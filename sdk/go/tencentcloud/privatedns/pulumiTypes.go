@@ -11,10 +11,14 @@ import (
 )
 
 type ZoneAccountVpcSet struct {
-	Region    string `pulumi:"region"`
-	Uin       string `pulumi:"uin"`
+	// Region.
+	Region string `pulumi:"region"`
+	// UIN of the VPC account.
+	Uin string `pulumi:"uin"`
+	// VPC ID.
 	UniqVpcId string `pulumi:"uniqVpcId"`
-	VpcName   string `pulumi:"vpcName"`
+	// VPC NAME.
+	VpcName string `pulumi:"vpcName"`
 }
 
 // ZoneAccountVpcSetInput is an input type that accepts ZoneAccountVpcSetArgs and ZoneAccountVpcSetOutput values.
@@ -29,10 +33,14 @@ type ZoneAccountVpcSetInput interface {
 }
 
 type ZoneAccountVpcSetArgs struct {
-	Region    pulumi.StringInput `pulumi:"region"`
-	Uin       pulumi.StringInput `pulumi:"uin"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// UIN of the VPC account.
+	Uin pulumi.StringInput `pulumi:"uin"`
+	// VPC ID.
 	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
-	VpcName   pulumi.StringInput `pulumi:"vpcName"`
+	// VPC NAME.
+	VpcName pulumi.StringInput `pulumi:"vpcName"`
 }
 
 func (ZoneAccountVpcSetArgs) ElementType() reflect.Type {
@@ -86,18 +94,22 @@ func (o ZoneAccountVpcSetOutput) ToZoneAccountVpcSetOutputWithContext(ctx contex
 	return o
 }
 
+// Region.
 func (o ZoneAccountVpcSetOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneAccountVpcSet) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// UIN of the VPC account.
 func (o ZoneAccountVpcSetOutput) Uin() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneAccountVpcSet) string { return v.Uin }).(pulumi.StringOutput)
 }
 
+// VPC ID.
 func (o ZoneAccountVpcSetOutput) UniqVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneAccountVpcSet) string { return v.UniqVpcId }).(pulumi.StringOutput)
 }
 
+// VPC NAME.
 func (o ZoneAccountVpcSetOutput) VpcName() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneAccountVpcSet) string { return v.VpcName }).(pulumi.StringOutput)
 }
@@ -123,7 +135,9 @@ func (o ZoneAccountVpcSetArrayOutput) Index(i pulumi.IntInput) ZoneAccountVpcSet
 }
 
 type ZoneTagSet struct {
-	TagKey   string `pulumi:"tagKey"`
+	// Key of Tag.
+	TagKey string `pulumi:"tagKey"`
+	// Value of Tag.
 	TagValue string `pulumi:"tagValue"`
 }
 
@@ -139,7 +153,9 @@ type ZoneTagSetInput interface {
 }
 
 type ZoneTagSetArgs struct {
-	TagKey   pulumi.StringInput `pulumi:"tagKey"`
+	// Key of Tag.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Value of Tag.
 	TagValue pulumi.StringInput `pulumi:"tagValue"`
 }
 
@@ -194,10 +210,12 @@ func (o ZoneTagSetOutput) ToZoneTagSetOutputWithContext(ctx context.Context) Zon
 	return o
 }
 
+// Key of Tag.
 func (o ZoneTagSetOutput) TagKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneTagSet) string { return v.TagKey }).(pulumi.StringOutput)
 }
 
+// Value of Tag.
 func (o ZoneTagSetOutput) TagValue() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneTagSet) string { return v.TagValue }).(pulumi.StringOutput)
 }
@@ -223,7 +241,9 @@ func (o ZoneTagSetArrayOutput) Index(i pulumi.IntInput) ZoneTagSetOutput {
 }
 
 type ZoneVpcSet struct {
-	Region    string `pulumi:"region"`
+	// VPC REGION.
+	Region string `pulumi:"region"`
+	// VPC ID.
 	UniqVpcId string `pulumi:"uniqVpcId"`
 }
 
@@ -239,7 +259,9 @@ type ZoneVpcSetInput interface {
 }
 
 type ZoneVpcSetArgs struct {
-	Region    pulumi.StringInput `pulumi:"region"`
+	// VPC REGION.
+	Region pulumi.StringInput `pulumi:"region"`
+	// VPC ID.
 	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
 }
 
@@ -294,10 +316,12 @@ func (o ZoneVpcSetOutput) ToZoneVpcSetOutputWithContext(ctx context.Context) Zon
 	return o
 }
 
+// VPC REGION.
 func (o ZoneVpcSetOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneVpcSet) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// VPC ID.
 func (o ZoneVpcSetOutput) UniqVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneVpcSet) string { return v.UniqVpcId }).(pulumi.StringOutput)
 }

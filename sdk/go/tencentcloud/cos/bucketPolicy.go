@@ -11,13 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a COS resource to create a COS bucket policy and set its attributes.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cos.NewBucketPolicy(ctx, "cosPolicy", &Cos.BucketPolicyArgs{
+// 			Bucket: pulumi.String("mycos-1258798060"),
+// 			Policy: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"Statement\": [\n", "    {\n", "      \"Principal\": {\n", "        \"qcs\": [\n", "          \"qcs::cam::uin/<your-account-id>:uin/<your-account-id>\"\n", "        ]\n", "      },\n", "      \"Action\": [\n", "        \"name/cos:DeleteBucket\",\n", "        \"name/cos:PutBucketACL\"\n", "      ],\n", "      \"Effect\": \"allow\",\n", "      \"Resource\": [\n", "        \"qcs::cos:<bucket region>:uid/<your-account-id>:<bucket name>/*\"\n", "      ]\n", "    }\n", "  ]\n", "}\n", "\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// COS bucket policy can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+// ```
 type BucketPolicy struct {
 	pulumi.CustomResourceState
 
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringOutput `pulumi:"bucket"`
-	// The text of the policy. For more info please refer to [Tencent official
-	// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+	// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
 	Policy pulumi.StringOutput `pulumi:"policy"`
 }
 
@@ -58,16 +92,14 @@ func GetBucketPolicy(ctx *pulumi.Context,
 type bucketPolicyState struct {
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket *string `pulumi:"bucket"`
-	// The text of the policy. For more info please refer to [Tencent official
-	// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+	// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
 	Policy *string `pulumi:"policy"`
 }
 
 type BucketPolicyState struct {
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringPtrInput
-	// The text of the policy. For more info please refer to [Tencent official
-	// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+	// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
 	Policy pulumi.StringPtrInput
 }
 
@@ -78,8 +110,7 @@ func (BucketPolicyState) ElementType() reflect.Type {
 type bucketPolicyArgs struct {
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket string `pulumi:"bucket"`
-	// The text of the policy. For more info please refer to [Tencent official
-	// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+	// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
 	Policy string `pulumi:"policy"`
 }
 
@@ -87,8 +118,7 @@ type bucketPolicyArgs struct {
 type BucketPolicyArgs struct {
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringInput
-	// The text of the policy. For more info please refer to [Tencent official
-	// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+	// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
 	Policy pulumi.StringInput
 }
 
@@ -184,8 +214,7 @@ func (o BucketPolicyOutput) Bucket() pulumi.StringOutput {
 	return o.ApplyT(func(v *BucketPolicy) pulumi.StringOutput { return v.Bucket }).(pulumi.StringOutput)
 }
 
-// The text of the policy. For more info please refer to [Tencent official
-// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
 func (o BucketPolicyOutput) Policy() pulumi.StringOutput {
 	return o.ApplyT(func(v *BucketPolicy) pulumi.StringOutput { return v.Policy }).(pulumi.StringOutput)
 }

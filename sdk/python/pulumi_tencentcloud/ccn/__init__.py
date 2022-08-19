@@ -6,8 +6,8 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .attachment import *
-from .bandwidth_limits import *
-from .ccn_bandwidth_limit import *
+from .bandwidth_limit import *
+from .get_bandwidth_limits import *
+from .get_instances import *
 from .instance import *
-from .instances import *
 from . import outputs

@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskList
     {
+        /// <summary>
+        /// Sampled screen capturing template ID.
+        /// </summary>
         public readonly string Definition;
+        /// <summary>
+        /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkList> WatermarkLists;
 
         [OutputConstructor]

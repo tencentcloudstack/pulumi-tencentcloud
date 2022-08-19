@@ -10,6 +10,127 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a VOD procedure template.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooAdaptiveDynamicStreamingTemplate, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "fooAdaptiveDynamicStreamingTemplate", &Vod.AdaptiveDynamicStreamingTemplateArgs{
+// 			Format:                       pulumi.String("HLS"),
+// 			DrmType:                      pulumi.String("SimpleAES"),
+// 			DisableHigherVideoBitrate:    pulumi.Bool(false),
+// 			DisableHigherVideoResolution: pulumi.Bool(false),
+// 			Comment:                      pulumi.String("test"),
+// 			StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
+// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+// 						Codec:              pulumi.String("libx265"),
+// 						Fps:                pulumi.Int(4),
+// 						Bitrate:            pulumi.Int(129),
+// 						ResolutionAdaptive: pulumi.Bool(false),
+// 						Width:              pulumi.Int(128),
+// 						Height:             pulumi.Int(128),
+// 						FillType:           pulumi.String("stretch"),
+// 					},
+// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+// 						Codec:        pulumi.String("libmp3lame"),
+// 						Bitrate:      pulumi.Int(129),
+// 						SampleRate:   pulumi.Int(44100),
+// 						AudioChannel: pulumi.String("dual"),
+// 					},
+// 					RemoveAudio: pulumi.Bool(false),
+// 				},
+// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+// 						Codec:   pulumi.String("libx264"),
+// 						Fps:     pulumi.Int(4),
+// 						Bitrate: pulumi.Int(256),
+// 					},
+// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+// 						Codec:      pulumi.String("libfdk_aac"),
+// 						Bitrate:    pulumi.Int(256),
+// 						SampleRate: pulumi.Int(44100),
+// 					},
+// 					RemoveAudio: pulumi.Bool(true),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooSnapshotByTimeOffsetTemplate, err := Vod.NewSnapshotByTimeOffsetTemplate(ctx, "fooSnapshotByTimeOffsetTemplate", &Vod.SnapshotByTimeOffsetTemplateArgs{
+// 			Width:              pulumi.Int(130),
+// 			Height:             pulumi.Int(128),
+// 			ResolutionAdaptive: pulumi.Bool(false),
+// 			Format:             pulumi.String("png"),
+// 			Comment:            pulumi.String("test"),
+// 			FillType:           pulumi.String("white"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooImageSpriteTemplate, err := Vod.NewImageSpriteTemplate(ctx, "fooImageSpriteTemplate", &Vod.ImageSpriteTemplateArgs{
+// 			SampleType:         pulumi.String("Percent"),
+// 			SampleInterval:     pulumi.Int(10),
+// 			RowCount:           pulumi.Int(3),
+// 			ColumnCount:        pulumi.Int(3),
+// 			Comment:            pulumi.String("test"),
+// 			FillType:           pulumi.String("stretch"),
+// 			Width:              pulumi.Int(128),
+// 			Height:             pulumi.Int(128),
+// 			ResolutionAdaptive: pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Vod.NewProcedureTemplate(ctx, "fooProcedureTemplate", &Vod.ProcedureTemplateArgs{
+// 			Comment: pulumi.String("test"),
+// 			MediaProcessTask: &vod.ProcedureTemplateMediaProcessTaskArgs{
+// 				AdaptiveDynamicStreamingTaskLists: vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{
+// 					&vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{
+// 						Definition: fooAdaptiveDynamicStreamingTemplate.ID(),
+// 					},
+// 				},
+// 				SnapshotByTimeOffsetTaskLists: vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray{
+// 					&vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{
+// 						Definition: fooSnapshotByTimeOffsetTemplate.ID(),
+// 						ExtTimeOffsetLists: pulumi.StringArray{
+// 							pulumi.String("3.5s"),
+// 						},
+// 					},
+// 				},
+// 				ImageSpriteTaskLists: vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray{
+// 					&vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{
+// 						Definition: fooImageSpriteTemplate.ID(),
+// 					},
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VOD procedure template can be imported using the name, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
+// ```
 type ProcedureTemplate struct {
 	pulumi.CustomResourceState
 
@@ -21,8 +142,7 @@ type ProcedureTemplate struct {
 	MediaProcessTask ProcedureTemplateMediaProcessTaskPtrOutput `pulumi:"mediaProcessTask"`
 	// Task flow name (up to 20 characters).
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrOutput `pulumi:"subAppId"`
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
@@ -65,8 +185,7 @@ type procedureTemplateState struct {
 	MediaProcessTask *ProcedureTemplateMediaProcessTask `pulumi:"mediaProcessTask"`
 	// Task flow name (up to 20 characters).
 	Name *string `pulumi:"name"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *int `pulumi:"subAppId"`
 	// Last modified time of template in ISO date format.
 	UpdateTime *string `pulumi:"updateTime"`
@@ -81,8 +200,7 @@ type ProcedureTemplateState struct {
 	MediaProcessTask ProcedureTemplateMediaProcessTaskPtrInput
 	// Task flow name (up to 20 characters).
 	Name pulumi.StringPtrInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrInput
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringPtrInput
@@ -99,8 +217,7 @@ type procedureTemplateArgs struct {
 	MediaProcessTask *ProcedureTemplateMediaProcessTask `pulumi:"mediaProcessTask"`
 	// Task flow name (up to 20 characters).
 	Name *string `pulumi:"name"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *int `pulumi:"subAppId"`
 }
 
@@ -112,8 +229,7 @@ type ProcedureTemplateArgs struct {
 	MediaProcessTask ProcedureTemplateMediaProcessTaskPtrInput
 	// Task flow name (up to 20 characters).
 	Name pulumi.StringPtrInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrInput
 }
 
@@ -224,8 +340,7 @@ func (o ProcedureTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProcedureTemplate) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-// field; otherwise, leave it empty.
+// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 func (o ProcedureTemplateOutput) SubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProcedureTemplate) pulumi.IntPtrOutput { return v.SubAppId }).(pulumi.IntPtrOutput)
 }

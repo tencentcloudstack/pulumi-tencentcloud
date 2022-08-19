@@ -5,12 +5,12 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_instances import *
+from .get_specinfos import *
+from .get_xlogs import *
 from .instance import *
-from .instances import *
 from .readonly_attachment import *
 from .readonly_group import *
 from .readonly_instance import *
-from .specinfos import *
-from .xlogs import *
 from ._inputs import *
 from . import outputs

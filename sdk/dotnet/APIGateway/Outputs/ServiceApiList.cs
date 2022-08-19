@@ -7,16 +7,31 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway.Outputs
+namespace Pulumi.Tencentcloud.ApiGateway.Outputs
 {
 
     [OutputType]
     public sealed class ServiceApiList
     {
+        /// <summary>
+        /// Description of the API.
+        /// </summary>
         public readonly string? ApiDesc;
+        /// <summary>
+        /// ID of the API.
+        /// </summary>
         public readonly string? ApiId;
+        /// <summary>
+        /// Name of the API.
+        /// </summary>
         public readonly string? ApiName;
+        /// <summary>
+        /// Method of the API.
+        /// </summary>
         public readonly string? Method;
+        /// <summary>
+        /// Path of the API.
+        /// </summary>
         public readonly string? Path;
 
         [OutputConstructor]

@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a VOD sub application.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vod.NewSubApplication(ctx, "foo", &Vod.SubApplicationArgs{
+// 			Description: pulumi.String("this is sub application"),
+// 			Status:      pulumi.String("On"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VOD super player config can be imported using the name+, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+// ```
 type SubApplication struct {
 	pulumi.CustomResourceState
 
@@ -18,8 +51,7 @@ type SubApplication struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Sub application description.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-	// must be unique under a user.
+	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Sub appliaction status.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -61,8 +93,7 @@ type subApplicationState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Sub application description.
 	Description *string `pulumi:"description"`
-	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-	// must be unique under a user.
+	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name *string `pulumi:"name"`
 	// Sub appliaction status.
 	Status *string `pulumi:"status"`
@@ -73,8 +104,7 @@ type SubApplicationState struct {
 	CreateTime pulumi.StringPtrInput
 	// Sub application description.
 	Description pulumi.StringPtrInput
-	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-	// must be unique under a user.
+	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name pulumi.StringPtrInput
 	// Sub appliaction status.
 	Status pulumi.StringPtrInput
@@ -87,8 +117,7 @@ func (SubApplicationState) ElementType() reflect.Type {
 type subApplicationArgs struct {
 	// Sub application description.
 	Description *string `pulumi:"description"`
-	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-	// must be unique under a user.
+	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name *string `pulumi:"name"`
 	// Sub appliaction status.
 	Status string `pulumi:"status"`
@@ -98,8 +127,7 @@ type subApplicationArgs struct {
 type SubApplicationArgs struct {
 	// Sub application description.
 	Description pulumi.StringPtrInput
-	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-	// must be unique under a user.
+	// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name pulumi.StringPtrInput
 	// Sub appliaction status.
 	Status pulumi.StringInput
@@ -202,8 +230,7 @@ func (o SubApplicationOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SubApplication) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-// must be unique under a user.
+// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 func (o SubApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SubApplication) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

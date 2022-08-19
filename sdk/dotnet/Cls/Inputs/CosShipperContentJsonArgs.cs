@@ -12,11 +12,19 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class CosShipperContentJsonArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Enablement flag.
+        /// </summary>
         [Input("enableTag", required: true)]
         public Input<bool> EnableTag { get; set; } = null!;
 
         [Input("metaFields", required: true)]
         private InputList<string>? _metaFields;
+
+        /// <summary>
+        /// Metadata information list
+        /// Note: this field may return null, indicating that no valid values can be obtained..
+        /// </summary>
         public InputList<string> MetaFields
         {
             get => _metaFields ?? (_metaFields = new InputList<string>());

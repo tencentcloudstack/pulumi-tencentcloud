@@ -163,7 +163,40 @@ class L7RuleV2(pulumi.CustomResource):
                  rule: Optional[pulumi.Input[pulumi.InputType['L7RuleV2RuleArgs']]] = None,
                  __props__=None):
         """
-        Create a L7RuleV2 resource with the given unique name, props, and options.
+        Use this resource to create dayu new layer 7 rule
+
+        > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        tencentcloud_dayu_l7_rule_v2 = tencentcloud.dayu.L7RuleV2("tencentcloudDayuL7RuleV2",
+            resource_id="bgpip-000004xe",
+            resource_ip="119.28.217.162",
+            resource_type="bgpip",
+            rule=tencentcloud.dayu.L7RuleV2RuleArgs(
+                domain="github.com",
+                keep_enable=False,
+                keeptime=0,
+                lb_type=1,
+                protocol="http",
+                source_lists=[
+                    tencentcloud.dayu.L7RuleV2RuleSourceListArgs(
+                        source="1.2.3.5",
+                        weight=100,
+                    ),
+                    tencentcloud.dayu.L7RuleV2RuleSourceListArgs(
+                        source="1.2.3.6",
+                        weight=100,
+                    ),
+                ],
+                source_type=2,
+            ))
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 7 rule works for.
@@ -178,7 +211,40 @@ class L7RuleV2(pulumi.CustomResource):
                  args: L7RuleV2Args,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a L7RuleV2 resource with the given unique name, props, and options.
+        Use this resource to create dayu new layer 7 rule
+
+        > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        tencentcloud_dayu_l7_rule_v2 = tencentcloud.dayu.L7RuleV2("tencentcloudDayuL7RuleV2",
+            resource_id="bgpip-000004xe",
+            resource_ip="119.28.217.162",
+            resource_type="bgpip",
+            rule=tencentcloud.dayu.L7RuleV2RuleArgs(
+                domain="github.com",
+                keep_enable=False,
+                keeptime=0,
+                lb_type=1,
+                protocol="http",
+                source_lists=[
+                    tencentcloud.dayu.L7RuleV2RuleSourceListArgs(
+                        source="1.2.3.5",
+                        weight=100,
+                    ),
+                    tencentcloud.dayu.L7RuleV2RuleSourceListArgs(
+                        source="1.2.3.6",
+                        weight=100,
+                    ),
+                ],
+                source_type=2,
+            ))
+        ```
+
         :param str resource_name: The name of the resource.
         :param L7RuleV2Args args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

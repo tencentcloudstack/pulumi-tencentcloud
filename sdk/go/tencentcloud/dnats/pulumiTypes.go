@@ -10,145 +10,169 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type InstancesDnatList struct {
+type GetInstanceDnatList struct {
+	// Description of the NAT forward.
 	Description *string `pulumi:"description"`
-	ElasticIp   string  `pulumi:"elasticIp"`
-	ElasticPort string  `pulumi:"elasticPort"`
-	NatId       string  `pulumi:"natId"`
-	PrivateIp   string  `pulumi:"privateIp"`
-	PrivatePort string  `pulumi:"privatePort"`
-	Protocol    string  `pulumi:"protocol"`
-	VpcId       string  `pulumi:"vpcId"`
+	// Network address of the EIP.
+	ElasticIp string `pulumi:"elasticIp"`
+	// Port of the EIP.
+	ElasticPort string `pulumi:"elasticPort"`
+	// ID of the NAT gateway.
+	NatId string `pulumi:"natId"`
+	// Network address of the backend service.
+	PrivateIp string `pulumi:"privateIp"`
+	// Port of intranet.
+	PrivatePort string `pulumi:"privatePort"`
+	// Type of the network protocol. Valid values: `TCP` and `UDP`.
+	Protocol string `pulumi:"protocol"`
+	// ID of the VPC.
+	VpcId string `pulumi:"vpcId"`
 }
 
-// InstancesDnatListInput is an input type that accepts InstancesDnatListArgs and InstancesDnatListOutput values.
-// You can construct a concrete instance of `InstancesDnatListInput` via:
+// GetInstanceDnatListInput is an input type that accepts GetInstanceDnatListArgs and GetInstanceDnatListOutput values.
+// You can construct a concrete instance of `GetInstanceDnatListInput` via:
 //
-//          InstancesDnatListArgs{...}
-type InstancesDnatListInput interface {
+//          GetInstanceDnatListArgs{...}
+type GetInstanceDnatListInput interface {
 	pulumi.Input
 
-	ToInstancesDnatListOutput() InstancesDnatListOutput
-	ToInstancesDnatListOutputWithContext(context.Context) InstancesDnatListOutput
+	ToGetInstanceDnatListOutput() GetInstanceDnatListOutput
+	ToGetInstanceDnatListOutputWithContext(context.Context) GetInstanceDnatListOutput
 }
 
-type InstancesDnatListArgs struct {
+type GetInstanceDnatListArgs struct {
+	// Description of the NAT forward.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	ElasticIp   pulumi.StringInput    `pulumi:"elasticIp"`
-	ElasticPort pulumi.StringInput    `pulumi:"elasticPort"`
-	NatId       pulumi.StringInput    `pulumi:"natId"`
-	PrivateIp   pulumi.StringInput    `pulumi:"privateIp"`
-	PrivatePort pulumi.StringInput    `pulumi:"privatePort"`
-	Protocol    pulumi.StringInput    `pulumi:"protocol"`
-	VpcId       pulumi.StringInput    `pulumi:"vpcId"`
+	// Network address of the EIP.
+	ElasticIp pulumi.StringInput `pulumi:"elasticIp"`
+	// Port of the EIP.
+	ElasticPort pulumi.StringInput `pulumi:"elasticPort"`
+	// ID of the NAT gateway.
+	NatId pulumi.StringInput `pulumi:"natId"`
+	// Network address of the backend service.
+	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
+	// Port of intranet.
+	PrivatePort pulumi.StringInput `pulumi:"privatePort"`
+	// Type of the network protocol. Valid values: `TCP` and `UDP`.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// ID of the VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
-func (InstancesDnatListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesDnatList)(nil)).Elem()
+func (GetInstanceDnatListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDnatList)(nil)).Elem()
 }
 
-func (i InstancesDnatListArgs) ToInstancesDnatListOutput() InstancesDnatListOutput {
-	return i.ToInstancesDnatListOutputWithContext(context.Background())
+func (i GetInstanceDnatListArgs) ToGetInstanceDnatListOutput() GetInstanceDnatListOutput {
+	return i.ToGetInstanceDnatListOutputWithContext(context.Background())
 }
 
-func (i InstancesDnatListArgs) ToInstancesDnatListOutputWithContext(ctx context.Context) InstancesDnatListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesDnatListOutput)
+func (i GetInstanceDnatListArgs) ToGetInstanceDnatListOutputWithContext(ctx context.Context) GetInstanceDnatListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDnatListOutput)
 }
 
-// InstancesDnatListArrayInput is an input type that accepts InstancesDnatListArray and InstancesDnatListArrayOutput values.
-// You can construct a concrete instance of `InstancesDnatListArrayInput` via:
+// GetInstanceDnatListArrayInput is an input type that accepts GetInstanceDnatListArray and GetInstanceDnatListArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDnatListArrayInput` via:
 //
-//          InstancesDnatListArray{ InstancesDnatListArgs{...} }
-type InstancesDnatListArrayInput interface {
+//          GetInstanceDnatListArray{ GetInstanceDnatListArgs{...} }
+type GetInstanceDnatListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesDnatListArrayOutput() InstancesDnatListArrayOutput
-	ToInstancesDnatListArrayOutputWithContext(context.Context) InstancesDnatListArrayOutput
+	ToGetInstanceDnatListArrayOutput() GetInstanceDnatListArrayOutput
+	ToGetInstanceDnatListArrayOutputWithContext(context.Context) GetInstanceDnatListArrayOutput
 }
 
-type InstancesDnatListArray []InstancesDnatListInput
+type GetInstanceDnatListArray []GetInstanceDnatListInput
 
-func (InstancesDnatListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesDnatList)(nil)).Elem()
+func (GetInstanceDnatListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDnatList)(nil)).Elem()
 }
 
-func (i InstancesDnatListArray) ToInstancesDnatListArrayOutput() InstancesDnatListArrayOutput {
-	return i.ToInstancesDnatListArrayOutputWithContext(context.Background())
+func (i GetInstanceDnatListArray) ToGetInstanceDnatListArrayOutput() GetInstanceDnatListArrayOutput {
+	return i.ToGetInstanceDnatListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesDnatListArray) ToInstancesDnatListArrayOutputWithContext(ctx context.Context) InstancesDnatListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesDnatListArrayOutput)
+func (i GetInstanceDnatListArray) ToGetInstanceDnatListArrayOutputWithContext(ctx context.Context) GetInstanceDnatListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDnatListArrayOutput)
 }
 
-type InstancesDnatListOutput struct{ *pulumi.OutputState }
+type GetInstanceDnatListOutput struct{ *pulumi.OutputState }
 
-func (InstancesDnatListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesDnatList)(nil)).Elem()
+func (GetInstanceDnatListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDnatList)(nil)).Elem()
 }
 
-func (o InstancesDnatListOutput) ToInstancesDnatListOutput() InstancesDnatListOutput {
+func (o GetInstanceDnatListOutput) ToGetInstanceDnatListOutput() GetInstanceDnatListOutput {
 	return o
 }
 
-func (o InstancesDnatListOutput) ToInstancesDnatListOutputWithContext(ctx context.Context) InstancesDnatListOutput {
+func (o GetInstanceDnatListOutput) ToGetInstanceDnatListOutputWithContext(ctx context.Context) GetInstanceDnatListOutput {
 	return o
 }
 
-func (o InstancesDnatListOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v InstancesDnatList) *string { return v.Description }).(pulumi.StringPtrOutput)
+// Description of the NAT forward.
+func (o GetInstanceDnatListOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-func (o InstancesDnatListOutput) ElasticIp() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesDnatList) string { return v.ElasticIp }).(pulumi.StringOutput)
+// Network address of the EIP.
+func (o GetInstanceDnatListOutput) ElasticIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) string { return v.ElasticIp }).(pulumi.StringOutput)
 }
 
-func (o InstancesDnatListOutput) ElasticPort() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesDnatList) string { return v.ElasticPort }).(pulumi.StringOutput)
+// Port of the EIP.
+func (o GetInstanceDnatListOutput) ElasticPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) string { return v.ElasticPort }).(pulumi.StringOutput)
 }
 
-func (o InstancesDnatListOutput) NatId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesDnatList) string { return v.NatId }).(pulumi.StringOutput)
+// ID of the NAT gateway.
+func (o GetInstanceDnatListOutput) NatId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) string { return v.NatId }).(pulumi.StringOutput)
 }
 
-func (o InstancesDnatListOutput) PrivateIp() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesDnatList) string { return v.PrivateIp }).(pulumi.StringOutput)
+// Network address of the backend service.
+func (o GetInstanceDnatListOutput) PrivateIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
-func (o InstancesDnatListOutput) PrivatePort() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesDnatList) string { return v.PrivatePort }).(pulumi.StringOutput)
+// Port of intranet.
+func (o GetInstanceDnatListOutput) PrivatePort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) string { return v.PrivatePort }).(pulumi.StringOutput)
 }
 
-func (o InstancesDnatListOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesDnatList) string { return v.Protocol }).(pulumi.StringOutput)
+// Type of the network protocol. Valid values: `TCP` and `UDP`.
+func (o GetInstanceDnatListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-func (o InstancesDnatListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesDnatList) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of the VPC.
+func (o GetInstanceDnatListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDnatList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-type InstancesDnatListArrayOutput struct{ *pulumi.OutputState }
+type GetInstanceDnatListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesDnatListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesDnatList)(nil)).Elem()
+func (GetInstanceDnatListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDnatList)(nil)).Elem()
 }
 
-func (o InstancesDnatListArrayOutput) ToInstancesDnatListArrayOutput() InstancesDnatListArrayOutput {
+func (o GetInstanceDnatListArrayOutput) ToGetInstanceDnatListArrayOutput() GetInstanceDnatListArrayOutput {
 	return o
 }
 
-func (o InstancesDnatListArrayOutput) ToInstancesDnatListArrayOutputWithContext(ctx context.Context) InstancesDnatListArrayOutput {
+func (o GetInstanceDnatListArrayOutput) ToGetInstanceDnatListArrayOutputWithContext(ctx context.Context) GetInstanceDnatListArrayOutput {
 	return o
 }
 
-func (o InstancesDnatListArrayOutput) Index(i pulumi.IntInput) InstancesDnatListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesDnatList {
-		return vs[0].([]InstancesDnatList)[vs[1].(int)]
-	}).(InstancesDnatListOutput)
+func (o GetInstanceDnatListArrayOutput) Index(i pulumi.IntInput) GetInstanceDnatListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDnatList {
+		return vs[0].([]GetInstanceDnatList)[vs[1].(int)]
+	}).(GetInstanceDnatListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesDnatListInput)(nil)).Elem(), InstancesDnatListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesDnatListArrayInput)(nil)).Elem(), InstancesDnatListArray{})
-	pulumi.RegisterOutputType(InstancesDnatListOutput{})
-	pulumi.RegisterOutputType(InstancesDnatListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDnatListInput)(nil)).Elem(), GetInstanceDnatListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDnatListArrayInput)(nil)).Elem(), GetInstanceDnatListArray{})
+	pulumi.RegisterOutputType(GetInstanceDnatListOutput{})
+	pulumi.RegisterOutputType(GetInstanceDnatListArrayOutput{})
 }

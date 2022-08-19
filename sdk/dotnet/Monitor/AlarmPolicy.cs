@@ -9,6 +9,314 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Monitor
 {
+    /// <summary>
+    /// Provides a alarm policy resource for monitor.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// cvm_device alarm policy
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @group = new Tencentcloud.Monitor.AlarmPolicy("group", new Tencentcloud.Monitor.AlarmPolicyArgs
+    ///         {
+    ///             Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+    ///             {
+    ///                 IsUnionRule = 1,
+    ///                 Rules = 
+    ///                 {
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         ContinuePeriod = 1,
+    ///                         IsPowerNotice = 0,
+    ///                         MetricName = "CpuUsage",
+    ///                         NoticeFrequency = 3600,
+    ///                         Operator = "ge",
+    ///                         Period = 60,
+    ///                         Value = "89.9",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Enable = 1,
+    ///             EventConditions = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///                 {
+    ///                     MetricName = "ping_unreachable",
+    ///                 },
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///                 {
+    ///                     MetricName = "guest_reboot",
+    ///                 },
+    ///             },
+    ///             MonitorType = "MT_QCE",
+    ///             Namespace = "cvm_device",
+    ///             NoticeIds = 
+    ///             {
+    ///                 "notice-l9ziyxw6",
+    ///             },
+    ///             PolicyName = "hello",
+    ///             ProjectId = 1244035,
+    ///             TriggerTasks = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyTriggerTaskArgs
+    ///                 {
+    ///                     TaskConfig = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+    ///                     Type = "AS",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// k8s_cluster alarm policy
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var policy = new Tencentcloud.Monitor.AlarmPolicy("policy", new Tencentcloud.Monitor.AlarmPolicyArgs
+    ///         {
+    ///             Enable = 1,
+    ///             MonitorType = "MT_QCE",
+    ///             Namespace = "k8s_cluster",
+    ///             NoticeIds = 
+    ///             {
+    ///                 "notice-l9ziyxw6",
+    ///             },
+    ///             PolicyName = "TkeClusterNew",
+    ///             ProjectId = 1244035,
+    ///             Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+    ///             {
+    ///                 IsUnionRule = 0,
+    ///                 Rules = 
+    ///                 {
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         ContinuePeriod = 3,
+    ///                         Description = "Allocatable Pods",
+    ///                         IsPowerNotice = 0,
+    ///                         MetricName = "K8sClusterAllocatablePodsTotal",
+    ///                         NoticeFrequency = 3600,
+    ///                         Operator = "gt",
+    ///                         Period = 60,
+    ///                         RuleType = "STATIC",
+    ///                         Unit = "Count",
+    ///                         Value = "10",
+    ///                         Filter = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleFilterArgs
+    ///                         {
+    ///                             Dimensions = JsonSerializer.Serialize(new[]
+    ///                                 {
+    ///                                     new[]
+    ///                                         {
+    ///                                             new Dictionary&lt;string, object?&gt;
+    ///                                             {
+    ///                                                 { "Key", "region" },
+    ///                                                 { "Operator", "eq" },
+    ///                                                 { "Value", new[]
+    ///                                                     {
+    ///                                                         "ap-guangzhou",
+    ///                                                     }
+    ///                                                  },
+    ///                                             },
+    ///                                             new Dictionary&lt;string, object?&gt;
+    ///                                             {
+    ///                                                 { "Key", "tke_cluster_instance_id" },
+    ///                                                 { "Operator", "in" },
+    ///                                                 { "Value", new[]
+    ///                                                     {
+    ///                                                         "cls-czhtobea",
+    ///                                                     }
+    ///                                                  },
+    ///                                             },
+    ///                                         }
+    ///                                     ,
+    ///                                 }
+    ///                             ),
+    ///                             Type = "DIMENSION",
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         ContinuePeriod = 3,
+    ///                         Description = "Total CPU Cores",
+    ///                         IsPowerNotice = 0,
+    ///                         MetricName = "K8sClusterCpuCoreTotal",
+    ///                         NoticeFrequency = 3600,
+    ///                         Operator = "gt",
+    ///                         Period = 60,
+    ///                         RuleType = "STATIC",
+    ///                         Unit = "Core",
+    ///                         Value = "2",
+    ///                         Filter = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleFilterArgs
+    ///                         {
+    ///                             Dimensions = JsonSerializer.Serialize(new[]
+    ///                                 {
+    ///                                     new[]
+    ///                                         {
+    ///                                             new Dictionary&lt;string, object?&gt;
+    ///                                             {
+    ///                                                 { "Key", "region" },
+    ///                                                 { "Operator", "eq" },
+    ///                                                 { "Value", new[]
+    ///                                                     {
+    ///                                                         "ap-guangzhou",
+    ///                                                     }
+    ///                                                  },
+    ///                                             },
+    ///                                             new Dictionary&lt;string, object?&gt;
+    ///                                             {
+    ///                                                 { "Key", "tke_cluster_instance_id" },
+    ///                                                 { "Operator", "in" },
+    ///                                                 { "Value", new[]
+    ///                                                     {
+    ///                                                         "cls-czhtobea",
+    ///                                                     }
+    ///                                                  },
+    ///                                             },
+    ///                                         }
+    ///                                     ,
+    ///                                 }
+    ///                             ),
+    ///                             Type = "DIMENSION",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// cvm_device alarm policy binding cvm by tag
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var policy = new Tencentcloud.Monitor.AlarmPolicy("policy", new Tencentcloud.Monitor.AlarmPolicyArgs
+    ///         {
+    ///             Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+    ///             {
+    ///                 IsUnionRule = 0,
+    ///                 Rules = 
+    ///                 {
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         ContinuePeriod = 5,
+    ///                         Description = "CPUUtilization",
+    ///                         IsPowerNotice = 0,
+    ///                         MetricName = "CpuUsage",
+    ///                         NoticeFrequency = 7200,
+    ///                         Operator = "gt",
+    ///                         Period = 60,
+    ///                         RuleType = "STATIC",
+    ///                         Unit = "%",
+    ///                         Value = "95",
+    ///                     },
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         ContinuePeriod = 5,
+    ///                         Description = "PublicBandwidthUtilization",
+    ///                         IsPowerNotice = 0,
+    ///                         MetricName = "Outratio",
+    ///                         NoticeFrequency = 7200,
+    ///                         Operator = "gt",
+    ///                         Period = 60,
+    ///                         RuleType = "STATIC",
+    ///                         Unit = "%",
+    ///                         Value = "95",
+    ///                     },
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         ContinuePeriod = 5,
+    ///                         Description = "MemoryUtilization",
+    ///                         IsPowerNotice = 0,
+    ///                         MetricName = "MemUsage",
+    ///                         NoticeFrequency = 7200,
+    ///                         Operator = "gt",
+    ///                         Period = 60,
+    ///                         RuleType = "STATIC",
+    ///                         Unit = "%",
+    ///                         Value = "95",
+    ///                     },
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         ContinuePeriod = 5,
+    ///                         Description = "DiskUtilization",
+    ///                         IsPowerNotice = 0,
+    ///                         MetricName = "CvmDiskUsage",
+    ///                         NoticeFrequency = 7200,
+    ///                         Operator = "gt",
+    ///                         Period = 60,
+    ///                         RuleType = "STATIC",
+    ///                         Unit = "%",
+    ///                         Value = "95",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Enable = 1,
+    ///             EventConditions = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///                 {
+    ///                     ContinuePeriod = 0,
+    ///                     Description = "DiskReadonly",
+    ///                     IsPowerNotice = 0,
+    ///                     MetricName = "disk_readonly",
+    ///                     NoticeFrequency = 0,
+    ///                     Period = 0,
+    ///                 },
+    ///             },
+    ///             MonitorType = "MT_QCE",
+    ///             Namespace = "cvm_device",
+    ///             NoticeIds = 
+    ///             {
+    ///                 "notice-l9ziyxw6",
+    ///             },
+    ///             PolicyName = "policy",
+    ///             PolicyTags = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyPolicyTagArgs
+    ///                 {
+    ///                     Key = "test-tag",
+    ///                     Value = "unit-test",
+    ///                 },
+    ///             },
+    ///             ProjectId = 0,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Alarm policy instance can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/alarmPolicy:AlarmPolicy")]
     public partial class AlarmPolicy : Pulumi.CustomResource
     {

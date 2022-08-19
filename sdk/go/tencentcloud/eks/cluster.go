@@ -11,6 +11,84 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides an elastic kubernetes cluster resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.2.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		sub, err := Subnet.NewInstance(ctx, "sub", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.2.11.0/24"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		sub2, err := Subnet.NewInstance(ctx, "sub2", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.2.10.0/24"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Eks.NewCluster(ctx, "foo", &Eks.ClusterArgs{
+// 			ClusterName: pulumi.String("tf-test-eks"),
+// 			K8sVersion:  pulumi.String("1.18.4"),
+// 			VpcId:       vpc.ID(),
+// 			SubnetIds: pulumi.StringArray{
+// 				sub.ID(),
+// 				sub2.ID(),
+// 			},
+// 			ClusterDesc:     pulumi.String("test eks cluster created by terraform"),
+// 			ServiceSubnetId: sub.ID(),
+// 			DnsServers: eks.ClusterDnsServerArray{
+// 				&eks.ClusterDnsServerArgs{
+// 					Domain: pulumi.String("www.example1.com"),
+// 					Servers: pulumi.StringArray{
+// 						pulumi.String("1.1.1.1:8080"),
+// 						pulumi.String("1.1.1.1:8081"),
+// 						pulumi.String("1.1.1.1:8082"),
+// 					},
+// 				},
+// 			},
+// 			EnableVpcCoreDns: pulumi.Bool(true),
+// 			NeedDeleteCbs:    pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"hello": pulumi.Any("world"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ```sh
+//  $ pulumi import tencentcloud:Eks/cluster:Cluster foo cluster-id
+// ```
 type Cluster struct {
 	pulumi.CustomResourceState
 

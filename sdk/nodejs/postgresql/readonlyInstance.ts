@@ -4,6 +4,39 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create postgresql readonly instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Postgresql.ReadonlyInstance("foo", {
+ *     autoRenewFlag: 0,
+ *     dbVersion: "10.4",
+ *     instanceChargeType: "POSTPAID_BY_HOUR",
+ *     masterDbInstanceId: "postgres-j4pm65id",
+ *     memory: 4,
+ *     needSupportIpv6: 0,
+ *     projectId: 0,
+ *     securityGroupsIds: ["sg-fefj5n6r"],
+ *     storage: 250,
+ *     subnetId: "subnet-enm92y0m",
+ *     vpcId: "vpc-86v957zb",
+ *     zone: "ap-guangzhou-6",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * postgresql readonly instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+ * ```
+ */
 export class ReadonlyInstance extends pulumi.CustomResource {
     /**
      * Get an existing ReadonlyInstance resource's state with the given name, ID, and optional extra
@@ -53,8 +86,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly masterDbInstanceId!: pulumi.Output<string>;
     /**
-     * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-     * provides.
+     * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
     public readonly memory!: pulumi.Output<number>;
     /**
@@ -191,8 +223,7 @@ export interface ReadonlyInstanceState {
      */
     masterDbInstanceId?: pulumi.Input<string>;
     /**
-     * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-     * provides.
+     * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
     memory?: pulumi.Input<number>;
     /**
@@ -250,8 +281,7 @@ export interface ReadonlyInstanceArgs {
      */
     masterDbInstanceId: pulumi.Input<string>;
     /**
-     * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-     * provides.
+     * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
     memory: pulumi.Input<number>;
     /**

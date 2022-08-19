@@ -36,6 +36,11 @@ class AdaptiveDynamicStreamingTemplateStreamInfoArgs:
                  audio: pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs'],
                  video: pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs'],
                  remove_audio: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs'] audio: Audio parameter information.
+        :param pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs'] video: Video parameter information.
+        :param pulumi.Input[bool] remove_audio: Whether to remove audio stream. Valid values: `false`: no, `true`: yes. `false` by default.
+        """
         pulumi.set(__self__, "audio", audio)
         pulumi.set(__self__, "video", video)
         if remove_audio is not None:
@@ -44,6 +49,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoArgs:
     @property
     @pulumi.getter
     def audio(self) -> pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs']:
+        """
+        Audio parameter information.
+        """
         return pulumi.get(self, "audio")
 
     @audio.setter
@@ -53,6 +61,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoArgs:
     @property
     @pulumi.getter
     def video(self) -> pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs']:
+        """
+        Video parameter information.
+        """
         return pulumi.get(self, "video")
 
     @video.setter
@@ -62,6 +73,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoArgs:
     @property
     @pulumi.getter(name="removeAudio")
     def remove_audio(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to remove audio stream. Valid values: `false`: no, `true`: yes. `false` by default.
+        """
         return pulumi.get(self, "remove_audio")
 
     @remove_audio.setter
@@ -76,6 +90,12 @@ class AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs:
                  codec: pulumi.Input[str],
                  sample_rate: pulumi.Input[int],
                  audio_channel: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] bitrate: Audio stream bitrate in Kbps. Value range: `0` and `[26, 256]`. If the value is `0`, the bitrate of the audio stream will be the same as that of the original audio.
+        :param pulumi.Input[str] codec: Audio stream encoder. Valid value are: `libfdk_aac` and `libmp3lame`. while `libfdk_aac` is recommended.
+        :param pulumi.Input[int] sample_rate: Audio stream sample rate. Valid values: `32000`, `44100`, `48000`Hz.
+        :param pulumi.Input[str] audio_channel: Audio channel system. Valid values: mono, dual, stereo. Default value: dual.
+        """
         pulumi.set(__self__, "bitrate", bitrate)
         pulumi.set(__self__, "codec", codec)
         pulumi.set(__self__, "sample_rate", sample_rate)
@@ -85,6 +105,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs:
     @property
     @pulumi.getter
     def bitrate(self) -> pulumi.Input[int]:
+        """
+        Audio stream bitrate in Kbps. Value range: `0` and `[26, 256]`. If the value is `0`, the bitrate of the audio stream will be the same as that of the original audio.
+        """
         return pulumi.get(self, "bitrate")
 
     @bitrate.setter
@@ -94,6 +117,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs:
     @property
     @pulumi.getter
     def codec(self) -> pulumi.Input[str]:
+        """
+        Audio stream encoder. Valid value are: `libfdk_aac` and `libmp3lame`. while `libfdk_aac` is recommended.
+        """
         return pulumi.get(self, "codec")
 
     @codec.setter
@@ -103,6 +129,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs:
     @property
     @pulumi.getter(name="sampleRate")
     def sample_rate(self) -> pulumi.Input[int]:
+        """
+        Audio stream sample rate. Valid values: `32000`, `44100`, `48000`Hz.
+        """
         return pulumi.get(self, "sample_rate")
 
     @sample_rate.setter
@@ -112,6 +141,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs:
     @property
     @pulumi.getter(name="audioChannel")
     def audio_channel(self) -> Optional[pulumi.Input[str]]:
+        """
+        Audio channel system. Valid values: mono, dual, stereo. Default value: dual.
+        """
         return pulumi.get(self, "audio_channel")
 
     @audio_channel.setter
@@ -129,6 +161,15 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
                  height: Optional[pulumi.Input[int]] = None,
                  resolution_adaptive: Optional[pulumi.Input[bool]] = None,
                  width: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bitrate: Bitrate of video stream in Kbps. Value range: `0` and `[128, 35000]`. If the value is `0`, the bitrate of the video will be the same as that of the source video.
+        :param pulumi.Input[str] codec: Video stream encoder. Valid values: `libx264`,`libx265`,`av1`. `libx264`: H.264, `libx265`: H.265, `av1`: AOMedia Video 1. Currently, a resolution within 640x480 must be specified for `H.265`. and the `av1` container only supports mp4.
+        :param pulumi.Input[int] fps: Video frame rate in Hz. Value range: `[0, 60]`. If the value is `0`, the frame rate will be the same as that of the source video.
+        :param pulumi.Input[str] fill_type: Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] height: Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] width: Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "bitrate", bitrate)
         pulumi.set(__self__, "codec", codec)
         pulumi.set(__self__, "fps", fps)
@@ -144,6 +185,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @property
     @pulumi.getter
     def bitrate(self) -> pulumi.Input[int]:
+        """
+        Bitrate of video stream in Kbps. Value range: `0` and `[128, 35000]`. If the value is `0`, the bitrate of the video will be the same as that of the source video.
+        """
         return pulumi.get(self, "bitrate")
 
     @bitrate.setter
@@ -153,6 +197,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @property
     @pulumi.getter
     def codec(self) -> pulumi.Input[str]:
+        """
+        Video stream encoder. Valid values: `libx264`,`libx265`,`av1`. `libx264`: H.264, `libx265`: H.265, `av1`: AOMedia Video 1. Currently, a resolution within 640x480 must be specified for `H.265`. and the `av1` container only supports mp4.
+        """
         return pulumi.get(self, "codec")
 
     @codec.setter
@@ -162,6 +209,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @property
     @pulumi.getter
     def fps(self) -> pulumi.Input[int]:
+        """
+        Video frame rate in Hz. Value range: `[0, 60]`. If the value is `0`, the frame rate will be the same as that of the source video.
+        """
         return pulumi.get(self, "fps")
 
     @fps.setter
@@ -171,6 +221,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @property
     @pulumi.getter(name="fillType")
     def fill_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "fill_type")
 
     @fill_type.setter
@@ -180,6 +233,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @property
     @pulumi.getter
     def height(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "height")
 
     @height.setter
@@ -189,6 +245,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @property
     @pulumi.getter(name="resolutionAdaptive")
     def resolution_adaptive(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "resolution_adaptive")
 
     @resolution_adaptive.setter
@@ -198,6 +257,9 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @property
     @pulumi.getter
     def width(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "width")
 
     @width.setter
@@ -215,6 +277,15 @@ class ProcedureTemplateMediaProcessTaskArgs:
                  sample_snapshot_task_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs']]]] = None,
                  snapshot_by_time_offset_task_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs']]]] = None,
                  transcode_task_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs']]] adaptive_dynamic_streaming_task_lists: List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs']]] animated_graphic_task_lists: List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs']]] cover_by_snapshot_task_lists: List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs']]] image_sprite_task_lists: List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs']]] sample_snapshot_task_lists: List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs']]] snapshot_by_time_offset_task_lists: List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs']]] transcode_task_lists: List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         if adaptive_dynamic_streaming_task_lists is not None:
             pulumi.set(__self__, "adaptive_dynamic_streaming_task_lists", adaptive_dynamic_streaming_task_lists)
         if animated_graphic_task_lists is not None:
@@ -233,6 +304,9 @@ class ProcedureTemplateMediaProcessTaskArgs:
     @property
     @pulumi.getter(name="adaptiveDynamicStreamingTaskLists")
     def adaptive_dynamic_streaming_task_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs']]]]:
+        """
+        List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "adaptive_dynamic_streaming_task_lists")
 
     @adaptive_dynamic_streaming_task_lists.setter
@@ -242,6 +316,9 @@ class ProcedureTemplateMediaProcessTaskArgs:
     @property
     @pulumi.getter(name="animatedGraphicTaskLists")
     def animated_graphic_task_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs']]]]:
+        """
+        List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "animated_graphic_task_lists")
 
     @animated_graphic_task_lists.setter
@@ -251,6 +328,9 @@ class ProcedureTemplateMediaProcessTaskArgs:
     @property
     @pulumi.getter(name="coverBySnapshotTaskLists")
     def cover_by_snapshot_task_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs']]]]:
+        """
+        List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "cover_by_snapshot_task_lists")
 
     @cover_by_snapshot_task_lists.setter
@@ -260,6 +340,9 @@ class ProcedureTemplateMediaProcessTaskArgs:
     @property
     @pulumi.getter(name="imageSpriteTaskLists")
     def image_sprite_task_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs']]]]:
+        """
+        List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "image_sprite_task_lists")
 
     @image_sprite_task_lists.setter
@@ -269,6 +352,9 @@ class ProcedureTemplateMediaProcessTaskArgs:
     @property
     @pulumi.getter(name="sampleSnapshotTaskLists")
     def sample_snapshot_task_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs']]]]:
+        """
+        List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "sample_snapshot_task_lists")
 
     @sample_snapshot_task_lists.setter
@@ -278,6 +364,9 @@ class ProcedureTemplateMediaProcessTaskArgs:
     @property
     @pulumi.getter(name="snapshotByTimeOffsetTaskLists")
     def snapshot_by_time_offset_task_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs']]]]:
+        """
+        List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "snapshot_by_time_offset_task_lists")
 
     @snapshot_by_time_offset_task_lists.setter
@@ -287,6 +376,9 @@ class ProcedureTemplateMediaProcessTaskArgs:
     @property
     @pulumi.getter(name="transcodeTaskLists")
     def transcode_task_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs']]]]:
+        """
+        List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "transcode_task_lists")
 
     @transcode_task_lists.setter
@@ -299,6 +391,10 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs:
     def __init__(__self__, *,
                  definition: pulumi.Input[str],
                  watermark_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs']]]] = None):
+        """
+        :param pulumi.Input[str] definition: Adaptive bitrate streaming template ID.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs']]] watermark_lists: List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if watermark_lists is not None:
             pulumi.set(__self__, "watermark_lists", watermark_lists)
@@ -306,6 +402,9 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Adaptive bitrate streaming template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -315,6 +414,9 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs:
     @property
     @pulumi.getter(name="watermarkLists")
     def watermark_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs']]]]:
+        """
+        List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "watermark_lists")
 
     @watermark_lists.setter
@@ -330,6 +432,13 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermark
                  start_time_offset: Optional[pulumi.Input[float]] = None,
                  svg_content: Optional[pulumi.Input[str]] = None,
                  text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] definition: Watermarking template ID.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] text_content: Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if end_time_offset is not None:
             pulumi.set(__self__, "end_time_offset", end_time_offset)
@@ -343,6 +452,9 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermark
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Watermarking template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -352,6 +464,9 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermark
     @property
     @pulumi.getter(name="endTimeOffset")
     def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
         return pulumi.get(self, "end_time_offset")
 
     @end_time_offset.setter
@@ -361,6 +476,9 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermark
     @property
     @pulumi.getter(name="startTimeOffset")
     def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
         return pulumi.get(self, "start_time_offset")
 
     @start_time_offset.setter
@@ -370,6 +488,9 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermark
     @property
     @pulumi.getter(name="svgContent")
     def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "svg_content")
 
     @svg_content.setter
@@ -379,6 +500,9 @@ class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermark
     @property
     @pulumi.getter(name="textContent")
     def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "text_content")
 
     @text_content.setter
@@ -392,6 +516,11 @@ class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs:
                  definition: pulumi.Input[str],
                  end_time_offset: pulumi.Input[float],
                  start_time_offset: pulumi.Input[float]):
+        """
+        :param pulumi.Input[str] definition: Animated image generating template ID.
+        :param pulumi.Input[float] end_time_offset: End time of animated image in video in seconds.
+        :param pulumi.Input[float] start_time_offset: Start time of animated image in video in seconds.
+        """
         pulumi.set(__self__, "definition", definition)
         pulumi.set(__self__, "end_time_offset", end_time_offset)
         pulumi.set(__self__, "start_time_offset", start_time_offset)
@@ -399,6 +528,9 @@ class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Animated image generating template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -408,6 +540,9 @@ class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs:
     @property
     @pulumi.getter(name="endTimeOffset")
     def end_time_offset(self) -> pulumi.Input[float]:
+        """
+        End time of animated image in video in seconds.
+        """
         return pulumi.get(self, "end_time_offset")
 
     @end_time_offset.setter
@@ -417,6 +552,9 @@ class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs:
     @property
     @pulumi.getter(name="startTimeOffset")
     def start_time_offset(self) -> pulumi.Input[float]:
+        """
+        Start time of animated image in video in seconds.
+        """
         return pulumi.get(self, "start_time_offset")
 
     @start_time_offset.setter
@@ -431,6 +569,12 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs:
                  position_type: pulumi.Input[str],
                  position_value: pulumi.Input[float],
                  watermark_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs']]]] = None):
+        """
+        :param pulumi.Input[str] definition: Time point screen capturing template ID.
+        :param pulumi.Input[str] position_type: Screen capturing mode. Valid values: `Time`, `Percent`. `Time`: screen captures by time point, `Percent`: screen captures by percentage.
+        :param pulumi.Input[float] position_value: Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs']]] watermark_lists: List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         pulumi.set(__self__, "position_type", position_type)
         pulumi.set(__self__, "position_value", position_value)
@@ -440,6 +584,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Time point screen capturing template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -449,6 +596,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs:
     @property
     @pulumi.getter(name="positionType")
     def position_type(self) -> pulumi.Input[str]:
+        """
+        Screen capturing mode. Valid values: `Time`, `Percent`. `Time`: screen captures by time point, `Percent`: screen captures by percentage.
+        """
         return pulumi.get(self, "position_type")
 
     @position_type.setter
@@ -458,6 +608,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs:
     @property
     @pulumi.getter(name="positionValue")
     def position_value(self) -> pulumi.Input[float]:
+        """
+        Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.
+        """
         return pulumi.get(self, "position_value")
 
     @position_value.setter
@@ -467,6 +620,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs:
     @property
     @pulumi.getter(name="watermarkLists")
     def watermark_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs']]]]:
+        """
+        List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "watermark_lists")
 
     @watermark_lists.setter
@@ -482,6 +638,13 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs:
                  start_time_offset: Optional[pulumi.Input[float]] = None,
                  svg_content: Optional[pulumi.Input[str]] = None,
                  text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] definition: Watermarking template ID.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] text_content: Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if end_time_offset is not None:
             pulumi.set(__self__, "end_time_offset", end_time_offset)
@@ -495,6 +658,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Watermarking template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -504,6 +670,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="endTimeOffset")
     def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
         return pulumi.get(self, "end_time_offset")
 
     @end_time_offset.setter
@@ -513,6 +682,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="startTimeOffset")
     def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
         return pulumi.get(self, "start_time_offset")
 
     @start_time_offset.setter
@@ -522,6 +694,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="svgContent")
     def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "svg_content")
 
     @svg_content.setter
@@ -531,6 +706,9 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="textContent")
     def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "text_content")
 
     @text_content.setter
@@ -542,11 +720,17 @@ class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs:
 class ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs:
     def __init__(__self__, *,
                  definition: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] definition: Image sprite generating template ID.
+        """
         pulumi.set(__self__, "definition", definition)
 
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Image sprite generating template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -559,6 +743,10 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs:
     def __init__(__self__, *,
                  definition: pulumi.Input[str],
                  watermark_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs']]]] = None):
+        """
+        :param pulumi.Input[str] definition: Sampled screen capturing template ID.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs']]] watermark_lists: List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if watermark_lists is not None:
             pulumi.set(__self__, "watermark_lists", watermark_lists)
@@ -566,6 +754,9 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Sampled screen capturing template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -575,6 +766,9 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs:
     @property
     @pulumi.getter(name="watermarkLists")
     def watermark_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs']]]]:
+        """
+        List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "watermark_lists")
 
     @watermark_lists.setter
@@ -590,6 +784,13 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs:
                  start_time_offset: Optional[pulumi.Input[float]] = None,
                  svg_content: Optional[pulumi.Input[str]] = None,
                  text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] definition: Watermarking template ID.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] text_content: Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if end_time_offset is not None:
             pulumi.set(__self__, "end_time_offset", end_time_offset)
@@ -603,6 +804,9 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Watermarking template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -612,6 +816,9 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="endTimeOffset")
     def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
         return pulumi.get(self, "end_time_offset")
 
     @end_time_offset.setter
@@ -621,6 +828,9 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="startTimeOffset")
     def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
         return pulumi.get(self, "start_time_offset")
 
     @start_time_offset.setter
@@ -630,6 +840,9 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="svgContent")
     def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "svg_content")
 
     @svg_content.setter
@@ -639,6 +852,9 @@ class ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="textContent")
     def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "text_content")
 
     @text_content.setter
@@ -652,6 +868,11 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs:
                  definition: pulumi.Input[str],
                  ext_time_offset_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  watermark_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs']]]] = None):
+        """
+        :param pulumi.Input[str] definition: Time point screen capturing template ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ext_time_offset_lists: The list of screenshot time points. `s` and `%` formats are supported: When a time point string ends with `s`, its unit is second. For example, `3.5s` means the 3.5th second of the video; When a time point string ends with `%`, it is marked with corresponding percentage of the video duration. For example, `10%` means that the time point is at the 10% of the video entire duration.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs']]] watermark_lists: List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if ext_time_offset_lists is not None:
             pulumi.set(__self__, "ext_time_offset_lists", ext_time_offset_lists)
@@ -661,6 +882,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Time point screen capturing template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -670,6 +894,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs:
     @property
     @pulumi.getter(name="extTimeOffsetLists")
     def ext_time_offset_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of screenshot time points. `s` and `%` formats are supported: When a time point string ends with `s`, its unit is second. For example, `3.5s` means the 3.5th second of the video; When a time point string ends with `%`, it is marked with corresponding percentage of the video duration. For example, `10%` means that the time point is at the 10% of the video entire duration.
+        """
         return pulumi.get(self, "ext_time_offset_lists")
 
     @ext_time_offset_lists.setter
@@ -679,6 +906,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs:
     @property
     @pulumi.getter(name="watermarkLists")
     def watermark_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs']]]]:
+        """
+        List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "watermark_lists")
 
     @watermark_lists.setter
@@ -694,6 +924,13 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList
                  start_time_offset: Optional[pulumi.Input[float]] = None,
                  svg_content: Optional[pulumi.Input[str]] = None,
                  text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] definition: Watermarking template ID.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] text_content: Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if end_time_offset is not None:
             pulumi.set(__self__, "end_time_offset", end_time_offset)
@@ -707,6 +944,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Watermarking template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -716,6 +956,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList
     @property
     @pulumi.getter(name="endTimeOffset")
     def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
         return pulumi.get(self, "end_time_offset")
 
     @end_time_offset.setter
@@ -725,6 +968,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList
     @property
     @pulumi.getter(name="startTimeOffset")
     def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
         return pulumi.get(self, "start_time_offset")
 
     @start_time_offset.setter
@@ -734,6 +980,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList
     @property
     @pulumi.getter(name="svgContent")
     def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "svg_content")
 
     @svg_content.setter
@@ -743,6 +992,9 @@ class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList
     @property
     @pulumi.getter(name="textContent")
     def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "text_content")
 
     @text_content.setter
@@ -756,6 +1008,11 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs:
                  definition: pulumi.Input[str],
                  mosaic_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs']]]] = None,
                  watermark_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs']]]] = None):
+        """
+        :param pulumi.Input[str] definition: Video transcoding template ID.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs']]] mosaic_lists: List of blurs. Up to 10 ones can be supported.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs']]] watermark_lists: List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if mosaic_lists is not None:
             pulumi.set(__self__, "mosaic_lists", mosaic_lists)
@@ -765,6 +1022,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Video transcoding template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -774,6 +1034,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs:
     @property
     @pulumi.getter(name="mosaicLists")
     def mosaic_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs']]]]:
+        """
+        List of blurs. Up to 10 ones can be supported.
+        """
         return pulumi.get(self, "mosaic_lists")
 
     @mosaic_lists.setter
@@ -783,6 +1046,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs:
     @property
     @pulumi.getter(name="watermarkLists")
     def watermark_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs']]]]:
+        """
+        List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "watermark_lists")
 
     @watermark_lists.setter
@@ -800,6 +1066,15 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
                  width: Optional[pulumi.Input[str]] = None,
                  x_pos: Optional[pulumi.Input[str]] = None,
                  y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be: `TopLeft`: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.
+        :param pulumi.Input[float] end_time_offset: End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+        :param pulumi.Input[str] height: Blur height. `%` and `px` formats are supported: If the string ends in `%`, the `height` of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in `px`, the `height` of the blur will be in px; for example, 100px means that Height is 100 px. Default value: `10%`.
+        :param pulumi.Input[float] start_time_offset: Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+        :param pulumi.Input[str] width: Blur width. `%` and `px` formats are supported: If the string ends in `%`, the `width` of the blur will be the specified percentage of the video width; for example, 10% means that `width` is 10% of the video width; If the string ends in `px`, the `width` of the blur will be in px; for example, 100px means that Width is 100 px. Default value: `10%`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the blur relative to the origin of coordinates of the video. `%` and `px` formats are supported: If the string ends in `%`, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in `px`, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: `0px`.
+        :param pulumi.Input[str] y_pos: Vertical position of the origin of blur relative to the origin of coordinates of video. `%` and `px` formats are supported: If the string ends in `%`, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in `px`, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: `0px`.
+        """
         if coordinate_origin is not None:
             pulumi.set(__self__, "coordinate_origin", coordinate_origin)
         if end_time_offset is not None:
@@ -818,6 +1093,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
     @property
     @pulumi.getter(name="coordinateOrigin")
     def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be: `TopLeft`: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.
+        """
         return pulumi.get(self, "coordinate_origin")
 
     @coordinate_origin.setter
@@ -827,6 +1105,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
     @property
     @pulumi.getter(name="endTimeOffset")
     def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+        """
         return pulumi.get(self, "end_time_offset")
 
     @end_time_offset.setter
@@ -836,6 +1117,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
     @property
     @pulumi.getter
     def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Blur height. `%` and `px` formats are supported: If the string ends in `%`, the `height` of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in `px`, the `height` of the blur will be in px; for example, 100px means that Height is 100 px. Default value: `10%`.
+        """
         return pulumi.get(self, "height")
 
     @height.setter
@@ -845,6 +1129,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
     @property
     @pulumi.getter(name="startTimeOffset")
     def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+        """
         return pulumi.get(self, "start_time_offset")
 
     @start_time_offset.setter
@@ -854,6 +1141,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
     @property
     @pulumi.getter
     def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Blur width. `%` and `px` formats are supported: If the string ends in `%`, the `width` of the blur will be the specified percentage of the video width; for example, 10% means that `width` is 10% of the video width; If the string ends in `px`, the `width` of the blur will be in px; for example, 100px means that Width is 100 px. Default value: `10%`.
+        """
         return pulumi.get(self, "width")
 
     @width.setter
@@ -863,6 +1153,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
     @property
     @pulumi.getter(name="xPos")
     def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the blur relative to the origin of coordinates of the video. `%` and `px` formats are supported: If the string ends in `%`, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in `px`, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: `0px`.
+        """
         return pulumi.get(self, "x_pos")
 
     @x_pos.setter
@@ -872,6 +1165,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs:
     @property
     @pulumi.getter(name="yPos")
     def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        Vertical position of the origin of blur relative to the origin of coordinates of video. `%` and `px` formats are supported: If the string ends in `%`, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in `px`, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: `0px`.
+        """
         return pulumi.get(self, "y_pos")
 
     @y_pos.setter
@@ -887,6 +1183,13 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs:
                  start_time_offset: Optional[pulumi.Input[float]] = None,
                  svg_content: Optional[pulumi.Input[str]] = None,
                  text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] definition: Watermarking template ID.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] text_content: Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "definition", definition)
         if end_time_offset is not None:
             pulumi.set(__self__, "end_time_offset", end_time_offset)
@@ -900,6 +1203,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs:
     @property
     @pulumi.getter
     def definition(self) -> pulumi.Input[str]:
+        """
+        Watermarking template ID.
+        """
         return pulumi.get(self, "definition")
 
     @definition.setter
@@ -909,6 +1215,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="endTimeOffset")
     def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will exist till the last video frame; If this value is greater than `0` (e.g., n), the watermark will exist till second n; If this value is smaller than `0` (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
         return pulumi.get(self, "end_time_offset")
 
     @end_time_offset.setter
@@ -918,6 +1227,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="startTimeOffset")
     def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame. If this parameter is left blank or `0` is entered, the watermark will appear upon the first video frame; If this value is greater than `0` (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
         return pulumi.get(self, "start_time_offset")
 
     @start_time_offset.setter
@@ -927,6 +1239,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="svgContent")
     def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "svg_content")
 
     @svg_content.setter
@@ -936,6 +1251,9 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs:
     @property
     @pulumi.getter(name="textContent")
     def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "text_content")
 
     @text_content.setter
@@ -947,12 +1265,18 @@ class ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs:
 class SuperPlayerConfigDrmStreamingInfoArgs:
     def __init__(__self__, *,
                  simple_aes_definition: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] simple_aes_definition: ID of the adaptive dynamic streaming template whose protection type is `SimpleAES`.
+        """
         if simple_aes_definition is not None:
             pulumi.set(__self__, "simple_aes_definition", simple_aes_definition)
 
     @property
     @pulumi.getter(name="simpleAesDefinition")
     def simple_aes_definition(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the adaptive dynamic streaming template whose protection type is `SimpleAES`.
+        """
         return pulumi.get(self, "simple_aes_definition")
 
     @simple_aes_definition.setter
@@ -965,12 +1289,19 @@ class SuperPlayerConfigResolutionNameArgs:
     def __init__(__self__, *,
                  min_edge_length: pulumi.Input[int],
                  name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] min_edge_length: Length of video short side in px.
+        :param pulumi.Input[str] name: Display name.
+        """
         pulumi.set(__self__, "min_edge_length", min_edge_length)
         pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter(name="minEdgeLength")
     def min_edge_length(self) -> pulumi.Input[int]:
+        """
+        Length of video short side in px.
+        """
         return pulumi.get(self, "min_edge_length")
 
     @min_edge_length.setter
@@ -980,6 +1311,9 @@ class SuperPlayerConfigResolutionNameArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Display name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter

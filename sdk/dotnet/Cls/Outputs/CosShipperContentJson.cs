@@ -13,7 +13,14 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class CosShipperContentJson
     {
+        /// <summary>
+        /// Enablement flag.
+        /// </summary>
         public readonly bool EnableTag;
+        /// <summary>
+        /// Metadata information list
+        /// Note: this field may return null, indicating that no valid values can be obtained..
+        /// </summary>
         public readonly ImmutableArray<string> MetaFields;
 
         [OutputConstructor]

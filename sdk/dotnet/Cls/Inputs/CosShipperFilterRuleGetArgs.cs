@@ -12,12 +12,21 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class CosShipperFilterRuleGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Filter rule key.
+        /// </summary>
         [Input("key", required: true)]
         public Input<string> Key { get; set; } = null!;
 
+        /// <summary>
+        /// Filter rule.
+        /// </summary>
         [Input("regex", required: true)]
         public Input<string> Regex { get; set; } = null!;
 
+        /// <summary>
+        /// Filter rule value.
+        /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 

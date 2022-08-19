@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class L4RuleSourceListGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
+        /// </summary>
         [Input("source", required: true)]
         public Input<string> Source { get; set; } = null!;
 
+        /// <summary>
+        /// Weight of the source, the valid value ranges from 0 to 100.
+        /// </summary>
         [Input("weight", required: true)]
         public Input<int> Weight { get; set; } = null!;
 

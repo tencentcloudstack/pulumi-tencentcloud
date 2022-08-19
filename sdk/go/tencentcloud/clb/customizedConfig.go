@@ -11,6 +11,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CLB customized config.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewCustomizedConfig(ctx, "foo", &Clb.CustomizedConfigArgs{
+// 			ConfigContent: pulumi.String(fmt.Sprintf("%v%v", "client_max_body_size 224M;\n", "client_body_timeout 60s;\n")),
+// 			ConfigName: pulumi.String("helloWorld"),
+// 			LoadBalancerIds: pulumi.StringArray{
+// 				pulumi.Any(tencentcloud_clb_instance.Internal_clb.Id),
+// 				pulumi.Any(tencentcloud_clb_instance.Internal_clb2.Id),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CLB customized config can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+// ```
 type CustomizedConfig struct {
 	pulumi.CustomResourceState
 

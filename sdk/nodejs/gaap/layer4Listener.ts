@@ -5,6 +5,52 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a layer4 listener of GAAP.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
+ * const bar = new tencentcloud.gaap.Realserver("bar", {ip: "119.29.29.29"});
+ * const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("fooLayer4Listener", {
+ *     protocol: "TCP",
+ *     port: 80,
+ *     realserverType: "IP",
+ *     proxyId: fooProxy.id,
+ *     healthCheck: true,
+ *     realserverBindSets: [
+ *         {
+ *             id: fooRealserver.id,
+ *             ip: fooRealserver.ip,
+ *             port: 80,
+ *         },
+ *         {
+ *             id: bar.id,
+ *             ip: bar.ip,
+ *             port: 80,
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * GAAP layer4 listener can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
+ * ```
+ */
 export class Layer4Listener extends pulumi.CustomResource {
     /**
      * Get an existing Layer4Listener resource's state with the given name, ID, and optional extra
@@ -34,13 +80,11 @@ export class Layer4Listener extends pulumi.CustomResource {
     }
 
     /**
-     * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-     * listeners of `TCP` protocol.
+     * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
      */
     public readonly clientIpMethod!: pulumi.Output<number | undefined>;
     /**
-     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-     * `TCP` protocol and require less than `interval`.
+     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
      */
     public readonly connectTimeout!: pulumi.Output<number | undefined>;
     /**
@@ -76,8 +120,7 @@ export class Layer4Listener extends pulumi.CustomResource {
      */
     public readonly realserverBindSets!: pulumi.Output<outputs.Gaap.Layer4ListenerRealserverBindSet[] | undefined>;
     /**
-     * Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-     * `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+     * Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
      */
     public readonly realserverType!: pulumi.Output<string>;
     /**
@@ -153,13 +196,11 @@ export class Layer4Listener extends pulumi.CustomResource {
  */
 export interface Layer4ListenerState {
     /**
-     * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-     * listeners of `TCP` protocol.
+     * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
      */
     clientIpMethod?: pulumi.Input<number>;
     /**
-     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-     * `TCP` protocol and require less than `interval`.
+     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
      */
     connectTimeout?: pulumi.Input<number>;
     /**
@@ -195,8 +236,7 @@ export interface Layer4ListenerState {
      */
     realserverBindSets?: pulumi.Input<pulumi.Input<inputs.Gaap.Layer4ListenerRealserverBindSet>[]>;
     /**
-     * Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-     * `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+     * Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
      */
     realserverType?: pulumi.Input<string>;
     /**
@@ -214,13 +254,11 @@ export interface Layer4ListenerState {
  */
 export interface Layer4ListenerArgs {
     /**
-     * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-     * listeners of `TCP` protocol.
+     * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
      */
     clientIpMethod?: pulumi.Input<number>;
     /**
-     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-     * `TCP` protocol and require less than `interval`.
+     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
      */
     connectTimeout?: pulumi.Input<number>;
     /**
@@ -252,8 +290,7 @@ export interface Layer4ListenerArgs {
      */
     realserverBindSets?: pulumi.Input<pulumi.Input<inputs.Gaap.Layer4ListenerRealserverBindSet>[]>;
     /**
-     * Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-     * `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+     * Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
      */
     realserverType: pulumi.Input<string>;
     /**

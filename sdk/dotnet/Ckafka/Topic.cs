@@ -9,13 +9,57 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Ckafka
 {
+    /// <summary>
+    /// Use this resource to create ckafka topic.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Ckafka.Topic("foo", new Tencentcloud.Ckafka.TopicArgs
+    ///         {
+    ///             CleanUpPolicy = "delete",
+    ///             EnableWhiteList = true,
+    ///             InstanceId = "ckafka-f9ife4zz",
+    ///             IpWhiteLists = 
+    ///             {
+    ///                 "ip1",
+    ///                 "ip2",
+    ///             },
+    ///             MaxMessageBytes = 0,
+    ///             Note = "topic note",
+    ///             PartitionNum = 1,
+    ///             ReplicaNum = 2,
+    ///             Retention = 60000,
+    ///             Segment = 3600000,
+    ///             SyncReplicaMinNum = 1,
+    ///             TopicName = "example",
+    ///             UncleanLeaderElectionEnable = false,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ckafka topic can be imported using the instance_id#topic_name, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/topic:Topic")]
     public partial class Topic : Pulumi.CustomResource
     {
         /// <summary>
-        /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-        /// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-        /// will be deleted according to the storage time.
+        /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         /// </summary>
         [Output("cleanUpPolicy")]
         public Output<string?> CleanUpPolicy { get; private set; } = null!;
@@ -123,8 +167,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Output<string> TopicName { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-        /// allowed.
+        /// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         /// </summary>
         [Output("uncleanLeaderElectionEnable")]
         public Output<bool?> UncleanLeaderElectionEnable { get; private set; } = null!;
@@ -176,9 +219,7 @@ namespace Pulumi.Tencentcloud.Ckafka
     public sealed class TopicArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-        /// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-        /// will be deleted according to the storage time.
+        /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         /// </summary>
         [Input("cleanUpPolicy")]
         public Input<string>? CleanUpPolicy { get; set; }
@@ -256,8 +297,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<string> TopicName { get; set; } = null!;
 
         /// <summary>
-        /// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-        /// allowed.
+        /// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         /// </summary>
         [Input("uncleanLeaderElectionEnable")]
         public Input<bool>? UncleanLeaderElectionEnable { get; set; }
@@ -270,9 +310,7 @@ namespace Pulumi.Tencentcloud.Ckafka
     public sealed class TopicState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-        /// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-        /// will be deleted according to the storage time.
+        /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         /// </summary>
         [Input("cleanUpPolicy")]
         public Input<string>? CleanUpPolicy { get; set; }
@@ -386,8 +424,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<string>? TopicName { get; set; }
 
         /// <summary>
-        /// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-        /// allowed.
+        /// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         /// </summary>
         [Input("uncleanLeaderElectionEnable")]
         public Input<bool>? UncleanLeaderElectionEnable { get; set; }

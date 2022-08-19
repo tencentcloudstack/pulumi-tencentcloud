@@ -4,6 +4,24 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a DnsPod record.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const demo = new tencentcloud.Dnspod.Record("demo", {
+ *     domain: "mikatong.com",
+ *     recordLine: "默认",
+ *     recordType: "A",
+ *     subDomain: "demo",
+ *     value: "1.2.3.9",
+ * });
+ * ```
+ */
 export class Record extends pulumi.CustomResource {
     /**
      * Get an existing Record resource's state with the given name, ID, and optional extra
@@ -53,8 +71,7 @@ export class Record extends pulumi.CustomResource {
      */
     public readonly recordType!: pulumi.Output<string>;
     /**
-     * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-     * in, resolution will not take effect and the limits of load balancing will not be verified.
+     * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */
     public readonly status!: pulumi.Output<string | undefined>;
     /**
@@ -70,8 +87,7 @@ export class Record extends pulumi.CustomResource {
      */
     public readonly value!: pulumi.Output<string>;
     /**
-     * Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-     * this parameter, means that the weight information is not set. Default is 0.
+     * Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
      */
     public readonly weight!: pulumi.Output<number | undefined>;
 
@@ -153,8 +169,7 @@ export interface RecordState {
      */
     recordType?: pulumi.Input<string>;
     /**
-     * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-     * in, resolution will not take effect and the limits of load balancing will not be verified.
+     * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */
     status?: pulumi.Input<string>;
     /**
@@ -170,8 +185,7 @@ export interface RecordState {
      */
     value?: pulumi.Input<string>;
     /**
-     * Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-     * this parameter, means that the weight information is not set. Default is 0.
+     * Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
      */
     weight?: pulumi.Input<number>;
 }
@@ -197,8 +211,7 @@ export interface RecordArgs {
      */
     recordType: pulumi.Input<string>;
     /**
-     * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-     * in, resolution will not take effect and the limits of load balancing will not be verified.
+     * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */
     status?: pulumi.Input<string>;
     /**
@@ -214,8 +227,7 @@ export interface RecordArgs {
      */
     value: pulumi.Input<string>;
     /**
-     * Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-     * this parameter, means that the weight information is not set. Default is 0.
+     * Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
      */
     weight?: pulumi.Input<number>;
 }

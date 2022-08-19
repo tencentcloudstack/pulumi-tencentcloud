@@ -11,7 +11,44 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type RoleSSO struct {
+// Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewRoleSso(ctx, "foo", &Cam.RoleSsoArgs{
+// 			ClientIds: pulumi.StringArray{
+// 				pulumi.String("..."),
+// 			},
+// 			Description: pulumi.String("this is a description"),
+// 			IdentityKey: pulumi.String("..."),
+// 			IdentityUrl: pulumi.String("https://login.microsoftonline.com/.../v2.0"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM-ROLE-SSO can be imported using the `name`, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+// ```
+type RoleSso struct {
 	pulumi.CustomResourceState
 
 	// Client ids.
@@ -26,9 +63,9 @@ type RoleSSO struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 }
 
-// NewRoleSSO registers a new resource with the given unique name, arguments, and options.
-func NewRoleSSO(ctx *pulumi.Context,
-	name string, args *RoleSSOArgs, opts ...pulumi.ResourceOption) (*RoleSSO, error) {
+// NewRoleSso registers a new resource with the given unique name, arguments, and options.
+func NewRoleSso(ctx *pulumi.Context,
+	name string, args *RoleSsoArgs, opts ...pulumi.ResourceOption) (*RoleSso, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -42,28 +79,28 @@ func NewRoleSSO(ctx *pulumi.Context,
 	if args.IdentityUrl == nil {
 		return nil, errors.New("invalid value for required argument 'IdentityUrl'")
 	}
-	var resource RoleSSO
-	err := ctx.RegisterResource("tencentcloud:Cam/roleSSO:RoleSSO", name, args, &resource, opts...)
+	var resource RoleSso
+	err := ctx.RegisterResource("tencentcloud:Cam/roleSso:RoleSso", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetRoleSSO gets an existing RoleSSO resource's state with the given name, ID, and optional
+// GetRoleSso gets an existing RoleSso resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetRoleSSO(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *RoleSSOState, opts ...pulumi.ResourceOption) (*RoleSSO, error) {
-	var resource RoleSSO
-	err := ctx.ReadResource("tencentcloud:Cam/roleSSO:RoleSSO", name, id, state, &resource, opts...)
+func GetRoleSso(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *RoleSsoState, opts ...pulumi.ResourceOption) (*RoleSso, error) {
+	var resource RoleSso
+	err := ctx.ReadResource("tencentcloud:Cam/roleSso:RoleSso", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering RoleSSO resources.
-type roleSSOState struct {
+// Input properties used for looking up and filtering RoleSso resources.
+type roleSsoState struct {
 	// Client ids.
 	ClientIds []string `pulumi:"clientIds"`
 	// The description of resource.
@@ -76,7 +113,7 @@ type roleSSOState struct {
 	Name *string `pulumi:"name"`
 }
 
-type RoleSSOState struct {
+type RoleSsoState struct {
 	// Client ids.
 	ClientIds pulumi.StringArrayInput
 	// The description of resource.
@@ -89,11 +126,11 @@ type RoleSSOState struct {
 	Name pulumi.StringPtrInput
 }
 
-func (RoleSSOState) ElementType() reflect.Type {
-	return reflect.TypeOf((*roleSSOState)(nil)).Elem()
+func (RoleSsoState) ElementType() reflect.Type {
+	return reflect.TypeOf((*roleSsoState)(nil)).Elem()
 }
 
-type roleSSOArgs struct {
+type roleSsoArgs struct {
 	// Client ids.
 	ClientIds []string `pulumi:"clientIds"`
 	// The description of resource.
@@ -106,8 +143,8 @@ type roleSSOArgs struct {
 	Name *string `pulumi:"name"`
 }
 
-// The set of arguments for constructing a RoleSSO resource.
-type RoleSSOArgs struct {
+// The set of arguments for constructing a RoleSso resource.
+type RoleSsoArgs struct {
 	// Client ids.
 	ClientIds pulumi.StringArrayInput
 	// The description of resource.
@@ -120,163 +157,163 @@ type RoleSSOArgs struct {
 	Name pulumi.StringPtrInput
 }
 
-func (RoleSSOArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*roleSSOArgs)(nil)).Elem()
+func (RoleSsoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*roleSsoArgs)(nil)).Elem()
 }
 
-type RoleSSOInput interface {
+type RoleSsoInput interface {
 	pulumi.Input
 
-	ToRoleSSOOutput() RoleSSOOutput
-	ToRoleSSOOutputWithContext(ctx context.Context) RoleSSOOutput
+	ToRoleSsoOutput() RoleSsoOutput
+	ToRoleSsoOutputWithContext(ctx context.Context) RoleSsoOutput
 }
 
-func (*RoleSSO) ElementType() reflect.Type {
-	return reflect.TypeOf((**RoleSSO)(nil)).Elem()
+func (*RoleSso) ElementType() reflect.Type {
+	return reflect.TypeOf((**RoleSso)(nil)).Elem()
 }
 
-func (i *RoleSSO) ToRoleSSOOutput() RoleSSOOutput {
-	return i.ToRoleSSOOutputWithContext(context.Background())
+func (i *RoleSso) ToRoleSsoOutput() RoleSsoOutput {
+	return i.ToRoleSsoOutputWithContext(context.Background())
 }
 
-func (i *RoleSSO) ToRoleSSOOutputWithContext(ctx context.Context) RoleSSOOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(RoleSSOOutput)
+func (i *RoleSso) ToRoleSsoOutputWithContext(ctx context.Context) RoleSsoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RoleSsoOutput)
 }
 
-// RoleSSOArrayInput is an input type that accepts RoleSSOArray and RoleSSOArrayOutput values.
-// You can construct a concrete instance of `RoleSSOArrayInput` via:
+// RoleSsoArrayInput is an input type that accepts RoleSsoArray and RoleSsoArrayOutput values.
+// You can construct a concrete instance of `RoleSsoArrayInput` via:
 //
-//          RoleSSOArray{ RoleSSOArgs{...} }
-type RoleSSOArrayInput interface {
+//          RoleSsoArray{ RoleSsoArgs{...} }
+type RoleSsoArrayInput interface {
 	pulumi.Input
 
-	ToRoleSSOArrayOutput() RoleSSOArrayOutput
-	ToRoleSSOArrayOutputWithContext(context.Context) RoleSSOArrayOutput
+	ToRoleSsoArrayOutput() RoleSsoArrayOutput
+	ToRoleSsoArrayOutputWithContext(context.Context) RoleSsoArrayOutput
 }
 
-type RoleSSOArray []RoleSSOInput
+type RoleSsoArray []RoleSsoInput
 
-func (RoleSSOArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*RoleSSO)(nil)).Elem()
+func (RoleSsoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*RoleSso)(nil)).Elem()
 }
 
-func (i RoleSSOArray) ToRoleSSOArrayOutput() RoleSSOArrayOutput {
-	return i.ToRoleSSOArrayOutputWithContext(context.Background())
+func (i RoleSsoArray) ToRoleSsoArrayOutput() RoleSsoArrayOutput {
+	return i.ToRoleSsoArrayOutputWithContext(context.Background())
 }
 
-func (i RoleSSOArray) ToRoleSSOArrayOutputWithContext(ctx context.Context) RoleSSOArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(RoleSSOArrayOutput)
+func (i RoleSsoArray) ToRoleSsoArrayOutputWithContext(ctx context.Context) RoleSsoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RoleSsoArrayOutput)
 }
 
-// RoleSSOMapInput is an input type that accepts RoleSSOMap and RoleSSOMapOutput values.
-// You can construct a concrete instance of `RoleSSOMapInput` via:
+// RoleSsoMapInput is an input type that accepts RoleSsoMap and RoleSsoMapOutput values.
+// You can construct a concrete instance of `RoleSsoMapInput` via:
 //
-//          RoleSSOMap{ "key": RoleSSOArgs{...} }
-type RoleSSOMapInput interface {
+//          RoleSsoMap{ "key": RoleSsoArgs{...} }
+type RoleSsoMapInput interface {
 	pulumi.Input
 
-	ToRoleSSOMapOutput() RoleSSOMapOutput
-	ToRoleSSOMapOutputWithContext(context.Context) RoleSSOMapOutput
+	ToRoleSsoMapOutput() RoleSsoMapOutput
+	ToRoleSsoMapOutputWithContext(context.Context) RoleSsoMapOutput
 }
 
-type RoleSSOMap map[string]RoleSSOInput
+type RoleSsoMap map[string]RoleSsoInput
 
-func (RoleSSOMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*RoleSSO)(nil)).Elem()
+func (RoleSsoMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*RoleSso)(nil)).Elem()
 }
 
-func (i RoleSSOMap) ToRoleSSOMapOutput() RoleSSOMapOutput {
-	return i.ToRoleSSOMapOutputWithContext(context.Background())
+func (i RoleSsoMap) ToRoleSsoMapOutput() RoleSsoMapOutput {
+	return i.ToRoleSsoMapOutputWithContext(context.Background())
 }
 
-func (i RoleSSOMap) ToRoleSSOMapOutputWithContext(ctx context.Context) RoleSSOMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(RoleSSOMapOutput)
+func (i RoleSsoMap) ToRoleSsoMapOutputWithContext(ctx context.Context) RoleSsoMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RoleSsoMapOutput)
 }
 
-type RoleSSOOutput struct{ *pulumi.OutputState }
+type RoleSsoOutput struct{ *pulumi.OutputState }
 
-func (RoleSSOOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**RoleSSO)(nil)).Elem()
+func (RoleSsoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RoleSso)(nil)).Elem()
 }
 
-func (o RoleSSOOutput) ToRoleSSOOutput() RoleSSOOutput {
+func (o RoleSsoOutput) ToRoleSsoOutput() RoleSsoOutput {
 	return o
 }
 
-func (o RoleSSOOutput) ToRoleSSOOutputWithContext(ctx context.Context) RoleSSOOutput {
+func (o RoleSsoOutput) ToRoleSsoOutputWithContext(ctx context.Context) RoleSsoOutput {
 	return o
 }
 
 // Client ids.
-func (o RoleSSOOutput) ClientIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *RoleSSO) pulumi.StringArrayOutput { return v.ClientIds }).(pulumi.StringArrayOutput)
+func (o RoleSsoOutput) ClientIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *RoleSso) pulumi.StringArrayOutput { return v.ClientIds }).(pulumi.StringArrayOutput)
 }
 
 // The description of resource.
-func (o RoleSSOOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *RoleSSO) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+func (o RoleSsoOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RoleSso) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // Sign the public key.
-func (o RoleSSOOutput) IdentityKey() pulumi.StringOutput {
-	return o.ApplyT(func(v *RoleSSO) pulumi.StringOutput { return v.IdentityKey }).(pulumi.StringOutput)
+func (o RoleSsoOutput) IdentityKey() pulumi.StringOutput {
+	return o.ApplyT(func(v *RoleSso) pulumi.StringOutput { return v.IdentityKey }).(pulumi.StringOutput)
 }
 
 // Identity provider URL.
-func (o RoleSSOOutput) IdentityUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v *RoleSSO) pulumi.StringOutput { return v.IdentityUrl }).(pulumi.StringOutput)
+func (o RoleSsoOutput) IdentityUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *RoleSso) pulumi.StringOutput { return v.IdentityUrl }).(pulumi.StringOutput)
 }
 
 // The name of resource.
-func (o RoleSSOOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v *RoleSSO) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+func (o RoleSsoOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *RoleSso) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-type RoleSSOArrayOutput struct{ *pulumi.OutputState }
+type RoleSsoArrayOutput struct{ *pulumi.OutputState }
 
-func (RoleSSOArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*RoleSSO)(nil)).Elem()
+func (RoleSsoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*RoleSso)(nil)).Elem()
 }
 
-func (o RoleSSOArrayOutput) ToRoleSSOArrayOutput() RoleSSOArrayOutput {
+func (o RoleSsoArrayOutput) ToRoleSsoArrayOutput() RoleSsoArrayOutput {
 	return o
 }
 
-func (o RoleSSOArrayOutput) ToRoleSSOArrayOutputWithContext(ctx context.Context) RoleSSOArrayOutput {
+func (o RoleSsoArrayOutput) ToRoleSsoArrayOutputWithContext(ctx context.Context) RoleSsoArrayOutput {
 	return o
 }
 
-func (o RoleSSOArrayOutput) Index(i pulumi.IntInput) RoleSSOOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *RoleSSO {
-		return vs[0].([]*RoleSSO)[vs[1].(int)]
-	}).(RoleSSOOutput)
+func (o RoleSsoArrayOutput) Index(i pulumi.IntInput) RoleSsoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *RoleSso {
+		return vs[0].([]*RoleSso)[vs[1].(int)]
+	}).(RoleSsoOutput)
 }
 
-type RoleSSOMapOutput struct{ *pulumi.OutputState }
+type RoleSsoMapOutput struct{ *pulumi.OutputState }
 
-func (RoleSSOMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*RoleSSO)(nil)).Elem()
+func (RoleSsoMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*RoleSso)(nil)).Elem()
 }
 
-func (o RoleSSOMapOutput) ToRoleSSOMapOutput() RoleSSOMapOutput {
+func (o RoleSsoMapOutput) ToRoleSsoMapOutput() RoleSsoMapOutput {
 	return o
 }
 
-func (o RoleSSOMapOutput) ToRoleSSOMapOutputWithContext(ctx context.Context) RoleSSOMapOutput {
+func (o RoleSsoMapOutput) ToRoleSsoMapOutputWithContext(ctx context.Context) RoleSsoMapOutput {
 	return o
 }
 
-func (o RoleSSOMapOutput) MapIndex(k pulumi.StringInput) RoleSSOOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *RoleSSO {
-		return vs[0].(map[string]*RoleSSO)[vs[1].(string)]
-	}).(RoleSSOOutput)
+func (o RoleSsoMapOutput) MapIndex(k pulumi.StringInput) RoleSsoOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *RoleSso {
+		return vs[0].(map[string]*RoleSso)[vs[1].(string)]
+	}).(RoleSsoOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*RoleSSOInput)(nil)).Elem(), &RoleSSO{})
-	pulumi.RegisterInputType(reflect.TypeOf((*RoleSSOArrayInput)(nil)).Elem(), RoleSSOArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*RoleSSOMapInput)(nil)).Elem(), RoleSSOMap{})
-	pulumi.RegisterOutputType(RoleSSOOutput{})
-	pulumi.RegisterOutputType(RoleSSOArrayOutput{})
-	pulumi.RegisterOutputType(RoleSSOMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RoleSsoInput)(nil)).Elem(), &RoleSso{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RoleSsoArrayInput)(nil)).Elem(), RoleSsoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RoleSsoMapInput)(nil)).Elem(), RoleSsoMap{})
+	pulumi.RegisterOutputType(RoleSsoOutput{})
+	pulumi.RegisterOutputType(RoleSsoArrayOutput{})
+	pulumi.RegisterOutputType(RoleSsoMapOutput{})
 }

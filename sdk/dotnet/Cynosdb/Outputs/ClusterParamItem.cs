@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Cynosdb.Outputs
     [OutputType]
     public sealed class ClusterParamItem
     {
+        /// <summary>
+        /// Param expected value to set.
+        /// </summary>
         public readonly string CurrentValue;
+        /// <summary>
+        /// Name of param, e.g. `character_set_server`.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Param old value, indicates the value which already set, this value is required when modifying current_value.
+        /// </summary>
         public readonly string? OldValue;
 
         [OutputConstructor]

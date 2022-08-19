@@ -13,9 +13,9 @@ __all__ = [
     'InstanceMultiZoneInfo',
     'InstanceNodeInfoList',
     'InstanceWebNodeTypeInfo',
-    'InstancesInstanceListResult',
-    'InstancesInstanceListMultiZoneInfoResult',
-    'InstancesInstanceListNodeInfoListResult',
+    'GetInstancesInstanceListResult',
+    'GetInstancesInstanceListMultiZoneInfoResult',
+    'GetInstancesInstanceListNodeInfoListResult',
 ]
 
 @pulumi.output_type
@@ -42,17 +42,27 @@ class InstanceMultiZoneInfo(dict):
     def __init__(__self__, *,
                  availability_zone: str,
                  subnet_id: str):
+        """
+        :param str availability_zone: Availability zone.
+        :param str subnet_id: The ID of a VPC subnetwork.
+        """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "subnet_id", subnet_id)
 
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        Availability zone.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        The ID of a VPC subnetwork.
+        """
         return pulumi.get(self, "subnet_id")
 
 
@@ -88,6 +98,14 @@ class InstanceNodeInfoList(dict):
                  disk_type: Optional[str] = None,
                  encrypt: Optional[bool] = None,
                  type: Optional[str] = None):
+        """
+        :param int node_num: Number of nodes.
+        :param str node_type: Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
+        :param int disk_size: Node disk size. Unit is GB, and default value is `100`.
+        :param str disk_type: Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+        :param bool encrypt: Decides to encrypt this disk or not.
+        :param str type: Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+        """
         pulumi.set(__self__, "node_num", node_num)
         pulumi.set(__self__, "node_type", node_type)
         if disk_size is not None:
@@ -102,31 +120,49 @@ class InstanceNodeInfoList(dict):
     @property
     @pulumi.getter(name="nodeNum")
     def node_num(self) -> int:
+        """
+        Number of nodes.
+        """
         return pulumi.get(self, "node_num")
 
     @property
     @pulumi.getter(name="nodeType")
     def node_type(self) -> str:
+        """
+        Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
+        """
         return pulumi.get(self, "node_type")
 
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[int]:
+        """
+        Node disk size. Unit is GB, and default value is `100`.
+        """
         return pulumi.get(self, "disk_size")
 
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
+        """
+        Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+        """
         return pulumi.get(self, "disk_type")
 
     @property
     @pulumi.getter
     def encrypt(self) -> Optional[bool]:
+        """
+        Decides to encrypt this disk or not.
+        """
         return pulumi.get(self, "encrypt")
 
     @property
     @pulumi.getter
     def type(self) -> Optional[str]:
+        """
+        Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+        """
         return pulumi.get(self, "type")
 
 
@@ -154,22 +190,32 @@ class InstanceWebNodeTypeInfo(dict):
     def __init__(__self__, *,
                  node_num: int,
                  node_type: str):
+        """
+        :param int node_num: Visual node number.
+        :param str node_type: Visual node specifications.
+        """
         pulumi.set(__self__, "node_num", node_num)
         pulumi.set(__self__, "node_type", node_type)
 
     @property
     @pulumi.getter(name="nodeNum")
     def node_num(self) -> int:
+        """
+        Visual node number.
+        """
         return pulumi.get(self, "node_num")
 
     @property
     @pulumi.getter(name="nodeType")
     def node_type(self) -> str:
+        """
+        Visual node specifications.
+        """
         return pulumi.get(self, "node_type")
 
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
                  basic_security_type: int,
@@ -183,12 +229,32 @@ class InstancesInstanceListResult(dict):
                  instance_name: str,
                  kibana_url: str,
                  license_type: str,
-                 multi_zone_infos: Sequence['outputs.InstancesInstanceListMultiZoneInfoResult'],
-                 node_info_lists: Sequence['outputs.InstancesInstanceListNodeInfoListResult'],
+                 multi_zone_infos: Sequence['outputs.GetInstancesInstanceListMultiZoneInfoResult'],
+                 node_info_lists: Sequence['outputs.GetInstancesInstanceListNodeInfoListResult'],
                  subnet_id: str,
                  tags: Mapping[str, Any],
                  version: str,
                  vpc_id: str):
+        """
+        :param str availability_zone: Availability zone.
+        :param int basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above.
+        :param str charge_type: The charge type of instance.
+        :param str create_time: Instance creation time.
+        :param int deploy_mode: Cluster deployment mode.
+        :param str elasticsearch_domain: Elasticsearch domain name.
+        :param int elasticsearch_port: Elasticsearch port.
+        :param str elasticsearch_vip: Elasticsearch VIP.
+        :param str instance_id: ID of the instance to be queried.
+        :param str instance_name: Name of the instance to be queried.
+        :param str kibana_url: Kibana access URL.
+        :param str license_type: License type.
+        :param Sequence['GetInstancesInstanceListMultiZoneInfoArgs'] multi_zone_infos: Details of AZs in multi-AZ deployment mode.
+        :param Sequence['GetInstancesInstanceListNodeInfoListArgs'] node_info_lists: Node information list, which describe the specification information of various types of nodes in the cluster.
+        :param str subnet_id: The ID of a VPC subnet.
+        :param Mapping[str, Any] tags: Tag of the instance to be queried.
+        :param str version: Version of the instance.
+        :param str vpc_id: The ID of a VPC network.
+        """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "basic_security_type", basic_security_type)
         pulumi.set(__self__, "charge_type", charge_type)
@@ -211,115 +277,179 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        Availability zone.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="basicSecurityType")
     def basic_security_type(self) -> int:
+        """
+        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above.
+        """
         return pulumi.get(self, "basic_security_type")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        The charge type of instance.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Instance creation time.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="deployMode")
     def deploy_mode(self) -> int:
+        """
+        Cluster deployment mode.
+        """
         return pulumi.get(self, "deploy_mode")
 
     @property
     @pulumi.getter(name="elasticsearchDomain")
     def elasticsearch_domain(self) -> str:
+        """
+        Elasticsearch domain name.
+        """
         return pulumi.get(self, "elasticsearch_domain")
 
     @property
     @pulumi.getter(name="elasticsearchPort")
     def elasticsearch_port(self) -> int:
+        """
+        Elasticsearch port.
+        """
         return pulumi.get(self, "elasticsearch_port")
 
     @property
     @pulumi.getter(name="elasticsearchVip")
     def elasticsearch_vip(self) -> str:
+        """
+        Elasticsearch VIP.
+        """
         return pulumi.get(self, "elasticsearch_vip")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        ID of the instance to be queried.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        Name of the instance to be queried.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="kibanaUrl")
     def kibana_url(self) -> str:
+        """
+        Kibana access URL.
+        """
         return pulumi.get(self, "kibana_url")
 
     @property
     @pulumi.getter(name="licenseType")
     def license_type(self) -> str:
+        """
+        License type.
+        """
         return pulumi.get(self, "license_type")
 
     @property
     @pulumi.getter(name="multiZoneInfos")
-    def multi_zone_infos(self) -> Sequence['outputs.InstancesInstanceListMultiZoneInfoResult']:
+    def multi_zone_infos(self) -> Sequence['outputs.GetInstancesInstanceListMultiZoneInfoResult']:
+        """
+        Details of AZs in multi-AZ deployment mode.
+        """
         return pulumi.get(self, "multi_zone_infos")
 
     @property
     @pulumi.getter(name="nodeInfoLists")
-    def node_info_lists(self) -> Sequence['outputs.InstancesInstanceListNodeInfoListResult']:
+    def node_info_lists(self) -> Sequence['outputs.GetInstancesInstanceListNodeInfoListResult']:
+        """
+        Node information list, which describe the specification information of various types of nodes in the cluster.
+        """
         return pulumi.get(self, "node_info_lists")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        The ID of a VPC subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tag of the instance to be queried.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter
     def version(self) -> str:
+        """
+        Version of the instance.
+        """
         return pulumi.get(self, "version")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        The ID of a VPC network.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class InstancesInstanceListMultiZoneInfoResult(dict):
+class GetInstancesInstanceListMultiZoneInfoResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
                  subnet_id: str):
+        """
+        :param str availability_zone: Availability zone.
+        :param str subnet_id: The ID of a VPC subnet.
+        """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "subnet_id", subnet_id)
 
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        Availability zone.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        The ID of a VPC subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
 
 @pulumi.output_type
-class InstancesInstanceListNodeInfoListResult(dict):
+class GetInstancesInstanceListNodeInfoListResult(dict):
     def __init__(__self__, *,
                  disk_size: int,
                  disk_type: str,
@@ -327,6 +457,14 @@ class InstancesInstanceListNodeInfoListResult(dict):
                  node_num: int,
                  node_type: str,
                  type: str):
+        """
+        :param int disk_size: Node disk size.
+        :param str disk_type: Node disk type.
+        :param bool encrypt: Decides this disk encrypted or not.
+        :param int node_num: Number of nodes.
+        :param str node_type: Node specification.
+        :param str type: Node type.
+        """
         pulumi.set(__self__, "disk_size", disk_size)
         pulumi.set(__self__, "disk_type", disk_type)
         pulumi.set(__self__, "encrypt", encrypt)
@@ -337,31 +475,49 @@ class InstancesInstanceListNodeInfoListResult(dict):
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> int:
+        """
+        Node disk size.
+        """
         return pulumi.get(self, "disk_size")
 
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> str:
+        """
+        Node disk type.
+        """
         return pulumi.get(self, "disk_type")
 
     @property
     @pulumi.getter
     def encrypt(self) -> bool:
+        """
+        Decides this disk encrypted or not.
+        """
         return pulumi.get(self, "encrypt")
 
     @property
     @pulumi.getter(name="nodeNum")
     def node_num(self) -> int:
+        """
+        Number of nodes.
+        """
         return pulumi.get(self, "node_num")
 
     @property
     @pulumi.getter(name="nodeType")
     def node_type(self) -> str:
+        """
+        Node specification.
+        """
         return pulumi.get(self, "node_type")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Node type.
+        """
         return pulumi.get(self, "type")
 
 

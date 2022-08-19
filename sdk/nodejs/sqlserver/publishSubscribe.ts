@@ -5,6 +5,34 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a SQL Server PublishSubscribe resource belongs to SQL Server instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = new tencentcloud.sqlserver.PublishSubscribe("example", {
+ *     publishInstanceId: tencentcloud_sqlserver_instance.publish_instance.id,
+ *     subscribeInstanceId: tencentcloud_sqlserver_instance.subscribe_instance.id,
+ *     publishSubscribeName: "example",
+ *     deleteSubscribeDb: false,
+ *     databaseTuples: [{
+ *         publishDatabase: tencentcloud_sqlserver_db.test_publish_subscribe.name,
+ *     }],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * SQL Server PublishSubscribe can be imported using the publish_sqlserver_id#subscribe_sqlserver_id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe foo publish_sqlserver_id#subscribe_sqlserver_id
+ * ```
+ */
 export class PublishSubscribe extends pulumi.CustomResource {
     /**
      * Get an existing PublishSubscribe resource's state with the given name, ID, and optional extra
@@ -34,13 +62,11 @@ export class PublishSubscribe extends pulumi.CustomResource {
     }
 
     /**
-     * Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-     * modification is not allowed.
+     * Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
      */
     public readonly databaseTuples!: pulumi.Output<outputs.Sqlserver.PublishSubscribeDatabaseTuple[]>;
     /**
-     * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-     * database, `false` for does not delete the subscribe database. default is `false`.
+     * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
      */
     public readonly deleteSubscribeDb!: pulumi.Output<boolean | undefined>;
     /**
@@ -48,7 +74,7 @@ export class PublishSubscribe extends pulumi.CustomResource {
      */
     public readonly publishInstanceId!: pulumi.Output<string>;
     /**
-     * The name of the Publish and Subscribe. Default is `default_name`.
+     * The name of the Publish and Subscribe. Default is `defaultName`.
      */
     public readonly publishSubscribeName!: pulumi.Output<string | undefined>;
     /**
@@ -101,13 +127,11 @@ export class PublishSubscribe extends pulumi.CustomResource {
  */
 export interface PublishSubscribeState {
     /**
-     * Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-     * modification is not allowed.
+     * Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
      */
     databaseTuples?: pulumi.Input<pulumi.Input<inputs.Sqlserver.PublishSubscribeDatabaseTuple>[]>;
     /**
-     * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-     * database, `false` for does not delete the subscribe database. default is `false`.
+     * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
      */
     deleteSubscribeDb?: pulumi.Input<boolean>;
     /**
@@ -115,7 +139,7 @@ export interface PublishSubscribeState {
      */
     publishInstanceId?: pulumi.Input<string>;
     /**
-     * The name of the Publish and Subscribe. Default is `default_name`.
+     * The name of the Publish and Subscribe. Default is `defaultName`.
      */
     publishSubscribeName?: pulumi.Input<string>;
     /**
@@ -129,13 +153,11 @@ export interface PublishSubscribeState {
  */
 export interface PublishSubscribeArgs {
     /**
-     * Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-     * modification is not allowed.
+     * Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
      */
     databaseTuples: pulumi.Input<pulumi.Input<inputs.Sqlserver.PublishSubscribeDatabaseTuple>[]>;
     /**
-     * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-     * database, `false` for does not delete the subscribe database. default is `false`.
+     * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
      */
     deleteSubscribeDb?: pulumi.Input<boolean>;
     /**
@@ -143,7 +165,7 @@ export interface PublishSubscribeArgs {
      */
     publishInstanceId: pulumi.Input<string>;
     /**
-     * The name of the Publish and Subscribe. Default is `default_name`.
+     * The name of the Publish and Subscribe. Default is `defaultName`.
      */
     publishSubscribeName?: pulumi.Input<string>;
     /**

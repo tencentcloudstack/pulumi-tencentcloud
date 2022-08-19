@@ -177,7 +177,27 @@ class Snapshot(pulumi.CustomResource):
                  storage_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Snapshot resource with the given unique name, props, and options.
+        Provides a resource to create a CBS snapshot.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        snapshot = tencentcloud.cbs.Snapshot("snapshot",
+            snapshot_name="unnamed",
+            storage_id="disk-kdt0sq6m")
+        ```
+
+        ## Import
+
+        CBS snapshot can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] snapshot_name: Name of the snapshot.
@@ -190,7 +210,27 @@ class Snapshot(pulumi.CustomResource):
                  args: SnapshotArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Snapshot resource with the given unique name, props, and options.
+        Provides a resource to create a CBS snapshot.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        snapshot = tencentcloud.cbs.Snapshot("snapshot",
+            snapshot_name="unnamed",
+            storage_id="disk-kdt0sq6m")
+        ```
+
+        ## Import
+
+        CBS snapshot can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
+        ```
+
         :param str resource_name: The name of the resource.
         :param SnapshotArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

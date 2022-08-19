@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create TcaplusDB cluster.
+ *
+ * > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = new tencentcloud.Tcaplus.Cluster("test", {
+ *     clusterName: "tf_tcaplus_cluster_test",
+ *     idlType: "PROTO",
+ *     oldPasswordExpireLast: 3600,
+ *     password: "1qaA2k1wgvfa3ZZZ",
+ *     subnetId: "subnet-akwgvfa3",
+ *     vpcId: "vpc-7k6gzox6",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * tcaplus cluster can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+ * ```
+ */
 export class Cluster extends pulumi.CustomResource {
     /**
      * Get an existing Cluster resource's state with the given name, ID, and optional extra
@@ -65,18 +94,15 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly oldPasswordExpireLast!: pulumi.Output<number | undefined>;
     /**
-     * Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-     * expired.
+     * Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
      */
     public /*out*/ readonly oldPasswordExpireTime!: pulumi.Output<string>;
     /**
-     * Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-     * uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+     * Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
      */
     public readonly password!: pulumi.Output<string>;
     /**
-     * Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-     * password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+     * Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
      */
     public /*out*/ readonly passwordStatus!: pulumi.Output<string>;
     /**
@@ -187,18 +213,15 @@ export interface ClusterState {
      */
     oldPasswordExpireLast?: pulumi.Input<number>;
     /**
-     * Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-     * expired.
+     * Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
      */
     oldPasswordExpireTime?: pulumi.Input<string>;
     /**
-     * Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-     * uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+     * Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
      */
     password?: pulumi.Input<string>;
     /**
-     * Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-     * password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+     * Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
      */
     passwordStatus?: pulumi.Input<string>;
     /**
@@ -228,8 +251,7 @@ export interface ClusterArgs {
      */
     oldPasswordExpireLast?: pulumi.Input<number>;
     /**
-     * Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-     * uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+     * Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
      */
     password: pulumi.Input<string>;
     /**

@@ -11,19 +11,43 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCPolicyV2CcPrecisionReqLimitPolicy
+    public sealed class CcPolicyV2CcPrecisionReqLimitPolicy
     {
+        /// <summary>
+        /// The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+        /// </summary>
         public readonly string Action;
+        /// <summary>
+        /// Cookies, one of the three policy entries can only be filled in.
+        /// </summary>
         public readonly string? Cookie;
+        /// <summary>
+        /// The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+        /// </summary>
         public readonly int ExecuteDuration;
+        /// <summary>
+        /// The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+        /// </summary>
         public readonly string Mode;
+        /// <summary>
+        /// Statistical period, take values 1, 10, 30, 60, in seconds.
+        /// </summary>
         public readonly int Period;
+        /// <summary>
+        /// The number of requests, the value is 1 to 20000.
+        /// </summary>
         public readonly int RequestNum;
+        /// <summary>
+        /// Uri, one of the three policy entries can only be filled in.
+        /// </summary>
         public readonly string? Uri;
+        /// <summary>
+        /// User-Agent, only one of the three policy entries can be filled in.
+        /// </summary>
         public readonly string? UserAgent;
 
         [OutputConstructor]
-        private CCPolicyV2CcPrecisionReqLimitPolicy(
+        private CcPolicyV2CcPrecisionReqLimitPolicy(
             string action,
 
             string? cookie,

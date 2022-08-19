@@ -7,20 +7,35 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway.Outputs
+namespace Pulumi.Tencentcloud.ApiGateway.Outputs
 {
 
     [OutputType]
-    public sealed class APIResponseErrorCode
+    public sealed class ApiResponseErrorCode
     {
+        /// <summary>
+        /// Custom response configuration error code.
+        /// </summary>
         public readonly int Code;
+        /// <summary>
+        /// Custom error code conversion.
+        /// </summary>
         public readonly int? ConvertedCode;
+        /// <summary>
+        /// Parameter description.
+        /// </summary>
         public readonly string? Desc;
+        /// <summary>
+        /// Custom response configuration error message.
+        /// </summary>
         public readonly string Msg;
+        /// <summary>
+        /// Whether to enable error code conversion. Default value: `false`.
+        /// </summary>
         public readonly bool? NeedConvert;
 
         [OutputConstructor]
-        private APIResponseErrorCode(
+        private ApiResponseErrorCode(
             int code,
 
             int? convertedCode,

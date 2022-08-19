@@ -9,21 +9,96 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Ccn
 {
+    /// <summary>
+    /// Provides a resource to create a CCN instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// Create a prepaid CCN
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
+    ///         {
+    ///             BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///             ChargeType = "PREPAID",
+    ///             Description = "ci-temp-test-ccn-des",
+    ///             Qos = "AG",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Create a post-paid regional export speed limit type CCN
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
+    ///         {
+    ///             BandwidthLimitType = "OUTER_REGION_LIMIT",
+    ///             ChargeType = "POSTPAID",
+    ///             Description = "ci-temp-test-ccn-des",
+    ///             Qos = "AG",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Create a post-paid inter-regional rate limit type CNN
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
+    ///         {
+    ///             BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///             ChargeType = "POSTPAID",
+    ///             Description = "ci-temp-test-ccn-des",
+    ///             Qos = "AG",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Ccn instance can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
         /// <summary>
-        /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-        /// regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-        /// `OUTER_REGION_LIMIT`.
+        /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
         /// </summary>
         [Output("bandwidthLimitType")]
         public Output<string?> BandwidthLimitType { get; private set; } = null!;
 
         /// <summary>
-        /// Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-        /// `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-        /// inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        /// Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -117,17 +192,13 @@ namespace Pulumi.Tencentcloud.Ccn
     public sealed class InstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-        /// regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-        /// `OUTER_REGION_LIMIT`.
+        /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
         /// </summary>
         [Input("bandwidthLimitType")]
         public Input<string>? BandwidthLimitType { get; set; }
 
         /// <summary>
-        /// Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-        /// `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-        /// inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        /// Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -170,17 +241,13 @@ namespace Pulumi.Tencentcloud.Ccn
     public sealed class InstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-        /// regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-        /// `OUTER_REGION_LIMIT`.
+        /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
         /// </summary>
         [Input("bandwidthLimitType")]
         public Input<string>? BandwidthLimitType { get; set; }
 
         /// <summary>
-        /// Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-        /// `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-        /// inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        /// Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }

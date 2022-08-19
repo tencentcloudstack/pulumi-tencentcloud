@@ -9,108 +9,12 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'ClustersListResult',
     'IdlTableInfo',
-    'IdlsListResult',
-    'TableGroupsListResult',
-    'TablesListResult',
+    'GetClustersListResult',
+    'GetIdlsListResult',
+    'GetTablegroupsListResult',
+    'GetTablesListResult',
 ]
-
-@pulumi.output_type
-class ClustersListResult(dict):
-    def __init__(__self__, *,
-                 api_access_id: str,
-                 api_access_ip: str,
-                 api_access_port: int,
-                 cluster_id: str,
-                 cluster_name: str,
-                 create_time: str,
-                 idl_type: str,
-                 network_type: str,
-                 old_password_expire_time: str,
-                 password: str,
-                 password_status: str,
-                 subnet_id: str,
-                 vpc_id: str):
-        pulumi.set(__self__, "api_access_id", api_access_id)
-        pulumi.set(__self__, "api_access_ip", api_access_ip)
-        pulumi.set(__self__, "api_access_port", api_access_port)
-        pulumi.set(__self__, "cluster_id", cluster_id)
-        pulumi.set(__self__, "cluster_name", cluster_name)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "idl_type", idl_type)
-        pulumi.set(__self__, "network_type", network_type)
-        pulumi.set(__self__, "old_password_expire_time", old_password_expire_time)
-        pulumi.set(__self__, "password", password)
-        pulumi.set(__self__, "password_status", password_status)
-        pulumi.set(__self__, "subnet_id", subnet_id)
-        pulumi.set(__self__, "vpc_id", vpc_id)
-
-    @property
-    @pulumi.getter(name="apiAccessId")
-    def api_access_id(self) -> str:
-        return pulumi.get(self, "api_access_id")
-
-    @property
-    @pulumi.getter(name="apiAccessIp")
-    def api_access_ip(self) -> str:
-        return pulumi.get(self, "api_access_ip")
-
-    @property
-    @pulumi.getter(name="apiAccessPort")
-    def api_access_port(self) -> int:
-        return pulumi.get(self, "api_access_port")
-
-    @property
-    @pulumi.getter(name="clusterId")
-    def cluster_id(self) -> str:
-        return pulumi.get(self, "cluster_id")
-
-    @property
-    @pulumi.getter(name="clusterName")
-    def cluster_name(self) -> str:
-        return pulumi.get(self, "cluster_name")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="idlType")
-    def idl_type(self) -> str:
-        return pulumi.get(self, "idl_type")
-
-    @property
-    @pulumi.getter(name="networkType")
-    def network_type(self) -> str:
-        return pulumi.get(self, "network_type")
-
-    @property
-    @pulumi.getter(name="oldPasswordExpireTime")
-    def old_password_expire_time(self) -> str:
-        return pulumi.get(self, "old_password_expire_time")
-
-    @property
-    @pulumi.getter
-    def password(self) -> str:
-        return pulumi.get(self, "password")
-
-    @property
-    @pulumi.getter(name="passwordStatus")
-    def password_status(self) -> str:
-        return pulumi.get(self, "password_status")
-
-    @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> str:
-        return pulumi.get(self, "subnet_id")
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> str:
-        return pulumi.get(self, "vpc_id")
-
 
 @pulumi.output_type
 class IdlTableInfo(dict):
@@ -149,6 +53,15 @@ class IdlTableInfo(dict):
                  sum_value_field_size: Optional[int] = None,
                  table_name: Optional[str] = None,
                  value_fields: Optional[str] = None):
+        """
+        :param str error: Error messages for creating IDL file.
+        :param str index_key_set: Index key set of the TcaplusDB table.
+        :param str key_fields: Primary key fields of the TcaplusDB table.
+        :param int sum_key_field_size: Total size of primary key field of the TcaplusDB table.
+        :param int sum_value_field_size: Total size of non-primary key fields of the TcaplusDB table.
+        :param str table_name: Name of the TcaplusDB table.
+        :param str value_fields: Non-primary key fields of the TcaplusDB table.
+        """
         if error is not None:
             pulumi.set(__self__, "error", error)
         if index_key_set is not None:
@@ -167,59 +80,243 @@ class IdlTableInfo(dict):
     @property
     @pulumi.getter
     def error(self) -> Optional[str]:
+        """
+        Error messages for creating IDL file.
+        """
         return pulumi.get(self, "error")
 
     @property
     @pulumi.getter(name="indexKeySet")
     def index_key_set(self) -> Optional[str]:
+        """
+        Index key set of the TcaplusDB table.
+        """
         return pulumi.get(self, "index_key_set")
 
     @property
     @pulumi.getter(name="keyFields")
     def key_fields(self) -> Optional[str]:
+        """
+        Primary key fields of the TcaplusDB table.
+        """
         return pulumi.get(self, "key_fields")
 
     @property
     @pulumi.getter(name="sumKeyFieldSize")
     def sum_key_field_size(self) -> Optional[int]:
+        """
+        Total size of primary key field of the TcaplusDB table.
+        """
         return pulumi.get(self, "sum_key_field_size")
 
     @property
     @pulumi.getter(name="sumValueFieldSize")
     def sum_value_field_size(self) -> Optional[int]:
+        """
+        Total size of non-primary key fields of the TcaplusDB table.
+        """
         return pulumi.get(self, "sum_value_field_size")
 
     @property
     @pulumi.getter(name="tableName")
     def table_name(self) -> Optional[str]:
+        """
+        Name of the TcaplusDB table.
+        """
         return pulumi.get(self, "table_name")
 
     @property
     @pulumi.getter(name="valueFields")
     def value_fields(self) -> Optional[str]:
+        """
+        Non-primary key fields of the TcaplusDB table.
+        """
         return pulumi.get(self, "value_fields")
 
 
 @pulumi.output_type
-class IdlsListResult(dict):
+class GetClustersListResult(dict):
+    def __init__(__self__, *,
+                 api_access_id: str,
+                 api_access_ip: str,
+                 api_access_port: int,
+                 cluster_id: str,
+                 cluster_name: str,
+                 create_time: str,
+                 idl_type: str,
+                 network_type: str,
+                 old_password_expire_time: str,
+                 password: str,
+                 password_status: str,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str api_access_id: Access id of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        :param str api_access_ip: Access ip of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        :param int api_access_port: Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        :param str cluster_id: ID of the TcaplusDB cluster to be query.
+        :param str cluster_name: Name of the TcaplusDB cluster to be query.
+        :param str create_time: Create time of the TcaplusDB cluster.
+        :param str idl_type: IDL type of the TcaplusDB cluster.
+        :param str network_type: Network type of the TcaplusDB cluster.
+        :param str old_password_expire_time: Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
+        :param str password: Access password of the TcaplusDB cluster.
+        :param str password_status: Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable` means the password can not be changed in this moment; `modifiable` means the password can be changed in this moment.
+        :param str subnet_id: Subnet ID of the TcaplusDB cluster.
+        :param str vpc_id: VPC ID of the TcaplusDB cluster.
+        """
+        pulumi.set(__self__, "api_access_id", api_access_id)
+        pulumi.set(__self__, "api_access_ip", api_access_ip)
+        pulumi.set(__self__, "api_access_port", api_access_port)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "idl_type", idl_type)
+        pulumi.set(__self__, "network_type", network_type)
+        pulumi.set(__self__, "old_password_expire_time", old_password_expire_time)
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "password_status", password_status)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="apiAccessId")
+    def api_access_id(self) -> str:
+        """
+        Access id of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        """
+        return pulumi.get(self, "api_access_id")
+
+    @property
+    @pulumi.getter(name="apiAccessIp")
+    def api_access_ip(self) -> str:
+        """
+        Access ip of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        """
+        return pulumi.get(self, "api_access_ip")
+
+    @property
+    @pulumi.getter(name="apiAccessPort")
+    def api_access_port(self) -> int:
+        """
+        Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        """
+        return pulumi.get(self, "api_access_port")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        ID of the TcaplusDB cluster to be query.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Name of the TcaplusDB cluster to be query.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the TcaplusDB cluster.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="idlType")
+    def idl_type(self) -> str:
+        """
+        IDL type of the TcaplusDB cluster.
+        """
+        return pulumi.get(self, "idl_type")
+
+    @property
+    @pulumi.getter(name="networkType")
+    def network_type(self) -> str:
+        """
+        Network type of the TcaplusDB cluster.
+        """
+        return pulumi.get(self, "network_type")
+
+    @property
+    @pulumi.getter(name="oldPasswordExpireTime")
+    def old_password_expire_time(self) -> str:
+        """
+        Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
+        """
+        return pulumi.get(self, "old_password_expire_time")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        Access password of the TcaplusDB cluster.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter(name="passwordStatus")
+    def password_status(self) -> str:
+        """
+        Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable` means the password can not be changed in this moment; `modifiable` means the password can be changed in this moment.
+        """
+        return pulumi.get(self, "password_status")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet ID of the TcaplusDB cluster.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC ID of the TcaplusDB cluster.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetIdlsListResult(dict):
     def __init__(__self__, *,
                  idl_id: str):
+        """
+        :param str idl_id: ID of the IDL.
+        """
         pulumi.set(__self__, "idl_id", idl_id)
 
     @property
     @pulumi.getter(name="idlId")
     def idl_id(self) -> str:
+        """
+        ID of the IDL.
+        """
         return pulumi.get(self, "idl_id")
 
 
 @pulumi.output_type
-class TableGroupsListResult(dict):
+class GetTablegroupsListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  table_count: int,
                  tablegroup_id: str,
                  tablegroup_name: str,
                  total_size: int):
+        """
+        :param str create_time: Create time of the table group..
+        :param int table_count: Number of tables.
+        :param str tablegroup_id: Id of the table group to be query.
+        :param str tablegroup_name: Name of the table group to be query.
+        :param int total_size: Total storage size (MB).
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "table_count", table_count)
         pulumi.set(__self__, "tablegroup_id", tablegroup_id)
@@ -229,31 +326,46 @@ class TableGroupsListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the table group..
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="tableCount")
     def table_count(self) -> int:
+        """
+        Number of tables.
+        """
         return pulumi.get(self, "table_count")
 
     @property
     @pulumi.getter(name="tablegroupId")
     def tablegroup_id(self) -> str:
+        """
+        Id of the table group to be query.
+        """
         return pulumi.get(self, "tablegroup_id")
 
     @property
     @pulumi.getter(name="tablegroupName")
     def tablegroup_name(self) -> str:
+        """
+        Name of the table group to be query.
+        """
         return pulumi.get(self, "tablegroup_name")
 
     @property
     @pulumi.getter(name="totalSize")
     def total_size(self) -> int:
+        """
+        Total storage size (MB).
+        """
         return pulumi.get(self, "total_size")
 
 
 @pulumi.output_type
-class TablesListResult(dict):
+class GetTablesListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  description: str,
@@ -269,6 +381,22 @@ class TablesListResult(dict):
                  table_size: int,
                  table_type: str,
                  tablegroup_id: str):
+        """
+        :param str create_time: Create time of the TcaplusDB table.
+        :param str description: Description of the TcaplusDB table.
+        :param str error: Error message for creating TcaplusDB table.
+        :param str idl_id: IDL file id of the TcaplusDB table.
+        :param int reserved_read_cu: Reserved read capacity units of the TcaplusDB table.
+        :param int reserved_volume: Reserved storage capacity of the TcaplusDB table (unit:GB).
+        :param int reserved_write_cu: Reserved write capacity units of the TcaplusDB table.
+        :param str status: Status of the TcaplusDB table.
+        :param str table_id: Table ID to be query.
+        :param str table_idl_type: IDL type of  the TcaplusDB table.
+        :param str table_name: Table name to be query.
+        :param int table_size: Size of the TcaplusDB table.
+        :param str table_type: Type of the TcaplusDB table.
+        :param str tablegroup_id: ID of the table group to be query.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "error", error)
@@ -287,71 +415,113 @@ class TablesListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the TcaplusDB table.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of the TcaplusDB table.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def error(self) -> str:
+        """
+        Error message for creating TcaplusDB table.
+        """
         return pulumi.get(self, "error")
 
     @property
     @pulumi.getter(name="idlId")
     def idl_id(self) -> str:
+        """
+        IDL file id of the TcaplusDB table.
+        """
         return pulumi.get(self, "idl_id")
 
     @property
     @pulumi.getter(name="reservedReadCu")
     def reserved_read_cu(self) -> int:
+        """
+        Reserved read capacity units of the TcaplusDB table.
+        """
         return pulumi.get(self, "reserved_read_cu")
 
     @property
     @pulumi.getter(name="reservedVolume")
     def reserved_volume(self) -> int:
+        """
+        Reserved storage capacity of the TcaplusDB table (unit:GB).
+        """
         return pulumi.get(self, "reserved_volume")
 
     @property
     @pulumi.getter(name="reservedWriteCu")
     def reserved_write_cu(self) -> int:
+        """
+        Reserved write capacity units of the TcaplusDB table.
+        """
         return pulumi.get(self, "reserved_write_cu")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Status of the TcaplusDB table.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="tableId")
     def table_id(self) -> str:
+        """
+        Table ID to be query.
+        """
         return pulumi.get(self, "table_id")
 
     @property
     @pulumi.getter(name="tableIdlType")
     def table_idl_type(self) -> str:
+        """
+        IDL type of  the TcaplusDB table.
+        """
         return pulumi.get(self, "table_idl_type")
 
     @property
     @pulumi.getter(name="tableName")
     def table_name(self) -> str:
+        """
+        Table name to be query.
+        """
         return pulumi.get(self, "table_name")
 
     @property
     @pulumi.getter(name="tableSize")
     def table_size(self) -> int:
+        """
+        Size of the TcaplusDB table.
+        """
         return pulumi.get(self, "table_size")
 
     @property
     @pulumi.getter(name="tableType")
     def table_type(self) -> str:
+        """
+        Type of the TcaplusDB table.
+        """
         return pulumi.get(self, "table_type")
 
     @property
     @pulumi.getter(name="tablegroupId")
     def tablegroup_id(self) -> str:
+        """
+        ID of the table group to be query.
+        """
         return pulumi.get(self, "tablegroup_id")
 
 

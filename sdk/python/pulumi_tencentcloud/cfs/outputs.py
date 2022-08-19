@@ -9,18 +9,24 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'AccessGroupsAccessGroupListResult',
-    'AccessRulesAccessRuleListResult',
-    'FileSystemsFileSystemListResult',
+    'GetAccessGroupsAccessGroupListResult',
+    'GetAccessRulesAccessRuleListResult',
+    'GetFileSystemsFileSystemListResult',
 ]
 
 @pulumi.output_type
-class AccessGroupsAccessGroupListResult(dict):
+class GetAccessGroupsAccessGroupListResult(dict):
     def __init__(__self__, *,
                  access_group_id: str,
                  create_time: str,
                  description: str,
                  name: str):
+        """
+        :param str access_group_id: A specified access group ID used to query.
+        :param str create_time: Creation time of the access group.
+        :param str description: Description of the access group.
+        :param str name: A access group Name used to query.
+        """
         pulumi.set(__self__, "access_group_id", access_group_id)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
@@ -29,32 +35,51 @@ class AccessGroupsAccessGroupListResult(dict):
     @property
     @pulumi.getter(name="accessGroupId")
     def access_group_id(self) -> str:
+        """
+        A specified access group ID used to query.
+        """
         return pulumi.get(self, "access_group_id")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the access group.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of the access group.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        A access group Name used to query.
+        """
         return pulumi.get(self, "name")
 
 
 @pulumi.output_type
-class AccessRulesAccessRuleListResult(dict):
+class GetAccessRulesAccessRuleListResult(dict):
     def __init__(__self__, *,
                  access_rule_id: str,
                  auth_client_ip: str,
                  priority: int,
                  rw_permission: str,
                  user_permission: str):
+        """
+        :param str access_rule_id: A specified access rule ID used to query.
+        :param str auth_client_ip: Allowed IP of the access rule.
+        :param int priority: The priority level of access rule.
+        :param str rw_permission: Read and write permissions.
+        :param str user_permission: The permissions of accessing users.
+        """
         pulumi.set(__self__, "access_rule_id", access_rule_id)
         pulumi.set(__self__, "auth_client_ip", auth_client_ip)
         pulumi.set(__self__, "priority", priority)
@@ -64,31 +89,46 @@ class AccessRulesAccessRuleListResult(dict):
     @property
     @pulumi.getter(name="accessRuleId")
     def access_rule_id(self) -> str:
+        """
+        A specified access rule ID used to query.
+        """
         return pulumi.get(self, "access_rule_id")
 
     @property
     @pulumi.getter(name="authClientIp")
     def auth_client_ip(self) -> str:
+        """
+        Allowed IP of the access rule.
+        """
         return pulumi.get(self, "auth_client_ip")
 
     @property
     @pulumi.getter
     def priority(self) -> int:
+        """
+        The priority level of access rule.
+        """
         return pulumi.get(self, "priority")
 
     @property
     @pulumi.getter(name="rwPermission")
     def rw_permission(self) -> str:
+        """
+        Read and write permissions.
+        """
         return pulumi.get(self, "rw_permission")
 
     @property
     @pulumi.getter(name="userPermission")
     def user_permission(self) -> str:
+        """
+        The permissions of accessing users.
+        """
         return pulumi.get(self, "user_permission")
 
 
 @pulumi.output_type
-class FileSystemsFileSystemListResult(dict):
+class GetFileSystemsFileSystemListResult(dict):
     def __init__(__self__, *,
                  access_group_id: str,
                  availability_zone: str,
@@ -100,6 +140,18 @@ class FileSystemsFileSystemListResult(dict):
                  size_used: int,
                  status: str,
                  storage_type: str):
+        """
+        :param str access_group_id: ID of the access group.
+        :param str availability_zone: The available zone that the file system locates at.
+        :param str create_time: Creation time of the file system.
+        :param str file_system_id: A specified file system ID used to query.
+        :param str name: A file system name used to query.
+        :param str protocol: Protocol of the file system.
+        :param int size_limit: Size limit of the file system.
+        :param int size_used: Size used of the file system.
+        :param str status: Status of the file system.
+        :param str storage_type: Storage type of the file system.
+        """
         pulumi.set(__self__, "access_group_id", access_group_id)
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "create_time", create_time)
@@ -114,51 +166,81 @@ class FileSystemsFileSystemListResult(dict):
     @property
     @pulumi.getter(name="accessGroupId")
     def access_group_id(self) -> str:
+        """
+        ID of the access group.
+        """
         return pulumi.get(self, "access_group_id")
 
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        The available zone that the file system locates at.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the file system.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="fileSystemId")
     def file_system_id(self) -> str:
+        """
+        A specified file system ID used to query.
+        """
         return pulumi.get(self, "file_system_id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        A file system name used to query.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol of the file system.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="sizeLimit")
     def size_limit(self) -> int:
+        """
+        Size limit of the file system.
+        """
         return pulumi.get(self, "size_limit")
 
     @property
     @pulumi.getter(name="sizeUsed")
     def size_used(self) -> int:
+        """
+        Size used of the file system.
+        """
         return pulumi.get(self, "size_used")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Status of the file system.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="storageType")
     def storage_type(self) -> str:
+        """
+        Storage type of the file system.
+        """
         return pulumi.get(self, "storage_type")
 
 

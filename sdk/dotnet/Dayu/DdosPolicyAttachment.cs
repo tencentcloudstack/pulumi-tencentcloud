@@ -9,6 +9,30 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
+    /// <summary>
+    /// Provides a resource to create a dayu DDoS policy attachment.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var dayuDdosPolicyAttachmentBasic = new Tencentcloud.Dayu.DdosPolicyAttachment("dayuDdosPolicyAttachmentBasic", new Tencentcloud.Dayu.DdosPolicyAttachmentArgs
+    ///         {
+    ///             ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
+    ///             ResourceId = "bgpip-00000294",
+    ///             PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment")]
     public partial class DdosPolicyAttachment : Pulumi.CustomResource
     {

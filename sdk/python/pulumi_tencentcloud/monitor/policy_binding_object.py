@@ -99,7 +99,62 @@ class PolicyBindingObject(pulumi.CustomResource):
                  policy_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a PolicyBindingObject resource with the given unique name, props, and options.
+        Provides a resource for bind objects to a alarm policy resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        instances = tencentcloud.Instances.get_instance()
+        policy = tencentcloud.monitor.AlarmPolicy("policy",
+            policy_name="hello",
+            monitor_type="MT_QCE",
+            enable=1,
+            project_id=1244035,
+            namespace="cvm_device",
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=1,
+                rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                    metric_name="CpuUsage",
+                    period=60,
+                    operator="ge",
+                    value="89.9",
+                    continue_period=1,
+                    notice_frequency=3600,
+                    is_power_notice=0,
+                )],
+            ),
+            event_conditions=[
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="ping_unreachable",
+                ),
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="guest_reboot",
+                ),
+            ],
+            notice_ids=["notice-l9ziyxw6"],
+            trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
+                type="AS",
+                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+            )])
+        #for cvm
+        binding = tencentcloud.monitor.PolicyBindingObject("binding",
+            policy_id=policy.id,
+            dimensions=[tencentcloud.monitor.PolicyBindingObjectDimensionArgs(
+                dimensions_json=f"{{\"unInstanceId\":\"{instances.instance_lists[0].instance_id}\"}}",
+            )])
+        ```
+
+        ## Import
+
+        Monitor Policy Binding Object can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PolicyBindingObjectDimensionArgs']]]] dimensions: A list objects. Each element contains the following attributes:
@@ -112,7 +167,62 @@ class PolicyBindingObject(pulumi.CustomResource):
                  args: PolicyBindingObjectArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a PolicyBindingObject resource with the given unique name, props, and options.
+        Provides a resource for bind objects to a alarm policy resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        instances = tencentcloud.Instances.get_instance()
+        policy = tencentcloud.monitor.AlarmPolicy("policy",
+            policy_name="hello",
+            monitor_type="MT_QCE",
+            enable=1,
+            project_id=1244035,
+            namespace="cvm_device",
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=1,
+                rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                    metric_name="CpuUsage",
+                    period=60,
+                    operator="ge",
+                    value="89.9",
+                    continue_period=1,
+                    notice_frequency=3600,
+                    is_power_notice=0,
+                )],
+            ),
+            event_conditions=[
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="ping_unreachable",
+                ),
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="guest_reboot",
+                ),
+            ],
+            notice_ids=["notice-l9ziyxw6"],
+            trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
+                type="AS",
+                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+            )])
+        #for cvm
+        binding = tencentcloud.monitor.PolicyBindingObject("binding",
+            policy_id=policy.id,
+            dimensions=[tencentcloud.monitor.PolicyBindingObjectDimensionArgs(
+                dimensions_json=f"{{\"unInstanceId\":\"{instances.instance_lists[0].instance_id}\"}}",
+            )])
+        ```
+
+        ## Import
+
+        Monitor Policy Binding Object can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
+        ```
+
         :param str resource_name: The name of the resource.
         :param PolicyBindingObjectArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

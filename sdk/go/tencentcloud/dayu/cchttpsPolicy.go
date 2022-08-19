@@ -11,7 +11,46 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type CCHttpsPolicy struct {
+// Use this resource to create a dayu CC self-define https policy
+//
+// > **NOTE:** creating CC self-define https policy need a valid resource `Dayu.L7Rule`; The resource only support Anti-DDoS of resource type `bgpip`.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewCcHttpsPolicy(ctx, "testPolicy", &Dayu.CcHttpsPolicyArgs{
+// 			ResourceType: pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_type),
+// 			ResourceId:   pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_id),
+// 			RuleId:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Rule_id),
+// 			Domain:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Domain),
+// 			Action:       pulumi.String("drop"),
+// 			Switch:       pulumi.Bool(true),
+// 			RuleLists: dayu.CcHttpsPolicyRuleListArray{
+// 				&dayu.CcHttpsPolicyRuleListArgs{
+// 					Skey:     pulumi.String("cgi"),
+// 					Operator: pulumi.String("include"),
+// 					Value:    pulumi.String("123"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+type CcHttpsPolicy struct {
 	pulumi.CustomResourceState
 
 	// Action mode. Valid values are `alg` and `drop`.
@@ -33,14 +72,14 @@ type CCHttpsPolicy struct {
 	// Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
 	// Rule list of the CC self-define https policy.
-	RuleLists CCHttpsPolicyRuleListArrayOutput `pulumi:"ruleLists"`
+	RuleLists CcHttpsPolicyRuleListArrayOutput `pulumi:"ruleLists"`
 	// Indicate the CC self-define https policy takes effect or not.
 	Switch pulumi.BoolPtrOutput `pulumi:"switch"`
 }
 
-// NewCCHttpsPolicy registers a new resource with the given unique name, arguments, and options.
-func NewCCHttpsPolicy(ctx *pulumi.Context,
-	name string, args *CCHttpsPolicyArgs, opts ...pulumi.ResourceOption) (*CCHttpsPolicy, error) {
+// NewCcHttpsPolicy registers a new resource with the given unique name, arguments, and options.
+func NewCcHttpsPolicy(ctx *pulumi.Context,
+	name string, args *CcHttpsPolicyArgs, opts ...pulumi.ResourceOption) (*CcHttpsPolicy, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -60,28 +99,28 @@ func NewCCHttpsPolicy(ctx *pulumi.Context,
 	if args.RuleLists == nil {
 		return nil, errors.New("invalid value for required argument 'RuleLists'")
 	}
-	var resource CCHttpsPolicy
-	err := ctx.RegisterResource("tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy", name, args, &resource, opts...)
+	var resource CcHttpsPolicy
+	err := ctx.RegisterResource("tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetCCHttpsPolicy gets an existing CCHttpsPolicy resource's state with the given name, ID, and optional
+// GetCcHttpsPolicy gets an existing CcHttpsPolicy resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetCCHttpsPolicy(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *CCHttpsPolicyState, opts ...pulumi.ResourceOption) (*CCHttpsPolicy, error) {
-	var resource CCHttpsPolicy
-	err := ctx.ReadResource("tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy", name, id, state, &resource, opts...)
+func GetCcHttpsPolicy(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *CcHttpsPolicyState, opts ...pulumi.ResourceOption) (*CcHttpsPolicy, error) {
+	var resource CcHttpsPolicy
+	err := ctx.ReadResource("tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering CCHttpsPolicy resources.
-type cchttpsPolicyState struct {
+// Input properties used for looking up and filtering CcHttpsPolicy resources.
+type ccHttpsPolicyState struct {
 	// Action mode. Valid values are `alg` and `drop`.
 	Action *string `pulumi:"action"`
 	// Create time of the CC self-define https policy.
@@ -101,12 +140,12 @@ type cchttpsPolicyState struct {
 	// Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
 	RuleId *string `pulumi:"ruleId"`
 	// Rule list of the CC self-define https policy.
-	RuleLists []CCHttpsPolicyRuleList `pulumi:"ruleLists"`
+	RuleLists []CcHttpsPolicyRuleList `pulumi:"ruleLists"`
 	// Indicate the CC self-define https policy takes effect or not.
 	Switch *bool `pulumi:"switch"`
 }
 
-type CCHttpsPolicyState struct {
+type CcHttpsPolicyState struct {
 	// Action mode. Valid values are `alg` and `drop`.
 	Action pulumi.StringPtrInput
 	// Create time of the CC self-define https policy.
@@ -126,16 +165,16 @@ type CCHttpsPolicyState struct {
 	// Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
 	RuleId pulumi.StringPtrInput
 	// Rule list of the CC self-define https policy.
-	RuleLists CCHttpsPolicyRuleListArrayInput
+	RuleLists CcHttpsPolicyRuleListArrayInput
 	// Indicate the CC self-define https policy takes effect or not.
 	Switch pulumi.BoolPtrInput
 }
 
-func (CCHttpsPolicyState) ElementType() reflect.Type {
-	return reflect.TypeOf((*cchttpsPolicyState)(nil)).Elem()
+func (CcHttpsPolicyState) ElementType() reflect.Type {
+	return reflect.TypeOf((*ccHttpsPolicyState)(nil)).Elem()
 }
 
-type cchttpsPolicyArgs struct {
+type ccHttpsPolicyArgs struct {
 	// Action mode. Valid values are `alg` and `drop`.
 	Action *string `pulumi:"action"`
 	// Domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
@@ -149,13 +188,13 @@ type cchttpsPolicyArgs struct {
 	// Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
 	RuleId string `pulumi:"ruleId"`
 	// Rule list of the CC self-define https policy.
-	RuleLists []CCHttpsPolicyRuleList `pulumi:"ruleLists"`
+	RuleLists []CcHttpsPolicyRuleList `pulumi:"ruleLists"`
 	// Indicate the CC self-define https policy takes effect or not.
 	Switch *bool `pulumi:"switch"`
 }
 
-// The set of arguments for constructing a CCHttpsPolicy resource.
-type CCHttpsPolicyArgs struct {
+// The set of arguments for constructing a CcHttpsPolicy resource.
+type CcHttpsPolicyArgs struct {
 	// Action mode. Valid values are `alg` and `drop`.
 	Action pulumi.StringPtrInput
 	// Domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
@@ -169,198 +208,198 @@ type CCHttpsPolicyArgs struct {
 	// Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
 	RuleId pulumi.StringInput
 	// Rule list of the CC self-define https policy.
-	RuleLists CCHttpsPolicyRuleListArrayInput
+	RuleLists CcHttpsPolicyRuleListArrayInput
 	// Indicate the CC self-define https policy takes effect or not.
 	Switch pulumi.BoolPtrInput
 }
 
-func (CCHttpsPolicyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*cchttpsPolicyArgs)(nil)).Elem()
+func (CcHttpsPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ccHttpsPolicyArgs)(nil)).Elem()
 }
 
-type CCHttpsPolicyInput interface {
+type CcHttpsPolicyInput interface {
 	pulumi.Input
 
-	ToCCHttpsPolicyOutput() CCHttpsPolicyOutput
-	ToCCHttpsPolicyOutputWithContext(ctx context.Context) CCHttpsPolicyOutput
+	ToCcHttpsPolicyOutput() CcHttpsPolicyOutput
+	ToCcHttpsPolicyOutputWithContext(ctx context.Context) CcHttpsPolicyOutput
 }
 
-func (*CCHttpsPolicy) ElementType() reflect.Type {
-	return reflect.TypeOf((**CCHttpsPolicy)(nil)).Elem()
+func (*CcHttpsPolicy) ElementType() reflect.Type {
+	return reflect.TypeOf((**CcHttpsPolicy)(nil)).Elem()
 }
 
-func (i *CCHttpsPolicy) ToCCHttpsPolicyOutput() CCHttpsPolicyOutput {
-	return i.ToCCHttpsPolicyOutputWithContext(context.Background())
+func (i *CcHttpsPolicy) ToCcHttpsPolicyOutput() CcHttpsPolicyOutput {
+	return i.ToCcHttpsPolicyOutputWithContext(context.Background())
 }
 
-func (i *CCHttpsPolicy) ToCCHttpsPolicyOutputWithContext(ctx context.Context) CCHttpsPolicyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPolicyOutput)
+func (i *CcHttpsPolicy) ToCcHttpsPolicyOutputWithContext(ctx context.Context) CcHttpsPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcHttpsPolicyOutput)
 }
 
-// CCHttpsPolicyArrayInput is an input type that accepts CCHttpsPolicyArray and CCHttpsPolicyArrayOutput values.
-// You can construct a concrete instance of `CCHttpsPolicyArrayInput` via:
+// CcHttpsPolicyArrayInput is an input type that accepts CcHttpsPolicyArray and CcHttpsPolicyArrayOutput values.
+// You can construct a concrete instance of `CcHttpsPolicyArrayInput` via:
 //
-//          CCHttpsPolicyArray{ CCHttpsPolicyArgs{...} }
-type CCHttpsPolicyArrayInput interface {
+//          CcHttpsPolicyArray{ CcHttpsPolicyArgs{...} }
+type CcHttpsPolicyArrayInput interface {
 	pulumi.Input
 
-	ToCCHttpsPolicyArrayOutput() CCHttpsPolicyArrayOutput
-	ToCCHttpsPolicyArrayOutputWithContext(context.Context) CCHttpsPolicyArrayOutput
+	ToCcHttpsPolicyArrayOutput() CcHttpsPolicyArrayOutput
+	ToCcHttpsPolicyArrayOutputWithContext(context.Context) CcHttpsPolicyArrayOutput
 }
 
-type CCHttpsPolicyArray []CCHttpsPolicyInput
+type CcHttpsPolicyArray []CcHttpsPolicyInput
 
-func (CCHttpsPolicyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*CCHttpsPolicy)(nil)).Elem()
+func (CcHttpsPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*CcHttpsPolicy)(nil)).Elem()
 }
 
-func (i CCHttpsPolicyArray) ToCCHttpsPolicyArrayOutput() CCHttpsPolicyArrayOutput {
-	return i.ToCCHttpsPolicyArrayOutputWithContext(context.Background())
+func (i CcHttpsPolicyArray) ToCcHttpsPolicyArrayOutput() CcHttpsPolicyArrayOutput {
+	return i.ToCcHttpsPolicyArrayOutputWithContext(context.Background())
 }
 
-func (i CCHttpsPolicyArray) ToCCHttpsPolicyArrayOutputWithContext(ctx context.Context) CCHttpsPolicyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPolicyArrayOutput)
+func (i CcHttpsPolicyArray) ToCcHttpsPolicyArrayOutputWithContext(ctx context.Context) CcHttpsPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcHttpsPolicyArrayOutput)
 }
 
-// CCHttpsPolicyMapInput is an input type that accepts CCHttpsPolicyMap and CCHttpsPolicyMapOutput values.
-// You can construct a concrete instance of `CCHttpsPolicyMapInput` via:
+// CcHttpsPolicyMapInput is an input type that accepts CcHttpsPolicyMap and CcHttpsPolicyMapOutput values.
+// You can construct a concrete instance of `CcHttpsPolicyMapInput` via:
 //
-//          CCHttpsPolicyMap{ "key": CCHttpsPolicyArgs{...} }
-type CCHttpsPolicyMapInput interface {
+//          CcHttpsPolicyMap{ "key": CcHttpsPolicyArgs{...} }
+type CcHttpsPolicyMapInput interface {
 	pulumi.Input
 
-	ToCCHttpsPolicyMapOutput() CCHttpsPolicyMapOutput
-	ToCCHttpsPolicyMapOutputWithContext(context.Context) CCHttpsPolicyMapOutput
+	ToCcHttpsPolicyMapOutput() CcHttpsPolicyMapOutput
+	ToCcHttpsPolicyMapOutputWithContext(context.Context) CcHttpsPolicyMapOutput
 }
 
-type CCHttpsPolicyMap map[string]CCHttpsPolicyInput
+type CcHttpsPolicyMap map[string]CcHttpsPolicyInput
 
-func (CCHttpsPolicyMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*CCHttpsPolicy)(nil)).Elem()
+func (CcHttpsPolicyMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*CcHttpsPolicy)(nil)).Elem()
 }
 
-func (i CCHttpsPolicyMap) ToCCHttpsPolicyMapOutput() CCHttpsPolicyMapOutput {
-	return i.ToCCHttpsPolicyMapOutputWithContext(context.Background())
+func (i CcHttpsPolicyMap) ToCcHttpsPolicyMapOutput() CcHttpsPolicyMapOutput {
+	return i.ToCcHttpsPolicyMapOutputWithContext(context.Background())
 }
 
-func (i CCHttpsPolicyMap) ToCCHttpsPolicyMapOutputWithContext(ctx context.Context) CCHttpsPolicyMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPolicyMapOutput)
+func (i CcHttpsPolicyMap) ToCcHttpsPolicyMapOutputWithContext(ctx context.Context) CcHttpsPolicyMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcHttpsPolicyMapOutput)
 }
 
-type CCHttpsPolicyOutput struct{ *pulumi.OutputState }
+type CcHttpsPolicyOutput struct{ *pulumi.OutputState }
 
-func (CCHttpsPolicyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CCHttpsPolicy)(nil)).Elem()
+func (CcHttpsPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CcHttpsPolicy)(nil)).Elem()
 }
 
-func (o CCHttpsPolicyOutput) ToCCHttpsPolicyOutput() CCHttpsPolicyOutput {
+func (o CcHttpsPolicyOutput) ToCcHttpsPolicyOutput() CcHttpsPolicyOutput {
 	return o
 }
 
-func (o CCHttpsPolicyOutput) ToCCHttpsPolicyOutputWithContext(ctx context.Context) CCHttpsPolicyOutput {
+func (o CcHttpsPolicyOutput) ToCcHttpsPolicyOutputWithContext(ctx context.Context) CcHttpsPolicyOutput {
 	return o
 }
 
 // Action mode. Valid values are `alg` and `drop`.
-func (o CCHttpsPolicyOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.Action }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.Action }).(pulumi.StringOutput)
 }
 
 // Create time of the CC self-define https policy.
-func (o CCHttpsPolicyOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
 // Domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
-func (o CCHttpsPolicyOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
 }
 
 // Ip of the CC self-define https policy.
-func (o CCHttpsPolicyOutput) IpLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringArrayOutput { return v.IpLists }).(pulumi.StringArrayOutput)
+func (o CcHttpsPolicyOutput) IpLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringArrayOutput { return v.IpLists }).(pulumi.StringArrayOutput)
 }
 
 // Name of the CC self-define https policy. Length should between 1 and 20.
-func (o CCHttpsPolicyOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
 // Id of the CC self-define https policy.
-func (o CCHttpsPolicyOutput) PolicyId() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.PolicyId }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) PolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.PolicyId }).(pulumi.StringOutput)
 }
 
 // ID of the resource that the CC self-define https policy works for.
-func (o CCHttpsPolicyOutput) ResourceId() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.ResourceId }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.ResourceId }).(pulumi.StringOutput)
 }
 
 // Type of the resource that the CC self-define https policy works for, valid value is `bgpip`.
-func (o CCHttpsPolicyOutput) ResourceType() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.ResourceType }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.ResourceType }).(pulumi.StringOutput)
 }
 
 // Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
-func (o CCHttpsPolicyOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.StringOutput { return v.RuleId }).(pulumi.StringOutput)
+func (o CcHttpsPolicyOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.StringOutput { return v.RuleId }).(pulumi.StringOutput)
 }
 
 // Rule list of the CC self-define https policy.
-func (o CCHttpsPolicyOutput) RuleLists() CCHttpsPolicyRuleListArrayOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) CCHttpsPolicyRuleListArrayOutput { return v.RuleLists }).(CCHttpsPolicyRuleListArrayOutput)
+func (o CcHttpsPolicyOutput) RuleLists() CcHttpsPolicyRuleListArrayOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) CcHttpsPolicyRuleListArrayOutput { return v.RuleLists }).(CcHttpsPolicyRuleListArrayOutput)
 }
 
 // Indicate the CC self-define https policy takes effect or not.
-func (o CCHttpsPolicyOutput) Switch() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *CCHttpsPolicy) pulumi.BoolPtrOutput { return v.Switch }).(pulumi.BoolPtrOutput)
+func (o CcHttpsPolicyOutput) Switch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CcHttpsPolicy) pulumi.BoolPtrOutput { return v.Switch }).(pulumi.BoolPtrOutput)
 }
 
-type CCHttpsPolicyArrayOutput struct{ *pulumi.OutputState }
+type CcHttpsPolicyArrayOutput struct{ *pulumi.OutputState }
 
-func (CCHttpsPolicyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*CCHttpsPolicy)(nil)).Elem()
+func (CcHttpsPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*CcHttpsPolicy)(nil)).Elem()
 }
 
-func (o CCHttpsPolicyArrayOutput) ToCCHttpsPolicyArrayOutput() CCHttpsPolicyArrayOutput {
+func (o CcHttpsPolicyArrayOutput) ToCcHttpsPolicyArrayOutput() CcHttpsPolicyArrayOutput {
 	return o
 }
 
-func (o CCHttpsPolicyArrayOutput) ToCCHttpsPolicyArrayOutputWithContext(ctx context.Context) CCHttpsPolicyArrayOutput {
+func (o CcHttpsPolicyArrayOutput) ToCcHttpsPolicyArrayOutputWithContext(ctx context.Context) CcHttpsPolicyArrayOutput {
 	return o
 }
 
-func (o CCHttpsPolicyArrayOutput) Index(i pulumi.IntInput) CCHttpsPolicyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *CCHttpsPolicy {
-		return vs[0].([]*CCHttpsPolicy)[vs[1].(int)]
-	}).(CCHttpsPolicyOutput)
+func (o CcHttpsPolicyArrayOutput) Index(i pulumi.IntInput) CcHttpsPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *CcHttpsPolicy {
+		return vs[0].([]*CcHttpsPolicy)[vs[1].(int)]
+	}).(CcHttpsPolicyOutput)
 }
 
-type CCHttpsPolicyMapOutput struct{ *pulumi.OutputState }
+type CcHttpsPolicyMapOutput struct{ *pulumi.OutputState }
 
-func (CCHttpsPolicyMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*CCHttpsPolicy)(nil)).Elem()
+func (CcHttpsPolicyMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*CcHttpsPolicy)(nil)).Elem()
 }
 
-func (o CCHttpsPolicyMapOutput) ToCCHttpsPolicyMapOutput() CCHttpsPolicyMapOutput {
+func (o CcHttpsPolicyMapOutput) ToCcHttpsPolicyMapOutput() CcHttpsPolicyMapOutput {
 	return o
 }
 
-func (o CCHttpsPolicyMapOutput) ToCCHttpsPolicyMapOutputWithContext(ctx context.Context) CCHttpsPolicyMapOutput {
+func (o CcHttpsPolicyMapOutput) ToCcHttpsPolicyMapOutputWithContext(ctx context.Context) CcHttpsPolicyMapOutput {
 	return o
 }
 
-func (o CCHttpsPolicyMapOutput) MapIndex(k pulumi.StringInput) CCHttpsPolicyOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *CCHttpsPolicy {
-		return vs[0].(map[string]*CCHttpsPolicy)[vs[1].(string)]
-	}).(CCHttpsPolicyOutput)
+func (o CcHttpsPolicyMapOutput) MapIndex(k pulumi.StringInput) CcHttpsPolicyOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *CcHttpsPolicy {
+		return vs[0].(map[string]*CcHttpsPolicy)[vs[1].(string)]
+	}).(CcHttpsPolicyOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPolicyInput)(nil)).Elem(), &CCHttpsPolicy{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPolicyArrayInput)(nil)).Elem(), CCHttpsPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPolicyMapInput)(nil)).Elem(), CCHttpsPolicyMap{})
-	pulumi.RegisterOutputType(CCHttpsPolicyOutput{})
-	pulumi.RegisterOutputType(CCHttpsPolicyArrayOutput{})
-	pulumi.RegisterOutputType(CCHttpsPolicyMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcHttpsPolicyInput)(nil)).Elem(), &CcHttpsPolicy{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcHttpsPolicyArrayInput)(nil)).Elem(), CcHttpsPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcHttpsPolicyMapInput)(nil)).Elem(), CcHttpsPolicyMap{})
+	pulumi.RegisterOutputType(CcHttpsPolicyOutput{})
+	pulumi.RegisterOutputType(CcHttpsPolicyArrayOutput{})
+	pulumi.RegisterOutputType(CcHttpsPolicyMapOutput{})
 }

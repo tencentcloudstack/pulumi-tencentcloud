@@ -51,19 +51,12 @@ class ScalingConfigArgs:
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
-        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-               NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
-        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-               values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-               `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-               neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-               specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-               balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input['ScalingConfigInstanceNameSettingsArgs'] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-               `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -72,11 +65,9 @@ class ScalingConfigArgs:
         :param pulumi.Input[bool] public_ip_assigned: Specify whether to assign an Internet IP address.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security groups to which a CVM instance belongs.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
-        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-               instance_charge_type is set to `SPOTPAID`.
+        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[int] system_disk_size: Volume of system disk in GB. Default is `50`.
-        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-               disk_type_policy is ORIGINAL.
+        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         :param pulumi.Input[str] user_data: ase64-encoded User Data text, the length limit is 16KB.
         """
         pulumi.set(__self__, "configuration_name", configuration_name)
@@ -229,8 +220,7 @@ class ScalingConfigArgs:
     @pulumi.getter(name="instanceChargeType")
     def instance_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-        NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         """
         return pulumi.get(self, "instance_charge_type")
 
@@ -242,8 +232,7 @@ class ScalingConfigArgs:
     @pulumi.getter(name="instanceChargeTypePrepaidPeriod")
     def instance_charge_type_prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-        values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         """
         return pulumi.get(self, "instance_charge_type_prepaid_period")
 
@@ -255,11 +244,7 @@ class ScalingConfigArgs:
     @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
     def instance_charge_type_prepaid_renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
 
@@ -295,8 +280,7 @@ class ScalingConfigArgs:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-        `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -404,8 +388,7 @@ class ScalingConfigArgs:
     @pulumi.getter(name="spotMaxPrice")
     def spot_max_price(self) -> Optional[pulumi.Input[str]]:
         """
-        Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-        instance_charge_type is set to `SPOTPAID`.
+        Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         """
         return pulumi.get(self, "spot_max_price")
 
@@ -429,8 +412,7 @@ class ScalingConfigArgs:
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-        disk_type_policy is ORIGINAL.
+        Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         """
         return pulumi.get(self, "system_disk_type")
 
@@ -492,20 +474,13 @@ class _ScalingConfigState:
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
-        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-               NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
-        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-               values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-               `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-               neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-               specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-               balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input['ScalingConfigInstanceNameSettingsArgs'] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_types: Specified types of CVM instances.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-               `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -514,12 +489,10 @@ class _ScalingConfigState:
         :param pulumi.Input[bool] public_ip_assigned: Specify whether to assign an Internet IP address.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security groups to which a CVM instance belongs.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
-        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-               instance_charge_type is set to `SPOTPAID`.
+        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] status: Current statues of a launch configuration.
         :param pulumi.Input[int] system_disk_size: Volume of system disk in GB. Default is `50`.
-        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-               disk_type_policy is ORIGINAL.
+        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         :param pulumi.Input[str] user_data: ase64-encoded User Data text, the length limit is 16KB.
         """
         if cam_role_name is not None:
@@ -679,8 +652,7 @@ class _ScalingConfigState:
     @pulumi.getter(name="instanceChargeType")
     def instance_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-        NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         """
         return pulumi.get(self, "instance_charge_type")
 
@@ -692,8 +664,7 @@ class _ScalingConfigState:
     @pulumi.getter(name="instanceChargeTypePrepaidPeriod")
     def instance_charge_type_prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-        values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         """
         return pulumi.get(self, "instance_charge_type_prepaid_period")
 
@@ -705,11 +676,7 @@ class _ScalingConfigState:
     @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
     def instance_charge_type_prepaid_renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
 
@@ -757,8 +724,7 @@ class _ScalingConfigState:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-        `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -866,8 +832,7 @@ class _ScalingConfigState:
     @pulumi.getter(name="spotMaxPrice")
     def spot_max_price(self) -> Optional[pulumi.Input[str]]:
         """
-        Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-        instance_charge_type is set to `SPOTPAID`.
+        Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         """
         return pulumi.get(self, "spot_max_price")
 
@@ -903,8 +868,7 @@ class _ScalingConfigState:
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-        disk_type_policy is ORIGINAL.
+        Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         """
         return pulumi.get(self, "system_disk_type")
 
@@ -958,7 +922,60 @@ class ScalingConfig(pulumi.CustomResource):
                  user_data: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ScalingConfig resource with the given unique name, props, and options.
+        Provides a resource to create a configuration for an AS (Auto scaling) instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
+            configuration_name="launch-configuration",
+            data_disks=[tencentcloud.as..ScalingConfigDataDiskArgs(
+                disk_size=50,
+                disk_type="CLOUD_PREMIUM",
+            )],
+            enhanced_monitor_service=False,
+            enhanced_security_service=False,
+            image_id="img-9qabwvbn",
+            instance_tags={
+                "tag": "as",
+            },
+            instance_types=["SA1.SMALL1"],
+            internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+            internet_max_bandwidth_out=10,
+            password="test123#",
+            project_id=0,
+            public_ip_assigned=True,
+            system_disk_size=50,
+            system_disk_type="CLOUD_PREMIUM",
+            user_data="dGVzdA==")
+        ```
+
+        Using SPOT charge type
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
+            configuration_name="launch-configuration",
+            image_id="img-9qabwvbn",
+            instance_charge_type="SPOTPAID",
+            instance_types=["SA1.SMALL1"],
+            spot_instance_type="one-time",
+            spot_max_price="1000")
+        ```
+
+        ## Import
+
+        AutoScaling Configuration can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cam_role_name: CAM role name authorized to access.
@@ -968,20 +985,13 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
-        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-               NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
-        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-               values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-               `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-               neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-               specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-               balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input[pulumi.InputType['ScalingConfigInstanceNameSettingsArgs']] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_types: Specified types of CVM instances.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-               `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -990,11 +1000,9 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[bool] public_ip_assigned: Specify whether to assign an Internet IP address.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security groups to which a CVM instance belongs.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
-        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-               instance_charge_type is set to `SPOTPAID`.
+        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[int] system_disk_size: Volume of system disk in GB. Default is `50`.
-        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-               disk_type_policy is ORIGINAL.
+        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         :param pulumi.Input[str] user_data: ase64-encoded User Data text, the length limit is 16KB.
         """
         ...
@@ -1004,7 +1012,60 @@ class ScalingConfig(pulumi.CustomResource):
                  args: ScalingConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ScalingConfig resource with the given unique name, props, and options.
+        Provides a resource to create a configuration for an AS (Auto scaling) instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
+            configuration_name="launch-configuration",
+            data_disks=[tencentcloud.as..ScalingConfigDataDiskArgs(
+                disk_size=50,
+                disk_type="CLOUD_PREMIUM",
+            )],
+            enhanced_monitor_service=False,
+            enhanced_security_service=False,
+            image_id="img-9qabwvbn",
+            instance_tags={
+                "tag": "as",
+            },
+            instance_types=["SA1.SMALL1"],
+            internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+            internet_max_bandwidth_out=10,
+            password="test123#",
+            project_id=0,
+            public_ip_assigned=True,
+            system_disk_size=50,
+            system_disk_type="CLOUD_PREMIUM",
+            user_data="dGVzdA==")
+        ```
+
+        Using SPOT charge type
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
+            configuration_name="launch-configuration",
+            image_id="img-9qabwvbn",
+            instance_charge_type="SPOTPAID",
+            instance_types=["SA1.SMALL1"],
+            spot_instance_type="one-time",
+            spot_max_price="1000")
+        ```
+
+        ## Import
+
+        AutoScaling Configuration can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+        ```
+
         :param str resource_name: The name of the resource.
         :param ScalingConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1145,20 +1206,13 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
-        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-               NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
-        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-               values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-               `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-               neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-               specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-               balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input[pulumi.InputType['ScalingConfigInstanceNameSettingsArgs']] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_types: Specified types of CVM instances.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-               `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -1167,12 +1221,10 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[bool] public_ip_assigned: Specify whether to assign an Internet IP address.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security groups to which a CVM instance belongs.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
-        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-               instance_charge_type is set to `SPOTPAID`.
+        :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] status: Current statues of a launch configuration.
         :param pulumi.Input[int] system_disk_size: Volume of system disk in GB. Default is `50`.
-        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-               disk_type_policy is ORIGINAL.
+        :param pulumi.Input[str] system_disk_type: Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         :param pulumi.Input[str] user_data: ase64-encoded User Data text, the length limit is 16KB.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1277,8 +1329,7 @@ class ScalingConfig(pulumi.CustomResource):
     @pulumi.getter(name="instanceChargeType")
     def instance_charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-        NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         """
         return pulumi.get(self, "instance_charge_type")
 
@@ -1286,8 +1337,7 @@ class ScalingConfig(pulumi.CustomResource):
     @pulumi.getter(name="instanceChargeTypePrepaidPeriod")
     def instance_charge_type_prepaid_period(self) -> pulumi.Output[Optional[int]]:
         """
-        The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-        values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         """
         return pulumi.get(self, "instance_charge_type_prepaid_period")
 
@@ -1295,11 +1345,7 @@ class ScalingConfig(pulumi.CustomResource):
     @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
     def instance_charge_type_prepaid_renew_flag(self) -> pulumi.Output[str]:
         """
-        Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
 
@@ -1331,8 +1377,7 @@ class ScalingConfig(pulumi.CustomResource):
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-        `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -1404,8 +1449,7 @@ class ScalingConfig(pulumi.CustomResource):
     @pulumi.getter(name="spotMaxPrice")
     def spot_max_price(self) -> pulumi.Output[Optional[str]]:
         """
-        Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-        instance_charge_type is set to `SPOTPAID`.
+        Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         """
         return pulumi.get(self, "spot_max_price")
 
@@ -1429,8 +1473,7 @@ class ScalingConfig(pulumi.CustomResource):
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-        disk_type_policy is ORIGINAL.
+        Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         """
         return pulumi.get(self, "system_disk_type")
 

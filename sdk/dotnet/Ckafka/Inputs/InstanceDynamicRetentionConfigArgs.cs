@@ -12,15 +12,27 @@ namespace Pulumi.Tencentcloud.Ckafka.Inputs
 
     public sealed class InstanceDynamicRetentionConfigArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Minimum retention time, in minutes.
+        /// </summary>
         [Input("bottomRetention")]
         public Input<int>? BottomRetention { get; set; }
 
+        /// <summary>
+        /// Disk quota threshold (in percentage) for triggering the message retention time change event.
+        /// </summary>
         [Input("diskQuotaPercentage")]
         public Input<int>? DiskQuotaPercentage { get; set; }
 
+        /// <summary>
+        /// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled.
+        /// </summary>
         [Input("enable")]
         public Input<int>? Enable { get; set; }
 
+        /// <summary>
+        /// Percentage by which the message retention time is shortened each time.
+        /// </summary>
         [Input("stepForwardPercentage")]
         public Input<int>? StepForwardPercentage { get; set; }
 

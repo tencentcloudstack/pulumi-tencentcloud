@@ -21,6 +21,12 @@ class PrivilegeColumnArgs:
                  database_name: pulumi.Input[str],
                  privileges: pulumi.Input[Sequence[pulumi.Input[str]]],
                  table_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        :param pulumi.Input[str] database_name: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.
+        :param pulumi.Input[str] table_name: Table name.
+        """
         pulumi.set(__self__, "column_name", column_name)
         pulumi.set(__self__, "database_name", database_name)
         pulumi.set(__self__, "privileges", privileges)
@@ -29,6 +35,9 @@ class PrivilegeColumnArgs:
     @property
     @pulumi.getter(name="columnName")
     def column_name(self) -> pulumi.Input[str]:
+        """
+        Column name.
+        """
         return pulumi.get(self, "column_name")
 
     @column_name.setter
@@ -38,6 +47,9 @@ class PrivilegeColumnArgs:
     @property
     @pulumi.getter(name="databaseName")
     def database_name(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
         return pulumi.get(self, "database_name")
 
     @database_name.setter
@@ -47,6 +59,9 @@ class PrivilegeColumnArgs:
     @property
     @pulumi.getter
     def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.
+        """
         return pulumi.get(self, "privileges")
 
     @privileges.setter
@@ -56,6 +71,9 @@ class PrivilegeColumnArgs:
     @property
     @pulumi.getter(name="tableName")
     def table_name(self) -> pulumi.Input[str]:
+        """
+        Table name.
+        """
         return pulumi.get(self, "table_name")
 
     @table_name.setter
@@ -68,12 +86,19 @@ class PrivilegeDatabaseArgs:
     def __init__(__self__, *,
                  database_name: pulumi.Input[str],
                  privileges: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] database_name: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.
+        """
         pulumi.set(__self__, "database_name", database_name)
         pulumi.set(__self__, "privileges", privileges)
 
     @property
     @pulumi.getter(name="databaseName")
     def database_name(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
         return pulumi.get(self, "database_name")
 
     @database_name.setter
@@ -83,6 +108,9 @@ class PrivilegeDatabaseArgs:
     @property
     @pulumi.getter
     def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.
+        """
         return pulumi.get(self, "privileges")
 
     @privileges.setter
@@ -96,6 +124,11 @@ class PrivilegeTableArgs:
                  database_name: pulumi.Input[str],
                  privileges: pulumi.Input[Sequence[pulumi.Input[str]]],
                  table_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database_name: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+        :param pulumi.Input[str] table_name: Table name.
+        """
         pulumi.set(__self__, "database_name", database_name)
         pulumi.set(__self__, "privileges", privileges)
         pulumi.set(__self__, "table_name", table_name)
@@ -103,6 +136,9 @@ class PrivilegeTableArgs:
     @property
     @pulumi.getter(name="databaseName")
     def database_name(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
         return pulumi.get(self, "database_name")
 
     @database_name.setter
@@ -112,6 +148,9 @@ class PrivilegeTableArgs:
     @property
     @pulumi.getter
     def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+        """
         return pulumi.get(self, "privileges")
 
     @privileges.setter
@@ -121,6 +160,9 @@ class PrivilegeTableArgs:
     @property
     @pulumi.getter(name="tableName")
     def table_name(self) -> pulumi.Input[str]:
+        """
+        Table name.
+        """
         return pulumi.get(self, "table_name")
 
     @table_name.setter

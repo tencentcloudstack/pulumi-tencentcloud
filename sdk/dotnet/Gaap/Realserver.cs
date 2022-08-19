@@ -9,6 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Gaap
 {
+    /// <summary>
+    /// Provides a resource to create a GAAP realserver.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Gaap.Realserver("foo", new Tencentcloud.Gaap.RealserverArgs
+    ///         {
+    ///             Ip = "1.1.1.1",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// GAAP realserver can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/realserver:Realserver")]
     public partial class Realserver : Pulumi.CustomResource
     {

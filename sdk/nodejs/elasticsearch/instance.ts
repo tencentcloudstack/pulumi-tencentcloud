@@ -5,6 +5,46 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides an elasticsearch instance resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.elasticsearch.Instance("foo", {
+ *     instanceName: "tf-test",
+ *     availabilityZone: "ap-guangzhou-3",
+ *     version: "7.5.1",
+ *     vpcId: _var.vpc_id,
+ *     subnetId: _var.subnet_id,
+ *     password: "Test12345",
+ *     licenseType: "oss",
+ *     webNodeTypeInfos: [{
+ *         nodeNum: 1,
+ *         nodeType: "ES.S1.MEDIUM4",
+ *     }],
+ *     nodeInfoLists: [{
+ *         nodeNum: 2,
+ *         nodeType: "ES.S1.MEDIUM4",
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Elasticsearch instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -38,12 +78,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly availabilityZone!: pulumi.Output<string | undefined>;
     /**
-     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-     * disabled, `2` is enabled, and default value is `1`.
+     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
      */
     public readonly basicSecurityType!: pulumi.Output<number | undefined>;
     /**
-     * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     public readonly chargePeriod!: pulumi.Output<number | undefined>;
     /**
@@ -55,8 +94,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-     * Default value is `0`.
+     * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
      */
     public readonly deployMode!: pulumi.Output<number | undefined>;
     /**
@@ -72,8 +110,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly elasticsearchVip!: pulumi.Output<string>;
     /**
-     * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-     * underscores(_).
+     * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     public readonly instanceName!: pulumi.Output<string | undefined>;
     /**
@@ -85,12 +122,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly licenseType!: pulumi.Output<string | undefined>;
     /**
-     * Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+     * Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
      */
     public readonly multiZoneInfos!: pulumi.Output<outputs.Elasticsearch.InstanceMultiZoneInfo[]>;
     /**
-     * Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-     * such as node type, node quantity, node specification, disk type, and disk size.
+     * Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
      */
     public readonly nodeInfoLists!: pulumi.Output<outputs.Elasticsearch.InstanceNodeInfoList[]>;
     /**
@@ -98,8 +134,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly password!: pulumi.Output<string>;
     /**
-     * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-     * `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+     * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     public readonly renewFlag!: pulumi.Output<string | undefined>;
     /**
@@ -107,8 +142,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
-     * A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-     * Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+     * A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
@@ -208,12 +242,11 @@ export interface InstanceState {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
-     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-     * disabled, `2` is enabled, and default value is `1`.
+     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
      */
     basicSecurityType?: pulumi.Input<number>;
     /**
-     * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     chargePeriod?: pulumi.Input<number>;
     /**
@@ -225,8 +258,7 @@ export interface InstanceState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-     * Default value is `0`.
+     * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
      */
     deployMode?: pulumi.Input<number>;
     /**
@@ -242,8 +274,7 @@ export interface InstanceState {
      */
     elasticsearchVip?: pulumi.Input<string>;
     /**
-     * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-     * underscores(_).
+     * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     instanceName?: pulumi.Input<string>;
     /**
@@ -255,12 +286,11 @@ export interface InstanceState {
      */
     licenseType?: pulumi.Input<string>;
     /**
-     * Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+     * Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
      */
     multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceMultiZoneInfo>[]>;
     /**
-     * Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-     * such as node type, node quantity, node specification, disk type, and disk size.
+     * Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
      */
     nodeInfoLists?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[]>;
     /**
@@ -268,8 +298,7 @@ export interface InstanceState {
      */
     password?: pulumi.Input<string>;
     /**
-     * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-     * `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+     * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     renewFlag?: pulumi.Input<string>;
     /**
@@ -277,8 +306,7 @@ export interface InstanceState {
      */
     subnetId?: pulumi.Input<string>;
     /**
-     * A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-     * Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+     * A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
@@ -304,12 +332,11 @@ export interface InstanceArgs {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
-     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-     * disabled, `2` is enabled, and default value is `1`.
+     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
      */
     basicSecurityType?: pulumi.Input<number>;
     /**
-     * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     chargePeriod?: pulumi.Input<number>;
     /**
@@ -317,13 +344,11 @@ export interface InstanceArgs {
      */
     chargeType?: pulumi.Input<string>;
     /**
-     * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-     * Default value is `0`.
+     * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
      */
     deployMode?: pulumi.Input<number>;
     /**
-     * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-     * underscores(_).
+     * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     instanceName?: pulumi.Input<string>;
     /**
@@ -331,12 +356,11 @@ export interface InstanceArgs {
      */
     licenseType?: pulumi.Input<string>;
     /**
-     * Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+     * Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
      */
     multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceMultiZoneInfo>[]>;
     /**
-     * Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-     * such as node type, node quantity, node specification, disk type, and disk size.
+     * Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
      */
     nodeInfoLists: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[]>;
     /**
@@ -344,8 +368,7 @@ export interface InstanceArgs {
      */
     password: pulumi.Input<string>;
     /**
-     * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-     * `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+     * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     renewFlag?: pulumi.Input<string>;
     /**
@@ -353,8 +376,7 @@ export interface InstanceArgs {
      */
     subnetId?: pulumi.Input<string>;
     /**
-     * A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-     * Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+     * A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**

@@ -325,7 +325,22 @@ class GatewaySnat(pulumi.CustomResource):
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a GatewaySnat resource with the given unique name, props, and options.
+        Provides a resource to create a NAT Gateway SNat rule.
+
+        ## Import
+
+        VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
+
+        ```sh
+         $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+        ```
+
+         NETWORKINTERFACT SNat
+
+        ```sh
+         $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description.
@@ -344,7 +359,22 @@ class GatewaySnat(pulumi.CustomResource):
                  args: GatewaySnatArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a GatewaySnat resource with the given unique name, props, and options.
+        Provides a resource to create a NAT Gateway SNat rule.
+
+        ## Import
+
+        VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
+
+        ```sh
+         $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+        ```
+
+         NETWORKINTERFACT SNat
+
+        ```sh
+         $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+        ```
+
         :param str resource_name: The name of the resource.
         :param GatewaySnatArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

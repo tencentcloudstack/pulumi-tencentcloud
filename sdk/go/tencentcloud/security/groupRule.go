@@ -11,28 +11,108 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create security group rule.
+//
+// ## Example Usage
+//
+// Source is CIDR ip
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		sglab1Group, err := Security.NewGroup(ctx, "sglab1Group", &Security.GroupArgs{
+// 			Description: pulumi.String("favourite sg_1"),
+// 			ProjectId:   pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupRule(ctx, "sglab1GroupRule", &Security.GroupRuleArgs{
+// 			SecurityGroupId: sglab1Group.ID(),
+// 			Type:            pulumi.String("ingress"),
+// 			CidrIp:          pulumi.String("10.0.0.0/16"),
+// 			IpProtocol:      pulumi.String("TCP"),
+// 			PortRange:       pulumi.String("80"),
+// 			Policy:          pulumi.String("ACCEPT"),
+// 			Description:     pulumi.String("favourite sg rule_1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// Source is a security group id
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		sglab2Group, err := Security.NewGroup(ctx, "sglab2Group", &Security.GroupArgs{
+// 			Description: pulumi.String("favourite sg_2"),
+// 			ProjectId:   pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		sglab3, err := Security.NewGroup(ctx, "sglab3", &Security.GroupArgs{
+// 			Description: pulumi.String("favourite sg_3"),
+// 			ProjectId:   pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupRule(ctx, "sglab2GroupRule", &Security.GroupRuleArgs{
+// 			SecurityGroupId: sglab2Group.ID(),
+// 			Type:            pulumi.String("ingress"),
+// 			IpProtocol:      pulumi.String("TCP"),
+// 			PortRange:       pulumi.String("80"),
+// 			Policy:          pulumi.String("ACCEPT"),
+// 			SourceSgid:      sglab3.ID(),
+// 			Description:     pulumi.String("favourite sg rule_2"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type GroupRule struct {
 	pulumi.CustomResourceState
 
-	// ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
+	// ID of the address template, and confilicts with `sourceSgid` and `cidrIp`.
 	AddressTemplate GroupRuleAddressTemplateOutput `pulumi:"addressTemplate"`
-	// An IP address network or segment, and conflict with `source_sgid` and `address_template`.
+	// An IP address network or segment, and conflict with `sourceSgid` and `addressTemplate`.
 	CidrIp pulumi.StringPtrOutput `pulumi:"cidrIp"`
 	// Description of the security group rule.
 	Description pulumi.StringOutput `pulumi:"description"`
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-	// `protocol_template`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocolTemplate`.
 	IpProtocol pulumi.StringOutput `pulumi:"ipProtocol"`
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy pulumi.StringOutput `pulumi:"policy"`
-	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-	// all ports, and confilicts with `protocol_template`.
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange pulumi.StringOutput `pulumi:"portRange"`
-	// ID of the address template, and conflict with `ip_protocol`, `port_range`.
+	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
 	ProtocolTemplate GroupRuleProtocolTemplateOutput `pulumi:"protocolTemplate"`
 	// ID of the security group to be queried.
 	SecurityGroupId pulumi.StringOutput `pulumi:"securityGroupId"`
-	// ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
+	// ID of the nested security group, and conflicts with `cidrIp` and `addressTemplate`.
 	SourceSgid pulumi.StringOutput `pulumi:"sourceSgid"`
 	// Type of the security group rule. Valid values: `ingress` and `egress`.
 	Type pulumi.StringOutput `pulumi:"type"`
@@ -76,50 +156,46 @@ func GetGroupRule(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering GroupRule resources.
 type groupRuleState struct {
-	// ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
+	// ID of the address template, and confilicts with `sourceSgid` and `cidrIp`.
 	AddressTemplate *GroupRuleAddressTemplate `pulumi:"addressTemplate"`
-	// An IP address network or segment, and conflict with `source_sgid` and `address_template`.
+	// An IP address network or segment, and conflict with `sourceSgid` and `addressTemplate`.
 	CidrIp *string `pulumi:"cidrIp"`
 	// Description of the security group rule.
 	Description *string `pulumi:"description"`
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-	// `protocol_template`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocolTemplate`.
 	IpProtocol *string `pulumi:"ipProtocol"`
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy *string `pulumi:"policy"`
-	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-	// all ports, and confilicts with `protocol_template`.
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange *string `pulumi:"portRange"`
-	// ID of the address template, and conflict with `ip_protocol`, `port_range`.
+	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
 	ProtocolTemplate *GroupRuleProtocolTemplate `pulumi:"protocolTemplate"`
 	// ID of the security group to be queried.
 	SecurityGroupId *string `pulumi:"securityGroupId"`
-	// ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
+	// ID of the nested security group, and conflicts with `cidrIp` and `addressTemplate`.
 	SourceSgid *string `pulumi:"sourceSgid"`
 	// Type of the security group rule. Valid values: `ingress` and `egress`.
 	Type *string `pulumi:"type"`
 }
 
 type GroupRuleState struct {
-	// ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
+	// ID of the address template, and confilicts with `sourceSgid` and `cidrIp`.
 	AddressTemplate GroupRuleAddressTemplatePtrInput
-	// An IP address network or segment, and conflict with `source_sgid` and `address_template`.
+	// An IP address network or segment, and conflict with `sourceSgid` and `addressTemplate`.
 	CidrIp pulumi.StringPtrInput
 	// Description of the security group rule.
 	Description pulumi.StringPtrInput
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-	// `protocol_template`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocolTemplate`.
 	IpProtocol pulumi.StringPtrInput
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy pulumi.StringPtrInput
-	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-	// all ports, and confilicts with `protocol_template`.
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange pulumi.StringPtrInput
-	// ID of the address template, and conflict with `ip_protocol`, `port_range`.
+	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
 	ProtocolTemplate GroupRuleProtocolTemplatePtrInput
 	// ID of the security group to be queried.
 	SecurityGroupId pulumi.StringPtrInput
-	// ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
+	// ID of the nested security group, and conflicts with `cidrIp` and `addressTemplate`.
 	SourceSgid pulumi.StringPtrInput
 	// Type of the security group rule. Valid values: `ingress` and `egress`.
 	Type pulumi.StringPtrInput
@@ -130,25 +206,23 @@ func (GroupRuleState) ElementType() reflect.Type {
 }
 
 type groupRuleArgs struct {
-	// ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
+	// ID of the address template, and confilicts with `sourceSgid` and `cidrIp`.
 	AddressTemplate *GroupRuleAddressTemplate `pulumi:"addressTemplate"`
-	// An IP address network or segment, and conflict with `source_sgid` and `address_template`.
+	// An IP address network or segment, and conflict with `sourceSgid` and `addressTemplate`.
 	CidrIp *string `pulumi:"cidrIp"`
 	// Description of the security group rule.
 	Description *string `pulumi:"description"`
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-	// `protocol_template`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocolTemplate`.
 	IpProtocol *string `pulumi:"ipProtocol"`
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy string `pulumi:"policy"`
-	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-	// all ports, and confilicts with `protocol_template`.
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange *string `pulumi:"portRange"`
-	// ID of the address template, and conflict with `ip_protocol`, `port_range`.
+	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
 	ProtocolTemplate *GroupRuleProtocolTemplate `pulumi:"protocolTemplate"`
 	// ID of the security group to be queried.
 	SecurityGroupId string `pulumi:"securityGroupId"`
-	// ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
+	// ID of the nested security group, and conflicts with `cidrIp` and `addressTemplate`.
 	SourceSgid *string `pulumi:"sourceSgid"`
 	// Type of the security group rule. Valid values: `ingress` and `egress`.
 	Type string `pulumi:"type"`
@@ -156,25 +230,23 @@ type groupRuleArgs struct {
 
 // The set of arguments for constructing a GroupRule resource.
 type GroupRuleArgs struct {
-	// ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
+	// ID of the address template, and confilicts with `sourceSgid` and `cidrIp`.
 	AddressTemplate GroupRuleAddressTemplatePtrInput
-	// An IP address network or segment, and conflict with `source_sgid` and `address_template`.
+	// An IP address network or segment, and conflict with `sourceSgid` and `addressTemplate`.
 	CidrIp pulumi.StringPtrInput
 	// Description of the security group rule.
 	Description pulumi.StringPtrInput
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-	// `protocol_template`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocolTemplate`.
 	IpProtocol pulumi.StringPtrInput
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy pulumi.StringInput
-	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-	// all ports, and confilicts with `protocol_template`.
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange pulumi.StringPtrInput
-	// ID of the address template, and conflict with `ip_protocol`, `port_range`.
+	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
 	ProtocolTemplate GroupRuleProtocolTemplatePtrInput
 	// ID of the security group to be queried.
 	SecurityGroupId pulumi.StringInput
-	// ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
+	// ID of the nested security group, and conflicts with `cidrIp` and `addressTemplate`.
 	SourceSgid pulumi.StringPtrInput
 	// Type of the security group rule. Valid values: `ingress` and `egress`.
 	Type pulumi.StringInput
@@ -267,12 +339,12 @@ func (o GroupRuleOutput) ToGroupRuleOutputWithContext(ctx context.Context) Group
 	return o
 }
 
-// ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
+// ID of the address template, and confilicts with `sourceSgid` and `cidrIp`.
 func (o GroupRuleOutput) AddressTemplate() GroupRuleAddressTemplateOutput {
 	return o.ApplyT(func(v *GroupRule) GroupRuleAddressTemplateOutput { return v.AddressTemplate }).(GroupRuleAddressTemplateOutput)
 }
 
-// An IP address network or segment, and conflict with `source_sgid` and `address_template`.
+// An IP address network or segment, and conflict with `sourceSgid` and `addressTemplate`.
 func (o GroupRuleOutput) CidrIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringPtrOutput { return v.CidrIp }).(pulumi.StringPtrOutput)
 }
@@ -282,8 +354,7 @@ func (o GroupRuleOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
-// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-// `protocol_template`.
+// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocolTemplate`.
 func (o GroupRuleOutput) IpProtocol() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringOutput { return v.IpProtocol }).(pulumi.StringOutput)
 }
@@ -293,13 +364,12 @@ func (o GroupRuleOutput) Policy() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringOutput { return v.Policy }).(pulumi.StringOutput)
 }
 
-// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-// all ports, and confilicts with `protocol_template`.
+// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 func (o GroupRuleOutput) PortRange() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringOutput { return v.PortRange }).(pulumi.StringOutput)
 }
 
-// ID of the address template, and conflict with `ip_protocol`, `port_range`.
+// ID of the address template, and conflict with `ipProtocol`, `portRange`.
 func (o GroupRuleOutput) ProtocolTemplate() GroupRuleProtocolTemplateOutput {
 	return o.ApplyT(func(v *GroupRule) GroupRuleProtocolTemplateOutput { return v.ProtocolTemplate }).(GroupRuleProtocolTemplateOutput)
 }
@@ -309,7 +379,7 @@ func (o GroupRuleOutput) SecurityGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringOutput { return v.SecurityGroupId }).(pulumi.StringOutput)
 }
 
-// ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
+// ID of the nested security group, and conflicts with `cidrIp` and `addressTemplate`.
 func (o GroupRuleOutput) SourceSgid() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringOutput { return v.SourceSgid }).(pulumi.StringOutput)
 }

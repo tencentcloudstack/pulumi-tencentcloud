@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.PrivateDns.Outputs
     [OutputType]
     public sealed class ZoneVpcSet
     {
+        /// <summary>
+        /// VPC REGION.
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
         public readonly string UniqVpcId;
 
         [OutputConstructor]

@@ -21,8 +21,7 @@ class InstanceArgs:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Instance resource.
-        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-               192.168.0.0/16).
+        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
         :param pulumi.Input[bool] is_multicast: Indicates whether VPC multicast is enabled. The default value is 'true'.
@@ -45,8 +44,7 @@ class InstanceArgs:
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> pulumi.Input[str]:
         """
-        A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-        192.168.0.0/16).
+        A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         """
         return pulumi.get(self, "cidr_block")
 
@@ -130,8 +128,7 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
-        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-               192.168.0.0/16).
+        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         :param pulumi.Input[str] create_time: Creation time of VPC.
         :param pulumi.Input[str] default_route_table_id: Default route table id, which created automatically after VPC create.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
@@ -175,8 +172,7 @@ class _InstanceState:
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> Optional[pulumi.Input[str]]:
         """
-        A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-        192.168.0.0/16).
+        A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         """
         return pulumi.get(self, "cidr_block")
 
@@ -282,12 +278,20 @@ class Instance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to create a VPC.
+
+        ## Import
+
+        Vpc instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
-        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-               192.168.0.0/16).
+        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
         :param pulumi.Input[bool] is_multicast: Indicates whether VPC multicast is enabled. The default value is 'true'.
         :param pulumi.Input[str] name: The name of the VPC.
@@ -300,7 +304,16 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to create a VPC.
+
+        ## Import
+
+        Vpc instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -372,8 +385,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
-        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-               192.168.0.0/16).
+        :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         :param pulumi.Input[str] create_time: Creation time of VPC.
         :param pulumi.Input[str] default_route_table_id: Default route table id, which created automatically after VPC create.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
@@ -409,8 +421,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> pulumi.Output[str]:
         """
-        A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-        192.168.0.0/16).
+        A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         """
         return pulumi.get(self, "cidr_block")
 

@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create custom domain of API gateway.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.ApiGateway.CustomDomain("foo", {
+ *     defaultDomain: "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+ *     isDefaultMapping: false,
+ *     netType: "OUTER",
+ *     pathMappings: [
+ *         "/good#test",
+ *         "/root#release",
+ *     ],
+ *     protocol: "http",
+ *     serviceId: "service-ohxqslqe",
+ *     subDomain: "tic-test.dnsv1.com",
+ * });
+ * ```
+ */
 export class CustomDomain extends pulumi.CustomResource {
     /**
      * Get an existing CustomDomain resource's state with the given name, ID, and optional extra
@@ -19,7 +42,7 @@ export class CustomDomain extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/customDomain:CustomDomain';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/customDomain:CustomDomain';
 
     /**
      * Returns true if the given object is an instance of CustomDomain.  This is designed to work even
@@ -33,8 +56,7 @@ export class CustomDomain extends pulumi.CustomResource {
     }
 
     /**
-     * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-     * `https` or `http&https`.
+     * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
      */
     public readonly certificateId!: pulumi.Output<string>;
     /**
@@ -42,8 +64,7 @@ export class CustomDomain extends pulumi.CustomResource {
      */
     public readonly defaultDomain!: pulumi.Output<string>;
     /**
-     * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-     * In this case, the `path_mappings` attribute is required.
+     * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
      */
     public readonly isDefaultMapping!: pulumi.Output<boolean | undefined>;
     /**
@@ -51,8 +72,7 @@ export class CustomDomain extends pulumi.CustomResource {
      */
     public readonly netType!: pulumi.Output<string>;
     /**
-     * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-     * `prepub`, and `release`.
+     * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
      */
     public readonly pathMappings!: pulumi.Output<string[]>;
     /**
@@ -131,8 +151,7 @@ export class CustomDomain extends pulumi.CustomResource {
  */
 export interface CustomDomainState {
     /**
-     * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-     * `https` or `http&https`.
+     * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
      */
     certificateId?: pulumi.Input<string>;
     /**
@@ -140,8 +159,7 @@ export interface CustomDomainState {
      */
     defaultDomain?: pulumi.Input<string>;
     /**
-     * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-     * In this case, the `path_mappings` attribute is required.
+     * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
      */
     isDefaultMapping?: pulumi.Input<boolean>;
     /**
@@ -149,8 +167,7 @@ export interface CustomDomainState {
      */
     netType?: pulumi.Input<string>;
     /**
-     * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-     * `prepub`, and `release`.
+     * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
      */
     pathMappings?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -176,8 +193,7 @@ export interface CustomDomainState {
  */
 export interface CustomDomainArgs {
     /**
-     * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-     * `https` or `http&https`.
+     * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
      */
     certificateId?: pulumi.Input<string>;
     /**
@@ -185,8 +201,7 @@ export interface CustomDomainArgs {
      */
     defaultDomain: pulumi.Input<string>;
     /**
-     * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-     * In this case, the `path_mappings` attribute is required.
+     * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
      */
     isDefaultMapping?: pulumi.Input<boolean>;
     /**
@@ -194,8 +209,7 @@ export interface CustomDomainArgs {
      */
     netType: pulumi.Input<string>;
     /**
-     * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-     * `prepub`, and `release`.
+     * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
      */
     pathMappings?: pulumi.Input<pulumi.Input<string>[]>;
     /**

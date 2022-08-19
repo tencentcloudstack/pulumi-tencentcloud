@@ -7,103 +7,323 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func Table(ctx *pulumi.Context, args *TableArgs, opts ...pulumi.InvokeOption) (*TableResult, error) {
-	var rv TableResult
-	err := ctx.Invoke("tencentcloud:Route/table:Table", args, &rv, opts...)
+// Provides a resource to create a VPC routing table.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Route.NewTable(ctx, "fooTable", &Route.TableArgs{
+// 			VpcId: fooInstance.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Vpc routetable instance can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Route/table:Table test route_table_id
+// ```
+type Table struct {
+	pulumi.CustomResourceState
+
+	// Creation time of the routing table.
+	CreateTime pulumi.StringOutput `pulumi:"createTime"`
+	// Indicates whether it is the default routing table.
+	IsDefault pulumi.BoolOutput `pulumi:"isDefault"`
+	// The name of routing table.
+	Name pulumi.StringOutput `pulumi:"name"`
+	// ID list of the routing entries.
+	RouteEntryIds pulumi.StringArrayOutput `pulumi:"routeEntryIds"`
+	// ID list of the subnets associated with this route table.
+	SubnetIds pulumi.StringArrayOutput `pulumi:"subnetIds"`
+	// The tags of routing table.
+	Tags pulumi.MapOutput `pulumi:"tags"`
+	// ID of VPC to which the route table should be associated.
+	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+}
+
+// NewTable registers a new resource with the given unique name, arguments, and options.
+func NewTable(ctx *pulumi.Context,
+	name string, args *TableArgs, opts ...pulumi.ResourceOption) (*Table, error) {
+	if args == nil {
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.VpcId == nil {
+		return nil, errors.New("invalid value for required argument 'VpcId'")
+	}
+	var resource Table
+	err := ctx.RegisterResource("tencentcloud:Route/table:Table", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &rv, nil
+	return &resource, nil
 }
 
-// A collection of arguments for invoking Table.
+// GetTable gets an existing Table resource's state with the given name, ID, and optional
+// state properties that are used to uniquely qualify the lookup (nil if not required).
+func GetTable(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *TableState, opts ...pulumi.ResourceOption) (*Table, error) {
+	var resource Table
+	err := ctx.ReadResource("tencentcloud:Route/table:Table", name, id, state, &resource, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &resource, nil
+}
+
+// Input properties used for looking up and filtering Table resources.
+type tableState struct {
+	// Creation time of the routing table.
+	CreateTime *string `pulumi:"createTime"`
+	// Indicates whether it is the default routing table.
+	IsDefault *bool `pulumi:"isDefault"`
+	// The name of routing table.
+	Name *string `pulumi:"name"`
+	// ID list of the routing entries.
+	RouteEntryIds []string `pulumi:"routeEntryIds"`
+	// ID list of the subnets associated with this route table.
+	SubnetIds []string `pulumi:"subnetIds"`
+	// The tags of routing table.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// ID of VPC to which the route table should be associated.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+type TableState struct {
+	// Creation time of the routing table.
+	CreateTime pulumi.StringPtrInput
+	// Indicates whether it is the default routing table.
+	IsDefault pulumi.BoolPtrInput
+	// The name of routing table.
+	Name pulumi.StringPtrInput
+	// ID list of the routing entries.
+	RouteEntryIds pulumi.StringArrayInput
+	// ID list of the subnets associated with this route table.
+	SubnetIds pulumi.StringArrayInput
+	// The tags of routing table.
+	Tags pulumi.MapInput
+	// ID of VPC to which the route table should be associated.
+	VpcId pulumi.StringPtrInput
+}
+
+func (TableState) ElementType() reflect.Type {
+	return reflect.TypeOf((*tableState)(nil)).Elem()
+}
+
+type tableArgs struct {
+	// The name of routing table.
+	Name *string `pulumi:"name"`
+	// The tags of routing table.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// ID of VPC to which the route table should be associated.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// The set of arguments for constructing a Table resource.
 type TableArgs struct {
-	Name         *string `pulumi:"name"`
-	RouteTableId string  `pulumi:"routeTableId"`
+	// The name of routing table.
+	Name pulumi.StringPtrInput
+	// The tags of routing table.
+	Tags pulumi.MapInput
+	// ID of VPC to which the route table should be associated.
+	VpcId pulumi.StringInput
 }
 
-// A collection of values returned by Table.
-type TableResult struct {
-	CreateTime string `pulumi:"createTime"`
-	// The provider-assigned unique ID for this managed resource.
-	Id           string       `pulumi:"id"`
-	Name         *string      `pulumi:"name"`
-	RouteTableId string       `pulumi:"routeTableId"`
-	Routes       []TableRoute `pulumi:"routes"`
-	SubnetNum    int          `pulumi:"subnetNum"`
-	VpcId        string       `pulumi:"vpcId"`
+func (TableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*tableArgs)(nil)).Elem()
 }
 
-func TableOutput(ctx *pulumi.Context, args TableOutputArgs, opts ...pulumi.InvokeOption) TableResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (TableResult, error) {
-			args := v.(TableArgs)
-			r, err := Table(ctx, &args, opts...)
-			var s TableResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
-		}).(TableResultOutput)
+type TableInput interface {
+	pulumi.Input
+
+	ToTableOutput() TableOutput
+	ToTableOutputWithContext(ctx context.Context) TableOutput
 }
 
-// A collection of arguments for invoking Table.
-type TableOutputArgs struct {
-	Name         pulumi.StringPtrInput `pulumi:"name"`
-	RouteTableId pulumi.StringInput    `pulumi:"routeTableId"`
+func (*Table) ElementType() reflect.Type {
+	return reflect.TypeOf((**Table)(nil)).Elem()
 }
 
-func (TableOutputArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*TableArgs)(nil)).Elem()
+func (i *Table) ToTableOutput() TableOutput {
+	return i.ToTableOutputWithContext(context.Background())
 }
 
-// A collection of values returned by Table.
-type TableResultOutput struct{ *pulumi.OutputState }
-
-func (TableResultOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*TableResult)(nil)).Elem()
+func (i *Table) ToTableOutputWithContext(ctx context.Context) TableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TableOutput)
 }
 
-func (o TableResultOutput) ToTableResultOutput() TableResultOutput {
+// TableArrayInput is an input type that accepts TableArray and TableArrayOutput values.
+// You can construct a concrete instance of `TableArrayInput` via:
+//
+//          TableArray{ TableArgs{...} }
+type TableArrayInput interface {
+	pulumi.Input
+
+	ToTableArrayOutput() TableArrayOutput
+	ToTableArrayOutputWithContext(context.Context) TableArrayOutput
+}
+
+type TableArray []TableInput
+
+func (TableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Table)(nil)).Elem()
+}
+
+func (i TableArray) ToTableArrayOutput() TableArrayOutput {
+	return i.ToTableArrayOutputWithContext(context.Background())
+}
+
+func (i TableArray) ToTableArrayOutputWithContext(ctx context.Context) TableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TableArrayOutput)
+}
+
+// TableMapInput is an input type that accepts TableMap and TableMapOutput values.
+// You can construct a concrete instance of `TableMapInput` via:
+//
+//          TableMap{ "key": TableArgs{...} }
+type TableMapInput interface {
+	pulumi.Input
+
+	ToTableMapOutput() TableMapOutput
+	ToTableMapOutputWithContext(context.Context) TableMapOutput
+}
+
+type TableMap map[string]TableInput
+
+func (TableMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Table)(nil)).Elem()
+}
+
+func (i TableMap) ToTableMapOutput() TableMapOutput {
+	return i.ToTableMapOutputWithContext(context.Background())
+}
+
+func (i TableMap) ToTableMapOutputWithContext(ctx context.Context) TableMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TableMapOutput)
+}
+
+type TableOutput struct{ *pulumi.OutputState }
+
+func (TableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Table)(nil)).Elem()
+}
+
+func (o TableOutput) ToTableOutput() TableOutput {
 	return o
 }
 
-func (o TableResultOutput) ToTableResultOutputWithContext(ctx context.Context) TableResultOutput {
+func (o TableOutput) ToTableOutputWithContext(ctx context.Context) TableOutput {
 	return o
 }
 
-func (o TableResultOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v TableResult) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the routing table.
+func (o TableOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *Table) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// The provider-assigned unique ID for this managed resource.
-func (o TableResultOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v TableResult) string { return v.Id }).(pulumi.StringOutput)
+// Indicates whether it is the default routing table.
+func (o TableOutput) IsDefault() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Table) pulumi.BoolOutput { return v.IsDefault }).(pulumi.BoolOutput)
 }
 
-func (o TableResultOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v TableResult) *string { return v.Name }).(pulumi.StringPtrOutput)
+// The name of routing table.
+func (o TableOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Table) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o TableResultOutput) RouteTableId() pulumi.StringOutput {
-	return o.ApplyT(func(v TableResult) string { return v.RouteTableId }).(pulumi.StringOutput)
+// ID list of the routing entries.
+func (o TableOutput) RouteEntryIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Table) pulumi.StringArrayOutput { return v.RouteEntryIds }).(pulumi.StringArrayOutput)
 }
 
-func (o TableResultOutput) Routes() TableRouteArrayOutput {
-	return o.ApplyT(func(v TableResult) []TableRoute { return v.Routes }).(TableRouteArrayOutput)
+// ID list of the subnets associated with this route table.
+func (o TableOutput) SubnetIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Table) pulumi.StringArrayOutput { return v.SubnetIds }).(pulumi.StringArrayOutput)
 }
 
-func (o TableResultOutput) SubnetNum() pulumi.IntOutput {
-	return o.ApplyT(func(v TableResult) int { return v.SubnetNum }).(pulumi.IntOutput)
+// The tags of routing table.
+func (o TableOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Table) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-func (o TableResultOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v TableResult) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of VPC to which the route table should be associated.
+func (o TableOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Table) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type TableArrayOutput struct{ *pulumi.OutputState }
+
+func (TableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Table)(nil)).Elem()
+}
+
+func (o TableArrayOutput) ToTableArrayOutput() TableArrayOutput {
+	return o
+}
+
+func (o TableArrayOutput) ToTableArrayOutputWithContext(ctx context.Context) TableArrayOutput {
+	return o
+}
+
+func (o TableArrayOutput) Index(i pulumi.IntInput) TableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Table {
+		return vs[0].([]*Table)[vs[1].(int)]
+	}).(TableOutput)
+}
+
+type TableMapOutput struct{ *pulumi.OutputState }
+
+func (TableMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Table)(nil)).Elem()
+}
+
+func (o TableMapOutput) ToTableMapOutput() TableMapOutput {
+	return o
+}
+
+func (o TableMapOutput) ToTableMapOutputWithContext(ctx context.Context) TableMapOutput {
+	return o
+}
+
+func (o TableMapOutput) MapIndex(k pulumi.StringInput) TableOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *Table {
+		return vs[0].(map[string]*Table)[vs[1].(string)]
+	}).(TableOutput)
 }
 
 func init() {
-	pulumi.RegisterOutputType(TableResultOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TableInput)(nil)).Elem(), &Table{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TableArrayInput)(nil)).Elem(), TableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TableMapInput)(nil)).Elem(), TableMap{})
+	pulumi.RegisterOutputType(TableOutput{})
+	pulumi.RegisterOutputType(TableArrayOutput{})
+	pulumi.RegisterOutputType(TableMapOutput{})
 }

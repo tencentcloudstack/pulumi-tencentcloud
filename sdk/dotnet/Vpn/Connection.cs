@@ -9,6 +9,68 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpn
 {
+    /// <summary>
+    /// Provides a resource to create a VPN connection.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vpn.Connection("foo", new Tencentcloud.Vpn.ConnectionArgs
+    ///         {
+    ///             CustomerGatewayId = "cgw-xfqag",
+    ///             IkeDhGroupName = "GROUP2",
+    ///             IkeExchangeMode = "AGGRESSIVE",
+    ///             IkeLocalAddress = "1.1.1.1",
+    ///             IkeLocalIdentity = "ADDRESS",
+    ///             IkeProtoAuthenAlgorithm = "SHA",
+    ///             IkeProtoEncryAlgorithm = "3DES-CBC",
+    ///             IkeRemoteAddress = "2.2.2.2",
+    ///             IkeRemoteIdentity = "ADDRESS",
+    ///             IkeSaLifetimeSeconds = 86401,
+    ///             IpsecEncryptAlgorithm = "3DES-CBC",
+    ///             IpsecIntegrityAlgorithm = "SHA1",
+    ///             IpsecPfsDhGroup = "NULL",
+    ///             IpsecSaLifetimeSeconds = 7200,
+    ///             IpsecSaLifetimeTraffic = 2570,
+    ///             PreShareKey = "testt",
+    ///             SecurityGroupPolicies = 
+    ///             {
+    ///                 new Tencentcloud.Vpn.Inputs.ConnectionSecurityGroupPolicyArgs
+    ///                 {
+    ///                     LocalCidrBlock = "172.16.0.0/16",
+    ///                     RemoteCidrBlocks = 
+    ///                     {
+    ///                         "2.2.2.0/26",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "testt" },
+    ///             },
+    ///             VpcId = "vpc-dk8zmwuf",
+    ///             VpnGatewayId = "vpngw-8ccsnclt",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VPN connection can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/connection:Connection")]
     public partial class Connection : Pulumi.CustomResource
     {
@@ -49,8 +111,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<string> HealthCheckRemoteIp { get; private set; } = null!;
 
         /// <summary>
-        /// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-        /// Default value is `GROUP1`.
+        /// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
         /// </summary>
         [Output("ikeDhGroupName")]
         public Output<string?> IkeDhGroupName { get; private set; } = null!;
@@ -62,8 +123,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<string?> IkeExchangeMode { get; private set; } = null!;
 
         /// <summary>
-        /// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-        /// `public_ip_address` of the related VPN gateway.
+        /// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is `public_ip_address` of the related VPN gateway.
         /// </summary>
         [Output("ikeLocalAddress")]
         public Output<string?> IkeLocalAddress { get; private set; } = null!;
@@ -81,22 +141,19 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<string?> IkeLocalIdentity { get; private set; } = null!;
 
         /// <summary>
-        /// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-        /// `MD5`.
+        /// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
         /// </summary>
         [Output("ikeProtoAuthenAlgorithm")]
         public Output<string?> IkeProtoAuthenAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-        /// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
         /// </summary>
         [Output("ikeProtoEncryAlgorithm")]
         public Output<string?> IkeProtoEncryAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-        /// `public_ip_address` of the related customer gateway.
+        /// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is `public_ip_address` of the related customer gateway.
         /// </summary>
         [Output("ikeRemoteAddress")]
         public Output<string?> IkeRemoteAddress { get; private set; } = null!;
@@ -114,8 +171,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<string?> IkeRemoteIdentity { get; private set; } = null!;
 
         /// <summary>
-        /// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-        /// 86400 seconds.
+        /// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
         /// </summary>
         [Output("ikeSaLifetimeSeconds")]
         public Output<int?> IkeSaLifetimeSeconds { get; private set; } = null!;
@@ -127,15 +183,13 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<string?> IkeVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-        /// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
         /// </summary>
         [Output("ipsecEncryptAlgorithm")]
         public Output<string?> IpsecEncryptAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-        /// `MD5`.
+        /// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
         /// </summary>
         [Output("ipsecIntegrityAlgorithm")]
         public Output<string?> IpsecIntegrityAlgorithm { get; private set; } = null!;
@@ -147,22 +201,19 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<string?> IpsecPfsDhGroup { get; private set; } = null!;
 
         /// <summary>
-        /// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-        /// 3600 seconds.
+        /// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         /// </summary>
         [Output("ipsecSaLifetimeSeconds")]
         public Output<int?> IpsecSaLifetimeSeconds { get; private set; } = null!;
 
         /// <summary>
-        /// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-        /// 1843200.
+        /// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         /// </summary>
         [Output("ipsecSaLifetimeTraffic")]
         public Output<int?> IpsecSaLifetimeTraffic { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is
-        /// true, modification of `vpc_id` will be ignored.
+        /// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is true, modification of `vpc_id` will be ignored.
         /// </summary>
         [Output("isCcnType")]
         public Output<bool> IsCcnType { get; private set; } = null!;
@@ -298,8 +349,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? HealthCheckRemoteIp { get; set; }
 
         /// <summary>
-        /// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-        /// Default value is `GROUP1`.
+        /// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
         /// </summary>
         [Input("ikeDhGroupName")]
         public Input<string>? IkeDhGroupName { get; set; }
@@ -311,8 +361,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeExchangeMode { get; set; }
 
         /// <summary>
-        /// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-        /// `public_ip_address` of the related VPN gateway.
+        /// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is `public_ip_address` of the related VPN gateway.
         /// </summary>
         [Input("ikeLocalAddress")]
         public Input<string>? IkeLocalAddress { get; set; }
@@ -330,22 +379,19 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeLocalIdentity { get; set; }
 
         /// <summary>
-        /// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-        /// `MD5`.
+        /// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
         /// </summary>
         [Input("ikeProtoAuthenAlgorithm")]
         public Input<string>? IkeProtoAuthenAlgorithm { get; set; }
 
         /// <summary>
-        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-        /// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ikeProtoEncryAlgorithm")]
         public Input<string>? IkeProtoEncryAlgorithm { get; set; }
 
         /// <summary>
-        /// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-        /// `public_ip_address` of the related customer gateway.
+        /// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is `public_ip_address` of the related customer gateway.
         /// </summary>
         [Input("ikeRemoteAddress")]
         public Input<string>? IkeRemoteAddress { get; set; }
@@ -363,8 +409,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeRemoteIdentity { get; set; }
 
         /// <summary>
-        /// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-        /// 86400 seconds.
+        /// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
         /// </summary>
         [Input("ikeSaLifetimeSeconds")]
         public Input<int>? IkeSaLifetimeSeconds { get; set; }
@@ -376,15 +421,13 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeVersion { get; set; }
 
         /// <summary>
-        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-        /// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ipsecEncryptAlgorithm")]
         public Input<string>? IpsecEncryptAlgorithm { get; set; }
 
         /// <summary>
-        /// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-        /// `MD5`.
+        /// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
         /// </summary>
         [Input("ipsecIntegrityAlgorithm")]
         public Input<string>? IpsecIntegrityAlgorithm { get; set; }
@@ -396,15 +439,13 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IpsecPfsDhGroup { get; set; }
 
         /// <summary>
-        /// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-        /// 3600 seconds.
+        /// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         /// </summary>
         [Input("ipsecSaLifetimeSeconds")]
         public Input<int>? IpsecSaLifetimeSeconds { get; set; }
 
         /// <summary>
-        /// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-        /// 1843200.
+        /// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         /// </summary>
         [Input("ipsecSaLifetimeTraffic")]
         public Input<int>? IpsecSaLifetimeTraffic { get; set; }
@@ -501,8 +542,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? HealthCheckRemoteIp { get; set; }
 
         /// <summary>
-        /// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-        /// Default value is `GROUP1`.
+        /// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
         /// </summary>
         [Input("ikeDhGroupName")]
         public Input<string>? IkeDhGroupName { get; set; }
@@ -514,8 +554,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeExchangeMode { get; set; }
 
         /// <summary>
-        /// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-        /// `public_ip_address` of the related VPN gateway.
+        /// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is `public_ip_address` of the related VPN gateway.
         /// </summary>
         [Input("ikeLocalAddress")]
         public Input<string>? IkeLocalAddress { get; set; }
@@ -533,22 +572,19 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeLocalIdentity { get; set; }
 
         /// <summary>
-        /// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-        /// `MD5`.
+        /// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
         /// </summary>
         [Input("ikeProtoAuthenAlgorithm")]
         public Input<string>? IkeProtoAuthenAlgorithm { get; set; }
 
         /// <summary>
-        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-        /// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ikeProtoEncryAlgorithm")]
         public Input<string>? IkeProtoEncryAlgorithm { get; set; }
 
         /// <summary>
-        /// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-        /// `public_ip_address` of the related customer gateway.
+        /// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is `public_ip_address` of the related customer gateway.
         /// </summary>
         [Input("ikeRemoteAddress")]
         public Input<string>? IkeRemoteAddress { get; set; }
@@ -566,8 +602,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeRemoteIdentity { get; set; }
 
         /// <summary>
-        /// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-        /// 86400 seconds.
+        /// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
         /// </summary>
         [Input("ikeSaLifetimeSeconds")]
         public Input<int>? IkeSaLifetimeSeconds { get; set; }
@@ -579,15 +614,13 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IkeVersion { get; set; }
 
         /// <summary>
-        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-        /// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ipsecEncryptAlgorithm")]
         public Input<string>? IpsecEncryptAlgorithm { get; set; }
 
         /// <summary>
-        /// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-        /// `MD5`.
+        /// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
         /// </summary>
         [Input("ipsecIntegrityAlgorithm")]
         public Input<string>? IpsecIntegrityAlgorithm { get; set; }
@@ -599,22 +632,19 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? IpsecPfsDhGroup { get; set; }
 
         /// <summary>
-        /// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-        /// 3600 seconds.
+        /// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         /// </summary>
         [Input("ipsecSaLifetimeSeconds")]
         public Input<int>? IpsecSaLifetimeSeconds { get; set; }
 
         /// <summary>
-        /// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-        /// 1843200.
+        /// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         /// </summary>
         [Input("ipsecSaLifetimeTraffic")]
         public Input<int>? IpsecSaLifetimeTraffic { get; set; }
 
         /// <summary>
-        /// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is
-        /// true, modification of `vpc_id` will be ignored.
+        /// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is true, modification of `vpc_id` will be ignored.
         /// </summary>
         [Input("isCcnType")]
         public Input<bool>? IsCcnType { get; set; }

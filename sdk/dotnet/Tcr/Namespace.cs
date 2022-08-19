@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tcr
 {
+    /// <summary>
+    /// Use this resource to create tcr namespace.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tcr.Namespace("foo", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = "",
+    ///             IsPublic = true,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// tcr namespace can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/namespace:Namespace")]
     public partial class Namespace : Pulumi.CustomResource
     {
@@ -25,8 +56,7 @@ namespace Pulumi.Tencentcloud.Tcr
         public Output<bool?> IsPublic { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-        /// `_`, `-`), and cannot start, end or continue with separators.
+        /// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -90,8 +120,7 @@ namespace Pulumi.Tencentcloud.Tcr
         public Input<bool>? IsPublic { get; set; }
 
         /// <summary>
-        /// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-        /// `_`, `-`), and cannot start, end or continue with separators.
+        /// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -116,8 +145,7 @@ namespace Pulumi.Tencentcloud.Tcr
         public Input<bool>? IsPublic { get; set; }
 
         /// <summary>
-        /// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-        /// `_`, `-`), and cannot start, end or continue with separators.
+        /// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }

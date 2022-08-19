@@ -293,7 +293,28 @@ class VpcAttachment(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a VpcAttachment resource with the given unique name, props, and options.
+        Use this resource to create tcr vpc attachment to manage access of internal endpoint.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.VpcAttachment("foo",
+            instance_id="cls-satg5125",
+            subnet_id="subnet-1uwh63so",
+            vpc_id="vpc-asg3sfa3")
+        ```
+
+        ## Import
+
+        tcr vpc attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] enable_public_domain_dns: Whether to enable public domain dns. Default value is `false`.
@@ -311,7 +332,28 @@ class VpcAttachment(pulumi.CustomResource):
                  args: VpcAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a VpcAttachment resource with the given unique name, props, and options.
+        Use this resource to create tcr vpc attachment to manage access of internal endpoint.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.VpcAttachment("foo",
+            instance_id="cls-satg5125",
+            subnet_id="subnet-1uwh63so",
+            vpc_id="vpc-asg3sfa3")
+        ```
+
+        ## Import
+
+        tcr vpc attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+        ```
+
         :param str resource_name: The name of the resource.
         :param VpcAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

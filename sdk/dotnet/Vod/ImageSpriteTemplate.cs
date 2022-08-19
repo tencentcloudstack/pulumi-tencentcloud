@@ -9,6 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vod
 {
+    /// <summary>
+    /// Provide a resource to create a VOD image sprite template.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vod.ImageSpriteTemplate("foo", new Tencentcloud.Vod.ImageSpriteTemplateArgs
+    ///         {
+    ///             ColumnCount = 3,
+    ///             Comment = "test",
+    ///             FillType = "stretch",
+    ///             Height = 128,
+    ///             ResolutionAdaptive = false,
+    ///             RowCount = 3,
+    ///             SampleInterval = 10,
+    ///             SampleType = "Percent",
+    ///             Width = 128,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VOD image sprite template can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate")]
     public partial class ImageSpriteTemplate : Pulumi.CustomResource
     {
@@ -31,20 +69,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-        /// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-        /// aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-        /// retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-        /// Default value: `black`.
+        /// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
         /// </summary>
         [Output("fillType")]
         public Output<string?> FillType { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-        /// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-        /// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-        /// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         /// </summary>
         [Output("height")]
         public Output<int?> Height { get; private set; } = null!;
@@ -56,9 +87,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-        /// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-        /// `height` the height. Default value: `true`.
+        /// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         /// </summary>
         [Output("resolutionAdaptive")]
         public Output<bool?> ResolutionAdaptive { get; private set; } = null!;
@@ -70,8 +99,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<int> RowCount { get; private set; } = null!;
 
         /// <summary>
-        /// Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-        /// If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        /// Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         /// </summary>
         [Output("sampleInterval")]
         public Output<int> SampleInterval { get; private set; } = null!;
@@ -83,8 +111,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string> SampleType { get; private set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Output("subAppId")]
         public Output<int?> SubAppId { get; private set; } = null!;
@@ -96,10 +123,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string> UpdateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-        /// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-        /// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-        /// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        /// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         /// </summary>
         [Output("width")]
         public Output<int?> Width { get; private set; } = null!;
@@ -163,20 +187,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Comment { get; set; }
 
         /// <summary>
-        /// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-        /// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-        /// aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-        /// retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-        /// Default value: `black`.
+        /// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
         /// </summary>
         [Input("fillType")]
         public Input<string>? FillType { get; set; }
 
         /// <summary>
-        /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-        /// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-        /// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-        /// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         /// </summary>
         [Input("height")]
         public Input<int>? Height { get; set; }
@@ -188,9 +205,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-        /// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-        /// `height` the height. Default value: `true`.
+        /// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         /// </summary>
         [Input("resolutionAdaptive")]
         public Input<bool>? ResolutionAdaptive { get; set; }
@@ -202,8 +217,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<int> RowCount { get; set; } = null!;
 
         /// <summary>
-        /// Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-        /// If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        /// Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         /// </summary>
         [Input("sampleInterval", required: true)]
         public Input<int> SampleInterval { get; set; } = null!;
@@ -215,17 +229,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string> SampleType { get; set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
 
         /// <summary>
-        /// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-        /// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-        /// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-        /// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        /// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         /// </summary>
         [Input("width")]
         public Input<int>? Width { get; set; }
@@ -256,20 +266,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-        /// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-        /// aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-        /// retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-        /// Default value: `black`.
+        /// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
         /// </summary>
         [Input("fillType")]
         public Input<string>? FillType { get; set; }
 
         /// <summary>
-        /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-        /// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-        /// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-        /// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         /// </summary>
         [Input("height")]
         public Input<int>? Height { get; set; }
@@ -281,9 +284,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-        /// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-        /// `height` the height. Default value: `true`.
+        /// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         /// </summary>
         [Input("resolutionAdaptive")]
         public Input<bool>? ResolutionAdaptive { get; set; }
@@ -295,8 +296,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<int>? RowCount { get; set; }
 
         /// <summary>
-        /// Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-        /// If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        /// Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         /// </summary>
         [Input("sampleInterval")]
         public Input<int>? SampleInterval { get; set; }
@@ -308,8 +308,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? SampleType { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -321,10 +320,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? UpdateTime { get; set; }
 
         /// <summary>
-        /// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-        /// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-        /// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-        /// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        /// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         /// </summary>
         [Input("width")]
         public Input<int>? Width { get; set; }

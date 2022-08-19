@@ -10,14 +10,23 @@ using Pulumi.Serialization;
 namespace Pulumi.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CCPolicyV2CcPrecisionPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcPrecisionPolicyGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Domain.
+        /// </summary>
         [Input("domain", required: true)]
         public Input<string> Domain { get; set; } = null!;
 
+        /// <summary>
+        /// Ip address.
+        /// </summary>
         [Input("ip", required: true)]
         public Input<string> Ip { get; set; } = null!;
 
+        /// <summary>
+        /// Policy mode (discard or captcha).
+        /// </summary>
         [Input("policyAction", required: true)]
         public Input<string> PolicyAction { get; set; } = null!;
 
@@ -25,17 +34,24 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
         public Input<string>? PolicyId { get; set; }
 
         [Input("policys", required: true)]
-        private InputList<Inputs.CCPolicyV2CcPrecisionPolicyPolicyGetArgs>? _policys;
-        public InputList<Inputs.CCPolicyV2CcPrecisionPolicyPolicyGetArgs> Policys
+        private InputList<Inputs.CcPolicyV2CcPrecisionPolicyPolicyGetArgs>? _policys;
+
+        /// <summary>
+        /// A list of policies.
+        /// </summary>
+        public InputList<Inputs.CcPolicyV2CcPrecisionPolicyPolicyGetArgs> Policys
         {
-            get => _policys ?? (_policys = new InputList<Inputs.CCPolicyV2CcPrecisionPolicyPolicyGetArgs>());
+            get => _policys ?? (_policys = new InputList<Inputs.CcPolicyV2CcPrecisionPolicyPolicyGetArgs>());
             set => _policys = value;
         }
 
+        /// <summary>
+        /// Protocol.
+        /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
 
-        public CCPolicyV2CcPrecisionPolicyGetArgs()
+        public CcPolicyV2CcPrecisionPolicyGetArgs()
         {
         }
     }

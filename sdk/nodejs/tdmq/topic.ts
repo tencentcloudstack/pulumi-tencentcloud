@@ -4,6 +4,43 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a TDMQ topic.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tdmq.Instance("foo", {
+ *     clusterName: "example",
+ *     remark: "this is description.",
+ * });
+ * const barNamespace = new tencentcloud.Tdmq.Namespace("bar", {
+ *     clusterId: foo.id,
+ *     environName: "example",
+ *     msgTtl: 300,
+ *     remark: "this is description.",
+ * });
+ * const barTopic = new tencentcloud.Tdmq.Topic("bar", {
+ *     clusterId: foo.id,
+ *     environId: barNamespace.id,
+ *     partitions: 6,
+ *     remark: "this is description.",
+ *     topicName: "example",
+ *     topicType: 0,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Tdmq Topic can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
+ * ```
+ */
 export class Topic extends pulumi.CustomResource {
     /**
      * Get an existing Topic resource's state with the given name, ID, and optional extra

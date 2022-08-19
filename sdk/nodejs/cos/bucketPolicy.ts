@@ -4,6 +4,49 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a COS resource to create a COS bucket policy and set its attributes.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const cosPolicy = new tencentcloud.Cos.BucketPolicy("cos_policy", {
+ *     bucket: "mycos-1258798060",
+ *     policy: `{
+ *   "version": "2.0",
+ *   "Statement": [
+ *     {
+ *       "Principal": {
+ *         "qcs": [
+ *           "qcs::cam::uin/<your-account-id>:uin/<your-account-id>"
+ *         ]
+ *       },
+ *       "Action": [
+ *         "name/cos:DeleteBucket",
+ *         "name/cos:PutBucketACL"
+ *       ],
+ *       "Effect": "allow",
+ *       "Resource": [
+ *         "qcs::cos:<bucket region>:uid/<your-account-id>:<bucket name>/*"
+ *       ]
+ *     }
+ *   ]
+ * }
+ * `,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * COS bucket policy can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+ * ```
+ */
 export class BucketPolicy extends pulumi.CustomResource {
     /**
      * Get an existing BucketPolicy resource's state with the given name, ID, and optional extra
@@ -37,8 +80,7 @@ export class BucketPolicy extends pulumi.CustomResource {
      */
     public readonly bucket!: pulumi.Output<string>;
     /**
-     * The text of the policy. For more info please refer to [Tencent official
-     * doc](https://intl.cloud.tencent.com/document/product/436/18023).
+     * The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
      */
     public readonly policy!: pulumi.Output<string>;
 
@@ -82,8 +124,7 @@ export interface BucketPolicyState {
      */
     bucket?: pulumi.Input<string>;
     /**
-     * The text of the policy. For more info please refer to [Tencent official
-     * doc](https://intl.cloud.tencent.com/document/product/436/18023).
+     * The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
      */
     policy?: pulumi.Input<string>;
 }
@@ -97,8 +138,7 @@ export interface BucketPolicyArgs {
      */
     bucket: pulumi.Input<string>;
     /**
-     * The text of the policy. For more info please refer to [Tencent official
-     * doc](https://intl.cloud.tencent.com/document/product/436/18023).
+     * The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
      */
     policy: pulumi.Input<string>;
 }

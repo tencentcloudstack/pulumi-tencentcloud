@@ -13,12 +13,24 @@ namespace Pulumi.Tencentcloud.Emr.Outputs
     [OutputType]
     public sealed class ClusterResourceSpec
     {
+        /// <summary>
+        /// The number of common node.
+        /// </summary>
         public readonly int? CommonCount;
         public readonly Outputs.ClusterResourceSpecCommonResourceSpec? CommonResourceSpec;
+        /// <summary>
+        /// The number of core node.
+        /// </summary>
         public readonly int? CoreCount;
         public readonly Outputs.ClusterResourceSpecCoreResourceSpec? CoreResourceSpec;
+        /// <summary>
+        /// The number of master node.
+        /// </summary>
         public readonly int? MasterCount;
         public readonly Outputs.ClusterResourceSpecMasterResourceSpec? MasterResourceSpec;
+        /// <summary>
+        /// The number of core node.
+        /// </summary>
         public readonly int? TaskCount;
         public readonly Outputs.ClusterResourceSpecTaskResourceSpec? TaskResourceSpec;
 

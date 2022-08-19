@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.As.Inputs
 
     public sealed class ScalingConfigInstanceNameSettingsGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// CVM instance name.
+        /// </summary>
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
 
+        /// <summary>
+        /// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default is `ORIGINAL`.
+        /// </summary>
         [Input("instanceNameStyle")]
         public Input<string>? InstanceNameStyle { get; set; }
 

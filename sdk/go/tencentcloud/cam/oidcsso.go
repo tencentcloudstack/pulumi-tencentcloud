@@ -11,35 +11,72 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type OIDCSSO struct {
+// Provides a resource to create a CAM-OIDC-SSO.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewOidcSso(ctx, "foo", &Cam.OidcSsoArgs{
+// 			AuthorizationEndpoint: pulumi.String("https://login.microsoftonline.com/.../oauth2/v2.0/authorize"),
+// 			ClientId:              pulumi.String("..."),
+// 			IdentityKey:           pulumi.String("..."),
+// 			IdentityUrl:           pulumi.String("https://login.microsoftonline.com/.../v2.0"),
+// 			MappingFiled:          pulumi.String("name"),
+// 			ResponseMode:          pulumi.String("form_post"),
+// 			ResponseType:          pulumi.String("id_token"),
+// 			Scopes: pulumi.StringArray{
+// 				pulumi.String("openid"),
+// 				pulumi.String("email"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
+// ```
+type OidcSso struct {
 	pulumi.CustomResourceState
 
-	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-	// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
 	AuthorizationEndpoint pulumi.StringOutput `pulumi:"authorizationEndpoint"`
 	// Client ID, the client ID registered with the OpenID Connect identity provider.
 	ClientId pulumi.StringOutput `pulumi:"clientId"`
-	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-	// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
 	IdentityKey pulumi.StringOutput `pulumi:"identityKey"`
-	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-	// Openid-configuration provided by the Enterprise IdP.
+	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
 	IdentityUrl pulumi.StringOutput `pulumi:"identityUrl"`
-	// Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+	// Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
 	MappingFiled pulumi.StringOutput `pulumi:"mappingFiled"`
-	// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-	// recommended to select form_post mode.
+	// Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
 	ResponseMode pulumi.StringOutput `pulumi:"responseMode"`
 	// Authorization requests The Response type, with a fixed value id_token.
 	ResponseType pulumi.StringOutput `pulumi:"responseType"`
-	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-	// openid.
+	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
 	Scopes pulumi.StringArrayOutput `pulumi:"scopes"`
 }
 
-// NewOIDCSSO registers a new resource with the given unique name, arguments, and options.
-func NewOIDCSSO(ctx *pulumi.Context,
-	name string, args *OIDCSSOArgs, opts ...pulumi.ResourceOption) (*OIDCSSO, error) {
+// NewOidcSso registers a new resource with the given unique name, arguments, and options.
+func NewOidcSso(ctx *pulumi.Context,
+	name string, args *OidcSsoArgs, opts ...pulumi.ResourceOption) (*OidcSso, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -65,305 +102,280 @@ func NewOIDCSSO(ctx *pulumi.Context,
 	if args.ResponseType == nil {
 		return nil, errors.New("invalid value for required argument 'ResponseType'")
 	}
-	var resource OIDCSSO
-	err := ctx.RegisterResource("tencentcloud:Cam/oIDCSSO:OIDCSSO", name, args, &resource, opts...)
+	var resource OidcSso
+	err := ctx.RegisterResource("tencentcloud:Cam/oidcSso:OidcSso", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetOIDCSSO gets an existing OIDCSSO resource's state with the given name, ID, and optional
+// GetOidcSso gets an existing OidcSso resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetOIDCSSO(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *OIDCSSOState, opts ...pulumi.ResourceOption) (*OIDCSSO, error) {
-	var resource OIDCSSO
-	err := ctx.ReadResource("tencentcloud:Cam/oIDCSSO:OIDCSSO", name, id, state, &resource, opts...)
+func GetOidcSso(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *OidcSsoState, opts ...pulumi.ResourceOption) (*OidcSso, error) {
+	var resource OidcSso
+	err := ctx.ReadResource("tencentcloud:Cam/oidcSso:OidcSso", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering OIDCSSO resources.
-type oidcssoState struct {
-	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-	// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+// Input properties used for looking up and filtering OidcSso resources.
+type oidcSsoState struct {
+	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Client ID, the client ID registered with the OpenID Connect identity provider.
 	ClientId *string `pulumi:"clientId"`
-	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-	// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
 	IdentityKey *string `pulumi:"identityKey"`
-	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-	// Openid-configuration provided by the Enterprise IdP.
+	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
 	IdentityUrl *string `pulumi:"identityUrl"`
-	// Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+	// Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
 	MappingFiled *string `pulumi:"mappingFiled"`
-	// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-	// recommended to select form_post mode.
+	// Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
 	ResponseMode *string `pulumi:"responseMode"`
 	// Authorization requests The Response type, with a fixed value id_token.
 	ResponseType *string `pulumi:"responseType"`
-	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-	// openid.
+	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
 	Scopes []string `pulumi:"scopes"`
 }
 
-type OIDCSSOState struct {
-	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-	// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+type OidcSsoState struct {
+	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
 	AuthorizationEndpoint pulumi.StringPtrInput
 	// Client ID, the client ID registered with the OpenID Connect identity provider.
 	ClientId pulumi.StringPtrInput
-	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-	// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
 	IdentityKey pulumi.StringPtrInput
-	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-	// Openid-configuration provided by the Enterprise IdP.
+	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
 	IdentityUrl pulumi.StringPtrInput
-	// Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+	// Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
 	MappingFiled pulumi.StringPtrInput
-	// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-	// recommended to select form_post mode.
+	// Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
 	ResponseMode pulumi.StringPtrInput
 	// Authorization requests The Response type, with a fixed value id_token.
 	ResponseType pulumi.StringPtrInput
-	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-	// openid.
+	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
 	Scopes pulumi.StringArrayInput
 }
 
-func (OIDCSSOState) ElementType() reflect.Type {
-	return reflect.TypeOf((*oidcssoState)(nil)).Elem()
+func (OidcSsoState) ElementType() reflect.Type {
+	return reflect.TypeOf((*oidcSsoState)(nil)).Elem()
 }
 
-type oidcssoArgs struct {
-	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-	// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+type oidcSsoArgs struct {
+	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
 	AuthorizationEndpoint string `pulumi:"authorizationEndpoint"`
 	// Client ID, the client ID registered with the OpenID Connect identity provider.
 	ClientId string `pulumi:"clientId"`
-	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-	// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
 	IdentityKey string `pulumi:"identityKey"`
-	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-	// Openid-configuration provided by the Enterprise IdP.
+	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
 	IdentityUrl string `pulumi:"identityUrl"`
-	// Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+	// Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
 	MappingFiled string `pulumi:"mappingFiled"`
-	// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-	// recommended to select form_post mode.
+	// Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
 	ResponseMode string `pulumi:"responseMode"`
 	// Authorization requests The Response type, with a fixed value id_token.
 	ResponseType string `pulumi:"responseType"`
-	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-	// openid.
+	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
 	Scopes []string `pulumi:"scopes"`
 }
 
-// The set of arguments for constructing a OIDCSSO resource.
-type OIDCSSOArgs struct {
-	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-	// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+// The set of arguments for constructing a OidcSso resource.
+type OidcSsoArgs struct {
+	// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
 	AuthorizationEndpoint pulumi.StringInput
 	// Client ID, the client ID registered with the OpenID Connect identity provider.
 	ClientId pulumi.StringInput
-	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-	// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+	// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
 	IdentityKey pulumi.StringInput
-	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-	// Openid-configuration provided by the Enterprise IdP.
+	// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
 	IdentityUrl pulumi.StringInput
-	// Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+	// Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
 	MappingFiled pulumi.StringInput
-	// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-	// recommended to select form_post mode.
+	// Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
 	ResponseMode pulumi.StringInput
 	// Authorization requests The Response type, with a fixed value id_token.
 	ResponseType pulumi.StringInput
-	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-	// openid.
+	// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
 	Scopes pulumi.StringArrayInput
 }
 
-func (OIDCSSOArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*oidcssoArgs)(nil)).Elem()
+func (OidcSsoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*oidcSsoArgs)(nil)).Elem()
 }
 
-type OIDCSSOInput interface {
+type OidcSsoInput interface {
 	pulumi.Input
 
-	ToOIDCSSOOutput() OIDCSSOOutput
-	ToOIDCSSOOutputWithContext(ctx context.Context) OIDCSSOOutput
+	ToOidcSsoOutput() OidcSsoOutput
+	ToOidcSsoOutputWithContext(ctx context.Context) OidcSsoOutput
 }
 
-func (*OIDCSSO) ElementType() reflect.Type {
-	return reflect.TypeOf((**OIDCSSO)(nil)).Elem()
+func (*OidcSso) ElementType() reflect.Type {
+	return reflect.TypeOf((**OidcSso)(nil)).Elem()
 }
 
-func (i *OIDCSSO) ToOIDCSSOOutput() OIDCSSOOutput {
-	return i.ToOIDCSSOOutputWithContext(context.Background())
+func (i *OidcSso) ToOidcSsoOutput() OidcSsoOutput {
+	return i.ToOidcSsoOutputWithContext(context.Background())
 }
 
-func (i *OIDCSSO) ToOIDCSSOOutputWithContext(ctx context.Context) OIDCSSOOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(OIDCSSOOutput)
+func (i *OidcSso) ToOidcSsoOutputWithContext(ctx context.Context) OidcSsoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OidcSsoOutput)
 }
 
-// OIDCSSOArrayInput is an input type that accepts OIDCSSOArray and OIDCSSOArrayOutput values.
-// You can construct a concrete instance of `OIDCSSOArrayInput` via:
+// OidcSsoArrayInput is an input type that accepts OidcSsoArray and OidcSsoArrayOutput values.
+// You can construct a concrete instance of `OidcSsoArrayInput` via:
 //
-//          OIDCSSOArray{ OIDCSSOArgs{...} }
-type OIDCSSOArrayInput interface {
+//          OidcSsoArray{ OidcSsoArgs{...} }
+type OidcSsoArrayInput interface {
 	pulumi.Input
 
-	ToOIDCSSOArrayOutput() OIDCSSOArrayOutput
-	ToOIDCSSOArrayOutputWithContext(context.Context) OIDCSSOArrayOutput
+	ToOidcSsoArrayOutput() OidcSsoArrayOutput
+	ToOidcSsoArrayOutputWithContext(context.Context) OidcSsoArrayOutput
 }
 
-type OIDCSSOArray []OIDCSSOInput
+type OidcSsoArray []OidcSsoInput
 
-func (OIDCSSOArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*OIDCSSO)(nil)).Elem()
+func (OidcSsoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*OidcSso)(nil)).Elem()
 }
 
-func (i OIDCSSOArray) ToOIDCSSOArrayOutput() OIDCSSOArrayOutput {
-	return i.ToOIDCSSOArrayOutputWithContext(context.Background())
+func (i OidcSsoArray) ToOidcSsoArrayOutput() OidcSsoArrayOutput {
+	return i.ToOidcSsoArrayOutputWithContext(context.Background())
 }
 
-func (i OIDCSSOArray) ToOIDCSSOArrayOutputWithContext(ctx context.Context) OIDCSSOArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(OIDCSSOArrayOutput)
+func (i OidcSsoArray) ToOidcSsoArrayOutputWithContext(ctx context.Context) OidcSsoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OidcSsoArrayOutput)
 }
 
-// OIDCSSOMapInput is an input type that accepts OIDCSSOMap and OIDCSSOMapOutput values.
-// You can construct a concrete instance of `OIDCSSOMapInput` via:
+// OidcSsoMapInput is an input type that accepts OidcSsoMap and OidcSsoMapOutput values.
+// You can construct a concrete instance of `OidcSsoMapInput` via:
 //
-//          OIDCSSOMap{ "key": OIDCSSOArgs{...} }
-type OIDCSSOMapInput interface {
+//          OidcSsoMap{ "key": OidcSsoArgs{...} }
+type OidcSsoMapInput interface {
 	pulumi.Input
 
-	ToOIDCSSOMapOutput() OIDCSSOMapOutput
-	ToOIDCSSOMapOutputWithContext(context.Context) OIDCSSOMapOutput
+	ToOidcSsoMapOutput() OidcSsoMapOutput
+	ToOidcSsoMapOutputWithContext(context.Context) OidcSsoMapOutput
 }
 
-type OIDCSSOMap map[string]OIDCSSOInput
+type OidcSsoMap map[string]OidcSsoInput
 
-func (OIDCSSOMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*OIDCSSO)(nil)).Elem()
+func (OidcSsoMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*OidcSso)(nil)).Elem()
 }
 
-func (i OIDCSSOMap) ToOIDCSSOMapOutput() OIDCSSOMapOutput {
-	return i.ToOIDCSSOMapOutputWithContext(context.Background())
+func (i OidcSsoMap) ToOidcSsoMapOutput() OidcSsoMapOutput {
+	return i.ToOidcSsoMapOutputWithContext(context.Background())
 }
 
-func (i OIDCSSOMap) ToOIDCSSOMapOutputWithContext(ctx context.Context) OIDCSSOMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(OIDCSSOMapOutput)
+func (i OidcSsoMap) ToOidcSsoMapOutputWithContext(ctx context.Context) OidcSsoMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OidcSsoMapOutput)
 }
 
-type OIDCSSOOutput struct{ *pulumi.OutputState }
+type OidcSsoOutput struct{ *pulumi.OutputState }
 
-func (OIDCSSOOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**OIDCSSO)(nil)).Elem()
+func (OidcSsoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**OidcSso)(nil)).Elem()
 }
 
-func (o OIDCSSOOutput) ToOIDCSSOOutput() OIDCSSOOutput {
+func (o OidcSsoOutput) ToOidcSsoOutput() OidcSsoOutput {
 	return o
 }
 
-func (o OIDCSSOOutput) ToOIDCSSOOutputWithContext(ctx context.Context) OIDCSSOOutput {
+func (o OidcSsoOutput) ToOidcSsoOutputWithContext(ctx context.Context) OidcSsoOutput {
 	return o
 }
 
-// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
-func (o OIDCSSOOutput) AuthorizationEndpoint() pulumi.StringOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringOutput { return v.AuthorizationEndpoint }).(pulumi.StringOutput)
+// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
+func (o OidcSsoOutput) AuthorizationEndpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringOutput { return v.AuthorizationEndpoint }).(pulumi.StringOutput)
 }
 
 // Client ID, the client ID registered with the OpenID Connect identity provider.
-func (o OIDCSSOOutput) ClientId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
+func (o OidcSsoOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
 }
 
-// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
-func (o OIDCSSOOutput) IdentityKey() pulumi.StringOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringOutput { return v.IdentityKey }).(pulumi.StringOutput)
+// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+func (o OidcSsoOutput) IdentityKey() pulumi.StringOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringOutput { return v.IdentityKey }).(pulumi.StringOutput)
 }
 
-// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-// Openid-configuration provided by the Enterprise IdP.
-func (o OIDCSSOOutput) IdentityUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringOutput { return v.IdentityUrl }).(pulumi.StringOutput)
+// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
+func (o OidcSsoOutput) IdentityUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringOutput { return v.IdentityUrl }).(pulumi.StringOutput)
 }
 
-// Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
-func (o OIDCSSOOutput) MappingFiled() pulumi.StringOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringOutput { return v.MappingFiled }).(pulumi.StringOutput)
+// Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
+func (o OidcSsoOutput) MappingFiled() pulumi.StringOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringOutput { return v.MappingFiled }).(pulumi.StringOutput)
 }
 
-// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-// recommended to select form_post mode.
-func (o OIDCSSOOutput) ResponseMode() pulumi.StringOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringOutput { return v.ResponseMode }).(pulumi.StringOutput)
+// Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
+func (o OidcSsoOutput) ResponseMode() pulumi.StringOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringOutput { return v.ResponseMode }).(pulumi.StringOutput)
 }
 
 // Authorization requests The Response type, with a fixed value id_token.
-func (o OIDCSSOOutput) ResponseType() pulumi.StringOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringOutput { return v.ResponseType }).(pulumi.StringOutput)
+func (o OidcSsoOutput) ResponseType() pulumi.StringOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringOutput { return v.ResponseType }).(pulumi.StringOutput)
 }
 
-// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-// openid.
-func (o OIDCSSOOutput) Scopes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *OIDCSSO) pulumi.StringArrayOutput { return v.Scopes }).(pulumi.StringArrayOutput)
+// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
+func (o OidcSsoOutput) Scopes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *OidcSso) pulumi.StringArrayOutput { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
-type OIDCSSOArrayOutput struct{ *pulumi.OutputState }
+type OidcSsoArrayOutput struct{ *pulumi.OutputState }
 
-func (OIDCSSOArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*OIDCSSO)(nil)).Elem()
+func (OidcSsoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*OidcSso)(nil)).Elem()
 }
 
-func (o OIDCSSOArrayOutput) ToOIDCSSOArrayOutput() OIDCSSOArrayOutput {
+func (o OidcSsoArrayOutput) ToOidcSsoArrayOutput() OidcSsoArrayOutput {
 	return o
 }
 
-func (o OIDCSSOArrayOutput) ToOIDCSSOArrayOutputWithContext(ctx context.Context) OIDCSSOArrayOutput {
+func (o OidcSsoArrayOutput) ToOidcSsoArrayOutputWithContext(ctx context.Context) OidcSsoArrayOutput {
 	return o
 }
 
-func (o OIDCSSOArrayOutput) Index(i pulumi.IntInput) OIDCSSOOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OIDCSSO {
-		return vs[0].([]*OIDCSSO)[vs[1].(int)]
-	}).(OIDCSSOOutput)
+func (o OidcSsoArrayOutput) Index(i pulumi.IntInput) OidcSsoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OidcSso {
+		return vs[0].([]*OidcSso)[vs[1].(int)]
+	}).(OidcSsoOutput)
 }
 
-type OIDCSSOMapOutput struct{ *pulumi.OutputState }
+type OidcSsoMapOutput struct{ *pulumi.OutputState }
 
-func (OIDCSSOMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*OIDCSSO)(nil)).Elem()
+func (OidcSsoMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*OidcSso)(nil)).Elem()
 }
 
-func (o OIDCSSOMapOutput) ToOIDCSSOMapOutput() OIDCSSOMapOutput {
+func (o OidcSsoMapOutput) ToOidcSsoMapOutput() OidcSsoMapOutput {
 	return o
 }
 
-func (o OIDCSSOMapOutput) ToOIDCSSOMapOutputWithContext(ctx context.Context) OIDCSSOMapOutput {
+func (o OidcSsoMapOutput) ToOidcSsoMapOutputWithContext(ctx context.Context) OidcSsoMapOutput {
 	return o
 }
 
-func (o OIDCSSOMapOutput) MapIndex(k pulumi.StringInput) OIDCSSOOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *OIDCSSO {
-		return vs[0].(map[string]*OIDCSSO)[vs[1].(string)]
-	}).(OIDCSSOOutput)
+func (o OidcSsoMapOutput) MapIndex(k pulumi.StringInput) OidcSsoOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *OidcSso {
+		return vs[0].(map[string]*OidcSso)[vs[1].(string)]
+	}).(OidcSsoOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*OIDCSSOInput)(nil)).Elem(), &OIDCSSO{})
-	pulumi.RegisterInputType(reflect.TypeOf((*OIDCSSOArrayInput)(nil)).Elem(), OIDCSSOArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*OIDCSSOMapInput)(nil)).Elem(), OIDCSSOMap{})
-	pulumi.RegisterOutputType(OIDCSSOOutput{})
-	pulumi.RegisterOutputType(OIDCSSOArrayOutput{})
-	pulumi.RegisterOutputType(OIDCSSOMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OidcSsoInput)(nil)).Elem(), &OidcSso{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OidcSsoArrayInput)(nil)).Elem(), OidcSsoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OidcSsoMapInput)(nil)).Elem(), OidcSsoMap{})
+	pulumi.RegisterOutputType(OidcSsoOutput{})
+	pulumi.RegisterOutputType(OidcSsoArrayOutput{})
+	pulumi.RegisterOutputType(OidcSsoMapOutput{})
 }

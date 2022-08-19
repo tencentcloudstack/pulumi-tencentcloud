@@ -32,15 +32,13 @@ class DdosPolicyV2Args:
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2AclArgs']]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2BlackWhiteIpArgs']]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input['DdosPolicyV2DdosConnectLimitArgs'] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2DdosGeoIpBlockConfigArgs']]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
         :param pulumi.Input[str] ddos_level: Protection class, value [`low`, `middle`, `high`].
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2DdosSpeedLimitConfigArgs']]] ddos_speed_limit_configs: Access speed limit configuration for DDoS protection.
-        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-               means that the default value is adopted.
+        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2PacketFilterArgs']]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]] protocol_block_configs: Protocol block configuration for DDoS protection.
         """
@@ -108,8 +106,7 @@ class DdosPolicyV2Args:
     @pulumi.getter
     def business(self) -> Optional[pulumi.Input[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        packet; net indicates anti-anti-ip pro version.
+        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -181,8 +178,7 @@ class DdosPolicyV2Args:
     @pulumi.getter(name="ddosThreshold")
     def ddos_threshold(self) -> Optional[pulumi.Input[int]]:
         """
-        DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-        means that the default value is adopted.
+        DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         """
         return pulumi.get(self, "ddos_threshold")
 
@@ -234,15 +230,13 @@ class _DdosPolicyV2State:
         Input properties used for looking up and filtering DdosPolicyV2 resources.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2AclArgs']]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2BlackWhiteIpArgs']]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input['DdosPolicyV2DdosConnectLimitArgs'] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2DdosGeoIpBlockConfigArgs']]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
         :param pulumi.Input[str] ddos_level: Protection class, value [`low`, `middle`, `high`].
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2DdosSpeedLimitConfigArgs']]] ddos_speed_limit_configs: Access speed limit configuration for DDoS protection.
-        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-               means that the default value is adopted.
+        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2PacketFilterArgs']]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]] protocol_block_configs: Protocol block configuration for DDoS protection.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
@@ -300,8 +294,7 @@ class _DdosPolicyV2State:
     @pulumi.getter
     def business(self) -> Optional[pulumi.Input[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        packet; net indicates anti-anti-ip pro version.
+        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -373,8 +366,7 @@ class _DdosPolicyV2State:
     @pulumi.getter(name="ddosThreshold")
     def ddos_threshold(self) -> Optional[pulumi.Input[int]]:
         """
-        DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-        means that the default value is adopted.
+        DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         """
         return pulumi.get(self, "ddos_threshold")
 
@@ -438,20 +430,98 @@ class DdosPolicyV2(pulumi.CustomResource):
                  resource_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a DdosPolicyV2 resource with the given unique name, props, and options.
+        Use this resource to create dayu DDoS policy v2
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        ddos_v2 = tencentcloud.dayu.DdosPolicyV2("ddosV2",
+            acls=[tencentcloud.dayu.DdosPolicyV2AclArgs(
+                action="transmit",
+                d_port_end=10,
+                d_port_start=1,
+                forward_protocol="all",
+                priority=9,
+                s_port_end=20,
+                s_port_start=10,
+            )],
+            black_white_ips=[tencentcloud.dayu.DdosPolicyV2BlackWhiteIpArgs(
+                ip="1.2.3.4",
+                ip_type="black",
+            )],
+            business="bgpip",
+            ddos_ai="on",
+            ddos_connect_limit=tencentcloud.dayu.DdosPolicyV2DdosConnectLimitArgs(
+                bad_conn_threshold=30,
+                conn_timeout=30,
+                dst_conn_limit=21,
+                dst_new_limit=20,
+                null_conn_enable=1,
+                sd_conn_limit=11,
+                sd_new_limit=10,
+                syn_limit=20,
+                syn_rate=10,
+            ),
+            ddos_geo_ip_block_configs=[tencentcloud.dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs(
+                action="drop",
+                area_lists=[100001],
+                region_type="customized",
+            )],
+            ddos_level="low",
+            ddos_speed_limit_configs=[tencentcloud.dayu.DdosPolicyV2DdosSpeedLimitConfigArgs(
+                bandwidth=20,
+                dst_port_list="10",
+                mode=1,
+                packet_rate=10,
+                protocol_list="TCP",
+            )],
+            ddos_threshold=100,
+            packet_filters=[tencentcloud.dayu.DdosPolicyV2PacketFilterArgs(
+                action="drop",
+                d_port_end=20,
+                d_port_start=20,
+                depth=2,
+                depth2=3,
+                is_not=0,
+                is_not2=0,
+                match_begin="begin_l3",
+                match_begin2="begin_l3",
+                match_logic="and",
+                match_type="pcre",
+                match_type2="pcre",
+                offset=1,
+                offset2=2,
+                pktlen_max=30,
+                pktlen_min=30,
+                protocol="all",
+                s_port_end=10,
+                s_port_start=10,
+                str="12",
+                str2="30",
+            )],
+            protocol_block_configs=[tencentcloud.dayu.DdosPolicyV2ProtocolBlockConfigArgs(
+                drop_icmp=1,
+                drop_other=0,
+                drop_tcp=0,
+                drop_udp=0,
+            )],
+            resource_id="bgpip-000004xf")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2AclArgs']]]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2BlackWhiteIpArgs']]]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input[pulumi.InputType['DdosPolicyV2DdosConnectLimitArgs']] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2DdosGeoIpBlockConfigArgs']]]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
         :param pulumi.Input[str] ddos_level: Protection class, value [`low`, `middle`, `high`].
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2DdosSpeedLimitConfigArgs']]]] ddos_speed_limit_configs: Access speed limit configuration for DDoS protection.
-        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-               means that the default value is adopted.
+        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2PacketFilterArgs']]]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2ProtocolBlockConfigArgs']]]] protocol_block_configs: Protocol block configuration for DDoS protection.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
@@ -463,7 +533,87 @@ class DdosPolicyV2(pulumi.CustomResource):
                  args: DdosPolicyV2Args,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a DdosPolicyV2 resource with the given unique name, props, and options.
+        Use this resource to create dayu DDoS policy v2
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        ddos_v2 = tencentcloud.dayu.DdosPolicyV2("ddosV2",
+            acls=[tencentcloud.dayu.DdosPolicyV2AclArgs(
+                action="transmit",
+                d_port_end=10,
+                d_port_start=1,
+                forward_protocol="all",
+                priority=9,
+                s_port_end=20,
+                s_port_start=10,
+            )],
+            black_white_ips=[tencentcloud.dayu.DdosPolicyV2BlackWhiteIpArgs(
+                ip="1.2.3.4",
+                ip_type="black",
+            )],
+            business="bgpip",
+            ddos_ai="on",
+            ddos_connect_limit=tencentcloud.dayu.DdosPolicyV2DdosConnectLimitArgs(
+                bad_conn_threshold=30,
+                conn_timeout=30,
+                dst_conn_limit=21,
+                dst_new_limit=20,
+                null_conn_enable=1,
+                sd_conn_limit=11,
+                sd_new_limit=10,
+                syn_limit=20,
+                syn_rate=10,
+            ),
+            ddos_geo_ip_block_configs=[tencentcloud.dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs(
+                action="drop",
+                area_lists=[100001],
+                region_type="customized",
+            )],
+            ddos_level="low",
+            ddos_speed_limit_configs=[tencentcloud.dayu.DdosPolicyV2DdosSpeedLimitConfigArgs(
+                bandwidth=20,
+                dst_port_list="10",
+                mode=1,
+                packet_rate=10,
+                protocol_list="TCP",
+            )],
+            ddos_threshold=100,
+            packet_filters=[tencentcloud.dayu.DdosPolicyV2PacketFilterArgs(
+                action="drop",
+                d_port_end=20,
+                d_port_start=20,
+                depth=2,
+                depth2=3,
+                is_not=0,
+                is_not2=0,
+                match_begin="begin_l3",
+                match_begin2="begin_l3",
+                match_logic="and",
+                match_type="pcre",
+                match_type2="pcre",
+                offset=1,
+                offset2=2,
+                pktlen_max=30,
+                pktlen_min=30,
+                protocol="all",
+                s_port_end=10,
+                s_port_start=10,
+                str="12",
+                str2="30",
+            )],
+            protocol_block_configs=[tencentcloud.dayu.DdosPolicyV2ProtocolBlockConfigArgs(
+                drop_icmp=1,
+                drop_other=0,
+                drop_tcp=0,
+                drop_udp=0,
+            )],
+            resource_id="bgpip-000004xf")
+        ```
+
         :param str resource_name: The name of the resource.
         :param DdosPolicyV2Args args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -548,15 +698,13 @@ class DdosPolicyV2(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2AclArgs']]]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2BlackWhiteIpArgs']]]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input[pulumi.InputType['DdosPolicyV2DdosConnectLimitArgs']] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2DdosGeoIpBlockConfigArgs']]]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
         :param pulumi.Input[str] ddos_level: Protection class, value [`low`, `middle`, `high`].
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2DdosSpeedLimitConfigArgs']]]] ddos_speed_limit_configs: Access speed limit configuration for DDoS protection.
-        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-               means that the default value is adopted.
+        :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2PacketFilterArgs']]]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2ProtocolBlockConfigArgs']]]] protocol_block_configs: Protocol block configuration for DDoS protection.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
@@ -599,8 +747,7 @@ class DdosPolicyV2(pulumi.CustomResource):
     @pulumi.getter
     def business(self) -> pulumi.Output[Optional[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        packet; net indicates anti-anti-ip pro version.
+        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -648,8 +795,7 @@ class DdosPolicyV2(pulumi.CustomResource):
     @pulumi.getter(name="ddosThreshold")
     def ddos_threshold(self) -> pulumi.Output[Optional[int]]:
         """
-        DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-        means that the default value is adopted.
+        DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         """
         return pulumi.get(self, "ddos_threshold")
 

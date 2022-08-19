@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Security.Outputs
     [OutputType]
     public sealed class GroupRuleAddressTemplate
     {
+        /// <summary>
+        /// Address template group ID, conflicts with `template_id`.
+        /// </summary>
         public readonly string? GroupId;
+        /// <summary>
+        /// Address template ID, conflicts with `group_id`.
+        /// </summary>
         public readonly string? TemplateId;
 
         [OutputConstructor]

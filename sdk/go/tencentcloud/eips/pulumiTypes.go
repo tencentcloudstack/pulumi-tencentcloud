@@ -10,151 +10,178 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type InstancesEipList struct {
-	CreateTime string                 `pulumi:"createTime"`
-	EipId      string                 `pulumi:"eipId"`
-	EipName    string                 `pulumi:"eipName"`
-	EipType    string                 `pulumi:"eipType"`
-	EniId      string                 `pulumi:"eniId"`
-	InstanceId string                 `pulumi:"instanceId"`
-	PublicIp   string                 `pulumi:"publicIp"`
-	Status     string                 `pulumi:"status"`
-	Tags       map[string]interface{} `pulumi:"tags"`
+type GetInstanceEipList struct {
+	// Creation time of the EIP.
+	CreateTime string `pulumi:"createTime"`
+	// ID of the EIP to be queried.
+	EipId string `pulumi:"eipId"`
+	// Name of the EIP to be queried.
+	EipName string `pulumi:"eipName"`
+	// Type of the EIP.
+	EipType string `pulumi:"eipType"`
+	// The eni id to bind with the EIP.
+	EniId string `pulumi:"eniId"`
+	// The instance id to bind with the EIP.
+	InstanceId string `pulumi:"instanceId"`
+	// The elastic ip address.
+	PublicIp string `pulumi:"publicIp"`
+	// The EIP current status.
+	Status string `pulumi:"status"`
+	// The tags of EIP.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
-// InstancesEipListInput is an input type that accepts InstancesEipListArgs and InstancesEipListOutput values.
-// You can construct a concrete instance of `InstancesEipListInput` via:
+// GetInstanceEipListInput is an input type that accepts GetInstanceEipListArgs and GetInstanceEipListOutput values.
+// You can construct a concrete instance of `GetInstanceEipListInput` via:
 //
-//          InstancesEipListArgs{...}
-type InstancesEipListInput interface {
+//          GetInstanceEipListArgs{...}
+type GetInstanceEipListInput interface {
 	pulumi.Input
 
-	ToInstancesEipListOutput() InstancesEipListOutput
-	ToInstancesEipListOutputWithContext(context.Context) InstancesEipListOutput
+	ToGetInstanceEipListOutput() GetInstanceEipListOutput
+	ToGetInstanceEipListOutputWithContext(context.Context) GetInstanceEipListOutput
 }
 
-type InstancesEipListArgs struct {
+type GetInstanceEipListArgs struct {
+	// Creation time of the EIP.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
-	EipId      pulumi.StringInput `pulumi:"eipId"`
-	EipName    pulumi.StringInput `pulumi:"eipName"`
-	EipType    pulumi.StringInput `pulumi:"eipType"`
-	EniId      pulumi.StringInput `pulumi:"eniId"`
+	// ID of the EIP to be queried.
+	EipId pulumi.StringInput `pulumi:"eipId"`
+	// Name of the EIP to be queried.
+	EipName pulumi.StringInput `pulumi:"eipName"`
+	// Type of the EIP.
+	EipType pulumi.StringInput `pulumi:"eipType"`
+	// The eni id to bind with the EIP.
+	EniId pulumi.StringInput `pulumi:"eniId"`
+	// The instance id to bind with the EIP.
 	InstanceId pulumi.StringInput `pulumi:"instanceId"`
-	PublicIp   pulumi.StringInput `pulumi:"publicIp"`
-	Status     pulumi.StringInput `pulumi:"status"`
-	Tags       pulumi.MapInput    `pulumi:"tags"`
+	// The elastic ip address.
+	PublicIp pulumi.StringInput `pulumi:"publicIp"`
+	// The EIP current status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// The tags of EIP.
+	Tags pulumi.MapInput `pulumi:"tags"`
 }
 
-func (InstancesEipListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesEipList)(nil)).Elem()
+func (GetInstanceEipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceEipList)(nil)).Elem()
 }
 
-func (i InstancesEipListArgs) ToInstancesEipListOutput() InstancesEipListOutput {
-	return i.ToInstancesEipListOutputWithContext(context.Background())
+func (i GetInstanceEipListArgs) ToGetInstanceEipListOutput() GetInstanceEipListOutput {
+	return i.ToGetInstanceEipListOutputWithContext(context.Background())
 }
 
-func (i InstancesEipListArgs) ToInstancesEipListOutputWithContext(ctx context.Context) InstancesEipListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesEipListOutput)
+func (i GetInstanceEipListArgs) ToGetInstanceEipListOutputWithContext(ctx context.Context) GetInstanceEipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceEipListOutput)
 }
 
-// InstancesEipListArrayInput is an input type that accepts InstancesEipListArray and InstancesEipListArrayOutput values.
-// You can construct a concrete instance of `InstancesEipListArrayInput` via:
+// GetInstanceEipListArrayInput is an input type that accepts GetInstanceEipListArray and GetInstanceEipListArrayOutput values.
+// You can construct a concrete instance of `GetInstanceEipListArrayInput` via:
 //
-//          InstancesEipListArray{ InstancesEipListArgs{...} }
-type InstancesEipListArrayInput interface {
+//          GetInstanceEipListArray{ GetInstanceEipListArgs{...} }
+type GetInstanceEipListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesEipListArrayOutput() InstancesEipListArrayOutput
-	ToInstancesEipListArrayOutputWithContext(context.Context) InstancesEipListArrayOutput
+	ToGetInstanceEipListArrayOutput() GetInstanceEipListArrayOutput
+	ToGetInstanceEipListArrayOutputWithContext(context.Context) GetInstanceEipListArrayOutput
 }
 
-type InstancesEipListArray []InstancesEipListInput
+type GetInstanceEipListArray []GetInstanceEipListInput
 
-func (InstancesEipListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesEipList)(nil)).Elem()
+func (GetInstanceEipListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceEipList)(nil)).Elem()
 }
 
-func (i InstancesEipListArray) ToInstancesEipListArrayOutput() InstancesEipListArrayOutput {
-	return i.ToInstancesEipListArrayOutputWithContext(context.Background())
+func (i GetInstanceEipListArray) ToGetInstanceEipListArrayOutput() GetInstanceEipListArrayOutput {
+	return i.ToGetInstanceEipListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesEipListArray) ToInstancesEipListArrayOutputWithContext(ctx context.Context) InstancesEipListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesEipListArrayOutput)
+func (i GetInstanceEipListArray) ToGetInstanceEipListArrayOutputWithContext(ctx context.Context) GetInstanceEipListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceEipListArrayOutput)
 }
 
-type InstancesEipListOutput struct{ *pulumi.OutputState }
+type GetInstanceEipListOutput struct{ *pulumi.OutputState }
 
-func (InstancesEipListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesEipList)(nil)).Elem()
+func (GetInstanceEipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceEipList)(nil)).Elem()
 }
 
-func (o InstancesEipListOutput) ToInstancesEipListOutput() InstancesEipListOutput {
+func (o GetInstanceEipListOutput) ToGetInstanceEipListOutput() GetInstanceEipListOutput {
 	return o
 }
 
-func (o InstancesEipListOutput) ToInstancesEipListOutputWithContext(ctx context.Context) InstancesEipListOutput {
+func (o GetInstanceEipListOutput) ToGetInstanceEipListOutputWithContext(ctx context.Context) GetInstanceEipListOutput {
 	return o
 }
 
-func (o InstancesEipListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the EIP.
+func (o GetInstanceEipListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) EipId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.EipId }).(pulumi.StringOutput)
+// ID of the EIP to be queried.
+func (o GetInstanceEipListOutput) EipId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.EipId }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) EipName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.EipName }).(pulumi.StringOutput)
+// Name of the EIP to be queried.
+func (o GetInstanceEipListOutput) EipName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.EipName }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) EipType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.EipType }).(pulumi.StringOutput)
+// Type of the EIP.
+func (o GetInstanceEipListOutput) EipType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.EipType }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) EniId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.EniId }).(pulumi.StringOutput)
+// The eni id to bind with the EIP.
+func (o GetInstanceEipListOutput) EniId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.EniId }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.InstanceId }).(pulumi.StringOutput)
+// The instance id to bind with the EIP.
+func (o GetInstanceEipListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) PublicIp() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.PublicIp }).(pulumi.StringOutput)
+// The elastic ip address.
+func (o GetInstanceEipListOutput) PublicIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.PublicIp }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesEipList) string { return v.Status }).(pulumi.StringOutput)
+// The EIP current status.
+func (o GetInstanceEipListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEipList) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o InstancesEipListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v InstancesEipList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// The tags of EIP.
+func (o GetInstanceEipListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetInstanceEipList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-type InstancesEipListArrayOutput struct{ *pulumi.OutputState }
+type GetInstanceEipListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesEipListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesEipList)(nil)).Elem()
+func (GetInstanceEipListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceEipList)(nil)).Elem()
 }
 
-func (o InstancesEipListArrayOutput) ToInstancesEipListArrayOutput() InstancesEipListArrayOutput {
+func (o GetInstanceEipListArrayOutput) ToGetInstanceEipListArrayOutput() GetInstanceEipListArrayOutput {
 	return o
 }
 
-func (o InstancesEipListArrayOutput) ToInstancesEipListArrayOutputWithContext(ctx context.Context) InstancesEipListArrayOutput {
+func (o GetInstanceEipListArrayOutput) ToGetInstanceEipListArrayOutputWithContext(ctx context.Context) GetInstanceEipListArrayOutput {
 	return o
 }
 
-func (o InstancesEipListArrayOutput) Index(i pulumi.IntInput) InstancesEipListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesEipList {
-		return vs[0].([]InstancesEipList)[vs[1].(int)]
-	}).(InstancesEipListOutput)
+func (o GetInstanceEipListArrayOutput) Index(i pulumi.IntInput) GetInstanceEipListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceEipList {
+		return vs[0].([]GetInstanceEipList)[vs[1].(int)]
+	}).(GetInstanceEipListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesEipListInput)(nil)).Elem(), InstancesEipListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesEipListArrayInput)(nil)).Elem(), InstancesEipListArray{})
-	pulumi.RegisterOutputType(InstancesEipListOutput{})
-	pulumi.RegisterOutputType(InstancesEipListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceEipListInput)(nil)).Elem(), GetInstanceEipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceEipListArrayInput)(nil)).Elem(), GetInstanceEipListArray{})
+	pulumi.RegisterOutputType(GetInstanceEipListOutput{})
+	pulumi.RegisterOutputType(GetInstanceEipListArrayOutput{})
 }

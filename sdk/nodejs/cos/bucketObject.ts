@@ -4,6 +4,41 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a COS object resource to put an object(content or file) to the bucket.
+ *
+ * ## Example Usage
+ *
+ * Uploading a file to a bucket
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myobject = new tencentcloud.Cos.BucketObject("myobject", {
+ *     bucket: "mycos-1258798060",
+ *     key: "new_object_key",
+ *     source: "path/to/file",
+ * });
+ * ```
+ *
+ * Uploading a content to a bucket
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const mycos = new tencentcloud.cos.Bucket("mycos", {
+ *     bucket: "mycos-1258798060",
+ *     acl: "public-read",
+ * });
+ * const myobject = new tencentcloud.cos.BucketObject("myobject", {
+ *     bucket: mycos.bucket,
+ *     key: "new_object_key",
+ *     content: "the content that you want to upload.",
+ * });
+ * ```
+ */
 export class BucketObject extends pulumi.CustomResource {
     /**
      * Get an existing BucketObject resource's state with the given name, ID, and optional extra
@@ -33,8 +68,7 @@ export class BucketObject extends pulumi.CustomResource {
     }
 
     /**
-     * The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-     * `private`.
+     * The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
      */
     public readonly acl!: pulumi.Output<string | undefined>;
     /**
@@ -54,8 +88,7 @@ export class BucketObject extends pulumi.CustomResource {
      */
     public readonly contentDisposition!: pulumi.Output<string | undefined>;
     /**
-     * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-     * obtain the media-type referenced by the Content-Type header field.
+     * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
      */
     public readonly contentEncoding!: pulumi.Output<string | undefined>;
     /**
@@ -139,8 +172,7 @@ export class BucketObject extends pulumi.CustomResource {
  */
 export interface BucketObjectState {
     /**
-     * The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-     * `private`.
+     * The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
      */
     acl?: pulumi.Input<string>;
     /**
@@ -160,8 +192,7 @@ export interface BucketObjectState {
      */
     contentDisposition?: pulumi.Input<string>;
     /**
-     * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-     * obtain the media-type referenced by the Content-Type header field.
+     * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
      */
     contentEncoding?: pulumi.Input<string>;
     /**
@@ -195,8 +226,7 @@ export interface BucketObjectState {
  */
 export interface BucketObjectArgs {
     /**
-     * The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-     * `private`.
+     * The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
      */
     acl?: pulumi.Input<string>;
     /**
@@ -216,8 +246,7 @@ export interface BucketObjectArgs {
      */
     contentDisposition?: pulumi.Input<string>;
     /**
-     * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-     * obtain the media-type referenced by the Content-Type header field.
+     * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
      */
     contentEncoding?: pulumi.Input<string>;
     /**

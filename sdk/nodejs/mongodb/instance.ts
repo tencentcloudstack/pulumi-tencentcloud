@@ -5,6 +5,37 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a Mongodb instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const mongodb = new tencentcloud.Mongodb.Instance("mongodb", {
+ *     availableZone: "ap-guangzhou-2",
+ *     engineVersion: "MONGO_3_WT",
+ *     instanceName: "mongodb",
+ *     machineType: "GIO",
+ *     memory: 4,
+ *     password: "password1234",
+ *     projectId: 0,
+ *     subnetId: "subnet-lk0svi3p",
+ *     volume: 100,
+ *     vpcId: "vpc-mz3efvbw",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Mongodb instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -34,9 +65,7 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
-     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-     * `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-     * `1` for creation.
+     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
     public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
     /**
@@ -44,9 +73,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly availableZone!: pulumi.Output<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-     * Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-     * delete old instances and create new one with new charge type.
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
@@ -54,9 +81,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-     * (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-     * WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+     * Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
      */
     public readonly engineVersion!: pulumi.Output<string>;
     /**
@@ -64,8 +89,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly instanceName!: pulumi.Output<string>;
     /**
-     * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-     * `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+     * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
     public readonly machineType!: pulumi.Output<string>;
     /**
@@ -77,8 +101,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly password!: pulumi.Output<string | undefined>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-     * 36. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
@@ -86,8 +109,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
-     * ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-     * supported.
+     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
      */
     public readonly securityGroups!: pulumi.Output<string[] | undefined>;
     /**
@@ -95,12 +117,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly standbyInstanceLists!: pulumi.Output<outputs.Mongodb.InstanceStandbyInstanceList[]>;
     /**
-     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-     * processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
     /**
-     * ID of the subnet within this VPC. The value is required if `vpc_id` is set.
+     * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
@@ -208,9 +229,7 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
-     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-     * `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-     * `1` for creation.
+     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
@@ -218,9 +237,7 @@ export interface InstanceState {
      */
     availableZone?: pulumi.Input<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-     * Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-     * delete old instances and create new one with new charge type.
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -228,9 +245,7 @@ export interface InstanceState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-     * (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-     * WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+     * Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
      */
     engineVersion?: pulumi.Input<string>;
     /**
@@ -238,8 +253,7 @@ export interface InstanceState {
      */
     instanceName?: pulumi.Input<string>;
     /**
-     * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-     * `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+     * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
     machineType?: pulumi.Input<string>;
     /**
@@ -251,8 +265,7 @@ export interface InstanceState {
      */
     password?: pulumi.Input<string>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-     * 36. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
@@ -260,8 +273,7 @@ export interface InstanceState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-     * supported.
+     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -269,12 +281,11 @@ export interface InstanceState {
      */
     standbyInstanceLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceStandbyInstanceList>[]>;
     /**
-     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-     * processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
      */
     status?: pulumi.Input<number>;
     /**
-     * ID of the subnet within this VPC. The value is required if `vpc_id` is set.
+     * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -304,9 +315,7 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-     * `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-     * `1` for creation.
+     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
@@ -314,15 +323,11 @@ export interface InstanceArgs {
      */
     availableZone: pulumi.Input<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-     * Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-     * delete old instances and create new one with new charge type.
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
     chargeType?: pulumi.Input<string>;
     /**
-     * Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-     * (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-     * WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+     * Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
      */
     engineVersion: pulumi.Input<string>;
     /**
@@ -330,8 +335,7 @@ export interface InstanceArgs {
      */
     instanceName: pulumi.Input<string>;
     /**
-     * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-     * `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+     * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
     machineType: pulumi.Input<string>;
     /**
@@ -343,8 +347,7 @@ export interface InstanceArgs {
      */
     password?: pulumi.Input<string>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-     * 36. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
@@ -352,12 +355,11 @@ export interface InstanceArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-     * supported.
+     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * ID of the subnet within this VPC. The value is required if `vpc_id` is set.
+     * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
     subnetId?: pulumi.Input<string>;
     /**

@@ -9,6 +9,7 @@ from .config import *
 from .config_attachment import *
 from .config_extra import *
 from .cos_shipper import *
+from .index import *
 from .logset import *
 from .machine_group import *
 from .topic import *

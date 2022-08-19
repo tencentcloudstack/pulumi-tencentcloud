@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a VPN SSL Server.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const server = new tencentcloud.Vpn.SslServer("server", {
+ *     compress: true,
+ *     encryptAlgorithm: "AES-128-CBC",
+ *     integrityAlgorithm: "MD5",
+ *     localAddresses: ["10.0.0.0/17"],
+ *     remoteAddress: "11.0.0.0/16",
+ *     sslVpnPort: 1194,
+ *     sslVpnProtocol: "UDP",
+ *     sslVpnServerName: "helloworld",
+ *     vpnGatewayId: "vpngw-335lwf7d",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VPN SSL Server can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+ * ```
+ */
 export class SslServer extends pulumi.CustomResource {
     /**
      * Get an existing SslServer resource's state with the given name, ID, and optional extra

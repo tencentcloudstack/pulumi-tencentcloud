@@ -13,24 +13,81 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class DdosPolicyDropOption
     {
+        /// <summary>
+        /// The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
+        /// </summary>
         public readonly int BadConnThreshold;
+        /// <summary>
+        /// Indicate whether to check null connection or not.
+        /// </summary>
         public readonly bool CheckSyncConn;
+        /// <summary>
+        /// Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
+        /// </summary>
         public readonly int ConnTimeout;
+        /// <summary>
+        /// The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
+        /// </summary>
         public readonly int DConnLimit;
+        /// <summary>
+        /// The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
+        /// </summary>
         public readonly int DNewLimit;
+        /// <summary>
+        /// Indicate whether to drop abroad traffic or not.
+        /// </summary>
         public readonly bool DropAbroad;
+        /// <summary>
+        /// Indicate whether to drop ICMP protocol or not.
+        /// </summary>
         public readonly bool DropIcmp;
+        /// <summary>
+        /// Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+        /// </summary>
         public readonly bool DropOther;
+        /// <summary>
+        /// Indicate whether to drop TCP protocol or not.
+        /// </summary>
         public readonly bool DropTcp;
+        /// <summary>
+        /// Indicate to drop UDP protocol or not.
+        /// </summary>
         public readonly bool DropUdp;
+        /// <summary>
+        /// The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        /// </summary>
         public readonly int IcmpMbpsLimit;
+        /// <summary>
+        /// Indicate to enable null connection or not.
+        /// </summary>
         public readonly bool NullConnEnable;
+        /// <summary>
+        /// The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        /// </summary>
         public readonly int OtherMbpsLimit;
+        /// <summary>
+        /// The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
+        /// </summary>
         public readonly int SConnLimit;
+        /// <summary>
+        /// The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
+        /// </summary>
         public readonly int SNewLimit;
+        /// <summary>
+        /// The limit of syn of abnormal connection check. Valid value ranges: (0~100).
+        /// </summary>
         public readonly int SynLimit;
+        /// <summary>
+        /// The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
+        /// </summary>
         public readonly int? SynRate;
+        /// <summary>
+        /// The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
+        /// </summary>
         public readonly int TcpMbpsLimit;
+        /// <summary>
+        /// The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        /// </summary>
         public readonly int UdpMbpsLimit;
 
         [OutputConstructor]

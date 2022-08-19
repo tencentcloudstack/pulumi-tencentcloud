@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -23,8 +23,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Mysql/account:Account":
 		r = &Account{}
-	case "tencentcloud:Mysql/accountPrivilege:AccountPrivilege":
-		r = &AccountPrivilege{}
 	case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
 		r = &BackupPolicy{}
 	case "tencentcloud:Mysql/instance:Instance":
@@ -49,11 +47,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/account",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Mysql/accountPrivilege",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

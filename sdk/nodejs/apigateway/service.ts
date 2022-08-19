@@ -5,6 +5,38 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create API gateway service.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const service = new tencentcloud.ApiGateway.Service("service", {
+ *     ipVersion: "IPv4",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     preLimit: 500,
+ *     protocol: "http&https",
+ *     releaseLimit: 500,
+ *     serviceDesc: "your nice service",
+ *     serviceName: "niceservice",
+ *     testLimit: 500,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * API gateway service can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
+ * ```
+ */
 export class Service extends pulumi.CustomResource {
     /**
      * Get an existing Service resource's state with the given name, ID, and optional extra
@@ -20,7 +52,7 @@ export class Service extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/service:Service';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/service:Service';
 
     /**
      * Returns true if the given object is an instance of Service.  This is designed to work even
@@ -36,7 +68,7 @@ export class Service extends pulumi.CustomResource {
     /**
      * A list of APIs.
      */
-    public /*out*/ readonly apiLists!: pulumi.Output<outputs.APIGateway.ServiceApiList[]>;
+    public /*out*/ readonly apiLists!: pulumi.Output<outputs.ApiGateway.ServiceApiList[]>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
@@ -66,8 +98,7 @@ export class Service extends pulumi.CustomResource {
      */
     public /*out*/ readonly modifyTime!: pulumi.Output<string>;
     /**
-     * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-     * indicates access over private network, and `OUTER` indicates access over public network.
+     * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
      */
     public readonly netTypes!: pulumi.Output<string[]>;
     /**
@@ -101,7 +132,7 @@ export class Service extends pulumi.CustomResource {
     /**
      * A list of attach usage plans.
      */
-    public /*out*/ readonly usagePlanLists!: pulumi.Output<outputs.APIGateway.ServiceUsagePlanList[]>;
+    public /*out*/ readonly usagePlanLists!: pulumi.Output<outputs.ApiGateway.ServiceUsagePlanList[]>;
 
     /**
      * Create a Service resource with the given unique name, arguments, and options.
@@ -174,7 +205,7 @@ export interface ServiceState {
     /**
      * A list of APIs.
      */
-    apiLists?: pulumi.Input<pulumi.Input<inputs.APIGateway.ServiceApiList>[]>;
+    apiLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ServiceApiList>[]>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
@@ -204,8 +235,7 @@ export interface ServiceState {
      */
     modifyTime?: pulumi.Input<string>;
     /**
-     * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-     * indicates access over private network, and `OUTER` indicates access over public network.
+     * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
      */
     netTypes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -239,7 +269,7 @@ export interface ServiceState {
     /**
      * A list of attach usage plans.
      */
-    usagePlanLists?: pulumi.Input<pulumi.Input<inputs.APIGateway.ServiceUsagePlanList>[]>;
+    usagePlanLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ServiceUsagePlanList>[]>;
 }
 
 /**
@@ -255,8 +285,7 @@ export interface ServiceArgs {
      */
     ipVersion?: pulumi.Input<string>;
     /**
-     * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-     * indicates access over private network, and `OUTER` indicates access over public network.
+     * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
      */
     netTypes: pulumi.Input<pulumi.Input<string>[]>;
     /**

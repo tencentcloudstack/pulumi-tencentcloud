@@ -9,6 +9,66 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.As
 {
+    /// <summary>
+    /// Provides a resource to create a group of AS (Auto scaling) instances.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var scalingGroup = new Tencentcloud.As.ScalingGroup("scalingGroup", new Tencentcloud.As.ScalingGroupArgs
+    ///         {
+    ///             ConfigurationId = "asc-oqio4yyj",
+    ///             DefaultCooldown = 400,
+    ///             DesiredCapacity = 1,
+    ///             ForwardBalancerIds = 
+    ///             {
+    ///                 new Tencentcloud.As.Inputs.ScalingGroupForwardBalancerIdArgs
+    ///                 {
+    ///                     ListenerId = "lbl-81wr497k",
+    ///                     LoadBalancerId = "lb-hk693b1l",
+    ///                     RuleId = "loc-kiodx943",
+    ///                     TargetAttributes = 
+    ///                     {
+    ///                         new Tencentcloud.As.Inputs.ScalingGroupForwardBalancerIdTargetAttributeArgs
+    ///                         {
+    ///                             Port = 80,
+    ///                             Weight = 90,
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             MaxSize = 1,
+    ///             MinSize = 0,
+    ///             ProjectId = 0,
+    ///             RetryPolicy = "INCREMENTAL_INTERVALS",
+    ///             ScalingGroupName = "tf-as-scaling-group",
+    ///             SubnetIds = 
+    ///             {
+    ///                 "subnet-mc3egos",
+    ///             },
+    ///             TerminationPolicies = "NEWEST_INSTANCE",
+    ///             VpcId = "vpc-3efmz0z",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// AutoScaling Groups can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:As/scalingGroup:ScalingGroup")]
     public partial class ScalingGroup : Pulumi.CustomResource
     {
@@ -79,15 +139,13 @@ namespace Pulumi.Tencentcloud.As
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-        /// health check.
+        /// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
         /// </summary>
         [Output("replaceLoadBalancerUnhealthy")]
         public Output<bool?> ReplaceLoadBalancerUnhealthy { get; private set; } = null!;
 
         /// <summary>
-        /// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-        /// Cloud Monitor.
+        /// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         /// </summary>
         [Output("replaceMonitorUnhealthy")]
         public Output<bool?> ReplaceMonitorUnhealthy { get; private set; } = null!;
@@ -105,9 +163,7 @@ namespace Pulumi.Tencentcloud.As
         public Output<string> ScalingGroupName { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-        /// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-        /// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        /// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         /// </summary>
         [Output("scalingMode")]
         public Output<string?> ScalingMode { get; private set; } = null!;
@@ -261,15 +317,13 @@ namespace Pulumi.Tencentcloud.As
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-        /// health check.
+        /// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
         /// </summary>
         [Input("replaceLoadBalancerUnhealthy")]
         public Input<bool>? ReplaceLoadBalancerUnhealthy { get; set; }
 
         /// <summary>
-        /// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-        /// Cloud Monitor.
+        /// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         /// </summary>
         [Input("replaceMonitorUnhealthy")]
         public Input<bool>? ReplaceMonitorUnhealthy { get; set; }
@@ -287,9 +341,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<string> ScalingGroupName { get; set; } = null!;
 
         /// <summary>
-        /// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-        /// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-        /// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        /// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         /// </summary>
         [Input("scalingMode")]
         public Input<string>? ScalingMode { get; set; }
@@ -428,15 +480,13 @@ namespace Pulumi.Tencentcloud.As
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-        /// health check.
+        /// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
         /// </summary>
         [Input("replaceLoadBalancerUnhealthy")]
         public Input<bool>? ReplaceLoadBalancerUnhealthy { get; set; }
 
         /// <summary>
-        /// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-        /// Cloud Monitor.
+        /// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         /// </summary>
         [Input("replaceMonitorUnhealthy")]
         public Input<bool>? ReplaceMonitorUnhealthy { get; set; }
@@ -454,9 +504,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<string>? ScalingGroupName { get; set; }
 
         /// <summary>
-        /// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-        /// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-        /// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        /// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         /// </summary>
         [Input("scalingMode")]
         public Input<string>? ScalingMode { get; set; }

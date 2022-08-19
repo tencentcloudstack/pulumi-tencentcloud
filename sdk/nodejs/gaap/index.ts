@@ -6,29 +6,29 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./certificate";
-export * from "./certificates";
-export * from "./domainErrorPageInfo";
-export * from "./domainErrorPageInfoList";
+export * from "./domainErrorPage";
+export * from "./getCertificates";
+export * from "./getDomainErrorPages";
+export * from "./getHttpDomains";
+export * from "./getHttpRules";
+export * from "./getLayer4Listeners";
+export * from "./getLayer7Listeners";
+export * from "./getProxies";
+export * from "./getRealservers";
+export * from "./getSecurityPolicies";
+export * from "./getSecurityRules";
 export * from "./httpDomain";
-export * from "./httpDomains";
 export * from "./httpRule";
-export * from "./httpRules";
 export * from "./layer4Listener";
-export * from "./layer4Listeners";
 export * from "./layer7Listener";
-export * from "./layer7Listeners";
-export * from "./proxies";
 export * from "./proxy";
 export * from "./realserver";
-export * from "./realservers";
-export * from "./securityPolices";
 export * from "./securityPolicy";
 export * from "./securityRule";
-export * from "./securityRules";
 
 // Import resources to register:
 import { Certificate } from "./certificate";
-import { DomainErrorPageInfo } from "./domainErrorPageInfo";
+import { DomainErrorPage } from "./domainErrorPage";
 import { HttpDomain } from "./httpDomain";
 import { HttpRule } from "./httpRule";
 import { Layer4Listener } from "./layer4Listener";
@@ -44,8 +44,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Gaap/certificate:Certificate":
                 return new Certificate(name, <any>undefined, { urn })
-            case "tencentcloud:Gaap/domainErrorPageInfo:DomainErrorPageInfo":
-                return new DomainErrorPageInfo(name, <any>undefined, { urn })
+            case "tencentcloud:Gaap/domainErrorPage:DomainErrorPage":
+                return new DomainErrorPage(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/httpDomain:HttpDomain":
                 return new HttpDomain(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/httpRule:HttpRule":
@@ -68,7 +68,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/certificate", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/domainErrorPageInfo", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/domainErrorPage", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/httpDomain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/httpRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/layer4Listener", _module)

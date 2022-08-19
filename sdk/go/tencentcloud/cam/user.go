@@ -10,6 +10,49 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to manage CAM user.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewUser(ctx, "foo", &Cam.UserArgs{
+// 			ConsoleLogin:      pulumi.Bool(true),
+// 			CountryCode:       pulumi.String("86"),
+// 			Email:             pulumi.String("hello@test.com"),
+// 			ForceDelete:       pulumi.Bool(true),
+// 			NeedResetPassword: pulumi.Bool(true),
+// 			Password:          pulumi.String("Gail@1234"),
+// 			PhoneNum:          pulumi.String("12345678910"),
+// 			Remark:            pulumi.String("test"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf-cam-user"),
+// 			},
+// 			UseApi: pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM user can be imported using the user name, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+// ```
 type User struct {
 	pulumi.CustomResourceState
 
@@ -19,16 +62,13 @@ type User struct {
 	CountryCode pulumi.StringOutput `pulumi:"countryCode"`
 	// Email of the CAM user.
 	Email pulumi.StringPtrOutput `pulumi:"email"`
-	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-	// otherwise the user will be deleted directly. Default is false.
+	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// Name of the CAM user.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Indicate whether the CAM user need to reset the password when first logins.
 	NeedResetPassword pulumi.BoolPtrOutput `pulumi:"needResetPassword"`
-	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-	// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-	// set, a random password will be automatically generated.
+	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
 	Password pulumi.StringOutput `pulumi:"password"`
 	// Phone number of the CAM user.
 	PhoneNum pulumi.StringPtrOutput `pulumi:"phoneNum"`
@@ -83,16 +123,13 @@ type userState struct {
 	CountryCode *string `pulumi:"countryCode"`
 	// Email of the CAM user.
 	Email *string `pulumi:"email"`
-	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-	// otherwise the user will be deleted directly. Default is false.
+	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// Name of the CAM user.
 	Name *string `pulumi:"name"`
 	// Indicate whether the CAM user need to reset the password when first logins.
 	NeedResetPassword *bool `pulumi:"needResetPassword"`
-	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-	// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-	// set, a random password will be automatically generated.
+	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
 	Password *string `pulumi:"password"`
 	// Phone number of the CAM user.
 	PhoneNum *string `pulumi:"phoneNum"`
@@ -119,16 +156,13 @@ type UserState struct {
 	CountryCode pulumi.StringPtrInput
 	// Email of the CAM user.
 	Email pulumi.StringPtrInput
-	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-	// otherwise the user will be deleted directly. Default is false.
+	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
 	ForceDelete pulumi.BoolPtrInput
 	// Name of the CAM user.
 	Name pulumi.StringPtrInput
 	// Indicate whether the CAM user need to reset the password when first logins.
 	NeedResetPassword pulumi.BoolPtrInput
-	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-	// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-	// set, a random password will be automatically generated.
+	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
 	Password pulumi.StringPtrInput
 	// Phone number of the CAM user.
 	PhoneNum pulumi.StringPtrInput
@@ -159,16 +193,13 @@ type userArgs struct {
 	CountryCode *string `pulumi:"countryCode"`
 	// Email of the CAM user.
 	Email *string `pulumi:"email"`
-	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-	// otherwise the user will be deleted directly. Default is false.
+	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// Name of the CAM user.
 	Name *string `pulumi:"name"`
 	// Indicate whether the CAM user need to reset the password when first logins.
 	NeedResetPassword *bool `pulumi:"needResetPassword"`
-	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-	// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-	// set, a random password will be automatically generated.
+	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
 	Password *string `pulumi:"password"`
 	// Phone number of the CAM user.
 	PhoneNum *string `pulumi:"phoneNum"`
@@ -188,16 +219,13 @@ type UserArgs struct {
 	CountryCode pulumi.StringPtrInput
 	// Email of the CAM user.
 	Email pulumi.StringPtrInput
-	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-	// otherwise the user will be deleted directly. Default is false.
+	// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
 	ForceDelete pulumi.BoolPtrInput
 	// Name of the CAM user.
 	Name pulumi.StringPtrInput
 	// Indicate whether the CAM user need to reset the password when first logins.
 	NeedResetPassword pulumi.BoolPtrInput
-	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-	// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-	// set, a random password will be automatically generated.
+	// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
 	Password pulumi.StringPtrInput
 	// Phone number of the CAM user.
 	PhoneNum pulumi.StringPtrInput
@@ -311,8 +339,7 @@ func (o UserOutput) Email() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Email }).(pulumi.StringPtrOutput)
 }
 
-// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-// otherwise the user will be deleted directly. Default is false.
+// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
 func (o UserOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
@@ -327,9 +354,7 @@ func (o UserOutput) NeedResetPassword() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.BoolPtrOutput { return v.NeedResetPassword }).(pulumi.BoolPtrOutput)
 }
 
-// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-// set, a random password will be automatically generated.
+// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
 func (o UserOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
 }

@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a VPN customer gateway.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Vpn.CustomerGateway("foo", {
+ *     publicIpAddress: "1.1.1.1",
+ *     tags: {
+ *         tag: "test",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VPN customer gateway can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
+ * ```
+ */
 export class CustomerGateway extends pulumi.CustomResource {
     /**
      * Get an existing CustomerGateway resource's state with the given name, ID, and optional extra

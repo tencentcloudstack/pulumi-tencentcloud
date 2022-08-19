@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create SQL Server instance
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.sqlserver.Instance("foo", {
+ *     availabilityZone: _var.availability_zone,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: "vpc-409mvdvv",
+ *     subnetId: "subnet-nf9n81ps",
+ *     projectId: 123,
+ *     memory: 2,
+ *     storage: 100,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * SQL Server instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -33,8 +61,7 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
-     * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-     * instance.
+     * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
      */
     public readonly autoRenew!: pulumi.Output<number | undefined>;
     /**
@@ -54,9 +81,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-     * 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-     * Enterprise). Default is `2008R2`.
+     * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
      */
     public readonly engineVersion!: pulumi.Output<string | undefined>;
     /**
@@ -72,13 +97,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly maintenanceTimeSpan!: pulumi.Output<number>;
     /**
-     * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-     * Sunday.
+     * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
      */
     public readonly maintenanceWeekSets!: pulumi.Output<number[]>;
     /**
-     * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-     * provides.
+     * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
     public readonly memory!: pulumi.Output<number>;
     /**
@@ -98,8 +121,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number>;
     /**
-     * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-     * refers to an instance which is not read-only and has no RO group.
+     * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
      */
     public /*out*/ readonly roFlag!: pulumi.Output<string>;
     /**
@@ -107,14 +129,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly securityGroups!: pulumi.Output<string[] | undefined>;
     /**
-     * Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-     * recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-     * 12 for rebooting.
+     * Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
     /**
-     * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-     * `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+     * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
     public readonly storage!: pulumi.Output<number>;
     /**
@@ -224,8 +243,7 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
-     * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-     * instance.
+     * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
      */
     autoRenew?: pulumi.Input<number>;
     /**
@@ -245,9 +263,7 @@ export interface InstanceState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-     * 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-     * Enterprise). Default is `2008R2`.
+     * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
      */
     engineVersion?: pulumi.Input<string>;
     /**
@@ -263,13 +279,11 @@ export interface InstanceState {
      */
     maintenanceTimeSpan?: pulumi.Input<number>;
     /**
-     * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-     * Sunday.
+     * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
      */
     maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-     * provides.
+     * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
     memory?: pulumi.Input<number>;
     /**
@@ -289,8 +303,7 @@ export interface InstanceState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-     * refers to an instance which is not read-only and has no RO group.
+     * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
      */
     roFlag?: pulumi.Input<string>;
     /**
@@ -298,14 +311,11 @@ export interface InstanceState {
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-     * recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-     * 12 for rebooting.
+     * Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
      */
     status?: pulumi.Input<number>;
     /**
-     * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-     * `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+     * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
     storage?: pulumi.Input<number>;
     /**
@@ -339,8 +349,7 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-     * instance.
+     * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
      */
     autoRenew?: pulumi.Input<number>;
     /**
@@ -356,9 +365,7 @@ export interface InstanceArgs {
      */
     chargeType?: pulumi.Input<string>;
     /**
-     * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-     * 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-     * Enterprise). Default is `2008R2`.
+     * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
      */
     engineVersion?: pulumi.Input<string>;
     /**
@@ -374,13 +381,11 @@ export interface InstanceArgs {
      */
     maintenanceTimeSpan?: pulumi.Input<number>;
     /**
-     * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-     * Sunday.
+     * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
      */
     maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-     * provides.
+     * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
     memory: pulumi.Input<number>;
     /**
@@ -404,8 +409,7 @@ export interface InstanceArgs {
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-     * `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+     * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
     storage: pulumi.Input<number>;
     /**

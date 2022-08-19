@@ -4,6 +4,61 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CCN instance.
+ *
+ * ## Example Usage
+ *
+ * Create a prepaid CCN
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const main = new tencentcloud.Ccn.Instance("main", {
+ *     bandwidthLimitType: "INTER_REGION_LIMIT",
+ *     chargeType: "PREPAID",
+ *     description: "ci-temp-test-ccn-des",
+ *     qos: "AG",
+ * });
+ * ```
+ *
+ * Create a post-paid regional export speed limit type CCN
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const main = new tencentcloud.Ccn.Instance("main", {
+ *     bandwidthLimitType: "OUTER_REGION_LIMIT",
+ *     chargeType: "POSTPAID",
+ *     description: "ci-temp-test-ccn-des",
+ *     qos: "AG",
+ * });
+ * ```
+ *
+ * Create a post-paid inter-regional rate limit type CNN
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const main = new tencentcloud.Ccn.Instance("main", {
+ *     bandwidthLimitType: "INTER_REGION_LIMIT",
+ *     chargeType: "POSTPAID",
+ *     description: "ci-temp-test-ccn-des",
+ *     qos: "AG",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Ccn instance can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -33,15 +88,11 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
-     * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-     * regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-     * `OUTER_REGION_LIMIT`.
+     * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
      */
     public readonly bandwidthLimitType!: pulumi.Output<string | undefined>;
     /**
-     * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-     * `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-     * inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+     * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
@@ -117,15 +168,11 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
-     * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-     * regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-     * `OUTER_REGION_LIMIT`.
+     * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
      */
     bandwidthLimitType?: pulumi.Input<string>;
     /**
-     * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-     * `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-     * inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+     * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -163,15 +210,11 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-     * regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-     * `OUTER_REGION_LIMIT`.
+     * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
      */
     bandwidthLimitType?: pulumi.Input<string>;
     /**
-     * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-     * `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-     * inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+     * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
      */
     chargeType?: pulumi.Input<string>;
     /**

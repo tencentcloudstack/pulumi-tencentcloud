@@ -9,6 +9,17 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Redis
 {
+    /// <summary>
+    /// Provides a resource to create a Redis instance and set its attributes.
+    /// 
+    /// ## Import
+    /// 
+    /// Redis instance can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -25,9 +36,7 @@ namespace Pulumi.Tencentcloud.Redis
         public Output<string> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-        /// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-        /// new with new charge type.
+        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -39,8 +48,7 @@ namespace Pulumi.Tencentcloud.Redis
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-        /// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
@@ -52,9 +60,7 @@ namespace Pulumi.Tencentcloud.Redis
         public Output<string> Ip { get; private set; } = null!;
 
         /// <summary>
-        /// The memory volume of an available instance(in MB), please refer to
-        /// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-        /// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         /// </summary>
         [Output("memSize")]
         public Output<int> MemSize { get; private set; } = null!;
@@ -72,22 +78,19 @@ namespace Pulumi.Tencentcloud.Redis
         public Output<bool?> NoAuth { get; private set; } = null!;
 
         /// <summary>
-        /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-        /// empty.
+        /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
         [Output("password")]
         public Output<string?> Password { get; private set; } = null!;
 
         /// <summary>
-        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-        /// the Redis instance will be recreated.
+        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         /// </summary>
         [Output("port")]
         public Output<int?> Port { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Output("prepaidPeriod")]
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
@@ -117,10 +120,7 @@ namespace Pulumi.Tencentcloud.Redis
         public Output<ImmutableArray<int>> ReplicaZoneIds { get; private set; } = null!;
 
         /// <summary>
-        /// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-        /// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-        /// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-        /// recommended number of replicas &gt;=2.
+        /// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.
         /// </summary>
         [Output("replicasReadOnly")]
         public Output<bool> ReplicasReadOnly { get; private set; } = null!;
@@ -150,16 +150,13 @@ namespace Pulumi.Tencentcloud.Redis
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Instance type. Available values:
-        /// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-        /// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+        /// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `tencentcloud.Redis.getZoneConfig`.
         /// </summary>
         [Output("type")]
         public Output<string?> Type { get; private set; } = null!;
 
         /// <summary>
-        /// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-        /// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         /// </summary>
         [Output("typeId")]
         public Output<int?> TypeId { get; private set; } = null!;
@@ -229,24 +226,19 @@ namespace Pulumi.Tencentcloud.Redis
         public Input<string> AvailabilityZone { get; set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-        /// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-        /// new with new charge type.
+        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-        /// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The memory volume of an available instance(in MB), please refer to
-        /// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-        /// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         /// </summary>
         [Input("memSize", required: true)]
         public Input<int> MemSize { get; set; } = null!;
@@ -264,22 +256,19 @@ namespace Pulumi.Tencentcloud.Redis
         public Input<bool>? NoAuth { get; set; }
 
         /// <summary>
-        /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-        /// empty.
+        /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-        /// the Redis instance will be recreated.
+        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -315,10 +304,7 @@ namespace Pulumi.Tencentcloud.Redis
         }
 
         /// <summary>
-        /// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-        /// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-        /// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-        /// recommended number of replicas &gt;=2.
+        /// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.
         /// </summary>
         [Input("replicasReadOnly")]
         public Input<bool>? ReplicasReadOnly { get; set; }
@@ -354,16 +340,13 @@ namespace Pulumi.Tencentcloud.Redis
         }
 
         /// <summary>
-        /// Instance type. Available values:
-        /// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-        /// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+        /// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `tencentcloud.Redis.getZoneConfig`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-        /// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         /// </summary>
         [Input("typeId")]
         public Input<int>? TypeId { get; set; }
@@ -394,9 +377,7 @@ namespace Pulumi.Tencentcloud.Redis
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-        /// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-        /// new with new charge type.
+        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -408,8 +389,7 @@ namespace Pulumi.Tencentcloud.Redis
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-        /// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
@@ -421,9 +401,7 @@ namespace Pulumi.Tencentcloud.Redis
         public Input<string>? Ip { get; set; }
 
         /// <summary>
-        /// The memory volume of an available instance(in MB), please refer to
-        /// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-        /// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         /// </summary>
         [Input("memSize")]
         public Input<int>? MemSize { get; set; }
@@ -441,22 +419,19 @@ namespace Pulumi.Tencentcloud.Redis
         public Input<bool>? NoAuth { get; set; }
 
         /// <summary>
-        /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-        /// empty.
+        /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-        /// the Redis instance will be recreated.
+        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -492,10 +467,7 @@ namespace Pulumi.Tencentcloud.Redis
         }
 
         /// <summary>
-        /// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-        /// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-        /// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-        /// recommended number of replicas &gt;=2.
+        /// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.
         /// </summary>
         [Input("replicasReadOnly")]
         public Input<bool>? ReplicasReadOnly { get; set; }
@@ -537,16 +509,13 @@ namespace Pulumi.Tencentcloud.Redis
         }
 
         /// <summary>
-        /// Instance type. Available values:
-        /// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-        /// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+        /// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `tencentcloud.Redis.getZoneConfig`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-        /// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         /// </summary>
         [Input("typeId")]
         public Input<int>? TypeId { get; set; }

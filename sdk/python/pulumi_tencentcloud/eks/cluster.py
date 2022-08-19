@@ -476,7 +476,54 @@ class Cluster(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Cluster resource with the given unique name, props, and options.
+        Provides an elastic kubernetes cluster resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.2.0.0/16")
+        sub = tencentcloud.subnet.Instance("sub",
+            vpc_id=vpc.id,
+            cidr_block="10.2.11.0/24",
+            availability_zone="ap-guangzhou-3")
+        sub2 = tencentcloud.subnet.Instance("sub2",
+            vpc_id=vpc.id,
+            cidr_block="10.2.10.0/24",
+            availability_zone="ap-guangzhou-3")
+        foo = tencentcloud.eks.Cluster("foo",
+            cluster_name="tf-test-eks",
+            k8s_version="1.18.4",
+            vpc_id=vpc.id,
+            subnet_ids=[
+                sub.id,
+                sub2.id,
+            ],
+            cluster_desc="test eks cluster created by terraform",
+            service_subnet_id=sub.id,
+            dns_servers=[tencentcloud.eks.ClusterDnsServerArgs(
+                domain="www.example1.com",
+                servers=[
+                    "1.1.1.1:8080",
+                    "1.1.1.1:8081",
+                    "1.1.1.1:8082",
+                ],
+            )],
+            enable_vpc_core_dns=True,
+            need_delete_cbs=True,
+            tags={
+                "hello": "world",
+            })
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import tencentcloud:Eks/cluster:Cluster foo cluster-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_desc: Description of EKS cluster.
@@ -500,7 +547,54 @@ class Cluster(pulumi.CustomResource):
                  args: ClusterArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Cluster resource with the given unique name, props, and options.
+        Provides an elastic kubernetes cluster resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.2.0.0/16")
+        sub = tencentcloud.subnet.Instance("sub",
+            vpc_id=vpc.id,
+            cidr_block="10.2.11.0/24",
+            availability_zone="ap-guangzhou-3")
+        sub2 = tencentcloud.subnet.Instance("sub2",
+            vpc_id=vpc.id,
+            cidr_block="10.2.10.0/24",
+            availability_zone="ap-guangzhou-3")
+        foo = tencentcloud.eks.Cluster("foo",
+            cluster_name="tf-test-eks",
+            k8s_version="1.18.4",
+            vpc_id=vpc.id,
+            subnet_ids=[
+                sub.id,
+                sub2.id,
+            ],
+            cluster_desc="test eks cluster created by terraform",
+            service_subnet_id=sub.id,
+            dns_servers=[tencentcloud.eks.ClusterDnsServerArgs(
+                domain="www.example1.com",
+                servers=[
+                    "1.1.1.1:8080",
+                    "1.1.1.1:8081",
+                    "1.1.1.1:8082",
+                ],
+            )],
+            enable_vpc_core_dns=True,
+            need_delete_cbs=True,
+            tags={
+                "hello": "world",
+            })
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import tencentcloud:Eks/cluster:Cluster foo cluster-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

@@ -10,26 +10,26 @@ from .. import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['CCHttpsPolicyArgs', 'CCHttpsPolicy']
+__all__ = ['CcHttpsPolicyArgs', 'CcHttpsPolicy']
 
 @pulumi.input_type
-class CCHttpsPolicyArgs:
+class CcHttpsPolicyArgs:
     def __init__(__self__, *,
                  domain: pulumi.Input[str],
                  resource_id: pulumi.Input[str],
                  resource_type: pulumi.Input[str],
                  rule_id: pulumi.Input[str],
-                 rule_lists: pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]],
+                 rule_lists: pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]],
                  action: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[bool]] = None):
         """
-        The set of arguments for constructing a CCHttpsPolicy resource.
+        The set of arguments for constructing a CcHttpsPolicy resource.
         :param pulumi.Input[str] domain: Domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define https policy works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define https policy works for, valid value is `bgpip`.
         :param pulumi.Input[str] rule_id: Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
-        :param pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define https policy.
+        :param pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define https policy.
         :param pulumi.Input[str] action: Action mode. Valid values are `alg` and `drop`.
         :param pulumi.Input[str] name: Name of the CC self-define https policy. Length should between 1 and 20.
         :param pulumi.Input[bool] switch: Indicate the CC self-define https policy takes effect or not.
@@ -96,14 +96,14 @@ class CCHttpsPolicyArgs:
 
     @property
     @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]]:
+    def rule_lists(self) -> pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]]:
         """
         Rule list of the CC self-define https policy.
         """
         return pulumi.get(self, "rule_lists")
 
     @rule_lists.setter
-    def rule_lists(self, value: pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]]):
+    def rule_lists(self, value: pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]]):
         pulumi.set(self, "rule_lists", value)
 
     @property
@@ -144,7 +144,7 @@ class CCHttpsPolicyArgs:
 
 
 @pulumi.input_type
-class _CCHttpsPolicyState:
+class _CcHttpsPolicyState:
     def __init__(__self__, *,
                  action: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
@@ -155,10 +155,10 @@ class _CCHttpsPolicyState:
                  resource_id: Optional[pulumi.Input[str]] = None,
                  resource_type: Optional[pulumi.Input[str]] = None,
                  rule_id: Optional[pulumi.Input[str]] = None,
-                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]]] = None,
+                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]]] = None,
                  switch: Optional[pulumi.Input[bool]] = None):
         """
-        Input properties used for looking up and filtering CCHttpsPolicy resources.
+        Input properties used for looking up and filtering CcHttpsPolicy resources.
         :param pulumi.Input[str] action: Action mode. Valid values are `alg` and `drop`.
         :param pulumi.Input[str] create_time: Create time of the CC self-define https policy.
         :param pulumi.Input[str] domain: Domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
@@ -168,7 +168,7 @@ class _CCHttpsPolicyState:
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define https policy works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define https policy works for, valid value is `bgpip`.
         :param pulumi.Input[str] rule_id: Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
-        :param pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define https policy.
+        :param pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define https policy.
         :param pulumi.Input[bool] switch: Indicate the CC self-define https policy takes effect or not.
         """
         if action is not None:
@@ -304,14 +304,14 @@ class _CCHttpsPolicyState:
 
     @property
     @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]]]:
+    def rule_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]]]:
         """
         Rule list of the CC self-define https policy.
         """
         return pulumi.get(self, "rule_lists")
 
     @rule_lists.setter
-    def rule_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpsPolicyRuleListArgs']]]]):
+    def rule_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpsPolicyRuleListArgs']]]]):
         pulumi.set(self, "rule_lists", value)
 
     @property
@@ -327,7 +327,7 @@ class _CCHttpsPolicyState:
         pulumi.set(self, "switch", value)
 
 
-class CCHttpsPolicy(pulumi.CustomResource):
+class CcHttpsPolicy(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -338,11 +338,34 @@ class CCHttpsPolicy(pulumi.CustomResource):
                  resource_id: Optional[pulumi.Input[str]] = None,
                  resource_type: Optional[pulumi.Input[str]] = None,
                  rule_id: Optional[pulumi.Input[str]] = None,
-                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpsPolicyRuleListArgs']]]]] = None,
+                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpsPolicyRuleListArgs']]]]] = None,
                  switch: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a CCHttpsPolicy resource with the given unique name, props, and options.
+        Use this resource to create a dayu CC self-define https policy
+
+        > **NOTE:** creating CC self-define https policy need a valid resource `Dayu.L7Rule`; The resource only support Anti-DDoS of resource type `bgpip`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_policy = tencentcloud.dayu.CcHttpsPolicy("testPolicy",
+            resource_type=tencentcloud_dayu_l7_rule["test_rule"]["resource_type"],
+            resource_id=tencentcloud_dayu_l7_rule["test_rule"]["resource_id"],
+            rule_id=tencentcloud_dayu_l7_rule["test_rule"]["rule_id"],
+            domain=tencentcloud_dayu_l7_rule["test_rule"]["domain"],
+            action="drop",
+            switch=True,
+            rule_lists=[tencentcloud.dayu.CcHttpsPolicyRuleListArgs(
+                skey="cgi",
+                operator="include",
+                value="123",
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] action: Action mode. Valid values are `alg` and `drop`.
@@ -351,24 +374,47 @@ class CCHttpsPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define https policy works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define https policy works for, valid value is `bgpip`.
         :param pulumi.Input[str] rule_id: Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpsPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define https policy.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpsPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define https policy.
         :param pulumi.Input[bool] switch: Indicate the CC self-define https policy takes effect or not.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: CCHttpsPolicyArgs,
+                 args: CcHttpsPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CCHttpsPolicy resource with the given unique name, props, and options.
+        Use this resource to create a dayu CC self-define https policy
+
+        > **NOTE:** creating CC self-define https policy need a valid resource `Dayu.L7Rule`; The resource only support Anti-DDoS of resource type `bgpip`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_policy = tencentcloud.dayu.CcHttpsPolicy("testPolicy",
+            resource_type=tencentcloud_dayu_l7_rule["test_rule"]["resource_type"],
+            resource_id=tencentcloud_dayu_l7_rule["test_rule"]["resource_id"],
+            rule_id=tencentcloud_dayu_l7_rule["test_rule"]["rule_id"],
+            domain=tencentcloud_dayu_l7_rule["test_rule"]["domain"],
+            action="drop",
+            switch=True,
+            rule_lists=[tencentcloud.dayu.CcHttpsPolicyRuleListArgs(
+                skey="cgi",
+                operator="include",
+                value="123",
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
-        :param CCHttpsPolicyArgs args: The arguments to use to populate this resource's properties.
+        :param CcHttpsPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(CCHttpsPolicyArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(CcHttpsPolicyArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -383,7 +429,7 @@ class CCHttpsPolicy(pulumi.CustomResource):
                  resource_id: Optional[pulumi.Input[str]] = None,
                  resource_type: Optional[pulumi.Input[str]] = None,
                  rule_id: Optional[pulumi.Input[str]] = None,
-                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpsPolicyRuleListArgs']]]]] = None,
+                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpsPolicyRuleListArgs']]]]] = None,
                  switch: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         if opts is None:
@@ -395,7 +441,7 @@ class CCHttpsPolicy(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = CCHttpsPolicyArgs.__new__(CCHttpsPolicyArgs)
+            __props__ = CcHttpsPolicyArgs.__new__(CcHttpsPolicyArgs)
 
             __props__.__dict__["action"] = action
             if domain is None and not opts.urn:
@@ -418,8 +464,8 @@ class CCHttpsPolicy(pulumi.CustomResource):
             __props__.__dict__["create_time"] = None
             __props__.__dict__["ip_lists"] = None
             __props__.__dict__["policy_id"] = None
-        super(CCHttpsPolicy, __self__).__init__(
-            'tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy',
+        super(CcHttpsPolicy, __self__).__init__(
+            'tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy',
             resource_name,
             __props__,
             opts)
@@ -437,10 +483,10 @@ class CCHttpsPolicy(pulumi.CustomResource):
             resource_id: Optional[pulumi.Input[str]] = None,
             resource_type: Optional[pulumi.Input[str]] = None,
             rule_id: Optional[pulumi.Input[str]] = None,
-            rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpsPolicyRuleListArgs']]]]] = None,
-            switch: Optional[pulumi.Input[bool]] = None) -> 'CCHttpsPolicy':
+            rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpsPolicyRuleListArgs']]]]] = None,
+            switch: Optional[pulumi.Input[bool]] = None) -> 'CcHttpsPolicy':
         """
-        Get an existing CCHttpsPolicy resource's state with the given name, id, and optional extra
+        Get an existing CcHttpsPolicy resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -455,12 +501,12 @@ class CCHttpsPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define https policy works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define https policy works for, valid value is `bgpip`.
         :param pulumi.Input[str] rule_id: Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpsPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define https policy.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpsPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define https policy.
         :param pulumi.Input[bool] switch: Indicate the CC self-define https policy takes effect or not.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _CCHttpsPolicyState.__new__(_CCHttpsPolicyState)
+        __props__ = _CcHttpsPolicyState.__new__(_CcHttpsPolicyState)
 
         __props__.__dict__["action"] = action
         __props__.__dict__["create_time"] = create_time
@@ -473,7 +519,7 @@ class CCHttpsPolicy(pulumi.CustomResource):
         __props__.__dict__["rule_id"] = rule_id
         __props__.__dict__["rule_lists"] = rule_lists
         __props__.__dict__["switch"] = switch
-        return CCHttpsPolicy(resource_name, opts=opts, __props__=__props__)
+        return CcHttpsPolicy(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
@@ -549,7 +595,7 @@ class CCHttpsPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> pulumi.Output[Sequence['outputs.CCHttpsPolicyRuleList']]:
+    def rule_lists(self) -> pulumi.Output[Sequence['outputs.CcHttpsPolicyRuleList']]:
         """
         Rule list of the CC self-define https policy.
         """

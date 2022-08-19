@@ -4,6 +4,81 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to attach API gateway usage plan to service.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const plan = new tencentcloud.apigateway.UsagePlan("plan", {
+ *     usagePlanName: "my_plan",
+ *     usagePlanDesc: "nice plan",
+ *     maxRequestNum: 100,
+ *     maxRequestNumPreSec: 10,
+ * });
+ * const service = new tencentcloud.apigateway.Service("service", {
+ *     serviceName: "niceservice",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const api = new tencentcloud.apigateway.Api("api", {
+ *     serviceId: service.id,
+ *     apiName: "hello_update",
+ *     apiDesc: "my hello api update",
+ *     authType: "SECRET",
+ *     protocol: "HTTP",
+ *     enableCors: true,
+ *     requestConfigPath: "/user/info",
+ *     requestConfigMethod: "POST",
+ *     requestParameters: [{
+ *         name: "email",
+ *         position: "QUERY",
+ *         type: "string",
+ *         desc: "your email please?",
+ *         defaultValue: "tom@qq.com",
+ *         required: true,
+ *     }],
+ *     serviceConfigType: "HTTP",
+ *     serviceConfigTimeout: 10,
+ *     serviceConfigUrl: "http://www.tencent.com",
+ *     serviceConfigPath: "/user",
+ *     serviceConfigMethod: "POST",
+ *     responseType: "XML",
+ *     responseSuccessExample: "<note>success</note>",
+ *     responseFailExample: "<note>fail</note>",
+ *     responseErrorCodes: [{
+ *         code: 10,
+ *         msg: "system error",
+ *         desc: "system error code",
+ *         convertedCode: -10,
+ *         needConvert: true,
+ *     }],
+ * });
+ * const attachService = new tencentcloud.apigateway.UsagePlanAttachment("attachService", {
+ *     usagePlanId: plan.id,
+ *     serviceId: service.id,
+ *     environment: "release",
+ *     bindType: "API",
+ *     apiId: api.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * API gateway usage plan attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
+ * ```
+ */
 export class UsagePlanAttachment extends pulumi.CustomResource {
     /**
      * Get an existing UsagePlanAttachment resource's state with the given name, ID, and optional extra
@@ -19,7 +94,7 @@ export class UsagePlanAttachment extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/usagePlanAttachment:UsagePlanAttachment';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment';
 
     /**
      * Returns true if the given object is an instance of UsagePlanAttachment.  This is designed to work even
@@ -33,7 +108,7 @@ export class UsagePlanAttachment extends pulumi.CustomResource {
     }
 
     /**
-     * ID of the API. This parameter will be required when `bind_type` is `API`.
+     * ID of the API. This parameter will be required when `bindType` is `API`.
      */
     public readonly apiId!: pulumi.Output<string | undefined>;
     /**
@@ -98,7 +173,7 @@ export class UsagePlanAttachment extends pulumi.CustomResource {
  */
 export interface UsagePlanAttachmentState {
     /**
-     * ID of the API. This parameter will be required when `bind_type` is `API`.
+     * ID of the API. This parameter will be required when `bindType` is `API`.
      */
     apiId?: pulumi.Input<string>;
     /**
@@ -124,7 +199,7 @@ export interface UsagePlanAttachmentState {
  */
 export interface UsagePlanAttachmentArgs {
     /**
-     * ID of the API. This parameter will be required when `bind_type` is `API`.
+     * ID of the API. This parameter will be required when `bindType` is `API`.
      */
     apiId?: pulumi.Input<string>;
     /**

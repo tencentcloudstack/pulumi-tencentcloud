@@ -11,10 +11,129 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides an elastic kubernetes service container instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		group, err := Security.GetGroups(ctx, nil, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		zone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "cvm",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		sub, err := Subnet.NewInstance(ctx, "sub", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zone.Zones[0].Name),
+// 			CidrBlock:        pulumi.String("10.0.0.0/24"),
+// 			VpcId:            vpc.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		cbs, err := Cbs.NewStorage(ctx, "cbs", &Cbs.StorageArgs{
+// 			AvailabilityZone: pulumi.String(zone.Zones[0].Name),
+// 			StorageName:      pulumi.String("cbs1"),
+// 			StorageSize:      pulumi.Int(10),
+// 			StorageType:      pulumi.String("CLOUD_PREMIUM"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Eks.NewContainerInstance(ctx, "eci1", &Eks.ContainerInstanceArgs{
+// 			VpcId:         vpc.ID(),
+// 			SubnetId:      sub.ID(),
+// 			Cpu:           pulumi.Float64(2),
+// 			CpuType:       pulumi.String("intel"),
+// 			RestartPolicy: pulumi.String("Always"),
+// 			Memory:        pulumi.Float64(4),
+// 			SecurityGroups: pulumi.StringArray{
+// 				pulumi.String(group.SecurityGroups[0].SecurityGroupId),
+// 			},
+// 			CbsVolumes: eks.ContainerInstanceCbsVolumeArray{
+// 				&eks.ContainerInstanceCbsVolumeArgs{
+// 					Name:   pulumi.String("vol1"),
+// 					DiskId: cbs.ID(),
+// 				},
+// 			},
+// 			Containers: eks.ContainerInstanceContainerArray{
+// 				&eks.ContainerInstanceContainerArgs{
+// 					Name:  pulumi.String("redis1"),
+// 					Image: pulumi.String("redis"),
+// 					LivenessProbe: &eks.ContainerInstanceContainerLivenessProbeArgs{
+// 						InitDelaySeconds: pulumi.Int(1),
+// 						TimeoutSeconds:   pulumi.Int(3),
+// 						PeriodSeconds:    pulumi.Int(11),
+// 						SuccessThreshold: pulumi.Int(1),
+// 						FailureThreshold: pulumi.Int(3),
+// 						HttpGetPath:      pulumi.String("/"),
+// 						HttpGetPort:      pulumi.Int(443),
+// 						HttpGetScheme:    pulumi.String("HTTPS"),
+// 					},
+// 					ReadinessProbe: &eks.ContainerInstanceContainerReadinessProbeArgs{
+// 						InitDelaySeconds: pulumi.Int(1),
+// 						TimeoutSeconds:   pulumi.Int(3),
+// 						PeriodSeconds:    pulumi.Int(10),
+// 						SuccessThreshold: pulumi.Int(1),
+// 						FailureThreshold: pulumi.Int(3),
+// 						TcpSocketPort:    pulumi.Int(81),
+// 					},
+// 				},
+// 				&eks.ContainerInstanceContainerArgs{
+// 					Name:  pulumi.String("nginx"),
+// 					Image: pulumi.String("nginx"),
+// 				},
+// 			},
+// 			InitContainers: eks.ContainerInstanceInitContainerArray{
+// 				&eks.ContainerInstanceInitContainerArgs{
+// 					Name:  pulumi.String("alpine"),
+// 					Image: pulumi.String("alpine:latest"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ```sh
+//  $ pulumi import tencentcloud:Eks/containerInstance:ContainerInstance foo container-instance-id
+// ```
 type ContainerInstance struct {
 	pulumi.CustomResourceState
 
-	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
 	AutoCreateEip pulumi.BoolPtrOutput `pulumi:"autoCreateEip"`
 	// ID of EIP which create automatically.
 	AutoCreateEipId pulumi.StringOutput `pulumi:"autoCreateEipId"`
@@ -26,8 +145,7 @@ type ContainerInstance struct {
 	Containers ContainerInstanceContainerArrayOutput `pulumi:"containers"`
 	// The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	Cpu pulumi.Float64Output `pulumi:"cpu"`
-	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-	// `intel` when `amd` sold out.
+	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
 	CpuType pulumi.StringPtrOutput `pulumi:"cpuType"`
 	// Container instance creation time.
 	CreatedTime pulumi.StringOutput `pulumi:"createdTime"`
@@ -39,15 +157,13 @@ type ContainerInstance struct {
 	DnsSearches pulumi.StringArrayOutput `pulumi:"dnsSearches"`
 	// EIP address.
 	EipAddress pulumi.StringOutput `pulumi:"eipAddress"`
-	// Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+	// Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
 	EipDeletePolicy pulumi.BoolPtrOutput `pulumi:"eipDeletePolicy"`
-	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-	// `existed_eip_ids`.
+	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
 	EipMaxBandwidthOut pulumi.IntPtrOutput `pulumi:"eipMaxBandwidthOut"`
-	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-	// `existed_eip_ids`.
+	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
 	EipServiceProvider pulumi.StringPtrOutput `pulumi:"eipServiceProvider"`
-	// Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+	// Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
 	ExistedEipIds pulumi.StringArrayOutput `pulumi:"existedEipIds"`
 	// Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	GpuCount pulumi.IntPtrOutput `pulumi:"gpuCount"`
@@ -124,7 +240,7 @@ func GetContainerInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ContainerInstance resources.
 type containerInstanceState struct {
-	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
 	AutoCreateEip *bool `pulumi:"autoCreateEip"`
 	// ID of EIP which create automatically.
 	AutoCreateEipId *string `pulumi:"autoCreateEipId"`
@@ -136,8 +252,7 @@ type containerInstanceState struct {
 	Containers []ContainerInstanceContainer `pulumi:"containers"`
 	// The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	Cpu *float64 `pulumi:"cpu"`
-	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-	// `intel` when `amd` sold out.
+	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
 	CpuType *string `pulumi:"cpuType"`
 	// Container instance creation time.
 	CreatedTime *string `pulumi:"createdTime"`
@@ -149,15 +264,13 @@ type containerInstanceState struct {
 	DnsSearches []string `pulumi:"dnsSearches"`
 	// EIP address.
 	EipAddress *string `pulumi:"eipAddress"`
-	// Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+	// Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
 	EipDeletePolicy *bool `pulumi:"eipDeletePolicy"`
-	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-	// `existed_eip_ids`.
+	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
 	EipMaxBandwidthOut *int `pulumi:"eipMaxBandwidthOut"`
-	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-	// `existed_eip_ids`.
+	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
 	EipServiceProvider *string `pulumi:"eipServiceProvider"`
-	// Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+	// Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
 	ExistedEipIds []string `pulumi:"existedEipIds"`
 	// Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	GpuCount *int `pulumi:"gpuCount"`
@@ -188,7 +301,7 @@ type containerInstanceState struct {
 }
 
 type ContainerInstanceState struct {
-	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
 	AutoCreateEip pulumi.BoolPtrInput
 	// ID of EIP which create automatically.
 	AutoCreateEipId pulumi.StringPtrInput
@@ -200,8 +313,7 @@ type ContainerInstanceState struct {
 	Containers ContainerInstanceContainerArrayInput
 	// The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	Cpu pulumi.Float64PtrInput
-	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-	// `intel` when `amd` sold out.
+	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
 	CpuType pulumi.StringPtrInput
 	// Container instance creation time.
 	CreatedTime pulumi.StringPtrInput
@@ -213,15 +325,13 @@ type ContainerInstanceState struct {
 	DnsSearches pulumi.StringArrayInput
 	// EIP address.
 	EipAddress pulumi.StringPtrInput
-	// Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+	// Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
 	EipDeletePolicy pulumi.BoolPtrInput
-	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-	// `existed_eip_ids`.
+	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
 	EipMaxBandwidthOut pulumi.IntPtrInput
-	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-	// `existed_eip_ids`.
+	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
 	EipServiceProvider pulumi.StringPtrInput
-	// Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+	// Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
 	ExistedEipIds pulumi.StringArrayInput
 	// Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	GpuCount pulumi.IntPtrInput
@@ -256,7 +366,7 @@ func (ContainerInstanceState) ElementType() reflect.Type {
 }
 
 type containerInstanceArgs struct {
-	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
 	AutoCreateEip *bool `pulumi:"autoCreateEip"`
 	// CAM role name authorized to access.
 	CamRoleName *string `pulumi:"camRoleName"`
@@ -266,8 +376,7 @@ type containerInstanceArgs struct {
 	Containers []ContainerInstanceContainer `pulumi:"containers"`
 	// The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	Cpu float64 `pulumi:"cpu"`
-	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-	// `intel` when `amd` sold out.
+	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
 	CpuType *string `pulumi:"cpuType"`
 	// Map of DNS config options.
 	DnsConfigOptions map[string]interface{} `pulumi:"dnsConfigOptions"`
@@ -275,15 +384,13 @@ type containerInstanceArgs struct {
 	DnsNamesServers []string `pulumi:"dnsNamesServers"`
 	// List of DNS Search Domain.
 	DnsSearches []string `pulumi:"dnsSearches"`
-	// Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+	// Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
 	EipDeletePolicy *bool `pulumi:"eipDeletePolicy"`
-	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-	// `existed_eip_ids`.
+	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
 	EipMaxBandwidthOut *int `pulumi:"eipMaxBandwidthOut"`
-	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-	// `existed_eip_ids`.
+	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
 	EipServiceProvider *string `pulumi:"eipServiceProvider"`
-	// Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+	// Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
 	ExistedEipIds []string `pulumi:"existedEipIds"`
 	// Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	GpuCount *int `pulumi:"gpuCount"`
@@ -311,7 +418,7 @@ type containerInstanceArgs struct {
 
 // The set of arguments for constructing a ContainerInstance resource.
 type ContainerInstanceArgs struct {
-	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+	// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
 	AutoCreateEip pulumi.BoolPtrInput
 	// CAM role name authorized to access.
 	CamRoleName pulumi.StringPtrInput
@@ -321,8 +428,7 @@ type ContainerInstanceArgs struct {
 	Containers ContainerInstanceContainerArrayInput
 	// The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	Cpu pulumi.Float64Input
-	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-	// `intel` when `amd` sold out.
+	// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
 	CpuType pulumi.StringPtrInput
 	// Map of DNS config options.
 	DnsConfigOptions pulumi.MapInput
@@ -330,15 +436,13 @@ type ContainerInstanceArgs struct {
 	DnsNamesServers pulumi.StringArrayInput
 	// List of DNS Search Domain.
 	DnsSearches pulumi.StringArrayInput
-	// Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+	// Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
 	EipDeletePolicy pulumi.BoolPtrInput
-	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-	// `existed_eip_ids`.
+	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
 	EipMaxBandwidthOut pulumi.IntPtrInput
-	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-	// `existed_eip_ids`.
+	// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
 	EipServiceProvider pulumi.StringPtrInput
-	// Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+	// Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
 	ExistedEipIds pulumi.StringArrayInput
 	// Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
 	GpuCount pulumi.IntPtrInput
@@ -451,7 +555,7 @@ func (o ContainerInstanceOutput) ToContainerInstanceOutputWithContext(ctx contex
 	return o
 }
 
-// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+// Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
 func (o ContainerInstanceOutput) AutoCreateEip() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.BoolPtrOutput { return v.AutoCreateEip }).(pulumi.BoolPtrOutput)
 }
@@ -481,8 +585,7 @@ func (o ContainerInstanceOutput) Cpu() pulumi.Float64Output {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.Float64Output { return v.Cpu }).(pulumi.Float64Output)
 }
 
-// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-// `intel` when `amd` sold out.
+// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
 func (o ContainerInstanceOutput) CpuType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.StringPtrOutput { return v.CpuType }).(pulumi.StringPtrOutput)
 }
@@ -512,24 +615,22 @@ func (o ContainerInstanceOutput) EipAddress() pulumi.StringOutput {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.StringOutput { return v.EipAddress }).(pulumi.StringOutput)
 }
 
-// Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+// Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
 func (o ContainerInstanceOutput) EipDeletePolicy() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.BoolPtrOutput { return v.EipDeletePolicy }).(pulumi.BoolPtrOutput)
 }
 
-// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-// `existed_eip_ids`.
+// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
 func (o ContainerInstanceOutput) EipMaxBandwidthOut() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.IntPtrOutput { return v.EipMaxBandwidthOut }).(pulumi.IntPtrOutput)
 }
 
-// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-// `existed_eip_ids`.
+// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
 func (o ContainerInstanceOutput) EipServiceProvider() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.StringPtrOutput { return v.EipServiceProvider }).(pulumi.StringPtrOutput)
 }
 
-// Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+// Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
 func (o ContainerInstanceOutput) ExistedEipIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ContainerInstance) pulumi.StringArrayOutput { return v.ExistedEipIds }).(pulumi.StringArrayOutput)
 }

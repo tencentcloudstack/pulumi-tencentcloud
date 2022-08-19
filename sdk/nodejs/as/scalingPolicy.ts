@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource for an AS (Auto scaling) policy.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const scalingPolicy = new tencentcloud.As.ScalingPolicy("scaling_policy", {
+ *     adjustmentType: "EXACT_CAPACITY",
+ *     adjustmentValue: 0,
+ *     comparisonOperator: "GREATER_THAN",
+ *     continuousTime: 10,
+ *     cooldown: 360,
+ *     metricName: "CPU_UTILIZATION",
+ *     period: 300,
+ *     policyName: "tf-as-scaling-policy",
+ *     scalingGroupId: "asg-n32ymck2",
+ *     statistic: "AVERAGE",
+ *     threshold: 80,
+ * });
+ * ```
+ */
 export class ScalingPolicy extends pulumi.CustomResource {
     /**
      * Get an existing ScalingPolicy resource's state with the given name, ID, and optional extra
@@ -33,19 +57,15 @@ export class ScalingPolicy extends pulumi.CustomResource {
     }
 
     /**
-     * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-     * `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+     * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
      */
     public readonly adjustmentType!: pulumi.Output<string>;
     /**
-     * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-     * increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-     * type, it defines an absolute number of the existing Auto Scaling group size.
+     * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
      */
     public readonly adjustmentValue!: pulumi.Output<number>;
     /**
-     * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-     * `EQUAL_TO` and `NOT_EQUAL_TO`.
+     * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
      */
     public readonly comparisonOperator!: pulumi.Output<string>;
     /**
@@ -57,8 +77,7 @@ export class ScalingPolicy extends pulumi.CustomResource {
      */
     public readonly cooldown!: pulumi.Output<number | undefined>;
     /**
-     * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-     * `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+     * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
      */
     public readonly metricName!: pulumi.Output<string>;
     /**
@@ -163,19 +182,15 @@ export class ScalingPolicy extends pulumi.CustomResource {
  */
 export interface ScalingPolicyState {
     /**
-     * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-     * `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+     * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
      */
     adjustmentType?: pulumi.Input<string>;
     /**
-     * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-     * increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-     * type, it defines an absolute number of the existing Auto Scaling group size.
+     * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
      */
     adjustmentValue?: pulumi.Input<number>;
     /**
-     * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-     * `EQUAL_TO` and `NOT_EQUAL_TO`.
+     * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
      */
     comparisonOperator?: pulumi.Input<string>;
     /**
@@ -187,8 +202,7 @@ export interface ScalingPolicyState {
      */
     cooldown?: pulumi.Input<number>;
     /**
-     * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-     * `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+     * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
      */
     metricName?: pulumi.Input<string>;
     /**
@@ -222,19 +236,15 @@ export interface ScalingPolicyState {
  */
 export interface ScalingPolicyArgs {
     /**
-     * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-     * `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+     * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
      */
     adjustmentType: pulumi.Input<string>;
     /**
-     * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-     * increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-     * type, it defines an absolute number of the existing Auto Scaling group size.
+     * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
      */
     adjustmentValue: pulumi.Input<number>;
     /**
-     * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-     * `EQUAL_TO` and `NOT_EQUAL_TO`.
+     * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
      */
     comparisonOperator: pulumi.Input<string>;
     /**
@@ -246,8 +256,7 @@ export interface ScalingPolicyArgs {
      */
     cooldown?: pulumi.Input<number>;
     /**
-     * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-     * `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+     * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
      */
     metricName: pulumi.Input<string>;
     /**

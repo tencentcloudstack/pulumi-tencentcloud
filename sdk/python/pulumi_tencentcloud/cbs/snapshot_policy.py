@@ -162,7 +162,32 @@ class SnapshotPolicy(pulumi.CustomResource):
                  snapshot_policy_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SnapshotPolicy resource with the given unique name, props, and options.
+        Provides a snapshot policy resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        snapshot_policy = tencentcloud.cbs.SnapshotPolicy("snapshotPolicy",
+            repeat_hours=[1],
+            repeat_weekdays=[
+                1,
+                4,
+            ],
+            retention_days=7,
+            snapshot_policy_name="mysnapshotpolicyname")
+        ```
+
+        ## Import
+
+        CBS snapshot policy can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] repeat_hours: Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
@@ -177,7 +202,32 @@ class SnapshotPolicy(pulumi.CustomResource):
                  args: SnapshotPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SnapshotPolicy resource with the given unique name, props, and options.
+        Provides a snapshot policy resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        snapshot_policy = tencentcloud.cbs.SnapshotPolicy("snapshotPolicy",
+            repeat_hours=[1],
+            repeat_weekdays=[
+                1,
+                4,
+            ],
+            retention_days=7,
+            snapshot_policy_name="mysnapshotpolicyname")
+        ```
+
+        ## Import
+
+        CBS snapshot policy can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+        ```
+
         :param str resource_name: The name of the resource.
         :param SnapshotPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

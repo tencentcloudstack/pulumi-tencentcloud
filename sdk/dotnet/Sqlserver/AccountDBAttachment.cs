@@ -9,8 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Sqlserver
 {
-    [TencentcloudResourceType("tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment")]
-    public partial class AccountDBAttachment : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create SQL Server account DB attachment
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Sqlserver.AccountDbAttachment("foo", new Tencentcloud.Sqlserver.AccountDbAttachmentArgs
+    ///         {
+    ///             InstanceId = "mssql-3cdq7kx5",
+    ///             AccountName = tencentcloud_sqlserver_account.Example.Name,
+    ///             DbName = tencentcloud_sqlserver_db.Example.Name,
+    ///             Privilege = "ReadWrite",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SQL Server account DB attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment")]
+    public partial class AccountDbAttachment : Pulumi.CustomResource
     {
         /// <summary>
         /// SQL Server account name.
@@ -38,19 +71,19 @@ namespace Pulumi.Tencentcloud.Sqlserver
 
 
         /// <summary>
-        /// Create a AccountDBAttachment resource with the given unique name, arguments, and options.
+        /// Create a AccountDbAttachment resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public AccountDBAttachment(string name, AccountDBAttachmentArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment", name, args ?? new AccountDBAttachmentArgs(), MakeResourceOptions(options, ""))
+        public AccountDbAttachment(string name, AccountDbAttachmentArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment", name, args ?? new AccountDbAttachmentArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private AccountDBAttachment(string name, Input<string> id, AccountDBAttachmentState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment", name, state, MakeResourceOptions(options, id))
+        private AccountDbAttachment(string name, Input<string> id, AccountDbAttachmentState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -66,7 +99,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
             return merged;
         }
         /// <summary>
-        /// Get an existing AccountDBAttachment resource's state with the given name, ID, and optional extra
+        /// Get an existing AccountDbAttachment resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -74,13 +107,13 @@ namespace Pulumi.Tencentcloud.Sqlserver
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static AccountDBAttachment Get(string name, Input<string> id, AccountDBAttachmentState? state = null, CustomResourceOptions? options = null)
+        public static AccountDbAttachment Get(string name, Input<string> id, AccountDbAttachmentState? state = null, CustomResourceOptions? options = null)
         {
-            return new AccountDBAttachment(name, id, state, options);
+            return new AccountDbAttachment(name, id, state, options);
         }
     }
 
-    public sealed class AccountDBAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AccountDbAttachmentArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// SQL Server account name.
@@ -106,12 +139,12 @@ namespace Pulumi.Tencentcloud.Sqlserver
         [Input("privilege", required: true)]
         public Input<string> Privilege { get; set; } = null!;
 
-        public AccountDBAttachmentArgs()
+        public AccountDbAttachmentArgs()
         {
         }
     }
 
-    public sealed class AccountDBAttachmentState : Pulumi.ResourceArgs
+    public sealed class AccountDbAttachmentState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// SQL Server account name.
@@ -137,7 +170,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         [Input("privilege")]
         public Input<string>? Privilege { get; set; }
 
-        public AccountDBAttachmentState()
+        public AccountDbAttachmentState()
         {
         }
     }

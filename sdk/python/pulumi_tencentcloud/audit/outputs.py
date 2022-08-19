@@ -9,45 +9,65 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'CosRegionsAuditCosRegionListResult',
-    'KeyAliasAuditKeyAliasListResult',
+    'GetCosRegionsAuditCosRegionListResult',
+    'GetKeyAliasAuditKeyAliasListResult',
 ]
 
 @pulumi.output_type
-class CosRegionsAuditCosRegionListResult(dict):
+class GetCosRegionsAuditCosRegionListResult(dict):
     def __init__(__self__, *,
                  cos_region: str,
                  cos_region_name: str):
+        """
+        :param str cos_region: Cos region.
+        :param str cos_region_name: Cos region chinese name.
+        """
         pulumi.set(__self__, "cos_region", cos_region)
         pulumi.set(__self__, "cos_region_name", cos_region_name)
 
     @property
     @pulumi.getter(name="cosRegion")
     def cos_region(self) -> str:
+        """
+        Cos region.
+        """
         return pulumi.get(self, "cos_region")
 
     @property
     @pulumi.getter(name="cosRegionName")
     def cos_region_name(self) -> str:
+        """
+        Cos region chinese name.
+        """
         return pulumi.get(self, "cos_region_name")
 
 
 @pulumi.output_type
-class KeyAliasAuditKeyAliasListResult(dict):
+class GetKeyAliasAuditKeyAliasListResult(dict):
     def __init__(__self__, *,
                  key_alias: str,
                  key_id: str):
+        """
+        :param str key_alias: Key alias.
+        :param str key_id: Key ID.
+        """
         pulumi.set(__self__, "key_alias", key_alias)
         pulumi.set(__self__, "key_id", key_id)
 
     @property
     @pulumi.getter(name="keyAlias")
     def key_alias(self) -> str:
+        """
+        Key alias.
+        """
         return pulumi.get(self, "key_alias")
 
     @property
     @pulumi.getter(name="keyId")
     def key_id(self) -> str:
+        """
+        Key ID.
+        """
         return pulumi.get(self, "key_id")
 
 

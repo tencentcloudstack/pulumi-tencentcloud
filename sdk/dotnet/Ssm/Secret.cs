@@ -9,6 +9,43 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Ssm
 {
+    /// <summary>
+    /// Provide a resource to create a SSM secret.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Ssm.Secret("foo", new Tencentcloud.Ssm.SecretArgs
+    ///         {
+    ///             Description = "test secret",
+    ///             IsEnabled = true,
+    ///             RecoveryWindowInDays = 0,
+    ///             SecretName = "test",
+    ///             Tags = 
+    ///             {
+    ///                 { "test-tag", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SSM secret can be imported using the secretName, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/secret:Secret")]
     public partial class Secret : Pulumi.CustomResource
     {
@@ -25,22 +62,19 @@ namespace Pulumi.Tencentcloud.Ssm
         public Output<bool?> IsEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-        /// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        /// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         /// </summary>
         [Output("kmsKeyId")]
         public Output<string> KmsKeyId { get; private set; } = null!;
 
         /// <summary>
-        /// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-        /// days reserved, completely deleted after this date.
+        /// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         /// </summary>
         [Output("recoveryWindowInDays")]
         public Output<int?> RecoveryWindowInDays { get; private set; } = null!;
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        /// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Output("secretName")]
         public Output<string> SecretName { get; private set; } = null!;
@@ -116,22 +150,19 @@ namespace Pulumi.Tencentcloud.Ssm
         public Input<bool>? IsEnabled { get; set; }
 
         /// <summary>
-        /// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-        /// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        /// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         /// </summary>
         [Input("kmsKeyId")]
         public Input<string>? KmsKeyId { get; set; }
 
         /// <summary>
-        /// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-        /// days reserved, completely deleted after this date.
+        /// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         /// </summary>
         [Input("recoveryWindowInDays")]
         public Input<int>? RecoveryWindowInDays { get; set; }
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        /// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("secretName", required: true)]
         public Input<string> SecretName { get; set; } = null!;
@@ -168,22 +199,19 @@ namespace Pulumi.Tencentcloud.Ssm
         public Input<bool>? IsEnabled { get; set; }
 
         /// <summary>
-        /// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-        /// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        /// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         /// </summary>
         [Input("kmsKeyId")]
         public Input<string>? KmsKeyId { get; set; }
 
         /// <summary>
-        /// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-        /// days reserved, completely deleted after this date.
+        /// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         /// </summary>
         [Input("recoveryWindowInDays")]
         public Input<int>? RecoveryWindowInDays { get; set; }
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        /// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("secretName")]
         public Input<string>? SecretName { get; set; }

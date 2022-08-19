@@ -17,29 +17,37 @@ __all__ = [
     'AlarmPolicyEventConditionFilter',
     'AlarmPolicyPolicyTag',
     'AlarmPolicyTriggerTask',
-    'BindingAlarmReceiverReceivers',
-    'BindingObjectDimension',
-    'BindingObjectsListResult',
-    'DataDimensionResult',
-    'DataListResult',
+    'BindingReceiverReceivers',
     'PolicyBindingObjectDimension',
-    'PolicyConditionsListResult',
-    'PolicyConditionsListEventMetricResult',
-    'PolicyConditionsListMetricResult',
-    'PolicyGroupBindingObject',
-    'PolicyGroupCondition',
-    'PolicyGroupEventCondition',
-    'PolicyGroupReceiver',
-    'PolicyGroupsListResult',
-    'PolicyGroupsListConditionResult',
-    'PolicyGroupsListEventConditionResult',
-    'PolicyGroupsListReceiverResult',
-    'ProductEventDimensionResult',
-    'ProductEventListResult',
-    'ProductEventListAdditionMsgResult',
-    'ProductEventListDimensionResult',
-    'ProductEventListGroupInfoResult',
-    'ProductNamespaceListResult',
+    'TmpAlertRuleAnnotation',
+    'TmpAlertRuleLabel',
+    'TmpTkeAlertPolicyAlertRule',
+    'TmpTkeAlertPolicyAlertRuleNotification',
+    'TmpTkeAlertPolicyAlertRuleNotificationAlertManager',
+    'TmpTkeAlertPolicyAlertRuleRule',
+    'TmpTkeAlertPolicyAlertRuleRuleAnnotation',
+    'TmpTkeAlertPolicyAlertRuleRuleLabel',
+    'TmpTkeTemplateTemplate',
+    'TmpTkeTemplateTemplatePodMonitor',
+    'TmpTkeTemplateTemplateRawJob',
+    'TmpTkeTemplateTemplateRecordRule',
+    'TmpTkeTemplateTemplateServiceMonitor',
+    'GetBindingObjectsListResult',
+    'GetDataDimensionResult',
+    'GetDataListResult',
+    'GetPolicyConditionsListResult',
+    'GetPolicyConditionsListEventMetricResult',
+    'GetPolicyConditionsListMetricResult',
+    'GetPolicyGroupsListResult',
+    'GetPolicyGroupsListConditionResult',
+    'GetPolicyGroupsListEventConditionResult',
+    'GetPolicyGroupsListReceiverResult',
+    'GetProductEventDimensionResult',
+    'GetProductEventListResult',
+    'GetProductEventListAdditionMsgResult',
+    'GetProductEventListDimensionResult',
+    'GetProductEventListGroupInfoResult',
+    'GetProductNamespaceListResult',
 ]
 
 @pulumi.output_type
@@ -64,6 +72,10 @@ class AlarmPolicyConditions(dict):
     def __init__(__self__, *,
                  is_union_rule: Optional[int] = None,
                  rules: Optional[Sequence['outputs.AlarmPolicyConditionsRule']] = None):
+        """
+        :param int is_union_rule: The and or relation of indicator alarm rule.
+        :param Sequence['AlarmPolicyConditionsRuleArgs'] rules: A list of metric trigger condition.
+        """
         if is_union_rule is not None:
             pulumi.set(__self__, "is_union_rule", is_union_rule)
         if rules is not None:
@@ -72,11 +84,17 @@ class AlarmPolicyConditions(dict):
     @property
     @pulumi.getter(name="isUnionRule")
     def is_union_rule(self) -> Optional[int]:
+        """
+        The and or relation of indicator alarm rule.
+        """
         return pulumi.get(self, "is_union_rule")
 
     @property
     @pulumi.getter
     def rules(self) -> Optional[Sequence['outputs.AlarmPolicyConditionsRule']]:
+        """
+        A list of metric trigger condition.
+        """
         return pulumi.get(self, "rules")
 
 
@@ -119,6 +137,19 @@ class AlarmPolicyConditionsRule(dict):
                  rule_type: Optional[str] = None,
                  unit: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param int continue_period: Number of periods.
+        :param str description: Metric display name, which is used in the output parameter.
+        :param 'AlarmPolicyConditionsRuleFilterArgs' filter: Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        :param int is_power_notice: Whether the alarm frequency increases exponentially.
+        :param str metric_name: Metric name or event name.
+        :param int notice_frequency: Alarm interval in seconds.
+        :param str operator: Operator.
+        :param int period: Statistical period in seconds.
+        :param str rule_type: Trigger condition type.
+        :param str unit: Unit, which is used in the output parameter.
+        :param str value: Threshold.
+        """
         if continue_period is not None:
             pulumi.set(__self__, "continue_period", continue_period)
         if description is not None:
@@ -145,56 +176,89 @@ class AlarmPolicyConditionsRule(dict):
     @property
     @pulumi.getter(name="continuePeriod")
     def continue_period(self) -> Optional[int]:
+        """
+        Number of periods.
+        """
         return pulumi.get(self, "continue_period")
 
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
+        """
+        Metric display name, which is used in the output parameter.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def filter(self) -> Optional['outputs.AlarmPolicyConditionsRuleFilter']:
+        """
+        Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        """
         return pulumi.get(self, "filter")
 
     @property
     @pulumi.getter(name="isPowerNotice")
     def is_power_notice(self) -> Optional[int]:
+        """
+        Whether the alarm frequency increases exponentially.
+        """
         return pulumi.get(self, "is_power_notice")
 
     @property
     @pulumi.getter(name="metricName")
     def metric_name(self) -> Optional[str]:
+        """
+        Metric name or event name.
+        """
         return pulumi.get(self, "metric_name")
 
     @property
     @pulumi.getter(name="noticeFrequency")
     def notice_frequency(self) -> Optional[int]:
+        """
+        Alarm interval in seconds.
+        """
         return pulumi.get(self, "notice_frequency")
 
     @property
     @pulumi.getter
     def operator(self) -> Optional[str]:
+        """
+        Operator.
+        """
         return pulumi.get(self, "operator")
 
     @property
     @pulumi.getter
     def period(self) -> Optional[int]:
+        """
+        Statistical period in seconds.
+        """
         return pulumi.get(self, "period")
 
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> Optional[str]:
+        """
+        Trigger condition type.
+        """
         return pulumi.get(self, "rule_type")
 
     @property
     @pulumi.getter
     def unit(self) -> Optional[str]:
+        """
+        Unit, which is used in the output parameter.
+        """
         return pulumi.get(self, "unit")
 
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        Threshold.
+        """
         return pulumi.get(self, "value")
 
 
@@ -203,6 +267,10 @@ class AlarmPolicyConditionsRuleFilter(dict):
     def __init__(__self__, *,
                  dimensions: Optional[str] = None,
                  type: Optional[str] = None):
+        """
+        :param str dimensions: JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        :param str type: Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         if dimensions is not None:
             pulumi.set(__self__, "dimensions", dimensions)
         if type is not None:
@@ -211,11 +279,17 @@ class AlarmPolicyConditionsRuleFilter(dict):
     @property
     @pulumi.getter
     def dimensions(self) -> Optional[str]:
+        """
+        JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        """
         return pulumi.get(self, "dimensions")
 
     @property
     @pulumi.getter
     def type(self) -> Optional[str]:
+        """
+        Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         return pulumi.get(self, "type")
 
 
@@ -258,6 +332,19 @@ class AlarmPolicyEventCondition(dict):
                  rule_type: Optional[str] = None,
                  unit: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param int continue_period: Number of periods.
+        :param str description: Metric display name, which is used in the output parameter.
+        :param 'AlarmPolicyEventConditionFilterArgs' filter: Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        :param int is_power_notice: Whether the alarm frequency increases exponentially.
+        :param str metric_name: Metric name or event name.
+        :param int notice_frequency: Alarm interval in seconds.
+        :param str operator: Operator.
+        :param int period: Statistical period in seconds.
+        :param str rule_type: Trigger condition type.
+        :param str unit: Unit, which is used in the output parameter.
+        :param str value: Threshold.
+        """
         if continue_period is not None:
             pulumi.set(__self__, "continue_period", continue_period)
         if description is not None:
@@ -284,56 +371,89 @@ class AlarmPolicyEventCondition(dict):
     @property
     @pulumi.getter(name="continuePeriod")
     def continue_period(self) -> Optional[int]:
+        """
+        Number of periods.
+        """
         return pulumi.get(self, "continue_period")
 
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
+        """
+        Metric display name, which is used in the output parameter.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def filter(self) -> Optional['outputs.AlarmPolicyEventConditionFilter']:
+        """
+        Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        """
         return pulumi.get(self, "filter")
 
     @property
     @pulumi.getter(name="isPowerNotice")
     def is_power_notice(self) -> Optional[int]:
+        """
+        Whether the alarm frequency increases exponentially.
+        """
         return pulumi.get(self, "is_power_notice")
 
     @property
     @pulumi.getter(name="metricName")
     def metric_name(self) -> Optional[str]:
+        """
+        Metric name or event name.
+        """
         return pulumi.get(self, "metric_name")
 
     @property
     @pulumi.getter(name="noticeFrequency")
     def notice_frequency(self) -> Optional[int]:
+        """
+        Alarm interval in seconds.
+        """
         return pulumi.get(self, "notice_frequency")
 
     @property
     @pulumi.getter
     def operator(self) -> Optional[str]:
+        """
+        Operator.
+        """
         return pulumi.get(self, "operator")
 
     @property
     @pulumi.getter
     def period(self) -> Optional[int]:
+        """
+        Statistical period in seconds.
+        """
         return pulumi.get(self, "period")
 
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> Optional[str]:
+        """
+        Trigger condition type.
+        """
         return pulumi.get(self, "rule_type")
 
     @property
     @pulumi.getter
     def unit(self) -> Optional[str]:
+        """
+        Unit, which is used in the output parameter.
+        """
         return pulumi.get(self, "unit")
 
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        Threshold.
+        """
         return pulumi.get(self, "value")
 
 
@@ -342,6 +462,10 @@ class AlarmPolicyEventConditionFilter(dict):
     def __init__(__self__, *,
                  dimensions: Optional[str] = None,
                  type: Optional[str] = None):
+        """
+        :param str dimensions: JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        :param str type: Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         if dimensions is not None:
             pulumi.set(__self__, "dimensions", dimensions)
         if type is not None:
@@ -350,11 +474,17 @@ class AlarmPolicyEventConditionFilter(dict):
     @property
     @pulumi.getter
     def dimensions(self) -> Optional[str]:
+        """
+        JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        """
         return pulumi.get(self, "dimensions")
 
     @property
     @pulumi.getter
     def type(self) -> Optional[str]:
+        """
+        Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         return pulumi.get(self, "type")
 
 
@@ -363,17 +493,27 @@ class AlarmPolicyPolicyTag(dict):
     def __init__(__self__, *,
                  key: str,
                  value: str):
+        """
+        :param str key: Tag key.
+        :param str value: Tag value.
+        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "value", value)
 
     @property
     @pulumi.getter
     def key(self) -> str:
+        """
+        Tag key.
+        """
         return pulumi.get(self, "key")
 
     @property
     @pulumi.getter
     def value(self) -> str:
+        """
+        Tag value.
+        """
         return pulumi.get(self, "value")
 
 
@@ -399,22 +539,32 @@ class AlarmPolicyTriggerTask(dict):
     def __init__(__self__, *,
                  task_config: str,
                  type: str):
+        """
+        :param str task_config: Configuration information in JSON format.
+        :param str type: Triggered task type.
+        """
         pulumi.set(__self__, "task_config", task_config)
         pulumi.set(__self__, "type", type)
 
     @property
     @pulumi.getter(name="taskConfig")
     def task_config(self) -> str:
+        """
+        Configuration information in JSON format.
+        """
         return pulumi.get(self, "task_config")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Triggered task type.
+        """
         return pulumi.get(self, "type")
 
 
 @pulumi.output_type
-class BindingAlarmReceiverReceivers(dict):
+class BindingReceiverReceivers(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -434,14 +584,14 @@ class BindingAlarmReceiverReceivers(dict):
             suggest = "start_time"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in BindingAlarmReceiverReceivers. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in BindingReceiverReceivers. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        BindingAlarmReceiverReceivers.__key_warning(key)
+        BindingReceiverReceivers.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        BindingAlarmReceiverReceivers.__key_warning(key)
+        BindingReceiverReceivers.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -452,6 +602,15 @@ class BindingAlarmReceiverReceivers(dict):
                  receiver_group_lists: Optional[Sequence[int]] = None,
                  receiver_user_lists: Optional[Sequence[int]] = None,
                  start_time: Optional[int] = None):
+        """
+        :param Sequence[str] notify_ways: Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+        :param str receiver_type: Receive type. Optional `group`,`user`.
+        :param int end_time: End of alarm period. Meaning with `start_time`.
+        :param str receive_language: Alert sending language. Optional `en-US`,`zh-CN`.
+        :param Sequence[int] receiver_group_lists: Alarm receive group ID list.
+        :param Sequence[int] receiver_user_lists: Alarm receiver ID list.
+        :param int start_time: Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+        """
         pulumi.set(__self__, "notify_ways", notify_ways)
         pulumi.set(__self__, "receiver_type", receiver_type)
         if end_time is not None:
@@ -468,147 +627,58 @@ class BindingAlarmReceiverReceivers(dict):
     @property
     @pulumi.getter(name="notifyWays")
     def notify_ways(self) -> Sequence[str]:
+        """
+        Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+        """
         return pulumi.get(self, "notify_ways")
 
     @property
     @pulumi.getter(name="receiverType")
     def receiver_type(self) -> str:
+        """
+        Receive type. Optional `group`,`user`.
+        """
         return pulumi.get(self, "receiver_type")
 
     @property
     @pulumi.getter(name="endTime")
     def end_time(self) -> Optional[int]:
+        """
+        End of alarm period. Meaning with `start_time`.
+        """
         return pulumi.get(self, "end_time")
 
     @property
     @pulumi.getter(name="receiveLanguage")
     def receive_language(self) -> Optional[str]:
+        """
+        Alert sending language. Optional `en-US`,`zh-CN`.
+        """
         return pulumi.get(self, "receive_language")
 
     @property
     @pulumi.getter(name="receiverGroupLists")
     def receiver_group_lists(self) -> Optional[Sequence[int]]:
+        """
+        Alarm receive group ID list.
+        """
         return pulumi.get(self, "receiver_group_lists")
 
     @property
     @pulumi.getter(name="receiverUserLists")
     def receiver_user_lists(self) -> Optional[Sequence[int]]:
+        """
+        Alarm receiver ID list.
+        """
         return pulumi.get(self, "receiver_user_lists")
 
     @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[int]:
+        """
+        Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+        """
         return pulumi.get(self, "start_time")
-
-
-@pulumi.output_type
-class BindingObjectDimension(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "dimensionsJson":
-            suggest = "dimensions_json"
-        elif key == "uniqueId":
-            suggest = "unique_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in BindingObjectDimension. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        BindingObjectDimension.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        BindingObjectDimension.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 dimensions_json: str,
-                 unique_id: Optional[str] = None):
-        pulumi.set(__self__, "dimensions_json", dimensions_json)
-        if unique_id is not None:
-            pulumi.set(__self__, "unique_id", unique_id)
-
-    @property
-    @pulumi.getter(name="dimensionsJson")
-    def dimensions_json(self) -> str:
-        return pulumi.get(self, "dimensions_json")
-
-    @property
-    @pulumi.getter(name="uniqueId")
-    def unique_id(self) -> Optional[str]:
-        return pulumi.get(self, "unique_id")
-
-
-@pulumi.output_type
-class BindingObjectsListResult(dict):
-    def __init__(__self__, *,
-                 dimensions_json: str,
-                 is_shielded: int,
-                 region: str,
-                 unique_id: str):
-        pulumi.set(__self__, "dimensions_json", dimensions_json)
-        pulumi.set(__self__, "is_shielded", is_shielded)
-        pulumi.set(__self__, "region", region)
-        pulumi.set(__self__, "unique_id", unique_id)
-
-    @property
-    @pulumi.getter(name="dimensionsJson")
-    def dimensions_json(self) -> str:
-        return pulumi.get(self, "dimensions_json")
-
-    @property
-    @pulumi.getter(name="isShielded")
-    def is_shielded(self) -> int:
-        return pulumi.get(self, "is_shielded")
-
-    @property
-    @pulumi.getter
-    def region(self) -> str:
-        return pulumi.get(self, "region")
-
-    @property
-    @pulumi.getter(name="uniqueId")
-    def unique_id(self) -> str:
-        return pulumi.get(self, "unique_id")
-
-
-@pulumi.output_type
-class DataDimensionResult(dict):
-    def __init__(__self__, *,
-                 name: str,
-                 value: str):
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def value(self) -> str:
-        return pulumi.get(self, "value")
-
-
-@pulumi.output_type
-class DataListResult(dict):
-    def __init__(__self__, *,
-                 timestamp: int,
-                 value: float):
-        pulumi.set(__self__, "timestamp", timestamp)
-        pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def timestamp(self) -> int:
-        return pulumi.get(self, "timestamp")
-
-    @property
-    @pulumi.getter
-    def value(self) -> float:
-        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -635,6 +705,9 @@ class PolicyBindingObjectDimension(dict):
     def __init__(__self__, *,
                  dimensions_json: str,
                  unique_id: Optional[str] = None):
+        """
+        :param str dimensions_json: Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
+        """
         pulumi.set(__self__, "dimensions_json", dimensions_json)
         if unique_id is not None:
             pulumi.set(__self__, "unique_id", unique_id)
@@ -642,6 +715,9 @@ class PolicyBindingObjectDimension(dict):
     @property
     @pulumi.getter(name="dimensionsJson")
     def dimensions_json(self) -> str:
+        """
+        Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
+        """
         return pulumi.get(self, "dimensions_json")
 
     @property
@@ -651,14 +727,1145 @@ class PolicyBindingObjectDimension(dict):
 
 
 @pulumi.output_type
-class PolicyConditionsListResult(dict):
+class TmpAlertRuleAnnotation(dict):
     def __init__(__self__, *,
-                 event_metrics: Sequence['outputs.PolicyConditionsListEventMetricResult'],
+                 key: str,
+                 value: str):
+        """
+        :param str key: key.
+        :param str value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class TmpAlertRuleLabel(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: key.
+        :param str value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class TmpTkeAlertPolicyAlertRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "clusterId":
+            suggest = "cluster_id"
+        elif key == "templateId":
+            suggest = "template_id"
+        elif key == "updatedAt":
+            suggest = "updated_at"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeAlertPolicyAlertRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeAlertPolicyAlertRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeAlertPolicyAlertRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: str,
+                 rules: Sequence['outputs.TmpTkeAlertPolicyAlertRuleRule'],
+                 cluster_id: Optional[str] = None,
+                 id: Optional[str] = None,
+                 notification: Optional['outputs.TmpTkeAlertPolicyAlertRuleNotification'] = None,
+                 template_id: Optional[str] = None,
+                 updated_at: Optional[str] = None):
+        """
+        :param str name: Policy name.
+        :param Sequence['TmpTkeAlertPolicyAlertRuleRuleArgs'] rules: A list of rules.
+        :param str cluster_id: If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+        :param str id: Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+        :param 'TmpTkeAlertPolicyAlertRuleNotificationArgs' notification: Alarm channels, which may be returned using null in the template.
+        :param str template_id: If the alarm is sent from a template, the TemplateId is the template id.
+        :param str updated_at: Last modified time.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "rules", rules)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if notification is not None:
+            pulumi.set(__self__, "notification", notification)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+        if updated_at is not None:
+            pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Policy name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.TmpTkeAlertPolicyAlertRuleRule']:
+        """
+        A list of rules.
+        """
+        return pulumi.get(self, "rules")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[str]:
+        """
+        If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        """
+        Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def notification(self) -> Optional['outputs.TmpTkeAlertPolicyAlertRuleNotification']:
+        """
+        Alarm channels, which may be returned using null in the template.
+        """
+        return pulumi.get(self, "notification")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[str]:
+        """
+        If the alarm is sent from a template, the TemplateId is the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> Optional[str]:
+        """
+        Last modified time.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class TmpTkeAlertPolicyAlertRuleNotification(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "alertManager":
+            suggest = "alert_manager"
+        elif key == "notifyWays":
+            suggest = "notify_ways"
+        elif key == "phoneArriveNotice":
+            suggest = "phone_arrive_notice"
+        elif key == "phoneCircleInterval":
+            suggest = "phone_circle_interval"
+        elif key == "phoneCircleTimes":
+            suggest = "phone_circle_times"
+        elif key == "phoneInnerInterval":
+            suggest = "phone_inner_interval"
+        elif key == "phoneNotifyOrders":
+            suggest = "phone_notify_orders"
+        elif key == "receiverGroups":
+            suggest = "receiver_groups"
+        elif key == "repeatInterval":
+            suggest = "repeat_interval"
+        elif key == "timeRangeEnd":
+            suggest = "time_range_end"
+        elif key == "timeRangeStart":
+            suggest = "time_range_start"
+        elif key == "webHook":
+            suggest = "web_hook"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeAlertPolicyAlertRuleNotification. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeAlertPolicyAlertRuleNotification.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeAlertPolicyAlertRuleNotification.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enabled: bool,
+                 type: str,
+                 alert_manager: Optional['outputs.TmpTkeAlertPolicyAlertRuleNotificationAlertManager'] = None,
+                 notify_ways: Optional[Sequence[str]] = None,
+                 phone_arrive_notice: Optional[bool] = None,
+                 phone_circle_interval: Optional[int] = None,
+                 phone_circle_times: Optional[int] = None,
+                 phone_inner_interval: Optional[int] = None,
+                 phone_notify_orders: Optional[Sequence[int]] = None,
+                 receiver_groups: Optional[Sequence[str]] = None,
+                 repeat_interval: Optional[str] = None,
+                 time_range_end: Optional[str] = None,
+                 time_range_start: Optional[str] = None,
+                 web_hook: Optional[str] = None):
+        """
+        :param bool enabled: Whether it is enabled.
+        :param str type: The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+        :param 'TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs' alert_manager: If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+        :param Sequence[str] notify_ways: Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+        :param bool phone_arrive_notice: Telephone alerts reach notifications.
+        :param int phone_circle_interval: Effective end timeTelephone alarm wheel interval. Units: Seconds.
+        :param int phone_circle_times: PhoneCircleTimes.
+        :param int phone_inner_interval: Telephone alarm wheel intervals. Units: Seconds.
+        :param Sequence[int] phone_notify_orders: Telephone alarm sequence.
+        :param Sequence[str] receiver_groups: Alert Receiving Group (User Group).
+        :param str repeat_interval: Convergence time.
+        :param str time_range_end: Effective end time.
+        :param str time_range_start: The time from which it takes effect.
+        :param str web_hook: If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "type", type)
+        if alert_manager is not None:
+            pulumi.set(__self__, "alert_manager", alert_manager)
+        if notify_ways is not None:
+            pulumi.set(__self__, "notify_ways", notify_ways)
+        if phone_arrive_notice is not None:
+            pulumi.set(__self__, "phone_arrive_notice", phone_arrive_notice)
+        if phone_circle_interval is not None:
+            pulumi.set(__self__, "phone_circle_interval", phone_circle_interval)
+        if phone_circle_times is not None:
+            pulumi.set(__self__, "phone_circle_times", phone_circle_times)
+        if phone_inner_interval is not None:
+            pulumi.set(__self__, "phone_inner_interval", phone_inner_interval)
+        if phone_notify_orders is not None:
+            pulumi.set(__self__, "phone_notify_orders", phone_notify_orders)
+        if receiver_groups is not None:
+            pulumi.set(__self__, "receiver_groups", receiver_groups)
+        if repeat_interval is not None:
+            pulumi.set(__self__, "repeat_interval", repeat_interval)
+        if time_range_end is not None:
+            pulumi.set(__self__, "time_range_end", time_range_end)
+        if time_range_start is not None:
+            pulumi.set(__self__, "time_range_start", time_range_start)
+        if web_hook is not None:
+            pulumi.set(__self__, "web_hook", web_hook)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Whether it is enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="alertManager")
+    def alert_manager(self) -> Optional['outputs.TmpTkeAlertPolicyAlertRuleNotificationAlertManager']:
+        """
+        If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+        """
+        return pulumi.get(self, "alert_manager")
+
+    @property
+    @pulumi.getter(name="notifyWays")
+    def notify_ways(self) -> Optional[Sequence[str]]:
+        """
+        Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+        """
+        return pulumi.get(self, "notify_ways")
+
+    @property
+    @pulumi.getter(name="phoneArriveNotice")
+    def phone_arrive_notice(self) -> Optional[bool]:
+        """
+        Telephone alerts reach notifications.
+        """
+        return pulumi.get(self, "phone_arrive_notice")
+
+    @property
+    @pulumi.getter(name="phoneCircleInterval")
+    def phone_circle_interval(self) -> Optional[int]:
+        """
+        Effective end timeTelephone alarm wheel interval. Units: Seconds.
+        """
+        return pulumi.get(self, "phone_circle_interval")
+
+    @property
+    @pulumi.getter(name="phoneCircleTimes")
+    def phone_circle_times(self) -> Optional[int]:
+        """
+        PhoneCircleTimes.
+        """
+        return pulumi.get(self, "phone_circle_times")
+
+    @property
+    @pulumi.getter(name="phoneInnerInterval")
+    def phone_inner_interval(self) -> Optional[int]:
+        """
+        Telephone alarm wheel intervals. Units: Seconds.
+        """
+        return pulumi.get(self, "phone_inner_interval")
+
+    @property
+    @pulumi.getter(name="phoneNotifyOrders")
+    def phone_notify_orders(self) -> Optional[Sequence[int]]:
+        """
+        Telephone alarm sequence.
+        """
+        return pulumi.get(self, "phone_notify_orders")
+
+    @property
+    @pulumi.getter(name="receiverGroups")
+    def receiver_groups(self) -> Optional[Sequence[str]]:
+        """
+        Alert Receiving Group (User Group).
+        """
+        return pulumi.get(self, "receiver_groups")
+
+    @property
+    @pulumi.getter(name="repeatInterval")
+    def repeat_interval(self) -> Optional[str]:
+        """
+        Convergence time.
+        """
+        return pulumi.get(self, "repeat_interval")
+
+    @property
+    @pulumi.getter(name="timeRangeEnd")
+    def time_range_end(self) -> Optional[str]:
+        """
+        Effective end time.
+        """
+        return pulumi.get(self, "time_range_end")
+
+    @property
+    @pulumi.getter(name="timeRangeStart")
+    def time_range_start(self) -> Optional[str]:
+        """
+        The time from which it takes effect.
+        """
+        return pulumi.get(self, "time_range_start")
+
+    @property
+    @pulumi.getter(name="webHook")
+    def web_hook(self) -> Optional[str]:
+        """
+        If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "web_hook")
+
+
+@pulumi.output_type
+class TmpTkeAlertPolicyAlertRuleNotificationAlertManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "clusterId":
+            suggest = "cluster_id"
+        elif key == "clusterType":
+            suggest = "cluster_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeAlertPolicyAlertRuleNotificationAlertManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeAlertPolicyAlertRuleNotificationAlertManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeAlertPolicyAlertRuleNotificationAlertManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 url: str,
+                 cluster_id: Optional[str] = None,
+                 cluster_type: Optional[str] = None):
+        """
+        :param str url: Alertmanager url.
+        :param str cluster_id: The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+        :param str cluster_type: Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        pulumi.set(__self__, "url", url)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if cluster_type is not None:
+            pulumi.set(__self__, "cluster_type", cluster_type)
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        Alertmanager url.
+        """
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[str]:
+        """
+        The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> Optional[str]:
+        """
+        Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "cluster_type")
+
+
+@pulumi.output_type
+class TmpTkeAlertPolicyAlertRuleRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "for":
+            suggest = "for_"
+        elif key == "ruleState":
+            suggest = "rule_state"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeAlertPolicyAlertRuleRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeAlertPolicyAlertRuleRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeAlertPolicyAlertRuleRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 for_: str,
+                 labels: Sequence['outputs.TmpTkeAlertPolicyAlertRuleRuleLabel'],
+                 name: str,
+                 rule: str,
+                 template: str,
+                 annotations: Optional[Sequence['outputs.TmpTkeAlertPolicyAlertRuleRuleAnnotation']] = None,
+                 describe: Optional[str] = None,
+                 rule_state: Optional[int] = None):
+        """
+        :param str for_: Time of duration.
+        :param Sequence['TmpTkeAlertPolicyAlertRuleRuleLabelArgs'] labels: Extra labels.
+        :param str name: Rule name.
+        :param str rule: Prometheus statement.
+        :param str template: Alert sending template.
+        :param Sequence['TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs'] annotations: Refer to annotations in prometheus rule.
+        :param str describe: A description of the rule.
+        :param int rule_state: Alarm rule status.
+        """
+        pulumi.set(__self__, "for_", for_)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "rule", rule)
+        pulumi.set(__self__, "template", template)
+        if annotations is not None:
+            pulumi.set(__self__, "annotations", annotations)
+        if describe is not None:
+            pulumi.set(__self__, "describe", describe)
+        if rule_state is not None:
+            pulumi.set(__self__, "rule_state", rule_state)
+
+    @property
+    @pulumi.getter(name="for")
+    def for_(self) -> str:
+        """
+        Time of duration.
+        """
+        return pulumi.get(self, "for_")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Sequence['outputs.TmpTkeAlertPolicyAlertRuleRuleLabel']:
+        """
+        Extra labels.
+        """
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Rule name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def rule(self) -> str:
+        """
+        Prometheus statement.
+        """
+        return pulumi.get(self, "rule")
+
+    @property
+    @pulumi.getter
+    def template(self) -> str:
+        """
+        Alert sending template.
+        """
+        return pulumi.get(self, "template")
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> Optional[Sequence['outputs.TmpTkeAlertPolicyAlertRuleRuleAnnotation']]:
+        """
+        Refer to annotations in prometheus rule.
+        """
+        return pulumi.get(self, "annotations")
+
+    @property
+    @pulumi.getter
+    def describe(self) -> Optional[str]:
+        """
+        A description of the rule.
+        """
+        return pulumi.get(self, "describe")
+
+    @property
+    @pulumi.getter(name="ruleState")
+    def rule_state(self) -> Optional[int]:
+        """
+        Alarm rule status.
+        """
+        return pulumi.get(self, "rule_state")
+
+
+@pulumi.output_type
+class TmpTkeAlertPolicyAlertRuleRuleAnnotation(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: Name of map.
+        :param str value: Value of map.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of map.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of map.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class TmpTkeAlertPolicyAlertRuleRuleLabel(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: Name of map.
+        :param str value: Value of map.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of map.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of map.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class TmpTkeTemplateTemplate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "isDefault":
+            suggest = "is_default"
+        elif key == "podMonitors":
+            suggest = "pod_monitors"
+        elif key == "rawJobs":
+            suggest = "raw_jobs"
+        elif key == "recordRules":
+            suggest = "record_rules"
+        elif key == "serviceMonitors":
+            suggest = "service_monitors"
+        elif key == "templateId":
+            suggest = "template_id"
+        elif key == "updateTime":
+            suggest = "update_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeTemplateTemplate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeTemplateTemplate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeTemplateTemplate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 level: str,
+                 name: str,
+                 describe: Optional[str] = None,
+                 is_default: Optional[bool] = None,
+                 pod_monitors: Optional[Sequence['outputs.TmpTkeTemplateTemplatePodMonitor']] = None,
+                 raw_jobs: Optional[Sequence['outputs.TmpTkeTemplateTemplateRawJob']] = None,
+                 record_rules: Optional[Sequence['outputs.TmpTkeTemplateTemplateRecordRule']] = None,
+                 service_monitors: Optional[Sequence['outputs.TmpTkeTemplateTemplateServiceMonitor']] = None,
+                 template_id: Optional[str] = None,
+                 update_time: Optional[str] = None,
+                 version: Optional[str] = None):
+        """
+        :param str level: Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+        :param str name: Template name.
+        :param str describe: Template description.
+        :param bool is_default: Whether the system-supplied default template is used for outgoing references.
+        :param Sequence['TmpTkeTemplateTemplatePodMonitorArgs'] pod_monitors: Effective when Level is a cluster, A list of PodMonitors rules in the template.
+        :param Sequence['TmpTkeTemplateTemplateRawJobArgs'] raw_jobs: Effective when Level is a cluster, A list of RawJobs rules in the template.
+        :param Sequence['TmpTkeTemplateTemplateRecordRuleArgs'] record_rules: Effective when Level is instance, A list of aggregation rules in the template.
+        :param Sequence['TmpTkeTemplateTemplateServiceMonitorArgs'] service_monitors: Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+        :param str template_id: The ID of the template, which is used for the outgoing reference.
+        :param str update_time: Last updated, for outgoing references.
+        :param str version: Whether the system-supplied default template is used for outgoing references.
+        """
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "name", name)
+        if describe is not None:
+            pulumi.set(__self__, "describe", describe)
+        if is_default is not None:
+            pulumi.set(__self__, "is_default", is_default)
+        if pod_monitors is not None:
+            pulumi.set(__self__, "pod_monitors", pod_monitors)
+        if raw_jobs is not None:
+            pulumi.set(__self__, "raw_jobs", raw_jobs)
+        if record_rules is not None:
+            pulumi.set(__self__, "record_rules", record_rules)
+        if service_monitors is not None:
+            pulumi.set(__self__, "service_monitors", service_monitors)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+        if update_time is not None:
+            pulumi.set(__self__, "update_time", update_time)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def level(self) -> str:
+        """
+        Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Template name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def describe(self) -> Optional[str]:
+        """
+        Template description.
+        """
+        return pulumi.get(self, "describe")
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> Optional[bool]:
+        """
+        Whether the system-supplied default template is used for outgoing references.
+        """
+        return pulumi.get(self, "is_default")
+
+    @property
+    @pulumi.getter(name="podMonitors")
+    def pod_monitors(self) -> Optional[Sequence['outputs.TmpTkeTemplateTemplatePodMonitor']]:
+        """
+        Effective when Level is a cluster, A list of PodMonitors rules in the template.
+        """
+        return pulumi.get(self, "pod_monitors")
+
+    @property
+    @pulumi.getter(name="rawJobs")
+    def raw_jobs(self) -> Optional[Sequence['outputs.TmpTkeTemplateTemplateRawJob']]:
+        """
+        Effective when Level is a cluster, A list of RawJobs rules in the template.
+        """
+        return pulumi.get(self, "raw_jobs")
+
+    @property
+    @pulumi.getter(name="recordRules")
+    def record_rules(self) -> Optional[Sequence['outputs.TmpTkeTemplateTemplateRecordRule']]:
+        """
+        Effective when Level is instance, A list of aggregation rules in the template.
+        """
+        return pulumi.get(self, "record_rules")
+
+    @property
+    @pulumi.getter(name="serviceMonitors")
+    def service_monitors(self) -> Optional[Sequence['outputs.TmpTkeTemplateTemplateServiceMonitor']]:
+        """
+        Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+        """
+        return pulumi.get(self, "service_monitors")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[str]:
+        """
+        The ID of the template, which is used for the outgoing reference.
+        """
+        return pulumi.get(self, "template_id")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> Optional[str]:
+        """
+        Last updated, for outgoing references.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[str]:
+        """
+        Whether the system-supplied default template is used for outgoing references.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class TmpTkeTemplateTemplatePodMonitor(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "templateId":
+            suggest = "template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeTemplateTemplatePodMonitor. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeTemplateTemplatePodMonitor.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeTemplateTemplatePodMonitor.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 config: str,
+                 name: str,
+                 template_id: Optional[str] = None):
+        """
+        :param str config: Config.
+        :param str name: Name.
+        :param str template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> str:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[str]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class TmpTkeTemplateTemplateRawJob(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "templateId":
+            suggest = "template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeTemplateTemplateRawJob. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeTemplateTemplateRawJob.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeTemplateTemplateRawJob.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 config: str,
+                 name: str,
+                 template_id: Optional[str] = None):
+        """
+        :param str config: Config.
+        :param str name: Name.
+        :param str template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> str:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[str]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class TmpTkeTemplateTemplateRecordRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "templateId":
+            suggest = "template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeTemplateTemplateRecordRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeTemplateTemplateRecordRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeTemplateTemplateRecordRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 config: str,
+                 name: str,
+                 template_id: Optional[str] = None):
+        """
+        :param str config: Config.
+        :param str name: Name.
+        :param str template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> str:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[str]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class TmpTkeTemplateTemplateServiceMonitor(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "templateId":
+            suggest = "template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpTkeTemplateTemplateServiceMonitor. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpTkeTemplateTemplateServiceMonitor.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpTkeTemplateTemplateServiceMonitor.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 config: str,
+                 name: str,
+                 template_id: Optional[str] = None):
+        """
+        :param str config: Config.
+        :param str name: Name.
+        :param str template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> str:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[str]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class GetBindingObjectsListResult(dict):
+    def __init__(__self__, *,
+                 dimensions_json: str,
+                 is_shielded: int,
+                 region: str,
+                 unique_id: str):
+        """
+        :param str dimensions_json: Represents a collection of dimensions of an object instance, json format.
+        :param int is_shielded: Whether the object is shielded or not, `0` means unshielded and `1` means shielded.
+        :param str region: The region where the object is located.
+        :param str unique_id: Object unique ID.
+        """
+        pulumi.set(__self__, "dimensions_json", dimensions_json)
+        pulumi.set(__self__, "is_shielded", is_shielded)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "unique_id", unique_id)
+
+    @property
+    @pulumi.getter(name="dimensionsJson")
+    def dimensions_json(self) -> str:
+        """
+        Represents a collection of dimensions of an object instance, json format.
+        """
+        return pulumi.get(self, "dimensions_json")
+
+    @property
+    @pulumi.getter(name="isShielded")
+    def is_shielded(self) -> int:
+        """
+        Whether the object is shielded or not, `0` means unshielded and `1` means shielded.
+        """
+        return pulumi.get(self, "is_shielded")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        The region where the object is located.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="uniqueId")
+    def unique_id(self) -> str:
+        """
+        Object unique ID.
+        """
+        return pulumi.get(self, "unique_id")
+
+
+@pulumi.output_type
+class GetDataDimensionResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: Instance dimension name, eg: `InstanceId` for cvm.
+        :param str value: Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Instance dimension name, eg: `InstanceId` for cvm.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetDataListResult(dict):
+    def __init__(__self__, *,
+                 timestamp: int,
+                 value: float):
+        """
+        :param int timestamp: Statistical timestamp.
+        :param float value: Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+        """
+        pulumi.set(__self__, "timestamp", timestamp)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> int:
+        """
+        Statistical timestamp.
+        """
+        return pulumi.get(self, "timestamp")
+
+    @property
+    @pulumi.getter
+    def value(self) -> float:
+        """
+        Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetPolicyConditionsListResult(dict):
+    def __init__(__self__, *,
+                 event_metrics: Sequence['outputs.GetPolicyConditionsListEventMetricResult'],
                  is_support_multi_region: bool,
-                 metrics: Sequence['outputs.PolicyConditionsListMetricResult'],
+                 metrics: Sequence['outputs.GetPolicyConditionsListMetricResult'],
                  name: str,
                  policy_view_name: str,
                  support_regions: Sequence[str]):
+        """
+        :param Sequence['GetPolicyConditionsListEventMetricArgs'] event_metrics: A list of event condition metrics. Each element contains the following attributes:
+        :param bool is_support_multi_region: Whether to support multi region.
+        :param Sequence['GetPolicyConditionsListMetricArgs'] metrics: A list of event condition metrics. Each element contains the following attributes:
+        :param str name: Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
+        :param str policy_view_name: Policy view name, eg:`cvm_device`,`BANDWIDTHPACKAGE`, refer to `data.tencentcloud_monitor_policy_conditions(policy_view_name)`.
+        :param Sequence[str] support_regions: Support regions of this policy view.
+        """
         pulumi.set(__self__, "event_metrics", event_metrics)
         pulumi.set(__self__, "is_support_multi_region", is_support_multi_region)
         pulumi.set(__self__, "metrics", metrics)
@@ -668,41 +1875,64 @@ class PolicyConditionsListResult(dict):
 
     @property
     @pulumi.getter(name="eventMetrics")
-    def event_metrics(self) -> Sequence['outputs.PolicyConditionsListEventMetricResult']:
+    def event_metrics(self) -> Sequence['outputs.GetPolicyConditionsListEventMetricResult']:
+        """
+        A list of event condition metrics. Each element contains the following attributes:
+        """
         return pulumi.get(self, "event_metrics")
 
     @property
     @pulumi.getter(name="isSupportMultiRegion")
     def is_support_multi_region(self) -> bool:
+        """
+        Whether to support multi region.
+        """
         return pulumi.get(self, "is_support_multi_region")
 
     @property
     @pulumi.getter
-    def metrics(self) -> Sequence['outputs.PolicyConditionsListMetricResult']:
+    def metrics(self) -> Sequence['outputs.GetPolicyConditionsListMetricResult']:
+        """
+        A list of event condition metrics. Each element contains the following attributes:
+        """
         return pulumi.get(self, "metrics")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="policyViewName")
     def policy_view_name(self) -> str:
+        """
+        Policy view name, eg:`cvm_device`,`BANDWIDTHPACKAGE`, refer to `data.tencentcloud_monitor_policy_conditions(policy_view_name)`.
+        """
         return pulumi.get(self, "policy_view_name")
 
     @property
     @pulumi.getter(name="supportRegions")
     def support_regions(self) -> Sequence[str]:
+        """
+        Support regions of this policy view.
+        """
         return pulumi.get(self, "support_regions")
 
 
 @pulumi.output_type
-class PolicyConditionsListEventMetricResult(dict):
+class GetPolicyConditionsListEventMetricResult(dict):
     def __init__(__self__, *,
                  event_id: int,
                  event_show_name: str,
                  need_recovered: bool):
+        """
+        :param int event_id: The ID of this event metric.
+        :param str event_show_name: The name of this event metric.
+        :param bool need_recovered: Whether to recover.
+        """
         pulumi.set(__self__, "event_id", event_id)
         pulumi.set(__self__, "event_show_name", event_show_name)
         pulumi.set(__self__, "need_recovered", need_recovered)
@@ -710,21 +1940,30 @@ class PolicyConditionsListEventMetricResult(dict):
     @property
     @pulumi.getter(name="eventId")
     def event_id(self) -> int:
+        """
+        The ID of this event metric.
+        """
         return pulumi.get(self, "event_id")
 
     @property
     @pulumi.getter(name="eventShowName")
     def event_show_name(self) -> str:
+        """
+        The name of this event metric.
+        """
         return pulumi.get(self, "event_show_name")
 
     @property
     @pulumi.getter(name="needRecovered")
     def need_recovered(self) -> bool:
+        """
+        Whether to recover.
+        """
         return pulumi.get(self, "need_recovered")
 
 
 @pulumi.output_type
-class PolicyConditionsListMetricResult(dict):
+class GetPolicyConditionsListMetricResult(dict):
     def __init__(__self__, *,
                  calc_type_keys: Sequence[int],
                  calc_type_need: bool,
@@ -753,6 +1992,35 @@ class PolicyConditionsListMetricResult(dict):
                  stat_type_p60: str,
                  stat_type_p600: str,
                  stat_type_p86400: str):
+        """
+        :param Sequence[int] calc_type_keys: Calculate type of this metric.
+        :param bool calc_type_need: Whether `calc_type` required in the configuration.
+        :param str calc_value_default: The default calculate value of this metric.
+        :param str calc_value_fixed: The fixed calculate value of this metric.
+        :param str calc_value_max: The max calculate value of this metric.
+        :param str calc_value_min: The min calculate value of this metric.
+        :param bool calc_value_need: Whether `calc_value` required in the configuration.
+        :param int continue_time_default: The default continue time(seconds) config for this metric.
+        :param Sequence[int] continue_time_keys: The continue time(seconds) keys for this metric.
+        :param bool continue_time_need: Whether `continue_time` required in the configuration.
+        :param int metric_id: The ID of this metric.
+        :param str metric_show_name: The name of this metric.
+        :param str metric_unit: The unit of this metric.
+        :param int period_default: The default data time(seconds) config for this metric.
+        :param Sequence[int] period_keys: The data time(seconds) keys for this metric.
+        :param bool period_need: Whether `period` required in the configuration.
+        :param int period_num_default: The default period number config for this metric.
+        :param Sequence[int] period_num_keys: The period number keys for this metric.
+        :param bool period_num_need: Whether `period_num` required in the configuration.
+        :param str stat_type_p10: Data aggregation mode, cycle of 10 seconds.
+        :param str stat_type_p1800: Data aggregation mode, cycle of 1800 seconds.
+        :param str stat_type_p300: Data aggregation mode, cycle of 300 seconds.
+        :param str stat_type_p3600: Data aggregation mode, cycle of 3600 seconds.
+        :param str stat_type_p5: Data aggregation mode, cycle of 5 seconds.
+        :param str stat_type_p60: Data aggregation mode, cycle of 60 seconds.
+        :param str stat_type_p600: Data aggregation mode, cycle of 600 seconds.
+        :param str stat_type_p86400: Data aggregation mode, cycle of 86400 seconds.
+        """
         pulumi.set(__self__, "calc_type_keys", calc_type_keys)
         pulumi.set(__self__, "calc_type_need", calc_type_need)
         pulumi.set(__self__, "calc_value_default", calc_value_default)
@@ -784,497 +2052,226 @@ class PolicyConditionsListMetricResult(dict):
     @property
     @pulumi.getter(name="calcTypeKeys")
     def calc_type_keys(self) -> Sequence[int]:
+        """
+        Calculate type of this metric.
+        """
         return pulumi.get(self, "calc_type_keys")
 
     @property
     @pulumi.getter(name="calcTypeNeed")
     def calc_type_need(self) -> bool:
+        """
+        Whether `calc_type` required in the configuration.
+        """
         return pulumi.get(self, "calc_type_need")
 
     @property
     @pulumi.getter(name="calcValueDefault")
     def calc_value_default(self) -> str:
+        """
+        The default calculate value of this metric.
+        """
         return pulumi.get(self, "calc_value_default")
 
     @property
     @pulumi.getter(name="calcValueFixed")
     def calc_value_fixed(self) -> str:
+        """
+        The fixed calculate value of this metric.
+        """
         return pulumi.get(self, "calc_value_fixed")
 
     @property
     @pulumi.getter(name="calcValueMax")
     def calc_value_max(self) -> str:
+        """
+        The max calculate value of this metric.
+        """
         return pulumi.get(self, "calc_value_max")
 
     @property
     @pulumi.getter(name="calcValueMin")
     def calc_value_min(self) -> str:
+        """
+        The min calculate value of this metric.
+        """
         return pulumi.get(self, "calc_value_min")
 
     @property
     @pulumi.getter(name="calcValueNeed")
     def calc_value_need(self) -> bool:
+        """
+        Whether `calc_value` required in the configuration.
+        """
         return pulumi.get(self, "calc_value_need")
 
     @property
     @pulumi.getter(name="continueTimeDefault")
     def continue_time_default(self) -> int:
+        """
+        The default continue time(seconds) config for this metric.
+        """
         return pulumi.get(self, "continue_time_default")
 
     @property
     @pulumi.getter(name="continueTimeKeys")
     def continue_time_keys(self) -> Sequence[int]:
+        """
+        The continue time(seconds) keys for this metric.
+        """
         return pulumi.get(self, "continue_time_keys")
 
     @property
     @pulumi.getter(name="continueTimeNeed")
     def continue_time_need(self) -> bool:
+        """
+        Whether `continue_time` required in the configuration.
+        """
         return pulumi.get(self, "continue_time_need")
 
     @property
     @pulumi.getter(name="metricId")
     def metric_id(self) -> int:
+        """
+        The ID of this metric.
+        """
         return pulumi.get(self, "metric_id")
 
     @property
     @pulumi.getter(name="metricShowName")
     def metric_show_name(self) -> str:
+        """
+        The name of this metric.
+        """
         return pulumi.get(self, "metric_show_name")
 
     @property
     @pulumi.getter(name="metricUnit")
     def metric_unit(self) -> str:
+        """
+        The unit of this metric.
+        """
         return pulumi.get(self, "metric_unit")
 
     @property
     @pulumi.getter(name="periodDefault")
     def period_default(self) -> int:
+        """
+        The default data time(seconds) config for this metric.
+        """
         return pulumi.get(self, "period_default")
 
     @property
     @pulumi.getter(name="periodKeys")
     def period_keys(self) -> Sequence[int]:
+        """
+        The data time(seconds) keys for this metric.
+        """
         return pulumi.get(self, "period_keys")
 
     @property
     @pulumi.getter(name="periodNeed")
     def period_need(self) -> bool:
+        """
+        Whether `period` required in the configuration.
+        """
         return pulumi.get(self, "period_need")
 
     @property
     @pulumi.getter(name="periodNumDefault")
     def period_num_default(self) -> int:
+        """
+        The default period number config for this metric.
+        """
         return pulumi.get(self, "period_num_default")
 
     @property
     @pulumi.getter(name="periodNumKeys")
     def period_num_keys(self) -> Sequence[int]:
+        """
+        The period number keys for this metric.
+        """
         return pulumi.get(self, "period_num_keys")
 
     @property
     @pulumi.getter(name="periodNumNeed")
     def period_num_need(self) -> bool:
+        """
+        Whether `period_num` required in the configuration.
+        """
         return pulumi.get(self, "period_num_need")
 
     @property
     @pulumi.getter(name="statTypeP10")
     def stat_type_p10(self) -> str:
+        """
+        Data aggregation mode, cycle of 10 seconds.
+        """
         return pulumi.get(self, "stat_type_p10")
 
     @property
     @pulumi.getter(name="statTypeP1800")
     def stat_type_p1800(self) -> str:
+        """
+        Data aggregation mode, cycle of 1800 seconds.
+        """
         return pulumi.get(self, "stat_type_p1800")
 
     @property
     @pulumi.getter(name="statTypeP300")
     def stat_type_p300(self) -> str:
+        """
+        Data aggregation mode, cycle of 300 seconds.
+        """
         return pulumi.get(self, "stat_type_p300")
 
     @property
     @pulumi.getter(name="statTypeP3600")
     def stat_type_p3600(self) -> str:
+        """
+        Data aggregation mode, cycle of 3600 seconds.
+        """
         return pulumi.get(self, "stat_type_p3600")
 
     @property
     @pulumi.getter(name="statTypeP5")
     def stat_type_p5(self) -> str:
+        """
+        Data aggregation mode, cycle of 5 seconds.
+        """
         return pulumi.get(self, "stat_type_p5")
 
     @property
     @pulumi.getter(name="statTypeP60")
     def stat_type_p60(self) -> str:
+        """
+        Data aggregation mode, cycle of 60 seconds.
+        """
         return pulumi.get(self, "stat_type_p60")
 
     @property
     @pulumi.getter(name="statTypeP600")
     def stat_type_p600(self) -> str:
+        """
+        Data aggregation mode, cycle of 600 seconds.
+        """
         return pulumi.get(self, "stat_type_p600")
 
     @property
     @pulumi.getter(name="statTypeP86400")
     def stat_type_p86400(self) -> str:
+        """
+        Data aggregation mode, cycle of 86400 seconds.
+        """
         return pulumi.get(self, "stat_type_p86400")
 
 
 @pulumi.output_type
-class PolicyGroupBindingObject(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "dimensionsJson":
-            suggest = "dimensions_json"
-        elif key == "isShielded":
-            suggest = "is_shielded"
-        elif key == "uniqueId":
-            suggest = "unique_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PolicyGroupBindingObject. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PolicyGroupBindingObject.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PolicyGroupBindingObject.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 dimensions_json: Optional[str] = None,
-                 is_shielded: Optional[int] = None,
-                 region: Optional[str] = None,
-                 unique_id: Optional[str] = None):
-        if dimensions_json is not None:
-            pulumi.set(__self__, "dimensions_json", dimensions_json)
-        if is_shielded is not None:
-            pulumi.set(__self__, "is_shielded", is_shielded)
-        if region is not None:
-            pulumi.set(__self__, "region", region)
-        if unique_id is not None:
-            pulumi.set(__self__, "unique_id", unique_id)
-
-    @property
-    @pulumi.getter(name="dimensionsJson")
-    def dimensions_json(self) -> Optional[str]:
-        return pulumi.get(self, "dimensions_json")
-
-    @property
-    @pulumi.getter(name="isShielded")
-    def is_shielded(self) -> Optional[int]:
-        return pulumi.get(self, "is_shielded")
-
-    @property
-    @pulumi.getter
-    def region(self) -> Optional[str]:
-        return pulumi.get(self, "region")
-
-    @property
-    @pulumi.getter(name="uniqueId")
-    def unique_id(self) -> Optional[str]:
-        return pulumi.get(self, "unique_id")
-
-
-@pulumi.output_type
-class PolicyGroupCondition(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "alarmNotifyPeriod":
-            suggest = "alarm_notify_period"
-        elif key == "alarmNotifyType":
-            suggest = "alarm_notify_type"
-        elif key == "metricId":
-            suggest = "metric_id"
-        elif key == "calcPeriod":
-            suggest = "calc_period"
-        elif key == "calcType":
-            suggest = "calc_type"
-        elif key == "calcValue":
-            suggest = "calc_value"
-        elif key == "continuePeriod":
-            suggest = "continue_period"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PolicyGroupCondition. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PolicyGroupCondition.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PolicyGroupCondition.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 alarm_notify_period: int,
-                 alarm_notify_type: int,
-                 metric_id: int,
-                 calc_period: Optional[int] = None,
-                 calc_type: Optional[int] = None,
-                 calc_value: Optional[float] = None,
-                 continue_period: Optional[int] = None):
-        pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
-        pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
-        pulumi.set(__self__, "metric_id", metric_id)
-        if calc_period is not None:
-            pulumi.set(__self__, "calc_period", calc_period)
-        if calc_type is not None:
-            pulumi.set(__self__, "calc_type", calc_type)
-        if calc_value is not None:
-            pulumi.set(__self__, "calc_value", calc_value)
-        if continue_period is not None:
-            pulumi.set(__self__, "continue_period", continue_period)
-
-    @property
-    @pulumi.getter(name="alarmNotifyPeriod")
-    def alarm_notify_period(self) -> int:
-        return pulumi.get(self, "alarm_notify_period")
-
-    @property
-    @pulumi.getter(name="alarmNotifyType")
-    def alarm_notify_type(self) -> int:
-        return pulumi.get(self, "alarm_notify_type")
-
-    @property
-    @pulumi.getter(name="metricId")
-    def metric_id(self) -> int:
-        return pulumi.get(self, "metric_id")
-
-    @property
-    @pulumi.getter(name="calcPeriod")
-    def calc_period(self) -> Optional[int]:
-        return pulumi.get(self, "calc_period")
-
-    @property
-    @pulumi.getter(name="calcType")
-    def calc_type(self) -> Optional[int]:
-        return pulumi.get(self, "calc_type")
-
-    @property
-    @pulumi.getter(name="calcValue")
-    def calc_value(self) -> Optional[float]:
-        return pulumi.get(self, "calc_value")
-
-    @property
-    @pulumi.getter(name="continuePeriod")
-    def continue_period(self) -> Optional[int]:
-        return pulumi.get(self, "continue_period")
-
-
-@pulumi.output_type
-class PolicyGroupEventCondition(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "alarmNotifyPeriod":
-            suggest = "alarm_notify_period"
-        elif key == "alarmNotifyType":
-            suggest = "alarm_notify_type"
-        elif key == "eventId":
-            suggest = "event_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PolicyGroupEventCondition. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PolicyGroupEventCondition.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PolicyGroupEventCondition.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 alarm_notify_period: int,
-                 alarm_notify_type: int,
-                 event_id: int):
-        pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
-        pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
-        pulumi.set(__self__, "event_id", event_id)
-
-    @property
-    @pulumi.getter(name="alarmNotifyPeriod")
-    def alarm_notify_period(self) -> int:
-        return pulumi.get(self, "alarm_notify_period")
-
-    @property
-    @pulumi.getter(name="alarmNotifyType")
-    def alarm_notify_type(self) -> int:
-        return pulumi.get(self, "alarm_notify_type")
-
-    @property
-    @pulumi.getter(name="eventId")
-    def event_id(self) -> int:
-        return pulumi.get(self, "event_id")
-
-
-@pulumi.output_type
-class PolicyGroupReceiver(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "endTime":
-            suggest = "end_time"
-        elif key == "needSendNotice":
-            suggest = "need_send_notice"
-        elif key == "notifyWays":
-            suggest = "notify_ways"
-        elif key == "personInterval":
-            suggest = "person_interval"
-        elif key == "receiveLanguage":
-            suggest = "receive_language"
-        elif key == "receiverGroupLists":
-            suggest = "receiver_group_lists"
-        elif key == "receiverType":
-            suggest = "receiver_type"
-        elif key == "receiverUserLists":
-            suggest = "receiver_user_lists"
-        elif key == "recoverNotifies":
-            suggest = "recover_notifies"
-        elif key == "roundInterval":
-            suggest = "round_interval"
-        elif key == "roundNumber":
-            suggest = "round_number"
-        elif key == "sendFors":
-            suggest = "send_fors"
-        elif key == "startTime":
-            suggest = "start_time"
-        elif key == "uidLists":
-            suggest = "uid_lists"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PolicyGroupReceiver. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PolicyGroupReceiver.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PolicyGroupReceiver.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 end_time: Optional[int] = None,
-                 need_send_notice: Optional[int] = None,
-                 notify_ways: Optional[Sequence[str]] = None,
-                 person_interval: Optional[int] = None,
-                 receive_language: Optional[str] = None,
-                 receiver_group_lists: Optional[Sequence[int]] = None,
-                 receiver_type: Optional[str] = None,
-                 receiver_user_lists: Optional[Sequence[int]] = None,
-                 recover_notifies: Optional[Sequence[str]] = None,
-                 round_interval: Optional[int] = None,
-                 round_number: Optional[int] = None,
-                 send_fors: Optional[Sequence[str]] = None,
-                 start_time: Optional[int] = None,
-                 uid_lists: Optional[Sequence[int]] = None):
-        if end_time is not None:
-            pulumi.set(__self__, "end_time", end_time)
-        if need_send_notice is not None:
-            pulumi.set(__self__, "need_send_notice", need_send_notice)
-        if notify_ways is not None:
-            pulumi.set(__self__, "notify_ways", notify_ways)
-        if person_interval is not None:
-            pulumi.set(__self__, "person_interval", person_interval)
-        if receive_language is not None:
-            pulumi.set(__self__, "receive_language", receive_language)
-        if receiver_group_lists is not None:
-            pulumi.set(__self__, "receiver_group_lists", receiver_group_lists)
-        if receiver_type is not None:
-            pulumi.set(__self__, "receiver_type", receiver_type)
-        if receiver_user_lists is not None:
-            pulumi.set(__self__, "receiver_user_lists", receiver_user_lists)
-        if recover_notifies is not None:
-            pulumi.set(__self__, "recover_notifies", recover_notifies)
-        if round_interval is not None:
-            pulumi.set(__self__, "round_interval", round_interval)
-        if round_number is not None:
-            pulumi.set(__self__, "round_number", round_number)
-        if send_fors is not None:
-            pulumi.set(__self__, "send_fors", send_fors)
-        if start_time is not None:
-            pulumi.set(__self__, "start_time", start_time)
-        if uid_lists is not None:
-            pulumi.set(__self__, "uid_lists", uid_lists)
-
-    @property
-    @pulumi.getter(name="endTime")
-    def end_time(self) -> Optional[int]:
-        return pulumi.get(self, "end_time")
-
-    @property
-    @pulumi.getter(name="needSendNotice")
-    def need_send_notice(self) -> Optional[int]:
-        return pulumi.get(self, "need_send_notice")
-
-    @property
-    @pulumi.getter(name="notifyWays")
-    def notify_ways(self) -> Optional[Sequence[str]]:
-        return pulumi.get(self, "notify_ways")
-
-    @property
-    @pulumi.getter(name="personInterval")
-    def person_interval(self) -> Optional[int]:
-        return pulumi.get(self, "person_interval")
-
-    @property
-    @pulumi.getter(name="receiveLanguage")
-    def receive_language(self) -> Optional[str]:
-        return pulumi.get(self, "receive_language")
-
-    @property
-    @pulumi.getter(name="receiverGroupLists")
-    def receiver_group_lists(self) -> Optional[Sequence[int]]:
-        return pulumi.get(self, "receiver_group_lists")
-
-    @property
-    @pulumi.getter(name="receiverType")
-    def receiver_type(self) -> Optional[str]:
-        return pulumi.get(self, "receiver_type")
-
-    @property
-    @pulumi.getter(name="receiverUserLists")
-    def receiver_user_lists(self) -> Optional[Sequence[int]]:
-        return pulumi.get(self, "receiver_user_lists")
-
-    @property
-    @pulumi.getter(name="recoverNotifies")
-    def recover_notifies(self) -> Optional[Sequence[str]]:
-        return pulumi.get(self, "recover_notifies")
-
-    @property
-    @pulumi.getter(name="roundInterval")
-    def round_interval(self) -> Optional[int]:
-        return pulumi.get(self, "round_interval")
-
-    @property
-    @pulumi.getter(name="roundNumber")
-    def round_number(self) -> Optional[int]:
-        return pulumi.get(self, "round_number")
-
-    @property
-    @pulumi.getter(name="sendFors")
-    def send_fors(self) -> Optional[Sequence[str]]:
-        return pulumi.get(self, "send_fors")
-
-    @property
-    @pulumi.getter(name="startTime")
-    def start_time(self) -> Optional[int]:
-        return pulumi.get(self, "start_time")
-
-    @property
-    @pulumi.getter(name="uidLists")
-    def uid_lists(self) -> Optional[Sequence[int]]:
-        return pulumi.get(self, "uid_lists")
-
-
-@pulumi.output_type
-class PolicyGroupsListResult(dict):
+class GetPolicyGroupsListResult(dict):
     def __init__(__self__, *,
                  can_set_default: bool,
-                 conditions: Sequence['outputs.PolicyGroupsListConditionResult'],
-                 event_conditions: Sequence['outputs.PolicyGroupsListEventConditionResult'],
+                 conditions: Sequence['outputs.GetPolicyGroupsListConditionResult'],
+                 event_conditions: Sequence['outputs.GetPolicyGroupsListEventConditionResult'],
                  group_id: int,
                  group_name: str,
                  insert_time: int,
@@ -1285,10 +2282,29 @@ class PolicyGroupsListResult(dict):
                  parent_group_id: int,
                  policy_view_name: str,
                  project_id: int,
-                 receivers: Sequence['outputs.PolicyGroupsListReceiverResult'],
+                 receivers: Sequence['outputs.GetPolicyGroupsListReceiverResult'],
                  remark: str,
                  update_time: int,
                  use_sum: int):
+        """
+        :param bool can_set_default: Whether it can be set as the default policy.
+        :param Sequence['GetPolicyGroupsListConditionArgs'] conditions: A list of threshold rules. Each element contains the following attributes:
+        :param Sequence['GetPolicyGroupsListEventConditionArgs'] event_conditions: A list of event rules. Each element contains the following attributes:
+        :param int group_id: The policy group id.
+        :param str group_name: The policy group name.
+        :param int insert_time: The policy group create timestamp.
+        :param int is_default: If is default policy group or not, `0` represents the non-default policy, and `1` represents the default policy.
+        :param bool is_open: Whether open or not.
+        :param str last_edit_uin: Recently edited user uin.
+        :param int no_shielded_sum: Number of unmasked instances of policy group bindings.
+        :param int parent_group_id: Parent policy group ID.
+        :param str policy_view_name: The policy group view name.
+        :param int project_id: The project ID to which the policy group belongs.
+        :param Sequence['GetPolicyGroupsListReceiverArgs'] receivers: A list of receivers. Each element contains the following attributes:
+        :param str remark: Policy group remarks.
+        :param int update_time: The policy group update timestamp.
+        :param int use_sum: Number of instances of policy group bindings.
+        """
         pulumi.set(__self__, "can_set_default", can_set_default)
         pulumi.set(__self__, "conditions", conditions)
         pulumi.set(__self__, "event_conditions", event_conditions)
@@ -1310,91 +2326,142 @@ class PolicyGroupsListResult(dict):
     @property
     @pulumi.getter(name="canSetDefault")
     def can_set_default(self) -> bool:
+        """
+        Whether it can be set as the default policy.
+        """
         return pulumi.get(self, "can_set_default")
 
     @property
     @pulumi.getter
-    def conditions(self) -> Sequence['outputs.PolicyGroupsListConditionResult']:
+    def conditions(self) -> Sequence['outputs.GetPolicyGroupsListConditionResult']:
+        """
+        A list of threshold rules. Each element contains the following attributes:
+        """
         return pulumi.get(self, "conditions")
 
     @property
     @pulumi.getter(name="eventConditions")
-    def event_conditions(self) -> Sequence['outputs.PolicyGroupsListEventConditionResult']:
+    def event_conditions(self) -> Sequence['outputs.GetPolicyGroupsListEventConditionResult']:
+        """
+        A list of event rules. Each element contains the following attributes:
+        """
         return pulumi.get(self, "event_conditions")
 
     @property
     @pulumi.getter(name="groupId")
     def group_id(self) -> int:
+        """
+        The policy group id.
+        """
         return pulumi.get(self, "group_id")
 
     @property
     @pulumi.getter(name="groupName")
     def group_name(self) -> str:
+        """
+        The policy group name.
+        """
         return pulumi.get(self, "group_name")
 
     @property
     @pulumi.getter(name="insertTime")
     def insert_time(self) -> int:
+        """
+        The policy group create timestamp.
+        """
         return pulumi.get(self, "insert_time")
 
     @property
     @pulumi.getter(name="isDefault")
     def is_default(self) -> int:
+        """
+        If is default policy group or not, `0` represents the non-default policy, and `1` represents the default policy.
+        """
         return pulumi.get(self, "is_default")
 
     @property
     @pulumi.getter(name="isOpen")
     def is_open(self) -> bool:
+        """
+        Whether open or not.
+        """
         return pulumi.get(self, "is_open")
 
     @property
     @pulumi.getter(name="lastEditUin")
     def last_edit_uin(self) -> str:
+        """
+        Recently edited user uin.
+        """
         return pulumi.get(self, "last_edit_uin")
 
     @property
     @pulumi.getter(name="noShieldedSum")
     def no_shielded_sum(self) -> int:
+        """
+        Number of unmasked instances of policy group bindings.
+        """
         return pulumi.get(self, "no_shielded_sum")
 
     @property
     @pulumi.getter(name="parentGroupId")
     def parent_group_id(self) -> int:
+        """
+        Parent policy group ID.
+        """
         return pulumi.get(self, "parent_group_id")
 
     @property
     @pulumi.getter(name="policyViewName")
     def policy_view_name(self) -> str:
+        """
+        The policy group view name.
+        """
         return pulumi.get(self, "policy_view_name")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        The project ID to which the policy group belongs.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter
-    def receivers(self) -> Sequence['outputs.PolicyGroupsListReceiverResult']:
+    def receivers(self) -> Sequence['outputs.GetPolicyGroupsListReceiverResult']:
+        """
+        A list of receivers. Each element contains the following attributes:
+        """
         return pulumi.get(self, "receivers")
 
     @property
     @pulumi.getter
     def remark(self) -> str:
+        """
+        Policy group remarks.
+        """
         return pulumi.get(self, "remark")
 
     @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> int:
+        """
+        The policy group update timestamp.
+        """
         return pulumi.get(self, "update_time")
 
     @property
     @pulumi.getter(name="useSum")
     def use_sum(self) -> int:
+        """
+        Number of instances of policy group bindings.
+        """
         return pulumi.get(self, "use_sum")
 
 
 @pulumi.output_type
-class PolicyGroupsListConditionResult(dict):
+class GetPolicyGroupsListConditionResult(dict):
     def __init__(__self__, *,
                  alarm_notify_period: int,
                  alarm_notify_type: int,
@@ -1406,6 +2473,18 @@ class PolicyGroupsListConditionResult(dict):
                  metric_unit: str,
                  period: int,
                  rule_id: int):
+        """
+        :param int alarm_notify_period: Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+        :param int alarm_notify_type: Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+        :param int calc_type: Compare type, `1` means more than, `2`  means greater than or equal, `3` means less than, `4` means less than or equal to, `5` means equal, `6` means not equal, `7` means days rose, `8` means days fell, `9` means weeks rose, `10` means weeks fell, `11` means period rise, `12` means period fell.
+        :param str calc_value: Threshold value.
+        :param int continue_time: How long does the triggering rule last (per second).
+        :param int metric_id: The ID of this metric.
+        :param str metric_show_name: The name of this metric.
+        :param str metric_unit: The unit of this metric.
+        :param int period: Data aggregation cycle (unit second).
+        :param int rule_id: Threshold rule ID.
+        """
         pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
         pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
         pulumi.set(__self__, "calc_type", calc_type)
@@ -1420,62 +2499,99 @@ class PolicyGroupsListConditionResult(dict):
     @property
     @pulumi.getter(name="alarmNotifyPeriod")
     def alarm_notify_period(self) -> int:
+        """
+        Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+        """
         return pulumi.get(self, "alarm_notify_period")
 
     @property
     @pulumi.getter(name="alarmNotifyType")
     def alarm_notify_type(self) -> int:
+        """
+        Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+        """
         return pulumi.get(self, "alarm_notify_type")
 
     @property
     @pulumi.getter(name="calcType")
     def calc_type(self) -> int:
+        """
+        Compare type, `1` means more than, `2`  means greater than or equal, `3` means less than, `4` means less than or equal to, `5` means equal, `6` means not equal, `7` means days rose, `8` means days fell, `9` means weeks rose, `10` means weeks fell, `11` means period rise, `12` means period fell.
+        """
         return pulumi.get(self, "calc_type")
 
     @property
     @pulumi.getter(name="calcValue")
     def calc_value(self) -> str:
+        """
+        Threshold value.
+        """
         return pulumi.get(self, "calc_value")
 
     @property
     @pulumi.getter(name="continueTime")
     def continue_time(self) -> int:
+        """
+        How long does the triggering rule last (per second).
+        """
         return pulumi.get(self, "continue_time")
 
     @property
     @pulumi.getter(name="metricId")
     def metric_id(self) -> int:
+        """
+        The ID of this metric.
+        """
         return pulumi.get(self, "metric_id")
 
     @property
     @pulumi.getter(name="metricShowName")
     def metric_show_name(self) -> str:
+        """
+        The name of this metric.
+        """
         return pulumi.get(self, "metric_show_name")
 
     @property
     @pulumi.getter(name="metricUnit")
     def metric_unit(self) -> str:
+        """
+        The unit of this metric.
+        """
         return pulumi.get(self, "metric_unit")
 
     @property
     @pulumi.getter
     def period(self) -> int:
+        """
+        Data aggregation cycle (unit second).
+        """
         return pulumi.get(self, "period")
 
     @property
     @pulumi.getter(name="ruleId")
     def rule_id(self) -> int:
+        """
+        Threshold rule ID.
+        """
         return pulumi.get(self, "rule_id")
 
 
 @pulumi.output_type
-class PolicyGroupsListEventConditionResult(dict):
+class GetPolicyGroupsListEventConditionResult(dict):
     def __init__(__self__, *,
                  alarm_notify_period: int,
                  alarm_notify_type: int,
                  event_id: int,
                  event_show_name: str,
                  rule_id: int):
+        """
+        :param int alarm_notify_period: Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+        :param int alarm_notify_type: Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+        :param int event_id: The ID of this event metric.
+        :param str event_show_name: The name of this event metric.
+        :param int rule_id: Threshold rule ID.
+        """
         pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
         pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
         pulumi.set(__self__, "event_id", event_id)
@@ -1485,31 +2601,46 @@ class PolicyGroupsListEventConditionResult(dict):
     @property
     @pulumi.getter(name="alarmNotifyPeriod")
     def alarm_notify_period(self) -> int:
+        """
+        Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+        """
         return pulumi.get(self, "alarm_notify_period")
 
     @property
     @pulumi.getter(name="alarmNotifyType")
     def alarm_notify_type(self) -> int:
+        """
+        Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+        """
         return pulumi.get(self, "alarm_notify_type")
 
     @property
     @pulumi.getter(name="eventId")
     def event_id(self) -> int:
+        """
+        The ID of this event metric.
+        """
         return pulumi.get(self, "event_id")
 
     @property
     @pulumi.getter(name="eventShowName")
     def event_show_name(self) -> str:
+        """
+        The name of this event metric.
+        """
         return pulumi.get(self, "event_show_name")
 
     @property
     @pulumi.getter(name="ruleId")
     def rule_id(self) -> int:
+        """
+        Threshold rule ID.
+        """
         return pulumi.get(self, "rule_id")
 
 
 @pulumi.output_type
-class PolicyGroupsListReceiverResult(dict):
+class GetPolicyGroupsListReceiverResult(dict):
     def __init__(__self__, *,
                  end_time: int,
                  need_send_notice: int,
@@ -1525,6 +2656,22 @@ class PolicyGroupsListReceiverResult(dict):
                  send_fors: Sequence[str],
                  start_time: int,
                  uid_lists: Sequence[int]):
+        """
+        :param int end_time: End of alarm period. Meaning with `start_time`.
+        :param int need_send_notice: Do need a telephone alarm contact prompt.You don't need 0, you need 1.
+        :param Sequence[str] notify_ways: Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+        :param int person_interval: Telephone warning to individual interval (seconds).
+        :param str receive_language: Alert sending language.
+        :param Sequence[int] receiver_group_lists: Alarm receive group ID list.
+        :param str receiver_type: Receive type. Optional 'group' or 'user'.
+        :param Sequence[int] receiver_user_lists: Alarm receiver ID list.
+        :param Sequence[str] recover_notifies: Restore notification mode. Optional "SMS".
+        :param int round_interval: Telephone alarm interval per round (seconds).
+        :param int round_number: Telephone alarm number.
+        :param Sequence[str] send_fors: Telephone warning time.Option "OCCUR", "RECOVER".
+        :param int start_time: Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+        :param Sequence[int] uid_lists: The phone alerts the receiver uid.
+        """
         pulumi.set(__self__, "end_time", end_time)
         pulumi.set(__self__, "need_send_notice", need_send_notice)
         pulumi.set(__self__, "notify_ways", notify_ways)
@@ -1543,79 +2690,125 @@ class PolicyGroupsListReceiverResult(dict):
     @property
     @pulumi.getter(name="endTime")
     def end_time(self) -> int:
+        """
+        End of alarm period. Meaning with `start_time`.
+        """
         return pulumi.get(self, "end_time")
 
     @property
     @pulumi.getter(name="needSendNotice")
     def need_send_notice(self) -> int:
+        """
+        Do need a telephone alarm contact prompt.You don't need 0, you need 1.
+        """
         return pulumi.get(self, "need_send_notice")
 
     @property
     @pulumi.getter(name="notifyWays")
     def notify_ways(self) -> Sequence[str]:
+        """
+        Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+        """
         return pulumi.get(self, "notify_ways")
 
     @property
     @pulumi.getter(name="personInterval")
     def person_interval(self) -> int:
+        """
+        Telephone warning to individual interval (seconds).
+        """
         return pulumi.get(self, "person_interval")
 
     @property
     @pulumi.getter(name="receiveLanguage")
     def receive_language(self) -> str:
+        """
+        Alert sending language.
+        """
         return pulumi.get(self, "receive_language")
 
     @property
     @pulumi.getter(name="receiverGroupLists")
     def receiver_group_lists(self) -> Sequence[int]:
+        """
+        Alarm receive group ID list.
+        """
         return pulumi.get(self, "receiver_group_lists")
 
     @property
     @pulumi.getter(name="receiverType")
     def receiver_type(self) -> str:
+        """
+        Receive type. Optional 'group' or 'user'.
+        """
         return pulumi.get(self, "receiver_type")
 
     @property
     @pulumi.getter(name="receiverUserLists")
     def receiver_user_lists(self) -> Sequence[int]:
+        """
+        Alarm receiver ID list.
+        """
         return pulumi.get(self, "receiver_user_lists")
 
     @property
     @pulumi.getter(name="recoverNotifies")
     def recover_notifies(self) -> Sequence[str]:
+        """
+        Restore notification mode. Optional "SMS".
+        """
         return pulumi.get(self, "recover_notifies")
 
     @property
     @pulumi.getter(name="roundInterval")
     def round_interval(self) -> int:
+        """
+        Telephone alarm interval per round (seconds).
+        """
         return pulumi.get(self, "round_interval")
 
     @property
     @pulumi.getter(name="roundNumber")
     def round_number(self) -> int:
+        """
+        Telephone alarm number.
+        """
         return pulumi.get(self, "round_number")
 
     @property
     @pulumi.getter(name="sendFors")
     def send_fors(self) -> Sequence[str]:
+        """
+        Telephone warning time.Option "OCCUR", "RECOVER".
+        """
         return pulumi.get(self, "send_fors")
 
     @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> int:
+        """
+        Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+        """
         return pulumi.get(self, "start_time")
 
     @property
     @pulumi.getter(name="uidLists")
     def uid_lists(self) -> Sequence[int]:
+        """
+        The phone alerts the receiver uid.
+        """
         return pulumi.get(self, "uid_lists")
 
 
 @pulumi.output_type
-class ProductEventDimensionResult(dict):
+class GetProductEventDimensionResult(dict):
     def __init__(__self__, *,
                  name: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param str name: Instance dimension name, eg: `deviceWanIp` for internet ip.
+        :param str value: Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         if name is not None:
             pulumi.set(__self__, "name", name)
         if value is not None:
@@ -1624,24 +2817,30 @@ class ProductEventDimensionResult(dict):
     @property
     @pulumi.getter
     def name(self) -> Optional[str]:
+        """
+        Instance dimension name, eg: `deviceWanIp` for internet ip.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         return pulumi.get(self, "value")
 
 
 @pulumi.output_type
-class ProductEventListResult(dict):
+class GetProductEventListResult(dict):
     def __init__(__self__, *,
-                 addition_msgs: Sequence['outputs.ProductEventListAdditionMsgResult'],
-                 dimensions: Sequence['outputs.ProductEventListDimensionResult'],
+                 addition_msgs: Sequence['outputs.GetProductEventListAdditionMsgResult'],
+                 dimensions: Sequence['outputs.GetProductEventListDimensionResult'],
                  event_cname: str,
                  event_ename: str,
                  event_id: int,
                  event_name: str,
-                 group_infos: Sequence['outputs.ProductEventListGroupInfoResult'],
+                 group_infos: Sequence['outputs.GetProductEventListGroupInfoResult'],
                  instance_id: str,
                  instance_name: str,
                  is_alarm_config: int,
@@ -1655,6 +2854,28 @@ class ProductEventListResult(dict):
                  support_alarm: int,
                  type: str,
                  update_time: int):
+        """
+        :param Sequence['GetProductEventListAdditionMsgArgs'] addition_msgs: A list of addition message. Each element contains the following attributes:
+        :param Sequence['GetProductEventListDimensionArgs'] dimensions: Dimensional composition of instance objects.
+        :param str event_cname: Event chinese name.
+        :param str event_ename: Event english name.
+        :param int event_id: Event ID.
+        :param str event_name: Event name filtering, such as `guest_reboot` indicates that the machine restart.
+        :param Sequence['GetProductEventListGroupInfoArgs'] group_infos: A list of group info. Each element contains the following attributes:
+        :param str instance_id: Affect objects, such as `ins-19708ino`.
+        :param str instance_name: The name of this instance.
+        :param int is_alarm_config: Alarm status configuration filter, 1means configured, 0(default) means not configured.
+        :param str product_cname: Product chinese name.
+        :param str product_ename: Product english name.
+        :param str product_name: Product type filtering, such as `cvm` for cloud server.
+        :param str project_id: Project ID filter.
+        :param str region: The region of this instance.
+        :param int start_time: Start timestamp for this query, eg:`1588230000`. Default start time is `now-3600`.
+        :param str status: Event status filter, value range `-`,`alarm`,`recover`, indicating recovered, unrecovered and stateless.
+        :param int support_alarm: Whether to support alarm.
+        :param str type: Event type filtering, with value range `abnormal`,`status_change`, indicating state change and abnormal events.
+        :param int update_time: The update timestamp of this event.
+        """
         pulumi.set(__self__, "addition_msgs", addition_msgs)
         pulumi.set(__self__, "dimensions", dimensions)
         pulumi.set(__self__, "event_cname", event_cname)
@@ -1678,111 +2899,176 @@ class ProductEventListResult(dict):
 
     @property
     @pulumi.getter(name="additionMsgs")
-    def addition_msgs(self) -> Sequence['outputs.ProductEventListAdditionMsgResult']:
+    def addition_msgs(self) -> Sequence['outputs.GetProductEventListAdditionMsgResult']:
+        """
+        A list of addition message. Each element contains the following attributes:
+        """
         return pulumi.get(self, "addition_msgs")
 
     @property
     @pulumi.getter
-    def dimensions(self) -> Sequence['outputs.ProductEventListDimensionResult']:
+    def dimensions(self) -> Sequence['outputs.GetProductEventListDimensionResult']:
+        """
+        Dimensional composition of instance objects.
+        """
         return pulumi.get(self, "dimensions")
 
     @property
     @pulumi.getter(name="eventCname")
     def event_cname(self) -> str:
+        """
+        Event chinese name.
+        """
         return pulumi.get(self, "event_cname")
 
     @property
     @pulumi.getter(name="eventEname")
     def event_ename(self) -> str:
+        """
+        Event english name.
+        """
         return pulumi.get(self, "event_ename")
 
     @property
     @pulumi.getter(name="eventId")
     def event_id(self) -> int:
+        """
+        Event ID.
+        """
         return pulumi.get(self, "event_id")
 
     @property
     @pulumi.getter(name="eventName")
     def event_name(self) -> str:
+        """
+        Event name filtering, such as `guest_reboot` indicates that the machine restart.
+        """
         return pulumi.get(self, "event_name")
 
     @property
     @pulumi.getter(name="groupInfos")
-    def group_infos(self) -> Sequence['outputs.ProductEventListGroupInfoResult']:
+    def group_infos(self) -> Sequence['outputs.GetProductEventListGroupInfoResult']:
+        """
+        A list of group info. Each element contains the following attributes:
+        """
         return pulumi.get(self, "group_infos")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        Affect objects, such as `ins-19708ino`.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        The name of this instance.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="isAlarmConfig")
     def is_alarm_config(self) -> int:
+        """
+        Alarm status configuration filter, 1means configured, 0(default) means not configured.
+        """
         return pulumi.get(self, "is_alarm_config")
 
     @property
     @pulumi.getter(name="productCname")
     def product_cname(self) -> str:
+        """
+        Product chinese name.
+        """
         return pulumi.get(self, "product_cname")
 
     @property
     @pulumi.getter(name="productEname")
     def product_ename(self) -> str:
+        """
+        Product english name.
+        """
         return pulumi.get(self, "product_ename")
 
     @property
     @pulumi.getter(name="productName")
     def product_name(self) -> str:
+        """
+        Product type filtering, such as `cvm` for cloud server.
+        """
         return pulumi.get(self, "product_name")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> str:
+        """
+        Project ID filter.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter
     def region(self) -> str:
+        """
+        The region of this instance.
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> int:
+        """
+        Start timestamp for this query, eg:`1588230000`. Default start time is `now-3600`.
+        """
         return pulumi.get(self, "start_time")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Event status filter, value range `-`,`alarm`,`recover`, indicating recovered, unrecovered and stateless.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="supportAlarm")
     def support_alarm(self) -> int:
+        """
+        Whether to support alarm.
+        """
         return pulumi.get(self, "support_alarm")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Event type filtering, with value range `abnormal`,`status_change`, indicating state change and abnormal events.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> int:
+        """
+        The update timestamp of this event.
+        """
         return pulumi.get(self, "update_time")
 
 
 @pulumi.output_type
-class ProductEventListAdditionMsgResult(dict):
+class GetProductEventListAdditionMsgResult(dict):
     def __init__(__self__, *,
                  key: str,
                  name: str,
                  value: str):
+        """
+        :param str key: The key of this dimension.
+        :param str name: Instance dimension name, eg: `deviceWanIp` for internet ip.
+        :param str value: Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "value", value)
@@ -1790,25 +3076,39 @@ class ProductEventListAdditionMsgResult(dict):
     @property
     @pulumi.getter
     def key(self) -> str:
+        """
+        The key of this dimension.
+        """
         return pulumi.get(self, "key")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Instance dimension name, eg: `deviceWanIp` for internet ip.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def value(self) -> str:
+        """
+        Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         return pulumi.get(self, "value")
 
 
 @pulumi.output_type
-class ProductEventListDimensionResult(dict):
+class GetProductEventListDimensionResult(dict):
     def __init__(__self__, *,
                  key: str,
                  name: str,
                  value: str):
+        """
+        :param str key: The key of this dimension.
+        :param str name: Instance dimension name, eg: `deviceWanIp` for internet ip.
+        :param str value: Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "value", value)
@@ -1816,44 +3116,68 @@ class ProductEventListDimensionResult(dict):
     @property
     @pulumi.getter
     def key(self) -> str:
+        """
+        The key of this dimension.
+        """
         return pulumi.get(self, "key")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Instance dimension name, eg: `deviceWanIp` for internet ip.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def value(self) -> str:
+        """
+        Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         return pulumi.get(self, "value")
 
 
 @pulumi.output_type
-class ProductEventListGroupInfoResult(dict):
+class GetProductEventListGroupInfoResult(dict):
     def __init__(__self__, *,
                  group_id: str,
                  group_name: str):
+        """
+        :param str group_id: Policy group ID.
+        :param str group_name: Policy group name.
+        """
         pulumi.set(__self__, "group_id", group_id)
         pulumi.set(__self__, "group_name", group_name)
 
     @property
     @pulumi.getter(name="groupId")
     def group_id(self) -> str:
+        """
+        Policy group ID.
+        """
         return pulumi.get(self, "group_id")
 
     @property
     @pulumi.getter(name="groupName")
     def group_name(self) -> str:
+        """
+        Policy group name.
+        """
         return pulumi.get(self, "group_name")
 
 
 @pulumi.output_type
-class ProductNamespaceListResult(dict):
+class GetProductNamespaceListResult(dict):
     def __init__(__self__, *,
                  namespace: str,
                  product_chinese_name: str,
                  product_name: str):
+        """
+        :param str namespace: Namespace of each cloud product in monitor system.
+        :param str product_chinese_name: Chinese name of this product.
+        :param str product_name: English name of this product.
+        """
         pulumi.set(__self__, "namespace", namespace)
         pulumi.set(__self__, "product_chinese_name", product_chinese_name)
         pulumi.set(__self__, "product_name", product_name)
@@ -1861,16 +3185,25 @@ class ProductNamespaceListResult(dict):
     @property
     @pulumi.getter
     def namespace(self) -> str:
+        """
+        Namespace of each cloud product in monitor system.
+        """
         return pulumi.get(self, "namespace")
 
     @property
     @pulumi.getter(name="productChineseName")
     def product_chinese_name(self) -> str:
+        """
+        Chinese name of this product.
+        """
         return pulumi.get(self, "product_chinese_name")
 
     @property
     @pulumi.getter(name="productName")
     def product_name(self) -> str:
+        """
+        English name of this product.
+        """
         return pulumi.get(self, "product_name")
 
 

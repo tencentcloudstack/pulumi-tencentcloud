@@ -19,14 +19,10 @@ class SecretVersionArgs:
                  secret_string: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a SecretVersion resource.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-               and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-               bytes. When secret status is `Disabled`, this field will not update anymore.
-        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-               When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         """
         pulumi.set(__self__, "secret_name", secret_name)
         pulumi.set(__self__, "version_id", version_id)
@@ -39,8 +35,7 @@ class SecretVersionArgs:
     @pulumi.getter(name="secretName")
     def secret_name(self) -> pulumi.Input[str]:
         """
-        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "secret_name")
 
@@ -52,8 +47,7 @@ class SecretVersionArgs:
     @pulumi.getter(name="versionId")
     def version_id(self) -> pulumi.Input[str]:
         """
-        Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-        and hyphen '-'. The first character must be a letter or number.
+        Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "version_id")
 
@@ -65,8 +59,7 @@ class SecretVersionArgs:
     @pulumi.getter(name="secretBinary")
     def secret_binary(self) -> Optional[pulumi.Input[str]]:
         """
-        The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-        bytes. When secret status is `Disabled`, this field will not update anymore.
+        The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         """
         return pulumi.get(self, "secret_binary")
 
@@ -78,8 +71,7 @@ class SecretVersionArgs:
     @pulumi.getter(name="secretString")
     def secret_string(self) -> Optional[pulumi.Input[str]]:
         """
-        The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-        When secret status is `Disabled`, this field will not update anymore.
+        The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         """
         return pulumi.get(self, "secret_string")
 
@@ -97,14 +89,10 @@ class _SecretVersionState:
                  version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering SecretVersion resources.
-        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-               bytes. When secret status is `Disabled`, this field will not update anymore.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-               When secret status is `Disabled`, this field will not update anymore.
-        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-               and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         if secret_binary is not None:
             pulumi.set(__self__, "secret_binary", secret_binary)
@@ -119,8 +107,7 @@ class _SecretVersionState:
     @pulumi.getter(name="secretBinary")
     def secret_binary(self) -> Optional[pulumi.Input[str]]:
         """
-        The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-        bytes. When secret status is `Disabled`, this field will not update anymore.
+        The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         """
         return pulumi.get(self, "secret_binary")
 
@@ -132,8 +119,7 @@ class _SecretVersionState:
     @pulumi.getter(name="secretName")
     def secret_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "secret_name")
 
@@ -145,8 +131,7 @@ class _SecretVersionState:
     @pulumi.getter(name="secretString")
     def secret_string(self) -> Optional[pulumi.Input[str]]:
         """
-        The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-        When secret status is `Disabled`, this field will not update anymore.
+        The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         """
         return pulumi.get(self, "secret_string")
 
@@ -158,8 +143,7 @@ class _SecretVersionState:
     @pulumi.getter(name="versionId")
     def version_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-        and hyphen '-'. The first character must be a letter or number.
+        Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "version_id")
 
@@ -179,17 +163,42 @@ class SecretVersion(pulumi.CustomResource):
                  version_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SecretVersion resource with the given unique name, props, and options.
+        Provide a resource to create a SSM secret version.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ssm.Secret("foo",
+            secret_name="test",
+            description="test secret",
+            recovery_window_in_days=0,
+            is_enabled=True,
+            tags={
+                "test-tag": "test",
+            })
+        v1 = tencentcloud.ssm.SecretVersion("v1",
+            secret_name=foo.secret_name,
+            version_id="v1",
+            secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
+        ```
+
+        ## Import
+
+        SSM secret version can be imported using the secretName#versionId, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-               bytes. When secret status is `Disabled`, this field will not update anymore.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-               When secret status is `Disabled`, this field will not update anymore.
-        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-               and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         ...
     @overload
@@ -198,7 +207,36 @@ class SecretVersion(pulumi.CustomResource):
                  args: SecretVersionArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SecretVersion resource with the given unique name, props, and options.
+        Provide a resource to create a SSM secret version.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ssm.Secret("foo",
+            secret_name="test",
+            description="test secret",
+            recovery_window_in_days=0,
+            is_enabled=True,
+            tags={
+                "test-tag": "test",
+            })
+        v1 = tencentcloud.ssm.SecretVersion("v1",
+            secret_name=foo.secret_name,
+            version_id="v1",
+            secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
+        ```
+
+        ## Import
+
+        SSM secret version can be imported using the secretName#versionId, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+        ```
+
         :param str resource_name: The name of the resource.
         :param SecretVersionArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -259,14 +297,10 @@ class SecretVersion(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-               bytes. When secret status is `Disabled`, this field will not update anymore.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-               When secret status is `Disabled`, this field will not update anymore.
-        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-               and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_binary: The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_string: The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        :param pulumi.Input[str] version_id: Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -282,8 +316,7 @@ class SecretVersion(pulumi.CustomResource):
     @pulumi.getter(name="secretBinary")
     def secret_binary(self) -> pulumi.Output[Optional[str]]:
         """
-        The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-        bytes. When secret status is `Disabled`, this field will not update anymore.
+        The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         """
         return pulumi.get(self, "secret_binary")
 
@@ -291,8 +324,7 @@ class SecretVersion(pulumi.CustomResource):
     @pulumi.getter(name="secretName")
     def secret_name(self) -> pulumi.Output[str]:
         """
-        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "secret_name")
 
@@ -300,8 +332,7 @@ class SecretVersion(pulumi.CustomResource):
     @pulumi.getter(name="secretString")
     def secret_string(self) -> pulumi.Output[Optional[str]]:
         """
-        The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-        When secret status is `Disabled`, this field will not update anymore.
+        The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         """
         return pulumi.get(self, "secret_string")
 
@@ -309,8 +340,7 @@ class SecretVersion(pulumi.CustomResource):
     @pulumi.getter(name="versionId")
     def version_id(self) -> pulumi.Output[str]:
         """
-        Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-        and hyphen '-'. The first character must be a letter or number.
+        Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "version_id")
 

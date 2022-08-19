@@ -13,6 +13,9 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class CosShipperCompress
     {
+        /// <summary>
+        /// Compression format. Valid values: gzip, lzop, none (no compression).
+        /// </summary>
         public readonly string Format;
 
         [OutputConstructor]

@@ -97,7 +97,22 @@ class Attachment(pulumi.CustomResource):
                  scaling_group_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Attachment resource with the given unique name, props, and options.
+        Provides a resource to attach or detach CVM instances to a specified scaling group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        attachment = tencentcloud.as_.Attachment("attachment",
+            instance_ids=[
+                "ins-01",
+                "ins-02",
+            ],
+            scaling_group_id="sg-afasfa")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_ids: ID list of CVM instances to be attached to the scaling group.
@@ -110,7 +125,22 @@ class Attachment(pulumi.CustomResource):
                  args: AttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Attachment resource with the given unique name, props, and options.
+        Provides a resource to attach or detach CVM instances to a specified scaling group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        attachment = tencentcloud.as_.Attachment("attachment",
+            instance_ids=[
+                "ins-01",
+                "ins-02",
+            ],
+            scaling_group_id="sg-afasfa")
+        ```
+
         :param str resource_name: The name of the resource.
         :param AttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

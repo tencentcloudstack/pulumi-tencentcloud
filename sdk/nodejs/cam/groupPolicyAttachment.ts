@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CAM group policy attachment.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.cam.GroupPolicyAttachment("foo", {
+ *     groupId: tencentcloud_cam_group.foo.id,
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM group policy attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+ * ```
+ */
 export class GroupPolicyAttachment extends pulumi.CustomResource {
     /**
      * Get an existing GroupPolicyAttachment resource's state with the given name, ID, and optional extra
@@ -33,8 +56,7 @@ export class GroupPolicyAttachment extends pulumi.CustomResource {
     }
 
     /**
-     * Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-     * the others indicate syntax strategy ways.
+     * Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
      */
     public /*out*/ readonly createMode!: pulumi.Output<number>;
     /**
@@ -102,8 +124,7 @@ export class GroupPolicyAttachment extends pulumi.CustomResource {
  */
 export interface GroupPolicyAttachmentState {
     /**
-     * Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-     * the others indicate syntax strategy ways.
+     * Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
      */
     createMode?: pulumi.Input<number>;
     /**

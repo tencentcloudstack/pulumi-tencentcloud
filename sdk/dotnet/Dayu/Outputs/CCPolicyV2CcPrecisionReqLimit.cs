@@ -11,17 +11,32 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCPolicyV2CcPrecisionReqLimit
+    public sealed class CcPolicyV2CcPrecisionReqLimit
     {
+        /// <summary>
+        /// Domain.
+        /// </summary>
         public readonly string Domain;
         public readonly string? InstanceId;
+        /// <summary>
+        /// Ip address.
+        /// </summary>
         public readonly string? Ip;
+        /// <summary>
+        /// Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+        /// </summary>
         public readonly string Level;
-        public readonly ImmutableArray<Outputs.CCPolicyV2CcPrecisionReqLimitPolicy> Policys;
+        /// <summary>
+        /// The CC Frequency Limit Policy Item field.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.CcPolicyV2CcPrecisionReqLimitPolicy> Policys;
+        /// <summary>
+        /// Protocol, preferably HTTP, HTTPS.
+        /// </summary>
         public readonly string Protocol;
 
         [OutputConstructor]
-        private CCPolicyV2CcPrecisionReqLimit(
+        private CcPolicyV2CcPrecisionReqLimit(
             string domain,
 
             string? instanceId,
@@ -30,7 +45,7 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 
             string level,
 
-            ImmutableArray<Outputs.CCPolicyV2CcPrecisionReqLimitPolicy> policys,
+            ImmutableArray<Outputs.CcPolicyV2CcPrecisionReqLimitPolicy> policys,
 
             string protocol)
         {

@@ -10,19 +10,196 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'BackupListListResult',
-    'DefaultParamsParamListResult',
-    'InstancesInstanceListResult',
-    'ParameterListParameterListResult',
     'PrivilegeColumn',
     'PrivilegeDatabase',
     'PrivilegeTable',
-    'ZoneConfigListResult',
-    'ZoneConfigListSellResult',
+    'GetBackupListListResult',
+    'GetDefaultParamsParamListResult',
+    'GetInstanceInstanceListResult',
+    'GetParameterListParameterListResult',
+    'GetZoneConfigListResult',
+    'GetZoneConfigListSellResult',
 ]
 
 @pulumi.output_type
-class BackupListListResult(dict):
+class PrivilegeColumn(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnName":
+            suggest = "column_name"
+        elif key == "databaseName":
+            suggest = "database_name"
+        elif key == "tableName":
+            suggest = "table_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in PrivilegeColumn. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        PrivilegeColumn.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        PrivilegeColumn.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column_name: str,
+                 database_name: str,
+                 privileges: Sequence[str],
+                 table_name: str):
+        """
+        :param str column_name: Column name.
+        :param str database_name: Database name.
+        :param Sequence[str] privileges: Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.
+        :param str table_name: Table name.
+        """
+        pulumi.set(__self__, "column_name", column_name)
+        pulumi.set(__self__, "database_name", database_name)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> str:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> Sequence[str]:
+        """
+        Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.
+        """
+        return pulumi.get(self, "privileges")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_name")
+
+
+@pulumi.output_type
+class PrivilegeDatabase(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "databaseName":
+            suggest = "database_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in PrivilegeDatabase. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        PrivilegeDatabase.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        PrivilegeDatabase.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 database_name: str,
+                 privileges: Sequence[str]):
+        """
+        :param str database_name: Database name.
+        :param Sequence[str] privileges: Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        pulumi.set(__self__, "privileges", privileges)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> Sequence[str]:
+        """
+        Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.
+        """
+        return pulumi.get(self, "privileges")
+
+
+@pulumi.output_type
+class PrivilegeTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "databaseName":
+            suggest = "database_name"
+        elif key == "tableName":
+            suggest = "table_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in PrivilegeTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        PrivilegeTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        PrivilegeTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 database_name: str,
+                 privileges: Sequence[str],
+                 table_name: str):
+        """
+        :param str database_name: Database name.
+        :param Sequence[str] privileges: Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+        :param str table_name: Table name.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> Sequence[str]:
+        """
+        Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+        """
+        return pulumi.get(self, "privileges")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_name")
+
+
+@pulumi.output_type
+class GetBackupListListResult(dict):
     def __init__(__self__, *,
                  backup_id: int,
                  backup_model: str,
@@ -32,6 +209,16 @@ class BackupListListResult(dict):
                  intranet_url: str,
                  size: int,
                  time: str):
+        """
+        :param int backup_id: ID of Backup task.
+        :param str backup_model: Backup method. Supported values include: `physical` - physical backup, and `logical` - logical backup.
+        :param str creator: The owner of the backup files.
+        :param str finish_time: The time at which the backup finishes.
+        :param str internet_url: URL for downloads externally.
+        :param str intranet_url: URL for downloads internally.
+        :param int size: the size of backup file.
+        :param str time: The earliest time at which the backup starts. For example, `2` indicates 2:00 am.
+        """
         pulumi.set(__self__, "backup_id", backup_id)
         pulumi.set(__self__, "backup_model", backup_model)
         pulumi.set(__self__, "creator", creator)
@@ -44,46 +231,70 @@ class BackupListListResult(dict):
     @property
     @pulumi.getter(name="backupId")
     def backup_id(self) -> int:
+        """
+        ID of Backup task.
+        """
         return pulumi.get(self, "backup_id")
 
     @property
     @pulumi.getter(name="backupModel")
     def backup_model(self) -> str:
+        """
+        Backup method. Supported values include: `physical` - physical backup, and `logical` - logical backup.
+        """
         return pulumi.get(self, "backup_model")
 
     @property
     @pulumi.getter
     def creator(self) -> str:
+        """
+        The owner of the backup files.
+        """
         return pulumi.get(self, "creator")
 
     @property
     @pulumi.getter(name="finishTime")
     def finish_time(self) -> str:
+        """
+        The time at which the backup finishes.
+        """
         return pulumi.get(self, "finish_time")
 
     @property
     @pulumi.getter(name="internetUrl")
     def internet_url(self) -> str:
+        """
+        URL for downloads externally.
+        """
         return pulumi.get(self, "internet_url")
 
     @property
     @pulumi.getter(name="intranetUrl")
     def intranet_url(self) -> str:
+        """
+        URL for downloads internally.
+        """
         return pulumi.get(self, "intranet_url")
 
     @property
     @pulumi.getter
     def size(self) -> int:
+        """
+        the size of backup file.
+        """
         return pulumi.get(self, "size")
 
     @property
     @pulumi.getter
     def time(self) -> str:
+        """
+        The earliest time at which the backup starts. For example, `2` indicates 2:00 am.
+        """
         return pulumi.get(self, "time")
 
 
 @pulumi.output_type
-class DefaultParamsParamListResult(dict):
+class GetDefaultParamsParamListResult(dict):
     def __init__(__self__, *,
                  current_value: str,
                  default: str,
@@ -94,6 +305,17 @@ class DefaultParamsParamListResult(dict):
                  name: str,
                  need_reboot: int,
                  param_type: str):
+        """
+        :param str current_value: Param current value.
+        :param str default: Param default value.
+        :param str description: Param description.
+        :param Sequence[str] enum_values: Params available values if type of param is enum.
+        :param int max: Param maximum value if type of param is integer.
+        :param int min: Param minimum value if type of param is integer.
+        :param str name: Param key name.
+        :param int need_reboot: Indicates weather the database instance reboot if param modified.
+        :param str param_type: Type of param.
+        """
         pulumi.set(__self__, "current_value", current_value)
         pulumi.set(__self__, "default", default)
         pulumi.set(__self__, "description", description)
@@ -107,51 +329,78 @@ class DefaultParamsParamListResult(dict):
     @property
     @pulumi.getter(name="currentValue")
     def current_value(self) -> str:
+        """
+        Param current value.
+        """
         return pulumi.get(self, "current_value")
 
     @property
     @pulumi.getter
     def default(self) -> str:
+        """
+        Param default value.
+        """
         return pulumi.get(self, "default")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Param description.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="enumValues")
     def enum_values(self) -> Sequence[str]:
+        """
+        Params available values if type of param is enum.
+        """
         return pulumi.get(self, "enum_values")
 
     @property
     @pulumi.getter
     def max(self) -> int:
+        """
+        Param maximum value if type of param is integer.
+        """
         return pulumi.get(self, "max")
 
     @property
     @pulumi.getter
     def min(self) -> int:
+        """
+        Param minimum value if type of param is integer.
+        """
         return pulumi.get(self, "min")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Param key name.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="needReboot")
     def need_reboot(self) -> int:
+        """
+        Indicates weather the database instance reboot if param modified.
+        """
         return pulumi.get(self, "need_reboot")
 
     @property
     @pulumi.getter(name="paramType")
     def param_type(self) -> str:
+        """
+        Type of param.
+        """
         return pulumi.get(self, "param_type")
 
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstanceInstanceListResult(dict):
     def __init__(__self__, *,
                  auto_renew_flag: int,
                  charge_type: str,
@@ -181,6 +430,36 @@ class InstancesInstanceListResult(dict):
                  volume_size: int,
                  vpc_id: str,
                  zone: str):
+        """
+        :param int auto_renew_flag: Auto renew flag. NOTES: Only supported prepay instance.
+        :param str charge_type: Pay type of instance, valid values are `PREPAID` and `POSTPAID`.
+        :param int cpu_core_count: CPU count.
+        :param str create_time: The time at which a instance is created.
+        :param str dead_line_time: Expire date of instance. NOTES: Only supported prepay instance.
+        :param str device_type: Supported instance model. `HA` - high available version; `Basic` - basic version.
+        :param Sequence[str] dr_instance_ids: ID list of disaster-recovery type associated with the current instance.
+        :param str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
+        :param int init_flag: Initialization mark. Available values: `0` - Uninitialized; `1` - Initialized.
+        :param str instance_name: Name of mysql instance.
+        :param str instance_role: Instance type. Supported values include: `master` - master instance, `dr` - disaster recovery instance, and `ro` - read-only instance.
+        :param str internet_host: Public network domain name.
+        :param int internet_port: Public network port.
+        :param int internet_status: Status of public network.
+        :param str intranet_ip: Instance IP for internal access.
+        :param int intranet_port: Transport layer port number for internal purpose.
+        :param str master_instance_id: Indicates the master instance ID of recovery instances.
+        :param int memory_size: Memory size (in MB).
+        :param str mysql_id: Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
+        :param int pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
+        :param int project_id: Project ID to which the current instance belongs.
+        :param Sequence[str] ro_instance_ids: ID list of read-only type associated with the current instance.
+        :param int slave_sync_mode: Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+        :param int status: Instance status. Available values: `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
+        :param str subnet_id: ID of subnet to which the current instance belongs.
+        :param int volume_size: Disk capacity (in GB).
+        :param str vpc_id: ID of Virtual Private Cloud.
+        :param str zone: Information of available zone.
+        """
         pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         pulumi.set(__self__, "charge_type", charge_type)
         pulumi.set(__self__, "cpu_core_count", cpu_core_count)
@@ -213,146 +492,230 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> int:
+        """
+        Auto renew flag. NOTES: Only supported prepay instance.
+        """
         return pulumi.get(self, "auto_renew_flag")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        Pay type of instance, valid values are `PREPAID` and `POSTPAID`.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="cpuCoreCount")
     def cpu_core_count(self) -> int:
+        """
+        CPU count.
+        """
         return pulumi.get(self, "cpu_core_count")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        The time at which a instance is created.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="deadLineTime")
     def dead_line_time(self) -> str:
+        """
+        Expire date of instance. NOTES: Only supported prepay instance.
+        """
         return pulumi.get(self, "dead_line_time")
 
     @property
     @pulumi.getter(name="deviceType")
     def device_type(self) -> str:
+        """
+        Supported instance model. `HA` - high available version; `Basic` - basic version.
+        """
         return pulumi.get(self, "device_type")
 
     @property
     @pulumi.getter(name="drInstanceIds")
     def dr_instance_ids(self) -> Sequence[str]:
+        """
+        ID list of disaster-recovery type associated with the current instance.
+        """
         return pulumi.get(self, "dr_instance_ids")
 
     @property
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> str:
+        """
+        The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
+        """
         return pulumi.get(self, "engine_version")
 
     @property
     @pulumi.getter(name="initFlag")
     def init_flag(self) -> int:
+        """
+        Initialization mark. Available values: `0` - Uninitialized; `1` - Initialized.
+        """
         return pulumi.get(self, "init_flag")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        Name of mysql instance.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="instanceRole")
     def instance_role(self) -> str:
+        """
+        Instance type. Supported values include: `master` - master instance, `dr` - disaster recovery instance, and `ro` - read-only instance.
+        """
         return pulumi.get(self, "instance_role")
 
     @property
     @pulumi.getter(name="internetHost")
     def internet_host(self) -> str:
+        """
+        Public network domain name.
+        """
         return pulumi.get(self, "internet_host")
 
     @property
     @pulumi.getter(name="internetPort")
     def internet_port(self) -> int:
+        """
+        Public network port.
+        """
         return pulumi.get(self, "internet_port")
 
     @property
     @pulumi.getter(name="internetStatus")
     def internet_status(self) -> int:
+        """
+        Status of public network.
+        """
         return pulumi.get(self, "internet_status")
 
     @property
     @pulumi.getter(name="intranetIp")
     def intranet_ip(self) -> str:
+        """
+        Instance IP for internal access.
+        """
         return pulumi.get(self, "intranet_ip")
 
     @property
     @pulumi.getter(name="intranetPort")
     def intranet_port(self) -> int:
+        """
+        Transport layer port number for internal purpose.
+        """
         return pulumi.get(self, "intranet_port")
 
     @property
     @pulumi.getter(name="masterInstanceId")
     def master_instance_id(self) -> str:
+        """
+        Indicates the master instance ID of recovery instances.
+        """
         return pulumi.get(self, "master_instance_id")
 
     @property
     @pulumi.getter(name="memorySize")
     def memory_size(self) -> int:
+        """
+        Memory size (in MB).
+        """
         return pulumi.get(self, "memory_size")
 
     @property
     @pulumi.getter(name="mysqlId")
     def mysql_id(self) -> str:
+        """
+        Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
+        """
         return pulumi.get(self, "mysql_id")
 
     @property
     @pulumi.getter(name="payType")
     def pay_type(self) -> int:
+        """
+        It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
+        """
         return pulumi.get(self, "pay_type")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        Project ID to which the current instance belongs.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="roInstanceIds")
     def ro_instance_ids(self) -> Sequence[str]:
+        """
+        ID list of read-only type associated with the current instance.
+        """
         return pulumi.get(self, "ro_instance_ids")
 
     @property
     @pulumi.getter(name="slaveSyncMode")
     def slave_sync_mode(self) -> int:
+        """
+        Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+        """
         return pulumi.get(self, "slave_sync_mode")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Instance status. Available values: `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of subnet to which the current instance belongs.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter(name="volumeSize")
     def volume_size(self) -> int:
+        """
+        Disk capacity (in GB).
+        """
         return pulumi.get(self, "volume_size")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of Virtual Private Cloud.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        Information of available zone.
+        """
         return pulumi.get(self, "zone")
 
 
 @pulumi.output_type
-class ParameterListParameterListResult(dict):
+class GetParameterListParameterListResult(dict):
     def __init__(__self__, *,
                  current_value: str,
                  default_value: str,
@@ -363,6 +726,17 @@ class ParameterListParameterListResult(dict):
                  need_reboot: int,
                  parameter_name: str,
                  parameter_type: str):
+        """
+        :param str current_value: Current value.
+        :param str default_value: Default value.
+        :param str description: Parameter specification description.
+        :param Sequence[str] enum_values: Enumerated value.
+        :param int max: Maximum value for the parameter.
+        :param int min: Minimum value for the parameter.
+        :param int need_reboot: Indicates whether reboot is needed to enable the new parameters.
+        :param str parameter_name: Parameter name.
+        :param str parameter_type: Parameter type.
+        """
         pulumi.set(__self__, "current_value", current_value)
         pulumi.set(__self__, "default_value", default_value)
         pulumi.set(__self__, "description", description)
@@ -376,186 +750,78 @@ class ParameterListParameterListResult(dict):
     @property
     @pulumi.getter(name="currentValue")
     def current_value(self) -> str:
+        """
+        Current value.
+        """
         return pulumi.get(self, "current_value")
 
     @property
     @pulumi.getter(name="defaultValue")
     def default_value(self) -> str:
+        """
+        Default value.
+        """
         return pulumi.get(self, "default_value")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Parameter specification description.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="enumValues")
     def enum_values(self) -> Sequence[str]:
+        """
+        Enumerated value.
+        """
         return pulumi.get(self, "enum_values")
 
     @property
     @pulumi.getter
     def max(self) -> int:
+        """
+        Maximum value for the parameter.
+        """
         return pulumi.get(self, "max")
 
     @property
     @pulumi.getter
     def min(self) -> int:
+        """
+        Minimum value for the parameter.
+        """
         return pulumi.get(self, "min")
 
     @property
     @pulumi.getter(name="needReboot")
     def need_reboot(self) -> int:
+        """
+        Indicates whether reboot is needed to enable the new parameters.
+        """
         return pulumi.get(self, "need_reboot")
 
     @property
     @pulumi.getter(name="parameterName")
     def parameter_name(self) -> str:
+        """
+        Parameter name.
+        """
         return pulumi.get(self, "parameter_name")
 
     @property
     @pulumi.getter(name="parameterType")
     def parameter_type(self) -> str:
+        """
+        Parameter type.
+        """
         return pulumi.get(self, "parameter_type")
 
 
 @pulumi.output_type
-class PrivilegeColumn(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "columnName":
-            suggest = "column_name"
-        elif key == "databaseName":
-            suggest = "database_name"
-        elif key == "tableName":
-            suggest = "table_name"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PrivilegeColumn. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PrivilegeColumn.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PrivilegeColumn.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 column_name: str,
-                 database_name: str,
-                 privileges: Sequence[str],
-                 table_name: str):
-        pulumi.set(__self__, "column_name", column_name)
-        pulumi.set(__self__, "database_name", database_name)
-        pulumi.set(__self__, "privileges", privileges)
-        pulumi.set(__self__, "table_name", table_name)
-
-    @property
-    @pulumi.getter(name="columnName")
-    def column_name(self) -> str:
-        return pulumi.get(self, "column_name")
-
-    @property
-    @pulumi.getter(name="databaseName")
-    def database_name(self) -> str:
-        return pulumi.get(self, "database_name")
-
-    @property
-    @pulumi.getter
-    def privileges(self) -> Sequence[str]:
-        return pulumi.get(self, "privileges")
-
-    @property
-    @pulumi.getter(name="tableName")
-    def table_name(self) -> str:
-        return pulumi.get(self, "table_name")
-
-
-@pulumi.output_type
-class PrivilegeDatabase(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "databaseName":
-            suggest = "database_name"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PrivilegeDatabase. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PrivilegeDatabase.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PrivilegeDatabase.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 database_name: str,
-                 privileges: Sequence[str]):
-        pulumi.set(__self__, "database_name", database_name)
-        pulumi.set(__self__, "privileges", privileges)
-
-    @property
-    @pulumi.getter(name="databaseName")
-    def database_name(self) -> str:
-        return pulumi.get(self, "database_name")
-
-    @property
-    @pulumi.getter
-    def privileges(self) -> Sequence[str]:
-        return pulumi.get(self, "privileges")
-
-
-@pulumi.output_type
-class PrivilegeTable(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "databaseName":
-            suggest = "database_name"
-        elif key == "tableName":
-            suggest = "table_name"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PrivilegeTable. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PrivilegeTable.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PrivilegeTable.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 database_name: str,
-                 privileges: Sequence[str],
-                 table_name: str):
-        pulumi.set(__self__, "database_name", database_name)
-        pulumi.set(__self__, "privileges", privileges)
-        pulumi.set(__self__, "table_name", table_name)
-
-    @property
-    @pulumi.getter(name="databaseName")
-    def database_name(self) -> str:
-        return pulumi.get(self, "database_name")
-
-    @property
-    @pulumi.getter
-    def privileges(self) -> Sequence[str]:
-        return pulumi.get(self, "privileges")
-
-    @property
-    @pulumi.getter(name="tableName")
-    def table_name(self) -> str:
-        return pulumi.get(self, "table_name")
-
-
-@pulumi.output_type
-class ZoneConfigListResult(dict):
+class GetZoneConfigListResult(dict):
     def __init__(__self__, *,
                  disaster_recovery_zones: Sequence[str],
                  engine_versions: Sequence[str],
@@ -568,9 +834,23 @@ class ZoneConfigListResult(dict):
                  pay_types: Sequence[int],
                  remote_ro_zones: Sequence[str],
                  second_slave_zones: Sequence[str],
-                 sells: Sequence['outputs.ZoneConfigListSellResult'],
+                 sells: Sequence['outputs.GetZoneConfigListSellResult'],
                  slave_deploy_modes: Sequence[int],
                  support_slave_sync_modes: Sequence[int]):
+        """
+        :param Sequence[str] disaster_recovery_zones: Information about available zones of recovery.
+        :param Sequence[str] engine_versions: The version number of the database engine to use. Supported versions include `5.5`/`5.6`/`5.7`.
+        :param Sequence[str] first_slave_zones: Zone information about first slave instance.
+        :param int is_default: Indicates whether the current DC is the default DC for the region. Possible returned values: `0` - no; `1` - yes.
+        :param int is_support_disaster_recovery: Indicates whether recovery is supported: `0` - No; `1` - Yes.
+        :param int is_support_vpc: Indicates whether VPC is supported: `0` - No; `1` - Yes.
+        :param str name: The name of available zone which is equal to a specific datacenter.
+        :param Sequence[str] remote_ro_zones: Zone information about remote ro instance.
+        :param Sequence[str] second_slave_zones: Zone information about second slave instance.
+        :param Sequence['GetZoneConfigListSellArgs'] sells: A list of supported instance types for sell:
+        :param Sequence[int] slave_deploy_modes: Availability zone deployment method. Available values: `0` - Single availability zone; `1` - Multiple availability zones.
+        :param Sequence[int] support_slave_sync_modes: Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+        """
         pulumi.set(__self__, "disaster_recovery_zones", disaster_recovery_zones)
         pulumi.set(__self__, "engine_versions", engine_versions)
         pulumi.set(__self__, "first_slave_zones", first_slave_zones)
@@ -589,16 +869,25 @@ class ZoneConfigListResult(dict):
     @property
     @pulumi.getter(name="disasterRecoveryZones")
     def disaster_recovery_zones(self) -> Sequence[str]:
+        """
+        Information about available zones of recovery.
+        """
         return pulumi.get(self, "disaster_recovery_zones")
 
     @property
     @pulumi.getter(name="engineVersions")
     def engine_versions(self) -> Sequence[str]:
+        """
+        The version number of the database engine to use. Supported versions include `5.5`/`5.6`/`5.7`.
+        """
         return pulumi.get(self, "engine_versions")
 
     @property
     @pulumi.getter(name="firstSlaveZones")
     def first_slave_zones(self) -> Sequence[str]:
+        """
+        Zone information about first slave instance.
+        """
         return pulumi.get(self, "first_slave_zones")
 
     @property
@@ -609,21 +898,33 @@ class ZoneConfigListResult(dict):
     @property
     @pulumi.getter(name="isDefault")
     def is_default(self) -> int:
+        """
+        Indicates whether the current DC is the default DC for the region. Possible returned values: `0` - no; `1` - yes.
+        """
         return pulumi.get(self, "is_default")
 
     @property
     @pulumi.getter(name="isSupportDisasterRecovery")
     def is_support_disaster_recovery(self) -> int:
+        """
+        Indicates whether recovery is supported: `0` - No; `1` - Yes.
+        """
         return pulumi.get(self, "is_support_disaster_recovery")
 
     @property
     @pulumi.getter(name="isSupportVpc")
     def is_support_vpc(self) -> int:
+        """
+        Indicates whether VPC is supported: `0` - No; `1` - Yes.
+        """
         return pulumi.get(self, "is_support_vpc")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        The name of available zone which is equal to a specific datacenter.
+        """
         return pulumi.get(self, "name")
 
     @property
@@ -634,31 +935,46 @@ class ZoneConfigListResult(dict):
     @property
     @pulumi.getter(name="remoteRoZones")
     def remote_ro_zones(self) -> Sequence[str]:
+        """
+        Zone information about remote ro instance.
+        """
         return pulumi.get(self, "remote_ro_zones")
 
     @property
     @pulumi.getter(name="secondSlaveZones")
     def second_slave_zones(self) -> Sequence[str]:
+        """
+        Zone information about second slave instance.
+        """
         return pulumi.get(self, "second_slave_zones")
 
     @property
     @pulumi.getter
-    def sells(self) -> Sequence['outputs.ZoneConfigListSellResult']:
+    def sells(self) -> Sequence['outputs.GetZoneConfigListSellResult']:
+        """
+        A list of supported instance types for sell:
+        """
         return pulumi.get(self, "sells")
 
     @property
     @pulumi.getter(name="slaveDeployModes")
     def slave_deploy_modes(self) -> Sequence[int]:
+        """
+        Availability zone deployment method. Available values: `0` - Single availability zone; `1` - Multiple availability zones.
+        """
         return pulumi.get(self, "slave_deploy_modes")
 
     @property
     @pulumi.getter(name="supportSlaveSyncModes")
     def support_slave_sync_modes(self) -> Sequence[int]:
+        """
+        Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+        """
         return pulumi.get(self, "support_slave_sync_modes")
 
 
 @pulumi.output_type
-class ZoneConfigListSellResult(dict):
+class GetZoneConfigListSellResult(dict):
     def __init__(__self__, *,
                  cdb_type: str,
                  max_volume_size: int,
@@ -666,6 +982,13 @@ class ZoneConfigListSellResult(dict):
                  min_volume_size: int,
                  qps: int,
                  volume_step: int):
+        """
+        :param int max_volume_size: Maximum disk size (in GB).
+        :param int mem_size: Memory size (in MB).
+        :param int min_volume_size: Minimum disk size (in GB).
+        :param int qps: Queries per second.
+        :param int volume_step: Disk increment (in GB).
+        """
         pulumi.set(__self__, "cdb_type", cdb_type)
         pulumi.set(__self__, "max_volume_size", max_volume_size)
         pulumi.set(__self__, "mem_size", mem_size)
@@ -681,26 +1004,41 @@ class ZoneConfigListSellResult(dict):
     @property
     @pulumi.getter(name="maxVolumeSize")
     def max_volume_size(self) -> int:
+        """
+        Maximum disk size (in GB).
+        """
         return pulumi.get(self, "max_volume_size")
 
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> int:
+        """
+        Memory size (in MB).
+        """
         return pulumi.get(self, "mem_size")
 
     @property
     @pulumi.getter(name="minVolumeSize")
     def min_volume_size(self) -> int:
+        """
+        Minimum disk size (in GB).
+        """
         return pulumi.get(self, "min_volume_size")
 
     @property
     @pulumi.getter
     def qps(self) -> int:
+        """
+        Queries per second.
+        """
         return pulumi.get(self, "qps")
 
     @property
     @pulumi.getter(name="volumeStep")
     def volume_step(self) -> int:
+        """
+        Disk increment (in GB).
+        """
         return pulumi.get(self, "volume_step")
 
 

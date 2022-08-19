@@ -28,7 +28,7 @@ class ZoneArgs:
         :param pulumi.Input[Sequence[pulumi.Input['ZoneAccountVpcSetArgs']]] account_vpc_sets: List of authorized accounts' VPCs to associate with the private domain.
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] remark: Remarks.
-        :param pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]] tag_sets: Tags the private domain when it is created.
+        :param pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]] tag_sets: It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the private dns zone.
         :param pulumi.Input[Sequence[pulumi.Input['ZoneVpcSetArgs']]] vpc_sets: Associates the private domain to a VPC when it is created.
         """
@@ -101,7 +101,7 @@ class ZoneArgs:
     @pulumi.getter(name="tagSets")
     def tag_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]]]:
         """
-        Tags the private domain when it is created.
+        It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         """
         return pulumi.get(self, "tag_sets")
 
@@ -150,7 +150,7 @@ class _ZoneState:
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] domain: Domain name, which must be in the format of standard TLD.
         :param pulumi.Input[str] remark: Remarks.
-        :param pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]] tag_sets: Tags the private domain when it is created.
+        :param pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]] tag_sets: It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the private dns zone.
         :param pulumi.Input[Sequence[pulumi.Input['ZoneVpcSetArgs']]] vpc_sets: Associates the private domain to a VPC when it is created.
         """
@@ -224,7 +224,7 @@ class _ZoneState:
     @pulumi.getter(name="tagSets")
     def tag_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]]]:
         """
-        Tags the private domain when it is created.
+        It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         """
         return pulumi.get(self, "tag_sets")
 
@@ -271,14 +271,49 @@ class Zone(pulumi.CustomResource):
                  vpc_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneVpcSetArgs']]]]] = None,
                  __props__=None):
         """
-        Create a Zone resource with the given unique name, props, and options.
+        Provide a resource to create a Private Dns Zone.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.private_dns.Zone("foo",
+            account_vpc_sets=[tencentcloud.private.dns.ZoneAccountVpcSetArgs(
+                region="ap-guangzhou",
+                uin="454xxxxxxx",
+                uniq_vpc_id="vpc-xxxxx",
+                vpc_name="test-redis",
+            )],
+            dns_forward_status="DISABLED",
+            domain="domain.com",
+            remark="test",
+            tags={
+                "created_by": [{}],
+                "terraform": [{}],
+            },
+            vpc_sets=[tencentcloud.private.dns.ZoneVpcSetArgs(
+                region="ap-guangzhou",
+                uniq_vpc_id="vpc-xxxxx",
+            )])
+        ```
+
+        ## Import
+
+        Private Dns Zone can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneAccountVpcSetArgs']]]] account_vpc_sets: List of authorized accounts' VPCs to associate with the private domain.
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] domain: Domain name, which must be in the format of standard TLD.
         :param pulumi.Input[str] remark: Remarks.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneTagSetArgs']]]] tag_sets: Tags the private domain when it is created.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneTagSetArgs']]]] tag_sets: It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the private dns zone.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneVpcSetArgs']]]] vpc_sets: Associates the private domain to a VPC when it is created.
         """
@@ -289,7 +324,42 @@ class Zone(pulumi.CustomResource):
                  args: ZoneArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Zone resource with the given unique name, props, and options.
+        Provide a resource to create a Private Dns Zone.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.private_dns.Zone("foo",
+            account_vpc_sets=[tencentcloud.private.dns.ZoneAccountVpcSetArgs(
+                region="ap-guangzhou",
+                uin="454xxxxxxx",
+                uniq_vpc_id="vpc-xxxxx",
+                vpc_name="test-redis",
+            )],
+            dns_forward_status="DISABLED",
+            domain="domain.com",
+            remark="test",
+            tags={
+                "created_by": [{}],
+                "terraform": [{}],
+            },
+            vpc_sets=[tencentcloud.private.dns.ZoneVpcSetArgs(
+                region="ap-guangzhou",
+                uniq_vpc_id="vpc-xxxxx",
+            )])
+        ```
+
+        ## Import
+
+        Private Dns Zone can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param ZoneArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -364,7 +434,7 @@ class Zone(pulumi.CustomResource):
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] domain: Domain name, which must be in the format of standard TLD.
         :param pulumi.Input[str] remark: Remarks.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneTagSetArgs']]]] tag_sets: Tags the private domain when it is created.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneTagSetArgs']]]] tag_sets: It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the private dns zone.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneVpcSetArgs']]]] vpc_sets: Associates the private domain to a VPC when it is created.
         """
@@ -417,7 +487,7 @@ class Zone(pulumi.CustomResource):
     @pulumi.getter(name="tagSets")
     def tag_sets(self) -> pulumi.Output[Sequence['outputs.ZoneTagSet']]:
         """
-        Tags the private domain when it is created.
+        It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         """
         return pulumi.get(self, "tag_sets")
 

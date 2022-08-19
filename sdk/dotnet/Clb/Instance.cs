@@ -9,6 +9,206 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Clb
 {
+    /// <summary>
+    /// Provides a resource to create a CLB instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// INTERNAL CLB
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var internalClb = new Tencentcloud.Clb.Instance("internalClb", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             ClbName = "myclb",
+    ///             NetworkType = "INTERNAL",
+    ///             ProjectId = 0,
+    ///             SubnetId = "subnet-12rastkr",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///             VpcId = "vpc-7007ll7q",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// OPEN CLB
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var openClb = new Tencentcloud.Clb.Instance("openClb", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             ClbName = "myclb",
+    ///             NetworkType = "OPEN",
+    ///             ProjectId = 0,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 "sg-o0ek7r93",
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///             TargetRegionInfoRegion = "ap-guangzhou",
+    ///             TargetRegionInfoVpcId = "vpc-da7ffa61",
+    ///             VpcId = "vpc-da7ffa61",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Default enable
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "mytest" },
+    ///             },
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = "ap-guangzhou-1",
+    ///             VpcId = foo.Id,
+    ///             CidrBlock = "10.0.20.0/28",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var sglab = new Tencentcloud.Security.Group("sglab", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "favourite sg",
+    ///             ProjectId = 0,
+    ///         });
+    ///         var openClb = new Tencentcloud.Clb.Instance("openClb", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             NetworkType = "OPEN",
+    ///             ClbName = "my-open-clb",
+    ///             ProjectId = 0,
+    ///             VpcId = foo.Id,
+    ///             LoadBalancerPassToTarget = true,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 sglab.Id,
+    ///             },
+    ///             TargetRegionInfoRegion = "ap-guangzhou",
+    ///             TargetRegionInfoVpcId = foo.Id,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "open" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// CREATE multiple instance
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var openClb1 = new Tencentcloud.Clb.Instance("openClb1", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             ClbName = "hello",
+    ///             MasterZoneId = "ap-guangzhou-3",
+    ///             NetworkType = "OPEN",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// CREATE instance with log
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var vpcTest = new Tencentcloud.Vpc.Instance("vpcTest", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var rtbTest = new Tencentcloud.Route.Table("rtbTest", new Tencentcloud.Route.TableArgs
+    ///         {
+    ///             VpcId = vpcTest.Id,
+    ///         });
+    ///         var subnetTest = new Tencentcloud.Subnet.Instance("subnetTest", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///             CidrBlock = "10.0.1.0/24",
+    ///             RouteTableId = rtbTest.Id,
+    ///             VpcId = vpcTest.Id,
+    ///         });
+    ///         var @set = new Tencentcloud.Clb.LogSet("set", new Tencentcloud.Clb.LogSetArgs
+    ///         {
+    ///             Period = 7,
+    ///         });
+    ///         var topic = new Tencentcloud.Clb.LogTopic("topic", new Tencentcloud.Clb.LogTopicArgs
+    ///         {
+    ///             LogSetId = @set.Id,
+    ///             TopicName = "clb-topic",
+    ///         });
+    ///         var internalClb = new Tencentcloud.Clb.Instance("internalClb", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             ClbName = "myclb",
+    ///             LoadBalancerPassToTarget = true,
+    ///             LogSetId = @set.Id,
+    ///             LogTopicId = topic.Id,
+    ///             NetworkType = "INTERNAL",
+    ///             ProjectId = 0,
+    ///             SubnetId = subnetTest.Id,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///             VpcId = vpcTest.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CLB instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -43,15 +243,13 @@ namespace Pulumi.Tencentcloud.Clb
         public Output<int> InternetBandwidthMaxOut { get; private set; } = null!;
 
         /// <summary>
-        /// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-        /// `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Output("internetChargeType")]
         public Output<string> InternetChargeType { get; private set; } = null!;
 
         /// <summary>
-        /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-        /// backend instance security group.
+        /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         /// </summary>
         [Output("loadBalancerPassToTarget")]
         public Output<bool?> LoadBalancerPassToTarget { get; private set; } = null!;
@@ -93,15 +291,13 @@ namespace Pulumi.Tencentcloud.Clb
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-        /// traffic when the master is down.
+        /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         /// </summary>
         [Output("slaveZoneId")]
         public Output<string?> SlaveZoneId { get; private set; } = null!;
 
         /// <summary>
-        /// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-        /// untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        /// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `tencentcloud.Clb.SnatIp` to handle fixed ips.
         /// </summary>
         [Output("snatIps")]
         public Output<ImmutableArray<Outputs.InstanceSnatIp>> SnatIps { get; private set; } = null!;
@@ -137,9 +333,7 @@ namespace Pulumi.Tencentcloud.Clb
         public Output<string> TargetRegionInfoVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China
-        /// Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing
-        /// (BANDWIDTH_PACKAGE).
+        /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         /// </summary>
         [Output("vipIsp")]
         public Output<string> VipIsp { get; private set; } = null!;
@@ -227,15 +421,13 @@ namespace Pulumi.Tencentcloud.Clb
         public Input<int>? InternetBandwidthMaxOut { get; set; }
 
         /// <summary>
-        /// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-        /// `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
 
         /// <summary>
-        /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-        /// backend instance security group.
+        /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         /// </summary>
         [Input("loadBalancerPassToTarget")]
         public Input<bool>? LoadBalancerPassToTarget { get; set; }
@@ -283,8 +475,7 @@ namespace Pulumi.Tencentcloud.Clb
         }
 
         /// <summary>
-        /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-        /// traffic when the master is down.
+        /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         /// </summary>
         [Input("slaveZoneId")]
         public Input<string>? SlaveZoneId { get; set; }
@@ -293,8 +484,7 @@ namespace Pulumi.Tencentcloud.Clb
         private InputList<Inputs.InstanceSnatIpArgs>? _snatIps;
 
         /// <summary>
-        /// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-        /// untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        /// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `tencentcloud.Clb.SnatIp` to handle fixed ips.
         /// </summary>
         public InputList<Inputs.InstanceSnatIpArgs> SnatIps
         {
@@ -394,15 +584,13 @@ namespace Pulumi.Tencentcloud.Clb
         public Input<int>? InternetBandwidthMaxOut { get; set; }
 
         /// <summary>
-        /// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-        /// `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
 
         /// <summary>
-        /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-        /// backend instance security group.
+        /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         /// </summary>
         [Input("loadBalancerPassToTarget")]
         public Input<bool>? LoadBalancerPassToTarget { get; set; }
@@ -450,8 +638,7 @@ namespace Pulumi.Tencentcloud.Clb
         }
 
         /// <summary>
-        /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-        /// traffic when the master is down.
+        /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         /// </summary>
         [Input("slaveZoneId")]
         public Input<string>? SlaveZoneId { get; set; }
@@ -460,8 +647,7 @@ namespace Pulumi.Tencentcloud.Clb
         private InputList<Inputs.InstanceSnatIpGetArgs>? _snatIps;
 
         /// <summary>
-        /// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-        /// untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        /// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `tencentcloud.Clb.SnatIp` to handle fixed ips.
         /// </summary>
         public InputList<Inputs.InstanceSnatIpGetArgs> SnatIps
         {
@@ -506,9 +692,7 @@ namespace Pulumi.Tencentcloud.Clb
         public Input<string>? TargetRegionInfoVpcId { get; set; }
 
         /// <summary>
-        /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China
-        /// Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing
-        /// (BANDWIDTH_PACKAGE).
+        /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         /// </summary>
         [Input("vipIsp")]
         public Input<string>? VipIsp { get; set; }

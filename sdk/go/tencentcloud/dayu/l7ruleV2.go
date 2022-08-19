@@ -11,6 +11,53 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create dayu new layer 7 rule
+//
+// > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewL7RuleV2(ctx, "tencentcloudDayuL7RuleV2", &Dayu.L7RuleV2Args{
+// 			ResourceId:   pulumi.String("bgpip-000004xe"),
+// 			ResourceIp:   pulumi.String("119.28.217.162"),
+// 			ResourceType: pulumi.String("bgpip"),
+// 			Rule: &dayu.L7RuleV2RuleArgs{
+// 				Domain:     pulumi.String("github.com"),
+// 				KeepEnable: pulumi.Int(false),
+// 				Keeptime:   pulumi.Int(0),
+// 				LbType:     pulumi.Int(1),
+// 				Protocol:   pulumi.String("http"),
+// 				SourceLists: dayu.L7RuleV2RuleSourceListArray{
+// 					&dayu.L7RuleV2RuleSourceListArgs{
+// 						Source: pulumi.String("1.2.3.5"),
+// 						Weight: pulumi.Int(100),
+// 					},
+// 					&dayu.L7RuleV2RuleSourceListArgs{
+// 						Source: pulumi.String("1.2.3.6"),
+// 						Weight: pulumi.Int(100),
+// 					},
+// 				},
+// 				SourceType: pulumi.Int(2),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type L7RuleV2 struct {
 	pulumi.CustomResourceState
 

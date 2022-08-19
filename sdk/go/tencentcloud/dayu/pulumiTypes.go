@@ -10,2822 +10,1236 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type CCHttpPoliciesList struct {
-	Action       string                       `pulumi:"action"`
-	CreateTime   string                       `pulumi:"createTime"`
-	Frequency    int                          `pulumi:"frequency"`
-	IpLists      []string                     `pulumi:"ipLists"`
-	Name         string                       `pulumi:"name"`
-	PolicyId     string                       `pulumi:"policyId"`
-	ResourceId   string                       `pulumi:"resourceId"`
-	ResourceType string                       `pulumi:"resourceType"`
-	RuleLists    []CCHttpPoliciesListRuleList `pulumi:"ruleLists"`
-	Smode        string                       `pulumi:"smode"`
-	Switch       bool                         `pulumi:"switch"`
-}
-
-// CCHttpPoliciesListInput is an input type that accepts CCHttpPoliciesListArgs and CCHttpPoliciesListOutput values.
-// You can construct a concrete instance of `CCHttpPoliciesListInput` via:
-//
-//          CCHttpPoliciesListArgs{...}
-type CCHttpPoliciesListInput interface {
-	pulumi.Input
-
-	ToCCHttpPoliciesListOutput() CCHttpPoliciesListOutput
-	ToCCHttpPoliciesListOutputWithContext(context.Context) CCHttpPoliciesListOutput
-}
-
-type CCHttpPoliciesListArgs struct {
-	Action       pulumi.StringInput                   `pulumi:"action"`
-	CreateTime   pulumi.StringInput                   `pulumi:"createTime"`
-	Frequency    pulumi.IntInput                      `pulumi:"frequency"`
-	IpLists      pulumi.StringArrayInput              `pulumi:"ipLists"`
-	Name         pulumi.StringInput                   `pulumi:"name"`
-	PolicyId     pulumi.StringInput                   `pulumi:"policyId"`
-	ResourceId   pulumi.StringInput                   `pulumi:"resourceId"`
-	ResourceType pulumi.StringInput                   `pulumi:"resourceType"`
-	RuleLists    CCHttpPoliciesListRuleListArrayInput `pulumi:"ruleLists"`
-	Smode        pulumi.StringInput                   `pulumi:"smode"`
-	Switch       pulumi.BoolInput                     `pulumi:"switch"`
-}
-
-func (CCHttpPoliciesListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpPoliciesList)(nil)).Elem()
-}
-
-func (i CCHttpPoliciesListArgs) ToCCHttpPoliciesListOutput() CCHttpPoliciesListOutput {
-	return i.ToCCHttpPoliciesListOutputWithContext(context.Background())
-}
-
-func (i CCHttpPoliciesListArgs) ToCCHttpPoliciesListOutputWithContext(ctx context.Context) CCHttpPoliciesListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpPoliciesListOutput)
-}
-
-// CCHttpPoliciesListArrayInput is an input type that accepts CCHttpPoliciesListArray and CCHttpPoliciesListArrayOutput values.
-// You can construct a concrete instance of `CCHttpPoliciesListArrayInput` via:
-//
-//          CCHttpPoliciesListArray{ CCHttpPoliciesListArgs{...} }
-type CCHttpPoliciesListArrayInput interface {
-	pulumi.Input
-
-	ToCCHttpPoliciesListArrayOutput() CCHttpPoliciesListArrayOutput
-	ToCCHttpPoliciesListArrayOutputWithContext(context.Context) CCHttpPoliciesListArrayOutput
-}
-
-type CCHttpPoliciesListArray []CCHttpPoliciesListInput
-
-func (CCHttpPoliciesListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpPoliciesList)(nil)).Elem()
-}
-
-func (i CCHttpPoliciesListArray) ToCCHttpPoliciesListArrayOutput() CCHttpPoliciesListArrayOutput {
-	return i.ToCCHttpPoliciesListArrayOutputWithContext(context.Background())
-}
-
-func (i CCHttpPoliciesListArray) ToCCHttpPoliciesListArrayOutputWithContext(ctx context.Context) CCHttpPoliciesListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpPoliciesListArrayOutput)
-}
-
-type CCHttpPoliciesListOutput struct{ *pulumi.OutputState }
-
-func (CCHttpPoliciesListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpPoliciesList)(nil)).Elem()
-}
-
-func (o CCHttpPoliciesListOutput) ToCCHttpPoliciesListOutput() CCHttpPoliciesListOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListOutput) ToCCHttpPoliciesListOutputWithContext(ctx context.Context) CCHttpPoliciesListOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) string { return v.Action }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListOutput) Frequency() pulumi.IntOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) int { return v.Frequency }).(pulumi.IntOutput)
-}
-
-func (o CCHttpPoliciesListOutput) IpLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) []string { return v.IpLists }).(pulumi.StringArrayOutput)
-}
-
-func (o CCHttpPoliciesListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListOutput) PolicyId() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) string { return v.PolicyId }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListOutput) ResourceId() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) string { return v.ResourceId }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListOutput) ResourceType() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) string { return v.ResourceType }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListOutput) RuleLists() CCHttpPoliciesListRuleListArrayOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) []CCHttpPoliciesListRuleList { return v.RuleLists }).(CCHttpPoliciesListRuleListArrayOutput)
-}
-
-func (o CCHttpPoliciesListOutput) Smode() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) string { return v.Smode }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListOutput) Switch() pulumi.BoolOutput {
-	return o.ApplyT(func(v CCHttpPoliciesList) bool { return v.Switch }).(pulumi.BoolOutput)
-}
-
-type CCHttpPoliciesListArrayOutput struct{ *pulumi.OutputState }
-
-func (CCHttpPoliciesListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpPoliciesList)(nil)).Elem()
-}
-
-func (o CCHttpPoliciesListArrayOutput) ToCCHttpPoliciesListArrayOutput() CCHttpPoliciesListArrayOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListArrayOutput) ToCCHttpPoliciesListArrayOutputWithContext(ctx context.Context) CCHttpPoliciesListArrayOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListArrayOutput) Index(i pulumi.IntInput) CCHttpPoliciesListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCHttpPoliciesList {
-		return vs[0].([]CCHttpPoliciesList)[vs[1].(int)]
-	}).(CCHttpPoliciesListOutput)
-}
-
-type CCHttpPoliciesListRuleList struct {
-	Operator string `pulumi:"operator"`
-	Skey     string `pulumi:"skey"`
-	Value    string `pulumi:"value"`
-}
-
-// CCHttpPoliciesListRuleListInput is an input type that accepts CCHttpPoliciesListRuleListArgs and CCHttpPoliciesListRuleListOutput values.
-// You can construct a concrete instance of `CCHttpPoliciesListRuleListInput` via:
-//
-//          CCHttpPoliciesListRuleListArgs{...}
-type CCHttpPoliciesListRuleListInput interface {
-	pulumi.Input
-
-	ToCCHttpPoliciesListRuleListOutput() CCHttpPoliciesListRuleListOutput
-	ToCCHttpPoliciesListRuleListOutputWithContext(context.Context) CCHttpPoliciesListRuleListOutput
-}
-
-type CCHttpPoliciesListRuleListArgs struct {
-	Operator pulumi.StringInput `pulumi:"operator"`
-	Skey     pulumi.StringInput `pulumi:"skey"`
-	Value    pulumi.StringInput `pulumi:"value"`
-}
-
-func (CCHttpPoliciesListRuleListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpPoliciesListRuleList)(nil)).Elem()
-}
-
-func (i CCHttpPoliciesListRuleListArgs) ToCCHttpPoliciesListRuleListOutput() CCHttpPoliciesListRuleListOutput {
-	return i.ToCCHttpPoliciesListRuleListOutputWithContext(context.Background())
-}
-
-func (i CCHttpPoliciesListRuleListArgs) ToCCHttpPoliciesListRuleListOutputWithContext(ctx context.Context) CCHttpPoliciesListRuleListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpPoliciesListRuleListOutput)
-}
-
-// CCHttpPoliciesListRuleListArrayInput is an input type that accepts CCHttpPoliciesListRuleListArray and CCHttpPoliciesListRuleListArrayOutput values.
-// You can construct a concrete instance of `CCHttpPoliciesListRuleListArrayInput` via:
-//
-//          CCHttpPoliciesListRuleListArray{ CCHttpPoliciesListRuleListArgs{...} }
-type CCHttpPoliciesListRuleListArrayInput interface {
-	pulumi.Input
-
-	ToCCHttpPoliciesListRuleListArrayOutput() CCHttpPoliciesListRuleListArrayOutput
-	ToCCHttpPoliciesListRuleListArrayOutputWithContext(context.Context) CCHttpPoliciesListRuleListArrayOutput
-}
-
-type CCHttpPoliciesListRuleListArray []CCHttpPoliciesListRuleListInput
-
-func (CCHttpPoliciesListRuleListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpPoliciesListRuleList)(nil)).Elem()
-}
-
-func (i CCHttpPoliciesListRuleListArray) ToCCHttpPoliciesListRuleListArrayOutput() CCHttpPoliciesListRuleListArrayOutput {
-	return i.ToCCHttpPoliciesListRuleListArrayOutputWithContext(context.Background())
-}
-
-func (i CCHttpPoliciesListRuleListArray) ToCCHttpPoliciesListRuleListArrayOutputWithContext(ctx context.Context) CCHttpPoliciesListRuleListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpPoliciesListRuleListArrayOutput)
-}
-
-type CCHttpPoliciesListRuleListOutput struct{ *pulumi.OutputState }
-
-func (CCHttpPoliciesListRuleListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpPoliciesListRuleList)(nil)).Elem()
-}
-
-func (o CCHttpPoliciesListRuleListOutput) ToCCHttpPoliciesListRuleListOutput() CCHttpPoliciesListRuleListOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListRuleListOutput) ToCCHttpPoliciesListRuleListOutputWithContext(ctx context.Context) CCHttpPoliciesListRuleListOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListRuleListOutput) Operator() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesListRuleList) string { return v.Operator }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListRuleListOutput) Skey() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesListRuleList) string { return v.Skey }).(pulumi.StringOutput)
-}
-
-func (o CCHttpPoliciesListRuleListOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpPoliciesListRuleList) string { return v.Value }).(pulumi.StringOutput)
-}
-
-type CCHttpPoliciesListRuleListArrayOutput struct{ *pulumi.OutputState }
-
-func (CCHttpPoliciesListRuleListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpPoliciesListRuleList)(nil)).Elem()
-}
-
-func (o CCHttpPoliciesListRuleListArrayOutput) ToCCHttpPoliciesListRuleListArrayOutput() CCHttpPoliciesListRuleListArrayOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListRuleListArrayOutput) ToCCHttpPoliciesListRuleListArrayOutputWithContext(ctx context.Context) CCHttpPoliciesListRuleListArrayOutput {
-	return o
-}
-
-func (o CCHttpPoliciesListRuleListArrayOutput) Index(i pulumi.IntInput) CCHttpPoliciesListRuleListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCHttpPoliciesListRuleList {
-		return vs[0].([]CCHttpPoliciesListRuleList)[vs[1].(int)]
-	}).(CCHttpPoliciesListRuleListOutput)
-}
-
-type CCHttpPolicyRuleList struct {
+type CcHttpPolicyRuleList struct {
+	// Operator of the rule. Valid values: `include`, `notInclude`, `equal`.
 	Operator *string `pulumi:"operator"`
-	Skey     *string `pulumi:"skey"`
-	Value    *string `pulumi:"value"`
+	// Key of the rule. Valid values: `host`, `cgi`, `ua`, `referer`.
+	Skey *string `pulumi:"skey"`
+	// Rule value, then length should be less than 31 bytes.
+	Value *string `pulumi:"value"`
 }
 
-// CCHttpPolicyRuleListInput is an input type that accepts CCHttpPolicyRuleListArgs and CCHttpPolicyRuleListOutput values.
-// You can construct a concrete instance of `CCHttpPolicyRuleListInput` via:
+// CcHttpPolicyRuleListInput is an input type that accepts CcHttpPolicyRuleListArgs and CcHttpPolicyRuleListOutput values.
+// You can construct a concrete instance of `CcHttpPolicyRuleListInput` via:
 //
-//          CCHttpPolicyRuleListArgs{...}
-type CCHttpPolicyRuleListInput interface {
+//          CcHttpPolicyRuleListArgs{...}
+type CcHttpPolicyRuleListInput interface {
 	pulumi.Input
 
-	ToCCHttpPolicyRuleListOutput() CCHttpPolicyRuleListOutput
-	ToCCHttpPolicyRuleListOutputWithContext(context.Context) CCHttpPolicyRuleListOutput
+	ToCcHttpPolicyRuleListOutput() CcHttpPolicyRuleListOutput
+	ToCcHttpPolicyRuleListOutputWithContext(context.Context) CcHttpPolicyRuleListOutput
 }
 
-type CCHttpPolicyRuleListArgs struct {
+type CcHttpPolicyRuleListArgs struct {
+	// Operator of the rule. Valid values: `include`, `notInclude`, `equal`.
 	Operator pulumi.StringPtrInput `pulumi:"operator"`
-	Skey     pulumi.StringPtrInput `pulumi:"skey"`
-	Value    pulumi.StringPtrInput `pulumi:"value"`
+	// Key of the rule. Valid values: `host`, `cgi`, `ua`, `referer`.
+	Skey pulumi.StringPtrInput `pulumi:"skey"`
+	// Rule value, then length should be less than 31 bytes.
+	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
-func (CCHttpPolicyRuleListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpPolicyRuleList)(nil)).Elem()
+func (CcHttpPolicyRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcHttpPolicyRuleList)(nil)).Elem()
 }
 
-func (i CCHttpPolicyRuleListArgs) ToCCHttpPolicyRuleListOutput() CCHttpPolicyRuleListOutput {
-	return i.ToCCHttpPolicyRuleListOutputWithContext(context.Background())
+func (i CcHttpPolicyRuleListArgs) ToCcHttpPolicyRuleListOutput() CcHttpPolicyRuleListOutput {
+	return i.ToCcHttpPolicyRuleListOutputWithContext(context.Background())
 }
 
-func (i CCHttpPolicyRuleListArgs) ToCCHttpPolicyRuleListOutputWithContext(ctx context.Context) CCHttpPolicyRuleListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpPolicyRuleListOutput)
+func (i CcHttpPolicyRuleListArgs) ToCcHttpPolicyRuleListOutputWithContext(ctx context.Context) CcHttpPolicyRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcHttpPolicyRuleListOutput)
 }
 
-// CCHttpPolicyRuleListArrayInput is an input type that accepts CCHttpPolicyRuleListArray and CCHttpPolicyRuleListArrayOutput values.
-// You can construct a concrete instance of `CCHttpPolicyRuleListArrayInput` via:
+// CcHttpPolicyRuleListArrayInput is an input type that accepts CcHttpPolicyRuleListArray and CcHttpPolicyRuleListArrayOutput values.
+// You can construct a concrete instance of `CcHttpPolicyRuleListArrayInput` via:
 //
-//          CCHttpPolicyRuleListArray{ CCHttpPolicyRuleListArgs{...} }
-type CCHttpPolicyRuleListArrayInput interface {
+//          CcHttpPolicyRuleListArray{ CcHttpPolicyRuleListArgs{...} }
+type CcHttpPolicyRuleListArrayInput interface {
 	pulumi.Input
 
-	ToCCHttpPolicyRuleListArrayOutput() CCHttpPolicyRuleListArrayOutput
-	ToCCHttpPolicyRuleListArrayOutputWithContext(context.Context) CCHttpPolicyRuleListArrayOutput
+	ToCcHttpPolicyRuleListArrayOutput() CcHttpPolicyRuleListArrayOutput
+	ToCcHttpPolicyRuleListArrayOutputWithContext(context.Context) CcHttpPolicyRuleListArrayOutput
 }
 
-type CCHttpPolicyRuleListArray []CCHttpPolicyRuleListInput
+type CcHttpPolicyRuleListArray []CcHttpPolicyRuleListInput
 
-func (CCHttpPolicyRuleListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpPolicyRuleList)(nil)).Elem()
+func (CcHttpPolicyRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcHttpPolicyRuleList)(nil)).Elem()
 }
 
-func (i CCHttpPolicyRuleListArray) ToCCHttpPolicyRuleListArrayOutput() CCHttpPolicyRuleListArrayOutput {
-	return i.ToCCHttpPolicyRuleListArrayOutputWithContext(context.Background())
+func (i CcHttpPolicyRuleListArray) ToCcHttpPolicyRuleListArrayOutput() CcHttpPolicyRuleListArrayOutput {
+	return i.ToCcHttpPolicyRuleListArrayOutputWithContext(context.Background())
 }
 
-func (i CCHttpPolicyRuleListArray) ToCCHttpPolicyRuleListArrayOutputWithContext(ctx context.Context) CCHttpPolicyRuleListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpPolicyRuleListArrayOutput)
+func (i CcHttpPolicyRuleListArray) ToCcHttpPolicyRuleListArrayOutputWithContext(ctx context.Context) CcHttpPolicyRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcHttpPolicyRuleListArrayOutput)
 }
 
-type CCHttpPolicyRuleListOutput struct{ *pulumi.OutputState }
+type CcHttpPolicyRuleListOutput struct{ *pulumi.OutputState }
 
-func (CCHttpPolicyRuleListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpPolicyRuleList)(nil)).Elem()
+func (CcHttpPolicyRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcHttpPolicyRuleList)(nil)).Elem()
 }
 
-func (o CCHttpPolicyRuleListOutput) ToCCHttpPolicyRuleListOutput() CCHttpPolicyRuleListOutput {
+func (o CcHttpPolicyRuleListOutput) ToCcHttpPolicyRuleListOutput() CcHttpPolicyRuleListOutput {
 	return o
 }
 
-func (o CCHttpPolicyRuleListOutput) ToCCHttpPolicyRuleListOutputWithContext(ctx context.Context) CCHttpPolicyRuleListOutput {
+func (o CcHttpPolicyRuleListOutput) ToCcHttpPolicyRuleListOutputWithContext(ctx context.Context) CcHttpPolicyRuleListOutput {
 	return o
 }
 
-func (o CCHttpPolicyRuleListOutput) Operator() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCHttpPolicyRuleList) *string { return v.Operator }).(pulumi.StringPtrOutput)
+// Operator of the rule. Valid values: `include`, `notInclude`, `equal`.
+func (o CcHttpPolicyRuleListOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcHttpPolicyRuleList) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
-func (o CCHttpPolicyRuleListOutput) Skey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCHttpPolicyRuleList) *string { return v.Skey }).(pulumi.StringPtrOutput)
+// Key of the rule. Valid values: `host`, `cgi`, `ua`, `referer`.
+func (o CcHttpPolicyRuleListOutput) Skey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcHttpPolicyRuleList) *string { return v.Skey }).(pulumi.StringPtrOutput)
 }
 
-func (o CCHttpPolicyRuleListOutput) Value() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCHttpPolicyRuleList) *string { return v.Value }).(pulumi.StringPtrOutput)
+// Rule value, then length should be less than 31 bytes.
+func (o CcHttpPolicyRuleListOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcHttpPolicyRuleList) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
 
-type CCHttpPolicyRuleListArrayOutput struct{ *pulumi.OutputState }
+type CcHttpPolicyRuleListArrayOutput struct{ *pulumi.OutputState }
 
-func (CCHttpPolicyRuleListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpPolicyRuleList)(nil)).Elem()
+func (CcHttpPolicyRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcHttpPolicyRuleList)(nil)).Elem()
 }
 
-func (o CCHttpPolicyRuleListArrayOutput) ToCCHttpPolicyRuleListArrayOutput() CCHttpPolicyRuleListArrayOutput {
+func (o CcHttpPolicyRuleListArrayOutput) ToCcHttpPolicyRuleListArrayOutput() CcHttpPolicyRuleListArrayOutput {
 	return o
 }
 
-func (o CCHttpPolicyRuleListArrayOutput) ToCCHttpPolicyRuleListArrayOutputWithContext(ctx context.Context) CCHttpPolicyRuleListArrayOutput {
+func (o CcHttpPolicyRuleListArrayOutput) ToCcHttpPolicyRuleListArrayOutputWithContext(ctx context.Context) CcHttpPolicyRuleListArrayOutput {
 	return o
 }
 
-func (o CCHttpPolicyRuleListArrayOutput) Index(i pulumi.IntInput) CCHttpPolicyRuleListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCHttpPolicyRuleList {
-		return vs[0].([]CCHttpPolicyRuleList)[vs[1].(int)]
-	}).(CCHttpPolicyRuleListOutput)
+func (o CcHttpPolicyRuleListArrayOutput) Index(i pulumi.IntInput) CcHttpPolicyRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcHttpPolicyRuleList {
+		return vs[0].([]CcHttpPolicyRuleList)[vs[1].(int)]
+	}).(CcHttpPolicyRuleListOutput)
 }
 
-type CCHttpsPoliciesList struct {
-	Action       string                        `pulumi:"action"`
-	CreateTime   string                        `pulumi:"createTime"`
-	Domain       string                        `pulumi:"domain"`
-	IpLists      []string                      `pulumi:"ipLists"`
-	Name         string                        `pulumi:"name"`
-	PolicyId     string                        `pulumi:"policyId"`
-	ResourceId   string                        `pulumi:"resourceId"`
-	ResourceType string                        `pulumi:"resourceType"`
-	RuleId       string                        `pulumi:"ruleId"`
-	RuleLists    []CCHttpsPoliciesListRuleList `pulumi:"ruleLists"`
-	Switch       bool                          `pulumi:"switch"`
-}
-
-// CCHttpsPoliciesListInput is an input type that accepts CCHttpsPoliciesListArgs and CCHttpsPoliciesListOutput values.
-// You can construct a concrete instance of `CCHttpsPoliciesListInput` via:
-//
-//          CCHttpsPoliciesListArgs{...}
-type CCHttpsPoliciesListInput interface {
-	pulumi.Input
-
-	ToCCHttpsPoliciesListOutput() CCHttpsPoliciesListOutput
-	ToCCHttpsPoliciesListOutputWithContext(context.Context) CCHttpsPoliciesListOutput
-}
-
-type CCHttpsPoliciesListArgs struct {
-	Action       pulumi.StringInput                    `pulumi:"action"`
-	CreateTime   pulumi.StringInput                    `pulumi:"createTime"`
-	Domain       pulumi.StringInput                    `pulumi:"domain"`
-	IpLists      pulumi.StringArrayInput               `pulumi:"ipLists"`
-	Name         pulumi.StringInput                    `pulumi:"name"`
-	PolicyId     pulumi.StringInput                    `pulumi:"policyId"`
-	ResourceId   pulumi.StringInput                    `pulumi:"resourceId"`
-	ResourceType pulumi.StringInput                    `pulumi:"resourceType"`
-	RuleId       pulumi.StringInput                    `pulumi:"ruleId"`
-	RuleLists    CCHttpsPoliciesListRuleListArrayInput `pulumi:"ruleLists"`
-	Switch       pulumi.BoolInput                      `pulumi:"switch"`
-}
-
-func (CCHttpsPoliciesListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpsPoliciesList)(nil)).Elem()
-}
-
-func (i CCHttpsPoliciesListArgs) ToCCHttpsPoliciesListOutput() CCHttpsPoliciesListOutput {
-	return i.ToCCHttpsPoliciesListOutputWithContext(context.Background())
-}
-
-func (i CCHttpsPoliciesListArgs) ToCCHttpsPoliciesListOutputWithContext(ctx context.Context) CCHttpsPoliciesListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPoliciesListOutput)
-}
-
-// CCHttpsPoliciesListArrayInput is an input type that accepts CCHttpsPoliciesListArray and CCHttpsPoliciesListArrayOutput values.
-// You can construct a concrete instance of `CCHttpsPoliciesListArrayInput` via:
-//
-//          CCHttpsPoliciesListArray{ CCHttpsPoliciesListArgs{...} }
-type CCHttpsPoliciesListArrayInput interface {
-	pulumi.Input
-
-	ToCCHttpsPoliciesListArrayOutput() CCHttpsPoliciesListArrayOutput
-	ToCCHttpsPoliciesListArrayOutputWithContext(context.Context) CCHttpsPoliciesListArrayOutput
-}
-
-type CCHttpsPoliciesListArray []CCHttpsPoliciesListInput
-
-func (CCHttpsPoliciesListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpsPoliciesList)(nil)).Elem()
-}
-
-func (i CCHttpsPoliciesListArray) ToCCHttpsPoliciesListArrayOutput() CCHttpsPoliciesListArrayOutput {
-	return i.ToCCHttpsPoliciesListArrayOutputWithContext(context.Background())
-}
-
-func (i CCHttpsPoliciesListArray) ToCCHttpsPoliciesListArrayOutputWithContext(ctx context.Context) CCHttpsPoliciesListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPoliciesListArrayOutput)
-}
-
-type CCHttpsPoliciesListOutput struct{ *pulumi.OutputState }
-
-func (CCHttpsPoliciesListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpsPoliciesList)(nil)).Elem()
-}
-
-func (o CCHttpsPoliciesListOutput) ToCCHttpsPoliciesListOutput() CCHttpsPoliciesListOutput {
-	return o
-}
-
-func (o CCHttpsPoliciesListOutput) ToCCHttpsPoliciesListOutputWithContext(ctx context.Context) CCHttpsPoliciesListOutput {
-	return o
-}
-
-func (o CCHttpsPoliciesListOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.Action }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) IpLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) []string { return v.IpLists }).(pulumi.StringArrayOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) PolicyId() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.PolicyId }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) ResourceId() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.ResourceId }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) ResourceType() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.ResourceType }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) string { return v.RuleId }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) RuleLists() CCHttpsPoliciesListRuleListArrayOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) []CCHttpsPoliciesListRuleList { return v.RuleLists }).(CCHttpsPoliciesListRuleListArrayOutput)
-}
-
-func (o CCHttpsPoliciesListOutput) Switch() pulumi.BoolOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesList) bool { return v.Switch }).(pulumi.BoolOutput)
-}
-
-type CCHttpsPoliciesListArrayOutput struct{ *pulumi.OutputState }
-
-func (CCHttpsPoliciesListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpsPoliciesList)(nil)).Elem()
-}
-
-func (o CCHttpsPoliciesListArrayOutput) ToCCHttpsPoliciesListArrayOutput() CCHttpsPoliciesListArrayOutput {
-	return o
-}
-
-func (o CCHttpsPoliciesListArrayOutput) ToCCHttpsPoliciesListArrayOutputWithContext(ctx context.Context) CCHttpsPoliciesListArrayOutput {
-	return o
-}
-
-func (o CCHttpsPoliciesListArrayOutput) Index(i pulumi.IntInput) CCHttpsPoliciesListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCHttpsPoliciesList {
-		return vs[0].([]CCHttpsPoliciesList)[vs[1].(int)]
-	}).(CCHttpsPoliciesListOutput)
-}
-
-type CCHttpsPoliciesListRuleList struct {
+type CcHttpsPolicyRuleList struct {
+	// Operator of the rule. Valid values are `include` and `equal`.
 	Operator string `pulumi:"operator"`
-	Skey     string `pulumi:"skey"`
-	Value    string `pulumi:"value"`
+	// Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+	Skey string `pulumi:"skey"`
+	// Rule value, then length should be less than 31 bytes.
+	Value string `pulumi:"value"`
 }
 
-// CCHttpsPoliciesListRuleListInput is an input type that accepts CCHttpsPoliciesListRuleListArgs and CCHttpsPoliciesListRuleListOutput values.
-// You can construct a concrete instance of `CCHttpsPoliciesListRuleListInput` via:
+// CcHttpsPolicyRuleListInput is an input type that accepts CcHttpsPolicyRuleListArgs and CcHttpsPolicyRuleListOutput values.
+// You can construct a concrete instance of `CcHttpsPolicyRuleListInput` via:
 //
-//          CCHttpsPoliciesListRuleListArgs{...}
-type CCHttpsPoliciesListRuleListInput interface {
+//          CcHttpsPolicyRuleListArgs{...}
+type CcHttpsPolicyRuleListInput interface {
 	pulumi.Input
 
-	ToCCHttpsPoliciesListRuleListOutput() CCHttpsPoliciesListRuleListOutput
-	ToCCHttpsPoliciesListRuleListOutputWithContext(context.Context) CCHttpsPoliciesListRuleListOutput
+	ToCcHttpsPolicyRuleListOutput() CcHttpsPolicyRuleListOutput
+	ToCcHttpsPolicyRuleListOutputWithContext(context.Context) CcHttpsPolicyRuleListOutput
 }
 
-type CCHttpsPoliciesListRuleListArgs struct {
+type CcHttpsPolicyRuleListArgs struct {
+	// Operator of the rule. Valid values are `include` and `equal`.
 	Operator pulumi.StringInput `pulumi:"operator"`
-	Skey     pulumi.StringInput `pulumi:"skey"`
-	Value    pulumi.StringInput `pulumi:"value"`
+	// Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+	Skey pulumi.StringInput `pulumi:"skey"`
+	// Rule value, then length should be less than 31 bytes.
+	Value pulumi.StringInput `pulumi:"value"`
 }
 
-func (CCHttpsPoliciesListRuleListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpsPoliciesListRuleList)(nil)).Elem()
+func (CcHttpsPolicyRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcHttpsPolicyRuleList)(nil)).Elem()
 }
 
-func (i CCHttpsPoliciesListRuleListArgs) ToCCHttpsPoliciesListRuleListOutput() CCHttpsPoliciesListRuleListOutput {
-	return i.ToCCHttpsPoliciesListRuleListOutputWithContext(context.Background())
+func (i CcHttpsPolicyRuleListArgs) ToCcHttpsPolicyRuleListOutput() CcHttpsPolicyRuleListOutput {
+	return i.ToCcHttpsPolicyRuleListOutputWithContext(context.Background())
 }
 
-func (i CCHttpsPoliciesListRuleListArgs) ToCCHttpsPoliciesListRuleListOutputWithContext(ctx context.Context) CCHttpsPoliciesListRuleListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPoliciesListRuleListOutput)
+func (i CcHttpsPolicyRuleListArgs) ToCcHttpsPolicyRuleListOutputWithContext(ctx context.Context) CcHttpsPolicyRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcHttpsPolicyRuleListOutput)
 }
 
-// CCHttpsPoliciesListRuleListArrayInput is an input type that accepts CCHttpsPoliciesListRuleListArray and CCHttpsPoliciesListRuleListArrayOutput values.
-// You can construct a concrete instance of `CCHttpsPoliciesListRuleListArrayInput` via:
+// CcHttpsPolicyRuleListArrayInput is an input type that accepts CcHttpsPolicyRuleListArray and CcHttpsPolicyRuleListArrayOutput values.
+// You can construct a concrete instance of `CcHttpsPolicyRuleListArrayInput` via:
 //
-//          CCHttpsPoliciesListRuleListArray{ CCHttpsPoliciesListRuleListArgs{...} }
-type CCHttpsPoliciesListRuleListArrayInput interface {
+//          CcHttpsPolicyRuleListArray{ CcHttpsPolicyRuleListArgs{...} }
+type CcHttpsPolicyRuleListArrayInput interface {
 	pulumi.Input
 
-	ToCCHttpsPoliciesListRuleListArrayOutput() CCHttpsPoliciesListRuleListArrayOutput
-	ToCCHttpsPoliciesListRuleListArrayOutputWithContext(context.Context) CCHttpsPoliciesListRuleListArrayOutput
+	ToCcHttpsPolicyRuleListArrayOutput() CcHttpsPolicyRuleListArrayOutput
+	ToCcHttpsPolicyRuleListArrayOutputWithContext(context.Context) CcHttpsPolicyRuleListArrayOutput
 }
 
-type CCHttpsPoliciesListRuleListArray []CCHttpsPoliciesListRuleListInput
+type CcHttpsPolicyRuleListArray []CcHttpsPolicyRuleListInput
 
-func (CCHttpsPoliciesListRuleListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpsPoliciesListRuleList)(nil)).Elem()
+func (CcHttpsPolicyRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcHttpsPolicyRuleList)(nil)).Elem()
 }
 
-func (i CCHttpsPoliciesListRuleListArray) ToCCHttpsPoliciesListRuleListArrayOutput() CCHttpsPoliciesListRuleListArrayOutput {
-	return i.ToCCHttpsPoliciesListRuleListArrayOutputWithContext(context.Background())
+func (i CcHttpsPolicyRuleListArray) ToCcHttpsPolicyRuleListArrayOutput() CcHttpsPolicyRuleListArrayOutput {
+	return i.ToCcHttpsPolicyRuleListArrayOutputWithContext(context.Background())
 }
 
-func (i CCHttpsPoliciesListRuleListArray) ToCCHttpsPoliciesListRuleListArrayOutputWithContext(ctx context.Context) CCHttpsPoliciesListRuleListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPoliciesListRuleListArrayOutput)
+func (i CcHttpsPolicyRuleListArray) ToCcHttpsPolicyRuleListArrayOutputWithContext(ctx context.Context) CcHttpsPolicyRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcHttpsPolicyRuleListArrayOutput)
 }
 
-type CCHttpsPoliciesListRuleListOutput struct{ *pulumi.OutputState }
+type CcHttpsPolicyRuleListOutput struct{ *pulumi.OutputState }
 
-func (CCHttpsPoliciesListRuleListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpsPoliciesListRuleList)(nil)).Elem()
+func (CcHttpsPolicyRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcHttpsPolicyRuleList)(nil)).Elem()
 }
 
-func (o CCHttpsPoliciesListRuleListOutput) ToCCHttpsPoliciesListRuleListOutput() CCHttpsPoliciesListRuleListOutput {
+func (o CcHttpsPolicyRuleListOutput) ToCcHttpsPolicyRuleListOutput() CcHttpsPolicyRuleListOutput {
 	return o
 }
 
-func (o CCHttpsPoliciesListRuleListOutput) ToCCHttpsPoliciesListRuleListOutputWithContext(ctx context.Context) CCHttpsPoliciesListRuleListOutput {
+func (o CcHttpsPolicyRuleListOutput) ToCcHttpsPolicyRuleListOutputWithContext(ctx context.Context) CcHttpsPolicyRuleListOutput {
 	return o
 }
 
-func (o CCHttpsPoliciesListRuleListOutput) Operator() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesListRuleList) string { return v.Operator }).(pulumi.StringOutput)
+// Operator of the rule. Valid values are `include` and `equal`.
+func (o CcHttpsPolicyRuleListOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v CcHttpsPolicyRuleList) string { return v.Operator }).(pulumi.StringOutput)
 }
 
-func (o CCHttpsPoliciesListRuleListOutput) Skey() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesListRuleList) string { return v.Skey }).(pulumi.StringOutput)
+// Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+func (o CcHttpsPolicyRuleListOutput) Skey() pulumi.StringOutput {
+	return o.ApplyT(func(v CcHttpsPolicyRuleList) string { return v.Skey }).(pulumi.StringOutput)
 }
 
-func (o CCHttpsPoliciesListRuleListOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPoliciesListRuleList) string { return v.Value }).(pulumi.StringOutput)
+// Rule value, then length should be less than 31 bytes.
+func (o CcHttpsPolicyRuleListOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CcHttpsPolicyRuleList) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type CCHttpsPoliciesListRuleListArrayOutput struct{ *pulumi.OutputState }
+type CcHttpsPolicyRuleListArrayOutput struct{ *pulumi.OutputState }
 
-func (CCHttpsPoliciesListRuleListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpsPoliciesListRuleList)(nil)).Elem()
+func (CcHttpsPolicyRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcHttpsPolicyRuleList)(nil)).Elem()
 }
 
-func (o CCHttpsPoliciesListRuleListArrayOutput) ToCCHttpsPoliciesListRuleListArrayOutput() CCHttpsPoliciesListRuleListArrayOutput {
+func (o CcHttpsPolicyRuleListArrayOutput) ToCcHttpsPolicyRuleListArrayOutput() CcHttpsPolicyRuleListArrayOutput {
 	return o
 }
 
-func (o CCHttpsPoliciesListRuleListArrayOutput) ToCCHttpsPoliciesListRuleListArrayOutputWithContext(ctx context.Context) CCHttpsPoliciesListRuleListArrayOutput {
+func (o CcHttpsPolicyRuleListArrayOutput) ToCcHttpsPolicyRuleListArrayOutputWithContext(ctx context.Context) CcHttpsPolicyRuleListArrayOutput {
 	return o
 }
 
-func (o CCHttpsPoliciesListRuleListArrayOutput) Index(i pulumi.IntInput) CCHttpsPoliciesListRuleListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCHttpsPoliciesListRuleList {
-		return vs[0].([]CCHttpsPoliciesListRuleList)[vs[1].(int)]
-	}).(CCHttpsPoliciesListRuleListOutput)
+func (o CcHttpsPolicyRuleListArrayOutput) Index(i pulumi.IntInput) CcHttpsPolicyRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcHttpsPolicyRuleList {
+		return vs[0].([]CcHttpsPolicyRuleList)[vs[1].(int)]
+	}).(CcHttpsPolicyRuleListOutput)
 }
 
-type CCHttpsPolicyRuleList struct {
-	Operator string `pulumi:"operator"`
-	Skey     string `pulumi:"skey"`
-	Value    string `pulumi:"value"`
-}
-
-// CCHttpsPolicyRuleListInput is an input type that accepts CCHttpsPolicyRuleListArgs and CCHttpsPolicyRuleListOutput values.
-// You can construct a concrete instance of `CCHttpsPolicyRuleListInput` via:
-//
-//          CCHttpsPolicyRuleListArgs{...}
-type CCHttpsPolicyRuleListInput interface {
-	pulumi.Input
-
-	ToCCHttpsPolicyRuleListOutput() CCHttpsPolicyRuleListOutput
-	ToCCHttpsPolicyRuleListOutputWithContext(context.Context) CCHttpsPolicyRuleListOutput
-}
-
-type CCHttpsPolicyRuleListArgs struct {
-	Operator pulumi.StringInput `pulumi:"operator"`
-	Skey     pulumi.StringInput `pulumi:"skey"`
-	Value    pulumi.StringInput `pulumi:"value"`
-}
-
-func (CCHttpsPolicyRuleListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpsPolicyRuleList)(nil)).Elem()
-}
-
-func (i CCHttpsPolicyRuleListArgs) ToCCHttpsPolicyRuleListOutput() CCHttpsPolicyRuleListOutput {
-	return i.ToCCHttpsPolicyRuleListOutputWithContext(context.Background())
-}
-
-func (i CCHttpsPolicyRuleListArgs) ToCCHttpsPolicyRuleListOutputWithContext(ctx context.Context) CCHttpsPolicyRuleListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPolicyRuleListOutput)
-}
-
-// CCHttpsPolicyRuleListArrayInput is an input type that accepts CCHttpsPolicyRuleListArray and CCHttpsPolicyRuleListArrayOutput values.
-// You can construct a concrete instance of `CCHttpsPolicyRuleListArrayInput` via:
-//
-//          CCHttpsPolicyRuleListArray{ CCHttpsPolicyRuleListArgs{...} }
-type CCHttpsPolicyRuleListArrayInput interface {
-	pulumi.Input
-
-	ToCCHttpsPolicyRuleListArrayOutput() CCHttpsPolicyRuleListArrayOutput
-	ToCCHttpsPolicyRuleListArrayOutputWithContext(context.Context) CCHttpsPolicyRuleListArrayOutput
-}
-
-type CCHttpsPolicyRuleListArray []CCHttpsPolicyRuleListInput
-
-func (CCHttpsPolicyRuleListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpsPolicyRuleList)(nil)).Elem()
-}
-
-func (i CCHttpsPolicyRuleListArray) ToCCHttpsPolicyRuleListArrayOutput() CCHttpsPolicyRuleListArrayOutput {
-	return i.ToCCHttpsPolicyRuleListArrayOutputWithContext(context.Background())
-}
-
-func (i CCHttpsPolicyRuleListArray) ToCCHttpsPolicyRuleListArrayOutputWithContext(ctx context.Context) CCHttpsPolicyRuleListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCHttpsPolicyRuleListArrayOutput)
-}
-
-type CCHttpsPolicyRuleListOutput struct{ *pulumi.OutputState }
-
-func (CCHttpsPolicyRuleListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCHttpsPolicyRuleList)(nil)).Elem()
-}
-
-func (o CCHttpsPolicyRuleListOutput) ToCCHttpsPolicyRuleListOutput() CCHttpsPolicyRuleListOutput {
-	return o
-}
-
-func (o CCHttpsPolicyRuleListOutput) ToCCHttpsPolicyRuleListOutputWithContext(ctx context.Context) CCHttpsPolicyRuleListOutput {
-	return o
-}
-
-func (o CCHttpsPolicyRuleListOutput) Operator() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPolicyRuleList) string { return v.Operator }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPolicyRuleListOutput) Skey() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPolicyRuleList) string { return v.Skey }).(pulumi.StringOutput)
-}
-
-func (o CCHttpsPolicyRuleListOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v CCHttpsPolicyRuleList) string { return v.Value }).(pulumi.StringOutput)
-}
-
-type CCHttpsPolicyRuleListArrayOutput struct{ *pulumi.OutputState }
-
-func (CCHttpsPolicyRuleListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCHttpsPolicyRuleList)(nil)).Elem()
-}
-
-func (o CCHttpsPolicyRuleListArrayOutput) ToCCHttpsPolicyRuleListArrayOutput() CCHttpsPolicyRuleListArrayOutput {
-	return o
-}
-
-func (o CCHttpsPolicyRuleListArrayOutput) ToCCHttpsPolicyRuleListArrayOutputWithContext(ctx context.Context) CCHttpsPolicyRuleListArrayOutput {
-	return o
-}
-
-func (o CCHttpsPolicyRuleListArrayOutput) Index(i pulumi.IntInput) CCHttpsPolicyRuleListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCHttpsPolicyRuleList {
-		return vs[0].([]CCHttpsPolicyRuleList)[vs[1].(int)]
-	}).(CCHttpsPolicyRuleListOutput)
-}
-
-type CCPolicyV2CcBlackWhiteIp struct {
-	BlackWhiteIp string  `pulumi:"blackWhiteIp"`
-	CreateTime   *string `pulumi:"createTime"`
-	Domain       string  `pulumi:"domain"`
-	ModifyTime   *string `pulumi:"modifyTime"`
-	Protocol     string  `pulumi:"protocol"`
-	Type         string  `pulumi:"type"`
-}
-
-// CCPolicyV2CcBlackWhiteIpInput is an input type that accepts CCPolicyV2CcBlackWhiteIpArgs and CCPolicyV2CcBlackWhiteIpOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcBlackWhiteIpInput` via:
-//
-//          CCPolicyV2CcBlackWhiteIpArgs{...}
-type CCPolicyV2CcBlackWhiteIpInput interface {
-	pulumi.Input
-
-	ToCCPolicyV2CcBlackWhiteIpOutput() CCPolicyV2CcBlackWhiteIpOutput
-	ToCCPolicyV2CcBlackWhiteIpOutputWithContext(context.Context) CCPolicyV2CcBlackWhiteIpOutput
-}
-
-type CCPolicyV2CcBlackWhiteIpArgs struct {
-	BlackWhiteIp pulumi.StringInput    `pulumi:"blackWhiteIp"`
-	CreateTime   pulumi.StringPtrInput `pulumi:"createTime"`
-	Domain       pulumi.StringInput    `pulumi:"domain"`
-	ModifyTime   pulumi.StringPtrInput `pulumi:"modifyTime"`
-	Protocol     pulumi.StringInput    `pulumi:"protocol"`
-	Type         pulumi.StringInput    `pulumi:"type"`
-}
-
-func (CCPolicyV2CcBlackWhiteIpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcBlackWhiteIp)(nil)).Elem()
-}
-
-func (i CCPolicyV2CcBlackWhiteIpArgs) ToCCPolicyV2CcBlackWhiteIpOutput() CCPolicyV2CcBlackWhiteIpOutput {
-	return i.ToCCPolicyV2CcBlackWhiteIpOutputWithContext(context.Background())
-}
-
-func (i CCPolicyV2CcBlackWhiteIpArgs) ToCCPolicyV2CcBlackWhiteIpOutputWithContext(ctx context.Context) CCPolicyV2CcBlackWhiteIpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcBlackWhiteIpOutput)
-}
-
-// CCPolicyV2CcBlackWhiteIpArrayInput is an input type that accepts CCPolicyV2CcBlackWhiteIpArray and CCPolicyV2CcBlackWhiteIpArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcBlackWhiteIpArrayInput` via:
-//
-//          CCPolicyV2CcBlackWhiteIpArray{ CCPolicyV2CcBlackWhiteIpArgs{...} }
-type CCPolicyV2CcBlackWhiteIpArrayInput interface {
-	pulumi.Input
-
-	ToCCPolicyV2CcBlackWhiteIpArrayOutput() CCPolicyV2CcBlackWhiteIpArrayOutput
-	ToCCPolicyV2CcBlackWhiteIpArrayOutputWithContext(context.Context) CCPolicyV2CcBlackWhiteIpArrayOutput
-}
-
-type CCPolicyV2CcBlackWhiteIpArray []CCPolicyV2CcBlackWhiteIpInput
-
-func (CCPolicyV2CcBlackWhiteIpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcBlackWhiteIp)(nil)).Elem()
-}
-
-func (i CCPolicyV2CcBlackWhiteIpArray) ToCCPolicyV2CcBlackWhiteIpArrayOutput() CCPolicyV2CcBlackWhiteIpArrayOutput {
-	return i.ToCCPolicyV2CcBlackWhiteIpArrayOutputWithContext(context.Background())
-}
-
-func (i CCPolicyV2CcBlackWhiteIpArray) ToCCPolicyV2CcBlackWhiteIpArrayOutputWithContext(ctx context.Context) CCPolicyV2CcBlackWhiteIpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcBlackWhiteIpArrayOutput)
-}
-
-type CCPolicyV2CcBlackWhiteIpOutput struct{ *pulumi.OutputState }
-
-func (CCPolicyV2CcBlackWhiteIpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcBlackWhiteIp)(nil)).Elem()
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) ToCCPolicyV2CcBlackWhiteIpOutput() CCPolicyV2CcBlackWhiteIpOutput {
-	return o
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) ToCCPolicyV2CcBlackWhiteIpOutputWithContext(ctx context.Context) CCPolicyV2CcBlackWhiteIpOutput {
-	return o
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) BlackWhiteIp() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcBlackWhiteIp) string { return v.BlackWhiteIp }).(pulumi.StringOutput)
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) CreateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcBlackWhiteIp) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcBlackWhiteIp) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) ModifyTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcBlackWhiteIp) *string { return v.ModifyTime }).(pulumi.StringPtrOutput)
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcBlackWhiteIp) string { return v.Protocol }).(pulumi.StringOutput)
-}
-
-func (o CCPolicyV2CcBlackWhiteIpOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcBlackWhiteIp) string { return v.Type }).(pulumi.StringOutput)
-}
-
-type CCPolicyV2CcBlackWhiteIpArrayOutput struct{ *pulumi.OutputState }
-
-func (CCPolicyV2CcBlackWhiteIpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcBlackWhiteIp)(nil)).Elem()
-}
-
-func (o CCPolicyV2CcBlackWhiteIpArrayOutput) ToCCPolicyV2CcBlackWhiteIpArrayOutput() CCPolicyV2CcBlackWhiteIpArrayOutput {
-	return o
-}
-
-func (o CCPolicyV2CcBlackWhiteIpArrayOutput) ToCCPolicyV2CcBlackWhiteIpArrayOutputWithContext(ctx context.Context) CCPolicyV2CcBlackWhiteIpArrayOutput {
-	return o
-}
-
-func (o CCPolicyV2CcBlackWhiteIpArrayOutput) Index(i pulumi.IntInput) CCPolicyV2CcBlackWhiteIpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCPolicyV2CcBlackWhiteIp {
-		return vs[0].([]CCPolicyV2CcBlackWhiteIp)[vs[1].(int)]
-	}).(CCPolicyV2CcBlackWhiteIpOutput)
-}
-
-type CCPolicyV2CcGeoIpPolicy struct {
-	Action     string  `pulumi:"action"`
-	AreaLists  []int   `pulumi:"areaLists"`
+type CcPolicyV2CcBlackWhiteIp struct {
+	// Blacklist and whitelist IP addresses.
+	BlackWhiteIp string `pulumi:"blackWhiteIp"`
+	// Create time.
 	CreateTime *string `pulumi:"createTime"`
-	Domain     string  `pulumi:"domain"`
+	// Domain.
+	Domain string `pulumi:"domain"`
+	// Modify time.
 	ModifyTime *string `pulumi:"modifyTime"`
-	Protocol   string  `pulumi:"protocol"`
-	RegionType string  `pulumi:"regionType"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+	// IP type, value [black(blacklist IP), white (whitelist IP)].
+	Type string `pulumi:"type"`
 }
 
-// CCPolicyV2CcGeoIpPolicyInput is an input type that accepts CCPolicyV2CcGeoIpPolicyArgs and CCPolicyV2CcGeoIpPolicyOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcGeoIpPolicyInput` via:
+// CcPolicyV2CcBlackWhiteIpInput is an input type that accepts CcPolicyV2CcBlackWhiteIpArgs and CcPolicyV2CcBlackWhiteIpOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcBlackWhiteIpInput` via:
 //
-//          CCPolicyV2CcGeoIpPolicyArgs{...}
-type CCPolicyV2CcGeoIpPolicyInput interface {
+//          CcPolicyV2CcBlackWhiteIpArgs{...}
+type CcPolicyV2CcBlackWhiteIpInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcGeoIpPolicyOutput() CCPolicyV2CcGeoIpPolicyOutput
-	ToCCPolicyV2CcGeoIpPolicyOutputWithContext(context.Context) CCPolicyV2CcGeoIpPolicyOutput
+	ToCcPolicyV2CcBlackWhiteIpOutput() CcPolicyV2CcBlackWhiteIpOutput
+	ToCcPolicyV2CcBlackWhiteIpOutputWithContext(context.Context) CcPolicyV2CcBlackWhiteIpOutput
 }
 
-type CCPolicyV2CcGeoIpPolicyArgs struct {
-	Action     pulumi.StringInput    `pulumi:"action"`
-	AreaLists  pulumi.IntArrayInput  `pulumi:"areaLists"`
+type CcPolicyV2CcBlackWhiteIpArgs struct {
+	// Blacklist and whitelist IP addresses.
+	BlackWhiteIp pulumi.StringInput `pulumi:"blackWhiteIp"`
+	// Create time.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
-	Domain     pulumi.StringInput    `pulumi:"domain"`
+	// Domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Modify time.
 	ModifyTime pulumi.StringPtrInput `pulumi:"modifyTime"`
-	Protocol   pulumi.StringInput    `pulumi:"protocol"`
-	RegionType pulumi.StringInput    `pulumi:"regionType"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// IP type, value [black(blacklist IP), white (whitelist IP)].
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
-func (CCPolicyV2CcGeoIpPolicyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcGeoIpPolicy)(nil)).Elem()
+func (CcPolicyV2CcBlackWhiteIpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcBlackWhiteIp)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcGeoIpPolicyArgs) ToCCPolicyV2CcGeoIpPolicyOutput() CCPolicyV2CcGeoIpPolicyOutput {
-	return i.ToCCPolicyV2CcGeoIpPolicyOutputWithContext(context.Background())
+func (i CcPolicyV2CcBlackWhiteIpArgs) ToCcPolicyV2CcBlackWhiteIpOutput() CcPolicyV2CcBlackWhiteIpOutput {
+	return i.ToCcPolicyV2CcBlackWhiteIpOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcGeoIpPolicyArgs) ToCCPolicyV2CcGeoIpPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcGeoIpPolicyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcGeoIpPolicyOutput)
+func (i CcPolicyV2CcBlackWhiteIpArgs) ToCcPolicyV2CcBlackWhiteIpOutputWithContext(ctx context.Context) CcPolicyV2CcBlackWhiteIpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcBlackWhiteIpOutput)
 }
 
-// CCPolicyV2CcGeoIpPolicyArrayInput is an input type that accepts CCPolicyV2CcGeoIpPolicyArray and CCPolicyV2CcGeoIpPolicyArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcGeoIpPolicyArrayInput` via:
+// CcPolicyV2CcBlackWhiteIpArrayInput is an input type that accepts CcPolicyV2CcBlackWhiteIpArray and CcPolicyV2CcBlackWhiteIpArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcBlackWhiteIpArrayInput` via:
 //
-//          CCPolicyV2CcGeoIpPolicyArray{ CCPolicyV2CcGeoIpPolicyArgs{...} }
-type CCPolicyV2CcGeoIpPolicyArrayInput interface {
+//          CcPolicyV2CcBlackWhiteIpArray{ CcPolicyV2CcBlackWhiteIpArgs{...} }
+type CcPolicyV2CcBlackWhiteIpArrayInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcGeoIpPolicyArrayOutput() CCPolicyV2CcGeoIpPolicyArrayOutput
-	ToCCPolicyV2CcGeoIpPolicyArrayOutputWithContext(context.Context) CCPolicyV2CcGeoIpPolicyArrayOutput
+	ToCcPolicyV2CcBlackWhiteIpArrayOutput() CcPolicyV2CcBlackWhiteIpArrayOutput
+	ToCcPolicyV2CcBlackWhiteIpArrayOutputWithContext(context.Context) CcPolicyV2CcBlackWhiteIpArrayOutput
 }
 
-type CCPolicyV2CcGeoIpPolicyArray []CCPolicyV2CcGeoIpPolicyInput
+type CcPolicyV2CcBlackWhiteIpArray []CcPolicyV2CcBlackWhiteIpInput
 
-func (CCPolicyV2CcGeoIpPolicyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcGeoIpPolicy)(nil)).Elem()
+func (CcPolicyV2CcBlackWhiteIpArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcBlackWhiteIp)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcGeoIpPolicyArray) ToCCPolicyV2CcGeoIpPolicyArrayOutput() CCPolicyV2CcGeoIpPolicyArrayOutput {
-	return i.ToCCPolicyV2CcGeoIpPolicyArrayOutputWithContext(context.Background())
+func (i CcPolicyV2CcBlackWhiteIpArray) ToCcPolicyV2CcBlackWhiteIpArrayOutput() CcPolicyV2CcBlackWhiteIpArrayOutput {
+	return i.ToCcPolicyV2CcBlackWhiteIpArrayOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcGeoIpPolicyArray) ToCCPolicyV2CcGeoIpPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcGeoIpPolicyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcGeoIpPolicyArrayOutput)
+func (i CcPolicyV2CcBlackWhiteIpArray) ToCcPolicyV2CcBlackWhiteIpArrayOutputWithContext(ctx context.Context) CcPolicyV2CcBlackWhiteIpArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcBlackWhiteIpArrayOutput)
 }
 
-type CCPolicyV2CcGeoIpPolicyOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcBlackWhiteIpOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcGeoIpPolicyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcGeoIpPolicy)(nil)).Elem()
+func (CcPolicyV2CcBlackWhiteIpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcBlackWhiteIp)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) ToCCPolicyV2CcGeoIpPolicyOutput() CCPolicyV2CcGeoIpPolicyOutput {
+func (o CcPolicyV2CcBlackWhiteIpOutput) ToCcPolicyV2CcBlackWhiteIpOutput() CcPolicyV2CcBlackWhiteIpOutput {
 	return o
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) ToCCPolicyV2CcGeoIpPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcGeoIpPolicyOutput {
+func (o CcPolicyV2CcBlackWhiteIpOutput) ToCcPolicyV2CcBlackWhiteIpOutputWithContext(ctx context.Context) CcPolicyV2CcBlackWhiteIpOutput {
 	return o
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcGeoIpPolicy) string { return v.Action }).(pulumi.StringOutput)
+// Blacklist and whitelist IP addresses.
+func (o CcPolicyV2CcBlackWhiteIpOutput) BlackWhiteIp() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcBlackWhiteIp) string { return v.BlackWhiteIp }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) AreaLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v CCPolicyV2CcGeoIpPolicy) []int { return v.AreaLists }).(pulumi.IntArrayOutput)
+// Create time.
+func (o CcPolicyV2CcBlackWhiteIpOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcBlackWhiteIp) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) CreateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcGeoIpPolicy) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+// Domain.
+func (o CcPolicyV2CcBlackWhiteIpOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcBlackWhiteIp) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcGeoIpPolicy) string { return v.Domain }).(pulumi.StringOutput)
+// Modify time.
+func (o CcPolicyV2CcBlackWhiteIpOutput) ModifyTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcBlackWhiteIp) *string { return v.ModifyTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) ModifyTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcGeoIpPolicy) *string { return v.ModifyTime }).(pulumi.StringPtrOutput)
+// Protocol.
+func (o CcPolicyV2CcBlackWhiteIpOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcBlackWhiteIp) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcGeoIpPolicy) string { return v.Protocol }).(pulumi.StringOutput)
+// IP type, value [black(blacklist IP), white (whitelist IP)].
+func (o CcPolicyV2CcBlackWhiteIpOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcBlackWhiteIp) string { return v.Type }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcGeoIpPolicyOutput) RegionType() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcGeoIpPolicy) string { return v.RegionType }).(pulumi.StringOutput)
+type CcPolicyV2CcBlackWhiteIpArrayOutput struct{ *pulumi.OutputState }
+
+func (CcPolicyV2CcBlackWhiteIpArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcBlackWhiteIp)(nil)).Elem()
 }
 
-type CCPolicyV2CcGeoIpPolicyArrayOutput struct{ *pulumi.OutputState }
-
-func (CCPolicyV2CcGeoIpPolicyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcGeoIpPolicy)(nil)).Elem()
-}
-
-func (o CCPolicyV2CcGeoIpPolicyArrayOutput) ToCCPolicyV2CcGeoIpPolicyArrayOutput() CCPolicyV2CcGeoIpPolicyArrayOutput {
+func (o CcPolicyV2CcBlackWhiteIpArrayOutput) ToCcPolicyV2CcBlackWhiteIpArrayOutput() CcPolicyV2CcBlackWhiteIpArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcGeoIpPolicyArrayOutput) ToCCPolicyV2CcGeoIpPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcGeoIpPolicyArrayOutput {
+func (o CcPolicyV2CcBlackWhiteIpArrayOutput) ToCcPolicyV2CcBlackWhiteIpArrayOutputWithContext(ctx context.Context) CcPolicyV2CcBlackWhiteIpArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcGeoIpPolicyArrayOutput) Index(i pulumi.IntInput) CCPolicyV2CcGeoIpPolicyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCPolicyV2CcGeoIpPolicy {
-		return vs[0].([]CCPolicyV2CcGeoIpPolicy)[vs[1].(int)]
-	}).(CCPolicyV2CcGeoIpPolicyOutput)
+func (o CcPolicyV2CcBlackWhiteIpArrayOutput) Index(i pulumi.IntInput) CcPolicyV2CcBlackWhiteIpOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcPolicyV2CcBlackWhiteIp {
+		return vs[0].([]CcPolicyV2CcBlackWhiteIp)[vs[1].(int)]
+	}).(CcPolicyV2CcBlackWhiteIpOutput)
 }
 
-type CCPolicyV2CcPrecisionPolicy struct {
-	Domain       string                              `pulumi:"domain"`
-	Ip           string                              `pulumi:"ip"`
-	PolicyAction string                              `pulumi:"policyAction"`
-	PolicyId     *string                             `pulumi:"policyId"`
-	Policys      []CCPolicyV2CcPrecisionPolicyPolicy `pulumi:"policys"`
-	Protocol     string                              `pulumi:"protocol"`
+type CcPolicyV2CcGeoIpPolicy struct {
+	// User action, drop or arg.
+	Action string `pulumi:"action"`
+	// The list of region IDs that the user selects to block.
+	AreaLists []int `pulumi:"areaLists"`
+	// Create time.
+	CreateTime *string `pulumi:"createTime"`
+	// domain.
+	Domain string `pulumi:"domain"`
+	// Modify time.
+	ModifyTime *string `pulumi:"modifyTime"`
+	// Protocol, preferably HTTP, HTTPS.
+	Protocol string `pulumi:"protocol"`
+	// Regional types, divided into china, oversea and customized.
+	RegionType string `pulumi:"regionType"`
 }
 
-// CCPolicyV2CcPrecisionPolicyInput is an input type that accepts CCPolicyV2CcPrecisionPolicyArgs and CCPolicyV2CcPrecisionPolicyOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionPolicyInput` via:
+// CcPolicyV2CcGeoIpPolicyInput is an input type that accepts CcPolicyV2CcGeoIpPolicyArgs and CcPolicyV2CcGeoIpPolicyOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcGeoIpPolicyInput` via:
 //
-//          CCPolicyV2CcPrecisionPolicyArgs{...}
-type CCPolicyV2CcPrecisionPolicyInput interface {
+//          CcPolicyV2CcGeoIpPolicyArgs{...}
+type CcPolicyV2CcGeoIpPolicyInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionPolicyOutput() CCPolicyV2CcPrecisionPolicyOutput
-	ToCCPolicyV2CcPrecisionPolicyOutputWithContext(context.Context) CCPolicyV2CcPrecisionPolicyOutput
+	ToCcPolicyV2CcGeoIpPolicyOutput() CcPolicyV2CcGeoIpPolicyOutput
+	ToCcPolicyV2CcGeoIpPolicyOutputWithContext(context.Context) CcPolicyV2CcGeoIpPolicyOutput
 }
 
-type CCPolicyV2CcPrecisionPolicyArgs struct {
-	Domain       pulumi.StringInput                          `pulumi:"domain"`
-	Ip           pulumi.StringInput                          `pulumi:"ip"`
-	PolicyAction pulumi.StringInput                          `pulumi:"policyAction"`
-	PolicyId     pulumi.StringPtrInput                       `pulumi:"policyId"`
-	Policys      CCPolicyV2CcPrecisionPolicyPolicyArrayInput `pulumi:"policys"`
-	Protocol     pulumi.StringInput                          `pulumi:"protocol"`
+type CcPolicyV2CcGeoIpPolicyArgs struct {
+	// User action, drop or arg.
+	Action pulumi.StringInput `pulumi:"action"`
+	// The list of region IDs that the user selects to block.
+	AreaLists pulumi.IntArrayInput `pulumi:"areaLists"`
+	// Create time.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Modify time.
+	ModifyTime pulumi.StringPtrInput `pulumi:"modifyTime"`
+	// Protocol, preferably HTTP, HTTPS.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Regional types, divided into china, oversea and customized.
+	RegionType pulumi.StringInput `pulumi:"regionType"`
 }
 
-func (CCPolicyV2CcPrecisionPolicyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionPolicy)(nil)).Elem()
+func (CcPolicyV2CcGeoIpPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcGeoIpPolicy)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionPolicyArgs) ToCCPolicyV2CcPrecisionPolicyOutput() CCPolicyV2CcPrecisionPolicyOutput {
-	return i.ToCCPolicyV2CcPrecisionPolicyOutputWithContext(context.Background())
+func (i CcPolicyV2CcGeoIpPolicyArgs) ToCcPolicyV2CcGeoIpPolicyOutput() CcPolicyV2CcGeoIpPolicyOutput {
+	return i.ToCcPolicyV2CcGeoIpPolicyOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionPolicyArgs) ToCCPolicyV2CcPrecisionPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionPolicyOutput)
+func (i CcPolicyV2CcGeoIpPolicyArgs) ToCcPolicyV2CcGeoIpPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcGeoIpPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcGeoIpPolicyOutput)
 }
 
-// CCPolicyV2CcPrecisionPolicyArrayInput is an input type that accepts CCPolicyV2CcPrecisionPolicyArray and CCPolicyV2CcPrecisionPolicyArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionPolicyArrayInput` via:
+// CcPolicyV2CcGeoIpPolicyArrayInput is an input type that accepts CcPolicyV2CcGeoIpPolicyArray and CcPolicyV2CcGeoIpPolicyArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcGeoIpPolicyArrayInput` via:
 //
-//          CCPolicyV2CcPrecisionPolicyArray{ CCPolicyV2CcPrecisionPolicyArgs{...} }
-type CCPolicyV2CcPrecisionPolicyArrayInput interface {
+//          CcPolicyV2CcGeoIpPolicyArray{ CcPolicyV2CcGeoIpPolicyArgs{...} }
+type CcPolicyV2CcGeoIpPolicyArrayInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionPolicyArrayOutput() CCPolicyV2CcPrecisionPolicyArrayOutput
-	ToCCPolicyV2CcPrecisionPolicyArrayOutputWithContext(context.Context) CCPolicyV2CcPrecisionPolicyArrayOutput
+	ToCcPolicyV2CcGeoIpPolicyArrayOutput() CcPolicyV2CcGeoIpPolicyArrayOutput
+	ToCcPolicyV2CcGeoIpPolicyArrayOutputWithContext(context.Context) CcPolicyV2CcGeoIpPolicyArrayOutput
 }
 
-type CCPolicyV2CcPrecisionPolicyArray []CCPolicyV2CcPrecisionPolicyInput
+type CcPolicyV2CcGeoIpPolicyArray []CcPolicyV2CcGeoIpPolicyInput
 
-func (CCPolicyV2CcPrecisionPolicyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionPolicy)(nil)).Elem()
+func (CcPolicyV2CcGeoIpPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcGeoIpPolicy)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionPolicyArray) ToCCPolicyV2CcPrecisionPolicyArrayOutput() CCPolicyV2CcPrecisionPolicyArrayOutput {
-	return i.ToCCPolicyV2CcPrecisionPolicyArrayOutputWithContext(context.Background())
+func (i CcPolicyV2CcGeoIpPolicyArray) ToCcPolicyV2CcGeoIpPolicyArrayOutput() CcPolicyV2CcGeoIpPolicyArrayOutput {
+	return i.ToCcPolicyV2CcGeoIpPolicyArrayOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionPolicyArray) ToCCPolicyV2CcPrecisionPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionPolicyArrayOutput)
+func (i CcPolicyV2CcGeoIpPolicyArray) ToCcPolicyV2CcGeoIpPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcGeoIpPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcGeoIpPolicyArrayOutput)
 }
 
-type CCPolicyV2CcPrecisionPolicyOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcGeoIpPolicyOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcPrecisionPolicyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionPolicy)(nil)).Elem()
+func (CcPolicyV2CcGeoIpPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcGeoIpPolicy)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) ToCCPolicyV2CcPrecisionPolicyOutput() CCPolicyV2CcPrecisionPolicyOutput {
+func (o CcPolicyV2CcGeoIpPolicyOutput) ToCcPolicyV2CcGeoIpPolicyOutput() CcPolicyV2CcGeoIpPolicyOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) ToCCPolicyV2CcPrecisionPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyOutput {
+func (o CcPolicyV2CcGeoIpPolicyOutput) ToCcPolicyV2CcGeoIpPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcGeoIpPolicyOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicy) string { return v.Domain }).(pulumi.StringOutput)
+// User action, drop or arg.
+func (o CcPolicyV2CcGeoIpPolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcGeoIpPolicy) string { return v.Action }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicy) string { return v.Ip }).(pulumi.StringOutput)
+// The list of region IDs that the user selects to block.
+func (o CcPolicyV2CcGeoIpPolicyOutput) AreaLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v CcPolicyV2CcGeoIpPolicy) []int { return v.AreaLists }).(pulumi.IntArrayOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) PolicyAction() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicy) string { return v.PolicyAction }).(pulumi.StringOutput)
+// Create time.
+func (o CcPolicyV2CcGeoIpPolicyOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcGeoIpPolicy) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) PolicyId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicy) *string { return v.PolicyId }).(pulumi.StringPtrOutput)
+// domain.
+func (o CcPolicyV2CcGeoIpPolicyOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcGeoIpPolicy) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) Policys() CCPolicyV2CcPrecisionPolicyPolicyArrayOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicy) []CCPolicyV2CcPrecisionPolicyPolicy { return v.Policys }).(CCPolicyV2CcPrecisionPolicyPolicyArrayOutput)
+// Modify time.
+func (o CcPolicyV2CcGeoIpPolicyOutput) ModifyTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcGeoIpPolicy) *string { return v.ModifyTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicy) string { return v.Protocol }).(pulumi.StringOutput)
+// Protocol, preferably HTTP, HTTPS.
+func (o CcPolicyV2CcGeoIpPolicyOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcGeoIpPolicy) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-type CCPolicyV2CcPrecisionPolicyArrayOutput struct{ *pulumi.OutputState }
-
-func (CCPolicyV2CcPrecisionPolicyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionPolicy)(nil)).Elem()
+// Regional types, divided into china, oversea and customized.
+func (o CcPolicyV2CcGeoIpPolicyOutput) RegionType() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcGeoIpPolicy) string { return v.RegionType }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyArrayOutput) ToCCPolicyV2CcPrecisionPolicyArrayOutput() CCPolicyV2CcPrecisionPolicyArrayOutput {
+type CcPolicyV2CcGeoIpPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (CcPolicyV2CcGeoIpPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcGeoIpPolicy)(nil)).Elem()
+}
+
+func (o CcPolicyV2CcGeoIpPolicyArrayOutput) ToCcPolicyV2CcGeoIpPolicyArrayOutput() CcPolicyV2CcGeoIpPolicyArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyArrayOutput) ToCCPolicyV2CcPrecisionPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyArrayOutput {
+func (o CcPolicyV2CcGeoIpPolicyArrayOutput) ToCcPolicyV2CcGeoIpPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcGeoIpPolicyArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyArrayOutput) Index(i pulumi.IntInput) CCPolicyV2CcPrecisionPolicyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCPolicyV2CcPrecisionPolicy {
-		return vs[0].([]CCPolicyV2CcPrecisionPolicy)[vs[1].(int)]
-	}).(CCPolicyV2CcPrecisionPolicyOutput)
+func (o CcPolicyV2CcGeoIpPolicyArrayOutput) Index(i pulumi.IntInput) CcPolicyV2CcGeoIpPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcPolicyV2CcGeoIpPolicy {
+		return vs[0].([]CcPolicyV2CcGeoIpPolicy)[vs[1].(int)]
+	}).(CcPolicyV2CcGeoIpPolicyOutput)
 }
 
-type CCPolicyV2CcPrecisionPolicyPolicy struct {
-	FieldName     string `pulumi:"fieldName"`
-	FieldType     string `pulumi:"fieldType"`
-	Value         string `pulumi:"value"`
+type CcPolicyV2CcPrecisionPolicy struct {
+	// Domain.
+	Domain string `pulumi:"domain"`
+	// Ip address.
+	Ip string `pulumi:"ip"`
+	// Policy mode (discard or captcha).
+	PolicyAction string  `pulumi:"policyAction"`
+	PolicyId     *string `pulumi:"policyId"`
+	// A list of policies.
+	Policys []CcPolicyV2CcPrecisionPolicyPolicy `pulumi:"policys"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+}
+
+// CcPolicyV2CcPrecisionPolicyInput is an input type that accepts CcPolicyV2CcPrecisionPolicyArgs and CcPolicyV2CcPrecisionPolicyOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyInput` via:
+//
+//          CcPolicyV2CcPrecisionPolicyArgs{...}
+type CcPolicyV2CcPrecisionPolicyInput interface {
+	pulumi.Input
+
+	ToCcPolicyV2CcPrecisionPolicyOutput() CcPolicyV2CcPrecisionPolicyOutput
+	ToCcPolicyV2CcPrecisionPolicyOutputWithContext(context.Context) CcPolicyV2CcPrecisionPolicyOutput
+}
+
+type CcPolicyV2CcPrecisionPolicyArgs struct {
+	// Domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Ip address.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Policy mode (discard or captcha).
+	PolicyAction pulumi.StringInput    `pulumi:"policyAction"`
+	PolicyId     pulumi.StringPtrInput `pulumi:"policyId"`
+	// A list of policies.
+	Policys CcPolicyV2CcPrecisionPolicyPolicyArrayInput `pulumi:"policys"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (CcPolicyV2CcPrecisionPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionPolicy)(nil)).Elem()
+}
+
+func (i CcPolicyV2CcPrecisionPolicyArgs) ToCcPolicyV2CcPrecisionPolicyOutput() CcPolicyV2CcPrecisionPolicyOutput {
+	return i.ToCcPolicyV2CcPrecisionPolicyOutputWithContext(context.Background())
+}
+
+func (i CcPolicyV2CcPrecisionPolicyArgs) ToCcPolicyV2CcPrecisionPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionPolicyOutput)
+}
+
+// CcPolicyV2CcPrecisionPolicyArrayInput is an input type that accepts CcPolicyV2CcPrecisionPolicyArray and CcPolicyV2CcPrecisionPolicyArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyArrayInput` via:
+//
+//          CcPolicyV2CcPrecisionPolicyArray{ CcPolicyV2CcPrecisionPolicyArgs{...} }
+type CcPolicyV2CcPrecisionPolicyArrayInput interface {
+	pulumi.Input
+
+	ToCcPolicyV2CcPrecisionPolicyArrayOutput() CcPolicyV2CcPrecisionPolicyArrayOutput
+	ToCcPolicyV2CcPrecisionPolicyArrayOutputWithContext(context.Context) CcPolicyV2CcPrecisionPolicyArrayOutput
+}
+
+type CcPolicyV2CcPrecisionPolicyArray []CcPolicyV2CcPrecisionPolicyInput
+
+func (CcPolicyV2CcPrecisionPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionPolicy)(nil)).Elem()
+}
+
+func (i CcPolicyV2CcPrecisionPolicyArray) ToCcPolicyV2CcPrecisionPolicyArrayOutput() CcPolicyV2CcPrecisionPolicyArrayOutput {
+	return i.ToCcPolicyV2CcPrecisionPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i CcPolicyV2CcPrecisionPolicyArray) ToCcPolicyV2CcPrecisionPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionPolicyArrayOutput)
+}
+
+type CcPolicyV2CcPrecisionPolicyOutput struct{ *pulumi.OutputState }
+
+func (CcPolicyV2CcPrecisionPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionPolicy)(nil)).Elem()
+}
+
+func (o CcPolicyV2CcPrecisionPolicyOutput) ToCcPolicyV2CcPrecisionPolicyOutput() CcPolicyV2CcPrecisionPolicyOutput {
+	return o
+}
+
+func (o CcPolicyV2CcPrecisionPolicyOutput) ToCcPolicyV2CcPrecisionPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyOutput {
+	return o
+}
+
+// Domain.
+func (o CcPolicyV2CcPrecisionPolicyOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Ip address.
+func (o CcPolicyV2CcPrecisionPolicyOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Policy mode (discard or captcha).
+func (o CcPolicyV2CcPrecisionPolicyOutput) PolicyAction() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) string { return v.PolicyAction }).(pulumi.StringOutput)
+}
+
+func (o CcPolicyV2CcPrecisionPolicyOutput) PolicyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) *string { return v.PolicyId }).(pulumi.StringPtrOutput)
+}
+
+// A list of policies.
+func (o CcPolicyV2CcPrecisionPolicyOutput) Policys() CcPolicyV2CcPrecisionPolicyPolicyArrayOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) []CcPolicyV2CcPrecisionPolicyPolicy { return v.Policys }).(CcPolicyV2CcPrecisionPolicyPolicyArrayOutput)
+}
+
+// Protocol.
+func (o CcPolicyV2CcPrecisionPolicyOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type CcPolicyV2CcPrecisionPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (CcPolicyV2CcPrecisionPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionPolicy)(nil)).Elem()
+}
+
+func (o CcPolicyV2CcPrecisionPolicyArrayOutput) ToCcPolicyV2CcPrecisionPolicyArrayOutput() CcPolicyV2CcPrecisionPolicyArrayOutput {
+	return o
+}
+
+func (o CcPolicyV2CcPrecisionPolicyArrayOutput) ToCcPolicyV2CcPrecisionPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyArrayOutput {
+	return o
+}
+
+func (o CcPolicyV2CcPrecisionPolicyArrayOutput) Index(i pulumi.IntInput) CcPolicyV2CcPrecisionPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcPolicyV2CcPrecisionPolicy {
+		return vs[0].([]CcPolicyV2CcPrecisionPolicy)[vs[1].(int)]
+	}).(CcPolicyV2CcPrecisionPolicyOutput)
+}
+
+type CcPolicyV2CcPrecisionPolicyPolicy struct {
+	// Configuration item types, currently only support value.
+	FieldName string `pulumi:"fieldName"`
+	// Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+	FieldType string `pulumi:"fieldType"`
+	// Configure the value.
+	Value string `pulumi:"value"`
+	// Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
 	ValueOperator string `pulumi:"valueOperator"`
 }
 
-// CCPolicyV2CcPrecisionPolicyPolicyInput is an input type that accepts CCPolicyV2CcPrecisionPolicyPolicyArgs and CCPolicyV2CcPrecisionPolicyPolicyOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionPolicyPolicyInput` via:
+// CcPolicyV2CcPrecisionPolicyPolicyInput is an input type that accepts CcPolicyV2CcPrecisionPolicyPolicyArgs and CcPolicyV2CcPrecisionPolicyPolicyOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyPolicyInput` via:
 //
-//          CCPolicyV2CcPrecisionPolicyPolicyArgs{...}
-type CCPolicyV2CcPrecisionPolicyPolicyInput interface {
+//          CcPolicyV2CcPrecisionPolicyPolicyArgs{...}
+type CcPolicyV2CcPrecisionPolicyPolicyInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionPolicyPolicyOutput() CCPolicyV2CcPrecisionPolicyPolicyOutput
-	ToCCPolicyV2CcPrecisionPolicyPolicyOutputWithContext(context.Context) CCPolicyV2CcPrecisionPolicyPolicyOutput
+	ToCcPolicyV2CcPrecisionPolicyPolicyOutput() CcPolicyV2CcPrecisionPolicyPolicyOutput
+	ToCcPolicyV2CcPrecisionPolicyPolicyOutputWithContext(context.Context) CcPolicyV2CcPrecisionPolicyPolicyOutput
 }
 
-type CCPolicyV2CcPrecisionPolicyPolicyArgs struct {
-	FieldName     pulumi.StringInput `pulumi:"fieldName"`
-	FieldType     pulumi.StringInput `pulumi:"fieldType"`
-	Value         pulumi.StringInput `pulumi:"value"`
+type CcPolicyV2CcPrecisionPolicyPolicyArgs struct {
+	// Configuration item types, currently only support value.
+	FieldName pulumi.StringInput `pulumi:"fieldName"`
+	// Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+	FieldType pulumi.StringInput `pulumi:"fieldType"`
+	// Configure the value.
+	Value pulumi.StringInput `pulumi:"value"`
+	// Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
 	ValueOperator pulumi.StringInput `pulumi:"valueOperator"`
 }
 
-func (CCPolicyV2CcPrecisionPolicyPolicyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionPolicyPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionPolicyPolicyArgs) ToCCPolicyV2CcPrecisionPolicyPolicyOutput() CCPolicyV2CcPrecisionPolicyPolicyOutput {
-	return i.ToCCPolicyV2CcPrecisionPolicyPolicyOutputWithContext(context.Background())
+func (i CcPolicyV2CcPrecisionPolicyPolicyArgs) ToCcPolicyV2CcPrecisionPolicyPolicyOutput() CcPolicyV2CcPrecisionPolicyPolicyOutput {
+	return i.ToCcPolicyV2CcPrecisionPolicyPolicyOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionPolicyPolicyArgs) ToCCPolicyV2CcPrecisionPolicyPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyPolicyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionPolicyPolicyOutput)
+func (i CcPolicyV2CcPrecisionPolicyPolicyArgs) ToCcPolicyV2CcPrecisionPolicyPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionPolicyPolicyOutput)
 }
 
-// CCPolicyV2CcPrecisionPolicyPolicyArrayInput is an input type that accepts CCPolicyV2CcPrecisionPolicyPolicyArray and CCPolicyV2CcPrecisionPolicyPolicyArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionPolicyPolicyArrayInput` via:
+// CcPolicyV2CcPrecisionPolicyPolicyArrayInput is an input type that accepts CcPolicyV2CcPrecisionPolicyPolicyArray and CcPolicyV2CcPrecisionPolicyPolicyArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyPolicyArrayInput` via:
 //
-//          CCPolicyV2CcPrecisionPolicyPolicyArray{ CCPolicyV2CcPrecisionPolicyPolicyArgs{...} }
-type CCPolicyV2CcPrecisionPolicyPolicyArrayInput interface {
+//          CcPolicyV2CcPrecisionPolicyPolicyArray{ CcPolicyV2CcPrecisionPolicyPolicyArgs{...} }
+type CcPolicyV2CcPrecisionPolicyPolicyArrayInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionPolicyPolicyArrayOutput() CCPolicyV2CcPrecisionPolicyPolicyArrayOutput
-	ToCCPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(context.Context) CCPolicyV2CcPrecisionPolicyPolicyArrayOutput
+	ToCcPolicyV2CcPrecisionPolicyPolicyArrayOutput() CcPolicyV2CcPrecisionPolicyPolicyArrayOutput
+	ToCcPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(context.Context) CcPolicyV2CcPrecisionPolicyPolicyArrayOutput
 }
 
-type CCPolicyV2CcPrecisionPolicyPolicyArray []CCPolicyV2CcPrecisionPolicyPolicyInput
+type CcPolicyV2CcPrecisionPolicyPolicyArray []CcPolicyV2CcPrecisionPolicyPolicyInput
 
-func (CCPolicyV2CcPrecisionPolicyPolicyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionPolicyPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionPolicyPolicyArray) ToCCPolicyV2CcPrecisionPolicyPolicyArrayOutput() CCPolicyV2CcPrecisionPolicyPolicyArrayOutput {
-	return i.ToCCPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(context.Background())
+func (i CcPolicyV2CcPrecisionPolicyPolicyArray) ToCcPolicyV2CcPrecisionPolicyPolicyArrayOutput() CcPolicyV2CcPrecisionPolicyPolicyArrayOutput {
+	return i.ToCcPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionPolicyPolicyArray) ToCCPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyPolicyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionPolicyPolicyArrayOutput)
+func (i CcPolicyV2CcPrecisionPolicyPolicyArray) ToCcPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionPolicyPolicyArrayOutput)
 }
 
-type CCPolicyV2CcPrecisionPolicyPolicyOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcPrecisionPolicyPolicyOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcPrecisionPolicyPolicyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionPolicyPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyOutput) ToCCPolicyV2CcPrecisionPolicyPolicyOutput() CCPolicyV2CcPrecisionPolicyPolicyOutput {
+func (o CcPolicyV2CcPrecisionPolicyPolicyOutput) ToCcPolicyV2CcPrecisionPolicyPolicyOutput() CcPolicyV2CcPrecisionPolicyPolicyOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyOutput) ToCCPolicyV2CcPrecisionPolicyPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyPolicyOutput {
+func (o CcPolicyV2CcPrecisionPolicyPolicyOutput) ToCcPolicyV2CcPrecisionPolicyPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyPolicyOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyOutput) FieldName() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicyPolicy) string { return v.FieldName }).(pulumi.StringOutput)
+// Configuration item types, currently only support value.
+func (o CcPolicyV2CcPrecisionPolicyPolicyOutput) FieldName() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicyPolicy) string { return v.FieldName }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyOutput) FieldType() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicyPolicy) string { return v.FieldType }).(pulumi.StringOutput)
+// Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+func (o CcPolicyV2CcPrecisionPolicyPolicyOutput) FieldType() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicyPolicy) string { return v.FieldType }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicyPolicy) string { return v.Value }).(pulumi.StringOutput)
+// Configure the value.
+func (o CcPolicyV2CcPrecisionPolicyPolicyOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicyPolicy) string { return v.Value }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyOutput) ValueOperator() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionPolicyPolicy) string { return v.ValueOperator }).(pulumi.StringOutput)
+// Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
+func (o CcPolicyV2CcPrecisionPolicyPolicyOutput) ValueOperator() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicyPolicy) string { return v.ValueOperator }).(pulumi.StringOutput)
 }
 
-type CCPolicyV2CcPrecisionPolicyPolicyArrayOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcPrecisionPolicyPolicyArrayOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcPrecisionPolicyPolicyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionPolicyPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionPolicyPolicy)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyArrayOutput) ToCCPolicyV2CcPrecisionPolicyPolicyArrayOutput() CCPolicyV2CcPrecisionPolicyPolicyArrayOutput {
+func (o CcPolicyV2CcPrecisionPolicyPolicyArrayOutput) ToCcPolicyV2CcPrecisionPolicyPolicyArrayOutput() CcPolicyV2CcPrecisionPolicyPolicyArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyArrayOutput) ToCCPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionPolicyPolicyArrayOutput {
+func (o CcPolicyV2CcPrecisionPolicyPolicyArrayOutput) ToCcPolicyV2CcPrecisionPolicyPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionPolicyPolicyArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionPolicyPolicyArrayOutput) Index(i pulumi.IntInput) CCPolicyV2CcPrecisionPolicyPolicyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCPolicyV2CcPrecisionPolicyPolicy {
-		return vs[0].([]CCPolicyV2CcPrecisionPolicyPolicy)[vs[1].(int)]
-	}).(CCPolicyV2CcPrecisionPolicyPolicyOutput)
+func (o CcPolicyV2CcPrecisionPolicyPolicyArrayOutput) Index(i pulumi.IntInput) CcPolicyV2CcPrecisionPolicyPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcPolicyV2CcPrecisionPolicyPolicy {
+		return vs[0].([]CcPolicyV2CcPrecisionPolicyPolicy)[vs[1].(int)]
+	}).(CcPolicyV2CcPrecisionPolicyPolicyOutput)
 }
 
-type CCPolicyV2CcPrecisionReqLimit struct {
-	Domain     string                                `pulumi:"domain"`
-	InstanceId *string                               `pulumi:"instanceId"`
-	Ip         *string                               `pulumi:"ip"`
-	Level      string                                `pulumi:"level"`
-	Policys    []CCPolicyV2CcPrecisionReqLimitPolicy `pulumi:"policys"`
-	Protocol   string                                `pulumi:"protocol"`
+type CcPolicyV2CcPrecisionReqLimit struct {
+	// Domain.
+	Domain     string  `pulumi:"domain"`
+	InstanceId *string `pulumi:"instanceId"`
+	// Ip address.
+	Ip *string `pulumi:"ip"`
+	// Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+	Level string `pulumi:"level"`
+	// The CC Frequency Limit Policy Item field.
+	Policys []CcPolicyV2CcPrecisionReqLimitPolicy `pulumi:"policys"`
+	// Protocol, preferably HTTP, HTTPS.
+	Protocol string `pulumi:"protocol"`
 }
 
-// CCPolicyV2CcPrecisionReqLimitInput is an input type that accepts CCPolicyV2CcPrecisionReqLimitArgs and CCPolicyV2CcPrecisionReqLimitOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionReqLimitInput` via:
+// CcPolicyV2CcPrecisionReqLimitInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitArgs and CcPolicyV2CcPrecisionReqLimitOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitInput` via:
 //
-//          CCPolicyV2CcPrecisionReqLimitArgs{...}
-type CCPolicyV2CcPrecisionReqLimitInput interface {
+//          CcPolicyV2CcPrecisionReqLimitArgs{...}
+type CcPolicyV2CcPrecisionReqLimitInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionReqLimitOutput() CCPolicyV2CcPrecisionReqLimitOutput
-	ToCCPolicyV2CcPrecisionReqLimitOutputWithContext(context.Context) CCPolicyV2CcPrecisionReqLimitOutput
+	ToCcPolicyV2CcPrecisionReqLimitOutput() CcPolicyV2CcPrecisionReqLimitOutput
+	ToCcPolicyV2CcPrecisionReqLimitOutputWithContext(context.Context) CcPolicyV2CcPrecisionReqLimitOutput
 }
 
-type CCPolicyV2CcPrecisionReqLimitArgs struct {
-	Domain     pulumi.StringInput                            `pulumi:"domain"`
-	InstanceId pulumi.StringPtrInput                         `pulumi:"instanceId"`
-	Ip         pulumi.StringPtrInput                         `pulumi:"ip"`
-	Level      pulumi.StringInput                            `pulumi:"level"`
-	Policys    CCPolicyV2CcPrecisionReqLimitPolicyArrayInput `pulumi:"policys"`
-	Protocol   pulumi.StringInput                            `pulumi:"protocol"`
+type CcPolicyV2CcPrecisionReqLimitArgs struct {
+	// Domain.
+	Domain     pulumi.StringInput    `pulumi:"domain"`
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Ip address.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+	Level pulumi.StringInput `pulumi:"level"`
+	// The CC Frequency Limit Policy Item field.
+	Policys CcPolicyV2CcPrecisionReqLimitPolicyArrayInput `pulumi:"policys"`
+	// Protocol, preferably HTTP, HTTPS.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
 }
 
-func (CCPolicyV2CcPrecisionReqLimitArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimit)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimit)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitArgs) ToCCPolicyV2CcPrecisionReqLimitOutput() CCPolicyV2CcPrecisionReqLimitOutput {
-	return i.ToCCPolicyV2CcPrecisionReqLimitOutputWithContext(context.Background())
+func (i CcPolicyV2CcPrecisionReqLimitArgs) ToCcPolicyV2CcPrecisionReqLimitOutput() CcPolicyV2CcPrecisionReqLimitOutput {
+	return i.ToCcPolicyV2CcPrecisionReqLimitOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitArgs) ToCCPolicyV2CcPrecisionReqLimitOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionReqLimitOutput)
+func (i CcPolicyV2CcPrecisionReqLimitArgs) ToCcPolicyV2CcPrecisionReqLimitOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionReqLimitOutput)
 }
 
-// CCPolicyV2CcPrecisionReqLimitArrayInput is an input type that accepts CCPolicyV2CcPrecisionReqLimitArray and CCPolicyV2CcPrecisionReqLimitArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionReqLimitArrayInput` via:
+// CcPolicyV2CcPrecisionReqLimitArrayInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitArray and CcPolicyV2CcPrecisionReqLimitArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitArrayInput` via:
 //
-//          CCPolicyV2CcPrecisionReqLimitArray{ CCPolicyV2CcPrecisionReqLimitArgs{...} }
-type CCPolicyV2CcPrecisionReqLimitArrayInput interface {
+//          CcPolicyV2CcPrecisionReqLimitArray{ CcPolicyV2CcPrecisionReqLimitArgs{...} }
+type CcPolicyV2CcPrecisionReqLimitArrayInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionReqLimitArrayOutput() CCPolicyV2CcPrecisionReqLimitArrayOutput
-	ToCCPolicyV2CcPrecisionReqLimitArrayOutputWithContext(context.Context) CCPolicyV2CcPrecisionReqLimitArrayOutput
+	ToCcPolicyV2CcPrecisionReqLimitArrayOutput() CcPolicyV2CcPrecisionReqLimitArrayOutput
+	ToCcPolicyV2CcPrecisionReqLimitArrayOutputWithContext(context.Context) CcPolicyV2CcPrecisionReqLimitArrayOutput
 }
 
-type CCPolicyV2CcPrecisionReqLimitArray []CCPolicyV2CcPrecisionReqLimitInput
+type CcPolicyV2CcPrecisionReqLimitArray []CcPolicyV2CcPrecisionReqLimitInput
 
-func (CCPolicyV2CcPrecisionReqLimitArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionReqLimit)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionReqLimit)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitArray) ToCCPolicyV2CcPrecisionReqLimitArrayOutput() CCPolicyV2CcPrecisionReqLimitArrayOutput {
-	return i.ToCCPolicyV2CcPrecisionReqLimitArrayOutputWithContext(context.Background())
+func (i CcPolicyV2CcPrecisionReqLimitArray) ToCcPolicyV2CcPrecisionReqLimitArrayOutput() CcPolicyV2CcPrecisionReqLimitArrayOutput {
+	return i.ToCcPolicyV2CcPrecisionReqLimitArrayOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitArray) ToCCPolicyV2CcPrecisionReqLimitArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionReqLimitArrayOutput)
+func (i CcPolicyV2CcPrecisionReqLimitArray) ToCcPolicyV2CcPrecisionReqLimitArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionReqLimitArrayOutput)
 }
 
-type CCPolicyV2CcPrecisionReqLimitOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcPrecisionReqLimitOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcPrecisionReqLimitOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimit)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimit)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) ToCCPolicyV2CcPrecisionReqLimitOutput() CCPolicyV2CcPrecisionReqLimitOutput {
+func (o CcPolicyV2CcPrecisionReqLimitOutput) ToCcPolicyV2CcPrecisionReqLimitOutput() CcPolicyV2CcPrecisionReqLimitOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) ToCCPolicyV2CcPrecisionReqLimitOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitOutput {
+func (o CcPolicyV2CcPrecisionReqLimitOutput) ToCcPolicyV2CcPrecisionReqLimitOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimit) string { return v.Domain }).(pulumi.StringOutput)
+// Domain.
+func (o CcPolicyV2CcPrecisionReqLimitOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) InstanceId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimit) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+func (o CcPolicyV2CcPrecisionReqLimitOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) Ip() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimit) *string { return v.Ip }).(pulumi.StringPtrOutput)
+// Ip address.
+func (o CcPolicyV2CcPrecisionReqLimitOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) Level() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimit) string { return v.Level }).(pulumi.StringOutput)
+// Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+func (o CcPolicyV2CcPrecisionReqLimitOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) string { return v.Level }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) Policys() CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimit) []CCPolicyV2CcPrecisionReqLimitPolicy { return v.Policys }).(CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput)
+// The CC Frequency Limit Policy Item field.
+func (o CcPolicyV2CcPrecisionReqLimitOutput) Policys() CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) []CcPolicyV2CcPrecisionReqLimitPolicy { return v.Policys }).(CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimit) string { return v.Protocol }).(pulumi.StringOutput)
+// Protocol, preferably HTTP, HTTPS.
+func (o CcPolicyV2CcPrecisionReqLimitOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-type CCPolicyV2CcPrecisionReqLimitArrayOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcPrecisionReqLimitArrayOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcPrecisionReqLimitArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionReqLimit)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionReqLimit)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitArrayOutput) ToCCPolicyV2CcPrecisionReqLimitArrayOutput() CCPolicyV2CcPrecisionReqLimitArrayOutput {
+func (o CcPolicyV2CcPrecisionReqLimitArrayOutput) ToCcPolicyV2CcPrecisionReqLimitArrayOutput() CcPolicyV2CcPrecisionReqLimitArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitArrayOutput) ToCCPolicyV2CcPrecisionReqLimitArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitArrayOutput {
+func (o CcPolicyV2CcPrecisionReqLimitArrayOutput) ToCcPolicyV2CcPrecisionReqLimitArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitArrayOutput) Index(i pulumi.IntInput) CCPolicyV2CcPrecisionReqLimitOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCPolicyV2CcPrecisionReqLimit {
-		return vs[0].([]CCPolicyV2CcPrecisionReqLimit)[vs[1].(int)]
-	}).(CCPolicyV2CcPrecisionReqLimitOutput)
+func (o CcPolicyV2CcPrecisionReqLimitArrayOutput) Index(i pulumi.IntInput) CcPolicyV2CcPrecisionReqLimitOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcPolicyV2CcPrecisionReqLimit {
+		return vs[0].([]CcPolicyV2CcPrecisionReqLimit)[vs[1].(int)]
+	}).(CcPolicyV2CcPrecisionReqLimitOutput)
 }
 
-type CCPolicyV2CcPrecisionReqLimitPolicy struct {
-	Action          string  `pulumi:"action"`
-	Cookie          *string `pulumi:"cookie"`
-	ExecuteDuration int     `pulumi:"executeDuration"`
-	Mode            string  `pulumi:"mode"`
-	Period          int     `pulumi:"period"`
-	RequestNum      int     `pulumi:"requestNum"`
-	Uri             *string `pulumi:"uri"`
-	UserAgent       *string `pulumi:"userAgent"`
+type CcPolicyV2CcPrecisionReqLimitPolicy struct {
+	// The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+	Action string `pulumi:"action"`
+	// Cookies, one of the three policy entries can only be filled in.
+	Cookie *string `pulumi:"cookie"`
+	// The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+	ExecuteDuration int `pulumi:"executeDuration"`
+	// The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+	Mode string `pulumi:"mode"`
+	// Statistical period, take values 1, 10, 30, 60, in seconds.
+	Period int `pulumi:"period"`
+	// The number of requests, the value is 1 to 20000.
+	RequestNum int `pulumi:"requestNum"`
+	// Uri, one of the three policy entries can only be filled in.
+	Uri *string `pulumi:"uri"`
+	// User-Agent, only one of the three policy entries can be filled in.
+	UserAgent *string `pulumi:"userAgent"`
 }
 
-// CCPolicyV2CcPrecisionReqLimitPolicyInput is an input type that accepts CCPolicyV2CcPrecisionReqLimitPolicyArgs and CCPolicyV2CcPrecisionReqLimitPolicyOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionReqLimitPolicyInput` via:
+// CcPolicyV2CcPrecisionReqLimitPolicyInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitPolicyArgs and CcPolicyV2CcPrecisionReqLimitPolicyOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitPolicyInput` via:
 //
-//          CCPolicyV2CcPrecisionReqLimitPolicyArgs{...}
-type CCPolicyV2CcPrecisionReqLimitPolicyInput interface {
+//          CcPolicyV2CcPrecisionReqLimitPolicyArgs{...}
+type CcPolicyV2CcPrecisionReqLimitPolicyInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionReqLimitPolicyOutput() CCPolicyV2CcPrecisionReqLimitPolicyOutput
-	ToCCPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(context.Context) CCPolicyV2CcPrecisionReqLimitPolicyOutput
+	ToCcPolicyV2CcPrecisionReqLimitPolicyOutput() CcPolicyV2CcPrecisionReqLimitPolicyOutput
+	ToCcPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(context.Context) CcPolicyV2CcPrecisionReqLimitPolicyOutput
 }
 
-type CCPolicyV2CcPrecisionReqLimitPolicyArgs struct {
-	Action          pulumi.StringInput    `pulumi:"action"`
-	Cookie          pulumi.StringPtrInput `pulumi:"cookie"`
-	ExecuteDuration pulumi.IntInput       `pulumi:"executeDuration"`
-	Mode            pulumi.StringInput    `pulumi:"mode"`
-	Period          pulumi.IntInput       `pulumi:"period"`
-	RequestNum      pulumi.IntInput       `pulumi:"requestNum"`
-	Uri             pulumi.StringPtrInput `pulumi:"uri"`
-	UserAgent       pulumi.StringPtrInput `pulumi:"userAgent"`
+type CcPolicyV2CcPrecisionReqLimitPolicyArgs struct {
+	// The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Cookies, one of the three policy entries can only be filled in.
+	Cookie pulumi.StringPtrInput `pulumi:"cookie"`
+	// The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+	ExecuteDuration pulumi.IntInput `pulumi:"executeDuration"`
+	// The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+	Mode pulumi.StringInput `pulumi:"mode"`
+	// Statistical period, take values 1, 10, 30, 60, in seconds.
+	Period pulumi.IntInput `pulumi:"period"`
+	// The number of requests, the value is 1 to 20000.
+	RequestNum pulumi.IntInput `pulumi:"requestNum"`
+	// Uri, one of the three policy entries can only be filled in.
+	Uri pulumi.StringPtrInput `pulumi:"uri"`
+	// User-Agent, only one of the three policy entries can be filled in.
+	UserAgent pulumi.StringPtrInput `pulumi:"userAgent"`
 }
 
-func (CCPolicyV2CcPrecisionReqLimitPolicyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitPolicyArgs) ToCCPolicyV2CcPrecisionReqLimitPolicyOutput() CCPolicyV2CcPrecisionReqLimitPolicyOutput {
-	return i.ToCCPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(context.Background())
+func (i CcPolicyV2CcPrecisionReqLimitPolicyArgs) ToCcPolicyV2CcPrecisionReqLimitPolicyOutput() CcPolicyV2CcPrecisionReqLimitPolicyOutput {
+	return i.ToCcPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitPolicyArgs) ToCCPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitPolicyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionReqLimitPolicyOutput)
+func (i CcPolicyV2CcPrecisionReqLimitPolicyArgs) ToCcPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionReqLimitPolicyOutput)
 }
 
-// CCPolicyV2CcPrecisionReqLimitPolicyArrayInput is an input type that accepts CCPolicyV2CcPrecisionReqLimitPolicyArray and CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2CcPrecisionReqLimitPolicyArrayInput` via:
+// CcPolicyV2CcPrecisionReqLimitPolicyArrayInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitPolicyArray and CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitPolicyArrayInput` via:
 //
-//          CCPolicyV2CcPrecisionReqLimitPolicyArray{ CCPolicyV2CcPrecisionReqLimitPolicyArgs{...} }
-type CCPolicyV2CcPrecisionReqLimitPolicyArrayInput interface {
+//          CcPolicyV2CcPrecisionReqLimitPolicyArray{ CcPolicyV2CcPrecisionReqLimitPolicyArgs{...} }
+type CcPolicyV2CcPrecisionReqLimitPolicyArrayInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2CcPrecisionReqLimitPolicyArrayOutput() CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput
-	ToCCPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(context.Context) CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput
+	ToCcPolicyV2CcPrecisionReqLimitPolicyArrayOutput() CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput
+	ToCcPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(context.Context) CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput
 }
 
-type CCPolicyV2CcPrecisionReqLimitPolicyArray []CCPolicyV2CcPrecisionReqLimitPolicyInput
+type CcPolicyV2CcPrecisionReqLimitPolicyArray []CcPolicyV2CcPrecisionReqLimitPolicyInput
 
-func (CCPolicyV2CcPrecisionReqLimitPolicyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitPolicyArray) ToCCPolicyV2CcPrecisionReqLimitPolicyArrayOutput() CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
-	return i.ToCCPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(context.Background())
+func (i CcPolicyV2CcPrecisionReqLimitPolicyArray) ToCcPolicyV2CcPrecisionReqLimitPolicyArrayOutput() CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
+	return i.ToCcPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2CcPrecisionReqLimitPolicyArray) ToCCPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput)
+func (i CcPolicyV2CcPrecisionReqLimitPolicyArray) ToCcPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput)
 }
 
-type CCPolicyV2CcPrecisionReqLimitPolicyOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcPrecisionReqLimitPolicyOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcPrecisionReqLimitPolicyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) ToCCPolicyV2CcPrecisionReqLimitPolicyOutput() CCPolicyV2CcPrecisionReqLimitPolicyOutput {
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) ToCcPolicyV2CcPrecisionReqLimitPolicyOutput() CcPolicyV2CcPrecisionReqLimitPolicyOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) ToCCPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitPolicyOutput {
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) ToCcPolicyV2CcPrecisionReqLimitPolicyOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitPolicyOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) string { return v.Action }).(pulumi.StringOutput)
+// The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) string { return v.Action }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) Cookie() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) *string { return v.Cookie }).(pulumi.StringPtrOutput)
+// Cookies, one of the three policy entries can only be filled in.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) Cookie() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) *string { return v.Cookie }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) ExecuteDuration() pulumi.IntOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) int { return v.ExecuteDuration }).(pulumi.IntOutput)
+// The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) ExecuteDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) int { return v.ExecuteDuration }).(pulumi.IntOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) Mode() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) string { return v.Mode }).(pulumi.StringOutput)
+// The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) string { return v.Mode }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) Period() pulumi.IntOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) int { return v.Period }).(pulumi.IntOutput)
+// Statistical period, take values 1, 10, 30, 60, in seconds.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) int { return v.Period }).(pulumi.IntOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) RequestNum() pulumi.IntOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) int { return v.RequestNum }).(pulumi.IntOutput)
+// The number of requests, the value is 1 to 20000.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) RequestNum() pulumi.IntOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) int { return v.RequestNum }).(pulumi.IntOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) Uri() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) *string { return v.Uri }).(pulumi.StringPtrOutput)
+// Uri, one of the three policy entries can only be filled in.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) Uri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) *string { return v.Uri }).(pulumi.StringPtrOutput)
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyOutput) UserAgent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CCPolicyV2CcPrecisionReqLimitPolicy) *string { return v.UserAgent }).(pulumi.StringPtrOutput)
+// User-Agent, only one of the three policy entries can be filled in.
+func (o CcPolicyV2CcPrecisionReqLimitPolicyOutput) UserAgent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimitPolicy) *string { return v.UserAgent }).(pulumi.StringPtrOutput)
 }
 
-type CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput struct{ *pulumi.OutputState }
+type CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
+func (CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2CcPrecisionReqLimitPolicy)(nil)).Elem()
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput) ToCCPolicyV2CcPrecisionReqLimitPolicyArrayOutput() CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
+func (o CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput) ToCcPolicyV2CcPrecisionReqLimitPolicyArrayOutput() CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput) ToCCPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(ctx context.Context) CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
+func (o CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput) ToCcPolicyV2CcPrecisionReqLimitPolicyArrayOutputWithContext(ctx context.Context) CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput) Index(i pulumi.IntInput) CCPolicyV2CcPrecisionReqLimitPolicyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCPolicyV2CcPrecisionReqLimitPolicy {
-		return vs[0].([]CCPolicyV2CcPrecisionReqLimitPolicy)[vs[1].(int)]
-	}).(CCPolicyV2CcPrecisionReqLimitPolicyOutput)
+func (o CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput) Index(i pulumi.IntInput) CcPolicyV2CcPrecisionReqLimitPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcPolicyV2CcPrecisionReqLimitPolicy {
+		return vs[0].([]CcPolicyV2CcPrecisionReqLimitPolicy)[vs[1].(int)]
+	}).(CcPolicyV2CcPrecisionReqLimitPolicyOutput)
 }
 
-type CCPolicyV2Threshold struct {
-	Domain    string `pulumi:"domain"`
-	Threshold int    `pulumi:"threshold"`
+type CcPolicyV2Threshold struct {
+	// domain.
+	Domain string `pulumi:"domain"`
+	// Cleaning threshold, -1 indicates that the `default` mode is turned on.
+	Threshold int `pulumi:"threshold"`
 }
 
-// CCPolicyV2ThresholdInput is an input type that accepts CCPolicyV2ThresholdArgs and CCPolicyV2ThresholdOutput values.
-// You can construct a concrete instance of `CCPolicyV2ThresholdInput` via:
+// CcPolicyV2ThresholdInput is an input type that accepts CcPolicyV2ThresholdArgs and CcPolicyV2ThresholdOutput values.
+// You can construct a concrete instance of `CcPolicyV2ThresholdInput` via:
 //
-//          CCPolicyV2ThresholdArgs{...}
-type CCPolicyV2ThresholdInput interface {
+//          CcPolicyV2ThresholdArgs{...}
+type CcPolicyV2ThresholdInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2ThresholdOutput() CCPolicyV2ThresholdOutput
-	ToCCPolicyV2ThresholdOutputWithContext(context.Context) CCPolicyV2ThresholdOutput
+	ToCcPolicyV2ThresholdOutput() CcPolicyV2ThresholdOutput
+	ToCcPolicyV2ThresholdOutputWithContext(context.Context) CcPolicyV2ThresholdOutput
 }
 
-type CCPolicyV2ThresholdArgs struct {
-	Domain    pulumi.StringInput `pulumi:"domain"`
-	Threshold pulumi.IntInput    `pulumi:"threshold"`
+type CcPolicyV2ThresholdArgs struct {
+	// domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Cleaning threshold, -1 indicates that the `default` mode is turned on.
+	Threshold pulumi.IntInput `pulumi:"threshold"`
 }
 
-func (CCPolicyV2ThresholdArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2Threshold)(nil)).Elem()
+func (CcPolicyV2ThresholdArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2Threshold)(nil)).Elem()
 }
 
-func (i CCPolicyV2ThresholdArgs) ToCCPolicyV2ThresholdOutput() CCPolicyV2ThresholdOutput {
-	return i.ToCCPolicyV2ThresholdOutputWithContext(context.Background())
+func (i CcPolicyV2ThresholdArgs) ToCcPolicyV2ThresholdOutput() CcPolicyV2ThresholdOutput {
+	return i.ToCcPolicyV2ThresholdOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2ThresholdArgs) ToCCPolicyV2ThresholdOutputWithContext(ctx context.Context) CCPolicyV2ThresholdOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2ThresholdOutput)
+func (i CcPolicyV2ThresholdArgs) ToCcPolicyV2ThresholdOutputWithContext(ctx context.Context) CcPolicyV2ThresholdOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2ThresholdOutput)
 }
 
-// CCPolicyV2ThresholdArrayInput is an input type that accepts CCPolicyV2ThresholdArray and CCPolicyV2ThresholdArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2ThresholdArrayInput` via:
+// CcPolicyV2ThresholdArrayInput is an input type that accepts CcPolicyV2ThresholdArray and CcPolicyV2ThresholdArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2ThresholdArrayInput` via:
 //
-//          CCPolicyV2ThresholdArray{ CCPolicyV2ThresholdArgs{...} }
-type CCPolicyV2ThresholdArrayInput interface {
+//          CcPolicyV2ThresholdArray{ CcPolicyV2ThresholdArgs{...} }
+type CcPolicyV2ThresholdArrayInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2ThresholdArrayOutput() CCPolicyV2ThresholdArrayOutput
-	ToCCPolicyV2ThresholdArrayOutputWithContext(context.Context) CCPolicyV2ThresholdArrayOutput
+	ToCcPolicyV2ThresholdArrayOutput() CcPolicyV2ThresholdArrayOutput
+	ToCcPolicyV2ThresholdArrayOutputWithContext(context.Context) CcPolicyV2ThresholdArrayOutput
 }
 
-type CCPolicyV2ThresholdArray []CCPolicyV2ThresholdInput
+type CcPolicyV2ThresholdArray []CcPolicyV2ThresholdInput
 
-func (CCPolicyV2ThresholdArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2Threshold)(nil)).Elem()
+func (CcPolicyV2ThresholdArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2Threshold)(nil)).Elem()
 }
 
-func (i CCPolicyV2ThresholdArray) ToCCPolicyV2ThresholdArrayOutput() CCPolicyV2ThresholdArrayOutput {
-	return i.ToCCPolicyV2ThresholdArrayOutputWithContext(context.Background())
+func (i CcPolicyV2ThresholdArray) ToCcPolicyV2ThresholdArrayOutput() CcPolicyV2ThresholdArrayOutput {
+	return i.ToCcPolicyV2ThresholdArrayOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2ThresholdArray) ToCCPolicyV2ThresholdArrayOutputWithContext(ctx context.Context) CCPolicyV2ThresholdArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2ThresholdArrayOutput)
+func (i CcPolicyV2ThresholdArray) ToCcPolicyV2ThresholdArrayOutputWithContext(ctx context.Context) CcPolicyV2ThresholdArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2ThresholdArrayOutput)
 }
 
-type CCPolicyV2ThresholdOutput struct{ *pulumi.OutputState }
+type CcPolicyV2ThresholdOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2ThresholdOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CCPolicyV2Threshold)(nil)).Elem()
+func (CcPolicyV2ThresholdOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CcPolicyV2Threshold)(nil)).Elem()
 }
 
-func (o CCPolicyV2ThresholdOutput) ToCCPolicyV2ThresholdOutput() CCPolicyV2ThresholdOutput {
+func (o CcPolicyV2ThresholdOutput) ToCcPolicyV2ThresholdOutput() CcPolicyV2ThresholdOutput {
 	return o
 }
 
-func (o CCPolicyV2ThresholdOutput) ToCCPolicyV2ThresholdOutputWithContext(ctx context.Context) CCPolicyV2ThresholdOutput {
+func (o CcPolicyV2ThresholdOutput) ToCcPolicyV2ThresholdOutputWithContext(ctx context.Context) CcPolicyV2ThresholdOutput {
 	return o
 }
 
-func (o CCPolicyV2ThresholdOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CCPolicyV2Threshold) string { return v.Domain }).(pulumi.StringOutput)
+// domain.
+func (o CcPolicyV2ThresholdOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v CcPolicyV2Threshold) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o CCPolicyV2ThresholdOutput) Threshold() pulumi.IntOutput {
-	return o.ApplyT(func(v CCPolicyV2Threshold) int { return v.Threshold }).(pulumi.IntOutput)
+// Cleaning threshold, -1 indicates that the `default` mode is turned on.
+func (o CcPolicyV2ThresholdOutput) Threshold() pulumi.IntOutput {
+	return o.ApplyT(func(v CcPolicyV2Threshold) int { return v.Threshold }).(pulumi.IntOutput)
 }
 
-type CCPolicyV2ThresholdArrayOutput struct{ *pulumi.OutputState }
+type CcPolicyV2ThresholdArrayOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2ThresholdArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CCPolicyV2Threshold)(nil)).Elem()
+func (CcPolicyV2ThresholdArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CcPolicyV2Threshold)(nil)).Elem()
 }
 
-func (o CCPolicyV2ThresholdArrayOutput) ToCCPolicyV2ThresholdArrayOutput() CCPolicyV2ThresholdArrayOutput {
+func (o CcPolicyV2ThresholdArrayOutput) ToCcPolicyV2ThresholdArrayOutput() CcPolicyV2ThresholdArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2ThresholdArrayOutput) ToCCPolicyV2ThresholdArrayOutputWithContext(ctx context.Context) CCPolicyV2ThresholdArrayOutput {
+func (o CcPolicyV2ThresholdArrayOutput) ToCcPolicyV2ThresholdArrayOutputWithContext(ctx context.Context) CcPolicyV2ThresholdArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2ThresholdArrayOutput) Index(i pulumi.IntInput) CCPolicyV2ThresholdOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CCPolicyV2Threshold {
-		return vs[0].([]CCPolicyV2Threshold)[vs[1].(int)]
-	}).(CCPolicyV2ThresholdOutput)
-}
-
-type DdosPoliciesList struct {
-	BlackIps         []string                          `pulumi:"blackIps"`
-	CreateTime       string                            `pulumi:"createTime"`
-	DropOptions      []DdosPoliciesListDropOption      `pulumi:"dropOptions"`
-	Name             string                            `pulumi:"name"`
-	PacketFilters    []DdosPoliciesListPacketFilter    `pulumi:"packetFilters"`
-	PolicyId         string                            `pulumi:"policyId"`
-	PortFilters      []DdosPoliciesListPortFilter      `pulumi:"portFilters"`
-	SceneId          string                            `pulumi:"sceneId"`
-	WatermarkFilters []DdosPoliciesListWatermarkFilter `pulumi:"watermarkFilters"`
-	WatermarkKeys    []DdosPoliciesListWatermarkKey    `pulumi:"watermarkKeys"`
-	WhiteIps         []string                          `pulumi:"whiteIps"`
-}
-
-// DdosPoliciesListInput is an input type that accepts DdosPoliciesListArgs and DdosPoliciesListOutput values.
-// You can construct a concrete instance of `DdosPoliciesListInput` via:
-//
-//          DdosPoliciesListArgs{...}
-type DdosPoliciesListInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListOutput() DdosPoliciesListOutput
-	ToDdosPoliciesListOutputWithContext(context.Context) DdosPoliciesListOutput
-}
-
-type DdosPoliciesListArgs struct {
-	BlackIps         pulumi.StringArrayInput                   `pulumi:"blackIps"`
-	CreateTime       pulumi.StringInput                        `pulumi:"createTime"`
-	DropOptions      DdosPoliciesListDropOptionArrayInput      `pulumi:"dropOptions"`
-	Name             pulumi.StringInput                        `pulumi:"name"`
-	PacketFilters    DdosPoliciesListPacketFilterArrayInput    `pulumi:"packetFilters"`
-	PolicyId         pulumi.StringInput                        `pulumi:"policyId"`
-	PortFilters      DdosPoliciesListPortFilterArrayInput      `pulumi:"portFilters"`
-	SceneId          pulumi.StringInput                        `pulumi:"sceneId"`
-	WatermarkFilters DdosPoliciesListWatermarkFilterArrayInput `pulumi:"watermarkFilters"`
-	WatermarkKeys    DdosPoliciesListWatermarkKeyArrayInput    `pulumi:"watermarkKeys"`
-	WhiteIps         pulumi.StringArrayInput                   `pulumi:"whiteIps"`
-}
-
-func (DdosPoliciesListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesList)(nil)).Elem()
-}
-
-func (i DdosPoliciesListArgs) ToDdosPoliciesListOutput() DdosPoliciesListOutput {
-	return i.ToDdosPoliciesListOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListArgs) ToDdosPoliciesListOutputWithContext(ctx context.Context) DdosPoliciesListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListOutput)
-}
-
-// DdosPoliciesListArrayInput is an input type that accepts DdosPoliciesListArray and DdosPoliciesListArrayOutput values.
-// You can construct a concrete instance of `DdosPoliciesListArrayInput` via:
-//
-//          DdosPoliciesListArray{ DdosPoliciesListArgs{...} }
-type DdosPoliciesListArrayInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListArrayOutput() DdosPoliciesListArrayOutput
-	ToDdosPoliciesListArrayOutputWithContext(context.Context) DdosPoliciesListArrayOutput
-}
-
-type DdosPoliciesListArray []DdosPoliciesListInput
-
-func (DdosPoliciesListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesList)(nil)).Elem()
-}
-
-func (i DdosPoliciesListArray) ToDdosPoliciesListArrayOutput() DdosPoliciesListArrayOutput {
-	return i.ToDdosPoliciesListArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListArray) ToDdosPoliciesListArrayOutputWithContext(ctx context.Context) DdosPoliciesListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListArrayOutput)
-}
-
-type DdosPoliciesListOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesList)(nil)).Elem()
-}
-
-func (o DdosPoliciesListOutput) ToDdosPoliciesListOutput() DdosPoliciesListOutput {
-	return o
-}
-
-func (o DdosPoliciesListOutput) ToDdosPoliciesListOutputWithContext(ctx context.Context) DdosPoliciesListOutput {
-	return o
-}
-
-func (o DdosPoliciesListOutput) BlackIps() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesList) []string { return v.BlackIps }).(pulumi.StringArrayOutput)
-}
-
-func (o DdosPoliciesListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListOutput) DropOptions() DdosPoliciesListDropOptionArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesList) []DdosPoliciesListDropOption { return v.DropOptions }).(DdosPoliciesListDropOptionArrayOutput)
-}
-
-func (o DdosPoliciesListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListOutput) PacketFilters() DdosPoliciesListPacketFilterArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesList) []DdosPoliciesListPacketFilter { return v.PacketFilters }).(DdosPoliciesListPacketFilterArrayOutput)
-}
-
-func (o DdosPoliciesListOutput) PolicyId() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesList) string { return v.PolicyId }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListOutput) PortFilters() DdosPoliciesListPortFilterArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesList) []DdosPoliciesListPortFilter { return v.PortFilters }).(DdosPoliciesListPortFilterArrayOutput)
-}
-
-func (o DdosPoliciesListOutput) SceneId() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesList) string { return v.SceneId }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListOutput) WatermarkFilters() DdosPoliciesListWatermarkFilterArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesList) []DdosPoliciesListWatermarkFilter { return v.WatermarkFilters }).(DdosPoliciesListWatermarkFilterArrayOutput)
-}
-
-func (o DdosPoliciesListOutput) WatermarkKeys() DdosPoliciesListWatermarkKeyArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesList) []DdosPoliciesListWatermarkKey { return v.WatermarkKeys }).(DdosPoliciesListWatermarkKeyArrayOutput)
-}
-
-func (o DdosPoliciesListOutput) WhiteIps() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesList) []string { return v.WhiteIps }).(pulumi.StringArrayOutput)
-}
-
-type DdosPoliciesListArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesList)(nil)).Elem()
-}
-
-func (o DdosPoliciesListArrayOutput) ToDdosPoliciesListArrayOutput() DdosPoliciesListArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListArrayOutput) ToDdosPoliciesListArrayOutputWithContext(ctx context.Context) DdosPoliciesListArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListArrayOutput) Index(i pulumi.IntInput) DdosPoliciesListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPoliciesList {
-		return vs[0].([]DdosPoliciesList)[vs[1].(int)]
-	}).(DdosPoliciesListOutput)
-}
-
-type DdosPoliciesListDropOption struct {
-	BadConnThreshold int  `pulumi:"badConnThreshold"`
-	CheckSyncConn    bool `pulumi:"checkSyncConn"`
-	ConnTimeout      int  `pulumi:"connTimeout"`
-	DConnLimit       int  `pulumi:"dConnLimit"`
-	DNewLimit        int  `pulumi:"dNewLimit"`
-	DropAbroad       bool `pulumi:"dropAbroad"`
-	DropIcmp         bool `pulumi:"dropIcmp"`
-	DropOther        bool `pulumi:"dropOther"`
-	DropTcp          bool `pulumi:"dropTcp"`
-	DropUdp          bool `pulumi:"dropUdp"`
-	IcmpMbpsLimit    int  `pulumi:"icmpMbpsLimit"`
-	NullConnEnable   bool `pulumi:"nullConnEnable"`
-	OtherMbpsLimit   int  `pulumi:"otherMbpsLimit"`
-	SConnLimit       int  `pulumi:"sConnLimit"`
-	SNewLimit        int  `pulumi:"sNewLimit"`
-	SynLimit         int  `pulumi:"synLimit"`
-	SynRate          int  `pulumi:"synRate"`
-	TcpMbpsLimit     int  `pulumi:"tcpMbpsLimit"`
-	UdpMbpsLimit     int  `pulumi:"udpMbpsLimit"`
-}
-
-// DdosPoliciesListDropOptionInput is an input type that accepts DdosPoliciesListDropOptionArgs and DdosPoliciesListDropOptionOutput values.
-// You can construct a concrete instance of `DdosPoliciesListDropOptionInput` via:
-//
-//          DdosPoliciesListDropOptionArgs{...}
-type DdosPoliciesListDropOptionInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListDropOptionOutput() DdosPoliciesListDropOptionOutput
-	ToDdosPoliciesListDropOptionOutputWithContext(context.Context) DdosPoliciesListDropOptionOutput
-}
-
-type DdosPoliciesListDropOptionArgs struct {
-	BadConnThreshold pulumi.IntInput  `pulumi:"badConnThreshold"`
-	CheckSyncConn    pulumi.BoolInput `pulumi:"checkSyncConn"`
-	ConnTimeout      pulumi.IntInput  `pulumi:"connTimeout"`
-	DConnLimit       pulumi.IntInput  `pulumi:"dConnLimit"`
-	DNewLimit        pulumi.IntInput  `pulumi:"dNewLimit"`
-	DropAbroad       pulumi.BoolInput `pulumi:"dropAbroad"`
-	DropIcmp         pulumi.BoolInput `pulumi:"dropIcmp"`
-	DropOther        pulumi.BoolInput `pulumi:"dropOther"`
-	DropTcp          pulumi.BoolInput `pulumi:"dropTcp"`
-	DropUdp          pulumi.BoolInput `pulumi:"dropUdp"`
-	IcmpMbpsLimit    pulumi.IntInput  `pulumi:"icmpMbpsLimit"`
-	NullConnEnable   pulumi.BoolInput `pulumi:"nullConnEnable"`
-	OtherMbpsLimit   pulumi.IntInput  `pulumi:"otherMbpsLimit"`
-	SConnLimit       pulumi.IntInput  `pulumi:"sConnLimit"`
-	SNewLimit        pulumi.IntInput  `pulumi:"sNewLimit"`
-	SynLimit         pulumi.IntInput  `pulumi:"synLimit"`
-	SynRate          pulumi.IntInput  `pulumi:"synRate"`
-	TcpMbpsLimit     pulumi.IntInput  `pulumi:"tcpMbpsLimit"`
-	UdpMbpsLimit     pulumi.IntInput  `pulumi:"udpMbpsLimit"`
-}
-
-func (DdosPoliciesListDropOptionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListDropOption)(nil)).Elem()
-}
-
-func (i DdosPoliciesListDropOptionArgs) ToDdosPoliciesListDropOptionOutput() DdosPoliciesListDropOptionOutput {
-	return i.ToDdosPoliciesListDropOptionOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListDropOptionArgs) ToDdosPoliciesListDropOptionOutputWithContext(ctx context.Context) DdosPoliciesListDropOptionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListDropOptionOutput)
-}
-
-// DdosPoliciesListDropOptionArrayInput is an input type that accepts DdosPoliciesListDropOptionArray and DdosPoliciesListDropOptionArrayOutput values.
-// You can construct a concrete instance of `DdosPoliciesListDropOptionArrayInput` via:
-//
-//          DdosPoliciesListDropOptionArray{ DdosPoliciesListDropOptionArgs{...} }
-type DdosPoliciesListDropOptionArrayInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListDropOptionArrayOutput() DdosPoliciesListDropOptionArrayOutput
-	ToDdosPoliciesListDropOptionArrayOutputWithContext(context.Context) DdosPoliciesListDropOptionArrayOutput
-}
-
-type DdosPoliciesListDropOptionArray []DdosPoliciesListDropOptionInput
-
-func (DdosPoliciesListDropOptionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListDropOption)(nil)).Elem()
-}
-
-func (i DdosPoliciesListDropOptionArray) ToDdosPoliciesListDropOptionArrayOutput() DdosPoliciesListDropOptionArrayOutput {
-	return i.ToDdosPoliciesListDropOptionArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListDropOptionArray) ToDdosPoliciesListDropOptionArrayOutputWithContext(ctx context.Context) DdosPoliciesListDropOptionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListDropOptionArrayOutput)
-}
-
-type DdosPoliciesListDropOptionOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListDropOptionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListDropOption)(nil)).Elem()
-}
-
-func (o DdosPoliciesListDropOptionOutput) ToDdosPoliciesListDropOptionOutput() DdosPoliciesListDropOptionOutput {
-	return o
-}
-
-func (o DdosPoliciesListDropOptionOutput) ToDdosPoliciesListDropOptionOutputWithContext(ctx context.Context) DdosPoliciesListDropOptionOutput {
-	return o
-}
-
-func (o DdosPoliciesListDropOptionOutput) BadConnThreshold() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.BadConnThreshold }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) CheckSyncConn() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) bool { return v.CheckSyncConn }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) ConnTimeout() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.ConnTimeout }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) DConnLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.DConnLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) DNewLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.DNewLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) DropAbroad() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) bool { return v.DropAbroad }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) DropIcmp() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) bool { return v.DropIcmp }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) DropOther() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) bool { return v.DropOther }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) DropTcp() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) bool { return v.DropTcp }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) DropUdp() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) bool { return v.DropUdp }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) IcmpMbpsLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.IcmpMbpsLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) NullConnEnable() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) bool { return v.NullConnEnable }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) OtherMbpsLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.OtherMbpsLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) SConnLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.SConnLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) SNewLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.SNewLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) SynLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.SynLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) SynRate() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.SynRate }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) TcpMbpsLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.TcpMbpsLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListDropOptionOutput) UdpMbpsLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListDropOption) int { return v.UdpMbpsLimit }).(pulumi.IntOutput)
-}
-
-type DdosPoliciesListDropOptionArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListDropOptionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListDropOption)(nil)).Elem()
-}
-
-func (o DdosPoliciesListDropOptionArrayOutput) ToDdosPoliciesListDropOptionArrayOutput() DdosPoliciesListDropOptionArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListDropOptionArrayOutput) ToDdosPoliciesListDropOptionArrayOutputWithContext(ctx context.Context) DdosPoliciesListDropOptionArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListDropOptionArrayOutput) Index(i pulumi.IntInput) DdosPoliciesListDropOptionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPoliciesListDropOption {
-		return vs[0].([]DdosPoliciesListDropOption)[vs[1].(int)]
-	}).(DdosPoliciesListDropOptionOutput)
-}
-
-type DdosPoliciesListPacketFilter struct {
-	Action       string `pulumi:"action"`
-	DEndPort     int    `pulumi:"dEndPort"`
-	DStartPort   int    `pulumi:"dStartPort"`
-	Depth        int    `pulumi:"depth"`
-	IsInclude    bool   `pulumi:"isInclude"`
-	MatchBegin   string `pulumi:"matchBegin"`
-	MatchStr     string `pulumi:"matchStr"`
-	MatchType    string `pulumi:"matchType"`
-	Offset       int    `pulumi:"offset"`
-	PktLengthMax int    `pulumi:"pktLengthMax"`
-	PktLengthMin int    `pulumi:"pktLengthMin"`
-	Protocol     string `pulumi:"protocol"`
-	SEndPort     int    `pulumi:"sEndPort"`
-	SStartPort   int    `pulumi:"sStartPort"`
-}
-
-// DdosPoliciesListPacketFilterInput is an input type that accepts DdosPoliciesListPacketFilterArgs and DdosPoliciesListPacketFilterOutput values.
-// You can construct a concrete instance of `DdosPoliciesListPacketFilterInput` via:
-//
-//          DdosPoliciesListPacketFilterArgs{...}
-type DdosPoliciesListPacketFilterInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListPacketFilterOutput() DdosPoliciesListPacketFilterOutput
-	ToDdosPoliciesListPacketFilterOutputWithContext(context.Context) DdosPoliciesListPacketFilterOutput
-}
-
-type DdosPoliciesListPacketFilterArgs struct {
-	Action       pulumi.StringInput `pulumi:"action"`
-	DEndPort     pulumi.IntInput    `pulumi:"dEndPort"`
-	DStartPort   pulumi.IntInput    `pulumi:"dStartPort"`
-	Depth        pulumi.IntInput    `pulumi:"depth"`
-	IsInclude    pulumi.BoolInput   `pulumi:"isInclude"`
-	MatchBegin   pulumi.StringInput `pulumi:"matchBegin"`
-	MatchStr     pulumi.StringInput `pulumi:"matchStr"`
-	MatchType    pulumi.StringInput `pulumi:"matchType"`
-	Offset       pulumi.IntInput    `pulumi:"offset"`
-	PktLengthMax pulumi.IntInput    `pulumi:"pktLengthMax"`
-	PktLengthMin pulumi.IntInput    `pulumi:"pktLengthMin"`
-	Protocol     pulumi.StringInput `pulumi:"protocol"`
-	SEndPort     pulumi.IntInput    `pulumi:"sEndPort"`
-	SStartPort   pulumi.IntInput    `pulumi:"sStartPort"`
-}
-
-func (DdosPoliciesListPacketFilterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListPacketFilter)(nil)).Elem()
-}
-
-func (i DdosPoliciesListPacketFilterArgs) ToDdosPoliciesListPacketFilterOutput() DdosPoliciesListPacketFilterOutput {
-	return i.ToDdosPoliciesListPacketFilterOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListPacketFilterArgs) ToDdosPoliciesListPacketFilterOutputWithContext(ctx context.Context) DdosPoliciesListPacketFilterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListPacketFilterOutput)
-}
-
-// DdosPoliciesListPacketFilterArrayInput is an input type that accepts DdosPoliciesListPacketFilterArray and DdosPoliciesListPacketFilterArrayOutput values.
-// You can construct a concrete instance of `DdosPoliciesListPacketFilterArrayInput` via:
-//
-//          DdosPoliciesListPacketFilterArray{ DdosPoliciesListPacketFilterArgs{...} }
-type DdosPoliciesListPacketFilterArrayInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListPacketFilterArrayOutput() DdosPoliciesListPacketFilterArrayOutput
-	ToDdosPoliciesListPacketFilterArrayOutputWithContext(context.Context) DdosPoliciesListPacketFilterArrayOutput
-}
-
-type DdosPoliciesListPacketFilterArray []DdosPoliciesListPacketFilterInput
-
-func (DdosPoliciesListPacketFilterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListPacketFilter)(nil)).Elem()
-}
-
-func (i DdosPoliciesListPacketFilterArray) ToDdosPoliciesListPacketFilterArrayOutput() DdosPoliciesListPacketFilterArrayOutput {
-	return i.ToDdosPoliciesListPacketFilterArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListPacketFilterArray) ToDdosPoliciesListPacketFilterArrayOutputWithContext(ctx context.Context) DdosPoliciesListPacketFilterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListPacketFilterArrayOutput)
-}
-
-type DdosPoliciesListPacketFilterOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListPacketFilterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListPacketFilter)(nil)).Elem()
-}
-
-func (o DdosPoliciesListPacketFilterOutput) ToDdosPoliciesListPacketFilterOutput() DdosPoliciesListPacketFilterOutput {
-	return o
-}
-
-func (o DdosPoliciesListPacketFilterOutput) ToDdosPoliciesListPacketFilterOutputWithContext(ctx context.Context) DdosPoliciesListPacketFilterOutput {
-	return o
-}
-
-func (o DdosPoliciesListPacketFilterOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) string { return v.Action }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) DEndPort() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.DEndPort }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) DStartPort() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.DStartPort }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) Depth() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.Depth }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) IsInclude() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) bool { return v.IsInclude }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) MatchBegin() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) string { return v.MatchBegin }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) MatchStr() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) string { return v.MatchStr }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) MatchType() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) string { return v.MatchType }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) Offset() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.Offset }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) PktLengthMax() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.PktLengthMax }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) PktLengthMin() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.PktLengthMin }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) string { return v.Protocol }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) SEndPort() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.SEndPort }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPacketFilterOutput) SStartPort() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPacketFilter) int { return v.SStartPort }).(pulumi.IntOutput)
-}
-
-type DdosPoliciesListPacketFilterArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListPacketFilterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListPacketFilter)(nil)).Elem()
-}
-
-func (o DdosPoliciesListPacketFilterArrayOutput) ToDdosPoliciesListPacketFilterArrayOutput() DdosPoliciesListPacketFilterArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListPacketFilterArrayOutput) ToDdosPoliciesListPacketFilterArrayOutputWithContext(ctx context.Context) DdosPoliciesListPacketFilterArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListPacketFilterArrayOutput) Index(i pulumi.IntInput) DdosPoliciesListPacketFilterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPoliciesListPacketFilter {
-		return vs[0].([]DdosPoliciesListPacketFilter)[vs[1].(int)]
-	}).(DdosPoliciesListPacketFilterOutput)
-}
-
-type DdosPoliciesListPortFilter struct {
-	Action    string `pulumi:"action"`
-	EndPort   int    `pulumi:"endPort"`
-	Kind      int    `pulumi:"kind"`
-	Protocol  string `pulumi:"protocol"`
-	StartPort int    `pulumi:"startPort"`
-}
-
-// DdosPoliciesListPortFilterInput is an input type that accepts DdosPoliciesListPortFilterArgs and DdosPoliciesListPortFilterOutput values.
-// You can construct a concrete instance of `DdosPoliciesListPortFilterInput` via:
-//
-//          DdosPoliciesListPortFilterArgs{...}
-type DdosPoliciesListPortFilterInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListPortFilterOutput() DdosPoliciesListPortFilterOutput
-	ToDdosPoliciesListPortFilterOutputWithContext(context.Context) DdosPoliciesListPortFilterOutput
-}
-
-type DdosPoliciesListPortFilterArgs struct {
-	Action    pulumi.StringInput `pulumi:"action"`
-	EndPort   pulumi.IntInput    `pulumi:"endPort"`
-	Kind      pulumi.IntInput    `pulumi:"kind"`
-	Protocol  pulumi.StringInput `pulumi:"protocol"`
-	StartPort pulumi.IntInput    `pulumi:"startPort"`
-}
-
-func (DdosPoliciesListPortFilterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListPortFilter)(nil)).Elem()
-}
-
-func (i DdosPoliciesListPortFilterArgs) ToDdosPoliciesListPortFilterOutput() DdosPoliciesListPortFilterOutput {
-	return i.ToDdosPoliciesListPortFilterOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListPortFilterArgs) ToDdosPoliciesListPortFilterOutputWithContext(ctx context.Context) DdosPoliciesListPortFilterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListPortFilterOutput)
-}
-
-// DdosPoliciesListPortFilterArrayInput is an input type that accepts DdosPoliciesListPortFilterArray and DdosPoliciesListPortFilterArrayOutput values.
-// You can construct a concrete instance of `DdosPoliciesListPortFilterArrayInput` via:
-//
-//          DdosPoliciesListPortFilterArray{ DdosPoliciesListPortFilterArgs{...} }
-type DdosPoliciesListPortFilterArrayInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListPortFilterArrayOutput() DdosPoliciesListPortFilterArrayOutput
-	ToDdosPoliciesListPortFilterArrayOutputWithContext(context.Context) DdosPoliciesListPortFilterArrayOutput
-}
-
-type DdosPoliciesListPortFilterArray []DdosPoliciesListPortFilterInput
-
-func (DdosPoliciesListPortFilterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListPortFilter)(nil)).Elem()
-}
-
-func (i DdosPoliciesListPortFilterArray) ToDdosPoliciesListPortFilterArrayOutput() DdosPoliciesListPortFilterArrayOutput {
-	return i.ToDdosPoliciesListPortFilterArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListPortFilterArray) ToDdosPoliciesListPortFilterArrayOutputWithContext(ctx context.Context) DdosPoliciesListPortFilterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListPortFilterArrayOutput)
-}
-
-type DdosPoliciesListPortFilterOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListPortFilterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListPortFilter)(nil)).Elem()
-}
-
-func (o DdosPoliciesListPortFilterOutput) ToDdosPoliciesListPortFilterOutput() DdosPoliciesListPortFilterOutput {
-	return o
-}
-
-func (o DdosPoliciesListPortFilterOutput) ToDdosPoliciesListPortFilterOutputWithContext(ctx context.Context) DdosPoliciesListPortFilterOutput {
-	return o
-}
-
-func (o DdosPoliciesListPortFilterOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListPortFilter) string { return v.Action }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListPortFilterOutput) EndPort() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPortFilter) int { return v.EndPort }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPortFilterOutput) Kind() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPortFilter) int { return v.Kind }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListPortFilterOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListPortFilter) string { return v.Protocol }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListPortFilterOutput) StartPort() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListPortFilter) int { return v.StartPort }).(pulumi.IntOutput)
-}
-
-type DdosPoliciesListPortFilterArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListPortFilterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListPortFilter)(nil)).Elem()
-}
-
-func (o DdosPoliciesListPortFilterArrayOutput) ToDdosPoliciesListPortFilterArrayOutput() DdosPoliciesListPortFilterArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListPortFilterArrayOutput) ToDdosPoliciesListPortFilterArrayOutputWithContext(ctx context.Context) DdosPoliciesListPortFilterArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListPortFilterArrayOutput) Index(i pulumi.IntInput) DdosPoliciesListPortFilterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPoliciesListPortFilter {
-		return vs[0].([]DdosPoliciesListPortFilter)[vs[1].(int)]
-	}).(DdosPoliciesListPortFilterOutput)
-}
-
-type DdosPoliciesListWatermarkFilter struct {
-	AutoRemove   bool     `pulumi:"autoRemove"`
-	Offset       int      `pulumi:"offset"`
-	OpenSwitch   bool     `pulumi:"openSwitch"`
-	TcpPortLists []string `pulumi:"tcpPortLists"`
-	UdpPortLists []string `pulumi:"udpPortLists"`
-}
-
-// DdosPoliciesListWatermarkFilterInput is an input type that accepts DdosPoliciesListWatermarkFilterArgs and DdosPoliciesListWatermarkFilterOutput values.
-// You can construct a concrete instance of `DdosPoliciesListWatermarkFilterInput` via:
-//
-//          DdosPoliciesListWatermarkFilterArgs{...}
-type DdosPoliciesListWatermarkFilterInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListWatermarkFilterOutput() DdosPoliciesListWatermarkFilterOutput
-	ToDdosPoliciesListWatermarkFilterOutputWithContext(context.Context) DdosPoliciesListWatermarkFilterOutput
-}
-
-type DdosPoliciesListWatermarkFilterArgs struct {
-	AutoRemove   pulumi.BoolInput        `pulumi:"autoRemove"`
-	Offset       pulumi.IntInput         `pulumi:"offset"`
-	OpenSwitch   pulumi.BoolInput        `pulumi:"openSwitch"`
-	TcpPortLists pulumi.StringArrayInput `pulumi:"tcpPortLists"`
-	UdpPortLists pulumi.StringArrayInput `pulumi:"udpPortLists"`
-}
-
-func (DdosPoliciesListWatermarkFilterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListWatermarkFilter)(nil)).Elem()
-}
-
-func (i DdosPoliciesListWatermarkFilterArgs) ToDdosPoliciesListWatermarkFilterOutput() DdosPoliciesListWatermarkFilterOutput {
-	return i.ToDdosPoliciesListWatermarkFilterOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListWatermarkFilterArgs) ToDdosPoliciesListWatermarkFilterOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkFilterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListWatermarkFilterOutput)
-}
-
-// DdosPoliciesListWatermarkFilterArrayInput is an input type that accepts DdosPoliciesListWatermarkFilterArray and DdosPoliciesListWatermarkFilterArrayOutput values.
-// You can construct a concrete instance of `DdosPoliciesListWatermarkFilterArrayInput` via:
-//
-//          DdosPoliciesListWatermarkFilterArray{ DdosPoliciesListWatermarkFilterArgs{...} }
-type DdosPoliciesListWatermarkFilterArrayInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListWatermarkFilterArrayOutput() DdosPoliciesListWatermarkFilterArrayOutput
-	ToDdosPoliciesListWatermarkFilterArrayOutputWithContext(context.Context) DdosPoliciesListWatermarkFilterArrayOutput
-}
-
-type DdosPoliciesListWatermarkFilterArray []DdosPoliciesListWatermarkFilterInput
-
-func (DdosPoliciesListWatermarkFilterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListWatermarkFilter)(nil)).Elem()
-}
-
-func (i DdosPoliciesListWatermarkFilterArray) ToDdosPoliciesListWatermarkFilterArrayOutput() DdosPoliciesListWatermarkFilterArrayOutput {
-	return i.ToDdosPoliciesListWatermarkFilterArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListWatermarkFilterArray) ToDdosPoliciesListWatermarkFilterArrayOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkFilterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListWatermarkFilterArrayOutput)
-}
-
-type DdosPoliciesListWatermarkFilterOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListWatermarkFilterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListWatermarkFilter)(nil)).Elem()
-}
-
-func (o DdosPoliciesListWatermarkFilterOutput) ToDdosPoliciesListWatermarkFilterOutput() DdosPoliciesListWatermarkFilterOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkFilterOutput) ToDdosPoliciesListWatermarkFilterOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkFilterOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkFilterOutput) AutoRemove() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkFilter) bool { return v.AutoRemove }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListWatermarkFilterOutput) Offset() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkFilter) int { return v.Offset }).(pulumi.IntOutput)
-}
-
-func (o DdosPoliciesListWatermarkFilterOutput) OpenSwitch() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkFilter) bool { return v.OpenSwitch }).(pulumi.BoolOutput)
-}
-
-func (o DdosPoliciesListWatermarkFilterOutput) TcpPortLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkFilter) []string { return v.TcpPortLists }).(pulumi.StringArrayOutput)
-}
-
-func (o DdosPoliciesListWatermarkFilterOutput) UdpPortLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkFilter) []string { return v.UdpPortLists }).(pulumi.StringArrayOutput)
-}
-
-type DdosPoliciesListWatermarkFilterArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListWatermarkFilterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListWatermarkFilter)(nil)).Elem()
-}
-
-func (o DdosPoliciesListWatermarkFilterArrayOutput) ToDdosPoliciesListWatermarkFilterArrayOutput() DdosPoliciesListWatermarkFilterArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkFilterArrayOutput) ToDdosPoliciesListWatermarkFilterArrayOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkFilterArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkFilterArrayOutput) Index(i pulumi.IntInput) DdosPoliciesListWatermarkFilterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPoliciesListWatermarkFilter {
-		return vs[0].([]DdosPoliciesListWatermarkFilter)[vs[1].(int)]
-	}).(DdosPoliciesListWatermarkFilterOutput)
-}
-
-type DdosPoliciesListWatermarkKey struct {
-	Content    string  `pulumi:"content"`
-	CreateTime *string `pulumi:"createTime"`
-	Id         string  `pulumi:"id"`
-	OpenSwitch bool    `pulumi:"openSwitch"`
-}
-
-// DdosPoliciesListWatermarkKeyInput is an input type that accepts DdosPoliciesListWatermarkKeyArgs and DdosPoliciesListWatermarkKeyOutput values.
-// You can construct a concrete instance of `DdosPoliciesListWatermarkKeyInput` via:
-//
-//          DdosPoliciesListWatermarkKeyArgs{...}
-type DdosPoliciesListWatermarkKeyInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListWatermarkKeyOutput() DdosPoliciesListWatermarkKeyOutput
-	ToDdosPoliciesListWatermarkKeyOutputWithContext(context.Context) DdosPoliciesListWatermarkKeyOutput
-}
-
-type DdosPoliciesListWatermarkKeyArgs struct {
-	Content    pulumi.StringInput    `pulumi:"content"`
-	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
-	Id         pulumi.StringInput    `pulumi:"id"`
-	OpenSwitch pulumi.BoolInput      `pulumi:"openSwitch"`
-}
-
-func (DdosPoliciesListWatermarkKeyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListWatermarkKey)(nil)).Elem()
-}
-
-func (i DdosPoliciesListWatermarkKeyArgs) ToDdosPoliciesListWatermarkKeyOutput() DdosPoliciesListWatermarkKeyOutput {
-	return i.ToDdosPoliciesListWatermarkKeyOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListWatermarkKeyArgs) ToDdosPoliciesListWatermarkKeyOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkKeyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListWatermarkKeyOutput)
-}
-
-// DdosPoliciesListWatermarkKeyArrayInput is an input type that accepts DdosPoliciesListWatermarkKeyArray and DdosPoliciesListWatermarkKeyArrayOutput values.
-// You can construct a concrete instance of `DdosPoliciesListWatermarkKeyArrayInput` via:
-//
-//          DdosPoliciesListWatermarkKeyArray{ DdosPoliciesListWatermarkKeyArgs{...} }
-type DdosPoliciesListWatermarkKeyArrayInput interface {
-	pulumi.Input
-
-	ToDdosPoliciesListWatermarkKeyArrayOutput() DdosPoliciesListWatermarkKeyArrayOutput
-	ToDdosPoliciesListWatermarkKeyArrayOutputWithContext(context.Context) DdosPoliciesListWatermarkKeyArrayOutput
-}
-
-type DdosPoliciesListWatermarkKeyArray []DdosPoliciesListWatermarkKeyInput
-
-func (DdosPoliciesListWatermarkKeyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListWatermarkKey)(nil)).Elem()
-}
-
-func (i DdosPoliciesListWatermarkKeyArray) ToDdosPoliciesListWatermarkKeyArrayOutput() DdosPoliciesListWatermarkKeyArrayOutput {
-	return i.ToDdosPoliciesListWatermarkKeyArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPoliciesListWatermarkKeyArray) ToDdosPoliciesListWatermarkKeyArrayOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkKeyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPoliciesListWatermarkKeyArrayOutput)
-}
-
-type DdosPoliciesListWatermarkKeyOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListWatermarkKeyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPoliciesListWatermarkKey)(nil)).Elem()
-}
-
-func (o DdosPoliciesListWatermarkKeyOutput) ToDdosPoliciesListWatermarkKeyOutput() DdosPoliciesListWatermarkKeyOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkKeyOutput) ToDdosPoliciesListWatermarkKeyOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkKeyOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkKeyOutput) Content() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkKey) string { return v.Content }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListWatermarkKeyOutput) CreateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkKey) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPoliciesListWatermarkKeyOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkKey) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o DdosPoliciesListWatermarkKeyOutput) OpenSwitch() pulumi.BoolOutput {
-	return o.ApplyT(func(v DdosPoliciesListWatermarkKey) bool { return v.OpenSwitch }).(pulumi.BoolOutput)
-}
-
-type DdosPoliciesListWatermarkKeyArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPoliciesListWatermarkKeyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPoliciesListWatermarkKey)(nil)).Elem()
-}
-
-func (o DdosPoliciesListWatermarkKeyArrayOutput) ToDdosPoliciesListWatermarkKeyArrayOutput() DdosPoliciesListWatermarkKeyArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkKeyArrayOutput) ToDdosPoliciesListWatermarkKeyArrayOutputWithContext(ctx context.Context) DdosPoliciesListWatermarkKeyArrayOutput {
-	return o
-}
-
-func (o DdosPoliciesListWatermarkKeyArrayOutput) Index(i pulumi.IntInput) DdosPoliciesListWatermarkKeyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPoliciesListWatermarkKey {
-		return vs[0].([]DdosPoliciesListWatermarkKey)[vs[1].(int)]
-	}).(DdosPoliciesListWatermarkKeyOutput)
-}
-
-type DdosPolicyAttachmentsDayuDdosPolicyAttachmentList struct {
-	PolicyId     string `pulumi:"policyId"`
-	ResourceId   string `pulumi:"resourceId"`
-	ResourceType string `pulumi:"resourceType"`
-}
-
-// DdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput is an input type that accepts DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs and DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput values.
-// You can construct a concrete instance of `DdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput` via:
-//
-//          DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...}
-type DdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput interface {
-	pulumi.Input
-
-	ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput() DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput
-	ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(context.Context) DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput
-}
-
-type DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs struct {
-	PolicyId     pulumi.StringInput `pulumi:"policyId"`
-	ResourceId   pulumi.StringInput `pulumi:"resourceId"`
-	ResourceType pulumi.StringInput `pulumi:"resourceType"`
-}
-
-func (DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
-}
-
-func (i DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput() DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
-	return i.ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(ctx context.Context) DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput)
-}
-
-// DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput is an input type that accepts DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray and DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput values.
-// You can construct a concrete instance of `DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput` via:
-//
-//          DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray{ DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...} }
-type DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput interface {
-	pulumi.Input
-
-	ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput() DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput
-	ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(context.Context) DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput
-}
-
-type DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray []DdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput
-
-func (DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
-}
-
-func (i DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput() DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
-	return i.ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(ctx context.Context) DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput)
-}
-
-type DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput() DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
-	return o
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(ctx context.Context) DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
-	return o
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) PolicyId() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyAttachmentsDayuDdosPolicyAttachmentList) string { return v.PolicyId }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ResourceId() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyAttachmentsDayuDdosPolicyAttachmentList) string { return v.ResourceId }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ResourceType() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyAttachmentsDayuDdosPolicyAttachmentList) string { return v.ResourceType }).(pulumi.StringOutput)
-}
-
-type DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput() DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
-	return o
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) ToDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(ctx context.Context) DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
-	return o
-}
-
-func (o DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) Index(i pulumi.IntInput) DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPolicyAttachmentsDayuDdosPolicyAttachmentList {
-		return vs[0].([]DdosPolicyAttachmentsDayuDdosPolicyAttachmentList)[vs[1].(int)]
-	}).(DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput)
-}
-
-type DdosPolicyCasesList struct {
-	AppProtocols     []string `pulumi:"appProtocols"`
-	AppType          string   `pulumi:"appType"`
-	CreateTime       string   `pulumi:"createTime"`
-	HasAbroad        string   `pulumi:"hasAbroad"`
-	HasInitiateTcp   string   `pulumi:"hasInitiateTcp"`
-	HasInitiateUdp   string   `pulumi:"hasInitiateUdp"`
-	HasVpn           string   `pulumi:"hasVpn"`
-	MaxTcpPackageLen string   `pulumi:"maxTcpPackageLen"`
-	MaxUdpPackageLen string   `pulumi:"maxUdpPackageLen"`
-	MinTcpPackageLen string   `pulumi:"minTcpPackageLen"`
-	MinUdpPackageLen string   `pulumi:"minUdpPackageLen"`
-	Name             string   `pulumi:"name"`
-	PeerTcpPort      string   `pulumi:"peerTcpPort"`
-	PeerUdpPort      string   `pulumi:"peerUdpPort"`
-	PlatformTypes    []string `pulumi:"platformTypes"`
-	ResourceType     string   `pulumi:"resourceType"`
-	SceneId          string   `pulumi:"sceneId"`
-	TcpEndPort       string   `pulumi:"tcpEndPort"`
-	TcpFootprint     string   `pulumi:"tcpFootprint"`
-	TcpStartPort     string   `pulumi:"tcpStartPort"`
-	UdpEndPort       string   `pulumi:"udpEndPort"`
-	UdpFootprint     string   `pulumi:"udpFootprint"`
-	UdpStartPort     string   `pulumi:"udpStartPort"`
-	WebApiUrls       []string `pulumi:"webApiUrls"`
-}
-
-// DdosPolicyCasesListInput is an input type that accepts DdosPolicyCasesListArgs and DdosPolicyCasesListOutput values.
-// You can construct a concrete instance of `DdosPolicyCasesListInput` via:
-//
-//          DdosPolicyCasesListArgs{...}
-type DdosPolicyCasesListInput interface {
-	pulumi.Input
-
-	ToDdosPolicyCasesListOutput() DdosPolicyCasesListOutput
-	ToDdosPolicyCasesListOutputWithContext(context.Context) DdosPolicyCasesListOutput
-}
-
-type DdosPolicyCasesListArgs struct {
-	AppProtocols     pulumi.StringArrayInput `pulumi:"appProtocols"`
-	AppType          pulumi.StringInput      `pulumi:"appType"`
-	CreateTime       pulumi.StringInput      `pulumi:"createTime"`
-	HasAbroad        pulumi.StringInput      `pulumi:"hasAbroad"`
-	HasInitiateTcp   pulumi.StringInput      `pulumi:"hasInitiateTcp"`
-	HasInitiateUdp   pulumi.StringInput      `pulumi:"hasInitiateUdp"`
-	HasVpn           pulumi.StringInput      `pulumi:"hasVpn"`
-	MaxTcpPackageLen pulumi.StringInput      `pulumi:"maxTcpPackageLen"`
-	MaxUdpPackageLen pulumi.StringInput      `pulumi:"maxUdpPackageLen"`
-	MinTcpPackageLen pulumi.StringInput      `pulumi:"minTcpPackageLen"`
-	MinUdpPackageLen pulumi.StringInput      `pulumi:"minUdpPackageLen"`
-	Name             pulumi.StringInput      `pulumi:"name"`
-	PeerTcpPort      pulumi.StringInput      `pulumi:"peerTcpPort"`
-	PeerUdpPort      pulumi.StringInput      `pulumi:"peerUdpPort"`
-	PlatformTypes    pulumi.StringArrayInput `pulumi:"platformTypes"`
-	ResourceType     pulumi.StringInput      `pulumi:"resourceType"`
-	SceneId          pulumi.StringInput      `pulumi:"sceneId"`
-	TcpEndPort       pulumi.StringInput      `pulumi:"tcpEndPort"`
-	TcpFootprint     pulumi.StringInput      `pulumi:"tcpFootprint"`
-	TcpStartPort     pulumi.StringInput      `pulumi:"tcpStartPort"`
-	UdpEndPort       pulumi.StringInput      `pulumi:"udpEndPort"`
-	UdpFootprint     pulumi.StringInput      `pulumi:"udpFootprint"`
-	UdpStartPort     pulumi.StringInput      `pulumi:"udpStartPort"`
-	WebApiUrls       pulumi.StringArrayInput `pulumi:"webApiUrls"`
-}
-
-func (DdosPolicyCasesListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyCasesList)(nil)).Elem()
-}
-
-func (i DdosPolicyCasesListArgs) ToDdosPolicyCasesListOutput() DdosPolicyCasesListOutput {
-	return i.ToDdosPolicyCasesListOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyCasesListArgs) ToDdosPolicyCasesListOutputWithContext(ctx context.Context) DdosPolicyCasesListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyCasesListOutput)
-}
-
-// DdosPolicyCasesListArrayInput is an input type that accepts DdosPolicyCasesListArray and DdosPolicyCasesListArrayOutput values.
-// You can construct a concrete instance of `DdosPolicyCasesListArrayInput` via:
-//
-//          DdosPolicyCasesListArray{ DdosPolicyCasesListArgs{...} }
-type DdosPolicyCasesListArrayInput interface {
-	pulumi.Input
-
-	ToDdosPolicyCasesListArrayOutput() DdosPolicyCasesListArrayOutput
-	ToDdosPolicyCasesListArrayOutputWithContext(context.Context) DdosPolicyCasesListArrayOutput
-}
-
-type DdosPolicyCasesListArray []DdosPolicyCasesListInput
-
-func (DdosPolicyCasesListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyCasesList)(nil)).Elem()
-}
-
-func (i DdosPolicyCasesListArray) ToDdosPolicyCasesListArrayOutput() DdosPolicyCasesListArrayOutput {
-	return i.ToDdosPolicyCasesListArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyCasesListArray) ToDdosPolicyCasesListArrayOutputWithContext(ctx context.Context) DdosPolicyCasesListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyCasesListArrayOutput)
-}
-
-type DdosPolicyCasesListOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyCasesListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyCasesList)(nil)).Elem()
-}
-
-func (o DdosPolicyCasesListOutput) ToDdosPolicyCasesListOutput() DdosPolicyCasesListOutput {
-	return o
-}
-
-func (o DdosPolicyCasesListOutput) ToDdosPolicyCasesListOutputWithContext(ctx context.Context) DdosPolicyCasesListOutput {
-	return o
-}
-
-func (o DdosPolicyCasesListOutput) AppProtocols() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) []string { return v.AppProtocols }).(pulumi.StringArrayOutput)
-}
-
-func (o DdosPolicyCasesListOutput) AppType() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.AppType }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) HasAbroad() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.HasAbroad }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) HasInitiateTcp() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.HasInitiateTcp }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) HasInitiateUdp() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.HasInitiateUdp }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) HasVpn() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.HasVpn }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) MaxTcpPackageLen() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.MaxTcpPackageLen }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) MaxUdpPackageLen() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.MaxUdpPackageLen }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) MinTcpPackageLen() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.MinTcpPackageLen }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) MinUdpPackageLen() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.MinUdpPackageLen }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) PeerTcpPort() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.PeerTcpPort }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) PeerUdpPort() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.PeerUdpPort }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) PlatformTypes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) []string { return v.PlatformTypes }).(pulumi.StringArrayOutput)
-}
-
-func (o DdosPolicyCasesListOutput) ResourceType() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.ResourceType }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) SceneId() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.SceneId }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) TcpEndPort() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.TcpEndPort }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) TcpFootprint() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.TcpFootprint }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) TcpStartPort() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.TcpStartPort }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) UdpEndPort() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.UdpEndPort }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) UdpFootprint() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.UdpFootprint }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) UdpStartPort() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) string { return v.UdpStartPort }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyCasesListOutput) WebApiUrls() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DdosPolicyCasesList) []string { return v.WebApiUrls }).(pulumi.StringArrayOutput)
-}
-
-type DdosPolicyCasesListArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyCasesListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyCasesList)(nil)).Elem()
-}
-
-func (o DdosPolicyCasesListArrayOutput) ToDdosPolicyCasesListArrayOutput() DdosPolicyCasesListArrayOutput {
-	return o
-}
-
-func (o DdosPolicyCasesListArrayOutput) ToDdosPolicyCasesListArrayOutputWithContext(ctx context.Context) DdosPolicyCasesListArrayOutput {
-	return o
-}
-
-func (o DdosPolicyCasesListArrayOutput) Index(i pulumi.IntInput) DdosPolicyCasesListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPolicyCasesList {
-		return vs[0].([]DdosPolicyCasesList)[vs[1].(int)]
-	}).(DdosPolicyCasesListOutput)
+func (o CcPolicyV2ThresholdArrayOutput) Index(i pulumi.IntInput) CcPolicyV2ThresholdOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CcPolicyV2Threshold {
+		return vs[0].([]CcPolicyV2Threshold)[vs[1].(int)]
+	}).(CcPolicyV2ThresholdOutput)
 }
 
 type DdosPolicyDropOption struct {
-	BadConnThreshold int  `pulumi:"badConnThreshold"`
-	CheckSyncConn    bool `pulumi:"checkSyncConn"`
-	ConnTimeout      int  `pulumi:"connTimeout"`
-	DConnLimit       int  `pulumi:"dConnLimit"`
-	DNewLimit        int  `pulumi:"dNewLimit"`
-	DropAbroad       bool `pulumi:"dropAbroad"`
-	DropIcmp         bool `pulumi:"dropIcmp"`
-	DropOther        bool `pulumi:"dropOther"`
-	DropTcp          bool `pulumi:"dropTcp"`
-	DropUdp          bool `pulumi:"dropUdp"`
-	IcmpMbpsLimit    int  `pulumi:"icmpMbpsLimit"`
-	NullConnEnable   bool `pulumi:"nullConnEnable"`
-	OtherMbpsLimit   int  `pulumi:"otherMbpsLimit"`
-	SConnLimit       int  `pulumi:"sConnLimit"`
-	SNewLimit        int  `pulumi:"sNewLimit"`
-	SynLimit         int  `pulumi:"synLimit"`
-	SynRate          *int `pulumi:"synRate"`
-	TcpMbpsLimit     int  `pulumi:"tcpMbpsLimit"`
-	UdpMbpsLimit     int  `pulumi:"udpMbpsLimit"`
+	// The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
+	BadConnThreshold int `pulumi:"badConnThreshold"`
+	// Indicate whether to check null connection or not.
+	CheckSyncConn bool `pulumi:"checkSyncConn"`
+	// Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
+	ConnTimeout int `pulumi:"connTimeout"`
+	// The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
+	DConnLimit int `pulumi:"dConnLimit"`
+	// The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
+	DNewLimit int `pulumi:"dNewLimit"`
+	// Indicate whether to drop abroad traffic or not.
+	DropAbroad bool `pulumi:"dropAbroad"`
+	// Indicate whether to drop ICMP protocol or not.
+	DropIcmp bool `pulumi:"dropIcmp"`
+	// Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+	DropOther bool `pulumi:"dropOther"`
+	// Indicate whether to drop TCP protocol or not.
+	DropTcp bool `pulumi:"dropTcp"`
+	// Indicate to drop UDP protocol or not.
+	DropUdp bool `pulumi:"dropUdp"`
+	// The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+	IcmpMbpsLimit int `pulumi:"icmpMbpsLimit"`
+	// Indicate to enable null connection or not.
+	NullConnEnable bool `pulumi:"nullConnEnable"`
+	// The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+	OtherMbpsLimit int `pulumi:"otherMbpsLimit"`
+	// The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
+	SConnLimit int `pulumi:"sConnLimit"`
+	// The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
+	SNewLimit int `pulumi:"sNewLimit"`
+	// The limit of syn of abnormal connection check. Valid value ranges: (0~100).
+	SynLimit int `pulumi:"synLimit"`
+	// The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
+	SynRate *int `pulumi:"synRate"`
+	// The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
+	TcpMbpsLimit int `pulumi:"tcpMbpsLimit"`
+	// The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+	UdpMbpsLimit int `pulumi:"udpMbpsLimit"`
 }
 
 // DdosPolicyDropOptionInput is an input type that accepts DdosPolicyDropOptionArgs and DdosPolicyDropOptionOutput values.
@@ -2840,25 +1254,44 @@ type DdosPolicyDropOptionInput interface {
 }
 
 type DdosPolicyDropOptionArgs struct {
-	BadConnThreshold pulumi.IntInput    `pulumi:"badConnThreshold"`
-	CheckSyncConn    pulumi.BoolInput   `pulumi:"checkSyncConn"`
-	ConnTimeout      pulumi.IntInput    `pulumi:"connTimeout"`
-	DConnLimit       pulumi.IntInput    `pulumi:"dConnLimit"`
-	DNewLimit        pulumi.IntInput    `pulumi:"dNewLimit"`
-	DropAbroad       pulumi.BoolInput   `pulumi:"dropAbroad"`
-	DropIcmp         pulumi.BoolInput   `pulumi:"dropIcmp"`
-	DropOther        pulumi.BoolInput   `pulumi:"dropOther"`
-	DropTcp          pulumi.BoolInput   `pulumi:"dropTcp"`
-	DropUdp          pulumi.BoolInput   `pulumi:"dropUdp"`
-	IcmpMbpsLimit    pulumi.IntInput    `pulumi:"icmpMbpsLimit"`
-	NullConnEnable   pulumi.BoolInput   `pulumi:"nullConnEnable"`
-	OtherMbpsLimit   pulumi.IntInput    `pulumi:"otherMbpsLimit"`
-	SConnLimit       pulumi.IntInput    `pulumi:"sConnLimit"`
-	SNewLimit        pulumi.IntInput    `pulumi:"sNewLimit"`
-	SynLimit         pulumi.IntInput    `pulumi:"synLimit"`
-	SynRate          pulumi.IntPtrInput `pulumi:"synRate"`
-	TcpMbpsLimit     pulumi.IntInput    `pulumi:"tcpMbpsLimit"`
-	UdpMbpsLimit     pulumi.IntInput    `pulumi:"udpMbpsLimit"`
+	// The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
+	BadConnThreshold pulumi.IntInput `pulumi:"badConnThreshold"`
+	// Indicate whether to check null connection or not.
+	CheckSyncConn pulumi.BoolInput `pulumi:"checkSyncConn"`
+	// Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
+	ConnTimeout pulumi.IntInput `pulumi:"connTimeout"`
+	// The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
+	DConnLimit pulumi.IntInput `pulumi:"dConnLimit"`
+	// The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
+	DNewLimit pulumi.IntInput `pulumi:"dNewLimit"`
+	// Indicate whether to drop abroad traffic or not.
+	DropAbroad pulumi.BoolInput `pulumi:"dropAbroad"`
+	// Indicate whether to drop ICMP protocol or not.
+	DropIcmp pulumi.BoolInput `pulumi:"dropIcmp"`
+	// Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+	DropOther pulumi.BoolInput `pulumi:"dropOther"`
+	// Indicate whether to drop TCP protocol or not.
+	DropTcp pulumi.BoolInput `pulumi:"dropTcp"`
+	// Indicate to drop UDP protocol or not.
+	DropUdp pulumi.BoolInput `pulumi:"dropUdp"`
+	// The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+	IcmpMbpsLimit pulumi.IntInput `pulumi:"icmpMbpsLimit"`
+	// Indicate to enable null connection or not.
+	NullConnEnable pulumi.BoolInput `pulumi:"nullConnEnable"`
+	// The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+	OtherMbpsLimit pulumi.IntInput `pulumi:"otherMbpsLimit"`
+	// The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
+	SConnLimit pulumi.IntInput `pulumi:"sConnLimit"`
+	// The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
+	SNewLimit pulumi.IntInput `pulumi:"sNewLimit"`
+	// The limit of syn of abnormal connection check. Valid value ranges: (0~100).
+	SynLimit pulumi.IntInput `pulumi:"synLimit"`
+	// The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
+	SynRate pulumi.IntPtrInput `pulumi:"synRate"`
+	// The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
+	TcpMbpsLimit pulumi.IntInput `pulumi:"tcpMbpsLimit"`
+	// The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+	UdpMbpsLimit pulumi.IntInput `pulumi:"udpMbpsLimit"`
 }
 
 func (DdosPolicyDropOptionArgs) ElementType() reflect.Type {
@@ -2912,78 +1345,97 @@ func (o DdosPolicyDropOptionOutput) ToDdosPolicyDropOptionOutputWithContext(ctx 
 	return o
 }
 
+// The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
 func (o DdosPolicyDropOptionOutput) BadConnThreshold() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.BadConnThreshold }).(pulumi.IntOutput)
 }
 
+// Indicate whether to check null connection or not.
 func (o DdosPolicyDropOptionOutput) CheckSyncConn() pulumi.BoolOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) bool { return v.CheckSyncConn }).(pulumi.BoolOutput)
 }
 
+// Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
 func (o DdosPolicyDropOptionOutput) ConnTimeout() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.ConnTimeout }).(pulumi.IntOutput)
 }
 
+// The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
 func (o DdosPolicyDropOptionOutput) DConnLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.DConnLimit }).(pulumi.IntOutput)
 }
 
+// The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
 func (o DdosPolicyDropOptionOutput) DNewLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.DNewLimit }).(pulumi.IntOutput)
 }
 
+// Indicate whether to drop abroad traffic or not.
 func (o DdosPolicyDropOptionOutput) DropAbroad() pulumi.BoolOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) bool { return v.DropAbroad }).(pulumi.BoolOutput)
 }
 
+// Indicate whether to drop ICMP protocol or not.
 func (o DdosPolicyDropOptionOutput) DropIcmp() pulumi.BoolOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) bool { return v.DropIcmp }).(pulumi.BoolOutput)
 }
 
+// Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
 func (o DdosPolicyDropOptionOutput) DropOther() pulumi.BoolOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) bool { return v.DropOther }).(pulumi.BoolOutput)
 }
 
+// Indicate whether to drop TCP protocol or not.
 func (o DdosPolicyDropOptionOutput) DropTcp() pulumi.BoolOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) bool { return v.DropTcp }).(pulumi.BoolOutput)
 }
 
+// Indicate to drop UDP protocol or not.
 func (o DdosPolicyDropOptionOutput) DropUdp() pulumi.BoolOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) bool { return v.DropUdp }).(pulumi.BoolOutput)
 }
 
+// The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
 func (o DdosPolicyDropOptionOutput) IcmpMbpsLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.IcmpMbpsLimit }).(pulumi.IntOutput)
 }
 
+// Indicate to enable null connection or not.
 func (o DdosPolicyDropOptionOutput) NullConnEnable() pulumi.BoolOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) bool { return v.NullConnEnable }).(pulumi.BoolOutput)
 }
 
+// The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
 func (o DdosPolicyDropOptionOutput) OtherMbpsLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.OtherMbpsLimit }).(pulumi.IntOutput)
 }
 
+// The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
 func (o DdosPolicyDropOptionOutput) SConnLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.SConnLimit }).(pulumi.IntOutput)
 }
 
+// The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
 func (o DdosPolicyDropOptionOutput) SNewLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.SNewLimit }).(pulumi.IntOutput)
 }
 
+// The limit of syn of abnormal connection check. Valid value ranges: (0~100).
 func (o DdosPolicyDropOptionOutput) SynLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.SynLimit }).(pulumi.IntOutput)
 }
 
+// The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
 func (o DdosPolicyDropOptionOutput) SynRate() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) *int { return v.SynRate }).(pulumi.IntPtrOutput)
 }
 
+// The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
 func (o DdosPolicyDropOptionOutput) TcpMbpsLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.TcpMbpsLimit }).(pulumi.IntOutput)
 }
 
+// The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
 func (o DdosPolicyDropOptionOutput) UdpMbpsLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDropOption) int { return v.UdpMbpsLimit }).(pulumi.IntOutput)
 }
@@ -3009,20 +1461,34 @@ func (o DdosPolicyDropOptionArrayOutput) Index(i pulumi.IntInput) DdosPolicyDrop
 }
 
 type DdosPolicyPacketFilter struct {
-	Action       *string `pulumi:"action"`
-	DEndPort     *int    `pulumi:"dEndPort"`
-	DStartPort   *int    `pulumi:"dStartPort"`
-	Depth        *int    `pulumi:"depth"`
-	IsInclude    *bool   `pulumi:"isInclude"`
-	MatchBegin   *string `pulumi:"matchBegin"`
-	MatchStr     *string `pulumi:"matchStr"`
-	MatchType    *string `pulumi:"matchType"`
-	Offset       *int    `pulumi:"offset"`
-	PktLengthMax *int    `pulumi:"pktLengthMax"`
-	PktLengthMin *int    `pulumi:"pktLengthMin"`
-	Protocol     *string `pulumi:"protocol"`
-	SEndPort     *int    `pulumi:"sEndPort"`
-	SStartPort   *int    `pulumi:"sStartPort"`
+	// Action of port to take. Valid values: `drop`, `dropBlack`,`dropRst`,`dropBlackRst`,`transmit`.`drop`(drop the packet), `dropBlack`(drop the packet and black the ip),`dropRst`(drop the packet and disconnect),`dropBlackRst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
+	Action *string `pulumi:"action"`
+	// End port of the destination. Valid value ranges: (0~65535). It must be greater than `dStartPort`.
+	DEndPort *int `pulumi:"dEndPort"`
+	// Start port of the destination. Valid value ranges: (0~65535).
+	DStartPort *int `pulumi:"dStartPort"`
+	// The depth of match. Valid value ranges: (0~1500).
+	Depth *int `pulumi:"depth"`
+	// Indicate whether to include the key word/regular expression or not.
+	IsInclude *bool `pulumi:"isInclude"`
+	// Indicate whether to check load or not, `beginL5` means to match and `noMatch` means not.
+	MatchBegin *string `pulumi:"matchBegin"`
+	// The key word or regular expression.
+	MatchStr *string `pulumi:"matchStr"`
+	// Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
+	MatchType *string `pulumi:"matchType"`
+	// The offset of match. Valid value ranges: (0~1500).
+	Offset *int `pulumi:"offset"`
+	// The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pktLengthMin`.
+	PktLengthMax *int `pulumi:"pktLengthMax"`
+	// The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
+	PktLengthMin *int `pulumi:"pktLengthMin"`
+	// Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
+	Protocol *string `pulumi:"protocol"`
+	// End port of the source. Valid value ranges: (0~65535). It must be greater than `sStartPort`.
+	SEndPort *int `pulumi:"sEndPort"`
+	// Start port of the source. Valid value ranges: (0~65535).
+	SStartPort *int `pulumi:"sStartPort"`
 }
 
 // DdosPolicyPacketFilterInput is an input type that accepts DdosPolicyPacketFilterArgs and DdosPolicyPacketFilterOutput values.
@@ -3037,20 +1503,34 @@ type DdosPolicyPacketFilterInput interface {
 }
 
 type DdosPolicyPacketFilterArgs struct {
-	Action       pulumi.StringPtrInput `pulumi:"action"`
-	DEndPort     pulumi.IntPtrInput    `pulumi:"dEndPort"`
-	DStartPort   pulumi.IntPtrInput    `pulumi:"dStartPort"`
-	Depth        pulumi.IntPtrInput    `pulumi:"depth"`
-	IsInclude    pulumi.BoolPtrInput   `pulumi:"isInclude"`
-	MatchBegin   pulumi.StringPtrInput `pulumi:"matchBegin"`
-	MatchStr     pulumi.StringPtrInput `pulumi:"matchStr"`
-	MatchType    pulumi.StringPtrInput `pulumi:"matchType"`
-	Offset       pulumi.IntPtrInput    `pulumi:"offset"`
-	PktLengthMax pulumi.IntPtrInput    `pulumi:"pktLengthMax"`
-	PktLengthMin pulumi.IntPtrInput    `pulumi:"pktLengthMin"`
-	Protocol     pulumi.StringPtrInput `pulumi:"protocol"`
-	SEndPort     pulumi.IntPtrInput    `pulumi:"sEndPort"`
-	SStartPort   pulumi.IntPtrInput    `pulumi:"sStartPort"`
+	// Action of port to take. Valid values: `drop`, `dropBlack`,`dropRst`,`dropBlackRst`,`transmit`.`drop`(drop the packet), `dropBlack`(drop the packet and black the ip),`dropRst`(drop the packet and disconnect),`dropBlackRst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// End port of the destination. Valid value ranges: (0~65535). It must be greater than `dStartPort`.
+	DEndPort pulumi.IntPtrInput `pulumi:"dEndPort"`
+	// Start port of the destination. Valid value ranges: (0~65535).
+	DStartPort pulumi.IntPtrInput `pulumi:"dStartPort"`
+	// The depth of match. Valid value ranges: (0~1500).
+	Depth pulumi.IntPtrInput `pulumi:"depth"`
+	// Indicate whether to include the key word/regular expression or not.
+	IsInclude pulumi.BoolPtrInput `pulumi:"isInclude"`
+	// Indicate whether to check load or not, `beginL5` means to match and `noMatch` means not.
+	MatchBegin pulumi.StringPtrInput `pulumi:"matchBegin"`
+	// The key word or regular expression.
+	MatchStr pulumi.StringPtrInput `pulumi:"matchStr"`
+	// Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
+	MatchType pulumi.StringPtrInput `pulumi:"matchType"`
+	// The offset of match. Valid value ranges: (0~1500).
+	Offset pulumi.IntPtrInput `pulumi:"offset"`
+	// The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pktLengthMin`.
+	PktLengthMax pulumi.IntPtrInput `pulumi:"pktLengthMax"`
+	// The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
+	PktLengthMin pulumi.IntPtrInput `pulumi:"pktLengthMin"`
+	// Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// End port of the source. Valid value ranges: (0~65535). It must be greater than `sStartPort`.
+	SEndPort pulumi.IntPtrInput `pulumi:"sEndPort"`
+	// Start port of the source. Valid value ranges: (0~65535).
+	SStartPort pulumi.IntPtrInput `pulumi:"sStartPort"`
 }
 
 func (DdosPolicyPacketFilterArgs) ElementType() reflect.Type {
@@ -3104,58 +1584,72 @@ func (o DdosPolicyPacketFilterOutput) ToDdosPolicyPacketFilterOutputWithContext(
 	return o
 }
 
+// Action of port to take. Valid values: `drop`, `dropBlack`,`dropRst`,`dropBlackRst`,`transmit`.`drop`(drop the packet), `dropBlack`(drop the packet and black the ip),`dropRst`(drop the packet and disconnect),`dropBlackRst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
 func (o DdosPolicyPacketFilterOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
+// End port of the destination. Valid value ranges: (0~65535). It must be greater than `dStartPort`.
 func (o DdosPolicyPacketFilterOutput) DEndPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.DEndPort }).(pulumi.IntPtrOutput)
 }
 
+// Start port of the destination. Valid value ranges: (0~65535).
 func (o DdosPolicyPacketFilterOutput) DStartPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.DStartPort }).(pulumi.IntPtrOutput)
 }
 
+// The depth of match. Valid value ranges: (0~1500).
 func (o DdosPolicyPacketFilterOutput) Depth() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.Depth }).(pulumi.IntPtrOutput)
 }
 
+// Indicate whether to include the key word/regular expression or not.
 func (o DdosPolicyPacketFilterOutput) IsInclude() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *bool { return v.IsInclude }).(pulumi.BoolPtrOutput)
 }
 
+// Indicate whether to check load or not, `beginL5` means to match and `noMatch` means not.
 func (o DdosPolicyPacketFilterOutput) MatchBegin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *string { return v.MatchBegin }).(pulumi.StringPtrOutput)
 }
 
+// The key word or regular expression.
 func (o DdosPolicyPacketFilterOutput) MatchStr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *string { return v.MatchStr }).(pulumi.StringPtrOutput)
 }
 
+// Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
 func (o DdosPolicyPacketFilterOutput) MatchType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *string { return v.MatchType }).(pulumi.StringPtrOutput)
 }
 
+// The offset of match. Valid value ranges: (0~1500).
 func (o DdosPolicyPacketFilterOutput) Offset() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.Offset }).(pulumi.IntPtrOutput)
 }
 
+// The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pktLengthMin`.
 func (o DdosPolicyPacketFilterOutput) PktLengthMax() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.PktLengthMax }).(pulumi.IntPtrOutput)
 }
 
+// The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
 func (o DdosPolicyPacketFilterOutput) PktLengthMin() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.PktLengthMin }).(pulumi.IntPtrOutput)
 }
 
+// Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
 func (o DdosPolicyPacketFilterOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// End port of the source. Valid value ranges: (0~65535). It must be greater than `sStartPort`.
 func (o DdosPolicyPacketFilterOutput) SEndPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.SEndPort }).(pulumi.IntPtrOutput)
 }
 
+// Start port of the source. Valid value ranges: (0~65535).
 func (o DdosPolicyPacketFilterOutput) SStartPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPacketFilter) *int { return v.SStartPort }).(pulumi.IntPtrOutput)
 }
@@ -3181,11 +1675,16 @@ func (o DdosPolicyPacketFilterArrayOutput) Index(i pulumi.IntInput) DdosPolicyPa
 }
 
 type DdosPolicyPortFilter struct {
-	Action    *string `pulumi:"action"`
-	EndPort   *int    `pulumi:"endPort"`
-	Kind      *int    `pulumi:"kind"`
-	Protocol  *string `pulumi:"protocol"`
-	StartPort *int    `pulumi:"startPort"`
+	// Action of port to take. Valid values: `drop`, `transmit`.
+	Action *string `pulumi:"action"`
+	// End port. Valid value ranges: (0~65535). It must be greater than `startPort`.
+	EndPort *int `pulumi:"endPort"`
+	// The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
+	Kind *int `pulumi:"kind"`
+	// Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
+	Protocol *string `pulumi:"protocol"`
+	// Start port. Valid value ranges: (0~65535).
+	StartPort *int `pulumi:"startPort"`
 }
 
 // DdosPolicyPortFilterInput is an input type that accepts DdosPolicyPortFilterArgs and DdosPolicyPortFilterOutput values.
@@ -3200,11 +1699,16 @@ type DdosPolicyPortFilterInput interface {
 }
 
 type DdosPolicyPortFilterArgs struct {
-	Action    pulumi.StringPtrInput `pulumi:"action"`
-	EndPort   pulumi.IntPtrInput    `pulumi:"endPort"`
-	Kind      pulumi.IntPtrInput    `pulumi:"kind"`
-	Protocol  pulumi.StringPtrInput `pulumi:"protocol"`
-	StartPort pulumi.IntPtrInput    `pulumi:"startPort"`
+	// Action of port to take. Valid values: `drop`, `transmit`.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// End port. Valid value ranges: (0~65535). It must be greater than `startPort`.
+	EndPort pulumi.IntPtrInput `pulumi:"endPort"`
+	// The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
+	Kind pulumi.IntPtrInput `pulumi:"kind"`
+	// Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// Start port. Valid value ranges: (0~65535).
+	StartPort pulumi.IntPtrInput `pulumi:"startPort"`
 }
 
 func (DdosPolicyPortFilterArgs) ElementType() reflect.Type {
@@ -3258,22 +1762,27 @@ func (o DdosPolicyPortFilterOutput) ToDdosPolicyPortFilterOutputWithContext(ctx 
 	return o
 }
 
+// Action of port to take. Valid values: `drop`, `transmit`.
 func (o DdosPolicyPortFilterOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPortFilter) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
+// End port. Valid value ranges: (0~65535). It must be greater than `startPort`.
 func (o DdosPolicyPortFilterOutput) EndPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPortFilter) *int { return v.EndPort }).(pulumi.IntPtrOutput)
 }
 
+// The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
 func (o DdosPolicyPortFilterOutput) Kind() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPortFilter) *int { return v.Kind }).(pulumi.IntPtrOutput)
 }
 
+// Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
 func (o DdosPolicyPortFilterOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPortFilter) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// Start port. Valid value ranges: (0~65535).
 func (o DdosPolicyPortFilterOutput) StartPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyPortFilter) *int { return v.StartPort }).(pulumi.IntPtrOutput)
 }
@@ -3299,13 +1808,20 @@ func (o DdosPolicyPortFilterArrayOutput) Index(i pulumi.IntInput) DdosPolicyPort
 }
 
 type DdosPolicyV2Acl struct {
-	Action          string `pulumi:"action"`
-	DPortEnd        int    `pulumi:"dPortEnd"`
-	DPortStart      int    `pulumi:"dPortStart"`
+	// Action, optional values: drop, transmit, forward.
+	Action string `pulumi:"action"`
+	// The destination port ends, and the value range is 0~65535.
+	DPortEnd int `pulumi:"dPortEnd"`
+	// The destination port starts, and the value range is 0~65535.
+	DPortStart int `pulumi:"dPortStart"`
+	// Protocol type, desirable values tcp, udp, all.
 	ForwardProtocol string `pulumi:"forwardProtocol"`
-	Priority        int    `pulumi:"priority"`
-	SPortEnd        int    `pulumi:"sPortEnd"`
-	SPortStart      int    `pulumi:"sPortStart"`
+	// Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+	Priority int `pulumi:"priority"`
+	// The source port ends, and the acceptable value ranges from 0 to 65535.
+	SPortEnd int `pulumi:"sPortEnd"`
+	// The source port starts, and the value range is 0~65535.
+	SPortStart int `pulumi:"sPortStart"`
 }
 
 // DdosPolicyV2AclInput is an input type that accepts DdosPolicyV2AclArgs and DdosPolicyV2AclOutput values.
@@ -3320,13 +1836,20 @@ type DdosPolicyV2AclInput interface {
 }
 
 type DdosPolicyV2AclArgs struct {
-	Action          pulumi.StringInput `pulumi:"action"`
-	DPortEnd        pulumi.IntInput    `pulumi:"dPortEnd"`
-	DPortStart      pulumi.IntInput    `pulumi:"dPortStart"`
+	// Action, optional values: drop, transmit, forward.
+	Action pulumi.StringInput `pulumi:"action"`
+	// The destination port ends, and the value range is 0~65535.
+	DPortEnd pulumi.IntInput `pulumi:"dPortEnd"`
+	// The destination port starts, and the value range is 0~65535.
+	DPortStart pulumi.IntInput `pulumi:"dPortStart"`
+	// Protocol type, desirable values tcp, udp, all.
 	ForwardProtocol pulumi.StringInput `pulumi:"forwardProtocol"`
-	Priority        pulumi.IntInput    `pulumi:"priority"`
-	SPortEnd        pulumi.IntInput    `pulumi:"sPortEnd"`
-	SPortStart      pulumi.IntInput    `pulumi:"sPortStart"`
+	// Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// The source port ends, and the acceptable value ranges from 0 to 65535.
+	SPortEnd pulumi.IntInput `pulumi:"sPortEnd"`
+	// The source port starts, and the value range is 0~65535.
+	SPortStart pulumi.IntInput `pulumi:"sPortStart"`
 }
 
 func (DdosPolicyV2AclArgs) ElementType() reflect.Type {
@@ -3380,30 +1903,37 @@ func (o DdosPolicyV2AclOutput) ToDdosPolicyV2AclOutputWithContext(ctx context.Co
 	return o
 }
 
+// Action, optional values: drop, transmit, forward.
 func (o DdosPolicyV2AclOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2Acl) string { return v.Action }).(pulumi.StringOutput)
 }
 
+// The destination port ends, and the value range is 0~65535.
 func (o DdosPolicyV2AclOutput) DPortEnd() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2Acl) int { return v.DPortEnd }).(pulumi.IntOutput)
 }
 
+// The destination port starts, and the value range is 0~65535.
 func (o DdosPolicyV2AclOutput) DPortStart() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2Acl) int { return v.DPortStart }).(pulumi.IntOutput)
 }
 
+// Protocol type, desirable values tcp, udp, all.
 func (o DdosPolicyV2AclOutput) ForwardProtocol() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2Acl) string { return v.ForwardProtocol }).(pulumi.StringOutput)
 }
 
+// Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
 func (o DdosPolicyV2AclOutput) Priority() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2Acl) int { return v.Priority }).(pulumi.IntOutput)
 }
 
+// The source port ends, and the acceptable value ranges from 0 to 65535.
 func (o DdosPolicyV2AclOutput) SPortEnd() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2Acl) int { return v.SPortEnd }).(pulumi.IntOutput)
 }
 
+// The source port starts, and the value range is 0~65535.
 func (o DdosPolicyV2AclOutput) SPortStart() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2Acl) int { return v.SPortStart }).(pulumi.IntOutput)
 }
@@ -3429,7 +1959,9 @@ func (o DdosPolicyV2AclArrayOutput) Index(i pulumi.IntInput) DdosPolicyV2AclOutp
 }
 
 type DdosPolicyV2BlackWhiteIp struct {
-	Ip     string `pulumi:"ip"`
+	// Ip of resource instance.
+	Ip string `pulumi:"ip"`
+	// IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
 	IpType string `pulumi:"ipType"`
 }
 
@@ -3445,7 +1977,9 @@ type DdosPolicyV2BlackWhiteIpInput interface {
 }
 
 type DdosPolicyV2BlackWhiteIpArgs struct {
-	Ip     pulumi.StringInput `pulumi:"ip"`
+	// Ip of resource instance.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
 	IpType pulumi.StringInput `pulumi:"ipType"`
 }
 
@@ -3500,10 +2034,12 @@ func (o DdosPolicyV2BlackWhiteIpOutput) ToDdosPolicyV2BlackWhiteIpOutputWithCont
 	return o
 }
 
+// Ip of resource instance.
 func (o DdosPolicyV2BlackWhiteIpOutput) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2BlackWhiteIp) string { return v.Ip }).(pulumi.StringOutput)
 }
 
+// IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
 func (o DdosPolicyV2BlackWhiteIpOutput) IpType() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2BlackWhiteIp) string { return v.IpType }).(pulumi.StringOutput)
 }
@@ -3529,15 +2065,24 @@ func (o DdosPolicyV2BlackWhiteIpArrayOutput) Index(i pulumi.IntInput) DdosPolicy
 }
 
 type DdosPolicyV2DdosConnectLimit struct {
+	// Based on connection suppression trigger threshold, value range [0,4294967295].
 	BadConnThreshold int `pulumi:"badConnThreshold"`
-	ConnTimeout      int `pulumi:"connTimeout"`
-	DstConnLimit     int `pulumi:"dstConnLimit"`
-	DstNewLimit      int `pulumi:"dstNewLimit"`
-	NullConnEnable   int `pulumi:"nullConnEnable"`
-	SdConnLimit      int `pulumi:"sdConnLimit"`
-	SdNewLimit       int `pulumi:"sdNewLimit"`
-	SynLimit         int `pulumi:"synLimit"`
-	SynRate          int `pulumi:"synRate"`
+	// Abnormal connection detection condition, connection timeout, value range [0,65535].
+	ConnTimeout int `pulumi:"connTimeout"`
+	// Concurrent connection control based on destination IP+ destination port.
+	DstConnLimit int `pulumi:"dstConnLimit"`
+	// Limit on the number of news per second based on the destination IP.
+	DstNewLimit int `pulumi:"dstNewLimit"`
+	// Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
+	NullConnEnable int `pulumi:"nullConnEnable"`
+	// Concurrent connection control based on source IP + destination IP.
+	SdConnLimit int `pulumi:"sdConnLimit"`
+	// The limit on the number of news per second based on source IP + destination IP.
+	SdNewLimit int `pulumi:"sdNewLimit"`
+	// Anomaly connection detection condition, syn threshold, value range [0,100].
+	SynLimit int `pulumi:"synLimit"`
+	// Anomalous connection detection condition, percentage of syn ack, value range [0,100].
+	SynRate int `pulumi:"synRate"`
 }
 
 // DdosPolicyV2DdosConnectLimitInput is an input type that accepts DdosPolicyV2DdosConnectLimitArgs and DdosPolicyV2DdosConnectLimitOutput values.
@@ -3552,15 +2097,24 @@ type DdosPolicyV2DdosConnectLimitInput interface {
 }
 
 type DdosPolicyV2DdosConnectLimitArgs struct {
+	// Based on connection suppression trigger threshold, value range [0,4294967295].
 	BadConnThreshold pulumi.IntInput `pulumi:"badConnThreshold"`
-	ConnTimeout      pulumi.IntInput `pulumi:"connTimeout"`
-	DstConnLimit     pulumi.IntInput `pulumi:"dstConnLimit"`
-	DstNewLimit      pulumi.IntInput `pulumi:"dstNewLimit"`
-	NullConnEnable   pulumi.IntInput `pulumi:"nullConnEnable"`
-	SdConnLimit      pulumi.IntInput `pulumi:"sdConnLimit"`
-	SdNewLimit       pulumi.IntInput `pulumi:"sdNewLimit"`
-	SynLimit         pulumi.IntInput `pulumi:"synLimit"`
-	SynRate          pulumi.IntInput `pulumi:"synRate"`
+	// Abnormal connection detection condition, connection timeout, value range [0,65535].
+	ConnTimeout pulumi.IntInput `pulumi:"connTimeout"`
+	// Concurrent connection control based on destination IP+ destination port.
+	DstConnLimit pulumi.IntInput `pulumi:"dstConnLimit"`
+	// Limit on the number of news per second based on the destination IP.
+	DstNewLimit pulumi.IntInput `pulumi:"dstNewLimit"`
+	// Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
+	NullConnEnable pulumi.IntInput `pulumi:"nullConnEnable"`
+	// Concurrent connection control based on source IP + destination IP.
+	SdConnLimit pulumi.IntInput `pulumi:"sdConnLimit"`
+	// The limit on the number of news per second based on source IP + destination IP.
+	SdNewLimit pulumi.IntInput `pulumi:"sdNewLimit"`
+	// Anomaly connection detection condition, syn threshold, value range [0,100].
+	SynLimit pulumi.IntInput `pulumi:"synLimit"`
+	// Anomalous connection detection condition, percentage of syn ack, value range [0,100].
+	SynRate pulumi.IntInput `pulumi:"synRate"`
 }
 
 func (DdosPolicyV2DdosConnectLimitArgs) ElementType() reflect.Type {
@@ -3640,38 +2194,47 @@ func (o DdosPolicyV2DdosConnectLimitOutput) ToDdosPolicyV2DdosConnectLimitPtrOut
 	}).(DdosPolicyV2DdosConnectLimitPtrOutput)
 }
 
+// Based on connection suppression trigger threshold, value range [0,4294967295].
 func (o DdosPolicyV2DdosConnectLimitOutput) BadConnThreshold() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.BadConnThreshold }).(pulumi.IntOutput)
 }
 
+// Abnormal connection detection condition, connection timeout, value range [0,65535].
 func (o DdosPolicyV2DdosConnectLimitOutput) ConnTimeout() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.ConnTimeout }).(pulumi.IntOutput)
 }
 
+// Concurrent connection control based on destination IP+ destination port.
 func (o DdosPolicyV2DdosConnectLimitOutput) DstConnLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.DstConnLimit }).(pulumi.IntOutput)
 }
 
+// Limit on the number of news per second based on the destination IP.
 func (o DdosPolicyV2DdosConnectLimitOutput) DstNewLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.DstNewLimit }).(pulumi.IntOutput)
 }
 
+// Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
 func (o DdosPolicyV2DdosConnectLimitOutput) NullConnEnable() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.NullConnEnable }).(pulumi.IntOutput)
 }
 
+// Concurrent connection control based on source IP + destination IP.
 func (o DdosPolicyV2DdosConnectLimitOutput) SdConnLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.SdConnLimit }).(pulumi.IntOutput)
 }
 
+// The limit on the number of news per second based on source IP + destination IP.
 func (o DdosPolicyV2DdosConnectLimitOutput) SdNewLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.SdNewLimit }).(pulumi.IntOutput)
 }
 
+// Anomaly connection detection condition, syn threshold, value range [0,100].
 func (o DdosPolicyV2DdosConnectLimitOutput) SynLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.SynLimit }).(pulumi.IntOutput)
 }
 
+// Anomalous connection detection condition, percentage of syn ack, value range [0,100].
 func (o DdosPolicyV2DdosConnectLimitOutput) SynRate() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosConnectLimit) int { return v.SynRate }).(pulumi.IntOutput)
 }
@@ -3700,6 +2263,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) Elem() DdosPolicyV2DdosConnectLim
 	}).(DdosPolicyV2DdosConnectLimitOutput)
 }
 
+// Based on connection suppression trigger threshold, value range [0,4294967295].
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) BadConnThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3709,6 +2273,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) BadConnThreshold() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
+// Abnormal connection detection condition, connection timeout, value range [0,65535].
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) ConnTimeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3718,6 +2283,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) ConnTimeout() pulumi.IntPtrOutput
 	}).(pulumi.IntPtrOutput)
 }
 
+// Concurrent connection control based on destination IP+ destination port.
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) DstConnLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3727,6 +2293,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) DstConnLimit() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
+// Limit on the number of news per second based on the destination IP.
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) DstNewLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3736,6 +2303,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) DstNewLimit() pulumi.IntPtrOutput
 	}).(pulumi.IntPtrOutput)
 }
 
+// Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) NullConnEnable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3745,6 +2313,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) NullConnEnable() pulumi.IntPtrOut
 	}).(pulumi.IntPtrOutput)
 }
 
+// Concurrent connection control based on source IP + destination IP.
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) SdConnLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3754,6 +2323,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) SdConnLimit() pulumi.IntPtrOutput
 	}).(pulumi.IntPtrOutput)
 }
 
+// The limit on the number of news per second based on source IP + destination IP.
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) SdNewLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3763,6 +2333,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) SdNewLimit() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
+// Anomaly connection detection condition, syn threshold, value range [0,100].
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) SynLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3772,6 +2343,7 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) SynLimit() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Anomalous connection detection condition, percentage of syn ack, value range [0,100].
 func (o DdosPolicyV2DdosConnectLimitPtrOutput) SynRate() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyV2DdosConnectLimit) *int {
 		if v == nil {
@@ -3782,8 +2354,11 @@ func (o DdosPolicyV2DdosConnectLimitPtrOutput) SynRate() pulumi.IntPtrOutput {
 }
 
 type DdosPolicyV2DdosGeoIpBlockConfig struct {
-	Action     string `pulumi:"action"`
-	AreaLists  []int  `pulumi:"areaLists"`
+	// Block action, take the value [`drop`, `trans`].
+	Action string `pulumi:"action"`
+	// When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
+	AreaLists []int `pulumi:"areaLists"`
+	// Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
 	RegionType string `pulumi:"regionType"`
 }
 
@@ -3799,9 +2374,12 @@ type DdosPolicyV2DdosGeoIpBlockConfigInput interface {
 }
 
 type DdosPolicyV2DdosGeoIpBlockConfigArgs struct {
-	Action     pulumi.StringInput   `pulumi:"action"`
-	AreaLists  pulumi.IntArrayInput `pulumi:"areaLists"`
-	RegionType pulumi.StringInput   `pulumi:"regionType"`
+	// Block action, take the value [`drop`, `trans`].
+	Action pulumi.StringInput `pulumi:"action"`
+	// When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
+	AreaLists pulumi.IntArrayInput `pulumi:"areaLists"`
+	// Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
+	RegionType pulumi.StringInput `pulumi:"regionType"`
 }
 
 func (DdosPolicyV2DdosGeoIpBlockConfigArgs) ElementType() reflect.Type {
@@ -3855,14 +2433,17 @@ func (o DdosPolicyV2DdosGeoIpBlockConfigOutput) ToDdosPolicyV2DdosGeoIpBlockConf
 	return o
 }
 
+// Block action, take the value [`drop`, `trans`].
 func (o DdosPolicyV2DdosGeoIpBlockConfigOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosGeoIpBlockConfig) string { return v.Action }).(pulumi.StringOutput)
 }
 
+// When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
 func (o DdosPolicyV2DdosGeoIpBlockConfigOutput) AreaLists() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosGeoIpBlockConfig) []int { return v.AreaLists }).(pulumi.IntArrayOutput)
 }
 
+// Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
 func (o DdosPolicyV2DdosGeoIpBlockConfigOutput) RegionType() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosGeoIpBlockConfig) string { return v.RegionType }).(pulumi.StringOutput)
 }
@@ -3888,10 +2469,15 @@ func (o DdosPolicyV2DdosGeoIpBlockConfigArrayOutput) Index(i pulumi.IntInput) Dd
 }
 
 type DdosPolicyV2DdosSpeedLimitConfig struct {
-	Bandwidth    int    `pulumi:"bandwidth"`
-	DstPortList  string `pulumi:"dstPortList"`
-	Mode         int    `pulumi:"mode"`
-	PacketRate   int    `pulumi:"packetRate"`
+	// Bandwidth bps.
+	Bandwidth int `pulumi:"bandwidth"`
+	// List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.
+	DstPortList string `pulumi:"dstPortList"`
+	// Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].
+	Mode int `pulumi:"mode"`
+	// Packet rate pps.
+	PacketRate int `pulumi:"packetRate"`
+	// IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].
 	ProtocolList string `pulumi:"protocolList"`
 }
 
@@ -3907,10 +2493,15 @@ type DdosPolicyV2DdosSpeedLimitConfigInput interface {
 }
 
 type DdosPolicyV2DdosSpeedLimitConfigArgs struct {
-	Bandwidth    pulumi.IntInput    `pulumi:"bandwidth"`
-	DstPortList  pulumi.StringInput `pulumi:"dstPortList"`
-	Mode         pulumi.IntInput    `pulumi:"mode"`
-	PacketRate   pulumi.IntInput    `pulumi:"packetRate"`
+	// Bandwidth bps.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.
+	DstPortList pulumi.StringInput `pulumi:"dstPortList"`
+	// Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].
+	Mode pulumi.IntInput `pulumi:"mode"`
+	// Packet rate pps.
+	PacketRate pulumi.IntInput `pulumi:"packetRate"`
+	// IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].
 	ProtocolList pulumi.StringInput `pulumi:"protocolList"`
 }
 
@@ -3965,22 +2556,27 @@ func (o DdosPolicyV2DdosSpeedLimitConfigOutput) ToDdosPolicyV2DdosSpeedLimitConf
 	return o
 }
 
+// Bandwidth bps.
 func (o DdosPolicyV2DdosSpeedLimitConfigOutput) Bandwidth() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosSpeedLimitConfig) int { return v.Bandwidth }).(pulumi.IntOutput)
 }
 
+// List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.
 func (o DdosPolicyV2DdosSpeedLimitConfigOutput) DstPortList() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosSpeedLimitConfig) string { return v.DstPortList }).(pulumi.StringOutput)
 }
 
+// Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].
 func (o DdosPolicyV2DdosSpeedLimitConfigOutput) Mode() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosSpeedLimitConfig) int { return v.Mode }).(pulumi.IntOutput)
 }
 
+// Packet rate pps.
 func (o DdosPolicyV2DdosSpeedLimitConfigOutput) PacketRate() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosSpeedLimitConfig) int { return v.PacketRate }).(pulumi.IntOutput)
 }
 
+// IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].
 func (o DdosPolicyV2DdosSpeedLimitConfigOutput) ProtocolList() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2DdosSpeedLimitConfig) string { return v.ProtocolList }).(pulumi.StringOutput)
 }
@@ -4006,27 +2602,48 @@ func (o DdosPolicyV2DdosSpeedLimitConfigArrayOutput) Index(i pulumi.IntInput) Dd
 }
 
 type DdosPolicyV2PacketFilter struct {
-	Action      string `pulumi:"action"`
-	DPortEnd    int    `pulumi:"dPortEnd"`
-	DPortStart  int    `pulumi:"dPortStart"`
-	Depth       int    `pulumi:"depth"`
-	Depth2      int    `pulumi:"depth2"`
-	IsNot       int    `pulumi:"isNot"`
-	IsNot2      int    `pulumi:"isNot2"`
-	MatchBegin  string `pulumi:"matchBegin"`
+	// Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
+	Action string `pulumi:"action"`
+	// The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.
+	DPortEnd int `pulumi:"dPortEnd"`
+	// From the destination port, take the value 0~65535.
+	DPortStart int `pulumi:"dPortStart"`
+	// Detection depth from the detection position, value [0,1500].
+	Depth int `pulumi:"depth"`
+	// Second detection depth starting from the second detection position, value [0,1500].
+	Depth2 int `pulumi:"depth2"`
+	// Whether to include the detected value, take the value [0 (included),1 (not included)].
+	IsNot int `pulumi:"isNot"`
+	// Whether the second detection contains the detected value, the value [0 (included),1 (not included)].
+	IsNot2 int `pulumi:"isNot2"`
+	// Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].
+	MatchBegin string `pulumi:"matchBegin"`
+	// The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].
 	MatchBegin2 string `pulumi:"matchBegin2"`
-	MatchLogic  string `pulumi:"matchLogic"`
-	MatchType   string `pulumi:"matchType"`
-	MatchType2  string `pulumi:"matchType2"`
-	Offset      int    `pulumi:"offset"`
-	Offset2     int    `pulumi:"offset2"`
-	PktlenMax   int    `pulumi:"pktlenMax"`
-	PktlenMin   int    `pulumi:"pktlenMin"`
-	Protocol    string `pulumi:"protocol"`
-	SPortEnd    int    `pulumi:"sPortEnd"`
-	SPortStart  int    `pulumi:"sPortStart"`
-	Str         string `pulumi:"str"`
-	Str2        string `pulumi:"str2"`
+	// When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].
+	MatchLogic string `pulumi:"matchLogic"`
+	// Detection type, value [sunday (keyword),pcre (regular expression)].
+	MatchType string `pulumi:"matchType"`
+	// The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].
+	MatchType2 string `pulumi:"matchType2"`
+	// Offset from detection position, value range [0, Depth].
+	Offset int `pulumi:"offset"`
+	// Offset from the second detection position, value range [0,Depth2].
+	Offset2 int `pulumi:"offset2"`
+	// The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.
+	PktlenMax int `pulumi:"pktlenMax"`
+	// Minimum message length, 1-1500.
+	PktlenMin int `pulumi:"pktlenMin"`
+	// Protocol, value [tcp udp icmp all].
+	Protocol string `pulumi:"protocol"`
+	// End source port, take the value 1~65535, must be greater than or equal to the starting source port.
+	SPortEnd int `pulumi:"sPortEnd"`
+	// Start the source port, take the value 0~65535.
+	SPortStart int `pulumi:"sPortStart"`
+	// Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+	Str string `pulumi:"str"`
+	// The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+	Str2 string `pulumi:"str2"`
 }
 
 // DdosPolicyV2PacketFilterInput is an input type that accepts DdosPolicyV2PacketFilterArgs and DdosPolicyV2PacketFilterOutput values.
@@ -4041,27 +2658,48 @@ type DdosPolicyV2PacketFilterInput interface {
 }
 
 type DdosPolicyV2PacketFilterArgs struct {
-	Action      pulumi.StringInput `pulumi:"action"`
-	DPortEnd    pulumi.IntInput    `pulumi:"dPortEnd"`
-	DPortStart  pulumi.IntInput    `pulumi:"dPortStart"`
-	Depth       pulumi.IntInput    `pulumi:"depth"`
-	Depth2      pulumi.IntInput    `pulumi:"depth2"`
-	IsNot       pulumi.IntInput    `pulumi:"isNot"`
-	IsNot2      pulumi.IntInput    `pulumi:"isNot2"`
-	MatchBegin  pulumi.StringInput `pulumi:"matchBegin"`
+	// Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
+	Action pulumi.StringInput `pulumi:"action"`
+	// The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.
+	DPortEnd pulumi.IntInput `pulumi:"dPortEnd"`
+	// From the destination port, take the value 0~65535.
+	DPortStart pulumi.IntInput `pulumi:"dPortStart"`
+	// Detection depth from the detection position, value [0,1500].
+	Depth pulumi.IntInput `pulumi:"depth"`
+	// Second detection depth starting from the second detection position, value [0,1500].
+	Depth2 pulumi.IntInput `pulumi:"depth2"`
+	// Whether to include the detected value, take the value [0 (included),1 (not included)].
+	IsNot pulumi.IntInput `pulumi:"isNot"`
+	// Whether the second detection contains the detected value, the value [0 (included),1 (not included)].
+	IsNot2 pulumi.IntInput `pulumi:"isNot2"`
+	// Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].
+	MatchBegin pulumi.StringInput `pulumi:"matchBegin"`
+	// The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].
 	MatchBegin2 pulumi.StringInput `pulumi:"matchBegin2"`
-	MatchLogic  pulumi.StringInput `pulumi:"matchLogic"`
-	MatchType   pulumi.StringInput `pulumi:"matchType"`
-	MatchType2  pulumi.StringInput `pulumi:"matchType2"`
-	Offset      pulumi.IntInput    `pulumi:"offset"`
-	Offset2     pulumi.IntInput    `pulumi:"offset2"`
-	PktlenMax   pulumi.IntInput    `pulumi:"pktlenMax"`
-	PktlenMin   pulumi.IntInput    `pulumi:"pktlenMin"`
-	Protocol    pulumi.StringInput `pulumi:"protocol"`
-	SPortEnd    pulumi.IntInput    `pulumi:"sPortEnd"`
-	SPortStart  pulumi.IntInput    `pulumi:"sPortStart"`
-	Str         pulumi.StringInput `pulumi:"str"`
-	Str2        pulumi.StringInput `pulumi:"str2"`
+	// When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].
+	MatchLogic pulumi.StringInput `pulumi:"matchLogic"`
+	// Detection type, value [sunday (keyword),pcre (regular expression)].
+	MatchType pulumi.StringInput `pulumi:"matchType"`
+	// The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].
+	MatchType2 pulumi.StringInput `pulumi:"matchType2"`
+	// Offset from detection position, value range [0, Depth].
+	Offset pulumi.IntInput `pulumi:"offset"`
+	// Offset from the second detection position, value range [0,Depth2].
+	Offset2 pulumi.IntInput `pulumi:"offset2"`
+	// The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.
+	PktlenMax pulumi.IntInput `pulumi:"pktlenMax"`
+	// Minimum message length, 1-1500.
+	PktlenMin pulumi.IntInput `pulumi:"pktlenMin"`
+	// Protocol, value [tcp udp icmp all].
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// End source port, take the value 1~65535, must be greater than or equal to the starting source port.
+	SPortEnd pulumi.IntInput `pulumi:"sPortEnd"`
+	// Start the source port, take the value 0~65535.
+	SPortStart pulumi.IntInput `pulumi:"sPortStart"`
+	// Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+	Str pulumi.StringInput `pulumi:"str"`
+	// The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+	Str2 pulumi.StringInput `pulumi:"str2"`
 }
 
 func (DdosPolicyV2PacketFilterArgs) ElementType() reflect.Type {
@@ -4115,86 +2753,107 @@ func (o DdosPolicyV2PacketFilterOutput) ToDdosPolicyV2PacketFilterOutputWithCont
 	return o
 }
 
+// Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
 func (o DdosPolicyV2PacketFilterOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.Action }).(pulumi.StringOutput)
 }
 
+// The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.
 func (o DdosPolicyV2PacketFilterOutput) DPortEnd() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.DPortEnd }).(pulumi.IntOutput)
 }
 
+// From the destination port, take the value 0~65535.
 func (o DdosPolicyV2PacketFilterOutput) DPortStart() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.DPortStart }).(pulumi.IntOutput)
 }
 
+// Detection depth from the detection position, value [0,1500].
 func (o DdosPolicyV2PacketFilterOutput) Depth() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.Depth }).(pulumi.IntOutput)
 }
 
+// Second detection depth starting from the second detection position, value [0,1500].
 func (o DdosPolicyV2PacketFilterOutput) Depth2() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.Depth2 }).(pulumi.IntOutput)
 }
 
+// Whether to include the detected value, take the value [0 (included),1 (not included)].
 func (o DdosPolicyV2PacketFilterOutput) IsNot() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.IsNot }).(pulumi.IntOutput)
 }
 
+// Whether the second detection contains the detected value, the value [0 (included),1 (not included)].
 func (o DdosPolicyV2PacketFilterOutput) IsNot2() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.IsNot2 }).(pulumi.IntOutput)
 }
 
+// Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].
 func (o DdosPolicyV2PacketFilterOutput) MatchBegin() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.MatchBegin }).(pulumi.StringOutput)
 }
 
+// The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].
 func (o DdosPolicyV2PacketFilterOutput) MatchBegin2() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.MatchBegin2 }).(pulumi.StringOutput)
 }
 
+// When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].
 func (o DdosPolicyV2PacketFilterOutput) MatchLogic() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.MatchLogic }).(pulumi.StringOutput)
 }
 
+// Detection type, value [sunday (keyword),pcre (regular expression)].
 func (o DdosPolicyV2PacketFilterOutput) MatchType() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.MatchType }).(pulumi.StringOutput)
 }
 
+// The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].
 func (o DdosPolicyV2PacketFilterOutput) MatchType2() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.MatchType2 }).(pulumi.StringOutput)
 }
 
+// Offset from detection position, value range [0, Depth].
 func (o DdosPolicyV2PacketFilterOutput) Offset() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.Offset }).(pulumi.IntOutput)
 }
 
+// Offset from the second detection position, value range [0,Depth2].
 func (o DdosPolicyV2PacketFilterOutput) Offset2() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.Offset2 }).(pulumi.IntOutput)
 }
 
+// The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.
 func (o DdosPolicyV2PacketFilterOutput) PktlenMax() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.PktlenMax }).(pulumi.IntOutput)
 }
 
+// Minimum message length, 1-1500.
 func (o DdosPolicyV2PacketFilterOutput) PktlenMin() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.PktlenMin }).(pulumi.IntOutput)
 }
 
+// Protocol, value [tcp udp icmp all].
 func (o DdosPolicyV2PacketFilterOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
+// End source port, take the value 1~65535, must be greater than or equal to the starting source port.
 func (o DdosPolicyV2PacketFilterOutput) SPortEnd() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.SPortEnd }).(pulumi.IntOutput)
 }
 
+// Start the source port, take the value 0~65535.
 func (o DdosPolicyV2PacketFilterOutput) SPortStart() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) int { return v.SPortStart }).(pulumi.IntOutput)
 }
 
+// Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
 func (o DdosPolicyV2PacketFilterOutput) Str() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.Str }).(pulumi.StringOutput)
 }
 
+// The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
 func (o DdosPolicyV2PacketFilterOutput) Str2() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyV2PacketFilter) string { return v.Str2 }).(pulumi.StringOutput)
 }
@@ -4220,10 +2879,14 @@ func (o DdosPolicyV2PacketFilterArrayOutput) Index(i pulumi.IntInput) DdosPolicy
 }
 
 type DdosPolicyV2ProtocolBlockConfig struct {
-	DropIcmp  int `pulumi:"dropIcmp"`
+	// ICMP block, value [0 (block off), 1 (block on)].
+	DropIcmp int `pulumi:"dropIcmp"`
+	// Other block, value [0 (block off), 1 (block on)].
 	DropOther int `pulumi:"dropOther"`
-	DropTcp   int `pulumi:"dropTcp"`
-	DropUdp   int `pulumi:"dropUdp"`
+	// TCP block, value [0 (block off), 1 (block on)].
+	DropTcp int `pulumi:"dropTcp"`
+	// UDP block, value [0 (block off), 1 (block on)].
+	DropUdp int `pulumi:"dropUdp"`
 }
 
 // DdosPolicyV2ProtocolBlockConfigInput is an input type that accepts DdosPolicyV2ProtocolBlockConfigArgs and DdosPolicyV2ProtocolBlockConfigOutput values.
@@ -4238,10 +2901,14 @@ type DdosPolicyV2ProtocolBlockConfigInput interface {
 }
 
 type DdosPolicyV2ProtocolBlockConfigArgs struct {
-	DropIcmp  pulumi.IntInput `pulumi:"dropIcmp"`
+	// ICMP block, value [0 (block off), 1 (block on)].
+	DropIcmp pulumi.IntInput `pulumi:"dropIcmp"`
+	// Other block, value [0 (block off), 1 (block on)].
 	DropOther pulumi.IntInput `pulumi:"dropOther"`
-	DropTcp   pulumi.IntInput `pulumi:"dropTcp"`
-	DropUdp   pulumi.IntInput `pulumi:"dropUdp"`
+	// TCP block, value [0 (block off), 1 (block on)].
+	DropTcp pulumi.IntInput `pulumi:"dropTcp"`
+	// UDP block, value [0 (block off), 1 (block on)].
+	DropUdp pulumi.IntInput `pulumi:"dropUdp"`
 }
 
 func (DdosPolicyV2ProtocolBlockConfigArgs) ElementType() reflect.Type {
@@ -4295,18 +2962,22 @@ func (o DdosPolicyV2ProtocolBlockConfigOutput) ToDdosPolicyV2ProtocolBlockConfig
 	return o
 }
 
+// ICMP block, value [0 (block off), 1 (block on)].
 func (o DdosPolicyV2ProtocolBlockConfigOutput) DropIcmp() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2ProtocolBlockConfig) int { return v.DropIcmp }).(pulumi.IntOutput)
 }
 
+// Other block, value [0 (block off), 1 (block on)].
 func (o DdosPolicyV2ProtocolBlockConfigOutput) DropOther() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2ProtocolBlockConfig) int { return v.DropOther }).(pulumi.IntOutput)
 }
 
+// TCP block, value [0 (block off), 1 (block on)].
 func (o DdosPolicyV2ProtocolBlockConfigOutput) DropTcp() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2ProtocolBlockConfig) int { return v.DropTcp }).(pulumi.IntOutput)
 }
 
+// UDP block, value [0 (block off), 1 (block on)].
 func (o DdosPolicyV2ProtocolBlockConfigOutput) DropUdp() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyV2ProtocolBlockConfig) int { return v.DropUdp }).(pulumi.IntOutput)
 }
@@ -4332,10 +3003,15 @@ func (o DdosPolicyV2ProtocolBlockConfigArrayOutput) Index(i pulumi.IntInput) Ddo
 }
 
 type DdosPolicyWatermarkFilter struct {
-	AutoRemove   *bool    `pulumi:"autoRemove"`
-	Offset       *int     `pulumi:"offset"`
-	OpenSwitch   *bool    `pulumi:"openSwitch"`
+	// Indicate whether to auto-remove the watermark or not.
+	AutoRemove *bool `pulumi:"autoRemove"`
+	// The offset of watermark. Valid value ranges: (0~1500).
+	Offset *int `pulumi:"offset"`
+	// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+	OpenSwitch *bool `pulumi:"openSwitch"`
+	// Port range of TCP, the format is like `2000-3000`.
 	TcpPortLists []string `pulumi:"tcpPortLists"`
+	// Port range of TCP, the format is like `2000-3000`.
 	UdpPortLists []string `pulumi:"udpPortLists"`
 }
 
@@ -4351,10 +3027,15 @@ type DdosPolicyWatermarkFilterInput interface {
 }
 
 type DdosPolicyWatermarkFilterArgs struct {
-	AutoRemove   pulumi.BoolPtrInput     `pulumi:"autoRemove"`
-	Offset       pulumi.IntPtrInput      `pulumi:"offset"`
-	OpenSwitch   pulumi.BoolPtrInput     `pulumi:"openSwitch"`
+	// Indicate whether to auto-remove the watermark or not.
+	AutoRemove pulumi.BoolPtrInput `pulumi:"autoRemove"`
+	// The offset of watermark. Valid value ranges: (0~1500).
+	Offset pulumi.IntPtrInput `pulumi:"offset"`
+	// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+	OpenSwitch pulumi.BoolPtrInput `pulumi:"openSwitch"`
+	// Port range of TCP, the format is like `2000-3000`.
 	TcpPortLists pulumi.StringArrayInput `pulumi:"tcpPortLists"`
+	// Port range of TCP, the format is like `2000-3000`.
 	UdpPortLists pulumi.StringArrayInput `pulumi:"udpPortLists"`
 }
 
@@ -4409,22 +3090,27 @@ func (o DdosPolicyWatermarkFilterOutput) ToDdosPolicyWatermarkFilterOutputWithCo
 	return o
 }
 
+// Indicate whether to auto-remove the watermark or not.
 func (o DdosPolicyWatermarkFilterOutput) AutoRemove() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkFilter) *bool { return v.AutoRemove }).(pulumi.BoolPtrOutput)
 }
 
+// The offset of watermark. Valid value ranges: (0~1500).
 func (o DdosPolicyWatermarkFilterOutput) Offset() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkFilter) *int { return v.Offset }).(pulumi.IntPtrOutput)
 }
 
+// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
 func (o DdosPolicyWatermarkFilterOutput) OpenSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkFilter) *bool { return v.OpenSwitch }).(pulumi.BoolPtrOutput)
 }
 
+// Port range of TCP, the format is like `2000-3000`.
 func (o DdosPolicyWatermarkFilterOutput) TcpPortLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkFilter) []string { return v.TcpPortLists }).(pulumi.StringArrayOutput)
 }
 
+// Port range of TCP, the format is like `2000-3000`.
 func (o DdosPolicyWatermarkFilterOutput) UdpPortLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkFilter) []string { return v.UdpPortLists }).(pulumi.StringArrayOutput)
 }
@@ -4450,10 +3136,14 @@ func (o DdosPolicyWatermarkFilterArrayOutput) Index(i pulumi.IntInput) DdosPolic
 }
 
 type DdosPolicyWatermarkKey struct {
-	Content    *string `pulumi:"content"`
+	// Content of the watermark.
+	Content *string `pulumi:"content"`
+	// Create time of the DDoS policy.
 	CreateTime *string `pulumi:"createTime"`
-	Id         *string `pulumi:"id"`
-	OpenSwitch *bool   `pulumi:"openSwitch"`
+	// Id of the watermark.
+	Id *string `pulumi:"id"`
+	// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+	OpenSwitch *bool `pulumi:"openSwitch"`
 }
 
 // DdosPolicyWatermarkKeyInput is an input type that accepts DdosPolicyWatermarkKeyArgs and DdosPolicyWatermarkKeyOutput values.
@@ -4468,10 +3158,14 @@ type DdosPolicyWatermarkKeyInput interface {
 }
 
 type DdosPolicyWatermarkKeyArgs struct {
-	Content    pulumi.StringPtrInput `pulumi:"content"`
+	// Content of the watermark.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Create time of the DDoS policy.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
-	Id         pulumi.StringPtrInput `pulumi:"id"`
-	OpenSwitch pulumi.BoolPtrInput   `pulumi:"openSwitch"`
+	// Id of the watermark.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+	OpenSwitch pulumi.BoolPtrInput `pulumi:"openSwitch"`
 }
 
 func (DdosPolicyWatermarkKeyArgs) ElementType() reflect.Type {
@@ -4525,18 +3219,22 @@ func (o DdosPolicyWatermarkKeyOutput) ToDdosPolicyWatermarkKeyOutputWithContext(
 	return o
 }
 
+// Content of the watermark.
 func (o DdosPolicyWatermarkKeyOutput) Content() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkKey) *string { return v.Content }).(pulumi.StringPtrOutput)
 }
 
+// Create time of the DDoS policy.
 func (o DdosPolicyWatermarkKeyOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkKey) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// Id of the watermark.
 func (o DdosPolicyWatermarkKeyOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkKey) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
 func (o DdosPolicyWatermarkKeyOutput) OpenSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DdosPolicyWatermarkKey) *bool { return v.OpenSwitch }).(pulumi.BoolPtrOutput)
 }
@@ -4562,8 +3260,10 @@ func (o DdosPolicyWatermarkKeyArrayOutput) Index(i pulumi.IntInput) DdosPolicyWa
 }
 
 type L4RuleSourceList struct {
+	// Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
 	Source string `pulumi:"source"`
-	Weight int    `pulumi:"weight"`
+	// Weight of the source, the valid value ranges from 0 to 100.
+	Weight int `pulumi:"weight"`
 }
 
 // L4RuleSourceListInput is an input type that accepts L4RuleSourceListArgs and L4RuleSourceListOutput values.
@@ -4578,8 +3278,10 @@ type L4RuleSourceListInput interface {
 }
 
 type L4RuleSourceListArgs struct {
+	// Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
 	Source pulumi.StringInput `pulumi:"source"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
+	// Weight of the source, the valid value ranges from 0 to 100.
+	Weight pulumi.IntInput `pulumi:"weight"`
 }
 
 func (L4RuleSourceListArgs) ElementType() reflect.Type {
@@ -4633,10 +3335,12 @@ func (o L4RuleSourceListOutput) ToL4RuleSourceListOutputWithContext(ctx context.
 	return o
 }
 
+// Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
 func (o L4RuleSourceListOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v L4RuleSourceList) string { return v.Source }).(pulumi.StringOutput)
 }
 
+// Weight of the source, the valid value ranges from 0 to 100.
 func (o L4RuleSourceListOutput) Weight() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleSourceList) int { return v.Weight }).(pulumi.IntOutput)
 }
@@ -5044,574 +3748,28 @@ func (o L4RuleV2RulesSourceListArrayOutput) Index(i pulumi.IntInput) L4RuleV2Rul
 	}).(L4RuleV2RulesSourceListOutput)
 }
 
-type L4RulesList struct {
-	DPort                  int                     `pulumi:"dPort"`
-	HealthCheckHealthNum   int                     `pulumi:"healthCheckHealthNum"`
-	HealthCheckInterval    int                     `pulumi:"healthCheckInterval"`
-	HealthCheckSwitch      bool                    `pulumi:"healthCheckSwitch"`
-	HealthCheckTimeout     int                     `pulumi:"healthCheckTimeout"`
-	HealthCheckUnhealthNum int                     `pulumi:"healthCheckUnhealthNum"`
-	LbType                 int                     `pulumi:"lbType"`
-	Name                   string                  `pulumi:"name"`
-	Protocol               string                  `pulumi:"protocol"`
-	RuleId                 string                  `pulumi:"ruleId"`
-	SPort                  int                     `pulumi:"sPort"`
-	SessionSwitch          bool                    `pulumi:"sessionSwitch"`
-	SessionTime            int                     `pulumi:"sessionTime"`
-	SourceLists            []L4RulesListSourceList `pulumi:"sourceLists"`
-	SourceType             int                     `pulumi:"sourceType"`
-}
-
-// L4RulesListInput is an input type that accepts L4RulesListArgs and L4RulesListOutput values.
-// You can construct a concrete instance of `L4RulesListInput` via:
-//
-//          L4RulesListArgs{...}
-type L4RulesListInput interface {
-	pulumi.Input
-
-	ToL4RulesListOutput() L4RulesListOutput
-	ToL4RulesListOutputWithContext(context.Context) L4RulesListOutput
-}
-
-type L4RulesListArgs struct {
-	DPort                  pulumi.IntInput                 `pulumi:"dPort"`
-	HealthCheckHealthNum   pulumi.IntInput                 `pulumi:"healthCheckHealthNum"`
-	HealthCheckInterval    pulumi.IntInput                 `pulumi:"healthCheckInterval"`
-	HealthCheckSwitch      pulumi.BoolInput                `pulumi:"healthCheckSwitch"`
-	HealthCheckTimeout     pulumi.IntInput                 `pulumi:"healthCheckTimeout"`
-	HealthCheckUnhealthNum pulumi.IntInput                 `pulumi:"healthCheckUnhealthNum"`
-	LbType                 pulumi.IntInput                 `pulumi:"lbType"`
-	Name                   pulumi.StringInput              `pulumi:"name"`
-	Protocol               pulumi.StringInput              `pulumi:"protocol"`
-	RuleId                 pulumi.StringInput              `pulumi:"ruleId"`
-	SPort                  pulumi.IntInput                 `pulumi:"sPort"`
-	SessionSwitch          pulumi.BoolInput                `pulumi:"sessionSwitch"`
-	SessionTime            pulumi.IntInput                 `pulumi:"sessionTime"`
-	SourceLists            L4RulesListSourceListArrayInput `pulumi:"sourceLists"`
-	SourceType             pulumi.IntInput                 `pulumi:"sourceType"`
-}
-
-func (L4RulesListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesList)(nil)).Elem()
-}
-
-func (i L4RulesListArgs) ToL4RulesListOutput() L4RulesListOutput {
-	return i.ToL4RulesListOutputWithContext(context.Background())
-}
-
-func (i L4RulesListArgs) ToL4RulesListOutputWithContext(ctx context.Context) L4RulesListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesListOutput)
-}
-
-// L4RulesListArrayInput is an input type that accepts L4RulesListArray and L4RulesListArrayOutput values.
-// You can construct a concrete instance of `L4RulesListArrayInput` via:
-//
-//          L4RulesListArray{ L4RulesListArgs{...} }
-type L4RulesListArrayInput interface {
-	pulumi.Input
-
-	ToL4RulesListArrayOutput() L4RulesListArrayOutput
-	ToL4RulesListArrayOutputWithContext(context.Context) L4RulesListArrayOutput
-}
-
-type L4RulesListArray []L4RulesListInput
-
-func (L4RulesListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesList)(nil)).Elem()
-}
-
-func (i L4RulesListArray) ToL4RulesListArrayOutput() L4RulesListArrayOutput {
-	return i.ToL4RulesListArrayOutputWithContext(context.Background())
-}
-
-func (i L4RulesListArray) ToL4RulesListArrayOutputWithContext(ctx context.Context) L4RulesListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesListArrayOutput)
-}
-
-type L4RulesListOutput struct{ *pulumi.OutputState }
-
-func (L4RulesListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesList)(nil)).Elem()
-}
-
-func (o L4RulesListOutput) ToL4RulesListOutput() L4RulesListOutput {
-	return o
-}
-
-func (o L4RulesListOutput) ToL4RulesListOutputWithContext(ctx context.Context) L4RulesListOutput {
-	return o
-}
-
-func (o L4RulesListOutput) DPort() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.DPort }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) HealthCheckHealthNum() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) HealthCheckInterval() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.HealthCheckInterval }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) HealthCheckSwitch() pulumi.BoolOutput {
-	return o.ApplyT(func(v L4RulesList) bool { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
-}
-
-func (o L4RulesListOutput) HealthCheckTimeout() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.HealthCheckTimeout }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) LbType() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.LbType }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o L4RulesListOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesList) string { return v.Protocol }).(pulumi.StringOutput)
-}
-
-func (o L4RulesListOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesList) string { return v.RuleId }).(pulumi.StringOutput)
-}
-
-func (o L4RulesListOutput) SPort() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.SPort }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) SessionSwitch() pulumi.BoolOutput {
-	return o.ApplyT(func(v L4RulesList) bool { return v.SessionSwitch }).(pulumi.BoolOutput)
-}
-
-func (o L4RulesListOutput) SessionTime() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.SessionTime }).(pulumi.IntOutput)
-}
-
-func (o L4RulesListOutput) SourceLists() L4RulesListSourceListArrayOutput {
-	return o.ApplyT(func(v L4RulesList) []L4RulesListSourceList { return v.SourceLists }).(L4RulesListSourceListArrayOutput)
-}
-
-func (o L4RulesListOutput) SourceType() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesList) int { return v.SourceType }).(pulumi.IntOutput)
-}
-
-type L4RulesListArrayOutput struct{ *pulumi.OutputState }
-
-func (L4RulesListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesList)(nil)).Elem()
-}
-
-func (o L4RulesListArrayOutput) ToL4RulesListArrayOutput() L4RulesListArrayOutput {
-	return o
-}
-
-func (o L4RulesListArrayOutput) ToL4RulesListArrayOutputWithContext(ctx context.Context) L4RulesListArrayOutput {
-	return o
-}
-
-func (o L4RulesListArrayOutput) Index(i pulumi.IntInput) L4RulesListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) L4RulesList {
-		return vs[0].([]L4RulesList)[vs[1].(int)]
-	}).(L4RulesListOutput)
-}
-
-type L4RulesListSourceList struct {
-	Source string `pulumi:"source"`
-	Weight int    `pulumi:"weight"`
-}
-
-// L4RulesListSourceListInput is an input type that accepts L4RulesListSourceListArgs and L4RulesListSourceListOutput values.
-// You can construct a concrete instance of `L4RulesListSourceListInput` via:
-//
-//          L4RulesListSourceListArgs{...}
-type L4RulesListSourceListInput interface {
-	pulumi.Input
-
-	ToL4RulesListSourceListOutput() L4RulesListSourceListOutput
-	ToL4RulesListSourceListOutputWithContext(context.Context) L4RulesListSourceListOutput
-}
-
-type L4RulesListSourceListArgs struct {
-	Source pulumi.StringInput `pulumi:"source"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
-}
-
-func (L4RulesListSourceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesListSourceList)(nil)).Elem()
-}
-
-func (i L4RulesListSourceListArgs) ToL4RulesListSourceListOutput() L4RulesListSourceListOutput {
-	return i.ToL4RulesListSourceListOutputWithContext(context.Background())
-}
-
-func (i L4RulesListSourceListArgs) ToL4RulesListSourceListOutputWithContext(ctx context.Context) L4RulesListSourceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesListSourceListOutput)
-}
-
-// L4RulesListSourceListArrayInput is an input type that accepts L4RulesListSourceListArray and L4RulesListSourceListArrayOutput values.
-// You can construct a concrete instance of `L4RulesListSourceListArrayInput` via:
-//
-//          L4RulesListSourceListArray{ L4RulesListSourceListArgs{...} }
-type L4RulesListSourceListArrayInput interface {
-	pulumi.Input
-
-	ToL4RulesListSourceListArrayOutput() L4RulesListSourceListArrayOutput
-	ToL4RulesListSourceListArrayOutputWithContext(context.Context) L4RulesListSourceListArrayOutput
-}
-
-type L4RulesListSourceListArray []L4RulesListSourceListInput
-
-func (L4RulesListSourceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesListSourceList)(nil)).Elem()
-}
-
-func (i L4RulesListSourceListArray) ToL4RulesListSourceListArrayOutput() L4RulesListSourceListArrayOutput {
-	return i.ToL4RulesListSourceListArrayOutputWithContext(context.Background())
-}
-
-func (i L4RulesListSourceListArray) ToL4RulesListSourceListArrayOutputWithContext(ctx context.Context) L4RulesListSourceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesListSourceListArrayOutput)
-}
-
-type L4RulesListSourceListOutput struct{ *pulumi.OutputState }
-
-func (L4RulesListSourceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesListSourceList)(nil)).Elem()
-}
-
-func (o L4RulesListSourceListOutput) ToL4RulesListSourceListOutput() L4RulesListSourceListOutput {
-	return o
-}
-
-func (o L4RulesListSourceListOutput) ToL4RulesListSourceListOutputWithContext(ctx context.Context) L4RulesListSourceListOutput {
-	return o
-}
-
-func (o L4RulesListSourceListOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesListSourceList) string { return v.Source }).(pulumi.StringOutput)
-}
-
-func (o L4RulesListSourceListOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesListSourceList) int { return v.Weight }).(pulumi.IntOutput)
-}
-
-type L4RulesListSourceListArrayOutput struct{ *pulumi.OutputState }
-
-func (L4RulesListSourceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesListSourceList)(nil)).Elem()
-}
-
-func (o L4RulesListSourceListArrayOutput) ToL4RulesListSourceListArrayOutput() L4RulesListSourceListArrayOutput {
-	return o
-}
-
-func (o L4RulesListSourceListArrayOutput) ToL4RulesListSourceListArrayOutputWithContext(ctx context.Context) L4RulesListSourceListArrayOutput {
-	return o
-}
-
-func (o L4RulesListSourceListArrayOutput) Index(i pulumi.IntInput) L4RulesListSourceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) L4RulesListSourceList {
-		return vs[0].([]L4RulesListSourceList)[vs[1].(int)]
-	}).(L4RulesListSourceListOutput)
-}
-
-type L4RulesV2List struct {
-	Id           string                    `pulumi:"id"`
-	Ip           string                    `pulumi:"ip"`
-	KeepEnable   bool                      `pulumi:"keepEnable"`
-	Keeptime     int                       `pulumi:"keeptime"`
-	LbType       int                       `pulumi:"lbType"`
-	ModifyTime   string                    `pulumi:"modifyTime"`
-	Protocol     string                    `pulumi:"protocol"`
-	Region       int                       `pulumi:"region"`
-	RemoveSwitch bool                      `pulumi:"removeSwitch"`
-	RuleId       string                    `pulumi:"ruleId"`
-	RuleName     string                    `pulumi:"ruleName"`
-	SourceLists  []L4RulesV2ListSourceList `pulumi:"sourceLists"`
-	SourcePort   int                       `pulumi:"sourcePort"`
-	SourceType   int                       `pulumi:"sourceType"`
-	VirtualPort  int                       `pulumi:"virtualPort"`
-}
-
-// L4RulesV2ListInput is an input type that accepts L4RulesV2ListArgs and L4RulesV2ListOutput values.
-// You can construct a concrete instance of `L4RulesV2ListInput` via:
-//
-//          L4RulesV2ListArgs{...}
-type L4RulesV2ListInput interface {
-	pulumi.Input
-
-	ToL4RulesV2ListOutput() L4RulesV2ListOutput
-	ToL4RulesV2ListOutputWithContext(context.Context) L4RulesV2ListOutput
-}
-
-type L4RulesV2ListArgs struct {
-	Id           pulumi.StringInput                `pulumi:"id"`
-	Ip           pulumi.StringInput                `pulumi:"ip"`
-	KeepEnable   pulumi.BoolInput                  `pulumi:"keepEnable"`
-	Keeptime     pulumi.IntInput                   `pulumi:"keeptime"`
-	LbType       pulumi.IntInput                   `pulumi:"lbType"`
-	ModifyTime   pulumi.StringInput                `pulumi:"modifyTime"`
-	Protocol     pulumi.StringInput                `pulumi:"protocol"`
-	Region       pulumi.IntInput                   `pulumi:"region"`
-	RemoveSwitch pulumi.BoolInput                  `pulumi:"removeSwitch"`
-	RuleId       pulumi.StringInput                `pulumi:"ruleId"`
-	RuleName     pulumi.StringInput                `pulumi:"ruleName"`
-	SourceLists  L4RulesV2ListSourceListArrayInput `pulumi:"sourceLists"`
-	SourcePort   pulumi.IntInput                   `pulumi:"sourcePort"`
-	SourceType   pulumi.IntInput                   `pulumi:"sourceType"`
-	VirtualPort  pulumi.IntInput                   `pulumi:"virtualPort"`
-}
-
-func (L4RulesV2ListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesV2List)(nil)).Elem()
-}
-
-func (i L4RulesV2ListArgs) ToL4RulesV2ListOutput() L4RulesV2ListOutput {
-	return i.ToL4RulesV2ListOutputWithContext(context.Background())
-}
-
-func (i L4RulesV2ListArgs) ToL4RulesV2ListOutputWithContext(ctx context.Context) L4RulesV2ListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesV2ListOutput)
-}
-
-// L4RulesV2ListArrayInput is an input type that accepts L4RulesV2ListArray and L4RulesV2ListArrayOutput values.
-// You can construct a concrete instance of `L4RulesV2ListArrayInput` via:
-//
-//          L4RulesV2ListArray{ L4RulesV2ListArgs{...} }
-type L4RulesV2ListArrayInput interface {
-	pulumi.Input
-
-	ToL4RulesV2ListArrayOutput() L4RulesV2ListArrayOutput
-	ToL4RulesV2ListArrayOutputWithContext(context.Context) L4RulesV2ListArrayOutput
-}
-
-type L4RulesV2ListArray []L4RulesV2ListInput
-
-func (L4RulesV2ListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesV2List)(nil)).Elem()
-}
-
-func (i L4RulesV2ListArray) ToL4RulesV2ListArrayOutput() L4RulesV2ListArrayOutput {
-	return i.ToL4RulesV2ListArrayOutputWithContext(context.Background())
-}
-
-func (i L4RulesV2ListArray) ToL4RulesV2ListArrayOutputWithContext(ctx context.Context) L4RulesV2ListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesV2ListArrayOutput)
-}
-
-type L4RulesV2ListOutput struct{ *pulumi.OutputState }
-
-func (L4RulesV2ListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesV2List)(nil)).Elem()
-}
-
-func (o L4RulesV2ListOutput) ToL4RulesV2ListOutput() L4RulesV2ListOutput {
-	return o
-}
-
-func (o L4RulesV2ListOutput) ToL4RulesV2ListOutputWithContext(ctx context.Context) L4RulesV2ListOutput {
-	return o
-}
-
-func (o L4RulesV2ListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesV2List) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o L4RulesV2ListOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesV2List) string { return v.Ip }).(pulumi.StringOutput)
-}
-
-func (o L4RulesV2ListOutput) KeepEnable() pulumi.BoolOutput {
-	return o.ApplyT(func(v L4RulesV2List) bool { return v.KeepEnable }).(pulumi.BoolOutput)
-}
-
-func (o L4RulesV2ListOutput) Keeptime() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesV2List) int { return v.Keeptime }).(pulumi.IntOutput)
-}
-
-func (o L4RulesV2ListOutput) LbType() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesV2List) int { return v.LbType }).(pulumi.IntOutput)
-}
-
-func (o L4RulesV2ListOutput) ModifyTime() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesV2List) string { return v.ModifyTime }).(pulumi.StringOutput)
-}
-
-func (o L4RulesV2ListOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesV2List) string { return v.Protocol }).(pulumi.StringOutput)
-}
-
-func (o L4RulesV2ListOutput) Region() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesV2List) int { return v.Region }).(pulumi.IntOutput)
-}
-
-func (o L4RulesV2ListOutput) RemoveSwitch() pulumi.BoolOutput {
-	return o.ApplyT(func(v L4RulesV2List) bool { return v.RemoveSwitch }).(pulumi.BoolOutput)
-}
-
-func (o L4RulesV2ListOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesV2List) string { return v.RuleId }).(pulumi.StringOutput)
-}
-
-func (o L4RulesV2ListOutput) RuleName() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesV2List) string { return v.RuleName }).(pulumi.StringOutput)
-}
-
-func (o L4RulesV2ListOutput) SourceLists() L4RulesV2ListSourceListArrayOutput {
-	return o.ApplyT(func(v L4RulesV2List) []L4RulesV2ListSourceList { return v.SourceLists }).(L4RulesV2ListSourceListArrayOutput)
-}
-
-func (o L4RulesV2ListOutput) SourcePort() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesV2List) int { return v.SourcePort }).(pulumi.IntOutput)
-}
-
-func (o L4RulesV2ListOutput) SourceType() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesV2List) int { return v.SourceType }).(pulumi.IntOutput)
-}
-
-func (o L4RulesV2ListOutput) VirtualPort() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesV2List) int { return v.VirtualPort }).(pulumi.IntOutput)
-}
-
-type L4RulesV2ListArrayOutput struct{ *pulumi.OutputState }
-
-func (L4RulesV2ListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesV2List)(nil)).Elem()
-}
-
-func (o L4RulesV2ListArrayOutput) ToL4RulesV2ListArrayOutput() L4RulesV2ListArrayOutput {
-	return o
-}
-
-func (o L4RulesV2ListArrayOutput) ToL4RulesV2ListArrayOutputWithContext(ctx context.Context) L4RulesV2ListArrayOutput {
-	return o
-}
-
-func (o L4RulesV2ListArrayOutput) Index(i pulumi.IntInput) L4RulesV2ListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) L4RulesV2List {
-		return vs[0].([]L4RulesV2List)[vs[1].(int)]
-	}).(L4RulesV2ListOutput)
-}
-
-type L4RulesV2ListSourceList struct {
-	Source string `pulumi:"source"`
-	Weight int    `pulumi:"weight"`
-}
-
-// L4RulesV2ListSourceListInput is an input type that accepts L4RulesV2ListSourceListArgs and L4RulesV2ListSourceListOutput values.
-// You can construct a concrete instance of `L4RulesV2ListSourceListInput` via:
-//
-//          L4RulesV2ListSourceListArgs{...}
-type L4RulesV2ListSourceListInput interface {
-	pulumi.Input
-
-	ToL4RulesV2ListSourceListOutput() L4RulesV2ListSourceListOutput
-	ToL4RulesV2ListSourceListOutputWithContext(context.Context) L4RulesV2ListSourceListOutput
-}
-
-type L4RulesV2ListSourceListArgs struct {
-	Source pulumi.StringInput `pulumi:"source"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
-}
-
-func (L4RulesV2ListSourceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesV2ListSourceList)(nil)).Elem()
-}
-
-func (i L4RulesV2ListSourceListArgs) ToL4RulesV2ListSourceListOutput() L4RulesV2ListSourceListOutput {
-	return i.ToL4RulesV2ListSourceListOutputWithContext(context.Background())
-}
-
-func (i L4RulesV2ListSourceListArgs) ToL4RulesV2ListSourceListOutputWithContext(ctx context.Context) L4RulesV2ListSourceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesV2ListSourceListOutput)
-}
-
-// L4RulesV2ListSourceListArrayInput is an input type that accepts L4RulesV2ListSourceListArray and L4RulesV2ListSourceListArrayOutput values.
-// You can construct a concrete instance of `L4RulesV2ListSourceListArrayInput` via:
-//
-//          L4RulesV2ListSourceListArray{ L4RulesV2ListSourceListArgs{...} }
-type L4RulesV2ListSourceListArrayInput interface {
-	pulumi.Input
-
-	ToL4RulesV2ListSourceListArrayOutput() L4RulesV2ListSourceListArrayOutput
-	ToL4RulesV2ListSourceListArrayOutputWithContext(context.Context) L4RulesV2ListSourceListArrayOutput
-}
-
-type L4RulesV2ListSourceListArray []L4RulesV2ListSourceListInput
-
-func (L4RulesV2ListSourceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesV2ListSourceList)(nil)).Elem()
-}
-
-func (i L4RulesV2ListSourceListArray) ToL4RulesV2ListSourceListArrayOutput() L4RulesV2ListSourceListArrayOutput {
-	return i.ToL4RulesV2ListSourceListArrayOutputWithContext(context.Background())
-}
-
-func (i L4RulesV2ListSourceListArray) ToL4RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) L4RulesV2ListSourceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L4RulesV2ListSourceListArrayOutput)
-}
-
-type L4RulesV2ListSourceListOutput struct{ *pulumi.OutputState }
-
-func (L4RulesV2ListSourceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*L4RulesV2ListSourceList)(nil)).Elem()
-}
-
-func (o L4RulesV2ListSourceListOutput) ToL4RulesV2ListSourceListOutput() L4RulesV2ListSourceListOutput {
-	return o
-}
-
-func (o L4RulesV2ListSourceListOutput) ToL4RulesV2ListSourceListOutputWithContext(ctx context.Context) L4RulesV2ListSourceListOutput {
-	return o
-}
-
-func (o L4RulesV2ListSourceListOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v L4RulesV2ListSourceList) string { return v.Source }).(pulumi.StringOutput)
-}
-
-func (o L4RulesV2ListSourceListOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func(v L4RulesV2ListSourceList) int { return v.Weight }).(pulumi.IntOutput)
-}
-
-type L4RulesV2ListSourceListArrayOutput struct{ *pulumi.OutputState }
-
-func (L4RulesV2ListSourceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L4RulesV2ListSourceList)(nil)).Elem()
-}
-
-func (o L4RulesV2ListSourceListArrayOutput) ToL4RulesV2ListSourceListArrayOutput() L4RulesV2ListSourceListArrayOutput {
-	return o
-}
-
-func (o L4RulesV2ListSourceListArrayOutput) ToL4RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) L4RulesV2ListSourceListArrayOutput {
-	return o
-}
-
-func (o L4RulesV2ListSourceListArrayOutput) Index(i pulumi.IntInput) L4RulesV2ListSourceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) L4RulesV2ListSourceList {
-		return vs[0].([]L4RulesV2ListSourceList)[vs[1].(int)]
-	}).(L4RulesV2ListSourceListOutput)
-}
-
 type L7RuleV2Rule struct {
-	CcEnable          *int                     `pulumi:"ccEnable"`
-	CertType          *int                     `pulumi:"certType"`
-	Domain            string                   `pulumi:"domain"`
-	HttpsToHttpEnable *int                     `pulumi:"httpsToHttpEnable"`
-	KeepEnable        int                      `pulumi:"keepEnable"`
-	Keeptime          int                      `pulumi:"keeptime"`
-	LbType            int                      `pulumi:"lbType"`
-	Protocol          string                   `pulumi:"protocol"`
-	SourceLists       []L7RuleV2RuleSourceList `pulumi:"sourceLists"`
-	SourceType        int                      `pulumi:"sourceType"`
-	SslId             *string                  `pulumi:"sslId"`
+	// HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+	CcEnable *int `pulumi:"ccEnable"`
+	// The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+	CertType *int `pulumi:"certType"`
+	// Domain of the rule.
+	Domain string `pulumi:"domain"`
+	// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+	HttpsToHttpEnable *int `pulumi:"httpsToHttpEnable"`
+	// session hold switch.
+	KeepEnable int `pulumi:"keepEnable"`
+	// The keeptime of the layer 4 rule.
+	Keeptime int `pulumi:"keeptime"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType int `pulumi:"lbType"`
+	// Protocol of the rule.
+	Protocol    string                   `pulumi:"protocol"`
+	SourceLists []L7RuleV2RuleSourceList `pulumi:"sourceLists"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType int `pulumi:"sourceType"`
+	// When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+	SslId *string `pulumi:"sslId"`
 }
 
 // L7RuleV2RuleInput is an input type that accepts L7RuleV2RuleArgs and L7RuleV2RuleOutput values.
@@ -5626,17 +3784,27 @@ type L7RuleV2RuleInput interface {
 }
 
 type L7RuleV2RuleArgs struct {
-	CcEnable          pulumi.IntPtrInput               `pulumi:"ccEnable"`
-	CertType          pulumi.IntPtrInput               `pulumi:"certType"`
-	Domain            pulumi.StringInput               `pulumi:"domain"`
-	HttpsToHttpEnable pulumi.IntPtrInput               `pulumi:"httpsToHttpEnable"`
-	KeepEnable        pulumi.IntInput                  `pulumi:"keepEnable"`
-	Keeptime          pulumi.IntInput                  `pulumi:"keeptime"`
-	LbType            pulumi.IntInput                  `pulumi:"lbType"`
-	Protocol          pulumi.StringInput               `pulumi:"protocol"`
-	SourceLists       L7RuleV2RuleSourceListArrayInput `pulumi:"sourceLists"`
-	SourceType        pulumi.IntInput                  `pulumi:"sourceType"`
-	SslId             pulumi.StringPtrInput            `pulumi:"sslId"`
+	// HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+	CcEnable pulumi.IntPtrInput `pulumi:"ccEnable"`
+	// The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+	CertType pulumi.IntPtrInput `pulumi:"certType"`
+	// Domain of the rule.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+	HttpsToHttpEnable pulumi.IntPtrInput `pulumi:"httpsToHttpEnable"`
+	// session hold switch.
+	KeepEnable pulumi.IntInput `pulumi:"keepEnable"`
+	// The keeptime of the layer 4 rule.
+	Keeptime pulumi.IntInput `pulumi:"keeptime"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType pulumi.IntInput `pulumi:"lbType"`
+	// Protocol of the rule.
+	Protocol    pulumi.StringInput               `pulumi:"protocol"`
+	SourceLists L7RuleV2RuleSourceListArrayInput `pulumi:"sourceLists"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType pulumi.IntInput `pulumi:"sourceType"`
+	// When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+	SslId pulumi.StringPtrInput `pulumi:"sslId"`
 }
 
 func (L7RuleV2RuleArgs) ElementType() reflect.Type {
@@ -5716,34 +3884,42 @@ func (o L7RuleV2RuleOutput) ToL7RuleV2RulePtrOutputWithContext(ctx context.Conte
 	}).(L7RuleV2RulePtrOutput)
 }
 
+// HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
 func (o L7RuleV2RuleOutput) CcEnable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) *int { return v.CcEnable }).(pulumi.IntPtrOutput)
 }
 
+// The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
 func (o L7RuleV2RuleOutput) CertType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) *int { return v.CertType }).(pulumi.IntPtrOutput)
 }
 
+// Domain of the rule.
 func (o L7RuleV2RuleOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) string { return v.Domain }).(pulumi.StringOutput)
 }
 
+// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
 func (o L7RuleV2RuleOutput) HttpsToHttpEnable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) *int { return v.HttpsToHttpEnable }).(pulumi.IntPtrOutput)
 }
 
+// session hold switch.
 func (o L7RuleV2RuleOutput) KeepEnable() pulumi.IntOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) int { return v.KeepEnable }).(pulumi.IntOutput)
 }
 
+// The keeptime of the layer 4 rule.
 func (o L7RuleV2RuleOutput) Keeptime() pulumi.IntOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) int { return v.Keeptime }).(pulumi.IntOutput)
 }
 
+// LB type of the rule, `1` for weight cycling and `2` for IP hash.
 func (o L7RuleV2RuleOutput) LbType() pulumi.IntOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) int { return v.LbType }).(pulumi.IntOutput)
 }
 
+// Protocol of the rule.
 func (o L7RuleV2RuleOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) string { return v.Protocol }).(pulumi.StringOutput)
 }
@@ -5752,10 +3928,12 @@ func (o L7RuleV2RuleOutput) SourceLists() L7RuleV2RuleSourceListArrayOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) []L7RuleV2RuleSourceList { return v.SourceLists }).(L7RuleV2RuleSourceListArrayOutput)
 }
 
+// Source type, `1` for source of host, `2` for source of IP.
 func (o L7RuleV2RuleOutput) SourceType() pulumi.IntOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) int { return v.SourceType }).(pulumi.IntOutput)
 }
 
+// When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
 func (o L7RuleV2RuleOutput) SslId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v L7RuleV2Rule) *string { return v.SslId }).(pulumi.StringPtrOutput)
 }
@@ -5784,6 +3962,7 @@ func (o L7RuleV2RulePtrOutput) Elem() L7RuleV2RuleOutput {
 	}).(L7RuleV2RuleOutput)
 }
 
+// HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
 func (o L7RuleV2RulePtrOutput) CcEnable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *int {
 		if v == nil {
@@ -5793,6 +3972,7 @@ func (o L7RuleV2RulePtrOutput) CcEnable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
 func (o L7RuleV2RulePtrOutput) CertType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *int {
 		if v == nil {
@@ -5802,6 +3982,7 @@ func (o L7RuleV2RulePtrOutput) CertType() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Domain of the rule.
 func (o L7RuleV2RulePtrOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *string {
 		if v == nil {
@@ -5811,6 +3992,7 @@ func (o L7RuleV2RulePtrOutput) Domain() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
 func (o L7RuleV2RulePtrOutput) HttpsToHttpEnable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *int {
 		if v == nil {
@@ -5820,6 +4002,7 @@ func (o L7RuleV2RulePtrOutput) HttpsToHttpEnable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// session hold switch.
 func (o L7RuleV2RulePtrOutput) KeepEnable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *int {
 		if v == nil {
@@ -5829,6 +4012,7 @@ func (o L7RuleV2RulePtrOutput) KeepEnable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// The keeptime of the layer 4 rule.
 func (o L7RuleV2RulePtrOutput) Keeptime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *int {
 		if v == nil {
@@ -5838,6 +4022,7 @@ func (o L7RuleV2RulePtrOutput) Keeptime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// LB type of the rule, `1` for weight cycling and `2` for IP hash.
 func (o L7RuleV2RulePtrOutput) LbType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *int {
 		if v == nil {
@@ -5847,6 +4032,7 @@ func (o L7RuleV2RulePtrOutput) LbType() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Protocol of the rule.
 func (o L7RuleV2RulePtrOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *string {
 		if v == nil {
@@ -5865,6 +4051,7 @@ func (o L7RuleV2RulePtrOutput) SourceLists() L7RuleV2RuleSourceListArrayOutput {
 	}).(L7RuleV2RuleSourceListArrayOutput)
 }
 
+// Source type, `1` for source of host, `2` for source of IP.
 func (o L7RuleV2RulePtrOutput) SourceType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *int {
 		if v == nil {
@@ -5874,6 +4061,7 @@ func (o L7RuleV2RulePtrOutput) SourceType() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
 func (o L7RuleV2RulePtrOutput) SslId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *L7RuleV2Rule) *string {
 		if v == nil {
@@ -5983,553 +4171,3483 @@ func (o L7RuleV2RuleSourceListArrayOutput) Index(i pulumi.IntInput) L7RuleV2Rule
 	}).(L7RuleV2RuleSourceListOutput)
 }
 
-type L7RulesList struct {
-	Domain                 string   `pulumi:"domain"`
-	HealthCheckCode        int      `pulumi:"healthCheckCode"`
-	HealthCheckHealthNum   int      `pulumi:"healthCheckHealthNum"`
-	HealthCheckInterval    int      `pulumi:"healthCheckInterval"`
-	HealthCheckMethod      string   `pulumi:"healthCheckMethod"`
-	HealthCheckPath        string   `pulumi:"healthCheckPath"`
-	HealthCheckSwitch      bool     `pulumi:"healthCheckSwitch"`
-	HealthCheckUnhealthNum int      `pulumi:"healthCheckUnhealthNum"`
-	Name                   string   `pulumi:"name"`
-	Protocol               string   `pulumi:"protocol"`
-	RuleId                 string   `pulumi:"ruleId"`
-	SourceLists            []string `pulumi:"sourceLists"`
-	SourceType             int      `pulumi:"sourceType"`
-	SslId                  string   `pulumi:"sslId"`
-	Status                 int      `pulumi:"status"`
-	Switch                 bool     `pulumi:"switch"`
-	Threshold              int      `pulumi:"threshold"`
+type GetCcHttpPoliciesList struct {
+	// Action mode.
+	Action string `pulumi:"action"`
+	// Create time of the CC self-define http policy.
+	CreateTime string `pulumi:"createTime"`
+	// Max frequency per minute.
+	Frequency int `pulumi:"frequency"`
+	// IP of the CC self-define http policy.
+	IpLists []string `pulumi:"ipLists"`
+	// Name of the CC http policy to be queried.
+	Name string `pulumi:"name"`
+	// Id of the CC http policy to be queried.
+	PolicyId string `pulumi:"policyId"`
+	// ID of the resource that the CC http policy works for.
+	ResourceId string `pulumi:"resourceId"`
+	// Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+	ResourceType string                          `pulumi:"resourceType"`
+	RuleLists    []GetCcHttpPoliciesListRuleList `pulumi:"ruleLists"`
+	// Match mode.
+	Smode string `pulumi:"smode"`
+	// Indicate the CC self-define http policy takes effect or not.
+	Switch bool `pulumi:"switch"`
 }
 
-// L7RulesListInput is an input type that accepts L7RulesListArgs and L7RulesListOutput values.
-// You can construct a concrete instance of `L7RulesListInput` via:
+// GetCcHttpPoliciesListInput is an input type that accepts GetCcHttpPoliciesListArgs and GetCcHttpPoliciesListOutput values.
+// You can construct a concrete instance of `GetCcHttpPoliciesListInput` via:
 //
-//          L7RulesListArgs{...}
-type L7RulesListInput interface {
+//          GetCcHttpPoliciesListArgs{...}
+type GetCcHttpPoliciesListInput interface {
 	pulumi.Input
 
-	ToL7RulesListOutput() L7RulesListOutput
-	ToL7RulesListOutputWithContext(context.Context) L7RulesListOutput
+	ToGetCcHttpPoliciesListOutput() GetCcHttpPoliciesListOutput
+	ToGetCcHttpPoliciesListOutputWithContext(context.Context) GetCcHttpPoliciesListOutput
 }
 
-type L7RulesListArgs struct {
-	Domain                 pulumi.StringInput      `pulumi:"domain"`
-	HealthCheckCode        pulumi.IntInput         `pulumi:"healthCheckCode"`
-	HealthCheckHealthNum   pulumi.IntInput         `pulumi:"healthCheckHealthNum"`
-	HealthCheckInterval    pulumi.IntInput         `pulumi:"healthCheckInterval"`
-	HealthCheckMethod      pulumi.StringInput      `pulumi:"healthCheckMethod"`
-	HealthCheckPath        pulumi.StringInput      `pulumi:"healthCheckPath"`
-	HealthCheckSwitch      pulumi.BoolInput        `pulumi:"healthCheckSwitch"`
-	HealthCheckUnhealthNum pulumi.IntInput         `pulumi:"healthCheckUnhealthNum"`
-	Name                   pulumi.StringInput      `pulumi:"name"`
-	Protocol               pulumi.StringInput      `pulumi:"protocol"`
-	RuleId                 pulumi.StringInput      `pulumi:"ruleId"`
-	SourceLists            pulumi.StringArrayInput `pulumi:"sourceLists"`
-	SourceType             pulumi.IntInput         `pulumi:"sourceType"`
-	SslId                  pulumi.StringInput      `pulumi:"sslId"`
-	Status                 pulumi.IntInput         `pulumi:"status"`
-	Switch                 pulumi.BoolInput        `pulumi:"switch"`
-	Threshold              pulumi.IntInput         `pulumi:"threshold"`
+type GetCcHttpPoliciesListArgs struct {
+	// Action mode.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Create time of the CC self-define http policy.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Max frequency per minute.
+	Frequency pulumi.IntInput `pulumi:"frequency"`
+	// IP of the CC self-define http policy.
+	IpLists pulumi.StringArrayInput `pulumi:"ipLists"`
+	// Name of the CC http policy to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Id of the CC http policy to be queried.
+	PolicyId pulumi.StringInput `pulumi:"policyId"`
+	// ID of the resource that the CC http policy works for.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+	ResourceType pulumi.StringInput                      `pulumi:"resourceType"`
+	RuleLists    GetCcHttpPoliciesListRuleListArrayInput `pulumi:"ruleLists"`
+	// Match mode.
+	Smode pulumi.StringInput `pulumi:"smode"`
+	// Indicate the CC self-define http policy takes effect or not.
+	Switch pulumi.BoolInput `pulumi:"switch"`
 }
 
-func (L7RulesListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*L7RulesList)(nil)).Elem()
+func (GetCcHttpPoliciesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpPoliciesList)(nil)).Elem()
 }
 
-func (i L7RulesListArgs) ToL7RulesListOutput() L7RulesListOutput {
-	return i.ToL7RulesListOutputWithContext(context.Background())
+func (i GetCcHttpPoliciesListArgs) ToGetCcHttpPoliciesListOutput() GetCcHttpPoliciesListOutput {
+	return i.ToGetCcHttpPoliciesListOutputWithContext(context.Background())
 }
 
-func (i L7RulesListArgs) ToL7RulesListOutputWithContext(ctx context.Context) L7RulesListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L7RulesListOutput)
+func (i GetCcHttpPoliciesListArgs) ToGetCcHttpPoliciesListOutputWithContext(ctx context.Context) GetCcHttpPoliciesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpPoliciesListOutput)
 }
 
-// L7RulesListArrayInput is an input type that accepts L7RulesListArray and L7RulesListArrayOutput values.
-// You can construct a concrete instance of `L7RulesListArrayInput` via:
+// GetCcHttpPoliciesListArrayInput is an input type that accepts GetCcHttpPoliciesListArray and GetCcHttpPoliciesListArrayOutput values.
+// You can construct a concrete instance of `GetCcHttpPoliciesListArrayInput` via:
 //
-//          L7RulesListArray{ L7RulesListArgs{...} }
-type L7RulesListArrayInput interface {
+//          GetCcHttpPoliciesListArray{ GetCcHttpPoliciesListArgs{...} }
+type GetCcHttpPoliciesListArrayInput interface {
 	pulumi.Input
 
-	ToL7RulesListArrayOutput() L7RulesListArrayOutput
-	ToL7RulesListArrayOutputWithContext(context.Context) L7RulesListArrayOutput
+	ToGetCcHttpPoliciesListArrayOutput() GetCcHttpPoliciesListArrayOutput
+	ToGetCcHttpPoliciesListArrayOutputWithContext(context.Context) GetCcHttpPoliciesListArrayOutput
 }
 
-type L7RulesListArray []L7RulesListInput
+type GetCcHttpPoliciesListArray []GetCcHttpPoliciesListInput
 
-func (L7RulesListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L7RulesList)(nil)).Elem()
+func (GetCcHttpPoliciesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpPoliciesList)(nil)).Elem()
 }
 
-func (i L7RulesListArray) ToL7RulesListArrayOutput() L7RulesListArrayOutput {
-	return i.ToL7RulesListArrayOutputWithContext(context.Background())
+func (i GetCcHttpPoliciesListArray) ToGetCcHttpPoliciesListArrayOutput() GetCcHttpPoliciesListArrayOutput {
+	return i.ToGetCcHttpPoliciesListArrayOutputWithContext(context.Background())
 }
 
-func (i L7RulesListArray) ToL7RulesListArrayOutputWithContext(ctx context.Context) L7RulesListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L7RulesListArrayOutput)
+func (i GetCcHttpPoliciesListArray) ToGetCcHttpPoliciesListArrayOutputWithContext(ctx context.Context) GetCcHttpPoliciesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpPoliciesListArrayOutput)
 }
 
-type L7RulesListOutput struct{ *pulumi.OutputState }
+type GetCcHttpPoliciesListOutput struct{ *pulumi.OutputState }
 
-func (L7RulesListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*L7RulesList)(nil)).Elem()
+func (GetCcHttpPoliciesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpPoliciesList)(nil)).Elem()
 }
 
-func (o L7RulesListOutput) ToL7RulesListOutput() L7RulesListOutput {
+func (o GetCcHttpPoliciesListOutput) ToGetCcHttpPoliciesListOutput() GetCcHttpPoliciesListOutput {
 	return o
 }
 
-func (o L7RulesListOutput) ToL7RulesListOutputWithContext(ctx context.Context) L7RulesListOutput {
+func (o GetCcHttpPoliciesListOutput) ToGetCcHttpPoliciesListOutputWithContext(ctx context.Context) GetCcHttpPoliciesListOutput {
 	return o
 }
 
-func (o L7RulesListOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesList) string { return v.Domain }).(pulumi.StringOutput)
+// Action mode.
+func (o GetCcHttpPoliciesListOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.Action }).(pulumi.StringOutput)
 }
 
-func (o L7RulesListOutput) HealthCheckCode() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesList) int { return v.HealthCheckCode }).(pulumi.IntOutput)
+// Create time of the CC self-define http policy.
+func (o GetCcHttpPoliciesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o L7RulesListOutput) HealthCheckHealthNum() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesList) int { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
+// Max frequency per minute.
+func (o GetCcHttpPoliciesListOutput) Frequency() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) int { return v.Frequency }).(pulumi.IntOutput)
 }
 
-func (o L7RulesListOutput) HealthCheckInterval() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesList) int { return v.HealthCheckInterval }).(pulumi.IntOutput)
+// IP of the CC self-define http policy.
+func (o GetCcHttpPoliciesListOutput) IpLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) []string { return v.IpLists }).(pulumi.StringArrayOutput)
 }
 
-func (o L7RulesListOutput) HealthCheckMethod() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesList) string { return v.HealthCheckMethod }).(pulumi.StringOutput)
+// Name of the CC http policy to be queried.
+func (o GetCcHttpPoliciesListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o L7RulesListOutput) HealthCheckPath() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesList) string { return v.HealthCheckPath }).(pulumi.StringOutput)
+// Id of the CC http policy to be queried.
+func (o GetCcHttpPoliciesListOutput) PolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.PolicyId }).(pulumi.StringOutput)
 }
 
-func (o L7RulesListOutput) HealthCheckSwitch() pulumi.BoolOutput {
-	return o.ApplyT(func(v L7RulesList) bool { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
+// ID of the resource that the CC http policy works for.
+func (o GetCcHttpPoliciesListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.ResourceId }).(pulumi.StringOutput)
 }
 
-func (o L7RulesListOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesList) int { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
+// Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+func (o GetCcHttpPoliciesListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.ResourceType }).(pulumi.StringOutput)
 }
 
-func (o L7RulesListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesList) string { return v.Name }).(pulumi.StringOutput)
+func (o GetCcHttpPoliciesListOutput) RuleLists() GetCcHttpPoliciesListRuleListArrayOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) []GetCcHttpPoliciesListRuleList { return v.RuleLists }).(GetCcHttpPoliciesListRuleListArrayOutput)
 }
 
-func (o L7RulesListOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesList) string { return v.Protocol }).(pulumi.StringOutput)
+// Match mode.
+func (o GetCcHttpPoliciesListOutput) Smode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.Smode }).(pulumi.StringOutput)
 }
 
-func (o L7RulesListOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesList) string { return v.RuleId }).(pulumi.StringOutput)
+// Indicate the CC self-define http policy takes effect or not.
+func (o GetCcHttpPoliciesListOutput) Switch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesList) bool { return v.Switch }).(pulumi.BoolOutput)
 }
 
-func (o L7RulesListOutput) SourceLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v L7RulesList) []string { return v.SourceLists }).(pulumi.StringArrayOutput)
+type GetCcHttpPoliciesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcHttpPoliciesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpPoliciesList)(nil)).Elem()
 }
 
-func (o L7RulesListOutput) SourceType() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesList) int { return v.SourceType }).(pulumi.IntOutput)
-}
-
-func (o L7RulesListOutput) SslId() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesList) string { return v.SslId }).(pulumi.StringOutput)
-}
-
-func (o L7RulesListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesList) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o L7RulesListOutput) Switch() pulumi.BoolOutput {
-	return o.ApplyT(func(v L7RulesList) bool { return v.Switch }).(pulumi.BoolOutput)
-}
-
-func (o L7RulesListOutput) Threshold() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesList) int { return v.Threshold }).(pulumi.IntOutput)
-}
-
-type L7RulesListArrayOutput struct{ *pulumi.OutputState }
-
-func (L7RulesListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L7RulesList)(nil)).Elem()
-}
-
-func (o L7RulesListArrayOutput) ToL7RulesListArrayOutput() L7RulesListArrayOutput {
+func (o GetCcHttpPoliciesListArrayOutput) ToGetCcHttpPoliciesListArrayOutput() GetCcHttpPoliciesListArrayOutput {
 	return o
 }
 
-func (o L7RulesListArrayOutput) ToL7RulesListArrayOutputWithContext(ctx context.Context) L7RulesListArrayOutput {
+func (o GetCcHttpPoliciesListArrayOutput) ToGetCcHttpPoliciesListArrayOutputWithContext(ctx context.Context) GetCcHttpPoliciesListArrayOutput {
 	return o
 }
 
-func (o L7RulesListArrayOutput) Index(i pulumi.IntInput) L7RulesListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) L7RulesList {
-		return vs[0].([]L7RulesList)[vs[1].(int)]
-	}).(L7RulesListOutput)
+func (o GetCcHttpPoliciesListArrayOutput) Index(i pulumi.IntInput) GetCcHttpPoliciesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcHttpPoliciesList {
+		return vs[0].([]GetCcHttpPoliciesList)[vs[1].(int)]
+	}).(GetCcHttpPoliciesListOutput)
 }
 
-type L7RulesV2List struct {
-	CcEnable          int                       `pulumi:"ccEnable"`
-	CcLevel           string                    `pulumi:"ccLevel"`
-	CcStatus          int                       `pulumi:"ccStatus"`
-	CcThreshold       int                       `pulumi:"ccThreshold"`
-	CertType          int                       `pulumi:"certType"`
-	Domain            string                    `pulumi:"domain"`
-	HttpsToHttpEnable int                       `pulumi:"httpsToHttpEnable"`
-	Id                string                    `pulumi:"id"`
-	Ip                string                    `pulumi:"ip"`
-	KeepEnable        int                       `pulumi:"keepEnable"`
-	KeepTime          int                       `pulumi:"keepTime"`
-	LbType            int                       `pulumi:"lbType"`
-	ModifyTime        string                    `pulumi:"modifyTime"`
-	Protocol          string                    `pulumi:"protocol"`
-	Region            int                       `pulumi:"region"`
-	RuleName          string                    `pulumi:"ruleName"`
-	SourceLists       []L7RulesV2ListSourceList `pulumi:"sourceLists"`
-	SourceType        int                       `pulumi:"sourceType"`
-	SslId             string                    `pulumi:"sslId"`
-	Status            int                       `pulumi:"status"`
-	VirtualPort       int                       `pulumi:"virtualPort"`
+type GetCcHttpPoliciesListRuleList struct {
+	Operator string `pulumi:"operator"`
+	Skey     string `pulumi:"skey"`
+	Value    string `pulumi:"value"`
 }
 
-// L7RulesV2ListInput is an input type that accepts L7RulesV2ListArgs and L7RulesV2ListOutput values.
-// You can construct a concrete instance of `L7RulesV2ListInput` via:
+// GetCcHttpPoliciesListRuleListInput is an input type that accepts GetCcHttpPoliciesListRuleListArgs and GetCcHttpPoliciesListRuleListOutput values.
+// You can construct a concrete instance of `GetCcHttpPoliciesListRuleListInput` via:
 //
-//          L7RulesV2ListArgs{...}
-type L7RulesV2ListInput interface {
+//          GetCcHttpPoliciesListRuleListArgs{...}
+type GetCcHttpPoliciesListRuleListInput interface {
 	pulumi.Input
 
-	ToL7RulesV2ListOutput() L7RulesV2ListOutput
-	ToL7RulesV2ListOutputWithContext(context.Context) L7RulesV2ListOutput
+	ToGetCcHttpPoliciesListRuleListOutput() GetCcHttpPoliciesListRuleListOutput
+	ToGetCcHttpPoliciesListRuleListOutputWithContext(context.Context) GetCcHttpPoliciesListRuleListOutput
 }
 
-type L7RulesV2ListArgs struct {
-	CcEnable          pulumi.IntInput                   `pulumi:"ccEnable"`
-	CcLevel           pulumi.StringInput                `pulumi:"ccLevel"`
-	CcStatus          pulumi.IntInput                   `pulumi:"ccStatus"`
-	CcThreshold       pulumi.IntInput                   `pulumi:"ccThreshold"`
-	CertType          pulumi.IntInput                   `pulumi:"certType"`
-	Domain            pulumi.StringInput                `pulumi:"domain"`
-	HttpsToHttpEnable pulumi.IntInput                   `pulumi:"httpsToHttpEnable"`
-	Id                pulumi.StringInput                `pulumi:"id"`
-	Ip                pulumi.StringInput                `pulumi:"ip"`
-	KeepEnable        pulumi.IntInput                   `pulumi:"keepEnable"`
-	KeepTime          pulumi.IntInput                   `pulumi:"keepTime"`
-	LbType            pulumi.IntInput                   `pulumi:"lbType"`
-	ModifyTime        pulumi.StringInput                `pulumi:"modifyTime"`
-	Protocol          pulumi.StringInput                `pulumi:"protocol"`
-	Region            pulumi.IntInput                   `pulumi:"region"`
-	RuleName          pulumi.StringInput                `pulumi:"ruleName"`
-	SourceLists       L7RulesV2ListSourceListArrayInput `pulumi:"sourceLists"`
-	SourceType        pulumi.IntInput                   `pulumi:"sourceType"`
-	SslId             pulumi.StringInput                `pulumi:"sslId"`
-	Status            pulumi.IntInput                   `pulumi:"status"`
-	VirtualPort       pulumi.IntInput                   `pulumi:"virtualPort"`
+type GetCcHttpPoliciesListRuleListArgs struct {
+	Operator pulumi.StringInput `pulumi:"operator"`
+	Skey     pulumi.StringInput `pulumi:"skey"`
+	Value    pulumi.StringInput `pulumi:"value"`
 }
 
-func (L7RulesV2ListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*L7RulesV2List)(nil)).Elem()
+func (GetCcHttpPoliciesListRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpPoliciesListRuleList)(nil)).Elem()
 }
 
-func (i L7RulesV2ListArgs) ToL7RulesV2ListOutput() L7RulesV2ListOutput {
-	return i.ToL7RulesV2ListOutputWithContext(context.Background())
+func (i GetCcHttpPoliciesListRuleListArgs) ToGetCcHttpPoliciesListRuleListOutput() GetCcHttpPoliciesListRuleListOutput {
+	return i.ToGetCcHttpPoliciesListRuleListOutputWithContext(context.Background())
 }
 
-func (i L7RulesV2ListArgs) ToL7RulesV2ListOutputWithContext(ctx context.Context) L7RulesV2ListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L7RulesV2ListOutput)
+func (i GetCcHttpPoliciesListRuleListArgs) ToGetCcHttpPoliciesListRuleListOutputWithContext(ctx context.Context) GetCcHttpPoliciesListRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpPoliciesListRuleListOutput)
 }
 
-// L7RulesV2ListArrayInput is an input type that accepts L7RulesV2ListArray and L7RulesV2ListArrayOutput values.
-// You can construct a concrete instance of `L7RulesV2ListArrayInput` via:
+// GetCcHttpPoliciesListRuleListArrayInput is an input type that accepts GetCcHttpPoliciesListRuleListArray and GetCcHttpPoliciesListRuleListArrayOutput values.
+// You can construct a concrete instance of `GetCcHttpPoliciesListRuleListArrayInput` via:
 //
-//          L7RulesV2ListArray{ L7RulesV2ListArgs{...} }
-type L7RulesV2ListArrayInput interface {
+//          GetCcHttpPoliciesListRuleListArray{ GetCcHttpPoliciesListRuleListArgs{...} }
+type GetCcHttpPoliciesListRuleListArrayInput interface {
 	pulumi.Input
 
-	ToL7RulesV2ListArrayOutput() L7RulesV2ListArrayOutput
-	ToL7RulesV2ListArrayOutputWithContext(context.Context) L7RulesV2ListArrayOutput
+	ToGetCcHttpPoliciesListRuleListArrayOutput() GetCcHttpPoliciesListRuleListArrayOutput
+	ToGetCcHttpPoliciesListRuleListArrayOutputWithContext(context.Context) GetCcHttpPoliciesListRuleListArrayOutput
 }
 
-type L7RulesV2ListArray []L7RulesV2ListInput
+type GetCcHttpPoliciesListRuleListArray []GetCcHttpPoliciesListRuleListInput
 
-func (L7RulesV2ListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L7RulesV2List)(nil)).Elem()
+func (GetCcHttpPoliciesListRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpPoliciesListRuleList)(nil)).Elem()
 }
 
-func (i L7RulesV2ListArray) ToL7RulesV2ListArrayOutput() L7RulesV2ListArrayOutput {
-	return i.ToL7RulesV2ListArrayOutputWithContext(context.Background())
+func (i GetCcHttpPoliciesListRuleListArray) ToGetCcHttpPoliciesListRuleListArrayOutput() GetCcHttpPoliciesListRuleListArrayOutput {
+	return i.ToGetCcHttpPoliciesListRuleListArrayOutputWithContext(context.Background())
 }
 
-func (i L7RulesV2ListArray) ToL7RulesV2ListArrayOutputWithContext(ctx context.Context) L7RulesV2ListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L7RulesV2ListArrayOutput)
+func (i GetCcHttpPoliciesListRuleListArray) ToGetCcHttpPoliciesListRuleListArrayOutputWithContext(ctx context.Context) GetCcHttpPoliciesListRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpPoliciesListRuleListArrayOutput)
 }
 
-type L7RulesV2ListOutput struct{ *pulumi.OutputState }
+type GetCcHttpPoliciesListRuleListOutput struct{ *pulumi.OutputState }
 
-func (L7RulesV2ListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*L7RulesV2List)(nil)).Elem()
+func (GetCcHttpPoliciesListRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpPoliciesListRuleList)(nil)).Elem()
 }
 
-func (o L7RulesV2ListOutput) ToL7RulesV2ListOutput() L7RulesV2ListOutput {
+func (o GetCcHttpPoliciesListRuleListOutput) ToGetCcHttpPoliciesListRuleListOutput() GetCcHttpPoliciesListRuleListOutput {
 	return o
 }
 
-func (o L7RulesV2ListOutput) ToL7RulesV2ListOutputWithContext(ctx context.Context) L7RulesV2ListOutput {
+func (o GetCcHttpPoliciesListRuleListOutput) ToGetCcHttpPoliciesListRuleListOutputWithContext(ctx context.Context) GetCcHttpPoliciesListRuleListOutput {
 	return o
 }
 
-func (o L7RulesV2ListOutput) CcEnable() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.CcEnable }).(pulumi.IntOutput)
+func (o GetCcHttpPoliciesListRuleListOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesListRuleList) string { return v.Operator }).(pulumi.StringOutput)
 }
 
-func (o L7RulesV2ListOutput) CcLevel() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.CcLevel }).(pulumi.StringOutput)
+func (o GetCcHttpPoliciesListRuleListOutput) Skey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesListRuleList) string { return v.Skey }).(pulumi.StringOutput)
 }
 
-func (o L7RulesV2ListOutput) CcStatus() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.CcStatus }).(pulumi.IntOutput)
+func (o GetCcHttpPoliciesListRuleListOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpPoliciesListRuleList) string { return v.Value }).(pulumi.StringOutput)
 }
 
-func (o L7RulesV2ListOutput) CcThreshold() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.CcThreshold }).(pulumi.IntOutput)
+type GetCcHttpPoliciesListRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcHttpPoliciesListRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpPoliciesListRuleList)(nil)).Elem()
 }
 
-func (o L7RulesV2ListOutput) CertType() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.CertType }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o L7RulesV2ListOutput) HttpsToHttpEnable() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.HttpsToHttpEnable }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o L7RulesV2ListOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.Ip }).(pulumi.StringOutput)
-}
-
-func (o L7RulesV2ListOutput) KeepEnable() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.KeepEnable }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) KeepTime() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.KeepTime }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) LbType() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.LbType }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) ModifyTime() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.ModifyTime }).(pulumi.StringOutput)
-}
-
-func (o L7RulesV2ListOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.Protocol }).(pulumi.StringOutput)
-}
-
-func (o L7RulesV2ListOutput) Region() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.Region }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) RuleName() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.RuleName }).(pulumi.StringOutput)
-}
-
-func (o L7RulesV2ListOutput) SourceLists() L7RulesV2ListSourceListArrayOutput {
-	return o.ApplyT(func(v L7RulesV2List) []L7RulesV2ListSourceList { return v.SourceLists }).(L7RulesV2ListSourceListArrayOutput)
-}
-
-func (o L7RulesV2ListOutput) SourceType() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.SourceType }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) SslId() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2List) string { return v.SslId }).(pulumi.StringOutput)
-}
-
-func (o L7RulesV2ListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o L7RulesV2ListOutput) VirtualPort() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2List) int { return v.VirtualPort }).(pulumi.IntOutput)
-}
-
-type L7RulesV2ListArrayOutput struct{ *pulumi.OutputState }
-
-func (L7RulesV2ListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L7RulesV2List)(nil)).Elem()
-}
-
-func (o L7RulesV2ListArrayOutput) ToL7RulesV2ListArrayOutput() L7RulesV2ListArrayOutput {
+func (o GetCcHttpPoliciesListRuleListArrayOutput) ToGetCcHttpPoliciesListRuleListArrayOutput() GetCcHttpPoliciesListRuleListArrayOutput {
 	return o
 }
 
-func (o L7RulesV2ListArrayOutput) ToL7RulesV2ListArrayOutputWithContext(ctx context.Context) L7RulesV2ListArrayOutput {
+func (o GetCcHttpPoliciesListRuleListArrayOutput) ToGetCcHttpPoliciesListRuleListArrayOutputWithContext(ctx context.Context) GetCcHttpPoliciesListRuleListArrayOutput {
 	return o
 }
 
-func (o L7RulesV2ListArrayOutput) Index(i pulumi.IntInput) L7RulesV2ListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) L7RulesV2List {
-		return vs[0].([]L7RulesV2List)[vs[1].(int)]
-	}).(L7RulesV2ListOutput)
+func (o GetCcHttpPoliciesListRuleListArrayOutput) Index(i pulumi.IntInput) GetCcHttpPoliciesListRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcHttpPoliciesListRuleList {
+		return vs[0].([]GetCcHttpPoliciesListRuleList)[vs[1].(int)]
+	}).(GetCcHttpPoliciesListRuleListOutput)
 }
 
-type L7RulesV2ListSourceList struct {
+type GetCcHttpsPoliciesList struct {
+	// Action mode.
+	Action string `pulumi:"action"`
+	// Create time of the CC self-define https policy.
+	CreateTime string `pulumi:"createTime"`
+	// Domain that the CC self-define https policy works for.
+	Domain string `pulumi:"domain"`
+	// Ip of the CC self-define https policy.
+	IpLists []string `pulumi:"ipLists"`
+	// Name of the CC https policy to be queried.
+	Name string `pulumi:"name"`
+	// Id of the CC https policy to be queried.
+	PolicyId string `pulumi:"policyId"`
+	// Id of the resource that the CC https policy works for.
+	ResourceId string `pulumi:"resourceId"`
+	// Type of the resource that the CC https policy works for, valid value is `bgpip`.
+	ResourceType string `pulumi:"resourceType"`
+	// Rule id of the domain that the CC self-define https policy works for.
+	RuleId    string                           `pulumi:"ruleId"`
+	RuleLists []GetCcHttpsPoliciesListRuleList `pulumi:"ruleLists"`
+	// Indicate the CC self-define https policy takes effect or not.
+	Switch bool `pulumi:"switch"`
+}
+
+// GetCcHttpsPoliciesListInput is an input type that accepts GetCcHttpsPoliciesListArgs and GetCcHttpsPoliciesListOutput values.
+// You can construct a concrete instance of `GetCcHttpsPoliciesListInput` via:
+//
+//          GetCcHttpsPoliciesListArgs{...}
+type GetCcHttpsPoliciesListInput interface {
+	pulumi.Input
+
+	ToGetCcHttpsPoliciesListOutput() GetCcHttpsPoliciesListOutput
+	ToGetCcHttpsPoliciesListOutputWithContext(context.Context) GetCcHttpsPoliciesListOutput
+}
+
+type GetCcHttpsPoliciesListArgs struct {
+	// Action mode.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Create time of the CC self-define https policy.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Domain that the CC self-define https policy works for.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Ip of the CC self-define https policy.
+	IpLists pulumi.StringArrayInput `pulumi:"ipLists"`
+	// Name of the CC https policy to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Id of the CC https policy to be queried.
+	PolicyId pulumi.StringInput `pulumi:"policyId"`
+	// Id of the resource that the CC https policy works for.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Type of the resource that the CC https policy works for, valid value is `bgpip`.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Rule id of the domain that the CC self-define https policy works for.
+	RuleId    pulumi.StringInput                       `pulumi:"ruleId"`
+	RuleLists GetCcHttpsPoliciesListRuleListArrayInput `pulumi:"ruleLists"`
+	// Indicate the CC self-define https policy takes effect or not.
+	Switch pulumi.BoolInput `pulumi:"switch"`
+}
+
+func (GetCcHttpsPoliciesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpsPoliciesList)(nil)).Elem()
+}
+
+func (i GetCcHttpsPoliciesListArgs) ToGetCcHttpsPoliciesListOutput() GetCcHttpsPoliciesListOutput {
+	return i.ToGetCcHttpsPoliciesListOutputWithContext(context.Background())
+}
+
+func (i GetCcHttpsPoliciesListArgs) ToGetCcHttpsPoliciesListOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpsPoliciesListOutput)
+}
+
+// GetCcHttpsPoliciesListArrayInput is an input type that accepts GetCcHttpsPoliciesListArray and GetCcHttpsPoliciesListArrayOutput values.
+// You can construct a concrete instance of `GetCcHttpsPoliciesListArrayInput` via:
+//
+//          GetCcHttpsPoliciesListArray{ GetCcHttpsPoliciesListArgs{...} }
+type GetCcHttpsPoliciesListArrayInput interface {
+	pulumi.Input
+
+	ToGetCcHttpsPoliciesListArrayOutput() GetCcHttpsPoliciesListArrayOutput
+	ToGetCcHttpsPoliciesListArrayOutputWithContext(context.Context) GetCcHttpsPoliciesListArrayOutput
+}
+
+type GetCcHttpsPoliciesListArray []GetCcHttpsPoliciesListInput
+
+func (GetCcHttpsPoliciesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpsPoliciesList)(nil)).Elem()
+}
+
+func (i GetCcHttpsPoliciesListArray) ToGetCcHttpsPoliciesListArrayOutput() GetCcHttpsPoliciesListArrayOutput {
+	return i.ToGetCcHttpsPoliciesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCcHttpsPoliciesListArray) ToGetCcHttpsPoliciesListArrayOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpsPoliciesListArrayOutput)
+}
+
+type GetCcHttpsPoliciesListOutput struct{ *pulumi.OutputState }
+
+func (GetCcHttpsPoliciesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpsPoliciesList)(nil)).Elem()
+}
+
+func (o GetCcHttpsPoliciesListOutput) ToGetCcHttpsPoliciesListOutput() GetCcHttpsPoliciesListOutput {
+	return o
+}
+
+func (o GetCcHttpsPoliciesListOutput) ToGetCcHttpsPoliciesListOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListOutput {
+	return o
+}
+
+// Action mode.
+func (o GetCcHttpsPoliciesListOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Create time of the CC self-define https policy.
+func (o GetCcHttpsPoliciesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Domain that the CC self-define https policy works for.
+func (o GetCcHttpsPoliciesListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Ip of the CC self-define https policy.
+func (o GetCcHttpsPoliciesListOutput) IpLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) []string { return v.IpLists }).(pulumi.StringArrayOutput)
+}
+
+// Name of the CC https policy to be queried.
+func (o GetCcHttpsPoliciesListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Id of the CC https policy to be queried.
+func (o GetCcHttpsPoliciesListOutput) PolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.PolicyId }).(pulumi.StringOutput)
+}
+
+// Id of the resource that the CC https policy works for.
+func (o GetCcHttpsPoliciesListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Type of the resource that the CC https policy works for, valid value is `bgpip`.
+func (o GetCcHttpsPoliciesListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Rule id of the domain that the CC self-define https policy works for.
+func (o GetCcHttpsPoliciesListOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+func (o GetCcHttpsPoliciesListOutput) RuleLists() GetCcHttpsPoliciesListRuleListArrayOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) []GetCcHttpsPoliciesListRuleList { return v.RuleLists }).(GetCcHttpsPoliciesListRuleListArrayOutput)
+}
+
+// Indicate the CC self-define https policy takes effect or not.
+func (o GetCcHttpsPoliciesListOutput) Switch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesList) bool { return v.Switch }).(pulumi.BoolOutput)
+}
+
+type GetCcHttpsPoliciesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcHttpsPoliciesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpsPoliciesList)(nil)).Elem()
+}
+
+func (o GetCcHttpsPoliciesListArrayOutput) ToGetCcHttpsPoliciesListArrayOutput() GetCcHttpsPoliciesListArrayOutput {
+	return o
+}
+
+func (o GetCcHttpsPoliciesListArrayOutput) ToGetCcHttpsPoliciesListArrayOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListArrayOutput {
+	return o
+}
+
+func (o GetCcHttpsPoliciesListArrayOutput) Index(i pulumi.IntInput) GetCcHttpsPoliciesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcHttpsPoliciesList {
+		return vs[0].([]GetCcHttpsPoliciesList)[vs[1].(int)]
+	}).(GetCcHttpsPoliciesListOutput)
+}
+
+type GetCcHttpsPoliciesListRuleList struct {
+	Operator string `pulumi:"operator"`
+	Skey     string `pulumi:"skey"`
+	Value    string `pulumi:"value"`
+}
+
+// GetCcHttpsPoliciesListRuleListInput is an input type that accepts GetCcHttpsPoliciesListRuleListArgs and GetCcHttpsPoliciesListRuleListOutput values.
+// You can construct a concrete instance of `GetCcHttpsPoliciesListRuleListInput` via:
+//
+//          GetCcHttpsPoliciesListRuleListArgs{...}
+type GetCcHttpsPoliciesListRuleListInput interface {
+	pulumi.Input
+
+	ToGetCcHttpsPoliciesListRuleListOutput() GetCcHttpsPoliciesListRuleListOutput
+	ToGetCcHttpsPoliciesListRuleListOutputWithContext(context.Context) GetCcHttpsPoliciesListRuleListOutput
+}
+
+type GetCcHttpsPoliciesListRuleListArgs struct {
+	Operator pulumi.StringInput `pulumi:"operator"`
+	Skey     pulumi.StringInput `pulumi:"skey"`
+	Value    pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetCcHttpsPoliciesListRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpsPoliciesListRuleList)(nil)).Elem()
+}
+
+func (i GetCcHttpsPoliciesListRuleListArgs) ToGetCcHttpsPoliciesListRuleListOutput() GetCcHttpsPoliciesListRuleListOutput {
+	return i.ToGetCcHttpsPoliciesListRuleListOutputWithContext(context.Background())
+}
+
+func (i GetCcHttpsPoliciesListRuleListArgs) ToGetCcHttpsPoliciesListRuleListOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpsPoliciesListRuleListOutput)
+}
+
+// GetCcHttpsPoliciesListRuleListArrayInput is an input type that accepts GetCcHttpsPoliciesListRuleListArray and GetCcHttpsPoliciesListRuleListArrayOutput values.
+// You can construct a concrete instance of `GetCcHttpsPoliciesListRuleListArrayInput` via:
+//
+//          GetCcHttpsPoliciesListRuleListArray{ GetCcHttpsPoliciesListRuleListArgs{...} }
+type GetCcHttpsPoliciesListRuleListArrayInput interface {
+	pulumi.Input
+
+	ToGetCcHttpsPoliciesListRuleListArrayOutput() GetCcHttpsPoliciesListRuleListArrayOutput
+	ToGetCcHttpsPoliciesListRuleListArrayOutputWithContext(context.Context) GetCcHttpsPoliciesListRuleListArrayOutput
+}
+
+type GetCcHttpsPoliciesListRuleListArray []GetCcHttpsPoliciesListRuleListInput
+
+func (GetCcHttpsPoliciesListRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpsPoliciesListRuleList)(nil)).Elem()
+}
+
+func (i GetCcHttpsPoliciesListRuleListArray) ToGetCcHttpsPoliciesListRuleListArrayOutput() GetCcHttpsPoliciesListRuleListArrayOutput {
+	return i.ToGetCcHttpsPoliciesListRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCcHttpsPoliciesListRuleListArray) ToGetCcHttpsPoliciesListRuleListArrayOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcHttpsPoliciesListRuleListArrayOutput)
+}
+
+type GetCcHttpsPoliciesListRuleListOutput struct{ *pulumi.OutputState }
+
+func (GetCcHttpsPoliciesListRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcHttpsPoliciesListRuleList)(nil)).Elem()
+}
+
+func (o GetCcHttpsPoliciesListRuleListOutput) ToGetCcHttpsPoliciesListRuleListOutput() GetCcHttpsPoliciesListRuleListOutput {
+	return o
+}
+
+func (o GetCcHttpsPoliciesListRuleListOutput) ToGetCcHttpsPoliciesListRuleListOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListRuleListOutput {
+	return o
+}
+
+func (o GetCcHttpsPoliciesListRuleListOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesListRuleList) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+func (o GetCcHttpsPoliciesListRuleListOutput) Skey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesListRuleList) string { return v.Skey }).(pulumi.StringOutput)
+}
+
+func (o GetCcHttpsPoliciesListRuleListOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcHttpsPoliciesListRuleList) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetCcHttpsPoliciesListRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcHttpsPoliciesListRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcHttpsPoliciesListRuleList)(nil)).Elem()
+}
+
+func (o GetCcHttpsPoliciesListRuleListArrayOutput) ToGetCcHttpsPoliciesListRuleListArrayOutput() GetCcHttpsPoliciesListRuleListArrayOutput {
+	return o
+}
+
+func (o GetCcHttpsPoliciesListRuleListArrayOutput) ToGetCcHttpsPoliciesListRuleListArrayOutputWithContext(ctx context.Context) GetCcHttpsPoliciesListRuleListArrayOutput {
+	return o
+}
+
+func (o GetCcHttpsPoliciesListRuleListArrayOutput) Index(i pulumi.IntInput) GetCcHttpsPoliciesListRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcHttpsPoliciesListRuleList {
+		return vs[0].([]GetCcHttpsPoliciesListRuleList)[vs[1].(int)]
+	}).(GetCcHttpsPoliciesListRuleListOutput)
+}
+
+type GetDdosPoliciesList struct {
+	BlackIps []string `pulumi:"blackIps"`
+	// Create time of the DDoS policy.
+	CreateTime string `pulumi:"createTime"`
+	// Option list of abnormal check of the DDoS policy.
+	DropOptions []GetDdosPoliciesListDropOption `pulumi:"dropOptions"`
+	// Name of the DDoS policy.
+	Name string `pulumi:"name"`
+	// Message filter options list.
+	PacketFilters []GetDdosPoliciesListPacketFilter `pulumi:"packetFilters"`
+	// ID of the DDoS policy to be query.
+	PolicyId string `pulumi:"policyId"`
+	// Port limits of abnormal check of the DDoS policy.
+	PortFilters []GetDdosPoliciesListPortFilter `pulumi:"portFilters"`
+	// Id of policy case that the DDoS policy works for.
+	SceneId string `pulumi:"sceneId"`
+	// Watermark policy options, and only support one watermark policy at most.
+	WatermarkFilters []GetDdosPoliciesListWatermarkFilter `pulumi:"watermarkFilters"`
+	// Watermark content.
+	WatermarkKeys []GetDdosPoliciesListWatermarkKey `pulumi:"watermarkKeys"`
+	WhiteIps      []string                          `pulumi:"whiteIps"`
+}
+
+// GetDdosPoliciesListInput is an input type that accepts GetDdosPoliciesListArgs and GetDdosPoliciesListOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListInput` via:
+//
+//          GetDdosPoliciesListArgs{...}
+type GetDdosPoliciesListInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListOutput() GetDdosPoliciesListOutput
+	ToGetDdosPoliciesListOutputWithContext(context.Context) GetDdosPoliciesListOutput
+}
+
+type GetDdosPoliciesListArgs struct {
+	BlackIps pulumi.StringArrayInput `pulumi:"blackIps"`
+	// Create time of the DDoS policy.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Option list of abnormal check of the DDoS policy.
+	DropOptions GetDdosPoliciesListDropOptionArrayInput `pulumi:"dropOptions"`
+	// Name of the DDoS policy.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Message filter options list.
+	PacketFilters GetDdosPoliciesListPacketFilterArrayInput `pulumi:"packetFilters"`
+	// ID of the DDoS policy to be query.
+	PolicyId pulumi.StringInput `pulumi:"policyId"`
+	// Port limits of abnormal check of the DDoS policy.
+	PortFilters GetDdosPoliciesListPortFilterArrayInput `pulumi:"portFilters"`
+	// Id of policy case that the DDoS policy works for.
+	SceneId pulumi.StringInput `pulumi:"sceneId"`
+	// Watermark policy options, and only support one watermark policy at most.
+	WatermarkFilters GetDdosPoliciesListWatermarkFilterArrayInput `pulumi:"watermarkFilters"`
+	// Watermark content.
+	WatermarkKeys GetDdosPoliciesListWatermarkKeyArrayInput `pulumi:"watermarkKeys"`
+	WhiteIps      pulumi.StringArrayInput                   `pulumi:"whiteIps"`
+}
+
+func (GetDdosPoliciesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesList)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListArgs) ToGetDdosPoliciesListOutput() GetDdosPoliciesListOutput {
+	return i.ToGetDdosPoliciesListOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListArgs) ToGetDdosPoliciesListOutputWithContext(ctx context.Context) GetDdosPoliciesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListOutput)
+}
+
+// GetDdosPoliciesListArrayInput is an input type that accepts GetDdosPoliciesListArray and GetDdosPoliciesListArrayOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListArrayInput` via:
+//
+//          GetDdosPoliciesListArray{ GetDdosPoliciesListArgs{...} }
+type GetDdosPoliciesListArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListArrayOutput() GetDdosPoliciesListArrayOutput
+	ToGetDdosPoliciesListArrayOutputWithContext(context.Context) GetDdosPoliciesListArrayOutput
+}
+
+type GetDdosPoliciesListArray []GetDdosPoliciesListInput
+
+func (GetDdosPoliciesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesList)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListArray) ToGetDdosPoliciesListArrayOutput() GetDdosPoliciesListArrayOutput {
+	return i.ToGetDdosPoliciesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListArray) ToGetDdosPoliciesListArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListArrayOutput)
+}
+
+type GetDdosPoliciesListOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesList)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListOutput) ToGetDdosPoliciesListOutput() GetDdosPoliciesListOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListOutput) ToGetDdosPoliciesListOutputWithContext(ctx context.Context) GetDdosPoliciesListOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListOutput) BlackIps() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) []string { return v.BlackIps }).(pulumi.StringArrayOutput)
+}
+
+// Create time of the DDoS policy.
+func (o GetDdosPoliciesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Option list of abnormal check of the DDoS policy.
+func (o GetDdosPoliciesListOutput) DropOptions() GetDdosPoliciesListDropOptionArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) []GetDdosPoliciesListDropOption { return v.DropOptions }).(GetDdosPoliciesListDropOptionArrayOutput)
+}
+
+// Name of the DDoS policy.
+func (o GetDdosPoliciesListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Message filter options list.
+func (o GetDdosPoliciesListOutput) PacketFilters() GetDdosPoliciesListPacketFilterArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) []GetDdosPoliciesListPacketFilter { return v.PacketFilters }).(GetDdosPoliciesListPacketFilterArrayOutput)
+}
+
+// ID of the DDoS policy to be query.
+func (o GetDdosPoliciesListOutput) PolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) string { return v.PolicyId }).(pulumi.StringOutput)
+}
+
+// Port limits of abnormal check of the DDoS policy.
+func (o GetDdosPoliciesListOutput) PortFilters() GetDdosPoliciesListPortFilterArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) []GetDdosPoliciesListPortFilter { return v.PortFilters }).(GetDdosPoliciesListPortFilterArrayOutput)
+}
+
+// Id of policy case that the DDoS policy works for.
+func (o GetDdosPoliciesListOutput) SceneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) string { return v.SceneId }).(pulumi.StringOutput)
+}
+
+// Watermark policy options, and only support one watermark policy at most.
+func (o GetDdosPoliciesListOutput) WatermarkFilters() GetDdosPoliciesListWatermarkFilterArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) []GetDdosPoliciesListWatermarkFilter { return v.WatermarkFilters }).(GetDdosPoliciesListWatermarkFilterArrayOutput)
+}
+
+// Watermark content.
+func (o GetDdosPoliciesListOutput) WatermarkKeys() GetDdosPoliciesListWatermarkKeyArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) []GetDdosPoliciesListWatermarkKey { return v.WatermarkKeys }).(GetDdosPoliciesListWatermarkKeyArrayOutput)
+}
+
+func (o GetDdosPoliciesListOutput) WhiteIps() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesList) []string { return v.WhiteIps }).(pulumi.StringArrayOutput)
+}
+
+type GetDdosPoliciesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesList)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListArrayOutput) ToGetDdosPoliciesListArrayOutput() GetDdosPoliciesListArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListArrayOutput) ToGetDdosPoliciesListArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListArrayOutput) Index(i pulumi.IntInput) GetDdosPoliciesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPoliciesList {
+		return vs[0].([]GetDdosPoliciesList)[vs[1].(int)]
+	}).(GetDdosPoliciesListOutput)
+}
+
+type GetDdosPoliciesListDropOption struct {
+	// The number of new connections based on destination IP that trigger suppression of connections.
+	BadConnThreshold int `pulumi:"badConnThreshold"`
+	// Indicate whether to check null connection or not.
+	CheckSyncConn bool `pulumi:"checkSyncConn"`
+	// Connection timeout of abnormal connection check.
+	ConnTimeout int `pulumi:"connTimeout"`
+	// The limit of concurrent connections based on destination IP.
+	DConnLimit int `pulumi:"dConnLimit"`
+	// The limit of new connections based on destination IP.
+	DNewLimit  int  `pulumi:"dNewLimit"`
+	DropAbroad bool `pulumi:"dropAbroad"`
+	// Indicate whether to drop ICMP protocol or not.
+	DropIcmp bool `pulumi:"dropIcmp"`
+	// Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+	DropOther bool `pulumi:"dropOther"`
+	// Indicate whether to drop TCP protocol or not.
+	DropTcp bool `pulumi:"dropTcp"`
+	// Indicate to drop UDP protocol or not.
+	DropUdp bool `pulumi:"dropUdp"`
+	// The limit of ICMP traffic rate.
+	IcmpMbpsLimit int `pulumi:"icmpMbpsLimit"`
+	// Indicate to enable null connection or not.
+	NullConnEnable bool `pulumi:"nullConnEnable"`
+	// The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.
+	OtherMbpsLimit int `pulumi:"otherMbpsLimit"`
+	// The limit of concurrent connections based on source IP.
+	SConnLimit int `pulumi:"sConnLimit"`
+	// The limit of new connections based on source IP.
+	SNewLimit int `pulumi:"sNewLimit"`
+	// The limit of syn of abnormal connection check.
+	SynLimit int `pulumi:"synLimit"`
+	// The percentage of syn in ack of abnormal connection check.
+	SynRate int `pulumi:"synRate"`
+	// The limit of TCP traffic.
+	TcpMbpsLimit int `pulumi:"tcpMbpsLimit"`
+	// The limit of UDP traffic rate.
+	UdpMbpsLimit int `pulumi:"udpMbpsLimit"`
+}
+
+// GetDdosPoliciesListDropOptionInput is an input type that accepts GetDdosPoliciesListDropOptionArgs and GetDdosPoliciesListDropOptionOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListDropOptionInput` via:
+//
+//          GetDdosPoliciesListDropOptionArgs{...}
+type GetDdosPoliciesListDropOptionInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListDropOptionOutput() GetDdosPoliciesListDropOptionOutput
+	ToGetDdosPoliciesListDropOptionOutputWithContext(context.Context) GetDdosPoliciesListDropOptionOutput
+}
+
+type GetDdosPoliciesListDropOptionArgs struct {
+	// The number of new connections based on destination IP that trigger suppression of connections.
+	BadConnThreshold pulumi.IntInput `pulumi:"badConnThreshold"`
+	// Indicate whether to check null connection or not.
+	CheckSyncConn pulumi.BoolInput `pulumi:"checkSyncConn"`
+	// Connection timeout of abnormal connection check.
+	ConnTimeout pulumi.IntInput `pulumi:"connTimeout"`
+	// The limit of concurrent connections based on destination IP.
+	DConnLimit pulumi.IntInput `pulumi:"dConnLimit"`
+	// The limit of new connections based on destination IP.
+	DNewLimit  pulumi.IntInput  `pulumi:"dNewLimit"`
+	DropAbroad pulumi.BoolInput `pulumi:"dropAbroad"`
+	// Indicate whether to drop ICMP protocol or not.
+	DropIcmp pulumi.BoolInput `pulumi:"dropIcmp"`
+	// Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+	DropOther pulumi.BoolInput `pulumi:"dropOther"`
+	// Indicate whether to drop TCP protocol or not.
+	DropTcp pulumi.BoolInput `pulumi:"dropTcp"`
+	// Indicate to drop UDP protocol or not.
+	DropUdp pulumi.BoolInput `pulumi:"dropUdp"`
+	// The limit of ICMP traffic rate.
+	IcmpMbpsLimit pulumi.IntInput `pulumi:"icmpMbpsLimit"`
+	// Indicate to enable null connection or not.
+	NullConnEnable pulumi.BoolInput `pulumi:"nullConnEnable"`
+	// The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.
+	OtherMbpsLimit pulumi.IntInput `pulumi:"otherMbpsLimit"`
+	// The limit of concurrent connections based on source IP.
+	SConnLimit pulumi.IntInput `pulumi:"sConnLimit"`
+	// The limit of new connections based on source IP.
+	SNewLimit pulumi.IntInput `pulumi:"sNewLimit"`
+	// The limit of syn of abnormal connection check.
+	SynLimit pulumi.IntInput `pulumi:"synLimit"`
+	// The percentage of syn in ack of abnormal connection check.
+	SynRate pulumi.IntInput `pulumi:"synRate"`
+	// The limit of TCP traffic.
+	TcpMbpsLimit pulumi.IntInput `pulumi:"tcpMbpsLimit"`
+	// The limit of UDP traffic rate.
+	UdpMbpsLimit pulumi.IntInput `pulumi:"udpMbpsLimit"`
+}
+
+func (GetDdosPoliciesListDropOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListDropOption)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListDropOptionArgs) ToGetDdosPoliciesListDropOptionOutput() GetDdosPoliciesListDropOptionOutput {
+	return i.ToGetDdosPoliciesListDropOptionOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListDropOptionArgs) ToGetDdosPoliciesListDropOptionOutputWithContext(ctx context.Context) GetDdosPoliciesListDropOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListDropOptionOutput)
+}
+
+// GetDdosPoliciesListDropOptionArrayInput is an input type that accepts GetDdosPoliciesListDropOptionArray and GetDdosPoliciesListDropOptionArrayOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListDropOptionArrayInput` via:
+//
+//          GetDdosPoliciesListDropOptionArray{ GetDdosPoliciesListDropOptionArgs{...} }
+type GetDdosPoliciesListDropOptionArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListDropOptionArrayOutput() GetDdosPoliciesListDropOptionArrayOutput
+	ToGetDdosPoliciesListDropOptionArrayOutputWithContext(context.Context) GetDdosPoliciesListDropOptionArrayOutput
+}
+
+type GetDdosPoliciesListDropOptionArray []GetDdosPoliciesListDropOptionInput
+
+func (GetDdosPoliciesListDropOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListDropOption)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListDropOptionArray) ToGetDdosPoliciesListDropOptionArrayOutput() GetDdosPoliciesListDropOptionArrayOutput {
+	return i.ToGetDdosPoliciesListDropOptionArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListDropOptionArray) ToGetDdosPoliciesListDropOptionArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListDropOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListDropOptionArrayOutput)
+}
+
+type GetDdosPoliciesListDropOptionOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListDropOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListDropOption)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListDropOptionOutput) ToGetDdosPoliciesListDropOptionOutput() GetDdosPoliciesListDropOptionOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListDropOptionOutput) ToGetDdosPoliciesListDropOptionOutputWithContext(ctx context.Context) GetDdosPoliciesListDropOptionOutput {
+	return o
+}
+
+// The number of new connections based on destination IP that trigger suppression of connections.
+func (o GetDdosPoliciesListDropOptionOutput) BadConnThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.BadConnThreshold }).(pulumi.IntOutput)
+}
+
+// Indicate whether to check null connection or not.
+func (o GetDdosPoliciesListDropOptionOutput) CheckSyncConn() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.CheckSyncConn }).(pulumi.BoolOutput)
+}
+
+// Connection timeout of abnormal connection check.
+func (o GetDdosPoliciesListDropOptionOutput) ConnTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.ConnTimeout }).(pulumi.IntOutput)
+}
+
+// The limit of concurrent connections based on destination IP.
+func (o GetDdosPoliciesListDropOptionOutput) DConnLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.DConnLimit }).(pulumi.IntOutput)
+}
+
+// The limit of new connections based on destination IP.
+func (o GetDdosPoliciesListDropOptionOutput) DNewLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.DNewLimit }).(pulumi.IntOutput)
+}
+
+func (o GetDdosPoliciesListDropOptionOutput) DropAbroad() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.DropAbroad }).(pulumi.BoolOutput)
+}
+
+// Indicate whether to drop ICMP protocol or not.
+func (o GetDdosPoliciesListDropOptionOutput) DropIcmp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.DropIcmp }).(pulumi.BoolOutput)
+}
+
+// Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+func (o GetDdosPoliciesListDropOptionOutput) DropOther() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.DropOther }).(pulumi.BoolOutput)
+}
+
+// Indicate whether to drop TCP protocol or not.
+func (o GetDdosPoliciesListDropOptionOutput) DropTcp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.DropTcp }).(pulumi.BoolOutput)
+}
+
+// Indicate to drop UDP protocol or not.
+func (o GetDdosPoliciesListDropOptionOutput) DropUdp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.DropUdp }).(pulumi.BoolOutput)
+}
+
+// The limit of ICMP traffic rate.
+func (o GetDdosPoliciesListDropOptionOutput) IcmpMbpsLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.IcmpMbpsLimit }).(pulumi.IntOutput)
+}
+
+// Indicate to enable null connection or not.
+func (o GetDdosPoliciesListDropOptionOutput) NullConnEnable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.NullConnEnable }).(pulumi.BoolOutput)
+}
+
+// The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.
+func (o GetDdosPoliciesListDropOptionOutput) OtherMbpsLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.OtherMbpsLimit }).(pulumi.IntOutput)
+}
+
+// The limit of concurrent connections based on source IP.
+func (o GetDdosPoliciesListDropOptionOutput) SConnLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.SConnLimit }).(pulumi.IntOutput)
+}
+
+// The limit of new connections based on source IP.
+func (o GetDdosPoliciesListDropOptionOutput) SNewLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.SNewLimit }).(pulumi.IntOutput)
+}
+
+// The limit of syn of abnormal connection check.
+func (o GetDdosPoliciesListDropOptionOutput) SynLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.SynLimit }).(pulumi.IntOutput)
+}
+
+// The percentage of syn in ack of abnormal connection check.
+func (o GetDdosPoliciesListDropOptionOutput) SynRate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.SynRate }).(pulumi.IntOutput)
+}
+
+// The limit of TCP traffic.
+func (o GetDdosPoliciesListDropOptionOutput) TcpMbpsLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.TcpMbpsLimit }).(pulumi.IntOutput)
+}
+
+// The limit of UDP traffic rate.
+func (o GetDdosPoliciesListDropOptionOutput) UdpMbpsLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.UdpMbpsLimit }).(pulumi.IntOutput)
+}
+
+type GetDdosPoliciesListDropOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListDropOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListDropOption)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListDropOptionArrayOutput) ToGetDdosPoliciesListDropOptionArrayOutput() GetDdosPoliciesListDropOptionArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListDropOptionArrayOutput) ToGetDdosPoliciesListDropOptionArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListDropOptionArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListDropOptionArrayOutput) Index(i pulumi.IntInput) GetDdosPoliciesListDropOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPoliciesListDropOption {
+		return vs[0].([]GetDdosPoliciesListDropOption)[vs[1].(int)]
+	}).(GetDdosPoliciesListDropOptionOutput)
+}
+
+type GetDdosPoliciesListPacketFilter struct {
+	// Action of port to take.
+	Action string `pulumi:"action"`
+	// End port of the destination.
+	DEndPort int `pulumi:"dEndPort"`
+	// Start port of the destination.
+	DStartPort int `pulumi:"dStartPort"`
+	// The depth of match.
+	Depth int `pulumi:"depth"`
+	// Indicate whether to include the key word/regular expression or not.
+	IsInclude bool `pulumi:"isInclude"`
+	// Indicate whether to check load or not.
+	MatchBegin string `pulumi:"matchBegin"`
+	// The key word or regular expression.
+	MatchStr string `pulumi:"matchStr"`
+	// Match type.
+	MatchType string `pulumi:"matchType"`
+	// The offset of watermark.
+	Offset int `pulumi:"offset"`
+	// The max length of the packet.
+	PktLengthMax int `pulumi:"pktLengthMax"`
+	// The minimum length of the packet.
+	PktLengthMin int `pulumi:"pktLengthMin"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+	// End port of the source.
+	SEndPort int `pulumi:"sEndPort"`
+	// Start port of the source.
+	SStartPort int `pulumi:"sStartPort"`
+}
+
+// GetDdosPoliciesListPacketFilterInput is an input type that accepts GetDdosPoliciesListPacketFilterArgs and GetDdosPoliciesListPacketFilterOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListPacketFilterInput` via:
+//
+//          GetDdosPoliciesListPacketFilterArgs{...}
+type GetDdosPoliciesListPacketFilterInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListPacketFilterOutput() GetDdosPoliciesListPacketFilterOutput
+	ToGetDdosPoliciesListPacketFilterOutputWithContext(context.Context) GetDdosPoliciesListPacketFilterOutput
+}
+
+type GetDdosPoliciesListPacketFilterArgs struct {
+	// Action of port to take.
+	Action pulumi.StringInput `pulumi:"action"`
+	// End port of the destination.
+	DEndPort pulumi.IntInput `pulumi:"dEndPort"`
+	// Start port of the destination.
+	DStartPort pulumi.IntInput `pulumi:"dStartPort"`
+	// The depth of match.
+	Depth pulumi.IntInput `pulumi:"depth"`
+	// Indicate whether to include the key word/regular expression or not.
+	IsInclude pulumi.BoolInput `pulumi:"isInclude"`
+	// Indicate whether to check load or not.
+	MatchBegin pulumi.StringInput `pulumi:"matchBegin"`
+	// The key word or regular expression.
+	MatchStr pulumi.StringInput `pulumi:"matchStr"`
+	// Match type.
+	MatchType pulumi.StringInput `pulumi:"matchType"`
+	// The offset of watermark.
+	Offset pulumi.IntInput `pulumi:"offset"`
+	// The max length of the packet.
+	PktLengthMax pulumi.IntInput `pulumi:"pktLengthMax"`
+	// The minimum length of the packet.
+	PktLengthMin pulumi.IntInput `pulumi:"pktLengthMin"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// End port of the source.
+	SEndPort pulumi.IntInput `pulumi:"sEndPort"`
+	// Start port of the source.
+	SStartPort pulumi.IntInput `pulumi:"sStartPort"`
+}
+
+func (GetDdosPoliciesListPacketFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListPacketFilter)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListPacketFilterArgs) ToGetDdosPoliciesListPacketFilterOutput() GetDdosPoliciesListPacketFilterOutput {
+	return i.ToGetDdosPoliciesListPacketFilterOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListPacketFilterArgs) ToGetDdosPoliciesListPacketFilterOutputWithContext(ctx context.Context) GetDdosPoliciesListPacketFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListPacketFilterOutput)
+}
+
+// GetDdosPoliciesListPacketFilterArrayInput is an input type that accepts GetDdosPoliciesListPacketFilterArray and GetDdosPoliciesListPacketFilterArrayOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListPacketFilterArrayInput` via:
+//
+//          GetDdosPoliciesListPacketFilterArray{ GetDdosPoliciesListPacketFilterArgs{...} }
+type GetDdosPoliciesListPacketFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListPacketFilterArrayOutput() GetDdosPoliciesListPacketFilterArrayOutput
+	ToGetDdosPoliciesListPacketFilterArrayOutputWithContext(context.Context) GetDdosPoliciesListPacketFilterArrayOutput
+}
+
+type GetDdosPoliciesListPacketFilterArray []GetDdosPoliciesListPacketFilterInput
+
+func (GetDdosPoliciesListPacketFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListPacketFilter)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListPacketFilterArray) ToGetDdosPoliciesListPacketFilterArrayOutput() GetDdosPoliciesListPacketFilterArrayOutput {
+	return i.ToGetDdosPoliciesListPacketFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListPacketFilterArray) ToGetDdosPoliciesListPacketFilterArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListPacketFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListPacketFilterArrayOutput)
+}
+
+type GetDdosPoliciesListPacketFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListPacketFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListPacketFilter)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListPacketFilterOutput) ToGetDdosPoliciesListPacketFilterOutput() GetDdosPoliciesListPacketFilterOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListPacketFilterOutput) ToGetDdosPoliciesListPacketFilterOutputWithContext(ctx context.Context) GetDdosPoliciesListPacketFilterOutput {
+	return o
+}
+
+// Action of port to take.
+func (o GetDdosPoliciesListPacketFilterOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// End port of the destination.
+func (o GetDdosPoliciesListPacketFilterOutput) DEndPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.DEndPort }).(pulumi.IntOutput)
+}
+
+// Start port of the destination.
+func (o GetDdosPoliciesListPacketFilterOutput) DStartPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.DStartPort }).(pulumi.IntOutput)
+}
+
+// The depth of match.
+func (o GetDdosPoliciesListPacketFilterOutput) Depth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.Depth }).(pulumi.IntOutput)
+}
+
+// Indicate whether to include the key word/regular expression or not.
+func (o GetDdosPoliciesListPacketFilterOutput) IsInclude() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) bool { return v.IsInclude }).(pulumi.BoolOutput)
+}
+
+// Indicate whether to check load or not.
+func (o GetDdosPoliciesListPacketFilterOutput) MatchBegin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) string { return v.MatchBegin }).(pulumi.StringOutput)
+}
+
+// The key word or regular expression.
+func (o GetDdosPoliciesListPacketFilterOutput) MatchStr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) string { return v.MatchStr }).(pulumi.StringOutput)
+}
+
+// Match type.
+func (o GetDdosPoliciesListPacketFilterOutput) MatchType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) string { return v.MatchType }).(pulumi.StringOutput)
+}
+
+// The offset of watermark.
+func (o GetDdosPoliciesListPacketFilterOutput) Offset() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.Offset }).(pulumi.IntOutput)
+}
+
+// The max length of the packet.
+func (o GetDdosPoliciesListPacketFilterOutput) PktLengthMax() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.PktLengthMax }).(pulumi.IntOutput)
+}
+
+// The minimum length of the packet.
+func (o GetDdosPoliciesListPacketFilterOutput) PktLengthMin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.PktLengthMin }).(pulumi.IntOutput)
+}
+
+// Protocol.
+func (o GetDdosPoliciesListPacketFilterOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// End port of the source.
+func (o GetDdosPoliciesListPacketFilterOutput) SEndPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.SEndPort }).(pulumi.IntOutput)
+}
+
+// Start port of the source.
+func (o GetDdosPoliciesListPacketFilterOutput) SStartPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPacketFilter) int { return v.SStartPort }).(pulumi.IntOutput)
+}
+
+type GetDdosPoliciesListPacketFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListPacketFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListPacketFilter)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListPacketFilterArrayOutput) ToGetDdosPoliciesListPacketFilterArrayOutput() GetDdosPoliciesListPacketFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListPacketFilterArrayOutput) ToGetDdosPoliciesListPacketFilterArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListPacketFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListPacketFilterArrayOutput) Index(i pulumi.IntInput) GetDdosPoliciesListPacketFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPoliciesListPacketFilter {
+		return vs[0].([]GetDdosPoliciesListPacketFilter)[vs[1].(int)]
+	}).(GetDdosPoliciesListPacketFilterOutput)
+}
+
+type GetDdosPoliciesListPortFilter struct {
+	// Action of port to take.
+	Action string `pulumi:"action"`
+	// End port.
+	EndPort int `pulumi:"endPort"`
+	// The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.
+	Kind int `pulumi:"kind"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+	// Start port.
+	StartPort int `pulumi:"startPort"`
+}
+
+// GetDdosPoliciesListPortFilterInput is an input type that accepts GetDdosPoliciesListPortFilterArgs and GetDdosPoliciesListPortFilterOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListPortFilterInput` via:
+//
+//          GetDdosPoliciesListPortFilterArgs{...}
+type GetDdosPoliciesListPortFilterInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListPortFilterOutput() GetDdosPoliciesListPortFilterOutput
+	ToGetDdosPoliciesListPortFilterOutputWithContext(context.Context) GetDdosPoliciesListPortFilterOutput
+}
+
+type GetDdosPoliciesListPortFilterArgs struct {
+	// Action of port to take.
+	Action pulumi.StringInput `pulumi:"action"`
+	// End port.
+	EndPort pulumi.IntInput `pulumi:"endPort"`
+	// The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.
+	Kind pulumi.IntInput `pulumi:"kind"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Start port.
+	StartPort pulumi.IntInput `pulumi:"startPort"`
+}
+
+func (GetDdosPoliciesListPortFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListPortFilter)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListPortFilterArgs) ToGetDdosPoliciesListPortFilterOutput() GetDdosPoliciesListPortFilterOutput {
+	return i.ToGetDdosPoliciesListPortFilterOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListPortFilterArgs) ToGetDdosPoliciesListPortFilterOutputWithContext(ctx context.Context) GetDdosPoliciesListPortFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListPortFilterOutput)
+}
+
+// GetDdosPoliciesListPortFilterArrayInput is an input type that accepts GetDdosPoliciesListPortFilterArray and GetDdosPoliciesListPortFilterArrayOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListPortFilterArrayInput` via:
+//
+//          GetDdosPoliciesListPortFilterArray{ GetDdosPoliciesListPortFilterArgs{...} }
+type GetDdosPoliciesListPortFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListPortFilterArrayOutput() GetDdosPoliciesListPortFilterArrayOutput
+	ToGetDdosPoliciesListPortFilterArrayOutputWithContext(context.Context) GetDdosPoliciesListPortFilterArrayOutput
+}
+
+type GetDdosPoliciesListPortFilterArray []GetDdosPoliciesListPortFilterInput
+
+func (GetDdosPoliciesListPortFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListPortFilter)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListPortFilterArray) ToGetDdosPoliciesListPortFilterArrayOutput() GetDdosPoliciesListPortFilterArrayOutput {
+	return i.ToGetDdosPoliciesListPortFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListPortFilterArray) ToGetDdosPoliciesListPortFilterArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListPortFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListPortFilterArrayOutput)
+}
+
+type GetDdosPoliciesListPortFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListPortFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListPortFilter)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListPortFilterOutput) ToGetDdosPoliciesListPortFilterOutput() GetDdosPoliciesListPortFilterOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListPortFilterOutput) ToGetDdosPoliciesListPortFilterOutputWithContext(ctx context.Context) GetDdosPoliciesListPortFilterOutput {
+	return o
+}
+
+// Action of port to take.
+func (o GetDdosPoliciesListPortFilterOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPortFilter) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// End port.
+func (o GetDdosPoliciesListPortFilterOutput) EndPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPortFilter) int { return v.EndPort }).(pulumi.IntOutput)
+}
+
+// The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.
+func (o GetDdosPoliciesListPortFilterOutput) Kind() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPortFilter) int { return v.Kind }).(pulumi.IntOutput)
+}
+
+// Protocol.
+func (o GetDdosPoliciesListPortFilterOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPortFilter) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Start port.
+func (o GetDdosPoliciesListPortFilterOutput) StartPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListPortFilter) int { return v.StartPort }).(pulumi.IntOutput)
+}
+
+type GetDdosPoliciesListPortFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListPortFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListPortFilter)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListPortFilterArrayOutput) ToGetDdosPoliciesListPortFilterArrayOutput() GetDdosPoliciesListPortFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListPortFilterArrayOutput) ToGetDdosPoliciesListPortFilterArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListPortFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListPortFilterArrayOutput) Index(i pulumi.IntInput) GetDdosPoliciesListPortFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPoliciesListPortFilter {
+		return vs[0].([]GetDdosPoliciesListPortFilter)[vs[1].(int)]
+	}).(GetDdosPoliciesListPortFilterOutput)
+}
+
+type GetDdosPoliciesListWatermarkFilter struct {
+	// Indicate whether to auto-remove the watermark or not.
+	AutoRemove bool `pulumi:"autoRemove"`
+	// The offset of watermark.
+	Offset int `pulumi:"offset"`
+	// Indicate whether to auto-remove the watermark or not.
+	OpenSwitch bool `pulumi:"openSwitch"`
+	// Port range of TCP.
+	TcpPortLists []string `pulumi:"tcpPortLists"`
+	// Port range of TCP.
+	UdpPortLists []string `pulumi:"udpPortLists"`
+}
+
+// GetDdosPoliciesListWatermarkFilterInput is an input type that accepts GetDdosPoliciesListWatermarkFilterArgs and GetDdosPoliciesListWatermarkFilterOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListWatermarkFilterInput` via:
+//
+//          GetDdosPoliciesListWatermarkFilterArgs{...}
+type GetDdosPoliciesListWatermarkFilterInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListWatermarkFilterOutput() GetDdosPoliciesListWatermarkFilterOutput
+	ToGetDdosPoliciesListWatermarkFilterOutputWithContext(context.Context) GetDdosPoliciesListWatermarkFilterOutput
+}
+
+type GetDdosPoliciesListWatermarkFilterArgs struct {
+	// Indicate whether to auto-remove the watermark or not.
+	AutoRemove pulumi.BoolInput `pulumi:"autoRemove"`
+	// The offset of watermark.
+	Offset pulumi.IntInput `pulumi:"offset"`
+	// Indicate whether to auto-remove the watermark or not.
+	OpenSwitch pulumi.BoolInput `pulumi:"openSwitch"`
+	// Port range of TCP.
+	TcpPortLists pulumi.StringArrayInput `pulumi:"tcpPortLists"`
+	// Port range of TCP.
+	UdpPortLists pulumi.StringArrayInput `pulumi:"udpPortLists"`
+}
+
+func (GetDdosPoliciesListWatermarkFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListWatermarkFilter)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListWatermarkFilterArgs) ToGetDdosPoliciesListWatermarkFilterOutput() GetDdosPoliciesListWatermarkFilterOutput {
+	return i.ToGetDdosPoliciesListWatermarkFilterOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListWatermarkFilterArgs) ToGetDdosPoliciesListWatermarkFilterOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListWatermarkFilterOutput)
+}
+
+// GetDdosPoliciesListWatermarkFilterArrayInput is an input type that accepts GetDdosPoliciesListWatermarkFilterArray and GetDdosPoliciesListWatermarkFilterArrayOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListWatermarkFilterArrayInput` via:
+//
+//          GetDdosPoliciesListWatermarkFilterArray{ GetDdosPoliciesListWatermarkFilterArgs{...} }
+type GetDdosPoliciesListWatermarkFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListWatermarkFilterArrayOutput() GetDdosPoliciesListWatermarkFilterArrayOutput
+	ToGetDdosPoliciesListWatermarkFilterArrayOutputWithContext(context.Context) GetDdosPoliciesListWatermarkFilterArrayOutput
+}
+
+type GetDdosPoliciesListWatermarkFilterArray []GetDdosPoliciesListWatermarkFilterInput
+
+func (GetDdosPoliciesListWatermarkFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListWatermarkFilter)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListWatermarkFilterArray) ToGetDdosPoliciesListWatermarkFilterArrayOutput() GetDdosPoliciesListWatermarkFilterArrayOutput {
+	return i.ToGetDdosPoliciesListWatermarkFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListWatermarkFilterArray) ToGetDdosPoliciesListWatermarkFilterArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListWatermarkFilterArrayOutput)
+}
+
+type GetDdosPoliciesListWatermarkFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListWatermarkFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListWatermarkFilter)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListWatermarkFilterOutput) ToGetDdosPoliciesListWatermarkFilterOutput() GetDdosPoliciesListWatermarkFilterOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListWatermarkFilterOutput) ToGetDdosPoliciesListWatermarkFilterOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkFilterOutput {
+	return o
+}
+
+// Indicate whether to auto-remove the watermark or not.
+func (o GetDdosPoliciesListWatermarkFilterOutput) AutoRemove() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkFilter) bool { return v.AutoRemove }).(pulumi.BoolOutput)
+}
+
+// The offset of watermark.
+func (o GetDdosPoliciesListWatermarkFilterOutput) Offset() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkFilter) int { return v.Offset }).(pulumi.IntOutput)
+}
+
+// Indicate whether to auto-remove the watermark or not.
+func (o GetDdosPoliciesListWatermarkFilterOutput) OpenSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkFilter) bool { return v.OpenSwitch }).(pulumi.BoolOutput)
+}
+
+// Port range of TCP.
+func (o GetDdosPoliciesListWatermarkFilterOutput) TcpPortLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkFilter) []string { return v.TcpPortLists }).(pulumi.StringArrayOutput)
+}
+
+// Port range of TCP.
+func (o GetDdosPoliciesListWatermarkFilterOutput) UdpPortLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkFilter) []string { return v.UdpPortLists }).(pulumi.StringArrayOutput)
+}
+
+type GetDdosPoliciesListWatermarkFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListWatermarkFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListWatermarkFilter)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListWatermarkFilterArrayOutput) ToGetDdosPoliciesListWatermarkFilterArrayOutput() GetDdosPoliciesListWatermarkFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListWatermarkFilterArrayOutput) ToGetDdosPoliciesListWatermarkFilterArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListWatermarkFilterArrayOutput) Index(i pulumi.IntInput) GetDdosPoliciesListWatermarkFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPoliciesListWatermarkFilter {
+		return vs[0].([]GetDdosPoliciesListWatermarkFilter)[vs[1].(int)]
+	}).(GetDdosPoliciesListWatermarkFilterOutput)
+}
+
+type GetDdosPoliciesListWatermarkKey struct {
+	// Content of the watermark.
+	Content string `pulumi:"content"`
+	// Create time of the DDoS policy.
+	CreateTime *string `pulumi:"createTime"`
+	// Id of the watermark.
+	Id string `pulumi:"id"`
+	// Indicate whether to auto-remove the watermark or not.
+	OpenSwitch bool `pulumi:"openSwitch"`
+}
+
+// GetDdosPoliciesListWatermarkKeyInput is an input type that accepts GetDdosPoliciesListWatermarkKeyArgs and GetDdosPoliciesListWatermarkKeyOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListWatermarkKeyInput` via:
+//
+//          GetDdosPoliciesListWatermarkKeyArgs{...}
+type GetDdosPoliciesListWatermarkKeyInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListWatermarkKeyOutput() GetDdosPoliciesListWatermarkKeyOutput
+	ToGetDdosPoliciesListWatermarkKeyOutputWithContext(context.Context) GetDdosPoliciesListWatermarkKeyOutput
+}
+
+type GetDdosPoliciesListWatermarkKeyArgs struct {
+	// Content of the watermark.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Create time of the DDoS policy.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Id of the watermark.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Indicate whether to auto-remove the watermark or not.
+	OpenSwitch pulumi.BoolInput `pulumi:"openSwitch"`
+}
+
+func (GetDdosPoliciesListWatermarkKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListWatermarkKey)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListWatermarkKeyArgs) ToGetDdosPoliciesListWatermarkKeyOutput() GetDdosPoliciesListWatermarkKeyOutput {
+	return i.ToGetDdosPoliciesListWatermarkKeyOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListWatermarkKeyArgs) ToGetDdosPoliciesListWatermarkKeyOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListWatermarkKeyOutput)
+}
+
+// GetDdosPoliciesListWatermarkKeyArrayInput is an input type that accepts GetDdosPoliciesListWatermarkKeyArray and GetDdosPoliciesListWatermarkKeyArrayOutput values.
+// You can construct a concrete instance of `GetDdosPoliciesListWatermarkKeyArrayInput` via:
+//
+//          GetDdosPoliciesListWatermarkKeyArray{ GetDdosPoliciesListWatermarkKeyArgs{...} }
+type GetDdosPoliciesListWatermarkKeyArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPoliciesListWatermarkKeyArrayOutput() GetDdosPoliciesListWatermarkKeyArrayOutput
+	ToGetDdosPoliciesListWatermarkKeyArrayOutputWithContext(context.Context) GetDdosPoliciesListWatermarkKeyArrayOutput
+}
+
+type GetDdosPoliciesListWatermarkKeyArray []GetDdosPoliciesListWatermarkKeyInput
+
+func (GetDdosPoliciesListWatermarkKeyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListWatermarkKey)(nil)).Elem()
+}
+
+func (i GetDdosPoliciesListWatermarkKeyArray) ToGetDdosPoliciesListWatermarkKeyArrayOutput() GetDdosPoliciesListWatermarkKeyArrayOutput {
+	return i.ToGetDdosPoliciesListWatermarkKeyArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPoliciesListWatermarkKeyArray) ToGetDdosPoliciesListWatermarkKeyArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkKeyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPoliciesListWatermarkKeyArrayOutput)
+}
+
+type GetDdosPoliciesListWatermarkKeyOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListWatermarkKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPoliciesListWatermarkKey)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListWatermarkKeyOutput) ToGetDdosPoliciesListWatermarkKeyOutput() GetDdosPoliciesListWatermarkKeyOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListWatermarkKeyOutput) ToGetDdosPoliciesListWatermarkKeyOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkKeyOutput {
+	return o
+}
+
+// Content of the watermark.
+func (o GetDdosPoliciesListWatermarkKeyOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkKey) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Create time of the DDoS policy.
+func (o GetDdosPoliciesListWatermarkKeyOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkKey) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// Id of the watermark.
+func (o GetDdosPoliciesListWatermarkKeyOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkKey) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Indicate whether to auto-remove the watermark or not.
+func (o GetDdosPoliciesListWatermarkKeyOutput) OpenSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDdosPoliciesListWatermarkKey) bool { return v.OpenSwitch }).(pulumi.BoolOutput)
+}
+
+type GetDdosPoliciesListWatermarkKeyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPoliciesListWatermarkKeyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPoliciesListWatermarkKey)(nil)).Elem()
+}
+
+func (o GetDdosPoliciesListWatermarkKeyArrayOutput) ToGetDdosPoliciesListWatermarkKeyArrayOutput() GetDdosPoliciesListWatermarkKeyArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListWatermarkKeyArrayOutput) ToGetDdosPoliciesListWatermarkKeyArrayOutputWithContext(ctx context.Context) GetDdosPoliciesListWatermarkKeyArrayOutput {
+	return o
+}
+
+func (o GetDdosPoliciesListWatermarkKeyArrayOutput) Index(i pulumi.IntInput) GetDdosPoliciesListWatermarkKeyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPoliciesListWatermarkKey {
+		return vs[0].([]GetDdosPoliciesListWatermarkKey)[vs[1].(int)]
+	}).(GetDdosPoliciesListWatermarkKeyOutput)
+}
+
+type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList struct {
+	// Id of the policy to be queried.
+	PolicyId string `pulumi:"policyId"`
+	// ID of the attached resource to be queried.
+	ResourceId string `pulumi:"resourceId"`
+	// Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+	ResourceType string `pulumi:"resourceType"`
+}
+
+// GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput is an input type that accepts GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs and GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput values.
+// You can construct a concrete instance of `GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput` via:
+//
+//          GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...}
+type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput interface {
+	pulumi.Input
+
+	ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput() GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput
+	ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(context.Context) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput
+}
+
+type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs struct {
+	// Id of the policy to be queried.
+	PolicyId pulumi.StringInput `pulumi:"policyId"`
+	// ID of the attached resource to be queried.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+}
+
+func (GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
+}
+
+func (i GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput() GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
+	return i.ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(context.Background())
+}
+
+func (i GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(ctx context.Context) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput)
+}
+
+// GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput is an input type that accepts GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray and GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput values.
+// You can construct a concrete instance of `GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput` via:
+//
+//          GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray{ GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...} }
+type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput() GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput
+	ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(context.Context) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput
+}
+
+type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray []GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput
+
+func (GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
+}
+
+func (i GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput() GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
+	return i.ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(ctx context.Context) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput)
+}
+
+type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
+}
+
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput() GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
+	return o
+}
+
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutputWithContext(ctx context.Context) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
+	return o
+}
+
+// Id of the policy to be queried.
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) PolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList) string { return v.PolicyId }).(pulumi.StringOutput)
+}
+
+// ID of the attached resource to be queried.
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList)(nil)).Elem()
+}
+
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput() GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
+	return o
+}
+
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) ToGetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutputWithContext(ctx context.Context) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput {
+	return o
+}
+
+func (o GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput) Index(i pulumi.IntInput) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList {
+		return vs[0].([]GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList)[vs[1].(int)]
+	}).(GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput)
+}
+
+type GetDdosPolicyCasesList struct {
+	// App protocol set of the DDoS policy case.
+	AppProtocols []string `pulumi:"appProtocols"`
+	// App type of the DDoS policy case.
+	AppType string `pulumi:"appType"`
+	// Create time of the DDoS policy case.
+	CreateTime string `pulumi:"createTime"`
+	// Indicate whether the service involves overseas or not.
+	HasAbroad string `pulumi:"hasAbroad"`
+	// Indicate whether the service actively initiates TCP requests or not.
+	HasInitiateTcp string `pulumi:"hasInitiateTcp"`
+	// Indicate whether the actively initiate UDP requests or not.
+	HasInitiateUdp string `pulumi:"hasInitiateUdp"`
+	// Indicate whether the service involves VPN service or not.
+	HasVpn string `pulumi:"hasVpn"`
+	// The max length of TCP message package.
+	MaxTcpPackageLen string `pulumi:"maxTcpPackageLen"`
+	// The max length of UDP message package.
+	MaxUdpPackageLen string `pulumi:"maxUdpPackageLen"`
+	// The minimum length of TCP message package.
+	MinTcpPackageLen string `pulumi:"minTcpPackageLen"`
+	// The minimum length of UDP message package.
+	MinUdpPackageLen string `pulumi:"minUdpPackageLen"`
+	// Name of the DDoS policy case.
+	Name string `pulumi:"name"`
+	// The port that actively initiates TCP requests.
+	PeerTcpPort string `pulumi:"peerTcpPort"`
+	// The port that actively initiates UDP requests.
+	PeerUdpPort string `pulumi:"peerUdpPort"`
+	// Platform set of the DDoS policy case.
+	PlatformTypes []string `pulumi:"platformTypes"`
+	// Type of the resource that the DDoS policy case works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+	ResourceType string `pulumi:"resourceType"`
+	// ID of the DDoS policy case to be query.
+	SceneId string `pulumi:"sceneId"`
+	// End port of the TCP service.
+	TcpEndPort string `pulumi:"tcpEndPort"`
+	// The fixed signature of TCP protocol load.
+	TcpFootprint string `pulumi:"tcpFootprint"`
+	// Start port of the TCP service.
+	TcpStartPort string `pulumi:"tcpStartPort"`
+	// End port of the UDP service.
+	UdpEndPort string `pulumi:"udpEndPort"`
+	// The fixed signature of TCP protocol load.
+	UdpFootprint string `pulumi:"udpFootprint"`
+	// Start port of the UDP service.
+	UdpStartPort string `pulumi:"udpStartPort"`
+	// Web API url set.
+	WebApiUrls []string `pulumi:"webApiUrls"`
+}
+
+// GetDdosPolicyCasesListInput is an input type that accepts GetDdosPolicyCasesListArgs and GetDdosPolicyCasesListOutput values.
+// You can construct a concrete instance of `GetDdosPolicyCasesListInput` via:
+//
+//          GetDdosPolicyCasesListArgs{...}
+type GetDdosPolicyCasesListInput interface {
+	pulumi.Input
+
+	ToGetDdosPolicyCasesListOutput() GetDdosPolicyCasesListOutput
+	ToGetDdosPolicyCasesListOutputWithContext(context.Context) GetDdosPolicyCasesListOutput
+}
+
+type GetDdosPolicyCasesListArgs struct {
+	// App protocol set of the DDoS policy case.
+	AppProtocols pulumi.StringArrayInput `pulumi:"appProtocols"`
+	// App type of the DDoS policy case.
+	AppType pulumi.StringInput `pulumi:"appType"`
+	// Create time of the DDoS policy case.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Indicate whether the service involves overseas or not.
+	HasAbroad pulumi.StringInput `pulumi:"hasAbroad"`
+	// Indicate whether the service actively initiates TCP requests or not.
+	HasInitiateTcp pulumi.StringInput `pulumi:"hasInitiateTcp"`
+	// Indicate whether the actively initiate UDP requests or not.
+	HasInitiateUdp pulumi.StringInput `pulumi:"hasInitiateUdp"`
+	// Indicate whether the service involves VPN service or not.
+	HasVpn pulumi.StringInput `pulumi:"hasVpn"`
+	// The max length of TCP message package.
+	MaxTcpPackageLen pulumi.StringInput `pulumi:"maxTcpPackageLen"`
+	// The max length of UDP message package.
+	MaxUdpPackageLen pulumi.StringInput `pulumi:"maxUdpPackageLen"`
+	// The minimum length of TCP message package.
+	MinTcpPackageLen pulumi.StringInput `pulumi:"minTcpPackageLen"`
+	// The minimum length of UDP message package.
+	MinUdpPackageLen pulumi.StringInput `pulumi:"minUdpPackageLen"`
+	// Name of the DDoS policy case.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The port that actively initiates TCP requests.
+	PeerTcpPort pulumi.StringInput `pulumi:"peerTcpPort"`
+	// The port that actively initiates UDP requests.
+	PeerUdpPort pulumi.StringInput `pulumi:"peerUdpPort"`
+	// Platform set of the DDoS policy case.
+	PlatformTypes pulumi.StringArrayInput `pulumi:"platformTypes"`
+	// Type of the resource that the DDoS policy case works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// ID of the DDoS policy case to be query.
+	SceneId pulumi.StringInput `pulumi:"sceneId"`
+	// End port of the TCP service.
+	TcpEndPort pulumi.StringInput `pulumi:"tcpEndPort"`
+	// The fixed signature of TCP protocol load.
+	TcpFootprint pulumi.StringInput `pulumi:"tcpFootprint"`
+	// Start port of the TCP service.
+	TcpStartPort pulumi.StringInput `pulumi:"tcpStartPort"`
+	// End port of the UDP service.
+	UdpEndPort pulumi.StringInput `pulumi:"udpEndPort"`
+	// The fixed signature of TCP protocol load.
+	UdpFootprint pulumi.StringInput `pulumi:"udpFootprint"`
+	// Start port of the UDP service.
+	UdpStartPort pulumi.StringInput `pulumi:"udpStartPort"`
+	// Web API url set.
+	WebApiUrls pulumi.StringArrayInput `pulumi:"webApiUrls"`
+}
+
+func (GetDdosPolicyCasesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPolicyCasesList)(nil)).Elem()
+}
+
+func (i GetDdosPolicyCasesListArgs) ToGetDdosPolicyCasesListOutput() GetDdosPolicyCasesListOutput {
+	return i.ToGetDdosPolicyCasesListOutputWithContext(context.Background())
+}
+
+func (i GetDdosPolicyCasesListArgs) ToGetDdosPolicyCasesListOutputWithContext(ctx context.Context) GetDdosPolicyCasesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPolicyCasesListOutput)
+}
+
+// GetDdosPolicyCasesListArrayInput is an input type that accepts GetDdosPolicyCasesListArray and GetDdosPolicyCasesListArrayOutput values.
+// You can construct a concrete instance of `GetDdosPolicyCasesListArrayInput` via:
+//
+//          GetDdosPolicyCasesListArray{ GetDdosPolicyCasesListArgs{...} }
+type GetDdosPolicyCasesListArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosPolicyCasesListArrayOutput() GetDdosPolicyCasesListArrayOutput
+	ToGetDdosPolicyCasesListArrayOutputWithContext(context.Context) GetDdosPolicyCasesListArrayOutput
+}
+
+type GetDdosPolicyCasesListArray []GetDdosPolicyCasesListInput
+
+func (GetDdosPolicyCasesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPolicyCasesList)(nil)).Elem()
+}
+
+func (i GetDdosPolicyCasesListArray) ToGetDdosPolicyCasesListArrayOutput() GetDdosPolicyCasesListArrayOutput {
+	return i.ToGetDdosPolicyCasesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosPolicyCasesListArray) ToGetDdosPolicyCasesListArrayOutputWithContext(ctx context.Context) GetDdosPolicyCasesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosPolicyCasesListArrayOutput)
+}
+
+type GetDdosPolicyCasesListOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPolicyCasesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosPolicyCasesList)(nil)).Elem()
+}
+
+func (o GetDdosPolicyCasesListOutput) ToGetDdosPolicyCasesListOutput() GetDdosPolicyCasesListOutput {
+	return o
+}
+
+func (o GetDdosPolicyCasesListOutput) ToGetDdosPolicyCasesListOutputWithContext(ctx context.Context) GetDdosPolicyCasesListOutput {
+	return o
+}
+
+// App protocol set of the DDoS policy case.
+func (o GetDdosPolicyCasesListOutput) AppProtocols() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) []string { return v.AppProtocols }).(pulumi.StringArrayOutput)
+}
+
+// App type of the DDoS policy case.
+func (o GetDdosPolicyCasesListOutput) AppType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.AppType }).(pulumi.StringOutput)
+}
+
+// Create time of the DDoS policy case.
+func (o GetDdosPolicyCasesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Indicate whether the service involves overseas or not.
+func (o GetDdosPolicyCasesListOutput) HasAbroad() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.HasAbroad }).(pulumi.StringOutput)
+}
+
+// Indicate whether the service actively initiates TCP requests or not.
+func (o GetDdosPolicyCasesListOutput) HasInitiateTcp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.HasInitiateTcp }).(pulumi.StringOutput)
+}
+
+// Indicate whether the actively initiate UDP requests or not.
+func (o GetDdosPolicyCasesListOutput) HasInitiateUdp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.HasInitiateUdp }).(pulumi.StringOutput)
+}
+
+// Indicate whether the service involves VPN service or not.
+func (o GetDdosPolicyCasesListOutput) HasVpn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.HasVpn }).(pulumi.StringOutput)
+}
+
+// The max length of TCP message package.
+func (o GetDdosPolicyCasesListOutput) MaxTcpPackageLen() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.MaxTcpPackageLen }).(pulumi.StringOutput)
+}
+
+// The max length of UDP message package.
+func (o GetDdosPolicyCasesListOutput) MaxUdpPackageLen() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.MaxUdpPackageLen }).(pulumi.StringOutput)
+}
+
+// The minimum length of TCP message package.
+func (o GetDdosPolicyCasesListOutput) MinTcpPackageLen() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.MinTcpPackageLen }).(pulumi.StringOutput)
+}
+
+// The minimum length of UDP message package.
+func (o GetDdosPolicyCasesListOutput) MinUdpPackageLen() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.MinUdpPackageLen }).(pulumi.StringOutput)
+}
+
+// Name of the DDoS policy case.
+func (o GetDdosPolicyCasesListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The port that actively initiates TCP requests.
+func (o GetDdosPolicyCasesListOutput) PeerTcpPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.PeerTcpPort }).(pulumi.StringOutput)
+}
+
+// The port that actively initiates UDP requests.
+func (o GetDdosPolicyCasesListOutput) PeerUdpPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.PeerUdpPort }).(pulumi.StringOutput)
+}
+
+// Platform set of the DDoS policy case.
+func (o GetDdosPolicyCasesListOutput) PlatformTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) []string { return v.PlatformTypes }).(pulumi.StringArrayOutput)
+}
+
+// Type of the resource that the DDoS policy case works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+func (o GetDdosPolicyCasesListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// ID of the DDoS policy case to be query.
+func (o GetDdosPolicyCasesListOutput) SceneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.SceneId }).(pulumi.StringOutput)
+}
+
+// End port of the TCP service.
+func (o GetDdosPolicyCasesListOutput) TcpEndPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.TcpEndPort }).(pulumi.StringOutput)
+}
+
+// The fixed signature of TCP protocol load.
+func (o GetDdosPolicyCasesListOutput) TcpFootprint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.TcpFootprint }).(pulumi.StringOutput)
+}
+
+// Start port of the TCP service.
+func (o GetDdosPolicyCasesListOutput) TcpStartPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.TcpStartPort }).(pulumi.StringOutput)
+}
+
+// End port of the UDP service.
+func (o GetDdosPolicyCasesListOutput) UdpEndPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.UdpEndPort }).(pulumi.StringOutput)
+}
+
+// The fixed signature of TCP protocol load.
+func (o GetDdosPolicyCasesListOutput) UdpFootprint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.UdpFootprint }).(pulumi.StringOutput)
+}
+
+// Start port of the UDP service.
+func (o GetDdosPolicyCasesListOutput) UdpStartPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) string { return v.UdpStartPort }).(pulumi.StringOutput)
+}
+
+// Web API url set.
+func (o GetDdosPolicyCasesListOutput) WebApiUrls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosPolicyCasesList) []string { return v.WebApiUrls }).(pulumi.StringArrayOutput)
+}
+
+type GetDdosPolicyCasesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosPolicyCasesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosPolicyCasesList)(nil)).Elem()
+}
+
+func (o GetDdosPolicyCasesListArrayOutput) ToGetDdosPolicyCasesListArrayOutput() GetDdosPolicyCasesListArrayOutput {
+	return o
+}
+
+func (o GetDdosPolicyCasesListArrayOutput) ToGetDdosPolicyCasesListArrayOutputWithContext(ctx context.Context) GetDdosPolicyCasesListArrayOutput {
+	return o
+}
+
+func (o GetDdosPolicyCasesListArrayOutput) Index(i pulumi.IntInput) GetDdosPolicyCasesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosPolicyCasesList {
+		return vs[0].([]GetDdosPolicyCasesList)[vs[1].(int)]
+	}).(GetDdosPolicyCasesListOutput)
+}
+
+type GetEipList struct {
+	CreatedTime      string   `pulumi:"createdTime"`
+	EipAddressStatus string   `pulumi:"eipAddressStatus"`
+	EipBoundRscEni   string   `pulumi:"eipBoundRscEni"`
+	EipBoundRscIns   *string  `pulumi:"eipBoundRscIns"`
+	EipBoundRscVip   string   `pulumi:"eipBoundRscVip"`
+	EipLists         []string `pulumi:"eipLists"`
+	ExpiredTime      string   `pulumi:"expiredTime"`
+	InstanceId       *string  `pulumi:"instanceId"`
+	ModifyTime       string   `pulumi:"modifyTime"`
+	ProtectionStatus string   `pulumi:"protectionStatus"`
+	Region           string   `pulumi:"region"`
+}
+
+// GetEipListInput is an input type that accepts GetEipListArgs and GetEipListOutput values.
+// You can construct a concrete instance of `GetEipListInput` via:
+//
+//          GetEipListArgs{...}
+type GetEipListInput interface {
+	pulumi.Input
+
+	ToGetEipListOutput() GetEipListOutput
+	ToGetEipListOutputWithContext(context.Context) GetEipListOutput
+}
+
+type GetEipListArgs struct {
+	CreatedTime      pulumi.StringInput      `pulumi:"createdTime"`
+	EipAddressStatus pulumi.StringInput      `pulumi:"eipAddressStatus"`
+	EipBoundRscEni   pulumi.StringInput      `pulumi:"eipBoundRscEni"`
+	EipBoundRscIns   pulumi.StringPtrInput   `pulumi:"eipBoundRscIns"`
+	EipBoundRscVip   pulumi.StringInput      `pulumi:"eipBoundRscVip"`
+	EipLists         pulumi.StringArrayInput `pulumi:"eipLists"`
+	ExpiredTime      pulumi.StringInput      `pulumi:"expiredTime"`
+	InstanceId       pulumi.StringPtrInput   `pulumi:"instanceId"`
+	ModifyTime       pulumi.StringInput      `pulumi:"modifyTime"`
+	ProtectionStatus pulumi.StringInput      `pulumi:"protectionStatus"`
+	Region           pulumi.StringInput      `pulumi:"region"`
+}
+
+func (GetEipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEipList)(nil)).Elem()
+}
+
+func (i GetEipListArgs) ToGetEipListOutput() GetEipListOutput {
+	return i.ToGetEipListOutputWithContext(context.Background())
+}
+
+func (i GetEipListArgs) ToGetEipListOutputWithContext(ctx context.Context) GetEipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEipListOutput)
+}
+
+// GetEipListArrayInput is an input type that accepts GetEipListArray and GetEipListArrayOutput values.
+// You can construct a concrete instance of `GetEipListArrayInput` via:
+//
+//          GetEipListArray{ GetEipListArgs{...} }
+type GetEipListArrayInput interface {
+	pulumi.Input
+
+	ToGetEipListArrayOutput() GetEipListArrayOutput
+	ToGetEipListArrayOutputWithContext(context.Context) GetEipListArrayOutput
+}
+
+type GetEipListArray []GetEipListInput
+
+func (GetEipListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEipList)(nil)).Elem()
+}
+
+func (i GetEipListArray) ToGetEipListArrayOutput() GetEipListArrayOutput {
+	return i.ToGetEipListArrayOutputWithContext(context.Background())
+}
+
+func (i GetEipListArray) ToGetEipListArrayOutputWithContext(ctx context.Context) GetEipListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEipListArrayOutput)
+}
+
+type GetEipListOutput struct{ *pulumi.OutputState }
+
+func (GetEipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEipList)(nil)).Elem()
+}
+
+func (o GetEipListOutput) ToGetEipListOutput() GetEipListOutput {
+	return o
+}
+
+func (o GetEipListOutput) ToGetEipListOutputWithContext(ctx context.Context) GetEipListOutput {
+	return o
+}
+
+func (o GetEipListOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+func (o GetEipListOutput) EipAddressStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.EipAddressStatus }).(pulumi.StringOutput)
+}
+
+func (o GetEipListOutput) EipBoundRscEni() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.EipBoundRscEni }).(pulumi.StringOutput)
+}
+
+func (o GetEipListOutput) EipBoundRscIns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetEipList) *string { return v.EipBoundRscIns }).(pulumi.StringPtrOutput)
+}
+
+func (o GetEipListOutput) EipBoundRscVip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.EipBoundRscVip }).(pulumi.StringOutput)
+}
+
+func (o GetEipListOutput) EipLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetEipList) []string { return v.EipLists }).(pulumi.StringArrayOutput)
+}
+
+func (o GetEipListOutput) ExpiredTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.ExpiredTime }).(pulumi.StringOutput)
+}
+
+func (o GetEipListOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetEipList) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+func (o GetEipListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+func (o GetEipListOutput) ProtectionStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.ProtectionStatus }).(pulumi.StringOutput)
+}
+
+func (o GetEipListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEipList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetEipListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEipListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEipList)(nil)).Elem()
+}
+
+func (o GetEipListArrayOutput) ToGetEipListArrayOutput() GetEipListArrayOutput {
+	return o
+}
+
+func (o GetEipListArrayOutput) ToGetEipListArrayOutputWithContext(ctx context.Context) GetEipListArrayOutput {
+	return o
+}
+
+func (o GetEipListArrayOutput) Index(i pulumi.IntInput) GetEipListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEipList {
+		return vs[0].([]GetEipList)[vs[1].(int)]
+	}).(GetEipListOutput)
+}
+
+type GetL4RulesList struct {
+	// The destination port of the layer 4 rule.
+	DPort int `pulumi:"dPort"`
+	// Health threshold of health check.
+	HealthCheckHealthNum int `pulumi:"healthCheckHealthNum"`
+	// Interval time of health check.
+	HealthCheckInterval int `pulumi:"healthCheckInterval"`
+	// Indicates whether health check is enabled.
+	HealthCheckSwitch bool `pulumi:"healthCheckSwitch"`
+	// HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+	HealthCheckTimeout int `pulumi:"healthCheckTimeout"`
+	// Unhealthy threshold of health check.
+	HealthCheckUnhealthNum int `pulumi:"healthCheckUnhealthNum"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType int `pulumi:"lbType"`
+	// Name of the layer 4 rule to be queried.
+	Name string `pulumi:"name"`
+	// Protocol of the rule.
+	Protocol string `pulumi:"protocol"`
+	// Id of the layer 4 rule to be queried.
+	RuleId string `pulumi:"ruleId"`
+	// The source port of the layer 4 rule.
+	SPort int `pulumi:"sPort"`
+	// Indicate that the session will keep or not.
+	SessionSwitch bool `pulumi:"sessionSwitch"`
+	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
+	SessionTime int                        `pulumi:"sessionTime"`
+	SourceLists []GetL4RulesListSourceList `pulumi:"sourceLists"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType int `pulumi:"sourceType"`
+}
+
+// GetL4RulesListInput is an input type that accepts GetL4RulesListArgs and GetL4RulesListOutput values.
+// You can construct a concrete instance of `GetL4RulesListInput` via:
+//
+//          GetL4RulesListArgs{...}
+type GetL4RulesListInput interface {
+	pulumi.Input
+
+	ToGetL4RulesListOutput() GetL4RulesListOutput
+	ToGetL4RulesListOutputWithContext(context.Context) GetL4RulesListOutput
+}
+
+type GetL4RulesListArgs struct {
+	// The destination port of the layer 4 rule.
+	DPort pulumi.IntInput `pulumi:"dPort"`
+	// Health threshold of health check.
+	HealthCheckHealthNum pulumi.IntInput `pulumi:"healthCheckHealthNum"`
+	// Interval time of health check.
+	HealthCheckInterval pulumi.IntInput `pulumi:"healthCheckInterval"`
+	// Indicates whether health check is enabled.
+	HealthCheckSwitch pulumi.BoolInput `pulumi:"healthCheckSwitch"`
+	// HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+	HealthCheckTimeout pulumi.IntInput `pulumi:"healthCheckTimeout"`
+	// Unhealthy threshold of health check.
+	HealthCheckUnhealthNum pulumi.IntInput `pulumi:"healthCheckUnhealthNum"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType pulumi.IntInput `pulumi:"lbType"`
+	// Name of the layer 4 rule to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Protocol of the rule.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Id of the layer 4 rule to be queried.
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// The source port of the layer 4 rule.
+	SPort pulumi.IntInput `pulumi:"sPort"`
+	// Indicate that the session will keep or not.
+	SessionSwitch pulumi.BoolInput `pulumi:"sessionSwitch"`
+	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
+	SessionTime pulumi.IntInput                    `pulumi:"sessionTime"`
+	SourceLists GetL4RulesListSourceListArrayInput `pulumi:"sourceLists"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType pulumi.IntInput `pulumi:"sourceType"`
+}
+
+func (GetL4RulesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesList)(nil)).Elem()
+}
+
+func (i GetL4RulesListArgs) ToGetL4RulesListOutput() GetL4RulesListOutput {
+	return i.ToGetL4RulesListOutputWithContext(context.Background())
+}
+
+func (i GetL4RulesListArgs) ToGetL4RulesListOutputWithContext(ctx context.Context) GetL4RulesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesListOutput)
+}
+
+// GetL4RulesListArrayInput is an input type that accepts GetL4RulesListArray and GetL4RulesListArrayOutput values.
+// You can construct a concrete instance of `GetL4RulesListArrayInput` via:
+//
+//          GetL4RulesListArray{ GetL4RulesListArgs{...} }
+type GetL4RulesListArrayInput interface {
+	pulumi.Input
+
+	ToGetL4RulesListArrayOutput() GetL4RulesListArrayOutput
+	ToGetL4RulesListArrayOutputWithContext(context.Context) GetL4RulesListArrayOutput
+}
+
+type GetL4RulesListArray []GetL4RulesListInput
+
+func (GetL4RulesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesList)(nil)).Elem()
+}
+
+func (i GetL4RulesListArray) ToGetL4RulesListArrayOutput() GetL4RulesListArrayOutput {
+	return i.ToGetL4RulesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetL4RulesListArray) ToGetL4RulesListArrayOutputWithContext(ctx context.Context) GetL4RulesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesListArrayOutput)
+}
+
+type GetL4RulesListOutput struct{ *pulumi.OutputState }
+
+func (GetL4RulesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesList)(nil)).Elem()
+}
+
+func (o GetL4RulesListOutput) ToGetL4RulesListOutput() GetL4RulesListOutput {
+	return o
+}
+
+func (o GetL4RulesListOutput) ToGetL4RulesListOutputWithContext(ctx context.Context) GetL4RulesListOutput {
+	return o
+}
+
+// The destination port of the layer 4 rule.
+func (o GetL4RulesListOutput) DPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.DPort }).(pulumi.IntOutput)
+}
+
+// Health threshold of health check.
+func (o GetL4RulesListOutput) HealthCheckHealthNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
+}
+
+// Interval time of health check.
+func (o GetL4RulesListOutput) HealthCheckInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.HealthCheckInterval }).(pulumi.IntOutput)
+}
+
+// Indicates whether health check is enabled.
+func (o GetL4RulesListOutput) HealthCheckSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetL4RulesList) bool { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
+}
+
+// HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+func (o GetL4RulesListOutput) HealthCheckTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.HealthCheckTimeout }).(pulumi.IntOutput)
+}
+
+// Unhealthy threshold of health check.
+func (o GetL4RulesListOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
+}
+
+// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+func (o GetL4RulesListOutput) LbType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.LbType }).(pulumi.IntOutput)
+}
+
+// Name of the layer 4 rule to be queried.
+func (o GetL4RulesListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Protocol of the rule.
+func (o GetL4RulesListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Id of the layer 4 rule to be queried.
+func (o GetL4RulesListOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesList) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// The source port of the layer 4 rule.
+func (o GetL4RulesListOutput) SPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.SPort }).(pulumi.IntOutput)
+}
+
+// Indicate that the session will keep or not.
+func (o GetL4RulesListOutput) SessionSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetL4RulesList) bool { return v.SessionSwitch }).(pulumi.BoolOutput)
+}
+
+// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
+func (o GetL4RulesListOutput) SessionTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.SessionTime }).(pulumi.IntOutput)
+}
+
+func (o GetL4RulesListOutput) SourceLists() GetL4RulesListSourceListArrayOutput {
+	return o.ApplyT(func(v GetL4RulesList) []GetL4RulesListSourceList { return v.SourceLists }).(GetL4RulesListSourceListArrayOutput)
+}
+
+// Source type, `1` for source of host, `2` for source of IP.
+func (o GetL4RulesListOutput) SourceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesList) int { return v.SourceType }).(pulumi.IntOutput)
+}
+
+type GetL4RulesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetL4RulesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesList)(nil)).Elem()
+}
+
+func (o GetL4RulesListArrayOutput) ToGetL4RulesListArrayOutput() GetL4RulesListArrayOutput {
+	return o
+}
+
+func (o GetL4RulesListArrayOutput) ToGetL4RulesListArrayOutputWithContext(ctx context.Context) GetL4RulesListArrayOutput {
+	return o
+}
+
+func (o GetL4RulesListArrayOutput) Index(i pulumi.IntInput) GetL4RulesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetL4RulesList {
+		return vs[0].([]GetL4RulesList)[vs[1].(int)]
+	}).(GetL4RulesListOutput)
+}
+
+type GetL4RulesListSourceList struct {
 	Source string `pulumi:"source"`
 	Weight int    `pulumi:"weight"`
 }
 
-// L7RulesV2ListSourceListInput is an input type that accepts L7RulesV2ListSourceListArgs and L7RulesV2ListSourceListOutput values.
-// You can construct a concrete instance of `L7RulesV2ListSourceListInput` via:
+// GetL4RulesListSourceListInput is an input type that accepts GetL4RulesListSourceListArgs and GetL4RulesListSourceListOutput values.
+// You can construct a concrete instance of `GetL4RulesListSourceListInput` via:
 //
-//          L7RulesV2ListSourceListArgs{...}
-type L7RulesV2ListSourceListInput interface {
+//          GetL4RulesListSourceListArgs{...}
+type GetL4RulesListSourceListInput interface {
 	pulumi.Input
 
-	ToL7RulesV2ListSourceListOutput() L7RulesV2ListSourceListOutput
-	ToL7RulesV2ListSourceListOutputWithContext(context.Context) L7RulesV2ListSourceListOutput
+	ToGetL4RulesListSourceListOutput() GetL4RulesListSourceListOutput
+	ToGetL4RulesListSourceListOutputWithContext(context.Context) GetL4RulesListSourceListOutput
 }
 
-type L7RulesV2ListSourceListArgs struct {
+type GetL4RulesListSourceListArgs struct {
 	Source pulumi.StringInput `pulumi:"source"`
 	Weight pulumi.IntInput    `pulumi:"weight"`
 }
 
-func (L7RulesV2ListSourceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*L7RulesV2ListSourceList)(nil)).Elem()
+func (GetL4RulesListSourceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesListSourceList)(nil)).Elem()
 }
 
-func (i L7RulesV2ListSourceListArgs) ToL7RulesV2ListSourceListOutput() L7RulesV2ListSourceListOutput {
-	return i.ToL7RulesV2ListSourceListOutputWithContext(context.Background())
+func (i GetL4RulesListSourceListArgs) ToGetL4RulesListSourceListOutput() GetL4RulesListSourceListOutput {
+	return i.ToGetL4RulesListSourceListOutputWithContext(context.Background())
 }
 
-func (i L7RulesV2ListSourceListArgs) ToL7RulesV2ListSourceListOutputWithContext(ctx context.Context) L7RulesV2ListSourceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L7RulesV2ListSourceListOutput)
+func (i GetL4RulesListSourceListArgs) ToGetL4RulesListSourceListOutputWithContext(ctx context.Context) GetL4RulesListSourceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesListSourceListOutput)
 }
 
-// L7RulesV2ListSourceListArrayInput is an input type that accepts L7RulesV2ListSourceListArray and L7RulesV2ListSourceListArrayOutput values.
-// You can construct a concrete instance of `L7RulesV2ListSourceListArrayInput` via:
+// GetL4RulesListSourceListArrayInput is an input type that accepts GetL4RulesListSourceListArray and GetL4RulesListSourceListArrayOutput values.
+// You can construct a concrete instance of `GetL4RulesListSourceListArrayInput` via:
 //
-//          L7RulesV2ListSourceListArray{ L7RulesV2ListSourceListArgs{...} }
-type L7RulesV2ListSourceListArrayInput interface {
+//          GetL4RulesListSourceListArray{ GetL4RulesListSourceListArgs{...} }
+type GetL4RulesListSourceListArrayInput interface {
 	pulumi.Input
 
-	ToL7RulesV2ListSourceListArrayOutput() L7RulesV2ListSourceListArrayOutput
-	ToL7RulesV2ListSourceListArrayOutputWithContext(context.Context) L7RulesV2ListSourceListArrayOutput
+	ToGetL4RulesListSourceListArrayOutput() GetL4RulesListSourceListArrayOutput
+	ToGetL4RulesListSourceListArrayOutputWithContext(context.Context) GetL4RulesListSourceListArrayOutput
 }
 
-type L7RulesV2ListSourceListArray []L7RulesV2ListSourceListInput
+type GetL4RulesListSourceListArray []GetL4RulesListSourceListInput
 
-func (L7RulesV2ListSourceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L7RulesV2ListSourceList)(nil)).Elem()
+func (GetL4RulesListSourceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesListSourceList)(nil)).Elem()
 }
 
-func (i L7RulesV2ListSourceListArray) ToL7RulesV2ListSourceListArrayOutput() L7RulesV2ListSourceListArrayOutput {
-	return i.ToL7RulesV2ListSourceListArrayOutputWithContext(context.Background())
+func (i GetL4RulesListSourceListArray) ToGetL4RulesListSourceListArrayOutput() GetL4RulesListSourceListArrayOutput {
+	return i.ToGetL4RulesListSourceListArrayOutputWithContext(context.Background())
 }
 
-func (i L7RulesV2ListSourceListArray) ToL7RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) L7RulesV2ListSourceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(L7RulesV2ListSourceListArrayOutput)
+func (i GetL4RulesListSourceListArray) ToGetL4RulesListSourceListArrayOutputWithContext(ctx context.Context) GetL4RulesListSourceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesListSourceListArrayOutput)
 }
 
-type L7RulesV2ListSourceListOutput struct{ *pulumi.OutputState }
+type GetL4RulesListSourceListOutput struct{ *pulumi.OutputState }
 
-func (L7RulesV2ListSourceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*L7RulesV2ListSourceList)(nil)).Elem()
+func (GetL4RulesListSourceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesListSourceList)(nil)).Elem()
 }
 
-func (o L7RulesV2ListSourceListOutput) ToL7RulesV2ListSourceListOutput() L7RulesV2ListSourceListOutput {
+func (o GetL4RulesListSourceListOutput) ToGetL4RulesListSourceListOutput() GetL4RulesListSourceListOutput {
 	return o
 }
 
-func (o L7RulesV2ListSourceListOutput) ToL7RulesV2ListSourceListOutputWithContext(ctx context.Context) L7RulesV2ListSourceListOutput {
+func (o GetL4RulesListSourceListOutput) ToGetL4RulesListSourceListOutputWithContext(ctx context.Context) GetL4RulesListSourceListOutput {
 	return o
 }
 
-func (o L7RulesV2ListSourceListOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v L7RulesV2ListSourceList) string { return v.Source }).(pulumi.StringOutput)
+func (o GetL4RulesListSourceListOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesListSourceList) string { return v.Source }).(pulumi.StringOutput)
 }
 
-func (o L7RulesV2ListSourceListOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func(v L7RulesV2ListSourceList) int { return v.Weight }).(pulumi.IntOutput)
+func (o GetL4RulesListSourceListOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesListSourceList) int { return v.Weight }).(pulumi.IntOutput)
 }
 
-type L7RulesV2ListSourceListArrayOutput struct{ *pulumi.OutputState }
+type GetL4RulesListSourceListArrayOutput struct{ *pulumi.OutputState }
 
-func (L7RulesV2ListSourceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]L7RulesV2ListSourceList)(nil)).Elem()
+func (GetL4RulesListSourceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesListSourceList)(nil)).Elem()
 }
 
-func (o L7RulesV2ListSourceListArrayOutput) ToL7RulesV2ListSourceListArrayOutput() L7RulesV2ListSourceListArrayOutput {
+func (o GetL4RulesListSourceListArrayOutput) ToGetL4RulesListSourceListArrayOutput() GetL4RulesListSourceListArrayOutput {
 	return o
 }
 
-func (o L7RulesV2ListSourceListArrayOutput) ToL7RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) L7RulesV2ListSourceListArrayOutput {
+func (o GetL4RulesListSourceListArrayOutput) ToGetL4RulesListSourceListArrayOutputWithContext(ctx context.Context) GetL4RulesListSourceListArrayOutput {
 	return o
 }
 
-func (o L7RulesV2ListSourceListArrayOutput) Index(i pulumi.IntInput) L7RulesV2ListSourceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) L7RulesV2ListSourceList {
-		return vs[0].([]L7RulesV2ListSourceList)[vs[1].(int)]
-	}).(L7RulesV2ListSourceListOutput)
+func (o GetL4RulesListSourceListArrayOutput) Index(i pulumi.IntInput) GetL4RulesListSourceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetL4RulesListSourceList {
+		return vs[0].([]GetL4RulesListSourceList)[vs[1].(int)]
+	}).(GetL4RulesListSourceListOutput)
+}
+
+type GetL4RulesV2List struct {
+	// Bind the resource ID information.
+	Id string `pulumi:"id"`
+	// Ip of the resource.
+	Ip string `pulumi:"ip"`
+	// session hold switch.
+	KeepEnable bool `pulumi:"keepEnable"`
+	// The keeptime of the layer 4 rule.
+	Keeptime int `pulumi:"keeptime"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType int `pulumi:"lbType"`
+	// Rule modification time.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Protocol of the rule.
+	Protocol string `pulumi:"protocol"`
+	// Corresponding regional information.
+	Region int `pulumi:"region"`
+	// Remove the watermark state.
+	RemoveSwitch bool `pulumi:"removeSwitch"`
+	// ID of the 4 layer rule.
+	RuleId string `pulumi:"ruleId"`
+	// Name of the rule.
+	RuleName    string                       `pulumi:"ruleName"`
+	SourceLists []GetL4RulesV2ListSourceList `pulumi:"sourceLists"`
+	// The source port of the layer 4 rule.
+	SourcePort int `pulumi:"sourcePort"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType int `pulumi:"sourceType"`
+	// Virtual port of resource.
+	VirtualPort int `pulumi:"virtualPort"`
+}
+
+// GetL4RulesV2ListInput is an input type that accepts GetL4RulesV2ListArgs and GetL4RulesV2ListOutput values.
+// You can construct a concrete instance of `GetL4RulesV2ListInput` via:
+//
+//          GetL4RulesV2ListArgs{...}
+type GetL4RulesV2ListInput interface {
+	pulumi.Input
+
+	ToGetL4RulesV2ListOutput() GetL4RulesV2ListOutput
+	ToGetL4RulesV2ListOutputWithContext(context.Context) GetL4RulesV2ListOutput
+}
+
+type GetL4RulesV2ListArgs struct {
+	// Bind the resource ID information.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Ip of the resource.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// session hold switch.
+	KeepEnable pulumi.BoolInput `pulumi:"keepEnable"`
+	// The keeptime of the layer 4 rule.
+	Keeptime pulumi.IntInput `pulumi:"keeptime"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType pulumi.IntInput `pulumi:"lbType"`
+	// Rule modification time.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Protocol of the rule.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Corresponding regional information.
+	Region pulumi.IntInput `pulumi:"region"`
+	// Remove the watermark state.
+	RemoveSwitch pulumi.BoolInput `pulumi:"removeSwitch"`
+	// ID of the 4 layer rule.
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// Name of the rule.
+	RuleName    pulumi.StringInput                   `pulumi:"ruleName"`
+	SourceLists GetL4RulesV2ListSourceListArrayInput `pulumi:"sourceLists"`
+	// The source port of the layer 4 rule.
+	SourcePort pulumi.IntInput `pulumi:"sourcePort"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType pulumi.IntInput `pulumi:"sourceType"`
+	// Virtual port of resource.
+	VirtualPort pulumi.IntInput `pulumi:"virtualPort"`
+}
+
+func (GetL4RulesV2ListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesV2List)(nil)).Elem()
+}
+
+func (i GetL4RulesV2ListArgs) ToGetL4RulesV2ListOutput() GetL4RulesV2ListOutput {
+	return i.ToGetL4RulesV2ListOutputWithContext(context.Background())
+}
+
+func (i GetL4RulesV2ListArgs) ToGetL4RulesV2ListOutputWithContext(ctx context.Context) GetL4RulesV2ListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesV2ListOutput)
+}
+
+// GetL4RulesV2ListArrayInput is an input type that accepts GetL4RulesV2ListArray and GetL4RulesV2ListArrayOutput values.
+// You can construct a concrete instance of `GetL4RulesV2ListArrayInput` via:
+//
+//          GetL4RulesV2ListArray{ GetL4RulesV2ListArgs{...} }
+type GetL4RulesV2ListArrayInput interface {
+	pulumi.Input
+
+	ToGetL4RulesV2ListArrayOutput() GetL4RulesV2ListArrayOutput
+	ToGetL4RulesV2ListArrayOutputWithContext(context.Context) GetL4RulesV2ListArrayOutput
+}
+
+type GetL4RulesV2ListArray []GetL4RulesV2ListInput
+
+func (GetL4RulesV2ListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesV2List)(nil)).Elem()
+}
+
+func (i GetL4RulesV2ListArray) ToGetL4RulesV2ListArrayOutput() GetL4RulesV2ListArrayOutput {
+	return i.ToGetL4RulesV2ListArrayOutputWithContext(context.Background())
+}
+
+func (i GetL4RulesV2ListArray) ToGetL4RulesV2ListArrayOutputWithContext(ctx context.Context) GetL4RulesV2ListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesV2ListArrayOutput)
+}
+
+type GetL4RulesV2ListOutput struct{ *pulumi.OutputState }
+
+func (GetL4RulesV2ListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesV2List)(nil)).Elem()
+}
+
+func (o GetL4RulesV2ListOutput) ToGetL4RulesV2ListOutput() GetL4RulesV2ListOutput {
+	return o
+}
+
+func (o GetL4RulesV2ListOutput) ToGetL4RulesV2ListOutputWithContext(ctx context.Context) GetL4RulesV2ListOutput {
+	return o
+}
+
+// Bind the resource ID information.
+func (o GetL4RulesV2ListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Ip of the resource.
+func (o GetL4RulesV2ListOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// session hold switch.
+func (o GetL4RulesV2ListOutput) KeepEnable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) bool { return v.KeepEnable }).(pulumi.BoolOutput)
+}
+
+// The keeptime of the layer 4 rule.
+func (o GetL4RulesV2ListOutput) Keeptime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) int { return v.Keeptime }).(pulumi.IntOutput)
+}
+
+// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+func (o GetL4RulesV2ListOutput) LbType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) int { return v.LbType }).(pulumi.IntOutput)
+}
+
+// Rule modification time.
+func (o GetL4RulesV2ListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Protocol of the rule.
+func (o GetL4RulesV2ListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Corresponding regional information.
+func (o GetL4RulesV2ListOutput) Region() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) int { return v.Region }).(pulumi.IntOutput)
+}
+
+// Remove the watermark state.
+func (o GetL4RulesV2ListOutput) RemoveSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) bool { return v.RemoveSwitch }).(pulumi.BoolOutput)
+}
+
+// ID of the 4 layer rule.
+func (o GetL4RulesV2ListOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// Name of the rule.
+func (o GetL4RulesV2ListOutput) RuleName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) string { return v.RuleName }).(pulumi.StringOutput)
+}
+
+func (o GetL4RulesV2ListOutput) SourceLists() GetL4RulesV2ListSourceListArrayOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) []GetL4RulesV2ListSourceList { return v.SourceLists }).(GetL4RulesV2ListSourceListArrayOutput)
+}
+
+// The source port of the layer 4 rule.
+func (o GetL4RulesV2ListOutput) SourcePort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) int { return v.SourcePort }).(pulumi.IntOutput)
+}
+
+// Source type, `1` for source of host, `2` for source of IP.
+func (o GetL4RulesV2ListOutput) SourceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) int { return v.SourceType }).(pulumi.IntOutput)
+}
+
+// Virtual port of resource.
+func (o GetL4RulesV2ListOutput) VirtualPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesV2List) int { return v.VirtualPort }).(pulumi.IntOutput)
+}
+
+type GetL4RulesV2ListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetL4RulesV2ListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesV2List)(nil)).Elem()
+}
+
+func (o GetL4RulesV2ListArrayOutput) ToGetL4RulesV2ListArrayOutput() GetL4RulesV2ListArrayOutput {
+	return o
+}
+
+func (o GetL4RulesV2ListArrayOutput) ToGetL4RulesV2ListArrayOutputWithContext(ctx context.Context) GetL4RulesV2ListArrayOutput {
+	return o
+}
+
+func (o GetL4RulesV2ListArrayOutput) Index(i pulumi.IntInput) GetL4RulesV2ListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetL4RulesV2List {
+		return vs[0].([]GetL4RulesV2List)[vs[1].(int)]
+	}).(GetL4RulesV2ListOutput)
+}
+
+type GetL4RulesV2ListSourceList struct {
+	Source string `pulumi:"source"`
+	Weight int    `pulumi:"weight"`
+}
+
+// GetL4RulesV2ListSourceListInput is an input type that accepts GetL4RulesV2ListSourceListArgs and GetL4RulesV2ListSourceListOutput values.
+// You can construct a concrete instance of `GetL4RulesV2ListSourceListInput` via:
+//
+//          GetL4RulesV2ListSourceListArgs{...}
+type GetL4RulesV2ListSourceListInput interface {
+	pulumi.Input
+
+	ToGetL4RulesV2ListSourceListOutput() GetL4RulesV2ListSourceListOutput
+	ToGetL4RulesV2ListSourceListOutputWithContext(context.Context) GetL4RulesV2ListSourceListOutput
+}
+
+type GetL4RulesV2ListSourceListArgs struct {
+	Source pulumi.StringInput `pulumi:"source"`
+	Weight pulumi.IntInput    `pulumi:"weight"`
+}
+
+func (GetL4RulesV2ListSourceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (i GetL4RulesV2ListSourceListArgs) ToGetL4RulesV2ListSourceListOutput() GetL4RulesV2ListSourceListOutput {
+	return i.ToGetL4RulesV2ListSourceListOutputWithContext(context.Background())
+}
+
+func (i GetL4RulesV2ListSourceListArgs) ToGetL4RulesV2ListSourceListOutputWithContext(ctx context.Context) GetL4RulesV2ListSourceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesV2ListSourceListOutput)
+}
+
+// GetL4RulesV2ListSourceListArrayInput is an input type that accepts GetL4RulesV2ListSourceListArray and GetL4RulesV2ListSourceListArrayOutput values.
+// You can construct a concrete instance of `GetL4RulesV2ListSourceListArrayInput` via:
+//
+//          GetL4RulesV2ListSourceListArray{ GetL4RulesV2ListSourceListArgs{...} }
+type GetL4RulesV2ListSourceListArrayInput interface {
+	pulumi.Input
+
+	ToGetL4RulesV2ListSourceListArrayOutput() GetL4RulesV2ListSourceListArrayOutput
+	ToGetL4RulesV2ListSourceListArrayOutputWithContext(context.Context) GetL4RulesV2ListSourceListArrayOutput
+}
+
+type GetL4RulesV2ListSourceListArray []GetL4RulesV2ListSourceListInput
+
+func (GetL4RulesV2ListSourceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (i GetL4RulesV2ListSourceListArray) ToGetL4RulesV2ListSourceListArrayOutput() GetL4RulesV2ListSourceListArrayOutput {
+	return i.ToGetL4RulesV2ListSourceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetL4RulesV2ListSourceListArray) ToGetL4RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) GetL4RulesV2ListSourceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL4RulesV2ListSourceListArrayOutput)
+}
+
+type GetL4RulesV2ListSourceListOutput struct{ *pulumi.OutputState }
+
+func (GetL4RulesV2ListSourceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL4RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (o GetL4RulesV2ListSourceListOutput) ToGetL4RulesV2ListSourceListOutput() GetL4RulesV2ListSourceListOutput {
+	return o
+}
+
+func (o GetL4RulesV2ListSourceListOutput) ToGetL4RulesV2ListSourceListOutputWithContext(ctx context.Context) GetL4RulesV2ListSourceListOutput {
+	return o
+}
+
+func (o GetL4RulesV2ListSourceListOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL4RulesV2ListSourceList) string { return v.Source }).(pulumi.StringOutput)
+}
+
+func (o GetL4RulesV2ListSourceListOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL4RulesV2ListSourceList) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type GetL4RulesV2ListSourceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetL4RulesV2ListSourceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL4RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (o GetL4RulesV2ListSourceListArrayOutput) ToGetL4RulesV2ListSourceListArrayOutput() GetL4RulesV2ListSourceListArrayOutput {
+	return o
+}
+
+func (o GetL4RulesV2ListSourceListArrayOutput) ToGetL4RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) GetL4RulesV2ListSourceListArrayOutput {
+	return o
+}
+
+func (o GetL4RulesV2ListSourceListArrayOutput) Index(i pulumi.IntInput) GetL4RulesV2ListSourceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetL4RulesV2ListSourceList {
+		return vs[0].([]GetL4RulesV2ListSourceList)[vs[1].(int)]
+	}).(GetL4RulesV2ListSourceListOutput)
+}
+
+type GetL7RulesList struct {
+	// Domain of the layer 7 rule to be queried.
+	Domain string `pulumi:"domain"`
+	// HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+	HealthCheckCode int `pulumi:"healthCheckCode"`
+	// Health threshold of health check.
+	HealthCheckHealthNum int `pulumi:"healthCheckHealthNum"`
+	// Interval time of health check.
+	HealthCheckInterval int `pulumi:"healthCheckInterval"`
+	// Methods of health check.
+	HealthCheckMethod string `pulumi:"healthCheckMethod"`
+	// Path of health check.
+	HealthCheckPath string `pulumi:"healthCheckPath"`
+	// Indicates whether health check is enabled.
+	HealthCheckSwitch bool `pulumi:"healthCheckSwitch"`
+	// Unhealthy threshold of health check.
+	HealthCheckUnhealthNum int `pulumi:"healthCheckUnhealthNum"`
+	// Name of the rule.
+	Name string `pulumi:"name"`
+	// Protocol of the rule.
+	Protocol string `pulumi:"protocol"`
+	// Id of the layer 7 rule to be queried.
+	RuleId string `pulumi:"ruleId"`
+	// Source list of the rule.
+	SourceLists []string `pulumi:"sourceLists"`
+	// Source type, 1 for source of host, 2 for source of ip.
+	SourceType int `pulumi:"sourceType"`
+	// SSL id.
+	SslId string `pulumi:"sslId"`
+	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for waiting to be created/modified, `7` for waiting to be deleted and `8` for waiting to get SSL id.
+	Status int `pulumi:"status"`
+	// Indicate the rule will take effect or not.
+	Switch bool `pulumi:"switch"`
+	// Threshold of the rule.
+	Threshold int `pulumi:"threshold"`
+}
+
+// GetL7RulesListInput is an input type that accepts GetL7RulesListArgs and GetL7RulesListOutput values.
+// You can construct a concrete instance of `GetL7RulesListInput` via:
+//
+//          GetL7RulesListArgs{...}
+type GetL7RulesListInput interface {
+	pulumi.Input
+
+	ToGetL7RulesListOutput() GetL7RulesListOutput
+	ToGetL7RulesListOutputWithContext(context.Context) GetL7RulesListOutput
+}
+
+type GetL7RulesListArgs struct {
+	// Domain of the layer 7 rule to be queried.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+	HealthCheckCode pulumi.IntInput `pulumi:"healthCheckCode"`
+	// Health threshold of health check.
+	HealthCheckHealthNum pulumi.IntInput `pulumi:"healthCheckHealthNum"`
+	// Interval time of health check.
+	HealthCheckInterval pulumi.IntInput `pulumi:"healthCheckInterval"`
+	// Methods of health check.
+	HealthCheckMethod pulumi.StringInput `pulumi:"healthCheckMethod"`
+	// Path of health check.
+	HealthCheckPath pulumi.StringInput `pulumi:"healthCheckPath"`
+	// Indicates whether health check is enabled.
+	HealthCheckSwitch pulumi.BoolInput `pulumi:"healthCheckSwitch"`
+	// Unhealthy threshold of health check.
+	HealthCheckUnhealthNum pulumi.IntInput `pulumi:"healthCheckUnhealthNum"`
+	// Name of the rule.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Protocol of the rule.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Id of the layer 7 rule to be queried.
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// Source list of the rule.
+	SourceLists pulumi.StringArrayInput `pulumi:"sourceLists"`
+	// Source type, 1 for source of host, 2 for source of ip.
+	SourceType pulumi.IntInput `pulumi:"sourceType"`
+	// SSL id.
+	SslId pulumi.StringInput `pulumi:"sslId"`
+	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for waiting to be created/modified, `7` for waiting to be deleted and `8` for waiting to get SSL id.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Indicate the rule will take effect or not.
+	Switch pulumi.BoolInput `pulumi:"switch"`
+	// Threshold of the rule.
+	Threshold pulumi.IntInput `pulumi:"threshold"`
+}
+
+func (GetL7RulesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL7RulesList)(nil)).Elem()
+}
+
+func (i GetL7RulesListArgs) ToGetL7RulesListOutput() GetL7RulesListOutput {
+	return i.ToGetL7RulesListOutputWithContext(context.Background())
+}
+
+func (i GetL7RulesListArgs) ToGetL7RulesListOutputWithContext(ctx context.Context) GetL7RulesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL7RulesListOutput)
+}
+
+// GetL7RulesListArrayInput is an input type that accepts GetL7RulesListArray and GetL7RulesListArrayOutput values.
+// You can construct a concrete instance of `GetL7RulesListArrayInput` via:
+//
+//          GetL7RulesListArray{ GetL7RulesListArgs{...} }
+type GetL7RulesListArrayInput interface {
+	pulumi.Input
+
+	ToGetL7RulesListArrayOutput() GetL7RulesListArrayOutput
+	ToGetL7RulesListArrayOutputWithContext(context.Context) GetL7RulesListArrayOutput
+}
+
+type GetL7RulesListArray []GetL7RulesListInput
+
+func (GetL7RulesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL7RulesList)(nil)).Elem()
+}
+
+func (i GetL7RulesListArray) ToGetL7RulesListArrayOutput() GetL7RulesListArrayOutput {
+	return i.ToGetL7RulesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetL7RulesListArray) ToGetL7RulesListArrayOutputWithContext(ctx context.Context) GetL7RulesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL7RulesListArrayOutput)
+}
+
+type GetL7RulesListOutput struct{ *pulumi.OutputState }
+
+func (GetL7RulesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL7RulesList)(nil)).Elem()
+}
+
+func (o GetL7RulesListOutput) ToGetL7RulesListOutput() GetL7RulesListOutput {
+	return o
+}
+
+func (o GetL7RulesListOutput) ToGetL7RulesListOutputWithContext(ctx context.Context) GetL7RulesListOutput {
+	return o
+}
+
+// Domain of the layer 7 rule to be queried.
+func (o GetL7RulesListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+func (o GetL7RulesListOutput) HealthCheckCode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesList) int { return v.HealthCheckCode }).(pulumi.IntOutput)
+}
+
+// Health threshold of health check.
+func (o GetL7RulesListOutput) HealthCheckHealthNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesList) int { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
+}
+
+// Interval time of health check.
+func (o GetL7RulesListOutput) HealthCheckInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesList) int { return v.HealthCheckInterval }).(pulumi.IntOutput)
+}
+
+// Methods of health check.
+func (o GetL7RulesListOutput) HealthCheckMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesList) string { return v.HealthCheckMethod }).(pulumi.StringOutput)
+}
+
+// Path of health check.
+func (o GetL7RulesListOutput) HealthCheckPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesList) string { return v.HealthCheckPath }).(pulumi.StringOutput)
+}
+
+// Indicates whether health check is enabled.
+func (o GetL7RulesListOutput) HealthCheckSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetL7RulesList) bool { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
+}
+
+// Unhealthy threshold of health check.
+func (o GetL7RulesListOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesList) int { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
+}
+
+// Name of the rule.
+func (o GetL7RulesListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Protocol of the rule.
+func (o GetL7RulesListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Id of the layer 7 rule to be queried.
+func (o GetL7RulesListOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesList) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// Source list of the rule.
+func (o GetL7RulesListOutput) SourceLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetL7RulesList) []string { return v.SourceLists }).(pulumi.StringArrayOutput)
+}
+
+// Source type, 1 for source of host, 2 for source of ip.
+func (o GetL7RulesListOutput) SourceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesList) int { return v.SourceType }).(pulumi.IntOutput)
+}
+
+// SSL id.
+func (o GetL7RulesListOutput) SslId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesList) string { return v.SslId }).(pulumi.StringOutput)
+}
+
+// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for waiting to be created/modified, `7` for waiting to be deleted and `8` for waiting to get SSL id.
+func (o GetL7RulesListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Indicate the rule will take effect or not.
+func (o GetL7RulesListOutput) Switch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetL7RulesList) bool { return v.Switch }).(pulumi.BoolOutput)
+}
+
+// Threshold of the rule.
+func (o GetL7RulesListOutput) Threshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesList) int { return v.Threshold }).(pulumi.IntOutput)
+}
+
+type GetL7RulesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetL7RulesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL7RulesList)(nil)).Elem()
+}
+
+func (o GetL7RulesListArrayOutput) ToGetL7RulesListArrayOutput() GetL7RulesListArrayOutput {
+	return o
+}
+
+func (o GetL7RulesListArrayOutput) ToGetL7RulesListArrayOutputWithContext(ctx context.Context) GetL7RulesListArrayOutput {
+	return o
+}
+
+func (o GetL7RulesListArrayOutput) Index(i pulumi.IntInput) GetL7RulesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetL7RulesList {
+		return vs[0].([]GetL7RulesList)[vs[1].(int)]
+	}).(GetL7RulesListOutput)
+}
+
+type GetL7RulesV2List struct {
+	// CC protection status of HTTPS protocol, the value is [0 (off), 1 (on)].
+	CcEnable int `pulumi:"ccEnable"`
+	// CC protection level of HTTPS protocol.
+	CcLevel string `pulumi:"ccLevel"`
+	// CC protection status, value [0(off), 1(on)].
+	CcStatus int `pulumi:"ccStatus"`
+	// CC protection threshold of HTTPS protocol.
+	CcThreshold int `pulumi:"ccThreshold"`
+	// The source of the certificate.
+	CertType int `pulumi:"certType"`
+	// Domain of resource.
+	Domain string `pulumi:"domain"`
+	// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], default is off.
+	HttpsToHttpEnable int `pulumi:"httpsToHttpEnable"`
+	// Id of the resource.
+	Id string `pulumi:"id"`
+	// Ip of the resource.
+	Ip string `pulumi:"ip"`
+	// Session keep switch, value [0 (session keep closed), 1 (session keep open)].
+	KeepEnable int `pulumi:"keepEnable"`
+	// Session hold time, in seconds.
+	KeepTime int `pulumi:"keepTime"`
+	// Load balancing mode, the value is [1 (weighted round-robin)].
+	LbType int `pulumi:"lbType"`
+	// Modify time of resource.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Protocol of resource, value range [`http`, `https`].
+	Protocol string `pulumi:"protocol"`
+	// The area code.
+	Region int `pulumi:"region"`
+	// Rule description.
+	RuleName string `pulumi:"ruleName"`
+	// Source list of the rule.
+	SourceLists []GetL7RulesV2ListSourceList `pulumi:"sourceLists"`
+	// Back-to-origin method, value [1 (domain name back-to-source), 2 (IP back-to-source)].
+	SourceType int `pulumi:"sourceType"`
+	// SSL id of the resource.
+	SslId string `pulumi:"sslId"`
+	// Rule status, value [0 (rule configuration is successful), 1 (rule configuration is in effect), 2 (rule configuration fails), 3 (rule deletion is in effect), 5 (rule deletion fails), 6 (rule is waiting to be configured), 7 (rule pending deletion), 8 (rule pending configuration certificate)].
+	Status int `pulumi:"status"`
+	// Virtual port of resource.
+	VirtualPort int `pulumi:"virtualPort"`
+}
+
+// GetL7RulesV2ListInput is an input type that accepts GetL7RulesV2ListArgs and GetL7RulesV2ListOutput values.
+// You can construct a concrete instance of `GetL7RulesV2ListInput` via:
+//
+//          GetL7RulesV2ListArgs{...}
+type GetL7RulesV2ListInput interface {
+	pulumi.Input
+
+	ToGetL7RulesV2ListOutput() GetL7RulesV2ListOutput
+	ToGetL7RulesV2ListOutputWithContext(context.Context) GetL7RulesV2ListOutput
+}
+
+type GetL7RulesV2ListArgs struct {
+	// CC protection status of HTTPS protocol, the value is [0 (off), 1 (on)].
+	CcEnable pulumi.IntInput `pulumi:"ccEnable"`
+	// CC protection level of HTTPS protocol.
+	CcLevel pulumi.StringInput `pulumi:"ccLevel"`
+	// CC protection status, value [0(off), 1(on)].
+	CcStatus pulumi.IntInput `pulumi:"ccStatus"`
+	// CC protection threshold of HTTPS protocol.
+	CcThreshold pulumi.IntInput `pulumi:"ccThreshold"`
+	// The source of the certificate.
+	CertType pulumi.IntInput `pulumi:"certType"`
+	// Domain of resource.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], default is off.
+	HttpsToHttpEnable pulumi.IntInput `pulumi:"httpsToHttpEnable"`
+	// Id of the resource.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Ip of the resource.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Session keep switch, value [0 (session keep closed), 1 (session keep open)].
+	KeepEnable pulumi.IntInput `pulumi:"keepEnable"`
+	// Session hold time, in seconds.
+	KeepTime pulumi.IntInput `pulumi:"keepTime"`
+	// Load balancing mode, the value is [1 (weighted round-robin)].
+	LbType pulumi.IntInput `pulumi:"lbType"`
+	// Modify time of resource.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Protocol of resource, value range [`http`, `https`].
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// The area code.
+	Region pulumi.IntInput `pulumi:"region"`
+	// Rule description.
+	RuleName pulumi.StringInput `pulumi:"ruleName"`
+	// Source list of the rule.
+	SourceLists GetL7RulesV2ListSourceListArrayInput `pulumi:"sourceLists"`
+	// Back-to-origin method, value [1 (domain name back-to-source), 2 (IP back-to-source)].
+	SourceType pulumi.IntInput `pulumi:"sourceType"`
+	// SSL id of the resource.
+	SslId pulumi.StringInput `pulumi:"sslId"`
+	// Rule status, value [0 (rule configuration is successful), 1 (rule configuration is in effect), 2 (rule configuration fails), 3 (rule deletion is in effect), 5 (rule deletion fails), 6 (rule is waiting to be configured), 7 (rule pending deletion), 8 (rule pending configuration certificate)].
+	Status pulumi.IntInput `pulumi:"status"`
+	// Virtual port of resource.
+	VirtualPort pulumi.IntInput `pulumi:"virtualPort"`
+}
+
+func (GetL7RulesV2ListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL7RulesV2List)(nil)).Elem()
+}
+
+func (i GetL7RulesV2ListArgs) ToGetL7RulesV2ListOutput() GetL7RulesV2ListOutput {
+	return i.ToGetL7RulesV2ListOutputWithContext(context.Background())
+}
+
+func (i GetL7RulesV2ListArgs) ToGetL7RulesV2ListOutputWithContext(ctx context.Context) GetL7RulesV2ListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL7RulesV2ListOutput)
+}
+
+// GetL7RulesV2ListArrayInput is an input type that accepts GetL7RulesV2ListArray and GetL7RulesV2ListArrayOutput values.
+// You can construct a concrete instance of `GetL7RulesV2ListArrayInput` via:
+//
+//          GetL7RulesV2ListArray{ GetL7RulesV2ListArgs{...} }
+type GetL7RulesV2ListArrayInput interface {
+	pulumi.Input
+
+	ToGetL7RulesV2ListArrayOutput() GetL7RulesV2ListArrayOutput
+	ToGetL7RulesV2ListArrayOutputWithContext(context.Context) GetL7RulesV2ListArrayOutput
+}
+
+type GetL7RulesV2ListArray []GetL7RulesV2ListInput
+
+func (GetL7RulesV2ListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL7RulesV2List)(nil)).Elem()
+}
+
+func (i GetL7RulesV2ListArray) ToGetL7RulesV2ListArrayOutput() GetL7RulesV2ListArrayOutput {
+	return i.ToGetL7RulesV2ListArrayOutputWithContext(context.Background())
+}
+
+func (i GetL7RulesV2ListArray) ToGetL7RulesV2ListArrayOutputWithContext(ctx context.Context) GetL7RulesV2ListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL7RulesV2ListArrayOutput)
+}
+
+type GetL7RulesV2ListOutput struct{ *pulumi.OutputState }
+
+func (GetL7RulesV2ListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL7RulesV2List)(nil)).Elem()
+}
+
+func (o GetL7RulesV2ListOutput) ToGetL7RulesV2ListOutput() GetL7RulesV2ListOutput {
+	return o
+}
+
+func (o GetL7RulesV2ListOutput) ToGetL7RulesV2ListOutputWithContext(ctx context.Context) GetL7RulesV2ListOutput {
+	return o
+}
+
+// CC protection status of HTTPS protocol, the value is [0 (off), 1 (on)].
+func (o GetL7RulesV2ListOutput) CcEnable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.CcEnable }).(pulumi.IntOutput)
+}
+
+// CC protection level of HTTPS protocol.
+func (o GetL7RulesV2ListOutput) CcLevel() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.CcLevel }).(pulumi.StringOutput)
+}
+
+// CC protection status, value [0(off), 1(on)].
+func (o GetL7RulesV2ListOutput) CcStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.CcStatus }).(pulumi.IntOutput)
+}
+
+// CC protection threshold of HTTPS protocol.
+func (o GetL7RulesV2ListOutput) CcThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.CcThreshold }).(pulumi.IntOutput)
+}
+
+// The source of the certificate.
+func (o GetL7RulesV2ListOutput) CertType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.CertType }).(pulumi.IntOutput)
+}
+
+// Domain of resource.
+func (o GetL7RulesV2ListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], default is off.
+func (o GetL7RulesV2ListOutput) HttpsToHttpEnable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.HttpsToHttpEnable }).(pulumi.IntOutput)
+}
+
+// Id of the resource.
+func (o GetL7RulesV2ListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Ip of the resource.
+func (o GetL7RulesV2ListOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Session keep switch, value [0 (session keep closed), 1 (session keep open)].
+func (o GetL7RulesV2ListOutput) KeepEnable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.KeepEnable }).(pulumi.IntOutput)
+}
+
+// Session hold time, in seconds.
+func (o GetL7RulesV2ListOutput) KeepTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.KeepTime }).(pulumi.IntOutput)
+}
+
+// Load balancing mode, the value is [1 (weighted round-robin)].
+func (o GetL7RulesV2ListOutput) LbType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.LbType }).(pulumi.IntOutput)
+}
+
+// Modify time of resource.
+func (o GetL7RulesV2ListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Protocol of resource, value range [`http`, `https`].
+func (o GetL7RulesV2ListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// The area code.
+func (o GetL7RulesV2ListOutput) Region() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.Region }).(pulumi.IntOutput)
+}
+
+// Rule description.
+func (o GetL7RulesV2ListOutput) RuleName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.RuleName }).(pulumi.StringOutput)
+}
+
+// Source list of the rule.
+func (o GetL7RulesV2ListOutput) SourceLists() GetL7RulesV2ListSourceListArrayOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) []GetL7RulesV2ListSourceList { return v.SourceLists }).(GetL7RulesV2ListSourceListArrayOutput)
+}
+
+// Back-to-origin method, value [1 (domain name back-to-source), 2 (IP back-to-source)].
+func (o GetL7RulesV2ListOutput) SourceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.SourceType }).(pulumi.IntOutput)
+}
+
+// SSL id of the resource.
+func (o GetL7RulesV2ListOutput) SslId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) string { return v.SslId }).(pulumi.StringOutput)
+}
+
+// Rule status, value [0 (rule configuration is successful), 1 (rule configuration is in effect), 2 (rule configuration fails), 3 (rule deletion is in effect), 5 (rule deletion fails), 6 (rule is waiting to be configured), 7 (rule pending deletion), 8 (rule pending configuration certificate)].
+func (o GetL7RulesV2ListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Virtual port of resource.
+func (o GetL7RulesV2ListOutput) VirtualPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2List) int { return v.VirtualPort }).(pulumi.IntOutput)
+}
+
+type GetL7RulesV2ListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetL7RulesV2ListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL7RulesV2List)(nil)).Elem()
+}
+
+func (o GetL7RulesV2ListArrayOutput) ToGetL7RulesV2ListArrayOutput() GetL7RulesV2ListArrayOutput {
+	return o
+}
+
+func (o GetL7RulesV2ListArrayOutput) ToGetL7RulesV2ListArrayOutputWithContext(ctx context.Context) GetL7RulesV2ListArrayOutput {
+	return o
+}
+
+func (o GetL7RulesV2ListArrayOutput) Index(i pulumi.IntInput) GetL7RulesV2ListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetL7RulesV2List {
+		return vs[0].([]GetL7RulesV2List)[vs[1].(int)]
+	}).(GetL7RulesV2ListOutput)
+}
+
+type GetL7RulesV2ListSourceList struct {
+	// Back-to-source IP or domain name.
+	Source string `pulumi:"source"`
+	// Weight value, take value [0,100].
+	Weight int `pulumi:"weight"`
+}
+
+// GetL7RulesV2ListSourceListInput is an input type that accepts GetL7RulesV2ListSourceListArgs and GetL7RulesV2ListSourceListOutput values.
+// You can construct a concrete instance of `GetL7RulesV2ListSourceListInput` via:
+//
+//          GetL7RulesV2ListSourceListArgs{...}
+type GetL7RulesV2ListSourceListInput interface {
+	pulumi.Input
+
+	ToGetL7RulesV2ListSourceListOutput() GetL7RulesV2ListSourceListOutput
+	ToGetL7RulesV2ListSourceListOutputWithContext(context.Context) GetL7RulesV2ListSourceListOutput
+}
+
+type GetL7RulesV2ListSourceListArgs struct {
+	// Back-to-source IP or domain name.
+	Source pulumi.StringInput `pulumi:"source"`
+	// Weight value, take value [0,100].
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (GetL7RulesV2ListSourceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL7RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (i GetL7RulesV2ListSourceListArgs) ToGetL7RulesV2ListSourceListOutput() GetL7RulesV2ListSourceListOutput {
+	return i.ToGetL7RulesV2ListSourceListOutputWithContext(context.Background())
+}
+
+func (i GetL7RulesV2ListSourceListArgs) ToGetL7RulesV2ListSourceListOutputWithContext(ctx context.Context) GetL7RulesV2ListSourceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL7RulesV2ListSourceListOutput)
+}
+
+// GetL7RulesV2ListSourceListArrayInput is an input type that accepts GetL7RulesV2ListSourceListArray and GetL7RulesV2ListSourceListArrayOutput values.
+// You can construct a concrete instance of `GetL7RulesV2ListSourceListArrayInput` via:
+//
+//          GetL7RulesV2ListSourceListArray{ GetL7RulesV2ListSourceListArgs{...} }
+type GetL7RulesV2ListSourceListArrayInput interface {
+	pulumi.Input
+
+	ToGetL7RulesV2ListSourceListArrayOutput() GetL7RulesV2ListSourceListArrayOutput
+	ToGetL7RulesV2ListSourceListArrayOutputWithContext(context.Context) GetL7RulesV2ListSourceListArrayOutput
+}
+
+type GetL7RulesV2ListSourceListArray []GetL7RulesV2ListSourceListInput
+
+func (GetL7RulesV2ListSourceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL7RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (i GetL7RulesV2ListSourceListArray) ToGetL7RulesV2ListSourceListArrayOutput() GetL7RulesV2ListSourceListArrayOutput {
+	return i.ToGetL7RulesV2ListSourceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetL7RulesV2ListSourceListArray) ToGetL7RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) GetL7RulesV2ListSourceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetL7RulesV2ListSourceListArrayOutput)
+}
+
+type GetL7RulesV2ListSourceListOutput struct{ *pulumi.OutputState }
+
+func (GetL7RulesV2ListSourceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetL7RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (o GetL7RulesV2ListSourceListOutput) ToGetL7RulesV2ListSourceListOutput() GetL7RulesV2ListSourceListOutput {
+	return o
+}
+
+func (o GetL7RulesV2ListSourceListOutput) ToGetL7RulesV2ListSourceListOutputWithContext(ctx context.Context) GetL7RulesV2ListSourceListOutput {
+	return o
+}
+
+// Back-to-source IP or domain name.
+func (o GetL7RulesV2ListSourceListOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetL7RulesV2ListSourceList) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// Weight value, take value [0,100].
+func (o GetL7RulesV2ListSourceListOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetL7RulesV2ListSourceList) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type GetL7RulesV2ListSourceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetL7RulesV2ListSourceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetL7RulesV2ListSourceList)(nil)).Elem()
+}
+
+func (o GetL7RulesV2ListSourceListArrayOutput) ToGetL7RulesV2ListSourceListArrayOutput() GetL7RulesV2ListSourceListArrayOutput {
+	return o
+}
+
+func (o GetL7RulesV2ListSourceListArrayOutput) ToGetL7RulesV2ListSourceListArrayOutputWithContext(ctx context.Context) GetL7RulesV2ListSourceListArrayOutput {
+	return o
+}
+
+func (o GetL7RulesV2ListSourceListArrayOutput) Index(i pulumi.IntInput) GetL7RulesV2ListSourceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetL7RulesV2ListSourceList {
+		return vs[0].([]GetL7RulesV2ListSourceList)[vs[1].(int)]
+	}).(GetL7RulesV2ListSourceListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpPoliciesListInput)(nil)).Elem(), CCHttpPoliciesListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpPoliciesListArrayInput)(nil)).Elem(), CCHttpPoliciesListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpPoliciesListRuleListInput)(nil)).Elem(), CCHttpPoliciesListRuleListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpPoliciesListRuleListArrayInput)(nil)).Elem(), CCHttpPoliciesListRuleListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpPolicyRuleListInput)(nil)).Elem(), CCHttpPolicyRuleListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpPolicyRuleListArrayInput)(nil)).Elem(), CCHttpPolicyRuleListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPoliciesListInput)(nil)).Elem(), CCHttpsPoliciesListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPoliciesListArrayInput)(nil)).Elem(), CCHttpsPoliciesListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPoliciesListRuleListInput)(nil)).Elem(), CCHttpsPoliciesListRuleListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPoliciesListRuleListArrayInput)(nil)).Elem(), CCHttpsPoliciesListRuleListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPolicyRuleListInput)(nil)).Elem(), CCHttpsPolicyRuleListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCHttpsPolicyRuleListArrayInput)(nil)).Elem(), CCHttpsPolicyRuleListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcBlackWhiteIpInput)(nil)).Elem(), CCPolicyV2CcBlackWhiteIpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcBlackWhiteIpArrayInput)(nil)).Elem(), CCPolicyV2CcBlackWhiteIpArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcGeoIpPolicyInput)(nil)).Elem(), CCPolicyV2CcGeoIpPolicyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcGeoIpPolicyArrayInput)(nil)).Elem(), CCPolicyV2CcGeoIpPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionPolicyInput)(nil)).Elem(), CCPolicyV2CcPrecisionPolicyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionPolicyArrayInput)(nil)).Elem(), CCPolicyV2CcPrecisionPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionPolicyPolicyInput)(nil)).Elem(), CCPolicyV2CcPrecisionPolicyPolicyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionPolicyPolicyArrayInput)(nil)).Elem(), CCPolicyV2CcPrecisionPolicyPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimitInput)(nil)).Elem(), CCPolicyV2CcPrecisionReqLimitArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimitArrayInput)(nil)).Elem(), CCPolicyV2CcPrecisionReqLimitArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimitPolicyInput)(nil)).Elem(), CCPolicyV2CcPrecisionReqLimitPolicyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2CcPrecisionReqLimitPolicyArrayInput)(nil)).Elem(), CCPolicyV2CcPrecisionReqLimitPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2ThresholdInput)(nil)).Elem(), CCPolicyV2ThresholdArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2ThresholdArrayInput)(nil)).Elem(), CCPolicyV2ThresholdArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListInput)(nil)).Elem(), DdosPoliciesListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListArrayInput)(nil)).Elem(), DdosPoliciesListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListDropOptionInput)(nil)).Elem(), DdosPoliciesListDropOptionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListDropOptionArrayInput)(nil)).Elem(), DdosPoliciesListDropOptionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListPacketFilterInput)(nil)).Elem(), DdosPoliciesListPacketFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListPacketFilterArrayInput)(nil)).Elem(), DdosPoliciesListPacketFilterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListPortFilterInput)(nil)).Elem(), DdosPoliciesListPortFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListPortFilterArrayInput)(nil)).Elem(), DdosPoliciesListPortFilterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListWatermarkFilterInput)(nil)).Elem(), DdosPoliciesListWatermarkFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListWatermarkFilterArrayInput)(nil)).Elem(), DdosPoliciesListWatermarkFilterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListWatermarkKeyInput)(nil)).Elem(), DdosPoliciesListWatermarkKeyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPoliciesListWatermarkKeyArrayInput)(nil)).Elem(), DdosPoliciesListWatermarkKeyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput)(nil)).Elem(), DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput)(nil)).Elem(), DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyCasesListInput)(nil)).Elem(), DdosPolicyCasesListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyCasesListArrayInput)(nil)).Elem(), DdosPolicyCasesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcHttpPolicyRuleListInput)(nil)).Elem(), CcHttpPolicyRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcHttpPolicyRuleListArrayInput)(nil)).Elem(), CcHttpPolicyRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcHttpsPolicyRuleListInput)(nil)).Elem(), CcHttpsPolicyRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcHttpsPolicyRuleListArrayInput)(nil)).Elem(), CcHttpsPolicyRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcBlackWhiteIpInput)(nil)).Elem(), CcPolicyV2CcBlackWhiteIpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcBlackWhiteIpArrayInput)(nil)).Elem(), CcPolicyV2CcBlackWhiteIpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcGeoIpPolicyInput)(nil)).Elem(), CcPolicyV2CcGeoIpPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcGeoIpPolicyArrayInput)(nil)).Elem(), CcPolicyV2CcGeoIpPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionPolicyInput)(nil)).Elem(), CcPolicyV2CcPrecisionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionPolicyArrayInput)(nil)).Elem(), CcPolicyV2CcPrecisionPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionPolicyPolicyInput)(nil)).Elem(), CcPolicyV2CcPrecisionPolicyPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionPolicyPolicyArrayInput)(nil)).Elem(), CcPolicyV2CcPrecisionPolicyPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimitInput)(nil)).Elem(), CcPolicyV2CcPrecisionReqLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimitArrayInput)(nil)).Elem(), CcPolicyV2CcPrecisionReqLimitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimitPolicyInput)(nil)).Elem(), CcPolicyV2CcPrecisionReqLimitPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2CcPrecisionReqLimitPolicyArrayInput)(nil)).Elem(), CcPolicyV2CcPrecisionReqLimitPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2ThresholdInput)(nil)).Elem(), CcPolicyV2ThresholdArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2ThresholdArrayInput)(nil)).Elem(), CcPolicyV2ThresholdArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDropOptionInput)(nil)).Elem(), DdosPolicyDropOptionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDropOptionArrayInput)(nil)).Elem(), DdosPolicyDropOptionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyPacketFilterInput)(nil)).Elem(), DdosPolicyPacketFilterArgs{})
@@ -6560,66 +7678,68 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*L4RuleV2RulesPtrInput)(nil)).Elem(), L4RuleV2RulesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L4RuleV2RulesSourceListInput)(nil)).Elem(), L4RuleV2RulesSourceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L4RuleV2RulesSourceListArrayInput)(nil)).Elem(), L4RuleV2RulesSourceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesListInput)(nil)).Elem(), L4RulesListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesListArrayInput)(nil)).Elem(), L4RulesListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesListSourceListInput)(nil)).Elem(), L4RulesListSourceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesListSourceListArrayInput)(nil)).Elem(), L4RulesListSourceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesV2ListInput)(nil)).Elem(), L4RulesV2ListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesV2ListArrayInput)(nil)).Elem(), L4RulesV2ListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesV2ListSourceListInput)(nil)).Elem(), L4RulesV2ListSourceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L4RulesV2ListSourceListArrayInput)(nil)).Elem(), L4RulesV2ListSourceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L7RuleV2RuleInput)(nil)).Elem(), L7RuleV2RuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L7RuleV2RulePtrInput)(nil)).Elem(), L7RuleV2RuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L7RuleV2RuleSourceListInput)(nil)).Elem(), L7RuleV2RuleSourceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L7RuleV2RuleSourceListArrayInput)(nil)).Elem(), L7RuleV2RuleSourceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L7RulesListInput)(nil)).Elem(), L7RulesListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L7RulesListArrayInput)(nil)).Elem(), L7RulesListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L7RulesV2ListInput)(nil)).Elem(), L7RulesV2ListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L7RulesV2ListArrayInput)(nil)).Elem(), L7RulesV2ListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L7RulesV2ListSourceListInput)(nil)).Elem(), L7RulesV2ListSourceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*L7RulesV2ListSourceListArrayInput)(nil)).Elem(), L7RulesV2ListSourceListArray{})
-	pulumi.RegisterOutputType(CCHttpPoliciesListOutput{})
-	pulumi.RegisterOutputType(CCHttpPoliciesListArrayOutput{})
-	pulumi.RegisterOutputType(CCHttpPoliciesListRuleListOutput{})
-	pulumi.RegisterOutputType(CCHttpPoliciesListRuleListArrayOutput{})
-	pulumi.RegisterOutputType(CCHttpPolicyRuleListOutput{})
-	pulumi.RegisterOutputType(CCHttpPolicyRuleListArrayOutput{})
-	pulumi.RegisterOutputType(CCHttpsPoliciesListOutput{})
-	pulumi.RegisterOutputType(CCHttpsPoliciesListArrayOutput{})
-	pulumi.RegisterOutputType(CCHttpsPoliciesListRuleListOutput{})
-	pulumi.RegisterOutputType(CCHttpsPoliciesListRuleListArrayOutput{})
-	pulumi.RegisterOutputType(CCHttpsPolicyRuleListOutput{})
-	pulumi.RegisterOutputType(CCHttpsPolicyRuleListArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcBlackWhiteIpOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcBlackWhiteIpArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcGeoIpPolicyOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcGeoIpPolicyArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionPolicyOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionPolicyArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionPolicyPolicyOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionPolicyPolicyArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionReqLimitOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionReqLimitArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionReqLimitPolicyOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2CcPrecisionReqLimitPolicyArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2ThresholdOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2ThresholdArrayOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListArrayOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListDropOptionOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListDropOptionArrayOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListPacketFilterOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListPacketFilterArrayOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListPortFilterOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListPortFilterArrayOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListWatermarkFilterOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListWatermarkFilterArrayOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListWatermarkKeyOutput{})
-	pulumi.RegisterOutputType(DdosPoliciesListWatermarkKeyArrayOutput{})
-	pulumi.RegisterOutputType(DdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput{})
-	pulumi.RegisterOutputType(DdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput{})
-	pulumi.RegisterOutputType(DdosPolicyCasesListOutput{})
-	pulumi.RegisterOutputType(DdosPolicyCasesListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpPoliciesListInput)(nil)).Elem(), GetCcHttpPoliciesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpPoliciesListArrayInput)(nil)).Elem(), GetCcHttpPoliciesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpPoliciesListRuleListInput)(nil)).Elem(), GetCcHttpPoliciesListRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpPoliciesListRuleListArrayInput)(nil)).Elem(), GetCcHttpPoliciesListRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpsPoliciesListInput)(nil)).Elem(), GetCcHttpsPoliciesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpsPoliciesListArrayInput)(nil)).Elem(), GetCcHttpsPoliciesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpsPoliciesListRuleListInput)(nil)).Elem(), GetCcHttpsPoliciesListRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcHttpsPoliciesListRuleListArrayInput)(nil)).Elem(), GetCcHttpsPoliciesListRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListInput)(nil)).Elem(), GetDdosPoliciesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListArrayInput)(nil)).Elem(), GetDdosPoliciesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListDropOptionInput)(nil)).Elem(), GetDdosPoliciesListDropOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListDropOptionArrayInput)(nil)).Elem(), GetDdosPoliciesListDropOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListPacketFilterInput)(nil)).Elem(), GetDdosPoliciesListPacketFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListPacketFilterArrayInput)(nil)).Elem(), GetDdosPoliciesListPacketFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListPortFilterInput)(nil)).Elem(), GetDdosPoliciesListPortFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListPortFilterArrayInput)(nil)).Elem(), GetDdosPoliciesListPortFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListWatermarkFilterInput)(nil)).Elem(), GetDdosPoliciesListWatermarkFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListWatermarkFilterArrayInput)(nil)).Elem(), GetDdosPoliciesListWatermarkFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListWatermarkKeyInput)(nil)).Elem(), GetDdosPoliciesListWatermarkKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPoliciesListWatermarkKeyArrayInput)(nil)).Elem(), GetDdosPoliciesListWatermarkKeyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput)(nil)).Elem(), GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput)(nil)).Elem(), GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPolicyCasesListInput)(nil)).Elem(), GetDdosPolicyCasesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosPolicyCasesListArrayInput)(nil)).Elem(), GetDdosPolicyCasesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEipListInput)(nil)).Elem(), GetEipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEipListArrayInput)(nil)).Elem(), GetEipListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesListInput)(nil)).Elem(), GetL4RulesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesListArrayInput)(nil)).Elem(), GetL4RulesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesListSourceListInput)(nil)).Elem(), GetL4RulesListSourceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesListSourceListArrayInput)(nil)).Elem(), GetL4RulesListSourceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesV2ListInput)(nil)).Elem(), GetL4RulesV2ListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesV2ListArrayInput)(nil)).Elem(), GetL4RulesV2ListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesV2ListSourceListInput)(nil)).Elem(), GetL4RulesV2ListSourceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL4RulesV2ListSourceListArrayInput)(nil)).Elem(), GetL4RulesV2ListSourceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL7RulesListInput)(nil)).Elem(), GetL7RulesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL7RulesListArrayInput)(nil)).Elem(), GetL7RulesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL7RulesV2ListInput)(nil)).Elem(), GetL7RulesV2ListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL7RulesV2ListArrayInput)(nil)).Elem(), GetL7RulesV2ListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL7RulesV2ListSourceListInput)(nil)).Elem(), GetL7RulesV2ListSourceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetL7RulesV2ListSourceListArrayInput)(nil)).Elem(), GetL7RulesV2ListSourceListArray{})
+	pulumi.RegisterOutputType(CcHttpPolicyRuleListOutput{})
+	pulumi.RegisterOutputType(CcHttpPolicyRuleListArrayOutput{})
+	pulumi.RegisterOutputType(CcHttpsPolicyRuleListOutput{})
+	pulumi.RegisterOutputType(CcHttpsPolicyRuleListArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcBlackWhiteIpOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcBlackWhiteIpArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcGeoIpPolicyOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcGeoIpPolicyArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionPolicyOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionPolicyArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionPolicyPolicyOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionPolicyPolicyArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionReqLimitOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionReqLimitArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionReqLimitPolicyOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2ThresholdOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2ThresholdArrayOutput{})
 	pulumi.RegisterOutputType(DdosPolicyDropOptionOutput{})
 	pulumi.RegisterOutputType(DdosPolicyDropOptionArrayOutput{})
 	pulumi.RegisterOutputType(DdosPolicyPacketFilterOutput{})
@@ -6650,22 +7770,48 @@ func init() {
 	pulumi.RegisterOutputType(L4RuleV2RulesPtrOutput{})
 	pulumi.RegisterOutputType(L4RuleV2RulesSourceListOutput{})
 	pulumi.RegisterOutputType(L4RuleV2RulesSourceListArrayOutput{})
-	pulumi.RegisterOutputType(L4RulesListOutput{})
-	pulumi.RegisterOutputType(L4RulesListArrayOutput{})
-	pulumi.RegisterOutputType(L4RulesListSourceListOutput{})
-	pulumi.RegisterOutputType(L4RulesListSourceListArrayOutput{})
-	pulumi.RegisterOutputType(L4RulesV2ListOutput{})
-	pulumi.RegisterOutputType(L4RulesV2ListArrayOutput{})
-	pulumi.RegisterOutputType(L4RulesV2ListSourceListOutput{})
-	pulumi.RegisterOutputType(L4RulesV2ListSourceListArrayOutput{})
 	pulumi.RegisterOutputType(L7RuleV2RuleOutput{})
 	pulumi.RegisterOutputType(L7RuleV2RulePtrOutput{})
 	pulumi.RegisterOutputType(L7RuleV2RuleSourceListOutput{})
 	pulumi.RegisterOutputType(L7RuleV2RuleSourceListArrayOutput{})
-	pulumi.RegisterOutputType(L7RulesListOutput{})
-	pulumi.RegisterOutputType(L7RulesListArrayOutput{})
-	pulumi.RegisterOutputType(L7RulesV2ListOutput{})
-	pulumi.RegisterOutputType(L7RulesV2ListArrayOutput{})
-	pulumi.RegisterOutputType(L7RulesV2ListSourceListOutput{})
-	pulumi.RegisterOutputType(L7RulesV2ListSourceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCcHttpPoliciesListOutput{})
+	pulumi.RegisterOutputType(GetCcHttpPoliciesListArrayOutput{})
+	pulumi.RegisterOutputType(GetCcHttpPoliciesListRuleListOutput{})
+	pulumi.RegisterOutputType(GetCcHttpPoliciesListRuleListArrayOutput{})
+	pulumi.RegisterOutputType(GetCcHttpsPoliciesListOutput{})
+	pulumi.RegisterOutputType(GetCcHttpsPoliciesListArrayOutput{})
+	pulumi.RegisterOutputType(GetCcHttpsPoliciesListRuleListOutput{})
+	pulumi.RegisterOutputType(GetCcHttpsPoliciesListRuleListArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListDropOptionOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListDropOptionArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListPacketFilterOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListPacketFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListPortFilterOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListPortFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListWatermarkFilterOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListWatermarkFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListWatermarkKeyOutput{})
+	pulumi.RegisterOutputType(GetDdosPoliciesListWatermarkKeyArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput{})
+	pulumi.RegisterOutputType(GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosPolicyCasesListOutput{})
+	pulumi.RegisterOutputType(GetDdosPolicyCasesListArrayOutput{})
+	pulumi.RegisterOutputType(GetEipListOutput{})
+	pulumi.RegisterOutputType(GetEipListArrayOutput{})
+	pulumi.RegisterOutputType(GetL4RulesListOutput{})
+	pulumi.RegisterOutputType(GetL4RulesListArrayOutput{})
+	pulumi.RegisterOutputType(GetL4RulesListSourceListOutput{})
+	pulumi.RegisterOutputType(GetL4RulesListSourceListArrayOutput{})
+	pulumi.RegisterOutputType(GetL4RulesV2ListOutput{})
+	pulumi.RegisterOutputType(GetL4RulesV2ListArrayOutput{})
+	pulumi.RegisterOutputType(GetL4RulesV2ListSourceListOutput{})
+	pulumi.RegisterOutputType(GetL4RulesV2ListSourceListArrayOutput{})
+	pulumi.RegisterOutputType(GetL7RulesListOutput{})
+	pulumi.RegisterOutputType(GetL7RulesListArrayOutput{})
+	pulumi.RegisterOutputType(GetL7RulesV2ListOutput{})
+	pulumi.RegisterOutputType(GetL7RulesV2ListArrayOutput{})
+	pulumi.RegisterOutputType(GetL7RulesV2ListSourceListOutput{})
+	pulumi.RegisterOutputType(GetL7RulesV2ListSourceListArrayOutput{})
 }

@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class DdosPolicyV2BlackWhiteIp
     {
+        /// <summary>
+        /// Ip of resource instance.
+        /// </summary>
         public readonly string Ip;
+        /// <summary>
+        /// IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
+        /// </summary>
         public readonly string IpType;
 
         [OutputConstructor]

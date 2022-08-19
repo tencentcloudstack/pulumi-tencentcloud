@@ -296,7 +296,48 @@ class Instance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create tcr instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.Instance("foo",
+            instance_type="basic",
+            tags={
+                "test": "tf",
+            })
+        ```
+
+        Using public network access whitelist
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.Instance("foo",
+            instance_type="basic",
+            open_public_operation=True,
+            security_policies=[
+                tencentcloud.tcr.InstanceSecurityPolicyArgs(
+                    cidr_block="10.0.0.1/24",
+                ),
+                tencentcloud.tcr.InstanceSecurityPolicyArgs(
+                    cidr_block="192.168.1.1",
+                ),
+            ])
+        ```
+
+        ## Import
+
+        tcr instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] delete_bucket: Indicate to delete the COS bucket which is auto-created with the instance or not.
@@ -313,7 +354,48 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create tcr instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.Instance("foo",
+            instance_type="basic",
+            tags={
+                "test": "tf",
+            })
+        ```
+
+        Using public network access whitelist
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.Instance("foo",
+            instance_type="basic",
+            open_public_operation=True,
+            security_policies=[
+                tencentcloud.tcr.InstanceSecurityPolicyArgs(
+                    cidr_block="10.0.0.1/24",
+                ),
+                tencentcloud.tcr.InstanceSecurityPolicyArgs(
+                    cidr_block="192.168.1.1",
+                ),
+            ])
+        ```
+
+        ## Import
+
+        tcr instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

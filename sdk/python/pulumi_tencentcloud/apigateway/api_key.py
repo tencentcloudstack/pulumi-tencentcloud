@@ -8,15 +8,15 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
-__all__ = ['APIKeyArgs', 'APIKey']
+__all__ = ['ApiKeyArgs', 'ApiKey']
 
 @pulumi.input_type
-class APIKeyArgs:
+class ApiKeyArgs:
     def __init__(__self__, *,
                  secret_name: pulumi.Input[str],
                  status: Optional[pulumi.Input[str]] = None):
         """
-        The set of arguments for constructing a APIKey resource.
+        The set of arguments for constructing a ApiKey resource.
         :param pulumi.Input[str] secret_name: Custom key name.
         :param pulumi.Input[str] status: Key status. Valid values: `on`, `off`.
         """
@@ -50,7 +50,7 @@ class APIKeyArgs:
 
 
 @pulumi.input_type
-class _APIKeyState:
+class _ApiKeyState:
     def __init__(__self__, *,
                  access_key_secret: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
@@ -58,7 +58,7 @@ class _APIKeyState:
                  secret_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering APIKey resources.
+        Input properties used for looking up and filtering ApiKey resources.
         :param pulumi.Input[str] access_key_secret: Created API key.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -137,7 +137,7 @@ class _APIKeyState:
         pulumi.set(self, "status", value)
 
 
-class APIKey(pulumi.CustomResource):
+class ApiKey(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -146,7 +146,27 @@ class APIKey(pulumi.CustomResource):
                  status: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a APIKey resource with the given unique name, props, and options.
+        Use this resource to create API gateway access key.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.api_gateway.ApiKey("test",
+            secret_name="my_api_key",
+            status="on")
+        ```
+
+        ## Import
+
+        API gateway access key can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] secret_name: Custom key name.
@@ -156,17 +176,37 @@ class APIKey(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: APIKeyArgs,
+                 args: ApiKeyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a APIKey resource with the given unique name, props, and options.
+        Use this resource to create API gateway access key.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.api_gateway.ApiKey("test",
+            secret_name="my_api_key",
+            status="on")
+        ```
+
+        ## Import
+
+        API gateway access key can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+        ```
+
         :param str resource_name: The name of the resource.
-        :param APIKeyArgs args: The arguments to use to populate this resource's properties.
+        :param ApiKeyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(APIKeyArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(ApiKeyArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -187,7 +227,7 @@ class APIKey(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = APIKeyArgs.__new__(APIKeyArgs)
+            __props__ = ApiKeyArgs.__new__(ApiKeyArgs)
 
             if secret_name is None and not opts.urn:
                 raise TypeError("Missing required property 'secret_name'")
@@ -196,8 +236,8 @@ class APIKey(pulumi.CustomResource):
             __props__.__dict__["access_key_secret"] = None
             __props__.__dict__["create_time"] = None
             __props__.__dict__["modify_time"] = None
-        super(APIKey, __self__).__init__(
-            'tencentcloud:APIGateway/aPIKey:APIKey',
+        super(ApiKey, __self__).__init__(
+            'tencentcloud:ApiGateway/apiKey:ApiKey',
             resource_name,
             __props__,
             opts)
@@ -210,9 +250,9 @@ class APIKey(pulumi.CustomResource):
             create_time: Optional[pulumi.Input[str]] = None,
             modify_time: Optional[pulumi.Input[str]] = None,
             secret_name: Optional[pulumi.Input[str]] = None,
-            status: Optional[pulumi.Input[str]] = None) -> 'APIKey':
+            status: Optional[pulumi.Input[str]] = None) -> 'ApiKey':
         """
-        Get an existing APIKey resource's state with the given name, id, and optional extra
+        Get an existing ApiKey resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -226,14 +266,14 @@ class APIKey(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _APIKeyState.__new__(_APIKeyState)
+        __props__ = _ApiKeyState.__new__(_ApiKeyState)
 
         __props__.__dict__["access_key_secret"] = access_key_secret
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["modify_time"] = modify_time
         __props__.__dict__["secret_name"] = secret_name
         __props__.__dict__["status"] = status
-        return APIKey(resource_name, opts=opts, __props__=__props__)
+        return ApiKey(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="accessKeySecret")

@@ -13,11 +13,29 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ContainerInstanceInitContainerVolumeMount
     {
+        /// <summary>
+        /// Volume mount propagation.
+        /// </summary>
         public readonly string? MountPropagation;
+        /// <summary>
+        /// Volume name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Volume mount path.
+        /// </summary>
         public readonly string Path;
+        /// <summary>
+        /// Whether the volume is read-only.
+        /// </summary>
         public readonly bool? ReadOnly;
+        /// <summary>
+        /// Volume mount sub-path.
+        /// </summary>
         public readonly string? SubPath;
+        /// <summary>
+        /// Volume mount sub-path expression.
+        /// </summary>
         public readonly string? SubPathExpr;
 
         [OutputConstructor]

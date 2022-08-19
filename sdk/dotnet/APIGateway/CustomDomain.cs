@@ -7,14 +7,45 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/customDomain:CustomDomain")]
+    /// <summary>
+    /// Use this resource to create custom domain of API gateway.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new Tencentcloud.ApiGateway.CustomDomainArgs
+    ///         {
+    ///             DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+    ///             IsDefaultMapping = false,
+    ///             NetType = "OUTER",
+    ///             PathMappings = 
+    ///             {
+    ///                 "/good#test",
+    ///                 "/root#release",
+    ///             },
+    ///             Protocol = "http",
+    ///             ServiceId = "service-ohxqslqe",
+    ///             SubDomain = "tic-test.dnsv1.com",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/customDomain:CustomDomain")]
     public partial class CustomDomain : Pulumi.CustomResource
     {
         /// <summary>
-        /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-        /// `https` or `http&amp;https`.
+        /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&amp;https`.
         /// </summary>
         [Output("certificateId")]
         public Output<string> CertificateId { get; private set; } = null!;
@@ -26,8 +57,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Output<string> DefaultDomain { get; private set; } = null!;
 
         /// <summary>
-        /// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-        /// In this case, the `path_mappings` attribute is required.
+        /// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         /// </summary>
         [Output("isDefaultMapping")]
         public Output<bool?> IsDefaultMapping { get; private set; } = null!;
@@ -39,8 +69,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Output<string> NetType { get; private set; } = null!;
 
         /// <summary>
-        /// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-        /// `prepub`, and `release`.
+        /// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         /// </summary>
         [Output("pathMappings")]
         public Output<ImmutableArray<string>> PathMappings { get; private set; } = null!;
@@ -78,12 +107,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public CustomDomain(string name, CustomDomainArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/customDomain:CustomDomain", name, args ?? new CustomDomainArgs(), MakeResourceOptions(options, ""))
+            : base("tencentcloud:ApiGateway/customDomain:CustomDomain", name, args ?? new CustomDomainArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private CustomDomain(string name, Input<string> id, CustomDomainState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/customDomain:CustomDomain", name, state, MakeResourceOptions(options, id))
+            : base("tencentcloud:ApiGateway/customDomain:CustomDomain", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -116,8 +145,7 @@ namespace Pulumi.Tencentcloud.APIGateway
     public sealed class CustomDomainArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-        /// `https` or `http&amp;https`.
+        /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&amp;https`.
         /// </summary>
         [Input("certificateId")]
         public Input<string>? CertificateId { get; set; }
@@ -129,8 +157,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string> DefaultDomain { get; set; } = null!;
 
         /// <summary>
-        /// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-        /// In this case, the `path_mappings` attribute is required.
+        /// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         /// </summary>
         [Input("isDefaultMapping")]
         public Input<bool>? IsDefaultMapping { get; set; }
@@ -145,8 +172,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         private InputList<string>? _pathMappings;
 
         /// <summary>
-        /// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-        /// `prepub`, and `release`.
+        /// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         /// </summary>
         public InputList<string> PathMappings
         {
@@ -180,8 +206,7 @@ namespace Pulumi.Tencentcloud.APIGateway
     public sealed class CustomDomainState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-        /// `https` or `http&amp;https`.
+        /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&amp;https`.
         /// </summary>
         [Input("certificateId")]
         public Input<string>? CertificateId { get; set; }
@@ -193,8 +218,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? DefaultDomain { get; set; }
 
         /// <summary>
-        /// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-        /// In this case, the `path_mappings` attribute is required.
+        /// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         /// </summary>
         [Input("isDefaultMapping")]
         public Input<bool>? IsDefaultMapping { get; set; }
@@ -209,8 +233,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         private InputList<string>? _pathMappings;
 
         /// <summary>
-        /// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-        /// `prepub`, and `release`.
+        /// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         /// </summary>
         public InputList<string> PathMappings
         {

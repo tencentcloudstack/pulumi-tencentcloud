@@ -230,7 +230,29 @@ class UsagePlan(pulumi.CustomResource):
                  usage_plan_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a UsagePlan resource with the given unique name, props, and options.
+        Use this resource to create API gateway usage plan.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        plan = tencentcloud.api_gateway.UsagePlan("plan",
+            max_request_num=100,
+            max_request_num_pre_sec=10,
+            usage_plan_desc="nice plan",
+            usage_plan_name="my_plan")
+        ```
+
+        ## Import
+
+        API gateway usage plan can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] max_request_num: Total number of requests allowed. Valid values: -1, [1,99999999]. The default value is -1, which indicates no limit.
@@ -245,7 +267,29 @@ class UsagePlan(pulumi.CustomResource):
                  args: UsagePlanArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a UsagePlan resource with the given unique name, props, and options.
+        Use this resource to create API gateway usage plan.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        plan = tencentcloud.api_gateway.UsagePlan("plan",
+            max_request_num=100,
+            max_request_num_pre_sec=10,
+            usage_plan_desc="nice plan",
+            usage_plan_name="my_plan")
+        ```
+
+        ## Import
+
+        API gateway usage plan can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+        ```
+
         :param str resource_name: The name of the resource.
         :param UsagePlanArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -288,7 +332,7 @@ class UsagePlan(pulumi.CustomResource):
             __props__.__dict__["create_time"] = None
             __props__.__dict__["modify_time"] = None
         super(UsagePlan, __self__).__init__(
-            'tencentcloud:APIGateway/usagePlan:UsagePlan',
+            'tencentcloud:ApiGateway/usagePlan:UsagePlan',
             resource_name,
             __props__,
             opts)

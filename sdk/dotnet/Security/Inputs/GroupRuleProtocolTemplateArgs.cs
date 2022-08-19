@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Security.Inputs
 
     public sealed class GroupRuleProtocolTemplateArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Address template group ID, conflicts with `template_id`.
+        /// </summary>
         [Input("groupId")]
         public Input<string>? GroupId { get; set; }
 
+        /// <summary>
+        /// Address template ID, conflicts with `group_id`.
+        /// </summary>
         [Input("templateId")]
         public Input<string>? TemplateId { get; set; }
 

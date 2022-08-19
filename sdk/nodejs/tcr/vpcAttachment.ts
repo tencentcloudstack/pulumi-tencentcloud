@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create tcr vpc attachment to manage access of internal endpoint.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tcr.VpcAttachment("foo", {
+ *     instanceId: "cls-satg5125",
+ *     subnetId: "subnet-1uwh63so",
+ *     vpcId: "vpc-asg3sfa3",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * tcr vpc attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+ * ```
+ */
 export class VpcAttachment extends pulumi.CustomResource {
     /**
      * Get an existing VpcAttachment resource's state with the given name, ID, and optional extra

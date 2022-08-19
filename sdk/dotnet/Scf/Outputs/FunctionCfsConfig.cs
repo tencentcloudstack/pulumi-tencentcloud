@@ -13,14 +13,32 @@ namespace Pulumi.Tencentcloud.Scf.Outputs
     [OutputType]
     public sealed class FunctionCfsConfig
     {
+        /// <summary>
+        /// File system instance ID.
+        /// </summary>
         public readonly string CfsId;
         public readonly string? IpAddress;
+        /// <summary>
+        /// Local mount directory.
+        /// </summary>
         public readonly string LocalMountDir;
+        /// <summary>
+        /// File system mount instance ID.
+        /// </summary>
         public readonly string MountInsId;
         public readonly string? MountSubnetId;
         public readonly string? MountVpcId;
+        /// <summary>
+        /// Remote mount directory.
+        /// </summary>
         public readonly string RemoteMountDir;
+        /// <summary>
+        /// ID of user group.
+        /// </summary>
         public readonly string UserGroupId;
+        /// <summary>
+        /// ID of user.
+        /// </summary>
         public readonly string UserId;
 
         [OutputConstructor]

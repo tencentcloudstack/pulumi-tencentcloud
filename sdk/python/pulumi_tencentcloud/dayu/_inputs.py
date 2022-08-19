@@ -9,15 +9,15 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'CCHttpPolicyRuleListArgs',
-    'CCHttpsPolicyRuleListArgs',
-    'CCPolicyV2CcBlackWhiteIpArgs',
-    'CCPolicyV2CcGeoIpPolicyArgs',
-    'CCPolicyV2CcPrecisionPolicyArgs',
-    'CCPolicyV2CcPrecisionPolicyPolicyArgs',
-    'CCPolicyV2CcPrecisionReqLimitArgs',
-    'CCPolicyV2CcPrecisionReqLimitPolicyArgs',
-    'CCPolicyV2ThresholdArgs',
+    'CcHttpPolicyRuleListArgs',
+    'CcHttpsPolicyRuleListArgs',
+    'CcPolicyV2CcBlackWhiteIpArgs',
+    'CcPolicyV2CcGeoIpPolicyArgs',
+    'CcPolicyV2CcPrecisionPolicyArgs',
+    'CcPolicyV2CcPrecisionPolicyPolicyArgs',
+    'CcPolicyV2CcPrecisionReqLimitArgs',
+    'CcPolicyV2CcPrecisionReqLimitPolicyArgs',
+    'CcPolicyV2ThresholdArgs',
     'DdosPolicyDropOptionArgs',
     'DdosPolicyPacketFilterArgs',
     'DdosPolicyPortFilterArgs',
@@ -38,11 +38,16 @@ __all__ = [
 ]
 
 @pulumi.input_type
-class CCHttpPolicyRuleListArgs:
+class CcHttpPolicyRuleListArgs:
     def __init__(__self__, *,
                  operator: Optional[pulumi.Input[str]] = None,
                  skey: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] operator: Operator of the rule. Valid values: `include`, `not_include`, `equal`.
+        :param pulumi.Input[str] skey: Key of the rule. Valid values: `host`, `cgi`, `ua`, `referer`.
+        :param pulumi.Input[str] value: Rule value, then length should be less than 31 bytes.
+        """
         if operator is not None:
             pulumi.set(__self__, "operator", operator)
         if skey is not None:
@@ -53,6 +58,9 @@ class CCHttpPolicyRuleListArgs:
     @property
     @pulumi.getter
     def operator(self) -> Optional[pulumi.Input[str]]:
+        """
+        Operator of the rule. Valid values: `include`, `not_include`, `equal`.
+        """
         return pulumi.get(self, "operator")
 
     @operator.setter
@@ -62,6 +70,9 @@ class CCHttpPolicyRuleListArgs:
     @property
     @pulumi.getter
     def skey(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key of the rule. Valid values: `host`, `cgi`, `ua`, `referer`.
+        """
         return pulumi.get(self, "skey")
 
     @skey.setter
@@ -71,6 +82,9 @@ class CCHttpPolicyRuleListArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Rule value, then length should be less than 31 bytes.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -79,11 +93,16 @@ class CCHttpPolicyRuleListArgs:
 
 
 @pulumi.input_type
-class CCHttpsPolicyRuleListArgs:
+class CcHttpsPolicyRuleListArgs:
     def __init__(__self__, *,
                  operator: pulumi.Input[str],
                  skey: pulumi.Input[str],
                  value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] operator: Operator of the rule. Valid values are `include` and `equal`.
+        :param pulumi.Input[str] skey: Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+        :param pulumi.Input[str] value: Rule value, then length should be less than 31 bytes.
+        """
         pulumi.set(__self__, "operator", operator)
         pulumi.set(__self__, "skey", skey)
         pulumi.set(__self__, "value", value)
@@ -91,6 +110,9 @@ class CCHttpsPolicyRuleListArgs:
     @property
     @pulumi.getter
     def operator(self) -> pulumi.Input[str]:
+        """
+        Operator of the rule. Valid values are `include` and `equal`.
+        """
         return pulumi.get(self, "operator")
 
     @operator.setter
@@ -100,6 +122,9 @@ class CCHttpsPolicyRuleListArgs:
     @property
     @pulumi.getter
     def skey(self) -> pulumi.Input[str]:
+        """
+        Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+        """
         return pulumi.get(self, "skey")
 
     @skey.setter
@@ -109,6 +134,9 @@ class CCHttpsPolicyRuleListArgs:
     @property
     @pulumi.getter
     def value(self) -> pulumi.Input[str]:
+        """
+        Rule value, then length should be less than 31 bytes.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -117,7 +145,7 @@ class CCHttpsPolicyRuleListArgs:
 
 
 @pulumi.input_type
-class CCPolicyV2CcBlackWhiteIpArgs:
+class CcPolicyV2CcBlackWhiteIpArgs:
     def __init__(__self__, *,
                  black_white_ip: pulumi.Input[str],
                  domain: pulumi.Input[str],
@@ -125,6 +153,14 @@ class CCPolicyV2CcBlackWhiteIpArgs:
                  type: pulumi.Input[str],
                  create_time: Optional[pulumi.Input[str]] = None,
                  modify_time: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] black_white_ip: Blacklist and whitelist IP addresses.
+        :param pulumi.Input[str] domain: Domain.
+        :param pulumi.Input[str] protocol: Protocol.
+        :param pulumi.Input[str] type: IP type, value [black(blacklist IP), white (whitelist IP)].
+        :param pulumi.Input[str] create_time: Create time.
+        :param pulumi.Input[str] modify_time: Modify time.
+        """
         pulumi.set(__self__, "black_white_ip", black_white_ip)
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "protocol", protocol)
@@ -137,6 +173,9 @@ class CCPolicyV2CcBlackWhiteIpArgs:
     @property
     @pulumi.getter(name="blackWhiteIp")
     def black_white_ip(self) -> pulumi.Input[str]:
+        """
+        Blacklist and whitelist IP addresses.
+        """
         return pulumi.get(self, "black_white_ip")
 
     @black_white_ip.setter
@@ -146,6 +185,9 @@ class CCPolicyV2CcBlackWhiteIpArgs:
     @property
     @pulumi.getter
     def domain(self) -> pulumi.Input[str]:
+        """
+        Domain.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -155,6 +197,9 @@ class CCPolicyV2CcBlackWhiteIpArgs:
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -164,6 +209,9 @@ class CCPolicyV2CcBlackWhiteIpArgs:
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
+        """
+        IP type, value [black(blacklist IP), white (whitelist IP)].
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -173,6 +221,9 @@ class CCPolicyV2CcBlackWhiteIpArgs:
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Create time.
+        """
         return pulumi.get(self, "create_time")
 
     @create_time.setter
@@ -182,6 +233,9 @@ class CCPolicyV2CcBlackWhiteIpArgs:
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Modify time.
+        """
         return pulumi.get(self, "modify_time")
 
     @modify_time.setter
@@ -190,7 +244,7 @@ class CCPolicyV2CcBlackWhiteIpArgs:
 
 
 @pulumi.input_type
-class CCPolicyV2CcGeoIpPolicyArgs:
+class CcPolicyV2CcGeoIpPolicyArgs:
     def __init__(__self__, *,
                  action: pulumi.Input[str],
                  domain: pulumi.Input[str],
@@ -199,6 +253,15 @@ class CCPolicyV2CcGeoIpPolicyArgs:
                  area_lists: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  modify_time: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action: User action, drop or arg.
+        :param pulumi.Input[str] domain: domain.
+        :param pulumi.Input[str] protocol: Protocol, preferably HTTP, HTTPS.
+        :param pulumi.Input[str] region_type: Regional types, divided into china, oversea and customized.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] area_lists: The list of region IDs that the user selects to block.
+        :param pulumi.Input[str] create_time: Create time.
+        :param pulumi.Input[str] modify_time: Modify time.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "protocol", protocol)
@@ -213,6 +276,9 @@ class CCPolicyV2CcGeoIpPolicyArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        User action, drop or arg.
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -222,6 +288,9 @@ class CCPolicyV2CcGeoIpPolicyArgs:
     @property
     @pulumi.getter
     def domain(self) -> pulumi.Input[str]:
+        """
+        domain.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -231,6 +300,9 @@ class CCPolicyV2CcGeoIpPolicyArgs:
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol, preferably HTTP, HTTPS.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -240,6 +312,9 @@ class CCPolicyV2CcGeoIpPolicyArgs:
     @property
     @pulumi.getter(name="regionType")
     def region_type(self) -> pulumi.Input[str]:
+        """
+        Regional types, divided into china, oversea and customized.
+        """
         return pulumi.get(self, "region_type")
 
     @region_type.setter
@@ -249,6 +324,9 @@ class CCPolicyV2CcGeoIpPolicyArgs:
     @property
     @pulumi.getter(name="areaLists")
     def area_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        The list of region IDs that the user selects to block.
+        """
         return pulumi.get(self, "area_lists")
 
     @area_lists.setter
@@ -258,6 +336,9 @@ class CCPolicyV2CcGeoIpPolicyArgs:
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Create time.
+        """
         return pulumi.get(self, "create_time")
 
     @create_time.setter
@@ -267,6 +348,9 @@ class CCPolicyV2CcGeoIpPolicyArgs:
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Modify time.
+        """
         return pulumi.get(self, "modify_time")
 
     @modify_time.setter
@@ -275,14 +359,21 @@ class CCPolicyV2CcGeoIpPolicyArgs:
 
 
 @pulumi.input_type
-class CCPolicyV2CcPrecisionPolicyArgs:
+class CcPolicyV2CcPrecisionPolicyArgs:
     def __init__(__self__, *,
                  domain: pulumi.Input[str],
                  ip: pulumi.Input[str],
                  policy_action: pulumi.Input[str],
-                 policys: pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyPolicyArgs']]],
+                 policys: pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyPolicyArgs']]],
                  protocol: pulumi.Input[str],
                  policy_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] domain: Domain.
+        :param pulumi.Input[str] ip: Ip address.
+        :param pulumi.Input[str] policy_action: Policy mode (discard or captcha).
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyPolicyArgs']]] policys: A list of policies.
+        :param pulumi.Input[str] protocol: Protocol.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "policy_action", policy_action)
@@ -294,6 +385,9 @@ class CCPolicyV2CcPrecisionPolicyArgs:
     @property
     @pulumi.getter
     def domain(self) -> pulumi.Input[str]:
+        """
+        Domain.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -303,6 +397,9 @@ class CCPolicyV2CcPrecisionPolicyArgs:
     @property
     @pulumi.getter
     def ip(self) -> pulumi.Input[str]:
+        """
+        Ip address.
+        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -312,6 +409,9 @@ class CCPolicyV2CcPrecisionPolicyArgs:
     @property
     @pulumi.getter(name="policyAction")
     def policy_action(self) -> pulumi.Input[str]:
+        """
+        Policy mode (discard or captcha).
+        """
         return pulumi.get(self, "policy_action")
 
     @policy_action.setter
@@ -320,16 +420,22 @@ class CCPolicyV2CcPrecisionPolicyArgs:
 
     @property
     @pulumi.getter
-    def policys(self) -> pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyPolicyArgs']]]:
+    def policys(self) -> pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyPolicyArgs']]]:
+        """
+        A list of policies.
+        """
         return pulumi.get(self, "policys")
 
     @policys.setter
-    def policys(self, value: pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyPolicyArgs']]]):
+    def policys(self, value: pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyPolicyArgs']]]):
         pulumi.set(self, "policys", value)
 
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -347,12 +453,18 @@ class CCPolicyV2CcPrecisionPolicyArgs:
 
 
 @pulumi.input_type
-class CCPolicyV2CcPrecisionPolicyPolicyArgs:
+class CcPolicyV2CcPrecisionPolicyPolicyArgs:
     def __init__(__self__, *,
                  field_name: pulumi.Input[str],
                  field_type: pulumi.Input[str],
                  value: pulumi.Input[str],
                  value_operator: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] field_name: Configuration item types, currently only support value.
+        :param pulumi.Input[str] field_type: Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+        :param pulumi.Input[str] value: Configure the value.
+        :param pulumi.Input[str] value_operator: Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
+        """
         pulumi.set(__self__, "field_name", field_name)
         pulumi.set(__self__, "field_type", field_type)
         pulumi.set(__self__, "value", value)
@@ -361,6 +473,9 @@ class CCPolicyV2CcPrecisionPolicyPolicyArgs:
     @property
     @pulumi.getter(name="fieldName")
     def field_name(self) -> pulumi.Input[str]:
+        """
+        Configuration item types, currently only support value.
+        """
         return pulumi.get(self, "field_name")
 
     @field_name.setter
@@ -370,6 +485,9 @@ class CCPolicyV2CcPrecisionPolicyPolicyArgs:
     @property
     @pulumi.getter(name="fieldType")
     def field_type(self) -> pulumi.Input[str]:
+        """
+        Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+        """
         return pulumi.get(self, "field_type")
 
     @field_type.setter
@@ -379,6 +497,9 @@ class CCPolicyV2CcPrecisionPolicyPolicyArgs:
     @property
     @pulumi.getter
     def value(self) -> pulumi.Input[str]:
+        """
+        Configure the value.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -388,6 +509,9 @@ class CCPolicyV2CcPrecisionPolicyPolicyArgs:
     @property
     @pulumi.getter(name="valueOperator")
     def value_operator(self) -> pulumi.Input[str]:
+        """
+        Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
+        """
         return pulumi.get(self, "value_operator")
 
     @value_operator.setter
@@ -396,14 +520,21 @@ class CCPolicyV2CcPrecisionPolicyPolicyArgs:
 
 
 @pulumi.input_type
-class CCPolicyV2CcPrecisionReqLimitArgs:
+class CcPolicyV2CcPrecisionReqLimitArgs:
     def __init__(__self__, *,
                  domain: pulumi.Input[str],
                  level: pulumi.Input[str],
-                 policys: pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitPolicyArgs']]],
+                 policys: pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitPolicyArgs']]],
                  protocol: pulumi.Input[str],
                  instance_id: Optional[pulumi.Input[str]] = None,
                  ip: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] domain: Domain.
+        :param pulumi.Input[str] level: Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitPolicyArgs']]] policys: The CC Frequency Limit Policy Item field.
+        :param pulumi.Input[str] protocol: Protocol, preferably HTTP, HTTPS.
+        :param pulumi.Input[str] ip: Ip address.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "level", level)
         pulumi.set(__self__, "policys", policys)
@@ -416,6 +547,9 @@ class CCPolicyV2CcPrecisionReqLimitArgs:
     @property
     @pulumi.getter
     def domain(self) -> pulumi.Input[str]:
+        """
+        Domain.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -425,6 +559,9 @@ class CCPolicyV2CcPrecisionReqLimitArgs:
     @property
     @pulumi.getter
     def level(self) -> pulumi.Input[str]:
+        """
+        Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+        """
         return pulumi.get(self, "level")
 
     @level.setter
@@ -433,16 +570,22 @@ class CCPolicyV2CcPrecisionReqLimitArgs:
 
     @property
     @pulumi.getter
-    def policys(self) -> pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitPolicyArgs']]]:
+    def policys(self) -> pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitPolicyArgs']]]:
+        """
+        The CC Frequency Limit Policy Item field.
+        """
         return pulumi.get(self, "policys")
 
     @policys.setter
-    def policys(self, value: pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitPolicyArgs']]]):
+    def policys(self, value: pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitPolicyArgs']]]):
         pulumi.set(self, "policys", value)
 
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol, preferably HTTP, HTTPS.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -461,6 +604,9 @@ class CCPolicyV2CcPrecisionReqLimitArgs:
     @property
     @pulumi.getter
     def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Ip address.
+        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -469,7 +615,7 @@ class CCPolicyV2CcPrecisionReqLimitArgs:
 
 
 @pulumi.input_type
-class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
+class CcPolicyV2CcPrecisionReqLimitPolicyArgs:
     def __init__(__self__, *,
                  action: pulumi.Input[str],
                  execute_duration: pulumi.Input[int],
@@ -479,6 +625,16 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
                  cookie: Optional[pulumi.Input[str]] = None,
                  uri: Optional[pulumi.Input[str]] = None,
                  user_agent: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action: The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+        :param pulumi.Input[int] execute_duration: The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+        :param pulumi.Input[str] mode: The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+        :param pulumi.Input[int] period: Statistical period, take values 1, 10, 30, 60, in seconds.
+        :param pulumi.Input[int] request_num: The number of requests, the value is 1 to 20000.
+        :param pulumi.Input[str] cookie: Cookies, one of the three policy entries can only be filled in.
+        :param pulumi.Input[str] uri: Uri, one of the three policy entries can only be filled in.
+        :param pulumi.Input[str] user_agent: User-Agent, only one of the three policy entries can be filled in.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "execute_duration", execute_duration)
         pulumi.set(__self__, "mode", mode)
@@ -494,6 +650,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -503,6 +662,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter(name="executeDuration")
     def execute_duration(self) -> pulumi.Input[int]:
+        """
+        The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+        """
         return pulumi.get(self, "execute_duration")
 
     @execute_duration.setter
@@ -512,6 +674,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter
     def mode(self) -> pulumi.Input[str]:
+        """
+        The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+        """
         return pulumi.get(self, "mode")
 
     @mode.setter
@@ -521,6 +686,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter
     def period(self) -> pulumi.Input[int]:
+        """
+        Statistical period, take values 1, 10, 30, 60, in seconds.
+        """
         return pulumi.get(self, "period")
 
     @period.setter
@@ -530,6 +698,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter(name="requestNum")
     def request_num(self) -> pulumi.Input[int]:
+        """
+        The number of requests, the value is 1 to 20000.
+        """
         return pulumi.get(self, "request_num")
 
     @request_num.setter
@@ -539,6 +710,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter
     def cookie(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cookies, one of the three policy entries can only be filled in.
+        """
         return pulumi.get(self, "cookie")
 
     @cookie.setter
@@ -548,6 +722,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter
     def uri(self) -> Optional[pulumi.Input[str]]:
+        """
+        Uri, one of the three policy entries can only be filled in.
+        """
         return pulumi.get(self, "uri")
 
     @uri.setter
@@ -557,6 +734,9 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
     @property
     @pulumi.getter(name="userAgent")
     def user_agent(self) -> Optional[pulumi.Input[str]]:
+        """
+        User-Agent, only one of the three policy entries can be filled in.
+        """
         return pulumi.get(self, "user_agent")
 
     @user_agent.setter
@@ -565,16 +745,23 @@ class CCPolicyV2CcPrecisionReqLimitPolicyArgs:
 
 
 @pulumi.input_type
-class CCPolicyV2ThresholdArgs:
+class CcPolicyV2ThresholdArgs:
     def __init__(__self__, *,
                  domain: pulumi.Input[str],
                  threshold: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] domain: domain.
+        :param pulumi.Input[int] threshold: Cleaning threshold, -1 indicates that the `default` mode is turned on.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "threshold", threshold)
 
     @property
     @pulumi.getter
     def domain(self) -> pulumi.Input[str]:
+        """
+        domain.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -584,6 +771,9 @@ class CCPolicyV2ThresholdArgs:
     @property
     @pulumi.getter
     def threshold(self) -> pulumi.Input[int]:
+        """
+        Cleaning threshold, -1 indicates that the `default` mode is turned on.
+        """
         return pulumi.get(self, "threshold")
 
     @threshold.setter
@@ -613,6 +803,27 @@ class DdosPolicyDropOptionArgs:
                  tcp_mbps_limit: pulumi.Input[int],
                  udp_mbps_limit: pulumi.Input[int],
                  syn_rate: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bad_conn_threshold: The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
+        :param pulumi.Input[bool] check_sync_conn: Indicate whether to check null connection or not.
+        :param pulumi.Input[int] conn_timeout: Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
+        :param pulumi.Input[int] d_conn_limit: The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
+        :param pulumi.Input[int] d_new_limit: The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
+        :param pulumi.Input[bool] drop_abroad: Indicate whether to drop abroad traffic or not.
+        :param pulumi.Input[bool] drop_icmp: Indicate whether to drop ICMP protocol or not.
+        :param pulumi.Input[bool] drop_other: Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+        :param pulumi.Input[bool] drop_tcp: Indicate whether to drop TCP protocol or not.
+        :param pulumi.Input[bool] drop_udp: Indicate to drop UDP protocol or not.
+        :param pulumi.Input[int] icmp_mbps_limit: The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        :param pulumi.Input[bool] null_conn_enable: Indicate to enable null connection or not.
+        :param pulumi.Input[int] other_mbps_limit: The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        :param pulumi.Input[int] s_conn_limit: The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
+        :param pulumi.Input[int] s_new_limit: The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
+        :param pulumi.Input[int] syn_limit: The limit of syn of abnormal connection check. Valid value ranges: (0~100).
+        :param pulumi.Input[int] tcp_mbps_limit: The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
+        :param pulumi.Input[int] udp_mbps_limit: The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        :param pulumi.Input[int] syn_rate: The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
+        """
         pulumi.set(__self__, "bad_conn_threshold", bad_conn_threshold)
         pulumi.set(__self__, "check_sync_conn", check_sync_conn)
         pulumi.set(__self__, "conn_timeout", conn_timeout)
@@ -637,6 +848,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="badConnThreshold")
     def bad_conn_threshold(self) -> pulumi.Input[int]:
+        """
+        The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "bad_conn_threshold")
 
     @bad_conn_threshold.setter
@@ -646,6 +860,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="checkSyncConn")
     def check_sync_conn(self) -> pulumi.Input[bool]:
+        """
+        Indicate whether to check null connection or not.
+        """
         return pulumi.get(self, "check_sync_conn")
 
     @check_sync_conn.setter
@@ -655,6 +872,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="connTimeout")
     def conn_timeout(self) -> pulumi.Input[int]:
+        """
+        Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "conn_timeout")
 
     @conn_timeout.setter
@@ -664,6 +884,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="dConnLimit")
     def d_conn_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "d_conn_limit")
 
     @d_conn_limit.setter
@@ -673,6 +896,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="dNewLimit")
     def d_new_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "d_new_limit")
 
     @d_new_limit.setter
@@ -682,6 +908,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="dropAbroad")
     def drop_abroad(self) -> pulumi.Input[bool]:
+        """
+        Indicate whether to drop abroad traffic or not.
+        """
         return pulumi.get(self, "drop_abroad")
 
     @drop_abroad.setter
@@ -691,6 +920,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="dropIcmp")
     def drop_icmp(self) -> pulumi.Input[bool]:
+        """
+        Indicate whether to drop ICMP protocol or not.
+        """
         return pulumi.get(self, "drop_icmp")
 
     @drop_icmp.setter
@@ -700,6 +932,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="dropOther")
     def drop_other(self) -> pulumi.Input[bool]:
+        """
+        Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+        """
         return pulumi.get(self, "drop_other")
 
     @drop_other.setter
@@ -709,6 +944,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="dropTcp")
     def drop_tcp(self) -> pulumi.Input[bool]:
+        """
+        Indicate whether to drop TCP protocol or not.
+        """
         return pulumi.get(self, "drop_tcp")
 
     @drop_tcp.setter
@@ -718,6 +956,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="dropUdp")
     def drop_udp(self) -> pulumi.Input[bool]:
+        """
+        Indicate to drop UDP protocol or not.
+        """
         return pulumi.get(self, "drop_udp")
 
     @drop_udp.setter
@@ -727,6 +968,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="icmpMbpsLimit")
     def icmp_mbps_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "icmp_mbps_limit")
 
     @icmp_mbps_limit.setter
@@ -736,6 +980,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="nullConnEnable")
     def null_conn_enable(self) -> pulumi.Input[bool]:
+        """
+        Indicate to enable null connection or not.
+        """
         return pulumi.get(self, "null_conn_enable")
 
     @null_conn_enable.setter
@@ -745,6 +992,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="otherMbpsLimit")
     def other_mbps_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "other_mbps_limit")
 
     @other_mbps_limit.setter
@@ -754,6 +1004,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="sConnLimit")
     def s_conn_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "s_conn_limit")
 
     @s_conn_limit.setter
@@ -763,6 +1016,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="sNewLimit")
     def s_new_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "s_new_limit")
 
     @s_new_limit.setter
@@ -772,6 +1028,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="synLimit")
     def syn_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of syn of abnormal connection check. Valid value ranges: (0~100).
+        """
         return pulumi.get(self, "syn_limit")
 
     @syn_limit.setter
@@ -781,6 +1040,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="tcpMbpsLimit")
     def tcp_mbps_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "tcp_mbps_limit")
 
     @tcp_mbps_limit.setter
@@ -790,6 +1052,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="udpMbpsLimit")
     def udp_mbps_limit(self) -> pulumi.Input[int]:
+        """
+        The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "udp_mbps_limit")
 
     @udp_mbps_limit.setter
@@ -799,6 +1064,9 @@ class DdosPolicyDropOptionArgs:
     @property
     @pulumi.getter(name="synRate")
     def syn_rate(self) -> Optional[pulumi.Input[int]]:
+        """
+        The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
+        """
         return pulumi.get(self, "syn_rate")
 
     @syn_rate.setter
@@ -823,6 +1091,22 @@ class DdosPolicyPacketFilterArgs:
                  protocol: Optional[pulumi.Input[str]] = None,
                  s_end_port: Optional[pulumi.Input[int]] = None,
                  s_start_port: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] action: Action of port to take. Valid values: `drop`, `drop_black`,`drop_rst`,`drop_black_rst`,`transmit`.`drop`(drop the packet), `drop_black`(drop the packet and black the ip),`drop_rst`(drop the packet and disconnect),`drop_black_rst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
+        :param pulumi.Input[int] d_end_port: End port of the destination. Valid value ranges: (0~65535). It must be greater than `d_start_port`.
+        :param pulumi.Input[int] d_start_port: Start port of the destination. Valid value ranges: (0~65535).
+        :param pulumi.Input[int] depth: The depth of match. Valid value ranges: (0~1500).
+        :param pulumi.Input[bool] is_include: Indicate whether to include the key word/regular expression or not.
+        :param pulumi.Input[str] match_begin: Indicate whether to check load or not, `begin_l5` means to match and `no_match` means not.
+        :param pulumi.Input[str] match_str: The key word or regular expression.
+        :param pulumi.Input[str] match_type: Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
+        :param pulumi.Input[int] offset: The offset of match. Valid value ranges: (0~1500).
+        :param pulumi.Input[int] pkt_length_max: The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pkt_length_min`.
+        :param pulumi.Input[int] pkt_length_min: The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
+        :param pulumi.Input[str] protocol: Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
+        :param pulumi.Input[int] s_end_port: End port of the source. Valid value ranges: (0~65535). It must be greater than `s_start_port`.
+        :param pulumi.Input[int] s_start_port: Start port of the source. Valid value ranges: (0~65535).
+        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if d_end_port is not None:
@@ -855,6 +1139,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        Action of port to take. Valid values: `drop`, `drop_black`,`drop_rst`,`drop_black_rst`,`transmit`.`drop`(drop the packet), `drop_black`(drop the packet and black the ip),`drop_rst`(drop the packet and disconnect),`drop_black_rst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -864,6 +1151,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="dEndPort")
     def d_end_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        End port of the destination. Valid value ranges: (0~65535). It must be greater than `d_start_port`.
+        """
         return pulumi.get(self, "d_end_port")
 
     @d_end_port.setter
@@ -873,6 +1163,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="dStartPort")
     def d_start_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start port of the destination. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "d_start_port")
 
     @d_start_port.setter
@@ -882,6 +1175,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter
     def depth(self) -> Optional[pulumi.Input[int]]:
+        """
+        The depth of match. Valid value ranges: (0~1500).
+        """
         return pulumi.get(self, "depth")
 
     @depth.setter
@@ -891,6 +1187,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="isInclude")
     def is_include(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicate whether to include the key word/regular expression or not.
+        """
         return pulumi.get(self, "is_include")
 
     @is_include.setter
@@ -900,6 +1199,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="matchBegin")
     def match_begin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Indicate whether to check load or not, `begin_l5` means to match and `no_match` means not.
+        """
         return pulumi.get(self, "match_begin")
 
     @match_begin.setter
@@ -909,6 +1211,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="matchStr")
     def match_str(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key word or regular expression.
+        """
         return pulumi.get(self, "match_str")
 
     @match_str.setter
@@ -918,6 +1223,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="matchType")
     def match_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
+        """
         return pulumi.get(self, "match_type")
 
     @match_type.setter
@@ -927,6 +1235,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter
     def offset(self) -> Optional[pulumi.Input[int]]:
+        """
+        The offset of match. Valid value ranges: (0~1500).
+        """
         return pulumi.get(self, "offset")
 
     @offset.setter
@@ -936,6 +1247,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="pktLengthMax")
     def pkt_length_max(self) -> Optional[pulumi.Input[int]]:
+        """
+        The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pkt_length_min`.
+        """
         return pulumi.get(self, "pkt_length_max")
 
     @pkt_length_max.setter
@@ -945,6 +1259,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="pktLengthMin")
     def pkt_length_min(self) -> Optional[pulumi.Input[int]]:
+        """
+        The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
+        """
         return pulumi.get(self, "pkt_length_min")
 
     @pkt_length_min.setter
@@ -954,6 +1271,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -963,6 +1283,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="sEndPort")
     def s_end_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        End port of the source. Valid value ranges: (0~65535). It must be greater than `s_start_port`.
+        """
         return pulumi.get(self, "s_end_port")
 
     @s_end_port.setter
@@ -972,6 +1295,9 @@ class DdosPolicyPacketFilterArgs:
     @property
     @pulumi.getter(name="sStartPort")
     def s_start_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start port of the source. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "s_start_port")
 
     @s_start_port.setter
@@ -987,6 +1313,13 @@ class DdosPolicyPortFilterArgs:
                  kind: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  start_port: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] action: Action of port to take. Valid values: `drop`, `transmit`.
+        :param pulumi.Input[int] end_port: End port. Valid value ranges: (0~65535). It must be greater than `start_port`.
+        :param pulumi.Input[int] kind: The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
+        :param pulumi.Input[str] protocol: Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
+        :param pulumi.Input[int] start_port: Start port. Valid value ranges: (0~65535).
+        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if end_port is not None:
@@ -1001,6 +1334,9 @@ class DdosPolicyPortFilterArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        Action of port to take. Valid values: `drop`, `transmit`.
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -1010,6 +1346,9 @@ class DdosPolicyPortFilterArgs:
     @property
     @pulumi.getter(name="endPort")
     def end_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        End port. Valid value ranges: (0~65535). It must be greater than `start_port`.
+        """
         return pulumi.get(self, "end_port")
 
     @end_port.setter
@@ -1019,6 +1358,9 @@ class DdosPolicyPortFilterArgs:
     @property
     @pulumi.getter
     def kind(self) -> Optional[pulumi.Input[int]]:
+        """
+        The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
+        """
         return pulumi.get(self, "kind")
 
     @kind.setter
@@ -1028,6 +1370,9 @@ class DdosPolicyPortFilterArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1037,6 +1382,9 @@ class DdosPolicyPortFilterArgs:
     @property
     @pulumi.getter(name="startPort")
     def start_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start port. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "start_port")
 
     @start_port.setter
@@ -1054,6 +1402,15 @@ class DdosPolicyV2AclArgs:
                  priority: pulumi.Input[int],
                  s_port_end: pulumi.Input[int],
                  s_port_start: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] action: Action, optional values: drop, transmit, forward.
+        :param pulumi.Input[int] d_port_end: The destination port ends, and the value range is 0~65535.
+        :param pulumi.Input[int] d_port_start: The destination port starts, and the value range is 0~65535.
+        :param pulumi.Input[str] forward_protocol: Protocol type, desirable values tcp, udp, all.
+        :param pulumi.Input[int] priority: Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+        :param pulumi.Input[int] s_port_end: The source port ends, and the acceptable value ranges from 0 to 65535.
+        :param pulumi.Input[int] s_port_start: The source port starts, and the value range is 0~65535.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "d_port_end", d_port_end)
         pulumi.set(__self__, "d_port_start", d_port_start)
@@ -1065,6 +1422,9 @@ class DdosPolicyV2AclArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        Action, optional values: drop, transmit, forward.
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -1074,6 +1434,9 @@ class DdosPolicyV2AclArgs:
     @property
     @pulumi.getter(name="dPortEnd")
     def d_port_end(self) -> pulumi.Input[int]:
+        """
+        The destination port ends, and the value range is 0~65535.
+        """
         return pulumi.get(self, "d_port_end")
 
     @d_port_end.setter
@@ -1083,6 +1446,9 @@ class DdosPolicyV2AclArgs:
     @property
     @pulumi.getter(name="dPortStart")
     def d_port_start(self) -> pulumi.Input[int]:
+        """
+        The destination port starts, and the value range is 0~65535.
+        """
         return pulumi.get(self, "d_port_start")
 
     @d_port_start.setter
@@ -1092,6 +1458,9 @@ class DdosPolicyV2AclArgs:
     @property
     @pulumi.getter(name="forwardProtocol")
     def forward_protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol type, desirable values tcp, udp, all.
+        """
         return pulumi.get(self, "forward_protocol")
 
     @forward_protocol.setter
@@ -1101,6 +1470,9 @@ class DdosPolicyV2AclArgs:
     @property
     @pulumi.getter
     def priority(self) -> pulumi.Input[int]:
+        """
+        Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
         return pulumi.get(self, "priority")
 
     @priority.setter
@@ -1110,6 +1482,9 @@ class DdosPolicyV2AclArgs:
     @property
     @pulumi.getter(name="sPortEnd")
     def s_port_end(self) -> pulumi.Input[int]:
+        """
+        The source port ends, and the acceptable value ranges from 0 to 65535.
+        """
         return pulumi.get(self, "s_port_end")
 
     @s_port_end.setter
@@ -1119,6 +1494,9 @@ class DdosPolicyV2AclArgs:
     @property
     @pulumi.getter(name="sPortStart")
     def s_port_start(self) -> pulumi.Input[int]:
+        """
+        The source port starts, and the value range is 0~65535.
+        """
         return pulumi.get(self, "s_port_start")
 
     @s_port_start.setter
@@ -1131,12 +1509,19 @@ class DdosPolicyV2BlackWhiteIpArgs:
     def __init__(__self__, *,
                  ip: pulumi.Input[str],
                  ip_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] ip: Ip of resource instance.
+        :param pulumi.Input[str] ip_type: IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
+        """
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "ip_type", ip_type)
 
     @property
     @pulumi.getter
     def ip(self) -> pulumi.Input[str]:
+        """
+        Ip of resource instance.
+        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -1146,6 +1531,9 @@ class DdosPolicyV2BlackWhiteIpArgs:
     @property
     @pulumi.getter(name="ipType")
     def ip_type(self) -> pulumi.Input[str]:
+        """
+        IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
+        """
         return pulumi.get(self, "ip_type")
 
     @ip_type.setter
@@ -1165,6 +1553,17 @@ class DdosPolicyV2DdosConnectLimitArgs:
                  sd_new_limit: pulumi.Input[int],
                  syn_limit: pulumi.Input[int],
                  syn_rate: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] bad_conn_threshold: Based on connection suppression trigger threshold, value range [0,4294967295].
+        :param pulumi.Input[int] conn_timeout: Abnormal connection detection condition, connection timeout, value range [0,65535].
+        :param pulumi.Input[int] dst_conn_limit: Concurrent connection control based on destination IP+ destination port.
+        :param pulumi.Input[int] dst_new_limit: Limit on the number of news per second based on the destination IP.
+        :param pulumi.Input[int] null_conn_enable: Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
+        :param pulumi.Input[int] sd_conn_limit: Concurrent connection control based on source IP + destination IP.
+        :param pulumi.Input[int] sd_new_limit: The limit on the number of news per second based on source IP + destination IP.
+        :param pulumi.Input[int] syn_limit: Anomaly connection detection condition, syn threshold, value range [0,100].
+        :param pulumi.Input[int] syn_rate: Anomalous connection detection condition, percentage of syn ack, value range [0,100].
+        """
         pulumi.set(__self__, "bad_conn_threshold", bad_conn_threshold)
         pulumi.set(__self__, "conn_timeout", conn_timeout)
         pulumi.set(__self__, "dst_conn_limit", dst_conn_limit)
@@ -1178,6 +1577,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="badConnThreshold")
     def bad_conn_threshold(self) -> pulumi.Input[int]:
+        """
+        Based on connection suppression trigger threshold, value range [0,4294967295].
+        """
         return pulumi.get(self, "bad_conn_threshold")
 
     @bad_conn_threshold.setter
@@ -1187,6 +1589,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="connTimeout")
     def conn_timeout(self) -> pulumi.Input[int]:
+        """
+        Abnormal connection detection condition, connection timeout, value range [0,65535].
+        """
         return pulumi.get(self, "conn_timeout")
 
     @conn_timeout.setter
@@ -1196,6 +1601,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="dstConnLimit")
     def dst_conn_limit(self) -> pulumi.Input[int]:
+        """
+        Concurrent connection control based on destination IP+ destination port.
+        """
         return pulumi.get(self, "dst_conn_limit")
 
     @dst_conn_limit.setter
@@ -1205,6 +1613,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="dstNewLimit")
     def dst_new_limit(self) -> pulumi.Input[int]:
+        """
+        Limit on the number of news per second based on the destination IP.
+        """
         return pulumi.get(self, "dst_new_limit")
 
     @dst_new_limit.setter
@@ -1214,6 +1625,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="nullConnEnable")
     def null_conn_enable(self) -> pulumi.Input[int]:
+        """
+        Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
+        """
         return pulumi.get(self, "null_conn_enable")
 
     @null_conn_enable.setter
@@ -1223,6 +1637,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="sdConnLimit")
     def sd_conn_limit(self) -> pulumi.Input[int]:
+        """
+        Concurrent connection control based on source IP + destination IP.
+        """
         return pulumi.get(self, "sd_conn_limit")
 
     @sd_conn_limit.setter
@@ -1232,6 +1649,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="sdNewLimit")
     def sd_new_limit(self) -> pulumi.Input[int]:
+        """
+        The limit on the number of news per second based on source IP + destination IP.
+        """
         return pulumi.get(self, "sd_new_limit")
 
     @sd_new_limit.setter
@@ -1241,6 +1661,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="synLimit")
     def syn_limit(self) -> pulumi.Input[int]:
+        """
+        Anomaly connection detection condition, syn threshold, value range [0,100].
+        """
         return pulumi.get(self, "syn_limit")
 
     @syn_limit.setter
@@ -1250,6 +1673,9 @@ class DdosPolicyV2DdosConnectLimitArgs:
     @property
     @pulumi.getter(name="synRate")
     def syn_rate(self) -> pulumi.Input[int]:
+        """
+        Anomalous connection detection condition, percentage of syn ack, value range [0,100].
+        """
         return pulumi.get(self, "syn_rate")
 
     @syn_rate.setter
@@ -1263,6 +1689,11 @@ class DdosPolicyV2DdosGeoIpBlockConfigArgs:
                  action: pulumi.Input[str],
                  area_lists: pulumi.Input[Sequence[pulumi.Input[int]]],
                  region_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] action: Block action, take the value [`drop`, `trans`].
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] area_lists: When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
+        :param pulumi.Input[str] region_type: Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "area_lists", area_lists)
         pulumi.set(__self__, "region_type", region_type)
@@ -1270,6 +1701,9 @@ class DdosPolicyV2DdosGeoIpBlockConfigArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        Block action, take the value [`drop`, `trans`].
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -1279,6 +1713,9 @@ class DdosPolicyV2DdosGeoIpBlockConfigArgs:
     @property
     @pulumi.getter(name="areaLists")
     def area_lists(self) -> pulumi.Input[Sequence[pulumi.Input[int]]]:
+        """
+        When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
+        """
         return pulumi.get(self, "area_lists")
 
     @area_lists.setter
@@ -1288,6 +1725,9 @@ class DdosPolicyV2DdosGeoIpBlockConfigArgs:
     @property
     @pulumi.getter(name="regionType")
     def region_type(self) -> pulumi.Input[str]:
+        """
+        Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
+        """
         return pulumi.get(self, "region_type")
 
     @region_type.setter
@@ -1303,6 +1743,13 @@ class DdosPolicyV2DdosSpeedLimitConfigArgs:
                  mode: pulumi.Input[int],
                  packet_rate: pulumi.Input[int],
                  protocol_list: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] bandwidth: Bandwidth bps.
+        :param pulumi.Input[str] dst_port_list: List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.
+        :param pulumi.Input[int] mode: Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].
+        :param pulumi.Input[int] packet_rate: Packet rate pps.
+        :param pulumi.Input[str] protocol_list: IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].
+        """
         pulumi.set(__self__, "bandwidth", bandwidth)
         pulumi.set(__self__, "dst_port_list", dst_port_list)
         pulumi.set(__self__, "mode", mode)
@@ -1312,6 +1759,9 @@ class DdosPolicyV2DdosSpeedLimitConfigArgs:
     @property
     @pulumi.getter
     def bandwidth(self) -> pulumi.Input[int]:
+        """
+        Bandwidth bps.
+        """
         return pulumi.get(self, "bandwidth")
 
     @bandwidth.setter
@@ -1321,6 +1771,9 @@ class DdosPolicyV2DdosSpeedLimitConfigArgs:
     @property
     @pulumi.getter(name="dstPortList")
     def dst_port_list(self) -> pulumi.Input[str]:
+        """
+        List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.
+        """
         return pulumi.get(self, "dst_port_list")
 
     @dst_port_list.setter
@@ -1330,6 +1783,9 @@ class DdosPolicyV2DdosSpeedLimitConfigArgs:
     @property
     @pulumi.getter
     def mode(self) -> pulumi.Input[int]:
+        """
+        Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].
+        """
         return pulumi.get(self, "mode")
 
     @mode.setter
@@ -1339,6 +1795,9 @@ class DdosPolicyV2DdosSpeedLimitConfigArgs:
     @property
     @pulumi.getter(name="packetRate")
     def packet_rate(self) -> pulumi.Input[int]:
+        """
+        Packet rate pps.
+        """
         return pulumi.get(self, "packet_rate")
 
     @packet_rate.setter
@@ -1348,6 +1807,9 @@ class DdosPolicyV2DdosSpeedLimitConfigArgs:
     @property
     @pulumi.getter(name="protocolList")
     def protocol_list(self) -> pulumi.Input[str]:
+        """
+        IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].
+        """
         return pulumi.get(self, "protocol_list")
 
     @protocol_list.setter
@@ -1379,6 +1841,29 @@ class DdosPolicyV2PacketFilterArgs:
                  s_port_start: pulumi.Input[int],
                  str: pulumi.Input[str],
                  str2: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] action: Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
+        :param pulumi.Input[int] d_port_end: The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.
+        :param pulumi.Input[int] d_port_start: From the destination port, take the value 0~65535.
+        :param pulumi.Input[int] depth: Detection depth from the detection position, value [0,1500].
+        :param pulumi.Input[int] depth2: Second detection depth starting from the second detection position, value [0,1500].
+        :param pulumi.Input[int] is_not: Whether to include the detected value, take the value [0 (included),1 (not included)].
+        :param pulumi.Input[int] is_not2: Whether the second detection contains the detected value, the value [0 (included),1 (not included)].
+        :param pulumi.Input[str] match_begin: Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        :param pulumi.Input[str] match_begin2: The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        :param pulumi.Input[str] match_logic: When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].
+        :param pulumi.Input[str] match_type: Detection type, value [sunday (keyword),pcre (regular expression)].
+        :param pulumi.Input[str] match_type2: The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].
+        :param pulumi.Input[int] offset: Offset from detection position, value range [0, Depth].
+        :param pulumi.Input[int] offset2: Offset from the second detection position, value range [0,Depth2].
+        :param pulumi.Input[int] pktlen_max: The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.
+        :param pulumi.Input[int] pktlen_min: Minimum message length, 1-1500.
+        :param pulumi.Input[str] protocol: Protocol, value [tcp udp icmp all].
+        :param pulumi.Input[int] s_port_end: End source port, take the value 1~65535, must be greater than or equal to the starting source port.
+        :param pulumi.Input[int] s_port_start: Start the source port, take the value 0~65535.
+        :param pulumi.Input[str] str: Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        :param pulumi.Input[str] str2: The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "d_port_end", d_port_end)
         pulumi.set(__self__, "d_port_start", d_port_start)
@@ -1404,6 +1889,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
+        """
+        Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
+        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -1413,6 +1901,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="dPortEnd")
     def d_port_end(self) -> pulumi.Input[int]:
+        """
+        The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.
+        """
         return pulumi.get(self, "d_port_end")
 
     @d_port_end.setter
@@ -1422,6 +1913,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="dPortStart")
     def d_port_start(self) -> pulumi.Input[int]:
+        """
+        From the destination port, take the value 0~65535.
+        """
         return pulumi.get(self, "d_port_start")
 
     @d_port_start.setter
@@ -1431,6 +1925,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def depth(self) -> pulumi.Input[int]:
+        """
+        Detection depth from the detection position, value [0,1500].
+        """
         return pulumi.get(self, "depth")
 
     @depth.setter
@@ -1440,6 +1937,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def depth2(self) -> pulumi.Input[int]:
+        """
+        Second detection depth starting from the second detection position, value [0,1500].
+        """
         return pulumi.get(self, "depth2")
 
     @depth2.setter
@@ -1449,6 +1949,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="isNot")
     def is_not(self) -> pulumi.Input[int]:
+        """
+        Whether to include the detected value, take the value [0 (included),1 (not included)].
+        """
         return pulumi.get(self, "is_not")
 
     @is_not.setter
@@ -1458,6 +1961,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="isNot2")
     def is_not2(self) -> pulumi.Input[int]:
+        """
+        Whether the second detection contains the detected value, the value [0 (included),1 (not included)].
+        """
         return pulumi.get(self, "is_not2")
 
     @is_not2.setter
@@ -1467,6 +1973,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="matchBegin")
     def match_begin(self) -> pulumi.Input[str]:
+        """
+        Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        """
         return pulumi.get(self, "match_begin")
 
     @match_begin.setter
@@ -1476,6 +1985,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="matchBegin2")
     def match_begin2(self) -> pulumi.Input[str]:
+        """
+        The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        """
         return pulumi.get(self, "match_begin2")
 
     @match_begin2.setter
@@ -1485,6 +1997,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="matchLogic")
     def match_logic(self) -> pulumi.Input[str]:
+        """
+        When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].
+        """
         return pulumi.get(self, "match_logic")
 
     @match_logic.setter
@@ -1494,6 +2009,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="matchType")
     def match_type(self) -> pulumi.Input[str]:
+        """
+        Detection type, value [sunday (keyword),pcre (regular expression)].
+        """
         return pulumi.get(self, "match_type")
 
     @match_type.setter
@@ -1503,6 +2021,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="matchType2")
     def match_type2(self) -> pulumi.Input[str]:
+        """
+        The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].
+        """
         return pulumi.get(self, "match_type2")
 
     @match_type2.setter
@@ -1512,6 +2033,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def offset(self) -> pulumi.Input[int]:
+        """
+        Offset from detection position, value range [0, Depth].
+        """
         return pulumi.get(self, "offset")
 
     @offset.setter
@@ -1521,6 +2045,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def offset2(self) -> pulumi.Input[int]:
+        """
+        Offset from the second detection position, value range [0,Depth2].
+        """
         return pulumi.get(self, "offset2")
 
     @offset2.setter
@@ -1530,6 +2057,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="pktlenMax")
     def pktlen_max(self) -> pulumi.Input[int]:
+        """
+        The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.
+        """
         return pulumi.get(self, "pktlen_max")
 
     @pktlen_max.setter
@@ -1539,6 +2069,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="pktlenMin")
     def pktlen_min(self) -> pulumi.Input[int]:
+        """
+        Minimum message length, 1-1500.
+        """
         return pulumi.get(self, "pktlen_min")
 
     @pktlen_min.setter
@@ -1548,6 +2081,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol, value [tcp udp icmp all].
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1557,6 +2093,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="sPortEnd")
     def s_port_end(self) -> pulumi.Input[int]:
+        """
+        End source port, take the value 1~65535, must be greater than or equal to the starting source port.
+        """
         return pulumi.get(self, "s_port_end")
 
     @s_port_end.setter
@@ -1566,6 +2105,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter(name="sPortStart")
     def s_port_start(self) -> pulumi.Input[int]:
+        """
+        Start the source port, take the value 0~65535.
+        """
         return pulumi.get(self, "s_port_start")
 
     @s_port_start.setter
@@ -1575,6 +2117,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def str(self) -> pulumi.Input[str]:
+        """
+        Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        """
         return pulumi.get(self, "str")
 
     @str.setter
@@ -1584,6 +2129,9 @@ class DdosPolicyV2PacketFilterArgs:
     @property
     @pulumi.getter
     def str2(self) -> pulumi.Input[str]:
+        """
+        The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        """
         return pulumi.get(self, "str2")
 
     @str2.setter
@@ -1598,6 +2146,12 @@ class DdosPolicyV2ProtocolBlockConfigArgs:
                  drop_other: pulumi.Input[int],
                  drop_tcp: pulumi.Input[int],
                  drop_udp: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] drop_icmp: ICMP block, value [0 (block off), 1 (block on)].
+        :param pulumi.Input[int] drop_other: Other block, value [0 (block off), 1 (block on)].
+        :param pulumi.Input[int] drop_tcp: TCP block, value [0 (block off), 1 (block on)].
+        :param pulumi.Input[int] drop_udp: UDP block, value [0 (block off), 1 (block on)].
+        """
         pulumi.set(__self__, "drop_icmp", drop_icmp)
         pulumi.set(__self__, "drop_other", drop_other)
         pulumi.set(__self__, "drop_tcp", drop_tcp)
@@ -1606,6 +2160,9 @@ class DdosPolicyV2ProtocolBlockConfigArgs:
     @property
     @pulumi.getter(name="dropIcmp")
     def drop_icmp(self) -> pulumi.Input[int]:
+        """
+        ICMP block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_icmp")
 
     @drop_icmp.setter
@@ -1615,6 +2172,9 @@ class DdosPolicyV2ProtocolBlockConfigArgs:
     @property
     @pulumi.getter(name="dropOther")
     def drop_other(self) -> pulumi.Input[int]:
+        """
+        Other block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_other")
 
     @drop_other.setter
@@ -1624,6 +2184,9 @@ class DdosPolicyV2ProtocolBlockConfigArgs:
     @property
     @pulumi.getter(name="dropTcp")
     def drop_tcp(self) -> pulumi.Input[int]:
+        """
+        TCP block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_tcp")
 
     @drop_tcp.setter
@@ -1633,6 +2196,9 @@ class DdosPolicyV2ProtocolBlockConfigArgs:
     @property
     @pulumi.getter(name="dropUdp")
     def drop_udp(self) -> pulumi.Input[int]:
+        """
+        UDP block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_udp")
 
     @drop_udp.setter
@@ -1648,6 +2214,13 @@ class DdosPolicyWatermarkFilterArgs:
                  open_switch: Optional[pulumi.Input[bool]] = None,
                  tcp_port_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  udp_port_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[bool] auto_remove: Indicate whether to auto-remove the watermark or not.
+        :param pulumi.Input[int] offset: The offset of watermark. Valid value ranges: (0~1500).
+        :param pulumi.Input[bool] open_switch: Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tcp_port_lists: Port range of TCP, the format is like `2000-3000`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] udp_port_lists: Port range of TCP, the format is like `2000-3000`.
+        """
         if auto_remove is not None:
             pulumi.set(__self__, "auto_remove", auto_remove)
         if offset is not None:
@@ -1662,6 +2235,9 @@ class DdosPolicyWatermarkFilterArgs:
     @property
     @pulumi.getter(name="autoRemove")
     def auto_remove(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicate whether to auto-remove the watermark or not.
+        """
         return pulumi.get(self, "auto_remove")
 
     @auto_remove.setter
@@ -1671,6 +2247,9 @@ class DdosPolicyWatermarkFilterArgs:
     @property
     @pulumi.getter
     def offset(self) -> Optional[pulumi.Input[int]]:
+        """
+        The offset of watermark. Valid value ranges: (0~1500).
+        """
         return pulumi.get(self, "offset")
 
     @offset.setter
@@ -1680,6 +2259,9 @@ class DdosPolicyWatermarkFilterArgs:
     @property
     @pulumi.getter(name="openSwitch")
     def open_switch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        """
         return pulumi.get(self, "open_switch")
 
     @open_switch.setter
@@ -1689,6 +2271,9 @@ class DdosPolicyWatermarkFilterArgs:
     @property
     @pulumi.getter(name="tcpPortLists")
     def tcp_port_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Port range of TCP, the format is like `2000-3000`.
+        """
         return pulumi.get(self, "tcp_port_lists")
 
     @tcp_port_lists.setter
@@ -1698,6 +2283,9 @@ class DdosPolicyWatermarkFilterArgs:
     @property
     @pulumi.getter(name="udpPortLists")
     def udp_port_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Port range of TCP, the format is like `2000-3000`.
+        """
         return pulumi.get(self, "udp_port_lists")
 
     @udp_port_lists.setter
@@ -1712,6 +2300,12 @@ class DdosPolicyWatermarkKeyArgs:
                  create_time: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  open_switch: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] content: Content of the watermark.
+        :param pulumi.Input[str] create_time: Create time of the DDoS policy.
+        :param pulumi.Input[str] id: Id of the watermark.
+        :param pulumi.Input[bool] open_switch: Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        """
         if content is not None:
             pulumi.set(__self__, "content", content)
         if create_time is not None:
@@ -1724,6 +2318,9 @@ class DdosPolicyWatermarkKeyArgs:
     @property
     @pulumi.getter
     def content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Content of the watermark.
+        """
         return pulumi.get(self, "content")
 
     @content.setter
@@ -1733,6 +2330,9 @@ class DdosPolicyWatermarkKeyArgs:
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Create time of the DDoS policy.
+        """
         return pulumi.get(self, "create_time")
 
     @create_time.setter
@@ -1742,6 +2342,9 @@ class DdosPolicyWatermarkKeyArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Id of the watermark.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -1751,6 +2354,9 @@ class DdosPolicyWatermarkKeyArgs:
     @property
     @pulumi.getter(name="openSwitch")
     def open_switch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        """
         return pulumi.get(self, "open_switch")
 
     @open_switch.setter
@@ -1763,12 +2369,19 @@ class L4RuleSourceListArgs:
     def __init__(__self__, *,
                  source: pulumi.Input[str],
                  weight: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] source: Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
+        :param pulumi.Input[int] weight: Weight of the source, the valid value ranges from 0 to 100.
+        """
         pulumi.set(__self__, "source", source)
         pulumi.set(__self__, "weight", weight)
 
     @property
     @pulumi.getter
     def source(self) -> pulumi.Input[str]:
+        """
+        Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
+        """
         return pulumi.get(self, "source")
 
     @source.setter
@@ -1778,6 +2391,9 @@ class L4RuleSourceListArgs:
     @property
     @pulumi.getter
     def weight(self) -> pulumi.Input[int]:
+        """
+        Weight of the source, the valid value ranges from 0 to 100.
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter
@@ -1952,6 +2568,18 @@ class L7RuleV2RuleArgs:
                  cert_type: Optional[pulumi.Input[int]] = None,
                  https_to_http_enable: Optional[pulumi.Input[int]] = None,
                  ssl_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] domain: Domain of the rule.
+        :param pulumi.Input[int] keep_enable: session hold switch.
+        :param pulumi.Input[int] keeptime: The keeptime of the layer 4 rule.
+        :param pulumi.Input[int] lb_type: LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        :param pulumi.Input[str] protocol: Protocol of the rule.
+        :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
+        :param pulumi.Input[int] cc_enable: HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+        :param pulumi.Input[int] cert_type: The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+        :param pulumi.Input[int] https_to_http_enable: Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+        :param pulumi.Input[str] ssl_id: When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "keep_enable", keep_enable)
         pulumi.set(__self__, "keeptime", keeptime)
@@ -1971,6 +2599,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter
     def domain(self) -> pulumi.Input[str]:
+        """
+        Domain of the rule.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -1980,6 +2611,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter(name="keepEnable")
     def keep_enable(self) -> pulumi.Input[int]:
+        """
+        session hold switch.
+        """
         return pulumi.get(self, "keep_enable")
 
     @keep_enable.setter
@@ -1989,6 +2623,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter
     def keeptime(self) -> pulumi.Input[int]:
+        """
+        The keeptime of the layer 4 rule.
+        """
         return pulumi.get(self, "keeptime")
 
     @keeptime.setter
@@ -1998,6 +2635,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter(name="lbType")
     def lb_type(self) -> pulumi.Input[int]:
+        """
+        LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        """
         return pulumi.get(self, "lb_type")
 
     @lb_type.setter
@@ -2007,6 +2647,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol of the rule.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -2025,6 +2668,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter(name="sourceType")
     def source_type(self) -> pulumi.Input[int]:
+        """
+        Source type, `1` for source of host, `2` for source of IP.
+        """
         return pulumi.get(self, "source_type")
 
     @source_type.setter
@@ -2034,6 +2680,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter(name="ccEnable")
     def cc_enable(self) -> Optional[pulumi.Input[int]]:
+        """
+        HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+        """
         return pulumi.get(self, "cc_enable")
 
     @cc_enable.setter
@@ -2043,6 +2692,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter(name="certType")
     def cert_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+        """
         return pulumi.get(self, "cert_type")
 
     @cert_type.setter
@@ -2052,6 +2704,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter(name="httpsToHttpEnable")
     def https_to_http_enable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+        """
         return pulumi.get(self, "https_to_http_enable")
 
     @https_to_http_enable.setter
@@ -2061,6 +2716,9 @@ class L7RuleV2RuleArgs:
     @property
     @pulumi.getter(name="sslId")
     def ssl_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+        """
         return pulumi.get(self, "ssl_id")
 
     @ssl_id.setter

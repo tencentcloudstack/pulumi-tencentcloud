@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Security
 {
+    /// <summary>
+    /// Provides a resource to create security group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var sglab = new Tencentcloud.Security.Group("sglab", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "favourite sg",
+    ///             ProjectId = 0,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Security group can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Security/group:Group tencentcloud_security_group.sglab sg-ey3wmiz1
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Security/group:Group")]
     public partial class Group : Pulumi.CustomResource
     {

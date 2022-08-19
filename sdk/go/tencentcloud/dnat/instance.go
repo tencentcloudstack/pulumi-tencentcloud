@@ -11,6 +11,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a NAT forwarding.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnat"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dnat.NewInstance(ctx, "foo", &Dnat.InstanceArgs{
+// 			Description: pulumi.String("test"),
+// 			ElasticIp:   pulumi.String("139.199.232.238"),
+// 			ElasticPort: pulumi.String("80"),
+// 			NatId:       pulumi.String("nat-2515tdg"),
+// 			PrivateIp:   pulumi.String("10.0.0.1"),
+// 			PrivatePort: pulumi.String("22"),
+// 			Protocol:    pulumi.String("tcp"),
+// 			VpcId:       pulumi.String("vpc-asg3sfa3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// NAT forwarding can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 

@@ -10,8 +10,8 @@ from .. import _utilities
 
 __all__ = [
     'InstanceStandbyInstanceList',
-    'InstancesInstanceListResult',
-    'ZoneConfigListResult',
+    'GetInstancesInstanceListResult',
+    'GetZoneConfigListResult',
 ]
 
 @pulumi.output_type
@@ -38,6 +38,10 @@ class InstanceStandbyInstanceList(dict):
     def __init__(__self__, *,
                  standby_instance_id: Optional[str] = None,
                  standby_instance_region: Optional[str] = None):
+        """
+        :param str standby_instance_id: Indicates the ID of standby instance.
+        :param str standby_instance_region: Indicates the region of standby instance.
+        """
         if standby_instance_id is not None:
             pulumi.set(__self__, "standby_instance_id", standby_instance_id)
         if standby_instance_region is not None:
@@ -46,16 +50,22 @@ class InstanceStandbyInstanceList(dict):
     @property
     @pulumi.getter(name="standbyInstanceId")
     def standby_instance_id(self) -> Optional[str]:
+        """
+        Indicates the ID of standby instance.
+        """
         return pulumi.get(self, "standby_instance_id")
 
     @property
     @pulumi.getter(name="standbyInstanceRegion")
     def standby_instance_region(self) -> Optional[str]:
+        """
+        Indicates the region of standby instance.
+        """
         return pulumi.get(self, "standby_instance_region")
 
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  auto_renew_flag: int,
                  available_zone: str,
@@ -77,6 +87,28 @@ class InstancesInstanceListResult(dict):
                  volume: int,
                  vpc_id: str,
                  vport: int):
+        """
+        :param int auto_renew_flag: Auto renew flag.
+        :param str available_zone: The available zone of the Mongodb.
+        :param str charge_type: The charge type of instance.
+        :param str cluster_type: Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).
+        :param int cpu: Number of cpu's core.
+        :param str create_time: Creation time of the Mongodb instance.
+        :param str engine_version: Version of the Mongodb engine.
+        :param str instance_id: ID of the Mongodb instance to be queried.
+        :param str instance_name: Name of the Mongodb instance.
+        :param str machine_type: Type of Mongodb instance.
+        :param int memory: Memory size.
+        :param int project_id: ID of the project which the instance belongs.
+        :param int shard_quantity: Number of sharding.
+        :param int status: Status of the Mongodb, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        :param str subnet_id: ID of the subnet.
+        :param Mapping[str, Any] tags: Tags of the Mongodb instance to be queried.
+        :param str vip: IP of the Mongodb instance.
+        :param int volume: Disk size.
+        :param str vpc_id: ID of the VPC.
+        :param int vport: IP port of the Mongodb instance.
+        """
         pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         pulumi.set(__self__, "available_zone", available_zone)
         pulumi.set(__self__, "charge_type", charge_type)
@@ -101,106 +133,166 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> int:
+        """
+        Auto renew flag.
+        """
         return pulumi.get(self, "auto_renew_flag")
 
     @property
     @pulumi.getter(name="availableZone")
     def available_zone(self) -> str:
+        """
+        The available zone of the Mongodb.
+        """
         return pulumi.get(self, "available_zone")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        The charge type of instance.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="clusterType")
     def cluster_type(self) -> str:
+        """
+        Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).
+        """
         return pulumi.get(self, "cluster_type")
 
     @property
     @pulumi.getter
     def cpu(self) -> int:
+        """
+        Number of cpu's core.
+        """
         return pulumi.get(self, "cpu")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the Mongodb instance.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> str:
+        """
+        Version of the Mongodb engine.
+        """
         return pulumi.get(self, "engine_version")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        ID of the Mongodb instance to be queried.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        Name of the Mongodb instance.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="machineType")
     def machine_type(self) -> str:
+        """
+        Type of Mongodb instance.
+        """
         return pulumi.get(self, "machine_type")
 
     @property
     @pulumi.getter
     def memory(self) -> int:
+        """
+        Memory size.
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        ID of the project which the instance belongs.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="shardQuantity")
     def shard_quantity(self) -> int:
+        """
+        Number of sharding.
+        """
         return pulumi.get(self, "shard_quantity")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Status of the Mongodb, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of the subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the Mongodb instance to be queried.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter
     def vip(self) -> str:
+        """
+        IP of the Mongodb instance.
+        """
         return pulumi.get(self, "vip")
 
     @property
     @pulumi.getter
     def volume(self) -> int:
+        """
+        Disk size.
+        """
         return pulumi.get(self, "volume")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter
     def vport(self) -> int:
+        """
+        IP port of the Mongodb instance.
+        """
         return pulumi.get(self, "vport")
 
 
 @pulumi.output_type
-class ZoneConfigListResult(dict):
+class GetZoneConfigListResult(dict):
     def __init__(__self__, *,
                  available_zone: str,
                  cluster_type: str,
@@ -213,6 +305,19 @@ class ZoneConfigListResult(dict):
                  memory: int,
                  min_replicate_set_num: int,
                  min_storage: int):
+        """
+        :param str available_zone: The available zone of the Mongodb.
+        :param str cluster_type: Type of Mongodb cluster.
+        :param int cpu: Number of cpu's core.
+        :param int default_storage: Default disk size.
+        :param str engine_version: Version of the Mongodb version.
+        :param str machine_type: Type of Mongodb instance.
+        :param int max_replicate_set_num: Maximum replicate set num for sharding cluster.
+        :param int max_storage: Maximum size of the disk.
+        :param int memory: Memory size.
+        :param int min_replicate_set_num: Minimum replicate set num for sharding cluster.
+        :param int min_storage: Minimum sie of the disk.
+        """
         pulumi.set(__self__, "available_zone", available_zone)
         pulumi.set(__self__, "cluster_type", cluster_type)
         pulumi.set(__self__, "cpu", cpu)
@@ -228,56 +333,89 @@ class ZoneConfigListResult(dict):
     @property
     @pulumi.getter(name="availableZone")
     def available_zone(self) -> str:
+        """
+        The available zone of the Mongodb.
+        """
         return pulumi.get(self, "available_zone")
 
     @property
     @pulumi.getter(name="clusterType")
     def cluster_type(self) -> str:
+        """
+        Type of Mongodb cluster.
+        """
         return pulumi.get(self, "cluster_type")
 
     @property
     @pulumi.getter
     def cpu(self) -> int:
+        """
+        Number of cpu's core.
+        """
         return pulumi.get(self, "cpu")
 
     @property
     @pulumi.getter(name="defaultStorage")
     def default_storage(self) -> int:
+        """
+        Default disk size.
+        """
         return pulumi.get(self, "default_storage")
 
     @property
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> str:
+        """
+        Version of the Mongodb version.
+        """
         return pulumi.get(self, "engine_version")
 
     @property
     @pulumi.getter(name="machineType")
     def machine_type(self) -> str:
+        """
+        Type of Mongodb instance.
+        """
         return pulumi.get(self, "machine_type")
 
     @property
     @pulumi.getter(name="maxReplicateSetNum")
     def max_replicate_set_num(self) -> int:
+        """
+        Maximum replicate set num for sharding cluster.
+        """
         return pulumi.get(self, "max_replicate_set_num")
 
     @property
     @pulumi.getter(name="maxStorage")
     def max_storage(self) -> int:
+        """
+        Maximum size of the disk.
+        """
         return pulumi.get(self, "max_storage")
 
     @property
     @pulumi.getter
     def memory(self) -> int:
+        """
+        Memory size.
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter(name="minReplicateSetNum")
     def min_replicate_set_num(self) -> int:
+        """
+        Minimum replicate set num for sharding cluster.
+        """
         return pulumi.get(self, "min_replicate_set_num")
 
     @property
     @pulumi.getter(name="minStorage")
     def min_storage(self) -> int:
+        """
+        Minimum sie of the disk.
+        """
         return pulumi.get(self, "min_storage")
 
 

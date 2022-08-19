@@ -9,6 +9,65 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Clb
 {
+    /// <summary>
+    /// Provides a resource to create a CLB target group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
+    ///         {
+    ///             Port = 33,
+    ///             TargetGroupName = "test",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Create target group
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
+    ///         {
+    ///             Port = 18082,
+    ///             TargetGroupInstances = 
+    ///             {
+    ///                 new Tencentcloud.Clb.Inputs.TargetGroupTargetGroupInstanceArgs
+    ///                 {
+    ///                     BindIp = "10.0.0.4",
+    ///                     Port = 18080,
+    ///                 },
+    ///             },
+    ///             TargetGroupName = "hello1",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CLB target group can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/targetGroup:TargetGroup")]
     public partial class TargetGroup : Pulumi.CustomResource
     {

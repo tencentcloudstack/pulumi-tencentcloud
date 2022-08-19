@@ -12,6 +12,9 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class CosShipperCompressArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Compression format. Valid values: gzip, lzop, none (no compression).
+        /// </summary>
         [Input("format", required: true)]
         public Input<string> Format { get; set; } = null!;
 

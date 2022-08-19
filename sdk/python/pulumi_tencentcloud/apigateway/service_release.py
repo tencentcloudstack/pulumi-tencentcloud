@@ -162,7 +162,16 @@ class ServiceRelease(pulumi.CustomResource):
                  service_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ServiceRelease resource with the given unique name, props, and options.
+        Use this resource to create API gateway service release.
+
+        ## Import
+
+        API gateway service release can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] environment_name: API gateway service environment name to be released. Valid values: `test`, `prepub`, `release`.
@@ -177,7 +186,16 @@ class ServiceRelease(pulumi.CustomResource):
                  args: ServiceReleaseArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ServiceRelease resource with the given unique name, props, and options.
+        Use this resource to create API gateway service release.
+
+        ## Import
+
+        API gateway service release can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
+        ```
+
         :param str resource_name: The name of the resource.
         :param ServiceReleaseArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -220,7 +238,7 @@ class ServiceRelease(pulumi.CustomResource):
                 raise TypeError("Missing required property 'service_id'")
             __props__.__dict__["service_id"] = service_id
         super(ServiceRelease, __self__).__init__(
-            'tencentcloud:APIGateway/serviceRelease:ServiceRelease',
+            'tencentcloud:ApiGateway/serviceRelease:ServiceRelease',
             resource_name,
             __props__,
             opts)

@@ -11,6 +11,64 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a mysql instance resource to create master database instances.
+//
+// > **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-4"),
+// 			ChargeType:       pulumi.String("POSTPAID"),
+// 			EngineVersion:    pulumi.String("5.7"),
+// 			FirstSlaveZone:   pulumi.String("ap-guangzhou-4"),
+// 			InstanceName:     pulumi.String("myTestMysql"),
+// 			InternetService:  pulumi.Int(1),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			MemSize:          pulumi.Int(128000),
+// 			Parameters: pulumi.AnyMap{
+// 				"max_connections": pulumi.Any("1000"),
+// 			},
+// 			ProjectId:       pulumi.Int(201901010001),
+// 			RootPassword:    pulumi.String("********"),
+// 			SecondSlaveZone: pulumi.String("ap-guangzhou-4"),
+// 			SecurityGroups: pulumi.StringArray{
+// 				pulumi.String("sg-ot8eclwz"),
+// 			},
+// 			SlaveDeployMode: pulumi.Int(0),
+// 			SlaveSyncMode:   pulumi.Int(1),
+// 			SubnetId:        pulumi.String("subnet-9uivyb1g"),
+// 			Tags: pulumi.AnyMap{
+// 				"name": pulumi.Any("test"),
+// 			},
+// 			VolumeSize: pulumi.Int(250),
+// 			VpcId:      pulumi.String("vpc-12mt3l31"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// MySQL instance can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -30,9 +88,7 @@ type Instance struct {
 	FastUpgrade pulumi.IntPtrOutput `pulumi:"fastUpgrade"`
 	// Zone information about first slave instance.
 	FirstSlaveZone pulumi.StringPtrOutput `pulumi:"firstSlaveZone"`
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// Indicates whether GTID is enable. `0` - Not enabled; `1` - Enabled.
 	Gtid pulumi.IntOutput `pulumi:"gtid"`
@@ -56,11 +112,11 @@ type Instance struct {
 	ParamTemplateId pulumi.IntPtrOutput `pulumi:"paramTemplateId"`
 	// List of parameters to use.
 	Parameters pulumi.MapOutput `pulumi:"parameters"`
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType pulumi.IntPtrOutput `pulumi:"payType"`
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
@@ -68,8 +124,7 @@ type Instance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-	// when you purchase read-only instances or disaster recovery instances.
+	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
 	RootPassword pulumi.StringPtrOutput `pulumi:"rootPassword"`
 	// Zone information about second slave instance.
 	SecondSlaveZone pulumi.StringPtrOutput `pulumi:"secondSlaveZone"`
@@ -81,7 +136,7 @@ type Instance struct {
 	SlaveSyncMode pulumi.IntPtrOutput `pulumi:"slaveSyncMode"`
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntOutput `pulumi:"status"`
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 	// Instance tags.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -147,9 +202,7 @@ type instanceState struct {
 	FastUpgrade *int `pulumi:"fastUpgrade"`
 	// Zone information about first slave instance.
 	FirstSlaveZone *string `pulumi:"firstSlaveZone"`
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// Indicates whether GTID is enable. `0` - Not enabled; `1` - Enabled.
 	Gtid *int `pulumi:"gtid"`
@@ -173,11 +226,11 @@ type instanceState struct {
 	ParamTemplateId *int `pulumi:"paramTemplateId"`
 	// List of parameters to use.
 	Parameters map[string]interface{} `pulumi:"parameters"`
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType *int `pulumi:"payType"`
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period *int `pulumi:"period"`
@@ -185,8 +238,7 @@ type instanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Project ID, default value is 0.
 	ProjectId *int `pulumi:"projectId"`
-	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-	// when you purchase read-only instances or disaster recovery instances.
+	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
 	RootPassword *string `pulumi:"rootPassword"`
 	// Zone information about second slave instance.
 	SecondSlaveZone *string `pulumi:"secondSlaveZone"`
@@ -198,7 +250,7 @@ type instanceState struct {
 	SlaveSyncMode *int `pulumi:"slaveSyncMode"`
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status *int `pulumi:"status"`
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -227,9 +279,7 @@ type InstanceState struct {
 	FastUpgrade pulumi.IntPtrInput
 	// Zone information about first slave instance.
 	FirstSlaveZone pulumi.StringPtrInput
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete pulumi.BoolPtrInput
 	// Indicates whether GTID is enable. `0` - Not enabled; `1` - Enabled.
 	Gtid pulumi.IntPtrInput
@@ -253,11 +303,11 @@ type InstanceState struct {
 	ParamTemplateId pulumi.IntPtrInput
 	// List of parameters to use.
 	Parameters pulumi.MapInput
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType pulumi.IntPtrInput
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period pulumi.IntPtrInput
@@ -265,8 +315,7 @@ type InstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrInput
-	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-	// when you purchase read-only instances or disaster recovery instances.
+	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
 	RootPassword pulumi.StringPtrInput
 	// Zone information about second slave instance.
 	SecondSlaveZone pulumi.StringPtrInput
@@ -278,7 +327,7 @@ type InstanceState struct {
 	SlaveSyncMode pulumi.IntPtrInput
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntPtrInput
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
@@ -311,9 +360,7 @@ type instanceArgs struct {
 	FastUpgrade *int `pulumi:"fastUpgrade"`
 	// Zone information about first slave instance.
 	FirstSlaveZone *string `pulumi:"firstSlaveZone"`
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// The name of a mysql instance.
 	InstanceName string `pulumi:"instanceName"`
@@ -327,11 +374,11 @@ type instanceArgs struct {
 	ParamTemplateId *int `pulumi:"paramTemplateId"`
 	// List of parameters to use.
 	Parameters map[string]interface{} `pulumi:"parameters"`
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType *int `pulumi:"payType"`
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period *int `pulumi:"period"`
@@ -339,8 +386,7 @@ type instanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Project ID, default value is 0.
 	ProjectId *int `pulumi:"projectId"`
-	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-	// when you purchase read-only instances or disaster recovery instances.
+	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
 	RootPassword *string `pulumi:"rootPassword"`
 	// Zone information about second slave instance.
 	SecondSlaveZone *string `pulumi:"secondSlaveZone"`
@@ -350,7 +396,7 @@ type instanceArgs struct {
 	SlaveDeployMode *int `pulumi:"slaveDeployMode"`
 	// Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
 	SlaveSyncMode *int `pulumi:"slaveSyncMode"`
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -378,9 +424,7 @@ type InstanceArgs struct {
 	FastUpgrade pulumi.IntPtrInput
 	// Zone information about first slave instance.
 	FirstSlaveZone pulumi.StringPtrInput
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete pulumi.BoolPtrInput
 	// The name of a mysql instance.
 	InstanceName pulumi.StringInput
@@ -394,11 +438,11 @@ type InstanceArgs struct {
 	ParamTemplateId pulumi.IntPtrInput
 	// List of parameters to use.
 	Parameters pulumi.MapInput
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType pulumi.IntPtrInput
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period pulumi.IntPtrInput
@@ -406,8 +450,7 @@ type InstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrInput
-	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-	// when you purchase read-only instances or disaster recovery instances.
+	// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
 	RootPassword pulumi.StringPtrInput
 	// Zone information about second slave instance.
 	SecondSlaveZone pulumi.StringPtrInput
@@ -417,7 +460,7 @@ type InstanceArgs struct {
 	SlaveDeployMode pulumi.IntPtrInput
 	// Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
 	SlaveSyncMode pulumi.IntPtrInput
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
@@ -554,9 +597,7 @@ func (o InstanceOutput) FirstSlaveZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.FirstSlaveZone }).(pulumi.StringPtrOutput)
 }
 
-// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-// para of the readonly mysql instance will not take effect.
+// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 func (o InstanceOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
@@ -616,14 +657,14 @@ func (o InstanceOutput) Parameters() pulumi.MapOutput {
 	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Parameters }).(pulumi.MapOutput)
 }
 
-// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 //
 // Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 func (o InstanceOutput) PayType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PayType }).(pulumi.IntPtrOutput)
 }
 
-// Period of instance. NOTES: Only supported prepaid instance.
+// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 //
 // Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 func (o InstanceOutput) Period() pulumi.IntPtrOutput {
@@ -640,8 +681,7 @@ func (o InstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-// when you purchase read-only instances or disaster recovery instances.
+// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
 func (o InstanceOutput) RootPassword() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.RootPassword }).(pulumi.StringPtrOutput)
 }
@@ -671,7 +711,7 @@ func (o InstanceOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }
 
-// Private network ID. If `vpc_id` is set, this value is required.
+// Private network ID. If `vpcId` is set, this value is required.
 func (o InstanceOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
 }

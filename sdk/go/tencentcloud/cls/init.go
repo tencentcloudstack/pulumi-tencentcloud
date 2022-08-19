@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConfigExtra{}
 	case "tencentcloud:Cls/cosShipper:CosShipper":
 		r = &CosShipper{}
+	case "tencentcloud:Cls/index:Index":
+		r = &Index{}
 	case "tencentcloud:Cls/logset:Logset":
 		r = &Logset{}
 	case "tencentcloud:Cls/machineGroup:MachineGroup":
@@ -66,6 +68,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cls/cosShipper",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/index",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

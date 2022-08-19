@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vod
 {
+    /// <summary>
+    /// Provide a resource to create a VOD sub application.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vod.SubApplication("foo", new Tencentcloud.Vod.SubApplicationArgs
+    ///         {
+    ///             Description = "this is sub application",
+    ///             Status = "On",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VOD super player config can be imported using the name+, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/subApplication:SubApplication")]
     public partial class SubApplication : Pulumi.CustomResource
     {
@@ -25,8 +56,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-        /// must be unique under a user.
+        /// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -90,8 +120,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-        /// must be unique under a user.
+        /// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -122,8 +151,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-        /// must be unique under a user.
+        /// Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }

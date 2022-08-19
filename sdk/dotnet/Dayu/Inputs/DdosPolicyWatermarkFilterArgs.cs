@@ -12,17 +12,30 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyWatermarkFilterArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Indicate whether to auto-remove the watermark or not.
+        /// </summary>
         [Input("autoRemove")]
         public Input<bool>? AutoRemove { get; set; }
 
+        /// <summary>
+        /// The offset of watermark. Valid value ranges: (0~1500).
+        /// </summary>
         [Input("offset")]
         public Input<int>? Offset { get; set; }
 
+        /// <summary>
+        /// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        /// </summary>
         [Input("openSwitch")]
         public Input<bool>? OpenSwitch { get; set; }
 
         [Input("tcpPortLists")]
         private InputList<string>? _tcpPortLists;
+
+        /// <summary>
+        /// Port range of TCP, the format is like `2000-3000`.
+        /// </summary>
         public InputList<string> TcpPortLists
         {
             get => _tcpPortLists ?? (_tcpPortLists = new InputList<string>());
@@ -31,6 +44,10 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
         [Input("udpPortLists")]
         private InputList<string>? _udpPortLists;
+
+        /// <summary>
+        /// Port range of TCP, the format is like `2000-3000`.
+        /// </summary>
         public InputList<string> UdpPortLists
         {
             get => _udpPortLists ?? (_udpPortLists = new InputList<string>());

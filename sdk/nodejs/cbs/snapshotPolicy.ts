@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a snapshot policy resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const snapshotPolicy = new tencentcloud.Cbs.SnapshotPolicy("snapshot_policy", {
+ *     repeatHours: [1],
+ *     repeatWeekdays: [
+ *         1,
+ *         4,
+ *     ],
+ *     retentionDays: 7,
+ *     snapshotPolicyName: "mysnapshotpolicyname",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CBS snapshot policy can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+ * ```
+ */
 export class SnapshotPolicy extends pulumi.CustomResource {
     /**
      * Get an existing SnapshotPolicy resource's state with the given name, ID, and optional extra

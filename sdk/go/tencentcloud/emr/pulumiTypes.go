@@ -11,14 +11,18 @@ import (
 )
 
 type ClusterResourceSpec struct {
+	// The number of common node.
 	CommonCount        *int                                   `pulumi:"commonCount"`
 	CommonResourceSpec *ClusterResourceSpecCommonResourceSpec `pulumi:"commonResourceSpec"`
-	CoreCount          *int                                   `pulumi:"coreCount"`
-	CoreResourceSpec   *ClusterResourceSpecCoreResourceSpec   `pulumi:"coreResourceSpec"`
+	// The number of core node.
+	CoreCount        *int                                 `pulumi:"coreCount"`
+	CoreResourceSpec *ClusterResourceSpecCoreResourceSpec `pulumi:"coreResourceSpec"`
+	// The number of master node.
 	MasterCount        *int                                   `pulumi:"masterCount"`
 	MasterResourceSpec *ClusterResourceSpecMasterResourceSpec `pulumi:"masterResourceSpec"`
-	TaskCount          *int                                   `pulumi:"taskCount"`
-	TaskResourceSpec   *ClusterResourceSpecTaskResourceSpec   `pulumi:"taskResourceSpec"`
+	// The number of core node.
+	TaskCount        *int                                 `pulumi:"taskCount"`
+	TaskResourceSpec *ClusterResourceSpecTaskResourceSpec `pulumi:"taskResourceSpec"`
 }
 
 // ClusterResourceSpecInput is an input type that accepts ClusterResourceSpecArgs and ClusterResourceSpecOutput values.
@@ -33,14 +37,18 @@ type ClusterResourceSpecInput interface {
 }
 
 type ClusterResourceSpecArgs struct {
+	// The number of common node.
 	CommonCount        pulumi.IntPtrInput                            `pulumi:"commonCount"`
 	CommonResourceSpec ClusterResourceSpecCommonResourceSpecPtrInput `pulumi:"commonResourceSpec"`
-	CoreCount          pulumi.IntPtrInput                            `pulumi:"coreCount"`
-	CoreResourceSpec   ClusterResourceSpecCoreResourceSpecPtrInput   `pulumi:"coreResourceSpec"`
+	// The number of core node.
+	CoreCount        pulumi.IntPtrInput                          `pulumi:"coreCount"`
+	CoreResourceSpec ClusterResourceSpecCoreResourceSpecPtrInput `pulumi:"coreResourceSpec"`
+	// The number of master node.
 	MasterCount        pulumi.IntPtrInput                            `pulumi:"masterCount"`
 	MasterResourceSpec ClusterResourceSpecMasterResourceSpecPtrInput `pulumi:"masterResourceSpec"`
-	TaskCount          pulumi.IntPtrInput                            `pulumi:"taskCount"`
-	TaskResourceSpec   ClusterResourceSpecTaskResourceSpecPtrInput   `pulumi:"taskResourceSpec"`
+	// The number of core node.
+	TaskCount        pulumi.IntPtrInput                          `pulumi:"taskCount"`
+	TaskResourceSpec ClusterResourceSpecTaskResourceSpecPtrInput `pulumi:"taskResourceSpec"`
 }
 
 func (ClusterResourceSpecArgs) ElementType() reflect.Type {
@@ -120,6 +128,7 @@ func (o ClusterResourceSpecOutput) ToClusterResourceSpecPtrOutputWithContext(ctx
 	}).(ClusterResourceSpecPtrOutput)
 }
 
+// The number of common node.
 func (o ClusterResourceSpecOutput) CommonCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.CommonCount }).(pulumi.IntPtrOutput)
 }
@@ -128,6 +137,7 @@ func (o ClusterResourceSpecOutput) CommonResourceSpec() ClusterResourceSpecCommo
 	return o.ApplyT(func(v ClusterResourceSpec) *ClusterResourceSpecCommonResourceSpec { return v.CommonResourceSpec }).(ClusterResourceSpecCommonResourceSpecPtrOutput)
 }
 
+// The number of core node.
 func (o ClusterResourceSpecOutput) CoreCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.CoreCount }).(pulumi.IntPtrOutput)
 }
@@ -136,6 +146,7 @@ func (o ClusterResourceSpecOutput) CoreResourceSpec() ClusterResourceSpecCoreRes
 	return o.ApplyT(func(v ClusterResourceSpec) *ClusterResourceSpecCoreResourceSpec { return v.CoreResourceSpec }).(ClusterResourceSpecCoreResourceSpecPtrOutput)
 }
 
+// The number of master node.
 func (o ClusterResourceSpecOutput) MasterCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.MasterCount }).(pulumi.IntPtrOutput)
 }
@@ -144,6 +155,7 @@ func (o ClusterResourceSpecOutput) MasterResourceSpec() ClusterResourceSpecMaste
 	return o.ApplyT(func(v ClusterResourceSpec) *ClusterResourceSpecMasterResourceSpec { return v.MasterResourceSpec }).(ClusterResourceSpecMasterResourceSpecPtrOutput)
 }
 
+// The number of core node.
 func (o ClusterResourceSpecOutput) TaskCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.TaskCount }).(pulumi.IntPtrOutput)
 }
@@ -176,6 +188,7 @@ func (o ClusterResourceSpecPtrOutput) Elem() ClusterResourceSpecOutput {
 	}).(ClusterResourceSpecOutput)
 }
 
+// The number of common node.
 func (o ClusterResourceSpecPtrOutput) CommonCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *int {
 		if v == nil {
@@ -194,6 +207,7 @@ func (o ClusterResourceSpecPtrOutput) CommonResourceSpec() ClusterResourceSpecCo
 	}).(ClusterResourceSpecCommonResourceSpecPtrOutput)
 }
 
+// The number of core node.
 func (o ClusterResourceSpecPtrOutput) CoreCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *int {
 		if v == nil {
@@ -212,6 +226,7 @@ func (o ClusterResourceSpecPtrOutput) CoreResourceSpec() ClusterResourceSpecCore
 	}).(ClusterResourceSpecCoreResourceSpecPtrOutput)
 }
 
+// The number of master node.
 func (o ClusterResourceSpecPtrOutput) MasterCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *int {
 		if v == nil {
@@ -230,6 +245,7 @@ func (o ClusterResourceSpecPtrOutput) MasterResourceSpec() ClusterResourceSpecMa
 	}).(ClusterResourceSpecMasterResourceSpecPtrOutput)
 }
 
+// The number of core node.
 func (o ClusterResourceSpecPtrOutput) TaskCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *int {
 		if v == nil {
@@ -1140,876 +1156,1092 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) StorageType() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
-type InstancesCluster struct {
-	AddTime     string `pulumi:"addTime"`
-	ChargeType  int    `pulumi:"chargeType"`
-	ClusterId   string `pulumi:"clusterId"`
+type GetInstanceCluster struct {
+	// Add time of instance.
+	AddTime string `pulumi:"addTime"`
+	// Charge type of instance.
+	ChargeType int `pulumi:"chargeType"`
+	// Cluster id of instance.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name of instance.
 	ClusterName string `pulumi:"clusterName"`
-	Ftitle      string `pulumi:"ftitle"`
-	Id          int    `pulumi:"id"`
-	MasterIp    string `pulumi:"masterIp"`
-	ProjectId   int    `pulumi:"projectId"`
-	RegionId    int    `pulumi:"regionId"`
-	Status      int    `pulumi:"status"`
-	Zone        string `pulumi:"zone"`
-	ZoneId      int    `pulumi:"zoneId"`
+	// Title of instance.
+	Ftitle string `pulumi:"ftitle"`
+	// Id of instance.
+	Id int `pulumi:"id"`
+	// Master ip of instance.
+	MasterIp string `pulumi:"masterIp"`
+	// Fetch all instances which owner same project. Default 0 meaning use default project id.
+	ProjectId int `pulumi:"projectId"`
+	// Region id of instance.
+	RegionId int `pulumi:"regionId"`
+	// Status of instance.
+	Status int `pulumi:"status"`
+	// Zone of instance.
+	Zone string `pulumi:"zone"`
+	// Zone id of instance.
+	ZoneId int `pulumi:"zoneId"`
 }
 
-// InstancesClusterInput is an input type that accepts InstancesClusterArgs and InstancesClusterOutput values.
-// You can construct a concrete instance of `InstancesClusterInput` via:
+// GetInstanceClusterInput is an input type that accepts GetInstanceClusterArgs and GetInstanceClusterOutput values.
+// You can construct a concrete instance of `GetInstanceClusterInput` via:
 //
-//          InstancesClusterArgs{...}
-type InstancesClusterInput interface {
+//          GetInstanceClusterArgs{...}
+type GetInstanceClusterInput interface {
 	pulumi.Input
 
-	ToInstancesClusterOutput() InstancesClusterOutput
-	ToInstancesClusterOutputWithContext(context.Context) InstancesClusterOutput
+	ToGetInstanceClusterOutput() GetInstanceClusterOutput
+	ToGetInstanceClusterOutputWithContext(context.Context) GetInstanceClusterOutput
 }
 
-type InstancesClusterArgs struct {
-	AddTime     pulumi.StringInput `pulumi:"addTime"`
-	ChargeType  pulumi.IntInput    `pulumi:"chargeType"`
-	ClusterId   pulumi.StringInput `pulumi:"clusterId"`
+type GetInstanceClusterArgs struct {
+	// Add time of instance.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Charge type of instance.
+	ChargeType pulumi.IntInput `pulumi:"chargeType"`
+	// Cluster id of instance.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name of instance.
 	ClusterName pulumi.StringInput `pulumi:"clusterName"`
-	Ftitle      pulumi.StringInput `pulumi:"ftitle"`
-	Id          pulumi.IntInput    `pulumi:"id"`
-	MasterIp    pulumi.StringInput `pulumi:"masterIp"`
-	ProjectId   pulumi.IntInput    `pulumi:"projectId"`
-	RegionId    pulumi.IntInput    `pulumi:"regionId"`
-	Status      pulumi.IntInput    `pulumi:"status"`
-	Zone        pulumi.StringInput `pulumi:"zone"`
-	ZoneId      pulumi.IntInput    `pulumi:"zoneId"`
+	// Title of instance.
+	Ftitle pulumi.StringInput `pulumi:"ftitle"`
+	// Id of instance.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Master ip of instance.
+	MasterIp pulumi.StringInput `pulumi:"masterIp"`
+	// Fetch all instances which owner same project. Default 0 meaning use default project id.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Region id of instance.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// Status of instance.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Zone of instance.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// Zone id of instance.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
 }
 
-func (InstancesClusterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesCluster)(nil)).Elem()
+func (GetInstanceClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceCluster)(nil)).Elem()
 }
 
-func (i InstancesClusterArgs) ToInstancesClusterOutput() InstancesClusterOutput {
-	return i.ToInstancesClusterOutputWithContext(context.Background())
+func (i GetInstanceClusterArgs) ToGetInstanceClusterOutput() GetInstanceClusterOutput {
+	return i.ToGetInstanceClusterOutputWithContext(context.Background())
 }
 
-func (i InstancesClusterArgs) ToInstancesClusterOutputWithContext(ctx context.Context) InstancesClusterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesClusterOutput)
+func (i GetInstanceClusterArgs) ToGetInstanceClusterOutputWithContext(ctx context.Context) GetInstanceClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceClusterOutput)
 }
 
-// InstancesClusterArrayInput is an input type that accepts InstancesClusterArray and InstancesClusterArrayOutput values.
-// You can construct a concrete instance of `InstancesClusterArrayInput` via:
+// GetInstanceClusterArrayInput is an input type that accepts GetInstanceClusterArray and GetInstanceClusterArrayOutput values.
+// You can construct a concrete instance of `GetInstanceClusterArrayInput` via:
 //
-//          InstancesClusterArray{ InstancesClusterArgs{...} }
-type InstancesClusterArrayInput interface {
+//          GetInstanceClusterArray{ GetInstanceClusterArgs{...} }
+type GetInstanceClusterArrayInput interface {
 	pulumi.Input
 
-	ToInstancesClusterArrayOutput() InstancesClusterArrayOutput
-	ToInstancesClusterArrayOutputWithContext(context.Context) InstancesClusterArrayOutput
+	ToGetInstanceClusterArrayOutput() GetInstanceClusterArrayOutput
+	ToGetInstanceClusterArrayOutputWithContext(context.Context) GetInstanceClusterArrayOutput
 }
 
-type InstancesClusterArray []InstancesClusterInput
+type GetInstanceClusterArray []GetInstanceClusterInput
 
-func (InstancesClusterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesCluster)(nil)).Elem()
+func (GetInstanceClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceCluster)(nil)).Elem()
 }
 
-func (i InstancesClusterArray) ToInstancesClusterArrayOutput() InstancesClusterArrayOutput {
-	return i.ToInstancesClusterArrayOutputWithContext(context.Background())
+func (i GetInstanceClusterArray) ToGetInstanceClusterArrayOutput() GetInstanceClusterArrayOutput {
+	return i.ToGetInstanceClusterArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesClusterArray) ToInstancesClusterArrayOutputWithContext(ctx context.Context) InstancesClusterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesClusterArrayOutput)
+func (i GetInstanceClusterArray) ToGetInstanceClusterArrayOutputWithContext(ctx context.Context) GetInstanceClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceClusterArrayOutput)
 }
 
-type InstancesClusterOutput struct{ *pulumi.OutputState }
+type GetInstanceClusterOutput struct{ *pulumi.OutputState }
 
-func (InstancesClusterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesCluster)(nil)).Elem()
+func (GetInstanceClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceCluster)(nil)).Elem()
 }
 
-func (o InstancesClusterOutput) ToInstancesClusterOutput() InstancesClusterOutput {
+func (o GetInstanceClusterOutput) ToGetInstanceClusterOutput() GetInstanceClusterOutput {
 	return o
 }
 
-func (o InstancesClusterOutput) ToInstancesClusterOutputWithContext(ctx context.Context) InstancesClusterOutput {
+func (o GetInstanceClusterOutput) ToGetInstanceClusterOutputWithContext(ctx context.Context) GetInstanceClusterOutput {
 	return o
 }
 
-func (o InstancesClusterOutput) AddTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCluster) string { return v.AddTime }).(pulumi.StringOutput)
+// Add time of instance.
+func (o GetInstanceClusterOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCluster) string { return v.AddTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesClusterOutput) ChargeType() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCluster) int { return v.ChargeType }).(pulumi.IntOutput)
+// Charge type of instance.
+func (o GetInstanceClusterOutput) ChargeType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCluster) int { return v.ChargeType }).(pulumi.IntOutput)
 }
 
-func (o InstancesClusterOutput) ClusterId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCluster) string { return v.ClusterId }).(pulumi.StringOutput)
+// Cluster id of instance.
+func (o GetInstanceClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCluster) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-func (o InstancesClusterOutput) ClusterName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCluster) string { return v.ClusterName }).(pulumi.StringOutput)
+// Cluster name of instance.
+func (o GetInstanceClusterOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCluster) string { return v.ClusterName }).(pulumi.StringOutput)
 }
 
-func (o InstancesClusterOutput) Ftitle() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCluster) string { return v.Ftitle }).(pulumi.StringOutput)
+// Title of instance.
+func (o GetInstanceClusterOutput) Ftitle() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCluster) string { return v.Ftitle }).(pulumi.StringOutput)
 }
 
-func (o InstancesClusterOutput) Id() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCluster) int { return v.Id }).(pulumi.IntOutput)
+// Id of instance.
+func (o GetInstanceClusterOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCluster) int { return v.Id }).(pulumi.IntOutput)
 }
 
-func (o InstancesClusterOutput) MasterIp() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCluster) string { return v.MasterIp }).(pulumi.StringOutput)
+// Master ip of instance.
+func (o GetInstanceClusterOutput) MasterIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCluster) string { return v.MasterIp }).(pulumi.StringOutput)
 }
 
-func (o InstancesClusterOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCluster) int { return v.ProjectId }).(pulumi.IntOutput)
+// Fetch all instances which owner same project. Default 0 meaning use default project id.
+func (o GetInstanceClusterOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCluster) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o InstancesClusterOutput) RegionId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCluster) int { return v.RegionId }).(pulumi.IntOutput)
+// Region id of instance.
+func (o GetInstanceClusterOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCluster) int { return v.RegionId }).(pulumi.IntOutput)
 }
 
-func (o InstancesClusterOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCluster) int { return v.Status }).(pulumi.IntOutput)
+// Status of instance.
+func (o GetInstanceClusterOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCluster) int { return v.Status }).(pulumi.IntOutput)
 }
 
-func (o InstancesClusterOutput) Zone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCluster) string { return v.Zone }).(pulumi.StringOutput)
+// Zone of instance.
+func (o GetInstanceClusterOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCluster) string { return v.Zone }).(pulumi.StringOutput)
 }
 
-func (o InstancesClusterOutput) ZoneId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCluster) int { return v.ZoneId }).(pulumi.IntOutput)
+// Zone id of instance.
+func (o GetInstanceClusterOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCluster) int { return v.ZoneId }).(pulumi.IntOutput)
 }
 
-type InstancesClusterArrayOutput struct{ *pulumi.OutputState }
+type GetInstanceClusterArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesClusterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesCluster)(nil)).Elem()
+func (GetInstanceClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceCluster)(nil)).Elem()
 }
 
-func (o InstancesClusterArrayOutput) ToInstancesClusterArrayOutput() InstancesClusterArrayOutput {
+func (o GetInstanceClusterArrayOutput) ToGetInstanceClusterArrayOutput() GetInstanceClusterArrayOutput {
 	return o
 }
 
-func (o InstancesClusterArrayOutput) ToInstancesClusterArrayOutputWithContext(ctx context.Context) InstancesClusterArrayOutput {
+func (o GetInstanceClusterArrayOutput) ToGetInstanceClusterArrayOutputWithContext(ctx context.Context) GetInstanceClusterArrayOutput {
 	return o
 }
 
-func (o InstancesClusterArrayOutput) Index(i pulumi.IntInput) InstancesClusterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesCluster {
-		return vs[0].([]InstancesCluster)[vs[1].(int)]
-	}).(InstancesClusterOutput)
+func (o GetInstanceClusterArrayOutput) Index(i pulumi.IntInput) GetInstanceClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceCluster {
+		return vs[0].([]GetInstanceCluster)[vs[1].(int)]
+	}).(GetInstanceClusterOutput)
 }
 
-type NodesNode struct {
-	AppId                int                    `pulumi:"appId"`
-	ApplyTime            string                 `pulumi:"applyTime"`
-	AutoFlag             int                    `pulumi:"autoFlag"`
-	CdbIp                string                 `pulumi:"cdbIp"`
-	CdbNodeInfos         []NodesNodeCdbNodeInfo `pulumi:"cdbNodeInfos"`
-	CdbPort              int                    `pulumi:"cdbPort"`
-	ChargeType           int                    `pulumi:"chargeType"`
-	CpuNum               int                    `pulumi:"cpuNum"`
-	Destroyable          int                    `pulumi:"destroyable"`
-	DeviceClass          string                 `pulumi:"deviceClass"`
-	DiskSize             string                 `pulumi:"diskSize"`
-	DynamicPodSpec       string                 `pulumi:"dynamicPodSpec"`
-	EmrResourceId        string                 `pulumi:"emrResourceId"`
-	ExpireTime           string                 `pulumi:"expireTime"`
-	Flag                 int                    `pulumi:"flag"`
-	FreeTime             string                 `pulumi:"freeTime"`
-	HardwareResourceType string                 `pulumi:"hardwareResourceType"`
-	HwDiskSize           int                    `pulumi:"hwDiskSize"`
-	HwDiskSizeDesc       string                 `pulumi:"hwDiskSizeDesc"`
-	HwMemSize            int                    `pulumi:"hwMemSize"`
-	HwMemSizeDesc        string                 `pulumi:"hwMemSizeDesc"`
-	Ip                   string                 `pulumi:"ip"`
-	IsAutoRenew          int                    `pulumi:"isAutoRenew"`
-	IsDynamicSpec        int                    `pulumi:"isDynamicSpec"`
-	McMultiDisks         []NodesNodeMcMultiDisk `pulumi:"mcMultiDisks"`
-	MemDesc              string                 `pulumi:"memDesc"`
-	MemSize              int                    `pulumi:"memSize"`
-	Mutable              int                    `pulumi:"mutable"`
-	NameTag              string                 `pulumi:"nameTag"`
-	OrderNo              string                 `pulumi:"orderNo"`
-	RegionId             int                    `pulumi:"regionId"`
-	RootSize             int                    `pulumi:"rootSize"`
-	SerialNo             string                 `pulumi:"serialNo"`
-	Services             string                 `pulumi:"services"`
-	Spec                 string                 `pulumi:"spec"`
-	StorageType          int                    `pulumi:"storageType"`
-	SupportModifyPayMode int                    `pulumi:"supportModifyPayMode"`
-	Tags                 []NodesNodeTag         `pulumi:"tags"`
-	WanIp                string                 `pulumi:"wanIp"`
-	ZoneId               int                    `pulumi:"zoneId"`
+type GetNodesNode struct {
+	// User APPID.
+	AppId int `pulumi:"appId"`
+	// Application time.
+	ApplyTime string `pulumi:"applyTime"`
+	// Whether it is an autoscaling node, 0 is a normal node, and 1 is an autoscaling node.
+	AutoFlag int `pulumi:"autoFlag"`
+	// Database IP.
+	CdbIp string `pulumi:"cdbIp"`
+	// Database information.
+	CdbNodeInfos []GetNodesNodeCdbNodeInfo `pulumi:"cdbNodeInfos"`
+	// Database port.
+	CdbPort int `pulumi:"cdbPort"`
+	// The type of payment.
+	ChargeType int `pulumi:"chargeType"`
+	// Number of node cores.
+	CpuNum int `pulumi:"cpuNum"`
+	// Whether this node is destroyable, 1 can be destroyed, 0 is not destroyable.
+	Destroyable int `pulumi:"destroyable"`
+	// Device identity.
+	DeviceClass string `pulumi:"deviceClass"`
+	// Hard disk size.
+	DiskSize string `pulumi:"diskSize"`
+	// Floating specification value json string.
+	DynamicPodSpec string `pulumi:"dynamicPodSpec"`
+	// Node resource ID.
+	EmrResourceId string `pulumi:"emrResourceId"`
+	// Expiration time.
+	ExpireTime string `pulumi:"expireTime"`
+	// Node type. 0: common node; 1: master node; 2: core node; 3: task node.
+	Flag int `pulumi:"flag"`
+	// Release time.
+	FreeTime string `pulumi:"freeTime"`
+	// Resource type: Support all/host/pod, default is all.
+	HardwareResourceType string `pulumi:"hardwareResourceType"`
+	// Hard disk capacity.
+	HwDiskSize int `pulumi:"hwDiskSize"`
+	// Hard disk capacity description.
+	HwDiskSizeDesc string `pulumi:"hwDiskSizeDesc"`
+	// Memory capacity.
+	HwMemSize int `pulumi:"hwMemSize"`
+	// Memory capacity description.
+	HwMemSizeDesc string `pulumi:"hwMemSizeDesc"`
+	// Intranet IP.
+	Ip string `pulumi:"ip"`
+	// Renewal logo.
+	IsAutoRenew int `pulumi:"isAutoRenew"`
+	// Floating specifications, 1 yes, 0 no.
+	IsDynamicSpec int `pulumi:"isDynamicSpec"`
+	// Multi-cloud disk.
+	McMultiDisks []GetNodesNodeMcMultiDisk `pulumi:"mcMultiDisks"`
+	// Node memory description.
+	MemDesc string `pulumi:"memDesc"`
+	// Node memory.
+	MemSize int `pulumi:"memSize"`
+	// Supports variations.
+	Mutable int `pulumi:"mutable"`
+	// Node description.
+	NameTag string `pulumi:"nameTag"`
+	// Machine instance ID.
+	OrderNo string `pulumi:"orderNo"`
+	// The node is located in the region.
+	RegionId int `pulumi:"regionId"`
+	// The size of the system disk.
+	RootSize int `pulumi:"rootSize"`
+	// Serial number.
+	SerialNo string `pulumi:"serialNo"`
+	// Node deployment service.
+	Services string `pulumi:"services"`
+	// Node specifications.
+	Spec string `pulumi:"spec"`
+	// Disk type.
+	StorageType int `pulumi:"storageType"`
+	// Whether to support change billing type 1 Yes and 0 No.
+	SupportModifyPayMode int `pulumi:"supportModifyPayMode"`
+	// The label of the node binding.
+	Tags []GetNodesNodeTag `pulumi:"tags"`
+	// The master node is bound to the Internet IP address.
+	WanIp string `pulumi:"wanIp"`
+	// Zone where the node is located.
+	ZoneId int `pulumi:"zoneId"`
 }
 
-// NodesNodeInput is an input type that accepts NodesNodeArgs and NodesNodeOutput values.
-// You can construct a concrete instance of `NodesNodeInput` via:
+// GetNodesNodeInput is an input type that accepts GetNodesNodeArgs and GetNodesNodeOutput values.
+// You can construct a concrete instance of `GetNodesNodeInput` via:
 //
-//          NodesNodeArgs{...}
-type NodesNodeInput interface {
+//          GetNodesNodeArgs{...}
+type GetNodesNodeInput interface {
 	pulumi.Input
 
-	ToNodesNodeOutput() NodesNodeOutput
-	ToNodesNodeOutputWithContext(context.Context) NodesNodeOutput
+	ToGetNodesNodeOutput() GetNodesNodeOutput
+	ToGetNodesNodeOutputWithContext(context.Context) GetNodesNodeOutput
 }
 
-type NodesNodeArgs struct {
-	AppId                pulumi.IntInput                `pulumi:"appId"`
-	ApplyTime            pulumi.StringInput             `pulumi:"applyTime"`
-	AutoFlag             pulumi.IntInput                `pulumi:"autoFlag"`
-	CdbIp                pulumi.StringInput             `pulumi:"cdbIp"`
-	CdbNodeInfos         NodesNodeCdbNodeInfoArrayInput `pulumi:"cdbNodeInfos"`
-	CdbPort              pulumi.IntInput                `pulumi:"cdbPort"`
-	ChargeType           pulumi.IntInput                `pulumi:"chargeType"`
-	CpuNum               pulumi.IntInput                `pulumi:"cpuNum"`
-	Destroyable          pulumi.IntInput                `pulumi:"destroyable"`
-	DeviceClass          pulumi.StringInput             `pulumi:"deviceClass"`
-	DiskSize             pulumi.StringInput             `pulumi:"diskSize"`
-	DynamicPodSpec       pulumi.StringInput             `pulumi:"dynamicPodSpec"`
-	EmrResourceId        pulumi.StringInput             `pulumi:"emrResourceId"`
-	ExpireTime           pulumi.StringInput             `pulumi:"expireTime"`
-	Flag                 pulumi.IntInput                `pulumi:"flag"`
-	FreeTime             pulumi.StringInput             `pulumi:"freeTime"`
-	HardwareResourceType pulumi.StringInput             `pulumi:"hardwareResourceType"`
-	HwDiskSize           pulumi.IntInput                `pulumi:"hwDiskSize"`
-	HwDiskSizeDesc       pulumi.StringInput             `pulumi:"hwDiskSizeDesc"`
-	HwMemSize            pulumi.IntInput                `pulumi:"hwMemSize"`
-	HwMemSizeDesc        pulumi.StringInput             `pulumi:"hwMemSizeDesc"`
-	Ip                   pulumi.StringInput             `pulumi:"ip"`
-	IsAutoRenew          pulumi.IntInput                `pulumi:"isAutoRenew"`
-	IsDynamicSpec        pulumi.IntInput                `pulumi:"isDynamicSpec"`
-	McMultiDisks         NodesNodeMcMultiDiskArrayInput `pulumi:"mcMultiDisks"`
-	MemDesc              pulumi.StringInput             `pulumi:"memDesc"`
-	MemSize              pulumi.IntInput                `pulumi:"memSize"`
-	Mutable              pulumi.IntInput                `pulumi:"mutable"`
-	NameTag              pulumi.StringInput             `pulumi:"nameTag"`
-	OrderNo              pulumi.StringInput             `pulumi:"orderNo"`
-	RegionId             pulumi.IntInput                `pulumi:"regionId"`
-	RootSize             pulumi.IntInput                `pulumi:"rootSize"`
-	SerialNo             pulumi.StringInput             `pulumi:"serialNo"`
-	Services             pulumi.StringInput             `pulumi:"services"`
-	Spec                 pulumi.StringInput             `pulumi:"spec"`
-	StorageType          pulumi.IntInput                `pulumi:"storageType"`
-	SupportModifyPayMode pulumi.IntInput                `pulumi:"supportModifyPayMode"`
-	Tags                 NodesNodeTagArrayInput         `pulumi:"tags"`
-	WanIp                pulumi.StringInput             `pulumi:"wanIp"`
-	ZoneId               pulumi.IntInput                `pulumi:"zoneId"`
+type GetNodesNodeArgs struct {
+	// User APPID.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// Application time.
+	ApplyTime pulumi.StringInput `pulumi:"applyTime"`
+	// Whether it is an autoscaling node, 0 is a normal node, and 1 is an autoscaling node.
+	AutoFlag pulumi.IntInput `pulumi:"autoFlag"`
+	// Database IP.
+	CdbIp pulumi.StringInput `pulumi:"cdbIp"`
+	// Database information.
+	CdbNodeInfos GetNodesNodeCdbNodeInfoArrayInput `pulumi:"cdbNodeInfos"`
+	// Database port.
+	CdbPort pulumi.IntInput `pulumi:"cdbPort"`
+	// The type of payment.
+	ChargeType pulumi.IntInput `pulumi:"chargeType"`
+	// Number of node cores.
+	CpuNum pulumi.IntInput `pulumi:"cpuNum"`
+	// Whether this node is destroyable, 1 can be destroyed, 0 is not destroyable.
+	Destroyable pulumi.IntInput `pulumi:"destroyable"`
+	// Device identity.
+	DeviceClass pulumi.StringInput `pulumi:"deviceClass"`
+	// Hard disk size.
+	DiskSize pulumi.StringInput `pulumi:"diskSize"`
+	// Floating specification value json string.
+	DynamicPodSpec pulumi.StringInput `pulumi:"dynamicPodSpec"`
+	// Node resource ID.
+	EmrResourceId pulumi.StringInput `pulumi:"emrResourceId"`
+	// Expiration time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Node type. 0: common node; 1: master node; 2: core node; 3: task node.
+	Flag pulumi.IntInput `pulumi:"flag"`
+	// Release time.
+	FreeTime pulumi.StringInput `pulumi:"freeTime"`
+	// Resource type: Support all/host/pod, default is all.
+	HardwareResourceType pulumi.StringInput `pulumi:"hardwareResourceType"`
+	// Hard disk capacity.
+	HwDiskSize pulumi.IntInput `pulumi:"hwDiskSize"`
+	// Hard disk capacity description.
+	HwDiskSizeDesc pulumi.StringInput `pulumi:"hwDiskSizeDesc"`
+	// Memory capacity.
+	HwMemSize pulumi.IntInput `pulumi:"hwMemSize"`
+	// Memory capacity description.
+	HwMemSizeDesc pulumi.StringInput `pulumi:"hwMemSizeDesc"`
+	// Intranet IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Renewal logo.
+	IsAutoRenew pulumi.IntInput `pulumi:"isAutoRenew"`
+	// Floating specifications, 1 yes, 0 no.
+	IsDynamicSpec pulumi.IntInput `pulumi:"isDynamicSpec"`
+	// Multi-cloud disk.
+	McMultiDisks GetNodesNodeMcMultiDiskArrayInput `pulumi:"mcMultiDisks"`
+	// Node memory description.
+	MemDesc pulumi.StringInput `pulumi:"memDesc"`
+	// Node memory.
+	MemSize pulumi.IntInput `pulumi:"memSize"`
+	// Supports variations.
+	Mutable pulumi.IntInput `pulumi:"mutable"`
+	// Node description.
+	NameTag pulumi.StringInput `pulumi:"nameTag"`
+	// Machine instance ID.
+	OrderNo pulumi.StringInput `pulumi:"orderNo"`
+	// The node is located in the region.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// The size of the system disk.
+	RootSize pulumi.IntInput `pulumi:"rootSize"`
+	// Serial number.
+	SerialNo pulumi.StringInput `pulumi:"serialNo"`
+	// Node deployment service.
+	Services pulumi.StringInput `pulumi:"services"`
+	// Node specifications.
+	Spec pulumi.StringInput `pulumi:"spec"`
+	// Disk type.
+	StorageType pulumi.IntInput `pulumi:"storageType"`
+	// Whether to support change billing type 1 Yes and 0 No.
+	SupportModifyPayMode pulumi.IntInput `pulumi:"supportModifyPayMode"`
+	// The label of the node binding.
+	Tags GetNodesNodeTagArrayInput `pulumi:"tags"`
+	// The master node is bound to the Internet IP address.
+	WanIp pulumi.StringInput `pulumi:"wanIp"`
+	// Zone where the node is located.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
 }
 
-func (NodesNodeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNode)(nil)).Elem()
+func (GetNodesNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNode)(nil)).Elem()
 }
 
-func (i NodesNodeArgs) ToNodesNodeOutput() NodesNodeOutput {
-	return i.ToNodesNodeOutputWithContext(context.Background())
+func (i GetNodesNodeArgs) ToGetNodesNodeOutput() GetNodesNodeOutput {
+	return i.ToGetNodesNodeOutputWithContext(context.Background())
 }
 
-func (i NodesNodeArgs) ToNodesNodeOutputWithContext(ctx context.Context) NodesNodeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeOutput)
+func (i GetNodesNodeArgs) ToGetNodesNodeOutputWithContext(ctx context.Context) GetNodesNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeOutput)
 }
 
-// NodesNodeArrayInput is an input type that accepts NodesNodeArray and NodesNodeArrayOutput values.
-// You can construct a concrete instance of `NodesNodeArrayInput` via:
+// GetNodesNodeArrayInput is an input type that accepts GetNodesNodeArray and GetNodesNodeArrayOutput values.
+// You can construct a concrete instance of `GetNodesNodeArrayInput` via:
 //
-//          NodesNodeArray{ NodesNodeArgs{...} }
-type NodesNodeArrayInput interface {
+//          GetNodesNodeArray{ GetNodesNodeArgs{...} }
+type GetNodesNodeArrayInput interface {
 	pulumi.Input
 
-	ToNodesNodeArrayOutput() NodesNodeArrayOutput
-	ToNodesNodeArrayOutputWithContext(context.Context) NodesNodeArrayOutput
+	ToGetNodesNodeArrayOutput() GetNodesNodeArrayOutput
+	ToGetNodesNodeArrayOutputWithContext(context.Context) GetNodesNodeArrayOutput
 }
 
-type NodesNodeArray []NodesNodeInput
+type GetNodesNodeArray []GetNodesNodeInput
 
-func (NodesNodeArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNode)(nil)).Elem()
+func (GetNodesNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNode)(nil)).Elem()
 }
 
-func (i NodesNodeArray) ToNodesNodeArrayOutput() NodesNodeArrayOutput {
-	return i.ToNodesNodeArrayOutputWithContext(context.Background())
+func (i GetNodesNodeArray) ToGetNodesNodeArrayOutput() GetNodesNodeArrayOutput {
+	return i.ToGetNodesNodeArrayOutputWithContext(context.Background())
 }
 
-func (i NodesNodeArray) ToNodesNodeArrayOutputWithContext(ctx context.Context) NodesNodeArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeArrayOutput)
+func (i GetNodesNodeArray) ToGetNodesNodeArrayOutputWithContext(ctx context.Context) GetNodesNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeArrayOutput)
 }
 
-type NodesNodeOutput struct{ *pulumi.OutputState }
+type GetNodesNodeOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNode)(nil)).Elem()
+func (GetNodesNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNode)(nil)).Elem()
 }
 
-func (o NodesNodeOutput) ToNodesNodeOutput() NodesNodeOutput {
+func (o GetNodesNodeOutput) ToGetNodesNodeOutput() GetNodesNodeOutput {
 	return o
 }
 
-func (o NodesNodeOutput) ToNodesNodeOutputWithContext(ctx context.Context) NodesNodeOutput {
+func (o GetNodesNodeOutput) ToGetNodesNodeOutputWithContext(ctx context.Context) GetNodesNodeOutput {
 	return o
 }
 
-func (o NodesNodeOutput) AppId() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.AppId }).(pulumi.IntOutput)
+// User APPID.
+func (o GetNodesNodeOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.AppId }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) ApplyTime() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.ApplyTime }).(pulumi.StringOutput)
+// Application time.
+func (o GetNodesNodeOutput) ApplyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.ApplyTime }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) AutoFlag() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.AutoFlag }).(pulumi.IntOutput)
+// Whether it is an autoscaling node, 0 is a normal node, and 1 is an autoscaling node.
+func (o GetNodesNodeOutput) AutoFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.AutoFlag }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) CdbIp() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.CdbIp }).(pulumi.StringOutput)
+// Database IP.
+func (o GetNodesNodeOutput) CdbIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.CdbIp }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) CdbNodeInfos() NodesNodeCdbNodeInfoArrayOutput {
-	return o.ApplyT(func(v NodesNode) []NodesNodeCdbNodeInfo { return v.CdbNodeInfos }).(NodesNodeCdbNodeInfoArrayOutput)
+// Database information.
+func (o GetNodesNodeOutput) CdbNodeInfos() GetNodesNodeCdbNodeInfoArrayOutput {
+	return o.ApplyT(func(v GetNodesNode) []GetNodesNodeCdbNodeInfo { return v.CdbNodeInfos }).(GetNodesNodeCdbNodeInfoArrayOutput)
 }
 
-func (o NodesNodeOutput) CdbPort() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.CdbPort }).(pulumi.IntOutput)
+// Database port.
+func (o GetNodesNodeOutput) CdbPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.CdbPort }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) ChargeType() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.ChargeType }).(pulumi.IntOutput)
+// The type of payment.
+func (o GetNodesNodeOutput) ChargeType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.ChargeType }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) CpuNum() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.CpuNum }).(pulumi.IntOutput)
+// Number of node cores.
+func (o GetNodesNodeOutput) CpuNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.CpuNum }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) Destroyable() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.Destroyable }).(pulumi.IntOutput)
+// Whether this node is destroyable, 1 can be destroyed, 0 is not destroyable.
+func (o GetNodesNodeOutput) Destroyable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.Destroyable }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) DeviceClass() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.DeviceClass }).(pulumi.StringOutput)
+// Device identity.
+func (o GetNodesNodeOutput) DeviceClass() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.DeviceClass }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) DiskSize() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.DiskSize }).(pulumi.StringOutput)
+// Hard disk size.
+func (o GetNodesNodeOutput) DiskSize() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.DiskSize }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) DynamicPodSpec() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.DynamicPodSpec }).(pulumi.StringOutput)
+// Floating specification value json string.
+func (o GetNodesNodeOutput) DynamicPodSpec() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.DynamicPodSpec }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) EmrResourceId() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.EmrResourceId }).(pulumi.StringOutput)
+// Node resource ID.
+func (o GetNodesNodeOutput) EmrResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.EmrResourceId }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) ExpireTime() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.ExpireTime }).(pulumi.StringOutput)
+// Expiration time.
+func (o GetNodesNodeOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.ExpireTime }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) Flag() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.Flag }).(pulumi.IntOutput)
+// Node type. 0: common node; 1: master node; 2: core node; 3: task node.
+func (o GetNodesNodeOutput) Flag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.Flag }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) FreeTime() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.FreeTime }).(pulumi.StringOutput)
+// Release time.
+func (o GetNodesNodeOutput) FreeTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.FreeTime }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) HardwareResourceType() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.HardwareResourceType }).(pulumi.StringOutput)
+// Resource type: Support all/host/pod, default is all.
+func (o GetNodesNodeOutput) HardwareResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.HardwareResourceType }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) HwDiskSize() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.HwDiskSize }).(pulumi.IntOutput)
+// Hard disk capacity.
+func (o GetNodesNodeOutput) HwDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.HwDiskSize }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) HwDiskSizeDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.HwDiskSizeDesc }).(pulumi.StringOutput)
+// Hard disk capacity description.
+func (o GetNodesNodeOutput) HwDiskSizeDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.HwDiskSizeDesc }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) HwMemSize() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.HwMemSize }).(pulumi.IntOutput)
+// Memory capacity.
+func (o GetNodesNodeOutput) HwMemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.HwMemSize }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) HwMemSizeDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.HwMemSizeDesc }).(pulumi.StringOutput)
+// Memory capacity description.
+func (o GetNodesNodeOutput) HwMemSizeDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.HwMemSizeDesc }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.Ip }).(pulumi.StringOutput)
+// Intranet IP.
+func (o GetNodesNodeOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.Ip }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) IsAutoRenew() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.IsAutoRenew }).(pulumi.IntOutput)
+// Renewal logo.
+func (o GetNodesNodeOutput) IsAutoRenew() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.IsAutoRenew }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) IsDynamicSpec() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.IsDynamicSpec }).(pulumi.IntOutput)
+// Floating specifications, 1 yes, 0 no.
+func (o GetNodesNodeOutput) IsDynamicSpec() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.IsDynamicSpec }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) McMultiDisks() NodesNodeMcMultiDiskArrayOutput {
-	return o.ApplyT(func(v NodesNode) []NodesNodeMcMultiDisk { return v.McMultiDisks }).(NodesNodeMcMultiDiskArrayOutput)
+// Multi-cloud disk.
+func (o GetNodesNodeOutput) McMultiDisks() GetNodesNodeMcMultiDiskArrayOutput {
+	return o.ApplyT(func(v GetNodesNode) []GetNodesNodeMcMultiDisk { return v.McMultiDisks }).(GetNodesNodeMcMultiDiskArrayOutput)
 }
 
-func (o NodesNodeOutput) MemDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.MemDesc }).(pulumi.StringOutput)
+// Node memory description.
+func (o GetNodesNodeOutput) MemDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.MemDesc }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) MemSize() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.MemSize }).(pulumi.IntOutput)
+// Node memory.
+func (o GetNodesNodeOutput) MemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.MemSize }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) Mutable() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.Mutable }).(pulumi.IntOutput)
+// Supports variations.
+func (o GetNodesNodeOutput) Mutable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.Mutable }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) NameTag() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.NameTag }).(pulumi.StringOutput)
+// Node description.
+func (o GetNodesNodeOutput) NameTag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.NameTag }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) OrderNo() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.OrderNo }).(pulumi.StringOutput)
+// Machine instance ID.
+func (o GetNodesNodeOutput) OrderNo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.OrderNo }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) RegionId() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.RegionId }).(pulumi.IntOutput)
+// The node is located in the region.
+func (o GetNodesNodeOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.RegionId }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) RootSize() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.RootSize }).(pulumi.IntOutput)
+// The size of the system disk.
+func (o GetNodesNodeOutput) RootSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.RootSize }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) SerialNo() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.SerialNo }).(pulumi.StringOutput)
+// Serial number.
+func (o GetNodesNodeOutput) SerialNo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.SerialNo }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) Services() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.Services }).(pulumi.StringOutput)
+// Node deployment service.
+func (o GetNodesNodeOutput) Services() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.Services }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) Spec() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.Spec }).(pulumi.StringOutput)
+// Node specifications.
+func (o GetNodesNodeOutput) Spec() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.Spec }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) StorageType() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.StorageType }).(pulumi.IntOutput)
+// Disk type.
+func (o GetNodesNodeOutput) StorageType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.StorageType }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) SupportModifyPayMode() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.SupportModifyPayMode }).(pulumi.IntOutput)
+// Whether to support change billing type 1 Yes and 0 No.
+func (o GetNodesNodeOutput) SupportModifyPayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.SupportModifyPayMode }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeOutput) Tags() NodesNodeTagArrayOutput {
-	return o.ApplyT(func(v NodesNode) []NodesNodeTag { return v.Tags }).(NodesNodeTagArrayOutput)
+// The label of the node binding.
+func (o GetNodesNodeOutput) Tags() GetNodesNodeTagArrayOutput {
+	return o.ApplyT(func(v GetNodesNode) []GetNodesNodeTag { return v.Tags }).(GetNodesNodeTagArrayOutput)
 }
 
-func (o NodesNodeOutput) WanIp() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNode) string { return v.WanIp }).(pulumi.StringOutput)
+// The master node is bound to the Internet IP address.
+func (o GetNodesNodeOutput) WanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNode) string { return v.WanIp }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeOutput) ZoneId() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNode) int { return v.ZoneId }).(pulumi.IntOutput)
+// Zone where the node is located.
+func (o GetNodesNodeOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNode) int { return v.ZoneId }).(pulumi.IntOutput)
 }
 
-type NodesNodeArrayOutput struct{ *pulumi.OutputState }
+type GetNodesNodeArrayOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNode)(nil)).Elem()
+func (GetNodesNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNode)(nil)).Elem()
 }
 
-func (o NodesNodeArrayOutput) ToNodesNodeArrayOutput() NodesNodeArrayOutput {
+func (o GetNodesNodeArrayOutput) ToGetNodesNodeArrayOutput() GetNodesNodeArrayOutput {
 	return o
 }
 
-func (o NodesNodeArrayOutput) ToNodesNodeArrayOutputWithContext(ctx context.Context) NodesNodeArrayOutput {
+func (o GetNodesNodeArrayOutput) ToGetNodesNodeArrayOutputWithContext(ctx context.Context) GetNodesNodeArrayOutput {
 	return o
 }
 
-func (o NodesNodeArrayOutput) Index(i pulumi.IntInput) NodesNodeOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NodesNode {
-		return vs[0].([]NodesNode)[vs[1].(int)]
-	}).(NodesNodeOutput)
+func (o GetNodesNodeArrayOutput) Index(i pulumi.IntInput) GetNodesNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodesNode {
+		return vs[0].([]GetNodesNode)[vs[1].(int)]
+	}).(GetNodesNodeOutput)
 }
 
-type NodesNodeCdbNodeInfo struct {
-	ApplyTime    string `pulumi:"applyTime"`
-	ExpireFlag   bool   `pulumi:"expireFlag"`
-	ExpireTime   string `pulumi:"expireTime"`
+type GetNodesNodeCdbNodeInfo struct {
+	// Application time.
+	ApplyTime string `pulumi:"applyTime"`
+	// Expired id.
+	ExpireFlag bool `pulumi:"expireFlag"`
+	// Expiration time.
+	ExpireTime string `pulumi:"expireTime"`
+	// DB instance.
 	InstanceName string `pulumi:"instanceName"`
-	Ip           string `pulumi:"ip"`
-	IsAutoRenew  int    `pulumi:"isAutoRenew"`
-	MemSize      int    `pulumi:"memSize"`
-	PayType      int    `pulumi:"payType"`
-	Port         int    `pulumi:"port"`
-	RegionId     int    `pulumi:"regionId"`
-	SerialNo     string `pulumi:"serialNo"`
-	Service      string `pulumi:"service"`
-	Status       int    `pulumi:"status"`
-	Volume       int    `pulumi:"volume"`
-	ZoneId       int    `pulumi:"zoneId"`
+	// Intranet IP.
+	Ip string `pulumi:"ip"`
+	// Renewal logo.
+	IsAutoRenew int `pulumi:"isAutoRenew"`
+	// Node memory.
+	MemSize int `pulumi:"memSize"`
+	// The type of payment.
+	PayType int `pulumi:"payType"`
+	// Database port.
+	Port int `pulumi:"port"`
+	// The node is located in the region.
+	RegionId int `pulumi:"regionId"`
+	// Serial number.
+	SerialNo string `pulumi:"serialNo"`
+	// The service identity.
+	Service string `pulumi:"service"`
+	// Database status.
+	Status int `pulumi:"status"`
+	// The size of the cloud disk.
+	Volume int `pulumi:"volume"`
+	// Zone where the node is located.
+	ZoneId int `pulumi:"zoneId"`
 }
 
-// NodesNodeCdbNodeInfoInput is an input type that accepts NodesNodeCdbNodeInfoArgs and NodesNodeCdbNodeInfoOutput values.
-// You can construct a concrete instance of `NodesNodeCdbNodeInfoInput` via:
+// GetNodesNodeCdbNodeInfoInput is an input type that accepts GetNodesNodeCdbNodeInfoArgs and GetNodesNodeCdbNodeInfoOutput values.
+// You can construct a concrete instance of `GetNodesNodeCdbNodeInfoInput` via:
 //
-//          NodesNodeCdbNodeInfoArgs{...}
-type NodesNodeCdbNodeInfoInput interface {
+//          GetNodesNodeCdbNodeInfoArgs{...}
+type GetNodesNodeCdbNodeInfoInput interface {
 	pulumi.Input
 
-	ToNodesNodeCdbNodeInfoOutput() NodesNodeCdbNodeInfoOutput
-	ToNodesNodeCdbNodeInfoOutputWithContext(context.Context) NodesNodeCdbNodeInfoOutput
+	ToGetNodesNodeCdbNodeInfoOutput() GetNodesNodeCdbNodeInfoOutput
+	ToGetNodesNodeCdbNodeInfoOutputWithContext(context.Context) GetNodesNodeCdbNodeInfoOutput
 }
 
-type NodesNodeCdbNodeInfoArgs struct {
-	ApplyTime    pulumi.StringInput `pulumi:"applyTime"`
-	ExpireFlag   pulumi.BoolInput   `pulumi:"expireFlag"`
-	ExpireTime   pulumi.StringInput `pulumi:"expireTime"`
+type GetNodesNodeCdbNodeInfoArgs struct {
+	// Application time.
+	ApplyTime pulumi.StringInput `pulumi:"applyTime"`
+	// Expired id.
+	ExpireFlag pulumi.BoolInput `pulumi:"expireFlag"`
+	// Expiration time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// DB instance.
 	InstanceName pulumi.StringInput `pulumi:"instanceName"`
-	Ip           pulumi.StringInput `pulumi:"ip"`
-	IsAutoRenew  pulumi.IntInput    `pulumi:"isAutoRenew"`
-	MemSize      pulumi.IntInput    `pulumi:"memSize"`
-	PayType      pulumi.IntInput    `pulumi:"payType"`
-	Port         pulumi.IntInput    `pulumi:"port"`
-	RegionId     pulumi.IntInput    `pulumi:"regionId"`
-	SerialNo     pulumi.StringInput `pulumi:"serialNo"`
-	Service      pulumi.StringInput `pulumi:"service"`
-	Status       pulumi.IntInput    `pulumi:"status"`
-	Volume       pulumi.IntInput    `pulumi:"volume"`
-	ZoneId       pulumi.IntInput    `pulumi:"zoneId"`
+	// Intranet IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Renewal logo.
+	IsAutoRenew pulumi.IntInput `pulumi:"isAutoRenew"`
+	// Node memory.
+	MemSize pulumi.IntInput `pulumi:"memSize"`
+	// The type of payment.
+	PayType pulumi.IntInput `pulumi:"payType"`
+	// Database port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// The node is located in the region.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// Serial number.
+	SerialNo pulumi.StringInput `pulumi:"serialNo"`
+	// The service identity.
+	Service pulumi.StringInput `pulumi:"service"`
+	// Database status.
+	Status pulumi.IntInput `pulumi:"status"`
+	// The size of the cloud disk.
+	Volume pulumi.IntInput `pulumi:"volume"`
+	// Zone where the node is located.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
 }
 
-func (NodesNodeCdbNodeInfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNodeCdbNodeInfo)(nil)).Elem()
+func (GetNodesNodeCdbNodeInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNodeCdbNodeInfo)(nil)).Elem()
 }
 
-func (i NodesNodeCdbNodeInfoArgs) ToNodesNodeCdbNodeInfoOutput() NodesNodeCdbNodeInfoOutput {
-	return i.ToNodesNodeCdbNodeInfoOutputWithContext(context.Background())
+func (i GetNodesNodeCdbNodeInfoArgs) ToGetNodesNodeCdbNodeInfoOutput() GetNodesNodeCdbNodeInfoOutput {
+	return i.ToGetNodesNodeCdbNodeInfoOutputWithContext(context.Background())
 }
 
-func (i NodesNodeCdbNodeInfoArgs) ToNodesNodeCdbNodeInfoOutputWithContext(ctx context.Context) NodesNodeCdbNodeInfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeCdbNodeInfoOutput)
+func (i GetNodesNodeCdbNodeInfoArgs) ToGetNodesNodeCdbNodeInfoOutputWithContext(ctx context.Context) GetNodesNodeCdbNodeInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeCdbNodeInfoOutput)
 }
 
-// NodesNodeCdbNodeInfoArrayInput is an input type that accepts NodesNodeCdbNodeInfoArray and NodesNodeCdbNodeInfoArrayOutput values.
-// You can construct a concrete instance of `NodesNodeCdbNodeInfoArrayInput` via:
+// GetNodesNodeCdbNodeInfoArrayInput is an input type that accepts GetNodesNodeCdbNodeInfoArray and GetNodesNodeCdbNodeInfoArrayOutput values.
+// You can construct a concrete instance of `GetNodesNodeCdbNodeInfoArrayInput` via:
 //
-//          NodesNodeCdbNodeInfoArray{ NodesNodeCdbNodeInfoArgs{...} }
-type NodesNodeCdbNodeInfoArrayInput interface {
+//          GetNodesNodeCdbNodeInfoArray{ GetNodesNodeCdbNodeInfoArgs{...} }
+type GetNodesNodeCdbNodeInfoArrayInput interface {
 	pulumi.Input
 
-	ToNodesNodeCdbNodeInfoArrayOutput() NodesNodeCdbNodeInfoArrayOutput
-	ToNodesNodeCdbNodeInfoArrayOutputWithContext(context.Context) NodesNodeCdbNodeInfoArrayOutput
+	ToGetNodesNodeCdbNodeInfoArrayOutput() GetNodesNodeCdbNodeInfoArrayOutput
+	ToGetNodesNodeCdbNodeInfoArrayOutputWithContext(context.Context) GetNodesNodeCdbNodeInfoArrayOutput
 }
 
-type NodesNodeCdbNodeInfoArray []NodesNodeCdbNodeInfoInput
+type GetNodesNodeCdbNodeInfoArray []GetNodesNodeCdbNodeInfoInput
 
-func (NodesNodeCdbNodeInfoArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNodeCdbNodeInfo)(nil)).Elem()
+func (GetNodesNodeCdbNodeInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNodeCdbNodeInfo)(nil)).Elem()
 }
 
-func (i NodesNodeCdbNodeInfoArray) ToNodesNodeCdbNodeInfoArrayOutput() NodesNodeCdbNodeInfoArrayOutput {
-	return i.ToNodesNodeCdbNodeInfoArrayOutputWithContext(context.Background())
+func (i GetNodesNodeCdbNodeInfoArray) ToGetNodesNodeCdbNodeInfoArrayOutput() GetNodesNodeCdbNodeInfoArrayOutput {
+	return i.ToGetNodesNodeCdbNodeInfoArrayOutputWithContext(context.Background())
 }
 
-func (i NodesNodeCdbNodeInfoArray) ToNodesNodeCdbNodeInfoArrayOutputWithContext(ctx context.Context) NodesNodeCdbNodeInfoArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeCdbNodeInfoArrayOutput)
+func (i GetNodesNodeCdbNodeInfoArray) ToGetNodesNodeCdbNodeInfoArrayOutputWithContext(ctx context.Context) GetNodesNodeCdbNodeInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeCdbNodeInfoArrayOutput)
 }
 
-type NodesNodeCdbNodeInfoOutput struct{ *pulumi.OutputState }
+type GetNodesNodeCdbNodeInfoOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeCdbNodeInfoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNodeCdbNodeInfo)(nil)).Elem()
+func (GetNodesNodeCdbNodeInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNodeCdbNodeInfo)(nil)).Elem()
 }
 
-func (o NodesNodeCdbNodeInfoOutput) ToNodesNodeCdbNodeInfoOutput() NodesNodeCdbNodeInfoOutput {
+func (o GetNodesNodeCdbNodeInfoOutput) ToGetNodesNodeCdbNodeInfoOutput() GetNodesNodeCdbNodeInfoOutput {
 	return o
 }
 
-func (o NodesNodeCdbNodeInfoOutput) ToNodesNodeCdbNodeInfoOutputWithContext(ctx context.Context) NodesNodeCdbNodeInfoOutput {
+func (o GetNodesNodeCdbNodeInfoOutput) ToGetNodesNodeCdbNodeInfoOutputWithContext(ctx context.Context) GetNodesNodeCdbNodeInfoOutput {
 	return o
 }
 
-func (o NodesNodeCdbNodeInfoOutput) ApplyTime() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) string { return v.ApplyTime }).(pulumi.StringOutput)
+// Application time.
+func (o GetNodesNodeCdbNodeInfoOutput) ApplyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) string { return v.ApplyTime }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) ExpireFlag() pulumi.BoolOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) bool { return v.ExpireFlag }).(pulumi.BoolOutput)
+// Expired id.
+func (o GetNodesNodeCdbNodeInfoOutput) ExpireFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) bool { return v.ExpireFlag }).(pulumi.BoolOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) ExpireTime() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) string { return v.ExpireTime }).(pulumi.StringOutput)
+// Expiration time.
+func (o GetNodesNodeCdbNodeInfoOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) string { return v.ExpireTime }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) InstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) string { return v.InstanceName }).(pulumi.StringOutput)
+// DB instance.
+func (o GetNodesNodeCdbNodeInfoOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) string { return v.InstanceName }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) string { return v.Ip }).(pulumi.StringOutput)
+// Intranet IP.
+func (o GetNodesNodeCdbNodeInfoOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) string { return v.Ip }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) IsAutoRenew() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.IsAutoRenew }).(pulumi.IntOutput)
+// Renewal logo.
+func (o GetNodesNodeCdbNodeInfoOutput) IsAutoRenew() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.IsAutoRenew }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) MemSize() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.MemSize }).(pulumi.IntOutput)
+// Node memory.
+func (o GetNodesNodeCdbNodeInfoOutput) MemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.MemSize }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) PayType() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.PayType }).(pulumi.IntOutput)
+// The type of payment.
+func (o GetNodesNodeCdbNodeInfoOutput) PayType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.PayType }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.Port }).(pulumi.IntOutput)
+// Database port.
+func (o GetNodesNodeCdbNodeInfoOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.Port }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) RegionId() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.RegionId }).(pulumi.IntOutput)
+// The node is located in the region.
+func (o GetNodesNodeCdbNodeInfoOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.RegionId }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) SerialNo() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) string { return v.SerialNo }).(pulumi.StringOutput)
+// Serial number.
+func (o GetNodesNodeCdbNodeInfoOutput) SerialNo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) string { return v.SerialNo }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) Service() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) string { return v.Service }).(pulumi.StringOutput)
+// The service identity.
+func (o GetNodesNodeCdbNodeInfoOutput) Service() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) string { return v.Service }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.Status }).(pulumi.IntOutput)
+// Database status.
+func (o GetNodesNodeCdbNodeInfoOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.Status }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) Volume() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.Volume }).(pulumi.IntOutput)
+// The size of the cloud disk.
+func (o GetNodesNodeCdbNodeInfoOutput) Volume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.Volume }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeCdbNodeInfoOutput) ZoneId() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeCdbNodeInfo) int { return v.ZoneId }).(pulumi.IntOutput)
+// Zone where the node is located.
+func (o GetNodesNodeCdbNodeInfoOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeCdbNodeInfo) int { return v.ZoneId }).(pulumi.IntOutput)
 }
 
-type NodesNodeCdbNodeInfoArrayOutput struct{ *pulumi.OutputState }
+type GetNodesNodeCdbNodeInfoArrayOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeCdbNodeInfoArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNodeCdbNodeInfo)(nil)).Elem()
+func (GetNodesNodeCdbNodeInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNodeCdbNodeInfo)(nil)).Elem()
 }
 
-func (o NodesNodeCdbNodeInfoArrayOutput) ToNodesNodeCdbNodeInfoArrayOutput() NodesNodeCdbNodeInfoArrayOutput {
+func (o GetNodesNodeCdbNodeInfoArrayOutput) ToGetNodesNodeCdbNodeInfoArrayOutput() GetNodesNodeCdbNodeInfoArrayOutput {
 	return o
 }
 
-func (o NodesNodeCdbNodeInfoArrayOutput) ToNodesNodeCdbNodeInfoArrayOutputWithContext(ctx context.Context) NodesNodeCdbNodeInfoArrayOutput {
+func (o GetNodesNodeCdbNodeInfoArrayOutput) ToGetNodesNodeCdbNodeInfoArrayOutputWithContext(ctx context.Context) GetNodesNodeCdbNodeInfoArrayOutput {
 	return o
 }
 
-func (o NodesNodeCdbNodeInfoArrayOutput) Index(i pulumi.IntInput) NodesNodeCdbNodeInfoOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NodesNodeCdbNodeInfo {
-		return vs[0].([]NodesNodeCdbNodeInfo)[vs[1].(int)]
-	}).(NodesNodeCdbNodeInfoOutput)
+func (o GetNodesNodeCdbNodeInfoArrayOutput) Index(i pulumi.IntInput) GetNodesNodeCdbNodeInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodesNodeCdbNodeInfo {
+		return vs[0].([]GetNodesNodeCdbNodeInfo)[vs[1].(int)]
+	}).(GetNodesNodeCdbNodeInfoOutput)
 }
 
-type NodesNodeMcMultiDisk struct {
-	Count  int `pulumi:"count"`
-	Type   int `pulumi:"type"`
+type GetNodesNodeMcMultiDisk struct {
+	// The number of cloud disks of this type.
+	Count int `pulumi:"count"`
+	// Disk type.
+	Type int `pulumi:"type"`
+	// The size of the cloud disk.
 	Volume int `pulumi:"volume"`
 }
 
-// NodesNodeMcMultiDiskInput is an input type that accepts NodesNodeMcMultiDiskArgs and NodesNodeMcMultiDiskOutput values.
-// You can construct a concrete instance of `NodesNodeMcMultiDiskInput` via:
+// GetNodesNodeMcMultiDiskInput is an input type that accepts GetNodesNodeMcMultiDiskArgs and GetNodesNodeMcMultiDiskOutput values.
+// You can construct a concrete instance of `GetNodesNodeMcMultiDiskInput` via:
 //
-//          NodesNodeMcMultiDiskArgs{...}
-type NodesNodeMcMultiDiskInput interface {
+//          GetNodesNodeMcMultiDiskArgs{...}
+type GetNodesNodeMcMultiDiskInput interface {
 	pulumi.Input
 
-	ToNodesNodeMcMultiDiskOutput() NodesNodeMcMultiDiskOutput
-	ToNodesNodeMcMultiDiskOutputWithContext(context.Context) NodesNodeMcMultiDiskOutput
+	ToGetNodesNodeMcMultiDiskOutput() GetNodesNodeMcMultiDiskOutput
+	ToGetNodesNodeMcMultiDiskOutputWithContext(context.Context) GetNodesNodeMcMultiDiskOutput
 }
 
-type NodesNodeMcMultiDiskArgs struct {
-	Count  pulumi.IntInput `pulumi:"count"`
-	Type   pulumi.IntInput `pulumi:"type"`
+type GetNodesNodeMcMultiDiskArgs struct {
+	// The number of cloud disks of this type.
+	Count pulumi.IntInput `pulumi:"count"`
+	// Disk type.
+	Type pulumi.IntInput `pulumi:"type"`
+	// The size of the cloud disk.
 	Volume pulumi.IntInput `pulumi:"volume"`
 }
 
-func (NodesNodeMcMultiDiskArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNodeMcMultiDisk)(nil)).Elem()
+func (GetNodesNodeMcMultiDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNodeMcMultiDisk)(nil)).Elem()
 }
 
-func (i NodesNodeMcMultiDiskArgs) ToNodesNodeMcMultiDiskOutput() NodesNodeMcMultiDiskOutput {
-	return i.ToNodesNodeMcMultiDiskOutputWithContext(context.Background())
+func (i GetNodesNodeMcMultiDiskArgs) ToGetNodesNodeMcMultiDiskOutput() GetNodesNodeMcMultiDiskOutput {
+	return i.ToGetNodesNodeMcMultiDiskOutputWithContext(context.Background())
 }
 
-func (i NodesNodeMcMultiDiskArgs) ToNodesNodeMcMultiDiskOutputWithContext(ctx context.Context) NodesNodeMcMultiDiskOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeMcMultiDiskOutput)
+func (i GetNodesNodeMcMultiDiskArgs) ToGetNodesNodeMcMultiDiskOutputWithContext(ctx context.Context) GetNodesNodeMcMultiDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeMcMultiDiskOutput)
 }
 
-// NodesNodeMcMultiDiskArrayInput is an input type that accepts NodesNodeMcMultiDiskArray and NodesNodeMcMultiDiskArrayOutput values.
-// You can construct a concrete instance of `NodesNodeMcMultiDiskArrayInput` via:
+// GetNodesNodeMcMultiDiskArrayInput is an input type that accepts GetNodesNodeMcMultiDiskArray and GetNodesNodeMcMultiDiskArrayOutput values.
+// You can construct a concrete instance of `GetNodesNodeMcMultiDiskArrayInput` via:
 //
-//          NodesNodeMcMultiDiskArray{ NodesNodeMcMultiDiskArgs{...} }
-type NodesNodeMcMultiDiskArrayInput interface {
+//          GetNodesNodeMcMultiDiskArray{ GetNodesNodeMcMultiDiskArgs{...} }
+type GetNodesNodeMcMultiDiskArrayInput interface {
 	pulumi.Input
 
-	ToNodesNodeMcMultiDiskArrayOutput() NodesNodeMcMultiDiskArrayOutput
-	ToNodesNodeMcMultiDiskArrayOutputWithContext(context.Context) NodesNodeMcMultiDiskArrayOutput
+	ToGetNodesNodeMcMultiDiskArrayOutput() GetNodesNodeMcMultiDiskArrayOutput
+	ToGetNodesNodeMcMultiDiskArrayOutputWithContext(context.Context) GetNodesNodeMcMultiDiskArrayOutput
 }
 
-type NodesNodeMcMultiDiskArray []NodesNodeMcMultiDiskInput
+type GetNodesNodeMcMultiDiskArray []GetNodesNodeMcMultiDiskInput
 
-func (NodesNodeMcMultiDiskArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNodeMcMultiDisk)(nil)).Elem()
+func (GetNodesNodeMcMultiDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNodeMcMultiDisk)(nil)).Elem()
 }
 
-func (i NodesNodeMcMultiDiskArray) ToNodesNodeMcMultiDiskArrayOutput() NodesNodeMcMultiDiskArrayOutput {
-	return i.ToNodesNodeMcMultiDiskArrayOutputWithContext(context.Background())
+func (i GetNodesNodeMcMultiDiskArray) ToGetNodesNodeMcMultiDiskArrayOutput() GetNodesNodeMcMultiDiskArrayOutput {
+	return i.ToGetNodesNodeMcMultiDiskArrayOutputWithContext(context.Background())
 }
 
-func (i NodesNodeMcMultiDiskArray) ToNodesNodeMcMultiDiskArrayOutputWithContext(ctx context.Context) NodesNodeMcMultiDiskArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeMcMultiDiskArrayOutput)
+func (i GetNodesNodeMcMultiDiskArray) ToGetNodesNodeMcMultiDiskArrayOutputWithContext(ctx context.Context) GetNodesNodeMcMultiDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeMcMultiDiskArrayOutput)
 }
 
-type NodesNodeMcMultiDiskOutput struct{ *pulumi.OutputState }
+type GetNodesNodeMcMultiDiskOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeMcMultiDiskOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNodeMcMultiDisk)(nil)).Elem()
+func (GetNodesNodeMcMultiDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNodeMcMultiDisk)(nil)).Elem()
 }
 
-func (o NodesNodeMcMultiDiskOutput) ToNodesNodeMcMultiDiskOutput() NodesNodeMcMultiDiskOutput {
+func (o GetNodesNodeMcMultiDiskOutput) ToGetNodesNodeMcMultiDiskOutput() GetNodesNodeMcMultiDiskOutput {
 	return o
 }
 
-func (o NodesNodeMcMultiDiskOutput) ToNodesNodeMcMultiDiskOutputWithContext(ctx context.Context) NodesNodeMcMultiDiskOutput {
+func (o GetNodesNodeMcMultiDiskOutput) ToGetNodesNodeMcMultiDiskOutputWithContext(ctx context.Context) GetNodesNodeMcMultiDiskOutput {
 	return o
 }
 
-func (o NodesNodeMcMultiDiskOutput) Count() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeMcMultiDisk) int { return v.Count }).(pulumi.IntOutput)
+// The number of cloud disks of this type.
+func (o GetNodesNodeMcMultiDiskOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeMcMultiDisk) int { return v.Count }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeMcMultiDiskOutput) Type() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeMcMultiDisk) int { return v.Type }).(pulumi.IntOutput)
+// Disk type.
+func (o GetNodesNodeMcMultiDiskOutput) Type() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeMcMultiDisk) int { return v.Type }).(pulumi.IntOutput)
 }
 
-func (o NodesNodeMcMultiDiskOutput) Volume() pulumi.IntOutput {
-	return o.ApplyT(func(v NodesNodeMcMultiDisk) int { return v.Volume }).(pulumi.IntOutput)
+// The size of the cloud disk.
+func (o GetNodesNodeMcMultiDiskOutput) Volume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesNodeMcMultiDisk) int { return v.Volume }).(pulumi.IntOutput)
 }
 
-type NodesNodeMcMultiDiskArrayOutput struct{ *pulumi.OutputState }
+type GetNodesNodeMcMultiDiskArrayOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeMcMultiDiskArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNodeMcMultiDisk)(nil)).Elem()
+func (GetNodesNodeMcMultiDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNodeMcMultiDisk)(nil)).Elem()
 }
 
-func (o NodesNodeMcMultiDiskArrayOutput) ToNodesNodeMcMultiDiskArrayOutput() NodesNodeMcMultiDiskArrayOutput {
+func (o GetNodesNodeMcMultiDiskArrayOutput) ToGetNodesNodeMcMultiDiskArrayOutput() GetNodesNodeMcMultiDiskArrayOutput {
 	return o
 }
 
-func (o NodesNodeMcMultiDiskArrayOutput) ToNodesNodeMcMultiDiskArrayOutputWithContext(ctx context.Context) NodesNodeMcMultiDiskArrayOutput {
+func (o GetNodesNodeMcMultiDiskArrayOutput) ToGetNodesNodeMcMultiDiskArrayOutputWithContext(ctx context.Context) GetNodesNodeMcMultiDiskArrayOutput {
 	return o
 }
 
-func (o NodesNodeMcMultiDiskArrayOutput) Index(i pulumi.IntInput) NodesNodeMcMultiDiskOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NodesNodeMcMultiDisk {
-		return vs[0].([]NodesNodeMcMultiDisk)[vs[1].(int)]
-	}).(NodesNodeMcMultiDiskOutput)
+func (o GetNodesNodeMcMultiDiskArrayOutput) Index(i pulumi.IntInput) GetNodesNodeMcMultiDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodesNodeMcMultiDisk {
+		return vs[0].([]GetNodesNodeMcMultiDisk)[vs[1].(int)]
+	}).(GetNodesNodeMcMultiDiskOutput)
 }
 
-type NodesNodeTag struct {
-	TagKey   string `pulumi:"tagKey"`
+type GetNodesNodeTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
 	TagValue string `pulumi:"tagValue"`
 }
 
-// NodesNodeTagInput is an input type that accepts NodesNodeTagArgs and NodesNodeTagOutput values.
-// You can construct a concrete instance of `NodesNodeTagInput` via:
+// GetNodesNodeTagInput is an input type that accepts GetNodesNodeTagArgs and GetNodesNodeTagOutput values.
+// You can construct a concrete instance of `GetNodesNodeTagInput` via:
 //
-//          NodesNodeTagArgs{...}
-type NodesNodeTagInput interface {
+//          GetNodesNodeTagArgs{...}
+type GetNodesNodeTagInput interface {
 	pulumi.Input
 
-	ToNodesNodeTagOutput() NodesNodeTagOutput
-	ToNodesNodeTagOutputWithContext(context.Context) NodesNodeTagOutput
+	ToGetNodesNodeTagOutput() GetNodesNodeTagOutput
+	ToGetNodesNodeTagOutputWithContext(context.Context) GetNodesNodeTagOutput
 }
 
-type NodesNodeTagArgs struct {
-	TagKey   pulumi.StringInput `pulumi:"tagKey"`
+type GetNodesNodeTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
 	TagValue pulumi.StringInput `pulumi:"tagValue"`
 }
 
-func (NodesNodeTagArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNodeTag)(nil)).Elem()
+func (GetNodesNodeTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNodeTag)(nil)).Elem()
 }
 
-func (i NodesNodeTagArgs) ToNodesNodeTagOutput() NodesNodeTagOutput {
-	return i.ToNodesNodeTagOutputWithContext(context.Background())
+func (i GetNodesNodeTagArgs) ToGetNodesNodeTagOutput() GetNodesNodeTagOutput {
+	return i.ToGetNodesNodeTagOutputWithContext(context.Background())
 }
 
-func (i NodesNodeTagArgs) ToNodesNodeTagOutputWithContext(ctx context.Context) NodesNodeTagOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeTagOutput)
+func (i GetNodesNodeTagArgs) ToGetNodesNodeTagOutputWithContext(ctx context.Context) GetNodesNodeTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeTagOutput)
 }
 
-// NodesNodeTagArrayInput is an input type that accepts NodesNodeTagArray and NodesNodeTagArrayOutput values.
-// You can construct a concrete instance of `NodesNodeTagArrayInput` via:
+// GetNodesNodeTagArrayInput is an input type that accepts GetNodesNodeTagArray and GetNodesNodeTagArrayOutput values.
+// You can construct a concrete instance of `GetNodesNodeTagArrayInput` via:
 //
-//          NodesNodeTagArray{ NodesNodeTagArgs{...} }
-type NodesNodeTagArrayInput interface {
+//          GetNodesNodeTagArray{ GetNodesNodeTagArgs{...} }
+type GetNodesNodeTagArrayInput interface {
 	pulumi.Input
 
-	ToNodesNodeTagArrayOutput() NodesNodeTagArrayOutput
-	ToNodesNodeTagArrayOutputWithContext(context.Context) NodesNodeTagArrayOutput
+	ToGetNodesNodeTagArrayOutput() GetNodesNodeTagArrayOutput
+	ToGetNodesNodeTagArrayOutputWithContext(context.Context) GetNodesNodeTagArrayOutput
 }
 
-type NodesNodeTagArray []NodesNodeTagInput
+type GetNodesNodeTagArray []GetNodesNodeTagInput
 
-func (NodesNodeTagArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNodeTag)(nil)).Elem()
+func (GetNodesNodeTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNodeTag)(nil)).Elem()
 }
 
-func (i NodesNodeTagArray) ToNodesNodeTagArrayOutput() NodesNodeTagArrayOutput {
-	return i.ToNodesNodeTagArrayOutputWithContext(context.Background())
+func (i GetNodesNodeTagArray) ToGetNodesNodeTagArrayOutput() GetNodesNodeTagArrayOutput {
+	return i.ToGetNodesNodeTagArrayOutputWithContext(context.Background())
 }
 
-func (i NodesNodeTagArray) ToNodesNodeTagArrayOutputWithContext(ctx context.Context) NodesNodeTagArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NodesNodeTagArrayOutput)
+func (i GetNodesNodeTagArray) ToGetNodesNodeTagArrayOutputWithContext(ctx context.Context) GetNodesNodeTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesNodeTagArrayOutput)
 }
 
-type NodesNodeTagOutput struct{ *pulumi.OutputState }
+type GetNodesNodeTagOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeTagOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*NodesNodeTag)(nil)).Elem()
+func (GetNodesNodeTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesNodeTag)(nil)).Elem()
 }
 
-func (o NodesNodeTagOutput) ToNodesNodeTagOutput() NodesNodeTagOutput {
+func (o GetNodesNodeTagOutput) ToGetNodesNodeTagOutput() GetNodesNodeTagOutput {
 	return o
 }
 
-func (o NodesNodeTagOutput) ToNodesNodeTagOutputWithContext(ctx context.Context) NodesNodeTagOutput {
+func (o GetNodesNodeTagOutput) ToGetNodesNodeTagOutputWithContext(ctx context.Context) GetNodesNodeTagOutput {
 	return o
 }
 
-func (o NodesNodeTagOutput) TagKey() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeTag) string { return v.TagKey }).(pulumi.StringOutput)
+// Tag key.
+func (o GetNodesNodeTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeTag) string { return v.TagKey }).(pulumi.StringOutput)
 }
 
-func (o NodesNodeTagOutput) TagValue() pulumi.StringOutput {
-	return o.ApplyT(func(v NodesNodeTag) string { return v.TagValue }).(pulumi.StringOutput)
+// Tag value.
+func (o GetNodesNodeTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesNodeTag) string { return v.TagValue }).(pulumi.StringOutput)
 }
 
-type NodesNodeTagArrayOutput struct{ *pulumi.OutputState }
+type GetNodesNodeTagArrayOutput struct{ *pulumi.OutputState }
 
-func (NodesNodeTagArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NodesNodeTag)(nil)).Elem()
+func (GetNodesNodeTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesNodeTag)(nil)).Elem()
 }
 
-func (o NodesNodeTagArrayOutput) ToNodesNodeTagArrayOutput() NodesNodeTagArrayOutput {
+func (o GetNodesNodeTagArrayOutput) ToGetNodesNodeTagArrayOutput() GetNodesNodeTagArrayOutput {
 	return o
 }
 
-func (o NodesNodeTagArrayOutput) ToNodesNodeTagArrayOutputWithContext(ctx context.Context) NodesNodeTagArrayOutput {
+func (o GetNodesNodeTagArrayOutput) ToGetNodesNodeTagArrayOutputWithContext(ctx context.Context) GetNodesNodeTagArrayOutput {
 	return o
 }
 
-func (o NodesNodeTagArrayOutput) Index(i pulumi.IntInput) NodesNodeTagOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NodesNodeTag {
-		return vs[0].([]NodesNodeTag)[vs[1].(int)]
-	}).(NodesNodeTagOutput)
+func (o GetNodesNodeTagArrayOutput) Index(i pulumi.IntInput) GetNodesNodeTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodesNodeTag {
+		return vs[0].([]GetNodesNodeTag)[vs[1].(int)]
+	}).(GetNodesNodeTagOutput)
 }
 
 func init() {
@@ -2023,16 +2255,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecMasterResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesClusterInput)(nil)).Elem(), InstancesClusterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesClusterArrayInput)(nil)).Elem(), InstancesClusterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeInput)(nil)).Elem(), NodesNodeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeArrayInput)(nil)).Elem(), NodesNodeArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeCdbNodeInfoInput)(nil)).Elem(), NodesNodeCdbNodeInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeCdbNodeInfoArrayInput)(nil)).Elem(), NodesNodeCdbNodeInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeMcMultiDiskInput)(nil)).Elem(), NodesNodeMcMultiDiskArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeMcMultiDiskArrayInput)(nil)).Elem(), NodesNodeMcMultiDiskArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeTagInput)(nil)).Elem(), NodesNodeTagArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NodesNodeTagArrayInput)(nil)).Elem(), NodesNodeTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceClusterInput)(nil)).Elem(), GetInstanceClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceClusterArrayInput)(nil)).Elem(), GetInstanceClusterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeInput)(nil)).Elem(), GetNodesNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeArrayInput)(nil)).Elem(), GetNodesNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeCdbNodeInfoInput)(nil)).Elem(), GetNodesNodeCdbNodeInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeCdbNodeInfoArrayInput)(nil)).Elem(), GetNodesNodeCdbNodeInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeMcMultiDiskInput)(nil)).Elem(), GetNodesNodeMcMultiDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeMcMultiDiskArrayInput)(nil)).Elem(), GetNodesNodeMcMultiDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeTagInput)(nil)).Elem(), GetNodesNodeTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeTagArrayInput)(nil)).Elem(), GetNodesNodeTagArray{})
 	pulumi.RegisterOutputType(ClusterResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecPtrOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecCommonResourceSpecOutput{})
@@ -2043,14 +2275,14 @@ func init() {
 	pulumi.RegisterOutputType(ClusterResourceSpecMasterResourceSpecPtrOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecPtrOutput{})
-	pulumi.RegisterOutputType(InstancesClusterOutput{})
-	pulumi.RegisterOutputType(InstancesClusterArrayOutput{})
-	pulumi.RegisterOutputType(NodesNodeOutput{})
-	pulumi.RegisterOutputType(NodesNodeArrayOutput{})
-	pulumi.RegisterOutputType(NodesNodeCdbNodeInfoOutput{})
-	pulumi.RegisterOutputType(NodesNodeCdbNodeInfoArrayOutput{})
-	pulumi.RegisterOutputType(NodesNodeMcMultiDiskOutput{})
-	pulumi.RegisterOutputType(NodesNodeMcMultiDiskArrayOutput{})
-	pulumi.RegisterOutputType(NodesNodeTagOutput{})
-	pulumi.RegisterOutputType(NodesNodeTagArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceClusterOutput{})
+	pulumi.RegisterOutputType(GetInstanceClusterArrayOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeArrayOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeCdbNodeInfoOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeCdbNodeInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeMcMultiDiskOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeMcMultiDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeTagOutput{})
+	pulumi.RegisterOutputType(GetNodesNodeTagArrayOutput{})
 }

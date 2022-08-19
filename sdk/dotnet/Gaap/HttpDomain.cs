@@ -9,6 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Gaap
 {
+    /// <summary>
+    /// Provides a resource to create a forward domain of layer7 listener.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
+    ///         {
+    ///             Bandwidth = 10,
+    ///             Concurrent = 2,
+    ///             AccessRegion = "SouthChina",
+    ///             RealserverRegion = "NorthChina",
+    ///         });
+    ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
+    ///         {
+    ///             Protocol = "HTTP",
+    ///             Port = 80,
+    ///             ProxyId = fooProxy.Id,
+    ///         });
+    ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
+    ///         {
+    ///             ListenerId = fooLayer7Listener.Id,
+    ///             Domain = "www.qq.com",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// GAAP http domain can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/httpDomain:HttpDomain")]
     public partial class HttpDomain : Pulumi.CustomResource
     {
@@ -31,7 +75,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Output<string?> CertificateId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the client certificate, default value is `default`.
+        /// It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         /// </summary>
         [Output("clientCertificateId")]
         public Output<string> ClientCertificateId { get; private set; } = null!;
@@ -79,7 +123,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Output<string> RealserverCertificateDomain { get; private set; } = null!;
 
         /// <summary>
-        /// CA certificate ID of the realserver.
+        /// It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         /// </summary>
         [Output("realserverCertificateId")]
         public Output<string> RealserverCertificateId { get; private set; } = null!;
@@ -155,7 +199,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? CertificateId { get; set; }
 
         /// <summary>
-        /// ID of the client certificate, default value is `default`.
+        /// It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         /// </summary>
         [Input("clientCertificateId")]
         public Input<string>? ClientCertificateId { get; set; }
@@ -209,7 +253,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? RealserverCertificateDomain { get; set; }
 
         /// <summary>
-        /// CA certificate ID of the realserver.
+        /// It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         /// </summary>
         [Input("realserverCertificateId")]
         public Input<string>? RealserverCertificateId { get; set; }
@@ -252,7 +296,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? CertificateId { get; set; }
 
         /// <summary>
-        /// ID of the client certificate, default value is `default`.
+        /// It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         /// </summary>
         [Input("clientCertificateId")]
         public Input<string>? ClientCertificateId { get; set; }
@@ -306,7 +350,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? RealserverCertificateDomain { get; set; }
 
         /// <summary>
-        /// CA certificate ID of the realserver.
+        /// It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         /// </summary>
         [Input("realserverCertificateId")]
         public Input<string>? RealserverCertificateId { get; set; }

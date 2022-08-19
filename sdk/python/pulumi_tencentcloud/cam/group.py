@@ -115,7 +115,25 @@ class Group(pulumi.CustomResource):
                  remark: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Group resource with the given unique name, props, and options.
+        Provides a resource to create a CAM group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.Group("foo", remark="test")
+        ```
+
+        ## Import
+
+        CAM group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/group:Group foo 90496
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of CAM group.
@@ -128,7 +146,25 @@ class Group(pulumi.CustomResource):
                  args: Optional[GroupArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Group resource with the given unique name, props, and options.
+        Provides a resource to create a CAM group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.Group("foo", remark="test")
+        ```
+
+        ## Import
+
+        CAM group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/group:Group foo 90496
+        ```
+
         :param str resource_name: The name of the resource.
         :param GroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

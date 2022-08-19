@@ -9,6 +9,48 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Scf
 {
+    /// <summary>
+    /// Provide a resource to create a SCF layer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Scf.Layer("foo", new Tencentcloud.Scf.LayerArgs
+    ///         {
+    ///             CompatibleRuntimes = 
+    ///             {
+    ///                 "Python3.6",
+    ///             },
+    ///             Content = new Tencentcloud.Scf.Inputs.LayerContentArgs
+    ///             {
+    ///                 CosBucketName = "test-bucket",
+    ///                 CosBucketRegion = "ap-guangzhou",
+    ///                 CosObjectName = "/foo.zip",
+    ///             },
+    ///             Description = "foo",
+    ///             LayerName = "foo",
+    ///             LicenseInfo = "foo",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Scf layer can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/layer:Layer")]
     public partial class Layer : Pulumi.CustomResource
     {

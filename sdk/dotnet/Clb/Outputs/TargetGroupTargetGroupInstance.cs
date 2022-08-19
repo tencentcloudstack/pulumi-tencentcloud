@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Clb.Outputs
     [OutputType]
     public sealed class TargetGroupTargetGroupInstance
     {
+        /// <summary>
+        /// The internal ip of target group instance.
+        /// </summary>
         public readonly string BindIp;
+        /// <summary>
+        /// The new port of target group instance.
+        /// </summary>
         public readonly int? NewPort;
+        /// <summary>
+        /// The port of target group instance.
+        /// </summary>
         public readonly int Port;
+        /// <summary>
+        /// The weight of target group instance.
+        /// </summary>
         public readonly int? Weight;
 
         [OutputConstructor]

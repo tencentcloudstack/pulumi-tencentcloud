@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CLB instance topic.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topic = new tencentcloud.Clb.LogTopic("topic", {
+ *     logSetId: tencentcloud_clb_log_set_set.id,
+ *     topicName: "clb-topic",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CLB log topic can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+ * ```
+ */
 export class LogTopic extends pulumi.CustomResource {
     /**
      * Get an existing LogTopic resource's state with the given name, ID, and optional extra

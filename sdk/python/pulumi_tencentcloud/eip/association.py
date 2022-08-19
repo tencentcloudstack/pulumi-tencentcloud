@@ -20,8 +20,7 @@ class AssociationArgs:
         """
         The set of arguments for constructing a Association resource.
         :param pulumi.Input[str] eip_id: The ID of EIP.
-        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-               `private_ip fields`.
+        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         :param pulumi.Input[str] network_interface_id: Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
         :param pulumi.Input[str] private_ip: Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
         """
@@ -49,8 +48,7 @@ class AssociationArgs:
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-        `private_ip fields`.
+        The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         """
         return pulumi.get(self, "instance_id")
 
@@ -93,8 +91,7 @@ class _AssociationState:
         """
         Input properties used for looking up and filtering Association resources.
         :param pulumi.Input[str] eip_id: The ID of EIP.
-        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-               `private_ip fields`.
+        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         :param pulumi.Input[str] network_interface_id: Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
         :param pulumi.Input[str] private_ip: Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
         """
@@ -123,8 +120,7 @@ class _AssociationState:
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-        `private_ip fields`.
+        The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         """
         return pulumi.get(self, "instance_id")
 
@@ -168,12 +164,45 @@ class Association(pulumi.CustomResource):
                  private_ip: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Association resource with the given unique name, props, and options.
+        Provides an eip resource associated with other resource like CVM, ENI and CLB.
+
+        > **NOTE:** Please DO NOT define `allocate_public_ip` in `Instance.Instance` resource when using `Eip.Association`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.eip.Association("foo",
+            eip_id="eip-xxxxxx",
+            instance_id="ins-xxxxxx")
+        ```
+
+        or
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        bar = tencentcloud.eip.Association("bar",
+            eip_id="eip-xxxxxx",
+            network_interface_id="eni-xxxxxx",
+            private_ip="10.0.1.22")
+        ```
+
+        ## Import
+
+        Eip association can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] eip_id: The ID of EIP.
-        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-               `private_ip fields`.
+        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         :param pulumi.Input[str] network_interface_id: Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
         :param pulumi.Input[str] private_ip: Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
         """
@@ -184,7 +213,41 @@ class Association(pulumi.CustomResource):
                  args: AssociationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Association resource with the given unique name, props, and options.
+        Provides an eip resource associated with other resource like CVM, ENI and CLB.
+
+        > **NOTE:** Please DO NOT define `allocate_public_ip` in `Instance.Instance` resource when using `Eip.Association`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.eip.Association("foo",
+            eip_id="eip-xxxxxx",
+            instance_id="ins-xxxxxx")
+        ```
+
+        or
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        bar = tencentcloud.eip.Association("bar",
+            eip_id="eip-xxxxxx",
+            network_interface_id="eni-xxxxxx",
+            private_ip="10.0.1.22")
+        ```
+
+        ## Import
+
+        Eip association can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+        ```
+
         :param str resource_name: The name of the resource.
         :param AssociationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -244,8 +307,7 @@ class Association(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] eip_id: The ID of EIP.
-        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-               `private_ip fields`.
+        :param pulumi.Input[str] instance_id: The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         :param pulumi.Input[str] network_interface_id: Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
         :param pulumi.Input[str] private_ip: Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
         """
@@ -271,8 +333,7 @@ class Association(pulumi.CustomResource):
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Output[str]:
         """
-        The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-        `private_ip fields`.
+        The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         """
         return pulumi.get(self, "instance_id")
 

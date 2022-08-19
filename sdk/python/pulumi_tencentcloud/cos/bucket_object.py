@@ -29,13 +29,11 @@ class BucketObjectArgs:
         The set of arguments for constructing a BucketObject resource.
         :param pulumi.Input[str] bucket: The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[str] key: The name of the object once it is in the bucket.
-        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-               `private`.
+        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         :param pulumi.Input[str] cache_control: Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.
         :param pulumi.Input[str] content: Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
         :param pulumi.Input[str] content_disposition: Specifies presentational information for the object.
-        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-               obtain the media-type referenced by the Content-Type header field.
+        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         :param pulumi.Input[str] content_type: A standard MIME type describing the format of the object data.
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] source: The path to the source file being uploaded to the bucket.
@@ -93,8 +91,7 @@ class BucketObjectArgs:
     @pulumi.getter
     def acl(self) -> Optional[pulumi.Input[str]]:
         """
-        The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-        `private`.
+        The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         """
         return pulumi.get(self, "acl")
 
@@ -142,8 +139,7 @@ class BucketObjectArgs:
     @pulumi.getter(name="contentEncoding")
     def content_encoding(self) -> Optional[pulumi.Input[str]]:
         """
-        Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-        obtain the media-type referenced by the Content-Type header field.
+        Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         """
         return pulumi.get(self, "content_encoding")
 
@@ -229,14 +225,12 @@ class _BucketObjectState:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering BucketObject resources.
-        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-               `private`.
+        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         :param pulumi.Input[str] bucket: The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[str] cache_control: Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.
         :param pulumi.Input[str] content: Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
         :param pulumi.Input[str] content_disposition: Specifies presentational information for the object.
-        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-               obtain the media-type referenced by the Content-Type header field.
+        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         :param pulumi.Input[str] content_type: A standard MIME type describing the format of the object data.
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] key: The name of the object once it is in the bucket.
@@ -273,8 +267,7 @@ class _BucketObjectState:
     @pulumi.getter
     def acl(self) -> Optional[pulumi.Input[str]]:
         """
-        The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-        `private`.
+        The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         """
         return pulumi.get(self, "acl")
 
@@ -334,8 +327,7 @@ class _BucketObjectState:
     @pulumi.getter(name="contentEncoding")
     def content_encoding(self) -> Optional[pulumi.Input[str]]:
         """
-        Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-        obtain the media-type referenced by the Content-Type header field.
+        Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         """
         return pulumi.get(self, "content_encoding")
 
@@ -435,17 +427,45 @@ class BucketObject(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a BucketObject resource with the given unique name, props, and options.
+        Provides a COS object resource to put an object(content or file) to the bucket.
+
+        ## Example Usage
+
+        Uploading a file to a bucket
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        myobject = tencentcloud.cos.BucketObject("myobject",
+            bucket="mycos-1258798060",
+            key="new_object_key",
+            source="path/to/file")
+        ```
+
+        Uploading a content to a bucket
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        mycos = tencentcloud.cos.Bucket("mycos",
+            bucket="mycos-1258798060",
+            acl="public-read")
+        myobject = tencentcloud.cos.BucketObject("myobject",
+            bucket=mycos.bucket,
+            key="new_object_key",
+            content="the content that you want to upload.")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-               `private`.
+        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         :param pulumi.Input[str] bucket: The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[str] cache_control: Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.
         :param pulumi.Input[str] content: Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
         :param pulumi.Input[str] content_disposition: Specifies presentational information for the object.
-        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-               obtain the media-type referenced by the Content-Type header field.
+        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         :param pulumi.Input[str] content_type: A standard MIME type describing the format of the object data.
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] key: The name of the object once it is in the bucket.
@@ -460,7 +480,37 @@ class BucketObject(pulumi.CustomResource):
                  args: BucketObjectArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a BucketObject resource with the given unique name, props, and options.
+        Provides a COS object resource to put an object(content or file) to the bucket.
+
+        ## Example Usage
+
+        Uploading a file to a bucket
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        myobject = tencentcloud.cos.BucketObject("myobject",
+            bucket="mycos-1258798060",
+            key="new_object_key",
+            source="path/to/file")
+        ```
+
+        Uploading a content to a bucket
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        mycos = tencentcloud.cos.Bucket("mycos",
+            bucket="mycos-1258798060",
+            acl="public-read")
+        myobject = tencentcloud.cos.BucketObject("myobject",
+            bucket=mycos.bucket,
+            key="new_object_key",
+            content="the content that you want to upload.")
+        ```
+
         :param str resource_name: The name of the resource.
         :param BucketObjectArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -545,14 +595,12 @@ class BucketObject(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-               `private`.
+        :param pulumi.Input[str] acl: The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         :param pulumi.Input[str] bucket: The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[str] cache_control: Specifies caching behavior along the request/reply chain. For further details, RFC2616 can be referred.
         :param pulumi.Input[str] content: Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
         :param pulumi.Input[str] content_disposition: Specifies presentational information for the object.
-        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-               obtain the media-type referenced by the Content-Type header field.
+        :param pulumi.Input[str] content_encoding: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         :param pulumi.Input[str] content_type: A standard MIME type describing the format of the object data.
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] key: The name of the object once it is in the bucket.
@@ -582,8 +630,7 @@ class BucketObject(pulumi.CustomResource):
     @pulumi.getter
     def acl(self) -> pulumi.Output[Optional[str]]:
         """
-        The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-        `private`.
+        The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         """
         return pulumi.get(self, "acl")
 
@@ -623,8 +670,7 @@ class BucketObject(pulumi.CustomResource):
     @pulumi.getter(name="contentEncoding")
     def content_encoding(self) -> pulumi.Output[Optional[str]]:
         """
-        Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-        obtain the media-type referenced by the Content-Type header field.
+        Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         """
         return pulumi.get(self, "content_encoding")
 

@@ -13,11 +13,29 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class ConfigExtraContainerStdout
     {
+        /// <summary>
+        /// Is all containers.
+        /// </summary>
         public readonly bool AllContainers;
+        /// <summary>
+        /// Pod label to be excluded.
+        /// </summary>
         public readonly ImmutableArray<string> ExcludeLabels;
+        /// <summary>
+        /// Namespaces to be excluded, separated by separators, such as A, B.
+        /// </summary>
         public readonly string? ExcludeNamespace;
+        /// <summary>
+        /// Pod label info.
+        /// </summary>
         public readonly ImmutableArray<string> IncludeLabels;
+        /// <summary>
+        /// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+        /// </summary>
         public readonly string? Namespace;
+        /// <summary>
+        /// Workload info.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ConfigExtraContainerStdoutWorkload> Workloads;
 
         [OutputConstructor]

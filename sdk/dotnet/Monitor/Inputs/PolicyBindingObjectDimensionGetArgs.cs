@@ -12,6 +12,9 @@ namespace Pulumi.Tencentcloud.Monitor.Inputs
 
     public sealed class PolicyBindingObjectDimensionGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
+        /// </summary>
         [Input("dimensionsJson", required: true)]
         public Input<string> DimensionsJson { get; set; } = null!;
 

@@ -130,7 +130,27 @@ class Pair(pulumi.CustomResource):
                  public_key: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Pair resource with the given unique name, props, and options.
+        Provides a key pair resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.key.Pair("foo",
+            key_name="terraform_test",
+            public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
+        ```
+
+        ## Import
+
+        Key pair can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] key_name: The key pair's name. It is the only in one TencentCloud account.
@@ -144,7 +164,27 @@ class Pair(pulumi.CustomResource):
                  args: PairArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Pair resource with the given unique name, props, and options.
+        Provides a key pair resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.key.Pair("foo",
+            key_name="terraform_test",
+            public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
+        ```
+
+        ## Import
+
+        Key pair can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
+        ```
+
         :param str resource_name: The name of the resource.
         :param PairArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

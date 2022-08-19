@@ -30,8 +30,7 @@ class ReadonlyInstanceArgs:
         The set of arguments for constructing a ReadonlyInstance resource.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[int] project_id: Project ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group.
         :param pulumi.Input[int] storage: Instance storage capacity in GB.
@@ -89,8 +88,7 @@ class ReadonlyInstanceArgs:
     @pulumi.getter
     def memory(self) -> pulumi.Input[int]:
         """
-        Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        provides.
+        Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -243,8 +241,7 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
         :param pulumi.Input[int] project_id: Project ID.
@@ -347,8 +344,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter
     def memory(self) -> Optional[pulumi.Input[int]]:
         """
-        Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        provides.
+        Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -473,15 +469,44 @@ class ReadonlyInstance(pulumi.CustomResource):
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ReadonlyInstance resource with the given unique name, props, and options.
+        Use this resource to create postgresql readonly instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.postgresql.ReadonlyInstance("foo",
+            auto_renew_flag=0,
+            db_version="10.4",
+            instance_charge_type="POSTPAID_BY_HOUR",
+            master_db_instance_id="postgres-j4pm65id",
+            memory=4,
+            need_support_ipv6=0,
+            project_id=0,
+            security_groups_ids=["sg-fefj5n6r"],
+            storage=250,
+            subnet_id="subnet-enm92y0m",
+            vpc_id="vpc-86v957zb",
+            zone="ap-guangzhou-6")
+        ```
+
+        ## Import
+
+        postgresql readonly instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
         :param pulumi.Input[int] project_id: Project ID.
@@ -498,7 +523,37 @@ class ReadonlyInstance(pulumi.CustomResource):
                  args: ReadonlyInstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ReadonlyInstance resource with the given unique name, props, and options.
+        Use this resource to create postgresql readonly instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.postgresql.ReadonlyInstance("foo",
+            auto_renew_flag=0,
+            db_version="10.4",
+            instance_charge_type="POSTPAID_BY_HOUR",
+            master_db_instance_id="postgres-j4pm65id",
+            memory=4,
+            need_support_ipv6=0,
+            project_id=0,
+            security_groups_ids=["sg-fefj5n6r"],
+            storage=250,
+            subnet_id="subnet-enm92y0m",
+            vpc_id="vpc-86v957zb",
+            zone="ap-guangzhou-6")
+        ```
+
+        ## Import
+
+        postgresql readonly instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+        ```
+
         :param str resource_name: The name of the resource.
         :param ReadonlyInstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -607,8 +662,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
         :param pulumi.Input[int] project_id: Project ID.
@@ -682,8 +736,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter
     def memory(self) -> pulumi.Output[int]:
         """
-        Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        provides.
+        Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 

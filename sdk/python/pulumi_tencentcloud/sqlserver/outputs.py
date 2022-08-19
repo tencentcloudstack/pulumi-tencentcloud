@@ -10,490 +10,19 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'AccountDBAttachmentsListResult',
-    'AccountsListResult',
-    'BackupsListResult',
-    'BasicInstancesInstanceListResult',
-    'DBsDbListResult',
-    'InstancesInstanceListResult',
     'PublishSubscribeDatabaseTuple',
-    'PublishSubscribesPublishSubscribeListResult',
-    'PublishSubscribesPublishSubscribeListDatabaseTupleResult',
-    'ReadonlyGroupsListResult',
-    'ZoneConfigZoneListResult',
-    'ZoneConfigZoneListSpecinfoListResult',
+    'GetAccountDbAttachmentsListResult',
+    'GetAccountsListResult',
+    'GetBackupsListResult',
+    'GetBasicInstancesInstanceListResult',
+    'GetDbsDbListResult',
+    'GetInstancesInstanceListResult',
+    'GetPublishSubscribesPublishSubscribeListResult',
+    'GetPublishSubscribesPublishSubscribeListDatabaseTupleResult',
+    'GetReadonlyGroupsListResult',
+    'GetZoneConfigZoneListResult',
+    'GetZoneConfigZoneListSpecinfoListResult',
 ]
-
-@pulumi.output_type
-class AccountDBAttachmentsListResult(dict):
-    def __init__(__self__, *,
-                 account_name: str,
-                 db_name: str,
-                 instance_id: str,
-                 privilege: str):
-        pulumi.set(__self__, "account_name", account_name)
-        pulumi.set(__self__, "db_name", db_name)
-        pulumi.set(__self__, "instance_id", instance_id)
-        pulumi.set(__self__, "privilege", privilege)
-
-    @property
-    @pulumi.getter(name="accountName")
-    def account_name(self) -> str:
-        return pulumi.get(self, "account_name")
-
-    @property
-    @pulumi.getter(name="dbName")
-    def db_name(self) -> str:
-        return pulumi.get(self, "db_name")
-
-    @property
-    @pulumi.getter(name="instanceId")
-    def instance_id(self) -> str:
-        return pulumi.get(self, "instance_id")
-
-    @property
-    @pulumi.getter
-    def privilege(self) -> str:
-        return pulumi.get(self, "privilege")
-
-
-@pulumi.output_type
-class AccountsListResult(dict):
-    def __init__(__self__, *,
-                 create_time: str,
-                 instance_id: str,
-                 name: str,
-                 remark: str,
-                 status: int,
-                 update_time: str):
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "instance_id", instance_id)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "remark", remark)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "update_time", update_time)
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="instanceId")
-    def instance_id(self) -> str:
-        return pulumi.get(self, "instance_id")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def remark(self) -> str:
-        return pulumi.get(self, "remark")
-
-    @property
-    @pulumi.getter
-    def status(self) -> int:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter(name="updateTime")
-    def update_time(self) -> str:
-        return pulumi.get(self, "update_time")
-
-
-@pulumi.output_type
-class BackupsListResult(dict):
-    def __init__(__self__, *,
-                 db_lists: Sequence[str],
-                 end_time: str,
-                 file_name: str,
-                 id: str,
-                 instance_id: str,
-                 internet_url: str,
-                 intranet_url: str,
-                 size: int,
-                 start_time: str,
-                 status: int,
-                 strategy: int,
-                 trigger_model: int):
-        pulumi.set(__self__, "db_lists", db_lists)
-        pulumi.set(__self__, "end_time", end_time)
-        pulumi.set(__self__, "file_name", file_name)
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "instance_id", instance_id)
-        pulumi.set(__self__, "internet_url", internet_url)
-        pulumi.set(__self__, "intranet_url", intranet_url)
-        pulumi.set(__self__, "size", size)
-        pulumi.set(__self__, "start_time", start_time)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "strategy", strategy)
-        pulumi.set(__self__, "trigger_model", trigger_model)
-
-    @property
-    @pulumi.getter(name="dbLists")
-    def db_lists(self) -> Sequence[str]:
-        return pulumi.get(self, "db_lists")
-
-    @property
-    @pulumi.getter(name="endTime")
-    def end_time(self) -> str:
-        return pulumi.get(self, "end_time")
-
-    @property
-    @pulumi.getter(name="fileName")
-    def file_name(self) -> str:
-        return pulumi.get(self, "file_name")
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="instanceId")
-    def instance_id(self) -> str:
-        return pulumi.get(self, "instance_id")
-
-    @property
-    @pulumi.getter(name="internetUrl")
-    def internet_url(self) -> str:
-        return pulumi.get(self, "internet_url")
-
-    @property
-    @pulumi.getter(name="intranetUrl")
-    def intranet_url(self) -> str:
-        return pulumi.get(self, "intranet_url")
-
-    @property
-    @pulumi.getter
-    def size(self) -> int:
-        return pulumi.get(self, "size")
-
-    @property
-    @pulumi.getter(name="startTime")
-    def start_time(self) -> str:
-        return pulumi.get(self, "start_time")
-
-    @property
-    @pulumi.getter
-    def status(self) -> int:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter
-    def strategy(self) -> int:
-        return pulumi.get(self, "strategy")
-
-    @property
-    @pulumi.getter(name="triggerModel")
-    def trigger_model(self) -> int:
-        return pulumi.get(self, "trigger_model")
-
-
-@pulumi.output_type
-class BasicInstancesInstanceListResult(dict):
-    def __init__(__self__, *,
-                 availability_zone: str,
-                 charge_type: str,
-                 cpu: int,
-                 create_time: str,
-                 engine_version: str,
-                 id: str,
-                 memory: int,
-                 name: str,
-                 project_id: int,
-                 status: int,
-                 storage: int,
-                 subnet_id: str,
-                 tags: Mapping[str, Any],
-                 used_storage: int,
-                 vip: str,
-                 vpc_id: str,
-                 vport: int):
-        pulumi.set(__self__, "availability_zone", availability_zone)
-        pulumi.set(__self__, "charge_type", charge_type)
-        pulumi.set(__self__, "cpu", cpu)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "engine_version", engine_version)
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "memory", memory)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "project_id", project_id)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "storage", storage)
-        pulumi.set(__self__, "subnet_id", subnet_id)
-        pulumi.set(__self__, "tags", tags)
-        pulumi.set(__self__, "used_storage", used_storage)
-        pulumi.set(__self__, "vip", vip)
-        pulumi.set(__self__, "vpc_id", vpc_id)
-        pulumi.set(__self__, "vport", vport)
-
-    @property
-    @pulumi.getter(name="availabilityZone")
-    def availability_zone(self) -> str:
-        return pulumi.get(self, "availability_zone")
-
-    @property
-    @pulumi.getter(name="chargeType")
-    def charge_type(self) -> str:
-        return pulumi.get(self, "charge_type")
-
-    @property
-    @pulumi.getter
-    def cpu(self) -> int:
-        return pulumi.get(self, "cpu")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="engineVersion")
-    def engine_version(self) -> str:
-        return pulumi.get(self, "engine_version")
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def memory(self) -> int:
-        return pulumi.get(self, "memory")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="projectId")
-    def project_id(self) -> int:
-        return pulumi.get(self, "project_id")
-
-    @property
-    @pulumi.getter
-    def status(self) -> int:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter
-    def storage(self) -> int:
-        return pulumi.get(self, "storage")
-
-    @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> str:
-        return pulumi.get(self, "subnet_id")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> Mapping[str, Any]:
-        return pulumi.get(self, "tags")
-
-    @property
-    @pulumi.getter(name="usedStorage")
-    def used_storage(self) -> int:
-        return pulumi.get(self, "used_storage")
-
-    @property
-    @pulumi.getter
-    def vip(self) -> str:
-        return pulumi.get(self, "vip")
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> str:
-        return pulumi.get(self, "vpc_id")
-
-    @property
-    @pulumi.getter
-    def vport(self) -> int:
-        return pulumi.get(self, "vport")
-
-
-@pulumi.output_type
-class DBsDbListResult(dict):
-    def __init__(__self__, *,
-                 charset: str,
-                 create_time: str,
-                 instance_id: str,
-                 name: str,
-                 remark: str,
-                 status: str):
-        pulumi.set(__self__, "charset", charset)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "instance_id", instance_id)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "remark", remark)
-        pulumi.set(__self__, "status", status)
-
-    @property
-    @pulumi.getter
-    def charset(self) -> str:
-        return pulumi.get(self, "charset")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="instanceId")
-    def instance_id(self) -> str:
-        return pulumi.get(self, "instance_id")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def remark(self) -> str:
-        return pulumi.get(self, "remark")
-
-    @property
-    @pulumi.getter
-    def status(self) -> str:
-        return pulumi.get(self, "status")
-
-
-@pulumi.output_type
-class InstancesInstanceListResult(dict):
-    def __init__(__self__, *,
-                 availability_zone: str,
-                 charge_type: str,
-                 create_time: str,
-                 engine_version: str,
-                 ha_type: str,
-                 id: str,
-                 memory: int,
-                 name: str,
-                 project_id: int,
-                 ro_flag: str,
-                 status: int,
-                 storage: int,
-                 subnet_id: str,
-                 tags: Mapping[str, Any],
-                 used_storage: int,
-                 vip: str,
-                 vpc_id: str,
-                 vport: int):
-        pulumi.set(__self__, "availability_zone", availability_zone)
-        pulumi.set(__self__, "charge_type", charge_type)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "engine_version", engine_version)
-        pulumi.set(__self__, "ha_type", ha_type)
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "memory", memory)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "project_id", project_id)
-        pulumi.set(__self__, "ro_flag", ro_flag)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "storage", storage)
-        pulumi.set(__self__, "subnet_id", subnet_id)
-        pulumi.set(__self__, "tags", tags)
-        pulumi.set(__self__, "used_storage", used_storage)
-        pulumi.set(__self__, "vip", vip)
-        pulumi.set(__self__, "vpc_id", vpc_id)
-        pulumi.set(__self__, "vport", vport)
-
-    @property
-    @pulumi.getter(name="availabilityZone")
-    def availability_zone(self) -> str:
-        return pulumi.get(self, "availability_zone")
-
-    @property
-    @pulumi.getter(name="chargeType")
-    def charge_type(self) -> str:
-        return pulumi.get(self, "charge_type")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="engineVersion")
-    def engine_version(self) -> str:
-        return pulumi.get(self, "engine_version")
-
-    @property
-    @pulumi.getter(name="haType")
-    def ha_type(self) -> str:
-        return pulumi.get(self, "ha_type")
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def memory(self) -> int:
-        return pulumi.get(self, "memory")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="projectId")
-    def project_id(self) -> int:
-        return pulumi.get(self, "project_id")
-
-    @property
-    @pulumi.getter(name="roFlag")
-    def ro_flag(self) -> str:
-        return pulumi.get(self, "ro_flag")
-
-    @property
-    @pulumi.getter
-    def status(self) -> int:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter
-    def storage(self) -> int:
-        return pulumi.get(self, "storage")
-
-    @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> str:
-        return pulumi.get(self, "subnet_id")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> Mapping[str, Any]:
-        return pulumi.get(self, "tags")
-
-    @property
-    @pulumi.getter(name="usedStorage")
-    def used_storage(self) -> int:
-        return pulumi.get(self, "used_storage")
-
-    @property
-    @pulumi.getter
-    def vip(self) -> str:
-        return pulumi.get(self, "vip")
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> str:
-        return pulumi.get(self, "vpc_id")
-
-    @property
-    @pulumi.getter
-    def vport(self) -> int:
-        return pulumi.get(self, "vport")
-
 
 @pulumi.output_type
 class PublishSubscribeDatabaseTuple(dict):
@@ -516,18 +45,759 @@ class PublishSubscribeDatabaseTuple(dict):
 
     def __init__(__self__, *,
                  publish_database: str):
+        """
+        :param str publish_database: Publish the database.
+        """
         pulumi.set(__self__, "publish_database", publish_database)
 
     @property
     @pulumi.getter(name="publishDatabase")
     def publish_database(self) -> str:
+        """
+        Publish the database.
+        """
         return pulumi.get(self, "publish_database")
 
 
 @pulumi.output_type
-class PublishSubscribesPublishSubscribeListResult(dict):
+class GetAccountDbAttachmentsListResult(dict):
     def __init__(__self__, *,
-                 database_tuples: Sequence['outputs.PublishSubscribesPublishSubscribeListDatabaseTupleResult'],
+                 account_name: str,
+                 db_name: str,
+                 instance_id: str,
+                 privilege: str):
+        """
+        :param str account_name: Name of the SQL Server account to be queried.
+        :param str db_name: Name of the DB to be queried.
+        :param str instance_id: SQL Server instance ID that the account belongs to.
+        :param str privilege: Privilege of the account on DB. Valid value are `ReadOnly`, `ReadWrite`.
+        """
+        pulumi.set(__self__, "account_name", account_name)
+        pulumi.set(__self__, "db_name", db_name)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "privilege", privilege)
+
+    @property
+    @pulumi.getter(name="accountName")
+    def account_name(self) -> str:
+        """
+        Name of the SQL Server account to be queried.
+        """
+        return pulumi.get(self, "account_name")
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> str:
+        """
+        Name of the DB to be queried.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        SQL Server instance ID that the account belongs to.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def privilege(self) -> str:
+        """
+        Privilege of the account on DB. Valid value are `ReadOnly`, `ReadWrite`.
+        """
+        return pulumi.get(self, "privilege")
+
+
+@pulumi.output_type
+class GetAccountsListResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 instance_id: str,
+                 name: str,
+                 remark: str,
+                 status: int,
+                 update_time: str):
+        """
+        :param str create_time: Create time of the SQL Server account.
+        :param str instance_id: SQL server instance ID that the account belongs to.
+        :param str name: Name of the SQL server account to be queried.
+        :param str remark: Remark of the SQL Server account.
+        :param int status: Status of the SQL Server account. `1` for creating, `2` for running, `3` for modifying, 4 for resetting password, -1 for deleting.
+        :param str update_time: Last updated time of the SQL Server account.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the SQL Server account.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        SQL server instance ID that the account belongs to.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the SQL server account to be queried.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Remark of the SQL Server account.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Status of the SQL Server account. `1` for creating, `2` for running, `3` for modifying, 4 for resetting password, -1 for deleting.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Last updated time of the SQL Server account.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetBackupsListResult(dict):
+    def __init__(__self__, *,
+                 db_lists: Sequence[str],
+                 end_time: str,
+                 file_name: str,
+                 id: str,
+                 instance_id: str,
+                 internet_url: str,
+                 intranet_url: str,
+                 size: int,
+                 start_time: str,
+                 status: int,
+                 strategy: int,
+                 trigger_model: int):
+        """
+        :param Sequence[str] db_lists: Database name list of the backup.
+        :param str end_time: End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+        :param str file_name: File name of the backup.
+        :param str id: ID of the backup.
+        :param str instance_id: Instance ID.
+        :param str internet_url: URL for downloads externally.
+        :param str intranet_url: URL for downloads internally.
+        :param int size: The size of backup file. Unit is KB.
+        :param str start_time: Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+        :param int status: Status of the backup. `1` for creating, `2` for successfully created, 3 for failed.
+        :param int strategy: Strategy of the backup. `0` for instance backup, `1` for multi-databases backup.
+        :param int trigger_model: The way to trigger backup. `0` for timed trigger, `1` for manual trigger.
+        """
+        pulumi.set(__self__, "db_lists", db_lists)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "file_name", file_name)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "internet_url", internet_url)
+        pulumi.set(__self__, "intranet_url", intranet_url)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "strategy", strategy)
+        pulumi.set(__self__, "trigger_model", trigger_model)
+
+    @property
+    @pulumi.getter(name="dbLists")
+    def db_lists(self) -> Sequence[str]:
+        """
+        Database name list of the backup.
+        """
+        return pulumi.get(self, "db_lists")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        File name of the backup.
+        """
+        return pulumi.get(self, "file_name")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        ID of the backup.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="internetUrl")
+    def internet_url(self) -> str:
+        """
+        URL for downloads externally.
+        """
+        return pulumi.get(self, "internet_url")
+
+    @property
+    @pulumi.getter(name="intranetUrl")
+    def intranet_url(self) -> str:
+        """
+        URL for downloads internally.
+        """
+        return pulumi.get(self, "intranet_url")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        The size of backup file. Unit is KB.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Status of the backup. `1` for creating, `2` for successfully created, 3 for failed.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def strategy(self) -> int:
+        """
+        Strategy of the backup. `0` for instance backup, `1` for multi-databases backup.
+        """
+        return pulumi.get(self, "strategy")
+
+    @property
+    @pulumi.getter(name="triggerModel")
+    def trigger_model(self) -> int:
+        """
+        The way to trigger backup. `0` for timed trigger, `1` for manual trigger.
+        """
+        return pulumi.get(self, "trigger_model")
+
+
+@pulumi.output_type
+class GetBasicInstancesInstanceListResult(dict):
+    def __init__(__self__, *,
+                 availability_zone: str,
+                 charge_type: str,
+                 cpu: int,
+                 create_time: str,
+                 engine_version: str,
+                 id: str,
+                 memory: int,
+                 name: str,
+                 project_id: int,
+                 status: int,
+                 storage: int,
+                 subnet_id: str,
+                 tags: Mapping[str, Any],
+                 used_storage: int,
+                 vip: str,
+                 vpc_id: str,
+                 vport: int):
+        """
+        :param str availability_zone: Availability zone.
+        :param str charge_type: Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param int cpu: The CPU number of the SQL Server basic instance.
+        :param str create_time: Create time of the SQL Server basic instance.
+        :param str engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+        :param str id: ID of the SQL Server basic instance to be query.
+        :param int memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
+        :param str name: Name of the SQL Server basic instance to be query.
+        :param int project_id: Project ID of the SQL Server basic instance to be query.
+        :param int status: Status of the SQL Server basic instance. `1` for applying, `2` for running, `3` for running with limit, `4` for isolated, `5` for recycling, `6` for recycled, `7` for running with task, `8` for off-line, `9` for expanding, `10` for migrating, `11` for readonly, `12` for rebooting.
+        :param int storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param str subnet_id: Subnet ID of the SQL Server basic instance to be query.
+        :param Mapping[str, Any] tags: Tags of the SQL Server basic instance.
+        :param int used_storage: Used storage.
+        :param str vip: IP for private access.
+        :param str vpc_id: Vpc ID of the SQL Server basic instance to be query.
+        :param int vport: Port for private access.
+        """
+        pulumi.set(__self__, "availability_zone", availability_zone)
+        pulumi.set(__self__, "charge_type", charge_type)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "engine_version", engine_version)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "storage", storage)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "used_storage", used_storage)
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter(name="availabilityZone")
+    def availability_zone(self) -> str:
+        """
+        Availability zone.
+        """
+        return pulumi.get(self, "availability_zone")
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> str:
+        """
+        Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        The CPU number of the SQL Server basic instance.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the SQL Server basic instance.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="engineVersion")
+    def engine_version(self) -> str:
+        """
+        Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+        """
+        return pulumi.get(self, "engine_version")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        ID of the SQL Server basic instance to be query.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the SQL Server basic instance to be query.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID of the SQL Server basic instance to be query.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Status of the SQL Server basic instance. `1` for applying, `2` for running, `3` for running with limit, `4` for isolated, `5` for recycling, `6` for recycled, `7` for running with task, `8` for off-line, `9` for expanding, `10` for migrating, `11` for readonly, `12` for rebooting.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def storage(self) -> int:
+        """
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        """
+        return pulumi.get(self, "storage")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet ID of the SQL Server basic instance to be query.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the SQL Server basic instance.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="usedStorage")
+    def used_storage(self) -> int:
+        """
+        Used storage.
+        """
+        return pulumi.get(self, "used_storage")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        IP for private access.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        Vpc ID of the SQL Server basic instance to be query.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> int:
+        """
+        Port for private access.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class GetDbsDbListResult(dict):
+    def __init__(__self__, *,
+                 charset: str,
+                 create_time: str,
+                 instance_id: str,
+                 name: str,
+                 remark: str,
+                 status: str):
+        """
+        :param str charset: Character set DB uses, could be `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`.
+        :param str create_time: Database creation time.
+        :param str instance_id: SQL Server instance ID which DB belongs to.
+        :param str name: Name of DB.
+        :param str remark: Remark of the DB.
+        :param str status: Database status. Valid values are `creating`, `running`, `modifying`, `dropping`.
+        """
+        pulumi.set(__self__, "charset", charset)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def charset(self) -> str:
+        """
+        Character set DB uses, could be `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`.
+        """
+        return pulumi.get(self, "charset")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Database creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        SQL Server instance ID which DB belongs to.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of DB.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Remark of the DB.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Database status. Valid values are `creating`, `running`, `modifying`, `dropping`.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetInstancesInstanceListResult(dict):
+    def __init__(__self__, *,
+                 availability_zone: str,
+                 charge_type: str,
+                 create_time: str,
+                 engine_version: str,
+                 ha_type: str,
+                 id: str,
+                 memory: int,
+                 name: str,
+                 project_id: int,
+                 ro_flag: str,
+                 status: int,
+                 storage: int,
+                 subnet_id: str,
+                 tags: Mapping[str, Any],
+                 used_storage: int,
+                 vip: str,
+                 vpc_id: str,
+                 vport: int):
+        """
+        :param str availability_zone: Availability zone.
+        :param str charge_type: Pay type of the SQL Server instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param str create_time: Create time of the SQL Server instance.
+        :param str engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+        :param str ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster).
+        :param str id: ID of the SQL Server instance to be query.
+        :param int memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
+        :param str name: Name of the SQL Server instance to be query.
+        :param int project_id: Project ID of the SQL Server instance to be query.
+        :param str ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
+        :param int status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+        :param int storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param str subnet_id: Subnet ID of the SQL Server instance to be query.
+        :param Mapping[str, Any] tags: Tags of the SQL Server instance.
+        :param int used_storage: Used storage.
+        :param str vip: IP for private access.
+        :param str vpc_id: Vpc ID of the SQL Server instance to be query.
+        :param int vport: Port for private access.
+        """
+        pulumi.set(__self__, "availability_zone", availability_zone)
+        pulumi.set(__self__, "charge_type", charge_type)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "engine_version", engine_version)
+        pulumi.set(__self__, "ha_type", ha_type)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "ro_flag", ro_flag)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "storage", storage)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "used_storage", used_storage)
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter(name="availabilityZone")
+    def availability_zone(self) -> str:
+        """
+        Availability zone.
+        """
+        return pulumi.get(self, "availability_zone")
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> str:
+        """
+        Pay type of the SQL Server instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the SQL Server instance.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="engineVersion")
+    def engine_version(self) -> str:
+        """
+        Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+        """
+        return pulumi.get(self, "engine_version")
+
+    @property
+    @pulumi.getter(name="haType")
+    def ha_type(self) -> str:
+        """
+        Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster).
+        """
+        return pulumi.get(self, "ha_type")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        ID of the SQL Server instance to be query.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the SQL Server instance to be query.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID of the SQL Server instance to be query.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="roFlag")
+    def ro_flag(self) -> str:
+        """
+        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
+        """
+        return pulumi.get(self, "ro_flag")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def storage(self) -> int:
+        """
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        """
+        return pulumi.get(self, "storage")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet ID of the SQL Server instance to be query.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the SQL Server instance.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="usedStorage")
+    def used_storage(self) -> int:
+        """
+        Used storage.
+        """
+        return pulumi.get(self, "used_storage")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        IP for private access.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        Vpc ID of the SQL Server instance to be query.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> int:
+        """
+        Port for private access.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class GetPublishSubscribesPublishSubscribeListResult(dict):
+    def __init__(__self__, *,
+                 database_tuples: Sequence['outputs.GetPublishSubscribesPublishSubscribeListDatabaseTupleResult'],
                  publish_instance_id: str,
                  publish_instance_ip: str,
                  publish_instance_name: str,
@@ -536,6 +806,17 @@ class PublishSubscribesPublishSubscribeListResult(dict):
                  subscribe_instance_id: str,
                  subscribe_instance_ip: str,
                  subscribe_instance_name: str):
+        """
+        :param Sequence['GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs'] database_tuples: Database Publish and Publish relationship list.
+        :param str publish_instance_id: ID of the SQL Server instance which publish.
+        :param str publish_instance_ip: IP of the the SQL Server instance which publish.
+        :param str publish_instance_name: Name of the SQL Server instance which publish.
+        :param int publish_subscribe_id: The id of the Publish and Subscribe.
+        :param str publish_subscribe_name: The name of the Publish and Subscribe.
+        :param str subscribe_instance_id: ID of the SQL Server instance which subscribe.
+        :param str subscribe_instance_ip: IP of the SQL Server instance which subscribe.
+        :param str subscribe_instance_name: Name of the SQL Server instance which subscribe.
+        """
         pulumi.set(__self__, "database_tuples", database_tuples)
         pulumi.set(__self__, "publish_instance_id", publish_instance_id)
         pulumi.set(__self__, "publish_instance_ip", publish_instance_ip)
@@ -548,57 +829,90 @@ class PublishSubscribesPublishSubscribeListResult(dict):
 
     @property
     @pulumi.getter(name="databaseTuples")
-    def database_tuples(self) -> Sequence['outputs.PublishSubscribesPublishSubscribeListDatabaseTupleResult']:
+    def database_tuples(self) -> Sequence['outputs.GetPublishSubscribesPublishSubscribeListDatabaseTupleResult']:
+        """
+        Database Publish and Publish relationship list.
+        """
         return pulumi.get(self, "database_tuples")
 
     @property
     @pulumi.getter(name="publishInstanceId")
     def publish_instance_id(self) -> str:
+        """
+        ID of the SQL Server instance which publish.
+        """
         return pulumi.get(self, "publish_instance_id")
 
     @property
     @pulumi.getter(name="publishInstanceIp")
     def publish_instance_ip(self) -> str:
+        """
+        IP of the the SQL Server instance which publish.
+        """
         return pulumi.get(self, "publish_instance_ip")
 
     @property
     @pulumi.getter(name="publishInstanceName")
     def publish_instance_name(self) -> str:
+        """
+        Name of the SQL Server instance which publish.
+        """
         return pulumi.get(self, "publish_instance_name")
 
     @property
     @pulumi.getter(name="publishSubscribeId")
     def publish_subscribe_id(self) -> int:
+        """
+        The id of the Publish and Subscribe.
+        """
         return pulumi.get(self, "publish_subscribe_id")
 
     @property
     @pulumi.getter(name="publishSubscribeName")
     def publish_subscribe_name(self) -> str:
+        """
+        The name of the Publish and Subscribe.
+        """
         return pulumi.get(self, "publish_subscribe_name")
 
     @property
     @pulumi.getter(name="subscribeInstanceId")
     def subscribe_instance_id(self) -> str:
+        """
+        ID of the SQL Server instance which subscribe.
+        """
         return pulumi.get(self, "subscribe_instance_id")
 
     @property
     @pulumi.getter(name="subscribeInstanceIp")
     def subscribe_instance_ip(self) -> str:
+        """
+        IP of the SQL Server instance which subscribe.
+        """
         return pulumi.get(self, "subscribe_instance_ip")
 
     @property
     @pulumi.getter(name="subscribeInstanceName")
     def subscribe_instance_name(self) -> str:
+        """
+        Name of the SQL Server instance which subscribe.
+        """
         return pulumi.get(self, "subscribe_instance_name")
 
 
 @pulumi.output_type
-class PublishSubscribesPublishSubscribeListDatabaseTupleResult(dict):
+class GetPublishSubscribesPublishSubscribeListDatabaseTupleResult(dict):
     def __init__(__self__, *,
                  last_sync_time: str,
                  publish_database: str,
                  status: str,
                  subscribe_database: str):
+        """
+        :param str last_sync_time: Last sync time.
+        :param str publish_database: Name of publish database.
+        :param str status: Publish and subscribe status between databases, valid values are `running`, `success`, `fail`, `unknow`.
+        :param str subscribe_database: Name of subscribe database.
+        """
         pulumi.set(__self__, "last_sync_time", last_sync_time)
         pulumi.set(__self__, "publish_database", publish_database)
         pulumi.set(__self__, "status", status)
@@ -607,26 +921,38 @@ class PublishSubscribesPublishSubscribeListDatabaseTupleResult(dict):
     @property
     @pulumi.getter(name="lastSyncTime")
     def last_sync_time(self) -> str:
+        """
+        Last sync time.
+        """
         return pulumi.get(self, "last_sync_time")
 
     @property
     @pulumi.getter(name="publishDatabase")
     def publish_database(self) -> str:
+        """
+        Name of publish database.
+        """
         return pulumi.get(self, "publish_database")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Publish and subscribe status between databases, valid values are `running`, `success`, `fail`, `unknow`.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="subscribeDatabase")
     def subscribe_database(self) -> str:
+        """
+        Name of subscribe database.
+        """
         return pulumi.get(self, "subscribe_database")
 
 
 @pulumi.output_type
-class ReadonlyGroupsListResult(dict):
+class GetReadonlyGroupsListResult(dict):
     def __init__(__self__, *,
                  id: str,
                  is_offline_delay: int,
@@ -638,6 +964,18 @@ class ReadonlyGroupsListResult(dict):
                  status: int,
                  vip: str,
                  vport: int):
+        """
+        :param str id: ID of the readonly group.
+        :param int is_offline_delay: Indicate whether to offline delayed readonly instances.
+        :param str master_instance_id: Master SQL Server instance ID.
+        :param int max_delay_time: Maximum delay time of the readonly instances.
+        :param int min_instances: Minimum readonly instances that stays in the group.
+        :param str name: Name of the readonly group.
+        :param Sequence[str] readonly_instance_sets: Readonly instance ID set of the readonly group.
+        :param int status: Status of the readonly group. `1` for running, `5` for applying.
+        :param str vip: Virtual IP address of the readonly group.
+        :param int vport: Virtual port of the readonly group.
+        """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "is_offline_delay", is_offline_delay)
         pulumi.set(__self__, "master_instance_id", master_instance_id)
@@ -652,60 +990,95 @@ class ReadonlyGroupsListResult(dict):
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the readonly group.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="isOfflineDelay")
     def is_offline_delay(self) -> int:
+        """
+        Indicate whether to offline delayed readonly instances.
+        """
         return pulumi.get(self, "is_offline_delay")
 
     @property
     @pulumi.getter(name="masterInstanceId")
     def master_instance_id(self) -> str:
+        """
+        Master SQL Server instance ID.
+        """
         return pulumi.get(self, "master_instance_id")
 
     @property
     @pulumi.getter(name="maxDelayTime")
     def max_delay_time(self) -> int:
+        """
+        Maximum delay time of the readonly instances.
+        """
         return pulumi.get(self, "max_delay_time")
 
     @property
     @pulumi.getter(name="minInstances")
     def min_instances(self) -> int:
+        """
+        Minimum readonly instances that stays in the group.
+        """
         return pulumi.get(self, "min_instances")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the readonly group.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="readonlyInstanceSets")
     def readonly_instance_sets(self) -> Sequence[str]:
+        """
+        Readonly instance ID set of the readonly group.
+        """
         return pulumi.get(self, "readonly_instance_sets")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Status of the readonly group. `1` for running, `5` for applying.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter
     def vip(self) -> str:
+        """
+        Virtual IP address of the readonly group.
+        """
         return pulumi.get(self, "vip")
 
     @property
     @pulumi.getter
     def vport(self) -> int:
+        """
+        Virtual port of the readonly group.
+        """
         return pulumi.get(self, "vport")
 
 
 @pulumi.output_type
-class ZoneConfigZoneListResult(dict):
+class GetZoneConfigZoneListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
-                 specinfo_lists: Sequence['outputs.ZoneConfigZoneListSpecinfoListResult'],
+                 specinfo_lists: Sequence['outputs.GetZoneConfigZoneListSpecinfoListResult'],
                  zone_id: int):
+        """
+        :param str availability_zone: Alphabet ID of availability zone.
+        :param Sequence['GetZoneConfigZoneListSpecinfoListArgs'] specinfo_lists: A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:
+        :param int zone_id: Number ID of availability zone.
+        """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "specinfo_lists", specinfo_lists)
         pulumi.set(__self__, "zone_id", zone_id)
@@ -713,21 +1086,30 @@ class ZoneConfigZoneListResult(dict):
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        Alphabet ID of availability zone.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="specinfoLists")
-    def specinfo_lists(self) -> Sequence['outputs.ZoneConfigZoneListSpecinfoListResult']:
+    def specinfo_lists(self) -> Sequence['outputs.GetZoneConfigZoneListSpecinfoListResult']:
+        """
+        A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:
+        """
         return pulumi.get(self, "specinfo_lists")
 
     @property
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> int:
+        """
+        Number ID of availability zone.
+        """
         return pulumi.get(self, "zone_id")
 
 
 @pulumi.output_type
-class ZoneConfigZoneListSpecinfoListResult(dict):
+class GetZoneConfigZoneListSpecinfoListResult(dict):
     def __init__(__self__, *,
                  charge_type: str,
                  cpu: int,
@@ -739,6 +1121,18 @@ class ZoneConfigZoneListSpecinfoListResult(dict):
                  min_storage_size: int,
                  qps: int,
                  spec_id: int):
+        """
+        :param str charge_type: Billing mode under this specification. Valid values are `POSTPAID_BY_HOUR`, `PREPAID` and `ALL`. `ALL` means both POSTPAID_BY_HOUR and PREPAID.
+        :param int cpu: Number of CPU cores.
+        :param str db_version: Database version information. Valid values: `2008R2 (SQL Server 2008 Enterprise)`, `2012SP3 (SQL Server 2012 Enterprise)`, `2016SP1 (SQL Server 2016 Enterprise)`, `201602 (SQL Server 2016 Standard)`, `2017 (SQL Server 2017 Enterprise)`.
+        :param str db_version_name: Version name corresponding to the `db_version` field.
+        :param str machine_type: Model ID.
+        :param int max_storage_size: Maximum disk size under this specification in GB.
+        :param int memory: Memory size in GB.
+        :param int min_storage_size: Minimum disk size under this specification in GB.
+        :param int qps: QPS of this specification.
+        :param int spec_id: Instance specification ID.
+        """
         pulumi.set(__self__, "charge_type", charge_type)
         pulumi.set(__self__, "cpu", cpu)
         pulumi.set(__self__, "db_version", db_version)
@@ -753,51 +1147,81 @@ class ZoneConfigZoneListSpecinfoListResult(dict):
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        Billing mode under this specification. Valid values are `POSTPAID_BY_HOUR`, `PREPAID` and `ALL`. `ALL` means both POSTPAID_BY_HOUR and PREPAID.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter
     def cpu(self) -> int:
+        """
+        Number of CPU cores.
+        """
         return pulumi.get(self, "cpu")
 
     @property
     @pulumi.getter(name="dbVersion")
     def db_version(self) -> str:
+        """
+        Database version information. Valid values: `2008R2 (SQL Server 2008 Enterprise)`, `2012SP3 (SQL Server 2012 Enterprise)`, `2016SP1 (SQL Server 2016 Enterprise)`, `201602 (SQL Server 2016 Standard)`, `2017 (SQL Server 2017 Enterprise)`.
+        """
         return pulumi.get(self, "db_version")
 
     @property
     @pulumi.getter(name="dbVersionName")
     def db_version_name(self) -> str:
+        """
+        Version name corresponding to the `db_version` field.
+        """
         return pulumi.get(self, "db_version_name")
 
     @property
     @pulumi.getter(name="machineType")
     def machine_type(self) -> str:
+        """
+        Model ID.
+        """
         return pulumi.get(self, "machine_type")
 
     @property
     @pulumi.getter(name="maxStorageSize")
     def max_storage_size(self) -> int:
+        """
+        Maximum disk size under this specification in GB.
+        """
         return pulumi.get(self, "max_storage_size")
 
     @property
     @pulumi.getter
     def memory(self) -> int:
+        """
+        Memory size in GB.
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter(name="minStorageSize")
     def min_storage_size(self) -> int:
+        """
+        Minimum disk size under this specification in GB.
+        """
         return pulumi.get(self, "min_storage_size")
 
     @property
     @pulumi.getter
     def qps(self) -> int:
+        """
+        QPS of this specification.
+        """
         return pulumi.get(self, "qps")
 
     @property
     @pulumi.getter(name="specId")
     def spec_id(self) -> int:
+        """
+        Instance specification ID.
+        """
         return pulumi.get(self, "spec_id")
 
 

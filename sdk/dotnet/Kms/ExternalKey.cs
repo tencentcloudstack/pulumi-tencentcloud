@@ -9,12 +9,46 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Kms
 {
+    /// <summary>
+    /// Provide a resource to create a KMS external key.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Kms.ExternalKey("foo", new Tencentcloud.Kms.ExternalKeyArgs
+    ///         {
+    ///             Alias = "test",
+    ///             Description = "describe key test message.",
+    ///             IsEnabled = true,
+    ///             KeyMaterialBase64 = "MTIzMTIzMTIzMTIzMTIzQQ==",
+    ///             ValidTo = 2147443200,
+    ///             WrappingAlgorithm = "RSAES_PKCS1_V1_5",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// KMS external keys can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/externalKey:ExternalKey")]
     public partial class ExternalKey : Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-        /// a letter or number.
+        /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Output("alias")]
         public Output<string> Alias { get; private set; } = null!;
@@ -26,23 +60,19 @@ namespace Pulumi.Tencentcloud.Kms
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-        /// is `Enabled`, `Disabled`, `Archived`.
+        /// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         /// </summary>
         [Output("isArchived")]
         public Output<bool?> IsArchived { get; private set; } = null!;
 
         /// <summary>
-        /// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-        /// is `Enabled`, `Disabled`, `Archived`.
+        /// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         /// </summary>
         [Output("isEnabled")]
         public Output<bool?> IsEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-        /// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-        /// imported key material is required to be 256 bits.
+        /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         /// </summary>
         [Output("keyMaterialBase64")]
         public Output<string?> KeyMaterialBase64 { get; private set; } = null!;
@@ -54,8 +84,7 @@ namespace Pulumi.Tencentcloud.Kms
         public Output<string> KeyState { get; private set; } = null!;
 
         /// <summary>
-        /// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-        /// Defaults to 7 days.
+        /// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         /// </summary>
         [Output("pendingDeleteWindowInDays")]
         public Output<int?> PendingDeleteWindowInDays { get; private set; } = null!;
@@ -67,15 +96,13 @@ namespace Pulumi.Tencentcloud.Kms
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-        /// current timestamp, the maximum support is 2147443200.
+        /// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
         /// </summary>
         [Output("validTo")]
         public Output<int?> ValidTo { get; private set; } = null!;
 
         /// <summary>
-        /// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-        /// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        /// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         /// </summary>
         [Output("wrappingAlgorithm")]
         public Output<string?> WrappingAlgorithm { get; private set; } = null!;
@@ -127,8 +154,7 @@ namespace Pulumi.Tencentcloud.Kms
     public sealed class ExternalKeyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-        /// a letter or number.
+        /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("alias", required: true)]
         public Input<string> Alias { get; set; } = null!;
@@ -140,30 +166,25 @@ namespace Pulumi.Tencentcloud.Kms
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-        /// is `Enabled`, `Disabled`, `Archived`.
+        /// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         /// </summary>
         [Input("isArchived")]
         public Input<bool>? IsArchived { get; set; }
 
         /// <summary>
-        /// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-        /// is `Enabled`, `Disabled`, `Archived`.
+        /// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         /// </summary>
         [Input("isEnabled")]
         public Input<bool>? IsEnabled { get; set; }
 
         /// <summary>
-        /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-        /// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-        /// imported key material is required to be 256 bits.
+        /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         /// </summary>
         [Input("keyMaterialBase64")]
         public Input<string>? KeyMaterialBase64 { get; set; }
 
         /// <summary>
-        /// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-        /// Defaults to 7 days.
+        /// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         /// </summary>
         [Input("pendingDeleteWindowInDays")]
         public Input<int>? PendingDeleteWindowInDays { get; set; }
@@ -181,15 +202,13 @@ namespace Pulumi.Tencentcloud.Kms
         }
 
         /// <summary>
-        /// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-        /// current timestamp, the maximum support is 2147443200.
+        /// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
         /// </summary>
         [Input("validTo")]
         public Input<int>? ValidTo { get; set; }
 
         /// <summary>
-        /// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-        /// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        /// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         /// </summary>
         [Input("wrappingAlgorithm")]
         public Input<string>? WrappingAlgorithm { get; set; }
@@ -202,8 +221,7 @@ namespace Pulumi.Tencentcloud.Kms
     public sealed class ExternalKeyState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-        /// a letter or number.
+        /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("alias")]
         public Input<string>? Alias { get; set; }
@@ -215,23 +233,19 @@ namespace Pulumi.Tencentcloud.Kms
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-        /// is `Enabled`, `Disabled`, `Archived`.
+        /// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         /// </summary>
         [Input("isArchived")]
         public Input<bool>? IsArchived { get; set; }
 
         /// <summary>
-        /// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-        /// is `Enabled`, `Disabled`, `Archived`.
+        /// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         /// </summary>
         [Input("isEnabled")]
         public Input<bool>? IsEnabled { get; set; }
 
         /// <summary>
-        /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-        /// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-        /// imported key material is required to be 256 bits.
+        /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         /// </summary>
         [Input("keyMaterialBase64")]
         public Input<string>? KeyMaterialBase64 { get; set; }
@@ -243,8 +257,7 @@ namespace Pulumi.Tencentcloud.Kms
         public Input<string>? KeyState { get; set; }
 
         /// <summary>
-        /// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-        /// Defaults to 7 days.
+        /// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         /// </summary>
         [Input("pendingDeleteWindowInDays")]
         public Input<int>? PendingDeleteWindowInDays { get; set; }
@@ -262,15 +275,13 @@ namespace Pulumi.Tencentcloud.Kms
         }
 
         /// <summary>
-        /// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-        /// current timestamp, the maximum support is 2147443200.
+        /// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
         /// </summary>
         [Input("validTo")]
         public Input<int>? ValidTo { get; set; }
 
         /// <summary>
-        /// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-        /// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        /// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         /// </summary>
         [Input("wrappingAlgorithm")]
         public Input<string>? WrappingAlgorithm { get; set; }

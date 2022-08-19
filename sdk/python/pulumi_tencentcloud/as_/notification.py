@@ -18,9 +18,7 @@ class NotificationArgs:
                  scaling_group_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a Notification resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-               `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-               `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_user_group_ids: A group of user IDs to be notified.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         """
@@ -32,9 +30,7 @@ class NotificationArgs:
     @pulumi.getter(name="notificationTypes")
     def notification_types(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-        `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-        `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         """
         return pulumi.get(self, "notification_types")
 
@@ -75,9 +71,7 @@ class _NotificationState:
                  scaling_group_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Notification resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-               `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-               `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_user_group_ids: A group of user IDs to be notified.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         """
@@ -92,9 +86,7 @@ class _NotificationState:
     @pulumi.getter(name="notificationTypes")
     def notification_types(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-        `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-        `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         """
         return pulumi.get(self, "notification_types")
 
@@ -137,12 +129,28 @@ class Notification(pulumi.CustomResource):
                  scaling_group_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Notification resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) notification.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        as_notification = tencentcloud.as_.Notification("asNotification",
+            notification_types=[
+                "SCALE_OUT_FAILED",
+                "SCALE_IN_SUCCESSFUL",
+                "SCALE_IN_FAILED",
+                "REPLACE_UNHEALTHY_INSTANCE_FAILED",
+            ],
+            notification_user_group_ids=["76955"],
+            scaling_group_id="sg-12af45")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-               `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-               `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_user_group_ids: A group of user IDs to be notified.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         """
@@ -153,7 +161,25 @@ class Notification(pulumi.CustomResource):
                  args: NotificationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Notification resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) notification.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        as_notification = tencentcloud.as_.Notification("asNotification",
+            notification_types=[
+                "SCALE_OUT_FAILED",
+                "SCALE_IN_SUCCESSFUL",
+                "SCALE_IN_FAILED",
+                "REPLACE_UNHEALTHY_INSTANCE_FAILED",
+            ],
+            notification_user_group_ids=["76955"],
+            scaling_group_id="sg-12af45")
+        ```
+
         :param str resource_name: The name of the resource.
         :param NotificationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -213,9 +239,7 @@ class Notification(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-               `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-               `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_types: A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_user_group_ids: A group of user IDs to be notified.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         """
@@ -232,9 +256,7 @@ class Notification(pulumi.CustomResource):
     @pulumi.getter(name="notificationTypes")
     def notification_types(self) -> pulumi.Output[Sequence[str]]:
         """
-        A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-        `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-        `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         """
         return pulumi.get(self, "notification_types")
 

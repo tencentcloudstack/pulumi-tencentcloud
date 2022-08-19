@@ -5,6 +5,47 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a group of AS (Auto scaling) instances.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const scalingGroup = new tencentcloud.As.ScalingGroup("scaling_group", {
+ *     configurationId: "asc-oqio4yyj",
+ *     defaultCooldown: 400,
+ *     desiredCapacity: 1,
+ *     forwardBalancerIds: [{
+ *         listenerId: "lbl-81wr497k",
+ *         loadBalancerId: "lb-hk693b1l",
+ *         ruleId: "loc-kiodx943",
+ *         targetAttributes: [{
+ *             port: 80,
+ *             weight: 90,
+ *         }],
+ *     }],
+ *     maxSize: 1,
+ *     minSize: 0,
+ *     projectId: 0,
+ *     retryPolicy: "INCREMENTAL_INTERVALS",
+ *     scalingGroupName: "tf-as-scaling-group",
+ *     subnetIds: ["subnet-mc3egos"],
+ *     terminationPolicies: "NEWEST_INSTANCE",
+ *     vpcId: "vpc-3efmz0z",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * AutoScaling Groups can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+ * ```
+ */
 export class ScalingGroup extends pulumi.CustomResource {
     /**
      * Get an existing ScalingGroup resource's state with the given name, ID, and optional extra
@@ -46,11 +87,11 @@ export class ScalingGroup extends pulumi.CustomResource {
      */
     public readonly defaultCooldown!: pulumi.Output<number | undefined>;
     /**
-     * Desired volume of CVM instances, which is between `max_size` and `min_size`.
+     * Desired volume of CVM instances, which is between `maxSize` and `minSize`.
      */
     public readonly desiredCapacity!: pulumi.Output<number>;
     /**
-     * List of application load balancers, which can't be specified with `load_balancer_ids` together.
+     * List of application load balancers, which can't be specified with `loadBalancerIds` together.
      */
     public readonly forwardBalancerIds!: pulumi.Output<outputs.As.ScalingGroupForwardBalancerId[] | undefined>;
     /**
@@ -78,13 +119,11 @@ export class ScalingGroup extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
-     * Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-     * health check.
+     * Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
      */
     public readonly replaceLoadBalancerUnhealthy!: pulumi.Output<boolean | undefined>;
     /**
-     * Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-     * Cloud Monitor.
+     * Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
      */
     public readonly replaceMonitorUnhealthy!: pulumi.Output<boolean | undefined>;
     /**
@@ -96,9 +135,7 @@ export class ScalingGroup extends pulumi.CustomResource {
      */
     public readonly scalingGroupName!: pulumi.Output<string>;
     /**
-     * Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-     * instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-     * `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+     * Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
      */
     public readonly scalingMode!: pulumi.Output<string | undefined>;
     /**
@@ -223,11 +260,11 @@ export interface ScalingGroupState {
      */
     defaultCooldown?: pulumi.Input<number>;
     /**
-     * Desired volume of CVM instances, which is between `max_size` and `min_size`.
+     * Desired volume of CVM instances, which is between `maxSize` and `minSize`.
      */
     desiredCapacity?: pulumi.Input<number>;
     /**
-     * List of application load balancers, which can't be specified with `load_balancer_ids` together.
+     * List of application load balancers, which can't be specified with `loadBalancerIds` together.
      */
     forwardBalancerIds?: pulumi.Input<pulumi.Input<inputs.As.ScalingGroupForwardBalancerId>[]>;
     /**
@@ -255,13 +292,11 @@ export interface ScalingGroupState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-     * health check.
+     * Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
      */
     replaceLoadBalancerUnhealthy?: pulumi.Input<boolean>;
     /**
-     * Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-     * Cloud Monitor.
+     * Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
      */
     replaceMonitorUnhealthy?: pulumi.Input<boolean>;
     /**
@@ -273,9 +308,7 @@ export interface ScalingGroupState {
      */
     scalingGroupName?: pulumi.Input<string>;
     /**
-     * Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-     * instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-     * `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+     * Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
      */
     scalingMode?: pulumi.Input<string>;
     /**
@@ -317,11 +350,11 @@ export interface ScalingGroupArgs {
      */
     defaultCooldown?: pulumi.Input<number>;
     /**
-     * Desired volume of CVM instances, which is between `max_size` and `min_size`.
+     * Desired volume of CVM instances, which is between `maxSize` and `minSize`.
      */
     desiredCapacity?: pulumi.Input<number>;
     /**
-     * List of application load balancers, which can't be specified with `load_balancer_ids` together.
+     * List of application load balancers, which can't be specified with `loadBalancerIds` together.
      */
     forwardBalancerIds?: pulumi.Input<pulumi.Input<inputs.As.ScalingGroupForwardBalancerId>[]>;
     /**
@@ -345,13 +378,11 @@ export interface ScalingGroupArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-     * health check.
+     * Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
      */
     replaceLoadBalancerUnhealthy?: pulumi.Input<boolean>;
     /**
-     * Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-     * Cloud Monitor.
+     * Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
      */
     replaceMonitorUnhealthy?: pulumi.Input<boolean>;
     /**
@@ -363,9 +394,7 @@ export interface ScalingGroupArgs {
      */
     scalingGroupName: pulumi.Input<string>;
     /**
-     * Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-     * instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-     * `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+     * Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
      */
     scalingMode?: pulumi.Input<string>;
     /**

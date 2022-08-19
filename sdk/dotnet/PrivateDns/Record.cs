@@ -9,6 +9,42 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.PrivateDns
 {
+    /// <summary>
+    /// Provide a resource to create a Private Dns Record.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.PrivateDns.Record("foo", new Tencentcloud.PrivateDns.RecordArgs
+    ///         {
+    ///             Mx = 0,
+    ///             RecordType = "A",
+    ///             RecordValue = "192.168.1.2",
+    ///             SubDomain = "www",
+    ///             Ttl = 300,
+    ///             Weight = 1,
+    ///             ZoneId = "zone-rqndjnki",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Private Dns Record can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:PrivateDns/record:Record")]
     public partial class Record : Pulumi.CustomResource
     {

@@ -8,17 +8,17 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
-__all__ = ['IPStrategyArgs', 'IPStrategy']
+__all__ = ['IpStrategyArgs', 'IpStrategy']
 
 @pulumi.input_type
-class IPStrategyArgs:
+class IpStrategyArgs:
     def __init__(__self__, *,
                  service_id: pulumi.Input[str],
                  strategy_data: pulumi.Input[str],
                  strategy_name: pulumi.Input[str],
                  strategy_type: pulumi.Input[str]):
         """
-        The set of arguments for constructing a IPStrategy resource.
+        The set of arguments for constructing a IpStrategy resource.
         :param pulumi.Input[str] service_id: The ID of the API gateway service.
         :param pulumi.Input[str] strategy_data: IP address data.
         :param pulumi.Input[str] strategy_name: User defined strategy name.
@@ -79,7 +79,7 @@ class IPStrategyArgs:
 
 
 @pulumi.input_type
-class _IPStrategyState:
+class _IpStrategyState:
     def __init__(__self__, *,
                  create_time: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
@@ -88,7 +88,7 @@ class _IPStrategyState:
                  strategy_name: Optional[pulumi.Input[str]] = None,
                  strategy_type: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering IPStrategy resources.
+        Input properties used for looking up and filtering IpStrategy resources.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[str] service_id: The ID of the API gateway service.
         :param pulumi.Input[str] strategy_data: IP address data.
@@ -182,7 +182,7 @@ class _IPStrategyState:
         pulumi.set(self, "strategy_type", value)
 
 
-class IPStrategy(pulumi.CustomResource):
+class IpStrategy(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -193,7 +193,38 @@ class IPStrategy(pulumi.CustomResource):
                  strategy_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a IPStrategy resource with the given unique name, props, and options.
+        Use this resource to create IP strategy of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            service_name="niceservice",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        test = tencentcloud.api_gateway.IpStrategy("test",
+            service_id=service.id,
+            strategy_name="tf_test",
+            strategy_type="BLACK",
+            strategy_data="9.9.9.9")
+        ```
+
+        ## Import
+
+        IP strategy of API gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] service_id: The ID of the API gateway service.
@@ -205,17 +236,48 @@ class IPStrategy(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: IPStrategyArgs,
+                 args: IpStrategyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a IPStrategy resource with the given unique name, props, and options.
+        Use this resource to create IP strategy of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            service_name="niceservice",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        test = tencentcloud.api_gateway.IpStrategy("test",
+            service_id=service.id,
+            strategy_name="tf_test",
+            strategy_type="BLACK",
+            strategy_data="9.9.9.9")
+        ```
+
+        ## Import
+
+        IP strategy of API gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
+        ```
+
         :param str resource_name: The name of the resource.
-        :param IPStrategyArgs args: The arguments to use to populate this resource's properties.
+        :param IpStrategyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(IPStrategyArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(IpStrategyArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -238,7 +300,7 @@ class IPStrategy(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = IPStrategyArgs.__new__(IPStrategyArgs)
+            __props__ = IpStrategyArgs.__new__(IpStrategyArgs)
 
             if service_id is None and not opts.urn:
                 raise TypeError("Missing required property 'service_id'")
@@ -254,8 +316,8 @@ class IPStrategy(pulumi.CustomResource):
             __props__.__dict__["strategy_type"] = strategy_type
             __props__.__dict__["create_time"] = None
             __props__.__dict__["strategy_id"] = None
-        super(IPStrategy, __self__).__init__(
-            'tencentcloud:APIGateway/iPStrategy:IPStrategy',
+        super(IpStrategy, __self__).__init__(
+            'tencentcloud:ApiGateway/ipStrategy:IpStrategy',
             resource_name,
             __props__,
             opts)
@@ -269,9 +331,9 @@ class IPStrategy(pulumi.CustomResource):
             strategy_data: Optional[pulumi.Input[str]] = None,
             strategy_id: Optional[pulumi.Input[str]] = None,
             strategy_name: Optional[pulumi.Input[str]] = None,
-            strategy_type: Optional[pulumi.Input[str]] = None) -> 'IPStrategy':
+            strategy_type: Optional[pulumi.Input[str]] = None) -> 'IpStrategy':
         """
-        Get an existing IPStrategy resource's state with the given name, id, and optional extra
+        Get an existing IpStrategy resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -286,7 +348,7 @@ class IPStrategy(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _IPStrategyState.__new__(_IPStrategyState)
+        __props__ = _IpStrategyState.__new__(_IpStrategyState)
 
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["service_id"] = service_id
@@ -294,7 +356,7 @@ class IPStrategy(pulumi.CustomResource):
         __props__.__dict__["strategy_id"] = strategy_id
         __props__.__dict__["strategy_name"] = strategy_name
         __props__.__dict__["strategy_type"] = strategy_type
-        return IPStrategy(resource_name, opts=opts, __props__=__props__)
+        return IpStrategy(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="createTime")

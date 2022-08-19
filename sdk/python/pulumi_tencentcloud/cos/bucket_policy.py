@@ -18,8 +18,7 @@ class BucketPolicyArgs:
         """
         The set of arguments for constructing a BucketPolicy resource.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
-        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official
-               doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         """
         pulumi.set(__self__, "bucket", bucket)
         pulumi.set(__self__, "policy", policy)
@@ -40,8 +39,7 @@ class BucketPolicyArgs:
     @pulumi.getter
     def policy(self) -> pulumi.Input[str]:
         """
-        The text of the policy. For more info please refer to [Tencent official
-        doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         """
         return pulumi.get(self, "policy")
 
@@ -58,8 +56,7 @@ class _BucketPolicyState:
         """
         Input properties used for looking up and filtering BucketPolicy resources.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
-        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official
-               doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         """
         if bucket is not None:
             pulumi.set(__self__, "bucket", bucket)
@@ -82,8 +79,7 @@ class _BucketPolicyState:
     @pulumi.getter
     def policy(self) -> Optional[pulumi.Input[str]]:
         """
-        The text of the policy. For more info please refer to [Tencent official
-        doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         """
         return pulumi.get(self, "policy")
 
@@ -101,12 +97,52 @@ class BucketPolicy(pulumi.CustomResource):
                  policy: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a BucketPolicy resource with the given unique name, props, and options.
+        Provides a COS resource to create a COS bucket policy and set its attributes.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        cos_policy = tencentcloud.cos.BucketPolicy("cosPolicy",
+            bucket="mycos-1258798060",
+            policy=\"\"\"{
+          "version": "2.0",
+          "Statement": [
+            {
+              "Principal": {
+                "qcs": [
+                  "qcs::cam::uin/<your-account-id>:uin/<your-account-id>"
+                ]
+              },
+              "Action": [
+                "name/cos:DeleteBucket",
+                "name/cos:PutBucketACL"
+              ],
+              "Effect": "allow",
+              "Resource": [
+                "qcs::cos:<bucket region>:uid/<your-account-id>:<bucket name>/*"
+              ]
+            }
+          ]
+        }
+
+        \"\"\")
+        ```
+
+        ## Import
+
+        COS bucket policy can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
-        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official
-               doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         """
         ...
     @overload
@@ -115,7 +151,48 @@ class BucketPolicy(pulumi.CustomResource):
                  args: BucketPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a BucketPolicy resource with the given unique name, props, and options.
+        Provides a COS resource to create a COS bucket policy and set its attributes.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        cos_policy = tencentcloud.cos.BucketPolicy("cosPolicy",
+            bucket="mycos-1258798060",
+            policy=\"\"\"{
+          "version": "2.0",
+          "Statement": [
+            {
+              "Principal": {
+                "qcs": [
+                  "qcs::cam::uin/<your-account-id>:uin/<your-account-id>"
+                ]
+              },
+              "Action": [
+                "name/cos:DeleteBucket",
+                "name/cos:PutBucketACL"
+              ],
+              "Effect": "allow",
+              "Resource": [
+                "qcs::cos:<bucket region>:uid/<your-account-id>:<bucket name>/*"
+              ]
+            }
+          ]
+        }
+
+        \"\"\")
+        ```
+
+        ## Import
+
+        COS bucket policy can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+        ```
+
         :param str resource_name: The name of the resource.
         :param BucketPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -171,8 +248,7 @@ class BucketPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
-        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official
-               doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        :param pulumi.Input[str] policy: The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -194,8 +270,7 @@ class BucketPolicy(pulumi.CustomResource):
     @pulumi.getter
     def policy(self) -> pulumi.Output[str]:
         """
-        The text of the policy. For more info please refer to [Tencent official
-        doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         """
         return pulumi.get(self, "policy")
 

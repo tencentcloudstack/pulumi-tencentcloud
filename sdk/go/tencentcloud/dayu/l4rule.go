@@ -11,30 +11,75 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create dayu layer 4 rule
+//
+// > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip` and `net`
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewL4Rule(ctx, "testRule", &Dayu.L4RuleArgs{
+// 			DPort:                  pulumi.Int(60),
+// 			HealthCheckHealthNum:   pulumi.Int(5),
+// 			HealthCheckInterval:    pulumi.Int(35),
+// 			HealthCheckSwitch:      pulumi.Bool(true),
+// 			HealthCheckTimeout:     pulumi.Int(30),
+// 			HealthCheckUnhealthNum: pulumi.Int(10),
+// 			Protocol:               pulumi.String("TCP"),
+// 			ResourceId:             pulumi.String("bgpip-00000294"),
+// 			ResourceType:           pulumi.String("bgpip"),
+// 			SPort:                  pulumi.Int(80),
+// 			SessionSwitch:          pulumi.Bool(false),
+// 			SessionTime:            pulumi.Int(300),
+// 			SourceLists: dayu.L4RuleSourceListArray{
+// 				&dayu.L4RuleSourceListArgs{
+// 					Source: pulumi.String("1.1.1.1"),
+// 					Weight: pulumi.Int(100),
+// 				},
+// 				&dayu.L4RuleSourceListArgs{
+// 					Source: pulumi.String("2.2.2.2"),
+// 					Weight: pulumi.Int(50),
+// 				},
+// 			},
+// 			SourceType: pulumi.Int(2),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type L4Rule struct {
 	pulumi.CustomResourceState
 
 	// The destination port of the L4 rule.
 	DPort pulumi.IntOutput `pulumi:"dPort"`
-	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
 	HealthCheckHealthNum pulumi.IntOutput `pulumi:"healthCheckHealthNum"`
 	// Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
 	HealthCheckInterval pulumi.IntOutput `pulumi:"healthCheckInterval"`
-	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-	// item.
+	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
 	HealthCheckSwitch pulumi.BoolOutput `pulumi:"healthCheckSwitch"`
 	// HTTP Status Code. The default is 26 and value range is 2-60.
 	HealthCheckTimeout pulumi.IntOutput `pulumi:"healthCheckTimeout"`
-	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is 2-10.
+	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
 	HealthCheckUnhealthNum pulumi.IntOutput `pulumi:"healthCheckUnhealthNum"`
 	// LB type of the rule. Valid values: `1`, `2`. `1` for weight cycling and `2` for IP hash.
 	LbType pulumi.IntOutput `pulumi:"lbType"`
-	// Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+	// Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-	// only set with `tcp`.
+	// Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
 	Protocol pulumi.StringOutput `pulumi:"protocol"`
 	// ID of the resource that the layer 4 rule works for.
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
@@ -46,11 +91,9 @@ type L4Rule struct {
 	SPort pulumi.IntOutput `pulumi:"sPort"`
 	// Indicate that the session will keep or not, and default value is `false`.
 	SessionSwitch pulumi.BoolPtrOutput `pulumi:"sessionSwitch"`
-	// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-	// second.
+	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
 	SessionTime pulumi.IntOutput `pulumi:"sessionTime"`
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 20.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
 	SourceLists L4RuleSourceListArrayOutput `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType pulumi.IntOutput `pulumi:"sourceType"`
@@ -108,25 +151,21 @@ func GetL4Rule(ctx *pulumi.Context,
 type l4ruleState struct {
 	// The destination port of the L4 rule.
 	DPort *int `pulumi:"dPort"`
-	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
 	// Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
 	HealthCheckInterval *int `pulumi:"healthCheckInterval"`
-	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-	// item.
+	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
 	// HTTP Status Code. The default is 26 and value range is 2-60.
 	HealthCheckTimeout *int `pulumi:"healthCheckTimeout"`
-	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is 2-10.
+	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
 	// LB type of the rule. Valid values: `1`, `2`. `1` for weight cycling and `2` for IP hash.
 	LbType *int `pulumi:"lbType"`
-	// Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+	// Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
 	Name *string `pulumi:"name"`
-	// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-	// only set with `tcp`.
+	// Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
 	Protocol *string `pulumi:"protocol"`
 	// ID of the resource that the layer 4 rule works for.
 	ResourceId *string `pulumi:"resourceId"`
@@ -138,11 +177,9 @@ type l4ruleState struct {
 	SPort *int `pulumi:"sPort"`
 	// Indicate that the session will keep or not, and default value is `false`.
 	SessionSwitch *bool `pulumi:"sessionSwitch"`
-	// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-	// second.
+	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
 	SessionTime *int `pulumi:"sessionTime"`
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 20.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
 	SourceLists []L4RuleSourceList `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType *int `pulumi:"sourceType"`
@@ -151,25 +188,21 @@ type l4ruleState struct {
 type L4RuleState struct {
 	// The destination port of the L4 rule.
 	DPort pulumi.IntPtrInput
-	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
 	HealthCheckHealthNum pulumi.IntPtrInput
 	// Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
 	HealthCheckInterval pulumi.IntPtrInput
-	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-	// item.
+	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
 	HealthCheckSwitch pulumi.BoolPtrInput
 	// HTTP Status Code. The default is 26 and value range is 2-60.
 	HealthCheckTimeout pulumi.IntPtrInput
-	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is 2-10.
+	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
 	// LB type of the rule. Valid values: `1`, `2`. `1` for weight cycling and `2` for IP hash.
 	LbType pulumi.IntPtrInput
-	// Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+	// Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
 	Name pulumi.StringPtrInput
-	// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-	// only set with `tcp`.
+	// Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
 	Protocol pulumi.StringPtrInput
 	// ID of the resource that the layer 4 rule works for.
 	ResourceId pulumi.StringPtrInput
@@ -181,11 +214,9 @@ type L4RuleState struct {
 	SPort pulumi.IntPtrInput
 	// Indicate that the session will keep or not, and default value is `false`.
 	SessionSwitch pulumi.BoolPtrInput
-	// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-	// second.
+	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
 	SessionTime pulumi.IntPtrInput
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 20.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
 	SourceLists L4RuleSourceListArrayInput
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType pulumi.IntPtrInput
@@ -198,23 +229,19 @@ func (L4RuleState) ElementType() reflect.Type {
 type l4ruleArgs struct {
 	// The destination port of the L4 rule.
 	DPort int `pulumi:"dPort"`
-	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
 	// Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
 	HealthCheckInterval *int `pulumi:"healthCheckInterval"`
-	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-	// item.
+	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
 	// HTTP Status Code. The default is 26 and value range is 2-60.
 	HealthCheckTimeout *int `pulumi:"healthCheckTimeout"`
-	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is 2-10.
+	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
-	// Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+	// Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
 	Name *string `pulumi:"name"`
-	// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-	// only set with `tcp`.
+	// Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
 	Protocol string `pulumi:"protocol"`
 	// ID of the resource that the layer 4 rule works for.
 	ResourceId string `pulumi:"resourceId"`
@@ -224,11 +251,9 @@ type l4ruleArgs struct {
 	SPort int `pulumi:"sPort"`
 	// Indicate that the session will keep or not, and default value is `false`.
 	SessionSwitch *bool `pulumi:"sessionSwitch"`
-	// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-	// second.
+	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
 	SessionTime *int `pulumi:"sessionTime"`
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 20.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
 	SourceLists []L4RuleSourceList `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType int `pulumi:"sourceType"`
@@ -238,23 +263,19 @@ type l4ruleArgs struct {
 type L4RuleArgs struct {
 	// The destination port of the L4 rule.
 	DPort pulumi.IntInput
-	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+	// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
 	HealthCheckHealthNum pulumi.IntPtrInput
 	// Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
 	HealthCheckInterval pulumi.IntPtrInput
-	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-	// item.
+	// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
 	HealthCheckSwitch pulumi.BoolPtrInput
 	// HTTP Status Code. The default is 26 and value range is 2-60.
 	HealthCheckTimeout pulumi.IntPtrInput
-	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is 2-10.
+	// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
-	// Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+	// Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
 	Name pulumi.StringPtrInput
-	// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-	// only set with `tcp`.
+	// Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
 	Protocol pulumi.StringInput
 	// ID of the resource that the layer 4 rule works for.
 	ResourceId pulumi.StringInput
@@ -264,11 +285,9 @@ type L4RuleArgs struct {
 	SPort pulumi.IntInput
 	// Indicate that the session will keep or not, and default value is `false`.
 	SessionSwitch pulumi.BoolPtrInput
-	// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-	// second.
+	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
 	SessionTime pulumi.IntPtrInput
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 20.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
 	SourceLists L4RuleSourceListArrayInput
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType pulumi.IntInput
@@ -366,8 +385,7 @@ func (o L4RuleOutput) DPort() pulumi.IntOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.IntOutput { return v.DPort }).(pulumi.IntOutput)
 }
 
-// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
 func (o L4RuleOutput) HealthCheckHealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.IntOutput { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
 }
@@ -377,8 +395,7 @@ func (o L4RuleOutput) HealthCheckInterval() pulumi.IntOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.IntOutput { return v.HealthCheckInterval }).(pulumi.IntOutput)
 }
 
-// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-// item.
+// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
 func (o L4RuleOutput) HealthCheckSwitch() pulumi.BoolOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.BoolOutput { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
 }
@@ -388,8 +405,7 @@ func (o L4RuleOutput) HealthCheckTimeout() pulumi.IntOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.IntOutput { return v.HealthCheckTimeout }).(pulumi.IntOutput)
 }
 
-// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-// indicates that the forwarding is abnormal. The value range is 2-10.
+// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
 func (o L4RuleOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.IntOutput { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
 }
@@ -399,13 +415,12 @@ func (o L4RuleOutput) LbType() pulumi.IntOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.IntOutput { return v.LbType }).(pulumi.IntOutput)
 }
 
-// Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+// Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
 func (o L4RuleOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-// only set with `tcp`.
+// Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
 func (o L4RuleOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.StringOutput { return v.Protocol }).(pulumi.StringOutput)
 }
@@ -435,14 +450,12 @@ func (o L4RuleOutput) SessionSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.BoolPtrOutput { return v.SessionSwitch }).(pulumi.BoolPtrOutput)
 }
 
-// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-// second.
+// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
 func (o L4RuleOutput) SessionTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *L4Rule) pulumi.IntOutput { return v.SessionTime }).(pulumi.IntOutput)
 }
 
-// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-// 20.
+// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
 func (o L4RuleOutput) SourceLists() L4RuleSourceListArrayOutput {
 	return o.ApplyT(func(v *L4Rule) L4RuleSourceListArrayOutput { return v.SourceLists }).(L4RuleSourceListArrayOutput)
 }

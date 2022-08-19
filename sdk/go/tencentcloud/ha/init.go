@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -21,8 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "tencentcloud:Ha/haVip:HaVip":
-		r = &HaVip{}
+	case "tencentcloud:Ha/vip:Vip":
+		r = &Vip{}
 	case "tencentcloud:Ha/vipEipAttachment:VipEipAttachment":
 		r = &VipEipAttachment{}
 	default:
@@ -40,7 +40,7 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Ha/haVip",
+		"Ha/vip",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

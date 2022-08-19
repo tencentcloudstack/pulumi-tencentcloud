@@ -9,6 +9,133 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vod
 {
+    /// <summary>
+    /// Provide a resource to create a VOD procedure template.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplateArgs
+    ///         {
+    ///             Format = "HLS",
+    ///             DrmType = "SimpleAES",
+    ///             DisableHigherVideoBitrate = false,
+    ///             DisableHigherVideoResolution = false,
+    ///             Comment = "test",
+    ///             StreamInfos = 
+    ///             {
+    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 {
+    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
+    ///                     {
+    ///                         Codec = "libx265",
+    ///                         Fps = 4,
+    ///                         Bitrate = 129,
+    ///                         ResolutionAdaptive = false,
+    ///                         Width = 128,
+    ///                         Height = 128,
+    ///                         FillType = "stretch",
+    ///                     },
+    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
+    ///                     {
+    ///                         Codec = "libmp3lame",
+    ///                         Bitrate = 129,
+    ///                         SampleRate = 44100,
+    ///                         AudioChannel = "dual",
+    ///                     },
+    ///                     RemoveAudio = false,
+    ///                 },
+    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 {
+    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
+    ///                     {
+    ///                         Codec = "libx264",
+    ///                         Fps = 4,
+    ///                         Bitrate = 256,
+    ///                     },
+    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
+    ///                     {
+    ///                         Codec = "libfdk_aac",
+    ///                         Bitrate = 256,
+    ///                         SampleRate = 44100,
+    ///                     },
+    ///                     RemoveAudio = true,
+    ///                 },
+    ///             },
+    ///         });
+    ///         var fooSnapshotByTimeOffsetTemplate = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", new Tencentcloud.Vod.SnapshotByTimeOffsetTemplateArgs
+    ///         {
+    ///             Width = 130,
+    ///             Height = 128,
+    ///             ResolutionAdaptive = false,
+    ///             Format = "png",
+    ///             Comment = "test",
+    ///             FillType = "white",
+    ///         });
+    ///         var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new Tencentcloud.Vod.ImageSpriteTemplateArgs
+    ///         {
+    ///             SampleType = "Percent",
+    ///             SampleInterval = 10,
+    ///             RowCount = 3,
+    ///             ColumnCount = 3,
+    ///             Comment = "test",
+    ///             FillType = "stretch",
+    ///             Width = 128,
+    ///             Height = 128,
+    ///             ResolutionAdaptive = false,
+    ///         });
+    ///         var fooProcedureTemplate = new Tencentcloud.Vod.ProcedureTemplate("fooProcedureTemplate", new Tencentcloud.Vod.ProcedureTemplateArgs
+    ///         {
+    ///             Comment = "test",
+    ///             MediaProcessTask = new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskArgs
+    ///             {
+    ///                 AdaptiveDynamicStreamingTaskLists = 
+    ///                 {
+    ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs
+    ///                     {
+    ///                         Definition = fooAdaptiveDynamicStreamingTemplate.Id,
+    ///                     },
+    ///                 },
+    ///                 SnapshotByTimeOffsetTaskLists = 
+    ///                 {
+    ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs
+    ///                     {
+    ///                         Definition = fooSnapshotByTimeOffsetTemplate.Id,
+    ///                         ExtTimeOffsetLists = 
+    ///                         {
+    ///                             "3.5s",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///                 ImageSpriteTaskLists = 
+    ///                 {
+    ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs
+    ///                     {
+    ///                         Definition = fooImageSpriteTemplate.Id,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VOD procedure template can be imported using the name, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/procedureTemplate:ProcedureTemplate")]
     public partial class ProcedureTemplate : Pulumi.CustomResource
     {
@@ -37,8 +164,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Output("subAppId")]
         public Output<int?> SubAppId { get; private set; } = null!;
@@ -114,8 +240,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -152,8 +277,7 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }

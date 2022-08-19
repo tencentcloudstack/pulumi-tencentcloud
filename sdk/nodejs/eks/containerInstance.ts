@@ -5,6 +5,84 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides an elastic kubernetes service container instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const group = tencentcloud.Security.getGroups({});
+ * const zone = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cvm",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/24"});
+ * const sub = new tencentcloud.subnet.Instance("sub", {
+ *     availabilityZone: zone.then(zone => zone.zones?[0]?.name),
+ *     cidrBlock: "10.0.0.0/24",
+ *     vpcId: vpc.id,
+ * });
+ * const cbs = new tencentcloud.cbs.Storage("cbs", {
+ *     availabilityZone: zone.then(zone => zone.zones?[0]?.name),
+ *     storageName: "cbs1",
+ *     storageSize: 10,
+ *     storageType: "CLOUD_PREMIUM",
+ * });
+ * const eci1 = new tencentcloud.eks.ContainerInstance("eci1", {
+ *     vpcId: vpc.id,
+ *     subnetId: sub.id,
+ *     cpu: 2,
+ *     cpuType: "intel",
+ *     restartPolicy: "Always",
+ *     memory: 4,
+ *     securityGroups: [group.then(group => group.securityGroups?[0]?.securityGroupId)],
+ *     cbsVolumes: [{
+ *         name: "vol1",
+ *         diskId: cbs.id,
+ *     }],
+ *     containers: [
+ *         {
+ *             name: "redis1",
+ *             image: "redis",
+ *             livenessProbe: {
+ *                 initDelaySeconds: 1,
+ *                 timeoutSeconds: 3,
+ *                 periodSeconds: 11,
+ *                 successThreshold: 1,
+ *                 failureThreshold: 3,
+ *                 httpGetPath: "/",
+ *                 httpGetPort: 443,
+ *                 httpGetScheme: "HTTPS",
+ *             },
+ *             readinessProbe: {
+ *                 initDelaySeconds: 1,
+ *                 timeoutSeconds: 3,
+ *                 periodSeconds: 10,
+ *                 successThreshold: 1,
+ *                 failureThreshold: 3,
+ *                 tcpSocketPort: 81,
+ *             },
+ *         },
+ *         {
+ *             name: "nginx",
+ *             image: "nginx",
+ *         },
+ *     ],
+ *     initContainers: [{
+ *         name: "alpine",
+ *         image: "alpine:latest",
+ *     }],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Eks/containerInstance:ContainerInstance foo container-instance-id
+ * ```
+ */
 export class ContainerInstance extends pulumi.CustomResource {
     /**
      * Get an existing ContainerInstance resource's state with the given name, ID, and optional extra
@@ -34,7 +112,7 @@ export class ContainerInstance extends pulumi.CustomResource {
     }
 
     /**
-     * Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+     * Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
      */
     public readonly autoCreateEip!: pulumi.Output<boolean | undefined>;
     /**
@@ -58,8 +136,7 @@ export class ContainerInstance extends pulumi.CustomResource {
      */
     public readonly cpu!: pulumi.Output<number>;
     /**
-     * Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-     * `intel` when `amd` sold out.
+     * Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
      */
     public readonly cpuType!: pulumi.Output<string | undefined>;
     /**
@@ -83,21 +160,19 @@ export class ContainerInstance extends pulumi.CustomResource {
      */
     public /*out*/ readonly eipAddress!: pulumi.Output<string>;
     /**
-     * Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+     * Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
      */
     public readonly eipDeletePolicy!: pulumi.Output<boolean | undefined>;
     /**
-     * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-     * `existed_eip_ids`.
+     * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
      */
     public readonly eipMaxBandwidthOut!: pulumi.Output<number | undefined>;
     /**
-     * EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-     * `existed_eip_ids`.
+     * EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
      */
     public readonly eipServiceProvider!: pulumi.Output<string | undefined>;
     /**
-     * Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+     * Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
      */
     public readonly existedEipIds!: pulumi.Output<string[] | undefined>;
     /**
@@ -255,7 +330,7 @@ export class ContainerInstance extends pulumi.CustomResource {
  */
 export interface ContainerInstanceState {
     /**
-     * Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+     * Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
      */
     autoCreateEip?: pulumi.Input<boolean>;
     /**
@@ -279,8 +354,7 @@ export interface ContainerInstanceState {
      */
     cpu?: pulumi.Input<number>;
     /**
-     * Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-     * `intel` when `amd` sold out.
+     * Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
      */
     cpuType?: pulumi.Input<string>;
     /**
@@ -304,21 +378,19 @@ export interface ContainerInstanceState {
      */
     eipAddress?: pulumi.Input<string>;
     /**
-     * Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+     * Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
      */
     eipDeletePolicy?: pulumi.Input<boolean>;
     /**
-     * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-     * `existed_eip_ids`.
+     * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
      */
     eipMaxBandwidthOut?: pulumi.Input<number>;
     /**
-     * EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-     * `existed_eip_ids`.
+     * EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
      */
     eipServiceProvider?: pulumi.Input<string>;
     /**
-     * Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+     * Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
      */
     existedEipIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -380,7 +452,7 @@ export interface ContainerInstanceState {
  */
 export interface ContainerInstanceArgs {
     /**
-     * Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
+     * Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existedEipIds`.
      */
     autoCreateEip?: pulumi.Input<boolean>;
     /**
@@ -400,8 +472,7 @@ export interface ContainerInstanceArgs {
      */
     cpu: pulumi.Input<number>;
     /**
-     * Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-     * `intel` when `amd` sold out.
+     * Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
      */
     cpuType?: pulumi.Input<string>;
     /**
@@ -417,21 +488,19 @@ export interface ContainerInstanceArgs {
      */
     dnsSearches?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
+     * Indicates weather the EIP release or not after instance deleted. Conflict with `existedEipIds`.
      */
     eipDeletePolicy?: pulumi.Input<boolean>;
     /**
-     * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-     * `existed_eip_ids`.
+     * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existedEipIds`.
      */
     eipMaxBandwidthOut?: pulumi.Input<number>;
     /**
-     * EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-     * `existed_eip_ids`.
+     * EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existedEipIds`.
      */
     eipServiceProvider?: pulumi.Input<string>;
     /**
-     * Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
+     * Existed EIP ID List which used to bind container instance. Conflict with `autoCreateEip` and auto create EIP options.
      */
     existedEipIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**

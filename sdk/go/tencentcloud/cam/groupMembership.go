@@ -11,12 +11,48 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM group membership.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewGroupMembership(ctx, "foo", &Cam.GroupMembershipArgs{
+// 			GroupId: pulumi.Any(tencentcloud_cam_group.Foo.Id),
+// 			UserNames: pulumi.StringArray{
+// 				pulumi.Any(tencentcloud_cam_user.Foo.Name),
+// 				pulumi.Any(tencentcloud_cam_user.Bar.Name),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM group membership can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+// ```
 type GroupMembership struct {
 	pulumi.CustomResourceState
 
 	// ID of CAM group.
 	GroupId pulumi.StringOutput `pulumi:"groupId"`
-	// ID set of the CAM group members.
+	// It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
 	UserIds pulumi.StringArrayOutput `pulumi:"userIds"`
@@ -58,7 +94,7 @@ func GetGroupMembership(ctx *pulumi.Context,
 type groupMembershipState struct {
 	// ID of CAM group.
 	GroupId *string `pulumi:"groupId"`
-	// ID set of the CAM group members.
+	// It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
 	UserIds []string `pulumi:"userIds"`
@@ -69,7 +105,7 @@ type groupMembershipState struct {
 type GroupMembershipState struct {
 	// ID of CAM group.
 	GroupId pulumi.StringPtrInput
-	// ID set of the CAM group members.
+	// It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
 	UserIds pulumi.StringArrayInput
@@ -84,7 +120,7 @@ func (GroupMembershipState) ElementType() reflect.Type {
 type groupMembershipArgs struct {
 	// ID of CAM group.
 	GroupId string `pulumi:"groupId"`
-	// ID set of the CAM group members.
+	// It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
 	UserIds []string `pulumi:"userIds"`
@@ -96,7 +132,7 @@ type groupMembershipArgs struct {
 type GroupMembershipArgs struct {
 	// ID of CAM group.
 	GroupId pulumi.StringInput
-	// ID set of the CAM group members.
+	// It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
 	UserIds pulumi.StringArrayInput
@@ -196,7 +232,7 @@ func (o GroupMembershipOutput) GroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupMembership) pulumi.StringOutput { return v.GroupId }).(pulumi.StringOutput)
 }
 
-// ID set of the CAM group members.
+// It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 //
 // Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
 func (o GroupMembershipOutput) UserIds() pulumi.StringArrayOutput {

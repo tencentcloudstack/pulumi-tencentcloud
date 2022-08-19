@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CAM user policy attachment.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.cam.UserPolicyAttachment("foo", {
+ *     userId: tencentcloud_cam_user.foo.id,
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM user policy attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+ * ```
+ */
 export class UserPolicyAttachment extends pulumi.CustomResource {
     /**
      * Get an existing UserPolicyAttachment resource's state with the given name, ID, and optional extra
@@ -33,8 +56,7 @@ export class UserPolicyAttachment extends pulumi.CustomResource {
     }
 
     /**
-     * Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-     * the others indicate syntax strategy ways.
+     * Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
      */
     public /*out*/ readonly createMode!: pulumi.Output<number>;
     /**
@@ -54,7 +76,7 @@ export class UserPolicyAttachment extends pulumi.CustomResource {
      */
     public /*out*/ readonly policyType!: pulumi.Output<string>;
     /**
-     * ID of the attached CAM user.
+     * It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `user_name` instead.
      */
@@ -107,8 +129,7 @@ export class UserPolicyAttachment extends pulumi.CustomResource {
  */
 export interface UserPolicyAttachmentState {
     /**
-     * Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-     * the others indicate syntax strategy ways.
+     * Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
      */
     createMode?: pulumi.Input<number>;
     /**
@@ -128,7 +149,7 @@ export interface UserPolicyAttachmentState {
      */
     policyType?: pulumi.Input<string>;
     /**
-     * ID of the attached CAM user.
+     * It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `user_name` instead.
      */
@@ -148,7 +169,7 @@ export interface UserPolicyAttachmentArgs {
      */
     policyId: pulumi.Input<string>;
     /**
-     * ID of the attached CAM user.
+     * It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `user_name` instead.
      */

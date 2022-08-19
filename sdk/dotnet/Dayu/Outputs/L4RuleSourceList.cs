@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class L4RuleSourceList
     {
+        /// <summary>
+        /// Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
+        /// </summary>
         public readonly string Source;
+        /// <summary>
+        /// Weight of the source, the valid value ranges from 0 to 100.
+        /// </summary>
         public readonly int Weight;
 
         [OutputConstructor]

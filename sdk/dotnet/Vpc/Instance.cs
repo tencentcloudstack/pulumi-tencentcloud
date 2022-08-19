@@ -9,6 +9,17 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpc
 {
+    /// <summary>
+    /// Provide a resource to create a VPC.
+    /// 
+    /// ## Import
+    /// 
+    /// Vpc instance can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -19,8 +30,7 @@ namespace Pulumi.Tencentcloud.Vpc
         public Output<ImmutableArray<string>> AssistantCidrs { get; private set; } = null!;
 
         /// <summary>
-        /// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-        /// 192.168.0.0/16).
+        /// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         /// </summary>
         [Output("cidrBlock")]
         public Output<string> CidrBlock { get; private set; } = null!;
@@ -126,8 +136,7 @@ namespace Pulumi.Tencentcloud.Vpc
         }
 
         /// <summary>
-        /// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-        /// 192.168.0.0/16).
+        /// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         /// </summary>
         [Input("cidrBlock", required: true)]
         public Input<string> CidrBlock { get; set; } = null!;
@@ -188,8 +197,7 @@ namespace Pulumi.Tencentcloud.Vpc
         }
 
         /// <summary>
-        /// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-        /// 192.168.0.0/16).
+        /// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         /// </summary>
         [Input("cidrBlock")]
         public Input<string>? CidrBlock { get; set; }

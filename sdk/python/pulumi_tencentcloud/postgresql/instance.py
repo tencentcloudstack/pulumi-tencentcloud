@@ -43,28 +43,21 @@ class InstanceArgs:
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
-        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input['InstanceBackupPlanArgs'] backup_plan: Specify DB backup plan.
         :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
-        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
-        :param pulumi.Input[str] db_major_vesion: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]] db_node_sets: Specify instance node info for disaster migration.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
-        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-               milliseconds if not specified.
-        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-               not specified.
+        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
+        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
@@ -141,8 +134,7 @@ class InstanceArgs:
     @pulumi.getter
     def memory(self) -> pulumi.Input[int]:
         """
-        Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        provides.
+        Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -154,8 +146,7 @@ class InstanceArgs:
     @pulumi.getter(name="rootPassword")
     def root_password(self) -> pulumi.Input[str]:
         """
-        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        when you purchase read-only instances or disaster recovery instances.
+        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         """
         return pulumi.get(self, "root_password")
 
@@ -167,8 +158,7 @@ class InstanceArgs:
     @pulumi.getter
     def storage(self) -> pulumi.Input[int]:
         """
-        Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 
@@ -228,8 +218,7 @@ class InstanceArgs:
     @pulumi.getter(name="dbMajorVersion")
     def db_major_version(self) -> Optional[pulumi.Input[str]]:
         """
-        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        of PostgreSQL DBMajorVersion will be created.
+        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         """
         return pulumi.get(self, "db_major_version")
 
@@ -241,8 +230,7 @@ class InstanceArgs:
     @pulumi.getter(name="dbMajorVesion")
     def db_major_vesion(self) -> Optional[pulumi.Input[str]]:
         """
-        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        of PostgreSQL DBMajorVersion will be created.
+        `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         """
         return pulumi.get(self, "db_major_vesion")
 
@@ -302,8 +290,7 @@ class InstanceArgs:
     @pulumi.getter(name="maxStandbyArchiveDelay")
     def max_standby_archive_delay(self) -> Optional[pulumi.Input[int]]:
         """
-        max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-        milliseconds if not specified.
+        max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
         """
         return pulumi.get(self, "max_standby_archive_delay")
 
@@ -315,8 +302,7 @@ class InstanceArgs:
     @pulumi.getter(name="maxStandbyStreamingDelay")
     def max_standby_streaming_delay(self) -> Optional[pulumi.Input[int]]:
         """
-        max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-        not specified.
+        max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         """
         return pulumi.get(self, "max_standby_streaming_delay")
 
@@ -475,20 +461,15 @@ class _InstanceState:
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
-        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
-        :param pulumi.Input[str] db_major_vesion: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]] db_node_sets: Specify instance node info for disaster migration.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
-        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-               milliseconds if not specified.
-        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-               not specified.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
+        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
+        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
         :param pulumi.Input[str] private_access_ip: IP for private access.
@@ -497,12 +478,10 @@ class _InstanceState:
         :param pulumi.Input[str] public_access_host: Host for public access.
         :param pulumi.Input[int] public_access_port: Port for public access.
         :param pulumi.Input[bool] public_access_switch: Indicates whether to enable the access to an instance from public network or not.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[str] root_user: Instance root account name. This parameter is optional, Default value is `root`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
-        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
         :param pulumi.Input[int] uid: Uid of the postgresql instance.
@@ -650,8 +629,7 @@ class _InstanceState:
     @pulumi.getter(name="dbMajorVersion")
     def db_major_version(self) -> Optional[pulumi.Input[str]]:
         """
-        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        of PostgreSQL DBMajorVersion will be created.
+        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         """
         return pulumi.get(self, "db_major_version")
 
@@ -663,8 +641,7 @@ class _InstanceState:
     @pulumi.getter(name="dbMajorVesion")
     def db_major_vesion(self) -> Optional[pulumi.Input[str]]:
         """
-        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        of PostgreSQL DBMajorVersion will be created.
+        `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         """
         return pulumi.get(self, "db_major_vesion")
 
@@ -724,8 +701,7 @@ class _InstanceState:
     @pulumi.getter(name="maxStandbyArchiveDelay")
     def max_standby_archive_delay(self) -> Optional[pulumi.Input[int]]:
         """
-        max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-        milliseconds if not specified.
+        max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
         """
         return pulumi.get(self, "max_standby_archive_delay")
 
@@ -737,8 +713,7 @@ class _InstanceState:
     @pulumi.getter(name="maxStandbyStreamingDelay")
     def max_standby_streaming_delay(self) -> Optional[pulumi.Input[int]]:
         """
-        max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-        not specified.
+        max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         """
         return pulumi.get(self, "max_standby_streaming_delay")
 
@@ -750,8 +725,7 @@ class _InstanceState:
     @pulumi.getter
     def memory(self) -> Optional[pulumi.Input[int]]:
         """
-        Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        provides.
+        Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -859,8 +833,7 @@ class _InstanceState:
     @pulumi.getter(name="rootPassword")
     def root_password(self) -> Optional[pulumi.Input[str]]:
         """
-        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        when you purchase read-only instances or disaster recovery instances.
+        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         """
         return pulumi.get(self, "root_password")
 
@@ -896,8 +869,7 @@ class _InstanceState:
     @pulumi.getter
     def storage(self) -> Optional[pulumi.Input[int]]:
         """
-        Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 
@@ -986,7 +958,135 @@ class Instance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create postgresql instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-1"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        foo = tencentcloud.postgresql.Instance("foo",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            engine_version="10.4",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            storage=10,
+            tags={
+                "test": "tf",
+            })
+        ```
+
+        Create a multi available zone bucket
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        standby_availability_zone = config.get("standbyAvailabilityZone")
+        if standby_availability_zone is None:
+            standby_availability_zone = "ap-guangzhou-7"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        foo = tencentcloud.postgresql.Instance("foo",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            engine_version="10.4",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            storage=10,
+            db_node_sets=[
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    role="Primary",
+                    zone=availability_zone,
+                ),
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    zone=standby_availability_zone,
+                ),
+            ],
+            tags={
+                "test": "tf",
+            })
+        ```
+
+        create pgsql with kms key
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        pg = tencentcloud.postgresql.Instance("pg",
+            availability_zone="ap-guangzhou-6",
+            backup_plan=tencentcloud.postgresql.InstanceBackupPlanArgs(
+                backup_periods=[
+                    "tuesday",
+                    "wednesday",
+                ],
+                base_backup_retention_period=7,
+                max_backup_start_time="01:10:11",
+                min_backup_start_time="00:10:11",
+            ),
+            charge_type="POSTPAID_BY_HOUR",
+            charset="LATIN1",
+            db_kernel_version="v11.12_r1.3",
+            engine_version="11.12",
+            kms_key_id="788c606a-c7b7-11ec-82d1-5254001e5c4e",
+            kms_region="ap-guangzhou",
+            memory=4,
+            need_support_tde=1,
+            project_id=0,
+            root_password="xxxxxxxxxx",
+            storage=100,
+            subnet_id="subnet-enm92y0m",
+            tags={
+                "tf": "test",
+            },
+            vpc_id="vpc-86v957zb")
+        ```
+
+        ## Import
+
+        postgresql instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
@@ -994,30 +1094,23 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
-        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
-        :param pulumi.Input[str] db_major_vesion: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]] db_node_sets: Specify instance node info for disaster migration.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
-        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-               milliseconds if not specified.
-        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-               not specified.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
+        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
+        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
         :param pulumi.Input[bool] public_access_switch: Indicates whether to enable the access to an instance from public network or not.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[str] root_user: Instance root account name. This parameter is optional, Default value is `root`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
-        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
         :param pulumi.Input[str] vpc_id: ID of VPC.
@@ -1029,7 +1122,135 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create postgresql instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-1"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        foo = tencentcloud.postgresql.Instance("foo",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            engine_version="10.4",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            storage=10,
+            tags={
+                "test": "tf",
+            })
+        ```
+
+        Create a multi available zone bucket
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        standby_availability_zone = config.get("standbyAvailabilityZone")
+        if standby_availability_zone is None:
+            standby_availability_zone = "ap-guangzhou-7"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        foo = tencentcloud.postgresql.Instance("foo",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            engine_version="10.4",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            storage=10,
+            db_node_sets=[
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    role="Primary",
+                    zone=availability_zone,
+                ),
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    zone=standby_availability_zone,
+                ),
+            ],
+            tags={
+                "test": "tf",
+            })
+        ```
+
+        create pgsql with kms key
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        pg = tencentcloud.postgresql.Instance("pg",
+            availability_zone="ap-guangzhou-6",
+            backup_plan=tencentcloud.postgresql.InstanceBackupPlanArgs(
+                backup_periods=[
+                    "tuesday",
+                    "wednesday",
+                ],
+                base_backup_retention_period=7,
+                max_backup_start_time="01:10:11",
+                min_backup_start_time="00:10:11",
+            ),
+            charge_type="POSTPAID_BY_HOUR",
+            charset="LATIN1",
+            db_kernel_version="v11.12_r1.3",
+            engine_version="11.12",
+            kms_key_id="788c606a-c7b7-11ec-82d1-5254001e5c4e",
+            kms_region="ap-guangzhou",
+            memory=4,
+            need_support_tde=1,
+            project_id=0,
+            root_password="xxxxxxxxxx",
+            storage=100,
+            subnet_id="subnet-enm92y0m",
+            tags={
+                "tf": "test",
+            },
+            vpc_id="vpc-86v957zb")
+        ```
+
+        ## Import
+
+        postgresql instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1178,20 +1399,15 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
-        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
-        :param pulumi.Input[str] db_major_vesion: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-               of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]] db_node_sets: Specify instance node info for disaster migration.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
-        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-               milliseconds if not specified.
-        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-               not specified.
-        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-               provides.
+        :param pulumi.Input[int] max_standby_archive_delay: max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
+        :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
+        :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
         :param pulumi.Input[str] private_access_ip: IP for private access.
@@ -1200,12 +1416,10 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] public_access_host: Host for public access.
         :param pulumi.Input[int] public_access_port: Port for public access.
         :param pulumi.Input[bool] public_access_switch: Indicates whether to enable the access to an instance from public network or not.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[str] root_user: Instance root account name. This parameter is optional, Default value is `root`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
-        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
         :param pulumi.Input[int] uid: Uid of the postgresql instance.
@@ -1300,8 +1514,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="dbMajorVersion")
     def db_major_version(self) -> pulumi.Output[str]:
         """
-        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        of PostgreSQL DBMajorVersion will be created.
+        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         """
         return pulumi.get(self, "db_major_version")
 
@@ -1309,8 +1522,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="dbMajorVesion")
     def db_major_vesion(self) -> pulumi.Output[str]:
         """
-        PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        of PostgreSQL DBMajorVersion will be created.
+        `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         """
         return pulumi.get(self, "db_major_vesion")
 
@@ -1350,8 +1562,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="maxStandbyArchiveDelay")
     def max_standby_archive_delay(self) -> pulumi.Output[int]:
         """
-        max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-        milliseconds if not specified.
+        max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
         """
         return pulumi.get(self, "max_standby_archive_delay")
 
@@ -1359,8 +1570,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="maxStandbyStreamingDelay")
     def max_standby_streaming_delay(self) -> pulumi.Output[int]:
         """
-        max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-        not specified.
+        max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         """
         return pulumi.get(self, "max_standby_streaming_delay")
 
@@ -1368,8 +1578,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def memory(self) -> pulumi.Output[int]:
         """
-        Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        provides.
+        Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -1441,8 +1650,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="rootPassword")
     def root_password(self) -> pulumi.Output[str]:
         """
-        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        when you purchase read-only instances or disaster recovery instances.
+        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         """
         return pulumi.get(self, "root_password")
 
@@ -1466,8 +1674,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def storage(self) -> pulumi.Output[int]:
         """
-        Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 

@@ -10,32 +10,48 @@ using Pulumi.Serialization;
 namespace Pulumi.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CCPolicyV2CcPrecisionReqLimitGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcPrecisionReqLimitGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Domain.
+        /// </summary>
         [Input("domain", required: true)]
         public Input<string> Domain { get; set; } = null!;
 
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        /// <summary>
+        /// Ip address.
+        /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
+        /// <summary>
+        /// Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+        /// </summary>
         [Input("level", required: true)]
         public Input<string> Level { get; set; } = null!;
 
         [Input("policys", required: true)]
-        private InputList<Inputs.CCPolicyV2CcPrecisionReqLimitPolicyGetArgs>? _policys;
-        public InputList<Inputs.CCPolicyV2CcPrecisionReqLimitPolicyGetArgs> Policys
+        private InputList<Inputs.CcPolicyV2CcPrecisionReqLimitPolicyGetArgs>? _policys;
+
+        /// <summary>
+        /// The CC Frequency Limit Policy Item field.
+        /// </summary>
+        public InputList<Inputs.CcPolicyV2CcPrecisionReqLimitPolicyGetArgs> Policys
         {
-            get => _policys ?? (_policys = new InputList<Inputs.CCPolicyV2CcPrecisionReqLimitPolicyGetArgs>());
+            get => _policys ?? (_policys = new InputList<Inputs.CcPolicyV2CcPrecisionReqLimitPolicyGetArgs>());
             set => _policys = value;
         }
 
+        /// <summary>
+        /// Protocol, preferably HTTP, HTTPS.
+        /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
 
-        public CCPolicyV2CcPrecisionReqLimitGetArgs()
+        public CcPolicyV2CcPrecisionReqLimitGetArgs()
         {
         }
     }

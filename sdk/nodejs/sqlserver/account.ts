@@ -4,6 +4,30 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create SQL Server account
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.sqlserver.Account("foo", {
+ *     instanceId: tencentcloud_sqlserver_instance.example.id,
+ *     password: "test1233",
+ *     remark: "testt",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * SQL Server account can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Sqlserver/account:Account foo mssql-3cdq7kx5#tf_sqlserver_account
+ * ```
+ */
 export class Account extends pulumi.CustomResource {
     /**
      * Get an existing Account resource's state with the given name, ID, and optional extra
@@ -57,8 +81,7 @@ export class Account extends pulumi.CustomResource {
      */
     public readonly remark!: pulumi.Output<string | undefined>;
     /**
-     * Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-     * resetting password, -1 for deleting.
+     * Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
     /**
@@ -138,8 +161,7 @@ export interface AccountState {
      */
     remark?: pulumi.Input<string>;
     /**
-     * Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-     * resetting password, -1 for deleting.
+     * Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
      */
     status?: pulumi.Input<number>;
     /**

@@ -17,12 +17,19 @@ class ConnectionSecurityGroupPolicyArgs:
     def __init__(__self__, *,
                  local_cidr_block: pulumi.Input[str],
                  remote_cidr_blocks: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] local_cidr_block: Local cidr block.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] remote_cidr_blocks: Remote cidr block list.
+        """
         pulumi.set(__self__, "local_cidr_block", local_cidr_block)
         pulumi.set(__self__, "remote_cidr_blocks", remote_cidr_blocks)
 
     @property
     @pulumi.getter(name="localCidrBlock")
     def local_cidr_block(self) -> pulumi.Input[str]:
+        """
+        Local cidr block.
+        """
         return pulumi.get(self, "local_cidr_block")
 
     @local_cidr_block.setter
@@ -32,6 +39,9 @@ class ConnectionSecurityGroupPolicyArgs:
     @property
     @pulumi.getter(name="remoteCidrBlocks")
     def remote_cidr_blocks(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Remote cidr block list.
+        """
         return pulumi.get(self, "remote_cidr_blocks")
 
     @remote_cidr_blocks.setter

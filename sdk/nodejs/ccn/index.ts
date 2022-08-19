@@ -6,14 +6,14 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./attachment";
-export * from "./bandwidthLimits";
-export * from "./ccnBandwidthLimit";
+export * from "./bandwidthLimit";
+export * from "./getBandwidthLimits";
+export * from "./getInstances";
 export * from "./instance";
-export * from "./instances";
 
 // Import resources to register:
 import { Attachment } from "./attachment";
-import { CcnBandwidthLimit } from "./ccnBandwidthLimit";
+import { BandwidthLimit } from "./bandwidthLimit";
 import { Instance } from "./instance";
 
 const _module = {
@@ -22,8 +22,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Ccn/attachment:Attachment":
                 return new Attachment(name, <any>undefined, { urn })
-            case "tencentcloud:Ccn/ccnBandwidthLimit:CcnBandwidthLimit":
-                return new CcnBandwidthLimit(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/bandwidthLimit:BandwidthLimit":
+                return new BandwidthLimit(name, <any>undefined, { urn })
             case "tencentcloud:Ccn/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             default:
@@ -32,5 +32,5 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/attachment", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/ccnBandwidthLimit", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/bandwidthLimit", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instance", _module)

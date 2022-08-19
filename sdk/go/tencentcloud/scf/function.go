@@ -11,6 +11,77 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a SCF function.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+// 			CosBucketName:   pulumi.String("scf-code-1234567890"),
+// 			CosBucketRegion: pulumi.String("ap-guangzhou"),
+// 			CosObjectName:   pulumi.String("code.zip"),
+// 			Handler:         pulumi.String("main.do_it"),
+// 			Runtime:         pulumi.String("Python3.6"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// Using CFS config
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+// 			CfsConfigs: scf.FunctionCfsConfigArray{
+// 				&scf.FunctionCfsConfigArgs{
+// 					CfsId:          pulumi.String("cfs-xxxxxxxx"),
+// 					LocalMountDir:  pulumi.String("/mnt"),
+// 					MountInsId:     pulumi.String("cfs-xxxxxxxx"),
+// 					RemoteMountDir: pulumi.String("/"),
+// 					UserGroupId:    pulumi.String("10000"),
+// 					UserId:         pulumi.String("10000"),
+// 				},
+// 			},
+// 			Handler: pulumi.String("main.do_it"),
+// 			Runtime: pulumi.String("Python3.6"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SCF function can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Scf/function:Function test default+test
+// ```
 type Function struct {
 	pulumi.CustomResourceState
 
@@ -26,30 +97,27 @@ type Function struct {
 	CodeResult pulumi.StringOutput `pulumi:"codeResult"`
 	// SCF function code size, unit is M.
 	CodeSize pulumi.IntOutput `pulumi:"codeSize"`
-	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
+	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
 	CosBucketName pulumi.StringPtrOutput `pulumi:"cosBucketName"`
-	// Cos bucket region of the SCF function, conflict with `zip_file`.
+	// Cos bucket region of the SCF function, conflict with `zipFile`.
 	CosBucketRegion pulumi.StringPtrOutput `pulumi:"cosBucketRegion"`
-	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 	CosObjectName pulumi.StringPtrOutput `pulumi:"cosObjectName"`
-	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-	// Chinese, the maximum length is 1000.
+	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Whether EIP is a fixed IP.
 	EipFixed pulumi.BoolOutput `pulumi:"eipFixed"`
 	// SCF function EIP list.
 	Eips pulumi.StringArrayOutput `pulumi:"eips"`
-	// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+	// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
 	EnableEipConfig pulumi.BoolPtrOutput `pulumi:"enableEipConfig"`
-	// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+	// Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
 	EnablePublicNet pulumi.BoolPtrOutput `pulumi:"enablePublicNet"`
 	// Environment of the SCF function.
 	Environment pulumi.MapOutput `pulumi:"environment"`
 	// SCF function code error code.
 	ErrNo pulumi.IntOutput `pulumi:"errNo"`
-	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-	// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-	// length is 2-60.
+	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringOutput `pulumi:"handler"`
 	// SCF function domain name.
 	Host pulumi.StringOutput `pulumi:"host"`
@@ -63,17 +131,15 @@ type Function struct {
 	Layers FunctionLayerArrayOutput `pulumi:"layers"`
 	// Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
 	MemSize pulumi.IntPtrOutput `pulumi:"memSize"`
-	// SCF function last modified time.
+	// Modify time of SCF function trigger.
 	ModifyTime pulumi.StringOutput `pulumi:"modifyTime"`
-	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-	// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Namespace of the SCF function, default is `default`.
 	Namespace pulumi.StringPtrOutput `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role pulumi.StringPtrOutput `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-	// `PHP7`, `Golang1`, and `Java8`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
 	Runtime pulumi.StringOutput `pulumi:"runtime"`
 	// SCF function status.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -87,14 +153,13 @@ type Function struct {
 	Timeout pulumi.IntPtrOutput `pulumi:"timeout"`
 	// SCF trigger details list. Each element contains the following attributes:
 	TriggerInfos FunctionTriggerInfoArrayOutput `pulumi:"triggerInfos"`
-	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-	// then create triggers in the new list. Each element contains the following attributes:
+	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
 	Triggers FunctionTriggerArrayOutput `pulumi:"triggers"`
 	// SCF function vip.
 	Vip pulumi.StringOutput `pulumi:"vip"`
 	// VPC ID of the SCF function.
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
-	// Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+	// Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 	ZipFile pulumi.StringPtrOutput `pulumi:"zipFile"`
 }
 
@@ -145,30 +210,27 @@ type functionState struct {
 	CodeResult *string `pulumi:"codeResult"`
 	// SCF function code size, unit is M.
 	CodeSize *int `pulumi:"codeSize"`
-	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
+	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
 	CosBucketName *string `pulumi:"cosBucketName"`
-	// Cos bucket region of the SCF function, conflict with `zip_file`.
+	// Cos bucket region of the SCF function, conflict with `zipFile`.
 	CosBucketRegion *string `pulumi:"cosBucketRegion"`
-	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 	CosObjectName *string `pulumi:"cosObjectName"`
-	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-	// Chinese, the maximum length is 1000.
+	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description *string `pulumi:"description"`
 	// Whether EIP is a fixed IP.
 	EipFixed *bool `pulumi:"eipFixed"`
 	// SCF function EIP list.
 	Eips []string `pulumi:"eips"`
-	// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+	// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
 	EnableEipConfig *bool `pulumi:"enableEipConfig"`
-	// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+	// Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
 	EnablePublicNet *bool `pulumi:"enablePublicNet"`
 	// Environment of the SCF function.
 	Environment map[string]interface{} `pulumi:"environment"`
 	// SCF function code error code.
 	ErrNo *int `pulumi:"errNo"`
-	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-	// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-	// length is 2-60.
+	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler *string `pulumi:"handler"`
 	// SCF function domain name.
 	Host *string `pulumi:"host"`
@@ -182,17 +244,15 @@ type functionState struct {
 	Layers []FunctionLayer `pulumi:"layers"`
 	// Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
 	MemSize *int `pulumi:"memSize"`
-	// SCF function last modified time.
+	// Modify time of SCF function trigger.
 	ModifyTime *string `pulumi:"modifyTime"`
-	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-	// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Name *string `pulumi:"name"`
 	// Namespace of the SCF function, default is `default`.
 	Namespace *string `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role *string `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-	// `PHP7`, `Golang1`, and `Java8`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
 	Runtime *string `pulumi:"runtime"`
 	// SCF function status.
 	Status *string `pulumi:"status"`
@@ -206,14 +266,13 @@ type functionState struct {
 	Timeout *int `pulumi:"timeout"`
 	// SCF trigger details list. Each element contains the following attributes:
 	TriggerInfos []FunctionTriggerInfo `pulumi:"triggerInfos"`
-	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-	// then create triggers in the new list. Each element contains the following attributes:
+	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
 	Triggers []FunctionTrigger `pulumi:"triggers"`
 	// SCF function vip.
 	Vip *string `pulumi:"vip"`
 	// VPC ID of the SCF function.
 	VpcId *string `pulumi:"vpcId"`
-	// Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+	// Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 	ZipFile *string `pulumi:"zipFile"`
 }
 
@@ -230,30 +289,27 @@ type FunctionState struct {
 	CodeResult pulumi.StringPtrInput
 	// SCF function code size, unit is M.
 	CodeSize pulumi.IntPtrInput
-	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
+	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
 	CosBucketName pulumi.StringPtrInput
-	// Cos bucket region of the SCF function, conflict with `zip_file`.
+	// Cos bucket region of the SCF function, conflict with `zipFile`.
 	CosBucketRegion pulumi.StringPtrInput
-	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 	CosObjectName pulumi.StringPtrInput
-	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-	// Chinese, the maximum length is 1000.
+	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description pulumi.StringPtrInput
 	// Whether EIP is a fixed IP.
 	EipFixed pulumi.BoolPtrInput
 	// SCF function EIP list.
 	Eips pulumi.StringArrayInput
-	// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+	// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
 	EnableEipConfig pulumi.BoolPtrInput
-	// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+	// Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
 	EnablePublicNet pulumi.BoolPtrInput
 	// Environment of the SCF function.
 	Environment pulumi.MapInput
 	// SCF function code error code.
 	ErrNo pulumi.IntPtrInput
-	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-	// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-	// length is 2-60.
+	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringPtrInput
 	// SCF function domain name.
 	Host pulumi.StringPtrInput
@@ -267,17 +323,15 @@ type FunctionState struct {
 	Layers FunctionLayerArrayInput
 	// Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
 	MemSize pulumi.IntPtrInput
-	// SCF function last modified time.
+	// Modify time of SCF function trigger.
 	ModifyTime pulumi.StringPtrInput
-	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-	// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Name pulumi.StringPtrInput
 	// Namespace of the SCF function, default is `default`.
 	Namespace pulumi.StringPtrInput
 	// Role of the SCF function.
 	Role pulumi.StringPtrInput
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-	// `PHP7`, `Golang1`, and `Java8`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
 	Runtime pulumi.StringPtrInput
 	// SCF function status.
 	Status pulumi.StringPtrInput
@@ -291,14 +345,13 @@ type FunctionState struct {
 	Timeout pulumi.IntPtrInput
 	// SCF trigger details list. Each element contains the following attributes:
 	TriggerInfos FunctionTriggerInfoArrayInput
-	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-	// then create triggers in the new list. Each element contains the following attributes:
+	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
 	Triggers FunctionTriggerArrayInput
 	// SCF function vip.
 	Vip pulumi.StringPtrInput
 	// VPC ID of the SCF function.
 	VpcId pulumi.StringPtrInput
-	// Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+	// Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 	ZipFile pulumi.StringPtrInput
 }
 
@@ -313,24 +366,21 @@ type functionArgs struct {
 	ClsLogsetId *string `pulumi:"clsLogsetId"`
 	// cls topic id of the SCF function.
 	ClsTopicId *string `pulumi:"clsTopicId"`
-	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
+	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
 	CosBucketName *string `pulumi:"cosBucketName"`
-	// Cos bucket region of the SCF function, conflict with `zip_file`.
+	// Cos bucket region of the SCF function, conflict with `zipFile`.
 	CosBucketRegion *string `pulumi:"cosBucketRegion"`
-	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 	CosObjectName *string `pulumi:"cosObjectName"`
-	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-	// Chinese, the maximum length is 1000.
+	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description *string `pulumi:"description"`
-	// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+	// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
 	EnableEipConfig *bool `pulumi:"enableEipConfig"`
-	// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+	// Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
 	EnablePublicNet *bool `pulumi:"enablePublicNet"`
 	// Environment of the SCF function.
 	Environment map[string]interface{} `pulumi:"environment"`
-	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-	// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-	// length is 2-60.
+	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler string `pulumi:"handler"`
 	// Image of the SCF function, conflict with ``.
 	ImageConfigs []FunctionImageConfig `pulumi:"imageConfigs"`
@@ -340,15 +390,13 @@ type functionArgs struct {
 	Layers []FunctionLayer `pulumi:"layers"`
 	// Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
 	MemSize *int `pulumi:"memSize"`
-	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-	// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Name *string `pulumi:"name"`
 	// Namespace of the SCF function, default is `default`.
 	Namespace *string `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role *string `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-	// `PHP7`, `Golang1`, and `Java8`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
 	Runtime string `pulumi:"runtime"`
 	// Subnet ID of the SCF function.
 	SubnetId *string `pulumi:"subnetId"`
@@ -356,12 +404,11 @@ type functionArgs struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
 	Timeout *int `pulumi:"timeout"`
-	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-	// then create triggers in the new list. Each element contains the following attributes:
+	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
 	Triggers []FunctionTrigger `pulumi:"triggers"`
 	// VPC ID of the SCF function.
 	VpcId *string `pulumi:"vpcId"`
-	// Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+	// Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 	ZipFile *string `pulumi:"zipFile"`
 }
 
@@ -373,24 +420,21 @@ type FunctionArgs struct {
 	ClsLogsetId pulumi.StringPtrInput
 	// cls topic id of the SCF function.
 	ClsTopicId pulumi.StringPtrInput
-	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
+	// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
 	CosBucketName pulumi.StringPtrInput
-	// Cos bucket region of the SCF function, conflict with `zip_file`.
+	// Cos bucket region of the SCF function, conflict with `zipFile`.
 	CosBucketRegion pulumi.StringPtrInput
-	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+	// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 	CosObjectName pulumi.StringPtrInput
-	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-	// Chinese, the maximum length is 1000.
+	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description pulumi.StringPtrInput
-	// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+	// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
 	EnableEipConfig pulumi.BoolPtrInput
-	// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+	// Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
 	EnablePublicNet pulumi.BoolPtrInput
 	// Environment of the SCF function.
 	Environment pulumi.MapInput
-	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-	// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-	// length is 2-60.
+	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringInput
 	// Image of the SCF function, conflict with ``.
 	ImageConfigs FunctionImageConfigArrayInput
@@ -400,15 +444,13 @@ type FunctionArgs struct {
 	Layers FunctionLayerArrayInput
 	// Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
 	MemSize pulumi.IntPtrInput
-	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-	// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Name pulumi.StringPtrInput
 	// Namespace of the SCF function, default is `default`.
 	Namespace pulumi.StringPtrInput
 	// Role of the SCF function.
 	Role pulumi.StringPtrInput
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-	// `PHP7`, `Golang1`, and `Java8`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
 	Runtime pulumi.StringInput
 	// Subnet ID of the SCF function.
 	SubnetId pulumi.StringPtrInput
@@ -416,12 +458,11 @@ type FunctionArgs struct {
 	Tags pulumi.MapInput
 	// Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
 	Timeout pulumi.IntPtrInput
-	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-	// then create triggers in the new list. Each element contains the following attributes:
+	// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
 	Triggers FunctionTriggerArrayInput
 	// VPC ID of the SCF function.
 	VpcId pulumi.StringPtrInput
-	// Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+	// Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 	ZipFile pulumi.StringPtrInput
 }
 
@@ -542,23 +583,22 @@ func (o FunctionOutput) CodeSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Function) pulumi.IntOutput { return v.CodeSize }).(pulumi.IntOutput)
 }
 
-// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
+// Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
 func (o FunctionOutput) CosBucketName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.CosBucketName }).(pulumi.StringPtrOutput)
 }
 
-// Cos bucket region of the SCF function, conflict with `zip_file`.
+// Cos bucket region of the SCF function, conflict with `zipFile`.
 func (o FunctionOutput) CosBucketRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.CosBucketRegion }).(pulumi.StringPtrOutput)
 }
 
-// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+// Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 func (o FunctionOutput) CosObjectName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.CosObjectName }).(pulumi.StringPtrOutput)
 }
 
-// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-// Chinese, the maximum length is 1000.
+// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 func (o FunctionOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -573,12 +613,12 @@ func (o FunctionOutput) Eips() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringArrayOutput { return v.Eips }).(pulumi.StringArrayOutput)
 }
 
-// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
 func (o FunctionOutput) EnableEipConfig() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.BoolPtrOutput { return v.EnableEipConfig }).(pulumi.BoolPtrOutput)
 }
 
-// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+// Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
 func (o FunctionOutput) EnablePublicNet() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.BoolPtrOutput { return v.EnablePublicNet }).(pulumi.BoolPtrOutput)
 }
@@ -593,9 +633,7 @@ func (o FunctionOutput) ErrNo() pulumi.IntOutput {
 	return o.ApplyT(func(v *Function) pulumi.IntOutput { return v.ErrNo }).(pulumi.IntOutput)
 }
 
-// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-// length is 2-60.
+// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 func (o FunctionOutput) Handler() pulumi.StringOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.Handler }).(pulumi.StringOutput)
 }
@@ -630,13 +668,12 @@ func (o FunctionOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.IntPtrOutput { return v.MemSize }).(pulumi.IntPtrOutput)
 }
 
-// SCF function last modified time.
+// Modify time of SCF function trigger.
 func (o FunctionOutput) ModifyTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.ModifyTime }).(pulumi.StringOutput)
 }
 
-// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 func (o FunctionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
@@ -651,8 +688,7 @@ func (o FunctionOutput) Role() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Role }).(pulumi.StringPtrOutput)
 }
 
-// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-// `PHP7`, `Golang1`, and `Java8`.
+// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
 func (o FunctionOutput) Runtime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.Runtime }).(pulumi.StringOutput)
 }
@@ -687,8 +723,7 @@ func (o FunctionOutput) TriggerInfos() FunctionTriggerInfoArrayOutput {
 	return o.ApplyT(func(v *Function) FunctionTriggerInfoArrayOutput { return v.TriggerInfos }).(FunctionTriggerInfoArrayOutput)
 }
 
-// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-// then create triggers in the new list. Each element contains the following attributes:
+// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
 func (o FunctionOutput) Triggers() FunctionTriggerArrayOutput {
 	return o.ApplyT(func(v *Function) FunctionTriggerArrayOutput { return v.Triggers }).(FunctionTriggerArrayOutput)
 }
@@ -703,7 +738,7 @@ func (o FunctionOutput) VpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
 }
 
-// Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+// Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 func (o FunctionOutput) ZipFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.ZipFile }).(pulumi.StringPtrOutput)
 }

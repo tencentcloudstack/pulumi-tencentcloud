@@ -9,6 +9,65 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Clb
 {
+    /// <summary>
+    /// Provides a resource to create a CLB target group attachment is bound to the load balancing listener or forwarding rule.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             NetworkType = "OPEN",
+    ///             ClbName = "tf-clb-rule-basic",
+    ///         });
+    ///         var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new Tencentcloud.Clb.ListenerArgs
+    ///         {
+    ///             ClbId = clbBasic.Id,
+    ///             Port = 1,
+    ///             Protocol = "HTTP",
+    ///             ListenerName = "listener_basic",
+    ///         });
+    ///         var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new Tencentcloud.Clb.ListenerRuleArgs
+    ///         {
+    ///             ClbId = clbBasic.Id,
+    ///             ListenerId = listenerBasic.ListenerId,
+    ///             Domain = "abc.com",
+    ///             Url = "/",
+    ///             SessionExpireTime = 30,
+    ///             Scheduler = "WRR",
+    ///             TargetType = "TARGETGROUP",
+    ///         });
+    ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
+    ///         {
+    ///             TargetGroupName = "test-target-keep-1",
+    ///         });
+    ///         var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new Tencentcloud.Clb.TargetGroupAttachmentArgs
+    ///         {
+    ///             ClbId = clbBasic.Id,
+    ///             ListenerId = listenerBasic.ListenerId,
+    ///             RuleId = ruleBasic.RuleId,
+    ///             TargetGroupId = test.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CLB target group attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment")]
     public partial class TargetGroupAttachment : Pulumi.CustomResource
     {
@@ -37,7 +96,7 @@ namespace Pulumi.Tencentcloud.Clb
         public Output<string?> TargetGroupId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the CLB target group.
+        /// It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         /// </summary>
         [Output("targrtGroupId")]
         public Output<string?> TargrtGroupId { get; private set; } = null!;
@@ -113,7 +172,7 @@ namespace Pulumi.Tencentcloud.Clb
         public Input<string>? TargetGroupId { get; set; }
 
         /// <summary>
-        /// ID of the CLB target group.
+        /// It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         /// </summary>
         [Input("targrtGroupId")]
         public Input<string>? TargrtGroupId { get; set; }
@@ -150,7 +209,7 @@ namespace Pulumi.Tencentcloud.Clb
         public Input<string>? TargetGroupId { get; set; }
 
         /// <summary>
-        /// ID of the CLB target group.
+        /// It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         /// </summary>
         [Input("targrtGroupId")]
         public Input<string>? TargrtGroupId { get; set; }

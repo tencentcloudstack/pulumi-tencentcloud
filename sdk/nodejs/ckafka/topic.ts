@@ -4,6 +4,43 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create ckafka topic.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Ckafka.Topic("foo", {
+ *     cleanUpPolicy: "delete",
+ *     enableWhiteList: true,
+ *     instanceId: "ckafka-f9ife4zz",
+ *     ipWhiteLists: [
+ *         "ip1",
+ *         "ip2",
+ *     ],
+ *     maxMessageBytes: 0,
+ *     note: "topic note",
+ *     partitionNum: 1,
+ *     replicaNum: 2,
+ *     retention: 60000,
+ *     segment: 3600000,
+ *     syncReplicaMinNum: 1,
+ *     topicName: "example",
+ *     uncleanLeaderElectionEnable: false,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * ckafka topic can be imported using the instance_id#topic_name, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+ * ```
+ */
 export class Topic extends pulumi.CustomResource {
     /**
      * Get an existing Topic resource's state with the given name, ID, and optional extra
@@ -33,9 +70,7 @@ export class Topic extends pulumi.CustomResource {
     }
 
     /**
-     * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-     * `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-     * will be deleted according to the storage time.
+     * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
      */
     public readonly cleanUpPolicy!: pulumi.Output<string | undefined>;
     /**
@@ -107,8 +142,7 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly topicName!: pulumi.Output<string>;
     /**
-     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-     * allowed.
+     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
      */
     public readonly uncleanLeaderElectionEnable!: pulumi.Output<boolean | undefined>;
 
@@ -188,9 +222,7 @@ export class Topic extends pulumi.CustomResource {
  */
 export interface TopicState {
     /**
-     * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-     * `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-     * will be deleted according to the storage time.
+     * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
      */
     cleanUpPolicy?: pulumi.Input<string>;
     /**
@@ -262,8 +294,7 @@ export interface TopicState {
      */
     topicName?: pulumi.Input<string>;
     /**
-     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-     * allowed.
+     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
      */
     uncleanLeaderElectionEnable?: pulumi.Input<boolean>;
 }
@@ -273,9 +304,7 @@ export interface TopicState {
  */
 export interface TopicArgs {
     /**
-     * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-     * `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-     * will be deleted according to the storage time.
+     * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
      */
     cleanUpPolicy?: pulumi.Input<string>;
     /**
@@ -323,8 +352,7 @@ export interface TopicArgs {
      */
     topicName: pulumi.Input<string>;
     /**
-     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-     * allowed.
+     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
      */
     uncleanLeaderElectionEnable?: pulumi.Input<boolean>;
 }

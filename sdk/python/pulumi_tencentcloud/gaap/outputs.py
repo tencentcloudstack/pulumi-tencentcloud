@@ -10,22 +10,126 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'CertificatesCertificateResult',
-    'DomainErrorPageInfoListErrorPageInfoListResult',
-    'HttpDomainsDomainResult',
     'HttpRuleRealserver',
-    'HttpRulesRuleResult',
-    'HttpRulesRuleRealserverResult',
     'Layer4ListenerRealserverBindSet',
-    'Layer4ListenersListenerResult',
-    'Layer7ListenersListenerResult',
-    'ProxiesProxyResult',
-    'RealserversRealserverResult',
-    'SecurityRulesRuleResult',
+    'GetCertificatesCertificateResult',
+    'GetDomainErrorPagesErrorPageInfoListResult',
+    'GetHttpDomainsDomainResult',
+    'GetHttpRulesRuleResult',
+    'GetHttpRulesRuleRealserverResult',
+    'GetLayer4ListenersListenerResult',
+    'GetLayer7ListenersListenerResult',
+    'GetProxiesProxyResult',
+    'GetRealserversRealserverResult',
+    'GetSecurityRulesRuleResult',
 ]
 
 @pulumi.output_type
-class CertificatesCertificateResult(dict):
+class HttpRuleRealserver(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 ip: str,
+                 port: int,
+                 weight: Optional[int] = None):
+        """
+        :param str id: ID of the GAAP realserver.
+        :param str ip: IP of the GAAP realserver.
+        :param int port: Port of the GAAP realserver.
+        :param int weight: Scheduling weight, default value is `1`. Valid value ranges: (1~100).
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        ID of the GAAP realserver.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP of the GAAP realserver.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port of the GAAP realserver.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[int]:
+        """
+        Scheduling weight, default value is `1`. Valid value ranges: (1~100).
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class Layer4ListenerRealserverBindSet(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 ip: str,
+                 port: int,
+                 weight: Optional[int] = None):
+        """
+        :param str id: ID of the GAAP realserver.
+        :param str ip: IP of the GAAP realserver.
+        :param int port: Port of the GAAP realserver.
+        :param int weight: Scheduling weight, default value is `1`. The range of values is [1,100].
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        ID of the GAAP realserver.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP of the GAAP realserver.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port of the GAAP realserver.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[int]:
+        """
+        Scheduling weight, default value is `1`. The range of values is [1,100].
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetCertificatesCertificateResult(dict):
     def __init__(__self__, *,
                  begin_time: str,
                  create_time: str,
@@ -35,6 +139,16 @@ class CertificatesCertificateResult(dict):
                  name: str,
                  subject_cn: str,
                  type: str):
+        """
+        :param str begin_time: Beginning time of the certificate.
+        :param str create_time: Creation time of the certificate.
+        :param str end_time: Ending time of the certificate.
+        :param str id: ID of the certificate to be queried.
+        :param str issuer_cn: Issuer name of the certificate.
+        :param str name: Name of the certificate to be queried.
+        :param str subject_cn: Subject name of the certificate.
+        :param str type: Type of the certificate to be queried. Valid values: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
+        """
         pulumi.set(__self__, "begin_time", begin_time)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "end_time", end_time)
@@ -47,46 +161,70 @@ class CertificatesCertificateResult(dict):
     @property
     @pulumi.getter(name="beginTime")
     def begin_time(self) -> str:
+        """
+        Beginning time of the certificate.
+        """
         return pulumi.get(self, "begin_time")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the certificate.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="endTime")
     def end_time(self) -> str:
+        """
+        Ending time of the certificate.
+        """
         return pulumi.get(self, "end_time")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the certificate to be queried.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="issuerCn")
     def issuer_cn(self) -> str:
+        """
+        Issuer name of the certificate.
+        """
         return pulumi.get(self, "issuer_cn")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the certificate to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="subjectCn")
     def subject_cn(self) -> str:
+        """
+        Subject name of the certificate.
+        """
         return pulumi.get(self, "subject_cn")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Type of the certificate to be queried. Valid values: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
+        """
         return pulumi.get(self, "type")
 
 
 @pulumi.output_type
-class DomainErrorPageInfoListErrorPageInfoListResult(dict):
+class GetDomainErrorPagesErrorPageInfoListResult(dict):
     def __init__(__self__, *,
                  body: str,
                  clear_headers: Sequence[str],
@@ -96,6 +234,16 @@ class DomainErrorPageInfoListErrorPageInfoListResult(dict):
                  listener_id: str,
                  new_error_codes: int,
                  set_headers: Mapping[str, Any]):
+        """
+        :param str body: New response body.
+        :param Sequence[str] clear_headers: Response headers to be removed.
+        :param str domain: HTTP domain to be queried.
+        :param Sequence[int] error_codes: Original error codes.
+        :param str id: ID of the error page info.
+        :param str listener_id: ID of the layer7 listener to be queried.
+        :param int new_error_codes: New error code.
+        :param Mapping[str, Any] set_headers: Response headers to be set.
+        """
         pulumi.set(__self__, "body", body)
         pulumi.set(__self__, "clear_headers", clear_headers)
         pulumi.set(__self__, "domain", domain)
@@ -108,46 +256,70 @@ class DomainErrorPageInfoListErrorPageInfoListResult(dict):
     @property
     @pulumi.getter
     def body(self) -> str:
+        """
+        New response body.
+        """
         return pulumi.get(self, "body")
 
     @property
     @pulumi.getter(name="clearHeaders")
     def clear_headers(self) -> Sequence[str]:
+        """
+        Response headers to be removed.
+        """
         return pulumi.get(self, "clear_headers")
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        HTTP domain to be queried.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="errorCodes")
     def error_codes(self) -> Sequence[int]:
+        """
+        Original error codes.
+        """
         return pulumi.get(self, "error_codes")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the error page info.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> str:
+        """
+        ID of the layer7 listener to be queried.
+        """
         return pulumi.get(self, "listener_id")
 
     @property
     @pulumi.getter(name="newErrorCodes")
     def new_error_codes(self) -> int:
+        """
+        New error code.
+        """
         return pulumi.get(self, "new_error_codes")
 
     @property
     @pulumi.getter(name="setHeaders")
     def set_headers(self) -> Mapping[str, Any]:
+        """
+        Response headers to be set.
+        """
         return pulumi.get(self, "set_headers")
 
 
 @pulumi.output_type
-class HttpDomainsDomainResult(dict):
+class GetHttpDomainsDomainResult(dict):
     def __init__(__self__, *,
                  basic_auth: bool,
                  basic_auth_id: str,
@@ -161,6 +333,20 @@ class HttpDomainsDomainResult(dict):
                  realserver_certificate_domain: str,
                  realserver_certificate_id: str,
                  realserver_certificate_ids: Sequence[str]):
+        """
+        :param bool basic_auth: Indicates whether basic authentication is enable.
+        :param str basic_auth_id: ID of the basic authentication.
+        :param str certificate_id: ID of the server certificate.
+        :param str client_certificate_id: (**Deprecated**) It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead. ID of the client certificate.
+        :param Sequence[str] client_certificate_ids: ID list of the client certificate.
+        :param str domain: Forward domain of the layer7 listener to be queried.
+        :param bool gaap_auth: Indicates whether SSL certificate authentication is enable.
+        :param str gaap_auth_id: ID of the SSL certificate.
+        :param bool realserver_auth: Indicates whether realserver authentication is enable.
+        :param str realserver_certificate_domain: CA certificate domain of the realserver.
+        :param str realserver_certificate_id: (**Deprecated**) It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead. CA certificate ID of the realserver.
+        :param Sequence[str] realserver_certificate_ids: CA certificate ID list of the realserver.
+        """
         pulumi.set(__self__, "basic_auth", basic_auth)
         pulumi.set(__self__, "basic_auth_id", basic_auth_id)
         pulumi.set(__self__, "certificate_id", certificate_id)
@@ -177,100 +363,102 @@ class HttpDomainsDomainResult(dict):
     @property
     @pulumi.getter(name="basicAuth")
     def basic_auth(self) -> bool:
+        """
+        Indicates whether basic authentication is enable.
+        """
         return pulumi.get(self, "basic_auth")
 
     @property
     @pulumi.getter(name="basicAuthId")
     def basic_auth_id(self) -> str:
+        """
+        ID of the basic authentication.
+        """
         return pulumi.get(self, "basic_auth_id")
 
     @property
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> str:
+        """
+        ID of the server certificate.
+        """
         return pulumi.get(self, "certificate_id")
 
     @property
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> str:
+        """
+        (**Deprecated**) It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead. ID of the client certificate.
+        """
         return pulumi.get(self, "client_certificate_id")
 
     @property
     @pulumi.getter(name="clientCertificateIds")
     def client_certificate_ids(self) -> Sequence[str]:
+        """
+        ID list of the client certificate.
+        """
         return pulumi.get(self, "client_certificate_ids")
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Forward domain of the layer7 listener to be queried.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="gaapAuth")
     def gaap_auth(self) -> bool:
+        """
+        Indicates whether SSL certificate authentication is enable.
+        """
         return pulumi.get(self, "gaap_auth")
 
     @property
     @pulumi.getter(name="gaapAuthId")
     def gaap_auth_id(self) -> str:
+        """
+        ID of the SSL certificate.
+        """
         return pulumi.get(self, "gaap_auth_id")
 
     @property
     @pulumi.getter(name="realserverAuth")
     def realserver_auth(self) -> bool:
+        """
+        Indicates whether realserver authentication is enable.
+        """
         return pulumi.get(self, "realserver_auth")
 
     @property
     @pulumi.getter(name="realserverCertificateDomain")
     def realserver_certificate_domain(self) -> str:
+        """
+        CA certificate domain of the realserver.
+        """
         return pulumi.get(self, "realserver_certificate_domain")
 
     @property
     @pulumi.getter(name="realserverCertificateId")
     def realserver_certificate_id(self) -> str:
+        """
+        (**Deprecated**) It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead. CA certificate ID of the realserver.
+        """
         return pulumi.get(self, "realserver_certificate_id")
 
     @property
     @pulumi.getter(name="realserverCertificateIds")
     def realserver_certificate_ids(self) -> Sequence[str]:
+        """
+        CA certificate ID list of the realserver.
+        """
         return pulumi.get(self, "realserver_certificate_ids")
 
 
 @pulumi.output_type
-class HttpRuleRealserver(dict):
-    def __init__(__self__, *,
-                 id: str,
-                 ip: str,
-                 port: int,
-                 weight: Optional[int] = None):
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "ip", ip)
-        pulumi.set(__self__, "port", port)
-        if weight is not None:
-            pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def ip(self) -> str:
-        return pulumi.get(self, "ip")
-
-    @property
-    @pulumi.getter
-    def port(self) -> int:
-        return pulumi.get(self, "port")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> Optional[int]:
-        return pulumi.get(self, "weight")
-
-
-@pulumi.output_type
-class HttpRulesRuleResult(dict):
+class GetHttpRulesRuleResult(dict):
     def __init__(__self__, *,
                  connect_timeout: int,
                  domain: str,
@@ -284,10 +472,28 @@ class HttpRulesRuleResult(dict):
                  listener_id: str,
                  path: str,
                  realserver_type: str,
-                 realservers: Sequence['outputs.HttpRulesRuleRealserverResult'],
+                 realservers: Sequence['outputs.GetHttpRulesRuleRealserverResult'],
                  scheduler: str,
                  sni: str,
                  sni_switch: str):
+        """
+        :param int connect_timeout: Timeout of the health check response.
+        :param str domain: Forward domain of the layer7 listener to be queried.
+        :param str forward_host: Requested host which is forwarded to the realserver by the listener to be queried.
+        :param bool health_check: Indicates whether health check is enable.
+        :param str health_check_method: Method of the health check.
+        :param str health_check_path: Path of health check.
+        :param Sequence[int] health_check_status_codes: Return code of confirmed normal.
+        :param str id: ID of the GAAP realserver.
+        :param int interval: Interval of the health check.
+        :param str listener_id: ID of the layer7 listener to be queried.
+        :param str path: Path of the forward rule to be queried.
+        :param str realserver_type: Type of the realserver.
+        :param Sequence['GetHttpRulesRuleRealserverArgs'] realservers: An information list of GAAP realserver. Each element contains the following attributes:
+        :param str scheduler: Scheduling policy of the forward rule.
+        :param str sni: ServerNameIndication (SNI).
+        :param str sni_switch: ServerNameIndication (SNI) switch.
+        """
         pulumi.set(__self__, "connect_timeout", connect_timeout)
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "forward_host", forward_host)
@@ -308,86 +514,134 @@ class HttpRulesRuleResult(dict):
     @property
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> int:
+        """
+        Timeout of the health check response.
+        """
         return pulumi.get(self, "connect_timeout")
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Forward domain of the layer7 listener to be queried.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="forwardHost")
     def forward_host(self) -> str:
+        """
+        Requested host which is forwarded to the realserver by the listener to be queried.
+        """
         return pulumi.get(self, "forward_host")
 
     @property
     @pulumi.getter(name="healthCheck")
     def health_check(self) -> bool:
+        """
+        Indicates whether health check is enable.
+        """
         return pulumi.get(self, "health_check")
 
     @property
     @pulumi.getter(name="healthCheckMethod")
     def health_check_method(self) -> str:
+        """
+        Method of the health check.
+        """
         return pulumi.get(self, "health_check_method")
 
     @property
     @pulumi.getter(name="healthCheckPath")
     def health_check_path(self) -> str:
+        """
+        Path of health check.
+        """
         return pulumi.get(self, "health_check_path")
 
     @property
     @pulumi.getter(name="healthCheckStatusCodes")
     def health_check_status_codes(self) -> Sequence[int]:
+        """
+        Return code of confirmed normal.
+        """
         return pulumi.get(self, "health_check_status_codes")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the GAAP realserver.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def interval(self) -> int:
+        """
+        Interval of the health check.
+        """
         return pulumi.get(self, "interval")
 
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> str:
+        """
+        ID of the layer7 listener to be queried.
+        """
         return pulumi.get(self, "listener_id")
 
     @property
     @pulumi.getter
     def path(self) -> str:
+        """
+        Path of the forward rule to be queried.
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter(name="realserverType")
     def realserver_type(self) -> str:
+        """
+        Type of the realserver.
+        """
         return pulumi.get(self, "realserver_type")
 
     @property
     @pulumi.getter
-    def realservers(self) -> Sequence['outputs.HttpRulesRuleRealserverResult']:
+    def realservers(self) -> Sequence['outputs.GetHttpRulesRuleRealserverResult']:
+        """
+        An information list of GAAP realserver. Each element contains the following attributes:
+        """
         return pulumi.get(self, "realservers")
 
     @property
     @pulumi.getter
     def scheduler(self) -> str:
+        """
+        Scheduling policy of the forward rule.
+        """
         return pulumi.get(self, "scheduler")
 
     @property
     @pulumi.getter
     def sni(self) -> str:
+        """
+        ServerNameIndication (SNI).
+        """
         return pulumi.get(self, "sni")
 
     @property
     @pulumi.getter(name="sniSwitch")
     def sni_switch(self) -> str:
+        """
+        ServerNameIndication (SNI) switch.
+        """
         return pulumi.get(self, "sni_switch")
 
 
 @pulumi.output_type
-class HttpRulesRuleRealserverResult(dict):
+class GetHttpRulesRuleRealserverResult(dict):
     def __init__(__self__, *,
                  domain: str,
                  id: str,
@@ -395,6 +649,14 @@ class HttpRulesRuleRealserverResult(dict):
                  port: int,
                  status: int,
                  weight: int):
+        """
+        :param str domain: Forward domain of the layer7 listener to be queried.
+        :param str id: ID of the GAAP realserver.
+        :param str ip: IP of the GAAP realserver.
+        :param int port: Port of the GAAP realserver.
+        :param int status: Status of the GAAP realserver.
+        :param int weight: Scheduling weight.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "ip", ip)
@@ -405,70 +667,54 @@ class HttpRulesRuleRealserverResult(dict):
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Forward domain of the layer7 listener to be queried.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the GAAP realserver.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        IP of the GAAP realserver.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port of the GAAP realserver.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Status of the GAAP realserver.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter
     def weight(self) -> int:
+        """
+        Scheduling weight.
+        """
         return pulumi.get(self, "weight")
 
 
 @pulumi.output_type
-class Layer4ListenerRealserverBindSet(dict):
-    def __init__(__self__, *,
-                 id: str,
-                 ip: str,
-                 port: int,
-                 weight: Optional[int] = None):
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "ip", ip)
-        pulumi.set(__self__, "port", port)
-        if weight is not None:
-            pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def ip(self) -> str:
-        return pulumi.get(self, "ip")
-
-    @property
-    @pulumi.getter
-    def port(self) -> int:
-        return pulumi.get(self, "port")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> Optional[int]:
-        return pulumi.get(self, "weight")
-
-
-@pulumi.output_type
-class Layer4ListenersListenerResult(dict):
+class GetLayer4ListenersListenerResult(dict):
     def __init__(__self__, *,
                  connect_timeout: int,
                  create_time: str,
@@ -481,6 +727,19 @@ class Layer4ListenersListenerResult(dict):
                  realserver_type: str,
                  scheduler: str,
                  status: int):
+        """
+        :param int connect_timeout: Timeout of the health check response.
+        :param str create_time: Creation time of the layer4 listener.
+        :param bool health_check: Indicates whether health check is enable.
+        :param str id: ID of the layer4 listener.
+        :param int interval: Interval of the health check.
+        :param str name: Name of the layer4 listener.
+        :param int port: Port of the layer4 listener to be queried.
+        :param str protocol: Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
+        :param str realserver_type: Type of the realserver.
+        :param str scheduler: Scheduling policy of the layer4 listener.
+        :param int status: Status of the layer4 listener.
+        """
         pulumi.set(__self__, "connect_timeout", connect_timeout)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "health_check", health_check)
@@ -496,61 +755,94 @@ class Layer4ListenersListenerResult(dict):
     @property
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> int:
+        """
+        Timeout of the health check response.
+        """
         return pulumi.get(self, "connect_timeout")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the layer4 listener.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="healthCheck")
     def health_check(self) -> bool:
+        """
+        Indicates whether health check is enable.
+        """
         return pulumi.get(self, "health_check")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the layer4 listener.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def interval(self) -> int:
+        """
+        Interval of the health check.
+        """
         return pulumi.get(self, "interval")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the layer4 listener.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port of the layer4 listener to be queried.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="realserverType")
     def realserver_type(self) -> str:
+        """
+        Type of the realserver.
+        """
         return pulumi.get(self, "realserver_type")
 
     @property
     @pulumi.getter
     def scheduler(self) -> str:
+        """
+        Scheduling policy of the layer4 listener.
+        """
         return pulumi.get(self, "scheduler")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Status of the layer4 listener.
+        """
         return pulumi.get(self, "status")
 
 
 @pulumi.output_type
-class Layer7ListenersListenerResult(dict):
+class GetLayer7ListenersListenerResult(dict):
     def __init__(__self__, *,
                  auth_type: int,
                  certificate_id: str,
@@ -563,6 +855,19 @@ class Layer7ListenersListenerResult(dict):
                  port: int,
                  protocol: str,
                  status: int):
+        """
+        :param int auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication.
+        :param str certificate_id: Certificate ID of the layer7 listener.
+        :param str client_certificate_id: (**Deprecated**) It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead. ID of the client certificate.
+        :param Sequence[str] client_certificate_ids: ID list of the client certificate.
+        :param str create_time: Creation time of the layer7 listener.
+        :param str forward_protocol: Protocol type of the forwarding.
+        :param str id: ID of the layer7 listener.
+        :param str name: Name of the layer7 listener.
+        :param int port: Port of the layer7 listener to be queried.
+        :param str protocol: Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
+        :param int status: Status of the layer7 listener.
+        """
         pulumi.set(__self__, "auth_type", auth_type)
         pulumi.set(__self__, "certificate_id", certificate_id)
         pulumi.set(__self__, "client_certificate_id", client_certificate_id)
@@ -578,61 +883,94 @@ class Layer7ListenersListenerResult(dict):
     @property
     @pulumi.getter(name="authType")
     def auth_type(self) -> int:
+        """
+        Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication.
+        """
         return pulumi.get(self, "auth_type")
 
     @property
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> str:
+        """
+        Certificate ID of the layer7 listener.
+        """
         return pulumi.get(self, "certificate_id")
 
     @property
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> str:
+        """
+        (**Deprecated**) It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead. ID of the client certificate.
+        """
         return pulumi.get(self, "client_certificate_id")
 
     @property
     @pulumi.getter(name="clientCertificateIds")
     def client_certificate_ids(self) -> Sequence[str]:
+        """
+        ID list of the client certificate.
+        """
         return pulumi.get(self, "client_certificate_ids")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the layer7 listener.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="forwardProtocol")
     def forward_protocol(self) -> str:
+        """
+        Protocol type of the forwarding.
+        """
         return pulumi.get(self, "forward_protocol")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the layer7 listener.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the layer7 listener.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port of the layer7 listener to be queried.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Status of the layer7 listener.
+        """
         return pulumi.get(self, "status")
 
 
 @pulumi.output_type
-class ProxiesProxyResult(dict):
+class GetProxiesProxyResult(dict):
     def __init__(__self__, *,
                  access_region: str,
                  bandwidth: int,
@@ -651,6 +989,25 @@ class ProxiesProxyResult(dict):
                  support_protocols: Sequence[str],
                  tags: Mapping[str, Any],
                  version: str):
+        """
+        :param str access_region: Access region of the GAAP proxy to be queried. Conflict with `ids`.
+        :param int bandwidth: Maximum bandwidth of the GAAP proxy, unit is Mbps.
+        :param int concurrent: Maximum concurrency of the GAAP proxy, unit is 10k.
+        :param str create_time: Creation time of the GAAP proxy.
+        :param str domain: Access domain of the GAAP proxy.
+        :param str forward_ip: Forwarding IP of the GAAP proxy.
+        :param str id: ID of the GAAP proxy.
+        :param str ip: Access domain of the GAAP proxy.
+        :param str name: Name of the GAAP proxy.
+        :param str policy_id: Security policy ID of the GAAP proxy.
+        :param int project_id: Project ID of the GAAP proxy to be queried. Conflict with `ids`.
+        :param str realserver_region: Region of the GAAP realserver to be queried. Conflict with `ids`.
+        :param bool scalable: Indicates whether GAAP proxy can scalable.
+        :param str status: Status of the GAAP proxy.
+        :param Sequence[str] support_protocols: Supported protocols of the GAAP proxy.
+        :param Mapping[str, Any] tags: Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+        :param str version: Version of the GAAP proxy.
+        """
         pulumi.set(__self__, "access_region", access_region)
         pulumi.set(__self__, "bandwidth", bandwidth)
         pulumi.set(__self__, "concurrent", concurrent)
@@ -672,91 +1029,142 @@ class ProxiesProxyResult(dict):
     @property
     @pulumi.getter(name="accessRegion")
     def access_region(self) -> str:
+        """
+        Access region of the GAAP proxy to be queried. Conflict with `ids`.
+        """
         return pulumi.get(self, "access_region")
 
     @property
     @pulumi.getter
     def bandwidth(self) -> int:
+        """
+        Maximum bandwidth of the GAAP proxy, unit is Mbps.
+        """
         return pulumi.get(self, "bandwidth")
 
     @property
     @pulumi.getter
     def concurrent(self) -> int:
+        """
+        Maximum concurrency of the GAAP proxy, unit is 10k.
+        """
         return pulumi.get(self, "concurrent")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the GAAP proxy.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Access domain of the GAAP proxy.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="forwardIp")
     def forward_ip(self) -> str:
+        """
+        Forwarding IP of the GAAP proxy.
+        """
         return pulumi.get(self, "forward_ip")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the GAAP proxy.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        Access domain of the GAAP proxy.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the GAAP proxy.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="policyId")
     def policy_id(self) -> str:
+        """
+        Security policy ID of the GAAP proxy.
+        """
         return pulumi.get(self, "policy_id")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        Project ID of the GAAP proxy to be queried. Conflict with `ids`.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="realserverRegion")
     def realserver_region(self) -> str:
+        """
+        Region of the GAAP realserver to be queried. Conflict with `ids`.
+        """
         return pulumi.get(self, "realserver_region")
 
     @property
     @pulumi.getter
     def scalable(self) -> bool:
+        """
+        Indicates whether GAAP proxy can scalable.
+        """
         return pulumi.get(self, "scalable")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Status of the GAAP proxy.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="supportProtocols")
     def support_protocols(self) -> Sequence[str]:
+        """
+        Supported protocols of the GAAP proxy.
+        """
         return pulumi.get(self, "support_protocols")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter
     def version(self) -> str:
+        """
+        Version of the GAAP proxy.
+        """
         return pulumi.get(self, "version")
 
 
 @pulumi.output_type
-class RealserversRealserverResult(dict):
+class GetRealserversRealserverResult(dict):
     def __init__(__self__, *,
                  domain: str,
                  id: str,
@@ -764,6 +1172,14 @@ class RealserversRealserverResult(dict):
                  name: str,
                  project_id: int,
                  tags: Mapping[str, Any]):
+        """
+        :param str domain: Domain of the GAAP realserver to be queried, conflict with `ip`.
+        :param str id: ID of the GAAP realserver.
+        :param str ip: IP of the GAAP realserver to be queried, conflict with `domain`.
+        :param str name: Name of the GAAP realserver to be queried, the maximum length is 30.
+        :param int project_id: ID of the project within the GAAP realserver to be queried, default value is `-1`, no set means all projects.
+        :param Mapping[str, Any] tags: Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "ip", ip)
@@ -774,36 +1190,54 @@ class RealserversRealserverResult(dict):
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Domain of the GAAP realserver to be queried, conflict with `ip`.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the GAAP realserver.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        IP of the GAAP realserver to be queried, conflict with `domain`.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the GAAP realserver to be queried, the maximum length is 30.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        ID of the project within the GAAP realserver to be queried, default value is `-1`, no set means all projects.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+        """
         return pulumi.get(self, "tags")
 
 
 @pulumi.output_type
-class SecurityRulesRuleResult(dict):
+class GetSecurityRulesRuleResult(dict):
     def __init__(__self__, *,
                  action: str,
                  cidr_ip: str,
@@ -811,6 +1245,14 @@ class SecurityRulesRuleResult(dict):
                  name: str,
                  port: str,
                  protocol: str):
+        """
+        :param str action: Policy of the rule to be queried.
+        :param str cidr_ip: A network address block of the request source to be queried.
+        :param str id: ID of the security policy rule.
+        :param str name: Name of the security policy rule to be queried.
+        :param str port: Port of the security policy rule to be queried.
+        :param str protocol: Protocol of the security policy rule to be queried.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "cidr_ip", cidr_ip)
         pulumi.set(__self__, "id", id)
@@ -821,31 +1263,49 @@ class SecurityRulesRuleResult(dict):
     @property
     @pulumi.getter
     def action(self) -> str:
+        """
+        Policy of the rule to be queried.
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter(name="cidrIp")
     def cidr_ip(self) -> str:
+        """
+        A network address block of the request source to be queried.
+        """
         return pulumi.get(self, "cidr_ip")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the security policy rule.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the security policy rule to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def port(self) -> str:
+        """
+        Port of the security policy rule to be queried.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol of the security policy rule to be queried.
+        """
         return pulumi.get(self, "protocol")
 
 

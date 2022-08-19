@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.As.Outputs
     [OutputType]
     public sealed class ScalingGroupForwardBalancerId
     {
+        /// <summary>
+        /// Listener ID for application load balancers.
+        /// </summary>
         public readonly string ListenerId;
+        /// <summary>
+        /// ID of available load balancers.
+        /// </summary>
         public readonly string LoadBalancerId;
+        /// <summary>
+        /// ID of forwarding rules.
+        /// </summary>
         public readonly string? RuleId;
+        /// <summary>
+        /// Attribute list of target rules.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ScalingGroupForwardBalancerIdTargetAttribute> TargetAttributes;
 
         [OutputConstructor]

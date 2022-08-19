@@ -11,6 +11,44 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a SSM secret.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ssm.NewSecret(ctx, "foo", &Ssm.SecretArgs{
+// 			Description:          pulumi.String("test secret"),
+// 			IsEnabled:            pulumi.Bool(true),
+// 			RecoveryWindowInDays: pulumi.Int(0),
+// 			SecretName:           pulumi.String("test"),
+// 			Tags: pulumi.AnyMap{
+// 				"test-tag": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SSM secret can be imported using the secretName, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+// ```
 type Secret struct {
 	pulumi.CustomResourceState
 
@@ -18,14 +56,11 @@ type Secret struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled pulumi.BoolPtrOutput `pulumi:"isEnabled"`
-	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-	// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
 	KmsKeyId pulumi.StringOutput `pulumi:"kmsKeyId"`
-	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-	// days reserved, completely deleted after this date.
+	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
 	RecoveryWindowInDays pulumi.IntPtrOutput `pulumi:"recoveryWindowInDays"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringOutput `pulumi:"secretName"`
 	// Status of secret.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -69,14 +104,11 @@ type secretState struct {
 	Description *string `pulumi:"description"`
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled *bool `pulumi:"isEnabled"`
-	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-	// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
-	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-	// days reserved, completely deleted after this date.
+	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
 	RecoveryWindowInDays *int `pulumi:"recoveryWindowInDays"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName *string `pulumi:"secretName"`
 	// Status of secret.
 	Status *string `pulumi:"status"`
@@ -89,14 +121,11 @@ type SecretState struct {
 	Description pulumi.StringPtrInput
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled pulumi.BoolPtrInput
-	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-	// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
 	KmsKeyId pulumi.StringPtrInput
-	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-	// days reserved, completely deleted after this date.
+	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
 	RecoveryWindowInDays pulumi.IntPtrInput
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringPtrInput
 	// Status of secret.
 	Status pulumi.StringPtrInput
@@ -113,14 +142,11 @@ type secretArgs struct {
 	Description *string `pulumi:"description"`
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled *bool `pulumi:"isEnabled"`
-	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-	// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
-	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-	// days reserved, completely deleted after this date.
+	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
 	RecoveryWindowInDays *int `pulumi:"recoveryWindowInDays"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName string `pulumi:"secretName"`
 	// Tags of secret.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -132,14 +158,11 @@ type SecretArgs struct {
 	Description pulumi.StringPtrInput
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled pulumi.BoolPtrInput
-	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-	// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
 	KmsKeyId pulumi.StringPtrInput
-	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-	// days reserved, completely deleted after this date.
+	// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
 	RecoveryWindowInDays pulumi.IntPtrInput
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringInput
 	// Tags of secret.
 	Tags pulumi.MapInput
@@ -242,20 +265,17 @@ func (o SecretOutput) IsEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Secret) pulumi.BoolPtrOutput { return v.IsEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-// encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
 func (o SecretOutput) KmsKeyId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Secret) pulumi.StringOutput { return v.KmsKeyId }).(pulumi.StringOutput)
 }
 
-// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-// days reserved, completely deleted after this date.
+// Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
 func (o SecretOutput) RecoveryWindowInDays() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Secret) pulumi.IntPtrOutput { return v.RecoveryWindowInDays }).(pulumi.IntPtrOutput)
 }
 
-// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 func (o SecretOutput) SecretName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Secret) pulumi.StringOutput { return v.SecretName }).(pulumi.StringOutput)
 }

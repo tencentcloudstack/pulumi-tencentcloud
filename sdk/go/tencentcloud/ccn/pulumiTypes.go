@@ -10,389 +10,443 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type BandwidthLimitsLimit struct {
-	BandwidthLimit int    `pulumi:"bandwidthLimit"`
-	DstRegion      string `pulumi:"dstRegion"`
-	Region         string `pulumi:"region"`
+type GetBandwidthLimitsLimit struct {
+	// Limitation of bandwidth.
+	BandwidthLimit int `pulumi:"bandwidthLimit"`
+	// Destination area restriction.
+	DstRegion string `pulumi:"dstRegion"`
+	// Limitation of region.
+	Region string `pulumi:"region"`
 }
 
-// BandwidthLimitsLimitInput is an input type that accepts BandwidthLimitsLimitArgs and BandwidthLimitsLimitOutput values.
-// You can construct a concrete instance of `BandwidthLimitsLimitInput` via:
+// GetBandwidthLimitsLimitInput is an input type that accepts GetBandwidthLimitsLimitArgs and GetBandwidthLimitsLimitOutput values.
+// You can construct a concrete instance of `GetBandwidthLimitsLimitInput` via:
 //
-//          BandwidthLimitsLimitArgs{...}
-type BandwidthLimitsLimitInput interface {
+//          GetBandwidthLimitsLimitArgs{...}
+type GetBandwidthLimitsLimitInput interface {
 	pulumi.Input
 
-	ToBandwidthLimitsLimitOutput() BandwidthLimitsLimitOutput
-	ToBandwidthLimitsLimitOutputWithContext(context.Context) BandwidthLimitsLimitOutput
+	ToGetBandwidthLimitsLimitOutput() GetBandwidthLimitsLimitOutput
+	ToGetBandwidthLimitsLimitOutputWithContext(context.Context) GetBandwidthLimitsLimitOutput
 }
 
-type BandwidthLimitsLimitArgs struct {
-	BandwidthLimit pulumi.IntInput    `pulumi:"bandwidthLimit"`
-	DstRegion      pulumi.StringInput `pulumi:"dstRegion"`
-	Region         pulumi.StringInput `pulumi:"region"`
+type GetBandwidthLimitsLimitArgs struct {
+	// Limitation of bandwidth.
+	BandwidthLimit pulumi.IntInput `pulumi:"bandwidthLimit"`
+	// Destination area restriction.
+	DstRegion pulumi.StringInput `pulumi:"dstRegion"`
+	// Limitation of region.
+	Region pulumi.StringInput `pulumi:"region"`
 }
 
-func (BandwidthLimitsLimitArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BandwidthLimitsLimit)(nil)).Elem()
+func (GetBandwidthLimitsLimitArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBandwidthLimitsLimit)(nil)).Elem()
 }
 
-func (i BandwidthLimitsLimitArgs) ToBandwidthLimitsLimitOutput() BandwidthLimitsLimitOutput {
-	return i.ToBandwidthLimitsLimitOutputWithContext(context.Background())
+func (i GetBandwidthLimitsLimitArgs) ToGetBandwidthLimitsLimitOutput() GetBandwidthLimitsLimitOutput {
+	return i.ToGetBandwidthLimitsLimitOutputWithContext(context.Background())
 }
 
-func (i BandwidthLimitsLimitArgs) ToBandwidthLimitsLimitOutputWithContext(ctx context.Context) BandwidthLimitsLimitOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BandwidthLimitsLimitOutput)
+func (i GetBandwidthLimitsLimitArgs) ToGetBandwidthLimitsLimitOutputWithContext(ctx context.Context) GetBandwidthLimitsLimitOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBandwidthLimitsLimitOutput)
 }
 
-// BandwidthLimitsLimitArrayInput is an input type that accepts BandwidthLimitsLimitArray and BandwidthLimitsLimitArrayOutput values.
-// You can construct a concrete instance of `BandwidthLimitsLimitArrayInput` via:
+// GetBandwidthLimitsLimitArrayInput is an input type that accepts GetBandwidthLimitsLimitArray and GetBandwidthLimitsLimitArrayOutput values.
+// You can construct a concrete instance of `GetBandwidthLimitsLimitArrayInput` via:
 //
-//          BandwidthLimitsLimitArray{ BandwidthLimitsLimitArgs{...} }
-type BandwidthLimitsLimitArrayInput interface {
+//          GetBandwidthLimitsLimitArray{ GetBandwidthLimitsLimitArgs{...} }
+type GetBandwidthLimitsLimitArrayInput interface {
 	pulumi.Input
 
-	ToBandwidthLimitsLimitArrayOutput() BandwidthLimitsLimitArrayOutput
-	ToBandwidthLimitsLimitArrayOutputWithContext(context.Context) BandwidthLimitsLimitArrayOutput
+	ToGetBandwidthLimitsLimitArrayOutput() GetBandwidthLimitsLimitArrayOutput
+	ToGetBandwidthLimitsLimitArrayOutputWithContext(context.Context) GetBandwidthLimitsLimitArrayOutput
 }
 
-type BandwidthLimitsLimitArray []BandwidthLimitsLimitInput
+type GetBandwidthLimitsLimitArray []GetBandwidthLimitsLimitInput
 
-func (BandwidthLimitsLimitArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BandwidthLimitsLimit)(nil)).Elem()
+func (GetBandwidthLimitsLimitArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBandwidthLimitsLimit)(nil)).Elem()
 }
 
-func (i BandwidthLimitsLimitArray) ToBandwidthLimitsLimitArrayOutput() BandwidthLimitsLimitArrayOutput {
-	return i.ToBandwidthLimitsLimitArrayOutputWithContext(context.Background())
+func (i GetBandwidthLimitsLimitArray) ToGetBandwidthLimitsLimitArrayOutput() GetBandwidthLimitsLimitArrayOutput {
+	return i.ToGetBandwidthLimitsLimitArrayOutputWithContext(context.Background())
 }
 
-func (i BandwidthLimitsLimitArray) ToBandwidthLimitsLimitArrayOutputWithContext(ctx context.Context) BandwidthLimitsLimitArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BandwidthLimitsLimitArrayOutput)
+func (i GetBandwidthLimitsLimitArray) ToGetBandwidthLimitsLimitArrayOutputWithContext(ctx context.Context) GetBandwidthLimitsLimitArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBandwidthLimitsLimitArrayOutput)
 }
 
-type BandwidthLimitsLimitOutput struct{ *pulumi.OutputState }
+type GetBandwidthLimitsLimitOutput struct{ *pulumi.OutputState }
 
-func (BandwidthLimitsLimitOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BandwidthLimitsLimit)(nil)).Elem()
+func (GetBandwidthLimitsLimitOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBandwidthLimitsLimit)(nil)).Elem()
 }
 
-func (o BandwidthLimitsLimitOutput) ToBandwidthLimitsLimitOutput() BandwidthLimitsLimitOutput {
+func (o GetBandwidthLimitsLimitOutput) ToGetBandwidthLimitsLimitOutput() GetBandwidthLimitsLimitOutput {
 	return o
 }
 
-func (o BandwidthLimitsLimitOutput) ToBandwidthLimitsLimitOutputWithContext(ctx context.Context) BandwidthLimitsLimitOutput {
+func (o GetBandwidthLimitsLimitOutput) ToGetBandwidthLimitsLimitOutputWithContext(ctx context.Context) GetBandwidthLimitsLimitOutput {
 	return o
 }
 
-func (o BandwidthLimitsLimitOutput) BandwidthLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v BandwidthLimitsLimit) int { return v.BandwidthLimit }).(pulumi.IntOutput)
+// Limitation of bandwidth.
+func (o GetBandwidthLimitsLimitOutput) BandwidthLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBandwidthLimitsLimit) int { return v.BandwidthLimit }).(pulumi.IntOutput)
 }
 
-func (o BandwidthLimitsLimitOutput) DstRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v BandwidthLimitsLimit) string { return v.DstRegion }).(pulumi.StringOutput)
+// Destination area restriction.
+func (o GetBandwidthLimitsLimitOutput) DstRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBandwidthLimitsLimit) string { return v.DstRegion }).(pulumi.StringOutput)
 }
 
-func (o BandwidthLimitsLimitOutput) Region() pulumi.StringOutput {
-	return o.ApplyT(func(v BandwidthLimitsLimit) string { return v.Region }).(pulumi.StringOutput)
+// Limitation of region.
+func (o GetBandwidthLimitsLimitOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBandwidthLimitsLimit) string { return v.Region }).(pulumi.StringOutput)
 }
 
-type BandwidthLimitsLimitArrayOutput struct{ *pulumi.OutputState }
+type GetBandwidthLimitsLimitArrayOutput struct{ *pulumi.OutputState }
 
-func (BandwidthLimitsLimitArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BandwidthLimitsLimit)(nil)).Elem()
+func (GetBandwidthLimitsLimitArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBandwidthLimitsLimit)(nil)).Elem()
 }
 
-func (o BandwidthLimitsLimitArrayOutput) ToBandwidthLimitsLimitArrayOutput() BandwidthLimitsLimitArrayOutput {
+func (o GetBandwidthLimitsLimitArrayOutput) ToGetBandwidthLimitsLimitArrayOutput() GetBandwidthLimitsLimitArrayOutput {
 	return o
 }
 
-func (o BandwidthLimitsLimitArrayOutput) ToBandwidthLimitsLimitArrayOutputWithContext(ctx context.Context) BandwidthLimitsLimitArrayOutput {
+func (o GetBandwidthLimitsLimitArrayOutput) ToGetBandwidthLimitsLimitArrayOutputWithContext(ctx context.Context) GetBandwidthLimitsLimitArrayOutput {
 	return o
 }
 
-func (o BandwidthLimitsLimitArrayOutput) Index(i pulumi.IntInput) BandwidthLimitsLimitOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BandwidthLimitsLimit {
-		return vs[0].([]BandwidthLimitsLimit)[vs[1].(int)]
-	}).(BandwidthLimitsLimitOutput)
+func (o GetBandwidthLimitsLimitArrayOutput) Index(i pulumi.IntInput) GetBandwidthLimitsLimitOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBandwidthLimitsLimit {
+		return vs[0].([]GetBandwidthLimitsLimit)[vs[1].(int)]
+	}).(GetBandwidthLimitsLimitOutput)
 }
 
-type InstancesInstanceList struct {
-	AttachmentLists    []InstancesInstanceListAttachmentList `pulumi:"attachmentLists"`
-	BandwidthLimitType string                                `pulumi:"bandwidthLimitType"`
-	CcnId              string                                `pulumi:"ccnId"`
-	ChargeType         string                                `pulumi:"chargeType"`
-	CreateTime         string                                `pulumi:"createTime"`
-	Description        string                                `pulumi:"description"`
-	Name               string                                `pulumi:"name"`
-	Qos                string                                `pulumi:"qos"`
-	State              string                                `pulumi:"state"`
+type GetInstancesInstanceList struct {
+	// Information list of instance is attached.
+	AttachmentLists []GetInstancesInstanceListAttachmentList `pulumi:"attachmentLists"`
+	// The speed limit type.
+	BandwidthLimitType string `pulumi:"bandwidthLimitType"`
+	// ID of the CCN to be queried.
+	CcnId string `pulumi:"ccnId"`
+	// Billing mode.
+	ChargeType string `pulumi:"chargeType"`
+	// Creation time of resource.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the CCN.
+	Description string `pulumi:"description"`
+	// Name of the CCN to be queried.
+	Name string `pulumi:"name"`
+	// Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.
+	Qos string `pulumi:"qos"`
+	// States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.
+	State string `pulumi:"state"`
 }
 
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
 }
 
-type InstancesInstanceListArgs struct {
-	AttachmentLists    InstancesInstanceListAttachmentListArrayInput `pulumi:"attachmentLists"`
-	BandwidthLimitType pulumi.StringInput                            `pulumi:"bandwidthLimitType"`
-	CcnId              pulumi.StringInput                            `pulumi:"ccnId"`
-	ChargeType         pulumi.StringInput                            `pulumi:"chargeType"`
-	CreateTime         pulumi.StringInput                            `pulumi:"createTime"`
-	Description        pulumi.StringInput                            `pulumi:"description"`
-	Name               pulumi.StringInput                            `pulumi:"name"`
-	Qos                pulumi.StringInput                            `pulumi:"qos"`
-	State              pulumi.StringInput                            `pulumi:"state"`
+type GetInstancesInstanceListArgs struct {
+	// Information list of instance is attached.
+	AttachmentLists GetInstancesInstanceListAttachmentListArrayInput `pulumi:"attachmentLists"`
+	// The speed limit type.
+	BandwidthLimitType pulumi.StringInput `pulumi:"bandwidthLimitType"`
+	// ID of the CCN to be queried.
+	CcnId pulumi.StringInput `pulumi:"ccnId"`
+	// Billing mode.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Creation time of resource.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the CCN.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Name of the CCN to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.
+	Qos pulumi.StringInput `pulumi:"qos"`
+	// States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.
+	State pulumi.StringInput `pulumi:"state"`
 }
 
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
 }
 
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
 }
 
-type InstancesInstanceListArray []InstancesInstanceListInput
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
 
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
 }
 
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) AttachmentLists() InstancesInstanceListAttachmentListArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceList) []InstancesInstanceListAttachmentList { return v.AttachmentLists }).(InstancesInstanceListAttachmentListArrayOutput)
+// Information list of instance is attached.
+func (o GetInstancesInstanceListOutput) AttachmentLists() GetInstancesInstanceListAttachmentListArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListAttachmentList { return v.AttachmentLists }).(GetInstancesInstanceListAttachmentListArrayOutput)
 }
 
-func (o InstancesInstanceListOutput) BandwidthLimitType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.BandwidthLimitType }).(pulumi.StringOutput)
+// The speed limit type.
+func (o GetInstancesInstanceListOutput) BandwidthLimitType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.BandwidthLimitType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CcnId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CcnId }).(pulumi.StringOutput)
+// ID of the CCN to be queried.
+func (o GetInstancesInstanceListOutput) CcnId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CcnId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
+// Billing mode.
+func (o GetInstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of resource.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Description }).(pulumi.StringOutput)
+// Description of the CCN.
+func (o GetInstancesInstanceListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the CCN to be queried.
+func (o GetInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Qos() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Qos }).(pulumi.StringOutput)
+// Service quality of CCN, and the available value include 'PT', 'AU', 'AG'. The default is 'AU'.
+func (o GetInstancesInstanceListOutput) Qos() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Qos }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.State }).(pulumi.StringOutput)
+// States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.
+func (o GetInstancesInstanceListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.State }).(pulumi.StringOutput)
 }
 
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
 }
 
-type InstancesInstanceListAttachmentList struct {
-	AttachedTime   string   `pulumi:"attachedTime"`
-	CidrBlocks     []string `pulumi:"cidrBlocks"`
-	InstanceId     string   `pulumi:"instanceId"`
-	InstanceRegion string   `pulumi:"instanceRegion"`
-	InstanceType   string   `pulumi:"instanceType"`
-	State          string   `pulumi:"state"`
+type GetInstancesInstanceListAttachmentList struct {
+	// Time of attaching.
+	AttachedTime string `pulumi:"attachedTime"`
+	// A network address block of the instance that is attached.
+	CidrBlocks []string `pulumi:"cidrBlocks"`
+	// ID of instance is attached.
+	InstanceId string `pulumi:"instanceId"`
+	// The region that the instance locates at.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.
+	InstanceType string `pulumi:"instanceType"`
+	// States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.
+	State string `pulumi:"state"`
 }
 
-// InstancesInstanceListAttachmentListInput is an input type that accepts InstancesInstanceListAttachmentListArgs and InstancesInstanceListAttachmentListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListAttachmentListInput` via:
+// GetInstancesInstanceListAttachmentListInput is an input type that accepts GetInstancesInstanceListAttachmentListArgs and GetInstancesInstanceListAttachmentListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListAttachmentListInput` via:
 //
-//          InstancesInstanceListAttachmentListArgs{...}
-type InstancesInstanceListAttachmentListInput interface {
+//          GetInstancesInstanceListAttachmentListArgs{...}
+type GetInstancesInstanceListAttachmentListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListAttachmentListOutput() InstancesInstanceListAttachmentListOutput
-	ToInstancesInstanceListAttachmentListOutputWithContext(context.Context) InstancesInstanceListAttachmentListOutput
+	ToGetInstancesInstanceListAttachmentListOutput() GetInstancesInstanceListAttachmentListOutput
+	ToGetInstancesInstanceListAttachmentListOutputWithContext(context.Context) GetInstancesInstanceListAttachmentListOutput
 }
 
-type InstancesInstanceListAttachmentListArgs struct {
-	AttachedTime   pulumi.StringInput      `pulumi:"attachedTime"`
-	CidrBlocks     pulumi.StringArrayInput `pulumi:"cidrBlocks"`
-	InstanceId     pulumi.StringInput      `pulumi:"instanceId"`
-	InstanceRegion pulumi.StringInput      `pulumi:"instanceRegion"`
-	InstanceType   pulumi.StringInput      `pulumi:"instanceType"`
-	State          pulumi.StringInput      `pulumi:"state"`
+type GetInstancesInstanceListAttachmentListArgs struct {
+	// Time of attaching.
+	AttachedTime pulumi.StringInput `pulumi:"attachedTime"`
+	// A network address block of the instance that is attached.
+	CidrBlocks pulumi.StringArrayInput `pulumi:"cidrBlocks"`
+	// ID of instance is attached.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// The region that the instance locates at.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.
+	State pulumi.StringInput `pulumi:"state"`
 }
 
-func (InstancesInstanceListAttachmentListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListAttachmentList)(nil)).Elem()
+func (GetInstancesInstanceListAttachmentListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListAttachmentList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListAttachmentListArgs) ToInstancesInstanceListAttachmentListOutput() InstancesInstanceListAttachmentListOutput {
-	return i.ToInstancesInstanceListAttachmentListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListAttachmentListArgs) ToGetInstancesInstanceListAttachmentListOutput() GetInstancesInstanceListAttachmentListOutput {
+	return i.ToGetInstancesInstanceListAttachmentListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListAttachmentListArgs) ToInstancesInstanceListAttachmentListOutputWithContext(ctx context.Context) InstancesInstanceListAttachmentListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListAttachmentListOutput)
+func (i GetInstancesInstanceListAttachmentListArgs) ToGetInstancesInstanceListAttachmentListOutputWithContext(ctx context.Context) GetInstancesInstanceListAttachmentListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListAttachmentListOutput)
 }
 
-// InstancesInstanceListAttachmentListArrayInput is an input type that accepts InstancesInstanceListAttachmentListArray and InstancesInstanceListAttachmentListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListAttachmentListArrayInput` via:
+// GetInstancesInstanceListAttachmentListArrayInput is an input type that accepts GetInstancesInstanceListAttachmentListArray and GetInstancesInstanceListAttachmentListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListAttachmentListArrayInput` via:
 //
-//          InstancesInstanceListAttachmentListArray{ InstancesInstanceListAttachmentListArgs{...} }
-type InstancesInstanceListAttachmentListArrayInput interface {
+//          GetInstancesInstanceListAttachmentListArray{ GetInstancesInstanceListAttachmentListArgs{...} }
+type GetInstancesInstanceListAttachmentListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListAttachmentListArrayOutput() InstancesInstanceListAttachmentListArrayOutput
-	ToInstancesInstanceListAttachmentListArrayOutputWithContext(context.Context) InstancesInstanceListAttachmentListArrayOutput
+	ToGetInstancesInstanceListAttachmentListArrayOutput() GetInstancesInstanceListAttachmentListArrayOutput
+	ToGetInstancesInstanceListAttachmentListArrayOutputWithContext(context.Context) GetInstancesInstanceListAttachmentListArrayOutput
 }
 
-type InstancesInstanceListAttachmentListArray []InstancesInstanceListAttachmentListInput
+type GetInstancesInstanceListAttachmentListArray []GetInstancesInstanceListAttachmentListInput
 
-func (InstancesInstanceListAttachmentListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListAttachmentList)(nil)).Elem()
+func (GetInstancesInstanceListAttachmentListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListAttachmentList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListAttachmentListArray) ToInstancesInstanceListAttachmentListArrayOutput() InstancesInstanceListAttachmentListArrayOutput {
-	return i.ToInstancesInstanceListAttachmentListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListAttachmentListArray) ToGetInstancesInstanceListAttachmentListArrayOutput() GetInstancesInstanceListAttachmentListArrayOutput {
+	return i.ToGetInstancesInstanceListAttachmentListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListAttachmentListArray) ToInstancesInstanceListAttachmentListArrayOutputWithContext(ctx context.Context) InstancesInstanceListAttachmentListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListAttachmentListArrayOutput)
+func (i GetInstancesInstanceListAttachmentListArray) ToGetInstancesInstanceListAttachmentListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListAttachmentListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListAttachmentListArrayOutput)
 }
 
-type InstancesInstanceListAttachmentListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListAttachmentListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListAttachmentListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListAttachmentList)(nil)).Elem()
+func (GetInstancesInstanceListAttachmentListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListAttachmentList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListAttachmentListOutput) ToInstancesInstanceListAttachmentListOutput() InstancesInstanceListAttachmentListOutput {
+func (o GetInstancesInstanceListAttachmentListOutput) ToGetInstancesInstanceListAttachmentListOutput() GetInstancesInstanceListAttachmentListOutput {
 	return o
 }
 
-func (o InstancesInstanceListAttachmentListOutput) ToInstancesInstanceListAttachmentListOutputWithContext(ctx context.Context) InstancesInstanceListAttachmentListOutput {
+func (o GetInstancesInstanceListAttachmentListOutput) ToGetInstancesInstanceListAttachmentListOutputWithContext(ctx context.Context) GetInstancesInstanceListAttachmentListOutput {
 	return o
 }
 
-func (o InstancesInstanceListAttachmentListOutput) AttachedTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListAttachmentList) string { return v.AttachedTime }).(pulumi.StringOutput)
+// Time of attaching.
+func (o GetInstancesInstanceListAttachmentListOutput) AttachedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListAttachmentList) string { return v.AttachedTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListAttachmentListOutput) CidrBlocks() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceListAttachmentList) []string { return v.CidrBlocks }).(pulumi.StringArrayOutput)
+// A network address block of the instance that is attached.
+func (o GetInstancesInstanceListAttachmentListOutput) CidrBlocks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListAttachmentList) []string { return v.CidrBlocks }).(pulumi.StringArrayOutput)
 }
 
-func (o InstancesInstanceListAttachmentListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListAttachmentList) string { return v.InstanceId }).(pulumi.StringOutput)
+// ID of instance is attached.
+func (o GetInstancesInstanceListAttachmentListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListAttachmentList) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListAttachmentListOutput) InstanceRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListAttachmentList) string { return v.InstanceRegion }).(pulumi.StringOutput)
+// The region that the instance locates at.
+func (o GetInstancesInstanceListAttachmentListOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListAttachmentList) string { return v.InstanceRegion }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListAttachmentListOutput) InstanceType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListAttachmentList) string { return v.InstanceType }).(pulumi.StringOutput)
+// Type of attached instance network, and available values include VPC, DIRECTCONNECT, BMVPC and VPNGW.
+func (o GetInstancesInstanceListAttachmentListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListAttachmentList) string { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListAttachmentListOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListAttachmentList) string { return v.State }).(pulumi.StringOutput)
+// States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.
+func (o GetInstancesInstanceListAttachmentListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListAttachmentList) string { return v.State }).(pulumi.StringOutput)
 }
 
-type InstancesInstanceListAttachmentListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListAttachmentListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListAttachmentListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListAttachmentList)(nil)).Elem()
+func (GetInstancesInstanceListAttachmentListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListAttachmentList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListAttachmentListArrayOutput) ToInstancesInstanceListAttachmentListArrayOutput() InstancesInstanceListAttachmentListArrayOutput {
+func (o GetInstancesInstanceListAttachmentListArrayOutput) ToGetInstancesInstanceListAttachmentListArrayOutput() GetInstancesInstanceListAttachmentListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListAttachmentListArrayOutput) ToInstancesInstanceListAttachmentListArrayOutputWithContext(ctx context.Context) InstancesInstanceListAttachmentListArrayOutput {
+func (o GetInstancesInstanceListAttachmentListArrayOutput) ToGetInstancesInstanceListAttachmentListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListAttachmentListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListAttachmentListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListAttachmentListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceListAttachmentList {
-		return vs[0].([]InstancesInstanceListAttachmentList)[vs[1].(int)]
-	}).(InstancesInstanceListAttachmentListOutput)
+func (o GetInstancesInstanceListAttachmentListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListAttachmentListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListAttachmentList {
+		return vs[0].([]GetInstancesInstanceListAttachmentList)[vs[1].(int)]
+	}).(GetInstancesInstanceListAttachmentListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*BandwidthLimitsLimitInput)(nil)).Elem(), BandwidthLimitsLimitArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BandwidthLimitsLimitArrayInput)(nil)).Elem(), BandwidthLimitsLimitArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListAttachmentListInput)(nil)).Elem(), InstancesInstanceListAttachmentListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListAttachmentListArrayInput)(nil)).Elem(), InstancesInstanceListAttachmentListArray{})
-	pulumi.RegisterOutputType(BandwidthLimitsLimitOutput{})
-	pulumi.RegisterOutputType(BandwidthLimitsLimitArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListAttachmentListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListAttachmentListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthLimitsLimitInput)(nil)).Elem(), GetBandwidthLimitsLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthLimitsLimitArrayInput)(nil)).Elem(), GetBandwidthLimitsLimitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListAttachmentListInput)(nil)).Elem(), GetInstancesInstanceListAttachmentListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListAttachmentListArrayInput)(nil)).Elem(), GetInstancesInstanceListAttachmentListArray{})
+	pulumi.RegisterOutputType(GetBandwidthLimitsLimitOutput{})
+	pulumi.RegisterOutputType(GetBandwidthLimitsLimitArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListAttachmentListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListAttachmentListArrayOutput{})
 }

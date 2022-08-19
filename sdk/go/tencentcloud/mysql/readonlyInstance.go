@@ -11,6 +11,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a mysql instance resource to create read-only database instances.
+//
+// > **NOTE:** Read-only instances can be purchased only for two-node or three-node source instances on MySQL 5.6 or above with the InnoDB engine at a specification of 1 GB memory and 50 GB disk capacity or above.
+// **NOTE:** The terminate operation of read only mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewReadonlyInstance(ctx, "default", &Mysql.ReadonlyInstanceArgs{
+// 			InstanceName:     pulumi.String("myTestMysql"),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			MasterInstanceId: pulumi.String("cdb-dnqksd9f"),
+// 			MemSize:          pulumi.Int(128000),
+// 			SecurityGroups: pulumi.StringArray{
+// 				pulumi.String("sg-ot8eclwz"),
+// 			},
+// 			SubnetId: pulumi.String("subnet-9uivyb1g"),
+// 			Tags: pulumi.AnyMap{
+// 				"name": pulumi.Any("test"),
+// 			},
+// 			VolumeSize: pulumi.Int(255),
+// 			VpcId:      pulumi.String("vpc-12mt3l31"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
 
@@ -24,9 +63,7 @@ type ReadonlyInstance struct {
 	DeviceType pulumi.StringPtrOutput `pulumi:"deviceType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrOutput `pulumi:"fastUpgrade"`
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// The name of a mysql instance.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
@@ -44,11 +81,11 @@ type ReadonlyInstance struct {
 	MemSize pulumi.IntOutput `pulumi:"memSize"`
 	// Specify parameter template id.
 	ParamTemplateId pulumi.IntPtrOutput `pulumi:"paramTemplateId"`
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType pulumi.IntPtrOutput `pulumi:"payType"`
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
@@ -58,7 +95,7 @@ type ReadonlyInstance struct {
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntOutput `pulumi:"status"`
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 	// Instance tags.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -123,9 +160,7 @@ type readonlyInstanceState struct {
 	DeviceType *string `pulumi:"deviceType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// The name of a mysql instance.
 	InstanceName *string `pulumi:"instanceName"`
@@ -143,11 +178,11 @@ type readonlyInstanceState struct {
 	MemSize *int `pulumi:"memSize"`
 	// Specify parameter template id.
 	ParamTemplateId *int `pulumi:"paramTemplateId"`
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType *int `pulumi:"payType"`
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period *int `pulumi:"period"`
@@ -157,7 +192,7 @@ type readonlyInstanceState struct {
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status *int `pulumi:"status"`
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -182,9 +217,7 @@ type ReadonlyInstanceState struct {
 	DeviceType pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete pulumi.BoolPtrInput
 	// The name of a mysql instance.
 	InstanceName pulumi.StringPtrInput
@@ -202,11 +235,11 @@ type ReadonlyInstanceState struct {
 	MemSize pulumi.IntPtrInput
 	// Specify parameter template id.
 	ParamTemplateId pulumi.IntPtrInput
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType pulumi.IntPtrInput
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period pulumi.IntPtrInput
@@ -216,7 +249,7 @@ type ReadonlyInstanceState struct {
 	SecurityGroups pulumi.StringArrayInput
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntPtrInput
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
@@ -245,9 +278,7 @@ type readonlyInstanceArgs struct {
 	DeviceType *string `pulumi:"deviceType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// The name of a mysql instance.
 	InstanceName string `pulumi:"instanceName"`
@@ -261,11 +292,11 @@ type readonlyInstanceArgs struct {
 	MemSize int `pulumi:"memSize"`
 	// Specify parameter template id.
 	ParamTemplateId *int `pulumi:"paramTemplateId"`
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType *int `pulumi:"payType"`
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period *int `pulumi:"period"`
@@ -273,7 +304,7 @@ type readonlyInstanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Security groups to use.
 	SecurityGroups []string `pulumi:"securityGroups"`
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -297,9 +328,7 @@ type ReadonlyInstanceArgs struct {
 	DeviceType pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
-	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-	// para of the readonly mysql instance will not take effect.
+	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete pulumi.BoolPtrInput
 	// The name of a mysql instance.
 	InstanceName pulumi.StringInput
@@ -313,11 +342,11 @@ type ReadonlyInstanceArgs struct {
 	MemSize pulumi.IntInput
 	// Specify parameter template id.
 	ParamTemplateId pulumi.IntPtrInput
-	// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 	PayType pulumi.IntPtrInput
-	// Period of instance. NOTES: Only supported prepaid instance.
+	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
 	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 	Period pulumi.IntPtrInput
@@ -325,7 +354,7 @@ type ReadonlyInstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayInput
-	// Private network ID. If `vpc_id` is set, this value is required.
+	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
@@ -449,9 +478,7 @@ func (o ReadonlyInstanceOutput) FastUpgrade() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.FastUpgrade }).(pulumi.IntPtrOutput)
 }
 
-// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-// para of the readonly mysql instance will not take effect.
+// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 func (o ReadonlyInstanceOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
@@ -496,14 +523,14 @@ func (o ReadonlyInstanceOutput) ParamTemplateId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.ParamTemplateId }).(pulumi.IntPtrOutput)
 }
 
-// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 //
 // Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
 func (o ReadonlyInstanceOutput) PayType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.PayType }).(pulumi.IntPtrOutput)
 }
 
-// Period of instance. NOTES: Only supported prepaid instance.
+// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 //
 // Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
 func (o ReadonlyInstanceOutput) Period() pulumi.IntPtrOutput {
@@ -525,7 +552,7 @@ func (o ReadonlyInstanceOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }
 
-// Private network ID. If `vpc_id` is set, this value is required.
+// Private network ID. If `vpcId` is set, this value is required.
 func (o ReadonlyInstanceOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
 }

@@ -10,6 +10,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a VOD snapshot by time offset template.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vod.NewSnapshotByTimeOffsetTemplate(ctx, "foo", &Vod.SnapshotByTimeOffsetTemplateArgs{
+// 			Comment:            pulumi.String("test"),
+// 			FillType:           pulumi.String("white"),
+// 			Format:             pulumi.String("png"),
+// 			Height:             pulumi.Int(128),
+// 			ResolutionAdaptive: pulumi.Bool(false),
+// 			Width:              pulumi.Int(130),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VOD snapshot by time offset template can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate foo 46906
+// ```
 type SnapshotByTimeOffsetTemplate struct {
 	pulumi.CustomResourceState
 
@@ -17,36 +54,21 @@ type SnapshotByTimeOffsetTemplate struct {
 	Comment pulumi.StringPtrOutput `pulumi:"comment"`
 	// Creation time of template in ISO date format.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-	// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-	// aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This
-	// option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color
-	// blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills
-	// the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of
-	// the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
+	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
 	FillType pulumi.StringPtrOutput `pulumi:"fillType"`
 	// Image format. Valid values: `jpg`, `png`. Default value: `jpg`.
 	Format pulumi.StringPtrOutput `pulumi:"format"`
-	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-	// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-	// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-	// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height pulumi.IntPtrOutput `pulumi:"height"`
 	// Name of a time point screen capturing template. Length limit: 64 characters.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-	// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-	// `height` the height. Default value: `true`.
+	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive pulumi.BoolPtrOutput `pulumi:"resolutionAdaptive"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrOutput `pulumi:"subAppId"`
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
-	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-	// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-	// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-	// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width pulumi.IntPtrOutput `pulumi:"width"`
 }
 
@@ -83,36 +105,21 @@ type snapshotByTimeOffsetTemplateState struct {
 	Comment *string `pulumi:"comment"`
 	// Creation time of template in ISO date format.
 	CreateTime *string `pulumi:"createTime"`
-	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-	// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-	// aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This
-	// option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color
-	// blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills
-	// the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of
-	// the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
+	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
 	FillType *string `pulumi:"fillType"`
 	// Image format. Valid values: `jpg`, `png`. Default value: `jpg`.
 	Format *string `pulumi:"format"`
-	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-	// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-	// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-	// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height *int `pulumi:"height"`
 	// Name of a time point screen capturing template. Length limit: 64 characters.
 	Name *string `pulumi:"name"`
-	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-	// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-	// `height` the height. Default value: `true`.
+	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive *bool `pulumi:"resolutionAdaptive"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *int `pulumi:"subAppId"`
 	// Last modified time of template in ISO date format.
 	UpdateTime *string `pulumi:"updateTime"`
-	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-	// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-	// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-	// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width *int `pulumi:"width"`
 }
 
@@ -121,36 +128,21 @@ type SnapshotByTimeOffsetTemplateState struct {
 	Comment pulumi.StringPtrInput
 	// Creation time of template in ISO date format.
 	CreateTime pulumi.StringPtrInput
-	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-	// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-	// aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This
-	// option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color
-	// blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills
-	// the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of
-	// the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
+	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
 	FillType pulumi.StringPtrInput
 	// Image format. Valid values: `jpg`, `png`. Default value: `jpg`.
 	Format pulumi.StringPtrInput
-	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-	// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-	// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-	// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height pulumi.IntPtrInput
 	// Name of a time point screen capturing template. Length limit: 64 characters.
 	Name pulumi.StringPtrInput
-	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-	// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-	// `height` the height. Default value: `true`.
+	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive pulumi.BoolPtrInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrInput
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringPtrInput
-	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-	// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-	// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-	// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width pulumi.IntPtrInput
 }
 
@@ -161,34 +153,19 @@ func (SnapshotByTimeOffsetTemplateState) ElementType() reflect.Type {
 type snapshotByTimeOffsetTemplateArgs struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `pulumi:"comment"`
-	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-	// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-	// aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This
-	// option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color
-	// blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills
-	// the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of
-	// the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
+	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
 	FillType *string `pulumi:"fillType"`
 	// Image format. Valid values: `jpg`, `png`. Default value: `jpg`.
 	Format *string `pulumi:"format"`
-	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-	// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-	// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-	// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height *int `pulumi:"height"`
 	// Name of a time point screen capturing template. Length limit: 64 characters.
 	Name *string `pulumi:"name"`
-	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-	// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-	// `height` the height. Default value: `true`.
+	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive *bool `pulumi:"resolutionAdaptive"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *int `pulumi:"subAppId"`
-	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-	// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-	// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-	// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width *int `pulumi:"width"`
 }
 
@@ -196,34 +173,19 @@ type snapshotByTimeOffsetTemplateArgs struct {
 type SnapshotByTimeOffsetTemplateArgs struct {
 	// Template description. Length limit: 256 characters.
 	Comment pulumi.StringPtrInput
-	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-	// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-	// aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This
-	// option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color
-	// blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills
-	// the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of
-	// the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
+	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
 	FillType pulumi.StringPtrInput
 	// Image format. Valid values: `jpg`, `png`. Default value: `jpg`.
 	Format pulumi.StringPtrInput
-	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-	// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-	// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-	// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height pulumi.IntPtrInput
 	// Name of a time point screen capturing template. Length limit: 64 characters.
 	Name pulumi.StringPtrInput
-	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-	// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-	// `height` the height. Default value: `true`.
+	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive pulumi.BoolPtrInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrInput
-	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-	// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-	// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-	// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width pulumi.IntPtrInput
 }
 
@@ -324,13 +286,7 @@ func (o SnapshotByTimeOffsetTemplateOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-// following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-// aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This
-// option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color
-// blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills
-// the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of
-// the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
+// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot `shorter` or `longer`; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. `white`: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. `gauss`: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur. Default value: `black`.
 func (o SnapshotByTimeOffsetTemplateOutput) FillType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.StringPtrOutput { return v.FillType }).(pulumi.StringPtrOutput)
 }
@@ -340,10 +296,7 @@ func (o SnapshotByTimeOffsetTemplateOutput) Format() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.StringPtrOutput { return v.Format }).(pulumi.StringPtrOutput)
 }
 
-// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-// and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-// not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-// proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 func (o SnapshotByTimeOffsetTemplateOutput) Height() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.IntPtrOutput { return v.Height }).(pulumi.IntPtrOutput)
 }
@@ -353,15 +306,12 @@ func (o SnapshotByTimeOffsetTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-// video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-// `height` the height. Default value: `true`.
+// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 func (o SnapshotByTimeOffsetTemplateOutput) ResolutionAdaptive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.BoolPtrOutput { return v.ResolutionAdaptive }).(pulumi.BoolPtrOutput)
 }
 
-// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-// field; otherwise, leave it empty.
+// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 func (o SnapshotByTimeOffsetTemplateOutput) SubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.IntPtrOutput { return v.SubAppId }).(pulumi.IntPtrOutput)
 }
@@ -371,10 +321,7 @@ func (o SnapshotByTimeOffsetTemplateOutput) UpdateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.StringOutput { return v.UpdateTime }).(pulumi.StringOutput)
 }
 
-// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-// `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-// `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-// scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 func (o SnapshotByTimeOffsetTemplateOutput) Width() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.IntPtrOutput { return v.Width }).(pulumi.IntPtrOutput)
 }

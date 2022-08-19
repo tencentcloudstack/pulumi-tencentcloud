@@ -9,11 +9,11 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'InstancesInstanceListResult',
+    'GetInstancesInstanceListResult',
 ]
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  bandwidth: int,
                  bgp_asn: int,
@@ -32,6 +32,25 @@ class InstancesInstanceListResult(dict):
                  tencent_address: str,
                  vlan: int,
                  vpc_id: str):
+        """
+        :param int bandwidth: Bandwidth of the DC.
+        :param int bgp_asn: BGP ASN of the user.
+        :param str bgp_auth_key: BGP key of the user.
+        :param str create_time: Creation time of resource.
+        :param str customer_address: Interconnect IP of the DC within client.
+        :param str dc_id: ID of the DC.
+        :param str dcg_id: ID of the DC Gateway. Currently only new in the console.
+        :param str dcx_id: ID of the dedicated tunnels to be queried.
+        :param str name: Name of the dedicated tunnels to be queried.
+        :param str network_region: The region of the dedicated tunnel.
+        :param str network_type: Type of the network. Valid values: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
+        :param Sequence[str] route_filter_prefixes: Static route, the network address of the user IDC.
+        :param str route_type: Type of the route. Valid values: `BGP` and `STATIC`. The default value is `BGP`.
+        :param str state: State of the dedicated tunnels. Valid values: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
+        :param str tencent_address: Interconnect IP of the DC within Tencent.
+        :param int vlan: Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. `0` means that only one tunnel can be created for the physical connect.
+        :param str vpc_id: ID of the VPC or BMVPC.
+        """
         pulumi.set(__self__, "bandwidth", bandwidth)
         pulumi.set(__self__, "bgp_asn", bgp_asn)
         pulumi.set(__self__, "bgp_auth_key", bgp_auth_key)
@@ -53,86 +72,137 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter
     def bandwidth(self) -> int:
+        """
+        Bandwidth of the DC.
+        """
         return pulumi.get(self, "bandwidth")
 
     @property
     @pulumi.getter(name="bgpAsn")
     def bgp_asn(self) -> int:
+        """
+        BGP ASN of the user.
+        """
         return pulumi.get(self, "bgp_asn")
 
     @property
     @pulumi.getter(name="bgpAuthKey")
     def bgp_auth_key(self) -> str:
+        """
+        BGP key of the user.
+        """
         return pulumi.get(self, "bgp_auth_key")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of resource.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="customerAddress")
     def customer_address(self) -> str:
+        """
+        Interconnect IP of the DC within client.
+        """
         return pulumi.get(self, "customer_address")
 
     @property
     @pulumi.getter(name="dcId")
     def dc_id(self) -> str:
+        """
+        ID of the DC.
+        """
         return pulumi.get(self, "dc_id")
 
     @property
     @pulumi.getter(name="dcgId")
     def dcg_id(self) -> str:
+        """
+        ID of the DC Gateway. Currently only new in the console.
+        """
         return pulumi.get(self, "dcg_id")
 
     @property
     @pulumi.getter(name="dcxId")
     def dcx_id(self) -> str:
+        """
+        ID of the dedicated tunnels to be queried.
+        """
         return pulumi.get(self, "dcx_id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the dedicated tunnels to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="networkRegion")
     def network_region(self) -> str:
+        """
+        The region of the dedicated tunnel.
+        """
         return pulumi.get(self, "network_region")
 
     @property
     @pulumi.getter(name="networkType")
     def network_type(self) -> str:
+        """
+        Type of the network. Valid values: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
+        """
         return pulumi.get(self, "network_type")
 
     @property
     @pulumi.getter(name="routeFilterPrefixes")
     def route_filter_prefixes(self) -> Sequence[str]:
+        """
+        Static route, the network address of the user IDC.
+        """
         return pulumi.get(self, "route_filter_prefixes")
 
     @property
     @pulumi.getter(name="routeType")
     def route_type(self) -> str:
+        """
+        Type of the route. Valid values: `BGP` and `STATIC`. The default value is `BGP`.
+        """
         return pulumi.get(self, "route_type")
 
     @property
     @pulumi.getter
     def state(self) -> str:
+        """
+        State of the dedicated tunnels. Valid values: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
+        """
         return pulumi.get(self, "state")
 
     @property
     @pulumi.getter(name="tencentAddress")
     def tencent_address(self) -> str:
+        """
+        Interconnect IP of the DC within Tencent.
+        """
         return pulumi.get(self, "tencent_address")
 
     @property
     @pulumi.getter
     def vlan(self) -> int:
+        """
+        Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. `0` means that only one tunnel can be created for the physical connect.
+        """
         return pulumi.get(self, "vlan")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC or BMVPC.
+        """
         return pulumi.get(self, "vpc_id")
 
 

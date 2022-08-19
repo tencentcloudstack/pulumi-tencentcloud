@@ -260,7 +260,32 @@ class Record(pulumi.CustomResource):
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Record resource with the given unique name, props, and options.
+        Provide a resource to create a Private Dns Record.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.private_dns.Record("foo",
+            mx=0,
+            record_type="A",
+            record_value="192.168.1.2",
+            sub_domain="www",
+            ttl=300,
+            weight=1,
+            zone_id="zone-rqndjnki")
+        ```
+
+        ## Import
+
+        Private Dns Record can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] mx: MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
@@ -278,7 +303,32 @@ class Record(pulumi.CustomResource):
                  args: RecordArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Record resource with the given unique name, props, and options.
+        Provide a resource to create a Private Dns Record.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.private_dns.Record("foo",
+            mx=0,
+            record_type="A",
+            record_value="192.168.1.2",
+            sub_domain="www",
+            ttl=300,
+            weight=1,
+            zone_id="zone-rqndjnki")
+        ```
+
+        ## Import
+
+        Private Dns Record can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param RecordArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

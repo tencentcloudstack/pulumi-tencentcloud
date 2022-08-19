@@ -9,6 +9,52 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM policy.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.Policy("foo", new Tencentcloud.Cam.PolicyArgs
+    ///         {
+    ///             Description = "test",
+    ///             Document = @"{
+    ///   ""version"": ""2.0"",
+    ///   ""statement"": [
+    ///     {
+    ///       ""action"": [
+    ///         ""name/sts:AssumeRole""
+    ///       ],
+    ///       ""effect"": ""allow"",
+    ///       ""resource"": [
+    ///         ""*""
+    ///       ]
+    ///     }
+    ///   ]
+    /// }
+    /// 
+    /// ",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM policy can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/policy:Policy foo 26655801
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/policy:Policy")]
     public partial class Policy : Pulumi.CustomResource
     {
@@ -40,7 +86,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        /// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         /// </summary>
         [Output("type")]
         public Output<int> Type { get; private set; } = null!;
@@ -153,7 +199,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        /// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         /// </summary>
         [Input("type")]
         public Input<int>? Type { get; set; }

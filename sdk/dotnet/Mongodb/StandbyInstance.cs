@@ -9,13 +9,73 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Mongodb
 {
+    /// <summary>
+    /// Provide a resource to create a Mongodb standby instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var shanghai = new Tencentcloud.Provider("shanghai", new Tencentcloud.ProviderArgs
+    ///         {
+    ///             Region = "ap-shanghai",
+    ///         });
+    ///         var mongodbInstance = new Tencentcloud.Mongodb.Instance("mongodbInstance", new Tencentcloud.Mongodb.InstanceArgs
+    ///         {
+    ///             InstanceName = "tf-mongodb-test",
+    ///             Memory = 4,
+    ///             Volume = 100,
+    ///             EngineVersion = "MONGO_40_WT",
+    ///             MachineType = "HIO10G",
+    ///             AvailableZone = @var.Availability_zone,
+    ///             ProjectId = 0,
+    ///             Password = "test1234",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///         var mongodbStandbyInstance = new Tencentcloud.Mongodb.StandbyInstance("mongodbStandbyInstance", new Tencentcloud.Mongodb.StandbyInstanceArgs
+    ///         {
+    ///             InstanceName = "tf-mongodb-standby-test",
+    ///             Memory = 4,
+    ///             Volume = 100,
+    ///             AvailableZone = "ap-shanghai-2",
+    ///             ProjectId = 0,
+    ///             FatherInstanceId = mongodbInstance.Id,
+    ///             FatherInstanceRegion = "ap-guangzhou",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         }, new CustomResourceOptions
+    ///         {
+    ///             Provider = tencentcloud.Shanghai,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Mongodb instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/standbyInstance:StandbyInstance")]
     public partial class StandbyInstance : Pulumi.CustomResource
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        /// `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        /// `1` for creation.
+        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
         [Output("autoRenewFlag")]
         public Output<int?> AutoRenewFlag { get; private set; } = null!;
@@ -27,9 +87,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<string> AvailableZone { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        /// Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        /// delete old instances and create new one with new charge type.
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -77,8 +135,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<int> Memory { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        /// 36. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Output("prepaidPeriod")]
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
@@ -90,15 +147,13 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        /// supported.
+        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         /// </summary>
         [Output("securityGroups")]
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        /// processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         /// </summary>
         [Output("status")]
         public Output<int> Status { get; private set; } = null!;
@@ -186,9 +241,7 @@ namespace Pulumi.Tencentcloud.Mongodb
     public sealed class StandbyInstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        /// `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        /// `1` for creation.
+        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -200,9 +253,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string> AvailableZone { get; set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        /// Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        /// delete old instances and create new one with new charge type.
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -232,8 +283,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<int> Memory { get; set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        /// 36. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -248,8 +298,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        /// supported.
+        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         /// </summary>
         public InputList<string> SecurityGroups
         {
@@ -295,9 +344,7 @@ namespace Pulumi.Tencentcloud.Mongodb
     public sealed class StandbyInstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        /// `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        /// `1` for creation.
+        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -309,9 +356,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string>? AvailableZone { get; set; }
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        /// Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        /// delete old instances and create new one with new charge type.
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -359,8 +404,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<int>? Memory { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        /// 36. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -375,8 +419,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        /// supported.
+        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         /// </summary>
         public InputList<string> SecurityGroups
         {
@@ -385,8 +428,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         }
 
         /// <summary>
-        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        /// processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         /// </summary>
         [Input("status")]
         public Input<int>? Status { get; set; }

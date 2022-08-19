@@ -11,13 +11,20 @@ import (
 )
 
 type InstanceHostResource struct {
-	CpuAvailableNum     *int     `pulumi:"cpuAvailableNum"`
-	CpuTotalNum         *int     `pulumi:"cpuTotalNum"`
-	DiskAvailableSize   *int     `pulumi:"diskAvailableSize"`
-	DiskTotalSize       *int     `pulumi:"diskTotalSize"`
-	DiskType            *string  `pulumi:"diskType"`
+	// The number of available CPU cores of the instance.
+	CpuAvailableNum *int `pulumi:"cpuAvailableNum"`
+	// The number of total CPU cores of the instance.
+	CpuTotalNum *int `pulumi:"cpuTotalNum"`
+	// Instance disk available capacity, unit in GB.
+	DiskAvailableSize *int `pulumi:"diskAvailableSize"`
+	// Instance disk total capacity, unit in GB.
+	DiskTotalSize *int `pulumi:"diskTotalSize"`
+	// Type of the disk.
+	DiskType *string `pulumi:"diskType"`
+	// Instance memory available capacity, unit in GB.
 	MemoryAvailableSize *float64 `pulumi:"memoryAvailableSize"`
-	MemoryTotalSize     *float64 `pulumi:"memoryTotalSize"`
+	// Instance memory total capacity, unit in GB.
+	MemoryTotalSize *float64 `pulumi:"memoryTotalSize"`
 }
 
 // InstanceHostResourceInput is an input type that accepts InstanceHostResourceArgs and InstanceHostResourceOutput values.
@@ -32,13 +39,20 @@ type InstanceHostResourceInput interface {
 }
 
 type InstanceHostResourceArgs struct {
-	CpuAvailableNum     pulumi.IntPtrInput     `pulumi:"cpuAvailableNum"`
-	CpuTotalNum         pulumi.IntPtrInput     `pulumi:"cpuTotalNum"`
-	DiskAvailableSize   pulumi.IntPtrInput     `pulumi:"diskAvailableSize"`
-	DiskTotalSize       pulumi.IntPtrInput     `pulumi:"diskTotalSize"`
-	DiskType            pulumi.StringPtrInput  `pulumi:"diskType"`
+	// The number of available CPU cores of the instance.
+	CpuAvailableNum pulumi.IntPtrInput `pulumi:"cpuAvailableNum"`
+	// The number of total CPU cores of the instance.
+	CpuTotalNum pulumi.IntPtrInput `pulumi:"cpuTotalNum"`
+	// Instance disk available capacity, unit in GB.
+	DiskAvailableSize pulumi.IntPtrInput `pulumi:"diskAvailableSize"`
+	// Instance disk total capacity, unit in GB.
+	DiskTotalSize pulumi.IntPtrInput `pulumi:"diskTotalSize"`
+	// Type of the disk.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Instance memory available capacity, unit in GB.
 	MemoryAvailableSize pulumi.Float64PtrInput `pulumi:"memoryAvailableSize"`
-	MemoryTotalSize     pulumi.Float64PtrInput `pulumi:"memoryTotalSize"`
+	// Instance memory total capacity, unit in GB.
+	MemoryTotalSize pulumi.Float64PtrInput `pulumi:"memoryTotalSize"`
 }
 
 func (InstanceHostResourceArgs) ElementType() reflect.Type {
@@ -92,30 +106,37 @@ func (o InstanceHostResourceOutput) ToInstanceHostResourceOutputWithContext(ctx 
 	return o
 }
 
+// The number of available CPU cores of the instance.
 func (o InstanceHostResourceOutput) CpuAvailableNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceHostResource) *int { return v.CpuAvailableNum }).(pulumi.IntPtrOutput)
 }
 
+// The number of total CPU cores of the instance.
 func (o InstanceHostResourceOutput) CpuTotalNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceHostResource) *int { return v.CpuTotalNum }).(pulumi.IntPtrOutput)
 }
 
+// Instance disk available capacity, unit in GB.
 func (o InstanceHostResourceOutput) DiskAvailableSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceHostResource) *int { return v.DiskAvailableSize }).(pulumi.IntPtrOutput)
 }
 
+// Instance disk total capacity, unit in GB.
 func (o InstanceHostResourceOutput) DiskTotalSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceHostResource) *int { return v.DiskTotalSize }).(pulumi.IntPtrOutput)
 }
 
+// Type of the disk.
 func (o InstanceHostResourceOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceHostResource) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Instance memory available capacity, unit in GB.
 func (o InstanceHostResourceOutput) MemoryAvailableSize() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v InstanceHostResource) *float64 { return v.MemoryAvailableSize }).(pulumi.Float64PtrOutput)
 }
 
+// Instance memory total capacity, unit in GB.
 func (o InstanceHostResourceOutput) MemoryTotalSize() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v InstanceHostResource) *float64 { return v.MemoryTotalSize }).(pulumi.Float64PtrOutput)
 }
@@ -140,313 +161,373 @@ func (o InstanceHostResourceArrayOutput) Index(i pulumi.IntInput) InstanceHostRe
 	}).(InstanceHostResourceOutput)
 }
 
-type InstancesCdhInstanceList struct {
-	AvailabilityZone string                                 `pulumi:"availabilityZone"`
-	CageId           string                                 `pulumi:"cageId"`
-	ChargeType       string                                 `pulumi:"chargeType"`
-	CreateTime       string                                 `pulumi:"createTime"`
-	CvmInstanceIds   []string                               `pulumi:"cvmInstanceIds"`
-	ExpiredTime      string                                 `pulumi:"expiredTime"`
-	HostId           string                                 `pulumi:"hostId"`
-	HostName         string                                 `pulumi:"hostName"`
-	HostResources    []InstancesCdhInstanceListHostResource `pulumi:"hostResources"`
-	HostState        string                                 `pulumi:"hostState"`
-	HostType         string                                 `pulumi:"hostType"`
-	PrepaidRenewFlag string                                 `pulumi:"prepaidRenewFlag"`
-	ProjectId        int                                    `pulumi:"projectId"`
+type GetInstancesCdhInstanceList struct {
+	// The available zone that the CDH instance locates at.
+	AvailabilityZone string `pulumi:"availabilityZone"`
+	// Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.
+	CageId string `pulumi:"cageId"`
+	// The charge type of the CDH instance.
+	ChargeType string `pulumi:"chargeType"`
+	// Creation time of the CDH instance.
+	CreateTime string `pulumi:"createTime"`
+	// Id of CVM instances that have been created on the CDH instance.
+	CvmInstanceIds []string `pulumi:"cvmInstanceIds"`
+	// Expired time of the CDH instance.
+	ExpiredTime string `pulumi:"expiredTime"`
+	// ID of the CDH instances to be queried.
+	HostId string `pulumi:"hostId"`
+	// Name of the CDH instances to be queried.
+	HostName string `pulumi:"hostName"`
+	// An information list of host resource. Each element contains the following attributes:
+	HostResources []GetInstancesCdhInstanceListHostResource `pulumi:"hostResources"`
+	// State of the CDH instances to be queried. Valid values: `PENDING`, `LAUNCH_FAILURE`, `RUNNING`, `EXPIRED`.
+	HostState string `pulumi:"hostState"`
+	// Type of the CDH instance.
+	HostType string `pulumi:"hostType"`
+	// Auto renewal flag.
+	PrepaidRenewFlag string `pulumi:"prepaidRenewFlag"`
+	// The project CDH belongs to.
+	ProjectId int `pulumi:"projectId"`
 }
 
-// InstancesCdhInstanceListInput is an input type that accepts InstancesCdhInstanceListArgs and InstancesCdhInstanceListOutput values.
-// You can construct a concrete instance of `InstancesCdhInstanceListInput` via:
+// GetInstancesCdhInstanceListInput is an input type that accepts GetInstancesCdhInstanceListArgs and GetInstancesCdhInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesCdhInstanceListInput` via:
 //
-//          InstancesCdhInstanceListArgs{...}
-type InstancesCdhInstanceListInput interface {
+//          GetInstancesCdhInstanceListArgs{...}
+type GetInstancesCdhInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesCdhInstanceListOutput() InstancesCdhInstanceListOutput
-	ToInstancesCdhInstanceListOutputWithContext(context.Context) InstancesCdhInstanceListOutput
+	ToGetInstancesCdhInstanceListOutput() GetInstancesCdhInstanceListOutput
+	ToGetInstancesCdhInstanceListOutputWithContext(context.Context) GetInstancesCdhInstanceListOutput
 }
 
-type InstancesCdhInstanceListArgs struct {
-	AvailabilityZone pulumi.StringInput                             `pulumi:"availabilityZone"`
-	CageId           pulumi.StringInput                             `pulumi:"cageId"`
-	ChargeType       pulumi.StringInput                             `pulumi:"chargeType"`
-	CreateTime       pulumi.StringInput                             `pulumi:"createTime"`
-	CvmInstanceIds   pulumi.StringArrayInput                        `pulumi:"cvmInstanceIds"`
-	ExpiredTime      pulumi.StringInput                             `pulumi:"expiredTime"`
-	HostId           pulumi.StringInput                             `pulumi:"hostId"`
-	HostName         pulumi.StringInput                             `pulumi:"hostName"`
-	HostResources    InstancesCdhInstanceListHostResourceArrayInput `pulumi:"hostResources"`
-	HostState        pulumi.StringInput                             `pulumi:"hostState"`
-	HostType         pulumi.StringInput                             `pulumi:"hostType"`
-	PrepaidRenewFlag pulumi.StringInput                             `pulumi:"prepaidRenewFlag"`
-	ProjectId        pulumi.IntInput                                `pulumi:"projectId"`
+type GetInstancesCdhInstanceListArgs struct {
+	// The available zone that the CDH instance locates at.
+	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
+	// Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.
+	CageId pulumi.StringInput `pulumi:"cageId"`
+	// The charge type of the CDH instance.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Creation time of the CDH instance.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Id of CVM instances that have been created on the CDH instance.
+	CvmInstanceIds pulumi.StringArrayInput `pulumi:"cvmInstanceIds"`
+	// Expired time of the CDH instance.
+	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
+	// ID of the CDH instances to be queried.
+	HostId pulumi.StringInput `pulumi:"hostId"`
+	// Name of the CDH instances to be queried.
+	HostName pulumi.StringInput `pulumi:"hostName"`
+	// An information list of host resource. Each element contains the following attributes:
+	HostResources GetInstancesCdhInstanceListHostResourceArrayInput `pulumi:"hostResources"`
+	// State of the CDH instances to be queried. Valid values: `PENDING`, `LAUNCH_FAILURE`, `RUNNING`, `EXPIRED`.
+	HostState pulumi.StringInput `pulumi:"hostState"`
+	// Type of the CDH instance.
+	HostType pulumi.StringInput `pulumi:"hostType"`
+	// Auto renewal flag.
+	PrepaidRenewFlag pulumi.StringInput `pulumi:"prepaidRenewFlag"`
+	// The project CDH belongs to.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
 }
 
-func (InstancesCdhInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesCdhInstanceList)(nil)).Elem()
+func (GetInstancesCdhInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesCdhInstanceList)(nil)).Elem()
 }
 
-func (i InstancesCdhInstanceListArgs) ToInstancesCdhInstanceListOutput() InstancesCdhInstanceListOutput {
-	return i.ToInstancesCdhInstanceListOutputWithContext(context.Background())
+func (i GetInstancesCdhInstanceListArgs) ToGetInstancesCdhInstanceListOutput() GetInstancesCdhInstanceListOutput {
+	return i.ToGetInstancesCdhInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesCdhInstanceListArgs) ToInstancesCdhInstanceListOutputWithContext(ctx context.Context) InstancesCdhInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesCdhInstanceListOutput)
+func (i GetInstancesCdhInstanceListArgs) ToGetInstancesCdhInstanceListOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesCdhInstanceListOutput)
 }
 
-// InstancesCdhInstanceListArrayInput is an input type that accepts InstancesCdhInstanceListArray and InstancesCdhInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesCdhInstanceListArrayInput` via:
+// GetInstancesCdhInstanceListArrayInput is an input type that accepts GetInstancesCdhInstanceListArray and GetInstancesCdhInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesCdhInstanceListArrayInput` via:
 //
-//          InstancesCdhInstanceListArray{ InstancesCdhInstanceListArgs{...} }
-type InstancesCdhInstanceListArrayInput interface {
+//          GetInstancesCdhInstanceListArray{ GetInstancesCdhInstanceListArgs{...} }
+type GetInstancesCdhInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesCdhInstanceListArrayOutput() InstancesCdhInstanceListArrayOutput
-	ToInstancesCdhInstanceListArrayOutputWithContext(context.Context) InstancesCdhInstanceListArrayOutput
+	ToGetInstancesCdhInstanceListArrayOutput() GetInstancesCdhInstanceListArrayOutput
+	ToGetInstancesCdhInstanceListArrayOutputWithContext(context.Context) GetInstancesCdhInstanceListArrayOutput
 }
 
-type InstancesCdhInstanceListArray []InstancesCdhInstanceListInput
+type GetInstancesCdhInstanceListArray []GetInstancesCdhInstanceListInput
 
-func (InstancesCdhInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesCdhInstanceList)(nil)).Elem()
+func (GetInstancesCdhInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesCdhInstanceList)(nil)).Elem()
 }
 
-func (i InstancesCdhInstanceListArray) ToInstancesCdhInstanceListArrayOutput() InstancesCdhInstanceListArrayOutput {
-	return i.ToInstancesCdhInstanceListArrayOutputWithContext(context.Background())
+func (i GetInstancesCdhInstanceListArray) ToGetInstancesCdhInstanceListArrayOutput() GetInstancesCdhInstanceListArrayOutput {
+	return i.ToGetInstancesCdhInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesCdhInstanceListArray) ToInstancesCdhInstanceListArrayOutputWithContext(ctx context.Context) InstancesCdhInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesCdhInstanceListArrayOutput)
+func (i GetInstancesCdhInstanceListArray) ToGetInstancesCdhInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesCdhInstanceListArrayOutput)
 }
 
-type InstancesCdhInstanceListOutput struct{ *pulumi.OutputState }
+type GetInstancesCdhInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesCdhInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesCdhInstanceList)(nil)).Elem()
+func (GetInstancesCdhInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesCdhInstanceList)(nil)).Elem()
 }
 
-func (o InstancesCdhInstanceListOutput) ToInstancesCdhInstanceListOutput() InstancesCdhInstanceListOutput {
+func (o GetInstancesCdhInstanceListOutput) ToGetInstancesCdhInstanceListOutput() GetInstancesCdhInstanceListOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListOutput) ToInstancesCdhInstanceListOutputWithContext(ctx context.Context) InstancesCdhInstanceListOutput {
+func (o GetInstancesCdhInstanceListOutput) ToGetInstancesCdhInstanceListOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
+// The available zone that the CDH instance locates at.
+func (o GetInstancesCdhInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) CageId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.CageId }).(pulumi.StringOutput)
+// Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.
+func (o GetInstancesCdhInstanceListOutput) CageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.CageId }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
+// The charge type of the CDH instance.
+func (o GetInstancesCdhInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the CDH instance.
+func (o GetInstancesCdhInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) CvmInstanceIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) []string { return v.CvmInstanceIds }).(pulumi.StringArrayOutput)
+// Id of CVM instances that have been created on the CDH instance.
+func (o GetInstancesCdhInstanceListOutput) CvmInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) []string { return v.CvmInstanceIds }).(pulumi.StringArrayOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) ExpiredTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.ExpiredTime }).(pulumi.StringOutput)
+// Expired time of the CDH instance.
+func (o GetInstancesCdhInstanceListOutput) ExpiredTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.ExpiredTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) HostId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.HostId }).(pulumi.StringOutput)
+// ID of the CDH instances to be queried.
+func (o GetInstancesCdhInstanceListOutput) HostId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.HostId }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) HostName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.HostName }).(pulumi.StringOutput)
+// Name of the CDH instances to be queried.
+func (o GetInstancesCdhInstanceListOutput) HostName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.HostName }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) HostResources() InstancesCdhInstanceListHostResourceArrayOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) []InstancesCdhInstanceListHostResource { return v.HostResources }).(InstancesCdhInstanceListHostResourceArrayOutput)
+// An information list of host resource. Each element contains the following attributes:
+func (o GetInstancesCdhInstanceListOutput) HostResources() GetInstancesCdhInstanceListHostResourceArrayOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) []GetInstancesCdhInstanceListHostResource { return v.HostResources }).(GetInstancesCdhInstanceListHostResourceArrayOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) HostState() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.HostState }).(pulumi.StringOutput)
+// State of the CDH instances to be queried. Valid values: `PENDING`, `LAUNCH_FAILURE`, `RUNNING`, `EXPIRED`.
+func (o GetInstancesCdhInstanceListOutput) HostState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.HostState }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) HostType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.HostType }).(pulumi.StringOutput)
+// Type of the CDH instance.
+func (o GetInstancesCdhInstanceListOutput) HostType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.HostType }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) PrepaidRenewFlag() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) string { return v.PrepaidRenewFlag }).(pulumi.StringOutput)
+// Auto renewal flag.
+func (o GetInstancesCdhInstanceListOutput) PrepaidRenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) string { return v.PrepaidRenewFlag }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
+// The project CDH belongs to.
+func (o GetInstancesCdhInstanceListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-type InstancesCdhInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesCdhInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesCdhInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesCdhInstanceList)(nil)).Elem()
+func (GetInstancesCdhInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesCdhInstanceList)(nil)).Elem()
 }
 
-func (o InstancesCdhInstanceListArrayOutput) ToInstancesCdhInstanceListArrayOutput() InstancesCdhInstanceListArrayOutput {
+func (o GetInstancesCdhInstanceListArrayOutput) ToGetInstancesCdhInstanceListArrayOutput() GetInstancesCdhInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListArrayOutput) ToInstancesCdhInstanceListArrayOutputWithContext(ctx context.Context) InstancesCdhInstanceListArrayOutput {
+func (o GetInstancesCdhInstanceListArrayOutput) ToGetInstancesCdhInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesCdhInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesCdhInstanceList {
-		return vs[0].([]InstancesCdhInstanceList)[vs[1].(int)]
-	}).(InstancesCdhInstanceListOutput)
+func (o GetInstancesCdhInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesCdhInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesCdhInstanceList {
+		return vs[0].([]GetInstancesCdhInstanceList)[vs[1].(int)]
+	}).(GetInstancesCdhInstanceListOutput)
 }
 
-type InstancesCdhInstanceListHostResource struct {
-	CpuAvailableNum     int     `pulumi:"cpuAvailableNum"`
-	CpuTotalNum         int     `pulumi:"cpuTotalNum"`
-	DiskAvailableSize   int     `pulumi:"diskAvailableSize"`
-	DiskTotalSize       int     `pulumi:"diskTotalSize"`
-	DiskType            string  `pulumi:"diskType"`
+type GetInstancesCdhInstanceListHostResource struct {
+	// The number of available CPU cores of the instance.
+	CpuAvailableNum int `pulumi:"cpuAvailableNum"`
+	// The number of total CPU cores of the instance.
+	CpuTotalNum int `pulumi:"cpuTotalNum"`
+	// Instance disk available capacity, unit in GB.
+	DiskAvailableSize int `pulumi:"diskAvailableSize"`
+	// Instance disk total capacity, unit in GB.
+	DiskTotalSize int `pulumi:"diskTotalSize"`
+	// Type of the disk.
+	DiskType string `pulumi:"diskType"`
+	// Instance memory available capacity, unit in GB.
 	MemoryAvailableSize float64 `pulumi:"memoryAvailableSize"`
-	MemoryTotalSize     float64 `pulumi:"memoryTotalSize"`
+	// Instance memory total capacity, unit in GB.
+	MemoryTotalSize float64 `pulumi:"memoryTotalSize"`
 }
 
-// InstancesCdhInstanceListHostResourceInput is an input type that accepts InstancesCdhInstanceListHostResourceArgs and InstancesCdhInstanceListHostResourceOutput values.
-// You can construct a concrete instance of `InstancesCdhInstanceListHostResourceInput` via:
+// GetInstancesCdhInstanceListHostResourceInput is an input type that accepts GetInstancesCdhInstanceListHostResourceArgs and GetInstancesCdhInstanceListHostResourceOutput values.
+// You can construct a concrete instance of `GetInstancesCdhInstanceListHostResourceInput` via:
 //
-//          InstancesCdhInstanceListHostResourceArgs{...}
-type InstancesCdhInstanceListHostResourceInput interface {
+//          GetInstancesCdhInstanceListHostResourceArgs{...}
+type GetInstancesCdhInstanceListHostResourceInput interface {
 	pulumi.Input
 
-	ToInstancesCdhInstanceListHostResourceOutput() InstancesCdhInstanceListHostResourceOutput
-	ToInstancesCdhInstanceListHostResourceOutputWithContext(context.Context) InstancesCdhInstanceListHostResourceOutput
+	ToGetInstancesCdhInstanceListHostResourceOutput() GetInstancesCdhInstanceListHostResourceOutput
+	ToGetInstancesCdhInstanceListHostResourceOutputWithContext(context.Context) GetInstancesCdhInstanceListHostResourceOutput
 }
 
-type InstancesCdhInstanceListHostResourceArgs struct {
-	CpuAvailableNum     pulumi.IntInput     `pulumi:"cpuAvailableNum"`
-	CpuTotalNum         pulumi.IntInput     `pulumi:"cpuTotalNum"`
-	DiskAvailableSize   pulumi.IntInput     `pulumi:"diskAvailableSize"`
-	DiskTotalSize       pulumi.IntInput     `pulumi:"diskTotalSize"`
-	DiskType            pulumi.StringInput  `pulumi:"diskType"`
+type GetInstancesCdhInstanceListHostResourceArgs struct {
+	// The number of available CPU cores of the instance.
+	CpuAvailableNum pulumi.IntInput `pulumi:"cpuAvailableNum"`
+	// The number of total CPU cores of the instance.
+	CpuTotalNum pulumi.IntInput `pulumi:"cpuTotalNum"`
+	// Instance disk available capacity, unit in GB.
+	DiskAvailableSize pulumi.IntInput `pulumi:"diskAvailableSize"`
+	// Instance disk total capacity, unit in GB.
+	DiskTotalSize pulumi.IntInput `pulumi:"diskTotalSize"`
+	// Type of the disk.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Instance memory available capacity, unit in GB.
 	MemoryAvailableSize pulumi.Float64Input `pulumi:"memoryAvailableSize"`
-	MemoryTotalSize     pulumi.Float64Input `pulumi:"memoryTotalSize"`
+	// Instance memory total capacity, unit in GB.
+	MemoryTotalSize pulumi.Float64Input `pulumi:"memoryTotalSize"`
 }
 
-func (InstancesCdhInstanceListHostResourceArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesCdhInstanceListHostResource)(nil)).Elem()
+func (GetInstancesCdhInstanceListHostResourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesCdhInstanceListHostResource)(nil)).Elem()
 }
 
-func (i InstancesCdhInstanceListHostResourceArgs) ToInstancesCdhInstanceListHostResourceOutput() InstancesCdhInstanceListHostResourceOutput {
-	return i.ToInstancesCdhInstanceListHostResourceOutputWithContext(context.Background())
+func (i GetInstancesCdhInstanceListHostResourceArgs) ToGetInstancesCdhInstanceListHostResourceOutput() GetInstancesCdhInstanceListHostResourceOutput {
+	return i.ToGetInstancesCdhInstanceListHostResourceOutputWithContext(context.Background())
 }
 
-func (i InstancesCdhInstanceListHostResourceArgs) ToInstancesCdhInstanceListHostResourceOutputWithContext(ctx context.Context) InstancesCdhInstanceListHostResourceOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesCdhInstanceListHostResourceOutput)
+func (i GetInstancesCdhInstanceListHostResourceArgs) ToGetInstancesCdhInstanceListHostResourceOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListHostResourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesCdhInstanceListHostResourceOutput)
 }
 
-// InstancesCdhInstanceListHostResourceArrayInput is an input type that accepts InstancesCdhInstanceListHostResourceArray and InstancesCdhInstanceListHostResourceArrayOutput values.
-// You can construct a concrete instance of `InstancesCdhInstanceListHostResourceArrayInput` via:
+// GetInstancesCdhInstanceListHostResourceArrayInput is an input type that accepts GetInstancesCdhInstanceListHostResourceArray and GetInstancesCdhInstanceListHostResourceArrayOutput values.
+// You can construct a concrete instance of `GetInstancesCdhInstanceListHostResourceArrayInput` via:
 //
-//          InstancesCdhInstanceListHostResourceArray{ InstancesCdhInstanceListHostResourceArgs{...} }
-type InstancesCdhInstanceListHostResourceArrayInput interface {
+//          GetInstancesCdhInstanceListHostResourceArray{ GetInstancesCdhInstanceListHostResourceArgs{...} }
+type GetInstancesCdhInstanceListHostResourceArrayInput interface {
 	pulumi.Input
 
-	ToInstancesCdhInstanceListHostResourceArrayOutput() InstancesCdhInstanceListHostResourceArrayOutput
-	ToInstancesCdhInstanceListHostResourceArrayOutputWithContext(context.Context) InstancesCdhInstanceListHostResourceArrayOutput
+	ToGetInstancesCdhInstanceListHostResourceArrayOutput() GetInstancesCdhInstanceListHostResourceArrayOutput
+	ToGetInstancesCdhInstanceListHostResourceArrayOutputWithContext(context.Context) GetInstancesCdhInstanceListHostResourceArrayOutput
 }
 
-type InstancesCdhInstanceListHostResourceArray []InstancesCdhInstanceListHostResourceInput
+type GetInstancesCdhInstanceListHostResourceArray []GetInstancesCdhInstanceListHostResourceInput
 
-func (InstancesCdhInstanceListHostResourceArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesCdhInstanceListHostResource)(nil)).Elem()
+func (GetInstancesCdhInstanceListHostResourceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesCdhInstanceListHostResource)(nil)).Elem()
 }
 
-func (i InstancesCdhInstanceListHostResourceArray) ToInstancesCdhInstanceListHostResourceArrayOutput() InstancesCdhInstanceListHostResourceArrayOutput {
-	return i.ToInstancesCdhInstanceListHostResourceArrayOutputWithContext(context.Background())
+func (i GetInstancesCdhInstanceListHostResourceArray) ToGetInstancesCdhInstanceListHostResourceArrayOutput() GetInstancesCdhInstanceListHostResourceArrayOutput {
+	return i.ToGetInstancesCdhInstanceListHostResourceArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesCdhInstanceListHostResourceArray) ToInstancesCdhInstanceListHostResourceArrayOutputWithContext(ctx context.Context) InstancesCdhInstanceListHostResourceArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesCdhInstanceListHostResourceArrayOutput)
+func (i GetInstancesCdhInstanceListHostResourceArray) ToGetInstancesCdhInstanceListHostResourceArrayOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListHostResourceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesCdhInstanceListHostResourceArrayOutput)
 }
 
-type InstancesCdhInstanceListHostResourceOutput struct{ *pulumi.OutputState }
+type GetInstancesCdhInstanceListHostResourceOutput struct{ *pulumi.OutputState }
 
-func (InstancesCdhInstanceListHostResourceOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesCdhInstanceListHostResource)(nil)).Elem()
+func (GetInstancesCdhInstanceListHostResourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesCdhInstanceListHostResource)(nil)).Elem()
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) ToInstancesCdhInstanceListHostResourceOutput() InstancesCdhInstanceListHostResourceOutput {
+func (o GetInstancesCdhInstanceListHostResourceOutput) ToGetInstancesCdhInstanceListHostResourceOutput() GetInstancesCdhInstanceListHostResourceOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) ToInstancesCdhInstanceListHostResourceOutputWithContext(ctx context.Context) InstancesCdhInstanceListHostResourceOutput {
+func (o GetInstancesCdhInstanceListHostResourceOutput) ToGetInstancesCdhInstanceListHostResourceOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListHostResourceOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) CpuAvailableNum() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceListHostResource) int { return v.CpuAvailableNum }).(pulumi.IntOutput)
+// The number of available CPU cores of the instance.
+func (o GetInstancesCdhInstanceListHostResourceOutput) CpuAvailableNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceListHostResource) int { return v.CpuAvailableNum }).(pulumi.IntOutput)
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) CpuTotalNum() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceListHostResource) int { return v.CpuTotalNum }).(pulumi.IntOutput)
+// The number of total CPU cores of the instance.
+func (o GetInstancesCdhInstanceListHostResourceOutput) CpuTotalNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceListHostResource) int { return v.CpuTotalNum }).(pulumi.IntOutput)
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) DiskAvailableSize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceListHostResource) int { return v.DiskAvailableSize }).(pulumi.IntOutput)
+// Instance disk available capacity, unit in GB.
+func (o GetInstancesCdhInstanceListHostResourceOutput) DiskAvailableSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceListHostResource) int { return v.DiskAvailableSize }).(pulumi.IntOutput)
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) DiskTotalSize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceListHostResource) int { return v.DiskTotalSize }).(pulumi.IntOutput)
+// Instance disk total capacity, unit in GB.
+func (o GetInstancesCdhInstanceListHostResourceOutput) DiskTotalSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceListHostResource) int { return v.DiskTotalSize }).(pulumi.IntOutput)
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) DiskType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesCdhInstanceListHostResource) string { return v.DiskType }).(pulumi.StringOutput)
+// Type of the disk.
+func (o GetInstancesCdhInstanceListHostResourceOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesCdhInstanceListHostResource) string { return v.DiskType }).(pulumi.StringOutput)
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) MemoryAvailableSize() pulumi.Float64Output {
-	return o.ApplyT(func(v InstancesCdhInstanceListHostResource) float64 { return v.MemoryAvailableSize }).(pulumi.Float64Output)
+// Instance memory available capacity, unit in GB.
+func (o GetInstancesCdhInstanceListHostResourceOutput) MemoryAvailableSize() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstancesCdhInstanceListHostResource) float64 { return v.MemoryAvailableSize }).(pulumi.Float64Output)
 }
 
-func (o InstancesCdhInstanceListHostResourceOutput) MemoryTotalSize() pulumi.Float64Output {
-	return o.ApplyT(func(v InstancesCdhInstanceListHostResource) float64 { return v.MemoryTotalSize }).(pulumi.Float64Output)
+// Instance memory total capacity, unit in GB.
+func (o GetInstancesCdhInstanceListHostResourceOutput) MemoryTotalSize() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstancesCdhInstanceListHostResource) float64 { return v.MemoryTotalSize }).(pulumi.Float64Output)
 }
 
-type InstancesCdhInstanceListHostResourceArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesCdhInstanceListHostResourceArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesCdhInstanceListHostResourceArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesCdhInstanceListHostResource)(nil)).Elem()
+func (GetInstancesCdhInstanceListHostResourceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesCdhInstanceListHostResource)(nil)).Elem()
 }
 
-func (o InstancesCdhInstanceListHostResourceArrayOutput) ToInstancesCdhInstanceListHostResourceArrayOutput() InstancesCdhInstanceListHostResourceArrayOutput {
+func (o GetInstancesCdhInstanceListHostResourceArrayOutput) ToGetInstancesCdhInstanceListHostResourceArrayOutput() GetInstancesCdhInstanceListHostResourceArrayOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListHostResourceArrayOutput) ToInstancesCdhInstanceListHostResourceArrayOutputWithContext(ctx context.Context) InstancesCdhInstanceListHostResourceArrayOutput {
+func (o GetInstancesCdhInstanceListHostResourceArrayOutput) ToGetInstancesCdhInstanceListHostResourceArrayOutputWithContext(ctx context.Context) GetInstancesCdhInstanceListHostResourceArrayOutput {
 	return o
 }
 
-func (o InstancesCdhInstanceListHostResourceArrayOutput) Index(i pulumi.IntInput) InstancesCdhInstanceListHostResourceOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesCdhInstanceListHostResource {
-		return vs[0].([]InstancesCdhInstanceListHostResource)[vs[1].(int)]
-	}).(InstancesCdhInstanceListHostResourceOutput)
+func (o GetInstancesCdhInstanceListHostResourceArrayOutput) Index(i pulumi.IntInput) GetInstancesCdhInstanceListHostResourceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesCdhInstanceListHostResource {
+		return vs[0].([]GetInstancesCdhInstanceListHostResource)[vs[1].(int)]
+	}).(GetInstancesCdhInstanceListHostResourceOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceHostResourceInput)(nil)).Elem(), InstanceHostResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceHostResourceArrayInput)(nil)).Elem(), InstanceHostResourceArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesCdhInstanceListInput)(nil)).Elem(), InstancesCdhInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesCdhInstanceListArrayInput)(nil)).Elem(), InstancesCdhInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesCdhInstanceListHostResourceInput)(nil)).Elem(), InstancesCdhInstanceListHostResourceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesCdhInstanceListHostResourceArrayInput)(nil)).Elem(), InstancesCdhInstanceListHostResourceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesCdhInstanceListInput)(nil)).Elem(), GetInstancesCdhInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesCdhInstanceListArrayInput)(nil)).Elem(), GetInstancesCdhInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesCdhInstanceListHostResourceInput)(nil)).Elem(), GetInstancesCdhInstanceListHostResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesCdhInstanceListHostResourceArrayInput)(nil)).Elem(), GetInstancesCdhInstanceListHostResourceArray{})
 	pulumi.RegisterOutputType(InstanceHostResourceOutput{})
 	pulumi.RegisterOutputType(InstanceHostResourceArrayOutput{})
-	pulumi.RegisterOutputType(InstancesCdhInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesCdhInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesCdhInstanceListHostResourceOutput{})
-	pulumi.RegisterOutputType(InstancesCdhInstanceListHostResourceArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesCdhInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesCdhInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesCdhInstanceListHostResourceOutput{})
+	pulumi.RegisterOutputType(GetInstancesCdhInstanceListHostResourceArrayOutput{})
 }

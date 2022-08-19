@@ -9,6 +9,114 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Eks
 {
+    /// <summary>
+    /// Provides an elastic kubernetes service container instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @group = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync());
+    ///         var zone = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "cvm",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/24",
+    ///         });
+    ///         var sub = new Tencentcloud.Subnet.Instance("sub", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Zones?[0]?.Name),
+    ///             CidrBlock = "10.0.0.0/24",
+    ///             VpcId = vpc.Id,
+    ///         });
+    ///         var cbs = new Tencentcloud.Cbs.Storage("cbs", new Tencentcloud.Cbs.StorageArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Zones?[0]?.Name),
+    ///             StorageName = "cbs1",
+    ///             StorageSize = 10,
+    ///             StorageType = "CLOUD_PREMIUM",
+    ///         });
+    ///         var eci1 = new Tencentcloud.Eks.ContainerInstance("eci1", new Tencentcloud.Eks.ContainerInstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = sub.Id,
+    ///             Cpu = 2,
+    ///             CpuType = "intel",
+    ///             RestartPolicy = "Always",
+    ///             Memory = 4,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 @group.Apply(@group =&gt; @group.SecurityGroups?[0]?.SecurityGroupId),
+    ///             },
+    ///             CbsVolumes = 
+    ///             {
+    ///                 new Tencentcloud.Eks.Inputs.ContainerInstanceCbsVolumeArgs
+    ///                 {
+    ///                     Name = "vol1",
+    ///                     DiskId = cbs.Id,
+    ///                 },
+    ///             },
+    ///             Containers = 
+    ///             {
+    ///                 new Tencentcloud.Eks.Inputs.ContainerInstanceContainerArgs
+    ///                 {
+    ///                     Name = "redis1",
+    ///                     Image = "redis",
+    ///                     LivenessProbe = new Tencentcloud.Eks.Inputs.ContainerInstanceContainerLivenessProbeArgs
+    ///                     {
+    ///                         InitDelaySeconds = 1,
+    ///                         TimeoutSeconds = 3,
+    ///                         PeriodSeconds = 11,
+    ///                         SuccessThreshold = 1,
+    ///                         FailureThreshold = 3,
+    ///                         HttpGetPath = "/",
+    ///                         HttpGetPort = 443,
+    ///                         HttpGetScheme = "HTTPS",
+    ///                     },
+    ///                     ReadinessProbe = new Tencentcloud.Eks.Inputs.ContainerInstanceContainerReadinessProbeArgs
+    ///                     {
+    ///                         InitDelaySeconds = 1,
+    ///                         TimeoutSeconds = 3,
+    ///                         PeriodSeconds = 10,
+    ///                         SuccessThreshold = 1,
+    ///                         FailureThreshold = 3,
+    ///                         TcpSocketPort = 81,
+    ///                     },
+    ///                 },
+    ///                 new Tencentcloud.Eks.Inputs.ContainerInstanceContainerArgs
+    ///                 {
+    ///                     Name = "nginx",
+    ///                     Image = "nginx",
+    ///                 },
+    ///             },
+    ///             InitContainers = 
+    ///             {
+    ///                 new Tencentcloud.Eks.Inputs.ContainerInstanceInitContainerArgs
+    ///                 {
+    ///                     Name = "alpine",
+    ///                     Image = "alpine:latest",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Eks/containerInstance:ContainerInstance foo container-instance-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Eks/containerInstance:ContainerInstance")]
     public partial class ContainerInstance : Pulumi.CustomResource
     {
@@ -49,8 +157,7 @@ namespace Pulumi.Tencentcloud.Eks
         public Output<double> Cpu { get; private set; } = null!;
 
         /// <summary>
-        /// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-        /// `intel` when `amd` sold out.
+        /// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         /// </summary>
         [Output("cpuType")]
         public Output<string?> CpuType { get; private set; } = null!;
@@ -92,15 +199,13 @@ namespace Pulumi.Tencentcloud.Eks
         public Output<bool?> EipDeletePolicy { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-        /// `existed_eip_ids`.
+        /// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
         /// </summary>
         [Output("eipMaxBandwidthOut")]
         public Output<int?> EipMaxBandwidthOut { get; private set; } = null!;
 
         /// <summary>
-        /// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-        /// `existed_eip_ids`.
+        /// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         /// </summary>
         [Output("eipServiceProvider")]
         public Output<string?> EipServiceProvider { get; private set; } = null!;
@@ -278,8 +383,7 @@ namespace Pulumi.Tencentcloud.Eks
         public Input<double> Cpu { get; set; } = null!;
 
         /// <summary>
-        /// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-        /// `intel` when `amd` sold out.
+        /// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         /// </summary>
         [Input("cpuType")]
         public Input<string>? CpuType { get; set; }
@@ -327,15 +431,13 @@ namespace Pulumi.Tencentcloud.Eks
         public Input<bool>? EipDeletePolicy { get; set; }
 
         /// <summary>
-        /// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-        /// `existed_eip_ids`.
+        /// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
         /// </summary>
         [Input("eipMaxBandwidthOut")]
         public Input<int>? EipMaxBandwidthOut { get; set; }
 
         /// <summary>
-        /// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-        /// `existed_eip_ids`.
+        /// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         /// </summary>
         [Input("eipServiceProvider")]
         public Input<string>? EipServiceProvider { get; set; }
@@ -498,8 +600,7 @@ namespace Pulumi.Tencentcloud.Eks
         public Input<double>? Cpu { get; set; }
 
         /// <summary>
-        /// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-        /// `intel` when `amd` sold out.
+        /// Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         /// </summary>
         [Input("cpuType")]
         public Input<string>? CpuType { get; set; }
@@ -559,15 +660,13 @@ namespace Pulumi.Tencentcloud.Eks
         public Input<bool>? EipDeletePolicy { get; set; }
 
         /// <summary>
-        /// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-        /// `existed_eip_ids`.
+        /// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
         /// </summary>
         [Input("eipMaxBandwidthOut")]
         public Input<int>? EipMaxBandwidthOut { get; set; }
 
         /// <summary>
-        /// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-        /// `existed_eip_ids`.
+        /// EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         /// </summary>
         [Input("eipServiceProvider")]
         public Input<string>? EipServiceProvider { get; set; }

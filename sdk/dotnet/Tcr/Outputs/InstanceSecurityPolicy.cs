@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Tcr.Outputs
     [OutputType]
     public sealed class InstanceSecurityPolicy
     {
+        /// <summary>
+        /// The public network IP address of the access source.
+        /// </summary>
         public readonly string? CidrBlock;
+        /// <summary>
+        /// Remarks of policy.
+        /// </summary>
         public readonly string? Description;
         public readonly int? Index;
         public readonly string? Version;

@@ -9,6 +9,91 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM role.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// Create normally
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.Role("foo", new Tencentcloud.Cam.RoleArgs
+    ///         {
+    ///             ConsoleLogin = true,
+    ///             Description = "test",
+    ///             Document = @"{
+    ///   ""version"": ""2.0"",
+    ///   ""statement"": [
+    ///     {
+    ///       ""action"": [""name/sts:AssumeRole""],
+    ///       ""effect"": ""allow"",
+    ///       ""principal"": {
+    ///         ""qcs"": [""qcs::cam::uin/&lt;your-account-id&gt;:uin/&lt;your-account-id&gt;""]
+    ///       }
+    ///     }
+    ///   ]
+    /// }
+    /// 
+    /// ",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf-cam-role" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Create with SAML provider
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var boo = new Tencentcloud.Cam.Role("boo", new Tencentcloud.Cam.RoleArgs
+    ///         {
+    ///             ConsoleLogin = true,
+    ///             Description = "test",
+    ///             Document = @"{
+    ///   ""version"": ""2.0"",
+    ///   ""statement"": [
+    ///     {
+    ///       ""action"": [""name/sts:AssumeRole"", ""name/sts:AssumeRoleWithWebIdentity""],
+    ///       ""effect"": ""allow"",
+    ///       ""principal"": {
+    ///         ""federated"": [""qcs::cam::uin/&lt;your-account-id&gt;:saml-provider/&lt;your-name&gt;""]
+    ///       }
+    ///     }
+    ///   ]
+    /// }
+    /// 
+    /// ",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM role can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/role:Role")]
     public partial class Role : Pulumi.CustomResource
     {

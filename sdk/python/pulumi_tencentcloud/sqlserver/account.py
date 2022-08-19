@@ -115,8 +115,7 @@ class _AccountState:
         :param pulumi.Input[str] name: Name of the SQL Server account.
         :param pulumi.Input[str] password: Password of the SQL Server account.
         :param pulumi.Input[str] remark: Remark of the SQL Server account.
-        :param pulumi.Input[int] status: Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-               resetting password, -1 for deleting.
+        :param pulumi.Input[int] status: Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
         :param pulumi.Input[str] update_time: Last updated time of the SQL Server account.
         """
         if create_time is not None:
@@ -212,8 +211,7 @@ class _AccountState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[int]]:
         """
-        Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-        resetting password, -1 for deleting.
+        Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
         """
         return pulumi.get(self, "status")
 
@@ -246,7 +244,28 @@ class Account(pulumi.CustomResource):
                  remark: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Account resource with the given unique name, props, and options.
+        Use this resource to create SQL Server account
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.Account("foo",
+            instance_id=tencentcloud_sqlserver_instance["example"]["id"],
+            password="test1233",
+            remark="testt")
+        ```
+
+        ## Import
+
+        SQL Server account can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/account:Account foo mssql-3cdq7kx5#tf_sqlserver_account
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] instance_id: Instance ID that the account belongs to.
@@ -262,7 +281,28 @@ class Account(pulumi.CustomResource):
                  args: AccountArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Account resource with the given unique name, props, and options.
+        Use this resource to create SQL Server account
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.Account("foo",
+            instance_id=tencentcloud_sqlserver_instance["example"]["id"],
+            password="test1233",
+            remark="testt")
+        ```
+
+        ## Import
+
+        SQL Server account can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/account:Account foo mssql-3cdq7kx5#tf_sqlserver_account
+        ```
+
         :param str resource_name: The name of the resource.
         :param AccountArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -338,8 +378,7 @@ class Account(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the SQL Server account.
         :param pulumi.Input[str] password: Password of the SQL Server account.
         :param pulumi.Input[str] remark: Remark of the SQL Server account.
-        :param pulumi.Input[int] status: Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-               resetting password, -1 for deleting.
+        :param pulumi.Input[int] status: Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
         :param pulumi.Input[str] update_time: Last updated time of the SQL Server account.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -408,8 +447,7 @@ class Account(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
-        Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-        resetting password, -1 for deleting.
+        Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
         """
         return pulumi.get(self, "status")
 

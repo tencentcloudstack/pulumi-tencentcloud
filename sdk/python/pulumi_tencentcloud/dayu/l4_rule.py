@@ -33,26 +33,20 @@ class L4RuleArgs:
         """
         The set of arguments for constructing a L4Rule resource.
         :param pulumi.Input[int] d_port: The destination port of the L4 rule.
-        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-               only set with `tcp`.
+        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 4 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
         :param pulumi.Input[int] s_port: The source port of the L4 rule.
-        :param pulumi.Input[Sequence[pulumi.Input['L4RuleSourceListArgs']]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               20.
+        :param pulumi.Input[Sequence[pulumi.Input['L4RuleSourceListArgs']]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         :param pulumi.Input[int] health_check_interval: Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
-        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-               item.
+        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         :param pulumi.Input[int] health_check_timeout: HTTP Status Code. The default is 26 and value range is 2-60.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         :param pulumi.Input[str] name: Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
         :param pulumi.Input[bool] session_switch: Indicate that the session will keep or not, and default value is `false`.
-        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-               second.
+        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         """
         pulumi.set(__self__, "d_port", d_port)
         pulumi.set(__self__, "protocol", protocol)
@@ -94,8 +88,7 @@ class L4RuleArgs:
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
         """
-        Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-        only set with `tcp`.
+        Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         """
         return pulumi.get(self, "protocol")
 
@@ -143,8 +136,7 @@ class L4RuleArgs:
     @pulumi.getter(name="sourceLists")
     def source_lists(self) -> pulumi.Input[Sequence[pulumi.Input['L4RuleSourceListArgs']]]:
         """
-        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        20.
+        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         """
         return pulumi.get(self, "source_lists")
 
@@ -168,8 +160,7 @@ class L4RuleArgs:
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-        consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         """
         return pulumi.get(self, "health_check_health_num")
 
@@ -193,8 +184,7 @@ class L4RuleArgs:
     @pulumi.getter(name="healthCheckSwitch")
     def health_check_switch(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-        item.
+        Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         """
         return pulumi.get(self, "health_check_switch")
 
@@ -218,8 +208,7 @@ class L4RuleArgs:
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-        indicates that the forwarding is abnormal. The value range is 2-10.
+        Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         """
         return pulumi.get(self, "health_check_unhealth_num")
 
@@ -255,8 +244,7 @@ class L4RuleArgs:
     @pulumi.getter(name="sessionTime")
     def session_time(self) -> Optional[pulumi.Input[int]]:
         """
-        Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-        second.
+        Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         """
         return pulumi.get(self, "session_time")
 
@@ -288,27 +276,21 @@ class _L4RuleState:
         """
         Input properties used for looking up and filtering L4Rule resources.
         :param pulumi.Input[int] d_port: The destination port of the L4 rule.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         :param pulumi.Input[int] health_check_interval: Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
-        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-               item.
+        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         :param pulumi.Input[int] health_check_timeout: HTTP Status Code. The default is 26 and value range is 2-60.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         :param pulumi.Input[int] lb_type: LB type of the rule. Valid values: `1`, `2`. `1` for weight cycling and `2` for IP hash.
         :param pulumi.Input[str] name: Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
-        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-               only set with `tcp`.
+        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 4 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
         :param pulumi.Input[str] rule_id: ID of the layer 4 rule.
         :param pulumi.Input[int] s_port: The source port of the L4 rule.
         :param pulumi.Input[bool] session_switch: Indicate that the session will keep or not, and default value is `false`.
-        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-               second.
-        :param pulumi.Input[Sequence[pulumi.Input['L4RuleSourceListArgs']]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               20.
+        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
+        :param pulumi.Input[Sequence[pulumi.Input['L4RuleSourceListArgs']]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
         """
         if d_port is not None:
@@ -362,8 +344,7 @@ class _L4RuleState:
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-        consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         """
         return pulumi.get(self, "health_check_health_num")
 
@@ -387,8 +368,7 @@ class _L4RuleState:
     @pulumi.getter(name="healthCheckSwitch")
     def health_check_switch(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-        item.
+        Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         """
         return pulumi.get(self, "health_check_switch")
 
@@ -412,8 +392,7 @@ class _L4RuleState:
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-        indicates that the forwarding is abnormal. The value range is 2-10.
+        Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         """
         return pulumi.get(self, "health_check_unhealth_num")
 
@@ -449,8 +428,7 @@ class _L4RuleState:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-        only set with `tcp`.
+        Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         """
         return pulumi.get(self, "protocol")
 
@@ -522,8 +500,7 @@ class _L4RuleState:
     @pulumi.getter(name="sessionTime")
     def session_time(self) -> Optional[pulumi.Input[int]]:
         """
-        Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-        second.
+        Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         """
         return pulumi.get(self, "session_time")
 
@@ -535,8 +512,7 @@ class _L4RuleState:
     @pulumi.getter(name="sourceLists")
     def source_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['L4RuleSourceListArgs']]]]:
         """
-        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        20.
+        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         """
         return pulumi.get(self, "source_lists")
 
@@ -579,29 +555,58 @@ class L4Rule(pulumi.CustomResource):
                  source_type: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a L4Rule resource with the given unique name, props, and options.
+        Use this resource to create dayu layer 4 rule
+
+        > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip` and `net`
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_rule = tencentcloud.dayu.L4Rule("testRule",
+            d_port=60,
+            health_check_health_num=5,
+            health_check_interval=35,
+            health_check_switch=True,
+            health_check_timeout=30,
+            health_check_unhealth_num=10,
+            protocol="TCP",
+            resource_id="bgpip-00000294",
+            resource_type="bgpip",
+            s_port=80,
+            session_switch=False,
+            session_time=300,
+            source_lists=[
+                tencentcloud.dayu.L4RuleSourceListArgs(
+                    source="1.1.1.1",
+                    weight=100,
+                ),
+                tencentcloud.dayu.L4RuleSourceListArgs(
+                    source="2.2.2.2",
+                    weight=50,
+                ),
+            ],
+            source_type=2)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] d_port: The destination port of the L4 rule.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         :param pulumi.Input[int] health_check_interval: Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
-        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-               item.
+        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         :param pulumi.Input[int] health_check_timeout: HTTP Status Code. The default is 26 and value range is 2-60.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         :param pulumi.Input[str] name: Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
-        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-               only set with `tcp`.
+        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 4 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
         :param pulumi.Input[int] s_port: The source port of the L4 rule.
         :param pulumi.Input[bool] session_switch: Indicate that the session will keep or not, and default value is `false`.
-        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-               second.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['L4RuleSourceListArgs']]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               20.
+        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['L4RuleSourceListArgs']]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
         """
         ...
@@ -611,7 +616,42 @@ class L4Rule(pulumi.CustomResource):
                  args: L4RuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a L4Rule resource with the given unique name, props, and options.
+        Use this resource to create dayu layer 4 rule
+
+        > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip` and `net`
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_rule = tencentcloud.dayu.L4Rule("testRule",
+            d_port=60,
+            health_check_health_num=5,
+            health_check_interval=35,
+            health_check_switch=True,
+            health_check_timeout=30,
+            health_check_unhealth_num=10,
+            protocol="TCP",
+            resource_id="bgpip-00000294",
+            resource_type="bgpip",
+            s_port=80,
+            session_switch=False,
+            session_time=300,
+            source_lists=[
+                tencentcloud.dayu.L4RuleSourceListArgs(
+                    source="1.1.1.1",
+                    weight=100,
+                ),
+                tencentcloud.dayu.L4RuleSourceListArgs(
+                    source="2.2.2.2",
+                    weight=50,
+                ),
+            ],
+            source_type=2)
+        ```
+
         :param str resource_name: The name of the resource.
         :param L4RuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -720,27 +760,21 @@ class L4Rule(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] d_port: The destination port of the L4 rule.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         :param pulumi.Input[int] health_check_interval: Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
-        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-               item.
+        :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         :param pulumi.Input[int] health_check_timeout: HTTP Status Code. The default is 26 and value range is 2-60.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is 2-10.
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         :param pulumi.Input[int] lb_type: LB type of the rule. Valid values: `1`, `2`. `1` for weight cycling and `2` for IP hash.
         :param pulumi.Input[str] name: Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
-        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-               only set with `tcp`.
+        :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 4 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
         :param pulumi.Input[str] rule_id: ID of the layer 4 rule.
         :param pulumi.Input[int] s_port: The source port of the L4 rule.
         :param pulumi.Input[bool] session_switch: Indicate that the session will keep or not, and default value is `false`.
-        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-               second.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['L4RuleSourceListArgs']]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               20.
+        :param pulumi.Input[int] session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['L4RuleSourceListArgs']]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -778,8 +812,7 @@ class L4Rule(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> pulumi.Output[int]:
         """
-        Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-        consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         """
         return pulumi.get(self, "health_check_health_num")
 
@@ -795,8 +828,7 @@ class L4Rule(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckSwitch")
     def health_check_switch(self) -> pulumi.Output[bool]:
         """
-        Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-        item.
+        Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         """
         return pulumi.get(self, "health_check_switch")
 
@@ -812,8 +844,7 @@ class L4Rule(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> pulumi.Output[int]:
         """
-        Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-        indicates that the forwarding is abnormal. The value range is 2-10.
+        Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         """
         return pulumi.get(self, "health_check_unhealth_num")
 
@@ -837,8 +868,7 @@ class L4Rule(pulumi.CustomResource):
     @pulumi.getter
     def protocol(self) -> pulumi.Output[str]:
         """
-        Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-        only set with `tcp`.
+        Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         """
         return pulumi.get(self, "protocol")
 
@@ -886,8 +916,7 @@ class L4Rule(pulumi.CustomResource):
     @pulumi.getter(name="sessionTime")
     def session_time(self) -> pulumi.Output[int]:
         """
-        Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-        second.
+        Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         """
         return pulumi.get(self, "session_time")
 
@@ -895,8 +924,7 @@ class L4Rule(pulumi.CustomResource):
     @pulumi.getter(name="sourceLists")
     def source_lists(self) -> pulumi.Output[Sequence['outputs.L4RuleSourceList']]:
         """
-        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        20.
+        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         """
         return pulumi.get(self, "source_lists")
 

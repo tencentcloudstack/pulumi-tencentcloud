@@ -12,24 +12,36 @@ namespace Pulumi.Tencentcloud.Emr.Inputs
 
     public sealed class ClusterResourceSpecArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The number of common node.
+        /// </summary>
         [Input("commonCount")]
         public Input<int>? CommonCount { get; set; }
 
         [Input("commonResourceSpec")]
         public Input<Inputs.ClusterResourceSpecCommonResourceSpecArgs>? CommonResourceSpec { get; set; }
 
+        /// <summary>
+        /// The number of core node.
+        /// </summary>
         [Input("coreCount")]
         public Input<int>? CoreCount { get; set; }
 
         [Input("coreResourceSpec")]
         public Input<Inputs.ClusterResourceSpecCoreResourceSpecArgs>? CoreResourceSpec { get; set; }
 
+        /// <summary>
+        /// The number of master node.
+        /// </summary>
         [Input("masterCount")]
         public Input<int>? MasterCount { get; set; }
 
         [Input("masterResourceSpec")]
         public Input<Inputs.ClusterResourceSpecMasterResourceSpecArgs>? MasterResourceSpec { get; set; }
 
+        /// <summary>
+        /// The number of core node.
+        /// </summary>
         [Input("taskCount")]
         public Input<int>? TaskCount { get; set; }
 

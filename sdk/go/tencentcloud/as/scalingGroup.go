@@ -11,6 +11,64 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a group of AS (Auto scaling) instances.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := As.NewScalingGroup(ctx, "scalingGroup", &As.ScalingGroupArgs{
+// 			ConfigurationId: pulumi.String("asc-oqio4yyj"),
+// 			DefaultCooldown: pulumi.Int(400),
+// 			DesiredCapacity: pulumi.Int(1),
+// 			ForwardBalancerIds: as.ScalingGroupForwardBalancerIdArray{
+// 				&as.ScalingGroupForwardBalancerIdArgs{
+// 					ListenerId:     pulumi.String("lbl-81wr497k"),
+// 					LoadBalancerId: pulumi.String("lb-hk693b1l"),
+// 					RuleId:         pulumi.String("loc-kiodx943"),
+// 					TargetAttributes: as.ScalingGroupForwardBalancerIdTargetAttributeArray{
+// 						&as.ScalingGroupForwardBalancerIdTargetAttributeArgs{
+// 							Port:   pulumi.Int(80),
+// 							Weight: pulumi.Int(90),
+// 						},
+// 					},
+// 				},
+// 			},
+// 			MaxSize:          pulumi.Int(1),
+// 			MinSize:          pulumi.Int(0),
+// 			ProjectId:        pulumi.Int(0),
+// 			RetryPolicy:      pulumi.String("INCREMENTAL_INTERVALS"),
+// 			ScalingGroupName: pulumi.String("tf-as-scaling-group"),
+// 			SubnetIds: pulumi.StringArray{
+// 				pulumi.String("subnet-mc3egos"),
+// 			},
+// 			TerminationPolicies: pulumi.String("NEWEST_INSTANCE"),
+// 			VpcId:               pulumi.String("vpc-3efmz0z"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// AutoScaling Groups can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+// ```
 type ScalingGroup struct {
 	pulumi.CustomResourceState
 
@@ -20,9 +78,9 @@ type ScalingGroup struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Default cooldown time in second, and default value is `300`.
 	DefaultCooldown pulumi.IntPtrOutput `pulumi:"defaultCooldown"`
-	// Desired volume of CVM instances, which is between `max_size` and `min_size`.
+	// Desired volume of CVM instances, which is between `maxSize` and `minSize`.
 	DesiredCapacity pulumi.IntOutput `pulumi:"desiredCapacity"`
-	// List of application load balancers, which can't be specified with `load_balancer_ids` together.
+	// List of application load balancers, which can't be specified with `loadBalancerIds` together.
 	ForwardBalancerIds ScalingGroupForwardBalancerIdArrayOutput `pulumi:"forwardBalancerIds"`
 	// Instance number of a scaling group.
 	InstanceCount pulumi.IntOutput `pulumi:"instanceCount"`
@@ -36,19 +94,15 @@ type ScalingGroup struct {
 	MultiZoneSubnetPolicy pulumi.StringPtrOutput `pulumi:"multiZoneSubnetPolicy"`
 	// Specifies to which project the scaling group belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-	// health check.
+	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
 	ReplaceLoadBalancerUnhealthy pulumi.BoolPtrOutput `pulumi:"replaceLoadBalancerUnhealthy"`
-	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-	// Cloud Monitor.
+	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
 	ReplaceMonitorUnhealthy pulumi.BoolPtrOutput `pulumi:"replaceMonitorUnhealthy"`
 	// Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
 	RetryPolicy pulumi.StringPtrOutput `pulumi:"retryPolicy"`
 	// Name of a scaling group.
 	ScalingGroupName pulumi.StringOutput `pulumi:"scalingGroupName"`
-	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-	// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-	// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
 	ScalingMode pulumi.StringPtrOutput `pulumi:"scalingMode"`
 	// Current status of a scaling group.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -114,9 +168,9 @@ type scalingGroupState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Default cooldown time in second, and default value is `300`.
 	DefaultCooldown *int `pulumi:"defaultCooldown"`
-	// Desired volume of CVM instances, which is between `max_size` and `min_size`.
+	// Desired volume of CVM instances, which is between `maxSize` and `minSize`.
 	DesiredCapacity *int `pulumi:"desiredCapacity"`
-	// List of application load balancers, which can't be specified with `load_balancer_ids` together.
+	// List of application load balancers, which can't be specified with `loadBalancerIds` together.
 	ForwardBalancerIds []ScalingGroupForwardBalancerId `pulumi:"forwardBalancerIds"`
 	// Instance number of a scaling group.
 	InstanceCount *int `pulumi:"instanceCount"`
@@ -130,19 +184,15 @@ type scalingGroupState struct {
 	MultiZoneSubnetPolicy *string `pulumi:"multiZoneSubnetPolicy"`
 	// Specifies to which project the scaling group belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-	// health check.
+	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
 	ReplaceLoadBalancerUnhealthy *bool `pulumi:"replaceLoadBalancerUnhealthy"`
-	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-	// Cloud Monitor.
+	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
 	ReplaceMonitorUnhealthy *bool `pulumi:"replaceMonitorUnhealthy"`
 	// Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
 	RetryPolicy *string `pulumi:"retryPolicy"`
 	// Name of a scaling group.
 	ScalingGroupName *string `pulumi:"scalingGroupName"`
-	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-	// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-	// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
 	ScalingMode *string `pulumi:"scalingMode"`
 	// Current status of a scaling group.
 	Status *string `pulumi:"status"`
@@ -165,9 +215,9 @@ type ScalingGroupState struct {
 	CreateTime pulumi.StringPtrInput
 	// Default cooldown time in second, and default value is `300`.
 	DefaultCooldown pulumi.IntPtrInput
-	// Desired volume of CVM instances, which is between `max_size` and `min_size`.
+	// Desired volume of CVM instances, which is between `maxSize` and `minSize`.
 	DesiredCapacity pulumi.IntPtrInput
-	// List of application load balancers, which can't be specified with `load_balancer_ids` together.
+	// List of application load balancers, which can't be specified with `loadBalancerIds` together.
 	ForwardBalancerIds ScalingGroupForwardBalancerIdArrayInput
 	// Instance number of a scaling group.
 	InstanceCount pulumi.IntPtrInput
@@ -181,19 +231,15 @@ type ScalingGroupState struct {
 	MultiZoneSubnetPolicy pulumi.StringPtrInput
 	// Specifies to which project the scaling group belongs.
 	ProjectId pulumi.IntPtrInput
-	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-	// health check.
+	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
 	ReplaceLoadBalancerUnhealthy pulumi.BoolPtrInput
-	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-	// Cloud Monitor.
+	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
 	ReplaceMonitorUnhealthy pulumi.BoolPtrInput
 	// Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
 	RetryPolicy pulumi.StringPtrInput
 	// Name of a scaling group.
 	ScalingGroupName pulumi.StringPtrInput
-	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-	// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-	// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
 	ScalingMode pulumi.StringPtrInput
 	// Current status of a scaling group.
 	Status pulumi.StringPtrInput
@@ -218,9 +264,9 @@ type scalingGroupArgs struct {
 	ConfigurationId string `pulumi:"configurationId"`
 	// Default cooldown time in second, and default value is `300`.
 	DefaultCooldown *int `pulumi:"defaultCooldown"`
-	// Desired volume of CVM instances, which is between `max_size` and `min_size`.
+	// Desired volume of CVM instances, which is between `maxSize` and `minSize`.
 	DesiredCapacity *int `pulumi:"desiredCapacity"`
-	// List of application load balancers, which can't be specified with `load_balancer_ids` together.
+	// List of application load balancers, which can't be specified with `loadBalancerIds` together.
 	ForwardBalancerIds []ScalingGroupForwardBalancerId `pulumi:"forwardBalancerIds"`
 	// ID list of traditional load balancers.
 	LoadBalancerIds []string `pulumi:"loadBalancerIds"`
@@ -232,19 +278,15 @@ type scalingGroupArgs struct {
 	MultiZoneSubnetPolicy *string `pulumi:"multiZoneSubnetPolicy"`
 	// Specifies to which project the scaling group belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-	// health check.
+	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
 	ReplaceLoadBalancerUnhealthy *bool `pulumi:"replaceLoadBalancerUnhealthy"`
-	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-	// Cloud Monitor.
+	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
 	ReplaceMonitorUnhealthy *bool `pulumi:"replaceMonitorUnhealthy"`
 	// Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
 	RetryPolicy *string `pulumi:"retryPolicy"`
 	// Name of a scaling group.
 	ScalingGroupName string `pulumi:"scalingGroupName"`
-	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-	// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-	// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
 	ScalingMode *string `pulumi:"scalingMode"`
 	// ID list of subnet, and for VPC it is required.
 	SubnetIds []string `pulumi:"subnetIds"`
@@ -264,9 +306,9 @@ type ScalingGroupArgs struct {
 	ConfigurationId pulumi.StringInput
 	// Default cooldown time in second, and default value is `300`.
 	DefaultCooldown pulumi.IntPtrInput
-	// Desired volume of CVM instances, which is between `max_size` and `min_size`.
+	// Desired volume of CVM instances, which is between `maxSize` and `minSize`.
 	DesiredCapacity pulumi.IntPtrInput
-	// List of application load balancers, which can't be specified with `load_balancer_ids` together.
+	// List of application load balancers, which can't be specified with `loadBalancerIds` together.
 	ForwardBalancerIds ScalingGroupForwardBalancerIdArrayInput
 	// ID list of traditional load balancers.
 	LoadBalancerIds pulumi.StringArrayInput
@@ -278,19 +320,15 @@ type ScalingGroupArgs struct {
 	MultiZoneSubnetPolicy pulumi.StringPtrInput
 	// Specifies to which project the scaling group belongs.
 	ProjectId pulumi.IntPtrInput
-	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-	// health check.
+	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
 	ReplaceLoadBalancerUnhealthy pulumi.BoolPtrInput
-	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-	// Cloud Monitor.
+	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
 	ReplaceMonitorUnhealthy pulumi.BoolPtrInput
 	// Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
 	RetryPolicy pulumi.StringPtrInput
 	// Name of a scaling group.
 	ScalingGroupName pulumi.StringInput
-	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-	// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-	// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
 	ScalingMode pulumi.StringPtrInput
 	// ID list of subnet, and for VPC it is required.
 	SubnetIds pulumi.StringArrayInput
@@ -406,12 +444,12 @@ func (o ScalingGroupOutput) DefaultCooldown() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.IntPtrOutput { return v.DefaultCooldown }).(pulumi.IntPtrOutput)
 }
 
-// Desired volume of CVM instances, which is between `max_size` and `min_size`.
+// Desired volume of CVM instances, which is between `maxSize` and `minSize`.
 func (o ScalingGroupOutput) DesiredCapacity() pulumi.IntOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.IntOutput { return v.DesiredCapacity }).(pulumi.IntOutput)
 }
 
-// List of application load balancers, which can't be specified with `load_balancer_ids` together.
+// List of application load balancers, which can't be specified with `loadBalancerIds` together.
 func (o ScalingGroupOutput) ForwardBalancerIds() ScalingGroupForwardBalancerIdArrayOutput {
 	return o.ApplyT(func(v *ScalingGroup) ScalingGroupForwardBalancerIdArrayOutput { return v.ForwardBalancerIds }).(ScalingGroupForwardBalancerIdArrayOutput)
 }
@@ -446,14 +484,12 @@ func (o ScalingGroupOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-// health check.
+// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
 func (o ScalingGroupOutput) ReplaceLoadBalancerUnhealthy() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolPtrOutput { return v.ReplaceLoadBalancerUnhealthy }).(pulumi.BoolPtrOutput)
 }
 
-// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-// Cloud Monitor.
+// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
 func (o ScalingGroupOutput) ReplaceMonitorUnhealthy() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolPtrOutput { return v.ReplaceMonitorUnhealthy }).(pulumi.BoolPtrOutput)
 }
@@ -468,9 +504,7 @@ func (o ScalingGroupOutput) ScalingGroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.ScalingGroupName }).(pulumi.StringOutput)
 }
 
-// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-// instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-// `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
 func (o ScalingGroupOutput) ScalingMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.StringPtrOutput { return v.ScalingMode }).(pulumi.StringPtrOutput)
 }

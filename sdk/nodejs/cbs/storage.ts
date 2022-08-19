@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CBS.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const storage = new tencentcloud.Cbs.Storage("storage", {
+ *     availabilityZone: "ap-guangzhou-3",
+ *     encrypt: false,
+ *     projectId: 0,
+ *     storageName: "mystorage",
+ *     storageSize: 100,
+ *     storageType: "CLOUD_SSD",
+ *     tags: {
+ *         test: "tf",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CBS storage can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+ * ```
+ */
 export class Storage extends pulumi.CustomResource {
     /**
      * Get an existing Storage resource's state with the given name, ID, and optional extra
@@ -49,26 +79,21 @@ export class Storage extends pulumi.CustomResource {
      */
     public readonly encrypt!: pulumi.Output<boolean | undefined>;
     /**
-     * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-     * instead of staying recycle bin.
+     * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
-     * The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+     * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
      * @deprecated It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-     * Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
      */
     public readonly prepaidPeriod!: pulumi.Output<number>;
     /**
-     * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-     * notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-     * automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+     * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     public readonly prepaidRenewFlag!: pulumi.Output<string>;
     /**
@@ -84,8 +109,7 @@ export class Storage extends pulumi.CustomResource {
      */
     public readonly storageName!: pulumi.Output<string>;
     /**
-     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-     * [10-16000].
+     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
      */
     public readonly storageSize!: pulumi.Output<number>;
     /**
@@ -191,26 +215,21 @@ export interface StorageState {
      */
     encrypt?: pulumi.Input<boolean>;
     /**
-     * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-     * instead of staying recycle bin.
+     * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+     * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
      * @deprecated It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
      */
     period?: pulumi.Input<number>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-     * Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
-     * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-     * notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-     * automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+     * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidRenewFlag?: pulumi.Input<string>;
     /**
@@ -226,8 +245,7 @@ export interface StorageState {
      */
     storageName?: pulumi.Input<string>;
     /**
-     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-     * [10-16000].
+     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
      */
     storageSize?: pulumi.Input<number>;
     /**
@@ -265,26 +283,21 @@ export interface StorageArgs {
      */
     encrypt?: pulumi.Input<boolean>;
     /**
-     * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-     * instead of staying recycle bin.
+     * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+     * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
      * @deprecated It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
      */
     period?: pulumi.Input<number>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-     * Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
-     * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-     * notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-     * automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+     * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidRenewFlag?: pulumi.Input<string>;
     /**
@@ -300,8 +313,7 @@ export interface StorageArgs {
      */
     storageName: pulumi.Input<string>;
     /**
-     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-     * [10-16000].
+     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
      */
     storageSize: pulumi.Input<number>;
     /**

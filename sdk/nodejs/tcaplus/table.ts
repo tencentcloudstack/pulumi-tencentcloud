@@ -4,6 +4,74 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create TcaplusDB table.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = new tencentcloud.tcaplus.Cluster("test", {
+ *     idlType: "PROTO",
+ *     clusterName: "tf_tcaplus_cluster_test",
+ *     vpcId: "vpc-7k6gzox6",
+ *     subnetId: "subnet-akwgvfa3",
+ *     password: "1qaA2k1wgvfa3ZZZ",
+ *     oldPasswordExpireLast: 3600,
+ * });
+ * const tablegroup = new tencentcloud.tcaplus.Tablegroup("tablegroup", {
+ *     clusterId: test.id,
+ *     tablegroupName: "tf_test_group_name",
+ * });
+ * const main = new tencentcloud.tcaplus.Idl("main", {
+ *     clusterId: test.id,
+ *     tablegroupId: tablegroup.id,
+ *     fileName: "tf_idl_test_2",
+ *     fileType: "PROTO",
+ *     fileExtType: "proto",
+ *     fileContent: `    syntax = "proto2";
+ *     package myTcaplusTable;
+ *     import "tcaplusservice.optionv1.proto";
+ *     message tb_online {
+ *        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+ *         required int64 uin = 1;
+ *         required string name = 2;
+ *         required int32 region = 3;
+ *         required int32 gamesvrid = 4;
+ *         optional int32 logintime = 5 [default = 1];
+ *         repeated int64 lockid = 6 [packed = true];
+ *         optional bool is_available = 7 [default = false];
+ *         optional pay_info pay = 8;
+ *     }
+ *
+ *     message pay_info {
+ *         required int64 pay_id = 1;
+ *         optional uint64 total_money = 2;
+ *         optional uint64 pay_times = 3;
+ *         optional pay_auth_info auth = 4;
+ *         message pay_auth_info {
+ *             required string pay_keys = 1;
+ *             optional int64 update_time = 2;
+ *         }
+ *     }
+ * `,
+ * });
+ * const table = new tencentcloud.tcaplus.Table("table", {
+ *     clusterId: test.id,
+ *     tablegroupId: tablegroup.id,
+ *     tableName: "tb_online",
+ *     tableType: "GENERIC",
+ *     description: "test",
+ *     idlId: main.id,
+ *     tableIdlType: "PROTO",
+ *     reservedReadCu: 1000,
+ *     reservedWriteCu: 20,
+ *     reservedVolume: 1,
+ * });
+ * ```
+ */
 export class Table extends pulumi.CustomResource {
     /**
      * Get an existing Table resource's state with the given name, ID, and optional extra

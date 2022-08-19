@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class AlarmPolicyPolicyTag
     {
+        /// <summary>
+        /// Tag key.
+        /// </summary>
         public readonly string Key;
+        /// <summary>
+        /// Tag value.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

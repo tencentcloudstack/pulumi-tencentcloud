@@ -5,21 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./haVip";
+export * from "./getVipEipAttachments";
+export * from "./getVips";
+export * from "./vip";
 export * from "./vipEipAttachment";
-export * from "./vipEipAttachments";
-export * from "./vips";
 
 // Import resources to register:
-import { HaVip } from "./haVip";
+import { Vip } from "./vip";
 import { VipEipAttachment } from "./vipEipAttachment";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "tencentcloud:Ha/haVip:HaVip":
-                return new HaVip(name, <any>undefined, { urn })
+            case "tencentcloud:Ha/vip:Vip":
+                return new Vip(name, <any>undefined, { urn })
             case "tencentcloud:Ha/vipEipAttachment:VipEipAttachment":
                 return new VipEipAttachment(name, <any>undefined, { urn })
             default:
@@ -27,5 +27,5 @@ const _module = {
         }
     },
 };
-pulumi.runtime.registerResourceModule("tencentcloud", "Ha/haVip", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ha/vip", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ha/vipEipAttachment", _module)

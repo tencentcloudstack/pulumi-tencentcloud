@@ -10,261 +10,297 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type VipEipAttachmentsHaVipEipAttachmentList struct {
+type GetVipEipAttachmentsHaVipEipAttachmentList struct {
+	// Public IP address of EIP to be queried.
 	AddressIp string `pulumi:"addressIp"`
-	HavipId   string `pulumi:"havipId"`
+	// ID of the attached HA VIP to be queried.
+	HavipId string `pulumi:"havipId"`
 }
 
-// VipEipAttachmentsHaVipEipAttachmentListInput is an input type that accepts VipEipAttachmentsHaVipEipAttachmentListArgs and VipEipAttachmentsHaVipEipAttachmentListOutput values.
-// You can construct a concrete instance of `VipEipAttachmentsHaVipEipAttachmentListInput` via:
+// GetVipEipAttachmentsHaVipEipAttachmentListInput is an input type that accepts GetVipEipAttachmentsHaVipEipAttachmentListArgs and GetVipEipAttachmentsHaVipEipAttachmentListOutput values.
+// You can construct a concrete instance of `GetVipEipAttachmentsHaVipEipAttachmentListInput` via:
 //
-//          VipEipAttachmentsHaVipEipAttachmentListArgs{...}
-type VipEipAttachmentsHaVipEipAttachmentListInput interface {
+//          GetVipEipAttachmentsHaVipEipAttachmentListArgs{...}
+type GetVipEipAttachmentsHaVipEipAttachmentListInput interface {
 	pulumi.Input
 
-	ToVipEipAttachmentsHaVipEipAttachmentListOutput() VipEipAttachmentsHaVipEipAttachmentListOutput
-	ToVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(context.Context) VipEipAttachmentsHaVipEipAttachmentListOutput
+	ToGetVipEipAttachmentsHaVipEipAttachmentListOutput() GetVipEipAttachmentsHaVipEipAttachmentListOutput
+	ToGetVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(context.Context) GetVipEipAttachmentsHaVipEipAttachmentListOutput
 }
 
-type VipEipAttachmentsHaVipEipAttachmentListArgs struct {
+type GetVipEipAttachmentsHaVipEipAttachmentListArgs struct {
+	// Public IP address of EIP to be queried.
 	AddressIp pulumi.StringInput `pulumi:"addressIp"`
-	HavipId   pulumi.StringInput `pulumi:"havipId"`
+	// ID of the attached HA VIP to be queried.
+	HavipId pulumi.StringInput `pulumi:"havipId"`
 }
 
-func (VipEipAttachmentsHaVipEipAttachmentListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*VipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
+func (GetVipEipAttachmentsHaVipEipAttachmentListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
 }
 
-func (i VipEipAttachmentsHaVipEipAttachmentListArgs) ToVipEipAttachmentsHaVipEipAttachmentListOutput() VipEipAttachmentsHaVipEipAttachmentListOutput {
-	return i.ToVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(context.Background())
+func (i GetVipEipAttachmentsHaVipEipAttachmentListArgs) ToGetVipEipAttachmentsHaVipEipAttachmentListOutput() GetVipEipAttachmentsHaVipEipAttachmentListOutput {
+	return i.ToGetVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(context.Background())
 }
 
-func (i VipEipAttachmentsHaVipEipAttachmentListArgs) ToVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(ctx context.Context) VipEipAttachmentsHaVipEipAttachmentListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(VipEipAttachmentsHaVipEipAttachmentListOutput)
+func (i GetVipEipAttachmentsHaVipEipAttachmentListArgs) ToGetVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(ctx context.Context) GetVipEipAttachmentsHaVipEipAttachmentListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipEipAttachmentsHaVipEipAttachmentListOutput)
 }
 
-// VipEipAttachmentsHaVipEipAttachmentListArrayInput is an input type that accepts VipEipAttachmentsHaVipEipAttachmentListArray and VipEipAttachmentsHaVipEipAttachmentListArrayOutput values.
-// You can construct a concrete instance of `VipEipAttachmentsHaVipEipAttachmentListArrayInput` via:
+// GetVipEipAttachmentsHaVipEipAttachmentListArrayInput is an input type that accepts GetVipEipAttachmentsHaVipEipAttachmentListArray and GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput values.
+// You can construct a concrete instance of `GetVipEipAttachmentsHaVipEipAttachmentListArrayInput` via:
 //
-//          VipEipAttachmentsHaVipEipAttachmentListArray{ VipEipAttachmentsHaVipEipAttachmentListArgs{...} }
-type VipEipAttachmentsHaVipEipAttachmentListArrayInput interface {
+//          GetVipEipAttachmentsHaVipEipAttachmentListArray{ GetVipEipAttachmentsHaVipEipAttachmentListArgs{...} }
+type GetVipEipAttachmentsHaVipEipAttachmentListArrayInput interface {
 	pulumi.Input
 
-	ToVipEipAttachmentsHaVipEipAttachmentListArrayOutput() VipEipAttachmentsHaVipEipAttachmentListArrayOutput
-	ToVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(context.Context) VipEipAttachmentsHaVipEipAttachmentListArrayOutput
+	ToGetVipEipAttachmentsHaVipEipAttachmentListArrayOutput() GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput
+	ToGetVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(context.Context) GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput
 }
 
-type VipEipAttachmentsHaVipEipAttachmentListArray []VipEipAttachmentsHaVipEipAttachmentListInput
+type GetVipEipAttachmentsHaVipEipAttachmentListArray []GetVipEipAttachmentsHaVipEipAttachmentListInput
 
-func (VipEipAttachmentsHaVipEipAttachmentListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]VipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
+func (GetVipEipAttachmentsHaVipEipAttachmentListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
 }
 
-func (i VipEipAttachmentsHaVipEipAttachmentListArray) ToVipEipAttachmentsHaVipEipAttachmentListArrayOutput() VipEipAttachmentsHaVipEipAttachmentListArrayOutput {
-	return i.ToVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(context.Background())
+func (i GetVipEipAttachmentsHaVipEipAttachmentListArray) ToGetVipEipAttachmentsHaVipEipAttachmentListArrayOutput() GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput {
+	return i.ToGetVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(context.Background())
 }
 
-func (i VipEipAttachmentsHaVipEipAttachmentListArray) ToVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(ctx context.Context) VipEipAttachmentsHaVipEipAttachmentListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(VipEipAttachmentsHaVipEipAttachmentListArrayOutput)
+func (i GetVipEipAttachmentsHaVipEipAttachmentListArray) ToGetVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(ctx context.Context) GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput)
 }
 
-type VipEipAttachmentsHaVipEipAttachmentListOutput struct{ *pulumi.OutputState }
+type GetVipEipAttachmentsHaVipEipAttachmentListOutput struct{ *pulumi.OutputState }
 
-func (VipEipAttachmentsHaVipEipAttachmentListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*VipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
+func (GetVipEipAttachmentsHaVipEipAttachmentListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
 }
 
-func (o VipEipAttachmentsHaVipEipAttachmentListOutput) ToVipEipAttachmentsHaVipEipAttachmentListOutput() VipEipAttachmentsHaVipEipAttachmentListOutput {
+func (o GetVipEipAttachmentsHaVipEipAttachmentListOutput) ToGetVipEipAttachmentsHaVipEipAttachmentListOutput() GetVipEipAttachmentsHaVipEipAttachmentListOutput {
 	return o
 }
 
-func (o VipEipAttachmentsHaVipEipAttachmentListOutput) ToVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(ctx context.Context) VipEipAttachmentsHaVipEipAttachmentListOutput {
+func (o GetVipEipAttachmentsHaVipEipAttachmentListOutput) ToGetVipEipAttachmentsHaVipEipAttachmentListOutputWithContext(ctx context.Context) GetVipEipAttachmentsHaVipEipAttachmentListOutput {
 	return o
 }
 
-func (o VipEipAttachmentsHaVipEipAttachmentListOutput) AddressIp() pulumi.StringOutput {
-	return o.ApplyT(func(v VipEipAttachmentsHaVipEipAttachmentList) string { return v.AddressIp }).(pulumi.StringOutput)
+// Public IP address of EIP to be queried.
+func (o GetVipEipAttachmentsHaVipEipAttachmentListOutput) AddressIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipEipAttachmentsHaVipEipAttachmentList) string { return v.AddressIp }).(pulumi.StringOutput)
 }
 
-func (o VipEipAttachmentsHaVipEipAttachmentListOutput) HavipId() pulumi.StringOutput {
-	return o.ApplyT(func(v VipEipAttachmentsHaVipEipAttachmentList) string { return v.HavipId }).(pulumi.StringOutput)
+// ID of the attached HA VIP to be queried.
+func (o GetVipEipAttachmentsHaVipEipAttachmentListOutput) HavipId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipEipAttachmentsHaVipEipAttachmentList) string { return v.HavipId }).(pulumi.StringOutput)
 }
 
-type VipEipAttachmentsHaVipEipAttachmentListArrayOutput struct{ *pulumi.OutputState }
+type GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput struct{ *pulumi.OutputState }
 
-func (VipEipAttachmentsHaVipEipAttachmentListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]VipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
+func (GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipEipAttachmentsHaVipEipAttachmentList)(nil)).Elem()
 }
 
-func (o VipEipAttachmentsHaVipEipAttachmentListArrayOutput) ToVipEipAttachmentsHaVipEipAttachmentListArrayOutput() VipEipAttachmentsHaVipEipAttachmentListArrayOutput {
+func (o GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput) ToGetVipEipAttachmentsHaVipEipAttachmentListArrayOutput() GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput {
 	return o
 }
 
-func (o VipEipAttachmentsHaVipEipAttachmentListArrayOutput) ToVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(ctx context.Context) VipEipAttachmentsHaVipEipAttachmentListArrayOutput {
+func (o GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput) ToGetVipEipAttachmentsHaVipEipAttachmentListArrayOutputWithContext(ctx context.Context) GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput {
 	return o
 }
 
-func (o VipEipAttachmentsHaVipEipAttachmentListArrayOutput) Index(i pulumi.IntInput) VipEipAttachmentsHaVipEipAttachmentListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VipEipAttachmentsHaVipEipAttachmentList {
-		return vs[0].([]VipEipAttachmentsHaVipEipAttachmentList)[vs[1].(int)]
-	}).(VipEipAttachmentsHaVipEipAttachmentListOutput)
+func (o GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput) Index(i pulumi.IntInput) GetVipEipAttachmentsHaVipEipAttachmentListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVipEipAttachmentsHaVipEipAttachmentList {
+		return vs[0].([]GetVipEipAttachmentsHaVipEipAttachmentList)[vs[1].(int)]
+	}).(GetVipEipAttachmentsHaVipEipAttachmentListOutput)
 }
 
-type VipsHaVipList struct {
-	AddressIp          string `pulumi:"addressIp"`
-	CreateTime         string `pulumi:"createTime"`
-	Id                 string `pulumi:"id"`
-	InstanceId         string `pulumi:"instanceId"`
-	Name               string `pulumi:"name"`
+type GetVipsHaVipList struct {
+	// EIP of the HA VIP to be queried.
+	AddressIp string `pulumi:"addressIp"`
+	// Create time of the HA VIP.
+	CreateTime string `pulumi:"createTime"`
+	// ID of the HA VIP to be queried.
+	Id string `pulumi:"id"`
+	// Instance id that is associated.
+	InstanceId string `pulumi:"instanceId"`
+	// Name of the HA VIP. The length of character is limited to 1-60.
+	Name string `pulumi:"name"`
+	// Network interface id that is associated.
 	NetworkInterfaceId string `pulumi:"networkInterfaceId"`
-	State              string `pulumi:"state"`
-	SubnetId           string `pulumi:"subnetId"`
-	Vip                string `pulumi:"vip"`
-	VpcId              string `pulumi:"vpcId"`
+	// State of the HA VIP. Valid values: `AVAILABLE`, `UNBIND`.
+	State string `pulumi:"state"`
+	// Subnet id of the HA VIP to be queried.
+	SubnetId string `pulumi:"subnetId"`
+	// Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.
+	Vip string `pulumi:"vip"`
+	// VPC id of the HA VIP to be queried.
+	VpcId string `pulumi:"vpcId"`
 }
 
-// VipsHaVipListInput is an input type that accepts VipsHaVipListArgs and VipsHaVipListOutput values.
-// You can construct a concrete instance of `VipsHaVipListInput` via:
+// GetVipsHaVipListInput is an input type that accepts GetVipsHaVipListArgs and GetVipsHaVipListOutput values.
+// You can construct a concrete instance of `GetVipsHaVipListInput` via:
 //
-//          VipsHaVipListArgs{...}
-type VipsHaVipListInput interface {
+//          GetVipsHaVipListArgs{...}
+type GetVipsHaVipListInput interface {
 	pulumi.Input
 
-	ToVipsHaVipListOutput() VipsHaVipListOutput
-	ToVipsHaVipListOutputWithContext(context.Context) VipsHaVipListOutput
+	ToGetVipsHaVipListOutput() GetVipsHaVipListOutput
+	ToGetVipsHaVipListOutputWithContext(context.Context) GetVipsHaVipListOutput
 }
 
-type VipsHaVipListArgs struct {
-	AddressIp          pulumi.StringInput `pulumi:"addressIp"`
-	CreateTime         pulumi.StringInput `pulumi:"createTime"`
-	Id                 pulumi.StringInput `pulumi:"id"`
-	InstanceId         pulumi.StringInput `pulumi:"instanceId"`
-	Name               pulumi.StringInput `pulumi:"name"`
+type GetVipsHaVipListArgs struct {
+	// EIP of the HA VIP to be queried.
+	AddressIp pulumi.StringInput `pulumi:"addressIp"`
+	// Create time of the HA VIP.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// ID of the HA VIP to be queried.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Instance id that is associated.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Name of the HA VIP. The length of character is limited to 1-60.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Network interface id that is associated.
 	NetworkInterfaceId pulumi.StringInput `pulumi:"networkInterfaceId"`
-	State              pulumi.StringInput `pulumi:"state"`
-	SubnetId           pulumi.StringInput `pulumi:"subnetId"`
-	Vip                pulumi.StringInput `pulumi:"vip"`
-	VpcId              pulumi.StringInput `pulumi:"vpcId"`
+	// State of the HA VIP. Valid values: `AVAILABLE`, `UNBIND`.
+	State pulumi.StringInput `pulumi:"state"`
+	// Subnet id of the HA VIP to be queried.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// VPC id of the HA VIP to be queried.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
-func (VipsHaVipListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*VipsHaVipList)(nil)).Elem()
+func (GetVipsHaVipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipsHaVipList)(nil)).Elem()
 }
 
-func (i VipsHaVipListArgs) ToVipsHaVipListOutput() VipsHaVipListOutput {
-	return i.ToVipsHaVipListOutputWithContext(context.Background())
+func (i GetVipsHaVipListArgs) ToGetVipsHaVipListOutput() GetVipsHaVipListOutput {
+	return i.ToGetVipsHaVipListOutputWithContext(context.Background())
 }
 
-func (i VipsHaVipListArgs) ToVipsHaVipListOutputWithContext(ctx context.Context) VipsHaVipListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(VipsHaVipListOutput)
+func (i GetVipsHaVipListArgs) ToGetVipsHaVipListOutputWithContext(ctx context.Context) GetVipsHaVipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipsHaVipListOutput)
 }
 
-// VipsHaVipListArrayInput is an input type that accepts VipsHaVipListArray and VipsHaVipListArrayOutput values.
-// You can construct a concrete instance of `VipsHaVipListArrayInput` via:
+// GetVipsHaVipListArrayInput is an input type that accepts GetVipsHaVipListArray and GetVipsHaVipListArrayOutput values.
+// You can construct a concrete instance of `GetVipsHaVipListArrayInput` via:
 //
-//          VipsHaVipListArray{ VipsHaVipListArgs{...} }
-type VipsHaVipListArrayInput interface {
+//          GetVipsHaVipListArray{ GetVipsHaVipListArgs{...} }
+type GetVipsHaVipListArrayInput interface {
 	pulumi.Input
 
-	ToVipsHaVipListArrayOutput() VipsHaVipListArrayOutput
-	ToVipsHaVipListArrayOutputWithContext(context.Context) VipsHaVipListArrayOutput
+	ToGetVipsHaVipListArrayOutput() GetVipsHaVipListArrayOutput
+	ToGetVipsHaVipListArrayOutputWithContext(context.Context) GetVipsHaVipListArrayOutput
 }
 
-type VipsHaVipListArray []VipsHaVipListInput
+type GetVipsHaVipListArray []GetVipsHaVipListInput
 
-func (VipsHaVipListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]VipsHaVipList)(nil)).Elem()
+func (GetVipsHaVipListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipsHaVipList)(nil)).Elem()
 }
 
-func (i VipsHaVipListArray) ToVipsHaVipListArrayOutput() VipsHaVipListArrayOutput {
-	return i.ToVipsHaVipListArrayOutputWithContext(context.Background())
+func (i GetVipsHaVipListArray) ToGetVipsHaVipListArrayOutput() GetVipsHaVipListArrayOutput {
+	return i.ToGetVipsHaVipListArrayOutputWithContext(context.Background())
 }
 
-func (i VipsHaVipListArray) ToVipsHaVipListArrayOutputWithContext(ctx context.Context) VipsHaVipListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(VipsHaVipListArrayOutput)
+func (i GetVipsHaVipListArray) ToGetVipsHaVipListArrayOutputWithContext(ctx context.Context) GetVipsHaVipListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipsHaVipListArrayOutput)
 }
 
-type VipsHaVipListOutput struct{ *pulumi.OutputState }
+type GetVipsHaVipListOutput struct{ *pulumi.OutputState }
 
-func (VipsHaVipListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*VipsHaVipList)(nil)).Elem()
+func (GetVipsHaVipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipsHaVipList)(nil)).Elem()
 }
 
-func (o VipsHaVipListOutput) ToVipsHaVipListOutput() VipsHaVipListOutput {
+func (o GetVipsHaVipListOutput) ToGetVipsHaVipListOutput() GetVipsHaVipListOutput {
 	return o
 }
 
-func (o VipsHaVipListOutput) ToVipsHaVipListOutputWithContext(ctx context.Context) VipsHaVipListOutput {
+func (o GetVipsHaVipListOutput) ToGetVipsHaVipListOutputWithContext(ctx context.Context) GetVipsHaVipListOutput {
 	return o
 }
 
-func (o VipsHaVipListOutput) AddressIp() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.AddressIp }).(pulumi.StringOutput)
+// EIP of the HA VIP to be queried.
+func (o GetVipsHaVipListOutput) AddressIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.AddressIp }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Create time of the HA VIP.
+func (o GetVipsHaVipListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the HA VIP to be queried.
+func (o GetVipsHaVipListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.InstanceId }).(pulumi.StringOutput)
+// Instance id that is associated.
+func (o GetVipsHaVipListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the HA VIP. The length of character is limited to 1-60.
+func (o GetVipsHaVipListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) NetworkInterfaceId() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.NetworkInterfaceId }).(pulumi.StringOutput)
+// Network interface id that is associated.
+func (o GetVipsHaVipListOutput) NetworkInterfaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.NetworkInterfaceId }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.State }).(pulumi.StringOutput)
+// State of the HA VIP. Valid values: `AVAILABLE`, `UNBIND`.
+func (o GetVipsHaVipListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.State }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.SubnetId }).(pulumi.StringOutput)
+// Subnet id of the HA VIP to be queried.
+func (o GetVipsHaVipListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.SubnetId }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.Vip }).(pulumi.StringOutput)
+// Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.
+func (o GetVipsHaVipListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.Vip }).(pulumi.StringOutput)
 }
 
-func (o VipsHaVipListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v VipsHaVipList) string { return v.VpcId }).(pulumi.StringOutput)
+// VPC id of the HA VIP to be queried.
+func (o GetVipsHaVipListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipsHaVipList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-type VipsHaVipListArrayOutput struct{ *pulumi.OutputState }
+type GetVipsHaVipListArrayOutput struct{ *pulumi.OutputState }
 
-func (VipsHaVipListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]VipsHaVipList)(nil)).Elem()
+func (GetVipsHaVipListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipsHaVipList)(nil)).Elem()
 }
 
-func (o VipsHaVipListArrayOutput) ToVipsHaVipListArrayOutput() VipsHaVipListArrayOutput {
+func (o GetVipsHaVipListArrayOutput) ToGetVipsHaVipListArrayOutput() GetVipsHaVipListArrayOutput {
 	return o
 }
 
-func (o VipsHaVipListArrayOutput) ToVipsHaVipListArrayOutputWithContext(ctx context.Context) VipsHaVipListArrayOutput {
+func (o GetVipsHaVipListArrayOutput) ToGetVipsHaVipListArrayOutputWithContext(ctx context.Context) GetVipsHaVipListArrayOutput {
 	return o
 }
 
-func (o VipsHaVipListArrayOutput) Index(i pulumi.IntInput) VipsHaVipListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VipsHaVipList {
-		return vs[0].([]VipsHaVipList)[vs[1].(int)]
-	}).(VipsHaVipListOutput)
+func (o GetVipsHaVipListArrayOutput) Index(i pulumi.IntInput) GetVipsHaVipListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVipsHaVipList {
+		return vs[0].([]GetVipsHaVipList)[vs[1].(int)]
+	}).(GetVipsHaVipListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*VipEipAttachmentsHaVipEipAttachmentListInput)(nil)).Elem(), VipEipAttachmentsHaVipEipAttachmentListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*VipEipAttachmentsHaVipEipAttachmentListArrayInput)(nil)).Elem(), VipEipAttachmentsHaVipEipAttachmentListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*VipsHaVipListInput)(nil)).Elem(), VipsHaVipListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*VipsHaVipListArrayInput)(nil)).Elem(), VipsHaVipListArray{})
-	pulumi.RegisterOutputType(VipEipAttachmentsHaVipEipAttachmentListOutput{})
-	pulumi.RegisterOutputType(VipEipAttachmentsHaVipEipAttachmentListArrayOutput{})
-	pulumi.RegisterOutputType(VipsHaVipListOutput{})
-	pulumi.RegisterOutputType(VipsHaVipListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipEipAttachmentsHaVipEipAttachmentListInput)(nil)).Elem(), GetVipEipAttachmentsHaVipEipAttachmentListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipEipAttachmentsHaVipEipAttachmentListArrayInput)(nil)).Elem(), GetVipEipAttachmentsHaVipEipAttachmentListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipsHaVipListInput)(nil)).Elem(), GetVipsHaVipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipsHaVipListArrayInput)(nil)).Elem(), GetVipsHaVipListArray{})
+	pulumi.RegisterOutputType(GetVipEipAttachmentsHaVipEipAttachmentListOutput{})
+	pulumi.RegisterOutputType(GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput{})
+	pulumi.RegisterOutputType(GetVipsHaVipListOutput{})
+	pulumi.RegisterOutputType(GetVipsHaVipListArrayOutput{})
 }

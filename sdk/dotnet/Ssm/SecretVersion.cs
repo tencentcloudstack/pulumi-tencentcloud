@@ -9,33 +9,72 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Ssm
 {
+    /// <summary>
+    /// Provide a resource to create a SSM secret version.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Ssm.Secret("foo", new Tencentcloud.Ssm.SecretArgs
+    ///         {
+    ///             SecretName = "test",
+    ///             Description = "test secret",
+    ///             RecoveryWindowInDays = 0,
+    ///             IsEnabled = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "test-tag", "test" },
+    ///             },
+    ///         });
+    ///         var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new Tencentcloud.Ssm.SecretVersionArgs
+    ///         {
+    ///             SecretName = foo.SecretName,
+    ///             VersionId = "v1",
+    ///             SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SSM secret version can be imported using the secretName#versionId, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/secretVersion:SecretVersion")]
     public partial class SecretVersion : Pulumi.CustomResource
     {
         /// <summary>
-        /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-        /// bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         /// </summary>
         [Output("secretBinary")]
         public Output<string?> SecretBinary { get; private set; } = null!;
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        /// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Output("secretName")]
         public Output<string> SecretName { get; private set; } = null!;
 
         /// <summary>
-        /// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-        /// When secret status is `Disabled`, this field will not update anymore.
+        /// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         /// </summary>
         [Output("secretString")]
         public Output<string?> SecretString { get; private set; } = null!;
 
         /// <summary>
-        /// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-        /// and hyphen '-'. The first character must be a letter or number.
+        /// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Output("versionId")]
         public Output<string> VersionId { get; private set; } = null!;
@@ -87,29 +126,25 @@ namespace Pulumi.Tencentcloud.Ssm
     public sealed class SecretVersionArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-        /// bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         /// </summary>
         [Input("secretBinary")]
         public Input<string>? SecretBinary { get; set; }
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        /// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("secretName", required: true)]
         public Input<string> SecretName { get; set; } = null!;
 
         /// <summary>
-        /// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-        /// When secret status is `Disabled`, this field will not update anymore.
+        /// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         /// </summary>
         [Input("secretString")]
         public Input<string>? SecretString { get; set; }
 
         /// <summary>
-        /// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-        /// and hyphen '-'. The first character must be a letter or number.
+        /// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("versionId", required: true)]
         public Input<string> VersionId { get; set; } = null!;
@@ -122,29 +157,25 @@ namespace Pulumi.Tencentcloud.Ssm
     public sealed class SecretVersionState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-        /// bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         /// </summary>
         [Input("secretBinary")]
         public Input<string>? SecretBinary { get; set; }
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        /// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("secretName")]
         public Input<string>? SecretName { get; set; }
 
         /// <summary>
-        /// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-        /// When secret status is `Disabled`, this field will not update anymore.
+        /// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
         /// </summary>
         [Input("secretString")]
         public Input<string>? SecretString { get; set; }
 
         /// <summary>
-        /// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-        /// and hyphen '-'. The first character must be a letter or number.
+        /// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         /// </summary>
         [Input("versionId")]
         public Input<string>? VersionId { get; set; }

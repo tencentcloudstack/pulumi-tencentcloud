@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create an exclusive CLB Logset.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Clb.LogSet("foo", {
+ *     perioid: 7,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CLB log set can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+ * ```
+ */
 export class LogSet extends pulumi.CustomResource {
     /**
      * Get an existing LogSet resource's state with the given name, ID, and optional extra
@@ -37,7 +59,7 @@ export class LogSet extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Logset name, which unique and fixed `clb_logset` among all CLS logsets.
+     * Logset name, which unique and fixed `clbLogset` among all CLS logsets.
      */
     public /*out*/ readonly name!: pulumi.Output<string>;
     /**
@@ -87,7 +109,7 @@ export interface LogSetState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Logset name, which unique and fixed `clb_logset` among all CLS logsets.
+     * Logset name, which unique and fixed `clbLogset` among all CLS logsets.
      */
     name?: pulumi.Input<string>;
     /**

@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a VPN SSL Client.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const client = new tencentcloud.Vpn.SslClient("client", {
+ *     sslVpnClientName: "hello",
+ *     sslVpnServerId: "vpns-aog5xcjj",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VPN SSL Client can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
+ * ```
+ */
 export class SslClient extends pulumi.CustomResource {
     /**
      * Get an existing SslClient resource's state with the given name, ID, and optional extra

@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.PrivateDns.Inputs
 
     public sealed class ZoneTagSetGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Key of Tag.
+        /// </summary>
         [Input("tagKey", required: true)]
         public Input<string> TagKey { get; set; } = null!;
 
+        /// <summary>
+        /// Value of Tag.
+        /// </summary>
         [Input("tagValue", required: true)]
         public Input<string> TagValue { get; set; } = null!;
 

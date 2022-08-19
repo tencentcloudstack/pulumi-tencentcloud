@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create tcr repository.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = tencentcloud.Tcr.getInstances({
+ *     name: "test",
+ * });
+ * const foo = new tencentcloud.tcr.Repository("foo", {
+ *     instanceId: test.then(test => test.instanceLists?[0]?.id),
+ *     namespaceName: "exampleNamespace",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * tcr repository can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+ * ```
+ */
 export class Repository extends pulumi.CustomResource {
     /**
      * Get an existing Repository resource's state with the given name, ID, and optional extra
@@ -53,9 +79,7 @@ export class Repository extends pulumi.CustomResource {
      */
     public /*out*/ readonly isPublic!: pulumi.Output<boolean>;
     /**
-     * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-     * `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-     * as `sub1/sub2/repo`.
+     * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -141,9 +165,7 @@ export interface RepositoryState {
      */
     isPublic?: pulumi.Input<boolean>;
     /**
-     * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-     * `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-     * as `sub1/sub2/repo`.
+     * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
      */
     name?: pulumi.Input<string>;
     /**
@@ -177,9 +199,7 @@ export interface RepositoryArgs {
      */
     instanceId: pulumi.Input<string>;
     /**
-     * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-     * `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-     * as `sub1/sub2/repo`.
+     * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
      */
     name?: pulumi.Input<string>;
     /**

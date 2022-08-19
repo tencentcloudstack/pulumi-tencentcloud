@@ -9,6 +9,125 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
+    /// <summary>
+    /// Use this resource to create dayu DDoS policy v2
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var ddosV2 = new Tencentcloud.Dayu.DdosPolicyV2("ddosV2", new Tencentcloud.Dayu.DdosPolicyV2Args
+    ///         {
+    ///             Acls = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2AclArgs
+    ///                 {
+    ///                     Action = "transmit",
+    ///                     DPortEnd = 10,
+    ///                     DPortStart = 1,
+    ///                     ForwardProtocol = "all",
+    ///                     Priority = 9,
+    ///                     SPortEnd = 20,
+    ///                     SPortStart = 10,
+    ///                 },
+    ///             },
+    ///             BlackWhiteIps = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2BlackWhiteIpArgs
+    ///                 {
+    ///                     Ip = "1.2.3.4",
+    ///                     IpType = "black",
+    ///                 },
+    ///             },
+    ///             Business = "bgpip",
+    ///             DdosAi = "on",
+    ///             DdosConnectLimit = new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosConnectLimitArgs
+    ///             {
+    ///                 BadConnThreshold = 30,
+    ///                 ConnTimeout = 30,
+    ///                 DstConnLimit = 21,
+    ///                 DstNewLimit = 20,
+    ///                 NullConnEnable = 1,
+    ///                 SdConnLimit = 11,
+    ///                 SdNewLimit = 10,
+    ///                 SynLimit = 20,
+    ///                 SynRate = 10,
+    ///             },
+    ///             DdosGeoIpBlockConfigs = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosGeoIpBlockConfigArgs
+    ///                 {
+    ///                     Action = "drop",
+    ///                     AreaLists = 
+    ///                     {
+    ///                         100001,
+    ///                     },
+    ///                     RegionType = "customized",
+    ///                 },
+    ///             },
+    ///             DdosLevel = "low",
+    ///             DdosSpeedLimitConfigs = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosSpeedLimitConfigArgs
+    ///                 {
+    ///                     Bandwidth = 20,
+    ///                     DstPortList = "10",
+    ///                     Mode = 1,
+    ///                     PacketRate = 10,
+    ///                     ProtocolList = "TCP",
+    ///                 },
+    ///             },
+    ///             DdosThreshold = 100,
+    ///             PacketFilters = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2PacketFilterArgs
+    ///                 {
+    ///                     Action = "drop",
+    ///                     DPortEnd = 20,
+    ///                     DPortStart = 20,
+    ///                     Depth = 2,
+    ///                     Depth2 = 3,
+    ///                     IsNot = 0,
+    ///                     IsNot2 = 0,
+    ///                     MatchBegin = "begin_l3",
+    ///                     MatchBegin2 = "begin_l3",
+    ///                     MatchLogic = "and",
+    ///                     MatchType = "pcre",
+    ///                     MatchType2 = "pcre",
+    ///                     Offset = 1,
+    ///                     Offset2 = 2,
+    ///                     PktlenMax = 30,
+    ///                     PktlenMin = 30,
+    ///                     Protocol = "all",
+    ///                     SPortEnd = 10,
+    ///                     SPortStart = 10,
+    ///                     Str = "12",
+    ///                     Str2 = "30",
+    ///                 },
+    ///             },
+    ///             ProtocolBlockConfigs = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2ProtocolBlockConfigArgs
+    ///                 {
+    ///                     DropIcmp = 1,
+    ///                     DropOther = 0,
+    ///                     DropTcp = 0,
+    ///                     DropUdp = 0,
+    ///                 },
+    ///             },
+    ///             ResourceId = "bgpip-000004xf",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyV2:DdosPolicyV2")]
     public partial class DdosPolicyV2 : Pulumi.CustomResource
     {
@@ -25,8 +144,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<ImmutableArray<Outputs.DdosPolicyV2BlackWhiteIp>> BlackWhiteIps { get; private set; } = null!;
 
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        /// packet; net indicates anti-anti-ip pro version.
+        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Output("business")]
         public Output<string?> Business { get; private set; } = null!;
@@ -62,8 +180,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<ImmutableArray<Outputs.DdosPolicyV2DdosSpeedLimitConfig>> DdosSpeedLimitConfigs { get; private set; } = null!;
 
         /// <summary>
-        /// DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-        /// means that the default value is adopted.
+        /// DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         /// </summary>
         [Output("ddosThreshold")]
         public Output<int?> DdosThreshold { get; private set; } = null!;
@@ -157,8 +274,7 @@ namespace Pulumi.Tencentcloud.Dayu
         }
 
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        /// packet; net indicates anti-anti-ip pro version.
+        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business")]
         public Input<string>? Business { get; set; }
@@ -206,8 +322,7 @@ namespace Pulumi.Tencentcloud.Dayu
         }
 
         /// <summary>
-        /// DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-        /// means that the default value is adopted.
+        /// DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         /// </summary>
         [Input("ddosThreshold")]
         public Input<int>? DdosThreshold { get; set; }
@@ -274,8 +389,7 @@ namespace Pulumi.Tencentcloud.Dayu
         }
 
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        /// packet; net indicates anti-anti-ip pro version.
+        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business")]
         public Input<string>? Business { get; set; }
@@ -323,8 +437,7 @@ namespace Pulumi.Tencentcloud.Dayu
         }
 
         /// <summary>
-        /// DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-        /// means that the default value is adopted.
+        /// DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         /// </summary>
         [Input("ddosThreshold")]
         public Input<int>? DdosThreshold { get; set; }

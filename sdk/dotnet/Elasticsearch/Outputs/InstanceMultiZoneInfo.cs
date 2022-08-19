@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Elasticsearch.Outputs
     [OutputType]
     public sealed class InstanceMultiZoneInfo
     {
+        /// <summary>
+        /// Availability zone.
+        /// </summary>
         public readonly string AvailabilityZone;
+        /// <summary>
+        /// The ID of a VPC subnetwork.
+        /// </summary>
         public readonly string SubnetId;
 
         [OutputConstructor]

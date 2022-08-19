@@ -12,12 +12,21 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class CosShipperContentGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         [Input("csv")]
         public Input<Inputs.CosShipperContentCsvGetArgs>? Csv { get; set; }
 
+        /// <summary>
+        /// Content format. Valid values: json, csv.
+        /// </summary>
         [Input("format", required: true)]
         public Input<string> Format { get; set; } = null!;
 
+        /// <summary>
+        /// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         [Input("json")]
         public Input<Inputs.CosShipperContentJsonGetArgs>? Json { get; set; }
 

@@ -9,6 +9,45 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cbs
 {
+    /// <summary>
+    /// Provides a resource to create a CBS.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var storage = new Tencentcloud.Cbs.Storage("storage", new Tencentcloud.Cbs.StorageArgs
+    ///         {
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///             Encrypt = false,
+    ///             ProjectId = 0,
+    ///             StorageName = "mystorage",
+    ///             StorageSize = 100,
+    ///             StorageType = "CLOUD_SSD",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CBS storage can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/storage:Storage")]
     public partial class Storage : Pulumi.CustomResource
     {
@@ -37,30 +76,25 @@ namespace Pulumi.Tencentcloud.Cbs
         public Output<bool?> Encrypt { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-        /// instead of staying recycle bin.
+        /// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+        /// It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
         /// </summary>
         [Output("period")]
         public Output<int?> Period { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
         /// </summary>
         [Output("prepaidPeriod")]
         public Output<int> PrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
-        /// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-        /// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-        /// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Output("prepaidRenewFlag")]
         public Output<string> PrepaidRenewFlag { get; private set; } = null!;
@@ -84,8 +118,7 @@ namespace Pulumi.Tencentcloud.Cbs
         public Output<string> StorageName { get; private set; } = null!;
 
         /// <summary>
-        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-        /// [10-16000].
+        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
         /// </summary>
         [Output("storageSize")]
         public Output<int> StorageSize { get; private set; } = null!;
@@ -179,30 +212,25 @@ namespace Pulumi.Tencentcloud.Cbs
         public Input<bool>? Encrypt { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-        /// instead of staying recycle bin.
+        /// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+        /// It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-        /// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-        /// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidRenewFlag")]
         public Input<string>? PrepaidRenewFlag { get; set; }
@@ -226,8 +254,7 @@ namespace Pulumi.Tencentcloud.Cbs
         public Input<string> StorageName { get; set; } = null!;
 
         /// <summary>
-        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-        /// [10-16000].
+        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
         /// </summary>
         [Input("storageSize", required: true)]
         public Input<int> StorageSize { get; set; } = null!;
@@ -288,30 +315,25 @@ namespace Pulumi.Tencentcloud.Cbs
         public Input<bool>? Encrypt { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-        /// instead of staying recycle bin.
+        /// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+        /// It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-        /// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-        /// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidRenewFlag")]
         public Input<string>? PrepaidRenewFlag { get; set; }
@@ -335,8 +357,7 @@ namespace Pulumi.Tencentcloud.Cbs
         public Input<string>? StorageName { get; set; }
 
         /// <summary>
-        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-        /// [10-16000].
+        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
         /// </summary>
         [Input("storageSize")]
         public Input<int>? StorageSize { get; set; }

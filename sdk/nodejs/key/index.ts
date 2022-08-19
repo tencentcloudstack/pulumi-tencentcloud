@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getPairs";
 export * from "./pair";
-export * from "./pairs";
 
 // Import resources to register:
 import { Pair } from "./pair";

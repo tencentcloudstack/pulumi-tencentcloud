@@ -20,8 +20,7 @@ class NamespaceArgs:
         The set of arguments for constructing a Namespace resource.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
-        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         pulumi.set(__self__, "instance_id", instance_id)
         if is_public is not None:
@@ -57,8 +56,7 @@ class NamespaceArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-        `_`, `-`), and cannot start, end or continue with separators.
+        Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         return pulumi.get(self, "name")
 
@@ -77,8 +75,7 @@ class _NamespaceState:
         Input properties used for looking up and filtering Namespace resources.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
-        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
@@ -115,8 +112,7 @@ class _NamespaceState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-        `_`, `-`), and cannot start, end or continue with separators.
+        Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         return pulumi.get(self, "name")
 
@@ -135,13 +131,32 @@ class Namespace(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Namespace resource with the given unique name, props, and options.
+        Use this resource to create tcr namespace.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.Namespace("foo",
+            instance_id="",
+            is_public=True)
+        ```
+
+        ## Import
+
+        tcr namespace can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
-        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         ...
     @overload
@@ -150,7 +165,27 @@ class Namespace(pulumi.CustomResource):
                  args: NamespaceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Namespace resource with the given unique name, props, and options.
+        Use this resource to create tcr namespace.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tcr.Namespace("foo",
+            instance_id="",
+            is_public=True)
+        ```
+
+        ## Import
+
+        tcr namespace can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+        ```
+
         :param str resource_name: The name of the resource.
         :param NamespaceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -208,8 +243,7 @@ class Namespace(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
-        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -240,8 +274,7 @@ class Namespace(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-        `_`, `-`), and cannot start, end or continue with separators.
+        Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         return pulumi.get(self, "name")
 

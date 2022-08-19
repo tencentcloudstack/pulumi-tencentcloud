@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CLB customized config.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Clb.CustomizedConfig("foo", {
+ *     configContent: `client_max_body_size 224M;
+ * client_body_timeout 60s;`,
+ *     configName: "helloWorld",
+ *     loadBalancerIds: [
+ *         tencentcloud_clb_instance_internal_clb.id,
+ *         tencentcloud_clb_instance_internal_clb2.id,
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CLB customized config can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+ * ```
+ */
 export class CustomizedConfig extends pulumi.CustomResource {
     /**
      * Get an existing CustomizedConfig resource's state with the given name, ID, and optional extra

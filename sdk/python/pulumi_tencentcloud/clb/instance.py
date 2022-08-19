@@ -43,19 +43,15 @@ class InstanceArgs:
         :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-               `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-               backend instance security group.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         :param pulumi.Input[str] log_set_id: The id of log set.
         :param pulumi.Input[str] log_topic_id: The id of log topic.
         :param pulumi.Input[str] master_zone_id: Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
-        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-               traffic when the master is down.
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-               untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
         :param pulumi.Input[str] subnet_id: Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
@@ -169,8 +165,7 @@ class InstanceArgs:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-        `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -182,8 +177,7 @@ class InstanceArgs:
     @pulumi.getter(name="loadBalancerPassToTarget")
     def load_balancer_pass_to_target(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-        backend instance security group.
+        Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         """
         return pulumi.get(self, "load_balancer_pass_to_target")
 
@@ -255,8 +249,7 @@ class InstanceArgs:
     @pulumi.getter(name="slaveZoneId")
     def slave_zone_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-        traffic when the master is down.
+        Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         """
         return pulumi.get(self, "slave_zone_id")
 
@@ -268,8 +261,7 @@ class InstanceArgs:
     @pulumi.getter(name="snatIps")
     def snat_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]]]:
         """
-        Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-        untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         """
         return pulumi.get(self, "snat_ips")
 
@@ -395,28 +387,22 @@ class _InstanceState:
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-               `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-               backend instance security group.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         :param pulumi.Input[str] log_set_id: The id of log set.
         :param pulumi.Input[str] log_topic_id: The id of log topic.
         :param pulumi.Input[str] master_zone_id: Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
-        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-               traffic when the master is down.
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-               untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
         :param pulumi.Input[str] subnet_id: Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
-        :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China
-               Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing
-               (BANDWIDTH_PACKAGE).
+        :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
         """
@@ -531,8 +517,7 @@ class _InstanceState:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-        `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -544,8 +529,7 @@ class _InstanceState:
     @pulumi.getter(name="loadBalancerPassToTarget")
     def load_balancer_pass_to_target(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-        backend instance security group.
+        Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         """
         return pulumi.get(self, "load_balancer_pass_to_target")
 
@@ -629,8 +613,7 @@ class _InstanceState:
     @pulumi.getter(name="slaveZoneId")
     def slave_zone_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-        traffic when the master is down.
+        Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         """
         return pulumi.get(self, "slave_zone_id")
 
@@ -642,8 +625,7 @@ class _InstanceState:
     @pulumi.getter(name="snatIps")
     def snat_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]]]:
         """
-        Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-        untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         """
         return pulumi.get(self, "snat_ips")
 
@@ -715,9 +697,7 @@ class _InstanceState:
     @pulumi.getter(name="vipIsp")
     def vip_isp(self) -> Optional[pulumi.Input[str]]:
         """
-        Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China
-        Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing
-        (BANDWIDTH_PACKAGE).
+        Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         """
         return pulumi.get(self, "vip_isp")
 
@@ -778,27 +758,146 @@ class Instance(pulumi.CustomResource):
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create a CLB instance.
+
+        ## Example Usage
+
+        INTERNAL CLB
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        internal_clb = tencentcloud.clb.Instance("internalClb",
+            clb_name="myclb",
+            network_type="INTERNAL",
+            project_id=0,
+            subnet_id="subnet-12rastkr",
+            tags={
+                "test": "tf",
+            },
+            vpc_id="vpc-7007ll7q")
+        ```
+
+        OPEN CLB
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        open_clb = tencentcloud.clb.Instance("openClb",
+            clb_name="myclb",
+            network_type="OPEN",
+            project_id=0,
+            security_groups=["sg-o0ek7r93"],
+            tags={
+                "test": "tf",
+            },
+            target_region_info_region="ap-guangzhou",
+            target_region_info_vpc_id="vpc-da7ffa61",
+            vpc_id="vpc-da7ffa61")
+        ```
+
+        Default enable
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vpc.Instance("foo",
+            cidr_block="10.0.0.0/16",
+            tags={
+                "test": "mytest",
+            })
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone="ap-guangzhou-1",
+            vpc_id=foo.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        sglab = tencentcloud.security.Group("sglab",
+            description="favourite sg",
+            project_id=0)
+        open_clb = tencentcloud.clb.Instance("openClb",
+            network_type="OPEN",
+            clb_name="my-open-clb",
+            project_id=0,
+            vpc_id=foo.id,
+            load_balancer_pass_to_target=True,
+            security_groups=[sglab.id],
+            target_region_info_region="ap-guangzhou",
+            target_region_info_vpc_id=foo.id,
+            tags={
+                "test": "open",
+            })
+        ```
+
+        CREATE multiple instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        open_clb1 = tencentcloud.clb.Instance("openClb1",
+            clb_name="hello",
+            master_zone_id="ap-guangzhou-3",
+            network_type="OPEN")
+        ```
+
+        CREATE instance with log
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        vpc_test = tencentcloud.vpc.Instance("vpcTest", cidr_block="10.0.0.0/16")
+        rtb_test = tencentcloud.route.Table("rtbTest", vpc_id=vpc_test.id)
+        subnet_test = tencentcloud.subnet.Instance("subnetTest",
+            availability_zone="ap-guangzhou-3",
+            cidr_block="10.0.1.0/24",
+            route_table_id=rtb_test.id,
+            vpc_id=vpc_test.id)
+        set = tencentcloud.clb.LogSet("set", period=7)
+        topic = tencentcloud.clb.LogTopic("topic",
+            log_set_id=set.id,
+            topic_name="clb-topic")
+        internal_clb = tencentcloud.clb.Instance("internalClb",
+            clb_name="myclb",
+            load_balancer_pass_to_target=True,
+            log_set_id=set.id,
+            log_topic_id=topic.id,
+            network_type="INTERNAL",
+            project_id=0,
+            subnet_id=subnet_test.id,
+            tags={
+                "test": "tf",
+            },
+            vpc_id=vpc_test.id)
+        ```
+
+        ## Import
+
+        CLB instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-               `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-               backend instance security group.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         :param pulumi.Input[str] log_set_id: The id of log set.
         :param pulumi.Input[str] log_topic_id: The id of log topic.
         :param pulumi.Input[str] master_zone_id: Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
-        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-               traffic when the master is down.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-               untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
         :param pulumi.Input[str] subnet_id: Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
@@ -814,7 +913,130 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create a CLB instance.
+
+        ## Example Usage
+
+        INTERNAL CLB
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        internal_clb = tencentcloud.clb.Instance("internalClb",
+            clb_name="myclb",
+            network_type="INTERNAL",
+            project_id=0,
+            subnet_id="subnet-12rastkr",
+            tags={
+                "test": "tf",
+            },
+            vpc_id="vpc-7007ll7q")
+        ```
+
+        OPEN CLB
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        open_clb = tencentcloud.clb.Instance("openClb",
+            clb_name="myclb",
+            network_type="OPEN",
+            project_id=0,
+            security_groups=["sg-o0ek7r93"],
+            tags={
+                "test": "tf",
+            },
+            target_region_info_region="ap-guangzhou",
+            target_region_info_vpc_id="vpc-da7ffa61",
+            vpc_id="vpc-da7ffa61")
+        ```
+
+        Default enable
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vpc.Instance("foo",
+            cidr_block="10.0.0.0/16",
+            tags={
+                "test": "mytest",
+            })
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone="ap-guangzhou-1",
+            vpc_id=foo.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        sglab = tencentcloud.security.Group("sglab",
+            description="favourite sg",
+            project_id=0)
+        open_clb = tencentcloud.clb.Instance("openClb",
+            network_type="OPEN",
+            clb_name="my-open-clb",
+            project_id=0,
+            vpc_id=foo.id,
+            load_balancer_pass_to_target=True,
+            security_groups=[sglab.id],
+            target_region_info_region="ap-guangzhou",
+            target_region_info_vpc_id=foo.id,
+            tags={
+                "test": "open",
+            })
+        ```
+
+        CREATE multiple instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        open_clb1 = tencentcloud.clb.Instance("openClb1",
+            clb_name="hello",
+            master_zone_id="ap-guangzhou-3",
+            network_type="OPEN")
+        ```
+
+        CREATE instance with log
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        vpc_test = tencentcloud.vpc.Instance("vpcTest", cidr_block="10.0.0.0/16")
+        rtb_test = tencentcloud.route.Table("rtbTest", vpc_id=vpc_test.id)
+        subnet_test = tencentcloud.subnet.Instance("subnetTest",
+            availability_zone="ap-guangzhou-3",
+            cidr_block="10.0.1.0/24",
+            route_table_id=rtb_test.id,
+            vpc_id=vpc_test.id)
+        set = tencentcloud.clb.LogSet("set", period=7)
+        topic = tencentcloud.clb.LogTopic("topic",
+            log_set_id=set.id,
+            topic_name="clb-topic")
+        internal_clb = tencentcloud.clb.Instance("internalClb",
+            clb_name="myclb",
+            load_balancer_pass_to_target=True,
+            log_set_id=set.id,
+            log_topic_id=topic.id,
+            network_type="INTERNAL",
+            project_id=0,
+            subnet_id=subnet_test.id,
+            tags={
+                "test": "tf",
+            },
+            vpc_id=vpc_test.id)
+        ```
+
+        ## Import
+
+        CLB instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -935,28 +1157,22 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-               `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-               backend instance security group.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         :param pulumi.Input[str] log_set_id: The id of log set.
         :param pulumi.Input[str] log_topic_id: The id of log topic.
         :param pulumi.Input[str] master_zone_id: Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
-        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-               traffic when the master is down.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-               untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
         :param pulumi.Input[str] subnet_id: Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
-        :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China
-               Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing
-               (BANDWIDTH_PACKAGE).
+        :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
         """
@@ -1033,8 +1249,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> pulumi.Output[str]:
         """
-        Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`,
-        `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -1042,8 +1257,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="loadBalancerPassToTarget")
     def load_balancer_pass_to_target(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and
-        backend instance security group.
+        Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         """
         return pulumi.get(self, "load_balancer_pass_to_target")
 
@@ -1099,8 +1313,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="slaveZoneId")
     def slave_zone_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake
-        traffic when the master is down.
+        Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         """
         return pulumi.get(self, "slave_zone_id")
 
@@ -1108,8 +1321,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="snatIps")
     def snat_ips(self) -> pulumi.Output[Optional[Sequence['outputs.InstanceSnatIp']]]:
         """
-        Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is
-        untraceable, please import resource `tencentcloud_clb_snat_ip` to handle fixed ips.
+        Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         """
         return pulumi.get(self, "snat_ips")
 
@@ -1157,9 +1369,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="vipIsp")
     def vip_isp(self) -> pulumi.Output[str]:
         """
-        Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China
-        Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing
-        (BANDWIDTH_PACKAGE).
+        Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         """
         return pulumi.get(self, "vip_isp")
 

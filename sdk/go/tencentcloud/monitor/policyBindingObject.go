@@ -11,6 +11,93 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource for bind objects to a alarm policy resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		instances, err := Instances.GetInstance(ctx, nil, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		policy, err := Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
+// 			PolicyName:  pulumi.String("hello"),
+// 			MonitorType: pulumi.String("MT_QCE"),
+// 			Enable:      pulumi.Int(1),
+// 			ProjectId:   pulumi.Int(1244035),
+// 			Namespace:   pulumi.String("cvm_device"),
+// 			Conditions: &monitor.AlarmPolicyConditionsArgs{
+// 				IsUnionRule: pulumi.Int(1),
+// 				Rules: monitor.AlarmPolicyConditionsRuleArray{
+// 					&monitor.AlarmPolicyConditionsRuleArgs{
+// 						MetricName:      pulumi.String("CpuUsage"),
+// 						Period:          pulumi.Int(60),
+// 						Operator:        pulumi.String("ge"),
+// 						Value:           pulumi.String("89.9"),
+// 						ContinuePeriod:  pulumi.Int(1),
+// 						NoticeFrequency: pulumi.Int(3600),
+// 						IsPowerNotice:   pulumi.Int(0),
+// 					},
+// 				},
+// 			},
+// 			EventConditions: monitor.AlarmPolicyEventConditionArray{
+// 				&monitor.AlarmPolicyEventConditionArgs{
+// 					MetricName: pulumi.String("ping_unreachable"),
+// 				},
+// 				&monitor.AlarmPolicyEventConditionArgs{
+// 					MetricName: pulumi.String("guest_reboot"),
+// 				},
+// 			},
+// 			NoticeIds: pulumi.StringArray{
+// 				pulumi.String("notice-l9ziyxw6"),
+// 			},
+// 			TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
+// 				&monitor.AlarmPolicyTriggerTaskArgs{
+// 					Type:       pulumi.String("AS"),
+// 					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewPolicyBindingObject(ctx, "binding", &Monitor.PolicyBindingObjectArgs{
+// 			PolicyId: policy.ID(),
+// 			Dimensions: monitor.PolicyBindingObjectDimensionArray{
+// 				&monitor.PolicyBindingObjectDimensionArgs{
+// 					DimensionsJson: pulumi.String(fmt.Sprintf("%v%v%v", "{\"unInstanceId\":\"", instances.InstanceLists[0].InstanceId, "\"}")),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Monitor Policy Binding Object can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
+// ```
 type PolicyBindingObject struct {
 	pulumi.CustomResourceState
 

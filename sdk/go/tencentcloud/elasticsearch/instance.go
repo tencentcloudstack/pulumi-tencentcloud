@@ -11,22 +11,75 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides an elasticsearch instance resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Elasticsearch.NewInstance(ctx, "foo", &Elasticsearch.InstanceArgs{
+// 			InstanceName:     pulumi.String("tf-test"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			Version:          pulumi.String("7.5.1"),
+// 			VpcId:            pulumi.Any(_var.Vpc_id),
+// 			SubnetId:         pulumi.Any(_var.Subnet_id),
+// 			Password:         pulumi.String("Test12345"),
+// 			LicenseType:      pulumi.String("oss"),
+// 			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+// 				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+// 					NodeNum:  pulumi.Int(1),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+// 				},
+// 			},
+// 			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+// 				&elasticsearch.InstanceNodeInfoListArgs{
+// 					NodeNum:  pulumi.Int(2),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+// 					Encrypt:  pulumi.Bool(false),
+// 				},
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Elasticsearch instance can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone pulumi.StringPtrOutput `pulumi:"availabilityZone"`
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-	// disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
 	BasicSecurityType pulumi.IntPtrOutput `pulumi:"basicSecurityType"`
-	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod pulumi.IntPtrOutput `pulumi:"chargePeriod"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// Instance creation time.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-	// Default value is `0`.
+	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode pulumi.IntPtrOutput `pulumi:"deployMode"`
 	// Elasticsearch domain name.
 	ElasticsearchDomain pulumi.StringOutput `pulumi:"elasticsearchDomain"`
@@ -34,27 +87,23 @@ type Instance struct {
 	ElasticsearchPort pulumi.IntOutput `pulumi:"elasticsearchPort"`
 	// Elasticsearch VIP.
 	ElasticsearchVip pulumi.StringOutput `pulumi:"elasticsearchVip"`
-	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
 	// Kibana access URL.
 	KibanaUrl pulumi.StringOutput `pulumi:"kibanaUrl"`
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
 	LicenseType pulumi.StringPtrOutput `pulumi:"licenseType"`
-	// Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+	// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
 	MultiZoneInfos InstanceMultiZoneInfoArrayOutput `pulumi:"multiZoneInfos"`
-	// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-	// such as node type, node quantity, node specification, disk type, and disk size.
+	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists InstanceNodeInfoListArrayOutput `pulumi:"nodeInfoLists"`
 	// Password to an instance.
 	Password pulumi.StringOutput `pulumi:"password"`
-	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-	// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrOutput `pulumi:"renewFlag"`
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
-	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-	// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
 	Version pulumi.StringOutput `pulumi:"version"`
@@ -107,17 +156,15 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-	// disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
 	BasicSecurityType *int `pulumi:"basicSecurityType"`
-	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod *int `pulumi:"chargePeriod"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
 	// Instance creation time.
 	CreateTime *string `pulumi:"createTime"`
-	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-	// Default value is `0`.
+	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode *int `pulumi:"deployMode"`
 	// Elasticsearch domain name.
 	ElasticsearchDomain *string `pulumi:"elasticsearchDomain"`
@@ -125,27 +172,23 @@ type instanceState struct {
 	ElasticsearchPort *int `pulumi:"elasticsearchPort"`
 	// Elasticsearch VIP.
 	ElasticsearchVip *string `pulumi:"elasticsearchVip"`
-	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
 	// Kibana access URL.
 	KibanaUrl *string `pulumi:"kibanaUrl"`
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
 	LicenseType *string `pulumi:"licenseType"`
-	// Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+	// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
 	MultiZoneInfos []InstanceMultiZoneInfo `pulumi:"multiZoneInfos"`
-	// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-	// such as node type, node quantity, node specification, disk type, and disk size.
+	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists []InstanceNodeInfoList `pulumi:"nodeInfoLists"`
 	// Password to an instance.
 	Password *string `pulumi:"password"`
-	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-	// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag *string `pulumi:"renewFlag"`
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
 	SubnetId *string `pulumi:"subnetId"`
-	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-	// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
 	Version *string `pulumi:"version"`
@@ -158,17 +201,15 @@ type instanceState struct {
 type InstanceState struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone pulumi.StringPtrInput
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-	// disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
 	BasicSecurityType pulumi.IntPtrInput
-	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod pulumi.IntPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
 	// Instance creation time.
 	CreateTime pulumi.StringPtrInput
-	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-	// Default value is `0`.
+	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode pulumi.IntPtrInput
 	// Elasticsearch domain name.
 	ElasticsearchDomain pulumi.StringPtrInput
@@ -176,27 +217,23 @@ type InstanceState struct {
 	ElasticsearchPort pulumi.IntPtrInput
 	// Elasticsearch VIP.
 	ElasticsearchVip pulumi.StringPtrInput
-	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
 	// Kibana access URL.
 	KibanaUrl pulumi.StringPtrInput
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
 	LicenseType pulumi.StringPtrInput
-	// Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+	// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
 	MultiZoneInfos InstanceMultiZoneInfoArrayInput
-	// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-	// such as node type, node quantity, node specification, disk type, and disk size.
+	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists InstanceNodeInfoListArrayInput
 	// Password to an instance.
 	Password pulumi.StringPtrInput
-	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-	// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrInput
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
 	SubnetId pulumi.StringPtrInput
-	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-	// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapInput
 	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
 	Version pulumi.StringPtrInput
@@ -213,35 +250,29 @@ func (InstanceState) ElementType() reflect.Type {
 type instanceArgs struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-	// disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
 	BasicSecurityType *int `pulumi:"basicSecurityType"`
-	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod *int `pulumi:"chargePeriod"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
-	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-	// Default value is `0`.
+	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode *int `pulumi:"deployMode"`
-	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
 	LicenseType *string `pulumi:"licenseType"`
-	// Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+	// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
 	MultiZoneInfos []InstanceMultiZoneInfo `pulumi:"multiZoneInfos"`
-	// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-	// such as node type, node quantity, node specification, disk type, and disk size.
+	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists []InstanceNodeInfoList `pulumi:"nodeInfoLists"`
 	// Password to an instance.
 	Password string `pulumi:"password"`
-	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-	// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag *string `pulumi:"renewFlag"`
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
 	SubnetId *string `pulumi:"subnetId"`
-	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-	// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
 	Version string `pulumi:"version"`
@@ -255,35 +286,29 @@ type instanceArgs struct {
 type InstanceArgs struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone pulumi.StringPtrInput
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-	// disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
 	BasicSecurityType pulumi.IntPtrInput
-	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod pulumi.IntPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
-	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-	// Default value is `0`.
+	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode pulumi.IntPtrInput
-	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
 	LicenseType pulumi.StringPtrInput
-	// Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+	// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
 	MultiZoneInfos InstanceMultiZoneInfoArrayInput
-	// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-	// such as node type, node quantity, node specification, disk type, and disk size.
+	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists InstanceNodeInfoListArrayInput
 	// Password to an instance.
 	Password pulumi.StringInput
-	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-	// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrInput
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
 	SubnetId pulumi.StringPtrInput
-	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-	// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapInput
 	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
 	Version pulumi.StringInput
@@ -385,13 +410,12 @@ func (o InstanceOutput) AvailabilityZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.AvailabilityZone }).(pulumi.StringPtrOutput)
 }
 
-// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-// disabled, `2` is enabled, and default value is `1`.
+// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
 func (o InstanceOutput) BasicSecurityType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.BasicSecurityType }).(pulumi.IntPtrOutput)
 }
 
-// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
+// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 func (o InstanceOutput) ChargePeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ChargePeriod }).(pulumi.IntPtrOutput)
 }
@@ -406,8 +430,7 @@ func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-// Default value is `0`.
+// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 func (o InstanceOutput) DeployMode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.DeployMode }).(pulumi.IntPtrOutput)
 }
@@ -427,8 +450,7 @@ func (o InstanceOutput) ElasticsearchVip() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.ElasticsearchVip }).(pulumi.StringOutput)
 }
 
-// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-// underscores(_).
+// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 func (o InstanceOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.InstanceName }).(pulumi.StringPtrOutput)
 }
@@ -443,13 +465,12 @@ func (o InstanceOutput) LicenseType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.LicenseType }).(pulumi.StringPtrOutput)
 }
 
-// Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
+// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
 func (o InstanceOutput) MultiZoneInfos() InstanceMultiZoneInfoArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceMultiZoneInfoArrayOutput { return v.MultiZoneInfos }).(InstanceMultiZoneInfoArrayOutput)
 }
 
-// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-// such as node type, node quantity, node specification, disk type, and disk size.
+// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 func (o InstanceOutput) NodeInfoLists() InstanceNodeInfoListArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceNodeInfoListArrayOutput { return v.NodeInfoLists }).(InstanceNodeInfoListArrayOutput)
 }
@@ -459,8 +480,7 @@ func (o InstanceOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
 }
 
-// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 func (o InstanceOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.RenewFlag }).(pulumi.StringPtrOutput)
 }
@@ -470,8 +490,7 @@ func (o InstanceOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
 }
 
-// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 func (o InstanceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }

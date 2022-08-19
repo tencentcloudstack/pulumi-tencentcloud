@@ -9,16 +9,21 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'SecretVersionsSecretVersionListResult',
-    'SecretsSecretListResult',
+    'GetSecretVersionsSecretVersionListResult',
+    'GetSecretsSecretListResult',
 ]
 
 @pulumi.output_type
-class SecretVersionsSecretVersionListResult(dict):
+class GetSecretVersionsSecretVersionListResult(dict):
     def __init__(__self__, *,
                  secret_binary: str,
                  secret_string: str,
                  version_id: str):
+        """
+        :param str secret_binary: The base64-encoded binary secret.
+        :param str secret_string: The string text of secret.
+        :param str version_id: VersionId used to filter result.
+        """
         pulumi.set(__self__, "secret_binary", secret_binary)
         pulumi.set(__self__, "secret_string", secret_string)
         pulumi.set(__self__, "version_id", version_id)
@@ -26,21 +31,30 @@ class SecretVersionsSecretVersionListResult(dict):
     @property
     @pulumi.getter(name="secretBinary")
     def secret_binary(self) -> str:
+        """
+        The base64-encoded binary secret.
+        """
         return pulumi.get(self, "secret_binary")
 
     @property
     @pulumi.getter(name="secretString")
     def secret_string(self) -> str:
+        """
+        The string text of secret.
+        """
         return pulumi.get(self, "secret_string")
 
     @property
     @pulumi.getter(name="versionId")
     def version_id(self) -> str:
+        """
+        VersionId used to filter result.
+        """
         return pulumi.get(self, "version_id")
 
 
 @pulumi.output_type
-class SecretsSecretListResult(dict):
+class GetSecretsSecretListResult(dict):
     def __init__(__self__, *,
                  create_time: int,
                  create_uin: int,
@@ -49,6 +63,15 @@ class SecretsSecretListResult(dict):
                  kms_key_id: str,
                  secret_name: str,
                  status: str):
+        """
+        :param int create_time: Create time of secret.
+        :param int create_uin: Uin of Creator.
+        :param int delete_time: Delete time of CMK.
+        :param str description: Description of secret.
+        :param str kms_key_id: KMS keyId used to encrypt secret.
+        :param str secret_name: Secret name used to filter result.
+        :param str status: Status of secret.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "create_uin", create_uin)
         pulumi.set(__self__, "delete_time", delete_time)
@@ -60,36 +83,57 @@ class SecretsSecretListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> int:
+        """
+        Create time of secret.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="createUin")
     def create_uin(self) -> int:
+        """
+        Uin of Creator.
+        """
         return pulumi.get(self, "create_uin")
 
     @property
     @pulumi.getter(name="deleteTime")
     def delete_time(self) -> int:
+        """
+        Delete time of CMK.
+        """
         return pulumi.get(self, "delete_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of secret.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="kmsKeyId")
     def kms_key_id(self) -> str:
+        """
+        KMS keyId used to encrypt secret.
+        """
         return pulumi.get(self, "kms_key_id")
 
     @property
     @pulumi.getter(name="secretName")
     def secret_name(self) -> str:
+        """
+        Secret name used to filter result.
+        """
         return pulumi.get(self, "secret_name")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Status of secret.
+        """
         return pulumi.get(self, "status")
 
 

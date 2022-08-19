@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -23,8 +23,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Ssl/certificate:Certificate":
 		r = &Certificate{}
-	case "tencentcloud:Ssl/instance:Instance":
-		r = &Instance{}
+	case "tencentcloud:Ssl/freeCertificate:FreeCertificate":
+		r = &FreeCertificate{}
+	case "tencentcloud:Ssl/payCertificate:PayCertificate":
+		r = &PayCertificate{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -45,7 +47,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Ssl/instance",
+		"Ssl/freeCertificate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/payCertificate",
 		&module{version},
 	)
 }

@@ -4,9 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-export class DB extends pulumi.CustomResource {
+/**
+ * Provides a SQL Server DB resource belongs to SQL Server instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = new tencentcloud.sqlserver.Db("example", {
+ *     instanceId: tencentcloud_sqlserver_instance.example.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * SQL Server DB can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+ * ```
+ */
+export class Db extends pulumi.CustomResource {
     /**
-     * Get an existing DB resource's state with the given name, ID, and optional extra
+     * Get an existing Db resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -14,28 +38,26 @@ export class DB extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DBState, opts?: pulumi.CustomResourceOptions): DB {
-        return new DB(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DbState, opts?: pulumi.CustomResourceOptions): Db {
+        return new Db(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Sqlserver/dB:DB';
+    public static readonly __pulumiType = 'tencentcloud:Sqlserver/db:Db';
 
     /**
-     * Returns true if the given object is an instance of DB.  This is designed to work even
+     * Returns true if the given object is an instance of Db.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DB {
+    public static isInstance(obj: any): obj is Db {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DB.__pulumiType;
+        return obj['__pulumiType'] === Db.__pulumiType;
     }
 
     /**
-     * Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-     * `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-     * `Chinese_PRC_CI_AS`.
+     * Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
      */
     public readonly charset!: pulumi.Output<string | undefined>;
     /**
@@ -47,8 +69,7 @@ export class DB extends pulumi.CustomResource {
      */
     public readonly instanceId!: pulumi.Output<string>;
     /**
-     * Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-     * first one can not be underline.
+     * Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -61,18 +82,18 @@ export class DB extends pulumi.CustomResource {
     public /*out*/ readonly status!: pulumi.Output<string>;
 
     /**
-     * Create a DB resource with the given unique name, arguments, and options.
+     * Create a Db resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DBArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DBArgs | DBState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DbArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DbArgs | DbState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DBState | undefined;
+            const state = argsOrState as DbState | undefined;
             resourceInputs["charset"] = state ? state.charset : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
@@ -80,7 +101,7 @@ export class DB extends pulumi.CustomResource {
             resourceInputs["remark"] = state ? state.remark : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
         } else {
-            const args = argsOrState as DBArgs | undefined;
+            const args = argsOrState as DbArgs | undefined;
             if ((!args || args.instanceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceId'");
             }
@@ -92,18 +113,16 @@ export class DB extends pulumi.CustomResource {
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(DB.__pulumiType, name, resourceInputs, opts);
+        super(Db.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DB resources.
+ * Input properties used for looking up and filtering Db resources.
  */
-export interface DBState {
+export interface DbState {
     /**
-     * Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-     * `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-     * `Chinese_PRC_CI_AS`.
+     * Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
      */
     charset?: pulumi.Input<string>;
     /**
@@ -115,8 +134,7 @@ export interface DBState {
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-     * first one can not be underline.
+     * Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
      */
     name?: pulumi.Input<string>;
     /**
@@ -130,13 +148,11 @@ export interface DBState {
 }
 
 /**
- * The set of arguments for constructing a DB resource.
+ * The set of arguments for constructing a Db resource.
  */
-export interface DBArgs {
+export interface DbArgs {
     /**
-     * Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-     * `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-     * `Chinese_PRC_CI_AS`.
+     * Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
      */
     charset?: pulumi.Input<string>;
     /**
@@ -144,8 +160,7 @@ export interface DBArgs {
      */
     instanceId: pulumi.Input<string>;
     /**
-     * Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-     * first one can not be underline.
+     * Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
      */
     name?: pulumi.Input<string>;
     /**

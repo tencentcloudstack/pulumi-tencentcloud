@@ -4,6 +4,52 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a mysql instance resource to create master database instances.
+ *
+ * > **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const defaultInstance = new tencentcloud.Mysql.Instance("default", {
+ *     availabilityZone: "ap-guangzhou-4",
+ *     chargeType: "POSTPAID",
+ *     engineVersion: "5.7",
+ *     firstSlaveZone: "ap-guangzhou-4",
+ *     instanceName: "myTestMysql",
+ *     internetService: 1,
+ *     intranetPort: 3306,
+ *     memSize: 128000,
+ *     parameters: {
+ *         max_connections: "1000",
+ *     },
+ *     projectId: 201901010001,
+ *     rootPassword: "********",
+ *     secondSlaveZone: "ap-guangzhou-4",
+ *     securityGroups: ["sg-ot8eclwz"],
+ *     slaveDeployMode: 0,
+ *     slaveSyncMode: 1,
+ *     subnetId: "subnet-9uivyb1g",
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     volumeSize: 250,
+ *     vpcId: "vpc-12mt3l31",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * MySQL instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -65,9 +111,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly firstSlaveZone!: pulumi.Output<string | undefined>;
     /**
-     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-     * instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-     * para of the readonly mysql instance will not take effect.
+     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
@@ -115,13 +159,13 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly parameters!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+     * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
      */
     public readonly payType!: pulumi.Output<number | undefined>;
     /**
-     * Period of instance. NOTES: Only supported prepaid instance.
+     * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
      */
@@ -135,8 +179,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
-     * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-     * when you purchase read-only instances or disaster recovery instances.
+     * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
      */
     public readonly rootPassword!: pulumi.Output<string | undefined>;
     /**
@@ -160,7 +203,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
     /**
-     * Private network ID. If `vpc_id` is set, this value is required.
+     * Private network ID. If `vpcId` is set, this value is required.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
@@ -317,9 +360,7 @@ export interface InstanceState {
      */
     firstSlaveZone?: pulumi.Input<string>;
     /**
-     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-     * instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-     * para of the readonly mysql instance will not take effect.
+     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
@@ -367,13 +408,13 @@ export interface InstanceState {
      */
     parameters?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+     * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
      */
     payType?: pulumi.Input<number>;
     /**
-     * Period of instance. NOTES: Only supported prepaid instance.
+     * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
      */
@@ -387,8 +428,7 @@ export interface InstanceState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-     * when you purchase read-only instances or disaster recovery instances.
+     * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
      */
     rootPassword?: pulumi.Input<string>;
     /**
@@ -412,7 +452,7 @@ export interface InstanceState {
      */
     status?: pulumi.Input<number>;
     /**
-     * Private network ID. If `vpc_id` is set, this value is required.
+     * Private network ID. If `vpcId` is set, this value is required.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -470,9 +510,7 @@ export interface InstanceArgs {
      */
     firstSlaveZone?: pulumi.Input<string>;
     /**
-     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-     * instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-     * para of the readonly mysql instance will not take effect.
+     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
@@ -500,13 +538,13 @@ export interface InstanceArgs {
      */
     parameters?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+     * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
      */
     payType?: pulumi.Input<number>;
     /**
-     * Period of instance. NOTES: Only supported prepaid instance.
+     * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
      */
@@ -520,8 +558,7 @@ export interface InstanceArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-     * when you purchase read-only instances or disaster recovery instances.
+     * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
      */
     rootPassword?: pulumi.Input<string>;
     /**
@@ -541,7 +578,7 @@ export interface InstanceArgs {
      */
     slaveSyncMode?: pulumi.Input<number>;
     /**
-     * Private network ID. If `vpc_id` is set, this value is required.
+     * Private network ID. If `vpcId` is set, this value is required.
      */
     subnetId?: pulumi.Input<string>;
     /**

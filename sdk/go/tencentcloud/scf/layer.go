@@ -11,6 +11,49 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a SCF layer.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Scf.NewLayer(ctx, "foo", &Scf.LayerArgs{
+// 			CompatibleRuntimes: pulumi.StringArray{
+// 				pulumi.String("Python3.6"),
+// 			},
+// 			Content: &scf.LayerContentArgs{
+// 				CosBucketName:   pulumi.String("test-bucket"),
+// 				CosBucketRegion: pulumi.String("ap-guangzhou"),
+// 				CosObjectName:   pulumi.String("/foo.zip"),
+// 			},
+// 			Description: pulumi.String("foo"),
+// 			LayerName:   pulumi.String("foo"),
+// 			LicenseInfo: pulumi.String("foo"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Scf layer can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
+// ```
 type Layer struct {
 	pulumi.CustomResourceState
 

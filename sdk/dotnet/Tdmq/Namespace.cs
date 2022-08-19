@@ -9,6 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tdmq
 {
+    /// <summary>
+    /// Provide a resource to create a tdmq namespace.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         {
+    ///             ClusterName = "example",
+    ///             Remark = "this is description.",
+    ///         });
+    ///         var bar = new Tencentcloud.Tdmq.Namespace("bar", new Tencentcloud.Tdmq.NamespaceArgs
+    ///         {
+    ///             ClusterId = foo.Id,
+    ///             EnvironName = "example",
+    ///             MsgTtl = 300,
+    ///             Remark = "this is description.",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Tdmq namespace can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/namespace:Namespace")]
     public partial class Namespace : Pulumi.CustomResource
     {

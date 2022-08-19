@@ -28,12 +28,9 @@ class CustomDomainArgs:
         :param pulumi.Input[str] protocol: Protocol supported by service. Valid values: `http`, `https`, `http&https`.
         :param pulumi.Input[str] service_id: Unique service ID.
         :param pulumi.Input[str] sub_domain: Custom domain name to be bound.
-        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-               `https` or `http&https`.
-        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-               In this case, the `path_mappings` attribute is required.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-               `prepub`, and `release`.
+        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
+        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         """
         pulumi.set(__self__, "default_domain", default_domain)
         pulumi.set(__self__, "net_type", net_type)
@@ -111,8 +108,7 @@ class CustomDomainArgs:
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-        `https` or `http&https`.
+        Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         """
         return pulumi.get(self, "certificate_id")
 
@@ -124,8 +120,7 @@ class CustomDomainArgs:
     @pulumi.getter(name="isDefaultMapping")
     def is_default_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-        In this case, the `path_mappings` attribute is required.
+        Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         """
         return pulumi.get(self, "is_default_mapping")
 
@@ -137,8 +132,7 @@ class CustomDomainArgs:
     @pulumi.getter(name="pathMappings")
     def path_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-        `prepub`, and `release`.
+        Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         """
         return pulumi.get(self, "path_mappings")
 
@@ -161,14 +155,11 @@ class _CustomDomainState:
                  sub_domain: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering CustomDomain resources.
-        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-               `https` or `http&https`.
+        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         :param pulumi.Input[str] default_domain: Default domain name.
-        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-               In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         :param pulumi.Input[str] net_type: Network type. Valid values: `OUTER`, `INNER`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-               `prepub`, and `release`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         :param pulumi.Input[str] protocol: Protocol supported by service. Valid values: `http`, `https`, `http&https`.
         :param pulumi.Input[str] service_id: Unique service ID.
         :param pulumi.Input[int] status: Domain name resolution status. `1` means normal analysis, `0` means parsing failed.
@@ -197,8 +188,7 @@ class _CustomDomainState:
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-        `https` or `http&https`.
+        Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         """
         return pulumi.get(self, "certificate_id")
 
@@ -222,8 +212,7 @@ class _CustomDomainState:
     @pulumi.getter(name="isDefaultMapping")
     def is_default_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-        In this case, the `path_mappings` attribute is required.
+        Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         """
         return pulumi.get(self, "is_default_mapping")
 
@@ -247,8 +236,7 @@ class _CustomDomainState:
     @pulumi.getter(name="pathMappings")
     def path_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-        `prepub`, and `release`.
+        Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         """
         return pulumi.get(self, "path_mappings")
 
@@ -320,17 +308,34 @@ class CustomDomain(pulumi.CustomResource):
                  sub_domain: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a CustomDomain resource with the given unique name, props, and options.
+        Use this resource to create custom domain of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.api_gateway.CustomDomain("foo",
+            default_domain="service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+            is_default_mapping=False,
+            net_type="OUTER",
+            path_mappings=[
+                "/good#test",
+                "/root#release",
+            ],
+            protocol="http",
+            service_id="service-ohxqslqe",
+            sub_domain="tic-test.dnsv1.com")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-               `https` or `http&https`.
+        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         :param pulumi.Input[str] default_domain: Default domain name.
-        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-               In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         :param pulumi.Input[str] net_type: Network type. Valid values: `OUTER`, `INNER`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-               `prepub`, and `release`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         :param pulumi.Input[str] protocol: Protocol supported by service. Valid values: `http`, `https`, `http&https`.
         :param pulumi.Input[str] service_id: Unique service ID.
         :param pulumi.Input[str] sub_domain: Custom domain name to be bound.
@@ -342,7 +347,27 @@ class CustomDomain(pulumi.CustomResource):
                  args: CustomDomainArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CustomDomain resource with the given unique name, props, and options.
+        Use this resource to create custom domain of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.api_gateway.CustomDomain("foo",
+            default_domain="service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+            is_default_mapping=False,
+            net_type="OUTER",
+            path_mappings=[
+                "/good#test",
+                "/root#release",
+            ],
+            protocol="http",
+            service_id="service-ohxqslqe",
+            sub_domain="tic-test.dnsv1.com")
+        ```
+
         :param str resource_name: The name of the resource.
         :param CustomDomainArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -398,7 +423,7 @@ class CustomDomain(pulumi.CustomResource):
             __props__.__dict__["sub_domain"] = sub_domain
             __props__.__dict__["status"] = None
         super(CustomDomain, __self__).__init__(
-            'tencentcloud:APIGateway/customDomain:CustomDomain',
+            'tencentcloud:ApiGateway/customDomain:CustomDomain',
             resource_name,
             __props__,
             opts)
@@ -423,14 +448,11 @@ class CustomDomain(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-               `https` or `http&https`.
+        :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         :param pulumi.Input[str] default_domain: Default domain name.
-        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-               In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         :param pulumi.Input[str] net_type: Network type. Valid values: `OUTER`, `INNER`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-               `prepub`, and `release`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         :param pulumi.Input[str] protocol: Protocol supported by service. Valid values: `http`, `https`, `http&https`.
         :param pulumi.Input[str] service_id: Unique service ID.
         :param pulumi.Input[int] status: Domain name resolution status. `1` means normal analysis, `0` means parsing failed.
@@ -455,8 +477,7 @@ class CustomDomain(pulumi.CustomResource):
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> pulumi.Output[str]:
         """
-        Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-        `https` or `http&https`.
+        Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         """
         return pulumi.get(self, "certificate_id")
 
@@ -472,8 +493,7 @@ class CustomDomain(pulumi.CustomResource):
     @pulumi.getter(name="isDefaultMapping")
     def is_default_mapping(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-        In this case, the `path_mappings` attribute is required.
+        Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         """
         return pulumi.get(self, "is_default_mapping")
 
@@ -489,8 +509,7 @@ class CustomDomain(pulumi.CustomResource):
     @pulumi.getter(name="pathMappings")
     def path_mappings(self) -> pulumi.Output[Sequence[str]]:
         """
-        Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-        `prepub`, and `release`.
+        Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         """
         return pulumi.get(self, "path_mappings")
 

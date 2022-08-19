@@ -11,6 +11,55 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create TcaplusDB IDL file.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		test, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
+// 			IdlType:               pulumi.String("PROTO"),
+// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
+// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
+// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
+// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
+// 			OldPasswordExpireLast: pulumi.Int(3600),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		tablegroup, err := Tcaplus.NewTablegroup(ctx, "tablegroup", &Tcaplus.TablegroupArgs{
+// 			ClusterId:      test.ID(),
+// 			TablegroupName: pulumi.String("tf_test_group_name"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcaplus.NewIdl(ctx, "main", &Tcaplus.IdlArgs{
+// 			ClusterId:    test.ID(),
+// 			TablegroupId: tablegroup.ID(),
+// 			FileName:     pulumi.String("tf_idl_test"),
+// 			FileType:     pulumi.String("PROTO"),
+// 			FileExtType:  pulumi.String("proto"),
+// 			FileContent:  pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "    syntax = \"proto2\";\n", "    package myTcaplusTable;\n", "    import \"tcaplusservice.optionv1.proto\";\n", "    message tb_online {\n", "        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";\n", "        required int64 uin = 1;\n", "        required string name = 2;\n", "        required int32 region = 3;\n", "        required int32 gamesvrid = 4;\n", "        optional int32 logintime = 5 [default = 1];\n", "        repeated int64 lockid = 6 [packed = true];\n", "        optional bool is_available = 7 [default = false];\n", "        optional pay_info pay = 8;\n", "    }\n", "\n", "    message pay_info {\n", "        required int64 pay_id = 1;\n", "        optional uint64 total_money = 2;\n", "        optional uint64 pay_times = 3;\n", "        optional pay_auth_info auth = 4;\n", "        message pay_auth_info {\n", "            required string pay_keys = 1;\n", "            optional int64 update_time = 2;\n", "        }\n", "    }\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Idl struct {
 	pulumi.CustomResourceState
 
@@ -18,8 +67,7 @@ type Idl struct {
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// IDL file content of the TcaplusDB table.
 	FileContent pulumi.StringOutput `pulumi:"fileContent"`
-	// File ext type of the IDL file. If `file_type` is `PROTO`, `file_ext_type` must be 'proto'; If `file_type` is `TDR`,
-	// `file_ext_type` must be 'xml'.
+	// File ext type of the IDL file. If `fileType` is `PROTO`, `fileExtType` must be 'proto'; If `fileType` is `TDR`, `fileExtType` must be 'xml'.
 	FileExtType pulumi.StringOutput `pulumi:"fileExtType"`
 	// Name of the IDL file.
 	FileName pulumi.StringOutput `pulumi:"fileName"`
@@ -82,8 +130,7 @@ type idlState struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// IDL file content of the TcaplusDB table.
 	FileContent *string `pulumi:"fileContent"`
-	// File ext type of the IDL file. If `file_type` is `PROTO`, `file_ext_type` must be 'proto'; If `file_type` is `TDR`,
-	// `file_ext_type` must be 'xml'.
+	// File ext type of the IDL file. If `fileType` is `PROTO`, `fileExtType` must be 'proto'; If `fileType` is `TDR`, `fileExtType` must be 'xml'.
 	FileExtType *string `pulumi:"fileExtType"`
 	// Name of the IDL file.
 	FileName *string `pulumi:"fileName"`
@@ -100,8 +147,7 @@ type IdlState struct {
 	ClusterId pulumi.StringPtrInput
 	// IDL file content of the TcaplusDB table.
 	FileContent pulumi.StringPtrInput
-	// File ext type of the IDL file. If `file_type` is `PROTO`, `file_ext_type` must be 'proto'; If `file_type` is `TDR`,
-	// `file_ext_type` must be 'xml'.
+	// File ext type of the IDL file. If `fileType` is `PROTO`, `fileExtType` must be 'proto'; If `fileType` is `TDR`, `fileExtType` must be 'xml'.
 	FileExtType pulumi.StringPtrInput
 	// Name of the IDL file.
 	FileName pulumi.StringPtrInput
@@ -122,8 +168,7 @@ type idlArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// IDL file content of the TcaplusDB table.
 	FileContent string `pulumi:"fileContent"`
-	// File ext type of the IDL file. If `file_type` is `PROTO`, `file_ext_type` must be 'proto'; If `file_type` is `TDR`,
-	// `file_ext_type` must be 'xml'.
+	// File ext type of the IDL file. If `fileType` is `PROTO`, `fileExtType` must be 'proto'; If `fileType` is `TDR`, `fileExtType` must be 'xml'.
 	FileExtType string `pulumi:"fileExtType"`
 	// Name of the IDL file.
 	FileName string `pulumi:"fileName"`
@@ -139,8 +184,7 @@ type IdlArgs struct {
 	ClusterId pulumi.StringInput
 	// IDL file content of the TcaplusDB table.
 	FileContent pulumi.StringInput
-	// File ext type of the IDL file. If `file_type` is `PROTO`, `file_ext_type` must be 'proto'; If `file_type` is `TDR`,
-	// `file_ext_type` must be 'xml'.
+	// File ext type of the IDL file. If `fileType` is `PROTO`, `fileExtType` must be 'proto'; If `fileType` is `TDR`, `fileExtType` must be 'xml'.
 	FileExtType pulumi.StringInput
 	// Name of the IDL file.
 	FileName pulumi.StringInput
@@ -247,8 +291,7 @@ func (o IdlOutput) FileContent() pulumi.StringOutput {
 	return o.ApplyT(func(v *Idl) pulumi.StringOutput { return v.FileContent }).(pulumi.StringOutput)
 }
 
-// File ext type of the IDL file. If `file_type` is `PROTO`, `file_ext_type` must be 'proto'; If `file_type` is `TDR`,
-// `file_ext_type` must be 'xml'.
+// File ext type of the IDL file. If `fileType` is `PROTO`, `fileExtType` must be 'proto'; If `fileType` is `TDR`, `fileExtType` must be 'xml'.
 func (o IdlOutput) FileExtType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Idl) pulumi.StringOutput { return v.FileExtType }).(pulumi.StringOutput)
 }

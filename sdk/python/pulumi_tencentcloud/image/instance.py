@@ -23,16 +23,12 @@ class InstanceArgs:
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] image_name: Image name.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-               image.
-        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-               will be made after shutdown.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
+        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         :param pulumi.Input[str] image_description: Image Description.
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-               passed in simultaneously with InstanceId.
-        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-               Syspre function.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
+        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         pulumi.set(__self__, "image_name", image_name)
         if data_disk_ids is not None:
@@ -64,8 +60,7 @@ class InstanceArgs:
     @pulumi.getter(name="dataDiskIds")
     def data_disk_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-        image.
+        Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
         """
         return pulumi.get(self, "data_disk_ids")
 
@@ -77,8 +72,7 @@ class InstanceArgs:
     @pulumi.getter(name="forcePoweroff")
     def force_poweroff(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-        will be made after shutdown.
+        Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         """
         return pulumi.get(self, "force_poweroff")
 
@@ -114,8 +108,7 @@ class InstanceArgs:
     @pulumi.getter(name="snapshotIds")
     def snapshot_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-        passed in simultaneously with InstanceId.
+        Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         """
         return pulumi.get(self, "snapshot_ids")
 
@@ -127,8 +120,7 @@ class InstanceArgs:
     @pulumi.getter
     def sysprep(self) -> Optional[pulumi.Input[bool]]:
         """
-        Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-        Syspre function.
+        Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         return pulumi.get(self, "sysprep")
 
@@ -149,17 +141,13 @@ class _InstanceState:
                  sysprep: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-               image.
-        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-               will be made after shutdown.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
+        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         :param pulumi.Input[str] image_description: Image Description.
         :param pulumi.Input[str] image_name: Image name.
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-               passed in simultaneously with InstanceId.
-        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-               Syspre function.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
+        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         if data_disk_ids is not None:
             pulumi.set(__self__, "data_disk_ids", data_disk_ids)
@@ -180,8 +168,7 @@ class _InstanceState:
     @pulumi.getter(name="dataDiskIds")
     def data_disk_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-        image.
+        Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
         """
         return pulumi.get(self, "data_disk_ids")
 
@@ -193,8 +180,7 @@ class _InstanceState:
     @pulumi.getter(name="forcePoweroff")
     def force_poweroff(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-        will be made after shutdown.
+        Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         """
         return pulumi.get(self, "force_poweroff")
 
@@ -242,8 +228,7 @@ class _InstanceState:
     @pulumi.getter(name="snapshotIds")
     def snapshot_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-        passed in simultaneously with InstanceId.
+        Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         """
         return pulumi.get(self, "snapshot_ids")
 
@@ -255,8 +240,7 @@ class _InstanceState:
     @pulumi.getter
     def sysprep(self) -> Optional[pulumi.Input[bool]]:
         """
-        Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-        Syspre function.
+        Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         return pulumi.get(self, "sysprep")
 
@@ -279,20 +263,41 @@ class Instance(pulumi.CustomResource):
                  sysprep: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to manage image.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        image_snap = tencentcloud.image.Instance("imageSnap",
+            force_poweroff=True,
+            image_description="create image with snapshot",
+            image_name="image-snapshot-keep",
+            snapshot_ids=[
+                "snap-nbp3xy1d",
+                "snap-nvzu3dmh",
+            ])
+        ```
+
+        ## Import
+
+        image instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-               image.
-        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-               will be made after shutdown.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
+        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         :param pulumi.Input[str] image_description: Image Description.
         :param pulumi.Input[str] image_name: Image name.
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-               passed in simultaneously with InstanceId.
-        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-               Syspre function.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
+        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         ...
     @overload
@@ -301,7 +306,32 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to manage image.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        image_snap = tencentcloud.image.Instance("imageSnap",
+            force_poweroff=True,
+            image_description="create image with snapshot",
+            image_name="image-snapshot-keep",
+            snapshot_ids=[
+                "snap-nbp3xy1d",
+                "snap-nvzu3dmh",
+            ])
+        ```
+
+        ## Import
+
+        image instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -369,17 +399,13 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-               image.
-        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-               will be made after shutdown.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
+        :param pulumi.Input[bool] force_poweroff: Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         :param pulumi.Input[str] image_description: Image Description.
         :param pulumi.Input[str] image_name: Image name.
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-               passed in simultaneously with InstanceId.
-        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-               Syspre function.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
+        :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -398,8 +424,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="dataDiskIds")
     def data_disk_ids(self) -> pulumi.Output[Sequence[str]]:
         """
-        Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-        image.
+        Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
         """
         return pulumi.get(self, "data_disk_ids")
 
@@ -407,8 +432,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="forcePoweroff")
     def force_poweroff(self) -> pulumi.Output[Optional[bool]]:
         """
-        Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-        will be made after shutdown.
+        Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         """
         return pulumi.get(self, "force_poweroff")
 
@@ -440,8 +464,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="snapshotIds")
     def snapshot_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-        passed in simultaneously with InstanceId.
+        Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         """
         return pulumi.get(self, "snapshot_ids")
 
@@ -449,8 +472,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def sysprep(self) -> pulumi.Output[Optional[bool]]:
         """
-        Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-        Syspre function.
+        Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         return pulumi.get(self, "sysprep")
 

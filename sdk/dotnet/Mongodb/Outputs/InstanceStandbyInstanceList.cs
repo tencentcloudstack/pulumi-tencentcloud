@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Mongodb.Outputs
     [OutputType]
     public sealed class InstanceStandbyInstanceList
     {
+        /// <summary>
+        /// Indicates the ID of standby instance.
+        /// </summary>
         public readonly string? StandbyInstanceId;
+        /// <summary>
+        /// Indicates the region of standby instance.
+        /// </summary>
         public readonly string? StandbyInstanceRegion;
 
         [OutputConstructor]

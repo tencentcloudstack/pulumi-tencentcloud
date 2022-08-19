@@ -9,6 +9,62 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
+    /// <summary>
+    /// Use this resource to create dayu DDoS policy case
+    /// 
+    /// &gt; **NOTE:** when a dayu DDoS policy case is created, there will be a dayu DDoS policy created with the same prefix name in the same time. This resource only supports Anti-DDoS of type `bgp`, `bgp-multip` and `bgpip`. One Anti-DDoS resource can only has one DDoS policy case resource. When there is only one Anti-DDoS resource and one policy case, those two resource will be bind automatically.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Dayu.DdosPolicyCase("foo", new Tencentcloud.Dayu.DdosPolicyCaseArgs
+    ///         {
+    ///             AppProtocols = 
+    ///             {
+    ///                 "tcp",
+    ///                 "udp",
+    ///             },
+    ///             AppType = "WEB",
+    ///             HasAbroad = "yes",
+    ///             HasInitiateTcp = "yes",
+    ///             HasInitiateUdp = "yes",
+    ///             HasVpn = "yes",
+    ///             MaxTcpPackageLen = "1200",
+    ///             MaxUdpPackageLen = "1200",
+    ///             MinTcpPackageLen = "1000",
+    ///             MinUdpPackageLen = "1000",
+    ///             PeerTcpPort = "1111",
+    ///             PeerUdpPort = "3333",
+    ///             PlatformTypes = 
+    ///             {
+    ///                 "PC",
+    ///                 "MOBILE",
+    ///             },
+    ///             ResourceType = "bgpip",
+    ///             TcpEndPort = "2000",
+    ///             TcpFootprint = "511",
+    ///             TcpStartPort = "1000",
+    ///             UdpEndPort = "4000",
+    ///             UdpFootprint = "500",
+    ///             UdpStartPort = "3000",
+    ///             WebApiUrls = 
+    ///             {
+    ///                 "abc.com",
+    ///                 "test.cn/aaa.png",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyCase:DdosPolicyCase")]
     public partial class DdosPolicyCase : Pulumi.CustomResource
     {
@@ -55,15 +111,13 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<string?> HasVpn { get; private set; } = null!;
 
         /// <summary>
-        /// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-        /// greater than `min_tcp_package_len`.
+        /// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
         /// </summary>
         [Output("maxTcpPackageLen")]
         public Output<string?> MaxTcpPackageLen { get; private set; } = null!;
 
         /// <summary>
-        /// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-        /// greater than `min_udp_package_len`.
+        /// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         /// </summary>
         [Output("maxUdpPackageLen")]
         public Output<string?> MaxUdpPackageLen { get; private set; } = null!;
@@ -247,15 +301,13 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? HasVpn { get; set; }
 
         /// <summary>
-        /// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-        /// greater than `min_tcp_package_len`.
+        /// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
         /// </summary>
         [Input("maxTcpPackageLen")]
         public Input<string>? MaxTcpPackageLen { get; set; }
 
         /// <summary>
-        /// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-        /// greater than `min_udp_package_len`.
+        /// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         /// </summary>
         [Input("maxUdpPackageLen")]
         public Input<string>? MaxUdpPackageLen { get; set; }
@@ -412,15 +464,13 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? HasVpn { get; set; }
 
         /// <summary>
-        /// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-        /// greater than `min_tcp_package_len`.
+        /// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
         /// </summary>
         [Input("maxTcpPackageLen")]
         public Input<string>? MaxTcpPackageLen { get; set; }
 
         /// <summary>
-        /// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-        /// greater than `min_udp_package_len`.
+        /// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         /// </summary>
         [Input("maxUdpPackageLen")]
         public Input<string>? MaxUdpPackageLen { get; set; }

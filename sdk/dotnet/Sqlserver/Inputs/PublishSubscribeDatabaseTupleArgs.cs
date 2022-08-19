@@ -12,6 +12,9 @@ namespace Pulumi.Tencentcloud.Sqlserver.Inputs
 
     public sealed class PublishSubscribeDatabaseTupleArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Publish the database.
+        /// </summary>
         [Input("publishDatabase", required: true)]
         public Input<string> PublishDatabase { get; set; } = null!;
 

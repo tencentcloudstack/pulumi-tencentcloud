@@ -6,19 +6,19 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./cluster";
-export * from "./clusters";
+export * from "./getClusters";
+export * from "./getIdls";
+export * from "./getTablegroups";
+export * from "./getTables";
 export * from "./idl";
-export * from "./idls";
 export * from "./table";
-export * from "./tableGroup";
-export * from "./tableGroups";
-export * from "./tables";
+export * from "./tablegroup";
 
 // Import resources to register:
 import { Cluster } from "./cluster";
 import { Idl } from "./idl";
 import { Table } from "./table";
-import { TableGroup } from "./tableGroup";
+import { Tablegroup } from "./tablegroup";
 
 const _module = {
     version: utilities.getVersion(),
@@ -30,8 +30,8 @@ const _module = {
                 return new Idl(name, <any>undefined, { urn })
             case "tencentcloud:Tcaplus/table:Table":
                 return new Table(name, <any>undefined, { urn })
-            case "tencentcloud:Tcaplus/tableGroup:TableGroup":
-                return new TableGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Tcaplus/tablegroup:Tablegroup":
+                return new Tablegroup(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -40,4 +40,4 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcaplus/cluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcaplus/idl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcaplus/table", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Tcaplus/tableGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcaplus/tablegroup", _module)

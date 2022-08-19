@@ -11,20 +11,59 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type ACL struct {
+// Provide a resource to create a VPC ACL instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_default, err := Vpc.GetInstances(ctx, nil, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Vpc.NewAcl(ctx, "foo", &Vpc.AclArgs{
+// 			VpcId: pulumi.String(_default.InstanceLists[0].VpcId),
+// 			Ingresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+// 			},
+// 			Egresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Vpc ACL can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
+// ```
+type Acl struct {
 	pulumi.CustomResourceState
 
 	// Creation time of ACL.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses pulumi.StringArrayOutput `pulumi:"egresses"`
-	// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses pulumi.StringArrayOutput `pulumi:"ingresses"`
 	// Name of the network ACL.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -32,9 +71,9 @@ type ACL struct {
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
-// NewACL registers a new resource with the given unique name, arguments, and options.
-func NewACL(ctx *pulumi.Context,
-	name string, args *ACLArgs, opts ...pulumi.ResourceOption) (*ACL, error) {
+// NewAcl registers a new resource with the given unique name, arguments, and options.
+func NewAcl(ctx *pulumi.Context,
+	name string, args *AclArgs, opts ...pulumi.ResourceOption) (*Acl, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -42,39 +81,33 @@ func NewACL(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	var resource ACL
-	err := ctx.RegisterResource("tencentcloud:Vpc/aCL:ACL", name, args, &resource, opts...)
+	var resource Acl
+	err := ctx.RegisterResource("tencentcloud:Vpc/acl:Acl", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetACL gets an existing ACL resource's state with the given name, ID, and optional
+// GetAcl gets an existing Acl resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetACL(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *ACLState, opts ...pulumi.ResourceOption) (*ACL, error) {
-	var resource ACL
-	err := ctx.ReadResource("tencentcloud:Vpc/aCL:ACL", name, id, state, &resource, opts...)
+func GetAcl(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *AclState, opts ...pulumi.ResourceOption) (*Acl, error) {
+	var resource Acl
+	err := ctx.ReadResource("tencentcloud:Vpc/acl:Acl", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering ACL resources.
+// Input properties used for looking up and filtering Acl resources.
 type aclState struct {
 	// Creation time of ACL.
 	CreateTime *string `pulumi:"createTime"`
-	// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses []string `pulumi:"egresses"`
-	// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses []string `pulumi:"ingresses"`
 	// Name of the network ACL.
 	Name *string `pulumi:"name"`
@@ -82,18 +115,12 @@ type aclState struct {
 	VpcId *string `pulumi:"vpcId"`
 }
 
-type ACLState struct {
+type AclState struct {
 	// Creation time of ACL.
 	CreateTime pulumi.StringPtrInput
-	// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses pulumi.StringArrayInput
-	// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses pulumi.StringArrayInput
 	// Name of the network ACL.
 	Name pulumi.StringPtrInput
@@ -101,20 +128,14 @@ type ACLState struct {
 	VpcId pulumi.StringPtrInput
 }
 
-func (ACLState) ElementType() reflect.Type {
+func (AclState) ElementType() reflect.Type {
 	return reflect.TypeOf((*aclState)(nil)).Elem()
 }
 
 type aclArgs struct {
-	// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses []string `pulumi:"egresses"`
-	// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses []string `pulumi:"ingresses"`
 	// Name of the network ACL.
 	Name *string `pulumi:"name"`
@@ -122,17 +143,11 @@ type aclArgs struct {
 	VpcId string `pulumi:"vpcId"`
 }
 
-// The set of arguments for constructing a ACL resource.
-type ACLArgs struct {
-	// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+// The set of arguments for constructing a Acl resource.
+type AclArgs struct {
+	// Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses pulumi.StringArrayInput
-	// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-	// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-	// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses pulumi.StringArrayInput
 	// Name of the network ACL.
 	Name pulumi.StringPtrInput
@@ -140,169 +155,163 @@ type ACLArgs struct {
 	VpcId pulumi.StringInput
 }
 
-func (ACLArgs) ElementType() reflect.Type {
+func (AclArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*aclArgs)(nil)).Elem()
 }
 
-type ACLInput interface {
+type AclInput interface {
 	pulumi.Input
 
-	ToACLOutput() ACLOutput
-	ToACLOutputWithContext(ctx context.Context) ACLOutput
+	ToAclOutput() AclOutput
+	ToAclOutputWithContext(ctx context.Context) AclOutput
 }
 
-func (*ACL) ElementType() reflect.Type {
-	return reflect.TypeOf((**ACL)(nil)).Elem()
+func (*Acl) ElementType() reflect.Type {
+	return reflect.TypeOf((**Acl)(nil)).Elem()
 }
 
-func (i *ACL) ToACLOutput() ACLOutput {
-	return i.ToACLOutputWithContext(context.Background())
+func (i *Acl) ToAclOutput() AclOutput {
+	return i.ToAclOutputWithContext(context.Background())
 }
 
-func (i *ACL) ToACLOutputWithContext(ctx context.Context) ACLOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ACLOutput)
+func (i *Acl) ToAclOutputWithContext(ctx context.Context) AclOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AclOutput)
 }
 
-// ACLArrayInput is an input type that accepts ACLArray and ACLArrayOutput values.
-// You can construct a concrete instance of `ACLArrayInput` via:
+// AclArrayInput is an input type that accepts AclArray and AclArrayOutput values.
+// You can construct a concrete instance of `AclArrayInput` via:
 //
-//          ACLArray{ ACLArgs{...} }
-type ACLArrayInput interface {
+//          AclArray{ AclArgs{...} }
+type AclArrayInput interface {
 	pulumi.Input
 
-	ToACLArrayOutput() ACLArrayOutput
-	ToACLArrayOutputWithContext(context.Context) ACLArrayOutput
+	ToAclArrayOutput() AclArrayOutput
+	ToAclArrayOutputWithContext(context.Context) AclArrayOutput
 }
 
-type ACLArray []ACLInput
+type AclArray []AclInput
 
-func (ACLArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*ACL)(nil)).Elem()
+func (AclArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Acl)(nil)).Elem()
 }
 
-func (i ACLArray) ToACLArrayOutput() ACLArrayOutput {
-	return i.ToACLArrayOutputWithContext(context.Background())
+func (i AclArray) ToAclArrayOutput() AclArrayOutput {
+	return i.ToAclArrayOutputWithContext(context.Background())
 }
 
-func (i ACLArray) ToACLArrayOutputWithContext(ctx context.Context) ACLArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ACLArrayOutput)
+func (i AclArray) ToAclArrayOutputWithContext(ctx context.Context) AclArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AclArrayOutput)
 }
 
-// ACLMapInput is an input type that accepts ACLMap and ACLMapOutput values.
-// You can construct a concrete instance of `ACLMapInput` via:
+// AclMapInput is an input type that accepts AclMap and AclMapOutput values.
+// You can construct a concrete instance of `AclMapInput` via:
 //
-//          ACLMap{ "key": ACLArgs{...} }
-type ACLMapInput interface {
+//          AclMap{ "key": AclArgs{...} }
+type AclMapInput interface {
 	pulumi.Input
 
-	ToACLMapOutput() ACLMapOutput
-	ToACLMapOutputWithContext(context.Context) ACLMapOutput
+	ToAclMapOutput() AclMapOutput
+	ToAclMapOutputWithContext(context.Context) AclMapOutput
 }
 
-type ACLMap map[string]ACLInput
+type AclMap map[string]AclInput
 
-func (ACLMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*ACL)(nil)).Elem()
+func (AclMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Acl)(nil)).Elem()
 }
 
-func (i ACLMap) ToACLMapOutput() ACLMapOutput {
-	return i.ToACLMapOutputWithContext(context.Background())
+func (i AclMap) ToAclMapOutput() AclMapOutput {
+	return i.ToAclMapOutputWithContext(context.Background())
 }
 
-func (i ACLMap) ToACLMapOutputWithContext(ctx context.Context) ACLMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ACLMapOutput)
+func (i AclMap) ToAclMapOutputWithContext(ctx context.Context) AclMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AclMapOutput)
 }
 
-type ACLOutput struct{ *pulumi.OutputState }
+type AclOutput struct{ *pulumi.OutputState }
 
-func (ACLOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ACL)(nil)).Elem()
+func (AclOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Acl)(nil)).Elem()
 }
 
-func (o ACLOutput) ToACLOutput() ACLOutput {
+func (o AclOutput) ToAclOutput() AclOutput {
 	return o
 }
 
-func (o ACLOutput) ToACLOutputWithContext(ctx context.Context) ACLOutput {
+func (o AclOutput) ToAclOutputWithContext(ctx context.Context) AclOutput {
 	return o
 }
 
 // Creation time of ACL.
-func (o ACLOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v *ACL) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+func (o AclOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *Acl) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-// is `ICMP` or `ALL`, the 'port' must be `ALL`.
-func (o ACLOutput) Egresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ACL) pulumi.StringArrayOutput { return v.Egresses }).(pulumi.StringArrayOutput)
+// Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+func (o AclOutput) Egresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Acl) pulumi.StringArrayOutput { return v.Egresses }).(pulumi.StringArrayOutput)
 }
 
-// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-// is `ICMP` or `ALL`, the 'port' must be `ALL`.
-func (o ACLOutput) Ingresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ACL) pulumi.StringArrayOutput { return v.Ingresses }).(pulumi.StringArrayOutput)
+// Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+func (o AclOutput) Ingresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Acl) pulumi.StringArrayOutput { return v.Ingresses }).(pulumi.StringArrayOutput)
 }
 
 // Name of the network ACL.
-func (o ACLOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v *ACL) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+func (o AclOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Acl) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
 // ID of the VPC instance.
-func (o ACLOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ACL) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+func (o AclOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Acl) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
-type ACLArrayOutput struct{ *pulumi.OutputState }
+type AclArrayOutput struct{ *pulumi.OutputState }
 
-func (ACLArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*ACL)(nil)).Elem()
+func (AclArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Acl)(nil)).Elem()
 }
 
-func (o ACLArrayOutput) ToACLArrayOutput() ACLArrayOutput {
+func (o AclArrayOutput) ToAclArrayOutput() AclArrayOutput {
 	return o
 }
 
-func (o ACLArrayOutput) ToACLArrayOutputWithContext(ctx context.Context) ACLArrayOutput {
+func (o AclArrayOutput) ToAclArrayOutputWithContext(ctx context.Context) AclArrayOutput {
 	return o
 }
 
-func (o ACLArrayOutput) Index(i pulumi.IntInput) ACLOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ACL {
-		return vs[0].([]*ACL)[vs[1].(int)]
-	}).(ACLOutput)
+func (o AclArrayOutput) Index(i pulumi.IntInput) AclOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Acl {
+		return vs[0].([]*Acl)[vs[1].(int)]
+	}).(AclOutput)
 }
 
-type ACLMapOutput struct{ *pulumi.OutputState }
+type AclMapOutput struct{ *pulumi.OutputState }
 
-func (ACLMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*ACL)(nil)).Elem()
+func (AclMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Acl)(nil)).Elem()
 }
 
-func (o ACLMapOutput) ToACLMapOutput() ACLMapOutput {
+func (o AclMapOutput) ToAclMapOutput() AclMapOutput {
 	return o
 }
 
-func (o ACLMapOutput) ToACLMapOutputWithContext(ctx context.Context) ACLMapOutput {
+func (o AclMapOutput) ToAclMapOutputWithContext(ctx context.Context) AclMapOutput {
 	return o
 }
 
-func (o ACLMapOutput) MapIndex(k pulumi.StringInput) ACLOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *ACL {
-		return vs[0].(map[string]*ACL)[vs[1].(string)]
-	}).(ACLOutput)
+func (o AclMapOutput) MapIndex(k pulumi.StringInput) AclOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *Acl {
+		return vs[0].(map[string]*Acl)[vs[1].(string)]
+	}).(AclOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ACLInput)(nil)).Elem(), &ACL{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ACLArrayInput)(nil)).Elem(), ACLArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ACLMapInput)(nil)).Elem(), ACLMap{})
-	pulumi.RegisterOutputType(ACLOutput{})
-	pulumi.RegisterOutputType(ACLArrayOutput{})
-	pulumi.RegisterOutputType(ACLMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AclInput)(nil)).Elem(), &Acl{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AclArrayInput)(nil)).Elem(), AclArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AclMapInput)(nil)).Elem(), AclMap{})
+	pulumi.RegisterOutputType(AclOutput{})
+	pulumi.RegisterOutputType(AclArrayOutput{})
+	pulumi.RegisterOutputType(AclMapOutput{})
 }

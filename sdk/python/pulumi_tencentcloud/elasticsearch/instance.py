@@ -33,27 +33,21 @@ class InstanceArgs:
                  web_node_type_infos: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]]] = None):
         """
         The set of arguments for constructing a Instance resource.
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-               such as node type, node quantity, node specification, disk type, and disk size.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         :param pulumi.Input[str] password: Password to an instance.
         :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-               disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-               Default value is `0`.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceMultiZoneInfoArgs']]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
-        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-               `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-               Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]] web_node_type_infos: Visual node configuration.
         """
         pulumi.set(__self__, "node_info_lists", node_info_lists)
@@ -89,8 +83,7 @@ class InstanceArgs:
     @pulumi.getter(name="nodeInfoLists")
     def node_info_lists(self) -> pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]]:
         """
-        Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-        such as node type, node quantity, node specification, disk type, and disk size.
+        Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         """
         return pulumi.get(self, "node_info_lists")
 
@@ -150,8 +143,7 @@ class InstanceArgs:
     @pulumi.getter(name="basicSecurityType")
     def basic_security_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-        disabled, `2` is enabled, and default value is `1`.
+        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         """
         return pulumi.get(self, "basic_security_type")
 
@@ -187,8 +179,7 @@ class InstanceArgs:
     @pulumi.getter(name="deployMode")
     def deploy_mode(self) -> Optional[pulumi.Input[int]]:
         """
-        Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-        Default value is `0`.
+        Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         """
         return pulumi.get(self, "deploy_mode")
 
@@ -200,8 +191,7 @@ class InstanceArgs:
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-        underscores(_).
+        Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         """
         return pulumi.get(self, "instance_name")
 
@@ -237,8 +227,7 @@ class InstanceArgs:
     @pulumi.getter(name="renewFlag")
     def renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-        `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "renew_flag")
 
@@ -262,8 +251,7 @@ class InstanceArgs:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-        Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         """
         return pulumi.get(self, "tags")
 
@@ -311,29 +299,23 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-               disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Instance creation time.
-        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-               Default value is `0`.
+        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         :param pulumi.Input[str] elasticsearch_domain: Elasticsearch domain name.
         :param pulumi.Input[int] elasticsearch_port: Elasticsearch port.
         :param pulumi.Input[str] elasticsearch_vip: Elasticsearch VIP.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] kibana_url: Kibana access URL.
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceMultiZoneInfoArgs']]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-               such as node type, node quantity, node specification, disk type, and disk size.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         :param pulumi.Input[str] password: Password to an instance.
-        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-               `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-               Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]] web_node_type_infos: Visual node configuration.
@@ -397,8 +379,7 @@ class _InstanceState:
     @pulumi.getter(name="basicSecurityType")
     def basic_security_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-        disabled, `2` is enabled, and default value is `1`.
+        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         """
         return pulumi.get(self, "basic_security_type")
 
@@ -446,8 +427,7 @@ class _InstanceState:
     @pulumi.getter(name="deployMode")
     def deploy_mode(self) -> Optional[pulumi.Input[int]]:
         """
-        Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-        Default value is `0`.
+        Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         """
         return pulumi.get(self, "deploy_mode")
 
@@ -495,8 +475,7 @@ class _InstanceState:
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-        underscores(_).
+        Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         """
         return pulumi.get(self, "instance_name")
 
@@ -544,8 +523,7 @@ class _InstanceState:
     @pulumi.getter(name="nodeInfoLists")
     def node_info_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]]]:
         """
-        Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-        such as node type, node quantity, node specification, disk type, and disk size.
+        Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         """
         return pulumi.get(self, "node_info_lists")
 
@@ -569,8 +547,7 @@ class _InstanceState:
     @pulumi.getter(name="renewFlag")
     def renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-        `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "renew_flag")
 
@@ -594,8 +571,7 @@ class _InstanceState:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-        Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         """
         return pulumi.get(self, "tags")
 
@@ -663,28 +639,59 @@ class Instance(pulumi.CustomResource):
                  web_node_type_infos: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceWebNodeTypeInfoArgs']]]]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides an elasticsearch instance resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.elasticsearch.Instance("foo",
+            instance_name="tf-test",
+            availability_zone="ap-guangzhou-3",
+            version="7.5.1",
+            vpc_id=var["vpc_id"],
+            subnet_id=var["subnet_id"],
+            password="Test12345",
+            license_type="oss",
+            web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
+                node_num=1,
+                node_type="ES.S1.MEDIUM4",
+            )],
+            node_info_lists=[tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
+                node_num=2,
+                node_type="ES.S1.MEDIUM4",
+                encrypt=False,
+            )],
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        Elasticsearch instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-               disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-               Default value is `0`.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceMultiZoneInfoArgs']]]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoListArgs']]]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-               such as node type, node quantity, node specification, disk type, and disk size.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoListArgs']]]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         :param pulumi.Input[str] password: Password to an instance.
-        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-               `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-               Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceWebNodeTypeInfoArgs']]]] web_node_type_infos: Visual node configuration.
@@ -696,7 +703,44 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides an elasticsearch instance resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.elasticsearch.Instance("foo",
+            instance_name="tf-test",
+            availability_zone="ap-guangzhou-3",
+            version="7.5.1",
+            vpc_id=var["vpc_id"],
+            subnet_id=var["subnet_id"],
+            password="Test12345",
+            license_type="oss",
+            web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
+                node_num=1,
+                node_type="ES.S1.MEDIUM4",
+            )],
+            node_info_lists=[tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
+                node_num=2,
+                node_type="ES.S1.MEDIUM4",
+                encrypt=False,
+            )],
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        Elasticsearch instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -808,29 +852,23 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-               disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Instance creation time.
-        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-               Default value is `0`.
+        :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         :param pulumi.Input[str] elasticsearch_domain: Elasticsearch domain name.
         :param pulumi.Input[int] elasticsearch_port: Elasticsearch port.
         :param pulumi.Input[str] elasticsearch_vip: Elasticsearch VIP.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] kibana_url: Kibana access URL.
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceMultiZoneInfoArgs']]]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoListArgs']]]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-               such as node type, node quantity, node specification, disk type, and disk size.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoListArgs']]]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         :param pulumi.Input[str] password: Password to an instance.
-        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-               `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-               Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceWebNodeTypeInfoArgs']]]] web_node_type_infos: Visual node configuration.
@@ -874,8 +912,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="basicSecurityType")
     def basic_security_type(self) -> pulumi.Output[Optional[int]]:
         """
-        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-        disabled, `2` is enabled, and default value is `1`.
+        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         """
         return pulumi.get(self, "basic_security_type")
 
@@ -907,8 +944,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="deployMode")
     def deploy_mode(self) -> pulumi.Output[Optional[int]]:
         """
-        Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-        Default value is `0`.
+        Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         """
         return pulumi.get(self, "deploy_mode")
 
@@ -940,8 +976,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-        underscores(_).
+        Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         """
         return pulumi.get(self, "instance_name")
 
@@ -973,8 +1008,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="nodeInfoLists")
     def node_info_lists(self) -> pulumi.Output[Sequence['outputs.InstanceNodeInfoList']]:
         """
-        Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-        such as node type, node quantity, node specification, disk type, and disk size.
+        Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         """
         return pulumi.get(self, "node_info_lists")
 
@@ -990,8 +1024,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="renewFlag")
     def renew_flag(self) -> pulumi.Output[Optional[str]]:
         """
-        When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-        `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "renew_flag")
 
@@ -1007,8 +1040,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
         """
-        A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-        Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         """
         return pulumi.get(self, "tags")
 

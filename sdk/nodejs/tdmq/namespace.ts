@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a tdmq namespace.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tdmq.Instance("foo", {
+ *     clusterName: "example",
+ *     remark: "this is description.",
+ * });
+ * const bar = new tencentcloud.Tdmq.Namespace("bar", {
+ *     clusterId: foo.id,
+ *     environName: "example",
+ *     msgTtl: 300,
+ *     remark: "this is description.",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Tdmq namespace can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+ * ```
+ */
 export class Namespace extends pulumi.CustomResource {
     /**
      * Get an existing Namespace resource's state with the given name, ID, and optional extra

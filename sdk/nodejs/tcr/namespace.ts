@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create tcr namespace.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tcr.Namespace("foo", {
+ *     instanceId: "",
+ *     isPublic: true,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * tcr namespace can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+ * ```
+ */
 export class Namespace extends pulumi.CustomResource {
     /**
      * Get an existing Namespace resource's state with the given name, ID, and optional extra
@@ -41,8 +64,7 @@ export class Namespace extends pulumi.CustomResource {
      */
     public readonly isPublic!: pulumi.Output<boolean | undefined>;
     /**
-     * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-     * `_`, `-`), and cannot start, end or continue with separators.
+     * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
      */
     public readonly name!: pulumi.Output<string>;
 
@@ -89,8 +111,7 @@ export interface NamespaceState {
      */
     isPublic?: pulumi.Input<boolean>;
     /**
-     * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-     * `_`, `-`), and cannot start, end or continue with separators.
+     * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
      */
     name?: pulumi.Input<string>;
 }
@@ -108,8 +129,7 @@ export interface NamespaceArgs {
      */
     isPublic?: pulumi.Input<boolean>;
     /**
-     * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-     * `_`, `-`), and cannot start, end or continue with separators.
+     * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
      */
     name?: pulumi.Input<string>;
 }

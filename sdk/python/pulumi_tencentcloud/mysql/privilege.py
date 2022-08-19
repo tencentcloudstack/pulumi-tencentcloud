@@ -25,9 +25,7 @@ class PrivilegeArgs:
         """
         The set of arguments for constructing a Privilege resource.
         :param pulumi.Input[str] account_name: Account name.the forbidden value is:root,mysql.sys,tencentroot.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-               TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-               CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         :param pulumi.Input[str] mysql_id: Instance ID.
         :param pulumi.Input[str] account_host: Account host, default is `%`.
         :param pulumi.Input[Sequence[pulumi.Input['PrivilegeColumnArgs']]] columns: Column privileges list.
@@ -62,9 +60,7 @@ class PrivilegeArgs:
     @pulumi.getter
     def globals(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-        TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-        CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         """
         return pulumi.get(self, "globals")
 
@@ -149,9 +145,7 @@ class _PrivilegeState:
         :param pulumi.Input[str] account_name: Account name.the forbidden value is:root,mysql.sys,tencentroot.
         :param pulumi.Input[Sequence[pulumi.Input['PrivilegeColumnArgs']]] columns: Column privileges list.
         :param pulumi.Input[Sequence[pulumi.Input['PrivilegeDatabaseArgs']]] databases: Database privileges list.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-               TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-               CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         :param pulumi.Input[str] mysql_id: Instance ID.
         :param pulumi.Input[Sequence[pulumi.Input['PrivilegeTableArgs']]] tables: Table privileges list.
         """
@@ -222,9 +216,7 @@ class _PrivilegeState:
     @pulumi.getter
     def globals(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-        TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-        CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         """
         return pulumi.get(self, "globals")
 
@@ -271,16 +263,88 @@ class Privilege(pulumi.CustomResource):
                  tables: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivilegeTableArgs']]]]] = None,
                  __props__=None):
         """
-        Create a Privilege resource with the given unique name, props, and options.
+        Provides a mysql account privilege resource to grant different access privilege to different database. A database can be granted by multiple account.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.Instance("default",
+            mem_size=1000,
+            volume_size=25,
+            instance_name="guagua",
+            engine_version="5.7",
+            root_password="0153Y474",
+            availability_zone="ap-guangzhou-3",
+            internet_service=1)
+        mysql_account2 = tencentcloud.mysql.Account("mysqlAccount2",
+            mysql_id=default.id,
+            password="test1234",
+            description="test from terraform")
+        tttt = tencentcloud.mysql.Privilege("tttt",
+            mysql_id=default.id,
+            account_name=mysql_account2.name,
+            globals=["TRIGGER"],
+            databases=[
+                tencentcloud.mysql.PrivilegeDatabaseArgs(
+                    privileges=[
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                    ],
+                    database_name="sys",
+                ),
+                tencentcloud.mysql.PrivilegeDatabaseArgs(
+                    privileges=["SELECT"],
+                    database_name="performance_schema",
+                ),
+            ],
+            tables=[
+                tencentcloud.mysql.PrivilegeTableArgs(
+                    privileges=[
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                    ],
+                    database_name="mysql",
+                    table_name="slow_log",
+                ),
+                tencentcloud.mysql.PrivilegeTableArgs(
+                    privileges=[
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                    ],
+                    database_name="mysql",
+                    table_name="user",
+                ),
+            ],
+            columns=[tencentcloud.mysql.PrivilegeColumnArgs(
+                privileges=[
+                    "SELECT",
+                    "INSERT",
+                    "UPDATE",
+                    "REFERENCES",
+                ],
+                database_name="mysql",
+                table_name="user",
+                column_name="host",
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_host: Account host, default is `%`.
         :param pulumi.Input[str] account_name: Account name.the forbidden value is:root,mysql.sys,tencentroot.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivilegeColumnArgs']]]] columns: Column privileges list.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivilegeDatabaseArgs']]]] databases: Database privileges list.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-               TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-               CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         :param pulumi.Input[str] mysql_id: Instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivilegeTableArgs']]]] tables: Table privileges list.
         """
@@ -291,7 +355,81 @@ class Privilege(pulumi.CustomResource):
                  args: PrivilegeArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Privilege resource with the given unique name, props, and options.
+        Provides a mysql account privilege resource to grant different access privilege to different database. A database can be granted by multiple account.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.Instance("default",
+            mem_size=1000,
+            volume_size=25,
+            instance_name="guagua",
+            engine_version="5.7",
+            root_password="0153Y474",
+            availability_zone="ap-guangzhou-3",
+            internet_service=1)
+        mysql_account2 = tencentcloud.mysql.Account("mysqlAccount2",
+            mysql_id=default.id,
+            password="test1234",
+            description="test from terraform")
+        tttt = tencentcloud.mysql.Privilege("tttt",
+            mysql_id=default.id,
+            account_name=mysql_account2.name,
+            globals=["TRIGGER"],
+            databases=[
+                tencentcloud.mysql.PrivilegeDatabaseArgs(
+                    privileges=[
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                    ],
+                    database_name="sys",
+                ),
+                tencentcloud.mysql.PrivilegeDatabaseArgs(
+                    privileges=["SELECT"],
+                    database_name="performance_schema",
+                ),
+            ],
+            tables=[
+                tencentcloud.mysql.PrivilegeTableArgs(
+                    privileges=[
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                    ],
+                    database_name="mysql",
+                    table_name="slow_log",
+                ),
+                tencentcloud.mysql.PrivilegeTableArgs(
+                    privileges=[
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                    ],
+                    database_name="mysql",
+                    table_name="user",
+                ),
+            ],
+            columns=[tencentcloud.mysql.PrivilegeColumnArgs(
+                privileges=[
+                    "SELECT",
+                    "INSERT",
+                    "UPDATE",
+                    "REFERENCES",
+                ],
+                database_name="mysql",
+                table_name="user",
+                column_name="host",
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
         :param PrivilegeArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -367,9 +505,7 @@ class Privilege(pulumi.CustomResource):
         :param pulumi.Input[str] account_name: Account name.the forbidden value is:root,mysql.sys,tencentroot.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivilegeColumnArgs']]]] columns: Column privileges list.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivilegeDatabaseArgs']]]] databases: Database privileges list.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-               TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-               CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] globals: Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         :param pulumi.Input[str] mysql_id: Instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivilegeTableArgs']]]] tables: Table privileges list.
         """
@@ -422,9 +558,7 @@ class Privilege(pulumi.CustomResource):
     @pulumi.getter
     def globals(self) -> pulumi.Output[Sequence[str]]:
         """
-        Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-        TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-        CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         """
         return pulumi.get(self, "globals")
 

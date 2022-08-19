@@ -25,13 +25,10 @@ class LifecycleHookArgs:
         """
         The set of arguments for constructing a LifecycleHook resource.
         :param pulumi.Input[str] lifecycle_hook_name: The name of the lifecycle hook.
-        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-               `INSTANCE_TERMINATING`.
+        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
-        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-               Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
-        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-               (30~7200). and default value is `300`.
+        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
         :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
@@ -69,8 +66,7 @@ class LifecycleHookArgs:
     @pulumi.getter(name="lifecycleTransition")
     def lifecycle_transition(self) -> pulumi.Input[str]:
         """
-        The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-        `INSTANCE_TERMINATING`.
+        The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         """
         return pulumi.get(self, "lifecycle_transition")
 
@@ -94,8 +90,7 @@ class LifecycleHookArgs:
     @pulumi.getter(name="defaultResult")
     def default_result(self) -> Optional[pulumi.Input[str]]:
         """
-        Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-        Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         """
         return pulumi.get(self, "default_result")
 
@@ -107,8 +102,7 @@ class LifecycleHookArgs:
     @pulumi.getter(name="heartbeatTimeout")
     def heartbeat_timeout(self) -> Optional[pulumi.Input[int]]:
         """
-        Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-        (30~7200). and default value is `300`.
+        Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         """
         return pulumi.get(self, "heartbeat_timeout")
 
@@ -179,13 +173,10 @@ class _LifecycleHookState:
                  scaling_group_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering LifecycleHook resources.
-        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-               Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
-        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-               (30~7200). and default value is `300`.
+        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         :param pulumi.Input[str] lifecycle_hook_name: The name of the lifecycle hook.
-        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-               `INSTANCE_TERMINATING`.
+        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
         :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
@@ -215,8 +206,7 @@ class _LifecycleHookState:
     @pulumi.getter(name="defaultResult")
     def default_result(self) -> Optional[pulumi.Input[str]]:
         """
-        Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-        Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         """
         return pulumi.get(self, "default_result")
 
@@ -228,8 +218,7 @@ class _LifecycleHookState:
     @pulumi.getter(name="heartbeatTimeout")
     def heartbeat_timeout(self) -> Optional[pulumi.Input[int]]:
         """
-        Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-        (30~7200). and default value is `300`.
+        Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         """
         return pulumi.get(self, "heartbeat_timeout")
 
@@ -253,8 +242,7 @@ class _LifecycleHookState:
     @pulumi.getter(name="lifecycleTransition")
     def lifecycle_transition(self) -> Optional[pulumi.Input[str]]:
         """
-        The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-        `INSTANCE_TERMINATING`.
+        The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         """
         return pulumi.get(self, "lifecycle_transition")
 
@@ -339,16 +327,31 @@ class LifecycleHook(pulumi.CustomResource):
                  scaling_group_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a LifecycleHook resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) lifecycle hook.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        lifecycle_hook = tencentcloud.as_.LifecycleHook("lifecycleHook",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
+            lifecycle_hook_name="tf-as-lifecycle-hook",
+            lifecycle_transition="INSTANCE_LAUNCHING",
+            notification_metadata="tf test",
+            notification_queue_name="lifcyclehook",
+            notification_target_type="CMQ_QUEUE",
+            scaling_group_id="sg-12af45")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-               Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
-        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-               (30~7200). and default value is `300`.
+        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         :param pulumi.Input[str] lifecycle_hook_name: The name of the lifecycle hook.
-        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-               `INSTANCE_TERMINATING`.
+        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
         :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
@@ -362,7 +365,25 @@ class LifecycleHook(pulumi.CustomResource):
                  args: LifecycleHookArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a LifecycleHook resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) lifecycle hook.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        lifecycle_hook = tencentcloud.as_.LifecycleHook("lifecycleHook",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
+            lifecycle_hook_name="tf-as-lifecycle-hook",
+            lifecycle_transition="INSTANCE_LAUNCHING",
+            notification_metadata="tf test",
+            notification_queue_name="lifcyclehook",
+            notification_target_type="CMQ_QUEUE",
+            scaling_group_id="sg-12af45")
+        ```
+
         :param str resource_name: The name of the resource.
         :param LifecycleHookArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -440,13 +461,10 @@ class LifecycleHook(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-               Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
-        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-               (30~7200). and default value is `300`.
+        :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         :param pulumi.Input[str] lifecycle_hook_name: The name of the lifecycle hook.
-        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-               `INSTANCE_TERMINATING`.
+        :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
         :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
@@ -472,8 +490,7 @@ class LifecycleHook(pulumi.CustomResource):
     @pulumi.getter(name="defaultResult")
     def default_result(self) -> pulumi.Output[Optional[str]]:
         """
-        Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-        Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         """
         return pulumi.get(self, "default_result")
 
@@ -481,8 +498,7 @@ class LifecycleHook(pulumi.CustomResource):
     @pulumi.getter(name="heartbeatTimeout")
     def heartbeat_timeout(self) -> pulumi.Output[Optional[int]]:
         """
-        Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-        (30~7200). and default value is `300`.
+        Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         """
         return pulumi.get(self, "heartbeat_timeout")
 
@@ -498,8 +514,7 @@ class LifecycleHook(pulumi.CustomResource):
     @pulumi.getter(name="lifecycleTransition")
     def lifecycle_transition(self) -> pulumi.Output[str]:
         """
-        The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-        `INSTANCE_TERMINATING`.
+        The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         """
         return pulumi.get(self, "lifecycle_transition")
 

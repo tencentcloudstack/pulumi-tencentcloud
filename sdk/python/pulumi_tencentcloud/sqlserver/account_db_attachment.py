@@ -8,17 +8,17 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
-__all__ = ['AccountDBAttachmentArgs', 'AccountDBAttachment']
+__all__ = ['AccountDbAttachmentArgs', 'AccountDbAttachment']
 
 @pulumi.input_type
-class AccountDBAttachmentArgs:
+class AccountDbAttachmentArgs:
     def __init__(__self__, *,
                  account_name: pulumi.Input[str],
                  db_name: pulumi.Input[str],
                  instance_id: pulumi.Input[str],
                  privilege: pulumi.Input[str]):
         """
-        The set of arguments for constructing a AccountDBAttachment resource.
+        The set of arguments for constructing a AccountDbAttachment resource.
         :param pulumi.Input[str] account_name: SQL Server account name.
         :param pulumi.Input[str] db_name: SQL Server DB name.
         :param pulumi.Input[str] instance_id: SQL Server instance ID that the account belongs to.
@@ -79,14 +79,14 @@ class AccountDBAttachmentArgs:
 
 
 @pulumi.input_type
-class _AccountDBAttachmentState:
+class _AccountDbAttachmentState:
     def __init__(__self__, *,
                  account_name: Optional[pulumi.Input[str]] = None,
                  db_name: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  privilege: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering AccountDBAttachment resources.
+        Input properties used for looking up and filtering AccountDbAttachment resources.
         :param pulumi.Input[str] account_name: SQL Server account name.
         :param pulumi.Input[str] db_name: SQL Server DB name.
         :param pulumi.Input[str] instance_id: SQL Server instance ID that the account belongs to.
@@ -150,7 +150,7 @@ class _AccountDBAttachmentState:
         pulumi.set(self, "privilege", value)
 
 
-class AccountDBAttachment(pulumi.CustomResource):
+class AccountDbAttachment(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -161,7 +161,29 @@ class AccountDBAttachment(pulumi.CustomResource):
                  privilege: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AccountDBAttachment resource with the given unique name, props, and options.
+        Use this resource to create SQL Server account DB attachment
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.AccountDbAttachment("foo",
+            instance_id="mssql-3cdq7kx5",
+            account_name=tencentcloud_sqlserver_account["example"]["name"],
+            db_name=tencentcloud_sqlserver_db["example"]["name"],
+            privilege="ReadWrite")
+        ```
+
+        ## Import
+
+        SQL Server account DB attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: SQL Server account name.
@@ -173,17 +195,39 @@ class AccountDBAttachment(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: AccountDBAttachmentArgs,
+                 args: AccountDbAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AccountDBAttachment resource with the given unique name, props, and options.
+        Use this resource to create SQL Server account DB attachment
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.AccountDbAttachment("foo",
+            instance_id="mssql-3cdq7kx5",
+            account_name=tencentcloud_sqlserver_account["example"]["name"],
+            db_name=tencentcloud_sqlserver_db["example"]["name"],
+            privilege="ReadWrite")
+        ```
+
+        ## Import
+
+        SQL Server account DB attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+        ```
+
         :param str resource_name: The name of the resource.
-        :param AccountDBAttachmentArgs args: The arguments to use to populate this resource's properties.
+        :param AccountDbAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(AccountDBAttachmentArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(AccountDbAttachmentArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -206,7 +250,7 @@ class AccountDBAttachment(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = AccountDBAttachmentArgs.__new__(AccountDBAttachmentArgs)
+            __props__ = AccountDbAttachmentArgs.__new__(AccountDbAttachmentArgs)
 
             if account_name is None and not opts.urn:
                 raise TypeError("Missing required property 'account_name'")
@@ -220,8 +264,8 @@ class AccountDBAttachment(pulumi.CustomResource):
             if privilege is None and not opts.urn:
                 raise TypeError("Missing required property 'privilege'")
             __props__.__dict__["privilege"] = privilege
-        super(AccountDBAttachment, __self__).__init__(
-            'tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment',
+        super(AccountDbAttachment, __self__).__init__(
+            'tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment',
             resource_name,
             __props__,
             opts)
@@ -233,9 +277,9 @@ class AccountDBAttachment(pulumi.CustomResource):
             account_name: Optional[pulumi.Input[str]] = None,
             db_name: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
-            privilege: Optional[pulumi.Input[str]] = None) -> 'AccountDBAttachment':
+            privilege: Optional[pulumi.Input[str]] = None) -> 'AccountDbAttachment':
         """
-        Get an existing AccountDBAttachment resource's state with the given name, id, and optional extra
+        Get an existing AccountDbAttachment resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -248,13 +292,13 @@ class AccountDBAttachment(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _AccountDBAttachmentState.__new__(_AccountDBAttachmentState)
+        __props__ = _AccountDbAttachmentState.__new__(_AccountDbAttachmentState)
 
         __props__.__dict__["account_name"] = account_name
         __props__.__dict__["db_name"] = db_name
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["privilege"] = privilege
-        return AccountDBAttachment(resource_name, opts=opts, __props__=__props__)
+        return AccountDbAttachment(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="accountName")

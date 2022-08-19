@@ -14,8 +14,8 @@ __all__ = [
     'ClusterRoGroupInstance',
     'ClusterRwGroupAddr',
     'ClusterRwGroupInstance',
-    'ClustersClusterListResult',
-    'InstancesInstanceListResult',
+    'GetClustersClusterListResult',
+    'GetInstancesInstanceListResult',
 ]
 
 @pulumi.output_type
@@ -43,6 +43,11 @@ class ClusterParamItem(dict):
                  current_value: str,
                  name: str,
                  old_value: Optional[str] = None):
+        """
+        :param str current_value: Param expected value to set.
+        :param str name: Name of param, e.g. `character_set_server`.
+        :param str old_value: Param old value, indicates the value which already set, this value is required when modifying current_value.
+        """
         pulumi.set(__self__, "current_value", current_value)
         pulumi.set(__self__, "name", name)
         if old_value is not None:
@@ -51,16 +56,25 @@ class ClusterParamItem(dict):
     @property
     @pulumi.getter(name="currentValue")
     def current_value(self) -> str:
+        """
+        Param expected value to set.
+        """
         return pulumi.get(self, "current_value")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of param, e.g. `character_set_server`.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="oldValue")
     def old_value(self) -> Optional[str]:
+        """
+        Param old value, indicates the value which already set, this value is required when modifying current_value.
+        """
         return pulumi.get(self, "old_value")
 
 
@@ -69,6 +83,10 @@ class ClusterRoGroupAddr(dict):
     def __init__(__self__, *,
                  ip: Optional[str] = None,
                  port: Optional[int] = None):
+        """
+        :param str ip: IP address for read-write connection.
+        :param int port: Port of CynosDB cluster.
+        """
         if ip is not None:
             pulumi.set(__self__, "ip", ip)
         if port is not None:
@@ -77,11 +95,17 @@ class ClusterRoGroupAddr(dict):
     @property
     @pulumi.getter
     def ip(self) -> Optional[str]:
+        """
+        IP address for read-write connection.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter
     def port(self) -> Optional[int]:
+        """
+        Port of CynosDB cluster.
+        """
         return pulumi.get(self, "port")
 
 
@@ -109,6 +133,10 @@ class ClusterRoGroupInstance(dict):
     def __init__(__self__, *,
                  instance_id: Optional[str] = None,
                  instance_name: Optional[str] = None):
+        """
+        :param str instance_id: ID of instance.
+        :param str instance_name: Name of instance.
+        """
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
         if instance_name is not None:
@@ -117,11 +145,17 @@ class ClusterRoGroupInstance(dict):
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[str]:
+        """
+        ID of instance.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[str]:
+        """
+        Name of instance.
+        """
         return pulumi.get(self, "instance_name")
 
 
@@ -130,6 +164,10 @@ class ClusterRwGroupAddr(dict):
     def __init__(__self__, *,
                  ip: Optional[str] = None,
                  port: Optional[int] = None):
+        """
+        :param str ip: IP address for read-write connection.
+        :param int port: Port of CynosDB cluster.
+        """
         if ip is not None:
             pulumi.set(__self__, "ip", ip)
         if port is not None:
@@ -138,11 +176,17 @@ class ClusterRwGroupAddr(dict):
     @property
     @pulumi.getter
     def ip(self) -> Optional[str]:
+        """
+        IP address for read-write connection.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter
     def port(self) -> Optional[int]:
+        """
+        Port of CynosDB cluster.
+        """
         return pulumi.get(self, "port")
 
 
@@ -170,6 +214,10 @@ class ClusterRwGroupInstance(dict):
     def __init__(__self__, *,
                  instance_id: Optional[str] = None,
                  instance_name: Optional[str] = None):
+        """
+        :param str instance_id: ID of instance.
+        :param str instance_name: Name of instance.
+        """
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
         if instance_name is not None:
@@ -178,16 +226,22 @@ class ClusterRwGroupInstance(dict):
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[str]:
+        """
+        ID of instance.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[str]:
+        """
+        Name of instance.
+        """
         return pulumi.get(self, "instance_name")
 
 
 @pulumi.output_type
-class ClustersClusterListResult(dict):
+class GetClustersClusterListResult(dict):
     def __init__(__self__, *,
                  auto_renew_flag: int,
                  available_zone: str,
@@ -203,6 +257,22 @@ class ClustersClusterListResult(dict):
                  project_id: int,
                  subnet_id: str,
                  vpc_id: str):
+        """
+        :param int auto_renew_flag: Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Only works for PREPAID cluster.
+        :param str available_zone: The available zone of the CynosDB Cluster.
+        :param str charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
+        :param str cluster_id: ID of the cluster to be queried.
+        :param int cluster_limit: Storage limit of CynosDB cluster instance, unit in GB.
+        :param str cluster_name: Name of the cluster to be queried.
+        :param str cluster_status: Status of the Cynosdb cluster.
+        :param str create_time: Creation time of the CynosDB cluster.
+        :param str db_type: Type of CynosDB, and available values include `MYSQL`, `POSTGRESQL`.
+        :param str db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        :param int port: Port of CynosDB cluster.
+        :param int project_id: ID of the project to be queried.
+        :param str subnet_id: ID of the subnet within this VPC.
+        :param str vpc_id: ID of the VPC.
+        """
         pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         pulumi.set(__self__, "available_zone", available_zone)
         pulumi.set(__self__, "charge_type", charge_type)
@@ -221,76 +291,118 @@ class ClustersClusterListResult(dict):
     @property
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> int:
+        """
+        Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Only works for PREPAID cluster.
+        """
         return pulumi.get(self, "auto_renew_flag")
 
     @property
     @pulumi.getter(name="availableZone")
     def available_zone(self) -> str:
+        """
+        The available zone of the CynosDB Cluster.
+        """
         return pulumi.get(self, "available_zone")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> str:
+        """
+        ID of the cluster to be queried.
+        """
         return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="clusterLimit")
     def cluster_limit(self) -> int:
+        """
+        Storage limit of CynosDB cluster instance, unit in GB.
+        """
         return pulumi.get(self, "cluster_limit")
 
     @property
     @pulumi.getter(name="clusterName")
     def cluster_name(self) -> str:
+        """
+        Name of the cluster to be queried.
+        """
         return pulumi.get(self, "cluster_name")
 
     @property
     @pulumi.getter(name="clusterStatus")
     def cluster_status(self) -> str:
+        """
+        Status of the Cynosdb cluster.
+        """
         return pulumi.get(self, "cluster_status")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the CynosDB cluster.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="dbType")
     def db_type(self) -> str:
+        """
+        Type of CynosDB, and available values include `MYSQL`, `POSTGRESQL`.
+        """
         return pulumi.get(self, "db_type")
 
     @property
     @pulumi.getter(name="dbVersion")
     def db_version(self) -> str:
+        """
+        Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        """
         return pulumi.get(self, "db_version")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port of CynosDB cluster.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        ID of the project to be queried.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of the subnet within this VPC.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  instance_cpu_core: int,
@@ -301,6 +413,15 @@ class InstancesInstanceListResult(dict):
                  instance_type: str,
                  cluster_id: Optional[str] = None,
                  instance_id: Optional[str] = None):
+        """
+        :param str create_time: Creation time of the CynosDB instance.
+        :param str instance_name: Name of the Cynosdb instance to be queried.
+        :param str instance_status: Status of the Cynosdb instance.
+        :param int instance_storage_size: Storage size of the Cynosdb instance, unit in GB.
+        :param str instance_type: Instance type. `ro` for readonly instance, `rw` for read and write instance.
+        :param str cluster_id: ID of the cluster.
+        :param str instance_id: ID of the Cynosdb instance to be queried.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "instance_cpu_core", instance_cpu_core)
         pulumi.set(__self__, "instance_memory_size", instance_memory_size)
@@ -316,6 +437,9 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the CynosDB instance.
+        """
         return pulumi.get(self, "create_time")
 
     @property
@@ -331,31 +455,49 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        Name of the Cynosdb instance to be queried.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="instanceStatus")
     def instance_status(self) -> str:
+        """
+        Status of the Cynosdb instance.
+        """
         return pulumi.get(self, "instance_status")
 
     @property
     @pulumi.getter(name="instanceStorageSize")
     def instance_storage_size(self) -> int:
+        """
+        Storage size of the Cynosdb instance, unit in GB.
+        """
         return pulumi.get(self, "instance_storage_size")
 
     @property
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> str:
+        """
+        Instance type. `ro` for readonly instance, `rw` for read and write instance.
+        """
         return pulumi.get(self, "instance_type")
 
     @property
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[str]:
+        """
+        ID of the cluster.
+        """
         return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[str]:
+        """
+        ID of the Cynosdb instance to be queried.
+        """
         return pulumi.get(self, "instance_id")
 
 

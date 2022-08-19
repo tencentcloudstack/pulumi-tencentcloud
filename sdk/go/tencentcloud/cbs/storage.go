@@ -11,6 +11,46 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CBS.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewStorage(ctx, "storage", &Cbs.StorageArgs{
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			Encrypt:          pulumi.Bool(false),
+// 			ProjectId:        pulumi.Int(0),
+// 			StorageName:      pulumi.String("mystorage"),
+// 			StorageSize:      pulumi.Int(100),
+// 			StorageType:      pulumi.String("CLOUD_SSD"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CBS storage can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+// ```
 type Storage struct {
 	pulumi.CustomResourceState
 
@@ -22,20 +62,15 @@ type Storage struct {
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolPtrOutput `pulumi:"encrypt"`
-	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin.
+	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
-	// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
 	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod pulumi.IntOutput `pulumi:"prepaidPeriod"`
-	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-	// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-	// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag pulumi.StringOutput `pulumi:"prepaidRenewFlag"`
 	// ID of the project to which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
@@ -43,8 +78,7 @@ type Storage struct {
 	SnapshotId pulumi.StringOutput `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringOutput `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-	// [10-16000].
+	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
 	StorageSize pulumi.IntOutput `pulumi:"storageSize"`
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus pulumi.StringOutput `pulumi:"storageStatus"`
@@ -105,20 +139,15 @@ type storageState struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Indicates whether CBS is encrypted.
 	Encrypt *bool `pulumi:"encrypt"`
-	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin.
+	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
 	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
 	Period *int `pulumi:"period"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-	// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-	// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// ID of the project to which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
@@ -126,8 +155,7 @@ type storageState struct {
 	SnapshotId *string `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName *string `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-	// [10-16000].
+	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
 	StorageSize *int `pulumi:"storageSize"`
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus *string `pulumi:"storageStatus"`
@@ -148,20 +176,15 @@ type StorageState struct {
 	ChargeType pulumi.StringPtrInput
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolPtrInput
-	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin.
+	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete pulumi.BoolPtrInput
-	// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
 	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
 	Period pulumi.IntPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-	// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-	// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// ID of the project to which the instance belongs.
 	ProjectId pulumi.IntPtrInput
@@ -169,8 +192,7 @@ type StorageState struct {
 	SnapshotId pulumi.StringPtrInput
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringPtrInput
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-	// [10-16000].
+	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
 	StorageSize pulumi.IntPtrInput
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus pulumi.StringPtrInput
@@ -193,20 +215,15 @@ type storageArgs struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Indicates whether CBS is encrypted.
 	Encrypt *bool `pulumi:"encrypt"`
-	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin.
+	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
 	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
 	Period *int `pulumi:"period"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-	// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-	// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// ID of the project to which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
@@ -214,8 +231,7 @@ type storageArgs struct {
 	SnapshotId *string `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName string `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-	// [10-16000].
+	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
 	StorageSize int `pulumi:"storageSize"`
 	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
 	StorageType string `pulumi:"storageType"`
@@ -233,20 +249,15 @@ type StorageArgs struct {
 	ChargeType pulumi.StringPtrInput
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolPtrInput
-	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin.
+	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete pulumi.BoolPtrInput
-	// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
 	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
 	Period pulumi.IntPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-	// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-	// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// ID of the project to which the instance belongs.
 	ProjectId pulumi.IntPtrInput
@@ -254,8 +265,7 @@ type StorageArgs struct {
 	SnapshotId pulumi.StringPtrInput
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringInput
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-	// [10-16000].
+	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
 	StorageSize pulumi.IntInput
 	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
 	StorageType pulumi.StringInput
@@ -372,29 +382,24 @@ func (o StorageOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.BoolPtrOutput { return v.Encrypt }).(pulumi.BoolPtrOutput)
 }
 
-// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted
-// instead of staying recycle bin.
+// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 func (o StorageOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
 
-// The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
+// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 //
 // Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
 func (o StorageOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }
 
-// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-// Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 func (o StorageOutput) PrepaidPeriod() pulumi.IntOutput {
 	return o.ApplyT(func(v *Storage) pulumi.IntOutput { return v.PrepaidPeriod }).(pulumi.IntOutput)
 }
 
-// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically,
-// `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither
-// notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew
-// automatically. NOTE: it only works when charge_type is set to `PREPAID`.
+// Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
 func (o StorageOutput) PrepaidRenewFlag() pulumi.StringOutput {
 	return o.ApplyT(func(v *Storage) pulumi.StringOutput { return v.PrepaidRenewFlag }).(pulumi.StringOutput)
 }
@@ -414,8 +419,7 @@ func (o StorageOutput) StorageName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Storage) pulumi.StringOutput { return v.StorageName }).(pulumi.StringOutput)
 }
 
-// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are
-// [10-16000].
+// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
 func (o StorageOutput) StorageSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Storage) pulumi.IntOutput { return v.StorageSize }).(pulumi.IntOutput)
 }

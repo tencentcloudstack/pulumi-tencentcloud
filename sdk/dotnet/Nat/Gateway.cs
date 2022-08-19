@@ -9,6 +9,46 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Nat
 {
+    /// <summary>
+    /// Provides a resource to create a NAT gateway.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Nat.Gateway("foo", new Tencentcloud.Nat.GatewayArgs
+    ///         {
+    ///             AssignedEipSets = 
+    ///             {
+    ///                 "1.1.1.1",
+    ///             },
+    ///             Bandwidth = 100,
+    ///             MaxConcurrent = 1000000,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///             VpcId = "vpc-4xxr2cy7",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// NAT gateway can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Nat/gateway:Gateway")]
     public partial class Gateway : Pulumi.CustomResource
     {
@@ -19,8 +59,7 @@ namespace Pulumi.Tencentcloud.Nat
         public Output<ImmutableArray<string>> AssignedEipSets { get; private set; } = null!;
 
         /// <summary>
-        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-        /// `1000`, `2000`, `5000`. Default is 100.
+        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         /// </summary>
         [Output("bandwidth")]
         public Output<int?> Bandwidth { get; private set; } = null!;
@@ -32,8 +71,7 @@ namespace Pulumi.Tencentcloud.Nat
         public Output<string> CreatedTime { get; private set; } = null!;
 
         /// <summary>
-        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-        /// `1000000`.
+        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         /// </summary>
         [Output("maxConcurrent")]
         public Output<int?> MaxConcurrent { get; private set; } = null!;
@@ -115,15 +153,13 @@ namespace Pulumi.Tencentcloud.Nat
         }
 
         /// <summary>
-        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-        /// `1000`, `2000`, `5000`. Default is 100.
+        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
 
         /// <summary>
-        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-        /// `1000000`.
+        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         /// </summary>
         [Input("maxConcurrent")]
         public Input<int>? MaxConcurrent { get; set; }
@@ -172,8 +208,7 @@ namespace Pulumi.Tencentcloud.Nat
         }
 
         /// <summary>
-        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-        /// `1000`, `2000`, `5000`. Default is 100.
+        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
@@ -185,8 +220,7 @@ namespace Pulumi.Tencentcloud.Nat
         public Input<string>? CreatedTime { get; set; }
 
         /// <summary>
-        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-        /// `1000000`.
+        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         /// </summary>
         [Input("maxConcurrent")]
         public Input<int>? MaxConcurrent { get; set; }

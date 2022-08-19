@@ -98,7 +98,28 @@ class TemplateGroup(pulumi.CustomResource):
                  template_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a TemplateGroup resource with the given unique name, props, and options.
+        Provides a resource to manage address template group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.address.TemplateGroup("foo", template_ids=[
+            "ipl-axaf24151",
+            "ipl-axaf24152",
+        ])
+        ```
+
+        ## Import
+
+        Address template group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the address template group.
@@ -111,7 +132,28 @@ class TemplateGroup(pulumi.CustomResource):
                  args: TemplateGroupArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a TemplateGroup resource with the given unique name, props, and options.
+        Provides a resource to manage address template group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.address.TemplateGroup("foo", template_ids=[
+            "ipl-axaf24151",
+            "ipl-axaf24152",
+        ])
+        ```
+
+        ## Import
+
+        Address template group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
+        ```
+
         :param str resource_name: The name of the resource.
         :param TemplateGroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

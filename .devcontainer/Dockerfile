@@ -35,7 +35,7 @@ RUN rm -rf /usr/local/bin/pulumictl && \
     wget -O pulumictl.${PULUMICTL_VERSION}.tar.gz https://github.com/pulumi/pulumictl/releases/download/${PULUMICTL_VERSION}/pulumictl-${PULUMICTL_VERSION}-linux-amd64.tar.gz && \
     tar -C /usr/local/bin -xzf pulumictl.${PULUMICTL_VERSION}.tar.gz
 
-# Install nodejs
+# Install typescript
 ARG NODEJS_VERSION=v16.16.0
 ARG NODEJS_PKG=node-${NODEJS_VERSION}-linux-x64
 ARG NODEJS_TARBALL=${NODEJS_PKG}.tar.xz

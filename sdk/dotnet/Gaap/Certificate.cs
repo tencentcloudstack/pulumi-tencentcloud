@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Gaap
 {
+    /// <summary>
+    /// Provides a resource to create a certificate of GAAP.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Gaap.Certificate("foo", new Tencentcloud.Gaap.CertificateArgs
+    ///         {
+    ///             Content = "test:tx2KGdo3zJg/.",
+    ///             Type = "BASIC",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// GAAP certificate can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/certificate:Certificate")]
     public partial class Certificate : Pulumi.CustomResource
     {
@@ -19,9 +50,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Output<string> BeginTime { get; private set; } = null!;
 
         /// <summary>
-        /// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-        /// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-        /// `SSL`, the format is `pem`.
+        /// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         /// </summary>
         [Output("content")]
         public Output<string> Content { get; private set; } = null!;
@@ -63,9 +92,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Output<string> SubjectCn { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-        /// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-        /// CA certificate; `PROXY` means proxy SSL certificate.
+        /// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -117,9 +144,7 @@ namespace Pulumi.Tencentcloud.Gaap
     public sealed class CertificateArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-        /// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-        /// `SSL`, the format is `pem`.
+        /// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         /// </summary>
         [Input("content", required: true)]
         public Input<string> Content { get; set; } = null!;
@@ -137,9 +162,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-        /// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-        /// CA certificate; `PROXY` means proxy SSL certificate.
+        /// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -158,9 +181,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? BeginTime { get; set; }
 
         /// <summary>
-        /// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-        /// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-        /// `SSL`, the format is `pem`.
+        /// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
@@ -202,9 +223,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? SubjectCn { get; set; }
 
         /// <summary>
-        /// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-        /// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-        /// CA certificate; `PROXY` means proxy SSL certificate.
+        /// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

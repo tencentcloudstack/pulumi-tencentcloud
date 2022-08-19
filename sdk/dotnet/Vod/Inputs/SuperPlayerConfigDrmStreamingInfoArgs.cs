@@ -12,6 +12,9 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
     public sealed class SuperPlayerConfigDrmStreamingInfoArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of the adaptive dynamic streaming template whose protection type is `SimpleAES`.
+        /// </summary>
         [Input("simpleAesDefinition")]
         public Input<string>? SimpleAesDefinition { get; set; }
 

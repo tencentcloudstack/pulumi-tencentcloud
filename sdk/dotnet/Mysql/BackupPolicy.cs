@@ -9,6 +9,29 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Mysql
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @default = new Tencentcloud.Mysql.BackupPolicy("default", new Tencentcloud.Mysql.BackupPolicyArgs
+    ///         {
+    ///             BackupModel = "physical",
+    ///             BackupTime = "02:00-06:00",
+    ///             MysqlId = "cdb-dnqksd9f",
+    ///             RetentionPeriod = 7,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/backupPolicy:BackupPolicy")]
     public partial class BackupPolicy : Pulumi.CustomResource
     {
@@ -19,9 +42,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Output<string?> BackupModel { get; private set; } = null!;
 
         /// <summary>
-        /// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-        /// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-        /// `22:00-02:00`.
+        /// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         /// </summary>
         [Output("backupTime")]
         public Output<string?> BackupTime { get; private set; } = null!;
@@ -97,9 +118,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Input<string>? BackupModel { get; set; }
 
         /// <summary>
-        /// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-        /// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-        /// `22:00-02:00`.
+        /// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         /// </summary>
         [Input("backupTime")]
         public Input<string>? BackupTime { get; set; }
@@ -130,9 +149,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Input<string>? BackupModel { get; set; }
 
         /// <summary>
-        /// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-        /// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-        /// `22:00-02:00`.
+        /// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         /// </summary>
         [Input("backupTime")]
         public Input<string>? BackupTime { get; set; }

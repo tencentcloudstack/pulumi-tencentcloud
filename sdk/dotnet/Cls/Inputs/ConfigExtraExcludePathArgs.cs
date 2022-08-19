@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class ConfigExtraExcludePathArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Type. Valid values: File, Path.
+        /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
+        /// <summary>
+        /// Specific content corresponding to Type.
+        /// </summary>
         [Input("value")]
         public Input<string>? Value { get; set; }
 

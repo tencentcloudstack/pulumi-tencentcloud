@@ -4,6 +4,48 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CLB redirection.
+ *
+ * ## Example Usage
+ *
+ * Manual Rewrite
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Clb.Redirection("foo", {
+ *     clbId: "lb-p7olt9e5",
+ *     sourceListenerId: "lbl-jc1dx6ju",
+ *     sourceRuleId: "loc-ft8fmngv",
+ *     targetListenerId: "lbl-asj1hzuo",
+ *     targetRuleId: "loc-4xxr2cy7",
+ * });
+ * ```
+ *
+ * Auto Rewrite
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Clb.Redirection("foo", {
+ *     clbId: "lb-p7olt9e5",
+ *     isAutoRewrite: true,
+ *     targetListenerId: "lbl-asj1hzuo",
+ *     targetRuleId: "loc-4xxr2cy7",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CLB redirection can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+ * ```
+ */
 export class Redirection extends pulumi.CustomResource {
     /**
      * Get an existing Redirection resource's state with the given name, ID, and optional extra
@@ -37,14 +79,11 @@ export class Redirection extends pulumi.CustomResource {
      */
     public readonly clbId!: pulumi.Output<string>;
     /**
-     * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-     * auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-     * when this parameter set true.
+     * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
      */
     public readonly deleteAllAutoRewrite!: pulumi.Output<boolean | undefined>;
     /**
-     * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-     * should be empty, the target listener must be https protocol and port is 443.
+     * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
      */
     public readonly isAutoRewrite!: pulumi.Output<boolean | undefined>;
     /**
@@ -117,14 +156,11 @@ export interface RedirectionState {
      */
     clbId?: pulumi.Input<string>;
     /**
-     * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-     * auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-     * when this parameter set true.
+     * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
      */
     deleteAllAutoRewrite?: pulumi.Input<boolean>;
     /**
-     * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-     * should be empty, the target listener must be https protocol and port is 443.
+     * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
      */
     isAutoRewrite?: pulumi.Input<boolean>;
     /**
@@ -154,14 +190,11 @@ export interface RedirectionArgs {
      */
     clbId: pulumi.Input<string>;
     /**
-     * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-     * auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-     * when this parameter set true.
+     * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
      */
     deleteAllAutoRewrite?: pulumi.Input<boolean>;
     /**
-     * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-     * should be empty, the target listener must be https protocol and port is 443.
+     * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
      */
     isAutoRewrite?: pulumi.Input<boolean>;
     /**

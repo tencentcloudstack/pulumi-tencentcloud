@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const defaultBackupPolicy = new tencentcloud.Mysql.BackupPolicy("default", {
+ *     backupModel: "physical",
+ *     backupTime: "02:00-06:00",
+ *     mysqlId: "cdb-dnqksd9f",
+ *     retentionPeriod: 7,
+ * });
+ * ```
+ */
 export class BackupPolicy extends pulumi.CustomResource {
     /**
      * Get an existing BackupPolicy resource's state with the given name, ID, and optional extra
@@ -37,9 +52,7 @@ export class BackupPolicy extends pulumi.CustomResource {
      */
     public readonly backupModel!: pulumi.Output<string | undefined>;
     /**
-     * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-     * following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-     * `22:00-02:00`.
+     * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
      */
     public readonly backupTime!: pulumi.Output<string | undefined>;
     /**
@@ -98,9 +111,7 @@ export interface BackupPolicyState {
      */
     backupModel?: pulumi.Input<string>;
     /**
-     * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-     * following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-     * `22:00-02:00`.
+     * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
      */
     backupTime?: pulumi.Input<string>;
     /**
@@ -126,9 +137,7 @@ export interface BackupPolicyArgs {
      */
     backupModel?: pulumi.Input<string>;
     /**
-     * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-     * following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-     * `22:00-02:00`.
+     * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
      */
     backupTime?: pulumi.Input<string>;
     /**

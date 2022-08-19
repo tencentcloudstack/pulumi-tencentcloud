@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class MachineGroupMachineGroupType
     {
+        /// <summary>
+        /// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
+        /// </summary>
         public readonly string Type;
+        /// <summary>
+        /// Machine description list.
+        /// </summary>
         public readonly ImmutableArray<string> Values;
 
         [OutputConstructor]

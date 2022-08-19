@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class ConfigExtraExtractRuleFilterKeyRegexGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Log key to be filtered.
+        /// </summary>
         [Input("key")]
         public Input<string>? Key { get; set; }
 
+        /// <summary>
+        /// Filter rule regex corresponding to key.
+        /// </summary>
         [Input("regex")]
         public Input<string>? Regex { get; set; }
 

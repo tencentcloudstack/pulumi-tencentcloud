@@ -11,6 +11,51 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create postgresql readonly instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
+// 			AutoRenewFlag:      pulumi.Int(0),
+// 			DbVersion:          pulumi.String("10.4"),
+// 			InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+// 			MasterDbInstanceId: pulumi.String("postgres-j4pm65id"),
+// 			Memory:             pulumi.Int(4),
+// 			NeedSupportIpv6:    pulumi.Int(0),
+// 			ProjectId:          pulumi.Int(0),
+// 			SecurityGroupsIds: pulumi.StringArray{
+// 				pulumi.String("sg-fefj5n6r"),
+// 			},
+// 			Storage:  pulumi.Int(250),
+// 			SubnetId: pulumi.String("subnet-enm92y0m"),
+// 			VpcId:    pulumi.String("vpc-86v957zb"),
+// 			Zone:     pulumi.String("ap-guangzhou-6"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// postgresql readonly instance can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+// ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
 
@@ -24,8 +69,7 @@ type ReadonlyInstance struct {
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId pulumi.StringOutput `pulumi:"masterDbInstanceId"`
-	// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-	// provides.
+	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
 	Memory pulumi.IntOutput `pulumi:"memory"`
 	// Instance name.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -111,8 +155,7 @@ type readonlyInstanceState struct {
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId *string `pulumi:"masterDbInstanceId"`
-	// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-	// provides.
+	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
 	Memory *int `pulumi:"memory"`
 	// Instance name.
 	Name *string `pulumi:"name"`
@@ -143,8 +186,7 @@ type ReadonlyInstanceState struct {
 	InstanceChargeType pulumi.StringPtrInput
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId pulumi.StringPtrInput
-	// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-	// provides.
+	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
 	Memory pulumi.IntPtrInput
 	// Instance name.
 	Name pulumi.StringPtrInput
@@ -177,8 +219,7 @@ type readonlyInstanceArgs struct {
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId string `pulumi:"masterDbInstanceId"`
-	// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-	// provides.
+	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
 	Memory int `pulumi:"memory"`
 	// Instance name.
 	Name *string `pulumi:"name"`
@@ -208,8 +249,7 @@ type ReadonlyInstanceArgs struct {
 	InstanceChargeType pulumi.StringPtrInput
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId pulumi.StringInput
-	// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-	// provides.
+	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
 	Memory pulumi.IntInput
 	// Instance name.
 	Name pulumi.StringPtrInput
@@ -341,8 +381,7 @@ func (o ReadonlyInstanceOutput) MasterDbInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.MasterDbInstanceId }).(pulumi.StringOutput)
 }
 
-// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-// provides.
+// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
 func (o ReadonlyInstanceOutput) Memory() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.Memory }).(pulumi.IntOutput)
 }

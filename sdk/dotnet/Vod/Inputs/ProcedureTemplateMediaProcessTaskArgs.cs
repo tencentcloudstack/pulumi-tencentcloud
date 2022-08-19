@@ -14,6 +14,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
     {
         [Input("adaptiveDynamicStreamingTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs>? _adaptiveDynamicStreamingTaskLists;
+
+        /// <summary>
+        /// List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs> AdaptiveDynamicStreamingTaskLists
         {
             get => _adaptiveDynamicStreamingTaskLists ?? (_adaptiveDynamicStreamingTaskLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs>());
@@ -22,6 +26,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("animatedGraphicTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs>? _animatedGraphicTaskLists;
+
+        /// <summary>
+        /// List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs> AnimatedGraphicTaskLists
         {
             get => _animatedGraphicTaskLists ?? (_animatedGraphicTaskLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs>());
@@ -30,6 +38,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("coverBySnapshotTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs>? _coverBySnapshotTaskLists;
+
+        /// <summary>
+        /// List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs> CoverBySnapshotTaskLists
         {
             get => _coverBySnapshotTaskLists ?? (_coverBySnapshotTaskLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs>());
@@ -38,6 +50,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("imageSpriteTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs>? _imageSpriteTaskLists;
+
+        /// <summary>
+        /// List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs> ImageSpriteTaskLists
         {
             get => _imageSpriteTaskLists ?? (_imageSpriteTaskLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs>());
@@ -46,6 +62,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("sampleSnapshotTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs>? _sampleSnapshotTaskLists;
+
+        /// <summary>
+        /// List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs> SampleSnapshotTaskLists
         {
             get => _sampleSnapshotTaskLists ?? (_sampleSnapshotTaskLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs>());
@@ -54,6 +74,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("snapshotByTimeOffsetTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs>? _snapshotByTimeOffsetTaskLists;
+
+        /// <summary>
+        /// List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs> SnapshotByTimeOffsetTaskLists
         {
             get => _snapshotByTimeOffsetTaskLists ?? (_snapshotByTimeOffsetTaskLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs>());
@@ -62,6 +86,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("transcodeTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs>? _transcodeTaskLists;
+
+        /// <summary>
+        /// List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs> TranscodeTaskLists
         {
             get => _transcodeTaskLists ?? (_transcodeTaskLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs>());

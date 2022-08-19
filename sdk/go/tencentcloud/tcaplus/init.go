@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -27,8 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Idl{}
 	case "tencentcloud:Tcaplus/table:Table":
 		r = &Table{}
-	case "tencentcloud:Tcaplus/tableGroup:TableGroup":
-		r = &TableGroup{}
+	case "tencentcloud:Tcaplus/tablegroup:Tablegroup":
+		r = &Tablegroup{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -59,7 +59,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Tcaplus/tableGroup",
+		"Tcaplus/tablegroup",
 		&module{version},
 	)
 }

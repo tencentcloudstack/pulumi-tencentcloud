@@ -9,12 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Sqlserver
 {
+    /// <summary>
+    /// Use this resource to create SQL Server instance
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Sqlserver.Instance("foo", new Tencentcloud.Sqlserver.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = @var.Availability_zone,
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = "vpc-409mvdvv",
+    ///             SubnetId = "subnet-nf9n81ps",
+    ///             ProjectId = 123,
+    ///             Memory = 2,
+    ///             Storage = 100,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SQL Server instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
         /// <summary>
-        /// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-        /// instance.
+        /// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         /// </summary>
         [Output("autoRenew")]
         public Output<int?> AutoRenew { get; private set; } = null!;
@@ -44,9 +79,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-        /// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-        /// Enterprise). Default is `2008R2`.
+        /// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         /// </summary>
         [Output("engineVersion")]
         public Output<string?> EngineVersion { get; private set; } = null!;
@@ -70,15 +103,13 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Output<int> MaintenanceTimeSpan { get; private set; } = null!;
 
         /// <summary>
-        /// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-        /// Sunday.
+        /// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
         /// </summary>
         [Output("maintenanceWeekSets")]
         public Output<ImmutableArray<int>> MaintenanceWeekSets { get; private set; } = null!;
 
         /// <summary>
-        /// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        /// provides.
+        /// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         /// </summary>
         [Output("memory")]
         public Output<int> Memory { get; private set; } = null!;
@@ -108,8 +139,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Output<int> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-        /// refers to an instance which is not read-only and has no RO group.
+        /// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         /// </summary>
         [Output("roFlag")]
         public Output<string> RoFlag { get; private set; } = null!;
@@ -121,16 +151,13 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-        /// recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-        /// 12 for rebooting.
+        /// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
         /// </summary>
         [Output("status")]
         public Output<int> Status { get; private set; } = null!;
 
         /// <summary>
-        /// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        /// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        /// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         /// </summary>
         [Output("storage")]
         public Output<int> Storage { get; private set; } = null!;
@@ -218,8 +245,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
     public sealed class InstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-        /// instance.
+        /// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         /// </summary>
         [Input("autoRenew")]
         public Input<int>? AutoRenew { get; set; }
@@ -243,9 +269,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
-        /// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-        /// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-        /// Enterprise). Default is `2008R2`.
+        /// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -272,8 +296,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         private InputList<int>? _maintenanceWeekSets;
 
         /// <summary>
-        /// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-        /// Sunday.
+        /// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
         /// </summary>
         public InputList<int> MaintenanceWeekSets
         {
@@ -282,8 +305,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         }
 
         /// <summary>
-        /// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        /// provides.
+        /// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         /// </summary>
         [Input("memory", required: true)]
         public Input<int> Memory { get; set; } = null!;
@@ -325,8 +347,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         }
 
         /// <summary>
-        /// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        /// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        /// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         /// </summary>
         [Input("storage", required: true)]
         public Input<int> Storage { get; set; } = null!;
@@ -375,8 +396,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
     public sealed class InstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-        /// instance.
+        /// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         /// </summary>
         [Input("autoRenew")]
         public Input<int>? AutoRenew { get; set; }
@@ -406,9 +426,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-        /// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-        /// Enterprise). Default is `2008R2`.
+        /// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -435,8 +453,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         private InputList<int>? _maintenanceWeekSets;
 
         /// <summary>
-        /// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-        /// Sunday.
+        /// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
         /// </summary>
         public InputList<int> MaintenanceWeekSets
         {
@@ -445,8 +462,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         }
 
         /// <summary>
-        /// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        /// provides.
+        /// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         /// </summary>
         [Input("memory")]
         public Input<int>? Memory { get; set; }
@@ -476,8 +492,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-        /// refers to an instance which is not read-only and has no RO group.
+        /// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         /// </summary>
         [Input("roFlag")]
         public Input<string>? RoFlag { get; set; }
@@ -495,16 +510,13 @@ namespace Pulumi.Tencentcloud.Sqlserver
         }
 
         /// <summary>
-        /// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-        /// recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-        /// 12 for rebooting.
+        /// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
         /// </summary>
         [Input("status")]
         public Input<int>? Status { get; set; }
 
         /// <summary>
-        /// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        /// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        /// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         /// </summary>
         [Input("storage")]
         public Input<int>? Storage { get; set; }

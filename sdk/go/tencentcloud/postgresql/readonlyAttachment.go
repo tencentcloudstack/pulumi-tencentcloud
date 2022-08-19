@@ -11,6 +11,31 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create postgresql readonly attachment.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Postgresql.NewReadonlyAttachment(ctx, "attach", &Postgresql.ReadonlyAttachmentArgs{
+// 			DbInstanceId:    pulumi.Any(tencentcloud_postgresql_readonly_instance.Foo.Id),
+// 			ReadOnlyGroupId: pulumi.Any(tencentcloud_postgresql_readonly_group.Group.Id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ReadonlyAttachment struct {
 	pulumi.CustomResourceState
 

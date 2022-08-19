@@ -5,6 +5,39 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a cls config extra
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const extra = new tencentcloud.cls.ConfigExtra("extra", {
+ *     topicId: tencentcloud_cls_topic.topic.id,
+ *     type: "container_file",
+ *     logType: "json_log",
+ *     configFlag: "label_k8s",
+ *     logsetId: tencentcloud_cls_logset.logset.id,
+ *     logsetName: tencentcloud_cls_logset.logset.logset_name,
+ *     topicName: tencentcloud_cls_topic.topic.topic_name,
+ *     containerFile: {
+ *         container: "nginx",
+ *         filePattern: "log",
+ *         logPath: "/nginx",
+ *         namespace: "default",
+ *         workload: {
+ *             container: "nginx",
+ *             kind: "deployment",
+ *             name: "nginx",
+ *             namespace: "default",
+ *         },
+ *     },
+ *     groupId: "27752a9b-9918-440a-8ee7-9c84a14a47ed",
+ * });
+ * ```
+ */
 export class ConfigExtra extends pulumi.CustomResource {
     /**
      * Get an existing ConfigExtra resource's state with the given name, ID, and optional extra
@@ -66,9 +99,7 @@ export class ConfigExtra extends pulumi.CustomResource {
      */
     public readonly hostFile!: pulumi.Output<outputs.Cls.ConfigExtraHostFile | undefined>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-     * minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-     * Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
     public readonly logType!: pulumi.Output<string>;
     /**
@@ -211,9 +242,7 @@ export interface ConfigExtraState {
      */
     hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-     * minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-     * Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
     logType?: pulumi.Input<string>;
     /**
@@ -283,9 +312,7 @@ export interface ConfigExtraArgs {
      */
     hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-     * minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-     * Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
     logType: pulumi.Input<string>;
     /**

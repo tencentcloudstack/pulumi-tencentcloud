@@ -9,6 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Clb
 {
+    /// <summary>
+    /// Provides a resource to create a CLB customized config.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Clb.CustomizedConfig("foo", new Tencentcloud.Clb.CustomizedConfigArgs
+    ///         {
+    ///             ConfigContent = @"client_max_body_size 224M;
+    /// client_body_timeout 60s;
+    /// ",
+    ///             ConfigName = "helloWorld",
+    ///             LoadBalancerIds = 
+    ///             {
+    ///                 tencentcloud_clb_instance.Internal_clb.Id,
+    ///                 tencentcloud_clb_instance.Internal_clb2.Id,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CLB customized config can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/customizedConfig:CustomizedConfig")]
     public partial class CustomizedConfig : Pulumi.CustomResource
     {

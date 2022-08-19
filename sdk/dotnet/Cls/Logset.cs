@@ -9,6 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cls
 {
+    /// <summary>
+    /// Provides a resource to create a cls logset
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var logset = new Tencentcloud.Cls.Logset("logset", new Tencentcloud.Cls.LogsetArgs
+    ///         {
+    ///             LogsetName = "logset",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// cls logset can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/logset:Logset")]
     public partial class Logset : Pulumi.CustomResource
     {

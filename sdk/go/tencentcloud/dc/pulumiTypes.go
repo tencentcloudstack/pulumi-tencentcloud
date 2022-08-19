@@ -10,479 +10,578 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type GatewayCCNRoutesInstanceList struct {
-	AsPaths   []string `pulumi:"asPaths"`
-	CidrBlock string   `pulumi:"cidrBlock"`
-	DcgId     string   `pulumi:"dcgId"`
-	RouteId   string   `pulumi:"routeId"`
+type GetGatewayCcnRoutesInstanceList struct {
+	// As path list of the BGP.
+	AsPaths []string `pulumi:"asPaths"`
+	// A network address segment of IDC.
+	CidrBlock string `pulumi:"cidrBlock"`
+	// ID of the DCG to be queried.
+	DcgId string `pulumi:"dcgId"`
+	// ID of the DCG route.
+	RouteId string `pulumi:"routeId"`
 }
 
-// GatewayCCNRoutesInstanceListInput is an input type that accepts GatewayCCNRoutesInstanceListArgs and GatewayCCNRoutesInstanceListOutput values.
-// You can construct a concrete instance of `GatewayCCNRoutesInstanceListInput` via:
+// GetGatewayCcnRoutesInstanceListInput is an input type that accepts GetGatewayCcnRoutesInstanceListArgs and GetGatewayCcnRoutesInstanceListOutput values.
+// You can construct a concrete instance of `GetGatewayCcnRoutesInstanceListInput` via:
 //
-//          GatewayCCNRoutesInstanceListArgs{...}
-type GatewayCCNRoutesInstanceListInput interface {
+//          GetGatewayCcnRoutesInstanceListArgs{...}
+type GetGatewayCcnRoutesInstanceListInput interface {
 	pulumi.Input
 
-	ToGatewayCCNRoutesInstanceListOutput() GatewayCCNRoutesInstanceListOutput
-	ToGatewayCCNRoutesInstanceListOutputWithContext(context.Context) GatewayCCNRoutesInstanceListOutput
+	ToGetGatewayCcnRoutesInstanceListOutput() GetGatewayCcnRoutesInstanceListOutput
+	ToGetGatewayCcnRoutesInstanceListOutputWithContext(context.Context) GetGatewayCcnRoutesInstanceListOutput
 }
 
-type GatewayCCNRoutesInstanceListArgs struct {
-	AsPaths   pulumi.StringArrayInput `pulumi:"asPaths"`
-	CidrBlock pulumi.StringInput      `pulumi:"cidrBlock"`
-	DcgId     pulumi.StringInput      `pulumi:"dcgId"`
-	RouteId   pulumi.StringInput      `pulumi:"routeId"`
+type GetGatewayCcnRoutesInstanceListArgs struct {
+	// As path list of the BGP.
+	AsPaths pulumi.StringArrayInput `pulumi:"asPaths"`
+	// A network address segment of IDC.
+	CidrBlock pulumi.StringInput `pulumi:"cidrBlock"`
+	// ID of the DCG to be queried.
+	DcgId pulumi.StringInput `pulumi:"dcgId"`
+	// ID of the DCG route.
+	RouteId pulumi.StringInput `pulumi:"routeId"`
 }
 
-func (GatewayCCNRoutesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewayCCNRoutesInstanceList)(nil)).Elem()
+func (GetGatewayCcnRoutesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCcnRoutesInstanceList)(nil)).Elem()
 }
 
-func (i GatewayCCNRoutesInstanceListArgs) ToGatewayCCNRoutesInstanceListOutput() GatewayCCNRoutesInstanceListOutput {
-	return i.ToGatewayCCNRoutesInstanceListOutputWithContext(context.Background())
+func (i GetGatewayCcnRoutesInstanceListArgs) ToGetGatewayCcnRoutesInstanceListOutput() GetGatewayCcnRoutesInstanceListOutput {
+	return i.ToGetGatewayCcnRoutesInstanceListOutputWithContext(context.Background())
 }
 
-func (i GatewayCCNRoutesInstanceListArgs) ToGatewayCCNRoutesInstanceListOutputWithContext(ctx context.Context) GatewayCCNRoutesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewayCCNRoutesInstanceListOutput)
+func (i GetGatewayCcnRoutesInstanceListArgs) ToGetGatewayCcnRoutesInstanceListOutputWithContext(ctx context.Context) GetGatewayCcnRoutesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCcnRoutesInstanceListOutput)
 }
 
-// GatewayCCNRoutesInstanceListArrayInput is an input type that accepts GatewayCCNRoutesInstanceListArray and GatewayCCNRoutesInstanceListArrayOutput values.
-// You can construct a concrete instance of `GatewayCCNRoutesInstanceListArrayInput` via:
+// GetGatewayCcnRoutesInstanceListArrayInput is an input type that accepts GetGatewayCcnRoutesInstanceListArray and GetGatewayCcnRoutesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCcnRoutesInstanceListArrayInput` via:
 //
-//          GatewayCCNRoutesInstanceListArray{ GatewayCCNRoutesInstanceListArgs{...} }
-type GatewayCCNRoutesInstanceListArrayInput interface {
+//          GetGatewayCcnRoutesInstanceListArray{ GetGatewayCcnRoutesInstanceListArgs{...} }
+type GetGatewayCcnRoutesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToGatewayCCNRoutesInstanceListArrayOutput() GatewayCCNRoutesInstanceListArrayOutput
-	ToGatewayCCNRoutesInstanceListArrayOutputWithContext(context.Context) GatewayCCNRoutesInstanceListArrayOutput
+	ToGetGatewayCcnRoutesInstanceListArrayOutput() GetGatewayCcnRoutesInstanceListArrayOutput
+	ToGetGatewayCcnRoutesInstanceListArrayOutputWithContext(context.Context) GetGatewayCcnRoutesInstanceListArrayOutput
 }
 
-type GatewayCCNRoutesInstanceListArray []GatewayCCNRoutesInstanceListInput
+type GetGatewayCcnRoutesInstanceListArray []GetGatewayCcnRoutesInstanceListInput
 
-func (GatewayCCNRoutesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewayCCNRoutesInstanceList)(nil)).Elem()
+func (GetGatewayCcnRoutesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCcnRoutesInstanceList)(nil)).Elem()
 }
 
-func (i GatewayCCNRoutesInstanceListArray) ToGatewayCCNRoutesInstanceListArrayOutput() GatewayCCNRoutesInstanceListArrayOutput {
-	return i.ToGatewayCCNRoutesInstanceListArrayOutputWithContext(context.Background())
+func (i GetGatewayCcnRoutesInstanceListArray) ToGetGatewayCcnRoutesInstanceListArrayOutput() GetGatewayCcnRoutesInstanceListArrayOutput {
+	return i.ToGetGatewayCcnRoutesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i GatewayCCNRoutesInstanceListArray) ToGatewayCCNRoutesInstanceListArrayOutputWithContext(ctx context.Context) GatewayCCNRoutesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewayCCNRoutesInstanceListArrayOutput)
+func (i GetGatewayCcnRoutesInstanceListArray) ToGetGatewayCcnRoutesInstanceListArrayOutputWithContext(ctx context.Context) GetGatewayCcnRoutesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCcnRoutesInstanceListArrayOutput)
 }
 
-type GatewayCCNRoutesInstanceListOutput struct{ *pulumi.OutputState }
+type GetGatewayCcnRoutesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (GatewayCCNRoutesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewayCCNRoutesInstanceList)(nil)).Elem()
+func (GetGatewayCcnRoutesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCcnRoutesInstanceList)(nil)).Elem()
 }
 
-func (o GatewayCCNRoutesInstanceListOutput) ToGatewayCCNRoutesInstanceListOutput() GatewayCCNRoutesInstanceListOutput {
+func (o GetGatewayCcnRoutesInstanceListOutput) ToGetGatewayCcnRoutesInstanceListOutput() GetGatewayCcnRoutesInstanceListOutput {
 	return o
 }
 
-func (o GatewayCCNRoutesInstanceListOutput) ToGatewayCCNRoutesInstanceListOutputWithContext(ctx context.Context) GatewayCCNRoutesInstanceListOutput {
+func (o GetGatewayCcnRoutesInstanceListOutput) ToGetGatewayCcnRoutesInstanceListOutputWithContext(ctx context.Context) GetGatewayCcnRoutesInstanceListOutput {
 	return o
 }
 
-func (o GatewayCCNRoutesInstanceListOutput) AsPaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GatewayCCNRoutesInstanceList) []string { return v.AsPaths }).(pulumi.StringArrayOutput)
+// As path list of the BGP.
+func (o GetGatewayCcnRoutesInstanceListOutput) AsPaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewayCcnRoutesInstanceList) []string { return v.AsPaths }).(pulumi.StringArrayOutput)
 }
 
-func (o GatewayCCNRoutesInstanceListOutput) CidrBlock() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayCCNRoutesInstanceList) string { return v.CidrBlock }).(pulumi.StringOutput)
+// A network address segment of IDC.
+func (o GetGatewayCcnRoutesInstanceListOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCcnRoutesInstanceList) string { return v.CidrBlock }).(pulumi.StringOutput)
 }
 
-func (o GatewayCCNRoutesInstanceListOutput) DcgId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayCCNRoutesInstanceList) string { return v.DcgId }).(pulumi.StringOutput)
+// ID of the DCG to be queried.
+func (o GetGatewayCcnRoutesInstanceListOutput) DcgId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCcnRoutesInstanceList) string { return v.DcgId }).(pulumi.StringOutput)
 }
 
-func (o GatewayCCNRoutesInstanceListOutput) RouteId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayCCNRoutesInstanceList) string { return v.RouteId }).(pulumi.StringOutput)
+// ID of the DCG route.
+func (o GetGatewayCcnRoutesInstanceListOutput) RouteId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCcnRoutesInstanceList) string { return v.RouteId }).(pulumi.StringOutput)
 }
 
-type GatewayCCNRoutesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetGatewayCcnRoutesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (GatewayCCNRoutesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewayCCNRoutesInstanceList)(nil)).Elem()
+func (GetGatewayCcnRoutesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCcnRoutesInstanceList)(nil)).Elem()
 }
 
-func (o GatewayCCNRoutesInstanceListArrayOutput) ToGatewayCCNRoutesInstanceListArrayOutput() GatewayCCNRoutesInstanceListArrayOutput {
+func (o GetGatewayCcnRoutesInstanceListArrayOutput) ToGetGatewayCcnRoutesInstanceListArrayOutput() GetGatewayCcnRoutesInstanceListArrayOutput {
 	return o
 }
 
-func (o GatewayCCNRoutesInstanceListArrayOutput) ToGatewayCCNRoutesInstanceListArrayOutputWithContext(ctx context.Context) GatewayCCNRoutesInstanceListArrayOutput {
+func (o GetGatewayCcnRoutesInstanceListArrayOutput) ToGetGatewayCcnRoutesInstanceListArrayOutputWithContext(ctx context.Context) GetGatewayCcnRoutesInstanceListArrayOutput {
 	return o
 }
 
-func (o GatewayCCNRoutesInstanceListArrayOutput) Index(i pulumi.IntInput) GatewayCCNRoutesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GatewayCCNRoutesInstanceList {
-		return vs[0].([]GatewayCCNRoutesInstanceList)[vs[1].(int)]
-	}).(GatewayCCNRoutesInstanceListOutput)
+func (o GetGatewayCcnRoutesInstanceListArrayOutput) Index(i pulumi.IntInput) GetGatewayCcnRoutesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCcnRoutesInstanceList {
+		return vs[0].([]GetGatewayCcnRoutesInstanceList)[vs[1].(int)]
+	}).(GetGatewayCcnRoutesInstanceListOutput)
 }
 
-type GatewayInstancesInstanceList struct {
-	CnnRouteType      string `pulumi:"cnnRouteType"`
-	CreateTime        string `pulumi:"createTime"`
-	DcgId             string `pulumi:"dcgId"`
-	DcgIp             string `pulumi:"dcgIp"`
-	EnableBgp         bool   `pulumi:"enableBgp"`
-	GatewayType       string `pulumi:"gatewayType"`
-	Name              string `pulumi:"name"`
+type GetGatewayInstancesInstanceList struct {
+	// Type of CCN route. Valid values: `BGP` and `STATIC`.
+	CnnRouteType string `pulumi:"cnnRouteType"`
+	// Creation time of resource.
+	CreateTime string `pulumi:"createTime"`
+	// ID of the DCG to be queried.
+	DcgId string `pulumi:"dcgId"`
+	// IP of the DCG.
+	DcgIp string `pulumi:"dcgIp"`
+	// Indicates whether the BGP is enabled.
+	EnableBgp bool `pulumi:"enableBgp"`
+	// Type of the gateway. Valid values: `NORMAL` and `NAT`. Default is `NORMAL`.
+	GatewayType string `pulumi:"gatewayType"`
+	// Name of the DCG to be queried.
+	Name string `pulumi:"name"`
+	// Type of associated network. Valid values: `VPC` and `CCN`.
 	NetworkInstanceId string `pulumi:"networkInstanceId"`
-	NetworkType       string `pulumi:"networkType"`
+	// IP of the DCG.
+	NetworkType string `pulumi:"networkType"`
 }
 
-// GatewayInstancesInstanceListInput is an input type that accepts GatewayInstancesInstanceListArgs and GatewayInstancesInstanceListOutput values.
-// You can construct a concrete instance of `GatewayInstancesInstanceListInput` via:
+// GetGatewayInstancesInstanceListInput is an input type that accepts GetGatewayInstancesInstanceListArgs and GetGatewayInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetGatewayInstancesInstanceListInput` via:
 //
-//          GatewayInstancesInstanceListArgs{...}
-type GatewayInstancesInstanceListInput interface {
+//          GetGatewayInstancesInstanceListArgs{...}
+type GetGatewayInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToGatewayInstancesInstanceListOutput() GatewayInstancesInstanceListOutput
-	ToGatewayInstancesInstanceListOutputWithContext(context.Context) GatewayInstancesInstanceListOutput
+	ToGetGatewayInstancesInstanceListOutput() GetGatewayInstancesInstanceListOutput
+	ToGetGatewayInstancesInstanceListOutputWithContext(context.Context) GetGatewayInstancesInstanceListOutput
 }
 
-type GatewayInstancesInstanceListArgs struct {
-	CnnRouteType      pulumi.StringInput `pulumi:"cnnRouteType"`
-	CreateTime        pulumi.StringInput `pulumi:"createTime"`
-	DcgId             pulumi.StringInput `pulumi:"dcgId"`
-	DcgIp             pulumi.StringInput `pulumi:"dcgIp"`
-	EnableBgp         pulumi.BoolInput   `pulumi:"enableBgp"`
-	GatewayType       pulumi.StringInput `pulumi:"gatewayType"`
-	Name              pulumi.StringInput `pulumi:"name"`
+type GetGatewayInstancesInstanceListArgs struct {
+	// Type of CCN route. Valid values: `BGP` and `STATIC`.
+	CnnRouteType pulumi.StringInput `pulumi:"cnnRouteType"`
+	// Creation time of resource.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// ID of the DCG to be queried.
+	DcgId pulumi.StringInput `pulumi:"dcgId"`
+	// IP of the DCG.
+	DcgIp pulumi.StringInput `pulumi:"dcgIp"`
+	// Indicates whether the BGP is enabled.
+	EnableBgp pulumi.BoolInput `pulumi:"enableBgp"`
+	// Type of the gateway. Valid values: `NORMAL` and `NAT`. Default is `NORMAL`.
+	GatewayType pulumi.StringInput `pulumi:"gatewayType"`
+	// Name of the DCG to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Type of associated network. Valid values: `VPC` and `CCN`.
 	NetworkInstanceId pulumi.StringInput `pulumi:"networkInstanceId"`
-	NetworkType       pulumi.StringInput `pulumi:"networkType"`
+	// IP of the DCG.
+	NetworkType pulumi.StringInput `pulumi:"networkType"`
 }
 
-func (GatewayInstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewayInstancesInstanceList)(nil)).Elem()
+func (GetGatewayInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayInstancesInstanceList)(nil)).Elem()
 }
 
-func (i GatewayInstancesInstanceListArgs) ToGatewayInstancesInstanceListOutput() GatewayInstancesInstanceListOutput {
-	return i.ToGatewayInstancesInstanceListOutputWithContext(context.Background())
+func (i GetGatewayInstancesInstanceListArgs) ToGetGatewayInstancesInstanceListOutput() GetGatewayInstancesInstanceListOutput {
+	return i.ToGetGatewayInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i GatewayInstancesInstanceListArgs) ToGatewayInstancesInstanceListOutputWithContext(ctx context.Context) GatewayInstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewayInstancesInstanceListOutput)
+func (i GetGatewayInstancesInstanceListArgs) ToGetGatewayInstancesInstanceListOutputWithContext(ctx context.Context) GetGatewayInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayInstancesInstanceListOutput)
 }
 
-// GatewayInstancesInstanceListArrayInput is an input type that accepts GatewayInstancesInstanceListArray and GatewayInstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `GatewayInstancesInstanceListArrayInput` via:
+// GetGatewayInstancesInstanceListArrayInput is an input type that accepts GetGatewayInstancesInstanceListArray and GetGatewayInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayInstancesInstanceListArrayInput` via:
 //
-//          GatewayInstancesInstanceListArray{ GatewayInstancesInstanceListArgs{...} }
-type GatewayInstancesInstanceListArrayInput interface {
+//          GetGatewayInstancesInstanceListArray{ GetGatewayInstancesInstanceListArgs{...} }
+type GetGatewayInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToGatewayInstancesInstanceListArrayOutput() GatewayInstancesInstanceListArrayOutput
-	ToGatewayInstancesInstanceListArrayOutputWithContext(context.Context) GatewayInstancesInstanceListArrayOutput
+	ToGetGatewayInstancesInstanceListArrayOutput() GetGatewayInstancesInstanceListArrayOutput
+	ToGetGatewayInstancesInstanceListArrayOutputWithContext(context.Context) GetGatewayInstancesInstanceListArrayOutput
 }
 
-type GatewayInstancesInstanceListArray []GatewayInstancesInstanceListInput
+type GetGatewayInstancesInstanceListArray []GetGatewayInstancesInstanceListInput
 
-func (GatewayInstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewayInstancesInstanceList)(nil)).Elem()
+func (GetGatewayInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayInstancesInstanceList)(nil)).Elem()
 }
 
-func (i GatewayInstancesInstanceListArray) ToGatewayInstancesInstanceListArrayOutput() GatewayInstancesInstanceListArrayOutput {
-	return i.ToGatewayInstancesInstanceListArrayOutputWithContext(context.Background())
+func (i GetGatewayInstancesInstanceListArray) ToGetGatewayInstancesInstanceListArrayOutput() GetGatewayInstancesInstanceListArrayOutput {
+	return i.ToGetGatewayInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i GatewayInstancesInstanceListArray) ToGatewayInstancesInstanceListArrayOutputWithContext(ctx context.Context) GatewayInstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewayInstancesInstanceListArrayOutput)
+func (i GetGatewayInstancesInstanceListArray) ToGetGatewayInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetGatewayInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayInstancesInstanceListArrayOutput)
 }
 
-type GatewayInstancesInstanceListOutput struct{ *pulumi.OutputState }
+type GetGatewayInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (GatewayInstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewayInstancesInstanceList)(nil)).Elem()
+func (GetGatewayInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayInstancesInstanceList)(nil)).Elem()
 }
 
-func (o GatewayInstancesInstanceListOutput) ToGatewayInstancesInstanceListOutput() GatewayInstancesInstanceListOutput {
+func (o GetGatewayInstancesInstanceListOutput) ToGetGatewayInstancesInstanceListOutput() GetGatewayInstancesInstanceListOutput {
 	return o
 }
 
-func (o GatewayInstancesInstanceListOutput) ToGatewayInstancesInstanceListOutputWithContext(ctx context.Context) GatewayInstancesInstanceListOutput {
+func (o GetGatewayInstancesInstanceListOutput) ToGetGatewayInstancesInstanceListOutputWithContext(ctx context.Context) GetGatewayInstancesInstanceListOutput {
 	return o
 }
 
-func (o GatewayInstancesInstanceListOutput) CnnRouteType() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.CnnRouteType }).(pulumi.StringOutput)
+// Type of CCN route. Valid values: `BGP` and `STATIC`.
+func (o GetGatewayInstancesInstanceListOutput) CnnRouteType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.CnnRouteType }).(pulumi.StringOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of resource.
+func (o GetGatewayInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) DcgId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.DcgId }).(pulumi.StringOutput)
+// ID of the DCG to be queried.
+func (o GetGatewayInstancesInstanceListOutput) DcgId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.DcgId }).(pulumi.StringOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) DcgIp() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.DcgIp }).(pulumi.StringOutput)
+// IP of the DCG.
+func (o GetGatewayInstancesInstanceListOutput) DcgIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.DcgIp }).(pulumi.StringOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) EnableBgp() pulumi.BoolOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) bool { return v.EnableBgp }).(pulumi.BoolOutput)
+// Indicates whether the BGP is enabled.
+func (o GetGatewayInstancesInstanceListOutput) EnableBgp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) bool { return v.EnableBgp }).(pulumi.BoolOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) GatewayType() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.GatewayType }).(pulumi.StringOutput)
+// Type of the gateway. Valid values: `NORMAL` and `NAT`. Default is `NORMAL`.
+func (o GetGatewayInstancesInstanceListOutput) GatewayType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.GatewayType }).(pulumi.StringOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the DCG to be queried.
+func (o GetGatewayInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) NetworkInstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.NetworkInstanceId }).(pulumi.StringOutput)
+// Type of associated network. Valid values: `VPC` and `CCN`.
+func (o GetGatewayInstancesInstanceListOutput) NetworkInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.NetworkInstanceId }).(pulumi.StringOutput)
 }
 
-func (o GatewayInstancesInstanceListOutput) NetworkType() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayInstancesInstanceList) string { return v.NetworkType }).(pulumi.StringOutput)
+// IP of the DCG.
+func (o GetGatewayInstancesInstanceListOutput) NetworkType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayInstancesInstanceList) string { return v.NetworkType }).(pulumi.StringOutput)
 }
 
-type GatewayInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetGatewayInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (GatewayInstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewayInstancesInstanceList)(nil)).Elem()
+func (GetGatewayInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayInstancesInstanceList)(nil)).Elem()
 }
 
-func (o GatewayInstancesInstanceListArrayOutput) ToGatewayInstancesInstanceListArrayOutput() GatewayInstancesInstanceListArrayOutput {
+func (o GetGatewayInstancesInstanceListArrayOutput) ToGetGatewayInstancesInstanceListArrayOutput() GetGatewayInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o GatewayInstancesInstanceListArrayOutput) ToGatewayInstancesInstanceListArrayOutputWithContext(ctx context.Context) GatewayInstancesInstanceListArrayOutput {
+func (o GetGatewayInstancesInstanceListArrayOutput) ToGetGatewayInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetGatewayInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o GatewayInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GatewayInstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GatewayInstancesInstanceList {
-		return vs[0].([]GatewayInstancesInstanceList)[vs[1].(int)]
-	}).(GatewayInstancesInstanceListOutput)
+func (o GetGatewayInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetGatewayInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayInstancesInstanceList {
+		return vs[0].([]GetGatewayInstancesInstanceList)[vs[1].(int)]
+	}).(GetGatewayInstancesInstanceListOutput)
 }
 
-type InstancesInstanceList struct {
-	AccessPointId            string `pulumi:"accessPointId"`
-	Bandwidth                int    `pulumi:"bandwidth"`
-	CircuitCode              string `pulumi:"circuitCode"`
-	CreateTime               string `pulumi:"createTime"`
-	CustomerAddress          string `pulumi:"customerAddress"`
-	CustomerEmail            string `pulumi:"customerEmail"`
-	CustomerName             string `pulumi:"customerName"`
-	CustomerPhone            string `pulumi:"customerPhone"`
-	DcId                     string `pulumi:"dcId"`
-	EnabledTime              string `pulumi:"enabledTime"`
-	ExpiredTime              string `pulumi:"expiredTime"`
+type GetInstancesInstanceList struct {
+	// Access point ID of tne DC.
+	AccessPointId string `pulumi:"accessPointId"`
+	// Bandwidth of the DC.
+	Bandwidth int `pulumi:"bandwidth"`
+	// The circuit code provided by the operator for the DC.
+	CircuitCode string `pulumi:"circuitCode"`
+	// Creation time of resource.
+	CreateTime string `pulumi:"createTime"`
+	// Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.
+	CustomerAddress string `pulumi:"customerAddress"`
+	// Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+	CustomerEmail string `pulumi:"customerEmail"`
+	// Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+	CustomerName string `pulumi:"customerName"`
+	// Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+	CustomerPhone string `pulumi:"customerPhone"`
+	// ID of the DC to be queried.
+	DcId string `pulumi:"dcId"`
+	// Enable time of resource.
+	EnabledTime string `pulumi:"enabledTime"`
+	// Expire date of resource.
+	ExpiredTime string `pulumi:"expiredTime"`
+	// Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.
 	FaultReportContactPerson string `pulumi:"faultReportContactPerson"`
-	FaultReportContactPhone  string `pulumi:"faultReportContactPhone"`
-	LineOperator             string `pulumi:"lineOperator"`
-	Location                 string `pulumi:"location"`
-	Name                     string `pulumi:"name"`
-	PortType                 string `pulumi:"portType"`
-	RedundantDcId            string `pulumi:"redundantDcId"`
-	State                    string `pulumi:"state"`
-	TencentAddress           string `pulumi:"tencentAddress"`
+	// Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.
+	FaultReportContactPhone string `pulumi:"faultReportContactPhone"`
+	// Operator of the DC, and available values include `ChinaTelecom`, `ChinaMobile`, `ChinaUnicom`, `In-houseWiring`, `ChinaOther` and `InternationalOperator`.
+	LineOperator string `pulumi:"lineOperator"`
+	// The DC location where the connection is located.
+	Location string `pulumi:"location"`
+	// Name of the DC to be queried.
+	Name string `pulumi:"name"`
+	// Port type of the DC in client, and available values include `100Base-T`, `1000Base-T`, `1000Base-LX`, `10GBase-T` and `10GBase-LR`. The default value is `1000Base-LX`.
+	PortType string `pulumi:"portType"`
+	// ID of the redundant DC.
+	RedundantDcId string `pulumi:"redundantDcId"`
+	// State of the DC, and available values include `REJECTED`, `TOPAY`, `PAID`, `ALLOCATED`, `AVAILABLE`, `DELETING` and `DELETED`.
+	State string `pulumi:"state"`
+	// Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.
+	TencentAddress string `pulumi:"tencentAddress"`
 }
 
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
 }
 
-type InstancesInstanceListArgs struct {
-	AccessPointId            pulumi.StringInput `pulumi:"accessPointId"`
-	Bandwidth                pulumi.IntInput    `pulumi:"bandwidth"`
-	CircuitCode              pulumi.StringInput `pulumi:"circuitCode"`
-	CreateTime               pulumi.StringInput `pulumi:"createTime"`
-	CustomerAddress          pulumi.StringInput `pulumi:"customerAddress"`
-	CustomerEmail            pulumi.StringInput `pulumi:"customerEmail"`
-	CustomerName             pulumi.StringInput `pulumi:"customerName"`
-	CustomerPhone            pulumi.StringInput `pulumi:"customerPhone"`
-	DcId                     pulumi.StringInput `pulumi:"dcId"`
-	EnabledTime              pulumi.StringInput `pulumi:"enabledTime"`
-	ExpiredTime              pulumi.StringInput `pulumi:"expiredTime"`
+type GetInstancesInstanceListArgs struct {
+	// Access point ID of tne DC.
+	AccessPointId pulumi.StringInput `pulumi:"accessPointId"`
+	// Bandwidth of the DC.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// The circuit code provided by the operator for the DC.
+	CircuitCode pulumi.StringInput `pulumi:"circuitCode"`
+	// Creation time of resource.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.
+	CustomerAddress pulumi.StringInput `pulumi:"customerAddress"`
+	// Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+	CustomerEmail pulumi.StringInput `pulumi:"customerEmail"`
+	// Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+	CustomerName pulumi.StringInput `pulumi:"customerName"`
+	// Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+	CustomerPhone pulumi.StringInput `pulumi:"customerPhone"`
+	// ID of the DC to be queried.
+	DcId pulumi.StringInput `pulumi:"dcId"`
+	// Enable time of resource.
+	EnabledTime pulumi.StringInput `pulumi:"enabledTime"`
+	// Expire date of resource.
+	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
+	// Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.
 	FaultReportContactPerson pulumi.StringInput `pulumi:"faultReportContactPerson"`
-	FaultReportContactPhone  pulumi.StringInput `pulumi:"faultReportContactPhone"`
-	LineOperator             pulumi.StringInput `pulumi:"lineOperator"`
-	Location                 pulumi.StringInput `pulumi:"location"`
-	Name                     pulumi.StringInput `pulumi:"name"`
-	PortType                 pulumi.StringInput `pulumi:"portType"`
-	RedundantDcId            pulumi.StringInput `pulumi:"redundantDcId"`
-	State                    pulumi.StringInput `pulumi:"state"`
-	TencentAddress           pulumi.StringInput `pulumi:"tencentAddress"`
+	// Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.
+	FaultReportContactPhone pulumi.StringInput `pulumi:"faultReportContactPhone"`
+	// Operator of the DC, and available values include `ChinaTelecom`, `ChinaMobile`, `ChinaUnicom`, `In-houseWiring`, `ChinaOther` and `InternationalOperator`.
+	LineOperator pulumi.StringInput `pulumi:"lineOperator"`
+	// The DC location where the connection is located.
+	Location pulumi.StringInput `pulumi:"location"`
+	// Name of the DC to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Port type of the DC in client, and available values include `100Base-T`, `1000Base-T`, `1000Base-LX`, `10GBase-T` and `10GBase-LR`. The default value is `1000Base-LX`.
+	PortType pulumi.StringInput `pulumi:"portType"`
+	// ID of the redundant DC.
+	RedundantDcId pulumi.StringInput `pulumi:"redundantDcId"`
+	// State of the DC, and available values include `REJECTED`, `TOPAY`, `PAID`, `ALLOCATED`, `AVAILABLE`, `DELETING` and `DELETED`.
+	State pulumi.StringInput `pulumi:"state"`
+	// Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.
+	TencentAddress pulumi.StringInput `pulumi:"tencentAddress"`
 }
 
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
 }
 
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
 }
 
-type InstancesInstanceListArray []InstancesInstanceListInput
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
 
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
 }
 
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) AccessPointId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.AccessPointId }).(pulumi.StringOutput)
+// Access point ID of tne DC.
+func (o GetInstancesInstanceListOutput) AccessPointId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AccessPointId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Bandwidth() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Bandwidth }).(pulumi.IntOutput)
+// Bandwidth of the DC.
+func (o GetInstancesInstanceListOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Bandwidth }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) CircuitCode() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CircuitCode }).(pulumi.StringOutput)
+// The circuit code provided by the operator for the DC.
+func (o GetInstancesInstanceListOutput) CircuitCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CircuitCode }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of resource.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CustomerAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CustomerAddress }).(pulumi.StringOutput)
+// Interconnect IP of the DC within client. Note: This field may return null, indicating that no valid values are taken.
+func (o GetInstancesInstanceListOutput) CustomerAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CustomerAddress }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CustomerEmail() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CustomerEmail }).(pulumi.StringOutput)
+// Applicant email of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+func (o GetInstancesInstanceListOutput) CustomerEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CustomerEmail }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CustomerName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CustomerName }).(pulumi.StringOutput)
+// Applicant name of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+func (o GetInstancesInstanceListOutput) CustomerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CustomerName }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CustomerPhone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CustomerPhone }).(pulumi.StringOutput)
+// Applicant phone number of the DC, the default is obtained from the account. Note: This field may return null, indicating that no valid values are taken.
+func (o GetInstancesInstanceListOutput) CustomerPhone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CustomerPhone }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) DcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.DcId }).(pulumi.StringOutput)
+// ID of the DC to be queried.
+func (o GetInstancesInstanceListOutput) DcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DcId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) EnabledTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.EnabledTime }).(pulumi.StringOutput)
+// Enable time of resource.
+func (o GetInstancesInstanceListOutput) EnabledTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.EnabledTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) ExpiredTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ExpiredTime }).(pulumi.StringOutput)
+// Expire date of resource.
+func (o GetInstancesInstanceListOutput) ExpiredTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ExpiredTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) FaultReportContactPerson() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.FaultReportContactPerson }).(pulumi.StringOutput)
+// Contact of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.
+func (o GetInstancesInstanceListOutput) FaultReportContactPerson() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.FaultReportContactPerson }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) FaultReportContactPhone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.FaultReportContactPhone }).(pulumi.StringOutput)
+// Phone number of reporting a faulty. Note: This field may return null, indicating that no valid values are taken.
+func (o GetInstancesInstanceListOutput) FaultReportContactPhone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.FaultReportContactPhone }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) LineOperator() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.LineOperator }).(pulumi.StringOutput)
+// Operator of the DC, and available values include `ChinaTelecom`, `ChinaMobile`, `ChinaUnicom`, `In-houseWiring`, `ChinaOther` and `InternationalOperator`.
+func (o GetInstancesInstanceListOutput) LineOperator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LineOperator }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Location() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Location }).(pulumi.StringOutput)
+// The DC location where the connection is located.
+func (o GetInstancesInstanceListOutput) Location() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Location }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the DC to be queried.
+func (o GetInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) PortType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.PortType }).(pulumi.StringOutput)
+// Port type of the DC in client, and available values include `100Base-T`, `1000Base-T`, `1000Base-LX`, `10GBase-T` and `10GBase-LR`. The default value is `1000Base-LX`.
+func (o GetInstancesInstanceListOutput) PortType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.PortType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) RedundantDcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.RedundantDcId }).(pulumi.StringOutput)
+// ID of the redundant DC.
+func (o GetInstancesInstanceListOutput) RedundantDcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.RedundantDcId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.State }).(pulumi.StringOutput)
+// State of the DC, and available values include `REJECTED`, `TOPAY`, `PAID`, `ALLOCATED`, `AVAILABLE`, `DELETING` and `DELETED`.
+func (o GetInstancesInstanceListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.State }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) TencentAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.TencentAddress }).(pulumi.StringOutput)
+// Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.
+func (o GetInstancesInstanceListOutput) TencentAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.TencentAddress }).(pulumi.StringOutput)
 }
 
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewayCCNRoutesInstanceListInput)(nil)).Elem(), GatewayCCNRoutesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewayCCNRoutesInstanceListArrayInput)(nil)).Elem(), GatewayCCNRoutesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewayInstancesInstanceListInput)(nil)).Elem(), GatewayInstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewayInstancesInstanceListArrayInput)(nil)).Elem(), GatewayInstancesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
-	pulumi.RegisterOutputType(GatewayCCNRoutesInstanceListOutput{})
-	pulumi.RegisterOutputType(GatewayCCNRoutesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(GatewayInstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(GatewayInstancesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCcnRoutesInstanceListInput)(nil)).Elem(), GetGatewayCcnRoutesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCcnRoutesInstanceListArrayInput)(nil)).Elem(), GetGatewayCcnRoutesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayInstancesInstanceListInput)(nil)).Elem(), GetGatewayInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayInstancesInstanceListArrayInput)(nil)).Elem(), GetGatewayInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterOutputType(GetGatewayCcnRoutesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetGatewayCcnRoutesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetGatewayInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 }

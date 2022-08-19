@@ -24,7 +24,7 @@ class TargetGroupAttachmentArgs:
         :param pulumi.Input[str] listener_id: ID of the CLB listener.
         :param pulumi.Input[str] rule_id: ID of the CLB listener rule.
         :param pulumi.Input[str] target_group_id: ID of the CLB target group.
-        :param pulumi.Input[str] targrt_group_id: ID of the CLB target group.
+        :param pulumi.Input[str] targrt_group_id: It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         """
         pulumi.set(__self__, "clb_id", clb_id)
         pulumi.set(__self__, "listener_id", listener_id)
@@ -90,7 +90,7 @@ class TargetGroupAttachmentArgs:
     @pulumi.getter(name="targrtGroupId")
     def targrt_group_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the CLB target group.
+        It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         """
         return pulumi.get(self, "targrt_group_id")
 
@@ -113,7 +113,7 @@ class _TargetGroupAttachmentState:
         :param pulumi.Input[str] listener_id: ID of the CLB listener.
         :param pulumi.Input[str] rule_id: ID of the CLB listener rule.
         :param pulumi.Input[str] target_group_id: ID of the CLB target group.
-        :param pulumi.Input[str] targrt_group_id: ID of the CLB target group.
+        :param pulumi.Input[str] targrt_group_id: It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         """
         if clb_id is not None:
             pulumi.set(__self__, "clb_id", clb_id)
@@ -181,7 +181,7 @@ class _TargetGroupAttachmentState:
     @pulumi.getter(name="targrtGroupId")
     def targrt_group_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the CLB target group.
+        It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         """
         return pulumi.get(self, "targrt_group_id")
 
@@ -202,14 +202,53 @@ class TargetGroupAttachment(pulumi.CustomResource):
                  targrt_group_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a TargetGroupAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a CLB target group attachment is bound to the load balancing listener or forwarding rule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        clb_basic = tencentcloud.clb.Instance("clbBasic",
+            network_type="OPEN",
+            clb_name="tf-clb-rule-basic")
+        listener_basic = tencentcloud.clb.Listener("listenerBasic",
+            clb_id=clb_basic.id,
+            port=1,
+            protocol="HTTP",
+            listener_name="listener_basic")
+        rule_basic = tencentcloud.clb.ListenerRule("ruleBasic",
+            clb_id=clb_basic.id,
+            listener_id=listener_basic.listener_id,
+            domain="abc.com",
+            url="/",
+            session_expire_time=30,
+            scheduler="WRR",
+            target_type="TARGETGROUP")
+        test = tencentcloud.clb.TargetGroup("test", target_group_name="test-target-keep-1")
+        group = tencentcloud.clb.TargetGroupAttachment("group",
+            clb_id=clb_basic.id,
+            listener_id=listener_basic.listener_id,
+            rule_id=rule_basic.rule_id,
+            target_group_id=test.id)
+        ```
+
+        ## Import
+
+        CLB target group attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] clb_id: ID of the CLB.
         :param pulumi.Input[str] listener_id: ID of the CLB listener.
         :param pulumi.Input[str] rule_id: ID of the CLB listener rule.
         :param pulumi.Input[str] target_group_id: ID of the CLB target group.
-        :param pulumi.Input[str] targrt_group_id: ID of the CLB target group.
+        :param pulumi.Input[str] targrt_group_id: It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         """
         ...
     @overload
@@ -218,7 +257,46 @@ class TargetGroupAttachment(pulumi.CustomResource):
                  args: TargetGroupAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a TargetGroupAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a CLB target group attachment is bound to the load balancing listener or forwarding rule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        clb_basic = tencentcloud.clb.Instance("clbBasic",
+            network_type="OPEN",
+            clb_name="tf-clb-rule-basic")
+        listener_basic = tencentcloud.clb.Listener("listenerBasic",
+            clb_id=clb_basic.id,
+            port=1,
+            protocol="HTTP",
+            listener_name="listener_basic")
+        rule_basic = tencentcloud.clb.ListenerRule("ruleBasic",
+            clb_id=clb_basic.id,
+            listener_id=listener_basic.listener_id,
+            domain="abc.com",
+            url="/",
+            session_expire_time=30,
+            scheduler="WRR",
+            target_type="TARGETGROUP")
+        test = tencentcloud.clb.TargetGroup("test", target_group_name="test-target-keep-1")
+        group = tencentcloud.clb.TargetGroupAttachment("group",
+            clb_id=clb_basic.id,
+            listener_id=listener_basic.listener_id,
+            rule_id=rule_basic.rule_id,
+            target_group_id=test.id)
+        ```
+
+        ## Import
+
+        CLB target group attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+        ```
+
         :param str resource_name: The name of the resource.
         :param TargetGroupAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -289,7 +367,7 @@ class TargetGroupAttachment(pulumi.CustomResource):
         :param pulumi.Input[str] listener_id: ID of the CLB listener.
         :param pulumi.Input[str] rule_id: ID of the CLB listener rule.
         :param pulumi.Input[str] target_group_id: ID of the CLB target group.
-        :param pulumi.Input[str] targrt_group_id: ID of the CLB target group.
+        :param pulumi.Input[str] targrt_group_id: It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -338,7 +416,7 @@ class TargetGroupAttachment(pulumi.CustomResource):
     @pulumi.getter(name="targrtGroupId")
     def targrt_group_id(self) -> pulumi.Output[Optional[str]]:
         """
-        ID of the CLB target group.
+        It has been deprecated from version 1.47.1. Use `target_group_id` instead. ID of the CLB target group.
         """
         return pulumi.get(self, "targrt_group_id")
 

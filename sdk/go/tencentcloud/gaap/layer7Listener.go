@@ -11,21 +11,61 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a layer7 listener of GAAP.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+// 			Bandwidth:        pulumi.Int(10),
+// 			Concurrent:       pulumi.Int(2),
+// 			AccessRegion:     pulumi.String("SouthChina"),
+// 			RealserverRegion: pulumi.String("NorthChina"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+// 			Protocol: pulumi.String("HTTP"),
+// 			Port:     pulumi.Int(80),
+// 			ProxyId:  fooProxy.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// GAAP layer7 listener can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+// ```
 type Layer7Listener struct {
 	pulumi.CustomResourceState
 
-	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-	// supports listeners of `HTTPS` protocol.
+	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	AuthType pulumi.IntPtrOutput `pulumi:"authType"`
 	// Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
 	CertificateId pulumi.StringPtrOutput `pulumi:"certificateId"`
-	// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId pulumi.StringOutput `pulumi:"clientCertificateId"`
-	// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds pulumi.StringArrayOutput `pulumi:"clientCertificateIds"`
 	// Creation time of the layer7 listener.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -81,18 +121,15 @@ func GetLayer7Listener(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Layer7Listener resources.
 type layer7ListenerState struct {
-	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-	// supports listeners of `HTTPS` protocol.
+	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	AuthType *int `pulumi:"authType"`
 	// Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
 	CertificateId *string `pulumi:"certificateId"`
-	// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId *string `pulumi:"clientCertificateId"`
-	// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds []string `pulumi:"clientCertificateIds"`
 	// Creation time of the layer7 listener.
 	CreateTime *string `pulumi:"createTime"`
@@ -111,18 +148,15 @@ type layer7ListenerState struct {
 }
 
 type Layer7ListenerState struct {
-	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-	// supports listeners of `HTTPS` protocol.
+	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	AuthType pulumi.IntPtrInput
 	// Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
 	CertificateId pulumi.StringPtrInput
-	// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId pulumi.StringPtrInput
-	// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds pulumi.StringArrayInput
 	// Creation time of the layer7 listener.
 	CreateTime pulumi.StringPtrInput
@@ -145,18 +179,15 @@ func (Layer7ListenerState) ElementType() reflect.Type {
 }
 
 type layer7ListenerArgs struct {
-	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-	// supports listeners of `HTTPS` protocol.
+	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	AuthType *int `pulumi:"authType"`
 	// Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
 	CertificateId *string `pulumi:"certificateId"`
-	// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId *string `pulumi:"clientCertificateId"`
-	// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds []string `pulumi:"clientCertificateIds"`
 	// Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
 	ForwardProtocol *string `pulumi:"forwardProtocol"`
@@ -172,18 +203,15 @@ type layer7ListenerArgs struct {
 
 // The set of arguments for constructing a Layer7Listener resource.
 type Layer7ListenerArgs struct {
-	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-	// supports listeners of `HTTPS` protocol.
+	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	AuthType pulumi.IntPtrInput
 	// Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
 	CertificateId pulumi.StringPtrInput
-	// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId pulumi.StringPtrInput
-	// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-	// listeners of `HTTPS` protocol.
+	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds pulumi.StringArrayInput
 	// Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
 	ForwardProtocol pulumi.StringPtrInput
@@ -284,8 +312,7 @@ func (o Layer7ListenerOutput) ToLayer7ListenerOutputWithContext(ctx context.Cont
 	return o
 }
 
-// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-// supports listeners of `HTTPS` protocol.
+// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 func (o Layer7ListenerOutput) AuthType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Layer7Listener) pulumi.IntPtrOutput { return v.AuthType }).(pulumi.IntPtrOutput)
 }
@@ -295,16 +322,14 @@ func (o Layer7ListenerOutput) CertificateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Layer7Listener) pulumi.StringPtrOutput { return v.CertificateId }).(pulumi.StringPtrOutput)
 }
 
-// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-// listeners of `HTTPS` protocol.
+// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 //
 // Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 func (o Layer7ListenerOutput) ClientCertificateId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Layer7Listener) pulumi.StringOutput { return v.ClientCertificateId }).(pulumi.StringOutput)
 }
 
-// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-// listeners of `HTTPS` protocol.
+// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 func (o Layer7ListenerOutput) ClientCertificateIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Layer7Listener) pulumi.StringArrayOutput { return v.ClientCertificateIds }).(pulumi.StringArrayOutput)
 }

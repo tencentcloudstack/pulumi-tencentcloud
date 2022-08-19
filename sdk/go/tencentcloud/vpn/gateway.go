@@ -11,12 +11,77 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// POSTPAID_BY_HOUR VPN gateway
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+// 			Bandwidth: pulumi.Int(5),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			VpcId: pulumi.String("vpc-dk8zmwuf"),
+// 			Zone:  pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// PREPAID VPN gateway
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+// 			Bandwidth:     pulumi.Int(5),
+// 			ChargeType:    pulumi.String("PREPAID"),
+// 			PrepaidPeriod: pulumi.Int(1),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			VpcId: pulumi.String("vpc-dk8zmwuf"),
+// 			Zone:  pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VPN gateway can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+// ```
 type Gateway struct {
 	pulumi.CustomResourceState
 
-	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-	// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-	// unsupported.
+	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
 	Bandwidth pulumi.IntPtrOutput `pulumi:"bandwidth"`
 	// CDC instance ID.
 	CdcId pulumi.StringOutput `pulumi:"cdcId"`
@@ -28,19 +93,15 @@ type Gateway struct {
 	ExpiredTime pulumi.StringOutput `pulumi:"expiredTime"`
 	// Indicates whether ip address is blocked.
 	IsAddressBlocked pulumi.BoolOutput `pulumi:"isAddressBlocked"`
-	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-	// is only required for SSL VPN gateways.
+	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 	MaxConnection pulumi.IntOutput `pulumi:"maxConnection"`
 	// Name of the VPN gateway. The length of character is limited to 1-60.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
 	NewPurchasePlan pulumi.StringOutput `pulumi:"newPurchasePlan"`
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-	// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-	// period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-	// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
 	PrepaidRenewFlag pulumi.StringPtrOutput `pulumi:"prepaidRenewFlag"`
 	// Public IP of the VPN gateway.
 	PublicIpAddress pulumi.StringOutput `pulumi:"publicIpAddress"`
@@ -90,9 +151,7 @@ func GetGateway(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Gateway resources.
 type gatewayState struct {
-	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-	// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-	// unsupported.
+	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
 	Bandwidth *int `pulumi:"bandwidth"`
 	// CDC instance ID.
 	CdcId *string `pulumi:"cdcId"`
@@ -104,19 +163,15 @@ type gatewayState struct {
 	ExpiredTime *string `pulumi:"expiredTime"`
 	// Indicates whether ip address is blocked.
 	IsAddressBlocked *bool `pulumi:"isAddressBlocked"`
-	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-	// is only required for SSL VPN gateways.
+	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 	MaxConnection *int `pulumi:"maxConnection"`
 	// Name of the VPN gateway. The length of character is limited to 1-60.
 	Name *string `pulumi:"name"`
 	// The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
 	NewPurchasePlan *string `pulumi:"newPurchasePlan"`
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-	// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-	// period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-	// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// Public IP of the VPN gateway.
 	PublicIpAddress *string `pulumi:"publicIpAddress"`
@@ -135,9 +190,7 @@ type gatewayState struct {
 }
 
 type GatewayState struct {
-	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-	// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-	// unsupported.
+	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
 	Bandwidth pulumi.IntPtrInput
 	// CDC instance ID.
 	CdcId pulumi.StringPtrInput
@@ -149,19 +202,15 @@ type GatewayState struct {
 	ExpiredTime pulumi.StringPtrInput
 	// Indicates whether ip address is blocked.
 	IsAddressBlocked pulumi.BoolPtrInput
-	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-	// is only required for SSL VPN gateways.
+	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 	MaxConnection pulumi.IntPtrInput
 	// Name of the VPN gateway. The length of character is limited to 1-60.
 	Name pulumi.StringPtrInput
 	// The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
 	NewPurchasePlan pulumi.StringPtrInput
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-	// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-	// period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-	// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// Public IP of the VPN gateway.
 	PublicIpAddress pulumi.StringPtrInput
@@ -184,25 +233,19 @@ func (GatewayState) ElementType() reflect.Type {
 }
 
 type gatewayArgs struct {
-	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-	// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-	// unsupported.
+	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
 	Bandwidth *int `pulumi:"bandwidth"`
 	// CDC instance ID.
 	CdcId *string `pulumi:"cdcId"`
 	// Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
-	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-	// is only required for SSL VPN gateways.
+	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 	MaxConnection *int `pulumi:"maxConnection"`
 	// Name of the VPN gateway. The length of character is limited to 1-60.
 	Name *string `pulumi:"name"`
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-	// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-	// period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-	// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -216,25 +259,19 @@ type gatewayArgs struct {
 
 // The set of arguments for constructing a Gateway resource.
 type GatewayArgs struct {
-	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-	// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-	// unsupported.
+	// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
 	Bandwidth pulumi.IntPtrInput
 	// CDC instance ID.
 	CdcId pulumi.StringPtrInput
 	// Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
-	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-	// is only required for SSL VPN gateways.
+	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 	MaxConnection pulumi.IntPtrInput
 	// Name of the VPN gateway. The length of character is limited to 1-60.
 	Name pulumi.StringPtrInput
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-	// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-	// period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-	// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
@@ -333,9 +370,7 @@ func (o GatewayOutput) ToGatewayOutputWithContext(ctx context.Context) GatewayOu
 	return o
 }
 
-// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-// unsupported.
+// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
 func (o GatewayOutput) Bandwidth() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.IntPtrOutput { return v.Bandwidth }).(pulumi.IntPtrOutput)
 }
@@ -365,8 +400,7 @@ func (o GatewayOutput) IsAddressBlocked() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.BoolOutput { return v.IsAddressBlocked }).(pulumi.BoolOutput)
 }
 
-// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-// is only required for SSL VPN gateways.
+// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 func (o GatewayOutput) MaxConnection() pulumi.IntOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.IntOutput { return v.MaxConnection }).(pulumi.IntOutput)
 }
@@ -381,15 +415,12 @@ func (o GatewayOutput) NewPurchasePlan() pulumi.StringOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.NewPurchasePlan }).(pulumi.StringOutput)
 }
 
-// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-// period. This para can only be set to take effect in create operation.
+// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
 func (o GatewayOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.IntPtrOutput { return v.PrepaidPeriod }).(pulumi.IntPtrOutput)
 }
 
-// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
 func (o GatewayOutput) PrepaidRenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringPtrOutput { return v.PrepaidRenewFlag }).(pulumi.StringPtrOutput)
 }

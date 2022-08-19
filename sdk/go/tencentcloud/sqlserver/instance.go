@@ -11,11 +11,48 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create SQL Server instance
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.NewInstance(ctx, "foo", &Sqlserver.InstanceArgs{
+// 			AvailabilityZone: pulumi.Any(_var.Availability_zone),
+// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+// 			VpcId:            pulumi.String("vpc-409mvdvv"),
+// 			SubnetId:         pulumi.String("subnet-nf9n81ps"),
+// 			ProjectId:        pulumi.Int(123),
+// 			Memory:           pulumi.Int(2),
+// 			Storage:          pulumi.Int(100),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SQL Server instance can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
-	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-	// instance.
+	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
 	AutoRenew pulumi.IntPtrOutput `pulumi:"autoRenew"`
 	// Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
 	AutoVoucher pulumi.IntPtrOutput `pulumi:"autoVoucher"`
@@ -25,9 +62,7 @@ type Instance struct {
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// Create time of the SQL Server instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-	// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-	// Enterprise). Default is `2008R2`.
+	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion pulumi.StringPtrOutput `pulumi:"engineVersion"`
 	// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
 	HaType pulumi.StringPtrOutput `pulumi:"haType"`
@@ -35,11 +70,9 @@ type Instance struct {
 	MaintenanceStartTime pulumi.StringOutput `pulumi:"maintenanceStartTime"`
 	// The timespan of maintenance in one day, unit is hour.
 	MaintenanceTimeSpan pulumi.IntOutput `pulumi:"maintenanceTimeSpan"`
-	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-	// Sunday.
+	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
 	MaintenanceWeekSets pulumi.IntArrayOutput `pulumi:"maintenanceWeekSets"`
-	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-	// provides.
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
 	Memory pulumi.IntOutput `pulumi:"memory"`
 	// Indicate whether to deploy across availability zones.
 	MultiZones pulumi.BoolPtrOutput `pulumi:"multiZones"`
@@ -49,17 +82,13 @@ type Instance struct {
 	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntOutput `pulumi:"projectId"`
-	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-	// refers to an instance which is not read-only and has no RO group.
+	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
 	RoFlag pulumi.StringOutput `pulumi:"roFlag"`
 	// Security group bound to the instance.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
-	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-	// recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-	// 12 for rebooting.
+	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
 	Status pulumi.IntOutput `pulumi:"status"`
-	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-	// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
 	Storage pulumi.IntOutput `pulumi:"storage"`
 	// ID of subnet.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
@@ -110,8 +139,7 @@ func GetInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Instance resources.
 type instanceState struct {
-	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-	// instance.
+	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
 	AutoRenew *int `pulumi:"autoRenew"`
 	// Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
 	AutoVoucher *int `pulumi:"autoVoucher"`
@@ -121,9 +149,7 @@ type instanceState struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Create time of the SQL Server instance.
 	CreateTime *string `pulumi:"createTime"`
-	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-	// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-	// Enterprise). Default is `2008R2`.
+	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
 	HaType *string `pulumi:"haType"`
@@ -131,11 +157,9 @@ type instanceState struct {
 	MaintenanceStartTime *string `pulumi:"maintenanceStartTime"`
 	// The timespan of maintenance in one day, unit is hour.
 	MaintenanceTimeSpan *int `pulumi:"maintenanceTimeSpan"`
-	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-	// Sunday.
+	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
 	MaintenanceWeekSets []int `pulumi:"maintenanceWeekSets"`
-	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-	// provides.
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
 	Memory *int `pulumi:"memory"`
 	// Indicate whether to deploy across availability zones.
 	MultiZones *bool `pulumi:"multiZones"`
@@ -145,17 +169,13 @@ type instanceState struct {
 	Period *int `pulumi:"period"`
 	// Project ID, default value is 0.
 	ProjectId *int `pulumi:"projectId"`
-	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-	// refers to an instance which is not read-only and has no RO group.
+	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
 	RoFlag *string `pulumi:"roFlag"`
 	// Security group bound to the instance.
 	SecurityGroups []string `pulumi:"securityGroups"`
-	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-	// recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-	// 12 for rebooting.
+	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
 	Status *int `pulumi:"status"`
-	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-	// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
 	Storage *int `pulumi:"storage"`
 	// ID of subnet.
 	SubnetId *string `pulumi:"subnetId"`
@@ -172,8 +192,7 @@ type instanceState struct {
 }
 
 type InstanceState struct {
-	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-	// instance.
+	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
 	AutoRenew pulumi.IntPtrInput
 	// Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
 	AutoVoucher pulumi.IntPtrInput
@@ -183,9 +202,7 @@ type InstanceState struct {
 	ChargeType pulumi.StringPtrInput
 	// Create time of the SQL Server instance.
 	CreateTime pulumi.StringPtrInput
-	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-	// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-	// Enterprise). Default is `2008R2`.
+	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion pulumi.StringPtrInput
 	// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
 	HaType pulumi.StringPtrInput
@@ -193,11 +210,9 @@ type InstanceState struct {
 	MaintenanceStartTime pulumi.StringPtrInput
 	// The timespan of maintenance in one day, unit is hour.
 	MaintenanceTimeSpan pulumi.IntPtrInput
-	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-	// Sunday.
+	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
 	MaintenanceWeekSets pulumi.IntArrayInput
-	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-	// provides.
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
 	Memory pulumi.IntPtrInput
 	// Indicate whether to deploy across availability zones.
 	MultiZones pulumi.BoolPtrInput
@@ -207,17 +222,13 @@ type InstanceState struct {
 	Period pulumi.IntPtrInput
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrInput
-	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-	// refers to an instance which is not read-only and has no RO group.
+	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
 	RoFlag pulumi.StringPtrInput
 	// Security group bound to the instance.
 	SecurityGroups pulumi.StringArrayInput
-	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-	// recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-	// 12 for rebooting.
+	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
 	Status pulumi.IntPtrInput
-	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-	// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
 	Storage pulumi.IntPtrInput
 	// ID of subnet.
 	SubnetId pulumi.StringPtrInput
@@ -238,8 +249,7 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
-	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-	// instance.
+	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
 	AutoRenew *int `pulumi:"autoRenew"`
 	// Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
 	AutoVoucher *int `pulumi:"autoVoucher"`
@@ -247,9 +257,7 @@ type instanceArgs struct {
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
-	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-	// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-	// Enterprise). Default is `2008R2`.
+	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
 	HaType *string `pulumi:"haType"`
@@ -257,11 +265,9 @@ type instanceArgs struct {
 	MaintenanceStartTime *string `pulumi:"maintenanceStartTime"`
 	// The timespan of maintenance in one day, unit is hour.
 	MaintenanceTimeSpan *int `pulumi:"maintenanceTimeSpan"`
-	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-	// Sunday.
+	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
 	MaintenanceWeekSets []int `pulumi:"maintenanceWeekSets"`
-	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-	// provides.
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
 	Memory int `pulumi:"memory"`
 	// Indicate whether to deploy across availability zones.
 	MultiZones *bool `pulumi:"multiZones"`
@@ -273,8 +279,7 @@ type instanceArgs struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Security group bound to the instance.
 	SecurityGroups []string `pulumi:"securityGroups"`
-	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-	// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
 	Storage int `pulumi:"storage"`
 	// ID of subnet.
 	SubnetId *string `pulumi:"subnetId"`
@@ -288,8 +293,7 @@ type instanceArgs struct {
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
-	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-	// instance.
+	// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
 	AutoRenew pulumi.IntPtrInput
 	// Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
 	AutoVoucher pulumi.IntPtrInput
@@ -297,9 +301,7 @@ type InstanceArgs struct {
 	AvailabilityZone pulumi.StringPtrInput
 	// Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
-	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-	// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-	// Enterprise). Default is `2008R2`.
+	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion pulumi.StringPtrInput
 	// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
 	HaType pulumi.StringPtrInput
@@ -307,11 +309,9 @@ type InstanceArgs struct {
 	MaintenanceStartTime pulumi.StringPtrInput
 	// The timespan of maintenance in one day, unit is hour.
 	MaintenanceTimeSpan pulumi.IntPtrInput
-	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-	// Sunday.
+	// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
 	MaintenanceWeekSets pulumi.IntArrayInput
-	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-	// provides.
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
 	Memory pulumi.IntInput
 	// Indicate whether to deploy across availability zones.
 	MultiZones pulumi.BoolPtrInput
@@ -323,8 +323,7 @@ type InstanceArgs struct {
 	ProjectId pulumi.IntPtrInput
 	// Security group bound to the instance.
 	SecurityGroups pulumi.StringArrayInput
-	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-	// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
 	Storage pulumi.IntInput
 	// ID of subnet.
 	SubnetId pulumi.StringPtrInput
@@ -423,8 +422,7 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 	return o
 }
 
-// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-// instance.
+// Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
 func (o InstanceOutput) AutoRenew() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.AutoRenew }).(pulumi.IntPtrOutput)
 }
@@ -449,9 +447,7 @@ func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-// 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-// Enterprise). Default is `2008R2`.
+// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 func (o InstanceOutput) EngineVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.EngineVersion }).(pulumi.StringPtrOutput)
 }
@@ -471,14 +467,12 @@ func (o InstanceOutput) MaintenanceTimeSpan() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.MaintenanceTimeSpan }).(pulumi.IntOutput)
 }
 
-// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-// Sunday.
+// A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
 func (o InstanceOutput) MaintenanceWeekSets() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntArrayOutput { return v.MaintenanceWeekSets }).(pulumi.IntArrayOutput)
 }
 
-// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-// provides.
+// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
 func (o InstanceOutput) Memory() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Memory }).(pulumi.IntOutput)
 }
@@ -503,8 +497,7 @@ func (o InstanceOutput) ProjectId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-// refers to an instance which is not read-only and has no RO group.
+// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
 func (o InstanceOutput) RoFlag() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.RoFlag }).(pulumi.StringOutput)
 }
@@ -514,15 +507,12 @@ func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }
 
-// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-// recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-// 12 for rebooting.
+// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
 func (o InstanceOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }
 
-// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-// `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
 func (o InstanceOutput) Storage() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Storage }).(pulumi.IntOutput)
 }

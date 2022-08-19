@@ -10,134 +10,13 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type AclsAclList struct {
-	Host           string `pulumi:"host"`
-	OperationType  string `pulumi:"operationType"`
-	PermissionType string `pulumi:"permissionType"`
-	Principal      string `pulumi:"principal"`
-	ResourceName   string `pulumi:"resourceName"`
-	ResourceType   string `pulumi:"resourceType"`
-}
-
-// AclsAclListInput is an input type that accepts AclsAclListArgs and AclsAclListOutput values.
-// You can construct a concrete instance of `AclsAclListInput` via:
-//
-//          AclsAclListArgs{...}
-type AclsAclListInput interface {
-	pulumi.Input
-
-	ToAclsAclListOutput() AclsAclListOutput
-	ToAclsAclListOutputWithContext(context.Context) AclsAclListOutput
-}
-
-type AclsAclListArgs struct {
-	Host           pulumi.StringInput `pulumi:"host"`
-	OperationType  pulumi.StringInput `pulumi:"operationType"`
-	PermissionType pulumi.StringInput `pulumi:"permissionType"`
-	Principal      pulumi.StringInput `pulumi:"principal"`
-	ResourceName   pulumi.StringInput `pulumi:"resourceName"`
-	ResourceType   pulumi.StringInput `pulumi:"resourceType"`
-}
-
-func (AclsAclListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AclsAclList)(nil)).Elem()
-}
-
-func (i AclsAclListArgs) ToAclsAclListOutput() AclsAclListOutput {
-	return i.ToAclsAclListOutputWithContext(context.Background())
-}
-
-func (i AclsAclListArgs) ToAclsAclListOutputWithContext(ctx context.Context) AclsAclListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AclsAclListOutput)
-}
-
-// AclsAclListArrayInput is an input type that accepts AclsAclListArray and AclsAclListArrayOutput values.
-// You can construct a concrete instance of `AclsAclListArrayInput` via:
-//
-//          AclsAclListArray{ AclsAclListArgs{...} }
-type AclsAclListArrayInput interface {
-	pulumi.Input
-
-	ToAclsAclListArrayOutput() AclsAclListArrayOutput
-	ToAclsAclListArrayOutputWithContext(context.Context) AclsAclListArrayOutput
-}
-
-type AclsAclListArray []AclsAclListInput
-
-func (AclsAclListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AclsAclList)(nil)).Elem()
-}
-
-func (i AclsAclListArray) ToAclsAclListArrayOutput() AclsAclListArrayOutput {
-	return i.ToAclsAclListArrayOutputWithContext(context.Background())
-}
-
-func (i AclsAclListArray) ToAclsAclListArrayOutputWithContext(ctx context.Context) AclsAclListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AclsAclListArrayOutput)
-}
-
-type AclsAclListOutput struct{ *pulumi.OutputState }
-
-func (AclsAclListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AclsAclList)(nil)).Elem()
-}
-
-func (o AclsAclListOutput) ToAclsAclListOutput() AclsAclListOutput {
-	return o
-}
-
-func (o AclsAclListOutput) ToAclsAclListOutputWithContext(ctx context.Context) AclsAclListOutput {
-	return o
-}
-
-func (o AclsAclListOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func(v AclsAclList) string { return v.Host }).(pulumi.StringOutput)
-}
-
-func (o AclsAclListOutput) OperationType() pulumi.StringOutput {
-	return o.ApplyT(func(v AclsAclList) string { return v.OperationType }).(pulumi.StringOutput)
-}
-
-func (o AclsAclListOutput) PermissionType() pulumi.StringOutput {
-	return o.ApplyT(func(v AclsAclList) string { return v.PermissionType }).(pulumi.StringOutput)
-}
-
-func (o AclsAclListOutput) Principal() pulumi.StringOutput {
-	return o.ApplyT(func(v AclsAclList) string { return v.Principal }).(pulumi.StringOutput)
-}
-
-func (o AclsAclListOutput) ResourceName() pulumi.StringOutput {
-	return o.ApplyT(func(v AclsAclList) string { return v.ResourceName }).(pulumi.StringOutput)
-}
-
-func (o AclsAclListOutput) ResourceType() pulumi.StringOutput {
-	return o.ApplyT(func(v AclsAclList) string { return v.ResourceType }).(pulumi.StringOutput)
-}
-
-type AclsAclListArrayOutput struct{ *pulumi.OutputState }
-
-func (AclsAclListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AclsAclList)(nil)).Elem()
-}
-
-func (o AclsAclListArrayOutput) ToAclsAclListArrayOutput() AclsAclListArrayOutput {
-	return o
-}
-
-func (o AclsAclListArrayOutput) ToAclsAclListArrayOutputWithContext(ctx context.Context) AclsAclListArrayOutput {
-	return o
-}
-
-func (o AclsAclListArrayOutput) Index(i pulumi.IntInput) AclsAclListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AclsAclList {
-		return vs[0].([]AclsAclList)[vs[1].(int)]
-	}).(AclsAclListOutput)
-}
-
 type InstanceConfig struct {
-	AutoCreateTopicEnable    bool `pulumi:"autoCreateTopicEnable"`
-	DefaultNumPartitions     int  `pulumi:"defaultNumPartitions"`
-	DefaultReplicationFactor int  `pulumi:"defaultReplicationFactor"`
+	// Automatic creation. true: enabled, false: not enabled.
+	AutoCreateTopicEnable bool `pulumi:"autoCreateTopicEnable"`
+	// If auto.create.topic.enable is set to true and this value is not set, 3 will be used by default.
+	DefaultNumPartitions int `pulumi:"defaultNumPartitions"`
+	// If auto.create.topic.enable is set to true but this value is not set, 2 will be used by default.
+	DefaultReplicationFactor int `pulumi:"defaultReplicationFactor"`
 }
 
 // InstanceConfigInput is an input type that accepts InstanceConfigArgs and InstanceConfigOutput values.
@@ -152,9 +31,12 @@ type InstanceConfigInput interface {
 }
 
 type InstanceConfigArgs struct {
-	AutoCreateTopicEnable    pulumi.BoolInput `pulumi:"autoCreateTopicEnable"`
-	DefaultNumPartitions     pulumi.IntInput  `pulumi:"defaultNumPartitions"`
-	DefaultReplicationFactor pulumi.IntInput  `pulumi:"defaultReplicationFactor"`
+	// Automatic creation. true: enabled, false: not enabled.
+	AutoCreateTopicEnable pulumi.BoolInput `pulumi:"autoCreateTopicEnable"`
+	// If auto.create.topic.enable is set to true and this value is not set, 3 will be used by default.
+	DefaultNumPartitions pulumi.IntInput `pulumi:"defaultNumPartitions"`
+	// If auto.create.topic.enable is set to true but this value is not set, 2 will be used by default.
+	DefaultReplicationFactor pulumi.IntInput `pulumi:"defaultReplicationFactor"`
 }
 
 func (InstanceConfigArgs) ElementType() reflect.Type {
@@ -234,14 +116,17 @@ func (o InstanceConfigOutput) ToInstanceConfigPtrOutputWithContext(ctx context.C
 	}).(InstanceConfigPtrOutput)
 }
 
+// Automatic creation. true: enabled, false: not enabled.
 func (o InstanceConfigOutput) AutoCreateTopicEnable() pulumi.BoolOutput {
 	return o.ApplyT(func(v InstanceConfig) bool { return v.AutoCreateTopicEnable }).(pulumi.BoolOutput)
 }
 
+// If auto.create.topic.enable is set to true and this value is not set, 3 will be used by default.
 func (o InstanceConfigOutput) DefaultNumPartitions() pulumi.IntOutput {
 	return o.ApplyT(func(v InstanceConfig) int { return v.DefaultNumPartitions }).(pulumi.IntOutput)
 }
 
+// If auto.create.topic.enable is set to true but this value is not set, 2 will be used by default.
 func (o InstanceConfigOutput) DefaultReplicationFactor() pulumi.IntOutput {
 	return o.ApplyT(func(v InstanceConfig) int { return v.DefaultReplicationFactor }).(pulumi.IntOutput)
 }
@@ -270,6 +155,7 @@ func (o InstanceConfigPtrOutput) Elem() InstanceConfigOutput {
 	}).(InstanceConfigOutput)
 }
 
+// Automatic creation. true: enabled, false: not enabled.
 func (o InstanceConfigPtrOutput) AutoCreateTopicEnable() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *InstanceConfig) *bool {
 		if v == nil {
@@ -279,6 +165,7 @@ func (o InstanceConfigPtrOutput) AutoCreateTopicEnable() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// If auto.create.topic.enable is set to true and this value is not set, 3 will be used by default.
 func (o InstanceConfigPtrOutput) DefaultNumPartitions() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *InstanceConfig) *int {
 		if v == nil {
@@ -288,6 +175,7 @@ func (o InstanceConfigPtrOutput) DefaultNumPartitions() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// If auto.create.topic.enable is set to true but this value is not set, 2 will be used by default.
 func (o InstanceConfigPtrOutput) DefaultReplicationFactor() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *InstanceConfig) *int {
 		if v == nil {
@@ -298,9 +186,13 @@ func (o InstanceConfigPtrOutput) DefaultReplicationFactor() pulumi.IntPtrOutput 
 }
 
 type InstanceDynamicRetentionConfig struct {
-	BottomRetention       *int `pulumi:"bottomRetention"`
-	DiskQuotaPercentage   *int `pulumi:"diskQuotaPercentage"`
-	Enable                *int `pulumi:"enable"`
+	// Minimum retention time, in minutes.
+	BottomRetention *int `pulumi:"bottomRetention"`
+	// Disk quota threshold (in percentage) for triggering the message retention time change event.
+	DiskQuotaPercentage *int `pulumi:"diskQuotaPercentage"`
+	// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled.
+	Enable *int `pulumi:"enable"`
+	// Percentage by which the message retention time is shortened each time.
 	StepForwardPercentage *int `pulumi:"stepForwardPercentage"`
 }
 
@@ -316,9 +208,13 @@ type InstanceDynamicRetentionConfigInput interface {
 }
 
 type InstanceDynamicRetentionConfigArgs struct {
-	BottomRetention       pulumi.IntPtrInput `pulumi:"bottomRetention"`
-	DiskQuotaPercentage   pulumi.IntPtrInput `pulumi:"diskQuotaPercentage"`
-	Enable                pulumi.IntPtrInput `pulumi:"enable"`
+	// Minimum retention time, in minutes.
+	BottomRetention pulumi.IntPtrInput `pulumi:"bottomRetention"`
+	// Disk quota threshold (in percentage) for triggering the message retention time change event.
+	DiskQuotaPercentage pulumi.IntPtrInput `pulumi:"diskQuotaPercentage"`
+	// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled.
+	Enable pulumi.IntPtrInput `pulumi:"enable"`
+	// Percentage by which the message retention time is shortened each time.
 	StepForwardPercentage pulumi.IntPtrInput `pulumi:"stepForwardPercentage"`
 }
 
@@ -399,18 +295,22 @@ func (o InstanceDynamicRetentionConfigOutput) ToInstanceDynamicRetentionConfigPt
 	}).(InstanceDynamicRetentionConfigPtrOutput)
 }
 
+// Minimum retention time, in minutes.
 func (o InstanceDynamicRetentionConfigOutput) BottomRetention() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceDynamicRetentionConfig) *int { return v.BottomRetention }).(pulumi.IntPtrOutput)
 }
 
+// Disk quota threshold (in percentage) for triggering the message retention time change event.
 func (o InstanceDynamicRetentionConfigOutput) DiskQuotaPercentage() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceDynamicRetentionConfig) *int { return v.DiskQuotaPercentage }).(pulumi.IntPtrOutput)
 }
 
+// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled.
 func (o InstanceDynamicRetentionConfigOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceDynamicRetentionConfig) *int { return v.Enable }).(pulumi.IntPtrOutput)
 }
 
+// Percentage by which the message retention time is shortened each time.
 func (o InstanceDynamicRetentionConfigOutput) StepForwardPercentage() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceDynamicRetentionConfig) *int { return v.StepForwardPercentage }).(pulumi.IntPtrOutput)
 }
@@ -439,6 +339,7 @@ func (o InstanceDynamicRetentionConfigPtrOutput) Elem() InstanceDynamicRetention
 	}).(InstanceDynamicRetentionConfigOutput)
 }
 
+// Minimum retention time, in minutes.
 func (o InstanceDynamicRetentionConfigPtrOutput) BottomRetention() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *InstanceDynamicRetentionConfig) *int {
 		if v == nil {
@@ -448,6 +349,7 @@ func (o InstanceDynamicRetentionConfigPtrOutput) BottomRetention() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+// Disk quota threshold (in percentage) for triggering the message retention time change event.
 func (o InstanceDynamicRetentionConfigPtrOutput) DiskQuotaPercentage() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *InstanceDynamicRetentionConfig) *int {
 		if v == nil {
@@ -457,6 +359,7 @@ func (o InstanceDynamicRetentionConfigPtrOutput) DiskQuotaPercentage() pulumi.In
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled.
 func (o InstanceDynamicRetentionConfigPtrOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *InstanceDynamicRetentionConfig) *int {
 		if v == nil {
@@ -466,6 +369,7 @@ func (o InstanceDynamicRetentionConfigPtrOutput) Enable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Percentage by which the message retention time is shortened each time.
 func (o InstanceDynamicRetentionConfigPtrOutput) StepForwardPercentage() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *InstanceDynamicRetentionConfig) *int {
 		if v == nil {
@@ -476,7 +380,9 @@ func (o InstanceDynamicRetentionConfigPtrOutput) StepForwardPercentage() pulumi.
 }
 
 type InstanceTag struct {
-	Key   string `pulumi:"key"`
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
 	Value string `pulumi:"value"`
 }
 
@@ -492,7 +398,9 @@ type InstanceTagInput interface {
 }
 
 type InstanceTagArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -547,10 +455,12 @@ func (o InstanceTagOutput) ToInstanceTagOutputWithContext(ctx context.Context) I
 	return o
 }
 
+// Tag key.
 func (o InstanceTagOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceTag) string { return v.Key }).(pulumi.StringOutput)
 }
 
+// Tag value.
 func (o InstanceTagOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceTag) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -575,331 +485,1181 @@ func (o InstanceTagArrayOutput) Index(i pulumi.IntInput) InstanceTagOutput {
 	}).(InstanceTagOutput)
 }
 
-type TopicsInstanceList struct {
-	CleanUpPolicy               string `pulumi:"cleanUpPolicy"`
-	CreateTime                  string `pulumi:"createTime"`
-	EnableWhiteList             bool   `pulumi:"enableWhiteList"`
-	ForwardCosBucket            string `pulumi:"forwardCosBucket"`
-	ForwardInterval             int    `pulumi:"forwardInterval"`
-	ForwardStatus               int    `pulumi:"forwardStatus"`
-	IpWhiteListCount            int    `pulumi:"ipWhiteListCount"`
-	MaxMessageBytes             int    `pulumi:"maxMessageBytes"`
-	Note                        string `pulumi:"note"`
-	PartitionNum                int    `pulumi:"partitionNum"`
-	ReplicaNum                  int    `pulumi:"replicaNum"`
-	Retention                   int    `pulumi:"retention"`
-	Segment                     int    `pulumi:"segment"`
-	SegmentBytes                int    `pulumi:"segmentBytes"`
-	SyncReplicaMinNum           int    `pulumi:"syncReplicaMinNum"`
-	TopicId                     string `pulumi:"topicId"`
-	TopicName                   string `pulumi:"topicName"`
-	UncleanLeaderElectionEnable bool   `pulumi:"uncleanLeaderElectionEnable"`
+type GetAclsAclList struct {
+	// Host substr used for querying.
+	Host string `pulumi:"host"`
+	// ACL operation mode.
+	OperationType string `pulumi:"operationType"`
+	// ACL permission type, valid values are `UNKNOWN`, `ANY`, `DENY`, `ALLOW`, and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+	PermissionType string `pulumi:"permissionType"`
+	// User which can access. `*` means that any user can access.
+	Principal string `pulumi:"principal"`
+	// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
+	ResourceName string `pulumi:"resourceName"`
+	// ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
+	ResourceType string `pulumi:"resourceType"`
 }
 
-// TopicsInstanceListInput is an input type that accepts TopicsInstanceListArgs and TopicsInstanceListOutput values.
-// You can construct a concrete instance of `TopicsInstanceListInput` via:
+// GetAclsAclListInput is an input type that accepts GetAclsAclListArgs and GetAclsAclListOutput values.
+// You can construct a concrete instance of `GetAclsAclListInput` via:
 //
-//          TopicsInstanceListArgs{...}
-type TopicsInstanceListInput interface {
+//          GetAclsAclListArgs{...}
+type GetAclsAclListInput interface {
 	pulumi.Input
 
-	ToTopicsInstanceListOutput() TopicsInstanceListOutput
-	ToTopicsInstanceListOutputWithContext(context.Context) TopicsInstanceListOutput
+	ToGetAclsAclListOutput() GetAclsAclListOutput
+	ToGetAclsAclListOutputWithContext(context.Context) GetAclsAclListOutput
 }
 
-type TopicsInstanceListArgs struct {
-	CleanUpPolicy               pulumi.StringInput `pulumi:"cleanUpPolicy"`
-	CreateTime                  pulumi.StringInput `pulumi:"createTime"`
-	EnableWhiteList             pulumi.BoolInput   `pulumi:"enableWhiteList"`
-	ForwardCosBucket            pulumi.StringInput `pulumi:"forwardCosBucket"`
-	ForwardInterval             pulumi.IntInput    `pulumi:"forwardInterval"`
-	ForwardStatus               pulumi.IntInput    `pulumi:"forwardStatus"`
-	IpWhiteListCount            pulumi.IntInput    `pulumi:"ipWhiteListCount"`
-	MaxMessageBytes             pulumi.IntInput    `pulumi:"maxMessageBytes"`
-	Note                        pulumi.StringInput `pulumi:"note"`
-	PartitionNum                pulumi.IntInput    `pulumi:"partitionNum"`
-	ReplicaNum                  pulumi.IntInput    `pulumi:"replicaNum"`
-	Retention                   pulumi.IntInput    `pulumi:"retention"`
-	Segment                     pulumi.IntInput    `pulumi:"segment"`
-	SegmentBytes                pulumi.IntInput    `pulumi:"segmentBytes"`
-	SyncReplicaMinNum           pulumi.IntInput    `pulumi:"syncReplicaMinNum"`
-	TopicId                     pulumi.StringInput `pulumi:"topicId"`
-	TopicName                   pulumi.StringInput `pulumi:"topicName"`
-	UncleanLeaderElectionEnable pulumi.BoolInput   `pulumi:"uncleanLeaderElectionEnable"`
+type GetAclsAclListArgs struct {
+	// Host substr used for querying.
+	Host pulumi.StringInput `pulumi:"host"`
+	// ACL operation mode.
+	OperationType pulumi.StringInput `pulumi:"operationType"`
+	// ACL permission type, valid values are `UNKNOWN`, `ANY`, `DENY`, `ALLOW`, and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+	PermissionType pulumi.StringInput `pulumi:"permissionType"`
+	// User which can access. `*` means that any user can access.
+	Principal pulumi.StringInput `pulumi:"principal"`
+	// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
+	ResourceName pulumi.StringInput `pulumi:"resourceName"`
+	// ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
 }
 
-func (TopicsInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*TopicsInstanceList)(nil)).Elem()
+func (GetAclsAclListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAclsAclList)(nil)).Elem()
 }
 
-func (i TopicsInstanceListArgs) ToTopicsInstanceListOutput() TopicsInstanceListOutput {
-	return i.ToTopicsInstanceListOutputWithContext(context.Background())
+func (i GetAclsAclListArgs) ToGetAclsAclListOutput() GetAclsAclListOutput {
+	return i.ToGetAclsAclListOutputWithContext(context.Background())
 }
 
-func (i TopicsInstanceListArgs) ToTopicsInstanceListOutputWithContext(ctx context.Context) TopicsInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TopicsInstanceListOutput)
+func (i GetAclsAclListArgs) ToGetAclsAclListOutputWithContext(ctx context.Context) GetAclsAclListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAclsAclListOutput)
 }
 
-// TopicsInstanceListArrayInput is an input type that accepts TopicsInstanceListArray and TopicsInstanceListArrayOutput values.
-// You can construct a concrete instance of `TopicsInstanceListArrayInput` via:
+// GetAclsAclListArrayInput is an input type that accepts GetAclsAclListArray and GetAclsAclListArrayOutput values.
+// You can construct a concrete instance of `GetAclsAclListArrayInput` via:
 //
-//          TopicsInstanceListArray{ TopicsInstanceListArgs{...} }
-type TopicsInstanceListArrayInput interface {
+//          GetAclsAclListArray{ GetAclsAclListArgs{...} }
+type GetAclsAclListArrayInput interface {
 	pulumi.Input
 
-	ToTopicsInstanceListArrayOutput() TopicsInstanceListArrayOutput
-	ToTopicsInstanceListArrayOutputWithContext(context.Context) TopicsInstanceListArrayOutput
+	ToGetAclsAclListArrayOutput() GetAclsAclListArrayOutput
+	ToGetAclsAclListArrayOutputWithContext(context.Context) GetAclsAclListArrayOutput
 }
 
-type TopicsInstanceListArray []TopicsInstanceListInput
+type GetAclsAclListArray []GetAclsAclListInput
 
-func (TopicsInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TopicsInstanceList)(nil)).Elem()
+func (GetAclsAclListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAclsAclList)(nil)).Elem()
 }
 
-func (i TopicsInstanceListArray) ToTopicsInstanceListArrayOutput() TopicsInstanceListArrayOutput {
-	return i.ToTopicsInstanceListArrayOutputWithContext(context.Background())
+func (i GetAclsAclListArray) ToGetAclsAclListArrayOutput() GetAclsAclListArrayOutput {
+	return i.ToGetAclsAclListArrayOutputWithContext(context.Background())
 }
 
-func (i TopicsInstanceListArray) ToTopicsInstanceListArrayOutputWithContext(ctx context.Context) TopicsInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TopicsInstanceListArrayOutput)
+func (i GetAclsAclListArray) ToGetAclsAclListArrayOutputWithContext(ctx context.Context) GetAclsAclListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAclsAclListArrayOutput)
 }
 
-type TopicsInstanceListOutput struct{ *pulumi.OutputState }
+type GetAclsAclListOutput struct{ *pulumi.OutputState }
 
-func (TopicsInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*TopicsInstanceList)(nil)).Elem()
+func (GetAclsAclListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAclsAclList)(nil)).Elem()
 }
 
-func (o TopicsInstanceListOutput) ToTopicsInstanceListOutput() TopicsInstanceListOutput {
+func (o GetAclsAclListOutput) ToGetAclsAclListOutput() GetAclsAclListOutput {
 	return o
 }
 
-func (o TopicsInstanceListOutput) ToTopicsInstanceListOutputWithContext(ctx context.Context) TopicsInstanceListOutput {
+func (o GetAclsAclListOutput) ToGetAclsAclListOutputWithContext(ctx context.Context) GetAclsAclListOutput {
 	return o
 }
 
-func (o TopicsInstanceListOutput) CleanUpPolicy() pulumi.StringOutput {
-	return o.ApplyT(func(v TopicsInstanceList) string { return v.CleanUpPolicy }).(pulumi.StringOutput)
+// Host substr used for querying.
+func (o GetAclsAclListOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAclsAclList) string { return v.Host }).(pulumi.StringOutput)
 }
 
-func (o TopicsInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v TopicsInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// ACL operation mode.
+func (o GetAclsAclListOutput) OperationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAclsAclList) string { return v.OperationType }).(pulumi.StringOutput)
 }
 
-func (o TopicsInstanceListOutput) EnableWhiteList() pulumi.BoolOutput {
-	return o.ApplyT(func(v TopicsInstanceList) bool { return v.EnableWhiteList }).(pulumi.BoolOutput)
+// ACL permission type, valid values are `UNKNOWN`, `ANY`, `DENY`, `ALLOW`, and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+func (o GetAclsAclListOutput) PermissionType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAclsAclList) string { return v.PermissionType }).(pulumi.StringOutput)
 }
 
-func (o TopicsInstanceListOutput) ForwardCosBucket() pulumi.StringOutput {
-	return o.ApplyT(func(v TopicsInstanceList) string { return v.ForwardCosBucket }).(pulumi.StringOutput)
+// User which can access. `*` means that any user can access.
+func (o GetAclsAclListOutput) Principal() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAclsAclList) string { return v.Principal }).(pulumi.StringOutput)
 }
 
-func (o TopicsInstanceListOutput) ForwardInterval() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.ForwardInterval }).(pulumi.IntOutput)
+// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
+func (o GetAclsAclListOutput) ResourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAclsAclList) string { return v.ResourceName }).(pulumi.StringOutput)
 }
 
-func (o TopicsInstanceListOutput) ForwardStatus() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.ForwardStatus }).(pulumi.IntOutput)
+// ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
+func (o GetAclsAclListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAclsAclList) string { return v.ResourceType }).(pulumi.StringOutput)
 }
 
-func (o TopicsInstanceListOutput) IpWhiteListCount() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.IpWhiteListCount }).(pulumi.IntOutput)
+type GetAclsAclListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAclsAclListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAclsAclList)(nil)).Elem()
 }
 
-func (o TopicsInstanceListOutput) MaxMessageBytes() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.MaxMessageBytes }).(pulumi.IntOutput)
-}
-
-func (o TopicsInstanceListOutput) Note() pulumi.StringOutput {
-	return o.ApplyT(func(v TopicsInstanceList) string { return v.Note }).(pulumi.StringOutput)
-}
-
-func (o TopicsInstanceListOutput) PartitionNum() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.PartitionNum }).(pulumi.IntOutput)
-}
-
-func (o TopicsInstanceListOutput) ReplicaNum() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.ReplicaNum }).(pulumi.IntOutput)
-}
-
-func (o TopicsInstanceListOutput) Retention() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.Retention }).(pulumi.IntOutput)
-}
-
-func (o TopicsInstanceListOutput) Segment() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.Segment }).(pulumi.IntOutput)
-}
-
-func (o TopicsInstanceListOutput) SegmentBytes() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.SegmentBytes }).(pulumi.IntOutput)
-}
-
-func (o TopicsInstanceListOutput) SyncReplicaMinNum() pulumi.IntOutput {
-	return o.ApplyT(func(v TopicsInstanceList) int { return v.SyncReplicaMinNum }).(pulumi.IntOutput)
-}
-
-func (o TopicsInstanceListOutput) TopicId() pulumi.StringOutput {
-	return o.ApplyT(func(v TopicsInstanceList) string { return v.TopicId }).(pulumi.StringOutput)
-}
-
-func (o TopicsInstanceListOutput) TopicName() pulumi.StringOutput {
-	return o.ApplyT(func(v TopicsInstanceList) string { return v.TopicName }).(pulumi.StringOutput)
-}
-
-func (o TopicsInstanceListOutput) UncleanLeaderElectionEnable() pulumi.BoolOutput {
-	return o.ApplyT(func(v TopicsInstanceList) bool { return v.UncleanLeaderElectionEnable }).(pulumi.BoolOutput)
-}
-
-type TopicsInstanceListArrayOutput struct{ *pulumi.OutputState }
-
-func (TopicsInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TopicsInstanceList)(nil)).Elem()
-}
-
-func (o TopicsInstanceListArrayOutput) ToTopicsInstanceListArrayOutput() TopicsInstanceListArrayOutput {
+func (o GetAclsAclListArrayOutput) ToGetAclsAclListArrayOutput() GetAclsAclListArrayOutput {
 	return o
 }
 
-func (o TopicsInstanceListArrayOutput) ToTopicsInstanceListArrayOutputWithContext(ctx context.Context) TopicsInstanceListArrayOutput {
+func (o GetAclsAclListArrayOutput) ToGetAclsAclListArrayOutputWithContext(ctx context.Context) GetAclsAclListArrayOutput {
 	return o
 }
 
-func (o TopicsInstanceListArrayOutput) Index(i pulumi.IntInput) TopicsInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TopicsInstanceList {
-		return vs[0].([]TopicsInstanceList)[vs[1].(int)]
-	}).(TopicsInstanceListOutput)
+func (o GetAclsAclListArrayOutput) Index(i pulumi.IntInput) GetAclsAclListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAclsAclList {
+		return vs[0].([]GetAclsAclList)[vs[1].(int)]
+	}).(GetAclsAclListOutput)
 }
 
-type UsersUserList struct {
+type GetInstancesFilter struct {
+	// The field that needs to be filtered.
+	Name string `pulumi:"name"`
+	// The filtered value of the field.
+	Values []string `pulumi:"values"`
+}
+
+// GetInstancesFilterInput is an input type that accepts GetInstancesFilterArgs and GetInstancesFilterOutput values.
+// You can construct a concrete instance of `GetInstancesFilterInput` via:
+//
+//          GetInstancesFilterArgs{...}
+type GetInstancesFilterInput interface {
+	pulumi.Input
+
+	ToGetInstancesFilterOutput() GetInstancesFilterOutput
+	ToGetInstancesFilterOutputWithContext(context.Context) GetInstancesFilterOutput
+}
+
+type GetInstancesFilterArgs struct {
+	// The field that needs to be filtered.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The filtered value of the field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetInstancesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesFilter)(nil)).Elem()
+}
+
+func (i GetInstancesFilterArgs) ToGetInstancesFilterOutput() GetInstancesFilterOutput {
+	return i.ToGetInstancesFilterOutputWithContext(context.Background())
+}
+
+func (i GetInstancesFilterArgs) ToGetInstancesFilterOutputWithContext(ctx context.Context) GetInstancesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesFilterOutput)
+}
+
+// GetInstancesFilterArrayInput is an input type that accepts GetInstancesFilterArray and GetInstancesFilterArrayOutput values.
+// You can construct a concrete instance of `GetInstancesFilterArrayInput` via:
+//
+//          GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
+type GetInstancesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesFilterArrayOutput() GetInstancesFilterArrayOutput
+	ToGetInstancesFilterArrayOutputWithContext(context.Context) GetInstancesFilterArrayOutput
+}
+
+type GetInstancesFilterArray []GetInstancesFilterInput
+
+func (GetInstancesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesFilter)(nil)).Elem()
+}
+
+func (i GetInstancesFilterArray) ToGetInstancesFilterArrayOutput() GetInstancesFilterArrayOutput {
+	return i.ToGetInstancesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesFilterArray) ToGetInstancesFilterArrayOutputWithContext(ctx context.Context) GetInstancesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesFilterArrayOutput)
+}
+
+type GetInstancesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesFilter)(nil)).Elem()
+}
+
+func (o GetInstancesFilterOutput) ToGetInstancesFilterOutput() GetInstancesFilterOutput {
+	return o
+}
+
+func (o GetInstancesFilterOutput) ToGetInstancesFilterOutputWithContext(ctx context.Context) GetInstancesFilterOutput {
+	return o
+}
+
+// The field that needs to be filtered.
+func (o GetInstancesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The filtered value of the field.
+func (o GetInstancesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetInstancesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesFilter)(nil)).Elem()
+}
+
+func (o GetInstancesFilterArrayOutput) ToGetInstancesFilterArrayOutput() GetInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetInstancesFilterArrayOutput) ToGetInstancesFilterArrayOutputWithContext(ctx context.Context) GetInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetInstancesFilterArrayOutput) Index(i pulumi.IntInput) GetInstancesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesFilter {
+		return vs[0].([]GetInstancesFilter)[vs[1].(int)]
+	}).(GetInstancesFilterOutput)
+}
+
+type GetInstancesInstanceList struct {
+	// Instance bandwidth, in Mbps.
+	Bandwidth int `pulumi:"bandwidth"`
+	// The time when the instance was created.
+	CreateTime int `pulumi:"createTime"`
+	// ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	Cvm int `pulumi:"cvm"`
+	// The storage size of the instance, in GB.
+	DiskSize int `pulumi:"diskSize"`
+	// Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	DiskType string `pulumi:"diskType"`
+	// The instance expiration time.
+	ExpireTime int `pulumi:"expireTime"`
+	// Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.
+	Healthy int `pulumi:"healthy"`
+	// Instance status information.
+	HealthyMessage string `pulumi:"healthyMessage"`
+	// The instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// The instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	InstanceType string `pulumi:"instanceType"`
+	// Whether it is an internal customer. A value of 1 indicates an internal customer.
+	IsInternal int `pulumi:"isInternal"`
+	// The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.
+	MaxPartitionNumber int `pulumi:"maxPartitionNumber"`
+	// The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..
+	MaxTopicNumber int `pulumi:"maxTopicNumber"`
+	// The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..
+	PartitionNumber int `pulumi:"partitionNumber"`
+	// The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..
+	PublicNetwork int `pulumi:"publicNetwork"`
+	// The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..
+	PublicNetworkChargeType string `pulumi:"publicNetworkChargeType"`
+	// Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..
+	RebalanceTime string `pulumi:"rebalanceTime"`
+	// Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.
+	RenewFlag int `pulumi:"renewFlag"`
+	// (Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.
+	Status int `pulumi:"status"`
+	// Subnet id.
+	SubnetId string `pulumi:"subnetId"`
+	// Tag infomation.
+	Tags []GetInstancesInstanceListTag `pulumi:"tags"`
+	// The number of topics.
+	TopicNum int `pulumi:"topicNum"`
+	// Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.
+	Version string `pulumi:"version"`
+	// Virtual IP.
+	Vip string `pulumi:"vip"`
+	// Virtual IP entities.
+	VipList GetInstancesInstanceListVipList `pulumi:"vipList"`
+	// VpcId, if empty, indicates that it is the underlying network.
+	VpcId string `pulumi:"vpcId"`
+	// Virtual PORT.
+	Vport string `pulumi:"vport"`
+	// Availability Zone ID.
+	ZoneId int `pulumi:"zoneId"`
+	// Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.
+	ZoneIds []int `pulumi:"zoneIds"`
+}
+
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
+//
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
+}
+
+type GetInstancesInstanceListArgs struct {
+	// Instance bandwidth, in Mbps.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// The time when the instance was created.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	Cvm pulumi.IntInput `pulumi:"cvm"`
+	// The storage size of the instance, in GB.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// The instance expiration time.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.
+	Healthy pulumi.IntInput `pulumi:"healthy"`
+	// Instance status information.
+	HealthyMessage pulumi.StringInput `pulumi:"healthyMessage"`
+	// The instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// The instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Whether it is an internal customer. A value of 1 indicates an internal customer.
+	IsInternal pulumi.IntInput `pulumi:"isInternal"`
+	// The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.
+	MaxPartitionNumber pulumi.IntInput `pulumi:"maxPartitionNumber"`
+	// The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..
+	MaxTopicNumber pulumi.IntInput `pulumi:"maxTopicNumber"`
+	// The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..
+	PartitionNumber pulumi.IntInput `pulumi:"partitionNumber"`
+	// The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..
+	PublicNetwork pulumi.IntInput `pulumi:"publicNetwork"`
+	// The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..
+	PublicNetworkChargeType pulumi.StringInput `pulumi:"publicNetworkChargeType"`
+	// Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..
+	RebalanceTime pulumi.StringInput `pulumi:"rebalanceTime"`
+	// Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.
+	RenewFlag pulumi.IntInput `pulumi:"renewFlag"`
+	// (Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Subnet id.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tag infomation.
+	Tags GetInstancesInstanceListTagArrayInput `pulumi:"tags"`
+	// The number of topics.
+	TopicNum pulumi.IntInput `pulumi:"topicNum"`
+	// Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.
+	Version pulumi.StringInput `pulumi:"version"`
+	// Virtual IP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Virtual IP entities.
+	VipList GetInstancesInstanceListVipListInput `pulumi:"vipList"`
+	// VpcId, if empty, indicates that it is the underlying network.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Virtual PORT.
+	Vport pulumi.StringInput `pulumi:"vport"`
+	// Availability Zone ID.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.
+	ZoneIds pulumi.IntArrayInput `pulumi:"zoneIds"`
+}
+
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
+}
+
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
+//
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
+}
+
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
+
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
+}
+
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return o
+}
+
+// Instance bandwidth, in Mbps.
+func (o GetInstancesInstanceListOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// The time when the instance was created.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// ckafka sale type. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o GetInstancesInstanceListOutput) Cvm() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Cvm }).(pulumi.IntOutput)
+}
+
+// The storage size of the instance, in GB.
+func (o GetInstancesInstanceListOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Disk Type. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o GetInstancesInstanceListOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// The instance expiration time.
+func (o GetInstancesInstanceListOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ExpireTime }).(pulumi.IntOutput)
+}
+
+// Instance status int: 1 indicates health, 2 indicates alarm, and 3 indicates abnormal instance status.
+func (o GetInstancesInstanceListOutput) Healthy() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Healthy }).(pulumi.IntOutput)
+}
+
+// Instance status information.
+func (o GetInstancesInstanceListOutput) HealthyMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.HealthyMessage }).(pulumi.StringOutput)
+}
+
+// The instance ID.
+func (o GetInstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// The instance name.
+func (o GetInstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// ckafka instance type. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o GetInstancesInstanceListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Whether it is an internal customer. A value of 1 indicates an internal customer.
+func (o GetInstancesInstanceListOutput) IsInternal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsInternal }).(pulumi.IntOutput)
+}
+
+// The maximum number of Partitions for the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o GetInstancesInstanceListOutput) MaxPartitionNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.MaxPartitionNumber }).(pulumi.IntOutput)
+}
+
+// The maximum number of topics in the current specifications. Note: This field may return null, indicating that a valid value could not be retrieved..
+func (o GetInstancesInstanceListOutput) MaxTopicNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.MaxTopicNumber }).(pulumi.IntOutput)
+}
+
+// The current number of instances. Note: This field may return null, indicating that a valid value could not be retrieved..
+func (o GetInstancesInstanceListOutput) PartitionNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.PartitionNumber }).(pulumi.IntOutput)
+}
+
+// The Internet bandwidth value. Note: This field may return null, indicating that a valid value could not be retrieved..
+func (o GetInstancesInstanceListOutput) PublicNetwork() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.PublicNetwork }).(pulumi.IntOutput)
+}
+
+// The type of Internet bandwidth. Note: This field may return null, indicating that a valid value could not be retrieved..
+func (o GetInstancesInstanceListOutput) PublicNetworkChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.PublicNetworkChargeType }).(pulumi.StringOutput)
+}
+
+// Schedule the upgrade configuration time. Note: This field may return null, indicating that a valid value could not be retrieved..
+func (o GetInstancesInstanceListOutput) RebalanceTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.RebalanceTime }).(pulumi.StringOutput)
+}
+
+// Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.
+func (o GetInstancesInstanceListOutput) RenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.RenewFlag }).(pulumi.IntOutput)
+}
+
+// (Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.
+func (o GetInstancesInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Subnet id.
+func (o GetInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Tag infomation.
+func (o GetInstancesInstanceListOutput) Tags() GetInstancesInstanceListTagArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListTag { return v.Tags }).(GetInstancesInstanceListTagArrayOutput)
+}
+
+// The number of topics.
+func (o GetInstancesInstanceListOutput) TopicNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.TopicNum }).(pulumi.IntOutput)
+}
+
+// Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o GetInstancesInstanceListOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Version }).(pulumi.StringOutput)
+}
+
+// Virtual IP.
+func (o GetInstancesInstanceListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Virtual IP entities.
+func (o GetInstancesInstanceListOutput) VipList() GetInstancesInstanceListVipListOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) GetInstancesInstanceListVipList { return v.VipList }).(GetInstancesInstanceListVipListOutput)
+}
+
+// VpcId, if empty, indicates that it is the underlying network.
+func (o GetInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Virtual PORT.
+func (o GetInstancesInstanceListOutput) Vport() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Vport }).(pulumi.StringOutput)
+}
+
+// Availability Zone ID.
+func (o GetInstancesInstanceListOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// Across Availability Zones. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o GetInstancesInstanceListOutput) ZoneIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []int { return v.ZoneIds }).(pulumi.IntArrayOutput)
+}
+
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
+}
+
+type GetInstancesInstanceListTag struct {
+	// Matches the tag key value.
+	TagKey string `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetInstancesInstanceListTagInput is an input type that accepts GetInstancesInstanceListTagArgs and GetInstancesInstanceListTagOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListTagInput` via:
+//
+//          GetInstancesInstanceListTagArgs{...}
+type GetInstancesInstanceListTagInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput
+	ToGetInstancesInstanceListTagOutputWithContext(context.Context) GetInstancesInstanceListTagOutput
+}
+
+type GetInstancesInstanceListTagArgs struct {
+	// Matches the tag key value.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetInstancesInstanceListTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput {
+	return i.ToGetInstancesInstanceListTagOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutputWithContext(ctx context.Context) GetInstancesInstanceListTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListTagOutput)
+}
+
+// GetInstancesInstanceListTagArrayInput is an input type that accepts GetInstancesInstanceListTagArray and GetInstancesInstanceListTagArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListTagArrayInput` via:
+//
+//          GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
+type GetInstancesInstanceListTagArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput
+	ToGetInstancesInstanceListTagArrayOutputWithContext(context.Context) GetInstancesInstanceListTagArrayOutput
+}
+
+type GetInstancesInstanceListTagArray []GetInstancesInstanceListTagInput
+
+func (GetInstancesInstanceListTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListTagArray) ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput {
+	return i.ToGetInstancesInstanceListTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListTagArray) ToGetInstancesInstanceListTagArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListTagArrayOutput)
+}
+
+type GetInstancesInstanceListTagOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListTagOutput) ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagOutput) ToGetInstancesInstanceListTagOutputWithContext(ctx context.Context) GetInstancesInstanceListTagOutput {
+	return o
+}
+
+// Matches the tag key value.
+func (o GetInstancesInstanceListTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag Value.
+func (o GetInstancesInstanceListTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) ToGetInstancesInstanceListTagArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListTagArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListTag {
+		return vs[0].([]GetInstancesInstanceListTag)[vs[1].(int)]
+	}).(GetInstancesInstanceListTagOutput)
+}
+
+type GetInstancesInstanceListVipList struct {
+	// Virtual IP.
+	Vip string `pulumi:"vip"`
+	// Virtual PORT.
+	Vport string `pulumi:"vport"`
+}
+
+// GetInstancesInstanceListVipListInput is an input type that accepts GetInstancesInstanceListVipListArgs and GetInstancesInstanceListVipListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListVipListInput` via:
+//
+//          GetInstancesInstanceListVipListArgs{...}
+type GetInstancesInstanceListVipListInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListVipListOutput() GetInstancesInstanceListVipListOutput
+	ToGetInstancesInstanceListVipListOutputWithContext(context.Context) GetInstancesInstanceListVipListOutput
+}
+
+type GetInstancesInstanceListVipListArgs struct {
+	// Virtual IP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Virtual PORT.
+	Vport pulumi.StringInput `pulumi:"vport"`
+}
+
+func (GetInstancesInstanceListVipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListVipList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListVipListArgs) ToGetInstancesInstanceListVipListOutput() GetInstancesInstanceListVipListOutput {
+	return i.ToGetInstancesInstanceListVipListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListVipListArgs) ToGetInstancesInstanceListVipListOutputWithContext(ctx context.Context) GetInstancesInstanceListVipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListVipListOutput)
+}
+
+type GetInstancesInstanceListVipListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListVipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListVipList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListVipListOutput) ToGetInstancesInstanceListVipListOutput() GetInstancesInstanceListVipListOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListVipListOutput) ToGetInstancesInstanceListVipListOutputWithContext(ctx context.Context) GetInstancesInstanceListVipListOutput {
+	return o
+}
+
+// Virtual IP.
+func (o GetInstancesInstanceListVipListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListVipList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Virtual PORT.
+func (o GetInstancesInstanceListVipListOutput) Vport() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListVipList) string { return v.Vport }).(pulumi.StringOutput)
+}
+
+type GetTopicsInstanceList struct {
+	// Clear log policy, log clear mode. `delete`: logs are deleted according to the storage time, `compact`: logs are compressed according to the key, `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
+	CleanUpPolicy string `pulumi:"cleanUpPolicy"`
+	// Create time of the CKafka topic.
+	CreateTime string `pulumi:"createTime"`
+	// Whether to open the IP Whitelist. `true`: open, `false`: close.
+	EnableWhiteList bool `pulumi:"enableWhiteList"`
+	// Data backup cos bucket: the bucket address that is dumped to cos.
+	ForwardCosBucket string `pulumi:"forwardCosBucket"`
+	// Periodic frequency of data backup to cos.
+	ForwardInterval int `pulumi:"forwardInterval"`
+	// Data backup cos status. `1`: do not open data backup, `0`: open data backup.
+	ForwardStatus int `pulumi:"forwardStatus"`
+	// IP Whitelist count.
+	IpWhiteListCount int `pulumi:"ipWhiteListCount"`
+	// Max message bytes.
+	MaxMessageBytes int `pulumi:"maxMessageBytes"`
+	// CKafka topic note description.
+	Note string `pulumi:"note"`
+	// The number of partition.
+	PartitionNum int `pulumi:"partitionNum"`
+	// The number of replica.
+	ReplicaNum int `pulumi:"replicaNum"`
+	// Message can be selected. Retention time(unit ms).
+	Retention int `pulumi:"retention"`
+	// Segment scrolling time, in ms.
+	Segment int `pulumi:"segment"`
+	// Number of bytes rolled by shard.
+	SegmentBytes int `pulumi:"segmentBytes"`
+	// Min number of sync replicas.
+	SyncReplicaMinNum int `pulumi:"syncReplicaMinNum"`
+	// ID of the CKafka topic.
+	TopicId string `pulumi:"topicId"`
+	// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-). The length range is from 1 to 64.
+	TopicName string `pulumi:"topicName"`
+	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
+	UncleanLeaderElectionEnable bool `pulumi:"uncleanLeaderElectionEnable"`
+}
+
+// GetTopicsInstanceListInput is an input type that accepts GetTopicsInstanceListArgs and GetTopicsInstanceListOutput values.
+// You can construct a concrete instance of `GetTopicsInstanceListInput` via:
+//
+//          GetTopicsInstanceListArgs{...}
+type GetTopicsInstanceListInput interface {
+	pulumi.Input
+
+	ToGetTopicsInstanceListOutput() GetTopicsInstanceListOutput
+	ToGetTopicsInstanceListOutputWithContext(context.Context) GetTopicsInstanceListOutput
+}
+
+type GetTopicsInstanceListArgs struct {
+	// Clear log policy, log clear mode. `delete`: logs are deleted according to the storage time, `compact`: logs are compressed according to the key, `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
+	CleanUpPolicy pulumi.StringInput `pulumi:"cleanUpPolicy"`
+	// Create time of the CKafka topic.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Whether to open the IP Whitelist. `true`: open, `false`: close.
+	EnableWhiteList pulumi.BoolInput `pulumi:"enableWhiteList"`
+	// Data backup cos bucket: the bucket address that is dumped to cos.
+	ForwardCosBucket pulumi.StringInput `pulumi:"forwardCosBucket"`
+	// Periodic frequency of data backup to cos.
+	ForwardInterval pulumi.IntInput `pulumi:"forwardInterval"`
+	// Data backup cos status. `1`: do not open data backup, `0`: open data backup.
+	ForwardStatus pulumi.IntInput `pulumi:"forwardStatus"`
+	// IP Whitelist count.
+	IpWhiteListCount pulumi.IntInput `pulumi:"ipWhiteListCount"`
+	// Max message bytes.
+	MaxMessageBytes pulumi.IntInput `pulumi:"maxMessageBytes"`
+	// CKafka topic note description.
+	Note pulumi.StringInput `pulumi:"note"`
+	// The number of partition.
+	PartitionNum pulumi.IntInput `pulumi:"partitionNum"`
+	// The number of replica.
+	ReplicaNum pulumi.IntInput `pulumi:"replicaNum"`
+	// Message can be selected. Retention time(unit ms).
+	Retention pulumi.IntInput `pulumi:"retention"`
+	// Segment scrolling time, in ms.
+	Segment pulumi.IntInput `pulumi:"segment"`
+	// Number of bytes rolled by shard.
+	SegmentBytes pulumi.IntInput `pulumi:"segmentBytes"`
+	// Min number of sync replicas.
+	SyncReplicaMinNum pulumi.IntInput `pulumi:"syncReplicaMinNum"`
+	// ID of the CKafka topic.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+	// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-). The length range is from 1 to 64.
+	TopicName pulumi.StringInput `pulumi:"topicName"`
+	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
+	UncleanLeaderElectionEnable pulumi.BoolInput `pulumi:"uncleanLeaderElectionEnable"`
+}
+
+func (GetTopicsInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopicsInstanceList)(nil)).Elem()
+}
+
+func (i GetTopicsInstanceListArgs) ToGetTopicsInstanceListOutput() GetTopicsInstanceListOutput {
+	return i.ToGetTopicsInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetTopicsInstanceListArgs) ToGetTopicsInstanceListOutputWithContext(ctx context.Context) GetTopicsInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopicsInstanceListOutput)
+}
+
+// GetTopicsInstanceListArrayInput is an input type that accepts GetTopicsInstanceListArray and GetTopicsInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetTopicsInstanceListArrayInput` via:
+//
+//          GetTopicsInstanceListArray{ GetTopicsInstanceListArgs{...} }
+type GetTopicsInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetTopicsInstanceListArrayOutput() GetTopicsInstanceListArrayOutput
+	ToGetTopicsInstanceListArrayOutputWithContext(context.Context) GetTopicsInstanceListArrayOutput
+}
+
+type GetTopicsInstanceListArray []GetTopicsInstanceListInput
+
+func (GetTopicsInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopicsInstanceList)(nil)).Elem()
+}
+
+func (i GetTopicsInstanceListArray) ToGetTopicsInstanceListArrayOutput() GetTopicsInstanceListArrayOutput {
+	return i.ToGetTopicsInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopicsInstanceListArray) ToGetTopicsInstanceListArrayOutputWithContext(ctx context.Context) GetTopicsInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopicsInstanceListArrayOutput)
+}
+
+type GetTopicsInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetTopicsInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopicsInstanceList)(nil)).Elem()
+}
+
+func (o GetTopicsInstanceListOutput) ToGetTopicsInstanceListOutput() GetTopicsInstanceListOutput {
+	return o
+}
+
+func (o GetTopicsInstanceListOutput) ToGetTopicsInstanceListOutputWithContext(ctx context.Context) GetTopicsInstanceListOutput {
+	return o
+}
+
+// Clear log policy, log clear mode. `delete`: logs are deleted according to the storage time, `compact`: logs are compressed according to the key, `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
+func (o GetTopicsInstanceListOutput) CleanUpPolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) string { return v.CleanUpPolicy }).(pulumi.StringOutput)
+}
+
+// Create time of the CKafka topic.
+func (o GetTopicsInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Whether to open the IP Whitelist. `true`: open, `false`: close.
+func (o GetTopicsInstanceListOutput) EnableWhiteList() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) bool { return v.EnableWhiteList }).(pulumi.BoolOutput)
+}
+
+// Data backup cos bucket: the bucket address that is dumped to cos.
+func (o GetTopicsInstanceListOutput) ForwardCosBucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) string { return v.ForwardCosBucket }).(pulumi.StringOutput)
+}
+
+// Periodic frequency of data backup to cos.
+func (o GetTopicsInstanceListOutput) ForwardInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.ForwardInterval }).(pulumi.IntOutput)
+}
+
+// Data backup cos status. `1`: do not open data backup, `0`: open data backup.
+func (o GetTopicsInstanceListOutput) ForwardStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.ForwardStatus }).(pulumi.IntOutput)
+}
+
+// IP Whitelist count.
+func (o GetTopicsInstanceListOutput) IpWhiteListCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.IpWhiteListCount }).(pulumi.IntOutput)
+}
+
+// Max message bytes.
+func (o GetTopicsInstanceListOutput) MaxMessageBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.MaxMessageBytes }).(pulumi.IntOutput)
+}
+
+// CKafka topic note description.
+func (o GetTopicsInstanceListOutput) Note() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) string { return v.Note }).(pulumi.StringOutput)
+}
+
+// The number of partition.
+func (o GetTopicsInstanceListOutput) PartitionNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.PartitionNum }).(pulumi.IntOutput)
+}
+
+// The number of replica.
+func (o GetTopicsInstanceListOutput) ReplicaNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.ReplicaNum }).(pulumi.IntOutput)
+}
+
+// Message can be selected. Retention time(unit ms).
+func (o GetTopicsInstanceListOutput) Retention() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.Retention }).(pulumi.IntOutput)
+}
+
+// Segment scrolling time, in ms.
+func (o GetTopicsInstanceListOutput) Segment() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.Segment }).(pulumi.IntOutput)
+}
+
+// Number of bytes rolled by shard.
+func (o GetTopicsInstanceListOutput) SegmentBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.SegmentBytes }).(pulumi.IntOutput)
+}
+
+// Min number of sync replicas.
+func (o GetTopicsInstanceListOutput) SyncReplicaMinNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) int { return v.SyncReplicaMinNum }).(pulumi.IntOutput)
+}
+
+// ID of the CKafka topic.
+func (o GetTopicsInstanceListOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-). The length range is from 1 to 64.
+func (o GetTopicsInstanceListOutput) TopicName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) string { return v.TopicName }).(pulumi.StringOutput)
+}
+
+// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
+func (o GetTopicsInstanceListOutput) UncleanLeaderElectionEnable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTopicsInstanceList) bool { return v.UncleanLeaderElectionEnable }).(pulumi.BoolOutput)
+}
+
+type GetTopicsInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopicsInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopicsInstanceList)(nil)).Elem()
+}
+
+func (o GetTopicsInstanceListArrayOutput) ToGetTopicsInstanceListArrayOutput() GetTopicsInstanceListArrayOutput {
+	return o
+}
+
+func (o GetTopicsInstanceListArrayOutput) ToGetTopicsInstanceListArrayOutputWithContext(ctx context.Context) GetTopicsInstanceListArrayOutput {
+	return o
+}
+
+func (o GetTopicsInstanceListArrayOutput) Index(i pulumi.IntInput) GetTopicsInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopicsInstanceList {
+		return vs[0].([]GetTopicsInstanceList)[vs[1].(int)]
+	}).(GetTopicsInstanceListOutput)
+}
+
+type GetUsersUserList struct {
+	// Account name used when query ckafka users' infos. Could be a substr of user name.
 	AccountName string `pulumi:"accountName"`
-	CreateTime  string `pulumi:"createTime"`
-	UpdateTime  string `pulumi:"updateTime"`
+	// Creation time of the account.
+	CreateTime string `pulumi:"createTime"`
+	// The last update time of the account.
+	UpdateTime string `pulumi:"updateTime"`
 }
 
-// UsersUserListInput is an input type that accepts UsersUserListArgs and UsersUserListOutput values.
-// You can construct a concrete instance of `UsersUserListInput` via:
+// GetUsersUserListInput is an input type that accepts GetUsersUserListArgs and GetUsersUserListOutput values.
+// You can construct a concrete instance of `GetUsersUserListInput` via:
 //
-//          UsersUserListArgs{...}
-type UsersUserListInput interface {
+//          GetUsersUserListArgs{...}
+type GetUsersUserListInput interface {
 	pulumi.Input
 
-	ToUsersUserListOutput() UsersUserListOutput
-	ToUsersUserListOutputWithContext(context.Context) UsersUserListOutput
+	ToGetUsersUserListOutput() GetUsersUserListOutput
+	ToGetUsersUserListOutputWithContext(context.Context) GetUsersUserListOutput
 }
 
-type UsersUserListArgs struct {
+type GetUsersUserListArgs struct {
+	// Account name used when query ckafka users' infos. Could be a substr of user name.
 	AccountName pulumi.StringInput `pulumi:"accountName"`
-	CreateTime  pulumi.StringInput `pulumi:"createTime"`
-	UpdateTime  pulumi.StringInput `pulumi:"updateTime"`
+	// Creation time of the account.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// The last update time of the account.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
 }
 
-func (UsersUserListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*UsersUserList)(nil)).Elem()
+func (GetUsersUserListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsersUserList)(nil)).Elem()
 }
 
-func (i UsersUserListArgs) ToUsersUserListOutput() UsersUserListOutput {
-	return i.ToUsersUserListOutputWithContext(context.Background())
+func (i GetUsersUserListArgs) ToGetUsersUserListOutput() GetUsersUserListOutput {
+	return i.ToGetUsersUserListOutputWithContext(context.Background())
 }
 
-func (i UsersUserListArgs) ToUsersUserListOutputWithContext(ctx context.Context) UsersUserListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(UsersUserListOutput)
+func (i GetUsersUserListArgs) ToGetUsersUserListOutputWithContext(ctx context.Context) GetUsersUserListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsersUserListOutput)
 }
 
-// UsersUserListArrayInput is an input type that accepts UsersUserListArray and UsersUserListArrayOutput values.
-// You can construct a concrete instance of `UsersUserListArrayInput` via:
+// GetUsersUserListArrayInput is an input type that accepts GetUsersUserListArray and GetUsersUserListArrayOutput values.
+// You can construct a concrete instance of `GetUsersUserListArrayInput` via:
 //
-//          UsersUserListArray{ UsersUserListArgs{...} }
-type UsersUserListArrayInput interface {
+//          GetUsersUserListArray{ GetUsersUserListArgs{...} }
+type GetUsersUserListArrayInput interface {
 	pulumi.Input
 
-	ToUsersUserListArrayOutput() UsersUserListArrayOutput
-	ToUsersUserListArrayOutputWithContext(context.Context) UsersUserListArrayOutput
+	ToGetUsersUserListArrayOutput() GetUsersUserListArrayOutput
+	ToGetUsersUserListArrayOutputWithContext(context.Context) GetUsersUserListArrayOutput
 }
 
-type UsersUserListArray []UsersUserListInput
+type GetUsersUserListArray []GetUsersUserListInput
 
-func (UsersUserListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]UsersUserList)(nil)).Elem()
+func (GetUsersUserListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsersUserList)(nil)).Elem()
 }
 
-func (i UsersUserListArray) ToUsersUserListArrayOutput() UsersUserListArrayOutput {
-	return i.ToUsersUserListArrayOutputWithContext(context.Background())
+func (i GetUsersUserListArray) ToGetUsersUserListArrayOutput() GetUsersUserListArrayOutput {
+	return i.ToGetUsersUserListArrayOutputWithContext(context.Background())
 }
 
-func (i UsersUserListArray) ToUsersUserListArrayOutputWithContext(ctx context.Context) UsersUserListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(UsersUserListArrayOutput)
+func (i GetUsersUserListArray) ToGetUsersUserListArrayOutputWithContext(ctx context.Context) GetUsersUserListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsersUserListArrayOutput)
 }
 
-type UsersUserListOutput struct{ *pulumi.OutputState }
+type GetUsersUserListOutput struct{ *pulumi.OutputState }
 
-func (UsersUserListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*UsersUserList)(nil)).Elem()
+func (GetUsersUserListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsersUserList)(nil)).Elem()
 }
 
-func (o UsersUserListOutput) ToUsersUserListOutput() UsersUserListOutput {
+func (o GetUsersUserListOutput) ToGetUsersUserListOutput() GetUsersUserListOutput {
 	return o
 }
 
-func (o UsersUserListOutput) ToUsersUserListOutputWithContext(ctx context.Context) UsersUserListOutput {
+func (o GetUsersUserListOutput) ToGetUsersUserListOutputWithContext(ctx context.Context) GetUsersUserListOutput {
 	return o
 }
 
-func (o UsersUserListOutput) AccountName() pulumi.StringOutput {
-	return o.ApplyT(func(v UsersUserList) string { return v.AccountName }).(pulumi.StringOutput)
+// Account name used when query ckafka users' infos. Could be a substr of user name.
+func (o GetUsersUserListOutput) AccountName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUserList) string { return v.AccountName }).(pulumi.StringOutput)
 }
 
-func (o UsersUserListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v UsersUserList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the account.
+func (o GetUsersUserListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUserList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o UsersUserListOutput) UpdateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v UsersUserList) string { return v.UpdateTime }).(pulumi.StringOutput)
+// The last update time of the account.
+func (o GetUsersUserListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUserList) string { return v.UpdateTime }).(pulumi.StringOutput)
 }
 
-type UsersUserListArrayOutput struct{ *pulumi.OutputState }
+type GetUsersUserListArrayOutput struct{ *pulumi.OutputState }
 
-func (UsersUserListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]UsersUserList)(nil)).Elem()
+func (GetUsersUserListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsersUserList)(nil)).Elem()
 }
 
-func (o UsersUserListArrayOutput) ToUsersUserListArrayOutput() UsersUserListArrayOutput {
+func (o GetUsersUserListArrayOutput) ToGetUsersUserListArrayOutput() GetUsersUserListArrayOutput {
 	return o
 }
 
-func (o UsersUserListArrayOutput) ToUsersUserListArrayOutputWithContext(ctx context.Context) UsersUserListArrayOutput {
+func (o GetUsersUserListArrayOutput) ToGetUsersUserListArrayOutputWithContext(ctx context.Context) GetUsersUserListArrayOutput {
 	return o
 }
 
-func (o UsersUserListArrayOutput) Index(i pulumi.IntInput) UsersUserListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UsersUserList {
-		return vs[0].([]UsersUserList)[vs[1].(int)]
-	}).(UsersUserListOutput)
+func (o GetUsersUserListArrayOutput) Index(i pulumi.IntInput) GetUsersUserListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUsersUserList {
+		return vs[0].([]GetUsersUserList)[vs[1].(int)]
+	}).(GetUsersUserListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*AclsAclListInput)(nil)).Elem(), AclsAclListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AclsAclListArrayInput)(nil)).Elem(), AclsAclListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceConfigInput)(nil)).Elem(), InstanceConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceConfigPtrInput)(nil)).Elem(), InstanceConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDynamicRetentionConfigInput)(nil)).Elem(), InstanceDynamicRetentionConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDynamicRetentionConfigPtrInput)(nil)).Elem(), InstanceDynamicRetentionConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTagInput)(nil)).Elem(), InstanceTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTagArrayInput)(nil)).Elem(), InstanceTagArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TopicsInstanceListInput)(nil)).Elem(), TopicsInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TopicsInstanceListArrayInput)(nil)).Elem(), TopicsInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*UsersUserListInput)(nil)).Elem(), UsersUserListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*UsersUserListArrayInput)(nil)).Elem(), UsersUserListArray{})
-	pulumi.RegisterOutputType(AclsAclListOutput{})
-	pulumi.RegisterOutputType(AclsAclListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListInput)(nil)).Elem(), GetAclsAclListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListArrayInput)(nil)).Elem(), GetAclsAclListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesFilterInput)(nil)).Elem(), GetInstancesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesFilterArrayInput)(nil)).Elem(), GetInstancesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListTagInput)(nil)).Elem(), GetInstancesInstanceListTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListTagArrayInput)(nil)).Elem(), GetInstancesInstanceListTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListVipListInput)(nil)).Elem(), GetInstancesInstanceListVipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopicsInstanceListInput)(nil)).Elem(), GetTopicsInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopicsInstanceListArrayInput)(nil)).Elem(), GetTopicsInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserListInput)(nil)).Elem(), GetUsersUserListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserListArrayInput)(nil)).Elem(), GetUsersUserListArray{})
 	pulumi.RegisterOutputType(InstanceConfigOutput{})
 	pulumi.RegisterOutputType(InstanceConfigPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDynamicRetentionConfigOutput{})
 	pulumi.RegisterOutputType(InstanceDynamicRetentionConfigPtrOutput{})
 	pulumi.RegisterOutputType(InstanceTagOutput{})
 	pulumi.RegisterOutputType(InstanceTagArrayOutput{})
-	pulumi.RegisterOutputType(TopicsInstanceListOutput{})
-	pulumi.RegisterOutputType(TopicsInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(UsersUserListOutput{})
-	pulumi.RegisterOutputType(UsersUserListArrayOutput{})
+	pulumi.RegisterOutputType(GetAclsAclListOutput{})
+	pulumi.RegisterOutputType(GetAclsAclListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesFilterOutput{})
+	pulumi.RegisterOutputType(GetInstancesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListTagOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListTagArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListVipListOutput{})
+	pulumi.RegisterOutputType(GetTopicsInstanceListOutput{})
+	pulumi.RegisterOutputType(GetTopicsInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetUsersUserListOutput{})
+	pulumi.RegisterOutputType(GetUsersUserListArrayOutput{})
 }

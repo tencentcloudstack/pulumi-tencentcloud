@@ -27,6 +27,12 @@ class ClusterResourceSpecArgs:
                  master_resource_spec: Optional[pulumi.Input['ClusterResourceSpecMasterResourceSpecArgs']] = None,
                  task_count: Optional[pulumi.Input[int]] = None,
                  task_resource_spec: Optional[pulumi.Input['ClusterResourceSpecTaskResourceSpecArgs']] = None):
+        """
+        :param pulumi.Input[int] common_count: The number of common node.
+        :param pulumi.Input[int] core_count: The number of core node.
+        :param pulumi.Input[int] master_count: The number of master node.
+        :param pulumi.Input[int] task_count: The number of core node.
+        """
         if common_count is not None:
             pulumi.set(__self__, "common_count", common_count)
         if common_resource_spec is not None:
@@ -47,6 +53,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="commonCount")
     def common_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of common node.
+        """
         return pulumi.get(self, "common_count")
 
     @common_count.setter
@@ -65,6 +74,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="coreCount")
     def core_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of core node.
+        """
         return pulumi.get(self, "core_count")
 
     @core_count.setter
@@ -83,6 +95,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="masterCount")
     def master_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of master node.
+        """
         return pulumi.get(self, "master_count")
 
     @master_count.setter
@@ -101,6 +116,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="taskCount")
     def task_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of core node.
+        """
         return pulumi.get(self, "task_count")
 
     @task_count.setter

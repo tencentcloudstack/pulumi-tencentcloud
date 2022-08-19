@@ -5,6 +5,61 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a emr cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const emrrrr = new tencentcloud.emr.Cluster("emrrrr", {
+ *     productId: 4,
+ *     displayStrategy: "clusterList",
+ *     vpcSettings: {
+ *         vpc_id: "vpc-fuwly8x5",
+ *         subnet_id: "subnet-d830wfso",
+ *     },
+ *     softwares: [
+ *         "hadoop-2.8.4",
+ *         "zookeeper-3.4.9",
+ *     ],
+ *     supportHa: 0,
+ *     instanceName: "emr-test",
+ *     resourceSpec: {
+ *         masterResourceSpec: {
+ *             memSize: 8192,
+ *             cpu: 4,
+ *             diskSize: 100,
+ *             diskType: "CLOUD_PREMIUM",
+ *             spec: "CVM.S2",
+ *             storageType: 5,
+ *         },
+ *         coreResourceSpec: {
+ *             memSize: 8192,
+ *             cpu: 4,
+ *             diskSize: 100,
+ *             diskType: "CLOUD_PREMIUM",
+ *             spec: "CVM.S2",
+ *             storageType: 5,
+ *         },
+ *         masterCount: 1,
+ *         coreCount: 2,
+ *     },
+ *     loginSettings: {
+ *         password: "Tencent@cloud123",
+ *     },
+ *     timeSpan: 1,
+ *     timeUnit: "m",
+ *     payMode: 1,
+ *     placement: {
+ *         zone: "ap-guangzhou-3",
+ *         project_id: 0,
+ *     },
+ * });
+ * ```
+ */
 export class Cluster extends pulumi.CustomResource {
     /**
      * Get an existing Cluster resource's state with the given name, ID, and optional extra
@@ -46,8 +101,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly instanceId!: pulumi.Output<string>;
     /**
-     * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-     * underscores(_).
+     * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     public readonly instanceName!: pulumi.Output<string>;
     /**
@@ -55,9 +109,10 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly loginSettings!: pulumi.Output<{[key: string]: any}>;
     /**
-     * Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-     * Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-     * cluster Master node internet is enabled.
+     * Whether to enable the cluster Master node public network. Value range:
+     * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+     * - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+     * By default, the cluster Master node internet is enabled.
      */
     public readonly needMasterWan!: pulumi.Output<string | undefined>;
     /**
@@ -89,14 +144,12 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly supportHa!: pulumi.Output<number>;
     /**
-     * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-     * at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-     * length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+     * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+     * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
     public readonly timeSpan!: pulumi.Output<number>;
     /**
-     * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-     * When PayMode is 1, TimeUnit can only take the value m(month).
+     * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
      */
     public readonly timeUnit!: pulumi.Output<string>;
     /**
@@ -207,8 +260,7 @@ export interface ClusterState {
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-     * underscores(_).
+     * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     instanceName?: pulumi.Input<string>;
     /**
@@ -216,9 +268,10 @@ export interface ClusterState {
      */
     loginSettings?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-     * Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-     * cluster Master node internet is enabled.
+     * Whether to enable the cluster Master node public network. Value range:
+     * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+     * - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+     * By default, the cluster Master node internet is enabled.
      */
     needMasterWan?: pulumi.Input<string>;
     /**
@@ -250,14 +303,12 @@ export interface ClusterState {
      */
     supportHa?: pulumi.Input<number>;
     /**
-     * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-     * at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-     * length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+     * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+     * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
     timeSpan?: pulumi.Input<number>;
     /**
-     * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-     * When PayMode is 1, TimeUnit can only take the value m(month).
+     * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
      */
     timeUnit?: pulumi.Input<string>;
     /**
@@ -279,8 +330,7 @@ export interface ClusterArgs {
      */
     extendFsField?: pulumi.Input<string>;
     /**
-     * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-     * underscores(_).
+     * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     instanceName: pulumi.Input<string>;
     /**
@@ -288,9 +338,10 @@ export interface ClusterArgs {
      */
     loginSettings: pulumi.Input<{[key: string]: any}>;
     /**
-     * Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-     * Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-     * cluster Master node internet is enabled.
+     * Whether to enable the cluster Master node public network. Value range:
+     * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+     * - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+     * By default, the cluster Master node internet is enabled.
      */
     needMasterWan?: pulumi.Input<string>;
     /**
@@ -322,14 +373,12 @@ export interface ClusterArgs {
      */
     supportHa: pulumi.Input<number>;
     /**
-     * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-     * at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-     * length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+     * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+     * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
     timeSpan: pulumi.Input<number>;
     /**
-     * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-     * When PayMode is 1, TimeUnit can only take the value m(month).
+     * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
      */
     timeUnit: pulumi.Input<string>;
     /**

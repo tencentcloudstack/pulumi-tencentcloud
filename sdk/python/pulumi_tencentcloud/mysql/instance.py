@@ -54,19 +54,16 @@ class InstanceArgs:
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-               para of the readonly mysql instance will not take effect.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         :param pulumi.Input[int] internet_service: Indicates whether to enable the access to an instance from public network: 0 - No, 1 - Yes.
         :param pulumi.Input[int] intranet_port: Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
-        :param pulumi.Input[int] pay_type: Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
-        :param pulumi.Input[int] period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[str] second_slave_zone: Zone information about second slave instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -271,9 +268,7 @@ class InstanceArgs:
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-        instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-        para of the readonly mysql instance will not take effect.
+        Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         """
         return pulumi.get(self, "force_delete")
 
@@ -333,7 +328,7 @@ class InstanceArgs:
     @pulumi.getter(name="payType")
     def pay_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         """
         return pulumi.get(self, "pay_type")
 
@@ -345,7 +340,7 @@ class InstanceArgs:
     @pulumi.getter
     def period(self) -> Optional[pulumi.Input[int]]:
         """
-        Period of instance. NOTES: Only supported prepaid instance.
+        It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         """
         return pulumi.get(self, "period")
 
@@ -381,8 +376,7 @@ class InstanceArgs:
     @pulumi.getter(name="rootPassword")
     def root_password(self) -> Optional[pulumi.Input[str]]:
         """
-        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        when you purchase read-only instances or disaster recovery instances.
+        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         """
         return pulumi.get(self, "root_password")
 
@@ -523,9 +517,7 @@ class _InstanceState:
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-               para of the readonly mysql instance will not take effect.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         :param pulumi.Input[int] gtid: Indicates whether GTID is enable. `0` - Not enabled; `1` - Enabled.
         :param pulumi.Input[str] instance_name: The name of a mysql instance.
         :param pulumi.Input[str] internet_host: host for public access.
@@ -537,12 +529,11 @@ class _InstanceState:
         :param pulumi.Input[int] mem_size: Memory size (in MB).
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
-        :param pulumi.Input[int] pay_type: Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
-        :param pulumi.Input[int] period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[str] second_slave_zone: Zone information about second slave instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -731,9 +722,7 @@ class _InstanceState:
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-        instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-        para of the readonly mysql instance will not take effect.
+        Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         """
         return pulumi.get(self, "force_delete")
 
@@ -877,7 +866,7 @@ class _InstanceState:
     @pulumi.getter(name="payType")
     def pay_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         """
         return pulumi.get(self, "pay_type")
 
@@ -889,7 +878,7 @@ class _InstanceState:
     @pulumi.getter
     def period(self) -> Optional[pulumi.Input[int]]:
         """
-        Period of instance. NOTES: Only supported prepaid instance.
+        It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         """
         return pulumi.get(self, "period")
 
@@ -925,8 +914,7 @@ class _InstanceState:
     @pulumi.getter(name="rootPassword")
     def root_password(self) -> Optional[pulumi.Input[str]]:
         """
-        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        when you purchase read-only instances or disaster recovery instances.
+        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         """
         return pulumi.get(self, "root_password")
 
@@ -1090,7 +1078,50 @@ class Instance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a mysql instance resource to create master database instances.
+
+        > **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.Instance("default",
+            availability_zone="ap-guangzhou-4",
+            charge_type="POSTPAID",
+            engine_version="5.7",
+            first_slave_zone="ap-guangzhou-4",
+            instance_name="myTestMysql",
+            internet_service=1,
+            intranet_port=3306,
+            mem_size=128000,
+            parameters={
+                "max_connections": "1000",
+            },
+            project_id=201901010001,
+            root_password="********",
+            second_slave_zone="ap-guangzhou-4",
+            security_groups=["sg-ot8eclwz"],
+            slave_deploy_mode=0,
+            slave_sync_mode=1,
+            subnet_id="subnet-9uivyb1g",
+            tags={
+                "name": "test",
+            },
+            volume_size=250,
+            vpc_id="vpc-12mt3l31")
+        ```
+
+        ## Import
+
+        MySQL instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. NOTES: Only supported prepaid instance.
@@ -1101,21 +1132,18 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-               para of the readonly mysql instance will not take effect.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         :param pulumi.Input[str] instance_name: The name of a mysql instance.
         :param pulumi.Input[int] internet_service: Indicates whether to enable the access to an instance from public network: 0 - No, 1 - Yes.
         :param pulumi.Input[int] intranet_port: Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
         :param pulumi.Input[int] mem_size: Memory size (in MB).
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
-        :param pulumi.Input[int] pay_type: Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
-        :param pulumi.Input[int] period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[str] second_slave_zone: Zone information about second slave instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -1132,7 +1160,50 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a mysql instance resource to create master database instances.
+
+        > **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.Instance("default",
+            availability_zone="ap-guangzhou-4",
+            charge_type="POSTPAID",
+            engine_version="5.7",
+            first_slave_zone="ap-guangzhou-4",
+            instance_name="myTestMysql",
+            internet_service=1,
+            intranet_port=3306,
+            mem_size=128000,
+            parameters={
+                "max_connections": "1000",
+            },
+            project_id=201901010001,
+            root_password="********",
+            second_slave_zone="ap-guangzhou-4",
+            security_groups=["sg-ot8eclwz"],
+            slave_deploy_mode=0,
+            slave_sync_mode=1,
+            subnet_id="subnet-9uivyb1g",
+            tags={
+                "name": "test",
+            },
+            volume_size=250,
+            vpc_id="vpc-12mt3l31")
+        ```
+
+        ## Import
+
+        MySQL instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1295,9 +1366,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-               para of the readonly mysql instance will not take effect.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         :param pulumi.Input[int] gtid: Indicates whether GTID is enable. `0` - Not enabled; `1` - Enabled.
         :param pulumi.Input[str] instance_name: The name of a mysql instance.
         :param pulumi.Input[str] internet_host: host for public access.
@@ -1309,12 +1378,11 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] mem_size: Memory size (in MB).
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
-        :param pulumi.Input[int] pay_type: Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
-        :param pulumi.Input[int] period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
-        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-               when you purchase read-only instances or disaster recovery instances.
+        :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[str] second_slave_zone: Zone information about second slave instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -1435,9 +1503,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-        instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-        para of the readonly mysql instance will not take effect.
+        Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         """
         return pulumi.get(self, "force_delete")
 
@@ -1533,7 +1599,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="payType")
     def pay_type(self) -> pulumi.Output[Optional[int]]:
         """
-        Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         """
         return pulumi.get(self, "pay_type")
 
@@ -1541,7 +1607,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def period(self) -> pulumi.Output[Optional[int]]:
         """
-        Period of instance. NOTES: Only supported prepaid instance.
+        It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         """
         return pulumi.get(self, "period")
 
@@ -1565,8 +1631,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="rootPassword")
     def root_password(self) -> pulumi.Output[Optional[str]]:
         """
-        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        when you purchase read-only instances or disaster recovery instances.
+        Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         """
         return pulumi.get(self, "root_password")
 

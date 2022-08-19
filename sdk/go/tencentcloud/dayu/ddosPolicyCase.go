@@ -11,6 +11,61 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create dayu DDoS policy case
+//
+// > **NOTE:** when a dayu DDoS policy case is created, there will be a dayu DDoS policy created with the same prefix name in the same time. This resource only supports Anti-DDoS of type `bgp`, `bgp-multip` and `bgpip`. One Anti-DDoS resource can only has one DDoS policy case resource. When there is only one Anti-DDoS resource and one policy case, those two resource will be bind automatically.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewDdosPolicyCase(ctx, "foo", &Dayu.DdosPolicyCaseArgs{
+// 			AppProtocols: pulumi.StringArray{
+// 				pulumi.String("tcp"),
+// 				pulumi.String("udp"),
+// 			},
+// 			AppType:          pulumi.String("WEB"),
+// 			HasAbroad:        pulumi.String("yes"),
+// 			HasInitiateTcp:   pulumi.String("yes"),
+// 			HasInitiateUdp:   pulumi.String("yes"),
+// 			HasVpn:           pulumi.String("yes"),
+// 			MaxTcpPackageLen: pulumi.String("1200"),
+// 			MaxUdpPackageLen: pulumi.String("1200"),
+// 			MinTcpPackageLen: pulumi.String("1000"),
+// 			MinUdpPackageLen: pulumi.String("1000"),
+// 			PeerTcpPort:      pulumi.String("1111"),
+// 			PeerUdpPort:      pulumi.String("3333"),
+// 			PlatformTypes: pulumi.StringArray{
+// 				pulumi.String("PC"),
+// 				pulumi.String("MOBILE"),
+// 			},
+// 			ResourceType: pulumi.String("bgpip"),
+// 			TcpEndPort:   pulumi.String("2000"),
+// 			TcpFootprint: pulumi.String("511"),
+// 			TcpStartPort: pulumi.String("1000"),
+// 			UdpEndPort:   pulumi.String("4000"),
+// 			UdpFootprint: pulumi.String("500"),
+// 			UdpStartPort: pulumi.String("3000"),
+// 			WebApiUrls: pulumi.StringArray{
+// 				pulumi.String("abc.com"),
+// 				pulumi.String("test.cn/aaa.png"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type DdosPolicyCase struct {
 	pulumi.CustomResourceState
 
@@ -28,11 +83,9 @@ type DdosPolicyCase struct {
 	HasInitiateUdp pulumi.StringPtrOutput `pulumi:"hasInitiateUdp"`
 	// Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
 	HasVpn pulumi.StringPtrOutput `pulumi:"hasVpn"`
-	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_tcp_package_len`.
+	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
 	MaxTcpPackageLen pulumi.StringPtrOutput `pulumi:"maxTcpPackageLen"`
-	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_udp_package_len`.
+	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
 	MaxUdpPackageLen pulumi.StringPtrOutput `pulumi:"maxUdpPackageLen"`
 	// The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
 	MinTcpPackageLen pulumi.StringPtrOutput `pulumi:"minTcpPackageLen"`
@@ -50,13 +103,13 @@ type DdosPolicyCase struct {
 	ResourceType pulumi.StringOutput `pulumi:"resourceType"`
 	// ID of the DDoS policy case.
 	SceneId pulumi.StringOutput `pulumi:"sceneId"`
-	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcp_start_port`.
+	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcpStartPort`.
 	TcpEndPort pulumi.StringOutput `pulumi:"tcpEndPort"`
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	TcpFootprint pulumi.StringPtrOutput `pulumi:"tcpFootprint"`
 	// Start port of the TCP service. Valid value ranges: (0~65535).
 	TcpStartPort pulumi.StringOutput `pulumi:"tcpStartPort"`
-	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udp_start_port`.
+	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udpStartPort`.
 	UdpEndPort pulumi.StringOutput `pulumi:"udpEndPort"`
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	UdpFootprint pulumi.StringPtrOutput `pulumi:"udpFootprint"`
@@ -142,11 +195,9 @@ type ddosPolicyCaseState struct {
 	HasInitiateUdp *string `pulumi:"hasInitiateUdp"`
 	// Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
 	HasVpn *string `pulumi:"hasVpn"`
-	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_tcp_package_len`.
+	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
 	MaxTcpPackageLen *string `pulumi:"maxTcpPackageLen"`
-	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_udp_package_len`.
+	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
 	MaxUdpPackageLen *string `pulumi:"maxUdpPackageLen"`
 	// The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
 	MinTcpPackageLen *string `pulumi:"minTcpPackageLen"`
@@ -164,13 +215,13 @@ type ddosPolicyCaseState struct {
 	ResourceType *string `pulumi:"resourceType"`
 	// ID of the DDoS policy case.
 	SceneId *string `pulumi:"sceneId"`
-	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcp_start_port`.
+	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcpStartPort`.
 	TcpEndPort *string `pulumi:"tcpEndPort"`
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	TcpFootprint *string `pulumi:"tcpFootprint"`
 	// Start port of the TCP service. Valid value ranges: (0~65535).
 	TcpStartPort *string `pulumi:"tcpStartPort"`
-	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udp_start_port`.
+	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udpStartPort`.
 	UdpEndPort *string `pulumi:"udpEndPort"`
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	UdpFootprint *string `pulumi:"udpFootprint"`
@@ -195,11 +246,9 @@ type DdosPolicyCaseState struct {
 	HasInitiateUdp pulumi.StringPtrInput
 	// Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
 	HasVpn pulumi.StringPtrInput
-	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_tcp_package_len`.
+	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
 	MaxTcpPackageLen pulumi.StringPtrInput
-	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_udp_package_len`.
+	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
 	MaxUdpPackageLen pulumi.StringPtrInput
 	// The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
 	MinTcpPackageLen pulumi.StringPtrInput
@@ -217,13 +266,13 @@ type DdosPolicyCaseState struct {
 	ResourceType pulumi.StringPtrInput
 	// ID of the DDoS policy case.
 	SceneId pulumi.StringPtrInput
-	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcp_start_port`.
+	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcpStartPort`.
 	TcpEndPort pulumi.StringPtrInput
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	TcpFootprint pulumi.StringPtrInput
 	// Start port of the TCP service. Valid value ranges: (0~65535).
 	TcpStartPort pulumi.StringPtrInput
-	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udp_start_port`.
+	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udpStartPort`.
 	UdpEndPort pulumi.StringPtrInput
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	UdpFootprint pulumi.StringPtrInput
@@ -250,11 +299,9 @@ type ddosPolicyCaseArgs struct {
 	HasInitiateUdp *string `pulumi:"hasInitiateUdp"`
 	// Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
 	HasVpn *string `pulumi:"hasVpn"`
-	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_tcp_package_len`.
+	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
 	MaxTcpPackageLen *string `pulumi:"maxTcpPackageLen"`
-	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_udp_package_len`.
+	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
 	MaxUdpPackageLen *string `pulumi:"maxUdpPackageLen"`
 	// The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
 	MinTcpPackageLen *string `pulumi:"minTcpPackageLen"`
@@ -270,13 +317,13 @@ type ddosPolicyCaseArgs struct {
 	PlatformTypes []string `pulumi:"platformTypes"`
 	// Type of the resource that the DDoS policy case works for. Valid values: `bgpip`, `bgp` and `bgp-multip`.
 	ResourceType string `pulumi:"resourceType"`
-	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcp_start_port`.
+	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcpStartPort`.
 	TcpEndPort string `pulumi:"tcpEndPort"`
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	TcpFootprint *string `pulumi:"tcpFootprint"`
 	// Start port of the TCP service. Valid value ranges: (0~65535).
 	TcpStartPort string `pulumi:"tcpStartPort"`
-	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udp_start_port`.
+	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udpStartPort`.
 	UdpEndPort string `pulumi:"udpEndPort"`
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	UdpFootprint *string `pulumi:"udpFootprint"`
@@ -300,11 +347,9 @@ type DdosPolicyCaseArgs struct {
 	HasInitiateUdp pulumi.StringPtrInput
 	// Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
 	HasVpn pulumi.StringPtrInput
-	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_tcp_package_len`.
+	// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
 	MaxTcpPackageLen pulumi.StringPtrInput
-	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-	// greater than `min_udp_package_len`.
+	// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
 	MaxUdpPackageLen pulumi.StringPtrInput
 	// The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
 	MinTcpPackageLen pulumi.StringPtrInput
@@ -320,13 +365,13 @@ type DdosPolicyCaseArgs struct {
 	PlatformTypes pulumi.StringArrayInput
 	// Type of the resource that the DDoS policy case works for. Valid values: `bgpip`, `bgp` and `bgp-multip`.
 	ResourceType pulumi.StringInput
-	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcp_start_port`.
+	// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcpStartPort`.
 	TcpEndPort pulumi.StringInput
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	TcpFootprint pulumi.StringPtrInput
 	// Start port of the TCP service. Valid value ranges: (0~65535).
 	TcpStartPort pulumi.StringInput
-	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udp_start_port`.
+	// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udpStartPort`.
 	UdpEndPort pulumi.StringInput
 	// The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
 	UdpFootprint pulumi.StringPtrInput
@@ -458,14 +503,12 @@ func (o DdosPolicyCaseOutput) HasVpn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyCase) pulumi.StringPtrOutput { return v.HasVpn }).(pulumi.StringPtrOutput)
 }
 
-// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-// greater than `min_tcp_package_len`.
+// The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
 func (o DdosPolicyCaseOutput) MaxTcpPackageLen() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyCase) pulumi.StringPtrOutput { return v.MaxTcpPackageLen }).(pulumi.StringPtrOutput)
 }
 
-// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-// greater than `min_udp_package_len`.
+// The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
 func (o DdosPolicyCaseOutput) MaxUdpPackageLen() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyCase) pulumi.StringPtrOutput { return v.MaxUdpPackageLen }).(pulumi.StringPtrOutput)
 }
@@ -510,7 +553,7 @@ func (o DdosPolicyCaseOutput) SceneId() pulumi.StringOutput {
 	return o.ApplyT(func(v *DdosPolicyCase) pulumi.StringOutput { return v.SceneId }).(pulumi.StringOutput)
 }
 
-// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcp_start_port`.
+// End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcpStartPort`.
 func (o DdosPolicyCaseOutput) TcpEndPort() pulumi.StringOutput {
 	return o.ApplyT(func(v *DdosPolicyCase) pulumi.StringOutput { return v.TcpEndPort }).(pulumi.StringOutput)
 }
@@ -525,7 +568,7 @@ func (o DdosPolicyCaseOutput) TcpStartPort() pulumi.StringOutput {
 	return o.ApplyT(func(v *DdosPolicyCase) pulumi.StringOutput { return v.TcpStartPort }).(pulumi.StringOutput)
 }
 
-// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udp_start_port`.
+// End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udpStartPort`.
 func (o DdosPolicyCaseOutput) UdpEndPort() pulumi.StringOutput {
 	return o.ApplyT(func(v *DdosPolicyCase) pulumi.StringOutput { return v.UdpEndPort }).(pulumi.StringOutput)
 }

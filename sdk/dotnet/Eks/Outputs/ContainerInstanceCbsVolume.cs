@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ContainerInstanceCbsVolume
     {
+        /// <summary>
+        /// ID of CBS.
+        /// </summary>
         public readonly string DiskId;
+        /// <summary>
+        /// Name of CBS volume.
+        /// </summary>
         public readonly string Name;
 
         [OutputConstructor]

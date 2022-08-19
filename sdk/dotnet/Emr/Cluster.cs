@@ -9,6 +9,76 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Emr
 {
+    /// <summary>
+    /// Provide a resource to create a emr cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var emrrrr = new Tencentcloud.Emr.Cluster("emrrrr", new Tencentcloud.Emr.ClusterArgs
+    ///         {
+    ///             ProductId = 4,
+    ///             DisplayStrategy = "clusterList",
+    ///             VpcSettings = 
+    ///             {
+    ///                 { "vpc_id", "vpc-fuwly8x5" },
+    ///                 { "subnet_id", "subnet-d830wfso" },
+    ///             },
+    ///             Softwares = 
+    ///             {
+    ///                 "hadoop-2.8.4",
+    ///                 "zookeeper-3.4.9",
+    ///             },
+    ///             SupportHa = 0,
+    ///             InstanceName = "emr-test",
+    ///             ResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecArgs
+    ///             {
+    ///                 MasterResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecMasterResourceSpecArgs
+    ///                 {
+    ///                     MemSize = 8192,
+    ///                     Cpu = 4,
+    ///                     DiskSize = 100,
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     Spec = "CVM.S2",
+    ///                     StorageType = 5,
+    ///                 },
+    ///                 CoreResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecCoreResourceSpecArgs
+    ///                 {
+    ///                     MemSize = 8192,
+    ///                     Cpu = 4,
+    ///                     DiskSize = 100,
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     Spec = "CVM.S2",
+    ///                     StorageType = 5,
+    ///                 },
+    ///                 MasterCount = 1,
+    ///                 CoreCount = 2,
+    ///             },
+    ///             LoginSettings = 
+    ///             {
+    ///                 { "password", "Tencent@cloud123" },
+    ///             },
+    ///             TimeSpan = 1,
+    ///             TimeUnit = "m",
+    ///             PayMode = 1,
+    ///             Placement = 
+    ///             {
+    ///                 { "zone", "ap-guangzhou-3" },
+    ///                 { "project_id", 0 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Emr/cluster:Cluster")]
     public partial class Cluster : Pulumi.CustomResource
     {
@@ -31,8 +101,7 @@ namespace Pulumi.Tencentcloud.Emr
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-        /// underscores(_).
+        /// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
@@ -44,9 +113,10 @@ namespace Pulumi.Tencentcloud.Emr
         public Output<ImmutableDictionary<string, object>> LoginSettings { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-        /// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-        /// cluster Master node internet is enabled.
+        /// Whether to enable the cluster Master node public network. Value range:
+        /// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+        /// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+        /// By default, the cluster Master node internet is enabled.
         /// </summary>
         [Output("needMasterWan")]
         public Output<string?> NeedMasterWan { get; private set; } = null!;
@@ -94,16 +164,14 @@ namespace Pulumi.Tencentcloud.Emr
         public Output<int> SupportHa { get; private set; } = null!;
 
         /// <summary>
-        /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-        /// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-        /// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+        /// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         /// </summary>
         [Output("timeSpan")]
         public Output<int> TimeSpan { get; private set; } = null!;
 
         /// <summary>
-        /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-        /// When PayMode is 1, TimeUnit can only take the value m(month).
+        /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         /// </summary>
         [Output("timeUnit")]
         public Output<string> TimeUnit { get; private set; } = null!;
@@ -173,8 +241,7 @@ namespace Pulumi.Tencentcloud.Emr
         public Input<string>? ExtendFsField { get; set; }
 
         /// <summary>
-        /// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-        /// underscores(_).
+        /// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         /// </summary>
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
@@ -192,9 +259,10 @@ namespace Pulumi.Tencentcloud.Emr
         }
 
         /// <summary>
-        /// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-        /// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-        /// cluster Master node internet is enabled.
+        /// Whether to enable the cluster Master node public network. Value range:
+        /// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+        /// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+        /// By default, the cluster Master node internet is enabled.
         /// </summary>
         [Input("needMasterWan")]
         public Input<string>? NeedMasterWan { get; set; }
@@ -254,16 +322,14 @@ namespace Pulumi.Tencentcloud.Emr
         public Input<int> SupportHa { get; set; } = null!;
 
         /// <summary>
-        /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-        /// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-        /// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+        /// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         /// </summary>
         [Input("timeSpan", required: true)]
         public Input<int> TimeSpan { get; set; } = null!;
 
         /// <summary>
-        /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-        /// When PayMode is 1, TimeUnit can only take the value m(month).
+        /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         /// </summary>
         [Input("timeUnit", required: true)]
         public Input<string> TimeUnit { get; set; } = null!;
@@ -306,8 +372,7 @@ namespace Pulumi.Tencentcloud.Emr
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-        /// underscores(_).
+        /// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
@@ -325,9 +390,10 @@ namespace Pulumi.Tencentcloud.Emr
         }
 
         /// <summary>
-        /// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-        /// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-        /// cluster Master node internet is enabled.
+        /// Whether to enable the cluster Master node public network. Value range:
+        /// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+        /// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+        /// By default, the cluster Master node internet is enabled.
         /// </summary>
         [Input("needMasterWan")]
         public Input<string>? NeedMasterWan { get; set; }
@@ -387,16 +453,14 @@ namespace Pulumi.Tencentcloud.Emr
         public Input<int>? SupportHa { get; set; }
 
         /// <summary>
-        /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-        /// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-        /// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+        /// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         /// </summary>
         [Input("timeSpan")]
         public Input<int>? TimeSpan { get; set; }
 
         /// <summary>
-        /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-        /// When PayMode is 1, TimeUnit can only take the value m(month).
+        /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         /// </summary>
         [Input("timeUnit")]
         public Input<string>? TimeUnit { get; set; }

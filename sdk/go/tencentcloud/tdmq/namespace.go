@@ -11,6 +11,48 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a tdmq namespace.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
+// 			ClusterName: pulumi.String("example"),
+// 			Remark:      pulumi.String("this is description."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tdmq.NewNamespace(ctx, "bar", &Tdmq.NamespaceArgs{
+// 			ClusterId:   foo.ID(),
+// 			EnvironName: pulumi.String("example"),
+// 			MsgTtl:      pulumi.Int(300),
+// 			Remark:      pulumi.String("this is description."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Tdmq namespace can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+// ```
 type Namespace struct {
 	pulumi.CustomResourceState
 

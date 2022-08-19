@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a VOD sub application.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Vod.SubApplication("foo", {
+ *     description: "this is sub application",
+ *     status: "On",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VOD super player config can be imported using the name+, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+ * ```
+ */
 export class SubApplication extends pulumi.CustomResource {
     /**
      * Get an existing SubApplication resource's state with the given name, ID, and optional extra
@@ -41,8 +64,7 @@ export class SubApplication extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-     * must be unique under a user.
+     * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -95,8 +117,7 @@ export interface SubApplicationState {
      */
     description?: pulumi.Input<string>;
     /**
-     * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-     * must be unique under a user.
+     * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
      */
     name?: pulumi.Input<string>;
     /**
@@ -114,8 +135,7 @@ export interface SubApplicationArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-     * must be unique under a user.
+     * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
      */
     name?: pulumi.Input<string>;
     /**

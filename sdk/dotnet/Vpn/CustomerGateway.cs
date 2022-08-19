@@ -9,6 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpn
 {
+    /// <summary>
+    /// Provides a resource to create a VPN customer gateway.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vpn.CustomerGateway("foo", new Tencentcloud.Vpn.CustomerGatewayArgs
+    ///         {
+    ///             PublicIpAddress = "1.1.1.1",
+    ///             Tags = 
+    ///             {
+    ///                 { "tag", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VPN customer gateway can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/customerGateway:CustomerGateway")]
     public partial class CustomerGateway : Pulumi.CustomResource
     {

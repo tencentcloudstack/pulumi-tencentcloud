@@ -12,15 +12,27 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyWatermarkKeyArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Content of the watermark.
+        /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
+        /// <summary>
+        /// Create time of the DDoS policy.
+        /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
 
+        /// <summary>
+        /// Id of the watermark.
+        /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        /// </summary>
         [Input("openSwitch")]
         public Input<bool>? OpenSwitch { get; set; }
 

@@ -20,8 +20,7 @@ class SubApplicationArgs:
         The set of arguments for constructing a SubApplication resource.
         :param pulumi.Input[str] status: Sub appliaction status.
         :param pulumi.Input[str] description: Sub application description.
-        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-               must be unique under a user.
+        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         """
         pulumi.set(__self__, "status", status)
         if description is not None:
@@ -57,8 +56,7 @@ class SubApplicationArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-        must be unique under a user.
+        Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         """
         return pulumi.get(self, "name")
 
@@ -78,8 +76,7 @@ class _SubApplicationState:
         Input properties used for looking up and filtering SubApplication resources.
         :param pulumi.Input[str] create_time: The time when the sub application was created.
         :param pulumi.Input[str] description: Sub application description.
-        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-               must be unique under a user.
+        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         :param pulumi.Input[str] status: Sub appliaction status.
         """
         if create_time is not None:
@@ -119,8 +116,7 @@ class _SubApplicationState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-        must be unique under a user.
+        Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         """
         return pulumi.get(self, "name")
 
@@ -151,12 +147,31 @@ class SubApplication(pulumi.CustomResource):
                  status: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SubApplication resource with the given unique name, props, and options.
+        Provide a resource to create a VOD sub application.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vod.SubApplication("foo",
+            description="this is sub application",
+            status="On")
+        ```
+
+        ## Import
+
+        VOD super player config can be imported using the name+, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Sub application description.
-        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-               must be unique under a user.
+        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         :param pulumi.Input[str] status: Sub appliaction status.
         """
         ...
@@ -166,7 +181,27 @@ class SubApplication(pulumi.CustomResource):
                  args: SubApplicationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SubApplication resource with the given unique name, props, and options.
+        Provide a resource to create a VOD sub application.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vod.SubApplication("foo",
+            description="this is sub application",
+            status="On")
+        ```
+
+        ## Import
+
+        VOD super player config can be imported using the name+, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+        ```
+
         :param str resource_name: The name of the resource.
         :param SubApplicationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -226,8 +261,7 @@ class SubApplication(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] create_time: The time when the sub application was created.
         :param pulumi.Input[str] description: Sub application description.
-        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-               must be unique under a user.
+        :param pulumi.Input[str] name: Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         :param pulumi.Input[str] status: Sub appliaction status.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -260,8 +294,7 @@ class SubApplication(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and
-        must be unique under a user.
+        Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
         """
         return pulumi.get(self, "name")
 

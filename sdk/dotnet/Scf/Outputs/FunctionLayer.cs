@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Scf.Outputs
     [OutputType]
     public sealed class FunctionLayer
     {
+        /// <summary>
+        /// The name of Layer.
+        /// </summary>
         public readonly string LayerName;
+        /// <summary>
+        /// The version of layer.
+        /// </summary>
         public readonly int LayerVersion;
 
         [OutputConstructor]

@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Elasticsearch.Outputs
     [OutputType]
     public sealed class InstanceWebNodeTypeInfo
     {
+        /// <summary>
+        /// Visual node number.
+        /// </summary>
         public readonly int NodeNum;
+        /// <summary>
+        /// Visual node specifications.
+        /// </summary>
         public readonly string NodeType;
 
         [OutputConstructor]

@@ -11,6 +11,49 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to manage CDH instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		_, err := Cdh.NewInstance(ctx, "foo", &Cdh.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			HostType:         pulumi.String("HC20"),
+// 			ChargeType:       pulumi.String("PREPAID"),
+// 			PrepaidPeriod:    pulumi.Int(1),
+// 			HostName:         pulumi.String("test"),
+// 			PrepaidRenewFlag: pulumi.String("NOTIFY_AND_MANUAL_RENEW"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CDH instance can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -24,7 +67,7 @@ type Instance struct {
 	CvmInstanceIds pulumi.StringArrayOutput `pulumi:"cvmInstanceIds"`
 	// Expired time of the instance.
 	ExpiredTime pulumi.StringOutput `pulumi:"expiredTime"`
-	// The name of the CDH instance. The max length of host_name is 60.
+	// The name of the CDH instance. The max length of hostName is 60.
 	HostName pulumi.StringOutput `pulumi:"hostName"`
 	// An information list of host resource. Each element contains the following attributes:
 	HostResources InstanceHostResourceArrayOutput `pulumi:"hostResources"`
@@ -32,14 +75,9 @@ type Instance struct {
 	HostState pulumi.StringOutput `pulumi:"hostState"`
 	// The type of the CDH instance.
 	HostType pulumi.StringPtrOutput `pulumi:"hostType"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
-	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-	// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-	// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-	// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag pulumi.StringOutput `pulumi:"prepaidRenewFlag"`
 	// The project the instance belongs to, default to 0.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
@@ -87,7 +125,7 @@ type instanceState struct {
 	CvmInstanceIds []string `pulumi:"cvmInstanceIds"`
 	// Expired time of the instance.
 	ExpiredTime *string `pulumi:"expiredTime"`
-	// The name of the CDH instance. The max length of host_name is 60.
+	// The name of the CDH instance. The max length of hostName is 60.
 	HostName *string `pulumi:"hostName"`
 	// An information list of host resource. Each element contains the following attributes:
 	HostResources []InstanceHostResource `pulumi:"hostResources"`
@@ -95,14 +133,9 @@ type instanceState struct {
 	HostState *string `pulumi:"hostState"`
 	// The type of the CDH instance.
 	HostType *string `pulumi:"hostType"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-	// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-	// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-	// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// The project the instance belongs to, default to 0.
 	ProjectId *int `pulumi:"projectId"`
@@ -119,7 +152,7 @@ type InstanceState struct {
 	CvmInstanceIds pulumi.StringArrayInput
 	// Expired time of the instance.
 	ExpiredTime pulumi.StringPtrInput
-	// The name of the CDH instance. The max length of host_name is 60.
+	// The name of the CDH instance. The max length of hostName is 60.
 	HostName pulumi.StringPtrInput
 	// An information list of host resource. Each element contains the following attributes:
 	HostResources InstanceHostResourceArrayInput
@@ -127,14 +160,9 @@ type InstanceState struct {
 	HostState pulumi.StringPtrInput
 	// The type of the CDH instance.
 	HostType pulumi.StringPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-	// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-	// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-	// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// The project the instance belongs to, default to 0.
 	ProjectId pulumi.IntPtrInput
@@ -149,18 +177,13 @@ type instanceArgs struct {
 	AvailabilityZone string `pulumi:"availabilityZone"`
 	// The charge type of instance. Valid values are `PREPAID`. The default is `PREPAID`.
 	ChargeType *string `pulumi:"chargeType"`
-	// The name of the CDH instance. The max length of host_name is 60.
+	// The name of the CDH instance. The max length of hostName is 60.
 	HostName *string `pulumi:"hostName"`
 	// The type of the CDH instance.
 	HostType *string `pulumi:"hostType"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-	// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-	// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-	// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// The project the instance belongs to, default to 0.
 	ProjectId *int `pulumi:"projectId"`
@@ -172,18 +195,13 @@ type InstanceArgs struct {
 	AvailabilityZone pulumi.StringInput
 	// The charge type of instance. Valid values are `PREPAID`. The default is `PREPAID`.
 	ChargeType pulumi.StringPtrInput
-	// The name of the CDH instance. The max length of host_name is 60.
+	// The name of the CDH instance. The max length of hostName is 60.
 	HostName pulumi.StringPtrInput
 	// The type of the CDH instance.
 	HostType pulumi.StringPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-	// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-	// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-	// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-	// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// The project the instance belongs to, default to 0.
 	ProjectId pulumi.IntPtrInput
@@ -301,7 +319,7 @@ func (o InstanceOutput) ExpiredTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.ExpiredTime }).(pulumi.StringOutput)
 }
 
-// The name of the CDH instance. The max length of host_name is 60.
+// The name of the CDH instance. The max length of hostName is 60.
 func (o InstanceOutput) HostName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.HostName }).(pulumi.StringOutput)
 }
@@ -321,17 +339,12 @@ func (o InstanceOutput) HostType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.HostType }).(pulumi.StringPtrOutput)
 }
 
-// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 func (o InstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PrepaidPeriod }).(pulumi.IntPtrOutput)
 }
 
-// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
 func (o InstanceOutput) PrepaidRenewFlag() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.PrepaidRenewFlag }).(pulumi.StringOutput)
 }

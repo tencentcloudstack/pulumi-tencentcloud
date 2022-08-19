@@ -14,15 +14,25 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
     {
         [Input("customLabels")]
         private InputList<string>? _customLabels;
+
+        /// <summary>
+        /// Metadata info.
+        /// </summary>
         public InputList<string> CustomLabels
         {
             get => _customLabels ?? (_customLabels = new InputList<string>());
             set => _customLabels = value;
         }
 
+        /// <summary>
+        /// Log file name.
+        /// </summary>
         [Input("filePattern", required: true)]
         public Input<string> FilePattern { get; set; } = null!;
 
+        /// <summary>
+        /// Log file dir.
+        /// </summary>
         [Input("logPath", required: true)]
         public Input<string> LogPath { get; set; } = null!;
 

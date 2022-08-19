@@ -9,8 +9,46 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
-    [TencentcloudResourceType("tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy")]
-    public partial class CCHttpsPolicy : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create a dayu CC self-define https policy
+    /// 
+    /// &gt; **NOTE:** creating CC self-define https policy need a valid resource `tencentcloud.Dayu.L7Rule`; The resource only support Anti-DDoS of resource type `bgpip`.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var testPolicy = new Tencentcloud.Dayu.CcHttpsPolicy("testPolicy", new Tencentcloud.Dayu.CcHttpsPolicyArgs
+    ///         {
+    ///             ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
+    ///             ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
+    ///             RuleId = tencentcloud_dayu_l7_rule.Test_rule.Rule_id,
+    ///             Domain = tencentcloud_dayu_l7_rule.Test_rule.Domain,
+    ///             Action = "drop",
+    ///             Switch = true,
+    ///             RuleLists = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcHttpsPolicyRuleListArgs
+    ///                 {
+    ///                     Skey = "cgi",
+    ///                     Operator = "include",
+    ///                     Value = "123",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy")]
+    public partial class CcHttpsPolicy : Pulumi.CustomResource
     {
         /// <summary>
         /// Action mode. Valid values are `alg` and `drop`.
@@ -70,7 +108,7 @@ namespace Pulumi.Tencentcloud.Dayu
         /// Rule list of the CC self-define https policy.
         /// </summary>
         [Output("ruleLists")]
-        public Output<ImmutableArray<Outputs.CCHttpsPolicyRuleList>> RuleLists { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CcHttpsPolicyRuleList>> RuleLists { get; private set; } = null!;
 
         /// <summary>
         /// Indicate the CC self-define https policy takes effect or not.
@@ -80,19 +118,19 @@ namespace Pulumi.Tencentcloud.Dayu
 
 
         /// <summary>
-        /// Create a CCHttpsPolicy resource with the given unique name, arguments, and options.
+        /// Create a CcHttpsPolicy resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public CCHttpsPolicy(string name, CCHttpsPolicyArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy", name, args ?? new CCHttpsPolicyArgs(), MakeResourceOptions(options, ""))
+        public CcHttpsPolicy(string name, CcHttpsPolicyArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy", name, args ?? new CcHttpsPolicyArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private CCHttpsPolicy(string name, Input<string> id, CCHttpsPolicyState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy", name, state, MakeResourceOptions(options, id))
+        private CcHttpsPolicy(string name, Input<string> id, CcHttpsPolicyState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -108,7 +146,7 @@ namespace Pulumi.Tencentcloud.Dayu
             return merged;
         }
         /// <summary>
-        /// Get an existing CCHttpsPolicy resource's state with the given name, ID, and optional extra
+        /// Get an existing CcHttpsPolicy resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -116,13 +154,13 @@ namespace Pulumi.Tencentcloud.Dayu
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static CCHttpsPolicy Get(string name, Input<string> id, CCHttpsPolicyState? state = null, CustomResourceOptions? options = null)
+        public static CcHttpsPolicy Get(string name, Input<string> id, CcHttpsPolicyState? state = null, CustomResourceOptions? options = null)
         {
-            return new CCHttpsPolicy(name, id, state, options);
+            return new CcHttpsPolicy(name, id, state, options);
         }
     }
 
-    public sealed class CCHttpsPolicyArgs : Pulumi.ResourceArgs
+    public sealed class CcHttpsPolicyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action mode. Valid values are `alg` and `drop`.
@@ -161,14 +199,14 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string> RuleId { get; set; } = null!;
 
         [Input("ruleLists", required: true)]
-        private InputList<Inputs.CCHttpsPolicyRuleListArgs>? _ruleLists;
+        private InputList<Inputs.CcHttpsPolicyRuleListArgs>? _ruleLists;
 
         /// <summary>
         /// Rule list of the CC self-define https policy.
         /// </summary>
-        public InputList<Inputs.CCHttpsPolicyRuleListArgs> RuleLists
+        public InputList<Inputs.CcHttpsPolicyRuleListArgs> RuleLists
         {
-            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CCHttpsPolicyRuleListArgs>());
+            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CcHttpsPolicyRuleListArgs>());
             set => _ruleLists = value;
         }
 
@@ -178,12 +216,12 @@ namespace Pulumi.Tencentcloud.Dayu
         [Input("switch")]
         public Input<bool>? Switch { get; set; }
 
-        public CCHttpsPolicyArgs()
+        public CcHttpsPolicyArgs()
         {
         }
     }
 
-    public sealed class CCHttpsPolicyState : Pulumi.ResourceArgs
+    public sealed class CcHttpsPolicyState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action mode. Valid values are `alg` and `drop`.
@@ -246,14 +284,14 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? RuleId { get; set; }
 
         [Input("ruleLists")]
-        private InputList<Inputs.CCHttpsPolicyRuleListGetArgs>? _ruleLists;
+        private InputList<Inputs.CcHttpsPolicyRuleListGetArgs>? _ruleLists;
 
         /// <summary>
         /// Rule list of the CC self-define https policy.
         /// </summary>
-        public InputList<Inputs.CCHttpsPolicyRuleListGetArgs> RuleLists
+        public InputList<Inputs.CcHttpsPolicyRuleListGetArgs> RuleLists
         {
-            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CCHttpsPolicyRuleListGetArgs>());
+            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CcHttpsPolicyRuleListGetArgs>());
             set => _ruleLists = value;
         }
 
@@ -263,7 +301,7 @@ namespace Pulumi.Tencentcloud.Dayu
         [Input("switch")]
         public Input<bool>? Switch { get; set; }
 
-        public CCHttpsPolicyState()
+        public CcHttpsPolicyState()
         {
         }
     }

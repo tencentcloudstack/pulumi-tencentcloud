@@ -9,11 +9,11 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'InstancesEipListResult',
+    'GetInstanceEipListResult',
 ]
 
 @pulumi.output_type
-class InstancesEipListResult(dict):
+class GetInstanceEipListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  eip_id: str,
@@ -24,6 +24,17 @@ class InstancesEipListResult(dict):
                  public_ip: str,
                  status: str,
                  tags: Mapping[str, Any]):
+        """
+        :param str create_time: Creation time of the EIP.
+        :param str eip_id: ID of the EIP to be queried.
+        :param str eip_name: Name of the EIP to be queried.
+        :param str eip_type: Type of the EIP.
+        :param str eni_id: The eni id to bind with the EIP.
+        :param str instance_id: The instance id to bind with the EIP.
+        :param str public_ip: The elastic ip address.
+        :param str status: The EIP current status.
+        :param Mapping[str, Any] tags: The tags of EIP.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "eip_id", eip_id)
         pulumi.set(__self__, "eip_name", eip_name)
@@ -37,46 +48,73 @@ class InstancesEipListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the EIP.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="eipId")
     def eip_id(self) -> str:
+        """
+        ID of the EIP to be queried.
+        """
         return pulumi.get(self, "eip_id")
 
     @property
     @pulumi.getter(name="eipName")
     def eip_name(self) -> str:
+        """
+        Name of the EIP to be queried.
+        """
         return pulumi.get(self, "eip_name")
 
     @property
     @pulumi.getter(name="eipType")
     def eip_type(self) -> str:
+        """
+        Type of the EIP.
+        """
         return pulumi.get(self, "eip_type")
 
     @property
     @pulumi.getter(name="eniId")
     def eni_id(self) -> str:
+        """
+        The eni id to bind with the EIP.
+        """
         return pulumi.get(self, "eni_id")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        The instance id to bind with the EIP.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> str:
+        """
+        The elastic ip address.
+        """
         return pulumi.get(self, "public_ip")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        The EIP current status.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        The tags of EIP.
+        """
         return pulumi.get(self, "tags")
 
 

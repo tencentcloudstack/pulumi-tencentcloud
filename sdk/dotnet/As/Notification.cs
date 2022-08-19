@@ -9,13 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.As
 {
+    /// <summary>
+    /// Provides a resource for an AS (Auto scaling) notification.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var asNotification = new Tencentcloud.As.Notification("asNotification", new Tencentcloud.As.NotificationArgs
+    ///         {
+    ///             NotificationTypes = 
+    ///             {
+    ///                 "SCALE_OUT_FAILED",
+    ///                 "SCALE_IN_SUCCESSFUL",
+    ///                 "SCALE_IN_FAILED",
+    ///                 "REPLACE_UNHEALTHY_INSTANCE_FAILED",
+    ///             },
+    ///             NotificationUserGroupIds = 
+    ///             {
+    ///                 "76955",
+    ///             },
+    ///             ScalingGroupId = "sg-12af45",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:As/notification:Notification")]
     public partial class Notification : Pulumi.CustomResource
     {
         /// <summary>
-        /// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-        /// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-        /// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        /// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         /// </summary>
         [Output("notificationTypes")]
         public Output<ImmutableArray<string>> NotificationTypes { get; private set; } = null!;
@@ -82,9 +113,7 @@ namespace Pulumi.Tencentcloud.As
         private InputList<string>? _notificationTypes;
 
         /// <summary>
-        /// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-        /// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-        /// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        /// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         /// </summary>
         public InputList<string> NotificationTypes
         {
@@ -121,9 +150,7 @@ namespace Pulumi.Tencentcloud.As
         private InputList<string>? _notificationTypes;
 
         /// <summary>
-        /// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-        /// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-        /// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+        /// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
         /// </summary>
         public InputList<string> NotificationTypes
         {

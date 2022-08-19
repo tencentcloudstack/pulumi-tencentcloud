@@ -35,23 +35,17 @@ class InstanceArgs:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Instance resource.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
-        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-               instance.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-               2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-               Enterprise). Default is `2008R2`.
+        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-               Sunday.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
         :param pulumi.Input[bool] multi_zones: Indicate whether to deploy across availability zones.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
@@ -105,8 +99,7 @@ class InstanceArgs:
     @pulumi.getter
     def memory(self) -> pulumi.Input[int]:
         """
-        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        provides.
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -118,8 +111,7 @@ class InstanceArgs:
     @pulumi.getter
     def storage(self) -> pulumi.Input[int]:
         """
-        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 
@@ -131,8 +123,7 @@ class InstanceArgs:
     @pulumi.getter(name="autoRenew")
     def auto_renew(self) -> Optional[pulumi.Input[int]]:
         """
-        Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-        instance.
+        Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         """
         return pulumi.get(self, "auto_renew")
 
@@ -180,9 +171,7 @@ class InstanceArgs:
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-        2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-        Enterprise). Default is `2008R2`.
+        Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         """
         return pulumi.get(self, "engine_version")
 
@@ -230,8 +219,7 @@ class InstanceArgs:
     @pulumi.getter(name="maintenanceWeekSets")
     def maintenance_week_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
         """
-        A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-        Sunday.
+        A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
         """
         return pulumi.get(self, "maintenance_week_sets")
 
@@ -378,34 +366,25 @@ class _InstanceState:
                  vport: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
-        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-               instance.
+        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the SQL Server instance.
-        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-               2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-               Enterprise). Default is `2008R2`.
+        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-               Sunday.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[bool] multi_zones: Indicate whether to deploy across availability zones.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
-        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-               refers to an instance which is not read-only and has no RO group.
+        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
-        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-               recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-               12 for rebooting.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[str] vip: IP for private access.
@@ -468,8 +447,7 @@ class _InstanceState:
     @pulumi.getter(name="autoRenew")
     def auto_renew(self) -> Optional[pulumi.Input[int]]:
         """
-        Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-        instance.
+        Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         """
         return pulumi.get(self, "auto_renew")
 
@@ -529,9 +507,7 @@ class _InstanceState:
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-        2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-        Enterprise). Default is `2008R2`.
+        Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         """
         return pulumi.get(self, "engine_version")
 
@@ -579,8 +555,7 @@ class _InstanceState:
     @pulumi.getter(name="maintenanceWeekSets")
     def maintenance_week_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
         """
-        A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-        Sunday.
+        A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
         """
         return pulumi.get(self, "maintenance_week_sets")
 
@@ -592,8 +567,7 @@ class _InstanceState:
     @pulumi.getter
     def memory(self) -> Optional[pulumi.Input[int]]:
         """
-        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        provides.
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -653,8 +627,7 @@ class _InstanceState:
     @pulumi.getter(name="roFlag")
     def ro_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-        refers to an instance which is not read-only and has no RO group.
+        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         """
         return pulumi.get(self, "ro_flag")
 
@@ -678,9 +651,7 @@ class _InstanceState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[int]]:
         """
-        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-        recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-        12 for rebooting.
+        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
         """
         return pulumi.get(self, "status")
 
@@ -692,8 +663,7 @@ class _InstanceState:
     @pulumi.getter
     def storage(self) -> Optional[pulumi.Input[int]]:
         """
-        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 
@@ -801,31 +771,50 @@ class Instance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create SQL Server instance
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.Instance("foo",
+            availability_zone=var["availability_zone"],
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id="vpc-409mvdvv",
+            subnet_id="subnet-nf9n81ps",
+            project_id=123,
+            memory=2,
+            storage=100)
+        ```
+
+        ## Import
+
+        SQL Server instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-               instance.
+        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-               2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-               Enterprise). Default is `2008R2`.
+        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-               Sunday.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[bool] multi_zones: Indicate whether to deploy across availability zones.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
@@ -838,7 +827,32 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create SQL Server instance
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.Instance("foo",
+            availability_zone=var["availability_zone"],
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id="vpc-409mvdvv",
+            subnet_id="subnet-nf9n81ps",
+            project_id=123,
+            memory=2,
+            storage=100)
+        ```
+
+        ## Import
+
+        SQL Server instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -957,34 +971,25 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-               instance.
+        :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the SQL Server instance.
-        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-               2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-               Enterprise). Default is `2008R2`.
+        :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-               Sunday.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[bool] multi_zones: Indicate whether to deploy across availability zones.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
-        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-               refers to an instance which is not read-only and has no RO group.
+        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
-        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-               recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-               12 for rebooting.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[str] vip: IP for private access.
@@ -1027,8 +1032,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="autoRenew")
     def auto_renew(self) -> pulumi.Output[Optional[int]]:
         """
-        Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid
-        instance.
+        Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
         """
         return pulumi.get(self, "auto_renew")
 
@@ -1068,9 +1072,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> pulumi.Output[Optional[str]]:
         """
-        Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server
-        2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017
-        Enterprise). Default is `2008R2`.
+        Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         """
         return pulumi.get(self, "engine_version")
 
@@ -1102,8 +1104,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="maintenanceWeekSets")
     def maintenance_week_sets(self) -> pulumi.Output[Sequence[int]]:
         """
-        A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and
-        Sunday.
+        A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
         """
         return pulumi.get(self, "maintenance_week_sets")
 
@@ -1111,8 +1112,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def memory(self) -> pulumi.Output[int]:
         """
-        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        provides.
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -1152,8 +1152,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="roFlag")
     def ro_flag(self) -> pulumi.Output[str]:
         """
-        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-        refers to an instance which is not read-only and has no RO group.
+        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         """
         return pulumi.get(self, "ro_flag")
 
@@ -1169,9 +1168,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
-        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-        recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-        12 for rebooting.
+        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
         """
         return pulumi.get(self, "status")
 
@@ -1179,8 +1176,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def storage(self) -> pulumi.Output[int]:
         """
-        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 

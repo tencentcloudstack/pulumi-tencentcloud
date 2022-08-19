@@ -33,13 +33,13 @@ class HttpDomainArgs:
         :param pulumi.Input[bool] basic_auth: Indicates whether basic authentication is enable, default value is `false`.
         :param pulumi.Input[str] basic_auth_id: ID of the basic authentication.
         :param pulumi.Input[str] certificate_id: ID of the server certificate, default value is `default`.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate, default value is `default`.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the poly client certificate.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
         :param pulumi.Input[str] gaap_auth_id: ID of the SSL certificate.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
-        :param pulumi.Input[str] realserver_certificate_id: CA certificate ID of the realserver.
+        :param pulumi.Input[str] realserver_certificate_id: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] realserver_certificate_ids: CA certificate ID list of the realserver.
         """
         pulumi.set(__self__, "domain", domain)
@@ -137,7 +137,7 @@ class HttpDomainArgs:
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the client certificate, default value is `default`.
+        It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         """
         return pulumi.get(self, "client_certificate_id")
 
@@ -209,7 +209,7 @@ class HttpDomainArgs:
     @pulumi.getter(name="realserverCertificateId")
     def realserver_certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        CA certificate ID of the realserver.
+        It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         """
         return pulumi.get(self, "realserver_certificate_id")
 
@@ -251,7 +251,7 @@ class _HttpDomainState:
         :param pulumi.Input[bool] basic_auth: Indicates whether basic authentication is enable, default value is `false`.
         :param pulumi.Input[str] basic_auth_id: ID of the basic authentication.
         :param pulumi.Input[str] certificate_id: ID of the server certificate, default value is `default`.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate, default value is `default`.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the poly client certificate.
         :param pulumi.Input[str] domain: Forward domain of the layer7 listener.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
@@ -259,7 +259,7 @@ class _HttpDomainState:
         :param pulumi.Input[str] listener_id: ID of the layer7 listener.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
-        :param pulumi.Input[str] realserver_certificate_id: CA certificate ID of the realserver.
+        :param pulumi.Input[str] realserver_certificate_id: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] realserver_certificate_ids: CA certificate ID list of the realserver.
         """
         if basic_auth is not None:
@@ -335,7 +335,7 @@ class _HttpDomainState:
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the client certificate, default value is `default`.
+        It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         """
         return pulumi.get(self, "client_certificate_id")
 
@@ -431,7 +431,7 @@ class _HttpDomainState:
     @pulumi.getter(name="realserverCertificateId")
     def realserver_certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        CA certificate ID of the realserver.
+        It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         """
         return pulumi.get(self, "realserver_certificate_id")
 
@@ -472,13 +472,42 @@ class HttpDomain(pulumi.CustomResource):
                  realserver_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a HttpDomain resource with the given unique name, props, and options.
+        Provides a resource to create a forward domain of layer7 listener.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+            protocol="HTTP",
+            port=80,
+            proxy_id=foo_proxy.id)
+        foo_http_domain = tencentcloud.gaap.HttpDomain("fooHttpDomain",
+            listener_id=foo_layer7_listener.id,
+            domain="www.qq.com")
+        ```
+
+        ## Import
+
+        GAAP http domain can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] basic_auth: Indicates whether basic authentication is enable, default value is `false`.
         :param pulumi.Input[str] basic_auth_id: ID of the basic authentication.
         :param pulumi.Input[str] certificate_id: ID of the server certificate, default value is `default`.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate, default value is `default`.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the poly client certificate.
         :param pulumi.Input[str] domain: Forward domain of the layer7 listener.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
@@ -486,7 +515,7 @@ class HttpDomain(pulumi.CustomResource):
         :param pulumi.Input[str] listener_id: ID of the layer7 listener.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
-        :param pulumi.Input[str] realserver_certificate_id: CA certificate ID of the realserver.
+        :param pulumi.Input[str] realserver_certificate_id: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] realserver_certificate_ids: CA certificate ID list of the realserver.
         """
         ...
@@ -496,7 +525,36 @@ class HttpDomain(pulumi.CustomResource):
                  args: HttpDomainArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a HttpDomain resource with the given unique name, props, and options.
+        Provides a resource to create a forward domain of layer7 listener.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+            protocol="HTTP",
+            port=80,
+            proxy_id=foo_proxy.id)
+        foo_http_domain = tencentcloud.gaap.HttpDomain("fooHttpDomain",
+            listener_id=foo_layer7_listener.id,
+            domain="www.qq.com")
+        ```
+
+        ## Import
+
+        GAAP http domain can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+        ```
+
         :param str resource_name: The name of the resource.
         :param HttpDomainArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -593,7 +651,7 @@ class HttpDomain(pulumi.CustomResource):
         :param pulumi.Input[bool] basic_auth: Indicates whether basic authentication is enable, default value is `false`.
         :param pulumi.Input[str] basic_auth_id: ID of the basic authentication.
         :param pulumi.Input[str] certificate_id: ID of the server certificate, default value is `default`.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate, default value is `default`.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the poly client certificate.
         :param pulumi.Input[str] domain: Forward domain of the layer7 listener.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
@@ -601,7 +659,7 @@ class HttpDomain(pulumi.CustomResource):
         :param pulumi.Input[str] listener_id: ID of the layer7 listener.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
-        :param pulumi.Input[str] realserver_certificate_id: CA certificate ID of the realserver.
+        :param pulumi.Input[str] realserver_certificate_id: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] realserver_certificate_ids: CA certificate ID list of the realserver.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -651,7 +709,7 @@ class HttpDomain(pulumi.CustomResource):
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> pulumi.Output[str]:
         """
-        ID of the client certificate, default value is `default`.
+        It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate, default value is `default`.
         """
         return pulumi.get(self, "client_certificate_id")
 
@@ -715,7 +773,7 @@ class HttpDomain(pulumi.CustomResource):
     @pulumi.getter(name="realserverCertificateId")
     def realserver_certificate_id(self) -> pulumi.Output[str]:
         """
-        CA certificate ID of the realserver.
+        It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
         """
         return pulumi.get(self, "realserver_certificate_id")
 

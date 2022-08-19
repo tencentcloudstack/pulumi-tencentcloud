@@ -9,6 +9,58 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cos
 {
+    /// <summary>
+    /// Provides a COS resource to create a COS bucket policy and set its attributes.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var cosPolicy = new Tencentcloud.Cos.BucketPolicy("cosPolicy", new Tencentcloud.Cos.BucketPolicyArgs
+    ///         {
+    ///             Bucket = "mycos-1258798060",
+    ///             Policy = @"{
+    ///   ""version"": ""2.0"",
+    ///   ""Statement"": [
+    ///     {
+    ///       ""Principal"": {
+    ///         ""qcs"": [
+    ///           ""qcs::cam::uin/&lt;your-account-id&gt;:uin/&lt;your-account-id&gt;""
+    ///         ]
+    ///       },
+    ///       ""Action"": [
+    ///         ""name/cos:DeleteBucket"",
+    ///         ""name/cos:PutBucketACL""
+    ///       ],
+    ///       ""Effect"": ""allow"",
+    ///       ""Resource"": [
+    ///         ""qcs::cos:&lt;bucket region&gt;:uid/&lt;your-account-id&gt;:&lt;bucket name&gt;/*""
+    ///       ]
+    ///     }
+    ///   ]
+    /// }
+    /// 
+    /// ",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// COS bucket policy can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketPolicy:BucketPolicy")]
     public partial class BucketPolicy : Pulumi.CustomResource
     {
@@ -19,8 +71,7 @@ namespace Pulumi.Tencentcloud.Cos
         public Output<string> Bucket { get; private set; } = null!;
 
         /// <summary>
-        /// The text of the policy. For more info please refer to [Tencent official
-        /// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         /// </summary>
         [Output("policy")]
         public Output<string> Policy { get; private set; } = null!;
@@ -78,8 +129,7 @@ namespace Pulumi.Tencentcloud.Cos
         public Input<string> Bucket { get; set; } = null!;
 
         /// <summary>
-        /// The text of the policy. For more info please refer to [Tencent official
-        /// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         /// </summary>
         [Input("policy", required: true)]
         public Input<string> Policy { get; set; } = null!;
@@ -98,8 +148,7 @@ namespace Pulumi.Tencentcloud.Cos
         public Input<string>? Bucket { get; set; }
 
         /// <summary>
-        /// The text of the policy. For more info please refer to [Tencent official
-        /// doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
         /// </summary>
         [Input("policy")]
         public Input<string>? Policy { get; set; }

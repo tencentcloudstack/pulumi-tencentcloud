@@ -13,6 +13,9 @@ namespace Pulumi.Tencentcloud.Sqlserver.Outputs
     [OutputType]
     public sealed class PublishSubscribeDatabaseTuple
     {
+        /// <summary>
+        /// Publish the database.
+        /// </summary>
         public readonly string PublishDatabase;
 
         [OutputConstructor]

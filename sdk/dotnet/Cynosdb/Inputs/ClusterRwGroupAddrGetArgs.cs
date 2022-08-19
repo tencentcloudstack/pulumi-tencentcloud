@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Cynosdb.Inputs
 
     public sealed class ClusterRwGroupAddrGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// IP address for read-write connection.
+        /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
+        /// <summary>
+        /// Port of CynosDB cluster.
+        /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 

@@ -9,6 +9,60 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cls
 {
+    /// <summary>
+    /// Provides a resource to create a cls cos shipper.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var shipper = new Tencentcloud.Cls.CosShipper("shipper", new Tencentcloud.Cls.CosShipperArgs
+    ///         {
+    ///             Bucket = "preset-scf-bucket-1308919341",
+    ///             Compress = new Tencentcloud.Cls.Inputs.CosShipperCompressArgs
+    ///             {
+    ///                 Format = "lzop",
+    ///             },
+    ///             Content = new Tencentcloud.Cls.Inputs.CosShipperContentArgs
+    ///             {
+    ///                 Format = "json",
+    ///                 Json = new Tencentcloud.Cls.Inputs.CosShipperContentJsonArgs
+    ///                 {
+    ///                     EnableTag = true,
+    ///                     MetaFields = 
+    ///                     {
+    ///                         "__FILENAME__",
+    ///                         "__SOURCE__",
+    ///                         "__TIMESTAMP__",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Interval = 300,
+    ///             MaxSize = 200,
+    ///             Partition = "/%Y/%m/%d/%H/",
+    ///             Prefix = "ap-guangzhou-fffsasad-1649734752",
+    ///             ShipperName = "ap-guangzhou-fffsasad-1649734752",
+    ///             TopicId = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// cls cos shipper can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/cosShipper:CosShipper")]
     public partial class CosShipper : Pulumi.CustomResource
     {
@@ -31,8 +85,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Output<Outputs.CosShipperContent?> Content { get; private set; } = null!;
 
         /// <summary>
-        /// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-        /// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        /// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         /// </summary>
         [Output("filterRules")]
         public Output<ImmutableArray<Outputs.CosShipperFilterRule>> FilterRules { get; private set; } = null!;
@@ -141,8 +194,7 @@ namespace Pulumi.Tencentcloud.Cls
         private InputList<Inputs.CosShipperFilterRuleArgs>? _filterRules;
 
         /// <summary>
-        /// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-        /// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        /// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         /// </summary>
         public InputList<Inputs.CosShipperFilterRuleArgs> FilterRules
         {
@@ -215,8 +267,7 @@ namespace Pulumi.Tencentcloud.Cls
         private InputList<Inputs.CosShipperFilterRuleGetArgs>? _filterRules;
 
         /// <summary>
-        /// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-        /// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        /// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         /// </summary>
         public InputList<Inputs.CosShipperFilterRuleGetArgs> FilterRules
         {

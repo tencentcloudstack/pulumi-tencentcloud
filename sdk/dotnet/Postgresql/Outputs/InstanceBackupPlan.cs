@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Postgresql.Outputs
     [OutputType]
     public sealed class InstanceBackupPlan
     {
+        /// <summary>
+        /// List of backup period per week, available values: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`. NOTE: At least specify two days.
+        /// </summary>
         public readonly ImmutableArray<string> BackupPeriods;
+        /// <summary>
+        /// Specify days of the retention.
+        /// </summary>
         public readonly int? BaseBackupRetentionPeriod;
+        /// <summary>
+        /// Specify latest backup start time, format `hh:mm:ss`.
+        /// </summary>
         public readonly string? MaxBackupStartTime;
+        /// <summary>
+        /// Specify earliest backup start time, format `hh:mm:ss`.
+        /// </summary>
         public readonly string? MinBackupStartTime;
 
         [OutputConstructor]

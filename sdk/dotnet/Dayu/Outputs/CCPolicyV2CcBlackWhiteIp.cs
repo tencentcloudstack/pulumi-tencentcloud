@@ -11,17 +11,35 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCPolicyV2CcBlackWhiteIp
+    public sealed class CcPolicyV2CcBlackWhiteIp
     {
+        /// <summary>
+        /// Blacklist and whitelist IP addresses.
+        /// </summary>
         public readonly string BlackWhiteIp;
+        /// <summary>
+        /// Create time.
+        /// </summary>
         public readonly string? CreateTime;
+        /// <summary>
+        /// Domain.
+        /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Modify time.
+        /// </summary>
         public readonly string? ModifyTime;
+        /// <summary>
+        /// Protocol.
+        /// </summary>
         public readonly string Protocol;
+        /// <summary>
+        /// IP type, value [black(blacklist IP), white (whitelist IP)].
+        /// </summary>
         public readonly string Type;
 
         [OutputConstructor]
-        private CCPolicyV2CcBlackWhiteIp(
+        private CcPolicyV2CcBlackWhiteIp(
             string blackWhiteIp,
 
             string? createTime,

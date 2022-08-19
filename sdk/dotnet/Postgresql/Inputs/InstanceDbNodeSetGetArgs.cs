@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Postgresql.Inputs
 
     public sealed class InstanceDbNodeSetGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
+        /// </summary>
         [Input("role")]
         public Input<string>? Role { get; set; }
 
+        /// <summary>
+        /// Indicates the node available zone.
+        /// </summary>
         [Input("zone", required: true)]
         public Input<string> Zone { get; set; } = null!;
 

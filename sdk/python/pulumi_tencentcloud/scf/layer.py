@@ -277,7 +277,34 @@ class Layer(pulumi.CustomResource):
                  license_info: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Layer resource with the given unique name, props, and options.
+        Provide a resource to create a SCF layer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.scf.Layer("foo",
+            compatible_runtimes=["Python3.6"],
+            content=tencentcloud.scf.LayerContentArgs(
+                cos_bucket_name="test-bucket",
+                cos_bucket_region="ap-guangzhou",
+                cos_object_name="/foo.zip",
+            ),
+            description="foo",
+            layer_name="foo",
+            license_info="foo")
+        ```
+
+        ## Import
+
+        Scf layer can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] compatible_runtimes: The compatible runtimes of layer.
@@ -293,7 +320,34 @@ class Layer(pulumi.CustomResource):
                  args: LayerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Layer resource with the given unique name, props, and options.
+        Provide a resource to create a SCF layer.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.scf.Layer("foo",
+            compatible_runtimes=["Python3.6"],
+            content=tencentcloud.scf.LayerContentArgs(
+                cos_bucket_name="test-bucket",
+                cos_bucket_region="ap-guangzhou",
+                cos_object_name="/foo.zip",
+            ),
+            description="foo",
+            layer_name="foo",
+            license_info="foo")
+        ```
+
+        ## Import
+
+        Scf layer can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
+        ```
+
         :param str resource_name: The name of the resource.
         :param LayerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

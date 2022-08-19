@@ -11,6 +11,96 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a forward rule of layer7 listener.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+// 			Bandwidth:        pulumi.Int(10),
+// 			Concurrent:       pulumi.Int(2),
+// 			AccessRegion:     pulumi.String("SouthChina"),
+// 			RealserverRegion: pulumi.String("NorthChina"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+// 			Protocol: pulumi.String("HTTP"),
+// 			Port:     pulumi.Int(80),
+// 			ProxyId:  fooProxy.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
+// 			Ip: pulumi.String("1.1.1.1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		bar, err := Gaap.NewRealserver(ctx, "bar", &Gaap.RealserverArgs{
+// 			Ip: pulumi.String("8.8.8.8"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
+// 			ListenerId: fooLayer7Listener.ID(),
+// 			Domain:     pulumi.String("www.qq.com"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Gaap.NewHttpRule(ctx, "fooHttpRule", &Gaap.HttpRuleArgs{
+// 			ListenerId:        fooLayer7Listener.ID(),
+// 			Domain:            fooHttpDomain.Domain,
+// 			Path:              pulumi.String("/"),
+// 			RealserverType:    pulumi.String("IP"),
+// 			HealthCheck:       pulumi.Bool(true),
+// 			HealthCheckPath:   pulumi.String("/"),
+// 			HealthCheckMethod: pulumi.String("GET"),
+// 			HealthCheckStatusCodes: pulumi.IntArray{
+// 				pulumi.Int(200),
+// 			},
+// 			Realservers: gaap.HttpRuleRealserverArray{
+// 				&gaap.HttpRuleRealserverArgs{
+// 					Id:   fooRealserver.ID(),
+// 					Ip:   fooRealserver.Ip,
+// 					Port: pulumi.Int(80),
+// 				},
+// 				&gaap.HttpRuleRealserverArgs{
+// 					Id:   bar.ID(),
+// 					Ip:   bar.Ip,
+// 					Port: pulumi.Int(80),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// GAAP http rule can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Gaap/httpRule:HttpRule tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+// ```
 type HttpRule struct {
 	pulumi.CustomResourceState
 

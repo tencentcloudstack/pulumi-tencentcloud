@@ -5,6 +5,6 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_pairs import *
 from .pair import *
-from .pairs import *
 from . import outputs

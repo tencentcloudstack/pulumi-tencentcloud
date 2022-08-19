@@ -10,10 +10,10 @@ from .. import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['CCHttpPolicyArgs', 'CCHttpPolicy']
+__all__ = ['CcHttpPolicyArgs', 'CcHttpPolicy']
 
 @pulumi.input_type
-class CCHttpPolicyArgs:
+class CcHttpPolicyArgs:
     def __init__(__self__, *,
                  resource_id: pulumi.Input[str],
                  resource_type: pulumi.Input[str],
@@ -21,22 +21,19 @@ class CCHttpPolicyArgs:
                  frequency: Optional[pulumi.Input[int]] = None,
                  ip: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]]] = None,
+                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]]] = None,
                  smode: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[bool]] = None):
         """
-        The set of arguments for constructing a CCHttpPolicy resource.
+        The set of arguments for constructing a CcHttpPolicy resource.
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define http policy works for.
-        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-               `net`.
+        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         :param pulumi.Input[str] action: Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
         :param pulumi.Input[int] frequency: Max frequency per minute, only valid when `smode` is `speedlimit`, the valid value ranges from 1 to 10000.
-        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-               set one.
+        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         :param pulumi.Input[str] name: Name of the CC self-define http policy. Length should between 1 and 20.
-        :param pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
-        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-               one.
+        :param pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
+        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         :param pulumi.Input[bool] switch: Indicate the CC self-define http policy takes effect or not.
         """
         pulumi.set(__self__, "resource_id", resource_id)
@@ -72,8 +69,7 @@ class CCHttpPolicyArgs:
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> pulumi.Input[str]:
         """
-        Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-        `net`.
+        Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         """
         return pulumi.get(self, "resource_type")
 
@@ -109,8 +105,7 @@ class CCHttpPolicyArgs:
     @pulumi.getter
     def ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-        set one.
+        Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         """
         return pulumi.get(self, "ip")
 
@@ -132,22 +127,21 @@ class CCHttpPolicyArgs:
 
     @property
     @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]]]:
+    def rule_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]]]:
         """
-        Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+        Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
         """
         return pulumi.get(self, "rule_lists")
 
     @rule_lists.setter
-    def rule_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]]]):
+    def rule_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]]]):
         pulumi.set(self, "rule_lists", value)
 
     @property
     @pulumi.getter
     def smode(self) -> Optional[pulumi.Input[str]]:
         """
-        Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-        one.
+        Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         """
         return pulumi.get(self, "smode")
 
@@ -169,7 +163,7 @@ class CCHttpPolicyArgs:
 
 
 @pulumi.input_type
-class _CCHttpPolicyState:
+class _CcHttpPolicyState:
     def __init__(__self__, *,
                  action: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
@@ -179,24 +173,21 @@ class _CCHttpPolicyState:
                  policy_id: Optional[pulumi.Input[str]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
                  resource_type: Optional[pulumi.Input[str]] = None,
-                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]]] = None,
+                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]]] = None,
                  smode: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[bool]] = None):
         """
-        Input properties used for looking up and filtering CCHttpPolicy resources.
+        Input properties used for looking up and filtering CcHttpPolicy resources.
         :param pulumi.Input[str] action: Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
         :param pulumi.Input[str] create_time: Create time of the CC self-define http policy.
         :param pulumi.Input[int] frequency: Max frequency per minute, only valid when `smode` is `speedlimit`, the valid value ranges from 1 to 10000.
-        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-               set one.
+        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         :param pulumi.Input[str] name: Name of the CC self-define http policy. Length should between 1 and 20.
         :param pulumi.Input[str] policy_id: Id of the CC self-define http policy.
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define http policy works for.
-        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-               `net`.
-        :param pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
-        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-               one.
+        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        :param pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]] rule_lists: Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
+        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         :param pulumi.Input[bool] switch: Indicate the CC self-define http policy takes effect or not.
         """
         if action is not None:
@@ -262,8 +253,7 @@ class _CCHttpPolicyState:
     @pulumi.getter
     def ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-        set one.
+        Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         """
         return pulumi.get(self, "ip")
 
@@ -311,8 +301,7 @@ class _CCHttpPolicyState:
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-        `net`.
+        Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         """
         return pulumi.get(self, "resource_type")
 
@@ -322,22 +311,21 @@ class _CCHttpPolicyState:
 
     @property
     @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]]]:
+    def rule_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]]]:
         """
-        Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+        Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
         """
         return pulumi.get(self, "rule_lists")
 
     @rule_lists.setter
-    def rule_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCHttpPolicyRuleListArgs']]]]):
+    def rule_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcHttpPolicyRuleListArgs']]]]):
         pulumi.set(self, "rule_lists", value)
 
     @property
     @pulumi.getter
     def smode(self) -> Optional[pulumi.Input[str]]:
         """
-        Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-        one.
+        Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         """
         return pulumi.get(self, "smode")
 
@@ -358,7 +346,7 @@ class _CCHttpPolicyState:
         pulumi.set(self, "switch", value)
 
 
-class CCHttpPolicy(pulumi.CustomResource):
+class CcHttpPolicy(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -369,42 +357,147 @@ class CCHttpPolicy(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
                  resource_type: Optional[pulumi.Input[str]] = None,
-                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpPolicyRuleListArgs']]]]] = None,
+                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpPolicyRuleListArgs']]]]] = None,
                  smode: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a CCHttpPolicy resource with the given unique name, props, and options.
+        Use this resource to create a dayu CC self-define http policy
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_bgpip = tencentcloud.dayu.CcHttpPolicy("testBgpip",
+            action="drop",
+            resource_id="bgpip-00000294",
+            resource_type="bgpip",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="include",
+                skey="host",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        test_net = tencentcloud.dayu.CcHttpPolicy("testNet",
+            action="drop",
+            resource_id="net-0000007e",
+            resource_type="net",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="equal",
+                skey="cgi",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        test_bgpmultip = tencentcloud.dayu.CcHttpPolicy("testBgpmultip",
+            action="alg",
+            ip="111.230.178.25",
+            resource_id="bgp-0000008o",
+            resource_type="bgp-multip",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="not_include",
+                skey="referer",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        test_bgp = tencentcloud.dayu.CcHttpPolicy("testBgp",
+            action="alg",
+            resource_id="bgp-000006mq",
+            resource_type="bgp",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="not_include",
+                skey="ua",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] action: Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
         :param pulumi.Input[int] frequency: Max frequency per minute, only valid when `smode` is `speedlimit`, the valid value ranges from 1 to 10000.
-        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-               set one.
+        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         :param pulumi.Input[str] name: Name of the CC self-define http policy. Length should between 1 and 20.
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define http policy works for.
-        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-               `net`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
-        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-               one.
+        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
+        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         :param pulumi.Input[bool] switch: Indicate the CC self-define http policy takes effect or not.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: CCHttpPolicyArgs,
+                 args: CcHttpPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CCHttpPolicy resource with the given unique name, props, and options.
+        Use this resource to create a dayu CC self-define http policy
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_bgpip = tencentcloud.dayu.CcHttpPolicy("testBgpip",
+            action="drop",
+            resource_id="bgpip-00000294",
+            resource_type="bgpip",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="include",
+                skey="host",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        test_net = tencentcloud.dayu.CcHttpPolicy("testNet",
+            action="drop",
+            resource_id="net-0000007e",
+            resource_type="net",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="equal",
+                skey="cgi",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        test_bgpmultip = tencentcloud.dayu.CcHttpPolicy("testBgpmultip",
+            action="alg",
+            ip="111.230.178.25",
+            resource_id="bgp-0000008o",
+            resource_type="bgp-multip",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="not_include",
+                skey="referer",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        test_bgp = tencentcloud.dayu.CcHttpPolicy("testBgp",
+            action="alg",
+            resource_id="bgp-000006mq",
+            resource_type="bgp",
+            rule_lists=[tencentcloud.dayu.CcHttpPolicyRuleListArgs(
+                operator="not_include",
+                skey="ua",
+                value="123",
+            )],
+            smode="matching",
+            switch=True)
+        ```
+
         :param str resource_name: The name of the resource.
-        :param CCHttpPolicyArgs args: The arguments to use to populate this resource's properties.
+        :param CcHttpPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(CCHttpPolicyArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(CcHttpPolicyArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -419,7 +512,7 @@ class CCHttpPolicy(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
                  resource_type: Optional[pulumi.Input[str]] = None,
-                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpPolicyRuleListArgs']]]]] = None,
+                 rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpPolicyRuleListArgs']]]]] = None,
                  smode: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
@@ -432,7 +525,7 @@ class CCHttpPolicy(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = CCHttpPolicyArgs.__new__(CCHttpPolicyArgs)
+            __props__ = CcHttpPolicyArgs.__new__(CcHttpPolicyArgs)
 
             __props__.__dict__["action"] = action
             __props__.__dict__["frequency"] = frequency
@@ -449,8 +542,8 @@ class CCHttpPolicy(pulumi.CustomResource):
             __props__.__dict__["switch"] = switch
             __props__.__dict__["create_time"] = None
             __props__.__dict__["policy_id"] = None
-        super(CCHttpPolicy, __self__).__init__(
-            'tencentcloud:Dayu/cCHttpPolicy:CCHttpPolicy',
+        super(CcHttpPolicy, __self__).__init__(
+            'tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy',
             resource_name,
             __props__,
             opts)
@@ -467,11 +560,11 @@ class CCHttpPolicy(pulumi.CustomResource):
             policy_id: Optional[pulumi.Input[str]] = None,
             resource_id: Optional[pulumi.Input[str]] = None,
             resource_type: Optional[pulumi.Input[str]] = None,
-            rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpPolicyRuleListArgs']]]]] = None,
+            rule_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpPolicyRuleListArgs']]]]] = None,
             smode: Optional[pulumi.Input[str]] = None,
-            switch: Optional[pulumi.Input[bool]] = None) -> 'CCHttpPolicy':
+            switch: Optional[pulumi.Input[bool]] = None) -> 'CcHttpPolicy':
         """
-        Get an existing CCHttpPolicy resource's state with the given name, id, and optional extra
+        Get an existing CcHttpPolicy resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -480,21 +573,18 @@ class CCHttpPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] action: Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
         :param pulumi.Input[str] create_time: Create time of the CC self-define http policy.
         :param pulumi.Input[int] frequency: Max frequency per minute, only valid when `smode` is `speedlimit`, the valid value ranges from 1 to 10000.
-        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-               set one.
+        :param pulumi.Input[str] ip: Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         :param pulumi.Input[str] name: Name of the CC self-define http policy. Length should between 1 and 20.
         :param pulumi.Input[str] policy_id: Id of the CC self-define http policy.
         :param pulumi.Input[str] resource_id: ID of the resource that the CC self-define http policy works for.
-        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-               `net`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCHttpPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
-        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-               one.
+        :param pulumi.Input[str] resource_type: Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcHttpPolicyRuleListArgs']]]] rule_lists: Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
+        :param pulumi.Input[str] smode: Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         :param pulumi.Input[bool] switch: Indicate the CC self-define http policy takes effect or not.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _CCHttpPolicyState.__new__(_CCHttpPolicyState)
+        __props__ = _CcHttpPolicyState.__new__(_CcHttpPolicyState)
 
         __props__.__dict__["action"] = action
         __props__.__dict__["create_time"] = create_time
@@ -507,7 +597,7 @@ class CCHttpPolicy(pulumi.CustomResource):
         __props__.__dict__["rule_lists"] = rule_lists
         __props__.__dict__["smode"] = smode
         __props__.__dict__["switch"] = switch
-        return CCHttpPolicy(resource_name, opts=opts, __props__=__props__)
+        return CcHttpPolicy(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
@@ -537,8 +627,7 @@ class CCHttpPolicy(pulumi.CustomResource):
     @pulumi.getter
     def ip(self) -> pulumi.Output[str]:
         """
-        Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-        set one.
+        Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         """
         return pulumi.get(self, "ip")
 
@@ -570,16 +659,15 @@ class CCHttpPolicy(pulumi.CustomResource):
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> pulumi.Output[str]:
         """
-        Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-        `net`.
+        Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         """
         return pulumi.get(self, "resource_type")
 
     @property
     @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> pulumi.Output[Optional[Sequence['outputs.CCHttpPolicyRuleList']]]:
+    def rule_lists(self) -> pulumi.Output[Optional[Sequence['outputs.CcHttpPolicyRuleList']]]:
         """
-        Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+        Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
         """
         return pulumi.get(self, "rule_lists")
 
@@ -587,8 +675,7 @@ class CCHttpPolicy(pulumi.CustomResource):
     @pulumi.getter
     def smode(self) -> pulumi.Output[Optional[str]]:
         """
-        Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-        one.
+        Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         """
         return pulumi.get(self, "smode")
 

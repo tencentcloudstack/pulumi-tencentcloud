@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a Ckafka user.
+ *
+ * ## Example Usage
+ *
+ * Ckafka User
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Ckafka.User("foo", {
+ *     accountName: "tf-test",
+ *     instanceId: "ckafka-f9ife4zz",
+ *     password: "test1234",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Ckafka user can be imported using the instance_id#account_name, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
+ * ```
+ */
 export class User extends pulumi.CustomResource {
     /**
      * Get an existing User resource's state with the given name, ID, and optional extra

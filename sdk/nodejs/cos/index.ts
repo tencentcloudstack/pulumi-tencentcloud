@@ -5,32 +5,32 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./bucket";
 export * from "./bucketObject";
-export * from "./bucketObjects";
 export * from "./bucketPolicy";
-export * from "./buckets";
-export * from "./cosBucket";
+export * from "./getBucketObject";
+export * from "./getBuckets";
 
 // Import resources to register:
+import { Bucket } from "./bucket";
 import { BucketObject } from "./bucketObject";
 import { BucketPolicy } from "./bucketPolicy";
-import { CosBucket } from "./cosBucket";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cos/bucket:Bucket":
+                return new Bucket(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucketObject:BucketObject":
                 return new BucketObject(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucketPolicy:BucketPolicy":
                 return new BucketPolicy(name, <any>undefined, { urn })
-            case "tencentcloud:Cos/cosBucket:CosBucket":
-                return new CosBucket(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucket", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketObject", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketPolicy", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Cos/cosBucket", _module)

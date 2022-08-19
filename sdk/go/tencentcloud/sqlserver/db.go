@@ -11,19 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type DB struct {
+// Provides a SQL Server DB resource belongs to SQL Server instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.NewDb(ctx, "example", &Sqlserver.DbArgs{
+// 			InstanceId: pulumi.Any(tencentcloud_sqlserver_instance.Example.Id),
+// 			Charset:    pulumi.String("Chinese_PRC_BIN"),
+// 			Remark:     pulumi.String("test-remark"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SQL Server DB can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+// ```
+type Db struct {
 	pulumi.CustomResourceState
 
-	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-	// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-	// `Chinese_PRC_CI_AS`.
+	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
 	Charset pulumi.StringPtrOutput `pulumi:"charset"`
 	// Database creation time.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// SQL Server instance ID which DB belongs to.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
-	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-	// first one can not be underline.
+	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Remark of the DB.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
@@ -31,9 +62,9 @@ type DB struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 }
 
-// NewDB registers a new resource with the given unique name, arguments, and options.
-func NewDB(ctx *pulumi.Context,
-	name string, args *DBArgs, opts ...pulumi.ResourceOption) (*DB, error) {
+// NewDb registers a new resource with the given unique name, arguments, and options.
+func NewDb(ctx *pulumi.Context,
+	name string, args *DbArgs, opts ...pulumi.ResourceOption) (*Db, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -41,38 +72,35 @@ func NewDB(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	var resource DB
-	err := ctx.RegisterResource("tencentcloud:Sqlserver/dB:DB", name, args, &resource, opts...)
+	var resource Db
+	err := ctx.RegisterResource("tencentcloud:Sqlserver/db:Db", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetDB gets an existing DB resource's state with the given name, ID, and optional
+// GetDb gets an existing Db resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetDB(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *DBState, opts ...pulumi.ResourceOption) (*DB, error) {
-	var resource DB
-	err := ctx.ReadResource("tencentcloud:Sqlserver/dB:DB", name, id, state, &resource, opts...)
+func GetDb(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *DbState, opts ...pulumi.ResourceOption) (*Db, error) {
+	var resource Db
+	err := ctx.ReadResource("tencentcloud:Sqlserver/db:Db", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering DB resources.
+// Input properties used for looking up and filtering Db resources.
 type dbState struct {
-	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-	// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-	// `Chinese_PRC_CI_AS`.
+	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
 	Charset *string `pulumi:"charset"`
 	// Database creation time.
 	CreateTime *string `pulumi:"createTime"`
 	// SQL Server instance ID which DB belongs to.
 	InstanceId *string `pulumi:"instanceId"`
-	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-	// first one can not be underline.
+	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
 	Name *string `pulumi:"name"`
 	// Remark of the DB.
 	Remark *string `pulumi:"remark"`
@@ -80,17 +108,14 @@ type dbState struct {
 	Status *string `pulumi:"status"`
 }
 
-type DBState struct {
-	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-	// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-	// `Chinese_PRC_CI_AS`.
+type DbState struct {
+	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
 	Charset pulumi.StringPtrInput
 	// Database creation time.
 	CreateTime pulumi.StringPtrInput
 	// SQL Server instance ID which DB belongs to.
 	InstanceId pulumi.StringPtrInput
-	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-	// first one can not be underline.
+	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
 	Name pulumi.StringPtrInput
 	// Remark of the DB.
 	Remark pulumi.StringPtrInput
@@ -98,204 +123,195 @@ type DBState struct {
 	Status pulumi.StringPtrInput
 }
 
-func (DBState) ElementType() reflect.Type {
+func (DbState) ElementType() reflect.Type {
 	return reflect.TypeOf((*dbState)(nil)).Elem()
 }
 
 type dbArgs struct {
-	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-	// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-	// `Chinese_PRC_CI_AS`.
+	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
 	Charset *string `pulumi:"charset"`
 	// SQL Server instance ID which DB belongs to.
 	InstanceId string `pulumi:"instanceId"`
-	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-	// first one can not be underline.
+	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
 	Name *string `pulumi:"name"`
 	// Remark of the DB.
 	Remark *string `pulumi:"remark"`
 }
 
-// The set of arguments for constructing a DB resource.
-type DBArgs struct {
-	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-	// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-	// `Chinese_PRC_CI_AS`.
+// The set of arguments for constructing a Db resource.
+type DbArgs struct {
+	// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
 	Charset pulumi.StringPtrInput
 	// SQL Server instance ID which DB belongs to.
 	InstanceId pulumi.StringInput
-	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-	// first one can not be underline.
+	// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
 	Name pulumi.StringPtrInput
 	// Remark of the DB.
 	Remark pulumi.StringPtrInput
 }
 
-func (DBArgs) ElementType() reflect.Type {
+func (DbArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*dbArgs)(nil)).Elem()
 }
 
-type DBInput interface {
+type DbInput interface {
 	pulumi.Input
 
-	ToDBOutput() DBOutput
-	ToDBOutputWithContext(ctx context.Context) DBOutput
+	ToDbOutput() DbOutput
+	ToDbOutputWithContext(ctx context.Context) DbOutput
 }
 
-func (*DB) ElementType() reflect.Type {
-	return reflect.TypeOf((**DB)(nil)).Elem()
+func (*Db) ElementType() reflect.Type {
+	return reflect.TypeOf((**Db)(nil)).Elem()
 }
 
-func (i *DB) ToDBOutput() DBOutput {
-	return i.ToDBOutputWithContext(context.Background())
+func (i *Db) ToDbOutput() DbOutput {
+	return i.ToDbOutputWithContext(context.Background())
 }
 
-func (i *DB) ToDBOutputWithContext(ctx context.Context) DBOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DBOutput)
+func (i *Db) ToDbOutputWithContext(ctx context.Context) DbOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DbOutput)
 }
 
-// DBArrayInput is an input type that accepts DBArray and DBArrayOutput values.
-// You can construct a concrete instance of `DBArrayInput` via:
+// DbArrayInput is an input type that accepts DbArray and DbArrayOutput values.
+// You can construct a concrete instance of `DbArrayInput` via:
 //
-//          DBArray{ DBArgs{...} }
-type DBArrayInput interface {
+//          DbArray{ DbArgs{...} }
+type DbArrayInput interface {
 	pulumi.Input
 
-	ToDBArrayOutput() DBArrayOutput
-	ToDBArrayOutputWithContext(context.Context) DBArrayOutput
+	ToDbArrayOutput() DbArrayOutput
+	ToDbArrayOutputWithContext(context.Context) DbArrayOutput
 }
 
-type DBArray []DBInput
+type DbArray []DbInput
 
-func (DBArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*DB)(nil)).Elem()
+func (DbArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Db)(nil)).Elem()
 }
 
-func (i DBArray) ToDBArrayOutput() DBArrayOutput {
-	return i.ToDBArrayOutputWithContext(context.Background())
+func (i DbArray) ToDbArrayOutput() DbArrayOutput {
+	return i.ToDbArrayOutputWithContext(context.Background())
 }
 
-func (i DBArray) ToDBArrayOutputWithContext(ctx context.Context) DBArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DBArrayOutput)
+func (i DbArray) ToDbArrayOutputWithContext(ctx context.Context) DbArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DbArrayOutput)
 }
 
-// DBMapInput is an input type that accepts DBMap and DBMapOutput values.
-// You can construct a concrete instance of `DBMapInput` via:
+// DbMapInput is an input type that accepts DbMap and DbMapOutput values.
+// You can construct a concrete instance of `DbMapInput` via:
 //
-//          DBMap{ "key": DBArgs{...} }
-type DBMapInput interface {
+//          DbMap{ "key": DbArgs{...} }
+type DbMapInput interface {
 	pulumi.Input
 
-	ToDBMapOutput() DBMapOutput
-	ToDBMapOutputWithContext(context.Context) DBMapOutput
+	ToDbMapOutput() DbMapOutput
+	ToDbMapOutputWithContext(context.Context) DbMapOutput
 }
 
-type DBMap map[string]DBInput
+type DbMap map[string]DbInput
 
-func (DBMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*DB)(nil)).Elem()
+func (DbMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Db)(nil)).Elem()
 }
 
-func (i DBMap) ToDBMapOutput() DBMapOutput {
-	return i.ToDBMapOutputWithContext(context.Background())
+func (i DbMap) ToDbMapOutput() DbMapOutput {
+	return i.ToDbMapOutputWithContext(context.Background())
 }
 
-func (i DBMap) ToDBMapOutputWithContext(ctx context.Context) DBMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DBMapOutput)
+func (i DbMap) ToDbMapOutputWithContext(ctx context.Context) DbMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DbMapOutput)
 }
 
-type DBOutput struct{ *pulumi.OutputState }
+type DbOutput struct{ *pulumi.OutputState }
 
-func (DBOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DB)(nil)).Elem()
+func (DbOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Db)(nil)).Elem()
 }
 
-func (o DBOutput) ToDBOutput() DBOutput {
+func (o DbOutput) ToDbOutput() DbOutput {
 	return o
 }
 
-func (o DBOutput) ToDBOutputWithContext(ctx context.Context) DBOutput {
+func (o DbOutput) ToDbOutputWithContext(ctx context.Context) DbOutput {
 	return o
 }
 
-// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-// `Chinese_PRC_CI_AS`.
-func (o DBOutput) Charset() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DB) pulumi.StringPtrOutput { return v.Charset }).(pulumi.StringPtrOutput)
+// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
+func (o DbOutput) Charset() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Db) pulumi.StringPtrOutput { return v.Charset }).(pulumi.StringPtrOutput)
 }
 
 // Database creation time.
-func (o DBOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v *DB) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+func (o DbOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *Db) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
 // SQL Server instance ID which DB belongs to.
-func (o DBOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v *DB) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+func (o DbOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Db) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-// first one can not be underline.
-func (o DBOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v *DB) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
+func (o DbOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Db) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
 // Remark of the DB.
-func (o DBOutput) Remark() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DB) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
+func (o DbOutput) Remark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Db) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
 // Database status, could be `creating`, `running`, `modifying` which means changing the remark, and `deleting`.
-func (o DBOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v *DB) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
+func (o DbOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v *Db) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
-type DBArrayOutput struct{ *pulumi.OutputState }
+type DbArrayOutput struct{ *pulumi.OutputState }
 
-func (DBArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*DB)(nil)).Elem()
+func (DbArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Db)(nil)).Elem()
 }
 
-func (o DBArrayOutput) ToDBArrayOutput() DBArrayOutput {
+func (o DbArrayOutput) ToDbArrayOutput() DbArrayOutput {
 	return o
 }
 
-func (o DBArrayOutput) ToDBArrayOutputWithContext(ctx context.Context) DBArrayOutput {
+func (o DbArrayOutput) ToDbArrayOutputWithContext(ctx context.Context) DbArrayOutput {
 	return o
 }
 
-func (o DBArrayOutput) Index(i pulumi.IntInput) DBOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *DB {
-		return vs[0].([]*DB)[vs[1].(int)]
-	}).(DBOutput)
+func (o DbArrayOutput) Index(i pulumi.IntInput) DbOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Db {
+		return vs[0].([]*Db)[vs[1].(int)]
+	}).(DbOutput)
 }
 
-type DBMapOutput struct{ *pulumi.OutputState }
+type DbMapOutput struct{ *pulumi.OutputState }
 
-func (DBMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*DB)(nil)).Elem()
+func (DbMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Db)(nil)).Elem()
 }
 
-func (o DBMapOutput) ToDBMapOutput() DBMapOutput {
+func (o DbMapOutput) ToDbMapOutput() DbMapOutput {
 	return o
 }
 
-func (o DBMapOutput) ToDBMapOutputWithContext(ctx context.Context) DBMapOutput {
+func (o DbMapOutput) ToDbMapOutputWithContext(ctx context.Context) DbMapOutput {
 	return o
 }
 
-func (o DBMapOutput) MapIndex(k pulumi.StringInput) DBOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *DB {
-		return vs[0].(map[string]*DB)[vs[1].(string)]
-	}).(DBOutput)
+func (o DbMapOutput) MapIndex(k pulumi.StringInput) DbOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *Db {
+		return vs[0].(map[string]*Db)[vs[1].(string)]
+	}).(DbOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*DBInput)(nil)).Elem(), &DB{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DBArrayInput)(nil)).Elem(), DBArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DBMapInput)(nil)).Elem(), DBMap{})
-	pulumi.RegisterOutputType(DBOutput{})
-	pulumi.RegisterOutputType(DBArrayOutput{})
-	pulumi.RegisterOutputType(DBMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DbInput)(nil)).Elem(), &Db{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DbArrayInput)(nil)).Elem(), DbArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DbMapInput)(nil)).Elem(), DbMap{})
+	pulumi.RegisterOutputType(DbOutput{})
+	pulumi.RegisterOutputType(DbArrayOutput{})
+	pulumi.RegisterOutputType(DbMapOutput{})
 }

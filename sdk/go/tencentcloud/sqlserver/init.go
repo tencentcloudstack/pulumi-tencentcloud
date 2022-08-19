@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -23,12 +23,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Sqlserver/account:Account":
 		r = &Account{}
-	case "tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment":
-		r = &AccountDBAttachment{}
+	case "tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment":
+		r = &AccountDbAttachment{}
 	case "tencentcloud:Sqlserver/basicInstance:BasicInstance":
 		r = &BasicInstance{}
-	case "tencentcloud:Sqlserver/dB:DB":
-		r = &DB{}
+	case "tencentcloud:Sqlserver/db:Db":
+		r = &Db{}
 	case "tencentcloud:Sqlserver/instance:Instance":
 		r = &Instance{}
 	case "tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe":
@@ -55,7 +55,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Sqlserver/accountDBAttachment",
+		"Sqlserver/accountDbAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -65,7 +65,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Sqlserver/dB",
+		"Sqlserver/db",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

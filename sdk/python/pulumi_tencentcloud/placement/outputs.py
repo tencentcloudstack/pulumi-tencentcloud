@@ -9,11 +9,11 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'GroupsPlacementGroupListResult',
+    'GetGroupsPlacementGroupListResult',
 ]
 
 @pulumi.output_type
-class GroupsPlacementGroupListResult(dict):
+class GetGroupsPlacementGroupListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  current_num: int,
@@ -22,6 +22,15 @@ class GroupsPlacementGroupListResult(dict):
                  name: str,
                  placement_group_id: str,
                  type: str):
+        """
+        :param str create_time: Creation time of the placement group.
+        :param int current_num: Number of hosts in the placement group.
+        :param int cvm_quota_total: Maximum number of hosts in the placement group.
+        :param Sequence[str] instance_ids: Host IDs in the placement group.
+        :param str name: Name of the placement group to be queried.
+        :param str placement_group_id: ID of the placement group to be queried.
+        :param str type: Type of the placement group.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "current_num", current_num)
         pulumi.set(__self__, "cvm_quota_total", cvm_quota_total)
@@ -33,36 +42,57 @@ class GroupsPlacementGroupListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the placement group.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="currentNum")
     def current_num(self) -> int:
+        """
+        Number of hosts in the placement group.
+        """
         return pulumi.get(self, "current_num")
 
     @property
     @pulumi.getter(name="cvmQuotaTotal")
     def cvm_quota_total(self) -> int:
+        """
+        Maximum number of hosts in the placement group.
+        """
         return pulumi.get(self, "cvm_quota_total")
 
     @property
     @pulumi.getter(name="instanceIds")
     def instance_ids(self) -> Sequence[str]:
+        """
+        Host IDs in the placement group.
+        """
         return pulumi.get(self, "instance_ids")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the placement group to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="placementGroupId")
     def placement_group_id(self) -> str:
+        """
+        ID of the placement group to be queried.
+        """
         return pulumi.get(self, "placement_group_id")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Type of the placement group.
+        """
         return pulumi.get(self, "type")
 
 

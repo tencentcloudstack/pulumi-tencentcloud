@@ -9,12 +9,48 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Redis
 {
+    /// <summary>
+    /// Use this resource to create a backup config of redis.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var redislab = new Tencentcloud.Redis.BackupConfig("redislab", new Tencentcloud.Redis.BackupConfigArgs
+    ///         {
+    ///             BackupPeriods = 
+    ///             {
+    ///                 "Monday",
+    ///             },
+    ///             BackupTime = "04:00-05:00",
+    ///             RedisId = "crs-7yl0q0dd",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Redis
+    /// 
+    /// backup config can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/backupConfig:BackupConfig")]
     public partial class BackupConfig : Pulumi.CustomResource
     {
         /// <summary>
-        /// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-        /// `Friday`, `Saturday` and `Sunday`.
+        /// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         /// </summary>
         [Output("backupPeriods")]
         public Output<ImmutableArray<string>> BackupPeriods { get; private set; } = null!;
@@ -81,8 +117,7 @@ namespace Pulumi.Tencentcloud.Redis
         private InputList<string>? _backupPeriods;
 
         /// <summary>
-        /// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-        /// `Friday`, `Saturday` and `Sunday`.
+        /// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         /// </summary>
         [Obsolete(@"It has been deprecated from version 1.58.2. It makes no difference to online config at all")]
         public InputList<string> BackupPeriods
@@ -114,8 +149,7 @@ namespace Pulumi.Tencentcloud.Redis
         private InputList<string>? _backupPeriods;
 
         /// <summary>
-        /// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-        /// `Friday`, `Saturday` and `Sunday`.
+        /// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         /// </summary>
         [Obsolete(@"It has been deprecated from version 1.58.2. It makes no difference to online config at all")]
         public InputList<string> BackupPeriods

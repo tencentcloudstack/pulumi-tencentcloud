@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Clb/attachment:Attachment":
+		r = &Attachment{}
 	case "tencentcloud:Clb/customizedConfig:CustomizedConfig":
 		r = &CustomizedConfig{}
 	case "tencentcloud:Clb/instance:Instance":
@@ -35,14 +37,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &LogTopic{}
 	case "tencentcloud:Clb/redirection:Redirection":
 		r = &Redirection{}
-	case "tencentcloud:Clb/serverAttachment:ServerAttachment":
-		r = &ServerAttachment{}
-	case "tencentcloud:Clb/tGAttachmentInstance:TGAttachmentInstance":
-		r = &TGAttachmentInstance{}
+	case "tencentcloud:Clb/snatIp:SnatIp":
+		r = &SnatIp{}
 	case "tencentcloud:Clb/targetGroup:TargetGroup":
 		r = &TargetGroup{}
 	case "tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment":
 		r = &TargetGroupAttachment{}
+	case "tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment":
+		r = &TargetGroupInstanceAttachment{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -56,6 +58,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/attachment",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Clb/customizedConfig",
@@ -93,12 +100,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Clb/serverAttachment",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Clb/tGAttachmentInstance",
+		"Clb/snatIp",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -109,6 +111,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Clb/targetGroupAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/targetGroupInstanceAttachment",
 		&module{version},
 	)
 }

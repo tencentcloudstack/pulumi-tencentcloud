@@ -29,8 +29,7 @@ class InstanceArgs:
         :param pulumi.Input[str] cos_region: Region of the cos bucket.
         :param pulumi.Input[int] read_write_attribute: Event attribute filter. Valid values: `1`, `2`, `3`. `1` for readonly, `2` for write-only, `3` for all.
         :param pulumi.Input[bool] enable_kms_encry: Indicate whether the log is encrypt with KMS algorithm or not.
-        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-               KMS must be as same as the `cos_region`.
+        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `_audit.get_key_alias`. Caution: the region of the KMS must be as same as the `cos_region`.
         :param pulumi.Input[str] log_file_prefix: The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
         :param pulumi.Input[str] name: Name of audit. Valid length ranges from 3 to 128. Only alpha character or numbers or '_' supported.
         """
@@ -112,8 +111,7 @@ class InstanceArgs:
     @pulumi.getter(name="keyId")
     def key_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-        KMS must be as same as the `cos_region`.
+        Existing CMK unique key. This field can be get by data source `_audit.get_key_alias`. Caution: the region of the KMS must be as same as the `cos_region`.
         """
         return pulumi.get(self, "key_id")
 
@@ -164,8 +162,7 @@ class _InstanceState:
                terraform.
         :param pulumi.Input[str] cos_region: Region of the cos bucket.
         :param pulumi.Input[bool] enable_kms_encry: Indicate whether the log is encrypt with KMS algorithm or not.
-        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-               KMS must be as same as the `cos_region`.
+        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `_audit.get_key_alias`. Caution: the region of the KMS must be as same as the `cos_region`.
         :param pulumi.Input[str] log_file_prefix: The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
         :param pulumi.Input[str] name: Name of audit. Valid length ranges from 3 to 128. Only alpha character or numbers or '_' supported.
         :param pulumi.Input[int] read_write_attribute: Event attribute filter. Valid values: `1`, `2`, `3`. `1` for readonly, `2` for write-only, `3` for all.
@@ -240,8 +237,7 @@ class _InstanceState:
     @pulumi.getter(name="keyId")
     def key_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-        KMS must be as same as the `cos_region`.
+        Existing CMK unique key. This field can be get by data source `_audit.get_key_alias`. Caution: the region of the KMS must be as same as the `cos_region`.
         """
         return pulumi.get(self, "key_id")
 
@@ -301,7 +297,30 @@ class Instance(pulumi.CustomResource):
                  read_write_attribute: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create an audit.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.audit.Instance("foo",
+            audit_switch=True,
+            cos_bucket="test",
+            cos_region="ap-hongkong",
+            log_file_prefix="test",
+            read_write_attribute=3)
+        ```
+
+        ## Import
+
+        Audit can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Audit/instance:Instance foo audit-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] audit_switch: Indicate whether to turn on audit logging or not.
@@ -309,8 +328,7 @@ class Instance(pulumi.CustomResource):
                terraform.
         :param pulumi.Input[str] cos_region: Region of the cos bucket.
         :param pulumi.Input[bool] enable_kms_encry: Indicate whether the log is encrypt with KMS algorithm or not.
-        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-               KMS must be as same as the `cos_region`.
+        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `_audit.get_key_alias`. Caution: the region of the KMS must be as same as the `cos_region`.
         :param pulumi.Input[str] log_file_prefix: The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
         :param pulumi.Input[str] name: Name of audit. Valid length ranges from 3 to 128. Only alpha character or numbers or '_' supported.
         :param pulumi.Input[int] read_write_attribute: Event attribute filter. Valid values: `1`, `2`, `3`. `1` for readonly, `2` for write-only, `3` for all.
@@ -322,7 +340,30 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create an audit.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.audit.Instance("foo",
+            audit_switch=True,
+            cos_bucket="test",
+            cos_region="ap-hongkong",
+            log_file_prefix="test",
+            read_write_attribute=3)
+        ```
+
+        ## Import
+
+        Audit can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Audit/instance:Instance foo audit-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -404,8 +445,7 @@ class Instance(pulumi.CustomResource):
                terraform.
         :param pulumi.Input[str] cos_region: Region of the cos bucket.
         :param pulumi.Input[bool] enable_kms_encry: Indicate whether the log is encrypt with KMS algorithm or not.
-        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-               KMS must be as same as the `cos_region`.
+        :param pulumi.Input[str] key_id: Existing CMK unique key. This field can be get by data source `_audit.get_key_alias`. Caution: the region of the KMS must be as same as the `cos_region`.
         :param pulumi.Input[str] log_file_prefix: The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
         :param pulumi.Input[str] name: Name of audit. Valid length ranges from 3 to 128. Only alpha character or numbers or '_' supported.
         :param pulumi.Input[int] read_write_attribute: Event attribute filter. Valid values: `1`, `2`, `3`. `1` for readonly, `2` for write-only, `3` for all.
@@ -461,8 +501,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="keyId")
     def key_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-        KMS must be as same as the `cos_region`.
+        Existing CMK unique key. This field can be get by data source `_audit.get_key_alias`. Caution: the region of the KMS must be as same as the `cos_region`.
         """
         return pulumi.get(self, "key_id")
 

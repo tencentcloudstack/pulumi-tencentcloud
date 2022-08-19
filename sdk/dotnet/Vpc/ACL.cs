@@ -9,8 +9,49 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpc
 {
-    [TencentcloudResourceType("tencentcloud:Vpc/aCL:ACL")]
-    public partial class ACL : Pulumi.CustomResource
+    /// <summary>
+    /// Provide a resource to create a VPC ACL instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @default = Output.Create(Tencentcloud.Vpc.GetInstances.InvokeAsync());
+    ///         var foo = new Tencentcloud.Vpc.Acl("foo", new Tencentcloud.Vpc.AclArgs
+    ///         {
+    ///             VpcId = @default.Apply(@default =&gt; @default.InstanceLists?[0]?.VpcId),
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.1.0/24#800#TCP",
+    ///                 "ACCEPT#192.168.1.0/24#800-900#TCP",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.1.0/24#800#TCP",
+    ///                 "ACCEPT#192.168.1.0/24#800-900#TCP",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Vpc ACL can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Vpc/acl:Acl")]
+    public partial class Acl : Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time of ACL.
@@ -19,19 +60,13 @@ namespace Pulumi.Tencentcloud.Vpc
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-        /// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-        /// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         [Output("egresses")]
         public Output<ImmutableArray<string>> Egresses { get; private set; } = null!;
 
         /// <summary>
-        /// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-        /// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-        /// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         [Output("ingresses")]
         public Output<ImmutableArray<string>> Ingresses { get; private set; } = null!;
@@ -50,19 +85,19 @@ namespace Pulumi.Tencentcloud.Vpc
 
 
         /// <summary>
-        /// Create a ACL resource with the given unique name, arguments, and options.
+        /// Create a Acl resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public ACL(string name, ACLArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Vpc/aCL:ACL", name, args ?? new ACLArgs(), MakeResourceOptions(options, ""))
+        public Acl(string name, AclArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Vpc/acl:Acl", name, args ?? new AclArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private ACL(string name, Input<string> id, ACLState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Vpc/aCL:ACL", name, state, MakeResourceOptions(options, id))
+        private Acl(string name, Input<string> id, AclState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Vpc/acl:Acl", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -78,7 +113,7 @@ namespace Pulumi.Tencentcloud.Vpc
             return merged;
         }
         /// <summary>
-        /// Get an existing ACL resource's state with the given name, ID, and optional extra
+        /// Get an existing Acl resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -86,22 +121,19 @@ namespace Pulumi.Tencentcloud.Vpc
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static ACL Get(string name, Input<string> id, ACLState? state = null, CustomResourceOptions? options = null)
+        public static Acl Get(string name, Input<string> id, AclState? state = null, CustomResourceOptions? options = null)
         {
-            return new ACL(name, id, state, options);
+            return new Acl(name, id, state, options);
         }
     }
 
-    public sealed class ACLArgs : Pulumi.ResourceArgs
+    public sealed class AclArgs : Pulumi.ResourceArgs
     {
         [Input("egresses")]
         private InputList<string>? _egresses;
 
         /// <summary>
-        /// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-        /// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-        /// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Egresses
         {
@@ -113,10 +145,7 @@ namespace Pulumi.Tencentcloud.Vpc
         private InputList<string>? _ingresses;
 
         /// <summary>
-        /// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-        /// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-        /// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Ingresses
         {
@@ -136,12 +165,12 @@ namespace Pulumi.Tencentcloud.Vpc
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
-        public ACLArgs()
+        public AclArgs()
         {
         }
     }
 
-    public sealed class ACLState : Pulumi.ResourceArgs
+    public sealed class AclState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time of ACL.
@@ -153,10 +182,7 @@ namespace Pulumi.Tencentcloud.Vpc
         private InputList<string>? _egresses;
 
         /// <summary>
-        /// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-        /// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-        /// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Egresses
         {
@@ -168,10 +194,7 @@ namespace Pulumi.Tencentcloud.Vpc
         private InputList<string>? _ingresses;
 
         /// <summary>
-        /// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-        /// `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-        /// is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Ingresses
         {
@@ -191,7 +214,7 @@ namespace Pulumi.Tencentcloud.Vpc
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
-        public ACLState()
+        public AclState()
         {
         }
     }

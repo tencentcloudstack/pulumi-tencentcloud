@@ -9,12 +9,103 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
-    [TencentcloudResourceType("tencentcloud:Dayu/cCPolicyV2:CCPolicyV2")]
-    public partial class CCPolicyV2 : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create a dayu CC policy
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var demo = new Tencentcloud.Dayu.CcPolicyV2("demo", new Tencentcloud.Dayu.CcPolicyV2Args
+    ///         {
+    ///             Business = "bgpip",
+    ///             CcBlackWhiteIps = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcBlackWhiteIpArgs
+    ///                 {
+    ///                     BlackWhiteIp = "1.2.3.4",
+    ///                     Domain = "12.com",
+    ///                     Protocol = "http",
+    ///                     Type = "black",
+    ///                 },
+    ///             },
+    ///             CcGeoIpPolicys = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcGeoIpPolicyArgs
+    ///                 {
+    ///                     Action = "drop",
+    ///                     Domain = "12.com",
+    ///                     Protocol = "http",
+    ///                     RegionType = "china",
+    ///                 },
+    ///             },
+    ///             CcPrecisionPolicys = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyArgs
+    ///                 {
+    ///                     Domain = "1.com",
+    ///                     Ip = "162.62.163.34",
+    ///                     PolicyAction = "drop",
+    ///                     Policys = 
+    ///                     {
+    ///                         new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyPolicyArgs
+    ///                         {
+    ///                             FieldName = "cgi",
+    ///                             FieldType = "value",
+    ///                             Value = "12123.com",
+    ///                             ValueOperator = "equal",
+    ///                         },
+    ///                     },
+    ///                     Protocol = "http",
+    ///                 },
+    ///             },
+    ///             CcPrecisionReqLimits = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionReqLimitArgs
+    ///                 {
+    ///                     Domain = "11.com",
+    ///                     Level = "loose",
+    ///                     Policys = 
+    ///                     {
+    ///                         new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionReqLimitPolicyArgs
+    ///                         {
+    ///                             Action = "alg",
+    ///                             ExecuteDuration = 2,
+    ///                             Mode = "equal",
+    ///                             Period = 5,
+    ///                             RequestNum = 12,
+    ///                             Uri = "15.com",
+    ///                         },
+    ///                     },
+    ///                     Protocol = "http",
+    ///                 },
+    ///             },
+    ///             ResourceId = "bgpip-000004xf",
+    ///             Thresholds = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2ThresholdArgs
+    ///                 {
+    ///                     Domain = "12.com",
+    ///                     Threshold = 0,
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Dayu/ccPolicyV2:CcPolicyV2")]
+    public partial class CcPolicyV2 : Pulumi.CustomResource
     {
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        /// packet; net indicates anti-anti-ip pro version.
+        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Output("business")]
         public Output<string> Business { get; private set; } = null!;
@@ -23,25 +114,25 @@ namespace Pulumi.Tencentcloud.Dayu
         /// Blacklist and whitelist.
         /// </summary>
         [Output("ccBlackWhiteIps")]
-        public Output<ImmutableArray<Outputs.CCPolicyV2CcBlackWhiteIp>> CcBlackWhiteIps { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CcPolicyV2CcBlackWhiteIp>> CcBlackWhiteIps { get; private set; } = null!;
 
         /// <summary>
         /// Details of the CC region blocking policy list.
         /// </summary>
         [Output("ccGeoIpPolicys")]
-        public Output<ImmutableArray<Outputs.CCPolicyV2CcGeoIpPolicy>> CcGeoIpPolicys { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CcPolicyV2CcGeoIpPolicy>> CcGeoIpPolicys { get; private set; } = null!;
 
         /// <summary>
         /// CC Precision Protection List.
         /// </summary>
         [Output("ccPrecisionPolicys")]
-        public Output<ImmutableArray<Outputs.CCPolicyV2CcPrecisionPolicy>> CcPrecisionPolicys { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CcPolicyV2CcPrecisionPolicy>> CcPrecisionPolicys { get; private set; } = null!;
 
         /// <summary>
         /// CC frequency throttling policy.
         /// </summary>
         [Output("ccPrecisionReqLimits")]
-        public Output<ImmutableArray<Outputs.CCPolicyV2CcPrecisionReqLimit>> CcPrecisionReqLimits { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CcPolicyV2CcPrecisionReqLimit>> CcPrecisionReqLimits { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the resource instance.
@@ -53,23 +144,23 @@ namespace Pulumi.Tencentcloud.Dayu
         /// List of protection threshold configurations.
         /// </summary>
         [Output("thresholds")]
-        public Output<ImmutableArray<Outputs.CCPolicyV2Threshold>> Thresholds { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CcPolicyV2Threshold>> Thresholds { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a CCPolicyV2 resource with the given unique name, arguments, and options.
+        /// Create a CcPolicyV2 resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public CCPolicyV2(string name, CCPolicyV2Args args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Dayu/cCPolicyV2:CCPolicyV2", name, args ?? new CCPolicyV2Args(), MakeResourceOptions(options, ""))
+        public CcPolicyV2(string name, CcPolicyV2Args args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Dayu/ccPolicyV2:CcPolicyV2", name, args ?? new CcPolicyV2Args(), MakeResourceOptions(options, ""))
         {
         }
 
-        private CCPolicyV2(string name, Input<string> id, CCPolicyV2State? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Dayu/cCPolicyV2:CCPolicyV2", name, state, MakeResourceOptions(options, id))
+        private CcPolicyV2(string name, Input<string> id, CcPolicyV2State? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Dayu/ccPolicyV2:CcPolicyV2", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -85,7 +176,7 @@ namespace Pulumi.Tencentcloud.Dayu
             return merged;
         }
         /// <summary>
-        /// Get an existing CCPolicyV2 resource's state with the given name, ID, and optional extra
+        /// Get an existing CcPolicyV2 resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -93,66 +184,65 @@ namespace Pulumi.Tencentcloud.Dayu
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static CCPolicyV2 Get(string name, Input<string> id, CCPolicyV2State? state = null, CustomResourceOptions? options = null)
+        public static CcPolicyV2 Get(string name, Input<string> id, CcPolicyV2State? state = null, CustomResourceOptions? options = null)
         {
-            return new CCPolicyV2(name, id, state, options);
+            return new CcPolicyV2(name, id, state, options);
         }
     }
 
-    public sealed class CCPolicyV2Args : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2Args : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        /// packet; net indicates anti-anti-ip pro version.
+        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business", required: true)]
         public Input<string> Business { get; set; } = null!;
 
         [Input("ccBlackWhiteIps")]
-        private InputList<Inputs.CCPolicyV2CcBlackWhiteIpArgs>? _ccBlackWhiteIps;
+        private InputList<Inputs.CcPolicyV2CcBlackWhiteIpArgs>? _ccBlackWhiteIps;
 
         /// <summary>
         /// Blacklist and whitelist.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcBlackWhiteIpArgs> CcBlackWhiteIps
+        public InputList<Inputs.CcPolicyV2CcBlackWhiteIpArgs> CcBlackWhiteIps
         {
-            get => _ccBlackWhiteIps ?? (_ccBlackWhiteIps = new InputList<Inputs.CCPolicyV2CcBlackWhiteIpArgs>());
+            get => _ccBlackWhiteIps ?? (_ccBlackWhiteIps = new InputList<Inputs.CcPolicyV2CcBlackWhiteIpArgs>());
             set => _ccBlackWhiteIps = value;
         }
 
         [Input("ccGeoIpPolicys")]
-        private InputList<Inputs.CCPolicyV2CcGeoIpPolicyArgs>? _ccGeoIpPolicys;
+        private InputList<Inputs.CcPolicyV2CcGeoIpPolicyArgs>? _ccGeoIpPolicys;
 
         /// <summary>
         /// Details of the CC region blocking policy list.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcGeoIpPolicyArgs> CcGeoIpPolicys
+        public InputList<Inputs.CcPolicyV2CcGeoIpPolicyArgs> CcGeoIpPolicys
         {
-            get => _ccGeoIpPolicys ?? (_ccGeoIpPolicys = new InputList<Inputs.CCPolicyV2CcGeoIpPolicyArgs>());
+            get => _ccGeoIpPolicys ?? (_ccGeoIpPolicys = new InputList<Inputs.CcPolicyV2CcGeoIpPolicyArgs>());
             set => _ccGeoIpPolicys = value;
         }
 
         [Input("ccPrecisionPolicys")]
-        private InputList<Inputs.CCPolicyV2CcPrecisionPolicyArgs>? _ccPrecisionPolicys;
+        private InputList<Inputs.CcPolicyV2CcPrecisionPolicyArgs>? _ccPrecisionPolicys;
 
         /// <summary>
         /// CC Precision Protection List.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcPrecisionPolicyArgs> CcPrecisionPolicys
+        public InputList<Inputs.CcPolicyV2CcPrecisionPolicyArgs> CcPrecisionPolicys
         {
-            get => _ccPrecisionPolicys ?? (_ccPrecisionPolicys = new InputList<Inputs.CCPolicyV2CcPrecisionPolicyArgs>());
+            get => _ccPrecisionPolicys ?? (_ccPrecisionPolicys = new InputList<Inputs.CcPolicyV2CcPrecisionPolicyArgs>());
             set => _ccPrecisionPolicys = value;
         }
 
         [Input("ccPrecisionReqLimits")]
-        private InputList<Inputs.CCPolicyV2CcPrecisionReqLimitArgs>? _ccPrecisionReqLimits;
+        private InputList<Inputs.CcPolicyV2CcPrecisionReqLimitArgs>? _ccPrecisionReqLimits;
 
         /// <summary>
         /// CC frequency throttling policy.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcPrecisionReqLimitArgs> CcPrecisionReqLimits
+        public InputList<Inputs.CcPolicyV2CcPrecisionReqLimitArgs> CcPrecisionReqLimits
         {
-            get => _ccPrecisionReqLimits ?? (_ccPrecisionReqLimits = new InputList<Inputs.CCPolicyV2CcPrecisionReqLimitArgs>());
+            get => _ccPrecisionReqLimits ?? (_ccPrecisionReqLimits = new InputList<Inputs.CcPolicyV2CcPrecisionReqLimitArgs>());
             set => _ccPrecisionReqLimits = value;
         }
 
@@ -163,76 +253,75 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string> ResourceId { get; set; } = null!;
 
         [Input("thresholds")]
-        private InputList<Inputs.CCPolicyV2ThresholdArgs>? _thresholds;
+        private InputList<Inputs.CcPolicyV2ThresholdArgs>? _thresholds;
 
         /// <summary>
         /// List of protection threshold configurations.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2ThresholdArgs> Thresholds
+        public InputList<Inputs.CcPolicyV2ThresholdArgs> Thresholds
         {
-            get => _thresholds ?? (_thresholds = new InputList<Inputs.CCPolicyV2ThresholdArgs>());
+            get => _thresholds ?? (_thresholds = new InputList<Inputs.CcPolicyV2ThresholdArgs>());
             set => _thresholds = value;
         }
 
-        public CCPolicyV2Args()
+        public CcPolicyV2Args()
         {
         }
     }
 
-    public sealed class CCPolicyV2State : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2State : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        /// packet; net indicates anti-anti-ip pro version.
+        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business")]
         public Input<string>? Business { get; set; }
 
         [Input("ccBlackWhiteIps")]
-        private InputList<Inputs.CCPolicyV2CcBlackWhiteIpGetArgs>? _ccBlackWhiteIps;
+        private InputList<Inputs.CcPolicyV2CcBlackWhiteIpGetArgs>? _ccBlackWhiteIps;
 
         /// <summary>
         /// Blacklist and whitelist.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcBlackWhiteIpGetArgs> CcBlackWhiteIps
+        public InputList<Inputs.CcPolicyV2CcBlackWhiteIpGetArgs> CcBlackWhiteIps
         {
-            get => _ccBlackWhiteIps ?? (_ccBlackWhiteIps = new InputList<Inputs.CCPolicyV2CcBlackWhiteIpGetArgs>());
+            get => _ccBlackWhiteIps ?? (_ccBlackWhiteIps = new InputList<Inputs.CcPolicyV2CcBlackWhiteIpGetArgs>());
             set => _ccBlackWhiteIps = value;
         }
 
         [Input("ccGeoIpPolicys")]
-        private InputList<Inputs.CCPolicyV2CcGeoIpPolicyGetArgs>? _ccGeoIpPolicys;
+        private InputList<Inputs.CcPolicyV2CcGeoIpPolicyGetArgs>? _ccGeoIpPolicys;
 
         /// <summary>
         /// Details of the CC region blocking policy list.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcGeoIpPolicyGetArgs> CcGeoIpPolicys
+        public InputList<Inputs.CcPolicyV2CcGeoIpPolicyGetArgs> CcGeoIpPolicys
         {
-            get => _ccGeoIpPolicys ?? (_ccGeoIpPolicys = new InputList<Inputs.CCPolicyV2CcGeoIpPolicyGetArgs>());
+            get => _ccGeoIpPolicys ?? (_ccGeoIpPolicys = new InputList<Inputs.CcPolicyV2CcGeoIpPolicyGetArgs>());
             set => _ccGeoIpPolicys = value;
         }
 
         [Input("ccPrecisionPolicys")]
-        private InputList<Inputs.CCPolicyV2CcPrecisionPolicyGetArgs>? _ccPrecisionPolicys;
+        private InputList<Inputs.CcPolicyV2CcPrecisionPolicyGetArgs>? _ccPrecisionPolicys;
 
         /// <summary>
         /// CC Precision Protection List.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcPrecisionPolicyGetArgs> CcPrecisionPolicys
+        public InputList<Inputs.CcPolicyV2CcPrecisionPolicyGetArgs> CcPrecisionPolicys
         {
-            get => _ccPrecisionPolicys ?? (_ccPrecisionPolicys = new InputList<Inputs.CCPolicyV2CcPrecisionPolicyGetArgs>());
+            get => _ccPrecisionPolicys ?? (_ccPrecisionPolicys = new InputList<Inputs.CcPolicyV2CcPrecisionPolicyGetArgs>());
             set => _ccPrecisionPolicys = value;
         }
 
         [Input("ccPrecisionReqLimits")]
-        private InputList<Inputs.CCPolicyV2CcPrecisionReqLimitGetArgs>? _ccPrecisionReqLimits;
+        private InputList<Inputs.CcPolicyV2CcPrecisionReqLimitGetArgs>? _ccPrecisionReqLimits;
 
         /// <summary>
         /// CC frequency throttling policy.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2CcPrecisionReqLimitGetArgs> CcPrecisionReqLimits
+        public InputList<Inputs.CcPolicyV2CcPrecisionReqLimitGetArgs> CcPrecisionReqLimits
         {
-            get => _ccPrecisionReqLimits ?? (_ccPrecisionReqLimits = new InputList<Inputs.CCPolicyV2CcPrecisionReqLimitGetArgs>());
+            get => _ccPrecisionReqLimits ?? (_ccPrecisionReqLimits = new InputList<Inputs.CcPolicyV2CcPrecisionReqLimitGetArgs>());
             set => _ccPrecisionReqLimits = value;
         }
 
@@ -243,18 +332,18 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? ResourceId { get; set; }
 
         [Input("thresholds")]
-        private InputList<Inputs.CCPolicyV2ThresholdGetArgs>? _thresholds;
+        private InputList<Inputs.CcPolicyV2ThresholdGetArgs>? _thresholds;
 
         /// <summary>
         /// List of protection threshold configurations.
         /// </summary>
-        public InputList<Inputs.CCPolicyV2ThresholdGetArgs> Thresholds
+        public InputList<Inputs.CcPolicyV2ThresholdGetArgs> Thresholds
         {
-            get => _thresholds ?? (_thresholds = new InputList<Inputs.CCPolicyV2ThresholdGetArgs>());
+            get => _thresholds ?? (_thresholds = new InputList<Inputs.CcPolicyV2ThresholdGetArgs>());
             set => _thresholds = value;
         }
 
-        public CCPolicyV2State()
+        public CcPolicyV2State()
         {
         }
     }

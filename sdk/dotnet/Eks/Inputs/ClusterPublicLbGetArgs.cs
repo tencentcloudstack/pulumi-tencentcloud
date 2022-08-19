@@ -14,15 +14,25 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
     {
         [Input("allowFromCidrs")]
         private InputList<string>? _allowFromCidrs;
+
+        /// <summary>
+        /// List of CIDRs which allowed to access.
+        /// </summary>
         public InputList<string> AllowFromCidrs
         {
             get => _allowFromCidrs ?? (_allowFromCidrs = new InputList<string>());
             set => _allowFromCidrs = value;
         }
 
+        /// <summary>
+        /// Indicates weather the public access LB enabled.
+        /// </summary>
         [Input("enabled", required: true)]
         public Input<bool> Enabled { get; set; } = null!;
 
+        /// <summary>
+        /// Extra param text json.
+        /// </summary>
         [Input("extraParam")]
         public Input<string>? ExtraParam { get; set; }
 
@@ -31,6 +41,10 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
 
         [Input("securityPolicies")]
         private InputList<string>? _securityPolicies;
+
+        /// <summary>
+        /// List of security allow IP or CIDRs, default deny all.
+        /// </summary>
         public InputList<string> SecurityPolicies
         {
             get => _securityPolicies ?? (_securityPolicies = new InputList<string>());

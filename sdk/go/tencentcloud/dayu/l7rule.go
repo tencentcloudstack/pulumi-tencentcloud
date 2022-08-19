@@ -11,18 +11,59 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create dayu layer 7 rule
+//
+// > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewL7Rule(ctx, "testRule", &Dayu.L7RuleArgs{
+// 			Domain:                 pulumi.String("zhaoshaona.com"),
+// 			HealthCheckCode:        pulumi.Int(31),
+// 			HealthCheckHealthNum:   pulumi.Int(5),
+// 			HealthCheckInterval:    pulumi.Int(30),
+// 			HealthCheckMethod:      pulumi.String("GET"),
+// 			HealthCheckPath:        pulumi.String("/"),
+// 			HealthCheckSwitch:      pulumi.Bool(true),
+// 			HealthCheckUnhealthNum: pulumi.Int(10),
+// 			Protocol:               pulumi.String("https"),
+// 			ResourceId:             pulumi.String("bgpip-00000294"),
+// 			ResourceType:           pulumi.String("bgpip"),
+// 			SourceLists: pulumi.StringArray{
+// 				pulumi.String("1.1.1.1:80"),
+// 				pulumi.String("2.2.2.2"),
+// 			},
+// 			SourceType: pulumi.Int(2),
+// 			SslId:      pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+// 			Switch:     pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type L7Rule struct {
 	pulumi.CustomResourceState
 
 	// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
 	Domain pulumi.StringOutput `pulumi:"domain"`
-	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-	// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-	// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-	// the corresponding values.
+	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckCode pulumi.IntOutput `pulumi:"healthCheckCode"`
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
 	HealthCheckHealthNum pulumi.IntOutput `pulumi:"healthCheckHealthNum"`
 	// Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
 	HealthCheckInterval pulumi.IntOutput `pulumi:"healthCheckInterval"`
@@ -32,8 +73,7 @@ type L7Rule struct {
 	HealthCheckPath pulumi.StringOutput `pulumi:"healthCheckPath"`
 	// Indicates whether health check is enabled. The default is `false`.
 	HealthCheckSwitch pulumi.BoolOutput `pulumi:"healthCheckSwitch"`
-	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is [2-10].
+	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
 	HealthCheckUnhealthNum pulumi.IntOutput `pulumi:"healthCheckUnhealthNum"`
 	// Name of the rule.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -45,15 +85,13 @@ type L7Rule struct {
 	ResourceType pulumi.StringOutput `pulumi:"resourceType"`
 	// ID of the layer 7 rule.
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 16.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
 	SourceLists pulumi.StringArrayOutput `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType pulumi.IntOutput `pulumi:"sourceType"`
 	// SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
 	SslId pulumi.StringPtrOutput `pulumi:"sslId"`
-	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-	// failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
 	Status pulumi.IntOutput `pulumi:"status"`
 	// Indicate the rule will take effect or not.
 	Switch pulumi.BoolOutput `pulumi:"switch"`
@@ -111,13 +149,9 @@ func GetL7Rule(ctx *pulumi.Context,
 type l7ruleState struct {
 	// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
 	Domain *string `pulumi:"domain"`
-	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-	// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-	// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-	// the corresponding values.
+	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckCode *int `pulumi:"healthCheckCode"`
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
 	// Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
 	HealthCheckInterval *int `pulumi:"healthCheckInterval"`
@@ -127,8 +161,7 @@ type l7ruleState struct {
 	HealthCheckPath *string `pulumi:"healthCheckPath"`
 	// Indicates whether health check is enabled. The default is `false`.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
-	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is [2-10].
+	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
 	// Name of the rule.
 	Name *string `pulumi:"name"`
@@ -140,15 +173,13 @@ type l7ruleState struct {
 	ResourceType *string `pulumi:"resourceType"`
 	// ID of the layer 7 rule.
 	RuleId *string `pulumi:"ruleId"`
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 16.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
 	SourceLists []string `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType *int `pulumi:"sourceType"`
 	// SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
 	SslId *string `pulumi:"sslId"`
-	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-	// failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
 	Status *int `pulumi:"status"`
 	// Indicate the rule will take effect or not.
 	Switch *bool `pulumi:"switch"`
@@ -157,13 +188,9 @@ type l7ruleState struct {
 type L7RuleState struct {
 	// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
 	Domain pulumi.StringPtrInput
-	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-	// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-	// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-	// the corresponding values.
+	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckCode pulumi.IntPtrInput
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
 	HealthCheckHealthNum pulumi.IntPtrInput
 	// Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
 	HealthCheckInterval pulumi.IntPtrInput
@@ -173,8 +200,7 @@ type L7RuleState struct {
 	HealthCheckPath pulumi.StringPtrInput
 	// Indicates whether health check is enabled. The default is `false`.
 	HealthCheckSwitch pulumi.BoolPtrInput
-	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is [2-10].
+	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
 	HealthCheckUnhealthNum pulumi.IntPtrInput
 	// Name of the rule.
 	Name pulumi.StringPtrInput
@@ -186,15 +212,13 @@ type L7RuleState struct {
 	ResourceType pulumi.StringPtrInput
 	// ID of the layer 7 rule.
 	RuleId pulumi.StringPtrInput
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 16.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
 	SourceLists pulumi.StringArrayInput
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType pulumi.IntPtrInput
 	// SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
 	SslId pulumi.StringPtrInput
-	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-	// failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+	// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
 	Status pulumi.IntPtrInput
 	// Indicate the rule will take effect or not.
 	Switch pulumi.BoolPtrInput
@@ -207,13 +231,9 @@ func (L7RuleState) ElementType() reflect.Type {
 type l7ruleArgs struct {
 	// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
 	Domain string `pulumi:"domain"`
-	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-	// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-	// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-	// the corresponding values.
+	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckCode *int `pulumi:"healthCheckCode"`
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
 	// Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
 	HealthCheckInterval *int `pulumi:"healthCheckInterval"`
@@ -223,8 +243,7 @@ type l7ruleArgs struct {
 	HealthCheckPath *string `pulumi:"healthCheckPath"`
 	// Indicates whether health check is enabled. The default is `false`.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
-	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is [2-10].
+	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
 	// Name of the rule.
 	Name *string `pulumi:"name"`
@@ -234,8 +253,7 @@ type l7ruleArgs struct {
 	ResourceId string `pulumi:"resourceId"`
 	// Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
 	ResourceType string `pulumi:"resourceType"`
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 16.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
 	SourceLists []string `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType int `pulumi:"sourceType"`
@@ -249,13 +267,9 @@ type l7ruleArgs struct {
 type L7RuleArgs struct {
 	// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
 	Domain pulumi.StringInput
-	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-	// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-	// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-	// the corresponding values.
+	// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckCode pulumi.IntPtrInput
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
 	HealthCheckHealthNum pulumi.IntPtrInput
 	// Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
 	HealthCheckInterval pulumi.IntPtrInput
@@ -265,8 +279,7 @@ type L7RuleArgs struct {
 	HealthCheckPath pulumi.StringPtrInput
 	// Indicates whether health check is enabled. The default is `false`.
 	HealthCheckSwitch pulumi.BoolPtrInput
-	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-	// indicates that the forwarding is abnormal. The value range is [2-10].
+	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
 	HealthCheckUnhealthNum pulumi.IntPtrInput
 	// Name of the rule.
 	Name pulumi.StringPtrInput
@@ -276,8 +289,7 @@ type L7RuleArgs struct {
 	ResourceId pulumi.StringInput
 	// Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
 	ResourceType pulumi.StringInput
-	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-	// 16.
+	// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
 	SourceLists pulumi.StringArrayInput
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType pulumi.IntInput
@@ -379,16 +391,12 @@ func (o L7RuleOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
 }
 
-// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-// the corresponding values.
+// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
 func (o L7RuleOutput) HealthCheckCode() pulumi.IntOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.IntOutput { return v.HealthCheckCode }).(pulumi.IntOutput)
 }
 
-// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
 func (o L7RuleOutput) HealthCheckHealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.IntOutput { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
 }
@@ -413,8 +421,7 @@ func (o L7RuleOutput) HealthCheckSwitch() pulumi.BoolOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.BoolOutput { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
 }
 
-// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-// indicates that the forwarding is abnormal. The value range is [2-10].
+// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
 func (o L7RuleOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.IntOutput { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
 }
@@ -444,8 +451,7 @@ func (o L7RuleOutput) RuleId() pulumi.StringOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.StringOutput { return v.RuleId }).(pulumi.StringOutput)
 }
 
-// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-// 16.
+// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
 func (o L7RuleOutput) SourceLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.StringArrayOutput { return v.SourceLists }).(pulumi.StringArrayOutput)
 }
@@ -460,8 +466,7 @@ func (o L7RuleOutput) SslId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.StringPtrOutput { return v.SslId }).(pulumi.StringPtrOutput)
 }
 
-// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-// failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
 func (o L7RuleOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *L7Rule) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }

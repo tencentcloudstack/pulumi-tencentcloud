@@ -13,6 +13,9 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class ProcedureTemplateMediaProcessTaskImageSpriteTaskList
     {
+        /// <summary>
+        /// Image sprite generating template ID.
+        /// </summary>
         public readonly string Definition;
 
         [OutputConstructor]

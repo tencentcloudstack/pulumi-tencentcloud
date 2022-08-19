@@ -11,7 +11,55 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type IPStrategy struct {
+// Use this resource to create IP strategy of API gateway.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+// 			ServiceName: pulumi.String("niceservice"),
+// 			Protocol:    pulumi.String("http&https"),
+// 			ServiceDesc: pulumi.String("your nice service"),
+// 			NetTypes: pulumi.StringArray{
+// 				pulumi.String("INNER"),
+// 				pulumi.String("OUTER"),
+// 			},
+// 			IpVersion: pulumi.String("IPv4"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.NewIpStrategy(ctx, "test", &ApiGateway.IpStrategyArgs{
+// 			ServiceId:    service.ID(),
+// 			StrategyName: pulumi.String("tf_test"),
+// 			StrategyType: pulumi.String("BLACK"),
+// 			StrategyData: pulumi.String("9.9.9.9"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// IP strategy of API gateway can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
+// ```
+type IpStrategy struct {
 	pulumi.CustomResourceState
 
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -28,9 +76,9 @@ type IPStrategy struct {
 	StrategyType pulumi.StringOutput `pulumi:"strategyType"`
 }
 
-// NewIPStrategy registers a new resource with the given unique name, arguments, and options.
-func NewIPStrategy(ctx *pulumi.Context,
-	name string, args *IPStrategyArgs, opts ...pulumi.ResourceOption) (*IPStrategy, error) {
+// NewIpStrategy registers a new resource with the given unique name, arguments, and options.
+func NewIpStrategy(ctx *pulumi.Context,
+	name string, args *IpStrategyArgs, opts ...pulumi.ResourceOption) (*IpStrategy, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -47,28 +95,28 @@ func NewIPStrategy(ctx *pulumi.Context,
 	if args.StrategyType == nil {
 		return nil, errors.New("invalid value for required argument 'StrategyType'")
 	}
-	var resource IPStrategy
-	err := ctx.RegisterResource("tencentcloud:APIGateway/iPStrategy:IPStrategy", name, args, &resource, opts...)
+	var resource IpStrategy
+	err := ctx.RegisterResource("tencentcloud:ApiGateway/ipStrategy:IpStrategy", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetIPStrategy gets an existing IPStrategy resource's state with the given name, ID, and optional
+// GetIpStrategy gets an existing IpStrategy resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetIPStrategy(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *IPStrategyState, opts ...pulumi.ResourceOption) (*IPStrategy, error) {
-	var resource IPStrategy
-	err := ctx.ReadResource("tencentcloud:APIGateway/iPStrategy:IPStrategy", name, id, state, &resource, opts...)
+func GetIpStrategy(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *IpStrategyState, opts ...pulumi.ResourceOption) (*IpStrategy, error) {
+	var resource IpStrategy
+	err := ctx.ReadResource("tencentcloud:ApiGateway/ipStrategy:IpStrategy", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering IPStrategy resources.
-type ipstrategyState struct {
+// Input properties used for looking up and filtering IpStrategy resources.
+type ipStrategyState struct {
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime *string `pulumi:"createTime"`
 	// The ID of the API gateway service.
@@ -83,7 +131,7 @@ type ipstrategyState struct {
 	StrategyType *string `pulumi:"strategyType"`
 }
 
-type IPStrategyState struct {
+type IpStrategyState struct {
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime pulumi.StringPtrInput
 	// The ID of the API gateway service.
@@ -98,11 +146,11 @@ type IPStrategyState struct {
 	StrategyType pulumi.StringPtrInput
 }
 
-func (IPStrategyState) ElementType() reflect.Type {
-	return reflect.TypeOf((*ipstrategyState)(nil)).Elem()
+func (IpStrategyState) ElementType() reflect.Type {
+	return reflect.TypeOf((*ipStrategyState)(nil)).Elem()
 }
 
-type ipstrategyArgs struct {
+type ipStrategyArgs struct {
 	// The ID of the API gateway service.
 	ServiceId string `pulumi:"serviceId"`
 	// IP address data.
@@ -113,8 +161,8 @@ type ipstrategyArgs struct {
 	StrategyType string `pulumi:"strategyType"`
 }
 
-// The set of arguments for constructing a IPStrategy resource.
-type IPStrategyArgs struct {
+// The set of arguments for constructing a IpStrategy resource.
+type IpStrategyArgs struct {
 	// The ID of the API gateway service.
 	ServiceId pulumi.StringInput
 	// IP address data.
@@ -125,168 +173,168 @@ type IPStrategyArgs struct {
 	StrategyType pulumi.StringInput
 }
 
-func (IPStrategyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ipstrategyArgs)(nil)).Elem()
+func (IpStrategyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ipStrategyArgs)(nil)).Elem()
 }
 
-type IPStrategyInput interface {
+type IpStrategyInput interface {
 	pulumi.Input
 
-	ToIPStrategyOutput() IPStrategyOutput
-	ToIPStrategyOutputWithContext(ctx context.Context) IPStrategyOutput
+	ToIpStrategyOutput() IpStrategyOutput
+	ToIpStrategyOutputWithContext(ctx context.Context) IpStrategyOutput
 }
 
-func (*IPStrategy) ElementType() reflect.Type {
-	return reflect.TypeOf((**IPStrategy)(nil)).Elem()
+func (*IpStrategy) ElementType() reflect.Type {
+	return reflect.TypeOf((**IpStrategy)(nil)).Elem()
 }
 
-func (i *IPStrategy) ToIPStrategyOutput() IPStrategyOutput {
-	return i.ToIPStrategyOutputWithContext(context.Background())
+func (i *IpStrategy) ToIpStrategyOutput() IpStrategyOutput {
+	return i.ToIpStrategyOutputWithContext(context.Background())
 }
 
-func (i *IPStrategy) ToIPStrategyOutputWithContext(ctx context.Context) IPStrategyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IPStrategyOutput)
+func (i *IpStrategy) ToIpStrategyOutputWithContext(ctx context.Context) IpStrategyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IpStrategyOutput)
 }
 
-// IPStrategyArrayInput is an input type that accepts IPStrategyArray and IPStrategyArrayOutput values.
-// You can construct a concrete instance of `IPStrategyArrayInput` via:
+// IpStrategyArrayInput is an input type that accepts IpStrategyArray and IpStrategyArrayOutput values.
+// You can construct a concrete instance of `IpStrategyArrayInput` via:
 //
-//          IPStrategyArray{ IPStrategyArgs{...} }
-type IPStrategyArrayInput interface {
+//          IpStrategyArray{ IpStrategyArgs{...} }
+type IpStrategyArrayInput interface {
 	pulumi.Input
 
-	ToIPStrategyArrayOutput() IPStrategyArrayOutput
-	ToIPStrategyArrayOutputWithContext(context.Context) IPStrategyArrayOutput
+	ToIpStrategyArrayOutput() IpStrategyArrayOutput
+	ToIpStrategyArrayOutputWithContext(context.Context) IpStrategyArrayOutput
 }
 
-type IPStrategyArray []IPStrategyInput
+type IpStrategyArray []IpStrategyInput
 
-func (IPStrategyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*IPStrategy)(nil)).Elem()
+func (IpStrategyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*IpStrategy)(nil)).Elem()
 }
 
-func (i IPStrategyArray) ToIPStrategyArrayOutput() IPStrategyArrayOutput {
-	return i.ToIPStrategyArrayOutputWithContext(context.Background())
+func (i IpStrategyArray) ToIpStrategyArrayOutput() IpStrategyArrayOutput {
+	return i.ToIpStrategyArrayOutputWithContext(context.Background())
 }
 
-func (i IPStrategyArray) ToIPStrategyArrayOutputWithContext(ctx context.Context) IPStrategyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IPStrategyArrayOutput)
+func (i IpStrategyArray) ToIpStrategyArrayOutputWithContext(ctx context.Context) IpStrategyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IpStrategyArrayOutput)
 }
 
-// IPStrategyMapInput is an input type that accepts IPStrategyMap and IPStrategyMapOutput values.
-// You can construct a concrete instance of `IPStrategyMapInput` via:
+// IpStrategyMapInput is an input type that accepts IpStrategyMap and IpStrategyMapOutput values.
+// You can construct a concrete instance of `IpStrategyMapInput` via:
 //
-//          IPStrategyMap{ "key": IPStrategyArgs{...} }
-type IPStrategyMapInput interface {
+//          IpStrategyMap{ "key": IpStrategyArgs{...} }
+type IpStrategyMapInput interface {
 	pulumi.Input
 
-	ToIPStrategyMapOutput() IPStrategyMapOutput
-	ToIPStrategyMapOutputWithContext(context.Context) IPStrategyMapOutput
+	ToIpStrategyMapOutput() IpStrategyMapOutput
+	ToIpStrategyMapOutputWithContext(context.Context) IpStrategyMapOutput
 }
 
-type IPStrategyMap map[string]IPStrategyInput
+type IpStrategyMap map[string]IpStrategyInput
 
-func (IPStrategyMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*IPStrategy)(nil)).Elem()
+func (IpStrategyMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*IpStrategy)(nil)).Elem()
 }
 
-func (i IPStrategyMap) ToIPStrategyMapOutput() IPStrategyMapOutput {
-	return i.ToIPStrategyMapOutputWithContext(context.Background())
+func (i IpStrategyMap) ToIpStrategyMapOutput() IpStrategyMapOutput {
+	return i.ToIpStrategyMapOutputWithContext(context.Background())
 }
 
-func (i IPStrategyMap) ToIPStrategyMapOutputWithContext(ctx context.Context) IPStrategyMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IPStrategyMapOutput)
+func (i IpStrategyMap) ToIpStrategyMapOutputWithContext(ctx context.Context) IpStrategyMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IpStrategyMapOutput)
 }
 
-type IPStrategyOutput struct{ *pulumi.OutputState }
+type IpStrategyOutput struct{ *pulumi.OutputState }
 
-func (IPStrategyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**IPStrategy)(nil)).Elem()
+func (IpStrategyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IpStrategy)(nil)).Elem()
 }
 
-func (o IPStrategyOutput) ToIPStrategyOutput() IPStrategyOutput {
+func (o IpStrategyOutput) ToIpStrategyOutput() IpStrategyOutput {
 	return o
 }
 
-func (o IPStrategyOutput) ToIPStrategyOutputWithContext(ctx context.Context) IPStrategyOutput {
+func (o IpStrategyOutput) ToIpStrategyOutputWithContext(ctx context.Context) IpStrategyOutput {
 	return o
 }
 
 // Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-func (o IPStrategyOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v *IPStrategy) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+func (o IpStrategyOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *IpStrategy) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
 // The ID of the API gateway service.
-func (o IPStrategyOutput) ServiceId() pulumi.StringOutput {
-	return o.ApplyT(func(v *IPStrategy) pulumi.StringOutput { return v.ServiceId }).(pulumi.StringOutput)
+func (o IpStrategyOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *IpStrategy) pulumi.StringOutput { return v.ServiceId }).(pulumi.StringOutput)
 }
 
 // IP address data.
-func (o IPStrategyOutput) StrategyData() pulumi.StringOutput {
-	return o.ApplyT(func(v *IPStrategy) pulumi.StringOutput { return v.StrategyData }).(pulumi.StringOutput)
+func (o IpStrategyOutput) StrategyData() pulumi.StringOutput {
+	return o.ApplyT(func(v *IpStrategy) pulumi.StringOutput { return v.StrategyData }).(pulumi.StringOutput)
 }
 
 // IP policy ID.
-func (o IPStrategyOutput) StrategyId() pulumi.StringOutput {
-	return o.ApplyT(func(v *IPStrategy) pulumi.StringOutput { return v.StrategyId }).(pulumi.StringOutput)
+func (o IpStrategyOutput) StrategyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *IpStrategy) pulumi.StringOutput { return v.StrategyId }).(pulumi.StringOutput)
 }
 
 // User defined strategy name.
-func (o IPStrategyOutput) StrategyName() pulumi.StringOutput {
-	return o.ApplyT(func(v *IPStrategy) pulumi.StringOutput { return v.StrategyName }).(pulumi.StringOutput)
+func (o IpStrategyOutput) StrategyName() pulumi.StringOutput {
+	return o.ApplyT(func(v *IpStrategy) pulumi.StringOutput { return v.StrategyName }).(pulumi.StringOutput)
 }
 
 // Blacklist or whitelist.
-func (o IPStrategyOutput) StrategyType() pulumi.StringOutput {
-	return o.ApplyT(func(v *IPStrategy) pulumi.StringOutput { return v.StrategyType }).(pulumi.StringOutput)
+func (o IpStrategyOutput) StrategyType() pulumi.StringOutput {
+	return o.ApplyT(func(v *IpStrategy) pulumi.StringOutput { return v.StrategyType }).(pulumi.StringOutput)
 }
 
-type IPStrategyArrayOutput struct{ *pulumi.OutputState }
+type IpStrategyArrayOutput struct{ *pulumi.OutputState }
 
-func (IPStrategyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*IPStrategy)(nil)).Elem()
+func (IpStrategyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*IpStrategy)(nil)).Elem()
 }
 
-func (o IPStrategyArrayOutput) ToIPStrategyArrayOutput() IPStrategyArrayOutput {
+func (o IpStrategyArrayOutput) ToIpStrategyArrayOutput() IpStrategyArrayOutput {
 	return o
 }
 
-func (o IPStrategyArrayOutput) ToIPStrategyArrayOutputWithContext(ctx context.Context) IPStrategyArrayOutput {
+func (o IpStrategyArrayOutput) ToIpStrategyArrayOutputWithContext(ctx context.Context) IpStrategyArrayOutput {
 	return o
 }
 
-func (o IPStrategyArrayOutput) Index(i pulumi.IntInput) IPStrategyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *IPStrategy {
-		return vs[0].([]*IPStrategy)[vs[1].(int)]
-	}).(IPStrategyOutput)
+func (o IpStrategyArrayOutput) Index(i pulumi.IntInput) IpStrategyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *IpStrategy {
+		return vs[0].([]*IpStrategy)[vs[1].(int)]
+	}).(IpStrategyOutput)
 }
 
-type IPStrategyMapOutput struct{ *pulumi.OutputState }
+type IpStrategyMapOutput struct{ *pulumi.OutputState }
 
-func (IPStrategyMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*IPStrategy)(nil)).Elem()
+func (IpStrategyMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*IpStrategy)(nil)).Elem()
 }
 
-func (o IPStrategyMapOutput) ToIPStrategyMapOutput() IPStrategyMapOutput {
+func (o IpStrategyMapOutput) ToIpStrategyMapOutput() IpStrategyMapOutput {
 	return o
 }
 
-func (o IPStrategyMapOutput) ToIPStrategyMapOutputWithContext(ctx context.Context) IPStrategyMapOutput {
+func (o IpStrategyMapOutput) ToIpStrategyMapOutputWithContext(ctx context.Context) IpStrategyMapOutput {
 	return o
 }
 
-func (o IPStrategyMapOutput) MapIndex(k pulumi.StringInput) IPStrategyOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *IPStrategy {
-		return vs[0].(map[string]*IPStrategy)[vs[1].(string)]
-	}).(IPStrategyOutput)
+func (o IpStrategyMapOutput) MapIndex(k pulumi.StringInput) IpStrategyOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *IpStrategy {
+		return vs[0].(map[string]*IpStrategy)[vs[1].(string)]
+	}).(IpStrategyOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*IPStrategyInput)(nil)).Elem(), &IPStrategy{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IPStrategyArrayInput)(nil)).Elem(), IPStrategyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IPStrategyMapInput)(nil)).Elem(), IPStrategyMap{})
-	pulumi.RegisterOutputType(IPStrategyOutput{})
-	pulumi.RegisterOutputType(IPStrategyArrayOutput{})
-	pulumi.RegisterOutputType(IPStrategyMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IpStrategyInput)(nil)).Elem(), &IpStrategy{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IpStrategyArrayInput)(nil)).Elem(), IpStrategyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IpStrategyMapInput)(nil)).Elem(), IpStrategyMap{})
+	pulumi.RegisterOutputType(IpStrategyOutput{})
+	pulumi.RegisterOutputType(IpStrategyArrayOutput{})
+	pulumi.RegisterOutputType(IpStrategyMapOutput{})
 }

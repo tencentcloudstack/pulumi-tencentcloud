@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource for an AS (Auto scaling) schedule.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const schedule = new tencentcloud.As.Schedule("schedule", {
+ *     desiredCapacity: 0,
+ *     endTime: "2019-12-01T00:00:00+08:00",
+ *     maxSize: 10,
+ *     minSize: 0,
+ *     recurrence: "0 0 * * *",
+ *     scalingGroupId: "sg-12af45",
+ *     scheduleActionName: "tf-as-schedule",
+ *     startTime: "2019-01-01T00:00:00+08:00",
+ * });
+ * ```
+ */
 export class Schedule extends pulumi.CustomResource {
     /**
      * Get an existing Schedule resource's state with the given name, ID, and optional extra
@@ -49,8 +70,7 @@ export class Schedule extends pulumi.CustomResource {
      */
     public readonly minSize!: pulumi.Output<number>;
     /**
-     * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-     * format. And this argument should be set with end_time together.
+     * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
      */
     public readonly recurrence!: pulumi.Output<string | undefined>;
     /**
@@ -142,8 +162,7 @@ export interface ScheduleState {
      */
     minSize?: pulumi.Input<number>;
     /**
-     * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-     * format. And this argument should be set with end_time together.
+     * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
      */
     recurrence?: pulumi.Input<string>;
     /**
@@ -181,8 +200,7 @@ export interface ScheduleArgs {
      */
     minSize: pulumi.Input<number>;
     /**
-     * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-     * format. And this argument should be set with end_time together.
+     * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
      */
     recurrence?: pulumi.Input<string>;
     /**

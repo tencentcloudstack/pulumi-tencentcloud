@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Cynosdb.Outputs
     [OutputType]
     public sealed class ClusterRwGroupInstance
     {
+        /// <summary>
+        /// ID of instance.
+        /// </summary>
         public readonly string? InstanceId;
+        /// <summary>
+        /// Name of instance.
+        /// </summary>
         public readonly string? InstanceName;
 
         [OutputConstructor]

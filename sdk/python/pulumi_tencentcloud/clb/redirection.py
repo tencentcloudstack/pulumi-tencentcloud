@@ -25,11 +25,8 @@ class RedirectionArgs:
         :param pulumi.Input[str] clb_id: ID of CLB instance.
         :param pulumi.Input[str] target_listener_id: ID of source listener.
         :param pulumi.Input[str] target_rule_id: Rule ID of target listener.
-        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-               auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-               when this parameter set true.
-        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-               should be empty, the target listener must be https protocol and port is 443.
+        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
+        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         :param pulumi.Input[str] source_listener_id: ID of source listener.
         :param pulumi.Input[str] source_rule_id: Rule ID of source listener.
         """
@@ -85,9 +82,7 @@ class RedirectionArgs:
     @pulumi.getter(name="deleteAllAutoRewrite")
     def delete_all_auto_rewrite(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-        auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-        when this parameter set true.
+        Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
         """
         return pulumi.get(self, "delete_all_auto_rewrite")
 
@@ -99,8 +94,7 @@ class RedirectionArgs:
     @pulumi.getter(name="isAutoRewrite")
     def is_auto_rewrite(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-        should be empty, the target listener must be https protocol and port is 443.
+        Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         """
         return pulumi.get(self, "is_auto_rewrite")
 
@@ -146,11 +140,8 @@ class _RedirectionState:
         """
         Input properties used for looking up and filtering Redirection resources.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
-        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-               auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-               when this parameter set true.
-        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-               should be empty, the target listener must be https protocol and port is 443.
+        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
+        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         :param pulumi.Input[str] source_listener_id: ID of source listener.
         :param pulumi.Input[str] source_rule_id: Rule ID of source listener.
         :param pulumi.Input[str] target_listener_id: ID of source listener.
@@ -187,9 +178,7 @@ class _RedirectionState:
     @pulumi.getter(name="deleteAllAutoRewrite")
     def delete_all_auto_rewrite(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-        auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-        when this parameter set true.
+        Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
         """
         return pulumi.get(self, "delete_all_auto_rewrite")
 
@@ -201,8 +190,7 @@ class _RedirectionState:
     @pulumi.getter(name="isAutoRewrite")
     def is_auto_rewrite(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-        should be empty, the target listener must be https protocol and port is 443.
+        Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         """
         return pulumi.get(self, "is_auto_rewrite")
 
@@ -273,15 +261,50 @@ class Redirection(pulumi.CustomResource):
                  target_rule_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Redirection resource with the given unique name, props, and options.
+        Provides a resource to create a CLB redirection.
+
+        ## Example Usage
+
+        Manual Rewrite
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.clb.Redirection("foo",
+            clb_id="lb-p7olt9e5",
+            source_listener_id="lbl-jc1dx6ju",
+            source_rule_id="loc-ft8fmngv",
+            target_listener_id="lbl-asj1hzuo",
+            target_rule_id="loc-4xxr2cy7")
+        ```
+
+        Auto Rewrite
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.clb.Redirection("foo",
+            clb_id="lb-p7olt9e5",
+            is_auto_rewrite=True,
+            target_listener_id="lbl-asj1hzuo",
+            target_rule_id="loc-4xxr2cy7")
+        ```
+
+        ## Import
+
+        CLB redirection can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
-        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-               auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-               when this parameter set true.
-        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-               should be empty, the target listener must be https protocol and port is 443.
+        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
+        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         :param pulumi.Input[str] source_listener_id: ID of source listener.
         :param pulumi.Input[str] source_rule_id: Rule ID of source listener.
         :param pulumi.Input[str] target_listener_id: ID of source listener.
@@ -294,7 +317,45 @@ class Redirection(pulumi.CustomResource):
                  args: RedirectionArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Redirection resource with the given unique name, props, and options.
+        Provides a resource to create a CLB redirection.
+
+        ## Example Usage
+
+        Manual Rewrite
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.clb.Redirection("foo",
+            clb_id="lb-p7olt9e5",
+            source_listener_id="lbl-jc1dx6ju",
+            source_rule_id="loc-ft8fmngv",
+            target_listener_id="lbl-asj1hzuo",
+            target_rule_id="loc-4xxr2cy7")
+        ```
+
+        Auto Rewrite
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.clb.Redirection("foo",
+            clb_id="lb-p7olt9e5",
+            is_auto_rewrite=True,
+            target_listener_id="lbl-asj1hzuo",
+            target_rule_id="loc-4xxr2cy7")
+        ```
+
+        ## Import
+
+        CLB redirection can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+        ```
+
         :param str resource_name: The name of the resource.
         :param RedirectionArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -367,11 +428,8 @@ class Redirection(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
-        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-               auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-               when this parameter set true.
-        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-               should be empty, the target listener must be https protocol and port is 443.
+        :param pulumi.Input[bool] delete_all_auto_rewrite: Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
+        :param pulumi.Input[bool] is_auto_rewrite: Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         :param pulumi.Input[str] source_listener_id: ID of source listener.
         :param pulumi.Input[str] source_rule_id: Rule ID of source listener.
         :param pulumi.Input[str] target_listener_id: ID of source listener.
@@ -402,9 +460,7 @@ class Redirection(pulumi.CustomResource):
     @pulumi.getter(name="deleteAllAutoRewrite")
     def delete_all_auto_rewrite(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-        auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-        when this parameter set true.
+        Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
         """
         return pulumi.get(self, "delete_all_auto_rewrite")
 
@@ -412,8 +468,7 @@ class Redirection(pulumi.CustomResource):
     @pulumi.getter(name="isAutoRewrite")
     def is_auto_rewrite(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-        should be empty, the target listener must be https protocol and port is 443.
+        Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         """
         return pulumi.get(self, "is_auto_rewrite")
 

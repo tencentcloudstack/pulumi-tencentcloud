@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource for an AS (Auto scaling) notification.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const asNotification = new tencentcloud.As.Notification("as_notification", {
+ *     notificationTypes: [
+ *         "SCALE_OUT_FAILED",
+ *         "SCALE_IN_SUCCESSFUL",
+ *         "SCALE_IN_FAILED",
+ *         "REPLACE_UNHEALTHY_INSTANCE_FAILED",
+ *     ],
+ *     notificationUserGroupIds: ["76955"],
+ *     scalingGroupId: "sg-12af45",
+ * });
+ * ```
+ */
 export class Notification extends pulumi.CustomResource {
     /**
      * Get an existing Notification resource's state with the given name, ID, and optional extra
@@ -33,9 +54,7 @@ export class Notification extends pulumi.CustomResource {
     }
 
     /**
-     * A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-     * `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-     * `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+     * A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
      */
     public readonly notificationTypes!: pulumi.Output<string[]>;
     /**
@@ -88,9 +107,7 @@ export class Notification extends pulumi.CustomResource {
  */
 export interface NotificationState {
     /**
-     * A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-     * `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-     * `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+     * A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
      */
     notificationTypes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -108,9 +125,7 @@ export interface NotificationState {
  */
 export interface NotificationArgs {
     /**
-     * A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-     * `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-     * `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+     * A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
      */
     notificationTypes: pulumi.Input<pulumi.Input<string>[]>;
     /**

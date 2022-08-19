@@ -13,12 +13,33 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class ProcedureTemplateMediaProcessTask
     {
+        /// <summary>
+        /// List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList> AdaptiveDynamicStreamingTaskLists;
+        /// <summary>
+        /// List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskList> AnimatedGraphicTaskLists;
+        /// <summary>
+        /// List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskList> CoverBySnapshotTaskLists;
+        /// <summary>
+        /// List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskList> ImageSpriteTaskLists;
+        /// <summary>
+        /// List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskSampleSnapshotTaskList> SampleSnapshotTaskLists;
+        /// <summary>
+        /// List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskList> SnapshotByTimeOffsetTaskLists;
+        /// <summary>
+        /// List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskList> TranscodeTaskLists;
 
         [OutputConstructor]

@@ -9,6 +9,43 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dnat
 {
+    /// <summary>
+    /// Provides a resource to create a NAT forwarding.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Dnat.Instance("foo", new Tencentcloud.Dnat.InstanceArgs
+    ///         {
+    ///             Description = "test",
+    ///             ElasticIp = "139.199.232.238",
+    ///             ElasticPort = "80",
+    ///             NatId = "nat-2515tdg",
+    ///             PrivateIp = "10.0.0.1",
+    ///             PrivatePort = "22",
+    ///             Protocol = "tcp",
+    ///             VpcId = "vpc-asg3sfa3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// NAT forwarding can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnat/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {

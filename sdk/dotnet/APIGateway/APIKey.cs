@@ -7,10 +7,41 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/aPIKey:APIKey")]
-    public partial class APIKey : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create API gateway access key.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var test = new Tencentcloud.ApiGateway.ApiKey("test", new Tencentcloud.ApiGateway.ApiKeyArgs
+    ///         {
+    ///             SecretName = "my_api_key",
+    ///             Status = "on",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// API gateway access key can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/apiKey:ApiKey")]
+    public partial class ApiKey : Pulumi.CustomResource
     {
         /// <summary>
         /// Created API key.
@@ -44,19 +75,19 @@ namespace Pulumi.Tencentcloud.APIGateway
 
 
         /// <summary>
-        /// Create a APIKey resource with the given unique name, arguments, and options.
+        /// Create a ApiKey resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public APIKey(string name, APIKeyArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/aPIKey:APIKey", name, args ?? new APIKeyArgs(), MakeResourceOptions(options, ""))
+        public ApiKey(string name, ApiKeyArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/apiKey:ApiKey", name, args ?? new ApiKeyArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private APIKey(string name, Input<string> id, APIKeyState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/aPIKey:APIKey", name, state, MakeResourceOptions(options, id))
+        private ApiKey(string name, Input<string> id, ApiKeyState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/apiKey:ApiKey", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -72,7 +103,7 @@ namespace Pulumi.Tencentcloud.APIGateway
             return merged;
         }
         /// <summary>
-        /// Get an existing APIKey resource's state with the given name, ID, and optional extra
+        /// Get an existing ApiKey resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -80,13 +111,13 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static APIKey Get(string name, Input<string> id, APIKeyState? state = null, CustomResourceOptions? options = null)
+        public static ApiKey Get(string name, Input<string> id, ApiKeyState? state = null, CustomResourceOptions? options = null)
         {
-            return new APIKey(name, id, state, options);
+            return new ApiKey(name, id, state, options);
         }
     }
 
-    public sealed class APIKeyArgs : Pulumi.ResourceArgs
+    public sealed class ApiKeyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Custom key name.
@@ -100,12 +131,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("status")]
         public Input<string>? Status { get; set; }
 
-        public APIKeyArgs()
+        public ApiKeyArgs()
         {
         }
     }
 
-    public sealed class APIKeyState : Pulumi.ResourceArgs
+    public sealed class ApiKeyState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Created API key.
@@ -137,7 +168,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("status")]
         public Input<string>? Status { get; set; }
 
-        public APIKeyState()
+        public ApiKeyState()
         {
         }
     }

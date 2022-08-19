@@ -11,13 +11,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a VPC.
+//
+// ## Import
+//
+// Vpc instance can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
 	// List of Assistant CIDR.
 	AssistantCidrs pulumi.StringArrayOutput `pulumi:"assistantCidrs"`
-	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-	// 192.168.0.0/16).
+	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock pulumi.StringOutput `pulumi:"cidrBlock"`
 	// Creation time of VPC.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -69,8 +77,7 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// List of Assistant CIDR.
 	AssistantCidrs []string `pulumi:"assistantCidrs"`
-	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-	// 192.168.0.0/16).
+	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// Creation time of VPC.
 	CreateTime *string `pulumi:"createTime"`
@@ -91,8 +98,7 @@ type instanceState struct {
 type InstanceState struct {
 	// List of Assistant CIDR.
 	AssistantCidrs pulumi.StringArrayInput
-	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-	// 192.168.0.0/16).
+	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock pulumi.StringPtrInput
 	// Creation time of VPC.
 	CreateTime pulumi.StringPtrInput
@@ -117,8 +123,7 @@ func (InstanceState) ElementType() reflect.Type {
 type instanceArgs struct {
 	// List of Assistant CIDR.
 	AssistantCidrs []string `pulumi:"assistantCidrs"`
-	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-	// 192.168.0.0/16).
+	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock string `pulumi:"cidrBlock"`
 	// The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 	DnsServers []string `pulumi:"dnsServers"`
@@ -134,8 +139,7 @@ type instanceArgs struct {
 type InstanceArgs struct {
 	// List of Assistant CIDR.
 	AssistantCidrs pulumi.StringArrayInput
-	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-	// 192.168.0.0/16).
+	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock pulumi.StringInput
 	// The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 	DnsServers pulumi.StringArrayInput
@@ -239,8 +243,7 @@ func (o InstanceOutput) AssistantCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.AssistantCidrs }).(pulumi.StringArrayOutput)
 }
 
-// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-// 192.168.0.0/16).
+// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 func (o InstanceOutput) CidrBlock() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CidrBlock }).(pulumi.StringOutput)
 }

@@ -10,19 +10,21 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'InstancesInstanceListResult',
-    'InstancesInstanceListDataDiskResult',
+    'GetInstanceInstanceListResult',
+    'GetInstanceInstanceListDataDiskResult',
+    'GetSetInstanceListResult',
+    'GetSetInstanceListDataDiskResult',
 ]
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstanceInstanceListResult(dict):
     def __init__(__self__, *,
                  allocate_public_ip: bool,
                  availability_zone: str,
                  cam_role_name: str,
                  cpu: int,
                  create_time: str,
-                 data_disks: Sequence['outputs.InstancesInstanceListDataDiskResult'],
+                 data_disks: Sequence['outputs.GetInstanceInstanceListDataDiskResult'],
                  expired_time: str,
                  image_id: str,
                  instance_charge_type: str,
@@ -44,6 +46,35 @@ class InstancesInstanceListResult(dict):
                  system_disk_type: str,
                  tags: Mapping[str, Any],
                  vpc_id: str):
+        """
+        :param bool allocate_public_ip: Indicates whether public ip is assigned.
+        :param str availability_zone: The available zone that the CVM instance locates at.
+        :param str cam_role_name: CAM role name authorized to access.
+        :param int cpu: The number of CPU cores of the instance.
+        :param str create_time: Creation time of the instance.
+        :param Sequence['GetInstanceInstanceListDataDiskArgs'] data_disks: An information list of data disk. Each element contains the following attributes:
+        :param str expired_time: Expired time of the instance.
+        :param str image_id: ID of the image.
+        :param str instance_charge_type: The charge type of the instance.
+        :param str instance_charge_type_prepaid_renew_flag: The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.
+        :param str instance_id: ID of the instances to be queried.
+        :param str instance_name: Name of the instances to be queried.
+        :param str instance_type: Type of the instance.
+        :param str internet_charge_type: The charge type of the instance.
+        :param int internet_max_bandwidth_out: Public network maximum output bandwidth of the instance.
+        :param int memory: Instance memory capacity, unit in GB.
+        :param str private_ip: Private IP of the instance.
+        :param int project_id: The project CVM belongs to.
+        :param str public_ip: Public IP of the instance.
+        :param Sequence[str] security_groups: Security groups of the instance.
+        :param str status: Status of the instance.
+        :param str subnet_id: ID of a vpc subnetwork.
+        :param str system_disk_id: Image ID of the system disk.
+        :param int system_disk_size: Size of the system disk.
+        :param str system_disk_type: Type of the system disk.
+        :param Mapping[str, Any] tags: Tags of the instance.
+        :param str vpc_id: ID of the vpc to be queried.
+        """
         pulumi.set(__self__, "allocate_public_ip", allocate_public_ip)
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "cam_role_name", cam_role_name)
@@ -75,146 +106,233 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="allocatePublicIp")
     def allocate_public_ip(self) -> bool:
+        """
+        Indicates whether public ip is assigned.
+        """
         return pulumi.get(self, "allocate_public_ip")
 
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        The available zone that the CVM instance locates at.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="camRoleName")
     def cam_role_name(self) -> str:
+        """
+        CAM role name authorized to access.
+        """
         return pulumi.get(self, "cam_role_name")
 
     @property
     @pulumi.getter
     def cpu(self) -> int:
+        """
+        The number of CPU cores of the instance.
+        """
         return pulumi.get(self, "cpu")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the instance.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="dataDisks")
-    def data_disks(self) -> Sequence['outputs.InstancesInstanceListDataDiskResult']:
+    def data_disks(self) -> Sequence['outputs.GetInstanceInstanceListDataDiskResult']:
+        """
+        An information list of data disk. Each element contains the following attributes:
+        """
         return pulumi.get(self, "data_disks")
 
     @property
     @pulumi.getter(name="expiredTime")
     def expired_time(self) -> str:
+        """
+        Expired time of the instance.
+        """
         return pulumi.get(self, "expired_time")
 
     @property
     @pulumi.getter(name="imageId")
     def image_id(self) -> str:
+        """
+        ID of the image.
+        """
         return pulumi.get(self, "image_id")
 
     @property
     @pulumi.getter(name="instanceChargeType")
     def instance_charge_type(self) -> str:
+        """
+        The charge type of the instance.
+        """
         return pulumi.get(self, "instance_charge_type")
 
     @property
     @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
     def instance_charge_type_prepaid_renew_flag(self) -> str:
+        """
+        The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.
+        """
         return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        ID of the instances to be queried.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        Name of the instances to be queried.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> str:
+        """
+        Type of the instance.
+        """
         return pulumi.get(self, "instance_type")
 
     @property
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> str:
+        """
+        The charge type of the instance.
+        """
         return pulumi.get(self, "internet_charge_type")
 
     @property
     @pulumi.getter(name="internetMaxBandwidthOut")
     def internet_max_bandwidth_out(self) -> int:
+        """
+        Public network maximum output bandwidth of the instance.
+        """
         return pulumi.get(self, "internet_max_bandwidth_out")
 
     @property
     @pulumi.getter
     def memory(self) -> int:
+        """
+        Instance memory capacity, unit in GB.
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter(name="privateIp")
     def private_ip(self) -> str:
+        """
+        Private IP of the instance.
+        """
         return pulumi.get(self, "private_ip")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        The project CVM belongs to.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="publicIp")
     def public_ip(self) -> str:
+        """
+        Public IP of the instance.
+        """
         return pulumi.get(self, "public_ip")
 
     @property
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Sequence[str]:
+        """
+        Security groups of the instance.
+        """
         return pulumi.get(self, "security_groups")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Status of the instance.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of a vpc subnetwork.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter(name="systemDiskId")
     def system_disk_id(self) -> str:
+        """
+        Image ID of the system disk.
+        """
         return pulumi.get(self, "system_disk_id")
 
     @property
     @pulumi.getter(name="systemDiskSize")
     def system_disk_size(self) -> int:
+        """
+        Size of the system disk.
+        """
         return pulumi.get(self, "system_disk_size")
 
     @property
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> str:
+        """
+        Type of the system disk.
+        """
         return pulumi.get(self, "system_disk_type")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the instance.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the vpc to be queried.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class InstancesInstanceListDataDiskResult(dict):
+class GetInstanceInstanceListDataDiskResult(dict):
     def __init__(__self__, *,
                  data_disk_id: str,
                  data_disk_size: int,
                  data_disk_type: str,
                  delete_with_instance: bool):
+        """
+        :param str data_disk_id: Image ID of the data disk.
+        :param int data_disk_size: Size of the data disk.
+        :param str data_disk_type: Type of the data disk.
+        :param bool delete_with_instance: Indicates whether the data disk is destroyed with the instance.
+        """
         pulumi.set(__self__, "data_disk_id", data_disk_id)
         pulumi.set(__self__, "data_disk_size", data_disk_size)
         pulumi.set(__self__, "data_disk_type", data_disk_type)
@@ -223,21 +341,388 @@ class InstancesInstanceListDataDiskResult(dict):
     @property
     @pulumi.getter(name="dataDiskId")
     def data_disk_id(self) -> str:
+        """
+        Image ID of the data disk.
+        """
         return pulumi.get(self, "data_disk_id")
 
     @property
     @pulumi.getter(name="dataDiskSize")
     def data_disk_size(self) -> int:
+        """
+        Size of the data disk.
+        """
         return pulumi.get(self, "data_disk_size")
 
     @property
     @pulumi.getter(name="dataDiskType")
     def data_disk_type(self) -> str:
+        """
+        Type of the data disk.
+        """
         return pulumi.get(self, "data_disk_type")
 
     @property
     @pulumi.getter(name="deleteWithInstance")
     def delete_with_instance(self) -> bool:
+        """
+        Indicates whether the data disk is destroyed with the instance.
+        """
+        return pulumi.get(self, "delete_with_instance")
+
+
+@pulumi.output_type
+class GetSetInstanceListResult(dict):
+    def __init__(__self__, *,
+                 allocate_public_ip: bool,
+                 availability_zone: str,
+                 cam_role_name: str,
+                 cpu: int,
+                 create_time: str,
+                 data_disks: Sequence['outputs.GetSetInstanceListDataDiskResult'],
+                 expired_time: str,
+                 image_id: str,
+                 instance_charge_type: str,
+                 instance_charge_type_prepaid_renew_flag: str,
+                 instance_id: str,
+                 instance_name: str,
+                 instance_type: str,
+                 internet_charge_type: str,
+                 internet_max_bandwidth_out: int,
+                 memory: int,
+                 private_ip: str,
+                 project_id: int,
+                 public_ip: str,
+                 security_groups: Sequence[str],
+                 status: str,
+                 subnet_id: str,
+                 system_disk_id: str,
+                 system_disk_size: int,
+                 system_disk_type: str,
+                 tags: Mapping[str, Any],
+                 vpc_id: str):
+        """
+        :param bool allocate_public_ip: Indicates whether public ip is assigned.
+        :param str availability_zone: The available zone that the CVM instance locates at.
+        :param str cam_role_name: CAM role name authorized to access.
+        :param int cpu: The number of CPU cores of the instance.
+        :param str create_time: Creation time of the instance.
+        :param Sequence['GetSetInstanceListDataDiskArgs'] data_disks: An information list of data disk. Each element contains the following attributes:
+        :param str expired_time: Expired time of the instance.
+        :param str image_id: ID of the image.
+        :param str instance_charge_type: The charge type of the instance.
+        :param str instance_charge_type_prepaid_renew_flag: The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.
+        :param str instance_id: ID of the instances to be queried.
+        :param str instance_name: Name of the instances to be queried.
+        :param str instance_type: Type of the instance.
+        :param str internet_charge_type: The charge type of the instance.
+        :param int internet_max_bandwidth_out: Public network maximum output bandwidth of the instance.
+        :param int memory: Instance memory capacity, unit in GB.
+        :param str private_ip: Private IP of the instance.
+        :param int project_id: The project CVM belongs to.
+        :param str public_ip: Public IP of the instance.
+        :param Sequence[str] security_groups: Security groups of the instance.
+        :param str status: Status of the instance.
+        :param str subnet_id: ID of a vpc subnetwork.
+        :param str system_disk_id: Image ID of the system disk.
+        :param int system_disk_size: Size of the system disk.
+        :param str system_disk_type: Type of the system disk.
+        :param Mapping[str, Any] tags: Tags of the instance.
+        :param str vpc_id: ID of the vpc to be queried.
+        """
+        pulumi.set(__self__, "allocate_public_ip", allocate_public_ip)
+        pulumi.set(__self__, "availability_zone", availability_zone)
+        pulumi.set(__self__, "cam_role_name", cam_role_name)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "expired_time", expired_time)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        pulumi.set(__self__, "instance_charge_type_prepaid_renew_flag", instance_charge_type_prepaid_renew_flag)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "internet_charge_type", internet_charge_type)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "private_ip", private_ip)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "public_ip", public_ip)
+        pulumi.set(__self__, "security_groups", security_groups)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "system_disk_id", system_disk_id)
+        pulumi.set(__self__, "system_disk_size", system_disk_size)
+        pulumi.set(__self__, "system_disk_type", system_disk_type)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="allocatePublicIp")
+    def allocate_public_ip(self) -> bool:
+        """
+        Indicates whether public ip is assigned.
+        """
+        return pulumi.get(self, "allocate_public_ip")
+
+    @property
+    @pulumi.getter(name="availabilityZone")
+    def availability_zone(self) -> str:
+        """
+        The available zone that the CVM instance locates at.
+        """
+        return pulumi.get(self, "availability_zone")
+
+    @property
+    @pulumi.getter(name="camRoleName")
+    def cam_role_name(self) -> str:
+        """
+        CAM role name authorized to access.
+        """
+        return pulumi.get(self, "cam_role_name")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        The number of CPU cores of the instance.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time of the instance.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Sequence['outputs.GetSetInstanceListDataDiskResult']:
+        """
+        An information list of data disk. Each element contains the following attributes:
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="expiredTime")
+    def expired_time(self) -> str:
+        """
+        Expired time of the instance.
+        """
+        return pulumi.get(self, "expired_time")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        """
+        ID of the image.
+        """
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter(name="instanceChargeType")
+    def instance_charge_type(self) -> str:
+        """
+        The charge type of the instance.
+        """
+        return pulumi.get(self, "instance_charge_type")
+
+    @property
+    @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
+    def instance_charge_type_prepaid_renew_flag(self) -> str:
+        """
+        The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.
+        """
+        return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        ID of the instances to be queried.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Name of the instances to be queried.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Type of the instance.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="internetChargeType")
+    def internet_charge_type(self) -> str:
+        """
+        The charge type of the instance.
+        """
+        return pulumi.get(self, "internet_charge_type")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        Public network maximum output bandwidth of the instance.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Instance memory capacity, unit in GB.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="privateIp")
+    def private_ip(self) -> str:
+        """
+        Private IP of the instance.
+        """
+        return pulumi.get(self, "private_ip")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        The project CVM belongs to.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="publicIp")
+    def public_ip(self) -> str:
+        """
+        Public IP of the instance.
+        """
+        return pulumi.get(self, "public_ip")
+
+    @property
+    @pulumi.getter(name="securityGroups")
+    def security_groups(self) -> Sequence[str]:
+        """
+        Security groups of the instance.
+        """
+        return pulumi.get(self, "security_groups")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Status of the instance.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        ID of a vpc subnetwork.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="systemDiskId")
+    def system_disk_id(self) -> str:
+        """
+        Image ID of the system disk.
+        """
+        return pulumi.get(self, "system_disk_id")
+
+    @property
+    @pulumi.getter(name="systemDiskSize")
+    def system_disk_size(self) -> int:
+        """
+        Size of the system disk.
+        """
+        return pulumi.get(self, "system_disk_size")
+
+    @property
+    @pulumi.getter(name="systemDiskType")
+    def system_disk_type(self) -> str:
+        """
+        Type of the system disk.
+        """
+        return pulumi.get(self, "system_disk_type")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the instance.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        ID of the vpc to be queried.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetSetInstanceListDataDiskResult(dict):
+    def __init__(__self__, *,
+                 data_disk_id: str,
+                 data_disk_size: int,
+                 data_disk_type: str,
+                 delete_with_instance: bool):
+        """
+        :param str data_disk_id: Image ID of the data disk.
+        :param int data_disk_size: Size of the data disk.
+        :param str data_disk_type: Type of the data disk.
+        :param bool delete_with_instance: Indicates whether the data disk is destroyed with the instance.
+        """
+        pulumi.set(__self__, "data_disk_id", data_disk_id)
+        pulumi.set(__self__, "data_disk_size", data_disk_size)
+        pulumi.set(__self__, "data_disk_type", data_disk_type)
+        pulumi.set(__self__, "delete_with_instance", delete_with_instance)
+
+    @property
+    @pulumi.getter(name="dataDiskId")
+    def data_disk_id(self) -> str:
+        """
+        Image ID of the data disk.
+        """
+        return pulumi.get(self, "data_disk_id")
+
+    @property
+    @pulumi.getter(name="dataDiskSize")
+    def data_disk_size(self) -> int:
+        """
+        Size of the data disk.
+        """
+        return pulumi.get(self, "data_disk_size")
+
+    @property
+    @pulumi.getter(name="dataDiskType")
+    def data_disk_type(self) -> str:
+        """
+        Type of the data disk.
+        """
+        return pulumi.get(self, "data_disk_type")
+
+    @property
+    @pulumi.getter(name="deleteWithInstance")
+    def delete_with_instance(self) -> bool:
+        """
+        Indicates whether the data disk is destroyed with the instance.
+        """
         return pulumi.get(self, "delete_with_instance")
 
 

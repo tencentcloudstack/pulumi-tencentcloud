@@ -10,12 +10,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides an EIP resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Eip.NewInstance(ctx, "foo", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// EIP can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone pulumi.StringPtrOutput `pulumi:"anycastZone"`
-	// Indicates whether the anycast eip can be associated to a CLB.
+	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb pulumi.BoolPtrOutput `pulumi:"applicableForClb"`
@@ -33,7 +63,7 @@ type Instance struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 	// The tags of eip.
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
 	Type pulumi.StringPtrOutput `pulumi:"type"`
 }
 
@@ -68,7 +98,7 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone *string `pulumi:"anycastZone"`
-	// Indicates whether the anycast eip can be associated to a CLB.
+	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb *bool `pulumi:"applicableForClb"`
@@ -86,14 +116,14 @@ type instanceState struct {
 	Status *string `pulumi:"status"`
 	// The tags of eip.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
 	Type *string `pulumi:"type"`
 }
 
 type InstanceState struct {
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone pulumi.StringPtrInput
-	// Indicates whether the anycast eip can be associated to a CLB.
+	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb pulumi.BoolPtrInput
@@ -111,7 +141,7 @@ type InstanceState struct {
 	Status pulumi.StringPtrInput
 	// The tags of eip.
 	Tags pulumi.MapInput
-	// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
 	Type pulumi.StringPtrInput
 }
 
@@ -122,7 +152,7 @@ func (InstanceState) ElementType() reflect.Type {
 type instanceArgs struct {
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone *string `pulumi:"anycastZone"`
-	// Indicates whether the anycast eip can be associated to a CLB.
+	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb *bool `pulumi:"applicableForClb"`
@@ -136,7 +166,7 @@ type instanceArgs struct {
 	Name *string `pulumi:"name"`
 	// The tags of eip.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
 	Type *string `pulumi:"type"`
 }
 
@@ -144,7 +174,7 @@ type instanceArgs struct {
 type InstanceArgs struct {
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone pulumi.StringPtrInput
-	// Indicates whether the anycast eip can be associated to a CLB.
+	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb pulumi.BoolPtrInput
@@ -158,7 +188,7 @@ type InstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// The tags of eip.
 	Tags pulumi.MapInput
-	// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
 	Type pulumi.StringPtrInput
 }
 
@@ -254,7 +284,7 @@ func (o InstanceOutput) AnycastZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.AnycastZone }).(pulumi.StringPtrOutput)
 }
 
-// Indicates whether the anycast eip can be associated to a CLB.
+// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
 //
 // Deprecated: It has been deprecated from version 1.27.0.
 func (o InstanceOutput) ApplicableForClb() pulumi.BoolPtrOutput {
@@ -296,7 +326,7 @@ func (o InstanceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
 func (o InstanceOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }

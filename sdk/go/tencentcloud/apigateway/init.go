@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -21,25 +21,25 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "tencentcloud:APIGateway/aPI:API":
-		r = &API{}
-	case "tencentcloud:APIGateway/aPIKey:APIKey":
-		r = &APIKey{}
-	case "tencentcloud:APIGateway/aPIKeyAttachment:APIKeyAttachment":
-		r = &APIKeyAttachment{}
-	case "tencentcloud:APIGateway/customDomain:CustomDomain":
+	case "tencentcloud:ApiGateway/api:Api":
+		r = &Api{}
+	case "tencentcloud:ApiGateway/apiKey:ApiKey":
+		r = &ApiKey{}
+	case "tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment":
+		r = &ApiKeyAttachment{}
+	case "tencentcloud:ApiGateway/customDomain:CustomDomain":
 		r = &CustomDomain{}
-	case "tencentcloud:APIGateway/iPStrategy:IPStrategy":
-		r = &IPStrategy{}
-	case "tencentcloud:APIGateway/service:Service":
+	case "tencentcloud:ApiGateway/ipStrategy:IpStrategy":
+		r = &IpStrategy{}
+	case "tencentcloud:ApiGateway/service:Service":
 		r = &Service{}
-	case "tencentcloud:APIGateway/serviceRelease:ServiceRelease":
+	case "tencentcloud:ApiGateway/serviceRelease:ServiceRelease":
 		r = &ServiceRelease{}
-	case "tencentcloud:APIGateway/strategyAttachment:StrategyAttachment":
+	case "tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment":
 		r = &StrategyAttachment{}
-	case "tencentcloud:APIGateway/usagePlan:UsagePlan":
+	case "tencentcloud:ApiGateway/usagePlan:UsagePlan":
 		r = &UsagePlan{}
-	case "tencentcloud:APIGateway/usagePlanAttachment:UsagePlanAttachment":
+	case "tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment":
 		r = &UsagePlanAttachment{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
@@ -56,52 +56,52 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/aPI",
+		"ApiGateway/api",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/aPIKey",
+		"ApiGateway/apiKey",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/aPIKeyAttachment",
+		"ApiGateway/apiKeyAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/customDomain",
+		"ApiGateway/customDomain",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/iPStrategy",
+		"ApiGateway/ipStrategy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/service",
+		"ApiGateway/service",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/serviceRelease",
+		"ApiGateway/serviceRelease",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/strategyAttachment",
+		"ApiGateway/strategyAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/usagePlan",
+		"ApiGateway/usagePlan",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"APIGateway/usagePlanAttachment",
+		"ApiGateway/usagePlanAttachment",
 		&module{version},
 	)
 }

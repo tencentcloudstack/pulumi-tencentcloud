@@ -11,6 +11,38 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a placement group.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Placement"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Placement.NewGroup(ctx, "foo", &Placement.GroupArgs{
+// 			Type: pulumi.String("HOST"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Placement group can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
+// ```
 type Group struct {
 	pulumi.CustomResourceState
 

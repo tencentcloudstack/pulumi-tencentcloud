@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -27,8 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Namespace{}
 	case "tencentcloud:Tcr/repository:Repository":
 		r = &Repository{}
-	case "tencentcloud:Tcr/tcrToken:TcrToken":
-		r = &TcrToken{}
+	case "tencentcloud:Tcr/token:Token":
+		r = &Token{}
 	case "tencentcloud:Tcr/vpcAttachment:VpcAttachment":
 		r = &VpcAttachment{}
 	default:
@@ -61,7 +61,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Tcr/tcrToken",
+		"Tcr/token",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class SuperPlayerConfigResolutionName
     {
+        /// <summary>
+        /// Length of video short side in px.
+        /// </summary>
         public readonly int MinEdgeLength;
+        /// <summary>
+        /// Display name.
+        /// </summary>
         public readonly string Name;
 
         [OutputConstructor]

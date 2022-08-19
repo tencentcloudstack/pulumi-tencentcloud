@@ -4,6 +4,17 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to detailed information of attached backend server to an ENI.
+ *
+ * ## Import
+ *
+ * ENI attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
+ * ```
+ */
 export class Attachment extends pulumi.CustomResource {
     /**
      * Get an existing Attachment resource's state with the given name, ID, and optional extra

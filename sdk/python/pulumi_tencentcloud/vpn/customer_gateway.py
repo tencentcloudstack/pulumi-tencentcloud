@@ -147,7 +147,29 @@ class CustomerGateway(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a CustomerGateway resource with the given unique name, props, and options.
+        Provides a resource to create a VPN customer gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vpn.CustomerGateway("foo",
+            public_ip_address="1.1.1.1",
+            tags={
+                "tag": "test",
+            })
+        ```
+
+        ## Import
+
+        VPN customer gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the customer gateway. The length of character is limited to 1-60.
@@ -161,7 +183,29 @@ class CustomerGateway(pulumi.CustomResource):
                  args: CustomerGatewayArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CustomerGateway resource with the given unique name, props, and options.
+        Provides a resource to create a VPN customer gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vpn.CustomerGateway("foo",
+            public_ip_address="1.1.1.1",
+            tags={
+                "tag": "test",
+            })
+        ```
+
+        ## Import
+
+        VPN customer gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
+        ```
+
         :param str resource_name: The name of the resource.
         :param CustomerGatewayArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

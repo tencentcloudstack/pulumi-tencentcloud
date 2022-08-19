@@ -9,6 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Postgresql
 {
+    /// <summary>
+    /// Use this resource to create postgresql readonly instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Postgresql.ReadonlyInstance("foo", new Tencentcloud.Postgresql.ReadonlyInstanceArgs
+    ///         {
+    ///             AutoRenewFlag = 0,
+    ///             DbVersion = "10.4",
+    ///             InstanceChargeType = "POSTPAID_BY_HOUR",
+    ///             MasterDbInstanceId = "postgres-j4pm65id",
+    ///             Memory = 4,
+    ///             NeedSupportIpv6 = 0,
+    ///             ProjectId = 0,
+    ///             SecurityGroupsIds = 
+    ///             {
+    ///                 "sg-fefj5n6r",
+    ///             },
+    ///             Storage = 250,
+    ///             SubnetId = "subnet-enm92y0m",
+    ///             VpcId = "vpc-86v957zb",
+    ///             Zone = "ap-guangzhou-6",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// postgresql readonly instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance")]
     public partial class ReadonlyInstance : Pulumi.CustomResource
     {
@@ -43,8 +87,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Output<string> MasterDbInstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        /// provides.
+        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Output("memory")]
         public Output<int> Memory { get; private set; } = null!;
@@ -168,8 +211,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<string> MasterDbInstanceId { get; set; } = null!;
 
         /// <summary>
-        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        /// provides.
+        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Input("memory", required: true)]
         public Input<int> Memory { get; set; } = null!;
@@ -266,8 +308,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<string>? MasterDbInstanceId { get; set; }
 
         /// <summary>
-        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        /// provides.
+        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Input("memory")]
         public Input<int>? Memory { get; set; }

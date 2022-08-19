@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Mongodb.Inputs
 
     public sealed class InstanceStandbyInstanceListArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Indicates the ID of standby instance.
+        /// </summary>
         [Input("standbyInstanceId")]
         public Input<string>? StandbyInstanceId { get; set; }
 
+        /// <summary>
+        /// Indicates the region of standby instance.
+        /// </summary>
         [Input("standbyInstanceRegion")]
         public Input<string>? StandbyInstanceRegion { get; set; }
 

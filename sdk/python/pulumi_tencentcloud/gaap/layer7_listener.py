@@ -27,13 +27,10 @@ class Layer7ListenerArgs:
         :param pulumi.Input[int] port: Port of the layer7 listener.
         :param pulumi.Input[str] protocol: Protocol of the layer7 listener. Valid value: `HTTP` and `HTTPS`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
-        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-               supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] certificate_id: Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] forward_protocol: Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] name: Name of the layer7 listener, the maximum length is 30.
         """
@@ -96,8 +93,7 @@ class Layer7ListenerArgs:
     @pulumi.getter(name="authType")
     def auth_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-        supports listeners of `HTTPS` protocol.
+        Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "auth_type")
 
@@ -121,8 +117,7 @@ class Layer7ListenerArgs:
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        listeners of `HTTPS` protocol.
+        It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "client_certificate_id")
 
@@ -134,8 +129,7 @@ class Layer7ListenerArgs:
     @pulumi.getter(name="clientCertificateIds")
     def client_certificate_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        listeners of `HTTPS` protocol.
+        ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "client_certificate_ids")
 
@@ -184,13 +178,10 @@ class _Layer7ListenerState:
                  status: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Layer7Listener resources.
-        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-               supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] certificate_id: Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] create_time: Creation time of the layer7 listener.
         :param pulumi.Input[str] forward_protocol: Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] name: Name of the layer7 listener, the maximum length is 30.
@@ -229,8 +220,7 @@ class _Layer7ListenerState:
     @pulumi.getter(name="authType")
     def auth_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-        supports listeners of `HTTPS` protocol.
+        Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "auth_type")
 
@@ -254,8 +244,7 @@ class _Layer7ListenerState:
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        listeners of `HTTPS` protocol.
+        It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "client_certificate_id")
 
@@ -267,8 +256,7 @@ class _Layer7ListenerState:
     @pulumi.getter(name="clientCertificateIds")
     def client_certificate_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        listeners of `HTTPS` protocol.
+        ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "client_certificate_ids")
 
@@ -377,16 +365,39 @@ class Layer7Listener(pulumi.CustomResource):
                  proxy_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Layer7Listener resource with the given unique name, props, and options.
+        Provides a resource to create a layer7 listener of GAAP.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+            protocol="HTTP",
+            port=80,
+            proxy_id=foo_proxy.id)
+        ```
+
+        ## Import
+
+        GAAP layer7 listener can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-               supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] certificate_id: Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] forward_protocol: Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] name: Name of the layer7 listener, the maximum length is 30.
         :param pulumi.Input[int] port: Port of the layer7 listener.
@@ -400,7 +411,33 @@ class Layer7Listener(pulumi.CustomResource):
                  args: Layer7ListenerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Layer7Listener resource with the given unique name, props, and options.
+        Provides a resource to create a layer7 listener of GAAP.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+            protocol="HTTP",
+            port=80,
+            proxy_id=foo_proxy.id)
+        ```
+
+        ## Import
+
+        GAAP layer7 listener can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+        ```
+
         :param str resource_name: The name of the resource.
         :param Layer7ListenerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -485,13 +522,10 @@ class Layer7Listener(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-               supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[int] auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] certificate_id: Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
-        :param pulumi.Input[str] client_certificate_id: ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-               listeners of `HTTPS` protocol.
+        :param pulumi.Input[str] client_certificate_id: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] create_time: Creation time of the layer7 listener.
         :param pulumi.Input[str] forward_protocol: Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
         :param pulumi.Input[str] name: Name of the layer7 listener, the maximum length is 30.
@@ -521,8 +555,7 @@ class Layer7Listener(pulumi.CustomResource):
     @pulumi.getter(name="authType")
     def auth_type(self) -> pulumi.Output[Optional[int]]:
         """
-        Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-        supports listeners of `HTTPS` protocol.
+        Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "auth_type")
 
@@ -538,8 +571,7 @@ class Layer7Listener(pulumi.CustomResource):
     @pulumi.getter(name="clientCertificateId")
     def client_certificate_id(self) -> pulumi.Output[str]:
         """
-        ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        listeners of `HTTPS` protocol.
+        It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "client_certificate_id")
 
@@ -547,8 +579,7 @@ class Layer7Listener(pulumi.CustomResource):
     @pulumi.getter(name="clientCertificateIds")
     def client_certificate_ids(self) -> pulumi.Output[Sequence[str]]:
         """
-        ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        listeners of `HTTPS` protocol.
+        ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         """
         return pulumi.get(self, "client_certificate_ids")
 

@@ -5,9 +5,35 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-export class CCHttpsPolicy extends pulumi.CustomResource {
+/**
+ * Use this resource to create a dayu CC self-define https policy
+ *
+ * > **NOTE:** creating CC self-define https policy need a valid resource `tencentcloud.Dayu.L7Rule`; The resource only support Anti-DDoS of resource type `bgpip`.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const testPolicy = new tencentcloud.dayu.CcHttpsPolicy("testPolicy", {
+ *     resourceType: tencentcloud_dayu_l7_rule.test_rule.resource_type,
+ *     resourceId: tencentcloud_dayu_l7_rule.test_rule.resource_id,
+ *     ruleId: tencentcloud_dayu_l7_rule.test_rule.rule_id,
+ *     domain: tencentcloud_dayu_l7_rule.test_rule.domain,
+ *     action: "drop",
+ *     "switch": true,
+ *     ruleLists: [{
+ *         skey: "cgi",
+ *         operator: "include",
+ *         value: "123",
+ *     }],
+ * });
+ * ```
+ */
+export class CcHttpsPolicy extends pulumi.CustomResource {
     /**
-     * Get an existing CCHttpsPolicy resource's state with the given name, ID, and optional extra
+     * Get an existing CcHttpsPolicy resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -15,22 +41,22 @@ export class CCHttpsPolicy extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: CCHttpsPolicyState, opts?: pulumi.CustomResourceOptions): CCHttpsPolicy {
-        return new CCHttpsPolicy(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: CcHttpsPolicyState, opts?: pulumi.CustomResourceOptions): CcHttpsPolicy {
+        return new CcHttpsPolicy(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy';
+    public static readonly __pulumiType = 'tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy';
 
     /**
-     * Returns true if the given object is an instance of CCHttpsPolicy.  This is designed to work even
+     * Returns true if the given object is an instance of CcHttpsPolicy.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is CCHttpsPolicy {
+    public static isInstance(obj: any): obj is CcHttpsPolicy {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === CCHttpsPolicy.__pulumiType;
+        return obj['__pulumiType'] === CcHttpsPolicy.__pulumiType;
     }
 
     /**
@@ -72,25 +98,25 @@ export class CCHttpsPolicy extends pulumi.CustomResource {
     /**
      * Rule list of the CC self-define https policy.
      */
-    public readonly ruleLists!: pulumi.Output<outputs.Dayu.CCHttpsPolicyRuleList[]>;
+    public readonly ruleLists!: pulumi.Output<outputs.Dayu.CcHttpsPolicyRuleList[]>;
     /**
      * Indicate the CC self-define https policy takes effect or not.
      */
     public readonly switch!: pulumi.Output<boolean | undefined>;
 
     /**
-     * Create a CCHttpsPolicy resource with the given unique name, arguments, and options.
+     * Create a CcHttpsPolicy resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: CCHttpsPolicyArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: CCHttpsPolicyArgs | CCHttpsPolicyState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: CcHttpsPolicyArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: CcHttpsPolicyArgs | CcHttpsPolicyState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as CCHttpsPolicyState | undefined;
+            const state = argsOrState as CcHttpsPolicyState | undefined;
             resourceInputs["action"] = state ? state.action : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
@@ -103,7 +129,7 @@ export class CCHttpsPolicy extends pulumi.CustomResource {
             resourceInputs["ruleLists"] = state ? state.ruleLists : undefined;
             resourceInputs["switch"] = state ? state.switch : undefined;
         } else {
-            const args = argsOrState as CCHttpsPolicyArgs | undefined;
+            const args = argsOrState as CcHttpsPolicyArgs | undefined;
             if ((!args || args.domain === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'domain'");
             }
@@ -132,14 +158,14 @@ export class CCHttpsPolicy extends pulumi.CustomResource {
             resourceInputs["policyId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(CCHttpsPolicy.__pulumiType, name, resourceInputs, opts);
+        super(CcHttpsPolicy.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering CCHttpsPolicy resources.
+ * Input properties used for looking up and filtering CcHttpsPolicy resources.
  */
-export interface CCHttpsPolicyState {
+export interface CcHttpsPolicyState {
     /**
      * Action mode. Valid values are `alg` and `drop`.
      */
@@ -179,7 +205,7 @@ export interface CCHttpsPolicyState {
     /**
      * Rule list of the CC self-define https policy.
      */
-    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CCHttpsPolicyRuleList>[]>;
+    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpsPolicyRuleList>[]>;
     /**
      * Indicate the CC self-define https policy takes effect or not.
      */
@@ -187,9 +213,9 @@ export interface CCHttpsPolicyState {
 }
 
 /**
- * The set of arguments for constructing a CCHttpsPolicy resource.
+ * The set of arguments for constructing a CcHttpsPolicy resource.
  */
-export interface CCHttpsPolicyArgs {
+export interface CcHttpsPolicyArgs {
     /**
      * Action mode. Valid values are `alg` and `drop`.
      */
@@ -217,7 +243,7 @@ export interface CCHttpsPolicyArgs {
     /**
      * Rule list of the CC self-define https policy.
      */
-    ruleLists: pulumi.Input<pulumi.Input<inputs.Dayu.CCHttpsPolicyRuleList>[]>;
+    ruleLists: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpsPolicyRuleList>[]>;
     /**
      * Indicate the CC self-define https policy takes effect or not.
      */

@@ -10,913 +10,8 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type AccountDBAttachmentsList struct {
-	AccountName string `pulumi:"accountName"`
-	DbName      string `pulumi:"dbName"`
-	InstanceId  string `pulumi:"instanceId"`
-	Privilege   string `pulumi:"privilege"`
-}
-
-// AccountDBAttachmentsListInput is an input type that accepts AccountDBAttachmentsListArgs and AccountDBAttachmentsListOutput values.
-// You can construct a concrete instance of `AccountDBAttachmentsListInput` via:
-//
-//          AccountDBAttachmentsListArgs{...}
-type AccountDBAttachmentsListInput interface {
-	pulumi.Input
-
-	ToAccountDBAttachmentsListOutput() AccountDBAttachmentsListOutput
-	ToAccountDBAttachmentsListOutputWithContext(context.Context) AccountDBAttachmentsListOutput
-}
-
-type AccountDBAttachmentsListArgs struct {
-	AccountName pulumi.StringInput `pulumi:"accountName"`
-	DbName      pulumi.StringInput `pulumi:"dbName"`
-	InstanceId  pulumi.StringInput `pulumi:"instanceId"`
-	Privilege   pulumi.StringInput `pulumi:"privilege"`
-}
-
-func (AccountDBAttachmentsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccountDBAttachmentsList)(nil)).Elem()
-}
-
-func (i AccountDBAttachmentsListArgs) ToAccountDBAttachmentsListOutput() AccountDBAttachmentsListOutput {
-	return i.ToAccountDBAttachmentsListOutputWithContext(context.Background())
-}
-
-func (i AccountDBAttachmentsListArgs) ToAccountDBAttachmentsListOutputWithContext(ctx context.Context) AccountDBAttachmentsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccountDBAttachmentsListOutput)
-}
-
-// AccountDBAttachmentsListArrayInput is an input type that accepts AccountDBAttachmentsListArray and AccountDBAttachmentsListArrayOutput values.
-// You can construct a concrete instance of `AccountDBAttachmentsListArrayInput` via:
-//
-//          AccountDBAttachmentsListArray{ AccountDBAttachmentsListArgs{...} }
-type AccountDBAttachmentsListArrayInput interface {
-	pulumi.Input
-
-	ToAccountDBAttachmentsListArrayOutput() AccountDBAttachmentsListArrayOutput
-	ToAccountDBAttachmentsListArrayOutputWithContext(context.Context) AccountDBAttachmentsListArrayOutput
-}
-
-type AccountDBAttachmentsListArray []AccountDBAttachmentsListInput
-
-func (AccountDBAttachmentsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccountDBAttachmentsList)(nil)).Elem()
-}
-
-func (i AccountDBAttachmentsListArray) ToAccountDBAttachmentsListArrayOutput() AccountDBAttachmentsListArrayOutput {
-	return i.ToAccountDBAttachmentsListArrayOutputWithContext(context.Background())
-}
-
-func (i AccountDBAttachmentsListArray) ToAccountDBAttachmentsListArrayOutputWithContext(ctx context.Context) AccountDBAttachmentsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccountDBAttachmentsListArrayOutput)
-}
-
-type AccountDBAttachmentsListOutput struct{ *pulumi.OutputState }
-
-func (AccountDBAttachmentsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccountDBAttachmentsList)(nil)).Elem()
-}
-
-func (o AccountDBAttachmentsListOutput) ToAccountDBAttachmentsListOutput() AccountDBAttachmentsListOutput {
-	return o
-}
-
-func (o AccountDBAttachmentsListOutput) ToAccountDBAttachmentsListOutputWithContext(ctx context.Context) AccountDBAttachmentsListOutput {
-	return o
-}
-
-func (o AccountDBAttachmentsListOutput) AccountName() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountDBAttachmentsList) string { return v.AccountName }).(pulumi.StringOutput)
-}
-
-func (o AccountDBAttachmentsListOutput) DbName() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountDBAttachmentsList) string { return v.DbName }).(pulumi.StringOutput)
-}
-
-func (o AccountDBAttachmentsListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountDBAttachmentsList) string { return v.InstanceId }).(pulumi.StringOutput)
-}
-
-func (o AccountDBAttachmentsListOutput) Privilege() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountDBAttachmentsList) string { return v.Privilege }).(pulumi.StringOutput)
-}
-
-type AccountDBAttachmentsListArrayOutput struct{ *pulumi.OutputState }
-
-func (AccountDBAttachmentsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccountDBAttachmentsList)(nil)).Elem()
-}
-
-func (o AccountDBAttachmentsListArrayOutput) ToAccountDBAttachmentsListArrayOutput() AccountDBAttachmentsListArrayOutput {
-	return o
-}
-
-func (o AccountDBAttachmentsListArrayOutput) ToAccountDBAttachmentsListArrayOutputWithContext(ctx context.Context) AccountDBAttachmentsListArrayOutput {
-	return o
-}
-
-func (o AccountDBAttachmentsListArrayOutput) Index(i pulumi.IntInput) AccountDBAttachmentsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountDBAttachmentsList {
-		return vs[0].([]AccountDBAttachmentsList)[vs[1].(int)]
-	}).(AccountDBAttachmentsListOutput)
-}
-
-type AccountsList struct {
-	CreateTime string `pulumi:"createTime"`
-	InstanceId string `pulumi:"instanceId"`
-	Name       string `pulumi:"name"`
-	Remark     string `pulumi:"remark"`
-	Status     int    `pulumi:"status"`
-	UpdateTime string `pulumi:"updateTime"`
-}
-
-// AccountsListInput is an input type that accepts AccountsListArgs and AccountsListOutput values.
-// You can construct a concrete instance of `AccountsListInput` via:
-//
-//          AccountsListArgs{...}
-type AccountsListInput interface {
-	pulumi.Input
-
-	ToAccountsListOutput() AccountsListOutput
-	ToAccountsListOutputWithContext(context.Context) AccountsListOutput
-}
-
-type AccountsListArgs struct {
-	CreateTime pulumi.StringInput `pulumi:"createTime"`
-	InstanceId pulumi.StringInput `pulumi:"instanceId"`
-	Name       pulumi.StringInput `pulumi:"name"`
-	Remark     pulumi.StringInput `pulumi:"remark"`
-	Status     pulumi.IntInput    `pulumi:"status"`
-	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
-}
-
-func (AccountsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccountsList)(nil)).Elem()
-}
-
-func (i AccountsListArgs) ToAccountsListOutput() AccountsListOutput {
-	return i.ToAccountsListOutputWithContext(context.Background())
-}
-
-func (i AccountsListArgs) ToAccountsListOutputWithContext(ctx context.Context) AccountsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccountsListOutput)
-}
-
-// AccountsListArrayInput is an input type that accepts AccountsListArray and AccountsListArrayOutput values.
-// You can construct a concrete instance of `AccountsListArrayInput` via:
-//
-//          AccountsListArray{ AccountsListArgs{...} }
-type AccountsListArrayInput interface {
-	pulumi.Input
-
-	ToAccountsListArrayOutput() AccountsListArrayOutput
-	ToAccountsListArrayOutputWithContext(context.Context) AccountsListArrayOutput
-}
-
-type AccountsListArray []AccountsListInput
-
-func (AccountsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccountsList)(nil)).Elem()
-}
-
-func (i AccountsListArray) ToAccountsListArrayOutput() AccountsListArrayOutput {
-	return i.ToAccountsListArrayOutputWithContext(context.Background())
-}
-
-func (i AccountsListArray) ToAccountsListArrayOutputWithContext(ctx context.Context) AccountsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccountsListArrayOutput)
-}
-
-type AccountsListOutput struct{ *pulumi.OutputState }
-
-func (AccountsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccountsList)(nil)).Elem()
-}
-
-func (o AccountsListOutput) ToAccountsListOutput() AccountsListOutput {
-	return o
-}
-
-func (o AccountsListOutput) ToAccountsListOutputWithContext(ctx context.Context) AccountsListOutput {
-	return o
-}
-
-func (o AccountsListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountsList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o AccountsListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountsList) string { return v.InstanceId }).(pulumi.StringOutput)
-}
-
-func (o AccountsListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountsList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o AccountsListOutput) Remark() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountsList) string { return v.Remark }).(pulumi.StringOutput)
-}
-
-func (o AccountsListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v AccountsList) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o AccountsListOutput) UpdateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v AccountsList) string { return v.UpdateTime }).(pulumi.StringOutput)
-}
-
-type AccountsListArrayOutput struct{ *pulumi.OutputState }
-
-func (AccountsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccountsList)(nil)).Elem()
-}
-
-func (o AccountsListArrayOutput) ToAccountsListArrayOutput() AccountsListArrayOutput {
-	return o
-}
-
-func (o AccountsListArrayOutput) ToAccountsListArrayOutputWithContext(ctx context.Context) AccountsListArrayOutput {
-	return o
-}
-
-func (o AccountsListArrayOutput) Index(i pulumi.IntInput) AccountsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountsList {
-		return vs[0].([]AccountsList)[vs[1].(int)]
-	}).(AccountsListOutput)
-}
-
-type BackupsList struct {
-	DbLists      []string `pulumi:"dbLists"`
-	EndTime      string   `pulumi:"endTime"`
-	FileName     string   `pulumi:"fileName"`
-	Id           string   `pulumi:"id"`
-	InstanceId   string   `pulumi:"instanceId"`
-	InternetUrl  string   `pulumi:"internetUrl"`
-	IntranetUrl  string   `pulumi:"intranetUrl"`
-	Size         int      `pulumi:"size"`
-	StartTime    string   `pulumi:"startTime"`
-	Status       int      `pulumi:"status"`
-	Strategy     int      `pulumi:"strategy"`
-	TriggerModel int      `pulumi:"triggerModel"`
-}
-
-// BackupsListInput is an input type that accepts BackupsListArgs and BackupsListOutput values.
-// You can construct a concrete instance of `BackupsListInput` via:
-//
-//          BackupsListArgs{...}
-type BackupsListInput interface {
-	pulumi.Input
-
-	ToBackupsListOutput() BackupsListOutput
-	ToBackupsListOutputWithContext(context.Context) BackupsListOutput
-}
-
-type BackupsListArgs struct {
-	DbLists      pulumi.StringArrayInput `pulumi:"dbLists"`
-	EndTime      pulumi.StringInput      `pulumi:"endTime"`
-	FileName     pulumi.StringInput      `pulumi:"fileName"`
-	Id           pulumi.StringInput      `pulumi:"id"`
-	InstanceId   pulumi.StringInput      `pulumi:"instanceId"`
-	InternetUrl  pulumi.StringInput      `pulumi:"internetUrl"`
-	IntranetUrl  pulumi.StringInput      `pulumi:"intranetUrl"`
-	Size         pulumi.IntInput         `pulumi:"size"`
-	StartTime    pulumi.StringInput      `pulumi:"startTime"`
-	Status       pulumi.IntInput         `pulumi:"status"`
-	Strategy     pulumi.IntInput         `pulumi:"strategy"`
-	TriggerModel pulumi.IntInput         `pulumi:"triggerModel"`
-}
-
-func (BackupsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BackupsList)(nil)).Elem()
-}
-
-func (i BackupsListArgs) ToBackupsListOutput() BackupsListOutput {
-	return i.ToBackupsListOutputWithContext(context.Background())
-}
-
-func (i BackupsListArgs) ToBackupsListOutputWithContext(ctx context.Context) BackupsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BackupsListOutput)
-}
-
-// BackupsListArrayInput is an input type that accepts BackupsListArray and BackupsListArrayOutput values.
-// You can construct a concrete instance of `BackupsListArrayInput` via:
-//
-//          BackupsListArray{ BackupsListArgs{...} }
-type BackupsListArrayInput interface {
-	pulumi.Input
-
-	ToBackupsListArrayOutput() BackupsListArrayOutput
-	ToBackupsListArrayOutputWithContext(context.Context) BackupsListArrayOutput
-}
-
-type BackupsListArray []BackupsListInput
-
-func (BackupsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BackupsList)(nil)).Elem()
-}
-
-func (i BackupsListArray) ToBackupsListArrayOutput() BackupsListArrayOutput {
-	return i.ToBackupsListArrayOutputWithContext(context.Background())
-}
-
-func (i BackupsListArray) ToBackupsListArrayOutputWithContext(ctx context.Context) BackupsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BackupsListArrayOutput)
-}
-
-type BackupsListOutput struct{ *pulumi.OutputState }
-
-func (BackupsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BackupsList)(nil)).Elem()
-}
-
-func (o BackupsListOutput) ToBackupsListOutput() BackupsListOutput {
-	return o
-}
-
-func (o BackupsListOutput) ToBackupsListOutputWithContext(ctx context.Context) BackupsListOutput {
-	return o
-}
-
-func (o BackupsListOutput) DbLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v BackupsList) []string { return v.DbLists }).(pulumi.StringArrayOutput)
-}
-
-func (o BackupsListOutput) EndTime() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupsList) string { return v.EndTime }).(pulumi.StringOutput)
-}
-
-func (o BackupsListOutput) FileName() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupsList) string { return v.FileName }).(pulumi.StringOutput)
-}
-
-func (o BackupsListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupsList) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o BackupsListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupsList) string { return v.InstanceId }).(pulumi.StringOutput)
-}
-
-func (o BackupsListOutput) InternetUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupsList) string { return v.InternetUrl }).(pulumi.StringOutput)
-}
-
-func (o BackupsListOutput) IntranetUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupsList) string { return v.IntranetUrl }).(pulumi.StringOutput)
-}
-
-func (o BackupsListOutput) Size() pulumi.IntOutput {
-	return o.ApplyT(func(v BackupsList) int { return v.Size }).(pulumi.IntOutput)
-}
-
-func (o BackupsListOutput) StartTime() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupsList) string { return v.StartTime }).(pulumi.StringOutput)
-}
-
-func (o BackupsListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v BackupsList) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o BackupsListOutput) Strategy() pulumi.IntOutput {
-	return o.ApplyT(func(v BackupsList) int { return v.Strategy }).(pulumi.IntOutput)
-}
-
-func (o BackupsListOutput) TriggerModel() pulumi.IntOutput {
-	return o.ApplyT(func(v BackupsList) int { return v.TriggerModel }).(pulumi.IntOutput)
-}
-
-type BackupsListArrayOutput struct{ *pulumi.OutputState }
-
-func (BackupsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BackupsList)(nil)).Elem()
-}
-
-func (o BackupsListArrayOutput) ToBackupsListArrayOutput() BackupsListArrayOutput {
-	return o
-}
-
-func (o BackupsListArrayOutput) ToBackupsListArrayOutputWithContext(ctx context.Context) BackupsListArrayOutput {
-	return o
-}
-
-func (o BackupsListArrayOutput) Index(i pulumi.IntInput) BackupsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupsList {
-		return vs[0].([]BackupsList)[vs[1].(int)]
-	}).(BackupsListOutput)
-}
-
-type BasicInstancesInstanceList struct {
-	AvailabilityZone string                 `pulumi:"availabilityZone"`
-	ChargeType       string                 `pulumi:"chargeType"`
-	Cpu              int                    `pulumi:"cpu"`
-	CreateTime       string                 `pulumi:"createTime"`
-	EngineVersion    string                 `pulumi:"engineVersion"`
-	Id               string                 `pulumi:"id"`
-	Memory           int                    `pulumi:"memory"`
-	Name             string                 `pulumi:"name"`
-	ProjectId        int                    `pulumi:"projectId"`
-	Status           int                    `pulumi:"status"`
-	Storage          int                    `pulumi:"storage"`
-	SubnetId         string                 `pulumi:"subnetId"`
-	Tags             map[string]interface{} `pulumi:"tags"`
-	UsedStorage      int                    `pulumi:"usedStorage"`
-	Vip              string                 `pulumi:"vip"`
-	VpcId            string                 `pulumi:"vpcId"`
-	Vport            int                    `pulumi:"vport"`
-}
-
-// BasicInstancesInstanceListInput is an input type that accepts BasicInstancesInstanceListArgs and BasicInstancesInstanceListOutput values.
-// You can construct a concrete instance of `BasicInstancesInstanceListInput` via:
-//
-//          BasicInstancesInstanceListArgs{...}
-type BasicInstancesInstanceListInput interface {
-	pulumi.Input
-
-	ToBasicInstancesInstanceListOutput() BasicInstancesInstanceListOutput
-	ToBasicInstancesInstanceListOutputWithContext(context.Context) BasicInstancesInstanceListOutput
-}
-
-type BasicInstancesInstanceListArgs struct {
-	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
-	ChargeType       pulumi.StringInput `pulumi:"chargeType"`
-	Cpu              pulumi.IntInput    `pulumi:"cpu"`
-	CreateTime       pulumi.StringInput `pulumi:"createTime"`
-	EngineVersion    pulumi.StringInput `pulumi:"engineVersion"`
-	Id               pulumi.StringInput `pulumi:"id"`
-	Memory           pulumi.IntInput    `pulumi:"memory"`
-	Name             pulumi.StringInput `pulumi:"name"`
-	ProjectId        pulumi.IntInput    `pulumi:"projectId"`
-	Status           pulumi.IntInput    `pulumi:"status"`
-	Storage          pulumi.IntInput    `pulumi:"storage"`
-	SubnetId         pulumi.StringInput `pulumi:"subnetId"`
-	Tags             pulumi.MapInput    `pulumi:"tags"`
-	UsedStorage      pulumi.IntInput    `pulumi:"usedStorage"`
-	Vip              pulumi.StringInput `pulumi:"vip"`
-	VpcId            pulumi.StringInput `pulumi:"vpcId"`
-	Vport            pulumi.IntInput    `pulumi:"vport"`
-}
-
-func (BasicInstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BasicInstancesInstanceList)(nil)).Elem()
-}
-
-func (i BasicInstancesInstanceListArgs) ToBasicInstancesInstanceListOutput() BasicInstancesInstanceListOutput {
-	return i.ToBasicInstancesInstanceListOutputWithContext(context.Background())
-}
-
-func (i BasicInstancesInstanceListArgs) ToBasicInstancesInstanceListOutputWithContext(ctx context.Context) BasicInstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BasicInstancesInstanceListOutput)
-}
-
-// BasicInstancesInstanceListArrayInput is an input type that accepts BasicInstancesInstanceListArray and BasicInstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `BasicInstancesInstanceListArrayInput` via:
-//
-//          BasicInstancesInstanceListArray{ BasicInstancesInstanceListArgs{...} }
-type BasicInstancesInstanceListArrayInput interface {
-	pulumi.Input
-
-	ToBasicInstancesInstanceListArrayOutput() BasicInstancesInstanceListArrayOutput
-	ToBasicInstancesInstanceListArrayOutputWithContext(context.Context) BasicInstancesInstanceListArrayOutput
-}
-
-type BasicInstancesInstanceListArray []BasicInstancesInstanceListInput
-
-func (BasicInstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BasicInstancesInstanceList)(nil)).Elem()
-}
-
-func (i BasicInstancesInstanceListArray) ToBasicInstancesInstanceListArrayOutput() BasicInstancesInstanceListArrayOutput {
-	return i.ToBasicInstancesInstanceListArrayOutputWithContext(context.Background())
-}
-
-func (i BasicInstancesInstanceListArray) ToBasicInstancesInstanceListArrayOutputWithContext(ctx context.Context) BasicInstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BasicInstancesInstanceListArrayOutput)
-}
-
-type BasicInstancesInstanceListOutput struct{ *pulumi.OutputState }
-
-func (BasicInstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BasicInstancesInstanceList)(nil)).Elem()
-}
-
-func (o BasicInstancesInstanceListOutput) ToBasicInstancesInstanceListOutput() BasicInstancesInstanceListOutput {
-	return o
-}
-
-func (o BasicInstancesInstanceListOutput) ToBasicInstancesInstanceListOutputWithContext(ctx context.Context) BasicInstancesInstanceListOutput {
-	return o
-}
-
-func (o BasicInstancesInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Cpu() pulumi.IntOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) int { return v.Cpu }).(pulumi.IntOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Memory() pulumi.IntOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) int { return v.Memory }).(pulumi.IntOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Storage() pulumi.IntOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) int { return v.Storage }).(pulumi.IntOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) UsedStorage() pulumi.IntOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) int { return v.UsedStorage }).(pulumi.IntOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.Vip }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-func (o BasicInstancesInstanceListOutput) Vport() pulumi.IntOutput {
-	return o.ApplyT(func(v BasicInstancesInstanceList) int { return v.Vport }).(pulumi.IntOutput)
-}
-
-type BasicInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
-
-func (BasicInstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BasicInstancesInstanceList)(nil)).Elem()
-}
-
-func (o BasicInstancesInstanceListArrayOutput) ToBasicInstancesInstanceListArrayOutput() BasicInstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o BasicInstancesInstanceListArrayOutput) ToBasicInstancesInstanceListArrayOutputWithContext(ctx context.Context) BasicInstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o BasicInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) BasicInstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BasicInstancesInstanceList {
-		return vs[0].([]BasicInstancesInstanceList)[vs[1].(int)]
-	}).(BasicInstancesInstanceListOutput)
-}
-
-type DBsDbList struct {
-	Charset    string `pulumi:"charset"`
-	CreateTime string `pulumi:"createTime"`
-	InstanceId string `pulumi:"instanceId"`
-	Name       string `pulumi:"name"`
-	Remark     string `pulumi:"remark"`
-	Status     string `pulumi:"status"`
-}
-
-// DBsDbListInput is an input type that accepts DBsDbListArgs and DBsDbListOutput values.
-// You can construct a concrete instance of `DBsDbListInput` via:
-//
-//          DBsDbListArgs{...}
-type DBsDbListInput interface {
-	pulumi.Input
-
-	ToDBsDbListOutput() DBsDbListOutput
-	ToDBsDbListOutputWithContext(context.Context) DBsDbListOutput
-}
-
-type DBsDbListArgs struct {
-	Charset    pulumi.StringInput `pulumi:"charset"`
-	CreateTime pulumi.StringInput `pulumi:"createTime"`
-	InstanceId pulumi.StringInput `pulumi:"instanceId"`
-	Name       pulumi.StringInput `pulumi:"name"`
-	Remark     pulumi.StringInput `pulumi:"remark"`
-	Status     pulumi.StringInput `pulumi:"status"`
-}
-
-func (DBsDbListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DBsDbList)(nil)).Elem()
-}
-
-func (i DBsDbListArgs) ToDBsDbListOutput() DBsDbListOutput {
-	return i.ToDBsDbListOutputWithContext(context.Background())
-}
-
-func (i DBsDbListArgs) ToDBsDbListOutputWithContext(ctx context.Context) DBsDbListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DBsDbListOutput)
-}
-
-// DBsDbListArrayInput is an input type that accepts DBsDbListArray and DBsDbListArrayOutput values.
-// You can construct a concrete instance of `DBsDbListArrayInput` via:
-//
-//          DBsDbListArray{ DBsDbListArgs{...} }
-type DBsDbListArrayInput interface {
-	pulumi.Input
-
-	ToDBsDbListArrayOutput() DBsDbListArrayOutput
-	ToDBsDbListArrayOutputWithContext(context.Context) DBsDbListArrayOutput
-}
-
-type DBsDbListArray []DBsDbListInput
-
-func (DBsDbListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DBsDbList)(nil)).Elem()
-}
-
-func (i DBsDbListArray) ToDBsDbListArrayOutput() DBsDbListArrayOutput {
-	return i.ToDBsDbListArrayOutputWithContext(context.Background())
-}
-
-func (i DBsDbListArray) ToDBsDbListArrayOutputWithContext(ctx context.Context) DBsDbListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DBsDbListArrayOutput)
-}
-
-type DBsDbListOutput struct{ *pulumi.OutputState }
-
-func (DBsDbListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DBsDbList)(nil)).Elem()
-}
-
-func (o DBsDbListOutput) ToDBsDbListOutput() DBsDbListOutput {
-	return o
-}
-
-func (o DBsDbListOutput) ToDBsDbListOutputWithContext(ctx context.Context) DBsDbListOutput {
-	return o
-}
-
-func (o DBsDbListOutput) Charset() pulumi.StringOutput {
-	return o.ApplyT(func(v DBsDbList) string { return v.Charset }).(pulumi.StringOutput)
-}
-
-func (o DBsDbListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v DBsDbList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o DBsDbListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v DBsDbList) string { return v.InstanceId }).(pulumi.StringOutput)
-}
-
-func (o DBsDbListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v DBsDbList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o DBsDbListOutput) Remark() pulumi.StringOutput {
-	return o.ApplyT(func(v DBsDbList) string { return v.Remark }).(pulumi.StringOutput)
-}
-
-func (o DBsDbListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v DBsDbList) string { return v.Status }).(pulumi.StringOutput)
-}
-
-type DBsDbListArrayOutput struct{ *pulumi.OutputState }
-
-func (DBsDbListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DBsDbList)(nil)).Elem()
-}
-
-func (o DBsDbListArrayOutput) ToDBsDbListArrayOutput() DBsDbListArrayOutput {
-	return o
-}
-
-func (o DBsDbListArrayOutput) ToDBsDbListArrayOutputWithContext(ctx context.Context) DBsDbListArrayOutput {
-	return o
-}
-
-func (o DBsDbListArrayOutput) Index(i pulumi.IntInput) DBsDbListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DBsDbList {
-		return vs[0].([]DBsDbList)[vs[1].(int)]
-	}).(DBsDbListOutput)
-}
-
-type InstancesInstanceList struct {
-	AvailabilityZone string                 `pulumi:"availabilityZone"`
-	ChargeType       string                 `pulumi:"chargeType"`
-	CreateTime       string                 `pulumi:"createTime"`
-	EngineVersion    string                 `pulumi:"engineVersion"`
-	HaType           string                 `pulumi:"haType"`
-	Id               string                 `pulumi:"id"`
-	Memory           int                    `pulumi:"memory"`
-	Name             string                 `pulumi:"name"`
-	ProjectId        int                    `pulumi:"projectId"`
-	RoFlag           string                 `pulumi:"roFlag"`
-	Status           int                    `pulumi:"status"`
-	Storage          int                    `pulumi:"storage"`
-	SubnetId         string                 `pulumi:"subnetId"`
-	Tags             map[string]interface{} `pulumi:"tags"`
-	UsedStorage      int                    `pulumi:"usedStorage"`
-	Vip              string                 `pulumi:"vip"`
-	VpcId            string                 `pulumi:"vpcId"`
-	Vport            int                    `pulumi:"vport"`
-}
-
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
-//
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
-	pulumi.Input
-
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
-}
-
-type InstancesInstanceListArgs struct {
-	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
-	ChargeType       pulumi.StringInput `pulumi:"chargeType"`
-	CreateTime       pulumi.StringInput `pulumi:"createTime"`
-	EngineVersion    pulumi.StringInput `pulumi:"engineVersion"`
-	HaType           pulumi.StringInput `pulumi:"haType"`
-	Id               pulumi.StringInput `pulumi:"id"`
-	Memory           pulumi.IntInput    `pulumi:"memory"`
-	Name             pulumi.StringInput `pulumi:"name"`
-	ProjectId        pulumi.IntInput    `pulumi:"projectId"`
-	RoFlag           pulumi.StringInput `pulumi:"roFlag"`
-	Status           pulumi.IntInput    `pulumi:"status"`
-	Storage          pulumi.IntInput    `pulumi:"storage"`
-	SubnetId         pulumi.StringInput `pulumi:"subnetId"`
-	Tags             pulumi.MapInput    `pulumi:"tags"`
-	UsedStorage      pulumi.IntInput    `pulumi:"usedStorage"`
-	Vip              pulumi.StringInput `pulumi:"vip"`
-	VpcId            pulumi.StringInput `pulumi:"vpcId"`
-	Vport            pulumi.IntInput    `pulumi:"vport"`
-}
-
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
-}
-
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
-}
-
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
-}
-
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
-//
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
-	pulumi.Input
-
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
-}
-
-type InstancesInstanceListArray []InstancesInstanceListInput
-
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
-}
-
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
-}
-
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
-}
-
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
-
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
-}
-
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return o
-}
-
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return o
-}
-
-func (o InstancesInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) HaType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.HaType }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) Memory() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Memory }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) RoFlag() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.RoFlag }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) Storage() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Storage }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v InstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-func (o InstancesInstanceListOutput) UsedStorage() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.UsedStorage }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Vip }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) Vport() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Vport }).(pulumi.IntOutput)
-}
-
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
-
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
-}
-
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
-}
-
 type PublishSubscribeDatabaseTuple struct {
+	// Publish the database.
 	PublishDatabase string `pulumi:"publishDatabase"`
 }
 
@@ -932,6 +27,7 @@ type PublishSubscribeDatabaseTupleInput interface {
 }
 
 type PublishSubscribeDatabaseTupleArgs struct {
+	// Publish the database.
 	PublishDatabase pulumi.StringInput `pulumi:"publishDatabase"`
 }
 
@@ -986,6 +82,7 @@ func (o PublishSubscribeDatabaseTupleOutput) ToPublishSubscribeDatabaseTupleOutp
 	return o
 }
 
+// Publish the database.
 func (o PublishSubscribeDatabaseTupleOutput) PublishDatabase() pulumi.StringOutput {
 	return o.ApplyT(func(v PublishSubscribeDatabaseTuple) string { return v.PublishDatabase }).(pulumi.StringOutput)
 }
@@ -1010,711 +107,1914 @@ func (o PublishSubscribeDatabaseTupleArrayOutput) Index(i pulumi.IntInput) Publi
 	}).(PublishSubscribeDatabaseTupleOutput)
 }
 
-type PublishSubscribesPublishSubscribeList struct {
-	DatabaseTuples        []PublishSubscribesPublishSubscribeListDatabaseTuple `pulumi:"databaseTuples"`
-	PublishInstanceId     string                                               `pulumi:"publishInstanceId"`
-	PublishInstanceIp     string                                               `pulumi:"publishInstanceIp"`
-	PublishInstanceName   string                                               `pulumi:"publishInstanceName"`
-	PublishSubscribeId    int                                                  `pulumi:"publishSubscribeId"`
-	PublishSubscribeName  string                                               `pulumi:"publishSubscribeName"`
-	SubscribeInstanceId   string                                               `pulumi:"subscribeInstanceId"`
-	SubscribeInstanceIp   string                                               `pulumi:"subscribeInstanceIp"`
-	SubscribeInstanceName string                                               `pulumi:"subscribeInstanceName"`
+type GetAccountDbAttachmentsList struct {
+	// Name of the SQL Server account to be queried.
+	AccountName string `pulumi:"accountName"`
+	// Name of the DB to be queried.
+	DbName string `pulumi:"dbName"`
+	// SQL Server instance ID that the account belongs to.
+	InstanceId string `pulumi:"instanceId"`
+	// Privilege of the account on DB. Valid value are `ReadOnly`, `ReadWrite`.
+	Privilege string `pulumi:"privilege"`
 }
 
-// PublishSubscribesPublishSubscribeListInput is an input type that accepts PublishSubscribesPublishSubscribeListArgs and PublishSubscribesPublishSubscribeListOutput values.
-// You can construct a concrete instance of `PublishSubscribesPublishSubscribeListInput` via:
+// GetAccountDbAttachmentsListInput is an input type that accepts GetAccountDbAttachmentsListArgs and GetAccountDbAttachmentsListOutput values.
+// You can construct a concrete instance of `GetAccountDbAttachmentsListInput` via:
 //
-//          PublishSubscribesPublishSubscribeListArgs{...}
-type PublishSubscribesPublishSubscribeListInput interface {
+//          GetAccountDbAttachmentsListArgs{...}
+type GetAccountDbAttachmentsListInput interface {
 	pulumi.Input
 
-	ToPublishSubscribesPublishSubscribeListOutput() PublishSubscribesPublishSubscribeListOutput
-	ToPublishSubscribesPublishSubscribeListOutputWithContext(context.Context) PublishSubscribesPublishSubscribeListOutput
+	ToGetAccountDbAttachmentsListOutput() GetAccountDbAttachmentsListOutput
+	ToGetAccountDbAttachmentsListOutputWithContext(context.Context) GetAccountDbAttachmentsListOutput
 }
 
-type PublishSubscribesPublishSubscribeListArgs struct {
-	DatabaseTuples        PublishSubscribesPublishSubscribeListDatabaseTupleArrayInput `pulumi:"databaseTuples"`
-	PublishInstanceId     pulumi.StringInput                                           `pulumi:"publishInstanceId"`
-	PublishInstanceIp     pulumi.StringInput                                           `pulumi:"publishInstanceIp"`
-	PublishInstanceName   pulumi.StringInput                                           `pulumi:"publishInstanceName"`
-	PublishSubscribeId    pulumi.IntInput                                              `pulumi:"publishSubscribeId"`
-	PublishSubscribeName  pulumi.StringInput                                           `pulumi:"publishSubscribeName"`
-	SubscribeInstanceId   pulumi.StringInput                                           `pulumi:"subscribeInstanceId"`
-	SubscribeInstanceIp   pulumi.StringInput                                           `pulumi:"subscribeInstanceIp"`
-	SubscribeInstanceName pulumi.StringInput                                           `pulumi:"subscribeInstanceName"`
+type GetAccountDbAttachmentsListArgs struct {
+	// Name of the SQL Server account to be queried.
+	AccountName pulumi.StringInput `pulumi:"accountName"`
+	// Name of the DB to be queried.
+	DbName pulumi.StringInput `pulumi:"dbName"`
+	// SQL Server instance ID that the account belongs to.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Privilege of the account on DB. Valid value are `ReadOnly`, `ReadWrite`.
+	Privilege pulumi.StringInput `pulumi:"privilege"`
 }
 
-func (PublishSubscribesPublishSubscribeListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PublishSubscribesPublishSubscribeList)(nil)).Elem()
+func (GetAccountDbAttachmentsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountDbAttachmentsList)(nil)).Elem()
 }
 
-func (i PublishSubscribesPublishSubscribeListArgs) ToPublishSubscribesPublishSubscribeListOutput() PublishSubscribesPublishSubscribeListOutput {
-	return i.ToPublishSubscribesPublishSubscribeListOutputWithContext(context.Background())
+func (i GetAccountDbAttachmentsListArgs) ToGetAccountDbAttachmentsListOutput() GetAccountDbAttachmentsListOutput {
+	return i.ToGetAccountDbAttachmentsListOutputWithContext(context.Background())
 }
 
-func (i PublishSubscribesPublishSubscribeListArgs) ToPublishSubscribesPublishSubscribeListOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PublishSubscribesPublishSubscribeListOutput)
+func (i GetAccountDbAttachmentsListArgs) ToGetAccountDbAttachmentsListOutputWithContext(ctx context.Context) GetAccountDbAttachmentsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountDbAttachmentsListOutput)
 }
 
-// PublishSubscribesPublishSubscribeListArrayInput is an input type that accepts PublishSubscribesPublishSubscribeListArray and PublishSubscribesPublishSubscribeListArrayOutput values.
-// You can construct a concrete instance of `PublishSubscribesPublishSubscribeListArrayInput` via:
+// GetAccountDbAttachmentsListArrayInput is an input type that accepts GetAccountDbAttachmentsListArray and GetAccountDbAttachmentsListArrayOutput values.
+// You can construct a concrete instance of `GetAccountDbAttachmentsListArrayInput` via:
 //
-//          PublishSubscribesPublishSubscribeListArray{ PublishSubscribesPublishSubscribeListArgs{...} }
-type PublishSubscribesPublishSubscribeListArrayInput interface {
+//          GetAccountDbAttachmentsListArray{ GetAccountDbAttachmentsListArgs{...} }
+type GetAccountDbAttachmentsListArrayInput interface {
 	pulumi.Input
 
-	ToPublishSubscribesPublishSubscribeListArrayOutput() PublishSubscribesPublishSubscribeListArrayOutput
-	ToPublishSubscribesPublishSubscribeListArrayOutputWithContext(context.Context) PublishSubscribesPublishSubscribeListArrayOutput
+	ToGetAccountDbAttachmentsListArrayOutput() GetAccountDbAttachmentsListArrayOutput
+	ToGetAccountDbAttachmentsListArrayOutputWithContext(context.Context) GetAccountDbAttachmentsListArrayOutput
 }
 
-type PublishSubscribesPublishSubscribeListArray []PublishSubscribesPublishSubscribeListInput
+type GetAccountDbAttachmentsListArray []GetAccountDbAttachmentsListInput
 
-func (PublishSubscribesPublishSubscribeListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PublishSubscribesPublishSubscribeList)(nil)).Elem()
+func (GetAccountDbAttachmentsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountDbAttachmentsList)(nil)).Elem()
 }
 
-func (i PublishSubscribesPublishSubscribeListArray) ToPublishSubscribesPublishSubscribeListArrayOutput() PublishSubscribesPublishSubscribeListArrayOutput {
-	return i.ToPublishSubscribesPublishSubscribeListArrayOutputWithContext(context.Background())
+func (i GetAccountDbAttachmentsListArray) ToGetAccountDbAttachmentsListArrayOutput() GetAccountDbAttachmentsListArrayOutput {
+	return i.ToGetAccountDbAttachmentsListArrayOutputWithContext(context.Background())
 }
 
-func (i PublishSubscribesPublishSubscribeListArray) ToPublishSubscribesPublishSubscribeListArrayOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PublishSubscribesPublishSubscribeListArrayOutput)
+func (i GetAccountDbAttachmentsListArray) ToGetAccountDbAttachmentsListArrayOutputWithContext(ctx context.Context) GetAccountDbAttachmentsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountDbAttachmentsListArrayOutput)
 }
 
-type PublishSubscribesPublishSubscribeListOutput struct{ *pulumi.OutputState }
+type GetAccountDbAttachmentsListOutput struct{ *pulumi.OutputState }
 
-func (PublishSubscribesPublishSubscribeListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PublishSubscribesPublishSubscribeList)(nil)).Elem()
+func (GetAccountDbAttachmentsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountDbAttachmentsList)(nil)).Elem()
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) ToPublishSubscribesPublishSubscribeListOutput() PublishSubscribesPublishSubscribeListOutput {
+func (o GetAccountDbAttachmentsListOutput) ToGetAccountDbAttachmentsListOutput() GetAccountDbAttachmentsListOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) ToPublishSubscribesPublishSubscribeListOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListOutput {
+func (o GetAccountDbAttachmentsListOutput) ToGetAccountDbAttachmentsListOutputWithContext(ctx context.Context) GetAccountDbAttachmentsListOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) DatabaseTuples() PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) []PublishSubscribesPublishSubscribeListDatabaseTuple {
+// Name of the SQL Server account to be queried.
+func (o GetAccountDbAttachmentsListOutput) AccountName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountDbAttachmentsList) string { return v.AccountName }).(pulumi.StringOutput)
+}
+
+// Name of the DB to be queried.
+func (o GetAccountDbAttachmentsListOutput) DbName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountDbAttachmentsList) string { return v.DbName }).(pulumi.StringOutput)
+}
+
+// SQL Server instance ID that the account belongs to.
+func (o GetAccountDbAttachmentsListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountDbAttachmentsList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Privilege of the account on DB. Valid value are `ReadOnly`, `ReadWrite`.
+func (o GetAccountDbAttachmentsListOutput) Privilege() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountDbAttachmentsList) string { return v.Privilege }).(pulumi.StringOutput)
+}
+
+type GetAccountDbAttachmentsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountDbAttachmentsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountDbAttachmentsList)(nil)).Elem()
+}
+
+func (o GetAccountDbAttachmentsListArrayOutput) ToGetAccountDbAttachmentsListArrayOutput() GetAccountDbAttachmentsListArrayOutput {
+	return o
+}
+
+func (o GetAccountDbAttachmentsListArrayOutput) ToGetAccountDbAttachmentsListArrayOutputWithContext(ctx context.Context) GetAccountDbAttachmentsListArrayOutput {
+	return o
+}
+
+func (o GetAccountDbAttachmentsListArrayOutput) Index(i pulumi.IntInput) GetAccountDbAttachmentsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountDbAttachmentsList {
+		return vs[0].([]GetAccountDbAttachmentsList)[vs[1].(int)]
+	}).(GetAccountDbAttachmentsListOutput)
+}
+
+type GetAccountsList struct {
+	// Create time of the SQL Server account.
+	CreateTime string `pulumi:"createTime"`
+	// SQL server instance ID that the account belongs to.
+	InstanceId string `pulumi:"instanceId"`
+	// Name of the SQL server account to be queried.
+	Name string `pulumi:"name"`
+	// Remark of the SQL Server account.
+	Remark string `pulumi:"remark"`
+	// Status of the SQL Server account. `1` for creating, `2` for running, `3` for modifying, 4 for resetting password, -1 for deleting.
+	Status int `pulumi:"status"`
+	// Last updated time of the SQL Server account.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetAccountsListInput is an input type that accepts GetAccountsListArgs and GetAccountsListOutput values.
+// You can construct a concrete instance of `GetAccountsListInput` via:
+//
+//          GetAccountsListArgs{...}
+type GetAccountsListInput interface {
+	pulumi.Input
+
+	ToGetAccountsListOutput() GetAccountsListOutput
+	ToGetAccountsListOutputWithContext(context.Context) GetAccountsListOutput
+}
+
+type GetAccountsListArgs struct {
+	// Create time of the SQL Server account.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// SQL server instance ID that the account belongs to.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Name of the SQL server account to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Remark of the SQL Server account.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Status of the SQL Server account. `1` for creating, `2` for running, `3` for modifying, 4 for resetting password, -1 for deleting.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Last updated time of the SQL Server account.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetAccountsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountsList)(nil)).Elem()
+}
+
+func (i GetAccountsListArgs) ToGetAccountsListOutput() GetAccountsListOutput {
+	return i.ToGetAccountsListOutputWithContext(context.Background())
+}
+
+func (i GetAccountsListArgs) ToGetAccountsListOutputWithContext(ctx context.Context) GetAccountsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountsListOutput)
+}
+
+// GetAccountsListArrayInput is an input type that accepts GetAccountsListArray and GetAccountsListArrayOutput values.
+// You can construct a concrete instance of `GetAccountsListArrayInput` via:
+//
+//          GetAccountsListArray{ GetAccountsListArgs{...} }
+type GetAccountsListArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountsListArrayOutput() GetAccountsListArrayOutput
+	ToGetAccountsListArrayOutputWithContext(context.Context) GetAccountsListArrayOutput
+}
+
+type GetAccountsListArray []GetAccountsListInput
+
+func (GetAccountsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountsList)(nil)).Elem()
+}
+
+func (i GetAccountsListArray) ToGetAccountsListArrayOutput() GetAccountsListArrayOutput {
+	return i.ToGetAccountsListArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountsListArray) ToGetAccountsListArrayOutputWithContext(ctx context.Context) GetAccountsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountsListArrayOutput)
+}
+
+type GetAccountsListOutput struct{ *pulumi.OutputState }
+
+func (GetAccountsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountsList)(nil)).Elem()
+}
+
+func (o GetAccountsListOutput) ToGetAccountsListOutput() GetAccountsListOutput {
+	return o
+}
+
+func (o GetAccountsListOutput) ToGetAccountsListOutputWithContext(ctx context.Context) GetAccountsListOutput {
+	return o
+}
+
+// Create time of the SQL Server account.
+func (o GetAccountsListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// SQL server instance ID that the account belongs to.
+func (o GetAccountsListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Name of the SQL server account to be queried.
+func (o GetAccountsListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Remark of the SQL Server account.
+func (o GetAccountsListOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsList) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Status of the SQL Server account. `1` for creating, `2` for running, `3` for modifying, 4 for resetting password, -1 for deleting.
+func (o GetAccountsListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountsList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Last updated time of the SQL Server account.
+func (o GetAccountsListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetAccountsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountsList)(nil)).Elem()
+}
+
+func (o GetAccountsListArrayOutput) ToGetAccountsListArrayOutput() GetAccountsListArrayOutput {
+	return o
+}
+
+func (o GetAccountsListArrayOutput) ToGetAccountsListArrayOutputWithContext(ctx context.Context) GetAccountsListArrayOutput {
+	return o
+}
+
+func (o GetAccountsListArrayOutput) Index(i pulumi.IntInput) GetAccountsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountsList {
+		return vs[0].([]GetAccountsList)[vs[1].(int)]
+	}).(GetAccountsListOutput)
+}
+
+type GetBackupsList struct {
+	// Database name list of the backup.
+	DbLists []string `pulumi:"dbLists"`
+	// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	EndTime string `pulumi:"endTime"`
+	// File name of the backup.
+	FileName string `pulumi:"fileName"`
+	// ID of the backup.
+	Id string `pulumi:"id"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// URL for downloads externally.
+	InternetUrl string `pulumi:"internetUrl"`
+	// URL for downloads internally.
+	IntranetUrl string `pulumi:"intranetUrl"`
+	// The size of backup file. Unit is KB.
+	Size int `pulumi:"size"`
+	// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	StartTime string `pulumi:"startTime"`
+	// Status of the backup. `1` for creating, `2` for successfully created, 3 for failed.
+	Status int `pulumi:"status"`
+	// Strategy of the backup. `0` for instance backup, `1` for multi-databases backup.
+	Strategy int `pulumi:"strategy"`
+	// The way to trigger backup. `0` for timed trigger, `1` for manual trigger.
+	TriggerModel int `pulumi:"triggerModel"`
+}
+
+// GetBackupsListInput is an input type that accepts GetBackupsListArgs and GetBackupsListOutput values.
+// You can construct a concrete instance of `GetBackupsListInput` via:
+//
+//          GetBackupsListArgs{...}
+type GetBackupsListInput interface {
+	pulumi.Input
+
+	ToGetBackupsListOutput() GetBackupsListOutput
+	ToGetBackupsListOutputWithContext(context.Context) GetBackupsListOutput
+}
+
+type GetBackupsListArgs struct {
+	// Database name list of the backup.
+	DbLists pulumi.StringArrayInput `pulumi:"dbLists"`
+	// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// File name of the backup.
+	FileName pulumi.StringInput `pulumi:"fileName"`
+	// ID of the backup.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// URL for downloads externally.
+	InternetUrl pulumi.StringInput `pulumi:"internetUrl"`
+	// URL for downloads internally.
+	IntranetUrl pulumi.StringInput `pulumi:"intranetUrl"`
+	// The size of backup file. Unit is KB.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Status of the backup. `1` for creating, `2` for successfully created, 3 for failed.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Strategy of the backup. `0` for instance backup, `1` for multi-databases backup.
+	Strategy pulumi.IntInput `pulumi:"strategy"`
+	// The way to trigger backup. `0` for timed trigger, `1` for manual trigger.
+	TriggerModel pulumi.IntInput `pulumi:"triggerModel"`
+}
+
+func (GetBackupsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupsList)(nil)).Elem()
+}
+
+func (i GetBackupsListArgs) ToGetBackupsListOutput() GetBackupsListOutput {
+	return i.ToGetBackupsListOutputWithContext(context.Background())
+}
+
+func (i GetBackupsListArgs) ToGetBackupsListOutputWithContext(ctx context.Context) GetBackupsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupsListOutput)
+}
+
+// GetBackupsListArrayInput is an input type that accepts GetBackupsListArray and GetBackupsListArrayOutput values.
+// You can construct a concrete instance of `GetBackupsListArrayInput` via:
+//
+//          GetBackupsListArray{ GetBackupsListArgs{...} }
+type GetBackupsListArrayInput interface {
+	pulumi.Input
+
+	ToGetBackupsListArrayOutput() GetBackupsListArrayOutput
+	ToGetBackupsListArrayOutputWithContext(context.Context) GetBackupsListArrayOutput
+}
+
+type GetBackupsListArray []GetBackupsListInput
+
+func (GetBackupsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupsList)(nil)).Elem()
+}
+
+func (i GetBackupsListArray) ToGetBackupsListArrayOutput() GetBackupsListArrayOutput {
+	return i.ToGetBackupsListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBackupsListArray) ToGetBackupsListArrayOutputWithContext(ctx context.Context) GetBackupsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupsListArrayOutput)
+}
+
+type GetBackupsListOutput struct{ *pulumi.OutputState }
+
+func (GetBackupsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupsList)(nil)).Elem()
+}
+
+func (o GetBackupsListOutput) ToGetBackupsListOutput() GetBackupsListOutput {
+	return o
+}
+
+func (o GetBackupsListOutput) ToGetBackupsListOutputWithContext(ctx context.Context) GetBackupsListOutput {
+	return o
+}
+
+// Database name list of the backup.
+func (o GetBackupsListOutput) DbLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBackupsList) []string { return v.DbLists }).(pulumi.StringArrayOutput)
+}
+
+// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+func (o GetBackupsListOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupsList) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// File name of the backup.
+func (o GetBackupsListOutput) FileName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupsList) string { return v.FileName }).(pulumi.StringOutput)
+}
+
+// ID of the backup.
+func (o GetBackupsListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupsList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetBackupsListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupsList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// URL for downloads externally.
+func (o GetBackupsListOutput) InternetUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupsList) string { return v.InternetUrl }).(pulumi.StringOutput)
+}
+
+// URL for downloads internally.
+func (o GetBackupsListOutput) IntranetUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupsList) string { return v.IntranetUrl }).(pulumi.StringOutput)
+}
+
+// The size of backup file. Unit is KB.
+func (o GetBackupsListOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupsList) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+func (o GetBackupsListOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupsList) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Status of the backup. `1` for creating, `2` for successfully created, 3 for failed.
+func (o GetBackupsListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupsList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Strategy of the backup. `0` for instance backup, `1` for multi-databases backup.
+func (o GetBackupsListOutput) Strategy() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupsList) int { return v.Strategy }).(pulumi.IntOutput)
+}
+
+// The way to trigger backup. `0` for timed trigger, `1` for manual trigger.
+func (o GetBackupsListOutput) TriggerModel() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupsList) int { return v.TriggerModel }).(pulumi.IntOutput)
+}
+
+type GetBackupsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupsList)(nil)).Elem()
+}
+
+func (o GetBackupsListArrayOutput) ToGetBackupsListArrayOutput() GetBackupsListArrayOutput {
+	return o
+}
+
+func (o GetBackupsListArrayOutput) ToGetBackupsListArrayOutputWithContext(ctx context.Context) GetBackupsListArrayOutput {
+	return o
+}
+
+func (o GetBackupsListArrayOutput) Index(i pulumi.IntInput) GetBackupsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupsList {
+		return vs[0].([]GetBackupsList)[vs[1].(int)]
+	}).(GetBackupsListOutput)
+}
+
+type GetBasicInstancesInstanceList struct {
+	// Availability zone.
+	AvailabilityZone string `pulumi:"availabilityZone"`
+	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	ChargeType string `pulumi:"chargeType"`
+	// The CPU number of the SQL Server basic instance.
+	Cpu int `pulumi:"cpu"`
+	// Create time of the SQL Server basic instance.
+	CreateTime string `pulumi:"createTime"`
+	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+	EngineVersion string `pulumi:"engineVersion"`
+	// ID of the SQL Server basic instance to be query.
+	Id string `pulumi:"id"`
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
+	Memory int `pulumi:"memory"`
+	// Name of the SQL Server basic instance to be query.
+	Name string `pulumi:"name"`
+	// Project ID of the SQL Server basic instance to be query.
+	ProjectId int `pulumi:"projectId"`
+	// Status of the SQL Server basic instance. `1` for applying, `2` for running, `3` for running with limit, `4` for isolated, `5` for recycling, `6` for recycled, `7` for running with task, `8` for off-line, `9` for expanding, `10` for migrating, `11` for readonly, `12` for rebooting.
+	Status int `pulumi:"status"`
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
+	Storage int `pulumi:"storage"`
+	// Subnet ID of the SQL Server basic instance to be query.
+	SubnetId string `pulumi:"subnetId"`
+	// Tags of the SQL Server basic instance.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Used storage.
+	UsedStorage int `pulumi:"usedStorage"`
+	// IP for private access.
+	Vip string `pulumi:"vip"`
+	// Vpc ID of the SQL Server basic instance to be query.
+	VpcId string `pulumi:"vpcId"`
+	// Port for private access.
+	Vport int `pulumi:"vport"`
+}
+
+// GetBasicInstancesInstanceListInput is an input type that accepts GetBasicInstancesInstanceListArgs and GetBasicInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetBasicInstancesInstanceListInput` via:
+//
+//          GetBasicInstancesInstanceListArgs{...}
+type GetBasicInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetBasicInstancesInstanceListOutput() GetBasicInstancesInstanceListOutput
+	ToGetBasicInstancesInstanceListOutputWithContext(context.Context) GetBasicInstancesInstanceListOutput
+}
+
+type GetBasicInstancesInstanceListArgs struct {
+	// Availability zone.
+	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
+	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// The CPU number of the SQL Server basic instance.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Create time of the SQL Server basic instance.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
+	// ID of the SQL Server basic instance to be query.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Name of the SQL Server basic instance to be query.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Project ID of the SQL Server basic instance to be query.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Status of the SQL Server basic instance. `1` for applying, `2` for running, `3` for running with limit, `4` for isolated, `5` for recycling, `6` for recycled, `7` for running with task, `8` for off-line, `9` for expanding, `10` for migrating, `11` for readonly, `12` for rebooting.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
+	Storage pulumi.IntInput `pulumi:"storage"`
+	// Subnet ID of the SQL Server basic instance to be query.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tags of the SQL Server basic instance.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Used storage.
+	UsedStorage pulumi.IntInput `pulumi:"usedStorage"`
+	// IP for private access.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Vpc ID of the SQL Server basic instance to be query.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Port for private access.
+	Vport pulumi.IntInput `pulumi:"vport"`
+}
+
+func (GetBasicInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBasicInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetBasicInstancesInstanceListArgs) ToGetBasicInstancesInstanceListOutput() GetBasicInstancesInstanceListOutput {
+	return i.ToGetBasicInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetBasicInstancesInstanceListArgs) ToGetBasicInstancesInstanceListOutputWithContext(ctx context.Context) GetBasicInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBasicInstancesInstanceListOutput)
+}
+
+// GetBasicInstancesInstanceListArrayInput is an input type that accepts GetBasicInstancesInstanceListArray and GetBasicInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetBasicInstancesInstanceListArrayInput` via:
+//
+//          GetBasicInstancesInstanceListArray{ GetBasicInstancesInstanceListArgs{...} }
+type GetBasicInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetBasicInstancesInstanceListArrayOutput() GetBasicInstancesInstanceListArrayOutput
+	ToGetBasicInstancesInstanceListArrayOutputWithContext(context.Context) GetBasicInstancesInstanceListArrayOutput
+}
+
+type GetBasicInstancesInstanceListArray []GetBasicInstancesInstanceListInput
+
+func (GetBasicInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBasicInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetBasicInstancesInstanceListArray) ToGetBasicInstancesInstanceListArrayOutput() GetBasicInstancesInstanceListArrayOutput {
+	return i.ToGetBasicInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBasicInstancesInstanceListArray) ToGetBasicInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetBasicInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBasicInstancesInstanceListArrayOutput)
+}
+
+type GetBasicInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetBasicInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBasicInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetBasicInstancesInstanceListOutput) ToGetBasicInstancesInstanceListOutput() GetBasicInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetBasicInstancesInstanceListOutput) ToGetBasicInstancesInstanceListOutputWithContext(ctx context.Context) GetBasicInstancesInstanceListOutput {
+	return o
+}
+
+// Availability zone.
+func (o GetBasicInstancesInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
+}
+
+// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+func (o GetBasicInstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
+// The CPU number of the SQL Server basic instance.
+func (o GetBasicInstancesInstanceListOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Create time of the SQL Server basic instance.
+func (o GetBasicInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+func (o GetBasicInstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
+}
+
+// ID of the SQL Server basic instance to be query.
+func (o GetBasicInstancesInstanceListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
+func (o GetBasicInstancesInstanceListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Name of the SQL Server basic instance to be query.
+func (o GetBasicInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Project ID of the SQL Server basic instance to be query.
+func (o GetBasicInstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Status of the SQL Server basic instance. `1` for applying, `2` for running, `3` for running with limit, `4` for isolated, `5` for recycling, `6` for recycled, `7` for running with task, `8` for off-line, `9` for expanding, `10` for migrating, `11` for readonly, `12` for rebooting.
+func (o GetBasicInstancesInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
+func (o GetBasicInstancesInstanceListOutput) Storage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) int { return v.Storage }).(pulumi.IntOutput)
+}
+
+// Subnet ID of the SQL Server basic instance to be query.
+func (o GetBasicInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Tags of the SQL Server basic instance.
+func (o GetBasicInstancesInstanceListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Used storage.
+func (o GetBasicInstancesInstanceListOutput) UsedStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) int { return v.UsedStorage }).(pulumi.IntOutput)
+}
+
+// IP for private access.
+func (o GetBasicInstancesInstanceListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Vpc ID of the SQL Server basic instance to be query.
+func (o GetBasicInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Port for private access.
+func (o GetBasicInstancesInstanceListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBasicInstancesInstanceList) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+type GetBasicInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBasicInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBasicInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetBasicInstancesInstanceListArrayOutput) ToGetBasicInstancesInstanceListArrayOutput() GetBasicInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetBasicInstancesInstanceListArrayOutput) ToGetBasicInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetBasicInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetBasicInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetBasicInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBasicInstancesInstanceList {
+		return vs[0].([]GetBasicInstancesInstanceList)[vs[1].(int)]
+	}).(GetBasicInstancesInstanceListOutput)
+}
+
+type GetDbsDbList struct {
+	// Character set DB uses, could be `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`.
+	Charset string `pulumi:"charset"`
+	// Database creation time.
+	CreateTime string `pulumi:"createTime"`
+	// SQL Server instance ID which DB belongs to.
+	InstanceId string `pulumi:"instanceId"`
+	// Name of DB.
+	Name string `pulumi:"name"`
+	// Remark of the DB.
+	Remark string `pulumi:"remark"`
+	// Database status. Valid values are `creating`, `running`, `modifying`, `dropping`.
+	Status string `pulumi:"status"`
+}
+
+// GetDbsDbListInput is an input type that accepts GetDbsDbListArgs and GetDbsDbListOutput values.
+// You can construct a concrete instance of `GetDbsDbListInput` via:
+//
+//          GetDbsDbListArgs{...}
+type GetDbsDbListInput interface {
+	pulumi.Input
+
+	ToGetDbsDbListOutput() GetDbsDbListOutput
+	ToGetDbsDbListOutputWithContext(context.Context) GetDbsDbListOutput
+}
+
+type GetDbsDbListArgs struct {
+	// Character set DB uses, could be `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`.
+	Charset pulumi.StringInput `pulumi:"charset"`
+	// Database creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// SQL Server instance ID which DB belongs to.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Name of DB.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Remark of the DB.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Database status. Valid values are `creating`, `running`, `modifying`, `dropping`.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetDbsDbListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbsDbList)(nil)).Elem()
+}
+
+func (i GetDbsDbListArgs) ToGetDbsDbListOutput() GetDbsDbListOutput {
+	return i.ToGetDbsDbListOutputWithContext(context.Background())
+}
+
+func (i GetDbsDbListArgs) ToGetDbsDbListOutputWithContext(ctx context.Context) GetDbsDbListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbsDbListOutput)
+}
+
+// GetDbsDbListArrayInput is an input type that accepts GetDbsDbListArray and GetDbsDbListArrayOutput values.
+// You can construct a concrete instance of `GetDbsDbListArrayInput` via:
+//
+//          GetDbsDbListArray{ GetDbsDbListArgs{...} }
+type GetDbsDbListArrayInput interface {
+	pulumi.Input
+
+	ToGetDbsDbListArrayOutput() GetDbsDbListArrayOutput
+	ToGetDbsDbListArrayOutputWithContext(context.Context) GetDbsDbListArrayOutput
+}
+
+type GetDbsDbListArray []GetDbsDbListInput
+
+func (GetDbsDbListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbsDbList)(nil)).Elem()
+}
+
+func (i GetDbsDbListArray) ToGetDbsDbListArrayOutput() GetDbsDbListArrayOutput {
+	return i.ToGetDbsDbListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbsDbListArray) ToGetDbsDbListArrayOutputWithContext(ctx context.Context) GetDbsDbListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbsDbListArrayOutput)
+}
+
+type GetDbsDbListOutput struct{ *pulumi.OutputState }
+
+func (GetDbsDbListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbsDbList)(nil)).Elem()
+}
+
+func (o GetDbsDbListOutput) ToGetDbsDbListOutput() GetDbsDbListOutput {
+	return o
+}
+
+func (o GetDbsDbListOutput) ToGetDbsDbListOutputWithContext(ctx context.Context) GetDbsDbListOutput {
+	return o
+}
+
+// Character set DB uses, could be `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`.
+func (o GetDbsDbListOutput) Charset() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbsDbList) string { return v.Charset }).(pulumi.StringOutput)
+}
+
+// Database creation time.
+func (o GetDbsDbListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbsDbList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// SQL Server instance ID which DB belongs to.
+func (o GetDbsDbListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbsDbList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Name of DB.
+func (o GetDbsDbListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbsDbList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Remark of the DB.
+func (o GetDbsDbListOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbsDbList) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Database status. Valid values are `creating`, `running`, `modifying`, `dropping`.
+func (o GetDbsDbListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbsDbList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetDbsDbListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbsDbListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbsDbList)(nil)).Elem()
+}
+
+func (o GetDbsDbListArrayOutput) ToGetDbsDbListArrayOutput() GetDbsDbListArrayOutput {
+	return o
+}
+
+func (o GetDbsDbListArrayOutput) ToGetDbsDbListArrayOutputWithContext(ctx context.Context) GetDbsDbListArrayOutput {
+	return o
+}
+
+func (o GetDbsDbListArrayOutput) Index(i pulumi.IntInput) GetDbsDbListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbsDbList {
+		return vs[0].([]GetDbsDbList)[vs[1].(int)]
+	}).(GetDbsDbListOutput)
+}
+
+type GetInstancesInstanceList struct {
+	// Availability zone.
+	AvailabilityZone string `pulumi:"availabilityZone"`
+	// Pay type of the SQL Server instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	ChargeType string `pulumi:"chargeType"`
+	// Create time of the SQL Server instance.
+	CreateTime string `pulumi:"createTime"`
+	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+	EngineVersion string `pulumi:"engineVersion"`
+	// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster).
+	HaType string `pulumi:"haType"`
+	// ID of the SQL Server instance to be query.
+	Id string `pulumi:"id"`
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
+	Memory int `pulumi:"memory"`
+	// Name of the SQL Server instance to be query.
+	Name string `pulumi:"name"`
+	// Project ID of the SQL Server instance to be query.
+	ProjectId int `pulumi:"projectId"`
+	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
+	RoFlag string `pulumi:"roFlag"`
+	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+	Status int `pulumi:"status"`
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
+	Storage int `pulumi:"storage"`
+	// Subnet ID of the SQL Server instance to be query.
+	SubnetId string `pulumi:"subnetId"`
+	// Tags of the SQL Server instance.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Used storage.
+	UsedStorage int `pulumi:"usedStorage"`
+	// IP for private access.
+	Vip string `pulumi:"vip"`
+	// Vpc ID of the SQL Server instance to be query.
+	VpcId string `pulumi:"vpcId"`
+	// Port for private access.
+	Vport int `pulumi:"vport"`
+}
+
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
+//
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
+}
+
+type GetInstancesInstanceListArgs struct {
+	// Availability zone.
+	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
+	// Pay type of the SQL Server instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Create time of the SQL Server instance.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
+	// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster).
+	HaType pulumi.StringInput `pulumi:"haType"`
+	// ID of the SQL Server instance to be query.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Name of the SQL Server instance to be query.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Project ID of the SQL Server instance to be query.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
+	RoFlag pulumi.StringInput `pulumi:"roFlag"`
+	// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
+	Storage pulumi.IntInput `pulumi:"storage"`
+	// Subnet ID of the SQL Server instance to be query.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tags of the SQL Server instance.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Used storage.
+	UsedStorage pulumi.IntInput `pulumi:"usedStorage"`
+	// IP for private access.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Vpc ID of the SQL Server instance to be query.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Port for private access.
+	Vport pulumi.IntInput `pulumi:"vport"`
+}
+
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
+}
+
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
+//
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
+}
+
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
+
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
+}
+
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return o
+}
+
+// Availability zone.
+func (o GetInstancesInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
+}
+
+// Pay type of the SQL Server instance. For now, only `POSTPAID_BY_HOUR` is valid.
+func (o GetInstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
+// Create time of the SQL Server instance.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+func (o GetInstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
+}
+
+// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster).
+func (o GetInstancesInstanceListOutput) HaType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.HaType }).(pulumi.StringOutput)
+}
+
+// ID of the SQL Server instance to be query.
+func (o GetInstancesInstanceListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
+func (o GetInstancesInstanceListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Name of the SQL Server instance to be query.
+func (o GetInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Project ID of the SQL Server instance to be query.
+func (o GetInstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
+func (o GetInstancesInstanceListOutput) RoFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.RoFlag }).(pulumi.StringOutput)
+}
+
+// Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+func (o GetInstancesInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
+func (o GetInstancesInstanceListOutput) Storage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Storage }).(pulumi.IntOutput)
+}
+
+// Subnet ID of the SQL Server instance to be query.
+func (o GetInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Tags of the SQL Server instance.
+func (o GetInstancesInstanceListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Used storage.
+func (o GetInstancesInstanceListOutput) UsedStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.UsedStorage }).(pulumi.IntOutput)
+}
+
+// IP for private access.
+func (o GetInstancesInstanceListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Vpc ID of the SQL Server instance to be query.
+func (o GetInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Port for private access.
+func (o GetInstancesInstanceListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
+}
+
+type GetPublishSubscribesPublishSubscribeList struct {
+	// Database Publish and Publish relationship list.
+	DatabaseTuples []GetPublishSubscribesPublishSubscribeListDatabaseTuple `pulumi:"databaseTuples"`
+	// ID of the SQL Server instance which publish.
+	PublishInstanceId string `pulumi:"publishInstanceId"`
+	// IP of the the SQL Server instance which publish.
+	PublishInstanceIp string `pulumi:"publishInstanceIp"`
+	// Name of the SQL Server instance which publish.
+	PublishInstanceName string `pulumi:"publishInstanceName"`
+	// The id of the Publish and Subscribe.
+	PublishSubscribeId int `pulumi:"publishSubscribeId"`
+	// The name of the Publish and Subscribe.
+	PublishSubscribeName string `pulumi:"publishSubscribeName"`
+	// ID of the SQL Server instance which subscribe.
+	SubscribeInstanceId string `pulumi:"subscribeInstanceId"`
+	// IP of the SQL Server instance which subscribe.
+	SubscribeInstanceIp string `pulumi:"subscribeInstanceIp"`
+	// Name of the SQL Server instance which subscribe.
+	SubscribeInstanceName string `pulumi:"subscribeInstanceName"`
+}
+
+// GetPublishSubscribesPublishSubscribeListInput is an input type that accepts GetPublishSubscribesPublishSubscribeListArgs and GetPublishSubscribesPublishSubscribeListOutput values.
+// You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListInput` via:
+//
+//          GetPublishSubscribesPublishSubscribeListArgs{...}
+type GetPublishSubscribesPublishSubscribeListInput interface {
+	pulumi.Input
+
+	ToGetPublishSubscribesPublishSubscribeListOutput() GetPublishSubscribesPublishSubscribeListOutput
+	ToGetPublishSubscribesPublishSubscribeListOutputWithContext(context.Context) GetPublishSubscribesPublishSubscribeListOutput
+}
+
+type GetPublishSubscribesPublishSubscribeListArgs struct {
+	// Database Publish and Publish relationship list.
+	DatabaseTuples GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput `pulumi:"databaseTuples"`
+	// ID of the SQL Server instance which publish.
+	PublishInstanceId pulumi.StringInput `pulumi:"publishInstanceId"`
+	// IP of the the SQL Server instance which publish.
+	PublishInstanceIp pulumi.StringInput `pulumi:"publishInstanceIp"`
+	// Name of the SQL Server instance which publish.
+	PublishInstanceName pulumi.StringInput `pulumi:"publishInstanceName"`
+	// The id of the Publish and Subscribe.
+	PublishSubscribeId pulumi.IntInput `pulumi:"publishSubscribeId"`
+	// The name of the Publish and Subscribe.
+	PublishSubscribeName pulumi.StringInput `pulumi:"publishSubscribeName"`
+	// ID of the SQL Server instance which subscribe.
+	SubscribeInstanceId pulumi.StringInput `pulumi:"subscribeInstanceId"`
+	// IP of the SQL Server instance which subscribe.
+	SubscribeInstanceIp pulumi.StringInput `pulumi:"subscribeInstanceIp"`
+	// Name of the SQL Server instance which subscribe.
+	SubscribeInstanceName pulumi.StringInput `pulumi:"subscribeInstanceName"`
+}
+
+func (GetPublishSubscribesPublishSubscribeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishSubscribesPublishSubscribeList)(nil)).Elem()
+}
+
+func (i GetPublishSubscribesPublishSubscribeListArgs) ToGetPublishSubscribesPublishSubscribeListOutput() GetPublishSubscribesPublishSubscribeListOutput {
+	return i.ToGetPublishSubscribesPublishSubscribeListOutputWithContext(context.Background())
+}
+
+func (i GetPublishSubscribesPublishSubscribeListArgs) ToGetPublishSubscribesPublishSubscribeListOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishSubscribesPublishSubscribeListOutput)
+}
+
+// GetPublishSubscribesPublishSubscribeListArrayInput is an input type that accepts GetPublishSubscribesPublishSubscribeListArray and GetPublishSubscribesPublishSubscribeListArrayOutput values.
+// You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListArrayInput` via:
+//
+//          GetPublishSubscribesPublishSubscribeListArray{ GetPublishSubscribesPublishSubscribeListArgs{...} }
+type GetPublishSubscribesPublishSubscribeListArrayInput interface {
+	pulumi.Input
+
+	ToGetPublishSubscribesPublishSubscribeListArrayOutput() GetPublishSubscribesPublishSubscribeListArrayOutput
+	ToGetPublishSubscribesPublishSubscribeListArrayOutputWithContext(context.Context) GetPublishSubscribesPublishSubscribeListArrayOutput
+}
+
+type GetPublishSubscribesPublishSubscribeListArray []GetPublishSubscribesPublishSubscribeListInput
+
+func (GetPublishSubscribesPublishSubscribeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishSubscribesPublishSubscribeList)(nil)).Elem()
+}
+
+func (i GetPublishSubscribesPublishSubscribeListArray) ToGetPublishSubscribesPublishSubscribeListArrayOutput() GetPublishSubscribesPublishSubscribeListArrayOutput {
+	return i.ToGetPublishSubscribesPublishSubscribeListArrayOutputWithContext(context.Background())
+}
+
+func (i GetPublishSubscribesPublishSubscribeListArray) ToGetPublishSubscribesPublishSubscribeListArrayOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishSubscribesPublishSubscribeListArrayOutput)
+}
+
+type GetPublishSubscribesPublishSubscribeListOutput struct{ *pulumi.OutputState }
+
+func (GetPublishSubscribesPublishSubscribeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishSubscribesPublishSubscribeList)(nil)).Elem()
+}
+
+func (o GetPublishSubscribesPublishSubscribeListOutput) ToGetPublishSubscribesPublishSubscribeListOutput() GetPublishSubscribesPublishSubscribeListOutput {
+	return o
+}
+
+func (o GetPublishSubscribesPublishSubscribeListOutput) ToGetPublishSubscribesPublishSubscribeListOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListOutput {
+	return o
+}
+
+// Database Publish and Publish relationship list.
+func (o GetPublishSubscribesPublishSubscribeListOutput) DatabaseTuples() GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) []GetPublishSubscribesPublishSubscribeListDatabaseTuple {
 		return v.DatabaseTuples
-	}).(PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput)
+	}).(GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) PublishInstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) string { return v.PublishInstanceId }).(pulumi.StringOutput)
+// ID of the SQL Server instance which publish.
+func (o GetPublishSubscribesPublishSubscribeListOutput) PublishInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) string { return v.PublishInstanceId }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) PublishInstanceIp() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) string { return v.PublishInstanceIp }).(pulumi.StringOutput)
+// IP of the the SQL Server instance which publish.
+func (o GetPublishSubscribesPublishSubscribeListOutput) PublishInstanceIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) string { return v.PublishInstanceIp }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) PublishInstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) string { return v.PublishInstanceName }).(pulumi.StringOutput)
+// Name of the SQL Server instance which publish.
+func (o GetPublishSubscribesPublishSubscribeListOutput) PublishInstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) string { return v.PublishInstanceName }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) PublishSubscribeId() pulumi.IntOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) int { return v.PublishSubscribeId }).(pulumi.IntOutput)
+// The id of the Publish and Subscribe.
+func (o GetPublishSubscribesPublishSubscribeListOutput) PublishSubscribeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) int { return v.PublishSubscribeId }).(pulumi.IntOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) PublishSubscribeName() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) string { return v.PublishSubscribeName }).(pulumi.StringOutput)
+// The name of the Publish and Subscribe.
+func (o GetPublishSubscribesPublishSubscribeListOutput) PublishSubscribeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) string { return v.PublishSubscribeName }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) SubscribeInstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) string { return v.SubscribeInstanceId }).(pulumi.StringOutput)
+// ID of the SQL Server instance which subscribe.
+func (o GetPublishSubscribesPublishSubscribeListOutput) SubscribeInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) string { return v.SubscribeInstanceId }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) SubscribeInstanceIp() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) string { return v.SubscribeInstanceIp }).(pulumi.StringOutput)
+// IP of the SQL Server instance which subscribe.
+func (o GetPublishSubscribesPublishSubscribeListOutput) SubscribeInstanceIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) string { return v.SubscribeInstanceIp }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListOutput) SubscribeInstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeList) string { return v.SubscribeInstanceName }).(pulumi.StringOutput)
+// Name of the SQL Server instance which subscribe.
+func (o GetPublishSubscribesPublishSubscribeListOutput) SubscribeInstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeList) string { return v.SubscribeInstanceName }).(pulumi.StringOutput)
 }
 
-type PublishSubscribesPublishSubscribeListArrayOutput struct{ *pulumi.OutputState }
+type GetPublishSubscribesPublishSubscribeListArrayOutput struct{ *pulumi.OutputState }
 
-func (PublishSubscribesPublishSubscribeListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PublishSubscribesPublishSubscribeList)(nil)).Elem()
+func (GetPublishSubscribesPublishSubscribeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishSubscribesPublishSubscribeList)(nil)).Elem()
 }
 
-func (o PublishSubscribesPublishSubscribeListArrayOutput) ToPublishSubscribesPublishSubscribeListArrayOutput() PublishSubscribesPublishSubscribeListArrayOutput {
+func (o GetPublishSubscribesPublishSubscribeListArrayOutput) ToGetPublishSubscribesPublishSubscribeListArrayOutput() GetPublishSubscribesPublishSubscribeListArrayOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListArrayOutput) ToPublishSubscribesPublishSubscribeListArrayOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListArrayOutput {
+func (o GetPublishSubscribesPublishSubscribeListArrayOutput) ToGetPublishSubscribesPublishSubscribeListArrayOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListArrayOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListArrayOutput) Index(i pulumi.IntInput) PublishSubscribesPublishSubscribeListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PublishSubscribesPublishSubscribeList {
-		return vs[0].([]PublishSubscribesPublishSubscribeList)[vs[1].(int)]
-	}).(PublishSubscribesPublishSubscribeListOutput)
+func (o GetPublishSubscribesPublishSubscribeListArrayOutput) Index(i pulumi.IntInput) GetPublishSubscribesPublishSubscribeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublishSubscribesPublishSubscribeList {
+		return vs[0].([]GetPublishSubscribesPublishSubscribeList)[vs[1].(int)]
+	}).(GetPublishSubscribesPublishSubscribeListOutput)
 }
 
-type PublishSubscribesPublishSubscribeListDatabaseTuple struct {
-	LastSyncTime      string `pulumi:"lastSyncTime"`
-	PublishDatabase   string `pulumi:"publishDatabase"`
-	Status            string `pulumi:"status"`
+type GetPublishSubscribesPublishSubscribeListDatabaseTuple struct {
+	// Last sync time.
+	LastSyncTime string `pulumi:"lastSyncTime"`
+	// Name of publish database.
+	PublishDatabase string `pulumi:"publishDatabase"`
+	// Publish and subscribe status between databases, valid values are `running`, `success`, `fail`, `unknow`.
+	Status string `pulumi:"status"`
+	// Name of subscribe database.
 	SubscribeDatabase string `pulumi:"subscribeDatabase"`
 }
 
-// PublishSubscribesPublishSubscribeListDatabaseTupleInput is an input type that accepts PublishSubscribesPublishSubscribeListDatabaseTupleArgs and PublishSubscribesPublishSubscribeListDatabaseTupleOutput values.
-// You can construct a concrete instance of `PublishSubscribesPublishSubscribeListDatabaseTupleInput` via:
+// GetPublishSubscribesPublishSubscribeListDatabaseTupleInput is an input type that accepts GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs and GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput values.
+// You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListDatabaseTupleInput` via:
 //
-//          PublishSubscribesPublishSubscribeListDatabaseTupleArgs{...}
-type PublishSubscribesPublishSubscribeListDatabaseTupleInput interface {
+//          GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs{...}
+type GetPublishSubscribesPublishSubscribeListDatabaseTupleInput interface {
 	pulumi.Input
 
-	ToPublishSubscribesPublishSubscribeListDatabaseTupleOutput() PublishSubscribesPublishSubscribeListDatabaseTupleOutput
-	ToPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(context.Context) PublishSubscribesPublishSubscribeListDatabaseTupleOutput
+	ToGetPublishSubscribesPublishSubscribeListDatabaseTupleOutput() GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput
+	ToGetPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(context.Context) GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput
 }
 
-type PublishSubscribesPublishSubscribeListDatabaseTupleArgs struct {
-	LastSyncTime      pulumi.StringInput `pulumi:"lastSyncTime"`
-	PublishDatabase   pulumi.StringInput `pulumi:"publishDatabase"`
-	Status            pulumi.StringInput `pulumi:"status"`
+type GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs struct {
+	// Last sync time.
+	LastSyncTime pulumi.StringInput `pulumi:"lastSyncTime"`
+	// Name of publish database.
+	PublishDatabase pulumi.StringInput `pulumi:"publishDatabase"`
+	// Publish and subscribe status between databases, valid values are `running`, `success`, `fail`, `unknow`.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Name of subscribe database.
 	SubscribeDatabase pulumi.StringInput `pulumi:"subscribeDatabase"`
 }
 
-func (PublishSubscribesPublishSubscribeListDatabaseTupleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
+func (GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
 }
 
-func (i PublishSubscribesPublishSubscribeListDatabaseTupleArgs) ToPublishSubscribesPublishSubscribeListDatabaseTupleOutput() PublishSubscribesPublishSubscribeListDatabaseTupleOutput {
-	return i.ToPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(context.Background())
+func (i GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleOutput() GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput {
+	return i.ToGetPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(context.Background())
 }
 
-func (i PublishSubscribesPublishSubscribeListDatabaseTupleArgs) ToPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListDatabaseTupleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PublishSubscribesPublishSubscribeListDatabaseTupleOutput)
+func (i GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput)
 }
 
-// PublishSubscribesPublishSubscribeListDatabaseTupleArrayInput is an input type that accepts PublishSubscribesPublishSubscribeListDatabaseTupleArray and PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput values.
-// You can construct a concrete instance of `PublishSubscribesPublishSubscribeListDatabaseTupleArrayInput` via:
+// GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput is an input type that accepts GetPublishSubscribesPublishSubscribeListDatabaseTupleArray and GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput values.
+// You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput` via:
 //
-//          PublishSubscribesPublishSubscribeListDatabaseTupleArray{ PublishSubscribesPublishSubscribeListDatabaseTupleArgs{...} }
-type PublishSubscribesPublishSubscribeListDatabaseTupleArrayInput interface {
+//          GetPublishSubscribesPublishSubscribeListDatabaseTupleArray{ GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs{...} }
+type GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput interface {
 	pulumi.Input
 
-	ToPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput() PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput
-	ToPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(context.Context) PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput
+	ToGetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput() GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput
+	ToGetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(context.Context) GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput
 }
 
-type PublishSubscribesPublishSubscribeListDatabaseTupleArray []PublishSubscribesPublishSubscribeListDatabaseTupleInput
+type GetPublishSubscribesPublishSubscribeListDatabaseTupleArray []GetPublishSubscribesPublishSubscribeListDatabaseTupleInput
 
-func (PublishSubscribesPublishSubscribeListDatabaseTupleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
+func (GetPublishSubscribesPublishSubscribeListDatabaseTupleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
 }
 
-func (i PublishSubscribesPublishSubscribeListDatabaseTupleArray) ToPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput() PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
-	return i.ToPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(context.Background())
+func (i GetPublishSubscribesPublishSubscribeListDatabaseTupleArray) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput() GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
+	return i.ToGetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(context.Background())
 }
 
-func (i PublishSubscribesPublishSubscribeListDatabaseTupleArray) ToPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput)
+func (i GetPublishSubscribesPublishSubscribeListDatabaseTupleArray) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput)
 }
 
-type PublishSubscribesPublishSubscribeListDatabaseTupleOutput struct{ *pulumi.OutputState }
+type GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput struct{ *pulumi.OutputState }
 
-func (PublishSubscribesPublishSubscribeListDatabaseTupleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
+func (GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleOutput) ToPublishSubscribesPublishSubscribeListDatabaseTupleOutput() PublishSubscribesPublishSubscribeListDatabaseTupleOutput {
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleOutput() GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleOutput) ToPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListDatabaseTupleOutput {
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleOutput) LastSyncTime() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.LastSyncTime }).(pulumi.StringOutput)
+// Last sync time.
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput) LastSyncTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.LastSyncTime }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleOutput) PublishDatabase() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.PublishDatabase }).(pulumi.StringOutput)
+// Name of publish database.
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput) PublishDatabase() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.PublishDatabase }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.Status }).(pulumi.StringOutput)
+// Publish and subscribe status between databases, valid values are `running`, `success`, `fail`, `unknow`.
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleOutput) SubscribeDatabase() pulumi.StringOutput {
-	return o.ApplyT(func(v PublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.SubscribeDatabase }).(pulumi.StringOutput)
+// Name of subscribe database.
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput) SubscribeDatabase() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishSubscribesPublishSubscribeListDatabaseTuple) string { return v.SubscribeDatabase }).(pulumi.StringOutput)
 }
 
-type PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput struct{ *pulumi.OutputState }
+type GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput struct{ *pulumi.OutputState }
 
-func (PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
+func (GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishSubscribesPublishSubscribeListDatabaseTuple)(nil)).Elem()
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) ToPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput() PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput() GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) ToPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(ctx context.Context) PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) ToGetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutputWithContext(ctx context.Context) GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput {
 	return o
 }
 
-func (o PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) Index(i pulumi.IntInput) PublishSubscribesPublishSubscribeListDatabaseTupleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PublishSubscribesPublishSubscribeListDatabaseTuple {
-		return vs[0].([]PublishSubscribesPublishSubscribeListDatabaseTuple)[vs[1].(int)]
-	}).(PublishSubscribesPublishSubscribeListDatabaseTupleOutput)
+func (o GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput) Index(i pulumi.IntInput) GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublishSubscribesPublishSubscribeListDatabaseTuple {
+		return vs[0].([]GetPublishSubscribesPublishSubscribeListDatabaseTuple)[vs[1].(int)]
+	}).(GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput)
 }
 
-type ReadonlyGroupsList struct {
-	Id                   string   `pulumi:"id"`
-	IsOfflineDelay       int      `pulumi:"isOfflineDelay"`
-	MasterInstanceId     string   `pulumi:"masterInstanceId"`
-	MaxDelayTime         int      `pulumi:"maxDelayTime"`
-	MinInstances         int      `pulumi:"minInstances"`
-	Name                 string   `pulumi:"name"`
+type GetReadonlyGroupsList struct {
+	// ID of the readonly group.
+	Id string `pulumi:"id"`
+	// Indicate whether to offline delayed readonly instances.
+	IsOfflineDelay int `pulumi:"isOfflineDelay"`
+	// Master SQL Server instance ID.
+	MasterInstanceId string `pulumi:"masterInstanceId"`
+	// Maximum delay time of the readonly instances.
+	MaxDelayTime int `pulumi:"maxDelayTime"`
+	// Minimum readonly instances that stays in the group.
+	MinInstances int `pulumi:"minInstances"`
+	// Name of the readonly group.
+	Name string `pulumi:"name"`
+	// Readonly instance ID set of the readonly group.
 	ReadonlyInstanceSets []string `pulumi:"readonlyInstanceSets"`
-	Status               int      `pulumi:"status"`
-	Vip                  string   `pulumi:"vip"`
-	Vport                int      `pulumi:"vport"`
+	// Status of the readonly group. `1` for running, `5` for applying.
+	Status int `pulumi:"status"`
+	// Virtual IP address of the readonly group.
+	Vip string `pulumi:"vip"`
+	// Virtual port of the readonly group.
+	Vport int `pulumi:"vport"`
 }
 
-// ReadonlyGroupsListInput is an input type that accepts ReadonlyGroupsListArgs and ReadonlyGroupsListOutput values.
-// You can construct a concrete instance of `ReadonlyGroupsListInput` via:
+// GetReadonlyGroupsListInput is an input type that accepts GetReadonlyGroupsListArgs and GetReadonlyGroupsListOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsListInput` via:
 //
-//          ReadonlyGroupsListArgs{...}
-type ReadonlyGroupsListInput interface {
+//          GetReadonlyGroupsListArgs{...}
+type GetReadonlyGroupsListInput interface {
 	pulumi.Input
 
-	ToReadonlyGroupsListOutput() ReadonlyGroupsListOutput
-	ToReadonlyGroupsListOutputWithContext(context.Context) ReadonlyGroupsListOutput
+	ToGetReadonlyGroupsListOutput() GetReadonlyGroupsListOutput
+	ToGetReadonlyGroupsListOutputWithContext(context.Context) GetReadonlyGroupsListOutput
 }
 
-type ReadonlyGroupsListArgs struct {
-	Id                   pulumi.StringInput      `pulumi:"id"`
-	IsOfflineDelay       pulumi.IntInput         `pulumi:"isOfflineDelay"`
-	MasterInstanceId     pulumi.StringInput      `pulumi:"masterInstanceId"`
-	MaxDelayTime         pulumi.IntInput         `pulumi:"maxDelayTime"`
-	MinInstances         pulumi.IntInput         `pulumi:"minInstances"`
-	Name                 pulumi.StringInput      `pulumi:"name"`
+type GetReadonlyGroupsListArgs struct {
+	// ID of the readonly group.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Indicate whether to offline delayed readonly instances.
+	IsOfflineDelay pulumi.IntInput `pulumi:"isOfflineDelay"`
+	// Master SQL Server instance ID.
+	MasterInstanceId pulumi.StringInput `pulumi:"masterInstanceId"`
+	// Maximum delay time of the readonly instances.
+	MaxDelayTime pulumi.IntInput `pulumi:"maxDelayTime"`
+	// Minimum readonly instances that stays in the group.
+	MinInstances pulumi.IntInput `pulumi:"minInstances"`
+	// Name of the readonly group.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Readonly instance ID set of the readonly group.
 	ReadonlyInstanceSets pulumi.StringArrayInput `pulumi:"readonlyInstanceSets"`
-	Status               pulumi.IntInput         `pulumi:"status"`
-	Vip                  pulumi.StringInput      `pulumi:"vip"`
-	Vport                pulumi.IntInput         `pulumi:"vport"`
+	// Status of the readonly group. `1` for running, `5` for applying.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Virtual IP address of the readonly group.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Virtual port of the readonly group.
+	Vport pulumi.IntInput `pulumi:"vport"`
 }
 
-func (ReadonlyGroupsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ReadonlyGroupsList)(nil)).Elem()
+func (GetReadonlyGroupsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsList)(nil)).Elem()
 }
 
-func (i ReadonlyGroupsListArgs) ToReadonlyGroupsListOutput() ReadonlyGroupsListOutput {
-	return i.ToReadonlyGroupsListOutputWithContext(context.Background())
+func (i GetReadonlyGroupsListArgs) ToGetReadonlyGroupsListOutput() GetReadonlyGroupsListOutput {
+	return i.ToGetReadonlyGroupsListOutputWithContext(context.Background())
 }
 
-func (i ReadonlyGroupsListArgs) ToReadonlyGroupsListOutputWithContext(ctx context.Context) ReadonlyGroupsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ReadonlyGroupsListOutput)
+func (i GetReadonlyGroupsListArgs) ToGetReadonlyGroupsListOutputWithContext(ctx context.Context) GetReadonlyGroupsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsListOutput)
 }
 
-// ReadonlyGroupsListArrayInput is an input type that accepts ReadonlyGroupsListArray and ReadonlyGroupsListArrayOutput values.
-// You can construct a concrete instance of `ReadonlyGroupsListArrayInput` via:
+// GetReadonlyGroupsListArrayInput is an input type that accepts GetReadonlyGroupsListArray and GetReadonlyGroupsListArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsListArrayInput` via:
 //
-//          ReadonlyGroupsListArray{ ReadonlyGroupsListArgs{...} }
-type ReadonlyGroupsListArrayInput interface {
+//          GetReadonlyGroupsListArray{ GetReadonlyGroupsListArgs{...} }
+type GetReadonlyGroupsListArrayInput interface {
 	pulumi.Input
 
-	ToReadonlyGroupsListArrayOutput() ReadonlyGroupsListArrayOutput
-	ToReadonlyGroupsListArrayOutputWithContext(context.Context) ReadonlyGroupsListArrayOutput
+	ToGetReadonlyGroupsListArrayOutput() GetReadonlyGroupsListArrayOutput
+	ToGetReadonlyGroupsListArrayOutputWithContext(context.Context) GetReadonlyGroupsListArrayOutput
 }
 
-type ReadonlyGroupsListArray []ReadonlyGroupsListInput
+type GetReadonlyGroupsListArray []GetReadonlyGroupsListInput
 
-func (ReadonlyGroupsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ReadonlyGroupsList)(nil)).Elem()
+func (GetReadonlyGroupsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsList)(nil)).Elem()
 }
 
-func (i ReadonlyGroupsListArray) ToReadonlyGroupsListArrayOutput() ReadonlyGroupsListArrayOutput {
-	return i.ToReadonlyGroupsListArrayOutputWithContext(context.Background())
+func (i GetReadonlyGroupsListArray) ToGetReadonlyGroupsListArrayOutput() GetReadonlyGroupsListArrayOutput {
+	return i.ToGetReadonlyGroupsListArrayOutputWithContext(context.Background())
 }
 
-func (i ReadonlyGroupsListArray) ToReadonlyGroupsListArrayOutputWithContext(ctx context.Context) ReadonlyGroupsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ReadonlyGroupsListArrayOutput)
+func (i GetReadonlyGroupsListArray) ToGetReadonlyGroupsListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsListArrayOutput)
 }
 
-type ReadonlyGroupsListOutput struct{ *pulumi.OutputState }
+type GetReadonlyGroupsListOutput struct{ *pulumi.OutputState }
 
-func (ReadonlyGroupsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ReadonlyGroupsList)(nil)).Elem()
+func (GetReadonlyGroupsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsList)(nil)).Elem()
 }
 
-func (o ReadonlyGroupsListOutput) ToReadonlyGroupsListOutput() ReadonlyGroupsListOutput {
+func (o GetReadonlyGroupsListOutput) ToGetReadonlyGroupsListOutput() GetReadonlyGroupsListOutput {
 	return o
 }
 
-func (o ReadonlyGroupsListOutput) ToReadonlyGroupsListOutputWithContext(ctx context.Context) ReadonlyGroupsListOutput {
+func (o GetReadonlyGroupsListOutput) ToGetReadonlyGroupsListOutputWithContext(ctx context.Context) GetReadonlyGroupsListOutput {
 	return o
 }
 
-func (o ReadonlyGroupsListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the readonly group.
+func (o GetReadonlyGroupsListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o ReadonlyGroupsListOutput) IsOfflineDelay() pulumi.IntOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) int { return v.IsOfflineDelay }).(pulumi.IntOutput)
+// Indicate whether to offline delayed readonly instances.
+func (o GetReadonlyGroupsListOutput) IsOfflineDelay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) int { return v.IsOfflineDelay }).(pulumi.IntOutput)
 }
 
-func (o ReadonlyGroupsListOutput) MasterInstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) string { return v.MasterInstanceId }).(pulumi.StringOutput)
+// Master SQL Server instance ID.
+func (o GetReadonlyGroupsListOutput) MasterInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) string { return v.MasterInstanceId }).(pulumi.StringOutput)
 }
 
-func (o ReadonlyGroupsListOutput) MaxDelayTime() pulumi.IntOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) int { return v.MaxDelayTime }).(pulumi.IntOutput)
+// Maximum delay time of the readonly instances.
+func (o GetReadonlyGroupsListOutput) MaxDelayTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) int { return v.MaxDelayTime }).(pulumi.IntOutput)
 }
 
-func (o ReadonlyGroupsListOutput) MinInstances() pulumi.IntOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) int { return v.MinInstances }).(pulumi.IntOutput)
+// Minimum readonly instances that stays in the group.
+func (o GetReadonlyGroupsListOutput) MinInstances() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) int { return v.MinInstances }).(pulumi.IntOutput)
 }
 
-func (o ReadonlyGroupsListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the readonly group.
+func (o GetReadonlyGroupsListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ReadonlyGroupsListOutput) ReadonlyInstanceSets() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) []string { return v.ReadonlyInstanceSets }).(pulumi.StringArrayOutput)
+// Readonly instance ID set of the readonly group.
+func (o GetReadonlyGroupsListOutput) ReadonlyInstanceSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) []string { return v.ReadonlyInstanceSets }).(pulumi.StringArrayOutput)
 }
 
-func (o ReadonlyGroupsListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) int { return v.Status }).(pulumi.IntOutput)
+// Status of the readonly group. `1` for running, `5` for applying.
+func (o GetReadonlyGroupsListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) int { return v.Status }).(pulumi.IntOutput)
 }
 
-func (o ReadonlyGroupsListOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) string { return v.Vip }).(pulumi.StringOutput)
+// Virtual IP address of the readonly group.
+func (o GetReadonlyGroupsListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) string { return v.Vip }).(pulumi.StringOutput)
 }
 
-func (o ReadonlyGroupsListOutput) Vport() pulumi.IntOutput {
-	return o.ApplyT(func(v ReadonlyGroupsList) int { return v.Vport }).(pulumi.IntOutput)
+// Virtual port of the readonly group.
+func (o GetReadonlyGroupsListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsList) int { return v.Vport }).(pulumi.IntOutput)
 }
 
-type ReadonlyGroupsListArrayOutput struct{ *pulumi.OutputState }
+type GetReadonlyGroupsListArrayOutput struct{ *pulumi.OutputState }
 
-func (ReadonlyGroupsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ReadonlyGroupsList)(nil)).Elem()
+func (GetReadonlyGroupsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsList)(nil)).Elem()
 }
 
-func (o ReadonlyGroupsListArrayOutput) ToReadonlyGroupsListArrayOutput() ReadonlyGroupsListArrayOutput {
+func (o GetReadonlyGroupsListArrayOutput) ToGetReadonlyGroupsListArrayOutput() GetReadonlyGroupsListArrayOutput {
 	return o
 }
 
-func (o ReadonlyGroupsListArrayOutput) ToReadonlyGroupsListArrayOutputWithContext(ctx context.Context) ReadonlyGroupsListArrayOutput {
+func (o GetReadonlyGroupsListArrayOutput) ToGetReadonlyGroupsListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsListArrayOutput {
 	return o
 }
 
-func (o ReadonlyGroupsListArrayOutput) Index(i pulumi.IntInput) ReadonlyGroupsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ReadonlyGroupsList {
-		return vs[0].([]ReadonlyGroupsList)[vs[1].(int)]
-	}).(ReadonlyGroupsListOutput)
+func (o GetReadonlyGroupsListArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsList {
+		return vs[0].([]GetReadonlyGroupsList)[vs[1].(int)]
+	}).(GetReadonlyGroupsListOutput)
 }
 
-type ZoneConfigZoneList struct {
-	AvailabilityZone string                           `pulumi:"availabilityZone"`
-	SpecinfoLists    []ZoneConfigZoneListSpecinfoList `pulumi:"specinfoLists"`
-	ZoneId           int                              `pulumi:"zoneId"`
+type GetZoneConfigZoneList struct {
+	// Alphabet ID of availability zone.
+	AvailabilityZone string `pulumi:"availabilityZone"`
+	// A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:
+	SpecinfoLists []GetZoneConfigZoneListSpecinfoList `pulumi:"specinfoLists"`
+	// Number ID of availability zone.
+	ZoneId int `pulumi:"zoneId"`
 }
 
-// ZoneConfigZoneListInput is an input type that accepts ZoneConfigZoneListArgs and ZoneConfigZoneListOutput values.
-// You can construct a concrete instance of `ZoneConfigZoneListInput` via:
+// GetZoneConfigZoneListInput is an input type that accepts GetZoneConfigZoneListArgs and GetZoneConfigZoneListOutput values.
+// You can construct a concrete instance of `GetZoneConfigZoneListInput` via:
 //
-//          ZoneConfigZoneListArgs{...}
-type ZoneConfigZoneListInput interface {
+//          GetZoneConfigZoneListArgs{...}
+type GetZoneConfigZoneListInput interface {
 	pulumi.Input
 
-	ToZoneConfigZoneListOutput() ZoneConfigZoneListOutput
-	ToZoneConfigZoneListOutputWithContext(context.Context) ZoneConfigZoneListOutput
+	ToGetZoneConfigZoneListOutput() GetZoneConfigZoneListOutput
+	ToGetZoneConfigZoneListOutputWithContext(context.Context) GetZoneConfigZoneListOutput
 }
 
-type ZoneConfigZoneListArgs struct {
-	AvailabilityZone pulumi.StringInput                       `pulumi:"availabilityZone"`
-	SpecinfoLists    ZoneConfigZoneListSpecinfoListArrayInput `pulumi:"specinfoLists"`
-	ZoneId           pulumi.IntInput                          `pulumi:"zoneId"`
+type GetZoneConfigZoneListArgs struct {
+	// Alphabet ID of availability zone.
+	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
+	// A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:
+	SpecinfoLists GetZoneConfigZoneListSpecinfoListArrayInput `pulumi:"specinfoLists"`
+	// Number ID of availability zone.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
 }
 
-func (ZoneConfigZoneListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigZoneList)(nil)).Elem()
+func (GetZoneConfigZoneListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigZoneList)(nil)).Elem()
 }
 
-func (i ZoneConfigZoneListArgs) ToZoneConfigZoneListOutput() ZoneConfigZoneListOutput {
-	return i.ToZoneConfigZoneListOutputWithContext(context.Background())
+func (i GetZoneConfigZoneListArgs) ToGetZoneConfigZoneListOutput() GetZoneConfigZoneListOutput {
+	return i.ToGetZoneConfigZoneListOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigZoneListArgs) ToZoneConfigZoneListOutputWithContext(ctx context.Context) ZoneConfigZoneListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigZoneListOutput)
+func (i GetZoneConfigZoneListArgs) ToGetZoneConfigZoneListOutputWithContext(ctx context.Context) GetZoneConfigZoneListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigZoneListOutput)
 }
 
-// ZoneConfigZoneListArrayInput is an input type that accepts ZoneConfigZoneListArray and ZoneConfigZoneListArrayOutput values.
-// You can construct a concrete instance of `ZoneConfigZoneListArrayInput` via:
+// GetZoneConfigZoneListArrayInput is an input type that accepts GetZoneConfigZoneListArray and GetZoneConfigZoneListArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigZoneListArrayInput` via:
 //
-//          ZoneConfigZoneListArray{ ZoneConfigZoneListArgs{...} }
-type ZoneConfigZoneListArrayInput interface {
+//          GetZoneConfigZoneListArray{ GetZoneConfigZoneListArgs{...} }
+type GetZoneConfigZoneListArrayInput interface {
 	pulumi.Input
 
-	ToZoneConfigZoneListArrayOutput() ZoneConfigZoneListArrayOutput
-	ToZoneConfigZoneListArrayOutputWithContext(context.Context) ZoneConfigZoneListArrayOutput
+	ToGetZoneConfigZoneListArrayOutput() GetZoneConfigZoneListArrayOutput
+	ToGetZoneConfigZoneListArrayOutputWithContext(context.Context) GetZoneConfigZoneListArrayOutput
 }
 
-type ZoneConfigZoneListArray []ZoneConfigZoneListInput
+type GetZoneConfigZoneListArray []GetZoneConfigZoneListInput
 
-func (ZoneConfigZoneListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigZoneList)(nil)).Elem()
+func (GetZoneConfigZoneListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigZoneList)(nil)).Elem()
 }
 
-func (i ZoneConfigZoneListArray) ToZoneConfigZoneListArrayOutput() ZoneConfigZoneListArrayOutput {
-	return i.ToZoneConfigZoneListArrayOutputWithContext(context.Background())
+func (i GetZoneConfigZoneListArray) ToGetZoneConfigZoneListArrayOutput() GetZoneConfigZoneListArrayOutput {
+	return i.ToGetZoneConfigZoneListArrayOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigZoneListArray) ToZoneConfigZoneListArrayOutputWithContext(ctx context.Context) ZoneConfigZoneListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigZoneListArrayOutput)
+func (i GetZoneConfigZoneListArray) ToGetZoneConfigZoneListArrayOutputWithContext(ctx context.Context) GetZoneConfigZoneListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigZoneListArrayOutput)
 }
 
-type ZoneConfigZoneListOutput struct{ *pulumi.OutputState }
+type GetZoneConfigZoneListOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigZoneListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigZoneList)(nil)).Elem()
+func (GetZoneConfigZoneListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigZoneList)(nil)).Elem()
 }
 
-func (o ZoneConfigZoneListOutput) ToZoneConfigZoneListOutput() ZoneConfigZoneListOutput {
+func (o GetZoneConfigZoneListOutput) ToGetZoneConfigZoneListOutput() GetZoneConfigZoneListOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListOutput) ToZoneConfigZoneListOutputWithContext(ctx context.Context) ZoneConfigZoneListOutput {
+func (o GetZoneConfigZoneListOutput) ToGetZoneConfigZoneListOutputWithContext(ctx context.Context) GetZoneConfigZoneListOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListOutput) AvailabilityZone() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigZoneList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
+// Alphabet ID of availability zone.
+func (o GetZoneConfigZoneListOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigZoneListOutput) SpecinfoLists() ZoneConfigZoneListSpecinfoListArrayOutput {
-	return o.ApplyT(func(v ZoneConfigZoneList) []ZoneConfigZoneListSpecinfoList { return v.SpecinfoLists }).(ZoneConfigZoneListSpecinfoListArrayOutput)
+// A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:
+func (o GetZoneConfigZoneListOutput) SpecinfoLists() GetZoneConfigZoneListSpecinfoListArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneList) []GetZoneConfigZoneListSpecinfoList { return v.SpecinfoLists }).(GetZoneConfigZoneListSpecinfoListArrayOutput)
 }
 
-func (o ZoneConfigZoneListOutput) ZoneId() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigZoneList) int { return v.ZoneId }).(pulumi.IntOutput)
+// Number ID of availability zone.
+func (o GetZoneConfigZoneListOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneList) int { return v.ZoneId }).(pulumi.IntOutput)
 }
 
-type ZoneConfigZoneListArrayOutput struct{ *pulumi.OutputState }
+type GetZoneConfigZoneListArrayOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigZoneListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigZoneList)(nil)).Elem()
+func (GetZoneConfigZoneListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigZoneList)(nil)).Elem()
 }
 
-func (o ZoneConfigZoneListArrayOutput) ToZoneConfigZoneListArrayOutput() ZoneConfigZoneListArrayOutput {
+func (o GetZoneConfigZoneListArrayOutput) ToGetZoneConfigZoneListArrayOutput() GetZoneConfigZoneListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListArrayOutput) ToZoneConfigZoneListArrayOutputWithContext(ctx context.Context) ZoneConfigZoneListArrayOutput {
+func (o GetZoneConfigZoneListArrayOutput) ToGetZoneConfigZoneListArrayOutputWithContext(ctx context.Context) GetZoneConfigZoneListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListArrayOutput) Index(i pulumi.IntInput) ZoneConfigZoneListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneConfigZoneList {
-		return vs[0].([]ZoneConfigZoneList)[vs[1].(int)]
-	}).(ZoneConfigZoneListOutput)
+func (o GetZoneConfigZoneListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigZoneListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigZoneList {
+		return vs[0].([]GetZoneConfigZoneList)[vs[1].(int)]
+	}).(GetZoneConfigZoneListOutput)
 }
 
-type ZoneConfigZoneListSpecinfoList struct {
-	ChargeType     string `pulumi:"chargeType"`
-	Cpu            int    `pulumi:"cpu"`
-	DbVersion      string `pulumi:"dbVersion"`
-	DbVersionName  string `pulumi:"dbVersionName"`
-	MachineType    string `pulumi:"machineType"`
-	MaxStorageSize int    `pulumi:"maxStorageSize"`
-	Memory         int    `pulumi:"memory"`
-	MinStorageSize int    `pulumi:"minStorageSize"`
-	Qps            int    `pulumi:"qps"`
-	SpecId         int    `pulumi:"specId"`
+type GetZoneConfigZoneListSpecinfoList struct {
+	// Billing mode under this specification. Valid values are `POSTPAID_BY_HOUR`, `PREPAID` and `ALL`. `ALL` means both POSTPAID_BY_HOUR and PREPAID.
+	ChargeType string `pulumi:"chargeType"`
+	// Number of CPU cores.
+	Cpu int `pulumi:"cpu"`
+	// Database version information. Valid values: `2008R2 (SQL Server 2008 Enterprise)`, `2012SP3 (SQL Server 2012 Enterprise)`, `2016SP1 (SQL Server 2016 Enterprise)`, `201602 (SQL Server 2016 Standard)`, `2017 (SQL Server 2017 Enterprise)`.
+	DbVersion string `pulumi:"dbVersion"`
+	// Version name corresponding to the `dbVersion` field.
+	DbVersionName string `pulumi:"dbVersionName"`
+	// Model ID.
+	MachineType string `pulumi:"machineType"`
+	// Maximum disk size under this specification in GB.
+	MaxStorageSize int `pulumi:"maxStorageSize"`
+	// Memory size in GB.
+	Memory int `pulumi:"memory"`
+	// Minimum disk size under this specification in GB.
+	MinStorageSize int `pulumi:"minStorageSize"`
+	// QPS of this specification.
+	Qps int `pulumi:"qps"`
+	// Instance specification ID.
+	SpecId int `pulumi:"specId"`
 }
 
-// ZoneConfigZoneListSpecinfoListInput is an input type that accepts ZoneConfigZoneListSpecinfoListArgs and ZoneConfigZoneListSpecinfoListOutput values.
-// You can construct a concrete instance of `ZoneConfigZoneListSpecinfoListInput` via:
+// GetZoneConfigZoneListSpecinfoListInput is an input type that accepts GetZoneConfigZoneListSpecinfoListArgs and GetZoneConfigZoneListSpecinfoListOutput values.
+// You can construct a concrete instance of `GetZoneConfigZoneListSpecinfoListInput` via:
 //
-//          ZoneConfigZoneListSpecinfoListArgs{...}
-type ZoneConfigZoneListSpecinfoListInput interface {
+//          GetZoneConfigZoneListSpecinfoListArgs{...}
+type GetZoneConfigZoneListSpecinfoListInput interface {
 	pulumi.Input
 
-	ToZoneConfigZoneListSpecinfoListOutput() ZoneConfigZoneListSpecinfoListOutput
-	ToZoneConfigZoneListSpecinfoListOutputWithContext(context.Context) ZoneConfigZoneListSpecinfoListOutput
+	ToGetZoneConfigZoneListSpecinfoListOutput() GetZoneConfigZoneListSpecinfoListOutput
+	ToGetZoneConfigZoneListSpecinfoListOutputWithContext(context.Context) GetZoneConfigZoneListSpecinfoListOutput
 }
 
-type ZoneConfigZoneListSpecinfoListArgs struct {
-	ChargeType     pulumi.StringInput `pulumi:"chargeType"`
-	Cpu            pulumi.IntInput    `pulumi:"cpu"`
-	DbVersion      pulumi.StringInput `pulumi:"dbVersion"`
-	DbVersionName  pulumi.StringInput `pulumi:"dbVersionName"`
-	MachineType    pulumi.StringInput `pulumi:"machineType"`
-	MaxStorageSize pulumi.IntInput    `pulumi:"maxStorageSize"`
-	Memory         pulumi.IntInput    `pulumi:"memory"`
-	MinStorageSize pulumi.IntInput    `pulumi:"minStorageSize"`
-	Qps            pulumi.IntInput    `pulumi:"qps"`
-	SpecId         pulumi.IntInput    `pulumi:"specId"`
+type GetZoneConfigZoneListSpecinfoListArgs struct {
+	// Billing mode under this specification. Valid values are `POSTPAID_BY_HOUR`, `PREPAID` and `ALL`. `ALL` means both POSTPAID_BY_HOUR and PREPAID.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Number of CPU cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Database version information. Valid values: `2008R2 (SQL Server 2008 Enterprise)`, `2012SP3 (SQL Server 2012 Enterprise)`, `2016SP1 (SQL Server 2016 Enterprise)`, `201602 (SQL Server 2016 Standard)`, `2017 (SQL Server 2017 Enterprise)`.
+	DbVersion pulumi.StringInput `pulumi:"dbVersion"`
+	// Version name corresponding to the `dbVersion` field.
+	DbVersionName pulumi.StringInput `pulumi:"dbVersionName"`
+	// Model ID.
+	MachineType pulumi.StringInput `pulumi:"machineType"`
+	// Maximum disk size under this specification in GB.
+	MaxStorageSize pulumi.IntInput `pulumi:"maxStorageSize"`
+	// Memory size in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Minimum disk size under this specification in GB.
+	MinStorageSize pulumi.IntInput `pulumi:"minStorageSize"`
+	// QPS of this specification.
+	Qps pulumi.IntInput `pulumi:"qps"`
+	// Instance specification ID.
+	SpecId pulumi.IntInput `pulumi:"specId"`
 }
 
-func (ZoneConfigZoneListSpecinfoListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigZoneListSpecinfoList)(nil)).Elem()
+func (GetZoneConfigZoneListSpecinfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigZoneListSpecinfoList)(nil)).Elem()
 }
 
-func (i ZoneConfigZoneListSpecinfoListArgs) ToZoneConfigZoneListSpecinfoListOutput() ZoneConfigZoneListSpecinfoListOutput {
-	return i.ToZoneConfigZoneListSpecinfoListOutputWithContext(context.Background())
+func (i GetZoneConfigZoneListSpecinfoListArgs) ToGetZoneConfigZoneListSpecinfoListOutput() GetZoneConfigZoneListSpecinfoListOutput {
+	return i.ToGetZoneConfigZoneListSpecinfoListOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigZoneListSpecinfoListArgs) ToZoneConfigZoneListSpecinfoListOutputWithContext(ctx context.Context) ZoneConfigZoneListSpecinfoListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigZoneListSpecinfoListOutput)
+func (i GetZoneConfigZoneListSpecinfoListArgs) ToGetZoneConfigZoneListSpecinfoListOutputWithContext(ctx context.Context) GetZoneConfigZoneListSpecinfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigZoneListSpecinfoListOutput)
 }
 
-// ZoneConfigZoneListSpecinfoListArrayInput is an input type that accepts ZoneConfigZoneListSpecinfoListArray and ZoneConfigZoneListSpecinfoListArrayOutput values.
-// You can construct a concrete instance of `ZoneConfigZoneListSpecinfoListArrayInput` via:
+// GetZoneConfigZoneListSpecinfoListArrayInput is an input type that accepts GetZoneConfigZoneListSpecinfoListArray and GetZoneConfigZoneListSpecinfoListArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigZoneListSpecinfoListArrayInput` via:
 //
-//          ZoneConfigZoneListSpecinfoListArray{ ZoneConfigZoneListSpecinfoListArgs{...} }
-type ZoneConfigZoneListSpecinfoListArrayInput interface {
+//          GetZoneConfigZoneListSpecinfoListArray{ GetZoneConfigZoneListSpecinfoListArgs{...} }
+type GetZoneConfigZoneListSpecinfoListArrayInput interface {
 	pulumi.Input
 
-	ToZoneConfigZoneListSpecinfoListArrayOutput() ZoneConfigZoneListSpecinfoListArrayOutput
-	ToZoneConfigZoneListSpecinfoListArrayOutputWithContext(context.Context) ZoneConfigZoneListSpecinfoListArrayOutput
+	ToGetZoneConfigZoneListSpecinfoListArrayOutput() GetZoneConfigZoneListSpecinfoListArrayOutput
+	ToGetZoneConfigZoneListSpecinfoListArrayOutputWithContext(context.Context) GetZoneConfigZoneListSpecinfoListArrayOutput
 }
 
-type ZoneConfigZoneListSpecinfoListArray []ZoneConfigZoneListSpecinfoListInput
+type GetZoneConfigZoneListSpecinfoListArray []GetZoneConfigZoneListSpecinfoListInput
 
-func (ZoneConfigZoneListSpecinfoListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigZoneListSpecinfoList)(nil)).Elem()
+func (GetZoneConfigZoneListSpecinfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigZoneListSpecinfoList)(nil)).Elem()
 }
 
-func (i ZoneConfigZoneListSpecinfoListArray) ToZoneConfigZoneListSpecinfoListArrayOutput() ZoneConfigZoneListSpecinfoListArrayOutput {
-	return i.ToZoneConfigZoneListSpecinfoListArrayOutputWithContext(context.Background())
+func (i GetZoneConfigZoneListSpecinfoListArray) ToGetZoneConfigZoneListSpecinfoListArrayOutput() GetZoneConfigZoneListSpecinfoListArrayOutput {
+	return i.ToGetZoneConfigZoneListSpecinfoListArrayOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigZoneListSpecinfoListArray) ToZoneConfigZoneListSpecinfoListArrayOutputWithContext(ctx context.Context) ZoneConfigZoneListSpecinfoListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigZoneListSpecinfoListArrayOutput)
+func (i GetZoneConfigZoneListSpecinfoListArray) ToGetZoneConfigZoneListSpecinfoListArrayOutputWithContext(ctx context.Context) GetZoneConfigZoneListSpecinfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigZoneListSpecinfoListArrayOutput)
 }
 
-type ZoneConfigZoneListSpecinfoListOutput struct{ *pulumi.OutputState }
+type GetZoneConfigZoneListSpecinfoListOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigZoneListSpecinfoListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigZoneListSpecinfoList)(nil)).Elem()
+func (GetZoneConfigZoneListSpecinfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigZoneListSpecinfoList)(nil)).Elem()
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) ToZoneConfigZoneListSpecinfoListOutput() ZoneConfigZoneListSpecinfoListOutput {
+func (o GetZoneConfigZoneListSpecinfoListOutput) ToGetZoneConfigZoneListSpecinfoListOutput() GetZoneConfigZoneListSpecinfoListOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) ToZoneConfigZoneListSpecinfoListOutputWithContext(ctx context.Context) ZoneConfigZoneListSpecinfoListOutput {
+func (o GetZoneConfigZoneListSpecinfoListOutput) ToGetZoneConfigZoneListSpecinfoListOutputWithContext(ctx context.Context) GetZoneConfigZoneListSpecinfoListOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) string { return v.ChargeType }).(pulumi.StringOutput)
+// Billing mode under this specification. Valid values are `POSTPAID_BY_HOUR`, `PREPAID` and `ALL`. `ALL` means both POSTPAID_BY_HOUR and PREPAID.
+func (o GetZoneConfigZoneListSpecinfoListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) Cpu() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) int { return v.Cpu }).(pulumi.IntOutput)
+// Number of CPU cores.
+func (o GetZoneConfigZoneListSpecinfoListOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) int { return v.Cpu }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) DbVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) string { return v.DbVersion }).(pulumi.StringOutput)
+// Database version information. Valid values: `2008R2 (SQL Server 2008 Enterprise)`, `2012SP3 (SQL Server 2012 Enterprise)`, `2016SP1 (SQL Server 2016 Enterprise)`, `201602 (SQL Server 2016 Standard)`, `2017 (SQL Server 2017 Enterprise)`.
+func (o GetZoneConfigZoneListSpecinfoListOutput) DbVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) string { return v.DbVersion }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) DbVersionName() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) string { return v.DbVersionName }).(pulumi.StringOutput)
+// Version name corresponding to the `dbVersion` field.
+func (o GetZoneConfigZoneListSpecinfoListOutput) DbVersionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) string { return v.DbVersionName }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) MachineType() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) string { return v.MachineType }).(pulumi.StringOutput)
+// Model ID.
+func (o GetZoneConfigZoneListSpecinfoListOutput) MachineType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) string { return v.MachineType }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) MaxStorageSize() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) int { return v.MaxStorageSize }).(pulumi.IntOutput)
+// Maximum disk size under this specification in GB.
+func (o GetZoneConfigZoneListSpecinfoListOutput) MaxStorageSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) int { return v.MaxStorageSize }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) Memory() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) int { return v.Memory }).(pulumi.IntOutput)
+// Memory size in GB.
+func (o GetZoneConfigZoneListSpecinfoListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) int { return v.Memory }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) MinStorageSize() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) int { return v.MinStorageSize }).(pulumi.IntOutput)
+// Minimum disk size under this specification in GB.
+func (o GetZoneConfigZoneListSpecinfoListOutput) MinStorageSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) int { return v.MinStorageSize }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) Qps() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) int { return v.Qps }).(pulumi.IntOutput)
+// QPS of this specification.
+func (o GetZoneConfigZoneListSpecinfoListOutput) Qps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) int { return v.Qps }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigZoneListSpecinfoListOutput) SpecId() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigZoneListSpecinfoList) int { return v.SpecId }).(pulumi.IntOutput)
+// Instance specification ID.
+func (o GetZoneConfigZoneListSpecinfoListOutput) SpecId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigZoneListSpecinfoList) int { return v.SpecId }).(pulumi.IntOutput)
 }
 
-type ZoneConfigZoneListSpecinfoListArrayOutput struct{ *pulumi.OutputState }
+type GetZoneConfigZoneListSpecinfoListArrayOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigZoneListSpecinfoListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigZoneListSpecinfoList)(nil)).Elem()
+func (GetZoneConfigZoneListSpecinfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigZoneListSpecinfoList)(nil)).Elem()
 }
 
-func (o ZoneConfigZoneListSpecinfoListArrayOutput) ToZoneConfigZoneListSpecinfoListArrayOutput() ZoneConfigZoneListSpecinfoListArrayOutput {
+func (o GetZoneConfigZoneListSpecinfoListArrayOutput) ToGetZoneConfigZoneListSpecinfoListArrayOutput() GetZoneConfigZoneListSpecinfoListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListSpecinfoListArrayOutput) ToZoneConfigZoneListSpecinfoListArrayOutputWithContext(ctx context.Context) ZoneConfigZoneListSpecinfoListArrayOutput {
+func (o GetZoneConfigZoneListSpecinfoListArrayOutput) ToGetZoneConfigZoneListSpecinfoListArrayOutputWithContext(ctx context.Context) GetZoneConfigZoneListSpecinfoListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigZoneListSpecinfoListArrayOutput) Index(i pulumi.IntInput) ZoneConfigZoneListSpecinfoListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneConfigZoneListSpecinfoList {
-		return vs[0].([]ZoneConfigZoneListSpecinfoList)[vs[1].(int)]
-	}).(ZoneConfigZoneListSpecinfoListOutput)
+func (o GetZoneConfigZoneListSpecinfoListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigZoneListSpecinfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigZoneListSpecinfoList {
+		return vs[0].([]GetZoneConfigZoneListSpecinfoList)[vs[1].(int)]
+	}).(GetZoneConfigZoneListSpecinfoListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*AccountDBAttachmentsListInput)(nil)).Elem(), AccountDBAttachmentsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccountDBAttachmentsListArrayInput)(nil)).Elem(), AccountDBAttachmentsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccountsListInput)(nil)).Elem(), AccountsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccountsListArrayInput)(nil)).Elem(), AccountsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BackupsListInput)(nil)).Elem(), BackupsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BackupsListArrayInput)(nil)).Elem(), BackupsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BasicInstancesInstanceListInput)(nil)).Elem(), BasicInstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BasicInstancesInstanceListArrayInput)(nil)).Elem(), BasicInstancesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DBsDbListInput)(nil)).Elem(), DBsDbListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DBsDbListArrayInput)(nil)).Elem(), DBsDbListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribeDatabaseTupleInput)(nil)).Elem(), PublishSubscribeDatabaseTupleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribeDatabaseTupleArrayInput)(nil)).Elem(), PublishSubscribeDatabaseTupleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribesPublishSubscribeListInput)(nil)).Elem(), PublishSubscribesPublishSubscribeListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribesPublishSubscribeListArrayInput)(nil)).Elem(), PublishSubscribesPublishSubscribeListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribesPublishSubscribeListDatabaseTupleInput)(nil)).Elem(), PublishSubscribesPublishSubscribeListDatabaseTupleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribesPublishSubscribeListDatabaseTupleArrayInput)(nil)).Elem(), PublishSubscribesPublishSubscribeListDatabaseTupleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ReadonlyGroupsListInput)(nil)).Elem(), ReadonlyGroupsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ReadonlyGroupsListArrayInput)(nil)).Elem(), ReadonlyGroupsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigZoneListInput)(nil)).Elem(), ZoneConfigZoneListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigZoneListArrayInput)(nil)).Elem(), ZoneConfigZoneListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigZoneListSpecinfoListInput)(nil)).Elem(), ZoneConfigZoneListSpecinfoListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigZoneListSpecinfoListArrayInput)(nil)).Elem(), ZoneConfigZoneListSpecinfoListArray{})
-	pulumi.RegisterOutputType(AccountDBAttachmentsListOutput{})
-	pulumi.RegisterOutputType(AccountDBAttachmentsListArrayOutput{})
-	pulumi.RegisterOutputType(AccountsListOutput{})
-	pulumi.RegisterOutputType(AccountsListArrayOutput{})
-	pulumi.RegisterOutputType(BackupsListOutput{})
-	pulumi.RegisterOutputType(BackupsListArrayOutput{})
-	pulumi.RegisterOutputType(BasicInstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(BasicInstancesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(DBsDbListOutput{})
-	pulumi.RegisterOutputType(DBsDbListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountDbAttachmentsListInput)(nil)).Elem(), GetAccountDbAttachmentsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountDbAttachmentsListArrayInput)(nil)).Elem(), GetAccountDbAttachmentsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountsListInput)(nil)).Elem(), GetAccountsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountsListArrayInput)(nil)).Elem(), GetAccountsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupsListInput)(nil)).Elem(), GetBackupsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupsListArrayInput)(nil)).Elem(), GetBackupsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBasicInstancesInstanceListInput)(nil)).Elem(), GetBasicInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBasicInstancesInstanceListArrayInput)(nil)).Elem(), GetBasicInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbListInput)(nil)).Elem(), GetDbsDbListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbListArrayInput)(nil)).Elem(), GetDbsDbListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishSubscribesPublishSubscribeListInput)(nil)).Elem(), GetPublishSubscribesPublishSubscribeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishSubscribesPublishSubscribeListArrayInput)(nil)).Elem(), GetPublishSubscribesPublishSubscribeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishSubscribesPublishSubscribeListDatabaseTupleInput)(nil)).Elem(), GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput)(nil)).Elem(), GetPublishSubscribesPublishSubscribeListDatabaseTupleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsListInput)(nil)).Elem(), GetReadonlyGroupsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsListArrayInput)(nil)).Elem(), GetReadonlyGroupsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigZoneListInput)(nil)).Elem(), GetZoneConfigZoneListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigZoneListArrayInput)(nil)).Elem(), GetZoneConfigZoneListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigZoneListSpecinfoListInput)(nil)).Elem(), GetZoneConfigZoneListSpecinfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigZoneListSpecinfoListArrayInput)(nil)).Elem(), GetZoneConfigZoneListSpecinfoListArray{})
 	pulumi.RegisterOutputType(PublishSubscribeDatabaseTupleOutput{})
 	pulumi.RegisterOutputType(PublishSubscribeDatabaseTupleArrayOutput{})
-	pulumi.RegisterOutputType(PublishSubscribesPublishSubscribeListOutput{})
-	pulumi.RegisterOutputType(PublishSubscribesPublishSubscribeListArrayOutput{})
-	pulumi.RegisterOutputType(PublishSubscribesPublishSubscribeListDatabaseTupleOutput{})
-	pulumi.RegisterOutputType(PublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput{})
-	pulumi.RegisterOutputType(ReadonlyGroupsListOutput{})
-	pulumi.RegisterOutputType(ReadonlyGroupsListArrayOutput{})
-	pulumi.RegisterOutputType(ZoneConfigZoneListOutput{})
-	pulumi.RegisterOutputType(ZoneConfigZoneListArrayOutput{})
-	pulumi.RegisterOutputType(ZoneConfigZoneListSpecinfoListOutput{})
-	pulumi.RegisterOutputType(ZoneConfigZoneListSpecinfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountDbAttachmentsListOutput{})
+	pulumi.RegisterOutputType(GetAccountDbAttachmentsListArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountsListOutput{})
+	pulumi.RegisterOutputType(GetAccountsListArrayOutput{})
+	pulumi.RegisterOutputType(GetBackupsListOutput{})
+	pulumi.RegisterOutputType(GetBackupsListArrayOutput{})
+	pulumi.RegisterOutputType(GetBasicInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetBasicInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDbsDbListOutput{})
+	pulumi.RegisterOutputType(GetDbsDbListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetPublishSubscribesPublishSubscribeListOutput{})
+	pulumi.RegisterOutputType(GetPublishSubscribesPublishSubscribeListArrayOutput{})
+	pulumi.RegisterOutputType(GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput{})
+	pulumi.RegisterOutputType(GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsListOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsListArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigZoneListOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigZoneListArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigZoneListSpecinfoListOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigZoneListSpecinfoListArrayOutput{})
 }

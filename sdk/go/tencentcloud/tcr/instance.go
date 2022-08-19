@@ -11,6 +11,74 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create tcr instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("basic"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// Using public network access whitelist
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 			InstanceType:        pulumi.String("basic"),
+// 			OpenPublicOperation: pulumi.Bool(true),
+// 			SecurityPolicies: tcr.InstanceSecurityPolicyArray{
+// 				&tcr.InstanceSecurityPolicyArgs{
+// 					CidrBlock: pulumi.String("10.0.0.1/24"),
+// 				},
+// 				&tcr.InstanceSecurityPolicyArgs{
+// 					CidrBlock: pulumi.String("192.168.1.1"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// tcr instance can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -28,7 +96,7 @@ type Instance struct {
 	PublicDomain pulumi.StringOutput `pulumi:"publicDomain"`
 	// Status of the TCR instance public network access.
 	PublicStatus pulumi.StringOutput `pulumi:"publicStatus"`
-	// Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies InstanceSecurityPolicyArrayOutput `pulumi:"securityPolicies"`
 	// Status of the TCR instance.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -82,7 +150,7 @@ type instanceState struct {
 	PublicDomain *string `pulumi:"publicDomain"`
 	// Status of the TCR instance public network access.
 	PublicStatus *string `pulumi:"publicStatus"`
-	// Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies []InstanceSecurityPolicy `pulumi:"securityPolicies"`
 	// Status of the TCR instance.
 	Status *string `pulumi:"status"`
@@ -105,7 +173,7 @@ type InstanceState struct {
 	PublicDomain pulumi.StringPtrInput
 	// Status of the TCR instance public network access.
 	PublicStatus pulumi.StringPtrInput
-	// Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies InstanceSecurityPolicyArrayInput
 	// Status of the TCR instance.
 	Status pulumi.StringPtrInput
@@ -126,7 +194,7 @@ type instanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Control public network access.
 	OpenPublicOperation *bool `pulumi:"openPublicOperation"`
-	// Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies []InstanceSecurityPolicy `pulumi:"securityPolicies"`
 	// The available tags within this TCR instance.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -142,7 +210,7 @@ type InstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Control public network access.
 	OpenPublicOperation pulumi.BoolPtrInput
-	// Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies InstanceSecurityPolicyArrayInput
 	// The available tags within this TCR instance.
 	Tags pulumi.MapInput
@@ -270,7 +338,7 @@ func (o InstanceOutput) PublicStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.PublicStatus }).(pulumi.StringOutput)
 }
 
-// Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 func (o InstanceOutput) SecurityPolicies() InstanceSecurityPolicyArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceSecurityPolicyArrayOutput { return v.SecurityPolicies }).(InstanceSecurityPolicyArrayOutput)
 }

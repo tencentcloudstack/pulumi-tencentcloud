@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskList
     {
+        /// <summary>
+        /// Animated image generating template ID.
+        /// </summary>
         public readonly string Definition;
+        /// <summary>
+        /// End time of animated image in video in seconds.
+        /// </summary>
         public readonly double EndTimeOffset;
+        /// <summary>
+        /// Start time of animated image in video in seconds.
+        /// </summary>
         public readonly double StartTimeOffset;
 
         [OutputConstructor]

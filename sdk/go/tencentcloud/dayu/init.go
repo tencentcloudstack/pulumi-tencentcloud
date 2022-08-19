@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -21,14 +21,12 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "tencentcloud:Dayu/cCHttpPolicy:CCHttpPolicy":
-		r = &CCHttpPolicy{}
-	case "tencentcloud:Dayu/cCHttpsPolicy:CCHttpsPolicy":
-		r = &CCHttpsPolicy{}
-	case "tencentcloud:Dayu/cCPolicyV2:CCPolicyV2":
-		r = &CCPolicyV2{}
-	case "tencentcloud:Dayu/dayuEipEip:DayuEipEip":
-		r = &DayuEipEip{}
+	case "tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy":
+		r = &CcHttpPolicy{}
+	case "tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy":
+		r = &CcHttpsPolicy{}
+	case "tencentcloud:Dayu/ccPolicyV2:CcPolicyV2":
+		r = &CcPolicyV2{}
 	case "tencentcloud:Dayu/ddosPolicy:DdosPolicy":
 		r = &DdosPolicy{}
 	case "tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment":
@@ -37,6 +35,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DdosPolicyCase{}
 	case "tencentcloud:Dayu/ddosPolicyV2:DdosPolicyV2":
 		r = &DdosPolicyV2{}
+	case "tencentcloud:Dayu/eip:Eip":
+		r = &Eip{}
 	case "tencentcloud:Dayu/l4Rule:L4Rule":
 		r = &L4Rule{}
 	case "tencentcloud:Dayu/l4RuleV2:L4RuleV2":
@@ -60,22 +60,17 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Dayu/cCHttpPolicy",
+		"Dayu/ccHttpPolicy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Dayu/cCHttpsPolicy",
+		"Dayu/ccHttpsPolicy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Dayu/cCPolicyV2",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Dayu/dayuEipEip",
+		"Dayu/ccPolicyV2",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -96,6 +91,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Dayu/ddosPolicyV2",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dayu/eip",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

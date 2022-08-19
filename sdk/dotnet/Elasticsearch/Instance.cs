@@ -9,6 +9,63 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Elasticsearch
 {
+    /// <summary>
+    /// Provides an elasticsearch instance resource.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Elasticsearch.Instance("foo", new Tencentcloud.Elasticsearch.InstanceArgs
+    ///         {
+    ///             InstanceName = "tf-test",
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///             Version = "7.5.1",
+    ///             VpcId = @var.Vpc_id,
+    ///             SubnetId = @var.Subnet_id,
+    ///             Password = "Test12345",
+    ///             LicenseType = "oss",
+    ///             WebNodeTypeInfos = 
+    ///             {
+    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///                 {
+    ///                     NodeNum = 1,
+    ///                     NodeType = "ES.S1.MEDIUM4",
+    ///                 },
+    ///             },
+    ///             NodeInfoLists = 
+    ///             {
+    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///                 {
+    ///                     NodeNum = 2,
+    ///                     NodeType = "ES.S1.MEDIUM4",
+    ///                     Encrypt = false,
+    ///                 },
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Elasticsearch instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -19,8 +76,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Output<string?> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-        /// disabled, `2` is enabled, and default value is `1`.
+        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         /// </summary>
         [Output("basicSecurityType")]
         public Output<int?> BasicSecurityType { get; private set; } = null!;
@@ -44,8 +100,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-        /// Default value is `0`.
+        /// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         /// </summary>
         [Output("deployMode")]
         public Output<int?> DeployMode { get; private set; } = null!;
@@ -69,8 +124,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Output<string> ElasticsearchVip { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-        /// underscores(_).
+        /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         /// </summary>
         [Output("instanceName")]
         public Output<string?> InstanceName { get; private set; } = null!;
@@ -94,8 +148,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Output<ImmutableArray<Outputs.InstanceMultiZoneInfo>> MultiZoneInfos { get; private set; } = null!;
 
         /// <summary>
-        /// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-        /// such as node type, node quantity, node specification, disk type, and disk size.
+        /// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         /// </summary>
         [Output("nodeInfoLists")]
         public Output<ImmutableArray<Outputs.InstanceNodeInfoList>> NodeInfoLists { get; private set; } = null!;
@@ -107,8 +160,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Output<string> Password { get; private set; } = null!;
 
         /// <summary>
-        /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-        /// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Output("renewFlag")]
         public Output<string?> RenewFlag { get; private set; } = null!;
@@ -120,8 +172,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Output<string?> SubnetId { get; private set; } = null!;
 
         /// <summary>
-        /// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-        /// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        /// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
@@ -197,8 +248,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-        /// disabled, `2` is enabled, and default value is `1`.
+        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         /// </summary>
         [Input("basicSecurityType")]
         public Input<int>? BasicSecurityType { get; set; }
@@ -216,15 +266,13 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
-        /// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-        /// Default value is `0`.
+        /// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         /// </summary>
         [Input("deployMode")]
         public Input<int>? DeployMode { get; set; }
 
         /// <summary>
-        /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-        /// underscores(_).
+        /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
@@ -251,8 +299,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         private InputList<Inputs.InstanceNodeInfoListArgs>? _nodeInfoLists;
 
         /// <summary>
-        /// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-        /// such as node type, node quantity, node specification, disk type, and disk size.
+        /// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         /// </summary>
         public InputList<Inputs.InstanceNodeInfoListArgs> NodeInfoLists
         {
@@ -267,8 +314,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Input<string> Password { get; set; } = null!;
 
         /// <summary>
-        /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-        /// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("renewFlag")]
         public Input<string>? RenewFlag { get; set; }
@@ -283,8 +329,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-        /// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        /// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         /// </summary>
         public InputMap<object> Tags
         {
@@ -330,8 +375,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is
-        /// disabled, `2` is enabled, and default value is `1`.
+        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
         /// </summary>
         [Input("basicSecurityType")]
         public Input<int>? BasicSecurityType { get; set; }
@@ -355,8 +399,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment.
-        /// Default value is `0`.
+        /// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         /// </summary>
         [Input("deployMode")]
         public Input<int>? DeployMode { get; set; }
@@ -380,8 +423,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Input<string>? ElasticsearchVip { get; set; }
 
         /// <summary>
-        /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or
-        /// underscores(_).
+        /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
@@ -414,8 +456,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         private InputList<Inputs.InstanceNodeInfoListGetArgs>? _nodeInfoLists;
 
         /// <summary>
-        /// Node information list, which is used to describe the specification information of various types of nodes in the cluster,
-        /// such as node type, node quantity, node specification, disk type, and disk size.
+        /// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
         /// </summary>
         public InputList<Inputs.InstanceNodeInfoListGetArgs> NodeInfoLists
         {
@@ -430,8 +471,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are
-        /// `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("renewFlag")]
         public Input<string>? RenewFlag { get; set; }
@@ -446,8 +486,7 @@ namespace Pulumi.Tencentcloud.Elasticsearch
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// A mapping of tags to assign to the instance. For tag limits, please refer to [Use
-        /// Limits](https://intl.cloud.tencent.com/document/product/651/13354).
+        /// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         /// </summary>
         public InputMap<object> Tags
         {

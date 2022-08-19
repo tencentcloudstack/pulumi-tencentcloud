@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a cls config attachment
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const attach = new tencentcloud.cls.ConfigAttachment("attach", {
+ *     configId: tencentcloud_cls_config.config.id,
+ *     groupId: "27752a9b-9918-440a-8ee7-9c84a14a47ed",
+ * });
+ * ```
+ */
 export class ConfigAttachment extends pulumi.CustomResource {
     /**
      * Get an existing ConfigAttachment resource's state with the given name, ID, and optional extra

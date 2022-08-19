@@ -198,7 +198,29 @@ class Realserver(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Realserver resource with the given unique name, props, and options.
+        Provides a resource to create a GAAP realserver.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.gaap.Realserver("foo",
+            ip="1.1.1.1",
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        GAAP realserver can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain: Domain of the GAAP realserver, conflict with `ip`.
@@ -214,7 +236,29 @@ class Realserver(pulumi.CustomResource):
                  args: Optional[RealserverArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Realserver resource with the given unique name, props, and options.
+        Provides a resource to create a GAAP realserver.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.gaap.Realserver("foo",
+            ip="1.1.1.1",
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        GAAP realserver can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
+        ```
+
         :param str resource_name: The name of the resource.
         :param RealserverArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

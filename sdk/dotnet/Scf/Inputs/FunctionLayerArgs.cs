@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Scf.Inputs
 
     public sealed class FunctionLayerArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The name of Layer.
+        /// </summary>
         [Input("layerName", required: true)]
         public Input<string> LayerName { get; set; } = null!;
 
+        /// <summary>
+        /// The version of layer.
+        /// </summary>
         [Input("layerVersion", required: true)]
         public Input<int> LayerVersion { get; set; } = null!;
 

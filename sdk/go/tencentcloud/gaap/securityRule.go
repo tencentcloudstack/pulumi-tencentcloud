@@ -11,6 +11,57 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a security policy rule.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+// 			Bandwidth:        pulumi.Int(10),
+// 			Concurrent:       pulumi.Int(2),
+// 			AccessRegion:     pulumi.String("SouthChina"),
+// 			RealserverRegion: pulumi.String("NorthChina"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooSecurityPolicy, err := Gaap.NewSecurityPolicy(ctx, "fooSecurityPolicy", &Gaap.SecurityPolicyArgs{
+// 			ProxyId: fooProxy.ID(),
+// 			Action:  pulumi.String("ACCEPT"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Gaap.NewSecurityRule(ctx, "fooSecurityRule", &Gaap.SecurityRuleArgs{
+// 			PolicyId: fooSecurityPolicy.ID(),
+// 			CidrIp:   pulumi.String("1.1.1.1"),
+// 			Action:   pulumi.String("ACCEPT"),
+// 			Protocol: pulumi.String("TCP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// GAAP security rule can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+// ```
 type SecurityRule struct {
 	pulumi.CustomResourceState
 

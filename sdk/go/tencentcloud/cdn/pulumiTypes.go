@@ -10,156 +10,172 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type CdnDomainAuthentication struct {
-	Switch *string                       `pulumi:"switch"`
-	TypeA  *CdnDomainAuthenticationTypeA `pulumi:"typeA"`
-	TypeB  *CdnDomainAuthenticationTypeB `pulumi:"typeB"`
-	TypeC  *CdnDomainAuthenticationTypeC `pulumi:"typeC"`
-	TypeD  *CdnDomainAuthenticationTypeD `pulumi:"typeD"`
+type DomainAuthentication struct {
+	// Authentication switching, available values: `on`, `off`.
+	Switch *string `pulumi:"switch"`
+	// Timestamp hotlink protection mode A configuration.
+	TypeA *DomainAuthenticationTypeA `pulumi:"typeA"`
+	// Timestamp hotlink protection mode B configuration. NOTE: according to upgrading of TencentCloud Platform, TypeB is unavailable for now.
+	TypeB *DomainAuthenticationTypeB `pulumi:"typeB"`
+	// Timestamp hotlink protection mode C configuration.
+	TypeC *DomainAuthenticationTypeC `pulumi:"typeC"`
+	// Timestamp hotlink protection mode D configuration.
+	TypeD *DomainAuthenticationTypeD `pulumi:"typeD"`
 }
 
-// CdnDomainAuthenticationInput is an input type that accepts CdnDomainAuthenticationArgs and CdnDomainAuthenticationOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationInput` via:
+// DomainAuthenticationInput is an input type that accepts DomainAuthenticationArgs and DomainAuthenticationOutput values.
+// You can construct a concrete instance of `DomainAuthenticationInput` via:
 //
-//          CdnDomainAuthenticationArgs{...}
-type CdnDomainAuthenticationInput interface {
+//          DomainAuthenticationArgs{...}
+type DomainAuthenticationInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationOutput() CdnDomainAuthenticationOutput
-	ToCdnDomainAuthenticationOutputWithContext(context.Context) CdnDomainAuthenticationOutput
+	ToDomainAuthenticationOutput() DomainAuthenticationOutput
+	ToDomainAuthenticationOutputWithContext(context.Context) DomainAuthenticationOutput
 }
 
-type CdnDomainAuthenticationArgs struct {
-	Switch pulumi.StringPtrInput                `pulumi:"switch"`
-	TypeA  CdnDomainAuthenticationTypeAPtrInput `pulumi:"typeA"`
-	TypeB  CdnDomainAuthenticationTypeBPtrInput `pulumi:"typeB"`
-	TypeC  CdnDomainAuthenticationTypeCPtrInput `pulumi:"typeC"`
-	TypeD  CdnDomainAuthenticationTypeDPtrInput `pulumi:"typeD"`
+type DomainAuthenticationArgs struct {
+	// Authentication switching, available values: `on`, `off`.
+	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	// Timestamp hotlink protection mode A configuration.
+	TypeA DomainAuthenticationTypeAPtrInput `pulumi:"typeA"`
+	// Timestamp hotlink protection mode B configuration. NOTE: according to upgrading of TencentCloud Platform, TypeB is unavailable for now.
+	TypeB DomainAuthenticationTypeBPtrInput `pulumi:"typeB"`
+	// Timestamp hotlink protection mode C configuration.
+	TypeC DomainAuthenticationTypeCPtrInput `pulumi:"typeC"`
+	// Timestamp hotlink protection mode D configuration.
+	TypeD DomainAuthenticationTypeDPtrInput `pulumi:"typeD"`
 }
 
-func (CdnDomainAuthenticationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthentication)(nil)).Elem()
+func (DomainAuthenticationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthentication)(nil)).Elem()
 }
 
-func (i CdnDomainAuthenticationArgs) ToCdnDomainAuthenticationOutput() CdnDomainAuthenticationOutput {
-	return i.ToCdnDomainAuthenticationOutputWithContext(context.Background())
+func (i DomainAuthenticationArgs) ToDomainAuthenticationOutput() DomainAuthenticationOutput {
+	return i.ToDomainAuthenticationOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationArgs) ToCdnDomainAuthenticationOutputWithContext(ctx context.Context) CdnDomainAuthenticationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationOutput)
+func (i DomainAuthenticationArgs) ToDomainAuthenticationOutputWithContext(ctx context.Context) DomainAuthenticationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationOutput)
 }
 
-func (i CdnDomainAuthenticationArgs) ToCdnDomainAuthenticationPtrOutput() CdnDomainAuthenticationPtrOutput {
-	return i.ToCdnDomainAuthenticationPtrOutputWithContext(context.Background())
+func (i DomainAuthenticationArgs) ToDomainAuthenticationPtrOutput() DomainAuthenticationPtrOutput {
+	return i.ToDomainAuthenticationPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationArgs) ToCdnDomainAuthenticationPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationOutput).ToCdnDomainAuthenticationPtrOutputWithContext(ctx)
+func (i DomainAuthenticationArgs) ToDomainAuthenticationPtrOutputWithContext(ctx context.Context) DomainAuthenticationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationOutput).ToDomainAuthenticationPtrOutputWithContext(ctx)
 }
 
-// CdnDomainAuthenticationPtrInput is an input type that accepts CdnDomainAuthenticationArgs, CdnDomainAuthenticationPtr and CdnDomainAuthenticationPtrOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationPtrInput` via:
+// DomainAuthenticationPtrInput is an input type that accepts DomainAuthenticationArgs, DomainAuthenticationPtr and DomainAuthenticationPtrOutput values.
+// You can construct a concrete instance of `DomainAuthenticationPtrInput` via:
 //
-//          CdnDomainAuthenticationArgs{...}
+//          DomainAuthenticationArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainAuthenticationPtrInput interface {
+type DomainAuthenticationPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationPtrOutput() CdnDomainAuthenticationPtrOutput
-	ToCdnDomainAuthenticationPtrOutputWithContext(context.Context) CdnDomainAuthenticationPtrOutput
+	ToDomainAuthenticationPtrOutput() DomainAuthenticationPtrOutput
+	ToDomainAuthenticationPtrOutputWithContext(context.Context) DomainAuthenticationPtrOutput
 }
 
-type cdnDomainAuthenticationPtrType CdnDomainAuthenticationArgs
+type domainAuthenticationPtrType DomainAuthenticationArgs
 
-func CdnDomainAuthenticationPtr(v *CdnDomainAuthenticationArgs) CdnDomainAuthenticationPtrInput {
-	return (*cdnDomainAuthenticationPtrType)(v)
+func DomainAuthenticationPtr(v *DomainAuthenticationArgs) DomainAuthenticationPtrInput {
+	return (*domainAuthenticationPtrType)(v)
 }
 
-func (*cdnDomainAuthenticationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthentication)(nil)).Elem()
+func (*domainAuthenticationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthentication)(nil)).Elem()
 }
 
-func (i *cdnDomainAuthenticationPtrType) ToCdnDomainAuthenticationPtrOutput() CdnDomainAuthenticationPtrOutput {
-	return i.ToCdnDomainAuthenticationPtrOutputWithContext(context.Background())
+func (i *domainAuthenticationPtrType) ToDomainAuthenticationPtrOutput() DomainAuthenticationPtrOutput {
+	return i.ToDomainAuthenticationPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainAuthenticationPtrType) ToCdnDomainAuthenticationPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationPtrOutput)
+func (i *domainAuthenticationPtrType) ToDomainAuthenticationPtrOutputWithContext(ctx context.Context) DomainAuthenticationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationPtrOutput)
 }
 
-type CdnDomainAuthenticationOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthentication)(nil)).Elem()
+func (DomainAuthenticationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthentication)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationOutput) ToCdnDomainAuthenticationOutput() CdnDomainAuthenticationOutput {
+func (o DomainAuthenticationOutput) ToDomainAuthenticationOutput() DomainAuthenticationOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationOutput) ToCdnDomainAuthenticationOutputWithContext(ctx context.Context) CdnDomainAuthenticationOutput {
+func (o DomainAuthenticationOutput) ToDomainAuthenticationOutputWithContext(ctx context.Context) DomainAuthenticationOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationOutput) ToCdnDomainAuthenticationPtrOutput() CdnDomainAuthenticationPtrOutput {
-	return o.ToCdnDomainAuthenticationPtrOutputWithContext(context.Background())
+func (o DomainAuthenticationOutput) ToDomainAuthenticationPtrOutput() DomainAuthenticationPtrOutput {
+	return o.ToDomainAuthenticationPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainAuthenticationOutput) ToCdnDomainAuthenticationPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainAuthentication) *CdnDomainAuthentication {
+func (o DomainAuthenticationOutput) ToDomainAuthenticationPtrOutputWithContext(ctx context.Context) DomainAuthenticationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainAuthentication) *DomainAuthentication {
 		return &v
-	}).(CdnDomainAuthenticationPtrOutput)
+	}).(DomainAuthenticationPtrOutput)
 }
 
-func (o CdnDomainAuthenticationOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthentication) *string { return v.Switch }).(pulumi.StringPtrOutput)
+// Authentication switching, available values: `on`, `off`.
+func (o DomainAuthenticationOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthentication) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationOutput) TypeA() CdnDomainAuthenticationTypeAPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthentication) *CdnDomainAuthenticationTypeA { return v.TypeA }).(CdnDomainAuthenticationTypeAPtrOutput)
+// Timestamp hotlink protection mode A configuration.
+func (o DomainAuthenticationOutput) TypeA() DomainAuthenticationTypeAPtrOutput {
+	return o.ApplyT(func(v DomainAuthentication) *DomainAuthenticationTypeA { return v.TypeA }).(DomainAuthenticationTypeAPtrOutput)
 }
 
-func (o CdnDomainAuthenticationOutput) TypeB() CdnDomainAuthenticationTypeBPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthentication) *CdnDomainAuthenticationTypeB { return v.TypeB }).(CdnDomainAuthenticationTypeBPtrOutput)
+// Timestamp hotlink protection mode B configuration. NOTE: according to upgrading of TencentCloud Platform, TypeB is unavailable for now.
+func (o DomainAuthenticationOutput) TypeB() DomainAuthenticationTypeBPtrOutput {
+	return o.ApplyT(func(v DomainAuthentication) *DomainAuthenticationTypeB { return v.TypeB }).(DomainAuthenticationTypeBPtrOutput)
 }
 
-func (o CdnDomainAuthenticationOutput) TypeC() CdnDomainAuthenticationTypeCPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthentication) *CdnDomainAuthenticationTypeC { return v.TypeC }).(CdnDomainAuthenticationTypeCPtrOutput)
+// Timestamp hotlink protection mode C configuration.
+func (o DomainAuthenticationOutput) TypeC() DomainAuthenticationTypeCPtrOutput {
+	return o.ApplyT(func(v DomainAuthentication) *DomainAuthenticationTypeC { return v.TypeC }).(DomainAuthenticationTypeCPtrOutput)
 }
 
-func (o CdnDomainAuthenticationOutput) TypeD() CdnDomainAuthenticationTypeDPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthentication) *CdnDomainAuthenticationTypeD { return v.TypeD }).(CdnDomainAuthenticationTypeDPtrOutput)
+// Timestamp hotlink protection mode D configuration.
+func (o DomainAuthenticationOutput) TypeD() DomainAuthenticationTypeDPtrOutput {
+	return o.ApplyT(func(v DomainAuthentication) *DomainAuthenticationTypeD { return v.TypeD }).(DomainAuthenticationTypeDPtrOutput)
 }
 
-type CdnDomainAuthenticationPtrOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthentication)(nil)).Elem()
+func (DomainAuthenticationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthentication)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationPtrOutput) ToCdnDomainAuthenticationPtrOutput() CdnDomainAuthenticationPtrOutput {
+func (o DomainAuthenticationPtrOutput) ToDomainAuthenticationPtrOutput() DomainAuthenticationPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationPtrOutput) ToCdnDomainAuthenticationPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationPtrOutput {
+func (o DomainAuthenticationPtrOutput) ToDomainAuthenticationPtrOutputWithContext(ctx context.Context) DomainAuthenticationPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationPtrOutput) Elem() CdnDomainAuthenticationOutput {
-	return o.ApplyT(func(v *CdnDomainAuthentication) CdnDomainAuthentication {
+func (o DomainAuthenticationPtrOutput) Elem() DomainAuthenticationOutput {
+	return o.ApplyT(func(v *DomainAuthentication) DomainAuthentication {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainAuthentication
+		var ret DomainAuthentication
 		return ret
-	}).(CdnDomainAuthenticationOutput)
+	}).(DomainAuthenticationOutput)
 }
 
-func (o CdnDomainAuthenticationPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthentication) *string {
+// Authentication switching, available values: `on`, `off`.
+func (o DomainAuthenticationPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthentication) *string {
 		if v == nil {
 			return nil
 		}
@@ -167,198 +183,221 @@ func (o CdnDomainAuthenticationPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationPtrOutput) TypeA() CdnDomainAuthenticationTypeAPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthentication) *CdnDomainAuthenticationTypeA {
+// Timestamp hotlink protection mode A configuration.
+func (o DomainAuthenticationPtrOutput) TypeA() DomainAuthenticationTypeAPtrOutput {
+	return o.ApplyT(func(v *DomainAuthentication) *DomainAuthenticationTypeA {
 		if v == nil {
 			return nil
 		}
 		return v.TypeA
-	}).(CdnDomainAuthenticationTypeAPtrOutput)
+	}).(DomainAuthenticationTypeAPtrOutput)
 }
 
-func (o CdnDomainAuthenticationPtrOutput) TypeB() CdnDomainAuthenticationTypeBPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthentication) *CdnDomainAuthenticationTypeB {
+// Timestamp hotlink protection mode B configuration. NOTE: according to upgrading of TencentCloud Platform, TypeB is unavailable for now.
+func (o DomainAuthenticationPtrOutput) TypeB() DomainAuthenticationTypeBPtrOutput {
+	return o.ApplyT(func(v *DomainAuthentication) *DomainAuthenticationTypeB {
 		if v == nil {
 			return nil
 		}
 		return v.TypeB
-	}).(CdnDomainAuthenticationTypeBPtrOutput)
+	}).(DomainAuthenticationTypeBPtrOutput)
 }
 
-func (o CdnDomainAuthenticationPtrOutput) TypeC() CdnDomainAuthenticationTypeCPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthentication) *CdnDomainAuthenticationTypeC {
+// Timestamp hotlink protection mode C configuration.
+func (o DomainAuthenticationPtrOutput) TypeC() DomainAuthenticationTypeCPtrOutput {
+	return o.ApplyT(func(v *DomainAuthentication) *DomainAuthenticationTypeC {
 		if v == nil {
 			return nil
 		}
 		return v.TypeC
-	}).(CdnDomainAuthenticationTypeCPtrOutput)
+	}).(DomainAuthenticationTypeCPtrOutput)
 }
 
-func (o CdnDomainAuthenticationPtrOutput) TypeD() CdnDomainAuthenticationTypeDPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthentication) *CdnDomainAuthenticationTypeD {
+// Timestamp hotlink protection mode D configuration.
+func (o DomainAuthenticationPtrOutput) TypeD() DomainAuthenticationTypeDPtrOutput {
+	return o.ApplyT(func(v *DomainAuthentication) *DomainAuthenticationTypeD {
 		if v == nil {
 			return nil
 		}
 		return v.TypeD
-	}).(CdnDomainAuthenticationTypeDPtrOutput)
+	}).(DomainAuthenticationTypeDPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeA struct {
-	BackupSecretKey *string  `pulumi:"backupSecretKey"`
-	ExpireTime      int      `pulumi:"expireTime"`
-	FileExtensions  []string `pulumi:"fileExtensions"`
-	FilterType      string   `pulumi:"filterType"`
-	SecretKey       string   `pulumi:"secretKey"`
-	SignParam       string   `pulumi:"signParam"`
+type DomainAuthenticationTypeA struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey *string `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime int `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions []string `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType string `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey string `pulumi:"secretKey"`
+	// Signature parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+	SignParam string `pulumi:"signParam"`
 }
 
-// CdnDomainAuthenticationTypeAInput is an input type that accepts CdnDomainAuthenticationTypeAArgs and CdnDomainAuthenticationTypeAOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeAInput` via:
+// DomainAuthenticationTypeAInput is an input type that accepts DomainAuthenticationTypeAArgs and DomainAuthenticationTypeAOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeAInput` via:
 //
-//          CdnDomainAuthenticationTypeAArgs{...}
-type CdnDomainAuthenticationTypeAInput interface {
+//          DomainAuthenticationTypeAArgs{...}
+type DomainAuthenticationTypeAInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeAOutput() CdnDomainAuthenticationTypeAOutput
-	ToCdnDomainAuthenticationTypeAOutputWithContext(context.Context) CdnDomainAuthenticationTypeAOutput
+	ToDomainAuthenticationTypeAOutput() DomainAuthenticationTypeAOutput
+	ToDomainAuthenticationTypeAOutputWithContext(context.Context) DomainAuthenticationTypeAOutput
 }
 
-type CdnDomainAuthenticationTypeAArgs struct {
-	BackupSecretKey pulumi.StringPtrInput   `pulumi:"backupSecretKey"`
-	ExpireTime      pulumi.IntInput         `pulumi:"expireTime"`
-	FileExtensions  pulumi.StringArrayInput `pulumi:"fileExtensions"`
-	FilterType      pulumi.StringInput      `pulumi:"filterType"`
-	SecretKey       pulumi.StringInput      `pulumi:"secretKey"`
-	SignParam       pulumi.StringInput      `pulumi:"signParam"`
+type DomainAuthenticationTypeAArgs struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey pulumi.StringPtrInput `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions pulumi.StringArrayInput `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType pulumi.StringInput `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	// Signature parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+	SignParam pulumi.StringInput `pulumi:"signParam"`
 }
 
-func (CdnDomainAuthenticationTypeAArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeA)(nil)).Elem()
+func (DomainAuthenticationTypeAArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeA)(nil)).Elem()
 }
 
-func (i CdnDomainAuthenticationTypeAArgs) ToCdnDomainAuthenticationTypeAOutput() CdnDomainAuthenticationTypeAOutput {
-	return i.ToCdnDomainAuthenticationTypeAOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeAArgs) ToDomainAuthenticationTypeAOutput() DomainAuthenticationTypeAOutput {
+	return i.ToDomainAuthenticationTypeAOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeAArgs) ToCdnDomainAuthenticationTypeAOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeAOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeAOutput)
+func (i DomainAuthenticationTypeAArgs) ToDomainAuthenticationTypeAOutputWithContext(ctx context.Context) DomainAuthenticationTypeAOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeAOutput)
 }
 
-func (i CdnDomainAuthenticationTypeAArgs) ToCdnDomainAuthenticationTypeAPtrOutput() CdnDomainAuthenticationTypeAPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeAPtrOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeAArgs) ToDomainAuthenticationTypeAPtrOutput() DomainAuthenticationTypeAPtrOutput {
+	return i.ToDomainAuthenticationTypeAPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeAArgs) ToCdnDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeAPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeAOutput).ToCdnDomainAuthenticationTypeAPtrOutputWithContext(ctx)
+func (i DomainAuthenticationTypeAArgs) ToDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeAPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeAOutput).ToDomainAuthenticationTypeAPtrOutputWithContext(ctx)
 }
 
-// CdnDomainAuthenticationTypeAPtrInput is an input type that accepts CdnDomainAuthenticationTypeAArgs, CdnDomainAuthenticationTypeAPtr and CdnDomainAuthenticationTypeAPtrOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeAPtrInput` via:
+// DomainAuthenticationTypeAPtrInput is an input type that accepts DomainAuthenticationTypeAArgs, DomainAuthenticationTypeAPtr and DomainAuthenticationTypeAPtrOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeAPtrInput` via:
 //
-//          CdnDomainAuthenticationTypeAArgs{...}
+//          DomainAuthenticationTypeAArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainAuthenticationTypeAPtrInput interface {
+type DomainAuthenticationTypeAPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeAPtrOutput() CdnDomainAuthenticationTypeAPtrOutput
-	ToCdnDomainAuthenticationTypeAPtrOutputWithContext(context.Context) CdnDomainAuthenticationTypeAPtrOutput
+	ToDomainAuthenticationTypeAPtrOutput() DomainAuthenticationTypeAPtrOutput
+	ToDomainAuthenticationTypeAPtrOutputWithContext(context.Context) DomainAuthenticationTypeAPtrOutput
 }
 
-type cdnDomainAuthenticationTypeAPtrType CdnDomainAuthenticationTypeAArgs
+type domainAuthenticationTypeAPtrType DomainAuthenticationTypeAArgs
 
-func CdnDomainAuthenticationTypeAPtr(v *CdnDomainAuthenticationTypeAArgs) CdnDomainAuthenticationTypeAPtrInput {
-	return (*cdnDomainAuthenticationTypeAPtrType)(v)
+func DomainAuthenticationTypeAPtr(v *DomainAuthenticationTypeAArgs) DomainAuthenticationTypeAPtrInput {
+	return (*domainAuthenticationTypeAPtrType)(v)
 }
 
-func (*cdnDomainAuthenticationTypeAPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeA)(nil)).Elem()
+func (*domainAuthenticationTypeAPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeA)(nil)).Elem()
 }
 
-func (i *cdnDomainAuthenticationTypeAPtrType) ToCdnDomainAuthenticationTypeAPtrOutput() CdnDomainAuthenticationTypeAPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeAPtrOutputWithContext(context.Background())
+func (i *domainAuthenticationTypeAPtrType) ToDomainAuthenticationTypeAPtrOutput() DomainAuthenticationTypeAPtrOutput {
+	return i.ToDomainAuthenticationTypeAPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainAuthenticationTypeAPtrType) ToCdnDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeAPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeAPtrOutput)
+func (i *domainAuthenticationTypeAPtrType) ToDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeAPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeAPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeAOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeAOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeAOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeA)(nil)).Elem()
+func (DomainAuthenticationTypeAOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeA)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) ToCdnDomainAuthenticationTypeAOutput() CdnDomainAuthenticationTypeAOutput {
+func (o DomainAuthenticationTypeAOutput) ToDomainAuthenticationTypeAOutput() DomainAuthenticationTypeAOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) ToCdnDomainAuthenticationTypeAOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeAOutput {
+func (o DomainAuthenticationTypeAOutput) ToDomainAuthenticationTypeAOutputWithContext(ctx context.Context) DomainAuthenticationTypeAOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) ToCdnDomainAuthenticationTypeAPtrOutput() CdnDomainAuthenticationTypeAPtrOutput {
-	return o.ToCdnDomainAuthenticationTypeAPtrOutputWithContext(context.Background())
+func (o DomainAuthenticationTypeAOutput) ToDomainAuthenticationTypeAPtrOutput() DomainAuthenticationTypeAPtrOutput {
+	return o.ToDomainAuthenticationTypeAPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) ToCdnDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeAPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainAuthenticationTypeA) *CdnDomainAuthenticationTypeA {
+func (o DomainAuthenticationTypeAOutput) ToDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeAPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainAuthenticationTypeA) *DomainAuthenticationTypeA {
 		return &v
-	}).(CdnDomainAuthenticationTypeAPtrOutput)
+	}).(DomainAuthenticationTypeAPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeA) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeAOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeA) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) ExpireTime() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeA) int { return v.ExpireTime }).(pulumi.IntOutput)
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeAOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeA) int { return v.ExpireTime }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeA) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeAOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeA) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) FilterType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeA) string { return v.FilterType }).(pulumi.StringOutput)
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeAOutput) FilterType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeA) string { return v.FilterType }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeA) string { return v.SecretKey }).(pulumi.StringOutput)
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeAOutput) SecretKey() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeA) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAOutput) SignParam() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeA) string { return v.SignParam }).(pulumi.StringOutput)
+// Signature parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+func (o DomainAuthenticationTypeAOutput) SignParam() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeA) string { return v.SignParam }).(pulumi.StringOutput)
 }
 
-type CdnDomainAuthenticationTypeAPtrOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeAPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeAPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeA)(nil)).Elem()
+func (DomainAuthenticationTypeAPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeA)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) ToCdnDomainAuthenticationTypeAPtrOutput() CdnDomainAuthenticationTypeAPtrOutput {
+func (o DomainAuthenticationTypeAPtrOutput) ToDomainAuthenticationTypeAPtrOutput() DomainAuthenticationTypeAPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) ToCdnDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeAPtrOutput {
+func (o DomainAuthenticationTypeAPtrOutput) ToDomainAuthenticationTypeAPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeAPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) Elem() CdnDomainAuthenticationTypeAOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeA) CdnDomainAuthenticationTypeA {
+func (o DomainAuthenticationTypeAPtrOutput) Elem() DomainAuthenticationTypeAOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeA) DomainAuthenticationTypeA {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainAuthenticationTypeA
+		var ret DomainAuthenticationTypeA
 		return ret
-	}).(CdnDomainAuthenticationTypeAOutput)
+	}).(DomainAuthenticationTypeAOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeA) *string {
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeAPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeA) *string {
 		if v == nil {
 			return nil
 		}
@@ -366,8 +405,9 @@ func (o CdnDomainAuthenticationTypeAPtrOutput) BackupSecretKey() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) ExpireTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeA) *int {
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeAPtrOutput) ExpireTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeA) *int {
 		if v == nil {
 			return nil
 		}
@@ -375,8 +415,9 @@ func (o CdnDomainAuthenticationTypeAPtrOutput) ExpireTime() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeA) []string {
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeAPtrOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeA) []string {
 		if v == nil {
 			return nil
 		}
@@ -384,8 +425,9 @@ func (o CdnDomainAuthenticationTypeAPtrOutput) FileExtensions() pulumi.StringArr
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) FilterType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeA) *string {
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeAPtrOutput) FilterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeA) *string {
 		if v == nil {
 			return nil
 		}
@@ -393,8 +435,9 @@ func (o CdnDomainAuthenticationTypeAPtrOutput) FilterType() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeA) *string {
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeAPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeA) *string {
 		if v == nil {
 			return nil
 		}
@@ -402,8 +445,9 @@ func (o CdnDomainAuthenticationTypeAPtrOutput) SecretKey() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeAPtrOutput) SignParam() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeA) *string {
+// Signature parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+func (o DomainAuthenticationTypeAPtrOutput) SignParam() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeA) *string {
 		if v == nil {
 			return nil
 		}
@@ -411,156 +455,172 @@ func (o CdnDomainAuthenticationTypeAPtrOutput) SignParam() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeB struct {
-	BackupSecretKey *string  `pulumi:"backupSecretKey"`
-	ExpireTime      int      `pulumi:"expireTime"`
-	FileExtensions  []string `pulumi:"fileExtensions"`
-	FilterType      string   `pulumi:"filterType"`
-	SecretKey       string   `pulumi:"secretKey"`
+type DomainAuthenticationTypeB struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey *string `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime int `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions []string `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType string `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey string `pulumi:"secretKey"`
 }
 
-// CdnDomainAuthenticationTypeBInput is an input type that accepts CdnDomainAuthenticationTypeBArgs and CdnDomainAuthenticationTypeBOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeBInput` via:
+// DomainAuthenticationTypeBInput is an input type that accepts DomainAuthenticationTypeBArgs and DomainAuthenticationTypeBOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeBInput` via:
 //
-//          CdnDomainAuthenticationTypeBArgs{...}
-type CdnDomainAuthenticationTypeBInput interface {
+//          DomainAuthenticationTypeBArgs{...}
+type DomainAuthenticationTypeBInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeBOutput() CdnDomainAuthenticationTypeBOutput
-	ToCdnDomainAuthenticationTypeBOutputWithContext(context.Context) CdnDomainAuthenticationTypeBOutput
+	ToDomainAuthenticationTypeBOutput() DomainAuthenticationTypeBOutput
+	ToDomainAuthenticationTypeBOutputWithContext(context.Context) DomainAuthenticationTypeBOutput
 }
 
-type CdnDomainAuthenticationTypeBArgs struct {
-	BackupSecretKey pulumi.StringPtrInput   `pulumi:"backupSecretKey"`
-	ExpireTime      pulumi.IntInput         `pulumi:"expireTime"`
-	FileExtensions  pulumi.StringArrayInput `pulumi:"fileExtensions"`
-	FilterType      pulumi.StringInput      `pulumi:"filterType"`
-	SecretKey       pulumi.StringInput      `pulumi:"secretKey"`
+type DomainAuthenticationTypeBArgs struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey pulumi.StringPtrInput `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions pulumi.StringArrayInput `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType pulumi.StringInput `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
 }
 
-func (CdnDomainAuthenticationTypeBArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeB)(nil)).Elem()
+func (DomainAuthenticationTypeBArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeB)(nil)).Elem()
 }
 
-func (i CdnDomainAuthenticationTypeBArgs) ToCdnDomainAuthenticationTypeBOutput() CdnDomainAuthenticationTypeBOutput {
-	return i.ToCdnDomainAuthenticationTypeBOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeBArgs) ToDomainAuthenticationTypeBOutput() DomainAuthenticationTypeBOutput {
+	return i.ToDomainAuthenticationTypeBOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeBArgs) ToCdnDomainAuthenticationTypeBOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeBOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeBOutput)
+func (i DomainAuthenticationTypeBArgs) ToDomainAuthenticationTypeBOutputWithContext(ctx context.Context) DomainAuthenticationTypeBOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeBOutput)
 }
 
-func (i CdnDomainAuthenticationTypeBArgs) ToCdnDomainAuthenticationTypeBPtrOutput() CdnDomainAuthenticationTypeBPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeBPtrOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeBArgs) ToDomainAuthenticationTypeBPtrOutput() DomainAuthenticationTypeBPtrOutput {
+	return i.ToDomainAuthenticationTypeBPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeBArgs) ToCdnDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeBPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeBOutput).ToCdnDomainAuthenticationTypeBPtrOutputWithContext(ctx)
+func (i DomainAuthenticationTypeBArgs) ToDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeBPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeBOutput).ToDomainAuthenticationTypeBPtrOutputWithContext(ctx)
 }
 
-// CdnDomainAuthenticationTypeBPtrInput is an input type that accepts CdnDomainAuthenticationTypeBArgs, CdnDomainAuthenticationTypeBPtr and CdnDomainAuthenticationTypeBPtrOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeBPtrInput` via:
+// DomainAuthenticationTypeBPtrInput is an input type that accepts DomainAuthenticationTypeBArgs, DomainAuthenticationTypeBPtr and DomainAuthenticationTypeBPtrOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeBPtrInput` via:
 //
-//          CdnDomainAuthenticationTypeBArgs{...}
+//          DomainAuthenticationTypeBArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainAuthenticationTypeBPtrInput interface {
+type DomainAuthenticationTypeBPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeBPtrOutput() CdnDomainAuthenticationTypeBPtrOutput
-	ToCdnDomainAuthenticationTypeBPtrOutputWithContext(context.Context) CdnDomainAuthenticationTypeBPtrOutput
+	ToDomainAuthenticationTypeBPtrOutput() DomainAuthenticationTypeBPtrOutput
+	ToDomainAuthenticationTypeBPtrOutputWithContext(context.Context) DomainAuthenticationTypeBPtrOutput
 }
 
-type cdnDomainAuthenticationTypeBPtrType CdnDomainAuthenticationTypeBArgs
+type domainAuthenticationTypeBPtrType DomainAuthenticationTypeBArgs
 
-func CdnDomainAuthenticationTypeBPtr(v *CdnDomainAuthenticationTypeBArgs) CdnDomainAuthenticationTypeBPtrInput {
-	return (*cdnDomainAuthenticationTypeBPtrType)(v)
+func DomainAuthenticationTypeBPtr(v *DomainAuthenticationTypeBArgs) DomainAuthenticationTypeBPtrInput {
+	return (*domainAuthenticationTypeBPtrType)(v)
 }
 
-func (*cdnDomainAuthenticationTypeBPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeB)(nil)).Elem()
+func (*domainAuthenticationTypeBPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeB)(nil)).Elem()
 }
 
-func (i *cdnDomainAuthenticationTypeBPtrType) ToCdnDomainAuthenticationTypeBPtrOutput() CdnDomainAuthenticationTypeBPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeBPtrOutputWithContext(context.Background())
+func (i *domainAuthenticationTypeBPtrType) ToDomainAuthenticationTypeBPtrOutput() DomainAuthenticationTypeBPtrOutput {
+	return i.ToDomainAuthenticationTypeBPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainAuthenticationTypeBPtrType) ToCdnDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeBPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeBPtrOutput)
+func (i *domainAuthenticationTypeBPtrType) ToDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeBPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeBPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeBOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeBOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeBOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeB)(nil)).Elem()
+func (DomainAuthenticationTypeBOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeB)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) ToCdnDomainAuthenticationTypeBOutput() CdnDomainAuthenticationTypeBOutput {
+func (o DomainAuthenticationTypeBOutput) ToDomainAuthenticationTypeBOutput() DomainAuthenticationTypeBOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) ToCdnDomainAuthenticationTypeBOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeBOutput {
+func (o DomainAuthenticationTypeBOutput) ToDomainAuthenticationTypeBOutputWithContext(ctx context.Context) DomainAuthenticationTypeBOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) ToCdnDomainAuthenticationTypeBPtrOutput() CdnDomainAuthenticationTypeBPtrOutput {
-	return o.ToCdnDomainAuthenticationTypeBPtrOutputWithContext(context.Background())
+func (o DomainAuthenticationTypeBOutput) ToDomainAuthenticationTypeBPtrOutput() DomainAuthenticationTypeBPtrOutput {
+	return o.ToDomainAuthenticationTypeBPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) ToCdnDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeBPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainAuthenticationTypeB) *CdnDomainAuthenticationTypeB {
+func (o DomainAuthenticationTypeBOutput) ToDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeBPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainAuthenticationTypeB) *DomainAuthenticationTypeB {
 		return &v
-	}).(CdnDomainAuthenticationTypeBPtrOutput)
+	}).(DomainAuthenticationTypeBPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeB) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeBOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeB) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) ExpireTime() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeB) int { return v.ExpireTime }).(pulumi.IntOutput)
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeBOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeB) int { return v.ExpireTime }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeB) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeBOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeB) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) FilterType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeB) string { return v.FilterType }).(pulumi.StringOutput)
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeBOutput) FilterType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeB) string { return v.FilterType }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeB) string { return v.SecretKey }).(pulumi.StringOutput)
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeBOutput) SecretKey() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeB) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
-type CdnDomainAuthenticationTypeBPtrOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeBPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeBPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeB)(nil)).Elem()
+func (DomainAuthenticationTypeBPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeB)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) ToCdnDomainAuthenticationTypeBPtrOutput() CdnDomainAuthenticationTypeBPtrOutput {
+func (o DomainAuthenticationTypeBPtrOutput) ToDomainAuthenticationTypeBPtrOutput() DomainAuthenticationTypeBPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) ToCdnDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeBPtrOutput {
+func (o DomainAuthenticationTypeBPtrOutput) ToDomainAuthenticationTypeBPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeBPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) Elem() CdnDomainAuthenticationTypeBOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeB) CdnDomainAuthenticationTypeB {
+func (o DomainAuthenticationTypeBPtrOutput) Elem() DomainAuthenticationTypeBOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeB) DomainAuthenticationTypeB {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainAuthenticationTypeB
+		var ret DomainAuthenticationTypeB
 		return ret
-	}).(CdnDomainAuthenticationTypeBOutput)
+	}).(DomainAuthenticationTypeBOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeB) *string {
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeBPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeB) *string {
 		if v == nil {
 			return nil
 		}
@@ -568,8 +628,9 @@ func (o CdnDomainAuthenticationTypeBPtrOutput) BackupSecretKey() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) ExpireTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeB) *int {
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeBPtrOutput) ExpireTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeB) *int {
 		if v == nil {
 			return nil
 		}
@@ -577,8 +638,9 @@ func (o CdnDomainAuthenticationTypeBPtrOutput) ExpireTime() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeB) []string {
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeBPtrOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeB) []string {
 		if v == nil {
 			return nil
 		}
@@ -586,8 +648,9 @@ func (o CdnDomainAuthenticationTypeBPtrOutput) FileExtensions() pulumi.StringArr
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) FilterType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeB) *string {
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeBPtrOutput) FilterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeB) *string {
 		if v == nil {
 			return nil
 		}
@@ -595,8 +658,9 @@ func (o CdnDomainAuthenticationTypeBPtrOutput) FilterType() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeBPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeB) *string {
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeBPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeB) *string {
 		if v == nil {
 			return nil
 		}
@@ -604,162 +668,181 @@ func (o CdnDomainAuthenticationTypeBPtrOutput) SecretKey() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeC struct {
-	BackupSecretKey *string  `pulumi:"backupSecretKey"`
-	ExpireTime      int      `pulumi:"expireTime"`
-	FileExtensions  []string `pulumi:"fileExtensions"`
-	FilterType      string   `pulumi:"filterType"`
-	SecretKey       string   `pulumi:"secretKey"`
-	TimeFormat      *string  `pulumi:"timeFormat"`
+type DomainAuthenticationTypeC struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey *string `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime int `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions []string `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType string `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey string `pulumi:"secretKey"`
+	// Timestamp formation, available values: `dec`, `hex`.
+	TimeFormat *string `pulumi:"timeFormat"`
 }
 
-// CdnDomainAuthenticationTypeCInput is an input type that accepts CdnDomainAuthenticationTypeCArgs and CdnDomainAuthenticationTypeCOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeCInput` via:
+// DomainAuthenticationTypeCInput is an input type that accepts DomainAuthenticationTypeCArgs and DomainAuthenticationTypeCOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeCInput` via:
 //
-//          CdnDomainAuthenticationTypeCArgs{...}
-type CdnDomainAuthenticationTypeCInput interface {
+//          DomainAuthenticationTypeCArgs{...}
+type DomainAuthenticationTypeCInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeCOutput() CdnDomainAuthenticationTypeCOutput
-	ToCdnDomainAuthenticationTypeCOutputWithContext(context.Context) CdnDomainAuthenticationTypeCOutput
+	ToDomainAuthenticationTypeCOutput() DomainAuthenticationTypeCOutput
+	ToDomainAuthenticationTypeCOutputWithContext(context.Context) DomainAuthenticationTypeCOutput
 }
 
-type CdnDomainAuthenticationTypeCArgs struct {
-	BackupSecretKey pulumi.StringPtrInput   `pulumi:"backupSecretKey"`
-	ExpireTime      pulumi.IntInput         `pulumi:"expireTime"`
-	FileExtensions  pulumi.StringArrayInput `pulumi:"fileExtensions"`
-	FilterType      pulumi.StringInput      `pulumi:"filterType"`
-	SecretKey       pulumi.StringInput      `pulumi:"secretKey"`
-	TimeFormat      pulumi.StringPtrInput   `pulumi:"timeFormat"`
+type DomainAuthenticationTypeCArgs struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey pulumi.StringPtrInput `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions pulumi.StringArrayInput `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType pulumi.StringInput `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	// Timestamp formation, available values: `dec`, `hex`.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
 }
 
-func (CdnDomainAuthenticationTypeCArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeC)(nil)).Elem()
+func (DomainAuthenticationTypeCArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeC)(nil)).Elem()
 }
 
-func (i CdnDomainAuthenticationTypeCArgs) ToCdnDomainAuthenticationTypeCOutput() CdnDomainAuthenticationTypeCOutput {
-	return i.ToCdnDomainAuthenticationTypeCOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeCArgs) ToDomainAuthenticationTypeCOutput() DomainAuthenticationTypeCOutput {
+	return i.ToDomainAuthenticationTypeCOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeCArgs) ToCdnDomainAuthenticationTypeCOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeCOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeCOutput)
+func (i DomainAuthenticationTypeCArgs) ToDomainAuthenticationTypeCOutputWithContext(ctx context.Context) DomainAuthenticationTypeCOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeCOutput)
 }
 
-func (i CdnDomainAuthenticationTypeCArgs) ToCdnDomainAuthenticationTypeCPtrOutput() CdnDomainAuthenticationTypeCPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeCPtrOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeCArgs) ToDomainAuthenticationTypeCPtrOutput() DomainAuthenticationTypeCPtrOutput {
+	return i.ToDomainAuthenticationTypeCPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeCArgs) ToCdnDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeCPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeCOutput).ToCdnDomainAuthenticationTypeCPtrOutputWithContext(ctx)
+func (i DomainAuthenticationTypeCArgs) ToDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeCPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeCOutput).ToDomainAuthenticationTypeCPtrOutputWithContext(ctx)
 }
 
-// CdnDomainAuthenticationTypeCPtrInput is an input type that accepts CdnDomainAuthenticationTypeCArgs, CdnDomainAuthenticationTypeCPtr and CdnDomainAuthenticationTypeCPtrOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeCPtrInput` via:
+// DomainAuthenticationTypeCPtrInput is an input type that accepts DomainAuthenticationTypeCArgs, DomainAuthenticationTypeCPtr and DomainAuthenticationTypeCPtrOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeCPtrInput` via:
 //
-//          CdnDomainAuthenticationTypeCArgs{...}
+//          DomainAuthenticationTypeCArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainAuthenticationTypeCPtrInput interface {
+type DomainAuthenticationTypeCPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeCPtrOutput() CdnDomainAuthenticationTypeCPtrOutput
-	ToCdnDomainAuthenticationTypeCPtrOutputWithContext(context.Context) CdnDomainAuthenticationTypeCPtrOutput
+	ToDomainAuthenticationTypeCPtrOutput() DomainAuthenticationTypeCPtrOutput
+	ToDomainAuthenticationTypeCPtrOutputWithContext(context.Context) DomainAuthenticationTypeCPtrOutput
 }
 
-type cdnDomainAuthenticationTypeCPtrType CdnDomainAuthenticationTypeCArgs
+type domainAuthenticationTypeCPtrType DomainAuthenticationTypeCArgs
 
-func CdnDomainAuthenticationTypeCPtr(v *CdnDomainAuthenticationTypeCArgs) CdnDomainAuthenticationTypeCPtrInput {
-	return (*cdnDomainAuthenticationTypeCPtrType)(v)
+func DomainAuthenticationTypeCPtr(v *DomainAuthenticationTypeCArgs) DomainAuthenticationTypeCPtrInput {
+	return (*domainAuthenticationTypeCPtrType)(v)
 }
 
-func (*cdnDomainAuthenticationTypeCPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeC)(nil)).Elem()
+func (*domainAuthenticationTypeCPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeC)(nil)).Elem()
 }
 
-func (i *cdnDomainAuthenticationTypeCPtrType) ToCdnDomainAuthenticationTypeCPtrOutput() CdnDomainAuthenticationTypeCPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeCPtrOutputWithContext(context.Background())
+func (i *domainAuthenticationTypeCPtrType) ToDomainAuthenticationTypeCPtrOutput() DomainAuthenticationTypeCPtrOutput {
+	return i.ToDomainAuthenticationTypeCPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainAuthenticationTypeCPtrType) ToCdnDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeCPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeCPtrOutput)
+func (i *domainAuthenticationTypeCPtrType) ToDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeCPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeCPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeCOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeCOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeCOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeC)(nil)).Elem()
+func (DomainAuthenticationTypeCOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeC)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) ToCdnDomainAuthenticationTypeCOutput() CdnDomainAuthenticationTypeCOutput {
+func (o DomainAuthenticationTypeCOutput) ToDomainAuthenticationTypeCOutput() DomainAuthenticationTypeCOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) ToCdnDomainAuthenticationTypeCOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeCOutput {
+func (o DomainAuthenticationTypeCOutput) ToDomainAuthenticationTypeCOutputWithContext(ctx context.Context) DomainAuthenticationTypeCOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) ToCdnDomainAuthenticationTypeCPtrOutput() CdnDomainAuthenticationTypeCPtrOutput {
-	return o.ToCdnDomainAuthenticationTypeCPtrOutputWithContext(context.Background())
+func (o DomainAuthenticationTypeCOutput) ToDomainAuthenticationTypeCPtrOutput() DomainAuthenticationTypeCPtrOutput {
+	return o.ToDomainAuthenticationTypeCPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) ToCdnDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeCPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainAuthenticationTypeC) *CdnDomainAuthenticationTypeC {
+func (o DomainAuthenticationTypeCOutput) ToDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeCPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainAuthenticationTypeC) *DomainAuthenticationTypeC {
 		return &v
-	}).(CdnDomainAuthenticationTypeCPtrOutput)
+	}).(DomainAuthenticationTypeCPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeC) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeCOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeC) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) ExpireTime() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeC) int { return v.ExpireTime }).(pulumi.IntOutput)
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeCOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeC) int { return v.ExpireTime }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeC) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeCOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeC) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) FilterType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeC) string { return v.FilterType }).(pulumi.StringOutput)
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeCOutput) FilterType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeC) string { return v.FilterType }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeC) string { return v.SecretKey }).(pulumi.StringOutput)
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeCOutput) SecretKey() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeC) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCOutput) TimeFormat() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeC) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
+// Timestamp formation, available values: `dec`, `hex`.
+func (o DomainAuthenticationTypeCOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeC) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeCPtrOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeCPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeCPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeC)(nil)).Elem()
+func (DomainAuthenticationTypeCPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeC)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) ToCdnDomainAuthenticationTypeCPtrOutput() CdnDomainAuthenticationTypeCPtrOutput {
+func (o DomainAuthenticationTypeCPtrOutput) ToDomainAuthenticationTypeCPtrOutput() DomainAuthenticationTypeCPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) ToCdnDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeCPtrOutput {
+func (o DomainAuthenticationTypeCPtrOutput) ToDomainAuthenticationTypeCPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeCPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) Elem() CdnDomainAuthenticationTypeCOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeC) CdnDomainAuthenticationTypeC {
+func (o DomainAuthenticationTypeCPtrOutput) Elem() DomainAuthenticationTypeCOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeC) DomainAuthenticationTypeC {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainAuthenticationTypeC
+		var ret DomainAuthenticationTypeC
 		return ret
-	}).(CdnDomainAuthenticationTypeCOutput)
+	}).(DomainAuthenticationTypeCOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeC) *string {
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeCPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeC) *string {
 		if v == nil {
 			return nil
 		}
@@ -767,8 +850,9 @@ func (o CdnDomainAuthenticationTypeCPtrOutput) BackupSecretKey() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) ExpireTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeC) *int {
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeCPtrOutput) ExpireTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeC) *int {
 		if v == nil {
 			return nil
 		}
@@ -776,8 +860,9 @@ func (o CdnDomainAuthenticationTypeCPtrOutput) ExpireTime() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeC) []string {
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeCPtrOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeC) []string {
 		if v == nil {
 			return nil
 		}
@@ -785,8 +870,9 @@ func (o CdnDomainAuthenticationTypeCPtrOutput) FileExtensions() pulumi.StringArr
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) FilterType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeC) *string {
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeCPtrOutput) FilterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeC) *string {
 		if v == nil {
 			return nil
 		}
@@ -794,8 +880,9 @@ func (o CdnDomainAuthenticationTypeCPtrOutput) FilterType() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeC) *string {
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeCPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeC) *string {
 		if v == nil {
 			return nil
 		}
@@ -803,8 +890,9 @@ func (o CdnDomainAuthenticationTypeCPtrOutput) SecretKey() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeCPtrOutput) TimeFormat() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeC) *string {
+// Timestamp formation, available values: `dec`, `hex`.
+func (o DomainAuthenticationTypeCPtrOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeC) *string {
 		if v == nil {
 			return nil
 		}
@@ -812,168 +900,190 @@ func (o CdnDomainAuthenticationTypeCPtrOutput) TimeFormat() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeD struct {
-	BackupSecretKey *string  `pulumi:"backupSecretKey"`
-	ExpireTime      int      `pulumi:"expireTime"`
-	FileExtensions  []string `pulumi:"fileExtensions"`
-	FilterType      string   `pulumi:"filterType"`
-	SecretKey       string   `pulumi:"secretKey"`
-	TimeFormat      *string  `pulumi:"timeFormat"`
-	TimeParam       *string  `pulumi:"timeParam"`
+type DomainAuthenticationTypeD struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey *string `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime int `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions []string `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType string `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey string `pulumi:"secretKey"`
+	// Timestamp formation, available values: `dec`, `hex`.
+	TimeFormat *string `pulumi:"timeFormat"`
+	// Timestamp parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+	TimeParam *string `pulumi:"timeParam"`
 }
 
-// CdnDomainAuthenticationTypeDInput is an input type that accepts CdnDomainAuthenticationTypeDArgs and CdnDomainAuthenticationTypeDOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeDInput` via:
+// DomainAuthenticationTypeDInput is an input type that accepts DomainAuthenticationTypeDArgs and DomainAuthenticationTypeDOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeDInput` via:
 //
-//          CdnDomainAuthenticationTypeDArgs{...}
-type CdnDomainAuthenticationTypeDInput interface {
+//          DomainAuthenticationTypeDArgs{...}
+type DomainAuthenticationTypeDInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeDOutput() CdnDomainAuthenticationTypeDOutput
-	ToCdnDomainAuthenticationTypeDOutputWithContext(context.Context) CdnDomainAuthenticationTypeDOutput
+	ToDomainAuthenticationTypeDOutput() DomainAuthenticationTypeDOutput
+	ToDomainAuthenticationTypeDOutputWithContext(context.Context) DomainAuthenticationTypeDOutput
 }
 
-type CdnDomainAuthenticationTypeDArgs struct {
-	BackupSecretKey pulumi.StringPtrInput   `pulumi:"backupSecretKey"`
-	ExpireTime      pulumi.IntInput         `pulumi:"expireTime"`
-	FileExtensions  pulumi.StringArrayInput `pulumi:"fileExtensions"`
-	FilterType      pulumi.StringInput      `pulumi:"filterType"`
-	SecretKey       pulumi.StringInput      `pulumi:"secretKey"`
-	TimeFormat      pulumi.StringPtrInput   `pulumi:"timeFormat"`
-	TimeParam       pulumi.StringPtrInput   `pulumi:"timeParam"`
+type DomainAuthenticationTypeDArgs struct {
+	// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+	BackupSecretKey pulumi.StringPtrInput `pulumi:"backupSecretKey"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+	FileExtensions pulumi.StringArrayInput `pulumi:"fileExtensions"`
+	// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+	FilterType pulumi.StringInput `pulumi:"filterType"`
+	// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	// Timestamp formation, available values: `dec`, `hex`.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+	// Timestamp parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+	TimeParam pulumi.StringPtrInput `pulumi:"timeParam"`
 }
 
-func (CdnDomainAuthenticationTypeDArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeD)(nil)).Elem()
+func (DomainAuthenticationTypeDArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeD)(nil)).Elem()
 }
 
-func (i CdnDomainAuthenticationTypeDArgs) ToCdnDomainAuthenticationTypeDOutput() CdnDomainAuthenticationTypeDOutput {
-	return i.ToCdnDomainAuthenticationTypeDOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeDArgs) ToDomainAuthenticationTypeDOutput() DomainAuthenticationTypeDOutput {
+	return i.ToDomainAuthenticationTypeDOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeDArgs) ToCdnDomainAuthenticationTypeDOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeDOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeDOutput)
+func (i DomainAuthenticationTypeDArgs) ToDomainAuthenticationTypeDOutputWithContext(ctx context.Context) DomainAuthenticationTypeDOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeDOutput)
 }
 
-func (i CdnDomainAuthenticationTypeDArgs) ToCdnDomainAuthenticationTypeDPtrOutput() CdnDomainAuthenticationTypeDPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeDPtrOutputWithContext(context.Background())
+func (i DomainAuthenticationTypeDArgs) ToDomainAuthenticationTypeDPtrOutput() DomainAuthenticationTypeDPtrOutput {
+	return i.ToDomainAuthenticationTypeDPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAuthenticationTypeDArgs) ToCdnDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeDPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeDOutput).ToCdnDomainAuthenticationTypeDPtrOutputWithContext(ctx)
+func (i DomainAuthenticationTypeDArgs) ToDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeDPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeDOutput).ToDomainAuthenticationTypeDPtrOutputWithContext(ctx)
 }
 
-// CdnDomainAuthenticationTypeDPtrInput is an input type that accepts CdnDomainAuthenticationTypeDArgs, CdnDomainAuthenticationTypeDPtr and CdnDomainAuthenticationTypeDPtrOutput values.
-// You can construct a concrete instance of `CdnDomainAuthenticationTypeDPtrInput` via:
+// DomainAuthenticationTypeDPtrInput is an input type that accepts DomainAuthenticationTypeDArgs, DomainAuthenticationTypeDPtr and DomainAuthenticationTypeDPtrOutput values.
+// You can construct a concrete instance of `DomainAuthenticationTypeDPtrInput` via:
 //
-//          CdnDomainAuthenticationTypeDArgs{...}
+//          DomainAuthenticationTypeDArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainAuthenticationTypeDPtrInput interface {
+type DomainAuthenticationTypeDPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainAuthenticationTypeDPtrOutput() CdnDomainAuthenticationTypeDPtrOutput
-	ToCdnDomainAuthenticationTypeDPtrOutputWithContext(context.Context) CdnDomainAuthenticationTypeDPtrOutput
+	ToDomainAuthenticationTypeDPtrOutput() DomainAuthenticationTypeDPtrOutput
+	ToDomainAuthenticationTypeDPtrOutputWithContext(context.Context) DomainAuthenticationTypeDPtrOutput
 }
 
-type cdnDomainAuthenticationTypeDPtrType CdnDomainAuthenticationTypeDArgs
+type domainAuthenticationTypeDPtrType DomainAuthenticationTypeDArgs
 
-func CdnDomainAuthenticationTypeDPtr(v *CdnDomainAuthenticationTypeDArgs) CdnDomainAuthenticationTypeDPtrInput {
-	return (*cdnDomainAuthenticationTypeDPtrType)(v)
+func DomainAuthenticationTypeDPtr(v *DomainAuthenticationTypeDArgs) DomainAuthenticationTypeDPtrInput {
+	return (*domainAuthenticationTypeDPtrType)(v)
 }
 
-func (*cdnDomainAuthenticationTypeDPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeD)(nil)).Elem()
+func (*domainAuthenticationTypeDPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeD)(nil)).Elem()
 }
 
-func (i *cdnDomainAuthenticationTypeDPtrType) ToCdnDomainAuthenticationTypeDPtrOutput() CdnDomainAuthenticationTypeDPtrOutput {
-	return i.ToCdnDomainAuthenticationTypeDPtrOutputWithContext(context.Background())
+func (i *domainAuthenticationTypeDPtrType) ToDomainAuthenticationTypeDPtrOutput() DomainAuthenticationTypeDPtrOutput {
+	return i.ToDomainAuthenticationTypeDPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainAuthenticationTypeDPtrType) ToCdnDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeDPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAuthenticationTypeDPtrOutput)
+func (i *domainAuthenticationTypeDPtrType) ToDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeDPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAuthenticationTypeDPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeDOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeDOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeDOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAuthenticationTypeD)(nil)).Elem()
+func (DomainAuthenticationTypeDOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAuthenticationTypeD)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) ToCdnDomainAuthenticationTypeDOutput() CdnDomainAuthenticationTypeDOutput {
+func (o DomainAuthenticationTypeDOutput) ToDomainAuthenticationTypeDOutput() DomainAuthenticationTypeDOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) ToCdnDomainAuthenticationTypeDOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeDOutput {
+func (o DomainAuthenticationTypeDOutput) ToDomainAuthenticationTypeDOutputWithContext(ctx context.Context) DomainAuthenticationTypeDOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) ToCdnDomainAuthenticationTypeDPtrOutput() CdnDomainAuthenticationTypeDPtrOutput {
-	return o.ToCdnDomainAuthenticationTypeDPtrOutputWithContext(context.Background())
+func (o DomainAuthenticationTypeDOutput) ToDomainAuthenticationTypeDPtrOutput() DomainAuthenticationTypeDPtrOutput {
+	return o.ToDomainAuthenticationTypeDPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) ToCdnDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeDPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainAuthenticationTypeD) *CdnDomainAuthenticationTypeD {
+func (o DomainAuthenticationTypeDOutput) ToDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeDPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainAuthenticationTypeD) *DomainAuthenticationTypeD {
 		return &v
-	}).(CdnDomainAuthenticationTypeDPtrOutput)
+	}).(DomainAuthenticationTypeDPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeD) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeDOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeD) *string { return v.BackupSecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) ExpireTime() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeD) int { return v.ExpireTime }).(pulumi.IntOutput)
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeDOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeD) int { return v.ExpireTime }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeD) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeDOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeD) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) FilterType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeD) string { return v.FilterType }).(pulumi.StringOutput)
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeDOutput) FilterType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeD) string { return v.FilterType }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeD) string { return v.SecretKey }).(pulumi.StringOutput)
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeDOutput) SecretKey() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeD) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) TimeFormat() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeD) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
+// Timestamp formation, available values: `dec`, `hex`.
+func (o DomainAuthenticationTypeDOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeD) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDOutput) TimeParam() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAuthenticationTypeD) *string { return v.TimeParam }).(pulumi.StringPtrOutput)
+// Timestamp parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+func (o DomainAuthenticationTypeDOutput) TimeParam() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAuthenticationTypeD) *string { return v.TimeParam }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainAuthenticationTypeDPtrOutput struct{ *pulumi.OutputState }
+type DomainAuthenticationTypeDPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAuthenticationTypeDPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAuthenticationTypeD)(nil)).Elem()
+func (DomainAuthenticationTypeDPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAuthenticationTypeD)(nil)).Elem()
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) ToCdnDomainAuthenticationTypeDPtrOutput() CdnDomainAuthenticationTypeDPtrOutput {
+func (o DomainAuthenticationTypeDPtrOutput) ToDomainAuthenticationTypeDPtrOutput() DomainAuthenticationTypeDPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) ToCdnDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) CdnDomainAuthenticationTypeDPtrOutput {
+func (o DomainAuthenticationTypeDPtrOutput) ToDomainAuthenticationTypeDPtrOutputWithContext(ctx context.Context) DomainAuthenticationTypeDPtrOutput {
 	return o
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) Elem() CdnDomainAuthenticationTypeDOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) CdnDomainAuthenticationTypeD {
+func (o DomainAuthenticationTypeDPtrOutput) Elem() DomainAuthenticationTypeDOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) DomainAuthenticationTypeD {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainAuthenticationTypeD
+		var ret DomainAuthenticationTypeD
 		return ret
-	}).(CdnDomainAuthenticationTypeDOutput)
+	}).(DomainAuthenticationTypeDOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) *string {
+// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+func (o DomainAuthenticationTypeDPtrOutput) BackupSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) *string {
 		if v == nil {
 			return nil
 		}
@@ -981,8 +1091,9 @@ func (o CdnDomainAuthenticationTypeDPtrOutput) BackupSecretKey() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) ExpireTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) *int {
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainAuthenticationTypeDPtrOutput) ExpireTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) *int {
 		if v == nil {
 			return nil
 		}
@@ -990,8 +1101,9 @@ func (o CdnDomainAuthenticationTypeDPtrOutput) ExpireTime() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) []string {
+// File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+func (o DomainAuthenticationTypeDPtrOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) []string {
 		if v == nil {
 			return nil
 		}
@@ -999,8 +1111,9 @@ func (o CdnDomainAuthenticationTypeDPtrOutput) FileExtensions() pulumi.StringArr
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) FilterType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) *string {
+// Available values: `whitelist` - all types apart from `fileExtensions` are authenticated, `blacklist`: - only the types in the `fileExtensions` are authenticated.
+func (o DomainAuthenticationTypeDPtrOutput) FilterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) *string {
 		if v == nil {
 			return nil
 		}
@@ -1008,8 +1121,9 @@ func (o CdnDomainAuthenticationTypeDPtrOutput) FilterType() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) *string {
+// The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+func (o DomainAuthenticationTypeDPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) *string {
 		if v == nil {
 			return nil
 		}
@@ -1017,8 +1131,9 @@ func (o CdnDomainAuthenticationTypeDPtrOutput) SecretKey() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) TimeFormat() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) *string {
+// Timestamp formation, available values: `dec`, `hex`.
+func (o DomainAuthenticationTypeDPtrOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) *string {
 		if v == nil {
 			return nil
 		}
@@ -1026,8 +1141,9 @@ func (o CdnDomainAuthenticationTypeDPtrOutput) TimeFormat() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAuthenticationTypeDPtrOutput) TimeParam() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAuthenticationTypeD) *string {
+// Timestamp parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+func (o DomainAuthenticationTypeDPtrOutput) TimeParam() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAuthenticationTypeD) *string {
 		if v == nil {
 			return nil
 		}
@@ -1035,156 +1151,172 @@ func (o CdnDomainAuthenticationTypeDPtrOutput) TimeParam() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainAwsPrivateAccess struct {
+type DomainAwsPrivateAccess struct {
+	// Access ID.
 	AccessKey *string `pulumi:"accessKey"`
-	Bucket    *string `pulumi:"bucket"`
-	Region    *string `pulumi:"region"`
+	// Bucket.
+	Bucket *string `pulumi:"bucket"`
+	// Region.
+	Region *string `pulumi:"region"`
+	// Key.
 	SecretKey *string `pulumi:"secretKey"`
-	Switch    string  `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainAwsPrivateAccessInput is an input type that accepts CdnDomainAwsPrivateAccessArgs and CdnDomainAwsPrivateAccessOutput values.
-// You can construct a concrete instance of `CdnDomainAwsPrivateAccessInput` via:
+// DomainAwsPrivateAccessInput is an input type that accepts DomainAwsPrivateAccessArgs and DomainAwsPrivateAccessOutput values.
+// You can construct a concrete instance of `DomainAwsPrivateAccessInput` via:
 //
-//          CdnDomainAwsPrivateAccessArgs{...}
-type CdnDomainAwsPrivateAccessInput interface {
+//          DomainAwsPrivateAccessArgs{...}
+type DomainAwsPrivateAccessInput interface {
 	pulumi.Input
 
-	ToCdnDomainAwsPrivateAccessOutput() CdnDomainAwsPrivateAccessOutput
-	ToCdnDomainAwsPrivateAccessOutputWithContext(context.Context) CdnDomainAwsPrivateAccessOutput
+	ToDomainAwsPrivateAccessOutput() DomainAwsPrivateAccessOutput
+	ToDomainAwsPrivateAccessOutputWithContext(context.Context) DomainAwsPrivateAccessOutput
 }
 
-type CdnDomainAwsPrivateAccessArgs struct {
+type DomainAwsPrivateAccessArgs struct {
+	// Access ID.
 	AccessKey pulumi.StringPtrInput `pulumi:"accessKey"`
-	Bucket    pulumi.StringPtrInput `pulumi:"bucket"`
-	Region    pulumi.StringPtrInput `pulumi:"region"`
+	// Bucket.
+	Bucket pulumi.StringPtrInput `pulumi:"bucket"`
+	// Region.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// Key.
 	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
-	Switch    pulumi.StringInput    `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainAwsPrivateAccessArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAwsPrivateAccess)(nil)).Elem()
+func (DomainAwsPrivateAccessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAwsPrivateAccess)(nil)).Elem()
 }
 
-func (i CdnDomainAwsPrivateAccessArgs) ToCdnDomainAwsPrivateAccessOutput() CdnDomainAwsPrivateAccessOutput {
-	return i.ToCdnDomainAwsPrivateAccessOutputWithContext(context.Background())
+func (i DomainAwsPrivateAccessArgs) ToDomainAwsPrivateAccessOutput() DomainAwsPrivateAccessOutput {
+	return i.ToDomainAwsPrivateAccessOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAwsPrivateAccessArgs) ToCdnDomainAwsPrivateAccessOutputWithContext(ctx context.Context) CdnDomainAwsPrivateAccessOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAwsPrivateAccessOutput)
+func (i DomainAwsPrivateAccessArgs) ToDomainAwsPrivateAccessOutputWithContext(ctx context.Context) DomainAwsPrivateAccessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAwsPrivateAccessOutput)
 }
 
-func (i CdnDomainAwsPrivateAccessArgs) ToCdnDomainAwsPrivateAccessPtrOutput() CdnDomainAwsPrivateAccessPtrOutput {
-	return i.ToCdnDomainAwsPrivateAccessPtrOutputWithContext(context.Background())
+func (i DomainAwsPrivateAccessArgs) ToDomainAwsPrivateAccessPtrOutput() DomainAwsPrivateAccessPtrOutput {
+	return i.ToDomainAwsPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainAwsPrivateAccessArgs) ToCdnDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainAwsPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAwsPrivateAccessOutput).ToCdnDomainAwsPrivateAccessPtrOutputWithContext(ctx)
+func (i DomainAwsPrivateAccessArgs) ToDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) DomainAwsPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAwsPrivateAccessOutput).ToDomainAwsPrivateAccessPtrOutputWithContext(ctx)
 }
 
-// CdnDomainAwsPrivateAccessPtrInput is an input type that accepts CdnDomainAwsPrivateAccessArgs, CdnDomainAwsPrivateAccessPtr and CdnDomainAwsPrivateAccessPtrOutput values.
-// You can construct a concrete instance of `CdnDomainAwsPrivateAccessPtrInput` via:
+// DomainAwsPrivateAccessPtrInput is an input type that accepts DomainAwsPrivateAccessArgs, DomainAwsPrivateAccessPtr and DomainAwsPrivateAccessPtrOutput values.
+// You can construct a concrete instance of `DomainAwsPrivateAccessPtrInput` via:
 //
-//          CdnDomainAwsPrivateAccessArgs{...}
+//          DomainAwsPrivateAccessArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainAwsPrivateAccessPtrInput interface {
+type DomainAwsPrivateAccessPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainAwsPrivateAccessPtrOutput() CdnDomainAwsPrivateAccessPtrOutput
-	ToCdnDomainAwsPrivateAccessPtrOutputWithContext(context.Context) CdnDomainAwsPrivateAccessPtrOutput
+	ToDomainAwsPrivateAccessPtrOutput() DomainAwsPrivateAccessPtrOutput
+	ToDomainAwsPrivateAccessPtrOutputWithContext(context.Context) DomainAwsPrivateAccessPtrOutput
 }
 
-type cdnDomainAwsPrivateAccessPtrType CdnDomainAwsPrivateAccessArgs
+type domainAwsPrivateAccessPtrType DomainAwsPrivateAccessArgs
 
-func CdnDomainAwsPrivateAccessPtr(v *CdnDomainAwsPrivateAccessArgs) CdnDomainAwsPrivateAccessPtrInput {
-	return (*cdnDomainAwsPrivateAccessPtrType)(v)
+func DomainAwsPrivateAccessPtr(v *DomainAwsPrivateAccessArgs) DomainAwsPrivateAccessPtrInput {
+	return (*domainAwsPrivateAccessPtrType)(v)
 }
 
-func (*cdnDomainAwsPrivateAccessPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAwsPrivateAccess)(nil)).Elem()
+func (*domainAwsPrivateAccessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAwsPrivateAccess)(nil)).Elem()
 }
 
-func (i *cdnDomainAwsPrivateAccessPtrType) ToCdnDomainAwsPrivateAccessPtrOutput() CdnDomainAwsPrivateAccessPtrOutput {
-	return i.ToCdnDomainAwsPrivateAccessPtrOutputWithContext(context.Background())
+func (i *domainAwsPrivateAccessPtrType) ToDomainAwsPrivateAccessPtrOutput() DomainAwsPrivateAccessPtrOutput {
+	return i.ToDomainAwsPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainAwsPrivateAccessPtrType) ToCdnDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainAwsPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainAwsPrivateAccessPtrOutput)
+func (i *domainAwsPrivateAccessPtrType) ToDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) DomainAwsPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAwsPrivateAccessPtrOutput)
 }
 
-type CdnDomainAwsPrivateAccessOutput struct{ *pulumi.OutputState }
+type DomainAwsPrivateAccessOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAwsPrivateAccessOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainAwsPrivateAccess)(nil)).Elem()
+func (DomainAwsPrivateAccessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAwsPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) ToCdnDomainAwsPrivateAccessOutput() CdnDomainAwsPrivateAccessOutput {
+func (o DomainAwsPrivateAccessOutput) ToDomainAwsPrivateAccessOutput() DomainAwsPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) ToCdnDomainAwsPrivateAccessOutputWithContext(ctx context.Context) CdnDomainAwsPrivateAccessOutput {
+func (o DomainAwsPrivateAccessOutput) ToDomainAwsPrivateAccessOutputWithContext(ctx context.Context) DomainAwsPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) ToCdnDomainAwsPrivateAccessPtrOutput() CdnDomainAwsPrivateAccessPtrOutput {
-	return o.ToCdnDomainAwsPrivateAccessPtrOutputWithContext(context.Background())
+func (o DomainAwsPrivateAccessOutput) ToDomainAwsPrivateAccessPtrOutput() DomainAwsPrivateAccessPtrOutput {
+	return o.ToDomainAwsPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) ToCdnDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainAwsPrivateAccessPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainAwsPrivateAccess) *CdnDomainAwsPrivateAccess {
+func (o DomainAwsPrivateAccessOutput) ToDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) DomainAwsPrivateAccessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainAwsPrivateAccess) *DomainAwsPrivateAccess {
 		return &v
-	}).(CdnDomainAwsPrivateAccessPtrOutput)
+	}).(DomainAwsPrivateAccessPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAwsPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
+// Access ID.
+func (o DomainAwsPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAwsPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) Bucket() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAwsPrivateAccess) *string { return v.Bucket }).(pulumi.StringPtrOutput)
+// Bucket.
+func (o DomainAwsPrivateAccessOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAwsPrivateAccess) *string { return v.Bucket }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) Region() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAwsPrivateAccess) *string { return v.Region }).(pulumi.StringPtrOutput)
+// Region.
+func (o DomainAwsPrivateAccessOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAwsPrivateAccess) *string { return v.Region }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainAwsPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+// Key.
+func (o DomainAwsPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAwsPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainAwsPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainAwsPrivateAccessOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAwsPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainAwsPrivateAccessPtrOutput struct{ *pulumi.OutputState }
+type DomainAwsPrivateAccessPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainAwsPrivateAccessPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainAwsPrivateAccess)(nil)).Elem()
+func (DomainAwsPrivateAccessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAwsPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) ToCdnDomainAwsPrivateAccessPtrOutput() CdnDomainAwsPrivateAccessPtrOutput {
+func (o DomainAwsPrivateAccessPtrOutput) ToDomainAwsPrivateAccessPtrOutput() DomainAwsPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) ToCdnDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainAwsPrivateAccessPtrOutput {
+func (o DomainAwsPrivateAccessPtrOutput) ToDomainAwsPrivateAccessPtrOutputWithContext(ctx context.Context) DomainAwsPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) Elem() CdnDomainAwsPrivateAccessOutput {
-	return o.ApplyT(func(v *CdnDomainAwsPrivateAccess) CdnDomainAwsPrivateAccess {
+func (o DomainAwsPrivateAccessPtrOutput) Elem() DomainAwsPrivateAccessOutput {
+	return o.ApplyT(func(v *DomainAwsPrivateAccess) DomainAwsPrivateAccess {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainAwsPrivateAccess
+		var ret DomainAwsPrivateAccess
 		return ret
-	}).(CdnDomainAwsPrivateAccessOutput)
+	}).(DomainAwsPrivateAccessOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAwsPrivateAccess) *string {
+// Access ID.
+func (o DomainAwsPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAwsPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -1192,8 +1324,9 @@ func (o CdnDomainAwsPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAwsPrivateAccess) *string {
+// Bucket.
+func (o DomainAwsPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAwsPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -1201,8 +1334,9 @@ func (o CdnDomainAwsPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) Region() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAwsPrivateAccess) *string {
+// Region.
+func (o DomainAwsPrivateAccessPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAwsPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -1210,8 +1344,9 @@ func (o CdnDomainAwsPrivateAccessPtrOutput) Region() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAwsPrivateAccess) *string {
+// Key.
+func (o DomainAwsPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAwsPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -1219,8 +1354,9 @@ func (o CdnDomainAwsPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainAwsPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainAwsPrivateAccess) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainAwsPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAwsPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -1228,180 +1364,202 @@ func (o CdnDomainAwsPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainBandWidthAlert struct {
-	AlertPercentage         *int                                  `pulumi:"alertPercentage"`
-	AlertSwitch             *string                               `pulumi:"alertSwitch"`
-	BpsThreshold            *int                                  `pulumi:"bpsThreshold"`
-	CounterMeasure          *string                               `pulumi:"counterMeasure"`
-	LastTriggerTime         *string                               `pulumi:"lastTriggerTime"`
-	LastTriggerTimeOverseas *string                               `pulumi:"lastTriggerTimeOverseas"`
-	Metric                  *string                               `pulumi:"metric"`
-	StatisticItem           *CdnDomainBandWidthAlertStatisticItem `pulumi:"statisticItem"`
-	Switch                  string                                `pulumi:"switch"`
+type DomainBandWidthAlert struct {
+	// Alert percentage.
+	AlertPercentage *int `pulumi:"alertPercentage"`
+	// Switch alert.
+	AlertSwitch *string `pulumi:"alertSwitch"`
+	// threshold of bps.
+	BpsThreshold *int `pulumi:"bpsThreshold"`
+	// Counter measure.
+	CounterMeasure          *string `pulumi:"counterMeasure"`
+	LastTriggerTime         *string `pulumi:"lastTriggerTime"`
+	LastTriggerTimeOverseas *string `pulumi:"lastTriggerTimeOverseas"`
+	// Metric.
+	Metric *string `pulumi:"metric"`
+	// Specify statistic item configuration.
+	StatisticItem *DomainBandWidthAlertStatisticItem `pulumi:"statisticItem"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainBandWidthAlertInput is an input type that accepts CdnDomainBandWidthAlertArgs and CdnDomainBandWidthAlertOutput values.
-// You can construct a concrete instance of `CdnDomainBandWidthAlertInput` via:
+// DomainBandWidthAlertInput is an input type that accepts DomainBandWidthAlertArgs and DomainBandWidthAlertOutput values.
+// You can construct a concrete instance of `DomainBandWidthAlertInput` via:
 //
-//          CdnDomainBandWidthAlertArgs{...}
-type CdnDomainBandWidthAlertInput interface {
+//          DomainBandWidthAlertArgs{...}
+type DomainBandWidthAlertInput interface {
 	pulumi.Input
 
-	ToCdnDomainBandWidthAlertOutput() CdnDomainBandWidthAlertOutput
-	ToCdnDomainBandWidthAlertOutputWithContext(context.Context) CdnDomainBandWidthAlertOutput
+	ToDomainBandWidthAlertOutput() DomainBandWidthAlertOutput
+	ToDomainBandWidthAlertOutputWithContext(context.Context) DomainBandWidthAlertOutput
 }
 
-type CdnDomainBandWidthAlertArgs struct {
-	AlertPercentage         pulumi.IntPtrInput                           `pulumi:"alertPercentage"`
-	AlertSwitch             pulumi.StringPtrInput                        `pulumi:"alertSwitch"`
-	BpsThreshold            pulumi.IntPtrInput                           `pulumi:"bpsThreshold"`
-	CounterMeasure          pulumi.StringPtrInput                        `pulumi:"counterMeasure"`
-	LastTriggerTime         pulumi.StringPtrInput                        `pulumi:"lastTriggerTime"`
-	LastTriggerTimeOverseas pulumi.StringPtrInput                        `pulumi:"lastTriggerTimeOverseas"`
-	Metric                  pulumi.StringPtrInput                        `pulumi:"metric"`
-	StatisticItem           CdnDomainBandWidthAlertStatisticItemPtrInput `pulumi:"statisticItem"`
-	Switch                  pulumi.StringInput                           `pulumi:"switch"`
+type DomainBandWidthAlertArgs struct {
+	// Alert percentage.
+	AlertPercentage pulumi.IntPtrInput `pulumi:"alertPercentage"`
+	// Switch alert.
+	AlertSwitch pulumi.StringPtrInput `pulumi:"alertSwitch"`
+	// threshold of bps.
+	BpsThreshold pulumi.IntPtrInput `pulumi:"bpsThreshold"`
+	// Counter measure.
+	CounterMeasure          pulumi.StringPtrInput `pulumi:"counterMeasure"`
+	LastTriggerTime         pulumi.StringPtrInput `pulumi:"lastTriggerTime"`
+	LastTriggerTimeOverseas pulumi.StringPtrInput `pulumi:"lastTriggerTimeOverseas"`
+	// Metric.
+	Metric pulumi.StringPtrInput `pulumi:"metric"`
+	// Specify statistic item configuration.
+	StatisticItem DomainBandWidthAlertStatisticItemPtrInput `pulumi:"statisticItem"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainBandWidthAlertArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainBandWidthAlert)(nil)).Elem()
+func (DomainBandWidthAlertArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainBandWidthAlert)(nil)).Elem()
 }
 
-func (i CdnDomainBandWidthAlertArgs) ToCdnDomainBandWidthAlertOutput() CdnDomainBandWidthAlertOutput {
-	return i.ToCdnDomainBandWidthAlertOutputWithContext(context.Background())
+func (i DomainBandWidthAlertArgs) ToDomainBandWidthAlertOutput() DomainBandWidthAlertOutput {
+	return i.ToDomainBandWidthAlertOutputWithContext(context.Background())
 }
 
-func (i CdnDomainBandWidthAlertArgs) ToCdnDomainBandWidthAlertOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainBandWidthAlertOutput)
+func (i DomainBandWidthAlertArgs) ToDomainBandWidthAlertOutputWithContext(ctx context.Context) DomainBandWidthAlertOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainBandWidthAlertOutput)
 }
 
-func (i CdnDomainBandWidthAlertArgs) ToCdnDomainBandWidthAlertPtrOutput() CdnDomainBandWidthAlertPtrOutput {
-	return i.ToCdnDomainBandWidthAlertPtrOutputWithContext(context.Background())
+func (i DomainBandWidthAlertArgs) ToDomainBandWidthAlertPtrOutput() DomainBandWidthAlertPtrOutput {
+	return i.ToDomainBandWidthAlertPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainBandWidthAlertArgs) ToCdnDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainBandWidthAlertOutput).ToCdnDomainBandWidthAlertPtrOutputWithContext(ctx)
+func (i DomainBandWidthAlertArgs) ToDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainBandWidthAlertOutput).ToDomainBandWidthAlertPtrOutputWithContext(ctx)
 }
 
-// CdnDomainBandWidthAlertPtrInput is an input type that accepts CdnDomainBandWidthAlertArgs, CdnDomainBandWidthAlertPtr and CdnDomainBandWidthAlertPtrOutput values.
-// You can construct a concrete instance of `CdnDomainBandWidthAlertPtrInput` via:
+// DomainBandWidthAlertPtrInput is an input type that accepts DomainBandWidthAlertArgs, DomainBandWidthAlertPtr and DomainBandWidthAlertPtrOutput values.
+// You can construct a concrete instance of `DomainBandWidthAlertPtrInput` via:
 //
-//          CdnDomainBandWidthAlertArgs{...}
+//          DomainBandWidthAlertArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainBandWidthAlertPtrInput interface {
+type DomainBandWidthAlertPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainBandWidthAlertPtrOutput() CdnDomainBandWidthAlertPtrOutput
-	ToCdnDomainBandWidthAlertPtrOutputWithContext(context.Context) CdnDomainBandWidthAlertPtrOutput
+	ToDomainBandWidthAlertPtrOutput() DomainBandWidthAlertPtrOutput
+	ToDomainBandWidthAlertPtrOutputWithContext(context.Context) DomainBandWidthAlertPtrOutput
 }
 
-type cdnDomainBandWidthAlertPtrType CdnDomainBandWidthAlertArgs
+type domainBandWidthAlertPtrType DomainBandWidthAlertArgs
 
-func CdnDomainBandWidthAlertPtr(v *CdnDomainBandWidthAlertArgs) CdnDomainBandWidthAlertPtrInput {
-	return (*cdnDomainBandWidthAlertPtrType)(v)
+func DomainBandWidthAlertPtr(v *DomainBandWidthAlertArgs) DomainBandWidthAlertPtrInput {
+	return (*domainBandWidthAlertPtrType)(v)
 }
 
-func (*cdnDomainBandWidthAlertPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainBandWidthAlert)(nil)).Elem()
+func (*domainBandWidthAlertPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainBandWidthAlert)(nil)).Elem()
 }
 
-func (i *cdnDomainBandWidthAlertPtrType) ToCdnDomainBandWidthAlertPtrOutput() CdnDomainBandWidthAlertPtrOutput {
-	return i.ToCdnDomainBandWidthAlertPtrOutputWithContext(context.Background())
+func (i *domainBandWidthAlertPtrType) ToDomainBandWidthAlertPtrOutput() DomainBandWidthAlertPtrOutput {
+	return i.ToDomainBandWidthAlertPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainBandWidthAlertPtrType) ToCdnDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainBandWidthAlertPtrOutput)
+func (i *domainBandWidthAlertPtrType) ToDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainBandWidthAlertPtrOutput)
 }
 
-type CdnDomainBandWidthAlertOutput struct{ *pulumi.OutputState }
+type DomainBandWidthAlertOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainBandWidthAlertOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainBandWidthAlert)(nil)).Elem()
+func (DomainBandWidthAlertOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainBandWidthAlert)(nil)).Elem()
 }
 
-func (o CdnDomainBandWidthAlertOutput) ToCdnDomainBandWidthAlertOutput() CdnDomainBandWidthAlertOutput {
+func (o DomainBandWidthAlertOutput) ToDomainBandWidthAlertOutput() DomainBandWidthAlertOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertOutput) ToCdnDomainBandWidthAlertOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertOutput {
+func (o DomainBandWidthAlertOutput) ToDomainBandWidthAlertOutputWithContext(ctx context.Context) DomainBandWidthAlertOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertOutput) ToCdnDomainBandWidthAlertPtrOutput() CdnDomainBandWidthAlertPtrOutput {
-	return o.ToCdnDomainBandWidthAlertPtrOutputWithContext(context.Background())
+func (o DomainBandWidthAlertOutput) ToDomainBandWidthAlertPtrOutput() DomainBandWidthAlertPtrOutput {
+	return o.ToDomainBandWidthAlertPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainBandWidthAlertOutput) ToCdnDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainBandWidthAlert) *CdnDomainBandWidthAlert {
+func (o DomainBandWidthAlertOutput) ToDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainBandWidthAlert) *DomainBandWidthAlert {
 		return &v
-	}).(CdnDomainBandWidthAlertPtrOutput)
+	}).(DomainBandWidthAlertPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) AlertPercentage() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *int { return v.AlertPercentage }).(pulumi.IntPtrOutput)
+// Alert percentage.
+func (o DomainBandWidthAlertOutput) AlertPercentage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *int { return v.AlertPercentage }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) AlertSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *string { return v.AlertSwitch }).(pulumi.StringPtrOutput)
+// Switch alert.
+func (o DomainBandWidthAlertOutput) AlertSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *string { return v.AlertSwitch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) BpsThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *int { return v.BpsThreshold }).(pulumi.IntPtrOutput)
+// threshold of bps.
+func (o DomainBandWidthAlertOutput) BpsThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *int { return v.BpsThreshold }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) CounterMeasure() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *string { return v.CounterMeasure }).(pulumi.StringPtrOutput)
+// Counter measure.
+func (o DomainBandWidthAlertOutput) CounterMeasure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *string { return v.CounterMeasure }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) LastTriggerTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *string { return v.LastTriggerTime }).(pulumi.StringPtrOutput)
+func (o DomainBandWidthAlertOutput) LastTriggerTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *string { return v.LastTriggerTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) LastTriggerTimeOverseas() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *string { return v.LastTriggerTimeOverseas }).(pulumi.StringPtrOutput)
+func (o DomainBandWidthAlertOutput) LastTriggerTimeOverseas() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *string { return v.LastTriggerTimeOverseas }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) Metric() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *string { return v.Metric }).(pulumi.StringPtrOutput)
+// Metric.
+func (o DomainBandWidthAlertOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *string { return v.Metric }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) StatisticItem() CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) *CdnDomainBandWidthAlertStatisticItem { return v.StatisticItem }).(CdnDomainBandWidthAlertStatisticItemPtrOutput)
+// Specify statistic item configuration.
+func (o DomainBandWidthAlertOutput) StatisticItem() DomainBandWidthAlertStatisticItemPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) *DomainBandWidthAlertStatisticItem { return v.StatisticItem }).(DomainBandWidthAlertStatisticItemPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlert) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainBandWidthAlertOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainBandWidthAlert) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainBandWidthAlertPtrOutput struct{ *pulumi.OutputState }
+type DomainBandWidthAlertPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainBandWidthAlertPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainBandWidthAlert)(nil)).Elem()
+func (DomainBandWidthAlertPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainBandWidthAlert)(nil)).Elem()
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) ToCdnDomainBandWidthAlertPtrOutput() CdnDomainBandWidthAlertPtrOutput {
+func (o DomainBandWidthAlertPtrOutput) ToDomainBandWidthAlertPtrOutput() DomainBandWidthAlertPtrOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) ToCdnDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertPtrOutput {
+func (o DomainBandWidthAlertPtrOutput) ToDomainBandWidthAlertPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertPtrOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) Elem() CdnDomainBandWidthAlertOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) CdnDomainBandWidthAlert {
+func (o DomainBandWidthAlertPtrOutput) Elem() DomainBandWidthAlertOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) DomainBandWidthAlert {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainBandWidthAlert
+		var ret DomainBandWidthAlert
 		return ret
-	}).(CdnDomainBandWidthAlertOutput)
+	}).(DomainBandWidthAlertOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) AlertPercentage() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *int {
+// Alert percentage.
+func (o DomainBandWidthAlertPtrOutput) AlertPercentage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *int {
 		if v == nil {
 			return nil
 		}
@@ -1409,8 +1567,9 @@ func (o CdnDomainBandWidthAlertPtrOutput) AlertPercentage() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) AlertSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *string {
+// Switch alert.
+func (o DomainBandWidthAlertPtrOutput) AlertSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *string {
 		if v == nil {
 			return nil
 		}
@@ -1418,8 +1577,9 @@ func (o CdnDomainBandWidthAlertPtrOutput) AlertSwitch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) BpsThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *int {
+// threshold of bps.
+func (o DomainBandWidthAlertPtrOutput) BpsThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *int {
 		if v == nil {
 			return nil
 		}
@@ -1427,8 +1587,9 @@ func (o CdnDomainBandWidthAlertPtrOutput) BpsThreshold() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) CounterMeasure() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *string {
+// Counter measure.
+func (o DomainBandWidthAlertPtrOutput) CounterMeasure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *string {
 		if v == nil {
 			return nil
 		}
@@ -1436,8 +1597,8 @@ func (o CdnDomainBandWidthAlertPtrOutput) CounterMeasure() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) LastTriggerTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *string {
+func (o DomainBandWidthAlertPtrOutput) LastTriggerTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *string {
 		if v == nil {
 			return nil
 		}
@@ -1445,8 +1606,8 @@ func (o CdnDomainBandWidthAlertPtrOutput) LastTriggerTime() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) LastTriggerTimeOverseas() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *string {
+func (o DomainBandWidthAlertPtrOutput) LastTriggerTimeOverseas() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *string {
 		if v == nil {
 			return nil
 		}
@@ -1454,8 +1615,9 @@ func (o CdnDomainBandWidthAlertPtrOutput) LastTriggerTimeOverseas() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) Metric() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *string {
+// Metric.
+func (o DomainBandWidthAlertPtrOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *string {
 		if v == nil {
 			return nil
 		}
@@ -1463,17 +1625,19 @@ func (o CdnDomainBandWidthAlertPtrOutput) Metric() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) StatisticItem() CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *CdnDomainBandWidthAlertStatisticItem {
+// Specify statistic item configuration.
+func (o DomainBandWidthAlertPtrOutput) StatisticItem() DomainBandWidthAlertStatisticItemPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *DomainBandWidthAlertStatisticItem {
 		if v == nil {
 			return nil
 		}
 		return v.StatisticItem
-	}).(CdnDomainBandWidthAlertStatisticItemPtrOutput)
+	}).(DomainBandWidthAlertStatisticItemPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlert) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainBandWidthAlertPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlert) *string {
 		if v == nil {
 			return nil
 		}
@@ -1481,180 +1645,208 @@ func (o CdnDomainBandWidthAlertPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainBandWidthAlertStatisticItem struct {
-	AlertPercentage *int    `pulumi:"alertPercentage"`
-	AlertSwitch     *string `pulumi:"alertSwitch"`
-	BpsThreshold    *int    `pulumi:"bpsThreshold"`
-	CounterMeasure  *string `pulumi:"counterMeasure"`
-	Cycle           *int    `pulumi:"cycle"`
-	Metric          *string `pulumi:"metric"`
-	Switch          string  `pulumi:"switch"`
-	Type            *string `pulumi:"type"`
-	UnblockTime     *int    `pulumi:"unblockTime"`
+type DomainBandWidthAlertStatisticItem struct {
+	// Alert percentage.
+	AlertPercentage *int `pulumi:"alertPercentage"`
+	// Switch alert.
+	AlertSwitch *string `pulumi:"alertSwitch"`
+	// threshold of bps.
+	BpsThreshold *int `pulumi:"bpsThreshold"`
+	// Counter measure, values: `RETURN_404`, `RESOLVE_DNS_TO_ORIGIN`.
+	CounterMeasure *string `pulumi:"counterMeasure"`
+	// Cycle of checking in minutes, values `60`, `1440`.
+	Cycle *int `pulumi:"cycle"`
+	// Metric.
+	Metric *string `pulumi:"metric"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
+	// Type of statistic item.
+	Type *string `pulumi:"type"`
+	// Time of auto unblock.
+	UnblockTime *int `pulumi:"unblockTime"`
 }
 
-// CdnDomainBandWidthAlertStatisticItemInput is an input type that accepts CdnDomainBandWidthAlertStatisticItemArgs and CdnDomainBandWidthAlertStatisticItemOutput values.
-// You can construct a concrete instance of `CdnDomainBandWidthAlertStatisticItemInput` via:
+// DomainBandWidthAlertStatisticItemInput is an input type that accepts DomainBandWidthAlertStatisticItemArgs and DomainBandWidthAlertStatisticItemOutput values.
+// You can construct a concrete instance of `DomainBandWidthAlertStatisticItemInput` via:
 //
-//          CdnDomainBandWidthAlertStatisticItemArgs{...}
-type CdnDomainBandWidthAlertStatisticItemInput interface {
+//          DomainBandWidthAlertStatisticItemArgs{...}
+type DomainBandWidthAlertStatisticItemInput interface {
 	pulumi.Input
 
-	ToCdnDomainBandWidthAlertStatisticItemOutput() CdnDomainBandWidthAlertStatisticItemOutput
-	ToCdnDomainBandWidthAlertStatisticItemOutputWithContext(context.Context) CdnDomainBandWidthAlertStatisticItemOutput
+	ToDomainBandWidthAlertStatisticItemOutput() DomainBandWidthAlertStatisticItemOutput
+	ToDomainBandWidthAlertStatisticItemOutputWithContext(context.Context) DomainBandWidthAlertStatisticItemOutput
 }
 
-type CdnDomainBandWidthAlertStatisticItemArgs struct {
-	AlertPercentage pulumi.IntPtrInput    `pulumi:"alertPercentage"`
-	AlertSwitch     pulumi.StringPtrInput `pulumi:"alertSwitch"`
-	BpsThreshold    pulumi.IntPtrInput    `pulumi:"bpsThreshold"`
-	CounterMeasure  pulumi.StringPtrInput `pulumi:"counterMeasure"`
-	Cycle           pulumi.IntPtrInput    `pulumi:"cycle"`
-	Metric          pulumi.StringPtrInput `pulumi:"metric"`
-	Switch          pulumi.StringInput    `pulumi:"switch"`
-	Type            pulumi.StringPtrInput `pulumi:"type"`
-	UnblockTime     pulumi.IntPtrInput    `pulumi:"unblockTime"`
+type DomainBandWidthAlertStatisticItemArgs struct {
+	// Alert percentage.
+	AlertPercentage pulumi.IntPtrInput `pulumi:"alertPercentage"`
+	// Switch alert.
+	AlertSwitch pulumi.StringPtrInput `pulumi:"alertSwitch"`
+	// threshold of bps.
+	BpsThreshold pulumi.IntPtrInput `pulumi:"bpsThreshold"`
+	// Counter measure, values: `RETURN_404`, `RESOLVE_DNS_TO_ORIGIN`.
+	CounterMeasure pulumi.StringPtrInput `pulumi:"counterMeasure"`
+	// Cycle of checking in minutes, values `60`, `1440`.
+	Cycle pulumi.IntPtrInput `pulumi:"cycle"`
+	// Metric.
+	Metric pulumi.StringPtrInput `pulumi:"metric"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
+	// Type of statistic item.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Time of auto unblock.
+	UnblockTime pulumi.IntPtrInput `pulumi:"unblockTime"`
 }
 
-func (CdnDomainBandWidthAlertStatisticItemArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainBandWidthAlertStatisticItem)(nil)).Elem()
+func (DomainBandWidthAlertStatisticItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainBandWidthAlertStatisticItem)(nil)).Elem()
 }
 
-func (i CdnDomainBandWidthAlertStatisticItemArgs) ToCdnDomainBandWidthAlertStatisticItemOutput() CdnDomainBandWidthAlertStatisticItemOutput {
-	return i.ToCdnDomainBandWidthAlertStatisticItemOutputWithContext(context.Background())
+func (i DomainBandWidthAlertStatisticItemArgs) ToDomainBandWidthAlertStatisticItemOutput() DomainBandWidthAlertStatisticItemOutput {
+	return i.ToDomainBandWidthAlertStatisticItemOutputWithContext(context.Background())
 }
 
-func (i CdnDomainBandWidthAlertStatisticItemArgs) ToCdnDomainBandWidthAlertStatisticItemOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertStatisticItemOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainBandWidthAlertStatisticItemOutput)
+func (i DomainBandWidthAlertStatisticItemArgs) ToDomainBandWidthAlertStatisticItemOutputWithContext(ctx context.Context) DomainBandWidthAlertStatisticItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainBandWidthAlertStatisticItemOutput)
 }
 
-func (i CdnDomainBandWidthAlertStatisticItemArgs) ToCdnDomainBandWidthAlertStatisticItemPtrOutput() CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return i.ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Background())
+func (i DomainBandWidthAlertStatisticItemArgs) ToDomainBandWidthAlertStatisticItemPtrOutput() DomainBandWidthAlertStatisticItemPtrOutput {
+	return i.ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainBandWidthAlertStatisticItemArgs) ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainBandWidthAlertStatisticItemOutput).ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx)
+func (i DomainBandWidthAlertStatisticItemArgs) ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertStatisticItemPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainBandWidthAlertStatisticItemOutput).ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx)
 }
 
-// CdnDomainBandWidthAlertStatisticItemPtrInput is an input type that accepts CdnDomainBandWidthAlertStatisticItemArgs, CdnDomainBandWidthAlertStatisticItemPtr and CdnDomainBandWidthAlertStatisticItemPtrOutput values.
-// You can construct a concrete instance of `CdnDomainBandWidthAlertStatisticItemPtrInput` via:
+// DomainBandWidthAlertStatisticItemPtrInput is an input type that accepts DomainBandWidthAlertStatisticItemArgs, DomainBandWidthAlertStatisticItemPtr and DomainBandWidthAlertStatisticItemPtrOutput values.
+// You can construct a concrete instance of `DomainBandWidthAlertStatisticItemPtrInput` via:
 //
-//          CdnDomainBandWidthAlertStatisticItemArgs{...}
+//          DomainBandWidthAlertStatisticItemArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainBandWidthAlertStatisticItemPtrInput interface {
+type DomainBandWidthAlertStatisticItemPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainBandWidthAlertStatisticItemPtrOutput() CdnDomainBandWidthAlertStatisticItemPtrOutput
-	ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Context) CdnDomainBandWidthAlertStatisticItemPtrOutput
+	ToDomainBandWidthAlertStatisticItemPtrOutput() DomainBandWidthAlertStatisticItemPtrOutput
+	ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Context) DomainBandWidthAlertStatisticItemPtrOutput
 }
 
-type cdnDomainBandWidthAlertStatisticItemPtrType CdnDomainBandWidthAlertStatisticItemArgs
+type domainBandWidthAlertStatisticItemPtrType DomainBandWidthAlertStatisticItemArgs
 
-func CdnDomainBandWidthAlertStatisticItemPtr(v *CdnDomainBandWidthAlertStatisticItemArgs) CdnDomainBandWidthAlertStatisticItemPtrInput {
-	return (*cdnDomainBandWidthAlertStatisticItemPtrType)(v)
+func DomainBandWidthAlertStatisticItemPtr(v *DomainBandWidthAlertStatisticItemArgs) DomainBandWidthAlertStatisticItemPtrInput {
+	return (*domainBandWidthAlertStatisticItemPtrType)(v)
 }
 
-func (*cdnDomainBandWidthAlertStatisticItemPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainBandWidthAlertStatisticItem)(nil)).Elem()
+func (*domainBandWidthAlertStatisticItemPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainBandWidthAlertStatisticItem)(nil)).Elem()
 }
 
-func (i *cdnDomainBandWidthAlertStatisticItemPtrType) ToCdnDomainBandWidthAlertStatisticItemPtrOutput() CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return i.ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Background())
+func (i *domainBandWidthAlertStatisticItemPtrType) ToDomainBandWidthAlertStatisticItemPtrOutput() DomainBandWidthAlertStatisticItemPtrOutput {
+	return i.ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainBandWidthAlertStatisticItemPtrType) ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainBandWidthAlertStatisticItemPtrOutput)
+func (i *domainBandWidthAlertStatisticItemPtrType) ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertStatisticItemPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainBandWidthAlertStatisticItemPtrOutput)
 }
 
-type CdnDomainBandWidthAlertStatisticItemOutput struct{ *pulumi.OutputState }
+type DomainBandWidthAlertStatisticItemOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainBandWidthAlertStatisticItemOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainBandWidthAlertStatisticItem)(nil)).Elem()
+func (DomainBandWidthAlertStatisticItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainBandWidthAlertStatisticItem)(nil)).Elem()
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) ToCdnDomainBandWidthAlertStatisticItemOutput() CdnDomainBandWidthAlertStatisticItemOutput {
+func (o DomainBandWidthAlertStatisticItemOutput) ToDomainBandWidthAlertStatisticItemOutput() DomainBandWidthAlertStatisticItemOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) ToCdnDomainBandWidthAlertStatisticItemOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertStatisticItemOutput {
+func (o DomainBandWidthAlertStatisticItemOutput) ToDomainBandWidthAlertStatisticItemOutputWithContext(ctx context.Context) DomainBandWidthAlertStatisticItemOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) ToCdnDomainBandWidthAlertStatisticItemPtrOutput() CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return o.ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Background())
+func (o DomainBandWidthAlertStatisticItemOutput) ToDomainBandWidthAlertStatisticItemPtrOutput() DomainBandWidthAlertStatisticItemPtrOutput {
+	return o.ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertStatisticItemPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainBandWidthAlertStatisticItem) *CdnDomainBandWidthAlertStatisticItem {
+func (o DomainBandWidthAlertStatisticItemOutput) ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertStatisticItemPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainBandWidthAlertStatisticItem) *DomainBandWidthAlertStatisticItem {
 		return &v
-	}).(CdnDomainBandWidthAlertStatisticItemPtrOutput)
+	}).(DomainBandWidthAlertStatisticItemPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) AlertPercentage() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *int { return v.AlertPercentage }).(pulumi.IntPtrOutput)
+// Alert percentage.
+func (o DomainBandWidthAlertStatisticItemOutput) AlertPercentage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *int { return v.AlertPercentage }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) AlertSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *string { return v.AlertSwitch }).(pulumi.StringPtrOutput)
+// Switch alert.
+func (o DomainBandWidthAlertStatisticItemOutput) AlertSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *string { return v.AlertSwitch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) BpsThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *int { return v.BpsThreshold }).(pulumi.IntPtrOutput)
+// threshold of bps.
+func (o DomainBandWidthAlertStatisticItemOutput) BpsThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *int { return v.BpsThreshold }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) CounterMeasure() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *string { return v.CounterMeasure }).(pulumi.StringPtrOutput)
+// Counter measure, values: `RETURN_404`, `RESOLVE_DNS_TO_ORIGIN`.
+func (o DomainBandWidthAlertStatisticItemOutput) CounterMeasure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *string { return v.CounterMeasure }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) Cycle() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *int { return v.Cycle }).(pulumi.IntPtrOutput)
+// Cycle of checking in minutes, values `60`, `1440`.
+func (o DomainBandWidthAlertStatisticItemOutput) Cycle() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *int { return v.Cycle }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) Metric() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *string { return v.Metric }).(pulumi.StringPtrOutput)
+// Metric.
+func (o DomainBandWidthAlertStatisticItemOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *string { return v.Metric }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainBandWidthAlertStatisticItemOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *string { return v.Type }).(pulumi.StringPtrOutput)
+// Type of statistic item.
+func (o DomainBandWidthAlertStatisticItemOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemOutput) UnblockTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainBandWidthAlertStatisticItem) *int { return v.UnblockTime }).(pulumi.IntPtrOutput)
+// Time of auto unblock.
+func (o DomainBandWidthAlertStatisticItemOutput) UnblockTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainBandWidthAlertStatisticItem) *int { return v.UnblockTime }).(pulumi.IntPtrOutput)
 }
 
-type CdnDomainBandWidthAlertStatisticItemPtrOutput struct{ *pulumi.OutputState }
+type DomainBandWidthAlertStatisticItemPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainBandWidthAlertStatisticItemPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainBandWidthAlertStatisticItem)(nil)).Elem()
+func (DomainBandWidthAlertStatisticItemPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainBandWidthAlertStatisticItem)(nil)).Elem()
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) ToCdnDomainBandWidthAlertStatisticItemPtrOutput() CdnDomainBandWidthAlertStatisticItemPtrOutput {
+func (o DomainBandWidthAlertStatisticItemPtrOutput) ToDomainBandWidthAlertStatisticItemPtrOutput() DomainBandWidthAlertStatisticItemPtrOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) ToCdnDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) CdnDomainBandWidthAlertStatisticItemPtrOutput {
+func (o DomainBandWidthAlertStatisticItemPtrOutput) ToDomainBandWidthAlertStatisticItemPtrOutputWithContext(ctx context.Context) DomainBandWidthAlertStatisticItemPtrOutput {
 	return o
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Elem() CdnDomainBandWidthAlertStatisticItemOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) CdnDomainBandWidthAlertStatisticItem {
+func (o DomainBandWidthAlertStatisticItemPtrOutput) Elem() DomainBandWidthAlertStatisticItemOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) DomainBandWidthAlertStatisticItem {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainBandWidthAlertStatisticItem
+		var ret DomainBandWidthAlertStatisticItem
 		return ret
-	}).(CdnDomainBandWidthAlertStatisticItemOutput)
+	}).(DomainBandWidthAlertStatisticItemOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) AlertPercentage() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *int {
+// Alert percentage.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) AlertPercentage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *int {
 		if v == nil {
 			return nil
 		}
@@ -1662,8 +1854,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) AlertPercentage() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) AlertSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *string {
+// Switch alert.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) AlertSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *string {
 		if v == nil {
 			return nil
 		}
@@ -1671,8 +1864,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) AlertSwitch() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) BpsThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *int {
+// threshold of bps.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) BpsThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *int {
 		if v == nil {
 			return nil
 		}
@@ -1680,8 +1874,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) BpsThreshold() pulumi.Int
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) CounterMeasure() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *string {
+// Counter measure, values: `RETURN_404`, `RESOLVE_DNS_TO_ORIGIN`.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) CounterMeasure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *string {
 		if v == nil {
 			return nil
 		}
@@ -1689,8 +1884,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) CounterMeasure() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Cycle() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *int {
+// Cycle of checking in minutes, values `60`, `1440`.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) Cycle() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *int {
 		if v == nil {
 			return nil
 		}
@@ -1698,8 +1894,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Cycle() pulumi.IntPtrOutp
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Metric() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *string {
+// Metric.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *string {
 		if v == nil {
 			return nil
 		}
@@ -1707,8 +1904,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Metric() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainBandWidthAlertStatisticItemPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *string {
 		if v == nil {
 			return nil
 		}
@@ -1716,8 +1914,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Switch() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *string {
+// Type of statistic item.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *string {
 		if v == nil {
 			return nil
 		}
@@ -1725,8 +1924,9 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) Type() pulumi.StringPtrOu
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) UnblockTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainBandWidthAlertStatisticItem) *int {
+// Time of auto unblock.
+func (o DomainBandWidthAlertStatisticItemPtrOutput) UnblockTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainBandWidthAlertStatisticItem) *int {
 		if v == nil {
 			return nil
 		}
@@ -1734,147 +1934,155 @@ func (o CdnDomainBandWidthAlertStatisticItemPtrOutput) UnblockTime() pulumi.IntP
 	}).(pulumi.IntPtrOutput)
 }
 
-type CdnDomainCompression struct {
-	CompressionRules []CdnDomainCompressionCompressionRule `pulumi:"compressionRules"`
-	Switch           string                                `pulumi:"switch"`
+type DomainCompression struct {
+	// List of compression rules.
+	CompressionRules []DomainCompressionCompressionRule `pulumi:"compressionRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainCompressionInput is an input type that accepts CdnDomainCompressionArgs and CdnDomainCompressionOutput values.
-// You can construct a concrete instance of `CdnDomainCompressionInput` via:
+// DomainCompressionInput is an input type that accepts DomainCompressionArgs and DomainCompressionOutput values.
+// You can construct a concrete instance of `DomainCompressionInput` via:
 //
-//          CdnDomainCompressionArgs{...}
-type CdnDomainCompressionInput interface {
+//          DomainCompressionArgs{...}
+type DomainCompressionInput interface {
 	pulumi.Input
 
-	ToCdnDomainCompressionOutput() CdnDomainCompressionOutput
-	ToCdnDomainCompressionOutputWithContext(context.Context) CdnDomainCompressionOutput
+	ToDomainCompressionOutput() DomainCompressionOutput
+	ToDomainCompressionOutputWithContext(context.Context) DomainCompressionOutput
 }
 
-type CdnDomainCompressionArgs struct {
-	CompressionRules CdnDomainCompressionCompressionRuleArrayInput `pulumi:"compressionRules"`
-	Switch           pulumi.StringInput                            `pulumi:"switch"`
+type DomainCompressionArgs struct {
+	// List of compression rules.
+	CompressionRules DomainCompressionCompressionRuleArrayInput `pulumi:"compressionRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainCompressionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainCompression)(nil)).Elem()
+func (DomainCompressionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainCompression)(nil)).Elem()
 }
 
-func (i CdnDomainCompressionArgs) ToCdnDomainCompressionOutput() CdnDomainCompressionOutput {
-	return i.ToCdnDomainCompressionOutputWithContext(context.Background())
+func (i DomainCompressionArgs) ToDomainCompressionOutput() DomainCompressionOutput {
+	return i.ToDomainCompressionOutputWithContext(context.Background())
 }
 
-func (i CdnDomainCompressionArgs) ToCdnDomainCompressionOutputWithContext(ctx context.Context) CdnDomainCompressionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainCompressionOutput)
+func (i DomainCompressionArgs) ToDomainCompressionOutputWithContext(ctx context.Context) DomainCompressionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainCompressionOutput)
 }
 
-func (i CdnDomainCompressionArgs) ToCdnDomainCompressionPtrOutput() CdnDomainCompressionPtrOutput {
-	return i.ToCdnDomainCompressionPtrOutputWithContext(context.Background())
+func (i DomainCompressionArgs) ToDomainCompressionPtrOutput() DomainCompressionPtrOutput {
+	return i.ToDomainCompressionPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainCompressionArgs) ToCdnDomainCompressionPtrOutputWithContext(ctx context.Context) CdnDomainCompressionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainCompressionOutput).ToCdnDomainCompressionPtrOutputWithContext(ctx)
+func (i DomainCompressionArgs) ToDomainCompressionPtrOutputWithContext(ctx context.Context) DomainCompressionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainCompressionOutput).ToDomainCompressionPtrOutputWithContext(ctx)
 }
 
-// CdnDomainCompressionPtrInput is an input type that accepts CdnDomainCompressionArgs, CdnDomainCompressionPtr and CdnDomainCompressionPtrOutput values.
-// You can construct a concrete instance of `CdnDomainCompressionPtrInput` via:
+// DomainCompressionPtrInput is an input type that accepts DomainCompressionArgs, DomainCompressionPtr and DomainCompressionPtrOutput values.
+// You can construct a concrete instance of `DomainCompressionPtrInput` via:
 //
-//          CdnDomainCompressionArgs{...}
+//          DomainCompressionArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainCompressionPtrInput interface {
+type DomainCompressionPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainCompressionPtrOutput() CdnDomainCompressionPtrOutput
-	ToCdnDomainCompressionPtrOutputWithContext(context.Context) CdnDomainCompressionPtrOutput
+	ToDomainCompressionPtrOutput() DomainCompressionPtrOutput
+	ToDomainCompressionPtrOutputWithContext(context.Context) DomainCompressionPtrOutput
 }
 
-type cdnDomainCompressionPtrType CdnDomainCompressionArgs
+type domainCompressionPtrType DomainCompressionArgs
 
-func CdnDomainCompressionPtr(v *CdnDomainCompressionArgs) CdnDomainCompressionPtrInput {
-	return (*cdnDomainCompressionPtrType)(v)
+func DomainCompressionPtr(v *DomainCompressionArgs) DomainCompressionPtrInput {
+	return (*domainCompressionPtrType)(v)
 }
 
-func (*cdnDomainCompressionPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainCompression)(nil)).Elem()
+func (*domainCompressionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainCompression)(nil)).Elem()
 }
 
-func (i *cdnDomainCompressionPtrType) ToCdnDomainCompressionPtrOutput() CdnDomainCompressionPtrOutput {
-	return i.ToCdnDomainCompressionPtrOutputWithContext(context.Background())
+func (i *domainCompressionPtrType) ToDomainCompressionPtrOutput() DomainCompressionPtrOutput {
+	return i.ToDomainCompressionPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainCompressionPtrType) ToCdnDomainCompressionPtrOutputWithContext(ctx context.Context) CdnDomainCompressionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainCompressionPtrOutput)
+func (i *domainCompressionPtrType) ToDomainCompressionPtrOutputWithContext(ctx context.Context) DomainCompressionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainCompressionPtrOutput)
 }
 
-type CdnDomainCompressionOutput struct{ *pulumi.OutputState }
+type DomainCompressionOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainCompressionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainCompression)(nil)).Elem()
+func (DomainCompressionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainCompression)(nil)).Elem()
 }
 
-func (o CdnDomainCompressionOutput) ToCdnDomainCompressionOutput() CdnDomainCompressionOutput {
+func (o DomainCompressionOutput) ToDomainCompressionOutput() DomainCompressionOutput {
 	return o
 }
 
-func (o CdnDomainCompressionOutput) ToCdnDomainCompressionOutputWithContext(ctx context.Context) CdnDomainCompressionOutput {
+func (o DomainCompressionOutput) ToDomainCompressionOutputWithContext(ctx context.Context) DomainCompressionOutput {
 	return o
 }
 
-func (o CdnDomainCompressionOutput) ToCdnDomainCompressionPtrOutput() CdnDomainCompressionPtrOutput {
-	return o.ToCdnDomainCompressionPtrOutputWithContext(context.Background())
+func (o DomainCompressionOutput) ToDomainCompressionPtrOutput() DomainCompressionPtrOutput {
+	return o.ToDomainCompressionPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainCompressionOutput) ToCdnDomainCompressionPtrOutputWithContext(ctx context.Context) CdnDomainCompressionPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainCompression) *CdnDomainCompression {
+func (o DomainCompressionOutput) ToDomainCompressionPtrOutputWithContext(ctx context.Context) DomainCompressionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainCompression) *DomainCompression {
 		return &v
-	}).(CdnDomainCompressionPtrOutput)
+	}).(DomainCompressionPtrOutput)
 }
 
-func (o CdnDomainCompressionOutput) CompressionRules() CdnDomainCompressionCompressionRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainCompression) []CdnDomainCompressionCompressionRule { return v.CompressionRules }).(CdnDomainCompressionCompressionRuleArrayOutput)
+// List of compression rules.
+func (o DomainCompressionOutput) CompressionRules() DomainCompressionCompressionRuleArrayOutput {
+	return o.ApplyT(func(v DomainCompression) []DomainCompressionCompressionRule { return v.CompressionRules }).(DomainCompressionCompressionRuleArrayOutput)
 }
 
-func (o CdnDomainCompressionOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainCompression) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainCompressionOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainCompression) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainCompressionPtrOutput struct{ *pulumi.OutputState }
+type DomainCompressionPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainCompressionPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainCompression)(nil)).Elem()
+func (DomainCompressionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainCompression)(nil)).Elem()
 }
 
-func (o CdnDomainCompressionPtrOutput) ToCdnDomainCompressionPtrOutput() CdnDomainCompressionPtrOutput {
+func (o DomainCompressionPtrOutput) ToDomainCompressionPtrOutput() DomainCompressionPtrOutput {
 	return o
 }
 
-func (o CdnDomainCompressionPtrOutput) ToCdnDomainCompressionPtrOutputWithContext(ctx context.Context) CdnDomainCompressionPtrOutput {
+func (o DomainCompressionPtrOutput) ToDomainCompressionPtrOutputWithContext(ctx context.Context) DomainCompressionPtrOutput {
 	return o
 }
 
-func (o CdnDomainCompressionPtrOutput) Elem() CdnDomainCompressionOutput {
-	return o.ApplyT(func(v *CdnDomainCompression) CdnDomainCompression {
+func (o DomainCompressionPtrOutput) Elem() DomainCompressionOutput {
+	return o.ApplyT(func(v *DomainCompression) DomainCompression {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainCompression
+		var ret DomainCompression
 		return ret
-	}).(CdnDomainCompressionOutput)
+	}).(DomainCompressionOutput)
 }
 
-func (o CdnDomainCompressionPtrOutput) CompressionRules() CdnDomainCompressionCompressionRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainCompression) []CdnDomainCompressionCompressionRule {
+// List of compression rules.
+func (o DomainCompressionPtrOutput) CompressionRules() DomainCompressionCompressionRuleArrayOutput {
+	return o.ApplyT(func(v *DomainCompression) []DomainCompressionCompressionRule {
 		if v == nil {
 			return nil
 		}
 		return v.CompressionRules
-	}).(CdnDomainCompressionCompressionRuleArrayOutput)
+	}).(DomainCompressionCompressionRuleArrayOutput)
 }
 
-func (o CdnDomainCompressionPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainCompression) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainCompressionPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainCompression) *string {
 		if v == nil {
 			return nil
 		}
@@ -1882,277 +2090,306 @@ func (o CdnDomainCompressionPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainCompressionCompressionRule struct {
-	Algorithms     []string `pulumi:"algorithms"`
-	Compress       bool     `pulumi:"compress"`
+type DomainCompressionCompressionRule struct {
+	// List of algorithms, available: `gzip` and `brotli`.
+	Algorithms []string `pulumi:"algorithms"`
+	// Must be set as true, enables compression.
+	Compress bool `pulumi:"compress"`
+	// List of file extensions like `jpg`, `txt`.
 	FileExtensions []string `pulumi:"fileExtensions"`
-	MaxLength      int      `pulumi:"maxLength"`
-	MinLength      int      `pulumi:"minLength"`
-	RulePaths      []string `pulumi:"rulePaths"`
-	RuleType       *string  `pulumi:"ruleType"`
+	// The maximum file size to trigger compression (in bytes).
+	MaxLength int `pulumi:"maxLength"`
+	// The minimum file size to trigger compression (in bytes).
+	MinLength int `pulumi:"minLength"`
+	// List of rule paths for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule type, available: `all`, `file`, `directory`, `path`, `contentType`.
+	RuleType *string `pulumi:"ruleType"`
 }
 
-// CdnDomainCompressionCompressionRuleInput is an input type that accepts CdnDomainCompressionCompressionRuleArgs and CdnDomainCompressionCompressionRuleOutput values.
-// You can construct a concrete instance of `CdnDomainCompressionCompressionRuleInput` via:
+// DomainCompressionCompressionRuleInput is an input type that accepts DomainCompressionCompressionRuleArgs and DomainCompressionCompressionRuleOutput values.
+// You can construct a concrete instance of `DomainCompressionCompressionRuleInput` via:
 //
-//          CdnDomainCompressionCompressionRuleArgs{...}
-type CdnDomainCompressionCompressionRuleInput interface {
+//          DomainCompressionCompressionRuleArgs{...}
+type DomainCompressionCompressionRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainCompressionCompressionRuleOutput() CdnDomainCompressionCompressionRuleOutput
-	ToCdnDomainCompressionCompressionRuleOutputWithContext(context.Context) CdnDomainCompressionCompressionRuleOutput
+	ToDomainCompressionCompressionRuleOutput() DomainCompressionCompressionRuleOutput
+	ToDomainCompressionCompressionRuleOutputWithContext(context.Context) DomainCompressionCompressionRuleOutput
 }
 
-type CdnDomainCompressionCompressionRuleArgs struct {
-	Algorithms     pulumi.StringArrayInput `pulumi:"algorithms"`
-	Compress       pulumi.BoolInput        `pulumi:"compress"`
+type DomainCompressionCompressionRuleArgs struct {
+	// List of algorithms, available: `gzip` and `brotli`.
+	Algorithms pulumi.StringArrayInput `pulumi:"algorithms"`
+	// Must be set as true, enables compression.
+	Compress pulumi.BoolInput `pulumi:"compress"`
+	// List of file extensions like `jpg`, `txt`.
 	FileExtensions pulumi.StringArrayInput `pulumi:"fileExtensions"`
-	MaxLength      pulumi.IntInput         `pulumi:"maxLength"`
-	MinLength      pulumi.IntInput         `pulumi:"minLength"`
-	RulePaths      pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType       pulumi.StringPtrInput   `pulumi:"ruleType"`
+	// The maximum file size to trigger compression (in bytes).
+	MaxLength pulumi.IntInput `pulumi:"maxLength"`
+	// The minimum file size to trigger compression (in bytes).
+	MinLength pulumi.IntInput `pulumi:"minLength"`
+	// List of rule paths for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule type, available: `all`, `file`, `directory`, `path`, `contentType`.
+	RuleType pulumi.StringPtrInput `pulumi:"ruleType"`
 }
 
-func (CdnDomainCompressionCompressionRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainCompressionCompressionRule)(nil)).Elem()
+func (DomainCompressionCompressionRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainCompressionCompressionRule)(nil)).Elem()
 }
 
-func (i CdnDomainCompressionCompressionRuleArgs) ToCdnDomainCompressionCompressionRuleOutput() CdnDomainCompressionCompressionRuleOutput {
-	return i.ToCdnDomainCompressionCompressionRuleOutputWithContext(context.Background())
+func (i DomainCompressionCompressionRuleArgs) ToDomainCompressionCompressionRuleOutput() DomainCompressionCompressionRuleOutput {
+	return i.ToDomainCompressionCompressionRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainCompressionCompressionRuleArgs) ToCdnDomainCompressionCompressionRuleOutputWithContext(ctx context.Context) CdnDomainCompressionCompressionRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainCompressionCompressionRuleOutput)
+func (i DomainCompressionCompressionRuleArgs) ToDomainCompressionCompressionRuleOutputWithContext(ctx context.Context) DomainCompressionCompressionRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainCompressionCompressionRuleOutput)
 }
 
-// CdnDomainCompressionCompressionRuleArrayInput is an input type that accepts CdnDomainCompressionCompressionRuleArray and CdnDomainCompressionCompressionRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainCompressionCompressionRuleArrayInput` via:
+// DomainCompressionCompressionRuleArrayInput is an input type that accepts DomainCompressionCompressionRuleArray and DomainCompressionCompressionRuleArrayOutput values.
+// You can construct a concrete instance of `DomainCompressionCompressionRuleArrayInput` via:
 //
-//          CdnDomainCompressionCompressionRuleArray{ CdnDomainCompressionCompressionRuleArgs{...} }
-type CdnDomainCompressionCompressionRuleArrayInput interface {
+//          DomainCompressionCompressionRuleArray{ DomainCompressionCompressionRuleArgs{...} }
+type DomainCompressionCompressionRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainCompressionCompressionRuleArrayOutput() CdnDomainCompressionCompressionRuleArrayOutput
-	ToCdnDomainCompressionCompressionRuleArrayOutputWithContext(context.Context) CdnDomainCompressionCompressionRuleArrayOutput
+	ToDomainCompressionCompressionRuleArrayOutput() DomainCompressionCompressionRuleArrayOutput
+	ToDomainCompressionCompressionRuleArrayOutputWithContext(context.Context) DomainCompressionCompressionRuleArrayOutput
 }
 
-type CdnDomainCompressionCompressionRuleArray []CdnDomainCompressionCompressionRuleInput
+type DomainCompressionCompressionRuleArray []DomainCompressionCompressionRuleInput
 
-func (CdnDomainCompressionCompressionRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainCompressionCompressionRule)(nil)).Elem()
+func (DomainCompressionCompressionRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainCompressionCompressionRule)(nil)).Elem()
 }
 
-func (i CdnDomainCompressionCompressionRuleArray) ToCdnDomainCompressionCompressionRuleArrayOutput() CdnDomainCompressionCompressionRuleArrayOutput {
-	return i.ToCdnDomainCompressionCompressionRuleArrayOutputWithContext(context.Background())
+func (i DomainCompressionCompressionRuleArray) ToDomainCompressionCompressionRuleArrayOutput() DomainCompressionCompressionRuleArrayOutput {
+	return i.ToDomainCompressionCompressionRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainCompressionCompressionRuleArray) ToCdnDomainCompressionCompressionRuleArrayOutputWithContext(ctx context.Context) CdnDomainCompressionCompressionRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainCompressionCompressionRuleArrayOutput)
+func (i DomainCompressionCompressionRuleArray) ToDomainCompressionCompressionRuleArrayOutputWithContext(ctx context.Context) DomainCompressionCompressionRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainCompressionCompressionRuleArrayOutput)
 }
 
-type CdnDomainCompressionCompressionRuleOutput struct{ *pulumi.OutputState }
+type DomainCompressionCompressionRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainCompressionCompressionRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainCompressionCompressionRule)(nil)).Elem()
+func (DomainCompressionCompressionRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainCompressionCompressionRule)(nil)).Elem()
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) ToCdnDomainCompressionCompressionRuleOutput() CdnDomainCompressionCompressionRuleOutput {
+func (o DomainCompressionCompressionRuleOutput) ToDomainCompressionCompressionRuleOutput() DomainCompressionCompressionRuleOutput {
 	return o
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) ToCdnDomainCompressionCompressionRuleOutputWithContext(ctx context.Context) CdnDomainCompressionCompressionRuleOutput {
+func (o DomainCompressionCompressionRuleOutput) ToDomainCompressionCompressionRuleOutputWithContext(ctx context.Context) DomainCompressionCompressionRuleOutput {
 	return o
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) Algorithms() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainCompressionCompressionRule) []string { return v.Algorithms }).(pulumi.StringArrayOutput)
+// List of algorithms, available: `gzip` and `brotli`.
+func (o DomainCompressionCompressionRuleOutput) Algorithms() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainCompressionCompressionRule) []string { return v.Algorithms }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) Compress() pulumi.BoolOutput {
-	return o.ApplyT(func(v CdnDomainCompressionCompressionRule) bool { return v.Compress }).(pulumi.BoolOutput)
+// Must be set as true, enables compression.
+func (o DomainCompressionCompressionRuleOutput) Compress() pulumi.BoolOutput {
+	return o.ApplyT(func(v DomainCompressionCompressionRule) bool { return v.Compress }).(pulumi.BoolOutput)
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) FileExtensions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainCompressionCompressionRule) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
+// List of file extensions like `jpg`, `txt`.
+func (o DomainCompressionCompressionRuleOutput) FileExtensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainCompressionCompressionRule) []string { return v.FileExtensions }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) MaxLength() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainCompressionCompressionRule) int { return v.MaxLength }).(pulumi.IntOutput)
+// The maximum file size to trigger compression (in bytes).
+func (o DomainCompressionCompressionRuleOutput) MaxLength() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainCompressionCompressionRule) int { return v.MaxLength }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) MinLength() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainCompressionCompressionRule) int { return v.MinLength }).(pulumi.IntOutput)
+// The minimum file size to trigger compression (in bytes).
+func (o DomainCompressionCompressionRuleOutput) MinLength() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainCompressionCompressionRule) int { return v.MinLength }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainCompressionCompressionRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// List of rule paths for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+func (o DomainCompressionCompressionRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainCompressionCompressionRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainCompressionCompressionRuleOutput) RuleType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainCompressionCompressionRule) *string { return v.RuleType }).(pulumi.StringPtrOutput)
+// Rule type, available: `all`, `file`, `directory`, `path`, `contentType`.
+func (o DomainCompressionCompressionRuleOutput) RuleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainCompressionCompressionRule) *string { return v.RuleType }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainCompressionCompressionRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainCompressionCompressionRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainCompressionCompressionRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainCompressionCompressionRule)(nil)).Elem()
+func (DomainCompressionCompressionRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainCompressionCompressionRule)(nil)).Elem()
 }
 
-func (o CdnDomainCompressionCompressionRuleArrayOutput) ToCdnDomainCompressionCompressionRuleArrayOutput() CdnDomainCompressionCompressionRuleArrayOutput {
+func (o DomainCompressionCompressionRuleArrayOutput) ToDomainCompressionCompressionRuleArrayOutput() DomainCompressionCompressionRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainCompressionCompressionRuleArrayOutput) ToCdnDomainCompressionCompressionRuleArrayOutputWithContext(ctx context.Context) CdnDomainCompressionCompressionRuleArrayOutput {
+func (o DomainCompressionCompressionRuleArrayOutput) ToDomainCompressionCompressionRuleArrayOutputWithContext(ctx context.Context) DomainCompressionCompressionRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainCompressionCompressionRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainCompressionCompressionRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainCompressionCompressionRule {
-		return vs[0].([]CdnDomainCompressionCompressionRule)[vs[1].(int)]
-	}).(CdnDomainCompressionCompressionRuleOutput)
+func (o DomainCompressionCompressionRuleArrayOutput) Index(i pulumi.IntInput) DomainCompressionCompressionRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainCompressionCompressionRule {
+		return vs[0].([]DomainCompressionCompressionRule)[vs[1].(int)]
+	}).(DomainCompressionCompressionRuleOutput)
 }
 
-type CdnDomainDownstreamCapping struct {
-	CappingRules []CdnDomainDownstreamCappingCappingRule `pulumi:"cappingRules"`
-	Switch       string                                  `pulumi:"switch"`
+type DomainDownstreamCapping struct {
+	// List of capping rule.
+	CappingRules []DomainDownstreamCappingCappingRule `pulumi:"cappingRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainDownstreamCappingInput is an input type that accepts CdnDomainDownstreamCappingArgs and CdnDomainDownstreamCappingOutput values.
-// You can construct a concrete instance of `CdnDomainDownstreamCappingInput` via:
+// DomainDownstreamCappingInput is an input type that accepts DomainDownstreamCappingArgs and DomainDownstreamCappingOutput values.
+// You can construct a concrete instance of `DomainDownstreamCappingInput` via:
 //
-//          CdnDomainDownstreamCappingArgs{...}
-type CdnDomainDownstreamCappingInput interface {
+//          DomainDownstreamCappingArgs{...}
+type DomainDownstreamCappingInput interface {
 	pulumi.Input
 
-	ToCdnDomainDownstreamCappingOutput() CdnDomainDownstreamCappingOutput
-	ToCdnDomainDownstreamCappingOutputWithContext(context.Context) CdnDomainDownstreamCappingOutput
+	ToDomainDownstreamCappingOutput() DomainDownstreamCappingOutput
+	ToDomainDownstreamCappingOutputWithContext(context.Context) DomainDownstreamCappingOutput
 }
 
-type CdnDomainDownstreamCappingArgs struct {
-	CappingRules CdnDomainDownstreamCappingCappingRuleArrayInput `pulumi:"cappingRules"`
-	Switch       pulumi.StringInput                              `pulumi:"switch"`
+type DomainDownstreamCappingArgs struct {
+	// List of capping rule.
+	CappingRules DomainDownstreamCappingCappingRuleArrayInput `pulumi:"cappingRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainDownstreamCappingArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainDownstreamCapping)(nil)).Elem()
+func (DomainDownstreamCappingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainDownstreamCapping)(nil)).Elem()
 }
 
-func (i CdnDomainDownstreamCappingArgs) ToCdnDomainDownstreamCappingOutput() CdnDomainDownstreamCappingOutput {
-	return i.ToCdnDomainDownstreamCappingOutputWithContext(context.Background())
+func (i DomainDownstreamCappingArgs) ToDomainDownstreamCappingOutput() DomainDownstreamCappingOutput {
+	return i.ToDomainDownstreamCappingOutputWithContext(context.Background())
 }
 
-func (i CdnDomainDownstreamCappingArgs) ToCdnDomainDownstreamCappingOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainDownstreamCappingOutput)
+func (i DomainDownstreamCappingArgs) ToDomainDownstreamCappingOutputWithContext(ctx context.Context) DomainDownstreamCappingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainDownstreamCappingOutput)
 }
 
-func (i CdnDomainDownstreamCappingArgs) ToCdnDomainDownstreamCappingPtrOutput() CdnDomainDownstreamCappingPtrOutput {
-	return i.ToCdnDomainDownstreamCappingPtrOutputWithContext(context.Background())
+func (i DomainDownstreamCappingArgs) ToDomainDownstreamCappingPtrOutput() DomainDownstreamCappingPtrOutput {
+	return i.ToDomainDownstreamCappingPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainDownstreamCappingArgs) ToCdnDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainDownstreamCappingOutput).ToCdnDomainDownstreamCappingPtrOutputWithContext(ctx)
+func (i DomainDownstreamCappingArgs) ToDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) DomainDownstreamCappingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainDownstreamCappingOutput).ToDomainDownstreamCappingPtrOutputWithContext(ctx)
 }
 
-// CdnDomainDownstreamCappingPtrInput is an input type that accepts CdnDomainDownstreamCappingArgs, CdnDomainDownstreamCappingPtr and CdnDomainDownstreamCappingPtrOutput values.
-// You can construct a concrete instance of `CdnDomainDownstreamCappingPtrInput` via:
+// DomainDownstreamCappingPtrInput is an input type that accepts DomainDownstreamCappingArgs, DomainDownstreamCappingPtr and DomainDownstreamCappingPtrOutput values.
+// You can construct a concrete instance of `DomainDownstreamCappingPtrInput` via:
 //
-//          CdnDomainDownstreamCappingArgs{...}
+//          DomainDownstreamCappingArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainDownstreamCappingPtrInput interface {
+type DomainDownstreamCappingPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainDownstreamCappingPtrOutput() CdnDomainDownstreamCappingPtrOutput
-	ToCdnDomainDownstreamCappingPtrOutputWithContext(context.Context) CdnDomainDownstreamCappingPtrOutput
+	ToDomainDownstreamCappingPtrOutput() DomainDownstreamCappingPtrOutput
+	ToDomainDownstreamCappingPtrOutputWithContext(context.Context) DomainDownstreamCappingPtrOutput
 }
 
-type cdnDomainDownstreamCappingPtrType CdnDomainDownstreamCappingArgs
+type domainDownstreamCappingPtrType DomainDownstreamCappingArgs
 
-func CdnDomainDownstreamCappingPtr(v *CdnDomainDownstreamCappingArgs) CdnDomainDownstreamCappingPtrInput {
-	return (*cdnDomainDownstreamCappingPtrType)(v)
+func DomainDownstreamCappingPtr(v *DomainDownstreamCappingArgs) DomainDownstreamCappingPtrInput {
+	return (*domainDownstreamCappingPtrType)(v)
 }
 
-func (*cdnDomainDownstreamCappingPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainDownstreamCapping)(nil)).Elem()
+func (*domainDownstreamCappingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainDownstreamCapping)(nil)).Elem()
 }
 
-func (i *cdnDomainDownstreamCappingPtrType) ToCdnDomainDownstreamCappingPtrOutput() CdnDomainDownstreamCappingPtrOutput {
-	return i.ToCdnDomainDownstreamCappingPtrOutputWithContext(context.Background())
+func (i *domainDownstreamCappingPtrType) ToDomainDownstreamCappingPtrOutput() DomainDownstreamCappingPtrOutput {
+	return i.ToDomainDownstreamCappingPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainDownstreamCappingPtrType) ToCdnDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainDownstreamCappingPtrOutput)
+func (i *domainDownstreamCappingPtrType) ToDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) DomainDownstreamCappingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainDownstreamCappingPtrOutput)
 }
 
-type CdnDomainDownstreamCappingOutput struct{ *pulumi.OutputState }
+type DomainDownstreamCappingOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainDownstreamCappingOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainDownstreamCapping)(nil)).Elem()
+func (DomainDownstreamCappingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainDownstreamCapping)(nil)).Elem()
 }
 
-func (o CdnDomainDownstreamCappingOutput) ToCdnDomainDownstreamCappingOutput() CdnDomainDownstreamCappingOutput {
+func (o DomainDownstreamCappingOutput) ToDomainDownstreamCappingOutput() DomainDownstreamCappingOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingOutput) ToCdnDomainDownstreamCappingOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingOutput {
+func (o DomainDownstreamCappingOutput) ToDomainDownstreamCappingOutputWithContext(ctx context.Context) DomainDownstreamCappingOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingOutput) ToCdnDomainDownstreamCappingPtrOutput() CdnDomainDownstreamCappingPtrOutput {
-	return o.ToCdnDomainDownstreamCappingPtrOutputWithContext(context.Background())
+func (o DomainDownstreamCappingOutput) ToDomainDownstreamCappingPtrOutput() DomainDownstreamCappingPtrOutput {
+	return o.ToDomainDownstreamCappingPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainDownstreamCappingOutput) ToCdnDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainDownstreamCapping) *CdnDomainDownstreamCapping {
+func (o DomainDownstreamCappingOutput) ToDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) DomainDownstreamCappingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainDownstreamCapping) *DomainDownstreamCapping {
 		return &v
-	}).(CdnDomainDownstreamCappingPtrOutput)
+	}).(DomainDownstreamCappingPtrOutput)
 }
 
-func (o CdnDomainDownstreamCappingOutput) CappingRules() CdnDomainDownstreamCappingCappingRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainDownstreamCapping) []CdnDomainDownstreamCappingCappingRule { return v.CappingRules }).(CdnDomainDownstreamCappingCappingRuleArrayOutput)
+// List of capping rule.
+func (o DomainDownstreamCappingOutput) CappingRules() DomainDownstreamCappingCappingRuleArrayOutput {
+	return o.ApplyT(func(v DomainDownstreamCapping) []DomainDownstreamCappingCappingRule { return v.CappingRules }).(DomainDownstreamCappingCappingRuleArrayOutput)
 }
 
-func (o CdnDomainDownstreamCappingOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainDownstreamCapping) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainDownstreamCappingOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainDownstreamCapping) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainDownstreamCappingPtrOutput struct{ *pulumi.OutputState }
+type DomainDownstreamCappingPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainDownstreamCappingPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainDownstreamCapping)(nil)).Elem()
+func (DomainDownstreamCappingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainDownstreamCapping)(nil)).Elem()
 }
 
-func (o CdnDomainDownstreamCappingPtrOutput) ToCdnDomainDownstreamCappingPtrOutput() CdnDomainDownstreamCappingPtrOutput {
+func (o DomainDownstreamCappingPtrOutput) ToDomainDownstreamCappingPtrOutput() DomainDownstreamCappingPtrOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingPtrOutput) ToCdnDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingPtrOutput {
+func (o DomainDownstreamCappingPtrOutput) ToDomainDownstreamCappingPtrOutputWithContext(ctx context.Context) DomainDownstreamCappingPtrOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingPtrOutput) Elem() CdnDomainDownstreamCappingOutput {
-	return o.ApplyT(func(v *CdnDomainDownstreamCapping) CdnDomainDownstreamCapping {
+func (o DomainDownstreamCappingPtrOutput) Elem() DomainDownstreamCappingOutput {
+	return o.ApplyT(func(v *DomainDownstreamCapping) DomainDownstreamCapping {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainDownstreamCapping
+		var ret DomainDownstreamCapping
 		return ret
-	}).(CdnDomainDownstreamCappingOutput)
+	}).(DomainDownstreamCappingOutput)
 }
 
-func (o CdnDomainDownstreamCappingPtrOutput) CappingRules() CdnDomainDownstreamCappingCappingRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainDownstreamCapping) []CdnDomainDownstreamCappingCappingRule {
+// List of capping rule.
+func (o DomainDownstreamCappingPtrOutput) CappingRules() DomainDownstreamCappingCappingRuleArrayOutput {
+	return o.ApplyT(func(v *DomainDownstreamCapping) []DomainDownstreamCappingCappingRule {
 		if v == nil {
 			return nil
 		}
 		return v.CappingRules
-	}).(CdnDomainDownstreamCappingCappingRuleArrayOutput)
+	}).(DomainDownstreamCappingCappingRuleArrayOutput)
 }
 
-func (o CdnDomainDownstreamCappingPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainDownstreamCapping) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainDownstreamCappingPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainDownstreamCapping) *string {
 		if v == nil {
 			return nil
 		}
@@ -2160,253 +2397,270 @@ func (o CdnDomainDownstreamCappingPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainDownstreamCappingCappingRule struct {
-	KbpsThreshold int      `pulumi:"kbpsThreshold"`
-	RulePaths     []string `pulumi:"rulePaths"`
-	RuleType      string   `pulumi:"ruleType"`
+type DomainDownstreamCappingCappingRule struct {
+	// Capping rule kbps threshold.
+	KbpsThreshold int `pulumi:"kbpsThreshold"`
+	// List of capping rule path.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Capping rule type.
+	RuleType string `pulumi:"ruleType"`
 }
 
-// CdnDomainDownstreamCappingCappingRuleInput is an input type that accepts CdnDomainDownstreamCappingCappingRuleArgs and CdnDomainDownstreamCappingCappingRuleOutput values.
-// You can construct a concrete instance of `CdnDomainDownstreamCappingCappingRuleInput` via:
+// DomainDownstreamCappingCappingRuleInput is an input type that accepts DomainDownstreamCappingCappingRuleArgs and DomainDownstreamCappingCappingRuleOutput values.
+// You can construct a concrete instance of `DomainDownstreamCappingCappingRuleInput` via:
 //
-//          CdnDomainDownstreamCappingCappingRuleArgs{...}
-type CdnDomainDownstreamCappingCappingRuleInput interface {
+//          DomainDownstreamCappingCappingRuleArgs{...}
+type DomainDownstreamCappingCappingRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainDownstreamCappingCappingRuleOutput() CdnDomainDownstreamCappingCappingRuleOutput
-	ToCdnDomainDownstreamCappingCappingRuleOutputWithContext(context.Context) CdnDomainDownstreamCappingCappingRuleOutput
+	ToDomainDownstreamCappingCappingRuleOutput() DomainDownstreamCappingCappingRuleOutput
+	ToDomainDownstreamCappingCappingRuleOutputWithContext(context.Context) DomainDownstreamCappingCappingRuleOutput
 }
 
-type CdnDomainDownstreamCappingCappingRuleArgs struct {
-	KbpsThreshold pulumi.IntInput         `pulumi:"kbpsThreshold"`
-	RulePaths     pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType      pulumi.StringInput      `pulumi:"ruleType"`
+type DomainDownstreamCappingCappingRuleArgs struct {
+	// Capping rule kbps threshold.
+	KbpsThreshold pulumi.IntInput `pulumi:"kbpsThreshold"`
+	// List of capping rule path.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Capping rule type.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
 }
 
-func (CdnDomainDownstreamCappingCappingRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainDownstreamCappingCappingRule)(nil)).Elem()
+func (DomainDownstreamCappingCappingRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainDownstreamCappingCappingRule)(nil)).Elem()
 }
 
-func (i CdnDomainDownstreamCappingCappingRuleArgs) ToCdnDomainDownstreamCappingCappingRuleOutput() CdnDomainDownstreamCappingCappingRuleOutput {
-	return i.ToCdnDomainDownstreamCappingCappingRuleOutputWithContext(context.Background())
+func (i DomainDownstreamCappingCappingRuleArgs) ToDomainDownstreamCappingCappingRuleOutput() DomainDownstreamCappingCappingRuleOutput {
+	return i.ToDomainDownstreamCappingCappingRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainDownstreamCappingCappingRuleArgs) ToCdnDomainDownstreamCappingCappingRuleOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingCappingRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainDownstreamCappingCappingRuleOutput)
+func (i DomainDownstreamCappingCappingRuleArgs) ToDomainDownstreamCappingCappingRuleOutputWithContext(ctx context.Context) DomainDownstreamCappingCappingRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainDownstreamCappingCappingRuleOutput)
 }
 
-// CdnDomainDownstreamCappingCappingRuleArrayInput is an input type that accepts CdnDomainDownstreamCappingCappingRuleArray and CdnDomainDownstreamCappingCappingRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainDownstreamCappingCappingRuleArrayInput` via:
+// DomainDownstreamCappingCappingRuleArrayInput is an input type that accepts DomainDownstreamCappingCappingRuleArray and DomainDownstreamCappingCappingRuleArrayOutput values.
+// You can construct a concrete instance of `DomainDownstreamCappingCappingRuleArrayInput` via:
 //
-//          CdnDomainDownstreamCappingCappingRuleArray{ CdnDomainDownstreamCappingCappingRuleArgs{...} }
-type CdnDomainDownstreamCappingCappingRuleArrayInput interface {
+//          DomainDownstreamCappingCappingRuleArray{ DomainDownstreamCappingCappingRuleArgs{...} }
+type DomainDownstreamCappingCappingRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainDownstreamCappingCappingRuleArrayOutput() CdnDomainDownstreamCappingCappingRuleArrayOutput
-	ToCdnDomainDownstreamCappingCappingRuleArrayOutputWithContext(context.Context) CdnDomainDownstreamCappingCappingRuleArrayOutput
+	ToDomainDownstreamCappingCappingRuleArrayOutput() DomainDownstreamCappingCappingRuleArrayOutput
+	ToDomainDownstreamCappingCappingRuleArrayOutputWithContext(context.Context) DomainDownstreamCappingCappingRuleArrayOutput
 }
 
-type CdnDomainDownstreamCappingCappingRuleArray []CdnDomainDownstreamCappingCappingRuleInput
+type DomainDownstreamCappingCappingRuleArray []DomainDownstreamCappingCappingRuleInput
 
-func (CdnDomainDownstreamCappingCappingRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainDownstreamCappingCappingRule)(nil)).Elem()
+func (DomainDownstreamCappingCappingRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainDownstreamCappingCappingRule)(nil)).Elem()
 }
 
-func (i CdnDomainDownstreamCappingCappingRuleArray) ToCdnDomainDownstreamCappingCappingRuleArrayOutput() CdnDomainDownstreamCappingCappingRuleArrayOutput {
-	return i.ToCdnDomainDownstreamCappingCappingRuleArrayOutputWithContext(context.Background())
+func (i DomainDownstreamCappingCappingRuleArray) ToDomainDownstreamCappingCappingRuleArrayOutput() DomainDownstreamCappingCappingRuleArrayOutput {
+	return i.ToDomainDownstreamCappingCappingRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainDownstreamCappingCappingRuleArray) ToCdnDomainDownstreamCappingCappingRuleArrayOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingCappingRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainDownstreamCappingCappingRuleArrayOutput)
+func (i DomainDownstreamCappingCappingRuleArray) ToDomainDownstreamCappingCappingRuleArrayOutputWithContext(ctx context.Context) DomainDownstreamCappingCappingRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainDownstreamCappingCappingRuleArrayOutput)
 }
 
-type CdnDomainDownstreamCappingCappingRuleOutput struct{ *pulumi.OutputState }
+type DomainDownstreamCappingCappingRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainDownstreamCappingCappingRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainDownstreamCappingCappingRule)(nil)).Elem()
+func (DomainDownstreamCappingCappingRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainDownstreamCappingCappingRule)(nil)).Elem()
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleOutput) ToCdnDomainDownstreamCappingCappingRuleOutput() CdnDomainDownstreamCappingCappingRuleOutput {
+func (o DomainDownstreamCappingCappingRuleOutput) ToDomainDownstreamCappingCappingRuleOutput() DomainDownstreamCappingCappingRuleOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleOutput) ToCdnDomainDownstreamCappingCappingRuleOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingCappingRuleOutput {
+func (o DomainDownstreamCappingCappingRuleOutput) ToDomainDownstreamCappingCappingRuleOutputWithContext(ctx context.Context) DomainDownstreamCappingCappingRuleOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleOutput) KbpsThreshold() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainDownstreamCappingCappingRule) int { return v.KbpsThreshold }).(pulumi.IntOutput)
+// Capping rule kbps threshold.
+func (o DomainDownstreamCappingCappingRuleOutput) KbpsThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainDownstreamCappingCappingRule) int { return v.KbpsThreshold }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainDownstreamCappingCappingRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// List of capping rule path.
+func (o DomainDownstreamCappingCappingRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainDownstreamCappingCappingRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleOutput) RuleType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainDownstreamCappingCappingRule) string { return v.RuleType }).(pulumi.StringOutput)
+// Capping rule type.
+func (o DomainDownstreamCappingCappingRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainDownstreamCappingCappingRule) string { return v.RuleType }).(pulumi.StringOutput)
 }
 
-type CdnDomainDownstreamCappingCappingRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainDownstreamCappingCappingRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainDownstreamCappingCappingRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainDownstreamCappingCappingRule)(nil)).Elem()
+func (DomainDownstreamCappingCappingRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainDownstreamCappingCappingRule)(nil)).Elem()
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleArrayOutput) ToCdnDomainDownstreamCappingCappingRuleArrayOutput() CdnDomainDownstreamCappingCappingRuleArrayOutput {
+func (o DomainDownstreamCappingCappingRuleArrayOutput) ToDomainDownstreamCappingCappingRuleArrayOutput() DomainDownstreamCappingCappingRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleArrayOutput) ToCdnDomainDownstreamCappingCappingRuleArrayOutputWithContext(ctx context.Context) CdnDomainDownstreamCappingCappingRuleArrayOutput {
+func (o DomainDownstreamCappingCappingRuleArrayOutput) ToDomainDownstreamCappingCappingRuleArrayOutputWithContext(ctx context.Context) DomainDownstreamCappingCappingRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainDownstreamCappingCappingRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainDownstreamCappingCappingRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainDownstreamCappingCappingRule {
-		return vs[0].([]CdnDomainDownstreamCappingCappingRule)[vs[1].(int)]
-	}).(CdnDomainDownstreamCappingCappingRuleOutput)
+func (o DomainDownstreamCappingCappingRuleArrayOutput) Index(i pulumi.IntInput) DomainDownstreamCappingCappingRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainDownstreamCappingCappingRule {
+		return vs[0].([]DomainDownstreamCappingCappingRule)[vs[1].(int)]
+	}).(DomainDownstreamCappingCappingRuleOutput)
 }
 
-type CdnDomainErrorPage struct {
-	PageRules []CdnDomainErrorPagePageRule `pulumi:"pageRules"`
-	Switch    string                       `pulumi:"switch"`
+type DomainErrorPage struct {
+	// List of error page rule.
+	PageRules []DomainErrorPagePageRule `pulumi:"pageRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainErrorPageInput is an input type that accepts CdnDomainErrorPageArgs and CdnDomainErrorPageOutput values.
-// You can construct a concrete instance of `CdnDomainErrorPageInput` via:
+// DomainErrorPageInput is an input type that accepts DomainErrorPageArgs and DomainErrorPageOutput values.
+// You can construct a concrete instance of `DomainErrorPageInput` via:
 //
-//          CdnDomainErrorPageArgs{...}
-type CdnDomainErrorPageInput interface {
+//          DomainErrorPageArgs{...}
+type DomainErrorPageInput interface {
 	pulumi.Input
 
-	ToCdnDomainErrorPageOutput() CdnDomainErrorPageOutput
-	ToCdnDomainErrorPageOutputWithContext(context.Context) CdnDomainErrorPageOutput
+	ToDomainErrorPageOutput() DomainErrorPageOutput
+	ToDomainErrorPageOutputWithContext(context.Context) DomainErrorPageOutput
 }
 
-type CdnDomainErrorPageArgs struct {
-	PageRules CdnDomainErrorPagePageRuleArrayInput `pulumi:"pageRules"`
-	Switch    pulumi.StringInput                   `pulumi:"switch"`
+type DomainErrorPageArgs struct {
+	// List of error page rule.
+	PageRules DomainErrorPagePageRuleArrayInput `pulumi:"pageRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainErrorPageArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainErrorPage)(nil)).Elem()
+func (DomainErrorPageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainErrorPage)(nil)).Elem()
 }
 
-func (i CdnDomainErrorPageArgs) ToCdnDomainErrorPageOutput() CdnDomainErrorPageOutput {
-	return i.ToCdnDomainErrorPageOutputWithContext(context.Background())
+func (i DomainErrorPageArgs) ToDomainErrorPageOutput() DomainErrorPageOutput {
+	return i.ToDomainErrorPageOutputWithContext(context.Background())
 }
 
-func (i CdnDomainErrorPageArgs) ToCdnDomainErrorPageOutputWithContext(ctx context.Context) CdnDomainErrorPageOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainErrorPageOutput)
+func (i DomainErrorPageArgs) ToDomainErrorPageOutputWithContext(ctx context.Context) DomainErrorPageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainErrorPageOutput)
 }
 
-func (i CdnDomainErrorPageArgs) ToCdnDomainErrorPagePtrOutput() CdnDomainErrorPagePtrOutput {
-	return i.ToCdnDomainErrorPagePtrOutputWithContext(context.Background())
+func (i DomainErrorPageArgs) ToDomainErrorPagePtrOutput() DomainErrorPagePtrOutput {
+	return i.ToDomainErrorPagePtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainErrorPageArgs) ToCdnDomainErrorPagePtrOutputWithContext(ctx context.Context) CdnDomainErrorPagePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainErrorPageOutput).ToCdnDomainErrorPagePtrOutputWithContext(ctx)
+func (i DomainErrorPageArgs) ToDomainErrorPagePtrOutputWithContext(ctx context.Context) DomainErrorPagePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainErrorPageOutput).ToDomainErrorPagePtrOutputWithContext(ctx)
 }
 
-// CdnDomainErrorPagePtrInput is an input type that accepts CdnDomainErrorPageArgs, CdnDomainErrorPagePtr and CdnDomainErrorPagePtrOutput values.
-// You can construct a concrete instance of `CdnDomainErrorPagePtrInput` via:
+// DomainErrorPagePtrInput is an input type that accepts DomainErrorPageArgs, DomainErrorPagePtr and DomainErrorPagePtrOutput values.
+// You can construct a concrete instance of `DomainErrorPagePtrInput` via:
 //
-//          CdnDomainErrorPageArgs{...}
+//          DomainErrorPageArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainErrorPagePtrInput interface {
+type DomainErrorPagePtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainErrorPagePtrOutput() CdnDomainErrorPagePtrOutput
-	ToCdnDomainErrorPagePtrOutputWithContext(context.Context) CdnDomainErrorPagePtrOutput
+	ToDomainErrorPagePtrOutput() DomainErrorPagePtrOutput
+	ToDomainErrorPagePtrOutputWithContext(context.Context) DomainErrorPagePtrOutput
 }
 
-type cdnDomainErrorPagePtrType CdnDomainErrorPageArgs
+type domainErrorPagePtrType DomainErrorPageArgs
 
-func CdnDomainErrorPagePtr(v *CdnDomainErrorPageArgs) CdnDomainErrorPagePtrInput {
-	return (*cdnDomainErrorPagePtrType)(v)
+func DomainErrorPagePtr(v *DomainErrorPageArgs) DomainErrorPagePtrInput {
+	return (*domainErrorPagePtrType)(v)
 }
 
-func (*cdnDomainErrorPagePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainErrorPage)(nil)).Elem()
+func (*domainErrorPagePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainErrorPage)(nil)).Elem()
 }
 
-func (i *cdnDomainErrorPagePtrType) ToCdnDomainErrorPagePtrOutput() CdnDomainErrorPagePtrOutput {
-	return i.ToCdnDomainErrorPagePtrOutputWithContext(context.Background())
+func (i *domainErrorPagePtrType) ToDomainErrorPagePtrOutput() DomainErrorPagePtrOutput {
+	return i.ToDomainErrorPagePtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainErrorPagePtrType) ToCdnDomainErrorPagePtrOutputWithContext(ctx context.Context) CdnDomainErrorPagePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainErrorPagePtrOutput)
+func (i *domainErrorPagePtrType) ToDomainErrorPagePtrOutputWithContext(ctx context.Context) DomainErrorPagePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainErrorPagePtrOutput)
 }
 
-type CdnDomainErrorPageOutput struct{ *pulumi.OutputState }
+type DomainErrorPageOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainErrorPageOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainErrorPage)(nil)).Elem()
+func (DomainErrorPageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainErrorPage)(nil)).Elem()
 }
 
-func (o CdnDomainErrorPageOutput) ToCdnDomainErrorPageOutput() CdnDomainErrorPageOutput {
+func (o DomainErrorPageOutput) ToDomainErrorPageOutput() DomainErrorPageOutput {
 	return o
 }
 
-func (o CdnDomainErrorPageOutput) ToCdnDomainErrorPageOutputWithContext(ctx context.Context) CdnDomainErrorPageOutput {
+func (o DomainErrorPageOutput) ToDomainErrorPageOutputWithContext(ctx context.Context) DomainErrorPageOutput {
 	return o
 }
 
-func (o CdnDomainErrorPageOutput) ToCdnDomainErrorPagePtrOutput() CdnDomainErrorPagePtrOutput {
-	return o.ToCdnDomainErrorPagePtrOutputWithContext(context.Background())
+func (o DomainErrorPageOutput) ToDomainErrorPagePtrOutput() DomainErrorPagePtrOutput {
+	return o.ToDomainErrorPagePtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainErrorPageOutput) ToCdnDomainErrorPagePtrOutputWithContext(ctx context.Context) CdnDomainErrorPagePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainErrorPage) *CdnDomainErrorPage {
+func (o DomainErrorPageOutput) ToDomainErrorPagePtrOutputWithContext(ctx context.Context) DomainErrorPagePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainErrorPage) *DomainErrorPage {
 		return &v
-	}).(CdnDomainErrorPagePtrOutput)
+	}).(DomainErrorPagePtrOutput)
 }
 
-func (o CdnDomainErrorPageOutput) PageRules() CdnDomainErrorPagePageRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainErrorPage) []CdnDomainErrorPagePageRule { return v.PageRules }).(CdnDomainErrorPagePageRuleArrayOutput)
+// List of error page rule.
+func (o DomainErrorPageOutput) PageRules() DomainErrorPagePageRuleArrayOutput {
+	return o.ApplyT(func(v DomainErrorPage) []DomainErrorPagePageRule { return v.PageRules }).(DomainErrorPagePageRuleArrayOutput)
 }
 
-func (o CdnDomainErrorPageOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainErrorPage) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainErrorPageOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainErrorPage) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainErrorPagePtrOutput struct{ *pulumi.OutputState }
+type DomainErrorPagePtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainErrorPagePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainErrorPage)(nil)).Elem()
+func (DomainErrorPagePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainErrorPage)(nil)).Elem()
 }
 
-func (o CdnDomainErrorPagePtrOutput) ToCdnDomainErrorPagePtrOutput() CdnDomainErrorPagePtrOutput {
+func (o DomainErrorPagePtrOutput) ToDomainErrorPagePtrOutput() DomainErrorPagePtrOutput {
 	return o
 }
 
-func (o CdnDomainErrorPagePtrOutput) ToCdnDomainErrorPagePtrOutputWithContext(ctx context.Context) CdnDomainErrorPagePtrOutput {
+func (o DomainErrorPagePtrOutput) ToDomainErrorPagePtrOutputWithContext(ctx context.Context) DomainErrorPagePtrOutput {
 	return o
 }
 
-func (o CdnDomainErrorPagePtrOutput) Elem() CdnDomainErrorPageOutput {
-	return o.ApplyT(func(v *CdnDomainErrorPage) CdnDomainErrorPage {
+func (o DomainErrorPagePtrOutput) Elem() DomainErrorPageOutput {
+	return o.ApplyT(func(v *DomainErrorPage) DomainErrorPage {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainErrorPage
+		var ret DomainErrorPage
 		return ret
-	}).(CdnDomainErrorPageOutput)
+	}).(DomainErrorPageOutput)
 }
 
-func (o CdnDomainErrorPagePtrOutput) PageRules() CdnDomainErrorPagePageRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainErrorPage) []CdnDomainErrorPagePageRule {
+// List of error page rule.
+func (o DomainErrorPagePtrOutput) PageRules() DomainErrorPagePageRuleArrayOutput {
+	return o.ApplyT(func(v *DomainErrorPage) []DomainErrorPagePageRule {
 		if v == nil {
 			return nil
 		}
 		return v.PageRules
-	}).(CdnDomainErrorPagePageRuleArrayOutput)
+	}).(DomainErrorPagePageRuleArrayOutput)
 }
 
-func (o CdnDomainErrorPagePtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainErrorPage) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainErrorPagePtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainErrorPage) *string {
 		if v == nil {
 			return nil
 		}
@@ -2414,302 +2668,334 @@ func (o CdnDomainErrorPagePtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainErrorPagePageRule struct {
-	RedirectCode int    `pulumi:"redirectCode"`
-	RedirectUrl  string `pulumi:"redirectUrl"`
-	StatusCode   int    `pulumi:"statusCode"`
+type DomainErrorPagePageRule struct {
+	// Redirect code of error page rules.
+	RedirectCode int `pulumi:"redirectCode"`
+	// Redirect url of error page rules.
+	RedirectUrl string `pulumi:"redirectUrl"`
+	// Status code of error page rules.
+	StatusCode int `pulumi:"statusCode"`
 }
 
-// CdnDomainErrorPagePageRuleInput is an input type that accepts CdnDomainErrorPagePageRuleArgs and CdnDomainErrorPagePageRuleOutput values.
-// You can construct a concrete instance of `CdnDomainErrorPagePageRuleInput` via:
+// DomainErrorPagePageRuleInput is an input type that accepts DomainErrorPagePageRuleArgs and DomainErrorPagePageRuleOutput values.
+// You can construct a concrete instance of `DomainErrorPagePageRuleInput` via:
 //
-//          CdnDomainErrorPagePageRuleArgs{...}
-type CdnDomainErrorPagePageRuleInput interface {
+//          DomainErrorPagePageRuleArgs{...}
+type DomainErrorPagePageRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainErrorPagePageRuleOutput() CdnDomainErrorPagePageRuleOutput
-	ToCdnDomainErrorPagePageRuleOutputWithContext(context.Context) CdnDomainErrorPagePageRuleOutput
+	ToDomainErrorPagePageRuleOutput() DomainErrorPagePageRuleOutput
+	ToDomainErrorPagePageRuleOutputWithContext(context.Context) DomainErrorPagePageRuleOutput
 }
 
-type CdnDomainErrorPagePageRuleArgs struct {
-	RedirectCode pulumi.IntInput    `pulumi:"redirectCode"`
-	RedirectUrl  pulumi.StringInput `pulumi:"redirectUrl"`
-	StatusCode   pulumi.IntInput    `pulumi:"statusCode"`
+type DomainErrorPagePageRuleArgs struct {
+	// Redirect code of error page rules.
+	RedirectCode pulumi.IntInput `pulumi:"redirectCode"`
+	// Redirect url of error page rules.
+	RedirectUrl pulumi.StringInput `pulumi:"redirectUrl"`
+	// Status code of error page rules.
+	StatusCode pulumi.IntInput `pulumi:"statusCode"`
 }
 
-func (CdnDomainErrorPagePageRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainErrorPagePageRule)(nil)).Elem()
+func (DomainErrorPagePageRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainErrorPagePageRule)(nil)).Elem()
 }
 
-func (i CdnDomainErrorPagePageRuleArgs) ToCdnDomainErrorPagePageRuleOutput() CdnDomainErrorPagePageRuleOutput {
-	return i.ToCdnDomainErrorPagePageRuleOutputWithContext(context.Background())
+func (i DomainErrorPagePageRuleArgs) ToDomainErrorPagePageRuleOutput() DomainErrorPagePageRuleOutput {
+	return i.ToDomainErrorPagePageRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainErrorPagePageRuleArgs) ToCdnDomainErrorPagePageRuleOutputWithContext(ctx context.Context) CdnDomainErrorPagePageRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainErrorPagePageRuleOutput)
+func (i DomainErrorPagePageRuleArgs) ToDomainErrorPagePageRuleOutputWithContext(ctx context.Context) DomainErrorPagePageRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainErrorPagePageRuleOutput)
 }
 
-// CdnDomainErrorPagePageRuleArrayInput is an input type that accepts CdnDomainErrorPagePageRuleArray and CdnDomainErrorPagePageRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainErrorPagePageRuleArrayInput` via:
+// DomainErrorPagePageRuleArrayInput is an input type that accepts DomainErrorPagePageRuleArray and DomainErrorPagePageRuleArrayOutput values.
+// You can construct a concrete instance of `DomainErrorPagePageRuleArrayInput` via:
 //
-//          CdnDomainErrorPagePageRuleArray{ CdnDomainErrorPagePageRuleArgs{...} }
-type CdnDomainErrorPagePageRuleArrayInput interface {
+//          DomainErrorPagePageRuleArray{ DomainErrorPagePageRuleArgs{...} }
+type DomainErrorPagePageRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainErrorPagePageRuleArrayOutput() CdnDomainErrorPagePageRuleArrayOutput
-	ToCdnDomainErrorPagePageRuleArrayOutputWithContext(context.Context) CdnDomainErrorPagePageRuleArrayOutput
+	ToDomainErrorPagePageRuleArrayOutput() DomainErrorPagePageRuleArrayOutput
+	ToDomainErrorPagePageRuleArrayOutputWithContext(context.Context) DomainErrorPagePageRuleArrayOutput
 }
 
-type CdnDomainErrorPagePageRuleArray []CdnDomainErrorPagePageRuleInput
+type DomainErrorPagePageRuleArray []DomainErrorPagePageRuleInput
 
-func (CdnDomainErrorPagePageRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainErrorPagePageRule)(nil)).Elem()
+func (DomainErrorPagePageRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainErrorPagePageRule)(nil)).Elem()
 }
 
-func (i CdnDomainErrorPagePageRuleArray) ToCdnDomainErrorPagePageRuleArrayOutput() CdnDomainErrorPagePageRuleArrayOutput {
-	return i.ToCdnDomainErrorPagePageRuleArrayOutputWithContext(context.Background())
+func (i DomainErrorPagePageRuleArray) ToDomainErrorPagePageRuleArrayOutput() DomainErrorPagePageRuleArrayOutput {
+	return i.ToDomainErrorPagePageRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainErrorPagePageRuleArray) ToCdnDomainErrorPagePageRuleArrayOutputWithContext(ctx context.Context) CdnDomainErrorPagePageRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainErrorPagePageRuleArrayOutput)
+func (i DomainErrorPagePageRuleArray) ToDomainErrorPagePageRuleArrayOutputWithContext(ctx context.Context) DomainErrorPagePageRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainErrorPagePageRuleArrayOutput)
 }
 
-type CdnDomainErrorPagePageRuleOutput struct{ *pulumi.OutputState }
+type DomainErrorPagePageRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainErrorPagePageRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainErrorPagePageRule)(nil)).Elem()
+func (DomainErrorPagePageRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainErrorPagePageRule)(nil)).Elem()
 }
 
-func (o CdnDomainErrorPagePageRuleOutput) ToCdnDomainErrorPagePageRuleOutput() CdnDomainErrorPagePageRuleOutput {
+func (o DomainErrorPagePageRuleOutput) ToDomainErrorPagePageRuleOutput() DomainErrorPagePageRuleOutput {
 	return o
 }
 
-func (o CdnDomainErrorPagePageRuleOutput) ToCdnDomainErrorPagePageRuleOutputWithContext(ctx context.Context) CdnDomainErrorPagePageRuleOutput {
+func (o DomainErrorPagePageRuleOutput) ToDomainErrorPagePageRuleOutputWithContext(ctx context.Context) DomainErrorPagePageRuleOutput {
 	return o
 }
 
-func (o CdnDomainErrorPagePageRuleOutput) RedirectCode() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainErrorPagePageRule) int { return v.RedirectCode }).(pulumi.IntOutput)
+// Redirect code of error page rules.
+func (o DomainErrorPagePageRuleOutput) RedirectCode() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainErrorPagePageRule) int { return v.RedirectCode }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainErrorPagePageRuleOutput) RedirectUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainErrorPagePageRule) string { return v.RedirectUrl }).(pulumi.StringOutput)
+// Redirect url of error page rules.
+func (o DomainErrorPagePageRuleOutput) RedirectUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainErrorPagePageRule) string { return v.RedirectUrl }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainErrorPagePageRuleOutput) StatusCode() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainErrorPagePageRule) int { return v.StatusCode }).(pulumi.IntOutput)
+// Status code of error page rules.
+func (o DomainErrorPagePageRuleOutput) StatusCode() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainErrorPagePageRule) int { return v.StatusCode }).(pulumi.IntOutput)
 }
 
-type CdnDomainErrorPagePageRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainErrorPagePageRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainErrorPagePageRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainErrorPagePageRule)(nil)).Elem()
+func (DomainErrorPagePageRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainErrorPagePageRule)(nil)).Elem()
 }
 
-func (o CdnDomainErrorPagePageRuleArrayOutput) ToCdnDomainErrorPagePageRuleArrayOutput() CdnDomainErrorPagePageRuleArrayOutput {
+func (o DomainErrorPagePageRuleArrayOutput) ToDomainErrorPagePageRuleArrayOutput() DomainErrorPagePageRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainErrorPagePageRuleArrayOutput) ToCdnDomainErrorPagePageRuleArrayOutputWithContext(ctx context.Context) CdnDomainErrorPagePageRuleArrayOutput {
+func (o DomainErrorPagePageRuleArrayOutput) ToDomainErrorPagePageRuleArrayOutputWithContext(ctx context.Context) DomainErrorPagePageRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainErrorPagePageRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainErrorPagePageRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainErrorPagePageRule {
-		return vs[0].([]CdnDomainErrorPagePageRule)[vs[1].(int)]
-	}).(CdnDomainErrorPagePageRuleOutput)
+func (o DomainErrorPagePageRuleArrayOutput) Index(i pulumi.IntInput) DomainErrorPagePageRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainErrorPagePageRule {
+		return vs[0].([]DomainErrorPagePageRule)[vs[1].(int)]
+	}).(DomainErrorPagePageRuleOutput)
 }
 
-type CdnDomainHttpsConfig struct {
-	ClientCertificateConfig *CdnDomainHttpsConfigClientCertificateConfig `pulumi:"clientCertificateConfig"`
-	ForceRedirect           *CdnDomainHttpsConfigForceRedirect           `pulumi:"forceRedirect"`
-	Http2Switch             *string                                      `pulumi:"http2Switch"`
-	HttpsSwitch             string                                       `pulumi:"httpsSwitch"`
-	OcspStaplingSwitch      *string                                      `pulumi:"ocspStaplingSwitch"`
-	ServerCertificateConfig *CdnDomainHttpsConfigServerCertificateConfig `pulumi:"serverCertificateConfig"`
-	SpdySwitch              *string                                      `pulumi:"spdySwitch"`
-	VerifyClient            *string                                      `pulumi:"verifyClient"`
+type DomainHttpsConfig struct {
+	// Client certificate configuration information.
+	ClientCertificateConfig *DomainHttpsConfigClientCertificateConfig `pulumi:"clientCertificateConfig"`
+	// Configuration of forced HTTP or HTTPS redirects.
+	ForceRedirect *DomainHttpsConfigForceRedirect `pulumi:"forceRedirect"`
+	// HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
+	Http2Switch *string `pulumi:"http2Switch"`
+	// HTTPS configuration switch. Valid values are `on` and `off`.
+	HttpsSwitch string `pulumi:"httpsSwitch"`
+	// OCSP configuration switch. Valid values are `on` and `off`. and default value is `off`.
+	OcspStaplingSwitch *string `pulumi:"ocspStaplingSwitch"`
+	// Server certificate configuration information.
+	ServerCertificateConfig *DomainHttpsConfigServerCertificateConfig `pulumi:"serverCertificateConfig"`
+	// Spdy configuration switch. Valid values are `on` and `off`. and default value is `off`. This parameter is for white-list customer.
+	SpdySwitch *string `pulumi:"spdySwitch"`
+	// Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
+	VerifyClient *string `pulumi:"verifyClient"`
 }
 
-// CdnDomainHttpsConfigInput is an input type that accepts CdnDomainHttpsConfigArgs and CdnDomainHttpsConfigOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigInput` via:
+// DomainHttpsConfigInput is an input type that accepts DomainHttpsConfigArgs and DomainHttpsConfigOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigInput` via:
 //
-//          CdnDomainHttpsConfigArgs{...}
-type CdnDomainHttpsConfigInput interface {
+//          DomainHttpsConfigArgs{...}
+type DomainHttpsConfigInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigOutput() CdnDomainHttpsConfigOutput
-	ToCdnDomainHttpsConfigOutputWithContext(context.Context) CdnDomainHttpsConfigOutput
+	ToDomainHttpsConfigOutput() DomainHttpsConfigOutput
+	ToDomainHttpsConfigOutputWithContext(context.Context) DomainHttpsConfigOutput
 }
 
-type CdnDomainHttpsConfigArgs struct {
-	ClientCertificateConfig CdnDomainHttpsConfigClientCertificateConfigPtrInput `pulumi:"clientCertificateConfig"`
-	ForceRedirect           CdnDomainHttpsConfigForceRedirectPtrInput           `pulumi:"forceRedirect"`
-	Http2Switch             pulumi.StringPtrInput                               `pulumi:"http2Switch"`
-	HttpsSwitch             pulumi.StringInput                                  `pulumi:"httpsSwitch"`
-	OcspStaplingSwitch      pulumi.StringPtrInput                               `pulumi:"ocspStaplingSwitch"`
-	ServerCertificateConfig CdnDomainHttpsConfigServerCertificateConfigPtrInput `pulumi:"serverCertificateConfig"`
-	SpdySwitch              pulumi.StringPtrInput                               `pulumi:"spdySwitch"`
-	VerifyClient            pulumi.StringPtrInput                               `pulumi:"verifyClient"`
+type DomainHttpsConfigArgs struct {
+	// Client certificate configuration information.
+	ClientCertificateConfig DomainHttpsConfigClientCertificateConfigPtrInput `pulumi:"clientCertificateConfig"`
+	// Configuration of forced HTTP or HTTPS redirects.
+	ForceRedirect DomainHttpsConfigForceRedirectPtrInput `pulumi:"forceRedirect"`
+	// HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
+	Http2Switch pulumi.StringPtrInput `pulumi:"http2Switch"`
+	// HTTPS configuration switch. Valid values are `on` and `off`.
+	HttpsSwitch pulumi.StringInput `pulumi:"httpsSwitch"`
+	// OCSP configuration switch. Valid values are `on` and `off`. and default value is `off`.
+	OcspStaplingSwitch pulumi.StringPtrInput `pulumi:"ocspStaplingSwitch"`
+	// Server certificate configuration information.
+	ServerCertificateConfig DomainHttpsConfigServerCertificateConfigPtrInput `pulumi:"serverCertificateConfig"`
+	// Spdy configuration switch. Valid values are `on` and `off`. and default value is `off`. This parameter is for white-list customer.
+	SpdySwitch pulumi.StringPtrInput `pulumi:"spdySwitch"`
+	// Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
+	VerifyClient pulumi.StringPtrInput `pulumi:"verifyClient"`
 }
 
-func (CdnDomainHttpsConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfig)(nil)).Elem()
+func (DomainHttpsConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfig)(nil)).Elem()
 }
 
-func (i CdnDomainHttpsConfigArgs) ToCdnDomainHttpsConfigOutput() CdnDomainHttpsConfigOutput {
-	return i.ToCdnDomainHttpsConfigOutputWithContext(context.Background())
+func (i DomainHttpsConfigArgs) ToDomainHttpsConfigOutput() DomainHttpsConfigOutput {
+	return i.ToDomainHttpsConfigOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigArgs) ToCdnDomainHttpsConfigOutputWithContext(ctx context.Context) CdnDomainHttpsConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigOutput)
+func (i DomainHttpsConfigArgs) ToDomainHttpsConfigOutputWithContext(ctx context.Context) DomainHttpsConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigOutput)
 }
 
-func (i CdnDomainHttpsConfigArgs) ToCdnDomainHttpsConfigPtrOutput() CdnDomainHttpsConfigPtrOutput {
-	return i.ToCdnDomainHttpsConfigPtrOutputWithContext(context.Background())
+func (i DomainHttpsConfigArgs) ToDomainHttpsConfigPtrOutput() DomainHttpsConfigPtrOutput {
+	return i.ToDomainHttpsConfigPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigArgs) ToCdnDomainHttpsConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigOutput).ToCdnDomainHttpsConfigPtrOutputWithContext(ctx)
+func (i DomainHttpsConfigArgs) ToDomainHttpsConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigOutput).ToDomainHttpsConfigPtrOutputWithContext(ctx)
 }
 
-// CdnDomainHttpsConfigPtrInput is an input type that accepts CdnDomainHttpsConfigArgs, CdnDomainHttpsConfigPtr and CdnDomainHttpsConfigPtrOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigPtrInput` via:
+// DomainHttpsConfigPtrInput is an input type that accepts DomainHttpsConfigArgs, DomainHttpsConfigPtr and DomainHttpsConfigPtrOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigPtrInput` via:
 //
-//          CdnDomainHttpsConfigArgs{...}
+//          DomainHttpsConfigArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainHttpsConfigPtrInput interface {
+type DomainHttpsConfigPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigPtrOutput() CdnDomainHttpsConfigPtrOutput
-	ToCdnDomainHttpsConfigPtrOutputWithContext(context.Context) CdnDomainHttpsConfigPtrOutput
+	ToDomainHttpsConfigPtrOutput() DomainHttpsConfigPtrOutput
+	ToDomainHttpsConfigPtrOutputWithContext(context.Context) DomainHttpsConfigPtrOutput
 }
 
-type cdnDomainHttpsConfigPtrType CdnDomainHttpsConfigArgs
+type domainHttpsConfigPtrType DomainHttpsConfigArgs
 
-func CdnDomainHttpsConfigPtr(v *CdnDomainHttpsConfigArgs) CdnDomainHttpsConfigPtrInput {
-	return (*cdnDomainHttpsConfigPtrType)(v)
+func DomainHttpsConfigPtr(v *DomainHttpsConfigArgs) DomainHttpsConfigPtrInput {
+	return (*domainHttpsConfigPtrType)(v)
 }
 
-func (*cdnDomainHttpsConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfig)(nil)).Elem()
+func (*domainHttpsConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfig)(nil)).Elem()
 }
 
-func (i *cdnDomainHttpsConfigPtrType) ToCdnDomainHttpsConfigPtrOutput() CdnDomainHttpsConfigPtrOutput {
-	return i.ToCdnDomainHttpsConfigPtrOutputWithContext(context.Background())
+func (i *domainHttpsConfigPtrType) ToDomainHttpsConfigPtrOutput() DomainHttpsConfigPtrOutput {
+	return i.ToDomainHttpsConfigPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainHttpsConfigPtrType) ToCdnDomainHttpsConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigPtrOutput)
+func (i *domainHttpsConfigPtrType) ToDomainHttpsConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigPtrOutput)
 }
 
-type CdnDomainHttpsConfigOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfig)(nil)).Elem()
+func (DomainHttpsConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfig)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigOutput) ToCdnDomainHttpsConfigOutput() CdnDomainHttpsConfigOutput {
+func (o DomainHttpsConfigOutput) ToDomainHttpsConfigOutput() DomainHttpsConfigOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigOutput) ToCdnDomainHttpsConfigOutputWithContext(ctx context.Context) CdnDomainHttpsConfigOutput {
+func (o DomainHttpsConfigOutput) ToDomainHttpsConfigOutputWithContext(ctx context.Context) DomainHttpsConfigOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigOutput) ToCdnDomainHttpsConfigPtrOutput() CdnDomainHttpsConfigPtrOutput {
-	return o.ToCdnDomainHttpsConfigPtrOutputWithContext(context.Background())
+func (o DomainHttpsConfigOutput) ToDomainHttpsConfigPtrOutput() DomainHttpsConfigPtrOutput {
+	return o.ToDomainHttpsConfigPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainHttpsConfigOutput) ToCdnDomainHttpsConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainHttpsConfig) *CdnDomainHttpsConfig {
+func (o DomainHttpsConfigOutput) ToDomainHttpsConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainHttpsConfig) *DomainHttpsConfig {
 		return &v
-	}).(CdnDomainHttpsConfigPtrOutput)
+	}).(DomainHttpsConfigPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) ClientCertificateConfig() CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) *CdnDomainHttpsConfigClientCertificateConfig {
-		return v.ClientCertificateConfig
-	}).(CdnDomainHttpsConfigClientCertificateConfigPtrOutput)
+// Client certificate configuration information.
+func (o DomainHttpsConfigOutput) ClientCertificateConfig() DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *DomainHttpsConfigClientCertificateConfig { return v.ClientCertificateConfig }).(DomainHttpsConfigClientCertificateConfigPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) ForceRedirect() CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) *CdnDomainHttpsConfigForceRedirect { return v.ForceRedirect }).(CdnDomainHttpsConfigForceRedirectPtrOutput)
+// Configuration of forced HTTP or HTTPS redirects.
+func (o DomainHttpsConfigOutput) ForceRedirect() DomainHttpsConfigForceRedirectPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *DomainHttpsConfigForceRedirect { return v.ForceRedirect }).(DomainHttpsConfigForceRedirectPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) Http2Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) *string { return v.Http2Switch }).(pulumi.StringPtrOutput)
+// HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainHttpsConfigOutput) Http2Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *string { return v.Http2Switch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) HttpsSwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) string { return v.HttpsSwitch }).(pulumi.StringOutput)
+// HTTPS configuration switch. Valid values are `on` and `off`.
+func (o DomainHttpsConfigOutput) HttpsSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) string { return v.HttpsSwitch }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) OcspStaplingSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) *string { return v.OcspStaplingSwitch }).(pulumi.StringPtrOutput)
+// OCSP configuration switch. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainHttpsConfigOutput) OcspStaplingSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *string { return v.OcspStaplingSwitch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) ServerCertificateConfig() CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) *CdnDomainHttpsConfigServerCertificateConfig {
-		return v.ServerCertificateConfig
-	}).(CdnDomainHttpsConfigServerCertificateConfigPtrOutput)
+// Server certificate configuration information.
+func (o DomainHttpsConfigOutput) ServerCertificateConfig() DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *DomainHttpsConfigServerCertificateConfig { return v.ServerCertificateConfig }).(DomainHttpsConfigServerCertificateConfigPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) SpdySwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) *string { return v.SpdySwitch }).(pulumi.StringPtrOutput)
+// Spdy configuration switch. Valid values are `on` and `off`. and default value is `off`. This parameter is for white-list customer.
+func (o DomainHttpsConfigOutput) SpdySwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *string { return v.SpdySwitch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigOutput) VerifyClient() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfig) *string { return v.VerifyClient }).(pulumi.StringPtrOutput)
+// Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainHttpsConfigOutput) VerifyClient() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *string { return v.VerifyClient }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHttpsConfigPtrOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfig)(nil)).Elem()
+func (DomainHttpsConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfig)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) ToCdnDomainHttpsConfigPtrOutput() CdnDomainHttpsConfigPtrOutput {
+func (o DomainHttpsConfigPtrOutput) ToDomainHttpsConfigPtrOutput() DomainHttpsConfigPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) ToCdnDomainHttpsConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigPtrOutput {
+func (o DomainHttpsConfigPtrOutput) ToDomainHttpsConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) Elem() CdnDomainHttpsConfigOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) CdnDomainHttpsConfig {
+func (o DomainHttpsConfigPtrOutput) Elem() DomainHttpsConfigOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) DomainHttpsConfig {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainHttpsConfig
+		var ret DomainHttpsConfig
 		return ret
-	}).(CdnDomainHttpsConfigOutput)
+	}).(DomainHttpsConfigOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) ClientCertificateConfig() CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *CdnDomainHttpsConfigClientCertificateConfig {
+// Client certificate configuration information.
+func (o DomainHttpsConfigPtrOutput) ClientCertificateConfig() DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *DomainHttpsConfigClientCertificateConfig {
 		if v == nil {
 			return nil
 		}
 		return v.ClientCertificateConfig
-	}).(CdnDomainHttpsConfigClientCertificateConfigPtrOutput)
+	}).(DomainHttpsConfigClientCertificateConfigPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) ForceRedirect() CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *CdnDomainHttpsConfigForceRedirect {
+// Configuration of forced HTTP or HTTPS redirects.
+func (o DomainHttpsConfigPtrOutput) ForceRedirect() DomainHttpsConfigForceRedirectPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *DomainHttpsConfigForceRedirect {
 		if v == nil {
 			return nil
 		}
 		return v.ForceRedirect
-	}).(CdnDomainHttpsConfigForceRedirectPtrOutput)
+	}).(DomainHttpsConfigForceRedirectPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) Http2Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *string {
+// HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainHttpsConfigPtrOutput) Http2Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2717,8 +3003,9 @@ func (o CdnDomainHttpsConfigPtrOutput) Http2Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) HttpsSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *string {
+// HTTPS configuration switch. Valid values are `on` and `off`.
+func (o DomainHttpsConfigPtrOutput) HttpsSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2726,8 +3013,9 @@ func (o CdnDomainHttpsConfigPtrOutput) HttpsSwitch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) OcspStaplingSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *string {
+// OCSP configuration switch. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainHttpsConfigPtrOutput) OcspStaplingSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2735,17 +3023,19 @@ func (o CdnDomainHttpsConfigPtrOutput) OcspStaplingSwitch() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) ServerCertificateConfig() CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *CdnDomainHttpsConfigServerCertificateConfig {
+// Server certificate configuration information.
+func (o DomainHttpsConfigPtrOutput) ServerCertificateConfig() DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *DomainHttpsConfigServerCertificateConfig {
 		if v == nil {
 			return nil
 		}
 		return v.ServerCertificateConfig
-	}).(CdnDomainHttpsConfigServerCertificateConfigPtrOutput)
+	}).(DomainHttpsConfigServerCertificateConfigPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) SpdySwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *string {
+// Spdy configuration switch. Valid values are `on` and `off`. and default value is `off`. This parameter is for white-list customer.
+func (o DomainHttpsConfigPtrOutput) SpdySwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2753,8 +3043,9 @@ func (o CdnDomainHttpsConfigPtrOutput) SpdySwitch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigPtrOutput) VerifyClient() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfig) *string {
+// Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainHttpsConfigPtrOutput) VerifyClient() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2762,150 +3053,157 @@ func (o CdnDomainHttpsConfigPtrOutput) VerifyClient() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHttpsConfigClientCertificateConfig struct {
+type DomainHttpsConfigClientCertificateConfig struct {
+	// Client Certificate PEM format, requires Base64 encoding.
 	CertificateContent string  `pulumi:"certificateContent"`
 	CertificateName    *string `pulumi:"certificateName"`
 	DeployTime         *string `pulumi:"deployTime"`
-	ExpireTime         *string `pulumi:"expireTime"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime *string `pulumi:"expireTime"`
 }
 
-// CdnDomainHttpsConfigClientCertificateConfigInput is an input type that accepts CdnDomainHttpsConfigClientCertificateConfigArgs and CdnDomainHttpsConfigClientCertificateConfigOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigClientCertificateConfigInput` via:
+// DomainHttpsConfigClientCertificateConfigInput is an input type that accepts DomainHttpsConfigClientCertificateConfigArgs and DomainHttpsConfigClientCertificateConfigOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigClientCertificateConfigInput` via:
 //
-//          CdnDomainHttpsConfigClientCertificateConfigArgs{...}
-type CdnDomainHttpsConfigClientCertificateConfigInput interface {
+//          DomainHttpsConfigClientCertificateConfigArgs{...}
+type DomainHttpsConfigClientCertificateConfigInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigClientCertificateConfigOutput() CdnDomainHttpsConfigClientCertificateConfigOutput
-	ToCdnDomainHttpsConfigClientCertificateConfigOutputWithContext(context.Context) CdnDomainHttpsConfigClientCertificateConfigOutput
+	ToDomainHttpsConfigClientCertificateConfigOutput() DomainHttpsConfigClientCertificateConfigOutput
+	ToDomainHttpsConfigClientCertificateConfigOutputWithContext(context.Context) DomainHttpsConfigClientCertificateConfigOutput
 }
 
-type CdnDomainHttpsConfigClientCertificateConfigArgs struct {
+type DomainHttpsConfigClientCertificateConfigArgs struct {
+	// Client Certificate PEM format, requires Base64 encoding.
 	CertificateContent pulumi.StringInput    `pulumi:"certificateContent"`
 	CertificateName    pulumi.StringPtrInput `pulumi:"certificateName"`
 	DeployTime         pulumi.StringPtrInput `pulumi:"deployTime"`
-	ExpireTime         pulumi.StringPtrInput `pulumi:"expireTime"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime pulumi.StringPtrInput `pulumi:"expireTime"`
 }
 
-func (CdnDomainHttpsConfigClientCertificateConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfigClientCertificateConfig)(nil)).Elem()
+func (DomainHttpsConfigClientCertificateConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigClientCertificateConfig)(nil)).Elem()
 }
 
-func (i CdnDomainHttpsConfigClientCertificateConfigArgs) ToCdnDomainHttpsConfigClientCertificateConfigOutput() CdnDomainHttpsConfigClientCertificateConfigOutput {
-	return i.ToCdnDomainHttpsConfigClientCertificateConfigOutputWithContext(context.Background())
+func (i DomainHttpsConfigClientCertificateConfigArgs) ToDomainHttpsConfigClientCertificateConfigOutput() DomainHttpsConfigClientCertificateConfigOutput {
+	return i.ToDomainHttpsConfigClientCertificateConfigOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigClientCertificateConfigArgs) ToCdnDomainHttpsConfigClientCertificateConfigOutputWithContext(ctx context.Context) CdnDomainHttpsConfigClientCertificateConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigClientCertificateConfigOutput)
+func (i DomainHttpsConfigClientCertificateConfigArgs) ToDomainHttpsConfigClientCertificateConfigOutputWithContext(ctx context.Context) DomainHttpsConfigClientCertificateConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigClientCertificateConfigOutput)
 }
 
-func (i CdnDomainHttpsConfigClientCertificateConfigArgs) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutput() CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return i.ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Background())
+func (i DomainHttpsConfigClientCertificateConfigArgs) ToDomainHttpsConfigClientCertificateConfigPtrOutput() DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return i.ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigClientCertificateConfigArgs) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigClientCertificateConfigOutput).ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx)
+func (i DomainHttpsConfigClientCertificateConfigArgs) ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigClientCertificateConfigOutput).ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx)
 }
 
-// CdnDomainHttpsConfigClientCertificateConfigPtrInput is an input type that accepts CdnDomainHttpsConfigClientCertificateConfigArgs, CdnDomainHttpsConfigClientCertificateConfigPtr and CdnDomainHttpsConfigClientCertificateConfigPtrOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigClientCertificateConfigPtrInput` via:
+// DomainHttpsConfigClientCertificateConfigPtrInput is an input type that accepts DomainHttpsConfigClientCertificateConfigArgs, DomainHttpsConfigClientCertificateConfigPtr and DomainHttpsConfigClientCertificateConfigPtrOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigClientCertificateConfigPtrInput` via:
 //
-//          CdnDomainHttpsConfigClientCertificateConfigArgs{...}
+//          DomainHttpsConfigClientCertificateConfigArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainHttpsConfigClientCertificateConfigPtrInput interface {
+type DomainHttpsConfigClientCertificateConfigPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigClientCertificateConfigPtrOutput() CdnDomainHttpsConfigClientCertificateConfigPtrOutput
-	ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Context) CdnDomainHttpsConfigClientCertificateConfigPtrOutput
+	ToDomainHttpsConfigClientCertificateConfigPtrOutput() DomainHttpsConfigClientCertificateConfigPtrOutput
+	ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Context) DomainHttpsConfigClientCertificateConfigPtrOutput
 }
 
-type cdnDomainHttpsConfigClientCertificateConfigPtrType CdnDomainHttpsConfigClientCertificateConfigArgs
+type domainHttpsConfigClientCertificateConfigPtrType DomainHttpsConfigClientCertificateConfigArgs
 
-func CdnDomainHttpsConfigClientCertificateConfigPtr(v *CdnDomainHttpsConfigClientCertificateConfigArgs) CdnDomainHttpsConfigClientCertificateConfigPtrInput {
-	return (*cdnDomainHttpsConfigClientCertificateConfigPtrType)(v)
+func DomainHttpsConfigClientCertificateConfigPtr(v *DomainHttpsConfigClientCertificateConfigArgs) DomainHttpsConfigClientCertificateConfigPtrInput {
+	return (*domainHttpsConfigClientCertificateConfigPtrType)(v)
 }
 
-func (*cdnDomainHttpsConfigClientCertificateConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfigClientCertificateConfig)(nil)).Elem()
+func (*domainHttpsConfigClientCertificateConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigClientCertificateConfig)(nil)).Elem()
 }
 
-func (i *cdnDomainHttpsConfigClientCertificateConfigPtrType) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutput() CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return i.ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Background())
+func (i *domainHttpsConfigClientCertificateConfigPtrType) ToDomainHttpsConfigClientCertificateConfigPtrOutput() DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return i.ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainHttpsConfigClientCertificateConfigPtrType) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigClientCertificateConfigPtrOutput)
+func (i *domainHttpsConfigClientCertificateConfigPtrType) ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigClientCertificateConfigPtrOutput)
 }
 
-type CdnDomainHttpsConfigClientCertificateConfigOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigClientCertificateConfigOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigClientCertificateConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfigClientCertificateConfig)(nil)).Elem()
+func (DomainHttpsConfigClientCertificateConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigClientCertificateConfig)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) ToCdnDomainHttpsConfigClientCertificateConfigOutput() CdnDomainHttpsConfigClientCertificateConfigOutput {
+func (o DomainHttpsConfigClientCertificateConfigOutput) ToDomainHttpsConfigClientCertificateConfigOutput() DomainHttpsConfigClientCertificateConfigOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) ToCdnDomainHttpsConfigClientCertificateConfigOutputWithContext(ctx context.Context) CdnDomainHttpsConfigClientCertificateConfigOutput {
+func (o DomainHttpsConfigClientCertificateConfigOutput) ToDomainHttpsConfigClientCertificateConfigOutputWithContext(ctx context.Context) DomainHttpsConfigClientCertificateConfigOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutput() CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return o.ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Background())
+func (o DomainHttpsConfigClientCertificateConfigOutput) ToDomainHttpsConfigClientCertificateConfigPtrOutput() DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return o.ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainHttpsConfigClientCertificateConfig) *CdnDomainHttpsConfigClientCertificateConfig {
+func (o DomainHttpsConfigClientCertificateConfigOutput) ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigClientCertificateConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainHttpsConfigClientCertificateConfig) *DomainHttpsConfigClientCertificateConfig {
 		return &v
-	}).(CdnDomainHttpsConfigClientCertificateConfigPtrOutput)
+	}).(DomainHttpsConfigClientCertificateConfigPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) CertificateContent() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigClientCertificateConfig) string { return v.CertificateContent }).(pulumi.StringOutput)
+// Client Certificate PEM format, requires Base64 encoding.
+func (o DomainHttpsConfigClientCertificateConfigOutput) CertificateContent() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) string { return v.CertificateContent }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) CertificateName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigClientCertificateConfig) *string { return v.CertificateName }).(pulumi.StringPtrOutput)
+func (o DomainHttpsConfigClientCertificateConfigOutput) CertificateName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) *string { return v.CertificateName }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) DeployTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigClientCertificateConfig) *string { return v.DeployTime }).(pulumi.StringPtrOutput)
+func (o DomainHttpsConfigClientCertificateConfigOutput) DeployTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) *string { return v.DeployTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigOutput) ExpireTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigClientCertificateConfig) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainHttpsConfigClientCertificateConfigOutput) ExpireTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHttpsConfigClientCertificateConfigPtrOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigClientCertificateConfigPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigClientCertificateConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfigClientCertificateConfig)(nil)).Elem()
+func (DomainHttpsConfigClientCertificateConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigClientCertificateConfig)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutput() CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
+func (o DomainHttpsConfigClientCertificateConfigPtrOutput) ToDomainHttpsConfigClientCertificateConfigPtrOutput() DomainHttpsConfigClientCertificateConfigPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) ToCdnDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigClientCertificateConfigPtrOutput {
+func (o DomainHttpsConfigClientCertificateConfigPtrOutput) ToDomainHttpsConfigClientCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigClientCertificateConfigPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) Elem() CdnDomainHttpsConfigClientCertificateConfigOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigClientCertificateConfig) CdnDomainHttpsConfigClientCertificateConfig {
+func (o DomainHttpsConfigClientCertificateConfigPtrOutput) Elem() DomainHttpsConfigClientCertificateConfigOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) DomainHttpsConfigClientCertificateConfig {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainHttpsConfigClientCertificateConfig
+		var ret DomainHttpsConfigClientCertificateConfig
 		return ret
-	}).(CdnDomainHttpsConfigClientCertificateConfigOutput)
+	}).(DomainHttpsConfigClientCertificateConfigOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) CertificateContent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigClientCertificateConfig) *string {
+// Client Certificate PEM format, requires Base64 encoding.
+func (o DomainHttpsConfigClientCertificateConfigPtrOutput) CertificateContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2913,8 +3211,8 @@ func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) CertificateContent
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) CertificateName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigClientCertificateConfig) *string {
+func (o DomainHttpsConfigClientCertificateConfigPtrOutput) CertificateName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2922,8 +3220,8 @@ func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) CertificateName() 
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) DeployTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigClientCertificateConfig) *string {
+func (o DomainHttpsConfigClientCertificateConfigPtrOutput) DeployTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2931,8 +3229,9 @@ func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) DeployTime() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) ExpireTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigClientCertificateConfig) *string {
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainHttpsConfigClientCertificateConfigPtrOutput) ExpireTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -2940,144 +3239,154 @@ func (o CdnDomainHttpsConfigClientCertificateConfigPtrOutput) ExpireTime() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHttpsConfigForceRedirect struct {
-	RedirectStatusCode *int    `pulumi:"redirectStatusCode"`
-	RedirectType       *string `pulumi:"redirectType"`
-	Switch             *string `pulumi:"switch"`
+type DomainHttpsConfigForceRedirect struct {
+	// Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
+	RedirectStatusCode *int `pulumi:"redirectStatusCode"`
+	// Forced redirect type. Valid values are `http` and `https`. `http` means a forced redirect from HTTPS to HTTP, `https` means a forced redirect from HTTP to HTTPS. When `switch` setting `off`, this property does not need to be set or set to `http`. Default value is `http`.
+	RedirectType *string `pulumi:"redirectType"`
+	// Forced redirect configuration switch. Valid values are `on` and `off`. Default value is `off`.
+	Switch *string `pulumi:"switch"`
 }
 
-// CdnDomainHttpsConfigForceRedirectInput is an input type that accepts CdnDomainHttpsConfigForceRedirectArgs and CdnDomainHttpsConfigForceRedirectOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigForceRedirectInput` via:
+// DomainHttpsConfigForceRedirectInput is an input type that accepts DomainHttpsConfigForceRedirectArgs and DomainHttpsConfigForceRedirectOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigForceRedirectInput` via:
 //
-//          CdnDomainHttpsConfigForceRedirectArgs{...}
-type CdnDomainHttpsConfigForceRedirectInput interface {
+//          DomainHttpsConfigForceRedirectArgs{...}
+type DomainHttpsConfigForceRedirectInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigForceRedirectOutput() CdnDomainHttpsConfigForceRedirectOutput
-	ToCdnDomainHttpsConfigForceRedirectOutputWithContext(context.Context) CdnDomainHttpsConfigForceRedirectOutput
+	ToDomainHttpsConfigForceRedirectOutput() DomainHttpsConfigForceRedirectOutput
+	ToDomainHttpsConfigForceRedirectOutputWithContext(context.Context) DomainHttpsConfigForceRedirectOutput
 }
 
-type CdnDomainHttpsConfigForceRedirectArgs struct {
-	RedirectStatusCode pulumi.IntPtrInput    `pulumi:"redirectStatusCode"`
-	RedirectType       pulumi.StringPtrInput `pulumi:"redirectType"`
-	Switch             pulumi.StringPtrInput `pulumi:"switch"`
+type DomainHttpsConfigForceRedirectArgs struct {
+	// Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
+	RedirectStatusCode pulumi.IntPtrInput `pulumi:"redirectStatusCode"`
+	// Forced redirect type. Valid values are `http` and `https`. `http` means a forced redirect from HTTPS to HTTP, `https` means a forced redirect from HTTP to HTTPS. When `switch` setting `off`, this property does not need to be set or set to `http`. Default value is `http`.
+	RedirectType pulumi.StringPtrInput `pulumi:"redirectType"`
+	// Forced redirect configuration switch. Valid values are `on` and `off`. Default value is `off`.
+	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
-func (CdnDomainHttpsConfigForceRedirectArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfigForceRedirect)(nil)).Elem()
+func (DomainHttpsConfigForceRedirectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigForceRedirect)(nil)).Elem()
 }
 
-func (i CdnDomainHttpsConfigForceRedirectArgs) ToCdnDomainHttpsConfigForceRedirectOutput() CdnDomainHttpsConfigForceRedirectOutput {
-	return i.ToCdnDomainHttpsConfigForceRedirectOutputWithContext(context.Background())
+func (i DomainHttpsConfigForceRedirectArgs) ToDomainHttpsConfigForceRedirectOutput() DomainHttpsConfigForceRedirectOutput {
+	return i.ToDomainHttpsConfigForceRedirectOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigForceRedirectArgs) ToCdnDomainHttpsConfigForceRedirectOutputWithContext(ctx context.Context) CdnDomainHttpsConfigForceRedirectOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigForceRedirectOutput)
+func (i DomainHttpsConfigForceRedirectArgs) ToDomainHttpsConfigForceRedirectOutputWithContext(ctx context.Context) DomainHttpsConfigForceRedirectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigForceRedirectOutput)
 }
 
-func (i CdnDomainHttpsConfigForceRedirectArgs) ToCdnDomainHttpsConfigForceRedirectPtrOutput() CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return i.ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Background())
+func (i DomainHttpsConfigForceRedirectArgs) ToDomainHttpsConfigForceRedirectPtrOutput() DomainHttpsConfigForceRedirectPtrOutput {
+	return i.ToDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigForceRedirectArgs) ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigForceRedirectOutput).ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx)
+func (i DomainHttpsConfigForceRedirectArgs) ToDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) DomainHttpsConfigForceRedirectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigForceRedirectOutput).ToDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx)
 }
 
-// CdnDomainHttpsConfigForceRedirectPtrInput is an input type that accepts CdnDomainHttpsConfigForceRedirectArgs, CdnDomainHttpsConfigForceRedirectPtr and CdnDomainHttpsConfigForceRedirectPtrOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigForceRedirectPtrInput` via:
+// DomainHttpsConfigForceRedirectPtrInput is an input type that accepts DomainHttpsConfigForceRedirectArgs, DomainHttpsConfigForceRedirectPtr and DomainHttpsConfigForceRedirectPtrOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigForceRedirectPtrInput` via:
 //
-//          CdnDomainHttpsConfigForceRedirectArgs{...}
+//          DomainHttpsConfigForceRedirectArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainHttpsConfigForceRedirectPtrInput interface {
+type DomainHttpsConfigForceRedirectPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigForceRedirectPtrOutput() CdnDomainHttpsConfigForceRedirectPtrOutput
-	ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Context) CdnDomainHttpsConfigForceRedirectPtrOutput
+	ToDomainHttpsConfigForceRedirectPtrOutput() DomainHttpsConfigForceRedirectPtrOutput
+	ToDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Context) DomainHttpsConfigForceRedirectPtrOutput
 }
 
-type cdnDomainHttpsConfigForceRedirectPtrType CdnDomainHttpsConfigForceRedirectArgs
+type domainHttpsConfigForceRedirectPtrType DomainHttpsConfigForceRedirectArgs
 
-func CdnDomainHttpsConfigForceRedirectPtr(v *CdnDomainHttpsConfigForceRedirectArgs) CdnDomainHttpsConfigForceRedirectPtrInput {
-	return (*cdnDomainHttpsConfigForceRedirectPtrType)(v)
+func DomainHttpsConfigForceRedirectPtr(v *DomainHttpsConfigForceRedirectArgs) DomainHttpsConfigForceRedirectPtrInput {
+	return (*domainHttpsConfigForceRedirectPtrType)(v)
 }
 
-func (*cdnDomainHttpsConfigForceRedirectPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfigForceRedirect)(nil)).Elem()
+func (*domainHttpsConfigForceRedirectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigForceRedirect)(nil)).Elem()
 }
 
-func (i *cdnDomainHttpsConfigForceRedirectPtrType) ToCdnDomainHttpsConfigForceRedirectPtrOutput() CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return i.ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Background())
+func (i *domainHttpsConfigForceRedirectPtrType) ToDomainHttpsConfigForceRedirectPtrOutput() DomainHttpsConfigForceRedirectPtrOutput {
+	return i.ToDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainHttpsConfigForceRedirectPtrType) ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigForceRedirectPtrOutput)
+func (i *domainHttpsConfigForceRedirectPtrType) ToDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) DomainHttpsConfigForceRedirectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigForceRedirectPtrOutput)
 }
 
-type CdnDomainHttpsConfigForceRedirectOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigForceRedirectOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigForceRedirectOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfigForceRedirect)(nil)).Elem()
+func (DomainHttpsConfigForceRedirectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigForceRedirect)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigForceRedirectOutput) ToCdnDomainHttpsConfigForceRedirectOutput() CdnDomainHttpsConfigForceRedirectOutput {
+func (o DomainHttpsConfigForceRedirectOutput) ToDomainHttpsConfigForceRedirectOutput() DomainHttpsConfigForceRedirectOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigForceRedirectOutput) ToCdnDomainHttpsConfigForceRedirectOutputWithContext(ctx context.Context) CdnDomainHttpsConfigForceRedirectOutput {
+func (o DomainHttpsConfigForceRedirectOutput) ToDomainHttpsConfigForceRedirectOutputWithContext(ctx context.Context) DomainHttpsConfigForceRedirectOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigForceRedirectOutput) ToCdnDomainHttpsConfigForceRedirectPtrOutput() CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return o.ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Background())
+func (o DomainHttpsConfigForceRedirectOutput) ToDomainHttpsConfigForceRedirectPtrOutput() DomainHttpsConfigForceRedirectPtrOutput {
+	return o.ToDomainHttpsConfigForceRedirectPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainHttpsConfigForceRedirectOutput) ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigForceRedirectPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainHttpsConfigForceRedirect) *CdnDomainHttpsConfigForceRedirect {
+func (o DomainHttpsConfigForceRedirectOutput) ToDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) DomainHttpsConfigForceRedirectPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainHttpsConfigForceRedirect) *DomainHttpsConfigForceRedirect {
 		return &v
-	}).(CdnDomainHttpsConfigForceRedirectPtrOutput)
+	}).(DomainHttpsConfigForceRedirectPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigForceRedirectOutput) RedirectStatusCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigForceRedirect) *int { return v.RedirectStatusCode }).(pulumi.IntPtrOutput)
+// Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
+func (o DomainHttpsConfigForceRedirectOutput) RedirectStatusCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigForceRedirect) *int { return v.RedirectStatusCode }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigForceRedirectOutput) RedirectType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigForceRedirect) *string { return v.RedirectType }).(pulumi.StringPtrOutput)
+// Forced redirect type. Valid values are `http` and `https`. `http` means a forced redirect from HTTPS to HTTP, `https` means a forced redirect from HTTP to HTTPS. When `switch` setting `off`, this property does not need to be set or set to `http`. Default value is `http`.
+func (o DomainHttpsConfigForceRedirectOutput) RedirectType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigForceRedirect) *string { return v.RedirectType }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigForceRedirectOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigForceRedirect) *string { return v.Switch }).(pulumi.StringPtrOutput)
+// Forced redirect configuration switch. Valid values are `on` and `off`. Default value is `off`.
+func (o DomainHttpsConfigForceRedirectOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigForceRedirect) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHttpsConfigForceRedirectPtrOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigForceRedirectPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigForceRedirectPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfigForceRedirect)(nil)).Elem()
+func (DomainHttpsConfigForceRedirectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigForceRedirect)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigForceRedirectPtrOutput) ToCdnDomainHttpsConfigForceRedirectPtrOutput() CdnDomainHttpsConfigForceRedirectPtrOutput {
+func (o DomainHttpsConfigForceRedirectPtrOutput) ToDomainHttpsConfigForceRedirectPtrOutput() DomainHttpsConfigForceRedirectPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigForceRedirectPtrOutput) ToCdnDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigForceRedirectPtrOutput {
+func (o DomainHttpsConfigForceRedirectPtrOutput) ToDomainHttpsConfigForceRedirectPtrOutputWithContext(ctx context.Context) DomainHttpsConfigForceRedirectPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigForceRedirectPtrOutput) Elem() CdnDomainHttpsConfigForceRedirectOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigForceRedirect) CdnDomainHttpsConfigForceRedirect {
+func (o DomainHttpsConfigForceRedirectPtrOutput) Elem() DomainHttpsConfigForceRedirectOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigForceRedirect) DomainHttpsConfigForceRedirect {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainHttpsConfigForceRedirect
+		var ret DomainHttpsConfigForceRedirect
 		return ret
-	}).(CdnDomainHttpsConfigForceRedirectOutput)
+	}).(DomainHttpsConfigForceRedirectOutput)
 }
 
-func (o CdnDomainHttpsConfigForceRedirectPtrOutput) RedirectStatusCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigForceRedirect) *int {
+// Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
+func (o DomainHttpsConfigForceRedirectPtrOutput) RedirectStatusCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigForceRedirect) *int {
 		if v == nil {
 			return nil
 		}
@@ -3085,8 +3394,9 @@ func (o CdnDomainHttpsConfigForceRedirectPtrOutput) RedirectStatusCode() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigForceRedirectPtrOutput) RedirectType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigForceRedirect) *string {
+// Forced redirect type. Valid values are `http` and `https`. `http` means a forced redirect from HTTPS to HTTP, `https` means a forced redirect from HTTP to HTTPS. When `switch` setting `off`, this property does not need to be set or set to `http`. Default value is `http`.
+func (o DomainHttpsConfigForceRedirectPtrOutput) RedirectType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigForceRedirect) *string {
 		if v == nil {
 			return nil
 		}
@@ -3094,8 +3404,9 @@ func (o CdnDomainHttpsConfigForceRedirectPtrOutput) RedirectType() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigForceRedirectPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigForceRedirect) *string {
+// Forced redirect configuration switch. Valid values are `on` and `off`. Default value is `off`.
+func (o DomainHttpsConfigForceRedirectPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigForceRedirect) *string {
 		if v == nil {
 			return nil
 		}
@@ -3103,168 +3414,184 @@ func (o CdnDomainHttpsConfigForceRedirectPtrOutput) Switch() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHttpsConfigServerCertificateConfig struct {
+type DomainHttpsConfigServerCertificateConfig struct {
+	// Server certificate information. This is required when uploading an external certificate, which should contain the complete certificate chain.
 	CertificateContent *string `pulumi:"certificateContent"`
-	CertificateId      *string `pulumi:"certificateId"`
-	CertificateName    *string `pulumi:"certificateName"`
-	DeployTime         *string `pulumi:"deployTime"`
-	ExpireTime         *string `pulumi:"expireTime"`
-	Message            *string `pulumi:"message"`
-	PrivateKey         *string `pulumi:"privateKey"`
+	// Server certificate ID.
+	CertificateId   *string `pulumi:"certificateId"`
+	CertificateName *string `pulumi:"certificateName"`
+	DeployTime      *string `pulumi:"deployTime"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime *string `pulumi:"expireTime"`
+	// Certificate remarks.
+	Message *string `pulumi:"message"`
+	// Server key information. This is required when uploading an external certificate.
+	PrivateKey *string `pulumi:"privateKey"`
 }
 
-// CdnDomainHttpsConfigServerCertificateConfigInput is an input type that accepts CdnDomainHttpsConfigServerCertificateConfigArgs and CdnDomainHttpsConfigServerCertificateConfigOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigServerCertificateConfigInput` via:
+// DomainHttpsConfigServerCertificateConfigInput is an input type that accepts DomainHttpsConfigServerCertificateConfigArgs and DomainHttpsConfigServerCertificateConfigOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigServerCertificateConfigInput` via:
 //
-//          CdnDomainHttpsConfigServerCertificateConfigArgs{...}
-type CdnDomainHttpsConfigServerCertificateConfigInput interface {
+//          DomainHttpsConfigServerCertificateConfigArgs{...}
+type DomainHttpsConfigServerCertificateConfigInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigServerCertificateConfigOutput() CdnDomainHttpsConfigServerCertificateConfigOutput
-	ToCdnDomainHttpsConfigServerCertificateConfigOutputWithContext(context.Context) CdnDomainHttpsConfigServerCertificateConfigOutput
+	ToDomainHttpsConfigServerCertificateConfigOutput() DomainHttpsConfigServerCertificateConfigOutput
+	ToDomainHttpsConfigServerCertificateConfigOutputWithContext(context.Context) DomainHttpsConfigServerCertificateConfigOutput
 }
 
-type CdnDomainHttpsConfigServerCertificateConfigArgs struct {
+type DomainHttpsConfigServerCertificateConfigArgs struct {
+	// Server certificate information. This is required when uploading an external certificate, which should contain the complete certificate chain.
 	CertificateContent pulumi.StringPtrInput `pulumi:"certificateContent"`
-	CertificateId      pulumi.StringPtrInput `pulumi:"certificateId"`
-	CertificateName    pulumi.StringPtrInput `pulumi:"certificateName"`
-	DeployTime         pulumi.StringPtrInput `pulumi:"deployTime"`
-	ExpireTime         pulumi.StringPtrInput `pulumi:"expireTime"`
-	Message            pulumi.StringPtrInput `pulumi:"message"`
-	PrivateKey         pulumi.StringPtrInput `pulumi:"privateKey"`
+	// Server certificate ID.
+	CertificateId   pulumi.StringPtrInput `pulumi:"certificateId"`
+	CertificateName pulumi.StringPtrInput `pulumi:"certificateName"`
+	DeployTime      pulumi.StringPtrInput `pulumi:"deployTime"`
+	// Signature expiration time in second. The maximum value is 630720000.
+	ExpireTime pulumi.StringPtrInput `pulumi:"expireTime"`
+	// Certificate remarks.
+	Message pulumi.StringPtrInput `pulumi:"message"`
+	// Server key information. This is required when uploading an external certificate.
+	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
 }
 
-func (CdnDomainHttpsConfigServerCertificateConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfigServerCertificateConfig)(nil)).Elem()
+func (DomainHttpsConfigServerCertificateConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigServerCertificateConfig)(nil)).Elem()
 }
 
-func (i CdnDomainHttpsConfigServerCertificateConfigArgs) ToCdnDomainHttpsConfigServerCertificateConfigOutput() CdnDomainHttpsConfigServerCertificateConfigOutput {
-	return i.ToCdnDomainHttpsConfigServerCertificateConfigOutputWithContext(context.Background())
+func (i DomainHttpsConfigServerCertificateConfigArgs) ToDomainHttpsConfigServerCertificateConfigOutput() DomainHttpsConfigServerCertificateConfigOutput {
+	return i.ToDomainHttpsConfigServerCertificateConfigOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigServerCertificateConfigArgs) ToCdnDomainHttpsConfigServerCertificateConfigOutputWithContext(ctx context.Context) CdnDomainHttpsConfigServerCertificateConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigServerCertificateConfigOutput)
+func (i DomainHttpsConfigServerCertificateConfigArgs) ToDomainHttpsConfigServerCertificateConfigOutputWithContext(ctx context.Context) DomainHttpsConfigServerCertificateConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigServerCertificateConfigOutput)
 }
 
-func (i CdnDomainHttpsConfigServerCertificateConfigArgs) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutput() CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return i.ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Background())
+func (i DomainHttpsConfigServerCertificateConfigArgs) ToDomainHttpsConfigServerCertificateConfigPtrOutput() DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return i.ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHttpsConfigServerCertificateConfigArgs) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigServerCertificateConfigOutput).ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx)
+func (i DomainHttpsConfigServerCertificateConfigArgs) ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigServerCertificateConfigOutput).ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx)
 }
 
-// CdnDomainHttpsConfigServerCertificateConfigPtrInput is an input type that accepts CdnDomainHttpsConfigServerCertificateConfigArgs, CdnDomainHttpsConfigServerCertificateConfigPtr and CdnDomainHttpsConfigServerCertificateConfigPtrOutput values.
-// You can construct a concrete instance of `CdnDomainHttpsConfigServerCertificateConfigPtrInput` via:
+// DomainHttpsConfigServerCertificateConfigPtrInput is an input type that accepts DomainHttpsConfigServerCertificateConfigArgs, DomainHttpsConfigServerCertificateConfigPtr and DomainHttpsConfigServerCertificateConfigPtrOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigServerCertificateConfigPtrInput` via:
 //
-//          CdnDomainHttpsConfigServerCertificateConfigArgs{...}
+//          DomainHttpsConfigServerCertificateConfigArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainHttpsConfigServerCertificateConfigPtrInput interface {
+type DomainHttpsConfigServerCertificateConfigPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainHttpsConfigServerCertificateConfigPtrOutput() CdnDomainHttpsConfigServerCertificateConfigPtrOutput
-	ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Context) CdnDomainHttpsConfigServerCertificateConfigPtrOutput
+	ToDomainHttpsConfigServerCertificateConfigPtrOutput() DomainHttpsConfigServerCertificateConfigPtrOutput
+	ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Context) DomainHttpsConfigServerCertificateConfigPtrOutput
 }
 
-type cdnDomainHttpsConfigServerCertificateConfigPtrType CdnDomainHttpsConfigServerCertificateConfigArgs
+type domainHttpsConfigServerCertificateConfigPtrType DomainHttpsConfigServerCertificateConfigArgs
 
-func CdnDomainHttpsConfigServerCertificateConfigPtr(v *CdnDomainHttpsConfigServerCertificateConfigArgs) CdnDomainHttpsConfigServerCertificateConfigPtrInput {
-	return (*cdnDomainHttpsConfigServerCertificateConfigPtrType)(v)
+func DomainHttpsConfigServerCertificateConfigPtr(v *DomainHttpsConfigServerCertificateConfigArgs) DomainHttpsConfigServerCertificateConfigPtrInput {
+	return (*domainHttpsConfigServerCertificateConfigPtrType)(v)
 }
 
-func (*cdnDomainHttpsConfigServerCertificateConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfigServerCertificateConfig)(nil)).Elem()
+func (*domainHttpsConfigServerCertificateConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigServerCertificateConfig)(nil)).Elem()
 }
 
-func (i *cdnDomainHttpsConfigServerCertificateConfigPtrType) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutput() CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return i.ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Background())
+func (i *domainHttpsConfigServerCertificateConfigPtrType) ToDomainHttpsConfigServerCertificateConfigPtrOutput() DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return i.ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainHttpsConfigServerCertificateConfigPtrType) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHttpsConfigServerCertificateConfigPtrOutput)
+func (i *domainHttpsConfigServerCertificateConfigPtrType) ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigServerCertificateConfigPtrOutput)
 }
 
-type CdnDomainHttpsConfigServerCertificateConfigOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigServerCertificateConfigOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigServerCertificateConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHttpsConfigServerCertificateConfig)(nil)).Elem()
+func (DomainHttpsConfigServerCertificateConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigServerCertificateConfig)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) ToCdnDomainHttpsConfigServerCertificateConfigOutput() CdnDomainHttpsConfigServerCertificateConfigOutput {
+func (o DomainHttpsConfigServerCertificateConfigOutput) ToDomainHttpsConfigServerCertificateConfigOutput() DomainHttpsConfigServerCertificateConfigOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) ToCdnDomainHttpsConfigServerCertificateConfigOutputWithContext(ctx context.Context) CdnDomainHttpsConfigServerCertificateConfigOutput {
+func (o DomainHttpsConfigServerCertificateConfigOutput) ToDomainHttpsConfigServerCertificateConfigOutputWithContext(ctx context.Context) DomainHttpsConfigServerCertificateConfigOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutput() CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return o.ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Background())
+func (o DomainHttpsConfigServerCertificateConfigOutput) ToDomainHttpsConfigServerCertificateConfigPtrOutput() DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return o.ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainHttpsConfigServerCertificateConfig) *CdnDomainHttpsConfigServerCertificateConfig {
+func (o DomainHttpsConfigServerCertificateConfigOutput) ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigServerCertificateConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainHttpsConfigServerCertificateConfig) *DomainHttpsConfigServerCertificateConfig {
 		return &v
-	}).(CdnDomainHttpsConfigServerCertificateConfigPtrOutput)
+	}).(DomainHttpsConfigServerCertificateConfigPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) CertificateContent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigServerCertificateConfig) *string { return v.CertificateContent }).(pulumi.StringPtrOutput)
+// Server certificate information. This is required when uploading an external certificate, which should contain the complete certificate chain.
+func (o DomainHttpsConfigServerCertificateConfigOutput) CertificateContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigServerCertificateConfig) *string { return v.CertificateContent }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) CertificateId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigServerCertificateConfig) *string { return v.CertificateId }).(pulumi.StringPtrOutput)
+// Server certificate ID.
+func (o DomainHttpsConfigServerCertificateConfigOutput) CertificateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigServerCertificateConfig) *string { return v.CertificateId }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) CertificateName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigServerCertificateConfig) *string { return v.CertificateName }).(pulumi.StringPtrOutput)
+func (o DomainHttpsConfigServerCertificateConfigOutput) CertificateName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigServerCertificateConfig) *string { return v.CertificateName }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) DeployTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigServerCertificateConfig) *string { return v.DeployTime }).(pulumi.StringPtrOutput)
+func (o DomainHttpsConfigServerCertificateConfigOutput) DeployTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigServerCertificateConfig) *string { return v.DeployTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) ExpireTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigServerCertificateConfig) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainHttpsConfigServerCertificateConfigOutput) ExpireTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigServerCertificateConfig) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) Message() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigServerCertificateConfig) *string { return v.Message }).(pulumi.StringPtrOutput)
+// Certificate remarks.
+func (o DomainHttpsConfigServerCertificateConfigOutput) Message() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigServerCertificateConfig) *string { return v.Message }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigOutput) PrivateKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHttpsConfigServerCertificateConfig) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
+// Server key information. This is required when uploading an external certificate.
+func (o DomainHttpsConfigServerCertificateConfigOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigServerCertificateConfig) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHttpsConfigServerCertificateConfigPtrOutput struct{ *pulumi.OutputState }
+type DomainHttpsConfigServerCertificateConfigPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHttpsConfigServerCertificateConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHttpsConfigServerCertificateConfig)(nil)).Elem()
+func (DomainHttpsConfigServerCertificateConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigServerCertificateConfig)(nil)).Elem()
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutput() CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) ToDomainHttpsConfigServerCertificateConfigPtrOutput() DomainHttpsConfigServerCertificateConfigPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) ToCdnDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) CdnDomainHttpsConfigServerCertificateConfigPtrOutput {
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) ToDomainHttpsConfigServerCertificateConfigPtrOutputWithContext(ctx context.Context) DomainHttpsConfigServerCertificateConfigPtrOutput {
 	return o
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) Elem() CdnDomainHttpsConfigServerCertificateConfigOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) CdnDomainHttpsConfigServerCertificateConfig {
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) Elem() DomainHttpsConfigServerCertificateConfigOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) DomainHttpsConfigServerCertificateConfig {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainHttpsConfigServerCertificateConfig
+		var ret DomainHttpsConfigServerCertificateConfig
 		return ret
-	}).(CdnDomainHttpsConfigServerCertificateConfigOutput)
+	}).(DomainHttpsConfigServerCertificateConfigOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) CertificateContent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) *string {
+// Server certificate information. This is required when uploading an external certificate, which should contain the complete certificate chain.
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) CertificateContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -3272,8 +3599,9 @@ func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) CertificateContent
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) CertificateId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) *string {
+// Server certificate ID.
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) CertificateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -3281,8 +3609,8 @@ func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) CertificateId() pu
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) CertificateName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) *string {
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) CertificateName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -3290,8 +3618,8 @@ func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) CertificateName() 
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) DeployTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) *string {
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) DeployTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -3299,8 +3627,9 @@ func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) DeployTime() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) ExpireTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) *string {
+// Signature expiration time in second. The maximum value is 630720000.
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) ExpireTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -3308,8 +3637,9 @@ func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) ExpireTime() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) Message() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) *string {
+// Certificate remarks.
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) Message() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -3317,8 +3647,9 @@ func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) Message() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) PrivateKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHttpsConfigServerCertificateConfig) *string {
+// Server key information. This is required when uploading an external certificate.
+func (o DomainHttpsConfigServerCertificateConfigPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigServerCertificateConfig) *string {
 		if v == nil {
 			return nil
 		}
@@ -3326,150 +3657,163 @@ func (o CdnDomainHttpsConfigServerCertificateConfigPtrOutput) PrivateKey() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainHwPrivateAccess struct {
+type DomainHwPrivateAccess struct {
+	// Access ID.
 	AccessKey *string `pulumi:"accessKey"`
-	Bucket    *string `pulumi:"bucket"`
+	// Bucket.
+	Bucket *string `pulumi:"bucket"`
+	// Key.
 	SecretKey *string `pulumi:"secretKey"`
-	Switch    string  `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainHwPrivateAccessInput is an input type that accepts CdnDomainHwPrivateAccessArgs and CdnDomainHwPrivateAccessOutput values.
-// You can construct a concrete instance of `CdnDomainHwPrivateAccessInput` via:
+// DomainHwPrivateAccessInput is an input type that accepts DomainHwPrivateAccessArgs and DomainHwPrivateAccessOutput values.
+// You can construct a concrete instance of `DomainHwPrivateAccessInput` via:
 //
-//          CdnDomainHwPrivateAccessArgs{...}
-type CdnDomainHwPrivateAccessInput interface {
+//          DomainHwPrivateAccessArgs{...}
+type DomainHwPrivateAccessInput interface {
 	pulumi.Input
 
-	ToCdnDomainHwPrivateAccessOutput() CdnDomainHwPrivateAccessOutput
-	ToCdnDomainHwPrivateAccessOutputWithContext(context.Context) CdnDomainHwPrivateAccessOutput
+	ToDomainHwPrivateAccessOutput() DomainHwPrivateAccessOutput
+	ToDomainHwPrivateAccessOutputWithContext(context.Context) DomainHwPrivateAccessOutput
 }
 
-type CdnDomainHwPrivateAccessArgs struct {
+type DomainHwPrivateAccessArgs struct {
+	// Access ID.
 	AccessKey pulumi.StringPtrInput `pulumi:"accessKey"`
-	Bucket    pulumi.StringPtrInput `pulumi:"bucket"`
+	// Bucket.
+	Bucket pulumi.StringPtrInput `pulumi:"bucket"`
+	// Key.
 	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
-	Switch    pulumi.StringInput    `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainHwPrivateAccessArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHwPrivateAccess)(nil)).Elem()
+func (DomainHwPrivateAccessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHwPrivateAccess)(nil)).Elem()
 }
 
-func (i CdnDomainHwPrivateAccessArgs) ToCdnDomainHwPrivateAccessOutput() CdnDomainHwPrivateAccessOutput {
-	return i.ToCdnDomainHwPrivateAccessOutputWithContext(context.Background())
+func (i DomainHwPrivateAccessArgs) ToDomainHwPrivateAccessOutput() DomainHwPrivateAccessOutput {
+	return i.ToDomainHwPrivateAccessOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHwPrivateAccessArgs) ToCdnDomainHwPrivateAccessOutputWithContext(ctx context.Context) CdnDomainHwPrivateAccessOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHwPrivateAccessOutput)
+func (i DomainHwPrivateAccessArgs) ToDomainHwPrivateAccessOutputWithContext(ctx context.Context) DomainHwPrivateAccessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHwPrivateAccessOutput)
 }
 
-func (i CdnDomainHwPrivateAccessArgs) ToCdnDomainHwPrivateAccessPtrOutput() CdnDomainHwPrivateAccessPtrOutput {
-	return i.ToCdnDomainHwPrivateAccessPtrOutputWithContext(context.Background())
+func (i DomainHwPrivateAccessArgs) ToDomainHwPrivateAccessPtrOutput() DomainHwPrivateAccessPtrOutput {
+	return i.ToDomainHwPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainHwPrivateAccessArgs) ToCdnDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainHwPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHwPrivateAccessOutput).ToCdnDomainHwPrivateAccessPtrOutputWithContext(ctx)
+func (i DomainHwPrivateAccessArgs) ToDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) DomainHwPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHwPrivateAccessOutput).ToDomainHwPrivateAccessPtrOutputWithContext(ctx)
 }
 
-// CdnDomainHwPrivateAccessPtrInput is an input type that accepts CdnDomainHwPrivateAccessArgs, CdnDomainHwPrivateAccessPtr and CdnDomainHwPrivateAccessPtrOutput values.
-// You can construct a concrete instance of `CdnDomainHwPrivateAccessPtrInput` via:
+// DomainHwPrivateAccessPtrInput is an input type that accepts DomainHwPrivateAccessArgs, DomainHwPrivateAccessPtr and DomainHwPrivateAccessPtrOutput values.
+// You can construct a concrete instance of `DomainHwPrivateAccessPtrInput` via:
 //
-//          CdnDomainHwPrivateAccessArgs{...}
+//          DomainHwPrivateAccessArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainHwPrivateAccessPtrInput interface {
+type DomainHwPrivateAccessPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainHwPrivateAccessPtrOutput() CdnDomainHwPrivateAccessPtrOutput
-	ToCdnDomainHwPrivateAccessPtrOutputWithContext(context.Context) CdnDomainHwPrivateAccessPtrOutput
+	ToDomainHwPrivateAccessPtrOutput() DomainHwPrivateAccessPtrOutput
+	ToDomainHwPrivateAccessPtrOutputWithContext(context.Context) DomainHwPrivateAccessPtrOutput
 }
 
-type cdnDomainHwPrivateAccessPtrType CdnDomainHwPrivateAccessArgs
+type domainHwPrivateAccessPtrType DomainHwPrivateAccessArgs
 
-func CdnDomainHwPrivateAccessPtr(v *CdnDomainHwPrivateAccessArgs) CdnDomainHwPrivateAccessPtrInput {
-	return (*cdnDomainHwPrivateAccessPtrType)(v)
+func DomainHwPrivateAccessPtr(v *DomainHwPrivateAccessArgs) DomainHwPrivateAccessPtrInput {
+	return (*domainHwPrivateAccessPtrType)(v)
 }
 
-func (*cdnDomainHwPrivateAccessPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHwPrivateAccess)(nil)).Elem()
+func (*domainHwPrivateAccessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHwPrivateAccess)(nil)).Elem()
 }
 
-func (i *cdnDomainHwPrivateAccessPtrType) ToCdnDomainHwPrivateAccessPtrOutput() CdnDomainHwPrivateAccessPtrOutput {
-	return i.ToCdnDomainHwPrivateAccessPtrOutputWithContext(context.Background())
+func (i *domainHwPrivateAccessPtrType) ToDomainHwPrivateAccessPtrOutput() DomainHwPrivateAccessPtrOutput {
+	return i.ToDomainHwPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainHwPrivateAccessPtrType) ToCdnDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainHwPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainHwPrivateAccessPtrOutput)
+func (i *domainHwPrivateAccessPtrType) ToDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) DomainHwPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHwPrivateAccessPtrOutput)
 }
 
-type CdnDomainHwPrivateAccessOutput struct{ *pulumi.OutputState }
+type DomainHwPrivateAccessOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHwPrivateAccessOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainHwPrivateAccess)(nil)).Elem()
+func (DomainHwPrivateAccessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHwPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainHwPrivateAccessOutput) ToCdnDomainHwPrivateAccessOutput() CdnDomainHwPrivateAccessOutput {
+func (o DomainHwPrivateAccessOutput) ToDomainHwPrivateAccessOutput() DomainHwPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainHwPrivateAccessOutput) ToCdnDomainHwPrivateAccessOutputWithContext(ctx context.Context) CdnDomainHwPrivateAccessOutput {
+func (o DomainHwPrivateAccessOutput) ToDomainHwPrivateAccessOutputWithContext(ctx context.Context) DomainHwPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainHwPrivateAccessOutput) ToCdnDomainHwPrivateAccessPtrOutput() CdnDomainHwPrivateAccessPtrOutput {
-	return o.ToCdnDomainHwPrivateAccessPtrOutputWithContext(context.Background())
+func (o DomainHwPrivateAccessOutput) ToDomainHwPrivateAccessPtrOutput() DomainHwPrivateAccessPtrOutput {
+	return o.ToDomainHwPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainHwPrivateAccessOutput) ToCdnDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainHwPrivateAccessPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainHwPrivateAccess) *CdnDomainHwPrivateAccess {
+func (o DomainHwPrivateAccessOutput) ToDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) DomainHwPrivateAccessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainHwPrivateAccess) *DomainHwPrivateAccess {
 		return &v
-	}).(CdnDomainHwPrivateAccessPtrOutput)
+	}).(DomainHwPrivateAccessPtrOutput)
 }
 
-func (o CdnDomainHwPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHwPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
+// Access ID.
+func (o DomainHwPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHwPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHwPrivateAccessOutput) Bucket() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHwPrivateAccess) *string { return v.Bucket }).(pulumi.StringPtrOutput)
+// Bucket.
+func (o DomainHwPrivateAccessOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHwPrivateAccess) *string { return v.Bucket }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHwPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainHwPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+// Key.
+func (o DomainHwPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHwPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHwPrivateAccessOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainHwPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainHwPrivateAccessOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainHwPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainHwPrivateAccessPtrOutput struct{ *pulumi.OutputState }
+type DomainHwPrivateAccessPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainHwPrivateAccessPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainHwPrivateAccess)(nil)).Elem()
+func (DomainHwPrivateAccessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHwPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainHwPrivateAccessPtrOutput) ToCdnDomainHwPrivateAccessPtrOutput() CdnDomainHwPrivateAccessPtrOutput {
+func (o DomainHwPrivateAccessPtrOutput) ToDomainHwPrivateAccessPtrOutput() DomainHwPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainHwPrivateAccessPtrOutput) ToCdnDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainHwPrivateAccessPtrOutput {
+func (o DomainHwPrivateAccessPtrOutput) ToDomainHwPrivateAccessPtrOutputWithContext(ctx context.Context) DomainHwPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainHwPrivateAccessPtrOutput) Elem() CdnDomainHwPrivateAccessOutput {
-	return o.ApplyT(func(v *CdnDomainHwPrivateAccess) CdnDomainHwPrivateAccess {
+func (o DomainHwPrivateAccessPtrOutput) Elem() DomainHwPrivateAccessOutput {
+	return o.ApplyT(func(v *DomainHwPrivateAccess) DomainHwPrivateAccess {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainHwPrivateAccess
+		var ret DomainHwPrivateAccess
 		return ret
-	}).(CdnDomainHwPrivateAccessOutput)
+	}).(DomainHwPrivateAccessOutput)
 }
 
-func (o CdnDomainHwPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHwPrivateAccess) *string {
+// Access ID.
+func (o DomainHwPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHwPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -3477,8 +3821,9 @@ func (o CdnDomainHwPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHwPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHwPrivateAccess) *string {
+// Bucket.
+func (o DomainHwPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHwPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -3486,8 +3831,9 @@ func (o CdnDomainHwPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHwPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHwPrivateAccess) *string {
+// Key.
+func (o DomainHwPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHwPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -3495,8 +3841,9 @@ func (o CdnDomainHwPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainHwPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainHwPrivateAccess) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainHwPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHwPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -3504,165 +3851,182 @@ func (o CdnDomainHwPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainIpFilter struct {
-	FilterRules []CdnDomainIpFilterFilterRule `pulumi:"filterRules"`
-	FilterType  *string                       `pulumi:"filterType"`
-	Filters     []string                      `pulumi:"filters"`
-	ReturnCode  *int                          `pulumi:"returnCode"`
-	Switch      string                        `pulumi:"switch"`
+type DomainIpFilter struct {
+	// Ip filter rules, This feature is only available to selected beta customers.
+	FilterRules []DomainIpFilterFilterRule `pulumi:"filterRules"`
+	// IP `blacklist`/`whitelist` type.
+	FilterType *string `pulumi:"filterType"`
+	// Ip filter list, Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+	Filters []string `pulumi:"filters"`
+	// Return code, available values: 400-499.
+	ReturnCode *int `pulumi:"returnCode"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainIpFilterInput is an input type that accepts CdnDomainIpFilterArgs and CdnDomainIpFilterOutput values.
-// You can construct a concrete instance of `CdnDomainIpFilterInput` via:
+// DomainIpFilterInput is an input type that accepts DomainIpFilterArgs and DomainIpFilterOutput values.
+// You can construct a concrete instance of `DomainIpFilterInput` via:
 //
-//          CdnDomainIpFilterArgs{...}
-type CdnDomainIpFilterInput interface {
+//          DomainIpFilterArgs{...}
+type DomainIpFilterInput interface {
 	pulumi.Input
 
-	ToCdnDomainIpFilterOutput() CdnDomainIpFilterOutput
-	ToCdnDomainIpFilterOutputWithContext(context.Context) CdnDomainIpFilterOutput
+	ToDomainIpFilterOutput() DomainIpFilterOutput
+	ToDomainIpFilterOutputWithContext(context.Context) DomainIpFilterOutput
 }
 
-type CdnDomainIpFilterArgs struct {
-	FilterRules CdnDomainIpFilterFilterRuleArrayInput `pulumi:"filterRules"`
-	FilterType  pulumi.StringPtrInput                 `pulumi:"filterType"`
-	Filters     pulumi.StringArrayInput               `pulumi:"filters"`
-	ReturnCode  pulumi.IntPtrInput                    `pulumi:"returnCode"`
-	Switch      pulumi.StringInput                    `pulumi:"switch"`
+type DomainIpFilterArgs struct {
+	// Ip filter rules, This feature is only available to selected beta customers.
+	FilterRules DomainIpFilterFilterRuleArrayInput `pulumi:"filterRules"`
+	// IP `blacklist`/`whitelist` type.
+	FilterType pulumi.StringPtrInput `pulumi:"filterType"`
+	// Ip filter list, Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+	Filters pulumi.StringArrayInput `pulumi:"filters"`
+	// Return code, available values: 400-499.
+	ReturnCode pulumi.IntPtrInput `pulumi:"returnCode"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainIpFilterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainIpFilter)(nil)).Elem()
+func (DomainIpFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainIpFilter)(nil)).Elem()
 }
 
-func (i CdnDomainIpFilterArgs) ToCdnDomainIpFilterOutput() CdnDomainIpFilterOutput {
-	return i.ToCdnDomainIpFilterOutputWithContext(context.Background())
+func (i DomainIpFilterArgs) ToDomainIpFilterOutput() DomainIpFilterOutput {
+	return i.ToDomainIpFilterOutputWithContext(context.Background())
 }
 
-func (i CdnDomainIpFilterArgs) ToCdnDomainIpFilterOutputWithContext(ctx context.Context) CdnDomainIpFilterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFilterOutput)
+func (i DomainIpFilterArgs) ToDomainIpFilterOutputWithContext(ctx context.Context) DomainIpFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFilterOutput)
 }
 
-func (i CdnDomainIpFilterArgs) ToCdnDomainIpFilterPtrOutput() CdnDomainIpFilterPtrOutput {
-	return i.ToCdnDomainIpFilterPtrOutputWithContext(context.Background())
+func (i DomainIpFilterArgs) ToDomainIpFilterPtrOutput() DomainIpFilterPtrOutput {
+	return i.ToDomainIpFilterPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainIpFilterArgs) ToCdnDomainIpFilterPtrOutputWithContext(ctx context.Context) CdnDomainIpFilterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFilterOutput).ToCdnDomainIpFilterPtrOutputWithContext(ctx)
+func (i DomainIpFilterArgs) ToDomainIpFilterPtrOutputWithContext(ctx context.Context) DomainIpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFilterOutput).ToDomainIpFilterPtrOutputWithContext(ctx)
 }
 
-// CdnDomainIpFilterPtrInput is an input type that accepts CdnDomainIpFilterArgs, CdnDomainIpFilterPtr and CdnDomainIpFilterPtrOutput values.
-// You can construct a concrete instance of `CdnDomainIpFilterPtrInput` via:
+// DomainIpFilterPtrInput is an input type that accepts DomainIpFilterArgs, DomainIpFilterPtr and DomainIpFilterPtrOutput values.
+// You can construct a concrete instance of `DomainIpFilterPtrInput` via:
 //
-//          CdnDomainIpFilterArgs{...}
+//          DomainIpFilterArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainIpFilterPtrInput interface {
+type DomainIpFilterPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainIpFilterPtrOutput() CdnDomainIpFilterPtrOutput
-	ToCdnDomainIpFilterPtrOutputWithContext(context.Context) CdnDomainIpFilterPtrOutput
+	ToDomainIpFilterPtrOutput() DomainIpFilterPtrOutput
+	ToDomainIpFilterPtrOutputWithContext(context.Context) DomainIpFilterPtrOutput
 }
 
-type cdnDomainIpFilterPtrType CdnDomainIpFilterArgs
+type domainIpFilterPtrType DomainIpFilterArgs
 
-func CdnDomainIpFilterPtr(v *CdnDomainIpFilterArgs) CdnDomainIpFilterPtrInput {
-	return (*cdnDomainIpFilterPtrType)(v)
+func DomainIpFilterPtr(v *DomainIpFilterArgs) DomainIpFilterPtrInput {
+	return (*domainIpFilterPtrType)(v)
 }
 
-func (*cdnDomainIpFilterPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainIpFilter)(nil)).Elem()
+func (*domainIpFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainIpFilter)(nil)).Elem()
 }
 
-func (i *cdnDomainIpFilterPtrType) ToCdnDomainIpFilterPtrOutput() CdnDomainIpFilterPtrOutput {
-	return i.ToCdnDomainIpFilterPtrOutputWithContext(context.Background())
+func (i *domainIpFilterPtrType) ToDomainIpFilterPtrOutput() DomainIpFilterPtrOutput {
+	return i.ToDomainIpFilterPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainIpFilterPtrType) ToCdnDomainIpFilterPtrOutputWithContext(ctx context.Context) CdnDomainIpFilterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFilterPtrOutput)
+func (i *domainIpFilterPtrType) ToDomainIpFilterPtrOutputWithContext(ctx context.Context) DomainIpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFilterPtrOutput)
 }
 
-type CdnDomainIpFilterOutput struct{ *pulumi.OutputState }
+type DomainIpFilterOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainIpFilterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainIpFilter)(nil)).Elem()
+func (DomainIpFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainIpFilter)(nil)).Elem()
 }
 
-func (o CdnDomainIpFilterOutput) ToCdnDomainIpFilterOutput() CdnDomainIpFilterOutput {
+func (o DomainIpFilterOutput) ToDomainIpFilterOutput() DomainIpFilterOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterOutput) ToCdnDomainIpFilterOutputWithContext(ctx context.Context) CdnDomainIpFilterOutput {
+func (o DomainIpFilterOutput) ToDomainIpFilterOutputWithContext(ctx context.Context) DomainIpFilterOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterOutput) ToCdnDomainIpFilterPtrOutput() CdnDomainIpFilterPtrOutput {
-	return o.ToCdnDomainIpFilterPtrOutputWithContext(context.Background())
+func (o DomainIpFilterOutput) ToDomainIpFilterPtrOutput() DomainIpFilterPtrOutput {
+	return o.ToDomainIpFilterPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainIpFilterOutput) ToCdnDomainIpFilterPtrOutputWithContext(ctx context.Context) CdnDomainIpFilterPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainIpFilter) *CdnDomainIpFilter {
+func (o DomainIpFilterOutput) ToDomainIpFilterPtrOutputWithContext(ctx context.Context) DomainIpFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainIpFilter) *DomainIpFilter {
 		return &v
-	}).(CdnDomainIpFilterPtrOutput)
+	}).(DomainIpFilterPtrOutput)
 }
 
-func (o CdnDomainIpFilterOutput) FilterRules() CdnDomainIpFilterFilterRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainIpFilter) []CdnDomainIpFilterFilterRule { return v.FilterRules }).(CdnDomainIpFilterFilterRuleArrayOutput)
+// Ip filter rules, This feature is only available to selected beta customers.
+func (o DomainIpFilterOutput) FilterRules() DomainIpFilterFilterRuleArrayOutput {
+	return o.ApplyT(func(v DomainIpFilter) []DomainIpFilterFilterRule { return v.FilterRules }).(DomainIpFilterFilterRuleArrayOutput)
 }
 
-func (o CdnDomainIpFilterOutput) FilterType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainIpFilter) *string { return v.FilterType }).(pulumi.StringPtrOutput)
+// IP `blacklist`/`whitelist` type.
+func (o DomainIpFilterOutput) FilterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainIpFilter) *string { return v.FilterType }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainIpFilterOutput) Filters() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainIpFilter) []string { return v.Filters }).(pulumi.StringArrayOutput)
+// Ip filter list, Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+func (o DomainIpFilterOutput) Filters() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainIpFilter) []string { return v.Filters }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainIpFilterOutput) ReturnCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainIpFilter) *int { return v.ReturnCode }).(pulumi.IntPtrOutput)
+// Return code, available values: 400-499.
+func (o DomainIpFilterOutput) ReturnCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainIpFilter) *int { return v.ReturnCode }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainIpFilterOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainIpFilter) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainIpFilterOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainIpFilter) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainIpFilterPtrOutput struct{ *pulumi.OutputState }
+type DomainIpFilterPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainIpFilterPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainIpFilter)(nil)).Elem()
+func (DomainIpFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainIpFilter)(nil)).Elem()
 }
 
-func (o CdnDomainIpFilterPtrOutput) ToCdnDomainIpFilterPtrOutput() CdnDomainIpFilterPtrOutput {
+func (o DomainIpFilterPtrOutput) ToDomainIpFilterPtrOutput() DomainIpFilterPtrOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterPtrOutput) ToCdnDomainIpFilterPtrOutputWithContext(ctx context.Context) CdnDomainIpFilterPtrOutput {
+func (o DomainIpFilterPtrOutput) ToDomainIpFilterPtrOutputWithContext(ctx context.Context) DomainIpFilterPtrOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterPtrOutput) Elem() CdnDomainIpFilterOutput {
-	return o.ApplyT(func(v *CdnDomainIpFilter) CdnDomainIpFilter {
+func (o DomainIpFilterPtrOutput) Elem() DomainIpFilterOutput {
+	return o.ApplyT(func(v *DomainIpFilter) DomainIpFilter {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainIpFilter
+		var ret DomainIpFilter
 		return ret
-	}).(CdnDomainIpFilterOutput)
+	}).(DomainIpFilterOutput)
 }
 
-func (o CdnDomainIpFilterPtrOutput) FilterRules() CdnDomainIpFilterFilterRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainIpFilter) []CdnDomainIpFilterFilterRule {
+// Ip filter rules, This feature is only available to selected beta customers.
+func (o DomainIpFilterPtrOutput) FilterRules() DomainIpFilterFilterRuleArrayOutput {
+	return o.ApplyT(func(v *DomainIpFilter) []DomainIpFilterFilterRule {
 		if v == nil {
 			return nil
 		}
 		return v.FilterRules
-	}).(CdnDomainIpFilterFilterRuleArrayOutput)
+	}).(DomainIpFilterFilterRuleArrayOutput)
 }
 
-func (o CdnDomainIpFilterPtrOutput) FilterType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainIpFilter) *string {
+// IP `blacklist`/`whitelist` type.
+func (o DomainIpFilterPtrOutput) FilterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainIpFilter) *string {
 		if v == nil {
 			return nil
 		}
@@ -3670,8 +4034,9 @@ func (o CdnDomainIpFilterPtrOutput) FilterType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainIpFilterPtrOutput) Filters() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CdnDomainIpFilter) []string {
+// Ip filter list, Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+func (o DomainIpFilterPtrOutput) Filters() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DomainIpFilter) []string {
 		if v == nil {
 			return nil
 		}
@@ -3679,8 +4044,9 @@ func (o CdnDomainIpFilterPtrOutput) Filters() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainIpFilterPtrOutput) ReturnCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainIpFilter) *int {
+// Return code, available values: 400-499.
+func (o DomainIpFilterPtrOutput) ReturnCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainIpFilter) *int {
 		if v == nil {
 			return nil
 		}
@@ -3688,8 +4054,9 @@ func (o CdnDomainIpFilterPtrOutput) ReturnCode() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainIpFilterPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainIpFilter) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainIpFilterPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainIpFilter) *string {
 		if v == nil {
 			return nil
 		}
@@ -3697,250 +4064,269 @@ func (o CdnDomainIpFilterPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainIpFilterFilterRule struct {
-	FilterType string   `pulumi:"filterType"`
-	Filters    []string `pulumi:"filters"`
-	RulePaths  []string `pulumi:"rulePaths"`
-	RuleType   string   `pulumi:"ruleType"`
+type DomainIpFilterFilterRule struct {
+	// Ip filter `blacklist`/`whitelist` type of filter rules.
+	FilterType string `pulumi:"filterType"`
+	// Ip filter rule list, supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+	Filters []string `pulumi:"filters"`
+	// Content list for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+	RuleType string `pulumi:"ruleType"`
 }
 
-// CdnDomainIpFilterFilterRuleInput is an input type that accepts CdnDomainIpFilterFilterRuleArgs and CdnDomainIpFilterFilterRuleOutput values.
-// You can construct a concrete instance of `CdnDomainIpFilterFilterRuleInput` via:
+// DomainIpFilterFilterRuleInput is an input type that accepts DomainIpFilterFilterRuleArgs and DomainIpFilterFilterRuleOutput values.
+// You can construct a concrete instance of `DomainIpFilterFilterRuleInput` via:
 //
-//          CdnDomainIpFilterFilterRuleArgs{...}
-type CdnDomainIpFilterFilterRuleInput interface {
+//          DomainIpFilterFilterRuleArgs{...}
+type DomainIpFilterFilterRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainIpFilterFilterRuleOutput() CdnDomainIpFilterFilterRuleOutput
-	ToCdnDomainIpFilterFilterRuleOutputWithContext(context.Context) CdnDomainIpFilterFilterRuleOutput
+	ToDomainIpFilterFilterRuleOutput() DomainIpFilterFilterRuleOutput
+	ToDomainIpFilterFilterRuleOutputWithContext(context.Context) DomainIpFilterFilterRuleOutput
 }
 
-type CdnDomainIpFilterFilterRuleArgs struct {
-	FilterType pulumi.StringInput      `pulumi:"filterType"`
-	Filters    pulumi.StringArrayInput `pulumi:"filters"`
-	RulePaths  pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType   pulumi.StringInput      `pulumi:"ruleType"`
+type DomainIpFilterFilterRuleArgs struct {
+	// Ip filter `blacklist`/`whitelist` type of filter rules.
+	FilterType pulumi.StringInput `pulumi:"filterType"`
+	// Ip filter rule list, supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+	Filters pulumi.StringArrayInput `pulumi:"filters"`
+	// Content list for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
 }
 
-func (CdnDomainIpFilterFilterRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainIpFilterFilterRule)(nil)).Elem()
+func (DomainIpFilterFilterRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainIpFilterFilterRule)(nil)).Elem()
 }
 
-func (i CdnDomainIpFilterFilterRuleArgs) ToCdnDomainIpFilterFilterRuleOutput() CdnDomainIpFilterFilterRuleOutput {
-	return i.ToCdnDomainIpFilterFilterRuleOutputWithContext(context.Background())
+func (i DomainIpFilterFilterRuleArgs) ToDomainIpFilterFilterRuleOutput() DomainIpFilterFilterRuleOutput {
+	return i.ToDomainIpFilterFilterRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainIpFilterFilterRuleArgs) ToCdnDomainIpFilterFilterRuleOutputWithContext(ctx context.Context) CdnDomainIpFilterFilterRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFilterFilterRuleOutput)
+func (i DomainIpFilterFilterRuleArgs) ToDomainIpFilterFilterRuleOutputWithContext(ctx context.Context) DomainIpFilterFilterRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFilterFilterRuleOutput)
 }
 
-// CdnDomainIpFilterFilterRuleArrayInput is an input type that accepts CdnDomainIpFilterFilterRuleArray and CdnDomainIpFilterFilterRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainIpFilterFilterRuleArrayInput` via:
+// DomainIpFilterFilterRuleArrayInput is an input type that accepts DomainIpFilterFilterRuleArray and DomainIpFilterFilterRuleArrayOutput values.
+// You can construct a concrete instance of `DomainIpFilterFilterRuleArrayInput` via:
 //
-//          CdnDomainIpFilterFilterRuleArray{ CdnDomainIpFilterFilterRuleArgs{...} }
-type CdnDomainIpFilterFilterRuleArrayInput interface {
+//          DomainIpFilterFilterRuleArray{ DomainIpFilterFilterRuleArgs{...} }
+type DomainIpFilterFilterRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainIpFilterFilterRuleArrayOutput() CdnDomainIpFilterFilterRuleArrayOutput
-	ToCdnDomainIpFilterFilterRuleArrayOutputWithContext(context.Context) CdnDomainIpFilterFilterRuleArrayOutput
+	ToDomainIpFilterFilterRuleArrayOutput() DomainIpFilterFilterRuleArrayOutput
+	ToDomainIpFilterFilterRuleArrayOutputWithContext(context.Context) DomainIpFilterFilterRuleArrayOutput
 }
 
-type CdnDomainIpFilterFilterRuleArray []CdnDomainIpFilterFilterRuleInput
+type DomainIpFilterFilterRuleArray []DomainIpFilterFilterRuleInput
 
-func (CdnDomainIpFilterFilterRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainIpFilterFilterRule)(nil)).Elem()
+func (DomainIpFilterFilterRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainIpFilterFilterRule)(nil)).Elem()
 }
 
-func (i CdnDomainIpFilterFilterRuleArray) ToCdnDomainIpFilterFilterRuleArrayOutput() CdnDomainIpFilterFilterRuleArrayOutput {
-	return i.ToCdnDomainIpFilterFilterRuleArrayOutputWithContext(context.Background())
+func (i DomainIpFilterFilterRuleArray) ToDomainIpFilterFilterRuleArrayOutput() DomainIpFilterFilterRuleArrayOutput {
+	return i.ToDomainIpFilterFilterRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainIpFilterFilterRuleArray) ToCdnDomainIpFilterFilterRuleArrayOutputWithContext(ctx context.Context) CdnDomainIpFilterFilterRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFilterFilterRuleArrayOutput)
+func (i DomainIpFilterFilterRuleArray) ToDomainIpFilterFilterRuleArrayOutputWithContext(ctx context.Context) DomainIpFilterFilterRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFilterFilterRuleArrayOutput)
 }
 
-type CdnDomainIpFilterFilterRuleOutput struct{ *pulumi.OutputState }
+type DomainIpFilterFilterRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainIpFilterFilterRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainIpFilterFilterRule)(nil)).Elem()
+func (DomainIpFilterFilterRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainIpFilterFilterRule)(nil)).Elem()
 }
 
-func (o CdnDomainIpFilterFilterRuleOutput) ToCdnDomainIpFilterFilterRuleOutput() CdnDomainIpFilterFilterRuleOutput {
+func (o DomainIpFilterFilterRuleOutput) ToDomainIpFilterFilterRuleOutput() DomainIpFilterFilterRuleOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterFilterRuleOutput) ToCdnDomainIpFilterFilterRuleOutputWithContext(ctx context.Context) CdnDomainIpFilterFilterRuleOutput {
+func (o DomainIpFilterFilterRuleOutput) ToDomainIpFilterFilterRuleOutputWithContext(ctx context.Context) DomainIpFilterFilterRuleOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterFilterRuleOutput) FilterType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainIpFilterFilterRule) string { return v.FilterType }).(pulumi.StringOutput)
+// Ip filter `blacklist`/`whitelist` type of filter rules.
+func (o DomainIpFilterFilterRuleOutput) FilterType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainIpFilterFilterRule) string { return v.FilterType }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainIpFilterFilterRuleOutput) Filters() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainIpFilterFilterRule) []string { return v.Filters }).(pulumi.StringArrayOutput)
+// Ip filter rule list, supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+func (o DomainIpFilterFilterRuleOutput) Filters() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainIpFilterFilterRule) []string { return v.Filters }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainIpFilterFilterRuleOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainIpFilterFilterRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// Content list for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+func (o DomainIpFilterFilterRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainIpFilterFilterRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainIpFilterFilterRuleOutput) RuleType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainIpFilterFilterRule) string { return v.RuleType }).(pulumi.StringOutput)
+// Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+func (o DomainIpFilterFilterRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainIpFilterFilterRule) string { return v.RuleType }).(pulumi.StringOutput)
 }
 
-type CdnDomainIpFilterFilterRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainIpFilterFilterRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainIpFilterFilterRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainIpFilterFilterRule)(nil)).Elem()
+func (DomainIpFilterFilterRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainIpFilterFilterRule)(nil)).Elem()
 }
 
-func (o CdnDomainIpFilterFilterRuleArrayOutput) ToCdnDomainIpFilterFilterRuleArrayOutput() CdnDomainIpFilterFilterRuleArrayOutput {
+func (o DomainIpFilterFilterRuleArrayOutput) ToDomainIpFilterFilterRuleArrayOutput() DomainIpFilterFilterRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterFilterRuleArrayOutput) ToCdnDomainIpFilterFilterRuleArrayOutputWithContext(ctx context.Context) CdnDomainIpFilterFilterRuleArrayOutput {
+func (o DomainIpFilterFilterRuleArrayOutput) ToDomainIpFilterFilterRuleArrayOutputWithContext(ctx context.Context) DomainIpFilterFilterRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainIpFilterFilterRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainIpFilterFilterRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainIpFilterFilterRule {
-		return vs[0].([]CdnDomainIpFilterFilterRule)[vs[1].(int)]
-	}).(CdnDomainIpFilterFilterRuleOutput)
+func (o DomainIpFilterFilterRuleArrayOutput) Index(i pulumi.IntInput) DomainIpFilterFilterRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainIpFilterFilterRule {
+		return vs[0].([]DomainIpFilterFilterRule)[vs[1].(int)]
+	}).(DomainIpFilterFilterRuleOutput)
 }
 
-type CdnDomainIpFreqLimit struct {
-	Qps    *int   `pulumi:"qps"`
+type DomainIpFreqLimit struct {
+	// Sets the limited number of requests per second, 514 will be returned for requests that exceed the limit.
+	Qps *int `pulumi:"qps"`
+	// Configuration switch, available values: `on`, `off` (default).
 	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainIpFreqLimitInput is an input type that accepts CdnDomainIpFreqLimitArgs and CdnDomainIpFreqLimitOutput values.
-// You can construct a concrete instance of `CdnDomainIpFreqLimitInput` via:
+// DomainIpFreqLimitInput is an input type that accepts DomainIpFreqLimitArgs and DomainIpFreqLimitOutput values.
+// You can construct a concrete instance of `DomainIpFreqLimitInput` via:
 //
-//          CdnDomainIpFreqLimitArgs{...}
-type CdnDomainIpFreqLimitInput interface {
+//          DomainIpFreqLimitArgs{...}
+type DomainIpFreqLimitInput interface {
 	pulumi.Input
 
-	ToCdnDomainIpFreqLimitOutput() CdnDomainIpFreqLimitOutput
-	ToCdnDomainIpFreqLimitOutputWithContext(context.Context) CdnDomainIpFreqLimitOutput
+	ToDomainIpFreqLimitOutput() DomainIpFreqLimitOutput
+	ToDomainIpFreqLimitOutputWithContext(context.Context) DomainIpFreqLimitOutput
 }
 
-type CdnDomainIpFreqLimitArgs struct {
-	Qps    pulumi.IntPtrInput `pulumi:"qps"`
+type DomainIpFreqLimitArgs struct {
+	// Sets the limited number of requests per second, 514 will be returned for requests that exceed the limit.
+	Qps pulumi.IntPtrInput `pulumi:"qps"`
+	// Configuration switch, available values: `on`, `off` (default).
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainIpFreqLimitArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainIpFreqLimit)(nil)).Elem()
+func (DomainIpFreqLimitArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainIpFreqLimit)(nil)).Elem()
 }
 
-func (i CdnDomainIpFreqLimitArgs) ToCdnDomainIpFreqLimitOutput() CdnDomainIpFreqLimitOutput {
-	return i.ToCdnDomainIpFreqLimitOutputWithContext(context.Background())
+func (i DomainIpFreqLimitArgs) ToDomainIpFreqLimitOutput() DomainIpFreqLimitOutput {
+	return i.ToDomainIpFreqLimitOutputWithContext(context.Background())
 }
 
-func (i CdnDomainIpFreqLimitArgs) ToCdnDomainIpFreqLimitOutputWithContext(ctx context.Context) CdnDomainIpFreqLimitOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFreqLimitOutput)
+func (i DomainIpFreqLimitArgs) ToDomainIpFreqLimitOutputWithContext(ctx context.Context) DomainIpFreqLimitOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFreqLimitOutput)
 }
 
-func (i CdnDomainIpFreqLimitArgs) ToCdnDomainIpFreqLimitPtrOutput() CdnDomainIpFreqLimitPtrOutput {
-	return i.ToCdnDomainIpFreqLimitPtrOutputWithContext(context.Background())
+func (i DomainIpFreqLimitArgs) ToDomainIpFreqLimitPtrOutput() DomainIpFreqLimitPtrOutput {
+	return i.ToDomainIpFreqLimitPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainIpFreqLimitArgs) ToCdnDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) CdnDomainIpFreqLimitPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFreqLimitOutput).ToCdnDomainIpFreqLimitPtrOutputWithContext(ctx)
+func (i DomainIpFreqLimitArgs) ToDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) DomainIpFreqLimitPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFreqLimitOutput).ToDomainIpFreqLimitPtrOutputWithContext(ctx)
 }
 
-// CdnDomainIpFreqLimitPtrInput is an input type that accepts CdnDomainIpFreqLimitArgs, CdnDomainIpFreqLimitPtr and CdnDomainIpFreqLimitPtrOutput values.
-// You can construct a concrete instance of `CdnDomainIpFreqLimitPtrInput` via:
+// DomainIpFreqLimitPtrInput is an input type that accepts DomainIpFreqLimitArgs, DomainIpFreqLimitPtr and DomainIpFreqLimitPtrOutput values.
+// You can construct a concrete instance of `DomainIpFreqLimitPtrInput` via:
 //
-//          CdnDomainIpFreqLimitArgs{...}
+//          DomainIpFreqLimitArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainIpFreqLimitPtrInput interface {
+type DomainIpFreqLimitPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainIpFreqLimitPtrOutput() CdnDomainIpFreqLimitPtrOutput
-	ToCdnDomainIpFreqLimitPtrOutputWithContext(context.Context) CdnDomainIpFreqLimitPtrOutput
+	ToDomainIpFreqLimitPtrOutput() DomainIpFreqLimitPtrOutput
+	ToDomainIpFreqLimitPtrOutputWithContext(context.Context) DomainIpFreqLimitPtrOutput
 }
 
-type cdnDomainIpFreqLimitPtrType CdnDomainIpFreqLimitArgs
+type domainIpFreqLimitPtrType DomainIpFreqLimitArgs
 
-func CdnDomainIpFreqLimitPtr(v *CdnDomainIpFreqLimitArgs) CdnDomainIpFreqLimitPtrInput {
-	return (*cdnDomainIpFreqLimitPtrType)(v)
+func DomainIpFreqLimitPtr(v *DomainIpFreqLimitArgs) DomainIpFreqLimitPtrInput {
+	return (*domainIpFreqLimitPtrType)(v)
 }
 
-func (*cdnDomainIpFreqLimitPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainIpFreqLimit)(nil)).Elem()
+func (*domainIpFreqLimitPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainIpFreqLimit)(nil)).Elem()
 }
 
-func (i *cdnDomainIpFreqLimitPtrType) ToCdnDomainIpFreqLimitPtrOutput() CdnDomainIpFreqLimitPtrOutput {
-	return i.ToCdnDomainIpFreqLimitPtrOutputWithContext(context.Background())
+func (i *domainIpFreqLimitPtrType) ToDomainIpFreqLimitPtrOutput() DomainIpFreqLimitPtrOutput {
+	return i.ToDomainIpFreqLimitPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainIpFreqLimitPtrType) ToCdnDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) CdnDomainIpFreqLimitPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainIpFreqLimitPtrOutput)
+func (i *domainIpFreqLimitPtrType) ToDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) DomainIpFreqLimitPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainIpFreqLimitPtrOutput)
 }
 
-type CdnDomainIpFreqLimitOutput struct{ *pulumi.OutputState }
+type DomainIpFreqLimitOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainIpFreqLimitOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainIpFreqLimit)(nil)).Elem()
+func (DomainIpFreqLimitOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainIpFreqLimit)(nil)).Elem()
 }
 
-func (o CdnDomainIpFreqLimitOutput) ToCdnDomainIpFreqLimitOutput() CdnDomainIpFreqLimitOutput {
+func (o DomainIpFreqLimitOutput) ToDomainIpFreqLimitOutput() DomainIpFreqLimitOutput {
 	return o
 }
 
-func (o CdnDomainIpFreqLimitOutput) ToCdnDomainIpFreqLimitOutputWithContext(ctx context.Context) CdnDomainIpFreqLimitOutput {
+func (o DomainIpFreqLimitOutput) ToDomainIpFreqLimitOutputWithContext(ctx context.Context) DomainIpFreqLimitOutput {
 	return o
 }
 
-func (o CdnDomainIpFreqLimitOutput) ToCdnDomainIpFreqLimitPtrOutput() CdnDomainIpFreqLimitPtrOutput {
-	return o.ToCdnDomainIpFreqLimitPtrOutputWithContext(context.Background())
+func (o DomainIpFreqLimitOutput) ToDomainIpFreqLimitPtrOutput() DomainIpFreqLimitPtrOutput {
+	return o.ToDomainIpFreqLimitPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainIpFreqLimitOutput) ToCdnDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) CdnDomainIpFreqLimitPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainIpFreqLimit) *CdnDomainIpFreqLimit {
+func (o DomainIpFreqLimitOutput) ToDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) DomainIpFreqLimitPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainIpFreqLimit) *DomainIpFreqLimit {
 		return &v
-	}).(CdnDomainIpFreqLimitPtrOutput)
+	}).(DomainIpFreqLimitPtrOutput)
 }
 
-func (o CdnDomainIpFreqLimitOutput) Qps() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CdnDomainIpFreqLimit) *int { return v.Qps }).(pulumi.IntPtrOutput)
+// Sets the limited number of requests per second, 514 will be returned for requests that exceed the limit.
+func (o DomainIpFreqLimitOutput) Qps() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainIpFreqLimit) *int { return v.Qps }).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainIpFreqLimitOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainIpFreqLimit) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainIpFreqLimitOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainIpFreqLimit) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainIpFreqLimitPtrOutput struct{ *pulumi.OutputState }
+type DomainIpFreqLimitPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainIpFreqLimitPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainIpFreqLimit)(nil)).Elem()
+func (DomainIpFreqLimitPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainIpFreqLimit)(nil)).Elem()
 }
 
-func (o CdnDomainIpFreqLimitPtrOutput) ToCdnDomainIpFreqLimitPtrOutput() CdnDomainIpFreqLimitPtrOutput {
+func (o DomainIpFreqLimitPtrOutput) ToDomainIpFreqLimitPtrOutput() DomainIpFreqLimitPtrOutput {
 	return o
 }
 
-func (o CdnDomainIpFreqLimitPtrOutput) ToCdnDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) CdnDomainIpFreqLimitPtrOutput {
+func (o DomainIpFreqLimitPtrOutput) ToDomainIpFreqLimitPtrOutputWithContext(ctx context.Context) DomainIpFreqLimitPtrOutput {
 	return o
 }
 
-func (o CdnDomainIpFreqLimitPtrOutput) Elem() CdnDomainIpFreqLimitOutput {
-	return o.ApplyT(func(v *CdnDomainIpFreqLimit) CdnDomainIpFreqLimit {
+func (o DomainIpFreqLimitPtrOutput) Elem() DomainIpFreqLimitOutput {
+	return o.ApplyT(func(v *DomainIpFreqLimit) DomainIpFreqLimit {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainIpFreqLimit
+		var ret DomainIpFreqLimit
 		return ret
-	}).(CdnDomainIpFreqLimitOutput)
+	}).(DomainIpFreqLimitOutput)
 }
 
-func (o CdnDomainIpFreqLimitPtrOutput) Qps() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainIpFreqLimit) *int {
+// Sets the limited number of requests per second, 514 will be returned for requests that exceed the limit.
+func (o DomainIpFreqLimitPtrOutput) Qps() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainIpFreqLimit) *int {
 		if v == nil {
 			return nil
 		}
@@ -3948,8 +4334,9 @@ func (o CdnDomainIpFreqLimitPtrOutput) Qps() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainIpFreqLimitPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainIpFreqLimit) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainIpFreqLimitPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainIpFreqLimit) *string {
 		if v == nil {
 			return nil
 		}
@@ -3957,147 +4344,155 @@ func (o CdnDomainIpFreqLimitPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainMaxAge struct {
-	MaxAgeRules []CdnDomainMaxAgeMaxAgeRule `pulumi:"maxAgeRules"`
-	Switch      string                      `pulumi:"switch"`
+type DomainMaxAge struct {
+	// List of Max Age rule configuration.
+	MaxAgeRules []DomainMaxAgeMaxAgeRule `pulumi:"maxAgeRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainMaxAgeInput is an input type that accepts CdnDomainMaxAgeArgs and CdnDomainMaxAgeOutput values.
-// You can construct a concrete instance of `CdnDomainMaxAgeInput` via:
+// DomainMaxAgeInput is an input type that accepts DomainMaxAgeArgs and DomainMaxAgeOutput values.
+// You can construct a concrete instance of `DomainMaxAgeInput` via:
 //
-//          CdnDomainMaxAgeArgs{...}
-type CdnDomainMaxAgeInput interface {
+//          DomainMaxAgeArgs{...}
+type DomainMaxAgeInput interface {
 	pulumi.Input
 
-	ToCdnDomainMaxAgeOutput() CdnDomainMaxAgeOutput
-	ToCdnDomainMaxAgeOutputWithContext(context.Context) CdnDomainMaxAgeOutput
+	ToDomainMaxAgeOutput() DomainMaxAgeOutput
+	ToDomainMaxAgeOutputWithContext(context.Context) DomainMaxAgeOutput
 }
 
-type CdnDomainMaxAgeArgs struct {
-	MaxAgeRules CdnDomainMaxAgeMaxAgeRuleArrayInput `pulumi:"maxAgeRules"`
-	Switch      pulumi.StringInput                  `pulumi:"switch"`
+type DomainMaxAgeArgs struct {
+	// List of Max Age rule configuration.
+	MaxAgeRules DomainMaxAgeMaxAgeRuleArrayInput `pulumi:"maxAgeRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainMaxAgeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainMaxAge)(nil)).Elem()
+func (DomainMaxAgeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainMaxAge)(nil)).Elem()
 }
 
-func (i CdnDomainMaxAgeArgs) ToCdnDomainMaxAgeOutput() CdnDomainMaxAgeOutput {
-	return i.ToCdnDomainMaxAgeOutputWithContext(context.Background())
+func (i DomainMaxAgeArgs) ToDomainMaxAgeOutput() DomainMaxAgeOutput {
+	return i.ToDomainMaxAgeOutputWithContext(context.Background())
 }
 
-func (i CdnDomainMaxAgeArgs) ToCdnDomainMaxAgeOutputWithContext(ctx context.Context) CdnDomainMaxAgeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainMaxAgeOutput)
+func (i DomainMaxAgeArgs) ToDomainMaxAgeOutputWithContext(ctx context.Context) DomainMaxAgeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainMaxAgeOutput)
 }
 
-func (i CdnDomainMaxAgeArgs) ToCdnDomainMaxAgePtrOutput() CdnDomainMaxAgePtrOutput {
-	return i.ToCdnDomainMaxAgePtrOutputWithContext(context.Background())
+func (i DomainMaxAgeArgs) ToDomainMaxAgePtrOutput() DomainMaxAgePtrOutput {
+	return i.ToDomainMaxAgePtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainMaxAgeArgs) ToCdnDomainMaxAgePtrOutputWithContext(ctx context.Context) CdnDomainMaxAgePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainMaxAgeOutput).ToCdnDomainMaxAgePtrOutputWithContext(ctx)
+func (i DomainMaxAgeArgs) ToDomainMaxAgePtrOutputWithContext(ctx context.Context) DomainMaxAgePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainMaxAgeOutput).ToDomainMaxAgePtrOutputWithContext(ctx)
 }
 
-// CdnDomainMaxAgePtrInput is an input type that accepts CdnDomainMaxAgeArgs, CdnDomainMaxAgePtr and CdnDomainMaxAgePtrOutput values.
-// You can construct a concrete instance of `CdnDomainMaxAgePtrInput` via:
+// DomainMaxAgePtrInput is an input type that accepts DomainMaxAgeArgs, DomainMaxAgePtr and DomainMaxAgePtrOutput values.
+// You can construct a concrete instance of `DomainMaxAgePtrInput` via:
 //
-//          CdnDomainMaxAgeArgs{...}
+//          DomainMaxAgeArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainMaxAgePtrInput interface {
+type DomainMaxAgePtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainMaxAgePtrOutput() CdnDomainMaxAgePtrOutput
-	ToCdnDomainMaxAgePtrOutputWithContext(context.Context) CdnDomainMaxAgePtrOutput
+	ToDomainMaxAgePtrOutput() DomainMaxAgePtrOutput
+	ToDomainMaxAgePtrOutputWithContext(context.Context) DomainMaxAgePtrOutput
 }
 
-type cdnDomainMaxAgePtrType CdnDomainMaxAgeArgs
+type domainMaxAgePtrType DomainMaxAgeArgs
 
-func CdnDomainMaxAgePtr(v *CdnDomainMaxAgeArgs) CdnDomainMaxAgePtrInput {
-	return (*cdnDomainMaxAgePtrType)(v)
+func DomainMaxAgePtr(v *DomainMaxAgeArgs) DomainMaxAgePtrInput {
+	return (*domainMaxAgePtrType)(v)
 }
 
-func (*cdnDomainMaxAgePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainMaxAge)(nil)).Elem()
+func (*domainMaxAgePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainMaxAge)(nil)).Elem()
 }
 
-func (i *cdnDomainMaxAgePtrType) ToCdnDomainMaxAgePtrOutput() CdnDomainMaxAgePtrOutput {
-	return i.ToCdnDomainMaxAgePtrOutputWithContext(context.Background())
+func (i *domainMaxAgePtrType) ToDomainMaxAgePtrOutput() DomainMaxAgePtrOutput {
+	return i.ToDomainMaxAgePtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainMaxAgePtrType) ToCdnDomainMaxAgePtrOutputWithContext(ctx context.Context) CdnDomainMaxAgePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainMaxAgePtrOutput)
+func (i *domainMaxAgePtrType) ToDomainMaxAgePtrOutputWithContext(ctx context.Context) DomainMaxAgePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainMaxAgePtrOutput)
 }
 
-type CdnDomainMaxAgeOutput struct{ *pulumi.OutputState }
+type DomainMaxAgeOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainMaxAgeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainMaxAge)(nil)).Elem()
+func (DomainMaxAgeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainMaxAge)(nil)).Elem()
 }
 
-func (o CdnDomainMaxAgeOutput) ToCdnDomainMaxAgeOutput() CdnDomainMaxAgeOutput {
+func (o DomainMaxAgeOutput) ToDomainMaxAgeOutput() DomainMaxAgeOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgeOutput) ToCdnDomainMaxAgeOutputWithContext(ctx context.Context) CdnDomainMaxAgeOutput {
+func (o DomainMaxAgeOutput) ToDomainMaxAgeOutputWithContext(ctx context.Context) DomainMaxAgeOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgeOutput) ToCdnDomainMaxAgePtrOutput() CdnDomainMaxAgePtrOutput {
-	return o.ToCdnDomainMaxAgePtrOutputWithContext(context.Background())
+func (o DomainMaxAgeOutput) ToDomainMaxAgePtrOutput() DomainMaxAgePtrOutput {
+	return o.ToDomainMaxAgePtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainMaxAgeOutput) ToCdnDomainMaxAgePtrOutputWithContext(ctx context.Context) CdnDomainMaxAgePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainMaxAge) *CdnDomainMaxAge {
+func (o DomainMaxAgeOutput) ToDomainMaxAgePtrOutputWithContext(ctx context.Context) DomainMaxAgePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainMaxAge) *DomainMaxAge {
 		return &v
-	}).(CdnDomainMaxAgePtrOutput)
+	}).(DomainMaxAgePtrOutput)
 }
 
-func (o CdnDomainMaxAgeOutput) MaxAgeRules() CdnDomainMaxAgeMaxAgeRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainMaxAge) []CdnDomainMaxAgeMaxAgeRule { return v.MaxAgeRules }).(CdnDomainMaxAgeMaxAgeRuleArrayOutput)
+// List of Max Age rule configuration.
+func (o DomainMaxAgeOutput) MaxAgeRules() DomainMaxAgeMaxAgeRuleArrayOutput {
+	return o.ApplyT(func(v DomainMaxAge) []DomainMaxAgeMaxAgeRule { return v.MaxAgeRules }).(DomainMaxAgeMaxAgeRuleArrayOutput)
 }
 
-func (o CdnDomainMaxAgeOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainMaxAge) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainMaxAgeOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainMaxAge) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainMaxAgePtrOutput struct{ *pulumi.OutputState }
+type DomainMaxAgePtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainMaxAgePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainMaxAge)(nil)).Elem()
+func (DomainMaxAgePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainMaxAge)(nil)).Elem()
 }
 
-func (o CdnDomainMaxAgePtrOutput) ToCdnDomainMaxAgePtrOutput() CdnDomainMaxAgePtrOutput {
+func (o DomainMaxAgePtrOutput) ToDomainMaxAgePtrOutput() DomainMaxAgePtrOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgePtrOutput) ToCdnDomainMaxAgePtrOutputWithContext(ctx context.Context) CdnDomainMaxAgePtrOutput {
+func (o DomainMaxAgePtrOutput) ToDomainMaxAgePtrOutputWithContext(ctx context.Context) DomainMaxAgePtrOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgePtrOutput) Elem() CdnDomainMaxAgeOutput {
-	return o.ApplyT(func(v *CdnDomainMaxAge) CdnDomainMaxAge {
+func (o DomainMaxAgePtrOutput) Elem() DomainMaxAgeOutput {
+	return o.ApplyT(func(v *DomainMaxAge) DomainMaxAge {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainMaxAge
+		var ret DomainMaxAge
 		return ret
-	}).(CdnDomainMaxAgeOutput)
+	}).(DomainMaxAgeOutput)
 }
 
-func (o CdnDomainMaxAgePtrOutput) MaxAgeRules() CdnDomainMaxAgeMaxAgeRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainMaxAge) []CdnDomainMaxAgeMaxAgeRule {
+// List of Max Age rule configuration.
+func (o DomainMaxAgePtrOutput) MaxAgeRules() DomainMaxAgeMaxAgeRuleArrayOutput {
+	return o.ApplyT(func(v *DomainMaxAge) []DomainMaxAgeMaxAgeRule {
 		if v == nil {
 			return nil
 		}
 		return v.MaxAgeRules
-	}).(CdnDomainMaxAgeMaxAgeRuleArrayOutput)
+	}).(DomainMaxAgeMaxAgeRuleArrayOutput)
 }
 
-func (o CdnDomainMaxAgePtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainMaxAge) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainMaxAgePtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainMaxAge) *string {
 		if v == nil {
 			return nil
 		}
@@ -4105,286 +4500,323 @@ func (o CdnDomainMaxAgePtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainMaxAgeMaxAgeRule struct {
-	FollowOrigin   *string  `pulumi:"followOrigin"`
+type DomainMaxAgeMaxAgeRule struct {
+	// Whether to follow origin, values: `on`/`off`, if set to `on`, the `maxAgeTime` will be ignored.
+	FollowOrigin *string `pulumi:"followOrigin"`
+	// List of rule paths for each `maxAgeType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
 	MaxAgeContents []string `pulumi:"maxAgeContents"`
-	MaxAgeTime     int      `pulumi:"maxAgeTime"`
-	MaxAgeType     string   `pulumi:"maxAgeType"`
+	// Max Age time in seconds, this can set to `0` that stands for no cache.
+	MaxAgeTime int `pulumi:"maxAgeTime"`
+	// The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+	MaxAgeType string `pulumi:"maxAgeType"`
 }
 
-// CdnDomainMaxAgeMaxAgeRuleInput is an input type that accepts CdnDomainMaxAgeMaxAgeRuleArgs and CdnDomainMaxAgeMaxAgeRuleOutput values.
-// You can construct a concrete instance of `CdnDomainMaxAgeMaxAgeRuleInput` via:
+// DomainMaxAgeMaxAgeRuleInput is an input type that accepts DomainMaxAgeMaxAgeRuleArgs and DomainMaxAgeMaxAgeRuleOutput values.
+// You can construct a concrete instance of `DomainMaxAgeMaxAgeRuleInput` via:
 //
-//          CdnDomainMaxAgeMaxAgeRuleArgs{...}
-type CdnDomainMaxAgeMaxAgeRuleInput interface {
+//          DomainMaxAgeMaxAgeRuleArgs{...}
+type DomainMaxAgeMaxAgeRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainMaxAgeMaxAgeRuleOutput() CdnDomainMaxAgeMaxAgeRuleOutput
-	ToCdnDomainMaxAgeMaxAgeRuleOutputWithContext(context.Context) CdnDomainMaxAgeMaxAgeRuleOutput
+	ToDomainMaxAgeMaxAgeRuleOutput() DomainMaxAgeMaxAgeRuleOutput
+	ToDomainMaxAgeMaxAgeRuleOutputWithContext(context.Context) DomainMaxAgeMaxAgeRuleOutput
 }
 
-type CdnDomainMaxAgeMaxAgeRuleArgs struct {
-	FollowOrigin   pulumi.StringPtrInput   `pulumi:"followOrigin"`
+type DomainMaxAgeMaxAgeRuleArgs struct {
+	// Whether to follow origin, values: `on`/`off`, if set to `on`, the `maxAgeTime` will be ignored.
+	FollowOrigin pulumi.StringPtrInput `pulumi:"followOrigin"`
+	// List of rule paths for each `maxAgeType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
 	MaxAgeContents pulumi.StringArrayInput `pulumi:"maxAgeContents"`
-	MaxAgeTime     pulumi.IntInput         `pulumi:"maxAgeTime"`
-	MaxAgeType     pulumi.StringInput      `pulumi:"maxAgeType"`
+	// Max Age time in seconds, this can set to `0` that stands for no cache.
+	MaxAgeTime pulumi.IntInput `pulumi:"maxAgeTime"`
+	// The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+	MaxAgeType pulumi.StringInput `pulumi:"maxAgeType"`
 }
 
-func (CdnDomainMaxAgeMaxAgeRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainMaxAgeMaxAgeRule)(nil)).Elem()
+func (DomainMaxAgeMaxAgeRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainMaxAgeMaxAgeRule)(nil)).Elem()
 }
 
-func (i CdnDomainMaxAgeMaxAgeRuleArgs) ToCdnDomainMaxAgeMaxAgeRuleOutput() CdnDomainMaxAgeMaxAgeRuleOutput {
-	return i.ToCdnDomainMaxAgeMaxAgeRuleOutputWithContext(context.Background())
+func (i DomainMaxAgeMaxAgeRuleArgs) ToDomainMaxAgeMaxAgeRuleOutput() DomainMaxAgeMaxAgeRuleOutput {
+	return i.ToDomainMaxAgeMaxAgeRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainMaxAgeMaxAgeRuleArgs) ToCdnDomainMaxAgeMaxAgeRuleOutputWithContext(ctx context.Context) CdnDomainMaxAgeMaxAgeRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainMaxAgeMaxAgeRuleOutput)
+func (i DomainMaxAgeMaxAgeRuleArgs) ToDomainMaxAgeMaxAgeRuleOutputWithContext(ctx context.Context) DomainMaxAgeMaxAgeRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainMaxAgeMaxAgeRuleOutput)
 }
 
-// CdnDomainMaxAgeMaxAgeRuleArrayInput is an input type that accepts CdnDomainMaxAgeMaxAgeRuleArray and CdnDomainMaxAgeMaxAgeRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainMaxAgeMaxAgeRuleArrayInput` via:
+// DomainMaxAgeMaxAgeRuleArrayInput is an input type that accepts DomainMaxAgeMaxAgeRuleArray and DomainMaxAgeMaxAgeRuleArrayOutput values.
+// You can construct a concrete instance of `DomainMaxAgeMaxAgeRuleArrayInput` via:
 //
-//          CdnDomainMaxAgeMaxAgeRuleArray{ CdnDomainMaxAgeMaxAgeRuleArgs{...} }
-type CdnDomainMaxAgeMaxAgeRuleArrayInput interface {
+//          DomainMaxAgeMaxAgeRuleArray{ DomainMaxAgeMaxAgeRuleArgs{...} }
+type DomainMaxAgeMaxAgeRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainMaxAgeMaxAgeRuleArrayOutput() CdnDomainMaxAgeMaxAgeRuleArrayOutput
-	ToCdnDomainMaxAgeMaxAgeRuleArrayOutputWithContext(context.Context) CdnDomainMaxAgeMaxAgeRuleArrayOutput
+	ToDomainMaxAgeMaxAgeRuleArrayOutput() DomainMaxAgeMaxAgeRuleArrayOutput
+	ToDomainMaxAgeMaxAgeRuleArrayOutputWithContext(context.Context) DomainMaxAgeMaxAgeRuleArrayOutput
 }
 
-type CdnDomainMaxAgeMaxAgeRuleArray []CdnDomainMaxAgeMaxAgeRuleInput
+type DomainMaxAgeMaxAgeRuleArray []DomainMaxAgeMaxAgeRuleInput
 
-func (CdnDomainMaxAgeMaxAgeRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainMaxAgeMaxAgeRule)(nil)).Elem()
+func (DomainMaxAgeMaxAgeRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainMaxAgeMaxAgeRule)(nil)).Elem()
 }
 
-func (i CdnDomainMaxAgeMaxAgeRuleArray) ToCdnDomainMaxAgeMaxAgeRuleArrayOutput() CdnDomainMaxAgeMaxAgeRuleArrayOutput {
-	return i.ToCdnDomainMaxAgeMaxAgeRuleArrayOutputWithContext(context.Background())
+func (i DomainMaxAgeMaxAgeRuleArray) ToDomainMaxAgeMaxAgeRuleArrayOutput() DomainMaxAgeMaxAgeRuleArrayOutput {
+	return i.ToDomainMaxAgeMaxAgeRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainMaxAgeMaxAgeRuleArray) ToCdnDomainMaxAgeMaxAgeRuleArrayOutputWithContext(ctx context.Context) CdnDomainMaxAgeMaxAgeRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainMaxAgeMaxAgeRuleArrayOutput)
+func (i DomainMaxAgeMaxAgeRuleArray) ToDomainMaxAgeMaxAgeRuleArrayOutputWithContext(ctx context.Context) DomainMaxAgeMaxAgeRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainMaxAgeMaxAgeRuleArrayOutput)
 }
 
-type CdnDomainMaxAgeMaxAgeRuleOutput struct{ *pulumi.OutputState }
+type DomainMaxAgeMaxAgeRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainMaxAgeMaxAgeRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainMaxAgeMaxAgeRule)(nil)).Elem()
+func (DomainMaxAgeMaxAgeRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainMaxAgeMaxAgeRule)(nil)).Elem()
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleOutput) ToCdnDomainMaxAgeMaxAgeRuleOutput() CdnDomainMaxAgeMaxAgeRuleOutput {
+func (o DomainMaxAgeMaxAgeRuleOutput) ToDomainMaxAgeMaxAgeRuleOutput() DomainMaxAgeMaxAgeRuleOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleOutput) ToCdnDomainMaxAgeMaxAgeRuleOutputWithContext(ctx context.Context) CdnDomainMaxAgeMaxAgeRuleOutput {
+func (o DomainMaxAgeMaxAgeRuleOutput) ToDomainMaxAgeMaxAgeRuleOutputWithContext(ctx context.Context) DomainMaxAgeMaxAgeRuleOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleOutput) FollowOrigin() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainMaxAgeMaxAgeRule) *string { return v.FollowOrigin }).(pulumi.StringPtrOutput)
+// Whether to follow origin, values: `on`/`off`, if set to `on`, the `maxAgeTime` will be ignored.
+func (o DomainMaxAgeMaxAgeRuleOutput) FollowOrigin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainMaxAgeMaxAgeRule) *string { return v.FollowOrigin }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleOutput) MaxAgeContents() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainMaxAgeMaxAgeRule) []string { return v.MaxAgeContents }).(pulumi.StringArrayOutput)
+// List of rule paths for each `maxAgeType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+func (o DomainMaxAgeMaxAgeRuleOutput) MaxAgeContents() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainMaxAgeMaxAgeRule) []string { return v.MaxAgeContents }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleOutput) MaxAgeTime() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainMaxAgeMaxAgeRule) int { return v.MaxAgeTime }).(pulumi.IntOutput)
+// Max Age time in seconds, this can set to `0` that stands for no cache.
+func (o DomainMaxAgeMaxAgeRuleOutput) MaxAgeTime() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainMaxAgeMaxAgeRule) int { return v.MaxAgeTime }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleOutput) MaxAgeType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainMaxAgeMaxAgeRule) string { return v.MaxAgeType }).(pulumi.StringOutput)
+// The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+func (o DomainMaxAgeMaxAgeRuleOutput) MaxAgeType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainMaxAgeMaxAgeRule) string { return v.MaxAgeType }).(pulumi.StringOutput)
 }
 
-type CdnDomainMaxAgeMaxAgeRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainMaxAgeMaxAgeRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainMaxAgeMaxAgeRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainMaxAgeMaxAgeRule)(nil)).Elem()
+func (DomainMaxAgeMaxAgeRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainMaxAgeMaxAgeRule)(nil)).Elem()
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleArrayOutput) ToCdnDomainMaxAgeMaxAgeRuleArrayOutput() CdnDomainMaxAgeMaxAgeRuleArrayOutput {
+func (o DomainMaxAgeMaxAgeRuleArrayOutput) ToDomainMaxAgeMaxAgeRuleArrayOutput() DomainMaxAgeMaxAgeRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleArrayOutput) ToCdnDomainMaxAgeMaxAgeRuleArrayOutputWithContext(ctx context.Context) CdnDomainMaxAgeMaxAgeRuleArrayOutput {
+func (o DomainMaxAgeMaxAgeRuleArrayOutput) ToDomainMaxAgeMaxAgeRuleArrayOutputWithContext(ctx context.Context) DomainMaxAgeMaxAgeRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainMaxAgeMaxAgeRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainMaxAgeMaxAgeRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainMaxAgeMaxAgeRule {
-		return vs[0].([]CdnDomainMaxAgeMaxAgeRule)[vs[1].(int)]
-	}).(CdnDomainMaxAgeMaxAgeRuleOutput)
+func (o DomainMaxAgeMaxAgeRuleArrayOutput) Index(i pulumi.IntInput) DomainMaxAgeMaxAgeRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainMaxAgeMaxAgeRule {
+		return vs[0].([]DomainMaxAgeMaxAgeRule)[vs[1].(int)]
+	}).(DomainMaxAgeMaxAgeRuleOutput)
 }
 
-type CdnDomainOrigin struct {
-	BackupOriginLists  []string `pulumi:"backupOriginLists"`
-	BackupOriginType   *string  `pulumi:"backupOriginType"`
-	BackupServerName   *string  `pulumi:"backupServerName"`
-	CosPrivateAccess   *string  `pulumi:"cosPrivateAccess"`
-	OriginLists        []string `pulumi:"originLists"`
-	OriginPullProtocol *string  `pulumi:"originPullProtocol"`
-	OriginType         string   `pulumi:"originType"`
-	ServerName         *string  `pulumi:"serverName"`
+type DomainOrigin struct {
+	// Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backupOriginType`.
+	BackupOriginLists []string `pulumi:"backupOriginLists"`
+	// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+	BackupOriginType *string `pulumi:"backupOriginType"`
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+	BackupServerName *string `pulumi:"backupServerName"`
+	// When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
+	CosPrivateAccess *string `pulumi:"cosPrivateAccess"`
+	// Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
+	OriginLists []string `pulumi:"originLists"`
+	// Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
+	OriginPullProtocol *string `pulumi:"originPullProtocol"`
+	// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+	OriginType string `pulumi:"originType"`
+	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	ServerName *string `pulumi:"serverName"`
 }
 
-// CdnDomainOriginInput is an input type that accepts CdnDomainOriginArgs and CdnDomainOriginOutput values.
-// You can construct a concrete instance of `CdnDomainOriginInput` via:
+// DomainOriginInput is an input type that accepts DomainOriginArgs and DomainOriginOutput values.
+// You can construct a concrete instance of `DomainOriginInput` via:
 //
-//          CdnDomainOriginArgs{...}
-type CdnDomainOriginInput interface {
+//          DomainOriginArgs{...}
+type DomainOriginInput interface {
 	pulumi.Input
 
-	ToCdnDomainOriginOutput() CdnDomainOriginOutput
-	ToCdnDomainOriginOutputWithContext(context.Context) CdnDomainOriginOutput
+	ToDomainOriginOutput() DomainOriginOutput
+	ToDomainOriginOutputWithContext(context.Context) DomainOriginOutput
 }
 
-type CdnDomainOriginArgs struct {
-	BackupOriginLists  pulumi.StringArrayInput `pulumi:"backupOriginLists"`
-	BackupOriginType   pulumi.StringPtrInput   `pulumi:"backupOriginType"`
-	BackupServerName   pulumi.StringPtrInput   `pulumi:"backupServerName"`
-	CosPrivateAccess   pulumi.StringPtrInput   `pulumi:"cosPrivateAccess"`
-	OriginLists        pulumi.StringArrayInput `pulumi:"originLists"`
-	OriginPullProtocol pulumi.StringPtrInput   `pulumi:"originPullProtocol"`
-	OriginType         pulumi.StringInput      `pulumi:"originType"`
-	ServerName         pulumi.StringPtrInput   `pulumi:"serverName"`
+type DomainOriginArgs struct {
+	// Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backupOriginType`.
+	BackupOriginLists pulumi.StringArrayInput `pulumi:"backupOriginLists"`
+	// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+	BackupOriginType pulumi.StringPtrInput `pulumi:"backupOriginType"`
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+	BackupServerName pulumi.StringPtrInput `pulumi:"backupServerName"`
+	// When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
+	CosPrivateAccess pulumi.StringPtrInput `pulumi:"cosPrivateAccess"`
+	// Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
+	OriginLists pulumi.StringArrayInput `pulumi:"originLists"`
+	// Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
+	OriginPullProtocol pulumi.StringPtrInput `pulumi:"originPullProtocol"`
+	// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+	OriginType pulumi.StringInput `pulumi:"originType"`
+	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	ServerName pulumi.StringPtrInput `pulumi:"serverName"`
 }
 
-func (CdnDomainOriginArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOrigin)(nil)).Elem()
+func (DomainOriginArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOrigin)(nil)).Elem()
 }
 
-func (i CdnDomainOriginArgs) ToCdnDomainOriginOutput() CdnDomainOriginOutput {
-	return i.ToCdnDomainOriginOutputWithContext(context.Background())
+func (i DomainOriginArgs) ToDomainOriginOutput() DomainOriginOutput {
+	return i.ToDomainOriginOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOriginArgs) ToCdnDomainOriginOutputWithContext(ctx context.Context) CdnDomainOriginOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginOutput)
+func (i DomainOriginArgs) ToDomainOriginOutputWithContext(ctx context.Context) DomainOriginOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginOutput)
 }
 
-func (i CdnDomainOriginArgs) ToCdnDomainOriginPtrOutput() CdnDomainOriginPtrOutput {
-	return i.ToCdnDomainOriginPtrOutputWithContext(context.Background())
+func (i DomainOriginArgs) ToDomainOriginPtrOutput() DomainOriginPtrOutput {
+	return i.ToDomainOriginPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOriginArgs) ToCdnDomainOriginPtrOutputWithContext(ctx context.Context) CdnDomainOriginPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginOutput).ToCdnDomainOriginPtrOutputWithContext(ctx)
+func (i DomainOriginArgs) ToDomainOriginPtrOutputWithContext(ctx context.Context) DomainOriginPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginOutput).ToDomainOriginPtrOutputWithContext(ctx)
 }
 
-// CdnDomainOriginPtrInput is an input type that accepts CdnDomainOriginArgs, CdnDomainOriginPtr and CdnDomainOriginPtrOutput values.
-// You can construct a concrete instance of `CdnDomainOriginPtrInput` via:
+// DomainOriginPtrInput is an input type that accepts DomainOriginArgs, DomainOriginPtr and DomainOriginPtrOutput values.
+// You can construct a concrete instance of `DomainOriginPtrInput` via:
 //
-//          CdnDomainOriginArgs{...}
+//          DomainOriginArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainOriginPtrInput interface {
+type DomainOriginPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainOriginPtrOutput() CdnDomainOriginPtrOutput
-	ToCdnDomainOriginPtrOutputWithContext(context.Context) CdnDomainOriginPtrOutput
+	ToDomainOriginPtrOutput() DomainOriginPtrOutput
+	ToDomainOriginPtrOutputWithContext(context.Context) DomainOriginPtrOutput
 }
 
-type cdnDomainOriginPtrType CdnDomainOriginArgs
+type domainOriginPtrType DomainOriginArgs
 
-func CdnDomainOriginPtr(v *CdnDomainOriginArgs) CdnDomainOriginPtrInput {
-	return (*cdnDomainOriginPtrType)(v)
+func DomainOriginPtr(v *DomainOriginArgs) DomainOriginPtrInput {
+	return (*domainOriginPtrType)(v)
 }
 
-func (*cdnDomainOriginPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOrigin)(nil)).Elem()
+func (*domainOriginPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOrigin)(nil)).Elem()
 }
 
-func (i *cdnDomainOriginPtrType) ToCdnDomainOriginPtrOutput() CdnDomainOriginPtrOutput {
-	return i.ToCdnDomainOriginPtrOutputWithContext(context.Background())
+func (i *domainOriginPtrType) ToDomainOriginPtrOutput() DomainOriginPtrOutput {
+	return i.ToDomainOriginPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainOriginPtrType) ToCdnDomainOriginPtrOutputWithContext(ctx context.Context) CdnDomainOriginPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginPtrOutput)
+func (i *domainOriginPtrType) ToDomainOriginPtrOutputWithContext(ctx context.Context) DomainOriginPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPtrOutput)
 }
 
-type CdnDomainOriginOutput struct{ *pulumi.OutputState }
+type DomainOriginOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOriginOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOrigin)(nil)).Elem()
+func (DomainOriginOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOrigin)(nil)).Elem()
 }
 
-func (o CdnDomainOriginOutput) ToCdnDomainOriginOutput() CdnDomainOriginOutput {
+func (o DomainOriginOutput) ToDomainOriginOutput() DomainOriginOutput {
 	return o
 }
 
-func (o CdnDomainOriginOutput) ToCdnDomainOriginOutputWithContext(ctx context.Context) CdnDomainOriginOutput {
+func (o DomainOriginOutput) ToDomainOriginOutputWithContext(ctx context.Context) DomainOriginOutput {
 	return o
 }
 
-func (o CdnDomainOriginOutput) ToCdnDomainOriginPtrOutput() CdnDomainOriginPtrOutput {
-	return o.ToCdnDomainOriginPtrOutputWithContext(context.Background())
+func (o DomainOriginOutput) ToDomainOriginPtrOutput() DomainOriginPtrOutput {
+	return o.ToDomainOriginPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainOriginOutput) ToCdnDomainOriginPtrOutputWithContext(ctx context.Context) CdnDomainOriginPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainOrigin) *CdnDomainOrigin {
+func (o DomainOriginOutput) ToDomainOriginPtrOutputWithContext(ctx context.Context) DomainOriginPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainOrigin) *DomainOrigin {
 		return &v
-	}).(CdnDomainOriginPtrOutput)
+	}).(DomainOriginPtrOutput)
 }
 
-func (o CdnDomainOriginOutput) BackupOriginLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) []string { return v.BackupOriginLists }).(pulumi.StringArrayOutput)
+// Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backupOriginType`.
+func (o DomainOriginOutput) BackupOriginLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainOrigin) []string { return v.BackupOriginLists }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainOriginOutput) BackupOriginType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) *string { return v.BackupOriginType }).(pulumi.StringPtrOutput)
+// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+func (o DomainOriginOutput) BackupOriginType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOrigin) *string { return v.BackupOriginType }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginOutput) BackupServerName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) *string { return v.BackupServerName }).(pulumi.StringPtrOutput)
+// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+func (o DomainOriginOutput) BackupServerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOrigin) *string { return v.BackupServerName }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginOutput) CosPrivateAccess() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) *string { return v.CosPrivateAccess }).(pulumi.StringPtrOutput)
+// When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainOriginOutput) CosPrivateAccess() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOrigin) *string { return v.CosPrivateAccess }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginOutput) OriginLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) []string { return v.OriginLists }).(pulumi.StringArrayOutput)
+// Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
+func (o DomainOriginOutput) OriginLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainOrigin) []string { return v.OriginLists }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainOriginOutput) OriginPullProtocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) *string { return v.OriginPullProtocol }).(pulumi.StringPtrOutput)
+// Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
+func (o DomainOriginOutput) OriginPullProtocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOrigin) *string { return v.OriginPullProtocol }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginOutput) OriginType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) string { return v.OriginType }).(pulumi.StringOutput)
+// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+func (o DomainOriginOutput) OriginType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainOrigin) string { return v.OriginType }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainOriginOutput) ServerName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOrigin) *string { return v.ServerName }).(pulumi.StringPtrOutput)
+// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+func (o DomainOriginOutput) ServerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOrigin) *string { return v.ServerName }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainOriginPtrOutput struct{ *pulumi.OutputState }
+type DomainOriginPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOriginPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOrigin)(nil)).Elem()
+func (DomainOriginPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOrigin)(nil)).Elem()
 }
 
-func (o CdnDomainOriginPtrOutput) ToCdnDomainOriginPtrOutput() CdnDomainOriginPtrOutput {
+func (o DomainOriginPtrOutput) ToDomainOriginPtrOutput() DomainOriginPtrOutput {
 	return o
 }
 
-func (o CdnDomainOriginPtrOutput) ToCdnDomainOriginPtrOutputWithContext(ctx context.Context) CdnDomainOriginPtrOutput {
+func (o DomainOriginPtrOutput) ToDomainOriginPtrOutputWithContext(ctx context.Context) DomainOriginPtrOutput {
 	return o
 }
 
-func (o CdnDomainOriginPtrOutput) Elem() CdnDomainOriginOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) CdnDomainOrigin {
+func (o DomainOriginPtrOutput) Elem() DomainOriginOutput {
+	return o.ApplyT(func(v *DomainOrigin) DomainOrigin {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainOrigin
+		var ret DomainOrigin
 		return ret
-	}).(CdnDomainOriginOutput)
+	}).(DomainOriginOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) BackupOriginLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) []string {
+// Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backupOriginType`.
+func (o DomainOriginPtrOutput) BackupOriginLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DomainOrigin) []string {
 		if v == nil {
 			return nil
 		}
@@ -4392,8 +4824,9 @@ func (o CdnDomainOriginPtrOutput) BackupOriginLists() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) BackupOriginType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) *string {
+// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+func (o DomainOriginPtrOutput) BackupOriginType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
 			return nil
 		}
@@ -4401,8 +4834,9 @@ func (o CdnDomainOriginPtrOutput) BackupOriginType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) BackupServerName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) *string {
+// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+func (o DomainOriginPtrOutput) BackupServerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
 			return nil
 		}
@@ -4410,8 +4844,9 @@ func (o CdnDomainOriginPtrOutput) BackupServerName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) CosPrivateAccess() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) *string {
+// When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainOriginPtrOutput) CosPrivateAccess() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
 			return nil
 		}
@@ -4419,8 +4854,9 @@ func (o CdnDomainOriginPtrOutput) CosPrivateAccess() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) OriginLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) []string {
+// Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
+func (o DomainOriginPtrOutput) OriginLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DomainOrigin) []string {
 		if v == nil {
 			return nil
 		}
@@ -4428,8 +4864,9 @@ func (o CdnDomainOriginPtrOutput) OriginLists() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) OriginPullProtocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) *string {
+// Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
+func (o DomainOriginPtrOutput) OriginPullProtocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
 			return nil
 		}
@@ -4437,8 +4874,9 @@ func (o CdnDomainOriginPtrOutput) OriginPullProtocol() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) OriginType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) *string {
+// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+func (o DomainOriginPtrOutput) OriginType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
 			return nil
 		}
@@ -4446,8 +4884,9 @@ func (o CdnDomainOriginPtrOutput) OriginType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginPtrOutput) ServerName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOrigin) *string {
+// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+func (o DomainOriginPtrOutput) ServerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
 			return nil
 		}
@@ -4455,138 +4894,145 @@ func (o CdnDomainOriginPtrOutput) ServerName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainOriginPullOptimization struct {
+type DomainOriginPullOptimization struct {
+	// Optimization type, values: `OVToCN` - Overseas to CN, `CNToOV` CN to Overseas.
 	OptimizationType *string `pulumi:"optimizationType"`
-	Switch           string  `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainOriginPullOptimizationInput is an input type that accepts CdnDomainOriginPullOptimizationArgs and CdnDomainOriginPullOptimizationOutput values.
-// You can construct a concrete instance of `CdnDomainOriginPullOptimizationInput` via:
+// DomainOriginPullOptimizationInput is an input type that accepts DomainOriginPullOptimizationArgs and DomainOriginPullOptimizationOutput values.
+// You can construct a concrete instance of `DomainOriginPullOptimizationInput` via:
 //
-//          CdnDomainOriginPullOptimizationArgs{...}
-type CdnDomainOriginPullOptimizationInput interface {
+//          DomainOriginPullOptimizationArgs{...}
+type DomainOriginPullOptimizationInput interface {
 	pulumi.Input
 
-	ToCdnDomainOriginPullOptimizationOutput() CdnDomainOriginPullOptimizationOutput
-	ToCdnDomainOriginPullOptimizationOutputWithContext(context.Context) CdnDomainOriginPullOptimizationOutput
+	ToDomainOriginPullOptimizationOutput() DomainOriginPullOptimizationOutput
+	ToDomainOriginPullOptimizationOutputWithContext(context.Context) DomainOriginPullOptimizationOutput
 }
 
-type CdnDomainOriginPullOptimizationArgs struct {
+type DomainOriginPullOptimizationArgs struct {
+	// Optimization type, values: `OVToCN` - Overseas to CN, `CNToOV` CN to Overseas.
 	OptimizationType pulumi.StringPtrInput `pulumi:"optimizationType"`
-	Switch           pulumi.StringInput    `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainOriginPullOptimizationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOriginPullOptimization)(nil)).Elem()
+func (DomainOriginPullOptimizationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginPullOptimization)(nil)).Elem()
 }
 
-func (i CdnDomainOriginPullOptimizationArgs) ToCdnDomainOriginPullOptimizationOutput() CdnDomainOriginPullOptimizationOutput {
-	return i.ToCdnDomainOriginPullOptimizationOutputWithContext(context.Background())
+func (i DomainOriginPullOptimizationArgs) ToDomainOriginPullOptimizationOutput() DomainOriginPullOptimizationOutput {
+	return i.ToDomainOriginPullOptimizationOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOriginPullOptimizationArgs) ToCdnDomainOriginPullOptimizationOutputWithContext(ctx context.Context) CdnDomainOriginPullOptimizationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginPullOptimizationOutput)
+func (i DomainOriginPullOptimizationArgs) ToDomainOriginPullOptimizationOutputWithContext(ctx context.Context) DomainOriginPullOptimizationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPullOptimizationOutput)
 }
 
-func (i CdnDomainOriginPullOptimizationArgs) ToCdnDomainOriginPullOptimizationPtrOutput() CdnDomainOriginPullOptimizationPtrOutput {
-	return i.ToCdnDomainOriginPullOptimizationPtrOutputWithContext(context.Background())
+func (i DomainOriginPullOptimizationArgs) ToDomainOriginPullOptimizationPtrOutput() DomainOriginPullOptimizationPtrOutput {
+	return i.ToDomainOriginPullOptimizationPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOriginPullOptimizationArgs) ToCdnDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullOptimizationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginPullOptimizationOutput).ToCdnDomainOriginPullOptimizationPtrOutputWithContext(ctx)
+func (i DomainOriginPullOptimizationArgs) ToDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) DomainOriginPullOptimizationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPullOptimizationOutput).ToDomainOriginPullOptimizationPtrOutputWithContext(ctx)
 }
 
-// CdnDomainOriginPullOptimizationPtrInput is an input type that accepts CdnDomainOriginPullOptimizationArgs, CdnDomainOriginPullOptimizationPtr and CdnDomainOriginPullOptimizationPtrOutput values.
-// You can construct a concrete instance of `CdnDomainOriginPullOptimizationPtrInput` via:
+// DomainOriginPullOptimizationPtrInput is an input type that accepts DomainOriginPullOptimizationArgs, DomainOriginPullOptimizationPtr and DomainOriginPullOptimizationPtrOutput values.
+// You can construct a concrete instance of `DomainOriginPullOptimizationPtrInput` via:
 //
-//          CdnDomainOriginPullOptimizationArgs{...}
+//          DomainOriginPullOptimizationArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainOriginPullOptimizationPtrInput interface {
+type DomainOriginPullOptimizationPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainOriginPullOptimizationPtrOutput() CdnDomainOriginPullOptimizationPtrOutput
-	ToCdnDomainOriginPullOptimizationPtrOutputWithContext(context.Context) CdnDomainOriginPullOptimizationPtrOutput
+	ToDomainOriginPullOptimizationPtrOutput() DomainOriginPullOptimizationPtrOutput
+	ToDomainOriginPullOptimizationPtrOutputWithContext(context.Context) DomainOriginPullOptimizationPtrOutput
 }
 
-type cdnDomainOriginPullOptimizationPtrType CdnDomainOriginPullOptimizationArgs
+type domainOriginPullOptimizationPtrType DomainOriginPullOptimizationArgs
 
-func CdnDomainOriginPullOptimizationPtr(v *CdnDomainOriginPullOptimizationArgs) CdnDomainOriginPullOptimizationPtrInput {
-	return (*cdnDomainOriginPullOptimizationPtrType)(v)
+func DomainOriginPullOptimizationPtr(v *DomainOriginPullOptimizationArgs) DomainOriginPullOptimizationPtrInput {
+	return (*domainOriginPullOptimizationPtrType)(v)
 }
 
-func (*cdnDomainOriginPullOptimizationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOriginPullOptimization)(nil)).Elem()
+func (*domainOriginPullOptimizationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOriginPullOptimization)(nil)).Elem()
 }
 
-func (i *cdnDomainOriginPullOptimizationPtrType) ToCdnDomainOriginPullOptimizationPtrOutput() CdnDomainOriginPullOptimizationPtrOutput {
-	return i.ToCdnDomainOriginPullOptimizationPtrOutputWithContext(context.Background())
+func (i *domainOriginPullOptimizationPtrType) ToDomainOriginPullOptimizationPtrOutput() DomainOriginPullOptimizationPtrOutput {
+	return i.ToDomainOriginPullOptimizationPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainOriginPullOptimizationPtrType) ToCdnDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullOptimizationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginPullOptimizationPtrOutput)
+func (i *domainOriginPullOptimizationPtrType) ToDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) DomainOriginPullOptimizationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPullOptimizationPtrOutput)
 }
 
-type CdnDomainOriginPullOptimizationOutput struct{ *pulumi.OutputState }
+type DomainOriginPullOptimizationOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOriginPullOptimizationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOriginPullOptimization)(nil)).Elem()
+func (DomainOriginPullOptimizationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginPullOptimization)(nil)).Elem()
 }
 
-func (o CdnDomainOriginPullOptimizationOutput) ToCdnDomainOriginPullOptimizationOutput() CdnDomainOriginPullOptimizationOutput {
+func (o DomainOriginPullOptimizationOutput) ToDomainOriginPullOptimizationOutput() DomainOriginPullOptimizationOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullOptimizationOutput) ToCdnDomainOriginPullOptimizationOutputWithContext(ctx context.Context) CdnDomainOriginPullOptimizationOutput {
+func (o DomainOriginPullOptimizationOutput) ToDomainOriginPullOptimizationOutputWithContext(ctx context.Context) DomainOriginPullOptimizationOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullOptimizationOutput) ToCdnDomainOriginPullOptimizationPtrOutput() CdnDomainOriginPullOptimizationPtrOutput {
-	return o.ToCdnDomainOriginPullOptimizationPtrOutputWithContext(context.Background())
+func (o DomainOriginPullOptimizationOutput) ToDomainOriginPullOptimizationPtrOutput() DomainOriginPullOptimizationPtrOutput {
+	return o.ToDomainOriginPullOptimizationPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainOriginPullOptimizationOutput) ToCdnDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullOptimizationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainOriginPullOptimization) *CdnDomainOriginPullOptimization {
+func (o DomainOriginPullOptimizationOutput) ToDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) DomainOriginPullOptimizationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainOriginPullOptimization) *DomainOriginPullOptimization {
 		return &v
-	}).(CdnDomainOriginPullOptimizationPtrOutput)
+	}).(DomainOriginPullOptimizationPtrOutput)
 }
 
-func (o CdnDomainOriginPullOptimizationOutput) OptimizationType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOriginPullOptimization) *string { return v.OptimizationType }).(pulumi.StringPtrOutput)
+// Optimization type, values: `OVToCN` - Overseas to CN, `CNToOV` CN to Overseas.
+func (o DomainOriginPullOptimizationOutput) OptimizationType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOriginPullOptimization) *string { return v.OptimizationType }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginPullOptimizationOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainOriginPullOptimization) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainOriginPullOptimizationOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainOriginPullOptimization) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainOriginPullOptimizationPtrOutput struct{ *pulumi.OutputState }
+type DomainOriginPullOptimizationPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOriginPullOptimizationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOriginPullOptimization)(nil)).Elem()
+func (DomainOriginPullOptimizationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOriginPullOptimization)(nil)).Elem()
 }
 
-func (o CdnDomainOriginPullOptimizationPtrOutput) ToCdnDomainOriginPullOptimizationPtrOutput() CdnDomainOriginPullOptimizationPtrOutput {
+func (o DomainOriginPullOptimizationPtrOutput) ToDomainOriginPullOptimizationPtrOutput() DomainOriginPullOptimizationPtrOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullOptimizationPtrOutput) ToCdnDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullOptimizationPtrOutput {
+func (o DomainOriginPullOptimizationPtrOutput) ToDomainOriginPullOptimizationPtrOutputWithContext(ctx context.Context) DomainOriginPullOptimizationPtrOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullOptimizationPtrOutput) Elem() CdnDomainOriginPullOptimizationOutput {
-	return o.ApplyT(func(v *CdnDomainOriginPullOptimization) CdnDomainOriginPullOptimization {
+func (o DomainOriginPullOptimizationPtrOutput) Elem() DomainOriginPullOptimizationOutput {
+	return o.ApplyT(func(v *DomainOriginPullOptimization) DomainOriginPullOptimization {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainOriginPullOptimization
+		var ret DomainOriginPullOptimization
 		return ret
-	}).(CdnDomainOriginPullOptimizationOutput)
+	}).(DomainOriginPullOptimizationOutput)
 }
 
-func (o CdnDomainOriginPullOptimizationPtrOutput) OptimizationType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOriginPullOptimization) *string {
+// Optimization type, values: `OVToCN` - Overseas to CN, `CNToOV` CN to Overseas.
+func (o DomainOriginPullOptimizationPtrOutput) OptimizationType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOriginPullOptimization) *string {
 		if v == nil {
 			return nil
 		}
@@ -4594,8 +5040,9 @@ func (o CdnDomainOriginPullOptimizationPtrOutput) OptimizationType() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOriginPullOptimizationPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOriginPullOptimization) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainOriginPullOptimizationPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOriginPullOptimization) *string {
 		if v == nil {
 			return nil
 		}
@@ -4603,138 +5050,145 @@ func (o CdnDomainOriginPullOptimizationPtrOutput) Switch() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainOriginPullTimeout struct {
+type DomainOriginPullTimeout struct {
+	// The origin-pull connection timeout (in seconds). Valid range: 5-60.
 	ConnectTimeout int `pulumi:"connectTimeout"`
+	// The origin-pull receipt timeout (in seconds). Valid range: 10-60.
 	ReceiveTimeout int `pulumi:"receiveTimeout"`
 }
 
-// CdnDomainOriginPullTimeoutInput is an input type that accepts CdnDomainOriginPullTimeoutArgs and CdnDomainOriginPullTimeoutOutput values.
-// You can construct a concrete instance of `CdnDomainOriginPullTimeoutInput` via:
+// DomainOriginPullTimeoutInput is an input type that accepts DomainOriginPullTimeoutArgs and DomainOriginPullTimeoutOutput values.
+// You can construct a concrete instance of `DomainOriginPullTimeoutInput` via:
 //
-//          CdnDomainOriginPullTimeoutArgs{...}
-type CdnDomainOriginPullTimeoutInput interface {
+//          DomainOriginPullTimeoutArgs{...}
+type DomainOriginPullTimeoutInput interface {
 	pulumi.Input
 
-	ToCdnDomainOriginPullTimeoutOutput() CdnDomainOriginPullTimeoutOutput
-	ToCdnDomainOriginPullTimeoutOutputWithContext(context.Context) CdnDomainOriginPullTimeoutOutput
+	ToDomainOriginPullTimeoutOutput() DomainOriginPullTimeoutOutput
+	ToDomainOriginPullTimeoutOutputWithContext(context.Context) DomainOriginPullTimeoutOutput
 }
 
-type CdnDomainOriginPullTimeoutArgs struct {
+type DomainOriginPullTimeoutArgs struct {
+	// The origin-pull connection timeout (in seconds). Valid range: 5-60.
 	ConnectTimeout pulumi.IntInput `pulumi:"connectTimeout"`
+	// The origin-pull receipt timeout (in seconds). Valid range: 10-60.
 	ReceiveTimeout pulumi.IntInput `pulumi:"receiveTimeout"`
 }
 
-func (CdnDomainOriginPullTimeoutArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOriginPullTimeout)(nil)).Elem()
+func (DomainOriginPullTimeoutArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginPullTimeout)(nil)).Elem()
 }
 
-func (i CdnDomainOriginPullTimeoutArgs) ToCdnDomainOriginPullTimeoutOutput() CdnDomainOriginPullTimeoutOutput {
-	return i.ToCdnDomainOriginPullTimeoutOutputWithContext(context.Background())
+func (i DomainOriginPullTimeoutArgs) ToDomainOriginPullTimeoutOutput() DomainOriginPullTimeoutOutput {
+	return i.ToDomainOriginPullTimeoutOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOriginPullTimeoutArgs) ToCdnDomainOriginPullTimeoutOutputWithContext(ctx context.Context) CdnDomainOriginPullTimeoutOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginPullTimeoutOutput)
+func (i DomainOriginPullTimeoutArgs) ToDomainOriginPullTimeoutOutputWithContext(ctx context.Context) DomainOriginPullTimeoutOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPullTimeoutOutput)
 }
 
-func (i CdnDomainOriginPullTimeoutArgs) ToCdnDomainOriginPullTimeoutPtrOutput() CdnDomainOriginPullTimeoutPtrOutput {
-	return i.ToCdnDomainOriginPullTimeoutPtrOutputWithContext(context.Background())
+func (i DomainOriginPullTimeoutArgs) ToDomainOriginPullTimeoutPtrOutput() DomainOriginPullTimeoutPtrOutput {
+	return i.ToDomainOriginPullTimeoutPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOriginPullTimeoutArgs) ToCdnDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullTimeoutPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginPullTimeoutOutput).ToCdnDomainOriginPullTimeoutPtrOutputWithContext(ctx)
+func (i DomainOriginPullTimeoutArgs) ToDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) DomainOriginPullTimeoutPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPullTimeoutOutput).ToDomainOriginPullTimeoutPtrOutputWithContext(ctx)
 }
 
-// CdnDomainOriginPullTimeoutPtrInput is an input type that accepts CdnDomainOriginPullTimeoutArgs, CdnDomainOriginPullTimeoutPtr and CdnDomainOriginPullTimeoutPtrOutput values.
-// You can construct a concrete instance of `CdnDomainOriginPullTimeoutPtrInput` via:
+// DomainOriginPullTimeoutPtrInput is an input type that accepts DomainOriginPullTimeoutArgs, DomainOriginPullTimeoutPtr and DomainOriginPullTimeoutPtrOutput values.
+// You can construct a concrete instance of `DomainOriginPullTimeoutPtrInput` via:
 //
-//          CdnDomainOriginPullTimeoutArgs{...}
+//          DomainOriginPullTimeoutArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainOriginPullTimeoutPtrInput interface {
+type DomainOriginPullTimeoutPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainOriginPullTimeoutPtrOutput() CdnDomainOriginPullTimeoutPtrOutput
-	ToCdnDomainOriginPullTimeoutPtrOutputWithContext(context.Context) CdnDomainOriginPullTimeoutPtrOutput
+	ToDomainOriginPullTimeoutPtrOutput() DomainOriginPullTimeoutPtrOutput
+	ToDomainOriginPullTimeoutPtrOutputWithContext(context.Context) DomainOriginPullTimeoutPtrOutput
 }
 
-type cdnDomainOriginPullTimeoutPtrType CdnDomainOriginPullTimeoutArgs
+type domainOriginPullTimeoutPtrType DomainOriginPullTimeoutArgs
 
-func CdnDomainOriginPullTimeoutPtr(v *CdnDomainOriginPullTimeoutArgs) CdnDomainOriginPullTimeoutPtrInput {
-	return (*cdnDomainOriginPullTimeoutPtrType)(v)
+func DomainOriginPullTimeoutPtr(v *DomainOriginPullTimeoutArgs) DomainOriginPullTimeoutPtrInput {
+	return (*domainOriginPullTimeoutPtrType)(v)
 }
 
-func (*cdnDomainOriginPullTimeoutPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOriginPullTimeout)(nil)).Elem()
+func (*domainOriginPullTimeoutPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOriginPullTimeout)(nil)).Elem()
 }
 
-func (i *cdnDomainOriginPullTimeoutPtrType) ToCdnDomainOriginPullTimeoutPtrOutput() CdnDomainOriginPullTimeoutPtrOutput {
-	return i.ToCdnDomainOriginPullTimeoutPtrOutputWithContext(context.Background())
+func (i *domainOriginPullTimeoutPtrType) ToDomainOriginPullTimeoutPtrOutput() DomainOriginPullTimeoutPtrOutput {
+	return i.ToDomainOriginPullTimeoutPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainOriginPullTimeoutPtrType) ToCdnDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullTimeoutPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOriginPullTimeoutPtrOutput)
+func (i *domainOriginPullTimeoutPtrType) ToDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) DomainOriginPullTimeoutPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPullTimeoutPtrOutput)
 }
 
-type CdnDomainOriginPullTimeoutOutput struct{ *pulumi.OutputState }
+type DomainOriginPullTimeoutOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOriginPullTimeoutOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOriginPullTimeout)(nil)).Elem()
+func (DomainOriginPullTimeoutOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginPullTimeout)(nil)).Elem()
 }
 
-func (o CdnDomainOriginPullTimeoutOutput) ToCdnDomainOriginPullTimeoutOutput() CdnDomainOriginPullTimeoutOutput {
+func (o DomainOriginPullTimeoutOutput) ToDomainOriginPullTimeoutOutput() DomainOriginPullTimeoutOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullTimeoutOutput) ToCdnDomainOriginPullTimeoutOutputWithContext(ctx context.Context) CdnDomainOriginPullTimeoutOutput {
+func (o DomainOriginPullTimeoutOutput) ToDomainOriginPullTimeoutOutputWithContext(ctx context.Context) DomainOriginPullTimeoutOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullTimeoutOutput) ToCdnDomainOriginPullTimeoutPtrOutput() CdnDomainOriginPullTimeoutPtrOutput {
-	return o.ToCdnDomainOriginPullTimeoutPtrOutputWithContext(context.Background())
+func (o DomainOriginPullTimeoutOutput) ToDomainOriginPullTimeoutPtrOutput() DomainOriginPullTimeoutPtrOutput {
+	return o.ToDomainOriginPullTimeoutPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainOriginPullTimeoutOutput) ToCdnDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullTimeoutPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainOriginPullTimeout) *CdnDomainOriginPullTimeout {
+func (o DomainOriginPullTimeoutOutput) ToDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) DomainOriginPullTimeoutPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainOriginPullTimeout) *DomainOriginPullTimeout {
 		return &v
-	}).(CdnDomainOriginPullTimeoutPtrOutput)
+	}).(DomainOriginPullTimeoutPtrOutput)
 }
 
-func (o CdnDomainOriginPullTimeoutOutput) ConnectTimeout() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainOriginPullTimeout) int { return v.ConnectTimeout }).(pulumi.IntOutput)
+// The origin-pull connection timeout (in seconds). Valid range: 5-60.
+func (o DomainOriginPullTimeoutOutput) ConnectTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainOriginPullTimeout) int { return v.ConnectTimeout }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainOriginPullTimeoutOutput) ReceiveTimeout() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainOriginPullTimeout) int { return v.ReceiveTimeout }).(pulumi.IntOutput)
+// The origin-pull receipt timeout (in seconds). Valid range: 10-60.
+func (o DomainOriginPullTimeoutOutput) ReceiveTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainOriginPullTimeout) int { return v.ReceiveTimeout }).(pulumi.IntOutput)
 }
 
-type CdnDomainOriginPullTimeoutPtrOutput struct{ *pulumi.OutputState }
+type DomainOriginPullTimeoutPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOriginPullTimeoutPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOriginPullTimeout)(nil)).Elem()
+func (DomainOriginPullTimeoutPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOriginPullTimeout)(nil)).Elem()
 }
 
-func (o CdnDomainOriginPullTimeoutPtrOutput) ToCdnDomainOriginPullTimeoutPtrOutput() CdnDomainOriginPullTimeoutPtrOutput {
+func (o DomainOriginPullTimeoutPtrOutput) ToDomainOriginPullTimeoutPtrOutput() DomainOriginPullTimeoutPtrOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullTimeoutPtrOutput) ToCdnDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) CdnDomainOriginPullTimeoutPtrOutput {
+func (o DomainOriginPullTimeoutPtrOutput) ToDomainOriginPullTimeoutPtrOutputWithContext(ctx context.Context) DomainOriginPullTimeoutPtrOutput {
 	return o
 }
 
-func (o CdnDomainOriginPullTimeoutPtrOutput) Elem() CdnDomainOriginPullTimeoutOutput {
-	return o.ApplyT(func(v *CdnDomainOriginPullTimeout) CdnDomainOriginPullTimeout {
+func (o DomainOriginPullTimeoutPtrOutput) Elem() DomainOriginPullTimeoutOutput {
+	return o.ApplyT(func(v *DomainOriginPullTimeout) DomainOriginPullTimeout {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainOriginPullTimeout
+		var ret DomainOriginPullTimeout
 		return ret
-	}).(CdnDomainOriginPullTimeoutOutput)
+	}).(DomainOriginPullTimeoutOutput)
 }
 
-func (o CdnDomainOriginPullTimeoutPtrOutput) ConnectTimeout() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOriginPullTimeout) *int {
+// The origin-pull connection timeout (in seconds). Valid range: 5-60.
+func (o DomainOriginPullTimeoutPtrOutput) ConnectTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainOriginPullTimeout) *int {
 		if v == nil {
 			return nil
 		}
@@ -4742,8 +5196,9 @@ func (o CdnDomainOriginPullTimeoutPtrOutput) ConnectTimeout() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CdnDomainOriginPullTimeoutPtrOutput) ReceiveTimeout() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOriginPullTimeout) *int {
+// The origin-pull receipt timeout (in seconds). Valid range: 10-60.
+func (o DomainOriginPullTimeoutPtrOutput) ReceiveTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainOriginPullTimeout) *int {
 		if v == nil {
 			return nil
 		}
@@ -4751,156 +5206,172 @@ func (o CdnDomainOriginPullTimeoutPtrOutput) ReceiveTimeout() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
-type CdnDomainOssPrivateAccess struct {
+type DomainOssPrivateAccess struct {
+	// Access ID.
 	AccessKey *string `pulumi:"accessKey"`
-	Bucket    *string `pulumi:"bucket"`
-	Region    *string `pulumi:"region"`
+	// Bucket.
+	Bucket *string `pulumi:"bucket"`
+	// Region.
+	Region *string `pulumi:"region"`
+	// Key.
 	SecretKey *string `pulumi:"secretKey"`
-	Switch    string  `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainOssPrivateAccessInput is an input type that accepts CdnDomainOssPrivateAccessArgs and CdnDomainOssPrivateAccessOutput values.
-// You can construct a concrete instance of `CdnDomainOssPrivateAccessInput` via:
+// DomainOssPrivateAccessInput is an input type that accepts DomainOssPrivateAccessArgs and DomainOssPrivateAccessOutput values.
+// You can construct a concrete instance of `DomainOssPrivateAccessInput` via:
 //
-//          CdnDomainOssPrivateAccessArgs{...}
-type CdnDomainOssPrivateAccessInput interface {
+//          DomainOssPrivateAccessArgs{...}
+type DomainOssPrivateAccessInput interface {
 	pulumi.Input
 
-	ToCdnDomainOssPrivateAccessOutput() CdnDomainOssPrivateAccessOutput
-	ToCdnDomainOssPrivateAccessOutputWithContext(context.Context) CdnDomainOssPrivateAccessOutput
+	ToDomainOssPrivateAccessOutput() DomainOssPrivateAccessOutput
+	ToDomainOssPrivateAccessOutputWithContext(context.Context) DomainOssPrivateAccessOutput
 }
 
-type CdnDomainOssPrivateAccessArgs struct {
+type DomainOssPrivateAccessArgs struct {
+	// Access ID.
 	AccessKey pulumi.StringPtrInput `pulumi:"accessKey"`
-	Bucket    pulumi.StringPtrInput `pulumi:"bucket"`
-	Region    pulumi.StringPtrInput `pulumi:"region"`
+	// Bucket.
+	Bucket pulumi.StringPtrInput `pulumi:"bucket"`
+	// Region.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// Key.
 	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
-	Switch    pulumi.StringInput    `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainOssPrivateAccessArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOssPrivateAccess)(nil)).Elem()
+func (DomainOssPrivateAccessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOssPrivateAccess)(nil)).Elem()
 }
 
-func (i CdnDomainOssPrivateAccessArgs) ToCdnDomainOssPrivateAccessOutput() CdnDomainOssPrivateAccessOutput {
-	return i.ToCdnDomainOssPrivateAccessOutputWithContext(context.Background())
+func (i DomainOssPrivateAccessArgs) ToDomainOssPrivateAccessOutput() DomainOssPrivateAccessOutput {
+	return i.ToDomainOssPrivateAccessOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOssPrivateAccessArgs) ToCdnDomainOssPrivateAccessOutputWithContext(ctx context.Context) CdnDomainOssPrivateAccessOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOssPrivateAccessOutput)
+func (i DomainOssPrivateAccessArgs) ToDomainOssPrivateAccessOutputWithContext(ctx context.Context) DomainOssPrivateAccessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOssPrivateAccessOutput)
 }
 
-func (i CdnDomainOssPrivateAccessArgs) ToCdnDomainOssPrivateAccessPtrOutput() CdnDomainOssPrivateAccessPtrOutput {
-	return i.ToCdnDomainOssPrivateAccessPtrOutputWithContext(context.Background())
+func (i DomainOssPrivateAccessArgs) ToDomainOssPrivateAccessPtrOutput() DomainOssPrivateAccessPtrOutput {
+	return i.ToDomainOssPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainOssPrivateAccessArgs) ToCdnDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainOssPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOssPrivateAccessOutput).ToCdnDomainOssPrivateAccessPtrOutputWithContext(ctx)
+func (i DomainOssPrivateAccessArgs) ToDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOssPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOssPrivateAccessOutput).ToDomainOssPrivateAccessPtrOutputWithContext(ctx)
 }
 
-// CdnDomainOssPrivateAccessPtrInput is an input type that accepts CdnDomainOssPrivateAccessArgs, CdnDomainOssPrivateAccessPtr and CdnDomainOssPrivateAccessPtrOutput values.
-// You can construct a concrete instance of `CdnDomainOssPrivateAccessPtrInput` via:
+// DomainOssPrivateAccessPtrInput is an input type that accepts DomainOssPrivateAccessArgs, DomainOssPrivateAccessPtr and DomainOssPrivateAccessPtrOutput values.
+// You can construct a concrete instance of `DomainOssPrivateAccessPtrInput` via:
 //
-//          CdnDomainOssPrivateAccessArgs{...}
+//          DomainOssPrivateAccessArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainOssPrivateAccessPtrInput interface {
+type DomainOssPrivateAccessPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainOssPrivateAccessPtrOutput() CdnDomainOssPrivateAccessPtrOutput
-	ToCdnDomainOssPrivateAccessPtrOutputWithContext(context.Context) CdnDomainOssPrivateAccessPtrOutput
+	ToDomainOssPrivateAccessPtrOutput() DomainOssPrivateAccessPtrOutput
+	ToDomainOssPrivateAccessPtrOutputWithContext(context.Context) DomainOssPrivateAccessPtrOutput
 }
 
-type cdnDomainOssPrivateAccessPtrType CdnDomainOssPrivateAccessArgs
+type domainOssPrivateAccessPtrType DomainOssPrivateAccessArgs
 
-func CdnDomainOssPrivateAccessPtr(v *CdnDomainOssPrivateAccessArgs) CdnDomainOssPrivateAccessPtrInput {
-	return (*cdnDomainOssPrivateAccessPtrType)(v)
+func DomainOssPrivateAccessPtr(v *DomainOssPrivateAccessArgs) DomainOssPrivateAccessPtrInput {
+	return (*domainOssPrivateAccessPtrType)(v)
 }
 
-func (*cdnDomainOssPrivateAccessPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOssPrivateAccess)(nil)).Elem()
+func (*domainOssPrivateAccessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOssPrivateAccess)(nil)).Elem()
 }
 
-func (i *cdnDomainOssPrivateAccessPtrType) ToCdnDomainOssPrivateAccessPtrOutput() CdnDomainOssPrivateAccessPtrOutput {
-	return i.ToCdnDomainOssPrivateAccessPtrOutputWithContext(context.Background())
+func (i *domainOssPrivateAccessPtrType) ToDomainOssPrivateAccessPtrOutput() DomainOssPrivateAccessPtrOutput {
+	return i.ToDomainOssPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainOssPrivateAccessPtrType) ToCdnDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainOssPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainOssPrivateAccessPtrOutput)
+func (i *domainOssPrivateAccessPtrType) ToDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOssPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOssPrivateAccessPtrOutput)
 }
 
-type CdnDomainOssPrivateAccessOutput struct{ *pulumi.OutputState }
+type DomainOssPrivateAccessOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOssPrivateAccessOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainOssPrivateAccess)(nil)).Elem()
+func (DomainOssPrivateAccessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOssPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainOssPrivateAccessOutput) ToCdnDomainOssPrivateAccessOutput() CdnDomainOssPrivateAccessOutput {
+func (o DomainOssPrivateAccessOutput) ToDomainOssPrivateAccessOutput() DomainOssPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainOssPrivateAccessOutput) ToCdnDomainOssPrivateAccessOutputWithContext(ctx context.Context) CdnDomainOssPrivateAccessOutput {
+func (o DomainOssPrivateAccessOutput) ToDomainOssPrivateAccessOutputWithContext(ctx context.Context) DomainOssPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainOssPrivateAccessOutput) ToCdnDomainOssPrivateAccessPtrOutput() CdnDomainOssPrivateAccessPtrOutput {
-	return o.ToCdnDomainOssPrivateAccessPtrOutputWithContext(context.Background())
+func (o DomainOssPrivateAccessOutput) ToDomainOssPrivateAccessPtrOutput() DomainOssPrivateAccessPtrOutput {
+	return o.ToDomainOssPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainOssPrivateAccessOutput) ToCdnDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainOssPrivateAccessPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainOssPrivateAccess) *CdnDomainOssPrivateAccess {
+func (o DomainOssPrivateAccessOutput) ToDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOssPrivateAccessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainOssPrivateAccess) *DomainOssPrivateAccess {
 		return &v
-	}).(CdnDomainOssPrivateAccessPtrOutput)
+	}).(DomainOssPrivateAccessPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOssPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
+// Access ID.
+func (o DomainOssPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOssPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessOutput) Bucket() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOssPrivateAccess) *string { return v.Bucket }).(pulumi.StringPtrOutput)
+// Bucket.
+func (o DomainOssPrivateAccessOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOssPrivateAccess) *string { return v.Bucket }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessOutput) Region() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOssPrivateAccess) *string { return v.Region }).(pulumi.StringPtrOutput)
+// Region.
+func (o DomainOssPrivateAccessOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOssPrivateAccess) *string { return v.Region }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainOssPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+// Key.
+func (o DomainOssPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOssPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainOssPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainOssPrivateAccessOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainOssPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainOssPrivateAccessPtrOutput struct{ *pulumi.OutputState }
+type DomainOssPrivateAccessPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainOssPrivateAccessPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainOssPrivateAccess)(nil)).Elem()
+func (DomainOssPrivateAccessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOssPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) ToCdnDomainOssPrivateAccessPtrOutput() CdnDomainOssPrivateAccessPtrOutput {
+func (o DomainOssPrivateAccessPtrOutput) ToDomainOssPrivateAccessPtrOutput() DomainOssPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) ToCdnDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainOssPrivateAccessPtrOutput {
+func (o DomainOssPrivateAccessPtrOutput) ToDomainOssPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOssPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) Elem() CdnDomainOssPrivateAccessOutput {
-	return o.ApplyT(func(v *CdnDomainOssPrivateAccess) CdnDomainOssPrivateAccess {
+func (o DomainOssPrivateAccessPtrOutput) Elem() DomainOssPrivateAccessOutput {
+	return o.ApplyT(func(v *DomainOssPrivateAccess) DomainOssPrivateAccess {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainOssPrivateAccess
+		var ret DomainOssPrivateAccess
 		return ret
-	}).(CdnDomainOssPrivateAccessOutput)
+	}).(DomainOssPrivateAccessOutput)
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOssPrivateAccess) *string {
+// Access ID.
+func (o DomainOssPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOssPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -4908,8 +5379,9 @@ func (o CdnDomainOssPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOssPrivateAccess) *string {
+// Bucket.
+func (o DomainOssPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOssPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -4917,8 +5389,9 @@ func (o CdnDomainOssPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) Region() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOssPrivateAccess) *string {
+// Region.
+func (o DomainOssPrivateAccessPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOssPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -4926,8 +5399,9 @@ func (o CdnDomainOssPrivateAccessPtrOutput) Region() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOssPrivateAccess) *string {
+// Key.
+func (o DomainOssPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOssPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -4935,8 +5409,9 @@ func (o CdnDomainOssPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainOssPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainOssPrivateAccess) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainOssPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOssPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -4944,144 +5419,154 @@ func (o CdnDomainOssPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainQnPrivateAccess struct {
+type DomainQnPrivateAccess struct {
+	// Access ID.
 	AccessKey *string `pulumi:"accessKey"`
+	// Key.
 	SecretKey *string `pulumi:"secretKey"`
-	Switch    string  `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainQnPrivateAccessInput is an input type that accepts CdnDomainQnPrivateAccessArgs and CdnDomainQnPrivateAccessOutput values.
-// You can construct a concrete instance of `CdnDomainQnPrivateAccessInput` via:
+// DomainQnPrivateAccessInput is an input type that accepts DomainQnPrivateAccessArgs and DomainQnPrivateAccessOutput values.
+// You can construct a concrete instance of `DomainQnPrivateAccessInput` via:
 //
-//          CdnDomainQnPrivateAccessArgs{...}
-type CdnDomainQnPrivateAccessInput interface {
+//          DomainQnPrivateAccessArgs{...}
+type DomainQnPrivateAccessInput interface {
 	pulumi.Input
 
-	ToCdnDomainQnPrivateAccessOutput() CdnDomainQnPrivateAccessOutput
-	ToCdnDomainQnPrivateAccessOutputWithContext(context.Context) CdnDomainQnPrivateAccessOutput
+	ToDomainQnPrivateAccessOutput() DomainQnPrivateAccessOutput
+	ToDomainQnPrivateAccessOutputWithContext(context.Context) DomainQnPrivateAccessOutput
 }
 
-type CdnDomainQnPrivateAccessArgs struct {
+type DomainQnPrivateAccessArgs struct {
+	// Access ID.
 	AccessKey pulumi.StringPtrInput `pulumi:"accessKey"`
+	// Key.
 	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
-	Switch    pulumi.StringInput    `pulumi:"switch"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainQnPrivateAccessArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainQnPrivateAccess)(nil)).Elem()
+func (DomainQnPrivateAccessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainQnPrivateAccess)(nil)).Elem()
 }
 
-func (i CdnDomainQnPrivateAccessArgs) ToCdnDomainQnPrivateAccessOutput() CdnDomainQnPrivateAccessOutput {
-	return i.ToCdnDomainQnPrivateAccessOutputWithContext(context.Background())
+func (i DomainQnPrivateAccessArgs) ToDomainQnPrivateAccessOutput() DomainQnPrivateAccessOutput {
+	return i.ToDomainQnPrivateAccessOutputWithContext(context.Background())
 }
 
-func (i CdnDomainQnPrivateAccessArgs) ToCdnDomainQnPrivateAccessOutputWithContext(ctx context.Context) CdnDomainQnPrivateAccessOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainQnPrivateAccessOutput)
+func (i DomainQnPrivateAccessArgs) ToDomainQnPrivateAccessOutputWithContext(ctx context.Context) DomainQnPrivateAccessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainQnPrivateAccessOutput)
 }
 
-func (i CdnDomainQnPrivateAccessArgs) ToCdnDomainQnPrivateAccessPtrOutput() CdnDomainQnPrivateAccessPtrOutput {
-	return i.ToCdnDomainQnPrivateAccessPtrOutputWithContext(context.Background())
+func (i DomainQnPrivateAccessArgs) ToDomainQnPrivateAccessPtrOutput() DomainQnPrivateAccessPtrOutput {
+	return i.ToDomainQnPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainQnPrivateAccessArgs) ToCdnDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainQnPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainQnPrivateAccessOutput).ToCdnDomainQnPrivateAccessPtrOutputWithContext(ctx)
+func (i DomainQnPrivateAccessArgs) ToDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) DomainQnPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainQnPrivateAccessOutput).ToDomainQnPrivateAccessPtrOutputWithContext(ctx)
 }
 
-// CdnDomainQnPrivateAccessPtrInput is an input type that accepts CdnDomainQnPrivateAccessArgs, CdnDomainQnPrivateAccessPtr and CdnDomainQnPrivateAccessPtrOutput values.
-// You can construct a concrete instance of `CdnDomainQnPrivateAccessPtrInput` via:
+// DomainQnPrivateAccessPtrInput is an input type that accepts DomainQnPrivateAccessArgs, DomainQnPrivateAccessPtr and DomainQnPrivateAccessPtrOutput values.
+// You can construct a concrete instance of `DomainQnPrivateAccessPtrInput` via:
 //
-//          CdnDomainQnPrivateAccessArgs{...}
+//          DomainQnPrivateAccessArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainQnPrivateAccessPtrInput interface {
+type DomainQnPrivateAccessPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainQnPrivateAccessPtrOutput() CdnDomainQnPrivateAccessPtrOutput
-	ToCdnDomainQnPrivateAccessPtrOutputWithContext(context.Context) CdnDomainQnPrivateAccessPtrOutput
+	ToDomainQnPrivateAccessPtrOutput() DomainQnPrivateAccessPtrOutput
+	ToDomainQnPrivateAccessPtrOutputWithContext(context.Context) DomainQnPrivateAccessPtrOutput
 }
 
-type cdnDomainQnPrivateAccessPtrType CdnDomainQnPrivateAccessArgs
+type domainQnPrivateAccessPtrType DomainQnPrivateAccessArgs
 
-func CdnDomainQnPrivateAccessPtr(v *CdnDomainQnPrivateAccessArgs) CdnDomainQnPrivateAccessPtrInput {
-	return (*cdnDomainQnPrivateAccessPtrType)(v)
+func DomainQnPrivateAccessPtr(v *DomainQnPrivateAccessArgs) DomainQnPrivateAccessPtrInput {
+	return (*domainQnPrivateAccessPtrType)(v)
 }
 
-func (*cdnDomainQnPrivateAccessPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainQnPrivateAccess)(nil)).Elem()
+func (*domainQnPrivateAccessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainQnPrivateAccess)(nil)).Elem()
 }
 
-func (i *cdnDomainQnPrivateAccessPtrType) ToCdnDomainQnPrivateAccessPtrOutput() CdnDomainQnPrivateAccessPtrOutput {
-	return i.ToCdnDomainQnPrivateAccessPtrOutputWithContext(context.Background())
+func (i *domainQnPrivateAccessPtrType) ToDomainQnPrivateAccessPtrOutput() DomainQnPrivateAccessPtrOutput {
+	return i.ToDomainQnPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainQnPrivateAccessPtrType) ToCdnDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainQnPrivateAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainQnPrivateAccessPtrOutput)
+func (i *domainQnPrivateAccessPtrType) ToDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) DomainQnPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainQnPrivateAccessPtrOutput)
 }
 
-type CdnDomainQnPrivateAccessOutput struct{ *pulumi.OutputState }
+type DomainQnPrivateAccessOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainQnPrivateAccessOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainQnPrivateAccess)(nil)).Elem()
+func (DomainQnPrivateAccessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainQnPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainQnPrivateAccessOutput) ToCdnDomainQnPrivateAccessOutput() CdnDomainQnPrivateAccessOutput {
+func (o DomainQnPrivateAccessOutput) ToDomainQnPrivateAccessOutput() DomainQnPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainQnPrivateAccessOutput) ToCdnDomainQnPrivateAccessOutputWithContext(ctx context.Context) CdnDomainQnPrivateAccessOutput {
+func (o DomainQnPrivateAccessOutput) ToDomainQnPrivateAccessOutputWithContext(ctx context.Context) DomainQnPrivateAccessOutput {
 	return o
 }
 
-func (o CdnDomainQnPrivateAccessOutput) ToCdnDomainQnPrivateAccessPtrOutput() CdnDomainQnPrivateAccessPtrOutput {
-	return o.ToCdnDomainQnPrivateAccessPtrOutputWithContext(context.Background())
+func (o DomainQnPrivateAccessOutput) ToDomainQnPrivateAccessPtrOutput() DomainQnPrivateAccessPtrOutput {
+	return o.ToDomainQnPrivateAccessPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainQnPrivateAccessOutput) ToCdnDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainQnPrivateAccessPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainQnPrivateAccess) *CdnDomainQnPrivateAccess {
+func (o DomainQnPrivateAccessOutput) ToDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) DomainQnPrivateAccessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainQnPrivateAccess) *DomainQnPrivateAccess {
 		return &v
-	}).(CdnDomainQnPrivateAccessPtrOutput)
+	}).(DomainQnPrivateAccessPtrOutput)
 }
 
-func (o CdnDomainQnPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainQnPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
+// Access ID.
+func (o DomainQnPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainQnPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainQnPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainQnPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+// Key.
+func (o DomainQnPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainQnPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainQnPrivateAccessOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainQnPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainQnPrivateAccessOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainQnPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainQnPrivateAccessPtrOutput struct{ *pulumi.OutputState }
+type DomainQnPrivateAccessPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainQnPrivateAccessPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainQnPrivateAccess)(nil)).Elem()
+func (DomainQnPrivateAccessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainQnPrivateAccess)(nil)).Elem()
 }
 
-func (o CdnDomainQnPrivateAccessPtrOutput) ToCdnDomainQnPrivateAccessPtrOutput() CdnDomainQnPrivateAccessPtrOutput {
+func (o DomainQnPrivateAccessPtrOutput) ToDomainQnPrivateAccessPtrOutput() DomainQnPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainQnPrivateAccessPtrOutput) ToCdnDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) CdnDomainQnPrivateAccessPtrOutput {
+func (o DomainQnPrivateAccessPtrOutput) ToDomainQnPrivateAccessPtrOutputWithContext(ctx context.Context) DomainQnPrivateAccessPtrOutput {
 	return o
 }
 
-func (o CdnDomainQnPrivateAccessPtrOutput) Elem() CdnDomainQnPrivateAccessOutput {
-	return o.ApplyT(func(v *CdnDomainQnPrivateAccess) CdnDomainQnPrivateAccess {
+func (o DomainQnPrivateAccessPtrOutput) Elem() DomainQnPrivateAccessOutput {
+	return o.ApplyT(func(v *DomainQnPrivateAccess) DomainQnPrivateAccess {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainQnPrivateAccess
+		var ret DomainQnPrivateAccess
 		return ret
-	}).(CdnDomainQnPrivateAccessOutput)
+	}).(DomainQnPrivateAccessOutput)
 }
 
-func (o CdnDomainQnPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainQnPrivateAccess) *string {
+// Access ID.
+func (o DomainQnPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainQnPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -5089,8 +5574,9 @@ func (o CdnDomainQnPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainQnPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainQnPrivateAccess) *string {
+// Key.
+func (o DomainQnPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainQnPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -5098,8 +5584,9 @@ func (o CdnDomainQnPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainQnPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainQnPrivateAccess) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainQnPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainQnPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -5107,147 +5594,155 @@ func (o CdnDomainQnPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainReferer struct {
-	RefererRules []CdnDomainRefererRefererRule `pulumi:"refererRules"`
-	Switch       string                        `pulumi:"switch"`
+type DomainReferer struct {
+	// List of referer rules.
+	RefererRules []DomainRefererRefererRule `pulumi:"refererRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainRefererInput is an input type that accepts CdnDomainRefererArgs and CdnDomainRefererOutput values.
-// You can construct a concrete instance of `CdnDomainRefererInput` via:
+// DomainRefererInput is an input type that accepts DomainRefererArgs and DomainRefererOutput values.
+// You can construct a concrete instance of `DomainRefererInput` via:
 //
-//          CdnDomainRefererArgs{...}
-type CdnDomainRefererInput interface {
+//          DomainRefererArgs{...}
+type DomainRefererInput interface {
 	pulumi.Input
 
-	ToCdnDomainRefererOutput() CdnDomainRefererOutput
-	ToCdnDomainRefererOutputWithContext(context.Context) CdnDomainRefererOutput
+	ToDomainRefererOutput() DomainRefererOutput
+	ToDomainRefererOutputWithContext(context.Context) DomainRefererOutput
 }
 
-type CdnDomainRefererArgs struct {
-	RefererRules CdnDomainRefererRefererRuleArrayInput `pulumi:"refererRules"`
-	Switch       pulumi.StringInput                    `pulumi:"switch"`
+type DomainRefererArgs struct {
+	// List of referer rules.
+	RefererRules DomainRefererRefererRuleArrayInput `pulumi:"refererRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainRefererArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainReferer)(nil)).Elem()
+func (DomainRefererArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainReferer)(nil)).Elem()
 }
 
-func (i CdnDomainRefererArgs) ToCdnDomainRefererOutput() CdnDomainRefererOutput {
-	return i.ToCdnDomainRefererOutputWithContext(context.Background())
+func (i DomainRefererArgs) ToDomainRefererOutput() DomainRefererOutput {
+	return i.ToDomainRefererOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRefererArgs) ToCdnDomainRefererOutputWithContext(ctx context.Context) CdnDomainRefererOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRefererOutput)
+func (i DomainRefererArgs) ToDomainRefererOutputWithContext(ctx context.Context) DomainRefererOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRefererOutput)
 }
 
-func (i CdnDomainRefererArgs) ToCdnDomainRefererPtrOutput() CdnDomainRefererPtrOutput {
-	return i.ToCdnDomainRefererPtrOutputWithContext(context.Background())
+func (i DomainRefererArgs) ToDomainRefererPtrOutput() DomainRefererPtrOutput {
+	return i.ToDomainRefererPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRefererArgs) ToCdnDomainRefererPtrOutputWithContext(ctx context.Context) CdnDomainRefererPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRefererOutput).ToCdnDomainRefererPtrOutputWithContext(ctx)
+func (i DomainRefererArgs) ToDomainRefererPtrOutputWithContext(ctx context.Context) DomainRefererPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRefererOutput).ToDomainRefererPtrOutputWithContext(ctx)
 }
 
-// CdnDomainRefererPtrInput is an input type that accepts CdnDomainRefererArgs, CdnDomainRefererPtr and CdnDomainRefererPtrOutput values.
-// You can construct a concrete instance of `CdnDomainRefererPtrInput` via:
+// DomainRefererPtrInput is an input type that accepts DomainRefererArgs, DomainRefererPtr and DomainRefererPtrOutput values.
+// You can construct a concrete instance of `DomainRefererPtrInput` via:
 //
-//          CdnDomainRefererArgs{...}
+//          DomainRefererArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainRefererPtrInput interface {
+type DomainRefererPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainRefererPtrOutput() CdnDomainRefererPtrOutput
-	ToCdnDomainRefererPtrOutputWithContext(context.Context) CdnDomainRefererPtrOutput
+	ToDomainRefererPtrOutput() DomainRefererPtrOutput
+	ToDomainRefererPtrOutputWithContext(context.Context) DomainRefererPtrOutput
 }
 
-type cdnDomainRefererPtrType CdnDomainRefererArgs
+type domainRefererPtrType DomainRefererArgs
 
-func CdnDomainRefererPtr(v *CdnDomainRefererArgs) CdnDomainRefererPtrInput {
-	return (*cdnDomainRefererPtrType)(v)
+func DomainRefererPtr(v *DomainRefererArgs) DomainRefererPtrInput {
+	return (*domainRefererPtrType)(v)
 }
 
-func (*cdnDomainRefererPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainReferer)(nil)).Elem()
+func (*domainRefererPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainReferer)(nil)).Elem()
 }
 
-func (i *cdnDomainRefererPtrType) ToCdnDomainRefererPtrOutput() CdnDomainRefererPtrOutput {
-	return i.ToCdnDomainRefererPtrOutputWithContext(context.Background())
+func (i *domainRefererPtrType) ToDomainRefererPtrOutput() DomainRefererPtrOutput {
+	return i.ToDomainRefererPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainRefererPtrType) ToCdnDomainRefererPtrOutputWithContext(ctx context.Context) CdnDomainRefererPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRefererPtrOutput)
+func (i *domainRefererPtrType) ToDomainRefererPtrOutputWithContext(ctx context.Context) DomainRefererPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRefererPtrOutput)
 }
 
-type CdnDomainRefererOutput struct{ *pulumi.OutputState }
+type DomainRefererOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRefererOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainReferer)(nil)).Elem()
+func (DomainRefererOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainReferer)(nil)).Elem()
 }
 
-func (o CdnDomainRefererOutput) ToCdnDomainRefererOutput() CdnDomainRefererOutput {
+func (o DomainRefererOutput) ToDomainRefererOutput() DomainRefererOutput {
 	return o
 }
 
-func (o CdnDomainRefererOutput) ToCdnDomainRefererOutputWithContext(ctx context.Context) CdnDomainRefererOutput {
+func (o DomainRefererOutput) ToDomainRefererOutputWithContext(ctx context.Context) DomainRefererOutput {
 	return o
 }
 
-func (o CdnDomainRefererOutput) ToCdnDomainRefererPtrOutput() CdnDomainRefererPtrOutput {
-	return o.ToCdnDomainRefererPtrOutputWithContext(context.Background())
+func (o DomainRefererOutput) ToDomainRefererPtrOutput() DomainRefererPtrOutput {
+	return o.ToDomainRefererPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainRefererOutput) ToCdnDomainRefererPtrOutputWithContext(ctx context.Context) CdnDomainRefererPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainReferer) *CdnDomainReferer {
+func (o DomainRefererOutput) ToDomainRefererPtrOutputWithContext(ctx context.Context) DomainRefererPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainReferer) *DomainReferer {
 		return &v
-	}).(CdnDomainRefererPtrOutput)
+	}).(DomainRefererPtrOutput)
 }
 
-func (o CdnDomainRefererOutput) RefererRules() CdnDomainRefererRefererRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainReferer) []CdnDomainRefererRefererRule { return v.RefererRules }).(CdnDomainRefererRefererRuleArrayOutput)
+// List of referer rules.
+func (o DomainRefererOutput) RefererRules() DomainRefererRefererRuleArrayOutput {
+	return o.ApplyT(func(v DomainReferer) []DomainRefererRefererRule { return v.RefererRules }).(DomainRefererRefererRuleArrayOutput)
 }
 
-func (o CdnDomainRefererOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainReferer) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainRefererOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainReferer) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainRefererPtrOutput struct{ *pulumi.OutputState }
+type DomainRefererPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRefererPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainReferer)(nil)).Elem()
+func (DomainRefererPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainReferer)(nil)).Elem()
 }
 
-func (o CdnDomainRefererPtrOutput) ToCdnDomainRefererPtrOutput() CdnDomainRefererPtrOutput {
+func (o DomainRefererPtrOutput) ToDomainRefererPtrOutput() DomainRefererPtrOutput {
 	return o
 }
 
-func (o CdnDomainRefererPtrOutput) ToCdnDomainRefererPtrOutputWithContext(ctx context.Context) CdnDomainRefererPtrOutput {
+func (o DomainRefererPtrOutput) ToDomainRefererPtrOutputWithContext(ctx context.Context) DomainRefererPtrOutput {
 	return o
 }
 
-func (o CdnDomainRefererPtrOutput) Elem() CdnDomainRefererOutput {
-	return o.ApplyT(func(v *CdnDomainReferer) CdnDomainReferer {
+func (o DomainRefererPtrOutput) Elem() DomainRefererOutput {
+	return o.ApplyT(func(v *DomainReferer) DomainReferer {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainReferer
+		var ret DomainReferer
 		return ret
-	}).(CdnDomainRefererOutput)
+	}).(DomainRefererOutput)
 }
 
-func (o CdnDomainRefererPtrOutput) RefererRules() CdnDomainRefererRefererRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainReferer) []CdnDomainRefererRefererRule {
+// List of referer rules.
+func (o DomainRefererPtrOutput) RefererRules() DomainRefererRefererRuleArrayOutput {
+	return o.ApplyT(func(v *DomainReferer) []DomainRefererRefererRule {
 		if v == nil {
 			return nil
 		}
 		return v.RefererRules
-	}).(CdnDomainRefererRefererRuleArrayOutput)
+	}).(DomainRefererRefererRuleArrayOutput)
 }
 
-func (o CdnDomainRefererPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainReferer) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainRefererPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainReferer) *string {
 		if v == nil {
 			return nil
 		}
@@ -5255,265 +5750,288 @@ func (o CdnDomainRefererPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainRefererRefererRule struct {
-	AllowEmpty  bool     `pulumi:"allowEmpty"`
-	RefererType string   `pulumi:"refererType"`
-	Referers    []string `pulumi:"referers"`
-	RulePaths   []string `pulumi:"rulePaths"`
-	RuleType    string   `pulumi:"ruleType"`
+type DomainRefererRefererRule struct {
+	// Whether to allow emptpy.
+	AllowEmpty bool `pulumi:"allowEmpty"`
+	// Referer type.
+	RefererType string `pulumi:"refererType"`
+	// Referer list.
+	Referers []string `pulumi:"referers"`
+	// Referer rule path list.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Referer rule type.
+	RuleType string `pulumi:"ruleType"`
 }
 
-// CdnDomainRefererRefererRuleInput is an input type that accepts CdnDomainRefererRefererRuleArgs and CdnDomainRefererRefererRuleOutput values.
-// You can construct a concrete instance of `CdnDomainRefererRefererRuleInput` via:
+// DomainRefererRefererRuleInput is an input type that accepts DomainRefererRefererRuleArgs and DomainRefererRefererRuleOutput values.
+// You can construct a concrete instance of `DomainRefererRefererRuleInput` via:
 //
-//          CdnDomainRefererRefererRuleArgs{...}
-type CdnDomainRefererRefererRuleInput interface {
+//          DomainRefererRefererRuleArgs{...}
+type DomainRefererRefererRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainRefererRefererRuleOutput() CdnDomainRefererRefererRuleOutput
-	ToCdnDomainRefererRefererRuleOutputWithContext(context.Context) CdnDomainRefererRefererRuleOutput
+	ToDomainRefererRefererRuleOutput() DomainRefererRefererRuleOutput
+	ToDomainRefererRefererRuleOutputWithContext(context.Context) DomainRefererRefererRuleOutput
 }
 
-type CdnDomainRefererRefererRuleArgs struct {
-	AllowEmpty  pulumi.BoolInput        `pulumi:"allowEmpty"`
-	RefererType pulumi.StringInput      `pulumi:"refererType"`
-	Referers    pulumi.StringArrayInput `pulumi:"referers"`
-	RulePaths   pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType    pulumi.StringInput      `pulumi:"ruleType"`
+type DomainRefererRefererRuleArgs struct {
+	// Whether to allow emptpy.
+	AllowEmpty pulumi.BoolInput `pulumi:"allowEmpty"`
+	// Referer type.
+	RefererType pulumi.StringInput `pulumi:"refererType"`
+	// Referer list.
+	Referers pulumi.StringArrayInput `pulumi:"referers"`
+	// Referer rule path list.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Referer rule type.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
 }
 
-func (CdnDomainRefererRefererRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRefererRefererRule)(nil)).Elem()
+func (DomainRefererRefererRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRefererRefererRule)(nil)).Elem()
 }
 
-func (i CdnDomainRefererRefererRuleArgs) ToCdnDomainRefererRefererRuleOutput() CdnDomainRefererRefererRuleOutput {
-	return i.ToCdnDomainRefererRefererRuleOutputWithContext(context.Background())
+func (i DomainRefererRefererRuleArgs) ToDomainRefererRefererRuleOutput() DomainRefererRefererRuleOutput {
+	return i.ToDomainRefererRefererRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRefererRefererRuleArgs) ToCdnDomainRefererRefererRuleOutputWithContext(ctx context.Context) CdnDomainRefererRefererRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRefererRefererRuleOutput)
+func (i DomainRefererRefererRuleArgs) ToDomainRefererRefererRuleOutputWithContext(ctx context.Context) DomainRefererRefererRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRefererRefererRuleOutput)
 }
 
-// CdnDomainRefererRefererRuleArrayInput is an input type that accepts CdnDomainRefererRefererRuleArray and CdnDomainRefererRefererRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainRefererRefererRuleArrayInput` via:
+// DomainRefererRefererRuleArrayInput is an input type that accepts DomainRefererRefererRuleArray and DomainRefererRefererRuleArrayOutput values.
+// You can construct a concrete instance of `DomainRefererRefererRuleArrayInput` via:
 //
-//          CdnDomainRefererRefererRuleArray{ CdnDomainRefererRefererRuleArgs{...} }
-type CdnDomainRefererRefererRuleArrayInput interface {
+//          DomainRefererRefererRuleArray{ DomainRefererRefererRuleArgs{...} }
+type DomainRefererRefererRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainRefererRefererRuleArrayOutput() CdnDomainRefererRefererRuleArrayOutput
-	ToCdnDomainRefererRefererRuleArrayOutputWithContext(context.Context) CdnDomainRefererRefererRuleArrayOutput
+	ToDomainRefererRefererRuleArrayOutput() DomainRefererRefererRuleArrayOutput
+	ToDomainRefererRefererRuleArrayOutputWithContext(context.Context) DomainRefererRefererRuleArrayOutput
 }
 
-type CdnDomainRefererRefererRuleArray []CdnDomainRefererRefererRuleInput
+type DomainRefererRefererRuleArray []DomainRefererRefererRuleInput
 
-func (CdnDomainRefererRefererRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainRefererRefererRule)(nil)).Elem()
+func (DomainRefererRefererRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRefererRefererRule)(nil)).Elem()
 }
 
-func (i CdnDomainRefererRefererRuleArray) ToCdnDomainRefererRefererRuleArrayOutput() CdnDomainRefererRefererRuleArrayOutput {
-	return i.ToCdnDomainRefererRefererRuleArrayOutputWithContext(context.Background())
+func (i DomainRefererRefererRuleArray) ToDomainRefererRefererRuleArrayOutput() DomainRefererRefererRuleArrayOutput {
+	return i.ToDomainRefererRefererRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRefererRefererRuleArray) ToCdnDomainRefererRefererRuleArrayOutputWithContext(ctx context.Context) CdnDomainRefererRefererRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRefererRefererRuleArrayOutput)
+func (i DomainRefererRefererRuleArray) ToDomainRefererRefererRuleArrayOutputWithContext(ctx context.Context) DomainRefererRefererRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRefererRefererRuleArrayOutput)
 }
 
-type CdnDomainRefererRefererRuleOutput struct{ *pulumi.OutputState }
+type DomainRefererRefererRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRefererRefererRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRefererRefererRule)(nil)).Elem()
+func (DomainRefererRefererRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRefererRefererRule)(nil)).Elem()
 }
 
-func (o CdnDomainRefererRefererRuleOutput) ToCdnDomainRefererRefererRuleOutput() CdnDomainRefererRefererRuleOutput {
+func (o DomainRefererRefererRuleOutput) ToDomainRefererRefererRuleOutput() DomainRefererRefererRuleOutput {
 	return o
 }
 
-func (o CdnDomainRefererRefererRuleOutput) ToCdnDomainRefererRefererRuleOutputWithContext(ctx context.Context) CdnDomainRefererRefererRuleOutput {
+func (o DomainRefererRefererRuleOutput) ToDomainRefererRefererRuleOutputWithContext(ctx context.Context) DomainRefererRefererRuleOutput {
 	return o
 }
 
-func (o CdnDomainRefererRefererRuleOutput) AllowEmpty() pulumi.BoolOutput {
-	return o.ApplyT(func(v CdnDomainRefererRefererRule) bool { return v.AllowEmpty }).(pulumi.BoolOutput)
+// Whether to allow emptpy.
+func (o DomainRefererRefererRuleOutput) AllowEmpty() pulumi.BoolOutput {
+	return o.ApplyT(func(v DomainRefererRefererRule) bool { return v.AllowEmpty }).(pulumi.BoolOutput)
 }
 
-func (o CdnDomainRefererRefererRuleOutput) RefererType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainRefererRefererRule) string { return v.RefererType }).(pulumi.StringOutput)
+// Referer type.
+func (o DomainRefererRefererRuleOutput) RefererType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRefererRefererRule) string { return v.RefererType }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainRefererRefererRuleOutput) Referers() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainRefererRefererRule) []string { return v.Referers }).(pulumi.StringArrayOutput)
+// Referer list.
+func (o DomainRefererRefererRuleOutput) Referers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainRefererRefererRule) []string { return v.Referers }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainRefererRefererRuleOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainRefererRefererRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// Referer rule path list.
+func (o DomainRefererRefererRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainRefererRefererRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainRefererRefererRuleOutput) RuleType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainRefererRefererRule) string { return v.RuleType }).(pulumi.StringOutput)
+// Referer rule type.
+func (o DomainRefererRefererRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRefererRefererRule) string { return v.RuleType }).(pulumi.StringOutput)
 }
 
-type CdnDomainRefererRefererRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainRefererRefererRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRefererRefererRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainRefererRefererRule)(nil)).Elem()
+func (DomainRefererRefererRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRefererRefererRule)(nil)).Elem()
 }
 
-func (o CdnDomainRefererRefererRuleArrayOutput) ToCdnDomainRefererRefererRuleArrayOutput() CdnDomainRefererRefererRuleArrayOutput {
+func (o DomainRefererRefererRuleArrayOutput) ToDomainRefererRefererRuleArrayOutput() DomainRefererRefererRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainRefererRefererRuleArrayOutput) ToCdnDomainRefererRefererRuleArrayOutputWithContext(ctx context.Context) CdnDomainRefererRefererRuleArrayOutput {
+func (o DomainRefererRefererRuleArrayOutput) ToDomainRefererRefererRuleArrayOutputWithContext(ctx context.Context) DomainRefererRefererRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainRefererRefererRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainRefererRefererRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainRefererRefererRule {
-		return vs[0].([]CdnDomainRefererRefererRule)[vs[1].(int)]
-	}).(CdnDomainRefererRefererRuleOutput)
+func (o DomainRefererRefererRuleArrayOutput) Index(i pulumi.IntInput) DomainRefererRefererRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainRefererRefererRule {
+		return vs[0].([]DomainRefererRefererRule)[vs[1].(int)]
+	}).(DomainRefererRefererRuleOutput)
 }
 
-type CdnDomainRequestHeader struct {
-	HeaderRules []CdnDomainRequestHeaderHeaderRule `pulumi:"headerRules"`
-	Switch      *string                            `pulumi:"switch"`
+type DomainRequestHeader struct {
+	// Custom request header configuration rules.
+	HeaderRules []DomainRequestHeaderHeaderRule `pulumi:"headerRules"`
+	// Custom request header configuration switch. Valid values are `on` and `off`. and default value is `off`.
+	Switch *string `pulumi:"switch"`
 }
 
-// CdnDomainRequestHeaderInput is an input type that accepts CdnDomainRequestHeaderArgs and CdnDomainRequestHeaderOutput values.
-// You can construct a concrete instance of `CdnDomainRequestHeaderInput` via:
+// DomainRequestHeaderInput is an input type that accepts DomainRequestHeaderArgs and DomainRequestHeaderOutput values.
+// You can construct a concrete instance of `DomainRequestHeaderInput` via:
 //
-//          CdnDomainRequestHeaderArgs{...}
-type CdnDomainRequestHeaderInput interface {
+//          DomainRequestHeaderArgs{...}
+type DomainRequestHeaderInput interface {
 	pulumi.Input
 
-	ToCdnDomainRequestHeaderOutput() CdnDomainRequestHeaderOutput
-	ToCdnDomainRequestHeaderOutputWithContext(context.Context) CdnDomainRequestHeaderOutput
+	ToDomainRequestHeaderOutput() DomainRequestHeaderOutput
+	ToDomainRequestHeaderOutputWithContext(context.Context) DomainRequestHeaderOutput
 }
 
-type CdnDomainRequestHeaderArgs struct {
-	HeaderRules CdnDomainRequestHeaderHeaderRuleArrayInput `pulumi:"headerRules"`
-	Switch      pulumi.StringPtrInput                      `pulumi:"switch"`
+type DomainRequestHeaderArgs struct {
+	// Custom request header configuration rules.
+	HeaderRules DomainRequestHeaderHeaderRuleArrayInput `pulumi:"headerRules"`
+	// Custom request header configuration switch. Valid values are `on` and `off`. and default value is `off`.
+	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
-func (CdnDomainRequestHeaderArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRequestHeader)(nil)).Elem()
+func (DomainRequestHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRequestHeader)(nil)).Elem()
 }
 
-func (i CdnDomainRequestHeaderArgs) ToCdnDomainRequestHeaderOutput() CdnDomainRequestHeaderOutput {
-	return i.ToCdnDomainRequestHeaderOutputWithContext(context.Background())
+func (i DomainRequestHeaderArgs) ToDomainRequestHeaderOutput() DomainRequestHeaderOutput {
+	return i.ToDomainRequestHeaderOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRequestHeaderArgs) ToCdnDomainRequestHeaderOutputWithContext(ctx context.Context) CdnDomainRequestHeaderOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRequestHeaderOutput)
+func (i DomainRequestHeaderArgs) ToDomainRequestHeaderOutputWithContext(ctx context.Context) DomainRequestHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRequestHeaderOutput)
 }
 
-func (i CdnDomainRequestHeaderArgs) ToCdnDomainRequestHeaderPtrOutput() CdnDomainRequestHeaderPtrOutput {
-	return i.ToCdnDomainRequestHeaderPtrOutputWithContext(context.Background())
+func (i DomainRequestHeaderArgs) ToDomainRequestHeaderPtrOutput() DomainRequestHeaderPtrOutput {
+	return i.ToDomainRequestHeaderPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRequestHeaderArgs) ToCdnDomainRequestHeaderPtrOutputWithContext(ctx context.Context) CdnDomainRequestHeaderPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRequestHeaderOutput).ToCdnDomainRequestHeaderPtrOutputWithContext(ctx)
+func (i DomainRequestHeaderArgs) ToDomainRequestHeaderPtrOutputWithContext(ctx context.Context) DomainRequestHeaderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRequestHeaderOutput).ToDomainRequestHeaderPtrOutputWithContext(ctx)
 }
 
-// CdnDomainRequestHeaderPtrInput is an input type that accepts CdnDomainRequestHeaderArgs, CdnDomainRequestHeaderPtr and CdnDomainRequestHeaderPtrOutput values.
-// You can construct a concrete instance of `CdnDomainRequestHeaderPtrInput` via:
+// DomainRequestHeaderPtrInput is an input type that accepts DomainRequestHeaderArgs, DomainRequestHeaderPtr and DomainRequestHeaderPtrOutput values.
+// You can construct a concrete instance of `DomainRequestHeaderPtrInput` via:
 //
-//          CdnDomainRequestHeaderArgs{...}
+//          DomainRequestHeaderArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainRequestHeaderPtrInput interface {
+type DomainRequestHeaderPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainRequestHeaderPtrOutput() CdnDomainRequestHeaderPtrOutput
-	ToCdnDomainRequestHeaderPtrOutputWithContext(context.Context) CdnDomainRequestHeaderPtrOutput
+	ToDomainRequestHeaderPtrOutput() DomainRequestHeaderPtrOutput
+	ToDomainRequestHeaderPtrOutputWithContext(context.Context) DomainRequestHeaderPtrOutput
 }
 
-type cdnDomainRequestHeaderPtrType CdnDomainRequestHeaderArgs
+type domainRequestHeaderPtrType DomainRequestHeaderArgs
 
-func CdnDomainRequestHeaderPtr(v *CdnDomainRequestHeaderArgs) CdnDomainRequestHeaderPtrInput {
-	return (*cdnDomainRequestHeaderPtrType)(v)
+func DomainRequestHeaderPtr(v *DomainRequestHeaderArgs) DomainRequestHeaderPtrInput {
+	return (*domainRequestHeaderPtrType)(v)
 }
 
-func (*cdnDomainRequestHeaderPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainRequestHeader)(nil)).Elem()
+func (*domainRequestHeaderPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainRequestHeader)(nil)).Elem()
 }
 
-func (i *cdnDomainRequestHeaderPtrType) ToCdnDomainRequestHeaderPtrOutput() CdnDomainRequestHeaderPtrOutput {
-	return i.ToCdnDomainRequestHeaderPtrOutputWithContext(context.Background())
+func (i *domainRequestHeaderPtrType) ToDomainRequestHeaderPtrOutput() DomainRequestHeaderPtrOutput {
+	return i.ToDomainRequestHeaderPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainRequestHeaderPtrType) ToCdnDomainRequestHeaderPtrOutputWithContext(ctx context.Context) CdnDomainRequestHeaderPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRequestHeaderPtrOutput)
+func (i *domainRequestHeaderPtrType) ToDomainRequestHeaderPtrOutputWithContext(ctx context.Context) DomainRequestHeaderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRequestHeaderPtrOutput)
 }
 
-type CdnDomainRequestHeaderOutput struct{ *pulumi.OutputState }
+type DomainRequestHeaderOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRequestHeaderOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRequestHeader)(nil)).Elem()
+func (DomainRequestHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRequestHeader)(nil)).Elem()
 }
 
-func (o CdnDomainRequestHeaderOutput) ToCdnDomainRequestHeaderOutput() CdnDomainRequestHeaderOutput {
+func (o DomainRequestHeaderOutput) ToDomainRequestHeaderOutput() DomainRequestHeaderOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderOutput) ToCdnDomainRequestHeaderOutputWithContext(ctx context.Context) CdnDomainRequestHeaderOutput {
+func (o DomainRequestHeaderOutput) ToDomainRequestHeaderOutputWithContext(ctx context.Context) DomainRequestHeaderOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderOutput) ToCdnDomainRequestHeaderPtrOutput() CdnDomainRequestHeaderPtrOutput {
-	return o.ToCdnDomainRequestHeaderPtrOutputWithContext(context.Background())
+func (o DomainRequestHeaderOutput) ToDomainRequestHeaderPtrOutput() DomainRequestHeaderPtrOutput {
+	return o.ToDomainRequestHeaderPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainRequestHeaderOutput) ToCdnDomainRequestHeaderPtrOutputWithContext(ctx context.Context) CdnDomainRequestHeaderPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainRequestHeader) *CdnDomainRequestHeader {
+func (o DomainRequestHeaderOutput) ToDomainRequestHeaderPtrOutputWithContext(ctx context.Context) DomainRequestHeaderPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainRequestHeader) *DomainRequestHeader {
 		return &v
-	}).(CdnDomainRequestHeaderPtrOutput)
+	}).(DomainRequestHeaderPtrOutput)
 }
 
-func (o CdnDomainRequestHeaderOutput) HeaderRules() CdnDomainRequestHeaderHeaderRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainRequestHeader) []CdnDomainRequestHeaderHeaderRule { return v.HeaderRules }).(CdnDomainRequestHeaderHeaderRuleArrayOutput)
+// Custom request header configuration rules.
+func (o DomainRequestHeaderOutput) HeaderRules() DomainRequestHeaderHeaderRuleArrayOutput {
+	return o.ApplyT(func(v DomainRequestHeader) []DomainRequestHeaderHeaderRule { return v.HeaderRules }).(DomainRequestHeaderHeaderRuleArrayOutput)
 }
 
-func (o CdnDomainRequestHeaderOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRequestHeader) *string { return v.Switch }).(pulumi.StringPtrOutput)
+// Custom request header configuration switch. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainRequestHeaderOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRequestHeader) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainRequestHeaderPtrOutput struct{ *pulumi.OutputState }
+type DomainRequestHeaderPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRequestHeaderPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainRequestHeader)(nil)).Elem()
+func (DomainRequestHeaderPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainRequestHeader)(nil)).Elem()
 }
 
-func (o CdnDomainRequestHeaderPtrOutput) ToCdnDomainRequestHeaderPtrOutput() CdnDomainRequestHeaderPtrOutput {
+func (o DomainRequestHeaderPtrOutput) ToDomainRequestHeaderPtrOutput() DomainRequestHeaderPtrOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderPtrOutput) ToCdnDomainRequestHeaderPtrOutputWithContext(ctx context.Context) CdnDomainRequestHeaderPtrOutput {
+func (o DomainRequestHeaderPtrOutput) ToDomainRequestHeaderPtrOutputWithContext(ctx context.Context) DomainRequestHeaderPtrOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderPtrOutput) Elem() CdnDomainRequestHeaderOutput {
-	return o.ApplyT(func(v *CdnDomainRequestHeader) CdnDomainRequestHeader {
+func (o DomainRequestHeaderPtrOutput) Elem() DomainRequestHeaderOutput {
+	return o.ApplyT(func(v *DomainRequestHeader) DomainRequestHeader {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainRequestHeader
+		var ret DomainRequestHeader
 		return ret
-	}).(CdnDomainRequestHeaderOutput)
+	}).(DomainRequestHeaderOutput)
 }
 
-func (o CdnDomainRequestHeaderPtrOutput) HeaderRules() CdnDomainRequestHeaderHeaderRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainRequestHeader) []CdnDomainRequestHeaderHeaderRule {
+// Custom request header configuration rules.
+func (o DomainRequestHeaderPtrOutput) HeaderRules() DomainRequestHeaderHeaderRuleArrayOutput {
+	return o.ApplyT(func(v *DomainRequestHeader) []DomainRequestHeaderHeaderRule {
 		if v == nil {
 			return nil
 		}
 		return v.HeaderRules
-	}).(CdnDomainRequestHeaderHeaderRuleArrayOutput)
+	}).(DomainRequestHeaderHeaderRuleArrayOutput)
 }
 
-func (o CdnDomainRequestHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainRequestHeader) *string {
+// Custom request header configuration switch. Valid values are `on` and `off`. and default value is `off`.
+func (o DomainRequestHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainRequestHeader) *string {
 		if v == nil {
 			return nil
 		}
@@ -5521,265 +6039,288 @@ func (o CdnDomainRequestHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainRequestHeaderHeaderRule struct {
-	HeaderMode  string   `pulumi:"headerMode"`
-	HeaderName  string   `pulumi:"headerName"`
-	HeaderValue string   `pulumi:"headerValue"`
-	RulePaths   []string `pulumi:"rulePaths"`
-	RuleType    string   `pulumi:"ruleType"`
+type DomainRequestHeaderHeaderRule struct {
+	// Response header mode.
+	HeaderMode string `pulumi:"headerMode"`
+	// response header name of rule.
+	HeaderName string `pulumi:"headerName"`
+	// response header value of rule.
+	HeaderValue string `pulumi:"headerValue"`
+	// response rule paths of rule.
+	RulePaths []string `pulumi:"rulePaths"`
+	// response rule type of rule.
+	RuleType string `pulumi:"ruleType"`
 }
 
-// CdnDomainRequestHeaderHeaderRuleInput is an input type that accepts CdnDomainRequestHeaderHeaderRuleArgs and CdnDomainRequestHeaderHeaderRuleOutput values.
-// You can construct a concrete instance of `CdnDomainRequestHeaderHeaderRuleInput` via:
+// DomainRequestHeaderHeaderRuleInput is an input type that accepts DomainRequestHeaderHeaderRuleArgs and DomainRequestHeaderHeaderRuleOutput values.
+// You can construct a concrete instance of `DomainRequestHeaderHeaderRuleInput` via:
 //
-//          CdnDomainRequestHeaderHeaderRuleArgs{...}
-type CdnDomainRequestHeaderHeaderRuleInput interface {
+//          DomainRequestHeaderHeaderRuleArgs{...}
+type DomainRequestHeaderHeaderRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainRequestHeaderHeaderRuleOutput() CdnDomainRequestHeaderHeaderRuleOutput
-	ToCdnDomainRequestHeaderHeaderRuleOutputWithContext(context.Context) CdnDomainRequestHeaderHeaderRuleOutput
+	ToDomainRequestHeaderHeaderRuleOutput() DomainRequestHeaderHeaderRuleOutput
+	ToDomainRequestHeaderHeaderRuleOutputWithContext(context.Context) DomainRequestHeaderHeaderRuleOutput
 }
 
-type CdnDomainRequestHeaderHeaderRuleArgs struct {
-	HeaderMode  pulumi.StringInput      `pulumi:"headerMode"`
-	HeaderName  pulumi.StringInput      `pulumi:"headerName"`
-	HeaderValue pulumi.StringInput      `pulumi:"headerValue"`
-	RulePaths   pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType    pulumi.StringInput      `pulumi:"ruleType"`
+type DomainRequestHeaderHeaderRuleArgs struct {
+	// Response header mode.
+	HeaderMode pulumi.StringInput `pulumi:"headerMode"`
+	// response header name of rule.
+	HeaderName pulumi.StringInput `pulumi:"headerName"`
+	// response header value of rule.
+	HeaderValue pulumi.StringInput `pulumi:"headerValue"`
+	// response rule paths of rule.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// response rule type of rule.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
 }
 
-func (CdnDomainRequestHeaderHeaderRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRequestHeaderHeaderRule)(nil)).Elem()
+func (DomainRequestHeaderHeaderRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (i CdnDomainRequestHeaderHeaderRuleArgs) ToCdnDomainRequestHeaderHeaderRuleOutput() CdnDomainRequestHeaderHeaderRuleOutput {
-	return i.ToCdnDomainRequestHeaderHeaderRuleOutputWithContext(context.Background())
+func (i DomainRequestHeaderHeaderRuleArgs) ToDomainRequestHeaderHeaderRuleOutput() DomainRequestHeaderHeaderRuleOutput {
+	return i.ToDomainRequestHeaderHeaderRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRequestHeaderHeaderRuleArgs) ToCdnDomainRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) CdnDomainRequestHeaderHeaderRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRequestHeaderHeaderRuleOutput)
+func (i DomainRequestHeaderHeaderRuleArgs) ToDomainRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) DomainRequestHeaderHeaderRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRequestHeaderHeaderRuleOutput)
 }
 
-// CdnDomainRequestHeaderHeaderRuleArrayInput is an input type that accepts CdnDomainRequestHeaderHeaderRuleArray and CdnDomainRequestHeaderHeaderRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainRequestHeaderHeaderRuleArrayInput` via:
+// DomainRequestHeaderHeaderRuleArrayInput is an input type that accepts DomainRequestHeaderHeaderRuleArray and DomainRequestHeaderHeaderRuleArrayOutput values.
+// You can construct a concrete instance of `DomainRequestHeaderHeaderRuleArrayInput` via:
 //
-//          CdnDomainRequestHeaderHeaderRuleArray{ CdnDomainRequestHeaderHeaderRuleArgs{...} }
-type CdnDomainRequestHeaderHeaderRuleArrayInput interface {
+//          DomainRequestHeaderHeaderRuleArray{ DomainRequestHeaderHeaderRuleArgs{...} }
+type DomainRequestHeaderHeaderRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainRequestHeaderHeaderRuleArrayOutput() CdnDomainRequestHeaderHeaderRuleArrayOutput
-	ToCdnDomainRequestHeaderHeaderRuleArrayOutputWithContext(context.Context) CdnDomainRequestHeaderHeaderRuleArrayOutput
+	ToDomainRequestHeaderHeaderRuleArrayOutput() DomainRequestHeaderHeaderRuleArrayOutput
+	ToDomainRequestHeaderHeaderRuleArrayOutputWithContext(context.Context) DomainRequestHeaderHeaderRuleArrayOutput
 }
 
-type CdnDomainRequestHeaderHeaderRuleArray []CdnDomainRequestHeaderHeaderRuleInput
+type DomainRequestHeaderHeaderRuleArray []DomainRequestHeaderHeaderRuleInput
 
-func (CdnDomainRequestHeaderHeaderRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainRequestHeaderHeaderRule)(nil)).Elem()
+func (DomainRequestHeaderHeaderRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (i CdnDomainRequestHeaderHeaderRuleArray) ToCdnDomainRequestHeaderHeaderRuleArrayOutput() CdnDomainRequestHeaderHeaderRuleArrayOutput {
-	return i.ToCdnDomainRequestHeaderHeaderRuleArrayOutputWithContext(context.Background())
+func (i DomainRequestHeaderHeaderRuleArray) ToDomainRequestHeaderHeaderRuleArrayOutput() DomainRequestHeaderHeaderRuleArrayOutput {
+	return i.ToDomainRequestHeaderHeaderRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRequestHeaderHeaderRuleArray) ToCdnDomainRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) CdnDomainRequestHeaderHeaderRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRequestHeaderHeaderRuleArrayOutput)
+func (i DomainRequestHeaderHeaderRuleArray) ToDomainRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) DomainRequestHeaderHeaderRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRequestHeaderHeaderRuleArrayOutput)
 }
 
-type CdnDomainRequestHeaderHeaderRuleOutput struct{ *pulumi.OutputState }
+type DomainRequestHeaderHeaderRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRequestHeaderHeaderRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRequestHeaderHeaderRule)(nil)).Elem()
+func (DomainRequestHeaderHeaderRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleOutput) ToCdnDomainRequestHeaderHeaderRuleOutput() CdnDomainRequestHeaderHeaderRuleOutput {
+func (o DomainRequestHeaderHeaderRuleOutput) ToDomainRequestHeaderHeaderRuleOutput() DomainRequestHeaderHeaderRuleOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleOutput) ToCdnDomainRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) CdnDomainRequestHeaderHeaderRuleOutput {
+func (o DomainRequestHeaderHeaderRuleOutput) ToDomainRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) DomainRequestHeaderHeaderRuleOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleOutput) HeaderMode() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainRequestHeaderHeaderRule) string { return v.HeaderMode }).(pulumi.StringOutput)
+// Response header mode.
+func (o DomainRequestHeaderHeaderRuleOutput) HeaderMode() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRequestHeaderHeaderRule) string { return v.HeaderMode }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleOutput) HeaderName() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainRequestHeaderHeaderRule) string { return v.HeaderName }).(pulumi.StringOutput)
+// response header name of rule.
+func (o DomainRequestHeaderHeaderRuleOutput) HeaderName() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRequestHeaderHeaderRule) string { return v.HeaderName }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleOutput) HeaderValue() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainRequestHeaderHeaderRule) string { return v.HeaderValue }).(pulumi.StringOutput)
+// response header value of rule.
+func (o DomainRequestHeaderHeaderRuleOutput) HeaderValue() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRequestHeaderHeaderRule) string { return v.HeaderValue }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainRequestHeaderHeaderRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// response rule paths of rule.
+func (o DomainRequestHeaderHeaderRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainRequestHeaderHeaderRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleOutput) RuleType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainRequestHeaderHeaderRule) string { return v.RuleType }).(pulumi.StringOutput)
+// response rule type of rule.
+func (o DomainRequestHeaderHeaderRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRequestHeaderHeaderRule) string { return v.RuleType }).(pulumi.StringOutput)
 }
 
-type CdnDomainRequestHeaderHeaderRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainRequestHeaderHeaderRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRequestHeaderHeaderRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainRequestHeaderHeaderRule)(nil)).Elem()
+func (DomainRequestHeaderHeaderRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleArrayOutput) ToCdnDomainRequestHeaderHeaderRuleArrayOutput() CdnDomainRequestHeaderHeaderRuleArrayOutput {
+func (o DomainRequestHeaderHeaderRuleArrayOutput) ToDomainRequestHeaderHeaderRuleArrayOutput() DomainRequestHeaderHeaderRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleArrayOutput) ToCdnDomainRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) CdnDomainRequestHeaderHeaderRuleArrayOutput {
+func (o DomainRequestHeaderHeaderRuleArrayOutput) ToDomainRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) DomainRequestHeaderHeaderRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainRequestHeaderHeaderRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainRequestHeaderHeaderRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainRequestHeaderHeaderRule {
-		return vs[0].([]CdnDomainRequestHeaderHeaderRule)[vs[1].(int)]
-	}).(CdnDomainRequestHeaderHeaderRuleOutput)
+func (o DomainRequestHeaderHeaderRuleArrayOutput) Index(i pulumi.IntInput) DomainRequestHeaderHeaderRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainRequestHeaderHeaderRule {
+		return vs[0].([]DomainRequestHeaderHeaderRule)[vs[1].(int)]
+	}).(DomainRequestHeaderHeaderRuleOutput)
 }
 
-type CdnDomainResponseHeader struct {
-	HeaderRules []CdnDomainResponseHeaderHeaderRule `pulumi:"headerRules"`
-	Switch      string                              `pulumi:"switch"`
+type DomainResponseHeader struct {
+	// List of response header rule.
+	HeaderRules []DomainResponseHeaderHeaderRule `pulumi:"headerRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainResponseHeaderInput is an input type that accepts CdnDomainResponseHeaderArgs and CdnDomainResponseHeaderOutput values.
-// You can construct a concrete instance of `CdnDomainResponseHeaderInput` via:
+// DomainResponseHeaderInput is an input type that accepts DomainResponseHeaderArgs and DomainResponseHeaderOutput values.
+// You can construct a concrete instance of `DomainResponseHeaderInput` via:
 //
-//          CdnDomainResponseHeaderArgs{...}
-type CdnDomainResponseHeaderInput interface {
+//          DomainResponseHeaderArgs{...}
+type DomainResponseHeaderInput interface {
 	pulumi.Input
 
-	ToCdnDomainResponseHeaderOutput() CdnDomainResponseHeaderOutput
-	ToCdnDomainResponseHeaderOutputWithContext(context.Context) CdnDomainResponseHeaderOutput
+	ToDomainResponseHeaderOutput() DomainResponseHeaderOutput
+	ToDomainResponseHeaderOutputWithContext(context.Context) DomainResponseHeaderOutput
 }
 
-type CdnDomainResponseHeaderArgs struct {
-	HeaderRules CdnDomainResponseHeaderHeaderRuleArrayInput `pulumi:"headerRules"`
-	Switch      pulumi.StringInput                          `pulumi:"switch"`
+type DomainResponseHeaderArgs struct {
+	// List of response header rule.
+	HeaderRules DomainResponseHeaderHeaderRuleArrayInput `pulumi:"headerRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainResponseHeaderArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainResponseHeader)(nil)).Elem()
+func (DomainResponseHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainResponseHeader)(nil)).Elem()
 }
 
-func (i CdnDomainResponseHeaderArgs) ToCdnDomainResponseHeaderOutput() CdnDomainResponseHeaderOutput {
-	return i.ToCdnDomainResponseHeaderOutputWithContext(context.Background())
+func (i DomainResponseHeaderArgs) ToDomainResponseHeaderOutput() DomainResponseHeaderOutput {
+	return i.ToDomainResponseHeaderOutputWithContext(context.Background())
 }
 
-func (i CdnDomainResponseHeaderArgs) ToCdnDomainResponseHeaderOutputWithContext(ctx context.Context) CdnDomainResponseHeaderOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainResponseHeaderOutput)
+func (i DomainResponseHeaderArgs) ToDomainResponseHeaderOutputWithContext(ctx context.Context) DomainResponseHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainResponseHeaderOutput)
 }
 
-func (i CdnDomainResponseHeaderArgs) ToCdnDomainResponseHeaderPtrOutput() CdnDomainResponseHeaderPtrOutput {
-	return i.ToCdnDomainResponseHeaderPtrOutputWithContext(context.Background())
+func (i DomainResponseHeaderArgs) ToDomainResponseHeaderPtrOutput() DomainResponseHeaderPtrOutput {
+	return i.ToDomainResponseHeaderPtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainResponseHeaderArgs) ToCdnDomainResponseHeaderPtrOutputWithContext(ctx context.Context) CdnDomainResponseHeaderPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainResponseHeaderOutput).ToCdnDomainResponseHeaderPtrOutputWithContext(ctx)
+func (i DomainResponseHeaderArgs) ToDomainResponseHeaderPtrOutputWithContext(ctx context.Context) DomainResponseHeaderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainResponseHeaderOutput).ToDomainResponseHeaderPtrOutputWithContext(ctx)
 }
 
-// CdnDomainResponseHeaderPtrInput is an input type that accepts CdnDomainResponseHeaderArgs, CdnDomainResponseHeaderPtr and CdnDomainResponseHeaderPtrOutput values.
-// You can construct a concrete instance of `CdnDomainResponseHeaderPtrInput` via:
+// DomainResponseHeaderPtrInput is an input type that accepts DomainResponseHeaderArgs, DomainResponseHeaderPtr and DomainResponseHeaderPtrOutput values.
+// You can construct a concrete instance of `DomainResponseHeaderPtrInput` via:
 //
-//          CdnDomainResponseHeaderArgs{...}
+//          DomainResponseHeaderArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainResponseHeaderPtrInput interface {
+type DomainResponseHeaderPtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainResponseHeaderPtrOutput() CdnDomainResponseHeaderPtrOutput
-	ToCdnDomainResponseHeaderPtrOutputWithContext(context.Context) CdnDomainResponseHeaderPtrOutput
+	ToDomainResponseHeaderPtrOutput() DomainResponseHeaderPtrOutput
+	ToDomainResponseHeaderPtrOutputWithContext(context.Context) DomainResponseHeaderPtrOutput
 }
 
-type cdnDomainResponseHeaderPtrType CdnDomainResponseHeaderArgs
+type domainResponseHeaderPtrType DomainResponseHeaderArgs
 
-func CdnDomainResponseHeaderPtr(v *CdnDomainResponseHeaderArgs) CdnDomainResponseHeaderPtrInput {
-	return (*cdnDomainResponseHeaderPtrType)(v)
+func DomainResponseHeaderPtr(v *DomainResponseHeaderArgs) DomainResponseHeaderPtrInput {
+	return (*domainResponseHeaderPtrType)(v)
 }
 
-func (*cdnDomainResponseHeaderPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainResponseHeader)(nil)).Elem()
+func (*domainResponseHeaderPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainResponseHeader)(nil)).Elem()
 }
 
-func (i *cdnDomainResponseHeaderPtrType) ToCdnDomainResponseHeaderPtrOutput() CdnDomainResponseHeaderPtrOutput {
-	return i.ToCdnDomainResponseHeaderPtrOutputWithContext(context.Background())
+func (i *domainResponseHeaderPtrType) ToDomainResponseHeaderPtrOutput() DomainResponseHeaderPtrOutput {
+	return i.ToDomainResponseHeaderPtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainResponseHeaderPtrType) ToCdnDomainResponseHeaderPtrOutputWithContext(ctx context.Context) CdnDomainResponseHeaderPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainResponseHeaderPtrOutput)
+func (i *domainResponseHeaderPtrType) ToDomainResponseHeaderPtrOutputWithContext(ctx context.Context) DomainResponseHeaderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainResponseHeaderPtrOutput)
 }
 
-type CdnDomainResponseHeaderOutput struct{ *pulumi.OutputState }
+type DomainResponseHeaderOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainResponseHeaderOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainResponseHeader)(nil)).Elem()
+func (DomainResponseHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainResponseHeader)(nil)).Elem()
 }
 
-func (o CdnDomainResponseHeaderOutput) ToCdnDomainResponseHeaderOutput() CdnDomainResponseHeaderOutput {
+func (o DomainResponseHeaderOutput) ToDomainResponseHeaderOutput() DomainResponseHeaderOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderOutput) ToCdnDomainResponseHeaderOutputWithContext(ctx context.Context) CdnDomainResponseHeaderOutput {
+func (o DomainResponseHeaderOutput) ToDomainResponseHeaderOutputWithContext(ctx context.Context) DomainResponseHeaderOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderOutput) ToCdnDomainResponseHeaderPtrOutput() CdnDomainResponseHeaderPtrOutput {
-	return o.ToCdnDomainResponseHeaderPtrOutputWithContext(context.Background())
+func (o DomainResponseHeaderOutput) ToDomainResponseHeaderPtrOutput() DomainResponseHeaderPtrOutput {
+	return o.ToDomainResponseHeaderPtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainResponseHeaderOutput) ToCdnDomainResponseHeaderPtrOutputWithContext(ctx context.Context) CdnDomainResponseHeaderPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainResponseHeader) *CdnDomainResponseHeader {
+func (o DomainResponseHeaderOutput) ToDomainResponseHeaderPtrOutputWithContext(ctx context.Context) DomainResponseHeaderPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainResponseHeader) *DomainResponseHeader {
 		return &v
-	}).(CdnDomainResponseHeaderPtrOutput)
+	}).(DomainResponseHeaderPtrOutput)
 }
 
-func (o CdnDomainResponseHeaderOutput) HeaderRules() CdnDomainResponseHeaderHeaderRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainResponseHeader) []CdnDomainResponseHeaderHeaderRule { return v.HeaderRules }).(CdnDomainResponseHeaderHeaderRuleArrayOutput)
+// List of response header rule.
+func (o DomainResponseHeaderOutput) HeaderRules() DomainResponseHeaderHeaderRuleArrayOutput {
+	return o.ApplyT(func(v DomainResponseHeader) []DomainResponseHeaderHeaderRule { return v.HeaderRules }).(DomainResponseHeaderHeaderRuleArrayOutput)
 }
 
-func (o CdnDomainResponseHeaderOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainResponseHeader) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainResponseHeaderOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainResponseHeader) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainResponseHeaderPtrOutput struct{ *pulumi.OutputState }
+type DomainResponseHeaderPtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainResponseHeaderPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainResponseHeader)(nil)).Elem()
+func (DomainResponseHeaderPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainResponseHeader)(nil)).Elem()
 }
 
-func (o CdnDomainResponseHeaderPtrOutput) ToCdnDomainResponseHeaderPtrOutput() CdnDomainResponseHeaderPtrOutput {
+func (o DomainResponseHeaderPtrOutput) ToDomainResponseHeaderPtrOutput() DomainResponseHeaderPtrOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderPtrOutput) ToCdnDomainResponseHeaderPtrOutputWithContext(ctx context.Context) CdnDomainResponseHeaderPtrOutput {
+func (o DomainResponseHeaderPtrOutput) ToDomainResponseHeaderPtrOutputWithContext(ctx context.Context) DomainResponseHeaderPtrOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderPtrOutput) Elem() CdnDomainResponseHeaderOutput {
-	return o.ApplyT(func(v *CdnDomainResponseHeader) CdnDomainResponseHeader {
+func (o DomainResponseHeaderPtrOutput) Elem() DomainResponseHeaderOutput {
+	return o.ApplyT(func(v *DomainResponseHeader) DomainResponseHeader {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainResponseHeader
+		var ret DomainResponseHeader
 		return ret
-	}).(CdnDomainResponseHeaderOutput)
+	}).(DomainResponseHeaderOutput)
 }
 
-func (o CdnDomainResponseHeaderPtrOutput) HeaderRules() CdnDomainResponseHeaderHeaderRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainResponseHeader) []CdnDomainResponseHeaderHeaderRule {
+// List of response header rule.
+func (o DomainResponseHeaderPtrOutput) HeaderRules() DomainResponseHeaderHeaderRuleArrayOutput {
+	return o.ApplyT(func(v *DomainResponseHeader) []DomainResponseHeaderHeaderRule {
 		if v == nil {
 			return nil
 		}
 		return v.HeaderRules
-	}).(CdnDomainResponseHeaderHeaderRuleArrayOutput)
+	}).(DomainResponseHeaderHeaderRuleArrayOutput)
 }
 
-func (o CdnDomainResponseHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainResponseHeader) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainResponseHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainResponseHeader) *string {
 		if v == nil {
 			return nil
 		}
@@ -5787,413 +6328,466 @@ func (o CdnDomainResponseHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainResponseHeaderHeaderRule struct {
-	HeaderMode  string   `pulumi:"headerMode"`
-	HeaderName  string   `pulumi:"headerName"`
-	HeaderValue string   `pulumi:"headerValue"`
-	RulePaths   []string `pulumi:"rulePaths"`
-	RuleType    string   `pulumi:"ruleType"`
+type DomainResponseHeaderHeaderRule struct {
+	// Response header mode.
+	HeaderMode string `pulumi:"headerMode"`
+	// response header name of rule.
+	HeaderName string `pulumi:"headerName"`
+	// response header value of rule.
+	HeaderValue string `pulumi:"headerValue"`
+	// response rule paths of rule.
+	RulePaths []string `pulumi:"rulePaths"`
+	// response rule type of rule.
+	RuleType string `pulumi:"ruleType"`
 }
 
-// CdnDomainResponseHeaderHeaderRuleInput is an input type that accepts CdnDomainResponseHeaderHeaderRuleArgs and CdnDomainResponseHeaderHeaderRuleOutput values.
-// You can construct a concrete instance of `CdnDomainResponseHeaderHeaderRuleInput` via:
+// DomainResponseHeaderHeaderRuleInput is an input type that accepts DomainResponseHeaderHeaderRuleArgs and DomainResponseHeaderHeaderRuleOutput values.
+// You can construct a concrete instance of `DomainResponseHeaderHeaderRuleInput` via:
 //
-//          CdnDomainResponseHeaderHeaderRuleArgs{...}
-type CdnDomainResponseHeaderHeaderRuleInput interface {
+//          DomainResponseHeaderHeaderRuleArgs{...}
+type DomainResponseHeaderHeaderRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainResponseHeaderHeaderRuleOutput() CdnDomainResponseHeaderHeaderRuleOutput
-	ToCdnDomainResponseHeaderHeaderRuleOutputWithContext(context.Context) CdnDomainResponseHeaderHeaderRuleOutput
+	ToDomainResponseHeaderHeaderRuleOutput() DomainResponseHeaderHeaderRuleOutput
+	ToDomainResponseHeaderHeaderRuleOutputWithContext(context.Context) DomainResponseHeaderHeaderRuleOutput
 }
 
-type CdnDomainResponseHeaderHeaderRuleArgs struct {
-	HeaderMode  pulumi.StringInput      `pulumi:"headerMode"`
-	HeaderName  pulumi.StringInput      `pulumi:"headerName"`
-	HeaderValue pulumi.StringInput      `pulumi:"headerValue"`
-	RulePaths   pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType    pulumi.StringInput      `pulumi:"ruleType"`
+type DomainResponseHeaderHeaderRuleArgs struct {
+	// Response header mode.
+	HeaderMode pulumi.StringInput `pulumi:"headerMode"`
+	// response header name of rule.
+	HeaderName pulumi.StringInput `pulumi:"headerName"`
+	// response header value of rule.
+	HeaderValue pulumi.StringInput `pulumi:"headerValue"`
+	// response rule paths of rule.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// response rule type of rule.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
 }
 
-func (CdnDomainResponseHeaderHeaderRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainResponseHeaderHeaderRule)(nil)).Elem()
+func (DomainResponseHeaderHeaderRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainResponseHeaderHeaderRule)(nil)).Elem()
 }
 
-func (i CdnDomainResponseHeaderHeaderRuleArgs) ToCdnDomainResponseHeaderHeaderRuleOutput() CdnDomainResponseHeaderHeaderRuleOutput {
-	return i.ToCdnDomainResponseHeaderHeaderRuleOutputWithContext(context.Background())
+func (i DomainResponseHeaderHeaderRuleArgs) ToDomainResponseHeaderHeaderRuleOutput() DomainResponseHeaderHeaderRuleOutput {
+	return i.ToDomainResponseHeaderHeaderRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainResponseHeaderHeaderRuleArgs) ToCdnDomainResponseHeaderHeaderRuleOutputWithContext(ctx context.Context) CdnDomainResponseHeaderHeaderRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainResponseHeaderHeaderRuleOutput)
+func (i DomainResponseHeaderHeaderRuleArgs) ToDomainResponseHeaderHeaderRuleOutputWithContext(ctx context.Context) DomainResponseHeaderHeaderRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainResponseHeaderHeaderRuleOutput)
 }
 
-// CdnDomainResponseHeaderHeaderRuleArrayInput is an input type that accepts CdnDomainResponseHeaderHeaderRuleArray and CdnDomainResponseHeaderHeaderRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainResponseHeaderHeaderRuleArrayInput` via:
+// DomainResponseHeaderHeaderRuleArrayInput is an input type that accepts DomainResponseHeaderHeaderRuleArray and DomainResponseHeaderHeaderRuleArrayOutput values.
+// You can construct a concrete instance of `DomainResponseHeaderHeaderRuleArrayInput` via:
 //
-//          CdnDomainResponseHeaderHeaderRuleArray{ CdnDomainResponseHeaderHeaderRuleArgs{...} }
-type CdnDomainResponseHeaderHeaderRuleArrayInput interface {
+//          DomainResponseHeaderHeaderRuleArray{ DomainResponseHeaderHeaderRuleArgs{...} }
+type DomainResponseHeaderHeaderRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainResponseHeaderHeaderRuleArrayOutput() CdnDomainResponseHeaderHeaderRuleArrayOutput
-	ToCdnDomainResponseHeaderHeaderRuleArrayOutputWithContext(context.Context) CdnDomainResponseHeaderHeaderRuleArrayOutput
+	ToDomainResponseHeaderHeaderRuleArrayOutput() DomainResponseHeaderHeaderRuleArrayOutput
+	ToDomainResponseHeaderHeaderRuleArrayOutputWithContext(context.Context) DomainResponseHeaderHeaderRuleArrayOutput
 }
 
-type CdnDomainResponseHeaderHeaderRuleArray []CdnDomainResponseHeaderHeaderRuleInput
+type DomainResponseHeaderHeaderRuleArray []DomainResponseHeaderHeaderRuleInput
 
-func (CdnDomainResponseHeaderHeaderRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainResponseHeaderHeaderRule)(nil)).Elem()
+func (DomainResponseHeaderHeaderRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainResponseHeaderHeaderRule)(nil)).Elem()
 }
 
-func (i CdnDomainResponseHeaderHeaderRuleArray) ToCdnDomainResponseHeaderHeaderRuleArrayOutput() CdnDomainResponseHeaderHeaderRuleArrayOutput {
-	return i.ToCdnDomainResponseHeaderHeaderRuleArrayOutputWithContext(context.Background())
+func (i DomainResponseHeaderHeaderRuleArray) ToDomainResponseHeaderHeaderRuleArrayOutput() DomainResponseHeaderHeaderRuleArrayOutput {
+	return i.ToDomainResponseHeaderHeaderRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainResponseHeaderHeaderRuleArray) ToCdnDomainResponseHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) CdnDomainResponseHeaderHeaderRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainResponseHeaderHeaderRuleArrayOutput)
+func (i DomainResponseHeaderHeaderRuleArray) ToDomainResponseHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) DomainResponseHeaderHeaderRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainResponseHeaderHeaderRuleArrayOutput)
 }
 
-type CdnDomainResponseHeaderHeaderRuleOutput struct{ *pulumi.OutputState }
+type DomainResponseHeaderHeaderRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainResponseHeaderHeaderRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainResponseHeaderHeaderRule)(nil)).Elem()
+func (DomainResponseHeaderHeaderRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainResponseHeaderHeaderRule)(nil)).Elem()
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleOutput) ToCdnDomainResponseHeaderHeaderRuleOutput() CdnDomainResponseHeaderHeaderRuleOutput {
+func (o DomainResponseHeaderHeaderRuleOutput) ToDomainResponseHeaderHeaderRuleOutput() DomainResponseHeaderHeaderRuleOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleOutput) ToCdnDomainResponseHeaderHeaderRuleOutputWithContext(ctx context.Context) CdnDomainResponseHeaderHeaderRuleOutput {
+func (o DomainResponseHeaderHeaderRuleOutput) ToDomainResponseHeaderHeaderRuleOutputWithContext(ctx context.Context) DomainResponseHeaderHeaderRuleOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleOutput) HeaderMode() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainResponseHeaderHeaderRule) string { return v.HeaderMode }).(pulumi.StringOutput)
+// Response header mode.
+func (o DomainResponseHeaderHeaderRuleOutput) HeaderMode() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainResponseHeaderHeaderRule) string { return v.HeaderMode }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleOutput) HeaderName() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainResponseHeaderHeaderRule) string { return v.HeaderName }).(pulumi.StringOutput)
+// response header name of rule.
+func (o DomainResponseHeaderHeaderRuleOutput) HeaderName() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainResponseHeaderHeaderRule) string { return v.HeaderName }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleOutput) HeaderValue() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainResponseHeaderHeaderRule) string { return v.HeaderValue }).(pulumi.StringOutput)
+// response header value of rule.
+func (o DomainResponseHeaderHeaderRuleOutput) HeaderValue() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainResponseHeaderHeaderRule) string { return v.HeaderValue }).(pulumi.StringOutput)
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainResponseHeaderHeaderRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// response rule paths of rule.
+func (o DomainResponseHeaderHeaderRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainResponseHeaderHeaderRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleOutput) RuleType() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainResponseHeaderHeaderRule) string { return v.RuleType }).(pulumi.StringOutput)
+// response rule type of rule.
+func (o DomainResponseHeaderHeaderRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainResponseHeaderHeaderRule) string { return v.RuleType }).(pulumi.StringOutput)
 }
 
-type CdnDomainResponseHeaderHeaderRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainResponseHeaderHeaderRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainResponseHeaderHeaderRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainResponseHeaderHeaderRule)(nil)).Elem()
+func (DomainResponseHeaderHeaderRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainResponseHeaderHeaderRule)(nil)).Elem()
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleArrayOutput) ToCdnDomainResponseHeaderHeaderRuleArrayOutput() CdnDomainResponseHeaderHeaderRuleArrayOutput {
+func (o DomainResponseHeaderHeaderRuleArrayOutput) ToDomainResponseHeaderHeaderRuleArrayOutput() DomainResponseHeaderHeaderRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleArrayOutput) ToCdnDomainResponseHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) CdnDomainResponseHeaderHeaderRuleArrayOutput {
+func (o DomainResponseHeaderHeaderRuleArrayOutput) ToDomainResponseHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) DomainResponseHeaderHeaderRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainResponseHeaderHeaderRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainResponseHeaderHeaderRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainResponseHeaderHeaderRule {
-		return vs[0].([]CdnDomainResponseHeaderHeaderRule)[vs[1].(int)]
-	}).(CdnDomainResponseHeaderHeaderRuleOutput)
+func (o DomainResponseHeaderHeaderRuleArrayOutput) Index(i pulumi.IntInput) DomainResponseHeaderHeaderRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainResponseHeaderHeaderRule {
+		return vs[0].([]DomainResponseHeaderHeaderRule)[vs[1].(int)]
+	}).(DomainResponseHeaderHeaderRuleOutput)
 }
 
-type CdnDomainRuleCach struct {
-	CacheTime          int      `pulumi:"cacheTime"`
-	CompareMaxAge      *string  `pulumi:"compareMaxAge"`
-	FollowOriginSwitch *string  `pulumi:"followOriginSwitch"`
-	IgnoreCacheControl *string  `pulumi:"ignoreCacheControl"`
-	IgnoreSetCookie    *string  `pulumi:"ignoreSetCookie"`
-	NoCacheSwitch      *string  `pulumi:"noCacheSwitch"`
-	ReValidate         *string  `pulumi:"reValidate"`
-	RulePaths          []string `pulumi:"rulePaths"`
-	RuleType           *string  `pulumi:"ruleType"`
-	Switch             *string  `pulumi:"switch"`
+type DomainRuleCach struct {
+	// Cache expiration time setting, the unit is second, the maximum can be set to 365 days.
+	CacheTime int `pulumi:"cacheTime"`
+	// Advanced cache expiration configuration. When it is turned on, it will compare the max-age value returned by the origin site with the cache expiration time set in CacheRules, and take the minimum value to cache at the node. Valid values are `on` and `off`. Default value is `off`.
+	CompareMaxAge *string `pulumi:"compareMaxAge"`
+	// Follow the source station configuration switch. Valid values are `on` and `off`.
+	FollowOriginSwitch *string `pulumi:"followOriginSwitch"`
+	// Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules. Valid values are `on` and `off`. Default value is `off`.
+	IgnoreCacheControl *string `pulumi:"ignoreCacheControl"`
+	// Ignore the Set-Cookie header of the origin site. Valid values are `on` and `off`. Default value is `off`. This parameter is for white-list customer.
+	IgnoreSetCookie *string `pulumi:"ignoreSetCookie"`
+	// Cache configuration switch. Valid values are `on` and `off`.
+	NoCacheSwitch *string `pulumi:"noCacheSwitch"`
+	// Always check back to origin. Valid values are `on` and `off`. Default value is `off`.
+	ReValidate *string `pulumi:"reValidate"`
+	// Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+	RuleType *string `pulumi:"ruleType"`
+	// Cache configuration switch. Valid values are `on` and `off`.
+	Switch *string `pulumi:"switch"`
 }
 
-// CdnDomainRuleCachInput is an input type that accepts CdnDomainRuleCachArgs and CdnDomainRuleCachOutput values.
-// You can construct a concrete instance of `CdnDomainRuleCachInput` via:
+// DomainRuleCachInput is an input type that accepts DomainRuleCachArgs and DomainRuleCachOutput values.
+// You can construct a concrete instance of `DomainRuleCachInput` via:
 //
-//          CdnDomainRuleCachArgs{...}
-type CdnDomainRuleCachInput interface {
+//          DomainRuleCachArgs{...}
+type DomainRuleCachInput interface {
 	pulumi.Input
 
-	ToCdnDomainRuleCachOutput() CdnDomainRuleCachOutput
-	ToCdnDomainRuleCachOutputWithContext(context.Context) CdnDomainRuleCachOutput
+	ToDomainRuleCachOutput() DomainRuleCachOutput
+	ToDomainRuleCachOutputWithContext(context.Context) DomainRuleCachOutput
 }
 
-type CdnDomainRuleCachArgs struct {
-	CacheTime          pulumi.IntInput         `pulumi:"cacheTime"`
-	CompareMaxAge      pulumi.StringPtrInput   `pulumi:"compareMaxAge"`
-	FollowOriginSwitch pulumi.StringPtrInput   `pulumi:"followOriginSwitch"`
-	IgnoreCacheControl pulumi.StringPtrInput   `pulumi:"ignoreCacheControl"`
-	IgnoreSetCookie    pulumi.StringPtrInput   `pulumi:"ignoreSetCookie"`
-	NoCacheSwitch      pulumi.StringPtrInput   `pulumi:"noCacheSwitch"`
-	ReValidate         pulumi.StringPtrInput   `pulumi:"reValidate"`
-	RulePaths          pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType           pulumi.StringPtrInput   `pulumi:"ruleType"`
-	Switch             pulumi.StringPtrInput   `pulumi:"switch"`
+type DomainRuleCachArgs struct {
+	// Cache expiration time setting, the unit is second, the maximum can be set to 365 days.
+	CacheTime pulumi.IntInput `pulumi:"cacheTime"`
+	// Advanced cache expiration configuration. When it is turned on, it will compare the max-age value returned by the origin site with the cache expiration time set in CacheRules, and take the minimum value to cache at the node. Valid values are `on` and `off`. Default value is `off`.
+	CompareMaxAge pulumi.StringPtrInput `pulumi:"compareMaxAge"`
+	// Follow the source station configuration switch. Valid values are `on` and `off`.
+	FollowOriginSwitch pulumi.StringPtrInput `pulumi:"followOriginSwitch"`
+	// Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules. Valid values are `on` and `off`. Default value is `off`.
+	IgnoreCacheControl pulumi.StringPtrInput `pulumi:"ignoreCacheControl"`
+	// Ignore the Set-Cookie header of the origin site. Valid values are `on` and `off`. Default value is `off`. This parameter is for white-list customer.
+	IgnoreSetCookie pulumi.StringPtrInput `pulumi:"ignoreSetCookie"`
+	// Cache configuration switch. Valid values are `on` and `off`.
+	NoCacheSwitch pulumi.StringPtrInput `pulumi:"noCacheSwitch"`
+	// Always check back to origin. Valid values are `on` and `off`. Default value is `off`.
+	ReValidate pulumi.StringPtrInput `pulumi:"reValidate"`
+	// Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+	RuleType pulumi.StringPtrInput `pulumi:"ruleType"`
+	// Cache configuration switch. Valid values are `on` and `off`.
+	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
-func (CdnDomainRuleCachArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRuleCach)(nil)).Elem()
+func (DomainRuleCachArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRuleCach)(nil)).Elem()
 }
 
-func (i CdnDomainRuleCachArgs) ToCdnDomainRuleCachOutput() CdnDomainRuleCachOutput {
-	return i.ToCdnDomainRuleCachOutputWithContext(context.Background())
+func (i DomainRuleCachArgs) ToDomainRuleCachOutput() DomainRuleCachOutput {
+	return i.ToDomainRuleCachOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRuleCachArgs) ToCdnDomainRuleCachOutputWithContext(ctx context.Context) CdnDomainRuleCachOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRuleCachOutput)
+func (i DomainRuleCachArgs) ToDomainRuleCachOutputWithContext(ctx context.Context) DomainRuleCachOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRuleCachOutput)
 }
 
-// CdnDomainRuleCachArrayInput is an input type that accepts CdnDomainRuleCachArray and CdnDomainRuleCachArrayOutput values.
-// You can construct a concrete instance of `CdnDomainRuleCachArrayInput` via:
+// DomainRuleCachArrayInput is an input type that accepts DomainRuleCachArray and DomainRuleCachArrayOutput values.
+// You can construct a concrete instance of `DomainRuleCachArrayInput` via:
 //
-//          CdnDomainRuleCachArray{ CdnDomainRuleCachArgs{...} }
-type CdnDomainRuleCachArrayInput interface {
+//          DomainRuleCachArray{ DomainRuleCachArgs{...} }
+type DomainRuleCachArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainRuleCachArrayOutput() CdnDomainRuleCachArrayOutput
-	ToCdnDomainRuleCachArrayOutputWithContext(context.Context) CdnDomainRuleCachArrayOutput
+	ToDomainRuleCachArrayOutput() DomainRuleCachArrayOutput
+	ToDomainRuleCachArrayOutputWithContext(context.Context) DomainRuleCachArrayOutput
 }
 
-type CdnDomainRuleCachArray []CdnDomainRuleCachInput
+type DomainRuleCachArray []DomainRuleCachInput
 
-func (CdnDomainRuleCachArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainRuleCach)(nil)).Elem()
+func (DomainRuleCachArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRuleCach)(nil)).Elem()
 }
 
-func (i CdnDomainRuleCachArray) ToCdnDomainRuleCachArrayOutput() CdnDomainRuleCachArrayOutput {
-	return i.ToCdnDomainRuleCachArrayOutputWithContext(context.Background())
+func (i DomainRuleCachArray) ToDomainRuleCachArrayOutput() DomainRuleCachArrayOutput {
+	return i.ToDomainRuleCachArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainRuleCachArray) ToCdnDomainRuleCachArrayOutputWithContext(ctx context.Context) CdnDomainRuleCachArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainRuleCachArrayOutput)
+func (i DomainRuleCachArray) ToDomainRuleCachArrayOutputWithContext(ctx context.Context) DomainRuleCachArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRuleCachArrayOutput)
 }
 
-type CdnDomainRuleCachOutput struct{ *pulumi.OutputState }
+type DomainRuleCachOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRuleCachOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainRuleCach)(nil)).Elem()
+func (DomainRuleCachOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRuleCach)(nil)).Elem()
 }
 
-func (o CdnDomainRuleCachOutput) ToCdnDomainRuleCachOutput() CdnDomainRuleCachOutput {
+func (o DomainRuleCachOutput) ToDomainRuleCachOutput() DomainRuleCachOutput {
 	return o
 }
 
-func (o CdnDomainRuleCachOutput) ToCdnDomainRuleCachOutputWithContext(ctx context.Context) CdnDomainRuleCachOutput {
+func (o DomainRuleCachOutput) ToDomainRuleCachOutputWithContext(ctx context.Context) DomainRuleCachOutput {
 	return o
 }
 
-func (o CdnDomainRuleCachOutput) CacheTime() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) int { return v.CacheTime }).(pulumi.IntOutput)
+// Cache expiration time setting, the unit is second, the maximum can be set to 365 days.
+func (o DomainRuleCachOutput) CacheTime() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainRuleCach) int { return v.CacheTime }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainRuleCachOutput) CompareMaxAge() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.CompareMaxAge }).(pulumi.StringPtrOutput)
+// Advanced cache expiration configuration. When it is turned on, it will compare the max-age value returned by the origin site with the cache expiration time set in CacheRules, and take the minimum value to cache at the node. Valid values are `on` and `off`. Default value is `off`.
+func (o DomainRuleCachOutput) CompareMaxAge() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.CompareMaxAge }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainRuleCachOutput) FollowOriginSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.FollowOriginSwitch }).(pulumi.StringPtrOutput)
+// Follow the source station configuration switch. Valid values are `on` and `off`.
+func (o DomainRuleCachOutput) FollowOriginSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.FollowOriginSwitch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainRuleCachOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.IgnoreCacheControl }).(pulumi.StringPtrOutput)
+// Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules. Valid values are `on` and `off`. Default value is `off`.
+func (o DomainRuleCachOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.IgnoreCacheControl }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainRuleCachOutput) IgnoreSetCookie() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.IgnoreSetCookie }).(pulumi.StringPtrOutput)
+// Ignore the Set-Cookie header of the origin site. Valid values are `on` and `off`. Default value is `off`. This parameter is for white-list customer.
+func (o DomainRuleCachOutput) IgnoreSetCookie() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.IgnoreSetCookie }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainRuleCachOutput) NoCacheSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.NoCacheSwitch }).(pulumi.StringPtrOutput)
+// Cache configuration switch. Valid values are `on` and `off`.
+func (o DomainRuleCachOutput) NoCacheSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.NoCacheSwitch }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainRuleCachOutput) ReValidate() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.ReValidate }).(pulumi.StringPtrOutput)
+// Always check back to origin. Valid values are `on` and `off`. Default value is `off`.
+func (o DomainRuleCachOutput) ReValidate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.ReValidate }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainRuleCachOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
+func (o DomainRuleCachOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainRuleCach) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o CdnDomainRuleCachOutput) RuleType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.RuleType }).(pulumi.StringPtrOutput)
+// Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+func (o DomainRuleCachOutput) RuleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.RuleType }).(pulumi.StringPtrOutput)
 }
 
-func (o CdnDomainRuleCachOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CdnDomainRuleCach) *string { return v.Switch }).(pulumi.StringPtrOutput)
+// Cache configuration switch. Valid values are `on` and `off`.
+func (o DomainRuleCachOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainRuleCach) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainRuleCachArrayOutput struct{ *pulumi.OutputState }
+type DomainRuleCachArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainRuleCachArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainRuleCach)(nil)).Elem()
+func (DomainRuleCachArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRuleCach)(nil)).Elem()
 }
 
-func (o CdnDomainRuleCachArrayOutput) ToCdnDomainRuleCachArrayOutput() CdnDomainRuleCachArrayOutput {
+func (o DomainRuleCachArrayOutput) ToDomainRuleCachArrayOutput() DomainRuleCachArrayOutput {
 	return o
 }
 
-func (o CdnDomainRuleCachArrayOutput) ToCdnDomainRuleCachArrayOutputWithContext(ctx context.Context) CdnDomainRuleCachArrayOutput {
+func (o DomainRuleCachArrayOutput) ToDomainRuleCachArrayOutputWithContext(ctx context.Context) DomainRuleCachArrayOutput {
 	return o
 }
 
-func (o CdnDomainRuleCachArrayOutput) Index(i pulumi.IntInput) CdnDomainRuleCachOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainRuleCach {
-		return vs[0].([]CdnDomainRuleCach)[vs[1].(int)]
-	}).(CdnDomainRuleCachOutput)
+func (o DomainRuleCachArrayOutput) Index(i pulumi.IntInput) DomainRuleCachOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainRuleCach {
+		return vs[0].([]DomainRuleCach)[vs[1].(int)]
+	}).(DomainRuleCachOutput)
 }
 
-type CdnDomainStatusCodeCache struct {
-	CacheRules []CdnDomainStatusCodeCacheCacheRule `pulumi:"cacheRules"`
-	Switch     string                              `pulumi:"switch"`
+type DomainStatusCodeCache struct {
+	// List of cache rule.
+	CacheRules []DomainStatusCodeCacheCacheRule `pulumi:"cacheRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
 }
 
-// CdnDomainStatusCodeCacheInput is an input type that accepts CdnDomainStatusCodeCacheArgs and CdnDomainStatusCodeCacheOutput values.
-// You can construct a concrete instance of `CdnDomainStatusCodeCacheInput` via:
+// DomainStatusCodeCacheInput is an input type that accepts DomainStatusCodeCacheArgs and DomainStatusCodeCacheOutput values.
+// You can construct a concrete instance of `DomainStatusCodeCacheInput` via:
 //
-//          CdnDomainStatusCodeCacheArgs{...}
-type CdnDomainStatusCodeCacheInput interface {
+//          DomainStatusCodeCacheArgs{...}
+type DomainStatusCodeCacheInput interface {
 	pulumi.Input
 
-	ToCdnDomainStatusCodeCacheOutput() CdnDomainStatusCodeCacheOutput
-	ToCdnDomainStatusCodeCacheOutputWithContext(context.Context) CdnDomainStatusCodeCacheOutput
+	ToDomainStatusCodeCacheOutput() DomainStatusCodeCacheOutput
+	ToDomainStatusCodeCacheOutputWithContext(context.Context) DomainStatusCodeCacheOutput
 }
 
-type CdnDomainStatusCodeCacheArgs struct {
-	CacheRules CdnDomainStatusCodeCacheCacheRuleArrayInput `pulumi:"cacheRules"`
-	Switch     pulumi.StringInput                          `pulumi:"switch"`
+type DomainStatusCodeCacheArgs struct {
+	// List of cache rule.
+	CacheRules DomainStatusCodeCacheCacheRuleArrayInput `pulumi:"cacheRules"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (CdnDomainStatusCodeCacheArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainStatusCodeCache)(nil)).Elem()
+func (DomainStatusCodeCacheArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainStatusCodeCache)(nil)).Elem()
 }
 
-func (i CdnDomainStatusCodeCacheArgs) ToCdnDomainStatusCodeCacheOutput() CdnDomainStatusCodeCacheOutput {
-	return i.ToCdnDomainStatusCodeCacheOutputWithContext(context.Background())
+func (i DomainStatusCodeCacheArgs) ToDomainStatusCodeCacheOutput() DomainStatusCodeCacheOutput {
+	return i.ToDomainStatusCodeCacheOutputWithContext(context.Background())
 }
 
-func (i CdnDomainStatusCodeCacheArgs) ToCdnDomainStatusCodeCacheOutputWithContext(ctx context.Context) CdnDomainStatusCodeCacheOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainStatusCodeCacheOutput)
+func (i DomainStatusCodeCacheArgs) ToDomainStatusCodeCacheOutputWithContext(ctx context.Context) DomainStatusCodeCacheOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainStatusCodeCacheOutput)
 }
 
-func (i CdnDomainStatusCodeCacheArgs) ToCdnDomainStatusCodeCachePtrOutput() CdnDomainStatusCodeCachePtrOutput {
-	return i.ToCdnDomainStatusCodeCachePtrOutputWithContext(context.Background())
+func (i DomainStatusCodeCacheArgs) ToDomainStatusCodeCachePtrOutput() DomainStatusCodeCachePtrOutput {
+	return i.ToDomainStatusCodeCachePtrOutputWithContext(context.Background())
 }
 
-func (i CdnDomainStatusCodeCacheArgs) ToCdnDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) CdnDomainStatusCodeCachePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainStatusCodeCacheOutput).ToCdnDomainStatusCodeCachePtrOutputWithContext(ctx)
+func (i DomainStatusCodeCacheArgs) ToDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) DomainStatusCodeCachePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainStatusCodeCacheOutput).ToDomainStatusCodeCachePtrOutputWithContext(ctx)
 }
 
-// CdnDomainStatusCodeCachePtrInput is an input type that accepts CdnDomainStatusCodeCacheArgs, CdnDomainStatusCodeCachePtr and CdnDomainStatusCodeCachePtrOutput values.
-// You can construct a concrete instance of `CdnDomainStatusCodeCachePtrInput` via:
+// DomainStatusCodeCachePtrInput is an input type that accepts DomainStatusCodeCacheArgs, DomainStatusCodeCachePtr and DomainStatusCodeCachePtrOutput values.
+// You can construct a concrete instance of `DomainStatusCodeCachePtrInput` via:
 //
-//          CdnDomainStatusCodeCacheArgs{...}
+//          DomainStatusCodeCacheArgs{...}
 //
 //  or:
 //
 //          nil
-type CdnDomainStatusCodeCachePtrInput interface {
+type DomainStatusCodeCachePtrInput interface {
 	pulumi.Input
 
-	ToCdnDomainStatusCodeCachePtrOutput() CdnDomainStatusCodeCachePtrOutput
-	ToCdnDomainStatusCodeCachePtrOutputWithContext(context.Context) CdnDomainStatusCodeCachePtrOutput
+	ToDomainStatusCodeCachePtrOutput() DomainStatusCodeCachePtrOutput
+	ToDomainStatusCodeCachePtrOutputWithContext(context.Context) DomainStatusCodeCachePtrOutput
 }
 
-type cdnDomainStatusCodeCachePtrType CdnDomainStatusCodeCacheArgs
+type domainStatusCodeCachePtrType DomainStatusCodeCacheArgs
 
-func CdnDomainStatusCodeCachePtr(v *CdnDomainStatusCodeCacheArgs) CdnDomainStatusCodeCachePtrInput {
-	return (*cdnDomainStatusCodeCachePtrType)(v)
+func DomainStatusCodeCachePtr(v *DomainStatusCodeCacheArgs) DomainStatusCodeCachePtrInput {
+	return (*domainStatusCodeCachePtrType)(v)
 }
 
-func (*cdnDomainStatusCodeCachePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainStatusCodeCache)(nil)).Elem()
+func (*domainStatusCodeCachePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainStatusCodeCache)(nil)).Elem()
 }
 
-func (i *cdnDomainStatusCodeCachePtrType) ToCdnDomainStatusCodeCachePtrOutput() CdnDomainStatusCodeCachePtrOutput {
-	return i.ToCdnDomainStatusCodeCachePtrOutputWithContext(context.Background())
+func (i *domainStatusCodeCachePtrType) ToDomainStatusCodeCachePtrOutput() DomainStatusCodeCachePtrOutput {
+	return i.ToDomainStatusCodeCachePtrOutputWithContext(context.Background())
 }
 
-func (i *cdnDomainStatusCodeCachePtrType) ToCdnDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) CdnDomainStatusCodeCachePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainStatusCodeCachePtrOutput)
+func (i *domainStatusCodeCachePtrType) ToDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) DomainStatusCodeCachePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainStatusCodeCachePtrOutput)
 }
 
-type CdnDomainStatusCodeCacheOutput struct{ *pulumi.OutputState }
+type DomainStatusCodeCacheOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainStatusCodeCacheOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainStatusCodeCache)(nil)).Elem()
+func (DomainStatusCodeCacheOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainStatusCodeCache)(nil)).Elem()
 }
 
-func (o CdnDomainStatusCodeCacheOutput) ToCdnDomainStatusCodeCacheOutput() CdnDomainStatusCodeCacheOutput {
+func (o DomainStatusCodeCacheOutput) ToDomainStatusCodeCacheOutput() DomainStatusCodeCacheOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCacheOutput) ToCdnDomainStatusCodeCacheOutputWithContext(ctx context.Context) CdnDomainStatusCodeCacheOutput {
+func (o DomainStatusCodeCacheOutput) ToDomainStatusCodeCacheOutputWithContext(ctx context.Context) DomainStatusCodeCacheOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCacheOutput) ToCdnDomainStatusCodeCachePtrOutput() CdnDomainStatusCodeCachePtrOutput {
-	return o.ToCdnDomainStatusCodeCachePtrOutputWithContext(context.Background())
+func (o DomainStatusCodeCacheOutput) ToDomainStatusCodeCachePtrOutput() DomainStatusCodeCachePtrOutput {
+	return o.ToDomainStatusCodeCachePtrOutputWithContext(context.Background())
 }
 
-func (o CdnDomainStatusCodeCacheOutput) ToCdnDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) CdnDomainStatusCodeCachePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CdnDomainStatusCodeCache) *CdnDomainStatusCodeCache {
+func (o DomainStatusCodeCacheOutput) ToDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) DomainStatusCodeCachePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainStatusCodeCache) *DomainStatusCodeCache {
 		return &v
-	}).(CdnDomainStatusCodeCachePtrOutput)
+	}).(DomainStatusCodeCachePtrOutput)
 }
 
-func (o CdnDomainStatusCodeCacheOutput) CacheRules() CdnDomainStatusCodeCacheCacheRuleArrayOutput {
-	return o.ApplyT(func(v CdnDomainStatusCodeCache) []CdnDomainStatusCodeCacheCacheRule { return v.CacheRules }).(CdnDomainStatusCodeCacheCacheRuleArrayOutput)
+// List of cache rule.
+func (o DomainStatusCodeCacheOutput) CacheRules() DomainStatusCodeCacheCacheRuleArrayOutput {
+	return o.ApplyT(func(v DomainStatusCodeCache) []DomainStatusCodeCacheCacheRule { return v.CacheRules }).(DomainStatusCodeCacheCacheRuleArrayOutput)
 }
 
-func (o CdnDomainStatusCodeCacheOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainStatusCodeCache) string { return v.Switch }).(pulumi.StringOutput)
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainStatusCodeCacheOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainStatusCodeCache) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type CdnDomainStatusCodeCachePtrOutput struct{ *pulumi.OutputState }
+type DomainStatusCodeCachePtrOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainStatusCodeCachePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CdnDomainStatusCodeCache)(nil)).Elem()
+func (DomainStatusCodeCachePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainStatusCodeCache)(nil)).Elem()
 }
 
-func (o CdnDomainStatusCodeCachePtrOutput) ToCdnDomainStatusCodeCachePtrOutput() CdnDomainStatusCodeCachePtrOutput {
+func (o DomainStatusCodeCachePtrOutput) ToDomainStatusCodeCachePtrOutput() DomainStatusCodeCachePtrOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCachePtrOutput) ToCdnDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) CdnDomainStatusCodeCachePtrOutput {
+func (o DomainStatusCodeCachePtrOutput) ToDomainStatusCodeCachePtrOutputWithContext(ctx context.Context) DomainStatusCodeCachePtrOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCachePtrOutput) Elem() CdnDomainStatusCodeCacheOutput {
-	return o.ApplyT(func(v *CdnDomainStatusCodeCache) CdnDomainStatusCodeCache {
+func (o DomainStatusCodeCachePtrOutput) Elem() DomainStatusCodeCacheOutput {
+	return o.ApplyT(func(v *DomainStatusCodeCache) DomainStatusCodeCache {
 		if v != nil {
 			return *v
 		}
-		var ret CdnDomainStatusCodeCache
+		var ret DomainStatusCodeCache
 		return ret
-	}).(CdnDomainStatusCodeCacheOutput)
+	}).(DomainStatusCodeCacheOutput)
 }
 
-func (o CdnDomainStatusCodeCachePtrOutput) CacheRules() CdnDomainStatusCodeCacheCacheRuleArrayOutput {
-	return o.ApplyT(func(v *CdnDomainStatusCodeCache) []CdnDomainStatusCodeCacheCacheRule {
+// List of cache rule.
+func (o DomainStatusCodeCachePtrOutput) CacheRules() DomainStatusCodeCacheCacheRuleArrayOutput {
+	return o.ApplyT(func(v *DomainStatusCodeCache) []DomainStatusCodeCacheCacheRule {
 		if v == nil {
 			return nil
 		}
 		return v.CacheRules
-	}).(CdnDomainStatusCodeCacheCacheRuleArrayOutput)
+	}).(DomainStatusCodeCacheCacheRuleArrayOutput)
 }
 
-func (o CdnDomainStatusCodeCachePtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CdnDomainStatusCodeCache) *string {
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainStatusCodeCachePtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainStatusCodeCache) *string {
 		if v == nil {
 			return nil
 		}
@@ -6201,1087 +6795,1523 @@ func (o CdnDomainStatusCodeCachePtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CdnDomainStatusCodeCacheCacheRule struct {
-	CacheTime  int    `pulumi:"cacheTime"`
+type DomainStatusCodeCacheCacheRule struct {
+	// Status code cache expiration time (in seconds).
+	CacheTime int `pulumi:"cacheTime"`
+	// Code of status cache. available values: `403`, `404`.
 	StatusCode string `pulumi:"statusCode"`
 }
 
-// CdnDomainStatusCodeCacheCacheRuleInput is an input type that accepts CdnDomainStatusCodeCacheCacheRuleArgs and CdnDomainStatusCodeCacheCacheRuleOutput values.
-// You can construct a concrete instance of `CdnDomainStatusCodeCacheCacheRuleInput` via:
+// DomainStatusCodeCacheCacheRuleInput is an input type that accepts DomainStatusCodeCacheCacheRuleArgs and DomainStatusCodeCacheCacheRuleOutput values.
+// You can construct a concrete instance of `DomainStatusCodeCacheCacheRuleInput` via:
 //
-//          CdnDomainStatusCodeCacheCacheRuleArgs{...}
-type CdnDomainStatusCodeCacheCacheRuleInput interface {
+//          DomainStatusCodeCacheCacheRuleArgs{...}
+type DomainStatusCodeCacheCacheRuleInput interface {
 	pulumi.Input
 
-	ToCdnDomainStatusCodeCacheCacheRuleOutput() CdnDomainStatusCodeCacheCacheRuleOutput
-	ToCdnDomainStatusCodeCacheCacheRuleOutputWithContext(context.Context) CdnDomainStatusCodeCacheCacheRuleOutput
+	ToDomainStatusCodeCacheCacheRuleOutput() DomainStatusCodeCacheCacheRuleOutput
+	ToDomainStatusCodeCacheCacheRuleOutputWithContext(context.Context) DomainStatusCodeCacheCacheRuleOutput
 }
 
-type CdnDomainStatusCodeCacheCacheRuleArgs struct {
-	CacheTime  pulumi.IntInput    `pulumi:"cacheTime"`
+type DomainStatusCodeCacheCacheRuleArgs struct {
+	// Status code cache expiration time (in seconds).
+	CacheTime pulumi.IntInput `pulumi:"cacheTime"`
+	// Code of status cache. available values: `403`, `404`.
 	StatusCode pulumi.StringInput `pulumi:"statusCode"`
 }
 
-func (CdnDomainStatusCodeCacheCacheRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainStatusCodeCacheCacheRule)(nil)).Elem()
+func (DomainStatusCodeCacheCacheRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainStatusCodeCacheCacheRule)(nil)).Elem()
 }
 
-func (i CdnDomainStatusCodeCacheCacheRuleArgs) ToCdnDomainStatusCodeCacheCacheRuleOutput() CdnDomainStatusCodeCacheCacheRuleOutput {
-	return i.ToCdnDomainStatusCodeCacheCacheRuleOutputWithContext(context.Background())
+func (i DomainStatusCodeCacheCacheRuleArgs) ToDomainStatusCodeCacheCacheRuleOutput() DomainStatusCodeCacheCacheRuleOutput {
+	return i.ToDomainStatusCodeCacheCacheRuleOutputWithContext(context.Background())
 }
 
-func (i CdnDomainStatusCodeCacheCacheRuleArgs) ToCdnDomainStatusCodeCacheCacheRuleOutputWithContext(ctx context.Context) CdnDomainStatusCodeCacheCacheRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainStatusCodeCacheCacheRuleOutput)
+func (i DomainStatusCodeCacheCacheRuleArgs) ToDomainStatusCodeCacheCacheRuleOutputWithContext(ctx context.Context) DomainStatusCodeCacheCacheRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainStatusCodeCacheCacheRuleOutput)
 }
 
-// CdnDomainStatusCodeCacheCacheRuleArrayInput is an input type that accepts CdnDomainStatusCodeCacheCacheRuleArray and CdnDomainStatusCodeCacheCacheRuleArrayOutput values.
-// You can construct a concrete instance of `CdnDomainStatusCodeCacheCacheRuleArrayInput` via:
+// DomainStatusCodeCacheCacheRuleArrayInput is an input type that accepts DomainStatusCodeCacheCacheRuleArray and DomainStatusCodeCacheCacheRuleArrayOutput values.
+// You can construct a concrete instance of `DomainStatusCodeCacheCacheRuleArrayInput` via:
 //
-//          CdnDomainStatusCodeCacheCacheRuleArray{ CdnDomainStatusCodeCacheCacheRuleArgs{...} }
-type CdnDomainStatusCodeCacheCacheRuleArrayInput interface {
+//          DomainStatusCodeCacheCacheRuleArray{ DomainStatusCodeCacheCacheRuleArgs{...} }
+type DomainStatusCodeCacheCacheRuleArrayInput interface {
 	pulumi.Input
 
-	ToCdnDomainStatusCodeCacheCacheRuleArrayOutput() CdnDomainStatusCodeCacheCacheRuleArrayOutput
-	ToCdnDomainStatusCodeCacheCacheRuleArrayOutputWithContext(context.Context) CdnDomainStatusCodeCacheCacheRuleArrayOutput
+	ToDomainStatusCodeCacheCacheRuleArrayOutput() DomainStatusCodeCacheCacheRuleArrayOutput
+	ToDomainStatusCodeCacheCacheRuleArrayOutputWithContext(context.Context) DomainStatusCodeCacheCacheRuleArrayOutput
 }
 
-type CdnDomainStatusCodeCacheCacheRuleArray []CdnDomainStatusCodeCacheCacheRuleInput
+type DomainStatusCodeCacheCacheRuleArray []DomainStatusCodeCacheCacheRuleInput
 
-func (CdnDomainStatusCodeCacheCacheRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainStatusCodeCacheCacheRule)(nil)).Elem()
+func (DomainStatusCodeCacheCacheRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainStatusCodeCacheCacheRule)(nil)).Elem()
 }
 
-func (i CdnDomainStatusCodeCacheCacheRuleArray) ToCdnDomainStatusCodeCacheCacheRuleArrayOutput() CdnDomainStatusCodeCacheCacheRuleArrayOutput {
-	return i.ToCdnDomainStatusCodeCacheCacheRuleArrayOutputWithContext(context.Background())
+func (i DomainStatusCodeCacheCacheRuleArray) ToDomainStatusCodeCacheCacheRuleArrayOutput() DomainStatusCodeCacheCacheRuleArrayOutput {
+	return i.ToDomainStatusCodeCacheCacheRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CdnDomainStatusCodeCacheCacheRuleArray) ToCdnDomainStatusCodeCacheCacheRuleArrayOutputWithContext(ctx context.Context) CdnDomainStatusCodeCacheCacheRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CdnDomainStatusCodeCacheCacheRuleArrayOutput)
+func (i DomainStatusCodeCacheCacheRuleArray) ToDomainStatusCodeCacheCacheRuleArrayOutputWithContext(ctx context.Context) DomainStatusCodeCacheCacheRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainStatusCodeCacheCacheRuleArrayOutput)
 }
 
-type CdnDomainStatusCodeCacheCacheRuleOutput struct{ *pulumi.OutputState }
+type DomainStatusCodeCacheCacheRuleOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainStatusCodeCacheCacheRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CdnDomainStatusCodeCacheCacheRule)(nil)).Elem()
+func (DomainStatusCodeCacheCacheRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainStatusCodeCacheCacheRule)(nil)).Elem()
 }
 
-func (o CdnDomainStatusCodeCacheCacheRuleOutput) ToCdnDomainStatusCodeCacheCacheRuleOutput() CdnDomainStatusCodeCacheCacheRuleOutput {
+func (o DomainStatusCodeCacheCacheRuleOutput) ToDomainStatusCodeCacheCacheRuleOutput() DomainStatusCodeCacheCacheRuleOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCacheCacheRuleOutput) ToCdnDomainStatusCodeCacheCacheRuleOutputWithContext(ctx context.Context) CdnDomainStatusCodeCacheCacheRuleOutput {
+func (o DomainStatusCodeCacheCacheRuleOutput) ToDomainStatusCodeCacheCacheRuleOutputWithContext(ctx context.Context) DomainStatusCodeCacheCacheRuleOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCacheCacheRuleOutput) CacheTime() pulumi.IntOutput {
-	return o.ApplyT(func(v CdnDomainStatusCodeCacheCacheRule) int { return v.CacheTime }).(pulumi.IntOutput)
+// Status code cache expiration time (in seconds).
+func (o DomainStatusCodeCacheCacheRuleOutput) CacheTime() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainStatusCodeCacheCacheRule) int { return v.CacheTime }).(pulumi.IntOutput)
 }
 
-func (o CdnDomainStatusCodeCacheCacheRuleOutput) StatusCode() pulumi.StringOutput {
-	return o.ApplyT(func(v CdnDomainStatusCodeCacheCacheRule) string { return v.StatusCode }).(pulumi.StringOutput)
+// Code of status cache. available values: `403`, `404`.
+func (o DomainStatusCodeCacheCacheRuleOutput) StatusCode() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainStatusCodeCacheCacheRule) string { return v.StatusCode }).(pulumi.StringOutput)
 }
 
-type CdnDomainStatusCodeCacheCacheRuleArrayOutput struct{ *pulumi.OutputState }
+type DomainStatusCodeCacheCacheRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CdnDomainStatusCodeCacheCacheRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CdnDomainStatusCodeCacheCacheRule)(nil)).Elem()
+func (DomainStatusCodeCacheCacheRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainStatusCodeCacheCacheRule)(nil)).Elem()
 }
 
-func (o CdnDomainStatusCodeCacheCacheRuleArrayOutput) ToCdnDomainStatusCodeCacheCacheRuleArrayOutput() CdnDomainStatusCodeCacheCacheRuleArrayOutput {
+func (o DomainStatusCodeCacheCacheRuleArrayOutput) ToDomainStatusCodeCacheCacheRuleArrayOutput() DomainStatusCodeCacheCacheRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCacheCacheRuleArrayOutput) ToCdnDomainStatusCodeCacheCacheRuleArrayOutputWithContext(ctx context.Context) CdnDomainStatusCodeCacheCacheRuleArrayOutput {
+func (o DomainStatusCodeCacheCacheRuleArrayOutput) ToDomainStatusCodeCacheCacheRuleArrayOutputWithContext(ctx context.Context) DomainStatusCodeCacheCacheRuleArrayOutput {
 	return o
 }
 
-func (o CdnDomainStatusCodeCacheCacheRuleArrayOutput) Index(i pulumi.IntInput) CdnDomainStatusCodeCacheCacheRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CdnDomainStatusCodeCacheCacheRule {
-		return vs[0].([]CdnDomainStatusCodeCacheCacheRule)[vs[1].(int)]
-	}).(CdnDomainStatusCodeCacheCacheRuleOutput)
+func (o DomainStatusCodeCacheCacheRuleArrayOutput) Index(i pulumi.IntInput) DomainStatusCodeCacheCacheRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainStatusCodeCacheCacheRule {
+		return vs[0].([]DomainStatusCodeCacheCacheRule)[vs[1].(int)]
+	}).(DomainStatusCodeCacheCacheRuleOutput)
 }
 
-type DomainsDomainList struct {
-	Area              string                           `pulumi:"area"`
-	Cname             string                           `pulumi:"cname"`
-	CreateTime        string                           `pulumi:"createTime"`
-	Domain            string                           `pulumi:"domain"`
-	FullUrlCache      bool                             `pulumi:"fullUrlCache"`
-	HttpsConfigs      []DomainsDomainListHttpsConfig   `pulumi:"httpsConfigs"`
-	Id                string                           `pulumi:"id"`
-	Origins           []DomainsDomainListOrigin        `pulumi:"origins"`
-	ProjectId         int                              `pulumi:"projectId"`
-	RangeOriginSwitch string                           `pulumi:"rangeOriginSwitch"`
-	RequestHeaders    []DomainsDomainListRequestHeader `pulumi:"requestHeaders"`
-	RuleCaches        []DomainsDomainListRuleCach      `pulumi:"ruleCaches"`
-	ServiceType       string                           `pulumi:"serviceType"`
-	Status            string                           `pulumi:"status"`
-	Tags              map[string]interface{}           `pulumi:"tags"`
-	UpdateTime        string                           `pulumi:"updateTime"`
+type UrlPurgePurgeHistory struct {
+	// Purge task create time.
+	CreateTime *string `pulumi:"createTime"`
+	// Purge flush type of `flush` or `delete`.
+	FlushType *string `pulumi:"flushType"`
+	// Purge category in of `url` or `path`.
+	PurgeType *string `pulumi:"purgeType"`
+	// Purge status of `fail`, `done`, `process`.
+	Status *string `pulumi:"status"`
+	// Task id of last operation.
+	TaskId *string `pulumi:"taskId"`
+	// Purge url.
+	Url *string `pulumi:"url"`
 }
 
-// DomainsDomainListInput is an input type that accepts DomainsDomainListArgs and DomainsDomainListOutput values.
-// You can construct a concrete instance of `DomainsDomainListInput` via:
+// UrlPurgePurgeHistoryInput is an input type that accepts UrlPurgePurgeHistoryArgs and UrlPurgePurgeHistoryOutput values.
+// You can construct a concrete instance of `UrlPurgePurgeHistoryInput` via:
 //
-//          DomainsDomainListArgs{...}
-type DomainsDomainListInput interface {
+//          UrlPurgePurgeHistoryArgs{...}
+type UrlPurgePurgeHistoryInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListOutput() DomainsDomainListOutput
-	ToDomainsDomainListOutputWithContext(context.Context) DomainsDomainListOutput
+	ToUrlPurgePurgeHistoryOutput() UrlPurgePurgeHistoryOutput
+	ToUrlPurgePurgeHistoryOutputWithContext(context.Context) UrlPurgePurgeHistoryOutput
 }
 
-type DomainsDomainListArgs struct {
-	Area              pulumi.StringInput                       `pulumi:"area"`
-	Cname             pulumi.StringInput                       `pulumi:"cname"`
-	CreateTime        pulumi.StringInput                       `pulumi:"createTime"`
-	Domain            pulumi.StringInput                       `pulumi:"domain"`
-	FullUrlCache      pulumi.BoolInput                         `pulumi:"fullUrlCache"`
-	HttpsConfigs      DomainsDomainListHttpsConfigArrayInput   `pulumi:"httpsConfigs"`
-	Id                pulumi.StringInput                       `pulumi:"id"`
-	Origins           DomainsDomainListOriginArrayInput        `pulumi:"origins"`
-	ProjectId         pulumi.IntInput                          `pulumi:"projectId"`
-	RangeOriginSwitch pulumi.StringInput                       `pulumi:"rangeOriginSwitch"`
-	RequestHeaders    DomainsDomainListRequestHeaderArrayInput `pulumi:"requestHeaders"`
-	RuleCaches        DomainsDomainListRuleCachArrayInput      `pulumi:"ruleCaches"`
-	ServiceType       pulumi.StringInput                       `pulumi:"serviceType"`
-	Status            pulumi.StringInput                       `pulumi:"status"`
-	Tags              pulumi.MapInput                          `pulumi:"tags"`
-	UpdateTime        pulumi.StringInput                       `pulumi:"updateTime"`
+type UrlPurgePurgeHistoryArgs struct {
+	// Purge task create time.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Purge flush type of `flush` or `delete`.
+	FlushType pulumi.StringPtrInput `pulumi:"flushType"`
+	// Purge category in of `url` or `path`.
+	PurgeType pulumi.StringPtrInput `pulumi:"purgeType"`
+	// Purge status of `fail`, `done`, `process`.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+	// Task id of last operation.
+	TaskId pulumi.StringPtrInput `pulumi:"taskId"`
+	// Purge url.
+	Url pulumi.StringPtrInput `pulumi:"url"`
 }
 
-func (DomainsDomainListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainList)(nil)).Elem()
+func (UrlPurgePurgeHistoryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UrlPurgePurgeHistory)(nil)).Elem()
 }
 
-func (i DomainsDomainListArgs) ToDomainsDomainListOutput() DomainsDomainListOutput {
-	return i.ToDomainsDomainListOutputWithContext(context.Background())
+func (i UrlPurgePurgeHistoryArgs) ToUrlPurgePurgeHistoryOutput() UrlPurgePurgeHistoryOutput {
+	return i.ToUrlPurgePurgeHistoryOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListArgs) ToDomainsDomainListOutputWithContext(ctx context.Context) DomainsDomainListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListOutput)
+func (i UrlPurgePurgeHistoryArgs) ToUrlPurgePurgeHistoryOutputWithContext(ctx context.Context) UrlPurgePurgeHistoryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UrlPurgePurgeHistoryOutput)
 }
 
-// DomainsDomainListArrayInput is an input type that accepts DomainsDomainListArray and DomainsDomainListArrayOutput values.
-// You can construct a concrete instance of `DomainsDomainListArrayInput` via:
+// UrlPurgePurgeHistoryArrayInput is an input type that accepts UrlPurgePurgeHistoryArray and UrlPurgePurgeHistoryArrayOutput values.
+// You can construct a concrete instance of `UrlPurgePurgeHistoryArrayInput` via:
 //
-//          DomainsDomainListArray{ DomainsDomainListArgs{...} }
-type DomainsDomainListArrayInput interface {
+//          UrlPurgePurgeHistoryArray{ UrlPurgePurgeHistoryArgs{...} }
+type UrlPurgePurgeHistoryArrayInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListArrayOutput() DomainsDomainListArrayOutput
-	ToDomainsDomainListArrayOutputWithContext(context.Context) DomainsDomainListArrayOutput
+	ToUrlPurgePurgeHistoryArrayOutput() UrlPurgePurgeHistoryArrayOutput
+	ToUrlPurgePurgeHistoryArrayOutputWithContext(context.Context) UrlPurgePurgeHistoryArrayOutput
 }
 
-type DomainsDomainListArray []DomainsDomainListInput
+type UrlPurgePurgeHistoryArray []UrlPurgePurgeHistoryInput
 
-func (DomainsDomainListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainList)(nil)).Elem()
+func (UrlPurgePurgeHistoryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UrlPurgePurgeHistory)(nil)).Elem()
 }
 
-func (i DomainsDomainListArray) ToDomainsDomainListArrayOutput() DomainsDomainListArrayOutput {
-	return i.ToDomainsDomainListArrayOutputWithContext(context.Background())
+func (i UrlPurgePurgeHistoryArray) ToUrlPurgePurgeHistoryArrayOutput() UrlPurgePurgeHistoryArrayOutput {
+	return i.ToUrlPurgePurgeHistoryArrayOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListArray) ToDomainsDomainListArrayOutputWithContext(ctx context.Context) DomainsDomainListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListArrayOutput)
+func (i UrlPurgePurgeHistoryArray) ToUrlPurgePurgeHistoryArrayOutputWithContext(ctx context.Context) UrlPurgePurgeHistoryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UrlPurgePurgeHistoryArrayOutput)
 }
 
-type DomainsDomainListOutput struct{ *pulumi.OutputState }
+type UrlPurgePurgeHistoryOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainList)(nil)).Elem()
+func (UrlPurgePurgeHistoryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UrlPurgePurgeHistory)(nil)).Elem()
 }
 
-func (o DomainsDomainListOutput) ToDomainsDomainListOutput() DomainsDomainListOutput {
+func (o UrlPurgePurgeHistoryOutput) ToUrlPurgePurgeHistoryOutput() UrlPurgePurgeHistoryOutput {
 	return o
 }
 
-func (o DomainsDomainListOutput) ToDomainsDomainListOutputWithContext(ctx context.Context) DomainsDomainListOutput {
+func (o UrlPurgePurgeHistoryOutput) ToUrlPurgePurgeHistoryOutputWithContext(ctx context.Context) UrlPurgePurgeHistoryOutput {
 	return o
 }
 
-func (o DomainsDomainListOutput) Area() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.Area }).(pulumi.StringOutput)
+// Purge task create time.
+func (o UrlPurgePurgeHistoryOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPurgePurgeHistory) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListOutput) Cname() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.Cname }).(pulumi.StringOutput)
+// Purge flush type of `flush` or `delete`.
+func (o UrlPurgePurgeHistoryOutput) FlushType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPurgePurgeHistory) *string { return v.FlushType }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Purge category in of `url` or `path`.
+func (o UrlPurgePurgeHistoryOutput) PurgeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPurgePurgeHistory) *string { return v.PurgeType }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.Domain }).(pulumi.StringOutput)
+// Purge status of `fail`, `done`, `process`.
+func (o UrlPurgePurgeHistoryOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPurgePurgeHistory) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListOutput) FullUrlCache() pulumi.BoolOutput {
-	return o.ApplyT(func(v DomainsDomainList) bool { return v.FullUrlCache }).(pulumi.BoolOutput)
+// Task id of last operation.
+func (o UrlPurgePurgeHistoryOutput) TaskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPurgePurgeHistory) *string { return v.TaskId }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListOutput) HttpsConfigs() DomainsDomainListHttpsConfigArrayOutput {
-	return o.ApplyT(func(v DomainsDomainList) []DomainsDomainListHttpsConfig { return v.HttpsConfigs }).(DomainsDomainListHttpsConfigArrayOutput)
+// Purge url.
+func (o UrlPurgePurgeHistoryOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPurgePurgeHistory) *string { return v.Url }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.Id }).(pulumi.StringOutput)
+type UrlPurgePurgeHistoryArrayOutput struct{ *pulumi.OutputState }
+
+func (UrlPurgePurgeHistoryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UrlPurgePurgeHistory)(nil)).Elem()
 }
 
-func (o DomainsDomainListOutput) Origins() DomainsDomainListOriginArrayOutput {
-	return o.ApplyT(func(v DomainsDomainList) []DomainsDomainListOrigin { return v.Origins }).(DomainsDomainListOriginArrayOutput)
-}
-
-func (o DomainsDomainListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v DomainsDomainList) int { return v.ProjectId }).(pulumi.IntOutput)
-}
-
-func (o DomainsDomainListOutput) RangeOriginSwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.RangeOriginSwitch }).(pulumi.StringOutput)
-}
-
-func (o DomainsDomainListOutput) RequestHeaders() DomainsDomainListRequestHeaderArrayOutput {
-	return o.ApplyT(func(v DomainsDomainList) []DomainsDomainListRequestHeader { return v.RequestHeaders }).(DomainsDomainListRequestHeaderArrayOutput)
-}
-
-func (o DomainsDomainListOutput) RuleCaches() DomainsDomainListRuleCachArrayOutput {
-	return o.ApplyT(func(v DomainsDomainList) []DomainsDomainListRuleCach { return v.RuleCaches }).(DomainsDomainListRuleCachArrayOutput)
-}
-
-func (o DomainsDomainListOutput) ServiceType() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.ServiceType }).(pulumi.StringOutput)
-}
-
-func (o DomainsDomainListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.Status }).(pulumi.StringOutput)
-}
-
-func (o DomainsDomainListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v DomainsDomainList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-func (o DomainsDomainListOutput) UpdateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainList) string { return v.UpdateTime }).(pulumi.StringOutput)
-}
-
-type DomainsDomainListArrayOutput struct{ *pulumi.OutputState }
-
-func (DomainsDomainListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainList)(nil)).Elem()
-}
-
-func (o DomainsDomainListArrayOutput) ToDomainsDomainListArrayOutput() DomainsDomainListArrayOutput {
+func (o UrlPurgePurgeHistoryArrayOutput) ToUrlPurgePurgeHistoryArrayOutput() UrlPurgePurgeHistoryArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListArrayOutput) ToDomainsDomainListArrayOutputWithContext(ctx context.Context) DomainsDomainListArrayOutput {
+func (o UrlPurgePurgeHistoryArrayOutput) ToUrlPurgePurgeHistoryArrayOutputWithContext(ctx context.Context) UrlPurgePurgeHistoryArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListArrayOutput) Index(i pulumi.IntInput) DomainsDomainListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainsDomainList {
-		return vs[0].([]DomainsDomainList)[vs[1].(int)]
-	}).(DomainsDomainListOutput)
+func (o UrlPurgePurgeHistoryArrayOutput) Index(i pulumi.IntInput) UrlPurgePurgeHistoryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UrlPurgePurgeHistory {
+		return vs[0].([]UrlPurgePurgeHistory)[vs[1].(int)]
+	}).(UrlPurgePurgeHistoryOutput)
 }
 
-type DomainsDomainListHttpsConfig struct {
-	Http2Switch        string `pulumi:"http2Switch"`
-	HttpsSwitch        string `pulumi:"httpsSwitch"`
+type UrlPushPushHistory struct {
+	// Specify push area. NOTE: only push same area cache contents.
+	Area *string `pulumi:"area"`
+	// Push task create time.
+	CreateTime *string `pulumi:"createTime"`
+	// Push progress in percent.
+	Percent *int `pulumi:"percent"`
+	// Push status of `fail`, `done`, `process` or `invalid` (4xx, 5xx response).
+	Status *string `pulumi:"status"`
+	// Push task id.
+	TaskId *string `pulumi:"taskId"`
+	// Push task update time.
+	UpdateTime *string `pulumi:"updateTime"`
+	// Push url.
+	Url *string `pulumi:"url"`
+}
+
+// UrlPushPushHistoryInput is an input type that accepts UrlPushPushHistoryArgs and UrlPushPushHistoryOutput values.
+// You can construct a concrete instance of `UrlPushPushHistoryInput` via:
+//
+//          UrlPushPushHistoryArgs{...}
+type UrlPushPushHistoryInput interface {
+	pulumi.Input
+
+	ToUrlPushPushHistoryOutput() UrlPushPushHistoryOutput
+	ToUrlPushPushHistoryOutputWithContext(context.Context) UrlPushPushHistoryOutput
+}
+
+type UrlPushPushHistoryArgs struct {
+	// Specify push area. NOTE: only push same area cache contents.
+	Area pulumi.StringPtrInput `pulumi:"area"`
+	// Push task create time.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Push progress in percent.
+	Percent pulumi.IntPtrInput `pulumi:"percent"`
+	// Push status of `fail`, `done`, `process` or `invalid` (4xx, 5xx response).
+	Status pulumi.StringPtrInput `pulumi:"status"`
+	// Push task id.
+	TaskId pulumi.StringPtrInput `pulumi:"taskId"`
+	// Push task update time.
+	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
+	// Push url.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+}
+
+func (UrlPushPushHistoryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UrlPushPushHistory)(nil)).Elem()
+}
+
+func (i UrlPushPushHistoryArgs) ToUrlPushPushHistoryOutput() UrlPushPushHistoryOutput {
+	return i.ToUrlPushPushHistoryOutputWithContext(context.Background())
+}
+
+func (i UrlPushPushHistoryArgs) ToUrlPushPushHistoryOutputWithContext(ctx context.Context) UrlPushPushHistoryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UrlPushPushHistoryOutput)
+}
+
+// UrlPushPushHistoryArrayInput is an input type that accepts UrlPushPushHistoryArray and UrlPushPushHistoryArrayOutput values.
+// You can construct a concrete instance of `UrlPushPushHistoryArrayInput` via:
+//
+//          UrlPushPushHistoryArray{ UrlPushPushHistoryArgs{...} }
+type UrlPushPushHistoryArrayInput interface {
+	pulumi.Input
+
+	ToUrlPushPushHistoryArrayOutput() UrlPushPushHistoryArrayOutput
+	ToUrlPushPushHistoryArrayOutputWithContext(context.Context) UrlPushPushHistoryArrayOutput
+}
+
+type UrlPushPushHistoryArray []UrlPushPushHistoryInput
+
+func (UrlPushPushHistoryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UrlPushPushHistory)(nil)).Elem()
+}
+
+func (i UrlPushPushHistoryArray) ToUrlPushPushHistoryArrayOutput() UrlPushPushHistoryArrayOutput {
+	return i.ToUrlPushPushHistoryArrayOutputWithContext(context.Background())
+}
+
+func (i UrlPushPushHistoryArray) ToUrlPushPushHistoryArrayOutputWithContext(ctx context.Context) UrlPushPushHistoryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UrlPushPushHistoryArrayOutput)
+}
+
+type UrlPushPushHistoryOutput struct{ *pulumi.OutputState }
+
+func (UrlPushPushHistoryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UrlPushPushHistory)(nil)).Elem()
+}
+
+func (o UrlPushPushHistoryOutput) ToUrlPushPushHistoryOutput() UrlPushPushHistoryOutput {
+	return o
+}
+
+func (o UrlPushPushHistoryOutput) ToUrlPushPushHistoryOutputWithContext(ctx context.Context) UrlPushPushHistoryOutput {
+	return o
+}
+
+// Specify push area. NOTE: only push same area cache contents.
+func (o UrlPushPushHistoryOutput) Area() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPushPushHistory) *string { return v.Area }).(pulumi.StringPtrOutput)
+}
+
+// Push task create time.
+func (o UrlPushPushHistoryOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPushPushHistory) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// Push progress in percent.
+func (o UrlPushPushHistoryOutput) Percent() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v UrlPushPushHistory) *int { return v.Percent }).(pulumi.IntPtrOutput)
+}
+
+// Push status of `fail`, `done`, `process` or `invalid` (4xx, 5xx response).
+func (o UrlPushPushHistoryOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPushPushHistory) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+// Push task id.
+func (o UrlPushPushHistoryOutput) TaskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPushPushHistory) *string { return v.TaskId }).(pulumi.StringPtrOutput)
+}
+
+// Push task update time.
+func (o UrlPushPushHistoryOutput) UpdateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPushPushHistory) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
+}
+
+// Push url.
+func (o UrlPushPushHistoryOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UrlPushPushHistory) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+type UrlPushPushHistoryArrayOutput struct{ *pulumi.OutputState }
+
+func (UrlPushPushHistoryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UrlPushPushHistory)(nil)).Elem()
+}
+
+func (o UrlPushPushHistoryArrayOutput) ToUrlPushPushHistoryArrayOutput() UrlPushPushHistoryArrayOutput {
+	return o
+}
+
+func (o UrlPushPushHistoryArrayOutput) ToUrlPushPushHistoryArrayOutputWithContext(ctx context.Context) UrlPushPushHistoryArrayOutput {
+	return o
+}
+
+func (o UrlPushPushHistoryArrayOutput) Index(i pulumi.IntInput) UrlPushPushHistoryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UrlPushPushHistory {
+		return vs[0].([]UrlPushPushHistory)[vs[1].(int)]
+	}).(UrlPushPushHistoryOutput)
+}
+
+type GetDomainsDomainList struct {
+	// Acceleration region.
+	Area string `pulumi:"area"`
+	// CNAME address of domain name.
+	Cname string `pulumi:"cname"`
+	// Domain name creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Acceleration domain name.
+	Domain string `pulumi:"domain"`
+	// Whether to enable full-path cache.
+	FullUrlCache bool `pulumi:"fullUrlCache"`
+	// HTTPS acceleration configuration. It's a list and consist of at most one item.
+	HttpsConfigs []GetDomainsDomainListHttpsConfig `pulumi:"httpsConfigs"`
+	// Domain name ID.
+	Id string `pulumi:"id"`
+	// Origin server configuration.
+	Origins []GetDomainsDomainListOrigin `pulumi:"origins"`
+	// The project CDN belongs to.
+	ProjectId int `pulumi:"projectId"`
+	// Sharding back to source configuration switch.
+	RangeOriginSwitch string `pulumi:"rangeOriginSwitch"`
+	// Request header configuration.
+	RequestHeaders []GetDomainsDomainListRequestHeader `pulumi:"requestHeaders"`
+	// Advanced path cache configuration.
+	RuleCaches []GetDomainsDomainListRuleCach `pulumi:"ruleCaches"`
+	// Service type of acceleration domain name. The available value include `web`, `download` and `media`.
+	ServiceType string `pulumi:"serviceType"`
+	// Acceleration service status.
+	Status string `pulumi:"status"`
+	// Tags of cdn domain.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Last modified time of domain name.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetDomainsDomainListInput is an input type that accepts GetDomainsDomainListArgs and GetDomainsDomainListOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListInput` via:
+//
+//          GetDomainsDomainListArgs{...}
+type GetDomainsDomainListInput interface {
+	pulumi.Input
+
+	ToGetDomainsDomainListOutput() GetDomainsDomainListOutput
+	ToGetDomainsDomainListOutputWithContext(context.Context) GetDomainsDomainListOutput
+}
+
+type GetDomainsDomainListArgs struct {
+	// Acceleration region.
+	Area pulumi.StringInput `pulumi:"area"`
+	// CNAME address of domain name.
+	Cname pulumi.StringInput `pulumi:"cname"`
+	// Domain name creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Acceleration domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Whether to enable full-path cache.
+	FullUrlCache pulumi.BoolInput `pulumi:"fullUrlCache"`
+	// HTTPS acceleration configuration. It's a list and consist of at most one item.
+	HttpsConfigs GetDomainsDomainListHttpsConfigArrayInput `pulumi:"httpsConfigs"`
+	// Domain name ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Origin server configuration.
+	Origins GetDomainsDomainListOriginArrayInput `pulumi:"origins"`
+	// The project CDN belongs to.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Sharding back to source configuration switch.
+	RangeOriginSwitch pulumi.StringInput `pulumi:"rangeOriginSwitch"`
+	// Request header configuration.
+	RequestHeaders GetDomainsDomainListRequestHeaderArrayInput `pulumi:"requestHeaders"`
+	// Advanced path cache configuration.
+	RuleCaches GetDomainsDomainListRuleCachArrayInput `pulumi:"ruleCaches"`
+	// Service type of acceleration domain name. The available value include `web`, `download` and `media`.
+	ServiceType pulumi.StringInput `pulumi:"serviceType"`
+	// Acceleration service status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Tags of cdn domain.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Last modified time of domain name.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetDomainsDomainListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainList)(nil)).Elem()
+}
+
+func (i GetDomainsDomainListArgs) ToGetDomainsDomainListOutput() GetDomainsDomainListOutput {
+	return i.ToGetDomainsDomainListOutputWithContext(context.Background())
+}
+
+func (i GetDomainsDomainListArgs) ToGetDomainsDomainListOutputWithContext(ctx context.Context) GetDomainsDomainListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListOutput)
+}
+
+// GetDomainsDomainListArrayInput is an input type that accepts GetDomainsDomainListArray and GetDomainsDomainListArrayOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListArrayInput` via:
+//
+//          GetDomainsDomainListArray{ GetDomainsDomainListArgs{...} }
+type GetDomainsDomainListArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainsDomainListArrayOutput() GetDomainsDomainListArrayOutput
+	ToGetDomainsDomainListArrayOutputWithContext(context.Context) GetDomainsDomainListArrayOutput
+}
+
+type GetDomainsDomainListArray []GetDomainsDomainListInput
+
+func (GetDomainsDomainListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainList)(nil)).Elem()
+}
+
+func (i GetDomainsDomainListArray) ToGetDomainsDomainListArrayOutput() GetDomainsDomainListArrayOutput {
+	return i.ToGetDomainsDomainListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainsDomainListArray) ToGetDomainsDomainListArrayOutputWithContext(ctx context.Context) GetDomainsDomainListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListArrayOutput)
+}
+
+type GetDomainsDomainListOutput struct{ *pulumi.OutputState }
+
+func (GetDomainsDomainListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainList)(nil)).Elem()
+}
+
+func (o GetDomainsDomainListOutput) ToGetDomainsDomainListOutput() GetDomainsDomainListOutput {
+	return o
+}
+
+func (o GetDomainsDomainListOutput) ToGetDomainsDomainListOutputWithContext(ctx context.Context) GetDomainsDomainListOutput {
+	return o
+}
+
+// Acceleration region.
+func (o GetDomainsDomainListOutput) Area() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.Area }).(pulumi.StringOutput)
+}
+
+// CNAME address of domain name.
+func (o GetDomainsDomainListOutput) Cname() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.Cname }).(pulumi.StringOutput)
+}
+
+// Domain name creation time.
+func (o GetDomainsDomainListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Acceleration domain name.
+func (o GetDomainsDomainListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Whether to enable full-path cache.
+func (o GetDomainsDomainListOutput) FullUrlCache() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) bool { return v.FullUrlCache }).(pulumi.BoolOutput)
+}
+
+// HTTPS acceleration configuration. It's a list and consist of at most one item.
+func (o GetDomainsDomainListOutput) HttpsConfigs() GetDomainsDomainListHttpsConfigArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) []GetDomainsDomainListHttpsConfig { return v.HttpsConfigs }).(GetDomainsDomainListHttpsConfigArrayOutput)
+}
+
+// Domain name ID.
+func (o GetDomainsDomainListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Origin server configuration.
+func (o GetDomainsDomainListOutput) Origins() GetDomainsDomainListOriginArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) []GetDomainsDomainListOrigin { return v.Origins }).(GetDomainsDomainListOriginArrayOutput)
+}
+
+// The project CDN belongs to.
+func (o GetDomainsDomainListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Sharding back to source configuration switch.
+func (o GetDomainsDomainListOutput) RangeOriginSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.RangeOriginSwitch }).(pulumi.StringOutput)
+}
+
+// Request header configuration.
+func (o GetDomainsDomainListOutput) RequestHeaders() GetDomainsDomainListRequestHeaderArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) []GetDomainsDomainListRequestHeader { return v.RequestHeaders }).(GetDomainsDomainListRequestHeaderArrayOutput)
+}
+
+// Advanced path cache configuration.
+func (o GetDomainsDomainListOutput) RuleCaches() GetDomainsDomainListRuleCachArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) []GetDomainsDomainListRuleCach { return v.RuleCaches }).(GetDomainsDomainListRuleCachArrayOutput)
+}
+
+// Service type of acceleration domain name. The available value include `web`, `download` and `media`.
+func (o GetDomainsDomainListOutput) ServiceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.ServiceType }).(pulumi.StringOutput)
+}
+
+// Acceleration service status.
+func (o GetDomainsDomainListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Tags of cdn domain.
+func (o GetDomainsDomainListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Last modified time of domain name.
+func (o GetDomainsDomainListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetDomainsDomainListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainsDomainListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainList)(nil)).Elem()
+}
+
+func (o GetDomainsDomainListArrayOutput) ToGetDomainsDomainListArrayOutput() GetDomainsDomainListArrayOutput {
+	return o
+}
+
+func (o GetDomainsDomainListArrayOutput) ToGetDomainsDomainListArrayOutputWithContext(ctx context.Context) GetDomainsDomainListArrayOutput {
+	return o
+}
+
+func (o GetDomainsDomainListArrayOutput) Index(i pulumi.IntInput) GetDomainsDomainListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainsDomainList {
+		return vs[0].([]GetDomainsDomainList)[vs[1].(int)]
+	}).(GetDomainsDomainListOutput)
+}
+
+type GetDomainsDomainListHttpsConfig struct {
+	// HTTP2 configuration switch.
+	Http2Switch string `pulumi:"http2Switch"`
+	// HTTPS configuration. Valid values: `on`, `off` and `processing`.
+	HttpsSwitch string `pulumi:"httpsSwitch"`
+	// OCSP configuration switch.
 	OcspStaplingSwitch string `pulumi:"ocspStaplingSwitch"`
-	SpdySwitch         string `pulumi:"spdySwitch"`
-	VerifyClient       string `pulumi:"verifyClient"`
+	// Spdy configuration switch.
+	SpdySwitch string `pulumi:"spdySwitch"`
+	// Client certificate authentication feature.
+	VerifyClient string `pulumi:"verifyClient"`
 }
 
-// DomainsDomainListHttpsConfigInput is an input type that accepts DomainsDomainListHttpsConfigArgs and DomainsDomainListHttpsConfigOutput values.
-// You can construct a concrete instance of `DomainsDomainListHttpsConfigInput` via:
+// GetDomainsDomainListHttpsConfigInput is an input type that accepts GetDomainsDomainListHttpsConfigArgs and GetDomainsDomainListHttpsConfigOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListHttpsConfigInput` via:
 //
-//          DomainsDomainListHttpsConfigArgs{...}
-type DomainsDomainListHttpsConfigInput interface {
+//          GetDomainsDomainListHttpsConfigArgs{...}
+type GetDomainsDomainListHttpsConfigInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListHttpsConfigOutput() DomainsDomainListHttpsConfigOutput
-	ToDomainsDomainListHttpsConfigOutputWithContext(context.Context) DomainsDomainListHttpsConfigOutput
+	ToGetDomainsDomainListHttpsConfigOutput() GetDomainsDomainListHttpsConfigOutput
+	ToGetDomainsDomainListHttpsConfigOutputWithContext(context.Context) GetDomainsDomainListHttpsConfigOutput
 }
 
-type DomainsDomainListHttpsConfigArgs struct {
-	Http2Switch        pulumi.StringInput `pulumi:"http2Switch"`
-	HttpsSwitch        pulumi.StringInput `pulumi:"httpsSwitch"`
+type GetDomainsDomainListHttpsConfigArgs struct {
+	// HTTP2 configuration switch.
+	Http2Switch pulumi.StringInput `pulumi:"http2Switch"`
+	// HTTPS configuration. Valid values: `on`, `off` and `processing`.
+	HttpsSwitch pulumi.StringInput `pulumi:"httpsSwitch"`
+	// OCSP configuration switch.
 	OcspStaplingSwitch pulumi.StringInput `pulumi:"ocspStaplingSwitch"`
-	SpdySwitch         pulumi.StringInput `pulumi:"spdySwitch"`
-	VerifyClient       pulumi.StringInput `pulumi:"verifyClient"`
+	// Spdy configuration switch.
+	SpdySwitch pulumi.StringInput `pulumi:"spdySwitch"`
+	// Client certificate authentication feature.
+	VerifyClient pulumi.StringInput `pulumi:"verifyClient"`
 }
 
-func (DomainsDomainListHttpsConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListHttpsConfig)(nil)).Elem()
+func (GetDomainsDomainListHttpsConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListHttpsConfig)(nil)).Elem()
 }
 
-func (i DomainsDomainListHttpsConfigArgs) ToDomainsDomainListHttpsConfigOutput() DomainsDomainListHttpsConfigOutput {
-	return i.ToDomainsDomainListHttpsConfigOutputWithContext(context.Background())
+func (i GetDomainsDomainListHttpsConfigArgs) ToGetDomainsDomainListHttpsConfigOutput() GetDomainsDomainListHttpsConfigOutput {
+	return i.ToGetDomainsDomainListHttpsConfigOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListHttpsConfigArgs) ToDomainsDomainListHttpsConfigOutputWithContext(ctx context.Context) DomainsDomainListHttpsConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListHttpsConfigOutput)
+func (i GetDomainsDomainListHttpsConfigArgs) ToGetDomainsDomainListHttpsConfigOutputWithContext(ctx context.Context) GetDomainsDomainListHttpsConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListHttpsConfigOutput)
 }
 
-// DomainsDomainListHttpsConfigArrayInput is an input type that accepts DomainsDomainListHttpsConfigArray and DomainsDomainListHttpsConfigArrayOutput values.
-// You can construct a concrete instance of `DomainsDomainListHttpsConfigArrayInput` via:
+// GetDomainsDomainListHttpsConfigArrayInput is an input type that accepts GetDomainsDomainListHttpsConfigArray and GetDomainsDomainListHttpsConfigArrayOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListHttpsConfigArrayInput` via:
 //
-//          DomainsDomainListHttpsConfigArray{ DomainsDomainListHttpsConfigArgs{...} }
-type DomainsDomainListHttpsConfigArrayInput interface {
+//          GetDomainsDomainListHttpsConfigArray{ GetDomainsDomainListHttpsConfigArgs{...} }
+type GetDomainsDomainListHttpsConfigArrayInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListHttpsConfigArrayOutput() DomainsDomainListHttpsConfigArrayOutput
-	ToDomainsDomainListHttpsConfigArrayOutputWithContext(context.Context) DomainsDomainListHttpsConfigArrayOutput
+	ToGetDomainsDomainListHttpsConfigArrayOutput() GetDomainsDomainListHttpsConfigArrayOutput
+	ToGetDomainsDomainListHttpsConfigArrayOutputWithContext(context.Context) GetDomainsDomainListHttpsConfigArrayOutput
 }
 
-type DomainsDomainListHttpsConfigArray []DomainsDomainListHttpsConfigInput
+type GetDomainsDomainListHttpsConfigArray []GetDomainsDomainListHttpsConfigInput
 
-func (DomainsDomainListHttpsConfigArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListHttpsConfig)(nil)).Elem()
+func (GetDomainsDomainListHttpsConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListHttpsConfig)(nil)).Elem()
 }
 
-func (i DomainsDomainListHttpsConfigArray) ToDomainsDomainListHttpsConfigArrayOutput() DomainsDomainListHttpsConfigArrayOutput {
-	return i.ToDomainsDomainListHttpsConfigArrayOutputWithContext(context.Background())
+func (i GetDomainsDomainListHttpsConfigArray) ToGetDomainsDomainListHttpsConfigArrayOutput() GetDomainsDomainListHttpsConfigArrayOutput {
+	return i.ToGetDomainsDomainListHttpsConfigArrayOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListHttpsConfigArray) ToDomainsDomainListHttpsConfigArrayOutputWithContext(ctx context.Context) DomainsDomainListHttpsConfigArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListHttpsConfigArrayOutput)
+func (i GetDomainsDomainListHttpsConfigArray) ToGetDomainsDomainListHttpsConfigArrayOutputWithContext(ctx context.Context) GetDomainsDomainListHttpsConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListHttpsConfigArrayOutput)
 }
 
-type DomainsDomainListHttpsConfigOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListHttpsConfigOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListHttpsConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListHttpsConfig)(nil)).Elem()
+func (GetDomainsDomainListHttpsConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListHttpsConfig)(nil)).Elem()
 }
 
-func (o DomainsDomainListHttpsConfigOutput) ToDomainsDomainListHttpsConfigOutput() DomainsDomainListHttpsConfigOutput {
+func (o GetDomainsDomainListHttpsConfigOutput) ToGetDomainsDomainListHttpsConfigOutput() GetDomainsDomainListHttpsConfigOutput {
 	return o
 }
 
-func (o DomainsDomainListHttpsConfigOutput) ToDomainsDomainListHttpsConfigOutputWithContext(ctx context.Context) DomainsDomainListHttpsConfigOutput {
+func (o GetDomainsDomainListHttpsConfigOutput) ToGetDomainsDomainListHttpsConfigOutputWithContext(ctx context.Context) GetDomainsDomainListHttpsConfigOutput {
 	return o
 }
 
-func (o DomainsDomainListHttpsConfigOutput) Http2Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListHttpsConfig) string { return v.Http2Switch }).(pulumi.StringOutput)
+// HTTP2 configuration switch.
+func (o GetDomainsDomainListHttpsConfigOutput) Http2Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListHttpsConfig) string { return v.Http2Switch }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListHttpsConfigOutput) HttpsSwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListHttpsConfig) string { return v.HttpsSwitch }).(pulumi.StringOutput)
+// HTTPS configuration. Valid values: `on`, `off` and `processing`.
+func (o GetDomainsDomainListHttpsConfigOutput) HttpsSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListHttpsConfig) string { return v.HttpsSwitch }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListHttpsConfigOutput) OcspStaplingSwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListHttpsConfig) string { return v.OcspStaplingSwitch }).(pulumi.StringOutput)
+// OCSP configuration switch.
+func (o GetDomainsDomainListHttpsConfigOutput) OcspStaplingSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListHttpsConfig) string { return v.OcspStaplingSwitch }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListHttpsConfigOutput) SpdySwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListHttpsConfig) string { return v.SpdySwitch }).(pulumi.StringOutput)
+// Spdy configuration switch.
+func (o GetDomainsDomainListHttpsConfigOutput) SpdySwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListHttpsConfig) string { return v.SpdySwitch }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListHttpsConfigOutput) VerifyClient() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListHttpsConfig) string { return v.VerifyClient }).(pulumi.StringOutput)
+// Client certificate authentication feature.
+func (o GetDomainsDomainListHttpsConfigOutput) VerifyClient() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListHttpsConfig) string { return v.VerifyClient }).(pulumi.StringOutput)
 }
 
-type DomainsDomainListHttpsConfigArrayOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListHttpsConfigArrayOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListHttpsConfigArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListHttpsConfig)(nil)).Elem()
+func (GetDomainsDomainListHttpsConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListHttpsConfig)(nil)).Elem()
 }
 
-func (o DomainsDomainListHttpsConfigArrayOutput) ToDomainsDomainListHttpsConfigArrayOutput() DomainsDomainListHttpsConfigArrayOutput {
+func (o GetDomainsDomainListHttpsConfigArrayOutput) ToGetDomainsDomainListHttpsConfigArrayOutput() GetDomainsDomainListHttpsConfigArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListHttpsConfigArrayOutput) ToDomainsDomainListHttpsConfigArrayOutputWithContext(ctx context.Context) DomainsDomainListHttpsConfigArrayOutput {
+func (o GetDomainsDomainListHttpsConfigArrayOutput) ToGetDomainsDomainListHttpsConfigArrayOutputWithContext(ctx context.Context) GetDomainsDomainListHttpsConfigArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListHttpsConfigArrayOutput) Index(i pulumi.IntInput) DomainsDomainListHttpsConfigOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainsDomainListHttpsConfig {
-		return vs[0].([]DomainsDomainListHttpsConfig)[vs[1].(int)]
-	}).(DomainsDomainListHttpsConfigOutput)
+func (o GetDomainsDomainListHttpsConfigArrayOutput) Index(i pulumi.IntInput) GetDomainsDomainListHttpsConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainsDomainListHttpsConfig {
+		return vs[0].([]GetDomainsDomainListHttpsConfig)[vs[1].(int)]
+	}).(GetDomainsDomainListHttpsConfigOutput)
 }
 
-type DomainsDomainListOrigin struct {
-	BackupOriginLists  []string `pulumi:"backupOriginLists"`
-	BackupOriginType   string   `pulumi:"backupOriginType"`
-	BackupServerName   string   `pulumi:"backupServerName"`
-	CosPrivateAccess   string   `pulumi:"cosPrivateAccess"`
-	OriginLists        []string `pulumi:"originLists"`
-	OriginPullProtocol string   `pulumi:"originPullProtocol"`
-	OriginType         string   `pulumi:"originType"`
-	ServerName         string   `pulumi:"serverName"`
+type GetDomainsDomainListOrigin struct {
+	// Backup origin server list.
+	BackupOriginLists []string `pulumi:"backupOriginLists"`
+	// Backup origin server type.
+	BackupOriginType string `pulumi:"backupOriginType"`
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+	BackupServerName string `pulumi:"backupServerName"`
+	// When OriginType is COS, you can specify if access to private buckets is allowed.
+	CosPrivateAccess string `pulumi:"cosPrivateAccess"`
+	// Master origin server list.
+	OriginLists []string `pulumi:"originLists"`
+	// Origin-pull protocol configuration. Valid values: `http`, `https` and `follow`.
+	OriginPullProtocol string `pulumi:"originPullProtocol"`
+	// Master origin server type.
+	OriginType string `pulumi:"originType"`
+	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	ServerName string `pulumi:"serverName"`
 }
 
-// DomainsDomainListOriginInput is an input type that accepts DomainsDomainListOriginArgs and DomainsDomainListOriginOutput values.
-// You can construct a concrete instance of `DomainsDomainListOriginInput` via:
+// GetDomainsDomainListOriginInput is an input type that accepts GetDomainsDomainListOriginArgs and GetDomainsDomainListOriginOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListOriginInput` via:
 //
-//          DomainsDomainListOriginArgs{...}
-type DomainsDomainListOriginInput interface {
+//          GetDomainsDomainListOriginArgs{...}
+type GetDomainsDomainListOriginInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListOriginOutput() DomainsDomainListOriginOutput
-	ToDomainsDomainListOriginOutputWithContext(context.Context) DomainsDomainListOriginOutput
+	ToGetDomainsDomainListOriginOutput() GetDomainsDomainListOriginOutput
+	ToGetDomainsDomainListOriginOutputWithContext(context.Context) GetDomainsDomainListOriginOutput
 }
 
-type DomainsDomainListOriginArgs struct {
-	BackupOriginLists  pulumi.StringArrayInput `pulumi:"backupOriginLists"`
-	BackupOriginType   pulumi.StringInput      `pulumi:"backupOriginType"`
-	BackupServerName   pulumi.StringInput      `pulumi:"backupServerName"`
-	CosPrivateAccess   pulumi.StringInput      `pulumi:"cosPrivateAccess"`
-	OriginLists        pulumi.StringArrayInput `pulumi:"originLists"`
-	OriginPullProtocol pulumi.StringInput      `pulumi:"originPullProtocol"`
-	OriginType         pulumi.StringInput      `pulumi:"originType"`
-	ServerName         pulumi.StringInput      `pulumi:"serverName"`
+type GetDomainsDomainListOriginArgs struct {
+	// Backup origin server list.
+	BackupOriginLists pulumi.StringArrayInput `pulumi:"backupOriginLists"`
+	// Backup origin server type.
+	BackupOriginType pulumi.StringInput `pulumi:"backupOriginType"`
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+	BackupServerName pulumi.StringInput `pulumi:"backupServerName"`
+	// When OriginType is COS, you can specify if access to private buckets is allowed.
+	CosPrivateAccess pulumi.StringInput `pulumi:"cosPrivateAccess"`
+	// Master origin server list.
+	OriginLists pulumi.StringArrayInput `pulumi:"originLists"`
+	// Origin-pull protocol configuration. Valid values: `http`, `https` and `follow`.
+	OriginPullProtocol pulumi.StringInput `pulumi:"originPullProtocol"`
+	// Master origin server type.
+	OriginType pulumi.StringInput `pulumi:"originType"`
+	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	ServerName pulumi.StringInput `pulumi:"serverName"`
 }
 
-func (DomainsDomainListOriginArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListOrigin)(nil)).Elem()
+func (GetDomainsDomainListOriginArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListOrigin)(nil)).Elem()
 }
 
-func (i DomainsDomainListOriginArgs) ToDomainsDomainListOriginOutput() DomainsDomainListOriginOutput {
-	return i.ToDomainsDomainListOriginOutputWithContext(context.Background())
+func (i GetDomainsDomainListOriginArgs) ToGetDomainsDomainListOriginOutput() GetDomainsDomainListOriginOutput {
+	return i.ToGetDomainsDomainListOriginOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListOriginArgs) ToDomainsDomainListOriginOutputWithContext(ctx context.Context) DomainsDomainListOriginOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListOriginOutput)
+func (i GetDomainsDomainListOriginArgs) ToGetDomainsDomainListOriginOutputWithContext(ctx context.Context) GetDomainsDomainListOriginOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListOriginOutput)
 }
 
-// DomainsDomainListOriginArrayInput is an input type that accepts DomainsDomainListOriginArray and DomainsDomainListOriginArrayOutput values.
-// You can construct a concrete instance of `DomainsDomainListOriginArrayInput` via:
+// GetDomainsDomainListOriginArrayInput is an input type that accepts GetDomainsDomainListOriginArray and GetDomainsDomainListOriginArrayOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListOriginArrayInput` via:
 //
-//          DomainsDomainListOriginArray{ DomainsDomainListOriginArgs{...} }
-type DomainsDomainListOriginArrayInput interface {
+//          GetDomainsDomainListOriginArray{ GetDomainsDomainListOriginArgs{...} }
+type GetDomainsDomainListOriginArrayInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListOriginArrayOutput() DomainsDomainListOriginArrayOutput
-	ToDomainsDomainListOriginArrayOutputWithContext(context.Context) DomainsDomainListOriginArrayOutput
+	ToGetDomainsDomainListOriginArrayOutput() GetDomainsDomainListOriginArrayOutput
+	ToGetDomainsDomainListOriginArrayOutputWithContext(context.Context) GetDomainsDomainListOriginArrayOutput
 }
 
-type DomainsDomainListOriginArray []DomainsDomainListOriginInput
+type GetDomainsDomainListOriginArray []GetDomainsDomainListOriginInput
 
-func (DomainsDomainListOriginArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListOrigin)(nil)).Elem()
+func (GetDomainsDomainListOriginArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListOrigin)(nil)).Elem()
 }
 
-func (i DomainsDomainListOriginArray) ToDomainsDomainListOriginArrayOutput() DomainsDomainListOriginArrayOutput {
-	return i.ToDomainsDomainListOriginArrayOutputWithContext(context.Background())
+func (i GetDomainsDomainListOriginArray) ToGetDomainsDomainListOriginArrayOutput() GetDomainsDomainListOriginArrayOutput {
+	return i.ToGetDomainsDomainListOriginArrayOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListOriginArray) ToDomainsDomainListOriginArrayOutputWithContext(ctx context.Context) DomainsDomainListOriginArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListOriginArrayOutput)
+func (i GetDomainsDomainListOriginArray) ToGetDomainsDomainListOriginArrayOutputWithContext(ctx context.Context) GetDomainsDomainListOriginArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListOriginArrayOutput)
 }
 
-type DomainsDomainListOriginOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListOriginOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListOriginOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListOrigin)(nil)).Elem()
+func (GetDomainsDomainListOriginOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListOrigin)(nil)).Elem()
 }
 
-func (o DomainsDomainListOriginOutput) ToDomainsDomainListOriginOutput() DomainsDomainListOriginOutput {
+func (o GetDomainsDomainListOriginOutput) ToGetDomainsDomainListOriginOutput() GetDomainsDomainListOriginOutput {
 	return o
 }
 
-func (o DomainsDomainListOriginOutput) ToDomainsDomainListOriginOutputWithContext(ctx context.Context) DomainsDomainListOriginOutput {
+func (o GetDomainsDomainListOriginOutput) ToGetDomainsDomainListOriginOutputWithContext(ctx context.Context) GetDomainsDomainListOriginOutput {
 	return o
 }
 
-func (o DomainsDomainListOriginOutput) BackupOriginLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) []string { return v.BackupOriginLists }).(pulumi.StringArrayOutput)
+// Backup origin server list.
+func (o GetDomainsDomainListOriginOutput) BackupOriginLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) []string { return v.BackupOriginLists }).(pulumi.StringArrayOutput)
 }
 
-func (o DomainsDomainListOriginOutput) BackupOriginType() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) string { return v.BackupOriginType }).(pulumi.StringOutput)
+// Backup origin server type.
+func (o GetDomainsDomainListOriginOutput) BackupOriginType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) string { return v.BackupOriginType }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListOriginOutput) BackupServerName() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) string { return v.BackupServerName }).(pulumi.StringOutput)
+// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+func (o GetDomainsDomainListOriginOutput) BackupServerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) string { return v.BackupServerName }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListOriginOutput) CosPrivateAccess() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) string { return v.CosPrivateAccess }).(pulumi.StringOutput)
+// When OriginType is COS, you can specify if access to private buckets is allowed.
+func (o GetDomainsDomainListOriginOutput) CosPrivateAccess() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) string { return v.CosPrivateAccess }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListOriginOutput) OriginLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) []string { return v.OriginLists }).(pulumi.StringArrayOutput)
+// Master origin server list.
+func (o GetDomainsDomainListOriginOutput) OriginLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) []string { return v.OriginLists }).(pulumi.StringArrayOutput)
 }
 
-func (o DomainsDomainListOriginOutput) OriginPullProtocol() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) string { return v.OriginPullProtocol }).(pulumi.StringOutput)
+// Origin-pull protocol configuration. Valid values: `http`, `https` and `follow`.
+func (o GetDomainsDomainListOriginOutput) OriginPullProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) string { return v.OriginPullProtocol }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListOriginOutput) OriginType() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) string { return v.OriginType }).(pulumi.StringOutput)
+// Master origin server type.
+func (o GetDomainsDomainListOriginOutput) OriginType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) string { return v.OriginType }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListOriginOutput) ServerName() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListOrigin) string { return v.ServerName }).(pulumi.StringOutput)
+// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+func (o GetDomainsDomainListOriginOutput) ServerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListOrigin) string { return v.ServerName }).(pulumi.StringOutput)
 }
 
-type DomainsDomainListOriginArrayOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListOriginArrayOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListOriginArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListOrigin)(nil)).Elem()
+func (GetDomainsDomainListOriginArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListOrigin)(nil)).Elem()
 }
 
-func (o DomainsDomainListOriginArrayOutput) ToDomainsDomainListOriginArrayOutput() DomainsDomainListOriginArrayOutput {
+func (o GetDomainsDomainListOriginArrayOutput) ToGetDomainsDomainListOriginArrayOutput() GetDomainsDomainListOriginArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListOriginArrayOutput) ToDomainsDomainListOriginArrayOutputWithContext(ctx context.Context) DomainsDomainListOriginArrayOutput {
+func (o GetDomainsDomainListOriginArrayOutput) ToGetDomainsDomainListOriginArrayOutputWithContext(ctx context.Context) GetDomainsDomainListOriginArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListOriginArrayOutput) Index(i pulumi.IntInput) DomainsDomainListOriginOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainsDomainListOrigin {
-		return vs[0].([]DomainsDomainListOrigin)[vs[1].(int)]
-	}).(DomainsDomainListOriginOutput)
+func (o GetDomainsDomainListOriginArrayOutput) Index(i pulumi.IntInput) GetDomainsDomainListOriginOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainsDomainListOrigin {
+		return vs[0].([]GetDomainsDomainListOrigin)[vs[1].(int)]
+	}).(GetDomainsDomainListOriginOutput)
 }
 
-type DomainsDomainListRequestHeader struct {
-	HeaderRules []DomainsDomainListRequestHeaderHeaderRule `pulumi:"headerRules"`
-	Switch      string                                     `pulumi:"switch"`
+type GetDomainsDomainListRequestHeader struct {
+	// Custom request header configuration rules.
+	HeaderRules []GetDomainsDomainListRequestHeaderHeaderRule `pulumi:"headerRules"`
+	// Cache configuration switch.
+	Switch string `pulumi:"switch"`
 }
 
-// DomainsDomainListRequestHeaderInput is an input type that accepts DomainsDomainListRequestHeaderArgs and DomainsDomainListRequestHeaderOutput values.
-// You can construct a concrete instance of `DomainsDomainListRequestHeaderInput` via:
+// GetDomainsDomainListRequestHeaderInput is an input type that accepts GetDomainsDomainListRequestHeaderArgs and GetDomainsDomainListRequestHeaderOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListRequestHeaderInput` via:
 //
-//          DomainsDomainListRequestHeaderArgs{...}
-type DomainsDomainListRequestHeaderInput interface {
+//          GetDomainsDomainListRequestHeaderArgs{...}
+type GetDomainsDomainListRequestHeaderInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListRequestHeaderOutput() DomainsDomainListRequestHeaderOutput
-	ToDomainsDomainListRequestHeaderOutputWithContext(context.Context) DomainsDomainListRequestHeaderOutput
+	ToGetDomainsDomainListRequestHeaderOutput() GetDomainsDomainListRequestHeaderOutput
+	ToGetDomainsDomainListRequestHeaderOutputWithContext(context.Context) GetDomainsDomainListRequestHeaderOutput
 }
 
-type DomainsDomainListRequestHeaderArgs struct {
-	HeaderRules DomainsDomainListRequestHeaderHeaderRuleArrayInput `pulumi:"headerRules"`
-	Switch      pulumi.StringInput                                 `pulumi:"switch"`
+type GetDomainsDomainListRequestHeaderArgs struct {
+	// Custom request header configuration rules.
+	HeaderRules GetDomainsDomainListRequestHeaderHeaderRuleArrayInput `pulumi:"headerRules"`
+	// Cache configuration switch.
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (DomainsDomainListRequestHeaderArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListRequestHeader)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListRequestHeader)(nil)).Elem()
 }
 
-func (i DomainsDomainListRequestHeaderArgs) ToDomainsDomainListRequestHeaderOutput() DomainsDomainListRequestHeaderOutput {
-	return i.ToDomainsDomainListRequestHeaderOutputWithContext(context.Background())
+func (i GetDomainsDomainListRequestHeaderArgs) ToGetDomainsDomainListRequestHeaderOutput() GetDomainsDomainListRequestHeaderOutput {
+	return i.ToGetDomainsDomainListRequestHeaderOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListRequestHeaderArgs) ToDomainsDomainListRequestHeaderOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListRequestHeaderOutput)
+func (i GetDomainsDomainListRequestHeaderArgs) ToGetDomainsDomainListRequestHeaderOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListRequestHeaderOutput)
 }
 
-// DomainsDomainListRequestHeaderArrayInput is an input type that accepts DomainsDomainListRequestHeaderArray and DomainsDomainListRequestHeaderArrayOutput values.
-// You can construct a concrete instance of `DomainsDomainListRequestHeaderArrayInput` via:
+// GetDomainsDomainListRequestHeaderArrayInput is an input type that accepts GetDomainsDomainListRequestHeaderArray and GetDomainsDomainListRequestHeaderArrayOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListRequestHeaderArrayInput` via:
 //
-//          DomainsDomainListRequestHeaderArray{ DomainsDomainListRequestHeaderArgs{...} }
-type DomainsDomainListRequestHeaderArrayInput interface {
+//          GetDomainsDomainListRequestHeaderArray{ GetDomainsDomainListRequestHeaderArgs{...} }
+type GetDomainsDomainListRequestHeaderArrayInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListRequestHeaderArrayOutput() DomainsDomainListRequestHeaderArrayOutput
-	ToDomainsDomainListRequestHeaderArrayOutputWithContext(context.Context) DomainsDomainListRequestHeaderArrayOutput
+	ToGetDomainsDomainListRequestHeaderArrayOutput() GetDomainsDomainListRequestHeaderArrayOutput
+	ToGetDomainsDomainListRequestHeaderArrayOutputWithContext(context.Context) GetDomainsDomainListRequestHeaderArrayOutput
 }
 
-type DomainsDomainListRequestHeaderArray []DomainsDomainListRequestHeaderInput
+type GetDomainsDomainListRequestHeaderArray []GetDomainsDomainListRequestHeaderInput
 
-func (DomainsDomainListRequestHeaderArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListRequestHeader)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListRequestHeader)(nil)).Elem()
 }
 
-func (i DomainsDomainListRequestHeaderArray) ToDomainsDomainListRequestHeaderArrayOutput() DomainsDomainListRequestHeaderArrayOutput {
-	return i.ToDomainsDomainListRequestHeaderArrayOutputWithContext(context.Background())
+func (i GetDomainsDomainListRequestHeaderArray) ToGetDomainsDomainListRequestHeaderArrayOutput() GetDomainsDomainListRequestHeaderArrayOutput {
+	return i.ToGetDomainsDomainListRequestHeaderArrayOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListRequestHeaderArray) ToDomainsDomainListRequestHeaderArrayOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListRequestHeaderArrayOutput)
+func (i GetDomainsDomainListRequestHeaderArray) ToGetDomainsDomainListRequestHeaderArrayOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListRequestHeaderArrayOutput)
 }
 
-type DomainsDomainListRequestHeaderOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListRequestHeaderOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListRequestHeaderOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListRequestHeader)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListRequestHeader)(nil)).Elem()
 }
 
-func (o DomainsDomainListRequestHeaderOutput) ToDomainsDomainListRequestHeaderOutput() DomainsDomainListRequestHeaderOutput {
+func (o GetDomainsDomainListRequestHeaderOutput) ToGetDomainsDomainListRequestHeaderOutput() GetDomainsDomainListRequestHeaderOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderOutput) ToDomainsDomainListRequestHeaderOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderOutput {
+func (o GetDomainsDomainListRequestHeaderOutput) ToGetDomainsDomainListRequestHeaderOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderOutput) HeaderRules() DomainsDomainListRequestHeaderHeaderRuleArrayOutput {
-	return o.ApplyT(func(v DomainsDomainListRequestHeader) []DomainsDomainListRequestHeaderHeaderRule {
+// Custom request header configuration rules.
+func (o GetDomainsDomainListRequestHeaderOutput) HeaderRules() GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRequestHeader) []GetDomainsDomainListRequestHeaderHeaderRule {
 		return v.HeaderRules
-	}).(DomainsDomainListRequestHeaderHeaderRuleArrayOutput)
+	}).(GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput)
 }
 
-func (o DomainsDomainListRequestHeaderOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRequestHeader) string { return v.Switch }).(pulumi.StringOutput)
+// Cache configuration switch.
+func (o GetDomainsDomainListRequestHeaderOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRequestHeader) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type DomainsDomainListRequestHeaderArrayOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListRequestHeaderArrayOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListRequestHeaderArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListRequestHeader)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListRequestHeader)(nil)).Elem()
 }
 
-func (o DomainsDomainListRequestHeaderArrayOutput) ToDomainsDomainListRequestHeaderArrayOutput() DomainsDomainListRequestHeaderArrayOutput {
+func (o GetDomainsDomainListRequestHeaderArrayOutput) ToGetDomainsDomainListRequestHeaderArrayOutput() GetDomainsDomainListRequestHeaderArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderArrayOutput) ToDomainsDomainListRequestHeaderArrayOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderArrayOutput {
+func (o GetDomainsDomainListRequestHeaderArrayOutput) ToGetDomainsDomainListRequestHeaderArrayOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderArrayOutput) Index(i pulumi.IntInput) DomainsDomainListRequestHeaderOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainsDomainListRequestHeader {
-		return vs[0].([]DomainsDomainListRequestHeader)[vs[1].(int)]
-	}).(DomainsDomainListRequestHeaderOutput)
+func (o GetDomainsDomainListRequestHeaderArrayOutput) Index(i pulumi.IntInput) GetDomainsDomainListRequestHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainsDomainListRequestHeader {
+		return vs[0].([]GetDomainsDomainListRequestHeader)[vs[1].(int)]
+	}).(GetDomainsDomainListRequestHeaderOutput)
 }
 
-type DomainsDomainListRequestHeaderHeaderRule struct {
-	HeaderMode  string   `pulumi:"headerMode"`
-	HeaderName  string   `pulumi:"headerName"`
-	HeaderValue string   `pulumi:"headerValue"`
-	RulePaths   []string `pulumi:"rulePaths"`
-	RuleType    string   `pulumi:"ruleType"`
+type GetDomainsDomainListRequestHeaderHeaderRule struct {
+	// Http header setting method.
+	HeaderMode string `pulumi:"headerMode"`
+	// Http header name.
+	HeaderName string `pulumi:"headerName"`
+	// Http header value.
+	HeaderValue string `pulumi:"headerValue"`
+	// Rule paths.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule type.
+	RuleType string `pulumi:"ruleType"`
 }
 
-// DomainsDomainListRequestHeaderHeaderRuleInput is an input type that accepts DomainsDomainListRequestHeaderHeaderRuleArgs and DomainsDomainListRequestHeaderHeaderRuleOutput values.
-// You can construct a concrete instance of `DomainsDomainListRequestHeaderHeaderRuleInput` via:
+// GetDomainsDomainListRequestHeaderHeaderRuleInput is an input type that accepts GetDomainsDomainListRequestHeaderHeaderRuleArgs and GetDomainsDomainListRequestHeaderHeaderRuleOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListRequestHeaderHeaderRuleInput` via:
 //
-//          DomainsDomainListRequestHeaderHeaderRuleArgs{...}
-type DomainsDomainListRequestHeaderHeaderRuleInput interface {
+//          GetDomainsDomainListRequestHeaderHeaderRuleArgs{...}
+type GetDomainsDomainListRequestHeaderHeaderRuleInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListRequestHeaderHeaderRuleOutput() DomainsDomainListRequestHeaderHeaderRuleOutput
-	ToDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(context.Context) DomainsDomainListRequestHeaderHeaderRuleOutput
+	ToGetDomainsDomainListRequestHeaderHeaderRuleOutput() GetDomainsDomainListRequestHeaderHeaderRuleOutput
+	ToGetDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(context.Context) GetDomainsDomainListRequestHeaderHeaderRuleOutput
 }
 
-type DomainsDomainListRequestHeaderHeaderRuleArgs struct {
-	HeaderMode  pulumi.StringInput      `pulumi:"headerMode"`
-	HeaderName  pulumi.StringInput      `pulumi:"headerName"`
-	HeaderValue pulumi.StringInput      `pulumi:"headerValue"`
-	RulePaths   pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType    pulumi.StringInput      `pulumi:"ruleType"`
+type GetDomainsDomainListRequestHeaderHeaderRuleArgs struct {
+	// Http header setting method.
+	HeaderMode pulumi.StringInput `pulumi:"headerMode"`
+	// Http header name.
+	HeaderName pulumi.StringInput `pulumi:"headerName"`
+	// Http header value.
+	HeaderValue pulumi.StringInput `pulumi:"headerValue"`
+	// Rule paths.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule type.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
 }
 
-func (DomainsDomainListRequestHeaderHeaderRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderHeaderRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (i DomainsDomainListRequestHeaderHeaderRuleArgs) ToDomainsDomainListRequestHeaderHeaderRuleOutput() DomainsDomainListRequestHeaderHeaderRuleOutput {
-	return i.ToDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(context.Background())
+func (i GetDomainsDomainListRequestHeaderHeaderRuleArgs) ToGetDomainsDomainListRequestHeaderHeaderRuleOutput() GetDomainsDomainListRequestHeaderHeaderRuleOutput {
+	return i.ToGetDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListRequestHeaderHeaderRuleArgs) ToDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderHeaderRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListRequestHeaderHeaderRuleOutput)
+func (i GetDomainsDomainListRequestHeaderHeaderRuleArgs) ToGetDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderHeaderRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListRequestHeaderHeaderRuleOutput)
 }
 
-// DomainsDomainListRequestHeaderHeaderRuleArrayInput is an input type that accepts DomainsDomainListRequestHeaderHeaderRuleArray and DomainsDomainListRequestHeaderHeaderRuleArrayOutput values.
-// You can construct a concrete instance of `DomainsDomainListRequestHeaderHeaderRuleArrayInput` via:
+// GetDomainsDomainListRequestHeaderHeaderRuleArrayInput is an input type that accepts GetDomainsDomainListRequestHeaderHeaderRuleArray and GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListRequestHeaderHeaderRuleArrayInput` via:
 //
-//          DomainsDomainListRequestHeaderHeaderRuleArray{ DomainsDomainListRequestHeaderHeaderRuleArgs{...} }
-type DomainsDomainListRequestHeaderHeaderRuleArrayInput interface {
+//          GetDomainsDomainListRequestHeaderHeaderRuleArray{ GetDomainsDomainListRequestHeaderHeaderRuleArgs{...} }
+type GetDomainsDomainListRequestHeaderHeaderRuleArrayInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListRequestHeaderHeaderRuleArrayOutput() DomainsDomainListRequestHeaderHeaderRuleArrayOutput
-	ToDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(context.Context) DomainsDomainListRequestHeaderHeaderRuleArrayOutput
+	ToGetDomainsDomainListRequestHeaderHeaderRuleArrayOutput() GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput
+	ToGetDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(context.Context) GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput
 }
 
-type DomainsDomainListRequestHeaderHeaderRuleArray []DomainsDomainListRequestHeaderHeaderRuleInput
+type GetDomainsDomainListRequestHeaderHeaderRuleArray []GetDomainsDomainListRequestHeaderHeaderRuleInput
 
-func (DomainsDomainListRequestHeaderHeaderRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderHeaderRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (i DomainsDomainListRequestHeaderHeaderRuleArray) ToDomainsDomainListRequestHeaderHeaderRuleArrayOutput() DomainsDomainListRequestHeaderHeaderRuleArrayOutput {
-	return i.ToDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(context.Background())
+func (i GetDomainsDomainListRequestHeaderHeaderRuleArray) ToGetDomainsDomainListRequestHeaderHeaderRuleArrayOutput() GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput {
+	return i.ToGetDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListRequestHeaderHeaderRuleArray) ToDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderHeaderRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListRequestHeaderHeaderRuleArrayOutput)
+func (i GetDomainsDomainListRequestHeaderHeaderRuleArray) ToGetDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput)
 }
 
-type DomainsDomainListRequestHeaderHeaderRuleOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListRequestHeaderHeaderRuleOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListRequestHeaderHeaderRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderHeaderRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleOutput) ToDomainsDomainListRequestHeaderHeaderRuleOutput() DomainsDomainListRequestHeaderHeaderRuleOutput {
+func (o GetDomainsDomainListRequestHeaderHeaderRuleOutput) ToGetDomainsDomainListRequestHeaderHeaderRuleOutput() GetDomainsDomainListRequestHeaderHeaderRuleOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleOutput) ToDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderHeaderRuleOutput {
+func (o GetDomainsDomainListRequestHeaderHeaderRuleOutput) ToGetDomainsDomainListRequestHeaderHeaderRuleOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderHeaderRuleOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleOutput) HeaderMode() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRequestHeaderHeaderRule) string { return v.HeaderMode }).(pulumi.StringOutput)
+// Http header setting method.
+func (o GetDomainsDomainListRequestHeaderHeaderRuleOutput) HeaderMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRequestHeaderHeaderRule) string { return v.HeaderMode }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleOutput) HeaderName() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRequestHeaderHeaderRule) string { return v.HeaderName }).(pulumi.StringOutput)
+// Http header name.
+func (o GetDomainsDomainListRequestHeaderHeaderRuleOutput) HeaderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRequestHeaderHeaderRule) string { return v.HeaderName }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleOutput) HeaderValue() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRequestHeaderHeaderRule) string { return v.HeaderValue }).(pulumi.StringOutput)
+// Http header value.
+func (o GetDomainsDomainListRequestHeaderHeaderRuleOutput) HeaderValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRequestHeaderHeaderRule) string { return v.HeaderValue }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DomainsDomainListRequestHeaderHeaderRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// Rule paths.
+func (o GetDomainsDomainListRequestHeaderHeaderRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRequestHeaderHeaderRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleOutput) RuleType() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRequestHeaderHeaderRule) string { return v.RuleType }).(pulumi.StringOutput)
+// Rule type.
+func (o GetDomainsDomainListRequestHeaderHeaderRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRequestHeaderHeaderRule) string { return v.RuleType }).(pulumi.StringOutput)
 }
 
-type DomainsDomainListRequestHeaderHeaderRuleArrayOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListRequestHeaderHeaderRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
+func (GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListRequestHeaderHeaderRule)(nil)).Elem()
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleArrayOutput) ToDomainsDomainListRequestHeaderHeaderRuleArrayOutput() DomainsDomainListRequestHeaderHeaderRuleArrayOutput {
+func (o GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput) ToGetDomainsDomainListRequestHeaderHeaderRuleArrayOutput() GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleArrayOutput) ToDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) DomainsDomainListRequestHeaderHeaderRuleArrayOutput {
+func (o GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput) ToGetDomainsDomainListRequestHeaderHeaderRuleArrayOutputWithContext(ctx context.Context) GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListRequestHeaderHeaderRuleArrayOutput) Index(i pulumi.IntInput) DomainsDomainListRequestHeaderHeaderRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainsDomainListRequestHeaderHeaderRule {
-		return vs[0].([]DomainsDomainListRequestHeaderHeaderRule)[vs[1].(int)]
-	}).(DomainsDomainListRequestHeaderHeaderRuleOutput)
+func (o GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput) Index(i pulumi.IntInput) GetDomainsDomainListRequestHeaderHeaderRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainsDomainListRequestHeaderHeaderRule {
+		return vs[0].([]GetDomainsDomainListRequestHeaderHeaderRule)[vs[1].(int)]
+	}).(GetDomainsDomainListRequestHeaderHeaderRuleOutput)
 }
 
-type DomainsDomainListRuleCach struct {
-	CacheTime          int      `pulumi:"cacheTime"`
-	CompareMaxAge      *string  `pulumi:"compareMaxAge"`
-	FollowOriginSwitch string   `pulumi:"followOriginSwitch"`
-	IgnoreCacheControl *string  `pulumi:"ignoreCacheControl"`
-	IgnoreSetCookie    string   `pulumi:"ignoreSetCookie"`
-	NoCacheSwitch      string   `pulumi:"noCacheSwitch"`
-	ReValidate         string   `pulumi:"reValidate"`
-	RulePaths          []string `pulumi:"rulePaths"`
-	RuleType           string   `pulumi:"ruleType"`
-	Switch             string   `pulumi:"switch"`
+type GetDomainsDomainListRuleCach struct {
+	CacheTime     int     `pulumi:"cacheTime"`
+	CompareMaxAge *string `pulumi:"compareMaxAge"`
+	// Follow the source station configuration switch.
+	FollowOriginSwitch string  `pulumi:"followOriginSwitch"`
+	IgnoreCacheControl *string `pulumi:"ignoreCacheControl"`
+	// Ignore the Set-Cookie header of the origin site.
+	IgnoreSetCookie string `pulumi:"ignoreSetCookie"`
+	// Cache configuration switch.
+	NoCacheSwitch string `pulumi:"noCacheSwitch"`
+	// Always check back to origin.
+	ReValidate string `pulumi:"reValidate"`
+	// Rule paths.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule type.
+	RuleType string `pulumi:"ruleType"`
+	// Cache configuration switch.
+	Switch string `pulumi:"switch"`
 }
 
-// DomainsDomainListRuleCachInput is an input type that accepts DomainsDomainListRuleCachArgs and DomainsDomainListRuleCachOutput values.
-// You can construct a concrete instance of `DomainsDomainListRuleCachInput` via:
+// GetDomainsDomainListRuleCachInput is an input type that accepts GetDomainsDomainListRuleCachArgs and GetDomainsDomainListRuleCachOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListRuleCachInput` via:
 //
-//          DomainsDomainListRuleCachArgs{...}
-type DomainsDomainListRuleCachInput interface {
+//          GetDomainsDomainListRuleCachArgs{...}
+type GetDomainsDomainListRuleCachInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListRuleCachOutput() DomainsDomainListRuleCachOutput
-	ToDomainsDomainListRuleCachOutputWithContext(context.Context) DomainsDomainListRuleCachOutput
+	ToGetDomainsDomainListRuleCachOutput() GetDomainsDomainListRuleCachOutput
+	ToGetDomainsDomainListRuleCachOutputWithContext(context.Context) GetDomainsDomainListRuleCachOutput
 }
 
-type DomainsDomainListRuleCachArgs struct {
-	CacheTime          pulumi.IntInput         `pulumi:"cacheTime"`
-	CompareMaxAge      pulumi.StringPtrInput   `pulumi:"compareMaxAge"`
-	FollowOriginSwitch pulumi.StringInput      `pulumi:"followOriginSwitch"`
-	IgnoreCacheControl pulumi.StringPtrInput   `pulumi:"ignoreCacheControl"`
-	IgnoreSetCookie    pulumi.StringInput      `pulumi:"ignoreSetCookie"`
-	NoCacheSwitch      pulumi.StringInput      `pulumi:"noCacheSwitch"`
-	ReValidate         pulumi.StringInput      `pulumi:"reValidate"`
-	RulePaths          pulumi.StringArrayInput `pulumi:"rulePaths"`
-	RuleType           pulumi.StringInput      `pulumi:"ruleType"`
-	Switch             pulumi.StringInput      `pulumi:"switch"`
+type GetDomainsDomainListRuleCachArgs struct {
+	CacheTime     pulumi.IntInput       `pulumi:"cacheTime"`
+	CompareMaxAge pulumi.StringPtrInput `pulumi:"compareMaxAge"`
+	// Follow the source station configuration switch.
+	FollowOriginSwitch pulumi.StringInput    `pulumi:"followOriginSwitch"`
+	IgnoreCacheControl pulumi.StringPtrInput `pulumi:"ignoreCacheControl"`
+	// Ignore the Set-Cookie header of the origin site.
+	IgnoreSetCookie pulumi.StringInput `pulumi:"ignoreSetCookie"`
+	// Cache configuration switch.
+	NoCacheSwitch pulumi.StringInput `pulumi:"noCacheSwitch"`
+	// Always check back to origin.
+	ReValidate pulumi.StringInput `pulumi:"reValidate"`
+	// Rule paths.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule type.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
+	// Cache configuration switch.
+	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
-func (DomainsDomainListRuleCachArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListRuleCach)(nil)).Elem()
+func (GetDomainsDomainListRuleCachArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListRuleCach)(nil)).Elem()
 }
 
-func (i DomainsDomainListRuleCachArgs) ToDomainsDomainListRuleCachOutput() DomainsDomainListRuleCachOutput {
-	return i.ToDomainsDomainListRuleCachOutputWithContext(context.Background())
+func (i GetDomainsDomainListRuleCachArgs) ToGetDomainsDomainListRuleCachOutput() GetDomainsDomainListRuleCachOutput {
+	return i.ToGetDomainsDomainListRuleCachOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListRuleCachArgs) ToDomainsDomainListRuleCachOutputWithContext(ctx context.Context) DomainsDomainListRuleCachOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListRuleCachOutput)
+func (i GetDomainsDomainListRuleCachArgs) ToGetDomainsDomainListRuleCachOutputWithContext(ctx context.Context) GetDomainsDomainListRuleCachOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListRuleCachOutput)
 }
 
-// DomainsDomainListRuleCachArrayInput is an input type that accepts DomainsDomainListRuleCachArray and DomainsDomainListRuleCachArrayOutput values.
-// You can construct a concrete instance of `DomainsDomainListRuleCachArrayInput` via:
+// GetDomainsDomainListRuleCachArrayInput is an input type that accepts GetDomainsDomainListRuleCachArray and GetDomainsDomainListRuleCachArrayOutput values.
+// You can construct a concrete instance of `GetDomainsDomainListRuleCachArrayInput` via:
 //
-//          DomainsDomainListRuleCachArray{ DomainsDomainListRuleCachArgs{...} }
-type DomainsDomainListRuleCachArrayInput interface {
+//          GetDomainsDomainListRuleCachArray{ GetDomainsDomainListRuleCachArgs{...} }
+type GetDomainsDomainListRuleCachArrayInput interface {
 	pulumi.Input
 
-	ToDomainsDomainListRuleCachArrayOutput() DomainsDomainListRuleCachArrayOutput
-	ToDomainsDomainListRuleCachArrayOutputWithContext(context.Context) DomainsDomainListRuleCachArrayOutput
+	ToGetDomainsDomainListRuleCachArrayOutput() GetDomainsDomainListRuleCachArrayOutput
+	ToGetDomainsDomainListRuleCachArrayOutputWithContext(context.Context) GetDomainsDomainListRuleCachArrayOutput
 }
 
-type DomainsDomainListRuleCachArray []DomainsDomainListRuleCachInput
+type GetDomainsDomainListRuleCachArray []GetDomainsDomainListRuleCachInput
 
-func (DomainsDomainListRuleCachArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListRuleCach)(nil)).Elem()
+func (GetDomainsDomainListRuleCachArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListRuleCach)(nil)).Elem()
 }
 
-func (i DomainsDomainListRuleCachArray) ToDomainsDomainListRuleCachArrayOutput() DomainsDomainListRuleCachArrayOutput {
-	return i.ToDomainsDomainListRuleCachArrayOutputWithContext(context.Background())
+func (i GetDomainsDomainListRuleCachArray) ToGetDomainsDomainListRuleCachArrayOutput() GetDomainsDomainListRuleCachArrayOutput {
+	return i.ToGetDomainsDomainListRuleCachArrayOutputWithContext(context.Background())
 }
 
-func (i DomainsDomainListRuleCachArray) ToDomainsDomainListRuleCachArrayOutputWithContext(ctx context.Context) DomainsDomainListRuleCachArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainsDomainListRuleCachArrayOutput)
+func (i GetDomainsDomainListRuleCachArray) ToGetDomainsDomainListRuleCachArrayOutputWithContext(ctx context.Context) GetDomainsDomainListRuleCachArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainsDomainListRuleCachArrayOutput)
 }
 
-type DomainsDomainListRuleCachOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListRuleCachOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListRuleCachOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainsDomainListRuleCach)(nil)).Elem()
+func (GetDomainsDomainListRuleCachOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainsDomainListRuleCach)(nil)).Elem()
 }
 
-func (o DomainsDomainListRuleCachOutput) ToDomainsDomainListRuleCachOutput() DomainsDomainListRuleCachOutput {
+func (o GetDomainsDomainListRuleCachOutput) ToGetDomainsDomainListRuleCachOutput() GetDomainsDomainListRuleCachOutput {
 	return o
 }
 
-func (o DomainsDomainListRuleCachOutput) ToDomainsDomainListRuleCachOutputWithContext(ctx context.Context) DomainsDomainListRuleCachOutput {
+func (o GetDomainsDomainListRuleCachOutput) ToGetDomainsDomainListRuleCachOutputWithContext(ctx context.Context) GetDomainsDomainListRuleCachOutput {
 	return o
 }
 
-func (o DomainsDomainListRuleCachOutput) CacheTime() pulumi.IntOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) int { return v.CacheTime }).(pulumi.IntOutput)
+func (o GetDomainsDomainListRuleCachOutput) CacheTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) int { return v.CacheTime }).(pulumi.IntOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) CompareMaxAge() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) *string { return v.CompareMaxAge }).(pulumi.StringPtrOutput)
+func (o GetDomainsDomainListRuleCachOutput) CompareMaxAge() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) *string { return v.CompareMaxAge }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) FollowOriginSwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) string { return v.FollowOriginSwitch }).(pulumi.StringOutput)
+// Follow the source station configuration switch.
+func (o GetDomainsDomainListRuleCachOutput) FollowOriginSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) string { return v.FollowOriginSwitch }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) *string { return v.IgnoreCacheControl }).(pulumi.StringPtrOutput)
+func (o GetDomainsDomainListRuleCachOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) *string { return v.IgnoreCacheControl }).(pulumi.StringPtrOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) IgnoreSetCookie() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) string { return v.IgnoreSetCookie }).(pulumi.StringOutput)
+// Ignore the Set-Cookie header of the origin site.
+func (o GetDomainsDomainListRuleCachOutput) IgnoreSetCookie() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) string { return v.IgnoreSetCookie }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) NoCacheSwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) string { return v.NoCacheSwitch }).(pulumi.StringOutput)
+// Cache configuration switch.
+func (o GetDomainsDomainListRuleCachOutput) NoCacheSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) string { return v.NoCacheSwitch }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) ReValidate() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) string { return v.ReValidate }).(pulumi.StringOutput)
+// Always check back to origin.
+func (o GetDomainsDomainListRuleCachOutput) ReValidate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) string { return v.ReValidate }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) RulePaths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+// Rule paths.
+func (o GetDomainsDomainListRuleCachOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) RuleType() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) string { return v.RuleType }).(pulumi.StringOutput)
+// Rule type.
+func (o GetDomainsDomainListRuleCachOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) string { return v.RuleType }).(pulumi.StringOutput)
 }
 
-func (o DomainsDomainListRuleCachOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainsDomainListRuleCach) string { return v.Switch }).(pulumi.StringOutput)
+// Cache configuration switch.
+func (o GetDomainsDomainListRuleCachOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainsDomainListRuleCach) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-type DomainsDomainListRuleCachArrayOutput struct{ *pulumi.OutputState }
+type GetDomainsDomainListRuleCachArrayOutput struct{ *pulumi.OutputState }
 
-func (DomainsDomainListRuleCachArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainsDomainListRuleCach)(nil)).Elem()
+func (GetDomainsDomainListRuleCachArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainsDomainListRuleCach)(nil)).Elem()
 }
 
-func (o DomainsDomainListRuleCachArrayOutput) ToDomainsDomainListRuleCachArrayOutput() DomainsDomainListRuleCachArrayOutput {
+func (o GetDomainsDomainListRuleCachArrayOutput) ToGetDomainsDomainListRuleCachArrayOutput() GetDomainsDomainListRuleCachArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListRuleCachArrayOutput) ToDomainsDomainListRuleCachArrayOutputWithContext(ctx context.Context) DomainsDomainListRuleCachArrayOutput {
+func (o GetDomainsDomainListRuleCachArrayOutput) ToGetDomainsDomainListRuleCachArrayOutputWithContext(ctx context.Context) GetDomainsDomainListRuleCachArrayOutput {
 	return o
 }
 
-func (o DomainsDomainListRuleCachArrayOutput) Index(i pulumi.IntInput) DomainsDomainListRuleCachOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainsDomainListRuleCach {
-		return vs[0].([]DomainsDomainListRuleCach)[vs[1].(int)]
-	}).(DomainsDomainListRuleCachOutput)
+func (o GetDomainsDomainListRuleCachArrayOutput) Index(i pulumi.IntInput) GetDomainsDomainListRuleCachOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainsDomainListRuleCach {
+		return vs[0].([]GetDomainsDomainListRuleCach)[vs[1].(int)]
+	}).(GetDomainsDomainListRuleCachOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationInput)(nil)).Elem(), CdnDomainAuthenticationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationPtrInput)(nil)).Elem(), CdnDomainAuthenticationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeAInput)(nil)).Elem(), CdnDomainAuthenticationTypeAArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeAPtrInput)(nil)).Elem(), CdnDomainAuthenticationTypeAArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeBInput)(nil)).Elem(), CdnDomainAuthenticationTypeBArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeBPtrInput)(nil)).Elem(), CdnDomainAuthenticationTypeBArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeCInput)(nil)).Elem(), CdnDomainAuthenticationTypeCArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeCPtrInput)(nil)).Elem(), CdnDomainAuthenticationTypeCArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeDInput)(nil)).Elem(), CdnDomainAuthenticationTypeDArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAuthenticationTypeDPtrInput)(nil)).Elem(), CdnDomainAuthenticationTypeDArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAwsPrivateAccessInput)(nil)).Elem(), CdnDomainAwsPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainAwsPrivateAccessPtrInput)(nil)).Elem(), CdnDomainAwsPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainBandWidthAlertInput)(nil)).Elem(), CdnDomainBandWidthAlertArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainBandWidthAlertPtrInput)(nil)).Elem(), CdnDomainBandWidthAlertArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainBandWidthAlertStatisticItemInput)(nil)).Elem(), CdnDomainBandWidthAlertStatisticItemArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainBandWidthAlertStatisticItemPtrInput)(nil)).Elem(), CdnDomainBandWidthAlertStatisticItemArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainCompressionInput)(nil)).Elem(), CdnDomainCompressionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainCompressionPtrInput)(nil)).Elem(), CdnDomainCompressionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainCompressionCompressionRuleInput)(nil)).Elem(), CdnDomainCompressionCompressionRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainCompressionCompressionRuleArrayInput)(nil)).Elem(), CdnDomainCompressionCompressionRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainDownstreamCappingInput)(nil)).Elem(), CdnDomainDownstreamCappingArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainDownstreamCappingPtrInput)(nil)).Elem(), CdnDomainDownstreamCappingArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainDownstreamCappingCappingRuleInput)(nil)).Elem(), CdnDomainDownstreamCappingCappingRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainDownstreamCappingCappingRuleArrayInput)(nil)).Elem(), CdnDomainDownstreamCappingCappingRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainErrorPageInput)(nil)).Elem(), CdnDomainErrorPageArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainErrorPagePtrInput)(nil)).Elem(), CdnDomainErrorPageArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainErrorPagePageRuleInput)(nil)).Elem(), CdnDomainErrorPagePageRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainErrorPagePageRuleArrayInput)(nil)).Elem(), CdnDomainErrorPagePageRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigInput)(nil)).Elem(), CdnDomainHttpsConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigPtrInput)(nil)).Elem(), CdnDomainHttpsConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigClientCertificateConfigInput)(nil)).Elem(), CdnDomainHttpsConfigClientCertificateConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigClientCertificateConfigPtrInput)(nil)).Elem(), CdnDomainHttpsConfigClientCertificateConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigForceRedirectInput)(nil)).Elem(), CdnDomainHttpsConfigForceRedirectArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigForceRedirectPtrInput)(nil)).Elem(), CdnDomainHttpsConfigForceRedirectArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigServerCertificateConfigInput)(nil)).Elem(), CdnDomainHttpsConfigServerCertificateConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHttpsConfigServerCertificateConfigPtrInput)(nil)).Elem(), CdnDomainHttpsConfigServerCertificateConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHwPrivateAccessInput)(nil)).Elem(), CdnDomainHwPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainHwPrivateAccessPtrInput)(nil)).Elem(), CdnDomainHwPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainIpFilterInput)(nil)).Elem(), CdnDomainIpFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainIpFilterPtrInput)(nil)).Elem(), CdnDomainIpFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainIpFilterFilterRuleInput)(nil)).Elem(), CdnDomainIpFilterFilterRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainIpFilterFilterRuleArrayInput)(nil)).Elem(), CdnDomainIpFilterFilterRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainIpFreqLimitInput)(nil)).Elem(), CdnDomainIpFreqLimitArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainIpFreqLimitPtrInput)(nil)).Elem(), CdnDomainIpFreqLimitArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainMaxAgeInput)(nil)).Elem(), CdnDomainMaxAgeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainMaxAgePtrInput)(nil)).Elem(), CdnDomainMaxAgeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainMaxAgeMaxAgeRuleInput)(nil)).Elem(), CdnDomainMaxAgeMaxAgeRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainMaxAgeMaxAgeRuleArrayInput)(nil)).Elem(), CdnDomainMaxAgeMaxAgeRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOriginInput)(nil)).Elem(), CdnDomainOriginArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOriginPtrInput)(nil)).Elem(), CdnDomainOriginArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOriginPullOptimizationInput)(nil)).Elem(), CdnDomainOriginPullOptimizationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOriginPullOptimizationPtrInput)(nil)).Elem(), CdnDomainOriginPullOptimizationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOriginPullTimeoutInput)(nil)).Elem(), CdnDomainOriginPullTimeoutArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOriginPullTimeoutPtrInput)(nil)).Elem(), CdnDomainOriginPullTimeoutArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOssPrivateAccessInput)(nil)).Elem(), CdnDomainOssPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainOssPrivateAccessPtrInput)(nil)).Elem(), CdnDomainOssPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainQnPrivateAccessInput)(nil)).Elem(), CdnDomainQnPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainQnPrivateAccessPtrInput)(nil)).Elem(), CdnDomainQnPrivateAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRefererInput)(nil)).Elem(), CdnDomainRefererArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRefererPtrInput)(nil)).Elem(), CdnDomainRefererArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRefererRefererRuleInput)(nil)).Elem(), CdnDomainRefererRefererRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRefererRefererRuleArrayInput)(nil)).Elem(), CdnDomainRefererRefererRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRequestHeaderInput)(nil)).Elem(), CdnDomainRequestHeaderArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRequestHeaderPtrInput)(nil)).Elem(), CdnDomainRequestHeaderArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRequestHeaderHeaderRuleInput)(nil)).Elem(), CdnDomainRequestHeaderHeaderRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRequestHeaderHeaderRuleArrayInput)(nil)).Elem(), CdnDomainRequestHeaderHeaderRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainResponseHeaderInput)(nil)).Elem(), CdnDomainResponseHeaderArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainResponseHeaderPtrInput)(nil)).Elem(), CdnDomainResponseHeaderArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainResponseHeaderHeaderRuleInput)(nil)).Elem(), CdnDomainResponseHeaderHeaderRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainResponseHeaderHeaderRuleArrayInput)(nil)).Elem(), CdnDomainResponseHeaderHeaderRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRuleCachInput)(nil)).Elem(), CdnDomainRuleCachArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainRuleCachArrayInput)(nil)).Elem(), CdnDomainRuleCachArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainStatusCodeCacheInput)(nil)).Elem(), CdnDomainStatusCodeCacheArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainStatusCodeCachePtrInput)(nil)).Elem(), CdnDomainStatusCodeCacheArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainStatusCodeCacheCacheRuleInput)(nil)).Elem(), CdnDomainStatusCodeCacheCacheRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CdnDomainStatusCodeCacheCacheRuleArrayInput)(nil)).Elem(), CdnDomainStatusCodeCacheCacheRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListInput)(nil)).Elem(), DomainsDomainListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListArrayInput)(nil)).Elem(), DomainsDomainListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListHttpsConfigInput)(nil)).Elem(), DomainsDomainListHttpsConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListHttpsConfigArrayInput)(nil)).Elem(), DomainsDomainListHttpsConfigArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListOriginInput)(nil)).Elem(), DomainsDomainListOriginArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListOriginArrayInput)(nil)).Elem(), DomainsDomainListOriginArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListRequestHeaderInput)(nil)).Elem(), DomainsDomainListRequestHeaderArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListRequestHeaderArrayInput)(nil)).Elem(), DomainsDomainListRequestHeaderArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListRequestHeaderHeaderRuleInput)(nil)).Elem(), DomainsDomainListRequestHeaderHeaderRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListRequestHeaderHeaderRuleArrayInput)(nil)).Elem(), DomainsDomainListRequestHeaderHeaderRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListRuleCachInput)(nil)).Elem(), DomainsDomainListRuleCachArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainsDomainListRuleCachArrayInput)(nil)).Elem(), DomainsDomainListRuleCachArray{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeAOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeAPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeBOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeBPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeCOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeCPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeDOutput{})
-	pulumi.RegisterOutputType(CdnDomainAuthenticationTypeDPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainAwsPrivateAccessOutput{})
-	pulumi.RegisterOutputType(CdnDomainAwsPrivateAccessPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainBandWidthAlertOutput{})
-	pulumi.RegisterOutputType(CdnDomainBandWidthAlertPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainBandWidthAlertStatisticItemOutput{})
-	pulumi.RegisterOutputType(CdnDomainBandWidthAlertStatisticItemPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainCompressionOutput{})
-	pulumi.RegisterOutputType(CdnDomainCompressionPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainCompressionCompressionRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainCompressionCompressionRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainDownstreamCappingOutput{})
-	pulumi.RegisterOutputType(CdnDomainDownstreamCappingPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainDownstreamCappingCappingRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainDownstreamCappingCappingRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainErrorPageOutput{})
-	pulumi.RegisterOutputType(CdnDomainErrorPagePtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainErrorPagePageRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainErrorPagePageRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigClientCertificateConfigOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigClientCertificateConfigPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigForceRedirectOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigForceRedirectPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigServerCertificateConfigOutput{})
-	pulumi.RegisterOutputType(CdnDomainHttpsConfigServerCertificateConfigPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainHwPrivateAccessOutput{})
-	pulumi.RegisterOutputType(CdnDomainHwPrivateAccessPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainIpFilterOutput{})
-	pulumi.RegisterOutputType(CdnDomainIpFilterPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainIpFilterFilterRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainIpFilterFilterRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainIpFreqLimitOutput{})
-	pulumi.RegisterOutputType(CdnDomainIpFreqLimitPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainMaxAgeOutput{})
-	pulumi.RegisterOutputType(CdnDomainMaxAgePtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainMaxAgeMaxAgeRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainMaxAgeMaxAgeRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainOriginOutput{})
-	pulumi.RegisterOutputType(CdnDomainOriginPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainOriginPullOptimizationOutput{})
-	pulumi.RegisterOutputType(CdnDomainOriginPullOptimizationPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainOriginPullTimeoutOutput{})
-	pulumi.RegisterOutputType(CdnDomainOriginPullTimeoutPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainOssPrivateAccessOutput{})
-	pulumi.RegisterOutputType(CdnDomainOssPrivateAccessPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainQnPrivateAccessOutput{})
-	pulumi.RegisterOutputType(CdnDomainQnPrivateAccessPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainRefererOutput{})
-	pulumi.RegisterOutputType(CdnDomainRefererPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainRefererRefererRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainRefererRefererRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainRequestHeaderOutput{})
-	pulumi.RegisterOutputType(CdnDomainRequestHeaderPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainRequestHeaderHeaderRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainRequestHeaderHeaderRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainResponseHeaderOutput{})
-	pulumi.RegisterOutputType(CdnDomainResponseHeaderPtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainResponseHeaderHeaderRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainResponseHeaderHeaderRuleArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainRuleCachOutput{})
-	pulumi.RegisterOutputType(CdnDomainRuleCachArrayOutput{})
-	pulumi.RegisterOutputType(CdnDomainStatusCodeCacheOutput{})
-	pulumi.RegisterOutputType(CdnDomainStatusCodeCachePtrOutput{})
-	pulumi.RegisterOutputType(CdnDomainStatusCodeCacheCacheRuleOutput{})
-	pulumi.RegisterOutputType(CdnDomainStatusCodeCacheCacheRuleArrayOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListArrayOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListHttpsConfigOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListHttpsConfigArrayOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListOriginOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListOriginArrayOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListRequestHeaderOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListRequestHeaderArrayOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListRequestHeaderHeaderRuleOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListRequestHeaderHeaderRuleArrayOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListRuleCachOutput{})
-	pulumi.RegisterOutputType(DomainsDomainListRuleCachArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationInput)(nil)).Elem(), DomainAuthenticationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationPtrInput)(nil)).Elem(), DomainAuthenticationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeAInput)(nil)).Elem(), DomainAuthenticationTypeAArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeAPtrInput)(nil)).Elem(), DomainAuthenticationTypeAArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeBInput)(nil)).Elem(), DomainAuthenticationTypeBArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeBPtrInput)(nil)).Elem(), DomainAuthenticationTypeBArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeCInput)(nil)).Elem(), DomainAuthenticationTypeCArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeCPtrInput)(nil)).Elem(), DomainAuthenticationTypeCArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeDInput)(nil)).Elem(), DomainAuthenticationTypeDArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeDPtrInput)(nil)).Elem(), DomainAuthenticationTypeDArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAwsPrivateAccessInput)(nil)).Elem(), DomainAwsPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAwsPrivateAccessPtrInput)(nil)).Elem(), DomainAwsPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainBandWidthAlertInput)(nil)).Elem(), DomainBandWidthAlertArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainBandWidthAlertPtrInput)(nil)).Elem(), DomainBandWidthAlertArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainBandWidthAlertStatisticItemInput)(nil)).Elem(), DomainBandWidthAlertStatisticItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainBandWidthAlertStatisticItemPtrInput)(nil)).Elem(), DomainBandWidthAlertStatisticItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainCompressionInput)(nil)).Elem(), DomainCompressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainCompressionPtrInput)(nil)).Elem(), DomainCompressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainCompressionCompressionRuleInput)(nil)).Elem(), DomainCompressionCompressionRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainCompressionCompressionRuleArrayInput)(nil)).Elem(), DomainCompressionCompressionRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainDownstreamCappingInput)(nil)).Elem(), DomainDownstreamCappingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainDownstreamCappingPtrInput)(nil)).Elem(), DomainDownstreamCappingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainDownstreamCappingCappingRuleInput)(nil)).Elem(), DomainDownstreamCappingCappingRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainDownstreamCappingCappingRuleArrayInput)(nil)).Elem(), DomainDownstreamCappingCappingRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPageInput)(nil)).Elem(), DomainErrorPageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPagePtrInput)(nil)).Elem(), DomainErrorPageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPagePageRuleInput)(nil)).Elem(), DomainErrorPagePageRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPagePageRuleArrayInput)(nil)).Elem(), DomainErrorPagePageRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigInput)(nil)).Elem(), DomainHttpsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigPtrInput)(nil)).Elem(), DomainHttpsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigClientCertificateConfigInput)(nil)).Elem(), DomainHttpsConfigClientCertificateConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigClientCertificateConfigPtrInput)(nil)).Elem(), DomainHttpsConfigClientCertificateConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigForceRedirectInput)(nil)).Elem(), DomainHttpsConfigForceRedirectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigForceRedirectPtrInput)(nil)).Elem(), DomainHttpsConfigForceRedirectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigServerCertificateConfigInput)(nil)).Elem(), DomainHttpsConfigServerCertificateConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigServerCertificateConfigPtrInput)(nil)).Elem(), DomainHttpsConfigServerCertificateConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHwPrivateAccessInput)(nil)).Elem(), DomainHwPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHwPrivateAccessPtrInput)(nil)).Elem(), DomainHwPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainIpFilterInput)(nil)).Elem(), DomainIpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainIpFilterPtrInput)(nil)).Elem(), DomainIpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainIpFilterFilterRuleInput)(nil)).Elem(), DomainIpFilterFilterRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainIpFilterFilterRuleArrayInput)(nil)).Elem(), DomainIpFilterFilterRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainIpFreqLimitInput)(nil)).Elem(), DomainIpFreqLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainIpFreqLimitPtrInput)(nil)).Elem(), DomainIpFreqLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainMaxAgeInput)(nil)).Elem(), DomainMaxAgeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainMaxAgePtrInput)(nil)).Elem(), DomainMaxAgeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainMaxAgeMaxAgeRuleInput)(nil)).Elem(), DomainMaxAgeMaxAgeRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainMaxAgeMaxAgeRuleArrayInput)(nil)).Elem(), DomainMaxAgeMaxAgeRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginInput)(nil)).Elem(), DomainOriginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPtrInput)(nil)).Elem(), DomainOriginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullOptimizationInput)(nil)).Elem(), DomainOriginPullOptimizationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullOptimizationPtrInput)(nil)).Elem(), DomainOriginPullOptimizationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullTimeoutInput)(nil)).Elem(), DomainOriginPullTimeoutArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullTimeoutPtrInput)(nil)).Elem(), DomainOriginPullTimeoutArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOssPrivateAccessInput)(nil)).Elem(), DomainOssPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOssPrivateAccessPtrInput)(nil)).Elem(), DomainOssPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainQnPrivateAccessInput)(nil)).Elem(), DomainQnPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainQnPrivateAccessPtrInput)(nil)).Elem(), DomainQnPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRefererInput)(nil)).Elem(), DomainRefererArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRefererPtrInput)(nil)).Elem(), DomainRefererArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRefererRefererRuleInput)(nil)).Elem(), DomainRefererRefererRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRefererRefererRuleArrayInput)(nil)).Elem(), DomainRefererRefererRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRequestHeaderInput)(nil)).Elem(), DomainRequestHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRequestHeaderPtrInput)(nil)).Elem(), DomainRequestHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRequestHeaderHeaderRuleInput)(nil)).Elem(), DomainRequestHeaderHeaderRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRequestHeaderHeaderRuleArrayInput)(nil)).Elem(), DomainRequestHeaderHeaderRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainResponseHeaderInput)(nil)).Elem(), DomainResponseHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainResponseHeaderPtrInput)(nil)).Elem(), DomainResponseHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainResponseHeaderHeaderRuleInput)(nil)).Elem(), DomainResponseHeaderHeaderRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainResponseHeaderHeaderRuleArrayInput)(nil)).Elem(), DomainResponseHeaderHeaderRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRuleCachInput)(nil)).Elem(), DomainRuleCachArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRuleCachArrayInput)(nil)).Elem(), DomainRuleCachArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainStatusCodeCacheInput)(nil)).Elem(), DomainStatusCodeCacheArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainStatusCodeCachePtrInput)(nil)).Elem(), DomainStatusCodeCacheArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainStatusCodeCacheCacheRuleInput)(nil)).Elem(), DomainStatusCodeCacheCacheRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainStatusCodeCacheCacheRuleArrayInput)(nil)).Elem(), DomainStatusCodeCacheCacheRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UrlPurgePurgeHistoryInput)(nil)).Elem(), UrlPurgePurgeHistoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UrlPurgePurgeHistoryArrayInput)(nil)).Elem(), UrlPurgePurgeHistoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UrlPushPushHistoryInput)(nil)).Elem(), UrlPushPushHistoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UrlPushPushHistoryArrayInput)(nil)).Elem(), UrlPushPushHistoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListInput)(nil)).Elem(), GetDomainsDomainListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListArrayInput)(nil)).Elem(), GetDomainsDomainListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListHttpsConfigInput)(nil)).Elem(), GetDomainsDomainListHttpsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListHttpsConfigArrayInput)(nil)).Elem(), GetDomainsDomainListHttpsConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListOriginInput)(nil)).Elem(), GetDomainsDomainListOriginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListOriginArrayInput)(nil)).Elem(), GetDomainsDomainListOriginArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListRequestHeaderInput)(nil)).Elem(), GetDomainsDomainListRequestHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListRequestHeaderArrayInput)(nil)).Elem(), GetDomainsDomainListRequestHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListRequestHeaderHeaderRuleInput)(nil)).Elem(), GetDomainsDomainListRequestHeaderHeaderRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListRequestHeaderHeaderRuleArrayInput)(nil)).Elem(), GetDomainsDomainListRequestHeaderHeaderRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListRuleCachInput)(nil)).Elem(), GetDomainsDomainListRuleCachArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListRuleCachArrayInput)(nil)).Elem(), GetDomainsDomainListRuleCachArray{})
+	pulumi.RegisterOutputType(DomainAuthenticationOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationPtrOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeAOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeAPtrOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeBOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeBPtrOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeCOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeCPtrOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeDOutput{})
+	pulumi.RegisterOutputType(DomainAuthenticationTypeDPtrOutput{})
+	pulumi.RegisterOutputType(DomainAwsPrivateAccessOutput{})
+	pulumi.RegisterOutputType(DomainAwsPrivateAccessPtrOutput{})
+	pulumi.RegisterOutputType(DomainBandWidthAlertOutput{})
+	pulumi.RegisterOutputType(DomainBandWidthAlertPtrOutput{})
+	pulumi.RegisterOutputType(DomainBandWidthAlertStatisticItemOutput{})
+	pulumi.RegisterOutputType(DomainBandWidthAlertStatisticItemPtrOutput{})
+	pulumi.RegisterOutputType(DomainCompressionOutput{})
+	pulumi.RegisterOutputType(DomainCompressionPtrOutput{})
+	pulumi.RegisterOutputType(DomainCompressionCompressionRuleOutput{})
+	pulumi.RegisterOutputType(DomainCompressionCompressionRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainDownstreamCappingOutput{})
+	pulumi.RegisterOutputType(DomainDownstreamCappingPtrOutput{})
+	pulumi.RegisterOutputType(DomainDownstreamCappingCappingRuleOutput{})
+	pulumi.RegisterOutputType(DomainDownstreamCappingCappingRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainErrorPageOutput{})
+	pulumi.RegisterOutputType(DomainErrorPagePtrOutput{})
+	pulumi.RegisterOutputType(DomainErrorPagePageRuleOutput{})
+	pulumi.RegisterOutputType(DomainErrorPagePageRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigPtrOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigClientCertificateConfigOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigClientCertificateConfigPtrOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigForceRedirectOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigForceRedirectPtrOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigServerCertificateConfigOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigServerCertificateConfigPtrOutput{})
+	pulumi.RegisterOutputType(DomainHwPrivateAccessOutput{})
+	pulumi.RegisterOutputType(DomainHwPrivateAccessPtrOutput{})
+	pulumi.RegisterOutputType(DomainIpFilterOutput{})
+	pulumi.RegisterOutputType(DomainIpFilterPtrOutput{})
+	pulumi.RegisterOutputType(DomainIpFilterFilterRuleOutput{})
+	pulumi.RegisterOutputType(DomainIpFilterFilterRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainIpFreqLimitOutput{})
+	pulumi.RegisterOutputType(DomainIpFreqLimitPtrOutput{})
+	pulumi.RegisterOutputType(DomainMaxAgeOutput{})
+	pulumi.RegisterOutputType(DomainMaxAgePtrOutput{})
+	pulumi.RegisterOutputType(DomainMaxAgeMaxAgeRuleOutput{})
+	pulumi.RegisterOutputType(DomainMaxAgeMaxAgeRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainOriginOutput{})
+	pulumi.RegisterOutputType(DomainOriginPtrOutput{})
+	pulumi.RegisterOutputType(DomainOriginPullOptimizationOutput{})
+	pulumi.RegisterOutputType(DomainOriginPullOptimizationPtrOutput{})
+	pulumi.RegisterOutputType(DomainOriginPullTimeoutOutput{})
+	pulumi.RegisterOutputType(DomainOriginPullTimeoutPtrOutput{})
+	pulumi.RegisterOutputType(DomainOssPrivateAccessOutput{})
+	pulumi.RegisterOutputType(DomainOssPrivateAccessPtrOutput{})
+	pulumi.RegisterOutputType(DomainQnPrivateAccessOutput{})
+	pulumi.RegisterOutputType(DomainQnPrivateAccessPtrOutput{})
+	pulumi.RegisterOutputType(DomainRefererOutput{})
+	pulumi.RegisterOutputType(DomainRefererPtrOutput{})
+	pulumi.RegisterOutputType(DomainRefererRefererRuleOutput{})
+	pulumi.RegisterOutputType(DomainRefererRefererRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainRequestHeaderOutput{})
+	pulumi.RegisterOutputType(DomainRequestHeaderPtrOutput{})
+	pulumi.RegisterOutputType(DomainRequestHeaderHeaderRuleOutput{})
+	pulumi.RegisterOutputType(DomainRequestHeaderHeaderRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainResponseHeaderOutput{})
+	pulumi.RegisterOutputType(DomainResponseHeaderPtrOutput{})
+	pulumi.RegisterOutputType(DomainResponseHeaderHeaderRuleOutput{})
+	pulumi.RegisterOutputType(DomainResponseHeaderHeaderRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainRuleCachOutput{})
+	pulumi.RegisterOutputType(DomainRuleCachArrayOutput{})
+	pulumi.RegisterOutputType(DomainStatusCodeCacheOutput{})
+	pulumi.RegisterOutputType(DomainStatusCodeCachePtrOutput{})
+	pulumi.RegisterOutputType(DomainStatusCodeCacheCacheRuleOutput{})
+	pulumi.RegisterOutputType(DomainStatusCodeCacheCacheRuleArrayOutput{})
+	pulumi.RegisterOutputType(UrlPurgePurgeHistoryOutput{})
+	pulumi.RegisterOutputType(UrlPurgePurgeHistoryArrayOutput{})
+	pulumi.RegisterOutputType(UrlPushPushHistoryOutput{})
+	pulumi.RegisterOutputType(UrlPushPushHistoryArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListHttpsConfigOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListHttpsConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListOriginOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListOriginArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListRequestHeaderOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListRequestHeaderArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListRequestHeaderHeaderRuleOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListRuleCachOutput{})
+	pulumi.RegisterOutputType(GetDomainsDomainListRuleCachArrayOutput{})
 }

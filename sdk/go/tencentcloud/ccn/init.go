@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -23,8 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Ccn/attachment:Attachment":
 		r = &Attachment{}
-	case "tencentcloud:Ccn/ccnBandwidthLimit:CcnBandwidthLimit":
-		r = &CcnBandwidthLimit{}
+	case "tencentcloud:Ccn/bandwidthLimit:BandwidthLimit":
+		r = &BandwidthLimit{}
 	case "tencentcloud:Ccn/instance:Instance":
 		r = &Instance{}
 	default:
@@ -47,7 +47,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Ccn/ccnBandwidthLimit",
+		"Ccn/bandwidthLimit",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

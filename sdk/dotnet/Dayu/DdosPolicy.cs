@@ -9,6 +9,109 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
+    /// <summary>
+    /// Use this resource to create dayu DDoS policy
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var testPolicy = new Tencentcloud.Dayu.DdosPolicy("testPolicy", new Tencentcloud.Dayu.DdosPolicyArgs
+    ///         {
+    ///             BlackIps = 
+    ///             {
+    ///                 "1.1.1.1",
+    ///             },
+    ///             DropOptions = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyDropOptionArgs
+    ///                 {
+    ///                     BadConnThreshold = 100,
+    ///                     CheckSyncConn = true,
+    ///                     ConnTimeout = 500,
+    ///                     DConnLimit = 100,
+    ///                     DNewLimit = 100,
+    ///                     DropAbroad = true,
+    ///                     DropIcmp = true,
+    ///                     DropOther = true,
+    ///                     DropTcp = true,
+    ///                     DropUdp = true,
+    ///                     IcmpMbpsLimit = 100,
+    ///                     NullConnEnable = true,
+    ///                     OtherMbpsLimit = 100,
+    ///                     SConnLimit = 100,
+    ///                     SNewLimit = 100,
+    ///                     SynLimit = 100,
+    ///                     SynRate = 50,
+    ///                     TcpMbpsLimit = 100,
+    ///                     UdpMbpsLimit = 100,
+    ///                 },
+    ///             },
+    ///             PacketFilters = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyPacketFilterArgs
+    ///                 {
+    ///                     Action = "drop",
+    ///                     DEndPort = 1500,
+    ///                     DStartPort = 1000,
+    ///                     Depth = 1000,
+    ///                     IsInclude = true,
+    ///                     MatchBegin = "begin_l5",
+    ///                     MatchType = "pcre",
+    ///                     Offset = 500,
+    ///                     PktLengthMax = 1400,
+    ///                     PktLengthMin = 1000,
+    ///                     Protocol = "tcp",
+    ///                     SEndPort = 2500,
+    ///                     SStartPort = 2000,
+    ///                 },
+    ///             },
+    ///             PortFilters = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyPortFilterArgs
+    ///                 {
+    ///                     Action = "drop",
+    ///                     EndPort = 2500,
+    ///                     Kind = 1,
+    ///                     Protocol = "all",
+    ///                     StartPort = 2000,
+    ///                 },
+    ///             },
+    ///             ResourceType = "bgpip",
+    ///             WatermarkFilters = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyWatermarkFilterArgs
+    ///                 {
+    ///                     AutoRemove = true,
+    ///                     Offset = 50,
+    ///                     OpenSwitch = true,
+    ///                     TcpPortLists = 
+    ///                     {
+    ///                         "2000-3000",
+    ///                         "3500-4000",
+    ///                     },
+    ///                     UdpPortLists = 
+    ///                     {
+    ///                         "5000-6000",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             WhiteIps = 
+    ///             {
+    ///                 "2.2.2.2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicy:DdosPolicy")]
     public partial class DdosPolicy : Pulumi.CustomResource
     {

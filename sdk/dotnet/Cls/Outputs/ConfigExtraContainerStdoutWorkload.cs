@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class ConfigExtraContainerStdoutWorkload
     {
+        /// <summary>
+        /// container name.
+        /// </summary>
         public readonly string? Container;
+        /// <summary>
+        /// workload type.
+        /// </summary>
         public readonly string Kind;
+        /// <summary>
+        /// workload name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// namespace.
+        /// </summary>
         public readonly string? Namespace;
 
         [OutputConstructor]

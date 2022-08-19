@@ -10,687 +10,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type BackupListList struct {
-	BackupId    int    `pulumi:"backupId"`
-	BackupModel string `pulumi:"backupModel"`
-	Creator     string `pulumi:"creator"`
-	FinishTime  string `pulumi:"finishTime"`
-	InternetUrl string `pulumi:"internetUrl"`
-	IntranetUrl string `pulumi:"intranetUrl"`
-	Size        int    `pulumi:"size"`
-	Time        string `pulumi:"time"`
-}
-
-// BackupListListInput is an input type that accepts BackupListListArgs and BackupListListOutput values.
-// You can construct a concrete instance of `BackupListListInput` via:
-//
-//          BackupListListArgs{...}
-type BackupListListInput interface {
-	pulumi.Input
-
-	ToBackupListListOutput() BackupListListOutput
-	ToBackupListListOutputWithContext(context.Context) BackupListListOutput
-}
-
-type BackupListListArgs struct {
-	BackupId    pulumi.IntInput    `pulumi:"backupId"`
-	BackupModel pulumi.StringInput `pulumi:"backupModel"`
-	Creator     pulumi.StringInput `pulumi:"creator"`
-	FinishTime  pulumi.StringInput `pulumi:"finishTime"`
-	InternetUrl pulumi.StringInput `pulumi:"internetUrl"`
-	IntranetUrl pulumi.StringInput `pulumi:"intranetUrl"`
-	Size        pulumi.IntInput    `pulumi:"size"`
-	Time        pulumi.StringInput `pulumi:"time"`
-}
-
-func (BackupListListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BackupListList)(nil)).Elem()
-}
-
-func (i BackupListListArgs) ToBackupListListOutput() BackupListListOutput {
-	return i.ToBackupListListOutputWithContext(context.Background())
-}
-
-func (i BackupListListArgs) ToBackupListListOutputWithContext(ctx context.Context) BackupListListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BackupListListOutput)
-}
-
-// BackupListListArrayInput is an input type that accepts BackupListListArray and BackupListListArrayOutput values.
-// You can construct a concrete instance of `BackupListListArrayInput` via:
-//
-//          BackupListListArray{ BackupListListArgs{...} }
-type BackupListListArrayInput interface {
-	pulumi.Input
-
-	ToBackupListListArrayOutput() BackupListListArrayOutput
-	ToBackupListListArrayOutputWithContext(context.Context) BackupListListArrayOutput
-}
-
-type BackupListListArray []BackupListListInput
-
-func (BackupListListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BackupListList)(nil)).Elem()
-}
-
-func (i BackupListListArray) ToBackupListListArrayOutput() BackupListListArrayOutput {
-	return i.ToBackupListListArrayOutputWithContext(context.Background())
-}
-
-func (i BackupListListArray) ToBackupListListArrayOutputWithContext(ctx context.Context) BackupListListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BackupListListArrayOutput)
-}
-
-type BackupListListOutput struct{ *pulumi.OutputState }
-
-func (BackupListListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BackupListList)(nil)).Elem()
-}
-
-func (o BackupListListOutput) ToBackupListListOutput() BackupListListOutput {
-	return o
-}
-
-func (o BackupListListOutput) ToBackupListListOutputWithContext(ctx context.Context) BackupListListOutput {
-	return o
-}
-
-func (o BackupListListOutput) BackupId() pulumi.IntOutput {
-	return o.ApplyT(func(v BackupListList) int { return v.BackupId }).(pulumi.IntOutput)
-}
-
-func (o BackupListListOutput) BackupModel() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupListList) string { return v.BackupModel }).(pulumi.StringOutput)
-}
-
-func (o BackupListListOutput) Creator() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupListList) string { return v.Creator }).(pulumi.StringOutput)
-}
-
-func (o BackupListListOutput) FinishTime() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupListList) string { return v.FinishTime }).(pulumi.StringOutput)
-}
-
-func (o BackupListListOutput) InternetUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupListList) string { return v.InternetUrl }).(pulumi.StringOutput)
-}
-
-func (o BackupListListOutput) IntranetUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupListList) string { return v.IntranetUrl }).(pulumi.StringOutput)
-}
-
-func (o BackupListListOutput) Size() pulumi.IntOutput {
-	return o.ApplyT(func(v BackupListList) int { return v.Size }).(pulumi.IntOutput)
-}
-
-func (o BackupListListOutput) Time() pulumi.StringOutput {
-	return o.ApplyT(func(v BackupListList) string { return v.Time }).(pulumi.StringOutput)
-}
-
-type BackupListListArrayOutput struct{ *pulumi.OutputState }
-
-func (BackupListListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BackupListList)(nil)).Elem()
-}
-
-func (o BackupListListArrayOutput) ToBackupListListArrayOutput() BackupListListArrayOutput {
-	return o
-}
-
-func (o BackupListListArrayOutput) ToBackupListListArrayOutputWithContext(ctx context.Context) BackupListListArrayOutput {
-	return o
-}
-
-func (o BackupListListArrayOutput) Index(i pulumi.IntInput) BackupListListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupListList {
-		return vs[0].([]BackupListList)[vs[1].(int)]
-	}).(BackupListListOutput)
-}
-
-type DefaultParamsParamList struct {
-	CurrentValue string   `pulumi:"currentValue"`
-	Default      string   `pulumi:"default"`
-	Description  string   `pulumi:"description"`
-	EnumValues   []string `pulumi:"enumValues"`
-	Max          int      `pulumi:"max"`
-	Min          int      `pulumi:"min"`
-	Name         string   `pulumi:"name"`
-	NeedReboot   int      `pulumi:"needReboot"`
-	ParamType    string   `pulumi:"paramType"`
-}
-
-// DefaultParamsParamListInput is an input type that accepts DefaultParamsParamListArgs and DefaultParamsParamListOutput values.
-// You can construct a concrete instance of `DefaultParamsParamListInput` via:
-//
-//          DefaultParamsParamListArgs{...}
-type DefaultParamsParamListInput interface {
-	pulumi.Input
-
-	ToDefaultParamsParamListOutput() DefaultParamsParamListOutput
-	ToDefaultParamsParamListOutputWithContext(context.Context) DefaultParamsParamListOutput
-}
-
-type DefaultParamsParamListArgs struct {
-	CurrentValue pulumi.StringInput      `pulumi:"currentValue"`
-	Default      pulumi.StringInput      `pulumi:"default"`
-	Description  pulumi.StringInput      `pulumi:"description"`
-	EnumValues   pulumi.StringArrayInput `pulumi:"enumValues"`
-	Max          pulumi.IntInput         `pulumi:"max"`
-	Min          pulumi.IntInput         `pulumi:"min"`
-	Name         pulumi.StringInput      `pulumi:"name"`
-	NeedReboot   pulumi.IntInput         `pulumi:"needReboot"`
-	ParamType    pulumi.StringInput      `pulumi:"paramType"`
-}
-
-func (DefaultParamsParamListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DefaultParamsParamList)(nil)).Elem()
-}
-
-func (i DefaultParamsParamListArgs) ToDefaultParamsParamListOutput() DefaultParamsParamListOutput {
-	return i.ToDefaultParamsParamListOutputWithContext(context.Background())
-}
-
-func (i DefaultParamsParamListArgs) ToDefaultParamsParamListOutputWithContext(ctx context.Context) DefaultParamsParamListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DefaultParamsParamListOutput)
-}
-
-// DefaultParamsParamListArrayInput is an input type that accepts DefaultParamsParamListArray and DefaultParamsParamListArrayOutput values.
-// You can construct a concrete instance of `DefaultParamsParamListArrayInput` via:
-//
-//          DefaultParamsParamListArray{ DefaultParamsParamListArgs{...} }
-type DefaultParamsParamListArrayInput interface {
-	pulumi.Input
-
-	ToDefaultParamsParamListArrayOutput() DefaultParamsParamListArrayOutput
-	ToDefaultParamsParamListArrayOutputWithContext(context.Context) DefaultParamsParamListArrayOutput
-}
-
-type DefaultParamsParamListArray []DefaultParamsParamListInput
-
-func (DefaultParamsParamListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DefaultParamsParamList)(nil)).Elem()
-}
-
-func (i DefaultParamsParamListArray) ToDefaultParamsParamListArrayOutput() DefaultParamsParamListArrayOutput {
-	return i.ToDefaultParamsParamListArrayOutputWithContext(context.Background())
-}
-
-func (i DefaultParamsParamListArray) ToDefaultParamsParamListArrayOutputWithContext(ctx context.Context) DefaultParamsParamListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DefaultParamsParamListArrayOutput)
-}
-
-type DefaultParamsParamListOutput struct{ *pulumi.OutputState }
-
-func (DefaultParamsParamListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DefaultParamsParamList)(nil)).Elem()
-}
-
-func (o DefaultParamsParamListOutput) ToDefaultParamsParamListOutput() DefaultParamsParamListOutput {
-	return o
-}
-
-func (o DefaultParamsParamListOutput) ToDefaultParamsParamListOutputWithContext(ctx context.Context) DefaultParamsParamListOutput {
-	return o
-}
-
-func (o DefaultParamsParamListOutput) CurrentValue() pulumi.StringOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) string { return v.CurrentValue }).(pulumi.StringOutput)
-}
-
-func (o DefaultParamsParamListOutput) Default() pulumi.StringOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) string { return v.Default }).(pulumi.StringOutput)
-}
-
-func (o DefaultParamsParamListOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) string { return v.Description }).(pulumi.StringOutput)
-}
-
-func (o DefaultParamsParamListOutput) EnumValues() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
-}
-
-func (o DefaultParamsParamListOutput) Max() pulumi.IntOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) int { return v.Max }).(pulumi.IntOutput)
-}
-
-func (o DefaultParamsParamListOutput) Min() pulumi.IntOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) int { return v.Min }).(pulumi.IntOutput)
-}
-
-func (o DefaultParamsParamListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o DefaultParamsParamListOutput) NeedReboot() pulumi.IntOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) int { return v.NeedReboot }).(pulumi.IntOutput)
-}
-
-func (o DefaultParamsParamListOutput) ParamType() pulumi.StringOutput {
-	return o.ApplyT(func(v DefaultParamsParamList) string { return v.ParamType }).(pulumi.StringOutput)
-}
-
-type DefaultParamsParamListArrayOutput struct{ *pulumi.OutputState }
-
-func (DefaultParamsParamListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DefaultParamsParamList)(nil)).Elem()
-}
-
-func (o DefaultParamsParamListArrayOutput) ToDefaultParamsParamListArrayOutput() DefaultParamsParamListArrayOutput {
-	return o
-}
-
-func (o DefaultParamsParamListArrayOutput) ToDefaultParamsParamListArrayOutputWithContext(ctx context.Context) DefaultParamsParamListArrayOutput {
-	return o
-}
-
-func (o DefaultParamsParamListArrayOutput) Index(i pulumi.IntInput) DefaultParamsParamListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DefaultParamsParamList {
-		return vs[0].([]DefaultParamsParamList)[vs[1].(int)]
-	}).(DefaultParamsParamListOutput)
-}
-
-type InstancesInstanceList struct {
-	AutoRenewFlag    int      `pulumi:"autoRenewFlag"`
-	ChargeType       string   `pulumi:"chargeType"`
-	CpuCoreCount     int      `pulumi:"cpuCoreCount"`
-	CreateTime       string   `pulumi:"createTime"`
-	DeadLineTime     string   `pulumi:"deadLineTime"`
-	DeviceType       string   `pulumi:"deviceType"`
-	DrInstanceIds    []string `pulumi:"drInstanceIds"`
-	EngineVersion    string   `pulumi:"engineVersion"`
-	InitFlag         int      `pulumi:"initFlag"`
-	InstanceName     string   `pulumi:"instanceName"`
-	InstanceRole     string   `pulumi:"instanceRole"`
-	InternetHost     string   `pulumi:"internetHost"`
-	InternetPort     int      `pulumi:"internetPort"`
-	InternetStatus   int      `pulumi:"internetStatus"`
-	IntranetIp       string   `pulumi:"intranetIp"`
-	IntranetPort     int      `pulumi:"intranetPort"`
-	MasterInstanceId string   `pulumi:"masterInstanceId"`
-	MemorySize       int      `pulumi:"memorySize"`
-	MysqlId          string   `pulumi:"mysqlId"`
-	PayType          int      `pulumi:"payType"`
-	ProjectId        int      `pulumi:"projectId"`
-	RoInstanceIds    []string `pulumi:"roInstanceIds"`
-	SlaveSyncMode    int      `pulumi:"slaveSyncMode"`
-	Status           int      `pulumi:"status"`
-	SubnetId         string   `pulumi:"subnetId"`
-	VolumeSize       int      `pulumi:"volumeSize"`
-	VpcId            string   `pulumi:"vpcId"`
-	Zone             string   `pulumi:"zone"`
-}
-
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
-//
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
-	pulumi.Input
-
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
-}
-
-type InstancesInstanceListArgs struct {
-	AutoRenewFlag    pulumi.IntInput         `pulumi:"autoRenewFlag"`
-	ChargeType       pulumi.StringInput      `pulumi:"chargeType"`
-	CpuCoreCount     pulumi.IntInput         `pulumi:"cpuCoreCount"`
-	CreateTime       pulumi.StringInput      `pulumi:"createTime"`
-	DeadLineTime     pulumi.StringInput      `pulumi:"deadLineTime"`
-	DeviceType       pulumi.StringInput      `pulumi:"deviceType"`
-	DrInstanceIds    pulumi.StringArrayInput `pulumi:"drInstanceIds"`
-	EngineVersion    pulumi.StringInput      `pulumi:"engineVersion"`
-	InitFlag         pulumi.IntInput         `pulumi:"initFlag"`
-	InstanceName     pulumi.StringInput      `pulumi:"instanceName"`
-	InstanceRole     pulumi.StringInput      `pulumi:"instanceRole"`
-	InternetHost     pulumi.StringInput      `pulumi:"internetHost"`
-	InternetPort     pulumi.IntInput         `pulumi:"internetPort"`
-	InternetStatus   pulumi.IntInput         `pulumi:"internetStatus"`
-	IntranetIp       pulumi.StringInput      `pulumi:"intranetIp"`
-	IntranetPort     pulumi.IntInput         `pulumi:"intranetPort"`
-	MasterInstanceId pulumi.StringInput      `pulumi:"masterInstanceId"`
-	MemorySize       pulumi.IntInput         `pulumi:"memorySize"`
-	MysqlId          pulumi.StringInput      `pulumi:"mysqlId"`
-	PayType          pulumi.IntInput         `pulumi:"payType"`
-	ProjectId        pulumi.IntInput         `pulumi:"projectId"`
-	RoInstanceIds    pulumi.StringArrayInput `pulumi:"roInstanceIds"`
-	SlaveSyncMode    pulumi.IntInput         `pulumi:"slaveSyncMode"`
-	Status           pulumi.IntInput         `pulumi:"status"`
-	SubnetId         pulumi.StringInput      `pulumi:"subnetId"`
-	VolumeSize       pulumi.IntInput         `pulumi:"volumeSize"`
-	VpcId            pulumi.StringInput      `pulumi:"vpcId"`
-	Zone             pulumi.StringInput      `pulumi:"zone"`
-}
-
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
-}
-
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
-}
-
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
-}
-
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
-//
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
-	pulumi.Input
-
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
-}
-
-type InstancesInstanceListArray []InstancesInstanceListInput
-
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
-}
-
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
-}
-
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
-}
-
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
-
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
-}
-
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return o
-}
-
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return o
-}
-
-func (o InstancesInstanceListOutput) AutoRenewFlag() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) CpuCoreCount() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.CpuCoreCount }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) DeadLineTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.DeadLineTime }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) DeviceType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.DeviceType }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) DrInstanceIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceList) []string { return v.DrInstanceIds }).(pulumi.StringArrayOutput)
-}
-
-func (o InstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) InitFlag() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.InitFlag }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) InstanceRole() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceRole }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) InternetHost() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InternetHost }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) InternetPort() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.InternetPort }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) InternetStatus() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.InternetStatus }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) IntranetIp() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.IntranetIp }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) IntranetPort() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.IntranetPort }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) MasterInstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.MasterInstanceId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) MemorySize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.MemorySize }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) MysqlId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.MysqlId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) PayType() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.PayType }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) RoInstanceIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceList) []string { return v.RoInstanceIds }).(pulumi.StringArrayOutput)
-}
-
-func (o InstancesInstanceListOutput) SlaveSyncMode() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.SlaveSyncMode }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) VolumeSize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.VolumeSize }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) Zone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Zone }).(pulumi.StringOutput)
-}
-
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
-
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
-}
-
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
-}
-
-type ParameterListParameterList struct {
-	CurrentValue  string   `pulumi:"currentValue"`
-	DefaultValue  string   `pulumi:"defaultValue"`
-	Description   string   `pulumi:"description"`
-	EnumValues    []string `pulumi:"enumValues"`
-	Max           int      `pulumi:"max"`
-	Min           int      `pulumi:"min"`
-	NeedReboot    int      `pulumi:"needReboot"`
-	ParameterName string   `pulumi:"parameterName"`
-	ParameterType string   `pulumi:"parameterType"`
-}
-
-// ParameterListParameterListInput is an input type that accepts ParameterListParameterListArgs and ParameterListParameterListOutput values.
-// You can construct a concrete instance of `ParameterListParameterListInput` via:
-//
-//          ParameterListParameterListArgs{...}
-type ParameterListParameterListInput interface {
-	pulumi.Input
-
-	ToParameterListParameterListOutput() ParameterListParameterListOutput
-	ToParameterListParameterListOutputWithContext(context.Context) ParameterListParameterListOutput
-}
-
-type ParameterListParameterListArgs struct {
-	CurrentValue  pulumi.StringInput      `pulumi:"currentValue"`
-	DefaultValue  pulumi.StringInput      `pulumi:"defaultValue"`
-	Description   pulumi.StringInput      `pulumi:"description"`
-	EnumValues    pulumi.StringArrayInput `pulumi:"enumValues"`
-	Max           pulumi.IntInput         `pulumi:"max"`
-	Min           pulumi.IntInput         `pulumi:"min"`
-	NeedReboot    pulumi.IntInput         `pulumi:"needReboot"`
-	ParameterName pulumi.StringInput      `pulumi:"parameterName"`
-	ParameterType pulumi.StringInput      `pulumi:"parameterType"`
-}
-
-func (ParameterListParameterListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ParameterListParameterList)(nil)).Elem()
-}
-
-func (i ParameterListParameterListArgs) ToParameterListParameterListOutput() ParameterListParameterListOutput {
-	return i.ToParameterListParameterListOutputWithContext(context.Background())
-}
-
-func (i ParameterListParameterListArgs) ToParameterListParameterListOutputWithContext(ctx context.Context) ParameterListParameterListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ParameterListParameterListOutput)
-}
-
-// ParameterListParameterListArrayInput is an input type that accepts ParameterListParameterListArray and ParameterListParameterListArrayOutput values.
-// You can construct a concrete instance of `ParameterListParameterListArrayInput` via:
-//
-//          ParameterListParameterListArray{ ParameterListParameterListArgs{...} }
-type ParameterListParameterListArrayInput interface {
-	pulumi.Input
-
-	ToParameterListParameterListArrayOutput() ParameterListParameterListArrayOutput
-	ToParameterListParameterListArrayOutputWithContext(context.Context) ParameterListParameterListArrayOutput
-}
-
-type ParameterListParameterListArray []ParameterListParameterListInput
-
-func (ParameterListParameterListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ParameterListParameterList)(nil)).Elem()
-}
-
-func (i ParameterListParameterListArray) ToParameterListParameterListArrayOutput() ParameterListParameterListArrayOutput {
-	return i.ToParameterListParameterListArrayOutputWithContext(context.Background())
-}
-
-func (i ParameterListParameterListArray) ToParameterListParameterListArrayOutputWithContext(ctx context.Context) ParameterListParameterListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ParameterListParameterListArrayOutput)
-}
-
-type ParameterListParameterListOutput struct{ *pulumi.OutputState }
-
-func (ParameterListParameterListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ParameterListParameterList)(nil)).Elem()
-}
-
-func (o ParameterListParameterListOutput) ToParameterListParameterListOutput() ParameterListParameterListOutput {
-	return o
-}
-
-func (o ParameterListParameterListOutput) ToParameterListParameterListOutputWithContext(ctx context.Context) ParameterListParameterListOutput {
-	return o
-}
-
-func (o ParameterListParameterListOutput) CurrentValue() pulumi.StringOutput {
-	return o.ApplyT(func(v ParameterListParameterList) string { return v.CurrentValue }).(pulumi.StringOutput)
-}
-
-func (o ParameterListParameterListOutput) DefaultValue() pulumi.StringOutput {
-	return o.ApplyT(func(v ParameterListParameterList) string { return v.DefaultValue }).(pulumi.StringOutput)
-}
-
-func (o ParameterListParameterListOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v ParameterListParameterList) string { return v.Description }).(pulumi.StringOutput)
-}
-
-func (o ParameterListParameterListOutput) EnumValues() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ParameterListParameterList) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
-}
-
-func (o ParameterListParameterListOutput) Max() pulumi.IntOutput {
-	return o.ApplyT(func(v ParameterListParameterList) int { return v.Max }).(pulumi.IntOutput)
-}
-
-func (o ParameterListParameterListOutput) Min() pulumi.IntOutput {
-	return o.ApplyT(func(v ParameterListParameterList) int { return v.Min }).(pulumi.IntOutput)
-}
-
-func (o ParameterListParameterListOutput) NeedReboot() pulumi.IntOutput {
-	return o.ApplyT(func(v ParameterListParameterList) int { return v.NeedReboot }).(pulumi.IntOutput)
-}
-
-func (o ParameterListParameterListOutput) ParameterName() pulumi.StringOutput {
-	return o.ApplyT(func(v ParameterListParameterList) string { return v.ParameterName }).(pulumi.StringOutput)
-}
-
-func (o ParameterListParameterListOutput) ParameterType() pulumi.StringOutput {
-	return o.ApplyT(func(v ParameterListParameterList) string { return v.ParameterType }).(pulumi.StringOutput)
-}
-
-type ParameterListParameterListArrayOutput struct{ *pulumi.OutputState }
-
-func (ParameterListParameterListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ParameterListParameterList)(nil)).Elem()
-}
-
-func (o ParameterListParameterListArrayOutput) ToParameterListParameterListArrayOutput() ParameterListParameterListArrayOutput {
-	return o
-}
-
-func (o ParameterListParameterListArrayOutput) ToParameterListParameterListArrayOutputWithContext(ctx context.Context) ParameterListParameterListArrayOutput {
-	return o
-}
-
-func (o ParameterListParameterListArrayOutput) Index(i pulumi.IntInput) ParameterListParameterListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ParameterListParameterList {
-		return vs[0].([]ParameterListParameterList)[vs[1].(int)]
-	}).(ParameterListParameterListOutput)
-}
-
 type PrivilegeColumn struct {
-	ColumnName   string   `pulumi:"columnName"`
-	DatabaseName string   `pulumi:"databaseName"`
-	Privileges   []string `pulumi:"privileges"`
-	TableName    string   `pulumi:"tableName"`
+	// Column name.
+	ColumnName string `pulumi:"columnName"`
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.
+	Privileges []string `pulumi:"privileges"`
+	// Table name.
+	TableName string `pulumi:"tableName"`
 }
 
 // PrivilegeColumnInput is an input type that accepts PrivilegeColumnArgs and PrivilegeColumnOutput values.
@@ -705,10 +33,14 @@ type PrivilegeColumnInput interface {
 }
 
 type PrivilegeColumnArgs struct {
-	ColumnName   pulumi.StringInput      `pulumi:"columnName"`
-	DatabaseName pulumi.StringInput      `pulumi:"databaseName"`
-	Privileges   pulumi.StringArrayInput `pulumi:"privileges"`
-	TableName    pulumi.StringInput      `pulumi:"tableName"`
+	// Column name.
+	ColumnName pulumi.StringInput `pulumi:"columnName"`
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// Table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
 }
 
 func (PrivilegeColumnArgs) ElementType() reflect.Type {
@@ -762,18 +94,22 @@ func (o PrivilegeColumnOutput) ToPrivilegeColumnOutputWithContext(ctx context.Co
 	return o
 }
 
+// Column name.
 func (o PrivilegeColumnOutput) ColumnName() pulumi.StringOutput {
 	return o.ApplyT(func(v PrivilegeColumn) string { return v.ColumnName }).(pulumi.StringOutput)
 }
 
+// Database name.
 func (o PrivilegeColumnOutput) DatabaseName() pulumi.StringOutput {
 	return o.ApplyT(func(v PrivilegeColumn) string { return v.DatabaseName }).(pulumi.StringOutput)
 }
 
+// Column privilege.available values for Privileges:SELECT,INSERT,UPDATE,REFERENCES.
 func (o PrivilegeColumnOutput) Privileges() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v PrivilegeColumn) []string { return v.Privileges }).(pulumi.StringArrayOutput)
 }
 
+// Table name.
 func (o PrivilegeColumnOutput) TableName() pulumi.StringOutput {
 	return o.ApplyT(func(v PrivilegeColumn) string { return v.TableName }).(pulumi.StringOutput)
 }
@@ -799,8 +135,10 @@ func (o PrivilegeColumnArrayOutput) Index(i pulumi.IntInput) PrivilegeColumnOutp
 }
 
 type PrivilegeDatabase struct {
-	DatabaseName string   `pulumi:"databaseName"`
-	Privileges   []string `pulumi:"privileges"`
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.
+	Privileges []string `pulumi:"privileges"`
 }
 
 // PrivilegeDatabaseInput is an input type that accepts PrivilegeDatabaseArgs and PrivilegeDatabaseOutput values.
@@ -815,8 +153,10 @@ type PrivilegeDatabaseInput interface {
 }
 
 type PrivilegeDatabaseArgs struct {
-	DatabaseName pulumi.StringInput      `pulumi:"databaseName"`
-	Privileges   pulumi.StringArrayInput `pulumi:"privileges"`
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
 }
 
 func (PrivilegeDatabaseArgs) ElementType() reflect.Type {
@@ -870,10 +210,12 @@ func (o PrivilegeDatabaseOutput) ToPrivilegeDatabaseOutputWithContext(ctx contex
 	return o
 }
 
+// Database name.
 func (o PrivilegeDatabaseOutput) DatabaseName() pulumi.StringOutput {
 	return o.ApplyT(func(v PrivilegeDatabase) string { return v.DatabaseName }).(pulumi.StringOutput)
 }
 
+// Database privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER.
 func (o PrivilegeDatabaseOutput) Privileges() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v PrivilegeDatabase) []string { return v.Privileges }).(pulumi.StringArrayOutput)
 }
@@ -899,9 +241,12 @@ func (o PrivilegeDatabaseArrayOutput) Index(i pulumi.IntInput) PrivilegeDatabase
 }
 
 type PrivilegeTable struct {
-	DatabaseName string   `pulumi:"databaseName"`
-	Privileges   []string `pulumi:"privileges"`
-	TableName    string   `pulumi:"tableName"`
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+	Privileges []string `pulumi:"privileges"`
+	// Table name.
+	TableName string `pulumi:"tableName"`
 }
 
 // PrivilegeTableInput is an input type that accepts PrivilegeTableArgs and PrivilegeTableOutput values.
@@ -916,9 +261,12 @@ type PrivilegeTableInput interface {
 }
 
 type PrivilegeTableArgs struct {
-	DatabaseName pulumi.StringInput      `pulumi:"databaseName"`
-	Privileges   pulumi.StringArrayInput `pulumi:"privileges"`
-	TableName    pulumi.StringInput      `pulumi:"tableName"`
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// Table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
 }
 
 func (PrivilegeTableArgs) ElementType() reflect.Type {
@@ -972,14 +320,17 @@ func (o PrivilegeTableOutput) ToPrivilegeTableOutputWithContext(ctx context.Cont
 	return o
 }
 
+// Database name.
 func (o PrivilegeTableOutput) DatabaseName() pulumi.StringOutput {
 	return o.ApplyT(func(v PrivilegeTable) string { return v.DatabaseName }).(pulumi.StringOutput)
 }
 
+// Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
 func (o PrivilegeTableOutput) Privileges() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v PrivilegeTable) []string { return v.Privileges }).(pulumi.StringArrayOutput)
 }
 
+// Table name.
 func (o PrivilegeTableOutput) TableName() pulumi.StringOutput {
 	return o.ApplyT(func(v PrivilegeTable) string { return v.TableName }).(pulumi.StringOutput)
 }
@@ -1004,337 +355,1226 @@ func (o PrivilegeTableArrayOutput) Index(i pulumi.IntInput) PrivilegeTableOutput
 	}).(PrivilegeTableOutput)
 }
 
-type ZoneConfigList struct {
-	DisasterRecoveryZones     []string             `pulumi:"disasterRecoveryZones"`
-	EngineVersions            []string             `pulumi:"engineVersions"`
-	FirstSlaveZones           []string             `pulumi:"firstSlaveZones"`
-	HourInstanceSaleMaxNum    int                  `pulumi:"hourInstanceSaleMaxNum"`
-	IsDefault                 int                  `pulumi:"isDefault"`
-	IsSupportDisasterRecovery int                  `pulumi:"isSupportDisasterRecovery"`
-	IsSupportVpc              int                  `pulumi:"isSupportVpc"`
-	Name                      string               `pulumi:"name"`
-	PayTypes                  []int                `pulumi:"payTypes"`
-	RemoteRoZones             []string             `pulumi:"remoteRoZones"`
-	SecondSlaveZones          []string             `pulumi:"secondSlaveZones"`
-	Sells                     []ZoneConfigListSell `pulumi:"sells"`
-	SlaveDeployModes          []int                `pulumi:"slaveDeployModes"`
-	SupportSlaveSyncModes     []int                `pulumi:"supportSlaveSyncModes"`
+type GetBackupListList struct {
+	// ID of Backup task.
+	BackupId int `pulumi:"backupId"`
+	// Backup method. Supported values include: `physical` - physical backup, and `logical` - logical backup.
+	BackupModel string `pulumi:"backupModel"`
+	// The owner of the backup files.
+	Creator string `pulumi:"creator"`
+	// The time at which the backup finishes.
+	FinishTime string `pulumi:"finishTime"`
+	// URL for downloads externally.
+	InternetUrl string `pulumi:"internetUrl"`
+	// URL for downloads internally.
+	IntranetUrl string `pulumi:"intranetUrl"`
+	// the size of backup file.
+	Size int `pulumi:"size"`
+	// The earliest time at which the backup starts. For example, `2` indicates 2:00 am.
+	Time string `pulumi:"time"`
 }
 
-// ZoneConfigListInput is an input type that accepts ZoneConfigListArgs and ZoneConfigListOutput values.
-// You can construct a concrete instance of `ZoneConfigListInput` via:
+// GetBackupListListInput is an input type that accepts GetBackupListListArgs and GetBackupListListOutput values.
+// You can construct a concrete instance of `GetBackupListListInput` via:
 //
-//          ZoneConfigListArgs{...}
-type ZoneConfigListInput interface {
+//          GetBackupListListArgs{...}
+type GetBackupListListInput interface {
 	pulumi.Input
 
-	ToZoneConfigListOutput() ZoneConfigListOutput
-	ToZoneConfigListOutputWithContext(context.Context) ZoneConfigListOutput
+	ToGetBackupListListOutput() GetBackupListListOutput
+	ToGetBackupListListOutputWithContext(context.Context) GetBackupListListOutput
 }
 
-type ZoneConfigListArgs struct {
-	DisasterRecoveryZones     pulumi.StringArrayInput      `pulumi:"disasterRecoveryZones"`
-	EngineVersions            pulumi.StringArrayInput      `pulumi:"engineVersions"`
-	FirstSlaveZones           pulumi.StringArrayInput      `pulumi:"firstSlaveZones"`
-	HourInstanceSaleMaxNum    pulumi.IntInput              `pulumi:"hourInstanceSaleMaxNum"`
-	IsDefault                 pulumi.IntInput              `pulumi:"isDefault"`
-	IsSupportDisasterRecovery pulumi.IntInput              `pulumi:"isSupportDisasterRecovery"`
-	IsSupportVpc              pulumi.IntInput              `pulumi:"isSupportVpc"`
-	Name                      pulumi.StringInput           `pulumi:"name"`
-	PayTypes                  pulumi.IntArrayInput         `pulumi:"payTypes"`
-	RemoteRoZones             pulumi.StringArrayInput      `pulumi:"remoteRoZones"`
-	SecondSlaveZones          pulumi.StringArrayInput      `pulumi:"secondSlaveZones"`
-	Sells                     ZoneConfigListSellArrayInput `pulumi:"sells"`
-	SlaveDeployModes          pulumi.IntArrayInput         `pulumi:"slaveDeployModes"`
-	SupportSlaveSyncModes     pulumi.IntArrayInput         `pulumi:"supportSlaveSyncModes"`
+type GetBackupListListArgs struct {
+	// ID of Backup task.
+	BackupId pulumi.IntInput `pulumi:"backupId"`
+	// Backup method. Supported values include: `physical` - physical backup, and `logical` - logical backup.
+	BackupModel pulumi.StringInput `pulumi:"backupModel"`
+	// The owner of the backup files.
+	Creator pulumi.StringInput `pulumi:"creator"`
+	// The time at which the backup finishes.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// URL for downloads externally.
+	InternetUrl pulumi.StringInput `pulumi:"internetUrl"`
+	// URL for downloads internally.
+	IntranetUrl pulumi.StringInput `pulumi:"intranetUrl"`
+	// the size of backup file.
+	Size pulumi.IntInput `pulumi:"size"`
+	// The earliest time at which the backup starts. For example, `2` indicates 2:00 am.
+	Time pulumi.StringInput `pulumi:"time"`
 }
 
-func (ZoneConfigListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigList)(nil)).Elem()
+func (GetBackupListListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupListList)(nil)).Elem()
 }
 
-func (i ZoneConfigListArgs) ToZoneConfigListOutput() ZoneConfigListOutput {
-	return i.ToZoneConfigListOutputWithContext(context.Background())
+func (i GetBackupListListArgs) ToGetBackupListListOutput() GetBackupListListOutput {
+	return i.ToGetBackupListListOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListArgs) ToZoneConfigListOutputWithContext(ctx context.Context) ZoneConfigListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListOutput)
+func (i GetBackupListListArgs) ToGetBackupListListOutputWithContext(ctx context.Context) GetBackupListListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupListListOutput)
 }
 
-// ZoneConfigListArrayInput is an input type that accepts ZoneConfigListArray and ZoneConfigListArrayOutput values.
-// You can construct a concrete instance of `ZoneConfigListArrayInput` via:
+// GetBackupListListArrayInput is an input type that accepts GetBackupListListArray and GetBackupListListArrayOutput values.
+// You can construct a concrete instance of `GetBackupListListArrayInput` via:
 //
-//          ZoneConfigListArray{ ZoneConfigListArgs{...} }
-type ZoneConfigListArrayInput interface {
+//          GetBackupListListArray{ GetBackupListListArgs{...} }
+type GetBackupListListArrayInput interface {
 	pulumi.Input
 
-	ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput
-	ToZoneConfigListArrayOutputWithContext(context.Context) ZoneConfigListArrayOutput
+	ToGetBackupListListArrayOutput() GetBackupListListArrayOutput
+	ToGetBackupListListArrayOutputWithContext(context.Context) GetBackupListListArrayOutput
 }
 
-type ZoneConfigListArray []ZoneConfigListInput
+type GetBackupListListArray []GetBackupListListInput
 
-func (ZoneConfigListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigList)(nil)).Elem()
+func (GetBackupListListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupListList)(nil)).Elem()
 }
 
-func (i ZoneConfigListArray) ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput {
-	return i.ToZoneConfigListArrayOutputWithContext(context.Background())
+func (i GetBackupListListArray) ToGetBackupListListArrayOutput() GetBackupListListArrayOutput {
+	return i.ToGetBackupListListArrayOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListArray) ToZoneConfigListArrayOutputWithContext(ctx context.Context) ZoneConfigListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListArrayOutput)
+func (i GetBackupListListArray) ToGetBackupListListArrayOutputWithContext(ctx context.Context) GetBackupListListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupListListArrayOutput)
 }
 
-type ZoneConfigListOutput struct{ *pulumi.OutputState }
+type GetBackupListListOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigList)(nil)).Elem()
+func (GetBackupListListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupListList)(nil)).Elem()
 }
 
-func (o ZoneConfigListOutput) ToZoneConfigListOutput() ZoneConfigListOutput {
+func (o GetBackupListListOutput) ToGetBackupListListOutput() GetBackupListListOutput {
 	return o
 }
 
-func (o ZoneConfigListOutput) ToZoneConfigListOutputWithContext(ctx context.Context) ZoneConfigListOutput {
+func (o GetBackupListListOutput) ToGetBackupListListOutputWithContext(ctx context.Context) GetBackupListListOutput {
 	return o
 }
 
-func (o ZoneConfigListOutput) DisasterRecoveryZones() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []string { return v.DisasterRecoveryZones }).(pulumi.StringArrayOutput)
+// ID of Backup task.
+func (o GetBackupListListOutput) BackupId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupListList) int { return v.BackupId }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) EngineVersions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []string { return v.EngineVersions }).(pulumi.StringArrayOutput)
+// Backup method. Supported values include: `physical` - physical backup, and `logical` - logical backup.
+func (o GetBackupListListOutput) BackupModel() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupListList) string { return v.BackupModel }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) FirstSlaveZones() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []string { return v.FirstSlaveZones }).(pulumi.StringArrayOutput)
+// The owner of the backup files.
+func (o GetBackupListListOutput) Creator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupListList) string { return v.Creator }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) HourInstanceSaleMaxNum() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.HourInstanceSaleMaxNum }).(pulumi.IntOutput)
+// The time at which the backup finishes.
+func (o GetBackupListListOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupListList) string { return v.FinishTime }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) IsDefault() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.IsDefault }).(pulumi.IntOutput)
+// URL for downloads externally.
+func (o GetBackupListListOutput) InternetUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupListList) string { return v.InternetUrl }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) IsSupportDisasterRecovery() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.IsSupportDisasterRecovery }).(pulumi.IntOutput)
+// URL for downloads internally.
+func (o GetBackupListListOutput) IntranetUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupListList) string { return v.IntranetUrl }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) IsSupportVpc() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.IsSupportVpc }).(pulumi.IntOutput)
+// the size of backup file.
+func (o GetBackupListListOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupListList) int { return v.Size }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.Name }).(pulumi.StringOutput)
+// The earliest time at which the backup starts. For example, `2` indicates 2:00 am.
+func (o GetBackupListListOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupListList) string { return v.Time }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) PayTypes() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []int { return v.PayTypes }).(pulumi.IntArrayOutput)
+type GetBackupListListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupListListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupListList)(nil)).Elem()
 }
 
-func (o ZoneConfigListOutput) RemoteRoZones() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []string { return v.RemoteRoZones }).(pulumi.StringArrayOutput)
-}
-
-func (o ZoneConfigListOutput) SecondSlaveZones() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []string { return v.SecondSlaveZones }).(pulumi.StringArrayOutput)
-}
-
-func (o ZoneConfigListOutput) Sells() ZoneConfigListSellArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []ZoneConfigListSell { return v.Sells }).(ZoneConfigListSellArrayOutput)
-}
-
-func (o ZoneConfigListOutput) SlaveDeployModes() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []int { return v.SlaveDeployModes }).(pulumi.IntArrayOutput)
-}
-
-func (o ZoneConfigListOutput) SupportSlaveSyncModes() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []int { return v.SupportSlaveSyncModes }).(pulumi.IntArrayOutput)
-}
-
-type ZoneConfigListArrayOutput struct{ *pulumi.OutputState }
-
-func (ZoneConfigListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigList)(nil)).Elem()
-}
-
-func (o ZoneConfigListArrayOutput) ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput {
+func (o GetBackupListListArrayOutput) ToGetBackupListListArrayOutput() GetBackupListListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListArrayOutput) ToZoneConfigListArrayOutputWithContext(ctx context.Context) ZoneConfigListArrayOutput {
+func (o GetBackupListListArrayOutput) ToGetBackupListListArrayOutputWithContext(ctx context.Context) GetBackupListListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListArrayOutput) Index(i pulumi.IntInput) ZoneConfigListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneConfigList {
-		return vs[0].([]ZoneConfigList)[vs[1].(int)]
-	}).(ZoneConfigListOutput)
+func (o GetBackupListListArrayOutput) Index(i pulumi.IntInput) GetBackupListListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupListList {
+		return vs[0].([]GetBackupListList)[vs[1].(int)]
+	}).(GetBackupListListOutput)
 }
 
-type ZoneConfigListSell struct {
-	CdbType       string `pulumi:"cdbType"`
-	MaxVolumeSize int    `pulumi:"maxVolumeSize"`
-	MemSize       int    `pulumi:"memSize"`
-	MinVolumeSize int    `pulumi:"minVolumeSize"`
-	Qps           int    `pulumi:"qps"`
-	VolumeStep    int    `pulumi:"volumeStep"`
+type GetDefaultParamsParamList struct {
+	// Param current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// Param default value.
+	Default string `pulumi:"default"`
+	// Param description.
+	Description string `pulumi:"description"`
+	// Params available values if type of param is enum.
+	EnumValues []string `pulumi:"enumValues"`
+	// Param maximum value if type of param is integer.
+	Max int `pulumi:"max"`
+	// Param minimum value if type of param is integer.
+	Min int `pulumi:"min"`
+	// Param key name.
+	Name string `pulumi:"name"`
+	// Indicates weather the database instance reboot if param modified.
+	NeedReboot int `pulumi:"needReboot"`
+	// Type of param.
+	ParamType string `pulumi:"paramType"`
 }
 
-// ZoneConfigListSellInput is an input type that accepts ZoneConfigListSellArgs and ZoneConfigListSellOutput values.
-// You can construct a concrete instance of `ZoneConfigListSellInput` via:
+// GetDefaultParamsParamListInput is an input type that accepts GetDefaultParamsParamListArgs and GetDefaultParamsParamListOutput values.
+// You can construct a concrete instance of `GetDefaultParamsParamListInput` via:
 //
-//          ZoneConfigListSellArgs{...}
-type ZoneConfigListSellInput interface {
+//          GetDefaultParamsParamListArgs{...}
+type GetDefaultParamsParamListInput interface {
 	pulumi.Input
 
-	ToZoneConfigListSellOutput() ZoneConfigListSellOutput
-	ToZoneConfigListSellOutputWithContext(context.Context) ZoneConfigListSellOutput
+	ToGetDefaultParamsParamListOutput() GetDefaultParamsParamListOutput
+	ToGetDefaultParamsParamListOutputWithContext(context.Context) GetDefaultParamsParamListOutput
 }
 
-type ZoneConfigListSellArgs struct {
-	CdbType       pulumi.StringInput `pulumi:"cdbType"`
-	MaxVolumeSize pulumi.IntInput    `pulumi:"maxVolumeSize"`
-	MemSize       pulumi.IntInput    `pulumi:"memSize"`
-	MinVolumeSize pulumi.IntInput    `pulumi:"minVolumeSize"`
-	Qps           pulumi.IntInput    `pulumi:"qps"`
-	VolumeStep    pulumi.IntInput    `pulumi:"volumeStep"`
+type GetDefaultParamsParamListArgs struct {
+	// Param current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// Param default value.
+	Default pulumi.StringInput `pulumi:"default"`
+	// Param description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Params available values if type of param is enum.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// Param maximum value if type of param is integer.
+	Max pulumi.IntInput `pulumi:"max"`
+	// Param minimum value if type of param is integer.
+	Min pulumi.IntInput `pulumi:"min"`
+	// Param key name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Indicates weather the database instance reboot if param modified.
+	NeedReboot pulumi.IntInput `pulumi:"needReboot"`
+	// Type of param.
+	ParamType pulumi.StringInput `pulumi:"paramType"`
 }
 
-func (ZoneConfigListSellArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigListSell)(nil)).Elem()
+func (GetDefaultParamsParamListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParamsParamList)(nil)).Elem()
 }
 
-func (i ZoneConfigListSellArgs) ToZoneConfigListSellOutput() ZoneConfigListSellOutput {
-	return i.ToZoneConfigListSellOutputWithContext(context.Background())
+func (i GetDefaultParamsParamListArgs) ToGetDefaultParamsParamListOutput() GetDefaultParamsParamListOutput {
+	return i.ToGetDefaultParamsParamListOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListSellArgs) ToZoneConfigListSellOutputWithContext(ctx context.Context) ZoneConfigListSellOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListSellOutput)
+func (i GetDefaultParamsParamListArgs) ToGetDefaultParamsParamListOutputWithContext(ctx context.Context) GetDefaultParamsParamListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParamsParamListOutput)
 }
 
-// ZoneConfigListSellArrayInput is an input type that accepts ZoneConfigListSellArray and ZoneConfigListSellArrayOutput values.
-// You can construct a concrete instance of `ZoneConfigListSellArrayInput` via:
+// GetDefaultParamsParamListArrayInput is an input type that accepts GetDefaultParamsParamListArray and GetDefaultParamsParamListArrayOutput values.
+// You can construct a concrete instance of `GetDefaultParamsParamListArrayInput` via:
 //
-//          ZoneConfigListSellArray{ ZoneConfigListSellArgs{...} }
-type ZoneConfigListSellArrayInput interface {
+//          GetDefaultParamsParamListArray{ GetDefaultParamsParamListArgs{...} }
+type GetDefaultParamsParamListArrayInput interface {
 	pulumi.Input
 
-	ToZoneConfigListSellArrayOutput() ZoneConfigListSellArrayOutput
-	ToZoneConfigListSellArrayOutputWithContext(context.Context) ZoneConfigListSellArrayOutput
+	ToGetDefaultParamsParamListArrayOutput() GetDefaultParamsParamListArrayOutput
+	ToGetDefaultParamsParamListArrayOutputWithContext(context.Context) GetDefaultParamsParamListArrayOutput
 }
 
-type ZoneConfigListSellArray []ZoneConfigListSellInput
+type GetDefaultParamsParamListArray []GetDefaultParamsParamListInput
 
-func (ZoneConfigListSellArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigListSell)(nil)).Elem()
+func (GetDefaultParamsParamListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParamsParamList)(nil)).Elem()
 }
 
-func (i ZoneConfigListSellArray) ToZoneConfigListSellArrayOutput() ZoneConfigListSellArrayOutput {
-	return i.ToZoneConfigListSellArrayOutputWithContext(context.Background())
+func (i GetDefaultParamsParamListArray) ToGetDefaultParamsParamListArrayOutput() GetDefaultParamsParamListArrayOutput {
+	return i.ToGetDefaultParamsParamListArrayOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListSellArray) ToZoneConfigListSellArrayOutputWithContext(ctx context.Context) ZoneConfigListSellArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListSellArrayOutput)
+func (i GetDefaultParamsParamListArray) ToGetDefaultParamsParamListArrayOutputWithContext(ctx context.Context) GetDefaultParamsParamListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParamsParamListArrayOutput)
 }
 
-type ZoneConfigListSellOutput struct{ *pulumi.OutputState }
+type GetDefaultParamsParamListOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigListSellOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigListSell)(nil)).Elem()
+func (GetDefaultParamsParamListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParamsParamList)(nil)).Elem()
 }
 
-func (o ZoneConfigListSellOutput) ToZoneConfigListSellOutput() ZoneConfigListSellOutput {
+func (o GetDefaultParamsParamListOutput) ToGetDefaultParamsParamListOutput() GetDefaultParamsParamListOutput {
 	return o
 }
 
-func (o ZoneConfigListSellOutput) ToZoneConfigListSellOutputWithContext(ctx context.Context) ZoneConfigListSellOutput {
+func (o GetDefaultParamsParamListOutput) ToGetDefaultParamsParamListOutputWithContext(ctx context.Context) GetDefaultParamsParamListOutput {
 	return o
 }
 
-func (o ZoneConfigListSellOutput) CdbType() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigListSell) string { return v.CdbType }).(pulumi.StringOutput)
+// Param current value.
+func (o GetDefaultParamsParamListOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) string { return v.CurrentValue }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListSellOutput) MaxVolumeSize() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigListSell) int { return v.MaxVolumeSize }).(pulumi.IntOutput)
+// Param default value.
+func (o GetDefaultParamsParamListOutput) Default() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) string { return v.Default }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListSellOutput) MemSize() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigListSell) int { return v.MemSize }).(pulumi.IntOutput)
+// Param description.
+func (o GetDefaultParamsParamListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListSellOutput) MinVolumeSize() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigListSell) int { return v.MinVolumeSize }).(pulumi.IntOutput)
+// Params available values if type of param is enum.
+func (o GetDefaultParamsParamListOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
 }
 
-func (o ZoneConfigListSellOutput) Qps() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigListSell) int { return v.Qps }).(pulumi.IntOutput)
+// Param maximum value if type of param is integer.
+func (o GetDefaultParamsParamListOutput) Max() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) int { return v.Max }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListSellOutput) VolumeStep() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigListSell) int { return v.VolumeStep }).(pulumi.IntOutput)
+// Param minimum value if type of param is integer.
+func (o GetDefaultParamsParamListOutput) Min() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) int { return v.Min }).(pulumi.IntOutput)
 }
 
-type ZoneConfigListSellArrayOutput struct{ *pulumi.OutputState }
-
-func (ZoneConfigListSellArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigListSell)(nil)).Elem()
+// Param key name.
+func (o GetDefaultParamsParamListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListSellArrayOutput) ToZoneConfigListSellArrayOutput() ZoneConfigListSellArrayOutput {
+// Indicates weather the database instance reboot if param modified.
+func (o GetDefaultParamsParamListOutput) NeedReboot() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) int { return v.NeedReboot }).(pulumi.IntOutput)
+}
+
+// Type of param.
+func (o GetDefaultParamsParamListOutput) ParamType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParamsParamList) string { return v.ParamType }).(pulumi.StringOutput)
+}
+
+type GetDefaultParamsParamListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDefaultParamsParamListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParamsParamList)(nil)).Elem()
+}
+
+func (o GetDefaultParamsParamListArrayOutput) ToGetDefaultParamsParamListArrayOutput() GetDefaultParamsParamListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListSellArrayOutput) ToZoneConfigListSellArrayOutputWithContext(ctx context.Context) ZoneConfigListSellArrayOutput {
+func (o GetDefaultParamsParamListArrayOutput) ToGetDefaultParamsParamListArrayOutputWithContext(ctx context.Context) GetDefaultParamsParamListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListSellArrayOutput) Index(i pulumi.IntInput) ZoneConfigListSellOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneConfigListSell {
-		return vs[0].([]ZoneConfigListSell)[vs[1].(int)]
-	}).(ZoneConfigListSellOutput)
+func (o GetDefaultParamsParamListArrayOutput) Index(i pulumi.IntInput) GetDefaultParamsParamListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDefaultParamsParamList {
+		return vs[0].([]GetDefaultParamsParamList)[vs[1].(int)]
+	}).(GetDefaultParamsParamListOutput)
+}
+
+type GetInstanceInstanceList struct {
+	// Auto renew flag. NOTES: Only supported prepay instance.
+	AutoRenewFlag int `pulumi:"autoRenewFlag"`
+	// Pay type of instance, valid values are `PREPAID` and `POSTPAID`.
+	ChargeType string `pulumi:"chargeType"`
+	// CPU count.
+	CpuCoreCount int `pulumi:"cpuCoreCount"`
+	// The time at which a instance is created.
+	CreateTime string `pulumi:"createTime"`
+	// Expire date of instance. NOTES: Only supported prepay instance.
+	DeadLineTime string `pulumi:"deadLineTime"`
+	// Supported instance model. `HA` - high available version; `Basic` - basic version.
+	DeviceType string `pulumi:"deviceType"`
+	// ID list of disaster-recovery type associated with the current instance.
+	DrInstanceIds []string `pulumi:"drInstanceIds"`
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
+	EngineVersion string `pulumi:"engineVersion"`
+	// Initialization mark. Available values: `0` - Uninitialized; `1` - Initialized.
+	InitFlag int `pulumi:"initFlag"`
+	// Name of mysql instance.
+	InstanceName string `pulumi:"instanceName"`
+	// Instance type. Supported values include: `master` - master instance, `dr` - disaster recovery instance, and `ro` - read-only instance.
+	InstanceRole string `pulumi:"instanceRole"`
+	// Public network domain name.
+	InternetHost string `pulumi:"internetHost"`
+	// Public network port.
+	InternetPort int `pulumi:"internetPort"`
+	// Status of public network.
+	InternetStatus int `pulumi:"internetStatus"`
+	// Instance IP for internal access.
+	IntranetIp string `pulumi:"intranetIp"`
+	// Transport layer port number for internal purpose.
+	IntranetPort int `pulumi:"intranetPort"`
+	// Indicates the master instance ID of recovery instances.
+	MasterInstanceId string `pulumi:"masterInstanceId"`
+	// Memory size (in MB).
+	MemorySize int `pulumi:"memorySize"`
+	// Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
+	MysqlId string `pulumi:"mysqlId"`
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
+	PayType int `pulumi:"payType"`
+	// Project ID to which the current instance belongs.
+	ProjectId int `pulumi:"projectId"`
+	// ID list of read-only type associated with the current instance.
+	RoInstanceIds []string `pulumi:"roInstanceIds"`
+	// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+	SlaveSyncMode int `pulumi:"slaveSyncMode"`
+	// Instance status. Available values: `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
+	Status int `pulumi:"status"`
+	// ID of subnet to which the current instance belongs.
+	SubnetId string `pulumi:"subnetId"`
+	// Disk capacity (in GB).
+	VolumeSize int `pulumi:"volumeSize"`
+	// ID of Virtual Private Cloud.
+	VpcId string `pulumi:"vpcId"`
+	// Information of available zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstanceInstanceListInput is an input type that accepts GetInstanceInstanceListArgs and GetInstanceInstanceListOutput values.
+// You can construct a concrete instance of `GetInstanceInstanceListInput` via:
+//
+//          GetInstanceInstanceListArgs{...}
+type GetInstanceInstanceListInput interface {
+	pulumi.Input
+
+	ToGetInstanceInstanceListOutput() GetInstanceInstanceListOutput
+	ToGetInstanceInstanceListOutputWithContext(context.Context) GetInstanceInstanceListOutput
+}
+
+type GetInstanceInstanceListArgs struct {
+	// Auto renew flag. NOTES: Only supported prepay instance.
+	AutoRenewFlag pulumi.IntInput `pulumi:"autoRenewFlag"`
+	// Pay type of instance, valid values are `PREPAID` and `POSTPAID`.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// CPU count.
+	CpuCoreCount pulumi.IntInput `pulumi:"cpuCoreCount"`
+	// The time at which a instance is created.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Expire date of instance. NOTES: Only supported prepay instance.
+	DeadLineTime pulumi.StringInput `pulumi:"deadLineTime"`
+	// Supported instance model. `HA` - high available version; `Basic` - basic version.
+	DeviceType pulumi.StringInput `pulumi:"deviceType"`
+	// ID list of disaster-recovery type associated with the current instance.
+	DrInstanceIds pulumi.StringArrayInput `pulumi:"drInstanceIds"`
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
+	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
+	// Initialization mark. Available values: `0` - Uninitialized; `1` - Initialized.
+	InitFlag pulumi.IntInput `pulumi:"initFlag"`
+	// Name of mysql instance.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Instance type. Supported values include: `master` - master instance, `dr` - disaster recovery instance, and `ro` - read-only instance.
+	InstanceRole pulumi.StringInput `pulumi:"instanceRole"`
+	// Public network domain name.
+	InternetHost pulumi.StringInput `pulumi:"internetHost"`
+	// Public network port.
+	InternetPort pulumi.IntInput `pulumi:"internetPort"`
+	// Status of public network.
+	InternetStatus pulumi.IntInput `pulumi:"internetStatus"`
+	// Instance IP for internal access.
+	IntranetIp pulumi.StringInput `pulumi:"intranetIp"`
+	// Transport layer port number for internal purpose.
+	IntranetPort pulumi.IntInput `pulumi:"intranetPort"`
+	// Indicates the master instance ID of recovery instances.
+	MasterInstanceId pulumi.StringInput `pulumi:"masterInstanceId"`
+	// Memory size (in MB).
+	MemorySize pulumi.IntInput `pulumi:"memorySize"`
+	// Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
+	MysqlId pulumi.StringInput `pulumi:"mysqlId"`
+	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
+	PayType pulumi.IntInput `pulumi:"payType"`
+	// Project ID to which the current instance belongs.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// ID list of read-only type associated with the current instance.
+	RoInstanceIds pulumi.StringArrayInput `pulumi:"roInstanceIds"`
+	// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+	SlaveSyncMode pulumi.IntInput `pulumi:"slaveSyncMode"`
+	// Instance status. Available values: `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
+	Status pulumi.IntInput `pulumi:"status"`
+	// ID of subnet to which the current instance belongs.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Disk capacity (in GB).
+	VolumeSize pulumi.IntInput `pulumi:"volumeSize"`
+	// ID of Virtual Private Cloud.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Information of available zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstanceInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceInstanceList)(nil)).Elem()
+}
+
+func (i GetInstanceInstanceListArgs) ToGetInstanceInstanceListOutput() GetInstanceInstanceListOutput {
+	return i.ToGetInstanceInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetInstanceInstanceListArgs) ToGetInstanceInstanceListOutputWithContext(ctx context.Context) GetInstanceInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceInstanceListOutput)
+}
+
+// GetInstanceInstanceListArrayInput is an input type that accepts GetInstanceInstanceListArray and GetInstanceInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstanceInstanceListArrayInput` via:
+//
+//          GetInstanceInstanceListArray{ GetInstanceInstanceListArgs{...} }
+type GetInstanceInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceInstanceListArrayOutput() GetInstanceInstanceListArrayOutput
+	ToGetInstanceInstanceListArrayOutputWithContext(context.Context) GetInstanceInstanceListArrayOutput
+}
+
+type GetInstanceInstanceListArray []GetInstanceInstanceListInput
+
+func (GetInstanceInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceInstanceList)(nil)).Elem()
+}
+
+func (i GetInstanceInstanceListArray) ToGetInstanceInstanceListArrayOutput() GetInstanceInstanceListArrayOutput {
+	return i.ToGetInstanceInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceInstanceListArray) ToGetInstanceInstanceListArrayOutputWithContext(ctx context.Context) GetInstanceInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceInstanceListArrayOutput)
+}
+
+type GetInstanceInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceInstanceList)(nil)).Elem()
+}
+
+func (o GetInstanceInstanceListOutput) ToGetInstanceInstanceListOutput() GetInstanceInstanceListOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListOutput) ToGetInstanceInstanceListOutputWithContext(ctx context.Context) GetInstanceInstanceListOutput {
+	return o
+}
+
+// Auto renew flag. NOTES: Only supported prepay instance.
+func (o GetInstanceInstanceListOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
+}
+
+// Pay type of instance, valid values are `PREPAID` and `POSTPAID`.
+func (o GetInstanceInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
+// CPU count.
+func (o GetInstanceInstanceListOutput) CpuCoreCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.CpuCoreCount }).(pulumi.IntOutput)
+}
+
+// The time at which a instance is created.
+func (o GetInstanceInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Expire date of instance. NOTES: Only supported prepay instance.
+func (o GetInstanceInstanceListOutput) DeadLineTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.DeadLineTime }).(pulumi.StringOutput)
+}
+
+// Supported instance model. `HA` - high available version; `Basic` - basic version.
+func (o GetInstanceInstanceListOutput) DeviceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.DeviceType }).(pulumi.StringOutput)
+}
+
+// ID list of disaster-recovery type associated with the current instance.
+func (o GetInstanceInstanceListOutput) DrInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) []string { return v.DrInstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
+func (o GetInstanceInstanceListOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
+}
+
+// Initialization mark. Available values: `0` - Uninitialized; `1` - Initialized.
+func (o GetInstanceInstanceListOutput) InitFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.InitFlag }).(pulumi.IntOutput)
+}
+
+// Name of mysql instance.
+func (o GetInstanceInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance type. Supported values include: `master` - master instance, `dr` - disaster recovery instance, and `ro` - read-only instance.
+func (o GetInstanceInstanceListOutput) InstanceRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.InstanceRole }).(pulumi.StringOutput)
+}
+
+// Public network domain name.
+func (o GetInstanceInstanceListOutput) InternetHost() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.InternetHost }).(pulumi.StringOutput)
+}
+
+// Public network port.
+func (o GetInstanceInstanceListOutput) InternetPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.InternetPort }).(pulumi.IntOutput)
+}
+
+// Status of public network.
+func (o GetInstanceInstanceListOutput) InternetStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.InternetStatus }).(pulumi.IntOutput)
+}
+
+// Instance IP for internal access.
+func (o GetInstanceInstanceListOutput) IntranetIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.IntranetIp }).(pulumi.StringOutput)
+}
+
+// Transport layer port number for internal purpose.
+func (o GetInstanceInstanceListOutput) IntranetPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.IntranetPort }).(pulumi.IntOutput)
+}
+
+// Indicates the master instance ID of recovery instances.
+func (o GetInstanceInstanceListOutput) MasterInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.MasterInstanceId }).(pulumi.StringOutput)
+}
+
+// Memory size (in MB).
+func (o GetInstanceInstanceListOutput) MemorySize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.MemorySize }).(pulumi.IntOutput)
+}
+
+// Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
+func (o GetInstanceInstanceListOutput) MysqlId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.MysqlId }).(pulumi.StringOutput)
+}
+
+// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
+func (o GetInstanceInstanceListOutput) PayType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.PayType }).(pulumi.IntOutput)
+}
+
+// Project ID to which the current instance belongs.
+func (o GetInstanceInstanceListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// ID list of read-only type associated with the current instance.
+func (o GetInstanceInstanceListOutput) RoInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) []string { return v.RoInstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+func (o GetInstanceInstanceListOutput) SlaveSyncMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.SlaveSyncMode }).(pulumi.IntOutput)
+}
+
+// Instance status. Available values: `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
+func (o GetInstanceInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// ID of subnet to which the current instance belongs.
+func (o GetInstanceInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Disk capacity (in GB).
+func (o GetInstanceInstanceListOutput) VolumeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.VolumeSize }).(pulumi.IntOutput)
+}
+
+// ID of Virtual Private Cloud.
+func (o GetInstanceInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Information of available zone.
+func (o GetInstanceInstanceListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstanceInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceInstanceList)(nil)).Elem()
+}
+
+func (o GetInstanceInstanceListArrayOutput) ToGetInstanceInstanceListArrayOutput() GetInstanceInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListArrayOutput) ToGetInstanceInstanceListArrayOutputWithContext(ctx context.Context) GetInstanceInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanceInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceInstanceList {
+		return vs[0].([]GetInstanceInstanceList)[vs[1].(int)]
+	}).(GetInstanceInstanceListOutput)
+}
+
+type GetParameterListParameterList struct {
+	// Current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// Default value.
+	DefaultValue string `pulumi:"defaultValue"`
+	// Parameter specification description.
+	Description string `pulumi:"description"`
+	// Enumerated value.
+	EnumValues []string `pulumi:"enumValues"`
+	// Maximum value for the parameter.
+	Max int `pulumi:"max"`
+	// Minimum value for the parameter.
+	Min int `pulumi:"min"`
+	// Indicates whether reboot is needed to enable the new parameters.
+	NeedReboot int `pulumi:"needReboot"`
+	// Parameter name.
+	ParameterName string `pulumi:"parameterName"`
+	// Parameter type.
+	ParameterType string `pulumi:"parameterType"`
+}
+
+// GetParameterListParameterListInput is an input type that accepts GetParameterListParameterListArgs and GetParameterListParameterListOutput values.
+// You can construct a concrete instance of `GetParameterListParameterListInput` via:
+//
+//          GetParameterListParameterListArgs{...}
+type GetParameterListParameterListInput interface {
+	pulumi.Input
+
+	ToGetParameterListParameterListOutput() GetParameterListParameterListOutput
+	ToGetParameterListParameterListOutputWithContext(context.Context) GetParameterListParameterListOutput
+}
+
+type GetParameterListParameterListArgs struct {
+	// Current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// Default value.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// Parameter specification description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Enumerated value.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// Maximum value for the parameter.
+	Max pulumi.IntInput `pulumi:"max"`
+	// Minimum value for the parameter.
+	Min pulumi.IntInput `pulumi:"min"`
+	// Indicates whether reboot is needed to enable the new parameters.
+	NeedReboot pulumi.IntInput `pulumi:"needReboot"`
+	// Parameter name.
+	ParameterName pulumi.StringInput `pulumi:"parameterName"`
+	// Parameter type.
+	ParameterType pulumi.StringInput `pulumi:"parameterType"`
+}
+
+func (GetParameterListParameterListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParameterListParameterList)(nil)).Elem()
+}
+
+func (i GetParameterListParameterListArgs) ToGetParameterListParameterListOutput() GetParameterListParameterListOutput {
+	return i.ToGetParameterListParameterListOutputWithContext(context.Background())
+}
+
+func (i GetParameterListParameterListArgs) ToGetParameterListParameterListOutputWithContext(ctx context.Context) GetParameterListParameterListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParameterListParameterListOutput)
+}
+
+// GetParameterListParameterListArrayInput is an input type that accepts GetParameterListParameterListArray and GetParameterListParameterListArrayOutput values.
+// You can construct a concrete instance of `GetParameterListParameterListArrayInput` via:
+//
+//          GetParameterListParameterListArray{ GetParameterListParameterListArgs{...} }
+type GetParameterListParameterListArrayInput interface {
+	pulumi.Input
+
+	ToGetParameterListParameterListArrayOutput() GetParameterListParameterListArrayOutput
+	ToGetParameterListParameterListArrayOutputWithContext(context.Context) GetParameterListParameterListArrayOutput
+}
+
+type GetParameterListParameterListArray []GetParameterListParameterListInput
+
+func (GetParameterListParameterListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParameterListParameterList)(nil)).Elem()
+}
+
+func (i GetParameterListParameterListArray) ToGetParameterListParameterListArrayOutput() GetParameterListParameterListArrayOutput {
+	return i.ToGetParameterListParameterListArrayOutputWithContext(context.Background())
+}
+
+func (i GetParameterListParameterListArray) ToGetParameterListParameterListArrayOutputWithContext(ctx context.Context) GetParameterListParameterListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParameterListParameterListArrayOutput)
+}
+
+type GetParameterListParameterListOutput struct{ *pulumi.OutputState }
+
+func (GetParameterListParameterListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParameterListParameterList)(nil)).Elem()
+}
+
+func (o GetParameterListParameterListOutput) ToGetParameterListParameterListOutput() GetParameterListParameterListOutput {
+	return o
+}
+
+func (o GetParameterListParameterListOutput) ToGetParameterListParameterListOutputWithContext(ctx context.Context) GetParameterListParameterListOutput {
+	return o
+}
+
+// Current value.
+func (o GetParameterListParameterListOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// Default value.
+func (o GetParameterListParameterListOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// Parameter specification description.
+func (o GetParameterListParameterListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Enumerated value.
+func (o GetParameterListParameterListOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// Maximum value for the parameter.
+func (o GetParameterListParameterListOutput) Max() pulumi.IntOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) int { return v.Max }).(pulumi.IntOutput)
+}
+
+// Minimum value for the parameter.
+func (o GetParameterListParameterListOutput) Min() pulumi.IntOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) int { return v.Min }).(pulumi.IntOutput)
+}
+
+// Indicates whether reboot is needed to enable the new parameters.
+func (o GetParameterListParameterListOutput) NeedReboot() pulumi.IntOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) int { return v.NeedReboot }).(pulumi.IntOutput)
+}
+
+// Parameter name.
+func (o GetParameterListParameterListOutput) ParameterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) string { return v.ParameterName }).(pulumi.StringOutput)
+}
+
+// Parameter type.
+func (o GetParameterListParameterListOutput) ParameterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterListParameterList) string { return v.ParameterType }).(pulumi.StringOutput)
+}
+
+type GetParameterListParameterListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetParameterListParameterListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParameterListParameterList)(nil)).Elem()
+}
+
+func (o GetParameterListParameterListArrayOutput) ToGetParameterListParameterListArrayOutput() GetParameterListParameterListArrayOutput {
+	return o
+}
+
+func (o GetParameterListParameterListArrayOutput) ToGetParameterListParameterListArrayOutputWithContext(ctx context.Context) GetParameterListParameterListArrayOutput {
+	return o
+}
+
+func (o GetParameterListParameterListArrayOutput) Index(i pulumi.IntInput) GetParameterListParameterListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetParameterListParameterList {
+		return vs[0].([]GetParameterListParameterList)[vs[1].(int)]
+	}).(GetParameterListParameterListOutput)
+}
+
+type GetZoneConfigList struct {
+	// Information about available zones of recovery.
+	DisasterRecoveryZones []string `pulumi:"disasterRecoveryZones"`
+	// The version number of the database engine to use. Supported versions include `5.5`/`5.6`/`5.7`.
+	EngineVersions []string `pulumi:"engineVersions"`
+	// Zone information about first slave instance.
+	FirstSlaveZones        []string `pulumi:"firstSlaveZones"`
+	HourInstanceSaleMaxNum int      `pulumi:"hourInstanceSaleMaxNum"`
+	// Indicates whether the current DC is the default DC for the region. Possible returned values: `0` - no; `1` - yes.
+	IsDefault int `pulumi:"isDefault"`
+	// Indicates whether recovery is supported: `0` - No; `1` - Yes.
+	IsSupportDisasterRecovery int `pulumi:"isSupportDisasterRecovery"`
+	// Indicates whether VPC is supported: `0` - No; `1` - Yes.
+	IsSupportVpc int `pulumi:"isSupportVpc"`
+	// The name of available zone which is equal to a specific datacenter.
+	Name     string `pulumi:"name"`
+	PayTypes []int  `pulumi:"payTypes"`
+	// Zone information about remote ro instance.
+	RemoteRoZones []string `pulumi:"remoteRoZones"`
+	// Zone information about second slave instance.
+	SecondSlaveZones []string `pulumi:"secondSlaveZones"`
+	// A list of supported instance types for sell:
+	Sells []GetZoneConfigListSell `pulumi:"sells"`
+	// Availability zone deployment method. Available values: `0` - Single availability zone; `1` - Multiple availability zones.
+	SlaveDeployModes []int `pulumi:"slaveDeployModes"`
+	// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+	SupportSlaveSyncModes []int `pulumi:"supportSlaveSyncModes"`
+}
+
+// GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
+// You can construct a concrete instance of `GetZoneConfigListInput` via:
+//
+//          GetZoneConfigListArgs{...}
+type GetZoneConfigListInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListOutput() GetZoneConfigListOutput
+	ToGetZoneConfigListOutputWithContext(context.Context) GetZoneConfigListOutput
+}
+
+type GetZoneConfigListArgs struct {
+	// Information about available zones of recovery.
+	DisasterRecoveryZones pulumi.StringArrayInput `pulumi:"disasterRecoveryZones"`
+	// The version number of the database engine to use. Supported versions include `5.5`/`5.6`/`5.7`.
+	EngineVersions pulumi.StringArrayInput `pulumi:"engineVersions"`
+	// Zone information about first slave instance.
+	FirstSlaveZones        pulumi.StringArrayInput `pulumi:"firstSlaveZones"`
+	HourInstanceSaleMaxNum pulumi.IntInput         `pulumi:"hourInstanceSaleMaxNum"`
+	// Indicates whether the current DC is the default DC for the region. Possible returned values: `0` - no; `1` - yes.
+	IsDefault pulumi.IntInput `pulumi:"isDefault"`
+	// Indicates whether recovery is supported: `0` - No; `1` - Yes.
+	IsSupportDisasterRecovery pulumi.IntInput `pulumi:"isSupportDisasterRecovery"`
+	// Indicates whether VPC is supported: `0` - No; `1` - Yes.
+	IsSupportVpc pulumi.IntInput `pulumi:"isSupportVpc"`
+	// The name of available zone which is equal to a specific datacenter.
+	Name     pulumi.StringInput   `pulumi:"name"`
+	PayTypes pulumi.IntArrayInput `pulumi:"payTypes"`
+	// Zone information about remote ro instance.
+	RemoteRoZones pulumi.StringArrayInput `pulumi:"remoteRoZones"`
+	// Zone information about second slave instance.
+	SecondSlaveZones pulumi.StringArrayInput `pulumi:"secondSlaveZones"`
+	// A list of supported instance types for sell:
+	Sells GetZoneConfigListSellArrayInput `pulumi:"sells"`
+	// Availability zone deployment method. Available values: `0` - Single availability zone; `1` - Multiple availability zones.
+	SlaveDeployModes pulumi.IntArrayInput `pulumi:"slaveDeployModes"`
+	// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+	SupportSlaveSyncModes pulumi.IntArrayInput `pulumi:"supportSlaveSyncModes"`
+}
+
+func (GetZoneConfigListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
+}
+
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
+	return i.ToGetZoneConfigListOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListOutput)
+}
+
+// GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
+//
+//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+type GetZoneConfigListArrayInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput
+	ToGetZoneConfigListArrayOutputWithContext(context.Context) GetZoneConfigListArrayOutput
+}
+
+type GetZoneConfigListArray []GetZoneConfigListInput
+
+func (GetZoneConfigListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
+}
+
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
+	return i.ToGetZoneConfigListArrayOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListArrayOutput)
+}
+
+type GetZoneConfigListOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
+}
+
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
+	return o
+}
+
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
+	return o
+}
+
+// Information about available zones of recovery.
+func (o GetZoneConfigListOutput) DisasterRecoveryZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []string { return v.DisasterRecoveryZones }).(pulumi.StringArrayOutput)
+}
+
+// The version number of the database engine to use. Supported versions include `5.5`/`5.6`/`5.7`.
+func (o GetZoneConfigListOutput) EngineVersions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []string { return v.EngineVersions }).(pulumi.StringArrayOutput)
+}
+
+// Zone information about first slave instance.
+func (o GetZoneConfigListOutput) FirstSlaveZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []string { return v.FirstSlaveZones }).(pulumi.StringArrayOutput)
+}
+
+func (o GetZoneConfigListOutput) HourInstanceSaleMaxNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.HourInstanceSaleMaxNum }).(pulumi.IntOutput)
+}
+
+// Indicates whether the current DC is the default DC for the region. Possible returned values: `0` - no; `1` - yes.
+func (o GetZoneConfigListOutput) IsDefault() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.IsDefault }).(pulumi.IntOutput)
+}
+
+// Indicates whether recovery is supported: `0` - No; `1` - Yes.
+func (o GetZoneConfigListOutput) IsSupportDisasterRecovery() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.IsSupportDisasterRecovery }).(pulumi.IntOutput)
+}
+
+// Indicates whether VPC is supported: `0` - No; `1` - Yes.
+func (o GetZoneConfigListOutput) IsSupportVpc() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.IsSupportVpc }).(pulumi.IntOutput)
+}
+
+// The name of available zone which is equal to a specific datacenter.
+func (o GetZoneConfigListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetZoneConfigListOutput) PayTypes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []int { return v.PayTypes }).(pulumi.IntArrayOutput)
+}
+
+// Zone information about remote ro instance.
+func (o GetZoneConfigListOutput) RemoteRoZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []string { return v.RemoteRoZones }).(pulumi.StringArrayOutput)
+}
+
+// Zone information about second slave instance.
+func (o GetZoneConfigListOutput) SecondSlaveZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []string { return v.SecondSlaveZones }).(pulumi.StringArrayOutput)
+}
+
+// A list of supported instance types for sell:
+func (o GetZoneConfigListOutput) Sells() GetZoneConfigListSellArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []GetZoneConfigListSell { return v.Sells }).(GetZoneConfigListSellArrayOutput)
+}
+
+// Availability zone deployment method. Available values: `0` - Single availability zone; `1` - Multiple availability zones.
+func (o GetZoneConfigListOutput) SlaveDeployModes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []int { return v.SlaveDeployModes }).(pulumi.IntArrayOutput)
+}
+
+// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
+func (o GetZoneConfigListOutput) SupportSlaveSyncModes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []int { return v.SupportSlaveSyncModes }).(pulumi.IntArrayOutput)
+}
+
+type GetZoneConfigListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
+}
+
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigList {
+		return vs[0].([]GetZoneConfigList)[vs[1].(int)]
+	}).(GetZoneConfigListOutput)
+}
+
+type GetZoneConfigListSell struct {
+	CdbType string `pulumi:"cdbType"`
+	// Maximum disk size (in GB).
+	MaxVolumeSize int `pulumi:"maxVolumeSize"`
+	// Memory size (in MB).
+	MemSize int `pulumi:"memSize"`
+	// Minimum disk size (in GB).
+	MinVolumeSize int `pulumi:"minVolumeSize"`
+	// Queries per second.
+	Qps int `pulumi:"qps"`
+	// Disk increment (in GB).
+	VolumeStep int `pulumi:"volumeStep"`
+}
+
+// GetZoneConfigListSellInput is an input type that accepts GetZoneConfigListSellArgs and GetZoneConfigListSellOutput values.
+// You can construct a concrete instance of `GetZoneConfigListSellInput` via:
+//
+//          GetZoneConfigListSellArgs{...}
+type GetZoneConfigListSellInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListSellOutput() GetZoneConfigListSellOutput
+	ToGetZoneConfigListSellOutputWithContext(context.Context) GetZoneConfigListSellOutput
+}
+
+type GetZoneConfigListSellArgs struct {
+	CdbType pulumi.StringInput `pulumi:"cdbType"`
+	// Maximum disk size (in GB).
+	MaxVolumeSize pulumi.IntInput `pulumi:"maxVolumeSize"`
+	// Memory size (in MB).
+	MemSize pulumi.IntInput `pulumi:"memSize"`
+	// Minimum disk size (in GB).
+	MinVolumeSize pulumi.IntInput `pulumi:"minVolumeSize"`
+	// Queries per second.
+	Qps pulumi.IntInput `pulumi:"qps"`
+	// Disk increment (in GB).
+	VolumeStep pulumi.IntInput `pulumi:"volumeStep"`
+}
+
+func (GetZoneConfigListSellArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigListSell)(nil)).Elem()
+}
+
+func (i GetZoneConfigListSellArgs) ToGetZoneConfigListSellOutput() GetZoneConfigListSellOutput {
+	return i.ToGetZoneConfigListSellOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListSellArgs) ToGetZoneConfigListSellOutputWithContext(ctx context.Context) GetZoneConfigListSellOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListSellOutput)
+}
+
+// GetZoneConfigListSellArrayInput is an input type that accepts GetZoneConfigListSellArray and GetZoneConfigListSellArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigListSellArrayInput` via:
+//
+//          GetZoneConfigListSellArray{ GetZoneConfigListSellArgs{...} }
+type GetZoneConfigListSellArrayInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListSellArrayOutput() GetZoneConfigListSellArrayOutput
+	ToGetZoneConfigListSellArrayOutputWithContext(context.Context) GetZoneConfigListSellArrayOutput
+}
+
+type GetZoneConfigListSellArray []GetZoneConfigListSellInput
+
+func (GetZoneConfigListSellArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigListSell)(nil)).Elem()
+}
+
+func (i GetZoneConfigListSellArray) ToGetZoneConfigListSellArrayOutput() GetZoneConfigListSellArrayOutput {
+	return i.ToGetZoneConfigListSellArrayOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListSellArray) ToGetZoneConfigListSellArrayOutputWithContext(ctx context.Context) GetZoneConfigListSellArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListSellArrayOutput)
+}
+
+type GetZoneConfigListSellOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListSellOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigListSell)(nil)).Elem()
+}
+
+func (o GetZoneConfigListSellOutput) ToGetZoneConfigListSellOutput() GetZoneConfigListSellOutput {
+	return o
+}
+
+func (o GetZoneConfigListSellOutput) ToGetZoneConfigListSellOutputWithContext(ctx context.Context) GetZoneConfigListSellOutput {
+	return o
+}
+
+func (o GetZoneConfigListSellOutput) CdbType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) string { return v.CdbType }).(pulumi.StringOutput)
+}
+
+// Maximum disk size (in GB).
+func (o GetZoneConfigListSellOutput) MaxVolumeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) int { return v.MaxVolumeSize }).(pulumi.IntOutput)
+}
+
+// Memory size (in MB).
+func (o GetZoneConfigListSellOutput) MemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) int { return v.MemSize }).(pulumi.IntOutput)
+}
+
+// Minimum disk size (in GB).
+func (o GetZoneConfigListSellOutput) MinVolumeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) int { return v.MinVolumeSize }).(pulumi.IntOutput)
+}
+
+// Queries per second.
+func (o GetZoneConfigListSellOutput) Qps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) int { return v.Qps }).(pulumi.IntOutput)
+}
+
+// Disk increment (in GB).
+func (o GetZoneConfigListSellOutput) VolumeStep() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) int { return v.VolumeStep }).(pulumi.IntOutput)
+}
+
+type GetZoneConfigListSellArrayOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListSellArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigListSell)(nil)).Elem()
+}
+
+func (o GetZoneConfigListSellArrayOutput) ToGetZoneConfigListSellArrayOutput() GetZoneConfigListSellArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListSellArrayOutput) ToGetZoneConfigListSellArrayOutputWithContext(ctx context.Context) GetZoneConfigListSellArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListSellArrayOutput) Index(i pulumi.IntInput) GetZoneConfigListSellOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigListSell {
+		return vs[0].([]GetZoneConfigListSell)[vs[1].(int)]
+	}).(GetZoneConfigListSellOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*BackupListListInput)(nil)).Elem(), BackupListListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BackupListListArrayInput)(nil)).Elem(), BackupListListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DefaultParamsParamListInput)(nil)).Elem(), DefaultParamsParamListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DefaultParamsParamListArrayInput)(nil)).Elem(), DefaultParamsParamListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ParameterListParameterListInput)(nil)).Elem(), ParameterListParameterListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ParameterListParameterListArrayInput)(nil)).Elem(), ParameterListParameterListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeColumnInput)(nil)).Elem(), PrivilegeColumnArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeColumnArrayInput)(nil)).Elem(), PrivilegeColumnArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeDatabaseInput)(nil)).Elem(), PrivilegeDatabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeDatabaseArrayInput)(nil)).Elem(), PrivilegeDatabaseArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeTableInput)(nil)).Elem(), PrivilegeTableArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeTableArrayInput)(nil)).Elem(), PrivilegeTableArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListInput)(nil)).Elem(), ZoneConfigListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListArrayInput)(nil)).Elem(), ZoneConfigListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListSellInput)(nil)).Elem(), ZoneConfigListSellArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListSellArrayInput)(nil)).Elem(), ZoneConfigListSellArray{})
-	pulumi.RegisterOutputType(BackupListListOutput{})
-	pulumi.RegisterOutputType(BackupListListArrayOutput{})
-	pulumi.RegisterOutputType(DefaultParamsParamListOutput{})
-	pulumi.RegisterOutputType(DefaultParamsParamListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(ParameterListParameterListOutput{})
-	pulumi.RegisterOutputType(ParameterListParameterListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupListListInput)(nil)).Elem(), GetBackupListListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupListListArrayInput)(nil)).Elem(), GetBackupListListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParamsParamListInput)(nil)).Elem(), GetDefaultParamsParamListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParamsParamListArrayInput)(nil)).Elem(), GetDefaultParamsParamListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListInput)(nil)).Elem(), GetInstanceInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListArrayInput)(nil)).Elem(), GetInstanceInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterListParameterListInput)(nil)).Elem(), GetParameterListParameterListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterListParameterListArrayInput)(nil)).Elem(), GetParameterListParameterListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListInput)(nil)).Elem(), GetZoneConfigListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListSellInput)(nil)).Elem(), GetZoneConfigListSellArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListSellArrayInput)(nil)).Elem(), GetZoneConfigListSellArray{})
 	pulumi.RegisterOutputType(PrivilegeColumnOutput{})
 	pulumi.RegisterOutputType(PrivilegeColumnArrayOutput{})
 	pulumi.RegisterOutputType(PrivilegeDatabaseOutput{})
 	pulumi.RegisterOutputType(PrivilegeDatabaseArrayOutput{})
 	pulumi.RegisterOutputType(PrivilegeTableOutput{})
 	pulumi.RegisterOutputType(PrivilegeTableArrayOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListArrayOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListSellOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListSellArrayOutput{})
+	pulumi.RegisterOutputType(GetBackupListListOutput{})
+	pulumi.RegisterOutputType(GetBackupListListArrayOutput{})
+	pulumi.RegisterOutputType(GetDefaultParamsParamListOutput{})
+	pulumi.RegisterOutputType(GetDefaultParamsParamListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstanceInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetParameterListParameterListOutput{})
+	pulumi.RegisterOutputType(GetParameterListParameterListArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListSellOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListSellArrayOutput{})
 }

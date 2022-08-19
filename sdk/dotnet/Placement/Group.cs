@@ -9,6 +9,36 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Placement
 {
+    /// <summary>
+    /// Provide a resource to create a placement group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Placement.Group("foo", new Tencentcloud.Placement.GroupArgs
+    ///         {
+    ///             Type = "HOST",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Placement group can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Placement/group:Group")]
     public partial class Group : Pulumi.CustomResource
     {

@@ -11,14 +11,37 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewBackupPolicy(ctx, "default", &Mysql.BackupPolicyArgs{
+// 			BackupModel:     pulumi.String("physical"),
+// 			BackupTime:      pulumi.String("02:00-06:00"),
+// 			MysqlId:         pulumi.String("cdb-dnqksd9f"),
+// 			RetentionPeriod: pulumi.Int(7),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type BackupPolicy struct {
 	pulumi.CustomResourceState
 
 	// Backup method. Supported values include: `physical` - physical backup.
 	BackupModel pulumi.StringPtrOutput `pulumi:"backupModel"`
-	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-	// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-	// `22:00-02:00`.
+	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
 	BackupTime pulumi.StringPtrOutput `pulumi:"backupTime"`
 	// Retention period for binlog in days.
 	BinlogPeriod pulumi.IntOutput `pulumi:"binlogPeriod"`
@@ -62,9 +85,7 @@ func GetBackupPolicy(ctx *pulumi.Context,
 type backupPolicyState struct {
 	// Backup method. Supported values include: `physical` - physical backup.
 	BackupModel *string `pulumi:"backupModel"`
-	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-	// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-	// `22:00-02:00`.
+	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
 	BackupTime *string `pulumi:"backupTime"`
 	// Retention period for binlog in days.
 	BinlogPeriod *int `pulumi:"binlogPeriod"`
@@ -77,9 +98,7 @@ type backupPolicyState struct {
 type BackupPolicyState struct {
 	// Backup method. Supported values include: `physical` - physical backup.
 	BackupModel pulumi.StringPtrInput
-	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-	// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-	// `22:00-02:00`.
+	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
 	BackupTime pulumi.StringPtrInput
 	// Retention period for binlog in days.
 	BinlogPeriod pulumi.IntPtrInput
@@ -96,9 +115,7 @@ func (BackupPolicyState) ElementType() reflect.Type {
 type backupPolicyArgs struct {
 	// Backup method. Supported values include: `physical` - physical backup.
 	BackupModel *string `pulumi:"backupModel"`
-	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-	// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-	// `22:00-02:00`.
+	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
 	BackupTime *string `pulumi:"backupTime"`
 	// Instance ID to which policies will be applied.
 	MysqlId string `pulumi:"mysqlId"`
@@ -110,9 +127,7 @@ type backupPolicyArgs struct {
 type BackupPolicyArgs struct {
 	// Backup method. Supported values include: `physical` - physical backup.
 	BackupModel pulumi.StringPtrInput
-	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-	// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-	// `22:00-02:00`.
+	// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
 	BackupTime pulumi.StringPtrInput
 	// Instance ID to which policies will be applied.
 	MysqlId pulumi.StringInput
@@ -212,9 +227,7 @@ func (o BackupPolicyOutput) BackupModel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BackupPolicy) pulumi.StringPtrOutput { return v.BackupModel }).(pulumi.StringPtrOutput)
 }
 
-// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-// following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-// `22:00-02:00`.
+// Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
 func (o BackupPolicyOutput) BackupTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BackupPolicy) pulumi.StringPtrOutput { return v.BackupTime }).(pulumi.StringPtrOutput)
 }

@@ -24,13 +24,13 @@ class InstanceArgs:
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
-        :param pulumi.Input[bool] applicable_for_clb: Indicates whether the anycast eip can be associated to a CLB.
+        :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
         :param pulumi.Input[str] name: The name of eip.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
         if anycast_zone is not None:
             pulumi.set(__self__, "anycast_zone", anycast_zone)
@@ -68,7 +68,7 @@ class InstanceArgs:
     @pulumi.getter(name="applicableForClb")
     def applicable_for_clb(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the anycast eip can be associated to a CLB.
+        It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         """
         return pulumi.get(self, "applicable_for_clb")
 
@@ -140,7 +140,7 @@ class InstanceArgs:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
         return pulumi.get(self, "type")
 
@@ -165,7 +165,7 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
-        :param pulumi.Input[bool] applicable_for_clb: Indicates whether the anycast eip can be associated to a CLB.
+        :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
@@ -173,7 +173,7 @@ class _InstanceState:
         :param pulumi.Input[str] public_ip: The elastic IP address.
         :param pulumi.Input[str] status: The EIP current status.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
         if anycast_zone is not None:
             pulumi.set(__self__, "anycast_zone", anycast_zone)
@@ -215,7 +215,7 @@ class _InstanceState:
     @pulumi.getter(name="applicableForClb")
     def applicable_for_clb(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the anycast eip can be associated to a CLB.
+        It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         """
         return pulumi.get(self, "applicable_for_clb")
 
@@ -311,7 +311,7 @@ class _InstanceState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
         return pulumi.get(self, "type")
 
@@ -335,17 +335,35 @@ class Instance(pulumi.CustomResource):
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides an EIP resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.eip.Instance("foo")
+        ```
+
+        ## Import
+
+        EIP can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
-        :param pulumi.Input[bool] applicable_for_clb: Indicates whether the anycast eip can be associated to a CLB.
+        :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
         :param pulumi.Input[str] name: The name of eip.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
         ...
     @overload
@@ -354,7 +372,25 @@ class Instance(pulumi.CustomResource):
                  args: Optional[InstanceArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides an EIP resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.eip.Instance("foo")
+        ```
+
+        ## Import
+
+        EIP can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -431,7 +467,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
-        :param pulumi.Input[bool] applicable_for_clb: Indicates whether the anycast eip can be associated to a CLB.
+        :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
@@ -439,7 +475,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] public_ip: The elastic IP address.
         :param pulumi.Input[str] status: The EIP current status.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -469,7 +505,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="applicableForClb")
     def applicable_for_clb(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether the anycast eip can be associated to a CLB.
+        It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         """
         return pulumi.get(self, "applicable_for_clb")
 
@@ -533,7 +569,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[Optional[str]]:
         """
-        The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
         return pulumi.get(self, "type")
 

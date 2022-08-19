@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Clb.Outputs
     [OutputType]
     public sealed class InstanceSnatIp
     {
+        /// <summary>
+        /// Snat IP address, If set to empty will auto allocated.
+        /// </summary>
         public readonly string? Ip;
+        /// <summary>
+        /// Snat subnet ID.
+        /// </summary>
         public readonly string SubnetId;
 
         [OutputConstructor]

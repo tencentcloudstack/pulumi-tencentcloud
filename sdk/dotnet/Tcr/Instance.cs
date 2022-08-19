@@ -9,6 +9,71 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tcr
 {
+    /// <summary>
+    /// Use this resource to create tcr instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tcr.Instance("foo", new Tencentcloud.Tcr.InstanceArgs
+    ///         {
+    ///             InstanceType = "basic",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Using public network access whitelist
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tcr.Instance("foo", new Tencentcloud.Tcr.InstanceArgs
+    ///         {
+    ///             InstanceType = "basic",
+    ///             OpenPublicOperation = true,
+    ///             SecurityPolicies = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
+    ///                 {
+    ///                     CidrBlock = "10.0.0.1/24",
+    ///                 },
+    ///                 new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
+    ///                 {
+    ///                     CidrBlock = "192.168.1.1",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// tcr instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {

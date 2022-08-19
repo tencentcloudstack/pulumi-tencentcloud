@@ -4,6 +4,43 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a CynosDB readonly instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.cynosdb.ReadonlyInstance("foo", {
+ *     clusterId: cynosdbmysql_dzj5l8gz,
+ *     instanceName: "tf-cynosdb-readonly-instance",
+ *     forceDelete: true,
+ *     instanceCpuCore: 2,
+ *     instanceMemorySize: 4,
+ *     instanceMaintainDuration: 7200,
+ *     instanceMaintainStartTime: 21600,
+ *     instanceMaintainWeekdays: [
+ *         "Fri",
+ *         "Mon",
+ *         "Sat",
+ *         "Sun",
+ *         "Thu",
+ *         "Wed",
+ *         "Tue",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CynosDB readonly instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
+ * ```
+ */
 export class ReadonlyInstance extends pulumi.CustomResource {
     /**
      * Get an existing ReadonlyInstance resource's state with the given name, ID, and optional extra
@@ -37,13 +74,11 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted
-     * instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+     * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-     * effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     public readonly instanceCpuCore!: pulumi.Output<number>;
     /**
@@ -59,8 +94,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly instanceMaintainWeekdays!: pulumi.Output<string[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-     * if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     public readonly instanceMemorySize!: pulumi.Output<number>;
     /**
@@ -138,13 +172,11 @@ export interface ReadonlyInstanceState {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted
-     * instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+     * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-     * effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceCpuCore?: pulumi.Input<number>;
     /**
@@ -160,8 +192,7 @@ export interface ReadonlyInstanceState {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-     * if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceMemorySize?: pulumi.Input<number>;
     /**
@@ -187,13 +218,11 @@ export interface ReadonlyInstanceArgs {
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted
-     * instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+     * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-     * effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceCpuCore: pulumi.Input<number>;
     /**
@@ -209,8 +238,7 @@ export interface ReadonlyInstanceArgs {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-     * if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceMemorySize: pulumi.Input<number>;
     /**

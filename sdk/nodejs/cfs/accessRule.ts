@@ -4,6 +4,24 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CFS access rule.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cfs.AccessRule("foo", {
+ *     accessGroupId: "pgroup-7nx89k7l",
+ *     authClientIp: "10.10.1.0/24",
+ *     priority: 1,
+ *     rwPermission: "RO",
+ *     userPermission: "root_squash",
+ * });
+ * ```
+ */
 export class AccessRule extends pulumi.CustomResource {
     /**
      * Get an existing AccessRule resource's state with the given name, ID, and optional extra
@@ -37,8 +55,7 @@ export class AccessRule extends pulumi.CustomResource {
      */
     public readonly accessGroupId!: pulumi.Output<string>;
     /**
-     * A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-     * note that the IP entered should be CVM's private IP.
+     * A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
      */
     public readonly authClientIp!: pulumi.Output<string>;
     /**
@@ -50,11 +67,7 @@ export class AccessRule extends pulumi.CustomResource {
      */
     public readonly rwPermission!: pulumi.Output<string | undefined>;
     /**
-     * The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-     * and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-     * `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-     * after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-     * `no_root_squash` indicates that access root users keep root account permission.
+     * The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
      */
     public readonly userPermission!: pulumi.Output<string | undefined>;
 
@@ -107,8 +120,7 @@ export interface AccessRuleState {
      */
     accessGroupId?: pulumi.Input<string>;
     /**
-     * A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-     * note that the IP entered should be CVM's private IP.
+     * A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
      */
     authClientIp?: pulumi.Input<string>;
     /**
@@ -120,11 +132,7 @@ export interface AccessRuleState {
      */
     rwPermission?: pulumi.Input<string>;
     /**
-     * The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-     * and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-     * `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-     * after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-     * `no_root_squash` indicates that access root users keep root account permission.
+     * The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
      */
     userPermission?: pulumi.Input<string>;
 }
@@ -138,8 +146,7 @@ export interface AccessRuleArgs {
      */
     accessGroupId: pulumi.Input<string>;
     /**
-     * A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-     * note that the IP entered should be CVM's private IP.
+     * A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
      */
     authClientIp: pulumi.Input<string>;
     /**
@@ -151,11 +158,7 @@ export interface AccessRuleArgs {
      */
     rwPermission?: pulumi.Input<string>;
     /**
-     * The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-     * and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-     * `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-     * after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-     * `no_root_squash` indicates that access root users keep root account permission.
+     * The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
      */
     userPermission?: pulumi.Input<string>;
 }

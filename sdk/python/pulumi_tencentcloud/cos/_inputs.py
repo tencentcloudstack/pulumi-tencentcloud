@@ -9,26 +9,33 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'CosBucketCorsRuleArgs',
-    'CosBucketLifecycleRuleArgs',
-    'CosBucketLifecycleRuleExpirationArgs',
-    'CosBucketLifecycleRuleNonCurrentExpirationArgs',
-    'CosBucketLifecycleRuleNonCurrentTransitionArgs',
-    'CosBucketLifecycleRuleTransitionArgs',
-    'CosBucketOriginDomainRuleArgs',
-    'CosBucketOriginPullRuleArgs',
-    'CosBucketReplicaRuleArgs',
-    'CosBucketWebsiteArgs',
+    'BucketCorsRuleArgs',
+    'BucketLifecycleRuleArgs',
+    'BucketLifecycleRuleExpirationArgs',
+    'BucketLifecycleRuleNonCurrentExpirationArgs',
+    'BucketLifecycleRuleNonCurrentTransitionArgs',
+    'BucketLifecycleRuleTransitionArgs',
+    'BucketOriginDomainRuleArgs',
+    'BucketOriginPullRuleArgs',
+    'BucketReplicaRuleArgs',
+    'BucketWebsiteArgs',
 ]
 
 @pulumi.input_type
-class CosBucketCorsRuleArgs:
+class BucketCorsRuleArgs:
     def __init__(__self__, *,
                  allowed_headers: pulumi.Input[Sequence[pulumi.Input[str]]],
                  allowed_methods: pulumi.Input[Sequence[pulumi.Input[str]]],
                  allowed_origins: pulumi.Input[Sequence[pulumi.Input[str]]],
                  expose_headers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  max_age_seconds: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_headers: Specifies which headers are allowed.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_methods: Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_origins: Specifies which origins are allowed.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] expose_headers: Specifies expose header in the response.
+        :param pulumi.Input[int] max_age_seconds: Specifies time in seconds that browser can cache the response for a preflight request.
+        """
         pulumi.set(__self__, "allowed_headers", allowed_headers)
         pulumi.set(__self__, "allowed_methods", allowed_methods)
         pulumi.set(__self__, "allowed_origins", allowed_origins)
@@ -40,6 +47,9 @@ class CosBucketCorsRuleArgs:
     @property
     @pulumi.getter(name="allowedHeaders")
     def allowed_headers(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Specifies which headers are allowed.
+        """
         return pulumi.get(self, "allowed_headers")
 
     @allowed_headers.setter
@@ -49,6 +59,9 @@ class CosBucketCorsRuleArgs:
     @property
     @pulumi.getter(name="allowedMethods")
     def allowed_methods(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
+        """
         return pulumi.get(self, "allowed_methods")
 
     @allowed_methods.setter
@@ -58,6 +71,9 @@ class CosBucketCorsRuleArgs:
     @property
     @pulumi.getter(name="allowedOrigins")
     def allowed_origins(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Specifies which origins are allowed.
+        """
         return pulumi.get(self, "allowed_origins")
 
     @allowed_origins.setter
@@ -67,6 +83,9 @@ class CosBucketCorsRuleArgs:
     @property
     @pulumi.getter(name="exposeHeaders")
     def expose_headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Specifies expose header in the response.
+        """
         return pulumi.get(self, "expose_headers")
 
     @expose_headers.setter
@@ -76,6 +95,9 @@ class CosBucketCorsRuleArgs:
     @property
     @pulumi.getter(name="maxAgeSeconds")
     def max_age_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies time in seconds that browser can cache the response for a preflight request.
+        """
         return pulumi.get(self, "max_age_seconds")
 
     @max_age_seconds.setter
@@ -84,14 +106,22 @@ class CosBucketCorsRuleArgs:
 
 
 @pulumi.input_type
-class CosBucketLifecycleRuleArgs:
+class BucketLifecycleRuleArgs:
     def __init__(__self__, *,
                  filter_prefix: pulumi.Input[str],
-                 expiration: Optional[pulumi.Input['CosBucketLifecycleRuleExpirationArgs']] = None,
+                 expiration: Optional[pulumi.Input['BucketLifecycleRuleExpirationArgs']] = None,
                  id: Optional[pulumi.Input[str]] = None,
-                 non_current_expiration: Optional[pulumi.Input['CosBucketLifecycleRuleNonCurrentExpirationArgs']] = None,
-                 non_current_transitions: Optional[pulumi.Input[Sequence[pulumi.Input['CosBucketLifecycleRuleNonCurrentTransitionArgs']]]] = None,
-                 transitions: Optional[pulumi.Input[Sequence[pulumi.Input['CosBucketLifecycleRuleTransitionArgs']]]] = None):
+                 non_current_expiration: Optional[pulumi.Input['BucketLifecycleRuleNonCurrentExpirationArgs']] = None,
+                 non_current_transitions: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleNonCurrentTransitionArgs']]]] = None,
+                 transitions: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleTransitionArgs']]]] = None):
+        """
+        :param pulumi.Input[str] filter_prefix: Object key prefix identifying one or more objects to which the rule applies.
+        :param pulumi.Input['BucketLifecycleRuleExpirationArgs'] expiration: Specifies a period in the object's expire (documented below).
+        :param pulumi.Input[str] id: A unique identifier for the rule. It can be up to 255 characters.
+        :param pulumi.Input['BucketLifecycleRuleNonCurrentExpirationArgs'] non_current_expiration: Specifies when non current object versions shall expire.
+        :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleNonCurrentTransitionArgs']]] non_current_transitions: Specifies a period in the non current object's transitions.
+        :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleTransitionArgs']]] transitions: Specifies a period in the object's transitions (documented below).
+        """
         pulumi.set(__self__, "filter_prefix", filter_prefix)
         if expiration is not None:
             pulumi.set(__self__, "expiration", expiration)
@@ -107,6 +137,9 @@ class CosBucketLifecycleRuleArgs:
     @property
     @pulumi.getter(name="filterPrefix")
     def filter_prefix(self) -> pulumi.Input[str]:
+        """
+        Object key prefix identifying one or more objects to which the rule applies.
+        """
         return pulumi.get(self, "filter_prefix")
 
     @filter_prefix.setter
@@ -115,16 +148,22 @@ class CosBucketLifecycleRuleArgs:
 
     @property
     @pulumi.getter
-    def expiration(self) -> Optional[pulumi.Input['CosBucketLifecycleRuleExpirationArgs']]:
+    def expiration(self) -> Optional[pulumi.Input['BucketLifecycleRuleExpirationArgs']]:
+        """
+        Specifies a period in the object's expire (documented below).
+        """
         return pulumi.get(self, "expiration")
 
     @expiration.setter
-    def expiration(self, value: Optional[pulumi.Input['CosBucketLifecycleRuleExpirationArgs']]):
+    def expiration(self, value: Optional[pulumi.Input['BucketLifecycleRuleExpirationArgs']]):
         pulumi.set(self, "expiration", value)
 
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        A unique identifier for the rule. It can be up to 255 characters.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -133,38 +172,52 @@ class CosBucketLifecycleRuleArgs:
 
     @property
     @pulumi.getter(name="nonCurrentExpiration")
-    def non_current_expiration(self) -> Optional[pulumi.Input['CosBucketLifecycleRuleNonCurrentExpirationArgs']]:
+    def non_current_expiration(self) -> Optional[pulumi.Input['BucketLifecycleRuleNonCurrentExpirationArgs']]:
+        """
+        Specifies when non current object versions shall expire.
+        """
         return pulumi.get(self, "non_current_expiration")
 
     @non_current_expiration.setter
-    def non_current_expiration(self, value: Optional[pulumi.Input['CosBucketLifecycleRuleNonCurrentExpirationArgs']]):
+    def non_current_expiration(self, value: Optional[pulumi.Input['BucketLifecycleRuleNonCurrentExpirationArgs']]):
         pulumi.set(self, "non_current_expiration", value)
 
     @property
     @pulumi.getter(name="nonCurrentTransitions")
-    def non_current_transitions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CosBucketLifecycleRuleNonCurrentTransitionArgs']]]]:
+    def non_current_transitions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleNonCurrentTransitionArgs']]]]:
+        """
+        Specifies a period in the non current object's transitions.
+        """
         return pulumi.get(self, "non_current_transitions")
 
     @non_current_transitions.setter
-    def non_current_transitions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CosBucketLifecycleRuleNonCurrentTransitionArgs']]]]):
+    def non_current_transitions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleNonCurrentTransitionArgs']]]]):
         pulumi.set(self, "non_current_transitions", value)
 
     @property
     @pulumi.getter
-    def transitions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CosBucketLifecycleRuleTransitionArgs']]]]:
+    def transitions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleTransitionArgs']]]]:
+        """
+        Specifies a period in the object's transitions (documented below).
+        """
         return pulumi.get(self, "transitions")
 
     @transitions.setter
-    def transitions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CosBucketLifecycleRuleTransitionArgs']]]]):
+    def transitions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleTransitionArgs']]]]):
         pulumi.set(self, "transitions", value)
 
 
 @pulumi.input_type
-class CosBucketLifecycleRuleExpirationArgs:
+class BucketLifecycleRuleExpirationArgs:
     def __init__(__self__, *,
                  date: Optional[pulumi.Input[str]] = None,
                  days: Optional[pulumi.Input[int]] = None,
                  delete_marker: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] date: Specifies the date after which you want the corresponding action to take effect.
+        :param pulumi.Input[int] days: Specifies the number of days after object creation when the specific rule action takes effect.
+        :param pulumi.Input[bool] delete_marker: Indicates whether the delete marker of an expired object will be removed.
+        """
         if date is not None:
             pulumi.set(__self__, "date", date)
         if days is not None:
@@ -175,6 +228,9 @@ class CosBucketLifecycleRuleExpirationArgs:
     @property
     @pulumi.getter
     def date(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specifies the date after which you want the corresponding action to take effect.
+        """
         return pulumi.get(self, "date")
 
     @date.setter
@@ -184,6 +240,9 @@ class CosBucketLifecycleRuleExpirationArgs:
     @property
     @pulumi.getter
     def days(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies the number of days after object creation when the specific rule action takes effect.
+        """
         return pulumi.get(self, "days")
 
     @days.setter
@@ -193,6 +252,9 @@ class CosBucketLifecycleRuleExpirationArgs:
     @property
     @pulumi.getter(name="deleteMarker")
     def delete_marker(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the delete marker of an expired object will be removed.
+        """
         return pulumi.get(self, "delete_marker")
 
     @delete_marker.setter
@@ -201,15 +263,21 @@ class CosBucketLifecycleRuleExpirationArgs:
 
 
 @pulumi.input_type
-class CosBucketLifecycleRuleNonCurrentExpirationArgs:
+class BucketLifecycleRuleNonCurrentExpirationArgs:
     def __init__(__self__, *,
                  non_current_days: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] non_current_days: Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
+        """
         if non_current_days is not None:
             pulumi.set(__self__, "non_current_days", non_current_days)
 
     @property
     @pulumi.getter(name="nonCurrentDays")
     def non_current_days(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
+        """
         return pulumi.get(self, "non_current_days")
 
     @non_current_days.setter
@@ -218,10 +286,14 @@ class CosBucketLifecycleRuleNonCurrentExpirationArgs:
 
 
 @pulumi.input_type
-class CosBucketLifecycleRuleNonCurrentTransitionArgs:
+class BucketLifecycleRuleNonCurrentTransitionArgs:
     def __init__(__self__, *,
                  storage_class: pulumi.Input[str],
                  non_current_days: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] storage_class: Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[int] non_current_days: Number of days after non current object creation when the specific rule action takes effect.
+        """
         pulumi.set(__self__, "storage_class", storage_class)
         if non_current_days is not None:
             pulumi.set(__self__, "non_current_days", non_current_days)
@@ -229,6 +301,9 @@ class CosBucketLifecycleRuleNonCurrentTransitionArgs:
     @property
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> pulumi.Input[str]:
+        """
+        Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        """
         return pulumi.get(self, "storage_class")
 
     @storage_class.setter
@@ -238,6 +313,9 @@ class CosBucketLifecycleRuleNonCurrentTransitionArgs:
     @property
     @pulumi.getter(name="nonCurrentDays")
     def non_current_days(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of days after non current object creation when the specific rule action takes effect.
+        """
         return pulumi.get(self, "non_current_days")
 
     @non_current_days.setter
@@ -246,11 +324,16 @@ class CosBucketLifecycleRuleNonCurrentTransitionArgs:
 
 
 @pulumi.input_type
-class CosBucketLifecycleRuleTransitionArgs:
+class BucketLifecycleRuleTransitionArgs:
     def __init__(__self__, *,
                  storage_class: pulumi.Input[str],
                  date: Optional[pulumi.Input[str]] = None,
                  days: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] storage_class: Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[str] date: Specifies the date after which you want the corresponding action to take effect.
+        :param pulumi.Input[int] days: Specifies the number of days after object creation when the specific rule action takes effect.
+        """
         pulumi.set(__self__, "storage_class", storage_class)
         if date is not None:
             pulumi.set(__self__, "date", date)
@@ -260,6 +343,9 @@ class CosBucketLifecycleRuleTransitionArgs:
     @property
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> pulumi.Input[str]:
+        """
+        Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        """
         return pulumi.get(self, "storage_class")
 
     @storage_class.setter
@@ -269,6 +355,9 @@ class CosBucketLifecycleRuleTransitionArgs:
     @property
     @pulumi.getter
     def date(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specifies the date after which you want the corresponding action to take effect.
+        """
         return pulumi.get(self, "date")
 
     @date.setter
@@ -278,6 +367,9 @@ class CosBucketLifecycleRuleTransitionArgs:
     @property
     @pulumi.getter
     def days(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies the number of days after object creation when the specific rule action takes effect.
+        """
         return pulumi.get(self, "days")
 
     @days.setter
@@ -286,11 +378,16 @@ class CosBucketLifecycleRuleTransitionArgs:
 
 
 @pulumi.input_type
-class CosBucketOriginDomainRuleArgs:
+class BucketOriginDomainRuleArgs:
     def __init__(__self__, *,
                  domain: pulumi.Input[str],
                  status: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] domain: Specify domain host.
+        :param pulumi.Input[str] status: Domain status, default: `ENABLED`.
+        :param pulumi.Input[str] type: Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+        """
         pulumi.set(__self__, "domain", domain)
         if status is not None:
             pulumi.set(__self__, "status", status)
@@ -300,6 +397,9 @@ class CosBucketOriginDomainRuleArgs:
     @property
     @pulumi.getter
     def domain(self) -> pulumi.Input[str]:
+        """
+        Specify domain host.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -309,6 +409,9 @@ class CosBucketOriginDomainRuleArgs:
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain status, default: `ENABLED`.
+        """
         return pulumi.get(self, "status")
 
     @status.setter
@@ -318,6 +421,9 @@ class CosBucketOriginDomainRuleArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -326,7 +432,7 @@ class CosBucketOriginDomainRuleArgs:
 
 
 @pulumi.input_type
-class CosBucketOriginPullRuleArgs:
+class BucketOriginPullRuleArgs:
     def __init__(__self__, *,
                  host: pulumi.Input[str],
                  priority: pulumi.Input[int],
@@ -337,6 +443,17 @@ class CosBucketOriginPullRuleArgs:
                  prefix: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  sync_back_to_source: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] host: Allows only a domain name or IP address. You can optionally append a port number to the address.
+        :param pulumi.Input[int] priority: Priority of origin-pull rules, do not set the same value for multiple rules.
+        :param pulumi.Input[Mapping[str, Any]] custom_http_headers: Specifies the custom headers that you can add for COS to access your origin server.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] follow_http_headers: Specifies the pass through headers when accessing the origin server.
+        :param pulumi.Input[bool] follow_query_string: Specifies whether to pass through COS request query string when accessing the origin server.
+        :param pulumi.Input[bool] follow_redirection: Specifies whether to follow 3XX redirect to another origin server to pull data from.
+        :param pulumi.Input[str] prefix: Triggers the origin-pull rule when the requested file name matches this prefix.
+        :param pulumi.Input[str] protocol: the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+        :param pulumi.Input[bool] sync_back_to_source: If `true`, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+        """
         pulumi.set(__self__, "host", host)
         pulumi.set(__self__, "priority", priority)
         if custom_http_headers is not None:
@@ -357,6 +474,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter
     def host(self) -> pulumi.Input[str]:
+        """
+        Allows only a domain name or IP address. You can optionally append a port number to the address.
+        """
         return pulumi.get(self, "host")
 
     @host.setter
@@ -366,6 +486,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter
     def priority(self) -> pulumi.Input[int]:
+        """
+        Priority of origin-pull rules, do not set the same value for multiple rules.
+        """
         return pulumi.get(self, "priority")
 
     @priority.setter
@@ -375,6 +498,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter(name="customHttpHeaders")
     def custom_http_headers(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Specifies the custom headers that you can add for COS to access your origin server.
+        """
         return pulumi.get(self, "custom_http_headers")
 
     @custom_http_headers.setter
@@ -384,6 +510,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter(name="followHttpHeaders")
     def follow_http_headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Specifies the pass through headers when accessing the origin server.
+        """
         return pulumi.get(self, "follow_http_headers")
 
     @follow_http_headers.setter
@@ -393,6 +522,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter(name="followQueryString")
     def follow_query_string(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Specifies whether to pass through COS request query string when accessing the origin server.
+        """
         return pulumi.get(self, "follow_query_string")
 
     @follow_query_string.setter
@@ -402,6 +534,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter(name="followRedirection")
     def follow_redirection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Specifies whether to follow 3XX redirect to another origin server to pull data from.
+        """
         return pulumi.get(self, "follow_redirection")
 
     @follow_redirection.setter
@@ -411,6 +546,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter
     def prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Triggers the origin-pull rule when the requested file name matches this prefix.
+        """
         return pulumi.get(self, "prefix")
 
     @prefix.setter
@@ -420,6 +558,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -429,6 +570,9 @@ class CosBucketOriginPullRuleArgs:
     @property
     @pulumi.getter(name="syncBackToSource")
     def sync_back_to_source(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If `true`, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+        """
         return pulumi.get(self, "sync_back_to_source")
 
     @sync_back_to_source.setter
@@ -437,13 +581,20 @@ class CosBucketOriginPullRuleArgs:
 
 
 @pulumi.input_type
-class CosBucketReplicaRuleArgs:
+class BucketReplicaRuleArgs:
     def __init__(__self__, *,
                  destination_bucket: pulumi.Input[str],
                  status: pulumi.Input[str],
                  destination_storage_class: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  prefix: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] destination_bucket: Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
+        :param pulumi.Input[str] status: Status identifier, available values: `Enabled`, `Disabled`.
+        :param pulumi.Input[str] destination_storage_class: Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+        :param pulumi.Input[str] id: Name of a specific rule.
+        :param pulumi.Input[str] prefix: Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
+        """
         pulumi.set(__self__, "destination_bucket", destination_bucket)
         pulumi.set(__self__, "status", status)
         if destination_storage_class is not None:
@@ -456,6 +607,9 @@ class CosBucketReplicaRuleArgs:
     @property
     @pulumi.getter(name="destinationBucket")
     def destination_bucket(self) -> pulumi.Input[str]:
+        """
+        Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
+        """
         return pulumi.get(self, "destination_bucket")
 
     @destination_bucket.setter
@@ -465,6 +619,9 @@ class CosBucketReplicaRuleArgs:
     @property
     @pulumi.getter
     def status(self) -> pulumi.Input[str]:
+        """
+        Status identifier, available values: `Enabled`, `Disabled`.
+        """
         return pulumi.get(self, "status")
 
     @status.setter
@@ -474,6 +631,9 @@ class CosBucketReplicaRuleArgs:
     @property
     @pulumi.getter(name="destinationStorageClass")
     def destination_storage_class(self) -> Optional[pulumi.Input[str]]:
+        """
+        Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+        """
         return pulumi.get(self, "destination_storage_class")
 
     @destination_storage_class.setter
@@ -483,6 +643,9 @@ class CosBucketReplicaRuleArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of a specific rule.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -492,6 +655,9 @@ class CosBucketReplicaRuleArgs:
     @property
     @pulumi.getter
     def prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
+        """
         return pulumi.get(self, "prefix")
 
     @prefix.setter
@@ -500,10 +666,14 @@ class CosBucketReplicaRuleArgs:
 
 
 @pulumi.input_type
-class CosBucketWebsiteArgs:
+class BucketWebsiteArgs:
     def __init__(__self__, *,
                  error_document: Optional[pulumi.Input[str]] = None,
                  index_document: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] error_document: An absolute path to the document to return in case of a 4XX error.
+        :param pulumi.Input[str] index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
+        """
         if error_document is not None:
             pulumi.set(__self__, "error_document", error_document)
         if index_document is not None:
@@ -512,6 +682,9 @@ class CosBucketWebsiteArgs:
     @property
     @pulumi.getter(name="errorDocument")
     def error_document(self) -> Optional[pulumi.Input[str]]:
+        """
+        An absolute path to the document to return in case of a 4XX error.
+        """
         return pulumi.get(self, "error_document")
 
     @error_document.setter
@@ -521,6 +694,9 @@ class CosBucketWebsiteArgs:
     @property
     @pulumi.getter(name="indexDocument")
     def index_document(self) -> Optional[pulumi.Input[str]]:
+        """
+        COS returns this index document when requests are made to the root domain or any of the subfolders.
+        """
         return pulumi.get(self, "index_document")
 
     @index_document.setter

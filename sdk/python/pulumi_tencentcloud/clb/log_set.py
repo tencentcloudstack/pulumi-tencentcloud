@@ -114,7 +114,16 @@ class LogSet(pulumi.CustomResource):
                  period: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a LogSet resource with the given unique name, props, and options.
+        Provides a resource to create an exclusive CLB Logset.
+
+        ## Import
+
+        CLB log set can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] period: Logset retention period in days. Maximun value is `90`.
@@ -126,7 +135,16 @@ class LogSet(pulumi.CustomResource):
                  args: Optional[LogSetArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a LogSet resource with the given unique name, props, and options.
+        Provides a resource to create an exclusive CLB Logset.
+
+        ## Import
+
+        CLB log set can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+        ```
+
         :param str resource_name: The name of the resource.
         :param LogSetArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

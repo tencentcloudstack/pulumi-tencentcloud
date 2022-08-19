@@ -15,11 +15,11 @@ __all__ = [
     'ClusterResourceSpecCoreResourceSpec',
     'ClusterResourceSpecMasterResourceSpec',
     'ClusterResourceSpecTaskResourceSpec',
-    'InstancesClusterResult',
-    'NodesNodeResult',
-    'NodesNodeCdbNodeInfoResult',
-    'NodesNodeMcMultiDiskResult',
-    'NodesNodeTagResult',
+    'GetInstanceClusterResult',
+    'GetNodesNodeResult',
+    'GetNodesNodeCdbNodeInfoResult',
+    'GetNodesNodeMcMultiDiskResult',
+    'GetNodesNodeTagResult',
 ]
 
 @pulumi.output_type
@@ -64,6 +64,12 @@ class ClusterResourceSpec(dict):
                  master_resource_spec: Optional['outputs.ClusterResourceSpecMasterResourceSpec'] = None,
                  task_count: Optional[int] = None,
                  task_resource_spec: Optional['outputs.ClusterResourceSpecTaskResourceSpec'] = None):
+        """
+        :param int common_count: The number of common node.
+        :param int core_count: The number of core node.
+        :param int master_count: The number of master node.
+        :param int task_count: The number of core node.
+        """
         if common_count is not None:
             pulumi.set(__self__, "common_count", common_count)
         if common_resource_spec is not None:
@@ -84,6 +90,9 @@ class ClusterResourceSpec(dict):
     @property
     @pulumi.getter(name="commonCount")
     def common_count(self) -> Optional[int]:
+        """
+        The number of common node.
+        """
         return pulumi.get(self, "common_count")
 
     @property
@@ -94,6 +103,9 @@ class ClusterResourceSpec(dict):
     @property
     @pulumi.getter(name="coreCount")
     def core_count(self) -> Optional[int]:
+        """
+        The number of core node.
+        """
         return pulumi.get(self, "core_count")
 
     @property
@@ -104,6 +116,9 @@ class ClusterResourceSpec(dict):
     @property
     @pulumi.getter(name="masterCount")
     def master_count(self) -> Optional[int]:
+        """
+        The number of master node.
+        """
         return pulumi.get(self, "master_count")
 
     @property
@@ -114,6 +129,9 @@ class ClusterResourceSpec(dict):
     @property
     @pulumi.getter(name="taskCount")
     def task_count(self) -> Optional[int]:
+        """
+        The number of core node.
+        """
         return pulumi.get(self, "task_count")
 
     @property
@@ -467,7 +485,7 @@ class ClusterResourceSpecTaskResourceSpec(dict):
 
 
 @pulumi.output_type
-class InstancesClusterResult(dict):
+class GetInstanceClusterResult(dict):
     def __init__(__self__, *,
                  add_time: str,
                  charge_type: int,
@@ -481,6 +499,20 @@ class InstancesClusterResult(dict):
                  status: int,
                  zone: str,
                  zone_id: int):
+        """
+        :param str add_time: Add time of instance.
+        :param int charge_type: Charge type of instance.
+        :param str cluster_id: Cluster id of instance.
+        :param str cluster_name: Cluster name of instance.
+        :param str ftitle: Title of instance.
+        :param int id: Id of instance.
+        :param str master_ip: Master ip of instance.
+        :param int project_id: Fetch all instances which owner same project. Default 0 meaning use default project id.
+        :param int region_id: Region id of instance.
+        :param int status: Status of instance.
+        :param str zone: Zone of instance.
+        :param int zone_id: Zone id of instance.
+        """
         pulumi.set(__self__, "add_time", add_time)
         pulumi.set(__self__, "charge_type", charge_type)
         pulumi.set(__self__, "cluster_id", cluster_id)
@@ -497,72 +529,108 @@ class InstancesClusterResult(dict):
     @property
     @pulumi.getter(name="addTime")
     def add_time(self) -> str:
+        """
+        Add time of instance.
+        """
         return pulumi.get(self, "add_time")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> int:
+        """
+        Charge type of instance.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> str:
+        """
+        Cluster id of instance.
+        """
         return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="clusterName")
     def cluster_name(self) -> str:
+        """
+        Cluster name of instance.
+        """
         return pulumi.get(self, "cluster_name")
 
     @property
     @pulumi.getter
     def ftitle(self) -> str:
+        """
+        Title of instance.
+        """
         return pulumi.get(self, "ftitle")
 
     @property
     @pulumi.getter
     def id(self) -> int:
+        """
+        Id of instance.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="masterIp")
     def master_ip(self) -> str:
+        """
+        Master ip of instance.
+        """
         return pulumi.get(self, "master_ip")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        Fetch all instances which owner same project. Default 0 meaning use default project id.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="regionId")
     def region_id(self) -> int:
+        """
+        Region id of instance.
+        """
         return pulumi.get(self, "region_id")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Status of instance.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        Zone of instance.
+        """
         return pulumi.get(self, "zone")
 
     @property
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> int:
+        """
+        Zone id of instance.
+        """
         return pulumi.get(self, "zone_id")
 
 
 @pulumi.output_type
-class NodesNodeResult(dict):
+class GetNodesNodeResult(dict):
     def __init__(__self__, *,
                  app_id: int,
                  apply_time: str,
                  auto_flag: int,
                  cdb_ip: str,
-                 cdb_node_infos: Sequence['outputs.NodesNodeCdbNodeInfoResult'],
+                 cdb_node_infos: Sequence['outputs.GetNodesNodeCdbNodeInfoResult'],
                  cdb_port: int,
                  charge_type: int,
                  cpu_num: int,
@@ -582,7 +650,7 @@ class NodesNodeResult(dict):
                  ip: str,
                  is_auto_renew: int,
                  is_dynamic_spec: int,
-                 mc_multi_disks: Sequence['outputs.NodesNodeMcMultiDiskResult'],
+                 mc_multi_disks: Sequence['outputs.GetNodesNodeMcMultiDiskResult'],
                  mem_desc: str,
                  mem_size: int,
                  mutable: int,
@@ -595,9 +663,51 @@ class NodesNodeResult(dict):
                  spec: str,
                  storage_type: int,
                  support_modify_pay_mode: int,
-                 tags: Sequence['outputs.NodesNodeTagResult'],
+                 tags: Sequence['outputs.GetNodesNodeTagResult'],
                  wan_ip: str,
                  zone_id: int):
+        """
+        :param int app_id: User APPID.
+        :param str apply_time: Application time.
+        :param int auto_flag: Whether it is an autoscaling node, 0 is a normal node, and 1 is an autoscaling node.
+        :param str cdb_ip: Database IP.
+        :param Sequence['GetNodesNodeCdbNodeInfoArgs'] cdb_node_infos: Database information.
+        :param int cdb_port: Database port.
+        :param int charge_type: The type of payment.
+        :param int cpu_num: Number of node cores.
+        :param int destroyable: Whether this node is destroyable, 1 can be destroyed, 0 is not destroyable.
+        :param str device_class: Device identity.
+        :param str disk_size: Hard disk size.
+        :param str dynamic_pod_spec: Floating specification value json string.
+        :param str emr_resource_id: Node resource ID.
+        :param str expire_time: Expiration time.
+        :param int flag: Node type. 0: common node; 1: master node; 2: core node; 3: task node.
+        :param str free_time: Release time.
+        :param str hardware_resource_type: Resource type: Support all/host/pod, default is all.
+        :param int hw_disk_size: Hard disk capacity.
+        :param str hw_disk_size_desc: Hard disk capacity description.
+        :param int hw_mem_size: Memory capacity.
+        :param str hw_mem_size_desc: Memory capacity description.
+        :param str ip: Intranet IP.
+        :param int is_auto_renew: Renewal logo.
+        :param int is_dynamic_spec: Floating specifications, 1 yes, 0 no.
+        :param Sequence['GetNodesNodeMcMultiDiskArgs'] mc_multi_disks: Multi-cloud disk.
+        :param str mem_desc: Node memory description.
+        :param int mem_size: Node memory.
+        :param int mutable: Supports variations.
+        :param str name_tag: Node description.
+        :param str order_no: Machine instance ID.
+        :param int region_id: The node is located in the region.
+        :param int root_size: The size of the system disk.
+        :param str serial_no: Serial number.
+        :param str services: Node deployment service.
+        :param str spec: Node specifications.
+        :param int storage_type: Disk type.
+        :param int support_modify_pay_mode: Whether to support change billing type 1 Yes and 0 No.
+        :param Sequence['GetNodesNodeTagArgs'] tags: The label of the node binding.
+        :param str wan_ip: The master node is bound to the Internet IP address.
+        :param int zone_id: Zone where the node is located.
+        """
         pulumi.set(__self__, "app_id", app_id)
         pulumi.set(__self__, "apply_time", apply_time)
         pulumi.set(__self__, "auto_flag", auto_flag)
@@ -642,206 +752,326 @@ class NodesNodeResult(dict):
     @property
     @pulumi.getter(name="appId")
     def app_id(self) -> int:
+        """
+        User APPID.
+        """
         return pulumi.get(self, "app_id")
 
     @property
     @pulumi.getter(name="applyTime")
     def apply_time(self) -> str:
+        """
+        Application time.
+        """
         return pulumi.get(self, "apply_time")
 
     @property
     @pulumi.getter(name="autoFlag")
     def auto_flag(self) -> int:
+        """
+        Whether it is an autoscaling node, 0 is a normal node, and 1 is an autoscaling node.
+        """
         return pulumi.get(self, "auto_flag")
 
     @property
     @pulumi.getter(name="cdbIp")
     def cdb_ip(self) -> str:
+        """
+        Database IP.
+        """
         return pulumi.get(self, "cdb_ip")
 
     @property
     @pulumi.getter(name="cdbNodeInfos")
-    def cdb_node_infos(self) -> Sequence['outputs.NodesNodeCdbNodeInfoResult']:
+    def cdb_node_infos(self) -> Sequence['outputs.GetNodesNodeCdbNodeInfoResult']:
+        """
+        Database information.
+        """
         return pulumi.get(self, "cdb_node_infos")
 
     @property
     @pulumi.getter(name="cdbPort")
     def cdb_port(self) -> int:
+        """
+        Database port.
+        """
         return pulumi.get(self, "cdb_port")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> int:
+        """
+        The type of payment.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="cpuNum")
     def cpu_num(self) -> int:
+        """
+        Number of node cores.
+        """
         return pulumi.get(self, "cpu_num")
 
     @property
     @pulumi.getter
     def destroyable(self) -> int:
+        """
+        Whether this node is destroyable, 1 can be destroyed, 0 is not destroyable.
+        """
         return pulumi.get(self, "destroyable")
 
     @property
     @pulumi.getter(name="deviceClass")
     def device_class(self) -> str:
+        """
+        Device identity.
+        """
         return pulumi.get(self, "device_class")
 
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> str:
+        """
+        Hard disk size.
+        """
         return pulumi.get(self, "disk_size")
 
     @property
     @pulumi.getter(name="dynamicPodSpec")
     def dynamic_pod_spec(self) -> str:
+        """
+        Floating specification value json string.
+        """
         return pulumi.get(self, "dynamic_pod_spec")
 
     @property
     @pulumi.getter(name="emrResourceId")
     def emr_resource_id(self) -> str:
+        """
+        Node resource ID.
+        """
         return pulumi.get(self, "emr_resource_id")
 
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> str:
+        """
+        Expiration time.
+        """
         return pulumi.get(self, "expire_time")
 
     @property
     @pulumi.getter
     def flag(self) -> int:
+        """
+        Node type. 0: common node; 1: master node; 2: core node; 3: task node.
+        """
         return pulumi.get(self, "flag")
 
     @property
     @pulumi.getter(name="freeTime")
     def free_time(self) -> str:
+        """
+        Release time.
+        """
         return pulumi.get(self, "free_time")
 
     @property
     @pulumi.getter(name="hardwareResourceType")
     def hardware_resource_type(self) -> str:
+        """
+        Resource type: Support all/host/pod, default is all.
+        """
         return pulumi.get(self, "hardware_resource_type")
 
     @property
     @pulumi.getter(name="hwDiskSize")
     def hw_disk_size(self) -> int:
+        """
+        Hard disk capacity.
+        """
         return pulumi.get(self, "hw_disk_size")
 
     @property
     @pulumi.getter(name="hwDiskSizeDesc")
     def hw_disk_size_desc(self) -> str:
+        """
+        Hard disk capacity description.
+        """
         return pulumi.get(self, "hw_disk_size_desc")
 
     @property
     @pulumi.getter(name="hwMemSize")
     def hw_mem_size(self) -> int:
+        """
+        Memory capacity.
+        """
         return pulumi.get(self, "hw_mem_size")
 
     @property
     @pulumi.getter(name="hwMemSizeDesc")
     def hw_mem_size_desc(self) -> str:
+        """
+        Memory capacity description.
+        """
         return pulumi.get(self, "hw_mem_size_desc")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        Intranet IP.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter(name="isAutoRenew")
     def is_auto_renew(self) -> int:
+        """
+        Renewal logo.
+        """
         return pulumi.get(self, "is_auto_renew")
 
     @property
     @pulumi.getter(name="isDynamicSpec")
     def is_dynamic_spec(self) -> int:
+        """
+        Floating specifications, 1 yes, 0 no.
+        """
         return pulumi.get(self, "is_dynamic_spec")
 
     @property
     @pulumi.getter(name="mcMultiDisks")
-    def mc_multi_disks(self) -> Sequence['outputs.NodesNodeMcMultiDiskResult']:
+    def mc_multi_disks(self) -> Sequence['outputs.GetNodesNodeMcMultiDiskResult']:
+        """
+        Multi-cloud disk.
+        """
         return pulumi.get(self, "mc_multi_disks")
 
     @property
     @pulumi.getter(name="memDesc")
     def mem_desc(self) -> str:
+        """
+        Node memory description.
+        """
         return pulumi.get(self, "mem_desc")
 
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> int:
+        """
+        Node memory.
+        """
         return pulumi.get(self, "mem_size")
 
     @property
     @pulumi.getter
     def mutable(self) -> int:
+        """
+        Supports variations.
+        """
         return pulumi.get(self, "mutable")
 
     @property
     @pulumi.getter(name="nameTag")
     def name_tag(self) -> str:
+        """
+        Node description.
+        """
         return pulumi.get(self, "name_tag")
 
     @property
     @pulumi.getter(name="orderNo")
     def order_no(self) -> str:
+        """
+        Machine instance ID.
+        """
         return pulumi.get(self, "order_no")
 
     @property
     @pulumi.getter(name="regionId")
     def region_id(self) -> int:
+        """
+        The node is located in the region.
+        """
         return pulumi.get(self, "region_id")
 
     @property
     @pulumi.getter(name="rootSize")
     def root_size(self) -> int:
+        """
+        The size of the system disk.
+        """
         return pulumi.get(self, "root_size")
 
     @property
     @pulumi.getter(name="serialNo")
     def serial_no(self) -> str:
+        """
+        Serial number.
+        """
         return pulumi.get(self, "serial_no")
 
     @property
     @pulumi.getter
     def services(self) -> str:
+        """
+        Node deployment service.
+        """
         return pulumi.get(self, "services")
 
     @property
     @pulumi.getter
     def spec(self) -> str:
+        """
+        Node specifications.
+        """
         return pulumi.get(self, "spec")
 
     @property
     @pulumi.getter(name="storageType")
     def storage_type(self) -> int:
+        """
+        Disk type.
+        """
         return pulumi.get(self, "storage_type")
 
     @property
     @pulumi.getter(name="supportModifyPayMode")
     def support_modify_pay_mode(self) -> int:
+        """
+        Whether to support change billing type 1 Yes and 0 No.
+        """
         return pulumi.get(self, "support_modify_pay_mode")
 
     @property
     @pulumi.getter
-    def tags(self) -> Sequence['outputs.NodesNodeTagResult']:
+    def tags(self) -> Sequence['outputs.GetNodesNodeTagResult']:
+        """
+        The label of the node binding.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="wanIp")
     def wan_ip(self) -> str:
+        """
+        The master node is bound to the Internet IP address.
+        """
         return pulumi.get(self, "wan_ip")
 
     @property
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> int:
+        """
+        Zone where the node is located.
+        """
         return pulumi.get(self, "zone_id")
 
 
 @pulumi.output_type
-class NodesNodeCdbNodeInfoResult(dict):
+class GetNodesNodeCdbNodeInfoResult(dict):
     def __init__(__self__, *,
                  apply_time: str,
                  expire_flag: bool,
@@ -858,6 +1088,23 @@ class NodesNodeCdbNodeInfoResult(dict):
                  status: int,
                  volume: int,
                  zone_id: int):
+        """
+        :param str apply_time: Application time.
+        :param bool expire_flag: Expired id.
+        :param str expire_time: Expiration time.
+        :param str instance_name: DB instance.
+        :param str ip: Intranet IP.
+        :param int is_auto_renew: Renewal logo.
+        :param int mem_size: Node memory.
+        :param int pay_type: The type of payment.
+        :param int port: Database port.
+        :param int region_id: The node is located in the region.
+        :param str serial_no: Serial number.
+        :param str service: The service identity.
+        :param int status: Database status.
+        :param int volume: The size of the cloud disk.
+        :param int zone_id: Zone where the node is located.
+        """
         pulumi.set(__self__, "apply_time", apply_time)
         pulumi.set(__self__, "expire_flag", expire_flag)
         pulumi.set(__self__, "expire_time", expire_time)
@@ -877,85 +1124,135 @@ class NodesNodeCdbNodeInfoResult(dict):
     @property
     @pulumi.getter(name="applyTime")
     def apply_time(self) -> str:
+        """
+        Application time.
+        """
         return pulumi.get(self, "apply_time")
 
     @property
     @pulumi.getter(name="expireFlag")
     def expire_flag(self) -> bool:
+        """
+        Expired id.
+        """
         return pulumi.get(self, "expire_flag")
 
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> str:
+        """
+        Expiration time.
+        """
         return pulumi.get(self, "expire_time")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        DB instance.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        Intranet IP.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter(name="isAutoRenew")
     def is_auto_renew(self) -> int:
+        """
+        Renewal logo.
+        """
         return pulumi.get(self, "is_auto_renew")
 
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> int:
+        """
+        Node memory.
+        """
         return pulumi.get(self, "mem_size")
 
     @property
     @pulumi.getter(name="payType")
     def pay_type(self) -> int:
+        """
+        The type of payment.
+        """
         return pulumi.get(self, "pay_type")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Database port.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter(name="regionId")
     def region_id(self) -> int:
+        """
+        The node is located in the region.
+        """
         return pulumi.get(self, "region_id")
 
     @property
     @pulumi.getter(name="serialNo")
     def serial_no(self) -> str:
+        """
+        Serial number.
+        """
         return pulumi.get(self, "serial_no")
 
     @property
     @pulumi.getter
     def service(self) -> str:
+        """
+        The service identity.
+        """
         return pulumi.get(self, "service")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Database status.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter
     def volume(self) -> int:
+        """
+        The size of the cloud disk.
+        """
         return pulumi.get(self, "volume")
 
     @property
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> int:
+        """
+        Zone where the node is located.
+        """
         return pulumi.get(self, "zone_id")
 
 
 @pulumi.output_type
-class NodesNodeMcMultiDiskResult(dict):
+class GetNodesNodeMcMultiDiskResult(dict):
     def __init__(__self__, *,
                  count: int,
                  type: int,
                  volume: int):
+        """
+        :param int count: The number of cloud disks of this type.
+        :param int type: Disk type.
+        :param int volume: The size of the cloud disk.
+        """
         pulumi.set(__self__, "count", count)
         pulumi.set(__self__, "type", type)
         pulumi.set(__self__, "volume", volume)
@@ -963,35 +1260,54 @@ class NodesNodeMcMultiDiskResult(dict):
     @property
     @pulumi.getter
     def count(self) -> int:
+        """
+        The number of cloud disks of this type.
+        """
         return pulumi.get(self, "count")
 
     @property
     @pulumi.getter
     def type(self) -> int:
+        """
+        Disk type.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter
     def volume(self) -> int:
+        """
+        The size of the cloud disk.
+        """
         return pulumi.get(self, "volume")
 
 
 @pulumi.output_type
-class NodesNodeTagResult(dict):
+class GetNodesNodeTagResult(dict):
     def __init__(__self__, *,
                  tag_key: str,
                  tag_value: str):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
         pulumi.set(__self__, "tag_key", tag_key)
         pulumi.set(__self__, "tag_value", tag_value)
 
     @property
     @pulumi.getter(name="tagKey")
     def tag_key(self) -> str:
+        """
+        Tag key.
+        """
         return pulumi.get(self, "tag_key")
 
     @property
     @pulumi.getter(name="tagValue")
     def tag_value(self) -> str:
+        """
+        Tag value.
+        """
         return pulumi.get(self, "tag_value")
 
 

@@ -12,14 +12,14 @@ from . import outputs
 __all__ = [
     'ScalingConfigDataDisk',
     'ScalingConfigInstanceNameSettings',
-    'ScalingConfigsConfigurationListResult',
-    'ScalingConfigsConfigurationListDataDiskResult',
     'ScalingGroupForwardBalancerId',
     'ScalingGroupForwardBalancerIdTargetAttribute',
-    'ScalingGroupsScalingGroupListResult',
-    'ScalingGroupsScalingGroupListForwardBalancerIdResult',
-    'ScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult',
-    'ScalingPoliciesScalingPolicyListResult',
+    'GetScalingConfigsConfigurationListResult',
+    'GetScalingConfigsConfigurationListDataDiskResult',
+    'GetScalingGroupsScalingGroupListResult',
+    'GetScalingGroupsScalingGroupListForwardBalancerIdResult',
+    'GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult',
+    'GetScalingPoliciesScalingPolicyListResult',
 ]
 
 @pulumi.output_type
@@ -52,6 +52,12 @@ class ScalingConfigDataDisk(dict):
                  disk_size: Optional[int] = None,
                  disk_type: Optional[str] = None,
                  snapshot_id: Optional[str] = None):
+        """
+        :param bool delete_with_instance: Indicates whether the disk remove after instance terminated.
+        :param int disk_size: Volume of disk in GB. Default is `0`.
+        :param str disk_type: Types of disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. valid when disk_type_policy is ORIGINAL.
+        :param str snapshot_id: Data disk snapshot ID.
+        """
         if delete_with_instance is not None:
             pulumi.set(__self__, "delete_with_instance", delete_with_instance)
         if disk_size is not None:
@@ -64,21 +70,33 @@ class ScalingConfigDataDisk(dict):
     @property
     @pulumi.getter(name="deleteWithInstance")
     def delete_with_instance(self) -> Optional[bool]:
+        """
+        Indicates whether the disk remove after instance terminated.
+        """
         return pulumi.get(self, "delete_with_instance")
 
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[int]:
+        """
+        Volume of disk in GB. Default is `0`.
+        """
         return pulumi.get(self, "disk_size")
 
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
+        """
+        Types of disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. valid when disk_type_policy is ORIGINAL.
+        """
         return pulumi.get(self, "disk_type")
 
     @property
     @pulumi.getter(name="snapshotId")
     def snapshot_id(self) -> Optional[str]:
+        """
+        Data disk snapshot ID.
+        """
         return pulumi.get(self, "snapshot_id")
 
 
@@ -106,6 +124,10 @@ class ScalingConfigInstanceNameSettings(dict):
     def __init__(__self__, *,
                  instance_name: str,
                  instance_name_style: Optional[str] = None):
+        """
+        :param str instance_name: CVM instance name.
+        :param str instance_name_style: Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default is `ORIGINAL`.
+        """
         pulumi.set(__self__, "instance_name", instance_name)
         if instance_name_style is not None:
             pulumi.set(__self__, "instance_name_style", instance_name_style)
@@ -113,190 +135,18 @@ class ScalingConfigInstanceNameSettings(dict):
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        CVM instance name.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="instanceNameStyle")
     def instance_name_style(self) -> Optional[str]:
+        """
+        Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default is `ORIGINAL`.
+        """
         return pulumi.get(self, "instance_name_style")
-
-
-@pulumi.output_type
-class ScalingConfigsConfigurationListResult(dict):
-    def __init__(__self__, *,
-                 configuration_id: str,
-                 configuration_name: str,
-                 create_time: str,
-                 data_disks: Sequence['outputs.ScalingConfigsConfigurationListDataDiskResult'],
-                 disk_type_policy: str,
-                 enhanced_monitor_service: bool,
-                 enhanced_security_service: bool,
-                 image_id: str,
-                 instance_tags: Mapping[str, Any],
-                 instance_types: Sequence[str],
-                 internet_charge_type: str,
-                 internet_max_bandwidth_out: int,
-                 key_ids: Sequence[str],
-                 project_id: int,
-                 public_ip_assigned: bool,
-                 security_group_ids: Sequence[str],
-                 status: str,
-                 system_disk_size: int,
-                 system_disk_type: str,
-                 user_data: str):
-        pulumi.set(__self__, "configuration_id", configuration_id)
-        pulumi.set(__self__, "configuration_name", configuration_name)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "data_disks", data_disks)
-        pulumi.set(__self__, "disk_type_policy", disk_type_policy)
-        pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
-        pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
-        pulumi.set(__self__, "image_id", image_id)
-        pulumi.set(__self__, "instance_tags", instance_tags)
-        pulumi.set(__self__, "instance_types", instance_types)
-        pulumi.set(__self__, "internet_charge_type", internet_charge_type)
-        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
-        pulumi.set(__self__, "key_ids", key_ids)
-        pulumi.set(__self__, "project_id", project_id)
-        pulumi.set(__self__, "public_ip_assigned", public_ip_assigned)
-        pulumi.set(__self__, "security_group_ids", security_group_ids)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "system_disk_size", system_disk_size)
-        pulumi.set(__self__, "system_disk_type", system_disk_type)
-        pulumi.set(__self__, "user_data", user_data)
-
-    @property
-    @pulumi.getter(name="configurationId")
-    def configuration_id(self) -> str:
-        return pulumi.get(self, "configuration_id")
-
-    @property
-    @pulumi.getter(name="configurationName")
-    def configuration_name(self) -> str:
-        return pulumi.get(self, "configuration_name")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="dataDisks")
-    def data_disks(self) -> Sequence['outputs.ScalingConfigsConfigurationListDataDiskResult']:
-        return pulumi.get(self, "data_disks")
-
-    @property
-    @pulumi.getter(name="diskTypePolicy")
-    def disk_type_policy(self) -> str:
-        return pulumi.get(self, "disk_type_policy")
-
-    @property
-    @pulumi.getter(name="enhancedMonitorService")
-    def enhanced_monitor_service(self) -> bool:
-        return pulumi.get(self, "enhanced_monitor_service")
-
-    @property
-    @pulumi.getter(name="enhancedSecurityService")
-    def enhanced_security_service(self) -> bool:
-        return pulumi.get(self, "enhanced_security_service")
-
-    @property
-    @pulumi.getter(name="imageId")
-    def image_id(self) -> str:
-        return pulumi.get(self, "image_id")
-
-    @property
-    @pulumi.getter(name="instanceTags")
-    def instance_tags(self) -> Mapping[str, Any]:
-        return pulumi.get(self, "instance_tags")
-
-    @property
-    @pulumi.getter(name="instanceTypes")
-    def instance_types(self) -> Sequence[str]:
-        return pulumi.get(self, "instance_types")
-
-    @property
-    @pulumi.getter(name="internetChargeType")
-    def internet_charge_type(self) -> str:
-        return pulumi.get(self, "internet_charge_type")
-
-    @property
-    @pulumi.getter(name="internetMaxBandwidthOut")
-    def internet_max_bandwidth_out(self) -> int:
-        return pulumi.get(self, "internet_max_bandwidth_out")
-
-    @property
-    @pulumi.getter(name="keyIds")
-    def key_ids(self) -> Sequence[str]:
-        return pulumi.get(self, "key_ids")
-
-    @property
-    @pulumi.getter(name="projectId")
-    def project_id(self) -> int:
-        return pulumi.get(self, "project_id")
-
-    @property
-    @pulumi.getter(name="publicIpAssigned")
-    def public_ip_assigned(self) -> bool:
-        return pulumi.get(self, "public_ip_assigned")
-
-    @property
-    @pulumi.getter(name="securityGroupIds")
-    def security_group_ids(self) -> Sequence[str]:
-        return pulumi.get(self, "security_group_ids")
-
-    @property
-    @pulumi.getter
-    def status(self) -> str:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter(name="systemDiskSize")
-    def system_disk_size(self) -> int:
-        return pulumi.get(self, "system_disk_size")
-
-    @property
-    @pulumi.getter(name="systemDiskType")
-    def system_disk_type(self) -> str:
-        return pulumi.get(self, "system_disk_type")
-
-    @property
-    @pulumi.getter(name="userData")
-    def user_data(self) -> str:
-        return pulumi.get(self, "user_data")
-
-
-@pulumi.output_type
-class ScalingConfigsConfigurationListDataDiskResult(dict):
-    def __init__(__self__, *,
-                 delete_with_instance: bool,
-                 disk_size: int,
-                 disk_type: str,
-                 snapshot_id: str):
-        pulumi.set(__self__, "delete_with_instance", delete_with_instance)
-        pulumi.set(__self__, "disk_size", disk_size)
-        pulumi.set(__self__, "disk_type", disk_type)
-        pulumi.set(__self__, "snapshot_id", snapshot_id)
-
-    @property
-    @pulumi.getter(name="deleteWithInstance")
-    def delete_with_instance(self) -> bool:
-        return pulumi.get(self, "delete_with_instance")
-
-    @property
-    @pulumi.getter(name="diskSize")
-    def disk_size(self) -> int:
-        return pulumi.get(self, "disk_size")
-
-    @property
-    @pulumi.getter(name="diskType")
-    def disk_type(self) -> str:
-        return pulumi.get(self, "disk_type")
-
-    @property
-    @pulumi.getter(name="snapshotId")
-    def snapshot_id(self) -> str:
-        return pulumi.get(self, "snapshot_id")
 
 
 @pulumi.output_type
@@ -329,6 +179,12 @@ class ScalingGroupForwardBalancerId(dict):
                  load_balancer_id: str,
                  target_attributes: Sequence['outputs.ScalingGroupForwardBalancerIdTargetAttribute'],
                  rule_id: Optional[str] = None):
+        """
+        :param str listener_id: Listener ID for application load balancers.
+        :param str load_balancer_id: ID of available load balancers.
+        :param Sequence['ScalingGroupForwardBalancerIdTargetAttributeArgs'] target_attributes: Attribute list of target rules.
+        :param str rule_id: ID of forwarding rules.
+        """
         pulumi.set(__self__, "listener_id", listener_id)
         pulumi.set(__self__, "load_balancer_id", load_balancer_id)
         pulumi.set(__self__, "target_attributes", target_attributes)
@@ -338,21 +194,33 @@ class ScalingGroupForwardBalancerId(dict):
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> str:
+        """
+        Listener ID for application load balancers.
+        """
         return pulumi.get(self, "listener_id")
 
     @property
     @pulumi.getter(name="loadBalancerId")
     def load_balancer_id(self) -> str:
+        """
+        ID of available load balancers.
+        """
         return pulumi.get(self, "load_balancer_id")
 
     @property
     @pulumi.getter(name="targetAttributes")
     def target_attributes(self) -> Sequence['outputs.ScalingGroupForwardBalancerIdTargetAttribute']:
+        """
+        Attribute list of target rules.
+        """
         return pulumi.get(self, "target_attributes")
 
     @property
     @pulumi.getter(name="ruleId")
     def rule_id(self) -> Optional[str]:
+        """
+        ID of forwarding rules.
+        """
         return pulumi.get(self, "rule_id")
 
 
@@ -361,28 +229,316 @@ class ScalingGroupForwardBalancerIdTargetAttribute(dict):
     def __init__(__self__, *,
                  port: int,
                  weight: int):
+        """
+        :param int port: Port number.
+        :param int weight: Weight.
+        """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "weight", weight)
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port number.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def weight(self) -> int:
+        """
+        Weight.
+        """
         return pulumi.get(self, "weight")
 
 
 @pulumi.output_type
-class ScalingGroupsScalingGroupListResult(dict):
+class GetScalingConfigsConfigurationListResult(dict):
+    def __init__(__self__, *,
+                 configuration_id: str,
+                 configuration_name: str,
+                 create_time: str,
+                 data_disks: Sequence['outputs.GetScalingConfigsConfigurationListDataDiskResult'],
+                 disk_type_policy: str,
+                 enhanced_monitor_service: bool,
+                 enhanced_security_service: bool,
+                 image_id: str,
+                 instance_tags: Mapping[str, Any],
+                 instance_types: Sequence[str],
+                 internet_charge_type: str,
+                 internet_max_bandwidth_out: int,
+                 key_ids: Sequence[str],
+                 project_id: int,
+                 public_ip_assigned: bool,
+                 security_group_ids: Sequence[str],
+                 status: str,
+                 system_disk_size: int,
+                 system_disk_type: str,
+                 user_data: str):
+        """
+        :param str configuration_id: Launch configuration ID.
+        :param str configuration_name: Launch configuration name.
+        :param str create_time: The time when the launch configuration was created.
+        :param Sequence['GetScalingConfigsConfigurationListDataDiskArgs'] data_disks: Configurations of data disk.
+        :param str disk_type_policy: Policy of cloud disk type.
+        :param bool enhanced_monitor_service: Whether to activate cloud monitor service.
+        :param bool enhanced_security_service: Whether to activate cloud security service.
+        :param str image_id: ID of available image, for example `img-8toqc6s3`.
+        :param Mapping[str, Any] instance_tags: A tag list associates with an instance.
+        :param Sequence[str] instance_types: Instance type list of the scaling configuration.
+        :param str internet_charge_type: Charge types for network traffic.
+        :param int internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps.
+        :param Sequence[str] key_ids: ID list of login keys.
+        :param int project_id: ID of the project to which the configuration belongs. Default value is 0.
+        :param bool public_ip_assigned: Specify whether to assign an Internet IP address.
+        :param Sequence[str] security_group_ids: Security groups to which the instance belongs.
+        :param str status: Current status of a launch configuration.
+        :param int system_disk_size: System disk size of the scaling configuration in GB.
+        :param str system_disk_type: System disk category of the scaling configuration.
+        :param str user_data: Base64-encoded User Data text.
+        """
+        pulumi.set(__self__, "configuration_id", configuration_id)
+        pulumi.set(__self__, "configuration_name", configuration_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "disk_type_policy", disk_type_policy)
+        pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
+        pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "instance_tags", instance_tags)
+        pulumi.set(__self__, "instance_types", instance_types)
+        pulumi.set(__self__, "internet_charge_type", internet_charge_type)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        pulumi.set(__self__, "key_ids", key_ids)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "public_ip_assigned", public_ip_assigned)
+        pulumi.set(__self__, "security_group_ids", security_group_ids)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "system_disk_size", system_disk_size)
+        pulumi.set(__self__, "system_disk_type", system_disk_type)
+        pulumi.set(__self__, "user_data", user_data)
+
+    @property
+    @pulumi.getter(name="configurationId")
+    def configuration_id(self) -> str:
+        """
+        Launch configuration ID.
+        """
+        return pulumi.get(self, "configuration_id")
+
+    @property
+    @pulumi.getter(name="configurationName")
+    def configuration_name(self) -> str:
+        """
+        Launch configuration name.
+        """
+        return pulumi.get(self, "configuration_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        The time when the launch configuration was created.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Sequence['outputs.GetScalingConfigsConfigurationListDataDiskResult']:
+        """
+        Configurations of data disk.
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="diskTypePolicy")
+    def disk_type_policy(self) -> str:
+        """
+        Policy of cloud disk type.
+        """
+        return pulumi.get(self, "disk_type_policy")
+
+    @property
+    @pulumi.getter(name="enhancedMonitorService")
+    def enhanced_monitor_service(self) -> bool:
+        """
+        Whether to activate cloud monitor service.
+        """
+        return pulumi.get(self, "enhanced_monitor_service")
+
+    @property
+    @pulumi.getter(name="enhancedSecurityService")
+    def enhanced_security_service(self) -> bool:
+        """
+        Whether to activate cloud security service.
+        """
+        return pulumi.get(self, "enhanced_security_service")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        """
+        ID of available image, for example `img-8toqc6s3`.
+        """
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter(name="instanceTags")
+    def instance_tags(self) -> Mapping[str, Any]:
+        """
+        A tag list associates with an instance.
+        """
+        return pulumi.get(self, "instance_tags")
+
+    @property
+    @pulumi.getter(name="instanceTypes")
+    def instance_types(self) -> Sequence[str]:
+        """
+        Instance type list of the scaling configuration.
+        """
+        return pulumi.get(self, "instance_types")
+
+    @property
+    @pulumi.getter(name="internetChargeType")
+    def internet_charge_type(self) -> str:
+        """
+        Charge types for network traffic.
+        """
+        return pulumi.get(self, "internet_charge_type")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        Max bandwidth of Internet access in Mbps.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter(name="keyIds")
+    def key_ids(self) -> Sequence[str]:
+        """
+        ID list of login keys.
+        """
+        return pulumi.get(self, "key_ids")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        ID of the project to which the configuration belongs. Default value is 0.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="publicIpAssigned")
+    def public_ip_assigned(self) -> bool:
+        """
+        Specify whether to assign an Internet IP address.
+        """
+        return pulumi.get(self, "public_ip_assigned")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Sequence[str]:
+        """
+        Security groups to which the instance belongs.
+        """
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Current status of a launch configuration.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="systemDiskSize")
+    def system_disk_size(self) -> int:
+        """
+        System disk size of the scaling configuration in GB.
+        """
+        return pulumi.get(self, "system_disk_size")
+
+    @property
+    @pulumi.getter(name="systemDiskType")
+    def system_disk_type(self) -> str:
+        """
+        System disk category of the scaling configuration.
+        """
+        return pulumi.get(self, "system_disk_type")
+
+    @property
+    @pulumi.getter(name="userData")
+    def user_data(self) -> str:
+        """
+        Base64-encoded User Data text.
+        """
+        return pulumi.get(self, "user_data")
+
+
+@pulumi.output_type
+class GetScalingConfigsConfigurationListDataDiskResult(dict):
+    def __init__(__self__, *,
+                 delete_with_instance: bool,
+                 disk_size: int,
+                 disk_type: str,
+                 snapshot_id: str):
+        """
+        :param bool delete_with_instance: Indicates whether the disk remove after instance terminated.
+        :param int disk_size: Volume of disk in GB. Default is `0`.
+        :param str disk_type: Type of disk.
+        :param str snapshot_id: Data disk snapshot ID.
+        """
+        pulumi.set(__self__, "delete_with_instance", delete_with_instance)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "snapshot_id", snapshot_id)
+
+    @property
+    @pulumi.getter(name="deleteWithInstance")
+    def delete_with_instance(self) -> bool:
+        """
+        Indicates whether the disk remove after instance terminated.
+        """
+        return pulumi.get(self, "delete_with_instance")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Volume of disk in GB. Default is `0`.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Type of disk.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> str:
+        """
+        Data disk snapshot ID.
+        """
+        return pulumi.get(self, "snapshot_id")
+
+
+@pulumi.output_type
+class GetScalingGroupsScalingGroupListResult(dict):
     def __init__(__self__, *,
                  configuration_id: str,
                  create_time: str,
                  default_cooldown: int,
                  desired_capacity: int,
-                 forward_balancer_ids: Sequence['outputs.ScalingGroupsScalingGroupListForwardBalancerIdResult'],
+                 forward_balancer_ids: Sequence['outputs.GetScalingGroupsScalingGroupListForwardBalancerIdResult'],
                  instance_count: int,
                  load_balancer_ids: Sequence[str],
                  max_size: int,
@@ -398,6 +554,28 @@ class ScalingGroupsScalingGroupListResult(dict):
                  termination_policies: Sequence[str],
                  vpc_id: str,
                  zones: Sequence[str]):
+        """
+        :param str configuration_id: Filter results by launch configuration ID.
+        :param str create_time: The time when the AS group was created.
+        :param int default_cooldown: Default cooldown time of scaling group.
+        :param int desired_capacity: The desired number of CVM instances.
+        :param Sequence['GetScalingGroupsScalingGroupListForwardBalancerIdArgs'] forward_balancer_ids: A list of application clb ids.
+        :param int instance_count: Number of instance.
+        :param Sequence[str] load_balancer_ids: A list of traditional clb ids which the CVM instances attached to.
+        :param int max_size: The maximum number of CVM instances.
+        :param int min_size: The minimum number of CVM instances.
+        :param str multi_zone_subnet_policy: Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+        :param int project_id: ID of the project to which the scaling group belongs. Default value is 0.
+        :param str retry_policy: A retry policy can be used when a creation fails.
+        :param str scaling_group_id: A specified scaling group ID used to query.
+        :param str scaling_group_name: A scaling group name used to query.
+        :param str status: Current status of a scaling group.
+        :param Sequence[str] subnet_ids: A list of subnet IDs.
+        :param Mapping[str, Any] tags: Tags used to query.
+        :param Sequence[str] termination_policies: A policy used to select a CVM instance to be terminated from the scaling group.
+        :param str vpc_id: ID of the vpc with which the instance is associated.
+        :param Sequence[str] zones: A list of available zones.
+        """
         pulumi.set(__self__, "configuration_id", configuration_id)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "default_cooldown", default_cooldown)
@@ -422,111 +600,177 @@ class ScalingGroupsScalingGroupListResult(dict):
     @property
     @pulumi.getter(name="configurationId")
     def configuration_id(self) -> str:
+        """
+        Filter results by launch configuration ID.
+        """
         return pulumi.get(self, "configuration_id")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        The time when the AS group was created.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="defaultCooldown")
     def default_cooldown(self) -> int:
+        """
+        Default cooldown time of scaling group.
+        """
         return pulumi.get(self, "default_cooldown")
 
     @property
     @pulumi.getter(name="desiredCapacity")
     def desired_capacity(self) -> int:
+        """
+        The desired number of CVM instances.
+        """
         return pulumi.get(self, "desired_capacity")
 
     @property
     @pulumi.getter(name="forwardBalancerIds")
-    def forward_balancer_ids(self) -> Sequence['outputs.ScalingGroupsScalingGroupListForwardBalancerIdResult']:
+    def forward_balancer_ids(self) -> Sequence['outputs.GetScalingGroupsScalingGroupListForwardBalancerIdResult']:
+        """
+        A list of application clb ids.
+        """
         return pulumi.get(self, "forward_balancer_ids")
 
     @property
     @pulumi.getter(name="instanceCount")
     def instance_count(self) -> int:
+        """
+        Number of instance.
+        """
         return pulumi.get(self, "instance_count")
 
     @property
     @pulumi.getter(name="loadBalancerIds")
     def load_balancer_ids(self) -> Sequence[str]:
+        """
+        A list of traditional clb ids which the CVM instances attached to.
+        """
         return pulumi.get(self, "load_balancer_ids")
 
     @property
     @pulumi.getter(name="maxSize")
     def max_size(self) -> int:
+        """
+        The maximum number of CVM instances.
+        """
         return pulumi.get(self, "max_size")
 
     @property
     @pulumi.getter(name="minSize")
     def min_size(self) -> int:
+        """
+        The minimum number of CVM instances.
+        """
         return pulumi.get(self, "min_size")
 
     @property
     @pulumi.getter(name="multiZoneSubnetPolicy")
     def multi_zone_subnet_policy(self) -> str:
+        """
+        Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+        """
         return pulumi.get(self, "multi_zone_subnet_policy")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        ID of the project to which the scaling group belongs. Default value is 0.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="retryPolicy")
     def retry_policy(self) -> str:
+        """
+        A retry policy can be used when a creation fails.
+        """
         return pulumi.get(self, "retry_policy")
 
     @property
     @pulumi.getter(name="scalingGroupId")
     def scaling_group_id(self) -> str:
+        """
+        A specified scaling group ID used to query.
+        """
         return pulumi.get(self, "scaling_group_id")
 
     @property
     @pulumi.getter(name="scalingGroupName")
     def scaling_group_name(self) -> str:
+        """
+        A scaling group name used to query.
+        """
         return pulumi.get(self, "scaling_group_name")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Current status of a scaling group.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="subnetIds")
     def subnet_ids(self) -> Sequence[str]:
+        """
+        A list of subnet IDs.
+        """
         return pulumi.get(self, "subnet_ids")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags used to query.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="terminationPolicies")
     def termination_policies(self) -> Sequence[str]:
+        """
+        A policy used to select a CVM instance to be terminated from the scaling group.
+        """
         return pulumi.get(self, "termination_policies")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the vpc with which the instance is associated.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter
     def zones(self) -> Sequence[str]:
+        """
+        A list of available zones.
+        """
         return pulumi.get(self, "zones")
 
 
 @pulumi.output_type
-class ScalingGroupsScalingGroupListForwardBalancerIdResult(dict):
+class GetScalingGroupsScalingGroupListForwardBalancerIdResult(dict):
     def __init__(__self__, *,
                  listener_id: str,
                  load_balancer_id: str,
                  location_id: str,
-                 target_attributes: Sequence['outputs.ScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult']):
+                 target_attributes: Sequence['outputs.GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult']):
+        """
+        :param str listener_id: Listener ID for application load balancers.
+        :param str load_balancer_id: ID of available load balancers.
+        :param str location_id: ID of forwarding rules.
+        :param Sequence['GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs'] target_attributes: Attribute list of target rules.
+        """
         pulumi.set(__self__, "listener_id", listener_id)
         pulumi.set(__self__, "load_balancer_id", load_balancer_id)
         pulumi.set(__self__, "location_id", location_id)
@@ -535,45 +779,67 @@ class ScalingGroupsScalingGroupListForwardBalancerIdResult(dict):
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> str:
+        """
+        Listener ID for application load balancers.
+        """
         return pulumi.get(self, "listener_id")
 
     @property
     @pulumi.getter(name="loadBalancerId")
     def load_balancer_id(self) -> str:
+        """
+        ID of available load balancers.
+        """
         return pulumi.get(self, "load_balancer_id")
 
     @property
     @pulumi.getter(name="locationId")
     def location_id(self) -> str:
+        """
+        ID of forwarding rules.
+        """
         return pulumi.get(self, "location_id")
 
     @property
     @pulumi.getter(name="targetAttributes")
-    def target_attributes(self) -> Sequence['outputs.ScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult']:
+    def target_attributes(self) -> Sequence['outputs.GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult']:
+        """
+        Attribute list of target rules.
+        """
         return pulumi.get(self, "target_attributes")
 
 
 @pulumi.output_type
-class ScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult(dict):
+class GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult(dict):
     def __init__(__self__, *,
                  port: int,
                  weight: int):
+        """
+        :param int port: Port number.
+        :param int weight: Weight.
+        """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "weight", weight)
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port number.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def weight(self) -> int:
+        """
+        Weight.
+        """
         return pulumi.get(self, "weight")
 
 
 @pulumi.output_type
-class ScalingPoliciesScalingPolicyListResult(dict):
+class GetScalingPoliciesScalingPolicyListResult(dict):
     def __init__(__self__, *,
                  adjustment_type: str,
                  adjustment_value: int,
@@ -587,6 +853,20 @@ class ScalingPoliciesScalingPolicyListResult(dict):
                  scaling_group_id: str,
                  statistic: str,
                  threshold: int):
+        """
+        :param str adjustment_type: Adjustment type of the scaling rule.
+        :param int adjustment_value: Adjustment value of the scaling rule.
+        :param str comparison_operator: Comparison operator.
+        :param int continuous_time: Retry times.
+        :param int cooldown: Cool down time of the scaling rule.
+        :param str metric_name: Name of an indicator.
+        :param Sequence[str] notification_user_group_ids: Users need to be notified when an alarm is triggered.
+        :param int period: Time period in second.
+        :param str policy_name: Scaling policy name.
+        :param str scaling_group_id: Scaling group ID.
+        :param str statistic: Statistic types.
+        :param int threshold: Alarm threshold.
+        """
         pulumi.set(__self__, "adjustment_type", adjustment_type)
         pulumi.set(__self__, "adjustment_value", adjustment_value)
         pulumi.set(__self__, "comparison_operator", comparison_operator)
@@ -603,61 +883,97 @@ class ScalingPoliciesScalingPolicyListResult(dict):
     @property
     @pulumi.getter(name="adjustmentType")
     def adjustment_type(self) -> str:
+        """
+        Adjustment type of the scaling rule.
+        """
         return pulumi.get(self, "adjustment_type")
 
     @property
     @pulumi.getter(name="adjustmentValue")
     def adjustment_value(self) -> int:
+        """
+        Adjustment value of the scaling rule.
+        """
         return pulumi.get(self, "adjustment_value")
 
     @property
     @pulumi.getter(name="comparisonOperator")
     def comparison_operator(self) -> str:
+        """
+        Comparison operator.
+        """
         return pulumi.get(self, "comparison_operator")
 
     @property
     @pulumi.getter(name="continuousTime")
     def continuous_time(self) -> int:
+        """
+        Retry times.
+        """
         return pulumi.get(self, "continuous_time")
 
     @property
     @pulumi.getter
     def cooldown(self) -> int:
+        """
+        Cool down time of the scaling rule.
+        """
         return pulumi.get(self, "cooldown")
 
     @property
     @pulumi.getter(name="metricName")
     def metric_name(self) -> str:
+        """
+        Name of an indicator.
+        """
         return pulumi.get(self, "metric_name")
 
     @property
     @pulumi.getter(name="notificationUserGroupIds")
     def notification_user_group_ids(self) -> Sequence[str]:
+        """
+        Users need to be notified when an alarm is triggered.
+        """
         return pulumi.get(self, "notification_user_group_ids")
 
     @property
     @pulumi.getter
     def period(self) -> int:
+        """
+        Time period in second.
+        """
         return pulumi.get(self, "period")
 
     @property
     @pulumi.getter(name="policyName")
     def policy_name(self) -> str:
+        """
+        Scaling policy name.
+        """
         return pulumi.get(self, "policy_name")
 
     @property
     @pulumi.getter(name="scalingGroupId")
     def scaling_group_id(self) -> str:
+        """
+        Scaling group ID.
+        """
         return pulumi.get(self, "scaling_group_id")
 
     @property
     @pulumi.getter
     def statistic(self) -> str:
+        """
+        Statistic types.
+        """
         return pulumi.get(self, "statistic")
 
     @property
     @pulumi.getter
     def threshold(self) -> int:
+        """
+        Alarm threshold.
+        """
         return pulumi.get(self, "threshold")
 
 

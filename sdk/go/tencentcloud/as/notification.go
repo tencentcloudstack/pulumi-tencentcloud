@@ -11,12 +11,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource for an AS (Auto scaling) notification.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := As.NewNotification(ctx, "asNotification", &As.NotificationArgs{
+// 			NotificationTypes: pulumi.StringArray{
+// 				pulumi.String("SCALE_OUT_FAILED"),
+// 				pulumi.String("SCALE_IN_SUCCESSFUL"),
+// 				pulumi.String("SCALE_IN_FAILED"),
+// 				pulumi.String("REPLACE_UNHEALTHY_INSTANCE_FAILED"),
+// 			},
+// 			NotificationUserGroupIds: pulumi.StringArray{
+// 				pulumi.String("76955"),
+// 			},
+// 			ScalingGroupId: pulumi.String("sg-12af45"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Notification struct {
 	pulumi.CustomResourceState
 
-	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-	// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-	// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
 	NotificationTypes pulumi.StringArrayOutput `pulumi:"notificationTypes"`
 	// A group of user IDs to be notified.
 	NotificationUserGroupIds pulumi.StringArrayOutput `pulumi:"notificationUserGroupIds"`
@@ -62,9 +93,7 @@ func GetNotification(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Notification resources.
 type notificationState struct {
-	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-	// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-	// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
 	NotificationTypes []string `pulumi:"notificationTypes"`
 	// A group of user IDs to be notified.
 	NotificationUserGroupIds []string `pulumi:"notificationUserGroupIds"`
@@ -73,9 +102,7 @@ type notificationState struct {
 }
 
 type NotificationState struct {
-	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-	// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-	// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
 	NotificationTypes pulumi.StringArrayInput
 	// A group of user IDs to be notified.
 	NotificationUserGroupIds pulumi.StringArrayInput
@@ -88,9 +115,7 @@ func (NotificationState) ElementType() reflect.Type {
 }
 
 type notificationArgs struct {
-	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-	// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-	// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
 	NotificationTypes []string `pulumi:"notificationTypes"`
 	// A group of user IDs to be notified.
 	NotificationUserGroupIds []string `pulumi:"notificationUserGroupIds"`
@@ -100,9 +125,7 @@ type notificationArgs struct {
 
 // The set of arguments for constructing a Notification resource.
 type NotificationArgs struct {
-	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-	// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-	// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+	// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
 	NotificationTypes pulumi.StringArrayInput
 	// A group of user IDs to be notified.
 	NotificationUserGroupIds pulumi.StringArrayInput
@@ -197,9 +220,7 @@ func (o NotificationOutput) ToNotificationOutputWithContext(ctx context.Context)
 	return o
 }
 
-// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`,
-// `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and
-// `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
+// A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
 func (o NotificationOutput) NotificationTypes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Notification) pulumi.StringArrayOutput { return v.NotificationTypes }).(pulumi.StringArrayOutput)
 }

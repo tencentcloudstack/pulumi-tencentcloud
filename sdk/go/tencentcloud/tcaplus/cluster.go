@@ -11,6 +11,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create TcaplusDB cluster.
+//
+// > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
+// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
+// 			IdlType:               pulumi.String("PROTO"),
+// 			OldPasswordExpireLast: pulumi.Int(3600),
+// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
+// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
+// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// tcaplus cluster can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+// ```
 type Cluster struct {
 	pulumi.CustomResourceState
 
@@ -30,14 +69,11 @@ type Cluster struct {
 	NetworkType pulumi.StringOutput `pulumi:"networkType"`
 	// Expiration time of old password after password update, unit: second.
 	OldPasswordExpireLast pulumi.IntPtrOutput `pulumi:"oldPasswordExpireLast"`
-	// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-	// expired.
+	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
 	OldPasswordExpireTime pulumi.StringOutput `pulumi:"oldPasswordExpireTime"`
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-	// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
 	Password pulumi.StringOutput `pulumi:"password"`
-	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-	// password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
 	PasswordStatus pulumi.StringOutput `pulumi:"passwordStatus"`
 	// Subnet id of the TcaplusDB cluster.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
@@ -105,14 +141,11 @@ type clusterState struct {
 	NetworkType *string `pulumi:"networkType"`
 	// Expiration time of old password after password update, unit: second.
 	OldPasswordExpireLast *int `pulumi:"oldPasswordExpireLast"`
-	// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-	// expired.
+	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
 	OldPasswordExpireTime *string `pulumi:"oldPasswordExpireTime"`
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-	// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
 	Password *string `pulumi:"password"`
-	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-	// password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
 	PasswordStatus *string `pulumi:"passwordStatus"`
 	// Subnet id of the TcaplusDB cluster.
 	SubnetId *string `pulumi:"subnetId"`
@@ -137,14 +170,11 @@ type ClusterState struct {
 	NetworkType pulumi.StringPtrInput
 	// Expiration time of old password after password update, unit: second.
 	OldPasswordExpireLast pulumi.IntPtrInput
-	// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-	// expired.
+	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
 	OldPasswordExpireTime pulumi.StringPtrInput
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-	// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
 	Password pulumi.StringPtrInput
-	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-	// password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
 	PasswordStatus pulumi.StringPtrInput
 	// Subnet id of the TcaplusDB cluster.
 	SubnetId pulumi.StringPtrInput
@@ -163,8 +193,7 @@ type clusterArgs struct {
 	IdlType string `pulumi:"idlType"`
 	// Expiration time of old password after password update, unit: second.
 	OldPasswordExpireLast *int `pulumi:"oldPasswordExpireLast"`
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-	// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
 	Password string `pulumi:"password"`
 	// Subnet id of the TcaplusDB cluster.
 	SubnetId string `pulumi:"subnetId"`
@@ -180,8 +209,7 @@ type ClusterArgs struct {
 	IdlType pulumi.StringInput
 	// Expiration time of old password after password update, unit: second.
 	OldPasswordExpireLast pulumi.IntPtrInput
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-	// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
 	Password pulumi.StringInput
 	// Subnet id of the TcaplusDB cluster.
 	SubnetId pulumi.StringInput
@@ -316,20 +344,17 @@ func (o ClusterOutput) OldPasswordExpireLast() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.OldPasswordExpireLast }).(pulumi.IntPtrOutput)
 }
 
-// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-// expired.
+// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
 func (o ClusterOutput) OldPasswordExpireTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.OldPasswordExpireTime }).(pulumi.StringOutput)
 }
 
-// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
 func (o ClusterOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
 }
 
-// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-// password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
 func (o ClusterOutput) PasswordStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.PasswordStatus }).(pulumi.StringOutput)
 }

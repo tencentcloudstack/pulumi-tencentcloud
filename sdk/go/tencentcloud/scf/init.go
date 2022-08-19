@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -25,8 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Function{}
 	case "tencentcloud:Scf/layer:Layer":
 		r = &Layer{}
-	case "tencentcloud:Scf/scfNamespace:ScfNamespace":
-		r = &ScfNamespace{}
+	case "tencentcloud:Scf/namespace:Namespace":
+		r = &Namespace{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -52,7 +52,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Scf/scfNamespace",
+		"Scf/namespace",
 		&module{version},
 	)
 }

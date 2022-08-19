@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
 
     public sealed class ClusterInternalLbGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Indicates weather the internal access LB enabled.
+        /// </summary>
         [Input("enabled", required: true)]
         public Input<bool> Enabled { get; set; } = null!;
 
+        /// <summary>
+        /// ID of subnet which related to Internal LB.
+        /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
 

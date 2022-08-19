@@ -6,16 +6,16 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./adaptiveDynamicStreamingTemplate";
-export * from "./adaptiveDynamicStreamingTemplates";
+export * from "./getAdaptiveDynamicStreamingTemplates";
+export * from "./getImageSpriteTemplates";
+export * from "./getProcedureTemplates";
+export * from "./getSnapshotByTimeOffsetTemplates";
+export * from "./getSuperPlayerConfigs";
 export * from "./imageSpriteTemplate";
-export * from "./imageSpriteTemplates";
 export * from "./procedureTemplate";
-export * from "./procedureTemplates";
 export * from "./snapshotByTimeOffsetTemplate";
-export * from "./snapshotByTimeOffsetTemplates";
 export * from "./subApplication";
 export * from "./superPlayerConfig";
-export * from "./superPlayerConfigs";
 
 // Import resources to register:
 import { AdaptiveDynamicStreamingTemplate } from "./adaptiveDynamicStreamingTemplate";

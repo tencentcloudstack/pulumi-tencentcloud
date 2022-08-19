@@ -6,13 +6,13 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./attachment";
+export * from "./getScalingConfigs";
+export * from "./getScalingGroups";
+export * from "./getScalingPolicies";
 export * from "./lifecycleHook";
 export * from "./notification";
 export * from "./scalingConfig";
-export * from "./scalingConfigs";
 export * from "./scalingGroup";
-export * from "./scalingGroups";
-export * from "./scalingPolicies";
 export * from "./scalingPolicy";
 export * from "./schedule";
 

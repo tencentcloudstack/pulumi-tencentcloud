@@ -9,11 +9,11 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'KeysKeyListResult',
+    'GetKeysKeyListResult',
 ]
 
 @pulumi.output_type
-class KeysKeyListResult(dict):
+class GetKeysKeyListResult(dict):
     def __init__(__self__, *,
                  alias: str,
                  create_time: int,
@@ -28,6 +28,21 @@ class KeysKeyListResult(dict):
                  origin: str,
                  owner: str,
                  valid_to: int):
+        """
+        :param str alias: Name of CMK.
+        :param int create_time: Create time of CMK.
+        :param int creator_uin: Uin of CMK Creator.
+        :param int deletion_date: Delete time of CMK.
+        :param str description: Description of CMK.
+        :param str key_id: ID of CMK.
+        :param bool key_rotation_enabled: Specify whether to enable key rotation.
+        :param str key_state: Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
+        :param str key_usage: Filter by usage of CMK. Available values include `ALL`, `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
+        :param int next_rotate_time: Next rotate time of CMK when key_rotation_enabled is true.
+        :param str origin: Filter by origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user, `ALL` - all CMKs. Default value is `ALL`.
+        :param str owner: Creator of CMK.
+        :param int valid_to: Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+        """
         pulumi.set(__self__, "alias", alias)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "creator_uin", creator_uin)
@@ -45,66 +60,105 @@ class KeysKeyListResult(dict):
     @property
     @pulumi.getter
     def alias(self) -> str:
+        """
+        Name of CMK.
+        """
         return pulumi.get(self, "alias")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> int:
+        """
+        Create time of CMK.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="creatorUin")
     def creator_uin(self) -> int:
+        """
+        Uin of CMK Creator.
+        """
         return pulumi.get(self, "creator_uin")
 
     @property
     @pulumi.getter(name="deletionDate")
     def deletion_date(self) -> int:
+        """
+        Delete time of CMK.
+        """
         return pulumi.get(self, "deletion_date")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of CMK.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="keyId")
     def key_id(self) -> str:
+        """
+        ID of CMK.
+        """
         return pulumi.get(self, "key_id")
 
     @property
     @pulumi.getter(name="keyRotationEnabled")
     def key_rotation_enabled(self) -> bool:
+        """
+        Specify whether to enable key rotation.
+        """
         return pulumi.get(self, "key_rotation_enabled")
 
     @property
     @pulumi.getter(name="keyState")
     def key_state(self) -> str:
+        """
+        Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
+        """
         return pulumi.get(self, "key_state")
 
     @property
     @pulumi.getter(name="keyUsage")
     def key_usage(self) -> str:
+        """
+        Filter by usage of CMK. Available values include `ALL`, `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
+        """
         return pulumi.get(self, "key_usage")
 
     @property
     @pulumi.getter(name="nextRotateTime")
     def next_rotate_time(self) -> int:
+        """
+        Next rotate time of CMK when key_rotation_enabled is true.
+        """
         return pulumi.get(self, "next_rotate_time")
 
     @property
     @pulumi.getter
     def origin(self) -> str:
+        """
+        Filter by origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user, `ALL` - all CMKs. Default value is `ALL`.
+        """
         return pulumi.get(self, "origin")
 
     @property
     @pulumi.getter
     def owner(self) -> str:
+        """
+        Creator of CMK.
+        """
         return pulumi.get(self, "owner")
 
     @property
     @pulumi.getter(name="validTo")
     def valid_to(self) -> int:
+        """
+        Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+        """
         return pulumi.get(self, "valid_to")
 
 

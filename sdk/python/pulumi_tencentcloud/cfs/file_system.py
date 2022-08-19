@@ -342,7 +342,30 @@ class FileSystem(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a FileSystem resource with the given unique name, props, and options.
+        Provides a resource to create a cloud file system(CFS).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-7nx89k7l",
+            availability_zone="ap-guangzhou-3",
+            protocol="NFS",
+            subnet_id="subnet-9mu2t9iw",
+            vpc_id="vpc-ah9fbkap")
+        ```
+
+        ## Import
+
+        Cloud file system can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_group_id: ID of a access group.
@@ -362,7 +385,30 @@ class FileSystem(pulumi.CustomResource):
                  args: FileSystemArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a FileSystem resource with the given unique name, props, and options.
+        Provides a resource to create a cloud file system(CFS).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-7nx89k7l",
+            availability_zone="ap-guangzhou-3",
+            protocol="NFS",
+            subnet_id="subnet-9mu2t9iw",
+            vpc_id="vpc-ah9fbkap")
+        ```
+
+        ## Import
+
+        Cloud file system can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+        ```
+
         :param str resource_name: The name of the resource.
         :param FileSystemArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

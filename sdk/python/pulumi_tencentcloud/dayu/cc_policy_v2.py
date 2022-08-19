@@ -10,28 +10,27 @@ from .. import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['CCPolicyV2Args', 'CCPolicyV2']
+__all__ = ['CcPolicyV2Args', 'CcPolicyV2']
 
 @pulumi.input_type
-class CCPolicyV2Args:
+class CcPolicyV2Args:
     def __init__(__self__, *,
                  business: pulumi.Input[str],
                  resource_id: pulumi.Input[str],
-                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]]] = None,
-                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]]] = None,
-                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]]] = None,
-                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]]] = None,
-                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]]] = None):
+                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]]] = None,
+                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]]] = None,
+                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]]] = None,
+                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]]] = None,
+                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]] = None):
         """
-        The set of arguments for constructing a CCPolicyV2 resource.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
+        The set of arguments for constructing a CcPolicyV2 resource.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]] cc_black_white_ips: Blacklist and whitelist.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]] cc_geo_ip_policys: Details of the CC region blocking policy list.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]] cc_precision_policys: CC Precision Protection List.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]] cc_precision_req_limits: CC frequency throttling policy.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]] thresholds: List of protection threshold configurations.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]] cc_black_white_ips: Blacklist and whitelist.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]] cc_geo_ip_policys: Details of the CC region blocking policy list.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]] cc_precision_policys: CC Precision Protection List.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]] cc_precision_req_limits: CC frequency throttling policy.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]] thresholds: List of protection threshold configurations.
         """
         pulumi.set(__self__, "business", business)
         pulumi.set(__self__, "resource_id", resource_id)
@@ -50,8 +49,7 @@ class CCPolicyV2Args:
     @pulumi.getter
     def business(self) -> pulumi.Input[str]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        packet; net indicates anti-anti-ip pro version.
+        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -73,85 +71,84 @@ class CCPolicyV2Args:
 
     @property
     @pulumi.getter(name="ccBlackWhiteIps")
-    def cc_black_white_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]]]:
+    def cc_black_white_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]]]:
         """
         Blacklist and whitelist.
         """
         return pulumi.get(self, "cc_black_white_ips")
 
     @cc_black_white_ips.setter
-    def cc_black_white_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]]]):
+    def cc_black_white_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]]]):
         pulumi.set(self, "cc_black_white_ips", value)
 
     @property
     @pulumi.getter(name="ccGeoIpPolicys")
-    def cc_geo_ip_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]]]:
+    def cc_geo_ip_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]]]:
         """
         Details of the CC region blocking policy list.
         """
         return pulumi.get(self, "cc_geo_ip_policys")
 
     @cc_geo_ip_policys.setter
-    def cc_geo_ip_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]]]):
+    def cc_geo_ip_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]]]):
         pulumi.set(self, "cc_geo_ip_policys", value)
 
     @property
     @pulumi.getter(name="ccPrecisionPolicys")
-    def cc_precision_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]]]:
+    def cc_precision_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]]]:
         """
         CC Precision Protection List.
         """
         return pulumi.get(self, "cc_precision_policys")
 
     @cc_precision_policys.setter
-    def cc_precision_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]]]):
+    def cc_precision_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]]]):
         pulumi.set(self, "cc_precision_policys", value)
 
     @property
     @pulumi.getter(name="ccPrecisionReqLimits")
-    def cc_precision_req_limits(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]]]:
+    def cc_precision_req_limits(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]]]:
         """
         CC frequency throttling policy.
         """
         return pulumi.get(self, "cc_precision_req_limits")
 
     @cc_precision_req_limits.setter
-    def cc_precision_req_limits(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]]]):
+    def cc_precision_req_limits(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]]]):
         pulumi.set(self, "cc_precision_req_limits", value)
 
     @property
     @pulumi.getter
-    def thresholds(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]]]:
+    def thresholds(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]]:
         """
         List of protection threshold configurations.
         """
         return pulumi.get(self, "thresholds")
 
     @thresholds.setter
-    def thresholds(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]]]):
+    def thresholds(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]]):
         pulumi.set(self, "thresholds", value)
 
 
 @pulumi.input_type
-class _CCPolicyV2State:
+class _CcPolicyV2State:
     def __init__(__self__, *,
                  business: Optional[pulumi.Input[str]] = None,
-                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]]] = None,
-                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]]] = None,
-                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]]] = None,
-                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]]] = None,
+                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]]] = None,
+                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]]] = None,
+                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]]] = None,
+                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
-                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]]] = None):
+                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]] = None):
         """
-        Input properties used for looking up and filtering CCPolicyV2 resources.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]] cc_black_white_ips: Blacklist and whitelist.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]] cc_geo_ip_policys: Details of the CC region blocking policy list.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]] cc_precision_policys: CC Precision Protection List.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]] cc_precision_req_limits: CC frequency throttling policy.
+        Input properties used for looking up and filtering CcPolicyV2 resources.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]] cc_black_white_ips: Blacklist and whitelist.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]] cc_geo_ip_policys: Details of the CC region blocking policy list.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]] cc_precision_policys: CC Precision Protection List.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]] cc_precision_req_limits: CC frequency throttling policy.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
-        :param pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]] thresholds: List of protection threshold configurations.
+        :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]] thresholds: List of protection threshold configurations.
         """
         if business is not None:
             pulumi.set(__self__, "business", business)
@@ -172,8 +169,7 @@ class _CCPolicyV2State:
     @pulumi.getter
     def business(self) -> Optional[pulumi.Input[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        packet; net indicates anti-anti-ip pro version.
+        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -183,50 +179,50 @@ class _CCPolicyV2State:
 
     @property
     @pulumi.getter(name="ccBlackWhiteIps")
-    def cc_black_white_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]]]:
+    def cc_black_white_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]]]:
         """
         Blacklist and whitelist.
         """
         return pulumi.get(self, "cc_black_white_ips")
 
     @cc_black_white_ips.setter
-    def cc_black_white_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcBlackWhiteIpArgs']]]]):
+    def cc_black_white_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]]]):
         pulumi.set(self, "cc_black_white_ips", value)
 
     @property
     @pulumi.getter(name="ccGeoIpPolicys")
-    def cc_geo_ip_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]]]:
+    def cc_geo_ip_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]]]:
         """
         Details of the CC region blocking policy list.
         """
         return pulumi.get(self, "cc_geo_ip_policys")
 
     @cc_geo_ip_policys.setter
-    def cc_geo_ip_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcGeoIpPolicyArgs']]]]):
+    def cc_geo_ip_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]]]):
         pulumi.set(self, "cc_geo_ip_policys", value)
 
     @property
     @pulumi.getter(name="ccPrecisionPolicys")
-    def cc_precision_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]]]:
+    def cc_precision_policys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]]]:
         """
         CC Precision Protection List.
         """
         return pulumi.get(self, "cc_precision_policys")
 
     @cc_precision_policys.setter
-    def cc_precision_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionPolicyArgs']]]]):
+    def cc_precision_policys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]]]):
         pulumi.set(self, "cc_precision_policys", value)
 
     @property
     @pulumi.getter(name="ccPrecisionReqLimits")
-    def cc_precision_req_limits(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]]]:
+    def cc_precision_req_limits(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]]]:
         """
         CC frequency throttling policy.
         """
         return pulumi.get(self, "cc_precision_req_limits")
 
     @cc_precision_req_limits.setter
-    def cc_precision_req_limits(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2CcPrecisionReqLimitArgs']]]]):
+    def cc_precision_req_limits(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionReqLimitArgs']]]]):
         pulumi.set(self, "cc_precision_req_limits", value)
 
     @property
@@ -243,58 +239,163 @@ class _CCPolicyV2State:
 
     @property
     @pulumi.getter
-    def thresholds(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]]]:
+    def thresholds(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]]:
         """
         List of protection threshold configurations.
         """
         return pulumi.get(self, "thresholds")
 
     @thresholds.setter
-    def thresholds(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CCPolicyV2ThresholdArgs']]]]):
+    def thresholds(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]]):
         pulumi.set(self, "thresholds", value)
 
 
-class CCPolicyV2(pulumi.CustomResource):
+class CcPolicyV2(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  business: Optional[pulumi.Input[str]] = None,
-                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcBlackWhiteIpArgs']]]]] = None,
-                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcGeoIpPolicyArgs']]]]] = None,
-                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionPolicyArgs']]]]] = None,
-                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionReqLimitArgs']]]]] = None,
+                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcBlackWhiteIpArgs']]]]] = None,
+                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcGeoIpPolicyArgs']]]]] = None,
+                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionPolicyArgs']]]]] = None,
+                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionReqLimitArgs']]]]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
-                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2ThresholdArgs']]]]] = None,
+                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2ThresholdArgs']]]]] = None,
                  __props__=None):
         """
-        Create a CCPolicyV2 resource with the given unique name, props, and options.
+        Use this resource to create a dayu CC policy
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        demo = tencentcloud.dayu.CcPolicyV2("demo",
+            business="bgpip",
+            cc_black_white_ips=[tencentcloud.dayu.CcPolicyV2CcBlackWhiteIpArgs(
+                black_white_ip="1.2.3.4",
+                domain="12.com",
+                protocol="http",
+                type="black",
+            )],
+            cc_geo_ip_policys=[tencentcloud.dayu.CcPolicyV2CcGeoIpPolicyArgs(
+                action="drop",
+                domain="12.com",
+                protocol="http",
+                region_type="china",
+            )],
+            cc_precision_policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionPolicyArgs(
+                domain="1.com",
+                ip="162.62.163.34",
+                policy_action="drop",
+                policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs(
+                    field_name="cgi",
+                    field_type="value",
+                    value="12123.com",
+                    value_operator="equal",
+                )],
+                protocol="http",
+            )],
+            cc_precision_req_limits=[tencentcloud.dayu.CcPolicyV2CcPrecisionReqLimitArgs(
+                domain="11.com",
+                level="loose",
+                policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs(
+                    action="alg",
+                    execute_duration=2,
+                    mode="equal",
+                    period=5,
+                    request_num=12,
+                    uri="15.com",
+                )],
+                protocol="http",
+            )],
+            resource_id="bgpip-000004xf",
+            thresholds=[tencentcloud.dayu.CcPolicyV2ThresholdArgs(
+                domain="12.com",
+                threshold=0,
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcBlackWhiteIpArgs']]]] cc_black_white_ips: Blacklist and whitelist.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcGeoIpPolicyArgs']]]] cc_geo_ip_policys: Details of the CC region blocking policy list.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionPolicyArgs']]]] cc_precision_policys: CC Precision Protection List.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionReqLimitArgs']]]] cc_precision_req_limits: CC frequency throttling policy.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcBlackWhiteIpArgs']]]] cc_black_white_ips: Blacklist and whitelist.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcGeoIpPolicyArgs']]]] cc_geo_ip_policys: Details of the CC region blocking policy list.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionPolicyArgs']]]] cc_precision_policys: CC Precision Protection List.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionReqLimitArgs']]]] cc_precision_req_limits: CC frequency throttling policy.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2ThresholdArgs']]]] thresholds: List of protection threshold configurations.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2ThresholdArgs']]]] thresholds: List of protection threshold configurations.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: CCPolicyV2Args,
+                 args: CcPolicyV2Args,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CCPolicyV2 resource with the given unique name, props, and options.
+        Use this resource to create a dayu CC policy
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        demo = tencentcloud.dayu.CcPolicyV2("demo",
+            business="bgpip",
+            cc_black_white_ips=[tencentcloud.dayu.CcPolicyV2CcBlackWhiteIpArgs(
+                black_white_ip="1.2.3.4",
+                domain="12.com",
+                protocol="http",
+                type="black",
+            )],
+            cc_geo_ip_policys=[tencentcloud.dayu.CcPolicyV2CcGeoIpPolicyArgs(
+                action="drop",
+                domain="12.com",
+                protocol="http",
+                region_type="china",
+            )],
+            cc_precision_policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionPolicyArgs(
+                domain="1.com",
+                ip="162.62.163.34",
+                policy_action="drop",
+                policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs(
+                    field_name="cgi",
+                    field_type="value",
+                    value="12123.com",
+                    value_operator="equal",
+                )],
+                protocol="http",
+            )],
+            cc_precision_req_limits=[tencentcloud.dayu.CcPolicyV2CcPrecisionReqLimitArgs(
+                domain="11.com",
+                level="loose",
+                policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs(
+                    action="alg",
+                    execute_duration=2,
+                    mode="equal",
+                    period=5,
+                    request_num=12,
+                    uri="15.com",
+                )],
+                protocol="http",
+            )],
+            resource_id="bgpip-000004xf",
+            thresholds=[tencentcloud.dayu.CcPolicyV2ThresholdArgs(
+                domain="12.com",
+                threshold=0,
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
-        :param CCPolicyV2Args args: The arguments to use to populate this resource's properties.
+        :param CcPolicyV2Args args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(CCPolicyV2Args, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(CcPolicyV2Args, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -304,12 +405,12 @@ class CCPolicyV2(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  business: Optional[pulumi.Input[str]] = None,
-                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcBlackWhiteIpArgs']]]]] = None,
-                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcGeoIpPolicyArgs']]]]] = None,
-                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionPolicyArgs']]]]] = None,
-                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionReqLimitArgs']]]]] = None,
+                 cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcBlackWhiteIpArgs']]]]] = None,
+                 cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcGeoIpPolicyArgs']]]]] = None,
+                 cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionPolicyArgs']]]]] = None,
+                 cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionReqLimitArgs']]]]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
-                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2ThresholdArgs']]]]] = None,
+                 thresholds: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2ThresholdArgs']]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -320,7 +421,7 @@ class CCPolicyV2(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = CCPolicyV2Args.__new__(CCPolicyV2Args)
+            __props__ = CcPolicyV2Args.__new__(CcPolicyV2Args)
 
             if business is None and not opts.urn:
                 raise TypeError("Missing required property 'business'")
@@ -333,8 +434,8 @@ class CCPolicyV2(pulumi.CustomResource):
                 raise TypeError("Missing required property 'resource_id'")
             __props__.__dict__["resource_id"] = resource_id
             __props__.__dict__["thresholds"] = thresholds
-        super(CCPolicyV2, __self__).__init__(
-            'tencentcloud:Dayu/cCPolicyV2:CCPolicyV2',
+        super(CcPolicyV2, __self__).__init__(
+            'tencentcloud:Dayu/ccPolicyV2:CcPolicyV2',
             resource_name,
             __props__,
             opts)
@@ -344,31 +445,30 @@ class CCPolicyV2(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             business: Optional[pulumi.Input[str]] = None,
-            cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcBlackWhiteIpArgs']]]]] = None,
-            cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcGeoIpPolicyArgs']]]]] = None,
-            cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionPolicyArgs']]]]] = None,
-            cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionReqLimitArgs']]]]] = None,
+            cc_black_white_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcBlackWhiteIpArgs']]]]] = None,
+            cc_geo_ip_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcGeoIpPolicyArgs']]]]] = None,
+            cc_precision_policys: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionPolicyArgs']]]]] = None,
+            cc_precision_req_limits: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionReqLimitArgs']]]]] = None,
             resource_id: Optional[pulumi.Input[str]] = None,
-            thresholds: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2ThresholdArgs']]]]] = None) -> 'CCPolicyV2':
+            thresholds: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2ThresholdArgs']]]]] = None) -> 'CcPolicyV2':
         """
-        Get an existing CCPolicyV2 resource's state with the given name, id, and optional extra
+        Get an existing CcPolicyV2 resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-               packet; net indicates anti-anti-ip pro version.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcBlackWhiteIpArgs']]]] cc_black_white_ips: Blacklist and whitelist.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcGeoIpPolicyArgs']]]] cc_geo_ip_policys: Details of the CC region blocking policy list.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionPolicyArgs']]]] cc_precision_policys: CC Precision Protection List.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2CcPrecisionReqLimitArgs']]]] cc_precision_req_limits: CC frequency throttling policy.
+        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcBlackWhiteIpArgs']]]] cc_black_white_ips: Blacklist and whitelist.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcGeoIpPolicyArgs']]]] cc_geo_ip_policys: Details of the CC region blocking policy list.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionPolicyArgs']]]] cc_precision_policys: CC Precision Protection List.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionReqLimitArgs']]]] cc_precision_req_limits: CC frequency throttling policy.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CCPolicyV2ThresholdArgs']]]] thresholds: List of protection threshold configurations.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2ThresholdArgs']]]] thresholds: List of protection threshold configurations.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _CCPolicyV2State.__new__(_CCPolicyV2State)
+        __props__ = _CcPolicyV2State.__new__(_CcPolicyV2State)
 
         __props__.__dict__["business"] = business
         __props__.__dict__["cc_black_white_ips"] = cc_black_white_ips
@@ -377,20 +477,19 @@ class CCPolicyV2(pulumi.CustomResource):
         __props__.__dict__["cc_precision_req_limits"] = cc_precision_req_limits
         __props__.__dict__["resource_id"] = resource_id
         __props__.__dict__["thresholds"] = thresholds
-        return CCPolicyV2(resource_name, opts=opts, __props__=__props__)
+        return CcPolicyV2(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
     def business(self) -> pulumi.Output[str]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-        packet; net indicates anti-anti-ip pro version.
+        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
     @property
     @pulumi.getter(name="ccBlackWhiteIps")
-    def cc_black_white_ips(self) -> pulumi.Output[Optional[Sequence['outputs.CCPolicyV2CcBlackWhiteIp']]]:
+    def cc_black_white_ips(self) -> pulumi.Output[Optional[Sequence['outputs.CcPolicyV2CcBlackWhiteIp']]]:
         """
         Blacklist and whitelist.
         """
@@ -398,7 +497,7 @@ class CCPolicyV2(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ccGeoIpPolicys")
-    def cc_geo_ip_policys(self) -> pulumi.Output[Optional[Sequence['outputs.CCPolicyV2CcGeoIpPolicy']]]:
+    def cc_geo_ip_policys(self) -> pulumi.Output[Optional[Sequence['outputs.CcPolicyV2CcGeoIpPolicy']]]:
         """
         Details of the CC region blocking policy list.
         """
@@ -406,7 +505,7 @@ class CCPolicyV2(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ccPrecisionPolicys")
-    def cc_precision_policys(self) -> pulumi.Output[Optional[Sequence['outputs.CCPolicyV2CcPrecisionPolicy']]]:
+    def cc_precision_policys(self) -> pulumi.Output[Optional[Sequence['outputs.CcPolicyV2CcPrecisionPolicy']]]:
         """
         CC Precision Protection List.
         """
@@ -414,7 +513,7 @@ class CCPolicyV2(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ccPrecisionReqLimits")
-    def cc_precision_req_limits(self) -> pulumi.Output[Optional[Sequence['outputs.CCPolicyV2CcPrecisionReqLimit']]]:
+    def cc_precision_req_limits(self) -> pulumi.Output[Optional[Sequence['outputs.CcPolicyV2CcPrecisionReqLimit']]]:
         """
         CC frequency throttling policy.
         """
@@ -430,7 +529,7 @@ class CCPolicyV2(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def thresholds(self) -> pulumi.Output[Optional[Sequence['outputs.CCPolicyV2Threshold']]]:
+    def thresholds(self) -> pulumi.Output[Optional[Sequence['outputs.CcPolicyV2Threshold']]]:
         """
         List of protection threshold configurations.
         """

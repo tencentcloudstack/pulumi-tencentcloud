@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Cynosdb.Inputs
 
     public sealed class ClusterRwGroupInstanceArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of instance.
+        /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        /// <summary>
+        /// Name of instance.
+        /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
 

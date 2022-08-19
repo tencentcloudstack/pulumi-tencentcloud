@@ -10,35 +10,57 @@ using Pulumi.Serialization;
 namespace Pulumi.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CCPolicyV2CcGeoIpPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcGeoIpPolicyGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// User action, drop or arg.
+        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
         [Input("areaLists")]
         private InputList<int>? _areaLists;
+
+        /// <summary>
+        /// The list of region IDs that the user selects to block.
+        /// </summary>
         public InputList<int> AreaLists
         {
             get => _areaLists ?? (_areaLists = new InputList<int>());
             set => _areaLists = value;
         }
 
+        /// <summary>
+        /// Create time.
+        /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
 
+        /// <summary>
+        /// domain.
+        /// </summary>
         [Input("domain", required: true)]
         public Input<string> Domain { get; set; } = null!;
 
+        /// <summary>
+        /// Modify time.
+        /// </summary>
         [Input("modifyTime")]
         public Input<string>? ModifyTime { get; set; }
 
+        /// <summary>
+        /// Protocol, preferably HTTP, HTTPS.
+        /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
 
+        /// <summary>
+        /// Regional types, divided into china, oversea and customized.
+        /// </summary>
         [Input("regionType", required: true)]
         public Input<string> RegionType { get; set; } = null!;
 
-        public CCPolicyV2CcGeoIpPolicyGetArgs()
+        public CcPolicyV2CcGeoIpPolicyGetArgs()
         {
         }
     }

@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a security policy of GAAP proxy.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooSecurityPolicy = new tencentcloud.gaap.SecurityPolicy("fooSecurityPolicy", {
+ *     proxyId: fooProxy.id,
+ *     action: "DROP",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * GAAP security policy can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy tencentcloud_gaap_security_policy.foo pl-xxxx
+ * ```
+ */
 export class SecurityPolicy extends pulumi.CustomResource {
     /**
      * Get an existing SecurityPolicy resource's state with the given name, ID, and optional extra

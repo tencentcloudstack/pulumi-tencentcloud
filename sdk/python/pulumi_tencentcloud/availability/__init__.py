@@ -5,6 +5,6 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .zones import *
-from .zones_by_product import *
+from .get_regions import *
+from .get_zones_by_product import *
 from . import outputs

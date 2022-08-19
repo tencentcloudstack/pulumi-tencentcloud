@@ -22,6 +22,15 @@ class IdlTableInfoArgs:
                  sum_value_field_size: Optional[pulumi.Input[int]] = None,
                  table_name: Optional[pulumi.Input[str]] = None,
                  value_fields: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] error: Error messages for creating IDL file.
+        :param pulumi.Input[str] index_key_set: Index key set of the TcaplusDB table.
+        :param pulumi.Input[str] key_fields: Primary key fields of the TcaplusDB table.
+        :param pulumi.Input[int] sum_key_field_size: Total size of primary key field of the TcaplusDB table.
+        :param pulumi.Input[int] sum_value_field_size: Total size of non-primary key fields of the TcaplusDB table.
+        :param pulumi.Input[str] table_name: Name of the TcaplusDB table.
+        :param pulumi.Input[str] value_fields: Non-primary key fields of the TcaplusDB table.
+        """
         if error is not None:
             pulumi.set(__self__, "error", error)
         if index_key_set is not None:
@@ -40,6 +49,9 @@ class IdlTableInfoArgs:
     @property
     @pulumi.getter
     def error(self) -> Optional[pulumi.Input[str]]:
+        """
+        Error messages for creating IDL file.
+        """
         return pulumi.get(self, "error")
 
     @error.setter
@@ -49,6 +61,9 @@ class IdlTableInfoArgs:
     @property
     @pulumi.getter(name="indexKeySet")
     def index_key_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        Index key set of the TcaplusDB table.
+        """
         return pulumi.get(self, "index_key_set")
 
     @index_key_set.setter
@@ -58,6 +73,9 @@ class IdlTableInfoArgs:
     @property
     @pulumi.getter(name="keyFields")
     def key_fields(self) -> Optional[pulumi.Input[str]]:
+        """
+        Primary key fields of the TcaplusDB table.
+        """
         return pulumi.get(self, "key_fields")
 
     @key_fields.setter
@@ -67,6 +85,9 @@ class IdlTableInfoArgs:
     @property
     @pulumi.getter(name="sumKeyFieldSize")
     def sum_key_field_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Total size of primary key field of the TcaplusDB table.
+        """
         return pulumi.get(self, "sum_key_field_size")
 
     @sum_key_field_size.setter
@@ -76,6 +97,9 @@ class IdlTableInfoArgs:
     @property
     @pulumi.getter(name="sumValueFieldSize")
     def sum_value_field_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Total size of non-primary key fields of the TcaplusDB table.
+        """
         return pulumi.get(self, "sum_value_field_size")
 
     @sum_value_field_size.setter
@@ -85,6 +109,9 @@ class IdlTableInfoArgs:
     @property
     @pulumi.getter(name="tableName")
     def table_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the TcaplusDB table.
+        """
         return pulumi.get(self, "table_name")
 
     @table_name.setter
@@ -94,6 +121,9 @@ class IdlTableInfoArgs:
     @property
     @pulumi.getter(name="valueFields")
     def value_fields(self) -> Optional[pulumi.Input[str]]:
+        """
+        Non-primary key fields of the TcaplusDB table.
+        """
         return pulumi.get(self, "value_fields")
 
     @value_fields.setter

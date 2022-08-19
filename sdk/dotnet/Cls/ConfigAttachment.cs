@@ -9,6 +9,29 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cls
 {
+    /// <summary>
+    /// Provides a resource to create a cls config attachment
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var attach = new Tencentcloud.Cls.ConfigAttachment("attach", new Tencentcloud.Cls.ConfigAttachmentArgs
+    ///         {
+    ///             ConfigId = tencentcloud_cls_config.Config.Id,
+    ///             GroupId = "27752a9b-9918-440a-8ee7-9c84a14a47ed",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/configAttachment:ConfigAttachment")]
     public partial class ConfigAttachment : Pulumi.CustomResource
     {

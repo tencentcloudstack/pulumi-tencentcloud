@@ -32,9 +32,7 @@ class TopicArgs:
         :param pulumi.Input[int] partition_num: The number of partition.
         :param pulumi.Input[int] replica_num: The number of replica.
         :param pulumi.Input[str] topic_name: Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
-        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-               `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-               will be deleted according to the storage time.
+        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         :param pulumi.Input[bool] enable_white_list: Whether to open the ip whitelist, `true`: open, `false`: close.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_white_lists: Ip whitelist, quota limit, required when enableWhileList=true.
         :param pulumi.Input[int] max_message_bytes: Max message bytes.
@@ -42,8 +40,7 @@ class TopicArgs:
         :param pulumi.Input[int] retention: Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
         :param pulumi.Input[int] segment: Segment scrolling time, in ms, the current minimum is 3600000ms.
         :param pulumi.Input[int] sync_replica_min_num: Min number of sync replicas, Default is `1`.
-        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-               allowed.
+        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         """
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "partition_num", partition_num)
@@ -120,9 +117,7 @@ class TopicArgs:
     @pulumi.getter(name="cleanUpPolicy")
     def clean_up_policy(self) -> Optional[pulumi.Input[str]]:
         """
-        Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-        `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-        will be deleted according to the storage time.
+        Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         """
         return pulumi.get(self, "clean_up_policy")
 
@@ -218,8 +213,7 @@ class TopicArgs:
     @pulumi.getter(name="uncleanLeaderElectionEnable")
     def unclean_leader_election_enable(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-        allowed.
+        Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         """
         return pulumi.get(self, "unclean_leader_election_enable")
 
@@ -252,9 +246,7 @@ class _TopicState:
                  unclean_leader_election_enable: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering Topic resources.
-        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-               `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-               will be deleted according to the storage time.
+        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         :param pulumi.Input[str] create_time: Create time of the CKafka topic.
         :param pulumi.Input[bool] enable_white_list: Whether to open the ip whitelist, `true`: open, `false`: close.
         :param pulumi.Input[str] forward_cos_bucket: Data backup cos bucket: the bucket address that is dumped to cos.
@@ -272,8 +264,7 @@ class _TopicState:
         :param pulumi.Input[int] segment_bytes: Number of bytes rolled by shard.
         :param pulumi.Input[int] sync_replica_min_num: Min number of sync replicas, Default is `1`.
         :param pulumi.Input[str] topic_name: Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
-        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-               allowed.
+        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         """
         if clean_up_policy is not None:
             pulumi.set(__self__, "clean_up_policy", clean_up_policy)
@@ -318,9 +309,7 @@ class _TopicState:
     @pulumi.getter(name="cleanUpPolicy")
     def clean_up_policy(self) -> Optional[pulumi.Input[str]]:
         """
-        Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-        `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-        will be deleted according to the storage time.
+        Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         """
         return pulumi.get(self, "clean_up_policy")
 
@@ -536,8 +525,7 @@ class _TopicState:
     @pulumi.getter(name="uncleanLeaderElectionEnable")
     def unclean_leader_election_enable(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-        allowed.
+        Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         """
         return pulumi.get(self, "unclean_leader_election_enable")
 
@@ -566,12 +554,44 @@ class Topic(pulumi.CustomResource):
                  unclean_leader_election_enable: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a Topic resource with the given unique name, props, and options.
+        Use this resource to create ckafka topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.Topic("foo",
+            clean_up_policy="delete",
+            enable_white_list=True,
+            instance_id="ckafka-f9ife4zz",
+            ip_white_lists=[
+                "ip1",
+                "ip2",
+            ],
+            max_message_bytes=0,
+            note="topic note",
+            partition_num=1,
+            replica_num=2,
+            retention=60000,
+            segment=3600000,
+            sync_replica_min_num=1,
+            topic_name="example",
+            unclean_leader_election_enable=False)
+        ```
+
+        ## Import
+
+        ckafka topic can be imported using the instance_id#topic_name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-               `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-               will be deleted according to the storage time.
+        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         :param pulumi.Input[bool] enable_white_list: Whether to open the ip whitelist, `true`: open, `false`: close.
         :param pulumi.Input[str] instance_id: Ckafka instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_white_lists: Ip whitelist, quota limit, required when enableWhileList=true.
@@ -583,8 +603,7 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[int] segment: Segment scrolling time, in ms, the current minimum is 3600000ms.
         :param pulumi.Input[int] sync_replica_min_num: Min number of sync replicas, Default is `1`.
         :param pulumi.Input[str] topic_name: Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
-        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-               allowed.
+        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         """
         ...
     @overload
@@ -593,7 +612,41 @@ class Topic(pulumi.CustomResource):
                  args: TopicArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Topic resource with the given unique name, props, and options.
+        Use this resource to create ckafka topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.Topic("foo",
+            clean_up_policy="delete",
+            enable_white_list=True,
+            instance_id="ckafka-f9ife4zz",
+            ip_white_lists=[
+                "ip1",
+                "ip2",
+            ],
+            max_message_bytes=0,
+            note="topic note",
+            partition_num=1,
+            replica_num=2,
+            retention=60000,
+            segment=3600000,
+            sync_replica_min_num=1,
+            topic_name="example",
+            unclean_leader_election_enable=False)
+        ```
+
+        ## Import
+
+        ckafka topic can be imported using the instance_id#topic_name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+        ```
+
         :param str resource_name: The name of the resource.
         :param TopicArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -697,9 +750,7 @@ class Topic(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-               `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-               will be deleted according to the storage time.
+        :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         :param pulumi.Input[str] create_time: Create time of the CKafka topic.
         :param pulumi.Input[bool] enable_white_list: Whether to open the ip whitelist, `true`: open, `false`: close.
         :param pulumi.Input[str] forward_cos_bucket: Data backup cos bucket: the bucket address that is dumped to cos.
@@ -717,8 +768,7 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[int] segment_bytes: Number of bytes rolled by shard.
         :param pulumi.Input[int] sync_replica_min_num: Min number of sync replicas, Default is `1`.
         :param pulumi.Input[str] topic_name: Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
-        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-               allowed.
+        :param pulumi.Input[bool] unclean_leader_election_enable: Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -749,9 +799,7 @@ class Topic(pulumi.CustomResource):
     @pulumi.getter(name="cleanUpPolicy")
     def clean_up_policy(self) -> pulumi.Output[Optional[str]]:
         """
-        Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-        `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-        will be deleted according to the storage time.
+        Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         """
         return pulumi.get(self, "clean_up_policy")
 
@@ -895,8 +943,7 @@ class Topic(pulumi.CustomResource):
     @pulumi.getter(name="uncleanLeaderElectionEnable")
     def unclean_leader_election_enable(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not
-        allowed.
+        Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
         """
         return pulumi.get(self, "unclean_leader_election_enable")
 

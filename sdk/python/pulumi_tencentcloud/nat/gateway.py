@@ -23,10 +23,8 @@ class GatewayArgs:
         The set of arguments for constructing a Gateway resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assigned_eip_sets: EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-               `1000`, `2000`, `5000`. Default is 100.
-        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-               `1000000`.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         """
@@ -69,8 +67,7 @@ class GatewayArgs:
     @pulumi.getter
     def bandwidth(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-        `1000`, `2000`, `5000`. Default is 100.
+        The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         """
         return pulumi.get(self, "bandwidth")
 
@@ -82,8 +79,7 @@ class GatewayArgs:
     @pulumi.getter(name="maxConcurrent")
     def max_concurrent(self) -> Optional[pulumi.Input[int]]:
         """
-        The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-        `1000000`.
+        The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         """
         return pulumi.get(self, "max_concurrent")
 
@@ -129,11 +125,9 @@ class _GatewayState:
         """
         Input properties used for looking up and filtering Gateway resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assigned_eip_sets: EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-               `1000`, `2000`, `5000`. Default is 100.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         :param pulumi.Input[str] created_time: Create time of the NAT gateway.
-        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-               `1000000`.
+        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
@@ -169,8 +163,7 @@ class _GatewayState:
     @pulumi.getter
     def bandwidth(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-        `1000`, `2000`, `5000`. Default is 100.
+        The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         """
         return pulumi.get(self, "bandwidth")
 
@@ -194,8 +187,7 @@ class _GatewayState:
     @pulumi.getter(name="maxConcurrent")
     def max_concurrent(self) -> Optional[pulumi.Input[int]]:
         """
-        The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-        `1000000`.
+        The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         """
         return pulumi.get(self, "max_concurrent")
 
@@ -253,14 +245,37 @@ class Gateway(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Gateway resource with the given unique name, props, and options.
+        Provides a resource to create a NAT gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.nat.Gateway("foo",
+            assigned_eip_sets=["1.1.1.1"],
+            bandwidth=100,
+            max_concurrent=1000000,
+            tags={
+                "test": "tf",
+            },
+            vpc_id="vpc-4xxr2cy7")
+        ```
+
+        ## Import
+
+        NAT gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assigned_eip_sets: EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-               `1000`, `2000`, `5000`. Default is 100.
-        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-               `1000000`.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
@@ -272,7 +287,32 @@ class Gateway(pulumi.CustomResource):
                  args: GatewayArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Gateway resource with the given unique name, props, and options.
+        Provides a resource to create a NAT gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.nat.Gateway("foo",
+            assigned_eip_sets=["1.1.1.1"],
+            bandwidth=100,
+            max_concurrent=1000000,
+            tags={
+                "test": "tf",
+            },
+            vpc_id="vpc-4xxr2cy7")
+        ```
+
+        ## Import
+
+        NAT gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+        ```
+
         :param str resource_name: The name of the resource.
         :param GatewayArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -342,11 +382,9 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assigned_eip_sets: EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-               `1000`, `2000`, `5000`. Default is 100.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         :param pulumi.Input[str] created_time: Create time of the NAT gateway.
-        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-               `1000000`.
+        :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
@@ -376,8 +414,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter
     def bandwidth(self) -> pulumi.Output[Optional[int]]:
         """
-        The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-        `1000`, `2000`, `5000`. Default is 100.
+        The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         """
         return pulumi.get(self, "bandwidth")
 
@@ -393,8 +430,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter(name="maxConcurrent")
     def max_concurrent(self) -> pulumi.Output[Optional[int]]:
         """
-        The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-        `1000000`.
+        The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         """
         return pulumi.get(self, "max_concurrent")
 

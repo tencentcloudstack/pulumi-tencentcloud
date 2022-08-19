@@ -11,6 +11,38 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create postgresql readonly group.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
+// 			MasterDbInstanceId:       pulumi.String("postgres-f44wlfdv"),
+// 			MaxReplayLag:             pulumi.Int(100),
+// 			MaxReplayLatency:         pulumi.Int(512),
+// 			MinDelayEliminateReserve: pulumi.Int(1),
+// 			ProjectId:                pulumi.Int(0),
+// 			ReplayLagEliminate:       pulumi.Int(1),
+// 			ReplayLatencyEliminate:   pulumi.Int(1),
+// 			SubnetId:                 pulumi.String("subnet-enm92y0m"),
+// 			VpcId:                    pulumi.String("vpc-86v957zb"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ReadonlyGroup struct {
 	pulumi.CustomResourceState
 
@@ -28,13 +60,11 @@ type ReadonlyGroup struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Project ID.
 	ProjectId pulumi.IntOutput `pulumi:"projectId"`
-	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-	// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLagEliminate pulumi.IntOutput `pulumi:"replayLagEliminate"`
-	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-	// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLatencyEliminate pulumi.IntOutput `pulumi:"replayLatencyEliminate"`
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroupsIds pulumi.StringArrayOutput `pulumi:"securityGroupsIds"`
 	// VPC subnet ID.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
@@ -112,13 +142,11 @@ type readonlyGroupState struct {
 	Name *string `pulumi:"name"`
 	// Project ID.
 	ProjectId *int `pulumi:"projectId"`
-	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-	// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLagEliminate *int `pulumi:"replayLagEliminate"`
-	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-	// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLatencyEliminate *int `pulumi:"replayLatencyEliminate"`
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroupsIds []string `pulumi:"securityGroupsIds"`
 	// VPC subnet ID.
 	SubnetId *string `pulumi:"subnetId"`
@@ -141,13 +169,11 @@ type ReadonlyGroupState struct {
 	Name pulumi.StringPtrInput
 	// Project ID.
 	ProjectId pulumi.IntPtrInput
-	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-	// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLagEliminate pulumi.IntPtrInput
-	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-	// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLatencyEliminate pulumi.IntPtrInput
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroupsIds pulumi.StringArrayInput
 	// VPC subnet ID.
 	SubnetId pulumi.StringPtrInput
@@ -172,13 +198,11 @@ type readonlyGroupArgs struct {
 	Name *string `pulumi:"name"`
 	// Project ID.
 	ProjectId int `pulumi:"projectId"`
-	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-	// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLagEliminate int `pulumi:"replayLagEliminate"`
-	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-	// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLatencyEliminate int `pulumi:"replayLatencyEliminate"`
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroupsIds []string `pulumi:"securityGroupsIds"`
 	// VPC subnet ID.
 	SubnetId string `pulumi:"subnetId"`
@@ -200,13 +224,11 @@ type ReadonlyGroupArgs struct {
 	Name pulumi.StringPtrInput
 	// Project ID.
 	ProjectId pulumi.IntInput
-	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-	// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLagEliminate pulumi.IntInput
-	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-	// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 	ReplayLatencyEliminate pulumi.IntInput
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroupsIds pulumi.StringArrayInput
 	// VPC subnet ID.
 	SubnetId pulumi.StringInput
@@ -336,19 +358,17 @@ func (o ReadonlyGroupOutput) ProjectId() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyGroup) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 func (o ReadonlyGroupOutput) ReplayLagEliminate() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyGroup) pulumi.IntOutput { return v.ReplayLagEliminate }).(pulumi.IntOutput)
 }
 
-// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
 func (o ReadonlyGroupOutput) ReplayLatencyEliminate() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyGroup) pulumi.IntOutput { return v.ReplayLatencyEliminate }).(pulumi.IntOutput)
 }
 
-// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 func (o ReadonlyGroupOutput) SecurityGroupsIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ReadonlyGroup) pulumi.StringArrayOutput { return v.SecurityGroupsIds }).(pulumi.StringArrayOutput)
 }

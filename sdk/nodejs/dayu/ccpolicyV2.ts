@@ -5,9 +5,65 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-export class CCPolicyV2 extends pulumi.CustomResource {
+/**
+ * Use this resource to create a dayu CC policy
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const demo = new tencentcloud.Dayu.CcPolicyV2("demo", {
+ *     business: "bgpip",
+ *     ccBlackWhiteIps: [{
+ *         blackWhiteIp: "1.2.3.4",
+ *         domain: "12.com",
+ *         protocol: "http",
+ *         type: "black",
+ *     }],
+ *     ccGeoIpPolicys: [{
+ *         action: "drop",
+ *         domain: "12.com",
+ *         protocol: "http",
+ *         regionType: "china",
+ *     }],
+ *     ccPrecisionPolicys: [{
+ *         domain: "1.com",
+ *         ip: "162.62.163.34",
+ *         policyAction: "drop",
+ *         policys: [{
+ *             fieldName: "cgi",
+ *             fieldType: "value",
+ *             value: "12123.com",
+ *             valueOperator: "equal",
+ *         }],
+ *         protocol: "http",
+ *     }],
+ *     ccPrecisionReqLimits: [{
+ *         domain: "11.com",
+ *         level: "loose",
+ *         policys: [{
+ *             action: "alg",
+ *             executeDuration: 2,
+ *             mode: "equal",
+ *             period: 5,
+ *             requestNum: 12,
+ *             uri: "15.com",
+ *         }],
+ *         protocol: "http",
+ *     }],
+ *     resourceId: "bgpip-000004xf",
+ *     thresholds: [{
+ *         domain: "12.com",
+ *         threshold: 0,
+ *     }],
+ * });
+ * ```
+ */
+export class CcPolicyV2 extends pulumi.CustomResource {
     /**
-     * Get an existing CCPolicyV2 resource's state with the given name, ID, and optional extra
+     * Get an existing CcPolicyV2 resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -15,45 +71,44 @@ export class CCPolicyV2 extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: CCPolicyV2State, opts?: pulumi.CustomResourceOptions): CCPolicyV2 {
-        return new CCPolicyV2(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: CcPolicyV2State, opts?: pulumi.CustomResourceOptions): CcPolicyV2 {
+        return new CcPolicyV2(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Dayu/cCPolicyV2:CCPolicyV2';
+    public static readonly __pulumiType = 'tencentcloud:Dayu/ccPolicyV2:CcPolicyV2';
 
     /**
-     * Returns true if the given object is an instance of CCPolicyV2.  This is designed to work even
+     * Returns true if the given object is an instance of CcPolicyV2.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is CCPolicyV2 {
+    public static isInstance(obj: any): obj is CcPolicyV2 {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === CCPolicyV2.__pulumiType;
+        return obj['__pulumiType'] === CcPolicyV2.__pulumiType;
     }
 
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-     * packet; net indicates anti-anti-ip pro version.
+     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     public readonly business!: pulumi.Output<string>;
     /**
      * Blacklist and whitelist.
      */
-    public readonly ccBlackWhiteIps!: pulumi.Output<outputs.Dayu.CCPolicyV2CcBlackWhiteIp[] | undefined>;
+    public readonly ccBlackWhiteIps!: pulumi.Output<outputs.Dayu.CcPolicyV2CcBlackWhiteIp[] | undefined>;
     /**
      * Details of the CC region blocking policy list.
      */
-    public readonly ccGeoIpPolicys!: pulumi.Output<outputs.Dayu.CCPolicyV2CcGeoIpPolicy[] | undefined>;
+    public readonly ccGeoIpPolicys!: pulumi.Output<outputs.Dayu.CcPolicyV2CcGeoIpPolicy[] | undefined>;
     /**
      * CC Precision Protection List.
      */
-    public readonly ccPrecisionPolicys!: pulumi.Output<outputs.Dayu.CCPolicyV2CcPrecisionPolicy[] | undefined>;
+    public readonly ccPrecisionPolicys!: pulumi.Output<outputs.Dayu.CcPolicyV2CcPrecisionPolicy[] | undefined>;
     /**
      * CC frequency throttling policy.
      */
-    public readonly ccPrecisionReqLimits!: pulumi.Output<outputs.Dayu.CCPolicyV2CcPrecisionReqLimit[] | undefined>;
+    public readonly ccPrecisionReqLimits!: pulumi.Output<outputs.Dayu.CcPolicyV2CcPrecisionReqLimit[] | undefined>;
     /**
      * The ID of the resource instance.
      */
@@ -61,21 +116,21 @@ export class CCPolicyV2 extends pulumi.CustomResource {
     /**
      * List of protection threshold configurations.
      */
-    public readonly thresholds!: pulumi.Output<outputs.Dayu.CCPolicyV2Threshold[] | undefined>;
+    public readonly thresholds!: pulumi.Output<outputs.Dayu.CcPolicyV2Threshold[] | undefined>;
 
     /**
-     * Create a CCPolicyV2 resource with the given unique name, arguments, and options.
+     * Create a CcPolicyV2 resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: CCPolicyV2Args, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: CCPolicyV2Args | CCPolicyV2State, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: CcPolicyV2Args, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: CcPolicyV2Args | CcPolicyV2State, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as CCPolicyV2State | undefined;
+            const state = argsOrState as CcPolicyV2State | undefined;
             resourceInputs["business"] = state ? state.business : undefined;
             resourceInputs["ccBlackWhiteIps"] = state ? state.ccBlackWhiteIps : undefined;
             resourceInputs["ccGeoIpPolicys"] = state ? state.ccGeoIpPolicys : undefined;
@@ -84,7 +139,7 @@ export class CCPolicyV2 extends pulumi.CustomResource {
             resourceInputs["resourceId"] = state ? state.resourceId : undefined;
             resourceInputs["thresholds"] = state ? state.thresholds : undefined;
         } else {
-            const args = argsOrState as CCPolicyV2Args | undefined;
+            const args = argsOrState as CcPolicyV2Args | undefined;
             if ((!args || args.business === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'business'");
             }
@@ -100,35 +155,34 @@ export class CCPolicyV2 extends pulumi.CustomResource {
             resourceInputs["thresholds"] = args ? args.thresholds : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(CCPolicyV2.__pulumiType, name, resourceInputs, opts);
+        super(CcPolicyV2.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering CCPolicyV2 resources.
+ * Input properties used for looking up and filtering CcPolicyV2 resources.
  */
-export interface CCPolicyV2State {
+export interface CcPolicyV2State {
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-     * packet; net indicates anti-anti-ip pro version.
+     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business?: pulumi.Input<string>;
     /**
      * Blacklist and whitelist.
      */
-    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcBlackWhiteIp>[]>;
+    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcBlackWhiteIp>[]>;
     /**
      * Details of the CC region blocking policy list.
      */
-    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcGeoIpPolicy>[]>;
+    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcGeoIpPolicy>[]>;
     /**
      * CC Precision Protection List.
      */
-    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcPrecisionPolicy>[]>;
+    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionPolicy>[]>;
     /**
      * CC frequency throttling policy.
      */
-    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcPrecisionReqLimit>[]>;
+    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionReqLimit>[]>;
     /**
      * The ID of the resource instance.
      */
@@ -136,34 +190,33 @@ export interface CCPolicyV2State {
     /**
      * List of protection threshold configurations.
      */
-    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2Threshold>[]>;
+    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2Threshold>[]>;
 }
 
 /**
- * The set of arguments for constructing a CCPolicyV2 resource.
+ * The set of arguments for constructing a CcPolicyV2 resource.
  */
-export interface CCPolicyV2Args {
+export interface CcPolicyV2Args {
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-     * packet; net indicates anti-anti-ip pro version.
+     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business: pulumi.Input<string>;
     /**
      * Blacklist and whitelist.
      */
-    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcBlackWhiteIp>[]>;
+    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcBlackWhiteIp>[]>;
     /**
      * Details of the CC region blocking policy list.
      */
-    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcGeoIpPolicy>[]>;
+    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcGeoIpPolicy>[]>;
     /**
      * CC Precision Protection List.
      */
-    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcPrecisionPolicy>[]>;
+    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionPolicy>[]>;
     /**
      * CC frequency throttling policy.
      */
-    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2CcPrecisionReqLimit>[]>;
+    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionReqLimit>[]>;
     /**
      * The ID of the resource instance.
      */
@@ -171,5 +224,5 @@ export interface CCPolicyV2Args {
     /**
      * List of protection threshold configurations.
      */
-    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CCPolicyV2Threshold>[]>;
+    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2Threshold>[]>;
 }

@@ -31,10 +31,8 @@ class ReadonlyGroupArgs:
         :param pulumi.Input[int] max_replay_latency: Delayed log size threshold in MB.
         :param pulumi.Input[int] min_delay_eliminate_reserve: The minimum number of read-only replicas that must be retained in an RO group.
         :param pulumi.Input[int] project_id: Project ID.
-        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-               instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
-        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-               the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
         :param pulumi.Input[str] vpc_id: VPC ID.
         :param pulumi.Input[str] name: RO group name.
@@ -118,8 +116,7 @@ class ReadonlyGroupArgs:
     @pulumi.getter(name="replayLagEliminate")
     def replay_lag_eliminate(self) -> pulumi.Input[int]:
         """
-        Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-        instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         """
         return pulumi.get(self, "replay_lag_eliminate")
 
@@ -131,8 +128,7 @@ class ReadonlyGroupArgs:
     @pulumi.getter(name="replayLatencyEliminate")
     def replay_latency_eliminate(self) -> pulumi.Input[int]:
         """
-        Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-        the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         """
         return pulumi.get(self, "replay_latency_eliminate")
 
@@ -213,10 +209,8 @@ class _ReadonlyGroupState:
         :param pulumi.Input[int] min_delay_eliminate_reserve: The minimum number of read-only replicas that must be retained in an RO group.
         :param pulumi.Input[str] name: RO group name.
         :param pulumi.Input[int] project_id: Project ID.
-        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-               instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
-        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-               the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
         :param pulumi.Input[str] vpc_id: VPC ID.
@@ -334,8 +328,7 @@ class _ReadonlyGroupState:
     @pulumi.getter(name="replayLagEliminate")
     def replay_lag_eliminate(self) -> Optional[pulumi.Input[int]]:
         """
-        Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-        instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         """
         return pulumi.get(self, "replay_lag_eliminate")
 
@@ -347,8 +340,7 @@ class _ReadonlyGroupState:
     @pulumi.getter(name="replayLatencyEliminate")
     def replay_latency_eliminate(self) -> Optional[pulumi.Input[int]]:
         """
-        Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-        the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         """
         return pulumi.get(self, "replay_latency_eliminate")
 
@@ -411,7 +403,26 @@ class ReadonlyGroup(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ReadonlyGroup resource with the given unique name, props, and options.
+        Use this resource to create postgresql readonly group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        group = tencentcloud.postgresql.ReadonlyGroup("group",
+            master_db_instance_id="postgres-f44wlfdv",
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1,
+            project_id=0,
+            replay_lag_eliminate=1,
+            replay_latency_eliminate=1,
+            subnet_id="subnet-enm92y0m",
+            vpc_id="vpc-86v957zb")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] master_db_instance_id: Primary instance ID.
@@ -420,10 +431,8 @@ class ReadonlyGroup(pulumi.CustomResource):
         :param pulumi.Input[int] min_delay_eliminate_reserve: The minimum number of read-only replicas that must be retained in an RO group.
         :param pulumi.Input[str] name: RO group name.
         :param pulumi.Input[int] project_id: Project ID.
-        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-               instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
-        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-               the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
         :param pulumi.Input[str] vpc_id: VPC ID.
@@ -435,7 +444,26 @@ class ReadonlyGroup(pulumi.CustomResource):
                  args: ReadonlyGroupArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ReadonlyGroup resource with the given unique name, props, and options.
+        Use this resource to create postgresql readonly group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        group = tencentcloud.postgresql.ReadonlyGroup("group",
+            master_db_instance_id="postgres-f44wlfdv",
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1,
+            project_id=0,
+            replay_lag_eliminate=1,
+            replay_latency_eliminate=1,
+            subnet_id="subnet-enm92y0m",
+            vpc_id="vpc-86v957zb")
+        ```
+
         :param str resource_name: The name of the resource.
         :param ReadonlyGroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -540,10 +568,8 @@ class ReadonlyGroup(pulumi.CustomResource):
         :param pulumi.Input[int] min_delay_eliminate_reserve: The minimum number of read-only replicas that must be retained in an RO group.
         :param pulumi.Input[str] name: RO group name.
         :param pulumi.Input[int] project_id: Project ID.
-        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-               instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
-        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-               the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_lag_eliminate: Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        :param pulumi.Input[int] replay_latency_eliminate: Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
         :param pulumi.Input[str] vpc_id: VPC ID.
@@ -626,8 +652,7 @@ class ReadonlyGroup(pulumi.CustomResource):
     @pulumi.getter(name="replayLagEliminate")
     def replay_lag_eliminate(self) -> pulumi.Output[int]:
         """
-        Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-        instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         """
         return pulumi.get(self, "replay_lag_eliminate")
 
@@ -635,8 +660,7 @@ class ReadonlyGroup(pulumi.CustomResource):
     @pulumi.getter(name="replayLatencyEliminate")
     def replay_latency_eliminate(self) -> pulumi.Output[int]:
         """
-        Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-        the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         """
         return pulumi.get(self, "replay_latency_eliminate")
 

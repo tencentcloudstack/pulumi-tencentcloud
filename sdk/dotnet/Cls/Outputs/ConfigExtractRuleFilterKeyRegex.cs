@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class ConfigExtractRuleFilterKeyRegex
     {
+        /// <summary>
+        /// Log key to be filtered.
+        /// </summary>
         public readonly string? Key;
+        /// <summary>
+        /// Filter rule regex corresponding to key.
+        /// </summary>
         public readonly string? Regex;
 
         [OutputConstructor]

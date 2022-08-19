@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource for an AS (Auto scaling) lifecycle hook.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const lifecycleHook = new tencentcloud.As.LifecycleHook("lifecycle_hook", {
+ *     defaultResult: "CONTINUE",
+ *     heartbeatTimeout: 500,
+ *     lifecycleHookName: "tf-as-lifecycle-hook",
+ *     lifecycleTransition: "INSTANCE_LAUNCHING",
+ *     notificationMetadata: "tf test",
+ *     notificationQueueName: "lifcyclehook",
+ *     notificationTargetType: "CMQ_QUEUE",
+ *     scalingGroupId: "sg-12af45",
+ * });
+ * ```
+ */
 export class LifecycleHook extends pulumi.CustomResource {
     /**
      * Get an existing LifecycleHook resource's state with the given name, ID, and optional extra
@@ -33,13 +54,11 @@ export class LifecycleHook extends pulumi.CustomResource {
     }
 
     /**
-     * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-     * Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+     * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
      */
     public readonly defaultResult!: pulumi.Output<string | undefined>;
     /**
-     * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-     * (30~7200). and default value is `300`.
+     * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
      */
     public readonly heartbeatTimeout!: pulumi.Output<number | undefined>;
     /**
@@ -47,8 +66,7 @@ export class LifecycleHook extends pulumi.CustomResource {
      */
     public readonly lifecycleHookName!: pulumi.Output<string>;
     /**
-     * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-     * `INSTANCE_TERMINATING`.
+     * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
      */
     public readonly lifecycleTransition!: pulumi.Output<string>;
     /**
@@ -125,13 +143,11 @@ export class LifecycleHook extends pulumi.CustomResource {
  */
 export interface LifecycleHookState {
     /**
-     * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-     * Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+     * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
      */
     defaultResult?: pulumi.Input<string>;
     /**
-     * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-     * (30~7200). and default value is `300`.
+     * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
      */
     heartbeatTimeout?: pulumi.Input<number>;
     /**
@@ -139,8 +155,7 @@ export interface LifecycleHookState {
      */
     lifecycleHookName?: pulumi.Input<string>;
     /**
-     * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-     * `INSTANCE_TERMINATING`.
+     * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
      */
     lifecycleTransition?: pulumi.Input<string>;
     /**
@@ -170,13 +185,11 @@ export interface LifecycleHookState {
  */
 export interface LifecycleHookArgs {
     /**
-     * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-     * Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+     * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
      */
     defaultResult?: pulumi.Input<string>;
     /**
-     * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-     * (30~7200). and default value is `300`.
+     * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
      */
     heartbeatTimeout?: pulumi.Input<number>;
     /**
@@ -184,8 +197,7 @@ export interface LifecycleHookArgs {
      */
     lifecycleHookName: pulumi.Input<string>;
     /**
-     * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-     * `INSTANCE_TERMINATING`.
+     * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
      */
     lifecycleTransition: pulumi.Input<string>;
     /**

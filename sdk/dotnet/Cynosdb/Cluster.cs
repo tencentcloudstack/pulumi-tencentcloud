@@ -9,12 +9,22 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cynosdb
 {
+    /// <summary>
+    /// Provide a resource to create a CynosDB cluster.
+    /// 
+    /// ## Import
+    /// 
+    /// CynosDB cluster can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/cluster:Cluster")]
     public partial class Cluster : Pulumi.CustomResource
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID
-        /// cluster.
+        /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         /// </summary>
         [Output("autoRenewFlag")]
         public Output<int?> AutoRenewFlag { get; private set; } = null!;
@@ -68,16 +78,13 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Output<string> DbVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All
-        /// RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR`
-        /// cluster.
+        /// Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-        /// effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceCpuCore")]
         public Output<int> InstanceCpuCore { get; private set; } = null!;
@@ -107,8 +114,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Output<ImmutableArray<string>> InstanceMaintainWeekdays { get; private set; } = null!;
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-        /// if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceMemorySize")]
         public Output<int> InstanceMemorySize { get; private set; } = null!;
@@ -150,8 +156,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Output<int?> Port { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`,
-        /// `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Output("prepaidPeriod")]
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
@@ -211,9 +216,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Output<ImmutableArray<string>> RwGroupSgs { get; private set; } = null!;
 
         /// <summary>
-        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If
-        /// db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU
-        /// and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         /// </summary>
         [Output("storageLimit")]
         public Output<int?> StorageLimit { get; private set; } = null!;
@@ -289,8 +292,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
     public sealed class ClusterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID
-        /// cluster.
+        /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -326,16 +328,13 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Input<string> DbVersion { get; set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All
-        /// RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR`
-        /// cluster.
+        /// Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-        /// effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceCpuCore", required: true)]
         public Input<int> InstanceCpuCore { get; set; } = null!;
@@ -365,8 +364,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-        /// if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceMemorySize", required: true)]
         public Input<int> InstanceMemorySize { get; set; } = null!;
@@ -396,8 +394,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`,
-        /// `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -433,9 +430,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If
-        /// db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU
-        /// and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         /// </summary>
         [Input("storageLimit")]
         public Input<int>? StorageLimit { get; set; }
@@ -472,8 +467,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
     public sealed class ClusterState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID
-        /// cluster.
+        /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -527,16 +521,13 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Input<string>? DbVersion { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All
-        /// RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR`
-        /// cluster.
+        /// Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-        /// effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceCpuCore")]
         public Input<int>? InstanceCpuCore { get; set; }
@@ -572,8 +563,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-        /// if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceMemorySize")]
         public Input<int>? InstanceMemorySize { get; set; }
@@ -621,8 +611,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`,
-        /// `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -718,9 +707,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If
-        /// db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU
-        /// and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         /// </summary>
         [Input("storageLimit")]
         public Input<int>? StorageLimit { get; set; }

@@ -525,7 +525,59 @@ class HttpRule(pulumi.CustomResource):
                  sni_switch: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a HttpRule resource with the given unique name, props, and options.
+        Provides a resource to create a forward rule of layer7 listener.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+            protocol="HTTP",
+            port=80,
+            proxy_id=foo_proxy.id)
+        foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
+        bar = tencentcloud.gaap.Realserver("bar", ip="8.8.8.8")
+        foo_http_domain = tencentcloud.gaap.HttpDomain("fooHttpDomain",
+            listener_id=foo_layer7_listener.id,
+            domain="www.qq.com")
+        foo_http_rule = tencentcloud.gaap.HttpRule("fooHttpRule",
+            listener_id=foo_layer7_listener.id,
+            domain=foo_http_domain.domain,
+            path="/",
+            realserver_type="IP",
+            health_check=True,
+            health_check_path="/",
+            health_check_method="GET",
+            health_check_status_codes=[200],
+            realservers=[
+                tencentcloud.gaap.HttpRuleRealserverArgs(
+                    id=foo_realserver.id,
+                    ip=foo_realserver.ip,
+                    port=80,
+                ),
+                tencentcloud.gaap.HttpRuleRealserverArgs(
+                    id=bar.id,
+                    ip=bar.ip,
+                    port=80,
+                ),
+            ])
+        ```
+
+        ## Import
+
+        GAAP http rule can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/httpRule:HttpRule tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] connect_timeout: Timeout of the health check response, default value is 2s.
@@ -551,7 +603,59 @@ class HttpRule(pulumi.CustomResource):
                  args: HttpRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a HttpRule resource with the given unique name, props, and options.
+        Provides a resource to create a forward rule of layer7 listener.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+            protocol="HTTP",
+            port=80,
+            proxy_id=foo_proxy.id)
+        foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
+        bar = tencentcloud.gaap.Realserver("bar", ip="8.8.8.8")
+        foo_http_domain = tencentcloud.gaap.HttpDomain("fooHttpDomain",
+            listener_id=foo_layer7_listener.id,
+            domain="www.qq.com")
+        foo_http_rule = tencentcloud.gaap.HttpRule("fooHttpRule",
+            listener_id=foo_layer7_listener.id,
+            domain=foo_http_domain.domain,
+            path="/",
+            realserver_type="IP",
+            health_check=True,
+            health_check_path="/",
+            health_check_method="GET",
+            health_check_status_codes=[200],
+            realservers=[
+                tencentcloud.gaap.HttpRuleRealserverArgs(
+                    id=foo_realserver.id,
+                    ip=foo_realserver.ip,
+                    port=80,
+                ),
+                tencentcloud.gaap.HttpRuleRealserverArgs(
+                    id=bar.id,
+                    ip=bar.ip,
+                    port=80,
+                ),
+            ])
+        ```
+
+        ## Import
+
+        GAAP http rule can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/httpRule:HttpRule tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+        ```
+
         :param str resource_name: The name of the resource.
         :param HttpRuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

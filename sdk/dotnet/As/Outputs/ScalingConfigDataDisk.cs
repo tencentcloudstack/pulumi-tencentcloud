@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.As.Outputs
     [OutputType]
     public sealed class ScalingConfigDataDisk
     {
+        /// <summary>
+        /// Indicates whether the disk remove after instance terminated.
+        /// </summary>
         public readonly bool? DeleteWithInstance;
+        /// <summary>
+        /// Volume of disk in GB. Default is `0`.
+        /// </summary>
         public readonly int? DiskSize;
+        /// <summary>
+        /// Types of disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. valid when disk_type_policy is ORIGINAL.
+        /// </summary>
         public readonly string? DiskType;
+        /// <summary>
+        /// Data disk snapshot ID.
+        /// </summary>
         public readonly string? SnapshotId;
 
         [OutputConstructor]

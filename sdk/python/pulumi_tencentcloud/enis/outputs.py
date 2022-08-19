@@ -10,18 +10,18 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'InstancesEniResult',
-    'InstancesEniIpv4Result',
+    'GetInstanceEniResult',
+    'GetInstanceEniIpv4Result',
 ]
 
 @pulumi.output_type
-class InstancesEniResult(dict):
+class GetInstanceEniResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  description: str,
                  id: str,
                  instance_id: str,
-                 ipv4s: Sequence['outputs.InstancesEniIpv4Result'],
+                 ipv4s: Sequence['outputs.GetInstanceEniIpv4Result'],
                  mac: str,
                  name: str,
                  primary: bool,
@@ -30,6 +30,21 @@ class InstancesEniResult(dict):
                  subnet_id: str,
                  tags: Mapping[str, Any],
                  vpc_id: str):
+        """
+        :param str create_time: Creation time of the ENI.
+        :param str description: Description of the ENI. Conflict with `ids`.
+        :param str id: ID of the ENI.
+        :param str instance_id: ID of the instance which bind the ENI. Conflict with `ids`.
+        :param Sequence['GetInstanceEniIpv4Args'] ipv4s: A set of intranet IPv4s.
+        :param str mac: MAC address.
+        :param str name: Name of the ENI to be queried. Conflict with `ids`.
+        :param bool primary: Indicates whether the IP is primary.
+        :param Sequence[str] security_groups: A set of security group IDs which bind the ENI.
+        :param str state: States of the ENI.
+        :param str subnet_id: ID of the subnet within this vpc to be queried. Conflict with `ids`.
+        :param Mapping[str, Any] tags: Tags of the ENI. Conflict with `ids`.
+        :param str vpc_id: ID of the vpc to be queried. Conflict with `ids`.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "id", id)
@@ -47,75 +62,119 @@ class InstancesEniResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the ENI.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of the ENI. Conflict with `ids`.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the ENI.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        ID of the instance which bind the ENI. Conflict with `ids`.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter
-    def ipv4s(self) -> Sequence['outputs.InstancesEniIpv4Result']:
+    def ipv4s(self) -> Sequence['outputs.GetInstanceEniIpv4Result']:
+        """
+        A set of intranet IPv4s.
+        """
         return pulumi.get(self, "ipv4s")
 
     @property
     @pulumi.getter
     def mac(self) -> str:
+        """
+        MAC address.
+        """
         return pulumi.get(self, "mac")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the ENI to be queried. Conflict with `ids`.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def primary(self) -> bool:
+        """
+        Indicates whether the IP is primary.
+        """
         return pulumi.get(self, "primary")
 
     @property
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Sequence[str]:
+        """
+        A set of security group IDs which bind the ENI.
+        """
         return pulumi.get(self, "security_groups")
 
     @property
     @pulumi.getter
     def state(self) -> str:
+        """
+        States of the ENI.
+        """
         return pulumi.get(self, "state")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of the subnet within this vpc to be queried. Conflict with `ids`.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the ENI. Conflict with `ids`.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the vpc to be queried. Conflict with `ids`.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class InstancesEniIpv4Result(dict):
+class GetInstanceEniIpv4Result(dict):
     def __init__(__self__, *,
                  description: str,
                  ip: str,
                  primary: bool):
+        """
+        :param str description: Description of the ENI. Conflict with `ids`.
+        :param str ip: Intranet IP.
+        :param bool primary: Indicates whether the IP is primary.
+        """
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "primary", primary)
@@ -123,16 +182,25 @@ class InstancesEniIpv4Result(dict):
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of the ENI. Conflict with `ids`.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        Intranet IP.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter
     def primary(self) -> bool:
+        """
+        Indicates whether the IP is primary.
+        """
         return pulumi.get(self, "primary")
 
 

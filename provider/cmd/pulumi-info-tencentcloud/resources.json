@@ -1,0 +1,1091 @@
+[
+  {
+    "key": "tencentcloud_dayu_eip",
+    "module": "Dayu",
+    "resource": "Eip",
+    "csharp_alters": {
+      "eip": "DayuEip"
+    }
+  },
+  {
+    "key": "tencentcloud_postgresql_instance",
+    "module": "Postgresql",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_tcr_token",
+    "module": "Tcr",
+    "resource": "Token",
+    "csharp_alters": {
+      "token": "TcrToken"
+    }
+  },
+  {
+    "key": "tencentcloud_dnat",
+    "module": "Dnat",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_kubernetes_scale_worker",
+    "module": "Kubernetes",
+    "resource": "ScaleWorker"
+  },
+  {
+    "key": "tencentcloud_instance",
+    "module": "Instance",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_clb_target_group_attachment",
+    "module": "Clb",
+    "resource": "TargetGroupAttachment"
+  },
+  {
+    "key": "tencentcloud_cdn_url_push",
+    "module": "Cdn",
+    "resource": "UrlPush"
+  },
+  {
+    "key": "tencentcloud_protocol_template",
+    "module": "Protocol",
+    "resource": "Template"
+  },
+  {
+    "key": "tencentcloud_ccn",
+    "module": "Ccn",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_tdmq_namespace",
+    "module": "Tdmq",
+    "resource": "Namespace"
+  },
+  {
+    "key": "tencentcloud_mysql_account",
+    "module": "Mysql",
+    "resource": "Account"
+  },
+  {
+    "key": "tencentcloud_eks_cluster",
+    "module": "Eks",
+    "resource": "Cluster"
+  },
+  {
+    "key": "tencentcloud_mongodb_sharding_instance",
+    "module": "Mongodb",
+    "resource": "ShardingInstance"
+  },
+  {
+    "key": "tencentcloud_kms_external_key",
+    "module": "Kms",
+    "resource": "ExternalKey"
+  },
+  {
+    "key": "tencentcloud_private_dns_zone",
+    "module": "PrivateDns",
+    "resource": "Zone"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_instance",
+    "module": "Monitor",
+    "resource": "TmpInstance"
+  },
+  {
+    "key": "tencentcloud_dayu_ddos_policy_case",
+    "module": "Dayu",
+    "resource": "DdosPolicyCase"
+  },
+  {
+    "key": "tencentcloud_cam_saml_provider",
+    "module": "Cam",
+    "resource": "SamlProvider"
+  },
+  {
+    "key": "tencentcloud_vpc_acl_attachment",
+    "module": "Vpc",
+    "resource": "AclAttachment"
+  },
+  {
+    "key": "tencentcloud_address_template_group",
+    "module": "Address",
+    "resource": "TemplateGroup"
+  },
+  {
+    "key": "tencentcloud_dnspod_domain_instance",
+    "module": "Dnspod",
+    "resource": "DomainInstance"
+  },
+  {
+    "key": "tencentcloud_api_gateway_custom_domain",
+    "module": "ApiGateway",
+    "resource": "CustomDomain"
+  },
+  {
+    "key": "tencentcloud_vpc_acl",
+    "module": "Vpc",
+    "resource": "Acl"
+  },
+  {
+    "key": "tencentcloud_ccn_bandwidth_limit",
+    "module": "Ccn",
+    "resource": "BandwidthLimit",
+    "csharp_alters": {
+      "bandwidth_limit": "CcnBandwidthLimit"
+    }
+  },
+  {
+    "key": "tencentcloud_gaap_layer7_listener",
+    "module": "Gaap",
+    "resource": "Layer7Listener"
+  },
+  {
+    "key": "tencentcloud_cbs_snapshot_policy",
+    "module": "Cbs",
+    "resource": "SnapshotPolicy"
+  },
+  {
+    "key": "tencentcloud_gaap_realserver",
+    "module": "Gaap",
+    "resource": "Realserver"
+  },
+  {
+    "key": "tencentcloud_gaap_layer4_listener",
+    "module": "Gaap",
+    "resource": "Layer4Listener"
+  },
+  {
+    "key": "tencentcloud_api_gateway_api",
+    "module": "ApiGateway",
+    "resource": "Api"
+  },
+  {
+    "key": "tencentcloud_api_gateway_api_key_attachment",
+    "module": "ApiGateway",
+    "resource": "ApiKeyAttachment"
+  },
+  {
+    "key": "tencentcloud_dnspod_record",
+    "module": "Dnspod",
+    "resource": "Record"
+  },
+  {
+    "key": "tencentcloud_nat_gateway",
+    "module": "Nat",
+    "resource": "Gateway"
+  },
+  {
+    "key": "tencentcloud_clb_snat_ip",
+    "module": "Clb",
+    "resource": "SnatIp"
+  },
+  {
+    "key": "tencentcloud_mysql_backup_policy",
+    "module": "Mysql",
+    "resource": "BackupPolicy"
+  },
+  {
+    "key": "tencentcloud_cbs_snapshot",
+    "module": "Cbs",
+    "resource": "Snapshot"
+  },
+  {
+    "key": "tencentcloud_cam_user_policy_attachment",
+    "module": "Cam",
+    "resource": "UserPolicyAttachment"
+  },
+  {
+    "key": "tencentcloud_dayu_cc_policy_v2",
+    "module": "Dayu",
+    "resource": "CcPolicyV2"
+  },
+  {
+    "key": "tencentcloud_cam_group",
+    "module": "Cam",
+    "resource": "Group"
+  },
+  {
+    "key": "tencentcloud_reserved_instance",
+    "module": "Reserved",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_alert_rule",
+    "module": "Monitor",
+    "resource": "TmpAlertRule"
+  },
+  {
+    "key": "tencentcloud_cdn_url_purge",
+    "module": "Cdn",
+    "resource": "UrlPurge"
+  },
+  {
+    "key": "tencentcloud_as_scaling_config",
+    "module": "As",
+    "resource": "ScalingConfig"
+  },
+  {
+    "key": "tencentcloud_cam_user",
+    "module": "Cam",
+    "resource": "User"
+  },
+  {
+    "key": "tencentcloud_cam_policy",
+    "module": "Cam",
+    "resource": "Policy"
+  },
+  {
+    "key": "tencentcloud_sqlserver_publish_subscribe",
+    "module": "Sqlserver",
+    "resource": "PublishSubscribe"
+  },
+  {
+    "key": "tencentcloud_vpc",
+    "module": "Vpc",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_api_gateway_strategy_attachment",
+    "module": "ApiGateway",
+    "resource": "StrategyAttachment"
+  },
+  {
+    "key": "tencentcloud_eni_attachment",
+    "module": "Eni",
+    "resource": "Attachment"
+  },
+  {
+    "key": "tencentcloud_kubernetes_addon_attachment",
+    "module": "Kubernetes",
+    "resource": "AddonAttachment"
+  },
+  {
+    "key": "tencentcloud_as_lifecycle_hook",
+    "module": "As",
+    "resource": "LifecycleHook"
+  },
+  {
+    "key": "tencentcloud_gaap_proxy",
+    "module": "Gaap",
+    "resource": "Proxy"
+  },
+  {
+    "key": "tencentcloud_cam_group_membership",
+    "module": "Cam",
+    "resource": "GroupMembership"
+  },
+  {
+    "key": "tencentcloud_placement_group",
+    "module": "Placement",
+    "resource": "Group"
+  },
+  {
+    "key": "tencentcloud_cfs_access_rule",
+    "module": "Cfs",
+    "resource": "AccessRule"
+  },
+  {
+    "key": "tencentcloud_sqlserver_instance",
+    "module": "Sqlserver",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_ssm_secret",
+    "module": "Ssm",
+    "resource": "Secret"
+  },
+  {
+    "key": "tencentcloud_kubernetes_as_scaling_group",
+    "module": "Kubernetes",
+    "resource": "AsScalingGroup"
+  },
+  {
+    "key": "tencentcloud_tcr_vpc_attachment",
+    "module": "Tcr",
+    "resource": "VpcAttachment"
+  },
+  {
+    "key": "tencentcloud_protocol_template_group",
+    "module": "Protocol",
+    "resource": "TemplateGroup"
+  },
+  {
+    "key": "tencentcloud_vod_super_player_config",
+    "module": "Vod",
+    "resource": "SuperPlayerConfig"
+  },
+  {
+    "key": "tencentcloud_mysql_privilege",
+    "module": "Mysql",
+    "resource": "Privilege"
+  },
+  {
+    "key": "tencentcloud_redis_backup_config",
+    "module": "Redis",
+    "resource": "BackupConfig"
+  },
+  {
+    "key": "tencentcloud_dayu_l4_rule",
+    "module": "Dayu",
+    "resource": "L4Rule"
+  },
+  {
+    "key": "tencentcloud_ssl_pay_certificate",
+    "module": "Ssl",
+    "resource": "PayCertificate"
+  },
+  {
+    "key": "tencentcloud_sqlserver_readonly_instance",
+    "module": "Sqlserver",
+    "resource": "ReadonlyInstance"
+  },
+  {
+    "key": "tencentcloud_key_pair",
+    "module": "Key",
+    "resource": "Pair"
+  },
+  {
+    "key": "tencentcloud_clb_log_topic",
+    "module": "Clb",
+    "resource": "LogTopic"
+  },
+  {
+    "key": "tencentcloud_tdmq_role",
+    "module": "Tdmq",
+    "resource": "Role"
+  },
+  {
+    "key": "tencentcloud_clb_attachment",
+    "module": "Clb",
+    "resource": "Attachment"
+  },
+  {
+    "key": "tencentcloud_dayu_l7_rule_v2",
+    "module": "Dayu",
+    "resource": "L7RuleV2"
+  },
+  {
+    "key": "tencentcloud_cynosdb_cluster",
+    "module": "Cynosdb",
+    "resource": "Cluster"
+  },
+  {
+    "key": "tencentcloud_cdh_instance",
+    "module": "Cdh",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_clb_instance",
+    "module": "Clb",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_image",
+    "module": "Image",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_cos_bucket_policy",
+    "module": "Cos",
+    "resource": "BucketPolicy"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_tke_template",
+    "module": "Monitor",
+    "resource": "TmpTkeTemplate"
+  },
+  {
+    "key": "tencentcloud_cam_oidc_sso",
+    "module": "Cam",
+    "resource": "OidcSso"
+  },
+  {
+    "key": "tencentcloud_scf_namespace",
+    "module": "Scf",
+    "resource": "Namespace",
+    "csharp_alters": {
+      "namespace": "ScfNamespace"
+    }
+  },
+  {
+    "key": "tencentcloud_gaap_certificate",
+    "module": "Gaap",
+    "resource": "Certificate"
+  },
+  {
+    "key": "tencentcloud_cbs_snapshot_policy_attachment",
+    "module": "Cbs",
+    "resource": "SnapshotPolicyAttachment"
+  },
+  {
+    "key": "tencentcloud_security_group",
+    "module": "Security",
+    "resource": "Group"
+  },
+  {
+    "key": "tencentcloud_clb_log_set",
+    "module": "Clb",
+    "resource": "LogSet"
+  },
+  {
+    "key": "tencentcloud_scf_layer",
+    "module": "Scf",
+    "resource": "Layer"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_tke_alert_policy",
+    "module": "Monitor",
+    "resource": "TmpTkeAlertPolicy"
+  },
+  {
+    "key": "tencentcloud_kms_key",
+    "module": "Kms",
+    "resource": "Key",
+    "csharp_alters": {
+      "key_state": "KmsKeyState"
+    }
+  },
+  {
+    "key": "tencentcloud_cbs_storage_set_attachment",
+    "module": "Cbs",
+    "resource": "StorageSetAttachment"
+  },
+  {
+    "key": "tencentcloud_ssl_free_certificate",
+    "module": "Ssl",
+    "resource": "FreeCertificate"
+  },
+  {
+    "key": "tencentcloud_postgresql_readonly_group",
+    "module": "Postgresql",
+    "resource": "ReadonlyGroup"
+  },
+  {
+    "key": "tencentcloud_api_gateway_ip_strategy",
+    "module": "ApiGateway",
+    "resource": "IpStrategy"
+  },
+  {
+    "key": "tencentcloud_sqlserver_basic_instance",
+    "module": "Sqlserver",
+    "resource": "BasicInstance"
+  },
+  {
+    "key": "tencentcloud_cls_config_extra",
+    "module": "Cls",
+    "resource": "ConfigExtra"
+  },
+  {
+    "key": "tencentcloud_ccn_attachment",
+    "module": "Ccn",
+    "resource": "Attachment"
+  },
+  {
+    "key": "tencentcloud_mysql_readonly_instance",
+    "module": "Mysql",
+    "resource": "ReadonlyInstance"
+  },
+  {
+    "key": "tencentcloud_sqlserver_account",
+    "module": "Sqlserver",
+    "resource": "Account"
+  },
+  {
+    "key": "tencentcloud_vod_image_sprite_template",
+    "module": "Vod",
+    "resource": "ImageSpriteTemplate"
+  },
+  {
+    "key": "tencentcloud_emr_cluster",
+    "module": "Emr",
+    "resource": "Cluster"
+  },
+  {
+    "key": "tencentcloud_scf_function",
+    "module": "Scf",
+    "resource": "Function"
+  },
+  {
+    "key": "tencentcloud_tcaplus_cluster",
+    "module": "Tcaplus",
+    "resource": "Cluster"
+  },
+  {
+    "key": "tencentcloud_tcaplus_table",
+    "module": "Tcaplus",
+    "resource": "Table"
+  },
+  {
+    "key": "tencentcloud_kubernetes_cluster",
+    "module": "Kubernetes",
+    "resource": "Cluster"
+  },
+  {
+    "key": "tencentcloud_as_notification",
+    "module": "As",
+    "resource": "Notification"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_scrape_job",
+    "module": "Monitor",
+    "resource": "TmpScrapeJob"
+  },
+  {
+    "key": "tencentcloud_cls_logset",
+    "module": "Cls",
+    "resource": "Logset"
+  },
+  {
+    "key": "tencentcloud_cls_config_attachment",
+    "module": "Cls",
+    "resource": "ConfigAttachment"
+  },
+  {
+    "key": "tencentcloud_cfs_file_system",
+    "module": "Cfs",
+    "resource": "FileSystem"
+  },
+  {
+    "key": "tencentcloud_vod_adaptive_dynamic_streaming_template",
+    "module": "Vod",
+    "resource": "AdaptiveDynamicStreamingTemplate"
+  },
+  {
+    "key": "tencentcloud_api_gateway_usage_plan_attachment",
+    "module": "ApiGateway",
+    "resource": "UsagePlanAttachment"
+  },
+  {
+    "key": "tencentcloud_tdmq_namespace_role_attachment",
+    "module": "Tdmq",
+    "resource": "NamespaceRoleAttachment"
+  },
+  {
+    "key": "tencentcloud_instance_set",
+    "module": "Instance",
+    "resource": "Set"
+  },
+  {
+    "key": "tencentcloud_gaap_security_policy",
+    "module": "Gaap",
+    "resource": "SecurityPolicy"
+  },
+  {
+    "key": "tencentcloud_elasticsearch_instance",
+    "module": "Elasticsearch",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_route_table_entry",
+    "module": "Route",
+    "resource": "TableEntry"
+  },
+  {
+    "key": "tencentcloud_vpn_ssl_client",
+    "module": "Vpn",
+    "resource": "SslClient"
+  },
+  {
+    "key": "tencentcloud_clb_target_group",
+    "module": "Clb",
+    "resource": "TargetGroup"
+  },
+  {
+    "key": "tencentcloud_ckafka_instance",
+    "module": "Ckafka",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_vod_snapshot_by_time_offset_template",
+    "module": "Vod",
+    "resource": "SnapshotByTimeOffsetTemplate"
+  },
+  {
+    "key": "tencentcloud_cls_machine_group",
+    "module": "Cls",
+    "resource": "MachineGroup"
+  },
+  {
+    "key": "tencentcloud_eni",
+    "module": "Eni",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_gaap_domain_error_page",
+    "module": "Gaap",
+    "resource": "DomainErrorPage"
+  },
+  {
+    "key": "tencentcloud_tdmq_instance",
+    "module": "Tdmq",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_ssm_secret_version",
+    "module": "Ssm",
+    "resource": "SecretVersion"
+  },
+  {
+    "key": "tencentcloud_cam_role_sso",
+    "module": "Cam",
+    "resource": "RoleSso"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_recording_rule",
+    "module": "Monitor",
+    "resource": "TmpRecordingRule"
+  },
+  {
+    "key": "tencentcloud_api_gateway_usage_plan",
+    "module": "ApiGateway",
+    "resource": "UsagePlan"
+  },
+  {
+    "key": "tencentcloud_cbs_storage_attachment",
+    "module": "Cbs",
+    "resource": "StorageAttachment"
+  },
+  {
+    "key": "tencentcloud_cynosdb_readonly_instance",
+    "module": "Cynosdb",
+    "resource": "ReadonlyInstance"
+  },
+  {
+    "key": "tencentcloud_cls_index",
+    "module": "Cls",
+    "resource": "Index"
+  },
+  {
+    "key": "tencentcloud_mongodb_standby_instance",
+    "module": "Mongodb",
+    "resource": "StandbyInstance"
+  },
+  {
+    "key": "tencentcloud_dc_gateway",
+    "module": "Dc",
+    "resource": "Gateway"
+  },
+  {
+    "key": "tencentcloud_security_group_lite_rule",
+    "module": "Security",
+    "resource": "GroupLiteRule"
+  },
+  {
+    "key": "tencentcloud_mysql_instance",
+    "module": "Mysql",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_private_dns_record",
+    "module": "PrivateDns",
+    "resource": "Record"
+  },
+  {
+    "key": "tencentcloud_dcx",
+    "module": "Dcx",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_cbs_storage_set",
+    "module": "Cbs",
+    "resource": "StorageSet"
+  },
+  {
+    "key": "tencentcloud_route_table",
+    "module": "Route",
+    "resource": "Table"
+  },
+  {
+    "key": "tencentcloud_cam_group_policy_attachment",
+    "module": "Cam",
+    "resource": "GroupPolicyAttachment"
+  },
+  {
+    "key": "tencentcloud_cam_role",
+    "module": "Cam",
+    "resource": "Role"
+  },
+  {
+    "key": "tencentcloud_clb_listener_rule",
+    "module": "Clb",
+    "resource": "ListenerRule"
+  },
+  {
+    "key": "tencentcloud_kubernetes_auth_attachment",
+    "module": "Kubernetes",
+    "resource": "AuthAttachment"
+  },
+  {
+    "key": "tencentcloud_kubernetes_node_pool",
+    "module": "Kubernetes",
+    "resource": "NodePool"
+  },
+  {
+    "key": "tencentcloud_dayu_l4_rule_v2",
+    "module": "Dayu",
+    "resource": "L4RuleV2"
+  },
+  {
+    "key": "tencentcloud_sqlserver_db",
+    "module": "Sqlserver",
+    "resource": "Db"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_exporter_integration",
+    "module": "Monitor",
+    "resource": "TmpExporterIntegration"
+  },
+  {
+    "key": "tencentcloud_cdn_domain",
+    "module": "Cdn",
+    "resource": "Domain",
+    "csharp_alters": {
+      "domain": "CdnDomain"
+    }
+  },
+  {
+    "key": "tencentcloud_nat_gateway_snat",
+    "module": "Nat",
+    "resource": "GatewaySnat"
+  },
+  {
+    "key": "tencentcloud_ha_vip",
+    "module": "Ha",
+    "resource": "Vip",
+    "csharp_alters": {
+      "vip": "HaVip"
+    }
+  },
+  {
+    "key": "tencentcloud_eks_container_instance",
+    "module": "Eks",
+    "resource": "ContainerInstance"
+  },
+  {
+    "key": "tencentcloud_cos_bucket_object",
+    "module": "Cos",
+    "resource": "BucketObject"
+  },
+  {
+    "key": "tencentcloud_ssl_certificate",
+    "module": "Ssl",
+    "resource": "Certificate"
+  },
+  {
+    "key": "tencentcloud_tcr_repository",
+    "module": "Tcr",
+    "resource": "Repository"
+  },
+  {
+    "key": "tencentcloud_monitor_policy_binding_object",
+    "module": "Monitor",
+    "resource": "PolicyBindingObject"
+  },
+  {
+    "key": "tencentcloud_gaap_http_domain",
+    "module": "Gaap",
+    "resource": "HttpDomain"
+  },
+  {
+    "key": "tencentcloud_audit",
+    "module": "Audit",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_eip",
+    "module": "Eip",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_dayu_cc_http_policy",
+    "module": "Dayu",
+    "resource": "CcHttpPolicy"
+  },
+  {
+    "key": "tencentcloud_tcaplus_tablegroup",
+    "module": "Tcaplus",
+    "resource": "Tablegroup"
+  },
+  {
+    "key": "tencentcloud_address_template",
+    "module": "Address",
+    "resource": "Template"
+  },
+  {
+    "key": "tencentcloud_clb_redirection",
+    "module": "Clb",
+    "resource": "Redirection"
+  },
+  {
+    "key": "tencentcloud_api_gateway_service",
+    "module": "ApiGateway",
+    "resource": "Service"
+  },
+  {
+    "key": "tencentcloud_cls_topic",
+    "module": "Cls",
+    "resource": "Topic"
+  },
+  {
+    "key": "tencentcloud_vpn_customer_gateway",
+    "module": "Vpn",
+    "resource": "CustomerGateway"
+  },
+  {
+    "key": "tencentcloud_as_scaling_policy",
+    "module": "As",
+    "resource": "ScalingPolicy"
+  },
+  {
+    "key": "tencentcloud_monitor_binding_receiver",
+    "module": "Monitor",
+    "resource": "BindingReceiver"
+  },
+  {
+    "key": "tencentcloud_ckafka_user",
+    "module": "Ckafka",
+    "resource": "User"
+  },
+  {
+    "key": "tencentcloud_tcr_namespace",
+    "module": "Tcr",
+    "resource": "Namespace"
+  },
+  {
+    "key": "tencentcloud_as_attachment",
+    "module": "As",
+    "resource": "Attachment"
+  },
+  {
+    "key": "tencentcloud_vpn_ssl_server",
+    "module": "Vpn",
+    "resource": "SslServer"
+  },
+  {
+    "key": "tencentcloud_cam_role_policy_attachment",
+    "module": "Cam",
+    "resource": "RolePolicyAttachment"
+  },
+  {
+    "key": "tencentcloud_sqlserver_account_db_attachment",
+    "module": "Sqlserver",
+    "resource": "AccountDbAttachment"
+  },
+  {
+    "key": "tencentcloud_eip_association",
+    "module": "Eip",
+    "resource": "Association"
+  },
+  {
+    "key": "tencentcloud_dc_gateway_ccn_route",
+    "module": "Dc",
+    "resource": "GatewayCcnRoute"
+  },
+  {
+    "key": "tencentcloud_vpn_gateway",
+    "module": "Vpn",
+    "resource": "Gateway"
+  },
+  {
+    "key": "tencentcloud_kubernetes_cluster_endpoint",
+    "module": "Kubernetes",
+    "resource": "ClusterEndpoint"
+  },
+  {
+    "key": "tencentcloud_dayu_l7_rule",
+    "module": "Dayu",
+    "resource": "L7Rule"
+  },
+  {
+    "key": "tencentcloud_gaap_security_rule",
+    "module": "Gaap",
+    "resource": "SecurityRule"
+  },
+  {
+    "key": "tencentcloud_postgresql_readonly_attachment",
+    "module": "Postgresql",
+    "resource": "ReadonlyAttachment"
+  },
+  {
+    "key": "tencentcloud_subnet",
+    "module": "Subnet",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_ckafka_topic",
+    "module": "Ckafka",
+    "resource": "Topic"
+  },
+  {
+    "key": "tencentcloud_dayu_ddos_policy_v2",
+    "module": "Dayu",
+    "resource": "DdosPolicyV2"
+  },
+  {
+    "key": "tencentcloud_ha_vip_eip_attachment",
+    "module": "Ha",
+    "resource": "VipEipAttachment"
+  },
+  {
+    "key": "tencentcloud_security_group_rule",
+    "module": "Security",
+    "resource": "GroupRule"
+  },
+  {
+    "key": "tencentcloud_as_schedule",
+    "module": "As",
+    "resource": "Schedule"
+  },
+  {
+    "key": "tencentcloud_cls_cos_shipper",
+    "module": "Cls",
+    "resource": "CosShipper"
+  },
+  {
+    "key": "tencentcloud_cbs_storage",
+    "module": "Cbs",
+    "resource": "Storage"
+  },
+  {
+    "key": "tencentcloud_monitor_alarm_policy",
+    "module": "Monitor",
+    "resource": "AlarmPolicy"
+  },
+  {
+    "key": "tencentcloud_cos_bucket",
+    "module": "Cos",
+    "resource": "Bucket",
+    "csharp_alters": {
+      "bucket": "CosBucket"
+    }
+  },
+  {
+    "key": "tencentcloud_dayu_ddos_policy",
+    "module": "Dayu",
+    "resource": "DdosPolicy"
+  },
+  {
+    "key": "tencentcloud_clb_customized_config",
+    "module": "Clb",
+    "resource": "CustomizedConfig"
+  },
+  {
+    "key": "tencentcloud_vod_sub_application",
+    "module": "Vod",
+    "resource": "SubApplication"
+  },
+  {
+    "key": "tencentcloud_api_gateway_api_key",
+    "module": "ApiGateway",
+    "resource": "ApiKey"
+  },
+  {
+    "key": "tencentcloud_vpn_gateway_route",
+    "module": "Vpn",
+    "resource": "GatewayRoute"
+  },
+  {
+    "key": "tencentcloud_as_scaling_group",
+    "module": "As",
+    "resource": "ScalingGroup"
+  },
+  {
+    "key": "tencentcloud_monitor_tmp_cvm_agent",
+    "module": "Monitor",
+    "resource": "TmpCvmAgent"
+  },
+  {
+    "key": "tencentcloud_ckafka_acl",
+    "module": "Ckafka",
+    "resource": "Acl"
+  },
+  {
+    "key": "tencentcloud_tcr_instance",
+    "module": "Tcr",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_kubernetes_cluster_attachment",
+    "module": "Kubernetes",
+    "resource": "ClusterAttachment"
+  },
+  {
+    "key": "tencentcloud_api_gateway_service_release",
+    "module": "ApiGateway",
+    "resource": "ServiceRelease"
+  },
+  {
+    "key": "tencentcloud_cfs_access_group",
+    "module": "Cfs",
+    "resource": "AccessGroup"
+  },
+  {
+    "key": "tencentcloud_vpn_connection",
+    "module": "Vpn",
+    "resource": "Connection"
+  },
+  {
+    "key": "tencentcloud_dayu_cc_https_policy",
+    "module": "Dayu",
+    "resource": "CcHttpsPolicy"
+  },
+  {
+    "key": "tencentcloud_vod_procedure_template",
+    "module": "Vod",
+    "resource": "ProcedureTemplate"
+  },
+  {
+    "key": "tencentcloud_tdmq_topic",
+    "module": "Tdmq",
+    "resource": "Topic"
+  },
+  {
+    "key": "tencentcloud_cls_config",
+    "module": "Cls",
+    "resource": "Config"
+  },
+  {
+    "key": "tencentcloud_redis_instance",
+    "module": "Redis",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_gaap_http_rule",
+    "module": "Gaap",
+    "resource": "HttpRule"
+  },
+  {
+    "key": "tencentcloud_postgresql_readonly_instance",
+    "module": "Postgresql",
+    "resource": "ReadonlyInstance"
+  },
+  {
+    "key": "tencentcloud_clb_target_group_instance_attachment",
+    "module": "Clb",
+    "resource": "TargetGroupInstanceAttachment"
+  },
+  {
+    "key": "tencentcloud_mongodb_instance",
+    "module": "Mongodb",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_dayu_ddos_policy_attachment",
+    "module": "Dayu",
+    "resource": "DdosPolicyAttachment"
+  },
+  {
+    "key": "tencentcloud_tcaplus_idl",
+    "module": "Tcaplus",
+    "resource": "Idl"
+  },
+  {
+    "key": "tencentcloud_lighthouse_instance",
+    "module": "Lighthouse",
+    "resource": "Instance"
+  },
+  {
+    "key": "tencentcloud_clb_listener",
+    "module": "Clb",
+    "resource": "Listener"
+  }
+]

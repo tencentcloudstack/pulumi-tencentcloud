@@ -11,6 +11,69 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to creating dedicated tunnels instances.
+//
+// > **NOTE:** 1. ID of the DC is queried, can only apply for this resource offline.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		dcId := "dc-kax48sg7"
+// 		if param := cfg.Get("dcId"); param != "" {
+// 			dcId = param
+// 		}
+// 		dcgId := "dcg-dmbhf7jf"
+// 		if param := cfg.Get("dcgId"); param != "" {
+// 			dcgId = param
+// 		}
+// 		vpcId := "vpc-4h9v4mo3"
+// 		if param := cfg.Get("vpcId"); param != "" {
+// 			vpcId = param
+// 		}
+// 		_, err := Dcx.NewInstance(ctx, "bgpMain", &Dcx.InstanceArgs{
+// 			Bandwidth:   pulumi.Int(900),
+// 			DcId:        pulumi.String(dcId),
+// 			DcgId:       pulumi.String(dcgId),
+// 			NetworkType: pulumi.String("VPC"),
+// 			RouteType:   pulumi.String("BGP"),
+// 			Vlan:        pulumi.Int(306),
+// 			VpcId:       pulumi.String(vpcId),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Dcx.NewInstance(ctx, "staticMain", &Dcx.InstanceArgs{
+// 			Bandwidth:   pulumi.Int(900),
+// 			DcId:        pulumi.String(dcId),
+// 			DcgId:       pulumi.String(dcgId),
+// 			NetworkType: pulumi.String("VPC"),
+// 			RouteType:   pulumi.String("STATIC"),
+// 			Vlan:        pulumi.Int(301),
+// 			VpcId:       pulumi.String(vpcId),
+// 			RouteFilterPrefixes: pulumi.StringArray{
+// 				pulumi.String("10.10.10.101/32"),
+// 			},
+// 			TencentAddress:  pulumi.String("100.93.46.1/30"),
+// 			CustomerAddress: pulumi.String("100.93.46.2/30"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -32,18 +95,15 @@ type Instance struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType pulumi.StringPtrOutput `pulumi:"networkType"`
-	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-	// field within BGP.
+	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
 	RouteFilterPrefixes pulumi.StringArrayOutput `pulumi:"routeFilterPrefixes"`
 	// Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
 	RouteType pulumi.StringPtrOutput `pulumi:"routeType"`
-	// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-	// `COMFIRMING` and `REJECTED`.
+	// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
 	State pulumi.StringOutput `pulumi:"state"`
 	// Interconnect IP of the DC within Tencent.
 	TencentAddress pulumi.StringOutput `pulumi:"tencentAddress"`
-	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-	// physical connect.
+	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan pulumi.IntPtrOutput `pulumi:"vlan"`
 	// ID of the VPC or BMVPC.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
@@ -105,18 +165,15 @@ type instanceState struct {
 	Name *string `pulumi:"name"`
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType *string `pulumi:"networkType"`
-	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-	// field within BGP.
+	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
 	RouteFilterPrefixes []string `pulumi:"routeFilterPrefixes"`
 	// Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
 	RouteType *string `pulumi:"routeType"`
-	// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-	// `COMFIRMING` and `REJECTED`.
+	// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
 	State *string `pulumi:"state"`
 	// Interconnect IP of the DC within Tencent.
 	TencentAddress *string `pulumi:"tencentAddress"`
-	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-	// physical connect.
+	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan *int `pulumi:"vlan"`
 	// ID of the VPC or BMVPC.
 	VpcId *string `pulumi:"vpcId"`
@@ -141,18 +198,15 @@ type InstanceState struct {
 	Name pulumi.StringPtrInput
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType pulumi.StringPtrInput
-	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-	// field within BGP.
+	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
 	RouteFilterPrefixes pulumi.StringArrayInput
 	// Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
 	RouteType pulumi.StringPtrInput
-	// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-	// `COMFIRMING` and `REJECTED`.
+	// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
 	State pulumi.StringPtrInput
 	// Interconnect IP of the DC within Tencent.
 	TencentAddress pulumi.StringPtrInput
-	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-	// physical connect.
+	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan pulumi.IntPtrInput
 	// ID of the VPC or BMVPC.
 	VpcId pulumi.StringPtrInput
@@ -179,15 +233,13 @@ type instanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType *string `pulumi:"networkType"`
-	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-	// field within BGP.
+	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
 	RouteFilterPrefixes []string `pulumi:"routeFilterPrefixes"`
 	// Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
 	RouteType *string `pulumi:"routeType"`
 	// Interconnect IP of the DC within Tencent.
 	TencentAddress *string `pulumi:"tencentAddress"`
-	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-	// physical connect.
+	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan *int `pulumi:"vlan"`
 	// ID of the VPC or BMVPC.
 	VpcId string `pulumi:"vpcId"`
@@ -211,15 +263,13 @@ type InstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType pulumi.StringPtrInput
-	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-	// field within BGP.
+	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
 	RouteFilterPrefixes pulumi.StringArrayInput
 	// Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
 	RouteType pulumi.StringPtrInput
 	// Interconnect IP of the DC within Tencent.
 	TencentAddress pulumi.StringPtrInput
-	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-	// physical connect.
+	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan pulumi.IntPtrInput
 	// ID of the VPC or BMVPC.
 	VpcId pulumi.StringInput
@@ -357,8 +407,7 @@ func (o InstanceOutput) NetworkType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.NetworkType }).(pulumi.StringPtrOutput)
 }
 
-// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-// field within BGP.
+// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
 func (o InstanceOutput) RouteFilterPrefixes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.RouteFilterPrefixes }).(pulumi.StringArrayOutput)
 }
@@ -368,8 +417,7 @@ func (o InstanceOutput) RouteType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.RouteType }).(pulumi.StringPtrOutput)
 }
 
-// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-// `COMFIRMING` and `REJECTED`.
+// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
 func (o InstanceOutput) State() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.State }).(pulumi.StringOutput)
 }
@@ -379,8 +427,7 @@ func (o InstanceOutput) TencentAddress() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.TencentAddress }).(pulumi.StringOutput)
 }
 
-// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-// physical connect.
+// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 func (o InstanceOutput) Vlan() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Vlan }).(pulumi.IntPtrOutput)
 }

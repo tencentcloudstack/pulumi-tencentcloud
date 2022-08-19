@@ -11,6 +11,32 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a dayu DDoS policy attachment.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewDdosPolicyAttachment(ctx, "dayuDdosPolicyAttachmentBasic", &Dayu.DdosPolicyAttachmentArgs{
+// 			ResourceType: pulumi.Any(tencentcloud_dayu_ddos_policy.Test_policy.Resource_type),
+// 			ResourceId:   pulumi.String("bgpip-00000294"),
+// 			PolicyId:     pulumi.Any(tencentcloud_dayu_ddos_policy.Test_policy.Policy_id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type DdosPolicyAttachment struct {
 	pulumi.CustomResourceState
 

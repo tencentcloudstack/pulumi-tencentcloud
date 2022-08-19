@@ -11,6 +11,46 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create tcr repository.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		test, err := Tcr.GetInstances(ctx, &tcr.GetInstancesArgs{
+// 			Name: pulumi.StringRef("test"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewRepository(ctx, "foo", &Tcr.RepositoryArgs{
+// 			InstanceId:    pulumi.String(test.InstanceLists[0].Id),
+// 			NamespaceName: pulumi.String("exampleNamespace"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// tcr repository can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+// ```
 type Repository struct {
 	pulumi.CustomResourceState
 
@@ -24,9 +64,7 @@ type Repository struct {
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Indicate the repository is public or not.
 	IsPublic pulumi.BoolOutput `pulumi:"isPublic"`
-	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-	// as `sub1/sub2/repo`.
+	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the TCR namespace.
 	NamespaceName pulumi.StringOutput `pulumi:"namespaceName"`
@@ -81,9 +119,7 @@ type repositoryState struct {
 	InstanceId *string `pulumi:"instanceId"`
 	// Indicate the repository is public or not.
 	IsPublic *bool `pulumi:"isPublic"`
-	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-	// as `sub1/sub2/repo`.
+	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
 	Name *string `pulumi:"name"`
 	// Name of the TCR namespace.
 	NamespaceName *string `pulumi:"namespaceName"`
@@ -104,9 +140,7 @@ type RepositoryState struct {
 	InstanceId pulumi.StringPtrInput
 	// Indicate the repository is public or not.
 	IsPublic pulumi.BoolPtrInput
-	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-	// as `sub1/sub2/repo`.
+	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
 	Name pulumi.StringPtrInput
 	// Name of the TCR namespace.
 	NamespaceName pulumi.StringPtrInput
@@ -127,9 +161,7 @@ type repositoryArgs struct {
 	Description *string `pulumi:"description"`
 	// ID of the TCR instance.
 	InstanceId string `pulumi:"instanceId"`
-	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-	// as `sub1/sub2/repo`.
+	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
 	Name *string `pulumi:"name"`
 	// Name of the TCR namespace.
 	NamespaceName string `pulumi:"namespaceName"`
@@ -143,9 +175,7 @@ type RepositoryArgs struct {
 	Description pulumi.StringPtrInput
 	// ID of the TCR instance.
 	InstanceId pulumi.StringInput
-	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-	// as `sub1/sub2/repo`.
+	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
 	Name pulumi.StringPtrInput
 	// Name of the TCR namespace.
 	NamespaceName pulumi.StringInput
@@ -263,9 +293,7 @@ func (o RepositoryOutput) IsPublic() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Repository) pulumi.BoolOutput { return v.IsPublic }).(pulumi.BoolOutput)
 }
 
-// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-// as `sub1/sub2/repo`.
+// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
 func (o RepositoryOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Repository) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

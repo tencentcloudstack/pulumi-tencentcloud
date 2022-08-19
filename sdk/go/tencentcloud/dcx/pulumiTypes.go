@@ -10,199 +10,250 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type InstancesInstanceList struct {
-	Bandwidth           int      `pulumi:"bandwidth"`
-	BgpAsn              int      `pulumi:"bgpAsn"`
-	BgpAuthKey          string   `pulumi:"bgpAuthKey"`
-	CreateTime          string   `pulumi:"createTime"`
-	CustomerAddress     string   `pulumi:"customerAddress"`
-	DcId                string   `pulumi:"dcId"`
-	DcgId               string   `pulumi:"dcgId"`
-	DcxId               string   `pulumi:"dcxId"`
-	Name                string   `pulumi:"name"`
-	NetworkRegion       string   `pulumi:"networkRegion"`
-	NetworkType         string   `pulumi:"networkType"`
+type GetInstancesInstanceList struct {
+	// Bandwidth of the DC.
+	Bandwidth int `pulumi:"bandwidth"`
+	// BGP ASN of the user.
+	BgpAsn int `pulumi:"bgpAsn"`
+	// BGP key of the user.
+	BgpAuthKey string `pulumi:"bgpAuthKey"`
+	// Creation time of resource.
+	CreateTime string `pulumi:"createTime"`
+	// Interconnect IP of the DC within client.
+	CustomerAddress string `pulumi:"customerAddress"`
+	// ID of the DC.
+	DcId string `pulumi:"dcId"`
+	// ID of the DC Gateway. Currently only new in the console.
+	DcgId string `pulumi:"dcgId"`
+	// ID of the dedicated tunnels to be queried.
+	DcxId string `pulumi:"dcxId"`
+	// Name of the dedicated tunnels to be queried.
+	Name string `pulumi:"name"`
+	// The region of the dedicated tunnel.
+	NetworkRegion string `pulumi:"networkRegion"`
+	// Type of the network. Valid values: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
+	NetworkType string `pulumi:"networkType"`
+	// Static route, the network address of the user IDC.
 	RouteFilterPrefixes []string `pulumi:"routeFilterPrefixes"`
-	RouteType           string   `pulumi:"routeType"`
-	State               string   `pulumi:"state"`
-	TencentAddress      string   `pulumi:"tencentAddress"`
-	Vlan                int      `pulumi:"vlan"`
-	VpcId               string   `pulumi:"vpcId"`
+	// Type of the route. Valid values: `BGP` and `STATIC`. The default value is `BGP`.
+	RouteType string `pulumi:"routeType"`
+	// State of the dedicated tunnels. Valid values: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
+	State string `pulumi:"state"`
+	// Interconnect IP of the DC within Tencent.
+	TencentAddress string `pulumi:"tencentAddress"`
+	// Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. `0` means that only one tunnel can be created for the physical connect.
+	Vlan int `pulumi:"vlan"`
+	// ID of the VPC or BMVPC.
+	VpcId string `pulumi:"vpcId"`
 }
 
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
 }
 
-type InstancesInstanceListArgs struct {
-	Bandwidth           pulumi.IntInput         `pulumi:"bandwidth"`
-	BgpAsn              pulumi.IntInput         `pulumi:"bgpAsn"`
-	BgpAuthKey          pulumi.StringInput      `pulumi:"bgpAuthKey"`
-	CreateTime          pulumi.StringInput      `pulumi:"createTime"`
-	CustomerAddress     pulumi.StringInput      `pulumi:"customerAddress"`
-	DcId                pulumi.StringInput      `pulumi:"dcId"`
-	DcgId               pulumi.StringInput      `pulumi:"dcgId"`
-	DcxId               pulumi.StringInput      `pulumi:"dcxId"`
-	Name                pulumi.StringInput      `pulumi:"name"`
-	NetworkRegion       pulumi.StringInput      `pulumi:"networkRegion"`
-	NetworkType         pulumi.StringInput      `pulumi:"networkType"`
+type GetInstancesInstanceListArgs struct {
+	// Bandwidth of the DC.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// BGP ASN of the user.
+	BgpAsn pulumi.IntInput `pulumi:"bgpAsn"`
+	// BGP key of the user.
+	BgpAuthKey pulumi.StringInput `pulumi:"bgpAuthKey"`
+	// Creation time of resource.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Interconnect IP of the DC within client.
+	CustomerAddress pulumi.StringInput `pulumi:"customerAddress"`
+	// ID of the DC.
+	DcId pulumi.StringInput `pulumi:"dcId"`
+	// ID of the DC Gateway. Currently only new in the console.
+	DcgId pulumi.StringInput `pulumi:"dcgId"`
+	// ID of the dedicated tunnels to be queried.
+	DcxId pulumi.StringInput `pulumi:"dcxId"`
+	// Name of the dedicated tunnels to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The region of the dedicated tunnel.
+	NetworkRegion pulumi.StringInput `pulumi:"networkRegion"`
+	// Type of the network. Valid values: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
+	NetworkType pulumi.StringInput `pulumi:"networkType"`
+	// Static route, the network address of the user IDC.
 	RouteFilterPrefixes pulumi.StringArrayInput `pulumi:"routeFilterPrefixes"`
-	RouteType           pulumi.StringInput      `pulumi:"routeType"`
-	State               pulumi.StringInput      `pulumi:"state"`
-	TencentAddress      pulumi.StringInput      `pulumi:"tencentAddress"`
-	Vlan                pulumi.IntInput         `pulumi:"vlan"`
-	VpcId               pulumi.StringInput      `pulumi:"vpcId"`
+	// Type of the route. Valid values: `BGP` and `STATIC`. The default value is `BGP`.
+	RouteType pulumi.StringInput `pulumi:"routeType"`
+	// State of the dedicated tunnels. Valid values: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
+	State pulumi.StringInput `pulumi:"state"`
+	// Interconnect IP of the DC within Tencent.
+	TencentAddress pulumi.StringInput `pulumi:"tencentAddress"`
+	// Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. `0` means that only one tunnel can be created for the physical connect.
+	Vlan pulumi.IntInput `pulumi:"vlan"`
+	// ID of the VPC or BMVPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
 }
 
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
 }
 
-type InstancesInstanceListArray []InstancesInstanceListInput
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
 
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
 }
 
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) Bandwidth() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Bandwidth }).(pulumi.IntOutput)
+// Bandwidth of the DC.
+func (o GetInstancesInstanceListOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Bandwidth }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) BgpAsn() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.BgpAsn }).(pulumi.IntOutput)
+// BGP ASN of the user.
+func (o GetInstancesInstanceListOutput) BgpAsn() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.BgpAsn }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) BgpAuthKey() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.BgpAuthKey }).(pulumi.StringOutput)
+// BGP key of the user.
+func (o GetInstancesInstanceListOutput) BgpAuthKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.BgpAuthKey }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of resource.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CustomerAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CustomerAddress }).(pulumi.StringOutput)
+// Interconnect IP of the DC within client.
+func (o GetInstancesInstanceListOutput) CustomerAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CustomerAddress }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) DcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.DcId }).(pulumi.StringOutput)
+// ID of the DC.
+func (o GetInstancesInstanceListOutput) DcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DcId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) DcgId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.DcgId }).(pulumi.StringOutput)
+// ID of the DC Gateway. Currently only new in the console.
+func (o GetInstancesInstanceListOutput) DcgId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DcgId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) DcxId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.DcxId }).(pulumi.StringOutput)
+// ID of the dedicated tunnels to be queried.
+func (o GetInstancesInstanceListOutput) DcxId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DcxId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the dedicated tunnels to be queried.
+func (o GetInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) NetworkRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.NetworkRegion }).(pulumi.StringOutput)
+// The region of the dedicated tunnel.
+func (o GetInstancesInstanceListOutput) NetworkRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.NetworkRegion }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) NetworkType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.NetworkType }).(pulumi.StringOutput)
+// Type of the network. Valid values: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
+func (o GetInstancesInstanceListOutput) NetworkType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.NetworkType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) RouteFilterPrefixes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceList) []string { return v.RouteFilterPrefixes }).(pulumi.StringArrayOutput)
+// Static route, the network address of the user IDC.
+func (o GetInstancesInstanceListOutput) RouteFilterPrefixes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []string { return v.RouteFilterPrefixes }).(pulumi.StringArrayOutput)
 }
 
-func (o InstancesInstanceListOutput) RouteType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.RouteType }).(pulumi.StringOutput)
+// Type of the route. Valid values: `BGP` and `STATIC`. The default value is `BGP`.
+func (o GetInstancesInstanceListOutput) RouteType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.RouteType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.State }).(pulumi.StringOutput)
+// State of the dedicated tunnels. Valid values: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
+func (o GetInstancesInstanceListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.State }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) TencentAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.TencentAddress }).(pulumi.StringOutput)
+// Interconnect IP of the DC within Tencent.
+func (o GetInstancesInstanceListOutput) TencentAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.TencentAddress }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Vlan() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Vlan }).(pulumi.IntOutput)
+// Vlan of the dedicated tunnels.  Valid value ranges: [0-3000]. `0` means that only one tunnel can be created for the physical connect.
+func (o GetInstancesInstanceListOutput) Vlan() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Vlan }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of the VPC or BMVPC.
+func (o GetInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 }

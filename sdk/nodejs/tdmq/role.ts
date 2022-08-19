@@ -4,6 +4,48 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a TDMQ role.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tdmq.Instance("foo", {
+ *     clusterName: "example",
+ *     remark: "this is description.",
+ * });
+ * const barNamespace = new tencentcloud.Tdmq.Namespace("bar", {
+ *     clusterId: foo.id,
+ *     environName: "example",
+ *     msgTtl: 300,
+ *     remark: "this is description.",
+ * });
+ * const barTopic = new tencentcloud.Tdmq.Topic("bar", {
+ *     clusterId: foo.id,
+ *     environId: barNamespace.id,
+ *     partitions: 6,
+ *     remark: "this is description.",
+ *     topicName: "example",
+ *     topicType: 0,
+ * });
+ * const barRole = new tencentcloud.Tdmq.Role("bar", {
+ *     clusterId: foo.id,
+ *     remark: "this is description world",
+ *     roleName: "example",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Tdmq instance can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tdmq/role:Role test tdmq_id
+ * ```
+ */
 export class Role extends pulumi.CustomResource {
     /**
      * Get an existing Role resource's state with the given name, ID, and optional extra

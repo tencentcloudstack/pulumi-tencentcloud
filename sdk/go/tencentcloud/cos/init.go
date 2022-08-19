@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -21,12 +21,12 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cos/bucket:Bucket":
+		r = &Bucket{}
 	case "tencentcloud:Cos/bucketObject:BucketObject":
 		r = &BucketObject{}
 	case "tencentcloud:Cos/bucketPolicy:BucketPolicy":
 		r = &BucketPolicy{}
-	case "tencentcloud:Cos/cosBucket:CosBucket":
-		r = &CosBucket{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -42,17 +42,17 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cos/bucket",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cos/bucketObject",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cos/bucketPolicy",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Cos/cosBucket",
 		&module{version},
 	)
 }

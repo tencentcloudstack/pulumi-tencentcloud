@@ -6,11 +6,11 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./accessGroup";
-export * from "./accessGroups";
 export * from "./accessRule";
-export * from "./accessRules";
 export * from "./fileSystem";
-export * from "./fileSystems";
+export * from "./getAccessGroups";
+export * from "./getAccessRules";
+export * from "./getFileSystems";
 
 // Import resources to register:
 import { AccessGroup } from "./accessGroup";

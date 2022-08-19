@@ -9,6 +9,52 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cynosdb
 {
+    /// <summary>
+    /// Provide a resource to create a CynosDB readonly instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cynosdb.ReadonlyInstance("foo", new Tencentcloud.Cynosdb.ReadonlyInstanceArgs
+    ///         {
+    ///             ClusterId = cynosdbmysql_dzj5l8gz,
+    ///             InstanceName = "tf-cynosdb-readonly-instance",
+    ///             ForceDelete = true,
+    ///             InstanceCpuCore = 2,
+    ///             InstanceMemorySize = 4,
+    ///             InstanceMaintainDuration = 7200,
+    ///             InstanceMaintainStartTime = 21600,
+    ///             InstanceMaintainWeekdays = 
+    ///             {
+    ///                 "Fri",
+    ///                 "Mon",
+    ///                 "Sat",
+    ///                 "Sun",
+    ///                 "Thu",
+    ///                 "Wed",
+    ///                 "Tue",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CynosDB readonly instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance")]
     public partial class ReadonlyInstance : Pulumi.CustomResource
     {
@@ -19,15 +65,13 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted
-        /// instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-        /// effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceCpuCore")]
         public Output<int> InstanceCpuCore { get; private set; } = null!;
@@ -51,8 +95,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Output<ImmutableArray<string>> InstanceMaintainWeekdays { get; private set; } = null!;
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-        /// if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceMemorySize")]
         public Output<int> InstanceMemorySize { get; private set; } = null!;
@@ -128,15 +171,13 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted
-        /// instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-        /// effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceCpuCore", required: true)]
         public Input<int> InstanceCpuCore { get; set; } = null!;
@@ -166,8 +207,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-        /// if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceMemorySize", required: true)]
         public Input<int> InstanceMemorySize { get; set; } = null!;
@@ -192,15 +232,13 @@ namespace Pulumi.Tencentcloud.Cynosdb
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted
-        /// instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-        /// effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceCpuCore")]
         public Input<int>? InstanceCpuCore { get; set; }
@@ -230,8 +268,7 @@ namespace Pulumi.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-        /// if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceMemorySize")]
         public Input<int>? InstanceMemorySize { get; set; }

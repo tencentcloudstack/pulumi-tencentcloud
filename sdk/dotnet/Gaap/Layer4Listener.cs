@@ -9,19 +9,81 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Gaap
 {
+    /// <summary>
+    /// Provides a resource to create a layer4 listener of GAAP.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
+    ///         {
+    ///             Bandwidth = 10,
+    ///             Concurrent = 2,
+    ///             AccessRegion = "SouthChina",
+    ///             RealserverRegion = "NorthChina",
+    ///         });
+    ///         var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new Tencentcloud.Gaap.RealserverArgs
+    ///         {
+    ///             Ip = "1.1.1.1",
+    ///         });
+    ///         var bar = new Tencentcloud.Gaap.Realserver("bar", new Tencentcloud.Gaap.RealserverArgs
+    ///         {
+    ///             Ip = "119.29.29.29",
+    ///         });
+    ///         var fooLayer4Listener = new Tencentcloud.Gaap.Layer4Listener("fooLayer4Listener", new Tencentcloud.Gaap.Layer4ListenerArgs
+    ///         {
+    ///             Protocol = "TCP",
+    ///             Port = 80,
+    ///             RealserverType = "IP",
+    ///             ProxyId = fooProxy.Id,
+    ///             HealthCheck = true,
+    ///             RealserverBindSets = 
+    ///             {
+    ///                 new Tencentcloud.Gaap.Inputs.Layer4ListenerRealserverBindSetArgs
+    ///                 {
+    ///                     Id = fooRealserver.Id,
+    ///                     Ip = fooRealserver.Ip,
+    ///                     Port = 80,
+    ///                 },
+    ///                 new Tencentcloud.Gaap.Inputs.Layer4ListenerRealserverBindSetArgs
+    ///                 {
+    ///                     Id = bar.Id,
+    ///                     Ip = bar.Ip,
+    ///                     Port = 80,
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// GAAP layer4 listener can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/layer4Listener:Layer4Listener")]
     public partial class Layer4Listener : Pulumi.CustomResource
     {
         /// <summary>
-        /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-        /// listeners of `TCP` protocol.
+        /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         /// </summary>
         [Output("clientIpMethod")]
         public Output<int?> ClientIpMethod { get; private set; } = null!;
 
         /// <summary>
-        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-        /// `TCP` protocol and require less than `interval`.
+        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         /// </summary>
         [Output("connectTimeout")]
         public Output<int?> ConnectTimeout { get; private set; } = null!;
@@ -75,8 +137,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Output<ImmutableArray<Outputs.Layer4ListenerRealserverBindSet>> RealserverBindSets { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-        /// `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        /// Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         /// </summary>
         [Output("realserverType")]
         public Output<string> RealserverType { get; private set; } = null!;
@@ -140,15 +201,13 @@ namespace Pulumi.Tencentcloud.Gaap
     public sealed class Layer4ListenerArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-        /// listeners of `TCP` protocol.
+        /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         /// </summary>
         [Input("clientIpMethod")]
         public Input<int>? ClientIpMethod { get; set; }
 
         /// <summary>
-        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-        /// `TCP` protocol and require less than `interval`.
+        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         /// </summary>
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
@@ -202,8 +261,7 @@ namespace Pulumi.Tencentcloud.Gaap
         }
 
         /// <summary>
-        /// Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-        /// `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        /// Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         /// </summary>
         [Input("realserverType", required: true)]
         public Input<string> RealserverType { get; set; } = null!;
@@ -222,15 +280,13 @@ namespace Pulumi.Tencentcloud.Gaap
     public sealed class Layer4ListenerState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-        /// listeners of `TCP` protocol.
+        /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         /// </summary>
         [Input("clientIpMethod")]
         public Input<int>? ClientIpMethod { get; set; }
 
         /// <summary>
-        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-        /// `TCP` protocol and require less than `interval`.
+        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         /// </summary>
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
@@ -290,8 +346,7 @@ namespace Pulumi.Tencentcloud.Gaap
         }
 
         /// <summary>
-        /// Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-        /// `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        /// Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         /// </summary>
         [Input("realserverType")]
         public Input<string>? RealserverType { get; set; }

@@ -7,8 +7,8 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./gateway";
 export * from "./gatewaySnat";
-export * from "./gatewaySnats";
-export * from "./gateways";
+export * from "./getGatewaySnats";
+export * from "./getGateways";
 
 // Import resources to register:
 import { Gateway } from "./gateway";

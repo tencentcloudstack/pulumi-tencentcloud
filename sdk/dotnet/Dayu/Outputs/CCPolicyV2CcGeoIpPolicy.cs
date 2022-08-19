@@ -11,18 +11,39 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCPolicyV2CcGeoIpPolicy
+    public sealed class CcPolicyV2CcGeoIpPolicy
     {
+        /// <summary>
+        /// User action, drop or arg.
+        /// </summary>
         public readonly string Action;
+        /// <summary>
+        /// The list of region IDs that the user selects to block.
+        /// </summary>
         public readonly ImmutableArray<int> AreaLists;
+        /// <summary>
+        /// Create time.
+        /// </summary>
         public readonly string? CreateTime;
+        /// <summary>
+        /// domain.
+        /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Modify time.
+        /// </summary>
         public readonly string? ModifyTime;
+        /// <summary>
+        /// Protocol, preferably HTTP, HTTPS.
+        /// </summary>
         public readonly string Protocol;
+        /// <summary>
+        /// Regional types, divided into china, oversea and customized.
+        /// </summary>
         public readonly string RegionType;
 
         [OutputConstructor]
-        private CCPolicyV2CcGeoIpPolicy(
+        private CcPolicyV2CcGeoIpPolicy(
             string action,
 
             ImmutableArray<int> areaLists,

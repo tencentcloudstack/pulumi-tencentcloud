@@ -9,15 +9,15 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'APIRequestParameterArgs',
-    'APIResponseErrorCodeArgs',
+    'ApiRequestParameterArgs',
+    'ApiResponseErrorCodeArgs',
     'ServiceApiListArgs',
     'ServiceUsagePlanListArgs',
     'UsagePlanAttachListArgs',
 ]
 
 @pulumi.input_type
-class APIRequestParameterArgs:
+class ApiRequestParameterArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  position: pulumi.Input[str],
@@ -25,6 +25,14 @@ class APIRequestParameterArgs:
                  default_value: Optional[pulumi.Input[str]] = None,
                  desc: Optional[pulumi.Input[str]] = None,
                  required: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] name: Parameter name.
+        :param pulumi.Input[str] position: Parameter location.
+        :param pulumi.Input[str] type: Parameter type.
+        :param pulumi.Input[str] default_value: Parameter default value.
+        :param pulumi.Input[str] desc: Parameter description.
+        :param pulumi.Input[bool] required: If this parameter required. Default value: `false`.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "position", position)
         pulumi.set(__self__, "type", type)
@@ -38,6 +46,9 @@ class APIRequestParameterArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Parameter name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -47,6 +58,9 @@ class APIRequestParameterArgs:
     @property
     @pulumi.getter
     def position(self) -> pulumi.Input[str]:
+        """
+        Parameter location.
+        """
         return pulumi.get(self, "position")
 
     @position.setter
@@ -56,6 +70,9 @@ class APIRequestParameterArgs:
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
+        """
+        Parameter type.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -65,6 +82,9 @@ class APIRequestParameterArgs:
     @property
     @pulumi.getter(name="defaultValue")
     def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter default value.
+        """
         return pulumi.get(self, "default_value")
 
     @default_value.setter
@@ -74,6 +94,9 @@ class APIRequestParameterArgs:
     @property
     @pulumi.getter
     def desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter description.
+        """
         return pulumi.get(self, "desc")
 
     @desc.setter
@@ -83,6 +106,9 @@ class APIRequestParameterArgs:
     @property
     @pulumi.getter
     def required(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If this parameter required. Default value: `false`.
+        """
         return pulumi.get(self, "required")
 
     @required.setter
@@ -91,13 +117,20 @@ class APIRequestParameterArgs:
 
 
 @pulumi.input_type
-class APIResponseErrorCodeArgs:
+class ApiResponseErrorCodeArgs:
     def __init__(__self__, *,
                  code: pulumi.Input[int],
                  msg: pulumi.Input[str],
                  converted_code: Optional[pulumi.Input[int]] = None,
                  desc: Optional[pulumi.Input[str]] = None,
                  need_convert: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[int] code: Custom response configuration error code.
+        :param pulumi.Input[str] msg: Custom response configuration error message.
+        :param pulumi.Input[int] converted_code: Custom error code conversion.
+        :param pulumi.Input[str] desc: Parameter description.
+        :param pulumi.Input[bool] need_convert: Whether to enable error code conversion. Default value: `false`.
+        """
         pulumi.set(__self__, "code", code)
         pulumi.set(__self__, "msg", msg)
         if converted_code is not None:
@@ -110,6 +143,9 @@ class APIResponseErrorCodeArgs:
     @property
     @pulumi.getter
     def code(self) -> pulumi.Input[int]:
+        """
+        Custom response configuration error code.
+        """
         return pulumi.get(self, "code")
 
     @code.setter
@@ -119,6 +155,9 @@ class APIResponseErrorCodeArgs:
     @property
     @pulumi.getter
     def msg(self) -> pulumi.Input[str]:
+        """
+        Custom response configuration error message.
+        """
         return pulumi.get(self, "msg")
 
     @msg.setter
@@ -128,6 +167,9 @@ class APIResponseErrorCodeArgs:
     @property
     @pulumi.getter(name="convertedCode")
     def converted_code(self) -> Optional[pulumi.Input[int]]:
+        """
+        Custom error code conversion.
+        """
         return pulumi.get(self, "converted_code")
 
     @converted_code.setter
@@ -137,6 +179,9 @@ class APIResponseErrorCodeArgs:
     @property
     @pulumi.getter
     def desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter description.
+        """
         return pulumi.get(self, "desc")
 
     @desc.setter
@@ -146,6 +191,9 @@ class APIResponseErrorCodeArgs:
     @property
     @pulumi.getter(name="needConvert")
     def need_convert(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable error code conversion. Default value: `false`.
+        """
         return pulumi.get(self, "need_convert")
 
     @need_convert.setter
@@ -161,6 +209,13 @@ class ServiceApiListArgs:
                  api_name: Optional[pulumi.Input[str]] = None,
                  method: Optional[pulumi.Input[str]] = None,
                  path: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_desc: Description of the API.
+        :param pulumi.Input[str] api_id: ID of the API.
+        :param pulumi.Input[str] api_name: Name of the API.
+        :param pulumi.Input[str] method: Method of the API.
+        :param pulumi.Input[str] path: Path of the API.
+        """
         if api_desc is not None:
             pulumi.set(__self__, "api_desc", api_desc)
         if api_id is not None:
@@ -175,6 +230,9 @@ class ServiceApiListArgs:
     @property
     @pulumi.getter(name="apiDesc")
     def api_desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Description of the API.
+        """
         return pulumi.get(self, "api_desc")
 
     @api_desc.setter
@@ -184,6 +242,9 @@ class ServiceApiListArgs:
     @property
     @pulumi.getter(name="apiId")
     def api_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the API.
+        """
         return pulumi.get(self, "api_id")
 
     @api_id.setter
@@ -193,6 +254,9 @@ class ServiceApiListArgs:
     @property
     @pulumi.getter(name="apiName")
     def api_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the API.
+        """
         return pulumi.get(self, "api_name")
 
     @api_name.setter
@@ -202,6 +266,9 @@ class ServiceApiListArgs:
     @property
     @pulumi.getter
     def method(self) -> Optional[pulumi.Input[str]]:
+        """
+        Method of the API.
+        """
         return pulumi.get(self, "method")
 
     @method.setter
@@ -211,6 +278,9 @@ class ServiceApiListArgs:
     @property
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path of the API.
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -225,6 +295,12 @@ class ServiceUsagePlanListArgs:
                  bind_type: Optional[pulumi.Input[str]] = None,
                  usage_plan_id: Optional[pulumi.Input[str]] = None,
                  usage_plan_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_id: ID of the API.
+        :param pulumi.Input[str] bind_type: Binding type.
+        :param pulumi.Input[str] usage_plan_id: ID of the usage plan.
+        :param pulumi.Input[str] usage_plan_name: Name of the usage plan.
+        """
         if api_id is not None:
             pulumi.set(__self__, "api_id", api_id)
         if bind_type is not None:
@@ -237,6 +313,9 @@ class ServiceUsagePlanListArgs:
     @property
     @pulumi.getter(name="apiId")
     def api_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the API.
+        """
         return pulumi.get(self, "api_id")
 
     @api_id.setter
@@ -246,6 +325,9 @@ class ServiceUsagePlanListArgs:
     @property
     @pulumi.getter(name="bindType")
     def bind_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Binding type.
+        """
         return pulumi.get(self, "bind_type")
 
     @bind_type.setter
@@ -255,6 +337,9 @@ class ServiceUsagePlanListArgs:
     @property
     @pulumi.getter(name="usagePlanId")
     def usage_plan_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the usage plan.
+        """
         return pulumi.get(self, "usage_plan_id")
 
     @usage_plan_id.setter
@@ -264,6 +349,9 @@ class ServiceUsagePlanListArgs:
     @property
     @pulumi.getter(name="usagePlanName")
     def usage_plan_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the usage plan.
+        """
         return pulumi.get(self, "usage_plan_name")
 
     @usage_plan_name.setter
@@ -283,6 +371,17 @@ class UsagePlanAttachListArgs:
                  path: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
                  service_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_id: The API ID, this value is empty if attach service.
+        :param pulumi.Input[str] api_name: The API name, this value is empty if attach service.
+        :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param pulumi.Input[str] environment: The environment name.
+        :param pulumi.Input[str] method: The API method, this value is empty if attach service.
+        :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param pulumi.Input[str] path: The API path, this value is empty if attach service.
+        :param pulumi.Input[str] service_id: The service ID.
+        :param pulumi.Input[str] service_name: The service name.
+        """
         if api_id is not None:
             pulumi.set(__self__, "api_id", api_id)
         if api_name is not None:
@@ -305,6 +404,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter(name="apiId")
     def api_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The API ID, this value is empty if attach service.
+        """
         return pulumi.get(self, "api_id")
 
     @api_id.setter
@@ -314,6 +416,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter(name="apiName")
     def api_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The API name, this value is empty if attach service.
+        """
         return pulumi.get(self, "api_name")
 
     @api_name.setter
@@ -323,6 +428,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
         return pulumi.get(self, "create_time")
 
     @create_time.setter
@@ -332,6 +440,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter
     def environment(self) -> Optional[pulumi.Input[str]]:
+        """
+        The environment name.
+        """
         return pulumi.get(self, "environment")
 
     @environment.setter
@@ -341,6 +452,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter
     def method(self) -> Optional[pulumi.Input[str]]:
+        """
+        The API method, this value is empty if attach service.
+        """
         return pulumi.get(self, "method")
 
     @method.setter
@@ -350,6 +464,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
         return pulumi.get(self, "modify_time")
 
     @modify_time.setter
@@ -359,6 +476,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The API path, this value is empty if attach service.
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -368,6 +488,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The service ID.
+        """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
@@ -377,6 +500,9 @@ class UsagePlanAttachListArgs:
     @property
     @pulumi.getter(name="serviceName")
     def service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The service name.
+        """
         return pulumi.get(self, "service_name")
 
     @service_name.setter

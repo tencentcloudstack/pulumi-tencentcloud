@@ -9,6 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Ckafka
 {
+    /// <summary>
+    /// Provides a resource to create a Ckafka user.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// Ckafka User
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Ckafka.User("foo", new Tencentcloud.Ckafka.UserArgs
+    ///         {
+    ///             AccountName = "tf-test",
+    ///             InstanceId = "ckafka-f9ife4zz",
+    ///             Password = "test1234",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Ckafka user can be imported using the instance_id#account_name, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/user:User")]
     public partial class User : Pulumi.CustomResource
     {

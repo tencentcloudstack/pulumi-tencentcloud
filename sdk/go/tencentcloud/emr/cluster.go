@@ -11,6 +11,72 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a emr cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Emr.NewCluster(ctx, "emrrrr", &Emr.ClusterArgs{
+// 			ProductId:       pulumi.Int(4),
+// 			DisplayStrategy: pulumi.String("clusterList"),
+// 			VpcSettings: pulumi.AnyMap{
+// 				"vpc_id":    pulumi.Any("vpc-fuwly8x5"),
+// 				"subnet_id": pulumi.Any("subnet-d830wfso"),
+// 			},
+// 			Softwares: pulumi.StringArray{
+// 				pulumi.String("hadoop-2.8.4"),
+// 				pulumi.String("zookeeper-3.4.9"),
+// 			},
+// 			SupportHa:    pulumi.Int(0),
+// 			InstanceName: pulumi.String("emr-test"),
+// 			ResourceSpec: &emr.ClusterResourceSpecArgs{
+// 				MasterResourceSpec: &emr.ClusterResourceSpecMasterResourceSpecArgs{
+// 					MemSize:     pulumi.Int(8192),
+// 					Cpu:         pulumi.Int(4),
+// 					DiskSize:    pulumi.Int(100),
+// 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
+// 					Spec:        pulumi.String("CVM.S2"),
+// 					StorageType: pulumi.Int(5),
+// 				},
+// 				CoreResourceSpec: &emr.ClusterResourceSpecCoreResourceSpecArgs{
+// 					MemSize:     pulumi.Int(8192),
+// 					Cpu:         pulumi.Int(4),
+// 					DiskSize:    pulumi.Int(100),
+// 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
+// 					Spec:        pulumi.String("CVM.S2"),
+// 					StorageType: pulumi.Int(5),
+// 				},
+// 				MasterCount: pulumi.Int(1),
+// 				CoreCount:   pulumi.Int(2),
+// 			},
+// 			LoginSettings: pulumi.AnyMap{
+// 				"password": pulumi.Any("Tencent@cloud123"),
+// 			},
+// 			TimeSpan: pulumi.Int(1),
+// 			TimeUnit: pulumi.String("m"),
+// 			PayMode:  pulumi.Int(1),
+// 			Placement: pulumi.AnyMap{
+// 				"zone":       pulumi.Any("ap-guangzhou-3"),
+// 				"project_id": pulumi.Any(0),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Cluster struct {
 	pulumi.CustomResourceState
 
@@ -20,14 +86,14 @@ type Cluster struct {
 	ExtendFsField pulumi.StringPtrOutput `pulumi:"extendFsField"`
 	// Created EMR instance id.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
-	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Instance login settings.
 	LoginSettings pulumi.MapOutput `pulumi:"loginSettings"`
-	// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-	// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-	// cluster Master node internet is enabled.
+	// Whether to enable the cluster Master node public network. Value range:
+	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+	// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+	//   By default, the cluster Master node internet is enabled.
 	NeedMasterWan pulumi.StringPtrOutput `pulumi:"needMasterWan"`
 	// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
 	PayMode pulumi.IntOutput `pulumi:"payMode"`
@@ -43,12 +109,10 @@ type Cluster struct {
 	Softwares pulumi.StringArrayOutput `pulumi:"softwares"`
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa pulumi.IntOutput `pulumi:"supportHa"`
-	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-	// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-	// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntOutput `pulumi:"timeSpan"`
-	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-	// When PayMode is 1, TimeUnit can only take the value m(month).
+	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
 	TimeUnit pulumi.StringOutput `pulumi:"timeUnit"`
 	// The private net config of EMR instance.
 	VpcSettings pulumi.MapOutput `pulumi:"vpcSettings"`
@@ -122,14 +186,14 @@ type clusterState struct {
 	ExtendFsField *string `pulumi:"extendFsField"`
 	// Created EMR instance id.
 	InstanceId *string `pulumi:"instanceId"`
-	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
 	// Instance login settings.
 	LoginSettings map[string]interface{} `pulumi:"loginSettings"`
-	// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-	// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-	// cluster Master node internet is enabled.
+	// Whether to enable the cluster Master node public network. Value range:
+	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+	// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+	//   By default, the cluster Master node internet is enabled.
 	NeedMasterWan *string `pulumi:"needMasterWan"`
 	// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
 	PayMode *int `pulumi:"payMode"`
@@ -145,12 +209,10 @@ type clusterState struct {
 	Softwares []string `pulumi:"softwares"`
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa *int `pulumi:"supportHa"`
-	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-	// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-	// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan *int `pulumi:"timeSpan"`
-	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-	// When PayMode is 1, TimeUnit can only take the value m(month).
+	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
 	TimeUnit *string `pulumi:"timeUnit"`
 	// The private net config of EMR instance.
 	VpcSettings map[string]interface{} `pulumi:"vpcSettings"`
@@ -163,14 +225,14 @@ type ClusterState struct {
 	ExtendFsField pulumi.StringPtrInput
 	// Created EMR instance id.
 	InstanceId pulumi.StringPtrInput
-	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
 	// Instance login settings.
 	LoginSettings pulumi.MapInput
-	// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-	// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-	// cluster Master node internet is enabled.
+	// Whether to enable the cluster Master node public network. Value range:
+	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+	// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+	//   By default, the cluster Master node internet is enabled.
 	NeedMasterWan pulumi.StringPtrInput
 	// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
 	PayMode pulumi.IntPtrInput
@@ -186,12 +248,10 @@ type ClusterState struct {
 	Softwares pulumi.StringArrayInput
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa pulumi.IntPtrInput
-	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-	// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-	// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntPtrInput
-	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-	// When PayMode is 1, TimeUnit can only take the value m(month).
+	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
 	TimeUnit pulumi.StringPtrInput
 	// The private net config of EMR instance.
 	VpcSettings pulumi.MapInput
@@ -206,14 +266,14 @@ type clusterArgs struct {
 	DisplayStrategy string `pulumi:"displayStrategy"`
 	// Access the external file system.
 	ExtendFsField *string `pulumi:"extendFsField"`
-	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName string `pulumi:"instanceName"`
 	// Instance login settings.
 	LoginSettings map[string]interface{} `pulumi:"loginSettings"`
-	// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-	// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-	// cluster Master node internet is enabled.
+	// Whether to enable the cluster Master node public network. Value range:
+	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+	// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+	//   By default, the cluster Master node internet is enabled.
 	NeedMasterWan *string `pulumi:"needMasterWan"`
 	// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
 	PayMode int `pulumi:"payMode"`
@@ -229,12 +289,10 @@ type clusterArgs struct {
 	Softwares []string `pulumi:"softwares"`
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa int `pulumi:"supportHa"`
-	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-	// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-	// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan int `pulumi:"timeSpan"`
-	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-	// When PayMode is 1, TimeUnit can only take the value m(month).
+	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
 	TimeUnit string `pulumi:"timeUnit"`
 	// The private net config of EMR instance.
 	VpcSettings map[string]interface{} `pulumi:"vpcSettings"`
@@ -246,14 +304,14 @@ type ClusterArgs struct {
 	DisplayStrategy pulumi.StringInput
 	// Access the external file system.
 	ExtendFsField pulumi.StringPtrInput
-	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-	// underscores(_).
+	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringInput
 	// Instance login settings.
 	LoginSettings pulumi.MapInput
-	// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-	// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-	// cluster Master node internet is enabled.
+	// Whether to enable the cluster Master node public network. Value range:
+	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+	// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+	//   By default, the cluster Master node internet is enabled.
 	NeedMasterWan pulumi.StringPtrInput
 	// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
 	PayMode pulumi.IntInput
@@ -269,12 +327,10 @@ type ClusterArgs struct {
 	Softwares pulumi.StringArrayInput
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa pulumi.IntInput
-	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-	// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-	// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntInput
-	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-	// When PayMode is 1, TimeUnit can only take the value m(month).
+	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
 	TimeUnit pulumi.StringInput
 	// The private net config of EMR instance.
 	VpcSettings pulumi.MapInput
@@ -382,8 +438,7 @@ func (o ClusterOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-// underscores(_).
+// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 func (o ClusterOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
 }
@@ -393,9 +448,10 @@ func (o ClusterOutput) LoginSettings() pulumi.MapOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.MapOutput { return v.LoginSettings }).(pulumi.MapOutput)
 }
 
-// Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-// Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-// cluster Master node internet is enabled.
+// Whether to enable the cluster Master node public network. Value range:
+// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+//   By default, the cluster Master node internet is enabled.
 func (o ClusterOutput) NeedMasterWan() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.NeedMasterWan }).(pulumi.StringPtrOutput)
 }
@@ -435,15 +491,13 @@ func (o ClusterOutput) SupportHa() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.SupportHa }).(pulumi.IntOutput)
 }
 
-// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-// at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-// length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 func (o ClusterOutput) TimeSpan() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.TimeSpan }).(pulumi.IntOutput)
 }
 
-// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-// When PayMode is 1, TimeUnit can only take the value m(month).
+// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
 func (o ClusterOutput) TimeUnit() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.TimeUnit }).(pulumi.StringOutput)
 }

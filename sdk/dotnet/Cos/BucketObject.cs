@@ -9,12 +9,63 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cos
 {
+    /// <summary>
+    /// Provides a COS object resource to put an object(content or file) to the bucket.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// Uploading a file to a bucket
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myobject = new Tencentcloud.Cos.BucketObject("myobject", new Tencentcloud.Cos.BucketObjectArgs
+    ///         {
+    ///             Bucket = "mycos-1258798060",
+    ///             Key = "new_object_key",
+    ///             Source = "path/to/file",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Uploading a content to a bucket
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
+    ///         {
+    ///             Bucket = "mycos-1258798060",
+    ///             Acl = "public-read",
+    ///         });
+    ///         var myobject = new Tencentcloud.Cos.BucketObject("myobject", new Tencentcloud.Cos.BucketObjectArgs
+    ///         {
+    ///             Bucket = mycos.CosBucket,
+    ///             Key = "new_object_key",
+    ///             Content = "the content that you want to upload.",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketObject:BucketObject")]
     public partial class BucketObject : Pulumi.CustomResource
     {
         /// <summary>
-        /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-        /// `private`.
+        /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         /// </summary>
         [Output("acl")]
         public Output<string?> Acl { get; private set; } = null!;
@@ -44,8 +95,7 @@ namespace Pulumi.Tencentcloud.Cos
         public Output<string?> ContentDisposition { get; private set; } = null!;
 
         /// <summary>
-        /// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-        /// obtain the media-type referenced by the Content-Type header field.
+        /// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         /// </summary>
         [Output("contentEncoding")]
         public Output<string?> ContentEncoding { get; private set; } = null!;
@@ -133,8 +183,7 @@ namespace Pulumi.Tencentcloud.Cos
     public sealed class BucketObjectArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-        /// `private`.
+        /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         /// </summary>
         [Input("acl")]
         public Input<string>? Acl { get; set; }
@@ -164,8 +213,7 @@ namespace Pulumi.Tencentcloud.Cos
         public Input<string>? ContentDisposition { get; set; }
 
         /// <summary>
-        /// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-        /// obtain the media-type referenced by the Content-Type header field.
+        /// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         /// </summary>
         [Input("contentEncoding")]
         public Input<string>? ContentEncoding { get; set; }
@@ -220,8 +268,7 @@ namespace Pulumi.Tencentcloud.Cos
     public sealed class BucketObjectState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-        /// `private`.
+        /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
         /// </summary>
         [Input("acl")]
         public Input<string>? Acl { get; set; }
@@ -251,8 +298,7 @@ namespace Pulumi.Tencentcloud.Cos
         public Input<string>? ContentDisposition { get; set; }
 
         /// <summary>
-        /// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-        /// obtain the media-type referenced by the Content-Type header field.
+        /// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         /// </summary>
         [Input("contentEncoding")]
         public Input<string>? ContentEncoding { get; set; }

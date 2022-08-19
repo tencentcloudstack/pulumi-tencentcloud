@@ -5,8 +5,8 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .ha_vip import *
+from .get_vip_eip_attachments import *
+from .get_vips import *
+from .vip import *
 from .vip_eip_attachment import *
-from .vip_eip_attachments import *
-from .vips import *
 from . import outputs

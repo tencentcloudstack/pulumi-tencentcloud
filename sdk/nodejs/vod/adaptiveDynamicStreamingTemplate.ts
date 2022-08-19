@@ -5,6 +5,65 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a VOD adaptive dynamic streaming template.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("foo", {
+ *     comment: "test",
+ *     disableHigherVideoBitrate: false,
+ *     disableHigherVideoResolution: false,
+ *     drmType: "SimpleAES",
+ *     format: "HLS",
+ *     streamInfos: [
+ *         {
+ *             audio: {
+ *                 audioChannel: "dual",
+ *                 bitrate: 129,
+ *                 codec: "libmp3lame",
+ *                 sampleRate: 44100,
+ *             },
+ *             removeAudio: false,
+ *             video: {
+ *                 bitrate: 129,
+ *                 codec: "libx265",
+ *                 fillType: "stretch",
+ *                 fps: 4,
+ *                 height: 128,
+ *                 resolutionAdaptive: false,
+ *                 width: 128,
+ *             },
+ *         },
+ *         {
+ *             audio: {
+ *                 bitrate: 256,
+ *                 codec: "libfdk_aac",
+ *                 sampleRate: 44100,
+ *             },
+ *             removeAudio: true,
+ *             video: {
+ *                 bitrate: 256,
+ *                 codec: "libx264",
+ *                 fps: 4,
+ *             },
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VOD adaptive dynamic streaming template can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+ * ```
+ */
 export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
     /**
      * Get an existing AdaptiveDynamicStreamingTemplate resource's state with the given name, ID, and optional extra
@@ -42,13 +101,11 @@ export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-     * `true`: yes. Default value: `false`.
+     * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
     public readonly disableHigherVideoBitrate!: pulumi.Output<boolean | undefined>;
     /**
-     * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-     * `true`: yes. Default value: `false`.
+     * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
     public readonly disableHigherVideoResolution!: pulumi.Output<boolean | undefined>;
     /**
@@ -64,14 +121,11 @@ export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-     * substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-     * first substream will be used as the output frame rate.
+     * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
      */
     public readonly streamInfos!: pulumi.Output<outputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfo[]>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-     * field; otherwise, leave it empty.
+     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
     public readonly subAppId!: pulumi.Output<number | undefined>;
     /**
@@ -139,13 +193,11 @@ export interface AdaptiveDynamicStreamingTemplateState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-     * `true`: yes. Default value: `false`.
+     * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
     disableHigherVideoBitrate?: pulumi.Input<boolean>;
     /**
-     * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-     * `true`: yes. Default value: `false`.
+     * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
     disableHigherVideoResolution?: pulumi.Input<boolean>;
     /**
@@ -161,14 +213,11 @@ export interface AdaptiveDynamicStreamingTemplateState {
      */
     name?: pulumi.Input<string>;
     /**
-     * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-     * substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-     * first substream will be used as the output frame rate.
+     * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
      */
     streamInfos?: pulumi.Input<pulumi.Input<inputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfo>[]>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-     * field; otherwise, leave it empty.
+     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
     subAppId?: pulumi.Input<number>;
     /**
@@ -186,13 +235,11 @@ export interface AdaptiveDynamicStreamingTemplateArgs {
      */
     comment?: pulumi.Input<string>;
     /**
-     * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-     * `true`: yes. Default value: `false`.
+     * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
     disableHigherVideoBitrate?: pulumi.Input<boolean>;
     /**
-     * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-     * `true`: yes. Default value: `false`.
+     * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
     disableHigherVideoResolution?: pulumi.Input<boolean>;
     /**
@@ -208,14 +255,11 @@ export interface AdaptiveDynamicStreamingTemplateArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-     * substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-     * first substream will be used as the output frame rate.
+     * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
      */
     streamInfos: pulumi.Input<pulumi.Input<inputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfo>[]>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-     * field; otherwise, leave it empty.
+     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
     subAppId?: pulumi.Input<number>;
 }

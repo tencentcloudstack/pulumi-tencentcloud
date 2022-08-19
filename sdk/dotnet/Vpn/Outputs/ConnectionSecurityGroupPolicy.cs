@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Vpn.Outputs
     [OutputType]
     public sealed class ConnectionSecurityGroupPolicy
     {
+        /// <summary>
+        /// Local cidr block.
+        /// </summary>
         public readonly string LocalCidrBlock;
+        /// <summary>
+        /// Remote cidr block list.
+        /// </summary>
         public readonly ImmutableArray<string> RemoteCidrBlocks;
 
         [OutputConstructor]

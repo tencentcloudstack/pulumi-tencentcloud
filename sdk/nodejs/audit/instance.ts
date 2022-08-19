@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create an audit.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Audit.Instance("foo", {
+ *     auditSwitch: true,
+ *     cosBucket: "test",
+ *     cosRegion: "ap-hongkong",
+ *     logFilePrefix: "test",
+ *     readWriteAttribute: 3,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Audit can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Audit/instance:Instance foo audit-test
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -50,8 +76,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly enableKmsEncry!: pulumi.Output<boolean | undefined>;
     /**
-     * Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-     * KMS must be as same as the `cos_region`.
+     * Existing CMK unique key. This field can be get by data source `tencentcloud.Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
      */
     public readonly keyId!: pulumi.Output<string | undefined>;
     /**
@@ -138,8 +163,7 @@ export interface InstanceState {
      */
     enableKmsEncry?: pulumi.Input<boolean>;
     /**
-     * Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-     * KMS must be as same as the `cos_region`.
+     * Existing CMK unique key. This field can be get by data source `tencentcloud.Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
      */
     keyId?: pulumi.Input<string>;
     /**
@@ -178,8 +202,7 @@ export interface InstanceArgs {
      */
     enableKmsEncry?: pulumi.Input<boolean>;
     /**
-     * Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-     * KMS must be as same as the `cos_region`.
+     * Existing CMK unique key. This field can be get by data source `tencentcloud.Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
      */
     keyId?: pulumi.Input<string>;
     /**

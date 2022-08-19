@@ -6,13 +6,13 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./connection";
-export * from "./connections";
 export * from "./customerGateway";
-export * from "./customerGateways";
 export * from "./gateway";
 export * from "./gatewayRoute";
-export * from "./gatewayRoutes";
-export * from "./gateways";
+export * from "./getConnections";
+export * from "./getCustomerGateways";
+export * from "./getGatewayRoutes";
+export * from "./getGateways";
 export * from "./sslClient";
 export * from "./sslServer";
 

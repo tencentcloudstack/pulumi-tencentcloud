@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a TDMQ instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tdmq.Instance("foo", {
+ *     clusterName: "example",
+ *     remark: "this is description.",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Tdmq instance can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra

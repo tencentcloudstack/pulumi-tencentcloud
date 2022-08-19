@@ -10,18 +10,27 @@ using Pulumi.Serialization;
 namespace Pulumi.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CCHttpsPolicyRuleListArgs : Pulumi.ResourceArgs
+    public sealed class CcHttpsPolicyRuleListArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Operator of the rule. Valid values are `include` and `equal`.
+        /// </summary>
         [Input("operator", required: true)]
         public Input<string> Operator { get; set; } = null!;
 
+        /// <summary>
+        /// Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+        /// </summary>
         [Input("skey", required: true)]
         public Input<string> Skey { get; set; } = null!;
 
+        /// <summary>
+        /// Rule value, then length should be less than 31 bytes.
+        /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 
-        public CCHttpsPolicyRuleListArgs()
+        public CcHttpsPolicyRuleListArgs()
         {
         }
     }

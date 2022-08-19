@@ -10,180 +10,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type ClustersList struct {
-	ApiAccessId           string `pulumi:"apiAccessId"`
-	ApiAccessIp           string `pulumi:"apiAccessIp"`
-	ApiAccessPort         int    `pulumi:"apiAccessPort"`
-	ClusterId             string `pulumi:"clusterId"`
-	ClusterName           string `pulumi:"clusterName"`
-	CreateTime            string `pulumi:"createTime"`
-	IdlType               string `pulumi:"idlType"`
-	NetworkType           string `pulumi:"networkType"`
-	OldPasswordExpireTime string `pulumi:"oldPasswordExpireTime"`
-	Password              string `pulumi:"password"`
-	PasswordStatus        string `pulumi:"passwordStatus"`
-	SubnetId              string `pulumi:"subnetId"`
-	VpcId                 string `pulumi:"vpcId"`
-}
-
-// ClustersListInput is an input type that accepts ClustersListArgs and ClustersListOutput values.
-// You can construct a concrete instance of `ClustersListInput` via:
-//
-//          ClustersListArgs{...}
-type ClustersListInput interface {
-	pulumi.Input
-
-	ToClustersListOutput() ClustersListOutput
-	ToClustersListOutputWithContext(context.Context) ClustersListOutput
-}
-
-type ClustersListArgs struct {
-	ApiAccessId           pulumi.StringInput `pulumi:"apiAccessId"`
-	ApiAccessIp           pulumi.StringInput `pulumi:"apiAccessIp"`
-	ApiAccessPort         pulumi.IntInput    `pulumi:"apiAccessPort"`
-	ClusterId             pulumi.StringInput `pulumi:"clusterId"`
-	ClusterName           pulumi.StringInput `pulumi:"clusterName"`
-	CreateTime            pulumi.StringInput `pulumi:"createTime"`
-	IdlType               pulumi.StringInput `pulumi:"idlType"`
-	NetworkType           pulumi.StringInput `pulumi:"networkType"`
-	OldPasswordExpireTime pulumi.StringInput `pulumi:"oldPasswordExpireTime"`
-	Password              pulumi.StringInput `pulumi:"password"`
-	PasswordStatus        pulumi.StringInput `pulumi:"passwordStatus"`
-	SubnetId              pulumi.StringInput `pulumi:"subnetId"`
-	VpcId                 pulumi.StringInput `pulumi:"vpcId"`
-}
-
-func (ClustersListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersList)(nil)).Elem()
-}
-
-func (i ClustersListArgs) ToClustersListOutput() ClustersListOutput {
-	return i.ToClustersListOutputWithContext(context.Background())
-}
-
-func (i ClustersListArgs) ToClustersListOutputWithContext(ctx context.Context) ClustersListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersListOutput)
-}
-
-// ClustersListArrayInput is an input type that accepts ClustersListArray and ClustersListArrayOutput values.
-// You can construct a concrete instance of `ClustersListArrayInput` via:
-//
-//          ClustersListArray{ ClustersListArgs{...} }
-type ClustersListArrayInput interface {
-	pulumi.Input
-
-	ToClustersListArrayOutput() ClustersListArrayOutput
-	ToClustersListArrayOutputWithContext(context.Context) ClustersListArrayOutput
-}
-
-type ClustersListArray []ClustersListInput
-
-func (ClustersListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersList)(nil)).Elem()
-}
-
-func (i ClustersListArray) ToClustersListArrayOutput() ClustersListArrayOutput {
-	return i.ToClustersListArrayOutputWithContext(context.Background())
-}
-
-func (i ClustersListArray) ToClustersListArrayOutputWithContext(ctx context.Context) ClustersListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersListArrayOutput)
-}
-
-type ClustersListOutput struct{ *pulumi.OutputState }
-
-func (ClustersListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersList)(nil)).Elem()
-}
-
-func (o ClustersListOutput) ToClustersListOutput() ClustersListOutput {
-	return o
-}
-
-func (o ClustersListOutput) ToClustersListOutputWithContext(ctx context.Context) ClustersListOutput {
-	return o
-}
-
-func (o ClustersListOutput) ApiAccessId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ApiAccessId }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) ApiAccessIp() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ApiAccessIp }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) ApiAccessPort() pulumi.IntOutput {
-	return o.ApplyT(func(v ClustersList) int { return v.ApiAccessPort }).(pulumi.IntOutput)
-}
-
-func (o ClustersListOutput) ClusterId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ClusterId }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) ClusterName() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ClusterName }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) IdlType() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.IdlType }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) NetworkType() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.NetworkType }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) OldPasswordExpireTime() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.OldPasswordExpireTime }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.Password }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) PasswordStatus() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.PasswordStatus }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.SubnetId }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-type ClustersListArrayOutput struct{ *pulumi.OutputState }
-
-func (ClustersListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersList)(nil)).Elem()
-}
-
-func (o ClustersListArrayOutput) ToClustersListArrayOutput() ClustersListArrayOutput {
-	return o
-}
-
-func (o ClustersListArrayOutput) ToClustersListArrayOutputWithContext(ctx context.Context) ClustersListArrayOutput {
-	return o
-}
-
-func (o ClustersListArrayOutput) Index(i pulumi.IntInput) ClustersListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClustersList {
-		return vs[0].([]ClustersList)[vs[1].(int)]
-	}).(ClustersListOutput)
-}
-
 type IdlTableInfo struct {
-	Error             *string `pulumi:"error"`
-	IndexKeySet       *string `pulumi:"indexKeySet"`
-	KeyFields         *string `pulumi:"keyFields"`
-	SumKeyFieldSize   *int    `pulumi:"sumKeyFieldSize"`
-	SumValueFieldSize *int    `pulumi:"sumValueFieldSize"`
-	TableName         *string `pulumi:"tableName"`
-	ValueFields       *string `pulumi:"valueFields"`
+	// Error messages for creating IDL file.
+	Error *string `pulumi:"error"`
+	// Index key set of the TcaplusDB table.
+	IndexKeySet *string `pulumi:"indexKeySet"`
+	// Primary key fields of the TcaplusDB table.
+	KeyFields *string `pulumi:"keyFields"`
+	// Total size of primary key field of the TcaplusDB table.
+	SumKeyFieldSize *int `pulumi:"sumKeyFieldSize"`
+	// Total size of non-primary key fields of the TcaplusDB table.
+	SumValueFieldSize *int `pulumi:"sumValueFieldSize"`
+	// Name of the TcaplusDB table.
+	TableName *string `pulumi:"tableName"`
+	// Non-primary key fields of the TcaplusDB table.
+	ValueFields *string `pulumi:"valueFields"`
 }
 
 // IdlTableInfoInput is an input type that accepts IdlTableInfoArgs and IdlTableInfoOutput values.
@@ -198,13 +39,20 @@ type IdlTableInfoInput interface {
 }
 
 type IdlTableInfoArgs struct {
-	Error             pulumi.StringPtrInput `pulumi:"error"`
-	IndexKeySet       pulumi.StringPtrInput `pulumi:"indexKeySet"`
-	KeyFields         pulumi.StringPtrInput `pulumi:"keyFields"`
-	SumKeyFieldSize   pulumi.IntPtrInput    `pulumi:"sumKeyFieldSize"`
-	SumValueFieldSize pulumi.IntPtrInput    `pulumi:"sumValueFieldSize"`
-	TableName         pulumi.StringPtrInput `pulumi:"tableName"`
-	ValueFields       pulumi.StringPtrInput `pulumi:"valueFields"`
+	// Error messages for creating IDL file.
+	Error pulumi.StringPtrInput `pulumi:"error"`
+	// Index key set of the TcaplusDB table.
+	IndexKeySet pulumi.StringPtrInput `pulumi:"indexKeySet"`
+	// Primary key fields of the TcaplusDB table.
+	KeyFields pulumi.StringPtrInput `pulumi:"keyFields"`
+	// Total size of primary key field of the TcaplusDB table.
+	SumKeyFieldSize pulumi.IntPtrInput `pulumi:"sumKeyFieldSize"`
+	// Total size of non-primary key fields of the TcaplusDB table.
+	SumValueFieldSize pulumi.IntPtrInput `pulumi:"sumValueFieldSize"`
+	// Name of the TcaplusDB table.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+	// Non-primary key fields of the TcaplusDB table.
+	ValueFields pulumi.StringPtrInput `pulumi:"valueFields"`
 }
 
 func (IdlTableInfoArgs) ElementType() reflect.Type {
@@ -258,30 +106,37 @@ func (o IdlTableInfoOutput) ToIdlTableInfoOutputWithContext(ctx context.Context)
 	return o
 }
 
+// Error messages for creating IDL file.
 func (o IdlTableInfoOutput) Error() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IdlTableInfo) *string { return v.Error }).(pulumi.StringPtrOutput)
 }
 
+// Index key set of the TcaplusDB table.
 func (o IdlTableInfoOutput) IndexKeySet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IdlTableInfo) *string { return v.IndexKeySet }).(pulumi.StringPtrOutput)
 }
 
+// Primary key fields of the TcaplusDB table.
 func (o IdlTableInfoOutput) KeyFields() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IdlTableInfo) *string { return v.KeyFields }).(pulumi.StringPtrOutput)
 }
 
+// Total size of primary key field of the TcaplusDB table.
 func (o IdlTableInfoOutput) SumKeyFieldSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v IdlTableInfo) *int { return v.SumKeyFieldSize }).(pulumi.IntPtrOutput)
 }
 
+// Total size of non-primary key fields of the TcaplusDB table.
 func (o IdlTableInfoOutput) SumValueFieldSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v IdlTableInfo) *int { return v.SumValueFieldSize }).(pulumi.IntPtrOutput)
 }
 
+// Name of the TcaplusDB table.
 func (o IdlTableInfoOutput) TableName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IdlTableInfo) *string { return v.TableName }).(pulumi.StringPtrOutput)
 }
 
+// Non-primary key fields of the TcaplusDB table.
 func (o IdlTableInfoOutput) ValueFields() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IdlTableInfo) *string { return v.ValueFields }).(pulumi.StringPtrOutput)
 }
@@ -306,409 +161,674 @@ func (o IdlTableInfoArrayOutput) Index(i pulumi.IntInput) IdlTableInfoOutput {
 	}).(IdlTableInfoOutput)
 }
 
-type IdlsList struct {
+type GetClustersList struct {
+	// Access id of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	ApiAccessId string `pulumi:"apiAccessId"`
+	// Access ip of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	ApiAccessIp string `pulumi:"apiAccessIp"`
+	// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	ApiAccessPort int `pulumi:"apiAccessPort"`
+	// ID of the TcaplusDB cluster to be query.
+	ClusterId string `pulumi:"clusterId"`
+	// Name of the TcaplusDB cluster to be query.
+	ClusterName string `pulumi:"clusterName"`
+	// Create time of the TcaplusDB cluster.
+	CreateTime string `pulumi:"createTime"`
+	// IDL type of the TcaplusDB cluster.
+	IdlType string `pulumi:"idlType"`
+	// Network type of the TcaplusDB cluster.
+	NetworkType string `pulumi:"networkType"`
+	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
+	OldPasswordExpireTime string `pulumi:"oldPasswordExpireTime"`
+	// Access password of the TcaplusDB cluster.
+	Password string `pulumi:"password"`
+	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable` means the password can not be changed in this moment; `modifiable` means the password can be changed in this moment.
+	PasswordStatus string `pulumi:"passwordStatus"`
+	// Subnet ID of the TcaplusDB cluster.
+	SubnetId string `pulumi:"subnetId"`
+	// VPC ID of the TcaplusDB cluster.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetClustersListInput is an input type that accepts GetClustersListArgs and GetClustersListOutput values.
+// You can construct a concrete instance of `GetClustersListInput` via:
+//
+//          GetClustersListArgs{...}
+type GetClustersListInput interface {
+	pulumi.Input
+
+	ToGetClustersListOutput() GetClustersListOutput
+	ToGetClustersListOutputWithContext(context.Context) GetClustersListOutput
+}
+
+type GetClustersListArgs struct {
+	// Access id of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	ApiAccessId pulumi.StringInput `pulumi:"apiAccessId"`
+	// Access ip of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	ApiAccessIp pulumi.StringInput `pulumi:"apiAccessIp"`
+	// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	ApiAccessPort pulumi.IntInput `pulumi:"apiAccessPort"`
+	// ID of the TcaplusDB cluster to be query.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Name of the TcaplusDB cluster to be query.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Create time of the TcaplusDB cluster.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// IDL type of the TcaplusDB cluster.
+	IdlType pulumi.StringInput `pulumi:"idlType"`
+	// Network type of the TcaplusDB cluster.
+	NetworkType pulumi.StringInput `pulumi:"networkType"`
+	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
+	OldPasswordExpireTime pulumi.StringInput `pulumi:"oldPasswordExpireTime"`
+	// Access password of the TcaplusDB cluster.
+	Password pulumi.StringInput `pulumi:"password"`
+	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable` means the password can not be changed in this moment; `modifiable` means the password can be changed in this moment.
+	PasswordStatus pulumi.StringInput `pulumi:"passwordStatus"`
+	// Subnet ID of the TcaplusDB cluster.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// VPC ID of the TcaplusDB cluster.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetClustersListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersList)(nil)).Elem()
+}
+
+func (i GetClustersListArgs) ToGetClustersListOutput() GetClustersListOutput {
+	return i.ToGetClustersListOutputWithContext(context.Background())
+}
+
+func (i GetClustersListArgs) ToGetClustersListOutputWithContext(ctx context.Context) GetClustersListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersListOutput)
+}
+
+// GetClustersListArrayInput is an input type that accepts GetClustersListArray and GetClustersListArrayOutput values.
+// You can construct a concrete instance of `GetClustersListArrayInput` via:
+//
+//          GetClustersListArray{ GetClustersListArgs{...} }
+type GetClustersListArrayInput interface {
+	pulumi.Input
+
+	ToGetClustersListArrayOutput() GetClustersListArrayOutput
+	ToGetClustersListArrayOutputWithContext(context.Context) GetClustersListArrayOutput
+}
+
+type GetClustersListArray []GetClustersListInput
+
+func (GetClustersListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersList)(nil)).Elem()
+}
+
+func (i GetClustersListArray) ToGetClustersListArrayOutput() GetClustersListArrayOutput {
+	return i.ToGetClustersListArrayOutputWithContext(context.Background())
+}
+
+func (i GetClustersListArray) ToGetClustersListArrayOutputWithContext(ctx context.Context) GetClustersListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersListArrayOutput)
+}
+
+type GetClustersListOutput struct{ *pulumi.OutputState }
+
+func (GetClustersListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersList)(nil)).Elem()
+}
+
+func (o GetClustersListOutput) ToGetClustersListOutput() GetClustersListOutput {
+	return o
+}
+
+func (o GetClustersListOutput) ToGetClustersListOutputWithContext(ctx context.Context) GetClustersListOutput {
+	return o
+}
+
+// Access id of the TcaplusDB cluster.For TcaplusDB SDK connect.
+func (o GetClustersListOutput) ApiAccessId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ApiAccessId }).(pulumi.StringOutput)
+}
+
+// Access ip of the TcaplusDB cluster.For TcaplusDB SDK connect.
+func (o GetClustersListOutput) ApiAccessIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ApiAccessIp }).(pulumi.StringOutput)
+}
+
+// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+func (o GetClustersListOutput) ApiAccessPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClustersList) int { return v.ApiAccessPort }).(pulumi.IntOutput)
+}
+
+// ID of the TcaplusDB cluster to be query.
+func (o GetClustersListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Name of the TcaplusDB cluster to be query.
+func (o GetClustersListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Create time of the TcaplusDB cluster.
+func (o GetClustersListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// IDL type of the TcaplusDB cluster.
+func (o GetClustersListOutput) IdlType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.IdlType }).(pulumi.StringOutput)
+}
+
+// Network type of the TcaplusDB cluster.
+func (o GetClustersListOutput) NetworkType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.NetworkType }).(pulumi.StringOutput)
+}
+
+// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
+func (o GetClustersListOutput) OldPasswordExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.OldPasswordExpireTime }).(pulumi.StringOutput)
+}
+
+// Access password of the TcaplusDB cluster.
+func (o GetClustersListOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable` means the password can not be changed in this moment; `modifiable` means the password can be changed in this moment.
+func (o GetClustersListOutput) PasswordStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.PasswordStatus }).(pulumi.StringOutput)
+}
+
+// Subnet ID of the TcaplusDB cluster.
+func (o GetClustersListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// VPC ID of the TcaplusDB cluster.
+func (o GetClustersListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetClustersListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClustersListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersList)(nil)).Elem()
+}
+
+func (o GetClustersListArrayOutput) ToGetClustersListArrayOutput() GetClustersListArrayOutput {
+	return o
+}
+
+func (o GetClustersListArrayOutput) ToGetClustersListArrayOutputWithContext(ctx context.Context) GetClustersListArrayOutput {
+	return o
+}
+
+func (o GetClustersListArrayOutput) Index(i pulumi.IntInput) GetClustersListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClustersList {
+		return vs[0].([]GetClustersList)[vs[1].(int)]
+	}).(GetClustersListOutput)
+}
+
+type GetIdlsList struct {
+	// ID of the IDL.
 	IdlId string `pulumi:"idlId"`
 }
 
-// IdlsListInput is an input type that accepts IdlsListArgs and IdlsListOutput values.
-// You can construct a concrete instance of `IdlsListInput` via:
+// GetIdlsListInput is an input type that accepts GetIdlsListArgs and GetIdlsListOutput values.
+// You can construct a concrete instance of `GetIdlsListInput` via:
 //
-//          IdlsListArgs{...}
-type IdlsListInput interface {
+//          GetIdlsListArgs{...}
+type GetIdlsListInput interface {
 	pulumi.Input
 
-	ToIdlsListOutput() IdlsListOutput
-	ToIdlsListOutputWithContext(context.Context) IdlsListOutput
+	ToGetIdlsListOutput() GetIdlsListOutput
+	ToGetIdlsListOutputWithContext(context.Context) GetIdlsListOutput
 }
 
-type IdlsListArgs struct {
+type GetIdlsListArgs struct {
+	// ID of the IDL.
 	IdlId pulumi.StringInput `pulumi:"idlId"`
 }
 
-func (IdlsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*IdlsList)(nil)).Elem()
+func (GetIdlsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIdlsList)(nil)).Elem()
 }
 
-func (i IdlsListArgs) ToIdlsListOutput() IdlsListOutput {
-	return i.ToIdlsListOutputWithContext(context.Background())
+func (i GetIdlsListArgs) ToGetIdlsListOutput() GetIdlsListOutput {
+	return i.ToGetIdlsListOutputWithContext(context.Background())
 }
 
-func (i IdlsListArgs) ToIdlsListOutputWithContext(ctx context.Context) IdlsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IdlsListOutput)
+func (i GetIdlsListArgs) ToGetIdlsListOutputWithContext(ctx context.Context) GetIdlsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIdlsListOutput)
 }
 
-// IdlsListArrayInput is an input type that accepts IdlsListArray and IdlsListArrayOutput values.
-// You can construct a concrete instance of `IdlsListArrayInput` via:
+// GetIdlsListArrayInput is an input type that accepts GetIdlsListArray and GetIdlsListArrayOutput values.
+// You can construct a concrete instance of `GetIdlsListArrayInput` via:
 //
-//          IdlsListArray{ IdlsListArgs{...} }
-type IdlsListArrayInput interface {
+//          GetIdlsListArray{ GetIdlsListArgs{...} }
+type GetIdlsListArrayInput interface {
 	pulumi.Input
 
-	ToIdlsListArrayOutput() IdlsListArrayOutput
-	ToIdlsListArrayOutputWithContext(context.Context) IdlsListArrayOutput
+	ToGetIdlsListArrayOutput() GetIdlsListArrayOutput
+	ToGetIdlsListArrayOutputWithContext(context.Context) GetIdlsListArrayOutput
 }
 
-type IdlsListArray []IdlsListInput
+type GetIdlsListArray []GetIdlsListInput
 
-func (IdlsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]IdlsList)(nil)).Elem()
+func (GetIdlsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIdlsList)(nil)).Elem()
 }
 
-func (i IdlsListArray) ToIdlsListArrayOutput() IdlsListArrayOutput {
-	return i.ToIdlsListArrayOutputWithContext(context.Background())
+func (i GetIdlsListArray) ToGetIdlsListArrayOutput() GetIdlsListArrayOutput {
+	return i.ToGetIdlsListArrayOutputWithContext(context.Background())
 }
 
-func (i IdlsListArray) ToIdlsListArrayOutputWithContext(ctx context.Context) IdlsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IdlsListArrayOutput)
+func (i GetIdlsListArray) ToGetIdlsListArrayOutputWithContext(ctx context.Context) GetIdlsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIdlsListArrayOutput)
 }
 
-type IdlsListOutput struct{ *pulumi.OutputState }
+type GetIdlsListOutput struct{ *pulumi.OutputState }
 
-func (IdlsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*IdlsList)(nil)).Elem()
+func (GetIdlsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIdlsList)(nil)).Elem()
 }
 
-func (o IdlsListOutput) ToIdlsListOutput() IdlsListOutput {
+func (o GetIdlsListOutput) ToGetIdlsListOutput() GetIdlsListOutput {
 	return o
 }
 
-func (o IdlsListOutput) ToIdlsListOutputWithContext(ctx context.Context) IdlsListOutput {
+func (o GetIdlsListOutput) ToGetIdlsListOutputWithContext(ctx context.Context) GetIdlsListOutput {
 	return o
 }
 
-func (o IdlsListOutput) IdlId() pulumi.StringOutput {
-	return o.ApplyT(func(v IdlsList) string { return v.IdlId }).(pulumi.StringOutput)
+// ID of the IDL.
+func (o GetIdlsListOutput) IdlId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIdlsList) string { return v.IdlId }).(pulumi.StringOutput)
 }
 
-type IdlsListArrayOutput struct{ *pulumi.OutputState }
+type GetIdlsListArrayOutput struct{ *pulumi.OutputState }
 
-func (IdlsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]IdlsList)(nil)).Elem()
+func (GetIdlsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIdlsList)(nil)).Elem()
 }
 
-func (o IdlsListArrayOutput) ToIdlsListArrayOutput() IdlsListArrayOutput {
+func (o GetIdlsListArrayOutput) ToGetIdlsListArrayOutput() GetIdlsListArrayOutput {
 	return o
 }
 
-func (o IdlsListArrayOutput) ToIdlsListArrayOutputWithContext(ctx context.Context) IdlsListArrayOutput {
+func (o GetIdlsListArrayOutput) ToGetIdlsListArrayOutputWithContext(ctx context.Context) GetIdlsListArrayOutput {
 	return o
 }
 
-func (o IdlsListArrayOutput) Index(i pulumi.IntInput) IdlsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IdlsList {
-		return vs[0].([]IdlsList)[vs[1].(int)]
-	}).(IdlsListOutput)
+func (o GetIdlsListArrayOutput) Index(i pulumi.IntInput) GetIdlsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetIdlsList {
+		return vs[0].([]GetIdlsList)[vs[1].(int)]
+	}).(GetIdlsListOutput)
 }
 
-type TableGroupsList struct {
-	CreateTime     string `pulumi:"createTime"`
-	TableCount     int    `pulumi:"tableCount"`
-	TablegroupId   string `pulumi:"tablegroupId"`
+type GetTablegroupsList struct {
+	// Create time of the table group..
+	CreateTime string `pulumi:"createTime"`
+	// Number of tables.
+	TableCount int `pulumi:"tableCount"`
+	// Id of the table group to be query.
+	TablegroupId string `pulumi:"tablegroupId"`
+	// Name of the table group to be query.
 	TablegroupName string `pulumi:"tablegroupName"`
-	TotalSize      int    `pulumi:"totalSize"`
+	// Total storage size (MB).
+	TotalSize int `pulumi:"totalSize"`
 }
 
-// TableGroupsListInput is an input type that accepts TableGroupsListArgs and TableGroupsListOutput values.
-// You can construct a concrete instance of `TableGroupsListInput` via:
+// GetTablegroupsListInput is an input type that accepts GetTablegroupsListArgs and GetTablegroupsListOutput values.
+// You can construct a concrete instance of `GetTablegroupsListInput` via:
 //
-//          TableGroupsListArgs{...}
-type TableGroupsListInput interface {
+//          GetTablegroupsListArgs{...}
+type GetTablegroupsListInput interface {
 	pulumi.Input
 
-	ToTableGroupsListOutput() TableGroupsListOutput
-	ToTableGroupsListOutputWithContext(context.Context) TableGroupsListOutput
+	ToGetTablegroupsListOutput() GetTablegroupsListOutput
+	ToGetTablegroupsListOutputWithContext(context.Context) GetTablegroupsListOutput
 }
 
-type TableGroupsListArgs struct {
-	CreateTime     pulumi.StringInput `pulumi:"createTime"`
-	TableCount     pulumi.IntInput    `pulumi:"tableCount"`
-	TablegroupId   pulumi.StringInput `pulumi:"tablegroupId"`
+type GetTablegroupsListArgs struct {
+	// Create time of the table group..
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Number of tables.
+	TableCount pulumi.IntInput `pulumi:"tableCount"`
+	// Id of the table group to be query.
+	TablegroupId pulumi.StringInput `pulumi:"tablegroupId"`
+	// Name of the table group to be query.
 	TablegroupName pulumi.StringInput `pulumi:"tablegroupName"`
-	TotalSize      pulumi.IntInput    `pulumi:"totalSize"`
+	// Total storage size (MB).
+	TotalSize pulumi.IntInput `pulumi:"totalSize"`
 }
 
-func (TableGroupsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*TableGroupsList)(nil)).Elem()
+func (GetTablegroupsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTablegroupsList)(nil)).Elem()
 }
 
-func (i TableGroupsListArgs) ToTableGroupsListOutput() TableGroupsListOutput {
-	return i.ToTableGroupsListOutputWithContext(context.Background())
+func (i GetTablegroupsListArgs) ToGetTablegroupsListOutput() GetTablegroupsListOutput {
+	return i.ToGetTablegroupsListOutputWithContext(context.Background())
 }
 
-func (i TableGroupsListArgs) ToTableGroupsListOutputWithContext(ctx context.Context) TableGroupsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TableGroupsListOutput)
+func (i GetTablegroupsListArgs) ToGetTablegroupsListOutputWithContext(ctx context.Context) GetTablegroupsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTablegroupsListOutput)
 }
 
-// TableGroupsListArrayInput is an input type that accepts TableGroupsListArray and TableGroupsListArrayOutput values.
-// You can construct a concrete instance of `TableGroupsListArrayInput` via:
+// GetTablegroupsListArrayInput is an input type that accepts GetTablegroupsListArray and GetTablegroupsListArrayOutput values.
+// You can construct a concrete instance of `GetTablegroupsListArrayInput` via:
 //
-//          TableGroupsListArray{ TableGroupsListArgs{...} }
-type TableGroupsListArrayInput interface {
+//          GetTablegroupsListArray{ GetTablegroupsListArgs{...} }
+type GetTablegroupsListArrayInput interface {
 	pulumi.Input
 
-	ToTableGroupsListArrayOutput() TableGroupsListArrayOutput
-	ToTableGroupsListArrayOutputWithContext(context.Context) TableGroupsListArrayOutput
+	ToGetTablegroupsListArrayOutput() GetTablegroupsListArrayOutput
+	ToGetTablegroupsListArrayOutputWithContext(context.Context) GetTablegroupsListArrayOutput
 }
 
-type TableGroupsListArray []TableGroupsListInput
+type GetTablegroupsListArray []GetTablegroupsListInput
 
-func (TableGroupsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TableGroupsList)(nil)).Elem()
+func (GetTablegroupsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTablegroupsList)(nil)).Elem()
 }
 
-func (i TableGroupsListArray) ToTableGroupsListArrayOutput() TableGroupsListArrayOutput {
-	return i.ToTableGroupsListArrayOutputWithContext(context.Background())
+func (i GetTablegroupsListArray) ToGetTablegroupsListArrayOutput() GetTablegroupsListArrayOutput {
+	return i.ToGetTablegroupsListArrayOutputWithContext(context.Background())
 }
 
-func (i TableGroupsListArray) ToTableGroupsListArrayOutputWithContext(ctx context.Context) TableGroupsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TableGroupsListArrayOutput)
+func (i GetTablegroupsListArray) ToGetTablegroupsListArrayOutputWithContext(ctx context.Context) GetTablegroupsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTablegroupsListArrayOutput)
 }
 
-type TableGroupsListOutput struct{ *pulumi.OutputState }
+type GetTablegroupsListOutput struct{ *pulumi.OutputState }
 
-func (TableGroupsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*TableGroupsList)(nil)).Elem()
+func (GetTablegroupsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTablegroupsList)(nil)).Elem()
 }
 
-func (o TableGroupsListOutput) ToTableGroupsListOutput() TableGroupsListOutput {
+func (o GetTablegroupsListOutput) ToGetTablegroupsListOutput() GetTablegroupsListOutput {
 	return o
 }
 
-func (o TableGroupsListOutput) ToTableGroupsListOutputWithContext(ctx context.Context) TableGroupsListOutput {
+func (o GetTablegroupsListOutput) ToGetTablegroupsListOutputWithContext(ctx context.Context) GetTablegroupsListOutput {
 	return o
 }
 
-func (o TableGroupsListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v TableGroupsList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Create time of the table group..
+func (o GetTablegroupsListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablegroupsList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o TableGroupsListOutput) TableCount() pulumi.IntOutput {
-	return o.ApplyT(func(v TableGroupsList) int { return v.TableCount }).(pulumi.IntOutput)
+// Number of tables.
+func (o GetTablegroupsListOutput) TableCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTablegroupsList) int { return v.TableCount }).(pulumi.IntOutput)
 }
 
-func (o TableGroupsListOutput) TablegroupId() pulumi.StringOutput {
-	return o.ApplyT(func(v TableGroupsList) string { return v.TablegroupId }).(pulumi.StringOutput)
+// Id of the table group to be query.
+func (o GetTablegroupsListOutput) TablegroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablegroupsList) string { return v.TablegroupId }).(pulumi.StringOutput)
 }
 
-func (o TableGroupsListOutput) TablegroupName() pulumi.StringOutput {
-	return o.ApplyT(func(v TableGroupsList) string { return v.TablegroupName }).(pulumi.StringOutput)
+// Name of the table group to be query.
+func (o GetTablegroupsListOutput) TablegroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablegroupsList) string { return v.TablegroupName }).(pulumi.StringOutput)
 }
 
-func (o TableGroupsListOutput) TotalSize() pulumi.IntOutput {
-	return o.ApplyT(func(v TableGroupsList) int { return v.TotalSize }).(pulumi.IntOutput)
+// Total storage size (MB).
+func (o GetTablegroupsListOutput) TotalSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTablegroupsList) int { return v.TotalSize }).(pulumi.IntOutput)
 }
 
-type TableGroupsListArrayOutput struct{ *pulumi.OutputState }
+type GetTablegroupsListArrayOutput struct{ *pulumi.OutputState }
 
-func (TableGroupsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TableGroupsList)(nil)).Elem()
+func (GetTablegroupsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTablegroupsList)(nil)).Elem()
 }
 
-func (o TableGroupsListArrayOutput) ToTableGroupsListArrayOutput() TableGroupsListArrayOutput {
+func (o GetTablegroupsListArrayOutput) ToGetTablegroupsListArrayOutput() GetTablegroupsListArrayOutput {
 	return o
 }
 
-func (o TableGroupsListArrayOutput) ToTableGroupsListArrayOutputWithContext(ctx context.Context) TableGroupsListArrayOutput {
+func (o GetTablegroupsListArrayOutput) ToGetTablegroupsListArrayOutputWithContext(ctx context.Context) GetTablegroupsListArrayOutput {
 	return o
 }
 
-func (o TableGroupsListArrayOutput) Index(i pulumi.IntInput) TableGroupsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TableGroupsList {
-		return vs[0].([]TableGroupsList)[vs[1].(int)]
-	}).(TableGroupsListOutput)
+func (o GetTablegroupsListArrayOutput) Index(i pulumi.IntInput) GetTablegroupsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTablegroupsList {
+		return vs[0].([]GetTablegroupsList)[vs[1].(int)]
+	}).(GetTablegroupsListOutput)
 }
 
-type TablesList struct {
-	CreateTime      string `pulumi:"createTime"`
-	Description     string `pulumi:"description"`
-	Error           string `pulumi:"error"`
-	IdlId           string `pulumi:"idlId"`
-	ReservedReadCu  int    `pulumi:"reservedReadCu"`
-	ReservedVolume  int    `pulumi:"reservedVolume"`
-	ReservedWriteCu int    `pulumi:"reservedWriteCu"`
-	Status          string `pulumi:"status"`
-	TableId         string `pulumi:"tableId"`
-	TableIdlType    string `pulumi:"tableIdlType"`
-	TableName       string `pulumi:"tableName"`
-	TableSize       int    `pulumi:"tableSize"`
-	TableType       string `pulumi:"tableType"`
-	TablegroupId    string `pulumi:"tablegroupId"`
+type GetTablesList struct {
+	// Create time of the TcaplusDB table.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the TcaplusDB table.
+	Description string `pulumi:"description"`
+	// Error message for creating TcaplusDB table.
+	Error string `pulumi:"error"`
+	// IDL file id of the TcaplusDB table.
+	IdlId string `pulumi:"idlId"`
+	// Reserved read capacity units of the TcaplusDB table.
+	ReservedReadCu int `pulumi:"reservedReadCu"`
+	// Reserved storage capacity of the TcaplusDB table (unit:GB).
+	ReservedVolume int `pulumi:"reservedVolume"`
+	// Reserved write capacity units of the TcaplusDB table.
+	ReservedWriteCu int `pulumi:"reservedWriteCu"`
+	// Status of the TcaplusDB table.
+	Status string `pulumi:"status"`
+	// Table ID to be query.
+	TableId string `pulumi:"tableId"`
+	// IDL type of  the TcaplusDB table.
+	TableIdlType string `pulumi:"tableIdlType"`
+	// Table name to be query.
+	TableName string `pulumi:"tableName"`
+	// Size of the TcaplusDB table.
+	TableSize int `pulumi:"tableSize"`
+	// Type of the TcaplusDB table.
+	TableType string `pulumi:"tableType"`
+	// ID of the table group to be query.
+	TablegroupId string `pulumi:"tablegroupId"`
 }
 
-// TablesListInput is an input type that accepts TablesListArgs and TablesListOutput values.
-// You can construct a concrete instance of `TablesListInput` via:
+// GetTablesListInput is an input type that accepts GetTablesListArgs and GetTablesListOutput values.
+// You can construct a concrete instance of `GetTablesListInput` via:
 //
-//          TablesListArgs{...}
-type TablesListInput interface {
+//          GetTablesListArgs{...}
+type GetTablesListInput interface {
 	pulumi.Input
 
-	ToTablesListOutput() TablesListOutput
-	ToTablesListOutputWithContext(context.Context) TablesListOutput
+	ToGetTablesListOutput() GetTablesListOutput
+	ToGetTablesListOutputWithContext(context.Context) GetTablesListOutput
 }
 
-type TablesListArgs struct {
-	CreateTime      pulumi.StringInput `pulumi:"createTime"`
-	Description     pulumi.StringInput `pulumi:"description"`
-	Error           pulumi.StringInput `pulumi:"error"`
-	IdlId           pulumi.StringInput `pulumi:"idlId"`
-	ReservedReadCu  pulumi.IntInput    `pulumi:"reservedReadCu"`
-	ReservedVolume  pulumi.IntInput    `pulumi:"reservedVolume"`
-	ReservedWriteCu pulumi.IntInput    `pulumi:"reservedWriteCu"`
-	Status          pulumi.StringInput `pulumi:"status"`
-	TableId         pulumi.StringInput `pulumi:"tableId"`
-	TableIdlType    pulumi.StringInput `pulumi:"tableIdlType"`
-	TableName       pulumi.StringInput `pulumi:"tableName"`
-	TableSize       pulumi.IntInput    `pulumi:"tableSize"`
-	TableType       pulumi.StringInput `pulumi:"tableType"`
-	TablegroupId    pulumi.StringInput `pulumi:"tablegroupId"`
+type GetTablesListArgs struct {
+	// Create time of the TcaplusDB table.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the TcaplusDB table.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Error message for creating TcaplusDB table.
+	Error pulumi.StringInput `pulumi:"error"`
+	// IDL file id of the TcaplusDB table.
+	IdlId pulumi.StringInput `pulumi:"idlId"`
+	// Reserved read capacity units of the TcaplusDB table.
+	ReservedReadCu pulumi.IntInput `pulumi:"reservedReadCu"`
+	// Reserved storage capacity of the TcaplusDB table (unit:GB).
+	ReservedVolume pulumi.IntInput `pulumi:"reservedVolume"`
+	// Reserved write capacity units of the TcaplusDB table.
+	ReservedWriteCu pulumi.IntInput `pulumi:"reservedWriteCu"`
+	// Status of the TcaplusDB table.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Table ID to be query.
+	TableId pulumi.StringInput `pulumi:"tableId"`
+	// IDL type of  the TcaplusDB table.
+	TableIdlType pulumi.StringInput `pulumi:"tableIdlType"`
+	// Table name to be query.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// Size of the TcaplusDB table.
+	TableSize pulumi.IntInput `pulumi:"tableSize"`
+	// Type of the TcaplusDB table.
+	TableType pulumi.StringInput `pulumi:"tableType"`
+	// ID of the table group to be query.
+	TablegroupId pulumi.StringInput `pulumi:"tablegroupId"`
 }
 
-func (TablesListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*TablesList)(nil)).Elem()
+func (GetTablesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTablesList)(nil)).Elem()
 }
 
-func (i TablesListArgs) ToTablesListOutput() TablesListOutput {
-	return i.ToTablesListOutputWithContext(context.Background())
+func (i GetTablesListArgs) ToGetTablesListOutput() GetTablesListOutput {
+	return i.ToGetTablesListOutputWithContext(context.Background())
 }
 
-func (i TablesListArgs) ToTablesListOutputWithContext(ctx context.Context) TablesListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TablesListOutput)
+func (i GetTablesListArgs) ToGetTablesListOutputWithContext(ctx context.Context) GetTablesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTablesListOutput)
 }
 
-// TablesListArrayInput is an input type that accepts TablesListArray and TablesListArrayOutput values.
-// You can construct a concrete instance of `TablesListArrayInput` via:
+// GetTablesListArrayInput is an input type that accepts GetTablesListArray and GetTablesListArrayOutput values.
+// You can construct a concrete instance of `GetTablesListArrayInput` via:
 //
-//          TablesListArray{ TablesListArgs{...} }
-type TablesListArrayInput interface {
+//          GetTablesListArray{ GetTablesListArgs{...} }
+type GetTablesListArrayInput interface {
 	pulumi.Input
 
-	ToTablesListArrayOutput() TablesListArrayOutput
-	ToTablesListArrayOutputWithContext(context.Context) TablesListArrayOutput
+	ToGetTablesListArrayOutput() GetTablesListArrayOutput
+	ToGetTablesListArrayOutputWithContext(context.Context) GetTablesListArrayOutput
 }
 
-type TablesListArray []TablesListInput
+type GetTablesListArray []GetTablesListInput
 
-func (TablesListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TablesList)(nil)).Elem()
+func (GetTablesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTablesList)(nil)).Elem()
 }
 
-func (i TablesListArray) ToTablesListArrayOutput() TablesListArrayOutput {
-	return i.ToTablesListArrayOutputWithContext(context.Background())
+func (i GetTablesListArray) ToGetTablesListArrayOutput() GetTablesListArrayOutput {
+	return i.ToGetTablesListArrayOutputWithContext(context.Background())
 }
 
-func (i TablesListArray) ToTablesListArrayOutputWithContext(ctx context.Context) TablesListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TablesListArrayOutput)
+func (i GetTablesListArray) ToGetTablesListArrayOutputWithContext(ctx context.Context) GetTablesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTablesListArrayOutput)
 }
 
-type TablesListOutput struct{ *pulumi.OutputState }
+type GetTablesListOutput struct{ *pulumi.OutputState }
 
-func (TablesListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*TablesList)(nil)).Elem()
+func (GetTablesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTablesList)(nil)).Elem()
 }
 
-func (o TablesListOutput) ToTablesListOutput() TablesListOutput {
+func (o GetTablesListOutput) ToGetTablesListOutput() GetTablesListOutput {
 	return o
 }
 
-func (o TablesListOutput) ToTablesListOutputWithContext(ctx context.Context) TablesListOutput {
+func (o GetTablesListOutput) ToGetTablesListOutputWithContext(ctx context.Context) GetTablesListOutput {
 	return o
 }
 
-func (o TablesListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Create time of the TcaplusDB table.
+func (o GetTablesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.Description }).(pulumi.StringOutput)
+// Description of the TcaplusDB table.
+func (o GetTablesListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) Error() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.Error }).(pulumi.StringOutput)
+// Error message for creating TcaplusDB table.
+func (o GetTablesListOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.Error }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) IdlId() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.IdlId }).(pulumi.StringOutput)
+// IDL file id of the TcaplusDB table.
+func (o GetTablesListOutput) IdlId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.IdlId }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) ReservedReadCu() pulumi.IntOutput {
-	return o.ApplyT(func(v TablesList) int { return v.ReservedReadCu }).(pulumi.IntOutput)
+// Reserved read capacity units of the TcaplusDB table.
+func (o GetTablesListOutput) ReservedReadCu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTablesList) int { return v.ReservedReadCu }).(pulumi.IntOutput)
 }
 
-func (o TablesListOutput) ReservedVolume() pulumi.IntOutput {
-	return o.ApplyT(func(v TablesList) int { return v.ReservedVolume }).(pulumi.IntOutput)
+// Reserved storage capacity of the TcaplusDB table (unit:GB).
+func (o GetTablesListOutput) ReservedVolume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTablesList) int { return v.ReservedVolume }).(pulumi.IntOutput)
 }
 
-func (o TablesListOutput) ReservedWriteCu() pulumi.IntOutput {
-	return o.ApplyT(func(v TablesList) int { return v.ReservedWriteCu }).(pulumi.IntOutput)
+// Reserved write capacity units of the TcaplusDB table.
+func (o GetTablesListOutput) ReservedWriteCu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTablesList) int { return v.ReservedWriteCu }).(pulumi.IntOutput)
 }
 
-func (o TablesListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.Status }).(pulumi.StringOutput)
+// Status of the TcaplusDB table.
+func (o GetTablesListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) TableId() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.TableId }).(pulumi.StringOutput)
+// Table ID to be query.
+func (o GetTablesListOutput) TableId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.TableId }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) TableIdlType() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.TableIdlType }).(pulumi.StringOutput)
+// IDL type of  the TcaplusDB table.
+func (o GetTablesListOutput) TableIdlType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.TableIdlType }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) TableName() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.TableName }).(pulumi.StringOutput)
+// Table name to be query.
+func (o GetTablesListOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.TableName }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) TableSize() pulumi.IntOutput {
-	return o.ApplyT(func(v TablesList) int { return v.TableSize }).(pulumi.IntOutput)
+// Size of the TcaplusDB table.
+func (o GetTablesListOutput) TableSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTablesList) int { return v.TableSize }).(pulumi.IntOutput)
 }
 
-func (o TablesListOutput) TableType() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.TableType }).(pulumi.StringOutput)
+// Type of the TcaplusDB table.
+func (o GetTablesListOutput) TableType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.TableType }).(pulumi.StringOutput)
 }
 
-func (o TablesListOutput) TablegroupId() pulumi.StringOutput {
-	return o.ApplyT(func(v TablesList) string { return v.TablegroupId }).(pulumi.StringOutput)
+// ID of the table group to be query.
+func (o GetTablesListOutput) TablegroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTablesList) string { return v.TablegroupId }).(pulumi.StringOutput)
 }
 
-type TablesListArrayOutput struct{ *pulumi.OutputState }
+type GetTablesListArrayOutput struct{ *pulumi.OutputState }
 
-func (TablesListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TablesList)(nil)).Elem()
+func (GetTablesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTablesList)(nil)).Elem()
 }
 
-func (o TablesListArrayOutput) ToTablesListArrayOutput() TablesListArrayOutput {
+func (o GetTablesListArrayOutput) ToGetTablesListArrayOutput() GetTablesListArrayOutput {
 	return o
 }
 
-func (o TablesListArrayOutput) ToTablesListArrayOutputWithContext(ctx context.Context) TablesListArrayOutput {
+func (o GetTablesListArrayOutput) ToGetTablesListArrayOutputWithContext(ctx context.Context) GetTablesListArrayOutput {
 	return o
 }
 
-func (o TablesListArrayOutput) Index(i pulumi.IntInput) TablesListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TablesList {
-		return vs[0].([]TablesList)[vs[1].(int)]
-	}).(TablesListOutput)
+func (o GetTablesListArrayOutput) Index(i pulumi.IntInput) GetTablesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTablesList {
+		return vs[0].([]GetTablesList)[vs[1].(int)]
+	}).(GetTablesListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersListInput)(nil)).Elem(), ClustersListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersListArrayInput)(nil)).Elem(), ClustersListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IdlTableInfoInput)(nil)).Elem(), IdlTableInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IdlTableInfoArrayInput)(nil)).Elem(), IdlTableInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IdlsListInput)(nil)).Elem(), IdlsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IdlsListArrayInput)(nil)).Elem(), IdlsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TableGroupsListInput)(nil)).Elem(), TableGroupsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TableGroupsListArrayInput)(nil)).Elem(), TableGroupsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TablesListInput)(nil)).Elem(), TablesListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TablesListArrayInput)(nil)).Elem(), TablesListArray{})
-	pulumi.RegisterOutputType(ClustersListOutput{})
-	pulumi.RegisterOutputType(ClustersListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListInput)(nil)).Elem(), GetClustersListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListArrayInput)(nil)).Elem(), GetClustersListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIdlsListInput)(nil)).Elem(), GetIdlsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIdlsListArrayInput)(nil)).Elem(), GetIdlsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTablegroupsListInput)(nil)).Elem(), GetTablegroupsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTablegroupsListArrayInput)(nil)).Elem(), GetTablegroupsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTablesListInput)(nil)).Elem(), GetTablesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTablesListArrayInput)(nil)).Elem(), GetTablesListArray{})
 	pulumi.RegisterOutputType(IdlTableInfoOutput{})
 	pulumi.RegisterOutputType(IdlTableInfoArrayOutput{})
-	pulumi.RegisterOutputType(IdlsListOutput{})
-	pulumi.RegisterOutputType(IdlsListArrayOutput{})
-	pulumi.RegisterOutputType(TableGroupsListOutput{})
-	pulumi.RegisterOutputType(TableGroupsListArrayOutput{})
-	pulumi.RegisterOutputType(TablesListOutput{})
-	pulumi.RegisterOutputType(TablesListArrayOutput{})
+	pulumi.RegisterOutputType(GetClustersListOutput{})
+	pulumi.RegisterOutputType(GetClustersListArrayOutput{})
+	pulumi.RegisterOutputType(GetIdlsListOutput{})
+	pulumi.RegisterOutputType(GetIdlsListArrayOutput{})
+	pulumi.RegisterOutputType(GetTablegroupsListOutput{})
+	pulumi.RegisterOutputType(GetTablegroupsListArrayOutput{})
+	pulumi.RegisterOutputType(GetTablesListOutput{})
+	pulumi.RegisterOutputType(GetTablesListArrayOutput{})
 }

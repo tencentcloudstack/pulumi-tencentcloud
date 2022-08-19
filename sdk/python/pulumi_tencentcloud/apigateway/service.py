@@ -26,8 +26,7 @@ class ServiceArgs:
                  test_limit: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Service resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-               indicates access over private network, and `OUTER` indicates access over public network.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         :param pulumi.Input[str] protocol: Service frontend request type. Valid values: `http`, `https`, `http&https`.
         :param pulumi.Input[str] service_name: Custom service name.
         :param pulumi.Input[str] exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
@@ -57,8 +56,7 @@ class ServiceArgs:
     @pulumi.getter(name="netTypes")
     def net_types(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-        indicates access over private network, and `OUTER` indicates access over public network.
+        Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         """
         return pulumi.get(self, "net_types")
 
@@ -193,8 +191,7 @@ class _ServiceState:
         :param pulumi.Input[str] internal_sub_domain: Private network access subdomain name.
         :param pulumi.Input[str] ip_version: IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
         :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-               indicates access over private network, and `OUTER` indicates access over public network.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         :param pulumi.Input[str] outer_sub_domain: Public network access subdomain name.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: Service frontend request type. Valid values: `http`, `https`, `http&https`.
@@ -339,8 +336,7 @@ class _ServiceState:
     @pulumi.getter(name="netTypes")
     def net_types(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-        indicates access over private network, and `OUTER` indicates access over public network.
+        Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         """
         return pulumi.get(self, "net_types")
 
@@ -461,13 +457,41 @@ class Service(pulumi.CustomResource):
                  test_limit: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a Service resource with the given unique name, props, and options.
+        Use this resource to create API gateway service.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            ip_version="IPv4",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            pre_limit=500,
+            protocol="http&https",
+            release_limit=500,
+            service_desc="your nice service",
+            service_name="niceservice",
+            test_limit=500)
+        ```
+
+        ## Import
+
+        API gateway service can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         :param pulumi.Input[str] ip_version: IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-               indicates access over private network, and `OUTER` indicates access over public network.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: Service frontend request type. Valid values: `http`, `https`, `http&https`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -482,7 +506,36 @@ class Service(pulumi.CustomResource):
                  args: ServiceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Service resource with the given unique name, props, and options.
+        Use this resource to create API gateway service.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            ip_version="IPv4",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            pre_limit=500,
+            protocol="http&https",
+            release_limit=500,
+            service_desc="your nice service",
+            service_name="niceservice",
+            test_limit=500)
+        ```
+
+        ## Import
+
+        API gateway service can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
+        ```
+
         :param str resource_name: The name of the resource.
         :param ServiceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -543,7 +596,7 @@ class Service(pulumi.CustomResource):
             __props__.__dict__["outer_sub_domain"] = None
             __props__.__dict__["usage_plan_lists"] = None
         super(Service, __self__).__init__(
-            'tencentcloud:APIGateway/service:Service',
+            'tencentcloud:ApiGateway/service:Service',
             resource_name,
             __props__,
             opts)
@@ -584,8 +637,7 @@ class Service(pulumi.CustomResource):
         :param pulumi.Input[str] internal_sub_domain: Private network access subdomain name.
         :param pulumi.Input[str] ip_version: IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
         :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-               indicates access over private network, and `OUTER` indicates access over public network.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         :param pulumi.Input[str] outer_sub_domain: Public network access subdomain name.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: Service frontend request type. Valid values: `http`, `https`, `http&https`.
@@ -686,8 +738,7 @@ class Service(pulumi.CustomResource):
     @pulumi.getter(name="netTypes")
     def net_types(self) -> pulumi.Output[Sequence[str]]:
         """
-        Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-        indicates access over private network, and `OUTER` indicates access over public network.
+        Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         """
         return pulumi.get(self, "net_types")
 

@@ -21,6 +21,12 @@ class ZoneAccountVpcSetArgs:
                  uin: pulumi.Input[str],
                  uniq_vpc_id: pulumi.Input[str],
                  vpc_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] region: Region.
+        :param pulumi.Input[str] uin: UIN of the VPC account.
+        :param pulumi.Input[str] uniq_vpc_id: VPC ID.
+        :param pulumi.Input[str] vpc_name: VPC NAME.
+        """
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "uin", uin)
         pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
@@ -29,6 +35,9 @@ class ZoneAccountVpcSetArgs:
     @property
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
+        """
+        Region.
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -38,6 +47,9 @@ class ZoneAccountVpcSetArgs:
     @property
     @pulumi.getter
     def uin(self) -> pulumi.Input[str]:
+        """
+        UIN of the VPC account.
+        """
         return pulumi.get(self, "uin")
 
     @uin.setter
@@ -47,6 +59,9 @@ class ZoneAccountVpcSetArgs:
     @property
     @pulumi.getter(name="uniqVpcId")
     def uniq_vpc_id(self) -> pulumi.Input[str]:
+        """
+        VPC ID.
+        """
         return pulumi.get(self, "uniq_vpc_id")
 
     @uniq_vpc_id.setter
@@ -56,6 +71,9 @@ class ZoneAccountVpcSetArgs:
     @property
     @pulumi.getter(name="vpcName")
     def vpc_name(self) -> pulumi.Input[str]:
+        """
+        VPC NAME.
+        """
         return pulumi.get(self, "vpc_name")
 
     @vpc_name.setter
@@ -68,12 +86,19 @@ class ZoneTagSetArgs:
     def __init__(__self__, *,
                  tag_key: pulumi.Input[str],
                  tag_value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] tag_key: Key of Tag.
+        :param pulumi.Input[str] tag_value: Value of Tag.
+        """
         pulumi.set(__self__, "tag_key", tag_key)
         pulumi.set(__self__, "tag_value", tag_value)
 
     @property
     @pulumi.getter(name="tagKey")
     def tag_key(self) -> pulumi.Input[str]:
+        """
+        Key of Tag.
+        """
         return pulumi.get(self, "tag_key")
 
     @tag_key.setter
@@ -83,6 +108,9 @@ class ZoneTagSetArgs:
     @property
     @pulumi.getter(name="tagValue")
     def tag_value(self) -> pulumi.Input[str]:
+        """
+        Value of Tag.
+        """
         return pulumi.get(self, "tag_value")
 
     @tag_value.setter
@@ -95,12 +123,19 @@ class ZoneVpcSetArgs:
     def __init__(__self__, *,
                  region: pulumi.Input[str],
                  uniq_vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] region: VPC REGION.
+        :param pulumi.Input[str] uniq_vpc_id: VPC ID.
+        """
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
 
     @property
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
+        """
+        VPC REGION.
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -110,6 +145,9 @@ class ZoneVpcSetArgs:
     @property
     @pulumi.getter(name="uniqVpcId")
     def uniq_vpc_id(self) -> pulumi.Input[str]:
+        """
+        VPC ID.
+        """
         return pulumi.get(self, "uniq_vpc_id")
 
     @uniq_vpc_id.setter

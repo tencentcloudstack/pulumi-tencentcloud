@@ -10,175 +10,214 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type KeysKeyList struct {
-	Alias              string `pulumi:"alias"`
-	CreateTime         int    `pulumi:"createTime"`
-	CreatorUin         int    `pulumi:"creatorUin"`
-	DeletionDate       int    `pulumi:"deletionDate"`
-	Description        string `pulumi:"description"`
-	KeyId              string `pulumi:"keyId"`
-	KeyRotationEnabled bool   `pulumi:"keyRotationEnabled"`
-	KeyState           string `pulumi:"keyState"`
-	KeyUsage           string `pulumi:"keyUsage"`
-	NextRotateTime     int    `pulumi:"nextRotateTime"`
-	Origin             string `pulumi:"origin"`
-	Owner              string `pulumi:"owner"`
-	ValidTo            int    `pulumi:"validTo"`
+type GetKeysKeyList struct {
+	// Name of CMK.
+	Alias string `pulumi:"alias"`
+	// Create time of CMK.
+	CreateTime int `pulumi:"createTime"`
+	// Uin of CMK Creator.
+	CreatorUin int `pulumi:"creatorUin"`
+	// Delete time of CMK.
+	DeletionDate int `pulumi:"deletionDate"`
+	// Description of CMK.
+	Description string `pulumi:"description"`
+	// ID of CMK.
+	KeyId string `pulumi:"keyId"`
+	// Specify whether to enable key rotation.
+	KeyRotationEnabled bool `pulumi:"keyRotationEnabled"`
+	// Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
+	KeyState string `pulumi:"keyState"`
+	// Filter by usage of CMK. Available values include `ALL`, `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
+	KeyUsage string `pulumi:"keyUsage"`
+	// Next rotate time of CMK when keyRotationEnabled is true.
+	NextRotateTime int `pulumi:"nextRotateTime"`
+	// Filter by origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user, `ALL` - all CMKs. Default value is `ALL`.
+	Origin string `pulumi:"origin"`
+	// Creator of CMK.
+	Owner string `pulumi:"owner"`
+	// Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+	ValidTo int `pulumi:"validTo"`
 }
 
-// KeysKeyListInput is an input type that accepts KeysKeyListArgs and KeysKeyListOutput values.
-// You can construct a concrete instance of `KeysKeyListInput` via:
+// GetKeysKeyListInput is an input type that accepts GetKeysKeyListArgs and GetKeysKeyListOutput values.
+// You can construct a concrete instance of `GetKeysKeyListInput` via:
 //
-//          KeysKeyListArgs{...}
-type KeysKeyListInput interface {
+//          GetKeysKeyListArgs{...}
+type GetKeysKeyListInput interface {
 	pulumi.Input
 
-	ToKeysKeyListOutput() KeysKeyListOutput
-	ToKeysKeyListOutputWithContext(context.Context) KeysKeyListOutput
+	ToGetKeysKeyListOutput() GetKeysKeyListOutput
+	ToGetKeysKeyListOutputWithContext(context.Context) GetKeysKeyListOutput
 }
 
-type KeysKeyListArgs struct {
-	Alias              pulumi.StringInput `pulumi:"alias"`
-	CreateTime         pulumi.IntInput    `pulumi:"createTime"`
-	CreatorUin         pulumi.IntInput    `pulumi:"creatorUin"`
-	DeletionDate       pulumi.IntInput    `pulumi:"deletionDate"`
-	Description        pulumi.StringInput `pulumi:"description"`
-	KeyId              pulumi.StringInput `pulumi:"keyId"`
-	KeyRotationEnabled pulumi.BoolInput   `pulumi:"keyRotationEnabled"`
-	KeyState           pulumi.StringInput `pulumi:"keyState"`
-	KeyUsage           pulumi.StringInput `pulumi:"keyUsage"`
-	NextRotateTime     pulumi.IntInput    `pulumi:"nextRotateTime"`
-	Origin             pulumi.StringInput `pulumi:"origin"`
-	Owner              pulumi.StringInput `pulumi:"owner"`
-	ValidTo            pulumi.IntInput    `pulumi:"validTo"`
+type GetKeysKeyListArgs struct {
+	// Name of CMK.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// Create time of CMK.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// Uin of CMK Creator.
+	CreatorUin pulumi.IntInput `pulumi:"creatorUin"`
+	// Delete time of CMK.
+	DeletionDate pulumi.IntInput `pulumi:"deletionDate"`
+	// Description of CMK.
+	Description pulumi.StringInput `pulumi:"description"`
+	// ID of CMK.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// Specify whether to enable key rotation.
+	KeyRotationEnabled pulumi.BoolInput `pulumi:"keyRotationEnabled"`
+	// Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
+	KeyState pulumi.StringInput `pulumi:"keyState"`
+	// Filter by usage of CMK. Available values include `ALL`, `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
+	KeyUsage pulumi.StringInput `pulumi:"keyUsage"`
+	// Next rotate time of CMK when keyRotationEnabled is true.
+	NextRotateTime pulumi.IntInput `pulumi:"nextRotateTime"`
+	// Filter by origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user, `ALL` - all CMKs. Default value is `ALL`.
+	Origin pulumi.StringInput `pulumi:"origin"`
+	// Creator of CMK.
+	Owner pulumi.StringInput `pulumi:"owner"`
+	// Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+	ValidTo pulumi.IntInput `pulumi:"validTo"`
 }
 
-func (KeysKeyListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*KeysKeyList)(nil)).Elem()
+func (GetKeysKeyListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetKeysKeyList)(nil)).Elem()
 }
 
-func (i KeysKeyListArgs) ToKeysKeyListOutput() KeysKeyListOutput {
-	return i.ToKeysKeyListOutputWithContext(context.Background())
+func (i GetKeysKeyListArgs) ToGetKeysKeyListOutput() GetKeysKeyListOutput {
+	return i.ToGetKeysKeyListOutputWithContext(context.Background())
 }
 
-func (i KeysKeyListArgs) ToKeysKeyListOutputWithContext(ctx context.Context) KeysKeyListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KeysKeyListOutput)
+func (i GetKeysKeyListArgs) ToGetKeysKeyListOutputWithContext(ctx context.Context) GetKeysKeyListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetKeysKeyListOutput)
 }
 
-// KeysKeyListArrayInput is an input type that accepts KeysKeyListArray and KeysKeyListArrayOutput values.
-// You can construct a concrete instance of `KeysKeyListArrayInput` via:
+// GetKeysKeyListArrayInput is an input type that accepts GetKeysKeyListArray and GetKeysKeyListArrayOutput values.
+// You can construct a concrete instance of `GetKeysKeyListArrayInput` via:
 //
-//          KeysKeyListArray{ KeysKeyListArgs{...} }
-type KeysKeyListArrayInput interface {
+//          GetKeysKeyListArray{ GetKeysKeyListArgs{...} }
+type GetKeysKeyListArrayInput interface {
 	pulumi.Input
 
-	ToKeysKeyListArrayOutput() KeysKeyListArrayOutput
-	ToKeysKeyListArrayOutputWithContext(context.Context) KeysKeyListArrayOutput
+	ToGetKeysKeyListArrayOutput() GetKeysKeyListArrayOutput
+	ToGetKeysKeyListArrayOutputWithContext(context.Context) GetKeysKeyListArrayOutput
 }
 
-type KeysKeyListArray []KeysKeyListInput
+type GetKeysKeyListArray []GetKeysKeyListInput
 
-func (KeysKeyListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]KeysKeyList)(nil)).Elem()
+func (GetKeysKeyListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetKeysKeyList)(nil)).Elem()
 }
 
-func (i KeysKeyListArray) ToKeysKeyListArrayOutput() KeysKeyListArrayOutput {
-	return i.ToKeysKeyListArrayOutputWithContext(context.Background())
+func (i GetKeysKeyListArray) ToGetKeysKeyListArrayOutput() GetKeysKeyListArrayOutput {
+	return i.ToGetKeysKeyListArrayOutputWithContext(context.Background())
 }
 
-func (i KeysKeyListArray) ToKeysKeyListArrayOutputWithContext(ctx context.Context) KeysKeyListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KeysKeyListArrayOutput)
+func (i GetKeysKeyListArray) ToGetKeysKeyListArrayOutputWithContext(ctx context.Context) GetKeysKeyListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetKeysKeyListArrayOutput)
 }
 
-type KeysKeyListOutput struct{ *pulumi.OutputState }
+type GetKeysKeyListOutput struct{ *pulumi.OutputState }
 
-func (KeysKeyListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*KeysKeyList)(nil)).Elem()
+func (GetKeysKeyListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetKeysKeyList)(nil)).Elem()
 }
 
-func (o KeysKeyListOutput) ToKeysKeyListOutput() KeysKeyListOutput {
+func (o GetKeysKeyListOutput) ToGetKeysKeyListOutput() GetKeysKeyListOutput {
 	return o
 }
 
-func (o KeysKeyListOutput) ToKeysKeyListOutputWithContext(ctx context.Context) KeysKeyListOutput {
+func (o GetKeysKeyListOutput) ToGetKeysKeyListOutputWithContext(ctx context.Context) GetKeysKeyListOutput {
 	return o
 }
 
-func (o KeysKeyListOutput) Alias() pulumi.StringOutput {
-	return o.ApplyT(func(v KeysKeyList) string { return v.Alias }).(pulumi.StringOutput)
+// Name of CMK.
+func (o GetKeysKeyListOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeysKeyList) string { return v.Alias }).(pulumi.StringOutput)
 }
 
-func (o KeysKeyListOutput) CreateTime() pulumi.IntOutput {
-	return o.ApplyT(func(v KeysKeyList) int { return v.CreateTime }).(pulumi.IntOutput)
+// Create time of CMK.
+func (o GetKeysKeyListOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetKeysKeyList) int { return v.CreateTime }).(pulumi.IntOutput)
 }
 
-func (o KeysKeyListOutput) CreatorUin() pulumi.IntOutput {
-	return o.ApplyT(func(v KeysKeyList) int { return v.CreatorUin }).(pulumi.IntOutput)
+// Uin of CMK Creator.
+func (o GetKeysKeyListOutput) CreatorUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetKeysKeyList) int { return v.CreatorUin }).(pulumi.IntOutput)
 }
 
-func (o KeysKeyListOutput) DeletionDate() pulumi.IntOutput {
-	return o.ApplyT(func(v KeysKeyList) int { return v.DeletionDate }).(pulumi.IntOutput)
+// Delete time of CMK.
+func (o GetKeysKeyListOutput) DeletionDate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetKeysKeyList) int { return v.DeletionDate }).(pulumi.IntOutput)
 }
 
-func (o KeysKeyListOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v KeysKeyList) string { return v.Description }).(pulumi.StringOutput)
+// Description of CMK.
+func (o GetKeysKeyListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeysKeyList) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o KeysKeyListOutput) KeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v KeysKeyList) string { return v.KeyId }).(pulumi.StringOutput)
+// ID of CMK.
+func (o GetKeysKeyListOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeysKeyList) string { return v.KeyId }).(pulumi.StringOutput)
 }
 
-func (o KeysKeyListOutput) KeyRotationEnabled() pulumi.BoolOutput {
-	return o.ApplyT(func(v KeysKeyList) bool { return v.KeyRotationEnabled }).(pulumi.BoolOutput)
+// Specify whether to enable key rotation.
+func (o GetKeysKeyListOutput) KeyRotationEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetKeysKeyList) bool { return v.KeyRotationEnabled }).(pulumi.BoolOutput)
 }
 
-func (o KeysKeyListOutput) KeyState() pulumi.StringOutput {
-	return o.ApplyT(func(v KeysKeyList) string { return v.KeyState }).(pulumi.StringOutput)
+// Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
+func (o GetKeysKeyListOutput) KeyState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeysKeyList) string { return v.KeyState }).(pulumi.StringOutput)
 }
 
-func (o KeysKeyListOutput) KeyUsage() pulumi.StringOutput {
-	return o.ApplyT(func(v KeysKeyList) string { return v.KeyUsage }).(pulumi.StringOutput)
+// Filter by usage of CMK. Available values include `ALL`, `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
+func (o GetKeysKeyListOutput) KeyUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeysKeyList) string { return v.KeyUsage }).(pulumi.StringOutput)
 }
 
-func (o KeysKeyListOutput) NextRotateTime() pulumi.IntOutput {
-	return o.ApplyT(func(v KeysKeyList) int { return v.NextRotateTime }).(pulumi.IntOutput)
+// Next rotate time of CMK when keyRotationEnabled is true.
+func (o GetKeysKeyListOutput) NextRotateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetKeysKeyList) int { return v.NextRotateTime }).(pulumi.IntOutput)
 }
 
-func (o KeysKeyListOutput) Origin() pulumi.StringOutput {
-	return o.ApplyT(func(v KeysKeyList) string { return v.Origin }).(pulumi.StringOutput)
+// Filter by origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user, `ALL` - all CMKs. Default value is `ALL`.
+func (o GetKeysKeyListOutput) Origin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeysKeyList) string { return v.Origin }).(pulumi.StringOutput)
 }
 
-func (o KeysKeyListOutput) Owner() pulumi.StringOutput {
-	return o.ApplyT(func(v KeysKeyList) string { return v.Owner }).(pulumi.StringOutput)
+// Creator of CMK.
+func (o GetKeysKeyListOutput) Owner() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeysKeyList) string { return v.Owner }).(pulumi.StringOutput)
 }
 
-func (o KeysKeyListOutput) ValidTo() pulumi.IntOutput {
-	return o.ApplyT(func(v KeysKeyList) int { return v.ValidTo }).(pulumi.IntOutput)
+// Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+func (o GetKeysKeyListOutput) ValidTo() pulumi.IntOutput {
+	return o.ApplyT(func(v GetKeysKeyList) int { return v.ValidTo }).(pulumi.IntOutput)
 }
 
-type KeysKeyListArrayOutput struct{ *pulumi.OutputState }
+type GetKeysKeyListArrayOutput struct{ *pulumi.OutputState }
 
-func (KeysKeyListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]KeysKeyList)(nil)).Elem()
+func (GetKeysKeyListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetKeysKeyList)(nil)).Elem()
 }
 
-func (o KeysKeyListArrayOutput) ToKeysKeyListArrayOutput() KeysKeyListArrayOutput {
+func (o GetKeysKeyListArrayOutput) ToGetKeysKeyListArrayOutput() GetKeysKeyListArrayOutput {
 	return o
 }
 
-func (o KeysKeyListArrayOutput) ToKeysKeyListArrayOutputWithContext(ctx context.Context) KeysKeyListArrayOutput {
+func (o GetKeysKeyListArrayOutput) ToGetKeysKeyListArrayOutputWithContext(ctx context.Context) GetKeysKeyListArrayOutput {
 	return o
 }
 
-func (o KeysKeyListArrayOutput) Index(i pulumi.IntInput) KeysKeyListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) KeysKeyList {
-		return vs[0].([]KeysKeyList)[vs[1].(int)]
-	}).(KeysKeyListOutput)
+func (o GetKeysKeyListArrayOutput) Index(i pulumi.IntInput) GetKeysKeyListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetKeysKeyList {
+		return vs[0].([]GetKeysKeyList)[vs[1].(int)]
+	}).(GetKeysKeyListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*KeysKeyListInput)(nil)).Elem(), KeysKeyListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*KeysKeyListArrayInput)(nil)).Elem(), KeysKeyListArray{})
-	pulumi.RegisterOutputType(KeysKeyListOutput{})
-	pulumi.RegisterOutputType(KeysKeyListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetKeysKeyListInput)(nil)).Elem(), GetKeysKeyListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetKeysKeyListArrayInput)(nil)).Elem(), GetKeysKeyListArray{})
+	pulumi.RegisterOutputType(GetKeysKeyListOutput{})
+	pulumi.RegisterOutputType(GetKeysKeyListArrayOutput{})
 }

@@ -5,7 +5,9 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .cdn_domain import *
-from .domains import *
+from .domain import *
+from .get_domains import *
+from .url_purge import *
+from .url_push import *
 from ._inputs import *
 from . import outputs

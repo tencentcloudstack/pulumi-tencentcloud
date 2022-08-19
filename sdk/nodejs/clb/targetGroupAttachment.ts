@@ -4,6 +4,51 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CLB target group attachment is bound to the load balancing listener or forwarding rule.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-clb-rule-basic",
+ * });
+ * const listenerBasic = new tencentcloud.clb.Listener("listenerBasic", {
+ *     clbId: clbBasic.id,
+ *     port: 1,
+ *     protocol: "HTTP",
+ *     listenerName: "listener_basic",
+ * });
+ * const ruleBasic = new tencentcloud.clb.ListenerRule("ruleBasic", {
+ *     clbId: clbBasic.id,
+ *     listenerId: listenerBasic.listenerId,
+ *     domain: "abc.com",
+ *     url: "/",
+ *     sessionExpireTime: 30,
+ *     scheduler: "WRR",
+ *     targetType: "TARGETGROUP",
+ * });
+ * const test = new tencentcloud.clb.TargetGroup("test", {targetGroupName: "test-target-keep-1"});
+ * const group = new tencentcloud.clb.TargetGroupAttachment("group", {
+ *     clbId: clbBasic.id,
+ *     listenerId: listenerBasic.listenerId,
+ *     ruleId: ruleBasic.ruleId,
+ *     targetGroupId: test.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CLB target group attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+ * ```
+ */
 export class TargetGroupAttachment extends pulumi.CustomResource {
     /**
      * Get an existing TargetGroupAttachment resource's state with the given name, ID, and optional extra
@@ -49,7 +94,7 @@ export class TargetGroupAttachment extends pulumi.CustomResource {
      */
     public readonly targetGroupId!: pulumi.Output<string | undefined>;
     /**
-     * ID of the CLB target group.
+     * It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
      *
      * @deprecated It has been deprecated from version 1.47.1. Use `target_group_id` instead.
      */
@@ -113,7 +158,7 @@ export interface TargetGroupAttachmentState {
      */
     targetGroupId?: pulumi.Input<string>;
     /**
-     * ID of the CLB target group.
+     * It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
      *
      * @deprecated It has been deprecated from version 1.47.1. Use `target_group_id` instead.
      */
@@ -141,7 +186,7 @@ export interface TargetGroupAttachmentArgs {
      */
     targetGroupId?: pulumi.Input<string>;
     /**
-     * ID of the CLB target group.
+     * It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
      *
      * @deprecated It has been deprecated from version 1.47.1. Use `target_group_id` instead.
      */

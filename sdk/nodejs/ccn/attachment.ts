@@ -4,6 +4,46 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a CCN attaching resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const region = config.get("region") || "ap-guangzhou";
+ * const otheruin = config.get("otheruin") || "123353";
+ * const otherccn = config.get("otherccn") || "ccn-151ssaga";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
+ *     cidrBlock: "10.0.0.0/16",
+ *     dnsServers: [
+ *         "119.29.29.29",
+ *         "8.8.8.8",
+ *     ],
+ *     isMulticast: false,
+ * });
+ * const main = new tencentcloud.ccn.Instance("main", {
+ *     description: "ci-temp-test-ccn-des",
+ *     qos: "AG",
+ * });
+ * const attachment = new tencentcloud.ccn.Attachment("attachment", {
+ *     ccnId: main.id,
+ *     instanceType: "VPC",
+ *     instanceId: vpc.id,
+ *     instanceRegion: region,
+ * });
+ * const otherAccount = new tencentcloud.ccn.Attachment("otherAccount", {
+ *     ccnId: otherccn,
+ *     instanceType: "VPC",
+ *     instanceId: vpc.id,
+ *     instanceRegion: region,
+ *     ccnUin: otheruin,
+ * });
+ * ```
+ */
 export class Attachment extends pulumi.CustomResource {
     /**
      * Get an existing Attachment resource's state with the given name, ID, and optional extra
@@ -41,8 +81,7 @@ export class Attachment extends pulumi.CustomResource {
      */
     public readonly ccnId!: pulumi.Output<string>;
     /**
-     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-     * attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
     public readonly ccnUin!: pulumi.Output<string>;
     /**
@@ -58,14 +97,11 @@ export class Attachment extends pulumi.CustomResource {
      */
     public readonly instanceRegion!: pulumi.Output<string>;
     /**
-     * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-     * `VPNGW` type is only for whitelist customer now.
+     * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
      */
     public readonly instanceType!: pulumi.Output<string>;
     /**
-     * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-     * `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-     * `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+     * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
      */
     public /*out*/ readonly state!: pulumi.Output<string>;
 
@@ -131,8 +167,7 @@ export interface AttachmentState {
      */
     ccnId?: pulumi.Input<string>;
     /**
-     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-     * attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
     ccnUin?: pulumi.Input<string>;
     /**
@@ -148,14 +183,11 @@ export interface AttachmentState {
      */
     instanceRegion?: pulumi.Input<string>;
     /**
-     * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-     * `VPNGW` type is only for whitelist customer now.
+     * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
      */
     instanceType?: pulumi.Input<string>;
     /**
-     * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-     * `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-     * `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+     * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
      */
     state?: pulumi.Input<string>;
 }
@@ -169,8 +201,7 @@ export interface AttachmentArgs {
      */
     ccnId: pulumi.Input<string>;
     /**
-     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-     * attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
     ccnUin?: pulumi.Input<string>;
     /**
@@ -182,8 +213,7 @@ export interface AttachmentArgs {
      */
     instanceRegion: pulumi.Input<string>;
     /**
-     * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-     * `VPNGW` type is only for whitelist customer now.
+     * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
      */
     instanceType: pulumi.Input<string>;
 }

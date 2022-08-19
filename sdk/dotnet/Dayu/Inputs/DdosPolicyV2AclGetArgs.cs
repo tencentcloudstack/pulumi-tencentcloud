@@ -12,24 +12,45 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyV2AclGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Action, optional values: drop, transmit, forward.
+        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
+        /// <summary>
+        /// The destination port ends, and the value range is 0~65535.
+        /// </summary>
         [Input("dPortEnd", required: true)]
         public Input<int> DPortEnd { get; set; } = null!;
 
+        /// <summary>
+        /// The destination port starts, and the value range is 0~65535.
+        /// </summary>
         [Input("dPortStart", required: true)]
         public Input<int> DPortStart { get; set; } = null!;
 
+        /// <summary>
+        /// Protocol type, desirable values tcp, udp, all.
+        /// </summary>
         [Input("forwardProtocol", required: true)]
         public Input<string> ForwardProtocol { get; set; } = null!;
 
+        /// <summary>
+        /// Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+        /// </summary>
         [Input("priority", required: true)]
         public Input<int> Priority { get; set; } = null!;
 
+        /// <summary>
+        /// The source port ends, and the acceptable value ranges from 0 to 65535.
+        /// </summary>
         [Input("sPortEnd", required: true)]
         public Input<int> SPortEnd { get; set; } = null!;
 
+        /// <summary>
+        /// The source port starts, and the value range is 0~65535.
+        /// </summary>
         [Input("sPortStart", required: true)]
         public Input<int> SPortStart { get; set; } = null!;
 

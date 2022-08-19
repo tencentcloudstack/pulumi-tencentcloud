@@ -9,54 +9,63 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'CdnDomainAuthenticationArgs',
-    'CdnDomainAuthenticationTypeAArgs',
-    'CdnDomainAuthenticationTypeBArgs',
-    'CdnDomainAuthenticationTypeCArgs',
-    'CdnDomainAuthenticationTypeDArgs',
-    'CdnDomainAwsPrivateAccessArgs',
-    'CdnDomainBandWidthAlertArgs',
-    'CdnDomainBandWidthAlertStatisticItemArgs',
-    'CdnDomainCompressionArgs',
-    'CdnDomainCompressionCompressionRuleArgs',
-    'CdnDomainDownstreamCappingArgs',
-    'CdnDomainDownstreamCappingCappingRuleArgs',
-    'CdnDomainErrorPageArgs',
-    'CdnDomainErrorPagePageRuleArgs',
-    'CdnDomainHttpsConfigArgs',
-    'CdnDomainHttpsConfigClientCertificateConfigArgs',
-    'CdnDomainHttpsConfigForceRedirectArgs',
-    'CdnDomainHttpsConfigServerCertificateConfigArgs',
-    'CdnDomainHwPrivateAccessArgs',
-    'CdnDomainIpFilterArgs',
-    'CdnDomainIpFilterFilterRuleArgs',
-    'CdnDomainIpFreqLimitArgs',
-    'CdnDomainMaxAgeArgs',
-    'CdnDomainMaxAgeMaxAgeRuleArgs',
-    'CdnDomainOriginArgs',
-    'CdnDomainOriginPullOptimizationArgs',
-    'CdnDomainOriginPullTimeoutArgs',
-    'CdnDomainOssPrivateAccessArgs',
-    'CdnDomainQnPrivateAccessArgs',
-    'CdnDomainRefererArgs',
-    'CdnDomainRefererRefererRuleArgs',
-    'CdnDomainRequestHeaderArgs',
-    'CdnDomainRequestHeaderHeaderRuleArgs',
-    'CdnDomainResponseHeaderArgs',
-    'CdnDomainResponseHeaderHeaderRuleArgs',
-    'CdnDomainRuleCachArgs',
-    'CdnDomainStatusCodeCacheArgs',
-    'CdnDomainStatusCodeCacheCacheRuleArgs',
+    'DomainAuthenticationArgs',
+    'DomainAuthenticationTypeAArgs',
+    'DomainAuthenticationTypeBArgs',
+    'DomainAuthenticationTypeCArgs',
+    'DomainAuthenticationTypeDArgs',
+    'DomainAwsPrivateAccessArgs',
+    'DomainBandWidthAlertArgs',
+    'DomainBandWidthAlertStatisticItemArgs',
+    'DomainCompressionArgs',
+    'DomainCompressionCompressionRuleArgs',
+    'DomainDownstreamCappingArgs',
+    'DomainDownstreamCappingCappingRuleArgs',
+    'DomainErrorPageArgs',
+    'DomainErrorPagePageRuleArgs',
+    'DomainHttpsConfigArgs',
+    'DomainHttpsConfigClientCertificateConfigArgs',
+    'DomainHttpsConfigForceRedirectArgs',
+    'DomainHttpsConfigServerCertificateConfigArgs',
+    'DomainHwPrivateAccessArgs',
+    'DomainIpFilterArgs',
+    'DomainIpFilterFilterRuleArgs',
+    'DomainIpFreqLimitArgs',
+    'DomainMaxAgeArgs',
+    'DomainMaxAgeMaxAgeRuleArgs',
+    'DomainOriginArgs',
+    'DomainOriginPullOptimizationArgs',
+    'DomainOriginPullTimeoutArgs',
+    'DomainOssPrivateAccessArgs',
+    'DomainQnPrivateAccessArgs',
+    'DomainRefererArgs',
+    'DomainRefererRefererRuleArgs',
+    'DomainRequestHeaderArgs',
+    'DomainRequestHeaderHeaderRuleArgs',
+    'DomainResponseHeaderArgs',
+    'DomainResponseHeaderHeaderRuleArgs',
+    'DomainRuleCachArgs',
+    'DomainStatusCodeCacheArgs',
+    'DomainStatusCodeCacheCacheRuleArgs',
+    'UrlPurgePurgeHistoryArgs',
+    'UrlPushPushHistoryArgs',
 ]
 
 @pulumi.input_type
-class CdnDomainAuthenticationArgs:
+class DomainAuthenticationArgs:
     def __init__(__self__, *,
                  switch: Optional[pulumi.Input[str]] = None,
-                 type_a: Optional[pulumi.Input['CdnDomainAuthenticationTypeAArgs']] = None,
-                 type_b: Optional[pulumi.Input['CdnDomainAuthenticationTypeBArgs']] = None,
-                 type_c: Optional[pulumi.Input['CdnDomainAuthenticationTypeCArgs']] = None,
-                 type_d: Optional[pulumi.Input['CdnDomainAuthenticationTypeDArgs']] = None):
+                 type_a: Optional[pulumi.Input['DomainAuthenticationTypeAArgs']] = None,
+                 type_b: Optional[pulumi.Input['DomainAuthenticationTypeBArgs']] = None,
+                 type_c: Optional[pulumi.Input['DomainAuthenticationTypeCArgs']] = None,
+                 type_d: Optional[pulumi.Input['DomainAuthenticationTypeDArgs']] = None):
+        """
+        :param pulumi.Input[str] switch: Authentication switching, available values: `on`, `off`.
+        :param pulumi.Input['DomainAuthenticationTypeAArgs'] type_a: Timestamp hotlink protection mode A configuration.
+        :param pulumi.Input['DomainAuthenticationTypeBArgs'] type_b: Timestamp hotlink protection mode B configuration. NOTE: according to upgrading of TencentCloud Platform, TypeB is unavailable for now.
+        :param pulumi.Input['DomainAuthenticationTypeCArgs'] type_c: Timestamp hotlink protection mode C configuration.
+        :param pulumi.Input['DomainAuthenticationTypeDArgs'] type_d: Timestamp hotlink protection mode D configuration.
+        """
         if switch is not None:
             pulumi.set(__self__, "switch", switch)
         if type_a is not None:
@@ -71,6 +80,9 @@ class CdnDomainAuthenticationArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Authentication switching, available values: `on`, `off`.
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -79,43 +91,55 @@ class CdnDomainAuthenticationArgs:
 
     @property
     @pulumi.getter(name="typeA")
-    def type_a(self) -> Optional[pulumi.Input['CdnDomainAuthenticationTypeAArgs']]:
+    def type_a(self) -> Optional[pulumi.Input['DomainAuthenticationTypeAArgs']]:
+        """
+        Timestamp hotlink protection mode A configuration.
+        """
         return pulumi.get(self, "type_a")
 
     @type_a.setter
-    def type_a(self, value: Optional[pulumi.Input['CdnDomainAuthenticationTypeAArgs']]):
+    def type_a(self, value: Optional[pulumi.Input['DomainAuthenticationTypeAArgs']]):
         pulumi.set(self, "type_a", value)
 
     @property
     @pulumi.getter(name="typeB")
-    def type_b(self) -> Optional[pulumi.Input['CdnDomainAuthenticationTypeBArgs']]:
+    def type_b(self) -> Optional[pulumi.Input['DomainAuthenticationTypeBArgs']]:
+        """
+        Timestamp hotlink protection mode B configuration. NOTE: according to upgrading of TencentCloud Platform, TypeB is unavailable for now.
+        """
         return pulumi.get(self, "type_b")
 
     @type_b.setter
-    def type_b(self, value: Optional[pulumi.Input['CdnDomainAuthenticationTypeBArgs']]):
+    def type_b(self, value: Optional[pulumi.Input['DomainAuthenticationTypeBArgs']]):
         pulumi.set(self, "type_b", value)
 
     @property
     @pulumi.getter(name="typeC")
-    def type_c(self) -> Optional[pulumi.Input['CdnDomainAuthenticationTypeCArgs']]:
+    def type_c(self) -> Optional[pulumi.Input['DomainAuthenticationTypeCArgs']]:
+        """
+        Timestamp hotlink protection mode C configuration.
+        """
         return pulumi.get(self, "type_c")
 
     @type_c.setter
-    def type_c(self, value: Optional[pulumi.Input['CdnDomainAuthenticationTypeCArgs']]):
+    def type_c(self, value: Optional[pulumi.Input['DomainAuthenticationTypeCArgs']]):
         pulumi.set(self, "type_c", value)
 
     @property
     @pulumi.getter(name="typeD")
-    def type_d(self) -> Optional[pulumi.Input['CdnDomainAuthenticationTypeDArgs']]:
+    def type_d(self) -> Optional[pulumi.Input['DomainAuthenticationTypeDArgs']]:
+        """
+        Timestamp hotlink protection mode D configuration.
+        """
         return pulumi.get(self, "type_d")
 
     @type_d.setter
-    def type_d(self, value: Optional[pulumi.Input['CdnDomainAuthenticationTypeDArgs']]):
+    def type_d(self, value: Optional[pulumi.Input['DomainAuthenticationTypeDArgs']]):
         pulumi.set(self, "type_d", value)
 
 
 @pulumi.input_type
-class CdnDomainAuthenticationTypeAArgs:
+class DomainAuthenticationTypeAArgs:
     def __init__(__self__, *,
                  expire_time: pulumi.Input[int],
                  file_extensions: pulumi.Input[Sequence[pulumi.Input[str]]],
@@ -123,6 +147,14 @@ class CdnDomainAuthenticationTypeAArgs:
                  secret_key: pulumi.Input[str],
                  sign_param: pulumi.Input[str],
                  backup_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] expire_time: Signature expiration time in second. The maximum value is 630720000.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] file_extensions: File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        :param pulumi.Input[str] filter_type: Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        :param pulumi.Input[str] secret_key: The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        :param pulumi.Input[str] sign_param: Signature parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+        :param pulumi.Input[str] backup_secret_key: Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        """
         pulumi.set(__self__, "expire_time", expire_time)
         pulumi.set(__self__, "file_extensions", file_extensions)
         pulumi.set(__self__, "filter_type", filter_type)
@@ -134,6 +166,9 @@ class CdnDomainAuthenticationTypeAArgs:
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> pulumi.Input[int]:
+        """
+        Signature expiration time in second. The maximum value is 630720000.
+        """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
@@ -143,6 +178,9 @@ class CdnDomainAuthenticationTypeAArgs:
     @property
     @pulumi.getter(name="fileExtensions")
     def file_extensions(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        """
         return pulumi.get(self, "file_extensions")
 
     @file_extensions.setter
@@ -152,6 +190,9 @@ class CdnDomainAuthenticationTypeAArgs:
     @property
     @pulumi.getter(name="filterType")
     def filter_type(self) -> pulumi.Input[str]:
+        """
+        Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        """
         return pulumi.get(self, "filter_type")
 
     @filter_type.setter
@@ -161,6 +202,9 @@ class CdnDomainAuthenticationTypeAArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -170,6 +214,9 @@ class CdnDomainAuthenticationTypeAArgs:
     @property
     @pulumi.getter(name="signParam")
     def sign_param(self) -> pulumi.Input[str]:
+        """
+        Signature parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+        """
         return pulumi.get(self, "sign_param")
 
     @sign_param.setter
@@ -179,6 +226,9 @@ class CdnDomainAuthenticationTypeAArgs:
     @property
     @pulumi.getter(name="backupSecretKey")
     def backup_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        """
         return pulumi.get(self, "backup_secret_key")
 
     @backup_secret_key.setter
@@ -187,13 +237,20 @@ class CdnDomainAuthenticationTypeAArgs:
 
 
 @pulumi.input_type
-class CdnDomainAuthenticationTypeBArgs:
+class DomainAuthenticationTypeBArgs:
     def __init__(__self__, *,
                  expire_time: pulumi.Input[int],
                  file_extensions: pulumi.Input[Sequence[pulumi.Input[str]]],
                  filter_type: pulumi.Input[str],
                  secret_key: pulumi.Input[str],
                  backup_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] expire_time: Signature expiration time in second. The maximum value is 630720000.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] file_extensions: File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        :param pulumi.Input[str] filter_type: Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        :param pulumi.Input[str] secret_key: The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        :param pulumi.Input[str] backup_secret_key: Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        """
         pulumi.set(__self__, "expire_time", expire_time)
         pulumi.set(__self__, "file_extensions", file_extensions)
         pulumi.set(__self__, "filter_type", filter_type)
@@ -204,6 +261,9 @@ class CdnDomainAuthenticationTypeBArgs:
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> pulumi.Input[int]:
+        """
+        Signature expiration time in second. The maximum value is 630720000.
+        """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
@@ -213,6 +273,9 @@ class CdnDomainAuthenticationTypeBArgs:
     @property
     @pulumi.getter(name="fileExtensions")
     def file_extensions(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        """
         return pulumi.get(self, "file_extensions")
 
     @file_extensions.setter
@@ -222,6 +285,9 @@ class CdnDomainAuthenticationTypeBArgs:
     @property
     @pulumi.getter(name="filterType")
     def filter_type(self) -> pulumi.Input[str]:
+        """
+        Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        """
         return pulumi.get(self, "filter_type")
 
     @filter_type.setter
@@ -231,6 +297,9 @@ class CdnDomainAuthenticationTypeBArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -240,6 +309,9 @@ class CdnDomainAuthenticationTypeBArgs:
     @property
     @pulumi.getter(name="backupSecretKey")
     def backup_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        """
         return pulumi.get(self, "backup_secret_key")
 
     @backup_secret_key.setter
@@ -248,7 +320,7 @@ class CdnDomainAuthenticationTypeBArgs:
 
 
 @pulumi.input_type
-class CdnDomainAuthenticationTypeCArgs:
+class DomainAuthenticationTypeCArgs:
     def __init__(__self__, *,
                  expire_time: pulumi.Input[int],
                  file_extensions: pulumi.Input[Sequence[pulumi.Input[str]]],
@@ -256,6 +328,14 @@ class CdnDomainAuthenticationTypeCArgs:
                  secret_key: pulumi.Input[str],
                  backup_secret_key: Optional[pulumi.Input[str]] = None,
                  time_format: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] expire_time: Signature expiration time in second. The maximum value is 630720000.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] file_extensions: File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        :param pulumi.Input[str] filter_type: Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        :param pulumi.Input[str] secret_key: The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        :param pulumi.Input[str] backup_secret_key: Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        :param pulumi.Input[str] time_format: Timestamp formation, available values: `dec`, `hex`.
+        """
         pulumi.set(__self__, "expire_time", expire_time)
         pulumi.set(__self__, "file_extensions", file_extensions)
         pulumi.set(__self__, "filter_type", filter_type)
@@ -268,6 +348,9 @@ class CdnDomainAuthenticationTypeCArgs:
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> pulumi.Input[int]:
+        """
+        Signature expiration time in second. The maximum value is 630720000.
+        """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
@@ -277,6 +360,9 @@ class CdnDomainAuthenticationTypeCArgs:
     @property
     @pulumi.getter(name="fileExtensions")
     def file_extensions(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        """
         return pulumi.get(self, "file_extensions")
 
     @file_extensions.setter
@@ -286,6 +372,9 @@ class CdnDomainAuthenticationTypeCArgs:
     @property
     @pulumi.getter(name="filterType")
     def filter_type(self) -> pulumi.Input[str]:
+        """
+        Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        """
         return pulumi.get(self, "filter_type")
 
     @filter_type.setter
@@ -295,6 +384,9 @@ class CdnDomainAuthenticationTypeCArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -304,6 +396,9 @@ class CdnDomainAuthenticationTypeCArgs:
     @property
     @pulumi.getter(name="backupSecretKey")
     def backup_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        """
         return pulumi.get(self, "backup_secret_key")
 
     @backup_secret_key.setter
@@ -313,6 +408,9 @@ class CdnDomainAuthenticationTypeCArgs:
     @property
     @pulumi.getter(name="timeFormat")
     def time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Timestamp formation, available values: `dec`, `hex`.
+        """
         return pulumi.get(self, "time_format")
 
     @time_format.setter
@@ -321,7 +419,7 @@ class CdnDomainAuthenticationTypeCArgs:
 
 
 @pulumi.input_type
-class CdnDomainAuthenticationTypeDArgs:
+class DomainAuthenticationTypeDArgs:
     def __init__(__self__, *,
                  expire_time: pulumi.Input[int],
                  file_extensions: pulumi.Input[Sequence[pulumi.Input[str]]],
@@ -330,6 +428,15 @@ class CdnDomainAuthenticationTypeDArgs:
                  backup_secret_key: Optional[pulumi.Input[str]] = None,
                  time_format: Optional[pulumi.Input[str]] = None,
                  time_param: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] expire_time: Signature expiration time in second. The maximum value is 630720000.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] file_extensions: File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        :param pulumi.Input[str] filter_type: Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        :param pulumi.Input[str] secret_key: The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        :param pulumi.Input[str] backup_secret_key: Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        :param pulumi.Input[str] time_format: Timestamp formation, available values: `dec`, `hex`.
+        :param pulumi.Input[str] time_param: Timestamp parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+        """
         pulumi.set(__self__, "expire_time", expire_time)
         pulumi.set(__self__, "file_extensions", file_extensions)
         pulumi.set(__self__, "filter_type", filter_type)
@@ -344,6 +451,9 @@ class CdnDomainAuthenticationTypeDArgs:
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> pulumi.Input[int]:
+        """
+        Signature expiration time in second. The maximum value is 630720000.
+        """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
@@ -353,6 +463,9 @@ class CdnDomainAuthenticationTypeDArgs:
     @property
     @pulumi.getter(name="fileExtensions")
     def file_extensions(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        File extension list settings determining if authentication should be performed. NOTE: If it contains an asterisk (*), this indicates all files.
+        """
         return pulumi.get(self, "file_extensions")
 
     @file_extensions.setter
@@ -362,6 +475,9 @@ class CdnDomainAuthenticationTypeDArgs:
     @property
     @pulumi.getter(name="filterType")
     def filter_type(self) -> pulumi.Input[str]:
+        """
+        Available values: `whitelist` - all types apart from `file_extensions` are authenticated, `blacklist`: - only the types in the `file_extensions` are authenticated.
+        """
         return pulumi.get(self, "filter_type")
 
     @filter_type.setter
@@ -371,6 +487,9 @@ class CdnDomainAuthenticationTypeDArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The key for signature calculation. Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -380,6 +499,9 @@ class CdnDomainAuthenticationTypeDArgs:
     @property
     @pulumi.getter(name="backupSecretKey")
     def backup_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
+        """
         return pulumi.get(self, "backup_secret_key")
 
     @backup_secret_key.setter
@@ -389,6 +511,9 @@ class CdnDomainAuthenticationTypeDArgs:
     @property
     @pulumi.getter(name="timeFormat")
     def time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Timestamp formation, available values: `dec`, `hex`.
+        """
         return pulumi.get(self, "time_format")
 
     @time_format.setter
@@ -398,6 +523,9 @@ class CdnDomainAuthenticationTypeDArgs:
     @property
     @pulumi.getter(name="timeParam")
     def time_param(self) -> Optional[pulumi.Input[str]]:
+        """
+        Timestamp parameter name. Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+        """
         return pulumi.get(self, "time_param")
 
     @time_param.setter
@@ -406,13 +534,20 @@ class CdnDomainAuthenticationTypeDArgs:
 
 
 @pulumi.input_type
-class CdnDomainAwsPrivateAccessArgs:
+class DomainAwsPrivateAccessArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  access_key: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[str] access_key: Access ID.
+        :param pulumi.Input[str] bucket: Bucket.
+        :param pulumi.Input[str] region: Region.
+        :param pulumi.Input[str] secret_key: Key.
+        """
         pulumi.set(__self__, "switch", switch)
         if access_key is not None:
             pulumi.set(__self__, "access_key", access_key)
@@ -426,6 +561,9 @@ class CdnDomainAwsPrivateAccessArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -435,6 +573,9 @@ class CdnDomainAwsPrivateAccessArgs:
     @property
     @pulumi.getter(name="accessKey")
     def access_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Access ID.
+        """
         return pulumi.get(self, "access_key")
 
     @access_key.setter
@@ -444,6 +585,9 @@ class CdnDomainAwsPrivateAccessArgs:
     @property
     @pulumi.getter
     def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        Bucket.
+        """
         return pulumi.get(self, "bucket")
 
     @bucket.setter
@@ -453,6 +597,9 @@ class CdnDomainAwsPrivateAccessArgs:
     @property
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Region.
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -462,6 +609,9 @@ class CdnDomainAwsPrivateAccessArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -470,7 +620,7 @@ class CdnDomainAwsPrivateAccessArgs:
 
 
 @pulumi.input_type
-class CdnDomainBandWidthAlertArgs:
+class DomainBandWidthAlertArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  alert_percentage: Optional[pulumi.Input[int]] = None,
@@ -480,7 +630,16 @@ class CdnDomainBandWidthAlertArgs:
                  last_trigger_time: Optional[pulumi.Input[str]] = None,
                  last_trigger_time_overseas: Optional[pulumi.Input[str]] = None,
                  metric: Optional[pulumi.Input[str]] = None,
-                 statistic_item: Optional[pulumi.Input['CdnDomainBandWidthAlertStatisticItemArgs']] = None):
+                 statistic_item: Optional[pulumi.Input['DomainBandWidthAlertStatisticItemArgs']] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[int] alert_percentage: Alert percentage.
+        :param pulumi.Input[str] alert_switch: Switch alert.
+        :param pulumi.Input[int] bps_threshold: threshold of bps.
+        :param pulumi.Input[str] counter_measure: Counter measure.
+        :param pulumi.Input[str] metric: Metric.
+        :param pulumi.Input['DomainBandWidthAlertStatisticItemArgs'] statistic_item: Specify statistic item configuration.
+        """
         pulumi.set(__self__, "switch", switch)
         if alert_percentage is not None:
             pulumi.set(__self__, "alert_percentage", alert_percentage)
@@ -502,6 +661,9 @@ class CdnDomainBandWidthAlertArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -511,6 +673,9 @@ class CdnDomainBandWidthAlertArgs:
     @property
     @pulumi.getter(name="alertPercentage")
     def alert_percentage(self) -> Optional[pulumi.Input[int]]:
+        """
+        Alert percentage.
+        """
         return pulumi.get(self, "alert_percentage")
 
     @alert_percentage.setter
@@ -520,6 +685,9 @@ class CdnDomainBandWidthAlertArgs:
     @property
     @pulumi.getter(name="alertSwitch")
     def alert_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Switch alert.
+        """
         return pulumi.get(self, "alert_switch")
 
     @alert_switch.setter
@@ -529,6 +697,9 @@ class CdnDomainBandWidthAlertArgs:
     @property
     @pulumi.getter(name="bpsThreshold")
     def bps_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        threshold of bps.
+        """
         return pulumi.get(self, "bps_threshold")
 
     @bps_threshold.setter
@@ -538,6 +709,9 @@ class CdnDomainBandWidthAlertArgs:
     @property
     @pulumi.getter(name="counterMeasure")
     def counter_measure(self) -> Optional[pulumi.Input[str]]:
+        """
+        Counter measure.
+        """
         return pulumi.get(self, "counter_measure")
 
     @counter_measure.setter
@@ -565,6 +739,9 @@ class CdnDomainBandWidthAlertArgs:
     @property
     @pulumi.getter
     def metric(self) -> Optional[pulumi.Input[str]]:
+        """
+        Metric.
+        """
         return pulumi.get(self, "metric")
 
     @metric.setter
@@ -573,16 +750,19 @@ class CdnDomainBandWidthAlertArgs:
 
     @property
     @pulumi.getter(name="statisticItem")
-    def statistic_item(self) -> Optional[pulumi.Input['CdnDomainBandWidthAlertStatisticItemArgs']]:
+    def statistic_item(self) -> Optional[pulumi.Input['DomainBandWidthAlertStatisticItemArgs']]:
+        """
+        Specify statistic item configuration.
+        """
         return pulumi.get(self, "statistic_item")
 
     @statistic_item.setter
-    def statistic_item(self, value: Optional[pulumi.Input['CdnDomainBandWidthAlertStatisticItemArgs']]):
+    def statistic_item(self, value: Optional[pulumi.Input['DomainBandWidthAlertStatisticItemArgs']]):
         pulumi.set(self, "statistic_item", value)
 
 
 @pulumi.input_type
-class CdnDomainBandWidthAlertStatisticItemArgs:
+class DomainBandWidthAlertStatisticItemArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  alert_percentage: Optional[pulumi.Input[int]] = None,
@@ -593,6 +773,17 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
                  metric: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  unblock_time: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[int] alert_percentage: Alert percentage.
+        :param pulumi.Input[str] alert_switch: Switch alert.
+        :param pulumi.Input[int] bps_threshold: threshold of bps.
+        :param pulumi.Input[str] counter_measure: Counter measure, values: `RETURN_404`, `RESOLVE_DNS_TO_ORIGIN`.
+        :param pulumi.Input[int] cycle: Cycle of checking in minutes, values `60`, `1440`.
+        :param pulumi.Input[str] metric: Metric.
+        :param pulumi.Input[str] type: Type of statistic item.
+        :param pulumi.Input[int] unblock_time: Time of auto unblock.
+        """
         pulumi.set(__self__, "switch", switch)
         if alert_percentage is not None:
             pulumi.set(__self__, "alert_percentage", alert_percentage)
@@ -614,6 +805,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -623,6 +817,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter(name="alertPercentage")
     def alert_percentage(self) -> Optional[pulumi.Input[int]]:
+        """
+        Alert percentage.
+        """
         return pulumi.get(self, "alert_percentage")
 
     @alert_percentage.setter
@@ -632,6 +829,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter(name="alertSwitch")
     def alert_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Switch alert.
+        """
         return pulumi.get(self, "alert_switch")
 
     @alert_switch.setter
@@ -641,6 +841,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter(name="bpsThreshold")
     def bps_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        threshold of bps.
+        """
         return pulumi.get(self, "bps_threshold")
 
     @bps_threshold.setter
@@ -650,6 +853,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter(name="counterMeasure")
     def counter_measure(self) -> Optional[pulumi.Input[str]]:
+        """
+        Counter measure, values: `RETURN_404`, `RESOLVE_DNS_TO_ORIGIN`.
+        """
         return pulumi.get(self, "counter_measure")
 
     @counter_measure.setter
@@ -659,6 +865,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter
     def cycle(self) -> Optional[pulumi.Input[int]]:
+        """
+        Cycle of checking in minutes, values `60`, `1440`.
+        """
         return pulumi.get(self, "cycle")
 
     @cycle.setter
@@ -668,6 +877,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter
     def metric(self) -> Optional[pulumi.Input[str]]:
+        """
+        Metric.
+        """
         return pulumi.get(self, "metric")
 
     @metric.setter
@@ -677,6 +889,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of statistic item.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -686,6 +901,9 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
     @property
     @pulumi.getter(name="unblockTime")
     def unblock_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Time of auto unblock.
+        """
         return pulumi.get(self, "unblock_time")
 
     @unblock_time.setter
@@ -694,10 +912,14 @@ class CdnDomainBandWidthAlertStatisticItemArgs:
 
 
 @pulumi.input_type
-class CdnDomainCompressionArgs:
+class DomainCompressionArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 compression_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainCompressionCompressionRuleArgs']]]] = None):
+                 compression_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainCompressionCompressionRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainCompressionCompressionRuleArgs']]] compression_rules: List of compression rules.
+        """
         pulumi.set(__self__, "switch", switch)
         if compression_rules is not None:
             pulumi.set(__self__, "compression_rules", compression_rules)
@@ -705,6 +927,9 @@ class CdnDomainCompressionArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -713,16 +938,19 @@ class CdnDomainCompressionArgs:
 
     @property
     @pulumi.getter(name="compressionRules")
-    def compression_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainCompressionCompressionRuleArgs']]]]:
+    def compression_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainCompressionCompressionRuleArgs']]]]:
+        """
+        List of compression rules.
+        """
         return pulumi.get(self, "compression_rules")
 
     @compression_rules.setter
-    def compression_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainCompressionCompressionRuleArgs']]]]):
+    def compression_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainCompressionCompressionRuleArgs']]]]):
         pulumi.set(self, "compression_rules", value)
 
 
 @pulumi.input_type
-class CdnDomainCompressionCompressionRuleArgs:
+class DomainCompressionCompressionRuleArgs:
     def __init__(__self__, *,
                  algorithms: pulumi.Input[Sequence[pulumi.Input[str]]],
                  compress: pulumi.Input[bool],
@@ -731,6 +959,15 @@ class CdnDomainCompressionCompressionRuleArgs:
                  file_extensions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rule_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rule_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] algorithms: List of algorithms, available: `gzip` and `brotli`.
+        :param pulumi.Input[bool] compress: Must be set as true, enables compression.
+        :param pulumi.Input[int] max_length: The maximum file size to trigger compression (in bytes).
+        :param pulumi.Input[int] min_length: The minimum file size to trigger compression (in bytes).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] file_extensions: List of file extensions like `jpg`, `txt`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: List of rule paths for each `rule_type`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        :param pulumi.Input[str] rule_type: Rule type, available: `all`, `file`, `directory`, `path`, `contentType`.
+        """
         pulumi.set(__self__, "algorithms", algorithms)
         pulumi.set(__self__, "compress", compress)
         pulumi.set(__self__, "max_length", max_length)
@@ -745,6 +982,9 @@ class CdnDomainCompressionCompressionRuleArgs:
     @property
     @pulumi.getter
     def algorithms(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of algorithms, available: `gzip` and `brotli`.
+        """
         return pulumi.get(self, "algorithms")
 
     @algorithms.setter
@@ -754,6 +994,9 @@ class CdnDomainCompressionCompressionRuleArgs:
     @property
     @pulumi.getter
     def compress(self) -> pulumi.Input[bool]:
+        """
+        Must be set as true, enables compression.
+        """
         return pulumi.get(self, "compress")
 
     @compress.setter
@@ -763,6 +1006,9 @@ class CdnDomainCompressionCompressionRuleArgs:
     @property
     @pulumi.getter(name="maxLength")
     def max_length(self) -> pulumi.Input[int]:
+        """
+        The maximum file size to trigger compression (in bytes).
+        """
         return pulumi.get(self, "max_length")
 
     @max_length.setter
@@ -772,6 +1018,9 @@ class CdnDomainCompressionCompressionRuleArgs:
     @property
     @pulumi.getter(name="minLength")
     def min_length(self) -> pulumi.Input[int]:
+        """
+        The minimum file size to trigger compression (in bytes).
+        """
         return pulumi.get(self, "min_length")
 
     @min_length.setter
@@ -781,6 +1030,9 @@ class CdnDomainCompressionCompressionRuleArgs:
     @property
     @pulumi.getter(name="fileExtensions")
     def file_extensions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of file extensions like `jpg`, `txt`.
+        """
         return pulumi.get(self, "file_extensions")
 
     @file_extensions.setter
@@ -790,6 +1042,9 @@ class CdnDomainCompressionCompressionRuleArgs:
     @property
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of rule paths for each `rule_type`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        """
         return pulumi.get(self, "rule_paths")
 
     @rule_paths.setter
@@ -799,6 +1054,9 @@ class CdnDomainCompressionCompressionRuleArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Rule type, available: `all`, `file`, `directory`, `path`, `contentType`.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -807,10 +1065,14 @@ class CdnDomainCompressionCompressionRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainDownstreamCappingArgs:
+class DomainDownstreamCappingArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 capping_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainDownstreamCappingCappingRuleArgs']]]] = None):
+                 capping_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainDownstreamCappingCappingRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainDownstreamCappingCappingRuleArgs']]] capping_rules: List of capping rule.
+        """
         pulumi.set(__self__, "switch", switch)
         if capping_rules is not None:
             pulumi.set(__self__, "capping_rules", capping_rules)
@@ -818,6 +1080,9 @@ class CdnDomainDownstreamCappingArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -826,20 +1091,28 @@ class CdnDomainDownstreamCappingArgs:
 
     @property
     @pulumi.getter(name="cappingRules")
-    def capping_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainDownstreamCappingCappingRuleArgs']]]]:
+    def capping_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainDownstreamCappingCappingRuleArgs']]]]:
+        """
+        List of capping rule.
+        """
         return pulumi.get(self, "capping_rules")
 
     @capping_rules.setter
-    def capping_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainDownstreamCappingCappingRuleArgs']]]]):
+    def capping_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainDownstreamCappingCappingRuleArgs']]]]):
         pulumi.set(self, "capping_rules", value)
 
 
 @pulumi.input_type
-class CdnDomainDownstreamCappingCappingRuleArgs:
+class DomainDownstreamCappingCappingRuleArgs:
     def __init__(__self__, *,
                  kbps_threshold: pulumi.Input[int],
                  rule_paths: pulumi.Input[Sequence[pulumi.Input[str]]],
                  rule_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] kbps_threshold: Capping rule kbps threshold.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: List of capping rule path.
+        :param pulumi.Input[str] rule_type: Capping rule type.
+        """
         pulumi.set(__self__, "kbps_threshold", kbps_threshold)
         pulumi.set(__self__, "rule_paths", rule_paths)
         pulumi.set(__self__, "rule_type", rule_type)
@@ -847,6 +1120,9 @@ class CdnDomainDownstreamCappingCappingRuleArgs:
     @property
     @pulumi.getter(name="kbpsThreshold")
     def kbps_threshold(self) -> pulumi.Input[int]:
+        """
+        Capping rule kbps threshold.
+        """
         return pulumi.get(self, "kbps_threshold")
 
     @kbps_threshold.setter
@@ -856,6 +1132,9 @@ class CdnDomainDownstreamCappingCappingRuleArgs:
     @property
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of capping rule path.
+        """
         return pulumi.get(self, "rule_paths")
 
     @rule_paths.setter
@@ -865,6 +1144,9 @@ class CdnDomainDownstreamCappingCappingRuleArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> pulumi.Input[str]:
+        """
+        Capping rule type.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -873,10 +1155,14 @@ class CdnDomainDownstreamCappingCappingRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainErrorPageArgs:
+class DomainErrorPageArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 page_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainErrorPagePageRuleArgs']]]] = None):
+                 page_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainErrorPagePageRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainErrorPagePageRuleArgs']]] page_rules: List of error page rule.
+        """
         pulumi.set(__self__, "switch", switch)
         if page_rules is not None:
             pulumi.set(__self__, "page_rules", page_rules)
@@ -884,6 +1170,9 @@ class CdnDomainErrorPageArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -892,20 +1181,28 @@ class CdnDomainErrorPageArgs:
 
     @property
     @pulumi.getter(name="pageRules")
-    def page_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainErrorPagePageRuleArgs']]]]:
+    def page_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainErrorPagePageRuleArgs']]]]:
+        """
+        List of error page rule.
+        """
         return pulumi.get(self, "page_rules")
 
     @page_rules.setter
-    def page_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainErrorPagePageRuleArgs']]]]):
+    def page_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainErrorPagePageRuleArgs']]]]):
         pulumi.set(self, "page_rules", value)
 
 
 @pulumi.input_type
-class CdnDomainErrorPagePageRuleArgs:
+class DomainErrorPagePageRuleArgs:
     def __init__(__self__, *,
                  redirect_code: pulumi.Input[int],
                  redirect_url: pulumi.Input[str],
                  status_code: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] redirect_code: Redirect code of error page rules.
+        :param pulumi.Input[str] redirect_url: Redirect url of error page rules.
+        :param pulumi.Input[int] status_code: Status code of error page rules.
+        """
         pulumi.set(__self__, "redirect_code", redirect_code)
         pulumi.set(__self__, "redirect_url", redirect_url)
         pulumi.set(__self__, "status_code", status_code)
@@ -913,6 +1210,9 @@ class CdnDomainErrorPagePageRuleArgs:
     @property
     @pulumi.getter(name="redirectCode")
     def redirect_code(self) -> pulumi.Input[int]:
+        """
+        Redirect code of error page rules.
+        """
         return pulumi.get(self, "redirect_code")
 
     @redirect_code.setter
@@ -922,6 +1222,9 @@ class CdnDomainErrorPagePageRuleArgs:
     @property
     @pulumi.getter(name="redirectUrl")
     def redirect_url(self) -> pulumi.Input[str]:
+        """
+        Redirect url of error page rules.
+        """
         return pulumi.get(self, "redirect_url")
 
     @redirect_url.setter
@@ -931,6 +1234,9 @@ class CdnDomainErrorPagePageRuleArgs:
     @property
     @pulumi.getter(name="statusCode")
     def status_code(self) -> pulumi.Input[int]:
+        """
+        Status code of error page rules.
+        """
         return pulumi.get(self, "status_code")
 
     @status_code.setter
@@ -939,16 +1245,26 @@ class CdnDomainErrorPagePageRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainHttpsConfigArgs:
+class DomainHttpsConfigArgs:
     def __init__(__self__, *,
                  https_switch: pulumi.Input[str],
-                 client_certificate_config: Optional[pulumi.Input['CdnDomainHttpsConfigClientCertificateConfigArgs']] = None,
-                 force_redirect: Optional[pulumi.Input['CdnDomainHttpsConfigForceRedirectArgs']] = None,
+                 client_certificate_config: Optional[pulumi.Input['DomainHttpsConfigClientCertificateConfigArgs']] = None,
+                 force_redirect: Optional[pulumi.Input['DomainHttpsConfigForceRedirectArgs']] = None,
                  http2_switch: Optional[pulumi.Input[str]] = None,
                  ocsp_stapling_switch: Optional[pulumi.Input[str]] = None,
-                 server_certificate_config: Optional[pulumi.Input['CdnDomainHttpsConfigServerCertificateConfigArgs']] = None,
+                 server_certificate_config: Optional[pulumi.Input['DomainHttpsConfigServerCertificateConfigArgs']] = None,
                  spdy_switch: Optional[pulumi.Input[str]] = None,
                  verify_client: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] https_switch: HTTPS configuration switch. Valid values are `on` and `off`.
+        :param pulumi.Input['DomainHttpsConfigClientCertificateConfigArgs'] client_certificate_config: Client certificate configuration information.
+        :param pulumi.Input['DomainHttpsConfigForceRedirectArgs'] force_redirect: Configuration of forced HTTP or HTTPS redirects.
+        :param pulumi.Input[str] http2_switch: HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
+        :param pulumi.Input[str] ocsp_stapling_switch: OCSP configuration switch. Valid values are `on` and `off`. and default value is `off`.
+        :param pulumi.Input['DomainHttpsConfigServerCertificateConfigArgs'] server_certificate_config: Server certificate configuration information.
+        :param pulumi.Input[str] spdy_switch: Spdy configuration switch. Valid values are `on` and `off`. and default value is `off`. This parameter is for white-list customer.
+        :param pulumi.Input[str] verify_client: Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
+        """
         pulumi.set(__self__, "https_switch", https_switch)
         if client_certificate_config is not None:
             pulumi.set(__self__, "client_certificate_config", client_certificate_config)
@@ -968,6 +1284,9 @@ class CdnDomainHttpsConfigArgs:
     @property
     @pulumi.getter(name="httpsSwitch")
     def https_switch(self) -> pulumi.Input[str]:
+        """
+        HTTPS configuration switch. Valid values are `on` and `off`.
+        """
         return pulumi.get(self, "https_switch")
 
     @https_switch.setter
@@ -976,25 +1295,34 @@ class CdnDomainHttpsConfigArgs:
 
     @property
     @pulumi.getter(name="clientCertificateConfig")
-    def client_certificate_config(self) -> Optional[pulumi.Input['CdnDomainHttpsConfigClientCertificateConfigArgs']]:
+    def client_certificate_config(self) -> Optional[pulumi.Input['DomainHttpsConfigClientCertificateConfigArgs']]:
+        """
+        Client certificate configuration information.
+        """
         return pulumi.get(self, "client_certificate_config")
 
     @client_certificate_config.setter
-    def client_certificate_config(self, value: Optional[pulumi.Input['CdnDomainHttpsConfigClientCertificateConfigArgs']]):
+    def client_certificate_config(self, value: Optional[pulumi.Input['DomainHttpsConfigClientCertificateConfigArgs']]):
         pulumi.set(self, "client_certificate_config", value)
 
     @property
     @pulumi.getter(name="forceRedirect")
-    def force_redirect(self) -> Optional[pulumi.Input['CdnDomainHttpsConfigForceRedirectArgs']]:
+    def force_redirect(self) -> Optional[pulumi.Input['DomainHttpsConfigForceRedirectArgs']]:
+        """
+        Configuration of forced HTTP or HTTPS redirects.
+        """
         return pulumi.get(self, "force_redirect")
 
     @force_redirect.setter
-    def force_redirect(self, value: Optional[pulumi.Input['CdnDomainHttpsConfigForceRedirectArgs']]):
+    def force_redirect(self, value: Optional[pulumi.Input['DomainHttpsConfigForceRedirectArgs']]):
         pulumi.set(self, "force_redirect", value)
 
     @property
     @pulumi.getter(name="http2Switch")
     def http2_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
+        """
         return pulumi.get(self, "http2_switch")
 
     @http2_switch.setter
@@ -1004,6 +1332,9 @@ class CdnDomainHttpsConfigArgs:
     @property
     @pulumi.getter(name="ocspStaplingSwitch")
     def ocsp_stapling_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        OCSP configuration switch. Valid values are `on` and `off`. and default value is `off`.
+        """
         return pulumi.get(self, "ocsp_stapling_switch")
 
     @ocsp_stapling_switch.setter
@@ -1012,16 +1343,22 @@ class CdnDomainHttpsConfigArgs:
 
     @property
     @pulumi.getter(name="serverCertificateConfig")
-    def server_certificate_config(self) -> Optional[pulumi.Input['CdnDomainHttpsConfigServerCertificateConfigArgs']]:
+    def server_certificate_config(self) -> Optional[pulumi.Input['DomainHttpsConfigServerCertificateConfigArgs']]:
+        """
+        Server certificate configuration information.
+        """
         return pulumi.get(self, "server_certificate_config")
 
     @server_certificate_config.setter
-    def server_certificate_config(self, value: Optional[pulumi.Input['CdnDomainHttpsConfigServerCertificateConfigArgs']]):
+    def server_certificate_config(self, value: Optional[pulumi.Input['DomainHttpsConfigServerCertificateConfigArgs']]):
         pulumi.set(self, "server_certificate_config", value)
 
     @property
     @pulumi.getter(name="spdySwitch")
     def spdy_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Spdy configuration switch. Valid values are `on` and `off`. and default value is `off`. This parameter is for white-list customer.
+        """
         return pulumi.get(self, "spdy_switch")
 
     @spdy_switch.setter
@@ -1031,6 +1368,9 @@ class CdnDomainHttpsConfigArgs:
     @property
     @pulumi.getter(name="verifyClient")
     def verify_client(self) -> Optional[pulumi.Input[str]]:
+        """
+        Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
+        """
         return pulumi.get(self, "verify_client")
 
     @verify_client.setter
@@ -1039,12 +1379,16 @@ class CdnDomainHttpsConfigArgs:
 
 
 @pulumi.input_type
-class CdnDomainHttpsConfigClientCertificateConfigArgs:
+class DomainHttpsConfigClientCertificateConfigArgs:
     def __init__(__self__, *,
                  certificate_content: pulumi.Input[str],
                  certificate_name: Optional[pulumi.Input[str]] = None,
                  deploy_time: Optional[pulumi.Input[str]] = None,
                  expire_time: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] certificate_content: Client Certificate PEM format, requires Base64 encoding.
+        :param pulumi.Input[str] expire_time: Signature expiration time in second. The maximum value is 630720000.
+        """
         pulumi.set(__self__, "certificate_content", certificate_content)
         if certificate_name is not None:
             pulumi.set(__self__, "certificate_name", certificate_name)
@@ -1056,6 +1400,9 @@ class CdnDomainHttpsConfigClientCertificateConfigArgs:
     @property
     @pulumi.getter(name="certificateContent")
     def certificate_content(self) -> pulumi.Input[str]:
+        """
+        Client Certificate PEM format, requires Base64 encoding.
+        """
         return pulumi.get(self, "certificate_content")
 
     @certificate_content.setter
@@ -1083,6 +1430,9 @@ class CdnDomainHttpsConfigClientCertificateConfigArgs:
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Signature expiration time in second. The maximum value is 630720000.
+        """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
@@ -1091,11 +1441,16 @@ class CdnDomainHttpsConfigClientCertificateConfigArgs:
 
 
 @pulumi.input_type
-class CdnDomainHttpsConfigForceRedirectArgs:
+class DomainHttpsConfigForceRedirectArgs:
     def __init__(__self__, *,
                  redirect_status_code: Optional[pulumi.Input[int]] = None,
                  redirect_type: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] redirect_status_code: Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
+        :param pulumi.Input[str] redirect_type: Forced redirect type. Valid values are `http` and `https`. `http` means a forced redirect from HTTPS to HTTP, `https` means a forced redirect from HTTP to HTTPS. When `switch` setting `off`, this property does not need to be set or set to `http`. Default value is `http`.
+        :param pulumi.Input[str] switch: Forced redirect configuration switch. Valid values are `on` and `off`. Default value is `off`.
+        """
         if redirect_status_code is not None:
             pulumi.set(__self__, "redirect_status_code", redirect_status_code)
         if redirect_type is not None:
@@ -1106,6 +1461,9 @@ class CdnDomainHttpsConfigForceRedirectArgs:
     @property
     @pulumi.getter(name="redirectStatusCode")
     def redirect_status_code(self) -> Optional[pulumi.Input[int]]:
+        """
+        Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
+        """
         return pulumi.get(self, "redirect_status_code")
 
     @redirect_status_code.setter
@@ -1115,6 +1473,9 @@ class CdnDomainHttpsConfigForceRedirectArgs:
     @property
     @pulumi.getter(name="redirectType")
     def redirect_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Forced redirect type. Valid values are `http` and `https`. `http` means a forced redirect from HTTPS to HTTP, `https` means a forced redirect from HTTP to HTTPS. When `switch` setting `off`, this property does not need to be set or set to `http`. Default value is `http`.
+        """
         return pulumi.get(self, "redirect_type")
 
     @redirect_type.setter
@@ -1124,6 +1485,9 @@ class CdnDomainHttpsConfigForceRedirectArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Forced redirect configuration switch. Valid values are `on` and `off`. Default value is `off`.
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1132,7 +1496,7 @@ class CdnDomainHttpsConfigForceRedirectArgs:
 
 
 @pulumi.input_type
-class CdnDomainHttpsConfigServerCertificateConfigArgs:
+class DomainHttpsConfigServerCertificateConfigArgs:
     def __init__(__self__, *,
                  certificate_content: Optional[pulumi.Input[str]] = None,
                  certificate_id: Optional[pulumi.Input[str]] = None,
@@ -1141,6 +1505,13 @@ class CdnDomainHttpsConfigServerCertificateConfigArgs:
                  expire_time: Optional[pulumi.Input[str]] = None,
                  message: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] certificate_content: Server certificate information. This is required when uploading an external certificate, which should contain the complete certificate chain.
+        :param pulumi.Input[str] certificate_id: Server certificate ID.
+        :param pulumi.Input[str] expire_time: Signature expiration time in second. The maximum value is 630720000.
+        :param pulumi.Input[str] message: Certificate remarks.
+        :param pulumi.Input[str] private_key: Server key information. This is required when uploading an external certificate.
+        """
         if certificate_content is not None:
             pulumi.set(__self__, "certificate_content", certificate_content)
         if certificate_id is not None:
@@ -1159,6 +1530,9 @@ class CdnDomainHttpsConfigServerCertificateConfigArgs:
     @property
     @pulumi.getter(name="certificateContent")
     def certificate_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server certificate information. This is required when uploading an external certificate, which should contain the complete certificate chain.
+        """
         return pulumi.get(self, "certificate_content")
 
     @certificate_content.setter
@@ -1168,6 +1542,9 @@ class CdnDomainHttpsConfigServerCertificateConfigArgs:
     @property
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server certificate ID.
+        """
         return pulumi.get(self, "certificate_id")
 
     @certificate_id.setter
@@ -1195,6 +1572,9 @@ class CdnDomainHttpsConfigServerCertificateConfigArgs:
     @property
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Signature expiration time in second. The maximum value is 630720000.
+        """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
@@ -1204,6 +1584,9 @@ class CdnDomainHttpsConfigServerCertificateConfigArgs:
     @property
     @pulumi.getter
     def message(self) -> Optional[pulumi.Input[str]]:
+        """
+        Certificate remarks.
+        """
         return pulumi.get(self, "message")
 
     @message.setter
@@ -1213,6 +1596,9 @@ class CdnDomainHttpsConfigServerCertificateConfigArgs:
     @property
     @pulumi.getter(name="privateKey")
     def private_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server key information. This is required when uploading an external certificate.
+        """
         return pulumi.get(self, "private_key")
 
     @private_key.setter
@@ -1221,12 +1607,18 @@ class CdnDomainHttpsConfigServerCertificateConfigArgs:
 
 
 @pulumi.input_type
-class CdnDomainHwPrivateAccessArgs:
+class DomainHwPrivateAccessArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  access_key: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[str] access_key: Access ID.
+        :param pulumi.Input[str] bucket: Bucket.
+        :param pulumi.Input[str] secret_key: Key.
+        """
         pulumi.set(__self__, "switch", switch)
         if access_key is not None:
             pulumi.set(__self__, "access_key", access_key)
@@ -1238,6 +1630,9 @@ class CdnDomainHwPrivateAccessArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1247,6 +1642,9 @@ class CdnDomainHwPrivateAccessArgs:
     @property
     @pulumi.getter(name="accessKey")
     def access_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Access ID.
+        """
         return pulumi.get(self, "access_key")
 
     @access_key.setter
@@ -1256,6 +1654,9 @@ class CdnDomainHwPrivateAccessArgs:
     @property
     @pulumi.getter
     def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        Bucket.
+        """
         return pulumi.get(self, "bucket")
 
     @bucket.setter
@@ -1265,6 +1666,9 @@ class CdnDomainHwPrivateAccessArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -1273,13 +1677,20 @@ class CdnDomainHwPrivateAccessArgs:
 
 
 @pulumi.input_type
-class CdnDomainIpFilterArgs:
+class DomainIpFilterArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 filter_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainIpFilterFilterRuleArgs']]]] = None,
+                 filter_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainIpFilterFilterRuleArgs']]]] = None,
                  filter_type: Optional[pulumi.Input[str]] = None,
                  filters: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  return_code: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainIpFilterFilterRuleArgs']]] filter_rules: Ip filter rules, This feature is only available to selected beta customers.
+        :param pulumi.Input[str] filter_type: IP `blacklist`/`whitelist` type.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] filters: Ip filter list, Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+        :param pulumi.Input[int] return_code: Return code, available values: 400-499.
+        """
         pulumi.set(__self__, "switch", switch)
         if filter_rules is not None:
             pulumi.set(__self__, "filter_rules", filter_rules)
@@ -1293,6 +1704,9 @@ class CdnDomainIpFilterArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1301,16 +1715,22 @@ class CdnDomainIpFilterArgs:
 
     @property
     @pulumi.getter(name="filterRules")
-    def filter_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainIpFilterFilterRuleArgs']]]]:
+    def filter_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainIpFilterFilterRuleArgs']]]]:
+        """
+        Ip filter rules, This feature is only available to selected beta customers.
+        """
         return pulumi.get(self, "filter_rules")
 
     @filter_rules.setter
-    def filter_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainIpFilterFilterRuleArgs']]]]):
+    def filter_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainIpFilterFilterRuleArgs']]]]):
         pulumi.set(self, "filter_rules", value)
 
     @property
     @pulumi.getter(name="filterType")
     def filter_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        IP `blacklist`/`whitelist` type.
+        """
         return pulumi.get(self, "filter_type")
 
     @filter_type.setter
@@ -1320,6 +1740,9 @@ class CdnDomainIpFilterArgs:
     @property
     @pulumi.getter
     def filters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Ip filter list, Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+        """
         return pulumi.get(self, "filters")
 
     @filters.setter
@@ -1329,6 +1752,9 @@ class CdnDomainIpFilterArgs:
     @property
     @pulumi.getter(name="returnCode")
     def return_code(self) -> Optional[pulumi.Input[int]]:
+        """
+        Return code, available values: 400-499.
+        """
         return pulumi.get(self, "return_code")
 
     @return_code.setter
@@ -1337,12 +1763,18 @@ class CdnDomainIpFilterArgs:
 
 
 @pulumi.input_type
-class CdnDomainIpFilterFilterRuleArgs:
+class DomainIpFilterFilterRuleArgs:
     def __init__(__self__, *,
                  filter_type: pulumi.Input[str],
                  filters: pulumi.Input[Sequence[pulumi.Input[str]]],
                  rule_paths: pulumi.Input[Sequence[pulumi.Input[str]]],
                  rule_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] filter_type: Ip filter `blacklist`/`whitelist` type of filter rules.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] filters: Ip filter rule list, supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: Content list for each `rule_type`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        :param pulumi.Input[str] rule_type: Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+        """
         pulumi.set(__self__, "filter_type", filter_type)
         pulumi.set(__self__, "filters", filters)
         pulumi.set(__self__, "rule_paths", rule_paths)
@@ -1351,6 +1783,9 @@ class CdnDomainIpFilterFilterRuleArgs:
     @property
     @pulumi.getter(name="filterType")
     def filter_type(self) -> pulumi.Input[str]:
+        """
+        Ip filter `blacklist`/`whitelist` type of filter rules.
+        """
         return pulumi.get(self, "filter_type")
 
     @filter_type.setter
@@ -1360,6 +1795,9 @@ class CdnDomainIpFilterFilterRuleArgs:
     @property
     @pulumi.getter
     def filters(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Ip filter rule list, supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+        """
         return pulumi.get(self, "filters")
 
     @filters.setter
@@ -1369,6 +1807,9 @@ class CdnDomainIpFilterFilterRuleArgs:
     @property
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Content list for each `rule_type`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        """
         return pulumi.get(self, "rule_paths")
 
     @rule_paths.setter
@@ -1378,6 +1819,9 @@ class CdnDomainIpFilterFilterRuleArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> pulumi.Input[str]:
+        """
+        Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -1386,10 +1830,14 @@ class CdnDomainIpFilterFilterRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainIpFreqLimitArgs:
+class DomainIpFreqLimitArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  qps: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[int] qps: Sets the limited number of requests per second, 514 will be returned for requests that exceed the limit.
+        """
         pulumi.set(__self__, "switch", switch)
         if qps is not None:
             pulumi.set(__self__, "qps", qps)
@@ -1397,6 +1845,9 @@ class CdnDomainIpFreqLimitArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1406,6 +1857,9 @@ class CdnDomainIpFreqLimitArgs:
     @property
     @pulumi.getter
     def qps(self) -> Optional[pulumi.Input[int]]:
+        """
+        Sets the limited number of requests per second, 514 will be returned for requests that exceed the limit.
+        """
         return pulumi.get(self, "qps")
 
     @qps.setter
@@ -1414,10 +1868,14 @@ class CdnDomainIpFreqLimitArgs:
 
 
 @pulumi.input_type
-class CdnDomainMaxAgeArgs:
+class DomainMaxAgeArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 max_age_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainMaxAgeMaxAgeRuleArgs']]]] = None):
+                 max_age_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainMaxAgeMaxAgeRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainMaxAgeMaxAgeRuleArgs']]] max_age_rules: List of Max Age rule configuration.
+        """
         pulumi.set(__self__, "switch", switch)
         if max_age_rules is not None:
             pulumi.set(__self__, "max_age_rules", max_age_rules)
@@ -1425,6 +1883,9 @@ class CdnDomainMaxAgeArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1433,21 +1894,30 @@ class CdnDomainMaxAgeArgs:
 
     @property
     @pulumi.getter(name="maxAgeRules")
-    def max_age_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainMaxAgeMaxAgeRuleArgs']]]]:
+    def max_age_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainMaxAgeMaxAgeRuleArgs']]]]:
+        """
+        List of Max Age rule configuration.
+        """
         return pulumi.get(self, "max_age_rules")
 
     @max_age_rules.setter
-    def max_age_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainMaxAgeMaxAgeRuleArgs']]]]):
+    def max_age_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainMaxAgeMaxAgeRuleArgs']]]]):
         pulumi.set(self, "max_age_rules", value)
 
 
 @pulumi.input_type
-class CdnDomainMaxAgeMaxAgeRuleArgs:
+class DomainMaxAgeMaxAgeRuleArgs:
     def __init__(__self__, *,
                  max_age_contents: pulumi.Input[Sequence[pulumi.Input[str]]],
                  max_age_time: pulumi.Input[int],
                  max_age_type: pulumi.Input[str],
                  follow_origin: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] max_age_contents: List of rule paths for each `max_age_type`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        :param pulumi.Input[int] max_age_time: Max Age time in seconds, this can set to `0` that stands for no cache.
+        :param pulumi.Input[str] max_age_type: The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        :param pulumi.Input[str] follow_origin: Whether to follow origin, values: `on`/`off`, if set to `on`, the `max_age_time` will be ignored.
+        """
         pulumi.set(__self__, "max_age_contents", max_age_contents)
         pulumi.set(__self__, "max_age_time", max_age_time)
         pulumi.set(__self__, "max_age_type", max_age_type)
@@ -1457,6 +1927,9 @@ class CdnDomainMaxAgeMaxAgeRuleArgs:
     @property
     @pulumi.getter(name="maxAgeContents")
     def max_age_contents(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of rule paths for each `max_age_type`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        """
         return pulumi.get(self, "max_age_contents")
 
     @max_age_contents.setter
@@ -1466,6 +1939,9 @@ class CdnDomainMaxAgeMaxAgeRuleArgs:
     @property
     @pulumi.getter(name="maxAgeTime")
     def max_age_time(self) -> pulumi.Input[int]:
+        """
+        Max Age time in seconds, this can set to `0` that stands for no cache.
+        """
         return pulumi.get(self, "max_age_time")
 
     @max_age_time.setter
@@ -1475,6 +1951,9 @@ class CdnDomainMaxAgeMaxAgeRuleArgs:
     @property
     @pulumi.getter(name="maxAgeType")
     def max_age_type(self) -> pulumi.Input[str]:
+        """
+        The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        """
         return pulumi.get(self, "max_age_type")
 
     @max_age_type.setter
@@ -1484,6 +1963,9 @@ class CdnDomainMaxAgeMaxAgeRuleArgs:
     @property
     @pulumi.getter(name="followOrigin")
     def follow_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to follow origin, values: `on`/`off`, if set to `on`, the `max_age_time` will be ignored.
+        """
         return pulumi.get(self, "follow_origin")
 
     @follow_origin.setter
@@ -1492,7 +1974,7 @@ class CdnDomainMaxAgeMaxAgeRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainOriginArgs:
+class DomainOriginArgs:
     def __init__(__self__, *,
                  origin_lists: pulumi.Input[Sequence[pulumi.Input[str]]],
                  origin_type: pulumi.Input[str],
@@ -1502,6 +1984,16 @@ class CdnDomainOriginArgs:
                  cos_private_access: Optional[pulumi.Input[str]] = None,
                  origin_pull_protocol: Optional[pulumi.Input[str]] = None,
                  server_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_lists: Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `origin_type`.
+        :param pulumi.Input[str] origin_type: Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ip_ipv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_origin_lists: Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backup_origin_type`.
+        :param pulumi.Input[str] backup_origin_type: Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+        :param pulumi.Input[str] backup_server_name: Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+        :param pulumi.Input[str] cos_private_access: When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
+        :param pulumi.Input[str] origin_pull_protocol: Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
+        :param pulumi.Input[str] server_name: Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        """
         pulumi.set(__self__, "origin_lists", origin_lists)
         pulumi.set(__self__, "origin_type", origin_type)
         if backup_origin_lists is not None:
@@ -1520,6 +2012,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="originLists")
     def origin_lists(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `origin_type`.
+        """
         return pulumi.get(self, "origin_lists")
 
     @origin_lists.setter
@@ -1529,6 +2024,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="originType")
     def origin_type(self) -> pulumi.Input[str]:
+        """
+        Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ip_ipv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+        """
         return pulumi.get(self, "origin_type")
 
     @origin_type.setter
@@ -1538,6 +2036,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="backupOriginLists")
     def backup_origin_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backup_origin_type`.
+        """
         return pulumi.get(self, "backup_origin_lists")
 
     @backup_origin_lists.setter
@@ -1547,6 +2048,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="backupOriginType")
     def backup_origin_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+        """
         return pulumi.get(self, "backup_origin_type")
 
     @backup_origin_type.setter
@@ -1556,6 +2060,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="backupServerName")
     def backup_server_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+        """
         return pulumi.get(self, "backup_server_name")
 
     @backup_server_name.setter
@@ -1565,6 +2072,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="cosPrivateAccess")
     def cos_private_access(self) -> Optional[pulumi.Input[str]]:
+        """
+        When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
+        """
         return pulumi.get(self, "cos_private_access")
 
     @cos_private_access.setter
@@ -1574,6 +2084,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="originPullProtocol")
     def origin_pull_protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
+        """
         return pulumi.get(self, "origin_pull_protocol")
 
     @origin_pull_protocol.setter
@@ -1583,6 +2096,9 @@ class CdnDomainOriginArgs:
     @property
     @pulumi.getter(name="serverName")
     def server_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        """
         return pulumi.get(self, "server_name")
 
     @server_name.setter
@@ -1591,10 +2107,14 @@ class CdnDomainOriginArgs:
 
 
 @pulumi.input_type
-class CdnDomainOriginPullOptimizationArgs:
+class DomainOriginPullOptimizationArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  optimization_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[str] optimization_type: Optimization type, values: `OVToCN` - Overseas to CN, `CNToOV` CN to Overseas.
+        """
         pulumi.set(__self__, "switch", switch)
         if optimization_type is not None:
             pulumi.set(__self__, "optimization_type", optimization_type)
@@ -1602,6 +2122,9 @@ class CdnDomainOriginPullOptimizationArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1611,6 +2134,9 @@ class CdnDomainOriginPullOptimizationArgs:
     @property
     @pulumi.getter(name="optimizationType")
     def optimization_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Optimization type, values: `OVToCN` - Overseas to CN, `CNToOV` CN to Overseas.
+        """
         return pulumi.get(self, "optimization_type")
 
     @optimization_type.setter
@@ -1619,16 +2145,23 @@ class CdnDomainOriginPullOptimizationArgs:
 
 
 @pulumi.input_type
-class CdnDomainOriginPullTimeoutArgs:
+class DomainOriginPullTimeoutArgs:
     def __init__(__self__, *,
                  connect_timeout: pulumi.Input[int],
                  receive_timeout: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] connect_timeout: The origin-pull connection timeout (in seconds). Valid range: 5-60.
+        :param pulumi.Input[int] receive_timeout: The origin-pull receipt timeout (in seconds). Valid range: 10-60.
+        """
         pulumi.set(__self__, "connect_timeout", connect_timeout)
         pulumi.set(__self__, "receive_timeout", receive_timeout)
 
     @property
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> pulumi.Input[int]:
+        """
+        The origin-pull connection timeout (in seconds). Valid range: 5-60.
+        """
         return pulumi.get(self, "connect_timeout")
 
     @connect_timeout.setter
@@ -1638,6 +2171,9 @@ class CdnDomainOriginPullTimeoutArgs:
     @property
     @pulumi.getter(name="receiveTimeout")
     def receive_timeout(self) -> pulumi.Input[int]:
+        """
+        The origin-pull receipt timeout (in seconds). Valid range: 10-60.
+        """
         return pulumi.get(self, "receive_timeout")
 
     @receive_timeout.setter
@@ -1646,13 +2182,20 @@ class CdnDomainOriginPullTimeoutArgs:
 
 
 @pulumi.input_type
-class CdnDomainOssPrivateAccessArgs:
+class DomainOssPrivateAccessArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  access_key: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[str] access_key: Access ID.
+        :param pulumi.Input[str] bucket: Bucket.
+        :param pulumi.Input[str] region: Region.
+        :param pulumi.Input[str] secret_key: Key.
+        """
         pulumi.set(__self__, "switch", switch)
         if access_key is not None:
             pulumi.set(__self__, "access_key", access_key)
@@ -1666,6 +2209,9 @@ class CdnDomainOssPrivateAccessArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1675,6 +2221,9 @@ class CdnDomainOssPrivateAccessArgs:
     @property
     @pulumi.getter(name="accessKey")
     def access_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Access ID.
+        """
         return pulumi.get(self, "access_key")
 
     @access_key.setter
@@ -1684,6 +2233,9 @@ class CdnDomainOssPrivateAccessArgs:
     @property
     @pulumi.getter
     def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        Bucket.
+        """
         return pulumi.get(self, "bucket")
 
     @bucket.setter
@@ -1693,6 +2245,9 @@ class CdnDomainOssPrivateAccessArgs:
     @property
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Region.
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -1702,6 +2257,9 @@ class CdnDomainOssPrivateAccessArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -1710,11 +2268,16 @@ class CdnDomainOssPrivateAccessArgs:
 
 
 @pulumi.input_type
-class CdnDomainQnPrivateAccessArgs:
+class DomainQnPrivateAccessArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  access_key: Optional[pulumi.Input[str]] = None,
                  secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[str] access_key: Access ID.
+        :param pulumi.Input[str] secret_key: Key.
+        """
         pulumi.set(__self__, "switch", switch)
         if access_key is not None:
             pulumi.set(__self__, "access_key", access_key)
@@ -1724,6 +2287,9 @@ class CdnDomainQnPrivateAccessArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1733,6 +2299,9 @@ class CdnDomainQnPrivateAccessArgs:
     @property
     @pulumi.getter(name="accessKey")
     def access_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Access ID.
+        """
         return pulumi.get(self, "access_key")
 
     @access_key.setter
@@ -1742,6 +2311,9 @@ class CdnDomainQnPrivateAccessArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -1750,10 +2322,14 @@ class CdnDomainQnPrivateAccessArgs:
 
 
 @pulumi.input_type
-class CdnDomainRefererArgs:
+class DomainRefererArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 referer_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainRefererRefererRuleArgs']]]] = None):
+                 referer_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainRefererRefererRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainRefererRefererRuleArgs']]] referer_rules: List of referer rules.
+        """
         pulumi.set(__self__, "switch", switch)
         if referer_rules is not None:
             pulumi.set(__self__, "referer_rules", referer_rules)
@@ -1761,6 +2337,9 @@ class CdnDomainRefererArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1769,22 +2348,32 @@ class CdnDomainRefererArgs:
 
     @property
     @pulumi.getter(name="refererRules")
-    def referer_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainRefererRefererRuleArgs']]]]:
+    def referer_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainRefererRefererRuleArgs']]]]:
+        """
+        List of referer rules.
+        """
         return pulumi.get(self, "referer_rules")
 
     @referer_rules.setter
-    def referer_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainRefererRefererRuleArgs']]]]):
+    def referer_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainRefererRefererRuleArgs']]]]):
         pulumi.set(self, "referer_rules", value)
 
 
 @pulumi.input_type
-class CdnDomainRefererRefererRuleArgs:
+class DomainRefererRefererRuleArgs:
     def __init__(__self__, *,
                  allow_empty: pulumi.Input[bool],
                  referer_type: pulumi.Input[str],
                  referers: pulumi.Input[Sequence[pulumi.Input[str]]],
                  rule_paths: pulumi.Input[Sequence[pulumi.Input[str]]],
                  rule_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] allow_empty: Whether to allow emptpy.
+        :param pulumi.Input[str] referer_type: Referer type.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] referers: Referer list.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: Referer rule path list.
+        :param pulumi.Input[str] rule_type: Referer rule type.
+        """
         pulumi.set(__self__, "allow_empty", allow_empty)
         pulumi.set(__self__, "referer_type", referer_type)
         pulumi.set(__self__, "referers", referers)
@@ -1794,6 +2383,9 @@ class CdnDomainRefererRefererRuleArgs:
     @property
     @pulumi.getter(name="allowEmpty")
     def allow_empty(self) -> pulumi.Input[bool]:
+        """
+        Whether to allow emptpy.
+        """
         return pulumi.get(self, "allow_empty")
 
     @allow_empty.setter
@@ -1803,6 +2395,9 @@ class CdnDomainRefererRefererRuleArgs:
     @property
     @pulumi.getter(name="refererType")
     def referer_type(self) -> pulumi.Input[str]:
+        """
+        Referer type.
+        """
         return pulumi.get(self, "referer_type")
 
     @referer_type.setter
@@ -1812,6 +2407,9 @@ class CdnDomainRefererRefererRuleArgs:
     @property
     @pulumi.getter
     def referers(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Referer list.
+        """
         return pulumi.get(self, "referers")
 
     @referers.setter
@@ -1821,6 +2419,9 @@ class CdnDomainRefererRefererRuleArgs:
     @property
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Referer rule path list.
+        """
         return pulumi.get(self, "rule_paths")
 
     @rule_paths.setter
@@ -1830,6 +2431,9 @@ class CdnDomainRefererRefererRuleArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> pulumi.Input[str]:
+        """
+        Referer rule type.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -1838,10 +2442,14 @@ class CdnDomainRefererRefererRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainRequestHeaderArgs:
+class DomainRequestHeaderArgs:
     def __init__(__self__, *,
-                 header_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainRequestHeaderHeaderRuleArgs']]]] = None,
+                 header_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainRequestHeaderHeaderRuleArgs']]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['DomainRequestHeaderHeaderRuleArgs']]] header_rules: Custom request header configuration rules.
+        :param pulumi.Input[str] switch: Custom request header configuration switch. Valid values are `on` and `off`. and default value is `off`.
+        """
         if header_rules is not None:
             pulumi.set(__self__, "header_rules", header_rules)
         if switch is not None:
@@ -1849,16 +2457,22 @@ class CdnDomainRequestHeaderArgs:
 
     @property
     @pulumi.getter(name="headerRules")
-    def header_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainRequestHeaderHeaderRuleArgs']]]]:
+    def header_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainRequestHeaderHeaderRuleArgs']]]]:
+        """
+        Custom request header configuration rules.
+        """
         return pulumi.get(self, "header_rules")
 
     @header_rules.setter
-    def header_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainRequestHeaderHeaderRuleArgs']]]]):
+    def header_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainRequestHeaderHeaderRuleArgs']]]]):
         pulumi.set(self, "header_rules", value)
 
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Custom request header configuration switch. Valid values are `on` and `off`. and default value is `off`.
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1867,13 +2481,20 @@ class CdnDomainRequestHeaderArgs:
 
 
 @pulumi.input_type
-class CdnDomainRequestHeaderHeaderRuleArgs:
+class DomainRequestHeaderHeaderRuleArgs:
     def __init__(__self__, *,
                  header_mode: pulumi.Input[str],
                  header_name: pulumi.Input[str],
                  header_value: pulumi.Input[str],
                  rule_paths: pulumi.Input[Sequence[pulumi.Input[str]]],
                  rule_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] header_mode: Response header mode.
+        :param pulumi.Input[str] header_name: response header name of rule.
+        :param pulumi.Input[str] header_value: response header value of rule.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: response rule paths of rule.
+        :param pulumi.Input[str] rule_type: response rule type of rule.
+        """
         pulumi.set(__self__, "header_mode", header_mode)
         pulumi.set(__self__, "header_name", header_name)
         pulumi.set(__self__, "header_value", header_value)
@@ -1883,6 +2504,9 @@ class CdnDomainRequestHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="headerMode")
     def header_mode(self) -> pulumi.Input[str]:
+        """
+        Response header mode.
+        """
         return pulumi.get(self, "header_mode")
 
     @header_mode.setter
@@ -1892,6 +2516,9 @@ class CdnDomainRequestHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="headerName")
     def header_name(self) -> pulumi.Input[str]:
+        """
+        response header name of rule.
+        """
         return pulumi.get(self, "header_name")
 
     @header_name.setter
@@ -1901,6 +2528,9 @@ class CdnDomainRequestHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="headerValue")
     def header_value(self) -> pulumi.Input[str]:
+        """
+        response header value of rule.
+        """
         return pulumi.get(self, "header_value")
 
     @header_value.setter
@@ -1910,6 +2540,9 @@ class CdnDomainRequestHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        response rule paths of rule.
+        """
         return pulumi.get(self, "rule_paths")
 
     @rule_paths.setter
@@ -1919,6 +2552,9 @@ class CdnDomainRequestHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> pulumi.Input[str]:
+        """
+        response rule type of rule.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -1927,10 +2563,14 @@ class CdnDomainRequestHeaderHeaderRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainResponseHeaderArgs:
+class DomainResponseHeaderArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 header_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainResponseHeaderHeaderRuleArgs']]]] = None):
+                 header_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainResponseHeaderHeaderRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainResponseHeaderHeaderRuleArgs']]] header_rules: List of response header rule.
+        """
         pulumi.set(__self__, "switch", switch)
         if header_rules is not None:
             pulumi.set(__self__, "header_rules", header_rules)
@@ -1938,6 +2578,9 @@ class CdnDomainResponseHeaderArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -1946,22 +2589,32 @@ class CdnDomainResponseHeaderArgs:
 
     @property
     @pulumi.getter(name="headerRules")
-    def header_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainResponseHeaderHeaderRuleArgs']]]]:
+    def header_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainResponseHeaderHeaderRuleArgs']]]]:
+        """
+        List of response header rule.
+        """
         return pulumi.get(self, "header_rules")
 
     @header_rules.setter
-    def header_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainResponseHeaderHeaderRuleArgs']]]]):
+    def header_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainResponseHeaderHeaderRuleArgs']]]]):
         pulumi.set(self, "header_rules", value)
 
 
 @pulumi.input_type
-class CdnDomainResponseHeaderHeaderRuleArgs:
+class DomainResponseHeaderHeaderRuleArgs:
     def __init__(__self__, *,
                  header_mode: pulumi.Input[str],
                  header_name: pulumi.Input[str],
                  header_value: pulumi.Input[str],
                  rule_paths: pulumi.Input[Sequence[pulumi.Input[str]]],
                  rule_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] header_mode: Response header mode.
+        :param pulumi.Input[str] header_name: response header name of rule.
+        :param pulumi.Input[str] header_value: response header value of rule.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: response rule paths of rule.
+        :param pulumi.Input[str] rule_type: response rule type of rule.
+        """
         pulumi.set(__self__, "header_mode", header_mode)
         pulumi.set(__self__, "header_name", header_name)
         pulumi.set(__self__, "header_value", header_value)
@@ -1971,6 +2624,9 @@ class CdnDomainResponseHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="headerMode")
     def header_mode(self) -> pulumi.Input[str]:
+        """
+        Response header mode.
+        """
         return pulumi.get(self, "header_mode")
 
     @header_mode.setter
@@ -1980,6 +2636,9 @@ class CdnDomainResponseHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="headerName")
     def header_name(self) -> pulumi.Input[str]:
+        """
+        response header name of rule.
+        """
         return pulumi.get(self, "header_name")
 
     @header_name.setter
@@ -1989,6 +2648,9 @@ class CdnDomainResponseHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="headerValue")
     def header_value(self) -> pulumi.Input[str]:
+        """
+        response header value of rule.
+        """
         return pulumi.get(self, "header_value")
 
     @header_value.setter
@@ -1998,6 +2660,9 @@ class CdnDomainResponseHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        response rule paths of rule.
+        """
         return pulumi.get(self, "rule_paths")
 
     @rule_paths.setter
@@ -2007,6 +2672,9 @@ class CdnDomainResponseHeaderHeaderRuleArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> pulumi.Input[str]:
+        """
+        response rule type of rule.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -2015,7 +2683,7 @@ class CdnDomainResponseHeaderHeaderRuleArgs:
 
 
 @pulumi.input_type
-class CdnDomainRuleCachArgs:
+class DomainRuleCachArgs:
     def __init__(__self__, *,
                  cache_time: pulumi.Input[int],
                  compare_max_age: Optional[pulumi.Input[str]] = None,
@@ -2027,6 +2695,18 @@ class CdnDomainRuleCachArgs:
                  rule_paths: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rule_type: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] cache_time: Cache expiration time setting, the unit is second, the maximum can be set to 365 days.
+        :param pulumi.Input[str] compare_max_age: Advanced cache expiration configuration. When it is turned on, it will compare the max-age value returned by the origin site with the cache expiration time set in CacheRules, and take the minimum value to cache at the node. Valid values are `on` and `off`. Default value is `off`.
+        :param pulumi.Input[str] follow_origin_switch: Follow the source station configuration switch. Valid values are `on` and `off`.
+        :param pulumi.Input[str] ignore_cache_control: Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules. Valid values are `on` and `off`. Default value is `off`.
+        :param pulumi.Input[str] ignore_set_cookie: Ignore the Set-Cookie header of the origin site. Valid values are `on` and `off`. Default value is `off`. This parameter is for white-list customer.
+        :param pulumi.Input[str] no_cache_switch: Cache configuration switch. Valid values are `on` and `off`.
+        :param pulumi.Input[str] re_validate: Always check back to origin. Valid values are `on` and `off`. Default value is `off`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
+        :param pulumi.Input[str] rule_type: Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        :param pulumi.Input[str] switch: Cache configuration switch. Valid values are `on` and `off`.
+        """
         pulumi.set(__self__, "cache_time", cache_time)
         if compare_max_age is not None:
             pulumi.set(__self__, "compare_max_age", compare_max_age)
@@ -2050,6 +2730,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="cacheTime")
     def cache_time(self) -> pulumi.Input[int]:
+        """
+        Cache expiration time setting, the unit is second, the maximum can be set to 365 days.
+        """
         return pulumi.get(self, "cache_time")
 
     @cache_time.setter
@@ -2059,6 +2742,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="compareMaxAge")
     def compare_max_age(self) -> Optional[pulumi.Input[str]]:
+        """
+        Advanced cache expiration configuration. When it is turned on, it will compare the max-age value returned by the origin site with the cache expiration time set in CacheRules, and take the minimum value to cache at the node. Valid values are `on` and `off`. Default value is `off`.
+        """
         return pulumi.get(self, "compare_max_age")
 
     @compare_max_age.setter
@@ -2068,6 +2754,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="followOriginSwitch")
     def follow_origin_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Follow the source station configuration switch. Valid values are `on` and `off`.
+        """
         return pulumi.get(self, "follow_origin_switch")
 
     @follow_origin_switch.setter
@@ -2077,6 +2766,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="ignoreCacheControl")
     def ignore_cache_control(self) -> Optional[pulumi.Input[str]]:
+        """
+        Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules. Valid values are `on` and `off`. Default value is `off`.
+        """
         return pulumi.get(self, "ignore_cache_control")
 
     @ignore_cache_control.setter
@@ -2086,6 +2778,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="ignoreSetCookie")
     def ignore_set_cookie(self) -> Optional[pulumi.Input[str]]:
+        """
+        Ignore the Set-Cookie header of the origin site. Valid values are `on` and `off`. Default value is `off`. This parameter is for white-list customer.
+        """
         return pulumi.get(self, "ignore_set_cookie")
 
     @ignore_set_cookie.setter
@@ -2095,6 +2790,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="noCacheSwitch")
     def no_cache_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cache configuration switch. Valid values are `on` and `off`.
+        """
         return pulumi.get(self, "no_cache_switch")
 
     @no_cache_switch.setter
@@ -2104,6 +2802,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="reValidate")
     def re_validate(self) -> Optional[pulumi.Input[str]]:
+        """
+        Always check back to origin. Valid values are `on` and `off`. Default value is `off`.
+        """
         return pulumi.get(self, "re_validate")
 
     @re_validate.setter
@@ -2113,6 +2814,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
+        """
         return pulumi.get(self, "rule_paths")
 
     @rule_paths.setter
@@ -2122,6 +2826,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -2131,6 +2838,9 @@ class CdnDomainRuleCachArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cache configuration switch. Valid values are `on` and `off`.
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -2139,10 +2849,14 @@ class CdnDomainRuleCachArgs:
 
 
 @pulumi.input_type
-class CdnDomainStatusCodeCacheArgs:
+class DomainStatusCodeCacheArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
-                 cache_rules: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainStatusCodeCacheCacheRuleArgs']]]] = None):
+                 cache_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainStatusCodeCacheCacheRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[Sequence[pulumi.Input['DomainStatusCodeCacheCacheRuleArgs']]] cache_rules: List of cache rule.
+        """
         pulumi.set(__self__, "switch", switch)
         if cache_rules is not None:
             pulumi.set(__self__, "cache_rules", cache_rules)
@@ -2150,6 +2864,9 @@ class CdnDomainStatusCodeCacheArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -2158,25 +2875,35 @@ class CdnDomainStatusCodeCacheArgs:
 
     @property
     @pulumi.getter(name="cacheRules")
-    def cache_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainStatusCodeCacheCacheRuleArgs']]]]:
+    def cache_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainStatusCodeCacheCacheRuleArgs']]]]:
+        """
+        List of cache rule.
+        """
         return pulumi.get(self, "cache_rules")
 
     @cache_rules.setter
-    def cache_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CdnDomainStatusCodeCacheCacheRuleArgs']]]]):
+    def cache_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainStatusCodeCacheCacheRuleArgs']]]]):
         pulumi.set(self, "cache_rules", value)
 
 
 @pulumi.input_type
-class CdnDomainStatusCodeCacheCacheRuleArgs:
+class DomainStatusCodeCacheCacheRuleArgs:
     def __init__(__self__, *,
                  cache_time: pulumi.Input[int],
                  status_code: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] cache_time: Status code cache expiration time (in seconds).
+        :param pulumi.Input[str] status_code: Code of status cache. available values: `403`, `404`.
+        """
         pulumi.set(__self__, "cache_time", cache_time)
         pulumi.set(__self__, "status_code", status_code)
 
     @property
     @pulumi.getter(name="cacheTime")
     def cache_time(self) -> pulumi.Input[int]:
+        """
+        Status code cache expiration time (in seconds).
+        """
         return pulumi.get(self, "cache_time")
 
     @cache_time.setter
@@ -2186,10 +2913,235 @@ class CdnDomainStatusCodeCacheCacheRuleArgs:
     @property
     @pulumi.getter(name="statusCode")
     def status_code(self) -> pulumi.Input[str]:
+        """
+        Code of status cache. available values: `403`, `404`.
+        """
         return pulumi.get(self, "status_code")
 
     @status_code.setter
     def status_code(self, value: pulumi.Input[str]):
         pulumi.set(self, "status_code", value)
+
+
+@pulumi.input_type
+class UrlPurgePurgeHistoryArgs:
+    def __init__(__self__, *,
+                 create_time: Optional[pulumi.Input[str]] = None,
+                 flush_type: Optional[pulumi.Input[str]] = None,
+                 purge_type: Optional[pulumi.Input[str]] = None,
+                 status: Optional[pulumi.Input[str]] = None,
+                 task_id: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] create_time: Purge task create time.
+        :param pulumi.Input[str] flush_type: Purge flush type of `flush` or `delete`.
+        :param pulumi.Input[str] purge_type: Purge category in of `url` or `path`.
+        :param pulumi.Input[str] status: Purge status of `fail`, `done`, `process`.
+        :param pulumi.Input[str] task_id: Task id of last operation.
+        :param pulumi.Input[str] url: Purge url.
+        """
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
+        if flush_type is not None:
+            pulumi.set(__self__, "flush_type", flush_type)
+        if purge_type is not None:
+            pulumi.set(__self__, "purge_type", purge_type)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+        if task_id is not None:
+            pulumi.set(__self__, "task_id", task_id)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Purge task create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @create_time.setter
+    def create_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "create_time", value)
+
+    @property
+    @pulumi.getter(name="flushType")
+    def flush_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Purge flush type of `flush` or `delete`.
+        """
+        return pulumi.get(self, "flush_type")
+
+    @flush_type.setter
+    def flush_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "flush_type", value)
+
+    @property
+    @pulumi.getter(name="purgeType")
+    def purge_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Purge category in of `url` or `path`.
+        """
+        return pulumi.get(self, "purge_type")
+
+    @purge_type.setter
+    def purge_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "purge_type", value)
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Purge status of `fail`, `done`, `process`.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "status", value)
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Task id of last operation.
+        """
+        return pulumi.get(self, "task_id")
+
+    @task_id.setter
+    def task_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "task_id", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Purge url.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class UrlPushPushHistoryArgs:
+    def __init__(__self__, *,
+                 area: Optional[pulumi.Input[str]] = None,
+                 create_time: Optional[pulumi.Input[str]] = None,
+                 percent: Optional[pulumi.Input[int]] = None,
+                 status: Optional[pulumi.Input[str]] = None,
+                 task_id: Optional[pulumi.Input[str]] = None,
+                 update_time: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] area: Specify push area. NOTE: only push same area cache contents.
+        :param pulumi.Input[str] create_time: Push task create time.
+        :param pulumi.Input[int] percent: Push progress in percent.
+        :param pulumi.Input[str] status: Push status of `fail`, `done`, `process` or `invalid` (4xx, 5xx response).
+        :param pulumi.Input[str] task_id: Push task id.
+        :param pulumi.Input[str] update_time: Push task update time.
+        :param pulumi.Input[str] url: Push url.
+        """
+        if area is not None:
+            pulumi.set(__self__, "area", area)
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
+        if percent is not None:
+            pulumi.set(__self__, "percent", percent)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+        if task_id is not None:
+            pulumi.set(__self__, "task_id", task_id)
+        if update_time is not None:
+            pulumi.set(__self__, "update_time", update_time)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def area(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify push area. NOTE: only push same area cache contents.
+        """
+        return pulumi.get(self, "area")
+
+    @area.setter
+    def area(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "area", value)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Push task create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @create_time.setter
+    def create_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "create_time", value)
+
+    @property
+    @pulumi.getter
+    def percent(self) -> Optional[pulumi.Input[int]]:
+        """
+        Push progress in percent.
+        """
+        return pulumi.get(self, "percent")
+
+    @percent.setter
+    def percent(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "percent", value)
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Push status of `fail`, `done`, `process` or `invalid` (4xx, 5xx response).
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "status", value)
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Push task id.
+        """
+        return pulumi.get(self, "task_id")
+
+    @task_id.setter
+    def task_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "task_id", value)
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Push task update time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @update_time.setter
+    def update_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "update_time", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Push url.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
 
 

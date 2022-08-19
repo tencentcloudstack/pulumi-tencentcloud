@@ -13,6 +13,9 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class SuperPlayerConfigDrmStreamingInfo
     {
+        /// <summary>
+        /// ID of the adaptive dynamic streaming template whose protection type is `SimpleAES`.
+        /// </summary>
         public readonly string? SimpleAesDefinition;
 
         [OutputConstructor]

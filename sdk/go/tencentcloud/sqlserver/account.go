@@ -11,6 +11,40 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create SQL Server account
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.NewAccount(ctx, "foo", &Sqlserver.AccountArgs{
+// 			InstanceId: pulumi.Any(tencentcloud_sqlserver_instance.Example.Id),
+// 			Password:   pulumi.String("test1233"),
+// 			Remark:     pulumi.String("testt"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SQL Server account can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Sqlserver/account:Account foo mssql-3cdq7kx5#tf_sqlserver_account
+// ```
 type Account struct {
 	pulumi.CustomResourceState
 
@@ -26,8 +60,7 @@ type Account struct {
 	Password pulumi.StringOutput `pulumi:"password"`
 	// Remark of the SQL Server account.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
-	// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-	// resetting password, -1 for deleting.
+	// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
 	Status pulumi.IntOutput `pulumi:"status"`
 	// Last updated time of the SQL Server account.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
@@ -80,8 +113,7 @@ type accountState struct {
 	Password *string `pulumi:"password"`
 	// Remark of the SQL Server account.
 	Remark *string `pulumi:"remark"`
-	// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-	// resetting password, -1 for deleting.
+	// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
 	Status *int `pulumi:"status"`
 	// Last updated time of the SQL Server account.
 	UpdateTime *string `pulumi:"updateTime"`
@@ -100,8 +132,7 @@ type AccountState struct {
 	Password pulumi.StringPtrInput
 	// Remark of the SQL Server account.
 	Remark pulumi.StringPtrInput
-	// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-	// resetting password, -1 for deleting.
+	// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
 	Status pulumi.IntPtrInput
 	// Last updated time of the SQL Server account.
 	UpdateTime pulumi.StringPtrInput
@@ -255,8 +286,7 @@ func (o AccountOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Account) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
-// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-// resetting password, -1 for deleting.
+// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
 func (o AccountOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *Account) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }

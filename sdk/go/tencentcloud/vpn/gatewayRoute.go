@@ -11,6 +11,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a VPN gateway route.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGatewayRoute(ctx, "route", &Vpn.GatewayRouteArgs{
+// 			DestinationCidrBlock: pulumi.String("10.0.0.0/16"),
+// 			InstanceId:           pulumi.String("vpnx-5b5dmao3"),
+// 			InstanceType:         pulumi.String("VPNCONN"),
+// 			Priority:             pulumi.Int(100),
+// 			Status:               pulumi.String("DISABLE"),
+// 			VpnGatewayId:         pulumi.String("vpngw-ak9sjem2"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
+// ```
 type GatewayRoute struct {
 	pulumi.CustomResourceState
 

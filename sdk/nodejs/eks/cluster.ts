@@ -5,6 +5,58 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides an elastic kubernetes cluster resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.2.0.0/16"});
+ * const sub = new tencentcloud.subnet.Instance("sub", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.2.11.0/24",
+ *     availabilityZone: "ap-guangzhou-3",
+ * });
+ * const sub2 = new tencentcloud.subnet.Instance("sub2", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.2.10.0/24",
+ *     availabilityZone: "ap-guangzhou-3",
+ * });
+ * const foo = new tencentcloud.eks.Cluster("foo", {
+ *     clusterName: "tf-test-eks",
+ *     k8sVersion: "1.18.4",
+ *     vpcId: vpc.id,
+ *     subnetIds: [
+ *         sub.id,
+ *         sub2.id,
+ *     ],
+ *     clusterDesc: "test eks cluster created by terraform",
+ *     serviceSubnetId: sub.id,
+ *     dnsServers: [{
+ *         domain: "www.example1.com",
+ *         servers: [
+ *             "1.1.1.1:8080",
+ *             "1.1.1.1:8081",
+ *             "1.1.1.1:8082",
+ *         ],
+ *     }],
+ *     enableVpcCoreDns: true,
+ *     needDeleteCbs: true,
+ *     tags: {
+ *         hello: "world",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Eks/cluster:Cluster foo cluster-id
+ * ```
+ */
 export class Cluster extends pulumi.CustomResource {
     /**
      * Get an existing Cluster resource's state with the given name, ID, and optional extra

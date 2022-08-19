@@ -9,23 +9,67 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Security
 {
+    /// <summary>
+    /// Provide a resource to create security group some lite rules quickly.
+    /// 
+    /// &gt; **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple tencentcloud.Security.GroupRule resources, otherwise it may cause problems.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = fooGroup.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
+    ///                 "DROP#8.8.8.8#80,90#UDP",
+    ///                 "ACCEPT#0.0.0.0/0#80-90#TCP",
+    ///                 "ACCEPT#sg-7ixn3foj#80-90#TCP",
+    ///                 "ACCEPT#ipm-epjq5kn0#80-90#TCP",
+    ///                 "ACCEPT#ipmg-3loavam6#80-90#TCP",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
+    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Security group lite rule can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Security/groupLiteRule:GroupLiteRule")]
     public partial class GroupLiteRule : Pulumi.CustomResource
     {
         /// <summary>
-        /// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        /// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        /// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         [Output("egresses")]
         public Output<ImmutableArray<string>> Egresses { get; private set; } = null!;
 
         /// <summary>
-        /// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        /// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        /// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         [Output("ingresses")]
         public Output<ImmutableArray<string>> Ingresses { get; private set; } = null!;
@@ -86,10 +130,7 @@ namespace Pulumi.Tencentcloud.Security
         private InputList<string>? _egresses;
 
         /// <summary>
-        /// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        /// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        /// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Egresses
         {
@@ -101,10 +142,7 @@ namespace Pulumi.Tencentcloud.Security
         private InputList<string>? _ingresses;
 
         /// <summary>
-        /// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        /// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        /// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Ingresses
         {
@@ -129,10 +167,7 @@ namespace Pulumi.Tencentcloud.Security
         private InputList<string>? _egresses;
 
         /// <summary>
-        /// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        /// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        /// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Egresses
         {
@@ -144,10 +179,7 @@ namespace Pulumi.Tencentcloud.Security
         private InputList<string>? _ingresses;
 
         /// <summary>
-        /// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        /// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        /// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        /// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        /// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         /// </summary>
         public InputList<string> Ingresses
         {

@@ -6,8 +6,8 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./cluster";
-export * from "./instances";
-export * from "./nodes";
+export * from "./getInstance";
+export * from "./getNodes";
 
 // Import resources to register:
 import { Cluster } from "./cluster";

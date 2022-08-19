@@ -12,33 +12,54 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class ConfigExtraContainerStdoutGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Is all containers.
+        /// </summary>
         [Input("allContainers", required: true)]
         public Input<bool> AllContainers { get; set; } = null!;
 
         [Input("excludeLabels")]
         private InputList<string>? _excludeLabels;
+
+        /// <summary>
+        /// Pod label to be excluded.
+        /// </summary>
         public InputList<string> ExcludeLabels
         {
             get => _excludeLabels ?? (_excludeLabels = new InputList<string>());
             set => _excludeLabels = value;
         }
 
+        /// <summary>
+        /// Namespaces to be excluded, separated by separators, such as A, B.
+        /// </summary>
         [Input("excludeNamespace")]
         public Input<string>? ExcludeNamespace { get; set; }
 
         [Input("includeLabels")]
         private InputList<string>? _includeLabels;
+
+        /// <summary>
+        /// Pod label info.
+        /// </summary>
         public InputList<string> IncludeLabels
         {
             get => _includeLabels ?? (_includeLabels = new InputList<string>());
             set => _includeLabels = value;
         }
 
+        /// <summary>
+        /// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+        /// </summary>
         [Input("namespace")]
         public Input<string>? Namespace { get; set; }
 
         [Input("workloads")]
         private InputList<Inputs.ConfigExtraContainerStdoutWorkloadGetArgs>? _workloads;
+
+        /// <summary>
+        /// Workload info.
+        /// </summary>
         public InputList<Inputs.ConfigExtraContainerStdoutWorkloadGetArgs> Workloads
         {
             get => _workloads ?? (_workloads = new InputList<Inputs.ConfigExtraContainerStdoutWorkloadGetArgs>());

@@ -5,6 +5,48 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a cls cos shipper.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const shipper = new tencentcloud.Cls.CosShipper("shipper", {
+ *     bucket: "preset-scf-bucket-1308919341",
+ *     compress: {
+ *         format: "lzop",
+ *     },
+ *     content: {
+ *         format: "json",
+ *         json: {
+ *             enableTag: true,
+ *             metaFields: [
+ *                 "__FILENAME__",
+ *                 "__SOURCE__",
+ *                 "__TIMESTAMP__",
+ *             ],
+ *         },
+ *     },
+ *     interval: 300,
+ *     maxSize: 200,
+ *     partition: "/%Y/%m/%d/%H/",
+ *     prefix: "ap-guangzhou-fffsasad-1649734752",
+ *     shipperName: "ap-guangzhou-fffsasad-1649734752",
+ *     topicId: "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * cls cos shipper can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+ * ```
+ */
 export class CosShipper extends pulumi.CustomResource {
     /**
      * Get an existing CosShipper resource's state with the given name, ID, and optional extra
@@ -46,8 +88,7 @@ export class CosShipper extends pulumi.CustomResource {
      */
     public readonly content!: pulumi.Output<outputs.Cls.CosShipperContent | undefined>;
     /**
-     * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-     * up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+     * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
      */
     public readonly filterRules!: pulumi.Output<outputs.Cls.CosShipperFilterRule[] | undefined>;
     /**
@@ -145,8 +186,7 @@ export interface CosShipperState {
      */
     content?: pulumi.Input<inputs.Cls.CosShipperContent>;
     /**
-     * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-     * up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+     * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
      */
     filterRules?: pulumi.Input<pulumi.Input<inputs.Cls.CosShipperFilterRule>[]>;
     /**
@@ -192,8 +232,7 @@ export interface CosShipperArgs {
      */
     content?: pulumi.Input<inputs.Cls.CosShipperContent>;
     /**
-     * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-     * up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+     * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
      */
     filterRules?: pulumi.Input<pulumi.Input<inputs.Cls.CosShipperFilterRule>[]>;
     /**

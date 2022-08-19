@@ -5,10 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getTemplateGroups";
+export * from "./getTemplates";
 export * from "./template";
 export * from "./templateGroup";
-export * from "./templateGroups";
-export * from "./templates";
 
 // Import resources to register:
 import { Template } from "./template";

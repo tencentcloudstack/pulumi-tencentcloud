@@ -11,23 +11,46 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CFS access rule.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cfs.NewAccessRule(ctx, "foo", &Cfs.AccessRuleArgs{
+// 			AccessGroupId:  pulumi.String("pgroup-7nx89k7l"),
+// 			AuthClientIp:   pulumi.String("10.10.1.0/24"),
+// 			Priority:       pulumi.Int(1),
+// 			RwPermission:   pulumi.String("RO"),
+// 			UserPermission: pulumi.String("root_squash"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type AccessRule struct {
 	pulumi.CustomResourceState
 
 	// ID of a access group.
 	AccessGroupId pulumi.StringOutput `pulumi:"accessGroupId"`
-	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-	// note that the IP entered should be CVM's private IP.
+	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
 	AuthClientIp pulumi.StringOutput `pulumi:"authClientIp"`
 	// The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
 	Priority pulumi.IntOutput `pulumi:"priority"`
 	// Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
 	RwPermission pulumi.StringPtrOutput `pulumi:"rwPermission"`
-	// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-	// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-	// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-	// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-	// `no_root_squash` indicates that access root users keep root account permission.
+	// The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
 	UserPermission pulumi.StringPtrOutput `pulumi:"userPermission"`
 }
 
@@ -71,36 +94,26 @@ func GetAccessRule(ctx *pulumi.Context,
 type accessRuleState struct {
 	// ID of a access group.
 	AccessGroupId *string `pulumi:"accessGroupId"`
-	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-	// note that the IP entered should be CVM's private IP.
+	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
 	AuthClientIp *string `pulumi:"authClientIp"`
 	// The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
 	Priority *int `pulumi:"priority"`
 	// Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
 	RwPermission *string `pulumi:"rwPermission"`
-	// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-	// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-	// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-	// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-	// `no_root_squash` indicates that access root users keep root account permission.
+	// The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
 	UserPermission *string `pulumi:"userPermission"`
 }
 
 type AccessRuleState struct {
 	// ID of a access group.
 	AccessGroupId pulumi.StringPtrInput
-	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-	// note that the IP entered should be CVM's private IP.
+	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
 	AuthClientIp pulumi.StringPtrInput
 	// The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
 	Priority pulumi.IntPtrInput
 	// Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
 	RwPermission pulumi.StringPtrInput
-	// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-	// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-	// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-	// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-	// `no_root_squash` indicates that access root users keep root account permission.
+	// The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
 	UserPermission pulumi.StringPtrInput
 }
 
@@ -111,18 +124,13 @@ func (AccessRuleState) ElementType() reflect.Type {
 type accessRuleArgs struct {
 	// ID of a access group.
 	AccessGroupId string `pulumi:"accessGroupId"`
-	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-	// note that the IP entered should be CVM's private IP.
+	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
 	AuthClientIp string `pulumi:"authClientIp"`
 	// The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
 	Priority int `pulumi:"priority"`
 	// Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
 	RwPermission *string `pulumi:"rwPermission"`
-	// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-	// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-	// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-	// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-	// `no_root_squash` indicates that access root users keep root account permission.
+	// The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
 	UserPermission *string `pulumi:"userPermission"`
 }
 
@@ -130,18 +138,13 @@ type accessRuleArgs struct {
 type AccessRuleArgs struct {
 	// ID of a access group.
 	AccessGroupId pulumi.StringInput
-	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-	// note that the IP entered should be CVM's private IP.
+	// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
 	AuthClientIp pulumi.StringInput
 	// The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
 	Priority pulumi.IntInput
 	// Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
 	RwPermission pulumi.StringPtrInput
-	// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-	// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-	// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-	// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-	// `no_root_squash` indicates that access root users keep root account permission.
+	// The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
 	UserPermission pulumi.StringPtrInput
 }
 
@@ -237,8 +240,7 @@ func (o AccessRuleOutput) AccessGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AccessRule) pulumi.StringOutput { return v.AccessGroupId }).(pulumi.StringOutput)
 }
 
-// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-// note that the IP entered should be CVM's private IP.
+// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
 func (o AccessRuleOutput) AuthClientIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AccessRule) pulumi.StringOutput { return v.AuthClientIp }).(pulumi.StringOutput)
 }
@@ -253,11 +255,7 @@ func (o AccessRuleOutput) RwPermission() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AccessRule) pulumi.StringPtrOutput { return v.RwPermission }).(pulumi.StringPtrOutput)
 }
 
-// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-// `no_root_squash` indicates that access root users keep root account permission.
+// The permissions of accessing users. Valid values are `allSquash`, `noAllSquash`, `rootSquash` and `noRootSquash`. and default is `rootSquash`. `allSquash` indicates that all access users are mapped as anonymous users or user groups; `noAllSquash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `rootSquash` indicates that map access root users to anonymous users or user groups; `noRootSquash` indicates that access root users keep root account permission.
 func (o AccessRuleOutput) UserPermission() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AccessRule) pulumi.StringPtrOutput { return v.UserPermission }).(pulumi.StringPtrOutput)
 }

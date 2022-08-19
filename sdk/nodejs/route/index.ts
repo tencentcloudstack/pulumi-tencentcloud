@@ -5,21 +5,25 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./entry";
 export * from "./table";
+export * from "./tableEntry";
 
 // Import resources to register:
-import { Entry } from "./entry";
+import { Table } from "./table";
+import { TableEntry } from "./tableEntry";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "tencentcloud:Route/entry:Entry":
-                return new Entry(name, <any>undefined, { urn })
+            case "tencentcloud:Route/table:Table":
+                return new Table(name, <any>undefined, { urn })
+            case "tencentcloud:Route/tableEntry:TableEntry":
+                return new TableEntry(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("tencentcloud", "Route/entry", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Route/table", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Route/tableEntry", _module)

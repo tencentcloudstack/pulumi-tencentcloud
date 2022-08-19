@@ -6,6 +6,6 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .external_key import *
-from .keys import *
-from .kms_key import *
+from .get_keys import *
+from .key import *
 from . import outputs

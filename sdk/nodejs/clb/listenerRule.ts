@@ -4,6 +4,46 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CLB listener rule.
+ *
+ * > **NOTE:** This resource only be applied to the HTTP or HTTPS listeners.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Clb.ListenerRule("foo", {
+ *     certificateCaId: "VfqO4zkB",
+ *     certificateId: "VjANRdz8",
+ *     certificateSslMode: "MUTUAL",
+ *     clbId: "lb-k2zjp9lv",
+ *     domain: "foo.net",
+ *     healthCheckHealthNum: 3,
+ *     healthCheckHttpCode: 2,
+ *     healthCheckHttpDomain: "Default Domain",
+ *     healthCheckHttpMethod: "GET",
+ *     healthCheckHttpPath: "Default Path",
+ *     healthCheckIntervalTime: 5,
+ *     healthCheckSwitch: true,
+ *     healthCheckUnhealthNum: 3,
+ *     listenerId: "lbl-hh141sn9",
+ *     scheduler: "WRR",
+ *     sessionExpireTime: 30,
+ *     url: "/bar",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+ * ```
+ */
 export class ListenerRule extends pulumi.CustomResource {
     /**
      * Get an existing ListenerRule resource's state with the given name, ID, and optional extra
@@ -57,17 +97,11 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly forwardType!: pulumi.Output<string>;
     /**
-     * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-     * consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener
-     * allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly healthCheckHealthNum!: pulumi.Output<number>;
     /**
-     * HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means
-     * the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-     * health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the
-     * corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check
-     * status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
+     * HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
      */
     public readonly healthCheckHttpCode!: pulumi.Output<number>;
     /**
@@ -75,8 +109,7 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly healthCheckHttpDomain!: pulumi.Output<string>;
     /**
-     * Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the
-     * available value are `HEAD` and `GET`.
+     * Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the available value are `HEAD` and `GET`.
      */
     public readonly healthCheckHttpMethod!: pulumi.Output<string>;
     /**
@@ -84,8 +117,7 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly healthCheckHttpPath!: pulumi.Output<string>;
     /**
-     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL
-     * listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly healthCheckIntervalTime!: pulumi.Output<number>;
     /**
@@ -93,9 +125,7 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly healthCheckSwitch!: pulumi.Output<boolean>;
     /**
-     * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-     * indicates that the forwarding is abnormal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct
-     * configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly healthCheckUnhealthNum!: pulumi.Output<number>;
     /**
@@ -111,20 +141,15 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public /*out*/ readonly ruleId!: pulumi.Output<string>;
     /**
-     * Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`. NOTES:
-     * TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in
-     * `tencentcloud_clb_listener_rule`.
+     * Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly scheduler!: pulumi.Output<string | undefined>;
     /**
-     * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-     * available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-     * listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly sessionExpireTime!: pulumi.Output<number | undefined>;
     /**
-     * Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-     * bind target group.
+     * Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
      */
     public readonly targetType!: pulumi.Output<string | undefined>;
     /**
@@ -236,17 +261,11 @@ export interface ListenerRuleState {
      */
     forwardType?: pulumi.Input<string>;
     /**
-     * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-     * consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener
-     * allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckHealthNum?: pulumi.Input<number>;
     /**
-     * HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means
-     * the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-     * health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the
-     * corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check
-     * status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
+     * HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
      */
     healthCheckHttpCode?: pulumi.Input<number>;
     /**
@@ -254,8 +273,7 @@ export interface ListenerRuleState {
      */
     healthCheckHttpDomain?: pulumi.Input<string>;
     /**
-     * Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the
-     * available value are `HEAD` and `GET`.
+     * Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the available value are `HEAD` and `GET`.
      */
     healthCheckHttpMethod?: pulumi.Input<string>;
     /**
@@ -263,8 +281,7 @@ export interface ListenerRuleState {
      */
     healthCheckHttpPath?: pulumi.Input<string>;
     /**
-     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL
-     * listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckIntervalTime?: pulumi.Input<number>;
     /**
@@ -272,9 +289,7 @@ export interface ListenerRuleState {
      */
     healthCheckSwitch?: pulumi.Input<boolean>;
     /**
-     * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-     * indicates that the forwarding is abnormal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct
-     * configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckUnhealthNum?: pulumi.Input<number>;
     /**
@@ -290,20 +305,15 @@ export interface ListenerRuleState {
      */
     ruleId?: pulumi.Input<string>;
     /**
-     * Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`. NOTES:
-     * TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in
-     * `tencentcloud_clb_listener_rule`.
+     * Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     scheduler?: pulumi.Input<string>;
     /**
-     * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-     * available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-     * listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     sessionExpireTime?: pulumi.Input<number>;
     /**
-     * Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-     * bind target group.
+     * Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
      */
     targetType?: pulumi.Input<string>;
     /**
@@ -341,17 +351,11 @@ export interface ListenerRuleArgs {
      */
     forwardType?: pulumi.Input<string>;
     /**
-     * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-     * consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener
-     * allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckHealthNum?: pulumi.Input<number>;
     /**
-     * HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means
-     * the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-     * health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the
-     * corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check
-     * status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
+     * HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
      */
     healthCheckHttpCode?: pulumi.Input<number>;
     /**
@@ -359,8 +363,7 @@ export interface ListenerRuleArgs {
      */
     healthCheckHttpDomain?: pulumi.Input<string>;
     /**
-     * Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the
-     * available value are `HEAD` and `GET`.
+     * Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the available value are `HEAD` and `GET`.
      */
     healthCheckHttpMethod?: pulumi.Input<string>;
     /**
@@ -368,8 +371,7 @@ export interface ListenerRuleArgs {
      */
     healthCheckHttpPath?: pulumi.Input<string>;
     /**
-     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL
-     * listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckIntervalTime?: pulumi.Input<number>;
     /**
@@ -377,9 +379,7 @@ export interface ListenerRuleArgs {
      */
     healthCheckSwitch?: pulumi.Input<boolean>;
     /**
-     * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-     * indicates that the forwarding is abnormal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct
-     * configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckUnhealthNum?: pulumi.Input<number>;
     /**
@@ -391,20 +391,15 @@ export interface ListenerRuleArgs {
      */
     listenerId: pulumi.Input<string>;
     /**
-     * Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`. NOTES:
-     * TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in
-     * `tencentcloud_clb_listener_rule`.
+     * Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     scheduler?: pulumi.Input<string>;
     /**
-     * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-     * available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-     * listener needs to be configured in `tencentcloud_clb_listener_rule`.
+     * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     sessionExpireTime?: pulumi.Input<number>;
     /**
-     * Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-     * bind target group.
+     * Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
      */
     targetType?: pulumi.Input<string>;
     /**

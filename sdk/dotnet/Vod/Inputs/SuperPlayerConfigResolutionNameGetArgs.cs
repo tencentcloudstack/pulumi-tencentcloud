@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
     public sealed class SuperPlayerConfigResolutionNameGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Length of video short side in px.
+        /// </summary>
         [Input("minEdgeLength", required: true)]
         public Input<int> MinEdgeLength { get; set; } = null!;
 
+        /// <summary>
+        /// Display name.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 

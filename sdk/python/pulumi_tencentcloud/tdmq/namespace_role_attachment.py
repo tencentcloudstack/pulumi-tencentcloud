@@ -177,7 +177,43 @@ class NamespaceRoleAttachment(pulumi.CustomResource):
                  role_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a NamespaceRoleAttachment resource with the given unique name, props, and options.
+        Provide a resource to create a TDMQ role.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
+            cluster_id=foo.id,
+            environ_name="example",
+            msg_ttl=300,
+            remark="this is description.")
+        bar_topic = tencentcloud.tdmq.Topic("barTopic",
+            cluster_id=foo.id,
+            environ_id=bar_namespace.id,
+            partitions=6,
+            remark="this is description.",
+            topic_name="example",
+            topic_type=0)
+        bar_role = tencentcloud.tdmq.Role("barRole",
+            cluster_id=foo.id,
+            remark="this is description world",
+            role_name="example")
+        bar_namespace_role_attachment = tencentcloud.tdmq.NamespaceRoleAttachment("barNamespaceRoleAttachment",
+            cluster_id=foo.id,
+            environ_id=bar_namespace.id,
+            permissions=[
+                "produce",
+                "consume",
+            ],
+            role_name=bar_role.role_name)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: The id of tdmq cluster.
@@ -192,7 +228,43 @@ class NamespaceRoleAttachment(pulumi.CustomResource):
                  args: NamespaceRoleAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a NamespaceRoleAttachment resource with the given unique name, props, and options.
+        Provide a resource to create a TDMQ role.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
+            cluster_id=foo.id,
+            environ_name="example",
+            msg_ttl=300,
+            remark="this is description.")
+        bar_topic = tencentcloud.tdmq.Topic("barTopic",
+            cluster_id=foo.id,
+            environ_id=bar_namespace.id,
+            partitions=6,
+            remark="this is description.",
+            topic_name="example",
+            topic_type=0)
+        bar_role = tencentcloud.tdmq.Role("barRole",
+            cluster_id=foo.id,
+            remark="this is description world",
+            role_name="example")
+        bar_namespace_role_attachment = tencentcloud.tdmq.NamespaceRoleAttachment("barNamespaceRoleAttachment",
+            cluster_id=foo.id,
+            environ_id=bar_namespace.id,
+            permissions=[
+                "produce",
+                "consume",
+            ],
+            role_name=bar_role.role_name)
+        ```
+
         :param str resource_name: The name of the resource.
         :param NamespaceRoleAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

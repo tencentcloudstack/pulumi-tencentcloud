@@ -16,11 +16,17 @@ __all__ = [
 class PublishSubscribeDatabaseTupleArgs:
     def __init__(__self__, *,
                  publish_database: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] publish_database: Publish the database.
+        """
         pulumi.set(__self__, "publish_database", publish_database)
 
     @property
     @pulumi.getter(name="publishDatabase")
     def publish_database(self) -> pulumi.Input[str]:
+        """
+        Publish the database.
+        """
         return pulumi.get(self, "publish_database")
 
     @publish_database.setter

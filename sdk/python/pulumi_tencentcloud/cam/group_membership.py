@@ -19,7 +19,7 @@ class GroupMembershipArgs:
         """
         The set of arguments for constructing a GroupMembership resource.
         :param pulumi.Input[str] group_id: ID of CAM group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: ID set of the CAM group members.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_names: User name set as ID of the CAM group members.
         """
         pulumi.set(__self__, "group_id", group_id)
@@ -47,7 +47,7 @@ class GroupMembershipArgs:
     @pulumi.getter(name="userIds")
     def user_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID set of the CAM group members.
+        It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         """
         return pulumi.get(self, "user_ids")
 
@@ -77,7 +77,7 @@ class _GroupMembershipState:
         """
         Input properties used for looking up and filtering GroupMembership resources.
         :param pulumi.Input[str] group_id: ID of CAM group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: ID set of the CAM group members.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_names: User name set as ID of the CAM group members.
         """
         if group_id is not None:
@@ -106,7 +106,7 @@ class _GroupMembershipState:
     @pulumi.getter(name="userIds")
     def user_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID set of the CAM group members.
+        It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         """
         return pulumi.get(self, "user_ids")
 
@@ -137,11 +137,34 @@ class GroupMembership(pulumi.CustomResource):
                  user_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a GroupMembership resource with the given unique name, props, and options.
+        Provides a resource to create a CAM group membership.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.GroupMembership("foo",
+            group_id=tencentcloud_cam_group["foo"]["id"],
+            user_names=[
+                tencentcloud_cam_user["foo"]["name"],
+                tencentcloud_cam_user["bar"]["name"],
+            ])
+        ```
+
+        ## Import
+
+        CAM group membership can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] group_id: ID of CAM group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: ID set of the CAM group members.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_names: User name set as ID of the CAM group members.
         """
         ...
@@ -151,7 +174,30 @@ class GroupMembership(pulumi.CustomResource):
                  args: GroupMembershipArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a GroupMembership resource with the given unique name, props, and options.
+        Provides a resource to create a CAM group membership.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.GroupMembership("foo",
+            group_id=tencentcloud_cam_group["foo"]["id"],
+            user_names=[
+                tencentcloud_cam_user["foo"]["name"],
+                tencentcloud_cam_user["bar"]["name"],
+            ])
+        ```
+
+        ## Import
+
+        CAM group membership can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+        ```
+
         :param str resource_name: The name of the resource.
         :param GroupMembershipArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -211,7 +257,7 @@ class GroupMembership(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] group_id: ID of CAM group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: ID set of the CAM group members.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] user_ids: It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_names: User name set as ID of the CAM group members.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -235,7 +281,7 @@ class GroupMembership(pulumi.CustomResource):
     @pulumi.getter(name="userIds")
     def user_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        ID set of the CAM group members.
+        It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         """
         return pulumi.get(self, "user_ids")
 

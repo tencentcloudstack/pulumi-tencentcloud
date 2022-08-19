@@ -9,6 +9,47 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpn
 {
+    /// <summary>
+    /// Provide a resource to create a VPN SSL Server.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var server = new Tencentcloud.Vpn.SslServer("server", new Tencentcloud.Vpn.SslServerArgs
+    ///         {
+    ///             Compress = true,
+    ///             EncryptAlgorithm = "AES-128-CBC",
+    ///             IntegrityAlgorithm = "MD5",
+    ///             LocalAddresses = 
+    ///             {
+    ///                 "10.0.0.0/17",
+    ///             },
+    ///             RemoteAddress = "11.0.0.0/16",
+    ///             SslVpnPort = 1194,
+    ///             SslVpnProtocol = "UDP",
+    ///             SslVpnServerName = "helloworld",
+    ///             VpnGatewayId = "vpngw-335lwf7d",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VPN SSL Server can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/sslServer:SslServer")]
     public partial class SslServer : Pulumi.CustomResource
     {

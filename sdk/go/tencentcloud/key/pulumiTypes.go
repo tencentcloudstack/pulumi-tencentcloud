@@ -10,127 +10,142 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type PairsKeyPairList struct {
+type GetPairsKeyPairList struct {
+	// Creation time of the key pair.
 	CreateTime string `pulumi:"createTime"`
-	KeyId      string `pulumi:"keyId"`
-	KeyName    string `pulumi:"keyName"`
-	ProjectId  int    `pulumi:"projectId"`
-	PublicKey  string `pulumi:"publicKey"`
+	// ID of the key pair to be queried.
+	KeyId string `pulumi:"keyId"`
+	// Name of the key pair to be queried. Support regular expression search, only `^` and `$` are supported.
+	KeyName string `pulumi:"keyName"`
+	// Project ID of the key pair to be queried.
+	ProjectId int `pulumi:"projectId"`
+	// public key of the key pair.
+	PublicKey string `pulumi:"publicKey"`
 }
 
-// PairsKeyPairListInput is an input type that accepts PairsKeyPairListArgs and PairsKeyPairListOutput values.
-// You can construct a concrete instance of `PairsKeyPairListInput` via:
+// GetPairsKeyPairListInput is an input type that accepts GetPairsKeyPairListArgs and GetPairsKeyPairListOutput values.
+// You can construct a concrete instance of `GetPairsKeyPairListInput` via:
 //
-//          PairsKeyPairListArgs{...}
-type PairsKeyPairListInput interface {
+//          GetPairsKeyPairListArgs{...}
+type GetPairsKeyPairListInput interface {
 	pulumi.Input
 
-	ToPairsKeyPairListOutput() PairsKeyPairListOutput
-	ToPairsKeyPairListOutputWithContext(context.Context) PairsKeyPairListOutput
+	ToGetPairsKeyPairListOutput() GetPairsKeyPairListOutput
+	ToGetPairsKeyPairListOutputWithContext(context.Context) GetPairsKeyPairListOutput
 }
 
-type PairsKeyPairListArgs struct {
+type GetPairsKeyPairListArgs struct {
+	// Creation time of the key pair.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
-	KeyId      pulumi.StringInput `pulumi:"keyId"`
-	KeyName    pulumi.StringInput `pulumi:"keyName"`
-	ProjectId  pulumi.IntInput    `pulumi:"projectId"`
-	PublicKey  pulumi.StringInput `pulumi:"publicKey"`
+	// ID of the key pair to be queried.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// Name of the key pair to be queried. Support regular expression search, only `^` and `$` are supported.
+	KeyName pulumi.StringInput `pulumi:"keyName"`
+	// Project ID of the key pair to be queried.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// public key of the key pair.
+	PublicKey pulumi.StringInput `pulumi:"publicKey"`
 }
 
-func (PairsKeyPairListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PairsKeyPairList)(nil)).Elem()
+func (GetPairsKeyPairListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPairsKeyPairList)(nil)).Elem()
 }
 
-func (i PairsKeyPairListArgs) ToPairsKeyPairListOutput() PairsKeyPairListOutput {
-	return i.ToPairsKeyPairListOutputWithContext(context.Background())
+func (i GetPairsKeyPairListArgs) ToGetPairsKeyPairListOutput() GetPairsKeyPairListOutput {
+	return i.ToGetPairsKeyPairListOutputWithContext(context.Background())
 }
 
-func (i PairsKeyPairListArgs) ToPairsKeyPairListOutputWithContext(ctx context.Context) PairsKeyPairListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PairsKeyPairListOutput)
+func (i GetPairsKeyPairListArgs) ToGetPairsKeyPairListOutputWithContext(ctx context.Context) GetPairsKeyPairListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPairsKeyPairListOutput)
 }
 
-// PairsKeyPairListArrayInput is an input type that accepts PairsKeyPairListArray and PairsKeyPairListArrayOutput values.
-// You can construct a concrete instance of `PairsKeyPairListArrayInput` via:
+// GetPairsKeyPairListArrayInput is an input type that accepts GetPairsKeyPairListArray and GetPairsKeyPairListArrayOutput values.
+// You can construct a concrete instance of `GetPairsKeyPairListArrayInput` via:
 //
-//          PairsKeyPairListArray{ PairsKeyPairListArgs{...} }
-type PairsKeyPairListArrayInput interface {
+//          GetPairsKeyPairListArray{ GetPairsKeyPairListArgs{...} }
+type GetPairsKeyPairListArrayInput interface {
 	pulumi.Input
 
-	ToPairsKeyPairListArrayOutput() PairsKeyPairListArrayOutput
-	ToPairsKeyPairListArrayOutputWithContext(context.Context) PairsKeyPairListArrayOutput
+	ToGetPairsKeyPairListArrayOutput() GetPairsKeyPairListArrayOutput
+	ToGetPairsKeyPairListArrayOutputWithContext(context.Context) GetPairsKeyPairListArrayOutput
 }
 
-type PairsKeyPairListArray []PairsKeyPairListInput
+type GetPairsKeyPairListArray []GetPairsKeyPairListInput
 
-func (PairsKeyPairListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PairsKeyPairList)(nil)).Elem()
+func (GetPairsKeyPairListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPairsKeyPairList)(nil)).Elem()
 }
 
-func (i PairsKeyPairListArray) ToPairsKeyPairListArrayOutput() PairsKeyPairListArrayOutput {
-	return i.ToPairsKeyPairListArrayOutputWithContext(context.Background())
+func (i GetPairsKeyPairListArray) ToGetPairsKeyPairListArrayOutput() GetPairsKeyPairListArrayOutput {
+	return i.ToGetPairsKeyPairListArrayOutputWithContext(context.Background())
 }
 
-func (i PairsKeyPairListArray) ToPairsKeyPairListArrayOutputWithContext(ctx context.Context) PairsKeyPairListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PairsKeyPairListArrayOutput)
+func (i GetPairsKeyPairListArray) ToGetPairsKeyPairListArrayOutputWithContext(ctx context.Context) GetPairsKeyPairListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPairsKeyPairListArrayOutput)
 }
 
-type PairsKeyPairListOutput struct{ *pulumi.OutputState }
+type GetPairsKeyPairListOutput struct{ *pulumi.OutputState }
 
-func (PairsKeyPairListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PairsKeyPairList)(nil)).Elem()
+func (GetPairsKeyPairListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPairsKeyPairList)(nil)).Elem()
 }
 
-func (o PairsKeyPairListOutput) ToPairsKeyPairListOutput() PairsKeyPairListOutput {
+func (o GetPairsKeyPairListOutput) ToGetPairsKeyPairListOutput() GetPairsKeyPairListOutput {
 	return o
 }
 
-func (o PairsKeyPairListOutput) ToPairsKeyPairListOutputWithContext(ctx context.Context) PairsKeyPairListOutput {
+func (o GetPairsKeyPairListOutput) ToGetPairsKeyPairListOutputWithContext(ctx context.Context) GetPairsKeyPairListOutput {
 	return o
 }
 
-func (o PairsKeyPairListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v PairsKeyPairList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the key pair.
+func (o GetPairsKeyPairListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPairsKeyPairList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o PairsKeyPairListOutput) KeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v PairsKeyPairList) string { return v.KeyId }).(pulumi.StringOutput)
+// ID of the key pair to be queried.
+func (o GetPairsKeyPairListOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPairsKeyPairList) string { return v.KeyId }).(pulumi.StringOutput)
 }
 
-func (o PairsKeyPairListOutput) KeyName() pulumi.StringOutput {
-	return o.ApplyT(func(v PairsKeyPairList) string { return v.KeyName }).(pulumi.StringOutput)
+// Name of the key pair to be queried. Support regular expression search, only `^` and `$` are supported.
+func (o GetPairsKeyPairListOutput) KeyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPairsKeyPairList) string { return v.KeyName }).(pulumi.StringOutput)
 }
 
-func (o PairsKeyPairListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v PairsKeyPairList) int { return v.ProjectId }).(pulumi.IntOutput)
+// Project ID of the key pair to be queried.
+func (o GetPairsKeyPairListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPairsKeyPairList) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o PairsKeyPairListOutput) PublicKey() pulumi.StringOutput {
-	return o.ApplyT(func(v PairsKeyPairList) string { return v.PublicKey }).(pulumi.StringOutput)
+// public key of the key pair.
+func (o GetPairsKeyPairListOutput) PublicKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPairsKeyPairList) string { return v.PublicKey }).(pulumi.StringOutput)
 }
 
-type PairsKeyPairListArrayOutput struct{ *pulumi.OutputState }
+type GetPairsKeyPairListArrayOutput struct{ *pulumi.OutputState }
 
-func (PairsKeyPairListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PairsKeyPairList)(nil)).Elem()
+func (GetPairsKeyPairListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPairsKeyPairList)(nil)).Elem()
 }
 
-func (o PairsKeyPairListArrayOutput) ToPairsKeyPairListArrayOutput() PairsKeyPairListArrayOutput {
+func (o GetPairsKeyPairListArrayOutput) ToGetPairsKeyPairListArrayOutput() GetPairsKeyPairListArrayOutput {
 	return o
 }
 
-func (o PairsKeyPairListArrayOutput) ToPairsKeyPairListArrayOutputWithContext(ctx context.Context) PairsKeyPairListArrayOutput {
+func (o GetPairsKeyPairListArrayOutput) ToGetPairsKeyPairListArrayOutputWithContext(ctx context.Context) GetPairsKeyPairListArrayOutput {
 	return o
 }
 
-func (o PairsKeyPairListArrayOutput) Index(i pulumi.IntInput) PairsKeyPairListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PairsKeyPairList {
-		return vs[0].([]PairsKeyPairList)[vs[1].(int)]
-	}).(PairsKeyPairListOutput)
+func (o GetPairsKeyPairListArrayOutput) Index(i pulumi.IntInput) GetPairsKeyPairListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPairsKeyPairList {
+		return vs[0].([]GetPairsKeyPairList)[vs[1].(int)]
+	}).(GetPairsKeyPairListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*PairsKeyPairListInput)(nil)).Elem(), PairsKeyPairListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PairsKeyPairListArrayInput)(nil)).Elem(), PairsKeyPairListArray{})
-	pulumi.RegisterOutputType(PairsKeyPairListOutput{})
-	pulumi.RegisterOutputType(PairsKeyPairListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPairsKeyPairListInput)(nil)).Elem(), GetPairsKeyPairListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPairsKeyPairListArrayInput)(nil)).Elem(), GetPairsKeyPairListArray{})
+	pulumi.RegisterOutputType(GetPairsKeyPairListOutput{})
+	pulumi.RegisterOutputType(GetPairsKeyPairListArrayOutput{})
 }

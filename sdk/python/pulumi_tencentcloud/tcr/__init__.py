@@ -5,10 +5,15 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_instances import *
+from .get_namespaces import *
+from .get_repositories import *
+from .get_tokens import *
+from .get_vpc_attachments import *
 from .instance import *
 from .namespace import *
 from .repository import *
-from .tcr_token import *
+from .token import *
 from .vpc_attachment import *
 from ._inputs import *
 from . import outputs

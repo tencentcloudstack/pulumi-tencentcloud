@@ -11,6 +11,48 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a VPN SSL Server.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewSslServer(ctx, "server", &Vpn.SslServerArgs{
+// 			Compress:           pulumi.Bool(true),
+// 			EncryptAlgorithm:   pulumi.String("AES-128-CBC"),
+// 			IntegrityAlgorithm: pulumi.String("MD5"),
+// 			LocalAddresses: pulumi.StringArray{
+// 				pulumi.String("10.0.0.0/17"),
+// 			},
+// 			RemoteAddress:    pulumi.String("11.0.0.0/16"),
+// 			SslVpnPort:       pulumi.Int(1194),
+// 			SslVpnProtocol:   pulumi.String("UDP"),
+// 			SslVpnServerName: pulumi.String("helloworld"),
+// 			VpnGatewayId:     pulumi.String("vpngw-335lwf7d"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VPN SSL Server can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+// ```
 type SslServer struct {
 	pulumi.CustomResourceState
 

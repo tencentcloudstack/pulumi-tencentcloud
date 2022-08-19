@@ -6,10 +6,10 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .function import *
-from .functions import *
+from .get_functions import *
+from .get_logs import *
+from .get_namespaces import *
 from .layer import *
-from .logs import *
-from .namespaces import *
-from .scf_namespace import *
+from .namespace import *
 from ._inputs import *
 from . import outputs

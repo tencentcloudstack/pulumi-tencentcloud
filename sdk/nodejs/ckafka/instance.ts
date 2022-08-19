@@ -5,6 +5,58 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create ckafka instance.
+ *
+ * > **NOTE:** It only support create profession ckafka instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Ckafka.Instance("foo", {
+ *     bandWidth: 40,
+ *     config: {
+ *         autoCreateTopicEnable: true,
+ *         defaultNumPartitions: 3,
+ *         defaultReplicationFactor: 3,
+ *     },
+ *     diskSize: 500,
+ *     diskType: "CLOUD_BASIC",
+ *     dynamicRetentionConfig: {
+ *         bottomRetention: 0,
+ *         diskQuotaPercentage: 0,
+ *         enable: 1,
+ *         stepForwardPercentage: 0,
+ *     },
+ *     instanceName: "ckafka-instance-tf-test",
+ *     kafkaVersion: "1.1.1",
+ *     msgRetentionTime: 1300,
+ *     multiZoneFlag: true,
+ *     partition: 800,
+ *     period: 1,
+ *     publicNetwork: 3,
+ *     renewFlag: 0,
+ *     subnetId: "subnet-4vwihrzk",
+ *     vpcId: "vpc-82p1t1nv",
+ *     zoneId: 100006,
+ *     zoneIds: [
+ *         100006,
+ *         100007,
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * ckafka instance can be imported using the instance_id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -42,8 +94,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly config!: pulumi.Output<outputs.Ckafka.InstanceConfig | undefined>;
     /**
-     * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-     * the control. If it is not within the interval, the plan will cause a change when first created.
+     * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
     public readonly diskSize!: pulumi.Output<number>;
     /**
@@ -63,17 +114,15 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly kafkaVersion!: pulumi.Output<string>;
     /**
-     * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-     * default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+     * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
     public readonly msgRetentionTime!: pulumi.Output<number>;
     /**
-     * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+     * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
      */
     public readonly multiZoneFlag!: pulumi.Output<boolean | undefined>;
     /**
-     * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-     * through the control. If it is not within the interval, the plan will cause a change when first created.
+     * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
     public readonly partition!: pulumi.Output<number>;
     /**
@@ -89,8 +138,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly rebalanceTime!: pulumi.Output<number | undefined>;
     /**
-     * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-     * no automatic renewal (user setting).
+     * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
      */
     public readonly renewFlag!: pulumi.Output<number>;
     /**
@@ -118,7 +166,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly zoneId!: pulumi.Output<number>;
     /**
-     * List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+     * List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
      */
     public readonly zoneIds!: pulumi.Output<number[] | undefined>;
 
@@ -210,8 +258,7 @@ export interface InstanceState {
      */
     config?: pulumi.Input<inputs.Ckafka.InstanceConfig>;
     /**
-     * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-     * the control. If it is not within the interval, the plan will cause a change when first created.
+     * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
     diskSize?: pulumi.Input<number>;
     /**
@@ -231,17 +278,15 @@ export interface InstanceState {
      */
     kafkaVersion?: pulumi.Input<string>;
     /**
-     * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-     * default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+     * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
     msgRetentionTime?: pulumi.Input<number>;
     /**
-     * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+     * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
      */
     multiZoneFlag?: pulumi.Input<boolean>;
     /**
-     * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-     * through the control. If it is not within the interval, the plan will cause a change when first created.
+     * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
     partition?: pulumi.Input<number>;
     /**
@@ -257,8 +302,7 @@ export interface InstanceState {
      */
     rebalanceTime?: pulumi.Input<number>;
     /**
-     * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-     * no automatic renewal (user setting).
+     * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
      */
     renewFlag?: pulumi.Input<number>;
     /**
@@ -286,7 +330,7 @@ export interface InstanceState {
      */
     zoneId?: pulumi.Input<number>;
     /**
-     * List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+     * List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
      */
     zoneIds?: pulumi.Input<pulumi.Input<number>[]>;
 }
@@ -304,8 +348,7 @@ export interface InstanceArgs {
      */
     config?: pulumi.Input<inputs.Ckafka.InstanceConfig>;
     /**
-     * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-     * the control. If it is not within the interval, the plan will cause a change when first created.
+     * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
     diskSize?: pulumi.Input<number>;
     /**
@@ -325,17 +368,15 @@ export interface InstanceArgs {
      */
     kafkaVersion?: pulumi.Input<string>;
     /**
-     * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-     * default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+     * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
     msgRetentionTime?: pulumi.Input<number>;
     /**
-     * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+     * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
      */
     multiZoneFlag?: pulumi.Input<boolean>;
     /**
-     * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-     * through the control. If it is not within the interval, the plan will cause a change when first created.
+     * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
     partition?: pulumi.Input<number>;
     /**
@@ -351,8 +392,7 @@ export interface InstanceArgs {
      */
     rebalanceTime?: pulumi.Input<number>;
     /**
-     * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-     * no automatic renewal (user setting).
+     * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
      */
     renewFlag?: pulumi.Input<number>;
     /**
@@ -372,7 +412,7 @@ export interface InstanceArgs {
      */
     zoneId: pulumi.Input<number>;
     /**
-     * List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+     * List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
      */
     zoneIds?: pulumi.Input<pulumi.Input<number>[]>;
 }

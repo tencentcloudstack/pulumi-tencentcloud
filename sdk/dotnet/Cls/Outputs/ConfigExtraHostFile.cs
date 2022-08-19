@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class ConfigExtraHostFile
     {
+        /// <summary>
+        /// Metadata info.
+        /// </summary>
         public readonly ImmutableArray<string> CustomLabels;
+        /// <summary>
+        /// Log file name.
+        /// </summary>
         public readonly string FilePattern;
+        /// <summary>
+        /// Log file dir.
+        /// </summary>
         public readonly string LogPath;
 
         [OutputConstructor]

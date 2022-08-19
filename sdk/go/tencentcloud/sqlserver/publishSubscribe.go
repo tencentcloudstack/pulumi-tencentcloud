@@ -11,18 +11,57 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a SQL Server PublishSubscribe resource belongs to SQL Server instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.NewPublishSubscribe(ctx, "example", &Sqlserver.PublishSubscribeArgs{
+// 			PublishInstanceId:    pulumi.Any(tencentcloud_sqlserver_instance.Publish_instance.Id),
+// 			SubscribeInstanceId:  pulumi.Any(tencentcloud_sqlserver_instance.Subscribe_instance.Id),
+// 			PublishSubscribeName: pulumi.String("example"),
+// 			DeleteSubscribeDb:    pulumi.Bool(false),
+// 			DatabaseTuples: sqlserver.PublishSubscribeDatabaseTupleArray{
+// 				&sqlserver.PublishSubscribeDatabaseTupleArgs{
+// 					PublishDatabase: pulumi.Any(tencentcloud_sqlserver_db.Test_publish_subscribe.Name),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SQL Server PublishSubscribe can be imported using the publish_sqlserver_id#subscribe_sqlserver_id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe foo publish_sqlserver_id#subscribe_sqlserver_id
+// ```
 type PublishSubscribe struct {
 	pulumi.CustomResourceState
 
-	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-	// modification is not allowed.
+	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
 	DatabaseTuples PublishSubscribeDatabaseTupleArrayOutput `pulumi:"databaseTuples"`
-	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-	// database, `false` for does not delete the subscribe database. default is `false`.
+	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
 	DeleteSubscribeDb pulumi.BoolPtrOutput `pulumi:"deleteSubscribeDb"`
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId pulumi.StringOutput `pulumi:"publishInstanceId"`
-	// The name of the Publish and Subscribe. Default is `default_name`.
+	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName pulumi.StringPtrOutput `pulumi:"publishSubscribeName"`
 	// ID of the SQL Server instance which subscribe.
 	SubscribeInstanceId pulumi.StringOutput `pulumi:"subscribeInstanceId"`
@@ -66,30 +105,26 @@ func GetPublishSubscribe(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PublishSubscribe resources.
 type publishSubscribeState struct {
-	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-	// modification is not allowed.
+	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
 	DatabaseTuples []PublishSubscribeDatabaseTuple `pulumi:"databaseTuples"`
-	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-	// database, `false` for does not delete the subscribe database. default is `false`.
+	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
 	DeleteSubscribeDb *bool `pulumi:"deleteSubscribeDb"`
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId *string `pulumi:"publishInstanceId"`
-	// The name of the Publish and Subscribe. Default is `default_name`.
+	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName *string `pulumi:"publishSubscribeName"`
 	// ID of the SQL Server instance which subscribe.
 	SubscribeInstanceId *string `pulumi:"subscribeInstanceId"`
 }
 
 type PublishSubscribeState struct {
-	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-	// modification is not allowed.
+	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
 	DatabaseTuples PublishSubscribeDatabaseTupleArrayInput
-	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-	// database, `false` for does not delete the subscribe database. default is `false`.
+	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
 	DeleteSubscribeDb pulumi.BoolPtrInput
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId pulumi.StringPtrInput
-	// The name of the Publish and Subscribe. Default is `default_name`.
+	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName pulumi.StringPtrInput
 	// ID of the SQL Server instance which subscribe.
 	SubscribeInstanceId pulumi.StringPtrInput
@@ -100,15 +135,13 @@ func (PublishSubscribeState) ElementType() reflect.Type {
 }
 
 type publishSubscribeArgs struct {
-	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-	// modification is not allowed.
+	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
 	DatabaseTuples []PublishSubscribeDatabaseTuple `pulumi:"databaseTuples"`
-	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-	// database, `false` for does not delete the subscribe database. default is `false`.
+	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
 	DeleteSubscribeDb *bool `pulumi:"deleteSubscribeDb"`
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId string `pulumi:"publishInstanceId"`
-	// The name of the Publish and Subscribe. Default is `default_name`.
+	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName *string `pulumi:"publishSubscribeName"`
 	// ID of the SQL Server instance which subscribe.
 	SubscribeInstanceId string `pulumi:"subscribeInstanceId"`
@@ -116,15 +149,13 @@ type publishSubscribeArgs struct {
 
 // The set of arguments for constructing a PublishSubscribe resource.
 type PublishSubscribeArgs struct {
-	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-	// modification is not allowed.
+	// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
 	DatabaseTuples PublishSubscribeDatabaseTupleArrayInput
-	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-	// database, `false` for does not delete the subscribe database. default is `false`.
+	// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
 	DeleteSubscribeDb pulumi.BoolPtrInput
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId pulumi.StringInput
-	// The name of the Publish and Subscribe. Default is `default_name`.
+	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName pulumi.StringPtrInput
 	// ID of the SQL Server instance which subscribe.
 	SubscribeInstanceId pulumi.StringInput
@@ -217,14 +248,12 @@ func (o PublishSubscribeOutput) ToPublishSubscribeOutputWithContext(ctx context.
 	return o
 }
 
-// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-// modification is not allowed.
+// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
 func (o PublishSubscribeOutput) DatabaseTuples() PublishSubscribeDatabaseTupleArrayOutput {
 	return o.ApplyT(func(v *PublishSubscribe) PublishSubscribeDatabaseTupleArrayOutput { return v.DatabaseTuples }).(PublishSubscribeDatabaseTupleArrayOutput)
 }
 
-// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-// database, `false` for does not delete the subscribe database. default is `false`.
+// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
 func (o PublishSubscribeOutput) DeleteSubscribeDb() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PublishSubscribe) pulumi.BoolPtrOutput { return v.DeleteSubscribeDb }).(pulumi.BoolPtrOutput)
 }
@@ -234,7 +263,7 @@ func (o PublishSubscribeOutput) PublishInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *PublishSubscribe) pulumi.StringOutput { return v.PublishInstanceId }).(pulumi.StringOutput)
 }
 
-// The name of the Publish and Subscribe. Default is `default_name`.
+// The name of the Publish and Subscribe. Default is `defaultName`.
 func (o PublishSubscribeOutput) PublishSubscribeName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PublishSubscribe) pulumi.StringPtrOutput { return v.PublishSubscribeName }).(pulumi.StringPtrOutput)
 }

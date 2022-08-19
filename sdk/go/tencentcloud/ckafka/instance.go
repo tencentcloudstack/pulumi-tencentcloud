@@ -11,6 +11,69 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create ckafka instance.
+//
+// > **NOTE:** It only support create profession ckafka instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ckafka.NewInstance(ctx, "foo", &Ckafka.InstanceArgs{
+// 			BandWidth: pulumi.Int(40),
+// 			Config: &ckafka.InstanceConfigArgs{
+// 				AutoCreateTopicEnable:    pulumi.Bool(true),
+// 				DefaultNumPartitions:     pulumi.Int(3),
+// 				DefaultReplicationFactor: pulumi.Int(3),
+// 			},
+// 			DiskSize: pulumi.Int(500),
+// 			DiskType: pulumi.String("CLOUD_BASIC"),
+// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+// 				BottomRetention:       pulumi.Int(0),
+// 				DiskQuotaPercentage:   pulumi.Int(0),
+// 				Enable:                pulumi.Int(1),
+// 				StepForwardPercentage: pulumi.Int(0),
+// 			},
+// 			InstanceName:     pulumi.String("ckafka-instance-tf-test"),
+// 			KafkaVersion:     pulumi.String("1.1.1"),
+// 			MsgRetentionTime: pulumi.Int(1300),
+// 			MultiZoneFlag:    pulumi.Bool(true),
+// 			Partition:        pulumi.Int(800),
+// 			Period:           pulumi.Int(1),
+// 			PublicNetwork:    pulumi.Int(3),
+// 			RenewFlag:        pulumi.Int(0),
+// 			SubnetId:         pulumi.String("subnet-4vwihrzk"),
+// 			VpcId:            pulumi.String("vpc-82p1t1nv"),
+// 			ZoneId:           pulumi.Int(100006),
+// 			ZoneIds: pulumi.IntArray{
+// 				pulumi.Int(100006),
+// 				pulumi.Int(100007),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ckafka instance can be imported using the instance_id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -18,8 +81,7 @@ type Instance struct {
 	BandWidth pulumi.IntOutput `pulumi:"bandWidth"`
 	// Instance configuration.
 	Config InstanceConfigPtrOutput `pulumi:"config"`
-	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-	// the control. If it is not within the interval, the plan will cause a change when first created.
+	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize pulumi.IntOutput `pulumi:"diskSize"`
 	// Type of disk.
 	DiskType pulumi.StringOutput `pulumi:"diskType"`
@@ -29,13 +91,11 @@ type Instance struct {
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringOutput `pulumi:"kafkaVersion"`
-	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-	// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime pulumi.IntOutput `pulumi:"msgRetentionTime"`
-	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
 	MultiZoneFlag pulumi.BoolPtrOutput `pulumi:"multiZoneFlag"`
-	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-	// through the control. If it is not within the interval, the plan will cause a change when first created.
+	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	Partition pulumi.IntOutput `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
@@ -43,8 +103,7 @@ type Instance struct {
 	PublicNetwork pulumi.IntOutput `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrOutput `pulumi:"rebalanceTime"`
-	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-	// no automatic renewal (user setting).
+	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag pulumi.IntOutput `pulumi:"renewFlag"`
 	// Subnet id.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
@@ -58,7 +117,7 @@ type Instance struct {
 	Vport pulumi.StringOutput `pulumi:"vport"`
 	// Available zone id.
 	ZoneId pulumi.IntOutput `pulumi:"zoneId"`
-	// List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+	// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
 	ZoneIds pulumi.IntArrayOutput `pulumi:"zoneIds"`
 }
 
@@ -107,8 +166,7 @@ type instanceState struct {
 	BandWidth *int `pulumi:"bandWidth"`
 	// Instance configuration.
 	Config *InstanceConfig `pulumi:"config"`
-	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-	// the control. If it is not within the interval, the plan will cause a change when first created.
+	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize *int `pulumi:"diskSize"`
 	// Type of disk.
 	DiskType *string `pulumi:"diskType"`
@@ -118,13 +176,11 @@ type instanceState struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion *string `pulumi:"kafkaVersion"`
-	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-	// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime *int `pulumi:"msgRetentionTime"`
-	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
 	MultiZoneFlag *bool `pulumi:"multiZoneFlag"`
-	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-	// through the control. If it is not within the interval, the plan will cause a change when first created.
+	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
@@ -132,8 +188,7 @@ type instanceState struct {
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
-	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-	// no automatic renewal (user setting).
+	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag *int `pulumi:"renewFlag"`
 	// Subnet id.
 	SubnetId *string `pulumi:"subnetId"`
@@ -147,7 +202,7 @@ type instanceState struct {
 	Vport *string `pulumi:"vport"`
 	// Available zone id.
 	ZoneId *int `pulumi:"zoneId"`
-	// List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+	// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
 	ZoneIds []int `pulumi:"zoneIds"`
 }
 
@@ -156,8 +211,7 @@ type InstanceState struct {
 	BandWidth pulumi.IntPtrInput
 	// Instance configuration.
 	Config InstanceConfigPtrInput
-	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-	// the control. If it is not within the interval, the plan will cause a change when first created.
+	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize pulumi.IntPtrInput
 	// Type of disk.
 	DiskType pulumi.StringPtrInput
@@ -167,13 +221,11 @@ type InstanceState struct {
 	InstanceName pulumi.StringPtrInput
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringPtrInput
-	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-	// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime pulumi.IntPtrInput
-	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
 	MultiZoneFlag pulumi.BoolPtrInput
-	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-	// through the control. If it is not within the interval, the plan will cause a change when first created.
+	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
@@ -181,8 +233,7 @@ type InstanceState struct {
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
-	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-	// no automatic renewal (user setting).
+	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag pulumi.IntPtrInput
 	// Subnet id.
 	SubnetId pulumi.StringPtrInput
@@ -196,7 +247,7 @@ type InstanceState struct {
 	Vport pulumi.StringPtrInput
 	// Available zone id.
 	ZoneId pulumi.IntPtrInput
-	// List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+	// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
 	ZoneIds pulumi.IntArrayInput
 }
 
@@ -209,8 +260,7 @@ type instanceArgs struct {
 	BandWidth *int `pulumi:"bandWidth"`
 	// Instance configuration.
 	Config *InstanceConfig `pulumi:"config"`
-	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-	// the control. If it is not within the interval, the plan will cause a change when first created.
+	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize *int `pulumi:"diskSize"`
 	// Type of disk.
 	DiskType *string `pulumi:"diskType"`
@@ -220,13 +270,11 @@ type instanceArgs struct {
 	InstanceName string `pulumi:"instanceName"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion *string `pulumi:"kafkaVersion"`
-	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-	// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime *int `pulumi:"msgRetentionTime"`
-	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
 	MultiZoneFlag *bool `pulumi:"multiZoneFlag"`
-	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-	// through the control. If it is not within the interval, the plan will cause a change when first created.
+	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
@@ -234,8 +282,7 @@ type instanceArgs struct {
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
-	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-	// no automatic renewal (user setting).
+	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag *int `pulumi:"renewFlag"`
 	// Subnet id.
 	SubnetId string `pulumi:"subnetId"`
@@ -245,7 +292,7 @@ type instanceArgs struct {
 	VpcId string `pulumi:"vpcId"`
 	// Available zone id.
 	ZoneId int `pulumi:"zoneId"`
-	// List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+	// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
 	ZoneIds []int `pulumi:"zoneIds"`
 }
 
@@ -255,8 +302,7 @@ type InstanceArgs struct {
 	BandWidth pulumi.IntPtrInput
 	// Instance configuration.
 	Config InstanceConfigPtrInput
-	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-	// the control. If it is not within the interval, the plan will cause a change when first created.
+	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize pulumi.IntPtrInput
 	// Type of disk.
 	DiskType pulumi.StringPtrInput
@@ -266,13 +312,11 @@ type InstanceArgs struct {
 	InstanceName pulumi.StringInput
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringPtrInput
-	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-	// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime pulumi.IntPtrInput
-	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
 	MultiZoneFlag pulumi.BoolPtrInput
-	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-	// through the control. If it is not within the interval, the plan will cause a change when first created.
+	// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
@@ -280,8 +324,7 @@ type InstanceArgs struct {
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
-	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-	// no automatic renewal (user setting).
+	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag pulumi.IntPtrInput
 	// Subnet id.
 	SubnetId pulumi.StringInput
@@ -291,7 +334,7 @@ type InstanceArgs struct {
 	VpcId pulumi.StringInput
 	// Available zone id.
 	ZoneId pulumi.IntInput
-	// List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+	// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
 	ZoneIds pulumi.IntArrayInput
 }
 
@@ -392,8 +435,7 @@ func (o InstanceOutput) Config() InstanceConfigPtrOutput {
 	return o.ApplyT(func(v *Instance) InstanceConfigPtrOutput { return v.Config }).(InstanceConfigPtrOutput)
 }
 
-// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-// the control. If it is not within the interval, the plan will cause a change when first created.
+// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 func (o InstanceOutput) DiskSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.DiskSize }).(pulumi.IntOutput)
 }
@@ -418,19 +460,17 @@ func (o InstanceOutput) KafkaVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.KafkaVersion }).(pulumi.StringOutput)
 }
 
-// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 func (o InstanceOutput) MsgRetentionTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.MsgRetentionTime }).(pulumi.IntOutput)
 }
 
-// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
+// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
 func (o InstanceOutput) MultiZoneFlag() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.MultiZoneFlag }).(pulumi.BoolPtrOutput)
 }
 
-// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-// through the control. If it is not within the interval, the plan will cause a change when first created.
+// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 func (o InstanceOutput) Partition() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Partition }).(pulumi.IntOutput)
 }
@@ -450,8 +490,7 @@ func (o InstanceOutput) RebalanceTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.RebalanceTime }).(pulumi.IntPtrOutput)
 }
 
-// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-// no automatic renewal (user setting).
+// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 func (o InstanceOutput) RenewFlag() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.RenewFlag }).(pulumi.IntOutput)
 }
@@ -486,7 +525,7 @@ func (o InstanceOutput) ZoneId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.ZoneId }).(pulumi.IntOutput)
 }
 
-// List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
+// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
 func (o InstanceOutput) ZoneIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntArrayOutput { return v.ZoneIds }).(pulumi.IntArrayOutput)
 }

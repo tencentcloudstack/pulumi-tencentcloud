@@ -10,139 +10,160 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type GroupsPlacementGroupList struct {
-	CreateTime       string   `pulumi:"createTime"`
-	CurrentNum       int      `pulumi:"currentNum"`
-	CvmQuotaTotal    int      `pulumi:"cvmQuotaTotal"`
-	InstanceIds      []string `pulumi:"instanceIds"`
-	Name             string   `pulumi:"name"`
-	PlacementGroupId string   `pulumi:"placementGroupId"`
-	Type             string   `pulumi:"type"`
+type GetGroupsPlacementGroupList struct {
+	// Creation time of the placement group.
+	CreateTime string `pulumi:"createTime"`
+	// Number of hosts in the placement group.
+	CurrentNum int `pulumi:"currentNum"`
+	// Maximum number of hosts in the placement group.
+	CvmQuotaTotal int `pulumi:"cvmQuotaTotal"`
+	// Host IDs in the placement group.
+	InstanceIds []string `pulumi:"instanceIds"`
+	// Name of the placement group to be queried.
+	Name string `pulumi:"name"`
+	// ID of the placement group to be queried.
+	PlacementGroupId string `pulumi:"placementGroupId"`
+	// Type of the placement group.
+	Type string `pulumi:"type"`
 }
 
-// GroupsPlacementGroupListInput is an input type that accepts GroupsPlacementGroupListArgs and GroupsPlacementGroupListOutput values.
-// You can construct a concrete instance of `GroupsPlacementGroupListInput` via:
+// GetGroupsPlacementGroupListInput is an input type that accepts GetGroupsPlacementGroupListArgs and GetGroupsPlacementGroupListOutput values.
+// You can construct a concrete instance of `GetGroupsPlacementGroupListInput` via:
 //
-//          GroupsPlacementGroupListArgs{...}
-type GroupsPlacementGroupListInput interface {
+//          GetGroupsPlacementGroupListArgs{...}
+type GetGroupsPlacementGroupListInput interface {
 	pulumi.Input
 
-	ToGroupsPlacementGroupListOutput() GroupsPlacementGroupListOutput
-	ToGroupsPlacementGroupListOutputWithContext(context.Context) GroupsPlacementGroupListOutput
+	ToGetGroupsPlacementGroupListOutput() GetGroupsPlacementGroupListOutput
+	ToGetGroupsPlacementGroupListOutputWithContext(context.Context) GetGroupsPlacementGroupListOutput
 }
 
-type GroupsPlacementGroupListArgs struct {
-	CreateTime       pulumi.StringInput      `pulumi:"createTime"`
-	CurrentNum       pulumi.IntInput         `pulumi:"currentNum"`
-	CvmQuotaTotal    pulumi.IntInput         `pulumi:"cvmQuotaTotal"`
-	InstanceIds      pulumi.StringArrayInput `pulumi:"instanceIds"`
-	Name             pulumi.StringInput      `pulumi:"name"`
-	PlacementGroupId pulumi.StringInput      `pulumi:"placementGroupId"`
-	Type             pulumi.StringInput      `pulumi:"type"`
+type GetGroupsPlacementGroupListArgs struct {
+	// Creation time of the placement group.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Number of hosts in the placement group.
+	CurrentNum pulumi.IntInput `pulumi:"currentNum"`
+	// Maximum number of hosts in the placement group.
+	CvmQuotaTotal pulumi.IntInput `pulumi:"cvmQuotaTotal"`
+	// Host IDs in the placement group.
+	InstanceIds pulumi.StringArrayInput `pulumi:"instanceIds"`
+	// Name of the placement group to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// ID of the placement group to be queried.
+	PlacementGroupId pulumi.StringInput `pulumi:"placementGroupId"`
+	// Type of the placement group.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
-func (GroupsPlacementGroupListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GroupsPlacementGroupList)(nil)).Elem()
+func (GetGroupsPlacementGroupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsPlacementGroupList)(nil)).Elem()
 }
 
-func (i GroupsPlacementGroupListArgs) ToGroupsPlacementGroupListOutput() GroupsPlacementGroupListOutput {
-	return i.ToGroupsPlacementGroupListOutputWithContext(context.Background())
+func (i GetGroupsPlacementGroupListArgs) ToGetGroupsPlacementGroupListOutput() GetGroupsPlacementGroupListOutput {
+	return i.ToGetGroupsPlacementGroupListOutputWithContext(context.Background())
 }
 
-func (i GroupsPlacementGroupListArgs) ToGroupsPlacementGroupListOutputWithContext(ctx context.Context) GroupsPlacementGroupListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GroupsPlacementGroupListOutput)
+func (i GetGroupsPlacementGroupListArgs) ToGetGroupsPlacementGroupListOutputWithContext(ctx context.Context) GetGroupsPlacementGroupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsPlacementGroupListOutput)
 }
 
-// GroupsPlacementGroupListArrayInput is an input type that accepts GroupsPlacementGroupListArray and GroupsPlacementGroupListArrayOutput values.
-// You can construct a concrete instance of `GroupsPlacementGroupListArrayInput` via:
+// GetGroupsPlacementGroupListArrayInput is an input type that accepts GetGroupsPlacementGroupListArray and GetGroupsPlacementGroupListArrayOutput values.
+// You can construct a concrete instance of `GetGroupsPlacementGroupListArrayInput` via:
 //
-//          GroupsPlacementGroupListArray{ GroupsPlacementGroupListArgs{...} }
-type GroupsPlacementGroupListArrayInput interface {
+//          GetGroupsPlacementGroupListArray{ GetGroupsPlacementGroupListArgs{...} }
+type GetGroupsPlacementGroupListArrayInput interface {
 	pulumi.Input
 
-	ToGroupsPlacementGroupListArrayOutput() GroupsPlacementGroupListArrayOutput
-	ToGroupsPlacementGroupListArrayOutputWithContext(context.Context) GroupsPlacementGroupListArrayOutput
+	ToGetGroupsPlacementGroupListArrayOutput() GetGroupsPlacementGroupListArrayOutput
+	ToGetGroupsPlacementGroupListArrayOutputWithContext(context.Context) GetGroupsPlacementGroupListArrayOutput
 }
 
-type GroupsPlacementGroupListArray []GroupsPlacementGroupListInput
+type GetGroupsPlacementGroupListArray []GetGroupsPlacementGroupListInput
 
-func (GroupsPlacementGroupListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GroupsPlacementGroupList)(nil)).Elem()
+func (GetGroupsPlacementGroupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsPlacementGroupList)(nil)).Elem()
 }
 
-func (i GroupsPlacementGroupListArray) ToGroupsPlacementGroupListArrayOutput() GroupsPlacementGroupListArrayOutput {
-	return i.ToGroupsPlacementGroupListArrayOutputWithContext(context.Background())
+func (i GetGroupsPlacementGroupListArray) ToGetGroupsPlacementGroupListArrayOutput() GetGroupsPlacementGroupListArrayOutput {
+	return i.ToGetGroupsPlacementGroupListArrayOutputWithContext(context.Background())
 }
 
-func (i GroupsPlacementGroupListArray) ToGroupsPlacementGroupListArrayOutputWithContext(ctx context.Context) GroupsPlacementGroupListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GroupsPlacementGroupListArrayOutput)
+func (i GetGroupsPlacementGroupListArray) ToGetGroupsPlacementGroupListArrayOutputWithContext(ctx context.Context) GetGroupsPlacementGroupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsPlacementGroupListArrayOutput)
 }
 
-type GroupsPlacementGroupListOutput struct{ *pulumi.OutputState }
+type GetGroupsPlacementGroupListOutput struct{ *pulumi.OutputState }
 
-func (GroupsPlacementGroupListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GroupsPlacementGroupList)(nil)).Elem()
+func (GetGroupsPlacementGroupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsPlacementGroupList)(nil)).Elem()
 }
 
-func (o GroupsPlacementGroupListOutput) ToGroupsPlacementGroupListOutput() GroupsPlacementGroupListOutput {
+func (o GetGroupsPlacementGroupListOutput) ToGetGroupsPlacementGroupListOutput() GetGroupsPlacementGroupListOutput {
 	return o
 }
 
-func (o GroupsPlacementGroupListOutput) ToGroupsPlacementGroupListOutputWithContext(ctx context.Context) GroupsPlacementGroupListOutput {
+func (o GetGroupsPlacementGroupListOutput) ToGetGroupsPlacementGroupListOutputWithContext(ctx context.Context) GetGroupsPlacementGroupListOutput {
 	return o
 }
 
-func (o GroupsPlacementGroupListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsPlacementGroupList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the placement group.
+func (o GetGroupsPlacementGroupListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsPlacementGroupList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o GroupsPlacementGroupListOutput) CurrentNum() pulumi.IntOutput {
-	return o.ApplyT(func(v GroupsPlacementGroupList) int { return v.CurrentNum }).(pulumi.IntOutput)
+// Number of hosts in the placement group.
+func (o GetGroupsPlacementGroupListOutput) CurrentNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsPlacementGroupList) int { return v.CurrentNum }).(pulumi.IntOutput)
 }
 
-func (o GroupsPlacementGroupListOutput) CvmQuotaTotal() pulumi.IntOutput {
-	return o.ApplyT(func(v GroupsPlacementGroupList) int { return v.CvmQuotaTotal }).(pulumi.IntOutput)
+// Maximum number of hosts in the placement group.
+func (o GetGroupsPlacementGroupListOutput) CvmQuotaTotal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsPlacementGroupList) int { return v.CvmQuotaTotal }).(pulumi.IntOutput)
 }
 
-func (o GroupsPlacementGroupListOutput) InstanceIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GroupsPlacementGroupList) []string { return v.InstanceIds }).(pulumi.StringArrayOutput)
+// Host IDs in the placement group.
+func (o GetGroupsPlacementGroupListOutput) InstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGroupsPlacementGroupList) []string { return v.InstanceIds }).(pulumi.StringArrayOutput)
 }
 
-func (o GroupsPlacementGroupListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsPlacementGroupList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the placement group to be queried.
+func (o GetGroupsPlacementGroupListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsPlacementGroupList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o GroupsPlacementGroupListOutput) PlacementGroupId() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsPlacementGroupList) string { return v.PlacementGroupId }).(pulumi.StringOutput)
+// ID of the placement group to be queried.
+func (o GetGroupsPlacementGroupListOutput) PlacementGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsPlacementGroupList) string { return v.PlacementGroupId }).(pulumi.StringOutput)
 }
 
-func (o GroupsPlacementGroupListOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsPlacementGroupList) string { return v.Type }).(pulumi.StringOutput)
+// Type of the placement group.
+func (o GetGroupsPlacementGroupListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsPlacementGroupList) string { return v.Type }).(pulumi.StringOutput)
 }
 
-type GroupsPlacementGroupListArrayOutput struct{ *pulumi.OutputState }
+type GetGroupsPlacementGroupListArrayOutput struct{ *pulumi.OutputState }
 
-func (GroupsPlacementGroupListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GroupsPlacementGroupList)(nil)).Elem()
+func (GetGroupsPlacementGroupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsPlacementGroupList)(nil)).Elem()
 }
 
-func (o GroupsPlacementGroupListArrayOutput) ToGroupsPlacementGroupListArrayOutput() GroupsPlacementGroupListArrayOutput {
+func (o GetGroupsPlacementGroupListArrayOutput) ToGetGroupsPlacementGroupListArrayOutput() GetGroupsPlacementGroupListArrayOutput {
 	return o
 }
 
-func (o GroupsPlacementGroupListArrayOutput) ToGroupsPlacementGroupListArrayOutputWithContext(ctx context.Context) GroupsPlacementGroupListArrayOutput {
+func (o GetGroupsPlacementGroupListArrayOutput) ToGetGroupsPlacementGroupListArrayOutputWithContext(ctx context.Context) GetGroupsPlacementGroupListArrayOutput {
 	return o
 }
 
-func (o GroupsPlacementGroupListArrayOutput) Index(i pulumi.IntInput) GroupsPlacementGroupListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GroupsPlacementGroupList {
-		return vs[0].([]GroupsPlacementGroupList)[vs[1].(int)]
-	}).(GroupsPlacementGroupListOutput)
+func (o GetGroupsPlacementGroupListArrayOutput) Index(i pulumi.IntInput) GetGroupsPlacementGroupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsPlacementGroupList {
+		return vs[0].([]GetGroupsPlacementGroupList)[vs[1].(int)]
+	}).(GetGroupsPlacementGroupListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*GroupsPlacementGroupListInput)(nil)).Elem(), GroupsPlacementGroupListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GroupsPlacementGroupListArrayInput)(nil)).Elem(), GroupsPlacementGroupListArray{})
-	pulumi.RegisterOutputType(GroupsPlacementGroupListOutput{})
-	pulumi.RegisterOutputType(GroupsPlacementGroupListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsPlacementGroupListInput)(nil)).Elem(), GetGroupsPlacementGroupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsPlacementGroupListArrayInput)(nil)).Elem(), GetGroupsPlacementGroupListArray{})
+	pulumi.RegisterOutputType(GetGroupsPlacementGroupListOutput{})
+	pulumi.RegisterOutputType(GetGroupsPlacementGroupListArrayOutput{})
 }

@@ -19,12 +19,8 @@ class CertificateArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Certificate resource.
-        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-               password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-               `SSL`, the format is `pem`.
-        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-               certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-               CA certificate; `PROXY` means proxy SSL certificate.
+        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
+        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         :param pulumi.Input[str] key: Key of the `SSL` certificate.
         :param pulumi.Input[str] name: Name of the certificate.
         """
@@ -39,9 +35,7 @@ class CertificateArgs:
     @pulumi.getter
     def content(self) -> pulumi.Input[str]:
         """
-        Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-        password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-        `SSL`, the format is `pem`.
+        Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         """
         return pulumi.get(self, "content")
 
@@ -53,9 +47,7 @@ class CertificateArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
         """
-        Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-        certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-        CA certificate; `PROXY` means proxy SSL certificate.
+        Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         """
         return pulumi.get(self, "type")
 
@@ -103,18 +95,14 @@ class _CertificateState:
         """
         Input properties used for looking up and filtering Certificate resources.
         :param pulumi.Input[str] begin_time: Beginning time of the certificate.
-        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-               password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-               `SSL`, the format is `pem`.
+        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         :param pulumi.Input[str] create_time: Creation time of the certificate.
         :param pulumi.Input[str] end_time: Ending time of the certificate.
         :param pulumi.Input[str] issuer_cn: Issuer name of the certificate.
         :param pulumi.Input[str] key: Key of the `SSL` certificate.
         :param pulumi.Input[str] name: Name of the certificate.
         :param pulumi.Input[str] subject_cn: Subject name of the certificate.
-        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-               certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-               CA certificate; `PROXY` means proxy SSL certificate.
+        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         """
         if begin_time is not None:
             pulumi.set(__self__, "begin_time", begin_time)
@@ -151,9 +139,7 @@ class _CertificateState:
     @pulumi.getter
     def content(self) -> Optional[pulumi.Input[str]]:
         """
-        Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-        password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-        `SSL`, the format is `pem`.
+        Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         """
         return pulumi.get(self, "content")
 
@@ -237,9 +223,7 @@ class _CertificateState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-        certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-        CA certificate; `PROXY` means proxy SSL certificate.
+        Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         """
         return pulumi.get(self, "type")
 
@@ -259,17 +243,33 @@ class Certificate(pulumi.CustomResource):
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Certificate resource with the given unique name, props, and options.
+        Provides a resource to create a certificate of GAAP.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.gaap.Certificate("foo",
+            content="test:tx2KGdo3zJg/.",
+            type="BASIC")
+        ```
+
+        ## Import
+
+        GAAP certificate can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-               password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-               `SSL`, the format is `pem`.
+        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         :param pulumi.Input[str] key: Key of the `SSL` certificate.
         :param pulumi.Input[str] name: Name of the certificate.
-        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-               certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-               CA certificate; `PROXY` means proxy SSL certificate.
+        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         """
         ...
     @overload
@@ -278,7 +278,27 @@ class Certificate(pulumi.CustomResource):
                  args: CertificateArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Certificate resource with the given unique name, props, and options.
+        Provides a resource to create a certificate of GAAP.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.gaap.Certificate("foo",
+            content="test:tx2KGdo3zJg/.",
+            type="BASIC")
+        ```
+
+        ## Import
+
+        GAAP certificate can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+        ```
+
         :param str resource_name: The name of the resource.
         :param CertificateArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -350,18 +370,14 @@ class Certificate(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] begin_time: Beginning time of the certificate.
-        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-               password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-               `SSL`, the format is `pem`.
+        :param pulumi.Input[str] content: Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         :param pulumi.Input[str] create_time: Creation time of the certificate.
         :param pulumi.Input[str] end_time: Ending time of the certificate.
         :param pulumi.Input[str] issuer_cn: Issuer name of the certificate.
         :param pulumi.Input[str] key: Key of the `SSL` certificate.
         :param pulumi.Input[str] name: Name of the certificate.
         :param pulumi.Input[str] subject_cn: Subject name of the certificate.
-        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-               certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-               CA certificate; `PROXY` means proxy SSL certificate.
+        :param pulumi.Input[str] type: Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -390,9 +406,7 @@ class Certificate(pulumi.CustomResource):
     @pulumi.getter
     def content(self) -> pulumi.Output[str]:
         """
-        Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-        password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-        `SSL`, the format is `pem`.
+        Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
         """
         return pulumi.get(self, "content")
 
@@ -448,9 +462,7 @@ class Certificate(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[str]:
         """
-        Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-        certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-        CA certificate; `PROXY` means proxy SSL certificate.
+        Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
         """
         return pulumi.get(self, "type")
 

@@ -12,36 +12,69 @@ namespace Pulumi.Tencentcloud.Monitor.Inputs
 
     public sealed class AlarmPolicyEventConditionGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Number of periods.
+        /// </summary>
         [Input("continuePeriod")]
         public Input<int>? ContinuePeriod { get; set; }
 
+        /// <summary>
+        /// Metric display name, which is used in the output parameter.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        /// </summary>
         [Input("filter")]
         public Input<Inputs.AlarmPolicyEventConditionFilterGetArgs>? Filter { get; set; }
 
+        /// <summary>
+        /// Whether the alarm frequency increases exponentially.
+        /// </summary>
         [Input("isPowerNotice")]
         public Input<int>? IsPowerNotice { get; set; }
 
+        /// <summary>
+        /// Metric name or event name.
+        /// </summary>
         [Input("metricName")]
         public Input<string>? MetricName { get; set; }
 
+        /// <summary>
+        /// Alarm interval in seconds.
+        /// </summary>
         [Input("noticeFrequency")]
         public Input<int>? NoticeFrequency { get; set; }
 
+        /// <summary>
+        /// Operator.
+        /// </summary>
         [Input("operator")]
         public Input<string>? Operator { get; set; }
 
+        /// <summary>
+        /// Statistical period in seconds.
+        /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
 
+        /// <summary>
+        /// Trigger condition type.
+        /// </summary>
         [Input("ruleType")]
         public Input<string>? RuleType { get; set; }
 
+        /// <summary>
+        /// Unit, which is used in the output parameter.
+        /// </summary>
         [Input("unit")]
         public Input<string>? Unit { get; set; }
 
+        /// <summary>
+        /// Threshold.
+        /// </summary>
         [Input("value")]
         public Input<string>? Value { get; set; }
 

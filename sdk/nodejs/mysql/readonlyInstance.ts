@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a mysql instance resource to create read-only database instances.
+ *
+ * > **NOTE:** Read-only instances can be purchased only for two-node or three-node source instances on MySQL 5.6 or above with the InnoDB engine at a specification of 1 GB memory and 50 GB disk capacity or above.
+ * **NOTE:** The terminate operation of read only mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const defaultReadonlyInstance = new tencentcloud.Mysql.ReadonlyInstance("default", {
+ *     instanceName: "myTestMysql",
+ *     intranetPort: 3306,
+ *     masterInstanceId: "cdb-dnqksd9f",
+ *     memSize: 128000,
+ *     securityGroups: ["sg-ot8eclwz"],
+ *     subnetId: "subnet-9uivyb1g",
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     volumeSize: 255,
+ *     vpcId: "vpc-12mt3l31",
+ * });
+ * ```
+ */
 export class ReadonlyInstance extends pulumi.CustomResource {
     /**
      * Get an existing ReadonlyInstance resource's state with the given name, ID, and optional extra
@@ -53,9 +80,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly fastUpgrade!: pulumi.Output<number | undefined>;
     /**
-     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-     * instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-     * para of the readonly mysql instance will not take effect.
+     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
@@ -91,13 +116,13 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly paramTemplateId!: pulumi.Output<number | undefined>;
     /**
-     * Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+     * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
      */
     public readonly payType!: pulumi.Output<number | undefined>;
     /**
-     * Period of instance. NOTES: Only supported prepaid instance.
+     * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
      */
@@ -115,7 +140,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
     /**
-     * Private network ID. If `vpc_id` is set, this value is required.
+     * Private network ID. If `vpcId` is set, this value is required.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
@@ -247,9 +272,7 @@ export interface ReadonlyInstanceState {
      */
     fastUpgrade?: pulumi.Input<number>;
     /**
-     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-     * instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-     * para of the readonly mysql instance will not take effect.
+     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
@@ -285,13 +308,13 @@ export interface ReadonlyInstanceState {
      */
     paramTemplateId?: pulumi.Input<number>;
     /**
-     * Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+     * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
      */
     payType?: pulumi.Input<number>;
     /**
-     * Period of instance. NOTES: Only supported prepaid instance.
+     * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
      */
@@ -309,7 +332,7 @@ export interface ReadonlyInstanceState {
      */
     status?: pulumi.Input<number>;
     /**
-     * Private network ID. If `vpc_id` is set, this value is required.
+     * Private network ID. If `vpcId` is set, this value is required.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -359,9 +382,7 @@ export interface ReadonlyInstanceArgs {
      */
     fastUpgrade?: pulumi.Input<number>;
     /**
-     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-     * instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-     * para of the readonly mysql instance will not take effect.
+     * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
@@ -389,13 +410,13 @@ export interface ReadonlyInstanceArgs {
      */
     paramTemplateId?: pulumi.Input<number>;
     /**
-     * Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+     * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
      */
     payType?: pulumi.Input<number>;
     /**
-     * Period of instance. NOTES: Only supported prepaid instance.
+     * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
      */
@@ -409,7 +430,7 @@ export interface ReadonlyInstanceArgs {
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Private network ID. If `vpc_id` is set, this value is required.
+     * Private network ID. If `vpcId` is set, this value is required.
      */
     subnetId?: pulumi.Input<string>;
     /**

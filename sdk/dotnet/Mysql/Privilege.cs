@@ -9,6 +9,115 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Mysql
 {
+    /// <summary>
+    /// Provides a mysql account privilege resource to grant different access privilege to different database. A database can be granted by multiple account.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @default = new Tencentcloud.Mysql.Instance("default", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
+    ///             MemSize = 1000,
+    ///             VolumeSize = 25,
+    ///             InstanceName = "guagua",
+    ///             EngineVersion = "5.7",
+    ///             RootPassword = "0153Y474",
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///             InternetService = 1,
+    ///         });
+    ///         var mysqlAccount2 = new Tencentcloud.Mysql.Account("mysqlAccount2", new Tencentcloud.Mysql.AccountArgs
+    ///         {
+    ///             MysqlId = @default.Id,
+    ///             Password = "test1234",
+    ///             Description = "test from terraform",
+    ///         });
+    ///         var tttt = new Tencentcloud.Mysql.Privilege("tttt", new Tencentcloud.Mysql.PrivilegeArgs
+    ///         {
+    ///             MysqlId = @default.Id,
+    ///             AccountName = mysqlAccount2.Name,
+    ///             Globals = 
+    ///             {
+    ///                 "TRIGGER",
+    ///             },
+    ///             Databases = 
+    ///             {
+    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeDatabaseArgs
+    ///                 {
+    ///                     Privileges = 
+    ///                     {
+    ///                         "SELECT",
+    ///                         "INSERT",
+    ///                         "UPDATE",
+    ///                         "DELETE",
+    ///                         "CREATE",
+    ///                     },
+    ///                     DatabaseName = "sys",
+    ///                 },
+    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeDatabaseArgs
+    ///                 {
+    ///                     Privileges = 
+    ///                     {
+    ///                         "SELECT",
+    ///                     },
+    ///                     DatabaseName = "performance_schema",
+    ///                 },
+    ///             },
+    ///             Tables = 
+    ///             {
+    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeTableArgs
+    ///                 {
+    ///                     Privileges = 
+    ///                     {
+    ///                         "SELECT",
+    ///                         "INSERT",
+    ///                         "UPDATE",
+    ///                         "DELETE",
+    ///                         "CREATE",
+    ///                     },
+    ///                     DatabaseName = "mysql",
+    ///                     TableName = "slow_log",
+    ///                 },
+    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeTableArgs
+    ///                 {
+    ///                     Privileges = 
+    ///                     {
+    ///                         "SELECT",
+    ///                         "INSERT",
+    ///                         "UPDATE",
+    ///                     },
+    ///                     DatabaseName = "mysql",
+    ///                     TableName = "user",
+    ///                 },
+    ///             },
+    ///             Columns = 
+    ///             {
+    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeColumnArgs
+    ///                 {
+    ///                     Privileges = 
+    ///                     {
+    ///                         "SELECT",
+    ///                         "INSERT",
+    ///                         "UPDATE",
+    ///                         "REFERENCES",
+    ///                     },
+    ///                     DatabaseName = "mysql",
+    ///                     TableName = "user",
+    ///                     ColumnName = "host",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/privilege:Privilege")]
     public partial class Privilege : Pulumi.CustomResource
     {
@@ -37,9 +146,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Output<ImmutableArray<Outputs.PrivilegeDatabase>> Databases { get; private set; } = null!;
 
         /// <summary>
-        /// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-        /// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-        /// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        /// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         /// </summary>
         [Output("globals")]
         public Output<ImmutableArray<string>> Globals { get; private set; } = null!;
@@ -142,9 +249,7 @@ namespace Pulumi.Tencentcloud.Mysql
         private InputList<string>? _globals;
 
         /// <summary>
-        /// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-        /// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-        /// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        /// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         /// </summary>
         public InputList<string> Globals
         {
@@ -217,9 +322,7 @@ namespace Pulumi.Tencentcloud.Mysql
         private InputList<string>? _globals;
 
         /// <summary>
-        /// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-        /// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-        /// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+        /// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
         /// </summary>
         public InputList<string> Globals
         {

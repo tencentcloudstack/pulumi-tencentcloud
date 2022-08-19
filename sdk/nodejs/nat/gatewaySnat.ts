@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a NAT Gateway SNat rule.
+ *
+ * ## Import
+ *
+ * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+ * ```
+ *
+ *  NETWORKINTERFACT SNat
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+ * ```
+ */
 export class GatewaySnat extends pulumi.CustomResource {
     /**
      * Get an existing GatewaySnat resource's state with the given name, ID, and optional extra
@@ -41,11 +58,11 @@ export class GatewaySnat extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string>;
     /**
-     * Instance ID, required when `resource_type` is NETWORKINTERFACE.
+     * Instance ID, required when `resourceType` is NETWORKINTERFACE.
      */
     public readonly instanceId!: pulumi.Output<string | undefined>;
     /**
-     * Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
      */
     public readonly instancePrivateIpAddr!: pulumi.Output<string | undefined>;
     /**
@@ -65,11 +82,11 @@ export class GatewaySnat extends pulumi.CustomResource {
      */
     public /*out*/ readonly snatId!: pulumi.Output<string>;
     /**
-     * The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+     * The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
      */
     public readonly subnetCidrBlock!: pulumi.Output<string | undefined>;
     /**
-     * Subnet instance ID, required when `resource_type` is SUBNET.
+     * Subnet instance ID, required when `resourceType` is SUBNET.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
 
@@ -139,11 +156,11 @@ export interface GatewaySnatState {
      */
     description?: pulumi.Input<string>;
     /**
-     * Instance ID, required when `resource_type` is NETWORKINTERFACE.
+     * Instance ID, required when `resourceType` is NETWORKINTERFACE.
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
      */
     instancePrivateIpAddr?: pulumi.Input<string>;
     /**
@@ -163,11 +180,11 @@ export interface GatewaySnatState {
      */
     snatId?: pulumi.Input<string>;
     /**
-     * The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+     * The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
      */
     subnetCidrBlock?: pulumi.Input<string>;
     /**
-     * Subnet instance ID, required when `resource_type` is SUBNET.
+     * Subnet instance ID, required when `resourceType` is SUBNET.
      */
     subnetId?: pulumi.Input<string>;
 }
@@ -181,11 +198,11 @@ export interface GatewaySnatArgs {
      */
     description: pulumi.Input<string>;
     /**
-     * Instance ID, required when `resource_type` is NETWORKINTERFACE.
+     * Instance ID, required when `resourceType` is NETWORKINTERFACE.
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
      */
     instancePrivateIpAddr?: pulumi.Input<string>;
     /**
@@ -201,11 +218,11 @@ export interface GatewaySnatArgs {
      */
     resourceType: pulumi.Input<string>;
     /**
-     * The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+     * The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
      */
     subnetCidrBlock?: pulumi.Input<string>;
     /**
-     * Subnet instance ID, required when `resource_type` is SUBNET.
+     * Subnet instance ID, required when `resourceType` is SUBNET.
      */
     subnetId?: pulumi.Input<string>;
 }

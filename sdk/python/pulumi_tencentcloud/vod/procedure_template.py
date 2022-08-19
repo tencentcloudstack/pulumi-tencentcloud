@@ -24,8 +24,7 @@ class ProcedureTemplateArgs:
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
         :param pulumi.Input['ProcedureTemplateMediaProcessTaskArgs'] media_process_task: Parameter of video processing task.
         :param pulumi.Input[str] name: Task flow name (up to 20 characters).
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
@@ -76,8 +75,7 @@ class ProcedureTemplateArgs:
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 
@@ -101,8 +99,7 @@ class _ProcedureTemplateState:
         :param pulumi.Input[str] create_time: Creation time of template in ISO date format.
         :param pulumi.Input['ProcedureTemplateMediaProcessTaskArgs'] media_process_task: Parameter of video processing task.
         :param pulumi.Input[str] name: Task flow name (up to 20 characters).
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         :param pulumi.Input[str] update_time: Last modified time of template in ISO date format.
         """
         if comment is not None:
@@ -170,8 +167,7 @@ class _ProcedureTemplateState:
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 
@@ -203,14 +199,100 @@ class ProcedureTemplate(pulumi.CustomResource):
                  sub_app_id: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a ProcedureTemplate resource with the given unique name, props, and options.
+        Provide a resource to create a VOD procedure template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_adaptive_dynamic_streaming_template = tencentcloud.vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate",
+            format="HLS",
+            drm_type="SimpleAES",
+            disable_higher_video_bitrate=False,
+            disable_higher_video_resolution=False,
+            comment="test",
+            stream_infos=[
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        codec="libx265",
+                        fps=4,
+                        bitrate=129,
+                        resolution_adaptive=False,
+                        width=128,
+                        height=128,
+                        fill_type="stretch",
+                    ),
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        codec="libmp3lame",
+                        bitrate=129,
+                        sample_rate=44100,
+                        audio_channel="dual",
+                    ),
+                    remove_audio=False,
+                ),
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        codec="libx264",
+                        fps=4,
+                        bitrate=256,
+                    ),
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        codec="libfdk_aac",
+                        bitrate=256,
+                        sample_rate=44100,
+                    ),
+                    remove_audio=True,
+                ),
+            ])
+        foo_snapshot_by_time_offset_template = tencentcloud.vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate",
+            width=130,
+            height=128,
+            resolution_adaptive=False,
+            format="png",
+            comment="test",
+            fill_type="white")
+        foo_image_sprite_template = tencentcloud.vod.ImageSpriteTemplate("fooImageSpriteTemplate",
+            sample_type="Percent",
+            sample_interval=10,
+            row_count=3,
+            column_count=3,
+            comment="test",
+            fill_type="stretch",
+            width=128,
+            height=128,
+            resolution_adaptive=False)
+        foo_procedure_template = tencentcloud.vod.ProcedureTemplate("fooProcedureTemplate",
+            comment="test",
+            media_process_task=tencentcloud.vod.ProcedureTemplateMediaProcessTaskArgs(
+                adaptive_dynamic_streaming_task_lists=[tencentcloud.vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs(
+                    definition=foo_adaptive_dynamic_streaming_template.id,
+                )],
+                snapshot_by_time_offset_task_lists=[tencentcloud.vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs(
+                    definition=foo_snapshot_by_time_offset_template.id,
+                    ext_time_offset_lists=["3.5s"],
+                )],
+                image_sprite_task_lists=[tencentcloud.vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs(
+                    definition=foo_image_sprite_template.id,
+                )],
+            ))
+        ```
+
+        ## Import
+
+        VOD procedure template can be imported using the name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
         :param pulumi.Input[pulumi.InputType['ProcedureTemplateMediaProcessTaskArgs']] media_process_task: Parameter of video processing task.
         :param pulumi.Input[str] name: Task flow name (up to 20 characters).
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         ...
     @overload
@@ -219,7 +301,94 @@ class ProcedureTemplate(pulumi.CustomResource):
                  args: Optional[ProcedureTemplateArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ProcedureTemplate resource with the given unique name, props, and options.
+        Provide a resource to create a VOD procedure template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_adaptive_dynamic_streaming_template = tencentcloud.vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate",
+            format="HLS",
+            drm_type="SimpleAES",
+            disable_higher_video_bitrate=False,
+            disable_higher_video_resolution=False,
+            comment="test",
+            stream_infos=[
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        codec="libx265",
+                        fps=4,
+                        bitrate=129,
+                        resolution_adaptive=False,
+                        width=128,
+                        height=128,
+                        fill_type="stretch",
+                    ),
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        codec="libmp3lame",
+                        bitrate=129,
+                        sample_rate=44100,
+                        audio_channel="dual",
+                    ),
+                    remove_audio=False,
+                ),
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        codec="libx264",
+                        fps=4,
+                        bitrate=256,
+                    ),
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        codec="libfdk_aac",
+                        bitrate=256,
+                        sample_rate=44100,
+                    ),
+                    remove_audio=True,
+                ),
+            ])
+        foo_snapshot_by_time_offset_template = tencentcloud.vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate",
+            width=130,
+            height=128,
+            resolution_adaptive=False,
+            format="png",
+            comment="test",
+            fill_type="white")
+        foo_image_sprite_template = tencentcloud.vod.ImageSpriteTemplate("fooImageSpriteTemplate",
+            sample_type="Percent",
+            sample_interval=10,
+            row_count=3,
+            column_count=3,
+            comment="test",
+            fill_type="stretch",
+            width=128,
+            height=128,
+            resolution_adaptive=False)
+        foo_procedure_template = tencentcloud.vod.ProcedureTemplate("fooProcedureTemplate",
+            comment="test",
+            media_process_task=tencentcloud.vod.ProcedureTemplateMediaProcessTaskArgs(
+                adaptive_dynamic_streaming_task_lists=[tencentcloud.vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs(
+                    definition=foo_adaptive_dynamic_streaming_template.id,
+                )],
+                snapshot_by_time_offset_task_lists=[tencentcloud.vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs(
+                    definition=foo_snapshot_by_time_offset_template.id,
+                    ext_time_offset_lists=["3.5s"],
+                )],
+                image_sprite_task_lists=[tencentcloud.vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs(
+                    definition=foo_image_sprite_template.id,
+                )],
+            ))
+        ```
+
+        ## Import
+
+        VOD procedure template can be imported using the name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
+        ```
+
         :param str resource_name: The name of the resource.
         :param ProcedureTemplateArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -284,8 +453,7 @@ class ProcedureTemplate(pulumi.CustomResource):
         :param pulumi.Input[str] create_time: Creation time of template in ISO date format.
         :param pulumi.Input[pulumi.InputType['ProcedureTemplateMediaProcessTaskArgs']] media_process_task: Parameter of video processing task.
         :param pulumi.Input[str] name: Task flow name (up to 20 characters).
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         :param pulumi.Input[str] update_time: Last modified time of template in ISO date format.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -336,8 +504,7 @@ class ProcedureTemplate(pulumi.CustomResource):
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> pulumi.Output[Optional[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 

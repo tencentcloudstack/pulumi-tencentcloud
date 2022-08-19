@@ -9,8 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
-    [TencentcloudResourceType("tencentcloud:Cam/roleSSO:RoleSSO")]
-    public partial class RoleSSO : Pulumi.CustomResource
+    /// <summary>
+    /// Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.RoleSso("foo", new Tencentcloud.Cam.RoleSsoArgs
+    ///         {
+    ///             ClientIds = 
+    ///             {
+    ///                 "...",
+    ///             },
+    ///             Description = "this is a description",
+    ///             IdentityKey = "...",
+    ///             IdentityUrl = "https://login.microsoftonline.com/.../v2.0",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM-ROLE-SSO can be imported using the `name`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Cam/roleSso:RoleSso")]
+    public partial class RoleSso : Pulumi.CustomResource
     {
         /// <summary>
         /// Client ids.
@@ -44,19 +80,19 @@ namespace Pulumi.Tencentcloud.Cam
 
 
         /// <summary>
-        /// Create a RoleSSO resource with the given unique name, arguments, and options.
+        /// Create a RoleSso resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public RoleSSO(string name, RoleSSOArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Cam/roleSSO:RoleSSO", name, args ?? new RoleSSOArgs(), MakeResourceOptions(options, ""))
+        public RoleSso(string name, RoleSsoArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Cam/roleSso:RoleSso", name, args ?? new RoleSsoArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private RoleSSO(string name, Input<string> id, RoleSSOState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Cam/roleSSO:RoleSSO", name, state, MakeResourceOptions(options, id))
+        private RoleSso(string name, Input<string> id, RoleSsoState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Cam/roleSso:RoleSso", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -72,7 +108,7 @@ namespace Pulumi.Tencentcloud.Cam
             return merged;
         }
         /// <summary>
-        /// Get an existing RoleSSO resource's state with the given name, ID, and optional extra
+        /// Get an existing RoleSso resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -80,13 +116,13 @@ namespace Pulumi.Tencentcloud.Cam
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static RoleSSO Get(string name, Input<string> id, RoleSSOState? state = null, CustomResourceOptions? options = null)
+        public static RoleSso Get(string name, Input<string> id, RoleSsoState? state = null, CustomResourceOptions? options = null)
         {
-            return new RoleSSO(name, id, state, options);
+            return new RoleSso(name, id, state, options);
         }
     }
 
-    public sealed class RoleSSOArgs : Pulumi.ResourceArgs
+    public sealed class RoleSsoArgs : Pulumi.ResourceArgs
     {
         [Input("clientIds", required: true)]
         private InputList<string>? _clientIds;
@@ -124,12 +160,12 @@ namespace Pulumi.Tencentcloud.Cam
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        public RoleSSOArgs()
+        public RoleSsoArgs()
         {
         }
     }
 
-    public sealed class RoleSSOState : Pulumi.ResourceArgs
+    public sealed class RoleSsoState : Pulumi.ResourceArgs
     {
         [Input("clientIds")]
         private InputList<string>? _clientIds;
@@ -167,7 +203,7 @@ namespace Pulumi.Tencentcloud.Cam
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        public RoleSSOState()
+        public RoleSsoState()
         {
         }
     }

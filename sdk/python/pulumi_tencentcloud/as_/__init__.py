@@ -6,13 +6,13 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .attachment import *
+from .get_scaling_configs import *
+from .get_scaling_groups import *
+from .get_scaling_policies import *
 from .lifecycle_hook import *
 from .notification import *
 from .scaling_config import *
-from .scaling_configs import *
 from .scaling_group import *
-from .scaling_groups import *
-from .scaling_policies import *
 from .scaling_policy import *
 from .schedule import *
 from ._inputs import *

@@ -10,225 +10,243 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type TemplateGroupsGroupList struct {
-	Id          string   `pulumi:"id"`
-	Name        string   `pulumi:"name"`
+type GetTemplateGroupsGroupList struct {
+	// ID of the protocol template group to query.
+	Id string `pulumi:"id"`
+	// Name of the protocol template group to query.
+	Name string `pulumi:"name"`
+	// ID set of the protocol template.
 	TemplateIds []string `pulumi:"templateIds"`
 }
 
-// TemplateGroupsGroupListInput is an input type that accepts TemplateGroupsGroupListArgs and TemplateGroupsGroupListOutput values.
-// You can construct a concrete instance of `TemplateGroupsGroupListInput` via:
+// GetTemplateGroupsGroupListInput is an input type that accepts GetTemplateGroupsGroupListArgs and GetTemplateGroupsGroupListOutput values.
+// You can construct a concrete instance of `GetTemplateGroupsGroupListInput` via:
 //
-//          TemplateGroupsGroupListArgs{...}
-type TemplateGroupsGroupListInput interface {
+//          GetTemplateGroupsGroupListArgs{...}
+type GetTemplateGroupsGroupListInput interface {
 	pulumi.Input
 
-	ToTemplateGroupsGroupListOutput() TemplateGroupsGroupListOutput
-	ToTemplateGroupsGroupListOutputWithContext(context.Context) TemplateGroupsGroupListOutput
+	ToGetTemplateGroupsGroupListOutput() GetTemplateGroupsGroupListOutput
+	ToGetTemplateGroupsGroupListOutputWithContext(context.Context) GetTemplateGroupsGroupListOutput
 }
 
-type TemplateGroupsGroupListArgs struct {
-	Id          pulumi.StringInput      `pulumi:"id"`
-	Name        pulumi.StringInput      `pulumi:"name"`
+type GetTemplateGroupsGroupListArgs struct {
+	// ID of the protocol template group to query.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Name of the protocol template group to query.
+	Name pulumi.StringInput `pulumi:"name"`
+	// ID set of the protocol template.
 	TemplateIds pulumi.StringArrayInput `pulumi:"templateIds"`
 }
 
-func (TemplateGroupsGroupListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*TemplateGroupsGroupList)(nil)).Elem()
+func (GetTemplateGroupsGroupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTemplateGroupsGroupList)(nil)).Elem()
 }
 
-func (i TemplateGroupsGroupListArgs) ToTemplateGroupsGroupListOutput() TemplateGroupsGroupListOutput {
-	return i.ToTemplateGroupsGroupListOutputWithContext(context.Background())
+func (i GetTemplateGroupsGroupListArgs) ToGetTemplateGroupsGroupListOutput() GetTemplateGroupsGroupListOutput {
+	return i.ToGetTemplateGroupsGroupListOutputWithContext(context.Background())
 }
 
-func (i TemplateGroupsGroupListArgs) ToTemplateGroupsGroupListOutputWithContext(ctx context.Context) TemplateGroupsGroupListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TemplateGroupsGroupListOutput)
+func (i GetTemplateGroupsGroupListArgs) ToGetTemplateGroupsGroupListOutputWithContext(ctx context.Context) GetTemplateGroupsGroupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTemplateGroupsGroupListOutput)
 }
 
-// TemplateGroupsGroupListArrayInput is an input type that accepts TemplateGroupsGroupListArray and TemplateGroupsGroupListArrayOutput values.
-// You can construct a concrete instance of `TemplateGroupsGroupListArrayInput` via:
+// GetTemplateGroupsGroupListArrayInput is an input type that accepts GetTemplateGroupsGroupListArray and GetTemplateGroupsGroupListArrayOutput values.
+// You can construct a concrete instance of `GetTemplateGroupsGroupListArrayInput` via:
 //
-//          TemplateGroupsGroupListArray{ TemplateGroupsGroupListArgs{...} }
-type TemplateGroupsGroupListArrayInput interface {
+//          GetTemplateGroupsGroupListArray{ GetTemplateGroupsGroupListArgs{...} }
+type GetTemplateGroupsGroupListArrayInput interface {
 	pulumi.Input
 
-	ToTemplateGroupsGroupListArrayOutput() TemplateGroupsGroupListArrayOutput
-	ToTemplateGroupsGroupListArrayOutputWithContext(context.Context) TemplateGroupsGroupListArrayOutput
+	ToGetTemplateGroupsGroupListArrayOutput() GetTemplateGroupsGroupListArrayOutput
+	ToGetTemplateGroupsGroupListArrayOutputWithContext(context.Context) GetTemplateGroupsGroupListArrayOutput
 }
 
-type TemplateGroupsGroupListArray []TemplateGroupsGroupListInput
+type GetTemplateGroupsGroupListArray []GetTemplateGroupsGroupListInput
 
-func (TemplateGroupsGroupListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TemplateGroupsGroupList)(nil)).Elem()
+func (GetTemplateGroupsGroupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTemplateGroupsGroupList)(nil)).Elem()
 }
 
-func (i TemplateGroupsGroupListArray) ToTemplateGroupsGroupListArrayOutput() TemplateGroupsGroupListArrayOutput {
-	return i.ToTemplateGroupsGroupListArrayOutputWithContext(context.Background())
+func (i GetTemplateGroupsGroupListArray) ToGetTemplateGroupsGroupListArrayOutput() GetTemplateGroupsGroupListArrayOutput {
+	return i.ToGetTemplateGroupsGroupListArrayOutputWithContext(context.Background())
 }
 
-func (i TemplateGroupsGroupListArray) ToTemplateGroupsGroupListArrayOutputWithContext(ctx context.Context) TemplateGroupsGroupListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TemplateGroupsGroupListArrayOutput)
+func (i GetTemplateGroupsGroupListArray) ToGetTemplateGroupsGroupListArrayOutputWithContext(ctx context.Context) GetTemplateGroupsGroupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTemplateGroupsGroupListArrayOutput)
 }
 
-type TemplateGroupsGroupListOutput struct{ *pulumi.OutputState }
+type GetTemplateGroupsGroupListOutput struct{ *pulumi.OutputState }
 
-func (TemplateGroupsGroupListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*TemplateGroupsGroupList)(nil)).Elem()
+func (GetTemplateGroupsGroupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTemplateGroupsGroupList)(nil)).Elem()
 }
 
-func (o TemplateGroupsGroupListOutput) ToTemplateGroupsGroupListOutput() TemplateGroupsGroupListOutput {
+func (o GetTemplateGroupsGroupListOutput) ToGetTemplateGroupsGroupListOutput() GetTemplateGroupsGroupListOutput {
 	return o
 }
 
-func (o TemplateGroupsGroupListOutput) ToTemplateGroupsGroupListOutputWithContext(ctx context.Context) TemplateGroupsGroupListOutput {
+func (o GetTemplateGroupsGroupListOutput) ToGetTemplateGroupsGroupListOutputWithContext(ctx context.Context) GetTemplateGroupsGroupListOutput {
 	return o
 }
 
-func (o TemplateGroupsGroupListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v TemplateGroupsGroupList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the protocol template group to query.
+func (o GetTemplateGroupsGroupListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTemplateGroupsGroupList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o TemplateGroupsGroupListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v TemplateGroupsGroupList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the protocol template group to query.
+func (o GetTemplateGroupsGroupListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTemplateGroupsGroupList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o TemplateGroupsGroupListOutput) TemplateIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v TemplateGroupsGroupList) []string { return v.TemplateIds }).(pulumi.StringArrayOutput)
+// ID set of the protocol template.
+func (o GetTemplateGroupsGroupListOutput) TemplateIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTemplateGroupsGroupList) []string { return v.TemplateIds }).(pulumi.StringArrayOutput)
 }
 
-type TemplateGroupsGroupListArrayOutput struct{ *pulumi.OutputState }
+type GetTemplateGroupsGroupListArrayOutput struct{ *pulumi.OutputState }
 
-func (TemplateGroupsGroupListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TemplateGroupsGroupList)(nil)).Elem()
+func (GetTemplateGroupsGroupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTemplateGroupsGroupList)(nil)).Elem()
 }
 
-func (o TemplateGroupsGroupListArrayOutput) ToTemplateGroupsGroupListArrayOutput() TemplateGroupsGroupListArrayOutput {
+func (o GetTemplateGroupsGroupListArrayOutput) ToGetTemplateGroupsGroupListArrayOutput() GetTemplateGroupsGroupListArrayOutput {
 	return o
 }
 
-func (o TemplateGroupsGroupListArrayOutput) ToTemplateGroupsGroupListArrayOutputWithContext(ctx context.Context) TemplateGroupsGroupListArrayOutput {
+func (o GetTemplateGroupsGroupListArrayOutput) ToGetTemplateGroupsGroupListArrayOutputWithContext(ctx context.Context) GetTemplateGroupsGroupListArrayOutput {
 	return o
 }
 
-func (o TemplateGroupsGroupListArrayOutput) Index(i pulumi.IntInput) TemplateGroupsGroupListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TemplateGroupsGroupList {
-		return vs[0].([]TemplateGroupsGroupList)[vs[1].(int)]
-	}).(TemplateGroupsGroupListOutput)
+func (o GetTemplateGroupsGroupListArrayOutput) Index(i pulumi.IntInput) GetTemplateGroupsGroupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTemplateGroupsGroupList {
+		return vs[0].([]GetTemplateGroupsGroupList)[vs[1].(int)]
+	}).(GetTemplateGroupsGroupListOutput)
 }
 
-type TemplatesTemplateList struct {
-	Id        string   `pulumi:"id"`
-	Name      string   `pulumi:"name"`
+type GetTemplatesTemplateList struct {
+	// ID of the protocol template to query.
+	Id string `pulumi:"id"`
+	// Name of the protocol template to query.
+	Name string `pulumi:"name"`
+	// Set of the protocols.
 	Protocols []string `pulumi:"protocols"`
 }
 
-// TemplatesTemplateListInput is an input type that accepts TemplatesTemplateListArgs and TemplatesTemplateListOutput values.
-// You can construct a concrete instance of `TemplatesTemplateListInput` via:
+// GetTemplatesTemplateListInput is an input type that accepts GetTemplatesTemplateListArgs and GetTemplatesTemplateListOutput values.
+// You can construct a concrete instance of `GetTemplatesTemplateListInput` via:
 //
-//          TemplatesTemplateListArgs{...}
-type TemplatesTemplateListInput interface {
+//          GetTemplatesTemplateListArgs{...}
+type GetTemplatesTemplateListInput interface {
 	pulumi.Input
 
-	ToTemplatesTemplateListOutput() TemplatesTemplateListOutput
-	ToTemplatesTemplateListOutputWithContext(context.Context) TemplatesTemplateListOutput
+	ToGetTemplatesTemplateListOutput() GetTemplatesTemplateListOutput
+	ToGetTemplatesTemplateListOutputWithContext(context.Context) GetTemplatesTemplateListOutput
 }
 
-type TemplatesTemplateListArgs struct {
-	Id        pulumi.StringInput      `pulumi:"id"`
-	Name      pulumi.StringInput      `pulumi:"name"`
+type GetTemplatesTemplateListArgs struct {
+	// ID of the protocol template to query.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Name of the protocol template to query.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Set of the protocols.
 	Protocols pulumi.StringArrayInput `pulumi:"protocols"`
 }
 
-func (TemplatesTemplateListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*TemplatesTemplateList)(nil)).Elem()
+func (GetTemplatesTemplateListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTemplatesTemplateList)(nil)).Elem()
 }
 
-func (i TemplatesTemplateListArgs) ToTemplatesTemplateListOutput() TemplatesTemplateListOutput {
-	return i.ToTemplatesTemplateListOutputWithContext(context.Background())
+func (i GetTemplatesTemplateListArgs) ToGetTemplatesTemplateListOutput() GetTemplatesTemplateListOutput {
+	return i.ToGetTemplatesTemplateListOutputWithContext(context.Background())
 }
 
-func (i TemplatesTemplateListArgs) ToTemplatesTemplateListOutputWithContext(ctx context.Context) TemplatesTemplateListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TemplatesTemplateListOutput)
+func (i GetTemplatesTemplateListArgs) ToGetTemplatesTemplateListOutputWithContext(ctx context.Context) GetTemplatesTemplateListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTemplatesTemplateListOutput)
 }
 
-// TemplatesTemplateListArrayInput is an input type that accepts TemplatesTemplateListArray and TemplatesTemplateListArrayOutput values.
-// You can construct a concrete instance of `TemplatesTemplateListArrayInput` via:
+// GetTemplatesTemplateListArrayInput is an input type that accepts GetTemplatesTemplateListArray and GetTemplatesTemplateListArrayOutput values.
+// You can construct a concrete instance of `GetTemplatesTemplateListArrayInput` via:
 //
-//          TemplatesTemplateListArray{ TemplatesTemplateListArgs{...} }
-type TemplatesTemplateListArrayInput interface {
+//          GetTemplatesTemplateListArray{ GetTemplatesTemplateListArgs{...} }
+type GetTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
-	ToTemplatesTemplateListArrayOutput() TemplatesTemplateListArrayOutput
-	ToTemplatesTemplateListArrayOutputWithContext(context.Context) TemplatesTemplateListArrayOutput
+	ToGetTemplatesTemplateListArrayOutput() GetTemplatesTemplateListArrayOutput
+	ToGetTemplatesTemplateListArrayOutputWithContext(context.Context) GetTemplatesTemplateListArrayOutput
 }
 
-type TemplatesTemplateListArray []TemplatesTemplateListInput
+type GetTemplatesTemplateListArray []GetTemplatesTemplateListInput
 
-func (TemplatesTemplateListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TemplatesTemplateList)(nil)).Elem()
+func (GetTemplatesTemplateListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTemplatesTemplateList)(nil)).Elem()
 }
 
-func (i TemplatesTemplateListArray) ToTemplatesTemplateListArrayOutput() TemplatesTemplateListArrayOutput {
-	return i.ToTemplatesTemplateListArrayOutputWithContext(context.Background())
+func (i GetTemplatesTemplateListArray) ToGetTemplatesTemplateListArrayOutput() GetTemplatesTemplateListArrayOutput {
+	return i.ToGetTemplatesTemplateListArrayOutputWithContext(context.Background())
 }
 
-func (i TemplatesTemplateListArray) ToTemplatesTemplateListArrayOutputWithContext(ctx context.Context) TemplatesTemplateListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TemplatesTemplateListArrayOutput)
+func (i GetTemplatesTemplateListArray) ToGetTemplatesTemplateListArrayOutputWithContext(ctx context.Context) GetTemplatesTemplateListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTemplatesTemplateListArrayOutput)
 }
 
-type TemplatesTemplateListOutput struct{ *pulumi.OutputState }
+type GetTemplatesTemplateListOutput struct{ *pulumi.OutputState }
 
-func (TemplatesTemplateListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*TemplatesTemplateList)(nil)).Elem()
+func (GetTemplatesTemplateListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTemplatesTemplateList)(nil)).Elem()
 }
 
-func (o TemplatesTemplateListOutput) ToTemplatesTemplateListOutput() TemplatesTemplateListOutput {
+func (o GetTemplatesTemplateListOutput) ToGetTemplatesTemplateListOutput() GetTemplatesTemplateListOutput {
 	return o
 }
 
-func (o TemplatesTemplateListOutput) ToTemplatesTemplateListOutputWithContext(ctx context.Context) TemplatesTemplateListOutput {
+func (o GetTemplatesTemplateListOutput) ToGetTemplatesTemplateListOutputWithContext(ctx context.Context) GetTemplatesTemplateListOutput {
 	return o
 }
 
-func (o TemplatesTemplateListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v TemplatesTemplateList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the protocol template to query.
+func (o GetTemplatesTemplateListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTemplatesTemplateList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o TemplatesTemplateListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v TemplatesTemplateList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the protocol template to query.
+func (o GetTemplatesTemplateListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTemplatesTemplateList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o TemplatesTemplateListOutput) Protocols() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v TemplatesTemplateList) []string { return v.Protocols }).(pulumi.StringArrayOutput)
+// Set of the protocols.
+func (o GetTemplatesTemplateListOutput) Protocols() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTemplatesTemplateList) []string { return v.Protocols }).(pulumi.StringArrayOutput)
 }
 
-type TemplatesTemplateListArrayOutput struct{ *pulumi.OutputState }
+type GetTemplatesTemplateListArrayOutput struct{ *pulumi.OutputState }
 
-func (TemplatesTemplateListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]TemplatesTemplateList)(nil)).Elem()
+func (GetTemplatesTemplateListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTemplatesTemplateList)(nil)).Elem()
 }
 
-func (o TemplatesTemplateListArrayOutput) ToTemplatesTemplateListArrayOutput() TemplatesTemplateListArrayOutput {
+func (o GetTemplatesTemplateListArrayOutput) ToGetTemplatesTemplateListArrayOutput() GetTemplatesTemplateListArrayOutput {
 	return o
 }
 
-func (o TemplatesTemplateListArrayOutput) ToTemplatesTemplateListArrayOutputWithContext(ctx context.Context) TemplatesTemplateListArrayOutput {
+func (o GetTemplatesTemplateListArrayOutput) ToGetTemplatesTemplateListArrayOutputWithContext(ctx context.Context) GetTemplatesTemplateListArrayOutput {
 	return o
 }
 
-func (o TemplatesTemplateListArrayOutput) Index(i pulumi.IntInput) TemplatesTemplateListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TemplatesTemplateList {
-		return vs[0].([]TemplatesTemplateList)[vs[1].(int)]
-	}).(TemplatesTemplateListOutput)
+func (o GetTemplatesTemplateListArrayOutput) Index(i pulumi.IntInput) GetTemplatesTemplateListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTemplatesTemplateList {
+		return vs[0].([]GetTemplatesTemplateList)[vs[1].(int)]
+	}).(GetTemplatesTemplateListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*TemplateGroupsGroupListInput)(nil)).Elem(), TemplateGroupsGroupListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TemplateGroupsGroupListArrayInput)(nil)).Elem(), TemplateGroupsGroupListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TemplatesTemplateListInput)(nil)).Elem(), TemplatesTemplateListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TemplatesTemplateListArrayInput)(nil)).Elem(), TemplatesTemplateListArray{})
-	pulumi.RegisterOutputType(TemplateGroupsGroupListOutput{})
-	pulumi.RegisterOutputType(TemplateGroupsGroupListArrayOutput{})
-	pulumi.RegisterOutputType(TemplatesTemplateListOutput{})
-	pulumi.RegisterOutputType(TemplatesTemplateListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTemplateGroupsGroupListInput)(nil)).Elem(), GetTemplateGroupsGroupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTemplateGroupsGroupListArrayInput)(nil)).Elem(), GetTemplateGroupsGroupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTemplatesTemplateListInput)(nil)).Elem(), GetTemplatesTemplateListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTemplatesTemplateListArrayInput)(nil)).Elem(), GetTemplatesTemplateListArray{})
+	pulumi.RegisterOutputType(GetTemplateGroupsGroupListOutput{})
+	pulumi.RegisterOutputType(GetTemplateGroupsGroupListArrayOutput{})
+	pulumi.RegisterOutputType(GetTemplatesTemplateListOutput{})
+	pulumi.RegisterOutputType(GetTemplatesTemplateListArrayOutput{})
 }

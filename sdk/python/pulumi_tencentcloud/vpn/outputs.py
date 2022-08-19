@@ -11,11 +11,11 @@ from . import outputs
 
 __all__ = [
     'ConnectionSecurityGroupPolicy',
-    'ConnectionsConnectionListResult',
-    'ConnectionsConnectionListSecurityGroupPolicyResult',
-    'CustomerGatewaysGatewayListResult',
-    'GatewayRoutesVpnGatewayRouteListResult',
-    'GatewaysGatewayListResult',
+    'GetConnectionsConnectionListResult',
+    'GetConnectionsConnectionListSecurityGroupPolicyResult',
+    'GetCustomerGatewaysGatewayListResult',
+    'GetGatewayRoutesVpnGatewayRouteListResult',
+    'GetGatewaysGatewayListResult',
 ]
 
 @pulumi.output_type
@@ -42,22 +42,32 @@ class ConnectionSecurityGroupPolicy(dict):
     def __init__(__self__, *,
                  local_cidr_block: str,
                  remote_cidr_blocks: Sequence[str]):
+        """
+        :param str local_cidr_block: Local cidr block.
+        :param Sequence[str] remote_cidr_blocks: Remote cidr block list.
+        """
         pulumi.set(__self__, "local_cidr_block", local_cidr_block)
         pulumi.set(__self__, "remote_cidr_blocks", remote_cidr_blocks)
 
     @property
     @pulumi.getter(name="localCidrBlock")
     def local_cidr_block(self) -> str:
+        """
+        Local cidr block.
+        """
         return pulumi.get(self, "local_cidr_block")
 
     @property
     @pulumi.getter(name="remoteCidrBlocks")
     def remote_cidr_blocks(self) -> Sequence[str]:
+        """
+        Remote cidr block list.
+        """
         return pulumi.get(self, "remote_cidr_blocks")
 
 
 @pulumi.output_type
-class ConnectionsConnectionListResult(dict):
+class GetConnectionsConnectionListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  customer_gateway_id: str,
@@ -84,12 +94,45 @@ class ConnectionsConnectionListResult(dict):
                  net_status: str,
                  pre_share_key: str,
                  route_type: str,
-                 security_group_policies: Sequence['outputs.ConnectionsConnectionListSecurityGroupPolicyResult'],
+                 security_group_policies: Sequence['outputs.GetConnectionsConnectionListSecurityGroupPolicyResult'],
                  state: str,
                  tags: Mapping[str, Any],
                  vpc_id: str,
                  vpn_gateway_id: str,
                  vpn_proto: str):
+        """
+        :param str create_time: Create time of the VPN connection.
+        :param str customer_gateway_id: Customer gateway ID of the VPN connection.
+        :param str encrypt_proto: Encrypt proto of the VPN connection.
+        :param str id: ID of the VPN connection.
+        :param str ike_dh_group_name: DH group name of the IKE operation specification.
+        :param str ike_exchange_mode: Exchange mode of the IKE operation specification.
+        :param str ike_local_address: Local address of the IKE operation specification.
+        :param str ike_local_fqdn_name: Local FQDN name of the IKE operation specification.
+        :param str ike_local_identity: Local identity of the IKE operation specification.
+        :param str ike_proto_authen_algorithm: Proto authenticate algorithm of the IKE operation specification.
+        :param str ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification.
+        :param str ike_remote_address: Remote address of the IKE operation specification.
+        :param str ike_remote_fqdn_name: Remote FQDN name of the IKE operation specification.
+        :param str ike_remote_identity: Remote identity of the IKE operation specification.
+        :param int ike_sa_lifetime_seconds: SA lifetime of the IKE operation specification, unit is `second`.
+        :param str ike_version: Version of the IKE operation specification.
+        :param str ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification.
+        :param str ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification.
+        :param str ipsec_pfs_dh_group: PFS DH group name of the IPSEC operation specification.
+        :param int ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is `second`.
+        :param int ipsec_sa_lifetime_traffic: SA lifetime traffic of the IPSEC operation specification, unit is `KB`.
+        :param str name: Name of the VPN connection. The length of character is limited to 1-60.
+        :param str net_status: Net status of the VPN connection.
+        :param str pre_share_key: Pre-shared key of the VPN connection.
+        :param str route_type: Route type of the VPN connection.
+        :param Sequence['GetConnectionsConnectionListSecurityGroupPolicyArgs'] security_group_policies: Security group policy of the VPN connection.
+        :param str state: State of the VPN connection.
+        :param Mapping[str, Any] tags: Tags of the VPN connection to be queried.
+        :param str vpc_id: ID of the VPC.
+        :param str vpn_gateway_id: VPN gateway ID of the VPN connection.
+        :param str vpn_proto: Vpn proto of the VPN connection.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "customer_gateway_id", customer_gateway_id)
         pulumi.set(__self__, "encrypt_proto", encrypt_proto)
@@ -125,186 +168,296 @@ class ConnectionsConnectionListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the VPN connection.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="customerGatewayId")
     def customer_gateway_id(self) -> str:
+        """
+        Customer gateway ID of the VPN connection.
+        """
         return pulumi.get(self, "customer_gateway_id")
 
     @property
     @pulumi.getter(name="encryptProto")
     def encrypt_proto(self) -> str:
+        """
+        Encrypt proto of the VPN connection.
+        """
         return pulumi.get(self, "encrypt_proto")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the VPN connection.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="ikeDhGroupName")
     def ike_dh_group_name(self) -> str:
+        """
+        DH group name of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_dh_group_name")
 
     @property
     @pulumi.getter(name="ikeExchangeMode")
     def ike_exchange_mode(self) -> str:
+        """
+        Exchange mode of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_exchange_mode")
 
     @property
     @pulumi.getter(name="ikeLocalAddress")
     def ike_local_address(self) -> str:
+        """
+        Local address of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_local_address")
 
     @property
     @pulumi.getter(name="ikeLocalFqdnName")
     def ike_local_fqdn_name(self) -> str:
+        """
+        Local FQDN name of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_local_fqdn_name")
 
     @property
     @pulumi.getter(name="ikeLocalIdentity")
     def ike_local_identity(self) -> str:
+        """
+        Local identity of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_local_identity")
 
     @property
     @pulumi.getter(name="ikeProtoAuthenAlgorithm")
     def ike_proto_authen_algorithm(self) -> str:
+        """
+        Proto authenticate algorithm of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_proto_authen_algorithm")
 
     @property
     @pulumi.getter(name="ikeProtoEncryAlgorithm")
     def ike_proto_encry_algorithm(self) -> str:
+        """
+        Proto encrypt algorithm of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_proto_encry_algorithm")
 
     @property
     @pulumi.getter(name="ikeRemoteAddress")
     def ike_remote_address(self) -> str:
+        """
+        Remote address of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_remote_address")
 
     @property
     @pulumi.getter(name="ikeRemoteFqdnName")
     def ike_remote_fqdn_name(self) -> str:
+        """
+        Remote FQDN name of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_remote_fqdn_name")
 
     @property
     @pulumi.getter(name="ikeRemoteIdentity")
     def ike_remote_identity(self) -> str:
+        """
+        Remote identity of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_remote_identity")
 
     @property
     @pulumi.getter(name="ikeSaLifetimeSeconds")
     def ike_sa_lifetime_seconds(self) -> int:
+        """
+        SA lifetime of the IKE operation specification, unit is `second`.
+        """
         return pulumi.get(self, "ike_sa_lifetime_seconds")
 
     @property
     @pulumi.getter(name="ikeVersion")
     def ike_version(self) -> str:
+        """
+        Version of the IKE operation specification.
+        """
         return pulumi.get(self, "ike_version")
 
     @property
     @pulumi.getter(name="ipsecEncryptAlgorithm")
     def ipsec_encrypt_algorithm(self) -> str:
+        """
+        Encrypt algorithm of the IPSEC operation specification.
+        """
         return pulumi.get(self, "ipsec_encrypt_algorithm")
 
     @property
     @pulumi.getter(name="ipsecIntegrityAlgorithm")
     def ipsec_integrity_algorithm(self) -> str:
+        """
+        Integrity algorithm of the IPSEC operation specification.
+        """
         return pulumi.get(self, "ipsec_integrity_algorithm")
 
     @property
     @pulumi.getter(name="ipsecPfsDhGroup")
     def ipsec_pfs_dh_group(self) -> str:
+        """
+        PFS DH group name of the IPSEC operation specification.
+        """
         return pulumi.get(self, "ipsec_pfs_dh_group")
 
     @property
     @pulumi.getter(name="ipsecSaLifetimeSeconds")
     def ipsec_sa_lifetime_seconds(self) -> int:
+        """
+        SA lifetime of the IPSEC operation specification, unit is `second`.
+        """
         return pulumi.get(self, "ipsec_sa_lifetime_seconds")
 
     @property
     @pulumi.getter(name="ipsecSaLifetimeTraffic")
     def ipsec_sa_lifetime_traffic(self) -> int:
+        """
+        SA lifetime traffic of the IPSEC operation specification, unit is `KB`.
+        """
         return pulumi.get(self, "ipsec_sa_lifetime_traffic")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the VPN connection. The length of character is limited to 1-60.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="netStatus")
     def net_status(self) -> str:
+        """
+        Net status of the VPN connection.
+        """
         return pulumi.get(self, "net_status")
 
     @property
     @pulumi.getter(name="preShareKey")
     def pre_share_key(self) -> str:
+        """
+        Pre-shared key of the VPN connection.
+        """
         return pulumi.get(self, "pre_share_key")
 
     @property
     @pulumi.getter(name="routeType")
     def route_type(self) -> str:
+        """
+        Route type of the VPN connection.
+        """
         return pulumi.get(self, "route_type")
 
     @property
     @pulumi.getter(name="securityGroupPolicies")
-    def security_group_policies(self) -> Sequence['outputs.ConnectionsConnectionListSecurityGroupPolicyResult']:
+    def security_group_policies(self) -> Sequence['outputs.GetConnectionsConnectionListSecurityGroupPolicyResult']:
+        """
+        Security group policy of the VPN connection.
+        """
         return pulumi.get(self, "security_group_policies")
 
     @property
     @pulumi.getter
     def state(self) -> str:
+        """
+        State of the VPN connection.
+        """
         return pulumi.get(self, "state")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the VPN connection to be queried.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter(name="vpnGatewayId")
     def vpn_gateway_id(self) -> str:
+        """
+        VPN gateway ID of the VPN connection.
+        """
         return pulumi.get(self, "vpn_gateway_id")
 
     @property
     @pulumi.getter(name="vpnProto")
     def vpn_proto(self) -> str:
+        """
+        Vpn proto of the VPN connection.
+        """
         return pulumi.get(self, "vpn_proto")
 
 
 @pulumi.output_type
-class ConnectionsConnectionListSecurityGroupPolicyResult(dict):
+class GetConnectionsConnectionListSecurityGroupPolicyResult(dict):
     def __init__(__self__, *,
                  local_cidr_block: str,
                  remote_cidr_blocks: Sequence[str]):
+        """
+        :param str local_cidr_block: Local cidr block.
+        :param Sequence[str] remote_cidr_blocks: Remote cidr block list.
+        """
         pulumi.set(__self__, "local_cidr_block", local_cidr_block)
         pulumi.set(__self__, "remote_cidr_blocks", remote_cidr_blocks)
 
     @property
     @pulumi.getter(name="localCidrBlock")
     def local_cidr_block(self) -> str:
+        """
+        Local cidr block.
+        """
         return pulumi.get(self, "local_cidr_block")
 
     @property
     @pulumi.getter(name="remoteCidrBlocks")
     def remote_cidr_blocks(self) -> Sequence[str]:
+        """
+        Remote cidr block list.
+        """
         return pulumi.get(self, "remote_cidr_blocks")
 
 
 @pulumi.output_type
-class CustomerGatewaysGatewayListResult(dict):
+class GetCustomerGatewaysGatewayListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  id: str,
                  name: str,
                  public_ip_address: str,
                  tags: Mapping[str, Any]):
+        """
+        :param str create_time: Create time of the VPN customer gateway.
+        :param str id: ID of the VPN customer gateway.
+        :param str name: Name of the customer gateway. The length of character is limited to 1-60.
+        :param str public_ip_address: Public ip address of the VPN customer gateway.
+        :param Mapping[str, Any] tags: Tags of the VPN customer gateway to be queried.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
@@ -314,31 +467,46 @@ class CustomerGatewaysGatewayListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the VPN customer gateway.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the VPN customer gateway.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the customer gateway. The length of character is limited to 1-60.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="publicIpAddress")
     def public_ip_address(self) -> str:
+        """
+        Public ip address of the VPN customer gateway.
+        """
         return pulumi.get(self, "public_ip_address")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the VPN customer gateway to be queried.
+        """
         return pulumi.get(self, "tags")
 
 
 @pulumi.output_type
-class GatewayRoutesVpnGatewayRouteListResult(dict):
+class GetGatewayRoutesVpnGatewayRouteListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  destination_cidr_block: str,
@@ -350,6 +518,15 @@ class GatewayRoutesVpnGatewayRouteListResult(dict):
                  type: str,
                  update_time: str,
                  vpn_gateway_id: str):
+        """
+        :param str create_time: Create time.
+        :param str instance_id: Instance ID of the next hop.
+        :param str instance_type: Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
+        :param str route_id: Route ID.
+        :param str type: Route type. Default value: Static.
+        :param str update_time: Update time.
+        :param str vpn_gateway_id: VPN gateway ID.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "destination_cidr_block", destination_cidr_block)
         pulumi.set(__self__, "instance_id", instance_id)
@@ -364,6 +541,9 @@ class GatewayRoutesVpnGatewayRouteListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time.
+        """
         return pulumi.get(self, "create_time")
 
     @property
@@ -374,11 +554,17 @@ class GatewayRoutesVpnGatewayRouteListResult(dict):
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        Instance ID of the next hop.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> str:
+        """
+        Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
+        """
         return pulumi.get(self, "instance_type")
 
     @property
@@ -389,6 +575,9 @@ class GatewayRoutesVpnGatewayRouteListResult(dict):
     @property
     @pulumi.getter(name="routeId")
     def route_id(self) -> str:
+        """
+        Route ID.
+        """
         return pulumi.get(self, "route_id")
 
     @property
@@ -399,21 +588,30 @@ class GatewayRoutesVpnGatewayRouteListResult(dict):
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Route type. Default value: Static.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> str:
+        """
+        Update time.
+        """
         return pulumi.get(self, "update_time")
 
     @property
     @pulumi.getter(name="vpnGatewayId")
     def vpn_gateway_id(self) -> str:
+        """
+        VPN gateway ID.
+        """
         return pulumi.get(self, "vpn_gateway_id")
 
 
 @pulumi.output_type
-class GatewaysGatewayListResult(dict):
+class GetGatewaysGatewayListResult(dict):
     def __init__(__self__, *,
                  bandwidth: int,
                  charge_type: str,
@@ -431,6 +629,24 @@ class GatewaysGatewayListResult(dict):
                  type: str,
                  vpc_id: str,
                  zone: str):
+        """
+        :param int bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps).
+        :param str charge_type: Charge Type of the VPN gateway.
+        :param str create_time: Create time of the VPN gateway.
+        :param str expired_time: Expired time of the VPN gateway when charge type is `PREPAID`.
+        :param str id: ID of the VPN gateway.
+        :param bool is_address_blocked: Indicates whether ip address is blocked.
+        :param str name: Name of the VPN gateway. The length of character is limited to 1-60.
+        :param str new_purchase_plan: The plan of new purchase.
+        :param str prepaid_renew_flag: Flag indicates whether to renew or not.
+        :param str public_ip_address: Public ip address of the VPN gateway.
+        :param str restrict_state: Restrict state of VPN gateway.
+        :param str state: State of the VPN gateway.
+        :param Mapping[str, Any] tags: Tags of the VPN gateway to be queried.
+        :param str type: Type of gateway instance.
+        :param str vpc_id: ID of the VPC.
+        :param str zone: Zone of the VPN gateway.
+        """
         pulumi.set(__self__, "bandwidth", bandwidth)
         pulumi.set(__self__, "charge_type", charge_type)
         pulumi.set(__self__, "create_time", create_time)
@@ -451,81 +667,129 @@ class GatewaysGatewayListResult(dict):
     @property
     @pulumi.getter
     def bandwidth(self) -> int:
+        """
+        The maximum public network output bandwidth of VPN gateway (unit: Mbps).
+        """
         return pulumi.get(self, "bandwidth")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        Charge Type of the VPN gateway.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the VPN gateway.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="expiredTime")
     def expired_time(self) -> str:
+        """
+        Expired time of the VPN gateway when charge type is `PREPAID`.
+        """
         return pulumi.get(self, "expired_time")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the VPN gateway.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="isAddressBlocked")
     def is_address_blocked(self) -> bool:
+        """
+        Indicates whether ip address is blocked.
+        """
         return pulumi.get(self, "is_address_blocked")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the VPN gateway. The length of character is limited to 1-60.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="newPurchasePlan")
     def new_purchase_plan(self) -> str:
+        """
+        The plan of new purchase.
+        """
         return pulumi.get(self, "new_purchase_plan")
 
     @property
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> str:
+        """
+        Flag indicates whether to renew or not.
+        """
         return pulumi.get(self, "prepaid_renew_flag")
 
     @property
     @pulumi.getter(name="publicIpAddress")
     def public_ip_address(self) -> str:
+        """
+        Public ip address of the VPN gateway.
+        """
         return pulumi.get(self, "public_ip_address")
 
     @property
     @pulumi.getter(name="restrictState")
     def restrict_state(self) -> str:
+        """
+        Restrict state of VPN gateway.
+        """
         return pulumi.get(self, "restrict_state")
 
     @property
     @pulumi.getter
     def state(self) -> str:
+        """
+        State of the VPN gateway.
+        """
         return pulumi.get(self, "state")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the VPN gateway to be queried.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Type of gateway instance.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        Zone of the VPN gateway.
+        """
         return pulumi.get(self, "zone")
 
 

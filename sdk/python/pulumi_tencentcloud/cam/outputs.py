@@ -9,23 +9,28 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'GroupMembershipsMembershipListResult',
-    'GroupPolicyAttachmentsGroupPolicyAttachmentListResult',
-    'GroupsGroupListResult',
-    'PoliciesPolicyListResult',
-    'RolePolicyAttachmentsRolePolicyAttachmentListResult',
-    'RolesRoleListResult',
-    'SAMLProvidersProviderListResult',
-    'UserPolicyAttachmentsUserPolicyAttachmentListResult',
-    'UsersUserListResult',
+    'GetGroupMembershipsMembershipListResult',
+    'GetGroupPolicyAttachmentsGroupPolicyAttachmentListResult',
+    'GetGroupsGroupListResult',
+    'GetPoliciesPolicyListResult',
+    'GetRolePolicyAttachmentsRolePolicyAttachmentListResult',
+    'GetRolesRoleListResult',
+    'GetSamlProvidersProviderListResult',
+    'GetUserPolicyAttachmentsUserPolicyAttachmentListResult',
+    'GetUsersUserListResult',
 ]
 
 @pulumi.output_type
-class GroupMembershipsMembershipListResult(dict):
+class GetGroupMembershipsMembershipListResult(dict):
     def __init__(__self__, *,
                  group_id: str,
                  user_ids: Sequence[str],
                  user_names: Sequence[str]):
+        """
+        :param str group_id: ID of CAM group to be queried.
+        :param Sequence[str] user_ids: (**Deprecated**) It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
+        :param Sequence[str] user_names: ID set of the CAM group members.
+        """
         pulumi.set(__self__, "group_id", group_id)
         pulumi.set(__self__, "user_ids", user_ids)
         pulumi.set(__self__, "user_names", user_names)
@@ -33,21 +38,30 @@ class GroupMembershipsMembershipListResult(dict):
     @property
     @pulumi.getter(name="groupId")
     def group_id(self) -> str:
+        """
+        ID of CAM group to be queried.
+        """
         return pulumi.get(self, "group_id")
 
     @property
     @pulumi.getter(name="userIds")
     def user_ids(self) -> Sequence[str]:
+        """
+        (**Deprecated**) It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
+        """
         return pulumi.get(self, "user_ids")
 
     @property
     @pulumi.getter(name="userNames")
     def user_names(self) -> Sequence[str]:
+        """
+        ID set of the CAM group members.
+        """
         return pulumi.get(self, "user_names")
 
 
 @pulumi.output_type
-class GroupPolicyAttachmentsGroupPolicyAttachmentListResult(dict):
+class GetGroupPolicyAttachmentsGroupPolicyAttachmentListResult(dict):
     def __init__(__self__, *,
                  create_mode: int,
                  create_time: str,
@@ -55,6 +69,14 @@ class GroupPolicyAttachmentsGroupPolicyAttachmentListResult(dict):
                  policy_id: str,
                  policy_name: str,
                  policy_type: str):
+        """
+        :param int create_mode: Mode of creation of the CAM user policy attachment. 1 means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
+        :param str create_time: Create time of the CAM group policy attachment.
+        :param str group_id: ID of the attached CAM group to be queried.
+        :param str policy_id: ID of CAM policy to be queried.
+        :param str policy_name: Name of the policy.
+        :param str policy_type: Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.
+        """
         pulumi.set(__self__, "create_mode", create_mode)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "group_id", group_id)
@@ -65,41 +87,65 @@ class GroupPolicyAttachmentsGroupPolicyAttachmentListResult(dict):
     @property
     @pulumi.getter(name="createMode")
     def create_mode(self) -> int:
+        """
+        Mode of creation of the CAM user policy attachment. 1 means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
+        """
         return pulumi.get(self, "create_mode")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the CAM group policy attachment.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="groupId")
     def group_id(self) -> str:
+        """
+        ID of the attached CAM group to be queried.
+        """
         return pulumi.get(self, "group_id")
 
     @property
     @pulumi.getter(name="policyId")
     def policy_id(self) -> str:
+        """
+        ID of CAM policy to be queried.
+        """
         return pulumi.get(self, "policy_id")
 
     @property
     @pulumi.getter(name="policyName")
     def policy_name(self) -> str:
+        """
+        Name of the policy.
+        """
         return pulumi.get(self, "policy_name")
 
     @property
     @pulumi.getter(name="policyType")
     def policy_type(self) -> str:
+        """
+        Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.
+        """
         return pulumi.get(self, "policy_type")
 
 
 @pulumi.output_type
-class GroupsGroupListResult(dict):
+class GetGroupsGroupListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  group_id: str,
                  name: str,
                  remark: str):
+        """
+        :param str create_time: Create time of the CAM group.
+        :param str group_id: ID of CAM group to be queried.
+        :param str name: Name of the CAM group to be queried.
+        :param str remark: Description of the cam group to be queried.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "group_id", group_id)
         pulumi.set(__self__, "name", name)
@@ -108,26 +154,38 @@ class GroupsGroupListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the CAM group.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="groupId")
     def group_id(self) -> str:
+        """
+        ID of CAM group to be queried.
+        """
         return pulumi.get(self, "group_id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the CAM group to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def remark(self) -> str:
+        """
+        Description of the cam group to be queried.
+        """
         return pulumi.get(self, "remark")
 
 
 @pulumi.output_type
-class PoliciesPolicyListResult(dict):
+class GetPoliciesPolicyListResult(dict):
     def __init__(__self__, *,
                  attachments: int,
                  create_mode: int,
@@ -137,6 +195,16 @@ class PoliciesPolicyListResult(dict):
                  policy_id: str,
                  service_type: str,
                  type: int):
+        """
+        :param int attachments: Number of attached users.
+        :param int create_mode: Mode of creation of policy strategy. Valid values: `1`, `2`. `1` means policy was created with console, and `2` means it was created by strategies.
+        :param str create_time: Create time of the CAM policy.
+        :param str description: The description of the CAM policy.
+        :param str name: Name of the CAM policy to be queried.
+        :param str policy_id: ID of CAM policy to be queried.
+        :param str service_type: Name of attached products.
+        :param int type: Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        """
         pulumi.set(__self__, "attachments", attachments)
         pulumi.set(__self__, "create_mode", create_mode)
         pulumi.set(__self__, "create_time", create_time)
@@ -149,46 +217,70 @@ class PoliciesPolicyListResult(dict):
     @property
     @pulumi.getter
     def attachments(self) -> int:
+        """
+        Number of attached users.
+        """
         return pulumi.get(self, "attachments")
 
     @property
     @pulumi.getter(name="createMode")
     def create_mode(self) -> int:
+        """
+        Mode of creation of policy strategy. Valid values: `1`, `2`. `1` means policy was created with console, and `2` means it was created by strategies.
+        """
         return pulumi.get(self, "create_mode")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the CAM policy.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        The description of the CAM policy.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the CAM policy to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="policyId")
     def policy_id(self) -> str:
+        """
+        ID of CAM policy to be queried.
+        """
         return pulumi.get(self, "policy_id")
 
     @property
     @pulumi.getter(name="serviceType")
     def service_type(self) -> str:
+        """
+        Name of attached products.
+        """
         return pulumi.get(self, "service_type")
 
     @property
     @pulumi.getter
     def type(self) -> int:
+        """
+        Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        """
         return pulumi.get(self, "type")
 
 
 @pulumi.output_type
-class RolePolicyAttachmentsRolePolicyAttachmentListResult(dict):
+class GetRolePolicyAttachmentsRolePolicyAttachmentListResult(dict):
     def __init__(__self__, *,
                  create_mode: int,
                  create_time: str,
@@ -196,6 +288,14 @@ class RolePolicyAttachmentsRolePolicyAttachmentListResult(dict):
                  policy_name: str,
                  policy_type: str,
                  role_id: str):
+        """
+        :param int create_mode: Mode of Creation of the CAM user policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
+        :param str create_time: Create time of the CAM role policy attachment.
+        :param str policy_id: ID of CAM policy to be queried.
+        :param str policy_name: Name of the policy.
+        :param str policy_type: Type of the policy strategy. Valid values are 'User', 'QCS'. 'User' means customer strategy and 'QCS' means preset strategy.
+        :param str role_id: ID of the attached CAM role to be queried.
+        """
         pulumi.set(__self__, "create_mode", create_mode)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "policy_id", policy_id)
@@ -206,36 +306,54 @@ class RolePolicyAttachmentsRolePolicyAttachmentListResult(dict):
     @property
     @pulumi.getter(name="createMode")
     def create_mode(self) -> int:
+        """
+        Mode of Creation of the CAM user policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
+        """
         return pulumi.get(self, "create_mode")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the CAM role policy attachment.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="policyId")
     def policy_id(self) -> str:
+        """
+        ID of CAM policy to be queried.
+        """
         return pulumi.get(self, "policy_id")
 
     @property
     @pulumi.getter(name="policyName")
     def policy_name(self) -> str:
+        """
+        Name of the policy.
+        """
         return pulumi.get(self, "policy_name")
 
     @property
     @pulumi.getter(name="policyType")
     def policy_type(self) -> str:
+        """
+        Type of the policy strategy. Valid values are 'User', 'QCS'. 'User' means customer strategy and 'QCS' means preset strategy.
+        """
         return pulumi.get(self, "policy_type")
 
     @property
     @pulumi.getter(name="roleId")
     def role_id(self) -> str:
+        """
+        ID of the attached CAM role to be queried.
+        """
         return pulumi.get(self, "role_id")
 
 
 @pulumi.output_type
-class RolesRoleListResult(dict):
+class GetRolesRoleListResult(dict):
     def __init__(__self__, *,
                  console_login: bool,
                  create_time: str,
@@ -244,6 +362,15 @@ class RolesRoleListResult(dict):
                  name: str,
                  role_id: str,
                  update_time: str):
+        """
+        :param bool console_login: Indicate whether the CAM role can be login or not.
+        :param str create_time: The create time of the CAM role.
+        :param str description: The description of the CAM role to be queried.
+        :param str document: Policy document of CAM role.
+        :param str name: Name of the CAM policy to be queried.
+        :param str role_id: ID of the CAM role to be queried.
+        :param str update_time: The last update time of the CAM role.
+        """
         pulumi.set(__self__, "console_login", console_login)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
@@ -255,46 +382,73 @@ class RolesRoleListResult(dict):
     @property
     @pulumi.getter(name="consoleLogin")
     def console_login(self) -> bool:
+        """
+        Indicate whether the CAM role can be login or not.
+        """
         return pulumi.get(self, "console_login")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        The create time of the CAM role.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        The description of the CAM role to be queried.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def document(self) -> str:
+        """
+        Policy document of CAM role.
+        """
         return pulumi.get(self, "document")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the CAM policy to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="roleId")
     def role_id(self) -> str:
+        """
+        ID of the CAM role to be queried.
+        """
         return pulumi.get(self, "role_id")
 
     @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> str:
+        """
+        The last update time of the CAM role.
+        """
         return pulumi.get(self, "update_time")
 
 
 @pulumi.output_type
-class SAMLProvidersProviderListResult(dict):
+class GetSamlProvidersProviderListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  description: str,
                  modify_time: str,
                  name: str):
+        """
+        :param str create_time: Create time of the CAM SAML provider.
+        :param str description: The description of the CAM SAML provider.
+        :param str modify_time: The last modify time of the CAM SAML provider.
+        :param str name: Name of the CAM SAML provider to be queried.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "modify_time", modify_time)
@@ -303,26 +457,38 @@ class SAMLProvidersProviderListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the CAM SAML provider.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        The description of the CAM SAML provider.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> str:
+        """
+        The last modify time of the CAM SAML provider.
+        """
         return pulumi.get(self, "modify_time")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the CAM SAML provider to be queried.
+        """
         return pulumi.get(self, "name")
 
 
 @pulumi.output_type
-class UserPolicyAttachmentsUserPolicyAttachmentListResult(dict):
+class GetUserPolicyAttachmentsUserPolicyAttachmentListResult(dict):
     def __init__(__self__, *,
                  create_mode: int,
                  create_time: str,
@@ -331,6 +497,15 @@ class UserPolicyAttachmentsUserPolicyAttachmentListResult(dict):
                  policy_type: str,
                  user_id: str,
                  user_name: str):
+        """
+        :param int create_mode: Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
+        :param str create_time: The create time of the CAM user policy attachment.
+        :param str policy_id: ID of CAM policy to be queried.
+        :param str policy_name: The name of the policy.
+        :param str policy_type: Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.
+        :param str user_id: It has been deprecated from version 1.59.6. Use `user_name` instead. ID of the attached CAM user to be queried.
+        :param str user_name: Name of the attached CAM user as unique key to be queried.
+        """
         pulumi.set(__self__, "create_mode", create_mode)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "policy_id", policy_id)
@@ -342,41 +517,62 @@ class UserPolicyAttachmentsUserPolicyAttachmentListResult(dict):
     @property
     @pulumi.getter(name="createMode")
     def create_mode(self) -> int:
+        """
+        Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
+        """
         return pulumi.get(self, "create_mode")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        The create time of the CAM user policy attachment.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="policyId")
     def policy_id(self) -> str:
+        """
+        ID of CAM policy to be queried.
+        """
         return pulumi.get(self, "policy_id")
 
     @property
     @pulumi.getter(name="policyName")
     def policy_name(self) -> str:
+        """
+        The name of the policy.
+        """
         return pulumi.get(self, "policy_name")
 
     @property
     @pulumi.getter(name="policyType")
     def policy_type(self) -> str:
+        """
+        Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.
+        """
         return pulumi.get(self, "policy_type")
 
     @property
     @pulumi.getter(name="userId")
     def user_id(self) -> str:
+        """
+        It has been deprecated from version 1.59.6. Use `user_name` instead. ID of the attached CAM user to be queried.
+        """
         return pulumi.get(self, "user_id")
 
     @property
     @pulumi.getter(name="userName")
     def user_name(self) -> str:
+        """
+        Name of the attached CAM user as unique key to be queried.
+        """
         return pulumi.get(self, "user_name")
 
 
 @pulumi.output_type
-class UsersUserListResult(dict):
+class GetUsersUserListResult(dict):
     def __init__(__self__, *,
                  country_code: str,
                  email: str,
@@ -387,6 +583,17 @@ class UsersUserListResult(dict):
                  uin: int,
                  user_id: str,
                  console_login: Optional[bool] = None):
+        """
+        :param str country_code: Country code of the CAM user to be queried.
+        :param str email: Email of the CAM user to be queried.
+        :param str name: Name of CAM user to be queried.
+        :param str phone_num: Phone num of the CAM user to be queried.
+        :param str remark: Remark of the CAM user to be queried.
+        :param int uid: Uid of the CAM user to be queried.
+        :param int uin: Uin of the CAM user to be queried.
+        :param str user_id: ID of CAM user. Its value equals to `name` argument.
+        :param bool console_login: Indicate whether the user can login in.
+        """
         pulumi.set(__self__, "country_code", country_code)
         pulumi.set(__self__, "email", email)
         pulumi.set(__self__, "name", name)
@@ -401,46 +608,73 @@ class UsersUserListResult(dict):
     @property
     @pulumi.getter(name="countryCode")
     def country_code(self) -> str:
+        """
+        Country code of the CAM user to be queried.
+        """
         return pulumi.get(self, "country_code")
 
     @property
     @pulumi.getter
     def email(self) -> str:
+        """
+        Email of the CAM user to be queried.
+        """
         return pulumi.get(self, "email")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of CAM user to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="phoneNum")
     def phone_num(self) -> str:
+        """
+        Phone num of the CAM user to be queried.
+        """
         return pulumi.get(self, "phone_num")
 
     @property
     @pulumi.getter
     def remark(self) -> str:
+        """
+        Remark of the CAM user to be queried.
+        """
         return pulumi.get(self, "remark")
 
     @property
     @pulumi.getter
     def uid(self) -> int:
+        """
+        Uid of the CAM user to be queried.
+        """
         return pulumi.get(self, "uid")
 
     @property
     @pulumi.getter
     def uin(self) -> int:
+        """
+        Uin of the CAM user to be queried.
+        """
         return pulumi.get(self, "uin")
 
     @property
     @pulumi.getter(name="userId")
     def user_id(self) -> str:
+        """
+        ID of CAM user. Its value equals to `name` argument.
+        """
         return pulumi.get(self, "user_id")
 
     @property
     @pulumi.getter(name="consoleLogin")
     def console_login(self) -> Optional[bool]:
+        """
+        Indicate whether the user can login in.
+        """
         return pulumi.get(self, "console_login")
 
 

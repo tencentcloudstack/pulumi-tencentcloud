@@ -11,9 +11,12 @@ import (
 )
 
 type ClusterParamItem struct {
-	CurrentValue string  `pulumi:"currentValue"`
-	Name         string  `pulumi:"name"`
-	OldValue     *string `pulumi:"oldValue"`
+	// Param expected value to set.
+	CurrentValue string `pulumi:"currentValue"`
+	// Name of param, e.g. `characterSetServer`.
+	Name string `pulumi:"name"`
+	// Param old value, indicates the value which already set, this value is required when modifying current_value.
+	OldValue *string `pulumi:"oldValue"`
 }
 
 // ClusterParamItemInput is an input type that accepts ClusterParamItemArgs and ClusterParamItemOutput values.
@@ -28,9 +31,12 @@ type ClusterParamItemInput interface {
 }
 
 type ClusterParamItemArgs struct {
-	CurrentValue pulumi.StringInput    `pulumi:"currentValue"`
-	Name         pulumi.StringInput    `pulumi:"name"`
-	OldValue     pulumi.StringPtrInput `pulumi:"oldValue"`
+	// Param expected value to set.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// Name of param, e.g. `characterSetServer`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Param old value, indicates the value which already set, this value is required when modifying current_value.
+	OldValue pulumi.StringPtrInput `pulumi:"oldValue"`
 }
 
 func (ClusterParamItemArgs) ElementType() reflect.Type {
@@ -84,14 +90,17 @@ func (o ClusterParamItemOutput) ToClusterParamItemOutputWithContext(ctx context.
 	return o
 }
 
+// Param expected value to set.
 func (o ClusterParamItemOutput) CurrentValue() pulumi.StringOutput {
 	return o.ApplyT(func(v ClusterParamItem) string { return v.CurrentValue }).(pulumi.StringOutput)
 }
 
+// Name of param, e.g. `characterSetServer`.
 func (o ClusterParamItemOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ClusterParamItem) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Param old value, indicates the value which already set, this value is required when modifying current_value.
 func (o ClusterParamItemOutput) OldValue() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterParamItem) *string { return v.OldValue }).(pulumi.StringPtrOutput)
 }
@@ -117,8 +126,10 @@ func (o ClusterParamItemArrayOutput) Index(i pulumi.IntInput) ClusterParamItemOu
 }
 
 type ClusterRoGroupAddr struct {
-	Ip   *string `pulumi:"ip"`
-	Port *int    `pulumi:"port"`
+	// IP address for read-write connection.
+	Ip *string `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port *int `pulumi:"port"`
 }
 
 // ClusterRoGroupAddrInput is an input type that accepts ClusterRoGroupAddrArgs and ClusterRoGroupAddrOutput values.
@@ -133,8 +144,10 @@ type ClusterRoGroupAddrInput interface {
 }
 
 type ClusterRoGroupAddrArgs struct {
-	Ip   pulumi.StringPtrInput `pulumi:"ip"`
-	Port pulumi.IntPtrInput    `pulumi:"port"`
+	// IP address for read-write connection.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port pulumi.IntPtrInput `pulumi:"port"`
 }
 
 func (ClusterRoGroupAddrArgs) ElementType() reflect.Type {
@@ -188,10 +201,12 @@ func (o ClusterRoGroupAddrOutput) ToClusterRoGroupAddrOutputWithContext(ctx cont
 	return o
 }
 
+// IP address for read-write connection.
 func (o ClusterRoGroupAddrOutput) Ip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRoGroupAddr) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
 
+// Port of CynosDB cluster.
 func (o ClusterRoGroupAddrOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterRoGroupAddr) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
@@ -217,7 +232,9 @@ func (o ClusterRoGroupAddrArrayOutput) Index(i pulumi.IntInput) ClusterRoGroupAd
 }
 
 type ClusterRoGroupInstance struct {
-	InstanceId   *string `pulumi:"instanceId"`
+	// ID of instance.
+	InstanceId *string `pulumi:"instanceId"`
+	// Name of instance.
 	InstanceName *string `pulumi:"instanceName"`
 }
 
@@ -233,7 +250,9 @@ type ClusterRoGroupInstanceInput interface {
 }
 
 type ClusterRoGroupInstanceArgs struct {
-	InstanceId   pulumi.StringPtrInput `pulumi:"instanceId"`
+	// ID of instance.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Name of instance.
 	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
 }
 
@@ -288,10 +307,12 @@ func (o ClusterRoGroupInstanceOutput) ToClusterRoGroupInstanceOutputWithContext(
 	return o
 }
 
+// ID of instance.
 func (o ClusterRoGroupInstanceOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRoGroupInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
+// Name of instance.
 func (o ClusterRoGroupInstanceOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRoGroupInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
 }
@@ -317,8 +338,10 @@ func (o ClusterRoGroupInstanceArrayOutput) Index(i pulumi.IntInput) ClusterRoGro
 }
 
 type ClusterRwGroupAddr struct {
-	Ip   *string `pulumi:"ip"`
-	Port *int    `pulumi:"port"`
+	// IP address for read-write connection.
+	Ip *string `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port *int `pulumi:"port"`
 }
 
 // ClusterRwGroupAddrInput is an input type that accepts ClusterRwGroupAddrArgs and ClusterRwGroupAddrOutput values.
@@ -333,8 +356,10 @@ type ClusterRwGroupAddrInput interface {
 }
 
 type ClusterRwGroupAddrArgs struct {
-	Ip   pulumi.StringPtrInput `pulumi:"ip"`
-	Port pulumi.IntPtrInput    `pulumi:"port"`
+	// IP address for read-write connection.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port pulumi.IntPtrInput `pulumi:"port"`
 }
 
 func (ClusterRwGroupAddrArgs) ElementType() reflect.Type {
@@ -388,10 +413,12 @@ func (o ClusterRwGroupAddrOutput) ToClusterRwGroupAddrOutputWithContext(ctx cont
 	return o
 }
 
+// IP address for read-write connection.
 func (o ClusterRwGroupAddrOutput) Ip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRwGroupAddr) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
 
+// Port of CynosDB cluster.
 func (o ClusterRwGroupAddrOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterRwGroupAddr) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
@@ -417,7 +444,9 @@ func (o ClusterRwGroupAddrArrayOutput) Index(i pulumi.IntInput) ClusterRwGroupAd
 }
 
 type ClusterRwGroupInstance struct {
-	InstanceId   *string `pulumi:"instanceId"`
+	// ID of instance.
+	InstanceId *string `pulumi:"instanceId"`
+	// Name of instance.
 	InstanceName *string `pulumi:"instanceName"`
 }
 
@@ -433,7 +462,9 @@ type ClusterRwGroupInstanceInput interface {
 }
 
 type ClusterRwGroupInstanceArgs struct {
-	InstanceId   pulumi.StringPtrInput `pulumi:"instanceId"`
+	// ID of instance.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Name of instance.
 	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
 }
 
@@ -488,10 +519,12 @@ func (o ClusterRwGroupInstanceOutput) ToClusterRwGroupInstanceOutputWithContext(
 	return o
 }
 
+// ID of instance.
 func (o ClusterRwGroupInstanceOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRwGroupInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
+// Name of instance.
 func (o ClusterRwGroupInstanceOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRwGroupInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
 }
@@ -516,318 +549,381 @@ func (o ClusterRwGroupInstanceArrayOutput) Index(i pulumi.IntInput) ClusterRwGro
 	}).(ClusterRwGroupInstanceOutput)
 }
 
-type ClustersClusterList struct {
-	AutoRenewFlag int    `pulumi:"autoRenewFlag"`
+type GetClustersClusterList struct {
+	// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Only works for PREPAID cluster.
+	AutoRenewFlag int `pulumi:"autoRenewFlag"`
+	// The available zone of the CynosDB Cluster.
 	AvailableZone string `pulumi:"availableZone"`
-	ChargeType    string `pulumi:"chargeType"`
-	ClusterId     string `pulumi:"clusterId"`
-	ClusterLimit  int    `pulumi:"clusterLimit"`
-	ClusterName   string `pulumi:"clusterName"`
+	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
+	ChargeType string `pulumi:"chargeType"`
+	// ID of the cluster to be queried.
+	ClusterId string `pulumi:"clusterId"`
+	// Storage limit of CynosDB cluster instance, unit in GB.
+	ClusterLimit int `pulumi:"clusterLimit"`
+	// Name of the cluster to be queried.
+	ClusterName string `pulumi:"clusterName"`
+	// Status of the Cynosdb cluster.
 	ClusterStatus string `pulumi:"clusterStatus"`
-	CreateTime    string `pulumi:"createTime"`
-	DbType        string `pulumi:"dbType"`
-	DbVersion     string `pulumi:"dbVersion"`
-	Port          int    `pulumi:"port"`
-	ProjectId     int    `pulumi:"projectId"`
-	SubnetId      string `pulumi:"subnetId"`
-	VpcId         string `pulumi:"vpcId"`
+	// Creation time of the CynosDB cluster.
+	CreateTime string `pulumi:"createTime"`
+	// Type of CynosDB, and available values include `MYSQL`, `POSTGRESQL`.
+	DbType string `pulumi:"dbType"`
+	// Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
+	DbVersion string `pulumi:"dbVersion"`
+	// Port of CynosDB cluster.
+	Port int `pulumi:"port"`
+	// ID of the project to be queried.
+	ProjectId int `pulumi:"projectId"`
+	// ID of the subnet within this VPC.
+	SubnetId string `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId string `pulumi:"vpcId"`
 }
 
-// ClustersClusterListInput is an input type that accepts ClustersClusterListArgs and ClustersClusterListOutput values.
-// You can construct a concrete instance of `ClustersClusterListInput` via:
+// GetClustersClusterListInput is an input type that accepts GetClustersClusterListArgs and GetClustersClusterListOutput values.
+// You can construct a concrete instance of `GetClustersClusterListInput` via:
 //
-//          ClustersClusterListArgs{...}
-type ClustersClusterListInput interface {
+//          GetClustersClusterListArgs{...}
+type GetClustersClusterListInput interface {
 	pulumi.Input
 
-	ToClustersClusterListOutput() ClustersClusterListOutput
-	ToClustersClusterListOutputWithContext(context.Context) ClustersClusterListOutput
+	ToGetClustersClusterListOutput() GetClustersClusterListOutput
+	ToGetClustersClusterListOutputWithContext(context.Context) GetClustersClusterListOutput
 }
 
-type ClustersClusterListArgs struct {
-	AutoRenewFlag pulumi.IntInput    `pulumi:"autoRenewFlag"`
+type GetClustersClusterListArgs struct {
+	// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Only works for PREPAID cluster.
+	AutoRenewFlag pulumi.IntInput `pulumi:"autoRenewFlag"`
+	// The available zone of the CynosDB Cluster.
 	AvailableZone pulumi.StringInput `pulumi:"availableZone"`
-	ChargeType    pulumi.StringInput `pulumi:"chargeType"`
-	ClusterId     pulumi.StringInput `pulumi:"clusterId"`
-	ClusterLimit  pulumi.IntInput    `pulumi:"clusterLimit"`
-	ClusterName   pulumi.StringInput `pulumi:"clusterName"`
+	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// ID of the cluster to be queried.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Storage limit of CynosDB cluster instance, unit in GB.
+	ClusterLimit pulumi.IntInput `pulumi:"clusterLimit"`
+	// Name of the cluster to be queried.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Status of the Cynosdb cluster.
 	ClusterStatus pulumi.StringInput `pulumi:"clusterStatus"`
-	CreateTime    pulumi.StringInput `pulumi:"createTime"`
-	DbType        pulumi.StringInput `pulumi:"dbType"`
-	DbVersion     pulumi.StringInput `pulumi:"dbVersion"`
-	Port          pulumi.IntInput    `pulumi:"port"`
-	ProjectId     pulumi.IntInput    `pulumi:"projectId"`
-	SubnetId      pulumi.StringInput `pulumi:"subnetId"`
-	VpcId         pulumi.StringInput `pulumi:"vpcId"`
+	// Creation time of the CynosDB cluster.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Type of CynosDB, and available values include `MYSQL`, `POSTGRESQL`.
+	DbType pulumi.StringInput `pulumi:"dbType"`
+	// Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
+	DbVersion pulumi.StringInput `pulumi:"dbVersion"`
+	// Port of CynosDB cluster.
+	Port pulumi.IntInput `pulumi:"port"`
+	// ID of the project to be queried.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// ID of the subnet within this VPC.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
-func (ClustersClusterListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersClusterList)(nil)).Elem()
+func (GetClustersClusterListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersClusterList)(nil)).Elem()
 }
 
-func (i ClustersClusterListArgs) ToClustersClusterListOutput() ClustersClusterListOutput {
-	return i.ToClustersClusterListOutputWithContext(context.Background())
+func (i GetClustersClusterListArgs) ToGetClustersClusterListOutput() GetClustersClusterListOutput {
+	return i.ToGetClustersClusterListOutputWithContext(context.Background())
 }
 
-func (i ClustersClusterListArgs) ToClustersClusterListOutputWithContext(ctx context.Context) ClustersClusterListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersClusterListOutput)
+func (i GetClustersClusterListArgs) ToGetClustersClusterListOutputWithContext(ctx context.Context) GetClustersClusterListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersClusterListOutput)
 }
 
-// ClustersClusterListArrayInput is an input type that accepts ClustersClusterListArray and ClustersClusterListArrayOutput values.
-// You can construct a concrete instance of `ClustersClusterListArrayInput` via:
+// GetClustersClusterListArrayInput is an input type that accepts GetClustersClusterListArray and GetClustersClusterListArrayOutput values.
+// You can construct a concrete instance of `GetClustersClusterListArrayInput` via:
 //
-//          ClustersClusterListArray{ ClustersClusterListArgs{...} }
-type ClustersClusterListArrayInput interface {
+//          GetClustersClusterListArray{ GetClustersClusterListArgs{...} }
+type GetClustersClusterListArrayInput interface {
 	pulumi.Input
 
-	ToClustersClusterListArrayOutput() ClustersClusterListArrayOutput
-	ToClustersClusterListArrayOutputWithContext(context.Context) ClustersClusterListArrayOutput
+	ToGetClustersClusterListArrayOutput() GetClustersClusterListArrayOutput
+	ToGetClustersClusterListArrayOutputWithContext(context.Context) GetClustersClusterListArrayOutput
 }
 
-type ClustersClusterListArray []ClustersClusterListInput
+type GetClustersClusterListArray []GetClustersClusterListInput
 
-func (ClustersClusterListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersClusterList)(nil)).Elem()
+func (GetClustersClusterListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersClusterList)(nil)).Elem()
 }
 
-func (i ClustersClusterListArray) ToClustersClusterListArrayOutput() ClustersClusterListArrayOutput {
-	return i.ToClustersClusterListArrayOutputWithContext(context.Background())
+func (i GetClustersClusterListArray) ToGetClustersClusterListArrayOutput() GetClustersClusterListArrayOutput {
+	return i.ToGetClustersClusterListArrayOutputWithContext(context.Background())
 }
 
-func (i ClustersClusterListArray) ToClustersClusterListArrayOutputWithContext(ctx context.Context) ClustersClusterListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersClusterListArrayOutput)
+func (i GetClustersClusterListArray) ToGetClustersClusterListArrayOutputWithContext(ctx context.Context) GetClustersClusterListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersClusterListArrayOutput)
 }
 
-type ClustersClusterListOutput struct{ *pulumi.OutputState }
+type GetClustersClusterListOutput struct{ *pulumi.OutputState }
 
-func (ClustersClusterListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersClusterList)(nil)).Elem()
+func (GetClustersClusterListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersClusterList)(nil)).Elem()
 }
 
-func (o ClustersClusterListOutput) ToClustersClusterListOutput() ClustersClusterListOutput {
+func (o GetClustersClusterListOutput) ToGetClustersClusterListOutput() GetClustersClusterListOutput {
 	return o
 }
 
-func (o ClustersClusterListOutput) ToClustersClusterListOutputWithContext(ctx context.Context) ClustersClusterListOutput {
+func (o GetClustersClusterListOutput) ToGetClustersClusterListOutputWithContext(ctx context.Context) GetClustersClusterListOutput {
 	return o
 }
 
-func (o ClustersClusterListOutput) AutoRenewFlag() pulumi.IntOutput {
-	return o.ApplyT(func(v ClustersClusterList) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
+// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Only works for PREPAID cluster.
+func (o GetClustersClusterListOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClustersClusterList) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
 }
 
-func (o ClustersClusterListOutput) AvailableZone() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.AvailableZone }).(pulumi.StringOutput)
+// The available zone of the CynosDB Cluster.
+func (o GetClustersClusterListOutput) AvailableZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.AvailableZone }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.ChargeType }).(pulumi.StringOutput)
+// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
+func (o GetClustersClusterListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) ClusterId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.ClusterId }).(pulumi.StringOutput)
+// ID of the cluster to be queried.
+func (o GetClustersClusterListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) ClusterLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v ClustersClusterList) int { return v.ClusterLimit }).(pulumi.IntOutput)
+// Storage limit of CynosDB cluster instance, unit in GB.
+func (o GetClustersClusterListOutput) ClusterLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClustersClusterList) int { return v.ClusterLimit }).(pulumi.IntOutput)
 }
 
-func (o ClustersClusterListOutput) ClusterName() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.ClusterName }).(pulumi.StringOutput)
+// Name of the cluster to be queried.
+func (o GetClustersClusterListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.ClusterName }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) ClusterStatus() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.ClusterStatus }).(pulumi.StringOutput)
+// Status of the Cynosdb cluster.
+func (o GetClustersClusterListOutput) ClusterStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.ClusterStatus }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the CynosDB cluster.
+func (o GetClustersClusterListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) DbType() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.DbType }).(pulumi.StringOutput)
+// Type of CynosDB, and available values include `MYSQL`, `POSTGRESQL`.
+func (o GetClustersClusterListOutput) DbType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.DbType }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) DbVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.DbVersion }).(pulumi.StringOutput)
+// Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
+func (o GetClustersClusterListOutput) DbVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.DbVersion }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v ClustersClusterList) int { return v.Port }).(pulumi.IntOutput)
+// Port of CynosDB cluster.
+func (o GetClustersClusterListOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClustersClusterList) int { return v.Port }).(pulumi.IntOutput)
 }
 
-func (o ClustersClusterListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v ClustersClusterList) int { return v.ProjectId }).(pulumi.IntOutput)
+// ID of the project to be queried.
+func (o GetClustersClusterListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClustersClusterList) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o ClustersClusterListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.SubnetId }).(pulumi.StringOutput)
+// ID of the subnet within this VPC.
+func (o GetClustersClusterListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.SubnetId }).(pulumi.StringOutput)
 }
 
-func (o ClustersClusterListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersClusterList) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of the VPC.
+func (o GetClustersClusterListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersClusterList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-type ClustersClusterListArrayOutput struct{ *pulumi.OutputState }
+type GetClustersClusterListArrayOutput struct{ *pulumi.OutputState }
 
-func (ClustersClusterListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersClusterList)(nil)).Elem()
+func (GetClustersClusterListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersClusterList)(nil)).Elem()
 }
 
-func (o ClustersClusterListArrayOutput) ToClustersClusterListArrayOutput() ClustersClusterListArrayOutput {
+func (o GetClustersClusterListArrayOutput) ToGetClustersClusterListArrayOutput() GetClustersClusterListArrayOutput {
 	return o
 }
 
-func (o ClustersClusterListArrayOutput) ToClustersClusterListArrayOutputWithContext(ctx context.Context) ClustersClusterListArrayOutput {
+func (o GetClustersClusterListArrayOutput) ToGetClustersClusterListArrayOutputWithContext(ctx context.Context) GetClustersClusterListArrayOutput {
 	return o
 }
 
-func (o ClustersClusterListArrayOutput) Index(i pulumi.IntInput) ClustersClusterListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClustersClusterList {
-		return vs[0].([]ClustersClusterList)[vs[1].(int)]
-	}).(ClustersClusterListOutput)
+func (o GetClustersClusterListArrayOutput) Index(i pulumi.IntInput) GetClustersClusterListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClustersClusterList {
+		return vs[0].([]GetClustersClusterList)[vs[1].(int)]
+	}).(GetClustersClusterListOutput)
 }
 
-type InstancesInstanceList struct {
-	ClusterId           *string `pulumi:"clusterId"`
-	CreateTime          string  `pulumi:"createTime"`
-	InstanceCpuCore     int     `pulumi:"instanceCpuCore"`
-	InstanceId          *string `pulumi:"instanceId"`
-	InstanceMemorySize  int     `pulumi:"instanceMemorySize"`
-	InstanceName        string  `pulumi:"instanceName"`
-	InstanceStatus      string  `pulumi:"instanceStatus"`
-	InstanceStorageSize int     `pulumi:"instanceStorageSize"`
-	InstanceType        string  `pulumi:"instanceType"`
+type GetInstancesInstanceList struct {
+	// ID of the cluster.
+	ClusterId *string `pulumi:"clusterId"`
+	// Creation time of the CynosDB instance.
+	CreateTime      string `pulumi:"createTime"`
+	InstanceCpuCore int    `pulumi:"instanceCpuCore"`
+	// ID of the Cynosdb instance to be queried.
+	InstanceId         *string `pulumi:"instanceId"`
+	InstanceMemorySize int     `pulumi:"instanceMemorySize"`
+	// Name of the Cynosdb instance to be queried.
+	InstanceName string `pulumi:"instanceName"`
+	// Status of the Cynosdb instance.
+	InstanceStatus string `pulumi:"instanceStatus"`
+	// Storage size of the Cynosdb instance, unit in GB.
+	InstanceStorageSize int `pulumi:"instanceStorageSize"`
+	// Instance type. `ro` for readonly instance, `rw` for read and write instance.
+	InstanceType string `pulumi:"instanceType"`
 }
 
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
 }
 
-type InstancesInstanceListArgs struct {
-	ClusterId           pulumi.StringPtrInput `pulumi:"clusterId"`
-	CreateTime          pulumi.StringInput    `pulumi:"createTime"`
-	InstanceCpuCore     pulumi.IntInput       `pulumi:"instanceCpuCore"`
-	InstanceId          pulumi.StringPtrInput `pulumi:"instanceId"`
-	InstanceMemorySize  pulumi.IntInput       `pulumi:"instanceMemorySize"`
-	InstanceName        pulumi.StringInput    `pulumi:"instanceName"`
-	InstanceStatus      pulumi.StringInput    `pulumi:"instanceStatus"`
-	InstanceStorageSize pulumi.IntInput       `pulumi:"instanceStorageSize"`
-	InstanceType        pulumi.StringInput    `pulumi:"instanceType"`
+type GetInstancesInstanceListArgs struct {
+	// ID of the cluster.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Creation time of the CynosDB instance.
+	CreateTime      pulumi.StringInput `pulumi:"createTime"`
+	InstanceCpuCore pulumi.IntInput    `pulumi:"instanceCpuCore"`
+	// ID of the Cynosdb instance to be queried.
+	InstanceId         pulumi.StringPtrInput `pulumi:"instanceId"`
+	InstanceMemorySize pulumi.IntInput       `pulumi:"instanceMemorySize"`
+	// Name of the Cynosdb instance to be queried.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Status of the Cynosdb instance.
+	InstanceStatus pulumi.StringInput `pulumi:"instanceStatus"`
+	// Storage size of the Cynosdb instance, unit in GB.
+	InstanceStorageSize pulumi.IntInput `pulumi:"instanceStorageSize"`
+	// Instance type. `ro` for readonly instance, `rw` for read and write instance.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
 }
 
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
 }
 
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
 }
 
-type InstancesInstanceListArray []InstancesInstanceListInput
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
 
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
 }
 
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ClusterId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v InstancesInstanceList) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+// ID of the cluster.
+func (o GetInstancesInstanceListOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
 }
 
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the CynosDB instance.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceCpuCore() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.InstanceCpuCore }).(pulumi.IntOutput)
+func (o GetInstancesInstanceListOutput) InstanceCpuCore() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.InstanceCpuCore }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v InstancesInstanceList) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+// ID of the Cynosdb instance to be queried.
+func (o GetInstancesInstanceListOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceMemorySize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.InstanceMemorySize }).(pulumi.IntOutput)
+func (o GetInstancesInstanceListOutput) InstanceMemorySize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.InstanceMemorySize }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+// Name of the Cynosdb instance to be queried.
+func (o GetInstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceStatus() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceStatus }).(pulumi.StringOutput)
+// Status of the Cynosdb instance.
+func (o GetInstancesInstanceListOutput) InstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceStatus }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceStorageSize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.InstanceStorageSize }).(pulumi.IntOutput)
+// Storage size of the Cynosdb instance, unit in GB.
+func (o GetInstancesInstanceListOutput) InstanceStorageSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.InstanceStorageSize }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceType }).(pulumi.StringOutput)
+// Instance type. `ro` for readonly instance, `rw` for read and write instance.
+func (o GetInstancesInstanceListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
 }
 
 func init() {
@@ -841,10 +937,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupAddrArrayInput)(nil)).Elem(), ClusterRwGroupAddrArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupInstanceInput)(nil)).Elem(), ClusterRwGroupInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupInstanceArrayInput)(nil)).Elem(), ClusterRwGroupInstanceArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersClusterListInput)(nil)).Elem(), ClustersClusterListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersClusterListArrayInput)(nil)).Elem(), ClustersClusterListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersClusterListInput)(nil)).Elem(), GetClustersClusterListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersClusterListArrayInput)(nil)).Elem(), GetClustersClusterListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterOutputType(ClusterParamItemOutput{})
 	pulumi.RegisterOutputType(ClusterParamItemArrayOutput{})
 	pulumi.RegisterOutputType(ClusterRoGroupAddrOutput{})
@@ -855,8 +951,8 @@ func init() {
 	pulumi.RegisterOutputType(ClusterRwGroupAddrArrayOutput{})
 	pulumi.RegisterOutputType(ClusterRwGroupInstanceOutput{})
 	pulumi.RegisterOutputType(ClusterRwGroupInstanceArrayOutput{})
-	pulumi.RegisterOutputType(ClustersClusterListOutput{})
-	pulumi.RegisterOutputType(ClustersClusterListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetClustersClusterListOutput{})
+	pulumi.RegisterOutputType(GetClustersClusterListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 }

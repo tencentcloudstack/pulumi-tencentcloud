@@ -161,7 +161,30 @@ class User(pulumi.CustomResource):
                  password: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a User resource with the given unique name, props, and options.
+        Provides a resource to create a Ckafka user.
+
+        ## Example Usage
+
+        Ckafka User
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.User("foo",
+            account_name="tf-test",
+            instance_id="ckafka-f9ife4zz",
+            password="test1234")
+        ```
+
+        ## Import
+
+        Ckafka user can be imported using the instance_id#account_name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_name: Account name used to access to ckafka instance.
@@ -175,7 +198,30 @@ class User(pulumi.CustomResource):
                  args: UserArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a User resource with the given unique name, props, and options.
+        Provides a resource to create a Ckafka user.
+
+        ## Example Usage
+
+        Ckafka User
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.User("foo",
+            account_name="tf-test",
+            instance_id="ckafka-f9ife4zz",
+            password="test1234")
+        ```
+
+        ## Import
+
+        Ckafka user can be imported using the instance_id#account_name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param UserArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

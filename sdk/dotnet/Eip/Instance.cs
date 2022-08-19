@@ -9,6 +9,35 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Eip
 {
+    /// <summary>
+    /// Provides an EIP resource.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Eip.Instance("foo", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// EIP can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -19,7 +48,7 @@ namespace Pulumi.Tencentcloud.Eip
         public Output<string?> AnycastZone { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether the anycast eip can be associated to a CLB.
+        /// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         /// </summary>
         [Output("applicableForClb")]
         public Output<bool?> ApplicableForClb { get; private set; } = null!;
@@ -67,7 +96,7 @@ namespace Pulumi.Tencentcloud.Eip
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         /// </summary>
         [Output("type")]
         public Output<string?> Type { get; private set; } = null!;
@@ -125,7 +154,7 @@ namespace Pulumi.Tencentcloud.Eip
         public Input<string>? AnycastZone { get; set; }
 
         /// <summary>
-        /// Indicates whether the anycast eip can be associated to a CLB.
+        /// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         /// </summary>
         [Input("applicableForClb")]
         public Input<bool>? ApplicableForClb { get; set; }
@@ -167,7 +196,7 @@ namespace Pulumi.Tencentcloud.Eip
         }
 
         /// <summary>
-        /// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
@@ -186,7 +215,7 @@ namespace Pulumi.Tencentcloud.Eip
         public Input<string>? AnycastZone { get; set; }
 
         /// <summary>
-        /// Indicates whether the anycast eip can be associated to a CLB.
+        /// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         /// </summary>
         [Input("applicableForClb")]
         public Input<bool>? ApplicableForClb { get; set; }
@@ -240,7 +269,7 @@ namespace Pulumi.Tencentcloud.Eip
         }
 
         /// <summary>
-        /// The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

@@ -9,6 +9,44 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Gaap
 {
+    /// <summary>
+    /// Provides a resource to create a security policy of GAAP proxy.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
+    ///         {
+    ///             Bandwidth = 10,
+    ///             Concurrent = 2,
+    ///             AccessRegion = "SouthChina",
+    ///             RealserverRegion = "NorthChina",
+    ///         });
+    ///         var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new Tencentcloud.Gaap.SecurityPolicyArgs
+    ///         {
+    ///             ProxyId = fooProxy.Id,
+    ///             Action = "DROP",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// GAAP security policy can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy tencentcloud_gaap_security_policy.foo pl-xxxx
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/securityPolicy:SecurityPolicy")]
     public partial class SecurityPolicy : Pulumi.CustomResource
     {

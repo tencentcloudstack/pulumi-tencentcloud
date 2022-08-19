@@ -5,9 +5,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./cosRegions";
+export * from "./getCosRegions";
+export * from "./getKeyAlias";
 export * from "./instance";
-export * from "./keyAlias";
 
 // Import resources to register:
 import { Instance } from "./instance";

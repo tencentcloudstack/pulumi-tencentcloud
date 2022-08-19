@@ -5,6 +5,42 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create dayu new layer 7 rule
+ *
+ * > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const tencentcloudDayuL7RuleV2 = new tencentcloud.Dayu.L7RuleV2("tencentcloud_dayu_l7_rule_v2", {
+ *     resourceId: "bgpip-000004xe",
+ *     resourceIp: "119.28.217.162",
+ *     resourceType: "bgpip",
+ *     rule: {
+ *         domain: "github.com",
+ *         keepEnable: false,
+ *         keeptime: 0,
+ *         lbType: 1,
+ *         protocol: "http",
+ *         sourceLists: [
+ *             {
+ *                 source: "1.2.3.5",
+ *                 weight: 100,
+ *             },
+ *             {
+ *                 source: "1.2.3.6",
+ *                 weight: 100,
+ *             },
+ *         ],
+ *         sourceType: 2,
+ *     },
+ * });
+ * ```
+ */
 export class L7RuleV2 extends pulumi.CustomResource {
     /**
      * Get an existing L7RuleV2 resource's state with the given name, ID, and optional extra

@@ -4,6 +4,85 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create IP strategy attachment of API gateway.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const serviceService = new tencentcloud.apigateway.Service("serviceService", {
+ *     serviceName: "niceservice",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const testIpStrategy = new tencentcloud.apigateway.IpStrategy("testIpStrategy", {
+ *     serviceId: serviceService.id,
+ *     strategyName: "tf_test",
+ *     strategyType: "BLACK",
+ *     strategyData: "9.9.9.9",
+ * });
+ * const api = new tencentcloud.apigateway.Api("api", {
+ *     serviceId: serviceService.id,
+ *     apiName: "hello_update",
+ *     apiDesc: "my hello api update",
+ *     authType: "SECRET",
+ *     protocol: "HTTP",
+ *     enableCors: true,
+ *     requestConfigPath: "/user/info",
+ *     requestConfigMethod: "POST",
+ *     requestParameters: [{
+ *         name: "email",
+ *         position: "QUERY",
+ *         type: "string",
+ *         desc: "your email please?",
+ *         defaultValue: "tom@qq.com",
+ *         required: true,
+ *     }],
+ *     serviceConfigType: "HTTP",
+ *     serviceConfigTimeout: 10,
+ *     serviceConfigUrl: "http://www.tencent.com",
+ *     serviceConfigPath: "/user",
+ *     serviceConfigMethod: "POST",
+ *     responseType: "XML",
+ *     responseSuccessExample: "<note>success</note>",
+ *     responseFailExample: "<note>fail</note>",
+ *     responseErrorCodes: [{
+ *         code: 10,
+ *         msg: "system error",
+ *         desc: "system error code",
+ *         convertedCode: -10,
+ *         needConvert: true,
+ *     }],
+ * });
+ * const serviceServiceRelease = new tencentcloud.apigateway.ServiceRelease("serviceServiceRelease", {
+ *     serviceId: serviceService.id,
+ *     environmentName: "release",
+ *     releaseDesc: "test service release",
+ * });
+ * const testStrategyAttachment = new tencentcloud.apigateway.StrategyAttachment("testStrategyAttachment", {
+ *     serviceId: serviceServiceRelease.serviceId,
+ *     strategyId: testIpStrategy.strategyId,
+ *     environmentName: "release",
+ *     bindApiId: api.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * IP strategy attachment of API gateway can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment test service-pk2r6bcc#IPStrategy-4kz2ljfi#api-h3wc5r0s#release
+ * ```
+ */
 export class StrategyAttachment extends pulumi.CustomResource {
     /**
      * Get an existing StrategyAttachment resource's state with the given name, ID, and optional extra
@@ -19,7 +98,7 @@ export class StrategyAttachment extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/strategyAttachment:StrategyAttachment';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment';
 
     /**
      * Returns true if the given object is an instance of StrategyAttachment.  This is designed to work even

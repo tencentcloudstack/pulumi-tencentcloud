@@ -6,9 +6,9 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./backupConfig";
+export * from "./getInstances";
+export * from "./getZoneConfig";
 export * from "./instance";
-export * from "./instances";
-export * from "./zoneConfig";
 
 // Import resources to register:
 import { BackupConfig } from "./backupConfig";

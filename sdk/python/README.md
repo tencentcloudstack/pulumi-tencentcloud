@@ -297,7 +297,7 @@ We can run integration tests on our examples using the `*_test.go` files in the 
     You can also run each test file separately via test tags:
 
     ```bash
-    cd examples && go test -v -tags=nodejs
+    cd examples && go test -v -tags=cos
     ```
 
 ## Configuring CI with GitHub Actions

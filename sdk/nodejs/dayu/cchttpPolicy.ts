@@ -5,9 +5,69 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-export class CCHttpPolicy extends pulumi.CustomResource {
+/**
+ * Use this resource to create a dayu CC self-define http policy
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const testBgpip = new tencentcloud.Dayu.CcHttpPolicy("test_bgpip", {
+ *     action: "drop",
+ *     resourceId: "bgpip-00000294",
+ *     resourceType: "bgpip",
+ *     ruleLists: [{
+ *         operator: "include",
+ *         skey: "host",
+ *         value: "123",
+ *     }],
+ *     smode: "matching",
+ *     switch: true,
+ * });
+ * const testNet = new tencentcloud.Dayu.CcHttpPolicy("test_net", {
+ *     action: "drop",
+ *     resourceId: "net-0000007e",
+ *     resourceType: "net",
+ *     ruleLists: [{
+ *         operator: "equal",
+ *         skey: "cgi",
+ *         value: "123",
+ *     }],
+ *     smode: "matching",
+ *     switch: true,
+ * });
+ * const testBgpmultip = new tencentcloud.Dayu.CcHttpPolicy("test_bgpmultip", {
+ *     action: "alg",
+ *     ip: "111.230.178.25",
+ *     resourceId: "bgp-0000008o",
+ *     resourceType: "bgp-multip",
+ *     ruleLists: [{
+ *         operator: "not_include",
+ *         skey: "referer",
+ *         value: "123",
+ *     }],
+ *     smode: "matching",
+ *     switch: true,
+ * });
+ * const testBgp = new tencentcloud.Dayu.CcHttpPolicy("test_bgp", {
+ *     action: "alg",
+ *     resourceId: "bgp-000006mq",
+ *     resourceType: "bgp",
+ *     ruleLists: [{
+ *         operator: "not_include",
+ *         skey: "ua",
+ *         value: "123",
+ *     }],
+ *     smode: "matching",
+ *     switch: true,
+ * });
+ * ```
+ */
+export class CcHttpPolicy extends pulumi.CustomResource {
     /**
-     * Get an existing CCHttpPolicy resource's state with the given name, ID, and optional extra
+     * Get an existing CcHttpPolicy resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -15,22 +75,22 @@ export class CCHttpPolicy extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: CCHttpPolicyState, opts?: pulumi.CustomResourceOptions): CCHttpPolicy {
-        return new CCHttpPolicy(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: CcHttpPolicyState, opts?: pulumi.CustomResourceOptions): CcHttpPolicy {
+        return new CcHttpPolicy(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Dayu/cCHttpPolicy:CCHttpPolicy';
+    public static readonly __pulumiType = 'tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy';
 
     /**
-     * Returns true if the given object is an instance of CCHttpPolicy.  This is designed to work even
+     * Returns true if the given object is an instance of CcHttpPolicy.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is CCHttpPolicy {
+    public static isInstance(obj: any): obj is CcHttpPolicy {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === CCHttpPolicy.__pulumiType;
+        return obj['__pulumiType'] === CcHttpPolicy.__pulumiType;
     }
 
     /**
@@ -46,8 +106,7 @@ export class CCHttpPolicy extends pulumi.CustomResource {
      */
     public readonly frequency!: pulumi.Output<number>;
     /**
-     * Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-     * set one.
+     * Ip of the CC self-define http policy, only valid when `resourceType` is `bgp-multip`. The num of list items can only be set one.
      */
     public readonly ip!: pulumi.Output<string>;
     /**
@@ -63,17 +122,15 @@ export class CCHttpPolicy extends pulumi.CustomResource {
      */
     public readonly resourceId!: pulumi.Output<string>;
     /**
-     * Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-     * `net`.
+     * Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
     public readonly resourceType!: pulumi.Output<string>;
     /**
-     * Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+     * Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
      */
-    public readonly ruleLists!: pulumi.Output<outputs.Dayu.CCHttpPolicyRuleList[] | undefined>;
+    public readonly ruleLists!: pulumi.Output<outputs.Dayu.CcHttpPolicyRuleList[] | undefined>;
     /**
-     * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-     * one.
+     * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
      */
     public readonly smode!: pulumi.Output<string | undefined>;
     /**
@@ -82,18 +139,18 @@ export class CCHttpPolicy extends pulumi.CustomResource {
     public readonly switch!: pulumi.Output<boolean | undefined>;
 
     /**
-     * Create a CCHttpPolicy resource with the given unique name, arguments, and options.
+     * Create a CcHttpPolicy resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: CCHttpPolicyArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: CCHttpPolicyArgs | CCHttpPolicyState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: CcHttpPolicyArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: CcHttpPolicyArgs | CcHttpPolicyState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as CCHttpPolicyState | undefined;
+            const state = argsOrState as CcHttpPolicyState | undefined;
             resourceInputs["action"] = state ? state.action : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["frequency"] = state ? state.frequency : undefined;
@@ -106,7 +163,7 @@ export class CCHttpPolicy extends pulumi.CustomResource {
             resourceInputs["smode"] = state ? state.smode : undefined;
             resourceInputs["switch"] = state ? state.switch : undefined;
         } else {
-            const args = argsOrState as CCHttpPolicyArgs | undefined;
+            const args = argsOrState as CcHttpPolicyArgs | undefined;
             if ((!args || args.resourceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
@@ -126,14 +183,14 @@ export class CCHttpPolicy extends pulumi.CustomResource {
             resourceInputs["policyId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(CCHttpPolicy.__pulumiType, name, resourceInputs, opts);
+        super(CcHttpPolicy.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering CCHttpPolicy resources.
+ * Input properties used for looking up and filtering CcHttpPolicy resources.
  */
-export interface CCHttpPolicyState {
+export interface CcHttpPolicyState {
     /**
      * Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
      */
@@ -147,8 +204,7 @@ export interface CCHttpPolicyState {
      */
     frequency?: pulumi.Input<number>;
     /**
-     * Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-     * set one.
+     * Ip of the CC self-define http policy, only valid when `resourceType` is `bgp-multip`. The num of list items can only be set one.
      */
     ip?: pulumi.Input<string>;
     /**
@@ -164,17 +220,15 @@ export interface CCHttpPolicyState {
      */
     resourceId?: pulumi.Input<string>;
     /**
-     * Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-     * `net`.
+     * Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
     resourceType?: pulumi.Input<string>;
     /**
-     * Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+     * Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
      */
-    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CCHttpPolicyRuleList>[]>;
+    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpPolicyRuleList>[]>;
     /**
-     * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-     * one.
+     * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
      */
     smode?: pulumi.Input<string>;
     /**
@@ -184,9 +238,9 @@ export interface CCHttpPolicyState {
 }
 
 /**
- * The set of arguments for constructing a CCHttpPolicy resource.
+ * The set of arguments for constructing a CcHttpPolicy resource.
  */
-export interface CCHttpPolicyArgs {
+export interface CcHttpPolicyArgs {
     /**
      * Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
      */
@@ -196,8 +250,7 @@ export interface CCHttpPolicyArgs {
      */
     frequency?: pulumi.Input<number>;
     /**
-     * Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-     * set one.
+     * Ip of the CC self-define http policy, only valid when `resourceType` is `bgp-multip`. The num of list items can only be set one.
      */
     ip?: pulumi.Input<string>;
     /**
@@ -209,17 +262,15 @@ export interface CCHttpPolicyArgs {
      */
     resourceId: pulumi.Input<string>;
     /**
-     * Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-     * `net`.
+     * Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
     resourceType: pulumi.Input<string>;
     /**
-     * Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+     * Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
      */
-    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CCHttpPolicyRuleList>[]>;
+    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpPolicyRuleList>[]>;
     /**
-     * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-     * one.
+     * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
      */
     smode?: pulumi.Input<string>;
     /**

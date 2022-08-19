@@ -11,11 +11,48 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create a backup config of redis.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Redis.NewBackupConfig(ctx, "redislab", &Redis.BackupConfigArgs{
+// 			BackupPeriods: pulumi.StringArray{
+// 				pulumi.String("Monday"),
+// 			},
+// 			BackupTime: pulumi.String("04:00-05:00"),
+// 			RedisId:    pulumi.String("crs-7yl0q0dd"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Redis
+//
+// backup config can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+// ```
 type BackupConfig struct {
 	pulumi.CustomResourceState
 
-	// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-	// `Friday`, `Saturday` and `Sunday`.
+	// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 	//
 	// Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all
 	BackupPeriods pulumi.StringArrayOutput `pulumi:"backupPeriods"`
@@ -60,8 +97,7 @@ func GetBackupConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering BackupConfig resources.
 type backupConfigState struct {
-	// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-	// `Friday`, `Saturday` and `Sunday`.
+	// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 	//
 	// Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all
 	BackupPeriods []string `pulumi:"backupPeriods"`
@@ -72,8 +108,7 @@ type backupConfigState struct {
 }
 
 type BackupConfigState struct {
-	// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-	// `Friday`, `Saturday` and `Sunday`.
+	// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 	//
 	// Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all
 	BackupPeriods pulumi.StringArrayInput
@@ -88,8 +123,7 @@ func (BackupConfigState) ElementType() reflect.Type {
 }
 
 type backupConfigArgs struct {
-	// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-	// `Friday`, `Saturday` and `Sunday`.
+	// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 	//
 	// Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all
 	BackupPeriods []string `pulumi:"backupPeriods"`
@@ -101,8 +135,7 @@ type backupConfigArgs struct {
 
 // The set of arguments for constructing a BackupConfig resource.
 type BackupConfigArgs struct {
-	// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-	// `Friday`, `Saturday` and `Sunday`.
+	// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 	//
 	// Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all
 	BackupPeriods pulumi.StringArrayInput
@@ -199,8 +232,7 @@ func (o BackupConfigOutput) ToBackupConfigOutputWithContext(ctx context.Context)
 	return o
 }
 
-// Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-// `Friday`, `Saturday` and `Sunday`.
+// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 //
 // Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all
 func (o BackupConfigOutput) BackupPeriods() pulumi.StringArrayOutput {

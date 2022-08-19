@@ -4,6 +4,51 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * ## Example Usage
+ *
+ * POSTPAID_BY_HOUR VPN gateway
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ *     bandwidth: 5,
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     vpcId: "vpc-dk8zmwuf",
+ *     zone: "ap-guangzhou-3",
+ * });
+ * ```
+ *
+ * PREPAID VPN gateway
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ *     bandwidth: 5,
+ *     chargeType: "PREPAID",
+ *     prepaidPeriod: 1,
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     vpcId: "vpc-dk8zmwuf",
+ *     zone: "ap-guangzhou-3",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VPN gateway can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+ * ```
+ */
 export class Gateway extends pulumi.CustomResource {
     /**
      * Get an existing Gateway resource's state with the given name, ID, and optional extra
@@ -33,9 +78,7 @@ export class Gateway extends pulumi.CustomResource {
     }
 
     /**
-     * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-     * 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-     * unsupported.
+     * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
      */
     public readonly bandwidth!: pulumi.Output<number | undefined>;
     /**
@@ -59,8 +102,7 @@ export class Gateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly isAddressBlocked!: pulumi.Output<boolean>;
     /**
-     * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-     * is only required for SSL VPN gateways.
+     * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
      */
     public readonly maxConnection!: pulumi.Output<number>;
     /**
@@ -72,14 +114,11 @@ export class Gateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly newPurchasePlan!: pulumi.Output<string>;
     /**
-     * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-     * month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-     * period. This para can only be set to take effect in create operation.
+     * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
      */
     public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
-     * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-     * `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+     * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
      */
     public readonly prepaidRenewFlag!: pulumi.Output<string | undefined>;
     /**
@@ -176,9 +215,7 @@ export class Gateway extends pulumi.CustomResource {
  */
 export interface GatewayState {
     /**
-     * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-     * 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-     * unsupported.
+     * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
      */
     bandwidth?: pulumi.Input<number>;
     /**
@@ -202,8 +239,7 @@ export interface GatewayState {
      */
     isAddressBlocked?: pulumi.Input<boolean>;
     /**
-     * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-     * is only required for SSL VPN gateways.
+     * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
      */
     maxConnection?: pulumi.Input<number>;
     /**
@@ -215,14 +251,11 @@ export interface GatewayState {
      */
     newPurchasePlan?: pulumi.Input<string>;
     /**
-     * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-     * month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-     * period. This para can only be set to take effect in create operation.
+     * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
-     * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-     * `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+     * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
      */
     prepaidRenewFlag?: pulumi.Input<string>;
     /**
@@ -260,9 +293,7 @@ export interface GatewayState {
  */
 export interface GatewayArgs {
     /**
-     * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-     * 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-     * unsupported.
+     * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
      */
     bandwidth?: pulumi.Input<number>;
     /**
@@ -274,8 +305,7 @@ export interface GatewayArgs {
      */
     chargeType?: pulumi.Input<string>;
     /**
-     * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-     * is only required for SSL VPN gateways.
+     * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
      */
     maxConnection?: pulumi.Input<number>;
     /**
@@ -283,14 +313,11 @@ export interface GatewayArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-     * month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-     * period. This para can only be set to take effect in create operation.
+     * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
-     * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-     * `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+     * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
      */
     prepaidRenewFlag?: pulumi.Input<string>;
     /**

@@ -13,12 +13,33 @@ namespace Pulumi.Tencentcloud.Cdh.Outputs
     [OutputType]
     public sealed class InstanceHostResource
     {
+        /// <summary>
+        /// The number of available CPU cores of the instance.
+        /// </summary>
         public readonly int? CpuAvailableNum;
+        /// <summary>
+        /// The number of total CPU cores of the instance.
+        /// </summary>
         public readonly int? CpuTotalNum;
+        /// <summary>
+        /// Instance disk available capacity, unit in GB.
+        /// </summary>
         public readonly int? DiskAvailableSize;
+        /// <summary>
+        /// Instance disk total capacity, unit in GB.
+        /// </summary>
         public readonly int? DiskTotalSize;
+        /// <summary>
+        /// Type of the disk.
+        /// </summary>
         public readonly string? DiskType;
+        /// <summary>
+        /// Instance memory available capacity, unit in GB.
+        /// </summary>
         public readonly double? MemoryAvailableSize;
+        /// <summary>
+        /// Instance memory total capacity, unit in GB.
+        /// </summary>
         public readonly double? MemoryTotalSize;
 
         [OutputConstructor]

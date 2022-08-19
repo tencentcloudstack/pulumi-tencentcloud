@@ -5,6 +5,44 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create dayu layer 4 rule
+ *
+ * > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip` and `net`
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const testRule = new tencentcloud.Dayu.L4Rule("test_rule", {
+ *     dPort: 60,
+ *     healthCheckHealthNum: 5,
+ *     healthCheckInterval: 35,
+ *     healthCheckSwitch: true,
+ *     healthCheckTimeout: 30,
+ *     healthCheckUnhealthNum: 10,
+ *     protocol: "TCP",
+ *     resourceId: "bgpip-00000294",
+ *     resourceType: "bgpip",
+ *     sPort: 80,
+ *     sessionSwitch: false,
+ *     sessionTime: 300,
+ *     sourceLists: [
+ *         {
+ *             source: "1.1.1.1",
+ *             weight: 100,
+ *         },
+ *         {
+ *             source: "2.2.2.2",
+ *             weight: 50,
+ *         },
+ *     ],
+ *     sourceType: 2,
+ * });
+ * ```
+ */
 export class L4Rule extends pulumi.CustomResource {
     /**
      * Get an existing L4Rule resource's state with the given name, ID, and optional extra
@@ -38,8 +76,7 @@ export class L4Rule extends pulumi.CustomResource {
      */
     public readonly dPort!: pulumi.Output<number>;
     /**
-     * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-     * consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+     * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
      */
     public readonly healthCheckHealthNum!: pulumi.Output<number>;
     /**
@@ -47,8 +84,7 @@ export class L4Rule extends pulumi.CustomResource {
      */
     public readonly healthCheckInterval!: pulumi.Output<number>;
     /**
-     * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-     * item.
+     * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
      */
     public readonly healthCheckSwitch!: pulumi.Output<boolean>;
     /**
@@ -56,8 +92,7 @@ export class L4Rule extends pulumi.CustomResource {
      */
     public readonly healthCheckTimeout!: pulumi.Output<number>;
     /**
-     * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-     * indicates that the forwarding is abnormal. The value range is 2-10.
+     * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
      */
     public readonly healthCheckUnhealthNum!: pulumi.Output<number>;
     /**
@@ -65,12 +100,11 @@ export class L4Rule extends pulumi.CustomResource {
      */
     public /*out*/ readonly lbType!: pulumi.Output<number>;
     /**
-     * Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+     * Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-     * only set with `tcp`.
+     * Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
      */
     public readonly protocol!: pulumi.Output<string>;
     /**
@@ -94,13 +128,11 @@ export class L4Rule extends pulumi.CustomResource {
      */
     public readonly sessionSwitch!: pulumi.Output<boolean | undefined>;
     /**
-     * Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-     * second.
+     * Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
      */
     public readonly sessionTime!: pulumi.Output<number>;
     /**
-     * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-     * 20.
+     * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
      */
     public readonly sourceLists!: pulumi.Output<outputs.Dayu.L4RuleSourceList[]>;
     /**
@@ -193,8 +225,7 @@ export interface L4RuleState {
      */
     dPort?: pulumi.Input<number>;
     /**
-     * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-     * consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+     * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
      */
     healthCheckHealthNum?: pulumi.Input<number>;
     /**
@@ -202,8 +233,7 @@ export interface L4RuleState {
      */
     healthCheckInterval?: pulumi.Input<number>;
     /**
-     * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-     * item.
+     * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
      */
     healthCheckSwitch?: pulumi.Input<boolean>;
     /**
@@ -211,8 +241,7 @@ export interface L4RuleState {
      */
     healthCheckTimeout?: pulumi.Input<number>;
     /**
-     * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-     * indicates that the forwarding is abnormal. The value range is 2-10.
+     * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
      */
     healthCheckUnhealthNum?: pulumi.Input<number>;
     /**
@@ -220,12 +249,11 @@ export interface L4RuleState {
      */
     lbType?: pulumi.Input<number>;
     /**
-     * Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+     * Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
      */
     name?: pulumi.Input<string>;
     /**
-     * Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-     * only set with `tcp`.
+     * Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
      */
     protocol?: pulumi.Input<string>;
     /**
@@ -249,13 +277,11 @@ export interface L4RuleState {
      */
     sessionSwitch?: pulumi.Input<boolean>;
     /**
-     * Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-     * second.
+     * Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
      */
     sessionTime?: pulumi.Input<number>;
     /**
-     * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-     * 20.
+     * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
      */
     sourceLists?: pulumi.Input<pulumi.Input<inputs.Dayu.L4RuleSourceList>[]>;
     /**
@@ -273,8 +299,7 @@ export interface L4RuleArgs {
      */
     dPort: pulumi.Input<number>;
     /**
-     * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-     * consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+     * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
      */
     healthCheckHealthNum?: pulumi.Input<number>;
     /**
@@ -282,8 +307,7 @@ export interface L4RuleArgs {
      */
     healthCheckInterval?: pulumi.Input<number>;
     /**
-     * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-     * item.
+     * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
      */
     healthCheckSwitch?: pulumi.Input<boolean>;
     /**
@@ -291,17 +315,15 @@ export interface L4RuleArgs {
      */
     healthCheckTimeout?: pulumi.Input<number>;
     /**
-     * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-     * indicates that the forwarding is abnormal. The value range is 2-10.
+     * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
      */
     healthCheckUnhealthNum?: pulumi.Input<number>;
     /**
-     * Name of the rule. When the `resource_type` is `net`, this field should be set with valid domain.
+     * Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
      */
     name?: pulumi.Input<string>;
     /**
-     * Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-     * only set with `tcp`.
+     * Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
      */
     protocol: pulumi.Input<string>;
     /**
@@ -321,13 +343,11 @@ export interface L4RuleArgs {
      */
     sessionSwitch?: pulumi.Input<boolean>;
     /**
-     * Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-     * second.
+     * Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
      */
     sessionTime?: pulumi.Input<number>;
     /**
-     * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-     * 20.
+     * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
      */
     sourceLists: pulumi.Input<pulumi.Input<inputs.Dayu.L4RuleSourceList>[]>;
     /**

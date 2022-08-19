@@ -10,20 +10,20 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'InstancesInstanceListResult',
-    'InstancesInstanceListNodeInfoResult',
-    'ZoneConfigListResult',
+    'GetInstancesInstanceListResult',
+    'GetInstancesInstanceListNodeInfoResult',
+    'GetZoneConfigListResult',
 ]
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  charge_type: str,
                  create_time: str,
                  ip: str,
                  mem_size: int,
                  name: str,
-                 node_infos: Sequence['outputs.InstancesInstanceListNodeInfoResult'],
+                 node_infos: Sequence['outputs.GetInstancesInstanceListNodeInfoResult'],
                  port: int,
                  project_id: int,
                  redis_id: str,
@@ -36,6 +36,26 @@ class InstancesInstanceListResult(dict):
                  type_id: int,
                  vpc_id: str,
                  zone: str):
+        """
+        :param str charge_type: The charge type of instance. Valid values are `POSTPAID` and `PREPAID`.
+        :param str create_time: The time when the instance is created.
+        :param str ip: IP address of an instance.
+        :param int mem_size: Memory size in MB.
+        :param str name: Name of a redis instance.
+        :param Sequence['GetInstancesInstanceListNodeInfoArgs'] node_infos: List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.
+        :param int port: The port used to access a redis instance.
+        :param int project_id: ID of the project to which redis instance belongs.
+        :param str redis_id: ID of a redis instance.
+        :param int redis_replicas_num: The number of instance copies.
+        :param int redis_shard_num: The number of instance shard.
+        :param str status: Current status of an instance, maybe: `init`, `processing`, `online`, `isolate` and `todelete`.
+        :param str subnet_id: ID of the vpc subnet.
+        :param Mapping[str, Any] tags: Tags of redis instance.
+        :param str type: (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `master_slave_redis`, `master_slave_ckv`, `cluster_ckv`, `cluster_redis` and `standalone_redis`.
+        :param int type_id: Instance type. Refer to `data.tencentcloud_redis_zone_config.list.type_id` get available values.
+        :param str vpc_id: ID of the vpc with which the instance is associated.
+        :param str zone: ID of an available zone.
+        """
         pulumi.set(__self__, "charge_type", charge_type)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "ip", ip)
@@ -58,100 +78,159 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        The charge type of instance. Valid values are `POSTPAID` and `PREPAID`.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        The time when the instance is created.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        IP address of an instance.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> int:
+        """
+        Memory size in MB.
+        """
         return pulumi.get(self, "mem_size")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of a redis instance.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="nodeInfos")
-    def node_infos(self) -> Sequence['outputs.InstancesInstanceListNodeInfoResult']:
+    def node_infos(self) -> Sequence['outputs.GetInstancesInstanceListNodeInfoResult']:
+        """
+        List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.
+        """
         return pulumi.get(self, "node_infos")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        The port used to access a redis instance.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        ID of the project to which redis instance belongs.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="redisId")
     def redis_id(self) -> str:
+        """
+        ID of a redis instance.
+        """
         return pulumi.get(self, "redis_id")
 
     @property
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> int:
+        """
+        The number of instance copies.
+        """
         return pulumi.get(self, "redis_replicas_num")
 
     @property
     @pulumi.getter(name="redisShardNum")
     def redis_shard_num(self) -> int:
+        """
+        The number of instance shard.
+        """
         return pulumi.get(self, "redis_shard_num")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Current status of an instance, maybe: `init`, `processing`, `online`, `isolate` and `todelete`.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of the vpc subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of redis instance.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `master_slave_redis`, `master_slave_ckv`, `cluster_ckv`, `cluster_redis` and `standalone_redis`.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="typeId")
     def type_id(self) -> int:
+        """
+        Instance type. Refer to `data.tencentcloud_redis_zone_config.list.type_id` get available values.
+        """
         return pulumi.get(self, "type_id")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the vpc with which the instance is associated.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        ID of an available zone.
+        """
         return pulumi.get(self, "zone")
 
 
 @pulumi.output_type
-class InstancesInstanceListNodeInfoResult(dict):
+class GetInstancesInstanceListNodeInfoResult(dict):
     def __init__(__self__, *,
                  id: int,
                  master: bool,
                  zone_id: int):
+        """
+        :param int id: ID of the master or replica node.
+        :param bool master: Indicates whether the node is master.
+        :param int zone_id: ID of the availability zone of the master or replica node.
+        """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "master", master)
         pulumi.set(__self__, "zone_id", zone_id)
@@ -159,21 +238,30 @@ class InstancesInstanceListNodeInfoResult(dict):
     @property
     @pulumi.getter
     def id(self) -> int:
+        """
+        ID of the master or replica node.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def master(self) -> bool:
+        """
+        Indicates whether the node is master.
+        """
         return pulumi.get(self, "master")
 
     @property
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> int:
+        """
+        ID of the availability zone of the master or replica node.
+        """
         return pulumi.get(self, "zone_id")
 
 
 @pulumi.output_type
-class ZoneConfigListResult(dict):
+class GetZoneConfigListResult(dict):
     def __init__(__self__, *,
                  mem_sizes: Sequence[int],
                  redis_replicas_nums: Sequence[int],
@@ -183,6 +271,16 @@ class ZoneConfigListResult(dict):
                  type_id: int,
                  version: str,
                  zone: str):
+        """
+        :param Sequence[int] mem_sizes: (**Deprecated**) It has been deprecated from version 1.26.0. Use `shard_memories` instead. The memory volume of an available instance(in MB).
+        :param Sequence[int] redis_replicas_nums: The support numbers of instance copies.
+        :param Sequence[int] redis_shard_nums: The support numbers of instance shard.
+        :param Sequence[int] shard_memories: The memory volume list of an available instance shard(in MB).
+        :param str type: (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `master_slave_redis`, `master_slave_ckv`, `cluster_ckv`, `cluster_redis` and `standalone_redis`.
+        :param int type_id: Instance type ID.
+        :param str version: Version description of an available instance. Possible values: `Redis 3.2`, `Redis 4.0`.
+        :param str zone: ID of available zone.
+        """
         pulumi.set(__self__, "mem_sizes", mem_sizes)
         pulumi.set(__self__, "redis_replicas_nums", redis_replicas_nums)
         pulumi.set(__self__, "redis_shard_nums", redis_shard_nums)
@@ -195,41 +293,65 @@ class ZoneConfigListResult(dict):
     @property
     @pulumi.getter(name="memSizes")
     def mem_sizes(self) -> Sequence[int]:
+        """
+        (**Deprecated**) It has been deprecated from version 1.26.0. Use `shard_memories` instead. The memory volume of an available instance(in MB).
+        """
         return pulumi.get(self, "mem_sizes")
 
     @property
     @pulumi.getter(name="redisReplicasNums")
     def redis_replicas_nums(self) -> Sequence[int]:
+        """
+        The support numbers of instance copies.
+        """
         return pulumi.get(self, "redis_replicas_nums")
 
     @property
     @pulumi.getter(name="redisShardNums")
     def redis_shard_nums(self) -> Sequence[int]:
+        """
+        The support numbers of instance shard.
+        """
         return pulumi.get(self, "redis_shard_nums")
 
     @property
     @pulumi.getter(name="shardMemories")
     def shard_memories(self) -> Sequence[int]:
+        """
+        The memory volume list of an available instance shard(in MB).
+        """
         return pulumi.get(self, "shard_memories")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `master_slave_redis`, `master_slave_ckv`, `cluster_ckv`, `cluster_redis` and `standalone_redis`.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="typeId")
     def type_id(self) -> int:
+        """
+        Instance type ID.
+        """
         return pulumi.get(self, "type_id")
 
     @property
     @pulumi.getter
     def version(self) -> str:
+        """
+        Version description of an available instance. Possible values: `Redis 3.2`, `Redis 4.0`.
+        """
         return pulumi.get(self, "version")
 
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        ID of available zone.
+        """
         return pulumi.get(self, "zone")
 
 

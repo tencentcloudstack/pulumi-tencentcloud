@@ -4,6 +4,49 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a TDMQ role.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tdmq.Instance("foo", {
+ *     clusterName: "example",
+ *     remark: "this is description.",
+ * });
+ * const barNamespace = new tencentcloud.Tdmq.Namespace("bar", {
+ *     clusterId: foo.id,
+ *     environName: "example",
+ *     msgTtl: 300,
+ *     remark: "this is description.",
+ * });
+ * const barTopic = new tencentcloud.Tdmq.Topic("bar", {
+ *     clusterId: foo.id,
+ *     environId: barNamespace.id,
+ *     partitions: 6,
+ *     remark: "this is description.",
+ *     topicName: "example",
+ *     topicType: 0,
+ * });
+ * const barRole = new tencentcloud.Tdmq.Role("bar", {
+ *     clusterId: foo.id,
+ *     remark: "this is description world",
+ *     roleName: "example",
+ * });
+ * const barNamespaceRoleAttachment = new tencentcloud.Tdmq.NamespaceRoleAttachment("bar", {
+ *     clusterId: foo.id,
+ *     environId: barNamespace.id,
+ *     permissions: [
+ *         "produce",
+ *         "consume",
+ *     ],
+ *     roleName: barRole.roleName,
+ * });
+ * ```
+ */
 export class NamespaceRoleAttachment extends pulumi.CustomResource {
     /**
      * Get an existing NamespaceRoleAttachment resource's state with the given name, ID, and optional extra

@@ -11,14 +11,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a certificate of GAAP.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Gaap.NewCertificate(ctx, "foo", &Gaap.CertificateArgs{
+// 			Content: pulumi.String("test:tx2KGdo3zJg/."),
+// 			Type:    pulumi.String("BASIC"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// GAAP certificate can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+// ```
 type Certificate struct {
 	pulumi.CustomResourceState
 
 	// Beginning time of the certificate.
 	BeginTime pulumi.StringOutput `pulumi:"beginTime"`
-	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-	// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-	// `SSL`, the format is `pem`.
+	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
 	Content pulumi.StringOutput `pulumi:"content"`
 	// Creation time of the certificate.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -32,9 +63,7 @@ type Certificate struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Subject name of the certificate.
 	SubjectCn pulumi.StringOutput `pulumi:"subjectCn"`
-	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-	// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-	// CA certificate; `PROXY` means proxy SSL certificate.
+	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
 	Type pulumi.StringOutput `pulumi:"type"`
 }
 
@@ -75,9 +104,7 @@ func GetCertificate(ctx *pulumi.Context,
 type certificateState struct {
 	// Beginning time of the certificate.
 	BeginTime *string `pulumi:"beginTime"`
-	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-	// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-	// `SSL`, the format is `pem`.
+	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
 	Content *string `pulumi:"content"`
 	// Creation time of the certificate.
 	CreateTime *string `pulumi:"createTime"`
@@ -91,18 +118,14 @@ type certificateState struct {
 	Name *string `pulumi:"name"`
 	// Subject name of the certificate.
 	SubjectCn *string `pulumi:"subjectCn"`
-	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-	// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-	// CA certificate; `PROXY` means proxy SSL certificate.
+	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
 	Type *string `pulumi:"type"`
 }
 
 type CertificateState struct {
 	// Beginning time of the certificate.
 	BeginTime pulumi.StringPtrInput
-	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-	// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-	// `SSL`, the format is `pem`.
+	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
 	Content pulumi.StringPtrInput
 	// Creation time of the certificate.
 	CreateTime pulumi.StringPtrInput
@@ -116,9 +139,7 @@ type CertificateState struct {
 	Name pulumi.StringPtrInput
 	// Subject name of the certificate.
 	SubjectCn pulumi.StringPtrInput
-	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-	// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-	// CA certificate; `PROXY` means proxy SSL certificate.
+	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
 	Type pulumi.StringPtrInput
 }
 
@@ -127,33 +148,25 @@ func (CertificateState) ElementType() reflect.Type {
 }
 
 type certificateArgs struct {
-	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-	// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-	// `SSL`, the format is `pem`.
+	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
 	Content string `pulumi:"content"`
 	// Key of the `SSL` certificate.
 	Key *string `pulumi:"key"`
 	// Name of the certificate.
 	Name *string `pulumi:"name"`
-	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-	// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-	// CA certificate; `PROXY` means proxy SSL certificate.
+	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
 	Type string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a Certificate resource.
 type CertificateArgs struct {
-	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-	// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-	// `SSL`, the format is `pem`.
+	// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
 	Content pulumi.StringInput
 	// Key of the `SSL` certificate.
 	Key pulumi.StringPtrInput
 	// Name of the certificate.
 	Name pulumi.StringPtrInput
-	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-	// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-	// CA certificate; `PROXY` means proxy SSL certificate.
+	// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
 	Type pulumi.StringInput
 }
 
@@ -249,9 +262,7 @@ func (o CertificateOutput) BeginTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Certificate) pulumi.StringOutput { return v.BeginTime }).(pulumi.StringOutput)
 }
 
-// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-// password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-// `SSL`, the format is `pem`.
+// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
 func (o CertificateOutput) Content() pulumi.StringOutput {
 	return o.ApplyT(func(v *Certificate) pulumi.StringOutput { return v.Content }).(pulumi.StringOutput)
 }
@@ -286,9 +297,7 @@ func (o CertificateOutput) SubjectCn() pulumi.StringOutput {
 	return o.ApplyT(func(v *Certificate) pulumi.StringOutput { return v.SubjectCn }).(pulumi.StringOutput)
 }
 
-// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-// certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-// CA certificate; `PROXY` means proxy SSL certificate.
+// Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
 func (o CertificateOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *Certificate) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }

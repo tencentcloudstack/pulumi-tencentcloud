@@ -9,6 +9,64 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Clb
 {
+    /// <summary>
+    /// Provides a resource to create a CLB redirection.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// Manual Rewrite
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Clb.Redirection("foo", new Tencentcloud.Clb.RedirectionArgs
+    ///         {
+    ///             ClbId = "lb-p7olt9e5",
+    ///             SourceListenerId = "lbl-jc1dx6ju",
+    ///             SourceRuleId = "loc-ft8fmngv",
+    ///             TargetListenerId = "lbl-asj1hzuo",
+    ///             TargetRuleId = "loc-4xxr2cy7",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Auto Rewrite
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Clb.Redirection("foo", new Tencentcloud.Clb.RedirectionArgs
+    ///         {
+    ///             ClbId = "lb-p7olt9e5",
+    ///             IsAutoRewrite = true,
+    ///             TargetListenerId = "lbl-asj1hzuo",
+    ///             TargetRuleId = "loc-4xxr2cy7",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CLB redirection can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/redirection:Redirection")]
     public partial class Redirection : Pulumi.CustomResource
     {
@@ -19,16 +77,13 @@ namespace Pulumi.Tencentcloud.Clb
         public Output<string> ClbId { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-        /// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-        /// when this parameter set true.
+        /// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
         /// </summary>
         [Output("deleteAllAutoRewrite")]
         public Output<bool?> DeleteAllAutoRewrite { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-        /// should be empty, the target listener must be https protocol and port is 443.
+        /// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         /// </summary>
         [Output("isAutoRewrite")]
         public Output<bool?> IsAutoRewrite { get; private set; } = null!;
@@ -110,16 +165,13 @@ namespace Pulumi.Tencentcloud.Clb
         public Input<string> ClbId { get; set; } = null!;
 
         /// <summary>
-        /// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-        /// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-        /// when this parameter set true.
+        /// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
         /// </summary>
         [Input("deleteAllAutoRewrite")]
         public Input<bool>? DeleteAllAutoRewrite { get; set; }
 
         /// <summary>
-        /// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-        /// should be empty, the target listener must be https protocol and port is 443.
+        /// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         /// </summary>
         [Input("isAutoRewrite")]
         public Input<bool>? IsAutoRewrite { get; set; }
@@ -162,16 +214,13 @@ namespace Pulumi.Tencentcloud.Clb
         public Input<string>? ClbId { get; set; }
 
         /// <summary>
-        /// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-        /// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-        /// when this parameter set true.
+        /// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
         /// </summary>
         [Input("deleteAllAutoRewrite")]
         public Input<bool>? DeleteAllAutoRewrite { get; set; }
 
         /// <summary>
-        /// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-        /// should be empty, the target listener must be https protocol and port is 443.
+        /// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
         /// </summary>
         [Input("isAutoRewrite")]
         public Input<bool>? IsAutoRewrite { get; set; }

@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create postgresql readonly group.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const group = new tencentcloud.Postgresql.ReadonlyGroup("group", {
+ *     masterDbInstanceId: "postgres-f44wlfdv",
+ *     maxReplayLag: 100,
+ *     maxReplayLatency: 512,
+ *     minDelayEliminateReserve: 1,
+ *     projectId: 0,
+ *     replayLagEliminate: 1,
+ *     replayLatencyEliminate: 1,
+ *     subnetId: "subnet-enm92y0m",
+ *     vpcId: "vpc-86v957zb",
+ * });
+ * ```
+ */
 export class ReadonlyGroup extends pulumi.CustomResource {
     /**
      * Get an existing ReadonlyGroup resource's state with the given name, ID, and optional extra
@@ -61,17 +83,15 @@ export class ReadonlyGroup extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number>;
     /**
-     * Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-     * instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+     * Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
     public readonly replayLagEliminate!: pulumi.Output<number>;
     /**
-     * Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-     * the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+     * Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
     public readonly replayLatencyEliminate!: pulumi.Output<number>;
     /**
-     * ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+     * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
     public readonly securityGroupsIds!: pulumi.Output<string[] | undefined>;
     /**
@@ -188,17 +208,15 @@ export interface ReadonlyGroupState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-     * instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+     * Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
     replayLagEliminate?: pulumi.Input<number>;
     /**
-     * Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-     * the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+     * Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
     replayLatencyEliminate?: pulumi.Input<number>;
     /**
-     * ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+     * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
     securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -240,17 +258,15 @@ export interface ReadonlyGroupArgs {
      */
     projectId: pulumi.Input<number>;
     /**
-     * Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-     * instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+     * Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
     replayLagEliminate: pulumi.Input<number>;
     /**
-     * Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-     * the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+     * Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
     replayLatencyEliminate: pulumi.Input<number>;
     /**
-     * ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+     * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
     securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**

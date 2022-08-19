@@ -11,20 +11,62 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a SSM secret version.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		foo, err := Ssm.NewSecret(ctx, "foo", &Ssm.SecretArgs{
+// 			SecretName:           pulumi.String("test"),
+// 			Description:          pulumi.String("test secret"),
+// 			RecoveryWindowInDays: pulumi.Int(0),
+// 			IsEnabled:            pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"test-tag": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
+// 			SecretName:   foo.SecretName,
+// 			VersionId:    pulumi.String("v1"),
+// 			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SSM secret version can be imported using the secretName#versionId, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+// ```
 type SecretVersion struct {
 	pulumi.CustomResourceState
 
-	// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-	// bytes. When secret status is `Disabled`, this field will not update anymore.
+	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretBinary pulumi.StringPtrOutput `pulumi:"secretBinary"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringOutput `pulumi:"secretName"`
-	// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-	// When secret status is `Disabled`, this field will not update anymore.
+	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretString pulumi.StringPtrOutput `pulumi:"secretString"`
-	// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-	// and hyphen '-'. The first character must be a letter or number.
+	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 }
 
@@ -63,32 +105,24 @@ func GetSecretVersion(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SecretVersion resources.
 type secretVersionState struct {
-	// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-	// bytes. When secret status is `Disabled`, this field will not update anymore.
+	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretBinary *string `pulumi:"secretBinary"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName *string `pulumi:"secretName"`
-	// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-	// When secret status is `Disabled`, this field will not update anymore.
+	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretString *string `pulumi:"secretString"`
-	// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-	// and hyphen '-'. The first character must be a letter or number.
+	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	VersionId *string `pulumi:"versionId"`
 }
 
 type SecretVersionState struct {
-	// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-	// bytes. When secret status is `Disabled`, this field will not update anymore.
+	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretBinary pulumi.StringPtrInput
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringPtrInput
-	// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-	// When secret status is `Disabled`, this field will not update anymore.
+	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretString pulumi.StringPtrInput
-	// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-	// and hyphen '-'. The first character must be a letter or number.
+	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	VersionId pulumi.StringPtrInput
 }
 
@@ -97,33 +131,25 @@ func (SecretVersionState) ElementType() reflect.Type {
 }
 
 type secretVersionArgs struct {
-	// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-	// bytes. When secret status is `Disabled`, this field will not update anymore.
+	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretBinary *string `pulumi:"secretBinary"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName string `pulumi:"secretName"`
-	// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-	// When secret status is `Disabled`, this field will not update anymore.
+	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretString *string `pulumi:"secretString"`
-	// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-	// and hyphen '-'. The first character must be a letter or number.
+	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	VersionId string `pulumi:"versionId"`
 }
 
 // The set of arguments for constructing a SecretVersion resource.
 type SecretVersionArgs struct {
-	// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-	// bytes. When secret status is `Disabled`, this field will not update anymore.
+	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretBinary pulumi.StringPtrInput
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-	// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringInput
-	// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-	// When secret status is `Disabled`, this field will not update anymore.
+	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 	SecretString pulumi.StringPtrInput
-	// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-	// and hyphen '-'. The first character must be a letter or number.
+	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	VersionId pulumi.StringInput
 }
 
@@ -214,26 +240,22 @@ func (o SecretVersionOutput) ToSecretVersionOutputWithContext(ctx context.Contex
 	return o
 }
 
-// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-// bytes. When secret status is `Disabled`, this field will not update anymore.
+// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 func (o SecretVersionOutput) SecretBinary() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringPtrOutput { return v.SecretBinary }).(pulumi.StringPtrOutput)
 }
 
-// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-// English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 func (o SecretVersionOutput) SecretName() pulumi.StringOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringOutput { return v.SecretName }).(pulumi.StringOutput)
 }
 
-// The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-// When secret status is `Disabled`, this field will not update anymore.
+// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
 func (o SecretVersionOutput) SecretString() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringPtrOutput { return v.SecretString }).(pulumi.StringPtrOutput)
 }
 
-// Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-// and hyphen '-'. The first character must be a letter or number.
+// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 func (o SecretVersionOutput) VersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringOutput { return v.VersionId }).(pulumi.StringOutput)
 }

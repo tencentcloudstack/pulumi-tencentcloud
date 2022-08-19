@@ -11,6 +11,76 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a CCN attaching resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		region := "ap-guangzhou"
+// 		if param := cfg.Get("region"); param != "" {
+// 			region = param
+// 		}
+// 		otheruin := "123353"
+// 		if param := cfg.Get("otheruin"); param != "" {
+// 			otheruin = param
+// 		}
+// 		otherccn := "ccn-151ssaga"
+// 		if param := cfg.Get("otherccn"); param != "" {
+// 			otherccn = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 			DnsServers: pulumi.StringArray{
+// 				pulumi.String("119.29.29.29"),
+// 				pulumi.String("8.8.8.8"),
+// 			},
+// 			IsMulticast: pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+// 			Description: pulumi.String("ci-temp-test-ccn-des"),
+// 			Qos:         pulumi.String("AG"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ccn.NewAttachment(ctx, "attachment", &Ccn.AttachmentArgs{
+// 			CcnId:          main.ID(),
+// 			InstanceType:   pulumi.String("VPC"),
+// 			InstanceId:     vpc.ID(),
+// 			InstanceRegion: pulumi.String(region),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ccn.NewAttachment(ctx, "otherAccount", &Ccn.AttachmentArgs{
+// 			CcnId:          pulumi.String(otherccn),
+// 			InstanceType:   pulumi.String("VPC"),
+// 			InstanceId:     vpc.ID(),
+// 			InstanceRegion: pulumi.String(region),
+// 			CcnUin:         pulumi.String(otheruin),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Attachment struct {
 	pulumi.CustomResourceState
 
@@ -18,8 +88,7 @@ type Attachment struct {
 	AttachedTime pulumi.StringOutput `pulumi:"attachedTime"`
 	// ID of the CCN.
 	CcnId pulumi.StringOutput `pulumi:"ccnId"`
-	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-	// attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 	CcnUin pulumi.StringOutput `pulumi:"ccnUin"`
 	// A network address block of the instance that is attached.
 	CidrBlocks pulumi.StringArrayOutput `pulumi:"cidrBlocks"`
@@ -27,12 +96,9 @@ type Attachment struct {
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// The region that the instance locates at.
 	InstanceRegion pulumi.StringOutput `pulumi:"instanceRegion"`
-	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-	// `VPNGW` type is only for whitelist customer now.
+	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
-	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-	// `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-	// `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State pulumi.StringOutput `pulumi:"state"`
 }
 
@@ -81,8 +147,7 @@ type attachmentState struct {
 	AttachedTime *string `pulumi:"attachedTime"`
 	// ID of the CCN.
 	CcnId *string `pulumi:"ccnId"`
-	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-	// attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 	CcnUin *string `pulumi:"ccnUin"`
 	// A network address block of the instance that is attached.
 	CidrBlocks []string `pulumi:"cidrBlocks"`
@@ -90,12 +155,9 @@ type attachmentState struct {
 	InstanceId *string `pulumi:"instanceId"`
 	// The region that the instance locates at.
 	InstanceRegion *string `pulumi:"instanceRegion"`
-	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-	// `VPNGW` type is only for whitelist customer now.
+	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType *string `pulumi:"instanceType"`
-	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-	// `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-	// `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State *string `pulumi:"state"`
 }
 
@@ -104,8 +166,7 @@ type AttachmentState struct {
 	AttachedTime pulumi.StringPtrInput
 	// ID of the CCN.
 	CcnId pulumi.StringPtrInput
-	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-	// attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 	CcnUin pulumi.StringPtrInput
 	// A network address block of the instance that is attached.
 	CidrBlocks pulumi.StringArrayInput
@@ -113,12 +174,9 @@ type AttachmentState struct {
 	InstanceId pulumi.StringPtrInput
 	// The region that the instance locates at.
 	InstanceRegion pulumi.StringPtrInput
-	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-	// `VPNGW` type is only for whitelist customer now.
+	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType pulumi.StringPtrInput
-	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-	// `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-	// `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State pulumi.StringPtrInput
 }
 
@@ -129,15 +187,13 @@ func (AttachmentState) ElementType() reflect.Type {
 type attachmentArgs struct {
 	// ID of the CCN.
 	CcnId string `pulumi:"ccnId"`
-	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-	// attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 	CcnUin *string `pulumi:"ccnUin"`
 	// ID of instance is attached.
 	InstanceId string `pulumi:"instanceId"`
 	// The region that the instance locates at.
 	InstanceRegion string `pulumi:"instanceRegion"`
-	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-	// `VPNGW` type is only for whitelist customer now.
+	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType string `pulumi:"instanceType"`
 }
 
@@ -145,15 +201,13 @@ type attachmentArgs struct {
 type AttachmentArgs struct {
 	// ID of the CCN.
 	CcnId pulumi.StringInput
-	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-	// attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 	CcnUin pulumi.StringPtrInput
 	// ID of instance is attached.
 	InstanceId pulumi.StringInput
 	// The region that the instance locates at.
 	InstanceRegion pulumi.StringInput
-	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-	// `VPNGW` type is only for whitelist customer now.
+	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType pulumi.StringInput
 }
 
@@ -254,8 +308,7 @@ func (o AttachmentOutput) CcnId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.CcnId }).(pulumi.StringOutput)
 }
 
-// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-// attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 func (o AttachmentOutput) CcnUin() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.CcnUin }).(pulumi.StringOutput)
 }
@@ -275,15 +328,12 @@ func (o AttachmentOutput) InstanceRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.InstanceRegion }).(pulumi.StringOutput)
 }
 
-// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-// `VPNGW` type is only for whitelist customer now.
+// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 func (o AttachmentOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-// `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-// `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 func (o AttachmentOutput) State() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.State }).(pulumi.StringOutput)
 }

@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Ckafka.Outputs
     [OutputType]
     public sealed class InstanceConfig
     {
+        /// <summary>
+        /// Automatic creation. true: enabled, false: not enabled.
+        /// </summary>
         public readonly bool AutoCreateTopicEnable;
+        /// <summary>
+        /// If auto.create.topic.enable is set to true and this value is not set, 3 will be used by default.
+        /// </summary>
         public readonly int DefaultNumPartitions;
+        /// <summary>
+        /// If auto.create.topic.enable is set to true but this value is not set, 2 will be used by default.
+        /// </summary>
         public readonly int DefaultReplicationFactor;
 
         [OutputConstructor]

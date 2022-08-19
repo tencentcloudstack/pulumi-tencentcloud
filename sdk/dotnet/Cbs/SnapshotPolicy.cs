@@ -9,6 +9,46 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cbs
 {
+    /// <summary>
+    /// Provides a snapshot policy resource.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var snapshotPolicy = new Tencentcloud.Cbs.SnapshotPolicy("snapshotPolicy", new Tencentcloud.Cbs.SnapshotPolicyArgs
+    ///         {
+    ///             RepeatHours = 
+    ///             {
+    ///                 1,
+    ///             },
+    ///             RepeatWeekdays = 
+    ///             {
+    ///                 1,
+    ///                 4,
+    ///             },
+    ///             RetentionDays = 7,
+    ///             SnapshotPolicyName = "mysnapshotpolicyname",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CBS snapshot policy can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy")]
     public partial class SnapshotPolicy : Pulumi.CustomResource
     {

@@ -9,27 +9,55 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.As
 {
+    /// <summary>
+    /// Provides a resource for an AS (Auto scaling) policy.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var scalingPolicy = new Tencentcloud.As.ScalingPolicy("scalingPolicy", new Tencentcloud.As.ScalingPolicyArgs
+    ///         {
+    ///             AdjustmentType = "EXACT_CAPACITY",
+    ///             AdjustmentValue = 0,
+    ///             ComparisonOperator = "GREATER_THAN",
+    ///             ContinuousTime = 10,
+    ///             Cooldown = 360,
+    ///             MetricName = "CPU_UTILIZATION",
+    ///             Period = 300,
+    ///             PolicyName = "tf-as-scaling-policy",
+    ///             ScalingGroupId = "asg-n32ymck2",
+    ///             Statistic = "AVERAGE",
+    ///             Threshold = 80,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:As/scalingPolicy:ScalingPolicy")]
     public partial class ScalingPolicy : Pulumi.CustomResource
     {
         /// <summary>
-        /// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-        /// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        /// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
         /// </summary>
         [Output("adjustmentType")]
         public Output<string> AdjustmentType { get; private set; } = null!;
 
         /// <summary>
-        /// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-        /// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-        /// type, it defines an absolute number of the existing Auto Scaling group size.
+        /// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
         /// </summary>
         [Output("adjustmentValue")]
         public Output<int> AdjustmentValue { get; private set; } = null!;
 
         /// <summary>
-        /// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-        /// `EQUAL_TO` and `NOT_EQUAL_TO`.
+        /// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         /// </summary>
         [Output("comparisonOperator")]
         public Output<string> ComparisonOperator { get; private set; } = null!;
@@ -47,8 +75,7 @@ namespace Pulumi.Tencentcloud.As
         public Output<int?> Cooldown { get; private set; } = null!;
 
         /// <summary>
-        /// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-        /// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        /// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         /// </summary>
         [Output("metricName")]
         public Output<string> MetricName { get; private set; } = null!;
@@ -136,23 +163,19 @@ namespace Pulumi.Tencentcloud.As
     public sealed class ScalingPolicyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-        /// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        /// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
         /// </summary>
         [Input("adjustmentType", required: true)]
         public Input<string> AdjustmentType { get; set; } = null!;
 
         /// <summary>
-        /// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-        /// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-        /// type, it defines an absolute number of the existing Auto Scaling group size.
+        /// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
         /// </summary>
         [Input("adjustmentValue", required: true)]
         public Input<int> AdjustmentValue { get; set; } = null!;
 
         /// <summary>
-        /// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-        /// `EQUAL_TO` and `NOT_EQUAL_TO`.
+        /// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         /// </summary>
         [Input("comparisonOperator", required: true)]
         public Input<string> ComparisonOperator { get; set; } = null!;
@@ -170,8 +193,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<int>? Cooldown { get; set; }
 
         /// <summary>
-        /// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-        /// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        /// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         /// </summary>
         [Input("metricName", required: true)]
         public Input<string> MetricName { get; set; } = null!;
@@ -226,23 +248,19 @@ namespace Pulumi.Tencentcloud.As
     public sealed class ScalingPolicyState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-        /// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        /// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
         /// </summary>
         [Input("adjustmentType")]
         public Input<string>? AdjustmentType { get; set; }
 
         /// <summary>
-        /// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-        /// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-        /// type, it defines an absolute number of the existing Auto Scaling group size.
+        /// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
         /// </summary>
         [Input("adjustmentValue")]
         public Input<int>? AdjustmentValue { get; set; }
 
         /// <summary>
-        /// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-        /// `EQUAL_TO` and `NOT_EQUAL_TO`.
+        /// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         /// </summary>
         [Input("comparisonOperator")]
         public Input<string>? ComparisonOperator { get; set; }
@@ -260,8 +278,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<int>? Cooldown { get; set; }
 
         /// <summary>
-        /// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-        /// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        /// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         /// </summary>
         [Input("metricName")]
         public Input<string>? MetricName { get; set; }

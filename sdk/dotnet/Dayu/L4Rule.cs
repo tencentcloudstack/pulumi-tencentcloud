@@ -9,6 +9,55 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
+    /// <summary>
+    /// Use this resource to create dayu layer 4 rule
+    /// 
+    /// &gt; **NOTE:** This resource only support resource Anti-DDoS of type `bgpip` and `net`
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var testRule = new Tencentcloud.Dayu.L4Rule("testRule", new Tencentcloud.Dayu.L4RuleArgs
+    ///         {
+    ///             DPort = 60,
+    ///             HealthCheckHealthNum = 5,
+    ///             HealthCheckInterval = 35,
+    ///             HealthCheckSwitch = true,
+    ///             HealthCheckTimeout = 30,
+    ///             HealthCheckUnhealthNum = 10,
+    ///             Protocol = "TCP",
+    ///             ResourceId = "bgpip-00000294",
+    ///             ResourceType = "bgpip",
+    ///             SPort = 80,
+    ///             SessionSwitch = false,
+    ///             SessionTime = 300,
+    ///             SourceLists = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.L4RuleSourceListArgs
+    ///                 {
+    ///                     Source = "1.1.1.1",
+    ///                     Weight = 100,
+    ///                 },
+    ///                 new Tencentcloud.Dayu.Inputs.L4RuleSourceListArgs
+    ///                 {
+    ///                     Source = "2.2.2.2",
+    ///                     Weight = 50,
+    ///                 },
+    ///             },
+    ///             SourceType = 2,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l4Rule:L4Rule")]
     public partial class L4Rule : Pulumi.CustomResource
     {
@@ -19,8 +68,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<int> DPort { get; private set; } = null!;
 
         /// <summary>
-        /// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-        /// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        /// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         /// </summary>
         [Output("healthCheckHealthNum")]
         public Output<int> HealthCheckHealthNum { get; private set; } = null!;
@@ -32,8 +80,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<int> HealthCheckInterval { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-        /// item.
+        /// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         /// </summary>
         [Output("healthCheckSwitch")]
         public Output<bool> HealthCheckSwitch { get; private set; } = null!;
@@ -45,8 +92,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<int> HealthCheckTimeout { get; private set; } = null!;
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-        /// indicates that the forwarding is abnormal. The value range is 2-10.
+        /// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         /// </summary>
         [Output("healthCheckUnhealthNum")]
         public Output<int> HealthCheckUnhealthNum { get; private set; } = null!;
@@ -64,8 +110,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-        /// only set with `tcp`.
+        /// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         /// </summary>
         [Output("protocol")]
         public Output<string> Protocol { get; private set; } = null!;
@@ -101,15 +146,13 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<bool?> SessionSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-        /// second.
+        /// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         /// </summary>
         [Output("sessionTime")]
         public Output<int> SessionTime { get; private set; } = null!;
 
         /// <summary>
-        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        /// 20.
+        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         /// </summary>
         [Output("sourceLists")]
         public Output<ImmutableArray<Outputs.L4RuleSourceList>> SourceLists { get; private set; } = null!;
@@ -173,8 +216,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int> DPort { get; set; } = null!;
 
         /// <summary>
-        /// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-        /// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        /// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         /// </summary>
         [Input("healthCheckHealthNum")]
         public Input<int>? HealthCheckHealthNum { get; set; }
@@ -186,8 +228,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int>? HealthCheckInterval { get; set; }
 
         /// <summary>
-        /// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-        /// item.
+        /// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         /// </summary>
         [Input("healthCheckSwitch")]
         public Input<bool>? HealthCheckSwitch { get; set; }
@@ -199,8 +240,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int>? HealthCheckTimeout { get; set; }
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-        /// indicates that the forwarding is abnormal. The value range is 2-10.
+        /// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         /// </summary>
         [Input("healthCheckUnhealthNum")]
         public Input<int>? HealthCheckUnhealthNum { get; set; }
@@ -212,8 +252,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-        /// only set with `tcp`.
+        /// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
@@ -243,8 +282,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<bool>? SessionSwitch { get; set; }
 
         /// <summary>
-        /// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-        /// second.
+        /// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         /// </summary>
         [Input("sessionTime")]
         public Input<int>? SessionTime { get; set; }
@@ -253,8 +291,7 @@ namespace Pulumi.Tencentcloud.Dayu
         private InputList<Inputs.L4RuleSourceListArgs>? _sourceLists;
 
         /// <summary>
-        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        /// 20.
+        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         /// </summary>
         public InputList<Inputs.L4RuleSourceListArgs> SourceLists
         {
@@ -282,8 +319,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int>? DPort { get; set; }
 
         /// <summary>
-        /// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3
-        /// consecutive times, indicates that the forwarding is normal. The value range is 2-10.
+        /// Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
         /// </summary>
         [Input("healthCheckHealthNum")]
         public Input<int>? HealthCheckHealthNum { get; set; }
@@ -295,8 +331,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int>? HealthCheckInterval { get; set; }
 
         /// <summary>
-        /// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source
-        /// item.
+        /// Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
         /// </summary>
         [Input("healthCheckSwitch")]
         public Input<bool>? HealthCheckSwitch { get; set; }
@@ -308,8 +343,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int>? HealthCheckTimeout { get; set; }
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times,
-        /// indicates that the forwarding is abnormal. The value range is 2-10.
+        /// Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
         /// </summary>
         [Input("healthCheckUnhealthNum")]
         public Input<int>? HealthCheckUnhealthNum { get; set; }
@@ -327,8 +361,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can
-        /// only set with `tcp`.
+        /// Protocol of the rule. Valid values: `http`, `https`. When `source_type` is 1(host source), the value of this field can only set with `tcp`.
         /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
@@ -364,8 +397,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<bool>? SessionSwitch { get; set; }
 
         /// <summary>
-        /// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is
-        /// second.
+        /// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         /// </summary>
         [Input("sessionTime")]
         public Input<int>? SessionTime { get; set; }
@@ -374,8 +406,7 @@ namespace Pulumi.Tencentcloud.Dayu
         private InputList<Inputs.L4RuleSourceListGetArgs>? _sourceLists;
 
         /// <summary>
-        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        /// 20.
+        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
         /// </summary>
         public InputList<Inputs.L4RuleSourceListGetArgs> SourceLists
         {

@@ -8,10 +8,10 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
-__all__ = ['RoleSSOArgs', 'RoleSSO']
+__all__ = ['RoleSsoArgs', 'RoleSso']
 
 @pulumi.input_type
-class RoleSSOArgs:
+class RoleSsoArgs:
     def __init__(__self__, *,
                  client_ids: pulumi.Input[Sequence[pulumi.Input[str]]],
                  identity_key: pulumi.Input[str],
@@ -19,7 +19,7 @@ class RoleSSOArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
-        The set of arguments for constructing a RoleSSO resource.
+        The set of arguments for constructing a RoleSso resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_ids: Client ids.
         :param pulumi.Input[str] identity_key: Sign the public key.
         :param pulumi.Input[str] identity_url: Identity provider URL.
@@ -96,7 +96,7 @@ class RoleSSOArgs:
 
 
 @pulumi.input_type
-class _RoleSSOState:
+class _RoleSsoState:
     def __init__(__self__, *,
                  client_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  description: Optional[pulumi.Input[str]] = None,
@@ -104,7 +104,7 @@ class _RoleSSOState:
                  identity_url: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering RoleSSO resources.
+        Input properties used for looking up and filtering RoleSso resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_ids: Client ids.
         :param pulumi.Input[str] description: The description of resource.
         :param pulumi.Input[str] identity_key: Sign the public key.
@@ -183,7 +183,7 @@ class _RoleSSOState:
         pulumi.set(self, "name", value)
 
 
-class RoleSSO(pulumi.CustomResource):
+class RoleSso(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -195,7 +195,29 @@ class RoleSSO(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a RoleSSO resource with the given unique name, props, and options.
+        Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.RoleSso("foo",
+            client_ids=["..."],
+            description="this is a description",
+            identity_key="...",
+            identity_url="https://login.microsoftonline.com/.../v2.0")
+        ```
+
+        ## Import
+
+        CAM-ROLE-SSO can be imported using the `name`, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_ids: Client ids.
@@ -208,17 +230,39 @@ class RoleSSO(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: RoleSSOArgs,
+                 args: RoleSsoArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a RoleSSO resource with the given unique name, props, and options.
+        Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.RoleSso("foo",
+            client_ids=["..."],
+            description="this is a description",
+            identity_key="...",
+            identity_url="https://login.microsoftonline.com/.../v2.0")
+        ```
+
+        ## Import
+
+        CAM-ROLE-SSO can be imported using the `name`, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+        ```
+
         :param str resource_name: The name of the resource.
-        :param RoleSSOArgs args: The arguments to use to populate this resource's properties.
+        :param RoleSsoArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(RoleSSOArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(RoleSsoArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -242,7 +286,7 @@ class RoleSSO(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = RoleSSOArgs.__new__(RoleSSOArgs)
+            __props__ = RoleSsoArgs.__new__(RoleSsoArgs)
 
             if client_ids is None and not opts.urn:
                 raise TypeError("Missing required property 'client_ids'")
@@ -255,8 +299,8 @@ class RoleSSO(pulumi.CustomResource):
                 raise TypeError("Missing required property 'identity_url'")
             __props__.__dict__["identity_url"] = identity_url
             __props__.__dict__["name"] = name
-        super(RoleSSO, __self__).__init__(
-            'tencentcloud:Cam/roleSSO:RoleSSO',
+        super(RoleSso, __self__).__init__(
+            'tencentcloud:Cam/roleSso:RoleSso',
             resource_name,
             __props__,
             opts)
@@ -269,9 +313,9 @@ class RoleSSO(pulumi.CustomResource):
             description: Optional[pulumi.Input[str]] = None,
             identity_key: Optional[pulumi.Input[str]] = None,
             identity_url: Optional[pulumi.Input[str]] = None,
-            name: Optional[pulumi.Input[str]] = None) -> 'RoleSSO':
+            name: Optional[pulumi.Input[str]] = None) -> 'RoleSso':
         """
-        Get an existing RoleSSO resource's state with the given name, id, and optional extra
+        Get an existing RoleSso resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -285,14 +329,14 @@ class RoleSSO(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _RoleSSOState.__new__(_RoleSSOState)
+        __props__ = _RoleSsoState.__new__(_RoleSsoState)
 
         __props__.__dict__["client_ids"] = client_ids
         __props__.__dict__["description"] = description
         __props__.__dict__["identity_key"] = identity_key
         __props__.__dict__["identity_url"] = identity_url
         __props__.__dict__["name"] = name
-        return RoleSSO(resource_name, opts=opts, __props__=__props__)
+        return RoleSso(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="clientIds")

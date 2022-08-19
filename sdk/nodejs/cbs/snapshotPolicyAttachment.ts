@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a CBS snapshot policy attachment resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.cbs.SnapshotPolicyAttachment("foo", {
+ *     storageId: tencentcloud_cbs_storage.foo.id,
+ *     snapshotPolicyId: tencentcloud_cbs_snapshot_policy.policy.id,
+ * });
+ * ```
+ */
 export class SnapshotPolicyAttachment extends pulumi.CustomResource {
     /**
      * Get an existing SnapshotPolicyAttachment resource's state with the given name, ID, and optional extra

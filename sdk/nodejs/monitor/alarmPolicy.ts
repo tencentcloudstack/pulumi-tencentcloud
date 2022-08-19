@@ -5,6 +5,215 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a alarm policy resource for monitor.
+ *
+ * ## Example Usage
+ *
+ * cvmDevice alarm policy
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const group = new tencentcloud.Monitor.AlarmPolicy("group", {
+ *     conditions: {
+ *         isUnionRule: 1,
+ *         rules: [{
+ *             continuePeriod: 1,
+ *             isPowerNotice: 0,
+ *             metricName: "CpuUsage",
+ *             noticeFrequency: 3600,
+ *             operator: "ge",
+ *             period: 60,
+ *             value: "89.9",
+ *         }],
+ *     },
+ *     enable: 1,
+ *     eventConditions: [
+ *         {
+ *             metricName: "ping_unreachable",
+ *         },
+ *         {
+ *             metricName: "guest_reboot",
+ *         },
+ *     ],
+ *     monitorType: "MT_QCE",
+ *     namespace: "cvm_device",
+ *     noticeIds: ["notice-l9ziyxw6"],
+ *     policyName: "hello",
+ *     projectId: 1244035,
+ *     triggerTasks: [{
+ *         taskConfig: "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+ *         type: "AS",
+ *     }],
+ * });
+ * ```
+ *
+ * k8sCluster alarm policy
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
+ *     enable: 1,
+ *     monitorType: "MT_QCE",
+ *     namespace: "k8s_cluster",
+ *     noticeIds: ["notice-l9ziyxw6"],
+ *     policyName: "TkeClusterNew",
+ *     projectId: 1244035,
+ *     conditions: {
+ *         isUnionRule: 0,
+ *         rules: [
+ *             {
+ *                 continuePeriod: 3,
+ *                 description: "Allocatable Pods",
+ *                 isPowerNotice: 0,
+ *                 metricName: "K8sClusterAllocatablePodsTotal",
+ *                 noticeFrequency: 3600,
+ *                 operator: "gt",
+ *                 period: 60,
+ *                 ruleType: "STATIC",
+ *                 unit: "Count",
+ *                 value: "10",
+ *                 filter: {
+ *                     dimensions: JSON.stringify([[
+ *                         {
+ *                             Key: "region",
+ *                             Operator: "eq",
+ *                             Value: ["ap-guangzhou"],
+ *                         },
+ *                         {
+ *                             Key: "tke_cluster_instance_id",
+ *                             Operator: "in",
+ *                             Value: ["cls-czhtobea"],
+ *                         },
+ *                     ]]),
+ *                     type: "DIMENSION",
+ *                 },
+ *             },
+ *             {
+ *                 continuePeriod: 3,
+ *                 description: "Total CPU Cores",
+ *                 isPowerNotice: 0,
+ *                 metricName: "K8sClusterCpuCoreTotal",
+ *                 noticeFrequency: 3600,
+ *                 operator: "gt",
+ *                 period: 60,
+ *                 ruleType: "STATIC",
+ *                 unit: "Core",
+ *                 value: "2",
+ *                 filter: {
+ *                     dimensions: JSON.stringify([[
+ *                         {
+ *                             Key: "region",
+ *                             Operator: "eq",
+ *                             Value: ["ap-guangzhou"],
+ *                         },
+ *                         {
+ *                             Key: "tke_cluster_instance_id",
+ *                             Operator: "in",
+ *                             Value: ["cls-czhtobea"],
+ *                         },
+ *                     ]]),
+ *                     type: "DIMENSION",
+ *                 },
+ *             },
+ *         ],
+ *     },
+ * });
+ * ```
+ *
+ * cvmDevice alarm policy binding cvm by tag
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const policy = new tencentcloud.Monitor.AlarmPolicy("policy", {
+ *     conditions: {
+ *         isUnionRule: 0,
+ *         rules: [
+ *             {
+ *                 continuePeriod: 5,
+ *                 description: "CPUUtilization",
+ *                 isPowerNotice: 0,
+ *                 metricName: "CpuUsage",
+ *                 noticeFrequency: 7200,
+ *                 operator: "gt",
+ *                 period: 60,
+ *                 ruleType: "STATIC",
+ *                 unit: "%",
+ *                 value: "95",
+ *             },
+ *             {
+ *                 continuePeriod: 5,
+ *                 description: "PublicBandwidthUtilization",
+ *                 isPowerNotice: 0,
+ *                 metricName: "Outratio",
+ *                 noticeFrequency: 7200,
+ *                 operator: "gt",
+ *                 period: 60,
+ *                 ruleType: "STATIC",
+ *                 unit: "%",
+ *                 value: "95",
+ *             },
+ *             {
+ *                 continuePeriod: 5,
+ *                 description: "MemoryUtilization",
+ *                 isPowerNotice: 0,
+ *                 metricName: "MemUsage",
+ *                 noticeFrequency: 7200,
+ *                 operator: "gt",
+ *                 period: 60,
+ *                 ruleType: "STATIC",
+ *                 unit: "%",
+ *                 value: "95",
+ *             },
+ *             {
+ *                 continuePeriod: 5,
+ *                 description: "DiskUtilization",
+ *                 isPowerNotice: 0,
+ *                 metricName: "CvmDiskUsage",
+ *                 noticeFrequency: 7200,
+ *                 operator: "gt",
+ *                 period: 60,
+ *                 ruleType: "STATIC",
+ *                 unit: "%",
+ *                 value: "95",
+ *             },
+ *         ],
+ *     },
+ *     enable: 1,
+ *     eventConditions: [{
+ *         continuePeriod: 0,
+ *         description: "DiskReadonly",
+ *         isPowerNotice: 0,
+ *         metricName: "disk_readonly",
+ *         noticeFrequency: 0,
+ *         period: 0,
+ *     }],
+ *     monitorType: "MT_QCE",
+ *     namespace: "cvm_device",
+ *     noticeIds: ["notice-l9ziyxw6"],
+ *     policyName: "policy",
+ *     policyTags: [{
+ *         key: "test-tag",
+ *         value: "unit-test",
+ *     }],
+ *     projectId: 0,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Alarm policy instance can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
+ * ```
+ */
 export class AlarmPolicy extends pulumi.CustomResource {
     /**
      * Get an existing AlarmPolicy resource's state with the given name, ID, and optional extra
