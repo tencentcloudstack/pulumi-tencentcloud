@@ -31,29 +31,29 @@ const (
 )
 
 // Provider returns additional overlaid schema and metadata associated with the provider.
-//go generate:
+// go generate:
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
 	p := shimv2.NewProvider(tencentcloud.Provider())
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		P:    p,
-		Name: "tencentcloud",
+		P:           p,
+		Name:        "tencentcloud",
 		DisplayName: "Tencentcloud",
-		Publisher: "TencentCloudStack",
-		LogoURL: "",
+		Publisher:   "TencentCloudStack",
+		LogoURL:     "",
 		// PluginDownloadURL is an optional URL used to download the Provider
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/
-		PluginDownloadURL: "",
+		PluginDownloadURL: "github://api.github.com/tencentcloudstack",
 		Description:       "A Pulumi package for creating and managing tencentcloud cloud resources.",
-		Keywords:   []string{"pulumi", "tencentcloud", "category/cloud"},
-		License:    "Apache-2.0",
-		Homepage:   "https://www.pulumi.com",
-		Repository: "https://github.com/tencentcloudstack/pulumi-tencentcloud",
-		GitHubOrg: "tencentcloudstack",
-		Config:    map[string]*tfbridge.SchemaInfo{
+		Keywords:          []string{"pulumi", "tencentcloud", "category/cloud"},
+		License:           "Apache-2.0",
+		Homepage:          "https://www.pulumi.com",
+		Repository:        "https://github.com/tencentcloudstack/pulumi-tencentcloud",
+		GitHubOrg:         "tencentcloudstack",
+		Config: map[string]*tfbridge.SchemaInfo{
 			"region": {
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"TENCENTCLOUD_REGION"},
@@ -75,8 +75,8 @@ func Provider() tfbridge.ProviderInfo {
 				},
 			},
 		},
-		Resources:            info.GetResourceInfo(mainPkg),
-		DataSources:          info.GetDataSourceInfo(mainPkg),
+		Resources:   info.GetResourceInfo(mainPkg),
+		DataSources: info.GetDataSourceInfo(mainPkg),
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -85,11 +85,13 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 				"@types/mime": "^2.0.0",
 			},
+			PackageName: "@tencent/pulumi-tencentcloud", // FIXME: change this to an appropriate packagename
 		},
 		Python: &tfbridge.PythonInfo{
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
+			PackageName: "tencent_pulumi_tencentcloud", // FIXME: change this to an appropriate packagename
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
@@ -104,6 +106,7 @@ func Provider() tfbridge.ProviderInfo {
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
+			RootNamespace: "Tencent.PulumiPackage", // FIXME: change this to an appropriate packagename
 		},
 	}
 
