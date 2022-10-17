@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.2.0.0/16"});
  * const sub = new tencentcloud.subnet.Instance("sub", {

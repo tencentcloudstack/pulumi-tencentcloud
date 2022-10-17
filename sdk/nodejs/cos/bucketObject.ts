@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const mycos = new tencentcloud.cos.Bucket("mycos", {
  *     bucket: "mycos-1258798060",

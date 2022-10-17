@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Tencentcloud
+namespace TencentCloudIAC.PulumiPackage.Tencentcloud
 {
     public static class Config
     {
@@ -32,11 +32,11 @@ namespace Pulumi.Tencentcloud
 
         private static readonly Pulumi.Config __config = new Pulumi.Config("tencentcloud");
 
-        private static readonly __Value<Pulumi.Tencentcloud.Config.Types.AssumeRole?> _assumeRole = new __Value<Pulumi.Tencentcloud.Config.Types.AssumeRole?>(() => __config.GetObject<Pulumi.Tencentcloud.Config.Types.AssumeRole>("assumeRole"));
+        private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole?> _assumeRole = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole>("assumeRole"));
         /// <summary>
         /// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
         /// </summary>
-        public static Pulumi.Tencentcloud.Config.Types.AssumeRole? AssumeRole
+        public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole? AssumeRole
         {
             get => _assumeRole.Get();
             set => _assumeRole.Set(value);

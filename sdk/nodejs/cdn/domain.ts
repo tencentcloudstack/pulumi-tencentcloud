@@ -97,7 +97,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const bucket = new tencentcloud.cos.Bucket("bucket", {
  *     bucket: "demo-bucket-1251234567",
