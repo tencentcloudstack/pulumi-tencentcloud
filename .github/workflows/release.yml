@@ -3,7 +3,7 @@ on:
   push:
     tags:
       - v*.*.*
-      - v*.*.*-**
+      - "!v*.*.*-**"
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
