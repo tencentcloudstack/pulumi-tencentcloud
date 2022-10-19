@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ha.NewVip(ctx, "foo", &Ha.VipArgs{
-// 			SubnetId: pulumi.String("subnet-4d4m4cd4s"),
-// 			Vip:      pulumi.String("10.0.4.16"),
-// 			VpcId:    pulumi.String("vpc-gzea3dd7"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ha.NewVip(ctx, "foo", &Ha.VipArgs{
+//				SubnetId: pulumi.String("subnet-4d4m4cd4s"),
+//				Vip:      pulumi.String("10.0.4.16"),
+//				VpcId:    pulumi.String("vpc-gzea3dd7"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // HA VIP can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
+//
+//	$ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
+//
 // ```
 type Vip struct {
 	pulumi.CustomResourceState
@@ -197,7 +202,7 @@ func (i *Vip) ToVipOutputWithContext(ctx context.Context) VipOutput {
 // VipArrayInput is an input type that accepts VipArray and VipArrayOutput values.
 // You can construct a concrete instance of `VipArrayInput` via:
 //
-//          VipArray{ VipArgs{...} }
+//	VipArray{ VipArgs{...} }
 type VipArrayInput interface {
 	pulumi.Input
 
@@ -222,7 +227,7 @@ func (i VipArray) ToVipArrayOutputWithContext(ctx context.Context) VipArrayOutpu
 // VipMapInput is an input type that accepts VipMap and VipMapOutput values.
 // You can construct a concrete instance of `VipMapInput` via:
 //
-//          VipMap{ "key": VipArgs{...} }
+//	VipMap{ "key": VipArgs{...} }
 type VipMapInput interface {
 	pulumi.Input
 

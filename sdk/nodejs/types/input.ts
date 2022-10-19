@@ -144,6 +144,7 @@ export namespace ApiGateway {
          */
         serviceName?: pulumi.Input<string>;
     }
+
 }
 
 export namespace As {
@@ -1090,24 +1091,12 @@ export namespace Cdn {
          */
         url?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Cfs {
 }
 
 export namespace Ckafka {
-    export interface GetInstancesFilterArgs {
-        /**
-         * The field that needs to be filtered.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * The filtered value of the field.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetInstancesFilter {
         /**
          * The field that needs to be filtered.
@@ -1117,6 +1106,17 @@ export namespace Ckafka {
          * The filtered value of the field.
          */
         values: string[];
+    }
+
+    export interface GetInstancesFilterArgs {
+        /**
+         * The field that needs to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * The filtered value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceConfig {
@@ -2629,6 +2629,7 @@ export namespace Dayu {
         source: pulumi.Input<string>;
         weight: pulumi.Input<number>;
     }
+
 }
 
 export namespace Dc {
@@ -3158,7 +3159,6 @@ export namespace Gaap {
          */
         weight?: pulumi.Input<number>;
     }
-
 }
 
 export namespace Ha {
@@ -4363,7 +4363,6 @@ export namespace Kubernetes {
          */
         lanIp?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Lighthouse {
@@ -4641,17 +4640,6 @@ export namespace Monitor {
         startTime?: pulumi.Input<number>;
     }
 
-    export interface GetDataDimension {
-        /**
-         * Instance dimension name, eg: `InstanceId` for cvm.
-         */
-        name: string;
-        /**
-         * Instance dimension value, eg: `ins-j0hk02zo` for cvm.
-         */
-        value: string;
-    }
-
     export interface GetDataDimensionArgs {
         /**
          * Instance dimension name, eg: `InstanceId` for cvm.
@@ -4663,15 +4651,15 @@ export namespace Monitor {
         value: pulumi.Input<string>;
     }
 
-    export interface GetProductEventDimensionArgs {
+    export interface GetDataDimension {
         /**
-         * Instance dimension name, eg: `deviceWanIp` for internet ip.
+         * Instance dimension name, eg: `InstanceId` for cvm.
          */
-        name?: pulumi.Input<string>;
+        name: string;
         /**
-         * Instance dimension value, eg: `119.119.119.119` for internet ip.
+         * Instance dimension value, eg: `ins-j0hk02zo` for cvm.
          */
-        value?: pulumi.Input<string>;
+        value: string;
     }
 
     export interface GetProductEventDimension {
@@ -4683,6 +4671,17 @@ export namespace Monitor {
          * Instance dimension value, eg: `119.119.119.119` for internet ip.
          */
         value?: string;
+    }
+
+    export interface GetProductEventDimensionArgs {
+        /**
+         * Instance dimension name, eg: `deviceWanIp` for internet ip.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Instance dimension value, eg: `119.119.119.119` for internet ip.
+         */
+        value?: pulumi.Input<string>;
     }
 
     export interface PolicyBindingObjectDimension {
@@ -5295,7 +5294,6 @@ export namespace Sqlserver {
          */
         publishDatabase: pulumi.Input<string>;
     }
-
 }
 
 export namespace Ssl {

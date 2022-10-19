@@ -18,62 +18,65 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
-// 			NetworkType: pulumi.String("OPEN"),
-// 			ClbName:     pulumi.String("tf-clb-rule-basic"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		listenerBasic, err := Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
-// 			ClbId:        clbBasic.ID(),
-// 			Port:         pulumi.Int(1),
-// 			Protocol:     pulumi.String("HTTP"),
-// 			ListenerName: pulumi.String("listener_basic"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ruleBasic, err := Clb.NewListenerRule(ctx, "ruleBasic", &Clb.ListenerRuleArgs{
-// 			ClbId:             clbBasic.ID(),
-// 			ListenerId:        listenerBasic.ListenerId,
-// 			Domain:            pulumi.String("abc.com"),
-// 			Url:               pulumi.String("/"),
-// 			SessionExpireTime: pulumi.Int(30),
-// 			Scheduler:         pulumi.String("WRR"),
-// 			TargetType:        pulumi.String("TARGETGROUP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		test, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-// 			TargetGroupName: pulumi.String("test-target-keep-1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clb.NewTargetGroupAttachment(ctx, "group", &Clb.TargetGroupAttachmentArgs{
-// 			ClbId:         clbBasic.ID(),
-// 			ListenerId:    listenerBasic.ListenerId,
-// 			RuleId:        ruleBasic.RuleId,
-// 			TargrtGroupId: test.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Clb.GetTargetGroupsOutput(ctx, clb.GetTargetGroupsOutputArgs{
-// 			TargetGroupId: test.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
+//				NetworkType: pulumi.String("OPEN"),
+//				ClbName:     pulumi.String("tf-clb-rule-basic"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			listenerBasic, err := Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
+//				ClbId:        clbBasic.ID(),
+//				Port:         pulumi.Int(1),
+//				Protocol:     pulumi.String("HTTP"),
+//				ListenerName: pulumi.String("listener_basic"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ruleBasic, err := Clb.NewListenerRule(ctx, "ruleBasic", &Clb.ListenerRuleArgs{
+//				ClbId:             clbBasic.ID(),
+//				ListenerId:        listenerBasic.ListenerId,
+//				Domain:            pulumi.String("abc.com"),
+//				Url:               pulumi.String("/"),
+//				SessionExpireTime: pulumi.Int(30),
+//				Scheduler:         pulumi.String("WRR"),
+//				TargetType:        pulumi.String("TARGETGROUP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			test, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+//				TargetGroupName: pulumi.String("test-target-keep-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clb.NewTargetGroupAttachment(ctx, "group", &Clb.TargetGroupAttachmentArgs{
+//				ClbId:         clbBasic.ID(),
+//				ListenerId:    listenerBasic.ListenerId,
+//				RuleId:        ruleBasic.RuleId,
+//				TargrtGroupId: test.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Clb.GetTargetGroupsOutput(ctx, clb.GetTargetGroupsOutputArgs{
+//				TargetGroupId: test.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTargetGroups(ctx *pulumi.Context, args *GetTargetGroupsArgs, opts ...pulumi.InvokeOption) (*GetTargetGroupsResult, error) {
 	var rv GetTargetGroupsResult

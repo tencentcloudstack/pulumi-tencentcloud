@@ -24,7 +24,7 @@ type GetGroupMembershipsMembershipList struct {
 // GetGroupMembershipsMembershipListInput is an input type that accepts GetGroupMembershipsMembershipListArgs and GetGroupMembershipsMembershipListOutput values.
 // You can construct a concrete instance of `GetGroupMembershipsMembershipListInput` via:
 //
-//          GetGroupMembershipsMembershipListArgs{...}
+//	GetGroupMembershipsMembershipListArgs{...}
 type GetGroupMembershipsMembershipListInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i GetGroupMembershipsMembershipListArgs) ToGetGroupMembershipsMembershipLi
 // GetGroupMembershipsMembershipListArrayInput is an input type that accepts GetGroupMembershipsMembershipListArray and GetGroupMembershipsMembershipListArrayOutput values.
 // You can construct a concrete instance of `GetGroupMembershipsMembershipListArrayInput` via:
 //
-//          GetGroupMembershipsMembershipListArray{ GetGroupMembershipsMembershipListArgs{...} }
+//	GetGroupMembershipsMembershipListArray{ GetGroupMembershipsMembershipListArgs{...} }
 type GetGroupMembershipsMembershipListArrayInput interface {
 	pulumi.Input
 
@@ -149,7 +149,7 @@ type GetGroupPolicyAttachmentsGroupPolicyAttachmentList struct {
 // GetGroupPolicyAttachmentsGroupPolicyAttachmentListInput is an input type that accepts GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs and GetGroupPolicyAttachmentsGroupPolicyAttachmentListOutput values.
 // You can construct a concrete instance of `GetGroupPolicyAttachmentsGroupPolicyAttachmentListInput` via:
 //
-//          GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...}
+//	GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...}
 type GetGroupPolicyAttachmentsGroupPolicyAttachmentListInput interface {
 	pulumi.Input
 
@@ -187,7 +187,7 @@ func (i GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs) ToGetGroupPolicy
 // GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayInput is an input type that accepts GetGroupPolicyAttachmentsGroupPolicyAttachmentListArray and GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayInput` via:
 //
-//          GetGroupPolicyAttachmentsGroupPolicyAttachmentListArray{ GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...} }
+//	GetGroupPolicyAttachmentsGroupPolicyAttachmentListArray{ GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...} }
 type GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -287,7 +287,7 @@ type GetGroupsGroupList struct {
 // GetGroupsGroupListInput is an input type that accepts GetGroupsGroupListArgs and GetGroupsGroupListOutput values.
 // You can construct a concrete instance of `GetGroupsGroupListInput` via:
 //
-//          GetGroupsGroupListArgs{...}
+//	GetGroupsGroupListArgs{...}
 type GetGroupsGroupListInput interface {
 	pulumi.Input
 
@@ -321,7 +321,7 @@ func (i GetGroupsGroupListArgs) ToGetGroupsGroupListOutputWithContext(ctx contex
 // GetGroupsGroupListArrayInput is an input type that accepts GetGroupsGroupListArray and GetGroupsGroupListArrayOutput values.
 // You can construct a concrete instance of `GetGroupsGroupListArrayInput` via:
 //
-//          GetGroupsGroupListArray{ GetGroupsGroupListArgs{...} }
+//	GetGroupsGroupListArray{ GetGroupsGroupListArgs{...} }
 type GetGroupsGroupListArrayInput interface {
 	pulumi.Input
 
@@ -419,7 +419,7 @@ type GetPoliciesPolicyList struct {
 // GetPoliciesPolicyListInput is an input type that accepts GetPoliciesPolicyListArgs and GetPoliciesPolicyListOutput values.
 // You can construct a concrete instance of `GetPoliciesPolicyListInput` via:
 //
-//          GetPoliciesPolicyListArgs{...}
+//	GetPoliciesPolicyListArgs{...}
 type GetPoliciesPolicyListInput interface {
 	pulumi.Input
 
@@ -461,7 +461,7 @@ func (i GetPoliciesPolicyListArgs) ToGetPoliciesPolicyListOutputWithContext(ctx 
 // GetPoliciesPolicyListArrayInput is an input type that accepts GetPoliciesPolicyListArray and GetPoliciesPolicyListArrayOutput values.
 // You can construct a concrete instance of `GetPoliciesPolicyListArrayInput` via:
 //
-//          GetPoliciesPolicyListArray{ GetPoliciesPolicyListArgs{...} }
+//	GetPoliciesPolicyListArray{ GetPoliciesPolicyListArgs{...} }
 type GetPoliciesPolicyListArrayInput interface {
 	pulumi.Input
 
@@ -575,7 +575,7 @@ type GetRolePolicyAttachmentsRolePolicyAttachmentList struct {
 // GetRolePolicyAttachmentsRolePolicyAttachmentListInput is an input type that accepts GetRolePolicyAttachmentsRolePolicyAttachmentListArgs and GetRolePolicyAttachmentsRolePolicyAttachmentListOutput values.
 // You can construct a concrete instance of `GetRolePolicyAttachmentsRolePolicyAttachmentListInput` via:
 //
-//          GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...}
+//	GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...}
 type GetRolePolicyAttachmentsRolePolicyAttachmentListInput interface {
 	pulumi.Input
 
@@ -613,7 +613,7 @@ func (i GetRolePolicyAttachmentsRolePolicyAttachmentListArgs) ToGetRolePolicyAtt
 // GetRolePolicyAttachmentsRolePolicyAttachmentListArrayInput is an input type that accepts GetRolePolicyAttachmentsRolePolicyAttachmentListArray and GetRolePolicyAttachmentsRolePolicyAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetRolePolicyAttachmentsRolePolicyAttachmentListArrayInput` via:
 //
-//          GetRolePolicyAttachmentsRolePolicyAttachmentListArray{ GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...} }
+//	GetRolePolicyAttachmentsRolePolicyAttachmentListArray{ GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...} }
 type GetRolePolicyAttachmentsRolePolicyAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -719,7 +719,7 @@ type GetRolesRoleList struct {
 // GetRolesRoleListInput is an input type that accepts GetRolesRoleListArgs and GetRolesRoleListOutput values.
 // You can construct a concrete instance of `GetRolesRoleListInput` via:
 //
-//          GetRolesRoleListArgs{...}
+//	GetRolesRoleListArgs{...}
 type GetRolesRoleListInput interface {
 	pulumi.Input
 
@@ -759,7 +759,7 @@ func (i GetRolesRoleListArgs) ToGetRolesRoleListOutputWithContext(ctx context.Co
 // GetRolesRoleListArrayInput is an input type that accepts GetRolesRoleListArray and GetRolesRoleListArrayOutput values.
 // You can construct a concrete instance of `GetRolesRoleListArrayInput` via:
 //
-//          GetRolesRoleListArray{ GetRolesRoleListArgs{...} }
+//	GetRolesRoleListArray{ GetRolesRoleListArgs{...} }
 type GetRolesRoleListArrayInput interface {
 	pulumi.Input
 
@@ -864,7 +864,7 @@ type GetSamlProvidersProviderList struct {
 // GetSamlProvidersProviderListInput is an input type that accepts GetSamlProvidersProviderListArgs and GetSamlProvidersProviderListOutput values.
 // You can construct a concrete instance of `GetSamlProvidersProviderListInput` via:
 //
-//          GetSamlProvidersProviderListArgs{...}
+//	GetSamlProvidersProviderListArgs{...}
 type GetSamlProvidersProviderListInput interface {
 	pulumi.Input
 
@@ -898,7 +898,7 @@ func (i GetSamlProvidersProviderListArgs) ToGetSamlProvidersProviderListOutputWi
 // GetSamlProvidersProviderListArrayInput is an input type that accepts GetSamlProvidersProviderListArray and GetSamlProvidersProviderListArrayOutput values.
 // You can construct a concrete instance of `GetSamlProvidersProviderListArrayInput` via:
 //
-//          GetSamlProvidersProviderListArray{ GetSamlProvidersProviderListArgs{...} }
+//	GetSamlProvidersProviderListArray{ GetSamlProvidersProviderListArgs{...} }
 type GetSamlProvidersProviderListArrayInput interface {
 	pulumi.Input
 
@@ -996,7 +996,7 @@ type GetUserPolicyAttachmentsUserPolicyAttachmentList struct {
 // GetUserPolicyAttachmentsUserPolicyAttachmentListInput is an input type that accepts GetUserPolicyAttachmentsUserPolicyAttachmentListArgs and GetUserPolicyAttachmentsUserPolicyAttachmentListOutput values.
 // You can construct a concrete instance of `GetUserPolicyAttachmentsUserPolicyAttachmentListInput` via:
 //
-//          GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...}
+//	GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...}
 type GetUserPolicyAttachmentsUserPolicyAttachmentListInput interface {
 	pulumi.Input
 
@@ -1038,7 +1038,7 @@ func (i GetUserPolicyAttachmentsUserPolicyAttachmentListArgs) ToGetUserPolicyAtt
 // GetUserPolicyAttachmentsUserPolicyAttachmentListArrayInput is an input type that accepts GetUserPolicyAttachmentsUserPolicyAttachmentListArray and GetUserPolicyAttachmentsUserPolicyAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetUserPolicyAttachmentsUserPolicyAttachmentListArrayInput` via:
 //
-//          GetUserPolicyAttachmentsUserPolicyAttachmentListArray{ GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...} }
+//	GetUserPolicyAttachmentsUserPolicyAttachmentListArray{ GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...} }
 type GetUserPolicyAttachmentsUserPolicyAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -1155,7 +1155,7 @@ type GetUsersUserList struct {
 // GetUsersUserListInput is an input type that accepts GetUsersUserListArgs and GetUsersUserListOutput values.
 // You can construct a concrete instance of `GetUsersUserListInput` via:
 //
-//          GetUsersUserListArgs{...}
+//	GetUsersUserListArgs{...}
 type GetUsersUserListInput interface {
 	pulumi.Input
 
@@ -1199,7 +1199,7 @@ func (i GetUsersUserListArgs) ToGetUsersUserListOutputWithContext(ctx context.Co
 // GetUsersUserListArrayInput is an input type that accepts GetUsersUserListArray and GetUsersUserListArrayOutput values.
 // You can construct a concrete instance of `GetUsersUserListArrayInput` via:
 //
-//          GetUsersUserListArray{ GetUsersUserListArgs{...} }
+//	GetUsersUserListArray{ GetUsersUserListArgs{...} }
 type GetUsersUserListArrayInput interface {
 	pulumi.Input
 

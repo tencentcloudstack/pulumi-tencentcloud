@@ -24,7 +24,7 @@ type ZoneAccountVpcSet struct {
 // ZoneAccountVpcSetInput is an input type that accepts ZoneAccountVpcSetArgs and ZoneAccountVpcSetOutput values.
 // You can construct a concrete instance of `ZoneAccountVpcSetInput` via:
 //
-//          ZoneAccountVpcSetArgs{...}
+//	ZoneAccountVpcSetArgs{...}
 type ZoneAccountVpcSetInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i ZoneAccountVpcSetArgs) ToZoneAccountVpcSetOutputWithContext(ctx context.
 // ZoneAccountVpcSetArrayInput is an input type that accepts ZoneAccountVpcSetArray and ZoneAccountVpcSetArrayOutput values.
 // You can construct a concrete instance of `ZoneAccountVpcSetArrayInput` via:
 //
-//          ZoneAccountVpcSetArray{ ZoneAccountVpcSetArgs{...} }
+//	ZoneAccountVpcSetArray{ ZoneAccountVpcSetArgs{...} }
 type ZoneAccountVpcSetArrayInput interface {
 	pulumi.Input
 
@@ -144,7 +144,7 @@ type ZoneTagSet struct {
 // ZoneTagSetInput is an input type that accepts ZoneTagSetArgs and ZoneTagSetOutput values.
 // You can construct a concrete instance of `ZoneTagSetInput` via:
 //
-//          ZoneTagSetArgs{...}
+//	ZoneTagSetArgs{...}
 type ZoneTagSetInput interface {
 	pulumi.Input
 
@@ -174,7 +174,7 @@ func (i ZoneTagSetArgs) ToZoneTagSetOutputWithContext(ctx context.Context) ZoneT
 // ZoneTagSetArrayInput is an input type that accepts ZoneTagSetArray and ZoneTagSetArrayOutput values.
 // You can construct a concrete instance of `ZoneTagSetArrayInput` via:
 //
-//          ZoneTagSetArray{ ZoneTagSetArgs{...} }
+//	ZoneTagSetArray{ ZoneTagSetArgs{...} }
 type ZoneTagSetArrayInput interface {
 	pulumi.Input
 
@@ -250,7 +250,7 @@ type ZoneVpcSet struct {
 // ZoneVpcSetInput is an input type that accepts ZoneVpcSetArgs and ZoneVpcSetOutput values.
 // You can construct a concrete instance of `ZoneVpcSetInput` via:
 //
-//          ZoneVpcSetArgs{...}
+//	ZoneVpcSetArgs{...}
 type ZoneVpcSetInput interface {
 	pulumi.Input
 
@@ -280,7 +280,7 @@ func (i ZoneVpcSetArgs) ToZoneVpcSetOutputWithContext(ctx context.Context) ZoneV
 // ZoneVpcSetArrayInput is an input type that accepts ZoneVpcSetArray and ZoneVpcSetArrayOutput values.
 // You can construct a concrete instance of `ZoneVpcSetArrayInput` via:
 //
-//          ZoneVpcSetArray{ ZoneVpcSetArgs{...} }
+//	ZoneVpcSetArray{ ZoneVpcSetArgs{...} }
 type ZoneVpcSetArrayInput interface {
 	pulumi.Input
 

@@ -152,7 +152,7 @@ func (i *L4RuleV2) ToL4RuleV2OutputWithContext(ctx context.Context) L4RuleV2Outp
 // L4RuleV2ArrayInput is an input type that accepts L4RuleV2Array and L4RuleV2ArrayOutput values.
 // You can construct a concrete instance of `L4RuleV2ArrayInput` via:
 //
-//          L4RuleV2Array{ L4RuleV2Args{...} }
+//	L4RuleV2Array{ L4RuleV2Args{...} }
 type L4RuleV2ArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +177,7 @@ func (i L4RuleV2Array) ToL4RuleV2ArrayOutputWithContext(ctx context.Context) L4R
 // L4RuleV2MapInput is an input type that accepts L4RuleV2Map and L4RuleV2MapOutput values.
 // You can construct a concrete instance of `L4RuleV2MapInput` via:
 //
-//          L4RuleV2Map{ "key": L4RuleV2Args{...} }
+//	L4RuleV2Map{ "key": L4RuleV2Args{...} }
 type L4RuleV2MapInput interface {
 	pulumi.Input
 

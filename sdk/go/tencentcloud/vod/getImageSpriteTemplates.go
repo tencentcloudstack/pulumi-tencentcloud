@@ -18,34 +18,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooImageSpriteTemplate, err := Vod.NewImageSpriteTemplate(ctx, "fooImageSpriteTemplate", &Vod.ImageSpriteTemplateArgs{
-// 			SampleType:         pulumi.String("Percent"),
-// 			SampleInterval:     pulumi.Int(10),
-// 			RowCount:           pulumi.Int(3),
-// 			ColumnCount:        pulumi.Int(3),
-// 			Comment:            pulumi.String("test"),
-// 			FillType:           pulumi.String("stretch"),
-// 			Width:              pulumi.Int(128),
-// 			Height:             pulumi.Int(128),
-// 			ResolutionAdaptive: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Vod.GetImageSpriteTemplatesOutput(ctx, vod.GetImageSpriteTemplatesOutputArgs{
-// 			Type:       pulumi.String("Custom"),
-// 			Definition: fooImageSpriteTemplate.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooImageSpriteTemplate, err := Vod.NewImageSpriteTemplate(ctx, "fooImageSpriteTemplate", &Vod.ImageSpriteTemplateArgs{
+//				SampleType:         pulumi.String("Percent"),
+//				SampleInterval:     pulumi.Int(10),
+//				RowCount:           pulumi.Int(3),
+//				ColumnCount:        pulumi.Int(3),
+//				Comment:            pulumi.String("test"),
+//				FillType:           pulumi.String("stretch"),
+//				Width:              pulumi.Int(128),
+//				Height:             pulumi.Int(128),
+//				ResolutionAdaptive: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Vod.GetImageSpriteTemplatesOutput(ctx, vod.GetImageSpriteTemplatesOutputArgs{
+//				Type:       pulumi.String("Custom"),
+//				Definition: fooImageSpriteTemplate.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetImageSpriteTemplates(ctx *pulumi.Context, args *GetImageSpriteTemplatesArgs, opts ...pulumi.InvokeOption) (*GetImageSpriteTemplatesResult, error) {
 	var rv GetImageSpriteTemplatesResult

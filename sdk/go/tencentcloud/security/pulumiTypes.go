@@ -20,7 +20,7 @@ type GroupRuleAddressTemplate struct {
 // GroupRuleAddressTemplateInput is an input type that accepts GroupRuleAddressTemplateArgs and GroupRuleAddressTemplateOutput values.
 // You can construct a concrete instance of `GroupRuleAddressTemplateInput` via:
 //
-//          GroupRuleAddressTemplateArgs{...}
+//	GroupRuleAddressTemplateArgs{...}
 type GroupRuleAddressTemplateInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i GroupRuleAddressTemplateArgs) ToGroupRuleAddressTemplatePtrOutputWithCon
 // GroupRuleAddressTemplatePtrInput is an input type that accepts GroupRuleAddressTemplateArgs, GroupRuleAddressTemplatePtr and GroupRuleAddressTemplatePtrOutput values.
 // You can construct a concrete instance of `GroupRuleAddressTemplatePtrInput` via:
 //
-//          GroupRuleAddressTemplateArgs{...}
+//	        GroupRuleAddressTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type GroupRuleAddressTemplatePtrInput interface {
 	pulumi.Input
 
@@ -176,7 +176,7 @@ type GroupRuleProtocolTemplate struct {
 // GroupRuleProtocolTemplateInput is an input type that accepts GroupRuleProtocolTemplateArgs and GroupRuleProtocolTemplateOutput values.
 // You can construct a concrete instance of `GroupRuleProtocolTemplateInput` via:
 //
-//          GroupRuleProtocolTemplateArgs{...}
+//	GroupRuleProtocolTemplateArgs{...}
 type GroupRuleProtocolTemplateInput interface {
 	pulumi.Input
 
@@ -214,11 +214,11 @@ func (i GroupRuleProtocolTemplateArgs) ToGroupRuleProtocolTemplatePtrOutputWithC
 // GroupRuleProtocolTemplatePtrInput is an input type that accepts GroupRuleProtocolTemplateArgs, GroupRuleProtocolTemplatePtr and GroupRuleProtocolTemplatePtrOutput values.
 // You can construct a concrete instance of `GroupRuleProtocolTemplatePtrInput` via:
 //
-//          GroupRuleProtocolTemplateArgs{...}
+//	        GroupRuleProtocolTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type GroupRuleProtocolTemplatePtrInput interface {
 	pulumi.Input
 
@@ -346,7 +346,7 @@ type GetGroupsSecurityGroup struct {
 // GetGroupsSecurityGroupInput is an input type that accepts GetGroupsSecurityGroupArgs and GetGroupsSecurityGroupOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupInput` via:
 //
-//          GetGroupsSecurityGroupArgs{...}
+//	GetGroupsSecurityGroupArgs{...}
 type GetGroupsSecurityGroupInput interface {
 	pulumi.Input
 
@@ -390,7 +390,7 @@ func (i GetGroupsSecurityGroupArgs) ToGetGroupsSecurityGroupOutputWithContext(ct
 // GetGroupsSecurityGroupArrayInput is an input type that accepts GetGroupsSecurityGroupArray and GetGroupsSecurityGroupArrayOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupArrayInput` via:
 //
-//          GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
+//	GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
 type GetGroupsSecurityGroupArrayInput interface {
 	pulumi.Input
 

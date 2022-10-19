@@ -18,32 +18,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
-// 			ResourceType: tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
-// 			ResourceId:   tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
-// 			PolicyId:     pulumi.StringRef(tencentcloud_dayu_cc_http_policy.Test_policy.Policy_id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
-// 			ResourceType: tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
-// 			ResourceId:   tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
-// 			Name:         pulumi.StringRef(tencentcloud_dayu_cc_http_policy.Test_policy.Name),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
+//				ResourceType: tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
+//				ResourceId:   tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
+//				PolicyId:     pulumi.StringRef(tencentcloud_dayu_cc_http_policy.Test_policy.Policy_id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dayu.GetCcHttpPolicies(ctx, &dayu.GetCcHttpPoliciesArgs{
+//				ResourceType: tencentcloud_dayu_cc_http_policy.Test_policy.Resource_type,
+//				ResourceId:   tencentcloud_dayu_cc_http_policy.Test_policy.Resource_id,
+//				Name:         pulumi.StringRef(tencentcloud_dayu_cc_http_policy.Test_policy.Name),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCcHttpPolicies(ctx *pulumi.Context, args *GetCcHttpPoliciesArgs, opts ...pulumi.InvokeOption) (*GetCcHttpPoliciesResult, error) {
 	var rv GetCcHttpPoliciesResult

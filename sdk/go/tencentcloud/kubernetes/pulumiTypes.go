@@ -46,7 +46,7 @@ type AsScalingGroupAutoScalingConfig struct {
 // AsScalingGroupAutoScalingConfigInput is an input type that accepts AsScalingGroupAutoScalingConfigArgs and AsScalingGroupAutoScalingConfigOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingConfigInput` via:
 //
-//          AsScalingGroupAutoScalingConfigArgs{...}
+//	AsScalingGroupAutoScalingConfigArgs{...}
 type AsScalingGroupAutoScalingConfigInput interface {
 	pulumi.Input
 
@@ -110,11 +110,11 @@ func (i AsScalingGroupAutoScalingConfigArgs) ToAsScalingGroupAutoScalingConfigPt
 // AsScalingGroupAutoScalingConfigPtrInput is an input type that accepts AsScalingGroupAutoScalingConfigArgs, AsScalingGroupAutoScalingConfigPtr and AsScalingGroupAutoScalingConfigPtrOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingConfigPtrInput` via:
 //
-//          AsScalingGroupAutoScalingConfigArgs{...}
+//	        AsScalingGroupAutoScalingConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AsScalingGroupAutoScalingConfigPtrInput interface {
 	pulumi.Input
 
@@ -425,7 +425,7 @@ type AsScalingGroupAutoScalingConfigDataDisk struct {
 // AsScalingGroupAutoScalingConfigDataDiskInput is an input type that accepts AsScalingGroupAutoScalingConfigDataDiskArgs and AsScalingGroupAutoScalingConfigDataDiskOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingConfigDataDiskInput` via:
 //
-//          AsScalingGroupAutoScalingConfigDataDiskArgs{...}
+//	AsScalingGroupAutoScalingConfigDataDiskArgs{...}
 type AsScalingGroupAutoScalingConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -457,7 +457,7 @@ func (i AsScalingGroupAutoScalingConfigDataDiskArgs) ToAsScalingGroupAutoScaling
 // AsScalingGroupAutoScalingConfigDataDiskArrayInput is an input type that accepts AsScalingGroupAutoScalingConfigDataDiskArray and AsScalingGroupAutoScalingConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingConfigDataDiskArrayInput` via:
 //
-//          AsScalingGroupAutoScalingConfigDataDiskArray{ AsScalingGroupAutoScalingConfigDataDiskArgs{...} }
+//	AsScalingGroupAutoScalingConfigDataDiskArray{ AsScalingGroupAutoScalingConfigDataDiskArgs{...} }
 type AsScalingGroupAutoScalingConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -562,7 +562,7 @@ type AsScalingGroupAutoScalingGroup struct {
 // AsScalingGroupAutoScalingGroupInput is an input type that accepts AsScalingGroupAutoScalingGroupArgs and AsScalingGroupAutoScalingGroupOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingGroupInput` via:
 //
-//          AsScalingGroupAutoScalingGroupArgs{...}
+//	AsScalingGroupAutoScalingGroupArgs{...}
 type AsScalingGroupAutoScalingGroupInput interface {
 	pulumi.Input
 
@@ -624,11 +624,11 @@ func (i AsScalingGroupAutoScalingGroupArgs) ToAsScalingGroupAutoScalingGroupPtrO
 // AsScalingGroupAutoScalingGroupPtrInput is an input type that accepts AsScalingGroupAutoScalingGroupArgs, AsScalingGroupAutoScalingGroupPtr and AsScalingGroupAutoScalingGroupPtrOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingGroupPtrInput` via:
 //
-//          AsScalingGroupAutoScalingGroupArgs{...}
+//	        AsScalingGroupAutoScalingGroupArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AsScalingGroupAutoScalingGroupPtrInput interface {
 	pulumi.Input
 
@@ -928,7 +928,7 @@ type AsScalingGroupAutoScalingGroupForwardBalancerId struct {
 // AsScalingGroupAutoScalingGroupForwardBalancerIdInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdArgs and AsScalingGroupAutoScalingGroupForwardBalancerIdOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdInput` via:
 //
-//          AsScalingGroupAutoScalingGroupForwardBalancerIdArgs{...}
+//	AsScalingGroupAutoScalingGroupForwardBalancerIdArgs{...}
 type AsScalingGroupAutoScalingGroupForwardBalancerIdInput interface {
 	pulumi.Input
 
@@ -962,7 +962,7 @@ func (i AsScalingGroupAutoScalingGroupForwardBalancerIdArgs) ToAsScalingGroupAut
 // AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdArray and AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput` via:
 //
-//          AsScalingGroupAutoScalingGroupForwardBalancerIdArray{ AsScalingGroupAutoScalingGroupForwardBalancerIdArgs{...} }
+//	AsScalingGroupAutoScalingGroupForwardBalancerIdArray{ AsScalingGroupAutoScalingGroupForwardBalancerIdArgs{...} }
 type AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput interface {
 	pulumi.Input
 
@@ -1050,7 +1050,7 @@ type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute struct {
 // AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs and AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput` via:
 //
-//          AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs{...}
+//	AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs{...}
 type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput interface {
 	pulumi.Input
 
@@ -1080,7 +1080,7 @@ func (i AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs) ToAs
 // AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray and AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput values.
 // You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput` via:
 //
-//          AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray{ AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs{...} }
+//	AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray{ AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs{...} }
 type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput interface {
 	pulumi.Input
 
@@ -1166,7 +1166,7 @@ type ClusterAttachmentWorkerConfig struct {
 // ClusterAttachmentWorkerConfigInput is an input type that accepts ClusterAttachmentWorkerConfigArgs and ClusterAttachmentWorkerConfigOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigInput` via:
 //
-//          ClusterAttachmentWorkerConfigArgs{...}
+//	ClusterAttachmentWorkerConfigArgs{...}
 type ClusterAttachmentWorkerConfigInput interface {
 	pulumi.Input
 
@@ -1214,11 +1214,11 @@ func (i ClusterAttachmentWorkerConfigArgs) ToClusterAttachmentWorkerConfigPtrOut
 // ClusterAttachmentWorkerConfigPtrInput is an input type that accepts ClusterAttachmentWorkerConfigArgs, ClusterAttachmentWorkerConfigPtr and ClusterAttachmentWorkerConfigPtrOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigPtrInput` via:
 //
-//          ClusterAttachmentWorkerConfigArgs{...}
+//	        ClusterAttachmentWorkerConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterAttachmentWorkerConfigPtrInput interface {
 	pulumi.Input
 
@@ -1415,7 +1415,7 @@ type ClusterAttachmentWorkerConfigDataDisk struct {
 // ClusterAttachmentWorkerConfigDataDiskInput is an input type that accepts ClusterAttachmentWorkerConfigDataDiskArgs and ClusterAttachmentWorkerConfigDataDiskOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigDataDiskInput` via:
 //
-//          ClusterAttachmentWorkerConfigDataDiskArgs{...}
+//	ClusterAttachmentWorkerConfigDataDiskArgs{...}
 type ClusterAttachmentWorkerConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -1453,7 +1453,7 @@ func (i ClusterAttachmentWorkerConfigDataDiskArgs) ToClusterAttachmentWorkerConf
 // ClusterAttachmentWorkerConfigDataDiskArrayInput is an input type that accepts ClusterAttachmentWorkerConfigDataDiskArray and ClusterAttachmentWorkerConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigDataDiskArrayInput` via:
 //
-//          ClusterAttachmentWorkerConfigDataDiskArray{ ClusterAttachmentWorkerConfigDataDiskArgs{...} }
+//	ClusterAttachmentWorkerConfigDataDiskArray{ ClusterAttachmentWorkerConfigDataDiskArgs{...} }
 type ClusterAttachmentWorkerConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -1559,7 +1559,7 @@ type ClusterAttachmentWorkerConfigOverrides struct {
 // ClusterAttachmentWorkerConfigOverridesInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesArgs and ClusterAttachmentWorkerConfigOverridesOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesInput` via:
 //
-//          ClusterAttachmentWorkerConfigOverridesArgs{...}
+//	ClusterAttachmentWorkerConfigOverridesArgs{...}
 type ClusterAttachmentWorkerConfigOverridesInput interface {
 	pulumi.Input
 
@@ -1607,11 +1607,11 @@ func (i ClusterAttachmentWorkerConfigOverridesArgs) ToClusterAttachmentWorkerCon
 // ClusterAttachmentWorkerConfigOverridesPtrInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesArgs, ClusterAttachmentWorkerConfigOverridesPtr and ClusterAttachmentWorkerConfigOverridesPtrOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesPtrInput` via:
 //
-//          ClusterAttachmentWorkerConfigOverridesArgs{...}
+//	        ClusterAttachmentWorkerConfigOverridesArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterAttachmentWorkerConfigOverridesPtrInput interface {
 	pulumi.Input
 
@@ -1810,7 +1810,7 @@ type ClusterAttachmentWorkerConfigOverridesDataDisk struct {
 // ClusterAttachmentWorkerConfigOverridesDataDiskInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesDataDiskArgs and ClusterAttachmentWorkerConfigOverridesDataDiskOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesDataDiskInput` via:
 //
-//          ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...}
+//	ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...}
 type ClusterAttachmentWorkerConfigOverridesDataDiskInput interface {
 	pulumi.Input
 
@@ -1848,7 +1848,7 @@ func (i ClusterAttachmentWorkerConfigOverridesDataDiskArgs) ToClusterAttachmentW
 // ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesDataDiskArray and ClusterAttachmentWorkerConfigOverridesDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput` via:
 //
-//          ClusterAttachmentWorkerConfigOverridesDataDiskArray{ ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...} }
+//	ClusterAttachmentWorkerConfigOverridesDataDiskArray{ ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...} }
 type ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -1946,7 +1946,7 @@ type ClusterAuthOptions struct {
 // ClusterAuthOptionsInput is an input type that accepts ClusterAuthOptionsArgs and ClusterAuthOptionsOutput values.
 // You can construct a concrete instance of `ClusterAuthOptionsInput` via:
 //
-//          ClusterAuthOptionsArgs{...}
+//	ClusterAuthOptionsArgs{...}
 type ClusterAuthOptionsInput interface {
 	pulumi.Input
 
@@ -1986,11 +1986,11 @@ func (i ClusterAuthOptionsArgs) ToClusterAuthOptionsPtrOutputWithContext(ctx con
 // ClusterAuthOptionsPtrInput is an input type that accepts ClusterAuthOptionsArgs, ClusterAuthOptionsPtr and ClusterAuthOptionsPtrOutput values.
 // You can construct a concrete instance of `ClusterAuthOptionsPtrInput` via:
 //
-//          ClusterAuthOptionsArgs{...}
+//	        ClusterAuthOptionsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterAuthOptionsPtrInput interface {
 	pulumi.Input
 
@@ -2121,7 +2121,7 @@ type ClusterClusterAudit struct {
 // ClusterClusterAuditInput is an input type that accepts ClusterClusterAuditArgs and ClusterClusterAuditOutput values.
 // You can construct a concrete instance of `ClusterClusterAuditInput` via:
 //
-//          ClusterClusterAuditArgs{...}
+//	ClusterClusterAuditArgs{...}
 type ClusterClusterAuditInput interface {
 	pulumi.Input
 
@@ -2161,11 +2161,11 @@ func (i ClusterClusterAuditArgs) ToClusterClusterAuditPtrOutputWithContext(ctx c
 // ClusterClusterAuditPtrInput is an input type that accepts ClusterClusterAuditArgs, ClusterClusterAuditPtr and ClusterClusterAuditPtrOutput values.
 // You can construct a concrete instance of `ClusterClusterAuditPtrInput` via:
 //
-//          ClusterClusterAuditArgs{...}
+//	        ClusterClusterAuditArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterClusterAuditPtrInput interface {
 	pulumi.Input
 
@@ -2296,7 +2296,7 @@ type ClusterClusterExtraArgs struct {
 // ClusterClusterExtraArgsInput is an input type that accepts ClusterClusterExtraArgsArgs and ClusterClusterExtraArgsOutput values.
 // You can construct a concrete instance of `ClusterClusterExtraArgsInput` via:
 //
-//          ClusterClusterExtraArgsArgs{...}
+//	ClusterClusterExtraArgsArgs{...}
 type ClusterClusterExtraArgsInput interface {
 	pulumi.Input
 
@@ -2336,11 +2336,11 @@ func (i ClusterClusterExtraArgsArgs) ToClusterClusterExtraArgsPtrOutputWithConte
 // ClusterClusterExtraArgsPtrInput is an input type that accepts ClusterClusterExtraArgsArgs, ClusterClusterExtraArgsPtr and ClusterClusterExtraArgsPtrOutput values.
 // You can construct a concrete instance of `ClusterClusterExtraArgsPtrInput` via:
 //
-//          ClusterClusterExtraArgsArgs{...}
+//	        ClusterClusterExtraArgsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterClusterExtraArgsPtrInput interface {
 	pulumi.Input
 
@@ -2471,7 +2471,7 @@ type ClusterEventPersistence struct {
 // ClusterEventPersistenceInput is an input type that accepts ClusterEventPersistenceArgs and ClusterEventPersistenceOutput values.
 // You can construct a concrete instance of `ClusterEventPersistenceInput` via:
 //
-//          ClusterEventPersistenceArgs{...}
+//	ClusterEventPersistenceArgs{...}
 type ClusterEventPersistenceInput interface {
 	pulumi.Input
 
@@ -2511,11 +2511,11 @@ func (i ClusterEventPersistenceArgs) ToClusterEventPersistencePtrOutputWithConte
 // ClusterEventPersistencePtrInput is an input type that accepts ClusterEventPersistenceArgs, ClusterEventPersistencePtr and ClusterEventPersistencePtrOutput values.
 // You can construct a concrete instance of `ClusterEventPersistencePtrInput` via:
 //
-//          ClusterEventPersistenceArgs{...}
+//	        ClusterEventPersistenceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterEventPersistencePtrInput interface {
 	pulumi.Input
 
@@ -2646,7 +2646,7 @@ type ClusterExistInstance struct {
 // ClusterExistInstanceInput is an input type that accepts ClusterExistInstanceArgs and ClusterExistInstanceOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceInput` via:
 //
-//          ClusterExistInstanceArgs{...}
+//	ClusterExistInstanceArgs{...}
 type ClusterExistInstanceInput interface {
 	pulumi.Input
 
@@ -2678,7 +2678,7 @@ func (i ClusterExistInstanceArgs) ToClusterExistInstanceOutputWithContext(ctx co
 // ClusterExistInstanceArrayInput is an input type that accepts ClusterExistInstanceArray and ClusterExistInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceArrayInput` via:
 //
-//          ClusterExistInstanceArray{ ClusterExistInstanceArgs{...} }
+//	ClusterExistInstanceArray{ ClusterExistInstanceArgs{...} }
 type ClusterExistInstanceArrayInput interface {
 	pulumi.Input
 
@@ -2757,7 +2757,7 @@ type ClusterExistInstanceInstancesPara struct {
 // ClusterExistInstanceInstancesParaInput is an input type that accepts ClusterExistInstanceInstancesParaArgs and ClusterExistInstanceInstancesParaOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceInstancesParaInput` via:
 //
-//          ClusterExistInstanceInstancesParaArgs{...}
+//	ClusterExistInstanceInstancesParaArgs{...}
 type ClusterExistInstanceInstancesParaInput interface {
 	pulumi.Input
 
@@ -2793,11 +2793,11 @@ func (i ClusterExistInstanceInstancesParaArgs) ToClusterExistInstanceInstancesPa
 // ClusterExistInstanceInstancesParaPtrInput is an input type that accepts ClusterExistInstanceInstancesParaArgs, ClusterExistInstanceInstancesParaPtr and ClusterExistInstanceInstancesParaPtrOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceInstancesParaPtrInput` via:
 //
-//          ClusterExistInstanceInstancesParaArgs{...}
+//	        ClusterExistInstanceInstancesParaArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterExistInstanceInstancesParaPtrInput interface {
 	pulumi.Input
 
@@ -2896,7 +2896,7 @@ type ClusterExtensionAddon struct {
 // ClusterExtensionAddonInput is an input type that accepts ClusterExtensionAddonArgs and ClusterExtensionAddonOutput values.
 // You can construct a concrete instance of `ClusterExtensionAddonInput` via:
 //
-//          ClusterExtensionAddonArgs{...}
+//	ClusterExtensionAddonArgs{...}
 type ClusterExtensionAddonInput interface {
 	pulumi.Input
 
@@ -2926,7 +2926,7 @@ func (i ClusterExtensionAddonArgs) ToClusterExtensionAddonOutputWithContext(ctx 
 // ClusterExtensionAddonArrayInput is an input type that accepts ClusterExtensionAddonArray and ClusterExtensionAddonArrayOutput values.
 // You can construct a concrete instance of `ClusterExtensionAddonArrayInput` via:
 //
-//          ClusterExtensionAddonArray{ ClusterExtensionAddonArgs{...} }
+//	ClusterExtensionAddonArray{ ClusterExtensionAddonArgs{...} }
 type ClusterExtensionAddonArrayInput interface {
 	pulumi.Input
 
@@ -3002,7 +3002,7 @@ type ClusterLogAgent struct {
 // ClusterLogAgentInput is an input type that accepts ClusterLogAgentArgs and ClusterLogAgentOutput values.
 // You can construct a concrete instance of `ClusterLogAgentInput` via:
 //
-//          ClusterLogAgentArgs{...}
+//	ClusterLogAgentArgs{...}
 type ClusterLogAgentInput interface {
 	pulumi.Input
 
@@ -3040,11 +3040,11 @@ func (i ClusterLogAgentArgs) ToClusterLogAgentPtrOutputWithContext(ctx context.C
 // ClusterLogAgentPtrInput is an input type that accepts ClusterLogAgentArgs, ClusterLogAgentPtr and ClusterLogAgentPtrOutput values.
 // You can construct a concrete instance of `ClusterLogAgentPtrInput` via:
 //
-//          ClusterLogAgentArgs{...}
+//	        ClusterLogAgentArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterLogAgentPtrInput interface {
 	pulumi.Input
 
@@ -3206,7 +3206,7 @@ type ClusterMasterConfig struct {
 // ClusterMasterConfigInput is an input type that accepts ClusterMasterConfigArgs and ClusterMasterConfigOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigInput` via:
 //
-//          ClusterMasterConfigArgs{...}
+//	ClusterMasterConfigArgs{...}
 type ClusterMasterConfigInput interface {
 	pulumi.Input
 
@@ -3284,7 +3284,7 @@ func (i ClusterMasterConfigArgs) ToClusterMasterConfigOutputWithContext(ctx cont
 // ClusterMasterConfigArrayInput is an input type that accepts ClusterMasterConfigArray and ClusterMasterConfigArrayOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigArrayInput` via:
 //
-//          ClusterMasterConfigArray{ ClusterMasterConfigArgs{...} }
+//	ClusterMasterConfigArray{ ClusterMasterConfigArgs{...} }
 type ClusterMasterConfigArrayInput interface {
 	pulumi.Input
 
@@ -3494,7 +3494,7 @@ type ClusterMasterConfigDataDisk struct {
 // ClusterMasterConfigDataDiskInput is an input type that accepts ClusterMasterConfigDataDiskArgs and ClusterMasterConfigDataDiskOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigDataDiskInput` via:
 //
-//          ClusterMasterConfigDataDiskArgs{...}
+//	ClusterMasterConfigDataDiskArgs{...}
 type ClusterMasterConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -3538,7 +3538,7 @@ func (i ClusterMasterConfigDataDiskArgs) ToClusterMasterConfigDataDiskOutputWith
 // ClusterMasterConfigDataDiskArrayInput is an input type that accepts ClusterMasterConfigDataDiskArray and ClusterMasterConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigDataDiskArrayInput` via:
 //
-//          ClusterMasterConfigDataDiskArray{ ClusterMasterConfigDataDiskArgs{...} }
+//	ClusterMasterConfigDataDiskArray{ ClusterMasterConfigDataDiskArgs{...} }
 type ClusterMasterConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -3663,7 +3663,7 @@ type ClusterNodePoolGlobalConfig struct {
 // ClusterNodePoolGlobalConfigInput is an input type that accepts ClusterNodePoolGlobalConfigArgs and ClusterNodePoolGlobalConfigOutput values.
 // You can construct a concrete instance of `ClusterNodePoolGlobalConfigInput` via:
 //
-//          ClusterNodePoolGlobalConfigArgs{...}
+//	ClusterNodePoolGlobalConfigArgs{...}
 type ClusterNodePoolGlobalConfigInput interface {
 	pulumi.Input
 
@@ -3707,7 +3707,7 @@ func (i ClusterNodePoolGlobalConfigArgs) ToClusterNodePoolGlobalConfigOutputWith
 // ClusterNodePoolGlobalConfigArrayInput is an input type that accepts ClusterNodePoolGlobalConfigArray and ClusterNodePoolGlobalConfigArrayOutput values.
 // You can construct a concrete instance of `ClusterNodePoolGlobalConfigArrayInput` via:
 //
-//          ClusterNodePoolGlobalConfigArray{ ClusterNodePoolGlobalConfigArgs{...} }
+//	ClusterNodePoolGlobalConfigArray{ ClusterNodePoolGlobalConfigArgs{...} }
 type ClusterNodePoolGlobalConfigArrayInput interface {
 	pulumi.Input
 
@@ -3866,7 +3866,7 @@ type ClusterWorkerConfig struct {
 // ClusterWorkerConfigInput is an input type that accepts ClusterWorkerConfigArgs and ClusterWorkerConfigOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigInput` via:
 //
-//          ClusterWorkerConfigArgs{...}
+//	ClusterWorkerConfigArgs{...}
 type ClusterWorkerConfigInput interface {
 	pulumi.Input
 
@@ -3944,7 +3944,7 @@ func (i ClusterWorkerConfigArgs) ToClusterWorkerConfigOutputWithContext(ctx cont
 // ClusterWorkerConfigArrayInput is an input type that accepts ClusterWorkerConfigArray and ClusterWorkerConfigArrayOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigArrayInput` via:
 //
-//          ClusterWorkerConfigArray{ ClusterWorkerConfigArgs{...} }
+//	ClusterWorkerConfigArray{ ClusterWorkerConfigArgs{...} }
 type ClusterWorkerConfigArrayInput interface {
 	pulumi.Input
 
@@ -4154,7 +4154,7 @@ type ClusterWorkerConfigDataDisk struct {
 // ClusterWorkerConfigDataDiskInput is an input type that accepts ClusterWorkerConfigDataDiskArgs and ClusterWorkerConfigDataDiskOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigDataDiskInput` via:
 //
-//          ClusterWorkerConfigDataDiskArgs{...}
+//	ClusterWorkerConfigDataDiskArgs{...}
 type ClusterWorkerConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -4198,7 +4198,7 @@ func (i ClusterWorkerConfigDataDiskArgs) ToClusterWorkerConfigDataDiskOutputWith
 // ClusterWorkerConfigDataDiskArrayInput is an input type that accepts ClusterWorkerConfigDataDiskArray and ClusterWorkerConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigDataDiskArrayInput` via:
 //
-//          ClusterWorkerConfigDataDiskArray{ ClusterWorkerConfigDataDiskArgs{...} }
+//	ClusterWorkerConfigDataDiskArray{ ClusterWorkerConfigDataDiskArgs{...} }
 type ClusterWorkerConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -4315,7 +4315,7 @@ type ClusterWorkerInstancesList struct {
 // ClusterWorkerInstancesListInput is an input type that accepts ClusterWorkerInstancesListArgs and ClusterWorkerInstancesListOutput values.
 // You can construct a concrete instance of `ClusterWorkerInstancesListInput` via:
 //
-//          ClusterWorkerInstancesListArgs{...}
+//	ClusterWorkerInstancesListArgs{...}
 type ClusterWorkerInstancesListInput interface {
 	pulumi.Input
 
@@ -4351,7 +4351,7 @@ func (i ClusterWorkerInstancesListArgs) ToClusterWorkerInstancesListOutputWithCo
 // ClusterWorkerInstancesListArrayInput is an input type that accepts ClusterWorkerInstancesListArray and ClusterWorkerInstancesListArrayOutput values.
 // You can construct a concrete instance of `ClusterWorkerInstancesListArrayInput` via:
 //
-//          ClusterWorkerInstancesListArray{ ClusterWorkerInstancesListArgs{...} }
+//	ClusterWorkerInstancesListArray{ ClusterWorkerInstancesListArgs{...} }
 type ClusterWorkerInstancesListArrayInput interface {
 	pulumi.Input
 
@@ -4478,7 +4478,7 @@ type NodePoolAutoScalingConfig struct {
 // NodePoolAutoScalingConfigInput is an input type that accepts NodePoolAutoScalingConfigArgs and NodePoolAutoScalingConfigOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigInput` via:
 //
-//          NodePoolAutoScalingConfigArgs{...}
+//	NodePoolAutoScalingConfigArgs{...}
 type NodePoolAutoScalingConfigInput interface {
 	pulumi.Input
 
@@ -4552,11 +4552,11 @@ func (i NodePoolAutoScalingConfigArgs) ToNodePoolAutoScalingConfigPtrOutputWithC
 // NodePoolAutoScalingConfigPtrInput is an input type that accepts NodePoolAutoScalingConfigArgs, NodePoolAutoScalingConfigPtr and NodePoolAutoScalingConfigPtrOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigPtrInput` via:
 //
-//          NodePoolAutoScalingConfigArgs{...}
+//	        NodePoolAutoScalingConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type NodePoolAutoScalingConfigPtrInput interface {
 	pulumi.Input
 
@@ -4944,7 +4944,7 @@ type NodePoolAutoScalingConfigDataDisk struct {
 // NodePoolAutoScalingConfigDataDiskInput is an input type that accepts NodePoolAutoScalingConfigDataDiskArgs and NodePoolAutoScalingConfigDataDiskOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigDataDiskInput` via:
 //
-//          NodePoolAutoScalingConfigDataDiskArgs{...}
+//	NodePoolAutoScalingConfigDataDiskArgs{...}
 type NodePoolAutoScalingConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -4978,7 +4978,7 @@ func (i NodePoolAutoScalingConfigDataDiskArgs) ToNodePoolAutoScalingConfigDataDi
 // NodePoolAutoScalingConfigDataDiskArrayInput is an input type that accepts NodePoolAutoScalingConfigDataDiskArray and NodePoolAutoScalingConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigDataDiskArrayInput` via:
 //
-//          NodePoolAutoScalingConfigDataDiskArray{ NodePoolAutoScalingConfigDataDiskArgs{...} }
+//	NodePoolAutoScalingConfigDataDiskArray{ NodePoolAutoScalingConfigDataDiskArgs{...} }
 type NodePoolAutoScalingConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -5074,7 +5074,7 @@ type NodePoolNodeConfig struct {
 // NodePoolNodeConfigInput is an input type that accepts NodePoolNodeConfigArgs and NodePoolNodeConfigOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigInput` via:
 //
-//          NodePoolNodeConfigArgs{...}
+//	NodePoolNodeConfigArgs{...}
 type NodePoolNodeConfigInput interface {
 	pulumi.Input
 
@@ -5122,11 +5122,11 @@ func (i NodePoolNodeConfigArgs) ToNodePoolNodeConfigPtrOutputWithContext(ctx con
 // NodePoolNodeConfigPtrInput is an input type that accepts NodePoolNodeConfigArgs, NodePoolNodeConfigPtr and NodePoolNodeConfigPtrOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigPtrInput` via:
 //
-//          NodePoolNodeConfigArgs{...}
+//	        NodePoolNodeConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type NodePoolNodeConfigPtrInput interface {
 	pulumi.Input
 
@@ -5323,7 +5323,7 @@ type NodePoolNodeConfigDataDisk struct {
 // NodePoolNodeConfigDataDiskInput is an input type that accepts NodePoolNodeConfigDataDiskArgs and NodePoolNodeConfigDataDiskOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigDataDiskInput` via:
 //
-//          NodePoolNodeConfigDataDiskArgs{...}
+//	NodePoolNodeConfigDataDiskArgs{...}
 type NodePoolNodeConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -5361,7 +5361,7 @@ func (i NodePoolNodeConfigDataDiskArgs) ToNodePoolNodeConfigDataDiskOutputWithCo
 // NodePoolNodeConfigDataDiskArrayInput is an input type that accepts NodePoolNodeConfigDataDiskArray and NodePoolNodeConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigDataDiskArrayInput` via:
 //
-//          NodePoolNodeConfigDataDiskArray{ NodePoolNodeConfigDataDiskArgs{...} }
+//	NodePoolNodeConfigDataDiskArray{ NodePoolNodeConfigDataDiskArgs{...} }
 type NodePoolNodeConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -5459,7 +5459,7 @@ type NodePoolTaint struct {
 // NodePoolTaintInput is an input type that accepts NodePoolTaintArgs and NodePoolTaintOutput values.
 // You can construct a concrete instance of `NodePoolTaintInput` via:
 //
-//          NodePoolTaintArgs{...}
+//	NodePoolTaintArgs{...}
 type NodePoolTaintInput interface {
 	pulumi.Input
 
@@ -5491,7 +5491,7 @@ func (i NodePoolTaintArgs) ToNodePoolTaintOutputWithContext(ctx context.Context)
 // NodePoolTaintArrayInput is an input type that accepts NodePoolTaintArray and NodePoolTaintArrayOutput values.
 // You can construct a concrete instance of `NodePoolTaintArrayInput` via:
 //
-//          NodePoolTaintArray{ NodePoolTaintArgs{...} }
+//	NodePoolTaintArray{ NodePoolTaintArgs{...} }
 type NodePoolTaintArrayInput interface {
 	pulumi.Input
 
@@ -5578,7 +5578,7 @@ type ScaleWorkerDataDisk struct {
 // ScaleWorkerDataDiskInput is an input type that accepts ScaleWorkerDataDiskArgs and ScaleWorkerDataDiskOutput values.
 // You can construct a concrete instance of `ScaleWorkerDataDiskInput` via:
 //
-//          ScaleWorkerDataDiskArgs{...}
+//	ScaleWorkerDataDiskArgs{...}
 type ScaleWorkerDataDiskInput interface {
 	pulumi.Input
 
@@ -5614,7 +5614,7 @@ func (i ScaleWorkerDataDiskArgs) ToScaleWorkerDataDiskOutputWithContext(ctx cont
 // ScaleWorkerDataDiskArrayInput is an input type that accepts ScaleWorkerDataDiskArray and ScaleWorkerDataDiskArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerDataDiskArrayInput` via:
 //
-//          ScaleWorkerDataDiskArray{ ScaleWorkerDataDiskArgs{...} }
+//	ScaleWorkerDataDiskArray{ ScaleWorkerDataDiskArgs{...} }
 type ScaleWorkerDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -5753,7 +5753,7 @@ type ScaleWorkerWorkerConfig struct {
 // ScaleWorkerWorkerConfigInput is an input type that accepts ScaleWorkerWorkerConfigArgs and ScaleWorkerWorkerConfigOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigInput` via:
 //
-//          ScaleWorkerWorkerConfigArgs{...}
+//	ScaleWorkerWorkerConfigArgs{...}
 type ScaleWorkerWorkerConfigInput interface {
 	pulumi.Input
 
@@ -5839,11 +5839,11 @@ func (i ScaleWorkerWorkerConfigArgs) ToScaleWorkerWorkerConfigPtrOutputWithConte
 // ScaleWorkerWorkerConfigPtrInput is an input type that accepts ScaleWorkerWorkerConfigArgs, ScaleWorkerWorkerConfigPtr and ScaleWorkerWorkerConfigPtrOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigPtrInput` via:
 //
-//          ScaleWorkerWorkerConfigArgs{...}
+//	        ScaleWorkerWorkerConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScaleWorkerWorkerConfigPtrInput interface {
 	pulumi.Input
 
@@ -6331,7 +6331,7 @@ type ScaleWorkerWorkerConfigDataDisk struct {
 // ScaleWorkerWorkerConfigDataDiskInput is an input type that accepts ScaleWorkerWorkerConfigDataDiskArgs and ScaleWorkerWorkerConfigDataDiskOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigDataDiskInput` via:
 //
-//          ScaleWorkerWorkerConfigDataDiskArgs{...}
+//	ScaleWorkerWorkerConfigDataDiskArgs{...}
 type ScaleWorkerWorkerConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -6375,7 +6375,7 @@ func (i ScaleWorkerWorkerConfigDataDiskArgs) ToScaleWorkerWorkerConfigDataDiskOu
 // ScaleWorkerWorkerConfigDataDiskArrayInput is an input type that accepts ScaleWorkerWorkerConfigDataDiskArray and ScaleWorkerWorkerConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigDataDiskArrayInput` via:
 //
-//          ScaleWorkerWorkerConfigDataDiskArray{ ScaleWorkerWorkerConfigDataDiskArgs{...} }
+//	ScaleWorkerWorkerConfigDataDiskArray{ ScaleWorkerWorkerConfigDataDiskArgs{...} }
 type ScaleWorkerWorkerConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -6492,7 +6492,7 @@ type ScaleWorkerWorkerInstancesList struct {
 // ScaleWorkerWorkerInstancesListInput is an input type that accepts ScaleWorkerWorkerInstancesListArgs and ScaleWorkerWorkerInstancesListOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerInstancesListInput` via:
 //
-//          ScaleWorkerWorkerInstancesListArgs{...}
+//	ScaleWorkerWorkerInstancesListArgs{...}
 type ScaleWorkerWorkerInstancesListInput interface {
 	pulumi.Input
 
@@ -6528,7 +6528,7 @@ func (i ScaleWorkerWorkerInstancesListArgs) ToScaleWorkerWorkerInstancesListOutp
 // ScaleWorkerWorkerInstancesListArrayInput is an input type that accepts ScaleWorkerWorkerInstancesListArray and ScaleWorkerWorkerInstancesListArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerInstancesListArrayInput` via:
 //
-//          ScaleWorkerWorkerInstancesListArray{ ScaleWorkerWorkerInstancesListArgs{...} }
+//	ScaleWorkerWorkerInstancesListArray{ ScaleWorkerWorkerInstancesListArgs{...} }
 type ScaleWorkerWorkerInstancesListArrayInput interface {
 	pulumi.Input
 
@@ -6621,7 +6621,7 @@ type GetChartsChartList struct {
 // GetChartsChartListInput is an input type that accepts GetChartsChartListArgs and GetChartsChartListOutput values.
 // You can construct a concrete instance of `GetChartsChartListInput` via:
 //
-//          GetChartsChartListArgs{...}
+//	GetChartsChartListArgs{...}
 type GetChartsChartListInput interface {
 	pulumi.Input
 
@@ -6653,7 +6653,7 @@ func (i GetChartsChartListArgs) ToGetChartsChartListOutputWithContext(ctx contex
 // GetChartsChartListArrayInput is an input type that accepts GetChartsChartListArray and GetChartsChartListArrayOutput values.
 // You can construct a concrete instance of `GetChartsChartListArrayInput` via:
 //
-//          GetChartsChartListArray{ GetChartsChartListArgs{...} }
+//	GetChartsChartListArray{ GetChartsChartListArgs{...} }
 type GetChartsChartListArrayInput interface {
 	pulumi.Input
 
@@ -6734,7 +6734,7 @@ type GetClusterCommonNamesList struct {
 // GetClusterCommonNamesListInput is an input type that accepts GetClusterCommonNamesListArgs and GetClusterCommonNamesListOutput values.
 // You can construct a concrete instance of `GetClusterCommonNamesListInput` via:
 //
-//          GetClusterCommonNamesListArgs{...}
+//	GetClusterCommonNamesListArgs{...}
 type GetClusterCommonNamesListInput interface {
 	pulumi.Input
 
@@ -6764,7 +6764,7 @@ func (i GetClusterCommonNamesListArgs) ToGetClusterCommonNamesListOutputWithCont
 // GetClusterCommonNamesListArrayInput is an input type that accepts GetClusterCommonNamesListArray and GetClusterCommonNamesListArrayOutput values.
 // You can construct a concrete instance of `GetClusterCommonNamesListArrayInput` via:
 //
-//          GetClusterCommonNamesListArray{ GetClusterCommonNamesListArgs{...} }
+//	GetClusterCommonNamesListArray{ GetClusterCommonNamesListArgs{...} }
 type GetClusterCommonNamesListArrayInput interface {
 	pulumi.Input
 
@@ -6852,7 +6852,7 @@ type GetClusterLevelsList struct {
 // GetClusterLevelsListInput is an input type that accepts GetClusterLevelsListArgs and GetClusterLevelsListOutput values.
 // You can construct a concrete instance of `GetClusterLevelsListInput` via:
 //
-//          GetClusterLevelsListArgs{...}
+//	GetClusterLevelsListArgs{...}
 type GetClusterLevelsListInput interface {
 	pulumi.Input
 
@@ -6894,7 +6894,7 @@ func (i GetClusterLevelsListArgs) ToGetClusterLevelsListOutputWithContext(ctx co
 // GetClusterLevelsListArrayInput is an input type that accepts GetClusterLevelsListArray and GetClusterLevelsListArrayOutput values.
 // You can construct a concrete instance of `GetClusterLevelsListArrayInput` via:
 //
-//          GetClusterLevelsListArray{ GetClusterLevelsListArgs{...} }
+//	GetClusterLevelsListArray{ GetClusterLevelsListArgs{...} }
 type GetClusterLevelsListArrayInput interface {
 	pulumi.Input
 
@@ -7070,7 +7070,7 @@ type GetClustersList struct {
 // GetClustersListInput is an input type that accepts GetClustersListArgs and GetClustersListOutput values.
 // You can construct a concrete instance of `GetClustersListInput` via:
 //
-//          GetClustersListArgs{...}
+//	GetClustersListArgs{...}
 type GetClustersListInput interface {
 	pulumi.Input
 
@@ -7170,7 +7170,7 @@ func (i GetClustersListArgs) ToGetClustersListOutputWithContext(ctx context.Cont
 // GetClustersListArrayInput is an input type that accepts GetClustersListArray and GetClustersListArrayOutput values.
 // You can construct a concrete instance of `GetClustersListArrayInput` via:
 //
-//          GetClustersListArray{ GetClustersListArgs{...} }
+//	GetClustersListArray{ GetClustersListArgs{...} }
 type GetClustersListArrayInput interface {
 	pulumi.Input
 
@@ -7420,7 +7420,7 @@ type GetClustersListClusterExtraArg struct {
 // GetClustersListClusterExtraArgInput is an input type that accepts GetClustersListClusterExtraArgArgs and GetClustersListClusterExtraArgOutput values.
 // You can construct a concrete instance of `GetClustersListClusterExtraArgInput` via:
 //
-//          GetClustersListClusterExtraArgArgs{...}
+//	GetClustersListClusterExtraArgArgs{...}
 type GetClustersListClusterExtraArgInput interface {
 	pulumi.Input
 
@@ -7452,7 +7452,7 @@ func (i GetClustersListClusterExtraArgArgs) ToGetClustersListClusterExtraArgOutp
 // GetClustersListClusterExtraArgArrayInput is an input type that accepts GetClustersListClusterExtraArgArray and GetClustersListClusterExtraArgArrayOutput values.
 // You can construct a concrete instance of `GetClustersListClusterExtraArgArrayInput` via:
 //
-//          GetClustersListClusterExtraArgArray{ GetClustersListClusterExtraArgArgs{...} }
+//	GetClustersListClusterExtraArgArray{ GetClustersListClusterExtraArgArgs{...} }
 type GetClustersListClusterExtraArgArrayInput interface {
 	pulumi.Input
 
@@ -7539,7 +7539,7 @@ type GetClustersListWorkerInstancesList struct {
 // GetClustersListWorkerInstancesListInput is an input type that accepts GetClustersListWorkerInstancesListArgs and GetClustersListWorkerInstancesListOutput values.
 // You can construct a concrete instance of `GetClustersListWorkerInstancesListInput` via:
 //
-//          GetClustersListWorkerInstancesListArgs{...}
+//	GetClustersListWorkerInstancesListArgs{...}
 type GetClustersListWorkerInstancesListInput interface {
 	pulumi.Input
 
@@ -7575,7 +7575,7 @@ func (i GetClustersListWorkerInstancesListArgs) ToGetClustersListWorkerInstances
 // GetClustersListWorkerInstancesListArrayInput is an input type that accepts GetClustersListWorkerInstancesListArray and GetClustersListWorkerInstancesListArrayOutput values.
 // You can construct a concrete instance of `GetClustersListWorkerInstancesListArrayInput` via:
 //
-//          GetClustersListWorkerInstancesListArray{ GetClustersListWorkerInstancesListArgs{...} }
+//	GetClustersListWorkerInstancesListArray{ GetClustersListWorkerInstancesListArgs{...} }
 type GetClustersListWorkerInstancesListArrayInput interface {
 	pulumi.Input
 

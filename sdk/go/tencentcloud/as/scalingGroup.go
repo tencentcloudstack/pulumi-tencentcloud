@@ -19,47 +19,50 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewScalingGroup(ctx, "scalingGroup", &As.ScalingGroupArgs{
-// 			ConfigurationId: pulumi.String("asc-oqio4yyj"),
-// 			DefaultCooldown: pulumi.Int(400),
-// 			DesiredCapacity: pulumi.Int(1),
-// 			ForwardBalancerIds: as.ScalingGroupForwardBalancerIdArray{
-// 				&as.ScalingGroupForwardBalancerIdArgs{
-// 					ListenerId:     pulumi.String("lbl-81wr497k"),
-// 					LoadBalancerId: pulumi.String("lb-hk693b1l"),
-// 					RuleId:         pulumi.String("loc-kiodx943"),
-// 					TargetAttributes: as.ScalingGroupForwardBalancerIdTargetAttributeArray{
-// 						&as.ScalingGroupForwardBalancerIdTargetAttributeArgs{
-// 							Port:   pulumi.Int(80),
-// 							Weight: pulumi.Int(90),
-// 						},
-// 					},
-// 				},
-// 			},
-// 			MaxSize:          pulumi.Int(1),
-// 			MinSize:          pulumi.Int(0),
-// 			ProjectId:        pulumi.Int(0),
-// 			RetryPolicy:      pulumi.String("INCREMENTAL_INTERVALS"),
-// 			ScalingGroupName: pulumi.String("tf-as-scaling-group"),
-// 			SubnetIds: pulumi.StringArray{
-// 				pulumi.String("subnet-mc3egos"),
-// 			},
-// 			TerminationPolicies: pulumi.String("NEWEST_INSTANCE"),
-// 			VpcId:               pulumi.String("vpc-3efmz0z"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewScalingGroup(ctx, "scalingGroup", &As.ScalingGroupArgs{
+//				ConfigurationId: pulumi.String("asc-oqio4yyj"),
+//				DefaultCooldown: pulumi.Int(400),
+//				DesiredCapacity: pulumi.Int(1),
+//				ForwardBalancerIds: as.ScalingGroupForwardBalancerIdArray{
+//					&as.ScalingGroupForwardBalancerIdArgs{
+//						ListenerId:     pulumi.String("lbl-81wr497k"),
+//						LoadBalancerId: pulumi.String("lb-hk693b1l"),
+//						RuleId:         pulumi.String("loc-kiodx943"),
+//						TargetAttributes: as.ScalingGroupForwardBalancerIdTargetAttributeArray{
+//							&as.ScalingGroupForwardBalancerIdTargetAttributeArgs{
+//								Port:   pulumi.Int(80),
+//								Weight: pulumi.Int(90),
+//							},
+//						},
+//					},
+//				},
+//				MaxSize:          pulumi.Int(1),
+//				MinSize:          pulumi.Int(0),
+//				ProjectId:        pulumi.Int(0),
+//				RetryPolicy:      pulumi.String("INCREMENTAL_INTERVALS"),
+//				ScalingGroupName: pulumi.String("tf-as-scaling-group"),
+//				SubnetIds: pulumi.StringArray{
+//					pulumi.String("subnet-mc3egos"),
+//				},
+//				TerminationPolicies: pulumi.String("NEWEST_INSTANCE"),
+//				VpcId:               pulumi.String("vpc-3efmz0z"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -67,7 +70,9 @@ import (
 // AutoScaling Groups can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+//
+//	$ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+//
 // ```
 type ScalingGroup struct {
 	pulumi.CustomResourceState
@@ -368,7 +373,7 @@ func (i *ScalingGroup) ToScalingGroupOutputWithContext(ctx context.Context) Scal
 // ScalingGroupArrayInput is an input type that accepts ScalingGroupArray and ScalingGroupArrayOutput values.
 // You can construct a concrete instance of `ScalingGroupArrayInput` via:
 //
-//          ScalingGroupArray{ ScalingGroupArgs{...} }
+//	ScalingGroupArray{ ScalingGroupArgs{...} }
 type ScalingGroupArrayInput interface {
 	pulumi.Input
 
@@ -393,7 +398,7 @@ func (i ScalingGroupArray) ToScalingGroupArrayOutputWithContext(ctx context.Cont
 // ScalingGroupMapInput is an input type that accepts ScalingGroupMap and ScalingGroupMapOutput values.
 // You can construct a concrete instance of `ScalingGroupMapInput` via:
 //
-//          ScalingGroupMap{ "key": ScalingGroupArgs{...} }
+//	ScalingGroupMap{ "key": ScalingGroupArgs{...} }
 type ScalingGroupMapInput interface {
 	pulumi.Input
 

@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnat"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnat.NewInstance(ctx, "foo", &Dnat.InstanceArgs{
-// 			Description: pulumi.String("test"),
-// 			ElasticIp:   pulumi.String("139.199.232.238"),
-// 			ElasticPort: pulumi.String("80"),
-// 			NatId:       pulumi.String("nat-2515tdg"),
-// 			PrivateIp:   pulumi.String("10.0.0.1"),
-// 			PrivatePort: pulumi.String("22"),
-// 			Protocol:    pulumi.String("tcp"),
-// 			VpcId:       pulumi.String("vpc-asg3sfa3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnat.NewInstance(ctx, "foo", &Dnat.InstanceArgs{
+//				Description: pulumi.String("test"),
+//				ElasticIp:   pulumi.String("139.199.232.238"),
+//				ElasticPort: pulumi.String("80"),
+//				NatId:       pulumi.String("nat-2515tdg"),
+//				PrivateIp:   pulumi.String("10.0.0.1"),
+//				PrivatePort: pulumi.String("22"),
+//				Protocol:    pulumi.String("tcp"),
+//				VpcId:       pulumi.String("vpc-asg3sfa3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // NAT forwarding can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
+//
+//	$ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -227,7 +232,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -252,7 +257,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

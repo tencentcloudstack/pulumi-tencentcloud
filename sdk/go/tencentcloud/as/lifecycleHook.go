@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewLifecycleHook(ctx, "lifecycleHook", &As.LifecycleHookArgs{
-// 			DefaultResult:          pulumi.String("CONTINUE"),
-// 			HeartbeatTimeout:       pulumi.Int(500),
-// 			LifecycleHookName:      pulumi.String("tf-as-lifecycle-hook"),
-// 			LifecycleTransition:    pulumi.String("INSTANCE_LAUNCHING"),
-// 			NotificationMetadata:   pulumi.String("tf test"),
-// 			NotificationQueueName:  pulumi.String("lifcyclehook"),
-// 			NotificationTargetType: pulumi.String("CMQ_QUEUE"),
-// 			ScalingGroupId:         pulumi.String("sg-12af45"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewLifecycleHook(ctx, "lifecycleHook", &As.LifecycleHookArgs{
+//				DefaultResult:          pulumi.String("CONTINUE"),
+//				HeartbeatTimeout:       pulumi.Int(500),
+//				LifecycleHookName:      pulumi.String("tf-as-lifecycle-hook"),
+//				LifecycleTransition:    pulumi.String("INSTANCE_LAUNCHING"),
+//				NotificationMetadata:   pulumi.String("tf test"),
+//				NotificationQueueName:  pulumi.String("lifcyclehook"),
+//				NotificationTargetType: pulumi.String("CMQ_QUEUE"),
+//				ScalingGroupId:         pulumi.String("sg-12af45"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type LifecycleHook struct {
 	pulumi.CustomResourceState
@@ -217,7 +220,7 @@ func (i *LifecycleHook) ToLifecycleHookOutputWithContext(ctx context.Context) Li
 // LifecycleHookArrayInput is an input type that accepts LifecycleHookArray and LifecycleHookArrayOutput values.
 // You can construct a concrete instance of `LifecycleHookArrayInput` via:
 //
-//          LifecycleHookArray{ LifecycleHookArgs{...} }
+//	LifecycleHookArray{ LifecycleHookArgs{...} }
 type LifecycleHookArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +245,7 @@ func (i LifecycleHookArray) ToLifecycleHookArrayOutputWithContext(ctx context.Co
 // LifecycleHookMapInput is an input type that accepts LifecycleHookMap and LifecycleHookMapOutput values.
 // You can construct a concrete instance of `LifecycleHookMapInput` via:
 //
-//          LifecycleHookMap{ "key": LifecycleHookArgs{...} }
+//	LifecycleHookMap{ "key": LifecycleHookArgs{...} }
 type LifecycleHookMapInput interface {
 	pulumi.Input
 

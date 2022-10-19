@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewLogTopic(ctx, "topic", &Clb.LogTopicArgs{
-// 			LogSetId:  pulumi.Any(tencentcloud_clb_log_set.Set.Id),
-// 			TopicName: pulumi.String("clb-topic"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewLogTopic(ctx, "topic", &Clb.LogTopicArgs{
+//				LogSetId:  pulumi.Any(tencentcloud_clb_log_set.Set.Id),
+//				TopicName: pulumi.String("clb-topic"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // CLB log topic can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+//
+//	$ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+//
 // ```
 type LogTopic struct {
 	pulumi.CustomResourceState
@@ -158,7 +163,7 @@ func (i *LogTopic) ToLogTopicOutputWithContext(ctx context.Context) LogTopicOutp
 // LogTopicArrayInput is an input type that accepts LogTopicArray and LogTopicArrayOutput values.
 // You can construct a concrete instance of `LogTopicArrayInput` via:
 //
-//          LogTopicArray{ LogTopicArgs{...} }
+//	LogTopicArray{ LogTopicArgs{...} }
 type LogTopicArrayInput interface {
 	pulumi.Input
 
@@ -183,7 +188,7 @@ func (i LogTopicArray) ToLogTopicArrayOutputWithContext(ctx context.Context) Log
 // LogTopicMapInput is an input type that accepts LogTopicMap and LogTopicMapOutput values.
 // You can construct a concrete instance of `LogTopicMapInput` via:
 //
-//          LogTopicMap{ "key": LogTopicArgs{...} }
+//	LogTopicMap{ "key": LogTopicArgs{...} }
 type LogTopicMapInput interface {
 	pulumi.Input
 

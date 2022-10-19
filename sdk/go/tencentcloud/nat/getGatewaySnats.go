@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Nat.GetGatewaySnats(ctx, &nat.GetGatewaySnatsArgs{
-// 			NatGatewayId: tencentcloud_nat_gateway.My_nat.Id,
-// 			SubnetId:     pulumi.StringRef(tencentcloud_nat_gateway_snat.My_subnet.Id),
-// 			PublicIpAddrs: []string{
-// 				"50.29.23.234",
-// 			},
-// 			Description:      pulumi.StringRef("snat demo"),
-// 			ResultOutputFile: pulumi.StringRef("./snat.txt"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Nat.GetGatewaySnats(ctx, &nat.GetGatewaySnatsArgs{
+//				NatGatewayId: tencentcloud_nat_gateway.My_nat.Id,
+//				SubnetId:     pulumi.StringRef(tencentcloud_nat_gateway_snat.My_subnet.Id),
+//				PublicIpAddrs: []string{
+//					"50.29.23.234",
+//				},
+//				Description:      pulumi.StringRef("snat demo"),
+//				ResultOutputFile: pulumi.StringRef("./snat.txt"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetGatewaySnats(ctx *pulumi.Context, args *GetGatewaySnatsArgs, opts ...pulumi.InvokeOption) (*GetGatewaySnatsResult, error) {
 	var rv GetGatewaySnatsResult

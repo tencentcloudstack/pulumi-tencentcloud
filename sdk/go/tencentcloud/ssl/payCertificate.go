@@ -25,49 +25,52 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewPayCertificate(ctx, "ssl", &Ssl.PayCertificateArgs{
-// 			Alias:     pulumi.String("test-ssl"),
-// 			DomainNum: pulumi.Int(1),
-// 			Information: &ssl.PayCertificateInformationArgs{
-// 				AdminEmail:           pulumi.String("test@tencent.com"),
-// 				AdminFirstName:       pulumi.String("test"),
-// 				AdminLastName:        pulumi.String("test"),
-// 				AdminPhoneNum:        pulumi.String("12345678901"),
-// 				AdminPosition:        pulumi.String("dev"),
-// 				CertificateDomain:    pulumi.String("www.domain.com"),
-// 				ContactEmail:         pulumi.String("test@tencent.com"),
-// 				ContactFirstName:     pulumi.String("test"),
-// 				ContactLastName:      pulumi.String("test"),
-// 				ContactNumber:        pulumi.String("12345678901"),
-// 				ContactPosition:      pulumi.String("dev"),
-// 				CsrType:              pulumi.String("online"),
-// 				OrganizationAddress:  pulumi.String("test"),
-// 				OrganizationCity:     pulumi.String("test"),
-// 				OrganizationCountry:  pulumi.String("CN"),
-// 				OrganizationDivision: pulumi.String("test"),
-// 				OrganizationName:     pulumi.String("test"),
-// 				OrganizationRegion:   pulumi.String("test"),
-// 				PhoneAreaCode:        pulumi.String("0755"),
-// 				PhoneNumber:          pulumi.String("12345678901"),
-// 				PostalCode:           pulumi.String("0755"),
-// 				VerifyType:           pulumi.String("DNS"),
-// 			},
-// 			ProductId: pulumi.Int(33),
-// 			ProjectId: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewPayCertificate(ctx, "ssl", &Ssl.PayCertificateArgs{
+//				Alias:     pulumi.String("test-ssl"),
+//				DomainNum: pulumi.Int(1),
+//				Information: &ssl.PayCertificateInformationArgs{
+//					AdminEmail:           pulumi.String("test@tencent.com"),
+//					AdminFirstName:       pulumi.String("test"),
+//					AdminLastName:        pulumi.String("test"),
+//					AdminPhoneNum:        pulumi.String("12345678901"),
+//					AdminPosition:        pulumi.String("dev"),
+//					CertificateDomain:    pulumi.String("www.domain.com"),
+//					ContactEmail:         pulumi.String("test@tencent.com"),
+//					ContactFirstName:     pulumi.String("test"),
+//					ContactLastName:      pulumi.String("test"),
+//					ContactNumber:        pulumi.String("12345678901"),
+//					ContactPosition:      pulumi.String("dev"),
+//					CsrType:              pulumi.String("online"),
+//					OrganizationAddress:  pulumi.String("test"),
+//					OrganizationCity:     pulumi.String("test"),
+//					OrganizationCountry:  pulumi.String("CN"),
+//					OrganizationDivision: pulumi.String("test"),
+//					OrganizationName:     pulumi.String("test"),
+//					OrganizationRegion:   pulumi.String("test"),
+//					PhoneAreaCode:        pulumi.String("0755"),
+//					PhoneNumber:          pulumi.String("12345678901"),
+//					PostalCode:           pulumi.String("0755"),
+//					VerifyType:           pulumi.String("DNS"),
+//				},
+//				ProductId: pulumi.Int(33),
+//				ProjectId: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -75,7 +78,9 @@ import (
 // payment SSL instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+//
+//	$ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+//
 // ```
 type PayCertificate struct {
 	pulumi.CustomResourceState
@@ -240,7 +245,7 @@ func (i *PayCertificate) ToPayCertificateOutputWithContext(ctx context.Context) 
 // PayCertificateArrayInput is an input type that accepts PayCertificateArray and PayCertificateArrayOutput values.
 // You can construct a concrete instance of `PayCertificateArrayInput` via:
 //
-//          PayCertificateArray{ PayCertificateArgs{...} }
+//	PayCertificateArray{ PayCertificateArgs{...} }
 type PayCertificateArrayInput interface {
 	pulumi.Input
 
@@ -265,7 +270,7 @@ func (i PayCertificateArray) ToPayCertificateArrayOutputWithContext(ctx context.
 // PayCertificateMapInput is an input type that accepts PayCertificateMap and PayCertificateMapOutput values.
 // You can construct a concrete instance of `PayCertificateMapInput` via:
 //
-//          PayCertificateMap{ "key": PayCertificateArgs{...} }
+//	PayCertificateMap{ "key": PayCertificateArgs{...} }
 type PayCertificateMapInput interface {
 	pulumi.Input
 

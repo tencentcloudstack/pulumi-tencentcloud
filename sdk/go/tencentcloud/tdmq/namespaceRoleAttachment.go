@@ -19,62 +19,65 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("example"),
-// 			Remark:      pulumi.String("this is description."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		barNamespace, err := Tdmq.NewNamespace(ctx, "barNamespace", &Tdmq.NamespaceArgs{
-// 			ClusterId:   foo.ID(),
-// 			EnvironName: pulumi.String("example"),
-// 			MsgTtl:      pulumi.Int(300),
-// 			Remark:      pulumi.String("this is description."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewTopic(ctx, "barTopic", &Tdmq.TopicArgs{
-// 			ClusterId:  foo.ID(),
-// 			EnvironId:  barNamespace.ID(),
-// 			Partitions: pulumi.Int(6),
-// 			Remark:     pulumi.String("this is description."),
-// 			TopicName:  pulumi.String("example"),
-// 			TopicType:  pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		barRole, err := Tdmq.NewRole(ctx, "barRole", &Tdmq.RoleArgs{
-// 			ClusterId: foo.ID(),
-// 			Remark:    pulumi.String("this is description world"),
-// 			RoleName:  pulumi.String("example"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewNamespaceRoleAttachment(ctx, "barNamespaceRoleAttachment", &Tdmq.NamespaceRoleAttachmentArgs{
-// 			ClusterId: foo.ID(),
-// 			EnvironId: barNamespace.ID(),
-// 			Permissions: pulumi.StringArray{
-// 				pulumi.String("produce"),
-// 				pulumi.String("consume"),
-// 			},
-// 			RoleName: barRole.RoleName,
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
+//				ClusterName: pulumi.String("example"),
+//				Remark:      pulumi.String("this is description."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			barNamespace, err := Tdmq.NewNamespace(ctx, "barNamespace", &Tdmq.NamespaceArgs{
+//				ClusterId:   foo.ID(),
+//				EnvironName: pulumi.String("example"),
+//				MsgTtl:      pulumi.Int(300),
+//				Remark:      pulumi.String("this is description."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewTopic(ctx, "barTopic", &Tdmq.TopicArgs{
+//				ClusterId:  foo.ID(),
+//				EnvironId:  barNamespace.ID(),
+//				Partitions: pulumi.Int(6),
+//				Remark:     pulumi.String("this is description."),
+//				TopicName:  pulumi.String("example"),
+//				TopicType:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			barRole, err := Tdmq.NewRole(ctx, "barRole", &Tdmq.RoleArgs{
+//				ClusterId: foo.ID(),
+//				Remark:    pulumi.String("this is description world"),
+//				RoleName:  pulumi.String("example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewNamespaceRoleAttachment(ctx, "barNamespaceRoleAttachment", &Tdmq.NamespaceRoleAttachmentArgs{
+//				ClusterId: foo.ID(),
+//				EnvironId: barNamespace.ID(),
+//				Permissions: pulumi.StringArray{
+//					pulumi.String("produce"),
+//					pulumi.String("consume"),
+//				},
+//				RoleName: barRole.RoleName,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type NamespaceRoleAttachment struct {
 	pulumi.CustomResourceState
@@ -210,7 +213,7 @@ func (i *NamespaceRoleAttachment) ToNamespaceRoleAttachmentOutputWithContext(ctx
 // NamespaceRoleAttachmentArrayInput is an input type that accepts NamespaceRoleAttachmentArray and NamespaceRoleAttachmentArrayOutput values.
 // You can construct a concrete instance of `NamespaceRoleAttachmentArrayInput` via:
 //
-//          NamespaceRoleAttachmentArray{ NamespaceRoleAttachmentArgs{...} }
+//	NamespaceRoleAttachmentArray{ NamespaceRoleAttachmentArgs{...} }
 type NamespaceRoleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -235,7 +238,7 @@ func (i NamespaceRoleAttachmentArray) ToNamespaceRoleAttachmentArrayOutputWithCo
 // NamespaceRoleAttachmentMapInput is an input type that accepts NamespaceRoleAttachmentMap and NamespaceRoleAttachmentMapOutput values.
 // You can construct a concrete instance of `NamespaceRoleAttachmentMapInput` via:
 //
-//          NamespaceRoleAttachmentMap{ "key": NamespaceRoleAttachmentArgs{...} }
+//	NamespaceRoleAttachmentMap{ "key": NamespaceRoleAttachmentArgs{...} }
 type NamespaceRoleAttachmentMapInput interface {
 	pulumi.Input
 

@@ -101,7 +101,7 @@ func (i *TmpTkeTemplate) ToTmpTkeTemplateOutputWithContext(ctx context.Context) 
 // TmpTkeTemplateArrayInput is an input type that accepts TmpTkeTemplateArray and TmpTkeTemplateArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateArrayInput` via:
 //
-//          TmpTkeTemplateArray{ TmpTkeTemplateArgs{...} }
+//	TmpTkeTemplateArray{ TmpTkeTemplateArgs{...} }
 type TmpTkeTemplateArrayInput interface {
 	pulumi.Input
 
@@ -126,7 +126,7 @@ func (i TmpTkeTemplateArray) ToTmpTkeTemplateArrayOutputWithContext(ctx context.
 // TmpTkeTemplateMapInput is an input type that accepts TmpTkeTemplateMap and TmpTkeTemplateMapOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateMapInput` via:
 //
-//          TmpTkeTemplateMap{ "key": TmpTkeTemplateArgs{...} }
+//	TmpTkeTemplateMap{ "key": TmpTkeTemplateArgs{...} }
 type TmpTkeTemplateMapInput interface {
 	pulumi.Input
 

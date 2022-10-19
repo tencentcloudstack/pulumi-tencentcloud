@@ -19,42 +19,45 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("example"),
-// 			Remark:      pulumi.String("this is description."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		barNamespace, err := Tdmq.NewNamespace(ctx, "barNamespace", &Tdmq.NamespaceArgs{
-// 			ClusterId:   foo.ID(),
-// 			EnvironName: pulumi.String("example"),
-// 			MsgTtl:      pulumi.Int(300),
-// 			Remark:      pulumi.String("this is description."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewTopic(ctx, "barTopic", &Tdmq.TopicArgs{
-// 			ClusterId:  foo.ID(),
-// 			EnvironId:  barNamespace.ID(),
-// 			Partitions: pulumi.Int(6),
-// 			Remark:     pulumi.String("this is description."),
-// 			TopicName:  pulumi.String("example"),
-// 			TopicType:  pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
+//				ClusterName: pulumi.String("example"),
+//				Remark:      pulumi.String("this is description."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			barNamespace, err := Tdmq.NewNamespace(ctx, "barNamespace", &Tdmq.NamespaceArgs{
+//				ClusterId:   foo.ID(),
+//				EnvironName: pulumi.String("example"),
+//				MsgTtl:      pulumi.Int(300),
+//				Remark:      pulumi.String("this is description."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewTopic(ctx, "barTopic", &Tdmq.TopicArgs{
+//				ClusterId:  foo.ID(),
+//				EnvironId:  barNamespace.ID(),
+//				Partitions: pulumi.Int(6),
+//				Remark:     pulumi.String("this is description."),
+//				TopicName:  pulumi.String("example"),
+//				TopicType:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -62,7 +65,9 @@ import (
 // Tdmq Topic can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
+//
+//	$ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
+//
 // ```
 type Topic struct {
 	pulumi.CustomResourceState
@@ -221,7 +226,7 @@ func (i *Topic) ToTopicOutputWithContext(ctx context.Context) TopicOutput {
 // TopicArrayInput is an input type that accepts TopicArray and TopicArrayOutput values.
 // You can construct a concrete instance of `TopicArrayInput` via:
 //
-//          TopicArray{ TopicArgs{...} }
+//	TopicArray{ TopicArgs{...} }
 type TopicArrayInput interface {
 	pulumi.Input
 
@@ -246,7 +251,7 @@ func (i TopicArray) ToTopicArrayOutputWithContext(ctx context.Context) TopicArra
 // TopicMapInput is an input type that accepts TopicMap and TopicMapOutput values.
 // You can construct a concrete instance of `TopicMapInput` via:
 //
-//          TopicMap{ "key": TopicArgs{...} }
+//	TopicMap{ "key": TopicArgs{...} }
 type TopicMapInput interface {
 	pulumi.Input
 

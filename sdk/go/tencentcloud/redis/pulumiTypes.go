@@ -54,7 +54,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -118,7 +118,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -278,7 +278,7 @@ type GetInstancesInstanceListNodeInfo struct {
 // GetInstancesInstanceListNodeInfoInput is an input type that accepts GetInstancesInstanceListNodeInfoArgs and GetInstancesInstanceListNodeInfoOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoInput` via:
 //
-//          GetInstancesInstanceListNodeInfoArgs{...}
+//	GetInstancesInstanceListNodeInfoArgs{...}
 type GetInstancesInstanceListNodeInfoInput interface {
 	pulumi.Input
 
@@ -310,7 +310,7 @@ func (i GetInstancesInstanceListNodeInfoArgs) ToGetInstancesInstanceListNodeInfo
 // GetInstancesInstanceListNodeInfoArrayInput is an input type that accepts GetInstancesInstanceListNodeInfoArray and GetInstancesInstanceListNodeInfoArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoArrayInput` via:
 //
-//          GetInstancesInstanceListNodeInfoArray{ GetInstancesInstanceListNodeInfoArgs{...} }
+//	GetInstancesInstanceListNodeInfoArray{ GetInstancesInstanceListNodeInfoArgs{...} }
 type GetInstancesInstanceListNodeInfoArrayInput interface {
 	pulumi.Input
 
@@ -407,7 +407,7 @@ type GetZoneConfigList struct {
 // GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
 // You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//          GetZoneConfigListArgs{...}
+//	GetZoneConfigListArgs{...}
 type GetZoneConfigListInput interface {
 	pulumi.Input
 
@@ -453,7 +453,7 @@ func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.
 // GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+//	GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
 type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 

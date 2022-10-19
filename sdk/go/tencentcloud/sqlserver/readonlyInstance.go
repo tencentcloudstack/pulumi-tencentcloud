@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewReadonlyInstance(ctx, "foo", &Sqlserver.ReadonlyInstanceArgs{
-// 			AvailabilityZone:  pulumi.String("ap-guangzhou-4"),
-// 			ChargeType:        pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:             pulumi.String("vpc-xxxxxxxx"),
-// 			SubnetId:          pulumi.String("subnet-xxxxxxxx"),
-// 			Memory:            pulumi.Int(2),
-// 			Storage:           pulumi.Int(10),
-// 			MasterInstanceId:  pulumi.Any(tencentcloud_sqlserver_instance.Test.Id),
-// 			ReadonlyGroupType: pulumi.Int(1),
-// 			ForceUpgrade:      pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewReadonlyInstance(ctx, "foo", &Sqlserver.ReadonlyInstanceArgs{
+//				AvailabilityZone:  pulumi.String("ap-guangzhou-4"),
+//				ChargeType:        pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:             pulumi.String("vpc-xxxxxxxx"),
+//				SubnetId:          pulumi.String("subnet-xxxxxxxx"),
+//				Memory:            pulumi.Int(2),
+//				Storage:           pulumi.Int(10),
+//				MasterInstanceId:  pulumi.Any(tencentcloud_sqlserver_instance.Test.Id),
+//				ReadonlyGroupType: pulumi.Int(1),
+//				ForceUpgrade:      pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // SQL Server readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+//
+//	$ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+//
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -329,7 +334,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -354,7 +359,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 

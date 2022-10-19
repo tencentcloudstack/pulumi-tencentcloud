@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.GetPolicyConditions(ctx, &monitor.GetPolicyConditionsArgs{
-// 			Name:             pulumi.StringRef("Cloud Virtual Machine"),
-// 			ResultOutputFile: pulumi.StringRef("./tencentcloud_monitor_policy_conditions.txt"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.GetPolicyConditions(ctx, &monitor.GetPolicyConditionsArgs{
+//				Name:             pulumi.StringRef("Cloud Virtual Machine"),
+//				ResultOutputFile: pulumi.StringRef("./tencentcloud_monitor_policy_conditions.txt"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPolicyConditions(ctx *pulumi.Context, args *GetPolicyConditionsArgs, opts ...pulumi.InvokeOption) (*GetPolicyConditionsResult, error) {
 	var rv GetPolicyConditionsResult

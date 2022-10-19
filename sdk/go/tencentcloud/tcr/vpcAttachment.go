@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewVpcAttachment(ctx, "foo", &Tcr.VpcAttachmentArgs{
-// 			InstanceId: pulumi.String("cls-satg5125"),
-// 			SubnetId:   pulumi.String("subnet-1uwh63so"),
-// 			VpcId:      pulumi.String("vpc-asg3sfa3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.NewVpcAttachment(ctx, "foo", &Tcr.VpcAttachmentArgs{
+//				InstanceId: pulumi.String("cls-satg5125"),
+//				SubnetId:   pulumi.String("subnet-1uwh63so"),
+//				VpcId:      pulumi.String("vpc-asg3sfa3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // tcr vpc attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+//
+//	$ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+//
 // ```
 type VpcAttachment struct {
 	pulumi.CustomResourceState
@@ -212,7 +217,7 @@ func (i *VpcAttachment) ToVpcAttachmentOutputWithContext(ctx context.Context) Vp
 // VpcAttachmentArrayInput is an input type that accepts VpcAttachmentArray and VpcAttachmentArrayOutput values.
 // You can construct a concrete instance of `VpcAttachmentArrayInput` via:
 //
-//          VpcAttachmentArray{ VpcAttachmentArgs{...} }
+//	VpcAttachmentArray{ VpcAttachmentArgs{...} }
 type VpcAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -237,7 +242,7 @@ func (i VpcAttachmentArray) ToVpcAttachmentArrayOutputWithContext(ctx context.Co
 // VpcAttachmentMapInput is an input type that accepts VpcAttachmentMap and VpcAttachmentMapOutput values.
 // You can construct a concrete instance of `VpcAttachmentMapInput` via:
 //
-//          VpcAttachmentMap{ "key": VpcAttachmentArgs{...} }
+//	VpcAttachmentMap{ "key": VpcAttachmentArgs{...} }
 type VpcAttachmentMapInput interface {
 	pulumi.Input
 

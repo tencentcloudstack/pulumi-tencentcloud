@@ -24,7 +24,7 @@ type InstanceBackupPlan struct {
 // InstanceBackupPlanInput is an input type that accepts InstanceBackupPlanArgs and InstanceBackupPlanOutput values.
 // You can construct a concrete instance of `InstanceBackupPlanInput` via:
 //
-//          InstanceBackupPlanArgs{...}
+//	InstanceBackupPlanArgs{...}
 type InstanceBackupPlanInput interface {
 	pulumi.Input
 
@@ -66,11 +66,11 @@ func (i InstanceBackupPlanArgs) ToInstanceBackupPlanPtrOutputWithContext(ctx con
 // InstanceBackupPlanPtrInput is an input type that accepts InstanceBackupPlanArgs, InstanceBackupPlanPtr and InstanceBackupPlanPtrOutput values.
 // You can construct a concrete instance of `InstanceBackupPlanPtrInput` via:
 //
-//          InstanceBackupPlanArgs{...}
+//	        InstanceBackupPlanArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceBackupPlanPtrInput interface {
 	pulumi.Input
 
@@ -214,7 +214,7 @@ type InstanceDbNodeSet struct {
 // InstanceDbNodeSetInput is an input type that accepts InstanceDbNodeSetArgs and InstanceDbNodeSetOutput values.
 // You can construct a concrete instance of `InstanceDbNodeSetInput` via:
 //
-//          InstanceDbNodeSetArgs{...}
+//	InstanceDbNodeSetArgs{...}
 type InstanceDbNodeSetInput interface {
 	pulumi.Input
 
@@ -244,7 +244,7 @@ func (i InstanceDbNodeSetArgs) ToInstanceDbNodeSetOutputWithContext(ctx context.
 // InstanceDbNodeSetArrayInput is an input type that accepts InstanceDbNodeSetArray and InstanceDbNodeSetArrayOutput values.
 // You can construct a concrete instance of `InstanceDbNodeSetArrayInput` via:
 //
-//          InstanceDbNodeSetArray{ InstanceDbNodeSetArgs{...} }
+//	InstanceDbNodeSetArray{ InstanceDbNodeSetArgs{...} }
 type InstanceDbNodeSetArrayInput interface {
 	pulumi.Input
 
@@ -356,7 +356,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -422,7 +422,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -600,7 +600,7 @@ type GetSpecinfosList struct {
 // GetSpecinfosListInput is an input type that accepts GetSpecinfosListArgs and GetSpecinfosListOutput values.
 // You can construct a concrete instance of `GetSpecinfosListInput` via:
 //
-//          GetSpecinfosListArgs{...}
+//	GetSpecinfosListArgs{...}
 type GetSpecinfosListInput interface {
 	pulumi.Input
 
@@ -642,7 +642,7 @@ func (i GetSpecinfosListArgs) ToGetSpecinfosListOutputWithContext(ctx context.Co
 // GetSpecinfosListArrayInput is an input type that accepts GetSpecinfosListArray and GetSpecinfosListArrayOutput values.
 // You can construct a concrete instance of `GetSpecinfosListArrayInput` via:
 //
-//          GetSpecinfosListArray{ GetSpecinfosListArgs{...} }
+//	GetSpecinfosListArray{ GetSpecinfosListArgs{...} }
 type GetSpecinfosListArrayInput interface {
 	pulumi.Input
 
@@ -756,7 +756,7 @@ type GetXlogsList struct {
 // GetXlogsListInput is an input type that accepts GetXlogsListArgs and GetXlogsListOutput values.
 // You can construct a concrete instance of `GetXlogsListInput` via:
 //
-//          GetXlogsListArgs{...}
+//	GetXlogsListArgs{...}
 type GetXlogsListInput interface {
 	pulumi.Input
 
@@ -794,7 +794,7 @@ func (i GetXlogsListArgs) ToGetXlogsListOutputWithContext(ctx context.Context) G
 // GetXlogsListArrayInput is an input type that accepts GetXlogsListArray and GetXlogsListArrayOutput values.
 // You can construct a concrete instance of `GetXlogsListArrayInput` via:
 //
-//          GetXlogsListArray{ GetXlogsListArgs{...} }
+//	GetXlogsListArray{ GetXlogsListArgs{...} }
 type GetXlogsListArrayInput interface {
 	pulumi.Input
 

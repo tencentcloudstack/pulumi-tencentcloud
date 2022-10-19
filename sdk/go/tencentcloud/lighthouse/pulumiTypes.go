@@ -28,7 +28,7 @@ type InstanceContainer struct {
 // InstanceContainerInput is an input type that accepts InstanceContainerArgs and InstanceContainerOutput values.
 // You can construct a concrete instance of `InstanceContainerInput` via:
 //
-//          InstanceContainerArgs{...}
+//	InstanceContainerArgs{...}
 type InstanceContainerInput interface {
 	pulumi.Input
 
@@ -66,7 +66,7 @@ func (i InstanceContainerArgs) ToInstanceContainerOutputWithContext(ctx context.
 // InstanceContainerArrayInput is an input type that accepts InstanceContainerArray and InstanceContainerArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerArrayInput` via:
 //
-//          InstanceContainerArray{ InstanceContainerArgs{...} }
+//	InstanceContainerArray{ InstanceContainerArgs{...} }
 type InstanceContainerArrayInput interface {
 	pulumi.Input
 
@@ -162,7 +162,7 @@ type InstanceContainerEnv struct {
 // InstanceContainerEnvInput is an input type that accepts InstanceContainerEnvArgs and InstanceContainerEnvOutput values.
 // You can construct a concrete instance of `InstanceContainerEnvInput` via:
 //
-//          InstanceContainerEnvArgs{...}
+//	InstanceContainerEnvArgs{...}
 type InstanceContainerEnvInput interface {
 	pulumi.Input
 
@@ -192,7 +192,7 @@ func (i InstanceContainerEnvArgs) ToInstanceContainerEnvOutputWithContext(ctx co
 // InstanceContainerEnvArrayInput is an input type that accepts InstanceContainerEnvArray and InstanceContainerEnvArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerEnvArrayInput` via:
 //
-//          InstanceContainerEnvArray{ InstanceContainerEnvArgs{...} }
+//	InstanceContainerEnvArray{ InstanceContainerEnvArgs{...} }
 type InstanceContainerEnvArrayInput interface {
 	pulumi.Input
 
@@ -272,7 +272,7 @@ type InstanceContainerPublishPort struct {
 // InstanceContainerPublishPortInput is an input type that accepts InstanceContainerPublishPortArgs and InstanceContainerPublishPortOutput values.
 // You can construct a concrete instance of `InstanceContainerPublishPortInput` via:
 //
-//          InstanceContainerPublishPortArgs{...}
+//	InstanceContainerPublishPortArgs{...}
 type InstanceContainerPublishPortInput interface {
 	pulumi.Input
 
@@ -306,7 +306,7 @@ func (i InstanceContainerPublishPortArgs) ToInstanceContainerPublishPortOutputWi
 // InstanceContainerPublishPortArrayInput is an input type that accepts InstanceContainerPublishPortArray and InstanceContainerPublishPortArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerPublishPortArrayInput` via:
 //
-//          InstanceContainerPublishPortArray{ InstanceContainerPublishPortArgs{...} }
+//	InstanceContainerPublishPortArray{ InstanceContainerPublishPortArgs{...} }
 type InstanceContainerPublishPortArrayInput interface {
 	pulumi.Input
 
@@ -392,7 +392,7 @@ type InstanceContainerVolume struct {
 // InstanceContainerVolumeInput is an input type that accepts InstanceContainerVolumeArgs and InstanceContainerVolumeOutput values.
 // You can construct a concrete instance of `InstanceContainerVolumeInput` via:
 //
-//          InstanceContainerVolumeArgs{...}
+//	InstanceContainerVolumeArgs{...}
 type InstanceContainerVolumeInput interface {
 	pulumi.Input
 
@@ -422,7 +422,7 @@ func (i InstanceContainerVolumeArgs) ToInstanceContainerVolumeOutputWithContext(
 // InstanceContainerVolumeArrayInput is an input type that accepts InstanceContainerVolumeArray and InstanceContainerVolumeArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerVolumeArrayInput` via:
 //
-//          InstanceContainerVolumeArray{ InstanceContainerVolumeArgs{...} }
+//	InstanceContainerVolumeArray{ InstanceContainerVolumeArgs{...} }
 type InstanceContainerVolumeArrayInput interface {
 	pulumi.Input
 
@@ -498,7 +498,7 @@ type InstanceLoginConfiguration struct {
 // InstanceLoginConfigurationInput is an input type that accepts InstanceLoginConfigurationArgs and InstanceLoginConfigurationOutput values.
 // You can construct a concrete instance of `InstanceLoginConfigurationInput` via:
 //
-//          InstanceLoginConfigurationArgs{...}
+//	InstanceLoginConfigurationArgs{...}
 type InstanceLoginConfigurationInput interface {
 	pulumi.Input
 
@@ -536,11 +536,11 @@ func (i InstanceLoginConfigurationArgs) ToInstanceLoginConfigurationPtrOutputWit
 // InstanceLoginConfigurationPtrInput is an input type that accepts InstanceLoginConfigurationArgs, InstanceLoginConfigurationPtr and InstanceLoginConfigurationPtrOutput values.
 // You can construct a concrete instance of `InstanceLoginConfigurationPtrInput` via:
 //
-//          InstanceLoginConfigurationArgs{...}
+//	        InstanceLoginConfigurationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceLoginConfigurationPtrInput interface {
 	pulumi.Input
 

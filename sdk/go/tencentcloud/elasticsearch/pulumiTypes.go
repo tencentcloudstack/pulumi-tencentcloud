@@ -20,7 +20,7 @@ type InstanceMultiZoneInfo struct {
 // InstanceMultiZoneInfoInput is an input type that accepts InstanceMultiZoneInfoArgs and InstanceMultiZoneInfoOutput values.
 // You can construct a concrete instance of `InstanceMultiZoneInfoInput` via:
 //
-//          InstanceMultiZoneInfoArgs{...}
+//	InstanceMultiZoneInfoArgs{...}
 type InstanceMultiZoneInfoInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i InstanceMultiZoneInfoArgs) ToInstanceMultiZoneInfoOutputWithContext(ctx 
 // InstanceMultiZoneInfoArrayInput is an input type that accepts InstanceMultiZoneInfoArray and InstanceMultiZoneInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceMultiZoneInfoArrayInput` via:
 //
-//          InstanceMultiZoneInfoArray{ InstanceMultiZoneInfoArgs{...} }
+//	InstanceMultiZoneInfoArray{ InstanceMultiZoneInfoArgs{...} }
 type InstanceMultiZoneInfoArrayInput interface {
 	pulumi.Input
 
@@ -134,7 +134,7 @@ type InstanceNodeInfoList struct {
 // InstanceNodeInfoListInput is an input type that accepts InstanceNodeInfoListArgs and InstanceNodeInfoListOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoListInput` via:
 //
-//          InstanceNodeInfoListArgs{...}
+//	InstanceNodeInfoListArgs{...}
 type InstanceNodeInfoListInput interface {
 	pulumi.Input
 
@@ -172,7 +172,7 @@ func (i InstanceNodeInfoListArgs) ToInstanceNodeInfoListOutputWithContext(ctx co
 // InstanceNodeInfoListArrayInput is an input type that accepts InstanceNodeInfoListArray and InstanceNodeInfoListArrayOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoListArrayInput` via:
 //
-//          InstanceNodeInfoListArray{ InstanceNodeInfoListArgs{...} }
+//	InstanceNodeInfoListArray{ InstanceNodeInfoListArgs{...} }
 type InstanceNodeInfoListArrayInput interface {
 	pulumi.Input
 
@@ -268,7 +268,7 @@ type InstanceWebNodeTypeInfo struct {
 // InstanceWebNodeTypeInfoInput is an input type that accepts InstanceWebNodeTypeInfoArgs and InstanceWebNodeTypeInfoOutput values.
 // You can construct a concrete instance of `InstanceWebNodeTypeInfoInput` via:
 //
-//          InstanceWebNodeTypeInfoArgs{...}
+//	InstanceWebNodeTypeInfoArgs{...}
 type InstanceWebNodeTypeInfoInput interface {
 	pulumi.Input
 
@@ -298,7 +298,7 @@ func (i InstanceWebNodeTypeInfoArgs) ToInstanceWebNodeTypeInfoOutputWithContext(
 // InstanceWebNodeTypeInfoArrayInput is an input type that accepts InstanceWebNodeTypeInfoArray and InstanceWebNodeTypeInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceWebNodeTypeInfoArrayInput` via:
 //
-//          InstanceWebNodeTypeInfoArray{ InstanceWebNodeTypeInfoArgs{...} }
+//	InstanceWebNodeTypeInfoArray{ InstanceWebNodeTypeInfoArgs{...} }
 type InstanceWebNodeTypeInfoArrayInput interface {
 	pulumi.Input
 
@@ -406,7 +406,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -468,7 +468,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -624,7 +624,7 @@ type GetInstancesInstanceListMultiZoneInfo struct {
 // GetInstancesInstanceListMultiZoneInfoInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArgs and GetInstancesInstanceListMultiZoneInfoOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoInput` via:
 //
-//          GetInstancesInstanceListMultiZoneInfoArgs{...}
+//	GetInstancesInstanceListMultiZoneInfoArgs{...}
 type GetInstancesInstanceListMultiZoneInfoInput interface {
 	pulumi.Input
 
@@ -654,7 +654,7 @@ func (i GetInstancesInstanceListMultiZoneInfoArgs) ToGetInstancesInstanceListMul
 // GetInstancesInstanceListMultiZoneInfoArrayInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArray and GetInstancesInstanceListMultiZoneInfoArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoArrayInput` via:
 //
-//          GetInstancesInstanceListMultiZoneInfoArray{ GetInstancesInstanceListMultiZoneInfoArgs{...} }
+//	GetInstancesInstanceListMultiZoneInfoArray{ GetInstancesInstanceListMultiZoneInfoArgs{...} }
 type GetInstancesInstanceListMultiZoneInfoArrayInput interface {
 	pulumi.Input
 
@@ -738,7 +738,7 @@ type GetInstancesInstanceListNodeInfoList struct {
 // GetInstancesInstanceListNodeInfoListInput is an input type that accepts GetInstancesInstanceListNodeInfoListArgs and GetInstancesInstanceListNodeInfoListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListInput` via:
 //
-//          GetInstancesInstanceListNodeInfoListArgs{...}
+//	GetInstancesInstanceListNodeInfoListArgs{...}
 type GetInstancesInstanceListNodeInfoListInput interface {
 	pulumi.Input
 
@@ -776,7 +776,7 @@ func (i GetInstancesInstanceListNodeInfoListArgs) ToGetInstancesInstanceListNode
 // GetInstancesInstanceListNodeInfoListArrayInput is an input type that accepts GetInstancesInstanceListNodeInfoListArray and GetInstancesInstanceListNodeInfoListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListArrayInput` via:
 //
-//          GetInstancesInstanceListNodeInfoListArray{ GetInstancesInstanceListNodeInfoListArgs{...} }
+//	GetInstancesInstanceListNodeInfoListArray{ GetInstancesInstanceListNodeInfoListArgs{...} }
 type GetInstancesInstanceListNodeInfoListArrayInput interface {
 	pulumi.Input
 

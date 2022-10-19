@@ -18,7 +18,9 @@ import (
 // cls cos index can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/index:Index index 0937e56f-4008-49d2-ad2d-69c52a9f11cc
+//
+//	$ pulumi import tencentcloud:Cls/index:Index index 0937e56f-4008-49d2-ad2d-69c52a9f11cc
+//
 // ```
 type Index struct {
 	pulumi.CustomResourceState
@@ -149,7 +151,7 @@ func (i *Index) ToIndexOutputWithContext(ctx context.Context) IndexOutput {
 // IndexArrayInput is an input type that accepts IndexArray and IndexArrayOutput values.
 // You can construct a concrete instance of `IndexArrayInput` via:
 //
-//          IndexArray{ IndexArgs{...} }
+//	IndexArray{ IndexArgs{...} }
 type IndexArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +176,7 @@ func (i IndexArray) ToIndexArrayOutputWithContext(ctx context.Context) IndexArra
 // IndexMapInput is an input type that accepts IndexMap and IndexMapOutput values.
 // You can construct a concrete instance of `IndexMapInput` via:
 //
-//          IndexMap{ "key": IndexArgs{...} }
+//	IndexMap{ "key": IndexArgs{...} }
 type IndexMapInput interface {
 	pulumi.Input
 

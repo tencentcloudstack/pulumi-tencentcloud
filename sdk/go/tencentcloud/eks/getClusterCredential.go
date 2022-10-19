@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eks.GetClusterCredential(ctx, &eks.GetClusterCredentialArgs{
-// 			ClusterId: "cls-xxxxxxxx",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("addresses", data.Tencentcloud_eks_cluster_credential.Cred.Addresses)
-// 		ctx.Export("caCert", data.Tencentcloud_eks_cluster_credential.Cred.Credential.Ca_cert)
-// 		ctx.Export("token", data.Tencentcloud_eks_cluster_credential.Cred.Credential.Token)
-// 		ctx.Export("publicLbParam", data.Tencentcloud_eks_cluster_credential.Cred.Public_lb[0].Extra_param)
-// 		ctx.Export("internalLbSubnet", data.Tencentcloud_eks_cluster_credential.Cred.Internal_lb[0].Subnet_id)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eks.GetClusterCredential(ctx, &eks.GetClusterCredentialArgs{
+//				ClusterId: "cls-xxxxxxxx",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("addresses", data.Tencentcloud_eks_cluster_credential.Cred.Addresses)
+//			ctx.Export("caCert", data.Tencentcloud_eks_cluster_credential.Cred.Credential.Ca_cert)
+//			ctx.Export("token", data.Tencentcloud_eks_cluster_credential.Cred.Credential.Token)
+//			ctx.Export("publicLbParam", data.Tencentcloud_eks_cluster_credential.Cred.Public_lb[0].Extra_param)
+//			ctx.Export("internalLbSubnet", data.Tencentcloud_eks_cluster_credential.Cred.Internal_lb[0].Subnet_id)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetClusterCredential(ctx *pulumi.Context, args *GetClusterCredentialArgs, opts ...pulumi.InvokeOption) (*GetClusterCredentialResult, error) {
 	var rv GetClusterCredentialResult

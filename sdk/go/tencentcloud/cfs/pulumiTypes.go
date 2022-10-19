@@ -24,7 +24,7 @@ type GetAccessGroupsAccessGroupList struct {
 // GetAccessGroupsAccessGroupListInput is an input type that accepts GetAccessGroupsAccessGroupListArgs and GetAccessGroupsAccessGroupListOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupListInput` via:
 //
-//          GetAccessGroupsAccessGroupListArgs{...}
+//	GetAccessGroupsAccessGroupListArgs{...}
 type GetAccessGroupsAccessGroupListInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i GetAccessGroupsAccessGroupListArgs) ToGetAccessGroupsAccessGroupListOutp
 // GetAccessGroupsAccessGroupListArrayInput is an input type that accepts GetAccessGroupsAccessGroupListArray and GetAccessGroupsAccessGroupListArrayOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupListArrayInput` via:
 //
-//          GetAccessGroupsAccessGroupListArray{ GetAccessGroupsAccessGroupListArgs{...} }
+//	GetAccessGroupsAccessGroupListArray{ GetAccessGroupsAccessGroupListArgs{...} }
 type GetAccessGroupsAccessGroupListArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +150,7 @@ type GetAccessRulesAccessRuleList struct {
 // GetAccessRulesAccessRuleListInput is an input type that accepts GetAccessRulesAccessRuleListArgs and GetAccessRulesAccessRuleListOutput values.
 // You can construct a concrete instance of `GetAccessRulesAccessRuleListInput` via:
 //
-//          GetAccessRulesAccessRuleListArgs{...}
+//	GetAccessRulesAccessRuleListArgs{...}
 type GetAccessRulesAccessRuleListInput interface {
 	pulumi.Input
 
@@ -186,7 +186,7 @@ func (i GetAccessRulesAccessRuleListArgs) ToGetAccessRulesAccessRuleListOutputWi
 // GetAccessRulesAccessRuleListArrayInput is an input type that accepts GetAccessRulesAccessRuleListArray and GetAccessRulesAccessRuleListArrayOutput values.
 // You can construct a concrete instance of `GetAccessRulesAccessRuleListArrayInput` via:
 //
-//          GetAccessRulesAccessRuleListArray{ GetAccessRulesAccessRuleListArgs{...} }
+//	GetAccessRulesAccessRuleListArray{ GetAccessRulesAccessRuleListArgs{...} }
 type GetAccessRulesAccessRuleListArrayInput interface {
 	pulumi.Input
 
@@ -293,7 +293,7 @@ type GetFileSystemsFileSystemList struct {
 // GetFileSystemsFileSystemListInput is an input type that accepts GetFileSystemsFileSystemListArgs and GetFileSystemsFileSystemListOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemListInput` via:
 //
-//          GetFileSystemsFileSystemListArgs{...}
+//	GetFileSystemsFileSystemListArgs{...}
 type GetFileSystemsFileSystemListInput interface {
 	pulumi.Input
 
@@ -339,7 +339,7 @@ func (i GetFileSystemsFileSystemListArgs) ToGetFileSystemsFileSystemListOutputWi
 // GetFileSystemsFileSystemListArrayInput is an input type that accepts GetFileSystemsFileSystemListArray and GetFileSystemsFileSystemListArrayOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemListArrayInput` via:
 //
-//          GetFileSystemsFileSystemListArray{ GetFileSystemsFileSystemListArgs{...} }
+//	GetFileSystemsFileSystemListArray{ GetFileSystemsFileSystemListArgs{...} }
 type GetFileSystemsFileSystemListArrayInput interface {
 	pulumi.Input
 

@@ -22,33 +22,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewReadonlyInstance(ctx, "default", &Mysql.ReadonlyInstanceArgs{
-// 			InstanceName:     pulumi.String("myTestMysql"),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			MasterInstanceId: pulumi.String("cdb-dnqksd9f"),
-// 			MemSize:          pulumi.Int(128000),
-// 			SecurityGroups: pulumi.StringArray{
-// 				pulumi.String("sg-ot8eclwz"),
-// 			},
-// 			SubnetId: pulumi.String("subnet-9uivyb1g"),
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			VolumeSize: pulumi.Int(255),
-// 			VpcId:      pulumi.String("vpc-12mt3l31"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewReadonlyInstance(ctx, "default", &Mysql.ReadonlyInstanceArgs{
+//				InstanceName:     pulumi.String("myTestMysql"),
+//				IntranetPort:     pulumi.Int(3306),
+//				MasterInstanceId: pulumi.String("cdb-dnqksd9f"),
+//				MemSize:          pulumi.Int(128000),
+//				SecurityGroups: pulumi.StringArray{
+//					pulumi.String("sg-ot8eclwz"),
+//				},
+//				SubnetId: pulumi.String("subnet-9uivyb1g"),
+//				Tags: pulumi.AnyMap{
+//					"name": pulumi.Any("test"),
+//				},
+//				VolumeSize: pulumi.Int(255),
+//				VpcId:      pulumi.String("vpc-12mt3l31"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -392,7 +395,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -417,7 +420,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 

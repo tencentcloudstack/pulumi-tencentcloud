@@ -21,40 +21,43 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.NewL7Rule(ctx, "testRule", &Dayu.L7RuleArgs{
-// 			Domain:                 pulumi.String("zhaoshaona.com"),
-// 			HealthCheckCode:        pulumi.Int(31),
-// 			HealthCheckHealthNum:   pulumi.Int(5),
-// 			HealthCheckInterval:    pulumi.Int(30),
-// 			HealthCheckMethod:      pulumi.String("GET"),
-// 			HealthCheckPath:        pulumi.String("/"),
-// 			HealthCheckSwitch:      pulumi.Bool(true),
-// 			HealthCheckUnhealthNum: pulumi.Int(10),
-// 			Protocol:               pulumi.String("https"),
-// 			ResourceId:             pulumi.String("bgpip-00000294"),
-// 			ResourceType:           pulumi.String("bgpip"),
-// 			SourceLists: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1:80"),
-// 				pulumi.String("2.2.2.2"),
-// 			},
-// 			SourceType: pulumi.Int(2),
-// 			SslId:      pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Switch:     pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.NewL7Rule(ctx, "testRule", &Dayu.L7RuleArgs{
+//				Domain:                 pulumi.String("zhaoshaona.com"),
+//				HealthCheckCode:        pulumi.Int(31),
+//				HealthCheckHealthNum:   pulumi.Int(5),
+//				HealthCheckInterval:    pulumi.Int(30),
+//				HealthCheckMethod:      pulumi.String("GET"),
+//				HealthCheckPath:        pulumi.String("/"),
+//				HealthCheckSwitch:      pulumi.Bool(true),
+//				HealthCheckUnhealthNum: pulumi.Int(10),
+//				Protocol:               pulumi.String("https"),
+//				ResourceId:             pulumi.String("bgpip-00000294"),
+//				ResourceType:           pulumi.String("bgpip"),
+//				SourceLists: pulumi.StringArray{
+//					pulumi.String("1.1.1.1:80"),
+//					pulumi.String("2.2.2.2"),
+//				},
+//				SourceType: pulumi.Int(2),
+//				SslId:      pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				Switch:     pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type L7Rule struct {
 	pulumi.CustomResourceState
@@ -325,7 +328,7 @@ func (i *L7Rule) ToL7RuleOutputWithContext(ctx context.Context) L7RuleOutput {
 // L7RuleArrayInput is an input type that accepts L7RuleArray and L7RuleArrayOutput values.
 // You can construct a concrete instance of `L7RuleArrayInput` via:
 //
-//          L7RuleArray{ L7RuleArgs{...} }
+//	L7RuleArray{ L7RuleArgs{...} }
 type L7RuleArrayInput interface {
 	pulumi.Input
 
@@ -350,7 +353,7 @@ func (i L7RuleArray) ToL7RuleArrayOutputWithContext(ctx context.Context) L7RuleA
 // L7RuleMapInput is an input type that accepts L7RuleMap and L7RuleMapOutput values.
 // You can construct a concrete instance of `L7RuleMapInput` via:
 //
-//          L7RuleMap{ "key": L7RuleArgs{...} }
+//	L7RuleMap{ "key": L7RuleArgs{...} }
 type L7RuleMapInput interface {
 	pulumi.Input
 

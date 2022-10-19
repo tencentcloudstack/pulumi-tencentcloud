@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 			Name:     pulumi.StringRef("tf-auto-test"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//				Name:     pulumi.StringRef("tf-auto-test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPolicies(ctx *pulumi.Context, args *GetPoliciesArgs, opts ...pulumi.InvokeOption) (*GetPoliciesResult, error) {
 	var rv GetPoliciesResult

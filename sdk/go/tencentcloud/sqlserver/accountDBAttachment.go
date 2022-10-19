@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewAccountDbAttachment(ctx, "foo", &Sqlserver.AccountDbAttachmentArgs{
-// 			InstanceId:  pulumi.String("mssql-3cdq7kx5"),
-// 			AccountName: pulumi.Any(tencentcloud_sqlserver_account.Example.Name),
-// 			DbName:      pulumi.Any(tencentcloud_sqlserver_db.Example.Name),
-// 			Privilege:   pulumi.String("ReadWrite"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewAccountDbAttachment(ctx, "foo", &Sqlserver.AccountDbAttachmentArgs{
+//				InstanceId:  pulumi.String("mssql-3cdq7kx5"),
+//				AccountName: pulumi.Any(tencentcloud_sqlserver_account.Example.Name),
+//				DbName:      pulumi.Any(tencentcloud_sqlserver_db.Example.Name),
+//				Privilege:   pulumi.String("ReadWrite"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // SQL Server account DB attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+//
+//	$ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+//
 // ```
 type AccountDbAttachment struct {
 	pulumi.CustomResourceState
@@ -174,7 +179,7 @@ func (i *AccountDbAttachment) ToAccountDbAttachmentOutputWithContext(ctx context
 // AccountDbAttachmentArrayInput is an input type that accepts AccountDbAttachmentArray and AccountDbAttachmentArrayOutput values.
 // You can construct a concrete instance of `AccountDbAttachmentArrayInput` via:
 //
-//          AccountDbAttachmentArray{ AccountDbAttachmentArgs{...} }
+//	AccountDbAttachmentArray{ AccountDbAttachmentArgs{...} }
 type AccountDbAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +204,7 @@ func (i AccountDbAttachmentArray) ToAccountDbAttachmentArrayOutputWithContext(ct
 // AccountDbAttachmentMapInput is an input type that accepts AccountDbAttachmentMap and AccountDbAttachmentMapOutput values.
 // You can construct a concrete instance of `AccountDbAttachmentMapInput` via:
 //
-//          AccountDbAttachmentMap{ "key": AccountDbAttachmentArgs{...} }
+//	AccountDbAttachmentMap{ "key": AccountDbAttachmentArgs{...} }
 type AccountDbAttachmentMapInput interface {
 	pulumi.Input
 

@@ -18,51 +18,54 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
-// 			UsagePlanName:       pulumi.String("my_plan"),
-// 			UsagePlanDesc:       pulumi.String("nice plan"),
-// 			MaxRequestNum:       pulumi.Int(100),
-// 			MaxRequestNumPreSec: pulumi.Int(10),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("niceservice"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		attachService, err := ApiGateway.NewUsagePlanAttachment(ctx, "attachService", &ApiGateway.UsagePlanAttachmentArgs{
-// 			UsagePlanId: plan.ID(),
-// 			ServiceId:   service.ID(),
-// 			Environment: pulumi.String("test"),
-// 			BindType:    pulumi.String("SERVICE"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetUsagePlanEnvironmentsOutput(ctx, apigateway.GetUsagePlanEnvironmentsOutputArgs{
-// 			UsagePlanId: attachService.UsagePlanId,
-// 			BindType:    pulumi.String("SERVICE"),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
+//				UsagePlanName:       pulumi.String("my_plan"),
+//				UsagePlanDesc:       pulumi.String("nice plan"),
+//				MaxRequestNum:       pulumi.Int(100),
+//				MaxRequestNumPreSec: pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("niceservice"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			attachService, err := ApiGateway.NewUsagePlanAttachment(ctx, "attachService", &ApiGateway.UsagePlanAttachmentArgs{
+//				UsagePlanId: plan.ID(),
+//				ServiceId:   service.ID(),
+//				Environment: pulumi.String("test"),
+//				BindType:    pulumi.String("SERVICE"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetUsagePlanEnvironmentsOutput(ctx, apigateway.GetUsagePlanEnvironmentsOutputArgs{
+//				UsagePlanId: attachService.UsagePlanId,
+//				BindType:    pulumi.String("SERVICE"),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetUsagePlanEnvironments(ctx *pulumi.Context, args *GetUsagePlanEnvironmentsArgs, opts ...pulumi.InvokeOption) (*GetUsagePlanEnvironmentsResult, error) {
 	var rv GetUsagePlanEnvironmentsResult

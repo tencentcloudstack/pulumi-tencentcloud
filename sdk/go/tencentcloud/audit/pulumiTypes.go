@@ -20,7 +20,7 @@ type GetCosRegionsAuditCosRegionList struct {
 // GetCosRegionsAuditCosRegionListInput is an input type that accepts GetCosRegionsAuditCosRegionListArgs and GetCosRegionsAuditCosRegionListOutput values.
 // You can construct a concrete instance of `GetCosRegionsAuditCosRegionListInput` via:
 //
-//          GetCosRegionsAuditCosRegionListArgs{...}
+//	GetCosRegionsAuditCosRegionListArgs{...}
 type GetCosRegionsAuditCosRegionListInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i GetCosRegionsAuditCosRegionListArgs) ToGetCosRegionsAuditCosRegionListOu
 // GetCosRegionsAuditCosRegionListArrayInput is an input type that accepts GetCosRegionsAuditCosRegionListArray and GetCosRegionsAuditCosRegionListArrayOutput values.
 // You can construct a concrete instance of `GetCosRegionsAuditCosRegionListArrayInput` via:
 //
-//          GetCosRegionsAuditCosRegionListArray{ GetCosRegionsAuditCosRegionListArgs{...} }
+//	GetCosRegionsAuditCosRegionListArray{ GetCosRegionsAuditCosRegionListArgs{...} }
 type GetCosRegionsAuditCosRegionListArrayInput interface {
 	pulumi.Input
 
@@ -126,7 +126,7 @@ type GetKeyAliasAuditKeyAliasList struct {
 // GetKeyAliasAuditKeyAliasListInput is an input type that accepts GetKeyAliasAuditKeyAliasListArgs and GetKeyAliasAuditKeyAliasListOutput values.
 // You can construct a concrete instance of `GetKeyAliasAuditKeyAliasListInput` via:
 //
-//          GetKeyAliasAuditKeyAliasListArgs{...}
+//	GetKeyAliasAuditKeyAliasListArgs{...}
 type GetKeyAliasAuditKeyAliasListInput interface {
 	pulumi.Input
 
@@ -156,7 +156,7 @@ func (i GetKeyAliasAuditKeyAliasListArgs) ToGetKeyAliasAuditKeyAliasListOutputWi
 // GetKeyAliasAuditKeyAliasListArrayInput is an input type that accepts GetKeyAliasAuditKeyAliasListArray and GetKeyAliasAuditKeyAliasListArrayOutput values.
 // You can construct a concrete instance of `GetKeyAliasAuditKeyAliasListArrayInput` via:
 //
-//          GetKeyAliasAuditKeyAliasListArray{ GetKeyAliasAuditKeyAliasListArgs{...} }
+//	GetKeyAliasAuditKeyAliasListArray{ GetKeyAliasAuditKeyAliasListArgs{...} }
 type GetKeyAliasAuditKeyAliasListArrayInput interface {
 	pulumi.Input
 

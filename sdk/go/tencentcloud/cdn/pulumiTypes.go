@@ -26,7 +26,7 @@ type DomainAuthentication struct {
 // DomainAuthenticationInput is an input type that accepts DomainAuthenticationArgs and DomainAuthenticationOutput values.
 // You can construct a concrete instance of `DomainAuthenticationInput` via:
 //
-//          DomainAuthenticationArgs{...}
+//	DomainAuthenticationArgs{...}
 type DomainAuthenticationInput interface {
 	pulumi.Input
 
@@ -70,11 +70,11 @@ func (i DomainAuthenticationArgs) ToDomainAuthenticationPtrOutputWithContext(ctx
 // DomainAuthenticationPtrInput is an input type that accepts DomainAuthenticationArgs, DomainAuthenticationPtr and DomainAuthenticationPtrOutput values.
 // You can construct a concrete instance of `DomainAuthenticationPtrInput` via:
 //
-//          DomainAuthenticationArgs{...}
+//	        DomainAuthenticationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainAuthenticationPtrInput interface {
 	pulumi.Input
 
@@ -241,7 +241,7 @@ type DomainAuthenticationTypeA struct {
 // DomainAuthenticationTypeAInput is an input type that accepts DomainAuthenticationTypeAArgs and DomainAuthenticationTypeAOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeAInput` via:
 //
-//          DomainAuthenticationTypeAArgs{...}
+//	DomainAuthenticationTypeAArgs{...}
 type DomainAuthenticationTypeAInput interface {
 	pulumi.Input
 
@@ -287,11 +287,11 @@ func (i DomainAuthenticationTypeAArgs) ToDomainAuthenticationTypeAPtrOutputWithC
 // DomainAuthenticationTypeAPtrInput is an input type that accepts DomainAuthenticationTypeAArgs, DomainAuthenticationTypeAPtr and DomainAuthenticationTypeAPtrOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeAPtrInput` via:
 //
-//          DomainAuthenticationTypeAArgs{...}
+//	        DomainAuthenticationTypeAArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainAuthenticationTypeAPtrInput interface {
 	pulumi.Input
 
@@ -471,7 +471,7 @@ type DomainAuthenticationTypeB struct {
 // DomainAuthenticationTypeBInput is an input type that accepts DomainAuthenticationTypeBArgs and DomainAuthenticationTypeBOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeBInput` via:
 //
-//          DomainAuthenticationTypeBArgs{...}
+//	DomainAuthenticationTypeBArgs{...}
 type DomainAuthenticationTypeBInput interface {
 	pulumi.Input
 
@@ -515,11 +515,11 @@ func (i DomainAuthenticationTypeBArgs) ToDomainAuthenticationTypeBPtrOutputWithC
 // DomainAuthenticationTypeBPtrInput is an input type that accepts DomainAuthenticationTypeBArgs, DomainAuthenticationTypeBPtr and DomainAuthenticationTypeBPtrOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeBPtrInput` via:
 //
-//          DomainAuthenticationTypeBArgs{...}
+//	        DomainAuthenticationTypeBArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainAuthenticationTypeBPtrInput interface {
 	pulumi.Input
 
@@ -686,7 +686,7 @@ type DomainAuthenticationTypeC struct {
 // DomainAuthenticationTypeCInput is an input type that accepts DomainAuthenticationTypeCArgs and DomainAuthenticationTypeCOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeCInput` via:
 //
-//          DomainAuthenticationTypeCArgs{...}
+//	DomainAuthenticationTypeCArgs{...}
 type DomainAuthenticationTypeCInput interface {
 	pulumi.Input
 
@@ -732,11 +732,11 @@ func (i DomainAuthenticationTypeCArgs) ToDomainAuthenticationTypeCPtrOutputWithC
 // DomainAuthenticationTypeCPtrInput is an input type that accepts DomainAuthenticationTypeCArgs, DomainAuthenticationTypeCPtr and DomainAuthenticationTypeCPtrOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeCPtrInput` via:
 //
-//          DomainAuthenticationTypeCArgs{...}
+//	        DomainAuthenticationTypeCArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainAuthenticationTypeCPtrInput interface {
 	pulumi.Input
 
@@ -920,7 +920,7 @@ type DomainAuthenticationTypeD struct {
 // DomainAuthenticationTypeDInput is an input type that accepts DomainAuthenticationTypeDArgs and DomainAuthenticationTypeDOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeDInput` via:
 //
-//          DomainAuthenticationTypeDArgs{...}
+//	DomainAuthenticationTypeDArgs{...}
 type DomainAuthenticationTypeDInput interface {
 	pulumi.Input
 
@@ -968,11 +968,11 @@ func (i DomainAuthenticationTypeDArgs) ToDomainAuthenticationTypeDPtrOutputWithC
 // DomainAuthenticationTypeDPtrInput is an input type that accepts DomainAuthenticationTypeDArgs, DomainAuthenticationTypeDPtr and DomainAuthenticationTypeDPtrOutput values.
 // You can construct a concrete instance of `DomainAuthenticationTypeDPtrInput` via:
 //
-//          DomainAuthenticationTypeDArgs{...}
+//	        DomainAuthenticationTypeDArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainAuthenticationTypeDPtrInput interface {
 	pulumi.Input
 
@@ -1167,7 +1167,7 @@ type DomainAwsPrivateAccess struct {
 // DomainAwsPrivateAccessInput is an input type that accepts DomainAwsPrivateAccessArgs and DomainAwsPrivateAccessOutput values.
 // You can construct a concrete instance of `DomainAwsPrivateAccessInput` via:
 //
-//          DomainAwsPrivateAccessArgs{...}
+//	DomainAwsPrivateAccessArgs{...}
 type DomainAwsPrivateAccessInput interface {
 	pulumi.Input
 
@@ -1211,11 +1211,11 @@ func (i DomainAwsPrivateAccessArgs) ToDomainAwsPrivateAccessPtrOutputWithContext
 // DomainAwsPrivateAccessPtrInput is an input type that accepts DomainAwsPrivateAccessArgs, DomainAwsPrivateAccessPtr and DomainAwsPrivateAccessPtrOutput values.
 // You can construct a concrete instance of `DomainAwsPrivateAccessPtrInput` via:
 //
-//          DomainAwsPrivateAccessArgs{...}
+//	        DomainAwsPrivateAccessArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainAwsPrivateAccessPtrInput interface {
 	pulumi.Input
 
@@ -1386,7 +1386,7 @@ type DomainBandWidthAlert struct {
 // DomainBandWidthAlertInput is an input type that accepts DomainBandWidthAlertArgs and DomainBandWidthAlertOutput values.
 // You can construct a concrete instance of `DomainBandWidthAlertInput` via:
 //
-//          DomainBandWidthAlertArgs{...}
+//	DomainBandWidthAlertArgs{...}
 type DomainBandWidthAlertInput interface {
 	pulumi.Input
 
@@ -1436,11 +1436,11 @@ func (i DomainBandWidthAlertArgs) ToDomainBandWidthAlertPtrOutputWithContext(ctx
 // DomainBandWidthAlertPtrInput is an input type that accepts DomainBandWidthAlertArgs, DomainBandWidthAlertPtr and DomainBandWidthAlertPtrOutput values.
 // You can construct a concrete instance of `DomainBandWidthAlertPtrInput` via:
 //
-//          DomainBandWidthAlertArgs{...}
+//	        DomainBandWidthAlertArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainBandWidthAlertPtrInput interface {
 	pulumi.Input
 
@@ -1669,7 +1669,7 @@ type DomainBandWidthAlertStatisticItem struct {
 // DomainBandWidthAlertStatisticItemInput is an input type that accepts DomainBandWidthAlertStatisticItemArgs and DomainBandWidthAlertStatisticItemOutput values.
 // You can construct a concrete instance of `DomainBandWidthAlertStatisticItemInput` via:
 //
-//          DomainBandWidthAlertStatisticItemArgs{...}
+//	DomainBandWidthAlertStatisticItemArgs{...}
 type DomainBandWidthAlertStatisticItemInput interface {
 	pulumi.Input
 
@@ -1721,11 +1721,11 @@ func (i DomainBandWidthAlertStatisticItemArgs) ToDomainBandWidthAlertStatisticIt
 // DomainBandWidthAlertStatisticItemPtrInput is an input type that accepts DomainBandWidthAlertStatisticItemArgs, DomainBandWidthAlertStatisticItemPtr and DomainBandWidthAlertStatisticItemPtrOutput values.
 // You can construct a concrete instance of `DomainBandWidthAlertStatisticItemPtrInput` via:
 //
-//          DomainBandWidthAlertStatisticItemArgs{...}
+//	        DomainBandWidthAlertStatisticItemArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainBandWidthAlertStatisticItemPtrInput interface {
 	pulumi.Input
 
@@ -1944,7 +1944,7 @@ type DomainCompression struct {
 // DomainCompressionInput is an input type that accepts DomainCompressionArgs and DomainCompressionOutput values.
 // You can construct a concrete instance of `DomainCompressionInput` via:
 //
-//          DomainCompressionArgs{...}
+//	DomainCompressionArgs{...}
 type DomainCompressionInput interface {
 	pulumi.Input
 
@@ -1982,11 +1982,11 @@ func (i DomainCompressionArgs) ToDomainCompressionPtrOutputWithContext(ctx conte
 // DomainCompressionPtrInput is an input type that accepts DomainCompressionArgs, DomainCompressionPtr and DomainCompressionPtrOutput values.
 // You can construct a concrete instance of `DomainCompressionPtrInput` via:
 //
-//          DomainCompressionArgs{...}
+//	        DomainCompressionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainCompressionPtrInput interface {
 	pulumi.Input
 
@@ -2110,7 +2110,7 @@ type DomainCompressionCompressionRule struct {
 // DomainCompressionCompressionRuleInput is an input type that accepts DomainCompressionCompressionRuleArgs and DomainCompressionCompressionRuleOutput values.
 // You can construct a concrete instance of `DomainCompressionCompressionRuleInput` via:
 //
-//          DomainCompressionCompressionRuleArgs{...}
+//	DomainCompressionCompressionRuleArgs{...}
 type DomainCompressionCompressionRuleInput interface {
 	pulumi.Input
 
@@ -2150,7 +2150,7 @@ func (i DomainCompressionCompressionRuleArgs) ToDomainCompressionCompressionRule
 // DomainCompressionCompressionRuleArrayInput is an input type that accepts DomainCompressionCompressionRuleArray and DomainCompressionCompressionRuleArrayOutput values.
 // You can construct a concrete instance of `DomainCompressionCompressionRuleArrayInput` via:
 //
-//          DomainCompressionCompressionRuleArray{ DomainCompressionCompressionRuleArgs{...} }
+//	DomainCompressionCompressionRuleArray{ DomainCompressionCompressionRuleArgs{...} }
 type DomainCompressionCompressionRuleArrayInput interface {
 	pulumi.Input
 
@@ -2251,7 +2251,7 @@ type DomainDownstreamCapping struct {
 // DomainDownstreamCappingInput is an input type that accepts DomainDownstreamCappingArgs and DomainDownstreamCappingOutput values.
 // You can construct a concrete instance of `DomainDownstreamCappingInput` via:
 //
-//          DomainDownstreamCappingArgs{...}
+//	DomainDownstreamCappingArgs{...}
 type DomainDownstreamCappingInput interface {
 	pulumi.Input
 
@@ -2289,11 +2289,11 @@ func (i DomainDownstreamCappingArgs) ToDomainDownstreamCappingPtrOutputWithConte
 // DomainDownstreamCappingPtrInput is an input type that accepts DomainDownstreamCappingArgs, DomainDownstreamCappingPtr and DomainDownstreamCappingPtrOutput values.
 // You can construct a concrete instance of `DomainDownstreamCappingPtrInput` via:
 //
-//          DomainDownstreamCappingArgs{...}
+//	        DomainDownstreamCappingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainDownstreamCappingPtrInput interface {
 	pulumi.Input
 
@@ -2409,7 +2409,7 @@ type DomainDownstreamCappingCappingRule struct {
 // DomainDownstreamCappingCappingRuleInput is an input type that accepts DomainDownstreamCappingCappingRuleArgs and DomainDownstreamCappingCappingRuleOutput values.
 // You can construct a concrete instance of `DomainDownstreamCappingCappingRuleInput` via:
 //
-//          DomainDownstreamCappingCappingRuleArgs{...}
+//	DomainDownstreamCappingCappingRuleArgs{...}
 type DomainDownstreamCappingCappingRuleInput interface {
 	pulumi.Input
 
@@ -2441,7 +2441,7 @@ func (i DomainDownstreamCappingCappingRuleArgs) ToDomainDownstreamCappingCapping
 // DomainDownstreamCappingCappingRuleArrayInput is an input type that accepts DomainDownstreamCappingCappingRuleArray and DomainDownstreamCappingCappingRuleArrayOutput values.
 // You can construct a concrete instance of `DomainDownstreamCappingCappingRuleArrayInput` via:
 //
-//          DomainDownstreamCappingCappingRuleArray{ DomainDownstreamCappingCappingRuleArgs{...} }
+//	DomainDownstreamCappingCappingRuleArray{ DomainDownstreamCappingCappingRuleArgs{...} }
 type DomainDownstreamCappingCappingRuleArrayInput interface {
 	pulumi.Input
 
@@ -2522,7 +2522,7 @@ type DomainErrorPage struct {
 // DomainErrorPageInput is an input type that accepts DomainErrorPageArgs and DomainErrorPageOutput values.
 // You can construct a concrete instance of `DomainErrorPageInput` via:
 //
-//          DomainErrorPageArgs{...}
+//	DomainErrorPageArgs{...}
 type DomainErrorPageInput interface {
 	pulumi.Input
 
@@ -2560,11 +2560,11 @@ func (i DomainErrorPageArgs) ToDomainErrorPagePtrOutputWithContext(ctx context.C
 // DomainErrorPagePtrInput is an input type that accepts DomainErrorPageArgs, DomainErrorPagePtr and DomainErrorPagePtrOutput values.
 // You can construct a concrete instance of `DomainErrorPagePtrInput` via:
 //
-//          DomainErrorPageArgs{...}
+//	        DomainErrorPageArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainErrorPagePtrInput interface {
 	pulumi.Input
 
@@ -2680,7 +2680,7 @@ type DomainErrorPagePageRule struct {
 // DomainErrorPagePageRuleInput is an input type that accepts DomainErrorPagePageRuleArgs and DomainErrorPagePageRuleOutput values.
 // You can construct a concrete instance of `DomainErrorPagePageRuleInput` via:
 //
-//          DomainErrorPagePageRuleArgs{...}
+//	DomainErrorPagePageRuleArgs{...}
 type DomainErrorPagePageRuleInput interface {
 	pulumi.Input
 
@@ -2712,7 +2712,7 @@ func (i DomainErrorPagePageRuleArgs) ToDomainErrorPagePageRuleOutputWithContext(
 // DomainErrorPagePageRuleArrayInput is an input type that accepts DomainErrorPagePageRuleArray and DomainErrorPagePageRuleArrayOutput values.
 // You can construct a concrete instance of `DomainErrorPagePageRuleArrayInput` via:
 //
-//          DomainErrorPagePageRuleArray{ DomainErrorPagePageRuleArgs{...} }
+//	DomainErrorPagePageRuleArray{ DomainErrorPagePageRuleArgs{...} }
 type DomainErrorPagePageRuleArrayInput interface {
 	pulumi.Input
 
@@ -2805,7 +2805,7 @@ type DomainHttpsConfig struct {
 // DomainHttpsConfigInput is an input type that accepts DomainHttpsConfigArgs and DomainHttpsConfigOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigInput` via:
 //
-//          DomainHttpsConfigArgs{...}
+//	DomainHttpsConfigArgs{...}
 type DomainHttpsConfigInput interface {
 	pulumi.Input
 
@@ -2855,11 +2855,11 @@ func (i DomainHttpsConfigArgs) ToDomainHttpsConfigPtrOutputWithContext(ctx conte
 // DomainHttpsConfigPtrInput is an input type that accepts DomainHttpsConfigArgs, DomainHttpsConfigPtr and DomainHttpsConfigPtrOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigPtrInput` via:
 //
-//          DomainHttpsConfigArgs{...}
+//	        DomainHttpsConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainHttpsConfigPtrInput interface {
 	pulumi.Input
 
@@ -3065,7 +3065,7 @@ type DomainHttpsConfigClientCertificateConfig struct {
 // DomainHttpsConfigClientCertificateConfigInput is an input type that accepts DomainHttpsConfigClientCertificateConfigArgs and DomainHttpsConfigClientCertificateConfigOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigClientCertificateConfigInput` via:
 //
-//          DomainHttpsConfigClientCertificateConfigArgs{...}
+//	DomainHttpsConfigClientCertificateConfigArgs{...}
 type DomainHttpsConfigClientCertificateConfigInput interface {
 	pulumi.Input
 
@@ -3105,11 +3105,11 @@ func (i DomainHttpsConfigClientCertificateConfigArgs) ToDomainHttpsConfigClientC
 // DomainHttpsConfigClientCertificateConfigPtrInput is an input type that accepts DomainHttpsConfigClientCertificateConfigArgs, DomainHttpsConfigClientCertificateConfigPtr and DomainHttpsConfigClientCertificateConfigPtrOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigClientCertificateConfigPtrInput` via:
 //
-//          DomainHttpsConfigClientCertificateConfigArgs{...}
+//	        DomainHttpsConfigClientCertificateConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainHttpsConfigClientCertificateConfigPtrInput interface {
 	pulumi.Input
 
@@ -3251,7 +3251,7 @@ type DomainHttpsConfigForceRedirect struct {
 // DomainHttpsConfigForceRedirectInput is an input type that accepts DomainHttpsConfigForceRedirectArgs and DomainHttpsConfigForceRedirectOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigForceRedirectInput` via:
 //
-//          DomainHttpsConfigForceRedirectArgs{...}
+//	DomainHttpsConfigForceRedirectArgs{...}
 type DomainHttpsConfigForceRedirectInput interface {
 	pulumi.Input
 
@@ -3291,11 +3291,11 @@ func (i DomainHttpsConfigForceRedirectArgs) ToDomainHttpsConfigForceRedirectPtrO
 // DomainHttpsConfigForceRedirectPtrInput is an input type that accepts DomainHttpsConfigForceRedirectArgs, DomainHttpsConfigForceRedirectPtr and DomainHttpsConfigForceRedirectPtrOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigForceRedirectPtrInput` via:
 //
-//          DomainHttpsConfigForceRedirectArgs{...}
+//	        DomainHttpsConfigForceRedirectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainHttpsConfigForceRedirectPtrInput interface {
 	pulumi.Input
 
@@ -3432,7 +3432,7 @@ type DomainHttpsConfigServerCertificateConfig struct {
 // DomainHttpsConfigServerCertificateConfigInput is an input type that accepts DomainHttpsConfigServerCertificateConfigArgs and DomainHttpsConfigServerCertificateConfigOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigServerCertificateConfigInput` via:
 //
-//          DomainHttpsConfigServerCertificateConfigArgs{...}
+//	DomainHttpsConfigServerCertificateConfigArgs{...}
 type DomainHttpsConfigServerCertificateConfigInput interface {
 	pulumi.Input
 
@@ -3478,11 +3478,11 @@ func (i DomainHttpsConfigServerCertificateConfigArgs) ToDomainHttpsConfigServerC
 // DomainHttpsConfigServerCertificateConfigPtrInput is an input type that accepts DomainHttpsConfigServerCertificateConfigArgs, DomainHttpsConfigServerCertificateConfigPtr and DomainHttpsConfigServerCertificateConfigPtrOutput values.
 // You can construct a concrete instance of `DomainHttpsConfigServerCertificateConfigPtrInput` via:
 //
-//          DomainHttpsConfigServerCertificateConfigArgs{...}
+//	        DomainHttpsConfigServerCertificateConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainHttpsConfigServerCertificateConfigPtrInput interface {
 	pulumi.Input
 
@@ -3671,7 +3671,7 @@ type DomainHwPrivateAccess struct {
 // DomainHwPrivateAccessInput is an input type that accepts DomainHwPrivateAccessArgs and DomainHwPrivateAccessOutput values.
 // You can construct a concrete instance of `DomainHwPrivateAccessInput` via:
 //
-//          DomainHwPrivateAccessArgs{...}
+//	DomainHwPrivateAccessArgs{...}
 type DomainHwPrivateAccessInput interface {
 	pulumi.Input
 
@@ -3713,11 +3713,11 @@ func (i DomainHwPrivateAccessArgs) ToDomainHwPrivateAccessPtrOutputWithContext(c
 // DomainHwPrivateAccessPtrInput is an input type that accepts DomainHwPrivateAccessArgs, DomainHwPrivateAccessPtr and DomainHwPrivateAccessPtrOutput values.
 // You can construct a concrete instance of `DomainHwPrivateAccessPtrInput` via:
 //
-//          DomainHwPrivateAccessArgs{...}
+//	        DomainHwPrivateAccessArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainHwPrivateAccessPtrInput interface {
 	pulumi.Input
 
@@ -3867,7 +3867,7 @@ type DomainIpFilter struct {
 // DomainIpFilterInput is an input type that accepts DomainIpFilterArgs and DomainIpFilterOutput values.
 // You can construct a concrete instance of `DomainIpFilterInput` via:
 //
-//          DomainIpFilterArgs{...}
+//	DomainIpFilterArgs{...}
 type DomainIpFilterInput interface {
 	pulumi.Input
 
@@ -3911,11 +3911,11 @@ func (i DomainIpFilterArgs) ToDomainIpFilterPtrOutputWithContext(ctx context.Con
 // DomainIpFilterPtrInput is an input type that accepts DomainIpFilterArgs, DomainIpFilterPtr and DomainIpFilterPtrOutput values.
 // You can construct a concrete instance of `DomainIpFilterPtrInput` via:
 //
-//          DomainIpFilterArgs{...}
+//	        DomainIpFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainIpFilterPtrInput interface {
 	pulumi.Input
 
@@ -4078,7 +4078,7 @@ type DomainIpFilterFilterRule struct {
 // DomainIpFilterFilterRuleInput is an input type that accepts DomainIpFilterFilterRuleArgs and DomainIpFilterFilterRuleOutput values.
 // You can construct a concrete instance of `DomainIpFilterFilterRuleInput` via:
 //
-//          DomainIpFilterFilterRuleArgs{...}
+//	DomainIpFilterFilterRuleArgs{...}
 type DomainIpFilterFilterRuleInput interface {
 	pulumi.Input
 
@@ -4112,7 +4112,7 @@ func (i DomainIpFilterFilterRuleArgs) ToDomainIpFilterFilterRuleOutputWithContex
 // DomainIpFilterFilterRuleArrayInput is an input type that accepts DomainIpFilterFilterRuleArray and DomainIpFilterFilterRuleArrayOutput values.
 // You can construct a concrete instance of `DomainIpFilterFilterRuleArrayInput` via:
 //
-//          DomainIpFilterFilterRuleArray{ DomainIpFilterFilterRuleArgs{...} }
+//	DomainIpFilterFilterRuleArray{ DomainIpFilterFilterRuleArgs{...} }
 type DomainIpFilterFilterRuleArrayInput interface {
 	pulumi.Input
 
@@ -4198,7 +4198,7 @@ type DomainIpFreqLimit struct {
 // DomainIpFreqLimitInput is an input type that accepts DomainIpFreqLimitArgs and DomainIpFreqLimitOutput values.
 // You can construct a concrete instance of `DomainIpFreqLimitInput` via:
 //
-//          DomainIpFreqLimitArgs{...}
+//	DomainIpFreqLimitArgs{...}
 type DomainIpFreqLimitInput interface {
 	pulumi.Input
 
@@ -4236,11 +4236,11 @@ func (i DomainIpFreqLimitArgs) ToDomainIpFreqLimitPtrOutputWithContext(ctx conte
 // DomainIpFreqLimitPtrInput is an input type that accepts DomainIpFreqLimitArgs, DomainIpFreqLimitPtr and DomainIpFreqLimitPtrOutput values.
 // You can construct a concrete instance of `DomainIpFreqLimitPtrInput` via:
 //
-//          DomainIpFreqLimitArgs{...}
+//	        DomainIpFreqLimitArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainIpFreqLimitPtrInput interface {
 	pulumi.Input
 
@@ -4354,7 +4354,7 @@ type DomainMaxAge struct {
 // DomainMaxAgeInput is an input type that accepts DomainMaxAgeArgs and DomainMaxAgeOutput values.
 // You can construct a concrete instance of `DomainMaxAgeInput` via:
 //
-//          DomainMaxAgeArgs{...}
+//	DomainMaxAgeArgs{...}
 type DomainMaxAgeInput interface {
 	pulumi.Input
 
@@ -4392,11 +4392,11 @@ func (i DomainMaxAgeArgs) ToDomainMaxAgePtrOutputWithContext(ctx context.Context
 // DomainMaxAgePtrInput is an input type that accepts DomainMaxAgeArgs, DomainMaxAgePtr and DomainMaxAgePtrOutput values.
 // You can construct a concrete instance of `DomainMaxAgePtrInput` via:
 //
-//          DomainMaxAgeArgs{...}
+//	        DomainMaxAgeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainMaxAgePtrInput interface {
 	pulumi.Input
 
@@ -4514,7 +4514,7 @@ type DomainMaxAgeMaxAgeRule struct {
 // DomainMaxAgeMaxAgeRuleInput is an input type that accepts DomainMaxAgeMaxAgeRuleArgs and DomainMaxAgeMaxAgeRuleOutput values.
 // You can construct a concrete instance of `DomainMaxAgeMaxAgeRuleInput` via:
 //
-//          DomainMaxAgeMaxAgeRuleArgs{...}
+//	DomainMaxAgeMaxAgeRuleArgs{...}
 type DomainMaxAgeMaxAgeRuleInput interface {
 	pulumi.Input
 
@@ -4548,7 +4548,7 @@ func (i DomainMaxAgeMaxAgeRuleArgs) ToDomainMaxAgeMaxAgeRuleOutputWithContext(ct
 // DomainMaxAgeMaxAgeRuleArrayInput is an input type that accepts DomainMaxAgeMaxAgeRuleArray and DomainMaxAgeMaxAgeRuleArrayOutput values.
 // You can construct a concrete instance of `DomainMaxAgeMaxAgeRuleArrayInput` via:
 //
-//          DomainMaxAgeMaxAgeRuleArray{ DomainMaxAgeMaxAgeRuleArgs{...} }
+//	DomainMaxAgeMaxAgeRuleArray{ DomainMaxAgeMaxAgeRuleArgs{...} }
 type DomainMaxAgeMaxAgeRuleArrayInput interface {
 	pulumi.Input
 
@@ -4646,7 +4646,7 @@ type DomainOrigin struct {
 // DomainOriginInput is an input type that accepts DomainOriginArgs and DomainOriginOutput values.
 // You can construct a concrete instance of `DomainOriginInput` via:
 //
-//          DomainOriginArgs{...}
+//	DomainOriginArgs{...}
 type DomainOriginInput interface {
 	pulumi.Input
 
@@ -4696,11 +4696,11 @@ func (i DomainOriginArgs) ToDomainOriginPtrOutputWithContext(ctx context.Context
 // DomainOriginPtrInput is an input type that accepts DomainOriginArgs, DomainOriginPtr and DomainOriginPtrOutput values.
 // You can construct a concrete instance of `DomainOriginPtrInput` via:
 //
-//          DomainOriginArgs{...}
+//	        DomainOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainOriginPtrInput interface {
 	pulumi.Input
 
@@ -4904,7 +4904,7 @@ type DomainOriginPullOptimization struct {
 // DomainOriginPullOptimizationInput is an input type that accepts DomainOriginPullOptimizationArgs and DomainOriginPullOptimizationOutput values.
 // You can construct a concrete instance of `DomainOriginPullOptimizationInput` via:
 //
-//          DomainOriginPullOptimizationArgs{...}
+//	DomainOriginPullOptimizationArgs{...}
 type DomainOriginPullOptimizationInput interface {
 	pulumi.Input
 
@@ -4942,11 +4942,11 @@ func (i DomainOriginPullOptimizationArgs) ToDomainOriginPullOptimizationPtrOutpu
 // DomainOriginPullOptimizationPtrInput is an input type that accepts DomainOriginPullOptimizationArgs, DomainOriginPullOptimizationPtr and DomainOriginPullOptimizationPtrOutput values.
 // You can construct a concrete instance of `DomainOriginPullOptimizationPtrInput` via:
 //
-//          DomainOriginPullOptimizationArgs{...}
+//	        DomainOriginPullOptimizationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainOriginPullOptimizationPtrInput interface {
 	pulumi.Input
 
@@ -5060,7 +5060,7 @@ type DomainOriginPullTimeout struct {
 // DomainOriginPullTimeoutInput is an input type that accepts DomainOriginPullTimeoutArgs and DomainOriginPullTimeoutOutput values.
 // You can construct a concrete instance of `DomainOriginPullTimeoutInput` via:
 //
-//          DomainOriginPullTimeoutArgs{...}
+//	DomainOriginPullTimeoutArgs{...}
 type DomainOriginPullTimeoutInput interface {
 	pulumi.Input
 
@@ -5098,11 +5098,11 @@ func (i DomainOriginPullTimeoutArgs) ToDomainOriginPullTimeoutPtrOutputWithConte
 // DomainOriginPullTimeoutPtrInput is an input type that accepts DomainOriginPullTimeoutArgs, DomainOriginPullTimeoutPtr and DomainOriginPullTimeoutPtrOutput values.
 // You can construct a concrete instance of `DomainOriginPullTimeoutPtrInput` via:
 //
-//          DomainOriginPullTimeoutArgs{...}
+//	        DomainOriginPullTimeoutArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainOriginPullTimeoutPtrInput interface {
 	pulumi.Input
 
@@ -5222,7 +5222,7 @@ type DomainOssPrivateAccess struct {
 // DomainOssPrivateAccessInput is an input type that accepts DomainOssPrivateAccessArgs and DomainOssPrivateAccessOutput values.
 // You can construct a concrete instance of `DomainOssPrivateAccessInput` via:
 //
-//          DomainOssPrivateAccessArgs{...}
+//	DomainOssPrivateAccessArgs{...}
 type DomainOssPrivateAccessInput interface {
 	pulumi.Input
 
@@ -5266,11 +5266,11 @@ func (i DomainOssPrivateAccessArgs) ToDomainOssPrivateAccessPtrOutputWithContext
 // DomainOssPrivateAccessPtrInput is an input type that accepts DomainOssPrivateAccessArgs, DomainOssPrivateAccessPtr and DomainOssPrivateAccessPtrOutput values.
 // You can construct a concrete instance of `DomainOssPrivateAccessPtrInput` via:
 //
-//          DomainOssPrivateAccessArgs{...}
+//	        DomainOssPrivateAccessArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainOssPrivateAccessPtrInput interface {
 	pulumi.Input
 
@@ -5431,7 +5431,7 @@ type DomainQnPrivateAccess struct {
 // DomainQnPrivateAccessInput is an input type that accepts DomainQnPrivateAccessArgs and DomainQnPrivateAccessOutput values.
 // You can construct a concrete instance of `DomainQnPrivateAccessInput` via:
 //
-//          DomainQnPrivateAccessArgs{...}
+//	DomainQnPrivateAccessArgs{...}
 type DomainQnPrivateAccessInput interface {
 	pulumi.Input
 
@@ -5471,11 +5471,11 @@ func (i DomainQnPrivateAccessArgs) ToDomainQnPrivateAccessPtrOutputWithContext(c
 // DomainQnPrivateAccessPtrInput is an input type that accepts DomainQnPrivateAccessArgs, DomainQnPrivateAccessPtr and DomainQnPrivateAccessPtrOutput values.
 // You can construct a concrete instance of `DomainQnPrivateAccessPtrInput` via:
 //
-//          DomainQnPrivateAccessArgs{...}
+//	        DomainQnPrivateAccessArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainQnPrivateAccessPtrInput interface {
 	pulumi.Input
 
@@ -5604,7 +5604,7 @@ type DomainReferer struct {
 // DomainRefererInput is an input type that accepts DomainRefererArgs and DomainRefererOutput values.
 // You can construct a concrete instance of `DomainRefererInput` via:
 //
-//          DomainRefererArgs{...}
+//	DomainRefererArgs{...}
 type DomainRefererInput interface {
 	pulumi.Input
 
@@ -5642,11 +5642,11 @@ func (i DomainRefererArgs) ToDomainRefererPtrOutputWithContext(ctx context.Conte
 // DomainRefererPtrInput is an input type that accepts DomainRefererArgs, DomainRefererPtr and DomainRefererPtrOutput values.
 // You can construct a concrete instance of `DomainRefererPtrInput` via:
 //
-//          DomainRefererArgs{...}
+//	        DomainRefererArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainRefererPtrInput interface {
 	pulumi.Input
 
@@ -5766,7 +5766,7 @@ type DomainRefererRefererRule struct {
 // DomainRefererRefererRuleInput is an input type that accepts DomainRefererRefererRuleArgs and DomainRefererRefererRuleOutput values.
 // You can construct a concrete instance of `DomainRefererRefererRuleInput` via:
 //
-//          DomainRefererRefererRuleArgs{...}
+//	DomainRefererRefererRuleArgs{...}
 type DomainRefererRefererRuleInput interface {
 	pulumi.Input
 
@@ -5802,7 +5802,7 @@ func (i DomainRefererRefererRuleArgs) ToDomainRefererRefererRuleOutputWithContex
 // DomainRefererRefererRuleArrayInput is an input type that accepts DomainRefererRefererRuleArray and DomainRefererRefererRuleArrayOutput values.
 // You can construct a concrete instance of `DomainRefererRefererRuleArrayInput` via:
 //
-//          DomainRefererRefererRuleArray{ DomainRefererRefererRuleArgs{...} }
+//	DomainRefererRefererRuleArray{ DomainRefererRefererRuleArgs{...} }
 type DomainRefererRefererRuleArrayInput interface {
 	pulumi.Input
 
@@ -5893,7 +5893,7 @@ type DomainRequestHeader struct {
 // DomainRequestHeaderInput is an input type that accepts DomainRequestHeaderArgs and DomainRequestHeaderOutput values.
 // You can construct a concrete instance of `DomainRequestHeaderInput` via:
 //
-//          DomainRequestHeaderArgs{...}
+//	DomainRequestHeaderArgs{...}
 type DomainRequestHeaderInput interface {
 	pulumi.Input
 
@@ -5931,11 +5931,11 @@ func (i DomainRequestHeaderArgs) ToDomainRequestHeaderPtrOutputWithContext(ctx c
 // DomainRequestHeaderPtrInput is an input type that accepts DomainRequestHeaderArgs, DomainRequestHeaderPtr and DomainRequestHeaderPtrOutput values.
 // You can construct a concrete instance of `DomainRequestHeaderPtrInput` via:
 //
-//          DomainRequestHeaderArgs{...}
+//	        DomainRequestHeaderArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainRequestHeaderPtrInput interface {
 	pulumi.Input
 
@@ -6055,7 +6055,7 @@ type DomainRequestHeaderHeaderRule struct {
 // DomainRequestHeaderHeaderRuleInput is an input type that accepts DomainRequestHeaderHeaderRuleArgs and DomainRequestHeaderHeaderRuleOutput values.
 // You can construct a concrete instance of `DomainRequestHeaderHeaderRuleInput` via:
 //
-//          DomainRequestHeaderHeaderRuleArgs{...}
+//	DomainRequestHeaderHeaderRuleArgs{...}
 type DomainRequestHeaderHeaderRuleInput interface {
 	pulumi.Input
 
@@ -6091,7 +6091,7 @@ func (i DomainRequestHeaderHeaderRuleArgs) ToDomainRequestHeaderHeaderRuleOutput
 // DomainRequestHeaderHeaderRuleArrayInput is an input type that accepts DomainRequestHeaderHeaderRuleArray and DomainRequestHeaderHeaderRuleArrayOutput values.
 // You can construct a concrete instance of `DomainRequestHeaderHeaderRuleArrayInput` via:
 //
-//          DomainRequestHeaderHeaderRuleArray{ DomainRequestHeaderHeaderRuleArgs{...} }
+//	DomainRequestHeaderHeaderRuleArray{ DomainRequestHeaderHeaderRuleArgs{...} }
 type DomainRequestHeaderHeaderRuleArrayInput interface {
 	pulumi.Input
 
@@ -6182,7 +6182,7 @@ type DomainResponseHeader struct {
 // DomainResponseHeaderInput is an input type that accepts DomainResponseHeaderArgs and DomainResponseHeaderOutput values.
 // You can construct a concrete instance of `DomainResponseHeaderInput` via:
 //
-//          DomainResponseHeaderArgs{...}
+//	DomainResponseHeaderArgs{...}
 type DomainResponseHeaderInput interface {
 	pulumi.Input
 
@@ -6220,11 +6220,11 @@ func (i DomainResponseHeaderArgs) ToDomainResponseHeaderPtrOutputWithContext(ctx
 // DomainResponseHeaderPtrInput is an input type that accepts DomainResponseHeaderArgs, DomainResponseHeaderPtr and DomainResponseHeaderPtrOutput values.
 // You can construct a concrete instance of `DomainResponseHeaderPtrInput` via:
 //
-//          DomainResponseHeaderArgs{...}
+//	        DomainResponseHeaderArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainResponseHeaderPtrInput interface {
 	pulumi.Input
 
@@ -6344,7 +6344,7 @@ type DomainResponseHeaderHeaderRule struct {
 // DomainResponseHeaderHeaderRuleInput is an input type that accepts DomainResponseHeaderHeaderRuleArgs and DomainResponseHeaderHeaderRuleOutput values.
 // You can construct a concrete instance of `DomainResponseHeaderHeaderRuleInput` via:
 //
-//          DomainResponseHeaderHeaderRuleArgs{...}
+//	DomainResponseHeaderHeaderRuleArgs{...}
 type DomainResponseHeaderHeaderRuleInput interface {
 	pulumi.Input
 
@@ -6380,7 +6380,7 @@ func (i DomainResponseHeaderHeaderRuleArgs) ToDomainResponseHeaderHeaderRuleOutp
 // DomainResponseHeaderHeaderRuleArrayInput is an input type that accepts DomainResponseHeaderHeaderRuleArray and DomainResponseHeaderHeaderRuleArrayOutput values.
 // You can construct a concrete instance of `DomainResponseHeaderHeaderRuleArrayInput` via:
 //
-//          DomainResponseHeaderHeaderRuleArray{ DomainResponseHeaderHeaderRuleArgs{...} }
+//	DomainResponseHeaderHeaderRuleArray{ DomainResponseHeaderHeaderRuleArgs{...} }
 type DomainResponseHeaderHeaderRuleArrayInput interface {
 	pulumi.Input
 
@@ -6487,7 +6487,7 @@ type DomainRuleCach struct {
 // DomainRuleCachInput is an input type that accepts DomainRuleCachArgs and DomainRuleCachOutput values.
 // You can construct a concrete instance of `DomainRuleCachInput` via:
 //
-//          DomainRuleCachArgs{...}
+//	DomainRuleCachArgs{...}
 type DomainRuleCachInput interface {
 	pulumi.Input
 
@@ -6533,7 +6533,7 @@ func (i DomainRuleCachArgs) ToDomainRuleCachOutputWithContext(ctx context.Contex
 // DomainRuleCachArrayInput is an input type that accepts DomainRuleCachArray and DomainRuleCachArrayOutput values.
 // You can construct a concrete instance of `DomainRuleCachArrayInput` via:
 //
-//          DomainRuleCachArray{ DomainRuleCachArgs{...} }
+//	DomainRuleCachArray{ DomainRuleCachArgs{...} }
 type DomainRuleCachArrayInput interface {
 	pulumi.Input
 
@@ -6649,7 +6649,7 @@ type DomainStatusCodeCache struct {
 // DomainStatusCodeCacheInput is an input type that accepts DomainStatusCodeCacheArgs and DomainStatusCodeCacheOutput values.
 // You can construct a concrete instance of `DomainStatusCodeCacheInput` via:
 //
-//          DomainStatusCodeCacheArgs{...}
+//	DomainStatusCodeCacheArgs{...}
 type DomainStatusCodeCacheInput interface {
 	pulumi.Input
 
@@ -6687,11 +6687,11 @@ func (i DomainStatusCodeCacheArgs) ToDomainStatusCodeCachePtrOutputWithContext(c
 // DomainStatusCodeCachePtrInput is an input type that accepts DomainStatusCodeCacheArgs, DomainStatusCodeCachePtr and DomainStatusCodeCachePtrOutput values.
 // You can construct a concrete instance of `DomainStatusCodeCachePtrInput` via:
 //
-//          DomainStatusCodeCacheArgs{...}
+//	        DomainStatusCodeCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DomainStatusCodeCachePtrInput interface {
 	pulumi.Input
 
@@ -6805,7 +6805,7 @@ type DomainStatusCodeCacheCacheRule struct {
 // DomainStatusCodeCacheCacheRuleInput is an input type that accepts DomainStatusCodeCacheCacheRuleArgs and DomainStatusCodeCacheCacheRuleOutput values.
 // You can construct a concrete instance of `DomainStatusCodeCacheCacheRuleInput` via:
 //
-//          DomainStatusCodeCacheCacheRuleArgs{...}
+//	DomainStatusCodeCacheCacheRuleArgs{...}
 type DomainStatusCodeCacheCacheRuleInput interface {
 	pulumi.Input
 
@@ -6835,7 +6835,7 @@ func (i DomainStatusCodeCacheCacheRuleArgs) ToDomainStatusCodeCacheCacheRuleOutp
 // DomainStatusCodeCacheCacheRuleArrayInput is an input type that accepts DomainStatusCodeCacheCacheRuleArray and DomainStatusCodeCacheCacheRuleArrayOutput values.
 // You can construct a concrete instance of `DomainStatusCodeCacheCacheRuleArrayInput` via:
 //
-//          DomainStatusCodeCacheCacheRuleArray{ DomainStatusCodeCacheCacheRuleArgs{...} }
+//	DomainStatusCodeCacheCacheRuleArray{ DomainStatusCodeCacheCacheRuleArgs{...} }
 type DomainStatusCodeCacheCacheRuleArrayInput interface {
 	pulumi.Input
 
@@ -6919,7 +6919,7 @@ type UrlPurgePurgeHistory struct {
 // UrlPurgePurgeHistoryInput is an input type that accepts UrlPurgePurgeHistoryArgs and UrlPurgePurgeHistoryOutput values.
 // You can construct a concrete instance of `UrlPurgePurgeHistoryInput` via:
 //
-//          UrlPurgePurgeHistoryArgs{...}
+//	UrlPurgePurgeHistoryArgs{...}
 type UrlPurgePurgeHistoryInput interface {
 	pulumi.Input
 
@@ -6957,7 +6957,7 @@ func (i UrlPurgePurgeHistoryArgs) ToUrlPurgePurgeHistoryOutputWithContext(ctx co
 // UrlPurgePurgeHistoryArrayInput is an input type that accepts UrlPurgePurgeHistoryArray and UrlPurgePurgeHistoryArrayOutput values.
 // You can construct a concrete instance of `UrlPurgePurgeHistoryArrayInput` via:
 //
-//          UrlPurgePurgeHistoryArray{ UrlPurgePurgeHistoryArgs{...} }
+//	UrlPurgePurgeHistoryArray{ UrlPurgePurgeHistoryArgs{...} }
 type UrlPurgePurgeHistoryArrayInput interface {
 	pulumi.Input
 
@@ -7063,7 +7063,7 @@ type UrlPushPushHistory struct {
 // UrlPushPushHistoryInput is an input type that accepts UrlPushPushHistoryArgs and UrlPushPushHistoryOutput values.
 // You can construct a concrete instance of `UrlPushPushHistoryInput` via:
 //
-//          UrlPushPushHistoryArgs{...}
+//	UrlPushPushHistoryArgs{...}
 type UrlPushPushHistoryInput interface {
 	pulumi.Input
 
@@ -7103,7 +7103,7 @@ func (i UrlPushPushHistoryArgs) ToUrlPushPushHistoryOutputWithContext(ctx contex
 // UrlPushPushHistoryArrayInput is an input type that accepts UrlPushPushHistoryArray and UrlPushPushHistoryArrayOutput values.
 // You can construct a concrete instance of `UrlPushPushHistoryArrayInput` via:
 //
-//          UrlPushPushHistoryArray{ UrlPushPushHistoryArgs{...} }
+//	UrlPushPushHistoryArray{ UrlPushPushHistoryArgs{...} }
 type UrlPushPushHistoryArrayInput interface {
 	pulumi.Input
 
@@ -7232,7 +7232,7 @@ type GetDomainsDomainList struct {
 // GetDomainsDomainListInput is an input type that accepts GetDomainsDomainListArgs and GetDomainsDomainListOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListInput` via:
 //
-//          GetDomainsDomainListArgs{...}
+//	GetDomainsDomainListArgs{...}
 type GetDomainsDomainListInput interface {
 	pulumi.Input
 
@@ -7290,7 +7290,7 @@ func (i GetDomainsDomainListArgs) ToGetDomainsDomainListOutputWithContext(ctx co
 // GetDomainsDomainListArrayInput is an input type that accepts GetDomainsDomainListArray and GetDomainsDomainListArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListArrayInput` via:
 //
-//          GetDomainsDomainListArray{ GetDomainsDomainListArgs{...} }
+//	GetDomainsDomainListArray{ GetDomainsDomainListArgs{...} }
 type GetDomainsDomainListArrayInput interface {
 	pulumi.Input
 
@@ -7442,7 +7442,7 @@ type GetDomainsDomainListHttpsConfig struct {
 // GetDomainsDomainListHttpsConfigInput is an input type that accepts GetDomainsDomainListHttpsConfigArgs and GetDomainsDomainListHttpsConfigOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListHttpsConfigInput` via:
 //
-//          GetDomainsDomainListHttpsConfigArgs{...}
+//	GetDomainsDomainListHttpsConfigArgs{...}
 type GetDomainsDomainListHttpsConfigInput interface {
 	pulumi.Input
 
@@ -7478,7 +7478,7 @@ func (i GetDomainsDomainListHttpsConfigArgs) ToGetDomainsDomainListHttpsConfigOu
 // GetDomainsDomainListHttpsConfigArrayInput is an input type that accepts GetDomainsDomainListHttpsConfigArray and GetDomainsDomainListHttpsConfigArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListHttpsConfigArrayInput` via:
 //
-//          GetDomainsDomainListHttpsConfigArray{ GetDomainsDomainListHttpsConfigArgs{...} }
+//	GetDomainsDomainListHttpsConfigArray{ GetDomainsDomainListHttpsConfigArgs{...} }
 type GetDomainsDomainListHttpsConfigArrayInput interface {
 	pulumi.Input
 
@@ -7581,7 +7581,7 @@ type GetDomainsDomainListOrigin struct {
 // GetDomainsDomainListOriginInput is an input type that accepts GetDomainsDomainListOriginArgs and GetDomainsDomainListOriginOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListOriginInput` via:
 //
-//          GetDomainsDomainListOriginArgs{...}
+//	GetDomainsDomainListOriginArgs{...}
 type GetDomainsDomainListOriginInput interface {
 	pulumi.Input
 
@@ -7623,7 +7623,7 @@ func (i GetDomainsDomainListOriginArgs) ToGetDomainsDomainListOriginOutputWithCo
 // GetDomainsDomainListOriginArrayInput is an input type that accepts GetDomainsDomainListOriginArray and GetDomainsDomainListOriginArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListOriginArrayInput` via:
 //
-//          GetDomainsDomainListOriginArray{ GetDomainsDomainListOriginArgs{...} }
+//	GetDomainsDomainListOriginArray{ GetDomainsDomainListOriginArgs{...} }
 type GetDomainsDomainListOriginArrayInput interface {
 	pulumi.Input
 
@@ -7729,7 +7729,7 @@ type GetDomainsDomainListRequestHeader struct {
 // GetDomainsDomainListRequestHeaderInput is an input type that accepts GetDomainsDomainListRequestHeaderArgs and GetDomainsDomainListRequestHeaderOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListRequestHeaderInput` via:
 //
-//          GetDomainsDomainListRequestHeaderArgs{...}
+//	GetDomainsDomainListRequestHeaderArgs{...}
 type GetDomainsDomainListRequestHeaderInput interface {
 	pulumi.Input
 
@@ -7759,7 +7759,7 @@ func (i GetDomainsDomainListRequestHeaderArgs) ToGetDomainsDomainListRequestHead
 // GetDomainsDomainListRequestHeaderArrayInput is an input type that accepts GetDomainsDomainListRequestHeaderArray and GetDomainsDomainListRequestHeaderArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListRequestHeaderArrayInput` via:
 //
-//          GetDomainsDomainListRequestHeaderArray{ GetDomainsDomainListRequestHeaderArgs{...} }
+//	GetDomainsDomainListRequestHeaderArray{ GetDomainsDomainListRequestHeaderArgs{...} }
 type GetDomainsDomainListRequestHeaderArrayInput interface {
 	pulumi.Input
 
@@ -7843,7 +7843,7 @@ type GetDomainsDomainListRequestHeaderHeaderRule struct {
 // GetDomainsDomainListRequestHeaderHeaderRuleInput is an input type that accepts GetDomainsDomainListRequestHeaderHeaderRuleArgs and GetDomainsDomainListRequestHeaderHeaderRuleOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListRequestHeaderHeaderRuleInput` via:
 //
-//          GetDomainsDomainListRequestHeaderHeaderRuleArgs{...}
+//	GetDomainsDomainListRequestHeaderHeaderRuleArgs{...}
 type GetDomainsDomainListRequestHeaderHeaderRuleInput interface {
 	pulumi.Input
 
@@ -7879,7 +7879,7 @@ func (i GetDomainsDomainListRequestHeaderHeaderRuleArgs) ToGetDomainsDomainListR
 // GetDomainsDomainListRequestHeaderHeaderRuleArrayInput is an input type that accepts GetDomainsDomainListRequestHeaderHeaderRuleArray and GetDomainsDomainListRequestHeaderHeaderRuleArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListRequestHeaderHeaderRuleArrayInput` via:
 //
-//          GetDomainsDomainListRequestHeaderHeaderRuleArray{ GetDomainsDomainListRequestHeaderHeaderRuleArgs{...} }
+//	GetDomainsDomainListRequestHeaderHeaderRuleArray{ GetDomainsDomainListRequestHeaderHeaderRuleArgs{...} }
 type GetDomainsDomainListRequestHeaderHeaderRuleArrayInput interface {
 	pulumi.Input
 
@@ -7983,7 +7983,7 @@ type GetDomainsDomainListRuleCach struct {
 // GetDomainsDomainListRuleCachInput is an input type that accepts GetDomainsDomainListRuleCachArgs and GetDomainsDomainListRuleCachOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListRuleCachInput` via:
 //
-//          GetDomainsDomainListRuleCachArgs{...}
+//	GetDomainsDomainListRuleCachArgs{...}
 type GetDomainsDomainListRuleCachInput interface {
 	pulumi.Input
 
@@ -8026,7 +8026,7 @@ func (i GetDomainsDomainListRuleCachArgs) ToGetDomainsDomainListRuleCachOutputWi
 // GetDomainsDomainListRuleCachArrayInput is an input type that accepts GetDomainsDomainListRuleCachArray and GetDomainsDomainListRuleCachArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListRuleCachArrayInput` via:
 //
-//          GetDomainsDomainListRuleCachArray{ GetDomainsDomainListRuleCachArgs{...} }
+//	GetDomainsDomainListRuleCachArray{ GetDomainsDomainListRuleCachArgs{...} }
 type GetDomainsDomainListRuleCachArrayInput interface {
 	pulumi.Input
 

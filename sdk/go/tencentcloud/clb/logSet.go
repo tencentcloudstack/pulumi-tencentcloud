@@ -17,7 +17,9 @@ import (
 // CLB log set can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+//
+//	$ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+//
 // ```
 type LogSet struct {
 	pulumi.CustomResourceState
@@ -123,7 +125,7 @@ func (i *LogSet) ToLogSetOutputWithContext(ctx context.Context) LogSetOutput {
 // LogSetArrayInput is an input type that accepts LogSetArray and LogSetArrayOutput values.
 // You can construct a concrete instance of `LogSetArrayInput` via:
 //
-//          LogSetArray{ LogSetArgs{...} }
+//	LogSetArray{ LogSetArgs{...} }
 type LogSetArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +150,7 @@ func (i LogSetArray) ToLogSetArrayOutputWithContext(ctx context.Context) LogSetA
 // LogSetMapInput is an input type that accepts LogSetMap and LogSetMapOutput values.
 // You can construct a concrete instance of `LogSetMapInput` via:
 //
-//          LogSetMap{ "key": LogSetArgs{...} }
+//	LogSetMap{ "key": LogSetArgs{...} }
 type LogSetMapInput interface {
 	pulumi.Input
 

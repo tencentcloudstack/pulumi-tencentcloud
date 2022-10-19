@@ -21,50 +21,53 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewInstance(ctx, "foo", &Ckafka.InstanceArgs{
-// 			BandWidth: pulumi.Int(40),
-// 			Config: &ckafka.InstanceConfigArgs{
-// 				AutoCreateTopicEnable:    pulumi.Bool(true),
-// 				DefaultNumPartitions:     pulumi.Int(3),
-// 				DefaultReplicationFactor: pulumi.Int(3),
-// 			},
-// 			DiskSize: pulumi.Int(500),
-// 			DiskType: pulumi.String("CLOUD_BASIC"),
-// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
-// 				BottomRetention:       pulumi.Int(0),
-// 				DiskQuotaPercentage:   pulumi.Int(0),
-// 				Enable:                pulumi.Int(1),
-// 				StepForwardPercentage: pulumi.Int(0),
-// 			},
-// 			InstanceName:     pulumi.String("ckafka-instance-tf-test"),
-// 			KafkaVersion:     pulumi.String("1.1.1"),
-// 			MsgRetentionTime: pulumi.Int(1300),
-// 			MultiZoneFlag:    pulumi.Bool(true),
-// 			Partition:        pulumi.Int(800),
-// 			Period:           pulumi.Int(1),
-// 			PublicNetwork:    pulumi.Int(3),
-// 			RenewFlag:        pulumi.Int(0),
-// 			SubnetId:         pulumi.String("subnet-4vwihrzk"),
-// 			VpcId:            pulumi.String("vpc-82p1t1nv"),
-// 			ZoneId:           pulumi.Int(100006),
-// 			ZoneIds: pulumi.IntArray{
-// 				pulumi.Int(100006),
-// 				pulumi.Int(100007),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewInstance(ctx, "foo", &Ckafka.InstanceArgs{
+//				BandWidth: pulumi.Int(40),
+//				Config: &ckafka.InstanceConfigArgs{
+//					AutoCreateTopicEnable:    pulumi.Bool(true),
+//					DefaultNumPartitions:     pulumi.Int(3),
+//					DefaultReplicationFactor: pulumi.Int(3),
+//				},
+//				DiskSize: pulumi.Int(500),
+//				DiskType: pulumi.String("CLOUD_BASIC"),
+//				DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+//					BottomRetention:       pulumi.Int(0),
+//					DiskQuotaPercentage:   pulumi.Int(0),
+//					Enable:                pulumi.Int(1),
+//					StepForwardPercentage: pulumi.Int(0),
+//				},
+//				InstanceName:     pulumi.String("ckafka-instance-tf-test"),
+//				KafkaVersion:     pulumi.String("1.1.1"),
+//				MsgRetentionTime: pulumi.Int(1300),
+//				MultiZoneFlag:    pulumi.Bool(true),
+//				Partition:        pulumi.Int(800),
+//				Period:           pulumi.Int(1),
+//				PublicNetwork:    pulumi.Int(3),
+//				RenewFlag:        pulumi.Int(0),
+//				SubnetId:         pulumi.String("subnet-4vwihrzk"),
+//				VpcId:            pulumi.String("vpc-82p1t1nv"),
+//				ZoneId:           pulumi.Int(100006),
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.Int(100006),
+//					pulumi.Int(100007),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -72,7 +75,9 @@ import (
 // ckafka instance can be imported using the instance_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+//
+//	$ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -364,7 +369,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -389,7 +394,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

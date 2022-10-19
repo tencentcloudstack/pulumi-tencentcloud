@@ -19,42 +19,45 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewBasicInstance(ctx, "foo", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.Any(_var.Availability_zone),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            pulumi.String("vpc-26w7r56z"),
-// 			SubnetId:         pulumi.String("subnet-lvlr6eeu"),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(2),
-// 			Storage:          pulumi.Int(20),
-// 			Cpu:              pulumi.Int(1),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			MaintenanceWeekSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			MaintenanceStartTime: pulumi.String("09:00"),
-// 			MaintenanceTimeSpan:  pulumi.Int(3),
-// 			SecurityGroups: pulumi.StringArray{
-// 				pulumi.String("sg-nltpbqg1"),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewBasicInstance(ctx, "foo", &Sqlserver.BasicInstanceArgs{
+//				AvailabilityZone: pulumi.Any(_var.Availability_zone),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            pulumi.String("vpc-26w7r56z"),
+//				SubnetId:         pulumi.String("subnet-lvlr6eeu"),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(2),
+//				Storage:          pulumi.Int(20),
+//				Cpu:              pulumi.Int(1),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				MaintenanceWeekSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				MaintenanceStartTime: pulumi.String("09:00"),
+//				MaintenanceTimeSpan:  pulumi.Int(3),
+//				SecurityGroups: pulumi.StringArray{
+//					pulumi.String("sg-nltpbqg1"),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -62,7 +65,9 @@ import (
 // SQL Server basic instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance foo mssql-3cdq7kx5
+//
+//	$ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance foo mssql-3cdq7kx5
+//
 // ```
 type BasicInstance struct {
 	pulumi.CustomResourceState
@@ -376,7 +381,7 @@ func (i *BasicInstance) ToBasicInstanceOutputWithContext(ctx context.Context) Ba
 // BasicInstanceArrayInput is an input type that accepts BasicInstanceArray and BasicInstanceArrayOutput values.
 // You can construct a concrete instance of `BasicInstanceArrayInput` via:
 //
-//          BasicInstanceArray{ BasicInstanceArgs{...} }
+//	BasicInstanceArray{ BasicInstanceArgs{...} }
 type BasicInstanceArrayInput interface {
 	pulumi.Input
 
@@ -401,7 +406,7 @@ func (i BasicInstanceArray) ToBasicInstanceArrayOutputWithContext(ctx context.Co
 // BasicInstanceMapInput is an input type that accepts BasicInstanceMap and BasicInstanceMapOutput values.
 // You can construct a concrete instance of `BasicInstanceMapInput` via:
 //
-//          BasicInstanceMap{ "key": BasicInstanceArgs{...} }
+//	BasicInstanceMap{ "key": BasicInstanceArgs{...} }
 type BasicInstanceMapInput interface {
 	pulumi.Input
 

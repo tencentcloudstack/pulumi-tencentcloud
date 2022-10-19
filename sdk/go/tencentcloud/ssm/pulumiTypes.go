@@ -22,7 +22,7 @@ type GetSecretVersionsSecretVersionList struct {
 // GetSecretVersionsSecretVersionListInput is an input type that accepts GetSecretVersionsSecretVersionListArgs and GetSecretVersionsSecretVersionListOutput values.
 // You can construct a concrete instance of `GetSecretVersionsSecretVersionListInput` via:
 //
-//          GetSecretVersionsSecretVersionListArgs{...}
+//	GetSecretVersionsSecretVersionListArgs{...}
 type GetSecretVersionsSecretVersionListInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i GetSecretVersionsSecretVersionListArgs) ToGetSecretVersionsSecretVersion
 // GetSecretVersionsSecretVersionListArrayInput is an input type that accepts GetSecretVersionsSecretVersionListArray and GetSecretVersionsSecretVersionListArrayOutput values.
 // You can construct a concrete instance of `GetSecretVersionsSecretVersionListArrayInput` via:
 //
-//          GetSecretVersionsSecretVersionListArray{ GetSecretVersionsSecretVersionListArgs{...} }
+//	GetSecretVersionsSecretVersionListArray{ GetSecretVersionsSecretVersionListArgs{...} }
 type GetSecretVersionsSecretVersionListArrayInput interface {
 	pulumi.Input
 
@@ -145,7 +145,7 @@ type GetSecretsSecretList struct {
 // GetSecretsSecretListInput is an input type that accepts GetSecretsSecretListArgs and GetSecretsSecretListOutput values.
 // You can construct a concrete instance of `GetSecretsSecretListInput` via:
 //
-//          GetSecretsSecretListArgs{...}
+//	GetSecretsSecretListArgs{...}
 type GetSecretsSecretListInput interface {
 	pulumi.Input
 
@@ -185,7 +185,7 @@ func (i GetSecretsSecretListArgs) ToGetSecretsSecretListOutputWithContext(ctx co
 // GetSecretsSecretListArrayInput is an input type that accepts GetSecretsSecretListArray and GetSecretsSecretListArrayOutput values.
 // You can construct a concrete instance of `GetSecretsSecretListArrayInput` via:
 //
-//          GetSecretsSecretListArray{ GetSecretsSecretListArgs{...} }
+//	GetSecretsSecretListArray{ GetSecretsSecretListArgs{...} }
 type GetSecretsSecretListArrayInput interface {
 	pulumi.Input
 

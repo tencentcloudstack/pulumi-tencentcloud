@@ -159,7 +159,7 @@ func (i *AsScalingGroup) ToAsScalingGroupOutputWithContext(ctx context.Context) 
 // AsScalingGroupArrayInput is an input type that accepts AsScalingGroupArray and AsScalingGroupArrayOutput values.
 // You can construct a concrete instance of `AsScalingGroupArrayInput` via:
 //
-//          AsScalingGroupArray{ AsScalingGroupArgs{...} }
+//	AsScalingGroupArray{ AsScalingGroupArgs{...} }
 type AsScalingGroupArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +184,7 @@ func (i AsScalingGroupArray) ToAsScalingGroupArrayOutputWithContext(ctx context.
 // AsScalingGroupMapInput is an input type that accepts AsScalingGroupMap and AsScalingGroupMapOutput values.
 // You can construct a concrete instance of `AsScalingGroupMapInput` via:
 //
-//          AsScalingGroupMap{ "key": AsScalingGroupArgs{...} }
+//	AsScalingGroupMap{ "key": AsScalingGroupArgs{...} }
 type AsScalingGroupMapInput interface {
 	pulumi.Input
 

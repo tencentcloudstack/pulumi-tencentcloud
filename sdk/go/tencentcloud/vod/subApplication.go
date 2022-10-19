@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vod.NewSubApplication(ctx, "foo", &Vod.SubApplicationArgs{
-// 			Description: pulumi.String("this is sub application"),
-// 			Status:      pulumi.String("On"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vod.NewSubApplication(ctx, "foo", &Vod.SubApplicationArgs{
+//				Description: pulumi.String("this is sub application"),
+//				Status:      pulumi.String("On"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // VOD super player config can be imported using the name+, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+//
+//	$ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+//
 // ```
 type SubApplication struct {
 	pulumi.CustomResourceState
@@ -159,7 +164,7 @@ func (i *SubApplication) ToSubApplicationOutputWithContext(ctx context.Context) 
 // SubApplicationArrayInput is an input type that accepts SubApplicationArray and SubApplicationArrayOutput values.
 // You can construct a concrete instance of `SubApplicationArrayInput` via:
 //
-//          SubApplicationArray{ SubApplicationArgs{...} }
+//	SubApplicationArray{ SubApplicationArgs{...} }
 type SubApplicationArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +189,7 @@ func (i SubApplicationArray) ToSubApplicationArrayOutputWithContext(ctx context.
 // SubApplicationMapInput is an input type that accepts SubApplicationMap and SubApplicationMapOutput values.
 // You can construct a concrete instance of `SubApplicationMapInput` via:
 //
-//          SubApplicationMap{ "key": SubApplicationArgs{...} }
+//	SubApplicationMap{ "key": SubApplicationArgs{...} }
 type SubApplicationMapInput interface {
 	pulumi.Input
 

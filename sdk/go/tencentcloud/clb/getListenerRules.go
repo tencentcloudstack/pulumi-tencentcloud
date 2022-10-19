@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetListenerRules(ctx, &clb.GetListenerRulesArgs{
-// 			ClbId:      "lb-k2zjp9lv",
-// 			Domain:     pulumi.StringRef("abc.com"),
-// 			ListenerId: "lbl-mwr6vbtv",
-// 			RuleId:     pulumi.StringRef("loc-inem40hz"),
-// 			Scheduler:  pulumi.StringRef("WRR"),
-// 			Url:        pulumi.StringRef("/"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetListenerRules(ctx, &clb.GetListenerRulesArgs{
+//				ClbId:      "lb-k2zjp9lv",
+//				Domain:     pulumi.StringRef("abc.com"),
+//				ListenerId: "lbl-mwr6vbtv",
+//				RuleId:     pulumi.StringRef("loc-inem40hz"),
+//				Scheduler:  pulumi.StringRef("WRR"),
+//				Url:        pulumi.StringRef("/"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetListenerRules(ctx *pulumi.Context, args *GetListenerRulesArgs, opts ...pulumi.InvokeOption) (*GetListenerRulesResult, error) {
 	var rv GetListenerRulesResult

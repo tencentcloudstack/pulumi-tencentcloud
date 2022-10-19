@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewSchedule(ctx, "schedule", &As.ScheduleArgs{
-// 			DesiredCapacity:    pulumi.Int(0),
-// 			EndTime:            pulumi.String("2019-12-01T00:00:00+08:00"),
-// 			MaxSize:            pulumi.Int(10),
-// 			MinSize:            pulumi.Int(0),
-// 			Recurrence:         pulumi.String("0 0 * * *"),
-// 			ScalingGroupId:     pulumi.String("sg-12af45"),
-// 			ScheduleActionName: pulumi.String("tf-as-schedule"),
-// 			StartTime:          pulumi.String("2019-01-01T00:00:00+08:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewSchedule(ctx, "schedule", &As.ScheduleArgs{
+//				DesiredCapacity:    pulumi.Int(0),
+//				EndTime:            pulumi.String("2019-12-01T00:00:00+08:00"),
+//				MaxSize:            pulumi.Int(10),
+//				MinSize:            pulumi.Int(0),
+//				Recurrence:         pulumi.String("0 0 * * *"),
+//				ScalingGroupId:     pulumi.String("sg-12af45"),
+//				ScheduleActionName: pulumi.String("tf-as-schedule"),
+//				StartTime:          pulumi.String("2019-01-01T00:00:00+08:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Schedule struct {
 	pulumi.CustomResourceState
@@ -216,7 +219,7 @@ func (i *Schedule) ToScheduleOutputWithContext(ctx context.Context) ScheduleOutp
 // ScheduleArrayInput is an input type that accepts ScheduleArray and ScheduleArrayOutput values.
 // You can construct a concrete instance of `ScheduleArrayInput` via:
 //
-//          ScheduleArray{ ScheduleArgs{...} }
+//	ScheduleArray{ ScheduleArgs{...} }
 type ScheduleArrayInput interface {
 	pulumi.Input
 
@@ -241,7 +244,7 @@ func (i ScheduleArray) ToScheduleArrayOutputWithContext(ctx context.Context) Sch
 // ScheduleMapInput is an input type that accepts ScheduleMap and ScheduleMapOutput values.
 // You can construct a concrete instance of `ScheduleMapInput` via:
 //
-//          ScheduleMap{ "key": ScheduleArgs{...} }
+//	ScheduleMap{ "key": ScheduleArgs{...} }
 type ScheduleMapInput interface {
 	pulumi.Input
 

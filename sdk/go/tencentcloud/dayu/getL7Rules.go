@@ -18,32 +18,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.GetL7Rules(ctx, &dayu.GetL7RulesArgs{
-// 			ResourceType: tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
-// 			ResourceId:   tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
-// 			Domain:       pulumi.StringRef(tencentcloud_dayu_l7_rule.Test_rule.Domain),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dayu.GetL7Rules(ctx, &dayu.GetL7RulesArgs{
-// 			ResourceType: tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
-// 			ResourceId:   tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
-// 			RuleId:       pulumi.StringRef(tencentcloud_dayu_l7_rule.Test_rule.Rule_id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.GetL7Rules(ctx, &dayu.GetL7RulesArgs{
+//				ResourceType: tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
+//				ResourceId:   tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
+//				Domain:       pulumi.StringRef(tencentcloud_dayu_l7_rule.Test_rule.Domain),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dayu.GetL7Rules(ctx, &dayu.GetL7RulesArgs{
+//				ResourceType: tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
+//				ResourceId:   tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
+//				RuleId:       pulumi.StringRef(tencentcloud_dayu_l7_rule.Test_rule.Rule_id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetL7Rules(ctx *pulumi.Context, args *GetL7RulesArgs, opts ...pulumi.InvokeOption) (*GetL7RulesResult, error) {
 	var rv GetL7RulesResult
