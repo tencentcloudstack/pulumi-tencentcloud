@@ -7,16 +7,16 @@ import (
 )
 
 type ResourceOutput struct {
-	Key string `json:"key"`
-	Module string `json:"module"`
-	Resource string `json:"resource"`
+	Key          string            `json:"key"`
+	Module       string            `json:"module"`
+	Resource     string            `json:"resource"`
 	CsharpAlters map[string]string `json:"csharp_alters,omitempty"`
 }
 
 type DataSourceOutput struct {
-	Key string `json:"key"`
-	Module string `json:"module"`
-	DataSource string `json:"data_source"`
+	Key          string            `json:"key"`
+	Module       string            `json:"module"`
+	DataSource   string            `json:"data_source"`
 	CsharpAlters map[string]string `json:"csharp_alters,omitempty"`
 }
 
@@ -30,9 +30,9 @@ func GetResourceOutput() []*ResourceOutput {
 		}
 		module, entity := transform.ResolveModuleEntity(k)
 		resourceOutputs = append(resourceOutputs, &ResourceOutput{
-			Key: k,
-			Module: transform.ToPascal(module),
-			Resource: transform.ToPascal(entity),
+			Key:          k,
+			Module:       transform.ToPascal(module),
+			Resource:     transform.ToPascal(entity),
 			CsharpAlters: transform.GetConflictFieldOfCsharpModule(k, v.Schema),
 		})
 	}
@@ -48,10 +48,10 @@ func GetDataSourceOutput() []*DataSourceOutput {
 		}
 		module, entity := transform.ResolveModuleEntity(k)
 		dataSourceOutputs = append(dataSourceOutputs, &DataSourceOutput{
-			Key: k,
+			Key:    k,
 			Module: transform.ToPascal(module),
 			// DataSource entity should start with prefix `get`
-			DataSource: "get" + transform.ToPascal(entity),
+			DataSource:   "get" + transform.ToPascal(entity),
 			CsharpAlters: transform.GetConflictFieldOfCsharpModule(k, v.Schema),
 		})
 	}
@@ -79,8 +79,7 @@ func GetResourceInfo(mainPkg string) map[string]*tfbridge.ResourceInfo {
 	return info
 }
 
-
-func GetDataSourceInfo(mainPkg string) map[string]*tfbridge.DataSourceInfo  {
+func GetDataSourceInfo(mainPkg string) map[string]*tfbridge.DataSourceInfo {
 	info := make(map[string]*tfbridge.DataSourceInfo)
 	outputs := GetDataSourceOutput()
 	for i := range outputs {

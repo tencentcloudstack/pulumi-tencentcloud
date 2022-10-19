@@ -1,4 +1,5 @@
 package info
+
 import (
 	"encoding/json"
 	"log"

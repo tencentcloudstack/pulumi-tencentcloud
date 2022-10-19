@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const main = new tencentcloud.vpc.Instance("main", {cidrBlock: "10.0.0.0/16"});
  * const vpcMain = new tencentcloud.dc.Gateway("vpcMain", {

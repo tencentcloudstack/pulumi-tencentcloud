@@ -209,6 +209,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const cosLogGrantRole = new tencentcloud.cam.Role("cosLogGrantRole", {

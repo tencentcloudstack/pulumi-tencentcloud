@@ -53,7 +53,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
  *     clbId: tencentcloud_clb_instance.clb_basic.id,
@@ -76,7 +76,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
  *     clbId: tencentcloud_clb_instance.clb_basic.id,
@@ -103,7 +103,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
  *     clbId: tencentcloud_clb_instance.clb_basic.id,

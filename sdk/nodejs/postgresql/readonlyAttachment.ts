@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const attach = new tencentcloud.postgresql.ReadonlyAttachment("attach", {
  *     dbInstanceId: tencentcloud_postgresql_readonly_instance.foo.id,

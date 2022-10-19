@@ -37,7 +37,7 @@ def readme():
         return "tencentcloud Pulumi Package - Development Version"
 
 
-setup(name='pulumi_tencentcloud',
+setup(name='tencentcloud_iac_pulumi',
       version=VERSION,
       description="A Pulumi package for creating and managing tencentcloud cloud resources.",
       long_description=readme(),
@@ -53,7 +53,7 @@ setup(name='pulumi_tencentcloud',
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'pulumi_tencentcloud': [
+          'tencentcloud_iac_pulumi': [
               'py.typed',
               'pulumi-plugin.json',
           ]

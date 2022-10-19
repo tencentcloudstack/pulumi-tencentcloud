@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const sglab1Group = new tencentcloud.security.Group("sglab1Group", {
  *     description: "favourite sg_1",
@@ -35,7 +35,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
  * const sglab2Group = new tencentcloud.security.Group("sglab2Group", {
  *     description: "favourite sg_2",
