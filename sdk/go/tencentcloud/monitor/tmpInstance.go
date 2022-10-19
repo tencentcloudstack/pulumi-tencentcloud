@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpInstance(ctx, "tmpInstance", &Monitor.TmpInstanceArgs{
-// 			DataRetentionTime: pulumi.Int(30),
-// 			InstanceName:      pulumi.String("demo"),
-// 			SubnetId:          pulumi.String("subnet-rdkj0agk"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			VpcId: pulumi.String("vpc-2hfyray3"),
-// 			Zone:  pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewTmpInstance(ctx, "tmpInstance", &Monitor.TmpInstanceArgs{
+//				DataRetentionTime: pulumi.Int(30),
+//				InstanceName:      pulumi.String("demo"),
+//				SubnetId:          pulumi.String("subnet-rdkj0agk"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				VpcId: pulumi.String("vpc-2hfyray3"),
+//				Zone:  pulumi.String("ap-guangzhou-3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // monitor tmpInstance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
+//
+//	$ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
+//
 // ```
 type TmpInstance struct {
 	pulumi.CustomResourceState
@@ -201,7 +206,7 @@ func (i *TmpInstance) ToTmpInstanceOutputWithContext(ctx context.Context) TmpIns
 // TmpInstanceArrayInput is an input type that accepts TmpInstanceArray and TmpInstanceArrayOutput values.
 // You can construct a concrete instance of `TmpInstanceArrayInput` via:
 //
-//          TmpInstanceArray{ TmpInstanceArgs{...} }
+//	TmpInstanceArray{ TmpInstanceArgs{...} }
 type TmpInstanceArrayInput interface {
 	pulumi.Input
 
@@ -226,7 +231,7 @@ func (i TmpInstanceArray) ToTmpInstanceArrayOutputWithContext(ctx context.Contex
 // TmpInstanceMapInput is an input type that accepts TmpInstanceMap and TmpInstanceMapOutput values.
 // You can construct a concrete instance of `TmpInstanceMapInput` via:
 //
-//          TmpInstanceMap{ "key": TmpInstanceArgs{...} }
+//	TmpInstanceMap{ "key": TmpInstanceArgs{...} }
 type TmpInstanceMapInput interface {
 	pulumi.Input
 

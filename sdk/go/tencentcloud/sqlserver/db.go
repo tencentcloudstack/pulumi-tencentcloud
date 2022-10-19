@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewDb(ctx, "example", &Sqlserver.DbArgs{
-// 			InstanceId: pulumi.Any(tencentcloud_sqlserver_instance.Example.Id),
-// 			Charset:    pulumi.String("Chinese_PRC_BIN"),
-// 			Remark:     pulumi.String("test-remark"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewDb(ctx, "example", &Sqlserver.DbArgs{
+//				InstanceId: pulumi.Any(tencentcloud_sqlserver_instance.Example.Id),
+//				Charset:    pulumi.String("Chinese_PRC_BIN"),
+//				Remark:     pulumi.String("test-remark"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // SQL Server DB can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+//
+//	$ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+//
 // ```
 type Db struct {
 	pulumi.CustomResourceState
@@ -176,7 +181,7 @@ func (i *Db) ToDbOutputWithContext(ctx context.Context) DbOutput {
 // DbArrayInput is an input type that accepts DbArray and DbArrayOutput values.
 // You can construct a concrete instance of `DbArrayInput` via:
 //
-//          DbArray{ DbArgs{...} }
+//	DbArray{ DbArgs{...} }
 type DbArrayInput interface {
 	pulumi.Input
 
@@ -201,7 +206,7 @@ func (i DbArray) ToDbArrayOutputWithContext(ctx context.Context) DbArrayOutput {
 // DbMapInput is an input type that accepts DbMap and DbMapOutput values.
 // You can construct a concrete instance of `DbMapInput` via:
 //
-//          DbMap{ "key": DbArgs{...} }
+//	DbMap{ "key": DbArgs{...} }
 type DbMapInput interface {
 	pulumi.Input
 

@@ -8091,6 +8091,7 @@ export namespace Gaap {
          */
         weight?: number;
     }
+
 }
 
 export namespace Ha {
@@ -11280,7 +11281,6 @@ export namespace Monitor {
          */
         templateId?: string;
     }
-
 }
 
 export namespace Mysql {
@@ -13078,6 +13078,7 @@ export namespace Sqlserver {
          */
         publishDatabase: string;
     }
+
 }
 
 export namespace Ssl {
@@ -14510,7 +14511,6 @@ export namespace Vod {
          */
         name: string;
     }
-
 }
 
 export namespace Vpc {

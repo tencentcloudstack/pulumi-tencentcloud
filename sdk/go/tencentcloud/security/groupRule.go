@@ -15,83 +15,89 @@ import (
 //
 // ## Example Usage
 //
-// Source is CIDR ip
+// # Source is CIDR ip
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		sglab1Group, err := Security.NewGroup(ctx, "sglab1Group", &Security.GroupArgs{
-// 			Description: pulumi.String("favourite sg_1"),
-// 			ProjectId:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupRule(ctx, "sglab1GroupRule", &Security.GroupRuleArgs{
-// 			SecurityGroupId: sglab1Group.ID(),
-// 			Type:            pulumi.String("ingress"),
-// 			CidrIp:          pulumi.String("10.0.0.0/16"),
-// 			IpProtocol:      pulumi.String("TCP"),
-// 			PortRange:       pulumi.String("80"),
-// 			Policy:          pulumi.String("ACCEPT"),
-// 			Description:     pulumi.String("favourite sg rule_1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			sglab1Group, err := Security.NewGroup(ctx, "sglab1Group", &Security.GroupArgs{
+//				Description: pulumi.String("favourite sg_1"),
+//				ProjectId:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupRule(ctx, "sglab1GroupRule", &Security.GroupRuleArgs{
+//				SecurityGroupId: sglab1Group.ID(),
+//				Type:            pulumi.String("ingress"),
+//				CidrIp:          pulumi.String("10.0.0.0/16"),
+//				IpProtocol:      pulumi.String("TCP"),
+//				PortRange:       pulumi.String("80"),
+//				Policy:          pulumi.String("ACCEPT"),
+//				Description:     pulumi.String("favourite sg rule_1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
-// Source is a security group id
+// # Source is a security group id
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		sglab2Group, err := Security.NewGroup(ctx, "sglab2Group", &Security.GroupArgs{
-// 			Description: pulumi.String("favourite sg_2"),
-// 			ProjectId:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sglab3, err := Security.NewGroup(ctx, "sglab3", &Security.GroupArgs{
-// 			Description: pulumi.String("favourite sg_3"),
-// 			ProjectId:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupRule(ctx, "sglab2GroupRule", &Security.GroupRuleArgs{
-// 			SecurityGroupId: sglab2Group.ID(),
-// 			Type:            pulumi.String("ingress"),
-// 			IpProtocol:      pulumi.String("TCP"),
-// 			PortRange:       pulumi.String("80"),
-// 			Policy:          pulumi.String("ACCEPT"),
-// 			SourceSgid:      sglab3.ID(),
-// 			Description:     pulumi.String("favourite sg rule_2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			sglab2Group, err := Security.NewGroup(ctx, "sglab2Group", &Security.GroupArgs{
+//				Description: pulumi.String("favourite sg_2"),
+//				ProjectId:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			sglab3, err := Security.NewGroup(ctx, "sglab3", &Security.GroupArgs{
+//				Description: pulumi.String("favourite sg_3"),
+//				ProjectId:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupRule(ctx, "sglab2GroupRule", &Security.GroupRuleArgs{
+//				SecurityGroupId: sglab2Group.ID(),
+//				Type:            pulumi.String("ingress"),
+//				IpProtocol:      pulumi.String("TCP"),
+//				PortRange:       pulumi.String("80"),
+//				Policy:          pulumi.String("ACCEPT"),
+//				SourceSgid:      sglab3.ID(),
+//				Description:     pulumi.String("favourite sg rule_2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type GroupRule struct {
 	pulumi.CustomResourceState
@@ -278,7 +284,7 @@ func (i *GroupRule) ToGroupRuleOutputWithContext(ctx context.Context) GroupRuleO
 // GroupRuleArrayInput is an input type that accepts GroupRuleArray and GroupRuleArrayOutput values.
 // You can construct a concrete instance of `GroupRuleArrayInput` via:
 //
-//          GroupRuleArray{ GroupRuleArgs{...} }
+//	GroupRuleArray{ GroupRuleArgs{...} }
 type GroupRuleArrayInput interface {
 	pulumi.Input
 
@@ -303,7 +309,7 @@ func (i GroupRuleArray) ToGroupRuleArrayOutputWithContext(ctx context.Context) G
 // GroupRuleMapInput is an input type that accepts GroupRuleMap and GroupRuleMapOutput values.
 // You can construct a concrete instance of `GroupRuleMapInput` via:
 //
-//          GroupRuleMap{ "key": GroupRuleArgs{...} }
+//	GroupRuleMap{ "key": GroupRuleArgs{...} }
 type GroupRuleMapInput interface {
 	pulumi.Input
 

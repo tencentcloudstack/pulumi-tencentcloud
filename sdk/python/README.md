@@ -11,13 +11,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @tencentcloud-iac/pulumi
+npm install @tencentcloud_iac/pulumi
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @tencentcloud-iac/pulumi
+yarn add @tencentcloud_iac/pulumi
 ```
 
 ### Python
@@ -43,6 +43,8 @@ The following configuration points are available for the `tencentcloud` provider
 - `tencentcloud:secretId` (environment: `TENCENTCLOUD_SECRET_ID`) - the API Secret ID for `tencentcloud`
 - `tencentcloud:secretKey` (environment: `TENCENTCLOUD_SECRET_KEY`) - the API Secret Key for `tencentcloud`
 - `tencentcloud:region` (environment: `TENCENTCLOUD_REGION`) - the region in which to deploy resources
+
+Run `pulumi config set tencentcloud:*` to configure before applying.
 
 ## Reference
 

@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Reserved.GetInstances(ctx, &reserved.GetInstancesArgs{
-// 			AvailabilityZone: pulumi.StringRef("na-siliconvalley-1"),
-// 			InstanceType:     pulumi.StringRef("S2.MEDIUM8"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Reserved.GetInstances(ctx, &reserved.GetInstancesArgs{
+//				AvailabilityZone: pulumi.StringRef("na-siliconvalley-1"),
+//				InstanceType:     pulumi.StringRef("S2.MEDIUM8"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
 	var rv GetInstancesResult

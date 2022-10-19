@@ -21,22 +21,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewAssociation(ctx, "foo", &Eip.AssociationArgs{
-// 			EipId:      pulumi.String("eip-xxxxxx"),
-// 			InstanceId: pulumi.String("ins-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewAssociation(ctx, "foo", &Eip.AssociationArgs{
+//				EipId:      pulumi.String("eip-xxxxxx"),
+//				InstanceId: pulumi.String("ins-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // or
@@ -45,23 +48,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewAssociation(ctx, "bar", &Eip.AssociationArgs{
-// 			EipId:              pulumi.String("eip-xxxxxx"),
-// 			NetworkInterfaceId: pulumi.String("eni-xxxxxx"),
-// 			PrivateIp:          pulumi.String("10.0.1.22"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewAssociation(ctx, "bar", &Eip.AssociationArgs{
+//				EipId:              pulumi.String("eip-xxxxxx"),
+//				NetworkInterfaceId: pulumi.String("eni-xxxxxx"),
+//				PrivateIp:          pulumi.String("10.0.1.22"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -69,7 +75,9 @@ import (
 // Eip association can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+//
+//	$ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+//
 // ```
 type Association struct {
 	pulumi.CustomResourceState
@@ -190,7 +198,7 @@ func (i *Association) ToAssociationOutputWithContext(ctx context.Context) Associ
 // AssociationArrayInput is an input type that accepts AssociationArray and AssociationArrayOutput values.
 // You can construct a concrete instance of `AssociationArrayInput` via:
 //
-//          AssociationArray{ AssociationArgs{...} }
+//	AssociationArray{ AssociationArgs{...} }
 type AssociationArrayInput interface {
 	pulumi.Input
 
@@ -215,7 +223,7 @@ func (i AssociationArray) ToAssociationArrayOutputWithContext(ctx context.Contex
 // AssociationMapInput is an input type that accepts AssociationMap and AssociationMapOutput values.
 // You can construct a concrete instance of `AssociationMapInput` via:
 //
-//          AssociationMap{ "key": AssociationArgs{...} }
+//	AssociationMap{ "key": AssociationArgs{...} }
 type AssociationMapInput interface {
 	pulumi.Input
 

@@ -19,41 +19,44 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		idInstances, err := Vpc.GetInstances(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Vpc.NewAcl(ctx, "foo", &Vpc.AclArgs{
-// 			VpcId: pulumi.String(idInstances.InstanceLists[0].VpcId),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewAclAttachment(ctx, "attachment", &Vpc.AclAttachmentArgs{
-// 			AclId:    foo.ID(),
-// 			SubnetId: pulumi.String(idInstances.InstanceLists[0].SubnetIds[0]),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			idInstances, err := Vpc.GetInstances(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			foo, err := Vpc.NewAcl(ctx, "foo", &Vpc.AclArgs{
+//				VpcId: pulumi.String(idInstances.InstanceLists[0].VpcId),
+//				Ingresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+//					pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+//				},
+//				Egresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+//					pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewAclAttachment(ctx, "attachment", &Vpc.AclAttachmentArgs{
+//				AclId:    foo.ID(),
+//				SubnetId: pulumi.String(idInstances.InstanceLists[0].SubnetIds[0]),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -61,7 +64,9 @@ import (
 // Acl attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
+//
+//	$ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
+//
 // ```
 type AclAttachment struct {
 	pulumi.CustomResourceState
@@ -165,7 +170,7 @@ func (i *AclAttachment) ToAclAttachmentOutputWithContext(ctx context.Context) Ac
 // AclAttachmentArrayInput is an input type that accepts AclAttachmentArray and AclAttachmentArrayOutput values.
 // You can construct a concrete instance of `AclAttachmentArrayInput` via:
 //
-//          AclAttachmentArray{ AclAttachmentArgs{...} }
+//	AclAttachmentArray{ AclAttachmentArgs{...} }
 type AclAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +195,7 @@ func (i AclAttachmentArray) ToAclAttachmentArrayOutputWithContext(ctx context.Co
 // AclAttachmentMapInput is an input type that accepts AclAttachmentMap and AclAttachmentMapOutput values.
 // You can construct a concrete instance of `AclAttachmentMapInput` via:
 //
-//          AclAttachmentMap{ "key": AclAttachmentArgs{...} }
+//	AclAttachmentMap{ "key": AclAttachmentArgs{...} }
 type AclAttachmentMapInput interface {
 	pulumi.Input
 

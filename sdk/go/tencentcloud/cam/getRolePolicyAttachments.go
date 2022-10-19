@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetRolePolicyAttachments(ctx, &cam.GetRolePolicyAttachmentsArgs{
-// 			RoleId: tencentcloud_cam_role.Foo.Id,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetRolePolicyAttachments(ctx, &cam.GetRolePolicyAttachmentsArgs{
-// 			RoleId:   tencentcloud_cam_role.Foo.Id,
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetRolePolicyAttachments(ctx, &cam.GetRolePolicyAttachmentsArgs{
+//				RoleId: tencentcloud_cam_role.Foo.Id,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetRolePolicyAttachments(ctx, &cam.GetRolePolicyAttachmentsArgs{
+//				RoleId:   tencentcloud_cam_role.Foo.Id,
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetRolePolicyAttachments(ctx *pulumi.Context, args *GetRolePolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetRolePolicyAttachmentsResult, error) {
 	var rv GetRolePolicyAttachmentsResult

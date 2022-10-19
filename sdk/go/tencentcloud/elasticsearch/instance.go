@@ -19,44 +19,47 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewInstance(ctx, "foo", &Elasticsearch.InstanceArgs{
-// 			InstanceName:     pulumi.String("tf-test"),
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			Version:          pulumi.String("7.5.1"),
-// 			VpcId:            pulumi.Any(_var.Vpc_id),
-// 			SubnetId:         pulumi.Any(_var.Subnet_id),
-// 			Password:         pulumi.String("Test12345"),
-// 			LicenseType:      pulumi.String("oss"),
-// 			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
-// 				&elasticsearch.InstanceWebNodeTypeInfoArgs{
-// 					NodeNum:  pulumi.Int(1),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
-// 				},
-// 			},
-// 			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
-// 				&elasticsearch.InstanceNodeInfoListArgs{
-// 					NodeNum:  pulumi.Int(2),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
-// 					Encrypt:  pulumi.Bool(false),
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewInstance(ctx, "foo", &Elasticsearch.InstanceArgs{
+//				InstanceName:     pulumi.String("tf-test"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				Version:          pulumi.String("7.5.1"),
+//				VpcId:            pulumi.Any(_var.Vpc_id),
+//				SubnetId:         pulumi.Any(_var.Subnet_id),
+//				Password:         pulumi.String("Test12345"),
+//				LicenseType:      pulumi.String("oss"),
+//				WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+//					&elasticsearch.InstanceWebNodeTypeInfoArgs{
+//						NodeNum:  pulumi.Int(1),
+//						NodeType: pulumi.String("ES.S1.MEDIUM4"),
+//					},
+//				},
+//				NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+//					&elasticsearch.InstanceNodeInfoListArgs{
+//						NodeNum:  pulumi.Int(2),
+//						NodeType: pulumi.String("ES.S1.MEDIUM4"),
+//						Encrypt:  pulumi.Bool(false),
+//					},
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -64,7 +67,9 @@ import (
 // Elasticsearch instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+//
+//	$ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -344,7 +349,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -369,7 +374,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

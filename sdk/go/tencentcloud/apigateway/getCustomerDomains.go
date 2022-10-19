@@ -18,34 +18,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
-// 			ServiceId:        pulumi.String("service-ohxqslqe"),
-// 			SubDomain:        pulumi.String("tic-test.dnsv1.com"),
-// 			Protocol:         pulumi.String("http"),
-// 			NetType:          pulumi.String("OUTER"),
-// 			IsDefaultMapping: pulumi.Bool(false),
-// 			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
-// 			PathMappings: pulumi.StringArray{
-// 				pulumi.String("/good#test"),
-// 				pulumi.String("/root#release"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetCustomerDomainsOutput(ctx, apigateway.GetCustomerDomainsOutputArgs{
-// 			ServiceId: foo.ServiceId,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
+//				ServiceId:        pulumi.String("service-ohxqslqe"),
+//				SubDomain:        pulumi.String("tic-test.dnsv1.com"),
+//				Protocol:         pulumi.String("http"),
+//				NetType:          pulumi.String("OUTER"),
+//				IsDefaultMapping: pulumi.Bool(false),
+//				DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
+//				PathMappings: pulumi.StringArray{
+//					pulumi.String("/good#test"),
+//					pulumi.String("/root#release"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetCustomerDomainsOutput(ctx, apigateway.GetCustomerDomainsOutputArgs{
+//				ServiceId: foo.ServiceId,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCustomerDomains(ctx *pulumi.Context, args *GetCustomerDomainsArgs, opts ...pulumi.InvokeOption) (*GetCustomerDomainsResult, error) {
 	var rv GetCustomerDomainsResult

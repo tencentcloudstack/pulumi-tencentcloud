@@ -18,58 +18,61 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("ck"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-// 			ServiceId:              service.ID(),
-// 			ApiName:                pulumi.String("hello"),
-// 			ApiDesc:                pulumi.String("my hello api"),
-// 			AuthType:               pulumi.String("NONE"),
-// 			Protocol:               pulumi.String("HTTP"),
-// 			EnableCors:             pulumi.Bool(true),
-// 			RequestConfigPath:      pulumi.String("/user/info"),
-// 			RequestConfigMethod:    pulumi.String("GET"),
-// 			ServiceConfigType:      pulumi.String("HTTP"),
-// 			ServiceConfigTimeout:   pulumi.Int(15),
-// 			ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
-// 			ServiceConfigPath:      pulumi.String("/user"),
-// 			ServiceConfigMethod:    pulumi.String("GET"),
-// 			ResponseType:           pulumi.String("HTML"),
-// 			ResponseSuccessExample: pulumi.String("success"),
-// 			ResponseFailExample:    pulumi.String("fail"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
-// 			ServiceId: service.ID(),
-// 			ApiId:     api.ID(),
-// 		}, nil)
-// 		_ = ApiGateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
-// 			ServiceId: service.ID(),
-// 			ApiName:   api.ApiName,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("ck"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
+//				ServiceId:              service.ID(),
+//				ApiName:                pulumi.String("hello"),
+//				ApiDesc:                pulumi.String("my hello api"),
+//				AuthType:               pulumi.String("NONE"),
+//				Protocol:               pulumi.String("HTTP"),
+//				EnableCors:             pulumi.Bool(true),
+//				RequestConfigPath:      pulumi.String("/user/info"),
+//				RequestConfigMethod:    pulumi.String("GET"),
+//				ServiceConfigType:      pulumi.String("HTTP"),
+//				ServiceConfigTimeout:   pulumi.Int(15),
+//				ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
+//				ServiceConfigPath:      pulumi.String("/user"),
+//				ServiceConfigMethod:    pulumi.String("GET"),
+//				ResponseType:           pulumi.String("HTML"),
+//				ResponseSuccessExample: pulumi.String("success"),
+//				ResponseFailExample:    pulumi.String("fail"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
+//				ServiceId: service.ID(),
+//				ApiId:     api.ID(),
+//			}, nil)
+//			_ = ApiGateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
+//				ServiceId: service.ID(),
+//				ApiName:   api.ApiName,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetApis(ctx *pulumi.Context, args *GetApisArgs, opts ...pulumi.InvokeOption) (*GetApisResult, error) {
 	var rv GetApisResult

@@ -20,7 +20,7 @@ type ClusterDnsServer struct {
 // ClusterDnsServerInput is an input type that accepts ClusterDnsServerArgs and ClusterDnsServerOutput values.
 // You can construct a concrete instance of `ClusterDnsServerInput` via:
 //
-//          ClusterDnsServerArgs{...}
+//	ClusterDnsServerArgs{...}
 type ClusterDnsServerInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i ClusterDnsServerArgs) ToClusterDnsServerOutputWithContext(ctx context.Co
 // ClusterDnsServerArrayInput is an input type that accepts ClusterDnsServerArray and ClusterDnsServerArrayOutput values.
 // You can construct a concrete instance of `ClusterDnsServerArrayInput` via:
 //
-//          ClusterDnsServerArray{ ClusterDnsServerArgs{...} }
+//	ClusterDnsServerArray{ ClusterDnsServerArgs{...} }
 type ClusterDnsServerArrayInput interface {
 	pulumi.Input
 
@@ -126,7 +126,7 @@ type ClusterInternalLb struct {
 // ClusterInternalLbInput is an input type that accepts ClusterInternalLbArgs and ClusterInternalLbOutput values.
 // You can construct a concrete instance of `ClusterInternalLbInput` via:
 //
-//          ClusterInternalLbArgs{...}
+//	ClusterInternalLbArgs{...}
 type ClusterInternalLbInput interface {
 	pulumi.Input
 
@@ -164,11 +164,11 @@ func (i ClusterInternalLbArgs) ToClusterInternalLbPtrOutputWithContext(ctx conte
 // ClusterInternalLbPtrInput is an input type that accepts ClusterInternalLbArgs, ClusterInternalLbPtr and ClusterInternalLbPtrOutput values.
 // You can construct a concrete instance of `ClusterInternalLbPtrInput` via:
 //
-//          ClusterInternalLbArgs{...}
+//	        ClusterInternalLbArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterInternalLbPtrInput interface {
 	pulumi.Input
 
@@ -287,7 +287,7 @@ type ClusterPublicLb struct {
 // ClusterPublicLbInput is an input type that accepts ClusterPublicLbArgs and ClusterPublicLbOutput values.
 // You can construct a concrete instance of `ClusterPublicLbInput` via:
 //
-//          ClusterPublicLbArgs{...}
+//	ClusterPublicLbArgs{...}
 type ClusterPublicLbInput interface {
 	pulumi.Input
 
@@ -330,11 +330,11 @@ func (i ClusterPublicLbArgs) ToClusterPublicLbPtrOutputWithContext(ctx context.C
 // ClusterPublicLbPtrInput is an input type that accepts ClusterPublicLbArgs, ClusterPublicLbPtr and ClusterPublicLbPtrOutput values.
 // You can construct a concrete instance of `ClusterPublicLbPtrInput` via:
 //
-//          ClusterPublicLbArgs{...}
+//	        ClusterPublicLbArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterPublicLbPtrInput interface {
 	pulumi.Input
 
@@ -491,7 +491,7 @@ type ContainerInstanceCbsVolume struct {
 // ContainerInstanceCbsVolumeInput is an input type that accepts ContainerInstanceCbsVolumeArgs and ContainerInstanceCbsVolumeOutput values.
 // You can construct a concrete instance of `ContainerInstanceCbsVolumeInput` via:
 //
-//          ContainerInstanceCbsVolumeArgs{...}
+//	ContainerInstanceCbsVolumeArgs{...}
 type ContainerInstanceCbsVolumeInput interface {
 	pulumi.Input
 
@@ -521,7 +521,7 @@ func (i ContainerInstanceCbsVolumeArgs) ToContainerInstanceCbsVolumeOutputWithCo
 // ContainerInstanceCbsVolumeArrayInput is an input type that accepts ContainerInstanceCbsVolumeArray and ContainerInstanceCbsVolumeArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceCbsVolumeArrayInput` via:
 //
-//          ContainerInstanceCbsVolumeArray{ ContainerInstanceCbsVolumeArgs{...} }
+//	ContainerInstanceCbsVolumeArray{ ContainerInstanceCbsVolumeArgs{...} }
 type ContainerInstanceCbsVolumeArrayInput interface {
 	pulumi.Input
 
@@ -615,7 +615,7 @@ type ContainerInstanceContainer struct {
 // ContainerInstanceContainerInput is an input type that accepts ContainerInstanceContainerArgs and ContainerInstanceContainerOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerInput` via:
 //
-//          ContainerInstanceContainerArgs{...}
+//	ContainerInstanceContainerArgs{...}
 type ContainerInstanceContainerInput interface {
 	pulumi.Input
 
@@ -663,7 +663,7 @@ func (i ContainerInstanceContainerArgs) ToContainerInstanceContainerOutputWithCo
 // ContainerInstanceContainerArrayInput is an input type that accepts ContainerInstanceContainerArray and ContainerInstanceContainerArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerArrayInput` via:
 //
-//          ContainerInstanceContainerArray{ ContainerInstanceContainerArgs{...} }
+//	ContainerInstanceContainerArray{ ContainerInstanceContainerArgs{...} }
 type ContainerInstanceContainerArrayInput interface {
 	pulumi.Input
 
@@ -801,7 +801,7 @@ type ContainerInstanceContainerLivenessProbe struct {
 // ContainerInstanceContainerLivenessProbeInput is an input type that accepts ContainerInstanceContainerLivenessProbeArgs and ContainerInstanceContainerLivenessProbeOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerLivenessProbeInput` via:
 //
-//          ContainerInstanceContainerLivenessProbeArgs{...}
+//	ContainerInstanceContainerLivenessProbeArgs{...}
 type ContainerInstanceContainerLivenessProbeInput interface {
 	pulumi.Input
 
@@ -856,11 +856,11 @@ func (i ContainerInstanceContainerLivenessProbeArgs) ToContainerInstanceContaine
 // ContainerInstanceContainerLivenessProbePtrInput is an input type that accepts ContainerInstanceContainerLivenessProbeArgs, ContainerInstanceContainerLivenessProbePtr and ContainerInstanceContainerLivenessProbePtrOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerLivenessProbePtrInput` via:
 //
-//          ContainerInstanceContainerLivenessProbeArgs{...}
+//	        ContainerInstanceContainerLivenessProbeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ContainerInstanceContainerLivenessProbePtrInput interface {
 	pulumi.Input
 
@@ -1113,7 +1113,7 @@ type ContainerInstanceContainerReadinessProbe struct {
 // ContainerInstanceContainerReadinessProbeInput is an input type that accepts ContainerInstanceContainerReadinessProbeArgs and ContainerInstanceContainerReadinessProbeOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerReadinessProbeInput` via:
 //
-//          ContainerInstanceContainerReadinessProbeArgs{...}
+//	ContainerInstanceContainerReadinessProbeArgs{...}
 type ContainerInstanceContainerReadinessProbeInput interface {
 	pulumi.Input
 
@@ -1168,11 +1168,11 @@ func (i ContainerInstanceContainerReadinessProbeArgs) ToContainerInstanceContain
 // ContainerInstanceContainerReadinessProbePtrInput is an input type that accepts ContainerInstanceContainerReadinessProbeArgs, ContainerInstanceContainerReadinessProbePtr and ContainerInstanceContainerReadinessProbePtrOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerReadinessProbePtrInput` via:
 //
-//          ContainerInstanceContainerReadinessProbeArgs{...}
+//	        ContainerInstanceContainerReadinessProbeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ContainerInstanceContainerReadinessProbePtrInput interface {
 	pulumi.Input
 
@@ -1416,7 +1416,7 @@ type ContainerInstanceContainerVolumeMount struct {
 // ContainerInstanceContainerVolumeMountInput is an input type that accepts ContainerInstanceContainerVolumeMountArgs and ContainerInstanceContainerVolumeMountOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerVolumeMountInput` via:
 //
-//          ContainerInstanceContainerVolumeMountArgs{...}
+//	ContainerInstanceContainerVolumeMountArgs{...}
 type ContainerInstanceContainerVolumeMountInput interface {
 	pulumi.Input
 
@@ -1454,7 +1454,7 @@ func (i ContainerInstanceContainerVolumeMountArgs) ToContainerInstanceContainerV
 // ContainerInstanceContainerVolumeMountArrayInput is an input type that accepts ContainerInstanceContainerVolumeMountArray and ContainerInstanceContainerVolumeMountArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceContainerVolumeMountArrayInput` via:
 //
-//          ContainerInstanceContainerVolumeMountArray{ ContainerInstanceContainerVolumeMountArgs{...} }
+//	ContainerInstanceContainerVolumeMountArray{ ContainerInstanceContainerVolumeMountArgs{...} }
 type ContainerInstanceContainerVolumeMountArrayInput interface {
 	pulumi.Input
 
@@ -1554,7 +1554,7 @@ type ContainerInstanceImageRegistryCredential struct {
 // ContainerInstanceImageRegistryCredentialInput is an input type that accepts ContainerInstanceImageRegistryCredentialArgs and ContainerInstanceImageRegistryCredentialOutput values.
 // You can construct a concrete instance of `ContainerInstanceImageRegistryCredentialInput` via:
 //
-//          ContainerInstanceImageRegistryCredentialArgs{...}
+//	ContainerInstanceImageRegistryCredentialArgs{...}
 type ContainerInstanceImageRegistryCredentialInput interface {
 	pulumi.Input
 
@@ -1588,7 +1588,7 @@ func (i ContainerInstanceImageRegistryCredentialArgs) ToContainerInstanceImageRe
 // ContainerInstanceImageRegistryCredentialArrayInput is an input type that accepts ContainerInstanceImageRegistryCredentialArray and ContainerInstanceImageRegistryCredentialArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceImageRegistryCredentialArrayInput` via:
 //
-//          ContainerInstanceImageRegistryCredentialArray{ ContainerInstanceImageRegistryCredentialArgs{...} }
+//	ContainerInstanceImageRegistryCredentialArray{ ContainerInstanceImageRegistryCredentialArgs{...} }
 type ContainerInstanceImageRegistryCredentialArrayInput interface {
 	pulumi.Input
 
@@ -1688,7 +1688,7 @@ type ContainerInstanceInitContainer struct {
 // ContainerInstanceInitContainerInput is an input type that accepts ContainerInstanceInitContainerArgs and ContainerInstanceInitContainerOutput values.
 // You can construct a concrete instance of `ContainerInstanceInitContainerInput` via:
 //
-//          ContainerInstanceInitContainerArgs{...}
+//	ContainerInstanceInitContainerArgs{...}
 type ContainerInstanceInitContainerInput interface {
 	pulumi.Input
 
@@ -1732,7 +1732,7 @@ func (i ContainerInstanceInitContainerArgs) ToContainerInstanceInitContainerOutp
 // ContainerInstanceInitContainerArrayInput is an input type that accepts ContainerInstanceInitContainerArray and ContainerInstanceInitContainerArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceInitContainerArrayInput` via:
 //
-//          ContainerInstanceInitContainerArray{ ContainerInstanceInitContainerArgs{...} }
+//	ContainerInstanceInitContainerArray{ ContainerInstanceInitContainerArgs{...} }
 type ContainerInstanceInitContainerArrayInput interface {
 	pulumi.Input
 
@@ -1853,7 +1853,7 @@ type ContainerInstanceInitContainerVolumeMount struct {
 // ContainerInstanceInitContainerVolumeMountInput is an input type that accepts ContainerInstanceInitContainerVolumeMountArgs and ContainerInstanceInitContainerVolumeMountOutput values.
 // You can construct a concrete instance of `ContainerInstanceInitContainerVolumeMountInput` via:
 //
-//          ContainerInstanceInitContainerVolumeMountArgs{...}
+//	ContainerInstanceInitContainerVolumeMountArgs{...}
 type ContainerInstanceInitContainerVolumeMountInput interface {
 	pulumi.Input
 
@@ -1891,7 +1891,7 @@ func (i ContainerInstanceInitContainerVolumeMountArgs) ToContainerInstanceInitCo
 // ContainerInstanceInitContainerVolumeMountArrayInput is an input type that accepts ContainerInstanceInitContainerVolumeMountArray and ContainerInstanceInitContainerVolumeMountArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceInitContainerVolumeMountArrayInput` via:
 //
-//          ContainerInstanceInitContainerVolumeMountArray{ ContainerInstanceInitContainerVolumeMountArgs{...} }
+//	ContainerInstanceInitContainerVolumeMountArray{ ContainerInstanceInitContainerVolumeMountArgs{...} }
 type ContainerInstanceInitContainerVolumeMountArrayInput interface {
 	pulumi.Input
 
@@ -1991,7 +1991,7 @@ type ContainerInstanceNfsVolume struct {
 // ContainerInstanceNfsVolumeInput is an input type that accepts ContainerInstanceNfsVolumeArgs and ContainerInstanceNfsVolumeOutput values.
 // You can construct a concrete instance of `ContainerInstanceNfsVolumeInput` via:
 //
-//          ContainerInstanceNfsVolumeArgs{...}
+//	ContainerInstanceNfsVolumeArgs{...}
 type ContainerInstanceNfsVolumeInput interface {
 	pulumi.Input
 
@@ -2025,7 +2025,7 @@ func (i ContainerInstanceNfsVolumeArgs) ToContainerInstanceNfsVolumeOutputWithCo
 // ContainerInstanceNfsVolumeArrayInput is an input type that accepts ContainerInstanceNfsVolumeArray and ContainerInstanceNfsVolumeArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceNfsVolumeArrayInput` via:
 //
-//          ContainerInstanceNfsVolumeArray{ ContainerInstanceNfsVolumeArgs{...} }
+//	ContainerInstanceNfsVolumeArray{ ContainerInstanceNfsVolumeArgs{...} }
 type ContainerInstanceNfsVolumeArrayInput interface {
 	pulumi.Input
 
@@ -2113,7 +2113,7 @@ type GetClusterCredentialAddress struct {
 // GetClusterCredentialAddressInput is an input type that accepts GetClusterCredentialAddressArgs and GetClusterCredentialAddressOutput values.
 // You can construct a concrete instance of `GetClusterCredentialAddressInput` via:
 //
-//          GetClusterCredentialAddressArgs{...}
+//	GetClusterCredentialAddressArgs{...}
 type GetClusterCredentialAddressInput interface {
 	pulumi.Input
 
@@ -2145,7 +2145,7 @@ func (i GetClusterCredentialAddressArgs) ToGetClusterCredentialAddressOutputWith
 // GetClusterCredentialAddressArrayInput is an input type that accepts GetClusterCredentialAddressArray and GetClusterCredentialAddressArrayOutput values.
 // You can construct a concrete instance of `GetClusterCredentialAddressArrayInput` via:
 //
-//          GetClusterCredentialAddressArray{ GetClusterCredentialAddressArgs{...} }
+//	GetClusterCredentialAddressArray{ GetClusterCredentialAddressArgs{...} }
 type GetClusterCredentialAddressArrayInput interface {
 	pulumi.Input
 
@@ -2226,7 +2226,7 @@ type GetClusterCredentialInternalLb struct {
 // GetClusterCredentialInternalLbInput is an input type that accepts GetClusterCredentialInternalLbArgs and GetClusterCredentialInternalLbOutput values.
 // You can construct a concrete instance of `GetClusterCredentialInternalLbInput` via:
 //
-//          GetClusterCredentialInternalLbArgs{...}
+//	GetClusterCredentialInternalLbArgs{...}
 type GetClusterCredentialInternalLbInput interface {
 	pulumi.Input
 
@@ -2256,7 +2256,7 @@ func (i GetClusterCredentialInternalLbArgs) ToGetClusterCredentialInternalLbOutp
 // GetClusterCredentialInternalLbArrayInput is an input type that accepts GetClusterCredentialInternalLbArray and GetClusterCredentialInternalLbArrayOutput values.
 // You can construct a concrete instance of `GetClusterCredentialInternalLbArrayInput` via:
 //
-//          GetClusterCredentialInternalLbArray{ GetClusterCredentialInternalLbArgs{...} }
+//	GetClusterCredentialInternalLbArray{ GetClusterCredentialInternalLbArgs{...} }
 type GetClusterCredentialInternalLbArrayInput interface {
 	pulumi.Input
 
@@ -2338,7 +2338,7 @@ type GetClusterCredentialPublicLb struct {
 // GetClusterCredentialPublicLbInput is an input type that accepts GetClusterCredentialPublicLbArgs and GetClusterCredentialPublicLbOutput values.
 // You can construct a concrete instance of `GetClusterCredentialPublicLbInput` via:
 //
-//          GetClusterCredentialPublicLbArgs{...}
+//	GetClusterCredentialPublicLbArgs{...}
 type GetClusterCredentialPublicLbInput interface {
 	pulumi.Input
 
@@ -2374,7 +2374,7 @@ func (i GetClusterCredentialPublicLbArgs) ToGetClusterCredentialPublicLbOutputWi
 // GetClusterCredentialPublicLbArrayInput is an input type that accepts GetClusterCredentialPublicLbArray and GetClusterCredentialPublicLbArrayOutput values.
 // You can construct a concrete instance of `GetClusterCredentialPublicLbArrayInput` via:
 //
-//          GetClusterCredentialPublicLbArray{ GetClusterCredentialPublicLbArgs{...} }
+//	GetClusterCredentialPublicLbArray{ GetClusterCredentialPublicLbArgs{...} }
 type GetClusterCredentialPublicLbArrayInput interface {
 	pulumi.Input
 
@@ -2487,7 +2487,7 @@ type GetClustersList struct {
 // GetClustersListInput is an input type that accepts GetClustersListArgs and GetClustersListOutput values.
 // You can construct a concrete instance of `GetClustersListInput` via:
 //
-//          GetClustersListArgs{...}
+//	GetClustersListArgs{...}
 type GetClustersListInput interface {
 	pulumi.Input
 
@@ -2539,7 +2539,7 @@ func (i GetClustersListArgs) ToGetClustersListOutputWithContext(ctx context.Cont
 // GetClustersListArrayInput is an input type that accepts GetClustersListArray and GetClustersListArrayOutput values.
 // You can construct a concrete instance of `GetClustersListArrayInput` via:
 //
-//          GetClustersListArray{ GetClustersListArgs{...} }
+//	GetClustersListArray{ GetClustersListArgs{...} }
 type GetClustersListArrayInput interface {
 	pulumi.Input
 
@@ -2670,7 +2670,7 @@ type GetClustersListDnsServer struct {
 // GetClustersListDnsServerInput is an input type that accepts GetClustersListDnsServerArgs and GetClustersListDnsServerOutput values.
 // You can construct a concrete instance of `GetClustersListDnsServerInput` via:
 //
-//          GetClustersListDnsServerArgs{...}
+//	GetClustersListDnsServerArgs{...}
 type GetClustersListDnsServerInput interface {
 	pulumi.Input
 
@@ -2700,7 +2700,7 @@ func (i GetClustersListDnsServerArgs) ToGetClustersListDnsServerOutputWithContex
 // GetClustersListDnsServerArrayInput is an input type that accepts GetClustersListDnsServerArray and GetClustersListDnsServerArrayOutput values.
 // You can construct a concrete instance of `GetClustersListDnsServerArrayInput` via:
 //
-//          GetClustersListDnsServerArray{ GetClustersListDnsServerArgs{...} }
+//	GetClustersListDnsServerArray{ GetClustersListDnsServerArgs{...} }
 type GetClustersListDnsServerArrayInput interface {
 	pulumi.Input
 

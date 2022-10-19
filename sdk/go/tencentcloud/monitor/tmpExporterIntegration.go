@@ -153,7 +153,7 @@ func (i *TmpExporterIntegration) ToTmpExporterIntegrationOutputWithContext(ctx c
 // TmpExporterIntegrationArrayInput is an input type that accepts TmpExporterIntegrationArray and TmpExporterIntegrationArrayOutput values.
 // You can construct a concrete instance of `TmpExporterIntegrationArrayInput` via:
 //
-//          TmpExporterIntegrationArray{ TmpExporterIntegrationArgs{...} }
+//	TmpExporterIntegrationArray{ TmpExporterIntegrationArgs{...} }
 type TmpExporterIntegrationArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +178,7 @@ func (i TmpExporterIntegrationArray) ToTmpExporterIntegrationArrayOutputWithCont
 // TmpExporterIntegrationMapInput is an input type that accepts TmpExporterIntegrationMap and TmpExporterIntegrationMapOutput values.
 // You can construct a concrete instance of `TmpExporterIntegrationMapInput` via:
 //
-//          TmpExporterIntegrationMap{ "key": TmpExporterIntegrationArgs{...} }
+//	TmpExporterIntegrationMap{ "key": TmpExporterIntegrationArgs{...} }
 type TmpExporterIntegrationMapInput interface {
 	pulumi.Input
 

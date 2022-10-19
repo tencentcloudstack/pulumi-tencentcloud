@@ -20,30 +20,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewFreeCertificate(ctx, "foo", &Ssl.FreeCertificateArgs{
-// 			Alias:           pulumi.String("my_free_cert"),
-// 			ContactEmail:    pulumi.String("foo@example.com"),
-// 			ContactPhone:    pulumi.String("12345678901"),
-// 			CsrEncryptAlgo:  pulumi.String("RSA"),
-// 			CsrKeyParameter: pulumi.String("2048"),
-// 			CsrKeyPassword:  pulumi.String("xxxxxxxx"),
-// 			Domain:          pulumi.String("example.com"),
-// 			DvAuthMethod:    pulumi.String("DNS_AUTO"),
-// 			PackageType:     pulumi.String("2"),
-// 			ValidityPeriod:  pulumi.String("12"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewFreeCertificate(ctx, "foo", &Ssl.FreeCertificateArgs{
+//				Alias:           pulumi.String("my_free_cert"),
+//				ContactEmail:    pulumi.String("foo@example.com"),
+//				ContactPhone:    pulumi.String("12345678901"),
+//				CsrEncryptAlgo:  pulumi.String("RSA"),
+//				CsrKeyParameter: pulumi.String("2048"),
+//				CsrKeyPassword:  pulumi.String("xxxxxxxx"),
+//				Domain:          pulumi.String("example.com"),
+//				DvAuthMethod:    pulumi.String("DNS_AUTO"),
+//				PackageType:     pulumi.String("2"),
+//				ValidityPeriod:  pulumi.String("12"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // FreeCertificate instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
+//
+//	$ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
+//
 // ```
 type FreeCertificate struct {
 	pulumi.CustomResourceState
@@ -327,7 +332,7 @@ func (i *FreeCertificate) ToFreeCertificateOutputWithContext(ctx context.Context
 // FreeCertificateArrayInput is an input type that accepts FreeCertificateArray and FreeCertificateArrayOutput values.
 // You can construct a concrete instance of `FreeCertificateArrayInput` via:
 //
-//          FreeCertificateArray{ FreeCertificateArgs{...} }
+//	FreeCertificateArray{ FreeCertificateArgs{...} }
 type FreeCertificateArrayInput interface {
 	pulumi.Input
 
@@ -352,7 +357,7 @@ func (i FreeCertificateArray) ToFreeCertificateArrayOutputWithContext(ctx contex
 // FreeCertificateMapInput is an input type that accepts FreeCertificateMap and FreeCertificateMapOutput values.
 // You can construct a concrete instance of `FreeCertificateMapInput` via:
 //
-//          FreeCertificateMap{ "key": FreeCertificateArgs{...} }
+//	FreeCertificateMap{ "key": FreeCertificateArgs{...} }
 type FreeCertificateMapInput interface {
 	pulumi.Input
 

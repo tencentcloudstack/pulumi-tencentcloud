@@ -22,7 +22,7 @@ type InstanceSecurityPolicy struct {
 // InstanceSecurityPolicyInput is an input type that accepts InstanceSecurityPolicyArgs and InstanceSecurityPolicyOutput values.
 // You can construct a concrete instance of `InstanceSecurityPolicyInput` via:
 //
-//          InstanceSecurityPolicyArgs{...}
+//	InstanceSecurityPolicyArgs{...}
 type InstanceSecurityPolicyInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i InstanceSecurityPolicyArgs) ToInstanceSecurityPolicyOutputWithContext(ct
 // InstanceSecurityPolicyArrayInput is an input type that accepts InstanceSecurityPolicyArray and InstanceSecurityPolicyArrayOutput values.
 // You can construct a concrete instance of `InstanceSecurityPolicyArrayInput` via:
 //
-//          InstanceSecurityPolicyArray{ InstanceSecurityPolicyArgs{...} }
+//	InstanceSecurityPolicyArray{ InstanceSecurityPolicyArgs{...} }
 type InstanceSecurityPolicyArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +148,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -188,7 +188,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -289,7 +289,7 @@ type GetNamespacesNamespaceList struct {
 // GetNamespacesNamespaceListInput is an input type that accepts GetNamespacesNamespaceListArgs and GetNamespacesNamespaceListOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceListInput` via:
 //
-//          GetNamespacesNamespaceListArgs{...}
+//	GetNamespacesNamespaceListArgs{...}
 type GetNamespacesNamespaceListInput interface {
 	pulumi.Input
 
@@ -319,7 +319,7 @@ func (i GetNamespacesNamespaceListArgs) ToGetNamespacesNamespaceListOutputWithCo
 // GetNamespacesNamespaceListArrayInput is an input type that accepts GetNamespacesNamespaceListArray and GetNamespacesNamespaceListArrayOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceListArrayInput` via:
 //
-//          GetNamespacesNamespaceListArray{ GetNamespacesNamespaceListArgs{...} }
+//	GetNamespacesNamespaceListArray{ GetNamespacesNamespaceListArgs{...} }
 type GetNamespacesNamespaceListArrayInput interface {
 	pulumi.Input
 
@@ -407,7 +407,7 @@ type GetRepositoriesRepositoryList struct {
 // GetRepositoriesRepositoryListInput is an input type that accepts GetRepositoriesRepositoryListArgs and GetRepositoriesRepositoryListOutput values.
 // You can construct a concrete instance of `GetRepositoriesRepositoryListInput` via:
 //
-//          GetRepositoriesRepositoryListArgs{...}
+//	GetRepositoriesRepositoryListArgs{...}
 type GetRepositoriesRepositoryListInput interface {
 	pulumi.Input
 
@@ -449,7 +449,7 @@ func (i GetRepositoriesRepositoryListArgs) ToGetRepositoriesRepositoryListOutput
 // GetRepositoriesRepositoryListArrayInput is an input type that accepts GetRepositoriesRepositoryListArray and GetRepositoriesRepositoryListArrayOutput values.
 // You can construct a concrete instance of `GetRepositoriesRepositoryListArrayInput` via:
 //
-//          GetRepositoriesRepositoryListArray{ GetRepositoriesRepositoryListArgs{...} }
+//	GetRepositoriesRepositoryListArray{ GetRepositoriesRepositoryListArgs{...} }
 type GetRepositoriesRepositoryListArrayInput interface {
 	pulumi.Input
 
@@ -559,7 +559,7 @@ type GetTokensTokenList struct {
 // GetTokensTokenListInput is an input type that accepts GetTokensTokenListArgs and GetTokensTokenListOutput values.
 // You can construct a concrete instance of `GetTokensTokenListInput` via:
 //
-//          GetTokensTokenListArgs{...}
+//	GetTokensTokenListArgs{...}
 type GetTokensTokenListInput interface {
 	pulumi.Input
 
@@ -593,7 +593,7 @@ func (i GetTokensTokenListArgs) ToGetTokensTokenListOutputWithContext(ctx contex
 // GetTokensTokenListArrayInput is an input type that accepts GetTokensTokenListArray and GetTokensTokenListArrayOutput values.
 // You can construct a concrete instance of `GetTokensTokenListArrayInput` via:
 //
-//          GetTokensTokenListArray{ GetTokensTokenListArgs{...} }
+//	GetTokensTokenListArray{ GetTokensTokenListArgs{...} }
 type GetTokensTokenListArrayInput interface {
 	pulumi.Input
 
@@ -687,7 +687,7 @@ type GetVpcAttachmentsVpcAttachmentList struct {
 // GetVpcAttachmentsVpcAttachmentListInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArgs and GetVpcAttachmentsVpcAttachmentListOutput values.
 // You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListInput` via:
 //
-//          GetVpcAttachmentsVpcAttachmentListArgs{...}
+//	GetVpcAttachmentsVpcAttachmentListArgs{...}
 type GetVpcAttachmentsVpcAttachmentListInput interface {
 	pulumi.Input
 
@@ -725,7 +725,7 @@ func (i GetVpcAttachmentsVpcAttachmentListArgs) ToGetVpcAttachmentsVpcAttachment
 // GetVpcAttachmentsVpcAttachmentListArrayInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArray and GetVpcAttachmentsVpcAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListArrayInput` via:
 //
-//          GetVpcAttachmentsVpcAttachmentListArray{ GetVpcAttachmentsVpcAttachmentListArgs{...} }
+//	GetVpcAttachmentsVpcAttachmentListArray{ GetVpcAttachmentsVpcAttachmentListArgs{...} }
 type GetVpcAttachmentsVpcAttachmentListArrayInput interface {
 	pulumi.Input
 

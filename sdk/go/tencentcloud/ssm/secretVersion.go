@@ -19,35 +19,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Ssm.NewSecret(ctx, "foo", &Ssm.SecretArgs{
-// 			SecretName:           pulumi.String("test"),
-// 			Description:          pulumi.String("test secret"),
-// 			RecoveryWindowInDays: pulumi.Int(0),
-// 			IsEnabled:            pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"test-tag": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
-// 			SecretName:   foo.SecretName,
-// 			VersionId:    pulumi.String("v1"),
-// 			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Ssm.NewSecret(ctx, "foo", &Ssm.SecretArgs{
+//				SecretName:           pulumi.String("test"),
+//				Description:          pulumi.String("test secret"),
+//				RecoveryWindowInDays: pulumi.Int(0),
+//				IsEnabled:            pulumi.Bool(true),
+//				Tags: pulumi.AnyMap{
+//					"test-tag": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
+//				SecretName:   foo.SecretName,
+//				VersionId:    pulumi.String("v1"),
+//				SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -55,7 +58,9 @@ import (
 // SSM secret version can be imported using the secretName#versionId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+//
+//	$ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+//
 // ```
 type SecretVersion struct {
 	pulumi.CustomResourceState
@@ -179,7 +184,7 @@ func (i *SecretVersion) ToSecretVersionOutputWithContext(ctx context.Context) Se
 // SecretVersionArrayInput is an input type that accepts SecretVersionArray and SecretVersionArrayOutput values.
 // You can construct a concrete instance of `SecretVersionArrayInput` via:
 //
-//          SecretVersionArray{ SecretVersionArgs{...} }
+//	SecretVersionArray{ SecretVersionArgs{...} }
 type SecretVersionArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +209,7 @@ func (i SecretVersionArray) ToSecretVersionArrayOutputWithContext(ctx context.Co
 // SecretVersionMapInput is an input type that accepts SecretVersionMap and SecretVersionMapOutput values.
 // You can construct a concrete instance of `SecretVersionMapInput` via:
 //
-//          SecretVersionMap{ "key": SecretVersionArgs{...} }
+//	SecretVersionMap{ "key": SecretVersionArgs{...} }
 type SecretVersionMapInput interface {
 	pulumi.Input
 

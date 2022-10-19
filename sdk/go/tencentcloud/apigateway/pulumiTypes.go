@@ -28,7 +28,7 @@ type ApiRequestParameter struct {
 // ApiRequestParameterInput is an input type that accepts ApiRequestParameterArgs and ApiRequestParameterOutput values.
 // You can construct a concrete instance of `ApiRequestParameterInput` via:
 //
-//          ApiRequestParameterArgs{...}
+//	ApiRequestParameterArgs{...}
 type ApiRequestParameterInput interface {
 	pulumi.Input
 
@@ -66,7 +66,7 @@ func (i ApiRequestParameterArgs) ToApiRequestParameterOutputWithContext(ctx cont
 // ApiRequestParameterArrayInput is an input type that accepts ApiRequestParameterArray and ApiRequestParameterArrayOutput values.
 // You can construct a concrete instance of `ApiRequestParameterArrayInput` via:
 //
-//          ApiRequestParameterArray{ ApiRequestParameterArgs{...} }
+//	ApiRequestParameterArray{ ApiRequestParameterArgs{...} }
 type ApiRequestParameterArrayInput interface {
 	pulumi.Input
 
@@ -168,7 +168,7 @@ type ApiResponseErrorCode struct {
 // ApiResponseErrorCodeInput is an input type that accepts ApiResponseErrorCodeArgs and ApiResponseErrorCodeOutput values.
 // You can construct a concrete instance of `ApiResponseErrorCodeInput` via:
 //
-//          ApiResponseErrorCodeArgs{...}
+//	ApiResponseErrorCodeArgs{...}
 type ApiResponseErrorCodeInput interface {
 	pulumi.Input
 
@@ -204,7 +204,7 @@ func (i ApiResponseErrorCodeArgs) ToApiResponseErrorCodeOutputWithContext(ctx co
 // ApiResponseErrorCodeArrayInput is an input type that accepts ApiResponseErrorCodeArray and ApiResponseErrorCodeArrayOutput values.
 // You can construct a concrete instance of `ApiResponseErrorCodeArrayInput` via:
 //
-//          ApiResponseErrorCodeArray{ ApiResponseErrorCodeArgs{...} }
+//	ApiResponseErrorCodeArray{ ApiResponseErrorCodeArgs{...} }
 type ApiResponseErrorCodeArrayInput interface {
 	pulumi.Input
 
@@ -301,7 +301,7 @@ type ServiceApiList struct {
 // ServiceApiListInput is an input type that accepts ServiceApiListArgs and ServiceApiListOutput values.
 // You can construct a concrete instance of `ServiceApiListInput` via:
 //
-//          ServiceApiListArgs{...}
+//	ServiceApiListArgs{...}
 type ServiceApiListInput interface {
 	pulumi.Input
 
@@ -337,7 +337,7 @@ func (i ServiceApiListArgs) ToServiceApiListOutputWithContext(ctx context.Contex
 // ServiceApiListArrayInput is an input type that accepts ServiceApiListArray and ServiceApiListArrayOutput values.
 // You can construct a concrete instance of `ServiceApiListArrayInput` via:
 //
-//          ServiceApiListArray{ ServiceApiListArgs{...} }
+//	ServiceApiListArray{ ServiceApiListArgs{...} }
 type ServiceApiListArrayInput interface {
 	pulumi.Input
 
@@ -432,7 +432,7 @@ type ServiceUsagePlanList struct {
 // ServiceUsagePlanListInput is an input type that accepts ServiceUsagePlanListArgs and ServiceUsagePlanListOutput values.
 // You can construct a concrete instance of `ServiceUsagePlanListInput` via:
 //
-//          ServiceUsagePlanListArgs{...}
+//	ServiceUsagePlanListArgs{...}
 type ServiceUsagePlanListInput interface {
 	pulumi.Input
 
@@ -466,7 +466,7 @@ func (i ServiceUsagePlanListArgs) ToServiceUsagePlanListOutputWithContext(ctx co
 // ServiceUsagePlanListArrayInput is an input type that accepts ServiceUsagePlanListArray and ServiceUsagePlanListArrayOutput values.
 // You can construct a concrete instance of `ServiceUsagePlanListArrayInput` via:
 //
-//          ServiceUsagePlanListArray{ ServiceUsagePlanListArgs{...} }
+//	ServiceUsagePlanListArray{ ServiceUsagePlanListArgs{...} }
 type ServiceUsagePlanListArrayInput interface {
 	pulumi.Input
 
@@ -566,7 +566,7 @@ type UsagePlanAttachList struct {
 // UsagePlanAttachListInput is an input type that accepts UsagePlanAttachListArgs and UsagePlanAttachListOutput values.
 // You can construct a concrete instance of `UsagePlanAttachListInput` via:
 //
-//          UsagePlanAttachListArgs{...}
+//	UsagePlanAttachListArgs{...}
 type UsagePlanAttachListInput interface {
 	pulumi.Input
 
@@ -610,7 +610,7 @@ func (i UsagePlanAttachListArgs) ToUsagePlanAttachListOutputWithContext(ctx cont
 // UsagePlanAttachListArrayInput is an input type that accepts UsagePlanAttachListArray and UsagePlanAttachListArrayOutput values.
 // You can construct a concrete instance of `UsagePlanAttachListArrayInput` via:
 //
-//          UsagePlanAttachListArray{ UsagePlanAttachListArgs{...} }
+//	UsagePlanAttachListArray{ UsagePlanAttachListArgs{...} }
 type UsagePlanAttachListArrayInput interface {
 	pulumi.Input
 
@@ -727,7 +727,7 @@ type GetApiKeysList struct {
 // GetApiKeysListInput is an input type that accepts GetApiKeysListArgs and GetApiKeysListOutput values.
 // You can construct a concrete instance of `GetApiKeysListInput` via:
 //
-//          GetApiKeysListArgs{...}
+//	GetApiKeysListArgs{...}
 type GetApiKeysListInput interface {
 	pulumi.Input
 
@@ -763,7 +763,7 @@ func (i GetApiKeysListArgs) ToGetApiKeysListOutputWithContext(ctx context.Contex
 // GetApiKeysListArrayInput is an input type that accepts GetApiKeysListArray and GetApiKeysListArrayOutput values.
 // You can construct a concrete instance of `GetApiKeysListArrayInput` via:
 //
-//          GetApiKeysListArray{ GetApiKeysListArgs{...} }
+//	GetApiKeysListArray{ GetApiKeysListArgs{...} }
 type GetApiKeysListArrayInput interface {
 	pulumi.Input
 
@@ -902,7 +902,7 @@ type GetApisList struct {
 // GetApisListInput is an input type that accepts GetApisListArgs and GetApisListOutput values.
 // You can construct a concrete instance of `GetApisListInput` via:
 //
-//          GetApisListArgs{...}
+//	GetApisListArgs{...}
 type GetApisListInput interface {
 	pulumi.Input
 
@@ -980,7 +980,7 @@ func (i GetApisListArgs) ToGetApisListOutputWithContext(ctx context.Context) Get
 // GetApisListArrayInput is an input type that accepts GetApisListArray and GetApisListArrayOutput values.
 // You can construct a concrete instance of `GetApisListArrayInput` via:
 //
-//          GetApisListArray{ GetApisListArgs{...} }
+//	GetApisListArray{ GetApisListArgs{...} }
 type GetApisListArrayInput interface {
 	pulumi.Input
 
@@ -1184,7 +1184,7 @@ type GetApisListRequestParameter struct {
 // GetApisListRequestParameterInput is an input type that accepts GetApisListRequestParameterArgs and GetApisListRequestParameterOutput values.
 // You can construct a concrete instance of `GetApisListRequestParameterInput` via:
 //
-//          GetApisListRequestParameterArgs{...}
+//	GetApisListRequestParameterArgs{...}
 type GetApisListRequestParameterInput interface {
 	pulumi.Input
 
@@ -1222,7 +1222,7 @@ func (i GetApisListRequestParameterArgs) ToGetApisListRequestParameterOutputWith
 // GetApisListRequestParameterArrayInput is an input type that accepts GetApisListRequestParameterArray and GetApisListRequestParameterArrayOutput values.
 // You can construct a concrete instance of `GetApisListRequestParameterArrayInput` via:
 //
-//          GetApisListRequestParameterArray{ GetApisListRequestParameterArgs{...} }
+//	GetApisListRequestParameterArray{ GetApisListRequestParameterArgs{...} }
 type GetApisListRequestParameterArrayInput interface {
 	pulumi.Input
 
@@ -1324,7 +1324,7 @@ type GetApisListResponseErrorCode struct {
 // GetApisListResponseErrorCodeInput is an input type that accepts GetApisListResponseErrorCodeArgs and GetApisListResponseErrorCodeOutput values.
 // You can construct a concrete instance of `GetApisListResponseErrorCodeInput` via:
 //
-//          GetApisListResponseErrorCodeArgs{...}
+//	GetApisListResponseErrorCodeArgs{...}
 type GetApisListResponseErrorCodeInput interface {
 	pulumi.Input
 
@@ -1360,7 +1360,7 @@ func (i GetApisListResponseErrorCodeArgs) ToGetApisListResponseErrorCodeOutputWi
 // GetApisListResponseErrorCodeArrayInput is an input type that accepts GetApisListResponseErrorCodeArray and GetApisListResponseErrorCodeArrayOutput values.
 // You can construct a concrete instance of `GetApisListResponseErrorCodeArrayInput` via:
 //
-//          GetApisListResponseErrorCodeArray{ GetApisListResponseErrorCodeArgs{...} }
+//	GetApisListResponseErrorCodeArray{ GetApisListResponseErrorCodeArgs{...} }
 type GetApisListResponseErrorCodeArrayInput interface {
 	pulumi.Input
 
@@ -1461,7 +1461,7 @@ type GetCustomerDomainsList struct {
 // GetCustomerDomainsListInput is an input type that accepts GetCustomerDomainsListArgs and GetCustomerDomainsListOutput values.
 // You can construct a concrete instance of `GetCustomerDomainsListInput` via:
 //
-//          GetCustomerDomainsListArgs{...}
+//	GetCustomerDomainsListArgs{...}
 type GetCustomerDomainsListInput interface {
 	pulumi.Input
 
@@ -1501,7 +1501,7 @@ func (i GetCustomerDomainsListArgs) ToGetCustomerDomainsListOutputWithContext(ct
 // GetCustomerDomainsListArrayInput is an input type that accepts GetCustomerDomainsListArray and GetCustomerDomainsListArrayOutput values.
 // You can construct a concrete instance of `GetCustomerDomainsListArrayInput` via:
 //
-//          GetCustomerDomainsListArray{ GetCustomerDomainsListArgs{...} }
+//	GetCustomerDomainsListArray{ GetCustomerDomainsListArgs{...} }
 type GetCustomerDomainsListArrayInput interface {
 	pulumi.Input
 
@@ -1602,7 +1602,7 @@ type GetCustomerDomainsListPathMapping struct {
 // GetCustomerDomainsListPathMappingInput is an input type that accepts GetCustomerDomainsListPathMappingArgs and GetCustomerDomainsListPathMappingOutput values.
 // You can construct a concrete instance of `GetCustomerDomainsListPathMappingInput` via:
 //
-//          GetCustomerDomainsListPathMappingArgs{...}
+//	GetCustomerDomainsListPathMappingArgs{...}
 type GetCustomerDomainsListPathMappingInput interface {
 	pulumi.Input
 
@@ -1632,7 +1632,7 @@ func (i GetCustomerDomainsListPathMappingArgs) ToGetCustomerDomainsListPathMappi
 // GetCustomerDomainsListPathMappingArrayInput is an input type that accepts GetCustomerDomainsListPathMappingArray and GetCustomerDomainsListPathMappingArrayOutput values.
 // You can construct a concrete instance of `GetCustomerDomainsListPathMappingArrayInput` via:
 //
-//          GetCustomerDomainsListPathMappingArray{ GetCustomerDomainsListPathMappingArgs{...} }
+//	GetCustomerDomainsListPathMappingArray{ GetCustomerDomainsListPathMappingArgs{...} }
 type GetCustomerDomainsListPathMappingArrayInput interface {
 	pulumi.Input
 
@@ -1722,7 +1722,7 @@ type GetIpStrategiesList struct {
 // GetIpStrategiesListInput is an input type that accepts GetIpStrategiesListArgs and GetIpStrategiesListOutput values.
 // You can construct a concrete instance of `GetIpStrategiesListInput` via:
 //
-//          GetIpStrategiesListArgs{...}
+//	GetIpStrategiesListArgs{...}
 type GetIpStrategiesListInput interface {
 	pulumi.Input
 
@@ -1766,7 +1766,7 @@ func (i GetIpStrategiesListArgs) ToGetIpStrategiesListOutputWithContext(ctx cont
 // GetIpStrategiesListArrayInput is an input type that accepts GetIpStrategiesListArray and GetIpStrategiesListArrayOutput values.
 // You can construct a concrete instance of `GetIpStrategiesListArrayInput` via:
 //
-//          GetIpStrategiesListArray{ GetIpStrategiesListArgs{...} }
+//	GetIpStrategiesListArray{ GetIpStrategiesListArgs{...} }
 type GetIpStrategiesListArrayInput interface {
 	pulumi.Input
 
@@ -1909,7 +1909,7 @@ type GetIpStrategiesListAttachList struct {
 // GetIpStrategiesListAttachListInput is an input type that accepts GetIpStrategiesListAttachListArgs and GetIpStrategiesListAttachListOutput values.
 // You can construct a concrete instance of `GetIpStrategiesListAttachListInput` via:
 //
-//          GetIpStrategiesListAttachListArgs{...}
+//	GetIpStrategiesListAttachListArgs{...}
 type GetIpStrategiesListAttachListInput interface {
 	pulumi.Input
 
@@ -1971,7 +1971,7 @@ func (i GetIpStrategiesListAttachListArgs) ToGetIpStrategiesListAttachListOutput
 // GetIpStrategiesListAttachListArrayInput is an input type that accepts GetIpStrategiesListAttachListArray and GetIpStrategiesListAttachListArrayOutput values.
 // You can construct a concrete instance of `GetIpStrategiesListAttachListArrayInput` via:
 //
-//          GetIpStrategiesListAttachListArray{ GetIpStrategiesListAttachListArgs{...} }
+//	GetIpStrategiesListAttachListArray{ GetIpStrategiesListAttachListArgs{...} }
 type GetIpStrategiesListAttachListArrayInput interface {
 	pulumi.Input
 
@@ -2151,7 +2151,7 @@ type GetServicesList struct {
 // GetServicesListInput is an input type that accepts GetServicesListArgs and GetServicesListOutput values.
 // You can construct a concrete instance of `GetServicesListInput` via:
 //
-//          GetServicesListArgs{...}
+//	GetServicesListArgs{...}
 type GetServicesListInput interface {
 	pulumi.Input
 
@@ -2205,7 +2205,7 @@ func (i GetServicesListArgs) ToGetServicesListOutputWithContext(ctx context.Cont
 // GetServicesListArrayInput is an input type that accepts GetServicesListArray and GetServicesListArrayOutput values.
 // You can construct a concrete instance of `GetServicesListArrayInput` via:
 //
-//          GetServicesListArray{ GetServicesListArgs{...} }
+//	GetServicesListArray{ GetServicesListArgs{...} }
 type GetServicesListArrayInput interface {
 	pulumi.Input
 
@@ -2345,7 +2345,7 @@ type GetServicesListUsagePlanList struct {
 // GetServicesListUsagePlanListInput is an input type that accepts GetServicesListUsagePlanListArgs and GetServicesListUsagePlanListOutput values.
 // You can construct a concrete instance of `GetServicesListUsagePlanListInput` via:
 //
-//          GetServicesListUsagePlanListArgs{...}
+//	GetServicesListUsagePlanListArgs{...}
 type GetServicesListUsagePlanListInput interface {
 	pulumi.Input
 
@@ -2379,7 +2379,7 @@ func (i GetServicesListUsagePlanListArgs) ToGetServicesListUsagePlanListOutputWi
 // GetServicesListUsagePlanListArrayInput is an input type that accepts GetServicesListUsagePlanListArray and GetServicesListUsagePlanListArrayOutput values.
 // You can construct a concrete instance of `GetServicesListUsagePlanListArrayInput` via:
 //
-//          GetServicesListUsagePlanListArray{ GetServicesListUsagePlanListArgs{...} }
+//	GetServicesListUsagePlanListArray{ GetServicesListUsagePlanListArgs{...} }
 type GetServicesListUsagePlanListArrayInput interface {
 	pulumi.Input
 
@@ -2465,7 +2465,7 @@ type GetThrottlingApisList struct {
 // GetThrottlingApisListInput is an input type that accepts GetThrottlingApisListArgs and GetThrottlingApisListOutput values.
 // You can construct a concrete instance of `GetThrottlingApisListInput` via:
 //
-//          GetThrottlingApisListArgs{...}
+//	GetThrottlingApisListArgs{...}
 type GetThrottlingApisListInput interface {
 	pulumi.Input
 
@@ -2495,7 +2495,7 @@ func (i GetThrottlingApisListArgs) ToGetThrottlingApisListOutputWithContext(ctx 
 // GetThrottlingApisListArrayInput is an input type that accepts GetThrottlingApisListArray and GetThrottlingApisListArrayOutput values.
 // You can construct a concrete instance of `GetThrottlingApisListArrayInput` via:
 //
-//          GetThrottlingApisListArray{ GetThrottlingApisListArgs{...} }
+//	GetThrottlingApisListArray{ GetThrottlingApisListArgs{...} }
 type GetThrottlingApisListArrayInput interface {
 	pulumi.Input
 
@@ -2579,7 +2579,7 @@ type GetThrottlingApisListApiEnvironmentStrategy struct {
 // GetThrottlingApisListApiEnvironmentStrategyInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyArgs and GetThrottlingApisListApiEnvironmentStrategyOutput values.
 // You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyInput` via:
 //
-//          GetThrottlingApisListApiEnvironmentStrategyArgs{...}
+//	GetThrottlingApisListApiEnvironmentStrategyArgs{...}
 type GetThrottlingApisListApiEnvironmentStrategyInput interface {
 	pulumi.Input
 
@@ -2615,7 +2615,7 @@ func (i GetThrottlingApisListApiEnvironmentStrategyArgs) ToGetThrottlingApisList
 // GetThrottlingApisListApiEnvironmentStrategyArrayInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyArray and GetThrottlingApisListApiEnvironmentStrategyArrayOutput values.
 // You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyArrayInput` via:
 //
-//          GetThrottlingApisListApiEnvironmentStrategyArray{ GetThrottlingApisListApiEnvironmentStrategyArgs{...} }
+//	GetThrottlingApisListApiEnvironmentStrategyArray{ GetThrottlingApisListApiEnvironmentStrategyArgs{...} }
 type GetThrottlingApisListApiEnvironmentStrategyArrayInput interface {
 	pulumi.Input
 
@@ -2708,7 +2708,7 @@ type GetThrottlingApisListApiEnvironmentStrategyStrategyList struct {
 // GetThrottlingApisListApiEnvironmentStrategyStrategyListInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs and GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput values.
 // You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyStrategyListInput` via:
 //
-//          GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs{...}
+//	GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs{...}
 type GetThrottlingApisListApiEnvironmentStrategyStrategyListInput interface {
 	pulumi.Input
 
@@ -2738,7 +2738,7 @@ func (i GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs) ToGetThrott
 // GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyStrategyListArray and GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput values.
 // You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput` via:
 //
-//          GetThrottlingApisListApiEnvironmentStrategyStrategyListArray{ GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs{...} }
+//	GetThrottlingApisListApiEnvironmentStrategyStrategyListArray{ GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs{...} }
 type GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput interface {
 	pulumi.Input
 
@@ -2814,7 +2814,7 @@ type GetThrottlingServicesList struct {
 // GetThrottlingServicesListInput is an input type that accepts GetThrottlingServicesListArgs and GetThrottlingServicesListOutput values.
 // You can construct a concrete instance of `GetThrottlingServicesListInput` via:
 //
-//          GetThrottlingServicesListArgs{...}
+//	GetThrottlingServicesListArgs{...}
 type GetThrottlingServicesListInput interface {
 	pulumi.Input
 
@@ -2844,7 +2844,7 @@ func (i GetThrottlingServicesListArgs) ToGetThrottlingServicesListOutputWithCont
 // GetThrottlingServicesListArrayInput is an input type that accepts GetThrottlingServicesListArray and GetThrottlingServicesListArrayOutput values.
 // You can construct a concrete instance of `GetThrottlingServicesListArrayInput` via:
 //
-//          GetThrottlingServicesListArray{ GetThrottlingServicesListArgs{...} }
+//	GetThrottlingServicesListArray{ GetThrottlingServicesListArgs{...} }
 type GetThrottlingServicesListArrayInput interface {
 	pulumi.Input
 
@@ -2926,7 +2926,7 @@ type GetThrottlingServicesListEnvironment struct {
 // GetThrottlingServicesListEnvironmentInput is an input type that accepts GetThrottlingServicesListEnvironmentArgs and GetThrottlingServicesListEnvironmentOutput values.
 // You can construct a concrete instance of `GetThrottlingServicesListEnvironmentInput` via:
 //
-//          GetThrottlingServicesListEnvironmentArgs{...}
+//	GetThrottlingServicesListEnvironmentArgs{...}
 type GetThrottlingServicesListEnvironmentInput interface {
 	pulumi.Input
 
@@ -2962,7 +2962,7 @@ func (i GetThrottlingServicesListEnvironmentArgs) ToGetThrottlingServicesListEnv
 // GetThrottlingServicesListEnvironmentArrayInput is an input type that accepts GetThrottlingServicesListEnvironmentArray and GetThrottlingServicesListEnvironmentArrayOutput values.
 // You can construct a concrete instance of `GetThrottlingServicesListEnvironmentArrayInput` via:
 //
-//          GetThrottlingServicesListEnvironmentArray{ GetThrottlingServicesListEnvironmentArgs{...} }
+//	GetThrottlingServicesListEnvironmentArray{ GetThrottlingServicesListEnvironmentArgs{...} }
 type GetThrottlingServicesListEnvironmentArrayInput interface {
 	pulumi.Input
 
@@ -3067,7 +3067,7 @@ type GetUsagePlanEnvironmentsList struct {
 // GetUsagePlanEnvironmentsListInput is an input type that accepts GetUsagePlanEnvironmentsListArgs and GetUsagePlanEnvironmentsListOutput values.
 // You can construct a concrete instance of `GetUsagePlanEnvironmentsListInput` via:
 //
-//          GetUsagePlanEnvironmentsListArgs{...}
+//	GetUsagePlanEnvironmentsListArgs{...}
 type GetUsagePlanEnvironmentsListInput interface {
 	pulumi.Input
 
@@ -3111,7 +3111,7 @@ func (i GetUsagePlanEnvironmentsListArgs) ToGetUsagePlanEnvironmentsListOutputWi
 // GetUsagePlanEnvironmentsListArrayInput is an input type that accepts GetUsagePlanEnvironmentsListArray and GetUsagePlanEnvironmentsListArrayOutput values.
 // You can construct a concrete instance of `GetUsagePlanEnvironmentsListArrayInput` via:
 //
-//          GetUsagePlanEnvironmentsListArray{ GetUsagePlanEnvironmentsListArgs{...} }
+//	GetUsagePlanEnvironmentsListArray{ GetUsagePlanEnvironmentsListArgs{...} }
 type GetUsagePlanEnvironmentsListArrayInput interface {
 	pulumi.Input
 
@@ -3232,7 +3232,7 @@ type GetUsagePlansList struct {
 // GetUsagePlansListInput is an input type that accepts GetUsagePlansListArgs and GetUsagePlansListOutput values.
 // You can construct a concrete instance of `GetUsagePlansListInput` via:
 //
-//          GetUsagePlansListArgs{...}
+//	GetUsagePlansListArgs{...}
 type GetUsagePlansListInput interface {
 	pulumi.Input
 
@@ -3272,7 +3272,7 @@ func (i GetUsagePlansListArgs) ToGetUsagePlansListOutputWithContext(ctx context.
 // GetUsagePlansListArrayInput is an input type that accepts GetUsagePlansListArray and GetUsagePlansListArrayOutput values.
 // You can construct a concrete instance of `GetUsagePlansListArrayInput` via:
 //
-//          GetUsagePlansListArray{ GetUsagePlansListArgs{...} }
+//	GetUsagePlansListArray{ GetUsagePlansListArgs{...} }
 type GetUsagePlansListArrayInput interface {
 	pulumi.Input
 

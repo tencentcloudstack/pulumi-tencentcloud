@@ -22,7 +22,7 @@ type AdaptiveDynamicStreamingTemplateStreamInfo struct {
 // AdaptiveDynamicStreamingTemplateStreamInfoInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoArgs and AdaptiveDynamicStreamingTemplateStreamInfoOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoArgs{...}
+//	AdaptiveDynamicStreamingTemplateStreamInfoArgs{...}
 type AdaptiveDynamicStreamingTemplateStreamInfoInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i AdaptiveDynamicStreamingTemplateStreamInfoArgs) ToAdaptiveDynamicStreami
 // AdaptiveDynamicStreamingTemplateStreamInfoArrayInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoArray and AdaptiveDynamicStreamingTemplateStreamInfoArrayOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoArrayInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoArray{ AdaptiveDynamicStreamingTemplateStreamInfoArgs{...} }
+//	AdaptiveDynamicStreamingTemplateStreamInfoArray{ AdaptiveDynamicStreamingTemplateStreamInfoArgs{...} }
 type AdaptiveDynamicStreamingTemplateStreamInfoArrayInput interface {
 	pulumi.Input
 
@@ -143,7 +143,7 @@ type AdaptiveDynamicStreamingTemplateStreamInfoAudio struct {
 // AdaptiveDynamicStreamingTemplateStreamInfoAudioInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs and AdaptiveDynamicStreamingTemplateStreamInfoAudioOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoAudioInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{...}
+//	AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{...}
 type AdaptiveDynamicStreamingTemplateStreamInfoAudioInput interface {
 	pulumi.Input
 
@@ -228,7 +228,7 @@ type AdaptiveDynamicStreamingTemplateStreamInfoVideo struct {
 // AdaptiveDynamicStreamingTemplateStreamInfoVideoInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs and AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoVideoInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{...}
+//	AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{...}
 type AdaptiveDynamicStreamingTemplateStreamInfoVideoInput interface {
 	pulumi.Input
 
@@ -334,7 +334,7 @@ type ProcedureTemplateMediaProcessTask struct {
 // ProcedureTemplateMediaProcessTaskInput is an input type that accepts ProcedureTemplateMediaProcessTaskArgs and ProcedureTemplateMediaProcessTaskOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskArgs{...}
+//	ProcedureTemplateMediaProcessTaskArgs{...}
 type ProcedureTemplateMediaProcessTaskInput interface {
 	pulumi.Input
 
@@ -382,11 +382,11 @@ func (i ProcedureTemplateMediaProcessTaskArgs) ToProcedureTemplateMediaProcessTa
 // ProcedureTemplateMediaProcessTaskPtrInput is an input type that accepts ProcedureTemplateMediaProcessTaskArgs, ProcedureTemplateMediaProcessTaskPtr and ProcedureTemplateMediaProcessTaskPtrOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskPtrInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskArgs{...}
+//	        ProcedureTemplateMediaProcessTaskArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ProcedureTemplateMediaProcessTaskPtrInput interface {
 	pulumi.Input
 
@@ -589,7 +589,7 @@ type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList struct {
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput interface {
 	pulumi.Input
 
@@ -619,7 +619,7 @@ func (i ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs) T
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput interface {
 	pulumi.Input
 
@@ -703,7 +703,7 @@ type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkL
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -739,7 +739,7 @@ func (i ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWaterma
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -842,7 +842,7 @@ type ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskList struct {
 // ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs and ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListInput interface {
 	pulumi.Input
 
@@ -874,7 +874,7 @@ func (i ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs) ToProcedur
 // ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArray and ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArray{ ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArray{ ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayInput interface {
 	pulumi.Input
 
@@ -959,7 +959,7 @@ type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskList struct {
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -993,7 +993,7 @@ func (i ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs) ToProcedur
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArray and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1087,7 +1087,7 @@ type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkList struc
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -1123,7 +1123,7 @@ func (i ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArg
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -1222,7 +1222,7 @@ type ProcedureTemplateMediaProcessTaskImageSpriteTaskList struct {
 // ProcedureTemplateMediaProcessTaskImageSpriteTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs and ProcedureTemplateMediaProcessTaskImageSpriteTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskImageSpriteTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskImageSpriteTaskListInput interface {
 	pulumi.Input
 
@@ -1250,7 +1250,7 @@ func (i ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs) ToProcedureTem
 // ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray and ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray{ ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray{ ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1321,7 +1321,7 @@ type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskList struct {
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -1351,7 +1351,7 @@ func (i ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs) ToProcedure
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArray and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1435,7 +1435,7 @@ type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkList struct
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -1471,7 +1471,7 @@ func (i ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -1574,7 +1574,7 @@ type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskList struct {
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListInput interface {
 	pulumi.Input
 
@@ -1606,7 +1606,7 @@ func (i ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs) ToPro
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1697,7 +1697,7 @@ type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList 
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -1733,7 +1733,7 @@ func (i ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkLi
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -1836,7 +1836,7 @@ type ProcedureTemplateMediaProcessTaskTranscodeTaskList struct {
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListInput interface {
 	pulumi.Input
 
@@ -1868,7 +1868,7 @@ func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs) ToProcedureTempl
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListArray and ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1963,7 +1963,7 @@ type ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList struct {
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListInput interface {
 	pulumi.Input
 
@@ -2003,7 +2003,7 @@ func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs) ToProc
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArray and ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput interface {
 	pulumi.Input
 
@@ -2114,7 +2114,7 @@ type ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList struct {
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -2150,7 +2150,7 @@ func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs) ToP
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -2243,7 +2243,7 @@ type SuperPlayerConfigDrmStreamingInfo struct {
 // SuperPlayerConfigDrmStreamingInfoInput is an input type that accepts SuperPlayerConfigDrmStreamingInfoArgs and SuperPlayerConfigDrmStreamingInfoOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigDrmStreamingInfoInput` via:
 //
-//          SuperPlayerConfigDrmStreamingInfoArgs{...}
+//	SuperPlayerConfigDrmStreamingInfoArgs{...}
 type SuperPlayerConfigDrmStreamingInfoInput interface {
 	pulumi.Input
 
@@ -2279,11 +2279,11 @@ func (i SuperPlayerConfigDrmStreamingInfoArgs) ToSuperPlayerConfigDrmStreamingIn
 // SuperPlayerConfigDrmStreamingInfoPtrInput is an input type that accepts SuperPlayerConfigDrmStreamingInfoArgs, SuperPlayerConfigDrmStreamingInfoPtr and SuperPlayerConfigDrmStreamingInfoPtrOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigDrmStreamingInfoPtrInput` via:
 //
-//          SuperPlayerConfigDrmStreamingInfoArgs{...}
+//	        SuperPlayerConfigDrmStreamingInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SuperPlayerConfigDrmStreamingInfoPtrInput interface {
 	pulumi.Input
 
@@ -2382,7 +2382,7 @@ type SuperPlayerConfigResolutionName struct {
 // SuperPlayerConfigResolutionNameInput is an input type that accepts SuperPlayerConfigResolutionNameArgs and SuperPlayerConfigResolutionNameOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigResolutionNameInput` via:
 //
-//          SuperPlayerConfigResolutionNameArgs{...}
+//	SuperPlayerConfigResolutionNameArgs{...}
 type SuperPlayerConfigResolutionNameInput interface {
 	pulumi.Input
 
@@ -2412,7 +2412,7 @@ func (i SuperPlayerConfigResolutionNameArgs) ToSuperPlayerConfigResolutionNameOu
 // SuperPlayerConfigResolutionNameArrayInput is an input type that accepts SuperPlayerConfigResolutionNameArray and SuperPlayerConfigResolutionNameArrayOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigResolutionNameArrayInput` via:
 //
-//          SuperPlayerConfigResolutionNameArray{ SuperPlayerConfigResolutionNameArgs{...} }
+//	SuperPlayerConfigResolutionNameArray{ SuperPlayerConfigResolutionNameArgs{...} }
 type SuperPlayerConfigResolutionNameArrayInput interface {
 	pulumi.Input
 
@@ -2506,7 +2506,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateList struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -2554,7 +2554,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListArgs) ToGetAdaptiveDynam
 // GetAdaptiveDynamicStreamingTemplatesTemplateListArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListArray and GetAdaptiveDynamicStreamingTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -2679,7 +2679,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfo struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoInput interface {
 	pulumi.Input
 
@@ -2711,7 +2711,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs) ToGetAda
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArray and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayInput interface {
 	pulumi.Input
 
@@ -2800,7 +2800,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudio struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioInput interface {
 	pulumi.Input
 
@@ -2834,7 +2834,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs) ToG
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArray and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayInput interface {
 	pulumi.Input
 
@@ -2930,7 +2930,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideo struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoInput interface {
 	pulumi.Input
 
@@ -2970,7 +2970,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs) ToG
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArray and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayInput interface {
 	pulumi.Input
 
@@ -3097,7 +3097,7 @@ type GetImageSpriteTemplatesTemplateList struct {
 // GetImageSpriteTemplatesTemplateListInput is an input type that accepts GetImageSpriteTemplatesTemplateListArgs and GetImageSpriteTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetImageSpriteTemplatesTemplateListInput` via:
 //
-//          GetImageSpriteTemplatesTemplateListArgs{...}
+//	GetImageSpriteTemplatesTemplateListArgs{...}
 type GetImageSpriteTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -3151,7 +3151,7 @@ func (i GetImageSpriteTemplatesTemplateListArgs) ToGetImageSpriteTemplatesTempla
 // GetImageSpriteTemplatesTemplateListArrayInput is an input type that accepts GetImageSpriteTemplatesTemplateListArray and GetImageSpriteTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetImageSpriteTemplatesTemplateListArrayInput` via:
 //
-//          GetImageSpriteTemplatesTemplateListArray{ GetImageSpriteTemplatesTemplateListArgs{...} }
+//	GetImageSpriteTemplatesTemplateListArray{ GetImageSpriteTemplatesTemplateListArgs{...} }
 type GetImageSpriteTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -3295,7 +3295,7 @@ type GetProcedureTemplatesTemplateList struct {
 // GetProcedureTemplatesTemplateListInput is an input type that accepts GetProcedureTemplatesTemplateListArgs and GetProcedureTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListInput` via:
 //
-//          GetProcedureTemplatesTemplateListArgs{...}
+//	GetProcedureTemplatesTemplateListArgs{...}
 type GetProcedureTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -3333,7 +3333,7 @@ func (i GetProcedureTemplatesTemplateListArgs) ToGetProcedureTemplatesTemplateLi
 // GetProcedureTemplatesTemplateListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListArray and GetProcedureTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListArray{ GetProcedureTemplatesTemplateListArgs{...} }
+//	GetProcedureTemplatesTemplateListArray{ GetProcedureTemplatesTemplateListArgs{...} }
 type GetProcedureTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -3441,7 +3441,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTask struct {
 // GetProcedureTemplatesTemplateListMediaProcessTaskInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskArgs and GetProcedureTemplatesTemplateListMediaProcessTaskOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskInput interface {
 	pulumi.Input
 
@@ -3481,7 +3481,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskArgs) ToGetProcedureTem
 // GetProcedureTemplatesTemplateListMediaProcessTaskArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskArray and GetProcedureTemplatesTemplateListMediaProcessTaskArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskArray{ GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskArray{ GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskArrayInput interface {
 	pulumi.Input
 
@@ -3596,7 +3596,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTa
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListInput interface {
 	pulumi.Input
 
@@ -3626,7 +3626,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamin
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput interface {
 	pulumi.Input
 
@@ -3710,7 +3710,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTa
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -3744,7 +3744,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamin
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -3845,7 +3845,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskList st
 // GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListInput interface {
 	pulumi.Input
 
@@ -3877,7 +3877,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskList
 // GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayInput interface {
 	pulumi.Input
 
@@ -3968,7 +3968,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskList st
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -4002,7 +4002,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskList
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4100,7 +4100,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWat
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -4134,7 +4134,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskList
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4231,7 +4231,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskList struct
 // GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListInput interface {
 	pulumi.Input
 
@@ -4259,7 +4259,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs
 // GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4332,7 +4332,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskList str
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -4362,7 +4362,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListA
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4446,7 +4446,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWate
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -4480,7 +4480,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListW
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4581,7 +4581,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskLi
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListInput interface {
 	pulumi.Input
 
@@ -4613,7 +4613,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTas
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4704,7 +4704,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskLi
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -4738,7 +4738,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTas
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4839,7 +4839,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskList struct {
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListInput interface {
 	pulumi.Input
 
@@ -4871,7 +4871,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs) 
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4966,7 +4966,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicLis
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListInput interface {
 	pulumi.Input
 
@@ -5006,7 +5006,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaic
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArray and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayInput interface {
 	pulumi.Input
 
@@ -5125,7 +5125,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermark
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -5159,7 +5159,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWaterm
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -5276,7 +5276,7 @@ type GetSnapshotByTimeOffsetTemplatesTemplateList struct {
 // GetSnapshotByTimeOffsetTemplatesTemplateListInput is an input type that accepts GetSnapshotByTimeOffsetTemplatesTemplateListArgs and GetSnapshotByTimeOffsetTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetSnapshotByTimeOffsetTemplatesTemplateListInput` via:
 //
-//          GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...}
+//	GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...}
 type GetSnapshotByTimeOffsetTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -5324,7 +5324,7 @@ func (i GetSnapshotByTimeOffsetTemplatesTemplateListArgs) ToGetSnapshotByTimeOff
 // GetSnapshotByTimeOffsetTemplatesTemplateListArrayInput is an input type that accepts GetSnapshotByTimeOffsetTemplatesTemplateListArray and GetSnapshotByTimeOffsetTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetSnapshotByTimeOffsetTemplatesTemplateListArrayInput` via:
 //
-//          GetSnapshotByTimeOffsetTemplatesTemplateListArray{ GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...} }
+//	GetSnapshotByTimeOffsetTemplatesTemplateListArray{ GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...} }
 type GetSnapshotByTimeOffsetTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -5465,7 +5465,7 @@ type GetSuperPlayerConfigsConfigList struct {
 // GetSuperPlayerConfigsConfigListInput is an input type that accepts GetSuperPlayerConfigsConfigListArgs and GetSuperPlayerConfigsConfigListOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListInput` via:
 //
-//          GetSuperPlayerConfigsConfigListArgs{...}
+//	GetSuperPlayerConfigsConfigListArgs{...}
 type GetSuperPlayerConfigsConfigListInput interface {
 	pulumi.Input
 
@@ -5515,7 +5515,7 @@ func (i GetSuperPlayerConfigsConfigListArgs) ToGetSuperPlayerConfigsConfigListOu
 // GetSuperPlayerConfigsConfigListArrayInput is an input type that accepts GetSuperPlayerConfigsConfigListArray and GetSuperPlayerConfigsConfigListArrayOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListArrayInput` via:
 //
-//          GetSuperPlayerConfigsConfigListArray{ GetSuperPlayerConfigsConfigListArgs{...} }
+//	GetSuperPlayerConfigsConfigListArray{ GetSuperPlayerConfigsConfigListArgs{...} }
 type GetSuperPlayerConfigsConfigListArrayInput interface {
 	pulumi.Input
 
@@ -5643,7 +5643,7 @@ type GetSuperPlayerConfigsConfigListDrmStreamingInfo struct {
 // GetSuperPlayerConfigsConfigListDrmStreamingInfoInput is an input type that accepts GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs and GetSuperPlayerConfigsConfigListDrmStreamingInfoOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListDrmStreamingInfoInput` via:
 //
-//          GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...}
+//	GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...}
 type GetSuperPlayerConfigsConfigListDrmStreamingInfoInput interface {
 	pulumi.Input
 
@@ -5671,7 +5671,7 @@ func (i GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs) ToGetSuperPlayerCon
 // GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayInput is an input type that accepts GetSuperPlayerConfigsConfigListDrmStreamingInfoArray and GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayInput` via:
 //
-//          GetSuperPlayerConfigsConfigListDrmStreamingInfoArray{ GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...} }
+//	GetSuperPlayerConfigsConfigListDrmStreamingInfoArray{ GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...} }
 type GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayInput interface {
 	pulumi.Input
 
@@ -5742,7 +5742,7 @@ type GetSuperPlayerConfigsConfigListResolutionName struct {
 // GetSuperPlayerConfigsConfigListResolutionNameInput is an input type that accepts GetSuperPlayerConfigsConfigListResolutionNameArgs and GetSuperPlayerConfigsConfigListResolutionNameOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListResolutionNameInput` via:
 //
-//          GetSuperPlayerConfigsConfigListResolutionNameArgs{...}
+//	GetSuperPlayerConfigsConfigListResolutionNameArgs{...}
 type GetSuperPlayerConfigsConfigListResolutionNameInput interface {
 	pulumi.Input
 
@@ -5772,7 +5772,7 @@ func (i GetSuperPlayerConfigsConfigListResolutionNameArgs) ToGetSuperPlayerConfi
 // GetSuperPlayerConfigsConfigListResolutionNameArrayInput is an input type that accepts GetSuperPlayerConfigsConfigListResolutionNameArray and GetSuperPlayerConfigsConfigListResolutionNameArrayOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListResolutionNameArrayInput` via:
 //
-//          GetSuperPlayerConfigsConfigListResolutionNameArray{ GetSuperPlayerConfigsConfigListResolutionNameArgs{...} }
+//	GetSuperPlayerConfigsConfigListResolutionNameArray{ GetSuperPlayerConfigsConfigListResolutionNameArgs{...} }
 type GetSuperPlayerConfigsConfigListResolutionNameArrayInput interface {
 	pulumi.Input
 

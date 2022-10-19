@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
-// 			AccessGroupId:    pulumi.String("pgroup-7nx89k7l"),
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			Protocol:         pulumi.String("NFS"),
-// 			SubnetId:         pulumi.String("subnet-9mu2t9iw"),
-// 			VpcId:            pulumi.String("vpc-ah9fbkap"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+//				AccessGroupId:    pulumi.String("pgroup-7nx89k7l"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				Protocol:         pulumi.String("NFS"),
+//				SubnetId:         pulumi.String("subnet-9mu2t9iw"),
+//				VpcId:            pulumi.String("vpc-ah9fbkap"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // Cloud file system can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+//
+//	$ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+//
 // ```
 type FileSystem struct {
 	pulumi.CustomResourceState
@@ -231,7 +236,7 @@ func (i *FileSystem) ToFileSystemOutputWithContext(ctx context.Context) FileSyst
 // FileSystemArrayInput is an input type that accepts FileSystemArray and FileSystemArrayOutput values.
 // You can construct a concrete instance of `FileSystemArrayInput` via:
 //
-//          FileSystemArray{ FileSystemArgs{...} }
+//	FileSystemArray{ FileSystemArgs{...} }
 type FileSystemArrayInput interface {
 	pulumi.Input
 
@@ -256,7 +261,7 @@ func (i FileSystemArray) ToFileSystemArrayOutputWithContext(ctx context.Context)
 // FileSystemMapInput is an input type that accepts FileSystemMap and FileSystemMapOutput values.
 // You can construct a concrete instance of `FileSystemMapInput` via:
 //
-//          FileSystemMap{ "key": FileSystemArgs{...} }
+//	FileSystemMap{ "key": FileSystemArgs{...} }
 type FileSystemMapInput interface {
 	pulumi.Input
 

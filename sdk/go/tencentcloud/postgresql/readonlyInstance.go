@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
-// 			AutoRenewFlag:      pulumi.Int(0),
-// 			DbVersion:          pulumi.String("10.4"),
-// 			InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
-// 			MasterDbInstanceId: pulumi.String("postgres-j4pm65id"),
-// 			Memory:             pulumi.Int(4),
-// 			NeedSupportIpv6:    pulumi.Int(0),
-// 			ProjectId:          pulumi.Int(0),
-// 			SecurityGroupsIds: pulumi.StringArray{
-// 				pulumi.String("sg-fefj5n6r"),
-// 			},
-// 			Storage:  pulumi.Int(250),
-// 			SubnetId: pulumi.String("subnet-enm92y0m"),
-// 			VpcId:    pulumi.String("vpc-86v957zb"),
-// 			Zone:     pulumi.String("ap-guangzhou-6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
+//				AutoRenewFlag:      pulumi.Int(0),
+//				DbVersion:          pulumi.String("10.4"),
+//				InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+//				MasterDbInstanceId: pulumi.String("postgres-j4pm65id"),
+//				Memory:             pulumi.Int(4),
+//				NeedSupportIpv6:    pulumi.Int(0),
+//				ProjectId:          pulumi.Int(0),
+//				SecurityGroupsIds: pulumi.StringArray{
+//					pulumi.String("sg-fefj5n6r"),
+//				},
+//				Storage:  pulumi.Int(250),
+//				SubnetId: pulumi.String("subnet-enm92y0m"),
+//				VpcId:    pulumi.String("vpc-86v957zb"),
+//				Zone:     pulumi.String("ap-guangzhou-6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -54,7 +57,9 @@ import (
 // postgresql readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+//
+//	$ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+//
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -295,7 +300,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -320,7 +325,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 

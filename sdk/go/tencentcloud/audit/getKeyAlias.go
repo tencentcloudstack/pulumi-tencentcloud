@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Audit.GetKeyAlias(ctx, &audit.GetKeyAliasArgs{
-// 			Region: "ap-hongkong",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Audit.GetKeyAlias(ctx, &audit.GetKeyAliasArgs{
+//				Region: "ap-hongkong",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetKeyAlias(ctx *pulumi.Context, args *GetKeyAliasArgs, opts ...pulumi.InvokeOption) (*GetKeyAliasResult, error) {
 	var rv GetKeyAliasResult

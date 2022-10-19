@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.NewProxy(ctx, "foo", &Gaap.ProxyArgs{
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.NewProxy(ctx, "foo", &Gaap.ProxyArgs{
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // GAAP proxy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
+//
+//	$ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
+//
 // ```
 type Proxy struct {
 	pulumi.CustomResourceState
@@ -259,7 +264,7 @@ func (i *Proxy) ToProxyOutputWithContext(ctx context.Context) ProxyOutput {
 // ProxyArrayInput is an input type that accepts ProxyArray and ProxyArrayOutput values.
 // You can construct a concrete instance of `ProxyArrayInput` via:
 //
-//          ProxyArray{ ProxyArgs{...} }
+//	ProxyArray{ ProxyArgs{...} }
 type ProxyArrayInput interface {
 	pulumi.Input
 
@@ -284,7 +289,7 @@ func (i ProxyArray) ToProxyArrayOutputWithContext(ctx context.Context) ProxyArra
 // ProxyMapInput is an input type that accepts ProxyMap and ProxyMapOutput values.
 // You can construct a concrete instance of `ProxyMapInput` via:
 //
-//          ProxyMap{ "key": ProxyArgs{...} }
+//	ProxyMap{ "key": ProxyArgs{...} }
 type ProxyMapInput interface {
 	pulumi.Input
 

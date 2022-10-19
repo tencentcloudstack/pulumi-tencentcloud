@@ -22,7 +22,7 @@ type ClusterParamItem struct {
 // ClusterParamItemInput is an input type that accepts ClusterParamItemArgs and ClusterParamItemOutput values.
 // You can construct a concrete instance of `ClusterParamItemInput` via:
 //
-//          ClusterParamItemArgs{...}
+//	ClusterParamItemArgs{...}
 type ClusterParamItemInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i ClusterParamItemArgs) ToClusterParamItemOutputWithContext(ctx context.Co
 // ClusterParamItemArrayInput is an input type that accepts ClusterParamItemArray and ClusterParamItemArrayOutput values.
 // You can construct a concrete instance of `ClusterParamItemArrayInput` via:
 //
-//          ClusterParamItemArray{ ClusterParamItemArgs{...} }
+//	ClusterParamItemArray{ ClusterParamItemArgs{...} }
 type ClusterParamItemArrayInput interface {
 	pulumi.Input
 
@@ -135,7 +135,7 @@ type ClusterRoGroupAddr struct {
 // ClusterRoGroupAddrInput is an input type that accepts ClusterRoGroupAddrArgs and ClusterRoGroupAddrOutput values.
 // You can construct a concrete instance of `ClusterRoGroupAddrInput` via:
 //
-//          ClusterRoGroupAddrArgs{...}
+//	ClusterRoGroupAddrArgs{...}
 type ClusterRoGroupAddrInput interface {
 	pulumi.Input
 
@@ -165,7 +165,7 @@ func (i ClusterRoGroupAddrArgs) ToClusterRoGroupAddrOutputWithContext(ctx contex
 // ClusterRoGroupAddrArrayInput is an input type that accepts ClusterRoGroupAddrArray and ClusterRoGroupAddrArrayOutput values.
 // You can construct a concrete instance of `ClusterRoGroupAddrArrayInput` via:
 //
-//          ClusterRoGroupAddrArray{ ClusterRoGroupAddrArgs{...} }
+//	ClusterRoGroupAddrArray{ ClusterRoGroupAddrArgs{...} }
 type ClusterRoGroupAddrArrayInput interface {
 	pulumi.Input
 
@@ -241,7 +241,7 @@ type ClusterRoGroupInstance struct {
 // ClusterRoGroupInstanceInput is an input type that accepts ClusterRoGroupInstanceArgs and ClusterRoGroupInstanceOutput values.
 // You can construct a concrete instance of `ClusterRoGroupInstanceInput` via:
 //
-//          ClusterRoGroupInstanceArgs{...}
+//	ClusterRoGroupInstanceArgs{...}
 type ClusterRoGroupInstanceInput interface {
 	pulumi.Input
 
@@ -271,7 +271,7 @@ func (i ClusterRoGroupInstanceArgs) ToClusterRoGroupInstanceOutputWithContext(ct
 // ClusterRoGroupInstanceArrayInput is an input type that accepts ClusterRoGroupInstanceArray and ClusterRoGroupInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterRoGroupInstanceArrayInput` via:
 //
-//          ClusterRoGroupInstanceArray{ ClusterRoGroupInstanceArgs{...} }
+//	ClusterRoGroupInstanceArray{ ClusterRoGroupInstanceArgs{...} }
 type ClusterRoGroupInstanceArrayInput interface {
 	pulumi.Input
 
@@ -347,7 +347,7 @@ type ClusterRwGroupAddr struct {
 // ClusterRwGroupAddrInput is an input type that accepts ClusterRwGroupAddrArgs and ClusterRwGroupAddrOutput values.
 // You can construct a concrete instance of `ClusterRwGroupAddrInput` via:
 //
-//          ClusterRwGroupAddrArgs{...}
+//	ClusterRwGroupAddrArgs{...}
 type ClusterRwGroupAddrInput interface {
 	pulumi.Input
 
@@ -377,7 +377,7 @@ func (i ClusterRwGroupAddrArgs) ToClusterRwGroupAddrOutputWithContext(ctx contex
 // ClusterRwGroupAddrArrayInput is an input type that accepts ClusterRwGroupAddrArray and ClusterRwGroupAddrArrayOutput values.
 // You can construct a concrete instance of `ClusterRwGroupAddrArrayInput` via:
 //
-//          ClusterRwGroupAddrArray{ ClusterRwGroupAddrArgs{...} }
+//	ClusterRwGroupAddrArray{ ClusterRwGroupAddrArgs{...} }
 type ClusterRwGroupAddrArrayInput interface {
 	pulumi.Input
 
@@ -453,7 +453,7 @@ type ClusterRwGroupInstance struct {
 // ClusterRwGroupInstanceInput is an input type that accepts ClusterRwGroupInstanceArgs and ClusterRwGroupInstanceOutput values.
 // You can construct a concrete instance of `ClusterRwGroupInstanceInput` via:
 //
-//          ClusterRwGroupInstanceArgs{...}
+//	ClusterRwGroupInstanceArgs{...}
 type ClusterRwGroupInstanceInput interface {
 	pulumi.Input
 
@@ -483,7 +483,7 @@ func (i ClusterRwGroupInstanceArgs) ToClusterRwGroupInstanceOutputWithContext(ct
 // ClusterRwGroupInstanceArrayInput is an input type that accepts ClusterRwGroupInstanceArray and ClusterRwGroupInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterRwGroupInstanceArrayInput` via:
 //
-//          ClusterRwGroupInstanceArray{ ClusterRwGroupInstanceArgs{...} }
+//	ClusterRwGroupInstanceArray{ ClusterRwGroupInstanceArgs{...} }
 type ClusterRwGroupInstanceArrayInput interface {
 	pulumi.Input
 
@@ -583,7 +583,7 @@ type GetClustersClusterList struct {
 // GetClustersClusterListInput is an input type that accepts GetClustersClusterListArgs and GetClustersClusterListOutput values.
 // You can construct a concrete instance of `GetClustersClusterListInput` via:
 //
-//          GetClustersClusterListArgs{...}
+//	GetClustersClusterListArgs{...}
 type GetClustersClusterListInput interface {
 	pulumi.Input
 
@@ -637,7 +637,7 @@ func (i GetClustersClusterListArgs) ToGetClustersClusterListOutputWithContext(ct
 // GetClustersClusterListArrayInput is an input type that accepts GetClustersClusterListArray and GetClustersClusterListArrayOutput values.
 // You can construct a concrete instance of `GetClustersClusterListArrayInput` via:
 //
-//          GetClustersClusterListArray{ GetClustersClusterListArgs{...} }
+//	GetClustersClusterListArray{ GetClustersClusterListArgs{...} }
 type GetClustersClusterListArrayInput interface {
 	pulumi.Input
 
@@ -785,7 +785,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -827,7 +827,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 

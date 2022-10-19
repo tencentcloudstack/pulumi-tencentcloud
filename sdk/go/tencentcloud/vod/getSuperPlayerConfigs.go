@@ -18,46 +18,49 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vod.NewSuperPlayerConfig(ctx, "fooSuperPlayerConfig", &Vod.SuperPlayerConfigArgs{
-// 			DrmSwitch: pulumi.Bool(true),
-// 			DrmStreamingInfo: &vod.SuperPlayerConfigDrmStreamingInfoArgs{
-// 				SimpleAesDefinition: pulumi.Any(tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id),
-// 			},
-// 			ImageSpriteDefinition: pulumi.Any(tencentcloud_vod_image_sprite_template.Foo.Id),
-// 			ResolutionNames: vod.SuperPlayerConfigResolutionNameArray{
-// 				&vod.SuperPlayerConfigResolutionNameArgs{
-// 					MinEdgeLength: pulumi.Int(889),
-// 					Name:          pulumi.String("test1"),
-// 				},
-// 				&vod.SuperPlayerConfigResolutionNameArgs{
-// 					MinEdgeLength: pulumi.Int(890),
-// 					Name:          pulumi.String("test2"),
-// 				},
-// 			},
-// 			Domain:  pulumi.String("Default"),
-// 			Scheme:  pulumi.String("Default"),
-// 			Comment: pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vod.GetSuperPlayerConfigs(ctx, &vod.GetSuperPlayerConfigsArgs{
-// 			Type: pulumi.StringRef("Custom"),
-// 			Name: pulumi.StringRef("tf-super-player"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vod.NewSuperPlayerConfig(ctx, "fooSuperPlayerConfig", &Vod.SuperPlayerConfigArgs{
+//				DrmSwitch: pulumi.Bool(true),
+//				DrmStreamingInfo: &vod.SuperPlayerConfigDrmStreamingInfoArgs{
+//					SimpleAesDefinition: pulumi.Any(tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id),
+//				},
+//				ImageSpriteDefinition: pulumi.Any(tencentcloud_vod_image_sprite_template.Foo.Id),
+//				ResolutionNames: vod.SuperPlayerConfigResolutionNameArray{
+//					&vod.SuperPlayerConfigResolutionNameArgs{
+//						MinEdgeLength: pulumi.Int(889),
+//						Name:          pulumi.String("test1"),
+//					},
+//					&vod.SuperPlayerConfigResolutionNameArgs{
+//						MinEdgeLength: pulumi.Int(890),
+//						Name:          pulumi.String("test2"),
+//					},
+//				},
+//				Domain:  pulumi.String("Default"),
+//				Scheme:  pulumi.String("Default"),
+//				Comment: pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vod.GetSuperPlayerConfigs(ctx, &vod.GetSuperPlayerConfigsArgs{
+//				Type: pulumi.StringRef("Custom"),
+//				Name: pulumi.StringRef("tf-super-player"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSuperPlayerConfigs(ctx *pulumi.Context, args *GetSuperPlayerConfigsArgs, opts ...pulumi.InvokeOption) (*GetSuperPlayerConfigsResult, error) {
 	var rv GetSuperPlayerConfigsResult

@@ -19,63 +19,66 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Emr.NewCluster(ctx, "emrrrr", &Emr.ClusterArgs{
-// 			ProductId:       pulumi.Int(4),
-// 			DisplayStrategy: pulumi.String("clusterList"),
-// 			VpcSettings: pulumi.AnyMap{
-// 				"vpc_id":    pulumi.Any("vpc-fuwly8x5"),
-// 				"subnet_id": pulumi.Any("subnet-d830wfso"),
-// 			},
-// 			Softwares: pulumi.StringArray{
-// 				pulumi.String("hadoop-2.8.4"),
-// 				pulumi.String("zookeeper-3.4.9"),
-// 			},
-// 			SupportHa:    pulumi.Int(0),
-// 			InstanceName: pulumi.String("emr-test"),
-// 			ResourceSpec: &emr.ClusterResourceSpecArgs{
-// 				MasterResourceSpec: &emr.ClusterResourceSpecMasterResourceSpecArgs{
-// 					MemSize:     pulumi.Int(8192),
-// 					Cpu:         pulumi.Int(4),
-// 					DiskSize:    pulumi.Int(100),
-// 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
-// 					Spec:        pulumi.String("CVM.S2"),
-// 					StorageType: pulumi.Int(5),
-// 				},
-// 				CoreResourceSpec: &emr.ClusterResourceSpecCoreResourceSpecArgs{
-// 					MemSize:     pulumi.Int(8192),
-// 					Cpu:         pulumi.Int(4),
-// 					DiskSize:    pulumi.Int(100),
-// 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
-// 					Spec:        pulumi.String("CVM.S2"),
-// 					StorageType: pulumi.Int(5),
-// 				},
-// 				MasterCount: pulumi.Int(1),
-// 				CoreCount:   pulumi.Int(2),
-// 			},
-// 			LoginSettings: pulumi.AnyMap{
-// 				"password": pulumi.Any("Tencent@cloud123"),
-// 			},
-// 			TimeSpan: pulumi.Int(1),
-// 			TimeUnit: pulumi.String("m"),
-// 			PayMode:  pulumi.Int(1),
-// 			Placement: pulumi.AnyMap{
-// 				"zone":       pulumi.Any("ap-guangzhou-3"),
-// 				"project_id": pulumi.Any(0),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Emr.NewCluster(ctx, "emrrrr", &Emr.ClusterArgs{
+//				ProductId:       pulumi.Int(4),
+//				DisplayStrategy: pulumi.String("clusterList"),
+//				VpcSettings: pulumi.AnyMap{
+//					"vpc_id":    pulumi.Any("vpc-fuwly8x5"),
+//					"subnet_id": pulumi.Any("subnet-d830wfso"),
+//				},
+//				Softwares: pulumi.StringArray{
+//					pulumi.String("hadoop-2.8.4"),
+//					pulumi.String("zookeeper-3.4.9"),
+//				},
+//				SupportHa:    pulumi.Int(0),
+//				InstanceName: pulumi.String("emr-test"),
+//				ResourceSpec: &emr.ClusterResourceSpecArgs{
+//					MasterResourceSpec: &emr.ClusterResourceSpecMasterResourceSpecArgs{
+//						MemSize:     pulumi.Int(8192),
+//						Cpu:         pulumi.Int(4),
+//						DiskSize:    pulumi.Int(100),
+//						DiskType:    pulumi.String("CLOUD_PREMIUM"),
+//						Spec:        pulumi.String("CVM.S2"),
+//						StorageType: pulumi.Int(5),
+//					},
+//					CoreResourceSpec: &emr.ClusterResourceSpecCoreResourceSpecArgs{
+//						MemSize:     pulumi.Int(8192),
+//						Cpu:         pulumi.Int(4),
+//						DiskSize:    pulumi.Int(100),
+//						DiskType:    pulumi.String("CLOUD_PREMIUM"),
+//						Spec:        pulumi.String("CVM.S2"),
+//						StorageType: pulumi.Int(5),
+//					},
+//					MasterCount: pulumi.Int(1),
+//					CoreCount:   pulumi.Int(2),
+//				},
+//				LoginSettings: pulumi.AnyMap{
+//					"password": pulumi.Any("Tencent@cloud123"),
+//				},
+//				TimeSpan: pulumi.Int(1),
+//				TimeUnit: pulumi.String("m"),
+//				PayMode:  pulumi.Int(1),
+//				Placement: pulumi.AnyMap{
+//					"zone":       pulumi.Any("ap-guangzhou-3"),
+//					"project_id": pulumi.Any(0),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Cluster struct {
 	pulumi.CustomResourceState
@@ -362,7 +365,7 @@ func (i *Cluster) ToClusterOutputWithContext(ctx context.Context) ClusterOutput 
 // ClusterArrayInput is an input type that accepts ClusterArray and ClusterArrayOutput values.
 // You can construct a concrete instance of `ClusterArrayInput` via:
 //
-//          ClusterArray{ ClusterArgs{...} }
+//	ClusterArray{ ClusterArgs{...} }
 type ClusterArrayInput interface {
 	pulumi.Input
 
@@ -387,7 +390,7 @@ func (i ClusterArray) ToClusterArrayOutputWithContext(ctx context.Context) Clust
 // ClusterMapInput is an input type that accepts ClusterMap and ClusterMapOutput values.
 // You can construct a concrete instance of `ClusterMapInput` via:
 //
-//          ClusterMap{ "key": ClusterArgs{...} }
+//	ClusterMap{ "key": ClusterArgs{...} }
 type ClusterMapInput interface {
 	pulumi.Input
 
@@ -449,9 +452,9 @@ func (o ClusterOutput) LoginSettings() pulumi.MapOutput {
 }
 
 // Whether to enable the cluster Master node public network. Value range:
-// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
-// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
-//   By default, the cluster Master node internet is enabled.
+//   - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+//   - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+//     By default, the cluster Master node internet is enabled.
 func (o ClusterOutput) NeedMasterWan() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.NeedMasterWan }).(pulumi.StringPtrOutput)
 }

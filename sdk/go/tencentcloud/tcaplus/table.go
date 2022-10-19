@@ -19,61 +19,64 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		test, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
-// 			IdlType:               pulumi.String("PROTO"),
-// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
-// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
-// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
-// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
-// 			OldPasswordExpireLast: pulumi.Int(3600),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tablegroup, err := Tcaplus.NewTablegroup(ctx, "tablegroup", &Tcaplus.TablegroupArgs{
-// 			ClusterId:      test.ID(),
-// 			TablegroupName: pulumi.String("tf_test_group_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		main, err := Tcaplus.NewIdl(ctx, "main", &Tcaplus.IdlArgs{
-// 			ClusterId:    test.ID(),
-// 			TablegroupId: tablegroup.ID(),
-// 			FileName:     pulumi.String("tf_idl_test_2"),
-// 			FileType:     pulumi.String("PROTO"),
-// 			FileExtType:  pulumi.String("proto"),
-// 			FileContent:  pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "    syntax = \"proto2\";\n", "    package myTcaplusTable;\n", "    import \"tcaplusservice.optionv1.proto\";\n", "    message tb_online {\n", "       option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";\n", "        required int64 uin = 1;\n", "        required string name = 2;\n", "        required int32 region = 3;\n", "        required int32 gamesvrid = 4;\n", "        optional int32 logintime = 5 [default = 1];\n", "        repeated int64 lockid = 6 [packed = true];\n", "        optional bool is_available = 7 [default = false];\n", "        optional pay_info pay = 8;\n", "    }\n", "\n", "    message pay_info {\n", "        required int64 pay_id = 1;\n", "        optional uint64 total_money = 2;\n", "        optional uint64 pay_times = 3;\n", "        optional pay_auth_info auth = 4;\n", "        message pay_auth_info {\n", "            required string pay_keys = 1;\n", "            optional int64 update_time = 2;\n", "        }\n", "    }\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcaplus.NewTable(ctx, "table", &Tcaplus.TableArgs{
-// 			ClusterId:       test.ID(),
-// 			TablegroupId:    tablegroup.ID(),
-// 			TableName:       pulumi.String("tb_online"),
-// 			TableType:       pulumi.String("GENERIC"),
-// 			Description:     pulumi.String("test"),
-// 			IdlId:           main.ID(),
-// 			TableIdlType:    pulumi.String("PROTO"),
-// 			ReservedReadCu:  pulumi.Int(1000),
-// 			ReservedWriteCu: pulumi.Int(20),
-// 			ReservedVolume:  pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			test, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
+//				IdlType:               pulumi.String("PROTO"),
+//				ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
+//				VpcId:                 pulumi.String("vpc-7k6gzox6"),
+//				SubnetId:              pulumi.String("subnet-akwgvfa3"),
+//				Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
+//				OldPasswordExpireLast: pulumi.Int(3600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tablegroup, err := Tcaplus.NewTablegroup(ctx, "tablegroup", &Tcaplus.TablegroupArgs{
+//				ClusterId:      test.ID(),
+//				TablegroupName: pulumi.String("tf_test_group_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			main, err := Tcaplus.NewIdl(ctx, "main", &Tcaplus.IdlArgs{
+//				ClusterId:    test.ID(),
+//				TablegroupId: tablegroup.ID(),
+//				FileName:     pulumi.String("tf_idl_test_2"),
+//				FileType:     pulumi.String("PROTO"),
+//				FileExtType:  pulumi.String("proto"),
+//				FileContent:  pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "    syntax = \"proto2\";\n", "    package myTcaplusTable;\n", "    import \"tcaplusservice.optionv1.proto\";\n", "    message tb_online {\n", "       option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";\n", "        required int64 uin = 1;\n", "        required string name = 2;\n", "        required int32 region = 3;\n", "        required int32 gamesvrid = 4;\n", "        optional int32 logintime = 5 [default = 1];\n", "        repeated int64 lockid = 6 [packed = true];\n", "        optional bool is_available = 7 [default = false];\n", "        optional pay_info pay = 8;\n", "    }\n", "\n", "    message pay_info {\n", "        required int64 pay_id = 1;\n", "        optional uint64 total_money = 2;\n", "        optional uint64 pay_times = 3;\n", "        optional pay_auth_info auth = 4;\n", "        message pay_auth_info {\n", "            required string pay_keys = 1;\n", "            optional int64 update_time = 2;\n", "        }\n", "    }\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcaplus.NewTable(ctx, "table", &Tcaplus.TableArgs{
+//				ClusterId:       test.ID(),
+//				TablegroupId:    tablegroup.ID(),
+//				TableName:       pulumi.String("tb_online"),
+//				TableType:       pulumi.String("GENERIC"),
+//				Description:     pulumi.String("test"),
+//				IdlId:           main.ID(),
+//				TableIdlType:    pulumi.String("PROTO"),
+//				ReservedReadCu:  pulumi.Int(1000),
+//				ReservedWriteCu: pulumi.Int(20),
+//				ReservedVolume:  pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Table struct {
 	pulumi.CustomResourceState
@@ -302,7 +305,7 @@ func (i *Table) ToTableOutputWithContext(ctx context.Context) TableOutput {
 // TableArrayInput is an input type that accepts TableArray and TableArrayOutput values.
 // You can construct a concrete instance of `TableArrayInput` via:
 //
-//          TableArray{ TableArgs{...} }
+//	TableArray{ TableArgs{...} }
 type TableArrayInput interface {
 	pulumi.Input
 
@@ -327,7 +330,7 @@ func (i TableArray) ToTableArrayOutputWithContext(ctx context.Context) TableArra
 // TableMapInput is an input type that accepts TableMap and TableMapOutput values.
 // You can construct a concrete instance of `TableMapInput` via:
 //
-//          TableMap{ "key": TableArgs{...} }
+//	TableMap{ "key": TableArgs{...} }
 type TableMapInput interface {
 	pulumi.Input
 

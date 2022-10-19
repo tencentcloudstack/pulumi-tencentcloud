@@ -19,69 +19,72 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("ck"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-// 			ServiceId:           service.ID(),
-// 			ApiName:             pulumi.String("hello"),
-// 			ApiDesc:             pulumi.String("my hello api"),
-// 			AuthType:            pulumi.String("NONE"),
-// 			Protocol:            pulumi.String("HTTP"),
-// 			EnableCors:          pulumi.Bool(true),
-// 			RequestConfigPath:   pulumi.String("/user/info"),
-// 			RequestConfigMethod: pulumi.String("GET"),
-// 			RequestParameters: apigateway.ApiRequestParameterArray{
-// 				&apigateway.ApiRequestParameterArgs{
-// 					Name:         pulumi.String("name"),
-// 					Position:     pulumi.String("QUERY"),
-// 					Type:         pulumi.String("string"),
-// 					Desc:         pulumi.String("who are you?"),
-// 					DefaultValue: pulumi.String("tom"),
-// 					Required:     pulumi.Bool(true),
-// 				},
-// 			},
-// 			ServiceConfigType:      pulumi.String("HTTP"),
-// 			ServiceConfigTimeout:   pulumi.Int(15),
-// 			ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
-// 			ServiceConfigPath:      pulumi.String("/user"),
-// 			ServiceConfigMethod:    pulumi.String("GET"),
-// 			ResponseType:           pulumi.String("HTML"),
-// 			ResponseSuccessExample: pulumi.String("success"),
-// 			ResponseFailExample:    pulumi.String("fail"),
-// 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-// 				&apigateway.ApiResponseErrorCodeArgs{
-// 					Code:          pulumi.Int(100),
-// 					Msg:           pulumi.String("system error"),
-// 					Desc:          pulumi.String("system error code"),
-// 					ConvertedCode: -100,
-// 					NeedConvert:   pulumi.Bool(true),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("ck"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
+//				ServiceId:           service.ID(),
+//				ApiName:             pulumi.String("hello"),
+//				ApiDesc:             pulumi.String("my hello api"),
+//				AuthType:            pulumi.String("NONE"),
+//				Protocol:            pulumi.String("HTTP"),
+//				EnableCors:          pulumi.Bool(true),
+//				RequestConfigPath:   pulumi.String("/user/info"),
+//				RequestConfigMethod: pulumi.String("GET"),
+//				RequestParameters: apigateway.ApiRequestParameterArray{
+//					&apigateway.ApiRequestParameterArgs{
+//						Name:         pulumi.String("name"),
+//						Position:     pulumi.String("QUERY"),
+//						Type:         pulumi.String("string"),
+//						Desc:         pulumi.String("who are you?"),
+//						DefaultValue: pulumi.String("tom"),
+//						Required:     pulumi.Bool(true),
+//					},
+//				},
+//				ServiceConfigType:      pulumi.String("HTTP"),
+//				ServiceConfigTimeout:   pulumi.Int(15),
+//				ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
+//				ServiceConfigPath:      pulumi.String("/user"),
+//				ServiceConfigMethod:    pulumi.String("GET"),
+//				ResponseType:           pulumi.String("HTML"),
+//				ResponseSuccessExample: pulumi.String("success"),
+//				ResponseFailExample:    pulumi.String("fail"),
+//				ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+//					&apigateway.ApiResponseErrorCodeArgs{
+//						Code:          pulumi.Int(100),
+//						Msg:           pulumi.String("system error"),
+//						Desc:          pulumi.String("system error code"),
+//						ConvertedCode: -100,
+//						NeedConvert:   pulumi.Bool(true),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Api struct {
 	pulumi.CustomResourceState
@@ -450,7 +453,7 @@ func (i *Api) ToApiOutputWithContext(ctx context.Context) ApiOutput {
 // ApiArrayInput is an input type that accepts ApiArray and ApiArrayOutput values.
 // You can construct a concrete instance of `ApiArrayInput` via:
 //
-//          ApiArray{ ApiArgs{...} }
+//	ApiArray{ ApiArgs{...} }
 type ApiArrayInput interface {
 	pulumi.Input
 
@@ -475,7 +478,7 @@ func (i ApiArray) ToApiArrayOutputWithContext(ctx context.Context) ApiArrayOutpu
 // ApiMapInput is an input type that accepts ApiMap and ApiMapOutput values.
 // You can construct a concrete instance of `ApiMapInput` via:
 //
-//          ApiMap{ "key": ApiArgs{...} }
+//	ApiMap{ "key": ApiArgs{...} }
 type ApiMapInput interface {
 	pulumi.Input
 

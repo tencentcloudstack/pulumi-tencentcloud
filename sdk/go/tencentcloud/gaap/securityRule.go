@@ -19,40 +19,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooSecurityPolicy, err := Gaap.NewSecurityPolicy(ctx, "fooSecurityPolicy", &Gaap.SecurityPolicyArgs{
-// 			ProxyId: fooProxy.ID(),
-// 			Action:  pulumi.String("ACCEPT"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Gaap.NewSecurityRule(ctx, "fooSecurityRule", &Gaap.SecurityRuleArgs{
-// 			PolicyId: fooSecurityPolicy.ID(),
-// 			CidrIp:   pulumi.String("1.1.1.1"),
-// 			Action:   pulumi.String("ACCEPT"),
-// 			Protocol: pulumi.String("TCP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooSecurityPolicy, err := Gaap.NewSecurityPolicy(ctx, "fooSecurityPolicy", &Gaap.SecurityPolicyArgs{
+//				ProxyId: fooProxy.ID(),
+//				Action:  pulumi.String("ACCEPT"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Gaap.NewSecurityRule(ctx, "fooSecurityRule", &Gaap.SecurityRuleArgs{
+//				PolicyId: fooSecurityPolicy.ID(),
+//				CidrIp:   pulumi.String("1.1.1.1"),
+//				Action:   pulumi.String("ACCEPT"),
+//				Protocol: pulumi.String("TCP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -60,7 +63,9 @@ import (
 // GAAP security rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+//
+//	$ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+//
 // ```
 type SecurityRule struct {
 	pulumi.CustomResourceState
@@ -207,7 +212,7 @@ func (i *SecurityRule) ToSecurityRuleOutputWithContext(ctx context.Context) Secu
 // SecurityRuleArrayInput is an input type that accepts SecurityRuleArray and SecurityRuleArrayOutput values.
 // You can construct a concrete instance of `SecurityRuleArrayInput` via:
 //
-//          SecurityRuleArray{ SecurityRuleArgs{...} }
+//	SecurityRuleArray{ SecurityRuleArgs{...} }
 type SecurityRuleArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +237,7 @@ func (i SecurityRuleArray) ToSecurityRuleArrayOutputWithContext(ctx context.Cont
 // SecurityRuleMapInput is an input type that accepts SecurityRuleMap and SecurityRuleMapOutput values.
 // You can construct a concrete instance of `SecurityRuleMapInput` via:
 //
-//          SecurityRuleMap{ "key": SecurityRuleArgs{...} }
+//	SecurityRuleMap{ "key": SecurityRuleArgs{...} }
 type SecurityRuleMapInput interface {
 	pulumi.Input
 

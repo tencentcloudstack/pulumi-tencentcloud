@@ -19,75 +19,81 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewScalingConfig(ctx, "launchConfiguration", &As.ScalingConfigArgs{
-// 			ConfigurationName: pulumi.String("launch-configuration"),
-// 			DataDisks: as.ScalingConfigDataDiskArray{
-// 				&as.ScalingConfigDataDiskArgs{
-// 					DiskSize: pulumi.Int(50),
-// 					DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 				},
-// 			},
-// 			EnhancedMonitorService:  pulumi.Bool(false),
-// 			EnhancedSecurityService: pulumi.Bool(false),
-// 			ImageId:                 pulumi.String("img-9qabwvbn"),
-// 			InstanceTags: pulumi.AnyMap{
-// 				"tag": pulumi.Any("as"),
-// 			},
-// 			InstanceTypes: pulumi.StringArray{
-// 				pulumi.String("SA1.SMALL1"),
-// 			},
-// 			InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 			InternetMaxBandwidthOut: pulumi.Int(10),
-// 			Password:                pulumi.String("test123#"),
-// 			ProjectId:               pulumi.Int(0),
-// 			PublicIpAssigned:        pulumi.Bool(true),
-// 			SystemDiskSize:          pulumi.Int(50),
-// 			SystemDiskType:          pulumi.String("CLOUD_PREMIUM"),
-// 			UserData:                pulumi.String("dGVzdA=="),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewScalingConfig(ctx, "launchConfiguration", &As.ScalingConfigArgs{
+//				ConfigurationName: pulumi.String("launch-configuration"),
+//				DataDisks: as.ScalingConfigDataDiskArray{
+//					&as.ScalingConfigDataDiskArgs{
+//						DiskSize: pulumi.Int(50),
+//						DiskType: pulumi.String("CLOUD_PREMIUM"),
+//					},
+//				},
+//				EnhancedMonitorService:  pulumi.Bool(false),
+//				EnhancedSecurityService: pulumi.Bool(false),
+//				ImageId:                 pulumi.String("img-9qabwvbn"),
+//				InstanceTags: pulumi.AnyMap{
+//					"tag": pulumi.Any("as"),
+//				},
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("SA1.SMALL1"),
+//				},
+//				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//				InternetMaxBandwidthOut: pulumi.Int(10),
+//				Password:                pulumi.String("test123#"),
+//				ProjectId:               pulumi.Int(0),
+//				PublicIpAssigned:        pulumi.Bool(true),
+//				SystemDiskSize:          pulumi.Int(50),
+//				SystemDiskType:          pulumi.String("CLOUD_PREMIUM"),
+//				UserData:                pulumi.String("dGVzdA=="),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
-// Using SPOT charge type
+// # Using SPOT charge type
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewScalingConfig(ctx, "launchConfiguration", &As.ScalingConfigArgs{
-// 			ConfigurationName:  pulumi.String("launch-configuration"),
-// 			ImageId:            pulumi.String("img-9qabwvbn"),
-// 			InstanceChargeType: pulumi.String("SPOTPAID"),
-// 			InstanceTypes: pulumi.StringArray{
-// 				pulumi.String("SA1.SMALL1"),
-// 			},
-// 			SpotInstanceType: pulumi.String("one-time"),
-// 			SpotMaxPrice:     pulumi.String("1000"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewScalingConfig(ctx, "launchConfiguration", &As.ScalingConfigArgs{
+//				ConfigurationName:  pulumi.String("launch-configuration"),
+//				ImageId:            pulumi.String("img-9qabwvbn"),
+//				InstanceChargeType: pulumi.String("SPOTPAID"),
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("SA1.SMALL1"),
+//				},
+//				SpotInstanceType: pulumi.String("one-time"),
+//				SpotMaxPrice:     pulumi.String("1000"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -95,7 +101,9 @@ import (
 // AutoScaling Configuration can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+//
+//	$ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+//
 // ```
 type ScalingConfig struct {
 	pulumi.CustomResourceState
@@ -454,7 +462,7 @@ func (i *ScalingConfig) ToScalingConfigOutputWithContext(ctx context.Context) Sc
 // ScalingConfigArrayInput is an input type that accepts ScalingConfigArray and ScalingConfigArrayOutput values.
 // You can construct a concrete instance of `ScalingConfigArrayInput` via:
 //
-//          ScalingConfigArray{ ScalingConfigArgs{...} }
+//	ScalingConfigArray{ ScalingConfigArgs{...} }
 type ScalingConfigArrayInput interface {
 	pulumi.Input
 
@@ -479,7 +487,7 @@ func (i ScalingConfigArray) ToScalingConfigArrayOutputWithContext(ctx context.Co
 // ScalingConfigMapInput is an input type that accepts ScalingConfigMap and ScalingConfigMapOutput values.
 // You can construct a concrete instance of `ScalingConfigMapInput` via:
 //
-//          ScalingConfigMap{ "key": ScalingConfigArgs{...} }
+//	ScalingConfigMap{ "key": ScalingConfigArgs{...} }
 type ScalingConfigMapInput interface {
 	pulumi.Input
 

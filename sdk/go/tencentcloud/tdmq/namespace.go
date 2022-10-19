@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("example"),
-// 			Remark:      pulumi.String("this is description."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewNamespace(ctx, "bar", &Tdmq.NamespaceArgs{
-// 			ClusterId:   foo.ID(),
-// 			EnvironName: pulumi.String("example"),
-// 			MsgTtl:      pulumi.Int(300),
-// 			Remark:      pulumi.String("this is description."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
+//				ClusterName: pulumi.String("example"),
+//				Remark:      pulumi.String("this is description."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewNamespace(ctx, "bar", &Tdmq.NamespaceArgs{
+//				ClusterId:   foo.ID(),
+//				EnvironName: pulumi.String("example"),
+//				MsgTtl:      pulumi.Int(300),
+//				Remark:      pulumi.String("this is description."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // Tdmq namespace can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+//
+//	$ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+//
 // ```
 type Namespace struct {
 	pulumi.CustomResourceState
@@ -188,7 +193,7 @@ func (i *Namespace) ToNamespaceOutputWithContext(ctx context.Context) NamespaceO
 // NamespaceArrayInput is an input type that accepts NamespaceArray and NamespaceArrayOutput values.
 // You can construct a concrete instance of `NamespaceArrayInput` via:
 //
-//          NamespaceArray{ NamespaceArgs{...} }
+//	NamespaceArray{ NamespaceArgs{...} }
 type NamespaceArrayInput interface {
 	pulumi.Input
 
@@ -213,7 +218,7 @@ func (i NamespaceArray) ToNamespaceArrayOutputWithContext(ctx context.Context) N
 // NamespaceMapInput is an input type that accepts NamespaceMap and NamespaceMapOutput values.
 // You can construct a concrete instance of `NamespaceMapInput` via:
 //
-//          NamespaceMap{ "key": NamespaceArgs{...} }
+//	NamespaceMap{ "key": NamespaceArgs{...} }
 type NamespaceMapInput interface {
 	pulumi.Input
 

@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiKey(ctx, "test", &ApiGateway.ApiKeyArgs{
-// 			SecretName: pulumi.String("my_api_key"),
-// 			Status:     pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiKey(ctx, "test", &ApiGateway.ApiKeyArgs{
+//				SecretName: pulumi.String("my_api_key"),
+//				Status:     pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // API gateway access key can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+//
+//	$ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+//
 // ```
 type ApiKey struct {
 	pulumi.CustomResourceState
@@ -161,7 +166,7 @@ func (i *ApiKey) ToApiKeyOutputWithContext(ctx context.Context) ApiKeyOutput {
 // ApiKeyArrayInput is an input type that accepts ApiKeyArray and ApiKeyArrayOutput values.
 // You can construct a concrete instance of `ApiKeyArrayInput` via:
 //
-//          ApiKeyArray{ ApiKeyArgs{...} }
+//	ApiKeyArray{ ApiKeyArgs{...} }
 type ApiKeyArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +191,7 @@ func (i ApiKeyArray) ToApiKeyArrayOutputWithContext(ctx context.Context) ApiKeyA
 // ApiKeyMapInput is an input type that accepts ApiKeyMap and ApiKeyMapOutput values.
 // You can construct a concrete instance of `ApiKeyMapInput` via:
 //
-//          ApiKeyMap{ "key": ApiKeyArgs{...} }
+//	ApiKeyMap{ "key": ApiKeyArgs{...} }
 type ApiKeyMapInput interface {
 	pulumi.Input
 

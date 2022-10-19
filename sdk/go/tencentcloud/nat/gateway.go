@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Nat.NewGateway(ctx, "foo", &Nat.GatewayArgs{
-// 			AssignedEipSets: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1"),
-// 			},
-// 			Bandwidth:     pulumi.Int(100),
-// 			MaxConcurrent: pulumi.Int(1000000),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 			VpcId: pulumi.String("vpc-4xxr2cy7"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Nat.NewGateway(ctx, "foo", &Nat.GatewayArgs{
+//				AssignedEipSets: pulumi.StringArray{
+//					pulumi.String("1.1.1.1"),
+//				},
+//				Bandwidth:     pulumi.Int(100),
+//				MaxConcurrent: pulumi.Int(1000000),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("tf"),
+//				},
+//				VpcId: pulumi.String("vpc-4xxr2cy7"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // NAT gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+//
+//	$ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+//
 // ```
 type Gateway struct {
 	pulumi.CustomResourceState
@@ -199,7 +204,7 @@ func (i *Gateway) ToGatewayOutputWithContext(ctx context.Context) GatewayOutput 
 // GatewayArrayInput is an input type that accepts GatewayArray and GatewayArrayOutput values.
 // You can construct a concrete instance of `GatewayArrayInput` via:
 //
-//          GatewayArray{ GatewayArgs{...} }
+//	GatewayArray{ GatewayArgs{...} }
 type GatewayArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +229,7 @@ func (i GatewayArray) ToGatewayArrayOutputWithContext(ctx context.Context) Gatew
 // GatewayMapInput is an input type that accepts GatewayMap and GatewayMapOutput values.
 // You can construct a concrete instance of `GatewayMapInput` via:
 //
-//          GatewayMap{ "key": GatewayArgs{...} }
+//	GatewayMap{ "key": GatewayArgs{...} }
 type GatewayMapInput interface {
 	pulumi.Input
 

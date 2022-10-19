@@ -19,60 +19,66 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CosBucketName:   pulumi.String("scf-code-1234567890"),
-// 			CosBucketRegion: pulumi.String("ap-guangzhou"),
-// 			CosObjectName:   pulumi.String("code.zip"),
-// 			Handler:         pulumi.String("main.do_it"),
-// 			Runtime:         pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CosBucketName:   pulumi.String("scf-code-1234567890"),
+//				CosBucketRegion: pulumi.String("ap-guangzhou"),
+//				CosObjectName:   pulumi.String("code.zip"),
+//				Handler:         pulumi.String("main.do_it"),
+//				Runtime:         pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
-// Using CFS config
+// # Using CFS config
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CfsConfigs: scf.FunctionCfsConfigArray{
-// 				&scf.FunctionCfsConfigArgs{
-// 					CfsId:          pulumi.String("cfs-xxxxxxxx"),
-// 					LocalMountDir:  pulumi.String("/mnt"),
-// 					MountInsId:     pulumi.String("cfs-xxxxxxxx"),
-// 					RemoteMountDir: pulumi.String("/"),
-// 					UserGroupId:    pulumi.String("10000"),
-// 					UserId:         pulumi.String("10000"),
-// 				},
-// 			},
-// 			Handler: pulumi.String("main.do_it"),
-// 			Runtime: pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CfsConfigs: scf.FunctionCfsConfigArray{
+//					&scf.FunctionCfsConfigArgs{
+//						CfsId:          pulumi.String("cfs-xxxxxxxx"),
+//						LocalMountDir:  pulumi.String("/mnt"),
+//						MountInsId:     pulumi.String("cfs-xxxxxxxx"),
+//						RemoteMountDir: pulumi.String("/"),
+//						UserGroupId:    pulumi.String("10000"),
+//						UserId:         pulumi.String("10000"),
+//					},
+//				},
+//				Handler: pulumi.String("main.do_it"),
+//				Runtime: pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -80,7 +86,9 @@ import (
 // SCF function can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/function:Function test default+test
+//
+//	$ pulumi import tencentcloud:Scf/function:Function test default+test
+//
 // ```
 type Function struct {
 	pulumi.CustomResourceState
@@ -492,7 +500,7 @@ func (i *Function) ToFunctionOutputWithContext(ctx context.Context) FunctionOutp
 // FunctionArrayInput is an input type that accepts FunctionArray and FunctionArrayOutput values.
 // You can construct a concrete instance of `FunctionArrayInput` via:
 //
-//          FunctionArray{ FunctionArgs{...} }
+//	FunctionArray{ FunctionArgs{...} }
 type FunctionArrayInput interface {
 	pulumi.Input
 
@@ -517,7 +525,7 @@ func (i FunctionArray) ToFunctionArrayOutputWithContext(ctx context.Context) Fun
 // FunctionMapInput is an input type that accepts FunctionMap and FunctionMapOutput values.
 // You can construct a concrete instance of `FunctionMapInput` via:
 //
-//          FunctionMap{ "key": FunctionArgs{...} }
+//	FunctionMap{ "key": FunctionArgs{...} }
 type FunctionMapInput interface {
 	pulumi.Input
 
@@ -643,7 +651,7 @@ func (o FunctionOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.Host }).(pulumi.StringOutput)
 }
 
-// Image of the SCF function, conflict with ``.
+// Image of the SCF function, conflict with “.
 func (o FunctionOutput) ImageConfigs() FunctionImageConfigArrayOutput {
 	return o.ApplyT(func(v *Function) FunctionImageConfigArrayOutput { return v.ImageConfigs }).(FunctionImageConfigArrayOutput)
 }

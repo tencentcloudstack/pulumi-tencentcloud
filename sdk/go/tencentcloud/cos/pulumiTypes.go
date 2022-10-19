@@ -26,7 +26,7 @@ type BucketCorsRule struct {
 // BucketCorsRuleInput is an input type that accepts BucketCorsRuleArgs and BucketCorsRuleOutput values.
 // You can construct a concrete instance of `BucketCorsRuleInput` via:
 //
-//          BucketCorsRuleArgs{...}
+//	BucketCorsRuleArgs{...}
 type BucketCorsRuleInput interface {
 	pulumi.Input
 
@@ -62,7 +62,7 @@ func (i BucketCorsRuleArgs) ToBucketCorsRuleOutputWithContext(ctx context.Contex
 // BucketCorsRuleArrayInput is an input type that accepts BucketCorsRuleArray and BucketCorsRuleArrayOutput values.
 // You can construct a concrete instance of `BucketCorsRuleArrayInput` via:
 //
-//          BucketCorsRuleArray{ BucketCorsRuleArgs{...} }
+//	BucketCorsRuleArray{ BucketCorsRuleArgs{...} }
 type BucketCorsRuleArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +161,7 @@ type BucketLifecycleRule struct {
 // BucketLifecycleRuleInput is an input type that accepts BucketLifecycleRuleArgs and BucketLifecycleRuleOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleInput` via:
 //
-//          BucketLifecycleRuleArgs{...}
+//	BucketLifecycleRuleArgs{...}
 type BucketLifecycleRuleInput interface {
 	pulumi.Input
 
@@ -199,7 +199,7 @@ func (i BucketLifecycleRuleArgs) ToBucketLifecycleRuleOutputWithContext(ctx cont
 // BucketLifecycleRuleArrayInput is an input type that accepts BucketLifecycleRuleArray and BucketLifecycleRuleArrayOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleArrayInput` via:
 //
-//          BucketLifecycleRuleArray{ BucketLifecycleRuleArgs{...} }
+//	BucketLifecycleRuleArray{ BucketLifecycleRuleArgs{...} }
 type BucketLifecycleRuleArrayInput interface {
 	pulumi.Input
 
@@ -297,7 +297,7 @@ type BucketLifecycleRuleExpiration struct {
 // BucketLifecycleRuleExpirationInput is an input type that accepts BucketLifecycleRuleExpirationArgs and BucketLifecycleRuleExpirationOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleExpirationInput` via:
 //
-//          BucketLifecycleRuleExpirationArgs{...}
+//	BucketLifecycleRuleExpirationArgs{...}
 type BucketLifecycleRuleExpirationInput interface {
 	pulumi.Input
 
@@ -337,11 +337,11 @@ func (i BucketLifecycleRuleExpirationArgs) ToBucketLifecycleRuleExpirationPtrOut
 // BucketLifecycleRuleExpirationPtrInput is an input type that accepts BucketLifecycleRuleExpirationArgs, BucketLifecycleRuleExpirationPtr and BucketLifecycleRuleExpirationPtrOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleExpirationPtrInput` via:
 //
-//          BucketLifecycleRuleExpirationArgs{...}
+//	        BucketLifecycleRuleExpirationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BucketLifecycleRuleExpirationPtrInput interface {
 	pulumi.Input
 
@@ -468,7 +468,7 @@ type BucketLifecycleRuleNonCurrentExpiration struct {
 // BucketLifecycleRuleNonCurrentExpirationInput is an input type that accepts BucketLifecycleRuleNonCurrentExpirationArgs and BucketLifecycleRuleNonCurrentExpirationOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentExpirationInput` via:
 //
-//          BucketLifecycleRuleNonCurrentExpirationArgs{...}
+//	BucketLifecycleRuleNonCurrentExpirationArgs{...}
 type BucketLifecycleRuleNonCurrentExpirationInput interface {
 	pulumi.Input
 
@@ -504,11 +504,11 @@ func (i BucketLifecycleRuleNonCurrentExpirationArgs) ToBucketLifecycleRuleNonCur
 // BucketLifecycleRuleNonCurrentExpirationPtrInput is an input type that accepts BucketLifecycleRuleNonCurrentExpirationArgs, BucketLifecycleRuleNonCurrentExpirationPtr and BucketLifecycleRuleNonCurrentExpirationPtrOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentExpirationPtrInput` via:
 //
-//          BucketLifecycleRuleNonCurrentExpirationArgs{...}
+//	        BucketLifecycleRuleNonCurrentExpirationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BucketLifecycleRuleNonCurrentExpirationPtrInput interface {
 	pulumi.Input
 
@@ -607,7 +607,7 @@ type BucketLifecycleRuleNonCurrentTransition struct {
 // BucketLifecycleRuleNonCurrentTransitionInput is an input type that accepts BucketLifecycleRuleNonCurrentTransitionArgs and BucketLifecycleRuleNonCurrentTransitionOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentTransitionInput` via:
 //
-//          BucketLifecycleRuleNonCurrentTransitionArgs{...}
+//	BucketLifecycleRuleNonCurrentTransitionArgs{...}
 type BucketLifecycleRuleNonCurrentTransitionInput interface {
 	pulumi.Input
 
@@ -637,7 +637,7 @@ func (i BucketLifecycleRuleNonCurrentTransitionArgs) ToBucketLifecycleRuleNonCur
 // BucketLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts BucketLifecycleRuleNonCurrentTransitionArray and BucketLifecycleRuleNonCurrentTransitionArrayOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentTransitionArrayInput` via:
 //
-//          BucketLifecycleRuleNonCurrentTransitionArray{ BucketLifecycleRuleNonCurrentTransitionArgs{...} }
+//	BucketLifecycleRuleNonCurrentTransitionArray{ BucketLifecycleRuleNonCurrentTransitionArgs{...} }
 type BucketLifecycleRuleNonCurrentTransitionArrayInput interface {
 	pulumi.Input
 
@@ -715,7 +715,7 @@ type BucketLifecycleRuleTransition struct {
 // BucketLifecycleRuleTransitionInput is an input type that accepts BucketLifecycleRuleTransitionArgs and BucketLifecycleRuleTransitionOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleTransitionInput` via:
 //
-//          BucketLifecycleRuleTransitionArgs{...}
+//	BucketLifecycleRuleTransitionArgs{...}
 type BucketLifecycleRuleTransitionInput interface {
 	pulumi.Input
 
@@ -747,7 +747,7 @@ func (i BucketLifecycleRuleTransitionArgs) ToBucketLifecycleRuleTransitionOutput
 // BucketLifecycleRuleTransitionArrayInput is an input type that accepts BucketLifecycleRuleTransitionArray and BucketLifecycleRuleTransitionArrayOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleTransitionArrayInput` via:
 //
-//          BucketLifecycleRuleTransitionArray{ BucketLifecycleRuleTransitionArgs{...} }
+//	BucketLifecycleRuleTransitionArray{ BucketLifecycleRuleTransitionArgs{...} }
 type BucketLifecycleRuleTransitionArrayInput interface {
 	pulumi.Input
 
@@ -830,7 +830,7 @@ type BucketOriginDomainRule struct {
 // BucketOriginDomainRuleInput is an input type that accepts BucketOriginDomainRuleArgs and BucketOriginDomainRuleOutput values.
 // You can construct a concrete instance of `BucketOriginDomainRuleInput` via:
 //
-//          BucketOriginDomainRuleArgs{...}
+//	BucketOriginDomainRuleArgs{...}
 type BucketOriginDomainRuleInput interface {
 	pulumi.Input
 
@@ -862,7 +862,7 @@ func (i BucketOriginDomainRuleArgs) ToBucketOriginDomainRuleOutputWithContext(ct
 // BucketOriginDomainRuleArrayInput is an input type that accepts BucketOriginDomainRuleArray and BucketOriginDomainRuleArrayOutput values.
 // You can construct a concrete instance of `BucketOriginDomainRuleArrayInput` via:
 //
-//          BucketOriginDomainRuleArray{ BucketOriginDomainRuleArgs{...} }
+//	BucketOriginDomainRuleArray{ BucketOriginDomainRuleArgs{...} }
 type BucketOriginDomainRuleArrayInput interface {
 	pulumi.Input
 
@@ -957,7 +957,7 @@ type BucketOriginPullRule struct {
 // BucketOriginPullRuleInput is an input type that accepts BucketOriginPullRuleArgs and BucketOriginPullRuleOutput values.
 // You can construct a concrete instance of `BucketOriginPullRuleInput` via:
 //
-//          BucketOriginPullRuleArgs{...}
+//	BucketOriginPullRuleArgs{...}
 type BucketOriginPullRuleInput interface {
 	pulumi.Input
 
@@ -1001,7 +1001,7 @@ func (i BucketOriginPullRuleArgs) ToBucketOriginPullRuleOutputWithContext(ctx co
 // BucketOriginPullRuleArrayInput is an input type that accepts BucketOriginPullRuleArray and BucketOriginPullRuleArrayOutput values.
 // You can construct a concrete instance of `BucketOriginPullRuleArrayInput` via:
 //
-//          BucketOriginPullRuleArray{ BucketOriginPullRuleArgs{...} }
+//	BucketOriginPullRuleArray{ BucketOriginPullRuleArgs{...} }
 type BucketOriginPullRuleArrayInput interface {
 	pulumi.Input
 
@@ -1118,7 +1118,7 @@ type BucketReplicaRule struct {
 // BucketReplicaRuleInput is an input type that accepts BucketReplicaRuleArgs and BucketReplicaRuleOutput values.
 // You can construct a concrete instance of `BucketReplicaRuleInput` via:
 //
-//          BucketReplicaRuleArgs{...}
+//	BucketReplicaRuleArgs{...}
 type BucketReplicaRuleInput interface {
 	pulumi.Input
 
@@ -1154,7 +1154,7 @@ func (i BucketReplicaRuleArgs) ToBucketReplicaRuleOutputWithContext(ctx context.
 // BucketReplicaRuleArrayInput is an input type that accepts BucketReplicaRuleArray and BucketReplicaRuleArrayOutput values.
 // You can construct a concrete instance of `BucketReplicaRuleArrayInput` via:
 //
-//          BucketReplicaRuleArray{ BucketReplicaRuleArgs{...} }
+//	BucketReplicaRuleArray{ BucketReplicaRuleArgs{...} }
 type BucketReplicaRuleArrayInput interface {
 	pulumi.Input
 
@@ -1245,7 +1245,7 @@ type BucketWebsite struct {
 // BucketWebsiteInput is an input type that accepts BucketWebsiteArgs and BucketWebsiteOutput values.
 // You can construct a concrete instance of `BucketWebsiteInput` via:
 //
-//          BucketWebsiteArgs{...}
+//	BucketWebsiteArgs{...}
 type BucketWebsiteInput interface {
 	pulumi.Input
 
@@ -1283,11 +1283,11 @@ func (i BucketWebsiteArgs) ToBucketWebsitePtrOutputWithContext(ctx context.Conte
 // BucketWebsitePtrInput is an input type that accepts BucketWebsiteArgs, BucketWebsitePtr and BucketWebsitePtrOutput values.
 // You can construct a concrete instance of `BucketWebsitePtrInput` via:
 //
-//          BucketWebsiteArgs{...}
+//	        BucketWebsiteArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BucketWebsitePtrInput interface {
 	pulumi.Input
 
@@ -1417,7 +1417,7 @@ type GetBucketsBucketList struct {
 // GetBucketsBucketListInput is an input type that accepts GetBucketsBucketListArgs and GetBucketsBucketListOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListInput` via:
 //
-//          GetBucketsBucketListArgs{...}
+//	GetBucketsBucketListArgs{...}
 type GetBucketsBucketListInput interface {
 	pulumi.Input
 
@@ -1463,7 +1463,7 @@ func (i GetBucketsBucketListArgs) ToGetBucketsBucketListOutputWithContext(ctx co
 // GetBucketsBucketListArrayInput is an input type that accepts GetBucketsBucketListArray and GetBucketsBucketListArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListArrayInput` via:
 //
-//          GetBucketsBucketListArray{ GetBucketsBucketListArgs{...} }
+//	GetBucketsBucketListArray{ GetBucketsBucketListArgs{...} }
 type GetBucketsBucketListArrayInput interface {
 	pulumi.Input
 
@@ -1585,7 +1585,7 @@ type GetBucketsBucketListCorsRule struct {
 // GetBucketsBucketListCorsRuleInput is an input type that accepts GetBucketsBucketListCorsRuleArgs and GetBucketsBucketListCorsRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListCorsRuleInput` via:
 //
-//          GetBucketsBucketListCorsRuleArgs{...}
+//	GetBucketsBucketListCorsRuleArgs{...}
 type GetBucketsBucketListCorsRuleInput interface {
 	pulumi.Input
 
@@ -1621,7 +1621,7 @@ func (i GetBucketsBucketListCorsRuleArgs) ToGetBucketsBucketListCorsRuleOutputWi
 // GetBucketsBucketListCorsRuleArrayInput is an input type that accepts GetBucketsBucketListCorsRuleArray and GetBucketsBucketListCorsRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListCorsRuleArrayInput` via:
 //
-//          GetBucketsBucketListCorsRuleArray{ GetBucketsBucketListCorsRuleArgs{...} }
+//	GetBucketsBucketListCorsRuleArray{ GetBucketsBucketListCorsRuleArgs{...} }
 type GetBucketsBucketListCorsRuleArrayInput interface {
 	pulumi.Input
 
@@ -1718,7 +1718,7 @@ type GetBucketsBucketListLifecycleRule struct {
 // GetBucketsBucketListLifecycleRuleInput is an input type that accepts GetBucketsBucketListLifecycleRuleArgs and GetBucketsBucketListLifecycleRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleArgs{...}
+//	GetBucketsBucketListLifecycleRuleArgs{...}
 type GetBucketsBucketListLifecycleRuleInput interface {
 	pulumi.Input
 
@@ -1754,7 +1754,7 @@ func (i GetBucketsBucketListLifecycleRuleArgs) ToGetBucketsBucketListLifecycleRu
 // GetBucketsBucketListLifecycleRuleArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleArray and GetBucketsBucketListLifecycleRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleArrayInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleArray{ GetBucketsBucketListLifecycleRuleArgs{...} }
+//	GetBucketsBucketListLifecycleRuleArray{ GetBucketsBucketListLifecycleRuleArgs{...} }
 type GetBucketsBucketListLifecycleRuleArrayInput interface {
 	pulumi.Input
 
@@ -1853,7 +1853,7 @@ type GetBucketsBucketListLifecycleRuleExpiration struct {
 // GetBucketsBucketListLifecycleRuleExpirationInput is an input type that accepts GetBucketsBucketListLifecycleRuleExpirationArgs and GetBucketsBucketListLifecycleRuleExpirationOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleExpirationInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleExpirationArgs{...}
+//	GetBucketsBucketListLifecycleRuleExpirationArgs{...}
 type GetBucketsBucketListLifecycleRuleExpirationInput interface {
 	pulumi.Input
 
@@ -1883,7 +1883,7 @@ func (i GetBucketsBucketListLifecycleRuleExpirationArgs) ToGetBucketsBucketListL
 // GetBucketsBucketListLifecycleRuleExpirationArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleExpirationArray and GetBucketsBucketListLifecycleRuleExpirationArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleExpirationArrayInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleExpirationArray{ GetBucketsBucketListLifecycleRuleExpirationArgs{...} }
+//	GetBucketsBucketListLifecycleRuleExpirationArray{ GetBucketsBucketListLifecycleRuleExpirationArgs{...} }
 type GetBucketsBucketListLifecycleRuleExpirationArrayInput interface {
 	pulumi.Input
 
@@ -1957,7 +1957,7 @@ type GetBucketsBucketListLifecycleRuleNonCurrentExpiration struct {
 // GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs and GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...}
+//	GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...}
 type GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput interface {
 	pulumi.Input
 
@@ -1985,7 +1985,7 @@ func (i GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ToGetBucketsB
 // GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray and GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray{ GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...} }
+//	GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray{ GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...} }
 type GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput interface {
 	pulumi.Input
 
@@ -2056,7 +2056,7 @@ type GetBucketsBucketListLifecycleRuleNonCurrentTransition struct {
 // GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs and GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...}
+//	GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...}
 type GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput interface {
 	pulumi.Input
 
@@ -2086,7 +2086,7 @@ func (i GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ToGetBucketsB
 // GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray and GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray{ GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...} }
+//	GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray{ GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...} }
 type GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput interface {
 	pulumi.Input
 
@@ -2164,7 +2164,7 @@ type GetBucketsBucketListLifecycleRuleTransition struct {
 // GetBucketsBucketListLifecycleRuleTransitionInput is an input type that accepts GetBucketsBucketListLifecycleRuleTransitionArgs and GetBucketsBucketListLifecycleRuleTransitionOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleTransitionInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleTransitionArgs{...}
+//	GetBucketsBucketListLifecycleRuleTransitionArgs{...}
 type GetBucketsBucketListLifecycleRuleTransitionInput interface {
 	pulumi.Input
 
@@ -2196,7 +2196,7 @@ func (i GetBucketsBucketListLifecycleRuleTransitionArgs) ToGetBucketsBucketListL
 // GetBucketsBucketListLifecycleRuleTransitionArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleTransitionArray and GetBucketsBucketListLifecycleRuleTransitionArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleTransitionArrayInput` via:
 //
-//          GetBucketsBucketListLifecycleRuleTransitionArray{ GetBucketsBucketListLifecycleRuleTransitionArgs{...} }
+//	GetBucketsBucketListLifecycleRuleTransitionArray{ GetBucketsBucketListLifecycleRuleTransitionArgs{...} }
 type GetBucketsBucketListLifecycleRuleTransitionArrayInput interface {
 	pulumi.Input
 
@@ -2276,7 +2276,7 @@ type GetBucketsBucketListOriginDomainRule struct {
 // GetBucketsBucketListOriginDomainRuleInput is an input type that accepts GetBucketsBucketListOriginDomainRuleArgs and GetBucketsBucketListOriginDomainRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginDomainRuleInput` via:
 //
-//          GetBucketsBucketListOriginDomainRuleArgs{...}
+//	GetBucketsBucketListOriginDomainRuleArgs{...}
 type GetBucketsBucketListOriginDomainRuleInput interface {
 	pulumi.Input
 
@@ -2305,7 +2305,7 @@ func (i GetBucketsBucketListOriginDomainRuleArgs) ToGetBucketsBucketListOriginDo
 // GetBucketsBucketListOriginDomainRuleArrayInput is an input type that accepts GetBucketsBucketListOriginDomainRuleArray and GetBucketsBucketListOriginDomainRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginDomainRuleArrayInput` via:
 //
-//          GetBucketsBucketListOriginDomainRuleArray{ GetBucketsBucketListOriginDomainRuleArgs{...} }
+//	GetBucketsBucketListOriginDomainRuleArray{ GetBucketsBucketListOriginDomainRuleArgs{...} }
 type GetBucketsBucketListOriginDomainRuleArrayInput interface {
 	pulumi.Input
 
@@ -2388,7 +2388,7 @@ type GetBucketsBucketListOriginPullRule struct {
 // GetBucketsBucketListOriginPullRuleInput is an input type that accepts GetBucketsBucketListOriginPullRuleArgs and GetBucketsBucketListOriginPullRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginPullRuleInput` via:
 //
-//          GetBucketsBucketListOriginPullRuleArgs{...}
+//	GetBucketsBucketListOriginPullRuleArgs{...}
 type GetBucketsBucketListOriginPullRuleInput interface {
 	pulumi.Input
 
@@ -2423,7 +2423,7 @@ func (i GetBucketsBucketListOriginPullRuleArgs) ToGetBucketsBucketListOriginPull
 // GetBucketsBucketListOriginPullRuleArrayInput is an input type that accepts GetBucketsBucketListOriginPullRuleArray and GetBucketsBucketListOriginPullRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginPullRuleArrayInput` via:
 //
-//          GetBucketsBucketListOriginPullRuleArray{ GetBucketsBucketListOriginPullRuleArgs{...} }
+//	GetBucketsBucketListOriginPullRuleArray{ GetBucketsBucketListOriginPullRuleArgs{...} }
 type GetBucketsBucketListOriginPullRuleArrayInput interface {
 	pulumi.Input
 
@@ -2525,7 +2525,7 @@ type GetBucketsBucketListWebsite struct {
 // GetBucketsBucketListWebsiteInput is an input type that accepts GetBucketsBucketListWebsiteArgs and GetBucketsBucketListWebsiteOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListWebsiteInput` via:
 //
-//          GetBucketsBucketListWebsiteArgs{...}
+//	GetBucketsBucketListWebsiteArgs{...}
 type GetBucketsBucketListWebsiteInput interface {
 	pulumi.Input
 
@@ -2555,7 +2555,7 @@ func (i GetBucketsBucketListWebsiteArgs) ToGetBucketsBucketListWebsiteOutputWith
 // GetBucketsBucketListWebsiteArrayInput is an input type that accepts GetBucketsBucketListWebsiteArray and GetBucketsBucketListWebsiteArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListWebsiteArrayInput` via:
 //
-//          GetBucketsBucketListWebsiteArray{ GetBucketsBucketListWebsiteArgs{...} }
+//	GetBucketsBucketListWebsiteArray{ GetBucketsBucketListWebsiteArgs{...} }
 type GetBucketsBucketListWebsiteArrayInput interface {
 	pulumi.Input
 

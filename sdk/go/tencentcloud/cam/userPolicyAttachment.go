@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewUserPolicyAttachment(ctx, "foo", &Cam.UserPolicyAttachmentArgs{
-// 			UserId:   pulumi.Any(tencentcloud_cam_user.Foo.Id),
-// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewUserPolicyAttachment(ctx, "foo", &Cam.UserPolicyAttachmentArgs{
+//				UserId:   pulumi.Any(tencentcloud_cam_user.Foo.Id),
+//				PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // CAM user policy attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+//
+//	$ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+//
 // ```
 type UserPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -187,7 +192,7 @@ func (i *UserPolicyAttachment) ToUserPolicyAttachmentOutputWithContext(ctx conte
 // UserPolicyAttachmentArrayInput is an input type that accepts UserPolicyAttachmentArray and UserPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `UserPolicyAttachmentArrayInput` via:
 //
-//          UserPolicyAttachmentArray{ UserPolicyAttachmentArgs{...} }
+//	UserPolicyAttachmentArray{ UserPolicyAttachmentArgs{...} }
 type UserPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -212,7 +217,7 @@ func (i UserPolicyAttachmentArray) ToUserPolicyAttachmentArrayOutputWithContext(
 // UserPolicyAttachmentMapInput is an input type that accepts UserPolicyAttachmentMap and UserPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `UserPolicyAttachmentMapInput` via:
 //
-//          UserPolicyAttachmentMap{ "key": UserPolicyAttachmentArgs{...} }
+//	UserPolicyAttachmentMap{ "key": UserPolicyAttachmentArgs{...} }
 type UserPolicyAttachmentMapInput interface {
 	pulumi.Input
 

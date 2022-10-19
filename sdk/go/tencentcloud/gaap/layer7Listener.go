@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-// 			Protocol: pulumi.String("HTTP"),
-// 			Port:     pulumi.Int(80),
-// 			ProxyId:  fooProxy.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+//				Protocol: pulumi.String("HTTP"),
+//				Port:     pulumi.Int(80),
+//				ProxyId:  fooProxy.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -52,7 +55,9 @@ import (
 // GAAP layer7 listener can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+//
+//	$ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+//
 // ```
 type Layer7Listener struct {
 	pulumi.CustomResourceState
@@ -251,7 +256,7 @@ func (i *Layer7Listener) ToLayer7ListenerOutputWithContext(ctx context.Context) 
 // Layer7ListenerArrayInput is an input type that accepts Layer7ListenerArray and Layer7ListenerArrayOutput values.
 // You can construct a concrete instance of `Layer7ListenerArrayInput` via:
 //
-//          Layer7ListenerArray{ Layer7ListenerArgs{...} }
+//	Layer7ListenerArray{ Layer7ListenerArgs{...} }
 type Layer7ListenerArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +281,7 @@ func (i Layer7ListenerArray) ToLayer7ListenerArrayOutputWithContext(ctx context.
 // Layer7ListenerMapInput is an input type that accepts Layer7ListenerMap and Layer7ListenerMapOutput values.
 // You can construct a concrete instance of `Layer7ListenerMapInput` via:
 //
-//          Layer7ListenerMap{ "key": Layer7ListenerArgs{...} }
+//	Layer7ListenerMap{ "key": Layer7ListenerArgs{...} }
 type Layer7ListenerMapInput interface {
 	pulumi.Input
 

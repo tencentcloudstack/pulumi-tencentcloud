@@ -21,45 +21,48 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-4"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			FirstSlaveZone:   pulumi.String("ap-guangzhou-4"),
-// 			InstanceName:     pulumi.String("myTestMysql"),
-// 			InternetService:  pulumi.Int(1),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			MemSize:          pulumi.Int(128000),
-// 			Parameters: pulumi.AnyMap{
-// 				"max_connections": pulumi.Any("1000"),
-// 			},
-// 			ProjectId:       pulumi.Int(201901010001),
-// 			RootPassword:    pulumi.String("********"),
-// 			SecondSlaveZone: pulumi.String("ap-guangzhou-4"),
-// 			SecurityGroups: pulumi.StringArray{
-// 				pulumi.String("sg-ot8eclwz"),
-// 			},
-// 			SlaveDeployMode: pulumi.Int(0),
-// 			SlaveSyncMode:   pulumi.Int(1),
-// 			SubnetId:        pulumi.String("subnet-9uivyb1g"),
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			VolumeSize: pulumi.Int(250),
-// 			VpcId:      pulumi.String("vpc-12mt3l31"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
+//				AvailabilityZone: pulumi.String("ap-guangzhou-4"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				EngineVersion:    pulumi.String("5.7"),
+//				FirstSlaveZone:   pulumi.String("ap-guangzhou-4"),
+//				InstanceName:     pulumi.String("myTestMysql"),
+//				InternetService:  pulumi.Int(1),
+//				IntranetPort:     pulumi.Int(3306),
+//				MemSize:          pulumi.Int(128000),
+//				Parameters: pulumi.AnyMap{
+//					"max_connections": pulumi.Any("1000"),
+//				},
+//				ProjectId:       pulumi.Int(201901010001),
+//				RootPassword:    pulumi.String("********"),
+//				SecondSlaveZone: pulumi.String("ap-guangzhou-4"),
+//				SecurityGroups: pulumi.StringArray{
+//					pulumi.String("sg-ot8eclwz"),
+//				},
+//				SlaveDeployMode: pulumi.Int(0),
+//				SlaveSyncMode:   pulumi.Int(1),
+//				SubnetId:        pulumi.String("subnet-9uivyb1g"),
+//				Tags: pulumi.AnyMap{
+//					"name": pulumi.Any("test"),
+//				},
+//				VolumeSize: pulumi.Int(250),
+//				VpcId:      pulumi.String("vpc-12mt3l31"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -67,7 +70,9 @@ import (
 // MySQL instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+//
+//	$ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -496,7 +501,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -521,7 +526,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

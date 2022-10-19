@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewGroupPolicyAttachment(ctx, "foo", &Cam.GroupPolicyAttachmentArgs{
-// 			GroupId:  pulumi.Any(tencentcloud_cam_group.Foo.Id),
-// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewGroupPolicyAttachment(ctx, "foo", &Cam.GroupPolicyAttachmentArgs{
+//				GroupId:  pulumi.Any(tencentcloud_cam_group.Foo.Id),
+//				PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // CAM group policy attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+//
+//	$ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+//
 // ```
 type GroupPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -170,7 +175,7 @@ func (i *GroupPolicyAttachment) ToGroupPolicyAttachmentOutputWithContext(ctx con
 // GroupPolicyAttachmentArrayInput is an input type that accepts GroupPolicyAttachmentArray and GroupPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `GroupPolicyAttachmentArrayInput` via:
 //
-//          GroupPolicyAttachmentArray{ GroupPolicyAttachmentArgs{...} }
+//	GroupPolicyAttachmentArray{ GroupPolicyAttachmentArgs{...} }
 type GroupPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -195,7 +200,7 @@ func (i GroupPolicyAttachmentArray) ToGroupPolicyAttachmentArrayOutputWithContex
 // GroupPolicyAttachmentMapInput is an input type that accepts GroupPolicyAttachmentMap and GroupPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `GroupPolicyAttachmentMapInput` via:
 //
-//          GroupPolicyAttachmentMap{ "key": GroupPolicyAttachmentArgs{...} }
+//	GroupPolicyAttachmentMap{ "key": GroupPolicyAttachmentArgs{...} }
 type GroupPolicyAttachmentMapInput interface {
 	pulumi.Input
 

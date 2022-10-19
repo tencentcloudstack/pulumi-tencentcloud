@@ -18,36 +18,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
-// 			CleanUpPolicy:   pulumi.String("delete"),
-// 			EnableWhiteList: pulumi.Bool(true),
-// 			InstanceId:      pulumi.String("ckafka-f9ife4zz"),
-// 			IpWhiteLists: pulumi.StringArray{
-// 				pulumi.String("ip1"),
-// 				pulumi.String("ip2"),
-// 			},
-// 			MaxMessageBytes:             pulumi.Int(0),
-// 			Note:                        pulumi.String("topic note"),
-// 			PartitionNum:                pulumi.Int(1),
-// 			ReplicaNum:                  pulumi.Int(2),
-// 			Retention:                   pulumi.Int(60000),
-// 			Segment:                     pulumi.Int(3600000),
-// 			SyncReplicaMinNum:           pulumi.Int(1),
-// 			TopicName:                   pulumi.String("example"),
-// 			UncleanLeaderElectionEnable: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
+//				CleanUpPolicy:   pulumi.String("delete"),
+//				EnableWhiteList: pulumi.Bool(true),
+//				InstanceId:      pulumi.String("ckafka-f9ife4zz"),
+//				IpWhiteLists: pulumi.StringArray{
+//					pulumi.String("ip1"),
+//					pulumi.String("ip2"),
+//				},
+//				MaxMessageBytes:             pulumi.Int(0),
+//				Note:                        pulumi.String("topic note"),
+//				PartitionNum:                pulumi.Int(1),
+//				ReplicaNum:                  pulumi.Int(2),
+//				Retention:                   pulumi.Int(60000),
+//				Segment:                     pulumi.Int(3600000),
+//				SyncReplicaMinNum:           pulumi.Int(1),
+//				TopicName:                   pulumi.String("example"),
+//				UncleanLeaderElectionEnable: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTopics(ctx *pulumi.Context, args *GetTopicsArgs, opts ...pulumi.InvokeOption) (*GetTopicsResult, error) {
 	var rv GetTopicsResult

@@ -22,7 +22,7 @@ type InstanceConfig struct {
 // InstanceConfigInput is an input type that accepts InstanceConfigArgs and InstanceConfigOutput values.
 // You can construct a concrete instance of `InstanceConfigInput` via:
 //
-//          InstanceConfigArgs{...}
+//	InstanceConfigArgs{...}
 type InstanceConfigInput interface {
 	pulumi.Input
 
@@ -62,11 +62,11 @@ func (i InstanceConfigArgs) ToInstanceConfigPtrOutputWithContext(ctx context.Con
 // InstanceConfigPtrInput is an input type that accepts InstanceConfigArgs, InstanceConfigPtr and InstanceConfigPtrOutput values.
 // You can construct a concrete instance of `InstanceConfigPtrInput` via:
 //
-//          InstanceConfigArgs{...}
+//	        InstanceConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceConfigPtrInput interface {
 	pulumi.Input
 
@@ -199,7 +199,7 @@ type InstanceDynamicRetentionConfig struct {
 // InstanceDynamicRetentionConfigInput is an input type that accepts InstanceDynamicRetentionConfigArgs and InstanceDynamicRetentionConfigOutput values.
 // You can construct a concrete instance of `InstanceDynamicRetentionConfigInput` via:
 //
-//          InstanceDynamicRetentionConfigArgs{...}
+//	InstanceDynamicRetentionConfigArgs{...}
 type InstanceDynamicRetentionConfigInput interface {
 	pulumi.Input
 
@@ -241,11 +241,11 @@ func (i InstanceDynamicRetentionConfigArgs) ToInstanceDynamicRetentionConfigPtrO
 // InstanceDynamicRetentionConfigPtrInput is an input type that accepts InstanceDynamicRetentionConfigArgs, InstanceDynamicRetentionConfigPtr and InstanceDynamicRetentionConfigPtrOutput values.
 // You can construct a concrete instance of `InstanceDynamicRetentionConfigPtrInput` via:
 //
-//          InstanceDynamicRetentionConfigArgs{...}
+//	        InstanceDynamicRetentionConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceDynamicRetentionConfigPtrInput interface {
 	pulumi.Input
 
@@ -389,7 +389,7 @@ type InstanceTag struct {
 // InstanceTagInput is an input type that accepts InstanceTagArgs and InstanceTagOutput values.
 // You can construct a concrete instance of `InstanceTagInput` via:
 //
-//          InstanceTagArgs{...}
+//	InstanceTagArgs{...}
 type InstanceTagInput interface {
 	pulumi.Input
 
@@ -419,7 +419,7 @@ func (i InstanceTagArgs) ToInstanceTagOutputWithContext(ctx context.Context) Ins
 // InstanceTagArrayInput is an input type that accepts InstanceTagArray and InstanceTagArrayOutput values.
 // You can construct a concrete instance of `InstanceTagArrayInput` via:
 //
-//          InstanceTagArray{ InstanceTagArgs{...} }
+//	InstanceTagArray{ InstanceTagArgs{...} }
 type InstanceTagArrayInput interface {
 	pulumi.Input
 
@@ -503,7 +503,7 @@ type GetAclsAclList struct {
 // GetAclsAclListInput is an input type that accepts GetAclsAclListArgs and GetAclsAclListOutput values.
 // You can construct a concrete instance of `GetAclsAclListInput` via:
 //
-//          GetAclsAclListArgs{...}
+//	GetAclsAclListArgs{...}
 type GetAclsAclListInput interface {
 	pulumi.Input
 
@@ -541,7 +541,7 @@ func (i GetAclsAclListArgs) ToGetAclsAclListOutputWithContext(ctx context.Contex
 // GetAclsAclListArrayInput is an input type that accepts GetAclsAclListArray and GetAclsAclListArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListArrayInput` via:
 //
-//          GetAclsAclListArray{ GetAclsAclListArgs{...} }
+//	GetAclsAclListArray{ GetAclsAclListArgs{...} }
 type GetAclsAclListArrayInput interface {
 	pulumi.Input
 
@@ -637,7 +637,7 @@ type GetInstancesFilter struct {
 // GetInstancesFilterInput is an input type that accepts GetInstancesFilterArgs and GetInstancesFilterOutput values.
 // You can construct a concrete instance of `GetInstancesFilterInput` via:
 //
-//          GetInstancesFilterArgs{...}
+//	GetInstancesFilterArgs{...}
 type GetInstancesFilterInput interface {
 	pulumi.Input
 
@@ -667,7 +667,7 @@ func (i GetInstancesFilterArgs) ToGetInstancesFilterOutputWithContext(ctx contex
 // GetInstancesFilterArrayInput is an input type that accepts GetInstancesFilterArray and GetInstancesFilterArrayOutput values.
 // You can construct a concrete instance of `GetInstancesFilterArrayInput` via:
 //
-//          GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
+//	GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
 type GetInstancesFilterArrayInput interface {
 	pulumi.Input
 
@@ -799,7 +799,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -885,7 +885,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1101,7 +1101,7 @@ type GetInstancesInstanceListTag struct {
 // GetInstancesInstanceListTagInput is an input type that accepts GetInstancesInstanceListTagArgs and GetInstancesInstanceListTagOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListTagInput` via:
 //
-//          GetInstancesInstanceListTagArgs{...}
+//	GetInstancesInstanceListTagArgs{...}
 type GetInstancesInstanceListTagInput interface {
 	pulumi.Input
 
@@ -1131,7 +1131,7 @@ func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutputWith
 // GetInstancesInstanceListTagArrayInput is an input type that accepts GetInstancesInstanceListTagArray and GetInstancesInstanceListTagArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListTagArrayInput` via:
 //
-//          GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
+//	GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
 type GetInstancesInstanceListTagArrayInput interface {
 	pulumi.Input
 
@@ -1207,7 +1207,7 @@ type GetInstancesInstanceListVipList struct {
 // GetInstancesInstanceListVipListInput is an input type that accepts GetInstancesInstanceListVipListArgs and GetInstancesInstanceListVipListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListVipListInput` via:
 //
-//          GetInstancesInstanceListVipListArgs{...}
+//	GetInstancesInstanceListVipListArgs{...}
 type GetInstancesInstanceListVipListInput interface {
 	pulumi.Input
 
@@ -1300,7 +1300,7 @@ type GetTopicsInstanceList struct {
 // GetTopicsInstanceListInput is an input type that accepts GetTopicsInstanceListArgs and GetTopicsInstanceListOutput values.
 // You can construct a concrete instance of `GetTopicsInstanceListInput` via:
 //
-//          GetTopicsInstanceListArgs{...}
+//	GetTopicsInstanceListArgs{...}
 type GetTopicsInstanceListInput interface {
 	pulumi.Input
 
@@ -1362,7 +1362,7 @@ func (i GetTopicsInstanceListArgs) ToGetTopicsInstanceListOutputWithContext(ctx 
 // GetTopicsInstanceListArrayInput is an input type that accepts GetTopicsInstanceListArray and GetTopicsInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetTopicsInstanceListArrayInput` via:
 //
-//          GetTopicsInstanceListArray{ GetTopicsInstanceListArgs{...} }
+//	GetTopicsInstanceListArray{ GetTopicsInstanceListArgs{...} }
 type GetTopicsInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1520,7 +1520,7 @@ type GetUsersUserList struct {
 // GetUsersUserListInput is an input type that accepts GetUsersUserListArgs and GetUsersUserListOutput values.
 // You can construct a concrete instance of `GetUsersUserListInput` via:
 //
-//          GetUsersUserListArgs{...}
+//	GetUsersUserListArgs{...}
 type GetUsersUserListInput interface {
 	pulumi.Input
 
@@ -1552,7 +1552,7 @@ func (i GetUsersUserListArgs) ToGetUsersUserListOutputWithContext(ctx context.Co
 // GetUsersUserListArrayInput is an input type that accepts GetUsersUserListArray and GetUsersUserListArrayOutput values.
 // You can construct a concrete instance of `GetUsersUserListArrayInput` via:
 //
-//          GetUsersUserListArray{ GetUsersUserListArgs{...} }
+//	GetUsersUserListArray{ GetUsersUserListArgs{...} }
 type GetUsersUserListArrayInput interface {
 	pulumi.Input
 

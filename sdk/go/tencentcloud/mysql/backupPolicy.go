@@ -17,24 +17,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewBackupPolicy(ctx, "default", &Mysql.BackupPolicyArgs{
-// 			BackupModel:     pulumi.String("physical"),
-// 			BackupTime:      pulumi.String("02:00-06:00"),
-// 			MysqlId:         pulumi.String("cdb-dnqksd9f"),
-// 			RetentionPeriod: pulumi.Int(7),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewBackupPolicy(ctx, "default", &Mysql.BackupPolicyArgs{
+//				BackupModel:     pulumi.String("physical"),
+//				BackupTime:      pulumi.String("02:00-06:00"),
+//				MysqlId:         pulumi.String("cdb-dnqksd9f"),
+//				RetentionPeriod: pulumi.Int(7),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BackupPolicy struct {
 	pulumi.CustomResourceState
@@ -161,7 +164,7 @@ func (i *BackupPolicy) ToBackupPolicyOutputWithContext(ctx context.Context) Back
 // BackupPolicyArrayInput is an input type that accepts BackupPolicyArray and BackupPolicyArrayOutput values.
 // You can construct a concrete instance of `BackupPolicyArrayInput` via:
 //
-//          BackupPolicyArray{ BackupPolicyArgs{...} }
+//	BackupPolicyArray{ BackupPolicyArgs{...} }
 type BackupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +189,7 @@ func (i BackupPolicyArray) ToBackupPolicyArrayOutputWithContext(ctx context.Cont
 // BackupPolicyMapInput is an input type that accepts BackupPolicyMap and BackupPolicyMapOutput values.
 // You can construct a concrete instance of `BackupPolicyMapInput` via:
 //
-//          BackupPolicyMap{ "key": BackupPolicyArgs{...} }
+//	BackupPolicyMap{ "key": BackupPolicyArgs{...} }
 type BackupPolicyMapInput interface {
 	pulumi.Input
 

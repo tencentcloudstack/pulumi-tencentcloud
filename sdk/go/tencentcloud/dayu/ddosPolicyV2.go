@@ -19,105 +19,108 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.NewDdosPolicyV2(ctx, "ddosV2", &Dayu.DdosPolicyV2Args{
-// 			Acls: dayu.DdosPolicyV2AclArray{
-// 				&dayu.DdosPolicyV2AclArgs{
-// 					Action:          pulumi.String("transmit"),
-// 					DPortEnd:        pulumi.Int(10),
-// 					DPortStart:      pulumi.Int(1),
-// 					ForwardProtocol: pulumi.String("all"),
-// 					Priority:        pulumi.Int(9),
-// 					SPortEnd:        pulumi.Int(20),
-// 					SPortStart:      pulumi.Int(10),
-// 				},
-// 			},
-// 			BlackWhiteIps: dayu.DdosPolicyV2BlackWhiteIpArray{
-// 				&dayu.DdosPolicyV2BlackWhiteIpArgs{
-// 					Ip:     pulumi.String("1.2.3.4"),
-// 					IpType: pulumi.String("black"),
-// 				},
-// 			},
-// 			Business: pulumi.String("bgpip"),
-// 			DdosAi:   pulumi.String("on"),
-// 			DdosConnectLimit: &dayu.DdosPolicyV2DdosConnectLimitArgs{
-// 				BadConnThreshold: pulumi.Int(30),
-// 				ConnTimeout:      pulumi.Int(30),
-// 				DstConnLimit:     pulumi.Int(21),
-// 				DstNewLimit:      pulumi.Int(20),
-// 				NullConnEnable:   pulumi.Int(1),
-// 				SdConnLimit:      pulumi.Int(11),
-// 				SdNewLimit:       pulumi.Int(10),
-// 				SynLimit:         pulumi.Int(20),
-// 				SynRate:          pulumi.Int(10),
-// 			},
-// 			DdosGeoIpBlockConfigs: dayu.DdosPolicyV2DdosGeoIpBlockConfigArray{
-// 				&dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs{
-// 					Action: pulumi.String("drop"),
-// 					AreaLists: pulumi.IntArray{
-// 						pulumi.Int(100001),
-// 					},
-// 					RegionType: pulumi.String("customized"),
-// 				},
-// 			},
-// 			DdosLevel: pulumi.String("low"),
-// 			DdosSpeedLimitConfigs: dayu.DdosPolicyV2DdosSpeedLimitConfigArray{
-// 				&dayu.DdosPolicyV2DdosSpeedLimitConfigArgs{
-// 					Bandwidth:    pulumi.Int(20),
-// 					DstPortList:  pulumi.String("10"),
-// 					Mode:         pulumi.Int(1),
-// 					PacketRate:   pulumi.Int(10),
-// 					ProtocolList: pulumi.String("TCP"),
-// 				},
-// 			},
-// 			DdosThreshold: pulumi.Int(100),
-// 			PacketFilters: dayu.DdosPolicyV2PacketFilterArray{
-// 				&dayu.DdosPolicyV2PacketFilterArgs{
-// 					Action:      pulumi.String("drop"),
-// 					DPortEnd:    pulumi.Int(20),
-// 					DPortStart:  pulumi.Int(20),
-// 					Depth:       pulumi.Int(2),
-// 					Depth2:      pulumi.Int(3),
-// 					IsNot:       pulumi.Int(0),
-// 					IsNot2:      pulumi.Int(0),
-// 					MatchBegin:  pulumi.String("begin_l3"),
-// 					MatchBegin2: pulumi.String("begin_l3"),
-// 					MatchLogic:  pulumi.String("and"),
-// 					MatchType:   pulumi.String("pcre"),
-// 					MatchType2:  pulumi.String("pcre"),
-// 					Offset:      pulumi.Int(1),
-// 					Offset2:     pulumi.Int(2),
-// 					PktlenMax:   pulumi.Int(30),
-// 					PktlenMin:   pulumi.Int(30),
-// 					Protocol:    pulumi.String("all"),
-// 					SPortEnd:    pulumi.Int(10),
-// 					SPortStart:  pulumi.Int(10),
-// 					Str:         pulumi.String("12"),
-// 					Str2:        pulumi.String("30"),
-// 				},
-// 			},
-// 			ProtocolBlockConfigs: dayu.DdosPolicyV2ProtocolBlockConfigArray{
-// 				&dayu.DdosPolicyV2ProtocolBlockConfigArgs{
-// 					DropIcmp:  pulumi.Int(1),
-// 					DropOther: pulumi.Int(0),
-// 					DropTcp:   pulumi.Int(0),
-// 					DropUdp:   pulumi.Int(0),
-// 				},
-// 			},
-// 			ResourceId: pulumi.String("bgpip-000004xf"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.NewDdosPolicyV2(ctx, "ddosV2", &Dayu.DdosPolicyV2Args{
+//				Acls: dayu.DdosPolicyV2AclArray{
+//					&dayu.DdosPolicyV2AclArgs{
+//						Action:          pulumi.String("transmit"),
+//						DPortEnd:        pulumi.Int(10),
+//						DPortStart:      pulumi.Int(1),
+//						ForwardProtocol: pulumi.String("all"),
+//						Priority:        pulumi.Int(9),
+//						SPortEnd:        pulumi.Int(20),
+//						SPortStart:      pulumi.Int(10),
+//					},
+//				},
+//				BlackWhiteIps: dayu.DdosPolicyV2BlackWhiteIpArray{
+//					&dayu.DdosPolicyV2BlackWhiteIpArgs{
+//						Ip:     pulumi.String("1.2.3.4"),
+//						IpType: pulumi.String("black"),
+//					},
+//				},
+//				Business: pulumi.String("bgpip"),
+//				DdosAi:   pulumi.String("on"),
+//				DdosConnectLimit: &dayu.DdosPolicyV2DdosConnectLimitArgs{
+//					BadConnThreshold: pulumi.Int(30),
+//					ConnTimeout:      pulumi.Int(30),
+//					DstConnLimit:     pulumi.Int(21),
+//					DstNewLimit:      pulumi.Int(20),
+//					NullConnEnable:   pulumi.Int(1),
+//					SdConnLimit:      pulumi.Int(11),
+//					SdNewLimit:       pulumi.Int(10),
+//					SynLimit:         pulumi.Int(20),
+//					SynRate:          pulumi.Int(10),
+//				},
+//				DdosGeoIpBlockConfigs: dayu.DdosPolicyV2DdosGeoIpBlockConfigArray{
+//					&dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs{
+//						Action: pulumi.String("drop"),
+//						AreaLists: pulumi.IntArray{
+//							pulumi.Int(100001),
+//						},
+//						RegionType: pulumi.String("customized"),
+//					},
+//				},
+//				DdosLevel: pulumi.String("low"),
+//				DdosSpeedLimitConfigs: dayu.DdosPolicyV2DdosSpeedLimitConfigArray{
+//					&dayu.DdosPolicyV2DdosSpeedLimitConfigArgs{
+//						Bandwidth:    pulumi.Int(20),
+//						DstPortList:  pulumi.String("10"),
+//						Mode:         pulumi.Int(1),
+//						PacketRate:   pulumi.Int(10),
+//						ProtocolList: pulumi.String("TCP"),
+//					},
+//				},
+//				DdosThreshold: pulumi.Int(100),
+//				PacketFilters: dayu.DdosPolicyV2PacketFilterArray{
+//					&dayu.DdosPolicyV2PacketFilterArgs{
+//						Action:      pulumi.String("drop"),
+//						DPortEnd:    pulumi.Int(20),
+//						DPortStart:  pulumi.Int(20),
+//						Depth:       pulumi.Int(2),
+//						Depth2:      pulumi.Int(3),
+//						IsNot:       pulumi.Int(0),
+//						IsNot2:      pulumi.Int(0),
+//						MatchBegin:  pulumi.String("begin_l3"),
+//						MatchBegin2: pulumi.String("begin_l3"),
+//						MatchLogic:  pulumi.String("and"),
+//						MatchType:   pulumi.String("pcre"),
+//						MatchType2:  pulumi.String("pcre"),
+//						Offset:      pulumi.Int(1),
+//						Offset2:     pulumi.Int(2),
+//						PktlenMax:   pulumi.Int(30),
+//						PktlenMin:   pulumi.Int(30),
+//						Protocol:    pulumi.String("all"),
+//						SPortEnd:    pulumi.Int(10),
+//						SPortStart:  pulumi.Int(10),
+//						Str:         pulumi.String("12"),
+//						Str2:        pulumi.String("30"),
+//					},
+//				},
+//				ProtocolBlockConfigs: dayu.DdosPolicyV2ProtocolBlockConfigArray{
+//					&dayu.DdosPolicyV2ProtocolBlockConfigArgs{
+//						DropIcmp:  pulumi.Int(1),
+//						DropOther: pulumi.Int(0),
+//						DropTcp:   pulumi.Int(0),
+//						DropUdp:   pulumi.Int(0),
+//					},
+//				},
+//				ResourceId: pulumi.String("bgpip-000004xf"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DdosPolicyV2 struct {
 	pulumi.CustomResourceState
@@ -318,7 +321,7 @@ func (i *DdosPolicyV2) ToDdosPolicyV2OutputWithContext(ctx context.Context) Ddos
 // DdosPolicyV2ArrayInput is an input type that accepts DdosPolicyV2Array and DdosPolicyV2ArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2ArrayInput` via:
 //
-//          DdosPolicyV2Array{ DdosPolicyV2Args{...} }
+//	DdosPolicyV2Array{ DdosPolicyV2Args{...} }
 type DdosPolicyV2ArrayInput interface {
 	pulumi.Input
 
@@ -343,7 +346,7 @@ func (i DdosPolicyV2Array) ToDdosPolicyV2ArrayOutputWithContext(ctx context.Cont
 // DdosPolicyV2MapInput is an input type that accepts DdosPolicyV2Map and DdosPolicyV2MapOutput values.
 // You can construct a concrete instance of `DdosPolicyV2MapInput` via:
 //
-//          DdosPolicyV2Map{ "key": DdosPolicyV2Args{...} }
+//	DdosPolicyV2Map{ "key": DdosPolicyV2Args{...} }
 type DdosPolicyV2MapInput interface {
 	pulumi.Input
 

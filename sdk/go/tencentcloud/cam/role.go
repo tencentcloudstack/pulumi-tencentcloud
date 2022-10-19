@@ -15,61 +15,67 @@ import (
 //
 // ## Example Usage
 //
-// Create normally
+// # Create normally
 //
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRole(ctx, "foo", &Cam.RoleArgs{
-// 			ConsoleLogin: pulumi.Bool(true),
-// 			Description:  pulumi.String("test"),
-// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\"qcs::cam::uin/<your-account-id>:uin/<your-account-id>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf-cam-role"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewRole(ctx, "foo", &Cam.RoleArgs{
+//				ConsoleLogin: pulumi.Bool(true),
+//				Description:  pulumi.String("test"),
+//				Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\"qcs::cam::uin/<your-account-id>:uin/<your-account-id>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("tf-cam-role"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
-// Create with SAML provider
+// # Create with SAML provider
 //
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRole(ctx, "boo", &Cam.RoleArgs{
-// 			ConsoleLogin: pulumi.Bool(true),
-// 			Description:  pulumi.String("test"),
-// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\", \"name/sts:AssumeRoleWithWebIdentity\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"federated\": [\"qcs::cam::uin/<your-account-id>:saml-provider/<your-name>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewRole(ctx, "boo", &Cam.RoleArgs{
+//				ConsoleLogin: pulumi.Bool(true),
+//				Description:  pulumi.String("test"),
+//				Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\", \"name/sts:AssumeRoleWithWebIdentity\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"federated\": [\"qcs::cam::uin/<your-account-id>:saml-provider/<your-name>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -77,7 +83,9 @@ import (
 // CAM role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+//
+//	$ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+//
 // ```
 type Role struct {
 	pulumi.CustomResourceState
@@ -235,7 +243,7 @@ func (i *Role) ToRoleOutputWithContext(ctx context.Context) RoleOutput {
 // RoleArrayInput is an input type that accepts RoleArray and RoleArrayOutput values.
 // You can construct a concrete instance of `RoleArrayInput` via:
 //
-//          RoleArray{ RoleArgs{...} }
+//	RoleArray{ RoleArgs{...} }
 type RoleArrayInput interface {
 	pulumi.Input
 
@@ -260,7 +268,7 @@ func (i RoleArray) ToRoleArrayOutputWithContext(ctx context.Context) RoleArrayOu
 // RoleMapInput is an input type that accepts RoleMap and RoleMapOutput values.
 // You can construct a concrete instance of `RoleMapInput` via:
 //
-//          RoleMap{ "key": RoleArgs{...} }
+//	RoleMap{ "key": RoleArgs{...} }
 type RoleMapInput interface {
 	pulumi.Input
 

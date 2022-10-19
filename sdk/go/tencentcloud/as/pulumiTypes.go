@@ -24,7 +24,7 @@ type ScalingConfigDataDisk struct {
 // ScalingConfigDataDiskInput is an input type that accepts ScalingConfigDataDiskArgs and ScalingConfigDataDiskOutput values.
 // You can construct a concrete instance of `ScalingConfigDataDiskInput` via:
 //
-//          ScalingConfigDataDiskArgs{...}
+//	ScalingConfigDataDiskArgs{...}
 type ScalingConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i ScalingConfigDataDiskArgs) ToScalingConfigDataDiskOutputWithContext(ctx 
 // ScalingConfigDataDiskArrayInput is an input type that accepts ScalingConfigDataDiskArray and ScalingConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ScalingConfigDataDiskArrayInput` via:
 //
-//          ScalingConfigDataDiskArray{ ScalingConfigDataDiskArgs{...} }
+//	ScalingConfigDataDiskArray{ ScalingConfigDataDiskArgs{...} }
 type ScalingConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -144,7 +144,7 @@ type ScalingConfigInstanceNameSettings struct {
 // ScalingConfigInstanceNameSettingsInput is an input type that accepts ScalingConfigInstanceNameSettingsArgs and ScalingConfigInstanceNameSettingsOutput values.
 // You can construct a concrete instance of `ScalingConfigInstanceNameSettingsInput` via:
 //
-//          ScalingConfigInstanceNameSettingsArgs{...}
+//	ScalingConfigInstanceNameSettingsArgs{...}
 type ScalingConfigInstanceNameSettingsInput interface {
 	pulumi.Input
 
@@ -182,11 +182,11 @@ func (i ScalingConfigInstanceNameSettingsArgs) ToScalingConfigInstanceNameSettin
 // ScalingConfigInstanceNameSettingsPtrInput is an input type that accepts ScalingConfigInstanceNameSettingsArgs, ScalingConfigInstanceNameSettingsPtr and ScalingConfigInstanceNameSettingsPtrOutput values.
 // You can construct a concrete instance of `ScalingConfigInstanceNameSettingsPtrInput` via:
 //
-//          ScalingConfigInstanceNameSettingsArgs{...}
+//	        ScalingConfigInstanceNameSettingsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScalingConfigInstanceNameSettingsPtrInput interface {
 	pulumi.Input
 
@@ -304,7 +304,7 @@ type ScalingGroupForwardBalancerId struct {
 // ScalingGroupForwardBalancerIdInput is an input type that accepts ScalingGroupForwardBalancerIdArgs and ScalingGroupForwardBalancerIdOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdInput` via:
 //
-//          ScalingGroupForwardBalancerIdArgs{...}
+//	ScalingGroupForwardBalancerIdArgs{...}
 type ScalingGroupForwardBalancerIdInput interface {
 	pulumi.Input
 
@@ -338,7 +338,7 @@ func (i ScalingGroupForwardBalancerIdArgs) ToScalingGroupForwardBalancerIdOutput
 // ScalingGroupForwardBalancerIdArrayInput is an input type that accepts ScalingGroupForwardBalancerIdArray and ScalingGroupForwardBalancerIdArrayOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdArrayInput` via:
 //
-//          ScalingGroupForwardBalancerIdArray{ ScalingGroupForwardBalancerIdArgs{...} }
+//	ScalingGroupForwardBalancerIdArray{ ScalingGroupForwardBalancerIdArgs{...} }
 type ScalingGroupForwardBalancerIdArrayInput interface {
 	pulumi.Input
 
@@ -426,7 +426,7 @@ type ScalingGroupForwardBalancerIdTargetAttribute struct {
 // ScalingGroupForwardBalancerIdTargetAttributeInput is an input type that accepts ScalingGroupForwardBalancerIdTargetAttributeArgs and ScalingGroupForwardBalancerIdTargetAttributeOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdTargetAttributeInput` via:
 //
-//          ScalingGroupForwardBalancerIdTargetAttributeArgs{...}
+//	ScalingGroupForwardBalancerIdTargetAttributeArgs{...}
 type ScalingGroupForwardBalancerIdTargetAttributeInput interface {
 	pulumi.Input
 
@@ -456,7 +456,7 @@ func (i ScalingGroupForwardBalancerIdTargetAttributeArgs) ToScalingGroupForwardB
 // ScalingGroupForwardBalancerIdTargetAttributeArrayInput is an input type that accepts ScalingGroupForwardBalancerIdTargetAttributeArray and ScalingGroupForwardBalancerIdTargetAttributeArrayOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdTargetAttributeArrayInput` via:
 //
-//          ScalingGroupForwardBalancerIdTargetAttributeArray{ ScalingGroupForwardBalancerIdTargetAttributeArgs{...} }
+//	ScalingGroupForwardBalancerIdTargetAttributeArray{ ScalingGroupForwardBalancerIdTargetAttributeArgs{...} }
 type ScalingGroupForwardBalancerIdTargetAttributeArrayInput interface {
 	pulumi.Input
 
@@ -568,7 +568,7 @@ type GetScalingConfigsConfigurationList struct {
 // GetScalingConfigsConfigurationListInput is an input type that accepts GetScalingConfigsConfigurationListArgs and GetScalingConfigsConfigurationListOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListInput` via:
 //
-//          GetScalingConfigsConfigurationListArgs{...}
+//	GetScalingConfigsConfigurationListArgs{...}
 type GetScalingConfigsConfigurationListInput interface {
 	pulumi.Input
 
@@ -634,7 +634,7 @@ func (i GetScalingConfigsConfigurationListArgs) ToGetScalingConfigsConfiguration
 // GetScalingConfigsConfigurationListArrayInput is an input type that accepts GetScalingConfigsConfigurationListArray and GetScalingConfigsConfigurationListArrayOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListArrayInput` via:
 //
-//          GetScalingConfigsConfigurationListArray{ GetScalingConfigsConfigurationListArgs{...} }
+//	GetScalingConfigsConfigurationListArray{ GetScalingConfigsConfigurationListArgs{...} }
 type GetScalingConfigsConfigurationListArrayInput interface {
 	pulumi.Input
 
@@ -806,7 +806,7 @@ type GetScalingConfigsConfigurationListDataDisk struct {
 // GetScalingConfigsConfigurationListDataDiskInput is an input type that accepts GetScalingConfigsConfigurationListDataDiskArgs and GetScalingConfigsConfigurationListDataDiskOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListDataDiskInput` via:
 //
-//          GetScalingConfigsConfigurationListDataDiskArgs{...}
+//	GetScalingConfigsConfigurationListDataDiskArgs{...}
 type GetScalingConfigsConfigurationListDataDiskInput interface {
 	pulumi.Input
 
@@ -840,7 +840,7 @@ func (i GetScalingConfigsConfigurationListDataDiskArgs) ToGetScalingConfigsConfi
 // GetScalingConfigsConfigurationListDataDiskArrayInput is an input type that accepts GetScalingConfigsConfigurationListDataDiskArray and GetScalingConfigsConfigurationListDataDiskArrayOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListDataDiskArrayInput` via:
 //
-//          GetScalingConfigsConfigurationListDataDiskArray{ GetScalingConfigsConfigurationListDataDiskArgs{...} }
+//	GetScalingConfigsConfigurationListDataDiskArray{ GetScalingConfigsConfigurationListDataDiskArgs{...} }
 type GetScalingConfigsConfigurationListDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -962,7 +962,7 @@ type GetScalingGroupsScalingGroupList struct {
 // GetScalingGroupsScalingGroupListInput is an input type that accepts GetScalingGroupsScalingGroupListArgs and GetScalingGroupsScalingGroupListOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListInput` via:
 //
-//          GetScalingGroupsScalingGroupListArgs{...}
+//	GetScalingGroupsScalingGroupListArgs{...}
 type GetScalingGroupsScalingGroupListInput interface {
 	pulumi.Input
 
@@ -1028,7 +1028,7 @@ func (i GetScalingGroupsScalingGroupListArgs) ToGetScalingGroupsScalingGroupList
 // GetScalingGroupsScalingGroupListArrayInput is an input type that accepts GetScalingGroupsScalingGroupListArray and GetScalingGroupsScalingGroupListArrayOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListArrayInput` via:
 //
-//          GetScalingGroupsScalingGroupListArray{ GetScalingGroupsScalingGroupListArgs{...} }
+//	GetScalingGroupsScalingGroupListArray{ GetScalingGroupsScalingGroupListArgs{...} }
 type GetScalingGroupsScalingGroupListArrayInput interface {
 	pulumi.Input
 
@@ -1200,7 +1200,7 @@ type GetScalingGroupsScalingGroupListForwardBalancerId struct {
 // GetScalingGroupsScalingGroupListForwardBalancerIdInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdArgs and GetScalingGroupsScalingGroupListForwardBalancerIdOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdInput` via:
 //
-//          GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...}
+//	GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...}
 type GetScalingGroupsScalingGroupListForwardBalancerIdInput interface {
 	pulumi.Input
 
@@ -1234,7 +1234,7 @@ func (i GetScalingGroupsScalingGroupListForwardBalancerIdArgs) ToGetScalingGroup
 // GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdArray and GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput` via:
 //
-//          GetScalingGroupsScalingGroupListForwardBalancerIdArray{ GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...} }
+//	GetScalingGroupsScalingGroupListForwardBalancerIdArray{ GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...} }
 type GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput interface {
 	pulumi.Input
 
@@ -1322,7 +1322,7 @@ type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute struct {
 // GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs and GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput` via:
 //
-//          GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...}
+//	GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...}
 type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput interface {
 	pulumi.Input
 
@@ -1352,7 +1352,7 @@ func (i GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs) To
 // GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray and GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput` via:
 //
-//          GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray{ GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...} }
+//	GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray{ GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...} }
 type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput interface {
 	pulumi.Input
 
@@ -1448,7 +1448,7 @@ type GetScalingPoliciesScalingPolicyList struct {
 // GetScalingPoliciesScalingPolicyListInput is an input type that accepts GetScalingPoliciesScalingPolicyListArgs and GetScalingPoliciesScalingPolicyListOutput values.
 // You can construct a concrete instance of `GetScalingPoliciesScalingPolicyListInput` via:
 //
-//          GetScalingPoliciesScalingPolicyListArgs{...}
+//	GetScalingPoliciesScalingPolicyListArgs{...}
 type GetScalingPoliciesScalingPolicyListInput interface {
 	pulumi.Input
 
@@ -1498,7 +1498,7 @@ func (i GetScalingPoliciesScalingPolicyListArgs) ToGetScalingPoliciesScalingPoli
 // GetScalingPoliciesScalingPolicyListArrayInput is an input type that accepts GetScalingPoliciesScalingPolicyListArray and GetScalingPoliciesScalingPolicyListArrayOutput values.
 // You can construct a concrete instance of `GetScalingPoliciesScalingPolicyListArrayInput` via:
 //
-//          GetScalingPoliciesScalingPolicyListArray{ GetScalingPoliciesScalingPolicyListArgs{...} }
+//	GetScalingPoliciesScalingPolicyListArray{ GetScalingPoliciesScalingPolicyListArgs{...} }
 type GetScalingPoliciesScalingPolicyListArrayInput interface {
 	pulumi.Input
 

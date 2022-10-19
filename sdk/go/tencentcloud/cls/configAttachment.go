@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewConfigAttachment(ctx, "attach", &Cls.ConfigAttachmentArgs{
-// 			ConfigId: pulumi.Any(tencentcloud_cls_config.Config.Id),
-// 			GroupId:  pulumi.String("27752a9b-9918-440a-8ee7-9c84a14a47ed"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewConfigAttachment(ctx, "attach", &Cls.ConfigAttachmentArgs{
+//				ConfigId: pulumi.Any(tencentcloud_cls_config.Config.Id),
+//				GroupId:  pulumi.String("27752a9b-9918-440a-8ee7-9c84a14a47ed"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConfigAttachment struct {
 	pulumi.CustomResourceState
@@ -138,7 +141,7 @@ func (i *ConfigAttachment) ToConfigAttachmentOutputWithContext(ctx context.Conte
 // ConfigAttachmentArrayInput is an input type that accepts ConfigAttachmentArray and ConfigAttachmentArrayOutput values.
 // You can construct a concrete instance of `ConfigAttachmentArrayInput` via:
 //
-//          ConfigAttachmentArray{ ConfigAttachmentArgs{...} }
+//	ConfigAttachmentArray{ ConfigAttachmentArgs{...} }
 type ConfigAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -163,7 +166,7 @@ func (i ConfigAttachmentArray) ToConfigAttachmentArrayOutputWithContext(ctx cont
 // ConfigAttachmentMapInput is an input type that accepts ConfigAttachmentMap and ConfigAttachmentMapOutput values.
 // You can construct a concrete instance of `ConfigAttachmentMapInput` via:
 //
-//          ConfigAttachmentMap{ "key": ConfigAttachmentArgs{...} }
+//	ConfigAttachmentMap{ "key": ConfigAttachmentArgs{...} }
 type ConfigAttachmentMapInput interface {
 	pulumi.Input
 

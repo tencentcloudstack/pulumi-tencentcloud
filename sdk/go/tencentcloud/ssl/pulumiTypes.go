@@ -66,7 +66,7 @@ type PayCertificateInformation struct {
 // PayCertificateInformationInput is an input type that accepts PayCertificateInformationArgs and PayCertificateInformationOutput values.
 // You can construct a concrete instance of `PayCertificateInformationInput` via:
 //
-//          PayCertificateInformationArgs{...}
+//	PayCertificateInformationArgs{...}
 type PayCertificateInformationInput interface {
 	pulumi.Input
 
@@ -150,11 +150,11 @@ func (i PayCertificateInformationArgs) ToPayCertificateInformationPtrOutputWithC
 // PayCertificateInformationPtrInput is an input type that accepts PayCertificateInformationArgs, PayCertificateInformationPtr and PayCertificateInformationPtrOutput values.
 // You can construct a concrete instance of `PayCertificateInformationPtrInput` via:
 //
-//          PayCertificateInformationArgs{...}
+//	        PayCertificateInformationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PayCertificateInformationPtrInput interface {
 	pulumi.Input
 
@@ -633,7 +633,7 @@ type GetCertificatesCertificate struct {
 // GetCertificatesCertificateInput is an input type that accepts GetCertificatesCertificateArgs and GetCertificatesCertificateOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateInput` via:
 //
-//          GetCertificatesCertificateArgs{...}
+//	GetCertificatesCertificateArgs{...}
 type GetCertificatesCertificateInput interface {
 	pulumi.Input
 
@@ -683,7 +683,7 @@ func (i GetCertificatesCertificateArgs) ToGetCertificatesCertificateOutputWithCo
 // GetCertificatesCertificateArrayInput is an input type that accepts GetCertificatesCertificateArray and GetCertificatesCertificateArrayOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateArrayInput` via:
 //
-//          GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
+//	GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
 type GetCertificatesCertificateArrayInput interface {
 	pulumi.Input
 

@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewStorageSet(ctx, "storage", &Cbs.StorageSetArgs{
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			DiskCount:        pulumi.Int(10),
-// 			Encrypt:          pulumi.Bool(false),
-// 			ProjectId:        pulumi.Int(0),
-// 			StorageName:      pulumi.String("mystorage"),
-// 			StorageSize:      pulumi.Int(100),
-// 			StorageType:      pulumi.String("CLOUD_SSD"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewStorageSet(ctx, "storage", &Cbs.StorageSetArgs{
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				DiskCount:        pulumi.Int(10),
+//				Encrypt:          pulumi.Bool(false),
+//				ProjectId:        pulumi.Int(0),
+//				StorageName:      pulumi.String("mystorage"),
+//				StorageSize:      pulumi.Int(100),
+//				StorageType:      pulumi.String("CLOUD_SSD"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StorageSet struct {
 	pulumi.CustomResourceState
@@ -247,7 +250,7 @@ func (i *StorageSet) ToStorageSetOutputWithContext(ctx context.Context) StorageS
 // StorageSetArrayInput is an input type that accepts StorageSetArray and StorageSetArrayOutput values.
 // You can construct a concrete instance of `StorageSetArrayInput` via:
 //
-//          StorageSetArray{ StorageSetArgs{...} }
+//	StorageSetArray{ StorageSetArgs{...} }
 type StorageSetArrayInput interface {
 	pulumi.Input
 
@@ -272,7 +275,7 @@ func (i StorageSetArray) ToStorageSetArrayOutputWithContext(ctx context.Context)
 // StorageSetMapInput is an input type that accepts StorageSetMap and StorageSetMapOutput values.
 // You can construct a concrete instance of `StorageSetMapInput` via:
 //
-//          StorageSetMap{ "key": StorageSetArgs{...} }
+//	StorageSetMap{ "key": StorageSetArgs{...} }
 type StorageSetMapInput interface {
 	pulumi.Input
 

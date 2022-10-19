@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Key.NewPair(ctx, "foo", &Key.PairArgs{
-// 			KeyName:   pulumi.String("terraform_test"),
-// 			PublicKey: pulumi.String("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw=="),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Key.NewPair(ctx, "foo", &Key.PairArgs{
+//				KeyName:   pulumi.String("terraform_test"),
+//				PublicKey: pulumi.String("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw=="),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // Key pair can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
+//
+//	$ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
+//
 // ```
 type Pair struct {
 	pulumi.CustomResourceState
@@ -156,7 +161,7 @@ func (i *Pair) ToPairOutputWithContext(ctx context.Context) PairOutput {
 // PairArrayInput is an input type that accepts PairArray and PairArrayOutput values.
 // You can construct a concrete instance of `PairArrayInput` via:
 //
-//          PairArray{ PairArgs{...} }
+//	PairArray{ PairArgs{...} }
 type PairArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +186,7 @@ func (i PairArray) ToPairArrayOutputWithContext(ctx context.Context) PairArrayOu
 // PairMapInput is an input type that accepts PairMap and PairMapOutput values.
 // You can construct a concrete instance of `PairMapInput` via:
 //
-//          PairMap{ "key": PairArgs{...} }
+//	PairMap{ "key": PairArgs{...} }
 type PairMapInput interface {
 	pulumi.Input
 

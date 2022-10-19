@@ -30,7 +30,7 @@ type GetAclsAclList struct {
 // GetAclsAclListInput is an input type that accepts GetAclsAclListArgs and GetAclsAclListOutput values.
 // You can construct a concrete instance of `GetAclsAclListInput` via:
 //
-//          GetAclsAclListArgs{...}
+//	GetAclsAclListArgs{...}
 type GetAclsAclListInput interface {
 	pulumi.Input
 
@@ -70,7 +70,7 @@ func (i GetAclsAclListArgs) ToGetAclsAclListOutputWithContext(ctx context.Contex
 // GetAclsAclListArrayInput is an input type that accepts GetAclsAclListArray and GetAclsAclListArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListArrayInput` via:
 //
-//          GetAclsAclListArray{ GetAclsAclListArgs{...} }
+//	GetAclsAclListArray{ GetAclsAclListArgs{...} }
 type GetAclsAclListArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +177,7 @@ type GetAclsAclListEgress struct {
 // GetAclsAclListEgressInput is an input type that accepts GetAclsAclListEgressArgs and GetAclsAclListEgressOutput values.
 // You can construct a concrete instance of `GetAclsAclListEgressInput` via:
 //
-//          GetAclsAclListEgressArgs{...}
+//	GetAclsAclListEgressArgs{...}
 type GetAclsAclListEgressInput interface {
 	pulumi.Input
 
@@ -213,7 +213,7 @@ func (i GetAclsAclListEgressArgs) ToGetAclsAclListEgressOutputWithContext(ctx co
 // GetAclsAclListEgressArrayInput is an input type that accepts GetAclsAclListEgressArray and GetAclsAclListEgressArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListEgressArrayInput` via:
 //
-//          GetAclsAclListEgressArray{ GetAclsAclListEgressArgs{...} }
+//	GetAclsAclListEgressArray{ GetAclsAclListEgressArgs{...} }
 type GetAclsAclListEgressArrayInput interface {
 	pulumi.Input
 
@@ -310,7 +310,7 @@ type GetAclsAclListIngress struct {
 // GetAclsAclListIngressInput is an input type that accepts GetAclsAclListIngressArgs and GetAclsAclListIngressOutput values.
 // You can construct a concrete instance of `GetAclsAclListIngressInput` via:
 //
-//          GetAclsAclListIngressArgs{...}
+//	GetAclsAclListIngressArgs{...}
 type GetAclsAclListIngressInput interface {
 	pulumi.Input
 
@@ -346,7 +346,7 @@ func (i GetAclsAclListIngressArgs) ToGetAclsAclListIngressOutputWithContext(ctx 
 // GetAclsAclListIngressArrayInput is an input type that accepts GetAclsAclListIngressArray and GetAclsAclListIngressArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListIngressArrayInput` via:
 //
-//          GetAclsAclListIngressArray{ GetAclsAclListIngressArgs{...} }
+//	GetAclsAclListIngressArray{ GetAclsAclListIngressArgs{...} }
 type GetAclsAclListIngressArrayInput interface {
 	pulumi.Input
 
@@ -443,7 +443,7 @@ type GetAclsAclListSubnet struct {
 // GetAclsAclListSubnetInput is an input type that accepts GetAclsAclListSubnetArgs and GetAclsAclListSubnetOutput values.
 // You can construct a concrete instance of `GetAclsAclListSubnetInput` via:
 //
-//          GetAclsAclListSubnetArgs{...}
+//	GetAclsAclListSubnetArgs{...}
 type GetAclsAclListSubnetInput interface {
 	pulumi.Input
 
@@ -479,7 +479,7 @@ func (i GetAclsAclListSubnetArgs) ToGetAclsAclListSubnetOutputWithContext(ctx co
 // GetAclsAclListSubnetArrayInput is an input type that accepts GetAclsAclListSubnetArray and GetAclsAclListSubnetArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListSubnetArrayInput` via:
 //
-//          GetAclsAclListSubnetArray{ GetAclsAclListSubnetArgs{...} }
+//	GetAclsAclListSubnetArray{ GetAclsAclListSubnetArgs{...} }
 type GetAclsAclListSubnetArrayInput interface {
 	pulumi.Input
 
@@ -584,7 +584,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -628,7 +628,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -751,7 +751,7 @@ type GetRouteTablesInstanceList struct {
 // GetRouteTablesInstanceListInput is an input type that accepts GetRouteTablesInstanceListArgs and GetRouteTablesInstanceListOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListInput` via:
 //
-//          GetRouteTablesInstanceListArgs{...}
+//	GetRouteTablesInstanceListArgs{...}
 type GetRouteTablesInstanceListInput interface {
 	pulumi.Input
 
@@ -793,7 +793,7 @@ func (i GetRouteTablesInstanceListArgs) ToGetRouteTablesInstanceListOutputWithCo
 // GetRouteTablesInstanceListArrayInput is an input type that accepts GetRouteTablesInstanceListArray and GetRouteTablesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListArrayInput` via:
 //
-//          GetRouteTablesInstanceListArray{ GetRouteTablesInstanceListArgs{...} }
+//	GetRouteTablesInstanceListArray{ GetRouteTablesInstanceListArgs{...} }
 type GetRouteTablesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -907,7 +907,7 @@ type GetRouteTablesInstanceListRouteEntryInfo struct {
 // GetRouteTablesInstanceListRouteEntryInfoInput is an input type that accepts GetRouteTablesInstanceListRouteEntryInfoArgs and GetRouteTablesInstanceListRouteEntryInfoOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListRouteEntryInfoInput` via:
 //
-//          GetRouteTablesInstanceListRouteEntryInfoArgs{...}
+//	GetRouteTablesInstanceListRouteEntryInfoArgs{...}
 type GetRouteTablesInstanceListRouteEntryInfoInput interface {
 	pulumi.Input
 
@@ -943,7 +943,7 @@ func (i GetRouteTablesInstanceListRouteEntryInfoArgs) ToGetRouteTablesInstanceLi
 // GetRouteTablesInstanceListRouteEntryInfoArrayInput is an input type that accepts GetRouteTablesInstanceListRouteEntryInfoArray and GetRouteTablesInstanceListRouteEntryInfoArrayOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListRouteEntryInfoArrayInput` via:
 //
-//          GetRouteTablesInstanceListRouteEntryInfoArray{ GetRouteTablesInstanceListRouteEntryInfoArgs{...} }
+//	GetRouteTablesInstanceListRouteEntryInfoArray{ GetRouteTablesInstanceListRouteEntryInfoArgs{...} }
 type GetRouteTablesInstanceListRouteEntryInfoArrayInput interface {
 	pulumi.Input
 
@@ -1052,7 +1052,7 @@ type GetSubnetsInstanceList struct {
 // GetSubnetsInstanceListInput is an input type that accepts GetSubnetsInstanceListArgs and GetSubnetsInstanceListOutput values.
 // You can construct a concrete instance of `GetSubnetsInstanceListInput` via:
 //
-//          GetSubnetsInstanceListArgs{...}
+//	GetSubnetsInstanceListArgs{...}
 type GetSubnetsInstanceListInput interface {
 	pulumi.Input
 
@@ -1100,7 +1100,7 @@ func (i GetSubnetsInstanceListArgs) ToGetSubnetsInstanceListOutputWithContext(ct
 // GetSubnetsInstanceListArrayInput is an input type that accepts GetSubnetsInstanceListArray and GetSubnetsInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetSubnetsInstanceListArrayInput` via:
 //
-//          GetSubnetsInstanceListArray{ GetSubnetsInstanceListArgs{...} }
+//	GetSubnetsInstanceListArray{ GetSubnetsInstanceListArgs{...} }
 type GetSubnetsInstanceListArrayInput interface {
 	pulumi.Input
 

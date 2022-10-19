@@ -42,7 +42,7 @@ type GetKeysKeyList struct {
 // GetKeysKeyListInput is an input type that accepts GetKeysKeyListArgs and GetKeysKeyListOutput values.
 // You can construct a concrete instance of `GetKeysKeyListInput` via:
 //
-//          GetKeysKeyListArgs{...}
+//	GetKeysKeyListArgs{...}
 type GetKeysKeyListInput interface {
 	pulumi.Input
 
@@ -94,7 +94,7 @@ func (i GetKeysKeyListArgs) ToGetKeysKeyListOutputWithContext(ctx context.Contex
 // GetKeysKeyListArrayInput is an input type that accepts GetKeysKeyListArray and GetKeysKeyListArrayOutput values.
 // You can construct a concrete instance of `GetKeysKeyListArrayInput` via:
 //
-//          GetKeysKeyListArray{ GetKeysKeyListArgs{...} }
+//	GetKeysKeyListArray{ GetKeysKeyListArgs{...} }
 type GetKeysKeyListArrayInput interface {
 	pulumi.Input
 

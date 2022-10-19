@@ -19,116 +19,121 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eks"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		group, err := Security.GetGroups(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		zone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cvm",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sub, err := Subnet.NewInstance(ctx, "sub", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Zones[0].Name),
-// 			CidrBlock:        pulumi.String("10.0.0.0/24"),
-// 			VpcId:            vpc.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		cbs, err := Cbs.NewStorage(ctx, "cbs", &Cbs.StorageArgs{
-// 			AvailabilityZone: pulumi.String(zone.Zones[0].Name),
-// 			StorageName:      pulumi.String("cbs1"),
-// 			StorageSize:      pulumi.Int(10),
-// 			StorageType:      pulumi.String("CLOUD_PREMIUM"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Eks.NewContainerInstance(ctx, "eci1", &Eks.ContainerInstanceArgs{
-// 			VpcId:         vpc.ID(),
-// 			SubnetId:      sub.ID(),
-// 			Cpu:           pulumi.Float64(2),
-// 			CpuType:       pulumi.String("intel"),
-// 			RestartPolicy: pulumi.String("Always"),
-// 			Memory:        pulumi.Float64(4),
-// 			SecurityGroups: pulumi.StringArray{
-// 				pulumi.String(group.SecurityGroups[0].SecurityGroupId),
-// 			},
-// 			CbsVolumes: eks.ContainerInstanceCbsVolumeArray{
-// 				&eks.ContainerInstanceCbsVolumeArgs{
-// 					Name:   pulumi.String("vol1"),
-// 					DiskId: cbs.ID(),
-// 				},
-// 			},
-// 			Containers: eks.ContainerInstanceContainerArray{
-// 				&eks.ContainerInstanceContainerArgs{
-// 					Name:  pulumi.String("redis1"),
-// 					Image: pulumi.String("redis"),
-// 					LivenessProbe: &eks.ContainerInstanceContainerLivenessProbeArgs{
-// 						InitDelaySeconds: pulumi.Int(1),
-// 						TimeoutSeconds:   pulumi.Int(3),
-// 						PeriodSeconds:    pulumi.Int(11),
-// 						SuccessThreshold: pulumi.Int(1),
-// 						FailureThreshold: pulumi.Int(3),
-// 						HttpGetPath:      pulumi.String("/"),
-// 						HttpGetPort:      pulumi.Int(443),
-// 						HttpGetScheme:    pulumi.String("HTTPS"),
-// 					},
-// 					ReadinessProbe: &eks.ContainerInstanceContainerReadinessProbeArgs{
-// 						InitDelaySeconds: pulumi.Int(1),
-// 						TimeoutSeconds:   pulumi.Int(3),
-// 						PeriodSeconds:    pulumi.Int(10),
-// 						SuccessThreshold: pulumi.Int(1),
-// 						FailureThreshold: pulumi.Int(3),
-// 						TcpSocketPort:    pulumi.Int(81),
-// 					},
-// 				},
-// 				&eks.ContainerInstanceContainerArgs{
-// 					Name:  pulumi.String("nginx"),
-// 					Image: pulumi.String("nginx"),
-// 				},
-// 			},
-// 			InitContainers: eks.ContainerInstanceInitContainerArray{
-// 				&eks.ContainerInstanceInitContainerArgs{
-// 					Name:  pulumi.String("alpine"),
-// 					Image: pulumi.String("alpine:latest"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			group, err := Security.GetGroups(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			zone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cvm",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			sub, err := Subnet.NewInstance(ctx, "sub", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Zones[0].Name),
+//				CidrBlock:        pulumi.String("10.0.0.0/24"),
+//				VpcId:            vpc.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			cbs, err := Cbs.NewStorage(ctx, "cbs", &Cbs.StorageArgs{
+//				AvailabilityZone: pulumi.String(zone.Zones[0].Name),
+//				StorageName:      pulumi.String("cbs1"),
+//				StorageSize:      pulumi.Int(10),
+//				StorageType:      pulumi.String("CLOUD_PREMIUM"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Eks.NewContainerInstance(ctx, "eci1", &Eks.ContainerInstanceArgs{
+//				VpcId:         vpc.ID(),
+//				SubnetId:      sub.ID(),
+//				Cpu:           pulumi.Float64(2),
+//				CpuType:       pulumi.String("intel"),
+//				RestartPolicy: pulumi.String("Always"),
+//				Memory:        pulumi.Float64(4),
+//				SecurityGroups: pulumi.StringArray{
+//					pulumi.String(group.SecurityGroups[0].SecurityGroupId),
+//				},
+//				CbsVolumes: eks.ContainerInstanceCbsVolumeArray{
+//					&eks.ContainerInstanceCbsVolumeArgs{
+//						Name:   pulumi.String("vol1"),
+//						DiskId: cbs.ID(),
+//					},
+//				},
+//				Containers: eks.ContainerInstanceContainerArray{
+//					&eks.ContainerInstanceContainerArgs{
+//						Name:  pulumi.String("redis1"),
+//						Image: pulumi.String("redis"),
+//						LivenessProbe: &eks.ContainerInstanceContainerLivenessProbeArgs{
+//							InitDelaySeconds: pulumi.Int(1),
+//							TimeoutSeconds:   pulumi.Int(3),
+//							PeriodSeconds:    pulumi.Int(11),
+//							SuccessThreshold: pulumi.Int(1),
+//							FailureThreshold: pulumi.Int(3),
+//							HttpGetPath:      pulumi.String("/"),
+//							HttpGetPort:      pulumi.Int(443),
+//							HttpGetScheme:    pulumi.String("HTTPS"),
+//						},
+//						ReadinessProbe: &eks.ContainerInstanceContainerReadinessProbeArgs{
+//							InitDelaySeconds: pulumi.Int(1),
+//							TimeoutSeconds:   pulumi.Int(3),
+//							PeriodSeconds:    pulumi.Int(10),
+//							SuccessThreshold: pulumi.Int(1),
+//							FailureThreshold: pulumi.Int(3),
+//							TcpSocketPort:    pulumi.Int(81),
+//						},
+//					},
+//					&eks.ContainerInstanceContainerArgs{
+//						Name:  pulumi.String("nginx"),
+//						Image: pulumi.String("nginx"),
+//					},
+//				},
+//				InitContainers: eks.ContainerInstanceInitContainerArray{
+//					&eks.ContainerInstanceInitContainerArgs{
+//						Name:  pulumi.String("alpine"),
+//						Image: pulumi.String("alpine:latest"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eks/containerInstance:ContainerInstance foo container-instance-id
+//
+//	$ pulumi import tencentcloud:Eks/containerInstance:ContainerInstance foo container-instance-id
+//
 // ```
 type ContainerInstance struct {
 	pulumi.CustomResourceState
@@ -494,7 +499,7 @@ func (i *ContainerInstance) ToContainerInstanceOutputWithContext(ctx context.Con
 // ContainerInstanceArrayInput is an input type that accepts ContainerInstanceArray and ContainerInstanceArrayOutput values.
 // You can construct a concrete instance of `ContainerInstanceArrayInput` via:
 //
-//          ContainerInstanceArray{ ContainerInstanceArgs{...} }
+//	ContainerInstanceArray{ ContainerInstanceArgs{...} }
 type ContainerInstanceArrayInput interface {
 	pulumi.Input
 
@@ -519,7 +524,7 @@ func (i ContainerInstanceArray) ToContainerInstanceArrayOutputWithContext(ctx co
 // ContainerInstanceMapInput is an input type that accepts ContainerInstanceMap and ContainerInstanceMapOutput values.
 // You can construct a concrete instance of `ContainerInstanceMapInput` via:
 //
-//          ContainerInstanceMap{ "key": ContainerInstanceArgs{...} }
+//	ContainerInstanceMap{ "key": ContainerInstanceArgs{...} }
 type ContainerInstanceMapInput interface {
 	pulumi.Input
 

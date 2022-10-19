@@ -21,38 +21,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("ACCEPT#0.0.0.0/0#80-90#TCP"),
-// 				pulumi.String("ACCEPT#sg-7ixn3foj#80-90#TCP"),
-// 				pulumi.String("ACCEPT#ipm-epjq5kn0#80-90#TCP"),
-// 				pulumi.String("ACCEPT#ipmg-3loavam6#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+//				SecurityGroupId: fooGroup.ID(),
+//				Ingresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+//					pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+//					pulumi.String("ACCEPT#0.0.0.0/0#80-90#TCP"),
+//					pulumi.String("ACCEPT#sg-7ixn3foj#80-90#TCP"),
+//					pulumi.String("ACCEPT#ipm-epjq5kn0#80-90#TCP"),
+//					pulumi.String("ACCEPT#ipmg-3loavam6#80-90#TCP"),
+//				},
+//				Egresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+//					pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+//					pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -60,7 +63,9 @@ import (
 // Security group lite rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+//
+//	$ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+//
 // ```
 type GroupLiteRule struct {
 	pulumi.CustomResourceState
@@ -171,7 +176,7 @@ func (i *GroupLiteRule) ToGroupLiteRuleOutputWithContext(ctx context.Context) Gr
 // GroupLiteRuleArrayInput is an input type that accepts GroupLiteRuleArray and GroupLiteRuleArrayOutput values.
 // You can construct a concrete instance of `GroupLiteRuleArrayInput` via:
 //
-//          GroupLiteRuleArray{ GroupLiteRuleArgs{...} }
+//	GroupLiteRuleArray{ GroupLiteRuleArgs{...} }
 type GroupLiteRuleArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +201,7 @@ func (i GroupLiteRuleArray) ToGroupLiteRuleArrayOutputWithContext(ctx context.Co
 // GroupLiteRuleMapInput is an input type that accepts GroupLiteRuleMap and GroupLiteRuleMapOutput values.
 // You can construct a concrete instance of `GroupLiteRuleMapInput` via:
 //
-//          GroupLiteRuleMap{ "key": GroupLiteRuleArgs{...} }
+//	GroupLiteRuleMap{ "key": GroupLiteRuleArgs{...} }
 type GroupLiteRuleMapInput interface {
 	pulumi.Input
 

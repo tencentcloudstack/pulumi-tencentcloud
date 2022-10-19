@@ -21,7 +21,9 @@ import (
 // KubernetesClusterEndpoint instance can be imported by passing cluster id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
+//
+//	$ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
+//
 // ```
 type ClusterEndpoint struct {
 	pulumi.CustomResourceState
@@ -214,7 +216,7 @@ func (i *ClusterEndpoint) ToClusterEndpointOutputWithContext(ctx context.Context
 // ClusterEndpointArrayInput is an input type that accepts ClusterEndpointArray and ClusterEndpointArrayOutput values.
 // You can construct a concrete instance of `ClusterEndpointArrayInput` via:
 //
-//          ClusterEndpointArray{ ClusterEndpointArgs{...} }
+//	ClusterEndpointArray{ ClusterEndpointArgs{...} }
 type ClusterEndpointArrayInput interface {
 	pulumi.Input
 
@@ -239,7 +241,7 @@ func (i ClusterEndpointArray) ToClusterEndpointArrayOutputWithContext(ctx contex
 // ClusterEndpointMapInput is an input type that accepts ClusterEndpointMap and ClusterEndpointMapOutput values.
 // You can construct a concrete instance of `ClusterEndpointMapInput` via:
 //
-//          ClusterEndpointMap{ "key": ClusterEndpointArgs{...} }
+//	ClusterEndpointMap{ "key": ClusterEndpointArgs{...} }
 type ClusterEndpointMapInput interface {
 	pulumi.Input
 

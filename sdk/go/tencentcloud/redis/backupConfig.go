@@ -19,35 +19,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewBackupConfig(ctx, "redislab", &Redis.BackupConfigArgs{
-// 			BackupPeriods: pulumi.StringArray{
-// 				pulumi.String("Monday"),
-// 			},
-// 			BackupTime: pulumi.String("04:00-05:00"),
-// 			RedisId:    pulumi.String("crs-7yl0q0dd"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewBackupConfig(ctx, "redislab", &Redis.BackupConfigArgs{
+//				BackupPeriods: pulumi.StringArray{
+//					pulumi.String("Monday"),
+//				},
+//				BackupTime: pulumi.String("04:00-05:00"),
+//				RedisId:    pulumi.String("crs-7yl0q0dd"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// Redis
+// # Redis
 //
 // backup config can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+//
+//	$ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+//
 // ```
 type BackupConfig struct {
 	pulumi.CustomResourceState
@@ -171,7 +176,7 @@ func (i *BackupConfig) ToBackupConfigOutputWithContext(ctx context.Context) Back
 // BackupConfigArrayInput is an input type that accepts BackupConfigArray and BackupConfigArrayOutput values.
 // You can construct a concrete instance of `BackupConfigArrayInput` via:
 //
-//          BackupConfigArray{ BackupConfigArgs{...} }
+//	BackupConfigArray{ BackupConfigArgs{...} }
 type BackupConfigArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +201,7 @@ func (i BackupConfigArray) ToBackupConfigArrayOutputWithContext(ctx context.Cont
 // BackupConfigMapInput is an input type that accepts BackupConfigMap and BackupConfigMapOutput values.
 // You can construct a concrete instance of `BackupConfigMapInput` via:
 //
-//          BackupConfigMap{ "key": BackupConfigArgs{...} }
+//	BackupConfigMap{ "key": BackupConfigArgs{...} }
 type BackupConfigMapInput interface {
 	pulumi.Input
 

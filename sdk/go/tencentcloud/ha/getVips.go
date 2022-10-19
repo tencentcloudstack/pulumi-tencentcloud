@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ha.GetVips(ctx, &ha.GetVipsArgs{
-// 			AddressIp: pulumi.StringRef("10.0.4.16"),
-// 			Id:        pulumi.StringRef("havip-kjqwe4ba"),
-// 			Name:      pulumi.StringRef("test"),
-// 			SubnetId:  pulumi.StringRef("subnet-4d4m4cd4"),
-// 			VpcId:     pulumi.StringRef("vpc-gzea3dd7"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ha.GetVips(ctx, &ha.GetVipsArgs{
+//				AddressIp: pulumi.StringRef("10.0.4.16"),
+//				Id:        pulumi.StringRef("havip-kjqwe4ba"),
+//				Name:      pulumi.StringRef("test"),
+//				SubnetId:  pulumi.StringRef("subnet-4d4m4cd4"),
+//				VpcId:     pulumi.StringRef("vpc-gzea3dd7"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetVips(ctx *pulumi.Context, args *GetVipsArgs, opts ...pulumi.InvokeOption) (*GetVipsResult, error) {
 	var rv GetVipsResult
