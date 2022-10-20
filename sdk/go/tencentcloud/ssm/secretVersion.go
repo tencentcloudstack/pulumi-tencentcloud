@@ -88,6 +88,7 @@ func NewSecretVersion(ctx *pulumi.Context,
 	if args.VersionId == nil {
 		return nil, errors.New("invalid value for required argument 'VersionId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SecretVersion
 	err := ctx.RegisterResource("tencentcloud:Ssm/secretVersion:SecretVersion", name, args, &resource, opts...)
 	if err != nil {

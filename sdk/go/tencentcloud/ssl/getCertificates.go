@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetCertificates(ctx *pulumi.Context, args *GetCertificatesArgs, opts ...pulumi.InvokeOption) (*GetCertificatesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetCertificatesResult
 	err := ctx.Invoke("tencentcloud:Ssl/getCertificates:getCertificates", args, &rv, opts...)
 	if err != nil {

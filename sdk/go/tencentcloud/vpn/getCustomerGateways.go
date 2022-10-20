@@ -12,6 +12,7 @@ import (
 
 // Use this data source to query detailed information of VPN customer gateways.
 func GetCustomerGateways(ctx *pulumi.Context, args *GetCustomerGatewaysArgs, opts ...pulumi.InvokeOption) (*GetCustomerGatewaysResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetCustomerGatewaysResult
 	err := ctx.Invoke("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args, &rv, opts...)
 	if err != nil {

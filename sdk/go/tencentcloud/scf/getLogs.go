@@ -46,6 +46,7 @@ import (
 //
 // ```
 func GetLogs(ctx *pulumi.Context, args *GetLogsArgs, opts ...pulumi.InvokeOption) (*GetLogsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetLogsResult
 	err := ctx.Invoke("tencentcloud:Scf/getLogs:getLogs", args, &rv, opts...)
 	if err != nil {

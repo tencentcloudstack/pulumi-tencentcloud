@@ -136,6 +136,7 @@ func NewLayer4Listener(ctx *pulumi.Context,
 	if args.RealserverType == nil {
 		return nil, errors.New("invalid value for required argument 'RealserverType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Layer4Listener
 	err := ctx.RegisterResource("tencentcloud:Gaap/layer4Listener:Layer4Listener", name, args, &resource, opts...)
 	if err != nil {

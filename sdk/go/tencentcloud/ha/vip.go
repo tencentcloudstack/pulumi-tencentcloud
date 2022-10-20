@@ -86,6 +86,7 @@ func NewVip(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Vip
 	err := ctx.RegisterResource("tencentcloud:Ha/vip:Vip", name, args, &resource, opts...)
 	if err != nil {

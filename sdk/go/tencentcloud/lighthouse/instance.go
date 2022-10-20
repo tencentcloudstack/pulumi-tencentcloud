@@ -157,6 +157,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.RenewFlag == nil {
 		return nil, errors.New("invalid value for required argument 'RenewFlag'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/instance:Instance", name, args, &resource, opts...)
 	if err != nil {

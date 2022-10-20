@@ -75,6 +75,7 @@ func NewLogTopic(ctx *pulumi.Context,
 	if args.TopicName == nil {
 		return nil, errors.New("invalid value for required argument 'TopicName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource LogTopic
 	err := ctx.RegisterResource("tencentcloud:Clb/logTopic:LogTopic", name, args, &resource, opts...)
 	if err != nil {

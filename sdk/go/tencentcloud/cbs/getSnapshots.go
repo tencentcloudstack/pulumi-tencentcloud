@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetSnapshots(ctx *pulumi.Context, args *GetSnapshotsArgs, opts ...pulumi.InvokeOption) (*GetSnapshotsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSnapshotsResult
 	err := ctx.Invoke("tencentcloud:Cbs/getSnapshots:getSnapshots", args, &rv, opts...)
 	if err != nil {

@@ -31,6 +31,7 @@ func NewBindingReceiver(ctx *pulumi.Context,
 	if args.GroupId == nil {
 		return nil, errors.New("invalid value for required argument 'GroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource BindingReceiver
 	err := ctx.RegisterResource("tencentcloud:Monitor/bindingReceiver:BindingReceiver", name, args, &resource, opts...)
 	if err != nil {

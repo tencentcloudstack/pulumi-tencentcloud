@@ -182,6 +182,7 @@ func NewScalingConfig(ctx *pulumi.Context,
 	if args.InstanceTypes == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceTypes'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ScalingConfig
 	err := ctx.RegisterResource("tencentcloud:As/scalingConfig:ScalingConfig", name, args, &resource, opts...)
 	if err != nil {

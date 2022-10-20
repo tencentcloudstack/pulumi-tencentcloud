@@ -117,6 +117,7 @@ func NewTableEntry(ctx *pulumi.Context,
 	if args.RouteTableId == nil {
 		return nil, errors.New("invalid value for required argument 'RouteTableId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TableEntry
 	err := ctx.RegisterResource("tencentcloud:Route/tableEntry:TableEntry", name, args, &resource, opts...)
 	if err != nil {

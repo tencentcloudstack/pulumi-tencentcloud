@@ -92,6 +92,7 @@ func NewCustomDomain(ctx *pulumi.Context,
 	if args.SubDomain == nil {
 		return nil, errors.New("invalid value for required argument 'SubDomain'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource CustomDomain
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/customDomain:CustomDomain", name, args, &resource, opts...)
 	if err != nil {

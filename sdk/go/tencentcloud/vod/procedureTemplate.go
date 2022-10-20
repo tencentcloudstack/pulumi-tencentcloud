@@ -160,6 +160,7 @@ func NewProcedureTemplate(ctx *pulumi.Context,
 		args = &ProcedureTemplateArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ProcedureTemplate
 	err := ctx.RegisterResource("tencentcloud:Vod/procedureTemplate:ProcedureTemplate", name, args, &resource, opts...)
 	if err != nil {

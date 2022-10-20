@@ -86,6 +86,7 @@ func NewRecord(ctx *pulumi.Context,
 	if args.Value == nil {
 		return nil, errors.New("invalid value for required argument 'Value'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Record
 	err := ctx.RegisterResource("tencentcloud:Dnspod/record:Record", name, args, &resource, opts...)
 	if err != nil {

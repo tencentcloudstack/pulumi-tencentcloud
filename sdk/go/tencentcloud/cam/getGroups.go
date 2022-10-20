@@ -45,6 +45,7 @@ import (
 //
 // ```
 func GetGroups(ctx *pulumi.Context, args *GetGroupsArgs, opts ...pulumi.InvokeOption) (*GetGroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetGroupsResult
 	err := ctx.Invoke("tencentcloud:Cam/getGroups:getGroups", args, &rv, opts...)
 	if err != nil {

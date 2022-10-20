@@ -184,6 +184,7 @@ func NewFunction(ctx *pulumi.Context,
 	if args.Runtime == nil {
 		return nil, errors.New("invalid value for required argument 'Runtime'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Function
 	err := ctx.RegisterResource("tencentcloud:Scf/function:Function", name, args, &resource, opts...)
 	if err != nil {

@@ -362,6 +362,7 @@ func NewListener(ctx *pulumi.Context,
 	if args.Protocol == nil {
 		return nil, errors.New("invalid value for required argument 'Protocol'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Listener
 	err := ctx.RegisterResource("tencentcloud:Clb/listener:Listener", name, args, &resource, opts...)
 	if err != nil {

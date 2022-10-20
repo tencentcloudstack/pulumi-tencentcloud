@@ -114,6 +114,7 @@ func NewHttpDomain(ctx *pulumi.Context,
 	if args.ListenerId == nil {
 		return nil, errors.New("invalid value for required argument 'ListenerId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource HttpDomain
 	err := ctx.RegisterResource("tencentcloud:Gaap/httpDomain:HttpDomain", name, args, &resource, opts...)
 	if err != nil {

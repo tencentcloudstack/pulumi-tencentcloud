@@ -82,6 +82,7 @@ func NewUsagePlan(ctx *pulumi.Context,
 	if args.UsagePlanName == nil {
 		return nil, errors.New("invalid value for required argument 'UsagePlanName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource UsagePlan
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/usagePlan:UsagePlan", name, args, &resource, opts...)
 	if err != nil {

@@ -123,6 +123,7 @@ func NewConfigExtra(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ConfigExtra
 	err := ctx.RegisterResource("tencentcloud:Cls/configExtra:ConfigExtra", name, args, &resource, opts...)
 	if err != nil {

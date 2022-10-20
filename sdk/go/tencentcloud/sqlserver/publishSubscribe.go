@@ -88,6 +88,7 @@ func NewPublishSubscribe(ctx *pulumi.Context,
 	if args.SubscribeInstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'SubscribeInstanceId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource PublishSubscribe
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe", name, args, &resource, opts...)
 	if err != nil {

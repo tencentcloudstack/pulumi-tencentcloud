@@ -471,6 +471,7 @@ func NewBucket(ctx *pulumi.Context,
 	if args.Bucket == nil {
 		return nil, errors.New("invalid value for required argument 'Bucket'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Bucket
 	err := ctx.RegisterResource("tencentcloud:Cos/bucket:Bucket", name, args, &resource, opts...)
 	if err != nil {

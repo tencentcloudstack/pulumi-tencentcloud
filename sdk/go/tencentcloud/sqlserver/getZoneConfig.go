@@ -37,6 +37,7 @@ import (
 //
 // ```
 func GetZoneConfig(ctx *pulumi.Context, args *GetZoneConfigArgs, opts ...pulumi.InvokeOption) (*GetZoneConfigResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetZoneConfigResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getZoneConfig:getZoneConfig", args, &rv, opts...)
 	if err != nil {

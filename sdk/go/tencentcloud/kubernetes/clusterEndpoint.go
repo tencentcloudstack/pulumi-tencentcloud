@@ -68,6 +68,7 @@ func NewClusterEndpoint(ctx *pulumi.Context,
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ClusterEndpoint
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint", name, args, &resource, opts...)
 	if err != nil {

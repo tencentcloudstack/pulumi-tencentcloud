@@ -53,6 +53,7 @@ import (
 //
 // ```
 func GetTopics(ctx *pulumi.Context, args *GetTopicsArgs, opts ...pulumi.InvokeOption) (*GetTopicsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTopicsResult
 	err := ctx.Invoke("tencentcloud:Ckafka/getTopics:getTopics", args, &rv, opts...)
 	if err != nil {

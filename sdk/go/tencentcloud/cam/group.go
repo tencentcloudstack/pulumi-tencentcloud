@@ -65,6 +65,7 @@ func NewGroup(ctx *pulumi.Context,
 		args = &GroupArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Group
 	err := ctx.RegisterResource("tencentcloud:Cam/group:Group", name, args, &resource, opts...)
 	if err != nil {

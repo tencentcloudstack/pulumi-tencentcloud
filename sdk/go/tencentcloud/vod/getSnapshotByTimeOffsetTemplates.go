@@ -48,6 +48,7 @@ import (
 //
 // ```
 func GetSnapshotByTimeOffsetTemplates(ctx *pulumi.Context, args *GetSnapshotByTimeOffsetTemplatesArgs, opts ...pulumi.InvokeOption) (*GetSnapshotByTimeOffsetTemplatesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSnapshotByTimeOffsetTemplatesResult
 	err := ctx.Invoke("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args, &rv, opts...)
 	if err != nil {

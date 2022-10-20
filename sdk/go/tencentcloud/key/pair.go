@@ -73,6 +73,7 @@ func NewPair(ctx *pulumi.Context,
 	if args.PublicKey == nil {
 		return nil, errors.New("invalid value for required argument 'PublicKey'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Pair
 	err := ctx.RegisterResource("tencentcloud:Key/pair:Pair", name, args, &resource, opts...)
 	if err != nil {

@@ -64,6 +64,7 @@ import (
 //
 // ```
 func GetSubnets(ctx *pulumi.Context, args *GetSubnetsArgs, opts ...pulumi.InvokeOption) (*GetSubnetsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSubnetsResult
 	err := ctx.Invoke("tencentcloud:Vpc/getSubnets:getSubnets", args, &rv, opts...)
 	if err != nil {

@@ -94,6 +94,7 @@ func NewMachineGroup(ctx *pulumi.Context,
 	if args.MachineGroupType == nil {
 		return nil, errors.New("invalid value for required argument 'MachineGroupType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource MachineGroup
 	err := ctx.RegisterResource("tencentcloud:Cls/machineGroup:MachineGroup", name, args, &resource, opts...)
 	if err != nil {

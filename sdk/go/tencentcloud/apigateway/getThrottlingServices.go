@@ -52,6 +52,7 @@ import (
 //
 // ```
 func GetThrottlingServices(ctx *pulumi.Context, args *GetThrottlingServicesArgs, opts ...pulumi.InvokeOption) (*GetThrottlingServicesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetThrottlingServicesResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args, &rv, opts...)
 	if err != nil {

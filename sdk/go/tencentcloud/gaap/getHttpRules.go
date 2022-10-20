@@ -77,6 +77,7 @@ import (
 //
 // ```
 func GetHttpRules(ctx *pulumi.Context, args *GetHttpRulesArgs, opts ...pulumi.InvokeOption) (*GetHttpRulesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetHttpRulesResult
 	err := ctx.Invoke("tencentcloud:Gaap/getHttpRules:getHttpRules", args, &rv, opts...)
 	if err != nil {

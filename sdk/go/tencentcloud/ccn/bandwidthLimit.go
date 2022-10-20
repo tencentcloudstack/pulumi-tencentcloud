@@ -128,6 +128,7 @@ func NewBandwidthLimit(ctx *pulumi.Context,
 	if args.Region == nil {
 		return nil, errors.New("invalid value for required argument 'Region'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource BandwidthLimit
 	err := ctx.RegisterResource("tencentcloud:Ccn/bandwidthLimit:BandwidthLimit", name, args, &resource, opts...)
 	if err != nil {

@@ -49,6 +49,7 @@ func NewTmpExporterIntegration(ctx *pulumi.Context,
 	if args.KubeType == nil {
 		return nil, errors.New("invalid value for required argument 'KubeType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TmpExporterIntegration
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpExporterIntegration:TmpExporterIntegration", name, args, &resource, opts...)
 	if err != nil {

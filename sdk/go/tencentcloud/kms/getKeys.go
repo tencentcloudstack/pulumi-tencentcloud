@@ -42,6 +42,7 @@ import (
 //
 // ```
 func GetKeys(ctx *pulumi.Context, args *GetKeysArgs, opts ...pulumi.InvokeOption) (*GetKeysResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetKeysResult
 	err := ctx.Invoke("tencentcloud:Kms/getKeys:getKeys", args, &rv, opts...)
 	if err != nil {

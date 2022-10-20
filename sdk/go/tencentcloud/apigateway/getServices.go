@@ -52,6 +52,7 @@ import (
 //
 // ```
 func GetServices(ctx *pulumi.Context, args *GetServicesArgs, opts ...pulumi.InvokeOption) (*GetServicesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetServicesResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getServices:getServices", args, &rv, opts...)
 	if err != nil {

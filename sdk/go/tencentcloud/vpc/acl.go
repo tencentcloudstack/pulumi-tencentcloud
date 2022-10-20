@@ -86,6 +86,7 @@ func NewAcl(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Acl
 	err := ctx.RegisterResource("tencentcloud:Vpc/acl:Acl", name, args, &resource, opts...)
 	if err != nil {

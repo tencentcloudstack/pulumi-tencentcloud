@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetFileSystems(ctx *pulumi.Context, args *GetFileSystemsArgs, opts ...pulumi.InvokeOption) (*GetFileSystemsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetFileSystemsResult
 	err := ctx.Invoke("tencentcloud:Cfs/getFileSystems:getFileSystems", args, &rv, opts...)
 	if err != nil {

@@ -43,6 +43,7 @@ import (
 //
 // ```
 func GetClusterCommonNames(ctx *pulumi.Context, args *GetClusterCommonNamesArgs, opts ...pulumi.InvokeOption) (*GetClusterCommonNamesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetClusterCommonNamesResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args, &rv, opts...)
 	if err != nil {

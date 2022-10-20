@@ -96,6 +96,7 @@ func NewUrlPurge(ctx *pulumi.Context,
 	if args.Urls == nil {
 		return nil, errors.New("invalid value for required argument 'Urls'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource UrlPurge
 	err := ctx.RegisterResource("tencentcloud:Cdn/urlPurge:UrlPurge", name, args, &resource, opts...)
 	if err != nil {

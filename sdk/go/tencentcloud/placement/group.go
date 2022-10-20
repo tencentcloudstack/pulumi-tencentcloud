@@ -73,6 +73,7 @@ func NewGroup(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Group
 	err := ctx.RegisterResource("tencentcloud:Placement/group:Group", name, args, &resource, opts...)
 	if err != nil {

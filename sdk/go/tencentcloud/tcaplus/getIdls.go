@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetIdls(ctx *pulumi.Context, args *GetIdlsArgs, opts ...pulumi.InvokeOption) (*GetIdlsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIdlsResult
 	err := ctx.Invoke("tencentcloud:Tcaplus/getIdls:getIdls", args, &rv, opts...)
 	if err != nil {

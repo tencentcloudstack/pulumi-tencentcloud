@@ -83,6 +83,7 @@ func NewUser(ctx *pulumi.Context,
 	if args.Password == nil {
 		return nil, errors.New("invalid value for required argument 'Password'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource User
 	err := ctx.RegisterResource("tencentcloud:Ckafka/user:User", name, args, &resource, opts...)
 	if err != nil {

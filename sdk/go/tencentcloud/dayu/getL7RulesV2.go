@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetL7RulesV2(ctx *pulumi.Context, args *GetL7RulesV2Args, opts ...pulumi.InvokeOption) (*GetL7RulesV2Result, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetL7RulesV2Result
 	err := ctx.Invoke("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", args, &rv, opts...)
 	if err != nil {

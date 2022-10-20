@@ -145,6 +145,7 @@ func NewScalingGroup(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ScalingGroup
 	err := ctx.RegisterResource("tencentcloud:As/scalingGroup:ScalingGroup", name, args, &resource, opts...)
 	if err != nil {

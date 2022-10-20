@@ -61,6 +61,7 @@ func NewSnapshotPolicyAttachment(ctx *pulumi.Context,
 	if args.StorageId == nil {
 		return nil, errors.New("invalid value for required argument 'StorageId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SnapshotPolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment", name, args, &resource, opts...)
 	if err != nil {

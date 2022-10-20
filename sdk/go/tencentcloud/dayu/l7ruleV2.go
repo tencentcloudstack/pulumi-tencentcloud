@@ -93,6 +93,7 @@ func NewL7RuleV2(ctx *pulumi.Context,
 	if args.Rule == nil {
 		return nil, errors.New("invalid value for required argument 'Rule'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource L7RuleV2
 	err := ctx.RegisterResource("tencentcloud:Dayu/l7RuleV2:L7RuleV2", name, args, &resource, opts...)
 	if err != nil {

@@ -100,6 +100,7 @@ func NewUser(ctx *pulumi.Context,
 		args = &UserArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource User
 	err := ctx.RegisterResource("tencentcloud:Cam/user:User", name, args, &resource, opts...)
 	if err != nil {

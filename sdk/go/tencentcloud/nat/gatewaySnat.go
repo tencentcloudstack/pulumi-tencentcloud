@@ -74,6 +74,7 @@ func NewGatewaySnat(ctx *pulumi.Context,
 	if args.ResourceType == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource GatewaySnat
 	err := ctx.RegisterResource("tencentcloud:Nat/gatewaySnat:GatewaySnat", name, args, &resource, opts...)
 	if err != nil {

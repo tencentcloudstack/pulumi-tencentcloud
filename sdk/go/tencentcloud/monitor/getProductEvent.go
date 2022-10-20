@@ -43,6 +43,7 @@ import (
 //
 // ```
 func GetProductEvent(ctx *pulumi.Context, args *GetProductEventArgs, opts ...pulumi.InvokeOption) (*GetProductEventResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetProductEventResult
 	err := ctx.Invoke("tencentcloud:Monitor/getProductEvent:getProductEvent", args, &rv, opts...)
 	if err != nil {

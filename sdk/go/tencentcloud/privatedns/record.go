@@ -92,6 +92,7 @@ func NewRecord(ctx *pulumi.Context,
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Record
 	err := ctx.RegisterResource("tencentcloud:PrivateDns/record:Record", name, args, &resource, opts...)
 	if err != nil {

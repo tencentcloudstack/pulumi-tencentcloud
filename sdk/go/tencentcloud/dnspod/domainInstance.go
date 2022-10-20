@@ -76,6 +76,7 @@ func NewDomainInstance(ctx *pulumi.Context,
 	if args.Domain == nil {
 		return nil, errors.New("invalid value for required argument 'Domain'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DomainInstance
 	err := ctx.RegisterResource("tencentcloud:Dnspod/domainInstance:DomainInstance", name, args, &resource, opts...)
 	if err != nil {

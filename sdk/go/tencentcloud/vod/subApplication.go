@@ -72,6 +72,7 @@ func NewSubApplication(ctx *pulumi.Context,
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SubApplication
 	err := ctx.RegisterResource("tencentcloud:Vod/subApplication:SubApplication", name, args, &resource, opts...)
 	if err != nil {

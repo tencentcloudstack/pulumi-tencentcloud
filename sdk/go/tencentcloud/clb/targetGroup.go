@@ -102,6 +102,7 @@ func NewTargetGroup(ctx *pulumi.Context,
 		args = &TargetGroupArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TargetGroup
 	err := ctx.RegisterResource("tencentcloud:Clb/targetGroup:TargetGroup", name, args, &resource, opts...)
 	if err != nil {

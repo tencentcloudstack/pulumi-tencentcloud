@@ -171,6 +171,8 @@ def get_l7_rules_v2(business: Optional[str] = None,
         opts = pulumi.InvokeOptions()
     if opts.version is None:
         opts.version = _utilities.get_version()
+        if opts.plugin_download_url is None:
+            opts.plugin_download_url = _utilities.get_plugin_download_url()
     __ret__ = pulumi.runtime.invoke('tencentcloud:Dayu/getL7RulesV2:getL7RulesV2', __args__, opts=opts, typ=GetL7RulesV2Result).value
 
     return AwaitableGetL7RulesV2Result(

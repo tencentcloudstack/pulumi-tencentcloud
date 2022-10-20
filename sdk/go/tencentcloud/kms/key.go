@@ -87,6 +87,7 @@ func NewKey(ctx *pulumi.Context,
 	if args.Alias == nil {
 		return nil, errors.New("invalid value for required argument 'Alias'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Key
 	err := ctx.RegisterResource("tencentcloud:Kms/key:Key", name, args, &resource, opts...)
 	if err != nil {

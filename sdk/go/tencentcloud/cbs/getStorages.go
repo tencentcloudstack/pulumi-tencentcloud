@@ -87,6 +87,7 @@ import (
 //
 // ```
 func GetStorages(ctx *pulumi.Context, args *GetStoragesArgs, opts ...pulumi.InvokeOption) (*GetStoragesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetStoragesResult
 	err := ctx.Invoke("tencentcloud:Cbs/getStorages:getStorages", args, &rv, opts...)
 	if err != nil {

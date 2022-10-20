@@ -12,6 +12,7 @@ import (
 
 // Provide a datasource to query default mysql parameters.
 func GetDefaultParams(ctx *pulumi.Context, args *GetDefaultParamsArgs, opts ...pulumi.InvokeOption) (*GetDefaultParamsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetDefaultParamsResult
 	err := ctx.Invoke("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args, &rv, opts...)
 	if err != nil {

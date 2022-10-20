@@ -130,6 +130,7 @@ func NewL4Rule(ctx *pulumi.Context,
 	if args.SourceType == nil {
 		return nil, errors.New("invalid value for required argument 'SourceType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource L4Rule
 	err := ctx.RegisterResource("tencentcloud:Dayu/l4Rule:L4Rule", name, args, &resource, opts...)
 	if err != nil {

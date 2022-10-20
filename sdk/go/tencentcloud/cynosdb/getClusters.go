@@ -42,6 +42,7 @@ import (
 //
 // ```
 func GetClusters(ctx *pulumi.Context, args *GetClustersArgs, opts ...pulumi.InvokeOption) (*GetClustersResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetClustersResult
 	err := ctx.Invoke("tencentcloud:Cynosdb/getClusters:getClusters", args, &rv, opts...)
 	if err != nil {

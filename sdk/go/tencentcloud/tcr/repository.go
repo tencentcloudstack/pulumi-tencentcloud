@@ -92,6 +92,7 @@ func NewRepository(ctx *pulumi.Context,
 	if args.NamespaceName == nil {
 		return nil, errors.New("invalid value for required argument 'NamespaceName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Repository
 	err := ctx.RegisterResource("tencentcloud:Tcr/repository:Repository", name, args, &resource, opts...)
 	if err != nil {

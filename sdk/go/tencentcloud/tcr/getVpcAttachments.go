@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetVpcAttachments(ctx *pulumi.Context, args *GetVpcAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetVpcAttachmentsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetVpcAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args, &rv, opts...)
 	if err != nil {

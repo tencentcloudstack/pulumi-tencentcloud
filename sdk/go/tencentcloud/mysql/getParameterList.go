@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetParameterList(ctx *pulumi.Context, args *GetParameterListArgs, opts ...pulumi.InvokeOption) (*GetParameterListResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetParameterListResult
 	err := ctx.Invoke("tencentcloud:Mysql/getParameterList:getParameterList", args, &rv, opts...)
 	if err != nil {

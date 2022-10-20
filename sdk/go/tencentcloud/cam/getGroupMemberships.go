@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetGroupMemberships(ctx *pulumi.Context, args *GetGroupMembershipsArgs, opts ...pulumi.InvokeOption) (*GetGroupMembershipsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetGroupMembershipsResult
 	err := ctx.Invoke("tencentcloud:Cam/getGroupMemberships:getGroupMemberships", args, &rv, opts...)
 	if err != nil {

@@ -29,6 +29,7 @@ func NewTmpTkeTemplate(ctx *pulumi.Context,
 	if args.Template == nil {
 		return nil, errors.New("invalid value for required argument 'Template'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TmpTkeTemplate
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpTkeTemplate:TmpTkeTemplate", name, args, &resource, opts...)
 	if err != nil {

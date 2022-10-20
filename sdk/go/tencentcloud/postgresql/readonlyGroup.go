@@ -109,6 +109,7 @@ func NewReadonlyGroup(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ReadonlyGroup
 	err := ctx.RegisterResource("tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup", name, args, &resource, opts...)
 	if err != nil {

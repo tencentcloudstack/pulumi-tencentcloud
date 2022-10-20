@@ -96,6 +96,7 @@ func NewFileSystem(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource FileSystem
 	err := ctx.RegisterResource("tencentcloud:Cfs/fileSystem:FileSystem", name, args, &resource, opts...)
 	if err != nil {

@@ -51,6 +51,7 @@ import (
 //
 // ```
 func GetCustomerDomains(ctx *pulumi.Context, args *GetCustomerDomainsArgs, opts ...pulumi.InvokeOption) (*GetCustomerDomainsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetCustomerDomainsResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args, &rv, opts...)
 	if err != nil {

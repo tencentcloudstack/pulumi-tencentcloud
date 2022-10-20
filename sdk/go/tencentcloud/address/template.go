@@ -71,6 +71,7 @@ func NewTemplate(ctx *pulumi.Context,
 	if args.Addresses == nil {
 		return nil, errors.New("invalid value for required argument 'Addresses'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Template
 	err := ctx.RegisterResource("tencentcloud:Address/template:Template", name, args, &resource, opts...)
 	if err != nil {

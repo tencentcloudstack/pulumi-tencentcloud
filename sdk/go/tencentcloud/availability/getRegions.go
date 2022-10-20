@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetRegions(ctx *pulumi.Context, args *GetRegionsArgs, opts ...pulumi.InvokeOption) (*GetRegionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetRegionsResult
 	err := ctx.Invoke("tencentcloud:Availability/getRegions:getRegions", args, &rv, opts...)
 	if err != nil {

@@ -85,6 +85,7 @@ func NewSnapshotPolicy(ctx *pulumi.Context,
 	if args.SnapshotPolicyName == nil {
 		return nil, errors.New("invalid value for required argument 'SnapshotPolicyName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SnapshotPolicy
 	err := ctx.RegisterResource("tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy", name, args, &resource, opts...)
 	if err != nil {

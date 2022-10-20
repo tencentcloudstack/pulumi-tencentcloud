@@ -74,6 +74,7 @@ func NewCustomerGateway(ctx *pulumi.Context,
 	if args.PublicIpAddress == nil {
 		return nil, errors.New("invalid value for required argument 'PublicIpAddress'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource CustomerGateway
 	err := ctx.RegisterResource("tencentcloud:Vpn/customerGateway:CustomerGateway", name, args, &resource, opts...)
 	if err != nil {

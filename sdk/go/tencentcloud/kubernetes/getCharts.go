@@ -37,6 +37,7 @@ import (
 //
 // ```
 func GetCharts(ctx *pulumi.Context, args *GetChartsArgs, opts ...pulumi.InvokeOption) (*GetChartsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetChartsResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getCharts:getCharts", args, &rv, opts...)
 	if err != nil {

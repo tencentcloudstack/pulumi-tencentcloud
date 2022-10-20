@@ -42,6 +42,7 @@ import (
 //
 // ```
 func GetNamespaces(ctx *pulumi.Context, args *GetNamespacesArgs, opts ...pulumi.InvokeOption) (*GetNamespacesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetNamespacesResult
 	err := ctx.Invoke("tencentcloud:Scf/getNamespaces:getNamespaces", args, &rv, opts...)
 	if err != nil {

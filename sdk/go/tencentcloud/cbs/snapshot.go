@@ -81,6 +81,7 @@ func NewSnapshot(ctx *pulumi.Context,
 	if args.StorageId == nil {
 		return nil, errors.New("invalid value for required argument 'StorageId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Snapshot
 	err := ctx.RegisterResource("tencentcloud:Cbs/snapshot:Snapshot", name, args, &resource, opts...)
 	if err != nil {

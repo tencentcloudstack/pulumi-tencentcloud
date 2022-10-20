@@ -151,6 +151,7 @@ func NewPrivilege(ctx *pulumi.Context,
 	if args.MysqlId == nil {
 		return nil, errors.New("invalid value for required argument 'MysqlId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Privilege
 	err := ctx.RegisterResource("tencentcloud:Mysql/privilege:Privilege", name, args, &resource, opts...)
 	if err != nil {

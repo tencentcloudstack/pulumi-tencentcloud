@@ -62,6 +62,7 @@ import (
 //
 // ```
 func GetIpStrategies(ctx *pulumi.Context, args *GetIpStrategiesArgs, opts ...pulumi.InvokeOption) (*GetIpStrategiesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIpStrategiesResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args, &rv, opts...)
 	if err != nil {

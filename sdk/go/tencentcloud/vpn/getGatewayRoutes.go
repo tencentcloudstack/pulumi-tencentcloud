@@ -45,6 +45,7 @@ import (
 //
 // ```
 func GetGatewayRoutes(ctx *pulumi.Context, args *GetGatewayRoutesArgs, opts ...pulumi.InvokeOption) (*GetGatewayRoutesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetGatewayRoutesResult
 	err := ctx.Invoke("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args, &rv, opts...)
 	if err != nil {

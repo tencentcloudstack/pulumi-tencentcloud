@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetPolicyConditions(ctx *pulumi.Context, args *GetPolicyConditionsArgs, opts ...pulumi.InvokeOption) (*GetPolicyConditionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetPolicyConditionsResult
 	err := ctx.Invoke("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args, &rv, opts...)
 	if err != nil {

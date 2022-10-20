@@ -115,6 +115,7 @@ func NewCosShipper(ctx *pulumi.Context,
 	if args.TopicId == nil {
 		return nil, errors.New("invalid value for required argument 'TopicId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource CosShipper
 	err := ctx.RegisterResource("tencentcloud:Cls/cosShipper:CosShipper", name, args, &resource, opts...)
 	if err != nil {

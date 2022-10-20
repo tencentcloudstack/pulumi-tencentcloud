@@ -279,6 +279,7 @@ func NewNodePool(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource NodePool
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/nodePool:NodePool", name, args, &resource, opts...)
 	if err != nil {

@@ -106,6 +106,7 @@ func NewDomainErrorPage(ctx *pulumi.Context,
 	if args.ListenerId == nil {
 		return nil, errors.New("invalid value for required argument 'ListenerId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DomainErrorPage
 	err := ctx.RegisterResource("tencentcloud:Gaap/domainErrorPage:DomainErrorPage", name, args, &resource, opts...)
 	if err != nil {

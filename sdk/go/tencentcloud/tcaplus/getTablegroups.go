@@ -12,6 +12,7 @@ import (
 
 // Use this data source to query table groups of the TcaplusDB cluster.
 func GetTablegroups(ctx *pulumi.Context, args *GetTablegroupsArgs, opts ...pulumi.InvokeOption) (*GetTablegroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTablegroupsResult
 	err := ctx.Invoke("tencentcloud:Tcaplus/getTablegroups:getTablegroups", args, &rv, opts...)
 	if err != nil {

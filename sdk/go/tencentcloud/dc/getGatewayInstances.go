@@ -55,6 +55,7 @@ import (
 //
 // ```
 func GetGatewayInstances(ctx *pulumi.Context, args *GetGatewayInstancesArgs, opts ...pulumi.InvokeOption) (*GetGatewayInstancesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetGatewayInstancesResult
 	err := ctx.Invoke("tencentcloud:Dc/getGatewayInstances:getGatewayInstances", args, &rv, opts...)
 	if err != nil {

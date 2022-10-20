@@ -44,6 +44,7 @@ import (
 //
 // ```
 func GetRedirections(ctx *pulumi.Context, args *GetRedirectionsArgs, opts ...pulumi.InvokeOption) (*GetRedirectionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetRedirectionsResult
 	err := ctx.Invoke("tencentcloud:Clb/getRedirections:getRedirections", args, &rv, opts...)
 	if err != nil {

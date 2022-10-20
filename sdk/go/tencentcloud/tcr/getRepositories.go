@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetRepositories(ctx *pulumi.Context, args *GetRepositoriesArgs, opts ...pulumi.InvokeOption) (*GetRepositoriesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetRepositoriesResult
 	err := ctx.Invoke("tencentcloud:Tcr/getRepositories:getRepositories", args, &rv, opts...)
 	if err != nil {

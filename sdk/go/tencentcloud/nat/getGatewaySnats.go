@@ -45,6 +45,7 @@ import (
 //
 // ```
 func GetGatewaySnats(ctx *pulumi.Context, args *GetGatewaySnatsArgs, opts ...pulumi.InvokeOption) (*GetGatewaySnatsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetGatewaySnatsResult
 	err := ctx.Invoke("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args, &rv, opts...)
 	if err != nil {

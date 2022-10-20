@@ -52,6 +52,7 @@ import (
 //
 // ```
 func GetSecurityPolicies(ctx *pulumi.Context, args *GetSecurityPoliciesArgs, opts ...pulumi.InvokeOption) (*GetSecurityPoliciesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSecurityPoliciesResult
 	err := ctx.Invoke("tencentcloud:Gaap/getSecurityPolicies:getSecurityPolicies", args, &rv, opts...)
 	if err != nil {

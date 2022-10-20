@@ -39,6 +39,7 @@ import (
 //
 // ```
 func LookupEip(ctx *pulumi.Context, args *LookupEipArgs, opts ...pulumi.InvokeOption) (*LookupEipResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupEipResult
 	err := ctx.Invoke("tencentcloud:Dayu/getEip:getEip", args, &rv, opts...)
 	if err != nil {

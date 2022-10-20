@@ -325,6 +325,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.NetworkType == nil {
 		return nil, errors.New("invalid value for required argument 'NetworkType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Clb/instance:Instance", name, args, &resource, opts...)
 	if err != nil {

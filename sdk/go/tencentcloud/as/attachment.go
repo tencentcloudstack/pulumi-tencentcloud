@@ -64,6 +64,7 @@ func NewAttachment(ctx *pulumi.Context,
 	if args.ScalingGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ScalingGroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Attachment
 	err := ctx.RegisterResource("tencentcloud:As/attachment:Attachment", name, args, &resource, opts...)
 	if err != nil {

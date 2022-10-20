@@ -44,6 +44,7 @@ import (
 //
 // ```
 func GetListenerRules(ctx *pulumi.Context, args *GetListenerRulesArgs, opts ...pulumi.InvokeOption) (*GetListenerRulesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetListenerRulesResult
 	err := ctx.Invoke("tencentcloud:Clb/getListenerRules:getListenerRules", args, &rv, opts...)
 	if err != nil {

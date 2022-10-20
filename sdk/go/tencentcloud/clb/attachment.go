@@ -89,6 +89,7 @@ func NewAttachment(ctx *pulumi.Context,
 	if args.Targets == nil {
 		return nil, errors.New("invalid value for required argument 'Targets'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Attachment
 	err := ctx.RegisterResource("tencentcloud:Clb/attachment:Attachment", name, args, &resource, opts...)
 	if err != nil {

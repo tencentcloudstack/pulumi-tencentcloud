@@ -41,6 +41,7 @@ func NewLogSet(ctx *pulumi.Context,
 		args = &LogSetArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource LogSet
 	err := ctx.RegisterResource("tencentcloud:Clb/logSet:LogSet", name, args, &resource, opts...)
 	if err != nil {

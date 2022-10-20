@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetTemplateGroups(ctx *pulumi.Context, args *GetTemplateGroupsArgs, opts ...pulumi.InvokeOption) (*GetTemplateGroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTemplateGroupsResult
 	err := ctx.Invoke("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args, &rv, opts...)
 	if err != nil {

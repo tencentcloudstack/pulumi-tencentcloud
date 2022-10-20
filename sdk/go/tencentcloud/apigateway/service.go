@@ -113,6 +113,7 @@ func NewService(ctx *pulumi.Context,
 	if args.ServiceName == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Service
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/service:Service", name, args, &resource, opts...)
 	if err != nil {

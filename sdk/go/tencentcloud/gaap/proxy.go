@@ -108,6 +108,7 @@ func NewProxy(ctx *pulumi.Context,
 	if args.RealserverRegion == nil {
 		return nil, errors.New("invalid value for required argument 'RealserverRegion'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Proxy
 	err := ctx.RegisterResource("tencentcloud:Gaap/proxy:Proxy", name, args, &resource, opts...)
 	if err != nil {

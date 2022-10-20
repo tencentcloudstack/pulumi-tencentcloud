@@ -44,6 +44,7 @@ import (
 //
 // ```
 func GetClusterCredential(ctx *pulumi.Context, args *GetClusterCredentialArgs, opts ...pulumi.InvokeOption) (*GetClusterCredentialResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetClusterCredentialResult
 	err := ctx.Invoke("tencentcloud:Eks/getClusterCredential:getClusterCredential", args, &rv, opts...)
 	if err != nil {

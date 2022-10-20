@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetDdosPolicies(ctx *pulumi.Context, args *GetDdosPoliciesArgs, opts ...pulumi.InvokeOption) (*GetDdosPoliciesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetDdosPoliciesResult
 	err := ctx.Invoke("tencentcloud:Dayu/getDdosPolicies:getDdosPolicies", args, &rv, opts...)
 	if err != nil {

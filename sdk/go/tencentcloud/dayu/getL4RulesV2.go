@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetL4RulesV2(ctx *pulumi.Context, args *GetL4RulesV2Args, opts ...pulumi.InvokeOption) (*GetL4RulesV2Result, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetL4RulesV2Result
 	err := ctx.Invoke("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", args, &rv, opts...)
 	if err != nil {

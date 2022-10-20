@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetReadonlyGroups(ctx *pulumi.Context, args *GetReadonlyGroupsArgs, opts ...pulumi.InvokeOption) (*GetReadonlyGroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetReadonlyGroupsResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getReadonlyGroups:getReadonlyGroups", args, &rv, opts...)
 	if err != nil {

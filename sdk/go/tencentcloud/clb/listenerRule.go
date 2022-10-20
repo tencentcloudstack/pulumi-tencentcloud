@@ -132,6 +132,7 @@ func NewListenerRule(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ListenerRule
 	err := ctx.RegisterResource("tencentcloud:Clb/listenerRule:ListenerRule", name, args, &resource, opts...)
 	if err != nil {

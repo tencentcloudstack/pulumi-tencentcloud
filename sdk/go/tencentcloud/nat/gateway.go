@@ -88,6 +88,7 @@ func NewGateway(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Gateway
 	err := ctx.RegisterResource("tencentcloud:Nat/gateway:Gateway", name, args, &resource, opts...)
 	if err != nil {

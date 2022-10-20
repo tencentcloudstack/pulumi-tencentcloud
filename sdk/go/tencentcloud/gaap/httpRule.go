@@ -163,6 +163,7 @@ func NewHttpRule(ctx *pulumi.Context,
 	if args.RealserverType == nil {
 		return nil, errors.New("invalid value for required argument 'RealserverType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource HttpRule
 	err := ctx.RegisterResource("tencentcloud:Gaap/httpRule:HttpRule", name, args, &resource, opts...)
 	if err != nil {

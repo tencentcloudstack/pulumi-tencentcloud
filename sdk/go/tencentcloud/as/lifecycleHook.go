@@ -84,6 +84,7 @@ func NewLifecycleHook(ctx *pulumi.Context,
 	if args.ScalingGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ScalingGroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource LifecycleHook
 	err := ctx.RegisterResource("tencentcloud:As/lifecycleHook:LifecycleHook", name, args, &resource, opts...)
 	if err != nil {

@@ -12,6 +12,7 @@ import (
 
 // Use this data source to query TcaplusDB tables.
 func GetTables(ctx *pulumi.Context, args *GetTablesArgs, opts ...pulumi.InvokeOption) (*GetTablesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTablesResult
 	err := ctx.Invoke("tencentcloud:Tcaplus/getTables:getTables", args, &rv, opts...)
 	if err != nil {

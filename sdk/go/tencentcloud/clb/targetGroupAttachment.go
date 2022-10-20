@@ -115,6 +115,7 @@ func NewTargetGroupAttachment(ctx *pulumi.Context,
 	if args.ListenerId == nil {
 		return nil, errors.New("invalid value for required argument 'ListenerId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TargetGroupAttachment
 	err := ctx.RegisterResource("tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment", name, args, &resource, opts...)
 	if err != nil {

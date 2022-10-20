@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetDbs(ctx *pulumi.Context, args *GetDbsArgs, opts ...pulumi.InvokeOption) (*GetDbsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetDbsResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getDbs:getDbs", args, &rv, opts...)
 	if err != nil {

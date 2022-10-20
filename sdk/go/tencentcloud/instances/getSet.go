@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetSet(ctx *pulumi.Context, args *GetSetArgs, opts ...pulumi.InvokeOption) (*GetSetResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSetResult
 	err := ctx.Invoke("tencentcloud:Instances/getSet:getSet", args, &rv, opts...)
 	if err != nil {

@@ -66,6 +66,7 @@ import (
 //
 // ```
 func GetGatewayCcnRoutes(ctx *pulumi.Context, args *GetGatewayCcnRoutesArgs, opts ...pulumi.InvokeOption) (*GetGatewayCcnRoutesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetGatewayCcnRoutesResult
 	err := ctx.Invoke("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args, &rv, opts...)
 	if err != nil {

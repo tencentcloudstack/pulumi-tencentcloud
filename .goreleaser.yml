@@ -5,7 +5,7 @@ before:
   hooks:
     - make tfgen
 builds:
-  - binary: provider-resource-tencentcloud
+  - binary: pulumi-resource-tencentcloud
     dir: provider
     env:
       - CGO_ENABLED=0

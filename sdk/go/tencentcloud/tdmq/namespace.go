@@ -89,6 +89,7 @@ func NewNamespace(ctx *pulumi.Context,
 	if args.MsgTtl == nil {
 		return nil, errors.New("invalid value for required argument 'MsgTtl'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Namespace
 	err := ctx.RegisterResource("tencentcloud:Tdmq/namespace:Namespace", name, args, &resource, opts...)
 	if err != nil {

@@ -61,6 +61,7 @@ func NewReadonlyAttachment(ctx *pulumi.Context,
 	if args.ReadOnlyGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ReadOnlyGroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ReadonlyAttachment
 	err := ctx.RegisterResource("tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment", name, args, &resource, opts...)
 	if err != nil {

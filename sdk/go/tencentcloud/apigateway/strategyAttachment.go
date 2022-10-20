@@ -154,6 +154,7 @@ func NewStrategyAttachment(ctx *pulumi.Context,
 	if args.StrategyId == nil {
 		return nil, errors.New("invalid value for required argument 'StrategyId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource StrategyAttachment
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment", name, args, &resource, opts...)
 	if err != nil {

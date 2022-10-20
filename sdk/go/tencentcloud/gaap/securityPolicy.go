@@ -82,6 +82,7 @@ func NewSecurityPolicy(ctx *pulumi.Context,
 	if args.ProxyId == nil {
 		return nil, errors.New("invalid value for required argument 'ProxyId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SecurityPolicy
 	err := ctx.RegisterResource("tencentcloud:Gaap/securityPolicy:SecurityPolicy", name, args, &resource, opts...)
 	if err != nil {

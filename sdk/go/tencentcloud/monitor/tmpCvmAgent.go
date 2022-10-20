@@ -67,6 +67,7 @@ func NewTmpCvmAgent(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TmpCvmAgent
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent", name, args, &resource, opts...)
 	if err != nil {

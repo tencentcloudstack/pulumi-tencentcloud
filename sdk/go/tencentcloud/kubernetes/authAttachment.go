@@ -146,6 +146,7 @@ func NewAuthAttachment(ctx *pulumi.Context,
 	if args.Issuer == nil {
 		return nil, errors.New("invalid value for required argument 'Issuer'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AuthAttachment
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/authAttachment:AuthAttachment", name, args, &resource, opts...)
 	if err != nil {
