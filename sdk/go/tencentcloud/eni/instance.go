@@ -112,6 +112,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Eni/instance:Instance", name, args, &resource, opts...)
 	if err != nil {

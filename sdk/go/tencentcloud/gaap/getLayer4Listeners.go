@@ -72,6 +72,7 @@ import (
 //
 // ```
 func GetLayer4Listeners(ctx *pulumi.Context, args *GetLayer4ListenersArgs, opts ...pulumi.InvokeOption) (*GetLayer4ListenersResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetLayer4ListenersResult
 	err := ctx.Invoke("tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners", args, &rv, opts...)
 	if err != nil {

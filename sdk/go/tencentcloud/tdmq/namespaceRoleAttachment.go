@@ -113,6 +113,7 @@ func NewNamespaceRoleAttachment(ctx *pulumi.Context,
 	if args.RoleName == nil {
 		return nil, errors.New("invalid value for required argument 'RoleName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource NamespaceRoleAttachment
 	err := ctx.RegisterResource("tencentcloud:Tdmq/namespaceRoleAttachment:NamespaceRoleAttachment", name, args, &resource, opts...)
 	if err != nil {

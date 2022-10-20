@@ -88,6 +88,7 @@ func NewGroupLiteRule(ctx *pulumi.Context,
 	if args.SecurityGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'SecurityGroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource GroupLiteRule
 	err := ctx.RegisterResource("tencentcloud:Security/groupLiteRule:GroupLiteRule", name, args, &resource, opts...)
 	if err != nil {

@@ -125,6 +125,7 @@ func NewPolicyBindingObject(ctx *pulumi.Context,
 	if args.PolicyId == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource PolicyBindingObject
 	err := ctx.RegisterResource("tencentcloud:Monitor/policyBindingObject:PolicyBindingObject", name, args, &resource, opts...)
 	if err != nil {

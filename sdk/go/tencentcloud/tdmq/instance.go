@@ -70,6 +70,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.ClusterName == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Tdmq/instance:Instance", name, args, &resource, opts...)
 	if err != nil {

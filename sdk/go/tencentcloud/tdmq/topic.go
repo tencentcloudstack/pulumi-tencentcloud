@@ -110,6 +110,7 @@ func NewTopic(ctx *pulumi.Context,
 	if args.TopicType == nil {
 		return nil, errors.New("invalid value for required argument 'TopicType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Topic
 	err := ctx.RegisterResource("tencentcloud:Tdmq/topic:Topic", name, args, &resource, opts...)
 	if err != nil {

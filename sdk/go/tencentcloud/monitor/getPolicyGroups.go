@@ -48,6 +48,7 @@ import (
 //
 // ```
 func GetPolicyGroups(ctx *pulumi.Context, args *GetPolicyGroupsArgs, opts ...pulumi.InvokeOption) (*GetPolicyGroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetPolicyGroupsResult
 	err := ctx.Invoke("tencentcloud:Monitor/getPolicyGroups:getPolicyGroups", args, &rv, opts...)
 	if err != nil {

@@ -72,6 +72,7 @@ func NewRealserver(ctx *pulumi.Context,
 		args = &RealserverArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Realserver
 	err := ctx.RegisterResource("tencentcloud:Gaap/realserver:Realserver", name, args, &resource, opts...)
 	if err != nil {

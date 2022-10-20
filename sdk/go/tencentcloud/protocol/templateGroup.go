@@ -41,6 +41,7 @@ func NewTemplateGroup(ctx *pulumi.Context,
 	if args.TemplateIds == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateIds'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TemplateGroup
 	err := ctx.RegisterResource("tencentcloud:Protocol/templateGroup:TemplateGroup", name, args, &resource, opts...)
 	if err != nil {

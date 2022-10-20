@@ -111,6 +111,7 @@ func NewScalingPolicy(ctx *pulumi.Context,
 	if args.Threshold == nil {
 		return nil, errors.New("invalid value for required argument 'Threshold'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ScalingPolicy
 	err := ctx.RegisterResource("tencentcloud:As/scalingPolicy:ScalingPolicy", name, args, &resource, opts...)
 	if err != nil {

@@ -94,6 +94,7 @@ func NewStorageSet(ctx *pulumi.Context,
 	if args.StorageType == nil {
 		return nil, errors.New("invalid value for required argument 'StorageType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource StorageSet
 	err := ctx.RegisterResource("tencentcloud:Cbs/storageSet:StorageSet", name, args, &resource, opts...)
 	if err != nil {

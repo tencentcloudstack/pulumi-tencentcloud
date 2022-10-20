@@ -140,6 +140,7 @@ func NewInstance(ctx *pulumi.Context,
 		args = &InstanceArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Ccn/instance:Instance", name, args, &resource, opts...)
 	if err != nil {

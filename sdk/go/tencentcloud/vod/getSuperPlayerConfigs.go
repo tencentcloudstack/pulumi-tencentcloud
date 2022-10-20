@@ -63,6 +63,7 @@ import (
 //
 // ```
 func GetSuperPlayerConfigs(ctx *pulumi.Context, args *GetSuperPlayerConfigsArgs, opts ...pulumi.InvokeOption) (*GetSuperPlayerConfigsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSuperPlayerConfigsResult
 	err := ctx.Invoke("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args, &rv, opts...)
 	if err != nil {

@@ -55,6 +55,7 @@ func NewProvider(ctx *pulumi.Context,
 	if isZero(args.SecurityToken) {
 		args.SecurityToken = pulumi.StringPtr(getEnvOrDefault("", nil, "TENCENTCLOUD_SECURITY_TOKEN").(string))
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:tencentcloud", name, args, &resource, opts...)
 	if err != nil {

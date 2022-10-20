@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetRealservers(ctx *pulumi.Context, args *GetRealserversArgs, opts ...pulumi.InvokeOption) (*GetRealserversResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetRealserversResult
 	err := ctx.Invoke("tencentcloud:Gaap/getRealservers:getRealservers", args, &rv, opts...)
 	if err != nil {

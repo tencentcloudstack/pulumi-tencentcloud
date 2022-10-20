@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetSecrets(ctx *pulumi.Context, args *GetSecretsArgs, opts ...pulumi.InvokeOption) (*GetSecretsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSecretsResult
 	err := ctx.Invoke("tencentcloud:Ssm/getSecrets:getSecrets", args, &rv, opts...)
 	if err != nil {

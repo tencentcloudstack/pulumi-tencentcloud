@@ -162,6 +162,7 @@ func NewDdosPolicyCase(ctx *pulumi.Context,
 	if args.WebApiUrls == nil {
 		return nil, errors.New("invalid value for required argument 'WebApiUrls'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DdosPolicyCase
 	err := ctx.RegisterResource("tencentcloud:Dayu/ddosPolicyCase:DdosPolicyCase", name, args, &resource, opts...)
 	if err != nil {

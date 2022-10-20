@@ -86,6 +86,7 @@ func NewGatewayCcnRoute(ctx *pulumi.Context,
 	if args.DcgId == nil {
 		return nil, errors.New("invalid value for required argument 'DcgId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource GatewayCcnRoute
 	err := ctx.RegisterResource("tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute", name, args, &resource, opts...)
 	if err != nil {

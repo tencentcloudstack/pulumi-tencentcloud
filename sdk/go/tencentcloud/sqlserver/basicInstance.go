@@ -141,6 +141,7 @@ func NewBasicInstance(ctx *pulumi.Context,
 	if args.Storage == nil {
 		return nil, errors.New("invalid value for required argument 'Storage'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource BasicInstance
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/basicInstance:BasicInstance", name, args, &resource, opts...)
 	if err != nil {

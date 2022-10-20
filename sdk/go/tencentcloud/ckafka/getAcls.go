@@ -42,6 +42,7 @@ import (
 //
 // ```
 func GetAcls(ctx *pulumi.Context, args *GetAclsArgs, opts ...pulumi.InvokeOption) (*GetAclsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAclsResult
 	err := ctx.Invoke("tencentcloud:Ckafka/getAcls:getAcls", args, &rv, opts...)
 	if err != nil {

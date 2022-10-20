@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetAccessGroups(ctx *pulumi.Context, args *GetAccessGroupsArgs, opts ...pulumi.InvokeOption) (*GetAccessGroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAccessGroupsResult
 	err := ctx.Invoke("tencentcloud:Cfs/getAccessGroups:getAccessGroups", args, &rv, opts...)
 	if err != nil {

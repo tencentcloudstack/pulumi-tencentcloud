@@ -55,6 +55,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.CidrBlock == nil {
 		return nil, errors.New("invalid value for required argument 'CidrBlock'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Vpc/instance:Instance", name, args, &resource, opts...)
 	if err != nil {

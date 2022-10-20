@@ -124,6 +124,7 @@ func NewAdaptiveDynamicStreamingTemplate(ctx *pulumi.Context,
 	if args.StreamInfos == nil {
 		return nil, errors.New("invalid value for required argument 'StreamInfos'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AdaptiveDynamicStreamingTemplate
 	err := ctx.RegisterResource("tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate", name, args, &resource, opts...)
 	if err != nil {

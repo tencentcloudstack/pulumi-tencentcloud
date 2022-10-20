@@ -188,6 +188,7 @@ func NewScaleWorker(ctx *pulumi.Context,
 	if args.WorkerConfig == nil {
 		return nil, errors.New("invalid value for required argument 'WorkerConfig'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ScaleWorker
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/scaleWorker:ScaleWorker", name, args, &resource, opts...)
 	if err != nil {

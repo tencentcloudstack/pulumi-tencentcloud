@@ -121,6 +121,7 @@ func NewPayCertificate(ctx *pulumi.Context,
 	if args.ProductId == nil {
 		return nil, errors.New("invalid value for required argument 'ProductId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource PayCertificate
 	err := ctx.RegisterResource("tencentcloud:Ssl/payCertificate:PayCertificate", name, args, &resource, opts...)
 	if err != nil {

@@ -91,6 +91,7 @@ func NewAcl(ctx *pulumi.Context,
 	if args.ResourceName == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Acl
 	err := ctx.RegisterResource("tencentcloud:Ckafka/acl:Acl", name, args, &resource, opts...)
 	if err != nil {

@@ -76,6 +76,7 @@ func NewTmpScrapeJob(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TmpScrapeJob
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob", name, args, &resource, opts...)
 	if err != nil {

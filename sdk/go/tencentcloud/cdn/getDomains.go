@@ -43,6 +43,7 @@ import (
 //
 // ```
 func GetDomains(ctx *pulumi.Context, args *GetDomainsArgs, opts ...pulumi.InvokeOption) (*GetDomainsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetDomainsResult
 	err := ctx.Invoke("tencentcloud:Cdn/getDomains:getDomains", args, &rv, opts...)
 	if err != nil {

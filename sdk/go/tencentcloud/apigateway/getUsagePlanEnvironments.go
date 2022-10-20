@@ -68,6 +68,7 @@ import (
 //
 // ```
 func GetUsagePlanEnvironments(ctx *pulumi.Context, args *GetUsagePlanEnvironmentsArgs, opts ...pulumi.InvokeOption) (*GetUsagePlanEnvironmentsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetUsagePlanEnvironmentsResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args, &rv, opts...)
 	if err != nil {

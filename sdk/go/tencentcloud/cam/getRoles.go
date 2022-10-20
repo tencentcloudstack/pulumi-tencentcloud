@@ -45,6 +45,7 @@ import (
 //
 // ```
 func GetRoles(ctx *pulumi.Context, args *GetRolesArgs, opts ...pulumi.InvokeOption) (*GetRolesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetRolesResult
 	err := ctx.Invoke("tencentcloud:Cam/getRoles:getRoles", args, &rv, opts...)
 	if err != nil {

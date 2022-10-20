@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetZonesByProduct(ctx *pulumi.Context, args *GetZonesByProductArgs, opts ...pulumi.InvokeOption) (*GetZonesByProductResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetZonesByProductResult
 	err := ctx.Invoke("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args, &rv, opts...)
 	if err != nil {

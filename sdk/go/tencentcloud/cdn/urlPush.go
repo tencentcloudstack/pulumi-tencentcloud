@@ -100,6 +100,7 @@ func NewUrlPush(ctx *pulumi.Context,
 	if args.Urls == nil {
 		return nil, errors.New("invalid value for required argument 'Urls'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource UrlPush
 	err := ctx.RegisterResource("tencentcloud:Cdn/urlPush:UrlPush", name, args, &resource, opts...)
 	if err != nil {

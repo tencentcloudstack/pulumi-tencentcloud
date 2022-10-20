@@ -106,6 +106,7 @@ func NewImageSpriteTemplate(ctx *pulumi.Context,
 	if args.SampleType == nil {
 		return nil, errors.New("invalid value for required argument 'SampleType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ImageSpriteTemplate
 	err := ctx.RegisterResource("tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate", name, args, &resource, opts...)
 	if err != nil {

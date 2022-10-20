@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetSpecinfos(ctx *pulumi.Context, args *GetSpecinfosArgs, opts ...pulumi.InvokeOption) (*GetSpecinfosResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSpecinfosResult
 	err := ctx.Invoke("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args, &rv, opts...)
 	if err != nil {

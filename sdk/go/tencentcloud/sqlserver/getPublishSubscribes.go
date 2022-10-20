@@ -47,6 +47,7 @@ import (
 //
 // ```
 func GetPublishSubscribes(ctx *pulumi.Context, args *GetPublishSubscribesArgs, opts ...pulumi.InvokeOption) (*GetPublishSubscribesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetPublishSubscribesResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getPublishSubscribes:getPublishSubscribes", args, &rv, opts...)
 	if err != nil {

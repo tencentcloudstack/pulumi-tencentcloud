@@ -43,10 +43,7 @@ func Provider() tfbridge.ProviderInfo {
 		DisplayName: "Tencentcloud",
 		Publisher:   "TencentCloudStack",
 		LogoURL:     "",
-		// PluginDownloadURL is an optional URL used to download the Provider
-		// for use in Pulumi programs
-		// e.g https://github.com/org/pulumi-provider-name/releases/
-		PluginDownloadURL: "",
+		PluginDownloadURL: "github://api.github.com/tencentcloudstack",
 		Description:       "A Pulumi package for creating and managing tencentcloud cloud resources.",
 		Keywords:          []string{"pulumi", "tencentcloud", "category/cloud"},
 		License:           "Apache-2.0",

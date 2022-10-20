@@ -73,6 +73,7 @@ func NewAccessRule(ctx *pulumi.Context,
 	if args.Priority == nil {
 		return nil, errors.New("invalid value for required argument 'Priority'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AccessRule
 	err := ctx.RegisterResource("tencentcloud:Cfs/accessRule:AccessRule", name, args, &resource, opts...)
 	if err != nil {

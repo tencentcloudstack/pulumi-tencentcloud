@@ -100,6 +100,7 @@ func NewLayer(ctx *pulumi.Context,
 	if args.LayerName == nil {
 		return nil, errors.New("invalid value for required argument 'LayerName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Layer
 	err := ctx.RegisterResource("tencentcloud:Scf/layer:Layer", name, args, &resource, opts...)
 	if err != nil {

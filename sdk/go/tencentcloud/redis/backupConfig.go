@@ -80,6 +80,7 @@ func NewBackupConfig(ctx *pulumi.Context,
 	if args.RedisId == nil {
 		return nil, errors.New("invalid value for required argument 'RedisId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource BackupConfig
 	err := ctx.RegisterResource("tencentcloud:Redis/backupConfig:BackupConfig", name, args, &resource, opts...)
 	if err != nil {

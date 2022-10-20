@@ -48,6 +48,7 @@ func NewL4RuleV2(ctx *pulumi.Context,
 	if args.Vpn == nil {
 		return nil, errors.New("invalid value for required argument 'Vpn'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource L4RuleV2
 	err := ctx.RegisterResource("tencentcloud:Dayu/l4RuleV2:L4RuleV2", name, args, &resource, opts...)
 	if err != nil {

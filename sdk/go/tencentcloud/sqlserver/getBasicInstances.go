@@ -52,6 +52,7 @@ import (
 //
 // ```
 func GetBasicInstances(ctx *pulumi.Context, args *GetBasicInstancesArgs, opts ...pulumi.InvokeOption) (*GetBasicInstancesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetBasicInstancesResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args, &rv, opts...)
 	if err != nil {

@@ -118,6 +118,7 @@ func NewRedirection(ctx *pulumi.Context,
 	if args.TargetRuleId == nil {
 		return nil, errors.New("invalid value for required argument 'TargetRuleId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Redirection
 	err := ctx.RegisterResource("tencentcloud:Clb/redirection:Redirection", name, args, &resource, opts...)
 	if err != nil {

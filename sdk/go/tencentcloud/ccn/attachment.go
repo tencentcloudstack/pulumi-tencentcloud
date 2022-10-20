@@ -124,6 +124,7 @@ func NewAttachment(ctx *pulumi.Context,
 	if args.InstanceType == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Attachment
 	err := ctx.RegisterResource("tencentcloud:Ccn/attachment:Attachment", name, args, &resource, opts...)
 	if err != nil {

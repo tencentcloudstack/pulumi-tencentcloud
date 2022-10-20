@@ -150,6 +150,7 @@ func NewStandbyInstance(ctx *pulumi.Context,
 	if args.Volume == nil {
 		return nil, errors.New("invalid value for required argument 'Volume'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource StandbyInstance
 	err := ctx.RegisterResource("tencentcloud:Mongodb/standbyInstance:StandbyInstance", name, args, &resource, opts...)
 	if err != nil {

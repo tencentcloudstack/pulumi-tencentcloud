@@ -84,6 +84,7 @@ func NewSnapshotByTimeOffsetTemplate(ctx *pulumi.Context,
 		args = &SnapshotByTimeOffsetTemplateArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SnapshotByTimeOffsetTemplate
 	err := ctx.RegisterResource("tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate", name, args, &resource, opts...)
 	if err != nil {

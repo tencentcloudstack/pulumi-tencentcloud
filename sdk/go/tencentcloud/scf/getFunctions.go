@@ -46,6 +46,7 @@ import (
 //
 // ```
 func GetFunctions(ctx *pulumi.Context, args *GetFunctionsArgs, opts ...pulumi.InvokeOption) (*GetFunctionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetFunctionsResult
 	err := ctx.Invoke("tencentcloud:Scf/getFunctions:getFunctions", args, &rv, opts...)
 	if err != nil {

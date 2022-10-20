@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetScalingPolicies(ctx *pulumi.Context, args *GetScalingPoliciesArgs, opts ...pulumi.InvokeOption) (*GetScalingPoliciesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetScalingPoliciesResult
 	err := ctx.Invoke("tencentcloud:As/getScalingPolicies:getScalingPolicies", args, &rv, opts...)
 	if err != nil {

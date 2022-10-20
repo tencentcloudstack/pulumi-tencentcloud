@@ -81,6 +81,7 @@ func NewPolicy(ctx *pulumi.Context,
 	if args.Document == nil {
 		return nil, errors.New("invalid value for required argument 'Document'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Policy
 	err := ctx.RegisterResource("tencentcloud:Cam/policy:Policy", name, args, &resource, opts...)
 	if err != nil {

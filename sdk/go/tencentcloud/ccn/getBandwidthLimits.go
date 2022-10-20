@@ -57,6 +57,7 @@ import (
 //
 // ```
 func GetBandwidthLimits(ctx *pulumi.Context, args *GetBandwidthLimitsArgs, opts ...pulumi.InvokeOption) (*GetBandwidthLimitsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetBandwidthLimitsResult
 	err := ctx.Invoke("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args, &rv, opts...)
 	if err != nil {

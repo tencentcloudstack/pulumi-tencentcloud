@@ -88,6 +88,7 @@ func NewSnatIp(ctx *pulumi.Context,
 	if args.ClbId == nil {
 		return nil, errors.New("invalid value for required argument 'ClbId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SnatIp
 	err := ctx.RegisterResource("tencentcloud:Clb/snatIp:SnatIp", name, args, &resource, opts...)
 	if err != nil {

@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetSecretVersions(ctx *pulumi.Context, args *GetSecretVersionsArgs, opts ...pulumi.InvokeOption) (*GetSecretVersionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSecretVersionsResult
 	err := ctx.Invoke("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args, &rv, opts...)
 	if err != nil {

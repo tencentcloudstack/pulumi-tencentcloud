@@ -100,6 +100,7 @@ func NewSecurityRule(ctx *pulumi.Context,
 	if args.PolicyId == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SecurityRule
 	err := ctx.RegisterResource("tencentcloud:Gaap/securityRule:SecurityRule", name, args, &resource, opts...)
 	if err != nil {

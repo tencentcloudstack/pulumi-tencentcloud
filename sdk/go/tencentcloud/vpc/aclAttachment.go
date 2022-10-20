@@ -90,6 +90,7 @@ func NewAclAttachment(ctx *pulumi.Context,
 	if args.SubnetId == nil {
 		return nil, errors.New("invalid value for required argument 'SubnetId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AclAttachment
 	err := ctx.RegisterResource("tencentcloud:Vpc/aclAttachment:AclAttachment", name, args, &resource, opts...)
 	if err != nil {

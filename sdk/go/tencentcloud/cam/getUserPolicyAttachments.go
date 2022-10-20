@@ -46,6 +46,7 @@ import (
 //
 // ```
 func GetUserPolicyAttachments(ctx *pulumi.Context, args *GetUserPolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetUserPolicyAttachmentsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetUserPolicyAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args, &rv, opts...)
 	if err != nil {

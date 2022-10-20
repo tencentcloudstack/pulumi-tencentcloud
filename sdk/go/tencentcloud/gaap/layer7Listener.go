@@ -104,6 +104,7 @@ func NewLayer7Listener(ctx *pulumi.Context,
 	if args.ProxyId == nil {
 		return nil, errors.New("invalid value for required argument 'ProxyId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Layer7Listener
 	err := ctx.RegisterResource("tencentcloud:Gaap/layer7Listener:Layer7Listener", name, args, &resource, opts...)
 	if err != nil {

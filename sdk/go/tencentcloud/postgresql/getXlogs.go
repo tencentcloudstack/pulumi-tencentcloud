@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetXlogs(ctx *pulumi.Context, args *GetXlogsArgs, opts ...pulumi.InvokeOption) (*GetXlogsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetXlogsResult
 	err := ctx.Invoke("tencentcloud:Postgresql/getXlogs:getXlogs", args, &rv, opts...)
 	if err != nil {

@@ -104,6 +104,7 @@ func NewZone(ctx *pulumi.Context,
 	if args.Domain == nil {
 		return nil, errors.New("invalid value for required argument 'Domain'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Zone
 	err := ctx.RegisterResource("tencentcloud:PrivateDns/zone:Zone", name, args, &resource, opts...)
 	if err != nil {

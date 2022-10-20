@@ -355,6 +355,7 @@ func NewAlarmPolicy(ctx *pulumi.Context,
 	if args.PolicyName == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AlarmPolicy
 	err := ctx.RegisterResource("tencentcloud:Monitor/alarmPolicy:AlarmPolicy", name, args, &resource, opts...)
 	if err != nil {

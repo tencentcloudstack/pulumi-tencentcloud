@@ -47,6 +47,7 @@ import (
 //
 // ```
 func GetPairs(ctx *pulumi.Context, args *GetPairsArgs, opts ...pulumi.InvokeOption) (*GetPairsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetPairsResult
 	err := ctx.Invoke("tencentcloud:Key/getPairs:getPairs", args, &rv, opts...)
 	if err != nil {

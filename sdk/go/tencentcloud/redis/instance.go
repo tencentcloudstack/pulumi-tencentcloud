@@ -90,6 +90,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.MemSize == nil {
 		return nil, errors.New("invalid value for required argument 'MemSize'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Redis/instance:Instance", name, args, &resource, opts...)
 	if err != nil {

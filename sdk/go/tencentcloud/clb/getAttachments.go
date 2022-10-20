@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetAttachments(ctx *pulumi.Context, args *GetAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetAttachmentsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Clb/getAttachments:getAttachments", args, &rv, opts...)
 	if err != nil {

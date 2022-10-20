@@ -80,6 +80,7 @@ import (
 //
 // ```
 func GetAdaptiveDynamicStreamingTemplates(ctx *pulumi.Context, args *GetAdaptiveDynamicStreamingTemplatesArgs, opts ...pulumi.InvokeOption) (*GetAdaptiveDynamicStreamingTemplatesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAdaptiveDynamicStreamingTemplatesResult
 	err := ctx.Invoke("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args, &rv, opts...)
 	if err != nil {

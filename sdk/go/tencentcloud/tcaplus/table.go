@@ -145,6 +145,7 @@ func NewTable(ctx *pulumi.Context,
 	if args.TablegroupId == nil {
 		return nil, errors.New("invalid value for required argument 'TablegroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Table
 	err := ctx.RegisterResource("tencentcloud:Tcaplus/table:Table", name, args, &resource, opts...)
 	if err != nil {

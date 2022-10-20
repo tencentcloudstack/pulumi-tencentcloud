@@ -46,6 +46,7 @@ import (
 //
 // ```
 func GetConnections(ctx *pulumi.Context, args *GetConnectionsArgs, opts ...pulumi.InvokeOption) (*GetConnectionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetConnectionsResult
 	err := ctx.Invoke("tencentcloud:Vpn/getConnections:getConnections", args, &rv, opts...)
 	if err != nil {

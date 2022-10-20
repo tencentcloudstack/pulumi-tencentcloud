@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetBackups(ctx *pulumi.Context, args *GetBackupsArgs, opts ...pulumi.InvokeOption) (*GetBackupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetBackupsResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getBackups:getBackups", args, &rv, opts...)
 	if err != nil {

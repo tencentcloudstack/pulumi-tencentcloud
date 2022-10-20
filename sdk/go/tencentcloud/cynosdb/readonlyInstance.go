@@ -107,6 +107,7 @@ func NewReadonlyInstance(ctx *pulumi.Context,
 	if args.InstanceName == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ReadonlyInstance
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance", name, args, &resource, opts...)
 	if err != nil {

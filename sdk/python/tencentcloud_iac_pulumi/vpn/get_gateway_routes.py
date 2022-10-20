@@ -142,6 +142,8 @@ def get_gateway_routes(destination_cidr: Optional[str] = None,
         opts = pulumi.InvokeOptions()
     if opts.version is None:
         opts.version = _utilities.get_version()
+        if opts.plugin_download_url is None:
+            opts.plugin_download_url = _utilities.get_plugin_download_url()
     __ret__ = pulumi.runtime.invoke('tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes', __args__, opts=opts, typ=GetGatewayRoutesResult).value
 
     return AwaitableGetGatewayRoutesResult(

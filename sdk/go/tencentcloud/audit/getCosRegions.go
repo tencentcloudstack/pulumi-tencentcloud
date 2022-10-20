@@ -37,6 +37,7 @@ import (
 //
 // ```
 func GetCosRegions(ctx *pulumi.Context, args *GetCosRegionsArgs, opts ...pulumi.InvokeOption) (*GetCosRegionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetCosRegionsResult
 	err := ctx.Invoke("tencentcloud:Audit/getCosRegions:getCosRegions", args, &rv, opts...)
 	if err != nil {

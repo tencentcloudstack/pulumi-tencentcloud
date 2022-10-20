@@ -158,6 +158,7 @@ func NewSuperPlayerConfig(ctx *pulumi.Context,
 		args = &SuperPlayerConfigArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SuperPlayerConfig
 	err := ctx.RegisterResource("tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig", name, args, &resource, opts...)
 	if err != nil {

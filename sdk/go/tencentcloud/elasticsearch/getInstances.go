@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetInstancesResult
 	err := ctx.Invoke("tencentcloud:Elasticsearch/getInstances:getInstances", args, &rv, opts...)
 	if err != nil {

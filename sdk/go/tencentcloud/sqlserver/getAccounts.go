@@ -46,6 +46,7 @@ import (
 //
 // ```
 func GetAccounts(ctx *pulumi.Context, args *GetAccountsArgs, opts ...pulumi.InvokeOption) (*GetAccountsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAccountsResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getAccounts:getAccounts", args, &rv, opts...)
 	if err != nil {

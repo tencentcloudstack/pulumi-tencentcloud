@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetAccessRules(ctx *pulumi.Context, args *GetAccessRulesArgs, opts ...pulumi.InvokeOption) (*GetAccessRulesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAccessRulesResult
 	err := ctx.Invoke("tencentcloud:Cfs/getAccessRules:getAccessRules", args, &rv, opts...)
 	if err != nil {

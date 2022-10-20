@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetVipEipAttachments(ctx *pulumi.Context, args *GetVipEipAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetVipEipAttachmentsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetVipEipAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args, &rv, opts...)
 	if err != nil {

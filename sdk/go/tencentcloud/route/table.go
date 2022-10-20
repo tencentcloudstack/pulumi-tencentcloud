@@ -84,6 +84,7 @@ func NewTable(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Table
 	err := ctx.RegisterResource("tencentcloud:Route/table:Table", name, args, &resource, opts...)
 	if err != nil {

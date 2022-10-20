@@ -67,6 +67,7 @@ func NewDdosPolicyAttachment(ctx *pulumi.Context,
 	if args.ResourceType == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DdosPolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment", name, args, &resource, opts...)
 	if err != nil {

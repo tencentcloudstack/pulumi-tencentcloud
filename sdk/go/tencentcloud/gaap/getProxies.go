@@ -47,6 +47,7 @@ import (
 //
 // ```
 func GetProxies(ctx *pulumi.Context, args *GetProxiesArgs, opts ...pulumi.InvokeOption) (*GetProxiesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetProxiesResult
 	err := ctx.Invoke("tencentcloud:Gaap/getProxies:getProxies", args, &rv, opts...)
 	if err != nil {

@@ -83,6 +83,7 @@ func NewSecret(ctx *pulumi.Context,
 	if args.SecretName == nil {
 		return nil, errors.New("invalid value for required argument 'SecretName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Secret
 	err := ctx.RegisterResource("tencentcloud:Ssm/secret:Secret", name, args, &resource, opts...)
 	if err != nil {

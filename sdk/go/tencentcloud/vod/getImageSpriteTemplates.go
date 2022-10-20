@@ -51,6 +51,7 @@ import (
 //
 // ```
 func GetImageSpriteTemplates(ctx *pulumi.Context, args *GetImageSpriteTemplatesArgs, opts ...pulumi.InvokeOption) (*GetImageSpriteTemplatesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetImageSpriteTemplatesResult
 	err := ctx.Invoke("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args, &rv, opts...)
 	if err != nil {

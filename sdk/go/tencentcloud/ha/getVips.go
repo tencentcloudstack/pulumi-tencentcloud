@@ -43,6 +43,7 @@ import (
 //
 // ```
 func GetVips(ctx *pulumi.Context, args *GetVipsArgs, opts ...pulumi.InvokeOption) (*GetVipsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetVipsResult
 	err := ctx.Invoke("tencentcloud:Ha/getVips:getVips", args, &rv, opts...)
 	if err != nil {

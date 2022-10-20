@@ -49,6 +49,7 @@ import (
 //
 // ```
 func GetCcHttpPolicies(ctx *pulumi.Context, args *GetCcHttpPoliciesArgs, opts ...pulumi.InvokeOption) (*GetCcHttpPoliciesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetCcHttpPoliciesResult
 	err := ctx.Invoke("tencentcloud:Dayu/getCcHttpPolicies:getCcHttpPolicies", args, &rv, opts...)
 	if err != nil {

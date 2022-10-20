@@ -65,6 +65,7 @@ import (
 //
 // ```
 func GetRouteTables(ctx *pulumi.Context, args *GetRouteTablesArgs, opts ...pulumi.InvokeOption) (*GetRouteTablesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetRouteTablesResult
 	err := ctx.Invoke("tencentcloud:Vpc/getRouteTables:getRouteTables", args, &rv, opts...)
 	if err != nil {

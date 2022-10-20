@@ -95,6 +95,7 @@ func NewConfig(ctx *pulumi.Context,
 	if args.ExtractRule == nil {
 		return nil, errors.New("invalid value for required argument 'ExtractRule'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Config
 	err := ctx.RegisterResource("tencentcloud:Cls/config:Config", name, args, &resource, opts...)
 	if err != nil {

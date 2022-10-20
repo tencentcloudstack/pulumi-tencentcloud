@@ -38,6 +38,7 @@ import (
 //
 // ```
 func GetClusterLevels(ctx *pulumi.Context, args *GetClusterLevelsArgs, opts ...pulumi.InvokeOption) (*GetClusterLevelsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetClusterLevelsResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args, &rv, opts...)
 	if err != nil {

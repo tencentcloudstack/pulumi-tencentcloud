@@ -54,6 +54,7 @@ func NewTargetGroupInstanceAttachment(ctx *pulumi.Context,
 	if args.Weight == nil {
 		return nil, errors.New("invalid value for required argument 'Weight'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TargetGroupInstanceAttachment
 	err := ctx.RegisterResource("tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment", name, args, &resource, opts...)
 	if err != nil {

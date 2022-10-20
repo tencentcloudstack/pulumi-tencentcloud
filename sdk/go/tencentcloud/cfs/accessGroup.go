@@ -65,6 +65,7 @@ func NewAccessGroup(ctx *pulumi.Context,
 		args = &AccessGroupArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AccessGroup
 	err := ctx.RegisterResource("tencentcloud:Cfs/accessGroup:AccessGroup", name, args, &resource, opts...)
 	if err != nil {

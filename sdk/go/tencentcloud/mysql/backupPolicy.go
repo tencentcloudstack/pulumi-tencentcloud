@@ -64,6 +64,7 @@ func NewBackupPolicy(ctx *pulumi.Context,
 	if args.MysqlId == nil {
 		return nil, errors.New("invalid value for required argument 'MysqlId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource BackupPolicy
 	err := ctx.RegisterResource("tencentcloud:Mysql/backupPolicy:BackupPolicy", name, args, &resource, opts...)
 	if err != nil {

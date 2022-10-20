@@ -47,6 +47,7 @@ func NewIndex(ctx *pulumi.Context,
 	if args.TopicId == nil {
 		return nil, errors.New("invalid value for required argument 'TopicId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Index
 	err := ctx.RegisterResource("tencentcloud:Cls/index:Index", name, args, &resource, opts...)
 	if err != nil {

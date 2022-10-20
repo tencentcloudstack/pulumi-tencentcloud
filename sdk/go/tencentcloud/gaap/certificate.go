@@ -85,6 +85,7 @@ func NewCertificate(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Certificate
 	err := ctx.RegisterResource("tencentcloud:Gaap/certificate:Certificate", name, args, &resource, opts...)
 	if err != nil {

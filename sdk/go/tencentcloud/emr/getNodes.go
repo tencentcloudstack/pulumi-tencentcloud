@@ -42,6 +42,7 @@ import (
 //
 // ```
 func GetNodes(ctx *pulumi.Context, args *GetNodesArgs, opts ...pulumi.InvokeOption) (*GetNodesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetNodesResult
 	err := ctx.Invoke("tencentcloud:Emr/getNodes:getNodes", args, &rv, opts...)
 	if err != nil {

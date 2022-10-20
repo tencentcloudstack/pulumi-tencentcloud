@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetProductNamespace(ctx *pulumi.Context, args *GetProductNamespaceArgs, opts ...pulumi.InvokeOption) (*GetProductNamespaceResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetProductNamespaceResult
 	err := ctx.Invoke("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args, &rv, opts...)
 	if err != nil {

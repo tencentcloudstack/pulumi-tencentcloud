@@ -61,6 +61,7 @@ import (
 //
 // ```
 func GetHttpDomains(ctx *pulumi.Context, args *GetHttpDomainsArgs, opts ...pulumi.InvokeOption) (*GetHttpDomainsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetHttpDomainsResult
 	err := ctx.Invoke("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args, &rv, opts...)
 	if err != nil {

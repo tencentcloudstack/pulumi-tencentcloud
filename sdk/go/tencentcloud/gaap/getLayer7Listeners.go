@@ -55,6 +55,7 @@ import (
 //
 // ```
 func GetLayer7Listeners(ctx *pulumi.Context, args *GetLayer7ListenersArgs, opts ...pulumi.InvokeOption) (*GetLayer7ListenersResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetLayer7ListenersResult
 	err := ctx.Invoke("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args, &rv, opts...)
 	if err != nil {

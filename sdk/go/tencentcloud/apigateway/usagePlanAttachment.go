@@ -146,6 +146,7 @@ func NewUsagePlanAttachment(ctx *pulumi.Context,
 	if args.UsagePlanId == nil {
 		return nil, errors.New("invalid value for required argument 'UsagePlanId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource UsagePlanAttachment
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment", name, args, &resource, opts...)
 	if err != nil {

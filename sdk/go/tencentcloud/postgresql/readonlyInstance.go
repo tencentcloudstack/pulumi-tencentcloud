@@ -128,6 +128,7 @@ func NewReadonlyInstance(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ReadonlyInstance
 	err := ctx.RegisterResource("tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance", name, args, &resource, opts...)
 	if err != nil {

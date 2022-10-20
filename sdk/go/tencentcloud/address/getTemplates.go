@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetTemplates(ctx *pulumi.Context, args *GetTemplatesArgs, opts ...pulumi.InvokeOption) (*GetTemplatesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTemplatesResult
 	err := ctx.Invoke("tencentcloud:Address/getTemplates:getTemplates", args, &rv, opts...)
 	if err != nil {

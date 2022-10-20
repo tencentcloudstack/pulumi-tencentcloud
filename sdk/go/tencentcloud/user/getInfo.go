@@ -37,6 +37,7 @@ import (
 //
 // ```
 func GetInfo(ctx *pulumi.Context, args *GetInfoArgs, opts ...pulumi.InvokeOption) (*GetInfoResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetInfoResult
 	err := ctx.Invoke("tencentcloud:User/getInfo:getInfo", args, &rv, opts...)
 	if err != nil {

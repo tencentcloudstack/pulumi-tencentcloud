@@ -88,6 +88,7 @@ func NewExternalKey(ctx *pulumi.Context,
 	if args.Alias == nil {
 		return nil, errors.New("invalid value for required argument 'Alias'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ExternalKey
 	err := ctx.RegisterResource("tencentcloud:Kms/externalKey:ExternalKey", name, args, &resource, opts...)
 	if err != nil {

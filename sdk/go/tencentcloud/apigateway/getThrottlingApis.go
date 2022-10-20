@@ -105,6 +105,7 @@ import (
 //
 // ```
 func GetThrottlingApis(ctx *pulumi.Context, args *GetThrottlingApisArgs, opts ...pulumi.InvokeOption) (*GetThrottlingApisResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetThrottlingApisResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis", args, &rv, opts...)
 	if err != nil {

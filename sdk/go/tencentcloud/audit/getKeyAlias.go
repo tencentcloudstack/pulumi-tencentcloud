@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetKeyAlias(ctx *pulumi.Context, args *GetKeyAliasArgs, opts ...pulumi.InvokeOption) (*GetKeyAliasResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetKeyAliasResult
 	err := ctx.Invoke("tencentcloud:Audit/getKeyAlias:getKeyAlias", args, &rv, opts...)
 	if err != nil {

@@ -102,6 +102,7 @@ func NewAssociation(ctx *pulumi.Context,
 	if args.EipId == nil {
 		return nil, errors.New("invalid value for required argument 'EipId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Association
 	err := ctx.RegisterResource("tencentcloud:Eip/association:Association", name, args, &resource, opts...)
 	if err != nil {

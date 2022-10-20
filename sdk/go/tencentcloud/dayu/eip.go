@@ -97,6 +97,7 @@ func NewEip(ctx *pulumi.Context,
 	if args.ResourceId == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Eip
 	err := ctx.RegisterResource("tencentcloud:Dayu/eip:Eip", name, args, &resource, opts...)
 	if err != nil {

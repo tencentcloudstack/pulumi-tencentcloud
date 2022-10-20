@@ -124,6 +124,7 @@ func NewFreeCertificate(ctx *pulumi.Context,
 	if args.DvAuthMethod == nil {
 		return nil, errors.New("invalid value for required argument 'DvAuthMethod'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource FreeCertificate
 	err := ctx.RegisterResource("tencentcloud:Ssl/freeCertificate:FreeCertificate", name, args, &resource, opts...)
 	if err != nil {

@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetTokens(ctx *pulumi.Context, args *GetTokensArgs, opts ...pulumi.InvokeOption) (*GetTokensResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTokensResult
 	err := ctx.Invoke("tencentcloud:Tcr/getTokens:getTokens", args, &rv, opts...)
 	if err != nil {

@@ -79,6 +79,7 @@ import (
 //
 // ```
 func GetTargetGroups(ctx *pulumi.Context, args *GetTargetGroupsArgs, opts ...pulumi.InvokeOption) (*GetTargetGroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTargetGroupsResult
 	err := ctx.Invoke("tencentcloud:Clb/getTargetGroups:getTargetGroups", args, &rv, opts...)
 	if err != nil {

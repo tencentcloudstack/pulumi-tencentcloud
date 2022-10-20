@@ -83,6 +83,7 @@ func NewCustomizedConfig(ctx *pulumi.Context,
 	if args.ConfigName == nil {
 		return nil, errors.New("invalid value for required argument 'ConfigName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource CustomizedConfig
 	err := ctx.RegisterResource("tencentcloud:Clb/customizedConfig:CustomizedConfig", name, args, &resource, opts...)
 	if err != nil {

@@ -61,6 +61,7 @@ func NewStorageSetAttachment(ctx *pulumi.Context,
 	if args.StorageId == nil {
 		return nil, errors.New("invalid value for required argument 'StorageId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource StorageSetAttachment
 	err := ctx.RegisterResource("tencentcloud:Cbs/storageSetAttachment:StorageSetAttachment", name, args, &resource, opts...)
 	if err != nil {

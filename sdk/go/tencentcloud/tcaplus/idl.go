@@ -107,6 +107,7 @@ func NewIdl(ctx *pulumi.Context,
 	if args.TablegroupId == nil {
 		return nil, errors.New("invalid value for required argument 'TablegroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Idl
 	err := ctx.RegisterResource("tencentcloud:Tcaplus/idl:Idl", name, args, &resource, opts...)
 	if err != nil {

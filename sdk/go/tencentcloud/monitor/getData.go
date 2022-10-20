@@ -75,6 +75,7 @@ import (
 //
 // ```
 func GetData(ctx *pulumi.Context, args *GetDataArgs, opts ...pulumi.InvokeOption) (*GetDataResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetDataResult
 	err := ctx.Invoke("tencentcloud:Monitor/getData:getData", args, &rv, opts...)
 	if err != nil {

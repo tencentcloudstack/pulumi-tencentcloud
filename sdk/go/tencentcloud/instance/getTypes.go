@@ -63,6 +63,7 @@ import (
 //
 // ```
 func GetTypes(ctx *pulumi.Context, args *GetTypesArgs, opts ...pulumi.InvokeOption) (*GetTypesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetTypesResult
 	err := ctx.Invoke("tencentcloud:Instance/getTypes:getTypes", args, &rv, opts...)
 	if err != nil {

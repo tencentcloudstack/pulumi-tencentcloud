@@ -1,4 +1,5 @@
 {
   "resource": true,
-  "name": "tencentcloud"
+  "name": "tencentcloud",
+  "server": "github://api.github.com/tencentcloudstack"
 }

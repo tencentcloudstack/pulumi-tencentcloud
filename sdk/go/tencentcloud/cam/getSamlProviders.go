@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetSamlProviders(ctx *pulumi.Context, args *GetSamlProvidersArgs, opts ...pulumi.InvokeOption) (*GetSamlProvidersResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSamlProvidersResult
 	err := ctx.Invoke("tencentcloud:Cam/getSamlProviders:getSamlProviders", args, &rv, opts...)
 	if err != nil {

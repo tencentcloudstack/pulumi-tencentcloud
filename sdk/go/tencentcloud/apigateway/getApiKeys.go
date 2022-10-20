@@ -46,6 +46,7 @@ import (
 //
 // ```
 func GetApiKeys(ctx *pulumi.Context, args *GetApiKeysArgs, opts ...pulumi.InvokeOption) (*GetApiKeysResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetApiKeysResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getApiKeys:getApiKeys", args, &rv, opts...)
 	if err != nil {

@@ -169,6 +169,7 @@ func NewConnection(ctx *pulumi.Context,
 	if args.VpnGatewayId == nil {
 		return nil, errors.New("invalid value for required argument 'VpnGatewayId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Connection
 	err := ctx.RegisterResource("tencentcloud:Vpn/connection:Connection", name, args, &resource, opts...)
 	if err != nil {

@@ -89,6 +89,7 @@ func NewGateway(ctx *pulumi.Context,
 	if args.NetworkType == nil {
 		return nil, errors.New("invalid value for required argument 'NetworkType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Gateway
 	err := ctx.RegisterResource("tencentcloud:Dc/gateway:Gateway", name, args, &resource, opts...)
 	if err != nil {

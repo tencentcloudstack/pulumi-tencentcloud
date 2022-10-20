@@ -39,6 +39,7 @@ import (
 //
 // ```
 func GetInstanceConfigs(ctx *pulumi.Context, args *GetInstanceConfigsArgs, opts ...pulumi.InvokeOption) (*GetInstanceConfigsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetInstanceConfigsResult
 	err := ctx.Invoke("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", args, &rv, opts...)
 	if err != nil {

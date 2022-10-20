@@ -100,6 +100,7 @@ func NewSslServer(ctx *pulumi.Context,
 	if args.VpnGatewayId == nil {
 		return nil, errors.New("invalid value for required argument 'VpnGatewayId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SslServer
 	err := ctx.RegisterResource("tencentcloud:Vpn/sslServer:SslServer", name, args, &resource, opts...)
 	if err != nil {

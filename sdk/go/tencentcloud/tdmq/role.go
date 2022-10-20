@@ -104,6 +104,7 @@ func NewRole(ctx *pulumi.Context,
 	if args.RoleName == nil {
 		return nil, errors.New("invalid value for required argument 'RoleName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Role
 	err := ctx.RegisterResource("tencentcloud:Tdmq/role:Role", name, args, &resource, opts...)
 	if err != nil {

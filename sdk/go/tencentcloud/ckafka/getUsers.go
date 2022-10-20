@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetUsers(ctx *pulumi.Context, args *GetUsersArgs, opts ...pulumi.InvokeOption) (*GetUsersResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetUsersResult
 	err := ctx.Invoke("tencentcloud:Ckafka/getUsers:getUsers", args, &rv, opts...)
 	if err != nil {

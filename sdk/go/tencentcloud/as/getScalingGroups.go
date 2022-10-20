@@ -41,6 +41,7 @@ import (
 //
 // ```
 func GetScalingGroups(ctx *pulumi.Context, args *GetScalingGroupsArgs, opts ...pulumi.InvokeOption) (*GetScalingGroupsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetScalingGroupsResult
 	err := ctx.Invoke("tencentcloud:As/getScalingGroups:getScalingGroups", args, &rv, opts...)
 	if err != nil {

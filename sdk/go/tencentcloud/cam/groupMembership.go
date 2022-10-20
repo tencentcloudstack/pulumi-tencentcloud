@@ -75,6 +75,7 @@ func NewGroupMembership(ctx *pulumi.Context,
 	if args.GroupId == nil {
 		return nil, errors.New("invalid value for required argument 'GroupId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource GroupMembership
 	err := ctx.RegisterResource("tencentcloud:Cam/groupMembership:GroupMembership", name, args, &resource, opts...)
 	if err != nil {

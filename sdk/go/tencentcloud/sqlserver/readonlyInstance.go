@@ -122,6 +122,7 @@ func NewReadonlyInstance(ctx *pulumi.Context,
 	if args.Storage == nil {
 		return nil, errors.New("invalid value for required argument 'Storage'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ReadonlyInstance
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance", name, args, &resource, opts...)
 	if err != nil {

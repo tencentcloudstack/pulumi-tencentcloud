@@ -46,6 +46,7 @@ import (
 //
 // ```
 func GetRolePolicyAttachments(ctx *pulumi.Context, args *GetRolePolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetRolePolicyAttachmentsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetRolePolicyAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args, &rv, opts...)
 	if err != nil {

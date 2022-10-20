@@ -63,6 +63,7 @@ import (
 //
 // ```
 func GetProcedureTemplates(ctx *pulumi.Context, args *GetProcedureTemplatesArgs, opts ...pulumi.InvokeOption) (*GetProcedureTemplatesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetProcedureTemplatesResult
 	err := ctx.Invoke("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args, &rv, opts...)
 	if err != nil {

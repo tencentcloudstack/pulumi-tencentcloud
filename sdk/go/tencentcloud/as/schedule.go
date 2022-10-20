@@ -91,6 +91,7 @@ func NewSchedule(ctx *pulumi.Context,
 	if args.StartTime == nil {
 		return nil, errors.New("invalid value for required argument 'StartTime'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Schedule
 	err := ctx.RegisterResource("tencentcloud:As/schedule:Schedule", name, args, &resource, opts...)
 	if err != nil {

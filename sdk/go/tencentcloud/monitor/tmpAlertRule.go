@@ -110,6 +110,7 @@ func NewTmpAlertRule(ctx *pulumi.Context,
 	if args.RuleName == nil {
 		return nil, errors.New("invalid value for required argument 'RuleName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TmpAlertRule
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpAlertRule:TmpAlertRule", name, args, &resource, opts...)
 	if err != nil {

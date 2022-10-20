@@ -83,6 +83,7 @@ import (
 //
 // ```
 func GetDomainErrorPages(ctx *pulumi.Context, args *GetDomainErrorPagesArgs, opts ...pulumi.InvokeOption) (*GetDomainErrorPagesResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetDomainErrorPagesResult
 	err := ctx.Invoke("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", args, &rv, opts...)
 	if err != nil {

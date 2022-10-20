@@ -40,6 +40,7 @@ import (
 //
 // ```
 func GetAccountDbAttachments(ctx *pulumi.Context, args *GetAccountDbAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetAccountDbAttachmentsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetAccountDbAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args, &rv, opts...)
 	if err != nil {

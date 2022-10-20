@@ -71,6 +71,7 @@ func NewVipEipAttachment(ctx *pulumi.Context,
 	if args.HavipId == nil {
 		return nil, errors.New("invalid value for required argument 'HavipId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource VipEipAttachment
 	err := ctx.RegisterResource("tencentcloud:Ha/vipEipAttachment:VipEipAttachment", name, args, &resource, opts...)
 	if err != nil {

@@ -185,6 +185,7 @@ func NewClusterAttachment(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ClusterAttachment
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/clusterAttachment:ClusterAttachment", name, args, &resource, opts...)
 	if err != nil {

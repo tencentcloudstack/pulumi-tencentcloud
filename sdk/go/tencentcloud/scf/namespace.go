@@ -73,6 +73,7 @@ func NewNamespace(ctx *pulumi.Context,
 	if args.Namespace == nil {
 		return nil, errors.New("invalid value for required argument 'Namespace'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Namespace
 	err := ctx.RegisterResource("tencentcloud:Scf/namespace:Namespace", name, args, &resource, opts...)
 	if err != nil {

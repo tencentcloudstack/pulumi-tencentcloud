@@ -116,6 +116,8 @@ def get_buckets(bucket_prefix: Optional[str] = None,
         opts = pulumi.InvokeOptions()
     if opts.version is None:
         opts.version = _utilities.get_version()
+        if opts.plugin_download_url is None:
+            opts.plugin_download_url = _utilities.get_plugin_download_url()
     __ret__ = pulumi.runtime.invoke('tencentcloud:Cos/getBuckets:getBuckets', __args__, opts=opts, typ=GetBucketsResult).value
 
     return AwaitableGetBucketsResult(

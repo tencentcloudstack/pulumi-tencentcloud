@@ -79,6 +79,7 @@ func NewRolePolicyAttachment(ctx *pulumi.Context,
 	if args.RoleId == nil {
 		return nil, errors.New("invalid value for required argument 'RoleId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource RolePolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment", name, args, &resource, opts...)
 	if err != nil {

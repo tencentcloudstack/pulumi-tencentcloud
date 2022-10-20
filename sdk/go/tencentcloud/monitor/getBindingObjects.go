@@ -45,6 +45,7 @@ import (
 //
 // ```
 func GetBindingObjects(ctx *pulumi.Context, args *GetBindingObjectsArgs, opts ...pulumi.InvokeOption) (*GetBindingObjectsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetBindingObjectsResult
 	err := ctx.Invoke("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args, &rv, opts...)
 	if err != nil {
