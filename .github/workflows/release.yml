@@ -12,7 +12,7 @@ env:
   NPM_REGISTRY_URL: https://registry.npmjs.org
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
-  PUBLISH_NUGET: false # not support nuget because of the account reason.
+  PUBLISH_NUGET: true
   PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
   PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
   PYPI_REPOSITORY_URL: ""
