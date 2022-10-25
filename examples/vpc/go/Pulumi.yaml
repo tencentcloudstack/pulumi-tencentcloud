@@ -1,0 +1,3 @@
+name: example-vpc-go
+description: A minimal Pulumi TencentCloud VPC go example
+runtime: go

@@ -4,6 +4,14 @@ The TencentCloud Resource Provider lets you manage [TencentCloud](https://cloud.
 
 ## Installing
 
+### Install tencentcloud provider
+
+The sdks installation will fully support package auto download in the future, now we recommend downloading manually:
+
+```bash
+pulumi plugin install resource tencentcloud --server github://api.github.com/tencentcloudstack
+```
+
 This package is available for several languages/platforms:
 
 ### Node.js (JavaScript/TypeScript)
@@ -40,11 +48,26 @@ go get github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/...
 
 The following configuration points are available for the `tencentcloud` provider:
 
-- `tencentcloud:secretId` (environment: `TENCENTCLOUD_SECRET_ID`) - the API Secret ID for `tencentcloud`
-- `tencentcloud:secretKey` (environment: `TENCENTCLOUD_SECRET_KEY`) - the API Secret Key for `tencentcloud`
-- `tencentcloud:region` (environment: `TENCENTCLOUD_REGION`) - the region in which to deploy resources
+#### Secret ID
+The API Secret ID, read from environment variable `TENCENTCLOUD_SECRET_ID` if not preset.
 
-Run `pulumi config set tencentcloud:*` to configure before applying.
+    $ pulumi config set tencentcloud:secretId [your-secret-id] --secret
+
+#### Secret Key
+The API Secret Key, read from environment variable `TENCENTCLOUD_SECRET_KEY` if not preset.
+
+    $ pulumi config set tencentcloud:secretKey [your-secret-key] --secret
+
+#### Security Token
+The Security Token for temporary access, read from environment variable `TENCENTCLOUD_SECURITY_TOKEN` if not preset.
+
+    $ pulumi config set tencentcloud:securityToken [your-security-token] --secret
+
+#### Region
+The region in which to deploy resources, read from environment variable `TENCENTCLOUD_REGION` if not preset.
+
+    $ pulumi config set tencentcloud:region ap-singapore
+
 
 ## Reference
 
