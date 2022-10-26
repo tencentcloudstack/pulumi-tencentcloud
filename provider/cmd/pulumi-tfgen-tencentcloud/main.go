@@ -15,11 +15,57 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 	tencentcloud "github.com/tencentcloudstack/pulumi-tencentcloud/provider"
 	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
+	"io/ioutil"
+	"log"
+	"regexp"
+	"strings"
 )
 
 func main() {
 	tfgen.Main("tencentcloud", version.Version, tencentcloud.Provider())
+	temporaryReplaceCodeExampleImportStatement()
+}
+
+// Hacking import statement replacement '@pulumi/tencentcloud' -> '@tencentcloud_iac/pulumi'
+// This function takes NO effect to example of `sdk/nodejs`
+func temporaryReplaceCodeExampleImportStatement()  {
+	schemaPath := "./provider/cmd/pulumi-resource-tencentcloud/schema.json"
+	schemaContents, err := ioutil.ReadFile(schemaPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var packageSpec schema.PackageSpec
+	err = json.Unmarshal(schemaContents, &packageSpec)
+	if err != nil {
+		log.Fatalf("cannot deserialize schema: %v", err)
+	}
+
+	mismatchImportPathRE := regexp.MustCompile(`import \* as pulumi from "@tencentcloud_iac/pulumi";`)
+
+	for i := range packageSpec.Functions {
+		f := packageSpec.Functions[i]
+		desc := f.Description
+		f.Description = mismatchImportPathRE.ReplaceAllString(desc, "")
+		f.Description = strings.ReplaceAll(desc, "\nimport * as tencentcloud from \"@pulumi/tencentcloud\";", "\nimport * as tencentcloud from \"@tencentcloud_iac/pulumi\";")
+		packageSpec.Functions[i] = f
+	}
+
+	for i := range packageSpec.Resources {
+		r := packageSpec.Resources[i]
+		desc := r.Description
+		r.Description = mismatchImportPathRE.ReplaceAllString(desc, "")
+		r.Description = strings.ReplaceAll(desc, "\nimport * as tencentcloud from \"@pulumi/tencentcloud\";", "\nimport * as tencentcloud from \"@tencentcloud_iac/pulumi\";")
+		packageSpec.Resources[i] = r
+	}
+
+	b, err := json.MarshalIndent(packageSpec, "", "    ")
+	if err := ioutil.WriteFile(schemaPath, b, 0600); err != nil {
+		log.Fatal(err)
+	}
 }

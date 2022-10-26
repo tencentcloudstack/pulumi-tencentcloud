@@ -4,7 +4,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>TencentCloudStack</Authors>
     <Company>TencentCloudStack</Company>
-    <Description>A Pulumi package for creating and managing tencentcloud cloud resources.</Description>
+    <Description>A Pulumi package for creating and managing Tencent Cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tencentcloudstack/pulumi-tencentcloud</RepositoryUrl>

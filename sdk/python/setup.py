@@ -39,7 +39,7 @@ def readme():
 
 setup(name='tencentcloud_iac_pulumi',
       version=VERSION,
-      description="A Pulumi package for creating and managing tencentcloud cloud resources.",
+      description="A Pulumi package for creating and managing Tencent Cloud resources.",
       long_description=readme(),
       long_description_content_type='text/markdown',
       cmdclass={

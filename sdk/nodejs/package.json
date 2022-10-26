@@ -1,7 +1,7 @@
 {
     "name": "@tencentcloud_iac/pulumi",
     "version": "${VERSION}",
-    "description": "A Pulumi package for creating and managing tencentcloud cloud resources.",
+    "description": "A Pulumi package for creating and managing Tencent Cloud resources.",
     "keywords": [
         "pulumi",
         "tencentcloud",

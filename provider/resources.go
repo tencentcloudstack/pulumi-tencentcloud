@@ -40,11 +40,11 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:           p,
 		Name:        "tencentcloud",
-		DisplayName: "Tencentcloud",
+		DisplayName: "TencentCloud",
 		Publisher:   "TencentCloudStack",
 		LogoURL:     "",
 		PluginDownloadURL: "github://api.github.com/tencentcloudstack",
-		Description:       "A Pulumi package for creating and managing tencentcloud cloud resources.",
+		Description:       "A Pulumi package for creating and managing Tencent Cloud resources.",
 		Keywords:          []string{"pulumi", "tencentcloud", "category/cloud"},
 		License:           "Apache-2.0",
 		Homepage:          "https://www.pulumi.com",
