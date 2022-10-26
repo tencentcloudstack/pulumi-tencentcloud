@@ -75,6 +75,3 @@ The Security Token for temporary access, read from environment variable `TENCENT
 pulumi config set tencentcloud:securityToken [your-security-token] --secret
 ```
 
-## Reference
-
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/tencentcloud/api-docs/).
