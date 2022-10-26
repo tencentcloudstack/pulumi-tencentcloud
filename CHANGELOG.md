@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+## v0.1.1
+
+- fix unchanged python doc after run `build_python`
+
+## v0.1.0
+
+- add docs for website, optimize existing documents
+- remove unused terraform.log file in example
+- add example vpc code
+
 ## v0.0.5
 
 - Support NuGet publish
