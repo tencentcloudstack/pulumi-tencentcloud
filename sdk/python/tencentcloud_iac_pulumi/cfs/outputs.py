@@ -134,6 +134,7 @@ class GetFileSystemsFileSystemListResult(dict):
                  availability_zone: str,
                  create_time: str,
                  file_system_id: str,
+                 mount_ip: str,
                  name: str,
                  protocol: str,
                  size_limit: int,
@@ -145,6 +146,7 @@ class GetFileSystemsFileSystemListResult(dict):
         :param str availability_zone: The available zone that the file system locates at.
         :param str create_time: Creation time of the file system.
         :param str file_system_id: A specified file system ID used to query.
+        :param str mount_ip: IP of the file system.
         :param str name: A file system name used to query.
         :param str protocol: Protocol of the file system.
         :param int size_limit: Size limit of the file system.
@@ -156,6 +158,7 @@ class GetFileSystemsFileSystemListResult(dict):
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "file_system_id", file_system_id)
+        pulumi.set(__self__, "mount_ip", mount_ip)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "protocol", protocol)
         pulumi.set(__self__, "size_limit", size_limit)
@@ -194,6 +197,14 @@ class GetFileSystemsFileSystemListResult(dict):
         A specified file system ID used to query.
         """
         return pulumi.get(self, "file_system_id")
+
+    @property
+    @pulumi.getter(name="mountIp")
+    def mount_ip(self) -> str:
+        """
+        IP of the file system.
+        """
+        return pulumi.get(self, "mount_ip")
 
     @property
     @pulumi.getter

@@ -72,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Output<string> PublishInstanceId { get; private set; } = null!;
 
         /// <summary>
+        /// ID of PubSub.
+        /// </summary>
+        [Output("publishSubscribeId")]
+        public Output<int> PublishSubscribeId { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the Publish and Subscribe. Default is `default_name`.
         /// </summary>
         [Output("publishSubscribeName")]
@@ -196,6 +202,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Input("publishInstanceId")]
         public Input<string>? PublishInstanceId { get; set; }
+
+        /// <summary>
+        /// ID of PubSub.
+        /// </summary>
+        [Input("publishSubscribeId")]
+        public Input<int>? PublishSubscribeId { get; set; }
 
         /// <summary>
         /// The name of the Publish and Subscribe. Default is `default_name`.

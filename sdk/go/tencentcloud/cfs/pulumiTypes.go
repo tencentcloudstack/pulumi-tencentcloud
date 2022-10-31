@@ -276,6 +276,8 @@ type GetFileSystemsFileSystemList struct {
 	CreateTime string `pulumi:"createTime"`
 	// A specified file system ID used to query.
 	FileSystemId string `pulumi:"fileSystemId"`
+	// IP of the file system.
+	MountIp string `pulumi:"mountIp"`
 	// A file system name used to query.
 	Name string `pulumi:"name"`
 	// Protocol of the file system.
@@ -310,6 +312,8 @@ type GetFileSystemsFileSystemListArgs struct {
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// A specified file system ID used to query.
 	FileSystemId pulumi.StringInput `pulumi:"fileSystemId"`
+	// IP of the file system.
+	MountIp pulumi.StringInput `pulumi:"mountIp"`
 	// A file system name used to query.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Protocol of the file system.
@@ -393,6 +397,11 @@ func (o GetFileSystemsFileSystemListOutput) CreateTime() pulumi.StringOutput {
 // A specified file system ID used to query.
 func (o GetFileSystemsFileSystemListOutput) FileSystemId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.FileSystemId }).(pulumi.StringOutput)
+}
+
+// IP of the file system.
+func (o GetFileSystemsFileSystemListOutput) MountIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.MountIp }).(pulumi.StringOutput)
 }
 
 // A file system name used to query.
