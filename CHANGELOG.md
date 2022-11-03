@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+## v0.1.2
+
+- Set `X-TC-RequestClient` req header by overwriting connectivity ReqClient
+- Add provider Logo
+- Add GitHub action for pull-request checking.
+
 ## v0.1.1
 
 - fix unchanged python doc after run `build_python`
