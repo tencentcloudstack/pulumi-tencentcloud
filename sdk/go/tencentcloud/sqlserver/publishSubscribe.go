@@ -66,6 +66,8 @@ type PublishSubscribe struct {
 	DeleteSubscribeDb pulumi.BoolPtrOutput `pulumi:"deleteSubscribeDb"`
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId pulumi.StringOutput `pulumi:"publishInstanceId"`
+	// ID of PubSub.
+	PublishSubscribeId pulumi.IntOutput `pulumi:"publishSubscribeId"`
 	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName pulumi.StringPtrOutput `pulumi:"publishSubscribeName"`
 	// ID of the SQL Server instance which subscribe.
@@ -117,6 +119,8 @@ type publishSubscribeState struct {
 	DeleteSubscribeDb *bool `pulumi:"deleteSubscribeDb"`
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId *string `pulumi:"publishInstanceId"`
+	// ID of PubSub.
+	PublishSubscribeId *int `pulumi:"publishSubscribeId"`
 	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName *string `pulumi:"publishSubscribeName"`
 	// ID of the SQL Server instance which subscribe.
@@ -130,6 +134,8 @@ type PublishSubscribeState struct {
 	DeleteSubscribeDb pulumi.BoolPtrInput
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId pulumi.StringPtrInput
+	// ID of PubSub.
+	PublishSubscribeId pulumi.IntPtrInput
 	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName pulumi.StringPtrInput
 	// ID of the SQL Server instance which subscribe.
@@ -267,6 +273,11 @@ func (o PublishSubscribeOutput) DeleteSubscribeDb() pulumi.BoolPtrOutput {
 // ID of the SQL Server instance which publish.
 func (o PublishSubscribeOutput) PublishInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *PublishSubscribe) pulumi.StringOutput { return v.PublishInstanceId }).(pulumi.StringOutput)
+}
+
+// ID of PubSub.
+func (o PublishSubscribeOutput) PublishSubscribeId() pulumi.IntOutput {
+	return o.ApplyT(func(v *PublishSubscribe) pulumi.IntOutput { return v.PublishSubscribeId }).(pulumi.IntOutput)
 }
 
 // The name of the Publish and Subscribe. Default is `defaultName`.

@@ -2905,6 +2905,10 @@ export namespace Cfs {
          */
         fileSystemId: string;
         /**
+         * IP of the file system.
+         */
+        mountIp: string;
+        /**
          * A file system name used to query.
          */
         name: string;
