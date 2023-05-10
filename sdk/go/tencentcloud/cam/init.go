@@ -31,18 +31,28 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OidcSso{}
 	case "tencentcloud:Cam/policy:Policy":
 		r = &Policy{}
+	case "tencentcloud:Cam/policyByName:PolicyByName":
+		r = &PolicyByName{}
 	case "tencentcloud:Cam/role:Role":
 		r = &Role{}
+	case "tencentcloud:Cam/roleByName:RoleByName":
+		r = &RoleByName{}
 	case "tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment":
 		r = &RolePolicyAttachment{}
+	case "tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName":
+		r = &RolePolicyAttachmentByName{}
 	case "tencentcloud:Cam/roleSso:RoleSso":
 		r = &RoleSso{}
 	case "tencentcloud:Cam/samlProvider:SamlProvider":
 		r = &SamlProvider{}
+	case "tencentcloud:Cam/serviceLinkedRole:ServiceLinkedRole":
+		r = &ServiceLinkedRole{}
 	case "tencentcloud:Cam/user:User":
 		r = &User{}
 	case "tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment":
 		r = &UserPolicyAttachment{}
+	case "tencentcloud:Cam/userSamlConfig:UserSamlConfig":
+		r = &UserSamlConfig{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -83,12 +93,27 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cam/policyByName",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cam/role",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cam/roleByName",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cam/rolePolicyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cam/rolePolicyAttachmentByName",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -103,12 +128,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cam/serviceLinkedRole",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cam/user",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cam/userPolicyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cam/userSamlConfig",
 		&module{version},
 	)
 }

@@ -39,6 +39,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
         /// </summary>
         public readonly string Id;
         /// <summary>
+        /// Key of the SSL certificate.
+        /// </summary>
+        public readonly string Key;
+        /// <summary>
         /// Name of the SSL certificate to be queried.
         /// </summary>
         public readonly string Name;
@@ -77,6 +81,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
 
             string id,
 
+            string key,
+
             string name,
 
             string productZhName,
@@ -95,6 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
             Domain = domain;
             EndTime = endTime;
             Id = id;
+            Key = key;
             Name = name;
             ProductZhName = productZhName;
             ProjectId = projectId;

@@ -10,6 +10,7 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'FlowLogFlowLogStorage',
     'GetAclsAclListResult',
     'GetAclsAclListEgressResult',
     'GetAclsAclListIngressResult',
@@ -19,6 +20,56 @@ __all__ = [
     'GetRouteTablesInstanceListRouteEntryInfoResult',
     'GetSubnetsInstanceListResult',
 ]
+
+@pulumi.output_type
+class FlowLogFlowLogStorage(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "storageId":
+            suggest = "storage_id"
+        elif key == "storageTopic":
+            suggest = "storage_topic"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FlowLogFlowLogStorage. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FlowLogFlowLogStorage.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FlowLogFlowLogStorage.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 storage_id: Optional[str] = None,
+                 storage_topic: Optional[str] = None):
+        """
+        :param str storage_id: Specify storage instance id, required while `storage_type` is `ckafka`.
+        :param str storage_topic: Specify storage topic id, required while `storage_type` is `ckafka`.
+        """
+        if storage_id is not None:
+            pulumi.set(__self__, "storage_id", storage_id)
+        if storage_topic is not None:
+            pulumi.set(__self__, "storage_topic", storage_topic)
+
+    @property
+    @pulumi.getter(name="storageId")
+    def storage_id(self) -> Optional[str]:
+        """
+        Specify storage instance id, required while `storage_type` is `ckafka`.
+        """
+        return pulumi.get(self, "storage_id")
+
+    @property
+    @pulumi.getter(name="storageTopic")
+    def storage_topic(self) -> Optional[str]:
+        """
+        Specify storage topic id, required while `storage_type` is `ckafka`.
+        """
+        return pulumi.get(self, "storage_topic")
+
 
 @pulumi.output_type
 class GetAclsAclListResult(dict):

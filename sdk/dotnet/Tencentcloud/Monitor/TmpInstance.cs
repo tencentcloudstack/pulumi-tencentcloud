@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     public partial class TmpInstance : Pulumi.CustomResource
     {
         /// <summary>
+        /// Prometheus HTTP API root address.
+        /// </summary>
+        [Output("apiRootPath")]
+        public Output<string> ApiRootPath { get; private set; } = null!;
+
+        /// <summary>
         /// Data retention time.
         /// </summary>
         [Output("dataRetentionTime")]
@@ -62,6 +68,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance IPv4 address.
+        /// </summary>
+        [Output("ipv4Address")]
+        public Output<string> Ipv4Address { get; private set; } = null!;
+
+        /// <summary>
+        /// Proxy address.
+        /// </summary>
+        [Output("proxyAddress")]
+        public Output<string> ProxyAddress { get; private set; } = null!;
+
+        /// <summary>
+        /// Prometheus remote write address.
+        /// </summary>
+        [Output("remoteWrite")]
+        public Output<string> RemoteWrite { get; private set; } = null!;
 
         /// <summary>
         /// Subnet Id.
@@ -184,6 +208,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     public sealed class TmpInstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Prometheus HTTP API root address.
+        /// </summary>
+        [Input("apiRootPath")]
+        public Input<string>? ApiRootPath { get; set; }
+
+        /// <summary>
         /// Data retention time.
         /// </summary>
         [Input("dataRetentionTime")]
@@ -194,6 +224,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Instance IPv4 address.
+        /// </summary>
+        [Input("ipv4Address")]
+        public Input<string>? Ipv4Address { get; set; }
+
+        /// <summary>
+        /// Proxy address.
+        /// </summary>
+        [Input("proxyAddress")]
+        public Input<string>? ProxyAddress { get; set; }
+
+        /// <summary>
+        /// Prometheus remote write address.
+        /// </summary>
+        [Input("remoteWrite")]
+        public Input<string>? RemoteWrite { get; set; }
 
         /// <summary>
         /// Subnet Id.

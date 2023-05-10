@@ -12,6 +12,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
 {
     /// <summary>
     /// Provides a resource to create a CDN domain.
+    /// 
     /// &gt; **NOTE:** To disable most of configuration with switch, just modify switch argument to off instead of remove the whole block
     /// 
     /// ## Example Usage
@@ -76,8 +77,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     ///         var foo = new Tencentcloud.Cdn.Domain("foo", new Tencentcloud.Cdn.DomainArgs
     ///         {
     ///             Area = "mainland",
+    ///             CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
+    ///             {
+    ///                 FullUrlCache = "on",
+    ///             },
     ///             Domain = "xxxx.com",
-    ///             FullUrlCache = false,
     ///             HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
     ///             {
     ///                 ForceRedirect = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigForceRedirectArgs
@@ -161,7 +165,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     ///             Domain = "abc.com",
     ///             ServiceType = "web",
     ///             Area = "mainland",
-    ///             FullUrlCache = false,
+    ///             CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
+    ///             {
+    ///                 FullUrlCache = "off",
+    ///             },
     ///             Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
     ///             {
     ///                 OriginType = "cos",
@@ -221,6 +228,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Output("bandWidthAlert")]
         public Output<Outputs.DomainBandWidthAlert?> BandWidthAlert { get; private set; } = null!;
+
+        /// <summary>
+        /// Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
+        /// </summary>
+        [Output("cacheKey")]
+        public Output<Outputs.DomainCacheKey?> CacheKey { get; private set; } = null!;
 
         /// <summary>
         /// CNAME address of domain name.
@@ -283,7 +296,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Output<string?> FollowRedirectSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable full-path cache. Default value is `true`.
+        /// Use `cache_key` &gt; `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         /// </summary>
         [Output("fullUrlCache")]
         public Output<bool?> FullUrlCache { get; private set; } = null!;
@@ -355,6 +368,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Output<Outputs.DomainOssPrivateAccess?> OssPrivateAccess { get; private set; } = null!;
 
         /// <summary>
+        /// Maximum post size configuration.
+        /// </summary>
+        [Output("postMaxSizes")]
+        public Output<ImmutableArray<Outputs.DomainPostMaxSize>> PostMaxSizes { get; private set; } = null!;
+
+        /// <summary>
         /// The project CDN belongs to, default to 0.
         /// </summary>
         [Output("projectId")]
@@ -415,7 +434,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Output<string?> SeoSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        /// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         /// </summary>
         [Output("serviceType")]
         public Output<string> ServiceType { get; private set; } = null!;
@@ -528,6 +547,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<Inputs.DomainBandWidthAlertArgs>? BandWidthAlert { get; set; }
 
         /// <summary>
+        /// Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
+        /// </summary>
+        [Input("cacheKey")]
+        public Input<Inputs.DomainCacheKeyArgs>? CacheKey { get; set; }
+
+        /// <summary>
         /// Smart compression configurations.
         /// </summary>
         [Input("compression")]
@@ -564,7 +589,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<string>? FollowRedirectSwitch { get; set; }
 
         /// <summary>
-        /// Whether to enable full-path cache. Default value is `true`.
+        /// Use `cache_key` &gt; `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         /// </summary>
         [Input("fullUrlCache")]
         public Input<bool>? FullUrlCache { get; set; }
@@ -635,6 +660,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         [Input("ossPrivateAccess")]
         public Input<Inputs.DomainOssPrivateAccessArgs>? OssPrivateAccess { get; set; }
 
+        [Input("postMaxSizes")]
+        private InputList<Inputs.DomainPostMaxSizeArgs>? _postMaxSizes;
+
+        /// <summary>
+        /// Maximum post size configuration.
+        /// </summary>
+        public InputList<Inputs.DomainPostMaxSizeArgs> PostMaxSizes
+        {
+            get => _postMaxSizes ?? (_postMaxSizes = new InputList<Inputs.DomainPostMaxSizeArgs>());
+            set => _postMaxSizes = value;
+        }
+
         /// <summary>
         /// The project CDN belongs to, default to 0.
         /// </summary>
@@ -702,7 +739,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<string>? SeoSwitch { get; set; }
 
         /// <summary>
-        /// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        /// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         /// </summary>
         [Input("serviceType", required: true)]
         public Input<string> ServiceType { get; set; } = null!;
@@ -775,6 +812,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<Inputs.DomainBandWidthAlertGetArgs>? BandWidthAlert { get; set; }
 
         /// <summary>
+        /// Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
+        /// </summary>
+        [Input("cacheKey")]
+        public Input<Inputs.DomainCacheKeyGetArgs>? CacheKey { get; set; }
+
+        /// <summary>
         /// CNAME address of domain name.
         /// </summary>
         [Input("cname")]
@@ -835,7 +878,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<string>? FollowRedirectSwitch { get; set; }
 
         /// <summary>
-        /// Whether to enable full-path cache. Default value is `true`.
+        /// Use `cache_key` &gt; `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         /// </summary>
         [Input("fullUrlCache")]
         public Input<bool>? FullUrlCache { get; set; }
@@ -906,6 +949,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         [Input("ossPrivateAccess")]
         public Input<Inputs.DomainOssPrivateAccessGetArgs>? OssPrivateAccess { get; set; }
 
+        [Input("postMaxSizes")]
+        private InputList<Inputs.DomainPostMaxSizeGetArgs>? _postMaxSizes;
+
+        /// <summary>
+        /// Maximum post size configuration.
+        /// </summary>
+        public InputList<Inputs.DomainPostMaxSizeGetArgs> PostMaxSizes
+        {
+            get => _postMaxSizes ?? (_postMaxSizes = new InputList<Inputs.DomainPostMaxSizeGetArgs>());
+            set => _postMaxSizes = value;
+        }
+
         /// <summary>
         /// The project CDN belongs to, default to 0.
         /// </summary>
@@ -973,7 +1028,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<string>? SeoSwitch { get; set; }
 
         /// <summary>
-        /// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        /// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         /// </summary>
         [Input("serviceType")]
         public Input<string>? ServiceType { get; set; }

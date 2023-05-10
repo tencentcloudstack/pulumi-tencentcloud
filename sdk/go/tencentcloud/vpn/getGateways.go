@@ -18,32 +18,29 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vpn.GetGateways(ctx, &vpn.GetGatewaysArgs{
-//				Id:              pulumi.StringRef("vpngw-8ccsnclt"),
-//				Name:            pulumi.StringRef("main"),
-//				PublicIpAddress: pulumi.StringRef("1.1.1.1"),
-//				Tags: map[string]interface{}{
-//					"test": "tf",
-//				},
-//				VpcId: pulumi.StringRef("vpc-dk8zmwuf"),
-//				Zone:  pulumi.StringRef("ap-guangzhou-3"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.GetGateways(ctx, &vpn.GetGatewaysArgs{
+// 			Id:              pulumi.StringRef("vpngw-8ccsnclt"),
+// 			Name:            pulumi.StringRef("main"),
+// 			PublicIpAddress: pulumi.StringRef("1.1.1.1"),
+// 			Tags: map[string]interface{}{
+// 				"test": "tf",
+// 			},
+// 			VpcId: pulumi.StringRef("vpc-dk8zmwuf"),
+// 			Zone:  pulumi.StringRef("ap-guangzhou-3"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetGateways(ctx *pulumi.Context, args *GetGatewaysArgs, opts ...pulumi.InvokeOption) (*GetGatewaysResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

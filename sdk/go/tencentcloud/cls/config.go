@@ -19,52 +19,49 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cls.NewConfig(ctx, "config", &Cls.ConfigArgs{
-//				ExcludePaths: cls.ConfigExcludePathArray{
-//					&cls.ConfigExcludePathArgs{
-//						Type:  pulumi.String("Path"),
-//						Value: pulumi.String("/data"),
-//					},
-//					&cls.ConfigExcludePathArgs{
-//						Type:  pulumi.String("File"),
-//						Value: pulumi.String("/file"),
-//					},
-//				},
-//				ExtractRule: &cls.ConfigExtractRuleArgs{
-//					Backtracking: -1,
-//					FilterKeyRegexes: cls.ConfigExtractRuleFilterKeyRegexArray{
-//						&cls.ConfigExtractRuleFilterKeyRegexArgs{
-//							Key:   pulumi.String("key1"),
-//							Regex: pulumi.String("value1"),
-//						},
-//						&cls.ConfigExtractRuleFilterKeyRegexArgs{
-//							Key:   pulumi.String("key2"),
-//							Regex: pulumi.String("value2"),
-//						},
-//					},
-//					UnMatchLogKey:       pulumi.String("config"),
-//					UnMatchUpLoadSwitch: pulumi.Bool(true),
-//				},
-//				LogType: pulumi.String("json_log"),
-//				Output:  pulumi.String("4d07fba0-b93e-4e0b-9a7f-d58542560bbb"),
-//				Path:    pulumi.String("/var/log/kubernetes"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewConfig(ctx, "config", &Cls.ConfigArgs{
+// 			ExcludePaths: cls.ConfigExcludePathArray{
+// 				&cls.ConfigExcludePathArgs{
+// 					Type:  pulumi.String("Path"),
+// 					Value: pulumi.String("/data"),
+// 				},
+// 				&cls.ConfigExcludePathArgs{
+// 					Type:  pulumi.String("File"),
+// 					Value: pulumi.String("/file"),
+// 				},
+// 			},
+// 			ExtractRule: &cls.ConfigExtractRuleArgs{
+// 				Backtracking: -1,
+// 				FilterKeyRegexes: cls.ConfigExtractRuleFilterKeyRegexArray{
+// 					&cls.ConfigExtractRuleFilterKeyRegexArgs{
+// 						Key:   pulumi.String("key1"),
+// 						Regex: pulumi.String("value1"),
+// 					},
+// 					&cls.ConfigExtractRuleFilterKeyRegexArgs{
+// 						Key:   pulumi.String("key2"),
+// 						Regex: pulumi.String("value2"),
+// 					},
+// 				},
+// 				UnMatchLogKey:       pulumi.String("config"),
+// 				UnMatchUpLoadSwitch: pulumi.Bool(true),
+// 			},
+// 			LogType: pulumi.String("json_log"),
+// 			Output:  pulumi.String("4d07fba0-b93e-4e0b-9a7f-d58542560bbb"),
+// 			Path:    pulumi.String("/var/log/kubernetes"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type Config struct {
 	pulumi.CustomResourceState
@@ -216,7 +213,7 @@ func (i *Config) ToConfigOutputWithContext(ctx context.Context) ConfigOutput {
 // ConfigArrayInput is an input type that accepts ConfigArray and ConfigArrayOutput values.
 // You can construct a concrete instance of `ConfigArrayInput` via:
 //
-//	ConfigArray{ ConfigArgs{...} }
+//          ConfigArray{ ConfigArgs{...} }
 type ConfigArrayInput interface {
 	pulumi.Input
 
@@ -241,7 +238,7 @@ func (i ConfigArray) ToConfigArrayOutputWithContext(ctx context.Context) ConfigA
 // ConfigMapInput is an input type that accepts ConfigMap and ConfigMapOutput values.
 // You can construct a concrete instance of `ConfigMapInput` via:
 //
-//	ConfigMap{ "key": ConfigArgs{...} }
+//          ConfigMap{ "key": ConfigArgs{...} }
 type ConfigMapInput interface {
 	pulumi.Input
 

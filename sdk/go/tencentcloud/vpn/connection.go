@@ -19,53 +19,50 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
-//				CustomerGatewayId:       pulumi.String("cgw-xfqag"),
-//				IkeDhGroupName:          pulumi.String("GROUP2"),
-//				IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
-//				IkeLocalAddress:         pulumi.String("1.1.1.1"),
-//				IkeLocalIdentity:        pulumi.String("ADDRESS"),
-//				IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
-//				IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
-//				IkeRemoteAddress:        pulumi.String("2.2.2.2"),
-//				IkeRemoteIdentity:       pulumi.String("ADDRESS"),
-//				IkeSaLifetimeSeconds:    pulumi.Int(86401),
-//				IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
-//				IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
-//				IpsecPfsDhGroup:         pulumi.String("NULL"),
-//				IpsecSaLifetimeSeconds:  pulumi.Int(7200),
-//				IpsecSaLifetimeTraffic:  pulumi.Int(2570),
-//				PreShareKey:             pulumi.String("testt"),
-//				SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
-//					&vpn.ConnectionSecurityGroupPolicyArgs{
-//						LocalCidrBlock: pulumi.String("172.16.0.0/16"),
-//						RemoteCidrBlocks: pulumi.StringArray{
-//							pulumi.String("2.2.2.0/26"),
-//						},
-//					},
-//				},
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("testt"),
-//				},
-//				VpcId:        pulumi.String("vpc-dk8zmwuf"),
-//				VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
+// 			CustomerGatewayId:       pulumi.String("cgw-xfqag"),
+// 			IkeDhGroupName:          pulumi.String("GROUP2"),
+// 			IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
+// 			IkeLocalAddress:         pulumi.String("1.1.1.1"),
+// 			IkeLocalIdentity:        pulumi.String("ADDRESS"),
+// 			IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
+// 			IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
+// 			IkeRemoteAddress:        pulumi.String("2.2.2.2"),
+// 			IkeRemoteIdentity:       pulumi.String("ADDRESS"),
+// 			IkeSaLifetimeSeconds:    pulumi.Int(86401),
+// 			IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
+// 			IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
+// 			IpsecPfsDhGroup:         pulumi.String("NULL"),
+// 			IpsecSaLifetimeSeconds:  pulumi.Int(7200),
+// 			IpsecSaLifetimeTraffic:  pulumi.Int(2570),
+// 			PreShareKey:             pulumi.String("testt"),
+// 			SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
+// 				&vpn.ConnectionSecurityGroupPolicyArgs{
+// 					LocalCidrBlock: pulumi.String("172.16.0.0/16"),
+// 					RemoteCidrBlocks: pulumi.StringArray{
+// 						pulumi.String("2.2.2.0/26"),
+// 					},
+// 				},
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("testt"),
+// 			},
+// 			VpcId:        pulumi.String("vpc-dk8zmwuf"),
+// 			VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -73,9 +70,7 @@ import (
 // VPN connection can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
-//
+//  $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
 // ```
 type Connection struct {
 	pulumi.CustomResourceState
@@ -84,6 +79,12 @@ type Connection struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// ID of the customer gateway.
 	CustomerGatewayId pulumi.StringOutput `pulumi:"customerGatewayId"`
+	// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+	DpdAction pulumi.StringOutput `pulumi:"dpdAction"`
+	// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+	DpdEnable pulumi.IntOutput `pulumi:"dpdEnable"`
+	// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+	DpdTimeout pulumi.IntOutput `pulumi:"dpdTimeout"`
 	// Whether intra-tunnel health checks are supported.
 	EnableHealthCheck pulumi.BoolOutput `pulumi:"enableHealthCheck"`
 	// Encrypt proto of the VPN connection.
@@ -196,6 +197,12 @@ type connectionState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// ID of the customer gateway.
 	CustomerGatewayId *string `pulumi:"customerGatewayId"`
+	// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+	DpdAction *string `pulumi:"dpdAction"`
+	// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+	DpdEnable *int `pulumi:"dpdEnable"`
+	// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+	DpdTimeout *int `pulumi:"dpdTimeout"`
 	// Whether intra-tunnel health checks are supported.
 	EnableHealthCheck *bool `pulumi:"enableHealthCheck"`
 	// Encrypt proto of the VPN connection.
@@ -267,6 +274,12 @@ type ConnectionState struct {
 	CreateTime pulumi.StringPtrInput
 	// ID of the customer gateway.
 	CustomerGatewayId pulumi.StringPtrInput
+	// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+	DpdAction pulumi.StringPtrInput
+	// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+	DpdEnable pulumi.IntPtrInput
+	// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+	DpdTimeout pulumi.IntPtrInput
 	// Whether intra-tunnel health checks are supported.
 	EnableHealthCheck pulumi.BoolPtrInput
 	// Encrypt proto of the VPN connection.
@@ -340,6 +353,12 @@ func (ConnectionState) ElementType() reflect.Type {
 type connectionArgs struct {
 	// ID of the customer gateway.
 	CustomerGatewayId string `pulumi:"customerGatewayId"`
+	// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+	DpdAction *string `pulumi:"dpdAction"`
+	// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+	DpdEnable *int `pulumi:"dpdEnable"`
+	// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+	DpdTimeout *int `pulumi:"dpdTimeout"`
 	// Whether intra-tunnel health checks are supported.
 	EnableHealthCheck *bool `pulumi:"enableHealthCheck"`
 	// Health check the address of this terminal.
@@ -398,6 +417,12 @@ type connectionArgs struct {
 type ConnectionArgs struct {
 	// ID of the customer gateway.
 	CustomerGatewayId pulumi.StringInput
+	// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+	DpdAction pulumi.StringPtrInput
+	// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+	DpdEnable pulumi.IntPtrInput
+	// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+	DpdTimeout pulumi.IntPtrInput
 	// Whether intra-tunnel health checks are supported.
 	EnableHealthCheck pulumi.BoolPtrInput
 	// Health check the address of this terminal.
@@ -478,7 +503,7 @@ func (i *Connection) ToConnectionOutputWithContext(ctx context.Context) Connecti
 // ConnectionArrayInput is an input type that accepts ConnectionArray and ConnectionArrayOutput values.
 // You can construct a concrete instance of `ConnectionArrayInput` via:
 //
-//	ConnectionArray{ ConnectionArgs{...} }
+//          ConnectionArray{ ConnectionArgs{...} }
 type ConnectionArrayInput interface {
 	pulumi.Input
 
@@ -503,7 +528,7 @@ func (i ConnectionArray) ToConnectionArrayOutputWithContext(ctx context.Context)
 // ConnectionMapInput is an input type that accepts ConnectionMap and ConnectionMapOutput values.
 // You can construct a concrete instance of `ConnectionMapInput` via:
 //
-//	ConnectionMap{ "key": ConnectionArgs{...} }
+//          ConnectionMap{ "key": ConnectionArgs{...} }
 type ConnectionMapInput interface {
 	pulumi.Input
 
@@ -547,6 +572,21 @@ func (o ConnectionOutput) CreateTime() pulumi.StringOutput {
 // ID of the customer gateway.
 func (o ConnectionOutput) CustomerGatewayId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.CustomerGatewayId }).(pulumi.StringOutput)
+}
+
+// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+func (o ConnectionOutput) DpdAction() pulumi.StringOutput {
+	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.DpdAction }).(pulumi.StringOutput)
+}
+
+// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+func (o ConnectionOutput) DpdEnable() pulumi.IntOutput {
+	return o.ApplyT(func(v *Connection) pulumi.IntOutput { return v.DpdEnable }).(pulumi.IntOutput)
+}
+
+// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+func (o ConnectionOutput) DpdTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v *Connection) pulumi.IntOutput { return v.DpdTimeout }).(pulumi.IntOutput)
 }
 
 // Whether intra-tunnel health checks are supported.

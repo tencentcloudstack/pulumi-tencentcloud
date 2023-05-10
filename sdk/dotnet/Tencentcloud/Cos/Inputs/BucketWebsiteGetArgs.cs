@@ -13,6 +13,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 
     public sealed class BucketWebsiteGetArgs : Pulumi.ResourceArgs
     {
+        [Input("endpoint")]
+        public Input<string>? Endpoint { get; set; }
+
         /// <summary>
         /// An absolute path to the document to return in case of a 4XX error.
         /// </summary>

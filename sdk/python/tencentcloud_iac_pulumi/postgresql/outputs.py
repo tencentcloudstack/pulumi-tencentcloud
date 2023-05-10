@@ -11,7 +11,10 @@ from .. import _utilities
 __all__ = [
     'InstanceBackupPlan',
     'InstanceDbNodeSet',
+    'ParameterTemplateModifyParamEntrySet',
     'GetInstancesInstanceListResult',
+    'GetParameterTemplatesFilterResult',
+    'GetParameterTemplatesListResult',
     'GetSpecinfosListResult',
     'GetXlogsListResult',
 ]
@@ -122,6 +125,52 @@ class InstanceDbNodeSet(dict):
         Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
         """
         return pulumi.get(self, "role")
+
+
+@pulumi.output_type
+class ParameterTemplateModifyParamEntrySet(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "expectedValue":
+            suggest = "expected_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ParameterTemplateModifyParamEntrySet. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ParameterTemplateModifyParamEntrySet.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ParameterTemplateModifyParamEntrySet.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 expected_value: str,
+                 name: str):
+        """
+        :param str expected_value: Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
+        :param str name: The parameter name.
+        """
+        pulumi.set(__self__, "expected_value", expected_value)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="expectedValue")
+    def expected_value(self) -> str:
+        """
+        Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
+        """
+        return pulumi.get(self, "expected_value")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The parameter name.
+        """
+        return pulumi.get(self, "name")
 
 
 @pulumi.output_type
@@ -349,6 +398,99 @@ class GetInstancesInstanceListResult(dict):
         ID of VPC.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetParameterTemplatesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetParameterTemplatesListResult(dict):
+    def __init__(__self__, *,
+                 db_engine: str,
+                 db_major_version: str,
+                 template_description: str,
+                 template_id: str,
+                 template_name: str):
+        """
+        :param str db_engine: the database engine for which the parameter template applies.
+        :param str db_major_version: the database version to which the parameter template applies.
+        :param str template_description: parameter template description.
+        :param str template_id: parameter template ID.
+        :param str template_name: parameter template name.
+        """
+        pulumi.set(__self__, "db_engine", db_engine)
+        pulumi.set(__self__, "db_major_version", db_major_version)
+        pulumi.set(__self__, "template_description", template_description)
+        pulumi.set(__self__, "template_id", template_id)
+        pulumi.set(__self__, "template_name", template_name)
+
+    @property
+    @pulumi.getter(name="dbEngine")
+    def db_engine(self) -> str:
+        """
+        the database engine for which the parameter template applies.
+        """
+        return pulumi.get(self, "db_engine")
+
+    @property
+    @pulumi.getter(name="dbMajorVersion")
+    def db_major_version(self) -> str:
+        """
+        the database version to which the parameter template applies.
+        """
+        return pulumi.get(self, "db_major_version")
+
+    @property
+    @pulumi.getter(name="templateDescription")
+    def template_description(self) -> str:
+        """
+        parameter template description.
+        """
+        return pulumi.get(self, "template_description")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> str:
+        """
+        parameter template ID.
+        """
+        return pulumi.get(self, "template_id")
+
+    @property
+    @pulumi.getter(name="templateName")
+    def template_name(self) -> str:
+        """
+        parameter template name.
+        """
+        return pulumi.get(self, "template_name")
 
 
 @pulumi.output_type

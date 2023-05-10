@@ -9,12 +9,100 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'FirewallRuleFirewallRuleArgs',
     'InstanceContainerArgs',
     'InstanceContainerEnvArgs',
     'InstanceContainerPublishPortArgs',
     'InstanceContainerVolumeArgs',
     'InstanceLoginConfigurationArgs',
+    'GetBundleFilterArgs',
 ]
+
+@pulumi.input_type
+class FirewallRuleFirewallRuleArgs:
+    def __init__(__self__, *,
+                 protocol: pulumi.Input[str],
+                 action: Optional[pulumi.Input[str]] = None,
+                 cidr_block: Optional[pulumi.Input[str]] = None,
+                 firewall_rule_description: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] protocol: Protocol. Valid values are TCP, UDP, ICMP, ALL.
+        :param pulumi.Input[str] action: Valid values are ACCEPT, DROP. Default value is ACCEPT.
+        :param pulumi.Input[str] cidr_block: IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+        :param pulumi.Input[str] firewall_rule_description: Firewall rule description.
+        :param pulumi.Input[str] port: Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+        """
+        pulumi.set(__self__, "protocol", protocol)
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if cidr_block is not None:
+            pulumi.set(__self__, "cidr_block", cidr_block)
+        if firewall_rule_description is not None:
+            pulumi.set(__self__, "firewall_rule_description", firewall_rule_description)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> pulumi.Input[str]:
+        """
+        Protocol. Valid values are TCP, UDP, ICMP, ALL.
+        """
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: pulumi.Input[str]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        Valid values are ACCEPT, DROP. Default value is ACCEPT.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> Optional[pulumi.Input[str]]:
+        """
+        IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @cidr_block.setter
+    def cidr_block(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cidr_block", value)
+
+    @property
+    @pulumi.getter(name="firewallRuleDescription")
+    def firewall_rule_description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Firewall rule description.
+        """
+        return pulumi.get(self, "firewall_rule_description")
+
+    @firewall_rule_description.setter
+    def firewall_rule_description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "firewall_rule_description", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[str]]:
+        """
+        Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "port", value)
+
 
 @pulumi.input_type
 class InstanceContainerArgs:
@@ -298,5 +386,42 @@ class InstanceLoginConfigurationArgs:
     @password.setter
     def password(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "password", value)
+
+
+@pulumi.input_type
+class GetBundleFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

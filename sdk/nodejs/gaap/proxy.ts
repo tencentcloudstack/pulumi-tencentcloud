@@ -65,11 +65,11 @@ export class Proxy extends pulumi.CustomResource {
      */
     public readonly accessRegion!: pulumi.Output<string>;
     /**
-     * Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+     * Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
      */
     public readonly bandwidth!: pulumi.Output<number>;
     /**
-     * Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+     * Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
      */
     public readonly concurrent!: pulumi.Output<number>;
     /**
@@ -117,7 +117,7 @@ export class Proxy extends pulumi.CustomResource {
      */
     public /*out*/ readonly supportProtocols!: pulumi.Output<string[]>;
     /**
-     * Tags of the GAAP proxy.
+     * Tags of the GAAP proxy. Tags that do not exist are not created automatically.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
@@ -193,11 +193,11 @@ export interface ProxyState {
      */
     accessRegion?: pulumi.Input<string>;
     /**
-     * Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+     * Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
      */
     bandwidth?: pulumi.Input<number>;
     /**
-     * Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+     * Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
      */
     concurrent?: pulumi.Input<number>;
     /**
@@ -245,7 +245,7 @@ export interface ProxyState {
      */
     supportProtocols?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Tags of the GAAP proxy.
+     * Tags of the GAAP proxy. Tags that do not exist are not created automatically.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
 }
@@ -259,11 +259,11 @@ export interface ProxyArgs {
      */
     accessRegion: pulumi.Input<string>;
     /**
-     * Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+     * Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
      */
     bandwidth: pulumi.Input<number>;
     /**
-     * Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+     * Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
      */
     concurrent: pulumi.Input<number>;
     /**
@@ -283,7 +283,7 @@ export interface ProxyArgs {
      */
     realserverRegion: pulumi.Input<string>;
     /**
-     * Tags of the GAAP proxy.
+     * Tags of the GAAP proxy. Tags that do not exist are not created automatically.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
 }

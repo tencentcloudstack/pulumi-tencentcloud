@@ -7,6 +7,25 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tmp tke template
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const template = new tencentcloud.Monitor.TmpTkeTemplate("template", {
+ *     template: {
+ *         describe: "template",
+ *         level: "cluster",
+ *         name: "test",
+ *         serviceMonitors: [{
+ *             config: "xxxxx",
+ *             name: "test",
+ *         }],
+ *     },
+ * });
+ * ```
  */
 export class TmpTkeTemplate extends pulumi.CustomResource {
     /**

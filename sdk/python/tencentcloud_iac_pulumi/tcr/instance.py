@@ -17,26 +17,42 @@ class InstanceArgs:
     def __init__(__self__, *,
                  instance_type: pulumi.Input[str],
                  delete_bucket: Optional[pulumi.Input[bool]] = None,
+                 instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
+                 instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  open_public_operation: Optional[pulumi.Input[bool]] = None,
+                 registry_charge_type: Optional[pulumi.Input[int]] = None,
+                 replications: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]]] = None,
                  security_policies: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceSecurityPolicyArgs']]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] instance_type: TCR types. Valid values are: `standard`, `basic`, `premium`.
         :param pulumi.Input[bool] delete_bucket: Indicate to delete the COS bucket which is auto-created with the instance or not.
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        :param pulumi.Input[int] instance_charge_type_prepaid_renew_flag: Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
         :param pulumi.Input[str] name: Name of the TCR instance.
         :param pulumi.Input[bool] open_public_operation: Control public network access.
+        :param pulumi.Input[int] registry_charge_type: Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]] replications: Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceSecurityPolicyArgs']]] security_policies: Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this TCR instance.
         """
         pulumi.set(__self__, "instance_type", instance_type)
         if delete_bucket is not None:
             pulumi.set(__self__, "delete_bucket", delete_bucket)
+        if instance_charge_type_prepaid_period is not None:
+            pulumi.set(__self__, "instance_charge_type_prepaid_period", instance_charge_type_prepaid_period)
+        if instance_charge_type_prepaid_renew_flag is not None:
+            pulumi.set(__self__, "instance_charge_type_prepaid_renew_flag", instance_charge_type_prepaid_renew_flag)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if open_public_operation is not None:
             pulumi.set(__self__, "open_public_operation", open_public_operation)
+        if registry_charge_type is not None:
+            pulumi.set(__self__, "registry_charge_type", registry_charge_type)
+        if replications is not None:
+            pulumi.set(__self__, "replications", replications)
         if security_policies is not None:
             pulumi.set(__self__, "security_policies", security_policies)
         if tags is not None:
@@ -67,6 +83,30 @@ class InstanceArgs:
         pulumi.set(self, "delete_bucket", value)
 
     @property
+    @pulumi.getter(name="instanceChargeTypePrepaidPeriod")
+    def instance_charge_type_prepaid_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        """
+        return pulumi.get(self, "instance_charge_type_prepaid_period")
+
+    @instance_charge_type_prepaid_period.setter
+    def instance_charge_type_prepaid_period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_charge_type_prepaid_period", value)
+
+    @property
+    @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
+    def instance_charge_type_prepaid_renew_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
+        """
+        return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
+
+    @instance_charge_type_prepaid_renew_flag.setter
+    def instance_charge_type_prepaid_renew_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_charge_type_prepaid_renew_flag", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -89,6 +129,30 @@ class InstanceArgs:
     @open_public_operation.setter
     def open_public_operation(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "open_public_operation", value)
+
+    @property
+    @pulumi.getter(name="registryChargeType")
+    def registry_charge_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        """
+        return pulumi.get(self, "registry_charge_type")
+
+    @registry_charge_type.setter
+    def registry_charge_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "registry_charge_type", value)
+
+    @property
+    @pulumi.getter
+    def replications(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]]]:
+        """
+        Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+        """
+        return pulumi.get(self, "replications")
+
+    @replications.setter
+    def replications(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]]]):
+        pulumi.set(self, "replications", value)
 
     @property
     @pulumi.getter(name="securityPolicies")
@@ -119,30 +183,46 @@ class InstanceArgs:
 class _InstanceState:
     def __init__(__self__, *,
                  delete_bucket: Optional[pulumi.Input[bool]] = None,
+                 expired_at: Optional[pulumi.Input[str]] = None,
+                 instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
+                 instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[int]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
                  internal_end_point: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  open_public_operation: Optional[pulumi.Input[bool]] = None,
                  public_domain: Optional[pulumi.Input[str]] = None,
                  public_status: Optional[pulumi.Input[str]] = None,
+                 registry_charge_type: Optional[pulumi.Input[int]] = None,
+                 replications: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]]] = None,
                  security_policies: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceSecurityPolicyArgs']]]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[bool] delete_bucket: Indicate to delete the COS bucket which is auto-created with the instance or not.
+        :param pulumi.Input[str] expired_at: Instance expiration time (prepaid).
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        :param pulumi.Input[int] instance_charge_type_prepaid_renew_flag: Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
         :param pulumi.Input[str] instance_type: TCR types. Valid values are: `standard`, `basic`, `premium`.
         :param pulumi.Input[str] internal_end_point: Internal address for access of the TCR instance.
         :param pulumi.Input[str] name: Name of the TCR instance.
         :param pulumi.Input[bool] open_public_operation: Control public network access.
         :param pulumi.Input[str] public_domain: Public address for access of the TCR instance.
         :param pulumi.Input[str] public_status: Status of the TCR instance public network access.
+        :param pulumi.Input[int] registry_charge_type: Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]] replications: Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceSecurityPolicyArgs']]] security_policies: Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
         :param pulumi.Input[str] status: Status of the TCR instance.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this TCR instance.
         """
         if delete_bucket is not None:
             pulumi.set(__self__, "delete_bucket", delete_bucket)
+        if expired_at is not None:
+            pulumi.set(__self__, "expired_at", expired_at)
+        if instance_charge_type_prepaid_period is not None:
+            pulumi.set(__self__, "instance_charge_type_prepaid_period", instance_charge_type_prepaid_period)
+        if instance_charge_type_prepaid_renew_flag is not None:
+            pulumi.set(__self__, "instance_charge_type_prepaid_renew_flag", instance_charge_type_prepaid_renew_flag)
         if instance_type is not None:
             pulumi.set(__self__, "instance_type", instance_type)
         if internal_end_point is not None:
@@ -155,6 +235,10 @@ class _InstanceState:
             pulumi.set(__self__, "public_domain", public_domain)
         if public_status is not None:
             pulumi.set(__self__, "public_status", public_status)
+        if registry_charge_type is not None:
+            pulumi.set(__self__, "registry_charge_type", registry_charge_type)
+        if replications is not None:
+            pulumi.set(__self__, "replications", replications)
         if security_policies is not None:
             pulumi.set(__self__, "security_policies", security_policies)
         if status is not None:
@@ -173,6 +257,42 @@ class _InstanceState:
     @delete_bucket.setter
     def delete_bucket(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "delete_bucket", value)
+
+    @property
+    @pulumi.getter(name="expiredAt")
+    def expired_at(self) -> Optional[pulumi.Input[str]]:
+        """
+        Instance expiration time (prepaid).
+        """
+        return pulumi.get(self, "expired_at")
+
+    @expired_at.setter
+    def expired_at(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "expired_at", value)
+
+    @property
+    @pulumi.getter(name="instanceChargeTypePrepaidPeriod")
+    def instance_charge_type_prepaid_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        """
+        return pulumi.get(self, "instance_charge_type_prepaid_period")
+
+    @instance_charge_type_prepaid_period.setter
+    def instance_charge_type_prepaid_period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_charge_type_prepaid_period", value)
+
+    @property
+    @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
+    def instance_charge_type_prepaid_renew_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
+        """
+        return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
+
+    @instance_charge_type_prepaid_renew_flag.setter
+    def instance_charge_type_prepaid_renew_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_charge_type_prepaid_renew_flag", value)
 
     @property
     @pulumi.getter(name="instanceType")
@@ -247,6 +367,30 @@ class _InstanceState:
         pulumi.set(self, "public_status", value)
 
     @property
+    @pulumi.getter(name="registryChargeType")
+    def registry_charge_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        """
+        return pulumi.get(self, "registry_charge_type")
+
+    @registry_charge_type.setter
+    def registry_charge_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "registry_charge_type", value)
+
+    @property
+    @pulumi.getter
+    def replications(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]]]:
+        """
+        Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+        """
+        return pulumi.get(self, "replications")
+
+    @replications.setter
+    def replications(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceReplicationArgs']]]]):
+        pulumi.set(self, "replications", value)
+
+    @property
     @pulumi.getter(name="securityPolicies")
     def security_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceSecurityPolicyArgs']]]]:
         """
@@ -289,9 +433,13 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  delete_bucket: Optional[pulumi.Input[bool]] = None,
+                 instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
+                 instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[int]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  open_public_operation: Optional[pulumi.Input[bool]] = None,
+                 registry_charge_type: Optional[pulumi.Input[int]] = None,
+                 replications: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceReplicationArgs']]]]] = None,
                  security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSecurityPolicyArgs']]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
@@ -330,6 +478,47 @@ class Instance(pulumi.CustomResource):
             ])
         ```
 
+        Create with Replications
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        tcr_region_map = config.get_object("tcrRegionMap")
+        if tcr_region_map is None:
+            tcr_region_map = {
+                "ap-guangzhou": 1,
+                "ap-shanghai": 4,
+                "ap-hongkong": 5,
+                "ap-beijing": 8,
+                "ap-singapore": 9,
+                "na-siliconvalley": 15,
+                "ap-chengdu": 16,
+                "eu-frankfurt": 17,
+                "ap-seoul": 18,
+                "ap-chongqing": 19,
+                "ap-mumbai": 21,
+                "na-ashburn": 22,
+                "ap-bangkok": 23,
+                "eu-moscow": 24,
+                "ap-tokyo": 25,
+                "ap-nanjing": 33,
+                "ap-taipei": 39,
+                "ap-jakarta": 72,
+            }
+        foo = tencentcloud.tcr.Instance("foo",
+            instance_type="premium",
+            replications=[
+                tencentcloud.tcr.InstanceReplicationArgs(
+                    region_id=tcr_region_map["ap-guangzhou"],
+                ),
+                tencentcloud.tcr.InstanceReplicationArgs(
+                    region_id=tcr_region_map["ap-singapore"],
+                ),
+            ])
+        ```
+
         ## Import
 
         tcr instance can be imported using the id, e.g.
@@ -341,9 +530,13 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] delete_bucket: Indicate to delete the COS bucket which is auto-created with the instance or not.
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        :param pulumi.Input[int] instance_charge_type_prepaid_renew_flag: Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
         :param pulumi.Input[str] instance_type: TCR types. Valid values are: `standard`, `basic`, `premium`.
         :param pulumi.Input[str] name: Name of the TCR instance.
         :param pulumi.Input[bool] open_public_operation: Control public network access.
+        :param pulumi.Input[int] registry_charge_type: Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceReplicationArgs']]]] replications: Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSecurityPolicyArgs']]]] security_policies: Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this TCR instance.
         """
@@ -388,6 +581,47 @@ class Instance(pulumi.CustomResource):
             ])
         ```
 
+        Create with Replications
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        tcr_region_map = config.get_object("tcrRegionMap")
+        if tcr_region_map is None:
+            tcr_region_map = {
+                "ap-guangzhou": 1,
+                "ap-shanghai": 4,
+                "ap-hongkong": 5,
+                "ap-beijing": 8,
+                "ap-singapore": 9,
+                "na-siliconvalley": 15,
+                "ap-chengdu": 16,
+                "eu-frankfurt": 17,
+                "ap-seoul": 18,
+                "ap-chongqing": 19,
+                "ap-mumbai": 21,
+                "na-ashburn": 22,
+                "ap-bangkok": 23,
+                "eu-moscow": 24,
+                "ap-tokyo": 25,
+                "ap-nanjing": 33,
+                "ap-taipei": 39,
+                "ap-jakarta": 72,
+            }
+        foo = tencentcloud.tcr.Instance("foo",
+            instance_type="premium",
+            replications=[
+                tencentcloud.tcr.InstanceReplicationArgs(
+                    region_id=tcr_region_map["ap-guangzhou"],
+                ),
+                tencentcloud.tcr.InstanceReplicationArgs(
+                    region_id=tcr_region_map["ap-singapore"],
+                ),
+            ])
+        ```
+
         ## Import
 
         tcr instance can be imported using the id, e.g.
@@ -412,9 +646,13 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  delete_bucket: Optional[pulumi.Input[bool]] = None,
+                 instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
+                 instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[int]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  open_public_operation: Optional[pulumi.Input[bool]] = None,
+                 registry_charge_type: Optional[pulumi.Input[int]] = None,
+                 replications: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceReplicationArgs']]]]] = None,
                  security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSecurityPolicyArgs']]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
@@ -432,13 +670,18 @@ class Instance(pulumi.CustomResource):
             __props__ = InstanceArgs.__new__(InstanceArgs)
 
             __props__.__dict__["delete_bucket"] = delete_bucket
+            __props__.__dict__["instance_charge_type_prepaid_period"] = instance_charge_type_prepaid_period
+            __props__.__dict__["instance_charge_type_prepaid_renew_flag"] = instance_charge_type_prepaid_renew_flag
             if instance_type is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_type'")
             __props__.__dict__["instance_type"] = instance_type
             __props__.__dict__["name"] = name
             __props__.__dict__["open_public_operation"] = open_public_operation
+            __props__.__dict__["registry_charge_type"] = registry_charge_type
+            __props__.__dict__["replications"] = replications
             __props__.__dict__["security_policies"] = security_policies
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["expired_at"] = None
             __props__.__dict__["internal_end_point"] = None
             __props__.__dict__["public_domain"] = None
             __props__.__dict__["public_status"] = None
@@ -454,12 +697,17 @@ class Instance(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             delete_bucket: Optional[pulumi.Input[bool]] = None,
+            expired_at: Optional[pulumi.Input[str]] = None,
+            instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
+            instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[int]] = None,
             instance_type: Optional[pulumi.Input[str]] = None,
             internal_end_point: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             open_public_operation: Optional[pulumi.Input[bool]] = None,
             public_domain: Optional[pulumi.Input[str]] = None,
             public_status: Optional[pulumi.Input[str]] = None,
+            registry_charge_type: Optional[pulumi.Input[int]] = None,
+            replications: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceReplicationArgs']]]]] = None,
             security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSecurityPolicyArgs']]]]] = None,
             status: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Instance':
@@ -471,12 +719,17 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] delete_bucket: Indicate to delete the COS bucket which is auto-created with the instance or not.
+        :param pulumi.Input[str] expired_at: Instance expiration time (prepaid).
+        :param pulumi.Input[int] instance_charge_type_prepaid_period: Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        :param pulumi.Input[int] instance_charge_type_prepaid_renew_flag: Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
         :param pulumi.Input[str] instance_type: TCR types. Valid values are: `standard`, `basic`, `premium`.
         :param pulumi.Input[str] internal_end_point: Internal address for access of the TCR instance.
         :param pulumi.Input[str] name: Name of the TCR instance.
         :param pulumi.Input[bool] open_public_operation: Control public network access.
         :param pulumi.Input[str] public_domain: Public address for access of the TCR instance.
         :param pulumi.Input[str] public_status: Status of the TCR instance public network access.
+        :param pulumi.Input[int] registry_charge_type: Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceReplicationArgs']]]] replications: Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSecurityPolicyArgs']]]] security_policies: Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
         :param pulumi.Input[str] status: Status of the TCR instance.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this TCR instance.
@@ -486,12 +739,17 @@ class Instance(pulumi.CustomResource):
         __props__ = _InstanceState.__new__(_InstanceState)
 
         __props__.__dict__["delete_bucket"] = delete_bucket
+        __props__.__dict__["expired_at"] = expired_at
+        __props__.__dict__["instance_charge_type_prepaid_period"] = instance_charge_type_prepaid_period
+        __props__.__dict__["instance_charge_type_prepaid_renew_flag"] = instance_charge_type_prepaid_renew_flag
         __props__.__dict__["instance_type"] = instance_type
         __props__.__dict__["internal_end_point"] = internal_end_point
         __props__.__dict__["name"] = name
         __props__.__dict__["open_public_operation"] = open_public_operation
         __props__.__dict__["public_domain"] = public_domain
         __props__.__dict__["public_status"] = public_status
+        __props__.__dict__["registry_charge_type"] = registry_charge_type
+        __props__.__dict__["replications"] = replications
         __props__.__dict__["security_policies"] = security_policies
         __props__.__dict__["status"] = status
         __props__.__dict__["tags"] = tags
@@ -504,6 +762,30 @@ class Instance(pulumi.CustomResource):
         Indicate to delete the COS bucket which is auto-created with the instance or not.
         """
         return pulumi.get(self, "delete_bucket")
+
+    @property
+    @pulumi.getter(name="expiredAt")
+    def expired_at(self) -> pulumi.Output[str]:
+        """
+        Instance expiration time (prepaid).
+        """
+        return pulumi.get(self, "expired_at")
+
+    @property
+    @pulumi.getter(name="instanceChargeTypePrepaidPeriod")
+    def instance_charge_type_prepaid_period(self) -> pulumi.Output[Optional[int]]:
+        """
+        Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        """
+        return pulumi.get(self, "instance_charge_type_prepaid_period")
+
+    @property
+    @pulumi.getter(name="instanceChargeTypePrepaidRenewFlag")
+    def instance_charge_type_prepaid_renew_flag(self) -> pulumi.Output[Optional[int]]:
+        """
+        Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
+        """
+        return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
 
     @property
     @pulumi.getter(name="instanceType")
@@ -552,6 +834,22 @@ class Instance(pulumi.CustomResource):
         Status of the TCR instance public network access.
         """
         return pulumi.get(self, "public_status")
+
+    @property
+    @pulumi.getter(name="registryChargeType")
+    def registry_charge_type(self) -> pulumi.Output[Optional[int]]:
+        """
+        Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        """
+        return pulumi.get(self, "registry_charge_type")
+
+    @property
+    @pulumi.getter
+    def replications(self) -> pulumi.Output[Optional[Sequence['outputs.InstanceReplication']]]:
+        """
+        Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+        """
+        return pulumi.get(self, "replications")
 
     @property
     @pulumi.getter(name="securityPolicies")

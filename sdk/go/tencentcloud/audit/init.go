@@ -21,8 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "tencentcloud:Audit/instance:Instance":
-		r = &Instance{}
+	case "tencentcloud:Audit/track:Track":
+		r = &Track{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -38,7 +38,7 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Audit/instance",
+		"Audit/track",
 		&module{version},
 	)
 }

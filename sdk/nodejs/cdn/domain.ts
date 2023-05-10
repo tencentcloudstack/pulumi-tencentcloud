@@ -7,6 +7,7 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a CDN domain.
+ *
  * > **NOTE:** To disable most of configuration with switch, just modify switch argument to off instead of remove the whole block
  *
  * ## Example Usage
@@ -51,8 +52,11 @@ import * as utilities from "../utilities";
  *
  * const foo = new tencentcloud.Cdn.Domain("foo", {
  *     area: "mainland",
+ *     // full_url_cache = true # Deprecated, use cache_key below.
+ *     cacheKey: {
+ *         fullUrlCache: "on",
+ *     },
  *     domain: "xxxx.com",
- *     fullUrlCache: false,
  *     httpsConfig: {
  *         forceRedirect: {
  *             redirectStatusCode: 302,
@@ -108,7 +112,9 @@ import * as utilities from "../utilities";
  *     domain: "abc.com",
  *     serviceType: "web",
  *     area: "mainland",
- *     fullUrlCache: false,
+ *     cacheKey: {
+ *         fullUrlCache: "off",
+ *     },
  *     origin: {
  *         originType: "cos",
  *         originLists: [bucket.cosBucketUrl],
@@ -179,6 +185,10 @@ export class Domain extends pulumi.CustomResource {
      */
     public readonly bandWidthAlert!: pulumi.Output<outputs.Cdn.DomainBandWidthAlert | undefined>;
     /**
+     * Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+     */
+    public readonly cacheKey!: pulumi.Output<outputs.Cdn.DomainCacheKey | undefined>;
+    /**
      * CNAME address of domain name.
      */
     public /*out*/ readonly cname!: pulumi.Output<string>;
@@ -219,7 +229,9 @@ export class Domain extends pulumi.CustomResource {
      */
     public readonly followRedirectSwitch!: pulumi.Output<string | undefined>;
     /**
-     * Whether to enable full-path cache. Default value is `true`.
+     * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+     *
+     * @deprecated Use `cache_key` -> `full_url_cache` instead.
      */
     public readonly fullUrlCache!: pulumi.Output<boolean | undefined>;
     /**
@@ -267,6 +279,10 @@ export class Domain extends pulumi.CustomResource {
      */
     public readonly ossPrivateAccess!: pulumi.Output<outputs.Cdn.DomainOssPrivateAccess | undefined>;
     /**
+     * Maximum post size configuration.
+     */
+    public readonly postMaxSizes!: pulumi.Output<outputs.Cdn.DomainPostMaxSize[] | undefined>;
+    /**
      * The project CDN belongs to, default to 0.
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
@@ -307,7 +323,7 @@ export class Domain extends pulumi.CustomResource {
      */
     public readonly seoSwitch!: pulumi.Output<string | undefined>;
     /**
-     * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+     * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
      */
     public readonly serviceType!: pulumi.Output<string>;
     /**
@@ -352,6 +368,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["authentication"] = state ? state.authentication : undefined;
             resourceInputs["awsPrivateAccess"] = state ? state.awsPrivateAccess : undefined;
             resourceInputs["bandWidthAlert"] = state ? state.bandWidthAlert : undefined;
+            resourceInputs["cacheKey"] = state ? state.cacheKey : undefined;
             resourceInputs["cname"] = state ? state.cname : undefined;
             resourceInputs["compression"] = state ? state.compression : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
@@ -374,6 +391,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["originPullOptimization"] = state ? state.originPullOptimization : undefined;
             resourceInputs["originPullTimeout"] = state ? state.originPullTimeout : undefined;
             resourceInputs["ossPrivateAccess"] = state ? state.ossPrivateAccess : undefined;
+            resourceInputs["postMaxSizes"] = state ? state.postMaxSizes : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["qnPrivateAccess"] = state ? state.qnPrivateAccess : undefined;
             resourceInputs["quicSwitch"] = state ? state.quicSwitch : undefined;
@@ -406,6 +424,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["authentication"] = args ? args.authentication : undefined;
             resourceInputs["awsPrivateAccess"] = args ? args.awsPrivateAccess : undefined;
             resourceInputs["bandWidthAlert"] = args ? args.bandWidthAlert : undefined;
+            resourceInputs["cacheKey"] = args ? args.cacheKey : undefined;
             resourceInputs["compression"] = args ? args.compression : undefined;
             resourceInputs["domain"] = args ? args.domain : undefined;
             resourceInputs["downstreamCapping"] = args ? args.downstreamCapping : undefined;
@@ -424,6 +443,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["originPullOptimization"] = args ? args.originPullOptimization : undefined;
             resourceInputs["originPullTimeout"] = args ? args.originPullTimeout : undefined;
             resourceInputs["ossPrivateAccess"] = args ? args.ossPrivateAccess : undefined;
+            resourceInputs["postMaxSizes"] = args ? args.postMaxSizes : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["qnPrivateAccess"] = args ? args.qnPrivateAccess : undefined;
             resourceInputs["quicSwitch"] = args ? args.quicSwitch : undefined;
@@ -472,6 +492,10 @@ export interface DomainState {
      */
     bandWidthAlert?: pulumi.Input<inputs.Cdn.DomainBandWidthAlert>;
     /**
+     * Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+     */
+    cacheKey?: pulumi.Input<inputs.Cdn.DomainCacheKey>;
+    /**
      * CNAME address of domain name.
      */
     cname?: pulumi.Input<string>;
@@ -512,7 +536,9 @@ export interface DomainState {
      */
     followRedirectSwitch?: pulumi.Input<string>;
     /**
-     * Whether to enable full-path cache. Default value is `true`.
+     * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+     *
+     * @deprecated Use `cache_key` -> `full_url_cache` instead.
      */
     fullUrlCache?: pulumi.Input<boolean>;
     /**
@@ -560,6 +586,10 @@ export interface DomainState {
      */
     ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess>;
     /**
+     * Maximum post size configuration.
+     */
+    postMaxSizes?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainPostMaxSize>[]>;
+    /**
      * The project CDN belongs to, default to 0.
      */
     projectId?: pulumi.Input<number>;
@@ -600,7 +630,7 @@ export interface DomainState {
      */
     seoSwitch?: pulumi.Input<string>;
     /**
-     * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+     * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
      */
     serviceType?: pulumi.Input<string>;
     /**
@@ -650,6 +680,10 @@ export interface DomainArgs {
      */
     bandWidthAlert?: pulumi.Input<inputs.Cdn.DomainBandWidthAlert>;
     /**
+     * Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+     */
+    cacheKey?: pulumi.Input<inputs.Cdn.DomainCacheKey>;
+    /**
      * Smart compression configurations.
      */
     compression?: pulumi.Input<inputs.Cdn.DomainCompression>;
@@ -674,7 +708,9 @@ export interface DomainArgs {
      */
     followRedirectSwitch?: pulumi.Input<string>;
     /**
-     * Whether to enable full-path cache. Default value is `true`.
+     * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+     *
+     * @deprecated Use `cache_key` -> `full_url_cache` instead.
      */
     fullUrlCache?: pulumi.Input<boolean>;
     /**
@@ -722,6 +758,10 @@ export interface DomainArgs {
      */
     ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess>;
     /**
+     * Maximum post size configuration.
+     */
+    postMaxSizes?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainPostMaxSize>[]>;
+    /**
      * The project CDN belongs to, default to 0.
      */
     projectId?: pulumi.Input<number>;
@@ -762,7 +802,7 @@ export interface DomainArgs {
      */
     seoSwitch?: pulumi.Input<string>;
     /**
-     * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+     * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
      */
     serviceType: pulumi.Input<string>;
     /**

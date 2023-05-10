@@ -13,11 +13,11 @@ import (
 type InstanceDataDisk struct {
 	// Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	DataDiskId *string `pulumi:"dataDiskId"`
-	// Size of the data disk, and unit is GB. If disk type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Size of the data disk, and unit is GB.
 	DataDiskSize int `pulumi:"dataDiskSize"`
 	// Snapshot ID of the data disk. The selected data disk snapshot size must be smaller than the data disk size.
 	DataDiskSnapshotId *string `pulumi:"dataDiskSnapshotId"`
-	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: SSD, `CLOUD_HSSD`: Enhanced SSD. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
+	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: LOCAL_BASIC: local disk, LOCAL_SSD: local SSD disk, LOCAL_NVME: local NVME disk, specified in the InstanceType, LOCAL_PRO: local HDD disk, specified in the InstanceType, CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD, CLOUD_BSSD: Balanced SSD.
 	DataDiskType string `pulumi:"dataDiskType"`
 	// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), default is true.
 	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
@@ -30,7 +30,7 @@ type InstanceDataDisk struct {
 // InstanceDataDiskInput is an input type that accepts InstanceDataDiskArgs and InstanceDataDiskOutput values.
 // You can construct a concrete instance of `InstanceDataDiskInput` via:
 //
-//	InstanceDataDiskArgs{...}
+//          InstanceDataDiskArgs{...}
 type InstanceDataDiskInput interface {
 	pulumi.Input
 
@@ -41,11 +41,11 @@ type InstanceDataDiskInput interface {
 type InstanceDataDiskArgs struct {
 	// Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	DataDiskId pulumi.StringPtrInput `pulumi:"dataDiskId"`
-	// Size of the data disk, and unit is GB. If disk type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Size of the data disk, and unit is GB.
 	DataDiskSize pulumi.IntInput `pulumi:"dataDiskSize"`
 	// Snapshot ID of the data disk. The selected data disk snapshot size must be smaller than the data disk size.
 	DataDiskSnapshotId pulumi.StringPtrInput `pulumi:"dataDiskSnapshotId"`
-	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: SSD, `CLOUD_HSSD`: Enhanced SSD. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
+	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: LOCAL_BASIC: local disk, LOCAL_SSD: local SSD disk, LOCAL_NVME: local NVME disk, specified in the InstanceType, LOCAL_PRO: local HDD disk, specified in the InstanceType, CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD, CLOUD_BSSD: Balanced SSD.
 	DataDiskType pulumi.StringInput `pulumi:"dataDiskType"`
 	// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), default is true.
 	DeleteWithInstance pulumi.BoolPtrInput `pulumi:"deleteWithInstance"`
@@ -70,7 +70,7 @@ func (i InstanceDataDiskArgs) ToInstanceDataDiskOutputWithContext(ctx context.Co
 // InstanceDataDiskArrayInput is an input type that accepts InstanceDataDiskArray and InstanceDataDiskArrayOutput values.
 // You can construct a concrete instance of `InstanceDataDiskArrayInput` via:
 //
-//	InstanceDataDiskArray{ InstanceDataDiskArgs{...} }
+//          InstanceDataDiskArray{ InstanceDataDiskArgs{...} }
 type InstanceDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -111,7 +111,7 @@ func (o InstanceDataDiskOutput) DataDiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceDataDisk) *string { return v.DataDiskId }).(pulumi.StringPtrOutput)
 }
 
-// Size of the data disk, and unit is GB. If disk type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+// Size of the data disk, and unit is GB.
 func (o InstanceDataDiskOutput) DataDiskSize() pulumi.IntOutput {
 	return o.ApplyT(func(v InstanceDataDisk) int { return v.DataDiskSize }).(pulumi.IntOutput)
 }
@@ -121,7 +121,7 @@ func (o InstanceDataDiskOutput) DataDiskSnapshotId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceDataDisk) *string { return v.DataDiskSnapshotId }).(pulumi.StringPtrOutput)
 }
 
-// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: SSD, `CLOUD_HSSD`: Enhanced SSD. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
+// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: LOCAL_BASIC: local disk, LOCAL_SSD: local SSD disk, LOCAL_NVME: local NVME disk, specified in the InstanceType, LOCAL_PRO: local HDD disk, specified in the InstanceType, CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD, CLOUD_BSSD: Balanced SSD.
 func (o InstanceDataDiskOutput) DataDiskType() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceDataDisk) string { return v.DataDiskType }).(pulumi.StringOutput)
 }
@@ -171,7 +171,7 @@ type GetTypesFilter struct {
 // GetTypesFilterInput is an input type that accepts GetTypesFilterArgs and GetTypesFilterOutput values.
 // You can construct a concrete instance of `GetTypesFilterInput` via:
 //
-//	GetTypesFilterArgs{...}
+//          GetTypesFilterArgs{...}
 type GetTypesFilterInput interface {
 	pulumi.Input
 
@@ -201,7 +201,7 @@ func (i GetTypesFilterArgs) ToGetTypesFilterOutputWithContext(ctx context.Contex
 // GetTypesFilterArrayInput is an input type that accepts GetTypesFilterArray and GetTypesFilterArrayOutput values.
 // You can construct a concrete instance of `GetTypesFilterArrayInput` via:
 //
-//	GetTypesFilterArray{ GetTypesFilterArgs{...} }
+//          GetTypesFilterArray{ GetTypesFilterArgs{...} }
 type GetTypesFilterArrayInput interface {
 	pulumi.Input
 
@@ -289,7 +289,7 @@ type GetTypesInstanceType struct {
 // GetTypesInstanceTypeInput is an input type that accepts GetTypesInstanceTypeArgs and GetTypesInstanceTypeOutput values.
 // You can construct a concrete instance of `GetTypesInstanceTypeInput` via:
 //
-//	GetTypesInstanceTypeArgs{...}
+//          GetTypesInstanceTypeArgs{...}
 type GetTypesInstanceTypeInput interface {
 	pulumi.Input
 
@@ -331,7 +331,7 @@ func (i GetTypesInstanceTypeArgs) ToGetTypesInstanceTypeOutputWithContext(ctx co
 // GetTypesInstanceTypeArrayInput is an input type that accepts GetTypesInstanceTypeArray and GetTypesInstanceTypeArrayOutput values.
 // You can construct a concrete instance of `GetTypesInstanceTypeArrayInput` via:
 //
-//	GetTypesInstanceTypeArray{ GetTypesInstanceTypeArgs{...} }
+//          GetTypesInstanceTypeArray{ GetTypesInstanceTypeArgs{...} }
 type GetTypesInstanceTypeArrayInput interface {
 	pulumi.Input
 

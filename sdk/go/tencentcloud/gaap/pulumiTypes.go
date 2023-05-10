@@ -24,7 +24,7 @@ type HttpRuleRealserver struct {
 // HttpRuleRealserverInput is an input type that accepts HttpRuleRealserverArgs and HttpRuleRealserverOutput values.
 // You can construct a concrete instance of `HttpRuleRealserverInput` via:
 //
-//	HttpRuleRealserverArgs{...}
+//          HttpRuleRealserverArgs{...}
 type HttpRuleRealserverInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i HttpRuleRealserverArgs) ToHttpRuleRealserverOutputWithContext(ctx contex
 // HttpRuleRealserverArrayInput is an input type that accepts HttpRuleRealserverArray and HttpRuleRealserverArrayOutput values.
 // You can construct a concrete instance of `HttpRuleRealserverArrayInput` via:
 //
-//	HttpRuleRealserverArray{ HttpRuleRealserverArgs{...} }
+//          HttpRuleRealserverArray{ HttpRuleRealserverArgs{...} }
 type HttpRuleRealserverArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +148,7 @@ type Layer4ListenerRealserverBindSet struct {
 // Layer4ListenerRealserverBindSetInput is an input type that accepts Layer4ListenerRealserverBindSetArgs and Layer4ListenerRealserverBindSetOutput values.
 // You can construct a concrete instance of `Layer4ListenerRealserverBindSetInput` via:
 //
-//	Layer4ListenerRealserverBindSetArgs{...}
+//          Layer4ListenerRealserverBindSetArgs{...}
 type Layer4ListenerRealserverBindSetInput interface {
 	pulumi.Input
 
@@ -182,7 +182,7 @@ func (i Layer4ListenerRealserverBindSetArgs) ToLayer4ListenerRealserverBindSetOu
 // Layer4ListenerRealserverBindSetArrayInput is an input type that accepts Layer4ListenerRealserverBindSetArray and Layer4ListenerRealserverBindSetArrayOutput values.
 // You can construct a concrete instance of `Layer4ListenerRealserverBindSetArrayInput` via:
 //
-//	Layer4ListenerRealserverBindSetArray{ Layer4ListenerRealserverBindSetArgs{...} }
+//          Layer4ListenerRealserverBindSetArray{ Layer4ListenerRealserverBindSetArgs{...} }
 type Layer4ListenerRealserverBindSetArrayInput interface {
 	pulumi.Input
 
@@ -280,7 +280,7 @@ type GetCertificatesCertificate struct {
 // GetCertificatesCertificateInput is an input type that accepts GetCertificatesCertificateArgs and GetCertificatesCertificateOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateInput` via:
 //
-//	GetCertificatesCertificateArgs{...}
+//          GetCertificatesCertificateArgs{...}
 type GetCertificatesCertificateInput interface {
 	pulumi.Input
 
@@ -322,7 +322,7 @@ func (i GetCertificatesCertificateArgs) ToGetCertificatesCertificateOutputWithCo
 // GetCertificatesCertificateArrayInput is an input type that accepts GetCertificatesCertificateArray and GetCertificatesCertificateArrayOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateArrayInput` via:
 //
-//	GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
+//          GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
 type GetCertificatesCertificateArrayInput interface {
 	pulumi.Input
 
@@ -440,7 +440,7 @@ type GetDomainErrorPagesErrorPageInfoList struct {
 // GetDomainErrorPagesErrorPageInfoListInput is an input type that accepts GetDomainErrorPagesErrorPageInfoListArgs and GetDomainErrorPagesErrorPageInfoListOutput values.
 // You can construct a concrete instance of `GetDomainErrorPagesErrorPageInfoListInput` via:
 //
-//	GetDomainErrorPagesErrorPageInfoListArgs{...}
+//          GetDomainErrorPagesErrorPageInfoListArgs{...}
 type GetDomainErrorPagesErrorPageInfoListInput interface {
 	pulumi.Input
 
@@ -482,7 +482,7 @@ func (i GetDomainErrorPagesErrorPageInfoListArgs) ToGetDomainErrorPagesErrorPage
 // GetDomainErrorPagesErrorPageInfoListArrayInput is an input type that accepts GetDomainErrorPagesErrorPageInfoListArray and GetDomainErrorPagesErrorPageInfoListArrayOutput values.
 // You can construct a concrete instance of `GetDomainErrorPagesErrorPageInfoListArrayInput` via:
 //
-//	GetDomainErrorPagesErrorPageInfoListArray{ GetDomainErrorPagesErrorPageInfoListArgs{...} }
+//          GetDomainErrorPagesErrorPageInfoListArray{ GetDomainErrorPagesErrorPageInfoListArgs{...} }
 type GetDomainErrorPagesErrorPageInfoListArrayInput interface {
 	pulumi.Input
 
@@ -612,7 +612,7 @@ type GetHttpDomainsDomain struct {
 // GetHttpDomainsDomainInput is an input type that accepts GetHttpDomainsDomainArgs and GetHttpDomainsDomainOutput values.
 // You can construct a concrete instance of `GetHttpDomainsDomainInput` via:
 //
-//	GetHttpDomainsDomainArgs{...}
+//          GetHttpDomainsDomainArgs{...}
 type GetHttpDomainsDomainInput interface {
 	pulumi.Input
 
@@ -666,7 +666,7 @@ func (i GetHttpDomainsDomainArgs) ToGetHttpDomainsDomainOutputWithContext(ctx co
 // GetHttpDomainsDomainArrayInput is an input type that accepts GetHttpDomainsDomainArray and GetHttpDomainsDomainArrayOutput values.
 // You can construct a concrete instance of `GetHttpDomainsDomainArrayInput` via:
 //
-//	GetHttpDomainsDomainArray{ GetHttpDomainsDomainArgs{...} }
+//          GetHttpDomainsDomainArray{ GetHttpDomainsDomainArgs{...} }
 type GetHttpDomainsDomainArrayInput interface {
 	pulumi.Input
 
@@ -824,7 +824,7 @@ type GetHttpRulesRule struct {
 // GetHttpRulesRuleInput is an input type that accepts GetHttpRulesRuleArgs and GetHttpRulesRuleOutput values.
 // You can construct a concrete instance of `GetHttpRulesRuleInput` via:
 //
-//	GetHttpRulesRuleArgs{...}
+//          GetHttpRulesRuleArgs{...}
 type GetHttpRulesRuleInput interface {
 	pulumi.Input
 
@@ -882,7 +882,7 @@ func (i GetHttpRulesRuleArgs) ToGetHttpRulesRuleOutputWithContext(ctx context.Co
 // GetHttpRulesRuleArrayInput is an input type that accepts GetHttpRulesRuleArray and GetHttpRulesRuleArrayOutput values.
 // You can construct a concrete instance of `GetHttpRulesRuleArrayInput` via:
 //
-//	GetHttpRulesRuleArray{ GetHttpRulesRuleArgs{...} }
+//          GetHttpRulesRuleArray{ GetHttpRulesRuleArgs{...} }
 type GetHttpRulesRuleArrayInput interface {
 	pulumi.Input
 
@@ -1036,7 +1036,7 @@ type GetHttpRulesRuleRealserver struct {
 // GetHttpRulesRuleRealserverInput is an input type that accepts GetHttpRulesRuleRealserverArgs and GetHttpRulesRuleRealserverOutput values.
 // You can construct a concrete instance of `GetHttpRulesRuleRealserverInput` via:
 //
-//	GetHttpRulesRuleRealserverArgs{...}
+//          GetHttpRulesRuleRealserverArgs{...}
 type GetHttpRulesRuleRealserverInput interface {
 	pulumi.Input
 
@@ -1074,7 +1074,7 @@ func (i GetHttpRulesRuleRealserverArgs) ToGetHttpRulesRuleRealserverOutputWithCo
 // GetHttpRulesRuleRealserverArrayInput is an input type that accepts GetHttpRulesRuleRealserverArray and GetHttpRulesRuleRealserverArrayOutput values.
 // You can construct a concrete instance of `GetHttpRulesRuleRealserverArrayInput` via:
 //
-//	GetHttpRulesRuleRealserverArray{ GetHttpRulesRuleRealserverArgs{...} }
+//          GetHttpRulesRuleRealserverArray{ GetHttpRulesRuleRealserverArgs{...} }
 type GetHttpRulesRuleRealserverArrayInput interface {
 	pulumi.Input
 
@@ -1177,6 +1177,8 @@ type GetLayer4ListenersListener struct {
 	Port int `pulumi:"port"`
 	// Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
 	Protocol string `pulumi:"protocol"`
+	// ID of the GAAP proxy to be queried.
+	ProxyId string `pulumi:"proxyId"`
 	// Type of the realserver.
 	RealserverType string `pulumi:"realserverType"`
 	// Scheduling policy of the layer4 listener.
@@ -1188,7 +1190,7 @@ type GetLayer4ListenersListener struct {
 // GetLayer4ListenersListenerInput is an input type that accepts GetLayer4ListenersListenerArgs and GetLayer4ListenersListenerOutput values.
 // You can construct a concrete instance of `GetLayer4ListenersListenerInput` via:
 //
-//	GetLayer4ListenersListenerArgs{...}
+//          GetLayer4ListenersListenerArgs{...}
 type GetLayer4ListenersListenerInput interface {
 	pulumi.Input
 
@@ -1213,6 +1215,8 @@ type GetLayer4ListenersListenerArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
 	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// ID of the GAAP proxy to be queried.
+	ProxyId pulumi.StringInput `pulumi:"proxyId"`
 	// Type of the realserver.
 	RealserverType pulumi.StringInput `pulumi:"realserverType"`
 	// Scheduling policy of the layer4 listener.
@@ -1236,7 +1240,7 @@ func (i GetLayer4ListenersListenerArgs) ToGetLayer4ListenersListenerOutputWithCo
 // GetLayer4ListenersListenerArrayInput is an input type that accepts GetLayer4ListenersListenerArray and GetLayer4ListenersListenerArrayOutput values.
 // You can construct a concrete instance of `GetLayer4ListenersListenerArrayInput` via:
 //
-//	GetLayer4ListenersListenerArray{ GetLayer4ListenersListenerArgs{...} }
+//          GetLayer4ListenersListenerArray{ GetLayer4ListenersListenerArgs{...} }
 type GetLayer4ListenersListenerArrayInput interface {
 	pulumi.Input
 
@@ -1312,6 +1316,11 @@ func (o GetLayer4ListenersListenerOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
+// ID of the GAAP proxy to be queried.
+func (o GetLayer4ListenersListenerOutput) ProxyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.ProxyId }).(pulumi.StringOutput)
+}
+
 // Type of the realserver.
 func (o GetLayer4ListenersListenerOutput) RealserverType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.RealserverType }).(pulumi.StringOutput)
@@ -1370,6 +1379,8 @@ type GetLayer7ListenersListener struct {
 	Port int `pulumi:"port"`
 	// Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
 	Protocol string `pulumi:"protocol"`
+	// ID of the GAAP proxy to be queried.
+	ProxyId string `pulumi:"proxyId"`
 	// Status of the layer7 listener.
 	Status int `pulumi:"status"`
 }
@@ -1377,7 +1388,7 @@ type GetLayer7ListenersListener struct {
 // GetLayer7ListenersListenerInput is an input type that accepts GetLayer7ListenersListenerArgs and GetLayer7ListenersListenerOutput values.
 // You can construct a concrete instance of `GetLayer7ListenersListenerInput` via:
 //
-//	GetLayer7ListenersListenerArgs{...}
+//          GetLayer7ListenersListenerArgs{...}
 type GetLayer7ListenersListenerInput interface {
 	pulumi.Input
 
@@ -1408,6 +1419,8 @@ type GetLayer7ListenersListenerArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
 	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// ID of the GAAP proxy to be queried.
+	ProxyId pulumi.StringInput `pulumi:"proxyId"`
 	// Status of the layer7 listener.
 	Status pulumi.IntInput `pulumi:"status"`
 }
@@ -1427,7 +1440,7 @@ func (i GetLayer7ListenersListenerArgs) ToGetLayer7ListenersListenerOutputWithCo
 // GetLayer7ListenersListenerArrayInput is an input type that accepts GetLayer7ListenersListenerArray and GetLayer7ListenersListenerArrayOutput values.
 // You can construct a concrete instance of `GetLayer7ListenersListenerArrayInput` via:
 //
-//	GetLayer7ListenersListenerArray{ GetLayer7ListenersListenerArgs{...} }
+//          GetLayer7ListenersListenerArray{ GetLayer7ListenersListenerArgs{...} }
 type GetLayer7ListenersListenerArrayInput interface {
 	pulumi.Input
 
@@ -1515,6 +1528,11 @@ func (o GetLayer7ListenersListenerOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
+// ID of the GAAP proxy to be queried.
+func (o GetLayer7ListenersListenerOutput) ProxyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.ProxyId }).(pulumi.StringOutput)
+}
+
 // Status of the layer7 listener.
 func (o GetLayer7ListenersListenerOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v GetLayer7ListenersListener) int { return v.Status }).(pulumi.IntOutput)
@@ -1580,7 +1598,7 @@ type GetProxiesProxy struct {
 // GetProxiesProxyInput is an input type that accepts GetProxiesProxyArgs and GetProxiesProxyOutput values.
 // You can construct a concrete instance of `GetProxiesProxyInput` via:
 //
-//	GetProxiesProxyArgs{...}
+//          GetProxiesProxyArgs{...}
 type GetProxiesProxyInput interface {
 	pulumi.Input
 
@@ -1640,7 +1658,7 @@ func (i GetProxiesProxyArgs) ToGetProxiesProxyOutputWithContext(ctx context.Cont
 // GetProxiesProxyArrayInput is an input type that accepts GetProxiesProxyArray and GetProxiesProxyArrayOutput values.
 // You can construct a concrete instance of `GetProxiesProxyArrayInput` via:
 //
-//	GetProxiesProxyArray{ GetProxiesProxyArgs{...} }
+//          GetProxiesProxyArray{ GetProxiesProxyArgs{...} }
 type GetProxiesProxyArrayInput interface {
 	pulumi.Input
 
@@ -1799,7 +1817,7 @@ type GetRealserversRealserver struct {
 // GetRealserversRealserverInput is an input type that accepts GetRealserversRealserverArgs and GetRealserversRealserverOutput values.
 // You can construct a concrete instance of `GetRealserversRealserverInput` via:
 //
-//	GetRealserversRealserverArgs{...}
+//          GetRealserversRealserverArgs{...}
 type GetRealserversRealserverInput interface {
 	pulumi.Input
 
@@ -1837,7 +1855,7 @@ func (i GetRealserversRealserverArgs) ToGetRealserversRealserverOutputWithContex
 // GetRealserversRealserverArrayInput is an input type that accepts GetRealserversRealserverArray and GetRealserversRealserverArrayOutput values.
 // You can construct a concrete instance of `GetRealserversRealserverArrayInput` via:
 //
-//	GetRealserversRealserverArray{ GetRealserversRealserverArgs{...} }
+//          GetRealserversRealserverArray{ GetRealserversRealserverArgs{...} }
 type GetRealserversRealserverArrayInput interface {
 	pulumi.Input
 
@@ -1941,7 +1959,7 @@ type GetSecurityRulesRule struct {
 // GetSecurityRulesRuleInput is an input type that accepts GetSecurityRulesRuleArgs and GetSecurityRulesRuleOutput values.
 // You can construct a concrete instance of `GetSecurityRulesRuleInput` via:
 //
-//	GetSecurityRulesRuleArgs{...}
+//          GetSecurityRulesRuleArgs{...}
 type GetSecurityRulesRuleInput interface {
 	pulumi.Input
 
@@ -1979,7 +1997,7 @@ func (i GetSecurityRulesRuleArgs) ToGetSecurityRulesRuleOutputWithContext(ctx co
 // GetSecurityRulesRuleArrayInput is an input type that accepts GetSecurityRulesRuleArray and GetSecurityRulesRuleArrayOutput values.
 // You can construct a concrete instance of `GetSecurityRulesRuleArrayInput` via:
 //
-//	GetSecurityRulesRuleArray{ GetSecurityRulesRuleArgs{...} }
+//          GetSecurityRulesRuleArray{ GetSecurityRulesRuleArgs{...} }
 type GetSecurityRulesRuleArrayInput interface {
 	pulumi.Input
 

@@ -18,91 +18,88 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-//				ServiceName: pulumi.String("niceservice"),
-//				Protocol:    pulumi.String("http&https"),
-//				ServiceDesc: pulumi.String("your nice service"),
-//				NetTypes: pulumi.StringArray{
-//					pulumi.String("INNER"),
-//					pulumi.String("OUTER"),
-//				},
-//				IpVersion: pulumi.String("IPv4"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-//				ServiceId:           service.ID(),
-//				ApiName:             pulumi.String("hello_update"),
-//				ApiDesc:             pulumi.String("my hello api update"),
-//				AuthType:            pulumi.String("SECRET"),
-//				Protocol:            pulumi.String("HTTP"),
-//				EnableCors:          pulumi.Bool(true),
-//				RequestConfigPath:   pulumi.String("/user/info"),
-//				RequestConfigMethod: pulumi.String("POST"),
-//				RequestParameters: apigateway.ApiRequestParameterArray{
-//					&apigateway.ApiRequestParameterArgs{
-//						Name:         pulumi.String("email"),
-//						Position:     pulumi.String("QUERY"),
-//						Type:         pulumi.String("string"),
-//						Desc:         pulumi.String("your email please?"),
-//						DefaultValue: pulumi.String("tom@qq.com"),
-//						Required:     pulumi.Bool(true),
-//					},
-//				},
-//				ServiceConfigType:      pulumi.String("HTTP"),
-//				ServiceConfigTimeout:   pulumi.Int(10),
-//				ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
-//				ServiceConfigPath:      pulumi.String("/user"),
-//				ServiceConfigMethod:    pulumi.String("POST"),
-//				ResponseType:           pulumi.String("XML"),
-//				ResponseSuccessExample: pulumi.String("<note>success</note>"),
-//				ResponseFailExample:    pulumi.String("<note>fail</note>"),
-//				ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-//					&apigateway.ApiResponseErrorCodeArgs{
-//						Code:          pulumi.Int(10),
-//						Msg:           pulumi.String("system error"),
-//						Desc:          pulumi.String("system error code"),
-//						ConvertedCode: -10,
-//						NeedConvert:   pulumi.Bool(true),
-//					},
-//				},
-//				ReleaseLimit: pulumi.Int(100),
-//				PreLimit:     pulumi.Int(100),
-//				TestLimit:    pulumi.Int(100),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = ApiGateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
-//				ServiceId: pulumi.StringRef(tencentcloud_api_gateway_api.Service_id),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = ApiGateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
-//				ServiceId: pulumi.StringRef(tencentcloud_api_gateway_api.Service.Service_id),
-//				EnvironmentNames: []string{
-//					"release",
-//					"test",
-//				},
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+// 			ServiceName: pulumi.String("niceservice"),
+// 			Protocol:    pulumi.String("http&https"),
+// 			ServiceDesc: pulumi.String("your nice service"),
+// 			NetTypes: pulumi.StringArray{
+// 				pulumi.String("INNER"),
+// 				pulumi.String("OUTER"),
+// 			},
+// 			IpVersion: pulumi.String("IPv4"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
+// 			ServiceId:           service.ID(),
+// 			ApiName:             pulumi.String("hello_update"),
+// 			ApiDesc:             pulumi.String("my hello api update"),
+// 			AuthType:            pulumi.String("SECRET"),
+// 			Protocol:            pulumi.String("HTTP"),
+// 			EnableCors:          pulumi.Bool(true),
+// 			RequestConfigPath:   pulumi.String("/user/info"),
+// 			RequestConfigMethod: pulumi.String("POST"),
+// 			RequestParameters: apigateway.ApiRequestParameterArray{
+// 				&apigateway.ApiRequestParameterArgs{
+// 					Name:         pulumi.String("email"),
+// 					Position:     pulumi.String("QUERY"),
+// 					Type:         pulumi.String("string"),
+// 					Desc:         pulumi.String("your email please?"),
+// 					DefaultValue: pulumi.String("tom@qq.com"),
+// 					Required:     pulumi.Bool(true),
+// 				},
+// 			},
+// 			ServiceConfigType:      pulumi.String("HTTP"),
+// 			ServiceConfigTimeout:   pulumi.Int(10),
+// 			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+// 			ServiceConfigPath:      pulumi.String("/user"),
+// 			ServiceConfigMethod:    pulumi.String("POST"),
+// 			ResponseType:           pulumi.String("XML"),
+// 			ResponseSuccessExample: pulumi.String("<note>success</note>"),
+// 			ResponseFailExample:    pulumi.String("<note>fail</note>"),
+// 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+// 				&apigateway.ApiResponseErrorCodeArgs{
+// 					Code:          pulumi.Int(10),
+// 					Msg:           pulumi.String("system error"),
+// 					Desc:          pulumi.String("system error code"),
+// 					ConvertedCode: -10,
+// 					NeedConvert:   pulumi.Bool(true),
+// 				},
+// 			},
+// 			ReleaseLimit: pulumi.Int(100),
+// 			PreLimit:     pulumi.Int(100),
+// 			TestLimit:    pulumi.Int(100),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
+// 			ServiceId: pulumi.StringRef(tencentcloud_api_gateway_api.Service_id),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.GetThrottlingApis(ctx, &apigateway.GetThrottlingApisArgs{
+// 			ServiceId: pulumi.StringRef(tencentcloud_api_gateway_api.Service.Service_id),
+// 			EnvironmentNames: []string{
+// 				"release",
+// 				"test",
+// 			},
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetThrottlingApis(ctx *pulumi.Context, args *GetThrottlingApisArgs, opts ...pulumi.InvokeOption) (*GetThrottlingApisResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

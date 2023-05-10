@@ -18,28 +18,25 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Kms.GetKeys(ctx, &kms.GetKeysArgs{
-//				KeyState:       pulumi.IntRef(0),
-//				KeyUsage:       pulumi.StringRef("ALL"),
-//				Origin:         pulumi.StringRef("TENCENT_KMS"),
-//				SearchKeyAlias: pulumi.StringRef("test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kms.GetKeys(ctx, &kms.GetKeysArgs{
+// 			KeyState:       pulumi.IntRef(0),
+// 			KeyUsage:       pulumi.StringRef("ALL"),
+// 			Origin:         pulumi.StringRef("TENCENT_KMS"),
+// 			SearchKeyAlias: pulumi.StringRef("test"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetKeys(ctx *pulumi.Context, args *GetKeysArgs, opts ...pulumi.InvokeOption) (*GetKeysResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -55,6 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string? Hostname;
         /// <summary>
+        /// Id of cvm hpc cluster.
+        /// </summary>
+        public readonly string? HpcClusterId;
+        /// <summary>
         /// The valid image id, format of img-xxx.
         /// </summary>
         public readonly string? ImgId;
@@ -141,6 +145,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string? hostname,
 
+            string? hpcClusterId,
+
             string? imgId,
 
             string? instanceChargeType,
@@ -183,6 +189,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             EnhancedMonitorService = enhancedMonitorService;
             EnhancedSecurityService = enhancedSecurityService;
             Hostname = hostname;
+            HpcClusterId = hpcClusterId;
             ImgId = imgId;
             InstanceChargeType = instanceChargeType;
             InstanceChargeTypePrepaidPeriod = instanceChargeTypePrepaidPeriod;

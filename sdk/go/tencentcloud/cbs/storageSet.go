@@ -19,30 +19,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cbs.NewStorageSet(ctx, "storage", &Cbs.StorageSetArgs{
-//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-//				DiskCount:        pulumi.Int(10),
-//				Encrypt:          pulumi.Bool(false),
-//				ProjectId:        pulumi.Int(0),
-//				StorageName:      pulumi.String("mystorage"),
-//				StorageSize:      pulumi.Int(100),
-//				StorageType:      pulumi.String("CLOUD_SSD"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewStorageSet(ctx, "storage", &Cbs.StorageSetArgs{
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			DiskCount:        pulumi.Int(10),
+// 			Encrypt:          pulumi.Bool(false),
+// 			ProjectId:        pulumi.Int(0),
+// 			StorageName:      pulumi.String("mystorage"),
+// 			StorageSize:      pulumi.Int(100),
+// 			StorageType:      pulumi.String("CLOUD_SSD"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type StorageSet struct {
 	pulumi.CustomResourceState
@@ -65,11 +62,11 @@ type StorageSet struct {
 	SnapshotId pulumi.StringOutput `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringOutput `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize pulumi.IntOutput `pulumi:"storageSize"`
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus pulumi.StringOutput `pulumi:"storageStatus"`
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType pulumi.StringOutput `pulumi:"storageType"`
 	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
 	ThroughputPerformance pulumi.IntPtrOutput `pulumi:"throughputPerformance"`
@@ -135,11 +132,11 @@ type storageSetState struct {
 	SnapshotId *string `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName *string `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize *int `pulumi:"storageSize"`
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus *string `pulumi:"storageStatus"`
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType *string `pulumi:"storageType"`
 	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
 	ThroughputPerformance *int `pulumi:"throughputPerformance"`
@@ -164,11 +161,11 @@ type StorageSetState struct {
 	SnapshotId pulumi.StringPtrInput
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringPtrInput
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize pulumi.IntPtrInput
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus pulumi.StringPtrInput
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType pulumi.StringPtrInput
 	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
 	ThroughputPerformance pulumi.IntPtrInput
@@ -193,9 +190,9 @@ type storageSetArgs struct {
 	SnapshotId *string `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName string `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize int `pulumi:"storageSize"`
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType string `pulumi:"storageType"`
 	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
 	ThroughputPerformance *int `pulumi:"throughputPerformance"`
@@ -217,9 +214,9 @@ type StorageSetArgs struct {
 	SnapshotId pulumi.StringPtrInput
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringInput
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize pulumi.IntInput
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType pulumi.StringInput
 	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
 	ThroughputPerformance pulumi.IntPtrInput
@@ -251,7 +248,7 @@ func (i *StorageSet) ToStorageSetOutputWithContext(ctx context.Context) StorageS
 // StorageSetArrayInput is an input type that accepts StorageSetArray and StorageSetArrayOutput values.
 // You can construct a concrete instance of `StorageSetArrayInput` via:
 //
-//	StorageSetArray{ StorageSetArgs{...} }
+//          StorageSetArray{ StorageSetArgs{...} }
 type StorageSetArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +273,7 @@ func (i StorageSetArray) ToStorageSetArrayOutputWithContext(ctx context.Context)
 // StorageSetMapInput is an input type that accepts StorageSetMap and StorageSetMapOutput values.
 // You can construct a concrete instance of `StorageSetMapInput` via:
 //
-//	StorageSetMap{ "key": StorageSetArgs{...} }
+//          StorageSetMap{ "key": StorageSetArgs{...} }
 type StorageSetMapInput interface {
 	pulumi.Input
 
@@ -357,7 +354,7 @@ func (o StorageSetOutput) StorageName() pulumi.StringOutput {
 	return o.ApplyT(func(v *StorageSet) pulumi.StringOutput { return v.StorageName }).(pulumi.StringOutput)
 }
 
-// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+// Volume of CBS, and unit is GB.
 func (o StorageSetOutput) StorageSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *StorageSet) pulumi.IntOutput { return v.StorageSize }).(pulumi.IntOutput)
 }
@@ -367,7 +364,7 @@ func (o StorageSetOutput) StorageStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *StorageSet) pulumi.StringOutput { return v.StorageStatus }).(pulumi.StringOutput)
 }
 
-// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 func (o StorageSetOutput) StorageType() pulumi.StringOutput {
 	return o.ApplyT(func(v *StorageSet) pulumi.StringOutput { return v.StorageType }).(pulumi.StringOutput)
 }

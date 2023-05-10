@@ -18,52 +18,49 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-//				Description: pulumi.String("ci-temp-test-ccn-des"),
-//				Qos:         pulumi.String("AG"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ccnMain, err := Dc.NewGateway(ctx, "ccnMain", &Dc.GatewayArgs{
-//				NetworkInstanceId: main.ID(),
-//				NetworkType:       pulumi.String("CCN"),
-//				GatewayType:       pulumi.String("NORMAL"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Dc.NewGatewayCcnRoute(ctx, "route1", &Dc.GatewayCcnRouteArgs{
-//				DcgId:     ccnMain.ID(),
-//				CidrBlock: pulumi.String("10.1.1.0/32"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Dc.NewGatewayCcnRoute(ctx, "route2", &Dc.GatewayCcnRouteArgs{
-//				DcgId:     ccnMain.ID(),
-//				CidrBlock: pulumi.String("192.1.1.0/32"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_ = Dc.GetGatewayCcnRoutesOutput(ctx, dc.GetGatewayCcnRoutesOutputArgs{
-//				DcgId: ccnMain.ID(),
-//			}, nil)
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+// 			Description: pulumi.String("ci-temp-test-ccn-des"),
+// 			Qos:         pulumi.String("AG"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ccnMain, err := Dc.NewGateway(ctx, "ccnMain", &Dc.GatewayArgs{
+// 			NetworkInstanceId: main.ID(),
+// 			NetworkType:       pulumi.String("CCN"),
+// 			GatewayType:       pulumi.String("NORMAL"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Dc.NewGatewayCcnRoute(ctx, "route1", &Dc.GatewayCcnRouteArgs{
+// 			DcgId:     ccnMain.ID(),
+// 			CidrBlock: pulumi.String("10.1.1.0/32"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Dc.NewGatewayCcnRoute(ctx, "route2", &Dc.GatewayCcnRouteArgs{
+// 			DcgId:     ccnMain.ID(),
+// 			CidrBlock: pulumi.String("192.1.1.0/32"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_ = Dc.GetGatewayCcnRoutesOutput(ctx, dc.GetGatewayCcnRoutesOutputArgs{
+// 			DcgId: ccnMain.ID(),
+// 		}, nil)
+// 		return nil
+// 	})
+// }
 // ```
 func GetGatewayCcnRoutes(ctx *pulumi.Context, args *GetGatewayCcnRoutesArgs, opts ...pulumi.InvokeOption) (*GetGatewayCcnRoutesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

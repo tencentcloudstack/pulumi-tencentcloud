@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Attachment{}
 	case "tencentcloud:Clb/customizedConfig:CustomizedConfig":
 		r = &CustomizedConfig{}
+	case "tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment":
+		r = &FunctionTargetsAttachment{}
 	case "tencentcloud:Clb/instance:Instance":
 		r = &Instance{}
 	case "tencentcloud:Clb/listener:Listener":
@@ -66,6 +68,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Clb/customizedConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/functionTargetsAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

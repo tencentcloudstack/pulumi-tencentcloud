@@ -5,6 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./diskBackup";
+export * from "./diskBackupRollbackOperation";
 export * from "./getSnapshotPolicies";
 export * from "./getSnapshots";
 export * from "./getStorages";
@@ -12,15 +14,19 @@ export * from "./getStoragesSet";
 export * from "./snapshot";
 export * from "./snapshotPolicy";
 export * from "./snapshotPolicyAttachment";
+export * from "./snapshotSharePermission";
 export * from "./storage";
 export * from "./storageAttachment";
 export * from "./storageSet";
 export * from "./storageSetAttachment";
 
 // Import resources to register:
+import { DiskBackup } from "./diskBackup";
+import { DiskBackupRollbackOperation } from "./diskBackupRollbackOperation";
 import { Snapshot } from "./snapshot";
 import { SnapshotPolicy } from "./snapshotPolicy";
 import { SnapshotPolicyAttachment } from "./snapshotPolicyAttachment";
+import { SnapshotSharePermission } from "./snapshotSharePermission";
 import { Storage } from "./storage";
 import { StorageAttachment } from "./storageAttachment";
 import { StorageSet } from "./storageSet";
@@ -30,12 +36,18 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cbs/diskBackup:DiskBackup":
+                return new DiskBackup(name, <any>undefined, { urn })
+            case "tencentcloud:Cbs/diskBackupRollbackOperation:DiskBackupRollbackOperation":
+                return new DiskBackupRollbackOperation(name, <any>undefined, { urn })
             case "tencentcloud:Cbs/snapshot:Snapshot":
                 return new Snapshot(name, <any>undefined, { urn })
             case "tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy":
                 return new SnapshotPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment":
                 return new SnapshotPolicyAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission":
+                return new SnapshotSharePermission(name, <any>undefined, { urn })
             case "tencentcloud:Cbs/storage:Storage":
                 return new Storage(name, <any>undefined, { urn })
             case "tencentcloud:Cbs/storageAttachment:StorageAttachment":
@@ -49,9 +61,12 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/diskBackup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/diskBackupRollbackOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/snapshot", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/snapshotPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/snapshotPolicyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/snapshotSharePermission", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/storage", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/storageAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/storageSet", _module)

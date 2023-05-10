@@ -18,6 +18,7 @@ __all__ = [
     'CcPolicyV2CcPrecisionReqLimitArgs',
     'CcPolicyV2CcPrecisionReqLimitPolicyArgs',
     'CcPolicyV2ThresholdArgs',
+    'DdosIpAttachmentV2BoundIpListArgs',
     'DdosPolicyDropOptionArgs',
     'DdosPolicyPacketFilterArgs',
     'DdosPolicyPortFilterArgs',
@@ -779,6 +780,76 @@ class CcPolicyV2ThresholdArgs:
     @threshold.setter
     def threshold(self, value: pulumi.Input[int]):
         pulumi.set(self, "threshold", value)
+
+
+@pulumi.input_type
+class DdosIpAttachmentV2BoundIpListArgs:
+    def __init__(__self__, *,
+                 ip: pulumi.Input[str],
+                 biz_type: Optional[pulumi.Input[str]] = None,
+                 device_type: Optional[pulumi.Input[str]] = None,
+                 instance_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] ip: IP address.
+        :param pulumi.Input[str] biz_type: Category of product that can be bound. Valid values: public (CVM and CLB), bm (BM), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), and other (hosted IP). This field is required when you perform binding.
+        :param pulumi.Input[str] device_type: Sub-product category. Valid values: cvm (CVM), lb (Load balancer), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), eip (BM EIP) and other (managed IP). This field is required when you perform binding.
+        :param pulumi.Input[str] instance_id: Anti-DDoS instance ID of the IP. This field is required only when the instance is bound to an IP. For example, this field InstanceId will be eni-* if the instance ID is bound to an ENI IP; none if there is no instance to bind to a managed IP.
+        """
+        pulumi.set(__self__, "ip", ip)
+        if biz_type is not None:
+            pulumi.set(__self__, "biz_type", biz_type)
+        if device_type is not None:
+            pulumi.set(__self__, "device_type", device_type)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> pulumi.Input[str]:
+        """
+        IP address.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter(name="bizType")
+    def biz_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Category of product that can be bound. Valid values: public (CVM and CLB), bm (BM), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), and other (hosted IP). This field is required when you perform binding.
+        """
+        return pulumi.get(self, "biz_type")
+
+    @biz_type.setter
+    def biz_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "biz_type", value)
+
+    @property
+    @pulumi.getter(name="deviceType")
+    def device_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Sub-product category. Valid values: cvm (CVM), lb (Load balancer), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), eip (BM EIP) and other (managed IP). This field is required when you perform binding.
+        """
+        return pulumi.get(self, "device_type")
+
+    @device_type.setter
+    def device_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "device_type", value)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Anti-DDoS instance ID of the IP. This field is required only when the instance is bound to an IP. For example, this field InstanceId will be eni-* if the instance ID is bound to an ENI IP; none if there is no instance to bind to a managed IP.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_id", value)
 
 
 @pulumi.input_type

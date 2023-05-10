@@ -15,6 +15,9 @@ import * as utilities from "../utilities";
  *
  * const foo = new tencentcloud.Key.Pair("foo", {
  *     keyName: "terraform_test",
+ * });
+ * const foo1 = new tencentcloud.Key.Pair("foo1", {
+ *     keyName: "terraform_test",
  *     publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
  * });
  * ```
@@ -67,6 +70,10 @@ export class Pair extends pulumi.CustomResource {
      * You can import an existing public key and using TencentCloud key pair to manage it.
      */
     public readonly publicKey!: pulumi.Output<string>;
+    /**
+     * Tags of the key pair.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a Pair resource with the given unique name, arguments, and options.
@@ -84,17 +91,16 @@ export class Pair extends pulumi.CustomResource {
             resourceInputs["keyName"] = state ? state.keyName : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["publicKey"] = state ? state.publicKey : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as PairArgs | undefined;
             if ((!args || args.keyName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'keyName'");
             }
-            if ((!args || args.publicKey === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'publicKey'");
-            }
             resourceInputs["keyName"] = args ? args.keyName : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["publicKey"] = args ? args.publicKey : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Pair.__pulumiType, name, resourceInputs, opts);
@@ -117,6 +123,10 @@ export interface PairState {
      * You can import an existing public key and using TencentCloud key pair to manage it.
      */
     publicKey?: pulumi.Input<string>;
+    /**
+     * Tags of the key pair.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -134,5 +144,9 @@ export interface PairArgs {
     /**
      * You can import an existing public key and using TencentCloud key pair to manage it.
      */
-    publicKey: pulumi.Input<string>;
+    publicKey?: pulumi.Input<string>;
+    /**
+     * Tags of the key pair.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }

@@ -21,48 +21,46 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
-//				AvailabilityZone: pulumi.String("ap-guangzhou-4"),
-//				ChargeType:       pulumi.String("POSTPAID"),
-//				EngineVersion:    pulumi.String("5.7"),
-//				FirstSlaveZone:   pulumi.String("ap-guangzhou-4"),
-//				InstanceName:     pulumi.String("myTestMysql"),
-//				InternetService:  pulumi.Int(1),
-//				IntranetPort:     pulumi.Int(3306),
-//				MemSize:          pulumi.Int(128000),
-//				Parameters: pulumi.AnyMap{
-//					"max_connections": pulumi.Any("1000"),
-//				},
-//				ProjectId:       pulumi.Int(201901010001),
-//				RootPassword:    pulumi.String("********"),
-//				SecondSlaveZone: pulumi.String("ap-guangzhou-4"),
-//				SecurityGroups: pulumi.StringArray{
-//					pulumi.String("sg-ot8eclwz"),
-//				},
-//				SlaveDeployMode: pulumi.Int(0),
-//				SlaveSyncMode:   pulumi.Int(1),
-//				SubnetId:        pulumi.String("subnet-9uivyb1g"),
-//				Tags: pulumi.AnyMap{
-//					"name": pulumi.Any("test"),
-//				},
-//				VolumeSize: pulumi.Int(250),
-//				VpcId:      pulumi.String("vpc-12mt3l31"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-4"),
+// 			ChargeType:       pulumi.String("POSTPAID"),
+// 			EngineVersion:    pulumi.String("5.7"),
+// 			FirstSlaveZone:   pulumi.String("ap-guangzhou-4"),
+// 			InstanceName:     pulumi.String("myTestMysql"),
+// 			InternetService:  pulumi.Int(1),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			MemSize:          pulumi.Int(128000),
+// 			Parameters: pulumi.AnyMap{
+// 				"character_set_server": pulumi.Any("UTF8"),
+// 				"max_connections":      pulumi.Any("1000"),
+// 			},
+// 			ProjectId:       pulumi.Int(201901010001),
+// 			RootPassword:    pulumi.String("********"),
+// 			SecondSlaveZone: pulumi.String("ap-guangzhou-4"),
+// 			SecurityGroups: pulumi.StringArray{
+// 				pulumi.String("sg-ot8eclwz"),
+// 			},
+// 			SlaveDeployMode: pulumi.Int(0),
+// 			SlaveSyncMode:   pulumi.Int(1),
+// 			SubnetId:        pulumi.String("subnet-9uivyb1g"),
+// 			Tags: pulumi.AnyMap{
+// 				"name": pulumi.Any("test"),
+// 			},
+// 			VolumeSize: pulumi.Int(250),
+// 			VpcId:      pulumi.String("vpc-12mt3l31"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -70,9 +68,7 @@ import (
 // MySQL instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
-//
+//  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -142,7 +138,7 @@ type Instance struct {
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntOutput `pulumi:"status"`
 	// Private network ID. If `vpcId` is set, this value is required.
-	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
+	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// Instance tags.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Indicates which kind of operations is being executed.
@@ -150,7 +146,7 @@ type Instance struct {
 	// Disk size (in GB).
 	VolumeSize pulumi.IntOutput `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
-	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
+	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -502,7 +498,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -527,7 +523,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -718,8 +714,8 @@ func (o InstanceOutput) Status() pulumi.IntOutput {
 }
 
 // Private network ID. If `vpcId` is set, this value is required.
-func (o InstanceOutput) SubnetId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
 }
 
 // Instance tags.
@@ -738,8 +734,8 @@ func (o InstanceOutput) VolumeSize() pulumi.IntOutput {
 }
 
 // ID of VPC, which can be modified once every 24 hours and can't be removed.
-func (o InstanceOutput) VpcId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

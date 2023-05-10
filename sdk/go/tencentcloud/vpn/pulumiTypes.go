@@ -20,7 +20,7 @@ type ConnectionSecurityGroupPolicy struct {
 // ConnectionSecurityGroupPolicyInput is an input type that accepts ConnectionSecurityGroupPolicyArgs and ConnectionSecurityGroupPolicyOutput values.
 // You can construct a concrete instance of `ConnectionSecurityGroupPolicyInput` via:
 //
-//	ConnectionSecurityGroupPolicyArgs{...}
+//          ConnectionSecurityGroupPolicyArgs{...}
 type ConnectionSecurityGroupPolicyInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i ConnectionSecurityGroupPolicyArgs) ToConnectionSecurityGroupPolicyOutput
 // ConnectionSecurityGroupPolicyArrayInput is an input type that accepts ConnectionSecurityGroupPolicyArray and ConnectionSecurityGroupPolicyArrayOutput values.
 // You can construct a concrete instance of `ConnectionSecurityGroupPolicyArrayInput` via:
 //
-//	ConnectionSecurityGroupPolicyArray{ ConnectionSecurityGroupPolicyArgs{...} }
+//          ConnectionSecurityGroupPolicyArray{ ConnectionSecurityGroupPolicyArgs{...} }
 type ConnectionSecurityGroupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -114,6 +114,181 @@ func (o ConnectionSecurityGroupPolicyArrayOutput) Index(i pulumi.IntInput) Conne
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConnectionSecurityGroupPolicy {
 		return vs[0].([]ConnectionSecurityGroupPolicy)[vs[1].(int)]
 	}).(ConnectionSecurityGroupPolicyOutput)
+}
+
+type CustomerGatewayConfigurationDownloadCustomerGatewayVendor struct {
+	// Platform.
+	Platform string `pulumi:"platform"`
+	// SoftwareVersion.
+	SoftwareVersion string `pulumi:"softwareVersion"`
+	// VendorName.
+	VendorName string `pulumi:"vendorName"`
+}
+
+// CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput is an input type that accepts CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs and CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput values.
+// You can construct a concrete instance of `CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput` via:
+//
+//          CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
+type CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput interface {
+	pulumi.Input
+
+	ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput
+	ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorOutputWithContext(context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput
+}
+
+type CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs struct {
+	// Platform.
+	Platform pulumi.StringInput `pulumi:"platform"`
+	// SoftwareVersion.
+	SoftwareVersion pulumi.StringInput `pulumi:"softwareVersion"`
+	// VendorName.
+	VendorName pulumi.StringInput `pulumi:"vendorName"`
+}
+
+func (CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomerGatewayConfigurationDownloadCustomerGatewayVendor)(nil)).Elem()
+}
+
+func (i CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput {
+	return i.ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorOutputWithContext(context.Background())
+}
+
+func (i CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorOutputWithContext(ctx context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput)
+}
+
+func (i CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return i.ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(context.Background())
+}
+
+func (i CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(ctx context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput).ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(ctx)
+}
+
+// CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput is an input type that accepts CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs, CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtr and CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput values.
+// You can construct a concrete instance of `CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput` via:
+//
+//          CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
+//
+//  or:
+//
+//          nil
+type CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput interface {
+	pulumi.Input
+
+	ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput
+	ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput
+}
+
+type customerGatewayConfigurationDownloadCustomerGatewayVendorPtrType CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs
+
+func CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtr(v *CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput {
+	return (*customerGatewayConfigurationDownloadCustomerGatewayVendorPtrType)(v)
+}
+
+func (*customerGatewayConfigurationDownloadCustomerGatewayVendorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomerGatewayConfigurationDownloadCustomerGatewayVendor)(nil)).Elem()
+}
+
+func (i *customerGatewayConfigurationDownloadCustomerGatewayVendorPtrType) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return i.ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(context.Background())
+}
+
+func (i *customerGatewayConfigurationDownloadCustomerGatewayVendorPtrType) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(ctx context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput)
+}
+
+type CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput struct{ *pulumi.OutputState }
+
+func (CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomerGatewayConfigurationDownloadCustomerGatewayVendor)(nil)).Elem()
+}
+
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput {
+	return o
+}
+
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorOutputWithContext(ctx context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput {
+	return o
+}
+
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return o.ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(context.Background())
+}
+
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(ctx context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomerGatewayConfigurationDownloadCustomerGatewayVendor) *CustomerGatewayConfigurationDownloadCustomerGatewayVendor {
+		return &v
+	}).(CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput)
+}
+
+// Platform.
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomerGatewayConfigurationDownloadCustomerGatewayVendor) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+// SoftwareVersion.
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) SoftwareVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomerGatewayConfigurationDownloadCustomerGatewayVendor) string { return v.SoftwareVersion }).(pulumi.StringOutput)
+}
+
+// VendorName.
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput) VendorName() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomerGatewayConfigurationDownloadCustomerGatewayVendor) string { return v.VendorName }).(pulumi.StringOutput)
+}
+
+type CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomerGatewayConfigurationDownloadCustomerGatewayVendor)(nil)).Elem()
+}
+
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput() CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return o
+}
+
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) ToCustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutputWithContext(ctx context.Context) CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput {
+	return o
+}
+
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) Elem() CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput {
+	return o.ApplyT(func(v *CustomerGatewayConfigurationDownloadCustomerGatewayVendor) CustomerGatewayConfigurationDownloadCustomerGatewayVendor {
+		if v != nil {
+			return *v
+		}
+		var ret CustomerGatewayConfigurationDownloadCustomerGatewayVendor
+		return ret
+	}).(CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput)
+}
+
+// Platform.
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) Platform() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomerGatewayConfigurationDownloadCustomerGatewayVendor) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Platform
+	}).(pulumi.StringPtrOutput)
+}
+
+// SoftwareVersion.
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) SoftwareVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomerGatewayConfigurationDownloadCustomerGatewayVendor) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SoftwareVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+// VendorName.
+func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) VendorName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomerGatewayConfigurationDownloadCustomerGatewayVendor) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.VendorName
+	}).(pulumi.StringPtrOutput)
 }
 
 type GetConnectionsConnectionList struct {
@@ -184,7 +359,7 @@ type GetConnectionsConnectionList struct {
 // GetConnectionsConnectionListInput is an input type that accepts GetConnectionsConnectionListArgs and GetConnectionsConnectionListOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListInput` via:
 //
-//	GetConnectionsConnectionListArgs{...}
+//          GetConnectionsConnectionListArgs{...}
 type GetConnectionsConnectionListInput interface {
 	pulumi.Input
 
@@ -272,7 +447,7 @@ func (i GetConnectionsConnectionListArgs) ToGetConnectionsConnectionListOutputWi
 // GetConnectionsConnectionListArrayInput is an input type that accepts GetConnectionsConnectionListArray and GetConnectionsConnectionListArrayOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListArrayInput` via:
 //
-//	GetConnectionsConnectionListArray{ GetConnectionsConnectionListArgs{...} }
+//          GetConnectionsConnectionListArray{ GetConnectionsConnectionListArgs{...} }
 type GetConnectionsConnectionListArrayInput interface {
 	pulumi.Input
 
@@ -495,7 +670,7 @@ type GetConnectionsConnectionListSecurityGroupPolicy struct {
 // GetConnectionsConnectionListSecurityGroupPolicyInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArgs and GetConnectionsConnectionListSecurityGroupPolicyOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyInput` via:
 //
-//	GetConnectionsConnectionListSecurityGroupPolicyArgs{...}
+//          GetConnectionsConnectionListSecurityGroupPolicyArgs{...}
 type GetConnectionsConnectionListSecurityGroupPolicyInput interface {
 	pulumi.Input
 
@@ -525,7 +700,7 @@ func (i GetConnectionsConnectionListSecurityGroupPolicyArgs) ToGetConnectionsCon
 // GetConnectionsConnectionListSecurityGroupPolicyArrayInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArray and GetConnectionsConnectionListSecurityGroupPolicyArrayOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyArrayInput` via:
 //
-//	GetConnectionsConnectionListSecurityGroupPolicyArray{ GetConnectionsConnectionListSecurityGroupPolicyArgs{...} }
+//          GetConnectionsConnectionListSecurityGroupPolicyArray{ GetConnectionsConnectionListSecurityGroupPolicyArgs{...} }
 type GetConnectionsConnectionListSecurityGroupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -591,6 +766,121 @@ func (o GetConnectionsConnectionListSecurityGroupPolicyArrayOutput) Index(i pulu
 	}).(GetConnectionsConnectionListSecurityGroupPolicyOutput)
 }
 
+type GetCustomerGatewayVendorsCustomerGatewayVendorSet struct {
+	// Platform.
+	Platform string `pulumi:"platform"`
+	// SoftwareVersion.
+	SoftwareVersion string `pulumi:"softwareVersion"`
+	// VendorName.
+	VendorName string `pulumi:"vendorName"`
+}
+
+// GetCustomerGatewayVendorsCustomerGatewayVendorSetInput is an input type that accepts GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs and GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput values.
+// You can construct a concrete instance of `GetCustomerGatewayVendorsCustomerGatewayVendorSetInput` via:
+//
+//          GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...}
+type GetCustomerGatewayVendorsCustomerGatewayVendorSetInput interface {
+	pulumi.Input
+
+	ToGetCustomerGatewayVendorsCustomerGatewayVendorSetOutput() GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput
+	ToGetCustomerGatewayVendorsCustomerGatewayVendorSetOutputWithContext(context.Context) GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput
+}
+
+type GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs struct {
+	// Platform.
+	Platform pulumi.StringInput `pulumi:"platform"`
+	// SoftwareVersion.
+	SoftwareVersion pulumi.StringInput `pulumi:"softwareVersion"`
+	// VendorName.
+	VendorName pulumi.StringInput `pulumi:"vendorName"`
+}
+
+func (GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerGatewayVendorsCustomerGatewayVendorSet)(nil)).Elem()
+}
+
+func (i GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetOutput() GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput {
+	return i.ToGetCustomerGatewayVendorsCustomerGatewayVendorSetOutputWithContext(context.Background())
+}
+
+func (i GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetOutputWithContext(ctx context.Context) GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput)
+}
+
+// GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput is an input type that accepts GetCustomerGatewayVendorsCustomerGatewayVendorSetArray and GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput values.
+// You can construct a concrete instance of `GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput` via:
+//
+//          GetCustomerGatewayVendorsCustomerGatewayVendorSetArray{ GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...} }
+type GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput interface {
+	pulumi.Input
+
+	ToGetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput() GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput
+	ToGetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutputWithContext(context.Context) GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput
+}
+
+type GetCustomerGatewayVendorsCustomerGatewayVendorSetArray []GetCustomerGatewayVendorsCustomerGatewayVendorSetInput
+
+func (GetCustomerGatewayVendorsCustomerGatewayVendorSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerGatewayVendorsCustomerGatewayVendorSet)(nil)).Elem()
+}
+
+func (i GetCustomerGatewayVendorsCustomerGatewayVendorSetArray) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput() GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput {
+	return i.ToGetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetCustomerGatewayVendorsCustomerGatewayVendorSetArray) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutputWithContext(ctx context.Context) GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput)
+}
+
+type GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput struct{ *pulumi.OutputState }
+
+func (GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerGatewayVendorsCustomerGatewayVendorSet)(nil)).Elem()
+}
+
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetOutput() GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput {
+	return o
+}
+
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetOutputWithContext(ctx context.Context) GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput {
+	return o
+}
+
+// Platform.
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerGatewayVendorsCustomerGatewayVendorSet) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+// SoftwareVersion.
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput) SoftwareVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerGatewayVendorsCustomerGatewayVendorSet) string { return v.SoftwareVersion }).(pulumi.StringOutput)
+}
+
+// VendorName.
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput) VendorName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerGatewayVendorsCustomerGatewayVendorSet) string { return v.VendorName }).(pulumi.StringOutput)
+}
+
+type GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerGatewayVendorsCustomerGatewayVendorSet)(nil)).Elem()
+}
+
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput() GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput {
+	return o
+}
+
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput) ToGetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutputWithContext(ctx context.Context) GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput {
+	return o
+}
+
+func (o GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput) Index(i pulumi.IntInput) GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCustomerGatewayVendorsCustomerGatewayVendorSet {
+		return vs[0].([]GetCustomerGatewayVendorsCustomerGatewayVendorSet)[vs[1].(int)]
+	}).(GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput)
+}
+
 type GetCustomerGatewaysGatewayList struct {
 	// Create time of the VPN customer gateway.
 	CreateTime string `pulumi:"createTime"`
@@ -607,7 +897,7 @@ type GetCustomerGatewaysGatewayList struct {
 // GetCustomerGatewaysGatewayListInput is an input type that accepts GetCustomerGatewaysGatewayListArgs and GetCustomerGatewaysGatewayListOutput values.
 // You can construct a concrete instance of `GetCustomerGatewaysGatewayListInput` via:
 //
-//	GetCustomerGatewaysGatewayListArgs{...}
+//          GetCustomerGatewaysGatewayListArgs{...}
 type GetCustomerGatewaysGatewayListInput interface {
 	pulumi.Input
 
@@ -643,7 +933,7 @@ func (i GetCustomerGatewaysGatewayListArgs) ToGetCustomerGatewaysGatewayListOutp
 // GetCustomerGatewaysGatewayListArrayInput is an input type that accepts GetCustomerGatewaysGatewayListArray and GetCustomerGatewaysGatewayListArrayOutput values.
 // You can construct a concrete instance of `GetCustomerGatewaysGatewayListArrayInput` via:
 //
-//	GetCustomerGatewaysGatewayListArray{ GetCustomerGatewaysGatewayListArgs{...} }
+//          GetCustomerGatewaysGatewayListArray{ GetCustomerGatewaysGatewayListArgs{...} }
 type GetCustomerGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 
@@ -747,7 +1037,7 @@ type GetGatewayRoutesVpnGatewayRouteList struct {
 // GetGatewayRoutesVpnGatewayRouteListInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArgs and GetGatewayRoutesVpnGatewayRouteListOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListInput` via:
 //
-//	GetGatewayRoutesVpnGatewayRouteListArgs{...}
+//          GetGatewayRoutesVpnGatewayRouteListArgs{...}
 type GetGatewayRoutesVpnGatewayRouteListInput interface {
 	pulumi.Input
 
@@ -790,7 +1080,7 @@ func (i GetGatewayRoutesVpnGatewayRouteListArgs) ToGetGatewayRoutesVpnGatewayRou
 // GetGatewayRoutesVpnGatewayRouteListArrayInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArray and GetGatewayRoutesVpnGatewayRouteListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListArrayInput` via:
 //
-//	GetGatewayRoutesVpnGatewayRouteListArray{ GetGatewayRoutesVpnGatewayRouteListArgs{...} }
+//          GetGatewayRoutesVpnGatewayRouteListArray{ GetGatewayRoutesVpnGatewayRouteListArgs{...} }
 type GetGatewayRoutesVpnGatewayRouteListArrayInput interface {
 	pulumi.Input
 
@@ -931,7 +1221,7 @@ type GetGatewaysGatewayList struct {
 // GetGatewaysGatewayListInput is an input type that accepts GetGatewaysGatewayListArgs and GetGatewaysGatewayListOutput values.
 // You can construct a concrete instance of `GetGatewaysGatewayListInput` via:
 //
-//	GetGatewaysGatewayListArgs{...}
+//          GetGatewaysGatewayListArgs{...}
 type GetGatewaysGatewayListInput interface {
 	pulumi.Input
 
@@ -989,7 +1279,7 @@ func (i GetGatewaysGatewayListArgs) ToGetGatewaysGatewayListOutputWithContext(ct
 // GetGatewaysGatewayListArrayInput is an input type that accepts GetGatewaysGatewayListArray and GetGatewaysGatewayListArrayOutput values.
 // You can construct a concrete instance of `GetGatewaysGatewayListArrayInput` via:
 //
-//	GetGatewaysGatewayListArray{ GetGatewaysGatewayListArgs{...} }
+//          GetGatewaysGatewayListArray{ GetGatewaysGatewayListArgs{...} }
 type GetGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 
@@ -1128,10 +1418,14 @@ func (o GetGatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) GetGatewaysG
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionSecurityGroupPolicyInput)(nil)).Elem(), ConnectionSecurityGroupPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionSecurityGroupPolicyArrayInput)(nil)).Elem(), ConnectionSecurityGroupPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput)(nil)).Elem(), CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput)(nil)).Elem(), CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListInput)(nil)).Elem(), GetConnectionsConnectionListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListArrayInput)(nil)).Elem(), GetConnectionsConnectionListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListSecurityGroupPolicyInput)(nil)).Elem(), GetConnectionsConnectionListSecurityGroupPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListSecurityGroupPolicyArrayInput)(nil)).Elem(), GetConnectionsConnectionListSecurityGroupPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerGatewayVendorsCustomerGatewayVendorSetInput)(nil)).Elem(), GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput)(nil)).Elem(), GetCustomerGatewayVendorsCustomerGatewayVendorSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerGatewaysGatewayListInput)(nil)).Elem(), GetCustomerGatewaysGatewayListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerGatewaysGatewayListArrayInput)(nil)).Elem(), GetCustomerGatewaysGatewayListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesVpnGatewayRouteListInput)(nil)).Elem(), GetGatewayRoutesVpnGatewayRouteListArgs{})
@@ -1140,10 +1434,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysGatewayListArrayInput)(nil)).Elem(), GetGatewaysGatewayListArray{})
 	pulumi.RegisterOutputType(ConnectionSecurityGroupPolicyOutput{})
 	pulumi.RegisterOutputType(ConnectionSecurityGroupPolicyArrayOutput{})
+	pulumi.RegisterOutputType(CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput{})
+	pulumi.RegisterOutputType(CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput{})
 	pulumi.RegisterOutputType(GetConnectionsConnectionListOutput{})
 	pulumi.RegisterOutputType(GetConnectionsConnectionListArrayOutput{})
 	pulumi.RegisterOutputType(GetConnectionsConnectionListSecurityGroupPolicyOutput{})
 	pulumi.RegisterOutputType(GetConnectionsConnectionListSecurityGroupPolicyArrayOutput{})
+	pulumi.RegisterOutputType(GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput{})
+	pulumi.RegisterOutputType(GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput{})
 	pulumi.RegisterOutputType(GetCustomerGatewaysGatewayListOutput{})
 	pulumi.RegisterOutputType(GetCustomerGatewaysGatewayListArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayRoutesVpnGatewayRouteListOutput{})

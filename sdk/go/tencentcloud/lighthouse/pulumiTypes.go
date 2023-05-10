@@ -10,6 +10,139 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type FirewallRuleFirewallRule struct {
+	// Valid values are ACCEPT, DROP. Default value is ACCEPT.
+	Action *string `pulumi:"action"`
+	// IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+	CidrBlock *string `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription *string `pulumi:"firewallRuleDescription"`
+	// Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+	Port *string `pulumi:"port"`
+	// Protocol. Valid values are TCP, UDP, ICMP, ALL.
+	Protocol string `pulumi:"protocol"`
+}
+
+// FirewallRuleFirewallRuleInput is an input type that accepts FirewallRuleFirewallRuleArgs and FirewallRuleFirewallRuleOutput values.
+// You can construct a concrete instance of `FirewallRuleFirewallRuleInput` via:
+//
+//          FirewallRuleFirewallRuleArgs{...}
+type FirewallRuleFirewallRuleInput interface {
+	pulumi.Input
+
+	ToFirewallRuleFirewallRuleOutput() FirewallRuleFirewallRuleOutput
+	ToFirewallRuleFirewallRuleOutputWithContext(context.Context) FirewallRuleFirewallRuleOutput
+}
+
+type FirewallRuleFirewallRuleArgs struct {
+	// Valid values are ACCEPT, DROP. Default value is ACCEPT.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription pulumi.StringPtrInput `pulumi:"firewallRuleDescription"`
+	// Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+	Port pulumi.StringPtrInput `pulumi:"port"`
+	// Protocol. Valid values are TCP, UDP, ICMP, ALL.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (FirewallRuleFirewallRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FirewallRuleFirewallRule)(nil)).Elem()
+}
+
+func (i FirewallRuleFirewallRuleArgs) ToFirewallRuleFirewallRuleOutput() FirewallRuleFirewallRuleOutput {
+	return i.ToFirewallRuleFirewallRuleOutputWithContext(context.Background())
+}
+
+func (i FirewallRuleFirewallRuleArgs) ToFirewallRuleFirewallRuleOutputWithContext(ctx context.Context) FirewallRuleFirewallRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FirewallRuleFirewallRuleOutput)
+}
+
+// FirewallRuleFirewallRuleArrayInput is an input type that accepts FirewallRuleFirewallRuleArray and FirewallRuleFirewallRuleArrayOutput values.
+// You can construct a concrete instance of `FirewallRuleFirewallRuleArrayInput` via:
+//
+//          FirewallRuleFirewallRuleArray{ FirewallRuleFirewallRuleArgs{...} }
+type FirewallRuleFirewallRuleArrayInput interface {
+	pulumi.Input
+
+	ToFirewallRuleFirewallRuleArrayOutput() FirewallRuleFirewallRuleArrayOutput
+	ToFirewallRuleFirewallRuleArrayOutputWithContext(context.Context) FirewallRuleFirewallRuleArrayOutput
+}
+
+type FirewallRuleFirewallRuleArray []FirewallRuleFirewallRuleInput
+
+func (FirewallRuleFirewallRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FirewallRuleFirewallRule)(nil)).Elem()
+}
+
+func (i FirewallRuleFirewallRuleArray) ToFirewallRuleFirewallRuleArrayOutput() FirewallRuleFirewallRuleArrayOutput {
+	return i.ToFirewallRuleFirewallRuleArrayOutputWithContext(context.Background())
+}
+
+func (i FirewallRuleFirewallRuleArray) ToFirewallRuleFirewallRuleArrayOutputWithContext(ctx context.Context) FirewallRuleFirewallRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FirewallRuleFirewallRuleArrayOutput)
+}
+
+type FirewallRuleFirewallRuleOutput struct{ *pulumi.OutputState }
+
+func (FirewallRuleFirewallRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FirewallRuleFirewallRule)(nil)).Elem()
+}
+
+func (o FirewallRuleFirewallRuleOutput) ToFirewallRuleFirewallRuleOutput() FirewallRuleFirewallRuleOutput {
+	return o
+}
+
+func (o FirewallRuleFirewallRuleOutput) ToFirewallRuleFirewallRuleOutputWithContext(ctx context.Context) FirewallRuleFirewallRuleOutput {
+	return o
+}
+
+// Valid values are ACCEPT, DROP. Default value is ACCEPT.
+func (o FirewallRuleFirewallRuleOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallRuleFirewallRule) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+// IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+func (o FirewallRuleFirewallRuleOutput) CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallRuleFirewallRule) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Firewall rule description.
+func (o FirewallRuleFirewallRuleOutput) FirewallRuleDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallRuleFirewallRule) *string { return v.FirewallRuleDescription }).(pulumi.StringPtrOutput)
+}
+
+// Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+func (o FirewallRuleFirewallRuleOutput) Port() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallRuleFirewallRule) *string { return v.Port }).(pulumi.StringPtrOutput)
+}
+
+// Protocol. Valid values are TCP, UDP, ICMP, ALL.
+func (o FirewallRuleFirewallRuleOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v FirewallRuleFirewallRule) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type FirewallRuleFirewallRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (FirewallRuleFirewallRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FirewallRuleFirewallRule)(nil)).Elem()
+}
+
+func (o FirewallRuleFirewallRuleArrayOutput) ToFirewallRuleFirewallRuleArrayOutput() FirewallRuleFirewallRuleArrayOutput {
+	return o
+}
+
+func (o FirewallRuleFirewallRuleArrayOutput) ToFirewallRuleFirewallRuleArrayOutputWithContext(ctx context.Context) FirewallRuleFirewallRuleArrayOutput {
+	return o
+}
+
+func (o FirewallRuleFirewallRuleArrayOutput) Index(i pulumi.IntInput) FirewallRuleFirewallRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FirewallRuleFirewallRule {
+		return vs[0].([]FirewallRuleFirewallRule)[vs[1].(int)]
+	}).(FirewallRuleFirewallRuleOutput)
+}
+
 type InstanceContainer struct {
 	// The command to run.
 	Command *string `pulumi:"command"`
@@ -28,7 +161,7 @@ type InstanceContainer struct {
 // InstanceContainerInput is an input type that accepts InstanceContainerArgs and InstanceContainerOutput values.
 // You can construct a concrete instance of `InstanceContainerInput` via:
 //
-//	InstanceContainerArgs{...}
+//          InstanceContainerArgs{...}
 type InstanceContainerInput interface {
 	pulumi.Input
 
@@ -66,7 +199,7 @@ func (i InstanceContainerArgs) ToInstanceContainerOutputWithContext(ctx context.
 // InstanceContainerArrayInput is an input type that accepts InstanceContainerArray and InstanceContainerArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerArrayInput` via:
 //
-//	InstanceContainerArray{ InstanceContainerArgs{...} }
+//          InstanceContainerArray{ InstanceContainerArgs{...} }
 type InstanceContainerArrayInput interface {
 	pulumi.Input
 
@@ -162,7 +295,7 @@ type InstanceContainerEnv struct {
 // InstanceContainerEnvInput is an input type that accepts InstanceContainerEnvArgs and InstanceContainerEnvOutput values.
 // You can construct a concrete instance of `InstanceContainerEnvInput` via:
 //
-//	InstanceContainerEnvArgs{...}
+//          InstanceContainerEnvArgs{...}
 type InstanceContainerEnvInput interface {
 	pulumi.Input
 
@@ -192,7 +325,7 @@ func (i InstanceContainerEnvArgs) ToInstanceContainerEnvOutputWithContext(ctx co
 // InstanceContainerEnvArrayInput is an input type that accepts InstanceContainerEnvArray and InstanceContainerEnvArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerEnvArrayInput` via:
 //
-//	InstanceContainerEnvArray{ InstanceContainerEnvArgs{...} }
+//          InstanceContainerEnvArray{ InstanceContainerEnvArgs{...} }
 type InstanceContainerEnvArrayInput interface {
 	pulumi.Input
 
@@ -272,7 +405,7 @@ type InstanceContainerPublishPort struct {
 // InstanceContainerPublishPortInput is an input type that accepts InstanceContainerPublishPortArgs and InstanceContainerPublishPortOutput values.
 // You can construct a concrete instance of `InstanceContainerPublishPortInput` via:
 //
-//	InstanceContainerPublishPortArgs{...}
+//          InstanceContainerPublishPortArgs{...}
 type InstanceContainerPublishPortInput interface {
 	pulumi.Input
 
@@ -306,7 +439,7 @@ func (i InstanceContainerPublishPortArgs) ToInstanceContainerPublishPortOutputWi
 // InstanceContainerPublishPortArrayInput is an input type that accepts InstanceContainerPublishPortArray and InstanceContainerPublishPortArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerPublishPortArrayInput` via:
 //
-//	InstanceContainerPublishPortArray{ InstanceContainerPublishPortArgs{...} }
+//          InstanceContainerPublishPortArray{ InstanceContainerPublishPortArgs{...} }
 type InstanceContainerPublishPortArrayInput interface {
 	pulumi.Input
 
@@ -392,7 +525,7 @@ type InstanceContainerVolume struct {
 // InstanceContainerVolumeInput is an input type that accepts InstanceContainerVolumeArgs and InstanceContainerVolumeOutput values.
 // You can construct a concrete instance of `InstanceContainerVolumeInput` via:
 //
-//	InstanceContainerVolumeArgs{...}
+//          InstanceContainerVolumeArgs{...}
 type InstanceContainerVolumeInput interface {
 	pulumi.Input
 
@@ -422,7 +555,7 @@ func (i InstanceContainerVolumeArgs) ToInstanceContainerVolumeOutputWithContext(
 // InstanceContainerVolumeArrayInput is an input type that accepts InstanceContainerVolumeArray and InstanceContainerVolumeArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerVolumeArrayInput` via:
 //
-//	InstanceContainerVolumeArray{ InstanceContainerVolumeArgs{...} }
+//          InstanceContainerVolumeArray{ InstanceContainerVolumeArgs{...} }
 type InstanceContainerVolumeArrayInput interface {
 	pulumi.Input
 
@@ -498,7 +631,7 @@ type InstanceLoginConfiguration struct {
 // InstanceLoginConfigurationInput is an input type that accepts InstanceLoginConfigurationArgs and InstanceLoginConfigurationOutput values.
 // You can construct a concrete instance of `InstanceLoginConfigurationInput` via:
 //
-//	InstanceLoginConfigurationArgs{...}
+//          InstanceLoginConfigurationArgs{...}
 type InstanceLoginConfigurationInput interface {
 	pulumi.Input
 
@@ -536,11 +669,11 @@ func (i InstanceLoginConfigurationArgs) ToInstanceLoginConfigurationPtrOutputWit
 // InstanceLoginConfigurationPtrInput is an input type that accepts InstanceLoginConfigurationArgs, InstanceLoginConfigurationPtr and InstanceLoginConfigurationPtrOutput values.
 // You can construct a concrete instance of `InstanceLoginConfigurationPtrInput` via:
 //
-//	        InstanceLoginConfigurationArgs{...}
+//          InstanceLoginConfigurationArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type InstanceLoginConfigurationPtrInput interface {
 	pulumi.Input
 
@@ -644,7 +777,701 @@ func (o InstanceLoginConfigurationPtrOutput) Password() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type GetBundleBundleSet struct {
+	// Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+	BundleDisplayLabel string `pulumi:"bundleDisplayLabel"`
+	// Package ID.
+	BundleId string `pulumi:"bundleId"`
+	// Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+	BundleSalesState string `pulumi:"bundleSalesState"`
+	// Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+	BundleType string `pulumi:"bundleType"`
+	// CPU.
+	Cpu int `pulumi:"cpu"`
+	// Network billing mode.
+	InternetChargeType string `pulumi:"internetChargeType"`
+	// Peak bandwidth in Mbps.
+	InternetMaxBandwidthOut int `pulumi:"internetMaxBandwidthOut"`
+	// Memory size in GB.
+	Memory int `pulumi:"memory"`
+	// Monthly network traffic in Gb.
+	MonthlyTraffic int `pulumi:"monthlyTraffic"`
+	// Current package unit price information.
+	Prices []GetBundleBundleSetPrice `pulumi:"prices"`
+	// Whether Linux/Unix is supported.
+	SupportLinuxUnixPlatform bool `pulumi:"supportLinuxUnixPlatform"`
+	// Whether Windows is supported.
+	SupportWindowsPlatform bool `pulumi:"supportWindowsPlatform"`
+	// System disk size.
+	SystemDiskSize int `pulumi:"systemDiskSize"`
+	// System disk type.
+	SystemDiskType string `pulumi:"systemDiskType"`
+}
+
+// GetBundleBundleSetInput is an input type that accepts GetBundleBundleSetArgs and GetBundleBundleSetOutput values.
+// You can construct a concrete instance of `GetBundleBundleSetInput` via:
+//
+//          GetBundleBundleSetArgs{...}
+type GetBundleBundleSetInput interface {
+	pulumi.Input
+
+	ToGetBundleBundleSetOutput() GetBundleBundleSetOutput
+	ToGetBundleBundleSetOutputWithContext(context.Context) GetBundleBundleSetOutput
+}
+
+type GetBundleBundleSetArgs struct {
+	// Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+	BundleDisplayLabel pulumi.StringInput `pulumi:"bundleDisplayLabel"`
+	// Package ID.
+	BundleId pulumi.StringInput `pulumi:"bundleId"`
+	// Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+	BundleSalesState pulumi.StringInput `pulumi:"bundleSalesState"`
+	// Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+	BundleType pulumi.StringInput `pulumi:"bundleType"`
+	// CPU.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Network billing mode.
+	InternetChargeType pulumi.StringInput `pulumi:"internetChargeType"`
+	// Peak bandwidth in Mbps.
+	InternetMaxBandwidthOut pulumi.IntInput `pulumi:"internetMaxBandwidthOut"`
+	// Memory size in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Monthly network traffic in Gb.
+	MonthlyTraffic pulumi.IntInput `pulumi:"monthlyTraffic"`
+	// Current package unit price information.
+	Prices GetBundleBundleSetPriceArrayInput `pulumi:"prices"`
+	// Whether Linux/Unix is supported.
+	SupportLinuxUnixPlatform pulumi.BoolInput `pulumi:"supportLinuxUnixPlatform"`
+	// Whether Windows is supported.
+	SupportWindowsPlatform pulumi.BoolInput `pulumi:"supportWindowsPlatform"`
+	// System disk size.
+	SystemDiskSize pulumi.IntInput `pulumi:"systemDiskSize"`
+	// System disk type.
+	SystemDiskType pulumi.StringInput `pulumi:"systemDiskType"`
+}
+
+func (GetBundleBundleSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleBundleSet)(nil)).Elem()
+}
+
+func (i GetBundleBundleSetArgs) ToGetBundleBundleSetOutput() GetBundleBundleSetOutput {
+	return i.ToGetBundleBundleSetOutputWithContext(context.Background())
+}
+
+func (i GetBundleBundleSetArgs) ToGetBundleBundleSetOutputWithContext(ctx context.Context) GetBundleBundleSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleBundleSetOutput)
+}
+
+// GetBundleBundleSetArrayInput is an input type that accepts GetBundleBundleSetArray and GetBundleBundleSetArrayOutput values.
+// You can construct a concrete instance of `GetBundleBundleSetArrayInput` via:
+//
+//          GetBundleBundleSetArray{ GetBundleBundleSetArgs{...} }
+type GetBundleBundleSetArrayInput interface {
+	pulumi.Input
+
+	ToGetBundleBundleSetArrayOutput() GetBundleBundleSetArrayOutput
+	ToGetBundleBundleSetArrayOutputWithContext(context.Context) GetBundleBundleSetArrayOutput
+}
+
+type GetBundleBundleSetArray []GetBundleBundleSetInput
+
+func (GetBundleBundleSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleBundleSet)(nil)).Elem()
+}
+
+func (i GetBundleBundleSetArray) ToGetBundleBundleSetArrayOutput() GetBundleBundleSetArrayOutput {
+	return i.ToGetBundleBundleSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetBundleBundleSetArray) ToGetBundleBundleSetArrayOutputWithContext(ctx context.Context) GetBundleBundleSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleBundleSetArrayOutput)
+}
+
+type GetBundleBundleSetOutput struct{ *pulumi.OutputState }
+
+func (GetBundleBundleSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleBundleSet)(nil)).Elem()
+}
+
+func (o GetBundleBundleSetOutput) ToGetBundleBundleSetOutput() GetBundleBundleSetOutput {
+	return o
+}
+
+func (o GetBundleBundleSetOutput) ToGetBundleBundleSetOutputWithContext(ctx context.Context) GetBundleBundleSetOutput {
+	return o
+}
+
+// Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+func (o GetBundleBundleSetOutput) BundleDisplayLabel() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) string { return v.BundleDisplayLabel }).(pulumi.StringOutput)
+}
+
+// Package ID.
+func (o GetBundleBundleSetOutput) BundleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) string { return v.BundleId }).(pulumi.StringOutput)
+}
+
+// Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+func (o GetBundleBundleSetOutput) BundleSalesState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) string { return v.BundleSalesState }).(pulumi.StringOutput)
+}
+
+// Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+func (o GetBundleBundleSetOutput) BundleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) string { return v.BundleType }).(pulumi.StringOutput)
+}
+
+// CPU.
+func (o GetBundleBundleSetOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Network billing mode.
+func (o GetBundleBundleSetOutput) InternetChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) string { return v.InternetChargeType }).(pulumi.StringOutput)
+}
+
+// Peak bandwidth in Mbps.
+func (o GetBundleBundleSetOutput) InternetMaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) int { return v.InternetMaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+// Memory size in GB.
+func (o GetBundleBundleSetOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Monthly network traffic in Gb.
+func (o GetBundleBundleSetOutput) MonthlyTraffic() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) int { return v.MonthlyTraffic }).(pulumi.IntOutput)
+}
+
+// Current package unit price information.
+func (o GetBundleBundleSetOutput) Prices() GetBundleBundleSetPriceArrayOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) []GetBundleBundleSetPrice { return v.Prices }).(GetBundleBundleSetPriceArrayOutput)
+}
+
+// Whether Linux/Unix is supported.
+func (o GetBundleBundleSetOutput) SupportLinuxUnixPlatform() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) bool { return v.SupportLinuxUnixPlatform }).(pulumi.BoolOutput)
+}
+
+// Whether Windows is supported.
+func (o GetBundleBundleSetOutput) SupportWindowsPlatform() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) bool { return v.SupportWindowsPlatform }).(pulumi.BoolOutput)
+}
+
+// System disk size.
+func (o GetBundleBundleSetOutput) SystemDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) int { return v.SystemDiskSize }).(pulumi.IntOutput)
+}
+
+// System disk type.
+func (o GetBundleBundleSetOutput) SystemDiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleBundleSet) string { return v.SystemDiskType }).(pulumi.StringOutput)
+}
+
+type GetBundleBundleSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBundleBundleSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleBundleSet)(nil)).Elem()
+}
+
+func (o GetBundleBundleSetArrayOutput) ToGetBundleBundleSetArrayOutput() GetBundleBundleSetArrayOutput {
+	return o
+}
+
+func (o GetBundleBundleSetArrayOutput) ToGetBundleBundleSetArrayOutputWithContext(ctx context.Context) GetBundleBundleSetArrayOutput {
+	return o
+}
+
+func (o GetBundleBundleSetArrayOutput) Index(i pulumi.IntInput) GetBundleBundleSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBundleBundleSet {
+		return vs[0].([]GetBundleBundleSet)[vs[1].(int)]
+	}).(GetBundleBundleSetOutput)
+}
+
+type GetBundleBundleSetPrice struct {
+	// Instance price.
+	InstancePrices []GetBundleBundleSetPriceInstancePrice `pulumi:"instancePrices"`
+}
+
+// GetBundleBundleSetPriceInput is an input type that accepts GetBundleBundleSetPriceArgs and GetBundleBundleSetPriceOutput values.
+// You can construct a concrete instance of `GetBundleBundleSetPriceInput` via:
+//
+//          GetBundleBundleSetPriceArgs{...}
+type GetBundleBundleSetPriceInput interface {
+	pulumi.Input
+
+	ToGetBundleBundleSetPriceOutput() GetBundleBundleSetPriceOutput
+	ToGetBundleBundleSetPriceOutputWithContext(context.Context) GetBundleBundleSetPriceOutput
+}
+
+type GetBundleBundleSetPriceArgs struct {
+	// Instance price.
+	InstancePrices GetBundleBundleSetPriceInstancePriceArrayInput `pulumi:"instancePrices"`
+}
+
+func (GetBundleBundleSetPriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleBundleSetPrice)(nil)).Elem()
+}
+
+func (i GetBundleBundleSetPriceArgs) ToGetBundleBundleSetPriceOutput() GetBundleBundleSetPriceOutput {
+	return i.ToGetBundleBundleSetPriceOutputWithContext(context.Background())
+}
+
+func (i GetBundleBundleSetPriceArgs) ToGetBundleBundleSetPriceOutputWithContext(ctx context.Context) GetBundleBundleSetPriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleBundleSetPriceOutput)
+}
+
+// GetBundleBundleSetPriceArrayInput is an input type that accepts GetBundleBundleSetPriceArray and GetBundleBundleSetPriceArrayOutput values.
+// You can construct a concrete instance of `GetBundleBundleSetPriceArrayInput` via:
+//
+//          GetBundleBundleSetPriceArray{ GetBundleBundleSetPriceArgs{...} }
+type GetBundleBundleSetPriceArrayInput interface {
+	pulumi.Input
+
+	ToGetBundleBundleSetPriceArrayOutput() GetBundleBundleSetPriceArrayOutput
+	ToGetBundleBundleSetPriceArrayOutputWithContext(context.Context) GetBundleBundleSetPriceArrayOutput
+}
+
+type GetBundleBundleSetPriceArray []GetBundleBundleSetPriceInput
+
+func (GetBundleBundleSetPriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleBundleSetPrice)(nil)).Elem()
+}
+
+func (i GetBundleBundleSetPriceArray) ToGetBundleBundleSetPriceArrayOutput() GetBundleBundleSetPriceArrayOutput {
+	return i.ToGetBundleBundleSetPriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetBundleBundleSetPriceArray) ToGetBundleBundleSetPriceArrayOutputWithContext(ctx context.Context) GetBundleBundleSetPriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleBundleSetPriceArrayOutput)
+}
+
+type GetBundleBundleSetPriceOutput struct{ *pulumi.OutputState }
+
+func (GetBundleBundleSetPriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleBundleSetPrice)(nil)).Elem()
+}
+
+func (o GetBundleBundleSetPriceOutput) ToGetBundleBundleSetPriceOutput() GetBundleBundleSetPriceOutput {
+	return o
+}
+
+func (o GetBundleBundleSetPriceOutput) ToGetBundleBundleSetPriceOutputWithContext(ctx context.Context) GetBundleBundleSetPriceOutput {
+	return o
+}
+
+// Instance price.
+func (o GetBundleBundleSetPriceOutput) InstancePrices() GetBundleBundleSetPriceInstancePriceArrayOutput {
+	return o.ApplyT(func(v GetBundleBundleSetPrice) []GetBundleBundleSetPriceInstancePrice { return v.InstancePrices }).(GetBundleBundleSetPriceInstancePriceArrayOutput)
+}
+
+type GetBundleBundleSetPriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBundleBundleSetPriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleBundleSetPrice)(nil)).Elem()
+}
+
+func (o GetBundleBundleSetPriceArrayOutput) ToGetBundleBundleSetPriceArrayOutput() GetBundleBundleSetPriceArrayOutput {
+	return o
+}
+
+func (o GetBundleBundleSetPriceArrayOutput) ToGetBundleBundleSetPriceArrayOutputWithContext(ctx context.Context) GetBundleBundleSetPriceArrayOutput {
+	return o
+}
+
+func (o GetBundleBundleSetPriceArrayOutput) Index(i pulumi.IntInput) GetBundleBundleSetPriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBundleBundleSetPrice {
+		return vs[0].([]GetBundleBundleSetPrice)[vs[1].(int)]
+	}).(GetBundleBundleSetPriceOutput)
+}
+
+type GetBundleBundleSetPriceInstancePrice struct {
+	// Currency unit. Valid values: CNY and USD.
+	Currency string `pulumi:"currency"`
+	// Discount.
+	Discount float64 `pulumi:"discount"`
+	// Discounted price.
+	DiscountPrice float64 `pulumi:"discountPrice"`
+	// Original package unit price.
+	OriginalBundlePrice float64 `pulumi:"originalBundlePrice"`
+	// Original price.
+	OriginalPrice float64 `pulumi:"originalPrice"`
+}
+
+// GetBundleBundleSetPriceInstancePriceInput is an input type that accepts GetBundleBundleSetPriceInstancePriceArgs and GetBundleBundleSetPriceInstancePriceOutput values.
+// You can construct a concrete instance of `GetBundleBundleSetPriceInstancePriceInput` via:
+//
+//          GetBundleBundleSetPriceInstancePriceArgs{...}
+type GetBundleBundleSetPriceInstancePriceInput interface {
+	pulumi.Input
+
+	ToGetBundleBundleSetPriceInstancePriceOutput() GetBundleBundleSetPriceInstancePriceOutput
+	ToGetBundleBundleSetPriceInstancePriceOutputWithContext(context.Context) GetBundleBundleSetPriceInstancePriceOutput
+}
+
+type GetBundleBundleSetPriceInstancePriceArgs struct {
+	// Currency unit. Valid values: CNY and USD.
+	Currency pulumi.StringInput `pulumi:"currency"`
+	// Discount.
+	Discount pulumi.Float64Input `pulumi:"discount"`
+	// Discounted price.
+	DiscountPrice pulumi.Float64Input `pulumi:"discountPrice"`
+	// Original package unit price.
+	OriginalBundlePrice pulumi.Float64Input `pulumi:"originalBundlePrice"`
+	// Original price.
+	OriginalPrice pulumi.Float64Input `pulumi:"originalPrice"`
+}
+
+func (GetBundleBundleSetPriceInstancePriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleBundleSetPriceInstancePrice)(nil)).Elem()
+}
+
+func (i GetBundleBundleSetPriceInstancePriceArgs) ToGetBundleBundleSetPriceInstancePriceOutput() GetBundleBundleSetPriceInstancePriceOutput {
+	return i.ToGetBundleBundleSetPriceInstancePriceOutputWithContext(context.Background())
+}
+
+func (i GetBundleBundleSetPriceInstancePriceArgs) ToGetBundleBundleSetPriceInstancePriceOutputWithContext(ctx context.Context) GetBundleBundleSetPriceInstancePriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleBundleSetPriceInstancePriceOutput)
+}
+
+// GetBundleBundleSetPriceInstancePriceArrayInput is an input type that accepts GetBundleBundleSetPriceInstancePriceArray and GetBundleBundleSetPriceInstancePriceArrayOutput values.
+// You can construct a concrete instance of `GetBundleBundleSetPriceInstancePriceArrayInput` via:
+//
+//          GetBundleBundleSetPriceInstancePriceArray{ GetBundleBundleSetPriceInstancePriceArgs{...} }
+type GetBundleBundleSetPriceInstancePriceArrayInput interface {
+	pulumi.Input
+
+	ToGetBundleBundleSetPriceInstancePriceArrayOutput() GetBundleBundleSetPriceInstancePriceArrayOutput
+	ToGetBundleBundleSetPriceInstancePriceArrayOutputWithContext(context.Context) GetBundleBundleSetPriceInstancePriceArrayOutput
+}
+
+type GetBundleBundleSetPriceInstancePriceArray []GetBundleBundleSetPriceInstancePriceInput
+
+func (GetBundleBundleSetPriceInstancePriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleBundleSetPriceInstancePrice)(nil)).Elem()
+}
+
+func (i GetBundleBundleSetPriceInstancePriceArray) ToGetBundleBundleSetPriceInstancePriceArrayOutput() GetBundleBundleSetPriceInstancePriceArrayOutput {
+	return i.ToGetBundleBundleSetPriceInstancePriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetBundleBundleSetPriceInstancePriceArray) ToGetBundleBundleSetPriceInstancePriceArrayOutputWithContext(ctx context.Context) GetBundleBundleSetPriceInstancePriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleBundleSetPriceInstancePriceArrayOutput)
+}
+
+type GetBundleBundleSetPriceInstancePriceOutput struct{ *pulumi.OutputState }
+
+func (GetBundleBundleSetPriceInstancePriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleBundleSetPriceInstancePrice)(nil)).Elem()
+}
+
+func (o GetBundleBundleSetPriceInstancePriceOutput) ToGetBundleBundleSetPriceInstancePriceOutput() GetBundleBundleSetPriceInstancePriceOutput {
+	return o
+}
+
+func (o GetBundleBundleSetPriceInstancePriceOutput) ToGetBundleBundleSetPriceInstancePriceOutputWithContext(ctx context.Context) GetBundleBundleSetPriceInstancePriceOutput {
+	return o
+}
+
+// Currency unit. Valid values: CNY and USD.
+func (o GetBundleBundleSetPriceInstancePriceOutput) Currency() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleBundleSetPriceInstancePrice) string { return v.Currency }).(pulumi.StringOutput)
+}
+
+// Discount.
+func (o GetBundleBundleSetPriceInstancePriceOutput) Discount() pulumi.Float64Output {
+	return o.ApplyT(func(v GetBundleBundleSetPriceInstancePrice) float64 { return v.Discount }).(pulumi.Float64Output)
+}
+
+// Discounted price.
+func (o GetBundleBundleSetPriceInstancePriceOutput) DiscountPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetBundleBundleSetPriceInstancePrice) float64 { return v.DiscountPrice }).(pulumi.Float64Output)
+}
+
+// Original package unit price.
+func (o GetBundleBundleSetPriceInstancePriceOutput) OriginalBundlePrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetBundleBundleSetPriceInstancePrice) float64 { return v.OriginalBundlePrice }).(pulumi.Float64Output)
+}
+
+// Original price.
+func (o GetBundleBundleSetPriceInstancePriceOutput) OriginalPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetBundleBundleSetPriceInstancePrice) float64 { return v.OriginalPrice }).(pulumi.Float64Output)
+}
+
+type GetBundleBundleSetPriceInstancePriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBundleBundleSetPriceInstancePriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleBundleSetPriceInstancePrice)(nil)).Elem()
+}
+
+func (o GetBundleBundleSetPriceInstancePriceArrayOutput) ToGetBundleBundleSetPriceInstancePriceArrayOutput() GetBundleBundleSetPriceInstancePriceArrayOutput {
+	return o
+}
+
+func (o GetBundleBundleSetPriceInstancePriceArrayOutput) ToGetBundleBundleSetPriceInstancePriceArrayOutputWithContext(ctx context.Context) GetBundleBundleSetPriceInstancePriceArrayOutput {
+	return o
+}
+
+func (o GetBundleBundleSetPriceInstancePriceArrayOutput) Index(i pulumi.IntInput) GetBundleBundleSetPriceInstancePriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBundleBundleSetPriceInstancePrice {
+		return vs[0].([]GetBundleBundleSetPriceInstancePrice)[vs[1].(int)]
+	}).(GetBundleBundleSetPriceInstancePriceOutput)
+}
+
+type GetBundleFilter struct {
+	// Field to be filtered.
+	Name string `pulumi:"name"`
+	// Filter value of field.
+	Values []string `pulumi:"values"`
+}
+
+// GetBundleFilterInput is an input type that accepts GetBundleFilterArgs and GetBundleFilterOutput values.
+// You can construct a concrete instance of `GetBundleFilterInput` via:
+//
+//          GetBundleFilterArgs{...}
+type GetBundleFilterInput interface {
+	pulumi.Input
+
+	ToGetBundleFilterOutput() GetBundleFilterOutput
+	ToGetBundleFilterOutputWithContext(context.Context) GetBundleFilterOutput
+}
+
+type GetBundleFilterArgs struct {
+	// Field to be filtered.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value of field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetBundleFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleFilter)(nil)).Elem()
+}
+
+func (i GetBundleFilterArgs) ToGetBundleFilterOutput() GetBundleFilterOutput {
+	return i.ToGetBundleFilterOutputWithContext(context.Background())
+}
+
+func (i GetBundleFilterArgs) ToGetBundleFilterOutputWithContext(ctx context.Context) GetBundleFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleFilterOutput)
+}
+
+// GetBundleFilterArrayInput is an input type that accepts GetBundleFilterArray and GetBundleFilterArrayOutput values.
+// You can construct a concrete instance of `GetBundleFilterArrayInput` via:
+//
+//          GetBundleFilterArray{ GetBundleFilterArgs{...} }
+type GetBundleFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetBundleFilterArrayOutput() GetBundleFilterArrayOutput
+	ToGetBundleFilterArrayOutputWithContext(context.Context) GetBundleFilterArrayOutput
+}
+
+type GetBundleFilterArray []GetBundleFilterInput
+
+func (GetBundleFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleFilter)(nil)).Elem()
+}
+
+func (i GetBundleFilterArray) ToGetBundleFilterArrayOutput() GetBundleFilterArrayOutput {
+	return i.ToGetBundleFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetBundleFilterArray) ToGetBundleFilterArrayOutputWithContext(ctx context.Context) GetBundleFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBundleFilterArrayOutput)
+}
+
+type GetBundleFilterOutput struct{ *pulumi.OutputState }
+
+func (GetBundleFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBundleFilter)(nil)).Elem()
+}
+
+func (o GetBundleFilterOutput) ToGetBundleFilterOutput() GetBundleFilterOutput {
+	return o
+}
+
+func (o GetBundleFilterOutput) ToGetBundleFilterOutputWithContext(ctx context.Context) GetBundleFilterOutput {
+	return o
+}
+
+// Field to be filtered.
+func (o GetBundleFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBundleFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value of field.
+func (o GetBundleFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBundleFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetBundleFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBundleFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBundleFilter)(nil)).Elem()
+}
+
+func (o GetBundleFilterArrayOutput) ToGetBundleFilterArrayOutput() GetBundleFilterArrayOutput {
+	return o
+}
+
+func (o GetBundleFilterArrayOutput) ToGetBundleFilterArrayOutputWithContext(ctx context.Context) GetBundleFilterArrayOutput {
+	return o
+}
+
+func (o GetBundleFilterArrayOutput) Index(i pulumi.IntInput) GetBundleFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBundleFilter {
+		return vs[0].([]GetBundleFilter)[vs[1].(int)]
+	}).(GetBundleFilterOutput)
+}
+
+type GetFirewallRulesTemplateFirewallRuleSet struct {
+	// Valid values are (ACCEPT, DROP). Default value is ACCEPT.
+	Action string `pulumi:"action"`
+	// Application type. Valid values are custom, HTTP (80), HTTPS (443), Linux login (22), Windows login (3389), MySQL (3306), SQL Server (1433), all TCP ports, all UDP ports, Ping-ICMP, ALL.
+	AppType string `pulumi:"appType"`
+	// IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+	CidrBlock string `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription string `pulumi:"firewallRuleDescription"`
+	// Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+	Port string `pulumi:"port"`
+	// Protocol. Valid values are TCP, UDP, ICMP, ALL.
+	Protocol string `pulumi:"protocol"`
+}
+
+// GetFirewallRulesTemplateFirewallRuleSetInput is an input type that accepts GetFirewallRulesTemplateFirewallRuleSetArgs and GetFirewallRulesTemplateFirewallRuleSetOutput values.
+// You can construct a concrete instance of `GetFirewallRulesTemplateFirewallRuleSetInput` via:
+//
+//          GetFirewallRulesTemplateFirewallRuleSetArgs{...}
+type GetFirewallRulesTemplateFirewallRuleSetInput interface {
+	pulumi.Input
+
+	ToGetFirewallRulesTemplateFirewallRuleSetOutput() GetFirewallRulesTemplateFirewallRuleSetOutput
+	ToGetFirewallRulesTemplateFirewallRuleSetOutputWithContext(context.Context) GetFirewallRulesTemplateFirewallRuleSetOutput
+}
+
+type GetFirewallRulesTemplateFirewallRuleSetArgs struct {
+	// Valid values are (ACCEPT, DROP). Default value is ACCEPT.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Application type. Valid values are custom, HTTP (80), HTTPS (443), Linux login (22), Windows login (3389), MySQL (3306), SQL Server (1433), all TCP ports, all UDP ports, Ping-ICMP, ALL.
+	AppType pulumi.StringInput `pulumi:"appType"`
+	// IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+	CidrBlock pulumi.StringInput `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription pulumi.StringInput `pulumi:"firewallRuleDescription"`
+	// Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+	Port pulumi.StringInput `pulumi:"port"`
+	// Protocol. Valid values are TCP, UDP, ICMP, ALL.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (GetFirewallRulesTemplateFirewallRuleSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFirewallRulesTemplateFirewallRuleSet)(nil)).Elem()
+}
+
+func (i GetFirewallRulesTemplateFirewallRuleSetArgs) ToGetFirewallRulesTemplateFirewallRuleSetOutput() GetFirewallRulesTemplateFirewallRuleSetOutput {
+	return i.ToGetFirewallRulesTemplateFirewallRuleSetOutputWithContext(context.Background())
+}
+
+func (i GetFirewallRulesTemplateFirewallRuleSetArgs) ToGetFirewallRulesTemplateFirewallRuleSetOutputWithContext(ctx context.Context) GetFirewallRulesTemplateFirewallRuleSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFirewallRulesTemplateFirewallRuleSetOutput)
+}
+
+// GetFirewallRulesTemplateFirewallRuleSetArrayInput is an input type that accepts GetFirewallRulesTemplateFirewallRuleSetArray and GetFirewallRulesTemplateFirewallRuleSetArrayOutput values.
+// You can construct a concrete instance of `GetFirewallRulesTemplateFirewallRuleSetArrayInput` via:
+//
+//          GetFirewallRulesTemplateFirewallRuleSetArray{ GetFirewallRulesTemplateFirewallRuleSetArgs{...} }
+type GetFirewallRulesTemplateFirewallRuleSetArrayInput interface {
+	pulumi.Input
+
+	ToGetFirewallRulesTemplateFirewallRuleSetArrayOutput() GetFirewallRulesTemplateFirewallRuleSetArrayOutput
+	ToGetFirewallRulesTemplateFirewallRuleSetArrayOutputWithContext(context.Context) GetFirewallRulesTemplateFirewallRuleSetArrayOutput
+}
+
+type GetFirewallRulesTemplateFirewallRuleSetArray []GetFirewallRulesTemplateFirewallRuleSetInput
+
+func (GetFirewallRulesTemplateFirewallRuleSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFirewallRulesTemplateFirewallRuleSet)(nil)).Elem()
+}
+
+func (i GetFirewallRulesTemplateFirewallRuleSetArray) ToGetFirewallRulesTemplateFirewallRuleSetArrayOutput() GetFirewallRulesTemplateFirewallRuleSetArrayOutput {
+	return i.ToGetFirewallRulesTemplateFirewallRuleSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetFirewallRulesTemplateFirewallRuleSetArray) ToGetFirewallRulesTemplateFirewallRuleSetArrayOutputWithContext(ctx context.Context) GetFirewallRulesTemplateFirewallRuleSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFirewallRulesTemplateFirewallRuleSetArrayOutput)
+}
+
+type GetFirewallRulesTemplateFirewallRuleSetOutput struct{ *pulumi.OutputState }
+
+func (GetFirewallRulesTemplateFirewallRuleSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFirewallRulesTemplateFirewallRuleSet)(nil)).Elem()
+}
+
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) ToGetFirewallRulesTemplateFirewallRuleSetOutput() GetFirewallRulesTemplateFirewallRuleSetOutput {
+	return o
+}
+
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) ToGetFirewallRulesTemplateFirewallRuleSetOutputWithContext(ctx context.Context) GetFirewallRulesTemplateFirewallRuleSetOutput {
+	return o
+}
+
+// Valid values are (ACCEPT, DROP). Default value is ACCEPT.
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFirewallRulesTemplateFirewallRuleSet) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Application type. Valid values are custom, HTTP (80), HTTPS (443), Linux login (22), Windows login (3389), MySQL (3306), SQL Server (1433), all TCP ports, all UDP ports, Ping-ICMP, ALL.
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) AppType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFirewallRulesTemplateFirewallRuleSet) string { return v.AppType }).(pulumi.StringOutput)
+}
+
+// IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFirewallRulesTemplateFirewallRuleSet) string { return v.CidrBlock }).(pulumi.StringOutput)
+}
+
+// Firewall rule description.
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) FirewallRuleDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFirewallRulesTemplateFirewallRuleSet) string { return v.FirewallRuleDescription }).(pulumi.StringOutput)
+}
+
+// Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFirewallRulesTemplateFirewallRuleSet) string { return v.Port }).(pulumi.StringOutput)
+}
+
+// Protocol. Valid values are TCP, UDP, ICMP, ALL.
+func (o GetFirewallRulesTemplateFirewallRuleSetOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFirewallRulesTemplateFirewallRuleSet) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type GetFirewallRulesTemplateFirewallRuleSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFirewallRulesTemplateFirewallRuleSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFirewallRulesTemplateFirewallRuleSet)(nil)).Elem()
+}
+
+func (o GetFirewallRulesTemplateFirewallRuleSetArrayOutput) ToGetFirewallRulesTemplateFirewallRuleSetArrayOutput() GetFirewallRulesTemplateFirewallRuleSetArrayOutput {
+	return o
+}
+
+func (o GetFirewallRulesTemplateFirewallRuleSetArrayOutput) ToGetFirewallRulesTemplateFirewallRuleSetArrayOutputWithContext(ctx context.Context) GetFirewallRulesTemplateFirewallRuleSetArrayOutput {
+	return o
+}
+
+func (o GetFirewallRulesTemplateFirewallRuleSetArrayOutput) Index(i pulumi.IntInput) GetFirewallRulesTemplateFirewallRuleSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFirewallRulesTemplateFirewallRuleSet {
+		return vs[0].([]GetFirewallRulesTemplateFirewallRuleSet)[vs[1].(int)]
+	}).(GetFirewallRulesTemplateFirewallRuleSetOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleInput)(nil)).Elem(), FirewallRuleFirewallRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleArrayInput)(nil)).Elem(), FirewallRuleFirewallRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerInput)(nil)).Elem(), InstanceContainerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerArrayInput)(nil)).Elem(), InstanceContainerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerEnvInput)(nil)).Elem(), InstanceContainerEnvArgs{})
@@ -655,6 +1482,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerVolumeArrayInput)(nil)).Elem(), InstanceContainerVolumeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceLoginConfigurationInput)(nil)).Elem(), InstanceLoginConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceLoginConfigurationPtrInput)(nil)).Elem(), InstanceLoginConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetInput)(nil)).Elem(), GetBundleBundleSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetArrayInput)(nil)).Elem(), GetBundleBundleSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetPriceInput)(nil)).Elem(), GetBundleBundleSetPriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetPriceArrayInput)(nil)).Elem(), GetBundleBundleSetPriceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetPriceInstancePriceInput)(nil)).Elem(), GetBundleBundleSetPriceInstancePriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetPriceInstancePriceArrayInput)(nil)).Elem(), GetBundleBundleSetPriceInstancePriceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleFilterInput)(nil)).Elem(), GetBundleFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleFilterArrayInput)(nil)).Elem(), GetBundleFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFirewallRulesTemplateFirewallRuleSetInput)(nil)).Elem(), GetFirewallRulesTemplateFirewallRuleSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFirewallRulesTemplateFirewallRuleSetArrayInput)(nil)).Elem(), GetFirewallRulesTemplateFirewallRuleSetArray{})
+	pulumi.RegisterOutputType(FirewallRuleFirewallRuleOutput{})
+	pulumi.RegisterOutputType(FirewallRuleFirewallRuleArrayOutput{})
 	pulumi.RegisterOutputType(InstanceContainerOutput{})
 	pulumi.RegisterOutputType(InstanceContainerArrayOutput{})
 	pulumi.RegisterOutputType(InstanceContainerEnvOutput{})
@@ -665,4 +1504,14 @@ func init() {
 	pulumi.RegisterOutputType(InstanceContainerVolumeArrayOutput{})
 	pulumi.RegisterOutputType(InstanceLoginConfigurationOutput{})
 	pulumi.RegisterOutputType(InstanceLoginConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(GetBundleBundleSetOutput{})
+	pulumi.RegisterOutputType(GetBundleBundleSetArrayOutput{})
+	pulumi.RegisterOutputType(GetBundleBundleSetPriceOutput{})
+	pulumi.RegisterOutputType(GetBundleBundleSetPriceArrayOutput{})
+	pulumi.RegisterOutputType(GetBundleBundleSetPriceInstancePriceOutput{})
+	pulumi.RegisterOutputType(GetBundleBundleSetPriceInstancePriceArrayOutput{})
+	pulumi.RegisterOutputType(GetBundleFilterOutput{})
+	pulumi.RegisterOutputType(GetBundleFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetFirewallRulesTemplateFirewallRuleSetOutput{})
+	pulumi.RegisterOutputType(GetFirewallRulesTemplateFirewallRuleSetArrayOutput{})
 }

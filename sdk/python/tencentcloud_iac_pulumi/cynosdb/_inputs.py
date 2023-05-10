@@ -9,12 +9,228 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'AuditLogFileFilterArgs',
     'ClusterParamItemArgs',
     'ClusterRoGroupAddrArgs',
     'ClusterRoGroupInstanceArgs',
     'ClusterRwGroupAddrArgs',
     'ClusterRwGroupInstanceArgs',
 ]
+
+@pulumi.input_type
+class AuditLogFileFilterArgs:
+    def __init__(__self__, *,
+                 affect_rows: Optional[pulumi.Input[int]] = None,
+                 db_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 exec_time: Optional[pulumi.Input[int]] = None,
+                 hosts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 policy_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sent_rows: Optional[pulumi.Input[int]] = None,
+                 sql: Optional[pulumi.Input[str]] = None,
+                 sql_type: Optional[pulumi.Input[str]] = None,
+                 sql_types: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sqls: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 table_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 thread_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 users: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[int] affect_rows: Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] db_names: The name of database.
+        :param pulumi.Input[int] exec_time: Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: Client host.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] policy_names: The name of audit policy.
+        :param pulumi.Input[int] sent_rows: Return the number of rows.
+        :param pulumi.Input[str] sql: SQL statement. Support fuzzy matching.
+        :param pulumi.Input[str] sql_type: SQL type. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] sql_types: SQL type. Supports simultaneous query of multiple types. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] sqls: SQL statement. Support passing multiple sql statements.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] table_names: The name of table.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] thread_ids: The ID of thread.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] users: User name.
+        """
+        if affect_rows is not None:
+            pulumi.set(__self__, "affect_rows", affect_rows)
+        if db_names is not None:
+            pulumi.set(__self__, "db_names", db_names)
+        if exec_time is not None:
+            pulumi.set(__self__, "exec_time", exec_time)
+        if hosts is not None:
+            pulumi.set(__self__, "hosts", hosts)
+        if policy_names is not None:
+            pulumi.set(__self__, "policy_names", policy_names)
+        if sent_rows is not None:
+            pulumi.set(__self__, "sent_rows", sent_rows)
+        if sql is not None:
+            pulumi.set(__self__, "sql", sql)
+        if sql_type is not None:
+            pulumi.set(__self__, "sql_type", sql_type)
+        if sql_types is not None:
+            pulumi.set(__self__, "sql_types", sql_types)
+        if sqls is not None:
+            pulumi.set(__self__, "sqls", sqls)
+        if table_names is not None:
+            pulumi.set(__self__, "table_names", table_names)
+        if thread_ids is not None:
+            pulumi.set(__self__, "thread_ids", thread_ids)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+
+    @property
+    @pulumi.getter(name="affectRows")
+    def affect_rows(self) -> Optional[pulumi.Input[int]]:
+        """
+        Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
+        """
+        return pulumi.get(self, "affect_rows")
+
+    @affect_rows.setter
+    def affect_rows(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "affect_rows", value)
+
+    @property
+    @pulumi.getter(name="dbNames")
+    def db_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The name of database.
+        """
+        return pulumi.get(self, "db_names")
+
+    @db_names.setter
+    def db_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "db_names", value)
+
+    @property
+    @pulumi.getter(name="execTime")
+    def exec_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+        """
+        return pulumi.get(self, "exec_time")
+
+    @exec_time.setter
+    def exec_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "exec_time", value)
+
+    @property
+    @pulumi.getter
+    def hosts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Client host.
+        """
+        return pulumi.get(self, "hosts")
+
+    @hosts.setter
+    def hosts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "hosts", value)
+
+    @property
+    @pulumi.getter(name="policyNames")
+    def policy_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The name of audit policy.
+        """
+        return pulumi.get(self, "policy_names")
+
+    @policy_names.setter
+    def policy_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "policy_names", value)
+
+    @property
+    @pulumi.getter(name="sentRows")
+    def sent_rows(self) -> Optional[pulumi.Input[int]]:
+        """
+        Return the number of rows.
+        """
+        return pulumi.get(self, "sent_rows")
+
+    @sent_rows.setter
+    def sent_rows(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "sent_rows", value)
+
+    @property
+    @pulumi.getter
+    def sql(self) -> Optional[pulumi.Input[str]]:
+        """
+        SQL statement. Support fuzzy matching.
+        """
+        return pulumi.get(self, "sql")
+
+    @sql.setter
+    def sql(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sql", value)
+
+    @property
+    @pulumi.getter(name="sqlType")
+    def sql_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        SQL type. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_type")
+
+    @sql_type.setter
+    def sql_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sql_type", value)
+
+    @property
+    @pulumi.getter(name="sqlTypes")
+    def sql_types(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        SQL type. Supports simultaneous query of multiple types. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_types")
+
+    @sql_types.setter
+    def sql_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "sql_types", value)
+
+    @property
+    @pulumi.getter
+    def sqls(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        SQL statement. Support passing multiple sql statements.
+        """
+        return pulumi.get(self, "sqls")
+
+    @sqls.setter
+    def sqls(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "sqls", value)
+
+    @property
+    @pulumi.getter(name="tableNames")
+    def table_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The name of table.
+        """
+        return pulumi.get(self, "table_names")
+
+    @table_names.setter
+    def table_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "table_names", value)
+
+    @property
+    @pulumi.getter(name="threadIds")
+    def thread_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The ID of thread.
+        """
+        return pulumi.get(self, "thread_ids")
+
+    @thread_ids.setter
+    def thread_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "thread_ids", value)
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        User name.
+        """
+        return pulumi.get(self, "users")
+
+    @users.setter
+    def users(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "users", value)
+
 
 @pulumi.input_type
 class ClusterParamItemArgs:

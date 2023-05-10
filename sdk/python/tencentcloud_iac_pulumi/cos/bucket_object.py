@@ -37,7 +37,7 @@ class BucketObjectArgs:
         :param pulumi.Input[str] content_type: A standard MIME type describing the format of the object data.
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] source: The path to the source file being uploaded to the bucket.
-        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag of the object.
         """
         pulumi.set(__self__, "bucket", bucket)
@@ -187,7 +187,7 @@ class BucketObjectArgs:
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> Optional[pulumi.Input[str]]:
         """
-        Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         """
         return pulumi.get(self, "storage_class")
 
@@ -235,7 +235,7 @@ class _BucketObjectState:
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] key: The name of the object once it is in the bucket.
         :param pulumi.Input[str] source: The path to the source file being uploaded to the bucket.
-        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag of the object.
         """
         if acl is not None:
@@ -387,7 +387,7 @@ class _BucketObjectState:
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> Optional[pulumi.Input[str]]:
         """
-        Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         """
         return pulumi.get(self, "storage_class")
 
@@ -470,7 +470,7 @@ class BucketObject(pulumi.CustomResource):
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] key: The name of the object once it is in the bucket.
         :param pulumi.Input[str] source: The path to the source file being uploaded to the bucket.
-        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag of the object.
         """
         ...
@@ -607,7 +607,7 @@ class BucketObject(pulumi.CustomResource):
         :param pulumi.Input[str] etag: The ETag generated for the object (an MD5 sum of the object content).
         :param pulumi.Input[str] key: The name of the object once it is in the bucket.
         :param pulumi.Input[str] source: The path to the source file being uploaded to the bucket.
-        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[str] storage_class: Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag of the object.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -712,7 +712,7 @@ class BucketObject(pulumi.CustomResource):
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> pulumi.Output[str]:
         """
-        Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         """
         return pulumi.get(self, "storage_class")
 

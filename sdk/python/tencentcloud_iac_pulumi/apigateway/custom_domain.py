@@ -20,6 +20,7 @@ class CustomDomainArgs:
                  sub_domain: pulumi.Input[str],
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  is_default_mapping: Optional[pulumi.Input[bool]] = None,
+                 is_forced_https: Optional[pulumi.Input[bool]] = None,
                  path_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a CustomDomain resource.
@@ -30,6 +31,7 @@ class CustomDomainArgs:
         :param pulumi.Input[str] sub_domain: Custom domain name to be bound.
         :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[bool] is_forced_https: Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         """
         pulumi.set(__self__, "default_domain", default_domain)
@@ -41,6 +43,8 @@ class CustomDomainArgs:
             pulumi.set(__self__, "certificate_id", certificate_id)
         if is_default_mapping is not None:
             pulumi.set(__self__, "is_default_mapping", is_default_mapping)
+        if is_forced_https is not None:
+            pulumi.set(__self__, "is_forced_https", is_forced_https)
         if path_mappings is not None:
             pulumi.set(__self__, "path_mappings", path_mappings)
 
@@ -129,6 +133,18 @@ class CustomDomainArgs:
         pulumi.set(self, "is_default_mapping", value)
 
     @property
+    @pulumi.getter(name="isForcedHttps")
+    def is_forced_https(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+        """
+        return pulumi.get(self, "is_forced_https")
+
+    @is_forced_https.setter
+    def is_forced_https(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_forced_https", value)
+
+    @property
     @pulumi.getter(name="pathMappings")
     def path_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -147,6 +163,7 @@ class _CustomDomainState:
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  default_domain: Optional[pulumi.Input[str]] = None,
                  is_default_mapping: Optional[pulumi.Input[bool]] = None,
+                 is_forced_https: Optional[pulumi.Input[bool]] = None,
                  net_type: Optional[pulumi.Input[str]] = None,
                  path_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
@@ -158,6 +175,7 @@ class _CustomDomainState:
         :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         :param pulumi.Input[str] default_domain: Default domain name.
         :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[bool] is_forced_https: Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
         :param pulumi.Input[str] net_type: Network type. Valid values: `OUTER`, `INNER`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         :param pulumi.Input[str] protocol: Protocol supported by service. Valid values: `http`, `https`, `http&https`.
@@ -171,6 +189,8 @@ class _CustomDomainState:
             pulumi.set(__self__, "default_domain", default_domain)
         if is_default_mapping is not None:
             pulumi.set(__self__, "is_default_mapping", is_default_mapping)
+        if is_forced_https is not None:
+            pulumi.set(__self__, "is_forced_https", is_forced_https)
         if net_type is not None:
             pulumi.set(__self__, "net_type", net_type)
         if path_mappings is not None:
@@ -219,6 +239,18 @@ class _CustomDomainState:
     @is_default_mapping.setter
     def is_default_mapping(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "is_default_mapping", value)
+
+    @property
+    @pulumi.getter(name="isForcedHttps")
+    def is_forced_https(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+        """
+        return pulumi.get(self, "is_forced_https")
+
+    @is_forced_https.setter
+    def is_forced_https(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_forced_https", value)
 
     @property
     @pulumi.getter(name="netType")
@@ -301,6 +333,7 @@ class CustomDomain(pulumi.CustomResource):
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  default_domain: Optional[pulumi.Input[str]] = None,
                  is_default_mapping: Optional[pulumi.Input[bool]] = None,
+                 is_forced_https: Optional[pulumi.Input[bool]] = None,
                  net_type: Optional[pulumi.Input[str]] = None,
                  path_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
@@ -334,6 +367,7 @@ class CustomDomain(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         :param pulumi.Input[str] default_domain: Default domain name.
         :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[bool] is_forced_https: Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
         :param pulumi.Input[str] net_type: Network type. Valid values: `OUTER`, `INNER`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         :param pulumi.Input[str] protocol: Protocol supported by service. Valid values: `http`, `https`, `http&https`.
@@ -386,6 +420,7 @@ class CustomDomain(pulumi.CustomResource):
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  default_domain: Optional[pulumi.Input[str]] = None,
                  is_default_mapping: Optional[pulumi.Input[bool]] = None,
+                 is_forced_https: Optional[pulumi.Input[bool]] = None,
                  net_type: Optional[pulumi.Input[str]] = None,
                  path_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
@@ -410,6 +445,7 @@ class CustomDomain(pulumi.CustomResource):
                 raise TypeError("Missing required property 'default_domain'")
             __props__.__dict__["default_domain"] = default_domain
             __props__.__dict__["is_default_mapping"] = is_default_mapping
+            __props__.__dict__["is_forced_https"] = is_forced_https
             if net_type is None and not opts.urn:
                 raise TypeError("Missing required property 'net_type'")
             __props__.__dict__["net_type"] = net_type
@@ -437,6 +473,7 @@ class CustomDomain(pulumi.CustomResource):
             certificate_id: Optional[pulumi.Input[str]] = None,
             default_domain: Optional[pulumi.Input[str]] = None,
             is_default_mapping: Optional[pulumi.Input[bool]] = None,
+            is_forced_https: Optional[pulumi.Input[bool]] = None,
             net_type: Optional[pulumi.Input[str]] = None,
             path_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
@@ -453,6 +490,7 @@ class CustomDomain(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_id: Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
         :param pulumi.Input[str] default_domain: Default domain name.
         :param pulumi.Input[bool] is_default_mapping: Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
+        :param pulumi.Input[bool] is_forced_https: Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
         :param pulumi.Input[str] net_type: Network type. Valid values: `OUTER`, `INNER`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] path_mappings: Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
         :param pulumi.Input[str] protocol: Protocol supported by service. Valid values: `http`, `https`, `http&https`.
@@ -467,6 +505,7 @@ class CustomDomain(pulumi.CustomResource):
         __props__.__dict__["certificate_id"] = certificate_id
         __props__.__dict__["default_domain"] = default_domain
         __props__.__dict__["is_default_mapping"] = is_default_mapping
+        __props__.__dict__["is_forced_https"] = is_forced_https
         __props__.__dict__["net_type"] = net_type
         __props__.__dict__["path_mappings"] = path_mappings
         __props__.__dict__["protocol"] = protocol
@@ -498,6 +537,14 @@ class CustomDomain(pulumi.CustomResource):
         Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `path_mappings` attribute is required.
         """
         return pulumi.get(self, "is_default_mapping")
+
+    @property
+    @pulumi.getter(name="isForcedHttps")
+    def is_forced_https(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+        """
+        return pulumi.get(self, "is_forced_https")
 
     @property
     @pulumi.getter(name="netType")

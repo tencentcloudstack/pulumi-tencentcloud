@@ -13,91 +13,87 @@ import (
 
 // Provides a resource to create security group rule.
 //
+// > **NOTE:** Single security rule is hardly ordered, use Security.GroupLiteRule instead.
+//
 // ## Example Usage
 //
-// # Source is CIDR ip
+// Source is CIDR ip
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			sglab1Group, err := Security.NewGroup(ctx, "sglab1Group", &Security.GroupArgs{
-//				Description: pulumi.String("favourite sg_1"),
-//				ProjectId:   pulumi.Int(0),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Security.NewGroupRule(ctx, "sglab1GroupRule", &Security.GroupRuleArgs{
-//				SecurityGroupId: sglab1Group.ID(),
-//				Type:            pulumi.String("ingress"),
-//				CidrIp:          pulumi.String("10.0.0.0/16"),
-//				IpProtocol:      pulumi.String("TCP"),
-//				PortRange:       pulumi.String("80"),
-//				Policy:          pulumi.String("ACCEPT"),
-//				Description:     pulumi.String("favourite sg rule_1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		sglab1Group, err := Security.NewGroup(ctx, "sglab1Group", &Security.GroupArgs{
+// 			Description: pulumi.String("favourite sg_1"),
+// 			ProjectId:   pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupRule(ctx, "sglab1GroupRule", &Security.GroupRuleArgs{
+// 			SecurityGroupId: sglab1Group.ID(),
+// 			Type:            pulumi.String("ingress"),
+// 			CidrIp:          pulumi.String("10.0.0.0/16"),
+// 			IpProtocol:      pulumi.String("TCP"),
+// 			PortRange:       pulumi.String("80"),
+// 			Policy:          pulumi.String("ACCEPT"),
+// 			Description:     pulumi.String("favourite sg rule_1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Source is a security group id
+// Source is a security group id
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			sglab2Group, err := Security.NewGroup(ctx, "sglab2Group", &Security.GroupArgs{
-//				Description: pulumi.String("favourite sg_2"),
-//				ProjectId:   pulumi.Int(0),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			sglab3, err := Security.NewGroup(ctx, "sglab3", &Security.GroupArgs{
-//				Description: pulumi.String("favourite sg_3"),
-//				ProjectId:   pulumi.Int(0),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Security.NewGroupRule(ctx, "sglab2GroupRule", &Security.GroupRuleArgs{
-//				SecurityGroupId: sglab2Group.ID(),
-//				Type:            pulumi.String("ingress"),
-//				IpProtocol:      pulumi.String("TCP"),
-//				PortRange:       pulumi.String("80"),
-//				Policy:          pulumi.String("ACCEPT"),
-//				SourceSgid:      sglab3.ID(),
-//				Description:     pulumi.String("favourite sg rule_2"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		sglab2Group, err := Security.NewGroup(ctx, "sglab2Group", &Security.GroupArgs{
+// 			Description: pulumi.String("favourite sg_2"),
+// 			ProjectId:   pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		sglab3, err := Security.NewGroup(ctx, "sglab3", &Security.GroupArgs{
+// 			Description: pulumi.String("favourite sg_3"),
+// 			ProjectId:   pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupRule(ctx, "sglab2GroupRule", &Security.GroupRuleArgs{
+// 			SecurityGroupId: sglab2Group.ID(),
+// 			Type:            pulumi.String("ingress"),
+// 			IpProtocol:      pulumi.String("TCP"),
+// 			PortRange:       pulumi.String("80"),
+// 			Policy:          pulumi.String("ACCEPT"),
+// 			SourceSgid:      sglab3.ID(),
+// 			Description:     pulumi.String("favourite sg rule_2"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type GroupRule struct {
 	pulumi.CustomResourceState
@@ -112,6 +108,8 @@ type GroupRule struct {
 	IpProtocol pulumi.StringOutput `pulumi:"ipProtocol"`
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy pulumi.StringOutput `pulumi:"policy"`
+	// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+	PolicyIndex pulumi.IntPtrOutput `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange pulumi.StringOutput `pulumi:"portRange"`
 	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
@@ -173,6 +171,8 @@ type groupRuleState struct {
 	IpProtocol *string `pulumi:"ipProtocol"`
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy *string `pulumi:"policy"`
+	// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+	PolicyIndex *int `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange *string `pulumi:"portRange"`
 	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
@@ -196,6 +196,8 @@ type GroupRuleState struct {
 	IpProtocol pulumi.StringPtrInput
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy pulumi.StringPtrInput
+	// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+	PolicyIndex pulumi.IntPtrInput
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange pulumi.StringPtrInput
 	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
@@ -223,6 +225,8 @@ type groupRuleArgs struct {
 	IpProtocol *string `pulumi:"ipProtocol"`
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy string `pulumi:"policy"`
+	// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+	PolicyIndex *int `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange *string `pulumi:"portRange"`
 	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
@@ -247,6 +251,8 @@ type GroupRuleArgs struct {
 	IpProtocol pulumi.StringPtrInput
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Policy pulumi.StringInput
+	// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+	PolicyIndex pulumi.IntPtrInput
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
 	PortRange pulumi.StringPtrInput
 	// ID of the address template, and conflict with `ipProtocol`, `portRange`.
@@ -285,7 +291,7 @@ func (i *GroupRule) ToGroupRuleOutputWithContext(ctx context.Context) GroupRuleO
 // GroupRuleArrayInput is an input type that accepts GroupRuleArray and GroupRuleArrayOutput values.
 // You can construct a concrete instance of `GroupRuleArrayInput` via:
 //
-//	GroupRuleArray{ GroupRuleArgs{...} }
+//          GroupRuleArray{ GroupRuleArgs{...} }
 type GroupRuleArrayInput interface {
 	pulumi.Input
 
@@ -310,7 +316,7 @@ func (i GroupRuleArray) ToGroupRuleArrayOutputWithContext(ctx context.Context) G
 // GroupRuleMapInput is an input type that accepts GroupRuleMap and GroupRuleMapOutput values.
 // You can construct a concrete instance of `GroupRuleMapInput` via:
 //
-//	GroupRuleMap{ "key": GroupRuleArgs{...} }
+//          GroupRuleMap{ "key": GroupRuleArgs{...} }
 type GroupRuleMapInput interface {
 	pulumi.Input
 
@@ -369,6 +375,11 @@ func (o GroupRuleOutput) IpProtocol() pulumi.StringOutput {
 // Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 func (o GroupRuleOutput) Policy() pulumi.StringOutput {
 	return o.ApplyT(func(v *GroupRule) pulumi.StringOutput { return v.Policy }).(pulumi.StringOutput)
+}
+
+// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+func (o GroupRuleOutput) PolicyIndex() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GroupRule) pulumi.IntPtrOutput { return v.PolicyIndex }).(pulumi.IntPtrOutput)
 }
 
 // Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.

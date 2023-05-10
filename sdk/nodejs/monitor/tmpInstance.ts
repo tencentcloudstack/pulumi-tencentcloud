@@ -62,6 +62,10 @@ export class TmpInstance extends pulumi.CustomResource {
     }
 
     /**
+     * Prometheus HTTP API root address.
+     */
+    public /*out*/ readonly apiRootPath!: pulumi.Output<string>;
+    /**
      * Data retention time.
      */
     public readonly dataRetentionTime!: pulumi.Output<number>;
@@ -69,6 +73,18 @@ export class TmpInstance extends pulumi.CustomResource {
      * Instance name.
      */
     public readonly instanceName!: pulumi.Output<string>;
+    /**
+     * Instance IPv4 address.
+     */
+    public /*out*/ readonly ipv4Address!: pulumi.Output<string>;
+    /**
+     * Proxy address.
+     */
+    public /*out*/ readonly proxyAddress!: pulumi.Output<string>;
+    /**
+     * Prometheus remote write address.
+     */
+    public /*out*/ readonly remoteWrite!: pulumi.Output<string>;
     /**
      * Subnet Id.
      */
@@ -99,8 +115,12 @@ export class TmpInstance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TmpInstanceState | undefined;
+            resourceInputs["apiRootPath"] = state ? state.apiRootPath : undefined;
             resourceInputs["dataRetentionTime"] = state ? state.dataRetentionTime : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
+            resourceInputs["ipv4Address"] = state ? state.ipv4Address : undefined;
+            resourceInputs["proxyAddress"] = state ? state.proxyAddress : undefined;
+            resourceInputs["remoteWrite"] = state ? state.remoteWrite : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
@@ -128,6 +148,10 @@ export class TmpInstance extends pulumi.CustomResource {
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zone"] = args ? args.zone : undefined;
+            resourceInputs["apiRootPath"] = undefined /*out*/;
+            resourceInputs["ipv4Address"] = undefined /*out*/;
+            resourceInputs["proxyAddress"] = undefined /*out*/;
+            resourceInputs["remoteWrite"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(TmpInstance.__pulumiType, name, resourceInputs, opts);
@@ -139,6 +163,10 @@ export class TmpInstance extends pulumi.CustomResource {
  */
 export interface TmpInstanceState {
     /**
+     * Prometheus HTTP API root address.
+     */
+    apiRootPath?: pulumi.Input<string>;
+    /**
      * Data retention time.
      */
     dataRetentionTime?: pulumi.Input<number>;
@@ -146,6 +174,18 @@ export interface TmpInstanceState {
      * Instance name.
      */
     instanceName?: pulumi.Input<string>;
+    /**
+     * Instance IPv4 address.
+     */
+    ipv4Address?: pulumi.Input<string>;
+    /**
+     * Proxy address.
+     */
+    proxyAddress?: pulumi.Input<string>;
+    /**
+     * Prometheus remote write address.
+     */
+    remoteWrite?: pulumi.Input<string>;
     /**
      * Subnet Id.
      */

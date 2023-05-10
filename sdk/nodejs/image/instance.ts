@@ -88,6 +88,10 @@ export class Instance extends pulumi.CustomResource {
      * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
     public readonly sysprep!: pulumi.Output<boolean | undefined>;
+    /**
+     * Tags of the image.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -109,6 +113,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["snapshotIds"] = state ? state.snapshotIds : undefined;
             resourceInputs["sysprep"] = state ? state.sysprep : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
             if ((!args || args.imageName === undefined) && !opts.urn) {
@@ -121,6 +126,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["snapshotIds"] = args ? args.snapshotIds : undefined;
             resourceInputs["sysprep"] = args ? args.sysprep : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
@@ -159,6 +165,10 @@ export interface InstanceState {
      * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
     sysprep?: pulumi.Input<boolean>;
+    /**
+     * Tags of the image.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -193,4 +203,8 @@ export interface InstanceArgs {
      * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
     sysprep?: pulumi.Input<boolean>;
+    /**
+     * Tags of the image.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }

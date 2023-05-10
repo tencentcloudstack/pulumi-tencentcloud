@@ -21,8 +21,24 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Lighthouse/applyDiskBackup:ApplyDiskBackup":
+		r = &ApplyDiskBackup{}
+	case "tencentcloud:Lighthouse/applyInstanceSnapshot:ApplyInstanceSnapshot":
+		r = &ApplyInstanceSnapshot{}
+	case "tencentcloud:Lighthouse/blueprint:Blueprint":
+		r = &Blueprint{}
+	case "tencentcloud:Lighthouse/diskAttachment:DiskAttachment":
+		r = &DiskAttachment{}
+	case "tencentcloud:Lighthouse/diskBackup:DiskBackup":
+		r = &DiskBackup{}
+	case "tencentcloud:Lighthouse/firewallRule:FirewallRule":
+		r = &FirewallRule{}
 	case "tencentcloud:Lighthouse/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Lighthouse/keyPair:KeyPair":
+		r = &KeyPair{}
+	case "tencentcloud:Lighthouse/snapshot:Snapshot":
+		r = &Snapshot{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -38,7 +54,47 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Lighthouse/applyDiskBackup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/applyInstanceSnapshot",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/blueprint",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/diskAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/diskBackup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/firewallRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Lighthouse/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/keyPair",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/snapshot",
 		&module{version},
 	)
 }

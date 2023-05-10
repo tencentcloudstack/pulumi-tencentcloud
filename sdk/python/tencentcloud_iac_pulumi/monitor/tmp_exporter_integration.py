@@ -195,6 +195,60 @@ class TmpExporterIntegration(pulumi.CustomResource):
         """
         Provides a resource to create a monitor tmpExporterIntegration
 
+        > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
+
+        ## Example Usage
+
+        Use blackbox-exporter
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        tmp_exporter_integration = tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegration",
+            cluster_id="cls-bmuaukfu",
+            content="{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}",
+            instance_id="prom-dko9d0nu",
+            kind="blackbox-exporter",
+            kube_type=1)
+        ```
+
+        Use es-exporter
+
+        ```python
+        import pulumi
+        import json
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        tmp_exporter_integration_es = tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegrationEs",
+            instance_id=tencentcloud_monitor_tmp_instance["tmpInstance"]["id"],
+            kind="es-exporter",
+            content=json.dumps({
+                "name": "ex-exporter-example",
+                "kind": "es-exporter",
+                "spec": {
+                    "instanceSpec": {
+                        "url": "http://127.0.0.1:9123",
+                        "labels": {
+                            "instance": "es-abcd",
+                        },
+                        "version": "1.70.1",
+                        "user": "fugiat Duis minim",
+                        "password": "exercitation cillum velit",
+                    },
+                    "exporterSpec": {
+                        "all": True,
+                        "indicesSettings": False,
+                        "snapshots": False,
+                        "indices": True,
+                        "shards": False,
+                    },
+                },
+            }),
+            cluster_id="",
+            kube_type=3)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -211,6 +265,60 @@ class TmpExporterIntegration(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a monitor tmpExporterIntegration
+
+        > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
+
+        ## Example Usage
+
+        Use blackbox-exporter
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        tmp_exporter_integration = tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegration",
+            cluster_id="cls-bmuaukfu",
+            content="{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}",
+            instance_id="prom-dko9d0nu",
+            kind="blackbox-exporter",
+            kube_type=1)
+        ```
+
+        Use es-exporter
+
+        ```python
+        import pulumi
+        import json
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        tmp_exporter_integration_es = tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegrationEs",
+            instance_id=tencentcloud_monitor_tmp_instance["tmpInstance"]["id"],
+            kind="es-exporter",
+            content=json.dumps({
+                "name": "ex-exporter-example",
+                "kind": "es-exporter",
+                "spec": {
+                    "instanceSpec": {
+                        "url": "http://127.0.0.1:9123",
+                        "labels": {
+                            "instance": "es-abcd",
+                        },
+                        "version": "1.70.1",
+                        "user": "fugiat Duis minim",
+                        "password": "exercitation cillum velit",
+                    },
+                    "exporterSpec": {
+                        "all": True,
+                        "indicesSettings": False,
+                        "snapshots": False,
+                        "indices": True,
+                        "shards": False,
+                    },
+                },
+            }),
+            cluster_id="",
+            kube_type=3)
+        ```
 
         :param str resource_name: The name of the resource.
         :param TmpExporterIntegrationArgs args: The arguments to use to populate this resource's properties.

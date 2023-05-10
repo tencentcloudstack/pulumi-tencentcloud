@@ -19,24 +19,21 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Monitor.NewTmpCvmAgent(ctx, "tmpCvmAgent", &Monitor.TmpCvmAgentArgs{
-//				InstanceId: pulumi.String("prom-dko9d0nu"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Monitor.NewTmpCvmAgent(ctx, "tmpCvmAgent", &Monitor.TmpCvmAgentArgs{
+// 			InstanceId: pulumi.String("prom-dko9d0nu"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -44,13 +41,13 @@ import (
 // monitor tmpCvmAgent can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent tmpCvmAgent_id
-//
+//  $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
 // ```
 type TmpCvmAgent struct {
 	pulumi.CustomResourceState
 
+	// Agent id.
+	AgentId pulumi.StringOutput `pulumi:"agentId"`
 	// Instance id.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Agent name.
@@ -90,6 +87,8 @@ func GetTmpCvmAgent(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering TmpCvmAgent resources.
 type tmpCvmAgentState struct {
+	// Agent id.
+	AgentId *string `pulumi:"agentId"`
 	// Instance id.
 	InstanceId *string `pulumi:"instanceId"`
 	// Agent name.
@@ -97,6 +96,8 @@ type tmpCvmAgentState struct {
 }
 
 type TmpCvmAgentState struct {
+	// Agent id.
+	AgentId pulumi.StringPtrInput
 	// Instance id.
 	InstanceId pulumi.StringPtrInput
 	// Agent name.
@@ -148,7 +149,7 @@ func (i *TmpCvmAgent) ToTmpCvmAgentOutputWithContext(ctx context.Context) TmpCvm
 // TmpCvmAgentArrayInput is an input type that accepts TmpCvmAgentArray and TmpCvmAgentArrayOutput values.
 // You can construct a concrete instance of `TmpCvmAgentArrayInput` via:
 //
-//	TmpCvmAgentArray{ TmpCvmAgentArgs{...} }
+//          TmpCvmAgentArray{ TmpCvmAgentArgs{...} }
 type TmpCvmAgentArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +174,7 @@ func (i TmpCvmAgentArray) ToTmpCvmAgentArrayOutputWithContext(ctx context.Contex
 // TmpCvmAgentMapInput is an input type that accepts TmpCvmAgentMap and TmpCvmAgentMapOutput values.
 // You can construct a concrete instance of `TmpCvmAgentMapInput` via:
 //
-//	TmpCvmAgentMap{ "key": TmpCvmAgentArgs{...} }
+//          TmpCvmAgentMap{ "key": TmpCvmAgentArgs{...} }
 type TmpCvmAgentMapInput interface {
 	pulumi.Input
 
@@ -207,6 +208,11 @@ func (o TmpCvmAgentOutput) ToTmpCvmAgentOutput() TmpCvmAgentOutput {
 
 func (o TmpCvmAgentOutput) ToTmpCvmAgentOutputWithContext(ctx context.Context) TmpCvmAgentOutput {
 	return o
+}
+
+// Agent id.
+func (o TmpCvmAgentOutput) AgentId() pulumi.StringOutput {
+	return o.ApplyT(func(v *TmpCvmAgent) pulumi.StringOutput { return v.AgentId }).(pulumi.StringOutput)
 }
 
 // Instance id.

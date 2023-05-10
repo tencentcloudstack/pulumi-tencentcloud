@@ -10,6 +10,272 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type InstancesAcceptAttachInstance struct {
+	// Description.
+	Description *string `pulumi:"description"`
+	// Attachment Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance Region.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+	InstanceType *string `pulumi:"instanceType"`
+	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+	RouteTableId *string `pulumi:"routeTableId"`
+}
+
+// InstancesAcceptAttachInstanceInput is an input type that accepts InstancesAcceptAttachInstanceArgs and InstancesAcceptAttachInstanceOutput values.
+// You can construct a concrete instance of `InstancesAcceptAttachInstanceInput` via:
+//
+//          InstancesAcceptAttachInstanceArgs{...}
+type InstancesAcceptAttachInstanceInput interface {
+	pulumi.Input
+
+	ToInstancesAcceptAttachInstanceOutput() InstancesAcceptAttachInstanceOutput
+	ToInstancesAcceptAttachInstanceOutputWithContext(context.Context) InstancesAcceptAttachInstanceOutput
+}
+
+type InstancesAcceptAttachInstanceArgs struct {
+	// Description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Attachment Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance Region.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+	RouteTableId pulumi.StringPtrInput `pulumi:"routeTableId"`
+}
+
+func (InstancesAcceptAttachInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstancesAcceptAttachInstance)(nil)).Elem()
+}
+
+func (i InstancesAcceptAttachInstanceArgs) ToInstancesAcceptAttachInstanceOutput() InstancesAcceptAttachInstanceOutput {
+	return i.ToInstancesAcceptAttachInstanceOutputWithContext(context.Background())
+}
+
+func (i InstancesAcceptAttachInstanceArgs) ToInstancesAcceptAttachInstanceOutputWithContext(ctx context.Context) InstancesAcceptAttachInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstancesAcceptAttachInstanceOutput)
+}
+
+// InstancesAcceptAttachInstanceArrayInput is an input type that accepts InstancesAcceptAttachInstanceArray and InstancesAcceptAttachInstanceArrayOutput values.
+// You can construct a concrete instance of `InstancesAcceptAttachInstanceArrayInput` via:
+//
+//          InstancesAcceptAttachInstanceArray{ InstancesAcceptAttachInstanceArgs{...} }
+type InstancesAcceptAttachInstanceArrayInput interface {
+	pulumi.Input
+
+	ToInstancesAcceptAttachInstanceArrayOutput() InstancesAcceptAttachInstanceArrayOutput
+	ToInstancesAcceptAttachInstanceArrayOutputWithContext(context.Context) InstancesAcceptAttachInstanceArrayOutput
+}
+
+type InstancesAcceptAttachInstanceArray []InstancesAcceptAttachInstanceInput
+
+func (InstancesAcceptAttachInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstancesAcceptAttachInstance)(nil)).Elem()
+}
+
+func (i InstancesAcceptAttachInstanceArray) ToInstancesAcceptAttachInstanceArrayOutput() InstancesAcceptAttachInstanceArrayOutput {
+	return i.ToInstancesAcceptAttachInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i InstancesAcceptAttachInstanceArray) ToInstancesAcceptAttachInstanceArrayOutputWithContext(ctx context.Context) InstancesAcceptAttachInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstancesAcceptAttachInstanceArrayOutput)
+}
+
+type InstancesAcceptAttachInstanceOutput struct{ *pulumi.OutputState }
+
+func (InstancesAcceptAttachInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstancesAcceptAttachInstance)(nil)).Elem()
+}
+
+func (o InstancesAcceptAttachInstanceOutput) ToInstancesAcceptAttachInstanceOutput() InstancesAcceptAttachInstanceOutput {
+	return o
+}
+
+func (o InstancesAcceptAttachInstanceOutput) ToInstancesAcceptAttachInstanceOutputWithContext(ctx context.Context) InstancesAcceptAttachInstanceOutput {
+	return o
+}
+
+// Description.
+func (o InstancesAcceptAttachInstanceOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesAcceptAttachInstance) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Attachment Instance ID.
+func (o InstancesAcceptAttachInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v InstancesAcceptAttachInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance Region.
+func (o InstancesAcceptAttachInstanceOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v InstancesAcceptAttachInstance) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+func (o InstancesAcceptAttachInstanceOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesAcceptAttachInstance) *string { return v.InstanceType }).(pulumi.StringPtrOutput)
+}
+
+// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o InstancesAcceptAttachInstanceOutput) RouteTableId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesAcceptAttachInstance) *string { return v.RouteTableId }).(pulumi.StringPtrOutput)
+}
+
+type InstancesAcceptAttachInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (InstancesAcceptAttachInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstancesAcceptAttachInstance)(nil)).Elem()
+}
+
+func (o InstancesAcceptAttachInstanceArrayOutput) ToInstancesAcceptAttachInstanceArrayOutput() InstancesAcceptAttachInstanceArrayOutput {
+	return o
+}
+
+func (o InstancesAcceptAttachInstanceArrayOutput) ToInstancesAcceptAttachInstanceArrayOutputWithContext(ctx context.Context) InstancesAcceptAttachInstanceArrayOutput {
+	return o
+}
+
+func (o InstancesAcceptAttachInstanceArrayOutput) Index(i pulumi.IntInput) InstancesAcceptAttachInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesAcceptAttachInstance {
+		return vs[0].([]InstancesAcceptAttachInstance)[vs[1].(int)]
+	}).(InstancesAcceptAttachInstanceOutput)
+}
+
+type InstancesResetAttachInstance struct {
+	// Description.
+	Description *string `pulumi:"description"`
+	// Attachment Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance Region.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+	InstanceType *string `pulumi:"instanceType"`
+	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+	RouteTableId *string `pulumi:"routeTableId"`
+}
+
+// InstancesResetAttachInstanceInput is an input type that accepts InstancesResetAttachInstanceArgs and InstancesResetAttachInstanceOutput values.
+// You can construct a concrete instance of `InstancesResetAttachInstanceInput` via:
+//
+//          InstancesResetAttachInstanceArgs{...}
+type InstancesResetAttachInstanceInput interface {
+	pulumi.Input
+
+	ToInstancesResetAttachInstanceOutput() InstancesResetAttachInstanceOutput
+	ToInstancesResetAttachInstanceOutputWithContext(context.Context) InstancesResetAttachInstanceOutput
+}
+
+type InstancesResetAttachInstanceArgs struct {
+	// Description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Attachment Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance Region.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+	RouteTableId pulumi.StringPtrInput `pulumi:"routeTableId"`
+}
+
+func (InstancesResetAttachInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstancesResetAttachInstance)(nil)).Elem()
+}
+
+func (i InstancesResetAttachInstanceArgs) ToInstancesResetAttachInstanceOutput() InstancesResetAttachInstanceOutput {
+	return i.ToInstancesResetAttachInstanceOutputWithContext(context.Background())
+}
+
+func (i InstancesResetAttachInstanceArgs) ToInstancesResetAttachInstanceOutputWithContext(ctx context.Context) InstancesResetAttachInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstancesResetAttachInstanceOutput)
+}
+
+// InstancesResetAttachInstanceArrayInput is an input type that accepts InstancesResetAttachInstanceArray and InstancesResetAttachInstanceArrayOutput values.
+// You can construct a concrete instance of `InstancesResetAttachInstanceArrayInput` via:
+//
+//          InstancesResetAttachInstanceArray{ InstancesResetAttachInstanceArgs{...} }
+type InstancesResetAttachInstanceArrayInput interface {
+	pulumi.Input
+
+	ToInstancesResetAttachInstanceArrayOutput() InstancesResetAttachInstanceArrayOutput
+	ToInstancesResetAttachInstanceArrayOutputWithContext(context.Context) InstancesResetAttachInstanceArrayOutput
+}
+
+type InstancesResetAttachInstanceArray []InstancesResetAttachInstanceInput
+
+func (InstancesResetAttachInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstancesResetAttachInstance)(nil)).Elem()
+}
+
+func (i InstancesResetAttachInstanceArray) ToInstancesResetAttachInstanceArrayOutput() InstancesResetAttachInstanceArrayOutput {
+	return i.ToInstancesResetAttachInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i InstancesResetAttachInstanceArray) ToInstancesResetAttachInstanceArrayOutputWithContext(ctx context.Context) InstancesResetAttachInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstancesResetAttachInstanceArrayOutput)
+}
+
+type InstancesResetAttachInstanceOutput struct{ *pulumi.OutputState }
+
+func (InstancesResetAttachInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstancesResetAttachInstance)(nil)).Elem()
+}
+
+func (o InstancesResetAttachInstanceOutput) ToInstancesResetAttachInstanceOutput() InstancesResetAttachInstanceOutput {
+	return o
+}
+
+func (o InstancesResetAttachInstanceOutput) ToInstancesResetAttachInstanceOutputWithContext(ctx context.Context) InstancesResetAttachInstanceOutput {
+	return o
+}
+
+// Description.
+func (o InstancesResetAttachInstanceOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesResetAttachInstance) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Attachment Instance ID.
+func (o InstancesResetAttachInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v InstancesResetAttachInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance Region.
+func (o InstancesResetAttachInstanceOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v InstancesResetAttachInstance) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+func (o InstancesResetAttachInstanceOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesResetAttachInstance) *string { return v.InstanceType }).(pulumi.StringPtrOutput)
+}
+
+// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o InstancesResetAttachInstanceOutput) RouteTableId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesResetAttachInstance) *string { return v.RouteTableId }).(pulumi.StringPtrOutput)
+}
+
+type InstancesResetAttachInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (InstancesResetAttachInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstancesResetAttachInstance)(nil)).Elem()
+}
+
+func (o InstancesResetAttachInstanceArrayOutput) ToInstancesResetAttachInstanceArrayOutput() InstancesResetAttachInstanceArrayOutput {
+	return o
+}
+
+func (o InstancesResetAttachInstanceArrayOutput) ToInstancesResetAttachInstanceArrayOutputWithContext(ctx context.Context) InstancesResetAttachInstanceArrayOutput {
+	return o
+}
+
+func (o InstancesResetAttachInstanceArrayOutput) Index(i pulumi.IntInput) InstancesResetAttachInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesResetAttachInstance {
+		return vs[0].([]InstancesResetAttachInstance)[vs[1].(int)]
+	}).(InstancesResetAttachInstanceOutput)
+}
+
 type GetBandwidthLimitsLimit struct {
 	// Limitation of bandwidth.
 	BandwidthLimit int `pulumi:"bandwidthLimit"`
@@ -22,7 +288,7 @@ type GetBandwidthLimitsLimit struct {
 // GetBandwidthLimitsLimitInput is an input type that accepts GetBandwidthLimitsLimitArgs and GetBandwidthLimitsLimitOutput values.
 // You can construct a concrete instance of `GetBandwidthLimitsLimitInput` via:
 //
-//	GetBandwidthLimitsLimitArgs{...}
+//          GetBandwidthLimitsLimitArgs{...}
 type GetBandwidthLimitsLimitInput interface {
 	pulumi.Input
 
@@ -54,7 +320,7 @@ func (i GetBandwidthLimitsLimitArgs) ToGetBandwidthLimitsLimitOutputWithContext(
 // GetBandwidthLimitsLimitArrayInput is an input type that accepts GetBandwidthLimitsLimitArray and GetBandwidthLimitsLimitArrayOutput values.
 // You can construct a concrete instance of `GetBandwidthLimitsLimitArrayInput` via:
 //
-//	GetBandwidthLimitsLimitArray{ GetBandwidthLimitsLimitArgs{...} }
+//          GetBandwidthLimitsLimitArray{ GetBandwidthLimitsLimitArgs{...} }
 type GetBandwidthLimitsLimitArrayInput interface {
 	pulumi.Input
 
@@ -125,6 +391,555 @@ func (o GetBandwidthLimitsLimitArrayOutput) Index(i pulumi.IntInput) GetBandwidt
 	}).(GetBandwidthLimitsLimitOutput)
 }
 
+type GetCrossBorderFlowMonitorCrossBorderFlowMonitorData struct {
+	// in bandwidth, `bps`.
+	InBandwidths []int `pulumi:"inBandwidths"`
+	// in pkg, `pps`.
+	InPkgs []int `pulumi:"inPkgs"`
+	// out bandwidth, `bps`.
+	OutBandwidths []int `pulumi:"outBandwidths"`
+	// out pkg, `pps`.
+	OutPkgs []int `pulumi:"outPkgs"`
+}
+
+// GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput is an input type that accepts GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs and GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput values.
+// You can construct a concrete instance of `GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput` via:
+//
+//          GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{...}
+type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput() GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput
+	ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutputWithContext(context.Context) GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput
+}
+
+type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs struct {
+	// in bandwidth, `bps`.
+	InBandwidths pulumi.IntArrayInput `pulumi:"inBandwidths"`
+	// in pkg, `pps`.
+	InPkgs pulumi.IntArrayInput `pulumi:"inPkgs"`
+	// out bandwidth, `bps`.
+	OutBandwidths pulumi.IntArrayInput `pulumi:"outBandwidths"`
+	// out pkg, `pps`.
+	OutPkgs pulumi.IntArrayInput `pulumi:"outPkgs"`
+}
+
+func (GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderFlowMonitorCrossBorderFlowMonitorData)(nil)).Elem()
+}
+
+func (i GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput() GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput {
+	return i.ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutputWithContext(ctx context.Context) GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput)
+}
+
+// GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayInput is an input type that accepts GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray and GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput values.
+// You can construct a concrete instance of `GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayInput` via:
+//
+//          GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray{ GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{...} }
+type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput() GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput
+	ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutputWithContext(context.Context) GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput
+}
+
+type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray []GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput
+
+func (GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderFlowMonitorCrossBorderFlowMonitorData)(nil)).Elem()
+}
+
+func (i GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput() GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput {
+	return i.ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutputWithContext(ctx context.Context) GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput)
+}
+
+type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderFlowMonitorCrossBorderFlowMonitorData)(nil)).Elem()
+}
+
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput() GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput {
+	return o
+}
+
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutputWithContext(ctx context.Context) GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput {
+	return o
+}
+
+// in bandwidth, `bps`.
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput) InBandwidths() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetCrossBorderFlowMonitorCrossBorderFlowMonitorData) []int { return v.InBandwidths }).(pulumi.IntArrayOutput)
+}
+
+// in pkg, `pps`.
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput) InPkgs() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetCrossBorderFlowMonitorCrossBorderFlowMonitorData) []int { return v.InPkgs }).(pulumi.IntArrayOutput)
+}
+
+// out bandwidth, `bps`.
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput) OutBandwidths() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetCrossBorderFlowMonitorCrossBorderFlowMonitorData) []int { return v.OutBandwidths }).(pulumi.IntArrayOutput)
+}
+
+// out pkg, `pps`.
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput) OutPkgs() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetCrossBorderFlowMonitorCrossBorderFlowMonitorData) []int { return v.OutPkgs }).(pulumi.IntArrayOutput)
+}
+
+type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderFlowMonitorCrossBorderFlowMonitorData)(nil)).Elem()
+}
+
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput() GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput) ToGetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutputWithContext(ctx context.Context) GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput) Index(i pulumi.IntInput) GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCrossBorderFlowMonitorCrossBorderFlowMonitorData {
+		return vs[0].([]GetCrossBorderFlowMonitorCrossBorderFlowMonitorData)[vs[1].(int)]
+	}).(GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet struct {
+	// ccn id.
+	CcnId string `pulumi:"ccnId"`
+	// bandwidth limit of cross region.
+	CcnRegionBandwidthLimits []GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit `pulumi:"ccnRegionBandwidthLimits"`
+	// create time.
+	CreatedTime string `pulumi:"createdTime"`
+	// expired time.
+	ExpiredTime string `pulumi:"expiredTime"`
+	// `POSTPAID` or `PREPAID`.
+	InstanceChargeType string `pulumi:"instanceChargeType"`
+	// if cross region.
+	IsCrossBorder bool `pulumi:"isCrossBorder"`
+	// `true` means locked.
+	IsSecurityLock bool `pulumi:"isSecurityLock"`
+	// market id.
+	MarketId string `pulumi:"marketId"`
+	// Id of RegionFlowControl.
+	RegionFlowControlId string `pulumi:"regionFlowControlId"`
+	// renew flag.
+	RenewFlag string `pulumi:"renewFlag"`
+	// update time.
+	UpdateTime string `pulumi:"updateTime"`
+	// user account id.
+	UserAccountId string `pulumi:"userAccountId"`
+}
+
+// GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput values.
+// You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput` via:
+//
+//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs{...}
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutputWithContext(context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs struct {
+	// ccn id.
+	CcnId pulumi.StringInput `pulumi:"ccnId"`
+	// bandwidth limit of cross region.
+	CcnRegionBandwidthLimits GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput `pulumi:"ccnRegionBandwidthLimits"`
+	// create time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// expired time.
+	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
+	// `POSTPAID` or `PREPAID`.
+	InstanceChargeType pulumi.StringInput `pulumi:"instanceChargeType"`
+	// if cross region.
+	IsCrossBorder pulumi.BoolInput `pulumi:"isCrossBorder"`
+	// `true` means locked.
+	IsSecurityLock pulumi.BoolInput `pulumi:"isSecurityLock"`
+	// market id.
+	MarketId pulumi.StringInput `pulumi:"marketId"`
+	// Id of RegionFlowControl.
+	RegionFlowControlId pulumi.StringInput `pulumi:"regionFlowControlId"`
+	// renew flag.
+	RenewFlag pulumi.StringInput `pulumi:"renewFlag"`
+	// update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// user account id.
+	UserAccountId pulumi.StringInput `pulumi:"userAccountId"`
+}
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet)(nil)).Elem()
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput {
+	return i.ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput)
+}
+
+// GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput values.
+// You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayInput` via:
+//
+//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray{ GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs{...} }
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutputWithContext(context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray []GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet)(nil)).Elem()
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput {
+	return i.ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet)(nil)).Elem()
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput {
+	return o
+}
+
+// ccn id.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) CcnId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.CcnId }).(pulumi.StringOutput)
+}
+
+// bandwidth limit of cross region.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) CcnRegionBandwidthLimits() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) []GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit {
+		return v.CcnRegionBandwidthLimits
+	}).(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput)
+}
+
+// create time.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// expired time.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) ExpiredTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.ExpiredTime }).(pulumi.StringOutput)
+}
+
+// `POSTPAID` or `PREPAID`.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) InstanceChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.InstanceChargeType }).(pulumi.StringOutput)
+}
+
+// if cross region.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) IsCrossBorder() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) bool { return v.IsCrossBorder }).(pulumi.BoolOutput)
+}
+
+// `true` means locked.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) IsSecurityLock() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) bool { return v.IsSecurityLock }).(pulumi.BoolOutput)
+}
+
+// market id.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) MarketId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.MarketId }).(pulumi.StringOutput)
+}
+
+// Id of RegionFlowControl.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) RegionFlowControlId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.RegionFlowControlId }).(pulumi.StringOutput)
+}
+
+// renew flag.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) RenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.RenewFlag }).(pulumi.StringOutput)
+}
+
+// update time.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// user account id.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput) UserAccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet) string { return v.UserAccountId }).(pulumi.StringOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet)(nil)).Elem()
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput) Index(i pulumi.IntInput) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet {
+		return vs[0].([]GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet)[vs[1].(int)]
+	}).(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit struct {
+	// bandwidth list(Mbps).
+	BandwidthLimit int `pulumi:"bandwidthLimit"`
+	// destination region, such as.
+	DestinationRegion string `pulumi:"destinationRegion"`
+	// source region, such as &#39;ap-shanghai&#39;.
+	SourceRegion string `pulumi:"sourceRegion"`
+}
+
+// GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput values.
+// You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput` via:
+//
+//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs{...}
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutputWithContext(context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs struct {
+	// bandwidth list(Mbps).
+	BandwidthLimit pulumi.IntInput `pulumi:"bandwidthLimit"`
+	// destination region, such as.
+	DestinationRegion pulumi.StringInput `pulumi:"destinationRegion"`
+	// source region, such as &#39;ap-shanghai&#39;.
+	SourceRegion pulumi.StringInput `pulumi:"sourceRegion"`
+}
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit)(nil)).Elem()
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput {
+	return i.ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput)
+}
+
+// GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput values.
+// You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput` via:
+//
+//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray{ GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs{...} }
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput
+	ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutputWithContext(context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray []GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit)(nil)).Elem()
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput {
+	return i.ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit)(nil)).Elem()
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput {
+	return o
+}
+
+// bandwidth list(Mbps).
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput) BandwidthLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit) int {
+		return v.BandwidthLimit
+	}).(pulumi.IntOutput)
+}
+
+// destination region, such as.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput) DestinationRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit) string {
+		return v.DestinationRegion
+	}).(pulumi.StringOutput)
+}
+
+// source region, such as &#39;ap-shanghai&#39;.
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput) SourceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit) string {
+		return v.SourceRegion
+	}).(pulumi.StringOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit)(nil)).Elem()
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput() GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput) ToGetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput) Index(i pulumi.IntInput) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit {
+		return vs[0].([]GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit)[vs[1].(int)]
+	}).(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsFilter struct {
+	// attribute name.
+	Name string `pulumi:"name"`
+	// Value of the field.
+	Values []string `pulumi:"values"`
+}
+
+// GetCrossBorderRegionBandwidthLimitsFilterInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsFilterArgs and GetCrossBorderRegionBandwidthLimitsFilterOutput values.
+// You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsFilterInput` via:
+//
+//          GetCrossBorderRegionBandwidthLimitsFilterArgs{...}
+type GetCrossBorderRegionBandwidthLimitsFilterInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderRegionBandwidthLimitsFilterOutput() GetCrossBorderRegionBandwidthLimitsFilterOutput
+	ToGetCrossBorderRegionBandwidthLimitsFilterOutputWithContext(context.Context) GetCrossBorderRegionBandwidthLimitsFilterOutput
+}
+
+type GetCrossBorderRegionBandwidthLimitsFilterArgs struct {
+	// attribute name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of the field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetCrossBorderRegionBandwidthLimitsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsFilter)(nil)).Elem()
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsFilterArgs) ToGetCrossBorderRegionBandwidthLimitsFilterOutput() GetCrossBorderRegionBandwidthLimitsFilterOutput {
+	return i.ToGetCrossBorderRegionBandwidthLimitsFilterOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsFilterArgs) ToGetCrossBorderRegionBandwidthLimitsFilterOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderRegionBandwidthLimitsFilterOutput)
+}
+
+// GetCrossBorderRegionBandwidthLimitsFilterArrayInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsFilterArray and GetCrossBorderRegionBandwidthLimitsFilterArrayOutput values.
+// You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsFilterArrayInput` via:
+//
+//          GetCrossBorderRegionBandwidthLimitsFilterArray{ GetCrossBorderRegionBandwidthLimitsFilterArgs{...} }
+type GetCrossBorderRegionBandwidthLimitsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetCrossBorderRegionBandwidthLimitsFilterArrayOutput() GetCrossBorderRegionBandwidthLimitsFilterArrayOutput
+	ToGetCrossBorderRegionBandwidthLimitsFilterArrayOutputWithContext(context.Context) GetCrossBorderRegionBandwidthLimitsFilterArrayOutput
+}
+
+type GetCrossBorderRegionBandwidthLimitsFilterArray []GetCrossBorderRegionBandwidthLimitsFilterInput
+
+func (GetCrossBorderRegionBandwidthLimitsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderRegionBandwidthLimitsFilter)(nil)).Elem()
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsFilterArray) ToGetCrossBorderRegionBandwidthLimitsFilterArrayOutput() GetCrossBorderRegionBandwidthLimitsFilterArrayOutput {
+	return i.ToGetCrossBorderRegionBandwidthLimitsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetCrossBorderRegionBandwidthLimitsFilterArray) ToGetCrossBorderRegionBandwidthLimitsFilterArrayOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossBorderRegionBandwidthLimitsFilterArrayOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderRegionBandwidthLimitsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsFilter)(nil)).Elem()
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsFilterOutput) ToGetCrossBorderRegionBandwidthLimitsFilterOutput() GetCrossBorderRegionBandwidthLimitsFilterOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsFilterOutput) ToGetCrossBorderRegionBandwidthLimitsFilterOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsFilterOutput {
+	return o
+}
+
+// attribute name.
+func (o GetCrossBorderRegionBandwidthLimitsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of the field.
+func (o GetCrossBorderRegionBandwidthLimitsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCrossBorderRegionBandwidthLimitsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetCrossBorderRegionBandwidthLimitsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCrossBorderRegionBandwidthLimitsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossBorderRegionBandwidthLimitsFilter)(nil)).Elem()
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsFilterArrayOutput) ToGetCrossBorderRegionBandwidthLimitsFilterArrayOutput() GetCrossBorderRegionBandwidthLimitsFilterArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsFilterArrayOutput) ToGetCrossBorderRegionBandwidthLimitsFilterArrayOutputWithContext(ctx context.Context) GetCrossBorderRegionBandwidthLimitsFilterArrayOutput {
+	return o
+}
+
+func (o GetCrossBorderRegionBandwidthLimitsFilterArrayOutput) Index(i pulumi.IntInput) GetCrossBorderRegionBandwidthLimitsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCrossBorderRegionBandwidthLimitsFilter {
+		return vs[0].([]GetCrossBorderRegionBandwidthLimitsFilter)[vs[1].(int)]
+	}).(GetCrossBorderRegionBandwidthLimitsFilterOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// Information list of instance is attached.
 	AttachmentLists []GetInstancesInstanceListAttachmentList `pulumi:"attachmentLists"`
@@ -149,7 +964,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -193,7 +1008,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -312,7 +1127,7 @@ type GetInstancesInstanceListAttachmentList struct {
 // GetInstancesInstanceListAttachmentListInput is an input type that accepts GetInstancesInstanceListAttachmentListArgs and GetInstancesInstanceListAttachmentListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListAttachmentListInput` via:
 //
-//	GetInstancesInstanceListAttachmentListArgs{...}
+//          GetInstancesInstanceListAttachmentListArgs{...}
 type GetInstancesInstanceListAttachmentListInput interface {
 	pulumi.Input
 
@@ -350,7 +1165,7 @@ func (i GetInstancesInstanceListAttachmentListArgs) ToGetInstancesInstanceListAt
 // GetInstancesInstanceListAttachmentListArrayInput is an input type that accepts GetInstancesInstanceListAttachmentListArray and GetInstancesInstanceListAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListAttachmentListArrayInput` via:
 //
-//	GetInstancesInstanceListAttachmentListArray{ GetInstancesInstanceListAttachmentListArgs{...} }
+//          GetInstancesInstanceListAttachmentListArray{ GetInstancesInstanceListAttachmentListArgs{...} }
 type GetInstancesInstanceListAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -437,14 +1252,38 @@ func (o GetInstancesInstanceListAttachmentListArrayOutput) Index(i pulumi.IntInp
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAcceptAttachInstanceInput)(nil)).Elem(), InstancesAcceptAttachInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAcceptAttachInstanceArrayInput)(nil)).Elem(), InstancesAcceptAttachInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstancesResetAttachInstanceInput)(nil)).Elem(), InstancesResetAttachInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstancesResetAttachInstanceArrayInput)(nil)).Elem(), InstancesResetAttachInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthLimitsLimitInput)(nil)).Elem(), GetBandwidthLimitsLimitArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthLimitsLimitArrayInput)(nil)).Elem(), GetBandwidthLimitsLimitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput)(nil)).Elem(), GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayInput)(nil)).Elem(), GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput)(nil)).Elem(), GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayInput)(nil)).Elem(), GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput)(nil)).Elem(), GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput)(nil)).Elem(), GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsFilterInput)(nil)).Elem(), GetCrossBorderRegionBandwidthLimitsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderRegionBandwidthLimitsFilterArrayInput)(nil)).Elem(), GetCrossBorderRegionBandwidthLimitsFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListAttachmentListInput)(nil)).Elem(), GetInstancesInstanceListAttachmentListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListAttachmentListArrayInput)(nil)).Elem(), GetInstancesInstanceListAttachmentListArray{})
+	pulumi.RegisterOutputType(InstancesAcceptAttachInstanceOutput{})
+	pulumi.RegisterOutputType(InstancesAcceptAttachInstanceArrayOutput{})
+	pulumi.RegisterOutputType(InstancesResetAttachInstanceOutput{})
+	pulumi.RegisterOutputType(InstancesResetAttachInstanceArrayOutput{})
 	pulumi.RegisterOutputType(GetBandwidthLimitsLimitOutput{})
 	pulumi.RegisterOutputType(GetBandwidthLimitsLimitArrayOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderRegionBandwidthLimitsFilterOutput{})
+	pulumi.RegisterOutputType(GetCrossBorderRegionBandwidthLimitsFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListAttachmentListOutput{})

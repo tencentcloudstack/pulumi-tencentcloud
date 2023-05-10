@@ -7,8 +7,16 @@ import typing
 # Export this package's modules as members:
 from .access_group import *
 from .access_rule import *
+from .auto_snapshot_policy import *
+from .auto_snapshot_policy_attachment import *
 from .file_system import *
 from .get_access_groups import *
 from .get_access_rules import *
+from .get_available_zone import *
+from .get_file_system_clients import *
 from .get_file_systems import *
+from .get_mount_targets import *
+from .sign_up_cfs_service import *
+from .snapshot import *
+from .user_quota import *
 from . import outputs

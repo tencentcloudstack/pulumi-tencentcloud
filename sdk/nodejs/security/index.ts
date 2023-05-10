@@ -9,11 +9,13 @@ export * from "./getGroups";
 export * from "./group";
 export * from "./groupLiteRule";
 export * from "./groupRule";
+export * from "./groupRuleSet";
 
 // Import resources to register:
 import { Group } from "./group";
 import { GroupLiteRule } from "./groupLiteRule";
 import { GroupRule } from "./groupRule";
+import { GroupRuleSet } from "./groupRuleSet";
 
 const _module = {
     version: utilities.getVersion(),
@@ -25,6 +27,8 @@ const _module = {
                 return new GroupLiteRule(name, <any>undefined, { urn })
             case "tencentcloud:Security/groupRule:GroupRule":
                 return new GroupRule(name, <any>undefined, { urn })
+            case "tencentcloud:Security/groupRuleSet:GroupRuleSet":
+                return new GroupRuleSet(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -33,3 +37,4 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Security/group", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Security/groupLiteRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Security/groupRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Security/groupRuleSet", _module)

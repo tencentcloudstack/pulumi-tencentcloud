@@ -25,6 +25,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Acl{}
 	case "tencentcloud:Vpc/aclAttachment:AclAttachment":
 		r = &AclAttachment{}
+	case "tencentcloud:Vpc/bandwidthPackage:BandwidthPackage":
+		r = &BandwidthPackage{}
+	case "tencentcloud:Vpc/bandwidthPackageAttachment:BandwidthPackageAttachment":
+		r = &BandwidthPackageAttachment{}
+	case "tencentcloud:Vpc/endPoint:EndPoint":
+		r = &EndPoint{}
+	case "tencentcloud:Vpc/endPointService:EndPointService":
+		r = &EndPointService{}
+	case "tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList":
+		r = &EndPointServiceWhiteList{}
+	case "tencentcloud:Vpc/flowLog:FlowLog":
+		r = &FlowLog{}
 	case "tencentcloud:Vpc/instance:Instance":
 		r = &Instance{}
 	default:
@@ -48,6 +60,36 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vpc/aclAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/bandwidthPackage",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/bandwidthPackageAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/endPoint",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/endPointService",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/endPointServiceWhiteList",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/flowLog",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

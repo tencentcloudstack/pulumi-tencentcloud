@@ -12,6 +12,7 @@ import (
 )
 
 // Provide a resource to create a Free Certificate.
+//
 // > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
 //
 // ## Example Usage
@@ -20,33 +21,30 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ssl.NewFreeCertificate(ctx, "foo", &Ssl.FreeCertificateArgs{
-//				Alias:           pulumi.String("my_free_cert"),
-//				ContactEmail:    pulumi.String("foo@example.com"),
-//				ContactPhone:    pulumi.String("12345678901"),
-//				CsrEncryptAlgo:  pulumi.String("RSA"),
-//				CsrKeyParameter: pulumi.String("2048"),
-//				CsrKeyPassword:  pulumi.String("xxxxxxxx"),
-//				Domain:          pulumi.String("example.com"),
-//				DvAuthMethod:    pulumi.String("DNS_AUTO"),
-//				PackageType:     pulumi.String("2"),
-//				ValidityPeriod:  pulumi.String("12"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ssl.NewFreeCertificate(ctx, "foo", &Ssl.FreeCertificateArgs{
+// 			Alias:           pulumi.String("my_free_cert"),
+// 			ContactEmail:    pulumi.String("foo@example.com"),
+// 			ContactPhone:    pulumi.String("12345678901"),
+// 			CsrEncryptAlgo:  pulumi.String("RSA"),
+// 			CsrKeyParameter: pulumi.String("2048"),
+// 			CsrKeyPassword:  pulumi.String("xxxxxxxx"),
+// 			Domain:          pulumi.String("example.com"),
+// 			DvAuthMethod:    pulumi.String("DNS_AUTO"),
+// 			PackageType:     pulumi.String("2"),
+// 			ValidityPeriod:  pulumi.String("12"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -54,9 +52,7 @@ import (
 // FreeCertificate instance can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
-//
+//  $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
 // ```
 type FreeCertificate struct {
 	pulumi.CustomResourceState
@@ -85,8 +81,10 @@ type FreeCertificate struct {
 	Deployable pulumi.BoolOutput `pulumi:"deployable"`
 	// Specify domain name.
 	Domain pulumi.StringOutput `pulumi:"domain"`
-	// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+	// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
 	DvAuthMethod pulumi.StringOutput `pulumi:"dvAuthMethod"`
+	// DV certification information.
+	DvAuths FreeCertificateDvAuthArrayOutput `pulumi:"dvAuths"`
 	// Certificate insert time.
 	InsertTime pulumi.StringOutput `pulumi:"insertTime"`
 	// Specify old certificate ID, used for re-apply.
@@ -171,8 +169,10 @@ type freeCertificateState struct {
 	Deployable *bool `pulumi:"deployable"`
 	// Specify domain name.
 	Domain *string `pulumi:"domain"`
-	// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+	// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
 	DvAuthMethod *string `pulumi:"dvAuthMethod"`
+	// DV certification information.
+	DvAuths []FreeCertificateDvAuth `pulumi:"dvAuths"`
 	// Certificate insert time.
 	InsertTime *string `pulumi:"insertTime"`
 	// Specify old certificate ID, used for re-apply.
@@ -222,8 +222,10 @@ type FreeCertificateState struct {
 	Deployable pulumi.BoolPtrInput
 	// Specify domain name.
 	Domain pulumi.StringPtrInput
-	// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+	// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
 	DvAuthMethod pulumi.StringPtrInput
+	// DV certification information.
+	DvAuths FreeCertificateDvAuthArrayInput
 	// Certificate insert time.
 	InsertTime pulumi.StringPtrInput
 	// Specify old certificate ID, used for re-apply.
@@ -267,7 +269,7 @@ type freeCertificateArgs struct {
 	CsrKeyPassword *string `pulumi:"csrKeyPassword"`
 	// Specify domain name.
 	Domain string `pulumi:"domain"`
-	// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+	// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
 	DvAuthMethod string `pulumi:"dvAuthMethod"`
 	// Specify old certificate ID, used for re-apply.
 	OldCertificateId *string `pulumi:"oldCertificateId"`
@@ -295,7 +297,7 @@ type FreeCertificateArgs struct {
 	CsrKeyPassword pulumi.StringPtrInput
 	// Specify domain name.
 	Domain pulumi.StringInput
-	// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+	// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
 	DvAuthMethod pulumi.StringInput
 	// Specify old certificate ID, used for re-apply.
 	OldCertificateId pulumi.StringPtrInput
@@ -333,7 +335,7 @@ func (i *FreeCertificate) ToFreeCertificateOutputWithContext(ctx context.Context
 // FreeCertificateArrayInput is an input type that accepts FreeCertificateArray and FreeCertificateArrayOutput values.
 // You can construct a concrete instance of `FreeCertificateArrayInput` via:
 //
-//	FreeCertificateArray{ FreeCertificateArgs{...} }
+//          FreeCertificateArray{ FreeCertificateArgs{...} }
 type FreeCertificateArrayInput interface {
 	pulumi.Input
 
@@ -358,7 +360,7 @@ func (i FreeCertificateArray) ToFreeCertificateArrayOutputWithContext(ctx contex
 // FreeCertificateMapInput is an input type that accepts FreeCertificateMap and FreeCertificateMapOutput values.
 // You can construct a concrete instance of `FreeCertificateMapInput` via:
 //
-//	FreeCertificateMap{ "key": FreeCertificateArgs{...} }
+//          FreeCertificateMap{ "key": FreeCertificateArgs{...} }
 type FreeCertificateMapInput interface {
 	pulumi.Input
 
@@ -454,9 +456,14 @@ func (o FreeCertificateOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *FreeCertificate) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
 }
 
-// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
 func (o FreeCertificateOutput) DvAuthMethod() pulumi.StringOutput {
 	return o.ApplyT(func(v *FreeCertificate) pulumi.StringOutput { return v.DvAuthMethod }).(pulumi.StringOutput)
+}
+
+// DV certification information.
+func (o FreeCertificateOutput) DvAuths() FreeCertificateDvAuthArrayOutput {
+	return o.ApplyT(func(v *FreeCertificate) FreeCertificateDvAuthArrayOutput { return v.DvAuths }).(FreeCertificateDvAuthArrayOutput)
 }
 
 // Certificate insert time.

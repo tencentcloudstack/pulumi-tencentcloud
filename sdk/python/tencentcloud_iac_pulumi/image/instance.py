@@ -19,7 +19,8 @@ class InstanceArgs:
                  image_description: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  snapshot_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 sysprep: Optional[pulumi.Input[bool]] = None):
+                 sysprep: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] image_name: Image name.
@@ -29,6 +30,7 @@ class InstanceArgs:
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the image.
         """
         pulumi.set(__self__, "image_name", image_name)
         if data_disk_ids is not None:
@@ -43,6 +45,8 @@ class InstanceArgs:
             pulumi.set(__self__, "snapshot_ids", snapshot_ids)
         if sysprep is not None:
             pulumi.set(__self__, "sysprep", sysprep)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="imageName")
@@ -128,6 +132,18 @@ class InstanceArgs:
     def sysprep(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "sysprep", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of the image.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _InstanceState:
@@ -138,7 +154,8 @@ class _InstanceState:
                  image_name: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  snapshot_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 sysprep: Optional[pulumi.Input[bool]] = None):
+                 sysprep: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] data_disk_ids: Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
@@ -148,6 +165,7 @@ class _InstanceState:
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the image.
         """
         if data_disk_ids is not None:
             pulumi.set(__self__, "data_disk_ids", data_disk_ids)
@@ -163,6 +181,8 @@ class _InstanceState:
             pulumi.set(__self__, "snapshot_ids", snapshot_ids)
         if sysprep is not None:
             pulumi.set(__self__, "sysprep", sysprep)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="dataDiskIds")
@@ -248,6 +268,18 @@ class _InstanceState:
     def sysprep(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "sysprep", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of the image.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 class Instance(pulumi.CustomResource):
     @overload
@@ -261,6 +293,7 @@ class Instance(pulumi.CustomResource):
                  instance_id: Optional[pulumi.Input[str]] = None,
                  snapshot_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  sysprep: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provide a resource to manage image.
@@ -298,6 +331,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the image.
         """
         ...
     @overload
@@ -354,6 +388,7 @@ class Instance(pulumi.CustomResource):
                  instance_id: Optional[pulumi.Input[str]] = None,
                  snapshot_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  sysprep: Optional[pulumi.Input[bool]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -377,6 +412,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["instance_id"] = instance_id
             __props__.__dict__["snapshot_ids"] = snapshot_ids
             __props__.__dict__["sysprep"] = sysprep
+            __props__.__dict__["tags"] = tags
         super(Instance, __self__).__init__(
             'tencentcloud:Image/instance:Instance',
             resource_name,
@@ -393,7 +429,8 @@ class Instance(pulumi.CustomResource):
             image_name: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
             snapshot_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-            sysprep: Optional[pulumi.Input[bool]] = None) -> 'Instance':
+            sysprep: Optional[pulumi.Input[bool]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Instance':
         """
         Get an existing Instance resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -408,6 +445,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_id: Cloud server instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] snapshot_ids: Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         :param pulumi.Input[bool] sysprep: Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the image.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -420,6 +458,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["snapshot_ids"] = snapshot_ids
         __props__.__dict__["sysprep"] = sysprep
+        __props__.__dict__["tags"] = tags
         return Instance(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -477,4 +516,12 @@ class Instance(pulumi.CustomResource):
         Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         """
         return pulumi.get(self, "sysprep")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tags of the image.
+        """
+        return pulumi.get(self, "tags")
 

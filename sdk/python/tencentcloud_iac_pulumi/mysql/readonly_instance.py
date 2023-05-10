@@ -1221,7 +1221,7 @@ class ReadonlyInstance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Output[Optional[str]]:
+    def subnet_id(self) -> pulumi.Output[str]:
         """
         Private network ID. If `vpc_id` is set, this value is required.
         """
@@ -1253,7 +1253,7 @@ class ReadonlyInstance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Output[Optional[str]]:
+    def vpc_id(self) -> pulumi.Output[str]:
         """
         ID of VPC, which can be modified once every 24 hours and can't be removed.
         """

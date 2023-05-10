@@ -9,10 +9,77 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'InstanceAccountAuthRole',
+    'InstanceBackupDownloadTaskBackupSet',
     'InstanceStandbyInstanceList',
+    'GetInstanceBackupsBackupListResult',
+    'GetInstanceConnectionsClientResult',
+    'GetInstanceCurrentOpCurrentOpResult',
+    'GetInstanceParamsInstanceEnumParamResult',
+    'GetInstanceParamsInstanceIntegerParamResult',
+    'GetInstanceParamsInstanceMultiParamResult',
+    'GetInstanceParamsInstanceTextParamResult',
     'GetInstancesInstanceListResult',
     'GetZoneConfigListResult',
 ]
+
+@pulumi.output_type
+class InstanceAccountAuthRole(dict):
+    def __init__(__self__, *,
+                 mask: int,
+                 namespace: str):
+        """
+        :param int mask: Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
+        :param str namespace: Refers to the name of the database with the current account permissions.*: Indicates all databases. db.name: Indicates the database of a specific name.
+        """
+        pulumi.set(__self__, "mask", mask)
+        pulumi.set(__self__, "namespace", namespace)
+
+    @property
+    @pulumi.getter
+    def mask(self) -> int:
+        """
+        Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
+        """
+        return pulumi.get(self, "mask")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Refers to the name of the database with the current account permissions.*: Indicates all databases. db.name: Indicates the database of a specific name.
+        """
+        return pulumi.get(self, "namespace")
+
+
+@pulumi.output_type
+class InstanceBackupDownloadTaskBackupSet(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "replicaSetId":
+            suggest = "replica_set_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstanceBackupDownloadTaskBackupSet. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstanceBackupDownloadTaskBackupSet.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstanceBackupDownloadTaskBackupSet.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 replica_set_id: str):
+        pulumi.set(__self__, "replica_set_id", replica_set_id)
+
+    @property
+    @pulumi.getter(name="replicaSetId")
+    def replica_set_id(self) -> str:
+        return pulumi.get(self, "replica_set_id")
+
 
 @pulumi.output_type
 class InstanceStandbyInstanceList(dict):
@@ -62,6 +129,649 @@ class InstanceStandbyInstanceList(dict):
         Indicates the region of standby instance.
         """
         return pulumi.get(self, "standby_instance_region")
+
+
+@pulumi.output_type
+class GetInstanceBackupsBackupListResult(dict):
+    def __init__(__self__, *,
+                 backup_desc: str,
+                 backup_method: int,
+                 backup_name: str,
+                 backup_size: int,
+                 backup_type: int,
+                 end_time: str,
+                 instance_id: str,
+                 start_time: str,
+                 status: int):
+        """
+        :param str backup_desc: Remark of backup.
+        :param int backup_method: Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
+        :param str backup_name: Backup mode name.
+        :param int backup_size: Size of backup(KN).
+        :param int backup_type: Backup mode type.
+        :param str end_time: end time of backup.
+        :param str instance_id: Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
+        :param str start_time: start time of backup.
+        :param int status: Backup status.
+        """
+        pulumi.set(__self__, "backup_desc", backup_desc)
+        pulumi.set(__self__, "backup_method", backup_method)
+        pulumi.set(__self__, "backup_name", backup_name)
+        pulumi.set(__self__, "backup_size", backup_size)
+        pulumi.set(__self__, "backup_type", backup_type)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="backupDesc")
+    def backup_desc(self) -> str:
+        """
+        Remark of backup.
+        """
+        return pulumi.get(self, "backup_desc")
+
+    @property
+    @pulumi.getter(name="backupMethod")
+    def backup_method(self) -> int:
+        """
+        Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
+        """
+        return pulumi.get(self, "backup_method")
+
+    @property
+    @pulumi.getter(name="backupName")
+    def backup_name(self) -> str:
+        """
+        Backup mode name.
+        """
+        return pulumi.get(self, "backup_name")
+
+    @property
+    @pulumi.getter(name="backupSize")
+    def backup_size(self) -> int:
+        """
+        Size of backup(KN).
+        """
+        return pulumi.get(self, "backup_size")
+
+    @property
+    @pulumi.getter(name="backupType")
+    def backup_type(self) -> int:
+        """
+        Backup mode type.
+        """
+        return pulumi.get(self, "backup_type")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        end time of backup.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        start time of backup.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Backup status.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetInstanceConnectionsClientResult(dict):
+    def __init__(__self__, *,
+                 count: int,
+                 internal_service: bool,
+                 ip: str):
+        """
+        :param int count: client connection count.
+        :param bool internal_service: is internal.
+        :param str ip: client connection ip.
+        """
+        pulumi.set(__self__, "count", count)
+        pulumi.set(__self__, "internal_service", internal_service)
+        pulumi.set(__self__, "ip", ip)
+
+    @property
+    @pulumi.getter
+    def count(self) -> int:
+        """
+        client connection count.
+        """
+        return pulumi.get(self, "count")
+
+    @property
+    @pulumi.getter(name="internalService")
+    def internal_service(self) -> bool:
+        """
+        is internal.
+        """
+        return pulumi.get(self, "internal_service")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        client connection ip.
+        """
+        return pulumi.get(self, "ip")
+
+
+@pulumi.output_type
+class GetInstanceCurrentOpCurrentOpResult(dict):
+    def __init__(__self__, *,
+                 microsecs_running: int,
+                 node_name: str,
+                 ns: str,
+                 op: str,
+                 op_id: int,
+                 operation: str,
+                 query: str,
+                 replica_set_name: str,
+                 state: str):
+        """
+        :param int microsecs_running: running time(ms).
+        :param str node_name: Node name.
+        :param str ns: Filter condition, the namespace namespace to which the operation belongs, in the format of db.collection.
+        :param str op: Filter condition, operation type, possible values: none, update, insert, query, command, getmore,remove and killcursors.
+        :param int op_id: operation id.
+        :param str operation: operation info.
+        :param str query: operation query.
+        :param str replica_set_name: filter condition, shard name.
+        :param str state: Filter condition, node status, possible value: primary, secondary.
+        """
+        pulumi.set(__self__, "microsecs_running", microsecs_running)
+        pulumi.set(__self__, "node_name", node_name)
+        pulumi.set(__self__, "ns", ns)
+        pulumi.set(__self__, "op", op)
+        pulumi.set(__self__, "op_id", op_id)
+        pulumi.set(__self__, "operation", operation)
+        pulumi.set(__self__, "query", query)
+        pulumi.set(__self__, "replica_set_name", replica_set_name)
+        pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter(name="microsecsRunning")
+    def microsecs_running(self) -> int:
+        """
+        running time(ms).
+        """
+        return pulumi.get(self, "microsecs_running")
+
+    @property
+    @pulumi.getter(name="nodeName")
+    def node_name(self) -> str:
+        """
+        Node name.
+        """
+        return pulumi.get(self, "node_name")
+
+    @property
+    @pulumi.getter
+    def ns(self) -> str:
+        """
+        Filter condition, the namespace namespace to which the operation belongs, in the format of db.collection.
+        """
+        return pulumi.get(self, "ns")
+
+    @property
+    @pulumi.getter
+    def op(self) -> str:
+        """
+        Filter condition, operation type, possible values: none, update, insert, query, command, getmore,remove and killcursors.
+        """
+        return pulumi.get(self, "op")
+
+    @property
+    @pulumi.getter(name="opId")
+    def op_id(self) -> int:
+        """
+        operation id.
+        """
+        return pulumi.get(self, "op_id")
+
+    @property
+    @pulumi.getter
+    def operation(self) -> str:
+        """
+        operation info.
+        """
+        return pulumi.get(self, "operation")
+
+    @property
+    @pulumi.getter
+    def query(self) -> str:
+        """
+        operation query.
+        """
+        return pulumi.get(self, "query")
+
+    @property
+    @pulumi.getter(name="replicaSetName")
+    def replica_set_name(self) -> str:
+        """
+        filter condition, shard name.
+        """
+        return pulumi.get(self, "replica_set_name")
+
+    @property
+    @pulumi.getter
+    def state(self) -> str:
+        """
+        Filter condition, node status, possible value: primary, secondary.
+        """
+        return pulumi.get(self, "state")
+
+
+@pulumi.output_type
+class GetInstanceParamsInstanceEnumParamResult(dict):
+    def __init__(__self__, *,
+                 current_value: str,
+                 default_value: str,
+                 enum_values: Sequence[str],
+                 need_restart: str,
+                 param_name: str,
+                 status: int,
+                 tips: Sequence[str],
+                 value_type: str):
+        """
+        :param str current_value: current value.
+        :param str default_value: default value.
+        :param Sequence[str] enum_values: enum value.
+        :param str need_restart: if need restart.
+        :param str param_name: name of parameter.
+        :param int status: if is running.
+        :param Sequence[str] tips: descripition of parameter.
+        :param str value_type: value type.
+        """
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "default_value", default_value)
+        pulumi.set(__self__, "enum_values", enum_values)
+        pulumi.set(__self__, "need_restart", need_restart)
+        pulumi.set(__self__, "param_name", param_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tips", tips)
+        pulumi.set(__self__, "value_type", value_type)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> str:
+        """
+        current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> str:
+        """
+        default value.
+        """
+        return pulumi.get(self, "default_value")
+
+    @property
+    @pulumi.getter(name="enumValues")
+    def enum_values(self) -> Sequence[str]:
+        """
+        enum value.
+        """
+        return pulumi.get(self, "enum_values")
+
+    @property
+    @pulumi.getter(name="needRestart")
+    def need_restart(self) -> str:
+        """
+        if need restart.
+        """
+        return pulumi.get(self, "need_restart")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        name of parameter.
+        """
+        return pulumi.get(self, "param_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        if is running.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tips(self) -> Sequence[str]:
+        """
+        descripition of parameter.
+        """
+        return pulumi.get(self, "tips")
+
+    @property
+    @pulumi.getter(name="valueType")
+    def value_type(self) -> str:
+        """
+        value type.
+        """
+        return pulumi.get(self, "value_type")
+
+
+@pulumi.output_type
+class GetInstanceParamsInstanceIntegerParamResult(dict):
+    def __init__(__self__, *,
+                 current_value: str,
+                 default_value: str,
+                 max: str,
+                 min: str,
+                 need_restart: str,
+                 param_name: str,
+                 status: int,
+                 tips: Sequence[str],
+                 value_type: str):
+        """
+        :param str current_value: current value.
+        :param str default_value: default value.
+        :param str max: max value.
+        :param str min: min value.
+        :param str need_restart: if need restart.
+        :param str param_name: name of parameter.
+        :param int status: if is running.
+        :param Sequence[str] tips: descripition of parameter.
+        :param str value_type: value type.
+        """
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "default_value", default_value)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "min", min)
+        pulumi.set(__self__, "need_restart", need_restart)
+        pulumi.set(__self__, "param_name", param_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tips", tips)
+        pulumi.set(__self__, "value_type", value_type)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> str:
+        """
+        current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> str:
+        """
+        default value.
+        """
+        return pulumi.get(self, "default_value")
+
+    @property
+    @pulumi.getter
+    def max(self) -> str:
+        """
+        max value.
+        """
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter
+    def min(self) -> str:
+        """
+        min value.
+        """
+        return pulumi.get(self, "min")
+
+    @property
+    @pulumi.getter(name="needRestart")
+    def need_restart(self) -> str:
+        """
+        if need restart.
+        """
+        return pulumi.get(self, "need_restart")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        name of parameter.
+        """
+        return pulumi.get(self, "param_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        if is running.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tips(self) -> Sequence[str]:
+        """
+        descripition of parameter.
+        """
+        return pulumi.get(self, "tips")
+
+    @property
+    @pulumi.getter(name="valueType")
+    def value_type(self) -> str:
+        """
+        value type.
+        """
+        return pulumi.get(self, "value_type")
+
+
+@pulumi.output_type
+class GetInstanceParamsInstanceMultiParamResult(dict):
+    def __init__(__self__, *,
+                 current_value: str,
+                 default_value: str,
+                 enum_values: Sequence[str],
+                 need_restart: str,
+                 param_name: str,
+                 status: int,
+                 tips: Sequence[str],
+                 value_type: str):
+        """
+        :param str current_value: current value.
+        :param str default_value: default value.
+        :param Sequence[str] enum_values: enum value.
+        :param str need_restart: if need restart.
+        :param str param_name: name of parameter.
+        :param int status: if is running.
+        :param Sequence[str] tips: descripition of parameter.
+        :param str value_type: value type.
+        """
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "default_value", default_value)
+        pulumi.set(__self__, "enum_values", enum_values)
+        pulumi.set(__self__, "need_restart", need_restart)
+        pulumi.set(__self__, "param_name", param_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tips", tips)
+        pulumi.set(__self__, "value_type", value_type)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> str:
+        """
+        current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> str:
+        """
+        default value.
+        """
+        return pulumi.get(self, "default_value")
+
+    @property
+    @pulumi.getter(name="enumValues")
+    def enum_values(self) -> Sequence[str]:
+        """
+        enum value.
+        """
+        return pulumi.get(self, "enum_values")
+
+    @property
+    @pulumi.getter(name="needRestart")
+    def need_restart(self) -> str:
+        """
+        if need restart.
+        """
+        return pulumi.get(self, "need_restart")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        name of parameter.
+        """
+        return pulumi.get(self, "param_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        if is running.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tips(self) -> Sequence[str]:
+        """
+        descripition of parameter.
+        """
+        return pulumi.get(self, "tips")
+
+    @property
+    @pulumi.getter(name="valueType")
+    def value_type(self) -> str:
+        """
+        value type.
+        """
+        return pulumi.get(self, "value_type")
+
+
+@pulumi.output_type
+class GetInstanceParamsInstanceTextParamResult(dict):
+    def __init__(__self__, *,
+                 current_value: str,
+                 default_value: str,
+                 need_restart: str,
+                 param_name: str,
+                 status: str,
+                 text_value: str,
+                 tips: Sequence[str],
+                 value_type: str):
+        """
+        :param str current_value: current value.
+        :param str default_value: default value.
+        :param str need_restart: if need restart.
+        :param str param_name: name of parameter.
+        :param str status: if is running.
+        :param str text_value: text value.
+        :param Sequence[str] tips: descripition of parameter.
+        :param str value_type: value type.
+        """
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "default_value", default_value)
+        pulumi.set(__self__, "need_restart", need_restart)
+        pulumi.set(__self__, "param_name", param_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "text_value", text_value)
+        pulumi.set(__self__, "tips", tips)
+        pulumi.set(__self__, "value_type", value_type)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> str:
+        """
+        current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> str:
+        """
+        default value.
+        """
+        return pulumi.get(self, "default_value")
+
+    @property
+    @pulumi.getter(name="needRestart")
+    def need_restart(self) -> str:
+        """
+        if need restart.
+        """
+        return pulumi.get(self, "need_restart")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        name of parameter.
+        """
+        return pulumi.get(self, "param_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        if is running.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="textValue")
+    def text_value(self) -> str:
+        """
+        text value.
+        """
+        return pulumi.get(self, "text_value")
+
+    @property
+    @pulumi.getter
+    def tips(self) -> Sequence[str]:
+        """
+        descripition of parameter.
+        """
+        return pulumi.get(self, "tips")
+
+    @property
+    @pulumi.getter(name="valueType")
+    def value_type(self) -> str:
+        """
+        value type.
+        """
+        return pulumi.get(self, "value_type")
 
 
 @pulumi.output_type

@@ -69,7 +69,7 @@ class SetArgs:
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
@@ -435,7 +435,7 @@ class SetArgs:
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_type")
 
@@ -549,7 +549,7 @@ class _SetState:
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
@@ -987,7 +987,7 @@ class _SetState:
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_type")
 
@@ -1096,7 +1096,7 @@ class Set(pulumi.CustomResource):
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
@@ -1286,7 +1286,7 @@ class Set(pulumi.CustomResource):
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
@@ -1575,7 +1575,7 @@ class Set(pulumi.CustomResource):
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> pulumi.Output[Optional[str]]:
         """
-        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_type")
 

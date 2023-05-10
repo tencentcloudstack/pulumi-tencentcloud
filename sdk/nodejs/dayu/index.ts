@@ -8,6 +8,7 @@ import * as utilities from "../utilities";
 export * from "./ccHttpPolicy";
 export * from "./ccHttpsPolicy";
 export * from "./ccPolicyV2";
+export * from "./ddosIpAttachmentV2";
 export * from "./ddosPolicy";
 export * from "./ddosPolicyAttachment";
 export * from "./ddosPolicyCase";
@@ -32,6 +33,7 @@ export * from "./l7ruleV2";
 import { CcHttpPolicy } from "./ccHttpPolicy";
 import { CcHttpsPolicy } from "./ccHttpsPolicy";
 import { CcPolicyV2 } from "./ccPolicyV2";
+import { DdosIpAttachmentV2 } from "./ddosIpAttachmentV2";
 import { DdosPolicy } from "./ddosPolicy";
 import { DdosPolicyAttachment } from "./ddosPolicyAttachment";
 import { DdosPolicyCase } from "./ddosPolicyCase";
@@ -52,6 +54,8 @@ const _module = {
                 return new CcHttpsPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Dayu/ccPolicyV2:CcPolicyV2":
                 return new CcPolicyV2(name, <any>undefined, { urn })
+            case "tencentcloud:Dayu/ddosIpAttachmentV2:DdosIpAttachmentV2":
+                return new DdosIpAttachmentV2(name, <any>undefined, { urn })
             case "tencentcloud:Dayu/ddosPolicy:DdosPolicy":
                 return new DdosPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment":
@@ -78,6 +82,7 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Dayu/ccHttpPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dayu/ccHttpsPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dayu/ccPolicyV2", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dayu/ddosIpAttachmentV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dayu/ddosPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dayu/ddosPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dayu/ddosPolicyCase", _module)

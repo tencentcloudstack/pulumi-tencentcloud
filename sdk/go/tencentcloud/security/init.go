@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &GroupLiteRule{}
 	case "tencentcloud:Security/groupRule:GroupRule":
 		r = &GroupRule{}
+	case "tencentcloud:Security/groupRuleSet:GroupRuleSet":
+		r = &GroupRuleSet{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -53,6 +55,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Security/groupRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Security/groupRuleSet",
 		&module{version},
 	)
 }

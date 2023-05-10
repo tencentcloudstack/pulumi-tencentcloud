@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
     public sealed class NodePoolAutoScalingConfigDataDiskArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Indicates whether the disk remove after instance terminated.
+        /// Indicates whether the disk remove after instance terminated. Default is `false`.
         /// </summary>
         [Input("deleteWithInstance")]
         public Input<bool>? DeleteWithInstance { get; set; }
@@ -32,10 +32,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string>? DiskType { get; set; }
 
         /// <summary>
+        /// Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
+        /// </summary>
+        [Input("encrypt")]
+        public Input<bool>? Encrypt { get; set; }
+
+        /// <summary>
         /// Data disk snapshot ID.
         /// </summary>
         [Input("snapshotId")]
         public Input<string>? SnapshotId { get; set; }
+
+        /// <summary>
+        /// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `data_size` &gt; 460GB.
+        /// </summary>
+        [Input("throughputPerformance")]
+        public Input<int>? ThroughputPerformance { get; set; }
 
         public NodePoolAutoScalingConfigDataDiskArgs()
         {

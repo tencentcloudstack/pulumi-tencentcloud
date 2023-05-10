@@ -158,6 +158,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<ImmutableArray<string>> ExtraArgs { get; private set; } = null!;
 
         /// <summary>
+        /// GPU driver parameters.
+        /// </summary>
+        [Output("gpuArgs")]
+        public Output<Outputs.ScaleWorkerGpuArgs?> GpuArgs { get; private set; } = null!;
+
+        /// <summary>
         /// Labels of kubernetes scale worker created nodes.
         /// </summary>
         [Output("labels")]
@@ -276,6 +282,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
             set => _extraArgs = value;
         }
 
+        /// <summary>
+        /// GPU driver parameters.
+        /// </summary>
+        [Input("gpuArgs")]
+        public Input<Inputs.ScaleWorkerGpuArgsArgs>? GpuArgs { get; set; }
+
         [Input("labels")]
         private InputMap<object>? _labels;
 
@@ -354,6 +366,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
             get => _extraArgs ?? (_extraArgs = new InputList<string>());
             set => _extraArgs = value;
         }
+
+        /// <summary>
+        /// GPU driver parameters.
+        /// </summary>
+        [Input("gpuArgs")]
+        public Input<Inputs.ScaleWorkerGpuArgsGetArgs>? GpuArgs { get; set; }
 
         [Input("labels")]
         private InputMap<object>? _labels;

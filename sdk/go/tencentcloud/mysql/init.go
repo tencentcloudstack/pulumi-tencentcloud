@@ -23,14 +23,26 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Mysql/account:Account":
 		r = &Account{}
+	case "tencentcloud:Mysql/auditLogFile:AuditLogFile":
+		r = &AuditLogFile{}
 	case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
 		r = &BackupPolicy{}
+	case "tencentcloud:Mysql/deployGroup:DeployGroup":
+		r = &DeployGroup{}
 	case "tencentcloud:Mysql/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Mysql/localBinlogConfig:LocalBinlogConfig":
+		r = &LocalBinlogConfig{}
+	case "tencentcloud:Mysql/paramTemplate:ParamTemplate":
+		r = &ParamTemplate{}
 	case "tencentcloud:Mysql/privilege:Privilege":
 		r = &Privilege{}
 	case "tencentcloud:Mysql/readonlyInstance:ReadonlyInstance":
 		r = &ReadonlyInstance{}
+	case "tencentcloud:Mysql/securityGroupsAttachment:SecurityGroupsAttachment":
+		r = &SecurityGroupsAttachment{}
+	case "tencentcloud:Mysql/timeWindow:TimeWindow":
+		r = &TimeWindow{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -51,12 +63,32 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mysql/auditLogFile",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mysql/backupPolicy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mysql/deployGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mysql/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/localBinlogConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/paramTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -67,6 +99,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/readonlyInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/securityGroupsAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/timeWindow",
 		&module{version},
 	)
 }

@@ -19,44 +19,41 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cls.NewConfigExtra(ctx, "extra", &Cls.ConfigExtraArgs{
-//				TopicId:    pulumi.Any(tencentcloud_cls_topic.Topic.Id),
-//				Type:       pulumi.String("container_file"),
-//				LogType:    pulumi.String("json_log"),
-//				ConfigFlag: pulumi.String("label_k8s"),
-//				LogsetId:   pulumi.Any(tencentcloud_cls_logset.Logset.Id),
-//				LogsetName: pulumi.Any(tencentcloud_cls_logset.Logset.Logset_name),
-//				TopicName:  pulumi.Any(tencentcloud_cls_topic.Topic.Topic_name),
-//				ContainerFile: &cls.ConfigExtraContainerFileArgs{
-//					Container:   pulumi.String("nginx"),
-//					FilePattern: pulumi.String("log"),
-//					LogPath:     pulumi.String("/nginx"),
-//					Namespace:   pulumi.String("default"),
-//					Workload: &cls.ConfigExtraContainerFileWorkloadArgs{
-//						Container: pulumi.String("nginx"),
-//						Kind:      pulumi.String("deployment"),
-//						Name:      pulumi.String("nginx"),
-//						Namespace: pulumi.String("default"),
-//					},
-//				},
-//				GroupId: pulumi.String("27752a9b-9918-440a-8ee7-9c84a14a47ed"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewConfigExtra(ctx, "extra", &Cls.ConfigExtraArgs{
+// 			TopicId:    pulumi.Any(tencentcloud_cls_topic.Topic.Id),
+// 			Type:       pulumi.String("container_file"),
+// 			LogType:    pulumi.String("json_log"),
+// 			ConfigFlag: pulumi.String("label_k8s"),
+// 			LogsetId:   pulumi.Any(tencentcloud_cls_logset.Logset.Id),
+// 			LogsetName: pulumi.Any(tencentcloud_cls_logset.Logset.Logset_name),
+// 			TopicName:  pulumi.Any(tencentcloud_cls_topic.Topic.Topic_name),
+// 			ContainerFile: &cls.ConfigExtraContainerFileArgs{
+// 				Container:   pulumi.String("nginx"),
+// 				FilePattern: pulumi.String("log"),
+// 				LogPath:     pulumi.String("/nginx"),
+// 				Namespace:   pulumi.String("default"),
+// 				Workload: &cls.ConfigExtraContainerFileWorkloadArgs{
+// 					Container: pulumi.String("nginx"),
+// 					Kind:      pulumi.String("deployment"),
+// 					Name:      pulumi.String("nginx"),
+// 					Namespace: pulumi.String("default"),
+// 				},
+// 			},
+// 			GroupId: pulumi.String("27752a9b-9918-440a-8ee7-9c84a14a47ed"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type ConfigExtra struct {
 	pulumi.CustomResourceState
@@ -316,7 +313,7 @@ func (i *ConfigExtra) ToConfigExtraOutputWithContext(ctx context.Context) Config
 // ConfigExtraArrayInput is an input type that accepts ConfigExtraArray and ConfigExtraArrayOutput values.
 // You can construct a concrete instance of `ConfigExtraArrayInput` via:
 //
-//	ConfigExtraArray{ ConfigExtraArgs{...} }
+//          ConfigExtraArray{ ConfigExtraArgs{...} }
 type ConfigExtraArrayInput interface {
 	pulumi.Input
 
@@ -341,7 +338,7 @@ func (i ConfigExtraArray) ToConfigExtraArrayOutputWithContext(ctx context.Contex
 // ConfigExtraMapInput is an input type that accepts ConfigExtraMap and ConfigExtraMapOutput values.
 // You can construct a concrete instance of `ConfigExtraMapInput` via:
 //
-//	ConfigExtraMap{ "key": ConfigExtraArgs{...} }
+//          ConfigExtraMap{ "key": ConfigExtraArgs{...} }
 type ConfigExtraMapInput interface {
 	pulumi.Input
 

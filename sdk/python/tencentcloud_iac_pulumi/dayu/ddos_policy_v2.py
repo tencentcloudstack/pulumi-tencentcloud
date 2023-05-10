@@ -32,7 +32,7 @@ class DdosPolicyV2Args:
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2AclArgs']]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2BlackWhiteIpArgs']]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input['DdosPolicyV2DdosConnectLimitArgs'] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2DdosGeoIpBlockConfigArgs']]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
@@ -106,7 +106,7 @@ class DdosPolicyV2Args:
     @pulumi.getter
     def business(self) -> Optional[pulumi.Input[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -230,7 +230,7 @@ class _DdosPolicyV2State:
         Input properties used for looking up and filtering DdosPolicyV2 resources.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2AclArgs']]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2BlackWhiteIpArgs']]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input['DdosPolicyV2DdosConnectLimitArgs'] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2DdosGeoIpBlockConfigArgs']]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
@@ -294,7 +294,7 @@ class _DdosPolicyV2State:
     @pulumi.getter
     def business(self) -> Optional[pulumi.Input[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -515,7 +515,7 @@ class DdosPolicyV2(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2AclArgs']]]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2BlackWhiteIpArgs']]]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input[pulumi.InputType['DdosPolicyV2DdosConnectLimitArgs']] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2DdosGeoIpBlockConfigArgs']]]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
@@ -700,7 +700,7 @@ class DdosPolicyV2(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2AclArgs']]]] acls: Port ACL policy for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2BlackWhiteIpArgs']]]] black_white_ips: DDoS-protected IP blacklist and whitelist.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] ddos_ai: AI protection switch, take the value [`on`, `off`].
         :param pulumi.Input[pulumi.InputType['DdosPolicyV2DdosConnectLimitArgs']] ddos_connect_limit: DDoS connection suppression options.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2DdosGeoIpBlockConfigArgs']]]] ddos_geo_ip_block_configs: DDoS-protected area block configuration.
@@ -749,7 +749,7 @@ class DdosPolicyV2(pulumi.CustomResource):
     @pulumi.getter
     def business(self) -> pulumi.Output[Optional[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 

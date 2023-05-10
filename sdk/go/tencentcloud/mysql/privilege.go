@@ -19,102 +19,99 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
-//				MemSize:          pulumi.Int(1000),
-//				VolumeSize:       pulumi.Int(25),
-//				InstanceName:     pulumi.String("guagua"),
-//				EngineVersion:    pulumi.String("5.7"),
-//				RootPassword:     pulumi.String("0153Y474"),
-//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-//				InternetService:  pulumi.Int(1),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			mysqlAccount2, err := Mysql.NewAccount(ctx, "mysqlAccount2", &Mysql.AccountArgs{
-//				MysqlId:     _default.ID(),
-//				Password:    pulumi.String("test1234"),
-//				Description: pulumi.String("test from terraform"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Mysql.NewPrivilege(ctx, "tttt", &Mysql.PrivilegeArgs{
-//				MysqlId:     _default.ID(),
-//				AccountName: mysqlAccount2.Name,
-//				Globals: pulumi.StringArray{
-//					pulumi.String("TRIGGER"),
-//				},
-//				Databases: mysql.PrivilegeDatabaseArray{
-//					&mysql.PrivilegeDatabaseArgs{
-//						Privileges: pulumi.StringArray{
-//							pulumi.String("SELECT"),
-//							pulumi.String("INSERT"),
-//							pulumi.String("UPDATE"),
-//							pulumi.String("DELETE"),
-//							pulumi.String("CREATE"),
-//						},
-//						DatabaseName: pulumi.String("sys"),
-//					},
-//					&mysql.PrivilegeDatabaseArgs{
-//						Privileges: pulumi.StringArray{
-//							pulumi.String("SELECT"),
-//						},
-//						DatabaseName: pulumi.String("performance_schema"),
-//					},
-//				},
-//				Tables: mysql.PrivilegeTableArray{
-//					&mysql.PrivilegeTableArgs{
-//						Privileges: pulumi.StringArray{
-//							pulumi.String("SELECT"),
-//							pulumi.String("INSERT"),
-//							pulumi.String("UPDATE"),
-//							pulumi.String("DELETE"),
-//							pulumi.String("CREATE"),
-//						},
-//						DatabaseName: pulumi.String("mysql"),
-//						TableName:    pulumi.String("slow_log"),
-//					},
-//					&mysql.PrivilegeTableArgs{
-//						Privileges: pulumi.StringArray{
-//							pulumi.String("SELECT"),
-//							pulumi.String("INSERT"),
-//							pulumi.String("UPDATE"),
-//						},
-//						DatabaseName: pulumi.String("mysql"),
-//						TableName:    pulumi.String("user"),
-//					},
-//				},
-//				Columns: mysql.PrivilegeColumnArray{
-//					&mysql.PrivilegeColumnArgs{
-//						Privileges: pulumi.StringArray{
-//							pulumi.String("SELECT"),
-//							pulumi.String("INSERT"),
-//							pulumi.String("UPDATE"),
-//							pulumi.String("REFERENCES"),
-//						},
-//						DatabaseName: pulumi.String("mysql"),
-//						TableName:    pulumi.String("user"),
-//						ColumnName:   pulumi.String("host"),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
+// 			MemSize:          pulumi.Int(1000),
+// 			VolumeSize:       pulumi.Int(25),
+// 			InstanceName:     pulumi.String("guagua"),
+// 			EngineVersion:    pulumi.String("5.7"),
+// 			RootPassword:     pulumi.String("0153Y474"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			InternetService:  pulumi.Int(1),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		mysqlAccount2, err := Mysql.NewAccount(ctx, "mysqlAccount2", &Mysql.AccountArgs{
+// 			MysqlId:     _default.ID(),
+// 			Password:    pulumi.String("test1234"),
+// 			Description: pulumi.String("test from terraform"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Mysql.NewPrivilege(ctx, "tttt", &Mysql.PrivilegeArgs{
+// 			MysqlId:     _default.ID(),
+// 			AccountName: mysqlAccount2.Name,
+// 			Globals: pulumi.StringArray{
+// 				pulumi.String("TRIGGER"),
+// 			},
+// 			Databases: mysql.PrivilegeDatabaseArray{
+// 				&mysql.PrivilegeDatabaseArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 						pulumi.String("DELETE"),
+// 						pulumi.String("CREATE"),
+// 					},
+// 					DatabaseName: pulumi.String("sys"),
+// 				},
+// 				&mysql.PrivilegeDatabaseArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 					},
+// 					DatabaseName: pulumi.String("performance_schema"),
+// 				},
+// 			},
+// 			Tables: mysql.PrivilegeTableArray{
+// 				&mysql.PrivilegeTableArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 						pulumi.String("DELETE"),
+// 						pulumi.String("CREATE"),
+// 					},
+// 					DatabaseName: pulumi.String("mysql"),
+// 					TableName:    pulumi.String("slow_log"),
+// 				},
+// 				&mysql.PrivilegeTableArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 					},
+// 					DatabaseName: pulumi.String("mysql"),
+// 					TableName:    pulumi.String("user"),
+// 				},
+// 			},
+// 			Columns: mysql.PrivilegeColumnArray{
+// 				&mysql.PrivilegeColumnArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 						pulumi.String("REFERENCES"),
+// 					},
+// 					DatabaseName: pulumi.String("mysql"),
+// 					TableName:    pulumi.String("user"),
+// 					ColumnName:   pulumi.String("host"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type Privilege struct {
 	pulumi.CustomResourceState
@@ -272,7 +269,7 @@ func (i *Privilege) ToPrivilegeOutputWithContext(ctx context.Context) PrivilegeO
 // PrivilegeArrayInput is an input type that accepts PrivilegeArray and PrivilegeArrayOutput values.
 // You can construct a concrete instance of `PrivilegeArrayInput` via:
 //
-//	PrivilegeArray{ PrivilegeArgs{...} }
+//          PrivilegeArray{ PrivilegeArgs{...} }
 type PrivilegeArrayInput interface {
 	pulumi.Input
 
@@ -297,7 +294,7 @@ func (i PrivilegeArray) ToPrivilegeArrayOutputWithContext(ctx context.Context) P
 // PrivilegeMapInput is an input type that accepts PrivilegeMap and PrivilegeMapOutput values.
 // You can construct a concrete instance of `PrivilegeMapInput` via:
 //
-//	PrivilegeMap{ "key": PrivilegeArgs{...} }
+//          PrivilegeMap{ "key": PrivilegeArgs{...} }
 type PrivilegeMapInput interface {
 	pulumi.Input
 

@@ -19,30 +19,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Gaap.NewProxy(ctx, "foo", &Gaap.ProxyArgs{
-//				AccessRegion:     pulumi.String("SouthChina"),
-//				Bandwidth:        pulumi.Int(10),
-//				Concurrent:       pulumi.Int(2),
-//				RealserverRegion: pulumi.String("NorthChina"),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("test"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Gaap.NewProxy(ctx, "foo", &Gaap.ProxyArgs{
+// 			AccessRegion:     pulumi.String("SouthChina"),
+// 			Bandwidth:        pulumi.Int(10),
+// 			Concurrent:       pulumi.Int(2),
+// 			RealserverRegion: pulumi.String("NorthChina"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -50,18 +47,16 @@ import (
 // GAAP proxy can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
-//
+//  $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
 // ```
 type Proxy struct {
 	pulumi.CustomResourceState
 
 	// Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
 	AccessRegion pulumi.StringOutput `pulumi:"accessRegion"`
-	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
 	Bandwidth pulumi.IntOutput `pulumi:"bandwidth"`
-	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
 	Concurrent pulumi.IntOutput `pulumi:"concurrent"`
 	// Creation time of the GAAP proxy.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -85,7 +80,7 @@ type Proxy struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Supported protocols of the GAAP proxy.
 	SupportProtocols pulumi.StringArrayOutput `pulumi:"supportProtocols"`
-	// Tags of the GAAP proxy.
+	// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
@@ -133,9 +128,9 @@ func GetProxy(ctx *pulumi.Context,
 type proxyState struct {
 	// Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
 	AccessRegion *string `pulumi:"accessRegion"`
-	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
 	Bandwidth *int `pulumi:"bandwidth"`
-	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
 	Concurrent *int `pulumi:"concurrent"`
 	// Creation time of the GAAP proxy.
 	CreateTime *string `pulumi:"createTime"`
@@ -159,16 +154,16 @@ type proxyState struct {
 	Status *string `pulumi:"status"`
 	// Supported protocols of the GAAP proxy.
 	SupportProtocols []string `pulumi:"supportProtocols"`
-	// Tags of the GAAP proxy.
+	// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
 	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type ProxyState struct {
 	// Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
 	AccessRegion pulumi.StringPtrInput
-	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
 	Bandwidth pulumi.IntPtrInput
-	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
 	Concurrent pulumi.IntPtrInput
 	// Creation time of the GAAP proxy.
 	CreateTime pulumi.StringPtrInput
@@ -192,7 +187,7 @@ type ProxyState struct {
 	Status pulumi.StringPtrInput
 	// Supported protocols of the GAAP proxy.
 	SupportProtocols pulumi.StringArrayInput
-	// Tags of the GAAP proxy.
+	// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
 	Tags pulumi.MapInput
 }
 
@@ -203,9 +198,9 @@ func (ProxyState) ElementType() reflect.Type {
 type proxyArgs struct {
 	// Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
 	AccessRegion string `pulumi:"accessRegion"`
-	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
 	Bandwidth int `pulumi:"bandwidth"`
-	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
 	Concurrent int `pulumi:"concurrent"`
 	// Indicates whether GAAP proxy is enabled, default value is `true`.
 	Enable *bool `pulumi:"enable"`
@@ -215,7 +210,7 @@ type proxyArgs struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
 	RealserverRegion string `pulumi:"realserverRegion"`
-	// Tags of the GAAP proxy.
+	// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
 	Tags map[string]interface{} `pulumi:"tags"`
 }
 
@@ -223,9 +218,9 @@ type proxyArgs struct {
 type ProxyArgs struct {
 	// Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
 	AccessRegion pulumi.StringInput
-	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+	// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
 	Bandwidth pulumi.IntInput
-	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+	// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
 	Concurrent pulumi.IntInput
 	// Indicates whether GAAP proxy is enabled, default value is `true`.
 	Enable pulumi.BoolPtrInput
@@ -235,7 +230,7 @@ type ProxyArgs struct {
 	ProjectId pulumi.IntPtrInput
 	// Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
 	RealserverRegion pulumi.StringInput
-	// Tags of the GAAP proxy.
+	// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
 	Tags pulumi.MapInput
 }
 
@@ -265,7 +260,7 @@ func (i *Proxy) ToProxyOutputWithContext(ctx context.Context) ProxyOutput {
 // ProxyArrayInput is an input type that accepts ProxyArray and ProxyArrayOutput values.
 // You can construct a concrete instance of `ProxyArrayInput` via:
 //
-//	ProxyArray{ ProxyArgs{...} }
+//          ProxyArray{ ProxyArgs{...} }
 type ProxyArrayInput interface {
 	pulumi.Input
 
@@ -290,7 +285,7 @@ func (i ProxyArray) ToProxyArrayOutputWithContext(ctx context.Context) ProxyArra
 // ProxyMapInput is an input type that accepts ProxyMap and ProxyMapOutput values.
 // You can construct a concrete instance of `ProxyMapInput` via:
 //
-//	ProxyMap{ "key": ProxyArgs{...} }
+//          ProxyMap{ "key": ProxyArgs{...} }
 type ProxyMapInput interface {
 	pulumi.Input
 
@@ -331,12 +326,12 @@ func (o ProxyOutput) AccessRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Proxy) pulumi.StringOutput { return v.AccessRegion }).(pulumi.StringOutput)
 }
 
-// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
 func (o ProxyOutput) Bandwidth() pulumi.IntOutput {
 	return o.ApplyT(func(v *Proxy) pulumi.IntOutput { return v.Bandwidth }).(pulumi.IntOutput)
 }
 
-// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
 func (o ProxyOutput) Concurrent() pulumi.IntOutput {
 	return o.ApplyT(func(v *Proxy) pulumi.IntOutput { return v.Concurrent }).(pulumi.IntOutput)
 }
@@ -396,7 +391,7 @@ func (o ProxyOutput) SupportProtocols() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Proxy) pulumi.StringArrayOutput { return v.SupportProtocols }).(pulumi.StringArrayOutput)
 }
 
-// Tags of the GAAP proxy.
+// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
 func (o ProxyOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Proxy) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }

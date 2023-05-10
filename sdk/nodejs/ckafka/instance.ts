@@ -8,7 +8,7 @@ import * as utilities from "../utilities";
 /**
  * Use this resource to create ckafka instance.
  *
- * > **NOTE:** It only support create profession ckafka instance.
+ * > **NOTE:** It only support create prepaid ckafka instance.
  *
  * ## Example Usage
  *
@@ -39,6 +39,7 @@ import * as utilities from "../utilities";
  *     period: 1,
  *     publicNetwork: 3,
  *     renewFlag: 0,
+ *     specificationsType: "profession",
  *     subnetId: "subnet-4vwihrzk",
  *     vpcId: "vpc-82p1t1nv",
  *     zoneId: 100006,
@@ -110,6 +111,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly instanceName!: pulumi.Output<string>;
     /**
+     * Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+     */
+    public readonly instanceType!: pulumi.Output<number>;
+    /**
      * Kafka version (0.10.2/1.1.1/2.4.1).
      */
     public readonly kafkaVersion!: pulumi.Output<string>;
@@ -130,7 +135,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
-     * Timestamp.
+     * Bandwidth of the public network.
      */
     public readonly publicNetwork!: pulumi.Output<number>;
     /**
@@ -142,21 +147,31 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly renewFlag!: pulumi.Output<number>;
     /**
-     * Subnet id.
+     * Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
      */
-    public readonly subnetId!: pulumi.Output<string>;
+    public readonly specificationsType!: pulumi.Output<string | undefined>;
     /**
-     * Partition size, the professional version does not need tag.
+     * Subnet id, it will be basic network if not set.
      */
-    public readonly tags!: pulumi.Output<outputs.Ckafka.InstanceTag[] | undefined>;
+    public readonly subnetId!: pulumi.Output<string | undefined>;
+    /**
+     * Tag set of instance.
+     */
+    public readonly tagSet!: pulumi.Output<{[key: string]: any}>;
+    /**
+     * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+     *
+     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+     */
+    public readonly tags!: pulumi.Output<outputs.Ckafka.InstanceTag[]>;
     /**
      * Vip of instance.
      */
     public /*out*/ readonly vip!: pulumi.Output<string>;
     /**
-     * Vpc id.
+     * Vpc id, it will be basic network if not set.
      */
-    public readonly vpcId!: pulumi.Output<string>;
+    public readonly vpcId!: pulumi.Output<string | undefined>;
     /**
      * Type of instance.
      */
@@ -189,6 +204,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["diskType"] = state ? state.diskType : undefined;
             resourceInputs["dynamicRetentionConfig"] = state ? state.dynamicRetentionConfig : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
+            resourceInputs["instanceType"] = state ? state.instanceType : undefined;
             resourceInputs["kafkaVersion"] = state ? state.kafkaVersion : undefined;
             resourceInputs["msgRetentionTime"] = state ? state.msgRetentionTime : undefined;
             resourceInputs["multiZoneFlag"] = state ? state.multiZoneFlag : undefined;
@@ -197,7 +213,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["publicNetwork"] = state ? state.publicNetwork : undefined;
             resourceInputs["rebalanceTime"] = state ? state.rebalanceTime : undefined;
             resourceInputs["renewFlag"] = state ? state.renewFlag : undefined;
+            resourceInputs["specificationsType"] = state ? state.specificationsType : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
+            resourceInputs["tagSet"] = state ? state.tagSet : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["vip"] = state ? state.vip : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
@@ -209,12 +227,6 @@ export class Instance extends pulumi.CustomResource {
             if ((!args || args.instanceName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceName'");
             }
-            if ((!args || args.subnetId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'subnetId'");
-            }
-            if ((!args || args.vpcId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'vpcId'");
-            }
             if ((!args || args.zoneId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'zoneId'");
             }
@@ -224,6 +236,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["diskType"] = args ? args.diskType : undefined;
             resourceInputs["dynamicRetentionConfig"] = args ? args.dynamicRetentionConfig : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
+            resourceInputs["instanceType"] = args ? args.instanceType : undefined;
             resourceInputs["kafkaVersion"] = args ? args.kafkaVersion : undefined;
             resourceInputs["msgRetentionTime"] = args ? args.msgRetentionTime : undefined;
             resourceInputs["multiZoneFlag"] = args ? args.multiZoneFlag : undefined;
@@ -232,7 +245,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["publicNetwork"] = args ? args.publicNetwork : undefined;
             resourceInputs["rebalanceTime"] = args ? args.rebalanceTime : undefined;
             resourceInputs["renewFlag"] = args ? args.renewFlag : undefined;
+            resourceInputs["specificationsType"] = args ? args.specificationsType : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
+            resourceInputs["tagSet"] = args ? args.tagSet : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
@@ -274,6 +289,10 @@ export interface InstanceState {
      */
     instanceName?: pulumi.Input<string>;
     /**
+     * Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+     */
+    instanceType?: pulumi.Input<number>;
+    /**
      * Kafka version (0.10.2/1.1.1/2.4.1).
      */
     kafkaVersion?: pulumi.Input<string>;
@@ -294,7 +313,7 @@ export interface InstanceState {
      */
     period?: pulumi.Input<number>;
     /**
-     * Timestamp.
+     * Bandwidth of the public network.
      */
     publicNetwork?: pulumi.Input<number>;
     /**
@@ -306,11 +325,21 @@ export interface InstanceState {
      */
     renewFlag?: pulumi.Input<number>;
     /**
-     * Subnet id.
+     * Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+     */
+    specificationsType?: pulumi.Input<string>;
+    /**
+     * Subnet id, it will be basic network if not set.
      */
     subnetId?: pulumi.Input<string>;
     /**
-     * Partition size, the professional version does not need tag.
+     * Tag set of instance.
+     */
+    tagSet?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+     *
+     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
     /**
@@ -318,7 +347,7 @@ export interface InstanceState {
      */
     vip?: pulumi.Input<string>;
     /**
-     * Vpc id.
+     * Vpc id, it will be basic network if not set.
      */
     vpcId?: pulumi.Input<string>;
     /**
@@ -364,6 +393,10 @@ export interface InstanceArgs {
      */
     instanceName: pulumi.Input<string>;
     /**
+     * Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+     */
+    instanceType?: pulumi.Input<number>;
+    /**
      * Kafka version (0.10.2/1.1.1/2.4.1).
      */
     kafkaVersion?: pulumi.Input<string>;
@@ -384,7 +417,7 @@ export interface InstanceArgs {
      */
     period?: pulumi.Input<number>;
     /**
-     * Timestamp.
+     * Bandwidth of the public network.
      */
     publicNetwork?: pulumi.Input<number>;
     /**
@@ -396,17 +429,27 @@ export interface InstanceArgs {
      */
     renewFlag?: pulumi.Input<number>;
     /**
-     * Subnet id.
+     * Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
      */
-    subnetId: pulumi.Input<string>;
+    specificationsType?: pulumi.Input<string>;
     /**
-     * Partition size, the professional version does not need tag.
+     * Subnet id, it will be basic network if not set.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * Tag set of instance.
+     */
+    tagSet?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+     *
+     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
     /**
-     * Vpc id.
+     * Vpc id, it will be basic network if not set.
      */
-    vpcId: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string>;
     /**
      * Available zone id.
      */

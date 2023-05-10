@@ -27,7 +27,7 @@ class VpcAttachmentArgs:
         :param pulumi.Input[str] vpc_id: ID of VPC.
         :param pulumi.Input[bool] enable_public_domain_dns: Whether to enable public domain dns. Default value is `false`.
         :param pulumi.Input[bool] enable_vpc_domain_dns: Whether to enable vpc domain dns. Default value is `false`.
-        :param pulumi.Input[int] region_id: ID of region. Conflict with region_name, can not be set at the same time.
+        :param pulumi.Input[int] region_id: this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         :param pulumi.Input[str] region_name: Name of region. Conflict with region_id, can not be set at the same time.
         """
         pulumi.set(__self__, "instance_id", instance_id)
@@ -37,6 +37,9 @@ class VpcAttachmentArgs:
             pulumi.set(__self__, "enable_public_domain_dns", enable_public_domain_dns)
         if enable_vpc_domain_dns is not None:
             pulumi.set(__self__, "enable_vpc_domain_dns", enable_vpc_domain_dns)
+        if region_id is not None:
+            warnings.warn("""this argument was deprecated, use `region_name` instead.""", DeprecationWarning)
+            pulumi.log.warn("""region_id is deprecated: this argument was deprecated, use `region_name` instead.""")
         if region_id is not None:
             pulumi.set(__self__, "region_id", region_id)
         if region_name is not None:
@@ -106,7 +109,7 @@ class VpcAttachmentArgs:
     @pulumi.getter(name="regionId")
     def region_id(self) -> Optional[pulumi.Input[int]]:
         """
-        ID of region. Conflict with region_name, can not be set at the same time.
+        this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         """
         return pulumi.get(self, "region_id")
 
@@ -145,7 +148,7 @@ class _VpcAttachmentState:
         :param pulumi.Input[bool] enable_public_domain_dns: Whether to enable public domain dns. Default value is `false`.
         :param pulumi.Input[bool] enable_vpc_domain_dns: Whether to enable vpc domain dns. Default value is `false`.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
-        :param pulumi.Input[int] region_id: ID of region. Conflict with region_name, can not be set at the same time.
+        :param pulumi.Input[int] region_id: this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         :param pulumi.Input[str] region_name: Name of region. Conflict with region_id, can not be set at the same time.
         :param pulumi.Input[str] status: Status of the internal access.
         :param pulumi.Input[str] subnet_id: ID of subnet.
@@ -159,6 +162,9 @@ class _VpcAttachmentState:
             pulumi.set(__self__, "enable_vpc_domain_dns", enable_vpc_domain_dns)
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
+        if region_id is not None:
+            warnings.warn("""this argument was deprecated, use `region_name` instead.""", DeprecationWarning)
+            pulumi.log.warn("""region_id is deprecated: this argument was deprecated, use `region_name` instead.""")
         if region_id is not None:
             pulumi.set(__self__, "region_id", region_id)
         if region_name is not None:
@@ -222,7 +228,7 @@ class _VpcAttachmentState:
     @pulumi.getter(name="regionId")
     def region_id(self) -> Optional[pulumi.Input[int]]:
         """
-        ID of region. Conflict with region_name, can not be set at the same time.
+        this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         """
         return pulumi.get(self, "region_id")
 
@@ -320,7 +326,7 @@ class VpcAttachment(pulumi.CustomResource):
         :param pulumi.Input[bool] enable_public_domain_dns: Whether to enable public domain dns. Default value is `false`.
         :param pulumi.Input[bool] enable_vpc_domain_dns: Whether to enable vpc domain dns. Default value is `false`.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
-        :param pulumi.Input[int] region_id: ID of region. Conflict with region_name, can not be set at the same time.
+        :param pulumi.Input[int] region_id: this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         :param pulumi.Input[str] region_name: Name of region. Conflict with region_id, can not be set at the same time.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[str] vpc_id: ID of VPC.
@@ -395,6 +401,9 @@ class VpcAttachment(pulumi.CustomResource):
             if instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_id'")
             __props__.__dict__["instance_id"] = instance_id
+            if region_id is not None and not opts.urn:
+                warnings.warn("""this argument was deprecated, use `region_name` instead.""", DeprecationWarning)
+                pulumi.log.warn("""region_id is deprecated: this argument was deprecated, use `region_name` instead.""")
             __props__.__dict__["region_id"] = region_id
             __props__.__dict__["region_name"] = region_name
             if subnet_id is None and not opts.urn:
@@ -435,7 +444,7 @@ class VpcAttachment(pulumi.CustomResource):
         :param pulumi.Input[bool] enable_public_domain_dns: Whether to enable public domain dns. Default value is `false`.
         :param pulumi.Input[bool] enable_vpc_domain_dns: Whether to enable vpc domain dns. Default value is `false`.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
-        :param pulumi.Input[int] region_id: ID of region. Conflict with region_name, can not be set at the same time.
+        :param pulumi.Input[int] region_id: this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         :param pulumi.Input[str] region_name: Name of region. Conflict with region_id, can not be set at the same time.
         :param pulumi.Input[str] status: Status of the internal access.
         :param pulumi.Input[str] subnet_id: ID of subnet.
@@ -492,7 +501,7 @@ class VpcAttachment(pulumi.CustomResource):
     @pulumi.getter(name="regionId")
     def region_id(self) -> pulumi.Output[Optional[int]]:
         """
-        ID of region. Conflict with region_name, can not be set at the same time.
+        this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         """
         return pulumi.get(self, "region_id")
 

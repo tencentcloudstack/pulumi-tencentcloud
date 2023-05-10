@@ -6,6 +6,7 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./bucket";
+export * from "./bucketDomainCertificateAttachment";
 export * from "./bucketObject";
 export * from "./bucketPolicy";
 export * from "./getBucketObject";
@@ -13,6 +14,7 @@ export * from "./getBuckets";
 
 // Import resources to register:
 import { Bucket } from "./bucket";
+import { BucketDomainCertificateAttachment } from "./bucketDomainCertificateAttachment";
 import { BucketObject } from "./bucketObject";
 import { BucketPolicy } from "./bucketPolicy";
 
@@ -22,6 +24,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Cos/bucket:Bucket":
                 return new Bucket(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/bucketDomainCertificateAttachment:BucketDomainCertificateAttachment":
+                return new BucketDomainCertificateAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucketObject:BucketObject":
                 return new BucketObject(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucketPolicy:BucketPolicy":
@@ -32,5 +36,6 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucket", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketDomainCertificateAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketObject", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketPolicy", _module)

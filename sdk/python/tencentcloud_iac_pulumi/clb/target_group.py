@@ -22,12 +22,15 @@ class TargetGroupArgs:
         """
         The set of arguments for constructing a TargetGroup resource.
         :param pulumi.Input[int] port: The default port of target group, add server after can use it.
-        :param pulumi.Input[Sequence[pulumi.Input['TargetGroupTargetGroupInstanceArgs']]] target_group_instances: The backend server of target group bind.
+        :param pulumi.Input[Sequence[pulumi.Input['TargetGroupTargetGroupInstanceArgs']]] target_group_instances: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         :param pulumi.Input[str] target_group_name: Target group name.
         :param pulumi.Input[str] vpc_id: VPC ID, default is based on the network.
         """
         if port is not None:
             pulumi.set(__self__, "port", port)
+        if target_group_instances is not None:
+            warnings.warn("""It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.""", DeprecationWarning)
+            pulumi.log.warn("""target_group_instances is deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.""")
         if target_group_instances is not None:
             pulumi.set(__self__, "target_group_instances", target_group_instances)
         if target_group_name is not None:
@@ -51,7 +54,7 @@ class TargetGroupArgs:
     @pulumi.getter(name="targetGroupInstances")
     def target_group_instances(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TargetGroupTargetGroupInstanceArgs']]]]:
         """
-        The backend server of target group bind.
+        It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         """
         return pulumi.get(self, "target_group_instances")
 
@@ -94,12 +97,15 @@ class _TargetGroupState:
         """
         Input properties used for looking up and filtering TargetGroup resources.
         :param pulumi.Input[int] port: The default port of target group, add server after can use it.
-        :param pulumi.Input[Sequence[pulumi.Input['TargetGroupTargetGroupInstanceArgs']]] target_group_instances: The backend server of target group bind.
+        :param pulumi.Input[Sequence[pulumi.Input['TargetGroupTargetGroupInstanceArgs']]] target_group_instances: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         :param pulumi.Input[str] target_group_name: Target group name.
         :param pulumi.Input[str] vpc_id: VPC ID, default is based on the network.
         """
         if port is not None:
             pulumi.set(__self__, "port", port)
+        if target_group_instances is not None:
+            warnings.warn("""It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.""", DeprecationWarning)
+            pulumi.log.warn("""target_group_instances is deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.""")
         if target_group_instances is not None:
             pulumi.set(__self__, "target_group_instances", target_group_instances)
         if target_group_name is not None:
@@ -123,7 +129,7 @@ class _TargetGroupState:
     @pulumi.getter(name="targetGroupInstances")
     def target_group_instances(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TargetGroupTargetGroupInstanceArgs']]]]:
         """
-        The backend server of target group bind.
+        It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         """
         return pulumi.get(self, "target_group_instances")
 
@@ -180,21 +186,6 @@ class TargetGroup(pulumi.CustomResource):
             target_group_name="test")
         ```
 
-        Create target group
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        test = tencentcloud.clb.TargetGroup("test",
-            port=18082,
-            target_group_instances=[tencentcloud.clb.TargetGroupTargetGroupInstanceArgs(
-                bind_ip="10.0.0.4",
-                port=18080,
-            )],
-            target_group_name="hello1")
-        ```
-
         ## Import
 
         CLB target group can be imported using the id, e.g.
@@ -206,7 +197,7 @@ class TargetGroup(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] port: The default port of target group, add server after can use it.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TargetGroupTargetGroupInstanceArgs']]]] target_group_instances: The backend server of target group bind.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TargetGroupTargetGroupInstanceArgs']]]] target_group_instances: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         :param pulumi.Input[str] target_group_name: Target group name.
         :param pulumi.Input[str] vpc_id: VPC ID, default is based on the network.
         """
@@ -228,21 +219,6 @@ class TargetGroup(pulumi.CustomResource):
         test = tencentcloud.clb.TargetGroup("test",
             port=33,
             target_group_name="test")
-        ```
-
-        Create target group
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        test = tencentcloud.clb.TargetGroup("test",
-            port=18082,
-            target_group_instances=[tencentcloud.clb.TargetGroupTargetGroupInstanceArgs(
-                bind_ip="10.0.0.4",
-                port=18080,
-            )],
-            target_group_name="hello1")
         ```
 
         ## Import
@@ -287,6 +263,9 @@ class TargetGroup(pulumi.CustomResource):
             __props__ = TargetGroupArgs.__new__(TargetGroupArgs)
 
             __props__.__dict__["port"] = port
+            if target_group_instances is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.""", DeprecationWarning)
+                pulumi.log.warn("""target_group_instances is deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.""")
             __props__.__dict__["target_group_instances"] = target_group_instances
             __props__.__dict__["target_group_name"] = target_group_name
             __props__.__dict__["vpc_id"] = vpc_id
@@ -312,7 +291,7 @@ class TargetGroup(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] port: The default port of target group, add server after can use it.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TargetGroupTargetGroupInstanceArgs']]]] target_group_instances: The backend server of target group bind.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TargetGroupTargetGroupInstanceArgs']]]] target_group_instances: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         :param pulumi.Input[str] target_group_name: Target group name.
         :param pulumi.Input[str] vpc_id: VPC ID, default is based on the network.
         """
@@ -338,7 +317,7 @@ class TargetGroup(pulumi.CustomResource):
     @pulumi.getter(name="targetGroupInstances")
     def target_group_instances(self) -> pulumi.Output[Optional[Sequence['outputs.TargetGroupTargetGroupInstance']]]:
         """
-        The backend server of target group bind.
+        It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         """
         return pulumi.get(self, "target_group_instances")
 

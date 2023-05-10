@@ -74,10 +74,6 @@ export class PublishSubscribe extends pulumi.CustomResource {
      */
     public readonly publishInstanceId!: pulumi.Output<string>;
     /**
-     * ID of PubSub.
-     */
-    public /*out*/ readonly publishSubscribeId!: pulumi.Output<number>;
-    /**
      * The name of the Publish and Subscribe. Default is `defaultName`.
      */
     public readonly publishSubscribeName!: pulumi.Output<string | undefined>;
@@ -102,7 +98,6 @@ export class PublishSubscribe extends pulumi.CustomResource {
             resourceInputs["databaseTuples"] = state ? state.databaseTuples : undefined;
             resourceInputs["deleteSubscribeDb"] = state ? state.deleteSubscribeDb : undefined;
             resourceInputs["publishInstanceId"] = state ? state.publishInstanceId : undefined;
-            resourceInputs["publishSubscribeId"] = state ? state.publishSubscribeId : undefined;
             resourceInputs["publishSubscribeName"] = state ? state.publishSubscribeName : undefined;
             resourceInputs["subscribeInstanceId"] = state ? state.subscribeInstanceId : undefined;
         } else {
@@ -121,7 +116,6 @@ export class PublishSubscribe extends pulumi.CustomResource {
             resourceInputs["publishInstanceId"] = args ? args.publishInstanceId : undefined;
             resourceInputs["publishSubscribeName"] = args ? args.publishSubscribeName : undefined;
             resourceInputs["subscribeInstanceId"] = args ? args.subscribeInstanceId : undefined;
-            resourceInputs["publishSubscribeId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(PublishSubscribe.__pulumiType, name, resourceInputs, opts);
@@ -144,10 +138,6 @@ export interface PublishSubscribeState {
      * ID of the SQL Server instance which publish.
      */
     publishInstanceId?: pulumi.Input<string>;
-    /**
-     * ID of PubSub.
-     */
-    publishSubscribeId?: pulumi.Input<number>;
     /**
      * The name of the Publish and Subscribe. Default is `defaultName`.
      */

@@ -13,6 +13,7 @@ __all__ = [
     'ScalingConfigInstanceNameSettingsArgs',
     'ScalingGroupForwardBalancerIdArgs',
     'ScalingGroupForwardBalancerIdTargetAttributeArgs',
+    'GetInstancesFilterArgs',
 ]
 
 @pulumi.input_type
@@ -23,7 +24,7 @@ class ScalingConfigDataDiskArgs:
                  disk_type: Optional[pulumi.Input[str]] = None,
                  snapshot_id: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[bool] delete_with_instance: Indicates whether the disk remove after instance terminated.
+        :param pulumi.Input[bool] delete_with_instance: Indicates whether the disk remove after instance terminated. Default is `false`.
         :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
         :param pulumi.Input[str] disk_type: Types of disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. valid when disk_type_policy is ORIGINAL.
         :param pulumi.Input[str] snapshot_id: Data disk snapshot ID.
@@ -41,7 +42,7 @@ class ScalingConfigDataDiskArgs:
     @pulumi.getter(name="deleteWithInstance")
     def delete_with_instance(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the disk remove after instance terminated.
+        Indicates whether the disk remove after instance terminated. Default is `false`.
         """
         return pulumi.get(self, "delete_with_instance")
 
@@ -227,5 +228,42 @@ class ScalingGroupForwardBalancerIdTargetAttributeArgs:
     @weight.setter
     def weight(self, value: pulumi.Input[int]):
         pulumi.set(self, "weight", value)
+
+
+@pulumi.input_type
+class GetInstancesFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+        :param Sequence[str] values: Value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Value of the field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

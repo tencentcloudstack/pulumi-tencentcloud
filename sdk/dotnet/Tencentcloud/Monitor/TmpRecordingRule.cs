@@ -25,7 +25,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///     {
     ///         var recordingRule = new Tencentcloud.Monitor.TmpRecordingRule("recordingRule", new Tencentcloud.Monitor.TmpRecordingRuleArgs
     ///         {
-    ///             Group = "LS0tDQpuYW1lOiBleGFtcGxlDQpydWxlczoNCiAgLSByZWNvcmQ6IGpvYjpodHRwX2lucHJvZ3Jlc3NfcmVxdWVzdHM6c3VtDQogICAgZXhwcjogc3VtIGJ5IChqb2IpIChodHRwX2lucHJvZ3Jlc3NfcmVxdWVzdHMp",
+    ///             Group = @"---
+    /// name: example-test
+    /// rules:
+    ///   - record: job:http_inprogress_requests:sum
+    ///     expr: sum by (job) (http_inprogress_requests)
+    /// 
+    /// ",
     ///             InstanceId = "prom-c89b3b3u",
     ///             RuleState = 2,
     ///         });

@@ -21,104 +21,197 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"fmt"
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-3"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			clusterCidr := "172.16.0.0/16"
-//			if param := cfg.Get("clusterCidr"); param != "" {
-//				clusterCidr = param
-//			}
-//			defaultInstanceType := "S1.SMALL1"
-//			if param := cfg.Get("defaultInstanceType"); param != "" {
-//				defaultInstanceType = param
-//			}
-//			_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-//				ImageTypes: []string{
-//					"PUBLIC_IMAGE",
-//				},
-//				OsName: pulumi.StringRef("centos"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				IsDefault:        pulumi.BoolRef(true),
-//				AvailabilityZone: pulumi.StringRef(availabilityZone),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-//				ClusterCidr:          pulumi.String("10.31.0.0/16"),
-//				ClusterMaxPodNum:     pulumi.Int(32),
-//				ClusterName:          pulumi.String("keep"),
-//				ClusterDesc:          pulumi.String("test cluster desc"),
-//				ClusterVersion:       pulumi.String("1.20.6"),
-//				ClusterMaxServiceNum: pulumi.Int(32),
-//				WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-//					&kubernetes.ClusterWorkerConfigArgs{
-//						Count:                   pulumi.Int(1),
-//						AvailabilityZone:        pulumi.String(availabilityZone),
-//						InstanceType:            pulumi.String(defaultInstanceType),
-//						SystemDiskType:          pulumi.String("CLOUD_SSD"),
-//						SystemDiskSize:          pulumi.Int(60),
-//						InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-//						InternetMaxBandwidthOut: pulumi.Int(100),
-//						PublicIpAssigned:        pulumi.Bool(true),
-//						SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
-//						DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-//							&kubernetes.ClusterWorkerConfigDataDiskArgs{
-//								DiskType: pulumi.String("CLOUD_PREMIUM"),
-//								DiskSize: pulumi.Int(50),
-//							},
-//						},
-//						EnhancedSecurityService: pulumi.Bool(false),
-//						EnhancedMonitorService:  pulumi.Bool(false),
-//						UserData:                pulumi.String("dGVzdA=="),
-//						Password:                pulumi.String("ZZXXccvv1212"),
-//					},
-//				},
-//				ClusterDeployType: pulumi.String("MANAGED_CLUSTER"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Kubernetes.NewAuthAttachment(ctx, "testAuthAttach", &Kubernetes.AuthAttachmentArgs{
-//				ClusterId: managedCluster.ID(),
-//				JwksUri: managedCluster.ID().ApplyT(func(id string) (string, error) {
-//					return fmt.Sprintf("%v%v%v", "https://", id, ".ccs.tencent-cloud.com/openid/v1/jwks"), nil
-//				}).(pulumi.StringOutput),
-//				Issuer: managedCluster.ID().ApplyT(func(id string) (string, error) {
-//					return fmt.Sprintf("%v%v%v", "https://", id, ".ccs.tencent-cloud.com"), nil
-//				}).(pulumi.StringOutput),
-//				AutoCreateDiscoveryAnonymousAuth: pulumi.Bool(true),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		clusterCidr := "172.16.0.0/16"
+// 		if param := cfg.Get("clusterCidr"); param != "" {
+// 			clusterCidr = param
+// 		}
+// 		defaultInstanceType := "S1.SMALL1"
+// 		if param := cfg.Get("defaultInstanceType"); param != "" {
+// 			defaultInstanceType = param
+// 		}
+// 		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+// 			ImageTypes: []string{
+// 				"PUBLIC_IMAGE",
+// 			},
+// 			OsName: pulumi.StringRef("centos"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+// 			IsDefault:        pulumi.BoolRef(true),
+// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+// 			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+// 			ClusterCidr:          pulumi.String("10.31.0.0/16"),
+// 			ClusterMaxPodNum:     pulumi.Int(32),
+// 			ClusterName:          pulumi.String("keep"),
+// 			ClusterDesc:          pulumi.String("test cluster desc"),
+// 			ClusterVersion:       pulumi.String("1.20.6"),
+// 			ClusterMaxServiceNum: pulumi.Int(32),
+// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+// 				&kubernetes.ClusterWorkerConfigArgs{
+// 					Count:                   pulumi.Int(1),
+// 					AvailabilityZone:        pulumi.String(availabilityZone),
+// 					InstanceType:            pulumi.String(defaultInstanceType),
+// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+// 					SystemDiskSize:          pulumi.Int(60),
+// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+// 					InternetMaxBandwidthOut: pulumi.Int(100),
+// 					PublicIpAssigned:        pulumi.Bool(true),
+// 					SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
+// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
+// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
+// 							DiskSize: pulumi.Int(50),
+// 						},
+// 					},
+// 					EnhancedSecurityService: pulumi.Bool(false),
+// 					EnhancedMonitorService:  pulumi.Bool(false),
+// 					UserData:                pulumi.String("dGVzdA=="),
+// 					Password:                pulumi.String("ZZXXccvv1212"),
+// 				},
+// 			},
+// 			ClusterDeployType: pulumi.String("MANAGED_CLUSTER"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Kubernetes.NewAuthAttachment(ctx, "testAuthAttach", &Kubernetes.AuthAttachmentArgs{
+// 			ClusterId: managedCluster.ID(),
+// 			JwksUri: managedCluster.ID().ApplyT(func(id string) (string, error) {
+// 				return fmt.Sprintf("%v%v%v", "https://", id, ".ccs.tencent-cloud.com/openid/v1/jwks"), nil
+// 			}).(pulumi.StringOutput),
+// 			Issuer: managedCluster.ID().ApplyT(func(id string) (string, error) {
+// 				return fmt.Sprintf("%v%v%v", "https://", id, ".ccs.tencent-cloud.com"), nil
+// 			}).(pulumi.StringOutput),
+// 			AutoCreateDiscoveryAnonymousAuth: pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
+// Use the TKE default issuer and jwksUri
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		clusterCidr := "172.16.0.0/16"
+// 		if param := cfg.Get("clusterCidr"); param != "" {
+// 			clusterCidr = param
+// 		}
+// 		defaultInstanceType := "S1.SMALL1"
+// 		if param := cfg.Get("defaultInstanceType"); param != "" {
+// 			defaultInstanceType = param
+// 		}
+// 		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+// 			ImageTypes: []string{
+// 				"PUBLIC_IMAGE",
+// 			},
+// 			OsName: pulumi.StringRef("centos"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+// 			IsDefault:        pulumi.BoolRef(true),
+// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+// 			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+// 			ClusterCidr:          pulumi.String("10.31.0.0/16"),
+// 			ClusterMaxPodNum:     pulumi.Int(32),
+// 			ClusterName:          pulumi.String("keep"),
+// 			ClusterDesc:          pulumi.String("test cluster desc"),
+// 			ClusterVersion:       pulumi.String("1.20.6"),
+// 			ClusterMaxServiceNum: pulumi.Int(32),
+// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+// 				&kubernetes.ClusterWorkerConfigArgs{
+// 					Count:                   pulumi.Int(1),
+// 					AvailabilityZone:        pulumi.String(availabilityZone),
+// 					InstanceType:            pulumi.String(defaultInstanceType),
+// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+// 					SystemDiskSize:          pulumi.Int(60),
+// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+// 					InternetMaxBandwidthOut: pulumi.Int(100),
+// 					PublicIpAssigned:        pulumi.Bool(true),
+// 					SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
+// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
+// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
+// 							DiskSize: pulumi.Int(50),
+// 						},
+// 					},
+// 					EnhancedSecurityService: pulumi.Bool(false),
+// 					EnhancedMonitorService:  pulumi.Bool(false),
+// 					UserData:                pulumi.String("dGVzdA=="),
+// 					Password:                pulumi.String("ZZXXccvv1212"),
+// 				},
+// 			},
+// 			ClusterDeployType: pulumi.String("MANAGED_CLUSTER"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Kubernetes.NewAuthAttachment(ctx, "testUseTkeDefaultAuthAttach", &Kubernetes.AuthAttachmentArgs{
+// 			ClusterId:                        managedCluster.ID(),
+// 			AutoCreateDiscoveryAnonymousAuth: pulumi.Bool(true),
+// 			UseTkeDefault:                    pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type AuthAttachment struct {
 	pulumi.CustomResourceState
@@ -127,10 +220,16 @@ type AuthAttachment struct {
 	AutoCreateDiscoveryAnonymousAuth pulumi.BoolPtrOutput `pulumi:"autoCreateDiscoveryAnonymousAuth"`
 	// ID of clusters.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
-	// Specify service-account-issuer.
-	Issuer pulumi.StringOutput `pulumi:"issuer"`
-	// Specify service-account-jwks-uri.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
+	Issuer pulumi.StringPtrOutput `pulumi:"issuer"`
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
 	JwksUri pulumi.StringPtrOutput `pulumi:"jwksUri"`
+	// The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+	TkeDefaultIssuer pulumi.StringOutput `pulumi:"tkeDefaultIssuer"`
+	// The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+	TkeDefaultJwksUri pulumi.StringOutput `pulumi:"tkeDefaultJwksUri"`
+	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+	UseTkeDefault pulumi.BoolPtrOutput `pulumi:"useTkeDefault"`
 }
 
 // NewAuthAttachment registers a new resource with the given unique name, arguments, and options.
@@ -142,9 +241,6 @@ func NewAuthAttachment(ctx *pulumi.Context,
 
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
-	}
-	if args.Issuer == nil {
-		return nil, errors.New("invalid value for required argument 'Issuer'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource AuthAttachment
@@ -173,10 +269,16 @@ type authAttachmentState struct {
 	AutoCreateDiscoveryAnonymousAuth *bool `pulumi:"autoCreateDiscoveryAnonymousAuth"`
 	// ID of clusters.
 	ClusterId *string `pulumi:"clusterId"`
-	// Specify service-account-issuer.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
 	Issuer *string `pulumi:"issuer"`
-	// Specify service-account-jwks-uri.
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
 	JwksUri *string `pulumi:"jwksUri"`
+	// The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+	TkeDefaultIssuer *string `pulumi:"tkeDefaultIssuer"`
+	// The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+	TkeDefaultJwksUri *string `pulumi:"tkeDefaultJwksUri"`
+	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+	UseTkeDefault *bool `pulumi:"useTkeDefault"`
 }
 
 type AuthAttachmentState struct {
@@ -184,10 +286,16 @@ type AuthAttachmentState struct {
 	AutoCreateDiscoveryAnonymousAuth pulumi.BoolPtrInput
 	// ID of clusters.
 	ClusterId pulumi.StringPtrInput
-	// Specify service-account-issuer.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
 	Issuer pulumi.StringPtrInput
-	// Specify service-account-jwks-uri.
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
 	JwksUri pulumi.StringPtrInput
+	// The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+	TkeDefaultIssuer pulumi.StringPtrInput
+	// The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+	TkeDefaultJwksUri pulumi.StringPtrInput
+	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+	UseTkeDefault pulumi.BoolPtrInput
 }
 
 func (AuthAttachmentState) ElementType() reflect.Type {
@@ -199,10 +307,12 @@ type authAttachmentArgs struct {
 	AutoCreateDiscoveryAnonymousAuth *bool `pulumi:"autoCreateDiscoveryAnonymousAuth"`
 	// ID of clusters.
 	ClusterId string `pulumi:"clusterId"`
-	// Specify service-account-issuer.
-	Issuer string `pulumi:"issuer"`
-	// Specify service-account-jwks-uri.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
+	Issuer *string `pulumi:"issuer"`
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
 	JwksUri *string `pulumi:"jwksUri"`
+	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+	UseTkeDefault *bool `pulumi:"useTkeDefault"`
 }
 
 // The set of arguments for constructing a AuthAttachment resource.
@@ -211,10 +321,12 @@ type AuthAttachmentArgs struct {
 	AutoCreateDiscoveryAnonymousAuth pulumi.BoolPtrInput
 	// ID of clusters.
 	ClusterId pulumi.StringInput
-	// Specify service-account-issuer.
-	Issuer pulumi.StringInput
-	// Specify service-account-jwks-uri.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
+	Issuer pulumi.StringPtrInput
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
 	JwksUri pulumi.StringPtrInput
+	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+	UseTkeDefault pulumi.BoolPtrInput
 }
 
 func (AuthAttachmentArgs) ElementType() reflect.Type {
@@ -243,7 +355,7 @@ func (i *AuthAttachment) ToAuthAttachmentOutputWithContext(ctx context.Context) 
 // AuthAttachmentArrayInput is an input type that accepts AuthAttachmentArray and AuthAttachmentArrayOutput values.
 // You can construct a concrete instance of `AuthAttachmentArrayInput` via:
 //
-//	AuthAttachmentArray{ AuthAttachmentArgs{...} }
+//          AuthAttachmentArray{ AuthAttachmentArgs{...} }
 type AuthAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -268,7 +380,7 @@ func (i AuthAttachmentArray) ToAuthAttachmentArrayOutputWithContext(ctx context.
 // AuthAttachmentMapInput is an input type that accepts AuthAttachmentMap and AuthAttachmentMapOutput values.
 // You can construct a concrete instance of `AuthAttachmentMapInput` via:
 //
-//	AuthAttachmentMap{ "key": AuthAttachmentArgs{...} }
+//          AuthAttachmentMap{ "key": AuthAttachmentArgs{...} }
 type AuthAttachmentMapInput interface {
 	pulumi.Input
 
@@ -314,14 +426,29 @@ func (o AuthAttachmentOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AuthAttachment) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-// Specify service-account-issuer.
-func (o AuthAttachmentOutput) Issuer() pulumi.StringOutput {
-	return o.ApplyT(func(v *AuthAttachment) pulumi.StringOutput { return v.Issuer }).(pulumi.StringOutput)
+// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
+func (o AuthAttachmentOutput) Issuer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AuthAttachment) pulumi.StringPtrOutput { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
-// Specify service-account-jwks-uri.
+// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
 func (o AuthAttachmentOutput) JwksUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AuthAttachment) pulumi.StringPtrOutput { return v.JwksUri }).(pulumi.StringPtrOutput)
+}
+
+// The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+func (o AuthAttachmentOutput) TkeDefaultIssuer() pulumi.StringOutput {
+	return o.ApplyT(func(v *AuthAttachment) pulumi.StringOutput { return v.TkeDefaultIssuer }).(pulumi.StringOutput)
+}
+
+// The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+func (o AuthAttachmentOutput) TkeDefaultJwksUri() pulumi.StringOutput {
+	return o.ApplyT(func(v *AuthAttachment) pulumi.StringOutput { return v.TkeDefaultJwksUri }).(pulumi.StringOutput)
+}
+
+// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+func (o AuthAttachmentOutput) UseTkeDefault() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AuthAttachment) pulumi.BoolPtrOutput { return v.UseTkeDefault }).(pulumi.BoolPtrOutput)
 }
 
 type AuthAttachmentArrayOutput struct{ *pulumi.OutputState }

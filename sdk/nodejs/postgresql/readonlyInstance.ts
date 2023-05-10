@@ -66,9 +66,13 @@ export class ReadonlyInstance extends pulumi.CustomResource {
     }
 
     /**
-     * Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+     * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
      */
     public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
+    /**
+     * Whether to use voucher, `1` for enabled.
+     */
+    public readonly autoVoucher!: pulumi.Output<number | undefined>;
     /**
      * Create time of the postgresql instance.
      */
@@ -98,6 +102,10 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly needSupportIpv6!: pulumi.Output<number | undefined>;
     /**
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     */
+    public readonly period!: pulumi.Output<number | undefined>;
+    /**
      * Project ID.
      */
     public readonly projectId!: pulumi.Output<number>;
@@ -113,6 +121,10 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * VPC subnet ID.
      */
     public readonly subnetId!: pulumi.Output<string>;
+    /**
+     * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+     */
+    public readonly voucherIds!: pulumi.Output<string[] | undefined>;
     /**
      * VPC ID.
      */
@@ -136,6 +148,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ReadonlyInstanceState | undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
+            resourceInputs["autoVoucher"] = state ? state.autoVoucher : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["dbVersion"] = state ? state.dbVersion : undefined;
             resourceInputs["instanceChargeType"] = state ? state.instanceChargeType : undefined;
@@ -143,10 +156,12 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["memory"] = state ? state.memory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["needSupportIpv6"] = state ? state.needSupportIpv6 : undefined;
+            resourceInputs["period"] = state ? state.period : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["securityGroupsIds"] = state ? state.securityGroupsIds : undefined;
             resourceInputs["storage"] = state ? state.storage : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
+            resourceInputs["voucherIds"] = state ? state.voucherIds : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
             resourceInputs["zone"] = state ? state.zone : undefined;
         } else {
@@ -179,16 +194,19 @@ export class ReadonlyInstance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'zone'");
             }
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
+            resourceInputs["autoVoucher"] = args ? args.autoVoucher : undefined;
             resourceInputs["dbVersion"] = args ? args.dbVersion : undefined;
             resourceInputs["instanceChargeType"] = args ? args.instanceChargeType : undefined;
             resourceInputs["masterDbInstanceId"] = args ? args.masterDbInstanceId : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["needSupportIpv6"] = args ? args.needSupportIpv6 : undefined;
+            resourceInputs["period"] = args ? args.period : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["securityGroupsIds"] = args ? args.securityGroupsIds : undefined;
             resourceInputs["storage"] = args ? args.storage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
+            resourceInputs["voucherIds"] = args ? args.voucherIds : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zone"] = args ? args.zone : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
@@ -203,9 +221,13 @@ export class ReadonlyInstance extends pulumi.CustomResource {
  */
 export interface ReadonlyInstanceState {
     /**
-     * Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+     * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
      */
     autoRenewFlag?: pulumi.Input<number>;
+    /**
+     * Whether to use voucher, `1` for enabled.
+     */
+    autoVoucher?: pulumi.Input<number>;
     /**
      * Create time of the postgresql instance.
      */
@@ -235,6 +257,10 @@ export interface ReadonlyInstanceState {
      */
     needSupportIpv6?: pulumi.Input<number>;
     /**
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     */
+    period?: pulumi.Input<number>;
+    /**
      * Project ID.
      */
     projectId?: pulumi.Input<number>;
@@ -251,6 +277,10 @@ export interface ReadonlyInstanceState {
      */
     subnetId?: pulumi.Input<string>;
     /**
+     * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+     */
+    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * VPC ID.
      */
     vpcId?: pulumi.Input<string>;
@@ -265,9 +295,13 @@ export interface ReadonlyInstanceState {
  */
 export interface ReadonlyInstanceArgs {
     /**
-     * Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+     * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
      */
     autoRenewFlag?: pulumi.Input<number>;
+    /**
+     * Whether to use voucher, `1` for enabled.
+     */
+    autoVoucher?: pulumi.Input<number>;
     /**
      * PostgreSQL kernel version, which must be the same as that of the primary instance.
      */
@@ -293,6 +327,10 @@ export interface ReadonlyInstanceArgs {
      */
     needSupportIpv6?: pulumi.Input<number>;
     /**
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     */
+    period?: pulumi.Input<number>;
+    /**
      * Project ID.
      */
     projectId: pulumi.Input<number>;
@@ -308,6 +346,10 @@ export interface ReadonlyInstanceArgs {
      * VPC subnet ID.
      */
     subnetId: pulumi.Input<string>;
+    /**
+     * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+     */
+    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * VPC ID.
      */

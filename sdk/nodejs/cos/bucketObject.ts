@@ -108,7 +108,7 @@ export class BucketObject extends pulumi.CustomResource {
      */
     public readonly source!: pulumi.Output<string | undefined>;
     /**
-     * Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+     * Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
      */
     public readonly storageClass!: pulumi.Output<string>;
     /**
@@ -212,7 +212,7 @@ export interface BucketObjectState {
      */
     source?: pulumi.Input<string>;
     /**
-     * Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+     * Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
      */
     storageClass?: pulumi.Input<string>;
     /**
@@ -266,7 +266,7 @@ export interface BucketObjectArgs {
      */
     source?: pulumi.Input<string>;
     /**
-     * Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+     * Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
      */
     storageClass?: pulumi.Input<string>;
     /**

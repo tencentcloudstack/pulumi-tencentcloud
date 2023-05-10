@@ -19,140 +19,134 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"fmt"
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-1"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-//				CidrBlock: pulumi.String("10.0.0.0/16"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-//				AvailabilityZone: pulumi.String(availabilityZone),
-//				VpcId:            vpc.ID(),
-//				CidrBlock:        pulumi.String("10.0.20.0/28"),
-//				IsMulticast:      pulumi.Bool(false),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Postgresql.NewInstance(ctx, "foo", &Postgresql.InstanceArgs{
-//				AvailabilityZone: pulumi.String(availabilityZone),
-//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
-//				EngineVersion:    pulumi.String("10.4"),
-//				RootUser:         pulumi.String("root123"),
-//				RootPassword:     pulumi.String(fmt.Sprintf("%v%v", "Root123", "$")),
-//				Charset:          pulumi.String("UTF8"),
-//				ProjectId:        pulumi.Int(0),
-//				Memory:           pulumi.Int(2),
-//				Storage:          pulumi.Int(10),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("tf"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-1"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.20.0/28"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Postgresql.NewInstance(ctx, "foo", &Postgresql.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			EngineVersion:    pulumi.String("10.4"),
+// 			RootUser:         pulumi.String("root123"),
+// 			RootPassword:     pulumi.String(fmt.Sprintf("%v%v", "Root123", "$")),
+// 			Charset:          pulumi.String("UTF8"),
+// 			ProjectId:        pulumi.Int(0),
+// 			Memory:           pulumi.Int(2),
+// 			Storage:          pulumi.Int(10),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Create a multi available zone bucket
+// Create a multi available zone bucket
 //
 // ```go
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"fmt"
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-6"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			standbyAvailabilityZone := "ap-guangzhou-7"
-//			if param := cfg.Get("standbyAvailabilityZone"); param != "" {
-//				standbyAvailabilityZone = param
-//			}
-//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-//				CidrBlock: pulumi.String("10.0.0.0/16"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-//				AvailabilityZone: pulumi.String(availabilityZone),
-//				VpcId:            vpc.ID(),
-//				CidrBlock:        pulumi.String("10.0.20.0/28"),
-//				IsMulticast:      pulumi.Bool(false),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Postgresql.NewInstance(ctx, "foo", &Postgresql.InstanceArgs{
-//				AvailabilityZone: pulumi.String(availabilityZone),
-//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
-//				EngineVersion:    pulumi.String("10.4"),
-//				RootUser:         pulumi.String("root123"),
-//				RootPassword:     pulumi.String(fmt.Sprintf("%v%v", "Root123", "$")),
-//				Charset:          pulumi.String("UTF8"),
-//				ProjectId:        pulumi.Int(0),
-//				Memory:           pulumi.Int(2),
-//				Storage:          pulumi.Int(10),
-//				DbNodeSets: postgresql.InstanceDbNodeSetArray{
-//					&postgresql.InstanceDbNodeSetArgs{
-//						Role: pulumi.String("Primary"),
-//						Zone: pulumi.String(availabilityZone),
-//					},
-//					&postgresql.InstanceDbNodeSetArgs{
-//						Zone: pulumi.String(standbyAvailabilityZone),
-//					},
-//				},
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("tf"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-6"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		standbyAvailabilityZone := "ap-guangzhou-7"
+// 		if param := cfg.Get("standbyAvailabilityZone"); param != "" {
+// 			standbyAvailabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.20.0/28"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Postgresql.NewInstance(ctx, "foo", &Postgresql.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			EngineVersion:    pulumi.String("10.4"),
+// 			RootUser:         pulumi.String("root123"),
+// 			RootPassword:     pulumi.String(fmt.Sprintf("%v%v", "Root123", "$")),
+// 			Charset:          pulumi.String("UTF8"),
+// 			ProjectId:        pulumi.Int(0),
+// 			Memory:           pulumi.Int(2),
+// 			Storage:          pulumi.Int(10),
+// 			DbNodeSets: postgresql.InstanceDbNodeSetArray{
+// 				&postgresql.InstanceDbNodeSetArgs{
+// 					Role: pulumi.String("Primary"),
+// 					Zone: pulumi.String(availabilityZone),
+// 				},
+// 				&postgresql.InstanceDbNodeSetArgs{
+// 					Zone: pulumi.String(standbyAvailabilityZone),
+// 				},
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // create pgsql with kms key
@@ -161,50 +155,47 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Postgresql.NewInstance(ctx, "pg", &Postgresql.InstanceArgs{
-//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
-//				BackupPlan: &postgresql.InstanceBackupPlanArgs{
-//					BackupPeriods: pulumi.StringArray{
-//						pulumi.String("tuesday"),
-//						pulumi.String("wednesday"),
-//					},
-//					BaseBackupRetentionPeriod: pulumi.Int(7),
-//					MaxBackupStartTime:        pulumi.String("01:10:11"),
-//					MinBackupStartTime:        pulumi.String("00:10:11"),
-//				},
-//				ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
-//				Charset:         pulumi.String("LATIN1"),
-//				DbKernelVersion: pulumi.String("v11.12_r1.3"),
-//				EngineVersion:   pulumi.String("11.12"),
-//				KmsKeyId:        pulumi.String("788c606a-c7b7-11ec-82d1-5254001e5c4e"),
-//				KmsRegion:       pulumi.String("ap-guangzhou"),
-//				Memory:          pulumi.Int(4),
-//				NeedSupportTde:  pulumi.Int(1),
-//				ProjectId:       pulumi.Int(0),
-//				RootPassword:    pulumi.String("xxxxxxxxxx"),
-//				Storage:         pulumi.Int(100),
-//				SubnetId:        pulumi.String("subnet-enm92y0m"),
-//				Tags: pulumi.AnyMap{
-//					"tf": pulumi.Any("test"),
-//				},
-//				VpcId: pulumi.String("vpc-86v957zb"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Postgresql.NewInstance(ctx, "pg", &Postgresql.InstanceArgs{
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+// 			BackupPlan: &postgresql.InstanceBackupPlanArgs{
+// 				BackupPeriods: pulumi.StringArray{
+// 					pulumi.String("tuesday"),
+// 					pulumi.String("wednesday"),
+// 				},
+// 				BaseBackupRetentionPeriod: pulumi.Int(7),
+// 				MaxBackupStartTime:        pulumi.String("01:10:11"),
+// 				MinBackupStartTime:        pulumi.String("00:10:11"),
+// 			},
+// 			ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
+// 			Charset:         pulumi.String("LATIN1"),
+// 			DbKernelVersion: pulumi.String("v11.12_r1.3"),
+// 			EngineVersion:   pulumi.String("11.12"),
+// 			KmsKeyId:        pulumi.String("788c606a-c7b7-11ec-82d1-5254001e5c4e"),
+// 			KmsRegion:       pulumi.String("ap-guangzhou"),
+// 			Memory:          pulumi.Int(4),
+// 			NeedSupportTde:  pulumi.Int(1),
+// 			ProjectId:       pulumi.Int(0),
+// 			RootPassword:    pulumi.String("xxxxxxxxxx"),
+// 			Storage:         pulumi.Int(100),
+// 			SubnetId:        pulumi.String("subnet-enm92y0m"),
+// 			Tags: pulumi.AnyMap{
+// 				"tf": pulumi.Any("test"),
+// 			},
+// 			VpcId: pulumi.String("vpc-86v957zb"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -212,18 +203,20 @@ import (
 // postgresql instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
-//
+//  $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
 
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher pulumi.IntPtrOutput `pulumi:"autoVoucher"`
 	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
 	// Specify DB backup plan.
 	BackupPlan InstanceBackupPlanPtrOutput `pulumi:"backupPlan"`
-	// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset pulumi.StringPtrOutput `pulumi:"charset"`
@@ -255,6 +248,8 @@ type Instance struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde pulumi.IntOutput `pulumi:"needSupportTde"`
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// IP for private access.
 	PrivateAccessIp pulumi.StringOutput `pulumi:"privateAccessIp"`
 	// Port for private access.
@@ -281,6 +276,8 @@ type Instance struct {
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Uid of the postgresql instance.
 	Uid pulumi.IntOutput `pulumi:"uid"`
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds pulumi.StringArrayOutput `pulumi:"voucherIds"`
 	// ID of VPC.
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 }
@@ -327,11 +324,15 @@ func GetInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Instance resources.
 type instanceState struct {
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher *int `pulumi:"autoVoucher"`
 	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Specify DB backup plan.
 	BackupPlan *InstanceBackupPlan `pulumi:"backupPlan"`
-	// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
 	ChargeType *string `pulumi:"chargeType"`
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset *string `pulumi:"charset"`
@@ -363,6 +364,8 @@ type instanceState struct {
 	Name *string `pulumi:"name"`
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde *int `pulumi:"needSupportTde"`
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period *int `pulumi:"period"`
 	// IP for private access.
 	PrivateAccessIp *string `pulumi:"privateAccessIp"`
 	// Port for private access.
@@ -389,16 +392,22 @@ type instanceState struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Uid of the postgresql instance.
 	Uid *int `pulumi:"uid"`
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds []string `pulumi:"voucherIds"`
 	// ID of VPC.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type InstanceState struct {
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+	AutoRenewFlag pulumi.IntPtrInput
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher pulumi.IntPtrInput
 	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
 	AvailabilityZone pulumi.StringPtrInput
 	// Specify DB backup plan.
 	BackupPlan InstanceBackupPlanPtrInput
-	// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
 	ChargeType pulumi.StringPtrInput
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset pulumi.StringPtrInput
@@ -430,6 +439,8 @@ type InstanceState struct {
 	Name pulumi.StringPtrInput
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde pulumi.IntPtrInput
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period pulumi.IntPtrInput
 	// IP for private access.
 	PrivateAccessIp pulumi.StringPtrInput
 	// Port for private access.
@@ -456,6 +467,8 @@ type InstanceState struct {
 	Tags pulumi.MapInput
 	// Uid of the postgresql instance.
 	Uid pulumi.IntPtrInput
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds pulumi.StringArrayInput
 	// ID of VPC.
 	VpcId pulumi.StringPtrInput
 }
@@ -465,11 +478,15 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher *int `pulumi:"autoVoucher"`
 	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
 	AvailabilityZone string `pulumi:"availabilityZone"`
 	// Specify DB backup plan.
 	BackupPlan *InstanceBackupPlan `pulumi:"backupPlan"`
-	// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
 	ChargeType *string `pulumi:"chargeType"`
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset *string `pulumi:"charset"`
@@ -499,6 +516,8 @@ type instanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde *int `pulumi:"needSupportTde"`
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period *int `pulumi:"period"`
 	// Project id, default value is `0`.
 	ProjectId *int `pulumi:"projectId"`
 	// Indicates whether to enable the access to an instance from public network or not.
@@ -515,17 +534,23 @@ type instanceArgs struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// The available tags within this postgresql.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds []string `pulumi:"voucherIds"`
 	// ID of VPC.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+	AutoRenewFlag pulumi.IntPtrInput
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher pulumi.IntPtrInput
 	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
 	AvailabilityZone pulumi.StringInput
 	// Specify DB backup plan.
 	BackupPlan InstanceBackupPlanPtrInput
-	// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
 	ChargeType pulumi.StringPtrInput
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset pulumi.StringPtrInput
@@ -555,6 +580,8 @@ type InstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde pulumi.IntPtrInput
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period pulumi.IntPtrInput
 	// Project id, default value is `0`.
 	ProjectId pulumi.IntPtrInput
 	// Indicates whether to enable the access to an instance from public network or not.
@@ -571,6 +598,8 @@ type InstanceArgs struct {
 	SubnetId pulumi.StringPtrInput
 	// The available tags within this postgresql.
 	Tags pulumi.MapInput
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds pulumi.StringArrayInput
 	// ID of VPC.
 	VpcId pulumi.StringPtrInput
 }
@@ -601,7 +630,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -626,7 +655,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -662,6 +691,16 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 	return o
 }
 
+// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+func (o InstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
+}
+
+// Whether to use voucher, `1` for enabled.
+func (o InstanceOutput) AutoVoucher() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.AutoVoucher }).(pulumi.IntPtrOutput)
+}
+
 // Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
 func (o InstanceOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
@@ -672,7 +711,7 @@ func (o InstanceOutput) BackupPlan() InstanceBackupPlanPtrOutput {
 	return o.ApplyT(func(v *Instance) InstanceBackupPlanPtrOutput { return v.BackupPlan }).(InstanceBackupPlanPtrOutput)
 }
 
-// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
 func (o InstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
@@ -749,6 +788,11 @@ func (o InstanceOutput) NeedSupportTde() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.NeedSupportTde }).(pulumi.IntOutput)
 }
 
+// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+func (o InstanceOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
+}
+
 // IP for private access.
 func (o InstanceOutput) PrivateAccessIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.PrivateAccessIp }).(pulumi.StringOutput)
@@ -812,6 +856,11 @@ func (o InstanceOutput) Tags() pulumi.MapOutput {
 // Uid of the postgresql instance.
 func (o InstanceOutput) Uid() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Uid }).(pulumi.IntOutput)
+}
+
+// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+func (o InstanceOutput) VoucherIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.VoucherIds }).(pulumi.StringArrayOutput)
 }
 
 // ID of VPC.

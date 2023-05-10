@@ -9,9 +9,139 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'FreeCertificateDvAuth',
+    'PayCertificateDvAuth',
     'PayCertificateInformation',
     'GetCertificatesCertificateResult',
 ]
+
+@pulumi.output_type
+class FreeCertificateDvAuth(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dvAuthKey":
+            suggest = "dv_auth_key"
+        elif key == "dvAuthValue":
+            suggest = "dv_auth_value"
+        elif key == "dvAuthVerifyType":
+            suggest = "dv_auth_verify_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FreeCertificateDvAuth. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FreeCertificateDvAuth.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FreeCertificateDvAuth.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 dv_auth_key: Optional[str] = None,
+                 dv_auth_value: Optional[str] = None,
+                 dv_auth_verify_type: Optional[str] = None):
+        """
+        :param str dv_auth_key: DV authentication key.
+        :param str dv_auth_value: DV authentication value.
+        :param str dv_auth_verify_type: DV authentication type.
+        """
+        if dv_auth_key is not None:
+            pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        if dv_auth_value is not None:
+            pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        if dv_auth_verify_type is not None:
+            pulumi.set(__self__, "dv_auth_verify_type", dv_auth_verify_type)
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> Optional[str]:
+        """
+        DV authentication key.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> Optional[str]:
+        """
+        DV authentication value.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @property
+    @pulumi.getter(name="dvAuthVerifyType")
+    def dv_auth_verify_type(self) -> Optional[str]:
+        """
+        DV authentication type.
+        """
+        return pulumi.get(self, "dv_auth_verify_type")
+
+
+@pulumi.output_type
+class PayCertificateDvAuth(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dvAuthKey":
+            suggest = "dv_auth_key"
+        elif key == "dvAuthValue":
+            suggest = "dv_auth_value"
+        elif key == "dvAuthVerifyType":
+            suggest = "dv_auth_verify_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in PayCertificateDvAuth. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        PayCertificateDvAuth.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        PayCertificateDvAuth.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 dv_auth_key: Optional[str] = None,
+                 dv_auth_value: Optional[str] = None,
+                 dv_auth_verify_type: Optional[str] = None):
+        """
+        :param str dv_auth_key: DV authentication key.
+        :param str dv_auth_value: DV authentication value.
+        :param str dv_auth_verify_type: DV authentication type.
+        """
+        if dv_auth_key is not None:
+            pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        if dv_auth_value is not None:
+            pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        if dv_auth_verify_type is not None:
+            pulumi.set(__self__, "dv_auth_verify_type", dv_auth_verify_type)
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> Optional[str]:
+        """
+        DV authentication key.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> Optional[str]:
+        """
+        DV authentication value.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @property
+    @pulumi.getter(name="dvAuthVerifyType")
+    def dv_auth_verify_type(self) -> Optional[str]:
+        """
+        DV authentication type.
+        """
+        return pulumi.get(self, "dv_auth_verify_type")
+
 
 @pulumi.output_type
 class PayCertificateInformation(dict):
@@ -373,6 +503,7 @@ class GetCertificatesCertificateResult(dict):
                  domain: str,
                  end_time: str,
                  id: str,
+                 key: str,
                  name: str,
                  product_zh_name: str,
                  project_id: int,
@@ -386,6 +517,7 @@ class GetCertificatesCertificateResult(dict):
         :param str domain: Primary domain of the SSL certificate.
         :param str end_time: Ending time of the SSL certificate.
         :param str id: ID of the SSL certificate to be queried.
+        :param str key: Key of the SSL certificate.
         :param str name: Name of the SSL certificate to be queried.
         :param str product_zh_name: Certificate authority.
         :param int project_id: Project ID of the SSL certificate.
@@ -399,6 +531,7 @@ class GetCertificatesCertificateResult(dict):
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "end_time", end_time)
         pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "product_zh_name", product_zh_name)
         pulumi.set(__self__, "project_id", project_id)
@@ -453,6 +586,14 @@ class GetCertificatesCertificateResult(dict):
         ID of the SSL certificate to be queried.
         """
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key of the SSL certificate.
+        """
+        return pulumi.get(self, "key")
 
     @property
     @pulumi.getter

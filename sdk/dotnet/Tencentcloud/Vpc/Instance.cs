@@ -25,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     public partial class Instance : Pulumi.CustomResource
     {
         /// <summary>
-        /// List of Assistant CIDR.
+        /// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         /// </summary>
         [Output("assistantCidrs")]
         public Output<ImmutableArray<string>> AssistantCidrs { get; private set; } = null!;
@@ -53,6 +53,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// </summary>
         [Output("dnsServers")]
         public Output<ImmutableArray<string>> DnsServers { get; private set; } = null!;
+
+        /// <summary>
+        /// List of Docker Assistant CIDR.
+        /// </summary>
+        [Output("dockerAssistantCidrs")]
+        public Output<ImmutableArray<string>> DockerAssistantCidrs { get; private set; } = null!;
 
         /// <summary>
         /// Indicates whether it is the default VPC for this region.
@@ -129,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         private InputList<string>? _assistantCidrs;
 
         /// <summary>
-        /// List of Assistant CIDR.
+        /// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         /// </summary>
         public InputList<string> AssistantCidrs
         {
@@ -190,7 +196,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         private InputList<string>? _assistantCidrs;
 
         /// <summary>
-        /// List of Assistant CIDR.
+        /// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         /// </summary>
         public InputList<string> AssistantCidrs
         {
@@ -226,6 +232,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         {
             get => _dnsServers ?? (_dnsServers = new InputList<string>());
             set => _dnsServers = value;
+        }
+
+        [Input("dockerAssistantCidrs")]
+        private InputList<string>? _dockerAssistantCidrs;
+
+        /// <summary>
+        /// List of Docker Assistant CIDR.
+        /// </summary>
+        public InputList<string> DockerAssistantCidrs
+        {
+            get => _dockerAssistantCidrs ?? (_dockerAssistantCidrs = new InputList<string>());
+            set => _dockerAssistantCidrs = value;
         }
 
         /// <summary>

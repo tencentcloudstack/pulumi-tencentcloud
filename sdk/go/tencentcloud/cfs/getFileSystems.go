@@ -18,27 +18,24 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cfs.GetFileSystems(ctx, &cfs.GetFileSystemsArgs{
-//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
-//				FileSystemId:     pulumi.StringRef("cfs-6hgquxmj"),
-//				Name:             pulumi.StringRef("test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cfs.GetFileSystems(ctx, &cfs.GetFileSystemsArgs{
+// 			AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
+// 			FileSystemId:     pulumi.StringRef("cfs-6hgquxmj"),
+// 			Name:             pulumi.StringRef("test"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetFileSystems(ctx *pulumi.Context, args *GetFileSystemsArgs, opts ...pulumi.InvokeOption) (*GetFileSystemsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

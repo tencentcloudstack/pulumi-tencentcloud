@@ -116,6 +116,15 @@ class LogSet(pulumi.CustomResource):
         """
         Provides a resource to create an exclusive CLB Logset.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.clb.LogSet("foo", period=7)
+        ```
+
         ## Import
 
         CLB log set can be imported using the id, e.g.
@@ -136,6 +145,15 @@ class LogSet(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create an exclusive CLB Logset.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.clb.LogSet("foo", period=7)
+        ```
 
         ## Import
 

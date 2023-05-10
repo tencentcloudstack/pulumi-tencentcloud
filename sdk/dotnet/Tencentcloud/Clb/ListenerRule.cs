@@ -140,6 +140,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<bool> HealthCheckSwitch { get; private set; } = null!;
 
         /// <summary>
+        /// Time out of health check. The value range is 2-60.
+        /// </summary>
+        [Output("healthCheckTimeOut")]
+        public Output<int> HealthCheckTimeOut { get; private set; } = null!;
+
+        /// <summary>
+        /// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        /// </summary>
+        [Output("healthCheckType")]
+        public Output<string> HealthCheckType { get; private set; } = null!;
+
+        /// <summary>
         /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Output("healthCheckUnhealthNum")]
@@ -313,6 +325,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? HealthCheckSwitch { get; set; }
 
         /// <summary>
+        /// Time out of health check. The value range is 2-60.
+        /// </summary>
+        [Input("healthCheckTimeOut")]
+        public Input<int>? HealthCheckTimeOut { get; set; }
+
+        /// <summary>
+        /// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        /// </summary>
+        [Input("healthCheckType")]
+        public Input<string>? HealthCheckType { get; set; }
+
+        /// <summary>
         /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Input("healthCheckUnhealthNum")]
@@ -438,6 +462,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("healthCheckSwitch")]
         public Input<bool>? HealthCheckSwitch { get; set; }
+
+        /// <summary>
+        /// Time out of health check. The value range is 2-60.
+        /// </summary>
+        [Input("healthCheckTimeOut")]
+        public Input<int>? HealthCheckTimeOut { get; set; }
+
+        /// <summary>
+        /// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        /// </summary>
+        [Input("healthCheckType")]
+        public Input<string>? HealthCheckType { get; set; }
 
         /// <summary>
         /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.

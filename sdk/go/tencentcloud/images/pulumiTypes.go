@@ -46,7 +46,7 @@ type GetInstanceImage struct {
 // GetInstanceImageInput is an input type that accepts GetInstanceImageArgs and GetInstanceImageOutput values.
 // You can construct a concrete instance of `GetInstanceImageInput` via:
 //
-//	GetInstanceImageArgs{...}
+//          GetInstanceImageArgs{...}
 type GetInstanceImageInput interface {
 	pulumi.Input
 
@@ -102,7 +102,7 @@ func (i GetInstanceImageArgs) ToGetInstanceImageOutputWithContext(ctx context.Co
 // GetInstanceImageArrayInput is an input type that accepts GetInstanceImageArray and GetInstanceImageArrayOutput values.
 // You can construct a concrete instance of `GetInstanceImageArrayInput` via:
 //
-//	GetInstanceImageArray{ GetInstanceImageArgs{...} }
+//          GetInstanceImageArray{ GetInstanceImageArgs{...} }
 type GetInstanceImageArrayInput interface {
 	pulumi.Input
 
@@ -247,7 +247,7 @@ type GetInstanceImageSnapshot struct {
 // GetInstanceImageSnapshotInput is an input type that accepts GetInstanceImageSnapshotArgs and GetInstanceImageSnapshotOutput values.
 // You can construct a concrete instance of `GetInstanceImageSnapshotInput` via:
 //
-//	GetInstanceImageSnapshotArgs{...}
+//          GetInstanceImageSnapshotArgs{...}
 type GetInstanceImageSnapshotInput interface {
 	pulumi.Input
 
@@ -281,7 +281,7 @@ func (i GetInstanceImageSnapshotArgs) ToGetInstanceImageSnapshotOutputWithContex
 // GetInstanceImageSnapshotArrayInput is an input type that accepts GetInstanceImageSnapshotArray and GetInstanceImageSnapshotArrayOutput values.
 // You can construct a concrete instance of `GetInstanceImageSnapshotArrayInput` via:
 //
-//	GetInstanceImageSnapshotArray{ GetInstanceImageSnapshotArgs{...} }
+//          GetInstanceImageSnapshotArray{ GetInstanceImageSnapshotArgs{...} }
 type GetInstanceImageSnapshotArrayInput interface {
 	pulumi.Input
 

@@ -19,25 +19,22 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cbs.NewSnapshot(ctx, "snapshot", &Cbs.SnapshotArgs{
-//				SnapshotName: pulumi.String("unnamed"),
-//				StorageId:    pulumi.String("disk-kdt0sq6m"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewSnapshot(ctx, "snapshot", &Cbs.SnapshotArgs{
+// 			SnapshotName: pulumi.String("unnamed"),
+// 			StorageId:    pulumi.String("disk-kdt0sq6m"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -45,9 +42,7 @@ import (
 // CBS snapshot can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
-//
+//  $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
 // ```
 type Snapshot struct {
 	pulumi.CustomResourceState
@@ -66,6 +61,10 @@ type Snapshot struct {
 	StorageId pulumi.StringOutput `pulumi:"storageId"`
 	// Volume of storage which this snapshot created from.
 	StorageSize pulumi.IntOutput `pulumi:"storageSize"`
+	// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+	//
+	// Deprecated: cbs snapshot do not support tag now.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
 // NewSnapshot registers a new resource with the given unique name, arguments, and options.
@@ -118,6 +117,10 @@ type snapshotState struct {
 	StorageId *string `pulumi:"storageId"`
 	// Volume of storage which this snapshot created from.
 	StorageSize *int `pulumi:"storageSize"`
+	// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+	//
+	// Deprecated: cbs snapshot do not support tag now.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type SnapshotState struct {
@@ -135,6 +138,10 @@ type SnapshotState struct {
 	StorageId pulumi.StringPtrInput
 	// Volume of storage which this snapshot created from.
 	StorageSize pulumi.IntPtrInput
+	// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+	//
+	// Deprecated: cbs snapshot do not support tag now.
+	Tags pulumi.MapInput
 }
 
 func (SnapshotState) ElementType() reflect.Type {
@@ -146,6 +153,10 @@ type snapshotArgs struct {
 	SnapshotName string `pulumi:"snapshotName"`
 	// ID of the the CBS which this snapshot created from.
 	StorageId string `pulumi:"storageId"`
+	// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+	//
+	// Deprecated: cbs snapshot do not support tag now.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Snapshot resource.
@@ -154,6 +165,10 @@ type SnapshotArgs struct {
 	SnapshotName pulumi.StringInput
 	// ID of the the CBS which this snapshot created from.
 	StorageId pulumi.StringInput
+	// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+	//
+	// Deprecated: cbs snapshot do not support tag now.
+	Tags pulumi.MapInput
 }
 
 func (SnapshotArgs) ElementType() reflect.Type {
@@ -182,7 +197,7 @@ func (i *Snapshot) ToSnapshotOutputWithContext(ctx context.Context) SnapshotOutp
 // SnapshotArrayInput is an input type that accepts SnapshotArray and SnapshotArrayOutput values.
 // You can construct a concrete instance of `SnapshotArrayInput` via:
 //
-//	SnapshotArray{ SnapshotArgs{...} }
+//          SnapshotArray{ SnapshotArgs{...} }
 type SnapshotArrayInput interface {
 	pulumi.Input
 
@@ -207,7 +222,7 @@ func (i SnapshotArray) ToSnapshotArrayOutputWithContext(ctx context.Context) Sna
 // SnapshotMapInput is an input type that accepts SnapshotMap and SnapshotMapOutput values.
 // You can construct a concrete instance of `SnapshotMapInput` via:
 //
-//	SnapshotMap{ "key": SnapshotArgs{...} }
+//          SnapshotMap{ "key": SnapshotArgs{...} }
 type SnapshotMapInput interface {
 	pulumi.Input
 
@@ -276,6 +291,13 @@ func (o SnapshotOutput) StorageId() pulumi.StringOutput {
 // Volume of storage which this snapshot created from.
 func (o SnapshotOutput) StorageSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Snapshot) pulumi.IntOutput { return v.StorageSize }).(pulumi.IntOutput)
+}
+
+// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+//
+// Deprecated: cbs snapshot do not support tag now.
+func (o SnapshotOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Snapshot) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 type SnapshotArrayOutput struct{ *pulumi.OutputState }

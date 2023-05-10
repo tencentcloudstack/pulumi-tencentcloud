@@ -110,7 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Output<string?> EngineVersion { get; private set; } = null!;
 
         /// <summary>
-        /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         /// </summary>
         [Output("machineType")]
         public Output<string> MachineType { get; private set; } = null!;
@@ -295,7 +295,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? EngineVersion { get; set; }
 
         /// <summary>
-        /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         /// </summary>
         [Input("machineType", required: true)]
         public Input<string> MachineType { get; set; } = null!;
@@ -452,7 +452,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? EngineVersion { get; set; }
 
         /// <summary>
-        /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         /// </summary>
         [Input("machineType")]
         public Input<string>? MachineType { get; set; }

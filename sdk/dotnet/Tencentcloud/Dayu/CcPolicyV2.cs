@@ -106,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     public partial class CcPolicyV2 : Pulumi.CustomResource
     {
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Output("business")]
         public Output<string> Business { get; private set; } = null!;
@@ -195,7 +195,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     public sealed class CcPolicyV2Args : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business", required: true)]
         public Input<string> Business { get; set; } = null!;
@@ -274,7 +274,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     public sealed class CcPolicyV2State : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business")]
         public Input<string>? Business { get; set; }

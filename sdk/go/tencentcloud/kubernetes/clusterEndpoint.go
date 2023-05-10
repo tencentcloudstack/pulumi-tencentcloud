@@ -11,8 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provide a resource to create a KubernetesClusterEndpoint.
-// This resource allows you to create an empty cluster first without any workers. Only all attached node depends create complete, cluster endpoint will finally be enabled.
+// Provide a resource to create a KubernetesClusterEndpoint. This resource allows you to create an empty cluster first without any workers. Only all attached node depends create complete, cluster endpoint will finally be enabled.
 //
 // > **NOTE:** Recommend using `dependsOn` to make sure endpoint create after node pools or workers does.
 //
@@ -21,9 +20,7 @@ import (
 // KubernetesClusterEndpoint instance can be imported by passing cluster id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
-//
+//  $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
 // ```
 type ClusterEndpoint struct {
 	pulumi.CustomResourceState
@@ -38,10 +35,14 @@ type ClusterEndpoint struct {
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// Open internet access or not.
 	ClusterInternet pulumi.BoolPtrOutput `pulumi:"clusterInternet"`
+	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+	ClusterInternetDomain pulumi.StringPtrOutput `pulumi:"clusterInternetDomain"`
 	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup pulumi.StringPtrOutput `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not.
 	ClusterIntranet pulumi.BoolPtrOutput `pulumi:"clusterIntranet"`
+	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+	ClusterIntranetDomain pulumi.StringPtrOutput `pulumi:"clusterIntranetDomain"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId pulumi.StringPtrOutput `pulumi:"clusterIntranetSubnetId"`
 	// Domain name for access.
@@ -101,10 +102,14 @@ type clusterEndpointState struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// Open internet access or not.
 	ClusterInternet *bool `pulumi:"clusterInternet"`
+	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+	ClusterInternetDomain *string `pulumi:"clusterInternetDomain"`
 	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup *string `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not.
 	ClusterIntranet *bool `pulumi:"clusterIntranet"`
+	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+	ClusterIntranetDomain *string `pulumi:"clusterIntranetDomain"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId *string `pulumi:"clusterIntranetSubnetId"`
 	// Domain name for access.
@@ -132,10 +137,14 @@ type ClusterEndpointState struct {
 	ClusterId pulumi.StringPtrInput
 	// Open internet access or not.
 	ClusterInternet pulumi.BoolPtrInput
+	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+	ClusterInternetDomain pulumi.StringPtrInput
 	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup pulumi.StringPtrInput
 	// Open intranet access or not.
 	ClusterIntranet pulumi.BoolPtrInput
+	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+	ClusterIntranetDomain pulumi.StringPtrInput
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId pulumi.StringPtrInput
 	// Domain name for access.
@@ -161,10 +170,14 @@ type clusterEndpointArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// Open internet access or not.
 	ClusterInternet *bool `pulumi:"clusterInternet"`
+	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+	ClusterInternetDomain *string `pulumi:"clusterInternetDomain"`
 	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup *string `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not.
 	ClusterIntranet *bool `pulumi:"clusterIntranet"`
+	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+	ClusterIntranetDomain *string `pulumi:"clusterIntranetDomain"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId *string `pulumi:"clusterIntranetSubnetId"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
@@ -179,10 +192,14 @@ type ClusterEndpointArgs struct {
 	ClusterId pulumi.StringInput
 	// Open internet access or not.
 	ClusterInternet pulumi.BoolPtrInput
+	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+	ClusterInternetDomain pulumi.StringPtrInput
 	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup pulumi.StringPtrInput
 	// Open intranet access or not.
 	ClusterIntranet pulumi.BoolPtrInput
+	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+	ClusterIntranetDomain pulumi.StringPtrInput
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId pulumi.StringPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
@@ -217,7 +234,7 @@ func (i *ClusterEndpoint) ToClusterEndpointOutputWithContext(ctx context.Context
 // ClusterEndpointArrayInput is an input type that accepts ClusterEndpointArray and ClusterEndpointArrayOutput values.
 // You can construct a concrete instance of `ClusterEndpointArrayInput` via:
 //
-//	ClusterEndpointArray{ ClusterEndpointArgs{...} }
+//          ClusterEndpointArray{ ClusterEndpointArgs{...} }
 type ClusterEndpointArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +259,7 @@ func (i ClusterEndpointArray) ToClusterEndpointArrayOutputWithContext(ctx contex
 // ClusterEndpointMapInput is an input type that accepts ClusterEndpointMap and ClusterEndpointMapOutput values.
 // You can construct a concrete instance of `ClusterEndpointMapInput` via:
 //
-//	ClusterEndpointMap{ "key": ClusterEndpointArgs{...} }
+//          ClusterEndpointMap{ "key": ClusterEndpointArgs{...} }
 type ClusterEndpointMapInput interface {
 	pulumi.Input
 
@@ -303,6 +320,11 @@ func (o ClusterEndpointOutput) ClusterInternet() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.BoolPtrOutput { return v.ClusterInternet }).(pulumi.BoolPtrOutput)
 }
 
+// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+func (o ClusterEndpointOutput) ClusterInternetDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterInternetDomain }).(pulumi.StringPtrOutput)
+}
+
 // Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
 func (o ClusterEndpointOutput) ClusterInternetSecurityGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterInternetSecurityGroup }).(pulumi.StringPtrOutput)
@@ -311,6 +333,11 @@ func (o ClusterEndpointOutput) ClusterInternetSecurityGroup() pulumi.StringPtrOu
 // Open intranet access or not.
 func (o ClusterEndpointOutput) ClusterIntranet() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.BoolPtrOutput { return v.ClusterIntranet }).(pulumi.BoolPtrOutput)
+}
+
+// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+func (o ClusterEndpointOutput) ClusterIntranetDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterIntranetDomain }).(pulumi.StringPtrOutput)
 }
 
 // Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.

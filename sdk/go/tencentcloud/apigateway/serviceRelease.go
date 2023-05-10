@@ -18,9 +18,7 @@ import (
 // API gateway service release can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
-//
+//  $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
 // ```
 type ServiceRelease struct {
 	pulumi.CustomResourceState
@@ -148,7 +146,7 @@ func (i *ServiceRelease) ToServiceReleaseOutputWithContext(ctx context.Context) 
 // ServiceReleaseArrayInput is an input type that accepts ServiceReleaseArray and ServiceReleaseArrayOutput values.
 // You can construct a concrete instance of `ServiceReleaseArrayInput` via:
 //
-//	ServiceReleaseArray{ ServiceReleaseArgs{...} }
+//          ServiceReleaseArray{ ServiceReleaseArgs{...} }
 type ServiceReleaseArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +171,7 @@ func (i ServiceReleaseArray) ToServiceReleaseArrayOutputWithContext(ctx context.
 // ServiceReleaseMapInput is an input type that accepts ServiceReleaseMap and ServiceReleaseMapOutput values.
 // You can construct a concrete instance of `ServiceReleaseMapInput` via:
 //
-//	ServiceReleaseMap{ "key": ServiceReleaseArgs{...} }
+//          ServiceReleaseMap{ "key": ServiceReleaseArgs{...} }
 type ServiceReleaseMapInput interface {
 	pulumi.Input
 

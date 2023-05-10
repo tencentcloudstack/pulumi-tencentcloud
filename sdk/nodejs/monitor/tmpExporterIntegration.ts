@@ -6,6 +6,61 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a monitor tmpExporterIntegration
+ *
+ * > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
+ *
+ * ## Example Usage
+ *
+ * Use blackbox-exporter
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const tmpExporterIntegration = new tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegration", {
+ *     clusterId: "cls-bmuaukfu",
+ *     content: "{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}",
+ *     instanceId: "prom-dko9d0nu",
+ *     kind: "blackbox-exporter",
+ *     kubeType: 1,
+ * });
+ * ```
+ *
+ * Use es-exporter
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const tmpExporterIntegrationEs = new tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegrationEs", {
+ *     instanceId: tencentcloud_monitor_tmp_instance.tmpInstance.id,
+ *     kind: "es-exporter",
+ *     content: JSON.stringify({
+ *         name: "ex-exporter-example",
+ *         kind: "es-exporter",
+ *         spec: {
+ *             instanceSpec: {
+ *                 url: "http://127.0.0.1:9123",
+ *                 labels: {
+ *                     instance: "es-abcd",
+ *                 },
+ *                 version: "1.70.1",
+ *                 user: "fugiat Duis minim",
+ *                 password: "exercitation cillum velit",
+ *             },
+ *             exporterSpec: {
+ *                 all: true,
+ *                 indicesSettings: false,
+ *                 snapshots: false,
+ *                 indices: true,
+ *                 shards: false,
+ *             },
+ *         },
+ *     }),
+ *     clusterId: "",
+ *     kubeType: 3,
+ * });
+ * ```
  */
 export class TmpExporterIntegration extends pulumi.CustomResource {
     /**

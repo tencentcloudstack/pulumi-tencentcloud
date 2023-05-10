@@ -23,6 +23,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Mongodb/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Mongodb/instanceAccount:InstanceAccount":
+		r = &InstanceAccount{}
+	case "tencentcloud:Mongodb/instanceBackup:InstanceBackup":
+		r = &InstanceBackup{}
+	case "tencentcloud:Mongodb/instanceBackupDownloadTask:InstanceBackupDownloadTask":
+		r = &InstanceBackupDownloadTask{}
 	case "tencentcloud:Mongodb/shardingInstance:ShardingInstance":
 		r = &ShardingInstance{}
 	case "tencentcloud:Mongodb/standbyInstance:StandbyInstance":
@@ -43,6 +49,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mongodb/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mongodb/instanceAccount",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mongodb/instanceBackup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mongodb/instanceBackupDownloadTask",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

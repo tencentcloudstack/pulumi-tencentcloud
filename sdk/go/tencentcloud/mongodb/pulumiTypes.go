@@ -10,6 +10,206 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type InstanceAccountAuthRole struct {
+	// Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
+	Mask int `pulumi:"mask"`
+	// Refers to the name of the database with the current account permissions.*: Indicates all databases. db.name: Indicates the database of a specific name.
+	Namespace string `pulumi:"namespace"`
+}
+
+// InstanceAccountAuthRoleInput is an input type that accepts InstanceAccountAuthRoleArgs and InstanceAccountAuthRoleOutput values.
+// You can construct a concrete instance of `InstanceAccountAuthRoleInput` via:
+//
+//          InstanceAccountAuthRoleArgs{...}
+type InstanceAccountAuthRoleInput interface {
+	pulumi.Input
+
+	ToInstanceAccountAuthRoleOutput() InstanceAccountAuthRoleOutput
+	ToInstanceAccountAuthRoleOutputWithContext(context.Context) InstanceAccountAuthRoleOutput
+}
+
+type InstanceAccountAuthRoleArgs struct {
+	// Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
+	Mask pulumi.IntInput `pulumi:"mask"`
+	// Refers to the name of the database with the current account permissions.*: Indicates all databases. db.name: Indicates the database of a specific name.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+}
+
+func (InstanceAccountAuthRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceAccountAuthRole)(nil)).Elem()
+}
+
+func (i InstanceAccountAuthRoleArgs) ToInstanceAccountAuthRoleOutput() InstanceAccountAuthRoleOutput {
+	return i.ToInstanceAccountAuthRoleOutputWithContext(context.Background())
+}
+
+func (i InstanceAccountAuthRoleArgs) ToInstanceAccountAuthRoleOutputWithContext(ctx context.Context) InstanceAccountAuthRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceAccountAuthRoleOutput)
+}
+
+// InstanceAccountAuthRoleArrayInput is an input type that accepts InstanceAccountAuthRoleArray and InstanceAccountAuthRoleArrayOutput values.
+// You can construct a concrete instance of `InstanceAccountAuthRoleArrayInput` via:
+//
+//          InstanceAccountAuthRoleArray{ InstanceAccountAuthRoleArgs{...} }
+type InstanceAccountAuthRoleArrayInput interface {
+	pulumi.Input
+
+	ToInstanceAccountAuthRoleArrayOutput() InstanceAccountAuthRoleArrayOutput
+	ToInstanceAccountAuthRoleArrayOutputWithContext(context.Context) InstanceAccountAuthRoleArrayOutput
+}
+
+type InstanceAccountAuthRoleArray []InstanceAccountAuthRoleInput
+
+func (InstanceAccountAuthRoleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceAccountAuthRole)(nil)).Elem()
+}
+
+func (i InstanceAccountAuthRoleArray) ToInstanceAccountAuthRoleArrayOutput() InstanceAccountAuthRoleArrayOutput {
+	return i.ToInstanceAccountAuthRoleArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceAccountAuthRoleArray) ToInstanceAccountAuthRoleArrayOutputWithContext(ctx context.Context) InstanceAccountAuthRoleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceAccountAuthRoleArrayOutput)
+}
+
+type InstanceAccountAuthRoleOutput struct{ *pulumi.OutputState }
+
+func (InstanceAccountAuthRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceAccountAuthRole)(nil)).Elem()
+}
+
+func (o InstanceAccountAuthRoleOutput) ToInstanceAccountAuthRoleOutput() InstanceAccountAuthRoleOutput {
+	return o
+}
+
+func (o InstanceAccountAuthRoleOutput) ToInstanceAccountAuthRoleOutputWithContext(ctx context.Context) InstanceAccountAuthRoleOutput {
+	return o
+}
+
+// Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
+func (o InstanceAccountAuthRoleOutput) Mask() pulumi.IntOutput {
+	return o.ApplyT(func(v InstanceAccountAuthRole) int { return v.Mask }).(pulumi.IntOutput)
+}
+
+// Refers to the name of the database with the current account permissions.*: Indicates all databases. db.name: Indicates the database of a specific name.
+func (o InstanceAccountAuthRoleOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceAccountAuthRole) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+type InstanceAccountAuthRoleArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceAccountAuthRoleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceAccountAuthRole)(nil)).Elem()
+}
+
+func (o InstanceAccountAuthRoleArrayOutput) ToInstanceAccountAuthRoleArrayOutput() InstanceAccountAuthRoleArrayOutput {
+	return o
+}
+
+func (o InstanceAccountAuthRoleArrayOutput) ToInstanceAccountAuthRoleArrayOutputWithContext(ctx context.Context) InstanceAccountAuthRoleArrayOutput {
+	return o
+}
+
+func (o InstanceAccountAuthRoleArrayOutput) Index(i pulumi.IntInput) InstanceAccountAuthRoleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceAccountAuthRole {
+		return vs[0].([]InstanceAccountAuthRole)[vs[1].(int)]
+	}).(InstanceAccountAuthRoleOutput)
+}
+
+type InstanceBackupDownloadTaskBackupSet struct {
+	ReplicaSetId string `pulumi:"replicaSetId"`
+}
+
+// InstanceBackupDownloadTaskBackupSetInput is an input type that accepts InstanceBackupDownloadTaskBackupSetArgs and InstanceBackupDownloadTaskBackupSetOutput values.
+// You can construct a concrete instance of `InstanceBackupDownloadTaskBackupSetInput` via:
+//
+//          InstanceBackupDownloadTaskBackupSetArgs{...}
+type InstanceBackupDownloadTaskBackupSetInput interface {
+	pulumi.Input
+
+	ToInstanceBackupDownloadTaskBackupSetOutput() InstanceBackupDownloadTaskBackupSetOutput
+	ToInstanceBackupDownloadTaskBackupSetOutputWithContext(context.Context) InstanceBackupDownloadTaskBackupSetOutput
+}
+
+type InstanceBackupDownloadTaskBackupSetArgs struct {
+	ReplicaSetId pulumi.StringInput `pulumi:"replicaSetId"`
+}
+
+func (InstanceBackupDownloadTaskBackupSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceBackupDownloadTaskBackupSet)(nil)).Elem()
+}
+
+func (i InstanceBackupDownloadTaskBackupSetArgs) ToInstanceBackupDownloadTaskBackupSetOutput() InstanceBackupDownloadTaskBackupSetOutput {
+	return i.ToInstanceBackupDownloadTaskBackupSetOutputWithContext(context.Background())
+}
+
+func (i InstanceBackupDownloadTaskBackupSetArgs) ToInstanceBackupDownloadTaskBackupSetOutputWithContext(ctx context.Context) InstanceBackupDownloadTaskBackupSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceBackupDownloadTaskBackupSetOutput)
+}
+
+// InstanceBackupDownloadTaskBackupSetArrayInput is an input type that accepts InstanceBackupDownloadTaskBackupSetArray and InstanceBackupDownloadTaskBackupSetArrayOutput values.
+// You can construct a concrete instance of `InstanceBackupDownloadTaskBackupSetArrayInput` via:
+//
+//          InstanceBackupDownloadTaskBackupSetArray{ InstanceBackupDownloadTaskBackupSetArgs{...} }
+type InstanceBackupDownloadTaskBackupSetArrayInput interface {
+	pulumi.Input
+
+	ToInstanceBackupDownloadTaskBackupSetArrayOutput() InstanceBackupDownloadTaskBackupSetArrayOutput
+	ToInstanceBackupDownloadTaskBackupSetArrayOutputWithContext(context.Context) InstanceBackupDownloadTaskBackupSetArrayOutput
+}
+
+type InstanceBackupDownloadTaskBackupSetArray []InstanceBackupDownloadTaskBackupSetInput
+
+func (InstanceBackupDownloadTaskBackupSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceBackupDownloadTaskBackupSet)(nil)).Elem()
+}
+
+func (i InstanceBackupDownloadTaskBackupSetArray) ToInstanceBackupDownloadTaskBackupSetArrayOutput() InstanceBackupDownloadTaskBackupSetArrayOutput {
+	return i.ToInstanceBackupDownloadTaskBackupSetArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceBackupDownloadTaskBackupSetArray) ToInstanceBackupDownloadTaskBackupSetArrayOutputWithContext(ctx context.Context) InstanceBackupDownloadTaskBackupSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceBackupDownloadTaskBackupSetArrayOutput)
+}
+
+type InstanceBackupDownloadTaskBackupSetOutput struct{ *pulumi.OutputState }
+
+func (InstanceBackupDownloadTaskBackupSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceBackupDownloadTaskBackupSet)(nil)).Elem()
+}
+
+func (o InstanceBackupDownloadTaskBackupSetOutput) ToInstanceBackupDownloadTaskBackupSetOutput() InstanceBackupDownloadTaskBackupSetOutput {
+	return o
+}
+
+func (o InstanceBackupDownloadTaskBackupSetOutput) ToInstanceBackupDownloadTaskBackupSetOutputWithContext(ctx context.Context) InstanceBackupDownloadTaskBackupSetOutput {
+	return o
+}
+
+func (o InstanceBackupDownloadTaskBackupSetOutput) ReplicaSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceBackupDownloadTaskBackupSet) string { return v.ReplicaSetId }).(pulumi.StringOutput)
+}
+
+type InstanceBackupDownloadTaskBackupSetArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceBackupDownloadTaskBackupSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceBackupDownloadTaskBackupSet)(nil)).Elem()
+}
+
+func (o InstanceBackupDownloadTaskBackupSetArrayOutput) ToInstanceBackupDownloadTaskBackupSetArrayOutput() InstanceBackupDownloadTaskBackupSetArrayOutput {
+	return o
+}
+
+func (o InstanceBackupDownloadTaskBackupSetArrayOutput) ToInstanceBackupDownloadTaskBackupSetArrayOutputWithContext(ctx context.Context) InstanceBackupDownloadTaskBackupSetArrayOutput {
+	return o
+}
+
+func (o InstanceBackupDownloadTaskBackupSetArrayOutput) Index(i pulumi.IntInput) InstanceBackupDownloadTaskBackupSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceBackupDownloadTaskBackupSet {
+		return vs[0].([]InstanceBackupDownloadTaskBackupSet)[vs[1].(int)]
+	}).(InstanceBackupDownloadTaskBackupSetOutput)
+}
+
 type InstanceStandbyInstanceList struct {
 	// Indicates the ID of standby instance.
 	StandbyInstanceId *string `pulumi:"standbyInstanceId"`
@@ -20,7 +220,7 @@ type InstanceStandbyInstanceList struct {
 // InstanceStandbyInstanceListInput is an input type that accepts InstanceStandbyInstanceListArgs and InstanceStandbyInstanceListOutput values.
 // You can construct a concrete instance of `InstanceStandbyInstanceListInput` via:
 //
-//	InstanceStandbyInstanceListArgs{...}
+//          InstanceStandbyInstanceListArgs{...}
 type InstanceStandbyInstanceListInput interface {
 	pulumi.Input
 
@@ -50,7 +250,7 @@ func (i InstanceStandbyInstanceListArgs) ToInstanceStandbyInstanceListOutputWith
 // InstanceStandbyInstanceListArrayInput is an input type that accepts InstanceStandbyInstanceListArray and InstanceStandbyInstanceListArrayOutput values.
 // You can construct a concrete instance of `InstanceStandbyInstanceListArrayInput` via:
 //
-//	InstanceStandbyInstanceListArray{ InstanceStandbyInstanceListArgs{...} }
+//          InstanceStandbyInstanceListArray{ InstanceStandbyInstanceListArgs{...} }
 type InstanceStandbyInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -116,6 +316,1108 @@ func (o InstanceStandbyInstanceListArrayOutput) Index(i pulumi.IntInput) Instanc
 	}).(InstanceStandbyInstanceListOutput)
 }
 
+type GetInstanceBackupsBackupList struct {
+	// Remark of backup.
+	BackupDesc string `pulumi:"backupDesc"`
+	// Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
+	BackupMethod int `pulumi:"backupMethod"`
+	// Backup mode name.
+	BackupName string `pulumi:"backupName"`
+	// Size of backup(KN).
+	BackupSize int `pulumi:"backupSize"`
+	// Backup mode type.
+	BackupType int `pulumi:"backupType"`
+	// end time of backup.
+	EndTime string `pulumi:"endTime"`
+	// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
+	InstanceId string `pulumi:"instanceId"`
+	// start time of backup.
+	StartTime string `pulumi:"startTime"`
+	// Backup status.
+	Status int `pulumi:"status"`
+}
+
+// GetInstanceBackupsBackupListInput is an input type that accepts GetInstanceBackupsBackupListArgs and GetInstanceBackupsBackupListOutput values.
+// You can construct a concrete instance of `GetInstanceBackupsBackupListInput` via:
+//
+//          GetInstanceBackupsBackupListArgs{...}
+type GetInstanceBackupsBackupListInput interface {
+	pulumi.Input
+
+	ToGetInstanceBackupsBackupListOutput() GetInstanceBackupsBackupListOutput
+	ToGetInstanceBackupsBackupListOutputWithContext(context.Context) GetInstanceBackupsBackupListOutput
+}
+
+type GetInstanceBackupsBackupListArgs struct {
+	// Remark of backup.
+	BackupDesc pulumi.StringInput `pulumi:"backupDesc"`
+	// Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
+	BackupMethod pulumi.IntInput `pulumi:"backupMethod"`
+	// Backup mode name.
+	BackupName pulumi.StringInput `pulumi:"backupName"`
+	// Size of backup(KN).
+	BackupSize pulumi.IntInput `pulumi:"backupSize"`
+	// Backup mode type.
+	BackupType pulumi.IntInput `pulumi:"backupType"`
+	// end time of backup.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// start time of backup.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Backup status.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetInstanceBackupsBackupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBackupsBackupList)(nil)).Elem()
+}
+
+func (i GetInstanceBackupsBackupListArgs) ToGetInstanceBackupsBackupListOutput() GetInstanceBackupsBackupListOutput {
+	return i.ToGetInstanceBackupsBackupListOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBackupsBackupListArgs) ToGetInstanceBackupsBackupListOutputWithContext(ctx context.Context) GetInstanceBackupsBackupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBackupsBackupListOutput)
+}
+
+// GetInstanceBackupsBackupListArrayInput is an input type that accepts GetInstanceBackupsBackupListArray and GetInstanceBackupsBackupListArrayOutput values.
+// You can construct a concrete instance of `GetInstanceBackupsBackupListArrayInput` via:
+//
+//          GetInstanceBackupsBackupListArray{ GetInstanceBackupsBackupListArgs{...} }
+type GetInstanceBackupsBackupListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceBackupsBackupListArrayOutput() GetInstanceBackupsBackupListArrayOutput
+	ToGetInstanceBackupsBackupListArrayOutputWithContext(context.Context) GetInstanceBackupsBackupListArrayOutput
+}
+
+type GetInstanceBackupsBackupListArray []GetInstanceBackupsBackupListInput
+
+func (GetInstanceBackupsBackupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBackupsBackupList)(nil)).Elem()
+}
+
+func (i GetInstanceBackupsBackupListArray) ToGetInstanceBackupsBackupListArrayOutput() GetInstanceBackupsBackupListArrayOutput {
+	return i.ToGetInstanceBackupsBackupListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBackupsBackupListArray) ToGetInstanceBackupsBackupListArrayOutputWithContext(ctx context.Context) GetInstanceBackupsBackupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBackupsBackupListArrayOutput)
+}
+
+type GetInstanceBackupsBackupListOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBackupsBackupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBackupsBackupList)(nil)).Elem()
+}
+
+func (o GetInstanceBackupsBackupListOutput) ToGetInstanceBackupsBackupListOutput() GetInstanceBackupsBackupListOutput {
+	return o
+}
+
+func (o GetInstanceBackupsBackupListOutput) ToGetInstanceBackupsBackupListOutputWithContext(ctx context.Context) GetInstanceBackupsBackupListOutput {
+	return o
+}
+
+// Remark of backup.
+func (o GetInstanceBackupsBackupListOutput) BackupDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.BackupDesc }).(pulumi.StringOutput)
+}
+
+// Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
+func (o GetInstanceBackupsBackupListOutput) BackupMethod() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) int { return v.BackupMethod }).(pulumi.IntOutput)
+}
+
+// Backup mode name.
+func (o GetInstanceBackupsBackupListOutput) BackupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.BackupName }).(pulumi.StringOutput)
+}
+
+// Size of backup(KN).
+func (o GetInstanceBackupsBackupListOutput) BackupSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) int { return v.BackupSize }).(pulumi.IntOutput)
+}
+
+// Backup mode type.
+func (o GetInstanceBackupsBackupListOutput) BackupType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) int { return v.BackupType }).(pulumi.IntOutput)
+}
+
+// end time of backup.
+func (o GetInstanceBackupsBackupListOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
+func (o GetInstanceBackupsBackupListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// start time of backup.
+func (o GetInstanceBackupsBackupListOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Backup status.
+func (o GetInstanceBackupsBackupListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetInstanceBackupsBackupListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBackupsBackupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBackupsBackupList)(nil)).Elem()
+}
+
+func (o GetInstanceBackupsBackupListArrayOutput) ToGetInstanceBackupsBackupListArrayOutput() GetInstanceBackupsBackupListArrayOutput {
+	return o
+}
+
+func (o GetInstanceBackupsBackupListArrayOutput) ToGetInstanceBackupsBackupListArrayOutputWithContext(ctx context.Context) GetInstanceBackupsBackupListArrayOutput {
+	return o
+}
+
+func (o GetInstanceBackupsBackupListArrayOutput) Index(i pulumi.IntInput) GetInstanceBackupsBackupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceBackupsBackupList {
+		return vs[0].([]GetInstanceBackupsBackupList)[vs[1].(int)]
+	}).(GetInstanceBackupsBackupListOutput)
+}
+
+type GetInstanceConnectionsClient struct {
+	// client connection count.
+	Count int `pulumi:"count"`
+	// is internal.
+	InternalService bool `pulumi:"internalService"`
+	// client connection ip.
+	Ip string `pulumi:"ip"`
+}
+
+// GetInstanceConnectionsClientInput is an input type that accepts GetInstanceConnectionsClientArgs and GetInstanceConnectionsClientOutput values.
+// You can construct a concrete instance of `GetInstanceConnectionsClientInput` via:
+//
+//          GetInstanceConnectionsClientArgs{...}
+type GetInstanceConnectionsClientInput interface {
+	pulumi.Input
+
+	ToGetInstanceConnectionsClientOutput() GetInstanceConnectionsClientOutput
+	ToGetInstanceConnectionsClientOutputWithContext(context.Context) GetInstanceConnectionsClientOutput
+}
+
+type GetInstanceConnectionsClientArgs struct {
+	// client connection count.
+	Count pulumi.IntInput `pulumi:"count"`
+	// is internal.
+	InternalService pulumi.BoolInput `pulumi:"internalService"`
+	// client connection ip.
+	Ip pulumi.StringInput `pulumi:"ip"`
+}
+
+func (GetInstanceConnectionsClientArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceConnectionsClient)(nil)).Elem()
+}
+
+func (i GetInstanceConnectionsClientArgs) ToGetInstanceConnectionsClientOutput() GetInstanceConnectionsClientOutput {
+	return i.ToGetInstanceConnectionsClientOutputWithContext(context.Background())
+}
+
+func (i GetInstanceConnectionsClientArgs) ToGetInstanceConnectionsClientOutputWithContext(ctx context.Context) GetInstanceConnectionsClientOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceConnectionsClientOutput)
+}
+
+// GetInstanceConnectionsClientArrayInput is an input type that accepts GetInstanceConnectionsClientArray and GetInstanceConnectionsClientArrayOutput values.
+// You can construct a concrete instance of `GetInstanceConnectionsClientArrayInput` via:
+//
+//          GetInstanceConnectionsClientArray{ GetInstanceConnectionsClientArgs{...} }
+type GetInstanceConnectionsClientArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceConnectionsClientArrayOutput() GetInstanceConnectionsClientArrayOutput
+	ToGetInstanceConnectionsClientArrayOutputWithContext(context.Context) GetInstanceConnectionsClientArrayOutput
+}
+
+type GetInstanceConnectionsClientArray []GetInstanceConnectionsClientInput
+
+func (GetInstanceConnectionsClientArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceConnectionsClient)(nil)).Elem()
+}
+
+func (i GetInstanceConnectionsClientArray) ToGetInstanceConnectionsClientArrayOutput() GetInstanceConnectionsClientArrayOutput {
+	return i.ToGetInstanceConnectionsClientArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceConnectionsClientArray) ToGetInstanceConnectionsClientArrayOutputWithContext(ctx context.Context) GetInstanceConnectionsClientArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceConnectionsClientArrayOutput)
+}
+
+type GetInstanceConnectionsClientOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceConnectionsClientOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceConnectionsClient)(nil)).Elem()
+}
+
+func (o GetInstanceConnectionsClientOutput) ToGetInstanceConnectionsClientOutput() GetInstanceConnectionsClientOutput {
+	return o
+}
+
+func (o GetInstanceConnectionsClientOutput) ToGetInstanceConnectionsClientOutputWithContext(ctx context.Context) GetInstanceConnectionsClientOutput {
+	return o
+}
+
+// client connection count.
+func (o GetInstanceConnectionsClientOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceConnectionsClient) int { return v.Count }).(pulumi.IntOutput)
+}
+
+// is internal.
+func (o GetInstanceConnectionsClientOutput) InternalService() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceConnectionsClient) bool { return v.InternalService }).(pulumi.BoolOutput)
+}
+
+// client connection ip.
+func (o GetInstanceConnectionsClientOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceConnectionsClient) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+type GetInstanceConnectionsClientArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceConnectionsClientArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceConnectionsClient)(nil)).Elem()
+}
+
+func (o GetInstanceConnectionsClientArrayOutput) ToGetInstanceConnectionsClientArrayOutput() GetInstanceConnectionsClientArrayOutput {
+	return o
+}
+
+func (o GetInstanceConnectionsClientArrayOutput) ToGetInstanceConnectionsClientArrayOutputWithContext(ctx context.Context) GetInstanceConnectionsClientArrayOutput {
+	return o
+}
+
+func (o GetInstanceConnectionsClientArrayOutput) Index(i pulumi.IntInput) GetInstanceConnectionsClientOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceConnectionsClient {
+		return vs[0].([]GetInstanceConnectionsClient)[vs[1].(int)]
+	}).(GetInstanceConnectionsClientOutput)
+}
+
+type GetInstanceCurrentOpCurrentOp struct {
+	// running time(ms).
+	MicrosecsRunning int `pulumi:"microsecsRunning"`
+	// Node name.
+	NodeName string `pulumi:"nodeName"`
+	// Filter condition, the namespace namespace to which the operation belongs, in the format of db.collection.
+	Ns string `pulumi:"ns"`
+	// Filter condition, operation type, possible values: none, update, insert, query, command, getmore,remove and killcursors.
+	Op string `pulumi:"op"`
+	// operation id.
+	OpId int `pulumi:"opId"`
+	// operation info.
+	Operation string `pulumi:"operation"`
+	// operation query.
+	Query string `pulumi:"query"`
+	// filter condition, shard name.
+	ReplicaSetName string `pulumi:"replicaSetName"`
+	// Filter condition, node status, possible value: primary, secondary.
+	State string `pulumi:"state"`
+}
+
+// GetInstanceCurrentOpCurrentOpInput is an input type that accepts GetInstanceCurrentOpCurrentOpArgs and GetInstanceCurrentOpCurrentOpOutput values.
+// You can construct a concrete instance of `GetInstanceCurrentOpCurrentOpInput` via:
+//
+//          GetInstanceCurrentOpCurrentOpArgs{...}
+type GetInstanceCurrentOpCurrentOpInput interface {
+	pulumi.Input
+
+	ToGetInstanceCurrentOpCurrentOpOutput() GetInstanceCurrentOpCurrentOpOutput
+	ToGetInstanceCurrentOpCurrentOpOutputWithContext(context.Context) GetInstanceCurrentOpCurrentOpOutput
+}
+
+type GetInstanceCurrentOpCurrentOpArgs struct {
+	// running time(ms).
+	MicrosecsRunning pulumi.IntInput `pulumi:"microsecsRunning"`
+	// Node name.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// Filter condition, the namespace namespace to which the operation belongs, in the format of db.collection.
+	Ns pulumi.StringInput `pulumi:"ns"`
+	// Filter condition, operation type, possible values: none, update, insert, query, command, getmore,remove and killcursors.
+	Op pulumi.StringInput `pulumi:"op"`
+	// operation id.
+	OpId pulumi.IntInput `pulumi:"opId"`
+	// operation info.
+	Operation pulumi.StringInput `pulumi:"operation"`
+	// operation query.
+	Query pulumi.StringInput `pulumi:"query"`
+	// filter condition, shard name.
+	ReplicaSetName pulumi.StringInput `pulumi:"replicaSetName"`
+	// Filter condition, node status, possible value: primary, secondary.
+	State pulumi.StringInput `pulumi:"state"`
+}
+
+func (GetInstanceCurrentOpCurrentOpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceCurrentOpCurrentOp)(nil)).Elem()
+}
+
+func (i GetInstanceCurrentOpCurrentOpArgs) ToGetInstanceCurrentOpCurrentOpOutput() GetInstanceCurrentOpCurrentOpOutput {
+	return i.ToGetInstanceCurrentOpCurrentOpOutputWithContext(context.Background())
+}
+
+func (i GetInstanceCurrentOpCurrentOpArgs) ToGetInstanceCurrentOpCurrentOpOutputWithContext(ctx context.Context) GetInstanceCurrentOpCurrentOpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceCurrentOpCurrentOpOutput)
+}
+
+// GetInstanceCurrentOpCurrentOpArrayInput is an input type that accepts GetInstanceCurrentOpCurrentOpArray and GetInstanceCurrentOpCurrentOpArrayOutput values.
+// You can construct a concrete instance of `GetInstanceCurrentOpCurrentOpArrayInput` via:
+//
+//          GetInstanceCurrentOpCurrentOpArray{ GetInstanceCurrentOpCurrentOpArgs{...} }
+type GetInstanceCurrentOpCurrentOpArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceCurrentOpCurrentOpArrayOutput() GetInstanceCurrentOpCurrentOpArrayOutput
+	ToGetInstanceCurrentOpCurrentOpArrayOutputWithContext(context.Context) GetInstanceCurrentOpCurrentOpArrayOutput
+}
+
+type GetInstanceCurrentOpCurrentOpArray []GetInstanceCurrentOpCurrentOpInput
+
+func (GetInstanceCurrentOpCurrentOpArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceCurrentOpCurrentOp)(nil)).Elem()
+}
+
+func (i GetInstanceCurrentOpCurrentOpArray) ToGetInstanceCurrentOpCurrentOpArrayOutput() GetInstanceCurrentOpCurrentOpArrayOutput {
+	return i.ToGetInstanceCurrentOpCurrentOpArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceCurrentOpCurrentOpArray) ToGetInstanceCurrentOpCurrentOpArrayOutputWithContext(ctx context.Context) GetInstanceCurrentOpCurrentOpArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceCurrentOpCurrentOpArrayOutput)
+}
+
+type GetInstanceCurrentOpCurrentOpOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceCurrentOpCurrentOpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceCurrentOpCurrentOp)(nil)).Elem()
+}
+
+func (o GetInstanceCurrentOpCurrentOpOutput) ToGetInstanceCurrentOpCurrentOpOutput() GetInstanceCurrentOpCurrentOpOutput {
+	return o
+}
+
+func (o GetInstanceCurrentOpCurrentOpOutput) ToGetInstanceCurrentOpCurrentOpOutputWithContext(ctx context.Context) GetInstanceCurrentOpCurrentOpOutput {
+	return o
+}
+
+// running time(ms).
+func (o GetInstanceCurrentOpCurrentOpOutput) MicrosecsRunning() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) int { return v.MicrosecsRunning }).(pulumi.IntOutput)
+}
+
+// Node name.
+func (o GetInstanceCurrentOpCurrentOpOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+// Filter condition, the namespace namespace to which the operation belongs, in the format of db.collection.
+func (o GetInstanceCurrentOpCurrentOpOutput) Ns() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) string { return v.Ns }).(pulumi.StringOutput)
+}
+
+// Filter condition, operation type, possible values: none, update, insert, query, command, getmore,remove and killcursors.
+func (o GetInstanceCurrentOpCurrentOpOutput) Op() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) string { return v.Op }).(pulumi.StringOutput)
+}
+
+// operation id.
+func (o GetInstanceCurrentOpCurrentOpOutput) OpId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) int { return v.OpId }).(pulumi.IntOutput)
+}
+
+// operation info.
+func (o GetInstanceCurrentOpCurrentOpOutput) Operation() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) string { return v.Operation }).(pulumi.StringOutput)
+}
+
+// operation query.
+func (o GetInstanceCurrentOpCurrentOpOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) string { return v.Query }).(pulumi.StringOutput)
+}
+
+// filter condition, shard name.
+func (o GetInstanceCurrentOpCurrentOpOutput) ReplicaSetName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) string { return v.ReplicaSetName }).(pulumi.StringOutput)
+}
+
+// Filter condition, node status, possible value: primary, secondary.
+func (o GetInstanceCurrentOpCurrentOpOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceCurrentOpCurrentOp) string { return v.State }).(pulumi.StringOutput)
+}
+
+type GetInstanceCurrentOpCurrentOpArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceCurrentOpCurrentOpArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceCurrentOpCurrentOp)(nil)).Elem()
+}
+
+func (o GetInstanceCurrentOpCurrentOpArrayOutput) ToGetInstanceCurrentOpCurrentOpArrayOutput() GetInstanceCurrentOpCurrentOpArrayOutput {
+	return o
+}
+
+func (o GetInstanceCurrentOpCurrentOpArrayOutput) ToGetInstanceCurrentOpCurrentOpArrayOutputWithContext(ctx context.Context) GetInstanceCurrentOpCurrentOpArrayOutput {
+	return o
+}
+
+func (o GetInstanceCurrentOpCurrentOpArrayOutput) Index(i pulumi.IntInput) GetInstanceCurrentOpCurrentOpOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceCurrentOpCurrentOp {
+		return vs[0].([]GetInstanceCurrentOpCurrentOp)[vs[1].(int)]
+	}).(GetInstanceCurrentOpCurrentOpOutput)
+}
+
+type GetInstanceParamsInstanceEnumParam struct {
+	// current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// default value.
+	DefaultValue string `pulumi:"defaultValue"`
+	// enum value.
+	EnumValues []string `pulumi:"enumValues"`
+	// if need restart.
+	NeedRestart string `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName string `pulumi:"paramName"`
+	// if is running.
+	Status int `pulumi:"status"`
+	// descripition of parameter.
+	Tips []string `pulumi:"tips"`
+	// value type.
+	ValueType string `pulumi:"valueType"`
+}
+
+// GetInstanceParamsInstanceEnumParamInput is an input type that accepts GetInstanceParamsInstanceEnumParamArgs and GetInstanceParamsInstanceEnumParamOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceEnumParamInput` via:
+//
+//          GetInstanceParamsInstanceEnumParamArgs{...}
+type GetInstanceParamsInstanceEnumParamInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceEnumParamOutput() GetInstanceParamsInstanceEnumParamOutput
+	ToGetInstanceParamsInstanceEnumParamOutputWithContext(context.Context) GetInstanceParamsInstanceEnumParamOutput
+}
+
+type GetInstanceParamsInstanceEnumParamArgs struct {
+	// current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// default value.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// enum value.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// if need restart.
+	NeedRestart pulumi.StringInput `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName pulumi.StringInput `pulumi:"paramName"`
+	// if is running.
+	Status pulumi.IntInput `pulumi:"status"`
+	// descripition of parameter.
+	Tips pulumi.StringArrayInput `pulumi:"tips"`
+	// value type.
+	ValueType pulumi.StringInput `pulumi:"valueType"`
+}
+
+func (GetInstanceParamsInstanceEnumParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceEnumParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceEnumParamArgs) ToGetInstanceParamsInstanceEnumParamOutput() GetInstanceParamsInstanceEnumParamOutput {
+	return i.ToGetInstanceParamsInstanceEnumParamOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceEnumParamArgs) ToGetInstanceParamsInstanceEnumParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceEnumParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceEnumParamOutput)
+}
+
+// GetInstanceParamsInstanceEnumParamArrayInput is an input type that accepts GetInstanceParamsInstanceEnumParamArray and GetInstanceParamsInstanceEnumParamArrayOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceEnumParamArrayInput` via:
+//
+//          GetInstanceParamsInstanceEnumParamArray{ GetInstanceParamsInstanceEnumParamArgs{...} }
+type GetInstanceParamsInstanceEnumParamArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceEnumParamArrayOutput() GetInstanceParamsInstanceEnumParamArrayOutput
+	ToGetInstanceParamsInstanceEnumParamArrayOutputWithContext(context.Context) GetInstanceParamsInstanceEnumParamArrayOutput
+}
+
+type GetInstanceParamsInstanceEnumParamArray []GetInstanceParamsInstanceEnumParamInput
+
+func (GetInstanceParamsInstanceEnumParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceEnumParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceEnumParamArray) ToGetInstanceParamsInstanceEnumParamArrayOutput() GetInstanceParamsInstanceEnumParamArrayOutput {
+	return i.ToGetInstanceParamsInstanceEnumParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceEnumParamArray) ToGetInstanceParamsInstanceEnumParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceEnumParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceEnumParamArrayOutput)
+}
+
+type GetInstanceParamsInstanceEnumParamOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceEnumParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceEnumParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceEnumParamOutput) ToGetInstanceParamsInstanceEnumParamOutput() GetInstanceParamsInstanceEnumParamOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceEnumParamOutput) ToGetInstanceParamsInstanceEnumParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceEnumParamOutput {
+	return o
+}
+
+// current value.
+func (o GetInstanceParamsInstanceEnumParamOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// default value.
+func (o GetInstanceParamsInstanceEnumParamOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// enum value.
+func (o GetInstanceParamsInstanceEnumParamOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// if need restart.
+func (o GetInstanceParamsInstanceEnumParamOutput) NeedRestart() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) string { return v.NeedRestart }).(pulumi.StringOutput)
+}
+
+// name of parameter.
+func (o GetInstanceParamsInstanceEnumParamOutput) ParamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) string { return v.ParamName }).(pulumi.StringOutput)
+}
+
+// if is running.
+func (o GetInstanceParamsInstanceEnumParamOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// descripition of parameter.
+func (o GetInstanceParamsInstanceEnumParamOutput) Tips() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) []string { return v.Tips }).(pulumi.StringArrayOutput)
+}
+
+// value type.
+func (o GetInstanceParamsInstanceEnumParamOutput) ValueType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceEnumParam) string { return v.ValueType }).(pulumi.StringOutput)
+}
+
+type GetInstanceParamsInstanceEnumParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceEnumParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceEnumParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceEnumParamArrayOutput) ToGetInstanceParamsInstanceEnumParamArrayOutput() GetInstanceParamsInstanceEnumParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceEnumParamArrayOutput) ToGetInstanceParamsInstanceEnumParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceEnumParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceEnumParamArrayOutput) Index(i pulumi.IntInput) GetInstanceParamsInstanceEnumParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceParamsInstanceEnumParam {
+		return vs[0].([]GetInstanceParamsInstanceEnumParam)[vs[1].(int)]
+	}).(GetInstanceParamsInstanceEnumParamOutput)
+}
+
+type GetInstanceParamsInstanceIntegerParam struct {
+	// current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// default value.
+	DefaultValue string `pulumi:"defaultValue"`
+	// max value.
+	Max string `pulumi:"max"`
+	// min value.
+	Min string `pulumi:"min"`
+	// if need restart.
+	NeedRestart string `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName string `pulumi:"paramName"`
+	// if is running.
+	Status int `pulumi:"status"`
+	// descripition of parameter.
+	Tips []string `pulumi:"tips"`
+	// value type.
+	ValueType string `pulumi:"valueType"`
+}
+
+// GetInstanceParamsInstanceIntegerParamInput is an input type that accepts GetInstanceParamsInstanceIntegerParamArgs and GetInstanceParamsInstanceIntegerParamOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceIntegerParamInput` via:
+//
+//          GetInstanceParamsInstanceIntegerParamArgs{...}
+type GetInstanceParamsInstanceIntegerParamInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceIntegerParamOutput() GetInstanceParamsInstanceIntegerParamOutput
+	ToGetInstanceParamsInstanceIntegerParamOutputWithContext(context.Context) GetInstanceParamsInstanceIntegerParamOutput
+}
+
+type GetInstanceParamsInstanceIntegerParamArgs struct {
+	// current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// default value.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// max value.
+	Max pulumi.StringInput `pulumi:"max"`
+	// min value.
+	Min pulumi.StringInput `pulumi:"min"`
+	// if need restart.
+	NeedRestart pulumi.StringInput `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName pulumi.StringInput `pulumi:"paramName"`
+	// if is running.
+	Status pulumi.IntInput `pulumi:"status"`
+	// descripition of parameter.
+	Tips pulumi.StringArrayInput `pulumi:"tips"`
+	// value type.
+	ValueType pulumi.StringInput `pulumi:"valueType"`
+}
+
+func (GetInstanceParamsInstanceIntegerParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceIntegerParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceIntegerParamArgs) ToGetInstanceParamsInstanceIntegerParamOutput() GetInstanceParamsInstanceIntegerParamOutput {
+	return i.ToGetInstanceParamsInstanceIntegerParamOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceIntegerParamArgs) ToGetInstanceParamsInstanceIntegerParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceIntegerParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceIntegerParamOutput)
+}
+
+// GetInstanceParamsInstanceIntegerParamArrayInput is an input type that accepts GetInstanceParamsInstanceIntegerParamArray and GetInstanceParamsInstanceIntegerParamArrayOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceIntegerParamArrayInput` via:
+//
+//          GetInstanceParamsInstanceIntegerParamArray{ GetInstanceParamsInstanceIntegerParamArgs{...} }
+type GetInstanceParamsInstanceIntegerParamArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceIntegerParamArrayOutput() GetInstanceParamsInstanceIntegerParamArrayOutput
+	ToGetInstanceParamsInstanceIntegerParamArrayOutputWithContext(context.Context) GetInstanceParamsInstanceIntegerParamArrayOutput
+}
+
+type GetInstanceParamsInstanceIntegerParamArray []GetInstanceParamsInstanceIntegerParamInput
+
+func (GetInstanceParamsInstanceIntegerParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceIntegerParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceIntegerParamArray) ToGetInstanceParamsInstanceIntegerParamArrayOutput() GetInstanceParamsInstanceIntegerParamArrayOutput {
+	return i.ToGetInstanceParamsInstanceIntegerParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceIntegerParamArray) ToGetInstanceParamsInstanceIntegerParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceIntegerParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceIntegerParamArrayOutput)
+}
+
+type GetInstanceParamsInstanceIntegerParamOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceIntegerParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceIntegerParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceIntegerParamOutput) ToGetInstanceParamsInstanceIntegerParamOutput() GetInstanceParamsInstanceIntegerParamOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceIntegerParamOutput) ToGetInstanceParamsInstanceIntegerParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceIntegerParamOutput {
+	return o
+}
+
+// current value.
+func (o GetInstanceParamsInstanceIntegerParamOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// default value.
+func (o GetInstanceParamsInstanceIntegerParamOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// max value.
+func (o GetInstanceParamsInstanceIntegerParamOutput) Max() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) string { return v.Max }).(pulumi.StringOutput)
+}
+
+// min value.
+func (o GetInstanceParamsInstanceIntegerParamOutput) Min() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) string { return v.Min }).(pulumi.StringOutput)
+}
+
+// if need restart.
+func (o GetInstanceParamsInstanceIntegerParamOutput) NeedRestart() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) string { return v.NeedRestart }).(pulumi.StringOutput)
+}
+
+// name of parameter.
+func (o GetInstanceParamsInstanceIntegerParamOutput) ParamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) string { return v.ParamName }).(pulumi.StringOutput)
+}
+
+// if is running.
+func (o GetInstanceParamsInstanceIntegerParamOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// descripition of parameter.
+func (o GetInstanceParamsInstanceIntegerParamOutput) Tips() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) []string { return v.Tips }).(pulumi.StringArrayOutput)
+}
+
+// value type.
+func (o GetInstanceParamsInstanceIntegerParamOutput) ValueType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceIntegerParam) string { return v.ValueType }).(pulumi.StringOutput)
+}
+
+type GetInstanceParamsInstanceIntegerParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceIntegerParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceIntegerParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceIntegerParamArrayOutput) ToGetInstanceParamsInstanceIntegerParamArrayOutput() GetInstanceParamsInstanceIntegerParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceIntegerParamArrayOutput) ToGetInstanceParamsInstanceIntegerParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceIntegerParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceIntegerParamArrayOutput) Index(i pulumi.IntInput) GetInstanceParamsInstanceIntegerParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceParamsInstanceIntegerParam {
+		return vs[0].([]GetInstanceParamsInstanceIntegerParam)[vs[1].(int)]
+	}).(GetInstanceParamsInstanceIntegerParamOutput)
+}
+
+type GetInstanceParamsInstanceMultiParam struct {
+	// current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// default value.
+	DefaultValue string `pulumi:"defaultValue"`
+	// enum value.
+	EnumValues []string `pulumi:"enumValues"`
+	// if need restart.
+	NeedRestart string `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName string `pulumi:"paramName"`
+	// if is running.
+	Status int `pulumi:"status"`
+	// descripition of parameter.
+	Tips []string `pulumi:"tips"`
+	// value type.
+	ValueType string `pulumi:"valueType"`
+}
+
+// GetInstanceParamsInstanceMultiParamInput is an input type that accepts GetInstanceParamsInstanceMultiParamArgs and GetInstanceParamsInstanceMultiParamOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceMultiParamInput` via:
+//
+//          GetInstanceParamsInstanceMultiParamArgs{...}
+type GetInstanceParamsInstanceMultiParamInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceMultiParamOutput() GetInstanceParamsInstanceMultiParamOutput
+	ToGetInstanceParamsInstanceMultiParamOutputWithContext(context.Context) GetInstanceParamsInstanceMultiParamOutput
+}
+
+type GetInstanceParamsInstanceMultiParamArgs struct {
+	// current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// default value.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// enum value.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// if need restart.
+	NeedRestart pulumi.StringInput `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName pulumi.StringInput `pulumi:"paramName"`
+	// if is running.
+	Status pulumi.IntInput `pulumi:"status"`
+	// descripition of parameter.
+	Tips pulumi.StringArrayInput `pulumi:"tips"`
+	// value type.
+	ValueType pulumi.StringInput `pulumi:"valueType"`
+}
+
+func (GetInstanceParamsInstanceMultiParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceMultiParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceMultiParamArgs) ToGetInstanceParamsInstanceMultiParamOutput() GetInstanceParamsInstanceMultiParamOutput {
+	return i.ToGetInstanceParamsInstanceMultiParamOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceMultiParamArgs) ToGetInstanceParamsInstanceMultiParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceMultiParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceMultiParamOutput)
+}
+
+// GetInstanceParamsInstanceMultiParamArrayInput is an input type that accepts GetInstanceParamsInstanceMultiParamArray and GetInstanceParamsInstanceMultiParamArrayOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceMultiParamArrayInput` via:
+//
+//          GetInstanceParamsInstanceMultiParamArray{ GetInstanceParamsInstanceMultiParamArgs{...} }
+type GetInstanceParamsInstanceMultiParamArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceMultiParamArrayOutput() GetInstanceParamsInstanceMultiParamArrayOutput
+	ToGetInstanceParamsInstanceMultiParamArrayOutputWithContext(context.Context) GetInstanceParamsInstanceMultiParamArrayOutput
+}
+
+type GetInstanceParamsInstanceMultiParamArray []GetInstanceParamsInstanceMultiParamInput
+
+func (GetInstanceParamsInstanceMultiParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceMultiParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceMultiParamArray) ToGetInstanceParamsInstanceMultiParamArrayOutput() GetInstanceParamsInstanceMultiParamArrayOutput {
+	return i.ToGetInstanceParamsInstanceMultiParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceMultiParamArray) ToGetInstanceParamsInstanceMultiParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceMultiParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceMultiParamArrayOutput)
+}
+
+type GetInstanceParamsInstanceMultiParamOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceMultiParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceMultiParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceMultiParamOutput) ToGetInstanceParamsInstanceMultiParamOutput() GetInstanceParamsInstanceMultiParamOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceMultiParamOutput) ToGetInstanceParamsInstanceMultiParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceMultiParamOutput {
+	return o
+}
+
+// current value.
+func (o GetInstanceParamsInstanceMultiParamOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// default value.
+func (o GetInstanceParamsInstanceMultiParamOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// enum value.
+func (o GetInstanceParamsInstanceMultiParamOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// if need restart.
+func (o GetInstanceParamsInstanceMultiParamOutput) NeedRestart() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) string { return v.NeedRestart }).(pulumi.StringOutput)
+}
+
+// name of parameter.
+func (o GetInstanceParamsInstanceMultiParamOutput) ParamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) string { return v.ParamName }).(pulumi.StringOutput)
+}
+
+// if is running.
+func (o GetInstanceParamsInstanceMultiParamOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// descripition of parameter.
+func (o GetInstanceParamsInstanceMultiParamOutput) Tips() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) []string { return v.Tips }).(pulumi.StringArrayOutput)
+}
+
+// value type.
+func (o GetInstanceParamsInstanceMultiParamOutput) ValueType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceMultiParam) string { return v.ValueType }).(pulumi.StringOutput)
+}
+
+type GetInstanceParamsInstanceMultiParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceMultiParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceMultiParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceMultiParamArrayOutput) ToGetInstanceParamsInstanceMultiParamArrayOutput() GetInstanceParamsInstanceMultiParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceMultiParamArrayOutput) ToGetInstanceParamsInstanceMultiParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceMultiParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceMultiParamArrayOutput) Index(i pulumi.IntInput) GetInstanceParamsInstanceMultiParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceParamsInstanceMultiParam {
+		return vs[0].([]GetInstanceParamsInstanceMultiParam)[vs[1].(int)]
+	}).(GetInstanceParamsInstanceMultiParamOutput)
+}
+
+type GetInstanceParamsInstanceTextParam struct {
+	// current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// default value.
+	DefaultValue string `pulumi:"defaultValue"`
+	// if need restart.
+	NeedRestart string `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName string `pulumi:"paramName"`
+	// if is running.
+	Status string `pulumi:"status"`
+	// text value.
+	TextValue string `pulumi:"textValue"`
+	// descripition of parameter.
+	Tips []string `pulumi:"tips"`
+	// value type.
+	ValueType string `pulumi:"valueType"`
+}
+
+// GetInstanceParamsInstanceTextParamInput is an input type that accepts GetInstanceParamsInstanceTextParamArgs and GetInstanceParamsInstanceTextParamOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceTextParamInput` via:
+//
+//          GetInstanceParamsInstanceTextParamArgs{...}
+type GetInstanceParamsInstanceTextParamInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceTextParamOutput() GetInstanceParamsInstanceTextParamOutput
+	ToGetInstanceParamsInstanceTextParamOutputWithContext(context.Context) GetInstanceParamsInstanceTextParamOutput
+}
+
+type GetInstanceParamsInstanceTextParamArgs struct {
+	// current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// default value.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// if need restart.
+	NeedRestart pulumi.StringInput `pulumi:"needRestart"`
+	// name of parameter.
+	ParamName pulumi.StringInput `pulumi:"paramName"`
+	// if is running.
+	Status pulumi.StringInput `pulumi:"status"`
+	// text value.
+	TextValue pulumi.StringInput `pulumi:"textValue"`
+	// descripition of parameter.
+	Tips pulumi.StringArrayInput `pulumi:"tips"`
+	// value type.
+	ValueType pulumi.StringInput `pulumi:"valueType"`
+}
+
+func (GetInstanceParamsInstanceTextParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceTextParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceTextParamArgs) ToGetInstanceParamsInstanceTextParamOutput() GetInstanceParamsInstanceTextParamOutput {
+	return i.ToGetInstanceParamsInstanceTextParamOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceTextParamArgs) ToGetInstanceParamsInstanceTextParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceTextParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceTextParamOutput)
+}
+
+// GetInstanceParamsInstanceTextParamArrayInput is an input type that accepts GetInstanceParamsInstanceTextParamArray and GetInstanceParamsInstanceTextParamArrayOutput values.
+// You can construct a concrete instance of `GetInstanceParamsInstanceTextParamArrayInput` via:
+//
+//          GetInstanceParamsInstanceTextParamArray{ GetInstanceParamsInstanceTextParamArgs{...} }
+type GetInstanceParamsInstanceTextParamArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceParamsInstanceTextParamArrayOutput() GetInstanceParamsInstanceTextParamArrayOutput
+	ToGetInstanceParamsInstanceTextParamArrayOutputWithContext(context.Context) GetInstanceParamsInstanceTextParamArrayOutput
+}
+
+type GetInstanceParamsInstanceTextParamArray []GetInstanceParamsInstanceTextParamInput
+
+func (GetInstanceParamsInstanceTextParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceTextParam)(nil)).Elem()
+}
+
+func (i GetInstanceParamsInstanceTextParamArray) ToGetInstanceParamsInstanceTextParamArrayOutput() GetInstanceParamsInstanceTextParamArrayOutput {
+	return i.ToGetInstanceParamsInstanceTextParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceParamsInstanceTextParamArray) ToGetInstanceParamsInstanceTextParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceTextParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceParamsInstanceTextParamArrayOutput)
+}
+
+type GetInstanceParamsInstanceTextParamOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceTextParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceParamsInstanceTextParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceTextParamOutput) ToGetInstanceParamsInstanceTextParamOutput() GetInstanceParamsInstanceTextParamOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceTextParamOutput) ToGetInstanceParamsInstanceTextParamOutputWithContext(ctx context.Context) GetInstanceParamsInstanceTextParamOutput {
+	return o
+}
+
+// current value.
+func (o GetInstanceParamsInstanceTextParamOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// default value.
+func (o GetInstanceParamsInstanceTextParamOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// if need restart.
+func (o GetInstanceParamsInstanceTextParamOutput) NeedRestart() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) string { return v.NeedRestart }).(pulumi.StringOutput)
+}
+
+// name of parameter.
+func (o GetInstanceParamsInstanceTextParamOutput) ParamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) string { return v.ParamName }).(pulumi.StringOutput)
+}
+
+// if is running.
+func (o GetInstanceParamsInstanceTextParamOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// text value.
+func (o GetInstanceParamsInstanceTextParamOutput) TextValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) string { return v.TextValue }).(pulumi.StringOutput)
+}
+
+// descripition of parameter.
+func (o GetInstanceParamsInstanceTextParamOutput) Tips() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) []string { return v.Tips }).(pulumi.StringArrayOutput)
+}
+
+// value type.
+func (o GetInstanceParamsInstanceTextParamOutput) ValueType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceParamsInstanceTextParam) string { return v.ValueType }).(pulumi.StringOutput)
+}
+
+type GetInstanceParamsInstanceTextParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceParamsInstanceTextParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceParamsInstanceTextParam)(nil)).Elem()
+}
+
+func (o GetInstanceParamsInstanceTextParamArrayOutput) ToGetInstanceParamsInstanceTextParamArrayOutput() GetInstanceParamsInstanceTextParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceTextParamArrayOutput) ToGetInstanceParamsInstanceTextParamArrayOutputWithContext(ctx context.Context) GetInstanceParamsInstanceTextParamArrayOutput {
+	return o
+}
+
+func (o GetInstanceParamsInstanceTextParamArrayOutput) Index(i pulumi.IntInput) GetInstanceParamsInstanceTextParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceParamsInstanceTextParam {
+		return vs[0].([]GetInstanceParamsInstanceTextParam)[vs[1].(int)]
+	}).(GetInstanceParamsInstanceTextParamOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// Auto renew flag.
 	AutoRenewFlag int `pulumi:"autoRenewFlag"`
@@ -162,7 +1464,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -228,7 +1530,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -412,7 +1714,7 @@ type GetZoneConfigList struct {
 // GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
 // You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//	GetZoneConfigListArgs{...}
+//          GetZoneConfigListArgs{...}
 type GetZoneConfigListInput interface {
 	pulumi.Input
 
@@ -460,7 +1762,7 @@ func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.
 // GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//	GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
 type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 
@@ -572,14 +1874,50 @@ func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigList
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAccountAuthRoleInput)(nil)).Elem(), InstanceAccountAuthRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAccountAuthRoleArrayInput)(nil)).Elem(), InstanceAccountAuthRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupDownloadTaskBackupSetInput)(nil)).Elem(), InstanceBackupDownloadTaskBackupSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupDownloadTaskBackupSetArrayInput)(nil)).Elem(), InstanceBackupDownloadTaskBackupSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListInput)(nil)).Elem(), InstanceStandbyInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListArrayInput)(nil)).Elem(), InstanceStandbyInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBackupsBackupListInput)(nil)).Elem(), GetInstanceBackupsBackupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBackupsBackupListArrayInput)(nil)).Elem(), GetInstanceBackupsBackupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceConnectionsClientInput)(nil)).Elem(), GetInstanceConnectionsClientArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceConnectionsClientArrayInput)(nil)).Elem(), GetInstanceConnectionsClientArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceCurrentOpCurrentOpInput)(nil)).Elem(), GetInstanceCurrentOpCurrentOpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceCurrentOpCurrentOpArrayInput)(nil)).Elem(), GetInstanceCurrentOpCurrentOpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceEnumParamInput)(nil)).Elem(), GetInstanceParamsInstanceEnumParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceEnumParamArrayInput)(nil)).Elem(), GetInstanceParamsInstanceEnumParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceIntegerParamInput)(nil)).Elem(), GetInstanceParamsInstanceIntegerParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceIntegerParamArrayInput)(nil)).Elem(), GetInstanceParamsInstanceIntegerParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceMultiParamInput)(nil)).Elem(), GetInstanceParamsInstanceMultiParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceMultiParamArrayInput)(nil)).Elem(), GetInstanceParamsInstanceMultiParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceTextParamInput)(nil)).Elem(), GetInstanceParamsInstanceTextParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamsInstanceTextParamArrayInput)(nil)).Elem(), GetInstanceParamsInstanceTextParamArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListInput)(nil)).Elem(), GetZoneConfigListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
+	pulumi.RegisterOutputType(InstanceAccountAuthRoleOutput{})
+	pulumi.RegisterOutputType(InstanceAccountAuthRoleArrayOutput{})
+	pulumi.RegisterOutputType(InstanceBackupDownloadTaskBackupSetOutput{})
+	pulumi.RegisterOutputType(InstanceBackupDownloadTaskBackupSetArrayOutput{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListOutput{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceBackupsBackupListOutput{})
+	pulumi.RegisterOutputType(GetInstanceBackupsBackupListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceConnectionsClientOutput{})
+	pulumi.RegisterOutputType(GetInstanceConnectionsClientArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceCurrentOpCurrentOpOutput{})
+	pulumi.RegisterOutputType(GetInstanceCurrentOpCurrentOpArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceEnumParamOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceEnumParamArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceIntegerParamOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceIntegerParamArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceMultiParamOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceMultiParamArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceTextParamOutput{})
+	pulumi.RegisterOutputType(GetInstanceParamsInstanceTextParamArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetZoneConfigListOutput{})

@@ -16,14 +16,13 @@ __all__ = ['InstanceArgs', 'Instance']
 class InstanceArgs:
     def __init__(__self__, *,
                  instance_name: pulumi.Input[str],
-                 subnet_id: pulumi.Input[str],
-                 vpc_id: pulumi.Input[str],
                  zone_id: pulumi.Input[int],
                  band_width: Optional[pulumi.Input[int]] = None,
                  config: Optional[pulumi.Input['InstanceConfigArgs']] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  dynamic_retention_config: Optional[pulumi.Input['InstanceDynamicRetentionConfigArgs']] = None,
+                 instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
@@ -32,33 +31,38 @@ class InstanceArgs:
                  public_network: Optional[pulumi.Input[int]] = None,
                  rebalance_time: Optional[pulumi.Input[int]] = None,
                  renew_flag: Optional[pulumi.Input[int]] = None,
+                 specifications_type: Optional[pulumi.Input[str]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
+                 tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] instance_name: Instance name.
-        :param pulumi.Input[str] subnet_id: Subnet id.
-        :param pulumi.Input[str] vpc_id: Vpc id.
         :param pulumi.Input[int] zone_id: Available zone id.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
         :param pulumi.Input['InstanceConfigArgs'] config: Instance configuration.
         :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input['InstanceDynamicRetentionConfigArgs'] dynamic_retention_config: Dynamic message retention policy configuration.
+        :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Timestamp.
+        :param pulumi.Input[int] public_network: Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: Partition size, the professional version does not need tag.
+        :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
+        :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
+        :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] zone_ids: List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
         """
         pulumi.set(__self__, "instance_name", instance_name)
-        pulumi.set(__self__, "subnet_id", subnet_id)
-        pulumi.set(__self__, "vpc_id", vpc_id)
         pulumi.set(__self__, "zone_id", zone_id)
         if band_width is not None:
             pulumi.set(__self__, "band_width", band_width)
@@ -70,6 +74,8 @@ class InstanceArgs:
             pulumi.set(__self__, "disk_type", disk_type)
         if dynamic_retention_config is not None:
             pulumi.set(__self__, "dynamic_retention_config", dynamic_retention_config)
+        if instance_type is not None:
+            pulumi.set(__self__, "instance_type", instance_type)
         if kafka_version is not None:
             pulumi.set(__self__, "kafka_version", kafka_version)
         if msg_retention_time is not None:
@@ -86,8 +92,19 @@ class InstanceArgs:
             pulumi.set(__self__, "rebalance_time", rebalance_time)
         if renew_flag is not None:
             pulumi.set(__self__, "renew_flag", renew_flag)
+        if specifications_type is not None:
+            pulumi.set(__self__, "specifications_type", specifications_type)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if tag_set is not None:
+            pulumi.set(__self__, "tag_set", tag_set)
+        if tags is not None:
+            warnings.warn("""It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
         if zone_ids is not None:
             pulumi.set(__self__, "zone_ids", zone_ids)
 
@@ -102,30 +119,6 @@ class InstanceArgs:
     @instance_name.setter
     def instance_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "instance_name", value)
-
-    @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Input[str]:
-        """
-        Subnet id.
-        """
-        return pulumi.get(self, "subnet_id")
-
-    @subnet_id.setter
-    def subnet_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "subnet_id", value)
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Input[str]:
-        """
-        Vpc id.
-        """
-        return pulumi.get(self, "vpc_id")
-
-    @vpc_id.setter
-    def vpc_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "vpc_id", value)
 
     @property
     @pulumi.getter(name="zoneId")
@@ -200,6 +193,18 @@ class InstanceArgs:
         pulumi.set(self, "dynamic_retention_config", value)
 
     @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+        """
+        return pulumi.get(self, "instance_type")
+
+    @instance_type.setter
+    def instance_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_type", value)
+
+    @property
     @pulumi.getter(name="kafkaVersion")
     def kafka_version(self) -> Optional[pulumi.Input[str]]:
         """
@@ -263,7 +268,7 @@ class InstanceArgs:
     @pulumi.getter(name="publicNetwork")
     def public_network(self) -> Optional[pulumi.Input[int]]:
         """
-        Timestamp.
+        Bandwidth of the public network.
         """
         return pulumi.get(self, "public_network")
 
@@ -296,16 +301,64 @@ class InstanceArgs:
         pulumi.set(self, "renew_flag", value)
 
     @property
+    @pulumi.getter(name="specificationsType")
+    def specifications_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        """
+        return pulumi.get(self, "specifications_type")
+
+    @specifications_type.setter
+    def specifications_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "specifications_type", value)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Subnet id, it will be basic network if not set.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="tagSet")
+    def tag_set(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag set of instance.
+        """
+        return pulumi.get(self, "tag_set")
+
+    @tag_set.setter
+    def tag_set(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tag_set", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]]]:
         """
-        Partition size, the professional version does not need tag.
+        It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
     def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]]]):
         pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Vpc id, it will be basic network if not set.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_id", value)
 
     @property
     @pulumi.getter(name="zoneIds")
@@ -329,6 +382,7 @@ class _InstanceState:
                  disk_type: Optional[pulumi.Input[str]] = None,
                  dynamic_retention_config: Optional[pulumi.Input['InstanceDynamicRetentionConfigArgs']] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
@@ -337,7 +391,9 @@ class _InstanceState:
                  public_network: Optional[pulumi.Input[int]] = None,
                  rebalance_time: Optional[pulumi.Input[int]] = None,
                  renew_flag: Optional[pulumi.Input[int]] = None,
+                 specifications_type: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]]] = None,
                  vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
@@ -352,18 +408,21 @@ class _InstanceState:
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input['InstanceDynamicRetentionConfigArgs'] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[str] instance_name: Instance name.
+        :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Timestamp.
+        :param pulumi.Input[int] public_network: Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
-        :param pulumi.Input[str] subnet_id: Subnet id.
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: Partition size, the professional version does not need tag.
+        :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
+        :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         :param pulumi.Input[str] vip: Vip of instance.
-        :param pulumi.Input[str] vpc_id: Vpc id.
+        :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[str] vport: Type of instance.
         :param pulumi.Input[int] zone_id: Available zone id.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] zone_ids: List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
@@ -380,6 +439,8 @@ class _InstanceState:
             pulumi.set(__self__, "dynamic_retention_config", dynamic_retention_config)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if instance_type is not None:
+            pulumi.set(__self__, "instance_type", instance_type)
         if kafka_version is not None:
             pulumi.set(__self__, "kafka_version", kafka_version)
         if msg_retention_time is not None:
@@ -396,8 +457,15 @@ class _InstanceState:
             pulumi.set(__self__, "rebalance_time", rebalance_time)
         if renew_flag is not None:
             pulumi.set(__self__, "renew_flag", renew_flag)
+        if specifications_type is not None:
+            pulumi.set(__self__, "specifications_type", specifications_type)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
+        if tag_set is not None:
+            pulumi.set(__self__, "tag_set", tag_set)
+        if tags is not None:
+            warnings.warn("""It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if vip is not None:
@@ -484,6 +552,18 @@ class _InstanceState:
         pulumi.set(self, "instance_name", value)
 
     @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+        """
+        return pulumi.get(self, "instance_type")
+
+    @instance_type.setter
+    def instance_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_type", value)
+
+    @property
     @pulumi.getter(name="kafkaVersion")
     def kafka_version(self) -> Optional[pulumi.Input[str]]:
         """
@@ -547,7 +627,7 @@ class _InstanceState:
     @pulumi.getter(name="publicNetwork")
     def public_network(self) -> Optional[pulumi.Input[int]]:
         """
-        Timestamp.
+        Bandwidth of the public network.
         """
         return pulumi.get(self, "public_network")
 
@@ -580,10 +660,22 @@ class _InstanceState:
         pulumi.set(self, "renew_flag", value)
 
     @property
+    @pulumi.getter(name="specificationsType")
+    def specifications_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        """
+        return pulumi.get(self, "specifications_type")
+
+    @specifications_type.setter
+    def specifications_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "specifications_type", value)
+
+    @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Subnet id.
+        Subnet id, it will be basic network if not set.
         """
         return pulumi.get(self, "subnet_id")
 
@@ -592,10 +684,22 @@ class _InstanceState:
         pulumi.set(self, "subnet_id", value)
 
     @property
+    @pulumi.getter(name="tagSet")
+    def tag_set(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag set of instance.
+        """
+        return pulumi.get(self, "tag_set")
+
+    @tag_set.setter
+    def tag_set(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tag_set", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]]]:
         """
-        Partition size, the professional version does not need tag.
+        It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         """
         return pulumi.get(self, "tags")
 
@@ -619,7 +723,7 @@ class _InstanceState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Vpc id.
+        Vpc id, it will be basic network if not set.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -675,6 +779,7 @@ class Instance(pulumi.CustomResource):
                  disk_type: Optional[pulumi.Input[str]] = None,
                  dynamic_retention_config: Optional[pulumi.Input[pulumi.InputType['InstanceDynamicRetentionConfigArgs']]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
@@ -683,7 +788,9 @@ class Instance(pulumi.CustomResource):
                  public_network: Optional[pulumi.Input[int]] = None,
                  rebalance_time: Optional[pulumi.Input[int]] = None,
                  renew_flag: Optional[pulumi.Input[int]] = None,
+                 specifications_type: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None,
@@ -692,7 +799,7 @@ class Instance(pulumi.CustomResource):
         """
         Use this resource to create ckafka instance.
 
-        > **NOTE:** It only support create profession ckafka instance.
+        > **NOTE:** It only support create prepaid ckafka instance.
 
         ## Example Usage
 
@@ -723,6 +830,7 @@ class Instance(pulumi.CustomResource):
             period=1,
             public_network=3,
             renew_flag=0,
+            specifications_type="profession",
             subnet_id="subnet-4vwihrzk",
             vpc_id="vpc-82p1t1nv",
             zone_id=100006,
@@ -748,17 +856,20 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input[pulumi.InputType['InstanceDynamicRetentionConfigArgs']] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[str] instance_name: Instance name.
+        :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Timestamp.
+        :param pulumi.Input[int] public_network: Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
-        :param pulumi.Input[str] subnet_id: Subnet id.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: Partition size, the professional version does not need tag.
-        :param pulumi.Input[str] vpc_id: Vpc id.
+        :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
+        :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
+        :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[int] zone_id: Available zone id.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] zone_ids: List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
         """
@@ -771,7 +882,7 @@ class Instance(pulumi.CustomResource):
         """
         Use this resource to create ckafka instance.
 
-        > **NOTE:** It only support create profession ckafka instance.
+        > **NOTE:** It only support create prepaid ckafka instance.
 
         ## Example Usage
 
@@ -802,6 +913,7 @@ class Instance(pulumi.CustomResource):
             period=1,
             public_network=3,
             renew_flag=0,
+            specifications_type="profession",
             subnet_id="subnet-4vwihrzk",
             vpc_id="vpc-82p1t1nv",
             zone_id=100006,
@@ -840,6 +952,7 @@ class Instance(pulumi.CustomResource):
                  disk_type: Optional[pulumi.Input[str]] = None,
                  dynamic_retention_config: Optional[pulumi.Input[pulumi.InputType['InstanceDynamicRetentionConfigArgs']]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
@@ -848,7 +961,9 @@ class Instance(pulumi.CustomResource):
                  public_network: Optional[pulumi.Input[int]] = None,
                  rebalance_time: Optional[pulumi.Input[int]] = None,
                  renew_flag: Optional[pulumi.Input[int]] = None,
+                 specifications_type: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None,
@@ -875,6 +990,7 @@ class Instance(pulumi.CustomResource):
             if instance_name is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_name'")
             __props__.__dict__["instance_name"] = instance_name
+            __props__.__dict__["instance_type"] = instance_type
             __props__.__dict__["kafka_version"] = kafka_version
             __props__.__dict__["msg_retention_time"] = msg_retention_time
             __props__.__dict__["multi_zone_flag"] = multi_zone_flag
@@ -883,12 +999,13 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["public_network"] = public_network
             __props__.__dict__["rebalance_time"] = rebalance_time
             __props__.__dict__["renew_flag"] = renew_flag
-            if subnet_id is None and not opts.urn:
-                raise TypeError("Missing required property 'subnet_id'")
+            __props__.__dict__["specifications_type"] = specifications_type
             __props__.__dict__["subnet_id"] = subnet_id
+            __props__.__dict__["tag_set"] = tag_set
+            if tags is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""", DeprecationWarning)
+                pulumi.log.warn("""tags is deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""")
             __props__.__dict__["tags"] = tags
-            if vpc_id is None and not opts.urn:
-                raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
             if zone_id is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_id'")
@@ -912,6 +1029,7 @@ class Instance(pulumi.CustomResource):
             disk_type: Optional[pulumi.Input[str]] = None,
             dynamic_retention_config: Optional[pulumi.Input[pulumi.InputType['InstanceDynamicRetentionConfigArgs']]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
+            instance_type: Optional[pulumi.Input[int]] = None,
             kafka_version: Optional[pulumi.Input[str]] = None,
             msg_retention_time: Optional[pulumi.Input[int]] = None,
             multi_zone_flag: Optional[pulumi.Input[bool]] = None,
@@ -920,7 +1038,9 @@ class Instance(pulumi.CustomResource):
             public_network: Optional[pulumi.Input[int]] = None,
             rebalance_time: Optional[pulumi.Input[int]] = None,
             renew_flag: Optional[pulumi.Input[int]] = None,
+            specifications_type: Optional[pulumi.Input[str]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
+            tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]]] = None,
             vip: Optional[pulumi.Input[str]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
@@ -940,18 +1060,21 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input[pulumi.InputType['InstanceDynamicRetentionConfigArgs']] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[str] instance_name: Instance name.
+        :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Timestamp.
+        :param pulumi.Input[int] public_network: Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
-        :param pulumi.Input[str] subnet_id: Subnet id.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: Partition size, the professional version does not need tag.
+        :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
+        :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         :param pulumi.Input[str] vip: Vip of instance.
-        :param pulumi.Input[str] vpc_id: Vpc id.
+        :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[str] vport: Type of instance.
         :param pulumi.Input[int] zone_id: Available zone id.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] zone_ids: List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
@@ -966,6 +1089,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["disk_type"] = disk_type
         __props__.__dict__["dynamic_retention_config"] = dynamic_retention_config
         __props__.__dict__["instance_name"] = instance_name
+        __props__.__dict__["instance_type"] = instance_type
         __props__.__dict__["kafka_version"] = kafka_version
         __props__.__dict__["msg_retention_time"] = msg_retention_time
         __props__.__dict__["multi_zone_flag"] = multi_zone_flag
@@ -974,7 +1098,9 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["public_network"] = public_network
         __props__.__dict__["rebalance_time"] = rebalance_time
         __props__.__dict__["renew_flag"] = renew_flag
+        __props__.__dict__["specifications_type"] = specifications_type
         __props__.__dict__["subnet_id"] = subnet_id
+        __props__.__dict__["tag_set"] = tag_set
         __props__.__dict__["tags"] = tags
         __props__.__dict__["vip"] = vip
         __props__.__dict__["vpc_id"] = vpc_id
@@ -1032,6 +1158,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "instance_name")
 
     @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> pulumi.Output[int]:
+        """
+        Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
     @pulumi.getter(name="kafkaVersion")
     def kafka_version(self) -> pulumi.Output[str]:
         """
@@ -1075,7 +1209,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="publicNetwork")
     def public_network(self) -> pulumi.Output[int]:
         """
-        Timestamp.
+        Bandwidth of the public network.
         """
         return pulumi.get(self, "public_network")
 
@@ -1096,18 +1230,34 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "renew_flag")
 
     @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="specificationsType")
+    def specifications_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Subnet id.
+        Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        """
+        return pulumi.get(self, "specifications_type")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Subnet id, it will be basic network if not set.
         """
         return pulumi.get(self, "subnet_id")
 
     @property
-    @pulumi.getter
-    def tags(self) -> pulumi.Output[Optional[Sequence['outputs.InstanceTag']]]:
+    @pulumi.getter(name="tagSet")
+    def tag_set(self) -> pulumi.Output[Mapping[str, Any]]:
         """
-        Partition size, the professional version does not need tag.
+        Tag set of instance.
+        """
+        return pulumi.get(self, "tag_set")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Sequence['outputs.InstanceTag']]:
+        """
+        It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         """
         return pulumi.get(self, "tags")
 
@@ -1121,9 +1271,9 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Output[str]:
+    def vpc_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Vpc id.
+        Vpc id, it will be basic network if not set.
         """
         return pulumi.get(self, "vpc_id")
 

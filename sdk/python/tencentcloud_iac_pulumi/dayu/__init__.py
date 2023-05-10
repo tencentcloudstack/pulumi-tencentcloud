@@ -8,6 +8,7 @@ import typing
 from .cc_http_policy import *
 from .cc_https_policy import *
 from .cc_policy_v2 import *
+from .ddos_ip_attachment_v2 import *
 from .ddos_policy import *
 from .ddos_policy_attachment import *
 from .ddos_policy_case import *

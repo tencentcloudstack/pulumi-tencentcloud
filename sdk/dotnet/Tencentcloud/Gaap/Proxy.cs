@@ -57,13 +57,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Output<string> AccessRegion { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+        /// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
         /// </summary>
         [Output("bandwidth")]
         public Output<int> Bandwidth { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+        /// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
         /// </summary>
         [Output("concurrent")]
         public Output<int> Concurrent { get; private set; } = null!;
@@ -135,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Output<ImmutableArray<string>> SupportProtocols { get; private set; } = null!;
 
         /// <summary>
-        /// Tags of the GAAP proxy.
+        /// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
@@ -194,13 +194,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string> AccessRegion { get; set; } = null!;
 
         /// <summary>
-        /// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+        /// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
         /// </summary>
         [Input("bandwidth", required: true)]
         public Input<int> Bandwidth { get; set; } = null!;
 
         /// <summary>
-        /// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+        /// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
         /// </summary>
         [Input("concurrent", required: true)]
         public Input<int> Concurrent { get; set; } = null!;
@@ -233,7 +233,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// Tags of the GAAP proxy.
+        /// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
         /// </summary>
         public InputMap<object> Tags
         {
@@ -255,13 +255,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string>? AccessRegion { get; set; }
 
         /// <summary>
-        /// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
+        /// Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
 
         /// <summary>
-        /// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+        /// Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
         /// </summary>
         [Input("concurrent")]
         public Input<int>? Concurrent { get; set; }
@@ -342,7 +342,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// Tags of the GAAP proxy.
+        /// Tags of the GAAP proxy. Tags that do not exist are not created automatically.
         /// </summary>
         public InputMap<object> Tags
         {

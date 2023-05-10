@@ -20,7 +20,7 @@ type AssumeRole struct {
 // AssumeRoleInput is an input type that accepts AssumeRoleArgs and AssumeRoleOutput values.
 // You can construct a concrete instance of `AssumeRoleInput` via:
 //
-//	AssumeRoleArgs{...}
+//          AssumeRoleArgs{...}
 type AssumeRoleInput interface {
 	pulumi.Input
 

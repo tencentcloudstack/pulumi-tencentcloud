@@ -18,26 +18,23 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ssm.GetSecretVersions(ctx, &ssm.GetSecretVersionsArgs{
-//				SecretName: "test",
-//				VersionId:  pulumi.StringRef("v1"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ssm.GetSecretVersions(ctx, &ssm.GetSecretVersionsArgs{
+// 			SecretName: "test",
+// 			VersionId:  pulumi.StringRef("v1"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetSecretVersions(ctx *pulumi.Context, args *GetSecretVersionsArgs, opts ...pulumi.InvokeOption) (*GetSecretVersionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

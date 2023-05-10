@@ -10,6 +10,9 @@ from .. import _utilities
 
 __all__ = [
     'BucketCorsRuleArgs',
+    'BucketDomainCertificateAttachmentDomainCertificateArgs',
+    'BucketDomainCertificateAttachmentDomainCertificateCertificateArgs',
+    'BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs',
     'BucketLifecycleRuleArgs',
     'BucketLifecycleRuleExpirationArgs',
     'BucketLifecycleRuleNonCurrentExpirationArgs',
@@ -103,6 +106,117 @@ class BucketCorsRuleArgs:
     @max_age_seconds.setter
     def max_age_seconds(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "max_age_seconds", value)
+
+
+@pulumi.input_type
+class BucketDomainCertificateAttachmentDomainCertificateArgs:
+    def __init__(__self__, *,
+                 certificate: pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateArgs'],
+                 domain: pulumi.Input[str]):
+        """
+        :param pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateArgs'] certificate: Certificate info.
+        :param pulumi.Input[str] domain: The name of domain.
+        """
+        pulumi.set(__self__, "certificate", certificate)
+        pulumi.set(__self__, "domain", domain)
+
+    @property
+    @pulumi.getter
+    def certificate(self) -> pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateArgs']:
+        """
+        Certificate info.
+        """
+        return pulumi.get(self, "certificate")
+
+    @certificate.setter
+    def certificate(self, value: pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateArgs']):
+        pulumi.set(self, "certificate", value)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> pulumi.Input[str]:
+        """
+        The name of domain.
+        """
+        return pulumi.get(self, "domain")
+
+    @domain.setter
+    def domain(self, value: pulumi.Input[str]):
+        pulumi.set(self, "domain", value)
+
+
+@pulumi.input_type
+class BucketDomainCertificateAttachmentDomainCertificateCertificateArgs:
+    def __init__(__self__, *,
+                 cert_type: pulumi.Input[str],
+                 custom_cert: pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs']):
+        """
+        :param pulumi.Input[str] cert_type: Certificate type.
+        :param pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs'] custom_cert: Custom certificate.
+        """
+        pulumi.set(__self__, "cert_type", cert_type)
+        pulumi.set(__self__, "custom_cert", custom_cert)
+
+    @property
+    @pulumi.getter(name="certType")
+    def cert_type(self) -> pulumi.Input[str]:
+        """
+        Certificate type.
+        """
+        return pulumi.get(self, "cert_type")
+
+    @cert_type.setter
+    def cert_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cert_type", value)
+
+    @property
+    @pulumi.getter(name="customCert")
+    def custom_cert(self) -> pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs']:
+        """
+        Custom certificate.
+        """
+        return pulumi.get(self, "custom_cert")
+
+    @custom_cert.setter
+    def custom_cert(self, value: pulumi.Input['BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs']):
+        pulumi.set(self, "custom_cert", value)
+
+
+@pulumi.input_type
+class BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs:
+    def __init__(__self__, *,
+                 cert: pulumi.Input[str],
+                 private_key: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] cert: Public key of certificate.
+        :param pulumi.Input[str] private_key: Private key of certificate.
+        """
+        pulumi.set(__self__, "cert", cert)
+        pulumi.set(__self__, "private_key", private_key)
+
+    @property
+    @pulumi.getter
+    def cert(self) -> pulumi.Input[str]:
+        """
+        Public key of certificate.
+        """
+        return pulumi.get(self, "cert")
+
+    @cert.setter
+    def cert(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cert", value)
+
+    @property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[str]:
+        """
+        Private key of certificate.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "private_key", value)
 
 
 @pulumi.input_type
@@ -291,7 +405,7 @@ class BucketLifecycleRuleNonCurrentTransitionArgs:
                  storage_class: pulumi.Input[str],
                  non_current_days: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] storage_class: Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[str] storage_class: Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param pulumi.Input[int] non_current_days: Number of days after non current object creation when the specific rule action takes effect.
         """
         pulumi.set(__self__, "storage_class", storage_class)
@@ -302,7 +416,7 @@ class BucketLifecycleRuleNonCurrentTransitionArgs:
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> pulumi.Input[str]:
         """
-        Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         """
         return pulumi.get(self, "storage_class")
 
@@ -330,7 +444,7 @@ class BucketLifecycleRuleTransitionArgs:
                  date: Optional[pulumi.Input[str]] = None,
                  days: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] storage_class: Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param pulumi.Input[str] storage_class: Specifies the storage class to which you want the object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param pulumi.Input[str] date: Specifies the date after which you want the corresponding action to take effect.
         :param pulumi.Input[int] days: Specifies the number of days after object creation when the specific rule action takes effect.
         """
@@ -344,7 +458,7 @@ class BucketLifecycleRuleTransitionArgs:
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> pulumi.Input[str]:
         """
-        Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        Specifies the storage class to which you want the object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         """
         return pulumi.get(self, "storage_class")
 
@@ -668,16 +782,28 @@ class BucketReplicaRuleArgs:
 @pulumi.input_type
 class BucketWebsiteArgs:
     def __init__(__self__, *,
+                 endpoint: Optional[pulumi.Input[str]] = None,
                  error_document: Optional[pulumi.Input[str]] = None,
                  index_document: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] error_document: An absolute path to the document to return in case of a 4XX error.
         :param pulumi.Input[str] index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
         """
+        if endpoint is not None:
+            pulumi.set(__self__, "endpoint", endpoint)
         if error_document is not None:
             pulumi.set(__self__, "error_document", error_document)
         if index_document is not None:
             pulumi.set(__self__, "index_document", index_document)
+
+    @property
+    @pulumi.getter
+    def endpoint(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "endpoint")
+
+    @endpoint.setter
+    def endpoint(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "endpoint", value)
 
     @property
     @pulumi.getter(name="errorDocument")

@@ -26,10 +26,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     ///         var mongodb = new Tencentcloud.Mongodb.ShardingInstance("mongodb", new Tencentcloud.Mongodb.ShardingInstanceArgs
     ///         {
     ///             AvailableZone = "ap-guangzhou-3",
-    ///             EngineVersion = "MONGO_3_WT",
+    ///             EngineVersion = "MONGO_36_WT",
     ///             InstanceName = "mongodb",
-    ///             MachineType = "GIO",
+    ///             MachineType = "HIO10G",
     ///             Memory = 4,
+    ///             MongosCpu = 1,
+    ///             MongosMemory = 2,
+    ///             MongosNodeNum = 3,
     ///             NodesPerShard = 3,
     ///             Password = "password1234",
     ///             ProjectId = 0,
@@ -61,6 +64,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<int?> AutoRenewFlag { get; private set; } = null!;
 
         /// <summary>
+        /// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        /// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        /// - Version 4.2 and above are not supported.
+        /// - Read-only disaster recovery instances are not supported.
+        /// - Basic network cannot be selected.
+        /// </summary>
+        [Output("availabilityZoneLists")]
+        public Output<ImmutableArray<string>> AvailabilityZoneLists { get; private set; } = null!;
+
+        /// <summary>
         /// The available zone of the Mongodb.
         /// </summary>
         [Output("availableZone")]
@@ -85,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string> EngineVersion { get; private set; } = null!;
 
         /// <summary>
+        /// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        /// </summary>
+        [Output("hiddenZone")]
+        public Output<string> HiddenZone { get; private set; } = null!;
+
+        /// <summary>
         /// Name of the Mongodb instance.
         /// </summary>
         [Output("instanceName")]
@@ -101,6 +120,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Output("memory")]
         public Output<int> Memory { get; private set; } = null!;
+
+        /// <summary>
+        /// Number of mongos cpu.
+        /// </summary>
+        [Output("mongosCpu")]
+        public Output<int> MongosCpu { get; private set; } = null!;
+
+        /// <summary>
+        /// Mongos memory size in GB.
+        /// </summary>
+        [Output("mongosMemory")]
+        public Output<int> MongosMemory { get; private set; } = null!;
+
+        /// <summary>
+        /// Number of mongos.
+        /// </summary>
+        [Output("mongosNodeNum")]
+        public Output<int> MongosNodeNum { get; private set; } = null!;
 
         /// <summary>
         /// Number of nodes per shard, at least 3(one master and two slaves).
@@ -233,6 +270,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
 
+        [Input("availabilityZoneLists")]
+        private InputList<string>? _availabilityZoneLists;
+
+        /// <summary>
+        /// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        /// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        /// - Version 4.2 and above are not supported.
+        /// - Read-only disaster recovery instances are not supported.
+        /// - Basic network cannot be selected.
+        /// </summary>
+        public InputList<string> AvailabilityZoneLists
+        {
+            get => _availabilityZoneLists ?? (_availabilityZoneLists = new InputList<string>());
+            set => _availabilityZoneLists = value;
+        }
+
         /// <summary>
         /// The available zone of the Mongodb.
         /// </summary>
@@ -252,6 +305,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string> EngineVersion { get; set; } = null!;
 
         /// <summary>
+        /// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        /// </summary>
+        [Input("hiddenZone")]
+        public Input<string>? HiddenZone { get; set; }
+
+        /// <summary>
         /// Name of the Mongodb instance.
         /// </summary>
         [Input("instanceName", required: true)]
@@ -268,6 +327,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("memory", required: true)]
         public Input<int> Memory { get; set; } = null!;
+
+        /// <summary>
+        /// Number of mongos cpu.
+        /// </summary>
+        [Input("mongosCpu")]
+        public Input<int>? MongosCpu { get; set; }
+
+        /// <summary>
+        /// Mongos memory size in GB.
+        /// </summary>
+        [Input("mongosMemory")]
+        public Input<int>? MongosMemory { get; set; }
+
+        /// <summary>
+        /// Number of mongos.
+        /// </summary>
+        [Input("mongosNodeNum")]
+        public Input<int>? MongosNodeNum { get; set; }
 
         /// <summary>
         /// Number of nodes per shard, at least 3(one master and two slaves).
@@ -354,6 +431,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
 
+        [Input("availabilityZoneLists")]
+        private InputList<string>? _availabilityZoneLists;
+
+        /// <summary>
+        /// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        /// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        /// - Version 4.2 and above are not supported.
+        /// - Read-only disaster recovery instances are not supported.
+        /// - Basic network cannot be selected.
+        /// </summary>
+        public InputList<string> AvailabilityZoneLists
+        {
+            get => _availabilityZoneLists ?? (_availabilityZoneLists = new InputList<string>());
+            set => _availabilityZoneLists = value;
+        }
+
         /// <summary>
         /// The available zone of the Mongodb.
         /// </summary>
@@ -379,6 +472,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? EngineVersion { get; set; }
 
         /// <summary>
+        /// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        /// </summary>
+        [Input("hiddenZone")]
+        public Input<string>? HiddenZone { get; set; }
+
+        /// <summary>
         /// Name of the Mongodb instance.
         /// </summary>
         [Input("instanceName")]
@@ -395,6 +494,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("memory")]
         public Input<int>? Memory { get; set; }
+
+        /// <summary>
+        /// Number of mongos cpu.
+        /// </summary>
+        [Input("mongosCpu")]
+        public Input<int>? MongosCpu { get; set; }
+
+        /// <summary>
+        /// Mongos memory size in GB.
+        /// </summary>
+        [Input("mongosMemory")]
+        public Input<int>? MongosMemory { get; set; }
+
+        /// <summary>
+        /// Number of mongos.
+        /// </summary>
+        [Input("mongosNodeNum")]
+        public Input<int>? MongosNodeNum { get; set; }
 
         /// <summary>
         /// Number of nodes per shard, at least 3(one master and two slaves).

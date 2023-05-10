@@ -18,17 +18,13 @@ import (
 // VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
-//
+//  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
 // ```
 //
-//	NETWORKINTERFACT SNat
+//  NETWORKINTERFACT SNat
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
-//
+//  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
 // ```
 type GatewaySnat struct {
 	pulumi.CustomResourceState
@@ -211,7 +207,7 @@ func (i *GatewaySnat) ToGatewaySnatOutputWithContext(ctx context.Context) Gatewa
 // GatewaySnatArrayInput is an input type that accepts GatewaySnatArray and GatewaySnatArrayOutput values.
 // You can construct a concrete instance of `GatewaySnatArrayInput` via:
 //
-//	GatewaySnatArray{ GatewaySnatArgs{...} }
+//          GatewaySnatArray{ GatewaySnatArgs{...} }
 type GatewaySnatArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +232,7 @@ func (i GatewaySnatArray) ToGatewaySnatArrayOutputWithContext(ctx context.Contex
 // GatewaySnatMapInput is an input type that accepts GatewaySnatMap and GatewaySnatMapOutput values.
 // You can construct a concrete instance of `GatewaySnatMapInput` via:
 //
-//	GatewaySnatMap{ "key": GatewaySnatArgs{...} }
+//          GatewaySnatMap{ "key": GatewaySnatArgs{...} }
 type GatewaySnatMapInput interface {
 	pulumi.Input
 

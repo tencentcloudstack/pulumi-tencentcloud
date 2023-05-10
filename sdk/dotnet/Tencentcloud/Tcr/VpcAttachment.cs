@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of region. Conflict with region_name, can not be set at the same time.
+        /// this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         /// </summary>
         [Output("regionId")]
         public Output<int?> RegionId { get; private set; } = null!;
@@ -165,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Input<string> InstanceId { get; set; } = null!;
 
         /// <summary>
-        /// ID of region. Conflict with region_name, can not be set at the same time.
+        /// this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         /// </summary>
         [Input("regionId")]
         public Input<int>? RegionId { get; set; }
@@ -220,7 +220,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// ID of region. Conflict with region_name, can not be set at the same time.
+        /// this argument was deprecated, use `region_name` instead. ID of region. Conflict with region_name, can not be set at the same time.
         /// </summary>
         [Input("regionId")]
         public Input<int>? RegionId { get; set; }

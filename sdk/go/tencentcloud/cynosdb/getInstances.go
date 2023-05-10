@@ -18,28 +18,25 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cynosdb.GetInstances(ctx, &cynosdb.GetInstancesArgs{
-//				DbType:       pulumi.StringRef("MYSQL"),
-//				InstanceId:   pulumi.StringRef("cynosdbmysql-ins-0wln9u6w"),
-//				InstanceName: pulumi.StringRef("test"),
-//				ProjectId:    pulumi.IntRef(0),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cynosdb.GetInstances(ctx, &cynosdb.GetInstancesArgs{
+// 			DbType:       pulumi.StringRef("MYSQL"),
+// 			InstanceId:   pulumi.StringRef("cynosdbmysql-ins-0wln9u6w"),
+// 			InstanceName: pulumi.StringRef("test"),
+// 			ProjectId:    pulumi.IntRef(0),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -21,134 +21,128 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-3"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			subnet := "subnet-pqfek0t8"
-//			if param := cfg.Get("subnet"); param != "" {
-//				subnet = param
-//			}
-//			scaleInstanceType := "S2.LARGE16"
-//			if param := cfg.Get("scaleInstanceType"); param != "" {
-//				scaleInstanceType = param
-//			}
-//			_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
-//				ClusterId:     pulumi.String("cls-godovr32"),
-//				DesiredPodNum: pulumi.Int(16),
-//				Labels: pulumi.AnyMap{
-//					"test1": pulumi.Any("test1"),
-//					"test2": pulumi.Any("test2"),
-//				},
-//				WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
-//					Count:                   pulumi.Int(3),
-//					AvailabilityZone:        pulumi.String(availabilityZone),
-//					InstanceType:            pulumi.String(scaleInstanceType),
-//					SubnetId:                pulumi.String(subnet),
-//					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-//					SystemDiskSize:          pulumi.Int(50),
-//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-//					InternetMaxBandwidthOut: pulumi.Int(100),
-//					PublicIpAssigned:        pulumi.Bool(true),
-//					DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
-//						&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
-//							DiskType: pulumi.String("CLOUD_PREMIUM"),
-//							DiskSize: pulumi.Int(50),
-//						},
-//					},
-//					EnhancedSecurityService: pulumi.Bool(false),
-//					EnhancedMonitorService:  pulumi.Bool(false),
-//					UserData:                pulumi.String("dGVzdA=="),
-//					Password:                pulumi.String("AABBccdd1122"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		subnet := "subnet-pqfek0t8"
+// 		if param := cfg.Get("subnet"); param != "" {
+// 			subnet = param
+// 		}
+// 		scaleInstanceType := "S2.LARGE16"
+// 		if param := cfg.Get("scaleInstanceType"); param != "" {
+// 			scaleInstanceType = param
+// 		}
+// 		_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
+// 			ClusterId:     pulumi.String("cls-godovr32"),
+// 			DesiredPodNum: pulumi.Int(16),
+// 			Labels: pulumi.AnyMap{
+// 				"test1": pulumi.Any("test1"),
+// 				"test2": pulumi.Any("test2"),
+// 			},
+// 			WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
+// 				Count:                   pulumi.Int(3),
+// 				AvailabilityZone:        pulumi.String(availabilityZone),
+// 				InstanceType:            pulumi.String(scaleInstanceType),
+// 				SubnetId:                pulumi.String(subnet),
+// 				SystemDiskType:          pulumi.String("CLOUD_SSD"),
+// 				SystemDiskSize:          pulumi.Int(50),
+// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+// 				InternetMaxBandwidthOut: pulumi.Int(100),
+// 				PublicIpAssigned:        pulumi.Bool(true),
+// 				DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
+// 					&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
+// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
+// 						DiskSize: pulumi.Int(50),
+// 					},
+// 				},
+// 				EnhancedSecurityService: pulumi.Bool(false),
+// 				EnhancedMonitorService:  pulumi.Bool(false),
+// 				UserData:                pulumi.String("dGVzdA=="),
+// 				Password:                pulumi.String("AABBccdd1122"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Use Kubelet
+// Use Kubelet
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-3"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			subnet := "subnet-pqfek0t8"
-//			if param := cfg.Get("subnet"); param != "" {
-//				subnet = param
-//			}
-//			scaleInstanceType := "S2.LARGE16"
-//			if param := cfg.Get("scaleInstanceType"); param != "" {
-//				scaleInstanceType = param
-//			}
-//			_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
-//				ClusterId: pulumi.String("cls-godovr32"),
-//				ExtraArgs: pulumi.StringArray{
-//					pulumi.String("root-dir=/var/lib/kubelet"),
-//				},
-//				Labels: pulumi.AnyMap{
-//					"test1": pulumi.Any("test1"),
-//					"test2": pulumi.Any("test2"),
-//				},
-//				WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
-//					Count:                   pulumi.Int(3),
-//					AvailabilityZone:        pulumi.String(availabilityZone),
-//					InstanceType:            pulumi.String(scaleInstanceType),
-//					SubnetId:                pulumi.String(subnet),
-//					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-//					SystemDiskSize:          pulumi.Int(50),
-//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-//					InternetMaxBandwidthOut: pulumi.Int(100),
-//					PublicIpAssigned:        pulumi.Bool(true),
-//					DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
-//						&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
-//							DiskType: pulumi.String("CLOUD_PREMIUM"),
-//							DiskSize: pulumi.Int(50),
-//						},
-//					},
-//					EnhancedSecurityService: pulumi.Bool(false),
-//					EnhancedMonitorService:  pulumi.Bool(false),
-//					UserData:                pulumi.String("dGVzdA=="),
-//					Password:                pulumi.String("AABBccdd1122"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		subnet := "subnet-pqfek0t8"
+// 		if param := cfg.Get("subnet"); param != "" {
+// 			subnet = param
+// 		}
+// 		scaleInstanceType := "S2.LARGE16"
+// 		if param := cfg.Get("scaleInstanceType"); param != "" {
+// 			scaleInstanceType = param
+// 		}
+// 		_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
+// 			ClusterId: pulumi.String("cls-godovr32"),
+// 			ExtraArgs: pulumi.StringArray{
+// 				pulumi.String("root-dir=/var/lib/kubelet"),
+// 			},
+// 			Labels: pulumi.AnyMap{
+// 				"test1": pulumi.Any("test1"),
+// 				"test2": pulumi.Any("test2"),
+// 			},
+// 			WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
+// 				Count:                   pulumi.Int(3),
+// 				AvailabilityZone:        pulumi.String(availabilityZone),
+// 				InstanceType:            pulumi.String(scaleInstanceType),
+// 				SubnetId:                pulumi.String(subnet),
+// 				SystemDiskType:          pulumi.String("CLOUD_SSD"),
+// 				SystemDiskSize:          pulumi.Int(50),
+// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+// 				InternetMaxBandwidthOut: pulumi.Int(100),
+// 				PublicIpAssigned:        pulumi.Bool(true),
+// 				DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
+// 					&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
+// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
+// 						DiskSize: pulumi.Int(50),
+// 					},
+// 				},
+// 				EnhancedSecurityService: pulumi.Bool(false),
+// 				EnhancedMonitorService:  pulumi.Bool(false),
+// 				UserData:                pulumi.String("dGVzdA=="),
+// 				Password:                pulumi.String("AABBccdd1122"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type ScaleWorker struct {
 	pulumi.CustomResourceState
@@ -163,6 +157,8 @@ type ScaleWorker struct {
 	DockerGraphPath pulumi.StringPtrOutput `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node.
 	ExtraArgs pulumi.StringArrayOutput `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs ScaleWorkerGpuArgsPtrOutput `pulumi:"gpuArgs"`
 	// Labels of kubernetes scale worker created nodes.
 	Labels pulumi.MapOutput `pulumi:"labels"`
 	// Mount target. Default is not mounting.
@@ -221,6 +217,8 @@ type scaleWorkerState struct {
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node.
 	ExtraArgs []string `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs *ScaleWorkerGpuArgs `pulumi:"gpuArgs"`
 	// Labels of kubernetes scale worker created nodes.
 	Labels map[string]interface{} `pulumi:"labels"`
 	// Mount target. Default is not mounting.
@@ -244,6 +242,8 @@ type ScaleWorkerState struct {
 	DockerGraphPath pulumi.StringPtrInput
 	// Custom parameter information related to the node.
 	ExtraArgs pulumi.StringArrayInput
+	// GPU driver parameters.
+	GpuArgs ScaleWorkerGpuArgsPtrInput
 	// Labels of kubernetes scale worker created nodes.
 	Labels pulumi.MapInput
 	// Mount target. Default is not mounting.
@@ -271,6 +271,8 @@ type scaleWorkerArgs struct {
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node.
 	ExtraArgs []string `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs *ScaleWorkerGpuArgs `pulumi:"gpuArgs"`
 	// Labels of kubernetes scale worker created nodes.
 	Labels map[string]interface{} `pulumi:"labels"`
 	// Mount target. Default is not mounting.
@@ -293,6 +295,8 @@ type ScaleWorkerArgs struct {
 	DockerGraphPath pulumi.StringPtrInput
 	// Custom parameter information related to the node.
 	ExtraArgs pulumi.StringArrayInput
+	// GPU driver parameters.
+	GpuArgs ScaleWorkerGpuArgsPtrInput
 	// Labels of kubernetes scale worker created nodes.
 	Labels pulumi.MapInput
 	// Mount target. Default is not mounting.
@@ -329,7 +333,7 @@ func (i *ScaleWorker) ToScaleWorkerOutputWithContext(ctx context.Context) ScaleW
 // ScaleWorkerArrayInput is an input type that accepts ScaleWorkerArray and ScaleWorkerArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerArrayInput` via:
 //
-//	ScaleWorkerArray{ ScaleWorkerArgs{...} }
+//          ScaleWorkerArray{ ScaleWorkerArgs{...} }
 type ScaleWorkerArrayInput interface {
 	pulumi.Input
 
@@ -354,7 +358,7 @@ func (i ScaleWorkerArray) ToScaleWorkerArrayOutputWithContext(ctx context.Contex
 // ScaleWorkerMapInput is an input type that accepts ScaleWorkerMap and ScaleWorkerMapOutput values.
 // You can construct a concrete instance of `ScaleWorkerMapInput` via:
 //
-//	ScaleWorkerMap{ "key": ScaleWorkerArgs{...} }
+//          ScaleWorkerMap{ "key": ScaleWorkerArgs{...} }
 type ScaleWorkerMapInput interface {
 	pulumi.Input
 
@@ -413,6 +417,11 @@ func (o ScaleWorkerOutput) DockerGraphPath() pulumi.StringPtrOutput {
 // Custom parameter information related to the node.
 func (o ScaleWorkerOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ScaleWorker) pulumi.StringArrayOutput { return v.ExtraArgs }).(pulumi.StringArrayOutput)
+}
+
+// GPU driver parameters.
+func (o ScaleWorkerOutput) GpuArgs() ScaleWorkerGpuArgsPtrOutput {
+	return o.ApplyT(func(v *ScaleWorker) ScaleWorkerGpuArgsPtrOutput { return v.GpuArgs }).(ScaleWorkerGpuArgsPtrOutput)
 }
 
 // Labels of kubernetes scale worker created nodes.

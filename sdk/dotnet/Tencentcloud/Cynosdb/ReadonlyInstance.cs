@@ -72,10 +72,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceCpuCore")]
-        public Output<int> InstanceCpuCore { get; private set; } = null!;
+        public Output<int?> InstanceCpuCore { get; private set; } = null!;
 
         /// <summary>
         /// Duration time for maintenance, unit in second. `3600` by default.
@@ -96,10 +96,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<ImmutableArray<string>> InstanceMaintainWeekdays { get; private set; } = null!;
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceMemorySize")]
-        public Output<int> InstanceMemorySize { get; private set; } = null!;
+        public Output<int?> InstanceMemorySize { get; private set; } = null!;
 
         /// <summary>
         /// Name of instance.
@@ -179,68 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        /// </summary>
-        [Input("instanceCpuCore", required: true)]
-        public Input<int> InstanceCpuCore { get; set; } = null!;
-
-        /// <summary>
-        /// Duration time for maintenance, unit in second. `3600` by default.
-        /// </summary>
-        [Input("instanceMaintainDuration")]
-        public Input<int>? InstanceMaintainDuration { get; set; }
-
-        /// <summary>
-        /// Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
-        /// </summary>
-        [Input("instanceMaintainStartTime")]
-        public Input<int>? InstanceMaintainStartTime { get; set; }
-
-        [Input("instanceMaintainWeekdays")]
-        private InputList<string>? _instanceMaintainWeekdays;
-
-        /// <summary>
-        /// Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        /// </summary>
-        public InputList<string> InstanceMaintainWeekdays
-        {
-            get => _instanceMaintainWeekdays ?? (_instanceMaintainWeekdays = new InputList<string>());
-            set => _instanceMaintainWeekdays = value;
-        }
-
-        /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        /// </summary>
-        [Input("instanceMemorySize", required: true)]
-        public Input<int> InstanceMemorySize { get; set; } = null!;
-
-        /// <summary>
-        /// Name of instance.
-        /// </summary>
-        [Input("instanceName", required: true)]
-        public Input<string> InstanceName { get; set; } = null!;
-
-        public ReadonlyInstanceArgs()
-        {
-        }
-    }
-
-    public sealed class ReadonlyInstanceState : Pulumi.ResourceArgs
-    {
-        /// <summary>
-        /// Cluster ID which the readonly instance belongs to.
-        /// </summary>
-        [Input("clusterId")]
-        public Input<string>? ClusterId { get; set; }
-
-        /// <summary>
-        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
-        /// </summary>
-        [Input("forceDelete")]
-        public Input<bool>? ForceDelete { get; set; }
-
-        /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceCpuCore")]
         public Input<int>? InstanceCpuCore { get; set; }
@@ -270,7 +209,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// </summary>
+        [Input("instanceMemorySize")]
+        public Input<int>? InstanceMemorySize { get; set; }
+
+        /// <summary>
+        /// Name of instance.
+        /// </summary>
+        [Input("instanceName", required: true)]
+        public Input<string> InstanceName { get; set; } = null!;
+
+        public ReadonlyInstanceArgs()
+        {
+        }
+    }
+
+    public sealed class ReadonlyInstanceState : Pulumi.ResourceArgs
+    {
+        /// <summary>
+        /// Cluster ID which the readonly instance belongs to.
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
+        /// <summary>
+        /// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+        /// </summary>
+        [Input("forceDelete")]
+        public Input<bool>? ForceDelete { get; set; }
+
+        /// <summary>
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// </summary>
+        [Input("instanceCpuCore")]
+        public Input<int>? InstanceCpuCore { get; set; }
+
+        /// <summary>
+        /// Duration time for maintenance, unit in second. `3600` by default.
+        /// </summary>
+        [Input("instanceMaintainDuration")]
+        public Input<int>? InstanceMaintainDuration { get; set; }
+
+        /// <summary>
+        /// Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
+        /// </summary>
+        [Input("instanceMaintainStartTime")]
+        public Input<int>? InstanceMaintainStartTime { get; set; }
+
+        [Input("instanceMaintainWeekdays")]
+        private InputList<string>? _instanceMaintainWeekdays;
+
+        /// <summary>
+        /// Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
+        /// </summary>
+        public InputList<string> InstanceMaintainWeekdays
+        {
+            get => _instanceMaintainWeekdays ?? (_instanceMaintainWeekdays = new InputList<string>());
+            set => _instanceMaintainWeekdays = value;
+        }
+
+        /// <summary>
+        /// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceMemorySize")]
         public Input<int>? InstanceMemorySize { get; set; }

@@ -5,20 +5,62 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./applyDiskBackup";
+export * from "./applyInstanceSnapshot";
+export * from "./blueprint";
+export * from "./diskAttachment";
+export * from "./diskBackup";
+export * from "./firewallRule";
+export * from "./getBundle";
+export * from "./getFirewallRulesTemplate";
 export * from "./instance";
+export * from "./keyPair";
+export * from "./snapshot";
 
 // Import resources to register:
+import { ApplyDiskBackup } from "./applyDiskBackup";
+import { ApplyInstanceSnapshot } from "./applyInstanceSnapshot";
+import { Blueprint } from "./blueprint";
+import { DiskAttachment } from "./diskAttachment";
+import { DiskBackup } from "./diskBackup";
+import { FirewallRule } from "./firewallRule";
 import { Instance } from "./instance";
+import { KeyPair } from "./keyPair";
+import { Snapshot } from "./snapshot";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Lighthouse/applyDiskBackup:ApplyDiskBackup":
+                return new ApplyDiskBackup(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/applyInstanceSnapshot:ApplyInstanceSnapshot":
+                return new ApplyInstanceSnapshot(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/blueprint:Blueprint":
+                return new Blueprint(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/diskAttachment:DiskAttachment":
+                return new DiskAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/diskBackup:DiskBackup":
+                return new DiskBackup(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/firewallRule:FirewallRule":
+                return new FirewallRule(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/keyPair:KeyPair":
+                return new KeyPair(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/snapshot:Snapshot":
+                return new Snapshot(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/applyDiskBackup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/applyInstanceSnapshot", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/blueprint", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/diskAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/diskBackup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/firewallRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/keyPair", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/snapshot", _module)

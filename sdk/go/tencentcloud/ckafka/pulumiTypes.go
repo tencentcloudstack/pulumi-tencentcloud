@@ -10,6 +10,2649 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type ConnectResourceClickhouseConnectParam struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// Password for Clickhouse connection source.
+	Password string `pulumi:"password"`
+	// Clickhouse connection port.
+	Port int `pulumi:"port"`
+	// Instance resources for Click House connection sources.
+	Resource string `pulumi:"resource"`
+	// Whether the Clickhouse connection source is a self-built cluster.
+	SelfBuilt bool `pulumi:"selfBuilt"`
+	// Instance VIP of the ClickHouse connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// The vpc Id of the source of the ClickHouse connection, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// The username of the clickhouse connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceClickhouseConnectParamInput is an input type that accepts ConnectResourceClickhouseConnectParamArgs and ConnectResourceClickhouseConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceClickhouseConnectParamInput` via:
+//
+//          ConnectResourceClickhouseConnectParamArgs{...}
+type ConnectResourceClickhouseConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceClickhouseConnectParamOutput() ConnectResourceClickhouseConnectParamOutput
+	ToConnectResourceClickhouseConnectParamOutputWithContext(context.Context) ConnectResourceClickhouseConnectParamOutput
+}
+
+type ConnectResourceClickhouseConnectParamArgs struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// Password for Clickhouse connection source.
+	Password pulumi.StringInput `pulumi:"password"`
+	// Clickhouse connection port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Instance resources for Click House connection sources.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// Whether the Clickhouse connection source is a self-built cluster.
+	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
+	// Instance VIP of the ClickHouse connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// The vpc Id of the source of the ClickHouse connection, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// The username of the clickhouse connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceClickhouseConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceClickhouseConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceClickhouseConnectParamArgs) ToConnectResourceClickhouseConnectParamOutput() ConnectResourceClickhouseConnectParamOutput {
+	return i.ToConnectResourceClickhouseConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceClickhouseConnectParamArgs) ToConnectResourceClickhouseConnectParamOutputWithContext(ctx context.Context) ConnectResourceClickhouseConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceClickhouseConnectParamOutput)
+}
+
+func (i ConnectResourceClickhouseConnectParamArgs) ToConnectResourceClickhouseConnectParamPtrOutput() ConnectResourceClickhouseConnectParamPtrOutput {
+	return i.ToConnectResourceClickhouseConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceClickhouseConnectParamArgs) ToConnectResourceClickhouseConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceClickhouseConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceClickhouseConnectParamOutput).ToConnectResourceClickhouseConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceClickhouseConnectParamPtrInput is an input type that accepts ConnectResourceClickhouseConnectParamArgs, ConnectResourceClickhouseConnectParamPtr and ConnectResourceClickhouseConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceClickhouseConnectParamPtrInput` via:
+//
+//          ConnectResourceClickhouseConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceClickhouseConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceClickhouseConnectParamPtrOutput() ConnectResourceClickhouseConnectParamPtrOutput
+	ToConnectResourceClickhouseConnectParamPtrOutputWithContext(context.Context) ConnectResourceClickhouseConnectParamPtrOutput
+}
+
+type connectResourceClickhouseConnectParamPtrType ConnectResourceClickhouseConnectParamArgs
+
+func ConnectResourceClickhouseConnectParamPtr(v *ConnectResourceClickhouseConnectParamArgs) ConnectResourceClickhouseConnectParamPtrInput {
+	return (*connectResourceClickhouseConnectParamPtrType)(v)
+}
+
+func (*connectResourceClickhouseConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceClickhouseConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceClickhouseConnectParamPtrType) ToConnectResourceClickhouseConnectParamPtrOutput() ConnectResourceClickhouseConnectParamPtrOutput {
+	return i.ToConnectResourceClickhouseConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceClickhouseConnectParamPtrType) ToConnectResourceClickhouseConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceClickhouseConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceClickhouseConnectParamPtrOutput)
+}
+
+type ConnectResourceClickhouseConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceClickhouseConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceClickhouseConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceClickhouseConnectParamOutput) ToConnectResourceClickhouseConnectParamOutput() ConnectResourceClickhouseConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceClickhouseConnectParamOutput) ToConnectResourceClickhouseConnectParamOutputWithContext(ctx context.Context) ConnectResourceClickhouseConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceClickhouseConnectParamOutput) ToConnectResourceClickhouseConnectParamPtrOutput() ConnectResourceClickhouseConnectParamPtrOutput {
+	return o.ToConnectResourceClickhouseConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceClickhouseConnectParamOutput) ToConnectResourceClickhouseConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceClickhouseConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceClickhouseConnectParam) *ConnectResourceClickhouseConnectParam {
+		return &v
+	}).(ConnectResourceClickhouseConnectParamPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceClickhouseConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// Password for Clickhouse connection source.
+func (o ConnectResourceClickhouseConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// Clickhouse connection port.
+func (o ConnectResourceClickhouseConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Instance resources for Click House connection sources.
+func (o ConnectResourceClickhouseConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// Whether the Clickhouse connection source is a self-built cluster.
+func (o ConnectResourceClickhouseConnectParamOutput) SelfBuilt() pulumi.BoolOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
+}
+
+// Instance VIP of the ClickHouse connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceClickhouseConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the source of the ClickHouse connection, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceClickhouseConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// The username of the clickhouse connection source.
+func (o ConnectResourceClickhouseConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceClickhouseConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceClickhouseConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceClickhouseConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceClickhouseConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceClickhouseConnectParamPtrOutput) ToConnectResourceClickhouseConnectParamPtrOutput() ConnectResourceClickhouseConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceClickhouseConnectParamPtrOutput) ToConnectResourceClickhouseConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceClickhouseConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceClickhouseConnectParamPtrOutput) Elem() ConnectResourceClickhouseConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) ConnectResourceClickhouseConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceClickhouseConnectParam
+		return ret
+	}).(ConnectResourceClickhouseConnectParamOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Password for Clickhouse connection source.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Clickhouse connection port.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Instance resources for Click House connection sources.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the Clickhouse connection source is a self-built cluster.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.SelfBuilt
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Instance VIP of the ClickHouse connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the source of the ClickHouse connection, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The username of the clickhouse connection source.
+func (o ConnectResourceClickhouseConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceClickhouseConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourceDorisConnectParam struct {
+	// Doris http CLB port, Usually mapped to port 8040 of be.
+	BePort *int `pulumi:"bePort"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// Doris  password.
+	Password string `pulumi:"password"`
+	// Doris jdbc CLB port, Usually mapped to port 9030 of fe.
+	Port int `pulumi:"port"`
+	// Doris  instanceId.
+	Resource string `pulumi:"resource"`
+	// Doris Whether the connection source is a self-built cluster, default: false.
+	SelfBuilt *bool `pulumi:"selfBuilt"`
+	// Doris vip, When it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// Doris vpcId, When it is a Tencent Cloud instance, it is required.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// Doris  The username of the connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceDorisConnectParamInput is an input type that accepts ConnectResourceDorisConnectParamArgs and ConnectResourceDorisConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceDorisConnectParamInput` via:
+//
+//          ConnectResourceDorisConnectParamArgs{...}
+type ConnectResourceDorisConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceDorisConnectParamOutput() ConnectResourceDorisConnectParamOutput
+	ToConnectResourceDorisConnectParamOutputWithContext(context.Context) ConnectResourceDorisConnectParamOutput
+}
+
+type ConnectResourceDorisConnectParamArgs struct {
+	// Doris http CLB port, Usually mapped to port 8040 of be.
+	BePort pulumi.IntPtrInput `pulumi:"bePort"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// Doris  password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// Doris jdbc CLB port, Usually mapped to port 9030 of fe.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Doris  instanceId.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// Doris Whether the connection source is a self-built cluster, default: false.
+	SelfBuilt pulumi.BoolPtrInput `pulumi:"selfBuilt"`
+	// Doris vip, When it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// Doris vpcId, When it is a Tencent Cloud instance, it is required.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// Doris  The username of the connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceDorisConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceDorisConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceDorisConnectParamArgs) ToConnectResourceDorisConnectParamOutput() ConnectResourceDorisConnectParamOutput {
+	return i.ToConnectResourceDorisConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceDorisConnectParamArgs) ToConnectResourceDorisConnectParamOutputWithContext(ctx context.Context) ConnectResourceDorisConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceDorisConnectParamOutput)
+}
+
+func (i ConnectResourceDorisConnectParamArgs) ToConnectResourceDorisConnectParamPtrOutput() ConnectResourceDorisConnectParamPtrOutput {
+	return i.ToConnectResourceDorisConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceDorisConnectParamArgs) ToConnectResourceDorisConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDorisConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceDorisConnectParamOutput).ToConnectResourceDorisConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceDorisConnectParamPtrInput is an input type that accepts ConnectResourceDorisConnectParamArgs, ConnectResourceDorisConnectParamPtr and ConnectResourceDorisConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceDorisConnectParamPtrInput` via:
+//
+//          ConnectResourceDorisConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceDorisConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceDorisConnectParamPtrOutput() ConnectResourceDorisConnectParamPtrOutput
+	ToConnectResourceDorisConnectParamPtrOutputWithContext(context.Context) ConnectResourceDorisConnectParamPtrOutput
+}
+
+type connectResourceDorisConnectParamPtrType ConnectResourceDorisConnectParamArgs
+
+func ConnectResourceDorisConnectParamPtr(v *ConnectResourceDorisConnectParamArgs) ConnectResourceDorisConnectParamPtrInput {
+	return (*connectResourceDorisConnectParamPtrType)(v)
+}
+
+func (*connectResourceDorisConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceDorisConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceDorisConnectParamPtrType) ToConnectResourceDorisConnectParamPtrOutput() ConnectResourceDorisConnectParamPtrOutput {
+	return i.ToConnectResourceDorisConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceDorisConnectParamPtrType) ToConnectResourceDorisConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDorisConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceDorisConnectParamPtrOutput)
+}
+
+type ConnectResourceDorisConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceDorisConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceDorisConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceDorisConnectParamOutput) ToConnectResourceDorisConnectParamOutput() ConnectResourceDorisConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceDorisConnectParamOutput) ToConnectResourceDorisConnectParamOutputWithContext(ctx context.Context) ConnectResourceDorisConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceDorisConnectParamOutput) ToConnectResourceDorisConnectParamPtrOutput() ConnectResourceDorisConnectParamPtrOutput {
+	return o.ToConnectResourceDorisConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceDorisConnectParamOutput) ToConnectResourceDorisConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDorisConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceDorisConnectParam) *ConnectResourceDorisConnectParam {
+		return &v
+	}).(ConnectResourceDorisConnectParamPtrOutput)
+}
+
+// Doris http CLB port, Usually mapped to port 8040 of be.
+func (o ConnectResourceDorisConnectParamOutput) BePort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) *int { return v.BePort }).(pulumi.IntPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceDorisConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// Doris  password.
+func (o ConnectResourceDorisConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// Doris jdbc CLB port, Usually mapped to port 9030 of fe.
+func (o ConnectResourceDorisConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Doris  instanceId.
+func (o ConnectResourceDorisConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// Doris Whether the connection source is a self-built cluster, default: false.
+func (o ConnectResourceDorisConnectParamOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) *bool { return v.SelfBuilt }).(pulumi.BoolPtrOutput)
+}
+
+// Doris vip, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceDorisConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// Doris vpcId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceDorisConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// Doris  The username of the connection source.
+func (o ConnectResourceDorisConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDorisConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceDorisConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceDorisConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceDorisConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceDorisConnectParamPtrOutput) ToConnectResourceDorisConnectParamPtrOutput() ConnectResourceDorisConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceDorisConnectParamPtrOutput) ToConnectResourceDorisConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDorisConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceDorisConnectParamPtrOutput) Elem() ConnectResourceDorisConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) ConnectResourceDorisConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceDorisConnectParam
+		return ret
+	}).(ConnectResourceDorisConnectParamOutput)
+}
+
+// Doris http CLB port, Usually mapped to port 8040 of be.
+func (o ConnectResourceDorisConnectParamPtrOutput) BePort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BePort
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceDorisConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Doris  password.
+func (o ConnectResourceDorisConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Doris jdbc CLB port, Usually mapped to port 9030 of fe.
+func (o ConnectResourceDorisConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Doris  instanceId.
+func (o ConnectResourceDorisConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// Doris Whether the connection source is a self-built cluster, default: false.
+func (o ConnectResourceDorisConnectParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SelfBuilt
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Doris vip, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceDorisConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// Doris vpcId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceDorisConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Doris  The username of the connection source.
+func (o ConnectResourceDorisConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDorisConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourceDtsConnectParam struct {
+	// Id of the Dts consumption group.
+	GroupId string `pulumi:"groupId"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// The password of the Dts consumption group.
+	Password string `pulumi:"password"`
+	// Dts port.
+	Port int `pulumi:"port"`
+	// Dts instance Id.
+	Resource string `pulumi:"resource"`
+	// Topic subscribed by Dts.
+	Topic string `pulumi:"topic"`
+	// The account number of the Dts consumption group.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceDtsConnectParamInput is an input type that accepts ConnectResourceDtsConnectParamArgs and ConnectResourceDtsConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceDtsConnectParamInput` via:
+//
+//          ConnectResourceDtsConnectParamArgs{...}
+type ConnectResourceDtsConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceDtsConnectParamOutput() ConnectResourceDtsConnectParamOutput
+	ToConnectResourceDtsConnectParamOutputWithContext(context.Context) ConnectResourceDtsConnectParamOutput
+}
+
+type ConnectResourceDtsConnectParamArgs struct {
+	// Id of the Dts consumption group.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// The password of the Dts consumption group.
+	Password pulumi.StringInput `pulumi:"password"`
+	// Dts port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Dts instance Id.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// Topic subscribed by Dts.
+	Topic pulumi.StringInput `pulumi:"topic"`
+	// The account number of the Dts consumption group.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceDtsConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceDtsConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceDtsConnectParamArgs) ToConnectResourceDtsConnectParamOutput() ConnectResourceDtsConnectParamOutput {
+	return i.ToConnectResourceDtsConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceDtsConnectParamArgs) ToConnectResourceDtsConnectParamOutputWithContext(ctx context.Context) ConnectResourceDtsConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceDtsConnectParamOutput)
+}
+
+func (i ConnectResourceDtsConnectParamArgs) ToConnectResourceDtsConnectParamPtrOutput() ConnectResourceDtsConnectParamPtrOutput {
+	return i.ToConnectResourceDtsConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceDtsConnectParamArgs) ToConnectResourceDtsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDtsConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceDtsConnectParamOutput).ToConnectResourceDtsConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceDtsConnectParamPtrInput is an input type that accepts ConnectResourceDtsConnectParamArgs, ConnectResourceDtsConnectParamPtr and ConnectResourceDtsConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceDtsConnectParamPtrInput` via:
+//
+//          ConnectResourceDtsConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceDtsConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceDtsConnectParamPtrOutput() ConnectResourceDtsConnectParamPtrOutput
+	ToConnectResourceDtsConnectParamPtrOutputWithContext(context.Context) ConnectResourceDtsConnectParamPtrOutput
+}
+
+type connectResourceDtsConnectParamPtrType ConnectResourceDtsConnectParamArgs
+
+func ConnectResourceDtsConnectParamPtr(v *ConnectResourceDtsConnectParamArgs) ConnectResourceDtsConnectParamPtrInput {
+	return (*connectResourceDtsConnectParamPtrType)(v)
+}
+
+func (*connectResourceDtsConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceDtsConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceDtsConnectParamPtrType) ToConnectResourceDtsConnectParamPtrOutput() ConnectResourceDtsConnectParamPtrOutput {
+	return i.ToConnectResourceDtsConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceDtsConnectParamPtrType) ToConnectResourceDtsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDtsConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceDtsConnectParamPtrOutput)
+}
+
+type ConnectResourceDtsConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceDtsConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceDtsConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceDtsConnectParamOutput) ToConnectResourceDtsConnectParamOutput() ConnectResourceDtsConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceDtsConnectParamOutput) ToConnectResourceDtsConnectParamOutputWithContext(ctx context.Context) ConnectResourceDtsConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceDtsConnectParamOutput) ToConnectResourceDtsConnectParamPtrOutput() ConnectResourceDtsConnectParamPtrOutput {
+	return o.ToConnectResourceDtsConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceDtsConnectParamOutput) ToConnectResourceDtsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDtsConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceDtsConnectParam) *ConnectResourceDtsConnectParam {
+		return &v
+	}).(ConnectResourceDtsConnectParamPtrOutput)
+}
+
+// Id of the Dts consumption group.
+func (o ConnectResourceDtsConnectParamOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDtsConnectParam) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceDtsConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceDtsConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// The password of the Dts consumption group.
+func (o ConnectResourceDtsConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDtsConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// Dts port.
+func (o ConnectResourceDtsConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceDtsConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Dts instance Id.
+func (o ConnectResourceDtsConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDtsConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// Topic subscribed by Dts.
+func (o ConnectResourceDtsConnectParamOutput) Topic() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDtsConnectParam) string { return v.Topic }).(pulumi.StringOutput)
+}
+
+// The account number of the Dts consumption group.
+func (o ConnectResourceDtsConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceDtsConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceDtsConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceDtsConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceDtsConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceDtsConnectParamPtrOutput) ToConnectResourceDtsConnectParamPtrOutput() ConnectResourceDtsConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceDtsConnectParamPtrOutput) ToConnectResourceDtsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceDtsConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceDtsConnectParamPtrOutput) Elem() ConnectResourceDtsConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) ConnectResourceDtsConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceDtsConnectParam
+		return ret
+	}).(ConnectResourceDtsConnectParamOutput)
+}
+
+// Id of the Dts consumption group.
+func (o ConnectResourceDtsConnectParamPtrOutput) GroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.GroupId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceDtsConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The password of the Dts consumption group.
+func (o ConnectResourceDtsConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Dts port.
+func (o ConnectResourceDtsConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Dts instance Id.
+func (o ConnectResourceDtsConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// Topic subscribed by Dts.
+func (o ConnectResourceDtsConnectParamPtrOutput) Topic() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Topic
+	}).(pulumi.StringPtrOutput)
+}
+
+// The account number of the Dts consumption group.
+func (o ConnectResourceDtsConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceDtsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourceEsConnectParam struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// Es The password of the connection source.
+	Password string `pulumi:"password"`
+	// Es port.
+	Port int `pulumi:"port"`
+	// Instance resource of Es connection source.
+	Resource string `pulumi:"resource"`
+	// Whether the Es connection source is a self-built cluster.
+	SelfBuilt bool `pulumi:"selfBuilt"`
+	// The instance vip of the Es connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// The vpc Id of the Es connection source, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// Es The username of the connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceEsConnectParamInput is an input type that accepts ConnectResourceEsConnectParamArgs and ConnectResourceEsConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceEsConnectParamInput` via:
+//
+//          ConnectResourceEsConnectParamArgs{...}
+type ConnectResourceEsConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceEsConnectParamOutput() ConnectResourceEsConnectParamOutput
+	ToConnectResourceEsConnectParamOutputWithContext(context.Context) ConnectResourceEsConnectParamOutput
+}
+
+type ConnectResourceEsConnectParamArgs struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// Es The password of the connection source.
+	Password pulumi.StringInput `pulumi:"password"`
+	// Es port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Instance resource of Es connection source.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// Whether the Es connection source is a self-built cluster.
+	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
+	// The instance vip of the Es connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// The vpc Id of the Es connection source, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// Es The username of the connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceEsConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceEsConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceEsConnectParamArgs) ToConnectResourceEsConnectParamOutput() ConnectResourceEsConnectParamOutput {
+	return i.ToConnectResourceEsConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceEsConnectParamArgs) ToConnectResourceEsConnectParamOutputWithContext(ctx context.Context) ConnectResourceEsConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceEsConnectParamOutput)
+}
+
+func (i ConnectResourceEsConnectParamArgs) ToConnectResourceEsConnectParamPtrOutput() ConnectResourceEsConnectParamPtrOutput {
+	return i.ToConnectResourceEsConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceEsConnectParamArgs) ToConnectResourceEsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceEsConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceEsConnectParamOutput).ToConnectResourceEsConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceEsConnectParamPtrInput is an input type that accepts ConnectResourceEsConnectParamArgs, ConnectResourceEsConnectParamPtr and ConnectResourceEsConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceEsConnectParamPtrInput` via:
+//
+//          ConnectResourceEsConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceEsConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceEsConnectParamPtrOutput() ConnectResourceEsConnectParamPtrOutput
+	ToConnectResourceEsConnectParamPtrOutputWithContext(context.Context) ConnectResourceEsConnectParamPtrOutput
+}
+
+type connectResourceEsConnectParamPtrType ConnectResourceEsConnectParamArgs
+
+func ConnectResourceEsConnectParamPtr(v *ConnectResourceEsConnectParamArgs) ConnectResourceEsConnectParamPtrInput {
+	return (*connectResourceEsConnectParamPtrType)(v)
+}
+
+func (*connectResourceEsConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceEsConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceEsConnectParamPtrType) ToConnectResourceEsConnectParamPtrOutput() ConnectResourceEsConnectParamPtrOutput {
+	return i.ToConnectResourceEsConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceEsConnectParamPtrType) ToConnectResourceEsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceEsConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceEsConnectParamPtrOutput)
+}
+
+type ConnectResourceEsConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceEsConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceEsConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceEsConnectParamOutput) ToConnectResourceEsConnectParamOutput() ConnectResourceEsConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceEsConnectParamOutput) ToConnectResourceEsConnectParamOutputWithContext(ctx context.Context) ConnectResourceEsConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceEsConnectParamOutput) ToConnectResourceEsConnectParamPtrOutput() ConnectResourceEsConnectParamPtrOutput {
+	return o.ToConnectResourceEsConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceEsConnectParamOutput) ToConnectResourceEsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceEsConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceEsConnectParam) *ConnectResourceEsConnectParam {
+		return &v
+	}).(ConnectResourceEsConnectParamPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceEsConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// Es The password of the connection source.
+func (o ConnectResourceEsConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// Es port.
+func (o ConnectResourceEsConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Instance resource of Es connection source.
+func (o ConnectResourceEsConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// Whether the Es connection source is a self-built cluster.
+func (o ConnectResourceEsConnectParamOutput) SelfBuilt() pulumi.BoolOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
+}
+
+// The instance vip of the Es connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceEsConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the Es connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceEsConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// Es The username of the connection source.
+func (o ConnectResourceEsConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceEsConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceEsConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceEsConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceEsConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceEsConnectParamPtrOutput) ToConnectResourceEsConnectParamPtrOutput() ConnectResourceEsConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceEsConnectParamPtrOutput) ToConnectResourceEsConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceEsConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceEsConnectParamPtrOutput) Elem() ConnectResourceEsConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) ConnectResourceEsConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceEsConnectParam
+		return ret
+	}).(ConnectResourceEsConnectParamOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceEsConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Es The password of the connection source.
+func (o ConnectResourceEsConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Es port.
+func (o ConnectResourceEsConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Instance resource of Es connection source.
+func (o ConnectResourceEsConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the Es connection source is a self-built cluster.
+func (o ConnectResourceEsConnectParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.SelfBuilt
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The instance vip of the Es connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceEsConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the Es connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceEsConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Es The username of the connection source.
+func (o ConnectResourceEsConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceEsConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourceKafkaConnectParam struct {
+	// Kafka broker ip, Mandatory when self-built.
+	BrokerAddress *string `pulumi:"brokerAddress"`
+	// Whether to update to the associated Dip task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// CKafka instanceId region, Required when crossing regions.
+	Region *string `pulumi:"region"`
+	// Kafka instanceId, When it is a Tencent Cloud instance, it is required.
+	Resource *string `pulumi:"resource"`
+	// Whether it is a self-built cluster, default: false.
+	SelfBuilt *bool `pulumi:"selfBuilt"`
+}
+
+// ConnectResourceKafkaConnectParamInput is an input type that accepts ConnectResourceKafkaConnectParamArgs and ConnectResourceKafkaConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceKafkaConnectParamInput` via:
+//
+//          ConnectResourceKafkaConnectParamArgs{...}
+type ConnectResourceKafkaConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceKafkaConnectParamOutput() ConnectResourceKafkaConnectParamOutput
+	ToConnectResourceKafkaConnectParamOutputWithContext(context.Context) ConnectResourceKafkaConnectParamOutput
+}
+
+type ConnectResourceKafkaConnectParamArgs struct {
+	// Kafka broker ip, Mandatory when self-built.
+	BrokerAddress pulumi.StringPtrInput `pulumi:"brokerAddress"`
+	// Whether to update to the associated Dip task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// CKafka instanceId region, Required when crossing regions.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// Kafka instanceId, When it is a Tencent Cloud instance, it is required.
+	Resource pulumi.StringPtrInput `pulumi:"resource"`
+	// Whether it is a self-built cluster, default: false.
+	SelfBuilt pulumi.BoolPtrInput `pulumi:"selfBuilt"`
+}
+
+func (ConnectResourceKafkaConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceKafkaConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceKafkaConnectParamArgs) ToConnectResourceKafkaConnectParamOutput() ConnectResourceKafkaConnectParamOutput {
+	return i.ToConnectResourceKafkaConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceKafkaConnectParamArgs) ToConnectResourceKafkaConnectParamOutputWithContext(ctx context.Context) ConnectResourceKafkaConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceKafkaConnectParamOutput)
+}
+
+func (i ConnectResourceKafkaConnectParamArgs) ToConnectResourceKafkaConnectParamPtrOutput() ConnectResourceKafkaConnectParamPtrOutput {
+	return i.ToConnectResourceKafkaConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceKafkaConnectParamArgs) ToConnectResourceKafkaConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceKafkaConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceKafkaConnectParamOutput).ToConnectResourceKafkaConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceKafkaConnectParamPtrInput is an input type that accepts ConnectResourceKafkaConnectParamArgs, ConnectResourceKafkaConnectParamPtr and ConnectResourceKafkaConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceKafkaConnectParamPtrInput` via:
+//
+//          ConnectResourceKafkaConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceKafkaConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceKafkaConnectParamPtrOutput() ConnectResourceKafkaConnectParamPtrOutput
+	ToConnectResourceKafkaConnectParamPtrOutputWithContext(context.Context) ConnectResourceKafkaConnectParamPtrOutput
+}
+
+type connectResourceKafkaConnectParamPtrType ConnectResourceKafkaConnectParamArgs
+
+func ConnectResourceKafkaConnectParamPtr(v *ConnectResourceKafkaConnectParamArgs) ConnectResourceKafkaConnectParamPtrInput {
+	return (*connectResourceKafkaConnectParamPtrType)(v)
+}
+
+func (*connectResourceKafkaConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceKafkaConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceKafkaConnectParamPtrType) ToConnectResourceKafkaConnectParamPtrOutput() ConnectResourceKafkaConnectParamPtrOutput {
+	return i.ToConnectResourceKafkaConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceKafkaConnectParamPtrType) ToConnectResourceKafkaConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceKafkaConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceKafkaConnectParamPtrOutput)
+}
+
+type ConnectResourceKafkaConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceKafkaConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceKafkaConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceKafkaConnectParamOutput) ToConnectResourceKafkaConnectParamOutput() ConnectResourceKafkaConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceKafkaConnectParamOutput) ToConnectResourceKafkaConnectParamOutputWithContext(ctx context.Context) ConnectResourceKafkaConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceKafkaConnectParamOutput) ToConnectResourceKafkaConnectParamPtrOutput() ConnectResourceKafkaConnectParamPtrOutput {
+	return o.ToConnectResourceKafkaConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceKafkaConnectParamOutput) ToConnectResourceKafkaConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceKafkaConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceKafkaConnectParam) *ConnectResourceKafkaConnectParam {
+		return &v
+	}).(ConnectResourceKafkaConnectParamPtrOutput)
+}
+
+// Kafka broker ip, Mandatory when self-built.
+func (o ConnectResourceKafkaConnectParamOutput) BrokerAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceKafkaConnectParam) *string { return v.BrokerAddress }).(pulumi.StringPtrOutput)
+}
+
+// Whether to update to the associated Dip task, default: false.
+func (o ConnectResourceKafkaConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceKafkaConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// CKafka instanceId region, Required when crossing regions.
+func (o ConnectResourceKafkaConnectParamOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceKafkaConnectParam) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+// Kafka instanceId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceKafkaConnectParamOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceKafkaConnectParam) *string { return v.Resource }).(pulumi.StringPtrOutput)
+}
+
+// Whether it is a self-built cluster, default: false.
+func (o ConnectResourceKafkaConnectParamOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceKafkaConnectParam) *bool { return v.SelfBuilt }).(pulumi.BoolPtrOutput)
+}
+
+type ConnectResourceKafkaConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceKafkaConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceKafkaConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceKafkaConnectParamPtrOutput) ToConnectResourceKafkaConnectParamPtrOutput() ConnectResourceKafkaConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceKafkaConnectParamPtrOutput) ToConnectResourceKafkaConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceKafkaConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceKafkaConnectParamPtrOutput) Elem() ConnectResourceKafkaConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceKafkaConnectParam) ConnectResourceKafkaConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceKafkaConnectParam
+		return ret
+	}).(ConnectResourceKafkaConnectParamOutput)
+}
+
+// Kafka broker ip, Mandatory when self-built.
+func (o ConnectResourceKafkaConnectParamPtrOutput) BrokerAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceKafkaConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BrokerAddress
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to update to the associated Dip task, default: false.
+func (o ConnectResourceKafkaConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceKafkaConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// CKafka instanceId region, Required when crossing regions.
+func (o ConnectResourceKafkaConnectParamPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceKafkaConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Kafka instanceId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceKafkaConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceKafkaConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether it is a self-built cluster, default: false.
+func (o ConnectResourceKafkaConnectParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceKafkaConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SelfBuilt
+	}).(pulumi.BoolPtrOutput)
+}
+
+type ConnectResourceMariadbConnectParam struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// MariaDB password.
+	Password string `pulumi:"password"`
+	// MariaDB port.
+	Port int `pulumi:"port"`
+	// MariaDB instanceId.
+	Resource string `pulumi:"resource"`
+	// The instance vip of the Maria DB connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// MariaDB vpcId, When it is a Tencent Cloud instance, it is required.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// MariaDB The username of the connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceMariadbConnectParamInput is an input type that accepts ConnectResourceMariadbConnectParamArgs and ConnectResourceMariadbConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceMariadbConnectParamInput` via:
+//
+//          ConnectResourceMariadbConnectParamArgs{...}
+type ConnectResourceMariadbConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceMariadbConnectParamOutput() ConnectResourceMariadbConnectParamOutput
+	ToConnectResourceMariadbConnectParamOutputWithContext(context.Context) ConnectResourceMariadbConnectParamOutput
+}
+
+type ConnectResourceMariadbConnectParamArgs struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// MariaDB password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// MariaDB port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// MariaDB instanceId.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// The instance vip of the Maria DB connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// MariaDB vpcId, When it is a Tencent Cloud instance, it is required.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// MariaDB The username of the connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceMariadbConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceMariadbConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceMariadbConnectParamArgs) ToConnectResourceMariadbConnectParamOutput() ConnectResourceMariadbConnectParamOutput {
+	return i.ToConnectResourceMariadbConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceMariadbConnectParamArgs) ToConnectResourceMariadbConnectParamOutputWithContext(ctx context.Context) ConnectResourceMariadbConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMariadbConnectParamOutput)
+}
+
+func (i ConnectResourceMariadbConnectParamArgs) ToConnectResourceMariadbConnectParamPtrOutput() ConnectResourceMariadbConnectParamPtrOutput {
+	return i.ToConnectResourceMariadbConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceMariadbConnectParamArgs) ToConnectResourceMariadbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMariadbConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMariadbConnectParamOutput).ToConnectResourceMariadbConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceMariadbConnectParamPtrInput is an input type that accepts ConnectResourceMariadbConnectParamArgs, ConnectResourceMariadbConnectParamPtr and ConnectResourceMariadbConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceMariadbConnectParamPtrInput` via:
+//
+//          ConnectResourceMariadbConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceMariadbConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceMariadbConnectParamPtrOutput() ConnectResourceMariadbConnectParamPtrOutput
+	ToConnectResourceMariadbConnectParamPtrOutputWithContext(context.Context) ConnectResourceMariadbConnectParamPtrOutput
+}
+
+type connectResourceMariadbConnectParamPtrType ConnectResourceMariadbConnectParamArgs
+
+func ConnectResourceMariadbConnectParamPtr(v *ConnectResourceMariadbConnectParamArgs) ConnectResourceMariadbConnectParamPtrInput {
+	return (*connectResourceMariadbConnectParamPtrType)(v)
+}
+
+func (*connectResourceMariadbConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceMariadbConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceMariadbConnectParamPtrType) ToConnectResourceMariadbConnectParamPtrOutput() ConnectResourceMariadbConnectParamPtrOutput {
+	return i.ToConnectResourceMariadbConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceMariadbConnectParamPtrType) ToConnectResourceMariadbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMariadbConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMariadbConnectParamPtrOutput)
+}
+
+type ConnectResourceMariadbConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceMariadbConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceMariadbConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceMariadbConnectParamOutput) ToConnectResourceMariadbConnectParamOutput() ConnectResourceMariadbConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceMariadbConnectParamOutput) ToConnectResourceMariadbConnectParamOutputWithContext(ctx context.Context) ConnectResourceMariadbConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceMariadbConnectParamOutput) ToConnectResourceMariadbConnectParamPtrOutput() ConnectResourceMariadbConnectParamPtrOutput {
+	return o.ToConnectResourceMariadbConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceMariadbConnectParamOutput) ToConnectResourceMariadbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMariadbConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceMariadbConnectParam) *ConnectResourceMariadbConnectParam {
+		return &v
+	}).(ConnectResourceMariadbConnectParamPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceMariadbConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMariadbConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// MariaDB password.
+func (o ConnectResourceMariadbConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMariadbConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// MariaDB port.
+func (o ConnectResourceMariadbConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceMariadbConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// MariaDB instanceId.
+func (o ConnectResourceMariadbConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMariadbConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// The instance vip of the Maria DB connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMariadbConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMariadbConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// MariaDB vpcId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMariadbConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMariadbConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// MariaDB The username of the connection source.
+func (o ConnectResourceMariadbConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMariadbConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceMariadbConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceMariadbConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceMariadbConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceMariadbConnectParamPtrOutput) ToConnectResourceMariadbConnectParamPtrOutput() ConnectResourceMariadbConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceMariadbConnectParamPtrOutput) ToConnectResourceMariadbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMariadbConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceMariadbConnectParamPtrOutput) Elem() ConnectResourceMariadbConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) ConnectResourceMariadbConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceMariadbConnectParam
+		return ret
+	}).(ConnectResourceMariadbConnectParamOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceMariadbConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// MariaDB password.
+func (o ConnectResourceMariadbConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// MariaDB port.
+func (o ConnectResourceMariadbConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// MariaDB instanceId.
+func (o ConnectResourceMariadbConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// The instance vip of the Maria DB connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMariadbConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// MariaDB vpcId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMariadbConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// MariaDB The username of the connection source.
+func (o ConnectResourceMariadbConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMariadbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourceMongodbConnectParam struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// Password for the source of the Mongo DB connection.
+	Password string `pulumi:"password"`
+	// MongoDB port.
+	Port int `pulumi:"port"`
+	// Instance resource of Mongo DB connection source.
+	Resource string `pulumi:"resource"`
+	// Whether the Mongo DB connection source is a self-built cluster.
+	SelfBuilt bool `pulumi:"selfBuilt"`
+	// The instance VIP of the Mongo DB connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// The vpc Id of the Mongo DB connection source, which is required when it is a Tencent Cloud instance.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// The username of the Mongo DB connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceMongodbConnectParamInput is an input type that accepts ConnectResourceMongodbConnectParamArgs and ConnectResourceMongodbConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceMongodbConnectParamInput` via:
+//
+//          ConnectResourceMongodbConnectParamArgs{...}
+type ConnectResourceMongodbConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceMongodbConnectParamOutput() ConnectResourceMongodbConnectParamOutput
+	ToConnectResourceMongodbConnectParamOutputWithContext(context.Context) ConnectResourceMongodbConnectParamOutput
+}
+
+type ConnectResourceMongodbConnectParamArgs struct {
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// Password for the source of the Mongo DB connection.
+	Password pulumi.StringInput `pulumi:"password"`
+	// MongoDB port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Instance resource of Mongo DB connection source.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// Whether the Mongo DB connection source is a self-built cluster.
+	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
+	// The instance VIP of the Mongo DB connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// The vpc Id of the Mongo DB connection source, which is required when it is a Tencent Cloud instance.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// The username of the Mongo DB connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceMongodbConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceMongodbConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceMongodbConnectParamArgs) ToConnectResourceMongodbConnectParamOutput() ConnectResourceMongodbConnectParamOutput {
+	return i.ToConnectResourceMongodbConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceMongodbConnectParamArgs) ToConnectResourceMongodbConnectParamOutputWithContext(ctx context.Context) ConnectResourceMongodbConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMongodbConnectParamOutput)
+}
+
+func (i ConnectResourceMongodbConnectParamArgs) ToConnectResourceMongodbConnectParamPtrOutput() ConnectResourceMongodbConnectParamPtrOutput {
+	return i.ToConnectResourceMongodbConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceMongodbConnectParamArgs) ToConnectResourceMongodbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMongodbConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMongodbConnectParamOutput).ToConnectResourceMongodbConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceMongodbConnectParamPtrInput is an input type that accepts ConnectResourceMongodbConnectParamArgs, ConnectResourceMongodbConnectParamPtr and ConnectResourceMongodbConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceMongodbConnectParamPtrInput` via:
+//
+//          ConnectResourceMongodbConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceMongodbConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceMongodbConnectParamPtrOutput() ConnectResourceMongodbConnectParamPtrOutput
+	ToConnectResourceMongodbConnectParamPtrOutputWithContext(context.Context) ConnectResourceMongodbConnectParamPtrOutput
+}
+
+type connectResourceMongodbConnectParamPtrType ConnectResourceMongodbConnectParamArgs
+
+func ConnectResourceMongodbConnectParamPtr(v *ConnectResourceMongodbConnectParamArgs) ConnectResourceMongodbConnectParamPtrInput {
+	return (*connectResourceMongodbConnectParamPtrType)(v)
+}
+
+func (*connectResourceMongodbConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceMongodbConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceMongodbConnectParamPtrType) ToConnectResourceMongodbConnectParamPtrOutput() ConnectResourceMongodbConnectParamPtrOutput {
+	return i.ToConnectResourceMongodbConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceMongodbConnectParamPtrType) ToConnectResourceMongodbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMongodbConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMongodbConnectParamPtrOutput)
+}
+
+type ConnectResourceMongodbConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceMongodbConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceMongodbConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceMongodbConnectParamOutput) ToConnectResourceMongodbConnectParamOutput() ConnectResourceMongodbConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceMongodbConnectParamOutput) ToConnectResourceMongodbConnectParamOutputWithContext(ctx context.Context) ConnectResourceMongodbConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceMongodbConnectParamOutput) ToConnectResourceMongodbConnectParamPtrOutput() ConnectResourceMongodbConnectParamPtrOutput {
+	return o.ToConnectResourceMongodbConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceMongodbConnectParamOutput) ToConnectResourceMongodbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMongodbConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceMongodbConnectParam) *ConnectResourceMongodbConnectParam {
+		return &v
+	}).(ConnectResourceMongodbConnectParamPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceMongodbConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// Password for the source of the Mongo DB connection.
+func (o ConnectResourceMongodbConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// MongoDB port.
+func (o ConnectResourceMongodbConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Instance resource of Mongo DB connection source.
+func (o ConnectResourceMongodbConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// Whether the Mongo DB connection source is a self-built cluster.
+func (o ConnectResourceMongodbConnectParamOutput) SelfBuilt() pulumi.BoolOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
+}
+
+// The instance VIP of the Mongo DB connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMongodbConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the Mongo DB connection source, which is required when it is a Tencent Cloud instance.
+func (o ConnectResourceMongodbConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// The username of the Mongo DB connection source.
+func (o ConnectResourceMongodbConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMongodbConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceMongodbConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceMongodbConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceMongodbConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceMongodbConnectParamPtrOutput) ToConnectResourceMongodbConnectParamPtrOutput() ConnectResourceMongodbConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceMongodbConnectParamPtrOutput) ToConnectResourceMongodbConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMongodbConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceMongodbConnectParamPtrOutput) Elem() ConnectResourceMongodbConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) ConnectResourceMongodbConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceMongodbConnectParam
+		return ret
+	}).(ConnectResourceMongodbConnectParamOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceMongodbConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Password for the source of the Mongo DB connection.
+func (o ConnectResourceMongodbConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// MongoDB port.
+func (o ConnectResourceMongodbConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Instance resource of Mongo DB connection source.
+func (o ConnectResourceMongodbConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the Mongo DB connection source is a self-built cluster.
+func (o ConnectResourceMongodbConnectParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.SelfBuilt
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The instance VIP of the Mongo DB connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMongodbConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the Mongo DB connection source, which is required when it is a Tencent Cloud instance.
+func (o ConnectResourceMongodbConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The username of the Mongo DB connection source.
+func (o ConnectResourceMongodbConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMongodbConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourceMysqlConnectParam struct {
+	// Required when type is TDSQL C_MYSQL.
+	ClusterId *string `pulumi:"clusterId"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// Mysql connection source password.
+	Password string `pulumi:"password"`
+	// MySQL port.
+	Port int `pulumi:"port"`
+	// Instance resource of My SQL connection source.
+	Resource string `pulumi:"resource"`
+	// Mysql Whether the connection source is a self-built cluster, default: false.
+	SelfBuilt *bool `pulumi:"selfBuilt"`
+	// The instance vip of the MySQL connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// The vpc Id of the My SQL connection source, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// Username of Mysql connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceMysqlConnectParamInput is an input type that accepts ConnectResourceMysqlConnectParamArgs and ConnectResourceMysqlConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceMysqlConnectParamInput` via:
+//
+//          ConnectResourceMysqlConnectParamArgs{...}
+type ConnectResourceMysqlConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceMysqlConnectParamOutput() ConnectResourceMysqlConnectParamOutput
+	ToConnectResourceMysqlConnectParamOutputWithContext(context.Context) ConnectResourceMysqlConnectParamOutput
+}
+
+type ConnectResourceMysqlConnectParamArgs struct {
+	// Required when type is TDSQL C_MYSQL.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// Mysql connection source password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// MySQL port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Instance resource of My SQL connection source.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// Mysql Whether the connection source is a self-built cluster, default: false.
+	SelfBuilt pulumi.BoolPtrInput `pulumi:"selfBuilt"`
+	// The instance vip of the MySQL connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// The vpc Id of the My SQL connection source, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// Username of Mysql connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceMysqlConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceMysqlConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceMysqlConnectParamArgs) ToConnectResourceMysqlConnectParamOutput() ConnectResourceMysqlConnectParamOutput {
+	return i.ToConnectResourceMysqlConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceMysqlConnectParamArgs) ToConnectResourceMysqlConnectParamOutputWithContext(ctx context.Context) ConnectResourceMysqlConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMysqlConnectParamOutput)
+}
+
+func (i ConnectResourceMysqlConnectParamArgs) ToConnectResourceMysqlConnectParamPtrOutput() ConnectResourceMysqlConnectParamPtrOutput {
+	return i.ToConnectResourceMysqlConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceMysqlConnectParamArgs) ToConnectResourceMysqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMysqlConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMysqlConnectParamOutput).ToConnectResourceMysqlConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceMysqlConnectParamPtrInput is an input type that accepts ConnectResourceMysqlConnectParamArgs, ConnectResourceMysqlConnectParamPtr and ConnectResourceMysqlConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceMysqlConnectParamPtrInput` via:
+//
+//          ConnectResourceMysqlConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceMysqlConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceMysqlConnectParamPtrOutput() ConnectResourceMysqlConnectParamPtrOutput
+	ToConnectResourceMysqlConnectParamPtrOutputWithContext(context.Context) ConnectResourceMysqlConnectParamPtrOutput
+}
+
+type connectResourceMysqlConnectParamPtrType ConnectResourceMysqlConnectParamArgs
+
+func ConnectResourceMysqlConnectParamPtr(v *ConnectResourceMysqlConnectParamArgs) ConnectResourceMysqlConnectParamPtrInput {
+	return (*connectResourceMysqlConnectParamPtrType)(v)
+}
+
+func (*connectResourceMysqlConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceMysqlConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceMysqlConnectParamPtrType) ToConnectResourceMysqlConnectParamPtrOutput() ConnectResourceMysqlConnectParamPtrOutput {
+	return i.ToConnectResourceMysqlConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceMysqlConnectParamPtrType) ToConnectResourceMysqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMysqlConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceMysqlConnectParamPtrOutput)
+}
+
+type ConnectResourceMysqlConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceMysqlConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceMysqlConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceMysqlConnectParamOutput) ToConnectResourceMysqlConnectParamOutput() ConnectResourceMysqlConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceMysqlConnectParamOutput) ToConnectResourceMysqlConnectParamOutputWithContext(ctx context.Context) ConnectResourceMysqlConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceMysqlConnectParamOutput) ToConnectResourceMysqlConnectParamPtrOutput() ConnectResourceMysqlConnectParamPtrOutput {
+	return o.ToConnectResourceMysqlConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceMysqlConnectParamOutput) ToConnectResourceMysqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMysqlConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceMysqlConnectParam) *ConnectResourceMysqlConnectParam {
+		return &v
+	}).(ConnectResourceMysqlConnectParamPtrOutput)
+}
+
+// Required when type is TDSQL C_MYSQL.
+func (o ConnectResourceMysqlConnectParamOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceMysqlConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// Mysql connection source password.
+func (o ConnectResourceMysqlConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// MySQL port.
+func (o ConnectResourceMysqlConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Instance resource of My SQL connection source.
+func (o ConnectResourceMysqlConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// Mysql Whether the connection source is a self-built cluster, default: false.
+func (o ConnectResourceMysqlConnectParamOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) *bool { return v.SelfBuilt }).(pulumi.BoolPtrOutput)
+}
+
+// The instance vip of the MySQL connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMysqlConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the My SQL connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMysqlConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// Username of Mysql connection source.
+func (o ConnectResourceMysqlConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceMysqlConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceMysqlConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceMysqlConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceMysqlConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceMysqlConnectParamPtrOutput) ToConnectResourceMysqlConnectParamPtrOutput() ConnectResourceMysqlConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceMysqlConnectParamPtrOutput) ToConnectResourceMysqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceMysqlConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceMysqlConnectParamPtrOutput) Elem() ConnectResourceMysqlConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) ConnectResourceMysqlConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceMysqlConnectParam
+		return ret
+	}).(ConnectResourceMysqlConnectParamOutput)
+}
+
+// Required when type is TDSQL C_MYSQL.
+func (o ConnectResourceMysqlConnectParamPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourceMysqlConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Mysql connection source password.
+func (o ConnectResourceMysqlConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// MySQL port.
+func (o ConnectResourceMysqlConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Instance resource of My SQL connection source.
+func (o ConnectResourceMysqlConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// Mysql Whether the connection source is a self-built cluster, default: false.
+func (o ConnectResourceMysqlConnectParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SelfBuilt
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The instance vip of the MySQL connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMysqlConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// The vpc Id of the My SQL connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceMysqlConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Username of Mysql connection source.
+func (o ConnectResourceMysqlConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceMysqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourcePostgresqlConnectParam struct {
+	// Required when type is TDSQL C_POSTGRESQL.
+	ClusterId *string `pulumi:"clusterId"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// PostgreSQL password.
+	Password string `pulumi:"password"`
+	// PostgreSQL port.
+	Port int `pulumi:"port"`
+	// PostgreSQL instanceId.
+	Resource string `pulumi:"resource"`
+	// PostgreSQL Whether the connection source is a self-built cluster, default: false.
+	SelfBuilt *bool `pulumi:"selfBuilt"`
+	// The instance VIP of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// The instance vpcId of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// PostgreSQL The username of the connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourcePostgresqlConnectParamInput is an input type that accepts ConnectResourcePostgresqlConnectParamArgs and ConnectResourcePostgresqlConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourcePostgresqlConnectParamInput` via:
+//
+//          ConnectResourcePostgresqlConnectParamArgs{...}
+type ConnectResourcePostgresqlConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourcePostgresqlConnectParamOutput() ConnectResourcePostgresqlConnectParamOutput
+	ToConnectResourcePostgresqlConnectParamOutputWithContext(context.Context) ConnectResourcePostgresqlConnectParamOutput
+}
+
+type ConnectResourcePostgresqlConnectParamArgs struct {
+	// Required when type is TDSQL C_POSTGRESQL.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Whether to update to the associated Datahub task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// PostgreSQL password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// PostgreSQL port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// PostgreSQL instanceId.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// PostgreSQL Whether the connection source is a self-built cluster, default: false.
+	SelfBuilt pulumi.BoolPtrInput `pulumi:"selfBuilt"`
+	// The instance VIP of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// The instance vpcId of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// PostgreSQL The username of the connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourcePostgresqlConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourcePostgresqlConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourcePostgresqlConnectParamArgs) ToConnectResourcePostgresqlConnectParamOutput() ConnectResourcePostgresqlConnectParamOutput {
+	return i.ToConnectResourcePostgresqlConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourcePostgresqlConnectParamArgs) ToConnectResourcePostgresqlConnectParamOutputWithContext(ctx context.Context) ConnectResourcePostgresqlConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourcePostgresqlConnectParamOutput)
+}
+
+func (i ConnectResourcePostgresqlConnectParamArgs) ToConnectResourcePostgresqlConnectParamPtrOutput() ConnectResourcePostgresqlConnectParamPtrOutput {
+	return i.ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourcePostgresqlConnectParamArgs) ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourcePostgresqlConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourcePostgresqlConnectParamOutput).ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourcePostgresqlConnectParamPtrInput is an input type that accepts ConnectResourcePostgresqlConnectParamArgs, ConnectResourcePostgresqlConnectParamPtr and ConnectResourcePostgresqlConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourcePostgresqlConnectParamPtrInput` via:
+//
+//          ConnectResourcePostgresqlConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourcePostgresqlConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourcePostgresqlConnectParamPtrOutput() ConnectResourcePostgresqlConnectParamPtrOutput
+	ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(context.Context) ConnectResourcePostgresqlConnectParamPtrOutput
+}
+
+type connectResourcePostgresqlConnectParamPtrType ConnectResourcePostgresqlConnectParamArgs
+
+func ConnectResourcePostgresqlConnectParamPtr(v *ConnectResourcePostgresqlConnectParamArgs) ConnectResourcePostgresqlConnectParamPtrInput {
+	return (*connectResourcePostgresqlConnectParamPtrType)(v)
+}
+
+func (*connectResourcePostgresqlConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourcePostgresqlConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourcePostgresqlConnectParamPtrType) ToConnectResourcePostgresqlConnectParamPtrOutput() ConnectResourcePostgresqlConnectParamPtrOutput {
+	return i.ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourcePostgresqlConnectParamPtrType) ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourcePostgresqlConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourcePostgresqlConnectParamPtrOutput)
+}
+
+type ConnectResourcePostgresqlConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourcePostgresqlConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourcePostgresqlConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourcePostgresqlConnectParamOutput) ToConnectResourcePostgresqlConnectParamOutput() ConnectResourcePostgresqlConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourcePostgresqlConnectParamOutput) ToConnectResourcePostgresqlConnectParamOutputWithContext(ctx context.Context) ConnectResourcePostgresqlConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourcePostgresqlConnectParamOutput) ToConnectResourcePostgresqlConnectParamPtrOutput() ConnectResourcePostgresqlConnectParamPtrOutput {
+	return o.ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourcePostgresqlConnectParamOutput) ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourcePostgresqlConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourcePostgresqlConnectParam) *ConnectResourcePostgresqlConnectParam {
+		return &v
+	}).(ConnectResourcePostgresqlConnectParamPtrOutput)
+}
+
+// Required when type is TDSQL C_POSTGRESQL.
+func (o ConnectResourcePostgresqlConnectParamOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourcePostgresqlConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// PostgreSQL password.
+func (o ConnectResourcePostgresqlConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// PostgreSQL port.
+func (o ConnectResourcePostgresqlConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// PostgreSQL instanceId.
+func (o ConnectResourcePostgresqlConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// PostgreSQL Whether the connection source is a self-built cluster, default: false.
+func (o ConnectResourcePostgresqlConnectParamOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) *bool { return v.SelfBuilt }).(pulumi.BoolPtrOutput)
+}
+
+// The instance VIP of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourcePostgresqlConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// The instance vpcId of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourcePostgresqlConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// PostgreSQL The username of the connection source.
+func (o ConnectResourcePostgresqlConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourcePostgresqlConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourcePostgresqlConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourcePostgresqlConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourcePostgresqlConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) ToConnectResourcePostgresqlConnectParamPtrOutput() ConnectResourcePostgresqlConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) ToConnectResourcePostgresqlConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourcePostgresqlConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) Elem() ConnectResourcePostgresqlConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) ConnectResourcePostgresqlConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourcePostgresqlConnectParam
+		return ret
+	}).(ConnectResourcePostgresqlConnectParamOutput)
+}
+
+// Required when type is TDSQL C_POSTGRESQL.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to update to the associated Datahub task, default: false.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// PostgreSQL password.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// PostgreSQL port.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// PostgreSQL instanceId.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// PostgreSQL Whether the connection source is a self-built cluster, default: false.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SelfBuilt
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The instance VIP of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// The instance vpcId of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// PostgreSQL The username of the connection source.
+func (o ConnectResourcePostgresqlConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourcePostgresqlConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectResourceSqlserverConnectParam struct {
+	// Whether to update to the associated Dip task, default: false.
+	IsUpdate *bool `pulumi:"isUpdate"`
+	// SQLServer password.
+	Password string `pulumi:"password"`
+	// SQLServer port.
+	Port int `pulumi:"port"`
+	// SQLServer instanceId.
+	Resource string `pulumi:"resource"`
+	// SQLServer instance vip, When it is a Tencent Cloud instance, it is required.
+	ServiceVip *string `pulumi:"serviceVip"`
+	// SQLServer vpcId, When it is a Tencent Cloud instance, it is required.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
+	// SQLServer The username of the connection source.
+	UserName string `pulumi:"userName"`
+}
+
+// ConnectResourceSqlserverConnectParamInput is an input type that accepts ConnectResourceSqlserverConnectParamArgs and ConnectResourceSqlserverConnectParamOutput values.
+// You can construct a concrete instance of `ConnectResourceSqlserverConnectParamInput` via:
+//
+//          ConnectResourceSqlserverConnectParamArgs{...}
+type ConnectResourceSqlserverConnectParamInput interface {
+	pulumi.Input
+
+	ToConnectResourceSqlserverConnectParamOutput() ConnectResourceSqlserverConnectParamOutput
+	ToConnectResourceSqlserverConnectParamOutputWithContext(context.Context) ConnectResourceSqlserverConnectParamOutput
+}
+
+type ConnectResourceSqlserverConnectParamArgs struct {
+	// Whether to update to the associated Dip task, default: false.
+	IsUpdate pulumi.BoolPtrInput `pulumi:"isUpdate"`
+	// SQLServer password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// SQLServer port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// SQLServer instanceId.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// SQLServer instance vip, When it is a Tencent Cloud instance, it is required.
+	ServiceVip pulumi.StringPtrInput `pulumi:"serviceVip"`
+	// SQLServer vpcId, When it is a Tencent Cloud instance, it is required.
+	UniqVpcId pulumi.StringPtrInput `pulumi:"uniqVpcId"`
+	// SQLServer The username of the connection source.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (ConnectResourceSqlserverConnectParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceSqlserverConnectParam)(nil)).Elem()
+}
+
+func (i ConnectResourceSqlserverConnectParamArgs) ToConnectResourceSqlserverConnectParamOutput() ConnectResourceSqlserverConnectParamOutput {
+	return i.ToConnectResourceSqlserverConnectParamOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceSqlserverConnectParamArgs) ToConnectResourceSqlserverConnectParamOutputWithContext(ctx context.Context) ConnectResourceSqlserverConnectParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceSqlserverConnectParamOutput)
+}
+
+func (i ConnectResourceSqlserverConnectParamArgs) ToConnectResourceSqlserverConnectParamPtrOutput() ConnectResourceSqlserverConnectParamPtrOutput {
+	return i.ToConnectResourceSqlserverConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectResourceSqlserverConnectParamArgs) ToConnectResourceSqlserverConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceSqlserverConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceSqlserverConnectParamOutput).ToConnectResourceSqlserverConnectParamPtrOutputWithContext(ctx)
+}
+
+// ConnectResourceSqlserverConnectParamPtrInput is an input type that accepts ConnectResourceSqlserverConnectParamArgs, ConnectResourceSqlserverConnectParamPtr and ConnectResourceSqlserverConnectParamPtrOutput values.
+// You can construct a concrete instance of `ConnectResourceSqlserverConnectParamPtrInput` via:
+//
+//          ConnectResourceSqlserverConnectParamArgs{...}
+//
+//  or:
+//
+//          nil
+type ConnectResourceSqlserverConnectParamPtrInput interface {
+	pulumi.Input
+
+	ToConnectResourceSqlserverConnectParamPtrOutput() ConnectResourceSqlserverConnectParamPtrOutput
+	ToConnectResourceSqlserverConnectParamPtrOutputWithContext(context.Context) ConnectResourceSqlserverConnectParamPtrOutput
+}
+
+type connectResourceSqlserverConnectParamPtrType ConnectResourceSqlserverConnectParamArgs
+
+func ConnectResourceSqlserverConnectParamPtr(v *ConnectResourceSqlserverConnectParamArgs) ConnectResourceSqlserverConnectParamPtrInput {
+	return (*connectResourceSqlserverConnectParamPtrType)(v)
+}
+
+func (*connectResourceSqlserverConnectParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceSqlserverConnectParam)(nil)).Elem()
+}
+
+func (i *connectResourceSqlserverConnectParamPtrType) ToConnectResourceSqlserverConnectParamPtrOutput() ConnectResourceSqlserverConnectParamPtrOutput {
+	return i.ToConnectResourceSqlserverConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (i *connectResourceSqlserverConnectParamPtrType) ToConnectResourceSqlserverConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceSqlserverConnectParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectResourceSqlserverConnectParamPtrOutput)
+}
+
+type ConnectResourceSqlserverConnectParamOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceSqlserverConnectParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectResourceSqlserverConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceSqlserverConnectParamOutput) ToConnectResourceSqlserverConnectParamOutput() ConnectResourceSqlserverConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceSqlserverConnectParamOutput) ToConnectResourceSqlserverConnectParamOutputWithContext(ctx context.Context) ConnectResourceSqlserverConnectParamOutput {
+	return o
+}
+
+func (o ConnectResourceSqlserverConnectParamOutput) ToConnectResourceSqlserverConnectParamPtrOutput() ConnectResourceSqlserverConnectParamPtrOutput {
+	return o.ToConnectResourceSqlserverConnectParamPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectResourceSqlserverConnectParamOutput) ToConnectResourceSqlserverConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceSqlserverConnectParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectResourceSqlserverConnectParam) *ConnectResourceSqlserverConnectParam {
+		return &v
+	}).(ConnectResourceSqlserverConnectParamPtrOutput)
+}
+
+// Whether to update to the associated Dip task, default: false.
+func (o ConnectResourceSqlserverConnectParamOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ConnectResourceSqlserverConnectParam) *bool { return v.IsUpdate }).(pulumi.BoolPtrOutput)
+}
+
+// SQLServer password.
+func (o ConnectResourceSqlserverConnectParamOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceSqlserverConnectParam) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// SQLServer port.
+func (o ConnectResourceSqlserverConnectParamOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectResourceSqlserverConnectParam) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// SQLServer instanceId.
+func (o ConnectResourceSqlserverConnectParamOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceSqlserverConnectParam) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// SQLServer instance vip, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceSqlserverConnectParamOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceSqlserverConnectParam) *string { return v.ServiceVip }).(pulumi.StringPtrOutput)
+}
+
+// SQLServer vpcId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceSqlserverConnectParamOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectResourceSqlserverConnectParam) *string { return v.UniqVpcId }).(pulumi.StringPtrOutput)
+}
+
+// SQLServer The username of the connection source.
+func (o ConnectResourceSqlserverConnectParamOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectResourceSqlserverConnectParam) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type ConnectResourceSqlserverConnectParamPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectResourceSqlserverConnectParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectResourceSqlserverConnectParam)(nil)).Elem()
+}
+
+func (o ConnectResourceSqlserverConnectParamPtrOutput) ToConnectResourceSqlserverConnectParamPtrOutput() ConnectResourceSqlserverConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceSqlserverConnectParamPtrOutput) ToConnectResourceSqlserverConnectParamPtrOutputWithContext(ctx context.Context) ConnectResourceSqlserverConnectParamPtrOutput {
+	return o
+}
+
+func (o ConnectResourceSqlserverConnectParamPtrOutput) Elem() ConnectResourceSqlserverConnectParamOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) ConnectResourceSqlserverConnectParam {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectResourceSqlserverConnectParam
+		return ret
+	}).(ConnectResourceSqlserverConnectParamOutput)
+}
+
+// Whether to update to the associated Dip task, default: false.
+func (o ConnectResourceSqlserverConnectParamPtrOutput) IsUpdate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsUpdate
+	}).(pulumi.BoolPtrOutput)
+}
+
+// SQLServer password.
+func (o ConnectResourceSqlserverConnectParamPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQLServer port.
+func (o ConnectResourceSqlserverConnectParamPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// SQLServer instanceId.
+func (o ConnectResourceSqlserverConnectParamPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Resource
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQLServer instance vip, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceSqlserverConnectParamPtrOutput) ServiceVip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceVip
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQLServer vpcId, When it is a Tencent Cloud instance, it is required.
+func (o ConnectResourceSqlserverConnectParamPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQLServer The username of the connection source.
+func (o ConnectResourceSqlserverConnectParamPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectResourceSqlserverConnectParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
 type InstanceConfig struct {
 	// Automatic creation. true: enabled, false: not enabled.
 	AutoCreateTopicEnable bool `pulumi:"autoCreateTopicEnable"`
@@ -22,7 +2665,7 @@ type InstanceConfig struct {
 // InstanceConfigInput is an input type that accepts InstanceConfigArgs and InstanceConfigOutput values.
 // You can construct a concrete instance of `InstanceConfigInput` via:
 //
-//	InstanceConfigArgs{...}
+//          InstanceConfigArgs{...}
 type InstanceConfigInput interface {
 	pulumi.Input
 
@@ -62,11 +2705,11 @@ func (i InstanceConfigArgs) ToInstanceConfigPtrOutputWithContext(ctx context.Con
 // InstanceConfigPtrInput is an input type that accepts InstanceConfigArgs, InstanceConfigPtr and InstanceConfigPtrOutput values.
 // You can construct a concrete instance of `InstanceConfigPtrInput` via:
 //
-//	        InstanceConfigArgs{...}
+//          InstanceConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type InstanceConfigPtrInput interface {
 	pulumi.Input
 
@@ -199,7 +2842,7 @@ type InstanceDynamicRetentionConfig struct {
 // InstanceDynamicRetentionConfigInput is an input type that accepts InstanceDynamicRetentionConfigArgs and InstanceDynamicRetentionConfigOutput values.
 // You can construct a concrete instance of `InstanceDynamicRetentionConfigInput` via:
 //
-//	InstanceDynamicRetentionConfigArgs{...}
+//          InstanceDynamicRetentionConfigArgs{...}
 type InstanceDynamicRetentionConfigInput interface {
 	pulumi.Input
 
@@ -241,11 +2884,11 @@ func (i InstanceDynamicRetentionConfigArgs) ToInstanceDynamicRetentionConfigPtrO
 // InstanceDynamicRetentionConfigPtrInput is an input type that accepts InstanceDynamicRetentionConfigArgs, InstanceDynamicRetentionConfigPtr and InstanceDynamicRetentionConfigPtrOutput values.
 // You can construct a concrete instance of `InstanceDynamicRetentionConfigPtrInput` via:
 //
-//	        InstanceDynamicRetentionConfigArgs{...}
+//          InstanceDynamicRetentionConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type InstanceDynamicRetentionConfigPtrInput interface {
 	pulumi.Input
 
@@ -389,7 +3032,7 @@ type InstanceTag struct {
 // InstanceTagInput is an input type that accepts InstanceTagArgs and InstanceTagOutput values.
 // You can construct a concrete instance of `InstanceTagInput` via:
 //
-//	InstanceTagArgs{...}
+//          InstanceTagArgs{...}
 type InstanceTagInput interface {
 	pulumi.Input
 
@@ -419,7 +3062,7 @@ func (i InstanceTagArgs) ToInstanceTagOutputWithContext(ctx context.Context) Ins
 // InstanceTagArrayInput is an input type that accepts InstanceTagArray and InstanceTagArrayOutput values.
 // You can construct a concrete instance of `InstanceTagArrayInput` via:
 //
-//	InstanceTagArray{ InstanceTagArgs{...} }
+//          InstanceTagArray{ InstanceTagArgs{...} }
 type InstanceTagArrayInput interface {
 	pulumi.Input
 
@@ -503,7 +3146,7 @@ type GetAclsAclList struct {
 // GetAclsAclListInput is an input type that accepts GetAclsAclListArgs and GetAclsAclListOutput values.
 // You can construct a concrete instance of `GetAclsAclListInput` via:
 //
-//	GetAclsAclListArgs{...}
+//          GetAclsAclListArgs{...}
 type GetAclsAclListInput interface {
 	pulumi.Input
 
@@ -541,7 +3184,7 @@ func (i GetAclsAclListArgs) ToGetAclsAclListOutputWithContext(ctx context.Contex
 // GetAclsAclListArrayInput is an input type that accepts GetAclsAclListArray and GetAclsAclListArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListArrayInput` via:
 //
-//	GetAclsAclListArray{ GetAclsAclListArgs{...} }
+//          GetAclsAclListArray{ GetAclsAclListArgs{...} }
 type GetAclsAclListArrayInput interface {
 	pulumi.Input
 
@@ -637,7 +3280,7 @@ type GetInstancesFilter struct {
 // GetInstancesFilterInput is an input type that accepts GetInstancesFilterArgs and GetInstancesFilterOutput values.
 // You can construct a concrete instance of `GetInstancesFilterInput` via:
 //
-//	GetInstancesFilterArgs{...}
+//          GetInstancesFilterArgs{...}
 type GetInstancesFilterInput interface {
 	pulumi.Input
 
@@ -667,7 +3310,7 @@ func (i GetInstancesFilterArgs) ToGetInstancesFilterOutputWithContext(ctx contex
 // GetInstancesFilterArrayInput is an input type that accepts GetInstancesFilterArray and GetInstancesFilterArrayOutput values.
 // You can construct a concrete instance of `GetInstancesFilterArrayInput` via:
 //
-//	GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
+//          GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
 type GetInstancesFilterArrayInput interface {
 	pulumi.Input
 
@@ -776,7 +3419,7 @@ type GetInstancesInstanceList struct {
 	Status int `pulumi:"status"`
 	// Subnet id.
 	SubnetId string `pulumi:"subnetId"`
-	// Tag infomation.
+	// Tag information.
 	Tags []GetInstancesInstanceListTag `pulumi:"tags"`
 	// The number of topics.
 	TopicNum int `pulumi:"topicNum"`
@@ -799,7 +3442,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -850,7 +3493,7 @@ type GetInstancesInstanceListArgs struct {
 	Status pulumi.IntInput `pulumi:"status"`
 	// Subnet id.
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
-	// Tag infomation.
+	// Tag information.
 	Tags GetInstancesInstanceListTagArrayInput `pulumi:"tags"`
 	// The number of topics.
 	TopicNum pulumi.IntInput `pulumi:"topicNum"`
@@ -885,7 +3528,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1026,7 +3669,7 @@ func (o GetInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
 }
 
-// Tag infomation.
+// Tag information.
 func (o GetInstancesInstanceListOutput) Tags() GetInstancesInstanceListTagArrayOutput {
 	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListTag { return v.Tags }).(GetInstancesInstanceListTagArrayOutput)
 }
@@ -1101,7 +3744,7 @@ type GetInstancesInstanceListTag struct {
 // GetInstancesInstanceListTagInput is an input type that accepts GetInstancesInstanceListTagArgs and GetInstancesInstanceListTagOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListTagInput` via:
 //
-//	GetInstancesInstanceListTagArgs{...}
+//          GetInstancesInstanceListTagArgs{...}
 type GetInstancesInstanceListTagInput interface {
 	pulumi.Input
 
@@ -1131,7 +3774,7 @@ func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutputWith
 // GetInstancesInstanceListTagArrayInput is an input type that accepts GetInstancesInstanceListTagArray and GetInstancesInstanceListTagArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListTagArrayInput` via:
 //
-//	GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
+//          GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
 type GetInstancesInstanceListTagArrayInput interface {
 	pulumi.Input
 
@@ -1207,7 +3850,7 @@ type GetInstancesInstanceListVipList struct {
 // GetInstancesInstanceListVipListInput is an input type that accepts GetInstancesInstanceListVipListArgs and GetInstancesInstanceListVipListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListVipListInput` via:
 //
-//	GetInstancesInstanceListVipListArgs{...}
+//          GetInstancesInstanceListVipListArgs{...}
 type GetInstancesInstanceListVipListInput interface {
 	pulumi.Input
 
@@ -1300,7 +3943,7 @@ type GetTopicsInstanceList struct {
 // GetTopicsInstanceListInput is an input type that accepts GetTopicsInstanceListArgs and GetTopicsInstanceListOutput values.
 // You can construct a concrete instance of `GetTopicsInstanceListInput` via:
 //
-//	GetTopicsInstanceListArgs{...}
+//          GetTopicsInstanceListArgs{...}
 type GetTopicsInstanceListInput interface {
 	pulumi.Input
 
@@ -1362,7 +4005,7 @@ func (i GetTopicsInstanceListArgs) ToGetTopicsInstanceListOutputWithContext(ctx 
 // GetTopicsInstanceListArrayInput is an input type that accepts GetTopicsInstanceListArray and GetTopicsInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetTopicsInstanceListArrayInput` via:
 //
-//	GetTopicsInstanceListArray{ GetTopicsInstanceListArgs{...} }
+//          GetTopicsInstanceListArray{ GetTopicsInstanceListArgs{...} }
 type GetTopicsInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1520,7 +4163,7 @@ type GetUsersUserList struct {
 // GetUsersUserListInput is an input type that accepts GetUsersUserListArgs and GetUsersUserListOutput values.
 // You can construct a concrete instance of `GetUsersUserListInput` via:
 //
-//	GetUsersUserListArgs{...}
+//          GetUsersUserListArgs{...}
 type GetUsersUserListInput interface {
 	pulumi.Input
 
@@ -1552,7 +4195,7 @@ func (i GetUsersUserListArgs) ToGetUsersUserListOutputWithContext(ctx context.Co
 // GetUsersUserListArrayInput is an input type that accepts GetUsersUserListArray and GetUsersUserListArrayOutput values.
 // You can construct a concrete instance of `GetUsersUserListArrayInput` via:
 //
-//	GetUsersUserListArray{ GetUsersUserListArgs{...} }
+//          GetUsersUserListArray{ GetUsersUserListArgs{...} }
 type GetUsersUserListArrayInput interface {
 	pulumi.Input
 
@@ -1624,6 +4267,26 @@ func (o GetUsersUserListArrayOutput) Index(i pulumi.IntInput) GetUsersUserListOu
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceClickhouseConnectParamInput)(nil)).Elem(), ConnectResourceClickhouseConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceClickhouseConnectParamPtrInput)(nil)).Elem(), ConnectResourceClickhouseConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceDorisConnectParamInput)(nil)).Elem(), ConnectResourceDorisConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceDorisConnectParamPtrInput)(nil)).Elem(), ConnectResourceDorisConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceDtsConnectParamInput)(nil)).Elem(), ConnectResourceDtsConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceDtsConnectParamPtrInput)(nil)).Elem(), ConnectResourceDtsConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceEsConnectParamInput)(nil)).Elem(), ConnectResourceEsConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceEsConnectParamPtrInput)(nil)).Elem(), ConnectResourceEsConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceKafkaConnectParamInput)(nil)).Elem(), ConnectResourceKafkaConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceKafkaConnectParamPtrInput)(nil)).Elem(), ConnectResourceKafkaConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceMariadbConnectParamInput)(nil)).Elem(), ConnectResourceMariadbConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceMariadbConnectParamPtrInput)(nil)).Elem(), ConnectResourceMariadbConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceMongodbConnectParamInput)(nil)).Elem(), ConnectResourceMongodbConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceMongodbConnectParamPtrInput)(nil)).Elem(), ConnectResourceMongodbConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceMysqlConnectParamInput)(nil)).Elem(), ConnectResourceMysqlConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceMysqlConnectParamPtrInput)(nil)).Elem(), ConnectResourceMysqlConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourcePostgresqlConnectParamInput)(nil)).Elem(), ConnectResourcePostgresqlConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourcePostgresqlConnectParamPtrInput)(nil)).Elem(), ConnectResourcePostgresqlConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceSqlserverConnectParamInput)(nil)).Elem(), ConnectResourceSqlserverConnectParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectResourceSqlserverConnectParamPtrInput)(nil)).Elem(), ConnectResourceSqlserverConnectParamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceConfigInput)(nil)).Elem(), InstanceConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceConfigPtrInput)(nil)).Elem(), InstanceConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDynamicRetentionConfigInput)(nil)).Elem(), InstanceDynamicRetentionConfigArgs{})
@@ -1643,6 +4306,26 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTopicsInstanceListArrayInput)(nil)).Elem(), GetTopicsInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserListInput)(nil)).Elem(), GetUsersUserListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserListArrayInput)(nil)).Elem(), GetUsersUserListArray{})
+	pulumi.RegisterOutputType(ConnectResourceClickhouseConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceClickhouseConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceDorisConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceDorisConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceDtsConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceDtsConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceEsConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceEsConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceKafkaConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceKafkaConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceMariadbConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceMariadbConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceMongodbConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceMongodbConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceMysqlConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceMysqlConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourcePostgresqlConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourcePostgresqlConnectParamPtrOutput{})
+	pulumi.RegisterOutputType(ConnectResourceSqlserverConnectParamOutput{})
+	pulumi.RegisterOutputType(ConnectResourceSqlserverConnectParamPtrOutput{})
 	pulumi.RegisterOutputType(InstanceConfigOutput{})
 	pulumi.RegisterOutputType(InstanceConfigPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDynamicRetentionConfigOutput{})

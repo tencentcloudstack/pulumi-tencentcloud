@@ -183,6 +183,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public partial class Instance : Pulumi.CustomResource
     {
         /// <summary>
+        /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        /// </summary>
+        [Output("autoRenewFlag")]
+        public Output<int?> AutoRenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to use voucher, `1` for enabled.
+        /// </summary>
+        [Output("autoVoucher")]
+        public Output<int?> AutoVoucher { get; private set; } = null!;
+
+        /// <summary>
         /// Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
         /// </summary>
         [Output("availabilityZone")]
@@ -195,7 +207,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<Outputs.InstanceBackupPlan?> BackupPlan { get; private set; } = null!;
 
         /// <summary>
-        /// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -285,6 +297,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int> NeedSupportTde { get; private set; } = null!;
 
         /// <summary>
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// </summary>
+        [Output("period")]
+        public Output<int?> Period { get; private set; } = null!;
+
+        /// <summary>
         /// IP for private access.
         /// </summary>
         [Output("privateAccessIp")]
@@ -363,6 +381,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int> Uid { get; private set; } = null!;
 
         /// <summary>
+        /// Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        /// </summary>
+        [Output("voucherIds")]
+        public Output<ImmutableArray<string>> VoucherIds { get; private set; } = null!;
+
+        /// <summary>
         /// ID of VPC.
         /// </summary>
         [Output("vpcId")]
@@ -416,6 +440,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public sealed class InstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        /// </summary>
+        [Input("autoRenewFlag")]
+        public Input<int>? AutoRenewFlag { get; set; }
+
+        /// <summary>
+        /// Whether to use voucher, `1` for enabled.
+        /// </summary>
+        [Input("autoVoucher")]
+        public Input<int>? AutoVoucher { get; set; }
+
+        /// <summary>
         /// Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
         /// </summary>
         [Input("availabilityZone", required: true)]
@@ -428,7 +464,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<Inputs.InstanceBackupPlanArgs>? BackupPlan { get; set; }
 
         /// <summary>
-        /// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -518,6 +554,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? NeedSupportTde { get; set; }
 
         /// <summary>
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// </summary>
+        [Input("period")]
+        public Input<int>? Period { get; set; }
+
+        /// <summary>
         /// Project id, default value is `0`.
         /// </summary>
         [Input("projectId")]
@@ -577,6 +619,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             set => _tags = value;
         }
 
+        [Input("voucherIds")]
+        private InputList<string>? _voucherIds;
+
+        /// <summary>
+        /// Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        /// </summary>
+        public InputList<string> VoucherIds
+        {
+            get => _voucherIds ?? (_voucherIds = new InputList<string>());
+            set => _voucherIds = value;
+        }
+
         /// <summary>
         /// ID of VPC.
         /// </summary>
@@ -591,6 +645,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public sealed class InstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        /// </summary>
+        [Input("autoRenewFlag")]
+        public Input<int>? AutoRenewFlag { get; set; }
+
+        /// <summary>
+        /// Whether to use voucher, `1` for enabled.
+        /// </summary>
+        [Input("autoVoucher")]
+        public Input<int>? AutoVoucher { get; set; }
+
+        /// <summary>
         /// Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
         /// </summary>
         [Input("availabilityZone")]
@@ -603,7 +669,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<Inputs.InstanceBackupPlanGetArgs>? BackupPlan { get; set; }
 
         /// <summary>
-        /// Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -699,6 +765,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? NeedSupportTde { get; set; }
 
         /// <summary>
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// </summary>
+        [Input("period")]
+        public Input<int>? Period { get; set; }
+
+        /// <summary>
         /// IP for private access.
         /// </summary>
         [Input("privateAccessIp")]
@@ -787,6 +859,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("uid")]
         public Input<int>? Uid { get; set; }
+
+        [Input("voucherIds")]
+        private InputList<string>? _voucherIds;
+
+        /// <summary>
+        /// Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        /// </summary>
+        public InputList<string> VoucherIds
+        {
+            get => _voucherIds ?? (_voucherIds = new InputList<string>());
+            set => _voucherIds = value;
+        }
 
         /// <summary>
         /// ID of VPC.

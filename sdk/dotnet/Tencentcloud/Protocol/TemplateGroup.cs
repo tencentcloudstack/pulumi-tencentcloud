@@ -13,6 +13,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
     /// <summary>
     /// Provides a resource to manage protocol template group.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Protocol.TemplateGroup("foo", new Tencentcloud.Protocol.TemplateGroupArgs
+    ///         {
+    ///             TemplateIds = 
+    ///             {
+    ///                 "ipl-axaf24151",
+    ///                 "ipl-axaf24152",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// Protocol template group can be imported using the id, e.g.

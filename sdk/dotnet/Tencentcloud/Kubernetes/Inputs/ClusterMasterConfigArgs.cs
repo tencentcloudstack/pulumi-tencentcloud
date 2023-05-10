@@ -80,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string>? Hostname { get; set; }
 
         /// <summary>
+        /// Id of cvm hpc cluster.
+        /// </summary>
+        [Input("hpcClusterId")]
+        public Input<string>? HpcClusterId { get; set; }
+
+        /// <summary>
         /// The valid image id, format of img-xxx.
         /// </summary>
         [Input("imgId")]

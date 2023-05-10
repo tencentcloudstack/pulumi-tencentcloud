@@ -5,8 +5,23 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .account import *
 from .backup_config import *
+from .connection_config import *
+from .get_backup import *
+from .get_backup_download_info import *
+from .get_instance_shards import *
+from .get_instance_task_list import *
+from .get_instance_zone_info import *
 from .get_instances import *
+from .get_param_records import *
 from .get_zone_config import *
 from .instance import *
+from .maintenance_window import *
+from .param import *
+from .param_template import *
+from .read_only import *
+from .replica_readonly import *
+from .ssl import *
+from ._inputs import *
 from . import outputs

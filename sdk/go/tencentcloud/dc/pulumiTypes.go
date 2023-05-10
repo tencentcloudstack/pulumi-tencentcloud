@@ -24,7 +24,7 @@ type GetGatewayCcnRoutesInstanceList struct {
 // GetGatewayCcnRoutesInstanceListInput is an input type that accepts GetGatewayCcnRoutesInstanceListArgs and GetGatewayCcnRoutesInstanceListOutput values.
 // You can construct a concrete instance of `GetGatewayCcnRoutesInstanceListInput` via:
 //
-//	GetGatewayCcnRoutesInstanceListArgs{...}
+//          GetGatewayCcnRoutesInstanceListArgs{...}
 type GetGatewayCcnRoutesInstanceListInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i GetGatewayCcnRoutesInstanceListArgs) ToGetGatewayCcnRoutesInstanceListOu
 // GetGatewayCcnRoutesInstanceListArrayInput is an input type that accepts GetGatewayCcnRoutesInstanceListArray and GetGatewayCcnRoutesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayCcnRoutesInstanceListArrayInput` via:
 //
-//	GetGatewayCcnRoutesInstanceListArray{ GetGatewayCcnRoutesInstanceListArgs{...} }
+//          GetGatewayCcnRoutesInstanceListArray{ GetGatewayCcnRoutesInstanceListArgs{...} }
 type GetGatewayCcnRoutesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +158,7 @@ type GetGatewayInstancesInstanceList struct {
 // GetGatewayInstancesInstanceListInput is an input type that accepts GetGatewayInstancesInstanceListArgs and GetGatewayInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetGatewayInstancesInstanceListInput` via:
 //
-//	GetGatewayInstancesInstanceListArgs{...}
+//          GetGatewayInstancesInstanceListArgs{...}
 type GetGatewayInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -202,7 +202,7 @@ func (i GetGatewayInstancesInstanceListArgs) ToGetGatewayInstancesInstanceListOu
 // GetGatewayInstancesInstanceListArrayInput is an input type that accepts GetGatewayInstancesInstanceListArray and GetGatewayInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayInstancesInstanceListArrayInput` via:
 //
-//	GetGatewayInstancesInstanceListArray{ GetGatewayInstancesInstanceListArgs{...} }
+//          GetGatewayInstancesInstanceListArray{ GetGatewayInstancesInstanceListArgs{...} }
 type GetGatewayInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -349,7 +349,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -415,7 +415,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 

@@ -23,8 +23,11 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@v1.5.0
         with:
           repo: pulumi/pulumictl
+          tag: v0.0.32
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v2.0.0
+        with:
+          pulumi-version: 3.47.1
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -32,7 +35,7 @@ jobs:
       - name: Setup DotNet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{matrix.dotnetverson}}
+          dotnet-version: ${{matrix.dotnetversion}}
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
@@ -52,15 +55,15 @@ jobs:
       fail-fast: true
       matrix:
         dotnetversion:
-          - 3.1.301
+          - 6.0.408
         goversion:
-          - 1.19.x
+          - 1.18.x
         language:
           - nodejs
           - python
           - dotnet
           - go
         nodeversion:
-          - 14.x
+          - 18.x
         pythonversion:
           - "3.9"

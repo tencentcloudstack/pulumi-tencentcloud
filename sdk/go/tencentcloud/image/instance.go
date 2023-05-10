@@ -19,30 +19,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Image.NewInstance(ctx, "imageSnap", &Image.InstanceArgs{
-//				ForcePoweroff:    pulumi.Bool(true),
-//				ImageDescription: pulumi.String("create image with snapshot"),
-//				ImageName:        pulumi.String("image-snapshot-keep"),
-//				SnapshotIds: pulumi.StringArray{
-//					pulumi.String("snap-nbp3xy1d"),
-//					pulumi.String("snap-nvzu3dmh"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Image.NewInstance(ctx, "imageSnap", &Image.InstanceArgs{
+// 			ForcePoweroff:    pulumi.Bool(true),
+// 			ImageDescription: pulumi.String("create image with snapshot"),
+// 			ImageName:        pulumi.String("image-snapshot-keep"),
+// 			SnapshotIds: pulumi.StringArray{
+// 				pulumi.String("snap-nbp3xy1d"),
+// 				pulumi.String("snap-nvzu3dmh"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -50,9 +47,7 @@ import (
 // image instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
-//
+//  $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -71,6 +66,8 @@ type Instance struct {
 	SnapshotIds pulumi.StringArrayOutput `pulumi:"snapshotIds"`
 	// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
 	Sysprep pulumi.BoolPtrOutput `pulumi:"sysprep"`
+	// Tags of the image.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -120,6 +117,8 @@ type instanceState struct {
 	SnapshotIds []string `pulumi:"snapshotIds"`
 	// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
 	Sysprep *bool `pulumi:"sysprep"`
+	// Tags of the image.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type InstanceState struct {
@@ -137,6 +136,8 @@ type InstanceState struct {
 	SnapshotIds pulumi.StringArrayInput
 	// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
 	Sysprep pulumi.BoolPtrInput
+	// Tags of the image.
+	Tags pulumi.MapInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -158,6 +159,8 @@ type instanceArgs struct {
 	SnapshotIds []string `pulumi:"snapshotIds"`
 	// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
 	Sysprep *bool `pulumi:"sysprep"`
+	// Tags of the image.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -176,6 +179,8 @@ type InstanceArgs struct {
 	SnapshotIds pulumi.StringArrayInput
 	// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
 	Sysprep pulumi.BoolPtrInput
+	// Tags of the image.
+	Tags pulumi.MapInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -204,7 +209,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -229,7 +234,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -298,6 +303,11 @@ func (o InstanceOutput) SnapshotIds() pulumi.StringArrayOutput {
 // Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
 func (o InstanceOutput) Sysprep() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.Sysprep }).(pulumi.BoolPtrOutput)
+}
+
+// Tags of the image.
+func (o InstanceOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

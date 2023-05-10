@@ -18,14 +18,12 @@ import (
 // Vpc instance can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
-//
+//  $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
 
-	// List of Assistant CIDR.
+	// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
 	AssistantCidrs pulumi.StringArrayOutput `pulumi:"assistantCidrs"`
 	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock pulumi.StringOutput `pulumi:"cidrBlock"`
@@ -35,6 +33,8 @@ type Instance struct {
 	DefaultRouteTableId pulumi.StringOutput `pulumi:"defaultRouteTableId"`
 	// The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 	DnsServers pulumi.StringArrayOutput `pulumi:"dnsServers"`
+	// List of Docker Assistant CIDR.
+	DockerAssistantCidrs pulumi.StringArrayOutput `pulumi:"dockerAssistantCidrs"`
 	// Indicates whether it is the default VPC for this region.
 	IsDefault pulumi.BoolOutput `pulumi:"isDefault"`
 	// Indicates whether VPC multicast is enabled. The default value is 'true'.
@@ -78,7 +78,7 @@ func GetInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Instance resources.
 type instanceState struct {
-	// List of Assistant CIDR.
+	// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
 	AssistantCidrs []string `pulumi:"assistantCidrs"`
 	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock *string `pulumi:"cidrBlock"`
@@ -88,6 +88,8 @@ type instanceState struct {
 	DefaultRouteTableId *string `pulumi:"defaultRouteTableId"`
 	// The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 	DnsServers []string `pulumi:"dnsServers"`
+	// List of Docker Assistant CIDR.
+	DockerAssistantCidrs []string `pulumi:"dockerAssistantCidrs"`
 	// Indicates whether it is the default VPC for this region.
 	IsDefault *bool `pulumi:"isDefault"`
 	// Indicates whether VPC multicast is enabled. The default value is 'true'.
@@ -99,7 +101,7 @@ type instanceState struct {
 }
 
 type InstanceState struct {
-	// List of Assistant CIDR.
+	// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
 	AssistantCidrs pulumi.StringArrayInput
 	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock pulumi.StringPtrInput
@@ -109,6 +111,8 @@ type InstanceState struct {
 	DefaultRouteTableId pulumi.StringPtrInput
 	// The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 	DnsServers pulumi.StringArrayInput
+	// List of Docker Assistant CIDR.
+	DockerAssistantCidrs pulumi.StringArrayInput
 	// Indicates whether it is the default VPC for this region.
 	IsDefault pulumi.BoolPtrInput
 	// Indicates whether VPC multicast is enabled. The default value is 'true'.
@@ -124,7 +128,7 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
-	// List of Assistant CIDR.
+	// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
 	AssistantCidrs []string `pulumi:"assistantCidrs"`
 	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock string `pulumi:"cidrBlock"`
@@ -140,7 +144,7 @@ type instanceArgs struct {
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
-	// List of Assistant CIDR.
+	// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
 	AssistantCidrs pulumi.StringArrayInput
 	// A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
 	CidrBlock pulumi.StringInput
@@ -180,7 +184,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -205,7 +209,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -241,7 +245,7 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 	return o
 }
 
-// List of Assistant CIDR.
+// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
 func (o InstanceOutput) AssistantCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.AssistantCidrs }).(pulumi.StringArrayOutput)
 }
@@ -264,6 +268,11 @@ func (o InstanceOutput) DefaultRouteTableId() pulumi.StringOutput {
 // The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 func (o InstanceOutput) DnsServers() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.DnsServers }).(pulumi.StringArrayOutput)
+}
+
+// List of Docker Assistant CIDR.
+func (o InstanceOutput) DockerAssistantCidrs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.DockerAssistantCidrs }).(pulumi.StringArrayOutput)
 }
 
 // Indicates whether it is the default VPC for this region.

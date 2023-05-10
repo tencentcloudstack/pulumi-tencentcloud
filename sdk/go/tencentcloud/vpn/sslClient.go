@@ -19,25 +19,22 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vpn.NewSslClient(ctx, "client", &Vpn.SslClientArgs{
-//				SslVpnClientName: pulumi.String("hello"),
-//				SslVpnServerId:   pulumi.String("vpns-aog5xcjj"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewSslClient(ctx, "client", &Vpn.SslClientArgs{
+// 			SslVpnClientName: pulumi.String("hello"),
+// 			SslVpnServerId:   pulumi.String("vpns-aog5xcjj"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -45,9 +42,7 @@ import (
 // VPN SSL Client can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
-//
+//  $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
 // ```
 type SslClient struct {
 	pulumi.CustomResourceState
@@ -152,7 +147,7 @@ func (i *SslClient) ToSslClientOutputWithContext(ctx context.Context) SslClientO
 // SslClientArrayInput is an input type that accepts SslClientArray and SslClientArrayOutput values.
 // You can construct a concrete instance of `SslClientArrayInput` via:
 //
-//	SslClientArray{ SslClientArgs{...} }
+//          SslClientArray{ SslClientArgs{...} }
 type SslClientArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +172,7 @@ func (i SslClientArray) ToSslClientArrayOutputWithContext(ctx context.Context) S
 // SslClientMapInput is an input type that accepts SslClientMap and SslClientMapOutput values.
 // You can construct a concrete instance of `SslClientMapInput` via:
 //
-//	SslClientMap{ "key": SslClientArgs{...} }
+//          SslClientMap{ "key": SslClientArgs{...} }
 type SslClientMapInput interface {
 	pulumi.Input
 

@@ -10,6 +10,371 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AuditLogFileFilter struct {
+	// Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
+	AffectRows *int `pulumi:"affectRows"`
+	// The name of database.
+	DbNames []string `pulumi:"dbNames"`
+	// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+	ExecTime *int `pulumi:"execTime"`
+	// Client host.
+	Hosts []string `pulumi:"hosts"`
+	// The name of audit policy.
+	PolicyNames []string `pulumi:"policyNames"`
+	// Return the number of rows.
+	SentRows *int `pulumi:"sentRows"`
+	// SQL statement. Support fuzzy matching.
+	Sql *string `pulumi:"sql"`
+	// SQL type. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlType *string `pulumi:"sqlType"`
+	// SQL type. Supports simultaneous query of multiple types. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlTypes []string `pulumi:"sqlTypes"`
+	// SQL statement. Support passing multiple sql statements.
+	Sqls []string `pulumi:"sqls"`
+	// The name of table.
+	TableNames []string `pulumi:"tableNames"`
+	// The ID of thread.
+	ThreadIds []string `pulumi:"threadIds"`
+	// User name.
+	Users []string `pulumi:"users"`
+}
+
+// AuditLogFileFilterInput is an input type that accepts AuditLogFileFilterArgs and AuditLogFileFilterOutput values.
+// You can construct a concrete instance of `AuditLogFileFilterInput` via:
+//
+//          AuditLogFileFilterArgs{...}
+type AuditLogFileFilterInput interface {
+	pulumi.Input
+
+	ToAuditLogFileFilterOutput() AuditLogFileFilterOutput
+	ToAuditLogFileFilterOutputWithContext(context.Context) AuditLogFileFilterOutput
+}
+
+type AuditLogFileFilterArgs struct {
+	// Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
+	AffectRows pulumi.IntPtrInput `pulumi:"affectRows"`
+	// The name of database.
+	DbNames pulumi.StringArrayInput `pulumi:"dbNames"`
+	// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+	ExecTime pulumi.IntPtrInput `pulumi:"execTime"`
+	// Client host.
+	Hosts pulumi.StringArrayInput `pulumi:"hosts"`
+	// The name of audit policy.
+	PolicyNames pulumi.StringArrayInput `pulumi:"policyNames"`
+	// Return the number of rows.
+	SentRows pulumi.IntPtrInput `pulumi:"sentRows"`
+	// SQL statement. Support fuzzy matching.
+	Sql pulumi.StringPtrInput `pulumi:"sql"`
+	// SQL type. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlType pulumi.StringPtrInput `pulumi:"sqlType"`
+	// SQL type. Supports simultaneous query of multiple types. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlTypes pulumi.StringArrayInput `pulumi:"sqlTypes"`
+	// SQL statement. Support passing multiple sql statements.
+	Sqls pulumi.StringArrayInput `pulumi:"sqls"`
+	// The name of table.
+	TableNames pulumi.StringArrayInput `pulumi:"tableNames"`
+	// The ID of thread.
+	ThreadIds pulumi.StringArrayInput `pulumi:"threadIds"`
+	// User name.
+	Users pulumi.StringArrayInput `pulumi:"users"`
+}
+
+func (AuditLogFileFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileFilter)(nil)).Elem()
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterOutput() AuditLogFileFilterOutput {
+	return i.ToAuditLogFileFilterOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterOutputWithContext(ctx context.Context) AuditLogFileFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterOutput)
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return i.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterOutput).ToAuditLogFileFilterPtrOutputWithContext(ctx)
+}
+
+// AuditLogFileFilterPtrInput is an input type that accepts AuditLogFileFilterArgs, AuditLogFileFilterPtr and AuditLogFileFilterPtrOutput values.
+// You can construct a concrete instance of `AuditLogFileFilterPtrInput` via:
+//
+//          AuditLogFileFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type AuditLogFileFilterPtrInput interface {
+	pulumi.Input
+
+	ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput
+	ToAuditLogFileFilterPtrOutputWithContext(context.Context) AuditLogFileFilterPtrOutput
+}
+
+type auditLogFileFilterPtrType AuditLogFileFilterArgs
+
+func AuditLogFileFilterPtr(v *AuditLogFileFilterArgs) AuditLogFileFilterPtrInput {
+	return (*auditLogFileFilterPtrType)(v)
+}
+
+func (*auditLogFileFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AuditLogFileFilter)(nil)).Elem()
+}
+
+func (i *auditLogFileFilterPtrType) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return i.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *auditLogFileFilterPtrType) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterPtrOutput)
+}
+
+type AuditLogFileFilterOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileFilter)(nil)).Elem()
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterOutput() AuditLogFileFilterOutput {
+	return o
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterOutputWithContext(ctx context.Context) AuditLogFileFilterOutput {
+	return o
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return o.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AuditLogFileFilter) *AuditLogFileFilter {
+		return &v
+	}).(AuditLogFileFilterPtrOutput)
+}
+
+// Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
+func (o AuditLogFileFilterOutput) AffectRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *int { return v.AffectRows }).(pulumi.IntPtrOutput)
+}
+
+// The name of database.
+func (o AuditLogFileFilterOutput) DbNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.DbNames }).(pulumi.StringArrayOutput)
+}
+
+// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+func (o AuditLogFileFilterOutput) ExecTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *int { return v.ExecTime }).(pulumi.IntPtrOutput)
+}
+
+// Client host.
+func (o AuditLogFileFilterOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+// The name of audit policy.
+func (o AuditLogFileFilterOutput) PolicyNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.PolicyNames }).(pulumi.StringArrayOutput)
+}
+
+// Return the number of rows.
+func (o AuditLogFileFilterOutput) SentRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *int { return v.SentRows }).(pulumi.IntPtrOutput)
+}
+
+// SQL statement. Support fuzzy matching.
+func (o AuditLogFileFilterOutput) Sql() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *string { return v.Sql }).(pulumi.StringPtrOutput)
+}
+
+// SQL type. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterOutput) SqlType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *string { return v.SqlType }).(pulumi.StringPtrOutput)
+}
+
+// SQL type. Supports simultaneous query of multiple types. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterOutput) SqlTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.SqlTypes }).(pulumi.StringArrayOutput)
+}
+
+// SQL statement. Support passing multiple sql statements.
+func (o AuditLogFileFilterOutput) Sqls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Sqls }).(pulumi.StringArrayOutput)
+}
+
+// The name of table.
+func (o AuditLogFileFilterOutput) TableNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.TableNames }).(pulumi.StringArrayOutput)
+}
+
+// The ID of thread.
+func (o AuditLogFileFilterOutput) ThreadIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.ThreadIds }).(pulumi.StringArrayOutput)
+}
+
+// User name.
+func (o AuditLogFileFilterOutput) Users() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Users }).(pulumi.StringArrayOutput)
+}
+
+type AuditLogFileFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AuditLogFileFilter)(nil)).Elem()
+}
+
+func (o AuditLogFileFilterPtrOutput) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return o
+}
+
+func (o AuditLogFileFilterPtrOutput) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return o
+}
+
+func (o AuditLogFileFilterPtrOutput) Elem() AuditLogFileFilterOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) AuditLogFileFilter {
+		if v != nil {
+			return *v
+		}
+		var ret AuditLogFileFilter
+		return ret
+	}).(AuditLogFileFilterOutput)
+}
+
+// Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
+func (o AuditLogFileFilterPtrOutput) AffectRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *int {
+		if v == nil {
+			return nil
+		}
+		return v.AffectRows
+	}).(pulumi.IntPtrOutput)
+}
+
+// The name of database.
+func (o AuditLogFileFilterPtrOutput) DbNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DbNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+func (o AuditLogFileFilterPtrOutput) ExecTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ExecTime
+	}).(pulumi.IntPtrOutput)
+}
+
+// Client host.
+func (o AuditLogFileFilterPtrOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hosts
+	}).(pulumi.StringArrayOutput)
+}
+
+// The name of audit policy.
+func (o AuditLogFileFilterPtrOutput) PolicyNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// Return the number of rows.
+func (o AuditLogFileFilterPtrOutput) SentRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SentRows
+	}).(pulumi.IntPtrOutput)
+}
+
+// SQL statement. Support fuzzy matching.
+func (o AuditLogFileFilterPtrOutput) Sql() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Sql
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQL type. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterPtrOutput) SqlType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SqlType
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQL type. Supports simultaneous query of multiple types. currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterPtrOutput) SqlTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.SqlTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+// SQL statement. Support passing multiple sql statements.
+func (o AuditLogFileFilterPtrOutput) Sqls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Sqls
+	}).(pulumi.StringArrayOutput)
+}
+
+// The name of table.
+func (o AuditLogFileFilterPtrOutput) TableNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.TableNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// The ID of thread.
+func (o AuditLogFileFilterPtrOutput) ThreadIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ThreadIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// User name.
+func (o AuditLogFileFilterPtrOutput) Users() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Users
+	}).(pulumi.StringArrayOutput)
+}
+
 type ClusterParamItem struct {
 	// Param expected value to set.
 	CurrentValue string `pulumi:"currentValue"`
@@ -22,7 +387,7 @@ type ClusterParamItem struct {
 // ClusterParamItemInput is an input type that accepts ClusterParamItemArgs and ClusterParamItemOutput values.
 // You can construct a concrete instance of `ClusterParamItemInput` via:
 //
-//	ClusterParamItemArgs{...}
+//          ClusterParamItemArgs{...}
 type ClusterParamItemInput interface {
 	pulumi.Input
 
@@ -54,7 +419,7 @@ func (i ClusterParamItemArgs) ToClusterParamItemOutputWithContext(ctx context.Co
 // ClusterParamItemArrayInput is an input type that accepts ClusterParamItemArray and ClusterParamItemArrayOutput values.
 // You can construct a concrete instance of `ClusterParamItemArrayInput` via:
 //
-//	ClusterParamItemArray{ ClusterParamItemArgs{...} }
+//          ClusterParamItemArray{ ClusterParamItemArgs{...} }
 type ClusterParamItemArrayInput interface {
 	pulumi.Input
 
@@ -135,7 +500,7 @@ type ClusterRoGroupAddr struct {
 // ClusterRoGroupAddrInput is an input type that accepts ClusterRoGroupAddrArgs and ClusterRoGroupAddrOutput values.
 // You can construct a concrete instance of `ClusterRoGroupAddrInput` via:
 //
-//	ClusterRoGroupAddrArgs{...}
+//          ClusterRoGroupAddrArgs{...}
 type ClusterRoGroupAddrInput interface {
 	pulumi.Input
 
@@ -165,7 +530,7 @@ func (i ClusterRoGroupAddrArgs) ToClusterRoGroupAddrOutputWithContext(ctx contex
 // ClusterRoGroupAddrArrayInput is an input type that accepts ClusterRoGroupAddrArray and ClusterRoGroupAddrArrayOutput values.
 // You can construct a concrete instance of `ClusterRoGroupAddrArrayInput` via:
 //
-//	ClusterRoGroupAddrArray{ ClusterRoGroupAddrArgs{...} }
+//          ClusterRoGroupAddrArray{ ClusterRoGroupAddrArgs{...} }
 type ClusterRoGroupAddrArrayInput interface {
 	pulumi.Input
 
@@ -241,7 +606,7 @@ type ClusterRoGroupInstance struct {
 // ClusterRoGroupInstanceInput is an input type that accepts ClusterRoGroupInstanceArgs and ClusterRoGroupInstanceOutput values.
 // You can construct a concrete instance of `ClusterRoGroupInstanceInput` via:
 //
-//	ClusterRoGroupInstanceArgs{...}
+//          ClusterRoGroupInstanceArgs{...}
 type ClusterRoGroupInstanceInput interface {
 	pulumi.Input
 
@@ -271,7 +636,7 @@ func (i ClusterRoGroupInstanceArgs) ToClusterRoGroupInstanceOutputWithContext(ct
 // ClusterRoGroupInstanceArrayInput is an input type that accepts ClusterRoGroupInstanceArray and ClusterRoGroupInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterRoGroupInstanceArrayInput` via:
 //
-//	ClusterRoGroupInstanceArray{ ClusterRoGroupInstanceArgs{...} }
+//          ClusterRoGroupInstanceArray{ ClusterRoGroupInstanceArgs{...} }
 type ClusterRoGroupInstanceArrayInput interface {
 	pulumi.Input
 
@@ -347,7 +712,7 @@ type ClusterRwGroupAddr struct {
 // ClusterRwGroupAddrInput is an input type that accepts ClusterRwGroupAddrArgs and ClusterRwGroupAddrOutput values.
 // You can construct a concrete instance of `ClusterRwGroupAddrInput` via:
 //
-//	ClusterRwGroupAddrArgs{...}
+//          ClusterRwGroupAddrArgs{...}
 type ClusterRwGroupAddrInput interface {
 	pulumi.Input
 
@@ -377,7 +742,7 @@ func (i ClusterRwGroupAddrArgs) ToClusterRwGroupAddrOutputWithContext(ctx contex
 // ClusterRwGroupAddrArrayInput is an input type that accepts ClusterRwGroupAddrArray and ClusterRwGroupAddrArrayOutput values.
 // You can construct a concrete instance of `ClusterRwGroupAddrArrayInput` via:
 //
-//	ClusterRwGroupAddrArray{ ClusterRwGroupAddrArgs{...} }
+//          ClusterRwGroupAddrArray{ ClusterRwGroupAddrArgs{...} }
 type ClusterRwGroupAddrArrayInput interface {
 	pulumi.Input
 
@@ -453,7 +818,7 @@ type ClusterRwGroupInstance struct {
 // ClusterRwGroupInstanceInput is an input type that accepts ClusterRwGroupInstanceArgs and ClusterRwGroupInstanceOutput values.
 // You can construct a concrete instance of `ClusterRwGroupInstanceInput` via:
 //
-//	ClusterRwGroupInstanceArgs{...}
+//          ClusterRwGroupInstanceArgs{...}
 type ClusterRwGroupInstanceInput interface {
 	pulumi.Input
 
@@ -483,7 +848,7 @@ func (i ClusterRwGroupInstanceArgs) ToClusterRwGroupInstanceOutputWithContext(ct
 // ClusterRwGroupInstanceArrayInput is an input type that accepts ClusterRwGroupInstanceArray and ClusterRwGroupInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterRwGroupInstanceArrayInput` via:
 //
-//	ClusterRwGroupInstanceArray{ ClusterRwGroupInstanceArgs{...} }
+//          ClusterRwGroupInstanceArray{ ClusterRwGroupInstanceArgs{...} }
 type ClusterRwGroupInstanceArrayInput interface {
 	pulumi.Input
 
@@ -549,6 +914,1341 @@ func (o ClusterRwGroupInstanceArrayOutput) Index(i pulumi.IntInput) ClusterRwGro
 	}).(ClusterRwGroupInstanceOutput)
 }
 
+type GetAccountsAccountSet struct {
+	// Account name of database.
+	AccountName string `pulumi:"accountName"`
+	// Create time.
+	CreateTime string `pulumi:"createTime"`
+	// The account description of database.
+	Description string `pulumi:"description"`
+	// Host.
+	Host string `pulumi:"host"`
+	// Maximum number of user connections.
+	MaxUserConnections int `pulumi:"maxUserConnections"`
+	// Update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetAccountsAccountSetInput is an input type that accepts GetAccountsAccountSetArgs and GetAccountsAccountSetOutput values.
+// You can construct a concrete instance of `GetAccountsAccountSetInput` via:
+//
+//          GetAccountsAccountSetArgs{...}
+type GetAccountsAccountSetInput interface {
+	pulumi.Input
+
+	ToGetAccountsAccountSetOutput() GetAccountsAccountSetOutput
+	ToGetAccountsAccountSetOutputWithContext(context.Context) GetAccountsAccountSetOutput
+}
+
+type GetAccountsAccountSetArgs struct {
+	// Account name of database.
+	AccountName pulumi.StringInput `pulumi:"accountName"`
+	// Create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// The account description of database.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Host.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Maximum number of user connections.
+	MaxUserConnections pulumi.IntInput `pulumi:"maxUserConnections"`
+	// Update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetAccountsAccountSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountsAccountSet)(nil)).Elem()
+}
+
+func (i GetAccountsAccountSetArgs) ToGetAccountsAccountSetOutput() GetAccountsAccountSetOutput {
+	return i.ToGetAccountsAccountSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountsAccountSetArgs) ToGetAccountsAccountSetOutputWithContext(ctx context.Context) GetAccountsAccountSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountsAccountSetOutput)
+}
+
+// GetAccountsAccountSetArrayInput is an input type that accepts GetAccountsAccountSetArray and GetAccountsAccountSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountsAccountSetArrayInput` via:
+//
+//          GetAccountsAccountSetArray{ GetAccountsAccountSetArgs{...} }
+type GetAccountsAccountSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountsAccountSetArrayOutput() GetAccountsAccountSetArrayOutput
+	ToGetAccountsAccountSetArrayOutputWithContext(context.Context) GetAccountsAccountSetArrayOutput
+}
+
+type GetAccountsAccountSetArray []GetAccountsAccountSetInput
+
+func (GetAccountsAccountSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountsAccountSet)(nil)).Elem()
+}
+
+func (i GetAccountsAccountSetArray) ToGetAccountsAccountSetArrayOutput() GetAccountsAccountSetArrayOutput {
+	return i.ToGetAccountsAccountSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountsAccountSetArray) ToGetAccountsAccountSetArrayOutputWithContext(ctx context.Context) GetAccountsAccountSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountsAccountSetArrayOutput)
+}
+
+type GetAccountsAccountSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountsAccountSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountsAccountSet)(nil)).Elem()
+}
+
+func (o GetAccountsAccountSetOutput) ToGetAccountsAccountSetOutput() GetAccountsAccountSetOutput {
+	return o
+}
+
+func (o GetAccountsAccountSetOutput) ToGetAccountsAccountSetOutputWithContext(ctx context.Context) GetAccountsAccountSetOutput {
+	return o
+}
+
+// Account name of database.
+func (o GetAccountsAccountSetOutput) AccountName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsAccountSet) string { return v.AccountName }).(pulumi.StringOutput)
+}
+
+// Create time.
+func (o GetAccountsAccountSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsAccountSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// The account description of database.
+func (o GetAccountsAccountSetOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsAccountSet) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Host.
+func (o GetAccountsAccountSetOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsAccountSet) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Maximum number of user connections.
+func (o GetAccountsAccountSetOutput) MaxUserConnections() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountsAccountSet) int { return v.MaxUserConnections }).(pulumi.IntOutput)
+}
+
+// Update time.
+func (o GetAccountsAccountSetOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsAccountSet) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetAccountsAccountSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountsAccountSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountsAccountSet)(nil)).Elem()
+}
+
+func (o GetAccountsAccountSetArrayOutput) ToGetAccountsAccountSetArrayOutput() GetAccountsAccountSetArrayOutput {
+	return o
+}
+
+func (o GetAccountsAccountSetArrayOutput) ToGetAccountsAccountSetArrayOutputWithContext(ctx context.Context) GetAccountsAccountSetArrayOutput {
+	return o
+}
+
+func (o GetAccountsAccountSetArrayOutput) Index(i pulumi.IntInput) GetAccountsAccountSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountsAccountSet {
+		return vs[0].([]GetAccountsAccountSet)[vs[1].(int)]
+	}).(GetAccountsAccountSetOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoList struct {
+	// User app id.
+	AppId int `pulumi:"appId"`
+	// The ID of cluster.
+	ClusterId string `pulumi:"clusterId"`
+	// Created time.
+	CreatedTime string `pulumi:"createdTime"`
+	// Deleted time.
+	DeletedTime string `pulumi:"deletedTime"`
+	// The ID of instance group.
+	InstanceGrpId string `pulumi:"instanceGrpId"`
+	// Instance groups contain instance information.
+	InstanceSets []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet `pulumi:"instanceSets"`
+	// Status.
+	Status string `pulumi:"status"`
+	// Instance group type. ha-ha group; ro-read-only group.
+	Type string `pulumi:"type"`
+	// Updated time.
+	UpdatedTime string `pulumi:"updatedTime"`
+	// Intranet IP.
+	Vip string `pulumi:"vip"`
+	// Intranet port.
+	Vport int `pulumi:"vport"`
+	// Public domain name.
+	WanDomain string `pulumi:"wanDomain"`
+	// Public IP.
+	WanIp string `pulumi:"wanIp"`
+	// Public port.
+	WanPort int `pulumi:"wanPort"`
+	// Public status.
+	WanStatus string `pulumi:"wanStatus"`
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListArgs and GetClusterInstanceGroupsInstanceGrpInfoListOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListArgs{...}
+type GetClusterInstanceGroupsInstanceGrpInfoListInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListOutput() GetClusterInstanceGroupsInstanceGrpInfoListOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListArgs struct {
+	// User app id.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// The ID of cluster.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Created time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Deleted time.
+	DeletedTime pulumi.StringInput `pulumi:"deletedTime"`
+	// The ID of instance group.
+	InstanceGrpId pulumi.StringInput `pulumi:"instanceGrpId"`
+	// Instance groups contain instance information.
+	InstanceSets GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput `pulumi:"instanceSets"`
+	// Status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Instance group type. ha-ha group; ro-read-only group.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Updated time.
+	UpdatedTime pulumi.StringInput `pulumi:"updatedTime"`
+	// Intranet IP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Intranet port.
+	Vport pulumi.IntInput `pulumi:"vport"`
+	// Public domain name.
+	WanDomain pulumi.StringInput `pulumi:"wanDomain"`
+	// Public IP.
+	WanIp pulumi.StringInput `pulumi:"wanIp"`
+	// Public port.
+	WanPort pulumi.IntInput `pulumi:"wanPort"`
+	// Public status.
+	WanStatus pulumi.StringInput `pulumi:"wanStatus"`
+}
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoList)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListOutput() GetClusterInstanceGroupsInstanceGrpInfoListOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListOutput)
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListArray and GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListArrayInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListArray{ GetClusterInstanceGroupsInstanceGrpInfoListArgs{...} }
+type GetClusterInstanceGroupsInstanceGrpInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListArrayOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListArray []GetClusterInstanceGroupsInstanceGrpInfoListInput
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoList)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListArray) ToGetClusterInstanceGroupsInstanceGrpInfoListArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListArray) ToGetClusterInstanceGroupsInstanceGrpInfoListArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoList)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListOutput() GetClusterInstanceGroupsInstanceGrpInfoListOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListOutput {
+	return o
+}
+
+// User app id.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// The ID of cluster.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Created time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Deleted time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) DeletedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.DeletedTime }).(pulumi.StringOutput)
+}
+
+// The ID of instance group.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) InstanceGrpId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.InstanceGrpId }).(pulumi.StringOutput)
+}
+
+// Instance groups contain instance information.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) InstanceSets() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet {
+		return v.InstanceSets
+	}).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput)
+}
+
+// Status.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Instance group type. ha-ha group; ro-read-only group.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Updated time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) UpdatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.UpdatedTime }).(pulumi.StringOutput)
+}
+
+// Intranet IP.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Intranet port.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+// Public domain name.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) WanDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.WanDomain }).(pulumi.StringOutput)
+}
+
+// Public IP.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) WanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.WanIp }).(pulumi.StringOutput)
+}
+
+// Public port.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) WanPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) int { return v.WanPort }).(pulumi.IntOutput)
+}
+
+// Public status.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListOutput) WanStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoList) string { return v.WanStatus }).(pulumi.StringOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoList)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput) Index(i pulumi.IntInput) GetClusterInstanceGroupsInstanceGrpInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstanceGroupsInstanceGrpInfoList {
+		return vs[0].([]GetClusterInstanceGroupsInstanceGrpInfoList)[vs[1].(int)]
+	}).(GetClusterInstanceGroupsInstanceGrpInfoListOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet struct {
+	// User app id.
+	AppId int `pulumi:"appId"`
+	// Business type.Note: This field may return null, indicating that no valid value can be obtained.
+	BusinessType string `pulumi:"businessType"`
+	// The ID of cluster.
+	ClusterId string `pulumi:"clusterId"`
+	// The name of cluster.
+	ClusterName string `pulumi:"clusterName"`
+	// Cpu, unit: CORE.
+	Cpu int `pulumi:"cpu"`
+	// Create time.
+	CreateTime string `pulumi:"createTime"`
+	// Cynos kernel version.
+	CynosVersion string `pulumi:"cynosVersion"`
+	// Database type.
+	DbType string `pulumi:"dbType"`
+	// Database version.
+	DbVersion string `pulumi:"dbVersion"`
+	// Destroy deadline.
+	DestroyDeadlineText string `pulumi:"destroyDeadlineText"`
+	// Instance destroy time.
+	DestroyTime string `pulumi:"destroyTime"`
+	// The id of instance.
+	InstanceId string `pulumi:"instanceId"`
+	// The name of instance.
+	InstanceName string `pulumi:"instanceName"`
+	// Instance role.
+	InstanceRole string `pulumi:"instanceRole"`
+	// Instance type.
+	InstanceType string `pulumi:"instanceType"`
+	// Whether to freeze.Note: This field may return null, indicating that no valid value can be obtained.
+	IsFreeze string `pulumi:"isFreeze"`
+	// Isolate time.
+	IsolateTime string `pulumi:"isolateTime"`
+	// Serverless instance maxmum cpu.
+	MaxCpu float64 `pulumi:"maxCpu"`
+	// Memory, unit: GB.
+	Memory int `pulumi:"memory"`
+	// Serverless instance minimum cpu.
+	MinCpu float64 `pulumi:"minCpu"`
+	// Net type.
+	NetType int `pulumi:"netType"`
+	// Pay mode.
+	PayMode int `pulumi:"payMode"`
+	// Instance expiration time.
+	PeriodEndTime string `pulumi:"periodEndTime"`
+	// Physical zone.
+	PhysicalZone string `pulumi:"physicalZone"`
+	// Task being processed.
+	ProcessingTask string `pulumi:"processingTask"`
+	// The id of project.
+	ProjectId int `pulumi:"projectId"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Renew flag.
+	RenewFlag int `pulumi:"renewFlag"`
+	// Resource tags.Note: This field may return null, indicating that no valid value can be obtained.
+	ResourceTags []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag `pulumi:"resourceTags"`
+	// Serverless instance status, optional values:resumepause.
+	ServerlessStatus string `pulumi:"serverlessStatus"`
+	// Status.
+	Status string `pulumi:"status"`
+	// Instance state Chinese description.
+	StatusDesc string `pulumi:"statusDesc"`
+	// Storage, unit: GB.
+	Storage int `pulumi:"storage"`
+	// Prepaid Storage Id.Note: This field may return null, indicating that no valid value can be obtained..
+	StorageId string `pulumi:"storageId"`
+	// Storage payment type.
+	StoragePayMode int `pulumi:"storagePayMode"`
+	// Subnet ID.
+	SubnetId string `pulumi:"subnetId"`
+	// Task list.Note: This field may return null, indicating that no valid value can be obtained.
+	Tasks []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask `pulumi:"tasks"`
+	// User Uin.
+	Uin string `pulumi:"uin"`
+	// Update time.
+	UpdateTime string `pulumi:"updateTime"`
+	// Intranet IP.
+	Vip string `pulumi:"vip"`
+	// VPC network ID.
+	VpcId string `pulumi:"vpcId"`
+	// Intranet port.
+	Vport int `pulumi:"vport"`
+	// Public domain name.
+	WanDomain string `pulumi:"wanDomain"`
+	// Public IP.
+	WanIp string `pulumi:"wanIp"`
+	// Public port.
+	WanPort int `pulumi:"wanPort"`
+	// Public status.
+	WanStatus string `pulumi:"wanStatus"`
+	// Availability zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs{...}
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs struct {
+	// User app id.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// Business type.Note: This field may return null, indicating that no valid value can be obtained.
+	BusinessType pulumi.StringInput `pulumi:"businessType"`
+	// The ID of cluster.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// The name of cluster.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Cpu, unit: CORE.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Cynos kernel version.
+	CynosVersion pulumi.StringInput `pulumi:"cynosVersion"`
+	// Database type.
+	DbType pulumi.StringInput `pulumi:"dbType"`
+	// Database version.
+	DbVersion pulumi.StringInput `pulumi:"dbVersion"`
+	// Destroy deadline.
+	DestroyDeadlineText pulumi.StringInput `pulumi:"destroyDeadlineText"`
+	// Instance destroy time.
+	DestroyTime pulumi.StringInput `pulumi:"destroyTime"`
+	// The id of instance.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// The name of instance.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Instance role.
+	InstanceRole pulumi.StringInput `pulumi:"instanceRole"`
+	// Instance type.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Whether to freeze.Note: This field may return null, indicating that no valid value can be obtained.
+	IsFreeze pulumi.StringInput `pulumi:"isFreeze"`
+	// Isolate time.
+	IsolateTime pulumi.StringInput `pulumi:"isolateTime"`
+	// Serverless instance maxmum cpu.
+	MaxCpu pulumi.Float64Input `pulumi:"maxCpu"`
+	// Memory, unit: GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Serverless instance minimum cpu.
+	MinCpu pulumi.Float64Input `pulumi:"minCpu"`
+	// Net type.
+	NetType pulumi.IntInput `pulumi:"netType"`
+	// Pay mode.
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+	// Instance expiration time.
+	PeriodEndTime pulumi.StringInput `pulumi:"periodEndTime"`
+	// Physical zone.
+	PhysicalZone pulumi.StringInput `pulumi:"physicalZone"`
+	// Task being processed.
+	ProcessingTask pulumi.StringInput `pulumi:"processingTask"`
+	// The id of project.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Renew flag.
+	RenewFlag pulumi.IntInput `pulumi:"renewFlag"`
+	// Resource tags.Note: This field may return null, indicating that no valid value can be obtained.
+	ResourceTags GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput `pulumi:"resourceTags"`
+	// Serverless instance status, optional values:resumepause.
+	ServerlessStatus pulumi.StringInput `pulumi:"serverlessStatus"`
+	// Status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Instance state Chinese description.
+	StatusDesc pulumi.StringInput `pulumi:"statusDesc"`
+	// Storage, unit: GB.
+	Storage pulumi.IntInput `pulumi:"storage"`
+	// Prepaid Storage Id.Note: This field may return null, indicating that no valid value can be obtained..
+	StorageId pulumi.StringInput `pulumi:"storageId"`
+	// Storage payment type.
+	StoragePayMode pulumi.IntInput `pulumi:"storagePayMode"`
+	// Subnet ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Task list.Note: This field may return null, indicating that no valid value can be obtained.
+	Tasks GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput `pulumi:"tasks"`
+	// User Uin.
+	Uin pulumi.StringInput `pulumi:"uin"`
+	// Update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// Intranet IP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// VPC network ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Intranet port.
+	Vport pulumi.IntInput `pulumi:"vport"`
+	// Public domain name.
+	WanDomain pulumi.StringInput `pulumi:"wanDomain"`
+	// Public IP.
+	WanIp pulumi.StringInput `pulumi:"wanIp"`
+	// Public port.
+	WanPort pulumi.IntInput `pulumi:"wanPort"`
+	// Public status.
+	WanStatus pulumi.StringInput `pulumi:"wanStatus"`
+	// Availability zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput)
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs{...} }
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput {
+	return o
+}
+
+// User app id.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// Business type.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) BusinessType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.BusinessType }).(pulumi.StringOutput)
+}
+
+// The ID of cluster.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// The name of cluster.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cpu, unit: CORE.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Create time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Cynos kernel version.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) CynosVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.CynosVersion }).(pulumi.StringOutput)
+}
+
+// Database type.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) DbType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.DbType }).(pulumi.StringOutput)
+}
+
+// Database version.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) DbVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.DbVersion }).(pulumi.StringOutput)
+}
+
+// Destroy deadline.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) DestroyDeadlineText() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.DestroyDeadlineText }).(pulumi.StringOutput)
+}
+
+// Instance destroy time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) DestroyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.DestroyTime }).(pulumi.StringOutput)
+}
+
+// The id of instance.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// The name of instance.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance role.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) InstanceRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.InstanceRole }).(pulumi.StringOutput)
+}
+
+// Instance type.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Whether to freeze.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) IsFreeze() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.IsFreeze }).(pulumi.StringOutput)
+}
+
+// Isolate time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) IsolateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.IsolateTime }).(pulumi.StringOutput)
+}
+
+// Serverless instance maxmum cpu.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) MaxCpu() pulumi.Float64Output {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) float64 { return v.MaxCpu }).(pulumi.Float64Output)
+}
+
+// Memory, unit: GB.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Serverless instance minimum cpu.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) MinCpu() pulumi.Float64Output {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) float64 { return v.MinCpu }).(pulumi.Float64Output)
+}
+
+// Net type.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) NetType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.NetType }).(pulumi.IntOutput)
+}
+
+// Pay mode.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+// Instance expiration time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) PeriodEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.PeriodEndTime }).(pulumi.StringOutput)
+}
+
+// Physical zone.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) PhysicalZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.PhysicalZone }).(pulumi.StringOutput)
+}
+
+// Task being processed.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ProcessingTask() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.ProcessingTask }).(pulumi.StringOutput)
+}
+
+// The id of project.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Region.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Renew flag.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) RenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.RenewFlag }).(pulumi.IntOutput)
+}
+
+// Resource tags.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ResourceTags() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag {
+		return v.ResourceTags
+	}).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput)
+}
+
+// Serverless instance status, optional values:resumepause.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) ServerlessStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.ServerlessStatus }).(pulumi.StringOutput)
+}
+
+// Status.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Instance state Chinese description.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) StatusDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.StatusDesc }).(pulumi.StringOutput)
+}
+
+// Storage, unit: GB.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Storage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.Storage }).(pulumi.IntOutput)
+}
+
+// Prepaid Storage Id.Note: This field may return null, indicating that no valid value can be obtained..
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) StorageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.StorageId }).(pulumi.StringOutput)
+}
+
+// Storage payment type.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) StoragePayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.StoragePayMode }).(pulumi.IntOutput)
+}
+
+// Subnet ID.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Task list.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Tasks() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask {
+		return v.Tasks
+	}).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput)
+}
+
+// User Uin.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Uin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.Uin }).(pulumi.StringOutput)
+}
+
+// Update time.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// Intranet IP.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// VPC network ID.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Intranet port.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+// Public domain name.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) WanDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.WanDomain }).(pulumi.StringOutput)
+}
+
+// Public IP.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) WanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.WanIp }).(pulumi.StringOutput)
+}
+
+// Public port.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) WanPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) int { return v.WanPort }).(pulumi.IntOutput)
+}
+
+// Public status.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) WanStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.WanStatus }).(pulumi.StringOutput)
+}
+
+// Availability zone.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput) Index(i pulumi.IntInput) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet {
+		return vs[0].([]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet)[vs[1].(int)]
+	}).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag struct {
+	// The key of tag.
+	TagKey string `pulumi:"tagKey"`
+	// The value of tag.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs{...}
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs struct {
+	// The key of tag.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// The value of tag.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput)
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs{...} }
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput {
+	return o
+}
+
+// The key of tag.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// The value of tag.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput) Index(i pulumi.IntInput) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag {
+		return vs[0].([]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag)[vs[1].(int)]
+	}).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask struct {
+	// Task ID (cluster ID|instance group ID|instance ID).Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectId string `pulumi:"objectId"`
+	// Object type.Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType string `pulumi:"objectType"`
+	// Task auto-increment ID.Note: This field may return null, indicating that no valid value can be obtained.
+	TaskId int `pulumi:"taskId"`
+	// Task status.Note: This field may return null, indicating that no valid value can be obtained.
+	TaskStatus string `pulumi:"taskStatus"`
+	// Task type.Note: This field may return null, indicating that no valid value can be obtained.
+	TaskType string `pulumi:"taskType"`
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs{...}
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs struct {
+	// Task ID (cluster ID|instance group ID|instance ID).Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectId pulumi.StringInput `pulumi:"objectId"`
+	// Object type.Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType pulumi.StringInput `pulumi:"objectType"`
+	// Task auto-increment ID.Note: This field may return null, indicating that no valid value can be obtained.
+	TaskId pulumi.IntInput `pulumi:"taskId"`
+	// Task status.Note: This field may return null, indicating that no valid value can be obtained.
+	TaskStatus pulumi.StringInput `pulumi:"taskStatus"`
+	// Task type.Note: This field may return null, indicating that no valid value can be obtained.
+	TaskType pulumi.StringInput `pulumi:"taskType"`
+}
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput)
+}
+
+// GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput` via:
+//
+//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs{...} }
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput
+	ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutputWithContext(context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray []GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask)(nil)).Elem()
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput {
+	return i.ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput {
+	return o
+}
+
+// Task ID (cluster ID|instance group ID|instance ID).Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) ObjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask) string { return v.ObjectId }).(pulumi.StringOutput)
+}
+
+// Object type.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) ObjectType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask) string { return v.ObjectType }).(pulumi.StringOutput)
+}
+
+// Task auto-increment ID.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) TaskId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask) int { return v.TaskId }).(pulumi.IntOutput)
+}
+
+// Task status.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) TaskStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask) string { return v.TaskStatus }).(pulumi.StringOutput)
+}
+
+// Task type.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput) TaskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask) string { return v.TaskType }).(pulumi.StringOutput)
+}
+
+type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask)(nil)).Elem()
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput() GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput) ToGetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutputWithContext(ctx context.Context) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput {
+	return o
+}
+
+func (o GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput) Index(i pulumi.IntInput) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask {
+		return vs[0].([]GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask)[vs[1].(int)]
+	}).(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput)
+}
+
+type GetClusterParamsItem struct {
+	// Current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// Default value.
+	Default string `pulumi:"default"`
+	// The description of parameter.
+	Description string `pulumi:"description"`
+	// When the parameter is enum/string/bool, the optional value list.Note: This field may return null, indicating that no valid value can be obtained.
+	EnumValues []string `pulumi:"enumValues"`
+	// Function.Note: This field may return null, indicating that no valid value can be obtained.
+	Func string `pulumi:"func"`
+	// Is it a function.Note: This field may return null, indicating that no valid value can be obtained.
+	IsFunc bool `pulumi:"isFunc"`
+	// Is it a global parameter.Note: This field may return null, indicating that no valid value can be obtained.
+	IsGlobal int `pulumi:"isGlobal"`
+	// Matching type, multiVal, regex is used when the parameter type is string.
+	MatchType string `pulumi:"matchType"`
+	// Match the target value, when multiVal, each key is divided by `;`.
+	MatchValue string `pulumi:"matchValue"`
+	// The maximum value when the parameter type is float/integer.
+	Max string `pulumi:"max"`
+	// The minimum value when the parameter type is float/integer.
+	Min string `pulumi:"min"`
+	// Whether to reboot.
+	NeedReboot int `pulumi:"needReboot"`
+	// Parameter name.
+	ParamName string `pulumi:"paramName"`
+	// Parameter type: integer/float/string/enum/bool.
+	ParamType string `pulumi:"paramType"`
+}
+
+// GetClusterParamsItemInput is an input type that accepts GetClusterParamsItemArgs and GetClusterParamsItemOutput values.
+// You can construct a concrete instance of `GetClusterParamsItemInput` via:
+//
+//          GetClusterParamsItemArgs{...}
+type GetClusterParamsItemInput interface {
+	pulumi.Input
+
+	ToGetClusterParamsItemOutput() GetClusterParamsItemOutput
+	ToGetClusterParamsItemOutputWithContext(context.Context) GetClusterParamsItemOutput
+}
+
+type GetClusterParamsItemArgs struct {
+	// Current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// Default value.
+	Default pulumi.StringInput `pulumi:"default"`
+	// The description of parameter.
+	Description pulumi.StringInput `pulumi:"description"`
+	// When the parameter is enum/string/bool, the optional value list.Note: This field may return null, indicating that no valid value can be obtained.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// Function.Note: This field may return null, indicating that no valid value can be obtained.
+	Func pulumi.StringInput `pulumi:"func"`
+	// Is it a function.Note: This field may return null, indicating that no valid value can be obtained.
+	IsFunc pulumi.BoolInput `pulumi:"isFunc"`
+	// Is it a global parameter.Note: This field may return null, indicating that no valid value can be obtained.
+	IsGlobal pulumi.IntInput `pulumi:"isGlobal"`
+	// Matching type, multiVal, regex is used when the parameter type is string.
+	MatchType pulumi.StringInput `pulumi:"matchType"`
+	// Match the target value, when multiVal, each key is divided by `;`.
+	MatchValue pulumi.StringInput `pulumi:"matchValue"`
+	// The maximum value when the parameter type is float/integer.
+	Max pulumi.StringInput `pulumi:"max"`
+	// The minimum value when the parameter type is float/integer.
+	Min pulumi.StringInput `pulumi:"min"`
+	// Whether to reboot.
+	NeedReboot pulumi.IntInput `pulumi:"needReboot"`
+	// Parameter name.
+	ParamName pulumi.StringInput `pulumi:"paramName"`
+	// Parameter type: integer/float/string/enum/bool.
+	ParamType pulumi.StringInput `pulumi:"paramType"`
+}
+
+func (GetClusterParamsItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterParamsItem)(nil)).Elem()
+}
+
+func (i GetClusterParamsItemArgs) ToGetClusterParamsItemOutput() GetClusterParamsItemOutput {
+	return i.ToGetClusterParamsItemOutputWithContext(context.Background())
+}
+
+func (i GetClusterParamsItemArgs) ToGetClusterParamsItemOutputWithContext(ctx context.Context) GetClusterParamsItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterParamsItemOutput)
+}
+
+// GetClusterParamsItemArrayInput is an input type that accepts GetClusterParamsItemArray and GetClusterParamsItemArrayOutput values.
+// You can construct a concrete instance of `GetClusterParamsItemArrayInput` via:
+//
+//          GetClusterParamsItemArray{ GetClusterParamsItemArgs{...} }
+type GetClusterParamsItemArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterParamsItemArrayOutput() GetClusterParamsItemArrayOutput
+	ToGetClusterParamsItemArrayOutputWithContext(context.Context) GetClusterParamsItemArrayOutput
+}
+
+type GetClusterParamsItemArray []GetClusterParamsItemInput
+
+func (GetClusterParamsItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterParamsItem)(nil)).Elem()
+}
+
+func (i GetClusterParamsItemArray) ToGetClusterParamsItemArrayOutput() GetClusterParamsItemArrayOutput {
+	return i.ToGetClusterParamsItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterParamsItemArray) ToGetClusterParamsItemArrayOutputWithContext(ctx context.Context) GetClusterParamsItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterParamsItemArrayOutput)
+}
+
+type GetClusterParamsItemOutput struct{ *pulumi.OutputState }
+
+func (GetClusterParamsItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterParamsItem)(nil)).Elem()
+}
+
+func (o GetClusterParamsItemOutput) ToGetClusterParamsItemOutput() GetClusterParamsItemOutput {
+	return o
+}
+
+func (o GetClusterParamsItemOutput) ToGetClusterParamsItemOutputWithContext(ctx context.Context) GetClusterParamsItemOutput {
+	return o
+}
+
+// Current value.
+func (o GetClusterParamsItemOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// Default value.
+func (o GetClusterParamsItemOutput) Default() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.Default }).(pulumi.StringOutput)
+}
+
+// The description of parameter.
+func (o GetClusterParamsItemOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// When the parameter is enum/string/bool, the optional value list.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterParamsItemOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// Function.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterParamsItemOutput) Func() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.Func }).(pulumi.StringOutput)
+}
+
+// Is it a function.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterParamsItemOutput) IsFunc() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) bool { return v.IsFunc }).(pulumi.BoolOutput)
+}
+
+// Is it a global parameter.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetClusterParamsItemOutput) IsGlobal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) int { return v.IsGlobal }).(pulumi.IntOutput)
+}
+
+// Matching type, multiVal, regex is used when the parameter type is string.
+func (o GetClusterParamsItemOutput) MatchType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.MatchType }).(pulumi.StringOutput)
+}
+
+// Match the target value, when multiVal, each key is divided by `;`.
+func (o GetClusterParamsItemOutput) MatchValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.MatchValue }).(pulumi.StringOutput)
+}
+
+// The maximum value when the parameter type is float/integer.
+func (o GetClusterParamsItemOutput) Max() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.Max }).(pulumi.StringOutput)
+}
+
+// The minimum value when the parameter type is float/integer.
+func (o GetClusterParamsItemOutput) Min() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.Min }).(pulumi.StringOutput)
+}
+
+// Whether to reboot.
+func (o GetClusterParamsItemOutput) NeedReboot() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) int { return v.NeedReboot }).(pulumi.IntOutput)
+}
+
+// Parameter name.
+func (o GetClusterParamsItemOutput) ParamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.ParamName }).(pulumi.StringOutput)
+}
+
+// Parameter type: integer/float/string/enum/bool.
+func (o GetClusterParamsItemOutput) ParamType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterParamsItem) string { return v.ParamType }).(pulumi.StringOutput)
+}
+
+type GetClusterParamsItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterParamsItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterParamsItem)(nil)).Elem()
+}
+
+func (o GetClusterParamsItemArrayOutput) ToGetClusterParamsItemArrayOutput() GetClusterParamsItemArrayOutput {
+	return o
+}
+
+func (o GetClusterParamsItemArrayOutput) ToGetClusterParamsItemArrayOutputWithContext(ctx context.Context) GetClusterParamsItemArrayOutput {
+	return o
+}
+
+func (o GetClusterParamsItemArrayOutput) Index(i pulumi.IntInput) GetClusterParamsItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterParamsItem {
+		return vs[0].([]GetClusterParamsItem)[vs[1].(int)]
+	}).(GetClusterParamsItemOutput)
+}
+
 type GetClustersClusterList struct {
 	// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Only works for PREPAID cluster.
 	AutoRenewFlag int `pulumi:"autoRenewFlag"`
@@ -583,7 +2283,7 @@ type GetClustersClusterList struct {
 // GetClustersClusterListInput is an input type that accepts GetClustersClusterListArgs and GetClustersClusterListOutput values.
 // You can construct a concrete instance of `GetClustersClusterListInput` via:
 //
-//	GetClustersClusterListArgs{...}
+//          GetClustersClusterListArgs{...}
 type GetClustersClusterListInput interface {
 	pulumi.Input
 
@@ -637,7 +2337,7 @@ func (i GetClustersClusterListArgs) ToGetClustersClusterListOutputWithContext(ct
 // GetClustersClusterListArrayInput is an input type that accepts GetClustersClusterListArray and GetClustersClusterListArrayOutput values.
 // You can construct a concrete instance of `GetClustersClusterListArrayInput` via:
 //
-//	GetClustersClusterListArray{ GetClustersClusterListArgs{...} }
+//          GetClustersClusterListArray{ GetClustersClusterListArgs{...} }
 type GetClustersClusterListArrayInput interface {
 	pulumi.Input
 
@@ -785,7 +2485,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -827,7 +2527,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -926,7 +2626,577 @@ func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanc
 	}).(GetInstancesInstanceListOutput)
 }
 
+type GetParamTemplatesItem struct {
+	// Database mode, optional values: NORMAL, SERVERLESS.
+	DbMode string `pulumi:"dbMode"`
+	// Engine version.
+	EngineVersion string `pulumi:"engineVersion"`
+	// The ID of template.
+	Id int `pulumi:"id"`
+	// Parameter template details.Note: This field may return null, indicating that no valid value can be obtained.
+	ParamInfoSets []GetParamTemplatesItemParamInfoSet `pulumi:"paramInfoSets"`
+	// The description of template.
+	TemplateDescription string `pulumi:"templateDescription"`
+	// The name of template.
+	TemplateName string `pulumi:"templateName"`
+}
+
+// GetParamTemplatesItemInput is an input type that accepts GetParamTemplatesItemArgs and GetParamTemplatesItemOutput values.
+// You can construct a concrete instance of `GetParamTemplatesItemInput` via:
+//
+//          GetParamTemplatesItemArgs{...}
+type GetParamTemplatesItemInput interface {
+	pulumi.Input
+
+	ToGetParamTemplatesItemOutput() GetParamTemplatesItemOutput
+	ToGetParamTemplatesItemOutputWithContext(context.Context) GetParamTemplatesItemOutput
+}
+
+type GetParamTemplatesItemArgs struct {
+	// Database mode, optional values: NORMAL, SERVERLESS.
+	DbMode pulumi.StringInput `pulumi:"dbMode"`
+	// Engine version.
+	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
+	// The ID of template.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Parameter template details.Note: This field may return null, indicating that no valid value can be obtained.
+	ParamInfoSets GetParamTemplatesItemParamInfoSetArrayInput `pulumi:"paramInfoSets"`
+	// The description of template.
+	TemplateDescription pulumi.StringInput `pulumi:"templateDescription"`
+	// The name of template.
+	TemplateName pulumi.StringInput `pulumi:"templateName"`
+}
+
+func (GetParamTemplatesItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParamTemplatesItem)(nil)).Elem()
+}
+
+func (i GetParamTemplatesItemArgs) ToGetParamTemplatesItemOutput() GetParamTemplatesItemOutput {
+	return i.ToGetParamTemplatesItemOutputWithContext(context.Background())
+}
+
+func (i GetParamTemplatesItemArgs) ToGetParamTemplatesItemOutputWithContext(ctx context.Context) GetParamTemplatesItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParamTemplatesItemOutput)
+}
+
+// GetParamTemplatesItemArrayInput is an input type that accepts GetParamTemplatesItemArray and GetParamTemplatesItemArrayOutput values.
+// You can construct a concrete instance of `GetParamTemplatesItemArrayInput` via:
+//
+//          GetParamTemplatesItemArray{ GetParamTemplatesItemArgs{...} }
+type GetParamTemplatesItemArrayInput interface {
+	pulumi.Input
+
+	ToGetParamTemplatesItemArrayOutput() GetParamTemplatesItemArrayOutput
+	ToGetParamTemplatesItemArrayOutputWithContext(context.Context) GetParamTemplatesItemArrayOutput
+}
+
+type GetParamTemplatesItemArray []GetParamTemplatesItemInput
+
+func (GetParamTemplatesItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParamTemplatesItem)(nil)).Elem()
+}
+
+func (i GetParamTemplatesItemArray) ToGetParamTemplatesItemArrayOutput() GetParamTemplatesItemArrayOutput {
+	return i.ToGetParamTemplatesItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetParamTemplatesItemArray) ToGetParamTemplatesItemArrayOutputWithContext(ctx context.Context) GetParamTemplatesItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParamTemplatesItemArrayOutput)
+}
+
+type GetParamTemplatesItemOutput struct{ *pulumi.OutputState }
+
+func (GetParamTemplatesItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParamTemplatesItem)(nil)).Elem()
+}
+
+func (o GetParamTemplatesItemOutput) ToGetParamTemplatesItemOutput() GetParamTemplatesItemOutput {
+	return o
+}
+
+func (o GetParamTemplatesItemOutput) ToGetParamTemplatesItemOutputWithContext(ctx context.Context) GetParamTemplatesItemOutput {
+	return o
+}
+
+// Database mode, optional values: NORMAL, SERVERLESS.
+func (o GetParamTemplatesItemOutput) DbMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItem) string { return v.DbMode }).(pulumi.StringOutput)
+}
+
+// Engine version.
+func (o GetParamTemplatesItemOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItem) string { return v.EngineVersion }).(pulumi.StringOutput)
+}
+
+// The ID of template.
+func (o GetParamTemplatesItemOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetParamTemplatesItem) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Parameter template details.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetParamTemplatesItemOutput) ParamInfoSets() GetParamTemplatesItemParamInfoSetArrayOutput {
+	return o.ApplyT(func(v GetParamTemplatesItem) []GetParamTemplatesItemParamInfoSet { return v.ParamInfoSets }).(GetParamTemplatesItemParamInfoSetArrayOutput)
+}
+
+// The description of template.
+func (o GetParamTemplatesItemOutput) TemplateDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItem) string { return v.TemplateDescription }).(pulumi.StringOutput)
+}
+
+// The name of template.
+func (o GetParamTemplatesItemOutput) TemplateName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItem) string { return v.TemplateName }).(pulumi.StringOutput)
+}
+
+type GetParamTemplatesItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetParamTemplatesItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParamTemplatesItem)(nil)).Elem()
+}
+
+func (o GetParamTemplatesItemArrayOutput) ToGetParamTemplatesItemArrayOutput() GetParamTemplatesItemArrayOutput {
+	return o
+}
+
+func (o GetParamTemplatesItemArrayOutput) ToGetParamTemplatesItemArrayOutputWithContext(ctx context.Context) GetParamTemplatesItemArrayOutput {
+	return o
+}
+
+func (o GetParamTemplatesItemArrayOutput) Index(i pulumi.IntInput) GetParamTemplatesItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetParamTemplatesItem {
+		return vs[0].([]GetParamTemplatesItem)[vs[1].(int)]
+	}).(GetParamTemplatesItemOutput)
+}
+
+type GetParamTemplatesItemParamInfoSet struct {
+	// Current value.
+	CurrentValue string `pulumi:"currentValue"`
+	// Default value.
+	Default string `pulumi:"default"`
+	// The description of parameter.
+	Description string `pulumi:"description"`
+	// An optional set of value types when the parameter type is enum.Note: This field may return null, indicating that no valid value can be obtained.
+	EnumValues []string `pulumi:"enumValues"`
+	// The maximum value when the parameter type is float/integer.Note: This field may return null, indicating that no valid value can be obtained.
+	Max string `pulumi:"max"`
+	// The minimum value when the parameter type is float/integer.Note: This field may return null, indicating that no valid value can be obtained.
+	Min string `pulumi:"min"`
+	// Whether to reboot.
+	NeedReboot int `pulumi:"needReboot"`
+	// The name of parameter.
+	ParamName string `pulumi:"paramName"`
+	// Parameter type: integer/float/string/enum.
+	ParamType string `pulumi:"paramType"`
+}
+
+// GetParamTemplatesItemParamInfoSetInput is an input type that accepts GetParamTemplatesItemParamInfoSetArgs and GetParamTemplatesItemParamInfoSetOutput values.
+// You can construct a concrete instance of `GetParamTemplatesItemParamInfoSetInput` via:
+//
+//          GetParamTemplatesItemParamInfoSetArgs{...}
+type GetParamTemplatesItemParamInfoSetInput interface {
+	pulumi.Input
+
+	ToGetParamTemplatesItemParamInfoSetOutput() GetParamTemplatesItemParamInfoSetOutput
+	ToGetParamTemplatesItemParamInfoSetOutputWithContext(context.Context) GetParamTemplatesItemParamInfoSetOutput
+}
+
+type GetParamTemplatesItemParamInfoSetArgs struct {
+	// Current value.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// Default value.
+	Default pulumi.StringInput `pulumi:"default"`
+	// The description of parameter.
+	Description pulumi.StringInput `pulumi:"description"`
+	// An optional set of value types when the parameter type is enum.Note: This field may return null, indicating that no valid value can be obtained.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// The maximum value when the parameter type is float/integer.Note: This field may return null, indicating that no valid value can be obtained.
+	Max pulumi.StringInput `pulumi:"max"`
+	// The minimum value when the parameter type is float/integer.Note: This field may return null, indicating that no valid value can be obtained.
+	Min pulumi.StringInput `pulumi:"min"`
+	// Whether to reboot.
+	NeedReboot pulumi.IntInput `pulumi:"needReboot"`
+	// The name of parameter.
+	ParamName pulumi.StringInput `pulumi:"paramName"`
+	// Parameter type: integer/float/string/enum.
+	ParamType pulumi.StringInput `pulumi:"paramType"`
+}
+
+func (GetParamTemplatesItemParamInfoSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParamTemplatesItemParamInfoSet)(nil)).Elem()
+}
+
+func (i GetParamTemplatesItemParamInfoSetArgs) ToGetParamTemplatesItemParamInfoSetOutput() GetParamTemplatesItemParamInfoSetOutput {
+	return i.ToGetParamTemplatesItemParamInfoSetOutputWithContext(context.Background())
+}
+
+func (i GetParamTemplatesItemParamInfoSetArgs) ToGetParamTemplatesItemParamInfoSetOutputWithContext(ctx context.Context) GetParamTemplatesItemParamInfoSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParamTemplatesItemParamInfoSetOutput)
+}
+
+// GetParamTemplatesItemParamInfoSetArrayInput is an input type that accepts GetParamTemplatesItemParamInfoSetArray and GetParamTemplatesItemParamInfoSetArrayOutput values.
+// You can construct a concrete instance of `GetParamTemplatesItemParamInfoSetArrayInput` via:
+//
+//          GetParamTemplatesItemParamInfoSetArray{ GetParamTemplatesItemParamInfoSetArgs{...} }
+type GetParamTemplatesItemParamInfoSetArrayInput interface {
+	pulumi.Input
+
+	ToGetParamTemplatesItemParamInfoSetArrayOutput() GetParamTemplatesItemParamInfoSetArrayOutput
+	ToGetParamTemplatesItemParamInfoSetArrayOutputWithContext(context.Context) GetParamTemplatesItemParamInfoSetArrayOutput
+}
+
+type GetParamTemplatesItemParamInfoSetArray []GetParamTemplatesItemParamInfoSetInput
+
+func (GetParamTemplatesItemParamInfoSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParamTemplatesItemParamInfoSet)(nil)).Elem()
+}
+
+func (i GetParamTemplatesItemParamInfoSetArray) ToGetParamTemplatesItemParamInfoSetArrayOutput() GetParamTemplatesItemParamInfoSetArrayOutput {
+	return i.ToGetParamTemplatesItemParamInfoSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetParamTemplatesItemParamInfoSetArray) ToGetParamTemplatesItemParamInfoSetArrayOutputWithContext(ctx context.Context) GetParamTemplatesItemParamInfoSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParamTemplatesItemParamInfoSetArrayOutput)
+}
+
+type GetParamTemplatesItemParamInfoSetOutput struct{ *pulumi.OutputState }
+
+func (GetParamTemplatesItemParamInfoSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParamTemplatesItemParamInfoSet)(nil)).Elem()
+}
+
+func (o GetParamTemplatesItemParamInfoSetOutput) ToGetParamTemplatesItemParamInfoSetOutput() GetParamTemplatesItemParamInfoSetOutput {
+	return o
+}
+
+func (o GetParamTemplatesItemParamInfoSetOutput) ToGetParamTemplatesItemParamInfoSetOutputWithContext(ctx context.Context) GetParamTemplatesItemParamInfoSetOutput {
+	return o
+}
+
+// Current value.
+func (o GetParamTemplatesItemParamInfoSetOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// Default value.
+func (o GetParamTemplatesItemParamInfoSetOutput) Default() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) string { return v.Default }).(pulumi.StringOutput)
+}
+
+// The description of parameter.
+func (o GetParamTemplatesItemParamInfoSetOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// An optional set of value types when the parameter type is enum.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetParamTemplatesItemParamInfoSetOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// The maximum value when the parameter type is float/integer.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetParamTemplatesItemParamInfoSetOutput) Max() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) string { return v.Max }).(pulumi.StringOutput)
+}
+
+// The minimum value when the parameter type is float/integer.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetParamTemplatesItemParamInfoSetOutput) Min() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) string { return v.Min }).(pulumi.StringOutput)
+}
+
+// Whether to reboot.
+func (o GetParamTemplatesItemParamInfoSetOutput) NeedReboot() pulumi.IntOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) int { return v.NeedReboot }).(pulumi.IntOutput)
+}
+
+// The name of parameter.
+func (o GetParamTemplatesItemParamInfoSetOutput) ParamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) string { return v.ParamName }).(pulumi.StringOutput)
+}
+
+// Parameter type: integer/float/string/enum.
+func (o GetParamTemplatesItemParamInfoSetOutput) ParamType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParamTemplatesItemParamInfoSet) string { return v.ParamType }).(pulumi.StringOutput)
+}
+
+type GetParamTemplatesItemParamInfoSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetParamTemplatesItemParamInfoSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParamTemplatesItemParamInfoSet)(nil)).Elem()
+}
+
+func (o GetParamTemplatesItemParamInfoSetArrayOutput) ToGetParamTemplatesItemParamInfoSetArrayOutput() GetParamTemplatesItemParamInfoSetArrayOutput {
+	return o
+}
+
+func (o GetParamTemplatesItemParamInfoSetArrayOutput) ToGetParamTemplatesItemParamInfoSetArrayOutputWithContext(ctx context.Context) GetParamTemplatesItemParamInfoSetArrayOutput {
+	return o
+}
+
+func (o GetParamTemplatesItemParamInfoSetArrayOutput) Index(i pulumi.IntInput) GetParamTemplatesItemParamInfoSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetParamTemplatesItemParamInfoSet {
+		return vs[0].([]GetParamTemplatesItemParamInfoSet)[vs[1].(int)]
+	}).(GetParamTemplatesItemParamInfoSetOutput)
+}
+
+type GetZoneConfigList struct {
+	// Instance CPU, unit: core.
+	Cpu int `pulumi:"cpu"`
+	// Machine type.
+	MachineType string `pulumi:"machineType"`
+	// Max io bandwidth.
+	MaxIoBandwidth int `pulumi:"maxIoBandwidth"`
+	// The maximum available storage for the instance, unit GB.
+	MaxStorageSize int `pulumi:"maxStorageSize"`
+	// Instance memory, unit: GB.
+	Memory int `pulumi:"memory"`
+	// Minimum available storage of the instance, unit: GB.
+	MinStorageSize int `pulumi:"minStorageSize"`
+	// Regional inventory information.
+	ZoneStockInfos []GetZoneConfigListZoneStockInfo `pulumi:"zoneStockInfos"`
+}
+
+// GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
+// You can construct a concrete instance of `GetZoneConfigListInput` via:
+//
+//          GetZoneConfigListArgs{...}
+type GetZoneConfigListInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListOutput() GetZoneConfigListOutput
+	ToGetZoneConfigListOutputWithContext(context.Context) GetZoneConfigListOutput
+}
+
+type GetZoneConfigListArgs struct {
+	// Instance CPU, unit: core.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Machine type.
+	MachineType pulumi.StringInput `pulumi:"machineType"`
+	// Max io bandwidth.
+	MaxIoBandwidth pulumi.IntInput `pulumi:"maxIoBandwidth"`
+	// The maximum available storage for the instance, unit GB.
+	MaxStorageSize pulumi.IntInput `pulumi:"maxStorageSize"`
+	// Instance memory, unit: GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Minimum available storage of the instance, unit: GB.
+	MinStorageSize pulumi.IntInput `pulumi:"minStorageSize"`
+	// Regional inventory information.
+	ZoneStockInfos GetZoneConfigListZoneStockInfoArrayInput `pulumi:"zoneStockInfos"`
+}
+
+func (GetZoneConfigListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
+}
+
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
+	return i.ToGetZoneConfigListOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListOutput)
+}
+
+// GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
+//
+//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+type GetZoneConfigListArrayInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput
+	ToGetZoneConfigListArrayOutputWithContext(context.Context) GetZoneConfigListArrayOutput
+}
+
+type GetZoneConfigListArray []GetZoneConfigListInput
+
+func (GetZoneConfigListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
+}
+
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
+	return i.ToGetZoneConfigListArrayOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListArrayOutput)
+}
+
+type GetZoneConfigListOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
+}
+
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
+	return o
+}
+
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
+	return o
+}
+
+// Instance CPU, unit: core.
+func (o GetZoneConfigListOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Machine type.
+func (o GetZoneConfigListOutput) MachineType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.MachineType }).(pulumi.StringOutput)
+}
+
+// Max io bandwidth.
+func (o GetZoneConfigListOutput) MaxIoBandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.MaxIoBandwidth }).(pulumi.IntOutput)
+}
+
+// The maximum available storage for the instance, unit GB.
+func (o GetZoneConfigListOutput) MaxStorageSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.MaxStorageSize }).(pulumi.IntOutput)
+}
+
+// Instance memory, unit: GB.
+func (o GetZoneConfigListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Minimum available storage of the instance, unit: GB.
+func (o GetZoneConfigListOutput) MinStorageSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.MinStorageSize }).(pulumi.IntOutput)
+}
+
+// Regional inventory information.
+func (o GetZoneConfigListOutput) ZoneStockInfos() GetZoneConfigListZoneStockInfoArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []GetZoneConfigListZoneStockInfo { return v.ZoneStockInfos }).(GetZoneConfigListZoneStockInfoArrayOutput)
+}
+
+type GetZoneConfigListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
+}
+
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigList {
+		return vs[0].([]GetZoneConfigList)[vs[1].(int)]
+	}).(GetZoneConfigListOutput)
+}
+
+type GetZoneConfigListZoneStockInfo struct {
+	// Has stock.
+	HasStock bool `pulumi:"hasStock"`
+	// Availability zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetZoneConfigListZoneStockInfoInput is an input type that accepts GetZoneConfigListZoneStockInfoArgs and GetZoneConfigListZoneStockInfoOutput values.
+// You can construct a concrete instance of `GetZoneConfigListZoneStockInfoInput` via:
+//
+//          GetZoneConfigListZoneStockInfoArgs{...}
+type GetZoneConfigListZoneStockInfoInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListZoneStockInfoOutput() GetZoneConfigListZoneStockInfoOutput
+	ToGetZoneConfigListZoneStockInfoOutputWithContext(context.Context) GetZoneConfigListZoneStockInfoOutput
+}
+
+type GetZoneConfigListZoneStockInfoArgs struct {
+	// Has stock.
+	HasStock pulumi.BoolInput `pulumi:"hasStock"`
+	// Availability zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetZoneConfigListZoneStockInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigListZoneStockInfo)(nil)).Elem()
+}
+
+func (i GetZoneConfigListZoneStockInfoArgs) ToGetZoneConfigListZoneStockInfoOutput() GetZoneConfigListZoneStockInfoOutput {
+	return i.ToGetZoneConfigListZoneStockInfoOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListZoneStockInfoArgs) ToGetZoneConfigListZoneStockInfoOutputWithContext(ctx context.Context) GetZoneConfigListZoneStockInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListZoneStockInfoOutput)
+}
+
+// GetZoneConfigListZoneStockInfoArrayInput is an input type that accepts GetZoneConfigListZoneStockInfoArray and GetZoneConfigListZoneStockInfoArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigListZoneStockInfoArrayInput` via:
+//
+//          GetZoneConfigListZoneStockInfoArray{ GetZoneConfigListZoneStockInfoArgs{...} }
+type GetZoneConfigListZoneStockInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetZoneConfigListZoneStockInfoArrayOutput() GetZoneConfigListZoneStockInfoArrayOutput
+	ToGetZoneConfigListZoneStockInfoArrayOutputWithContext(context.Context) GetZoneConfigListZoneStockInfoArrayOutput
+}
+
+type GetZoneConfigListZoneStockInfoArray []GetZoneConfigListZoneStockInfoInput
+
+func (GetZoneConfigListZoneStockInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigListZoneStockInfo)(nil)).Elem()
+}
+
+func (i GetZoneConfigListZoneStockInfoArray) ToGetZoneConfigListZoneStockInfoArrayOutput() GetZoneConfigListZoneStockInfoArrayOutput {
+	return i.ToGetZoneConfigListZoneStockInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetZoneConfigListZoneStockInfoArray) ToGetZoneConfigListZoneStockInfoArrayOutputWithContext(ctx context.Context) GetZoneConfigListZoneStockInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListZoneStockInfoArrayOutput)
+}
+
+type GetZoneConfigListZoneStockInfoOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListZoneStockInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigListZoneStockInfo)(nil)).Elem()
+}
+
+func (o GetZoneConfigListZoneStockInfoOutput) ToGetZoneConfigListZoneStockInfoOutput() GetZoneConfigListZoneStockInfoOutput {
+	return o
+}
+
+func (o GetZoneConfigListZoneStockInfoOutput) ToGetZoneConfigListZoneStockInfoOutputWithContext(ctx context.Context) GetZoneConfigListZoneStockInfoOutput {
+	return o
+}
+
+// Has stock.
+func (o GetZoneConfigListZoneStockInfoOutput) HasStock() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetZoneConfigListZoneStockInfo) bool { return v.HasStock }).(pulumi.BoolOutput)
+}
+
+// Availability zone.
+func (o GetZoneConfigListZoneStockInfoOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigListZoneStockInfo) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetZoneConfigListZoneStockInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetZoneConfigListZoneStockInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigListZoneStockInfo)(nil)).Elem()
+}
+
+func (o GetZoneConfigListZoneStockInfoArrayOutput) ToGetZoneConfigListZoneStockInfoArrayOutput() GetZoneConfigListZoneStockInfoArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListZoneStockInfoArrayOutput) ToGetZoneConfigListZoneStockInfoArrayOutputWithContext(ctx context.Context) GetZoneConfigListZoneStockInfoArrayOutput {
+	return o
+}
+
+func (o GetZoneConfigListZoneStockInfoArrayOutput) Index(i pulumi.IntInput) GetZoneConfigListZoneStockInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigListZoneStockInfo {
+		return vs[0].([]GetZoneConfigListZoneStockInfo)[vs[1].(int)]
+	}).(GetZoneConfigListZoneStockInfoOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterInput)(nil)).Elem(), AuditLogFileFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterPtrInput)(nil)).Elem(), AuditLogFileFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterParamItemInput)(nil)).Elem(), ClusterParamItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterParamItemArrayInput)(nil)).Elem(), ClusterParamItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRoGroupAddrInput)(nil)).Elem(), ClusterRoGroupAddrArgs{})
@@ -937,10 +3207,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupAddrArrayInput)(nil)).Elem(), ClusterRwGroupAddrArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupInstanceInput)(nil)).Elem(), ClusterRwGroupInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupInstanceArrayInput)(nil)).Elem(), ClusterRwGroupInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountsAccountSetInput)(nil)).Elem(), GetAccountsAccountSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountsAccountSetArrayInput)(nil)).Elem(), GetAccountsAccountSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListArrayInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput)(nil)).Elem(), GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterParamsItemInput)(nil)).Elem(), GetClusterParamsItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterParamsItemArrayInput)(nil)).Elem(), GetClusterParamsItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersClusterListInput)(nil)).Elem(), GetClustersClusterListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersClusterListArrayInput)(nil)).Elem(), GetClustersClusterListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParamTemplatesItemInput)(nil)).Elem(), GetParamTemplatesItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParamTemplatesItemArrayInput)(nil)).Elem(), GetParamTemplatesItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParamTemplatesItemParamInfoSetInput)(nil)).Elem(), GetParamTemplatesItemParamInfoSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParamTemplatesItemParamInfoSetArrayInput)(nil)).Elem(), GetParamTemplatesItemParamInfoSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListInput)(nil)).Elem(), GetZoneConfigListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListZoneStockInfoInput)(nil)).Elem(), GetZoneConfigListZoneStockInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListZoneStockInfoArrayInput)(nil)).Elem(), GetZoneConfigListZoneStockInfoArray{})
+	pulumi.RegisterOutputType(AuditLogFileFilterOutput{})
+	pulumi.RegisterOutputType(AuditLogFileFilterPtrOutput{})
 	pulumi.RegisterOutputType(ClusterParamItemOutput{})
 	pulumi.RegisterOutputType(ClusterParamItemArrayOutput{})
 	pulumi.RegisterOutputType(ClusterRoGroupAddrOutput{})
@@ -951,8 +3243,28 @@ func init() {
 	pulumi.RegisterOutputType(ClusterRwGroupAddrArrayOutput{})
 	pulumi.RegisterOutputType(ClusterRwGroupInstanceOutput{})
 	pulumi.RegisterOutputType(ClusterRwGroupInstanceArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountsAccountSetOutput{})
+	pulumi.RegisterOutputType(GetAccountsAccountSetArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput{})
+	pulumi.RegisterOutputType(GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterParamsItemOutput{})
+	pulumi.RegisterOutputType(GetClusterParamsItemArrayOutput{})
 	pulumi.RegisterOutputType(GetClustersClusterListOutput{})
 	pulumi.RegisterOutputType(GetClustersClusterListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetParamTemplatesItemOutput{})
+	pulumi.RegisterOutputType(GetParamTemplatesItemArrayOutput{})
+	pulumi.RegisterOutputType(GetParamTemplatesItemParamInfoSetOutput{})
+	pulumi.RegisterOutputType(GetParamTemplatesItemParamInfoSetArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListZoneStockInfoOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListZoneStockInfoArrayOutput{})
 }

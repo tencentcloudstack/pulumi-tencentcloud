@@ -8,6 +8,7 @@ import typing
 from .account import *
 from .account_db_attachment import *
 from .basic_instance import *
+from .config_backup_strategy import *
 from .db import *
 from .get_account_db_attachments import *
 from .get_accounts import *
@@ -19,6 +20,7 @@ from .get_publish_subscribes import *
 from .get_readonly_groups import *
 from .get_zone_config import *
 from .instance import *
+from .migration import *
 from .publish_subscribe import *
 from .readonly_instance import *
 from ._inputs import *

@@ -19,29 +19,26 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Kms.NewExternalKey(ctx, "foo", &Kms.ExternalKeyArgs{
-//				Alias:             pulumi.String("test"),
-//				Description:       pulumi.String("describe key test message."),
-//				IsEnabled:         pulumi.Bool(true),
-//				KeyMaterialBase64: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
-//				ValidTo:           pulumi.Int(2147443200),
-//				WrappingAlgorithm: pulumi.String("RSAES_PKCS1_V1_5"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kms.NewExternalKey(ctx, "foo", &Kms.ExternalKeyArgs{
+// 			Alias:             pulumi.String("test"),
+// 			Description:       pulumi.String("describe key test message."),
+// 			IsEnabled:         pulumi.Bool(true),
+// 			KeyMaterialBase64: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
+// 			ValidTo:           pulumi.Int(2147443200),
+// 			WrappingAlgorithm: pulumi.String("RSAES_PKCS1_V1_5"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -49,9 +46,7 @@ import (
 // KMS external keys can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
-//
+//  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
 // ```
 type ExternalKey struct {
 	pulumi.CustomResourceState
@@ -229,7 +224,7 @@ func (i *ExternalKey) ToExternalKeyOutputWithContext(ctx context.Context) Extern
 // ExternalKeyArrayInput is an input type that accepts ExternalKeyArray and ExternalKeyArrayOutput values.
 // You can construct a concrete instance of `ExternalKeyArrayInput` via:
 //
-//	ExternalKeyArray{ ExternalKeyArgs{...} }
+//          ExternalKeyArray{ ExternalKeyArgs{...} }
 type ExternalKeyArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +249,7 @@ func (i ExternalKeyArray) ToExternalKeyArrayOutputWithContext(ctx context.Contex
 // ExternalKeyMapInput is an input type that accepts ExternalKeyMap and ExternalKeyMapOutput values.
 // You can construct a concrete instance of `ExternalKeyMapInput` via:
 //
-//	ExternalKeyMap{ "key": ExternalKeyArgs{...} }
+//          ExternalKeyMap{ "key": ExternalKeyArgs{...} }
 type ExternalKeyMapInput interface {
 	pulumi.Input
 

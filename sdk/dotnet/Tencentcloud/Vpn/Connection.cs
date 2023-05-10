@@ -88,6 +88,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<string> CustomerGatewayId { get; private set; } = null!;
 
         /// <summary>
+        /// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        /// </summary>
+        [Output("dpdAction")]
+        public Output<string> DpdAction { get; private set; } = null!;
+
+        /// <summary>
+        /// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        /// </summary>
+        [Output("dpdEnable")]
+        public Output<int> DpdEnable { get; private set; } = null!;
+
+        /// <summary>
+        /// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+        /// </summary>
+        [Output("dpdTimeout")]
+        public Output<int> DpdTimeout { get; private set; } = null!;
+
+        /// <summary>
         /// Whether intra-tunnel health checks are supported.
         /// </summary>
         [Output("enableHealthCheck")]
@@ -333,6 +351,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string> CustomerGatewayId { get; set; } = null!;
 
         /// <summary>
+        /// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        /// </summary>
+        [Input("dpdAction")]
+        public Input<string>? DpdAction { get; set; }
+
+        /// <summary>
+        /// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        /// </summary>
+        [Input("dpdEnable")]
+        public Input<int>? DpdEnable { get; set; }
+
+        /// <summary>
+        /// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+        /// </summary>
+        [Input("dpdTimeout")]
+        public Input<int>? DpdTimeout { get; set; }
+
+        /// <summary>
         /// Whether intra-tunnel health checks are supported.
         /// </summary>
         [Input("enableHealthCheck")]
@@ -518,6 +554,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// </summary>
         [Input("customerGatewayId")]
         public Input<string>? CustomerGatewayId { get; set; }
+
+        /// <summary>
+        /// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        /// </summary>
+        [Input("dpdAction")]
+        public Input<string>? DpdAction { get; set; }
+
+        /// <summary>
+        /// Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        /// </summary>
+        [Input("dpdEnable")]
+        public Input<int>? DpdEnable { get; set; }
+
+        /// <summary>
+        /// DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+        /// </summary>
+        [Input("dpdTimeout")]
+        public Input<int>? DpdTimeout { get; set; }
 
         /// <summary>
         /// Whether intra-tunnel health checks are supported.

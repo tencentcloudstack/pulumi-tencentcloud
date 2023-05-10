@@ -7,6 +7,7 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./attachment";
 export * from "./customizedConfig";
+export * from "./functionTargetsAttachment";
 export * from "./getAttachments";
 export * from "./getInstances";
 export * from "./getListenerRules";
@@ -27,6 +28,7 @@ export * from "./targetGroupInstanceAttachment";
 // Import resources to register:
 import { Attachment } from "./attachment";
 import { CustomizedConfig } from "./customizedConfig";
+import { FunctionTargetsAttachment } from "./functionTargetsAttachment";
 import { Instance } from "./instance";
 import { Listener } from "./listener";
 import { ListenerRule } from "./listenerRule";
@@ -46,6 +48,8 @@ const _module = {
                 return new Attachment(name, <any>undefined, { urn })
             case "tencentcloud:Clb/customizedConfig:CustomizedConfig":
                 return new CustomizedConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment":
+                return new FunctionTargetsAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Clb/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Clb/listener:Listener":
@@ -73,6 +77,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/attachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/customizedConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/functionTargetsAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listener", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listenerRule", _module)

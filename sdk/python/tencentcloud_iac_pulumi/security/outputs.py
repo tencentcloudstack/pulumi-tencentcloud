@@ -11,6 +11,8 @@ from .. import _utilities
 __all__ = [
     'GroupRuleAddressTemplate',
     'GroupRuleProtocolTemplate',
+    'GroupRuleSetEgress',
+    'GroupRuleSetIngress',
     'GetGroupsSecurityGroupResult',
 ]
 
@@ -112,6 +114,340 @@ class GroupRuleProtocolTemplate(dict):
         Address template ID, conflicts with `group_id`.
         """
         return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class GroupRuleSetEgress(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "addressTemplateGroup":
+            suggest = "address_template_group"
+        elif key == "addressTemplateId":
+            suggest = "address_template_id"
+        elif key == "cidrBlock":
+            suggest = "cidr_block"
+        elif key == "ipv6CidrBlock":
+            suggest = "ipv6_cidr_block"
+        elif key == "serviceTemplateGroup":
+            suggest = "service_template_group"
+        elif key == "serviceTemplateId":
+            suggest = "service_template_id"
+        elif key == "sourceSecurityId":
+            suggest = "source_security_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in GroupRuleSetEgress. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        GroupRuleSetEgress.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        GroupRuleSetEgress.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action: str,
+                 address_template_group: Optional[str] = None,
+                 address_template_id: Optional[str] = None,
+                 cidr_block: Optional[str] = None,
+                 description: Optional[str] = None,
+                 ipv6_cidr_block: Optional[str] = None,
+                 port: Optional[str] = None,
+                 protocol: Optional[str] = None,
+                 service_template_group: Optional[str] = None,
+                 service_template_id: Optional[str] = None,
+                 source_security_id: Optional[str] = None):
+        """
+        :param str action: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+        :param str address_template_group: Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        :param str address_template_id: Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        :param str cidr_block: An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        :param str description: Description of the security group rule.
+        :param str ipv6_cidr_block: An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        :param str port: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+        :param str protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        :param str service_template_group: Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        :param str service_template_id: Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        :param str source_security_id: ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        """
+        pulumi.set(__self__, "action", action)
+        if address_template_group is not None:
+            pulumi.set(__self__, "address_template_group", address_template_group)
+        if address_template_id is not None:
+            pulumi.set(__self__, "address_template_id", address_template_id)
+        if cidr_block is not None:
+            pulumi.set(__self__, "cidr_block", cidr_block)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if ipv6_cidr_block is not None:
+            pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if service_template_group is not None:
+            pulumi.set(__self__, "service_template_group", service_template_group)
+        if service_template_id is not None:
+            pulumi.set(__self__, "service_template_id", service_template_id)
+        if source_security_id is not None:
+            pulumi.set(__self__, "source_security_id", source_security_id)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="addressTemplateGroup")
+    def address_template_group(self) -> Optional[str]:
+        """
+        Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        """
+        return pulumi.get(self, "address_template_group")
+
+    @property
+    @pulumi.getter(name="addressTemplateId")
+    def address_template_id(self) -> Optional[str]:
+        """
+        Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        """
+        return pulumi.get(self, "address_template_id")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> Optional[str]:
+        """
+        An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description of the security group rule.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="ipv6CidrBlock")
+    def ipv6_cidr_block(self) -> Optional[str]:
+        """
+        An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        """
+        return pulumi.get(self, "ipv6_cidr_block")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[str]:
+        """
+        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        """
+        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="serviceTemplateGroup")
+    def service_template_group(self) -> Optional[str]:
+        """
+        Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        """
+        return pulumi.get(self, "service_template_group")
+
+    @property
+    @pulumi.getter(name="serviceTemplateId")
+    def service_template_id(self) -> Optional[str]:
+        """
+        Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        """
+        return pulumi.get(self, "service_template_id")
+
+    @property
+    @pulumi.getter(name="sourceSecurityId")
+    def source_security_id(self) -> Optional[str]:
+        """
+        ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        """
+        return pulumi.get(self, "source_security_id")
+
+
+@pulumi.output_type
+class GroupRuleSetIngress(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "addressTemplateGroup":
+            suggest = "address_template_group"
+        elif key == "addressTemplateId":
+            suggest = "address_template_id"
+        elif key == "cidrBlock":
+            suggest = "cidr_block"
+        elif key == "ipv6CidrBlock":
+            suggest = "ipv6_cidr_block"
+        elif key == "serviceTemplateGroup":
+            suggest = "service_template_group"
+        elif key == "serviceTemplateId":
+            suggest = "service_template_id"
+        elif key == "sourceSecurityId":
+            suggest = "source_security_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in GroupRuleSetIngress. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        GroupRuleSetIngress.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        GroupRuleSetIngress.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action: str,
+                 address_template_group: Optional[str] = None,
+                 address_template_id: Optional[str] = None,
+                 cidr_block: Optional[str] = None,
+                 description: Optional[str] = None,
+                 ipv6_cidr_block: Optional[str] = None,
+                 port: Optional[str] = None,
+                 protocol: Optional[str] = None,
+                 service_template_group: Optional[str] = None,
+                 service_template_id: Optional[str] = None,
+                 source_security_id: Optional[str] = None):
+        """
+        :param str action: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+        :param str address_template_group: Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        :param str address_template_id: Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        :param str cidr_block: An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        :param str description: Description of the security group rule.
+        :param str ipv6_cidr_block: An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        :param str port: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+        :param str protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        :param str service_template_group: Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        :param str service_template_id: Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        :param str source_security_id: ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        """
+        pulumi.set(__self__, "action", action)
+        if address_template_group is not None:
+            pulumi.set(__self__, "address_template_group", address_template_group)
+        if address_template_id is not None:
+            pulumi.set(__self__, "address_template_id", address_template_id)
+        if cidr_block is not None:
+            pulumi.set(__self__, "cidr_block", cidr_block)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if ipv6_cidr_block is not None:
+            pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if service_template_group is not None:
+            pulumi.set(__self__, "service_template_group", service_template_group)
+        if service_template_id is not None:
+            pulumi.set(__self__, "service_template_id", service_template_id)
+        if source_security_id is not None:
+            pulumi.set(__self__, "source_security_id", source_security_id)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="addressTemplateGroup")
+    def address_template_group(self) -> Optional[str]:
+        """
+        Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        """
+        return pulumi.get(self, "address_template_group")
+
+    @property
+    @pulumi.getter(name="addressTemplateId")
+    def address_template_id(self) -> Optional[str]:
+        """
+        Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        """
+        return pulumi.get(self, "address_template_id")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> Optional[str]:
+        """
+        An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description of the security group rule.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="ipv6CidrBlock")
+    def ipv6_cidr_block(self) -> Optional[str]:
+        """
+        An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        """
+        return pulumi.get(self, "ipv6_cidr_block")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[str]:
+        """
+        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        """
+        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="serviceTemplateGroup")
+    def service_template_group(self) -> Optional[str]:
+        """
+        Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        """
+        return pulumi.get(self, "service_template_group")
+
+    @property
+    @pulumi.getter(name="serviceTemplateId")
+    def service_template_id(self) -> Optional[str]:
+        """
+        Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidr_block` and `port`.
+        """
+        return pulumi.get(self, "service_template_id")
+
+    @property
+    @pulumi.getter(name="sourceSecurityId")
+    def source_security_id(self) -> Optional[str]:
+        """
+        ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        """
+        return pulumi.get(self, "source_security_id")
 
 
 @pulumi.output_type

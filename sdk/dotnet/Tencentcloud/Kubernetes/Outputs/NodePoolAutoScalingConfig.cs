@@ -39,6 +39,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly bool? EnhancedSecurityService;
         /// <summary>
+        /// The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        /// </summary>
+        public readonly string? HostName;
+        /// <summary>
+        /// The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        /// </summary>
+        public readonly string? HostNameStyle;
+        /// <summary>
         /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         /// </summary>
         public readonly string? InstanceChargeType;
@@ -50,6 +58,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         /// </summary>
         public readonly string? InstanceChargeTypePrepaidRenewFlag;
+        /// <summary>
+        /// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        /// </summary>
+        public readonly string? InstanceName;
         /// <summary>
         /// Specified types of CVM instance.
         /// </summary>
@@ -109,11 +121,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             bool? enhancedSecurityService,
 
+            string? hostName,
+
+            string? hostNameStyle,
+
             string? instanceChargeType,
 
             int? instanceChargeTypePrepaidPeriod,
 
             string? instanceChargeTypePrepaidRenewFlag,
+
+            string? instanceName,
 
             string instanceType,
 
@@ -143,9 +161,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             DataDisks = dataDisks;
             EnhancedMonitorService = enhancedMonitorService;
             EnhancedSecurityService = enhancedSecurityService;
+            HostName = hostName;
+            HostNameStyle = hostNameStyle;
             InstanceChargeType = instanceChargeType;
             InstanceChargeTypePrepaidPeriod = instanceChargeTypePrepaidPeriod;
             InstanceChargeTypePrepaidRenewFlag = instanceChargeTypePrepaidRenewFlag;
+            InstanceName = instanceName;
             InstanceType = instanceType;
             InternetChargeType = internetChargeType;
             InternetMaxBandwidthOut = internetMaxBandwidthOut;

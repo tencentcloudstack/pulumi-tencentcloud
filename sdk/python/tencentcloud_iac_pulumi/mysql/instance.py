@@ -1098,6 +1098,7 @@ class Instance(pulumi.CustomResource):
             intranet_port=3306,
             mem_size=128000,
             parameters={
+                "character_set_server": "UTF8",
                 "max_connections": "1000",
             },
             project_id=201901010001,
@@ -1180,6 +1181,7 @@ class Instance(pulumi.CustomResource):
             intranet_port=3306,
             mem_size=128000,
             parameters={
+                "character_set_server": "UTF8",
                 "max_connections": "1000",
             },
             project_id=201901010001,
@@ -1679,7 +1681,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Output[Optional[str]]:
+    def subnet_id(self) -> pulumi.Output[str]:
         """
         Private network ID. If `vpc_id` is set, this value is required.
         """
@@ -1711,7 +1713,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Output[Optional[str]]:
+    def vpc_id(self) -> pulumi.Output[str]:
         """
         ID of VPC, which can be modified once every 24 hours and can't be removed.
         """

@@ -152,13 +152,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Output<ImmutableArray<string>> Eips { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+        /// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         /// </summary>
         [Output("enableEipConfig")]
         public Output<bool?> EnableEipConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        /// Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         /// </summary>
         [Output("enablePublicNet")]
         public Output<bool?> EnablePublicNet { get; private set; } = null!;
@@ -403,13 +403,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+        /// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         /// </summary>
         [Input("enableEipConfig")]
         public Input<bool>? EnableEipConfig { get; set; }
 
         /// <summary>
-        /// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        /// Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         /// </summary>
         [Input("enablePublicNet")]
         public Input<bool>? EnablePublicNet { get; set; }
@@ -632,13 +632,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
 
         /// <summary>
-        /// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+        /// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         /// </summary>
         [Input("enableEipConfig")]
         public Input<bool>? EnableEipConfig { get; set; }
 
         /// <summary>
-        /// Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        /// Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         /// </summary>
         [Input("enablePublicNet")]
         public Input<bool>? EnablePublicNet { get; set; }

@@ -8,6 +8,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create security group rule.
  *
+ * > **NOTE:** Single security rule is hardly ordered, use tencentcloud.Security.GroupLiteRule instead.
+ *
  * ## Example Usage
  *
  * Source is CIDR ip
@@ -105,6 +107,10 @@ export class GroupRule extends pulumi.CustomResource {
      */
     public readonly policy!: pulumi.Output<string>;
     /**
+     * The security group rule index number, the value of which dynamically changes as the security group rule changes.
+     */
+    public readonly policyIndex!: pulumi.Output<number | undefined>;
+    /**
      * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
      */
     public readonly portRange!: pulumi.Output<string>;
@@ -143,6 +149,7 @@ export class GroupRule extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["ipProtocol"] = state ? state.ipProtocol : undefined;
             resourceInputs["policy"] = state ? state.policy : undefined;
+            resourceInputs["policyIndex"] = state ? state.policyIndex : undefined;
             resourceInputs["portRange"] = state ? state.portRange : undefined;
             resourceInputs["protocolTemplate"] = state ? state.protocolTemplate : undefined;
             resourceInputs["securityGroupId"] = state ? state.securityGroupId : undefined;
@@ -164,6 +171,7 @@ export class GroupRule extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["ipProtocol"] = args ? args.ipProtocol : undefined;
             resourceInputs["policy"] = args ? args.policy : undefined;
+            resourceInputs["policyIndex"] = args ? args.policyIndex : undefined;
             resourceInputs["portRange"] = args ? args.portRange : undefined;
             resourceInputs["protocolTemplate"] = args ? args.protocolTemplate : undefined;
             resourceInputs["securityGroupId"] = args ? args.securityGroupId : undefined;
@@ -199,6 +207,10 @@ export interface GroupRuleState {
      * Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
      */
     policy?: pulumi.Input<string>;
+    /**
+     * The security group rule index number, the value of which dynamically changes as the security group rule changes.
+     */
+    policyIndex?: pulumi.Input<number>;
     /**
      * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
      */
@@ -245,6 +257,10 @@ export interface GroupRuleArgs {
      * Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
      */
     policy: pulumi.Input<string>;
+    /**
+     * The security group rule index number, the value of which dynamically changes as the security group rule changes.
+     */
+    policyIndex?: pulumi.Input<number>;
     /**
      * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocolTemplate`.
      */

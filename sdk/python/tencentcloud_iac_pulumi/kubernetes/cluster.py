@@ -28,8 +28,10 @@ class ClusterArgs:
                  cluster_desc: Optional[pulumi.Input[str]] = None,
                  cluster_extra_args: Optional[pulumi.Input['ClusterClusterExtraArgsArgs']] = None,
                  cluster_internet: Optional[pulumi.Input[bool]] = None,
+                 cluster_internet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_internet_security_group: Optional[pulumi.Input[str]] = None,
                  cluster_intranet: Optional[pulumi.Input[bool]] = None,
+                 cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_ipvs: Optional[pulumi.Input[bool]] = None,
                  cluster_level: Optional[pulumi.Input[str]] = None,
@@ -82,8 +84,10 @@ class ClusterArgs:
         :param pulumi.Input[str] cluster_desc: Description of the cluster.
         :param pulumi.Input['ClusterClusterExtraArgsArgs'] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
         :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
         :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
         :param pulumi.Input[str] cluster_level: Specify cluster level, valid for managed cluster, use data source `_kubernetes.get_cluster_levels` to query available levels. Available value examples `L5`, `L20`, `L50`, `L100`, etc.
@@ -92,8 +96,8 @@ class ClusterArgs:
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'.
-        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'. Default is 'docker'.
+        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[bool] enable_customized_pod_cidr: Whether to enable the custom mode of node podCIDR size. Default is false.
@@ -150,10 +154,14 @@ class ClusterArgs:
             pulumi.set(__self__, "cluster_extra_args", cluster_extra_args)
         if cluster_internet is not None:
             pulumi.set(__self__, "cluster_internet", cluster_internet)
+        if cluster_internet_domain is not None:
+            pulumi.set(__self__, "cluster_internet_domain", cluster_internet_domain)
         if cluster_internet_security_group is not None:
             pulumi.set(__self__, "cluster_internet_security_group", cluster_internet_security_group)
         if cluster_intranet is not None:
             pulumi.set(__self__, "cluster_intranet", cluster_intranet)
+        if cluster_intranet_domain is not None:
+            pulumi.set(__self__, "cluster_intranet_domain", cluster_intranet_domain)
         if cluster_intranet_subnet_id is not None:
             pulumi.set(__self__, "cluster_intranet_subnet_id", cluster_intranet_subnet_id)
         if cluster_ipvs is not None:
@@ -389,6 +397,18 @@ class ClusterArgs:
         pulumi.set(self, "cluster_internet", value)
 
     @property
+    @pulumi.getter(name="clusterInternetDomain")
+    def cluster_internet_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
+        """
+        return pulumi.get(self, "cluster_internet_domain")
+
+    @cluster_internet_domain.setter
+    def cluster_internet_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_internet_domain", value)
+
+    @property
     @pulumi.getter(name="clusterInternetSecurityGroup")
     def cluster_internet_security_group(self) -> Optional[pulumi.Input[str]]:
         """
@@ -411,6 +431,18 @@ class ClusterArgs:
     @cluster_intranet.setter
     def cluster_intranet(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "cluster_intranet", value)
+
+    @property
+    @pulumi.getter(name="clusterIntranetDomain")
+    def cluster_intranet_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
+        """
+        return pulumi.get(self, "cluster_intranet_domain")
+
+    @cluster_intranet_domain.setter
+    def cluster_intranet_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_intranet_domain", value)
 
     @property
     @pulumi.getter(name="clusterIntranetSubnetId")
@@ -512,7 +544,7 @@ class ClusterArgs:
     @pulumi.getter(name="clusterVersion")
     def cluster_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the cluster, Default is '1.10.5'.
+        Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
         """
         return pulumi.get(self, "cluster_version")
 
@@ -524,7 +556,7 @@ class ClusterArgs:
     @pulumi.getter(name="containerRuntime")
     def container_runtime(self) -> Optional[pulumi.Input[str]]:
         """
-        Runtime type of the cluster, the available values include: 'docker' and 'containerd'. Default is 'docker'.
+        Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         """
         return pulumi.get(self, "container_runtime")
 
@@ -874,8 +906,10 @@ class _ClusterState:
                  cluster_external_endpoint: Optional[pulumi.Input[str]] = None,
                  cluster_extra_args: Optional[pulumi.Input['ClusterClusterExtraArgsArgs']] = None,
                  cluster_internet: Optional[pulumi.Input[bool]] = None,
+                 cluster_internet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_internet_security_group: Optional[pulumi.Input[str]] = None,
                  cluster_intranet: Optional[pulumi.Input[bool]] = None,
+                 cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_ipvs: Optional[pulumi.Input[bool]] = None,
                  cluster_level: Optional[pulumi.Input[str]] = None,
@@ -939,8 +973,10 @@ class _ClusterState:
         :param pulumi.Input[str] cluster_external_endpoint: External network address to access.
         :param pulumi.Input['ClusterClusterExtraArgsArgs'] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
         :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
         :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
         :param pulumi.Input[str] cluster_level: Specify cluster level, valid for managed cluster, use data source `_kubernetes.get_cluster_levels` to query available levels. Available value examples `L5`, `L20`, `L50`, `L100`, etc.
@@ -950,8 +986,8 @@ class _ClusterState:
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'.
-        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'. Default is 'docker'.
+        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[str] domain: Domain name for access.
@@ -1020,10 +1056,14 @@ class _ClusterState:
             pulumi.set(__self__, "cluster_extra_args", cluster_extra_args)
         if cluster_internet is not None:
             pulumi.set(__self__, "cluster_internet", cluster_internet)
+        if cluster_internet_domain is not None:
+            pulumi.set(__self__, "cluster_internet_domain", cluster_internet_domain)
         if cluster_internet_security_group is not None:
             pulumi.set(__self__, "cluster_internet_security_group", cluster_internet_security_group)
         if cluster_intranet is not None:
             pulumi.set(__self__, "cluster_intranet", cluster_intranet)
+        if cluster_intranet_domain is not None:
+            pulumi.set(__self__, "cluster_intranet_domain", cluster_intranet_domain)
         if cluster_intranet_subnet_id is not None:
             pulumi.set(__self__, "cluster_intranet_subnet_id", cluster_intranet_subnet_id)
         if cluster_ipvs is not None:
@@ -1291,6 +1331,18 @@ class _ClusterState:
         pulumi.set(self, "cluster_internet", value)
 
     @property
+    @pulumi.getter(name="clusterInternetDomain")
+    def cluster_internet_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
+        """
+        return pulumi.get(self, "cluster_internet_domain")
+
+    @cluster_internet_domain.setter
+    def cluster_internet_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_internet_domain", value)
+
+    @property
     @pulumi.getter(name="clusterInternetSecurityGroup")
     def cluster_internet_security_group(self) -> Optional[pulumi.Input[str]]:
         """
@@ -1313,6 +1365,18 @@ class _ClusterState:
     @cluster_intranet.setter
     def cluster_intranet(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "cluster_intranet", value)
+
+    @property
+    @pulumi.getter(name="clusterIntranetDomain")
+    def cluster_intranet_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
+        """
+        return pulumi.get(self, "cluster_intranet_domain")
+
+    @cluster_intranet_domain.setter
+    def cluster_intranet_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_intranet_domain", value)
 
     @property
     @pulumi.getter(name="clusterIntranetSubnetId")
@@ -1426,7 +1490,7 @@ class _ClusterState:
     @pulumi.getter(name="clusterVersion")
     def cluster_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the cluster, Default is '1.10.5'.
+        Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
         """
         return pulumi.get(self, "cluster_version")
 
@@ -1438,7 +1502,7 @@ class _ClusterState:
     @pulumi.getter(name="containerRuntime")
     def container_runtime(self) -> Optional[pulumi.Input[str]]:
         """
-        Runtime type of the cluster, the available values include: 'docker' and 'containerd'. Default is 'docker'.
+        Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         """
         return pulumi.get(self, "container_runtime")
 
@@ -1896,8 +1960,10 @@ class Cluster(pulumi.CustomResource):
                  cluster_desc: Optional[pulumi.Input[str]] = None,
                  cluster_extra_args: Optional[pulumi.Input[pulumi.InputType['ClusterClusterExtraArgsArgs']]] = None,
                  cluster_internet: Optional[pulumi.Input[bool]] = None,
+                 cluster_internet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_internet_security_group: Optional[pulumi.Input[str]] = None,
                  cluster_intranet: Optional[pulumi.Input[bool]] = None,
+                 cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_ipvs: Optional[pulumi.Input[bool]] = None,
                  cluster_level: Optional[pulumi.Input[str]] = None,
@@ -1943,379 +2009,6 @@ class Cluster(pulumi.CustomResource):
         > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
         **NOTE:**  We recommend the usage of one cluster without worker config + node pool to manage cluster and nodes. It's a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone_first = config.get("availabilityZoneFirst")
-        if availability_zone_first is None:
-            availability_zone_first = "ap-guangzhou-3"
-        availability_zone_second = config.get("availabilityZoneSecond")
-        if availability_zone_second is None:
-            availability_zone_second = "ap-guangzhou-4"
-        cluster_cidr = config.get("clusterCidr")
-        if cluster_cidr is None:
-            cluster_cidr = "10.31.0.0/16"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA2.2XLARGE16"
-        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_first)
-        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_second)
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            vpc_id=vpc_first.instance_lists[0].vpc_id,
-            cluster_cidr=cluster_cidr,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_first,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_first.instance_lists[0].subnet_id,
-                    img_id="img-rkiynh11",
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                ),
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_second,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_second.instance_lists[0].subnet_id,
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                    cam_role_name="CVM_QcsRole",
-                ),
-            ],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            })
-        ```
-
-        Use Kubelet
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone_first = config.get("availabilityZoneFirst")
-        if availability_zone_first is None:
-            availability_zone_first = "ap-guangzhou-3"
-        availability_zone_second = config.get("availabilityZoneSecond")
-        if availability_zone_second is None:
-            availability_zone_second = "ap-guangzhou-4"
-        cluster_cidr = config.get("clusterCidr")
-        if cluster_cidr is None:
-            cluster_cidr = "10.31.0.0/16"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA2.2XLARGE16"
-        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_first)
-        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_second)
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            vpc_id=vpc_first.instance_lists[0].vpc_id,
-            cluster_cidr=cluster_cidr,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_first,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_first.instance_lists[0].subnet_id,
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                ),
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_second,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_second.instance_lists[0].subnet_id,
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                    cam_role_name="CVM_QcsRole",
-                ),
-            ],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            },
-            extra_args=["root-dir=/var/lib/kubelet"])
-        ```
-
-        Use extension addons
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone_first = config.get("availabilityZoneFirst")
-        if availability_zone_first is None:
-            availability_zone_first = "ap-guangzhou-3"
-        cluster_cidr = config.get("clusterCidr")
-        if cluster_cidr is None:
-            cluster_cidr = "10.31.0.0/16"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "S5.SMALL1"
-        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_first)
-        cluster_with_addon = tencentcloud.kubernetes.Cluster("clusterWithAddon",
-            vpc_id=vpc_first.instance_lists[0].vpc_id,
-            cluster_cidr=cluster_cidr,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                count=1,
-                availability_zone=availability_zone_first,
-                instance_type=default_instance_type,
-                system_disk_type="CLOUD_SSD",
-                system_disk_size=60,
-                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                internet_max_bandwidth_out=100,
-                public_ip_assigned=True,
-                subnet_id=vpc_first.instance_lists[0].subnet_id,
-                img_id="img-rkiynh11",
-                enhanced_security_service=False,
-                enhanced_monitor_service=False,
-                user_data="dGVzdA==",
-                password="ZZXXccvv1212",
-            )],
-            extension_addons=[
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="NodeProblemDetectorPlus",
-                    param="{\"kind\":\"NodeProblemDetector\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"npd\"},\"spec\":{\"version\":\"v2.0.0\",\"selfCure\":true,\"uin\":\"12345\",\"subUin\":\"12345\",\"policys\":[{\"actions\":{\"CVM\":{\"reBootCVM\":true,\"retryCounts\":1},\"runtime\":{\"reStartDokcer\":true,\"reStartKubelet\":true,\"retryCounts\":1},\"nodePod\":{\"evict\":true,\"retryCounts\":1}},\"conditionType\":\"Ready\"},{\"actions\":{\"runtime\":{\"reStartDokcer\":true,\"reStartKubelet\":true,\"retryCounts\":1}},\"conditionType\":\"KubeletProblem\"},{\"actions\":{\"runtime\":{\"reStartDokcer\":true,\"reStartKubelet\":false,\"retryCounts\":1}},\"conditionType\":\"DockerdProblem\"}]}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="OOMGuard",
-                    param="{\"kind\":\"OOMGuard\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"oom\"},\"spec\":{}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="DNSAutoscaler",
-                    param="{\"kind\":\"DNSAutoscaler\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"da\"},\"spec\":{}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="COS",
-                    param="{\"kind\":\"COS\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"cos\"},\"spec\":{\"version\":\"1.0.0\"}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="CFS",
-                    param="{\"kind\":\"CFS\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"cfs\"},\"spec\":{\"version\":\"1.0.0\"}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="CBS",
-                    param="{\"kind\":\"CBS\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"cbs\"},\"spec\":{}}",
-                ),
-            ])
-        ```
-
-        Use node pool global config
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone = config.get("availabilityZone")
-        if availability_zone is None:
-            availability_zone = "ap-guangzhou-3"
-        vpc = config.get("vpc")
-        if vpc is None:
-            vpc = "vpc-dk8zmwuf"
-        subnet = config.get("subnet")
-        if subnet is None:
-            subnet = "subnet-pqfek0t8"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA1.LARGE8"
-        test_node_pool_global_config = tencentcloud.kubernetes.Cluster("testNodePoolGlobalConfig",
-            vpc_id=vpc,
-            cluster_cidr="10.1.0.0/16",
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                count=1,
-                availability_zone=availability_zone,
-                instance_type=default_instance_type,
-                system_disk_type="CLOUD_SSD",
-                system_disk_size=60,
-                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                internet_max_bandwidth_out=100,
-                public_ip_assigned=True,
-                subnet_id=subnet,
-                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                    disk_type="CLOUD_PREMIUM",
-                    disk_size=50,
-                )],
-                enhanced_security_service=False,
-                enhanced_monitor_service=False,
-                user_data="dGVzdA==",
-                password="ZZXXccvv1212",
-            )],
-            node_pool_global_configs=[tencentcloud.kubernetes.ClusterNodePoolGlobalConfigArgs(
-                is_scale_in_enabled=True,
-                expander="random",
-                ignore_daemon_sets_utilization=True,
-                max_concurrent_scale_in=5,
-                scale_in_delay=15,
-                scale_in_unneeded_time=15,
-                scale_in_utilization_threshold=30,
-                skip_nodes_with_local_storage=False,
-                skip_nodes_with_system_pods=True,
-            )],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            })
-        ```
-
-        Using VPC-CNI network type
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone = config.get("availabilityZone")
-        if availability_zone is None:
-            availability_zone = "ap-guangzhou-1"
-        vpc = config.get("vpc")
-        if vpc is None:
-            vpc = "vpc-r1m1fyx5"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA2.SMALL2"
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            vpc_id=vpc,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=256,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            network_type="VPC-CNI",
-            eni_subnet_ids=["subnet-bk1etlyu"],
-            service_cidr="10.1.0.0/24",
-            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                count=1,
-                availability_zone=availability_zone,
-                instance_type=default_instance_type,
-                system_disk_type="CLOUD_PREMIUM",
-                system_disk_size=60,
-                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                internet_max_bandwidth_out=100,
-                public_ip_assigned=True,
-                subnet_id="subnet-t5dv27rs",
-                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                    disk_type="CLOUD_PREMIUM",
-                    disk_size=50,
-                )],
-                enhanced_security_service=False,
-                enhanced_monitor_service=False,
-                user_data="dGVzdA==",
-                password="ZZXXccvv1212",
-            )],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            })
-        ```
-
-        Using ops options
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            cluster_audit=tencentcloud.kubernetes.ClusterClusterAuditArgs(
-                enabled=True,
-                log_set_id="",
-                log_set_topic="",
-            ),
-            event_persistence=tencentcloud.kubernetes.ClusterEventPersistenceArgs(
-                enabled=True,
-                log_set_id="",
-                log_set_topic="",
-            ),
-            log_agent=tencentcloud.kubernetes.ClusterLogAgentArgs(
-                enabled=True,
-                kubelet_root_dir="",
-            ))
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] acquire_cluster_admin_role: If set to true, it will acquire the ClusterRole tke:admin. NOTE: this arguments cannot revoke to `false` after acquired.
@@ -2330,8 +2023,10 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_desc: Description of the cluster.
         :param pulumi.Input[pulumi.InputType['ClusterClusterExtraArgsArgs']] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
         :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
         :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
         :param pulumi.Input[str] cluster_level: Specify cluster level, valid for managed cluster, use data source `_kubernetes.get_cluster_levels` to query available levels. Available value examples `L5`, `L20`, `L50`, `L100`, etc.
@@ -2340,8 +2035,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'.
-        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'. Default is 'docker'.
+        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[bool] enable_customized_pod_cidr: Whether to enable the custom mode of node podCIDR size. Default is false.
@@ -2383,379 +2078,6 @@ class Cluster(pulumi.CustomResource):
         > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
         **NOTE:**  We recommend the usage of one cluster without worker config + node pool to manage cluster and nodes. It's a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone_first = config.get("availabilityZoneFirst")
-        if availability_zone_first is None:
-            availability_zone_first = "ap-guangzhou-3"
-        availability_zone_second = config.get("availabilityZoneSecond")
-        if availability_zone_second is None:
-            availability_zone_second = "ap-guangzhou-4"
-        cluster_cidr = config.get("clusterCidr")
-        if cluster_cidr is None:
-            cluster_cidr = "10.31.0.0/16"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA2.2XLARGE16"
-        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_first)
-        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_second)
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            vpc_id=vpc_first.instance_lists[0].vpc_id,
-            cluster_cidr=cluster_cidr,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_first,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_first.instance_lists[0].subnet_id,
-                    img_id="img-rkiynh11",
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                ),
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_second,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_second.instance_lists[0].subnet_id,
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                    cam_role_name="CVM_QcsRole",
-                ),
-            ],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            })
-        ```
-
-        Use Kubelet
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone_first = config.get("availabilityZoneFirst")
-        if availability_zone_first is None:
-            availability_zone_first = "ap-guangzhou-3"
-        availability_zone_second = config.get("availabilityZoneSecond")
-        if availability_zone_second is None:
-            availability_zone_second = "ap-guangzhou-4"
-        cluster_cidr = config.get("clusterCidr")
-        if cluster_cidr is None:
-            cluster_cidr = "10.31.0.0/16"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA2.2XLARGE16"
-        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_first)
-        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_second)
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            vpc_id=vpc_first.instance_lists[0].vpc_id,
-            cluster_cidr=cluster_cidr,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_first,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_first.instance_lists[0].subnet_id,
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                ),
-                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                    count=1,
-                    availability_zone=availability_zone_second,
-                    instance_type=default_instance_type,
-                    system_disk_type="CLOUD_SSD",
-                    system_disk_size=60,
-                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                    internet_max_bandwidth_out=100,
-                    public_ip_assigned=True,
-                    subnet_id=vpc_second.instance_lists[0].subnet_id,
-                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                        disk_type="CLOUD_PREMIUM",
-                        disk_size=50,
-                    )],
-                    enhanced_security_service=False,
-                    enhanced_monitor_service=False,
-                    user_data="dGVzdA==",
-                    password="ZZXXccvv1212",
-                    cam_role_name="CVM_QcsRole",
-                ),
-            ],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            },
-            extra_args=["root-dir=/var/lib/kubelet"])
-        ```
-
-        Use extension addons
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone_first = config.get("availabilityZoneFirst")
-        if availability_zone_first is None:
-            availability_zone_first = "ap-guangzhou-3"
-        cluster_cidr = config.get("clusterCidr")
-        if cluster_cidr is None:
-            cluster_cidr = "10.31.0.0/16"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "S5.SMALL1"
-        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
-            availability_zone=availability_zone_first)
-        cluster_with_addon = tencentcloud.kubernetes.Cluster("clusterWithAddon",
-            vpc_id=vpc_first.instance_lists[0].vpc_id,
-            cluster_cidr=cluster_cidr,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                count=1,
-                availability_zone=availability_zone_first,
-                instance_type=default_instance_type,
-                system_disk_type="CLOUD_SSD",
-                system_disk_size=60,
-                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                internet_max_bandwidth_out=100,
-                public_ip_assigned=True,
-                subnet_id=vpc_first.instance_lists[0].subnet_id,
-                img_id="img-rkiynh11",
-                enhanced_security_service=False,
-                enhanced_monitor_service=False,
-                user_data="dGVzdA==",
-                password="ZZXXccvv1212",
-            )],
-            extension_addons=[
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="NodeProblemDetectorPlus",
-                    param="{\"kind\":\"NodeProblemDetector\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"npd\"},\"spec\":{\"version\":\"v2.0.0\",\"selfCure\":true,\"uin\":\"12345\",\"subUin\":\"12345\",\"policys\":[{\"actions\":{\"CVM\":{\"reBootCVM\":true,\"retryCounts\":1},\"runtime\":{\"reStartDokcer\":true,\"reStartKubelet\":true,\"retryCounts\":1},\"nodePod\":{\"evict\":true,\"retryCounts\":1}},\"conditionType\":\"Ready\"},{\"actions\":{\"runtime\":{\"reStartDokcer\":true,\"reStartKubelet\":true,\"retryCounts\":1}},\"conditionType\":\"KubeletProblem\"},{\"actions\":{\"runtime\":{\"reStartDokcer\":true,\"reStartKubelet\":false,\"retryCounts\":1}},\"conditionType\":\"DockerdProblem\"}]}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="OOMGuard",
-                    param="{\"kind\":\"OOMGuard\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"oom\"},\"spec\":{}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="DNSAutoscaler",
-                    param="{\"kind\":\"DNSAutoscaler\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"da\"},\"spec\":{}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="COS",
-                    param="{\"kind\":\"COS\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"cos\"},\"spec\":{\"version\":\"1.0.0\"}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="CFS",
-                    param="{\"kind\":\"CFS\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"cfs\"},\"spec\":{\"version\":\"1.0.0\"}}",
-                ),
-                tencentcloud.kubernetes.ClusterExtensionAddonArgs(
-                    name="CBS",
-                    param="{\"kind\":\"CBS\",\"apiVersion\":\"platform.tke/v1\",\"metadata\":{\"generateName\":\"cbs\"},\"spec\":{}}",
-                ),
-            ])
-        ```
-
-        Use node pool global config
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone = config.get("availabilityZone")
-        if availability_zone is None:
-            availability_zone = "ap-guangzhou-3"
-        vpc = config.get("vpc")
-        if vpc is None:
-            vpc = "vpc-dk8zmwuf"
-        subnet = config.get("subnet")
-        if subnet is None:
-            subnet = "subnet-pqfek0t8"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA1.LARGE8"
-        test_node_pool_global_config = tencentcloud.kubernetes.Cluster("testNodePoolGlobalConfig",
-            vpc_id=vpc,
-            cluster_cidr="10.1.0.0/16",
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=32,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                count=1,
-                availability_zone=availability_zone,
-                instance_type=default_instance_type,
-                system_disk_type="CLOUD_SSD",
-                system_disk_size=60,
-                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                internet_max_bandwidth_out=100,
-                public_ip_assigned=True,
-                subnet_id=subnet,
-                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                    disk_type="CLOUD_PREMIUM",
-                    disk_size=50,
-                )],
-                enhanced_security_service=False,
-                enhanced_monitor_service=False,
-                user_data="dGVzdA==",
-                password="ZZXXccvv1212",
-            )],
-            node_pool_global_configs=[tencentcloud.kubernetes.ClusterNodePoolGlobalConfigArgs(
-                is_scale_in_enabled=True,
-                expander="random",
-                ignore_daemon_sets_utilization=True,
-                max_concurrent_scale_in=5,
-                scale_in_delay=15,
-                scale_in_unneeded_time=15,
-                scale_in_utilization_threshold=30,
-                skip_nodes_with_local_storage=False,
-                skip_nodes_with_system_pods=True,
-            )],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            })
-        ```
-
-        Using VPC-CNI network type
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone = config.get("availabilityZone")
-        if availability_zone is None:
-            availability_zone = "ap-guangzhou-1"
-        vpc = config.get("vpc")
-        if vpc is None:
-            vpc = "vpc-r1m1fyx5"
-        default_instance_type = config.get("defaultInstanceType")
-        if default_instance_type is None:
-            default_instance_type = "SA2.SMALL2"
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            vpc_id=vpc,
-            cluster_max_pod_num=32,
-            cluster_name="test",
-            cluster_desc="test cluster desc",
-            cluster_max_service_num=256,
-            cluster_internet=True,
-            cluster_deploy_type="MANAGED_CLUSTER",
-            network_type="VPC-CNI",
-            eni_subnet_ids=["subnet-bk1etlyu"],
-            service_cidr="10.1.0.0/24",
-            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-                count=1,
-                availability_zone=availability_zone,
-                instance_type=default_instance_type,
-                system_disk_type="CLOUD_PREMIUM",
-                system_disk_size=60,
-                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-                internet_max_bandwidth_out=100,
-                public_ip_assigned=True,
-                subnet_id="subnet-t5dv27rs",
-                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-                    disk_type="CLOUD_PREMIUM",
-                    disk_size=50,
-                )],
-                enhanced_security_service=False,
-                enhanced_monitor_service=False,
-                user_data="dGVzdA==",
-                password="ZZXXccvv1212",
-            )],
-            labels={
-                "test1": "test1",
-                "test2": "test2",
-            })
-        ```
-
-        Using ops options
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-            cluster_audit=tencentcloud.kubernetes.ClusterClusterAuditArgs(
-                enabled=True,
-                log_set_id="",
-                log_set_topic="",
-            ),
-            event_persistence=tencentcloud.kubernetes.ClusterEventPersistenceArgs(
-                enabled=True,
-                log_set_id="",
-                log_set_topic="",
-            ),
-            log_agent=tencentcloud.kubernetes.ClusterLogAgentArgs(
-                enabled=True,
-                kubelet_root_dir="",
-            ))
-        ```
-
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -2783,8 +2105,10 @@ class Cluster(pulumi.CustomResource):
                  cluster_desc: Optional[pulumi.Input[str]] = None,
                  cluster_extra_args: Optional[pulumi.Input[pulumi.InputType['ClusterClusterExtraArgsArgs']]] = None,
                  cluster_internet: Optional[pulumi.Input[bool]] = None,
+                 cluster_internet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_internet_security_group: Optional[pulumi.Input[str]] = None,
                  cluster_intranet: Optional[pulumi.Input[bool]] = None,
+                 cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_ipvs: Optional[pulumi.Input[bool]] = None,
                  cluster_level: Optional[pulumi.Input[str]] = None,
@@ -2852,8 +2176,10 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["cluster_desc"] = cluster_desc
             __props__.__dict__["cluster_extra_args"] = cluster_extra_args
             __props__.__dict__["cluster_internet"] = cluster_internet
+            __props__.__dict__["cluster_internet_domain"] = cluster_internet_domain
             __props__.__dict__["cluster_internet_security_group"] = cluster_internet_security_group
             __props__.__dict__["cluster_intranet"] = cluster_intranet
+            __props__.__dict__["cluster_intranet_domain"] = cluster_intranet_domain
             __props__.__dict__["cluster_intranet_subnet_id"] = cluster_intranet_subnet_id
             __props__.__dict__["cluster_ipvs"] = cluster_ipvs
             __props__.__dict__["cluster_level"] = cluster_level
@@ -2932,8 +2258,10 @@ class Cluster(pulumi.CustomResource):
             cluster_external_endpoint: Optional[pulumi.Input[str]] = None,
             cluster_extra_args: Optional[pulumi.Input[pulumi.InputType['ClusterClusterExtraArgsArgs']]] = None,
             cluster_internet: Optional[pulumi.Input[bool]] = None,
+            cluster_internet_domain: Optional[pulumi.Input[str]] = None,
             cluster_internet_security_group: Optional[pulumi.Input[str]] = None,
             cluster_intranet: Optional[pulumi.Input[bool]] = None,
+            cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
             cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
             cluster_ipvs: Optional[pulumi.Input[bool]] = None,
             cluster_level: Optional[pulumi.Input[str]] = None,
@@ -3002,8 +2330,10 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_external_endpoint: External network address to access.
         :param pulumi.Input[pulumi.InputType['ClusterClusterExtraArgsArgs']] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
         :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
         :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
         :param pulumi.Input[str] cluster_level: Specify cluster level, valid for managed cluster, use data source `_kubernetes.get_cluster_levels` to query available levels. Available value examples `L5`, `L20`, `L50`, `L100`, etc.
@@ -3013,8 +2343,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'.
-        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'. Default is 'docker'.
+        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[str] domain: Domain name for access.
@@ -3070,8 +2400,10 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["cluster_external_endpoint"] = cluster_external_endpoint
         __props__.__dict__["cluster_extra_args"] = cluster_extra_args
         __props__.__dict__["cluster_internet"] = cluster_internet
+        __props__.__dict__["cluster_internet_domain"] = cluster_internet_domain
         __props__.__dict__["cluster_internet_security_group"] = cluster_internet_security_group
         __props__.__dict__["cluster_intranet"] = cluster_intranet
+        __props__.__dict__["cluster_intranet_domain"] = cluster_intranet_domain
         __props__.__dict__["cluster_intranet_subnet_id"] = cluster_intranet_subnet_id
         __props__.__dict__["cluster_ipvs"] = cluster_ipvs
         __props__.__dict__["cluster_level"] = cluster_level
@@ -3234,6 +2566,14 @@ class Cluster(pulumi.CustomResource):
         return pulumi.get(self, "cluster_internet")
 
     @property
+    @pulumi.getter(name="clusterInternetDomain")
+    def cluster_internet_domain(self) -> pulumi.Output[Optional[str]]:
+        """
+        Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
+        """
+        return pulumi.get(self, "cluster_internet_domain")
+
+    @property
     @pulumi.getter(name="clusterInternetSecurityGroup")
     def cluster_internet_security_group(self) -> pulumi.Output[Optional[str]]:
         """
@@ -3248,6 +2588,14 @@ class Cluster(pulumi.CustomResource):
         Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
         """
         return pulumi.get(self, "cluster_intranet")
+
+    @property
+    @pulumi.getter(name="clusterIntranetDomain")
+    def cluster_intranet_domain(self) -> pulumi.Output[Optional[str]]:
+        """
+        Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
+        """
+        return pulumi.get(self, "cluster_intranet_domain")
 
     @property
     @pulumi.getter(name="clusterIntranetSubnetId")
@@ -3325,7 +2673,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="clusterVersion")
     def cluster_version(self) -> pulumi.Output[Optional[str]]:
         """
-        Version of the cluster, Default is '1.10.5'.
+        Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
         """
         return pulumi.get(self, "cluster_version")
 
@@ -3333,7 +2681,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="containerRuntime")
     def container_runtime(self) -> pulumi.Output[Optional[str]]:
         """
-        Runtime type of the cluster, the available values include: 'docker' and 'containerd'. Default is 'docker'.
+        Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         """
         return pulumi.get(self, "container_runtime")
 

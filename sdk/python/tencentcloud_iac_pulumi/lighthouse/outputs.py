@@ -10,12 +10,103 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'FirewallRuleFirewallRule',
     'InstanceContainer',
     'InstanceContainerEnv',
     'InstanceContainerPublishPort',
     'InstanceContainerVolume',
     'InstanceLoginConfiguration',
+    'GetBundleBundleSetResult',
+    'GetBundleBundleSetPriceResult',
+    'GetBundleBundleSetPriceInstancePriceResult',
+    'GetBundleFilterResult',
+    'GetFirewallRulesTemplateFirewallRuleSetResult',
 ]
+
+@pulumi.output_type
+class FirewallRuleFirewallRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cidrBlock":
+            suggest = "cidr_block"
+        elif key == "firewallRuleDescription":
+            suggest = "firewall_rule_description"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FirewallRuleFirewallRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FirewallRuleFirewallRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FirewallRuleFirewallRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 protocol: str,
+                 action: Optional[str] = None,
+                 cidr_block: Optional[str] = None,
+                 firewall_rule_description: Optional[str] = None,
+                 port: Optional[str] = None):
+        """
+        :param str protocol: Protocol. Valid values are TCP, UDP, ICMP, ALL.
+        :param str action: Valid values are ACCEPT, DROP. Default value is ACCEPT.
+        :param str cidr_block: IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+        :param str firewall_rule_description: Firewall rule description.
+        :param str port: Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+        """
+        pulumi.set(__self__, "protocol", protocol)
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if cidr_block is not None:
+            pulumi.set(__self__, "cidr_block", cidr_block)
+        if firewall_rule_description is not None:
+            pulumi.set(__self__, "firewall_rule_description", firewall_rule_description)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol. Valid values are TCP, UDP, ICMP, ALL.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[str]:
+        """
+        Valid values are ACCEPT, DROP. Default value is ACCEPT.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> Optional[str]:
+        """
+        IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter(name="firewallRuleDescription")
+    def firewall_rule_description(self) -> Optional[str]:
+        """
+        Firewall rule description.
+        """
+        return pulumi.get(self, "firewall_rule_description")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[str]:
+        """
+        Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+        """
+        return pulumi.get(self, "port")
+
 
 @pulumi.output_type
 class InstanceContainer(dict):
@@ -311,5 +402,348 @@ class InstanceLoginConfiguration(dict):
         Login password.
         """
         return pulumi.get(self, "password")
+
+
+@pulumi.output_type
+class GetBundleBundleSetResult(dict):
+    def __init__(__self__, *,
+                 bundle_display_label: str,
+                 bundle_id: str,
+                 bundle_sales_state: str,
+                 bundle_type: str,
+                 cpu: int,
+                 internet_charge_type: str,
+                 internet_max_bandwidth_out: int,
+                 memory: int,
+                 monthly_traffic: int,
+                 prices: Sequence['outputs.GetBundleBundleSetPriceResult'],
+                 support_linux_unix_platform: bool,
+                 support_windows_platform: bool,
+                 system_disk_size: int,
+                 system_disk_type: str):
+        """
+        :param str bundle_display_label: Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+        :param str bundle_id: Package ID.
+        :param str bundle_sales_state: Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+        :param str bundle_type: Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+        :param int cpu: CPU.
+        :param str internet_charge_type: Network billing mode.
+        :param int internet_max_bandwidth_out: Peak bandwidth in Mbps.
+        :param int memory: Memory size in GB.
+        :param int monthly_traffic: Monthly network traffic in Gb.
+        :param Sequence['GetBundleBundleSetPriceArgs'] prices: Current package unit price information.
+        :param bool support_linux_unix_platform: Whether Linux/Unix is supported.
+        :param bool support_windows_platform: Whether Windows is supported.
+        :param int system_disk_size: System disk size.
+        :param str system_disk_type: System disk type.
+        """
+        pulumi.set(__self__, "bundle_display_label", bundle_display_label)
+        pulumi.set(__self__, "bundle_id", bundle_id)
+        pulumi.set(__self__, "bundle_sales_state", bundle_sales_state)
+        pulumi.set(__self__, "bundle_type", bundle_type)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "internet_charge_type", internet_charge_type)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "monthly_traffic", monthly_traffic)
+        pulumi.set(__self__, "prices", prices)
+        pulumi.set(__self__, "support_linux_unix_platform", support_linux_unix_platform)
+        pulumi.set(__self__, "support_windows_platform", support_windows_platform)
+        pulumi.set(__self__, "system_disk_size", system_disk_size)
+        pulumi.set(__self__, "system_disk_type", system_disk_type)
+
+    @property
+    @pulumi.getter(name="bundleDisplayLabel")
+    def bundle_display_label(self) -> str:
+        """
+        Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+        """
+        return pulumi.get(self, "bundle_display_label")
+
+    @property
+    @pulumi.getter(name="bundleId")
+    def bundle_id(self) -> str:
+        """
+        Package ID.
+        """
+        return pulumi.get(self, "bundle_id")
+
+    @property
+    @pulumi.getter(name="bundleSalesState")
+    def bundle_sales_state(self) -> str:
+        """
+        Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+        """
+        return pulumi.get(self, "bundle_sales_state")
+
+    @property
+    @pulumi.getter(name="bundleType")
+    def bundle_type(self) -> str:
+        """
+        Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+        """
+        return pulumi.get(self, "bundle_type")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        CPU.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="internetChargeType")
+    def internet_charge_type(self) -> str:
+        """
+        Network billing mode.
+        """
+        return pulumi.get(self, "internet_charge_type")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        Peak bandwidth in Mbps.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Memory size in GB.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="monthlyTraffic")
+    def monthly_traffic(self) -> int:
+        """
+        Monthly network traffic in Gb.
+        """
+        return pulumi.get(self, "monthly_traffic")
+
+    @property
+    @pulumi.getter
+    def prices(self) -> Sequence['outputs.GetBundleBundleSetPriceResult']:
+        """
+        Current package unit price information.
+        """
+        return pulumi.get(self, "prices")
+
+    @property
+    @pulumi.getter(name="supportLinuxUnixPlatform")
+    def support_linux_unix_platform(self) -> bool:
+        """
+        Whether Linux/Unix is supported.
+        """
+        return pulumi.get(self, "support_linux_unix_platform")
+
+    @property
+    @pulumi.getter(name="supportWindowsPlatform")
+    def support_windows_platform(self) -> bool:
+        """
+        Whether Windows is supported.
+        """
+        return pulumi.get(self, "support_windows_platform")
+
+    @property
+    @pulumi.getter(name="systemDiskSize")
+    def system_disk_size(self) -> int:
+        """
+        System disk size.
+        """
+        return pulumi.get(self, "system_disk_size")
+
+    @property
+    @pulumi.getter(name="systemDiskType")
+    def system_disk_type(self) -> str:
+        """
+        System disk type.
+        """
+        return pulumi.get(self, "system_disk_type")
+
+
+@pulumi.output_type
+class GetBundleBundleSetPriceResult(dict):
+    def __init__(__self__, *,
+                 instance_prices: Sequence['outputs.GetBundleBundleSetPriceInstancePriceResult']):
+        """
+        :param Sequence['GetBundleBundleSetPriceInstancePriceArgs'] instance_prices: Instance price.
+        """
+        pulumi.set(__self__, "instance_prices", instance_prices)
+
+    @property
+    @pulumi.getter(name="instancePrices")
+    def instance_prices(self) -> Sequence['outputs.GetBundleBundleSetPriceInstancePriceResult']:
+        """
+        Instance price.
+        """
+        return pulumi.get(self, "instance_prices")
+
+
+@pulumi.output_type
+class GetBundleBundleSetPriceInstancePriceResult(dict):
+    def __init__(__self__, *,
+                 currency: str,
+                 discount: float,
+                 discount_price: float,
+                 original_bundle_price: float,
+                 original_price: float):
+        """
+        :param str currency: Currency unit. Valid values: CNY and USD.
+        :param float discount: Discount.
+        :param float discount_price: Discounted price.
+        :param float original_bundle_price: Original package unit price.
+        :param float original_price: Original price.
+        """
+        pulumi.set(__self__, "currency", currency)
+        pulumi.set(__self__, "discount", discount)
+        pulumi.set(__self__, "discount_price", discount_price)
+        pulumi.set(__self__, "original_bundle_price", original_bundle_price)
+        pulumi.set(__self__, "original_price", original_price)
+
+    @property
+    @pulumi.getter
+    def currency(self) -> str:
+        """
+        Currency unit. Valid values: CNY and USD.
+        """
+        return pulumi.get(self, "currency")
+
+    @property
+    @pulumi.getter
+    def discount(self) -> float:
+        """
+        Discount.
+        """
+        return pulumi.get(self, "discount")
+
+    @property
+    @pulumi.getter(name="discountPrice")
+    def discount_price(self) -> float:
+        """
+        Discounted price.
+        """
+        return pulumi.get(self, "discount_price")
+
+    @property
+    @pulumi.getter(name="originalBundlePrice")
+    def original_bundle_price(self) -> float:
+        """
+        Original package unit price.
+        """
+        return pulumi.get(self, "original_bundle_price")
+
+    @property
+    @pulumi.getter(name="originalPrice")
+    def original_price(self) -> float:
+        """
+        Original price.
+        """
+        return pulumi.get(self, "original_price")
+
+
+@pulumi.output_type
+class GetBundleFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetFirewallRulesTemplateFirewallRuleSetResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 app_type: str,
+                 cidr_block: str,
+                 firewall_rule_description: str,
+                 port: str,
+                 protocol: str):
+        """
+        :param str action: Valid values are (ACCEPT, DROP). Default value is ACCEPT.
+        :param str app_type: Application type. Valid values are custom, HTTP (80), HTTPS (443), Linux login (22), Windows login (3389), MySQL (3306), SQL Server (1433), all TCP ports, all UDP ports, Ping-ICMP, ALL.
+        :param str cidr_block: IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+        :param str firewall_rule_description: Firewall rule description.
+        :param str port: Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+        :param str protocol: Protocol. Valid values are TCP, UDP, ICMP, ALL.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "app_type", app_type)
+        pulumi.set(__self__, "cidr_block", cidr_block)
+        pulumi.set(__self__, "firewall_rule_description", firewall_rule_description)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Valid values are (ACCEPT, DROP). Default value is ACCEPT.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="appType")
+    def app_type(self) -> str:
+        """
+        Application type. Valid values are custom, HTTP (80), HTTPS (443), Linux login (22), Windows login (3389), MySQL (3306), SQL Server (1433), all TCP ports, all UDP ports, Ping-ICMP, ALL.
+        """
+        return pulumi.get(self, "app_type")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> str:
+        """
+        IP range or IP (mutually exclusive). Default value is 0.0.0.0/0, which indicates all sources.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter(name="firewallRuleDescription")
+    def firewall_rule_description(self) -> str:
+        """
+        Firewall rule description.
+        """
+        return pulumi.get(self, "firewall_rule_description")
+
+    @property
+    @pulumi.getter
+    def port(self) -> str:
+        """
+        Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol. Valid values are TCP, UDP, ICMP, ALL.
+        """
+        return pulumi.get(self, "protocol")
 
 

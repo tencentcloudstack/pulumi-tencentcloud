@@ -6,4 +6,6 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .domain_instance import *
+from .get_records import *
 from .record import *
+from . import outputs

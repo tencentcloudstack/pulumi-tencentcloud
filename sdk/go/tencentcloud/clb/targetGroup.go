@@ -18,59 +18,22 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-//				Port:            pulumi.Int(33),
-//				TargetGroupName: pulumi.String("test"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// # Create target group
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-//				Port: pulumi.Int(18082),
-//				TargetGroupInstances: clb.TargetGroupTargetGroupInstanceArray{
-//					&clb.TargetGroupTargetGroupInstanceArgs{
-//						BindIp: pulumi.String("10.0.0.4"),
-//						Port:   pulumi.Int(18080),
-//					},
-//				},
-//				TargetGroupName: pulumi.String("hello1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+// 			Port:            pulumi.Int(33),
+// 			TargetGroupName: pulumi.String("test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -78,16 +41,16 @@ import (
 // CLB target group can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
-//
+//  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
 // ```
 type TargetGroup struct {
 	pulumi.CustomResourceState
 
 	// The default port of target group, add server after can use it.
 	Port pulumi.IntPtrOutput `pulumi:"port"`
-	// The backend server of target group bind.
+	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+	//
+	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
 	TargetGroupInstances TargetGroupTargetGroupInstanceArrayOutput `pulumi:"targetGroupInstances"`
 	// Target group name.
 	TargetGroupName pulumi.StringPtrOutput `pulumi:"targetGroupName"`
@@ -127,7 +90,9 @@ func GetTargetGroup(ctx *pulumi.Context,
 type targetGroupState struct {
 	// The default port of target group, add server after can use it.
 	Port *int `pulumi:"port"`
-	// The backend server of target group bind.
+	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+	//
+	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
 	TargetGroupInstances []TargetGroupTargetGroupInstance `pulumi:"targetGroupInstances"`
 	// Target group name.
 	TargetGroupName *string `pulumi:"targetGroupName"`
@@ -138,7 +103,9 @@ type targetGroupState struct {
 type TargetGroupState struct {
 	// The default port of target group, add server after can use it.
 	Port pulumi.IntPtrInput
-	// The backend server of target group bind.
+	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+	//
+	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
 	TargetGroupInstances TargetGroupTargetGroupInstanceArrayInput
 	// Target group name.
 	TargetGroupName pulumi.StringPtrInput
@@ -153,7 +120,9 @@ func (TargetGroupState) ElementType() reflect.Type {
 type targetGroupArgs struct {
 	// The default port of target group, add server after can use it.
 	Port *int `pulumi:"port"`
-	// The backend server of target group bind.
+	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+	//
+	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
 	TargetGroupInstances []TargetGroupTargetGroupInstance `pulumi:"targetGroupInstances"`
 	// Target group name.
 	TargetGroupName *string `pulumi:"targetGroupName"`
@@ -165,7 +134,9 @@ type targetGroupArgs struct {
 type TargetGroupArgs struct {
 	// The default port of target group, add server after can use it.
 	Port pulumi.IntPtrInput
-	// The backend server of target group bind.
+	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+	//
+	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
 	TargetGroupInstances TargetGroupTargetGroupInstanceArrayInput
 	// Target group name.
 	TargetGroupName pulumi.StringPtrInput
@@ -199,7 +170,7 @@ func (i *TargetGroup) ToTargetGroupOutputWithContext(ctx context.Context) Target
 // TargetGroupArrayInput is an input type that accepts TargetGroupArray and TargetGroupArrayOutput values.
 // You can construct a concrete instance of `TargetGroupArrayInput` via:
 //
-//	TargetGroupArray{ TargetGroupArgs{...} }
+//          TargetGroupArray{ TargetGroupArgs{...} }
 type TargetGroupArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +195,7 @@ func (i TargetGroupArray) ToTargetGroupArrayOutputWithContext(ctx context.Contex
 // TargetGroupMapInput is an input type that accepts TargetGroupMap and TargetGroupMapOutput values.
 // You can construct a concrete instance of `TargetGroupMapInput` via:
 //
-//	TargetGroupMap{ "key": TargetGroupArgs{...} }
+//          TargetGroupMap{ "key": TargetGroupArgs{...} }
 type TargetGroupMapInput interface {
 	pulumi.Input
 
@@ -265,7 +236,9 @@ func (o TargetGroupOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *TargetGroup) pulumi.IntPtrOutput { return v.Port }).(pulumi.IntPtrOutput)
 }
 
-// The backend server of target group bind.
+// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+//
+// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
 func (o TargetGroupOutput) TargetGroupInstances() TargetGroupTargetGroupInstanceArrayOutput {
 	return o.ApplyT(func(v *TargetGroup) TargetGroupTargetGroupInstanceArrayOutput { return v.TargetGroupInstances }).(TargetGroupTargetGroupInstanceArrayOutput)
 }

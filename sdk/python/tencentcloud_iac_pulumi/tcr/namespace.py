@@ -7,6 +7,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['NamespaceArgs', 'Namespace']
 
@@ -14,19 +16,35 @@ __all__ = ['NamespaceArgs', 'Namespace']
 class NamespaceArgs:
     def __init__(__self__, *,
                  instance_id: pulumi.Input[str],
+                 cve_whitelist_items: Optional[pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]]] = None,
+                 is_auto_scan: Optional[pulumi.Input[bool]] = None,
+                 is_prevent_vul: Optional[pulumi.Input[bool]] = None,
                  is_public: Optional[pulumi.Input[bool]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 severity: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Namespace resource.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
+        :param pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]] cve_whitelist_items: Vulnerability Whitelist.
+        :param pulumi.Input[bool] is_auto_scan: Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        :param pulumi.Input[bool] is_prevent_vul: Blocking switch, `True` is open, `False` is closed. Default is `false`.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
         :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] severity: Block vulnerability level, currently only supports `low`, `medium`, `high`.
         """
         pulumi.set(__self__, "instance_id", instance_id)
+        if cve_whitelist_items is not None:
+            pulumi.set(__self__, "cve_whitelist_items", cve_whitelist_items)
+        if is_auto_scan is not None:
+            pulumi.set(__self__, "is_auto_scan", is_auto_scan)
+        if is_prevent_vul is not None:
+            pulumi.set(__self__, "is_prevent_vul", is_prevent_vul)
         if is_public is not None:
             pulumi.set(__self__, "is_public", is_public)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if severity is not None:
+            pulumi.set(__self__, "severity", severity)
 
     @property
     @pulumi.getter(name="instanceId")
@@ -41,6 +59,42 @@ class NamespaceArgs:
         pulumi.set(self, "instance_id", value)
 
     @property
+    @pulumi.getter(name="cveWhitelistItems")
+    def cve_whitelist_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]]]:
+        """
+        Vulnerability Whitelist.
+        """
+        return pulumi.get(self, "cve_whitelist_items")
+
+    @cve_whitelist_items.setter
+    def cve_whitelist_items(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]]]):
+        pulumi.set(self, "cve_whitelist_items", value)
+
+    @property
+    @pulumi.getter(name="isAutoScan")
+    def is_auto_scan(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        """
+        return pulumi.get(self, "is_auto_scan")
+
+    @is_auto_scan.setter
+    def is_auto_scan(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_auto_scan", value)
+
+    @property
+    @pulumi.getter(name="isPreventVul")
+    def is_prevent_vul(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Blocking switch, `True` is open, `False` is closed. Default is `false`.
+        """
+        return pulumi.get(self, "is_prevent_vul")
+
+    @is_prevent_vul.setter
+    def is_prevent_vul(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_prevent_vul", value)
+
+    @property
     @pulumi.getter(name="isPublic")
     def is_public(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -64,25 +118,65 @@ class NamespaceArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
+    @property
+    @pulumi.getter
+    def severity(self) -> Optional[pulumi.Input[str]]:
+        """
+        Block vulnerability level, currently only supports `low`, `medium`, `high`.
+        """
+        return pulumi.get(self, "severity")
+
+    @severity.setter
+    def severity(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "severity", value)
+
 
 @pulumi.input_type
 class _NamespaceState:
     def __init__(__self__, *,
+                 cve_whitelist_items: Optional[pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
+                 is_auto_scan: Optional[pulumi.Input[bool]] = None,
+                 is_prevent_vul: Optional[pulumi.Input[bool]] = None,
                  is_public: Optional[pulumi.Input[bool]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 severity: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Namespace resources.
+        :param pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]] cve_whitelist_items: Vulnerability Whitelist.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
+        :param pulumi.Input[bool] is_auto_scan: Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        :param pulumi.Input[bool] is_prevent_vul: Blocking switch, `True` is open, `False` is closed. Default is `false`.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
         :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] severity: Block vulnerability level, currently only supports `low`, `medium`, `high`.
         """
+        if cve_whitelist_items is not None:
+            pulumi.set(__self__, "cve_whitelist_items", cve_whitelist_items)
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
+        if is_auto_scan is not None:
+            pulumi.set(__self__, "is_auto_scan", is_auto_scan)
+        if is_prevent_vul is not None:
+            pulumi.set(__self__, "is_prevent_vul", is_prevent_vul)
         if is_public is not None:
             pulumi.set(__self__, "is_public", is_public)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if severity is not None:
+            pulumi.set(__self__, "severity", severity)
+
+    @property
+    @pulumi.getter(name="cveWhitelistItems")
+    def cve_whitelist_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]]]:
+        """
+        Vulnerability Whitelist.
+        """
+        return pulumi.get(self, "cve_whitelist_items")
+
+    @cve_whitelist_items.setter
+    def cve_whitelist_items(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['NamespaceCveWhitelistItemArgs']]]]):
+        pulumi.set(self, "cve_whitelist_items", value)
 
     @property
     @pulumi.getter(name="instanceId")
@@ -97,6 +191,30 @@ class _NamespaceState:
         pulumi.set(self, "instance_id", value)
 
     @property
+    @pulumi.getter(name="isAutoScan")
+    def is_auto_scan(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        """
+        return pulumi.get(self, "is_auto_scan")
+
+    @is_auto_scan.setter
+    def is_auto_scan(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_auto_scan", value)
+
+    @property
+    @pulumi.getter(name="isPreventVul")
+    def is_prevent_vul(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Blocking switch, `True` is open, `False` is closed. Default is `false`.
+        """
+        return pulumi.get(self, "is_prevent_vul")
+
+    @is_prevent_vul.setter
+    def is_prevent_vul(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_prevent_vul", value)
+
+    @property
     @pulumi.getter(name="isPublic")
     def is_public(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -120,15 +238,31 @@ class _NamespaceState:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
+    @property
+    @pulumi.getter
+    def severity(self) -> Optional[pulumi.Input[str]]:
+        """
+        Block vulnerability level, currently only supports `low`, `medium`, `high`.
+        """
+        return pulumi.get(self, "severity")
+
+    @severity.setter
+    def severity(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "severity", value)
+
 
 class Namespace(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cve_whitelist_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NamespaceCveWhitelistItemArgs']]]]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
+                 is_auto_scan: Optional[pulumi.Input[bool]] = None,
+                 is_prevent_vul: Optional[pulumi.Input[bool]] = None,
                  is_public: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 severity: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Use this resource to create tcr namespace.
@@ -140,8 +274,14 @@ class Namespace(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         foo = tencentcloud.tcr.Namespace("foo",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )],
             instance_id="",
-            is_public=True)
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            is_public=True,
+            severity="medium")
         ```
 
         ## Import
@@ -154,9 +294,13 @@ class Namespace(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NamespaceCveWhitelistItemArgs']]]] cve_whitelist_items: Vulnerability Whitelist.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
+        :param pulumi.Input[bool] is_auto_scan: Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        :param pulumi.Input[bool] is_prevent_vul: Blocking switch, `True` is open, `False` is closed. Default is `false`.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
         :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] severity: Block vulnerability level, currently only supports `low`, `medium`, `high`.
         """
         ...
     @overload
@@ -174,8 +318,14 @@ class Namespace(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         foo = tencentcloud.tcr.Namespace("foo",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )],
             instance_id="",
-            is_public=True)
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            is_public=True,
+            severity="medium")
         ```
 
         ## Import
@@ -201,9 +351,13 @@ class Namespace(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cve_whitelist_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NamespaceCveWhitelistItemArgs']]]]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
+                 is_auto_scan: Optional[pulumi.Input[bool]] = None,
+                 is_prevent_vul: Optional[pulumi.Input[bool]] = None,
                  is_public: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 severity: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -218,11 +372,15 @@ class Namespace(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = NamespaceArgs.__new__(NamespaceArgs)
 
+            __props__.__dict__["cve_whitelist_items"] = cve_whitelist_items
             if instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_id'")
             __props__.__dict__["instance_id"] = instance_id
+            __props__.__dict__["is_auto_scan"] = is_auto_scan
+            __props__.__dict__["is_prevent_vul"] = is_prevent_vul
             __props__.__dict__["is_public"] = is_public
             __props__.__dict__["name"] = name
+            __props__.__dict__["severity"] = severity
         super(Namespace, __self__).__init__(
             'tencentcloud:Tcr/namespace:Namespace',
             resource_name,
@@ -233,9 +391,13 @@ class Namespace(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            cve_whitelist_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NamespaceCveWhitelistItemArgs']]]]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
+            is_auto_scan: Optional[pulumi.Input[bool]] = None,
+            is_prevent_vul: Optional[pulumi.Input[bool]] = None,
             is_public: Optional[pulumi.Input[bool]] = None,
-            name: Optional[pulumi.Input[str]] = None) -> 'Namespace':
+            name: Optional[pulumi.Input[str]] = None,
+            severity: Optional[pulumi.Input[str]] = None) -> 'Namespace':
         """
         Get an existing Namespace resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -243,18 +405,34 @@ class Namespace(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NamespaceCveWhitelistItemArgs']]]] cve_whitelist_items: Vulnerability Whitelist.
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
+        :param pulumi.Input[bool] is_auto_scan: Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        :param pulumi.Input[bool] is_prevent_vul: Blocking switch, `True` is open, `False` is closed. Default is `false`.
         :param pulumi.Input[bool] is_public: Indicate that the namespace is public or not. Default is `false`.
         :param pulumi.Input[str] name: Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
+        :param pulumi.Input[str] severity: Block vulnerability level, currently only supports `low`, `medium`, `high`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _NamespaceState.__new__(_NamespaceState)
 
+        __props__.__dict__["cve_whitelist_items"] = cve_whitelist_items
         __props__.__dict__["instance_id"] = instance_id
+        __props__.__dict__["is_auto_scan"] = is_auto_scan
+        __props__.__dict__["is_prevent_vul"] = is_prevent_vul
         __props__.__dict__["is_public"] = is_public
         __props__.__dict__["name"] = name
+        __props__.__dict__["severity"] = severity
         return Namespace(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="cveWhitelistItems")
+    def cve_whitelist_items(self) -> pulumi.Output[Optional[Sequence['outputs.NamespaceCveWhitelistItem']]]:
+        """
+        Vulnerability Whitelist.
+        """
+        return pulumi.get(self, "cve_whitelist_items")
 
     @property
     @pulumi.getter(name="instanceId")
@@ -263,6 +441,22 @@ class Namespace(pulumi.CustomResource):
         ID of the TCR instance.
         """
         return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="isAutoScan")
+    def is_auto_scan(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        """
+        return pulumi.get(self, "is_auto_scan")
+
+    @property
+    @pulumi.getter(name="isPreventVul")
+    def is_prevent_vul(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Blocking switch, `True` is open, `False` is closed. Default is `false`.
+        """
+        return pulumi.get(self, "is_prevent_vul")
 
     @property
     @pulumi.getter(name="isPublic")
@@ -279,4 +473,12 @@ class Namespace(pulumi.CustomResource):
         Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def severity(self) -> pulumi.Output[Optional[str]]:
+        """
+        Block vulnerability level, currently only supports `low`, `medium`, `high`.
+        """
+        return pulumi.get(self, "severity")
 

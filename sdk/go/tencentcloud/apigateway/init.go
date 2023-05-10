@@ -23,6 +23,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:ApiGateway/api:Api":
 		r = &Api{}
+	case "tencentcloud:ApiGateway/apiApp:ApiApp":
+		r = &ApiApp{}
+	case "tencentcloud:ApiGateway/apiDoc:ApiDoc":
+		r = &ApiDoc{}
 	case "tencentcloud:ApiGateway/apiKey:ApiKey":
 		r = &ApiKey{}
 	case "tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment":
@@ -31,6 +35,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CustomDomain{}
 	case "tencentcloud:ApiGateway/ipStrategy:IpStrategy":
 		r = &IpStrategy{}
+	case "tencentcloud:ApiGateway/plugin:Plugin":
+		r = &Plugin{}
+	case "tencentcloud:ApiGateway/pluginAttachment:PluginAttachment":
+		r = &PluginAttachment{}
 	case "tencentcloud:ApiGateway/service:Service":
 		r = &Service{}
 	case "tencentcloud:ApiGateway/serviceRelease:ServiceRelease":
@@ -61,6 +69,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"ApiGateway/apiApp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"ApiGateway/apiDoc",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"ApiGateway/apiKey",
 		&module{version},
 	)
@@ -77,6 +95,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"ApiGateway/ipStrategy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"ApiGateway/plugin",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"ApiGateway/pluginAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

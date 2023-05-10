@@ -25,6 +25,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     public partial class Cluster : Pulumi.CustomResource
     {
         /// <summary>
+        /// Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        /// </summary>
+        [Output("autoPause")]
+        public Output<string?> AutoPause { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+        /// </summary>
+        [Output("autoPauseDelay")]
+        public Output<int?> AutoPauseDelay { get; private set; } = null!;
+
+        /// <summary>
         /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         /// </summary>
         [Output("autoRenewFlag")]
@@ -67,6 +79,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
+        /// Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+        /// </summary>
+        [Output("dbMode")]
+        public Output<string?> DbMode { get; private set; } = null!;
+
+        /// <summary>
         /// Type of CynosDB, and available values include `MYSQL`.
         /// </summary>
         [Output("dbType")]
@@ -85,10 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceCpuCore")]
-        public Output<int> InstanceCpuCore { get; private set; } = null!;
+        public Output<int?> InstanceCpuCore { get; private set; } = null!;
 
         /// <summary>
         /// ID of instance.
@@ -115,10 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<ImmutableArray<string>> InstanceMaintainWeekdays { get; private set; } = null!;
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Output("instanceMemorySize")]
-        public Output<int> InstanceMemorySize { get; private set; } = null!;
+        public Output<int?> InstanceMemorySize { get; private set; } = null!;
 
         /// <summary>
         /// Name of instance.
@@ -139,7 +157,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<int> InstanceStorageSize { get; private set; } = null!;
 
         /// <summary>
-        /// Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        /// Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        /// </summary>
+        [Output("maxCpu")]
+        public Output<double?> MaxCpu { get; private set; } = null!;
+
+        /// <summary>
+        /// Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        /// </summary>
+        [Output("minCpu")]
+        public Output<double?> MinCpu { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         /// </summary>
         [Output("paramItems")]
         public Output<ImmutableArray<Outputs.ClusterParamItem>> ParamItems { get; private set; } = null!;
@@ -155,6 +185,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Output("port")]
         public Output<int?> Port { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the parameter template.
+        /// </summary>
+        [Output("prarmTemplateId")]
+        public Output<int> PrarmTemplateId { get; private set; } = null!;
 
         /// <summary>
         /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -215,6 +251,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Output("rwGroupSgs")]
         public Output<ImmutableArray<string>> RwGroupSgs { get; private set; } = null!;
+
+        /// <summary>
+        /// Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
+        /// </summary>
+        [Output("serverlessStatus")]
+        public Output<string> ServerlessStatus { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        /// </summary>
+        [Output("serverlessStatusFlag")]
+        public Output<string?> ServerlessStatusFlag { get; private set; } = null!;
 
         /// <summary>
         /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
@@ -294,6 +342,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     public sealed class ClusterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        /// </summary>
+        [Input("autoPause")]
+        public Input<string>? AutoPause { get; set; }
+
+        /// <summary>
+        /// Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+        /// </summary>
+        [Input("autoPauseDelay")]
+        public Input<int>? AutoPauseDelay { get; set; }
+
+        /// <summary>
         /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         /// </summary>
         [Input("autoRenewFlag")]
@@ -318,6 +378,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string> ClusterName { get; set; } = null!;
 
         /// <summary>
+        /// Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+        /// </summary>
+        [Input("dbMode")]
+        public Input<string>? DbMode { get; set; }
+
+        /// <summary>
         /// Type of CynosDB, and available values include `MYSQL`.
         /// </summary>
         [Input("dbType", required: true)]
@@ -336,10 +402,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
-        [Input("instanceCpuCore", required: true)]
-        public Input<int> InstanceCpuCore { get; set; } = null!;
+        [Input("instanceCpuCore")]
+        public Input<int>? InstanceCpuCore { get; set; }
 
         /// <summary>
         /// Duration time for maintenance, unit in second. `3600` by default.
@@ -366,16 +432,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
-        [Input("instanceMemorySize", required: true)]
-        public Input<int> InstanceMemorySize { get; set; } = null!;
+        [Input("instanceMemorySize")]
+        public Input<int>? InstanceMemorySize { get; set; }
+
+        /// <summary>
+        /// Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        /// </summary>
+        [Input("maxCpu")]
+        public Input<double>? MaxCpu { get; set; }
+
+        /// <summary>
+        /// Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        /// </summary>
+        [Input("minCpu")]
+        public Input<double>? MinCpu { get; set; }
 
         [Input("paramItems")]
         private InputList<Inputs.ClusterParamItemArgs>? _paramItems;
 
         /// <summary>
-        /// Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        /// Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         /// </summary>
         public InputList<Inputs.ClusterParamItemArgs> ParamItems
         {
@@ -394,6 +472,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
+
+        /// <summary>
+        /// The ID of the parameter template.
+        /// </summary>
+        [Input("prarmTemplateId")]
+        public Input<int>? PrarmTemplateId { get; set; }
 
         /// <summary>
         /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -432,6 +516,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
 
         /// <summary>
+        /// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        /// </summary>
+        [Input("serverlessStatusFlag")]
+        public Input<string>? ServerlessStatusFlag { get; set; }
+
+        /// <summary>
         /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         /// </summary>
         [Input("storageLimit")]
@@ -468,6 +558,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
 
     public sealed class ClusterState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        /// </summary>
+        [Input("autoPause")]
+        public Input<string>? AutoPause { get; set; }
+
+        /// <summary>
+        /// Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+        /// </summary>
+        [Input("autoPauseDelay")]
+        public Input<int>? AutoPauseDelay { get; set; }
+
         /// <summary>
         /// Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         /// </summary>
@@ -511,6 +613,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
+        /// Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+        /// </summary>
+        [Input("dbMode")]
+        public Input<string>? DbMode { get; set; }
+
+        /// <summary>
         /// Type of CynosDB, and available values include `MYSQL`.
         /// </summary>
         [Input("dbType")]
@@ -529,7 +637,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceCpuCore")]
         public Input<int>? InstanceCpuCore { get; set; }
@@ -565,7 +673,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
 
         /// <summary>
-        /// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        /// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         /// </summary>
         [Input("instanceMemorySize")]
         public Input<int>? InstanceMemorySize { get; set; }
@@ -588,11 +696,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Input("instanceStorageSize")]
         public Input<int>? InstanceStorageSize { get; set; }
 
+        /// <summary>
+        /// Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        /// </summary>
+        [Input("maxCpu")]
+        public Input<double>? MaxCpu { get; set; }
+
+        /// <summary>
+        /// Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        /// </summary>
+        [Input("minCpu")]
+        public Input<double>? MinCpu { get; set; }
+
         [Input("paramItems")]
         private InputList<Inputs.ClusterParamItemGetArgs>? _paramItems;
 
         /// <summary>
-        /// Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        /// Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         /// </summary>
         public InputList<Inputs.ClusterParamItemGetArgs> ParamItems
         {
@@ -611,6 +731,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
+
+        /// <summary>
+        /// The ID of the parameter template.
+        /// </summary>
+        [Input("prarmTemplateId")]
+        public Input<int>? PrarmTemplateId { get; set; }
 
         /// <summary>
         /// The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -707,6 +833,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
             get => _rwGroupSgs ?? (_rwGroupSgs = new InputList<string>());
             set => _rwGroupSgs = value;
         }
+
+        /// <summary>
+        /// Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
+        /// </summary>
+        [Input("serverlessStatus")]
+        public Input<string>? ServerlessStatus { get; set; }
+
+        /// <summary>
+        /// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        /// </summary>
+        [Input("serverlessStatusFlag")]
+        public Input<string>? ServerlessStatusFlag { get; set; }
 
         /// <summary>
         /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.

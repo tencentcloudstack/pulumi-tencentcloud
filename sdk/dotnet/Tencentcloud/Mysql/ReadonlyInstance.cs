@@ -170,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// Private network ID. If `vpc_id` is set, this value is required.
         /// </summary>
         [Output("subnetId")]
-        public Output<string?> SubnetId { get; private set; } = null!;
+        public Output<string> SubnetId { get; private set; } = null!;
 
         /// <summary>
         /// Instance tags.
@@ -194,7 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// ID of VPC, which can be modified once every 24 hours and can't be removed.
         /// </summary>
         [Output("vpcId")]
-        public Output<string?> VpcId { get; private set; } = null!;
+        public Output<string> VpcId { get; private set; } = null!;
 
         /// <summary>
         /// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.

@@ -6,10 +6,15 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .connection import *
+from .connection_reset import *
 from .customer_gateway import *
+from .customer_gateway_configuration_download import *
 from .gateway import *
+from .gateway_ccn_routes import *
 from .gateway_route import *
+from .gateway_ssl_client_cert import *
 from .get_connections import *
+from .get_customer_gateway_vendors import *
 from .get_customer_gateways import *
 from .get_gateway_routes import *
 from .get_gateways import *

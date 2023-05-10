@@ -18,66 +18,63 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			fooAdaptiveDynamicStreamingTemplate, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "fooAdaptiveDynamicStreamingTemplate", &Vod.AdaptiveDynamicStreamingTemplateArgs{
-//				Format:                       pulumi.String("HLS"),
-//				DrmType:                      pulumi.String("SimpleAES"),
-//				DisableHigherVideoBitrate:    pulumi.Bool(false),
-//				DisableHigherVideoResolution: pulumi.Bool(false),
-//				Comment:                      pulumi.String("test"),
-//				StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
-//					&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-//						Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-//							Codec:              pulumi.String("libx265"),
-//							Fps:                pulumi.Int(4),
-//							Bitrate:            pulumi.Int(129),
-//							ResolutionAdaptive: pulumi.Bool(false),
-//							Width:              pulumi.Int(128),
-//							Height:             pulumi.Int(128),
-//							FillType:           pulumi.String("stretch"),
-//						},
-//						Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-//							Codec:        pulumi.String("libmp3lame"),
-//							Bitrate:      pulumi.Int(129),
-//							SampleRate:   pulumi.Int(44100),
-//							AudioChannel: pulumi.String("dual"),
-//						},
-//						RemoveAudio: pulumi.Bool(false),
-//					},
-//					&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-//						Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-//							Codec:   pulumi.String("libx264"),
-//							Fps:     pulumi.Int(4),
-//							Bitrate: pulumi.Int(256),
-//						},
-//						Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-//							Codec:      pulumi.String("libfdk_aac"),
-//							Bitrate:    pulumi.Int(256),
-//							SampleRate: pulumi.Int(44100),
-//						},
-//						RemoveAudio: pulumi.Bool(true),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_ = Vod.GetAdaptiveDynamicStreamingTemplatesOutput(ctx, vod.GetAdaptiveDynamicStreamingTemplatesOutputArgs{
-//				Type:       pulumi.String("Custom"),
-//				Definition: fooAdaptiveDynamicStreamingTemplate.ID(),
-//			}, nil)
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooAdaptiveDynamicStreamingTemplate, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "fooAdaptiveDynamicStreamingTemplate", &Vod.AdaptiveDynamicStreamingTemplateArgs{
+// 			Format:                       pulumi.String("HLS"),
+// 			DrmType:                      pulumi.String("SimpleAES"),
+// 			DisableHigherVideoBitrate:    pulumi.Bool(false),
+// 			DisableHigherVideoResolution: pulumi.Bool(false),
+// 			Comment:                      pulumi.String("test"),
+// 			StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
+// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+// 						Codec:              pulumi.String("libx265"),
+// 						Fps:                pulumi.Int(4),
+// 						Bitrate:            pulumi.Int(129),
+// 						ResolutionAdaptive: pulumi.Bool(false),
+// 						Width:              pulumi.Int(128),
+// 						Height:             pulumi.Int(128),
+// 						FillType:           pulumi.String("stretch"),
+// 					},
+// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+// 						Codec:        pulumi.String("libmp3lame"),
+// 						Bitrate:      pulumi.Int(129),
+// 						SampleRate:   pulumi.Int(44100),
+// 						AudioChannel: pulumi.String("dual"),
+// 					},
+// 					RemoveAudio: pulumi.Bool(false),
+// 				},
+// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+// 						Codec:   pulumi.String("libx264"),
+// 						Fps:     pulumi.Int(4),
+// 						Bitrate: pulumi.Int(256),
+// 					},
+// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+// 						Codec:      pulumi.String("libfdk_aac"),
+// 						Bitrate:    pulumi.Int(256),
+// 						SampleRate: pulumi.Int(44100),
+// 					},
+// 					RemoveAudio: pulumi.Bool(true),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_ = Vod.GetAdaptiveDynamicStreamingTemplatesOutput(ctx, vod.GetAdaptiveDynamicStreamingTemplatesOutputArgs{
+// 			Type:       pulumi.String("Custom"),
+// 			Definition: fooAdaptiveDynamicStreamingTemplate.ID(),
+// 		}, nil)
+// 		return nil
+// 	})
+// }
 // ```
 func GetAdaptiveDynamicStreamingTemplates(ctx *pulumi.Context, args *GetAdaptiveDynamicStreamingTemplatesArgs, opts ...pulumi.InvokeOption) (*GetAdaptiveDynamicStreamingTemplatesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

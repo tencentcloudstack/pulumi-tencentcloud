@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// &gt; **NOTE:**  We recommend the usage of one cluster with essential worker config + node pool to manage cluster and nodes. Its a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, tencentcloud.Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
     /// 
+    /// &gt; **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `delete_keep_instance` to `false`.
+    /// 
+    /// &gt; **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -85,6 +89,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                 Password = "test123#",
     ///                 EnhancedSecurityService = false,
     ///                 EnhancedMonitorService = false,
+    ///                 HostName = "12.123.0.0",
+    ///                 HostNameStyle = "ORIGINAL",
     ///             },
     ///             Labels = 
     ///             {
@@ -335,6 +341,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<ImmutableArray<string>> SubnetIds { get; private set; } = null!;
 
         /// <summary>
+        /// Node pool tag specifications, will passthroughs to the scaling instances.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
+        /// <summary>
         /// Taints of kubernetes node pool created nodes.
         /// </summary>
         [Output("taints")]
@@ -535,6 +547,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         {
             get => _subnetIds ?? (_subnetIds = new InputList<string>());
             set => _subnetIds = value;
+        }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Node pool tag specifications, will passthroughs to the scaling instances.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
         }
 
         [Input("taints")]
@@ -746,6 +770,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         {
             get => _subnetIds ?? (_subnetIds = new InputList<string>());
             set => _subnetIds = value;
+        }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Node pool tag specifications, will passthroughs to the scaling instances.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
         }
 
         [Input("taints")]

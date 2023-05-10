@@ -18,29 +18,26 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Redis.GetInstances(ctx, &redis.GetInstancesArgs{
-//				Limit:            pulumi.IntRef(20),
-//				ProjectId:        pulumi.IntRef(0),
-//				ResultOutputFile: pulumi.StringRef("/tmp/redis_instances"),
-//				SearchKey:        pulumi.StringRef("myredis"),
-//				Zone:             pulumi.StringRef("ap-hongkong-1"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Redis.GetInstances(ctx, &redis.GetInstancesArgs{
+// 			Limit:            pulumi.IntRef(20),
+// 			ProjectId:        pulumi.IntRef(0),
+// 			ResultOutputFile: pulumi.StringRef("/tmp/redis_instances"),
+// 			SearchKey:        pulumi.StringRef("myredis"),
+// 			Zone:             pulumi.StringRef("ap-hongkong-1"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -145,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public Output<ImmutableArray<Outputs.DdosPolicyV2BlackWhiteIp>> BlackWhiteIps { get; private set; } = null!;
 
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Output("business")]
         public Output<string?> Business { get; private set; } = null!;
@@ -276,7 +276,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
 
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business")]
         public Input<string>? Business { get; set; }
@@ -391,7 +391,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
 
         /// <summary>
-        /// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         /// </summary>
         [Input("business")]
         public Input<string>? Business { get; set; }

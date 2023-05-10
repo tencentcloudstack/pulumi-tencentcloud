@@ -7,6 +7,12 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./acl";
 export * from "./aclAttachment";
+export * from "./bandwidthPackage";
+export * from "./bandwidthPackageAttachment";
+export * from "./endPoint";
+export * from "./endPointService";
+export * from "./endPointServiceWhiteList";
+export * from "./flowLog";
 export * from "./getAcls";
 export * from "./getInstances";
 export * from "./getRouteTables";
@@ -16,6 +22,12 @@ export * from "./instance";
 // Import resources to register:
 import { Acl } from "./acl";
 import { AclAttachment } from "./aclAttachment";
+import { BandwidthPackage } from "./bandwidthPackage";
+import { BandwidthPackageAttachment } from "./bandwidthPackageAttachment";
+import { EndPoint } from "./endPoint";
+import { EndPointService } from "./endPointService";
+import { EndPointServiceWhiteList } from "./endPointServiceWhiteList";
+import { FlowLog } from "./flowLog";
 import { Instance } from "./instance";
 
 const _module = {
@@ -26,6 +38,18 @@ const _module = {
                 return new Acl(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/aclAttachment:AclAttachment":
                 return new AclAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/bandwidthPackage:BandwidthPackage":
+                return new BandwidthPackage(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/bandwidthPackageAttachment:BandwidthPackageAttachment":
+                return new BandwidthPackageAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/endPoint:EndPoint":
+                return new EndPoint(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/endPointService:EndPointService":
+                return new EndPointService(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList":
+                return new EndPointServiceWhiteList(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/flowLog:FlowLog":
+                return new FlowLog(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             default:
@@ -35,4 +59,10 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/acl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/aclAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/bandwidthPackage", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/bandwidthPackageAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/endPoint", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/endPointService", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/endPointServiceWhiteList", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/flowLog", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/instance", _module)

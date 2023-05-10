@@ -19,26 +19,25 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Monitor.NewTmpRecordingRule(ctx, "recordingRule", &Monitor.TmpRecordingRuleArgs{
-//				Group:      pulumi.String("LS0tDQpuYW1lOiBleGFtcGxlDQpydWxlczoNCiAgLSByZWNvcmQ6IGpvYjpodHRwX2lucHJvZ3Jlc3NfcmVxdWVzdHM6c3VtDQogICAgZXhwcjogc3VtIGJ5IChqb2IpIChodHRwX2lucHJvZ3Jlc3NfcmVxdWVzdHMp"),
-//				InstanceId: pulumi.String("prom-c89b3b3u"),
-//				RuleState:  pulumi.Int(2),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Monitor.NewTmpRecordingRule(ctx, "recordingRule", &Monitor.TmpRecordingRuleArgs{
+// 			Group:      pulumi.String(fmt.Sprintf("%v%v%v%v%v%v", "---\n", "name: example-test\n", "rules:\n", "  - record: job:http_inprogress_requests:sum\n", "    expr: sum by (job) (http_inprogress_requests)\n", "\n")),
+// 			InstanceId: pulumi.String("prom-c89b3b3u"),
+// 			RuleState:  pulumi.Int(2),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -46,9 +45,7 @@ import (
 // monitor recordingRule can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
-//
+//  $ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
 // ```
 type TmpRecordingRule struct {
 	pulumi.CustomResourceState
@@ -173,7 +170,7 @@ func (i *TmpRecordingRule) ToTmpRecordingRuleOutputWithContext(ctx context.Conte
 // TmpRecordingRuleArrayInput is an input type that accepts TmpRecordingRuleArray and TmpRecordingRuleArrayOutput values.
 // You can construct a concrete instance of `TmpRecordingRuleArrayInput` via:
 //
-//	TmpRecordingRuleArray{ TmpRecordingRuleArgs{...} }
+//          TmpRecordingRuleArray{ TmpRecordingRuleArgs{...} }
 type TmpRecordingRuleArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +195,7 @@ func (i TmpRecordingRuleArray) ToTmpRecordingRuleArrayOutputWithContext(ctx cont
 // TmpRecordingRuleMapInput is an input type that accepts TmpRecordingRuleMap and TmpRecordingRuleMapOutput values.
 // You can construct a concrete instance of `TmpRecordingRuleMapInput` via:
 //
-//	TmpRecordingRuleMap{ "key": TmpRecordingRuleArgs{...} }
+//          TmpRecordingRuleMap{ "key": TmpRecordingRuleArgs{...} }
 type TmpRecordingRuleMapInput interface {
 	pulumi.Input
 

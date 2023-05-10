@@ -19,70 +19,67 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			region := "ap-guangzhou"
-//			if param := cfg.Get("region"); param != "" {
-//				region = param
-//			}
-//			otheruin := "123353"
-//			if param := cfg.Get("otheruin"); param != "" {
-//				otheruin = param
-//			}
-//			otherccn := "ccn-151ssaga"
-//			if param := cfg.Get("otherccn"); param != "" {
-//				otherccn = param
-//			}
-//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-//				CidrBlock: pulumi.String("10.0.0.0/16"),
-//				DnsServers: pulumi.StringArray{
-//					pulumi.String("119.29.29.29"),
-//					pulumi.String("8.8.8.8"),
-//				},
-//				IsMulticast: pulumi.Bool(false),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-//				Description: pulumi.String("ci-temp-test-ccn-des"),
-//				Qos:         pulumi.String("AG"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Ccn.NewAttachment(ctx, "attachment", &Ccn.AttachmentArgs{
-//				CcnId:          main.ID(),
-//				InstanceType:   pulumi.String("VPC"),
-//				InstanceId:     vpc.ID(),
-//				InstanceRegion: pulumi.String(region),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Ccn.NewAttachment(ctx, "otherAccount", &Ccn.AttachmentArgs{
-//				CcnId:          pulumi.String(otherccn),
-//				InstanceType:   pulumi.String("VPC"),
-//				InstanceId:     vpc.ID(),
-//				InstanceRegion: pulumi.String(region),
-//				CcnUin:         pulumi.String(otheruin),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		region := "ap-guangzhou"
+// 		if param := cfg.Get("region"); param != "" {
+// 			region = param
+// 		}
+// 		otheruin := "123353"
+// 		if param := cfg.Get("otheruin"); param != "" {
+// 			otheruin = param
+// 		}
+// 		otherccn := "ccn-151ssaga"
+// 		if param := cfg.Get("otherccn"); param != "" {
+// 			otherccn = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 			DnsServers: pulumi.StringArray{
+// 				pulumi.String("119.29.29.29"),
+// 				pulumi.String("8.8.8.8"),
+// 			},
+// 			IsMulticast: pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+// 			Description: pulumi.String("ci-temp-test-ccn-des"),
+// 			Qos:         pulumi.String("AG"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ccn.NewAttachment(ctx, "attachment", &Ccn.AttachmentArgs{
+// 			CcnId:          main.ID(),
+// 			InstanceType:   pulumi.String("VPC"),
+// 			InstanceId:     vpc.ID(),
+// 			InstanceRegion: pulumi.String(region),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ccn.NewAttachment(ctx, "otherAccount", &Ccn.AttachmentArgs{
+// 			CcnId:          pulumi.String(otherccn),
+// 			InstanceType:   pulumi.String("VPC"),
+// 			InstanceId:     vpc.ID(),
+// 			InstanceRegion: pulumi.String(region),
+// 			CcnUin:         pulumi.String(otheruin),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type Attachment struct {
 	pulumi.CustomResourceState
@@ -95,6 +92,8 @@ type Attachment struct {
 	CcnUin pulumi.StringOutput `pulumi:"ccnUin"`
 	// A network address block of the instance that is attached.
 	CidrBlocks pulumi.StringArrayOutput `pulumi:"cidrBlocks"`
+	// Remark of attachment.
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// ID of instance is attached.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// The region that the instance locates at.
@@ -155,6 +154,8 @@ type attachmentState struct {
 	CcnUin *string `pulumi:"ccnUin"`
 	// A network address block of the instance that is attached.
 	CidrBlocks []string `pulumi:"cidrBlocks"`
+	// Remark of attachment.
+	Description *string `pulumi:"description"`
 	// ID of instance is attached.
 	InstanceId *string `pulumi:"instanceId"`
 	// The region that the instance locates at.
@@ -174,6 +175,8 @@ type AttachmentState struct {
 	CcnUin pulumi.StringPtrInput
 	// A network address block of the instance that is attached.
 	CidrBlocks pulumi.StringArrayInput
+	// Remark of attachment.
+	Description pulumi.StringPtrInput
 	// ID of instance is attached.
 	InstanceId pulumi.StringPtrInput
 	// The region that the instance locates at.
@@ -193,6 +196,8 @@ type attachmentArgs struct {
 	CcnId string `pulumi:"ccnId"`
 	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 	CcnUin *string `pulumi:"ccnUin"`
+	// Remark of attachment.
+	Description *string `pulumi:"description"`
 	// ID of instance is attached.
 	InstanceId string `pulumi:"instanceId"`
 	// The region that the instance locates at.
@@ -207,6 +212,8 @@ type AttachmentArgs struct {
 	CcnId pulumi.StringInput
 	// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 	CcnUin pulumi.StringPtrInput
+	// Remark of attachment.
+	Description pulumi.StringPtrInput
 	// ID of instance is attached.
 	InstanceId pulumi.StringInput
 	// The region that the instance locates at.
@@ -241,7 +248,7 @@ func (i *Attachment) ToAttachmentOutputWithContext(ctx context.Context) Attachme
 // AttachmentArrayInput is an input type that accepts AttachmentArray and AttachmentArrayOutput values.
 // You can construct a concrete instance of `AttachmentArrayInput` via:
 //
-//	AttachmentArray{ AttachmentArgs{...} }
+//          AttachmentArray{ AttachmentArgs{...} }
 type AttachmentArrayInput interface {
 	pulumi.Input
 
@@ -266,7 +273,7 @@ func (i AttachmentArray) ToAttachmentArrayOutputWithContext(ctx context.Context)
 // AttachmentMapInput is an input type that accepts AttachmentMap and AttachmentMapOutput values.
 // You can construct a concrete instance of `AttachmentMapInput` via:
 //
-//	AttachmentMap{ "key": AttachmentArgs{...} }
+//          AttachmentMap{ "key": AttachmentArgs{...} }
 type AttachmentMapInput interface {
 	pulumi.Input
 
@@ -312,7 +319,7 @@ func (o AttachmentOutput) CcnId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.CcnId }).(pulumi.StringOutput)
 }
 
-// Uin of the ccn attached. Default is “, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
 func (o AttachmentOutput) CcnUin() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.CcnUin }).(pulumi.StringOutput)
 }
@@ -320,6 +327,11 @@ func (o AttachmentOutput) CcnUin() pulumi.StringOutput {
 // A network address block of the instance that is attached.
 func (o AttachmentOutput) CidrBlocks() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringArrayOutput { return v.CidrBlocks }).(pulumi.StringArrayOutput)
+}
+
+// Remark of attachment.
+func (o AttachmentOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Attachment) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // ID of instance is attached.

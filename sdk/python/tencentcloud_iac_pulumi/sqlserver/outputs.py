@@ -10,6 +10,10 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'MigrationMigrateDbSet',
+    'MigrationRenameRestore',
+    'MigrationSource',
+    'MigrationTarget',
     'PublishSubscribeDatabaseTuple',
     'GetAccountDbAttachmentsListResult',
     'GetAccountsListResult',
@@ -23,6 +27,308 @@ __all__ = [
     'GetZoneConfigZoneListResult',
     'GetZoneConfigZoneListSpecinfoListResult',
 ]
+
+@pulumi.output_type
+class MigrationMigrateDbSet(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbName":
+            suggest = "db_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MigrationMigrateDbSet. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MigrationMigrateDbSet.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MigrationMigrateDbSet.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db_name: Optional[str] = None):
+        """
+        :param str db_name: Name of the migration database.
+        """
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[str]:
+        """
+        Name of the migration database.
+        """
+        return pulumi.get(self, "db_name")
+
+
+@pulumi.output_type
+class MigrationRenameRestore(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newName":
+            suggest = "new_name"
+        elif key == "oldName":
+            suggest = "old_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MigrationRenameRestore. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MigrationRenameRestore.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MigrationRenameRestore.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_name: Optional[str] = None,
+                 old_name: Optional[str] = None):
+        """
+        :param str new_name: When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.
+        :param str old_name: The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.
+        """
+        if new_name is not None:
+            pulumi.set(__self__, "new_name", new_name)
+        if old_name is not None:
+            pulumi.set(__self__, "old_name", old_name)
+
+    @property
+    @pulumi.getter(name="newName")
+    def new_name(self) -> Optional[str]:
+        """
+        When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.
+        """
+        return pulumi.get(self, "new_name")
+
+    @property
+    @pulumi.getter(name="oldName")
+    def old_name(self) -> Optional[str]:
+        """
+        The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.
+        """
+        return pulumi.get(self, "old_name")
+
+
+@pulumi.output_type
+class MigrationSource(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cvmId":
+            suggest = "cvm_id"
+        elif key == "instanceId":
+            suggest = "instance_id"
+        elif key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "urlPassword":
+            suggest = "url_password"
+        elif key == "userName":
+            suggest = "user_name"
+        elif key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MigrationSource. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MigrationSource.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MigrationSource.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cvm_id: Optional[str] = None,
+                 instance_id: Optional[str] = None,
+                 ip: Optional[str] = None,
+                 password: Optional[str] = None,
+                 port: Optional[int] = None,
+                 subnet_id: Optional[str] = None,
+                 url_password: Optional[str] = None,
+                 urls: Optional[Sequence[str]] = None,
+                 user_name: Optional[str] = None,
+                 vpc_id: Optional[str] = None):
+        """
+        :param str cvm_id: ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).
+        :param str instance_id: The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.
+        :param str ip: Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).
+        :param str password: Password, MigrateType=1 or MigrateType=2.
+        :param int port: The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).
+        :param str subnet_id: The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.
+        :param str url_password: The source backup password for offline migration, MigrateType=4 or MigrateType=5.
+        :param Sequence[str] urls: The source backup address for offline migration. MigrateType=4 or MigrateType=5.
+        :param str user_name: User name, MigrateType=1 or MigrateType=2.
+        :param str vpc_id: The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.
+        """
+        if cvm_id is not None:
+            pulumi.set(__self__, "cvm_id", cvm_id)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if url_password is not None:
+            pulumi.set(__self__, "url_password", url_password)
+        if urls is not None:
+            pulumi.set(__self__, "urls", urls)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="cvmId")
+    def cvm_id(self) -> Optional[str]:
+        """
+        ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).
+        """
+        return pulumi.get(self, "cvm_id")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        """
+        The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[str]:
+        """
+        Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[str]:
+        """
+        Password, MigrateType=1 or MigrateType=2.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        """
+        The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        """
+        The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="urlPassword")
+    def url_password(self) -> Optional[str]:
+        """
+        The source backup password for offline migration, MigrateType=4 or MigrateType=5.
+        """
+        return pulumi.get(self, "url_password")
+
+    @property
+    @pulumi.getter
+    def urls(self) -> Optional[Sequence[str]]:
+        """
+        The source backup address for offline migration. MigrateType=4 or MigrateType=5.
+        """
+        return pulumi.get(self, "urls")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[str]:
+        """
+        User name, MigrateType=1 or MigrateType=2.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[str]:
+        """
+        The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class MigrationTarget(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "userName":
+            suggest = "user_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MigrationTarget. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MigrationTarget.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MigrationTarget.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: Optional[str] = None,
+                 password: Optional[str] = None,
+                 user_name: Optional[str] = None):
+        """
+        :param str instance_id: The ID of the migration target instance, in the format mssql-si2823jyl.
+        :param str password: Password of the migration target instance.
+        :param str user_name: User name of the migration target instance.
+        """
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        """
+        The ID of the migration target instance, in the format mssql-si2823jyl.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[str]:
+        """
+        Password of the migration target instance.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[str]:
+        """
+        User name of the migration target instance.
+        """
+        return pulumi.get(self, "user_name")
+
 
 @pulumi.output_type
 class PublishSubscribeDatabaseTuple(dict):

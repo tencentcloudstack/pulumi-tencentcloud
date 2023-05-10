@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  *     password: "********",
  * });
  * ```
+ *
+ * ## Import
+ *
+ * mysql account can be imported using the mysqlId#accountName, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Mysql/account:Account default cdb-gqg6j82x#tf_account
+ * ```
  */
 export class Account extends pulumi.CustomResource {
     /**

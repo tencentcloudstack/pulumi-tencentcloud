@@ -30,7 +30,7 @@ type GetGroupsPlacementGroupList struct {
 // GetGroupsPlacementGroupListInput is an input type that accepts GetGroupsPlacementGroupListArgs and GetGroupsPlacementGroupListOutput values.
 // You can construct a concrete instance of `GetGroupsPlacementGroupListInput` via:
 //
-//	GetGroupsPlacementGroupListArgs{...}
+//          GetGroupsPlacementGroupListArgs{...}
 type GetGroupsPlacementGroupListInput interface {
 	pulumi.Input
 
@@ -70,7 +70,7 @@ func (i GetGroupsPlacementGroupListArgs) ToGetGroupsPlacementGroupListOutputWith
 // GetGroupsPlacementGroupListArrayInput is an input type that accepts GetGroupsPlacementGroupListArray and GetGroupsPlacementGroupListArrayOutput values.
 // You can construct a concrete instance of `GetGroupsPlacementGroupListArrayInput` via:
 //
-//	GetGroupsPlacementGroupListArray{ GetGroupsPlacementGroupListArgs{...} }
+//          GetGroupsPlacementGroupListArray{ GetGroupsPlacementGroupListArgs{...} }
 type GetGroupsPlacementGroupListArrayInput interface {
 	pulumi.Input
 

@@ -25,6 +25,7 @@ import * as utilities from "../utilities";
  *     intranetPort: 3306,
  *     memSize: 128000,
  *     parameters: {
+ *         character_set_server: "UTF8",
  *         max_connections: "1000",
  *     },
  *     projectId: 201901010001,
@@ -205,7 +206,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Private network ID. If `vpcId` is set, this value is required.
      */
-    public readonly subnetId!: pulumi.Output<string | undefined>;
+    public readonly subnetId!: pulumi.Output<string>;
     /**
      * Instance tags.
      */
@@ -221,7 +222,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
-    public readonly vpcId!: pulumi.Output<string | undefined>;
+    public readonly vpcId!: pulumi.Output<string>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.

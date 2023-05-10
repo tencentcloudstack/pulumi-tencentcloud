@@ -23,10 +23,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Kubernetes/addonAttachment:AddonAttachment":
 		r = &AddonAttachment{}
-	case "tencentcloud:Kubernetes/asScalingGroup:AsScalingGroup":
-		r = &AsScalingGroup{}
 	case "tencentcloud:Kubernetes/authAttachment:AuthAttachment":
 		r = &AuthAttachment{}
+	case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
+		r = &BackupStorageLocation{}
 	case "tencentcloud:Kubernetes/cluster:Cluster":
 		r = &Cluster{}
 	case "tencentcloud:Kubernetes/clusterAttachment:ClusterAttachment":
@@ -37,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NodePool{}
 	case "tencentcloud:Kubernetes/scaleWorker:ScaleWorker":
 		r = &ScaleWorker{}
+	case "tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool":
+		r = &ServerlessNodePool{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -57,12 +59,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Kubernetes/asScalingGroup",
+		"Kubernetes/authAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Kubernetes/authAttachment",
+		"Kubernetes/backupStorageLocation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -88,6 +90,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Kubernetes/scaleWorker",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/serverlessNodePool",
 		&module{version},
 	)
 }

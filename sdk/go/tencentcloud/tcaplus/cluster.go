@@ -21,29 +21,26 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
-//				ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
-//				IdlType:               pulumi.String("PROTO"),
-//				OldPasswordExpireLast: pulumi.Int(3600),
-//				Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
-//				SubnetId:              pulumi.String("subnet-akwgvfa3"),
-//				VpcId:                 pulumi.String("vpc-7k6gzox6"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
+// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
+// 			IdlType:               pulumi.String("PROTO"),
+// 			OldPasswordExpireLast: pulumi.Int(3600),
+// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
+// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
+// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -51,9 +48,7 @@ import (
 // tcaplus cluster can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
-//
+//  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
 // ```
 type Cluster struct {
 	pulumi.CustomResourceState
@@ -249,7 +244,7 @@ func (i *Cluster) ToClusterOutputWithContext(ctx context.Context) ClusterOutput 
 // ClusterArrayInput is an input type that accepts ClusterArray and ClusterArrayOutput values.
 // You can construct a concrete instance of `ClusterArrayInput` via:
 //
-//	ClusterArray{ ClusterArgs{...} }
+//          ClusterArray{ ClusterArgs{...} }
 type ClusterArrayInput interface {
 	pulumi.Input
 
@@ -274,7 +269,7 @@ func (i ClusterArray) ToClusterArrayOutputWithContext(ctx context.Context) Clust
 // ClusterMapInput is an input type that accepts ClusterMap and ClusterMapOutput values.
 // You can construct a concrete instance of `ClusterMapInput` via:
 //
-//	ClusterMap{ "key": ClusterArgs{...} }
+//          ClusterMap{ "key": ClusterArgs{...} }
 type ClusterMapInput interface {
 	pulumi.Input
 

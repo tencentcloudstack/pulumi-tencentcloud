@@ -5,6 +5,16 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .apply_disk_backup import *
+from .apply_instance_snapshot import *
+from .blueprint import *
+from .disk_attachment import *
+from .disk_backup import *
+from .firewall_rule import *
+from .get_bundle import *
+from .get_firewall_rules_template import *
 from .instance import *
+from .key_pair import *
+from .snapshot import *
 from ._inputs import *
 from . import outputs

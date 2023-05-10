@@ -19,6 +19,9 @@ class ConnectionArgs:
                  pre_share_key: pulumi.Input[str],
                  security_group_policies: pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]],
                  vpn_gateway_id: pulumi.Input[str],
+                 dpd_action: Optional[pulumi.Input[str]] = None,
+                 dpd_enable: Optional[pulumi.Input[int]] = None,
+                 dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
                  health_check_remote_ip: Optional[pulumi.Input[str]] = None,
@@ -48,6 +51,9 @@ class ConnectionArgs:
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
         :param pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]] security_group_policies: Security group policy of the VPN connection.
         :param pulumi.Input[str] vpn_gateway_id: ID of the VPN gateway.
+        :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        :param pulumi.Input[int] dpd_enable: Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
         :param pulumi.Input[str] health_check_remote_ip: Health check peer address.
@@ -76,6 +82,12 @@ class ConnectionArgs:
         pulumi.set(__self__, "pre_share_key", pre_share_key)
         pulumi.set(__self__, "security_group_policies", security_group_policies)
         pulumi.set(__self__, "vpn_gateway_id", vpn_gateway_id)
+        if dpd_action is not None:
+            pulumi.set(__self__, "dpd_action", dpd_action)
+        if dpd_enable is not None:
+            pulumi.set(__self__, "dpd_enable", dpd_enable)
+        if dpd_timeout is not None:
+            pulumi.set(__self__, "dpd_timeout", dpd_timeout)
         if enable_health_check is not None:
             pulumi.set(__self__, "enable_health_check", enable_health_check)
         if health_check_local_ip is not None:
@@ -170,6 +182,42 @@ class ConnectionArgs:
     @vpn_gateway_id.setter
     def vpn_gateway_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "vpn_gateway_id", value)
+
+    @property
+    @pulumi.getter(name="dpdAction")
+    def dpd_action(self) -> Optional[pulumi.Input[str]]:
+        """
+        The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        """
+        return pulumi.get(self, "dpd_action")
+
+    @dpd_action.setter
+    def dpd_action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dpd_action", value)
+
+    @property
+    @pulumi.getter(name="dpdEnable")
+    def dpd_enable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        """
+        return pulumi.get(self, "dpd_enable")
+
+    @dpd_enable.setter
+    def dpd_enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "dpd_enable", value)
+
+    @property
+    @pulumi.getter(name="dpdTimeout")
+    def dpd_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+        """
+        return pulumi.get(self, "dpd_timeout")
+
+    @dpd_timeout.setter
+    def dpd_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "dpd_timeout", value)
 
     @property
     @pulumi.getter(name="enableHealthCheck")
@@ -453,6 +501,9 @@ class _ConnectionState:
     def __init__(__self__, *,
                  create_time: Optional[pulumi.Input[str]] = None,
                  customer_gateway_id: Optional[pulumi.Input[str]] = None,
+                 dpd_action: Optional[pulumi.Input[str]] = None,
+                 dpd_enable: Optional[pulumi.Input[int]] = None,
+                 dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
                  encrypt_proto: Optional[pulumi.Input[str]] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
@@ -489,6 +540,9 @@ class _ConnectionState:
         Input properties used for looking up and filtering Connection resources.
         :param pulumi.Input[str] create_time: Create time of the VPN connection.
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
+        :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        :param pulumi.Input[int] dpd_enable: Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
         :param pulumi.Input[str] encrypt_proto: Encrypt proto of the VPN connection.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
@@ -526,6 +580,12 @@ class _ConnectionState:
             pulumi.set(__self__, "create_time", create_time)
         if customer_gateway_id is not None:
             pulumi.set(__self__, "customer_gateway_id", customer_gateway_id)
+        if dpd_action is not None:
+            pulumi.set(__self__, "dpd_action", dpd_action)
+        if dpd_enable is not None:
+            pulumi.set(__self__, "dpd_enable", dpd_enable)
+        if dpd_timeout is not None:
+            pulumi.set(__self__, "dpd_timeout", dpd_timeout)
         if enable_health_check is not None:
             pulumi.set(__self__, "enable_health_check", enable_health_check)
         if encrypt_proto is not None:
@@ -614,6 +674,42 @@ class _ConnectionState:
     @customer_gateway_id.setter
     def customer_gateway_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "customer_gateway_id", value)
+
+    @property
+    @pulumi.getter(name="dpdAction")
+    def dpd_action(self) -> Optional[pulumi.Input[str]]:
+        """
+        The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        """
+        return pulumi.get(self, "dpd_action")
+
+    @dpd_action.setter
+    def dpd_action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dpd_action", value)
+
+    @property
+    @pulumi.getter(name="dpdEnable")
+    def dpd_enable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        """
+        return pulumi.get(self, "dpd_enable")
+
+    @dpd_enable.setter
+    def dpd_enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "dpd_enable", value)
+
+    @property
+    @pulumi.getter(name="dpdTimeout")
+    def dpd_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+        """
+        return pulumi.get(self, "dpd_timeout")
+
+    @dpd_timeout.setter
+    def dpd_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "dpd_timeout", value)
 
     @property
     @pulumi.getter(name="enableHealthCheck")
@@ -1006,6 +1102,9 @@ class Connection(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  customer_gateway_id: Optional[pulumi.Input[str]] = None,
+                 dpd_action: Optional[pulumi.Input[str]] = None,
+                 dpd_enable: Optional[pulumi.Input[int]] = None,
+                 dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
                  health_check_remote_ip: Optional[pulumi.Input[str]] = None,
@@ -1081,6 +1180,9 @@ class Connection(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
+        :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        :param pulumi.Input[int] dpd_enable: Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
         :param pulumi.Input[str] health_check_remote_ip: Health check peer address.
@@ -1175,6 +1277,9 @@ class Connection(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  customer_gateway_id: Optional[pulumi.Input[str]] = None,
+                 dpd_action: Optional[pulumi.Input[str]] = None,
+                 dpd_enable: Optional[pulumi.Input[int]] = None,
+                 dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
                  health_check_remote_ip: Optional[pulumi.Input[str]] = None,
@@ -1218,6 +1323,9 @@ class Connection(pulumi.CustomResource):
             if customer_gateway_id is None and not opts.urn:
                 raise TypeError("Missing required property 'customer_gateway_id'")
             __props__.__dict__["customer_gateway_id"] = customer_gateway_id
+            __props__.__dict__["dpd_action"] = dpd_action
+            __props__.__dict__["dpd_enable"] = dpd_enable
+            __props__.__dict__["dpd_timeout"] = dpd_timeout
             __props__.__dict__["enable_health_check"] = enable_health_check
             __props__.__dict__["health_check_local_ip"] = health_check_local_ip
             __props__.__dict__["health_check_remote_ip"] = health_check_remote_ip
@@ -1269,6 +1377,9 @@ class Connection(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             customer_gateway_id: Optional[pulumi.Input[str]] = None,
+            dpd_action: Optional[pulumi.Input[str]] = None,
+            dpd_enable: Optional[pulumi.Input[int]] = None,
+            dpd_timeout: Optional[pulumi.Input[int]] = None,
             enable_health_check: Optional[pulumi.Input[bool]] = None,
             encrypt_proto: Optional[pulumi.Input[str]] = None,
             health_check_local_ip: Optional[pulumi.Input[str]] = None,
@@ -1310,6 +1421,9 @@ class Connection(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] create_time: Create time of the VPN connection.
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
+        :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        :param pulumi.Input[int] dpd_enable: Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
         :param pulumi.Input[str] encrypt_proto: Encrypt proto of the VPN connection.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
@@ -1349,6 +1463,9 @@ class Connection(pulumi.CustomResource):
 
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["customer_gateway_id"] = customer_gateway_id
+        __props__.__dict__["dpd_action"] = dpd_action
+        __props__.__dict__["dpd_enable"] = dpd_enable
+        __props__.__dict__["dpd_timeout"] = dpd_timeout
         __props__.__dict__["enable_health_check"] = enable_health_check
         __props__.__dict__["encrypt_proto"] = encrypt_proto
         __props__.__dict__["health_check_local_ip"] = health_check_local_ip
@@ -1398,6 +1515,30 @@ class Connection(pulumi.CustomResource):
         ID of the customer gateway.
         """
         return pulumi.get(self, "customer_gateway_id")
+
+    @property
+    @pulumi.getter(name="dpdAction")
+    def dpd_action(self) -> pulumi.Output[str]:
+        """
+        The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+        """
+        return pulumi.get(self, "dpd_action")
+
+    @property
+    @pulumi.getter(name="dpdEnable")
+    def dpd_enable(self) -> pulumi.Output[int]:
+        """
+        Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+        """
+        return pulumi.get(self, "dpd_enable")
+
+    @property
+    @pulumi.getter(name="dpdTimeout")
+    def dpd_timeout(self) -> pulumi.Output[int]:
+        """
+        DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+        """
+        return pulumi.get(self, "dpd_timeout")
 
     @property
     @pulumi.getter(name="enableHealthCheck")

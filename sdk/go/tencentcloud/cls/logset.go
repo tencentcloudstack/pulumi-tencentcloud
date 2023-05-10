@@ -19,27 +19,24 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
-//				LogsetName: pulumi.String("logset"),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("test"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
+// 			LogsetName: pulumi.String("demo"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -47,9 +44,7 @@ import (
 // cls logset can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
-//
+//  $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
 // ```
 type Logset struct {
 	pulumi.CustomResourceState
@@ -58,9 +53,9 @@ type Logset struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Logset name, which must be unique.
 	LogsetName pulumi.StringOutput `pulumi:"logsetName"`
-	// If AssumerUin is not empty, it indicates the service provider who creates the logset.
+	// If assumerUin is not empty, it indicates the service provider who creates the logset.
 	RoleName pulumi.StringOutput `pulumi:"roleName"`
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Number of log topics in logset.
 	TopicCount pulumi.IntOutput `pulumi:"topicCount"`
@@ -103,9 +98,9 @@ type logsetState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Logset name, which must be unique.
 	LogsetName *string `pulumi:"logsetName"`
-	// If AssumerUin is not empty, it indicates the service provider who creates the logset.
+	// If assumerUin is not empty, it indicates the service provider who creates the logset.
 	RoleName *string `pulumi:"roleName"`
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Number of log topics in logset.
 	TopicCount *int `pulumi:"topicCount"`
@@ -116,9 +111,9 @@ type LogsetState struct {
 	CreateTime pulumi.StringPtrInput
 	// Logset name, which must be unique.
 	LogsetName pulumi.StringPtrInput
-	// If AssumerUin is not empty, it indicates the service provider who creates the logset.
+	// If assumerUin is not empty, it indicates the service provider who creates the logset.
 	RoleName pulumi.StringPtrInput
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list.
 	Tags pulumi.MapInput
 	// Number of log topics in logset.
 	TopicCount pulumi.IntPtrInput
@@ -131,7 +126,7 @@ func (LogsetState) ElementType() reflect.Type {
 type logsetArgs struct {
 	// Logset name, which must be unique.
 	LogsetName string `pulumi:"logsetName"`
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
 }
 
@@ -139,7 +134,7 @@ type logsetArgs struct {
 type LogsetArgs struct {
 	// Logset name, which must be unique.
 	LogsetName pulumi.StringInput
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list.
 	Tags pulumi.MapInput
 }
 
@@ -169,7 +164,7 @@ func (i *Logset) ToLogsetOutputWithContext(ctx context.Context) LogsetOutput {
 // LogsetArrayInput is an input type that accepts LogsetArray and LogsetArrayOutput values.
 // You can construct a concrete instance of `LogsetArrayInput` via:
 //
-//	LogsetArray{ LogsetArgs{...} }
+//          LogsetArray{ LogsetArgs{...} }
 type LogsetArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +189,7 @@ func (i LogsetArray) ToLogsetArrayOutputWithContext(ctx context.Context) LogsetA
 // LogsetMapInput is an input type that accepts LogsetMap and LogsetMapOutput values.
 // You can construct a concrete instance of `LogsetMapInput` via:
 //
-//	LogsetMap{ "key": LogsetArgs{...} }
+//          LogsetMap{ "key": LogsetArgs{...} }
 type LogsetMapInput interface {
 	pulumi.Input
 
@@ -240,12 +235,12 @@ func (o LogsetOutput) LogsetName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Logset) pulumi.StringOutput { return v.LogsetName }).(pulumi.StringOutput)
 }
 
-// If AssumerUin is not empty, it indicates the service provider who creates the logset.
+// If assumerUin is not empty, it indicates the service provider who creates the logset.
 func (o LogsetOutput) RoleName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Logset) pulumi.StringOutput { return v.RoleName }).(pulumi.StringOutput)
 }
 
-// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+// Tag description list.
 func (o LogsetOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Logset) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }

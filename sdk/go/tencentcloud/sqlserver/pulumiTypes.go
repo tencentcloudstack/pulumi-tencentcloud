@@ -10,6 +10,692 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type MigrationMigrateDbSet struct {
+	// Name of the migration database.
+	DbName *string `pulumi:"dbName"`
+}
+
+// MigrationMigrateDbSetInput is an input type that accepts MigrationMigrateDbSetArgs and MigrationMigrateDbSetOutput values.
+// You can construct a concrete instance of `MigrationMigrateDbSetInput` via:
+//
+//          MigrationMigrateDbSetArgs{...}
+type MigrationMigrateDbSetInput interface {
+	pulumi.Input
+
+	ToMigrationMigrateDbSetOutput() MigrationMigrateDbSetOutput
+	ToMigrationMigrateDbSetOutputWithContext(context.Context) MigrationMigrateDbSetOutput
+}
+
+type MigrationMigrateDbSetArgs struct {
+	// Name of the migration database.
+	DbName pulumi.StringPtrInput `pulumi:"dbName"`
+}
+
+func (MigrationMigrateDbSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationMigrateDbSet)(nil)).Elem()
+}
+
+func (i MigrationMigrateDbSetArgs) ToMigrationMigrateDbSetOutput() MigrationMigrateDbSetOutput {
+	return i.ToMigrationMigrateDbSetOutputWithContext(context.Background())
+}
+
+func (i MigrationMigrateDbSetArgs) ToMigrationMigrateDbSetOutputWithContext(ctx context.Context) MigrationMigrateDbSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationMigrateDbSetOutput)
+}
+
+// MigrationMigrateDbSetArrayInput is an input type that accepts MigrationMigrateDbSetArray and MigrationMigrateDbSetArrayOutput values.
+// You can construct a concrete instance of `MigrationMigrateDbSetArrayInput` via:
+//
+//          MigrationMigrateDbSetArray{ MigrationMigrateDbSetArgs{...} }
+type MigrationMigrateDbSetArrayInput interface {
+	pulumi.Input
+
+	ToMigrationMigrateDbSetArrayOutput() MigrationMigrateDbSetArrayOutput
+	ToMigrationMigrateDbSetArrayOutputWithContext(context.Context) MigrationMigrateDbSetArrayOutput
+}
+
+type MigrationMigrateDbSetArray []MigrationMigrateDbSetInput
+
+func (MigrationMigrateDbSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MigrationMigrateDbSet)(nil)).Elem()
+}
+
+func (i MigrationMigrateDbSetArray) ToMigrationMigrateDbSetArrayOutput() MigrationMigrateDbSetArrayOutput {
+	return i.ToMigrationMigrateDbSetArrayOutputWithContext(context.Background())
+}
+
+func (i MigrationMigrateDbSetArray) ToMigrationMigrateDbSetArrayOutputWithContext(ctx context.Context) MigrationMigrateDbSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationMigrateDbSetArrayOutput)
+}
+
+type MigrationMigrateDbSetOutput struct{ *pulumi.OutputState }
+
+func (MigrationMigrateDbSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationMigrateDbSet)(nil)).Elem()
+}
+
+func (o MigrationMigrateDbSetOutput) ToMigrationMigrateDbSetOutput() MigrationMigrateDbSetOutput {
+	return o
+}
+
+func (o MigrationMigrateDbSetOutput) ToMigrationMigrateDbSetOutputWithContext(ctx context.Context) MigrationMigrateDbSetOutput {
+	return o
+}
+
+// Name of the migration database.
+func (o MigrationMigrateDbSetOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationMigrateDbSet) *string { return v.DbName }).(pulumi.StringPtrOutput)
+}
+
+type MigrationMigrateDbSetArrayOutput struct{ *pulumi.OutputState }
+
+func (MigrationMigrateDbSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MigrationMigrateDbSet)(nil)).Elem()
+}
+
+func (o MigrationMigrateDbSetArrayOutput) ToMigrationMigrateDbSetArrayOutput() MigrationMigrateDbSetArrayOutput {
+	return o
+}
+
+func (o MigrationMigrateDbSetArrayOutput) ToMigrationMigrateDbSetArrayOutputWithContext(ctx context.Context) MigrationMigrateDbSetArrayOutput {
+	return o
+}
+
+func (o MigrationMigrateDbSetArrayOutput) Index(i pulumi.IntInput) MigrationMigrateDbSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MigrationMigrateDbSet {
+		return vs[0].([]MigrationMigrateDbSet)[vs[1].(int)]
+	}).(MigrationMigrateDbSetOutput)
+}
+
+type MigrationRenameRestore struct {
+	// When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.
+	NewName *string `pulumi:"newName"`
+	// The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.
+	OldName *string `pulumi:"oldName"`
+}
+
+// MigrationRenameRestoreInput is an input type that accepts MigrationRenameRestoreArgs and MigrationRenameRestoreOutput values.
+// You can construct a concrete instance of `MigrationRenameRestoreInput` via:
+//
+//          MigrationRenameRestoreArgs{...}
+type MigrationRenameRestoreInput interface {
+	pulumi.Input
+
+	ToMigrationRenameRestoreOutput() MigrationRenameRestoreOutput
+	ToMigrationRenameRestoreOutputWithContext(context.Context) MigrationRenameRestoreOutput
+}
+
+type MigrationRenameRestoreArgs struct {
+	// When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.
+	NewName pulumi.StringPtrInput `pulumi:"newName"`
+	// The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.
+	OldName pulumi.StringPtrInput `pulumi:"oldName"`
+}
+
+func (MigrationRenameRestoreArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationRenameRestore)(nil)).Elem()
+}
+
+func (i MigrationRenameRestoreArgs) ToMigrationRenameRestoreOutput() MigrationRenameRestoreOutput {
+	return i.ToMigrationRenameRestoreOutputWithContext(context.Background())
+}
+
+func (i MigrationRenameRestoreArgs) ToMigrationRenameRestoreOutputWithContext(ctx context.Context) MigrationRenameRestoreOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationRenameRestoreOutput)
+}
+
+// MigrationRenameRestoreArrayInput is an input type that accepts MigrationRenameRestoreArray and MigrationRenameRestoreArrayOutput values.
+// You can construct a concrete instance of `MigrationRenameRestoreArrayInput` via:
+//
+//          MigrationRenameRestoreArray{ MigrationRenameRestoreArgs{...} }
+type MigrationRenameRestoreArrayInput interface {
+	pulumi.Input
+
+	ToMigrationRenameRestoreArrayOutput() MigrationRenameRestoreArrayOutput
+	ToMigrationRenameRestoreArrayOutputWithContext(context.Context) MigrationRenameRestoreArrayOutput
+}
+
+type MigrationRenameRestoreArray []MigrationRenameRestoreInput
+
+func (MigrationRenameRestoreArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MigrationRenameRestore)(nil)).Elem()
+}
+
+func (i MigrationRenameRestoreArray) ToMigrationRenameRestoreArrayOutput() MigrationRenameRestoreArrayOutput {
+	return i.ToMigrationRenameRestoreArrayOutputWithContext(context.Background())
+}
+
+func (i MigrationRenameRestoreArray) ToMigrationRenameRestoreArrayOutputWithContext(ctx context.Context) MigrationRenameRestoreArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationRenameRestoreArrayOutput)
+}
+
+type MigrationRenameRestoreOutput struct{ *pulumi.OutputState }
+
+func (MigrationRenameRestoreOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationRenameRestore)(nil)).Elem()
+}
+
+func (o MigrationRenameRestoreOutput) ToMigrationRenameRestoreOutput() MigrationRenameRestoreOutput {
+	return o
+}
+
+func (o MigrationRenameRestoreOutput) ToMigrationRenameRestoreOutputWithContext(ctx context.Context) MigrationRenameRestoreOutput {
+	return o
+}
+
+// When the new name of the library is used for offline migration, if it is not filled in, it will be named according to OldName. OldName and NewName cannot be filled in at the same time. OldName and NewName must be filled in and cannot be duplicate when used for cloning database.
+func (o MigrationRenameRestoreOutput) NewName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationRenameRestore) *string { return v.NewName }).(pulumi.StringPtrOutput)
+}
+
+// The name of the library. If oldName does not exist, a failure is returned.It can be left blank when used for offline migration tasks.
+func (o MigrationRenameRestoreOutput) OldName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationRenameRestore) *string { return v.OldName }).(pulumi.StringPtrOutput)
+}
+
+type MigrationRenameRestoreArrayOutput struct{ *pulumi.OutputState }
+
+func (MigrationRenameRestoreArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MigrationRenameRestore)(nil)).Elem()
+}
+
+func (o MigrationRenameRestoreArrayOutput) ToMigrationRenameRestoreArrayOutput() MigrationRenameRestoreArrayOutput {
+	return o
+}
+
+func (o MigrationRenameRestoreArrayOutput) ToMigrationRenameRestoreArrayOutputWithContext(ctx context.Context) MigrationRenameRestoreArrayOutput {
+	return o
+}
+
+func (o MigrationRenameRestoreArrayOutput) Index(i pulumi.IntInput) MigrationRenameRestoreOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MigrationRenameRestore {
+		return vs[0].([]MigrationRenameRestore)[vs[1].(int)]
+	}).(MigrationRenameRestoreOutput)
+}
+
+type MigrationSource struct {
+	// ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).
+	CvmId *string `pulumi:"cvmId"`
+	// The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.
+	InstanceId *string `pulumi:"instanceId"`
+	// Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).
+	Ip *string `pulumi:"ip"`
+	// Password, MigrateType=1 or MigrateType=2.
+	Password *string `pulumi:"password"`
+	// The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).
+	Port *int `pulumi:"port"`
+	// The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.
+	SubnetId *string `pulumi:"subnetId"`
+	// The source backup password for offline migration, MigrateType=4 or MigrateType=5.
+	UrlPassword *string `pulumi:"urlPassword"`
+	// The source backup address for offline migration. MigrateType=4 or MigrateType=5.
+	Urls []string `pulumi:"urls"`
+	// User name, MigrateType=1 or MigrateType=2.
+	UserName *string `pulumi:"userName"`
+	// The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+// MigrationSourceInput is an input type that accepts MigrationSourceArgs and MigrationSourceOutput values.
+// You can construct a concrete instance of `MigrationSourceInput` via:
+//
+//          MigrationSourceArgs{...}
+type MigrationSourceInput interface {
+	pulumi.Input
+
+	ToMigrationSourceOutput() MigrationSourceOutput
+	ToMigrationSourceOutputWithContext(context.Context) MigrationSourceOutput
+}
+
+type MigrationSourceArgs struct {
+	// ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).
+	CvmId pulumi.StringPtrInput `pulumi:"cvmId"`
+	// The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Password, MigrateType=1 or MigrateType=2.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.
+	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
+	// The source backup password for offline migration, MigrateType=4 or MigrateType=5.
+	UrlPassword pulumi.StringPtrInput `pulumi:"urlPassword"`
+	// The source backup address for offline migration. MigrateType=4 or MigrateType=5.
+	Urls pulumi.StringArrayInput `pulumi:"urls"`
+	// User name, MigrateType=1 or MigrateType=2.
+	UserName pulumi.StringPtrInput `pulumi:"userName"`
+	// The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.
+	VpcId pulumi.StringPtrInput `pulumi:"vpcId"`
+}
+
+func (MigrationSourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationSource)(nil)).Elem()
+}
+
+func (i MigrationSourceArgs) ToMigrationSourceOutput() MigrationSourceOutput {
+	return i.ToMigrationSourceOutputWithContext(context.Background())
+}
+
+func (i MigrationSourceArgs) ToMigrationSourceOutputWithContext(ctx context.Context) MigrationSourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationSourceOutput)
+}
+
+func (i MigrationSourceArgs) ToMigrationSourcePtrOutput() MigrationSourcePtrOutput {
+	return i.ToMigrationSourcePtrOutputWithContext(context.Background())
+}
+
+func (i MigrationSourceArgs) ToMigrationSourcePtrOutputWithContext(ctx context.Context) MigrationSourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationSourceOutput).ToMigrationSourcePtrOutputWithContext(ctx)
+}
+
+// MigrationSourcePtrInput is an input type that accepts MigrationSourceArgs, MigrationSourcePtr and MigrationSourcePtrOutput values.
+// You can construct a concrete instance of `MigrationSourcePtrInput` via:
+//
+//          MigrationSourceArgs{...}
+//
+//  or:
+//
+//          nil
+type MigrationSourcePtrInput interface {
+	pulumi.Input
+
+	ToMigrationSourcePtrOutput() MigrationSourcePtrOutput
+	ToMigrationSourcePtrOutputWithContext(context.Context) MigrationSourcePtrOutput
+}
+
+type migrationSourcePtrType MigrationSourceArgs
+
+func MigrationSourcePtr(v *MigrationSourceArgs) MigrationSourcePtrInput {
+	return (*migrationSourcePtrType)(v)
+}
+
+func (*migrationSourcePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MigrationSource)(nil)).Elem()
+}
+
+func (i *migrationSourcePtrType) ToMigrationSourcePtrOutput() MigrationSourcePtrOutput {
+	return i.ToMigrationSourcePtrOutputWithContext(context.Background())
+}
+
+func (i *migrationSourcePtrType) ToMigrationSourcePtrOutputWithContext(ctx context.Context) MigrationSourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationSourcePtrOutput)
+}
+
+type MigrationSourceOutput struct{ *pulumi.OutputState }
+
+func (MigrationSourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationSource)(nil)).Elem()
+}
+
+func (o MigrationSourceOutput) ToMigrationSourceOutput() MigrationSourceOutput {
+	return o
+}
+
+func (o MigrationSourceOutput) ToMigrationSourceOutputWithContext(ctx context.Context) MigrationSourceOutput {
+	return o
+}
+
+func (o MigrationSourceOutput) ToMigrationSourcePtrOutput() MigrationSourcePtrOutput {
+	return o.ToMigrationSourcePtrOutputWithContext(context.Background())
+}
+
+func (o MigrationSourceOutput) ToMigrationSourcePtrOutputWithContext(ctx context.Context) MigrationSourcePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MigrationSource) *MigrationSource {
+		return &v
+	}).(MigrationSourcePtrOutput)
+}
+
+// ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).
+func (o MigrationSourceOutput) CvmId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.CvmId }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.
+func (o MigrationSourceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).
+func (o MigrationSourceOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.Ip }).(pulumi.StringPtrOutput)
+}
+
+// Password, MigrateType=1 or MigrateType=2.
+func (o MigrationSourceOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).
+func (o MigrationSourceOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.
+func (o MigrationSourceOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
+}
+
+// The source backup password for offline migration, MigrateType=4 or MigrateType=5.
+func (o MigrationSourceOutput) UrlPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.UrlPassword }).(pulumi.StringPtrOutput)
+}
+
+// The source backup address for offline migration. MigrateType=4 or MigrateType=5.
+func (o MigrationSourceOutput) Urls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v MigrationSource) []string { return v.Urls }).(pulumi.StringArrayOutput)
+}
+
+// User name, MigrateType=1 or MigrateType=2.
+func (o MigrationSourceOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.UserName }).(pulumi.StringPtrOutput)
+}
+
+// The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.
+func (o MigrationSourceOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationSource) *string { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+type MigrationSourcePtrOutput struct{ *pulumi.OutputState }
+
+func (MigrationSourcePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MigrationSource)(nil)).Elem()
+}
+
+func (o MigrationSourcePtrOutput) ToMigrationSourcePtrOutput() MigrationSourcePtrOutput {
+	return o
+}
+
+func (o MigrationSourcePtrOutput) ToMigrationSourcePtrOutputWithContext(ctx context.Context) MigrationSourcePtrOutput {
+	return o
+}
+
+func (o MigrationSourcePtrOutput) Elem() MigrationSourceOutput {
+	return o.ApplyT(func(v *MigrationSource) MigrationSource {
+		if v != nil {
+			return *v
+		}
+		var ret MigrationSource
+		return ret
+	}).(MigrationSourceOutput)
+}
+
+// ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).
+func (o MigrationSourcePtrOutput) CvmId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CvmId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the migration source instance, which is used when MigrateType=1 (TencentDB for SQLServers). The format is mssql-si2823jyl.
+func (o MigrationSourcePtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Migrate the intranet IP of the self-built database of the source Cvm, and use it when MigrateType=2 (self-built SQL Server database of the cloud server).
+func (o MigrationSourcePtrOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Ip
+	}).(pulumi.StringPtrOutput)
+}
+
+// Password, MigrateType=1 or MigrateType=2.
+func (o MigrationSourcePtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// The port number of the self-built database of the migration source Cvm, which is used when MigrateType=2 (self-built SQL Server database of the cloud server).
+func (o MigrationSourcePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The subnet ID under the Vpc of the source Cvm is used when MigrateType=2 (ECS self-built SQL Server database). The format is as follows subnet-h9extioi.
+func (o MigrationSourcePtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The source backup password for offline migration, MigrateType=4 or MigrateType=5.
+func (o MigrationSourcePtrOutput) UrlPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UrlPassword
+	}).(pulumi.StringPtrOutput)
+}
+
+// The source backup address for offline migration. MigrateType=4 or MigrateType=5.
+func (o MigrationSourcePtrOutput) Urls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *MigrationSource) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Urls
+	}).(pulumi.StringArrayOutput)
+}
+
+// User name, MigrateType=1 or MigrateType=2.
+func (o MigrationSourcePtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The Vpc network ID of the migration source Cvm is used when MigrateType=2 (cloud server self-built SQL Server database). The format is as follows vpc-6ys9ont9.
+func (o MigrationSourcePtrOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+type MigrationTarget struct {
+	// The ID of the migration target instance, in the format mssql-si2823jyl.
+	InstanceId *string `pulumi:"instanceId"`
+	// Password of the migration target instance.
+	Password *string `pulumi:"password"`
+	// User name of the migration target instance.
+	UserName *string `pulumi:"userName"`
+}
+
+// MigrationTargetInput is an input type that accepts MigrationTargetArgs and MigrationTargetOutput values.
+// You can construct a concrete instance of `MigrationTargetInput` via:
+//
+//          MigrationTargetArgs{...}
+type MigrationTargetInput interface {
+	pulumi.Input
+
+	ToMigrationTargetOutput() MigrationTargetOutput
+	ToMigrationTargetOutputWithContext(context.Context) MigrationTargetOutput
+}
+
+type MigrationTargetArgs struct {
+	// The ID of the migration target instance, in the format mssql-si2823jyl.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Password of the migration target instance.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// User name of the migration target instance.
+	UserName pulumi.StringPtrInput `pulumi:"userName"`
+}
+
+func (MigrationTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationTarget)(nil)).Elem()
+}
+
+func (i MigrationTargetArgs) ToMigrationTargetOutput() MigrationTargetOutput {
+	return i.ToMigrationTargetOutputWithContext(context.Background())
+}
+
+func (i MigrationTargetArgs) ToMigrationTargetOutputWithContext(ctx context.Context) MigrationTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationTargetOutput)
+}
+
+func (i MigrationTargetArgs) ToMigrationTargetPtrOutput() MigrationTargetPtrOutput {
+	return i.ToMigrationTargetPtrOutputWithContext(context.Background())
+}
+
+func (i MigrationTargetArgs) ToMigrationTargetPtrOutputWithContext(ctx context.Context) MigrationTargetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationTargetOutput).ToMigrationTargetPtrOutputWithContext(ctx)
+}
+
+// MigrationTargetPtrInput is an input type that accepts MigrationTargetArgs, MigrationTargetPtr and MigrationTargetPtrOutput values.
+// You can construct a concrete instance of `MigrationTargetPtrInput` via:
+//
+//          MigrationTargetArgs{...}
+//
+//  or:
+//
+//          nil
+type MigrationTargetPtrInput interface {
+	pulumi.Input
+
+	ToMigrationTargetPtrOutput() MigrationTargetPtrOutput
+	ToMigrationTargetPtrOutputWithContext(context.Context) MigrationTargetPtrOutput
+}
+
+type migrationTargetPtrType MigrationTargetArgs
+
+func MigrationTargetPtr(v *MigrationTargetArgs) MigrationTargetPtrInput {
+	return (*migrationTargetPtrType)(v)
+}
+
+func (*migrationTargetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MigrationTarget)(nil)).Elem()
+}
+
+func (i *migrationTargetPtrType) ToMigrationTargetPtrOutput() MigrationTargetPtrOutput {
+	return i.ToMigrationTargetPtrOutputWithContext(context.Background())
+}
+
+func (i *migrationTargetPtrType) ToMigrationTargetPtrOutputWithContext(ctx context.Context) MigrationTargetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MigrationTargetPtrOutput)
+}
+
+type MigrationTargetOutput struct{ *pulumi.OutputState }
+
+func (MigrationTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MigrationTarget)(nil)).Elem()
+}
+
+func (o MigrationTargetOutput) ToMigrationTargetOutput() MigrationTargetOutput {
+	return o
+}
+
+func (o MigrationTargetOutput) ToMigrationTargetOutputWithContext(ctx context.Context) MigrationTargetOutput {
+	return o
+}
+
+func (o MigrationTargetOutput) ToMigrationTargetPtrOutput() MigrationTargetPtrOutput {
+	return o.ToMigrationTargetPtrOutputWithContext(context.Background())
+}
+
+func (o MigrationTargetOutput) ToMigrationTargetPtrOutputWithContext(ctx context.Context) MigrationTargetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MigrationTarget) *MigrationTarget {
+		return &v
+	}).(MigrationTargetPtrOutput)
+}
+
+// The ID of the migration target instance, in the format mssql-si2823jyl.
+func (o MigrationTargetOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationTarget) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Password of the migration target instance.
+func (o MigrationTargetOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationTarget) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// User name of the migration target instance.
+func (o MigrationTargetOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MigrationTarget) *string { return v.UserName }).(pulumi.StringPtrOutput)
+}
+
+type MigrationTargetPtrOutput struct{ *pulumi.OutputState }
+
+func (MigrationTargetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MigrationTarget)(nil)).Elem()
+}
+
+func (o MigrationTargetPtrOutput) ToMigrationTargetPtrOutput() MigrationTargetPtrOutput {
+	return o
+}
+
+func (o MigrationTargetPtrOutput) ToMigrationTargetPtrOutputWithContext(ctx context.Context) MigrationTargetPtrOutput {
+	return o
+}
+
+func (o MigrationTargetPtrOutput) Elem() MigrationTargetOutput {
+	return o.ApplyT(func(v *MigrationTarget) MigrationTarget {
+		if v != nil {
+			return *v
+		}
+		var ret MigrationTarget
+		return ret
+	}).(MigrationTargetOutput)
+}
+
+// The ID of the migration target instance, in the format mssql-si2823jyl.
+func (o MigrationTargetPtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationTarget) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Password of the migration target instance.
+func (o MigrationTargetPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationTarget) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// User name of the migration target instance.
+func (o MigrationTargetPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MigrationTarget) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
 type PublishSubscribeDatabaseTuple struct {
 	// Publish the database.
 	PublishDatabase string `pulumi:"publishDatabase"`
@@ -18,7 +704,7 @@ type PublishSubscribeDatabaseTuple struct {
 // PublishSubscribeDatabaseTupleInput is an input type that accepts PublishSubscribeDatabaseTupleArgs and PublishSubscribeDatabaseTupleOutput values.
 // You can construct a concrete instance of `PublishSubscribeDatabaseTupleInput` via:
 //
-//	PublishSubscribeDatabaseTupleArgs{...}
+//          PublishSubscribeDatabaseTupleArgs{...}
 type PublishSubscribeDatabaseTupleInput interface {
 	pulumi.Input
 
@@ -46,7 +732,7 @@ func (i PublishSubscribeDatabaseTupleArgs) ToPublishSubscribeDatabaseTupleOutput
 // PublishSubscribeDatabaseTupleArrayInput is an input type that accepts PublishSubscribeDatabaseTupleArray and PublishSubscribeDatabaseTupleArrayOutput values.
 // You can construct a concrete instance of `PublishSubscribeDatabaseTupleArrayInput` via:
 //
-//	PublishSubscribeDatabaseTupleArray{ PublishSubscribeDatabaseTupleArgs{...} }
+//          PublishSubscribeDatabaseTupleArray{ PublishSubscribeDatabaseTupleArgs{...} }
 type PublishSubscribeDatabaseTupleArrayInput interface {
 	pulumi.Input
 
@@ -121,7 +807,7 @@ type GetAccountDbAttachmentsList struct {
 // GetAccountDbAttachmentsListInput is an input type that accepts GetAccountDbAttachmentsListArgs and GetAccountDbAttachmentsListOutput values.
 // You can construct a concrete instance of `GetAccountDbAttachmentsListInput` via:
 //
-//	GetAccountDbAttachmentsListArgs{...}
+//          GetAccountDbAttachmentsListArgs{...}
 type GetAccountDbAttachmentsListInput interface {
 	pulumi.Input
 
@@ -155,7 +841,7 @@ func (i GetAccountDbAttachmentsListArgs) ToGetAccountDbAttachmentsListOutputWith
 // GetAccountDbAttachmentsListArrayInput is an input type that accepts GetAccountDbAttachmentsListArray and GetAccountDbAttachmentsListArrayOutput values.
 // You can construct a concrete instance of `GetAccountDbAttachmentsListArrayInput` via:
 //
-//	GetAccountDbAttachmentsListArray{ GetAccountDbAttachmentsListArgs{...} }
+//          GetAccountDbAttachmentsListArray{ GetAccountDbAttachmentsListArgs{...} }
 type GetAccountDbAttachmentsListArrayInput interface {
 	pulumi.Input
 
@@ -249,7 +935,7 @@ type GetAccountsList struct {
 // GetAccountsListInput is an input type that accepts GetAccountsListArgs and GetAccountsListOutput values.
 // You can construct a concrete instance of `GetAccountsListInput` via:
 //
-//	GetAccountsListArgs{...}
+//          GetAccountsListArgs{...}
 type GetAccountsListInput interface {
 	pulumi.Input
 
@@ -287,7 +973,7 @@ func (i GetAccountsListArgs) ToGetAccountsListOutputWithContext(ctx context.Cont
 // GetAccountsListArrayInput is an input type that accepts GetAccountsListArray and GetAccountsListArrayOutput values.
 // You can construct a concrete instance of `GetAccountsListArrayInput` via:
 //
-//	GetAccountsListArray{ GetAccountsListArgs{...} }
+//          GetAccountsListArray{ GetAccountsListArgs{...} }
 type GetAccountsListArrayInput interface {
 	pulumi.Input
 
@@ -403,7 +1089,7 @@ type GetBackupsList struct {
 // GetBackupsListInput is an input type that accepts GetBackupsListArgs and GetBackupsListOutput values.
 // You can construct a concrete instance of `GetBackupsListInput` via:
 //
-//	GetBackupsListArgs{...}
+//          GetBackupsListArgs{...}
 type GetBackupsListInput interface {
 	pulumi.Input
 
@@ -453,7 +1139,7 @@ func (i GetBackupsListArgs) ToGetBackupsListOutputWithContext(ctx context.Contex
 // GetBackupsListArrayInput is an input type that accepts GetBackupsListArray and GetBackupsListArrayOutput values.
 // You can construct a concrete instance of `GetBackupsListArrayInput` via:
 //
-//	GetBackupsListArray{ GetBackupsListArgs{...} }
+//          GetBackupsListArray{ GetBackupsListArgs{...} }
 type GetBackupsListArrayInput interface {
 	pulumi.Input
 
@@ -609,7 +1295,7 @@ type GetBasicInstancesInstanceList struct {
 // GetBasicInstancesInstanceListInput is an input type that accepts GetBasicInstancesInstanceListArgs and GetBasicInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetBasicInstancesInstanceListInput` via:
 //
-//	GetBasicInstancesInstanceListArgs{...}
+//          GetBasicInstancesInstanceListArgs{...}
 type GetBasicInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -669,7 +1355,7 @@ func (i GetBasicInstancesInstanceListArgs) ToGetBasicInstancesInstanceListOutput
 // GetBasicInstancesInstanceListArrayInput is an input type that accepts GetBasicInstancesInstanceListArray and GetBasicInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetBasicInstancesInstanceListArrayInput` via:
 //
-//	GetBasicInstancesInstanceListArray{ GetBasicInstancesInstanceListArgs{...} }
+//          GetBasicInstancesInstanceListArray{ GetBasicInstancesInstanceListArgs{...} }
 type GetBasicInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -828,7 +1514,7 @@ type GetDbsDbList struct {
 // GetDbsDbListInput is an input type that accepts GetDbsDbListArgs and GetDbsDbListOutput values.
 // You can construct a concrete instance of `GetDbsDbListInput` via:
 //
-//	GetDbsDbListArgs{...}
+//          GetDbsDbListArgs{...}
 type GetDbsDbListInput interface {
 	pulumi.Input
 
@@ -866,7 +1552,7 @@ func (i GetDbsDbListArgs) ToGetDbsDbListOutputWithContext(ctx context.Context) G
 // GetDbsDbListArrayInput is an input type that accepts GetDbsDbListArray and GetDbsDbListArrayOutput values.
 // You can construct a concrete instance of `GetDbsDbListArrayInput` via:
 //
-//	GetDbsDbListArray{ GetDbsDbListArgs{...} }
+//          GetDbsDbListArray{ GetDbsDbListArgs{...} }
 type GetDbsDbListArrayInput interface {
 	pulumi.Input
 
@@ -994,7 +1680,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -1056,7 +1742,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1226,7 +1912,7 @@ type GetPublishSubscribesPublishSubscribeList struct {
 // GetPublishSubscribesPublishSubscribeListInput is an input type that accepts GetPublishSubscribesPublishSubscribeListArgs and GetPublishSubscribesPublishSubscribeListOutput values.
 // You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListInput` via:
 //
-//	GetPublishSubscribesPublishSubscribeListArgs{...}
+//          GetPublishSubscribesPublishSubscribeListArgs{...}
 type GetPublishSubscribesPublishSubscribeListInput interface {
 	pulumi.Input
 
@@ -1270,7 +1956,7 @@ func (i GetPublishSubscribesPublishSubscribeListArgs) ToGetPublishSubscribesPubl
 // GetPublishSubscribesPublishSubscribeListArrayInput is an input type that accepts GetPublishSubscribesPublishSubscribeListArray and GetPublishSubscribesPublishSubscribeListArrayOutput values.
 // You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListArrayInput` via:
 //
-//	GetPublishSubscribesPublishSubscribeListArray{ GetPublishSubscribesPublishSubscribeListArgs{...} }
+//          GetPublishSubscribesPublishSubscribeListArray{ GetPublishSubscribesPublishSubscribeListArgs{...} }
 type GetPublishSubscribesPublishSubscribeListArrayInput interface {
 	pulumi.Input
 
@@ -1387,7 +2073,7 @@ type GetPublishSubscribesPublishSubscribeListDatabaseTuple struct {
 // GetPublishSubscribesPublishSubscribeListDatabaseTupleInput is an input type that accepts GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs and GetPublishSubscribesPublishSubscribeListDatabaseTupleOutput values.
 // You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListDatabaseTupleInput` via:
 //
-//	GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs{...}
+//          GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs{...}
 type GetPublishSubscribesPublishSubscribeListDatabaseTupleInput interface {
 	pulumi.Input
 
@@ -1421,7 +2107,7 @@ func (i GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs) ToGetPublishS
 // GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput is an input type that accepts GetPublishSubscribesPublishSubscribeListDatabaseTupleArray and GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayOutput values.
 // You can construct a concrete instance of `GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput` via:
 //
-//	GetPublishSubscribesPublishSubscribeListDatabaseTupleArray{ GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs{...} }
+//          GetPublishSubscribesPublishSubscribeListDatabaseTupleArray{ GetPublishSubscribesPublishSubscribeListDatabaseTupleArgs{...} }
 type GetPublishSubscribesPublishSubscribeListDatabaseTupleArrayInput interface {
 	pulumi.Input
 
@@ -1523,7 +2209,7 @@ type GetReadonlyGroupsList struct {
 // GetReadonlyGroupsListInput is an input type that accepts GetReadonlyGroupsListArgs and GetReadonlyGroupsListOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsListInput` via:
 //
-//	GetReadonlyGroupsListArgs{...}
+//          GetReadonlyGroupsListArgs{...}
 type GetReadonlyGroupsListInput interface {
 	pulumi.Input
 
@@ -1569,7 +2255,7 @@ func (i GetReadonlyGroupsListArgs) ToGetReadonlyGroupsListOutputWithContext(ctx 
 // GetReadonlyGroupsListArrayInput is an input type that accepts GetReadonlyGroupsListArray and GetReadonlyGroupsListArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsListArrayInput` via:
 //
-//	GetReadonlyGroupsListArray{ GetReadonlyGroupsListArgs{...} }
+//          GetReadonlyGroupsListArray{ GetReadonlyGroupsListArgs{...} }
 type GetReadonlyGroupsListArrayInput interface {
 	pulumi.Input
 
@@ -1687,7 +2373,7 @@ type GetZoneConfigZoneList struct {
 // GetZoneConfigZoneListInput is an input type that accepts GetZoneConfigZoneListArgs and GetZoneConfigZoneListOutput values.
 // You can construct a concrete instance of `GetZoneConfigZoneListInput` via:
 //
-//	GetZoneConfigZoneListArgs{...}
+//          GetZoneConfigZoneListArgs{...}
 type GetZoneConfigZoneListInput interface {
 	pulumi.Input
 
@@ -1719,7 +2405,7 @@ func (i GetZoneConfigZoneListArgs) ToGetZoneConfigZoneListOutputWithContext(ctx 
 // GetZoneConfigZoneListArrayInput is an input type that accepts GetZoneConfigZoneListArray and GetZoneConfigZoneListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigZoneListArrayInput` via:
 //
-//	GetZoneConfigZoneListArray{ GetZoneConfigZoneListArgs{...} }
+//          GetZoneConfigZoneListArray{ GetZoneConfigZoneListArgs{...} }
 type GetZoneConfigZoneListArrayInput interface {
 	pulumi.Input
 
@@ -1816,7 +2502,7 @@ type GetZoneConfigZoneListSpecinfoList struct {
 // GetZoneConfigZoneListSpecinfoListInput is an input type that accepts GetZoneConfigZoneListSpecinfoListArgs and GetZoneConfigZoneListSpecinfoListOutput values.
 // You can construct a concrete instance of `GetZoneConfigZoneListSpecinfoListInput` via:
 //
-//	GetZoneConfigZoneListSpecinfoListArgs{...}
+//          GetZoneConfigZoneListSpecinfoListArgs{...}
 type GetZoneConfigZoneListSpecinfoListInput interface {
 	pulumi.Input
 
@@ -1862,7 +2548,7 @@ func (i GetZoneConfigZoneListSpecinfoListArgs) ToGetZoneConfigZoneListSpecinfoLi
 // GetZoneConfigZoneListSpecinfoListArrayInput is an input type that accepts GetZoneConfigZoneListSpecinfoListArray and GetZoneConfigZoneListSpecinfoListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigZoneListSpecinfoListArrayInput` via:
 //
-//	GetZoneConfigZoneListSpecinfoListArray{ GetZoneConfigZoneListSpecinfoListArgs{...} }
+//          GetZoneConfigZoneListSpecinfoListArray{ GetZoneConfigZoneListSpecinfoListArgs{...} }
 type GetZoneConfigZoneListSpecinfoListArrayInput interface {
 	pulumi.Input
 
@@ -1969,6 +2655,14 @@ func (o GetZoneConfigZoneListSpecinfoListArrayOutput) Index(i pulumi.IntInput) G
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationMigrateDbSetInput)(nil)).Elem(), MigrationMigrateDbSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationMigrateDbSetArrayInput)(nil)).Elem(), MigrationMigrateDbSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationRenameRestoreInput)(nil)).Elem(), MigrationRenameRestoreArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationRenameRestoreArrayInput)(nil)).Elem(), MigrationRenameRestoreArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationSourceInput)(nil)).Elem(), MigrationSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationSourcePtrInput)(nil)).Elem(), MigrationSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationTargetInput)(nil)).Elem(), MigrationTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MigrationTargetPtrInput)(nil)).Elem(), MigrationTargetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribeDatabaseTupleInput)(nil)).Elem(), PublishSubscribeDatabaseTupleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PublishSubscribeDatabaseTupleArrayInput)(nil)).Elem(), PublishSubscribeDatabaseTupleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountDbAttachmentsListInput)(nil)).Elem(), GetAccountDbAttachmentsListArgs{})
@@ -1993,6 +2687,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigZoneListArrayInput)(nil)).Elem(), GetZoneConfigZoneListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigZoneListSpecinfoListInput)(nil)).Elem(), GetZoneConfigZoneListSpecinfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigZoneListSpecinfoListArrayInput)(nil)).Elem(), GetZoneConfigZoneListSpecinfoListArray{})
+	pulumi.RegisterOutputType(MigrationMigrateDbSetOutput{})
+	pulumi.RegisterOutputType(MigrationMigrateDbSetArrayOutput{})
+	pulumi.RegisterOutputType(MigrationRenameRestoreOutput{})
+	pulumi.RegisterOutputType(MigrationRenameRestoreArrayOutput{})
+	pulumi.RegisterOutputType(MigrationSourceOutput{})
+	pulumi.RegisterOutputType(MigrationSourcePtrOutput{})
+	pulumi.RegisterOutputType(MigrationTargetOutput{})
+	pulumi.RegisterOutputType(MigrationTargetPtrOutput{})
 	pulumi.RegisterOutputType(PublishSubscribeDatabaseTupleOutput{})
 	pulumi.RegisterOutputType(PublishSubscribeDatabaseTupleArrayOutput{})
 	pulumi.RegisterOutputType(GetAccountDbAttachmentsListOutput{})

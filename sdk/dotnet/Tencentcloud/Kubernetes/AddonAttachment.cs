@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// <summary>
     /// Provide a resource to configure kubernetes cluster app addons.
     /// 
+    /// &gt; **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -30,7 +32,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///             {
     ///                 "rootdir=/var/lib/kubelet",
     ///             },
-    ///             Version = "1.0.0",
     ///         });
     ///         var addonTcr = new Tencentcloud.Kubernetes.AddonAttachment("addonTcr", new Tencentcloud.Kubernetes.AddonAttachmentArgs
     ///         {
@@ -55,7 +56,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                 "global.hosts[0].ip=10.16.0.49",
     ///                 "global.hosts[0].disabled=false",
     ///             },
-    ///             Version = "1.0.0",
     ///         });
     ///     }
     /// 
@@ -79,7 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     ""spec"":{
     ///         ""chart"":{
     ///             ""chartName"":""cbs"",
-    ///             ""chartVersion"":""1.0.0""
+    ///             ""chartVersion"":""1.0.5""
     ///         },
     ///         ""values"":{
     ///             ""rawValuesType"":""yaml"",
@@ -148,7 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Addon version, default latest version. Conflict with `request_body`.
         /// </summary>
         [Output("version")]
-        public Output<string?> Version { get; private set; } = null!;
+        public Output<string> Version { get; private set; } = null!;
 
 
         /// <summary>

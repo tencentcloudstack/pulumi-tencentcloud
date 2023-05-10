@@ -14,7 +14,12 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const recordingRule = new tencentcloud.Monitor.TmpRecordingRule("recordingRule", {
- *     group: "LS0tDQpuYW1lOiBleGFtcGxlDQpydWxlczoNCiAgLSByZWNvcmQ6IGpvYjpodHRwX2lucHJvZ3Jlc3NfcmVxdWVzdHM6c3VtDQogICAgZXhwcjogc3VtIGJ5IChqb2IpIChodHRwX2lucHJvZ3Jlc3NfcmVxdWVzdHMp",
+ *     group: `---
+ * name: example-test
+ * rules:
+ *   - record: job:http_inprogress_requests:sum
+ *     expr: sum by (job) (http_inprogress_requests)
+ * `,
  *     instanceId: "prom-c89b3b3u",
  *     ruleState: 2,
  * });

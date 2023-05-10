@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  *     value: "1.2.3.9",
  * });
  * ```
+ *
+ * ## Import
+ *
+ * DnsPod Domain record can be imported using the Domain#RecordId, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+ * ```
  */
 export class Record extends pulumi.CustomResource {
     /**

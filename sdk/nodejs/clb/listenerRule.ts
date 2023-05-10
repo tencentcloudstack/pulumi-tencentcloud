@@ -125,6 +125,14 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly healthCheckSwitch!: pulumi.Output<boolean>;
     /**
+     * Time out of health check. The value range is 2-60.
+     */
+    public readonly healthCheckTimeOut!: pulumi.Output<number>;
+    /**
+     * Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+     */
+    public readonly healthCheckType!: pulumi.Output<string>;
+    /**
      * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly healthCheckUnhealthNum!: pulumi.Output<number>;
@@ -183,6 +191,8 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["healthCheckHttpPath"] = state ? state.healthCheckHttpPath : undefined;
             resourceInputs["healthCheckIntervalTime"] = state ? state.healthCheckIntervalTime : undefined;
             resourceInputs["healthCheckSwitch"] = state ? state.healthCheckSwitch : undefined;
+            resourceInputs["healthCheckTimeOut"] = state ? state.healthCheckTimeOut : undefined;
+            resourceInputs["healthCheckType"] = state ? state.healthCheckType : undefined;
             resourceInputs["healthCheckUnhealthNum"] = state ? state.healthCheckUnhealthNum : undefined;
             resourceInputs["http2Switch"] = state ? state.http2Switch : undefined;
             resourceInputs["listenerId"] = state ? state.listenerId : undefined;
@@ -218,6 +228,8 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["healthCheckHttpPath"] = args ? args.healthCheckHttpPath : undefined;
             resourceInputs["healthCheckIntervalTime"] = args ? args.healthCheckIntervalTime : undefined;
             resourceInputs["healthCheckSwitch"] = args ? args.healthCheckSwitch : undefined;
+            resourceInputs["healthCheckTimeOut"] = args ? args.healthCheckTimeOut : undefined;
+            resourceInputs["healthCheckType"] = args ? args.healthCheckType : undefined;
             resourceInputs["healthCheckUnhealthNum"] = args ? args.healthCheckUnhealthNum : undefined;
             resourceInputs["http2Switch"] = args ? args.http2Switch : undefined;
             resourceInputs["listenerId"] = args ? args.listenerId : undefined;
@@ -288,6 +300,14 @@ export interface ListenerRuleState {
      * Indicates whether health check is enabled.
      */
     healthCheckSwitch?: pulumi.Input<boolean>;
+    /**
+     * Time out of health check. The value range is 2-60.
+     */
+    healthCheckTimeOut?: pulumi.Input<number>;
+    /**
+     * Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+     */
+    healthCheckType?: pulumi.Input<string>;
     /**
      * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
@@ -378,6 +398,14 @@ export interface ListenerRuleArgs {
      * Indicates whether health check is enabled.
      */
     healthCheckSwitch?: pulumi.Input<boolean>;
+    /**
+     * Time out of health check. The value range is 2-60.
+     */
+    healthCheckTimeOut?: pulumi.Input<number>;
+    /**
+     * Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+     */
+    healthCheckType?: pulumi.Input<string>;
     /**
      * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */

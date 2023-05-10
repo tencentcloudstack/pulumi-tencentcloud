@@ -14,14 +14,21 @@ __all__ = ['SnapshotArgs', 'Snapshot']
 class SnapshotArgs:
     def __init__(__self__, *,
                  snapshot_name: pulumi.Input[str],
-                 storage_id: pulumi.Input[str]):
+                 storage_id: pulumi.Input[str],
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Snapshot resource.
         :param pulumi.Input[str] snapshot_name: Name of the snapshot.
         :param pulumi.Input[str] storage_id: ID of the the CBS which this snapshot created from.
+        :param pulumi.Input[Mapping[str, Any]] tags: cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
         """
         pulumi.set(__self__, "snapshot_name", snapshot_name)
         pulumi.set(__self__, "storage_id", storage_id)
+        if tags is not None:
+            warnings.warn("""cbs snapshot do not support tag now.""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: cbs snapshot do not support tag now.""")
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="snapshotName")
@@ -47,6 +54,18 @@ class SnapshotArgs:
     def storage_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "storage_id", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _SnapshotState:
@@ -57,7 +76,8 @@ class _SnapshotState:
                  snapshot_name: Optional[pulumi.Input[str]] = None,
                  snapshot_status: Optional[pulumi.Input[str]] = None,
                  storage_id: Optional[pulumi.Input[str]] = None,
-                 storage_size: Optional[pulumi.Input[int]] = None):
+                 storage_size: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Snapshot resources.
         :param pulumi.Input[str] create_time: Creation time of snapshot.
@@ -67,6 +87,7 @@ class _SnapshotState:
         :param pulumi.Input[str] snapshot_status: Status of the snapshot.
         :param pulumi.Input[str] storage_id: ID of the the CBS which this snapshot created from.
         :param pulumi.Input[int] storage_size: Volume of storage which this snapshot created from.
+        :param pulumi.Input[Mapping[str, Any]] tags: cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
         """
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
@@ -82,6 +103,11 @@ class _SnapshotState:
             pulumi.set(__self__, "storage_id", storage_id)
         if storage_size is not None:
             pulumi.set(__self__, "storage_size", storage_size)
+        if tags is not None:
+            warnings.warn("""cbs snapshot do not support tag now.""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: cbs snapshot do not support tag now.""")
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="createTime")
@@ -167,6 +193,18 @@ class _SnapshotState:
     def storage_size(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_size", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 class Snapshot(pulumi.CustomResource):
     @overload
@@ -175,6 +213,7 @@ class Snapshot(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  snapshot_name: Optional[pulumi.Input[str]] = None,
                  storage_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provides a resource to create a CBS snapshot.
@@ -202,6 +241,7 @@ class Snapshot(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] snapshot_name: Name of the snapshot.
         :param pulumi.Input[str] storage_id: ID of the the CBS which this snapshot created from.
+        :param pulumi.Input[Mapping[str, Any]] tags: cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
         """
         ...
     @overload
@@ -248,6 +288,7 @@ class Snapshot(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  snapshot_name: Optional[pulumi.Input[str]] = None,
                  storage_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -268,6 +309,10 @@ class Snapshot(pulumi.CustomResource):
             if storage_id is None and not opts.urn:
                 raise TypeError("Missing required property 'storage_id'")
             __props__.__dict__["storage_id"] = storage_id
+            if tags is not None and not opts.urn:
+                warnings.warn("""cbs snapshot do not support tag now.""", DeprecationWarning)
+                pulumi.log.warn("""tags is deprecated: cbs snapshot do not support tag now.""")
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["create_time"] = None
             __props__.__dict__["disk_type"] = None
             __props__.__dict__["percent"] = None
@@ -289,7 +334,8 @@ class Snapshot(pulumi.CustomResource):
             snapshot_name: Optional[pulumi.Input[str]] = None,
             snapshot_status: Optional[pulumi.Input[str]] = None,
             storage_id: Optional[pulumi.Input[str]] = None,
-            storage_size: Optional[pulumi.Input[int]] = None) -> 'Snapshot':
+            storage_size: Optional[pulumi.Input[int]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Snapshot':
         """
         Get an existing Snapshot resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -304,6 +350,7 @@ class Snapshot(pulumi.CustomResource):
         :param pulumi.Input[str] snapshot_status: Status of the snapshot.
         :param pulumi.Input[str] storage_id: ID of the the CBS which this snapshot created from.
         :param pulumi.Input[int] storage_size: Volume of storage which this snapshot created from.
+        :param pulumi.Input[Mapping[str, Any]] tags: cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -316,6 +363,7 @@ class Snapshot(pulumi.CustomResource):
         __props__.__dict__["snapshot_status"] = snapshot_status
         __props__.__dict__["storage_id"] = storage_id
         __props__.__dict__["storage_size"] = storage_size
+        __props__.__dict__["tags"] = tags
         return Snapshot(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -373,4 +421,12 @@ class Snapshot(pulumi.CustomResource):
         Volume of storage which this snapshot created from.
         """
         return pulumi.get(self, "storage_size")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+        """
+        return pulumi.get(self, "tags")
 

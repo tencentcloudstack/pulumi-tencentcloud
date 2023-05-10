@@ -102,7 +102,7 @@ export class BasicInstance extends pulumi.CustomResource {
      */
     public readonly engineVersion!: pulumi.Output<string | undefined>;
     /**
-     * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+     * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
      */
     public readonly machineType!: pulumi.Output<string>;
     /**
@@ -284,7 +284,7 @@ export interface BasicInstanceState {
      */
     engineVersion?: pulumi.Input<string>;
     /**
-     * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+     * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
      */
     machineType?: pulumi.Input<string>;
     /**
@@ -382,7 +382,7 @@ export interface BasicInstanceArgs {
      */
     engineVersion?: pulumi.Input<string>;
     /**
-     * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+     * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
      */
     machineType: pulumi.Input<string>;
     /**

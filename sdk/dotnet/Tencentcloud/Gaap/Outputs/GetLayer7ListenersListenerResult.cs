@@ -55,6 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
         /// </summary>
         public readonly string Protocol;
         /// <summary>
+        /// ID of the GAAP proxy to be queried.
+        /// </summary>
+        public readonly string ProxyId;
+        /// <summary>
         /// Status of the layer7 listener.
         /// </summary>
         public readonly int Status;
@@ -81,6 +85,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
 
             string protocol,
 
+            string proxyId,
+
             int status)
         {
             AuthType = authType;
@@ -93,6 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
             Name = name;
             Port = port;
             Protocol = protocol;
+            ProxyId = proxyId;
             Status = status;
         }
     }

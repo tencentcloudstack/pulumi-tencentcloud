@@ -33,34 +33,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// }
     /// ```
     /// 
-    /// Create target group
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
-    ///         {
-    ///             Port = 18082,
-    ///             TargetGroupInstances = 
-    ///             {
-    ///                 new Tencentcloud.Clb.Inputs.TargetGroupTargetGroupInstanceArgs
-    ///                 {
-    ///                     BindIp = "10.0.0.4",
-    ///                     Port = 18080,
-    ///                 },
-    ///             },
-    ///             TargetGroupName = "hello1",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// CLB target group can be imported using the id, e.g.
@@ -79,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int?> Port { get; private set; } = null!;
 
         /// <summary>
-        /// The backend server of target group bind.
+        /// It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         /// </summary>
         [Output("targetGroupInstances")]
         public Output<ImmutableArray<Outputs.TargetGroupTargetGroupInstance>> TargetGroupInstances { get; private set; } = null!;
@@ -153,8 +125,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         private InputList<Inputs.TargetGroupTargetGroupInstanceArgs>? _targetGroupInstances;
 
         /// <summary>
-        /// The backend server of target group bind.
+        /// It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.")]
         public InputList<Inputs.TargetGroupTargetGroupInstanceArgs> TargetGroupInstances
         {
             get => _targetGroupInstances ?? (_targetGroupInstances = new InputList<Inputs.TargetGroupTargetGroupInstanceArgs>());
@@ -190,8 +163,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         private InputList<Inputs.TargetGroupTargetGroupInstanceGetArgs>? _targetGroupInstances;
 
         /// <summary>
-        /// The backend server of target group bind.
+        /// It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.")]
         public InputList<Inputs.TargetGroupTargetGroupInstanceGetArgs> TargetGroupInstances
         {
             get => _targetGroupInstances ?? (_targetGroupInstances = new InputList<Inputs.TargetGroupTargetGroupInstanceGetArgs>());

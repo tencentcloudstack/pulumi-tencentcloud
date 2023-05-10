@@ -19,86 +19,83 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Dayu.NewCcPolicyV2(ctx, "demo", &Dayu.CcPolicyV2Args{
-//				Business: pulumi.String("bgpip"),
-//				CcBlackWhiteIps: dayu.CcPolicyV2CcBlackWhiteIpArray{
-//					&dayu.CcPolicyV2CcBlackWhiteIpArgs{
-//						BlackWhiteIp: pulumi.String("1.2.3.4"),
-//						Domain:       pulumi.String("12.com"),
-//						Protocol:     pulumi.String("http"),
-//						Type:         pulumi.String("black"),
-//					},
-//				},
-//				CcGeoIpPolicys: dayu.CcPolicyV2CcGeoIpPolicyArray{
-//					&dayu.CcPolicyV2CcGeoIpPolicyArgs{
-//						Action:     pulumi.String("drop"),
-//						Domain:     pulumi.String("12.com"),
-//						Protocol:   pulumi.String("http"),
-//						RegionType: pulumi.String("china"),
-//					},
-//				},
-//				CcPrecisionPolicys: dayu.CcPolicyV2CcPrecisionPolicyArray{
-//					&dayu.CcPolicyV2CcPrecisionPolicyArgs{
-//						Domain:       pulumi.String("1.com"),
-//						Ip:           pulumi.String("162.62.163.34"),
-//						PolicyAction: pulumi.String("drop"),
-//						Policys: dayu.CcPolicyV2CcPrecisionPolicyPolicyArray{
-//							&dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs{
-//								FieldName:     pulumi.String("cgi"),
-//								FieldType:     pulumi.String("value"),
-//								Value:         pulumi.String("12123.com"),
-//								ValueOperator: pulumi.String("equal"),
-//							},
-//						},
-//						Protocol: pulumi.String("http"),
-//					},
-//				},
-//				CcPrecisionReqLimits: dayu.CcPolicyV2CcPrecisionReqLimitArray{
-//					&dayu.CcPolicyV2CcPrecisionReqLimitArgs{
-//						Domain: pulumi.String("11.com"),
-//						Level:  pulumi.String("loose"),
-//						Policys: dayu.CcPolicyV2CcPrecisionReqLimitPolicyArray{
-//							&dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs{
-//								Action:          pulumi.String("alg"),
-//								ExecuteDuration: pulumi.Int(2),
-//								Mode:            pulumi.String("equal"),
-//								Period:          pulumi.Int(5),
-//								RequestNum:      pulumi.Int(12),
-//								Uri:             pulumi.String("15.com"),
-//							},
-//						},
-//						Protocol: pulumi.String("http"),
-//					},
-//				},
-//				ResourceId: pulumi.String("bgpip-000004xf"),
-//				Thresholds: dayu.CcPolicyV2ThresholdArray{
-//					&dayu.CcPolicyV2ThresholdArgs{
-//						Domain:    pulumi.String("12.com"),
-//						Threshold: pulumi.Int(0),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewCcPolicyV2(ctx, "demo", &Dayu.CcPolicyV2Args{
+// 			Business: pulumi.String("bgpip"),
+// 			CcBlackWhiteIps: dayu.CcPolicyV2CcBlackWhiteIpArray{
+// 				&dayu.CcPolicyV2CcBlackWhiteIpArgs{
+// 					BlackWhiteIp: pulumi.String("1.2.3.4"),
+// 					Domain:       pulumi.String("12.com"),
+// 					Protocol:     pulumi.String("http"),
+// 					Type:         pulumi.String("black"),
+// 				},
+// 			},
+// 			CcGeoIpPolicys: dayu.CcPolicyV2CcGeoIpPolicyArray{
+// 				&dayu.CcPolicyV2CcGeoIpPolicyArgs{
+// 					Action:     pulumi.String("drop"),
+// 					Domain:     pulumi.String("12.com"),
+// 					Protocol:   pulumi.String("http"),
+// 					RegionType: pulumi.String("china"),
+// 				},
+// 			},
+// 			CcPrecisionPolicys: dayu.CcPolicyV2CcPrecisionPolicyArray{
+// 				&dayu.CcPolicyV2CcPrecisionPolicyArgs{
+// 					Domain:       pulumi.String("1.com"),
+// 					Ip:           pulumi.String("162.62.163.34"),
+// 					PolicyAction: pulumi.String("drop"),
+// 					Policys: dayu.CcPolicyV2CcPrecisionPolicyPolicyArray{
+// 						&dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs{
+// 							FieldName:     pulumi.String("cgi"),
+// 							FieldType:     pulumi.String("value"),
+// 							Value:         pulumi.String("12123.com"),
+// 							ValueOperator: pulumi.String("equal"),
+// 						},
+// 					},
+// 					Protocol: pulumi.String("http"),
+// 				},
+// 			},
+// 			CcPrecisionReqLimits: dayu.CcPolicyV2CcPrecisionReqLimitArray{
+// 				&dayu.CcPolicyV2CcPrecisionReqLimitArgs{
+// 					Domain: pulumi.String("11.com"),
+// 					Level:  pulumi.String("loose"),
+// 					Policys: dayu.CcPolicyV2CcPrecisionReqLimitPolicyArray{
+// 						&dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs{
+// 							Action:          pulumi.String("alg"),
+// 							ExecuteDuration: pulumi.Int(2),
+// 							Mode:            pulumi.String("equal"),
+// 							Period:          pulumi.Int(5),
+// 							RequestNum:      pulumi.Int(12),
+// 							Uri:             pulumi.String("15.com"),
+// 						},
+// 					},
+// 					Protocol: pulumi.String("http"),
+// 				},
+// 			},
+// 			ResourceId: pulumi.String("bgpip-000004xf"),
+// 			Thresholds: dayu.CcPolicyV2ThresholdArray{
+// 				&dayu.CcPolicyV2ThresholdArgs{
+// 					Domain:    pulumi.String("12.com"),
+// 					Threshold: pulumi.Int(0),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type CcPolicyV2 struct {
 	pulumi.CustomResourceState
 
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+	// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business pulumi.StringOutput `pulumi:"business"`
 	// Blacklist and whitelist.
 	CcBlackWhiteIps CcPolicyV2CcBlackWhiteIpArrayOutput `pulumi:"ccBlackWhiteIps"`
@@ -150,7 +147,7 @@ func GetCcPolicyV2(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CcPolicyV2 resources.
 type ccPolicyV2State struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+	// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business *string `pulumi:"business"`
 	// Blacklist and whitelist.
 	CcBlackWhiteIps []CcPolicyV2CcBlackWhiteIp `pulumi:"ccBlackWhiteIps"`
@@ -167,7 +164,7 @@ type ccPolicyV2State struct {
 }
 
 type CcPolicyV2State struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+	// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business pulumi.StringPtrInput
 	// Blacklist and whitelist.
 	CcBlackWhiteIps CcPolicyV2CcBlackWhiteIpArrayInput
@@ -188,7 +185,7 @@ func (CcPolicyV2State) ElementType() reflect.Type {
 }
 
 type ccPolicyV2Args struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+	// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business string `pulumi:"business"`
 	// Blacklist and whitelist.
 	CcBlackWhiteIps []CcPolicyV2CcBlackWhiteIp `pulumi:"ccBlackWhiteIps"`
@@ -206,7 +203,7 @@ type ccPolicyV2Args struct {
 
 // The set of arguments for constructing a CcPolicyV2 resource.
 type CcPolicyV2Args struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+	// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business pulumi.StringInput
 	// Blacklist and whitelist.
 	CcBlackWhiteIps CcPolicyV2CcBlackWhiteIpArrayInput
@@ -248,7 +245,7 @@ func (i *CcPolicyV2) ToCcPolicyV2OutputWithContext(ctx context.Context) CcPolicy
 // CcPolicyV2ArrayInput is an input type that accepts CcPolicyV2Array and CcPolicyV2ArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2ArrayInput` via:
 //
-//	CcPolicyV2Array{ CcPolicyV2Args{...} }
+//          CcPolicyV2Array{ CcPolicyV2Args{...} }
 type CcPolicyV2ArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +270,7 @@ func (i CcPolicyV2Array) ToCcPolicyV2ArrayOutputWithContext(ctx context.Context)
 // CcPolicyV2MapInput is an input type that accepts CcPolicyV2Map and CcPolicyV2MapOutput values.
 // You can construct a concrete instance of `CcPolicyV2MapInput` via:
 //
-//	CcPolicyV2Map{ "key": CcPolicyV2Args{...} }
+//          CcPolicyV2Map{ "key": CcPolicyV2Args{...} }
 type CcPolicyV2MapInput interface {
 	pulumi.Input
 
@@ -309,7 +306,7 @@ func (o CcPolicyV2Output) ToCcPolicyV2OutputWithContext(ctx context.Context) CcP
 	return o
 }
 
-// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 func (o CcPolicyV2Output) Business() pulumi.StringOutput {
 	return o.ApplyT(func(v *CcPolicyV2) pulumi.StringOutput { return v.Business }).(pulumi.StringOutput)
 }

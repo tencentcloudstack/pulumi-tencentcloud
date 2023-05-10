@@ -26,7 +26,7 @@ class TmpAlertRuleArgs:
                  type: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a TmpAlertRule resource.
-        :param pulumi.Input[str] expr: Rule expression.
+        :param pulumi.Input[str] expr: Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         :param pulumi.Input[str] instance_id: Instance id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] receivers: Alarm notification template id list.
         :param pulumi.Input[str] rule_name: Rule name.
@@ -55,7 +55,7 @@ class TmpAlertRuleArgs:
     @pulumi.getter
     def expr(self) -> pulumi.Input[str]:
         """
-        Rule expression.
+        Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         """
         return pulumi.get(self, "expr")
 
@@ -176,7 +176,7 @@ class _TmpAlertRuleState:
         Input properties used for looking up and filtering TmpAlertRule resources.
         :param pulumi.Input[Sequence[pulumi.Input['TmpAlertRuleAnnotationArgs']]] annotations: Rule alarm duration.
         :param pulumi.Input[str] duration: Rule alarm duration.
-        :param pulumi.Input[str] expr: Rule expression.
+        :param pulumi.Input[str] expr: Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         :param pulumi.Input[str] instance_id: Instance id.
         :param pulumi.Input[Sequence[pulumi.Input['TmpAlertRuleLabelArgs']]] labels: Rule alarm duration.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] receivers: Alarm notification template id list.
@@ -231,7 +231,7 @@ class _TmpAlertRuleState:
     @pulumi.getter
     def expr(self) -> Optional[pulumi.Input[str]]:
         """
-        Rule expression.
+        Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         """
         return pulumi.get(self, "expr")
 
@@ -365,7 +365,7 @@ class TmpAlertRule(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TmpAlertRuleAnnotationArgs']]]] annotations: Rule alarm duration.
         :param pulumi.Input[str] duration: Rule alarm duration.
-        :param pulumi.Input[str] expr: Rule expression.
+        :param pulumi.Input[str] expr: Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         :param pulumi.Input[str] instance_id: Instance id.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TmpAlertRuleLabelArgs']]]] labels: Rule alarm duration.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] receivers: Alarm notification template id list.
@@ -496,7 +496,7 @@ class TmpAlertRule(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TmpAlertRuleAnnotationArgs']]]] annotations: Rule alarm duration.
         :param pulumi.Input[str] duration: Rule alarm duration.
-        :param pulumi.Input[str] expr: Rule expression.
+        :param pulumi.Input[str] expr: Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         :param pulumi.Input[str] instance_id: Instance id.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TmpAlertRuleLabelArgs']]]] labels: Rule alarm duration.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] receivers: Alarm notification template id list.
@@ -539,7 +539,7 @@ class TmpAlertRule(pulumi.CustomResource):
     @pulumi.getter
     def expr(self) -> pulumi.Output[str]:
         """
-        Rule expression.
+        Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         """
         return pulumi.get(self, "expr")
 

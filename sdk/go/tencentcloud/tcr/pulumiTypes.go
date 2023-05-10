@@ -10,6 +10,368 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type ImmutableTagRuleRule struct {
+	// disable rule.
+	Disabled *bool `pulumi:"disabled"`
+	// ID of the resource.
+	Id     *int    `pulumi:"id"`
+	NsName *string `pulumi:"nsName"`
+	// repository decoration type:repoMatches or repoExcludes.
+	RepositoryDecoration string `pulumi:"repositoryDecoration"`
+	// repository matching rules.
+	RepositoryPattern string `pulumi:"repositoryPattern"`
+	// tag decoration type: matches or excludes.
+	TagDecoration string `pulumi:"tagDecoration"`
+	// tag matching rules.
+	TagPattern string `pulumi:"tagPattern"`
+}
+
+// ImmutableTagRuleRuleInput is an input type that accepts ImmutableTagRuleRuleArgs and ImmutableTagRuleRuleOutput values.
+// You can construct a concrete instance of `ImmutableTagRuleRuleInput` via:
+//
+//          ImmutableTagRuleRuleArgs{...}
+type ImmutableTagRuleRuleInput interface {
+	pulumi.Input
+
+	ToImmutableTagRuleRuleOutput() ImmutableTagRuleRuleOutput
+	ToImmutableTagRuleRuleOutputWithContext(context.Context) ImmutableTagRuleRuleOutput
+}
+
+type ImmutableTagRuleRuleArgs struct {
+	// disable rule.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
+	// ID of the resource.
+	Id     pulumi.IntPtrInput    `pulumi:"id"`
+	NsName pulumi.StringPtrInput `pulumi:"nsName"`
+	// repository decoration type:repoMatches or repoExcludes.
+	RepositoryDecoration pulumi.StringInput `pulumi:"repositoryDecoration"`
+	// repository matching rules.
+	RepositoryPattern pulumi.StringInput `pulumi:"repositoryPattern"`
+	// tag decoration type: matches or excludes.
+	TagDecoration pulumi.StringInput `pulumi:"tagDecoration"`
+	// tag matching rules.
+	TagPattern pulumi.StringInput `pulumi:"tagPattern"`
+}
+
+func (ImmutableTagRuleRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ImmutableTagRuleRule)(nil)).Elem()
+}
+
+func (i ImmutableTagRuleRuleArgs) ToImmutableTagRuleRuleOutput() ImmutableTagRuleRuleOutput {
+	return i.ToImmutableTagRuleRuleOutputWithContext(context.Background())
+}
+
+func (i ImmutableTagRuleRuleArgs) ToImmutableTagRuleRuleOutputWithContext(ctx context.Context) ImmutableTagRuleRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ImmutableTagRuleRuleOutput)
+}
+
+func (i ImmutableTagRuleRuleArgs) ToImmutableTagRuleRulePtrOutput() ImmutableTagRuleRulePtrOutput {
+	return i.ToImmutableTagRuleRulePtrOutputWithContext(context.Background())
+}
+
+func (i ImmutableTagRuleRuleArgs) ToImmutableTagRuleRulePtrOutputWithContext(ctx context.Context) ImmutableTagRuleRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ImmutableTagRuleRuleOutput).ToImmutableTagRuleRulePtrOutputWithContext(ctx)
+}
+
+// ImmutableTagRuleRulePtrInput is an input type that accepts ImmutableTagRuleRuleArgs, ImmutableTagRuleRulePtr and ImmutableTagRuleRulePtrOutput values.
+// You can construct a concrete instance of `ImmutableTagRuleRulePtrInput` via:
+//
+//          ImmutableTagRuleRuleArgs{...}
+//
+//  or:
+//
+//          nil
+type ImmutableTagRuleRulePtrInput interface {
+	pulumi.Input
+
+	ToImmutableTagRuleRulePtrOutput() ImmutableTagRuleRulePtrOutput
+	ToImmutableTagRuleRulePtrOutputWithContext(context.Context) ImmutableTagRuleRulePtrOutput
+}
+
+type immutableTagRuleRulePtrType ImmutableTagRuleRuleArgs
+
+func ImmutableTagRuleRulePtr(v *ImmutableTagRuleRuleArgs) ImmutableTagRuleRulePtrInput {
+	return (*immutableTagRuleRulePtrType)(v)
+}
+
+func (*immutableTagRuleRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ImmutableTagRuleRule)(nil)).Elem()
+}
+
+func (i *immutableTagRuleRulePtrType) ToImmutableTagRuleRulePtrOutput() ImmutableTagRuleRulePtrOutput {
+	return i.ToImmutableTagRuleRulePtrOutputWithContext(context.Background())
+}
+
+func (i *immutableTagRuleRulePtrType) ToImmutableTagRuleRulePtrOutputWithContext(ctx context.Context) ImmutableTagRuleRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ImmutableTagRuleRulePtrOutput)
+}
+
+type ImmutableTagRuleRuleOutput struct{ *pulumi.OutputState }
+
+func (ImmutableTagRuleRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ImmutableTagRuleRule)(nil)).Elem()
+}
+
+func (o ImmutableTagRuleRuleOutput) ToImmutableTagRuleRuleOutput() ImmutableTagRuleRuleOutput {
+	return o
+}
+
+func (o ImmutableTagRuleRuleOutput) ToImmutableTagRuleRuleOutputWithContext(ctx context.Context) ImmutableTagRuleRuleOutput {
+	return o
+}
+
+func (o ImmutableTagRuleRuleOutput) ToImmutableTagRuleRulePtrOutput() ImmutableTagRuleRulePtrOutput {
+	return o.ToImmutableTagRuleRulePtrOutputWithContext(context.Background())
+}
+
+func (o ImmutableTagRuleRuleOutput) ToImmutableTagRuleRulePtrOutputWithContext(ctx context.Context) ImmutableTagRuleRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ImmutableTagRuleRule) *ImmutableTagRuleRule {
+		return &v
+	}).(ImmutableTagRuleRulePtrOutput)
+}
+
+// disable rule.
+func (o ImmutableTagRuleRuleOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ImmutableTagRuleRule) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
+}
+
+// ID of the resource.
+func (o ImmutableTagRuleRuleOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ImmutableTagRuleRule) *int { return v.Id }).(pulumi.IntPtrOutput)
+}
+
+func (o ImmutableTagRuleRuleOutput) NsName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ImmutableTagRuleRule) *string { return v.NsName }).(pulumi.StringPtrOutput)
+}
+
+// repository decoration type:repoMatches or repoExcludes.
+func (o ImmutableTagRuleRuleOutput) RepositoryDecoration() pulumi.StringOutput {
+	return o.ApplyT(func(v ImmutableTagRuleRule) string { return v.RepositoryDecoration }).(pulumi.StringOutput)
+}
+
+// repository matching rules.
+func (o ImmutableTagRuleRuleOutput) RepositoryPattern() pulumi.StringOutput {
+	return o.ApplyT(func(v ImmutableTagRuleRule) string { return v.RepositoryPattern }).(pulumi.StringOutput)
+}
+
+// tag decoration type: matches or excludes.
+func (o ImmutableTagRuleRuleOutput) TagDecoration() pulumi.StringOutput {
+	return o.ApplyT(func(v ImmutableTagRuleRule) string { return v.TagDecoration }).(pulumi.StringOutput)
+}
+
+// tag matching rules.
+func (o ImmutableTagRuleRuleOutput) TagPattern() pulumi.StringOutput {
+	return o.ApplyT(func(v ImmutableTagRuleRule) string { return v.TagPattern }).(pulumi.StringOutput)
+}
+
+type ImmutableTagRuleRulePtrOutput struct{ *pulumi.OutputState }
+
+func (ImmutableTagRuleRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ImmutableTagRuleRule)(nil)).Elem()
+}
+
+func (o ImmutableTagRuleRulePtrOutput) ToImmutableTagRuleRulePtrOutput() ImmutableTagRuleRulePtrOutput {
+	return o
+}
+
+func (o ImmutableTagRuleRulePtrOutput) ToImmutableTagRuleRulePtrOutputWithContext(ctx context.Context) ImmutableTagRuleRulePtrOutput {
+	return o
+}
+
+func (o ImmutableTagRuleRulePtrOutput) Elem() ImmutableTagRuleRuleOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) ImmutableTagRuleRule {
+		if v != nil {
+			return *v
+		}
+		var ret ImmutableTagRuleRule
+		return ret
+	}).(ImmutableTagRuleRuleOutput)
+}
+
+// disable rule.
+func (o ImmutableTagRuleRulePtrOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Disabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// ID of the resource.
+func (o ImmutableTagRuleRulePtrOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o ImmutableTagRuleRulePtrOutput) NsName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NsName
+	}).(pulumi.StringPtrOutput)
+}
+
+// repository decoration type:repoMatches or repoExcludes.
+func (o ImmutableTagRuleRulePtrOutput) RepositoryDecoration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RepositoryDecoration
+	}).(pulumi.StringPtrOutput)
+}
+
+// repository matching rules.
+func (o ImmutableTagRuleRulePtrOutput) RepositoryPattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RepositoryPattern
+	}).(pulumi.StringPtrOutput)
+}
+
+// tag decoration type: matches or excludes.
+func (o ImmutableTagRuleRulePtrOutput) TagDecoration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TagDecoration
+	}).(pulumi.StringPtrOutput)
+}
+
+// tag matching rules.
+func (o ImmutableTagRuleRulePtrOutput) TagPattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ImmutableTagRuleRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TagPattern
+	}).(pulumi.StringPtrOutput)
+}
+
+type InstanceReplication struct {
+	// ID of the resource.
+	Id *string `pulumi:"id"`
+	// Replication region ID, check the example at the top of page to find out id of region.
+	RegionId *int `pulumi:"regionId"`
+	// Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
+	SynTag *bool `pulumi:"synTag"`
+}
+
+// InstanceReplicationInput is an input type that accepts InstanceReplicationArgs and InstanceReplicationOutput values.
+// You can construct a concrete instance of `InstanceReplicationInput` via:
+//
+//          InstanceReplicationArgs{...}
+type InstanceReplicationInput interface {
+	pulumi.Input
+
+	ToInstanceReplicationOutput() InstanceReplicationOutput
+	ToInstanceReplicationOutputWithContext(context.Context) InstanceReplicationOutput
+}
+
+type InstanceReplicationArgs struct {
+	// ID of the resource.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Replication region ID, check the example at the top of page to find out id of region.
+	RegionId pulumi.IntPtrInput `pulumi:"regionId"`
+	// Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
+	SynTag pulumi.BoolPtrInput `pulumi:"synTag"`
+}
+
+func (InstanceReplicationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceReplication)(nil)).Elem()
+}
+
+func (i InstanceReplicationArgs) ToInstanceReplicationOutput() InstanceReplicationOutput {
+	return i.ToInstanceReplicationOutputWithContext(context.Background())
+}
+
+func (i InstanceReplicationArgs) ToInstanceReplicationOutputWithContext(ctx context.Context) InstanceReplicationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceReplicationOutput)
+}
+
+// InstanceReplicationArrayInput is an input type that accepts InstanceReplicationArray and InstanceReplicationArrayOutput values.
+// You can construct a concrete instance of `InstanceReplicationArrayInput` via:
+//
+//          InstanceReplicationArray{ InstanceReplicationArgs{...} }
+type InstanceReplicationArrayInput interface {
+	pulumi.Input
+
+	ToInstanceReplicationArrayOutput() InstanceReplicationArrayOutput
+	ToInstanceReplicationArrayOutputWithContext(context.Context) InstanceReplicationArrayOutput
+}
+
+type InstanceReplicationArray []InstanceReplicationInput
+
+func (InstanceReplicationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceReplication)(nil)).Elem()
+}
+
+func (i InstanceReplicationArray) ToInstanceReplicationArrayOutput() InstanceReplicationArrayOutput {
+	return i.ToInstanceReplicationArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceReplicationArray) ToInstanceReplicationArrayOutputWithContext(ctx context.Context) InstanceReplicationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceReplicationArrayOutput)
+}
+
+type InstanceReplicationOutput struct{ *pulumi.OutputState }
+
+func (InstanceReplicationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceReplication)(nil)).Elem()
+}
+
+func (o InstanceReplicationOutput) ToInstanceReplicationOutput() InstanceReplicationOutput {
+	return o
+}
+
+func (o InstanceReplicationOutput) ToInstanceReplicationOutputWithContext(ctx context.Context) InstanceReplicationOutput {
+	return o
+}
+
+// ID of the resource.
+func (o InstanceReplicationOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceReplication) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Replication region ID, check the example at the top of page to find out id of region.
+func (o InstanceReplicationOutput) RegionId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v InstanceReplication) *int { return v.RegionId }).(pulumi.IntPtrOutput)
+}
+
+// Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
+func (o InstanceReplicationOutput) SynTag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v InstanceReplication) *bool { return v.SynTag }).(pulumi.BoolPtrOutput)
+}
+
+type InstanceReplicationArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceReplicationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceReplication)(nil)).Elem()
+}
+
+func (o InstanceReplicationArrayOutput) ToInstanceReplicationArrayOutput() InstanceReplicationArrayOutput {
+	return o
+}
+
+func (o InstanceReplicationArrayOutput) ToInstanceReplicationArrayOutputWithContext(ctx context.Context) InstanceReplicationArrayOutput {
+	return o
+}
+
+func (o InstanceReplicationArrayOutput) Index(i pulumi.IntInput) InstanceReplicationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceReplication {
+		return vs[0].([]InstanceReplication)[vs[1].(int)]
+	}).(InstanceReplicationOutput)
+}
+
 type InstanceSecurityPolicy struct {
 	// The public network IP address of the access source.
 	CidrBlock *string `pulumi:"cidrBlock"`
@@ -22,7 +384,7 @@ type InstanceSecurityPolicy struct {
 // InstanceSecurityPolicyInput is an input type that accepts InstanceSecurityPolicyArgs and InstanceSecurityPolicyOutput values.
 // You can construct a concrete instance of `InstanceSecurityPolicyInput` via:
 //
-//	InstanceSecurityPolicyArgs{...}
+//          InstanceSecurityPolicyArgs{...}
 type InstanceSecurityPolicyInput interface {
 	pulumi.Input
 
@@ -54,7 +416,7 @@ func (i InstanceSecurityPolicyArgs) ToInstanceSecurityPolicyOutputWithContext(ct
 // InstanceSecurityPolicyArrayInput is an input type that accepts InstanceSecurityPolicyArray and InstanceSecurityPolicyArrayOutput values.
 // You can construct a concrete instance of `InstanceSecurityPolicyArrayInput` via:
 //
-//	InstanceSecurityPolicyArray{ InstanceSecurityPolicyArgs{...} }
+//          InstanceSecurityPolicyArray{ InstanceSecurityPolicyArgs{...} }
 type InstanceSecurityPolicyArrayInput interface {
 	pulumi.Input
 
@@ -128,6 +490,1358 @@ func (o InstanceSecurityPolicyArrayOutput) Index(i pulumi.IntInput) InstanceSecu
 	}).(InstanceSecurityPolicyOutput)
 }
 
+type ManageReplicationOperationPeerReplicationOption struct {
+	// whether to enable cross-master account instance synchronization.
+	EnablePeerReplication bool `pulumi:"enablePeerReplication"`
+	// access permanent token of the instance to be synchronized.
+	PeerRegistryToken string `pulumi:"peerRegistryToken"`
+	// uin of the instance to be synchronized.
+	PeerRegistryUin string `pulumi:"peerRegistryUin"`
+}
+
+// ManageReplicationOperationPeerReplicationOptionInput is an input type that accepts ManageReplicationOperationPeerReplicationOptionArgs and ManageReplicationOperationPeerReplicationOptionOutput values.
+// You can construct a concrete instance of `ManageReplicationOperationPeerReplicationOptionInput` via:
+//
+//          ManageReplicationOperationPeerReplicationOptionArgs{...}
+type ManageReplicationOperationPeerReplicationOptionInput interface {
+	pulumi.Input
+
+	ToManageReplicationOperationPeerReplicationOptionOutput() ManageReplicationOperationPeerReplicationOptionOutput
+	ToManageReplicationOperationPeerReplicationOptionOutputWithContext(context.Context) ManageReplicationOperationPeerReplicationOptionOutput
+}
+
+type ManageReplicationOperationPeerReplicationOptionArgs struct {
+	// whether to enable cross-master account instance synchronization.
+	EnablePeerReplication pulumi.BoolInput `pulumi:"enablePeerReplication"`
+	// access permanent token of the instance to be synchronized.
+	PeerRegistryToken pulumi.StringInput `pulumi:"peerRegistryToken"`
+	// uin of the instance to be synchronized.
+	PeerRegistryUin pulumi.StringInput `pulumi:"peerRegistryUin"`
+}
+
+func (ManageReplicationOperationPeerReplicationOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
+}
+
+func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionOutput() ManageReplicationOperationPeerReplicationOptionOutput {
+	return i.ToManageReplicationOperationPeerReplicationOptionOutputWithContext(context.Background())
+}
+
+func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationPeerReplicationOptionOutput)
+}
+
+func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return i.ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Background())
+}
+
+func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationPeerReplicationOptionOutput).ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx)
+}
+
+// ManageReplicationOperationPeerReplicationOptionPtrInput is an input type that accepts ManageReplicationOperationPeerReplicationOptionArgs, ManageReplicationOperationPeerReplicationOptionPtr and ManageReplicationOperationPeerReplicationOptionPtrOutput values.
+// You can construct a concrete instance of `ManageReplicationOperationPeerReplicationOptionPtrInput` via:
+//
+//          ManageReplicationOperationPeerReplicationOptionArgs{...}
+//
+//  or:
+//
+//          nil
+type ManageReplicationOperationPeerReplicationOptionPtrInput interface {
+	pulumi.Input
+
+	ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput
+	ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput
+}
+
+type manageReplicationOperationPeerReplicationOptionPtrType ManageReplicationOperationPeerReplicationOptionArgs
+
+func ManageReplicationOperationPeerReplicationOptionPtr(v *ManageReplicationOperationPeerReplicationOptionArgs) ManageReplicationOperationPeerReplicationOptionPtrInput {
+	return (*manageReplicationOperationPeerReplicationOptionPtrType)(v)
+}
+
+func (*manageReplicationOperationPeerReplicationOptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
+}
+
+func (i *manageReplicationOperationPeerReplicationOptionPtrType) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return i.ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Background())
+}
+
+func (i *manageReplicationOperationPeerReplicationOptionPtrType) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationPeerReplicationOptionPtrOutput)
+}
+
+type ManageReplicationOperationPeerReplicationOptionOutput struct{ *pulumi.OutputState }
+
+func (ManageReplicationOperationPeerReplicationOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
+}
+
+func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionOutput() ManageReplicationOperationPeerReplicationOptionOutput {
+	return o
+}
+
+func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionOutput {
+	return o
+}
+
+func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return o.ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Background())
+}
+
+func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ManageReplicationOperationPeerReplicationOption) *ManageReplicationOperationPeerReplicationOption {
+		return &v
+	}).(ManageReplicationOperationPeerReplicationOptionPtrOutput)
+}
+
+// whether to enable cross-master account instance synchronization.
+func (o ManageReplicationOperationPeerReplicationOptionOutput) EnablePeerReplication() pulumi.BoolOutput {
+	return o.ApplyT(func(v ManageReplicationOperationPeerReplicationOption) bool { return v.EnablePeerReplication }).(pulumi.BoolOutput)
+}
+
+// access permanent token of the instance to be synchronized.
+func (o ManageReplicationOperationPeerReplicationOptionOutput) PeerRegistryToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ManageReplicationOperationPeerReplicationOption) string { return v.PeerRegistryToken }).(pulumi.StringOutput)
+}
+
+// uin of the instance to be synchronized.
+func (o ManageReplicationOperationPeerReplicationOptionOutput) PeerRegistryUin() pulumi.StringOutput {
+	return o.ApplyT(func(v ManageReplicationOperationPeerReplicationOption) string { return v.PeerRegistryUin }).(pulumi.StringOutput)
+}
+
+type ManageReplicationOperationPeerReplicationOptionPtrOutput struct{ *pulumi.OutputState }
+
+func (ManageReplicationOperationPeerReplicationOptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
+}
+
+func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return o
+}
+
+func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
+	return o
+}
+
+func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) Elem() ManageReplicationOperationPeerReplicationOptionOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) ManageReplicationOperationPeerReplicationOption {
+		if v != nil {
+			return *v
+		}
+		var ret ManageReplicationOperationPeerReplicationOption
+		return ret
+	}).(ManageReplicationOperationPeerReplicationOptionOutput)
+}
+
+// whether to enable cross-master account instance synchronization.
+func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) EnablePeerReplication() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.EnablePeerReplication
+	}).(pulumi.BoolPtrOutput)
+}
+
+// access permanent token of the instance to be synchronized.
+func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) PeerRegistryToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PeerRegistryToken
+	}).(pulumi.StringPtrOutput)
+}
+
+// uin of the instance to be synchronized.
+func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) PeerRegistryUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PeerRegistryUin
+	}).(pulumi.StringPtrOutput)
+}
+
+type ManageReplicationOperationRule struct {
+	// target namespace.
+	DestNamespace string `pulumi:"destNamespace"`
+	// sync filters.
+	Filters []ManageReplicationOperationRuleFilter `pulumi:"filters"`
+	// synchronization rule names.
+	Name string `pulumi:"name"`
+	// whether to cover.
+	Override bool `pulumi:"override"`
+}
+
+// ManageReplicationOperationRuleInput is an input type that accepts ManageReplicationOperationRuleArgs and ManageReplicationOperationRuleOutput values.
+// You can construct a concrete instance of `ManageReplicationOperationRuleInput` via:
+//
+//          ManageReplicationOperationRuleArgs{...}
+type ManageReplicationOperationRuleInput interface {
+	pulumi.Input
+
+	ToManageReplicationOperationRuleOutput() ManageReplicationOperationRuleOutput
+	ToManageReplicationOperationRuleOutputWithContext(context.Context) ManageReplicationOperationRuleOutput
+}
+
+type ManageReplicationOperationRuleArgs struct {
+	// target namespace.
+	DestNamespace pulumi.StringInput `pulumi:"destNamespace"`
+	// sync filters.
+	Filters ManageReplicationOperationRuleFilterArrayInput `pulumi:"filters"`
+	// synchronization rule names.
+	Name pulumi.StringInput `pulumi:"name"`
+	// whether to cover.
+	Override pulumi.BoolInput `pulumi:"override"`
+}
+
+func (ManageReplicationOperationRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManageReplicationOperationRule)(nil)).Elem()
+}
+
+func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRuleOutput() ManageReplicationOperationRuleOutput {
+	return i.ToManageReplicationOperationRuleOutputWithContext(context.Background())
+}
+
+func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRuleOutputWithContext(ctx context.Context) ManageReplicationOperationRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleOutput)
+}
+
+func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
+	return i.ToManageReplicationOperationRulePtrOutputWithContext(context.Background())
+}
+
+func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleOutput).ToManageReplicationOperationRulePtrOutputWithContext(ctx)
+}
+
+// ManageReplicationOperationRulePtrInput is an input type that accepts ManageReplicationOperationRuleArgs, ManageReplicationOperationRulePtr and ManageReplicationOperationRulePtrOutput values.
+// You can construct a concrete instance of `ManageReplicationOperationRulePtrInput` via:
+//
+//          ManageReplicationOperationRuleArgs{...}
+//
+//  or:
+//
+//          nil
+type ManageReplicationOperationRulePtrInput interface {
+	pulumi.Input
+
+	ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput
+	ToManageReplicationOperationRulePtrOutputWithContext(context.Context) ManageReplicationOperationRulePtrOutput
+}
+
+type manageReplicationOperationRulePtrType ManageReplicationOperationRuleArgs
+
+func ManageReplicationOperationRulePtr(v *ManageReplicationOperationRuleArgs) ManageReplicationOperationRulePtrInput {
+	return (*manageReplicationOperationRulePtrType)(v)
+}
+
+func (*manageReplicationOperationRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ManageReplicationOperationRule)(nil)).Elem()
+}
+
+func (i *manageReplicationOperationRulePtrType) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
+	return i.ToManageReplicationOperationRulePtrOutputWithContext(context.Background())
+}
+
+func (i *manageReplicationOperationRulePtrType) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRulePtrOutput)
+}
+
+type ManageReplicationOperationRuleOutput struct{ *pulumi.OutputState }
+
+func (ManageReplicationOperationRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManageReplicationOperationRule)(nil)).Elem()
+}
+
+func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRuleOutput() ManageReplicationOperationRuleOutput {
+	return o
+}
+
+func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRuleOutputWithContext(ctx context.Context) ManageReplicationOperationRuleOutput {
+	return o
+}
+
+func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
+	return o.ToManageReplicationOperationRulePtrOutputWithContext(context.Background())
+}
+
+func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ManageReplicationOperationRule) *ManageReplicationOperationRule {
+		return &v
+	}).(ManageReplicationOperationRulePtrOutput)
+}
+
+// target namespace.
+func (o ManageReplicationOperationRuleOutput) DestNamespace() pulumi.StringOutput {
+	return o.ApplyT(func(v ManageReplicationOperationRule) string { return v.DestNamespace }).(pulumi.StringOutput)
+}
+
+// sync filters.
+func (o ManageReplicationOperationRuleOutput) Filters() ManageReplicationOperationRuleFilterArrayOutput {
+	return o.ApplyT(func(v ManageReplicationOperationRule) []ManageReplicationOperationRuleFilter { return v.Filters }).(ManageReplicationOperationRuleFilterArrayOutput)
+}
+
+// synchronization rule names.
+func (o ManageReplicationOperationRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ManageReplicationOperationRule) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// whether to cover.
+func (o ManageReplicationOperationRuleOutput) Override() pulumi.BoolOutput {
+	return o.ApplyT(func(v ManageReplicationOperationRule) bool { return v.Override }).(pulumi.BoolOutput)
+}
+
+type ManageReplicationOperationRulePtrOutput struct{ *pulumi.OutputState }
+
+func (ManageReplicationOperationRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ManageReplicationOperationRule)(nil)).Elem()
+}
+
+func (o ManageReplicationOperationRulePtrOutput) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
+	return o
+}
+
+func (o ManageReplicationOperationRulePtrOutput) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
+	return o
+}
+
+func (o ManageReplicationOperationRulePtrOutput) Elem() ManageReplicationOperationRuleOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationRule) ManageReplicationOperationRule {
+		if v != nil {
+			return *v
+		}
+		var ret ManageReplicationOperationRule
+		return ret
+	}).(ManageReplicationOperationRuleOutput)
+}
+
+// target namespace.
+func (o ManageReplicationOperationRulePtrOutput) DestNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DestNamespace
+	}).(pulumi.StringPtrOutput)
+}
+
+// sync filters.
+func (o ManageReplicationOperationRulePtrOutput) Filters() ManageReplicationOperationRuleFilterArrayOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationRule) []ManageReplicationOperationRuleFilter {
+		if v == nil {
+			return nil
+		}
+		return v.Filters
+	}).(ManageReplicationOperationRuleFilterArrayOutput)
+}
+
+// synchronization rule names.
+func (o ManageReplicationOperationRulePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// whether to cover.
+func (o ManageReplicationOperationRulePtrOutput) Override() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ManageReplicationOperationRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Override
+	}).(pulumi.BoolPtrOutput)
+}
+
+type ManageReplicationOperationRuleFilter struct {
+	// type (name, tag, and resource).
+	Type string `pulumi:"type"`
+	// empty by default.
+	Value *string `pulumi:"value"`
+}
+
+// ManageReplicationOperationRuleFilterInput is an input type that accepts ManageReplicationOperationRuleFilterArgs and ManageReplicationOperationRuleFilterOutput values.
+// You can construct a concrete instance of `ManageReplicationOperationRuleFilterInput` via:
+//
+//          ManageReplicationOperationRuleFilterArgs{...}
+type ManageReplicationOperationRuleFilterInput interface {
+	pulumi.Input
+
+	ToManageReplicationOperationRuleFilterOutput() ManageReplicationOperationRuleFilterOutput
+	ToManageReplicationOperationRuleFilterOutputWithContext(context.Context) ManageReplicationOperationRuleFilterOutput
+}
+
+type ManageReplicationOperationRuleFilterArgs struct {
+	// type (name, tag, and resource).
+	Type pulumi.StringInput `pulumi:"type"`
+	// empty by default.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ManageReplicationOperationRuleFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManageReplicationOperationRuleFilter)(nil)).Elem()
+}
+
+func (i ManageReplicationOperationRuleFilterArgs) ToManageReplicationOperationRuleFilterOutput() ManageReplicationOperationRuleFilterOutput {
+	return i.ToManageReplicationOperationRuleFilterOutputWithContext(context.Background())
+}
+
+func (i ManageReplicationOperationRuleFilterArgs) ToManageReplicationOperationRuleFilterOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleFilterOutput)
+}
+
+// ManageReplicationOperationRuleFilterArrayInput is an input type that accepts ManageReplicationOperationRuleFilterArray and ManageReplicationOperationRuleFilterArrayOutput values.
+// You can construct a concrete instance of `ManageReplicationOperationRuleFilterArrayInput` via:
+//
+//          ManageReplicationOperationRuleFilterArray{ ManageReplicationOperationRuleFilterArgs{...} }
+type ManageReplicationOperationRuleFilterArrayInput interface {
+	pulumi.Input
+
+	ToManageReplicationOperationRuleFilterArrayOutput() ManageReplicationOperationRuleFilterArrayOutput
+	ToManageReplicationOperationRuleFilterArrayOutputWithContext(context.Context) ManageReplicationOperationRuleFilterArrayOutput
+}
+
+type ManageReplicationOperationRuleFilterArray []ManageReplicationOperationRuleFilterInput
+
+func (ManageReplicationOperationRuleFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ManageReplicationOperationRuleFilter)(nil)).Elem()
+}
+
+func (i ManageReplicationOperationRuleFilterArray) ToManageReplicationOperationRuleFilterArrayOutput() ManageReplicationOperationRuleFilterArrayOutput {
+	return i.ToManageReplicationOperationRuleFilterArrayOutputWithContext(context.Background())
+}
+
+func (i ManageReplicationOperationRuleFilterArray) ToManageReplicationOperationRuleFilterArrayOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleFilterArrayOutput)
+}
+
+type ManageReplicationOperationRuleFilterOutput struct{ *pulumi.OutputState }
+
+func (ManageReplicationOperationRuleFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManageReplicationOperationRuleFilter)(nil)).Elem()
+}
+
+func (o ManageReplicationOperationRuleFilterOutput) ToManageReplicationOperationRuleFilterOutput() ManageReplicationOperationRuleFilterOutput {
+	return o
+}
+
+func (o ManageReplicationOperationRuleFilterOutput) ToManageReplicationOperationRuleFilterOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterOutput {
+	return o
+}
+
+// type (name, tag, and resource).
+func (o ManageReplicationOperationRuleFilterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ManageReplicationOperationRuleFilter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// empty by default.
+func (o ManageReplicationOperationRuleFilterOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ManageReplicationOperationRuleFilter) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ManageReplicationOperationRuleFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (ManageReplicationOperationRuleFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ManageReplicationOperationRuleFilter)(nil)).Elem()
+}
+
+func (o ManageReplicationOperationRuleFilterArrayOutput) ToManageReplicationOperationRuleFilterArrayOutput() ManageReplicationOperationRuleFilterArrayOutput {
+	return o
+}
+
+func (o ManageReplicationOperationRuleFilterArrayOutput) ToManageReplicationOperationRuleFilterArrayOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterArrayOutput {
+	return o
+}
+
+func (o ManageReplicationOperationRuleFilterArrayOutput) Index(i pulumi.IntInput) ManageReplicationOperationRuleFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ManageReplicationOperationRuleFilter {
+		return vs[0].([]ManageReplicationOperationRuleFilter)[vs[1].(int)]
+	}).(ManageReplicationOperationRuleFilterOutput)
+}
+
+type NamespaceCveWhitelistItem struct {
+	// Vulnerability Whitelist ID.
+	CveId *string `pulumi:"cveId"`
+}
+
+// NamespaceCveWhitelistItemInput is an input type that accepts NamespaceCveWhitelistItemArgs and NamespaceCveWhitelistItemOutput values.
+// You can construct a concrete instance of `NamespaceCveWhitelistItemInput` via:
+//
+//          NamespaceCveWhitelistItemArgs{...}
+type NamespaceCveWhitelistItemInput interface {
+	pulumi.Input
+
+	ToNamespaceCveWhitelistItemOutput() NamespaceCveWhitelistItemOutput
+	ToNamespaceCveWhitelistItemOutputWithContext(context.Context) NamespaceCveWhitelistItemOutput
+}
+
+type NamespaceCveWhitelistItemArgs struct {
+	// Vulnerability Whitelist ID.
+	CveId pulumi.StringPtrInput `pulumi:"cveId"`
+}
+
+func (NamespaceCveWhitelistItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NamespaceCveWhitelistItem)(nil)).Elem()
+}
+
+func (i NamespaceCveWhitelistItemArgs) ToNamespaceCveWhitelistItemOutput() NamespaceCveWhitelistItemOutput {
+	return i.ToNamespaceCveWhitelistItemOutputWithContext(context.Background())
+}
+
+func (i NamespaceCveWhitelistItemArgs) ToNamespaceCveWhitelistItemOutputWithContext(ctx context.Context) NamespaceCveWhitelistItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NamespaceCveWhitelistItemOutput)
+}
+
+// NamespaceCveWhitelistItemArrayInput is an input type that accepts NamespaceCveWhitelistItemArray and NamespaceCveWhitelistItemArrayOutput values.
+// You can construct a concrete instance of `NamespaceCveWhitelistItemArrayInput` via:
+//
+//          NamespaceCveWhitelistItemArray{ NamespaceCveWhitelistItemArgs{...} }
+type NamespaceCveWhitelistItemArrayInput interface {
+	pulumi.Input
+
+	ToNamespaceCveWhitelistItemArrayOutput() NamespaceCveWhitelistItemArrayOutput
+	ToNamespaceCveWhitelistItemArrayOutputWithContext(context.Context) NamespaceCveWhitelistItemArrayOutput
+}
+
+type NamespaceCveWhitelistItemArray []NamespaceCveWhitelistItemInput
+
+func (NamespaceCveWhitelistItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NamespaceCveWhitelistItem)(nil)).Elem()
+}
+
+func (i NamespaceCveWhitelistItemArray) ToNamespaceCveWhitelistItemArrayOutput() NamespaceCveWhitelistItemArrayOutput {
+	return i.ToNamespaceCveWhitelistItemArrayOutputWithContext(context.Background())
+}
+
+func (i NamespaceCveWhitelistItemArray) ToNamespaceCveWhitelistItemArrayOutputWithContext(ctx context.Context) NamespaceCveWhitelistItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NamespaceCveWhitelistItemArrayOutput)
+}
+
+type NamespaceCveWhitelistItemOutput struct{ *pulumi.OutputState }
+
+func (NamespaceCveWhitelistItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NamespaceCveWhitelistItem)(nil)).Elem()
+}
+
+func (o NamespaceCveWhitelistItemOutput) ToNamespaceCveWhitelistItemOutput() NamespaceCveWhitelistItemOutput {
+	return o
+}
+
+func (o NamespaceCveWhitelistItemOutput) ToNamespaceCveWhitelistItemOutputWithContext(ctx context.Context) NamespaceCveWhitelistItemOutput {
+	return o
+}
+
+// Vulnerability Whitelist ID.
+func (o NamespaceCveWhitelistItemOutput) CveId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NamespaceCveWhitelistItem) *string { return v.CveId }).(pulumi.StringPtrOutput)
+}
+
+type NamespaceCveWhitelistItemArrayOutput struct{ *pulumi.OutputState }
+
+func (NamespaceCveWhitelistItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NamespaceCveWhitelistItem)(nil)).Elem()
+}
+
+func (o NamespaceCveWhitelistItemArrayOutput) ToNamespaceCveWhitelistItemArrayOutput() NamespaceCveWhitelistItemArrayOutput {
+	return o
+}
+
+func (o NamespaceCveWhitelistItemArrayOutput) ToNamespaceCveWhitelistItemArrayOutputWithContext(ctx context.Context) NamespaceCveWhitelistItemArrayOutput {
+	return o
+}
+
+func (o NamespaceCveWhitelistItemArrayOutput) Index(i pulumi.IntInput) NamespaceCveWhitelistItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NamespaceCveWhitelistItem {
+		return vs[0].([]NamespaceCveWhitelistItem)[vs[1].(int)]
+	}).(NamespaceCveWhitelistItemOutput)
+}
+
+type TagRetentionRuleRetentionRule struct {
+	// The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+	Key string `pulumi:"key"`
+	// corresponding values for rule settings.
+	Value int `pulumi:"value"`
+}
+
+// TagRetentionRuleRetentionRuleInput is an input type that accepts TagRetentionRuleRetentionRuleArgs and TagRetentionRuleRetentionRuleOutput values.
+// You can construct a concrete instance of `TagRetentionRuleRetentionRuleInput` via:
+//
+//          TagRetentionRuleRetentionRuleArgs{...}
+type TagRetentionRuleRetentionRuleInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleRetentionRuleOutput() TagRetentionRuleRetentionRuleOutput
+	ToTagRetentionRuleRetentionRuleOutputWithContext(context.Context) TagRetentionRuleRetentionRuleOutput
+}
+
+type TagRetentionRuleRetentionRuleArgs struct {
+	// The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+	Key pulumi.StringInput `pulumi:"key"`
+	// corresponding values for rule settings.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (TagRetentionRuleRetentionRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleRetentionRule)(nil)).Elem()
+}
+
+func (i TagRetentionRuleRetentionRuleArgs) ToTagRetentionRuleRetentionRuleOutput() TagRetentionRuleRetentionRuleOutput {
+	return i.ToTagRetentionRuleRetentionRuleOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleRetentionRuleArgs) ToTagRetentionRuleRetentionRuleOutputWithContext(ctx context.Context) TagRetentionRuleRetentionRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleRetentionRuleOutput)
+}
+
+func (i TagRetentionRuleRetentionRuleArgs) ToTagRetentionRuleRetentionRulePtrOutput() TagRetentionRuleRetentionRulePtrOutput {
+	return i.ToTagRetentionRuleRetentionRulePtrOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleRetentionRuleArgs) ToTagRetentionRuleRetentionRulePtrOutputWithContext(ctx context.Context) TagRetentionRuleRetentionRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleRetentionRuleOutput).ToTagRetentionRuleRetentionRulePtrOutputWithContext(ctx)
+}
+
+// TagRetentionRuleRetentionRulePtrInput is an input type that accepts TagRetentionRuleRetentionRuleArgs, TagRetentionRuleRetentionRulePtr and TagRetentionRuleRetentionRulePtrOutput values.
+// You can construct a concrete instance of `TagRetentionRuleRetentionRulePtrInput` via:
+//
+//          TagRetentionRuleRetentionRuleArgs{...}
+//
+//  or:
+//
+//          nil
+type TagRetentionRuleRetentionRulePtrInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleRetentionRulePtrOutput() TagRetentionRuleRetentionRulePtrOutput
+	ToTagRetentionRuleRetentionRulePtrOutputWithContext(context.Context) TagRetentionRuleRetentionRulePtrOutput
+}
+
+type tagRetentionRuleRetentionRulePtrType TagRetentionRuleRetentionRuleArgs
+
+func TagRetentionRuleRetentionRulePtr(v *TagRetentionRuleRetentionRuleArgs) TagRetentionRuleRetentionRulePtrInput {
+	return (*tagRetentionRuleRetentionRulePtrType)(v)
+}
+
+func (*tagRetentionRuleRetentionRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleRetentionRule)(nil)).Elem()
+}
+
+func (i *tagRetentionRuleRetentionRulePtrType) ToTagRetentionRuleRetentionRulePtrOutput() TagRetentionRuleRetentionRulePtrOutput {
+	return i.ToTagRetentionRuleRetentionRulePtrOutputWithContext(context.Background())
+}
+
+func (i *tagRetentionRuleRetentionRulePtrType) ToTagRetentionRuleRetentionRulePtrOutputWithContext(ctx context.Context) TagRetentionRuleRetentionRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleRetentionRulePtrOutput)
+}
+
+type TagRetentionRuleRetentionRuleOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleRetentionRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleRetentionRule)(nil)).Elem()
+}
+
+func (o TagRetentionRuleRetentionRuleOutput) ToTagRetentionRuleRetentionRuleOutput() TagRetentionRuleRetentionRuleOutput {
+	return o
+}
+
+func (o TagRetentionRuleRetentionRuleOutput) ToTagRetentionRuleRetentionRuleOutputWithContext(ctx context.Context) TagRetentionRuleRetentionRuleOutput {
+	return o
+}
+
+func (o TagRetentionRuleRetentionRuleOutput) ToTagRetentionRuleRetentionRulePtrOutput() TagRetentionRuleRetentionRulePtrOutput {
+	return o.ToTagRetentionRuleRetentionRulePtrOutputWithContext(context.Background())
+}
+
+func (o TagRetentionRuleRetentionRuleOutput) ToTagRetentionRuleRetentionRulePtrOutputWithContext(ctx context.Context) TagRetentionRuleRetentionRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TagRetentionRuleRetentionRule) *TagRetentionRuleRetentionRule {
+		return &v
+	}).(TagRetentionRuleRetentionRulePtrOutput)
+}
+
+// The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+func (o TagRetentionRuleRetentionRuleOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v TagRetentionRuleRetentionRule) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// corresponding values for rule settings.
+func (o TagRetentionRuleRetentionRuleOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v TagRetentionRuleRetentionRule) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type TagRetentionRuleRetentionRulePtrOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleRetentionRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleRetentionRule)(nil)).Elem()
+}
+
+func (o TagRetentionRuleRetentionRulePtrOutput) ToTagRetentionRuleRetentionRulePtrOutput() TagRetentionRuleRetentionRulePtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleRetentionRulePtrOutput) ToTagRetentionRuleRetentionRulePtrOutputWithContext(ctx context.Context) TagRetentionRuleRetentionRulePtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleRetentionRulePtrOutput) Elem() TagRetentionRuleRetentionRuleOutput {
+	return o.ApplyT(func(v *TagRetentionRuleRetentionRule) TagRetentionRuleRetentionRule {
+		if v != nil {
+			return *v
+		}
+		var ret TagRetentionRuleRetentionRule
+		return ret
+	}).(TagRetentionRuleRetentionRuleOutput)
+}
+
+// The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+func (o TagRetentionRuleRetentionRulePtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleRetentionRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// corresponding values for rule settings.
+func (o TagRetentionRuleRetentionRulePtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleRetentionRule) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
+type WebhookTriggerTrigger struct {
+	// trigger rule.
+	Condition string `pulumi:"condition"`
+	// trigger description.
+	Description *string `pulumi:"description"`
+	// enable trigger.
+	Enabled bool `pulumi:"enabled"`
+	// trigger action.
+	EventTypes []string `pulumi:"eventTypes"`
+	// ID of the resource.
+	Id *int `pulumi:"id"`
+	// trigger name.
+	Name string `pulumi:"name"`
+	// the namespace Id to which the trigger belongs.
+	NamespaceId *int `pulumi:"namespaceId"`
+	// trigger target.
+	Targets []WebhookTriggerTriggerTarget `pulumi:"targets"`
+}
+
+// WebhookTriggerTriggerInput is an input type that accepts WebhookTriggerTriggerArgs and WebhookTriggerTriggerOutput values.
+// You can construct a concrete instance of `WebhookTriggerTriggerInput` via:
+//
+//          WebhookTriggerTriggerArgs{...}
+type WebhookTriggerTriggerInput interface {
+	pulumi.Input
+
+	ToWebhookTriggerTriggerOutput() WebhookTriggerTriggerOutput
+	ToWebhookTriggerTriggerOutputWithContext(context.Context) WebhookTriggerTriggerOutput
+}
+
+type WebhookTriggerTriggerArgs struct {
+	// trigger rule.
+	Condition pulumi.StringInput `pulumi:"condition"`
+	// trigger description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// enable trigger.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// trigger action.
+	EventTypes pulumi.StringArrayInput `pulumi:"eventTypes"`
+	// ID of the resource.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// trigger name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// the namespace Id to which the trigger belongs.
+	NamespaceId pulumi.IntPtrInput `pulumi:"namespaceId"`
+	// trigger target.
+	Targets WebhookTriggerTriggerTargetArrayInput `pulumi:"targets"`
+}
+
+func (WebhookTriggerTriggerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookTriggerTrigger)(nil)).Elem()
+}
+
+func (i WebhookTriggerTriggerArgs) ToWebhookTriggerTriggerOutput() WebhookTriggerTriggerOutput {
+	return i.ToWebhookTriggerTriggerOutputWithContext(context.Background())
+}
+
+func (i WebhookTriggerTriggerArgs) ToWebhookTriggerTriggerOutputWithContext(ctx context.Context) WebhookTriggerTriggerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookTriggerTriggerOutput)
+}
+
+func (i WebhookTriggerTriggerArgs) ToWebhookTriggerTriggerPtrOutput() WebhookTriggerTriggerPtrOutput {
+	return i.ToWebhookTriggerTriggerPtrOutputWithContext(context.Background())
+}
+
+func (i WebhookTriggerTriggerArgs) ToWebhookTriggerTriggerPtrOutputWithContext(ctx context.Context) WebhookTriggerTriggerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookTriggerTriggerOutput).ToWebhookTriggerTriggerPtrOutputWithContext(ctx)
+}
+
+// WebhookTriggerTriggerPtrInput is an input type that accepts WebhookTriggerTriggerArgs, WebhookTriggerTriggerPtr and WebhookTriggerTriggerPtrOutput values.
+// You can construct a concrete instance of `WebhookTriggerTriggerPtrInput` via:
+//
+//          WebhookTriggerTriggerArgs{...}
+//
+//  or:
+//
+//          nil
+type WebhookTriggerTriggerPtrInput interface {
+	pulumi.Input
+
+	ToWebhookTriggerTriggerPtrOutput() WebhookTriggerTriggerPtrOutput
+	ToWebhookTriggerTriggerPtrOutputWithContext(context.Context) WebhookTriggerTriggerPtrOutput
+}
+
+type webhookTriggerTriggerPtrType WebhookTriggerTriggerArgs
+
+func WebhookTriggerTriggerPtr(v *WebhookTriggerTriggerArgs) WebhookTriggerTriggerPtrInput {
+	return (*webhookTriggerTriggerPtrType)(v)
+}
+
+func (*webhookTriggerTriggerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebhookTriggerTrigger)(nil)).Elem()
+}
+
+func (i *webhookTriggerTriggerPtrType) ToWebhookTriggerTriggerPtrOutput() WebhookTriggerTriggerPtrOutput {
+	return i.ToWebhookTriggerTriggerPtrOutputWithContext(context.Background())
+}
+
+func (i *webhookTriggerTriggerPtrType) ToWebhookTriggerTriggerPtrOutputWithContext(ctx context.Context) WebhookTriggerTriggerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookTriggerTriggerPtrOutput)
+}
+
+type WebhookTriggerTriggerOutput struct{ *pulumi.OutputState }
+
+func (WebhookTriggerTriggerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookTriggerTrigger)(nil)).Elem()
+}
+
+func (o WebhookTriggerTriggerOutput) ToWebhookTriggerTriggerOutput() WebhookTriggerTriggerOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerOutput) ToWebhookTriggerTriggerOutputWithContext(ctx context.Context) WebhookTriggerTriggerOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerOutput) ToWebhookTriggerTriggerPtrOutput() WebhookTriggerTriggerPtrOutput {
+	return o.ToWebhookTriggerTriggerPtrOutputWithContext(context.Background())
+}
+
+func (o WebhookTriggerTriggerOutput) ToWebhookTriggerTriggerPtrOutputWithContext(ctx context.Context) WebhookTriggerTriggerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebhookTriggerTrigger) *WebhookTriggerTrigger {
+		return &v
+	}).(WebhookTriggerTriggerPtrOutput)
+}
+
+// trigger rule.
+func (o WebhookTriggerTriggerOutput) Condition() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) string { return v.Condition }).(pulumi.StringOutput)
+}
+
+// trigger description.
+func (o WebhookTriggerTriggerOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// enable trigger.
+func (o WebhookTriggerTriggerOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// trigger action.
+func (o WebhookTriggerTriggerOutput) EventTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) []string { return v.EventTypes }).(pulumi.StringArrayOutput)
+}
+
+// ID of the resource.
+func (o WebhookTriggerTriggerOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) *int { return v.Id }).(pulumi.IntPtrOutput)
+}
+
+// trigger name.
+func (o WebhookTriggerTriggerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// the namespace Id to which the trigger belongs.
+func (o WebhookTriggerTriggerOutput) NamespaceId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) *int { return v.NamespaceId }).(pulumi.IntPtrOutput)
+}
+
+// trigger target.
+func (o WebhookTriggerTriggerOutput) Targets() WebhookTriggerTriggerTargetArrayOutput {
+	return o.ApplyT(func(v WebhookTriggerTrigger) []WebhookTriggerTriggerTarget { return v.Targets }).(WebhookTriggerTriggerTargetArrayOutput)
+}
+
+type WebhookTriggerTriggerPtrOutput struct{ *pulumi.OutputState }
+
+func (WebhookTriggerTriggerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebhookTriggerTrigger)(nil)).Elem()
+}
+
+func (o WebhookTriggerTriggerPtrOutput) ToWebhookTriggerTriggerPtrOutput() WebhookTriggerTriggerPtrOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerPtrOutput) ToWebhookTriggerTriggerPtrOutputWithContext(ctx context.Context) WebhookTriggerTriggerPtrOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerPtrOutput) Elem() WebhookTriggerTriggerOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) WebhookTriggerTrigger {
+		if v != nil {
+			return *v
+		}
+		var ret WebhookTriggerTrigger
+		return ret
+	}).(WebhookTriggerTriggerOutput)
+}
+
+// trigger rule.
+func (o WebhookTriggerTriggerPtrOutput) Condition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Condition
+	}).(pulumi.StringPtrOutput)
+}
+
+// trigger description.
+func (o WebhookTriggerTriggerPtrOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Description
+	}).(pulumi.StringPtrOutput)
+}
+
+// enable trigger.
+func (o WebhookTriggerTriggerPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// trigger action.
+func (o WebhookTriggerTriggerPtrOutput) EventTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) []string {
+		if v == nil {
+			return nil
+		}
+		return v.EventTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+// ID of the resource.
+func (o WebhookTriggerTriggerPtrOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.IntPtrOutput)
+}
+
+// trigger name.
+func (o WebhookTriggerTriggerPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// the namespace Id to which the trigger belongs.
+func (o WebhookTriggerTriggerPtrOutput) NamespaceId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) *int {
+		if v == nil {
+			return nil
+		}
+		return v.NamespaceId
+	}).(pulumi.IntPtrOutput)
+}
+
+// trigger target.
+func (o WebhookTriggerTriggerPtrOutput) Targets() WebhookTriggerTriggerTargetArrayOutput {
+	return o.ApplyT(func(v *WebhookTriggerTrigger) []WebhookTriggerTriggerTarget {
+		if v == nil {
+			return nil
+		}
+		return v.Targets
+	}).(WebhookTriggerTriggerTargetArrayOutput)
+}
+
+type WebhookTriggerTriggerTarget struct {
+	// target address.
+	Address string `pulumi:"address"`
+	// custom Headers.
+	Headers []WebhookTriggerTriggerTargetHeader `pulumi:"headers"`
+}
+
+// WebhookTriggerTriggerTargetInput is an input type that accepts WebhookTriggerTriggerTargetArgs and WebhookTriggerTriggerTargetOutput values.
+// You can construct a concrete instance of `WebhookTriggerTriggerTargetInput` via:
+//
+//          WebhookTriggerTriggerTargetArgs{...}
+type WebhookTriggerTriggerTargetInput interface {
+	pulumi.Input
+
+	ToWebhookTriggerTriggerTargetOutput() WebhookTriggerTriggerTargetOutput
+	ToWebhookTriggerTriggerTargetOutputWithContext(context.Context) WebhookTriggerTriggerTargetOutput
+}
+
+type WebhookTriggerTriggerTargetArgs struct {
+	// target address.
+	Address pulumi.StringInput `pulumi:"address"`
+	// custom Headers.
+	Headers WebhookTriggerTriggerTargetHeaderArrayInput `pulumi:"headers"`
+}
+
+func (WebhookTriggerTriggerTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookTriggerTriggerTarget)(nil)).Elem()
+}
+
+func (i WebhookTriggerTriggerTargetArgs) ToWebhookTriggerTriggerTargetOutput() WebhookTriggerTriggerTargetOutput {
+	return i.ToWebhookTriggerTriggerTargetOutputWithContext(context.Background())
+}
+
+func (i WebhookTriggerTriggerTargetArgs) ToWebhookTriggerTriggerTargetOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookTriggerTriggerTargetOutput)
+}
+
+// WebhookTriggerTriggerTargetArrayInput is an input type that accepts WebhookTriggerTriggerTargetArray and WebhookTriggerTriggerTargetArrayOutput values.
+// You can construct a concrete instance of `WebhookTriggerTriggerTargetArrayInput` via:
+//
+//          WebhookTriggerTriggerTargetArray{ WebhookTriggerTriggerTargetArgs{...} }
+type WebhookTriggerTriggerTargetArrayInput interface {
+	pulumi.Input
+
+	ToWebhookTriggerTriggerTargetArrayOutput() WebhookTriggerTriggerTargetArrayOutput
+	ToWebhookTriggerTriggerTargetArrayOutputWithContext(context.Context) WebhookTriggerTriggerTargetArrayOutput
+}
+
+type WebhookTriggerTriggerTargetArray []WebhookTriggerTriggerTargetInput
+
+func (WebhookTriggerTriggerTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookTriggerTriggerTarget)(nil)).Elem()
+}
+
+func (i WebhookTriggerTriggerTargetArray) ToWebhookTriggerTriggerTargetArrayOutput() WebhookTriggerTriggerTargetArrayOutput {
+	return i.ToWebhookTriggerTriggerTargetArrayOutputWithContext(context.Background())
+}
+
+func (i WebhookTriggerTriggerTargetArray) ToWebhookTriggerTriggerTargetArrayOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookTriggerTriggerTargetArrayOutput)
+}
+
+type WebhookTriggerTriggerTargetOutput struct{ *pulumi.OutputState }
+
+func (WebhookTriggerTriggerTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookTriggerTriggerTarget)(nil)).Elem()
+}
+
+func (o WebhookTriggerTriggerTargetOutput) ToWebhookTriggerTriggerTargetOutput() WebhookTriggerTriggerTargetOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerTargetOutput) ToWebhookTriggerTriggerTargetOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetOutput {
+	return o
+}
+
+// target address.
+func (o WebhookTriggerTriggerTargetOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookTriggerTriggerTarget) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// custom Headers.
+func (o WebhookTriggerTriggerTargetOutput) Headers() WebhookTriggerTriggerTargetHeaderArrayOutput {
+	return o.ApplyT(func(v WebhookTriggerTriggerTarget) []WebhookTriggerTriggerTargetHeader { return v.Headers }).(WebhookTriggerTriggerTargetHeaderArrayOutput)
+}
+
+type WebhookTriggerTriggerTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (WebhookTriggerTriggerTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookTriggerTriggerTarget)(nil)).Elem()
+}
+
+func (o WebhookTriggerTriggerTargetArrayOutput) ToWebhookTriggerTriggerTargetArrayOutput() WebhookTriggerTriggerTargetArrayOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerTargetArrayOutput) ToWebhookTriggerTriggerTargetArrayOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetArrayOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerTargetArrayOutput) Index(i pulumi.IntInput) WebhookTriggerTriggerTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WebhookTriggerTriggerTarget {
+		return vs[0].([]WebhookTriggerTriggerTarget)[vs[1].(int)]
+	}).(WebhookTriggerTriggerTargetOutput)
+}
+
+type WebhookTriggerTriggerTargetHeader struct {
+	// Header Key.
+	Key string `pulumi:"key"`
+	// Header Values.
+	Values []string `pulumi:"values"`
+}
+
+// WebhookTriggerTriggerTargetHeaderInput is an input type that accepts WebhookTriggerTriggerTargetHeaderArgs and WebhookTriggerTriggerTargetHeaderOutput values.
+// You can construct a concrete instance of `WebhookTriggerTriggerTargetHeaderInput` via:
+//
+//          WebhookTriggerTriggerTargetHeaderArgs{...}
+type WebhookTriggerTriggerTargetHeaderInput interface {
+	pulumi.Input
+
+	ToWebhookTriggerTriggerTargetHeaderOutput() WebhookTriggerTriggerTargetHeaderOutput
+	ToWebhookTriggerTriggerTargetHeaderOutputWithContext(context.Context) WebhookTriggerTriggerTargetHeaderOutput
+}
+
+type WebhookTriggerTriggerTargetHeaderArgs struct {
+	// Header Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Header Values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (WebhookTriggerTriggerTargetHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookTriggerTriggerTargetHeader)(nil)).Elem()
+}
+
+func (i WebhookTriggerTriggerTargetHeaderArgs) ToWebhookTriggerTriggerTargetHeaderOutput() WebhookTriggerTriggerTargetHeaderOutput {
+	return i.ToWebhookTriggerTriggerTargetHeaderOutputWithContext(context.Background())
+}
+
+func (i WebhookTriggerTriggerTargetHeaderArgs) ToWebhookTriggerTriggerTargetHeaderOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookTriggerTriggerTargetHeaderOutput)
+}
+
+// WebhookTriggerTriggerTargetHeaderArrayInput is an input type that accepts WebhookTriggerTriggerTargetHeaderArray and WebhookTriggerTriggerTargetHeaderArrayOutput values.
+// You can construct a concrete instance of `WebhookTriggerTriggerTargetHeaderArrayInput` via:
+//
+//          WebhookTriggerTriggerTargetHeaderArray{ WebhookTriggerTriggerTargetHeaderArgs{...} }
+type WebhookTriggerTriggerTargetHeaderArrayInput interface {
+	pulumi.Input
+
+	ToWebhookTriggerTriggerTargetHeaderArrayOutput() WebhookTriggerTriggerTargetHeaderArrayOutput
+	ToWebhookTriggerTriggerTargetHeaderArrayOutputWithContext(context.Context) WebhookTriggerTriggerTargetHeaderArrayOutput
+}
+
+type WebhookTriggerTriggerTargetHeaderArray []WebhookTriggerTriggerTargetHeaderInput
+
+func (WebhookTriggerTriggerTargetHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookTriggerTriggerTargetHeader)(nil)).Elem()
+}
+
+func (i WebhookTriggerTriggerTargetHeaderArray) ToWebhookTriggerTriggerTargetHeaderArrayOutput() WebhookTriggerTriggerTargetHeaderArrayOutput {
+	return i.ToWebhookTriggerTriggerTargetHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i WebhookTriggerTriggerTargetHeaderArray) ToWebhookTriggerTriggerTargetHeaderArrayOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookTriggerTriggerTargetHeaderArrayOutput)
+}
+
+type WebhookTriggerTriggerTargetHeaderOutput struct{ *pulumi.OutputState }
+
+func (WebhookTriggerTriggerTargetHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookTriggerTriggerTargetHeader)(nil)).Elem()
+}
+
+func (o WebhookTriggerTriggerTargetHeaderOutput) ToWebhookTriggerTriggerTargetHeaderOutput() WebhookTriggerTriggerTargetHeaderOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerTargetHeaderOutput) ToWebhookTriggerTriggerTargetHeaderOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetHeaderOutput {
+	return o
+}
+
+// Header Key.
+func (o WebhookTriggerTriggerTargetHeaderOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookTriggerTriggerTargetHeader) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Header Values.
+func (o WebhookTriggerTriggerTargetHeaderOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WebhookTriggerTriggerTargetHeader) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type WebhookTriggerTriggerTargetHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (WebhookTriggerTriggerTargetHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookTriggerTriggerTargetHeader)(nil)).Elem()
+}
+
+func (o WebhookTriggerTriggerTargetHeaderArrayOutput) ToWebhookTriggerTriggerTargetHeaderArrayOutput() WebhookTriggerTriggerTargetHeaderArrayOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerTargetHeaderArrayOutput) ToWebhookTriggerTriggerTargetHeaderArrayOutputWithContext(ctx context.Context) WebhookTriggerTriggerTargetHeaderArrayOutput {
+	return o
+}
+
+func (o WebhookTriggerTriggerTargetHeaderArrayOutput) Index(i pulumi.IntInput) WebhookTriggerTriggerTargetHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WebhookTriggerTriggerTargetHeader {
+		return vs[0].([]WebhookTriggerTriggerTargetHeader)[vs[1].(int)]
+	}).(WebhookTriggerTriggerTargetHeaderOutput)
+}
+
+type GetImagesImageInfoList struct {
+	// specify image digest for lookup.
+	Digest string `pulumi:"digest"`
+	// image version name, default is fuzzy match.
+	ImageVersion string `pulumi:"imageVersion"`
+	// product type,note: this field may return null, indicating that no valid value can be obtained.
+	Kind string `pulumi:"kind"`
+	// kms signature information,note: this field may return null, indicating that no valid value can be obtained.
+	KmsSignature string `pulumi:"kmsSignature"`
+	// image size (unit: byte).
+	Size int `pulumi:"size"`
+	// update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetImagesImageInfoListInput is an input type that accepts GetImagesImageInfoListArgs and GetImagesImageInfoListOutput values.
+// You can construct a concrete instance of `GetImagesImageInfoListInput` via:
+//
+//          GetImagesImageInfoListArgs{...}
+type GetImagesImageInfoListInput interface {
+	pulumi.Input
+
+	ToGetImagesImageInfoListOutput() GetImagesImageInfoListOutput
+	ToGetImagesImageInfoListOutputWithContext(context.Context) GetImagesImageInfoListOutput
+}
+
+type GetImagesImageInfoListArgs struct {
+	// specify image digest for lookup.
+	Digest pulumi.StringInput `pulumi:"digest"`
+	// image version name, default is fuzzy match.
+	ImageVersion pulumi.StringInput `pulumi:"imageVersion"`
+	// product type,note: this field may return null, indicating that no valid value can be obtained.
+	Kind pulumi.StringInput `pulumi:"kind"`
+	// kms signature information,note: this field may return null, indicating that no valid value can be obtained.
+	KmsSignature pulumi.StringInput `pulumi:"kmsSignature"`
+	// image size (unit: byte).
+	Size pulumi.IntInput `pulumi:"size"`
+	// update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetImagesImageInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImagesImageInfoList)(nil)).Elem()
+}
+
+func (i GetImagesImageInfoListArgs) ToGetImagesImageInfoListOutput() GetImagesImageInfoListOutput {
+	return i.ToGetImagesImageInfoListOutputWithContext(context.Background())
+}
+
+func (i GetImagesImageInfoListArgs) ToGetImagesImageInfoListOutputWithContext(ctx context.Context) GetImagesImageInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImagesImageInfoListOutput)
+}
+
+// GetImagesImageInfoListArrayInput is an input type that accepts GetImagesImageInfoListArray and GetImagesImageInfoListArrayOutput values.
+// You can construct a concrete instance of `GetImagesImageInfoListArrayInput` via:
+//
+//          GetImagesImageInfoListArray{ GetImagesImageInfoListArgs{...} }
+type GetImagesImageInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetImagesImageInfoListArrayOutput() GetImagesImageInfoListArrayOutput
+	ToGetImagesImageInfoListArrayOutputWithContext(context.Context) GetImagesImageInfoListArrayOutput
+}
+
+type GetImagesImageInfoListArray []GetImagesImageInfoListInput
+
+func (GetImagesImageInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImagesImageInfoList)(nil)).Elem()
+}
+
+func (i GetImagesImageInfoListArray) ToGetImagesImageInfoListArrayOutput() GetImagesImageInfoListArrayOutput {
+	return i.ToGetImagesImageInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetImagesImageInfoListArray) ToGetImagesImageInfoListArrayOutputWithContext(ctx context.Context) GetImagesImageInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImagesImageInfoListArrayOutput)
+}
+
+type GetImagesImageInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetImagesImageInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImagesImageInfoList)(nil)).Elem()
+}
+
+func (o GetImagesImageInfoListOutput) ToGetImagesImageInfoListOutput() GetImagesImageInfoListOutput {
+	return o
+}
+
+func (o GetImagesImageInfoListOutput) ToGetImagesImageInfoListOutputWithContext(ctx context.Context) GetImagesImageInfoListOutput {
+	return o
+}
+
+// specify image digest for lookup.
+func (o GetImagesImageInfoListOutput) Digest() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImagesImageInfoList) string { return v.Digest }).(pulumi.StringOutput)
+}
+
+// image version name, default is fuzzy match.
+func (o GetImagesImageInfoListOutput) ImageVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImagesImageInfoList) string { return v.ImageVersion }).(pulumi.StringOutput)
+}
+
+// product type,note: this field may return null, indicating that no valid value can be obtained.
+func (o GetImagesImageInfoListOutput) Kind() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImagesImageInfoList) string { return v.Kind }).(pulumi.StringOutput)
+}
+
+// kms signature information,note: this field may return null, indicating that no valid value can be obtained.
+func (o GetImagesImageInfoListOutput) KmsSignature() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImagesImageInfoList) string { return v.KmsSignature }).(pulumi.StringOutput)
+}
+
+// image size (unit: byte).
+func (o GetImagesImageInfoListOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetImagesImageInfoList) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// update time.
+func (o GetImagesImageInfoListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImagesImageInfoList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetImagesImageInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetImagesImageInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImagesImageInfoList)(nil)).Elem()
+}
+
+func (o GetImagesImageInfoListArrayOutput) ToGetImagesImageInfoListArrayOutput() GetImagesImageInfoListArrayOutput {
+	return o
+}
+
+func (o GetImagesImageInfoListArrayOutput) ToGetImagesImageInfoListArrayOutputWithContext(ctx context.Context) GetImagesImageInfoListArrayOutput {
+	return o
+}
+
+func (o GetImagesImageInfoListArrayOutput) Index(i pulumi.IntInput) GetImagesImageInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetImagesImageInfoList {
+		return vs[0].([]GetImagesImageInfoList)[vs[1].(int)]
+	}).(GetImagesImageInfoListOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// ID of the TCR instance.
 	Id string `pulumi:"id"`
@@ -148,7 +1862,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -188,7 +1902,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -280,6 +1994,8 @@ func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanc
 }
 
 type GetNamespacesNamespaceList struct {
+	// ID of TCR namespace.
+	Id int `pulumi:"id"`
 	// Indicate that the namespace is public or not.
 	IsPublic bool `pulumi:"isPublic"`
 	// Name of TCR namespace.
@@ -289,7 +2005,7 @@ type GetNamespacesNamespaceList struct {
 // GetNamespacesNamespaceListInput is an input type that accepts GetNamespacesNamespaceListArgs and GetNamespacesNamespaceListOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceListInput` via:
 //
-//	GetNamespacesNamespaceListArgs{...}
+//          GetNamespacesNamespaceListArgs{...}
 type GetNamespacesNamespaceListInput interface {
 	pulumi.Input
 
@@ -298,6 +2014,8 @@ type GetNamespacesNamespaceListInput interface {
 }
 
 type GetNamespacesNamespaceListArgs struct {
+	// ID of TCR namespace.
+	Id pulumi.IntInput `pulumi:"id"`
 	// Indicate that the namespace is public or not.
 	IsPublic pulumi.BoolInput `pulumi:"isPublic"`
 	// Name of TCR namespace.
@@ -319,7 +2037,7 @@ func (i GetNamespacesNamespaceListArgs) ToGetNamespacesNamespaceListOutputWithCo
 // GetNamespacesNamespaceListArrayInput is an input type that accepts GetNamespacesNamespaceListArray and GetNamespacesNamespaceListArrayOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceListArrayInput` via:
 //
-//	GetNamespacesNamespaceListArray{ GetNamespacesNamespaceListArgs{...} }
+//          GetNamespacesNamespaceListArray{ GetNamespacesNamespaceListArgs{...} }
 type GetNamespacesNamespaceListArrayInput interface {
 	pulumi.Input
 
@@ -353,6 +2071,11 @@ func (o GetNamespacesNamespaceListOutput) ToGetNamespacesNamespaceListOutput() G
 
 func (o GetNamespacesNamespaceListOutput) ToGetNamespacesNamespaceListOutputWithContext(ctx context.Context) GetNamespacesNamespaceListOutput {
 	return o
+}
+
+// ID of TCR namespace.
+func (o GetNamespacesNamespaceListOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNamespacesNamespaceList) int { return v.Id }).(pulumi.IntOutput)
 }
 
 // Indicate that the namespace is public or not.
@@ -407,7 +2130,7 @@ type GetRepositoriesRepositoryList struct {
 // GetRepositoriesRepositoryListInput is an input type that accepts GetRepositoriesRepositoryListArgs and GetRepositoriesRepositoryListOutput values.
 // You can construct a concrete instance of `GetRepositoriesRepositoryListInput` via:
 //
-//	GetRepositoriesRepositoryListArgs{...}
+//          GetRepositoriesRepositoryListArgs{...}
 type GetRepositoriesRepositoryListInput interface {
 	pulumi.Input
 
@@ -449,7 +2172,7 @@ func (i GetRepositoriesRepositoryListArgs) ToGetRepositoriesRepositoryListOutput
 // GetRepositoriesRepositoryListArrayInput is an input type that accepts GetRepositoriesRepositoryListArray and GetRepositoriesRepositoryListArrayOutput values.
 // You can construct a concrete instance of `GetRepositoriesRepositoryListArrayInput` via:
 //
-//	GetRepositoriesRepositoryListArray{ GetRepositoriesRepositoryListArgs{...} }
+//          GetRepositoriesRepositoryListArray{ GetRepositoriesRepositoryListArgs{...} }
 type GetRepositoriesRepositoryListArrayInput interface {
 	pulumi.Input
 
@@ -559,7 +2282,7 @@ type GetTokensTokenList struct {
 // GetTokensTokenListInput is an input type that accepts GetTokensTokenListArgs and GetTokensTokenListOutput values.
 // You can construct a concrete instance of `GetTokensTokenListInput` via:
 //
-//	GetTokensTokenListArgs{...}
+//          GetTokensTokenListArgs{...}
 type GetTokensTokenListInput interface {
 	pulumi.Input
 
@@ -593,7 +2316,7 @@ func (i GetTokensTokenListArgs) ToGetTokensTokenListOutputWithContext(ctx contex
 // GetTokensTokenListArrayInput is an input type that accepts GetTokensTokenListArray and GetTokensTokenListArrayOutput values.
 // You can construct a concrete instance of `GetTokensTokenListArrayInput` via:
 //
-//	GetTokensTokenListArray{ GetTokensTokenListArgs{...} }
+//          GetTokensTokenListArray{ GetTokensTokenListArgs{...} }
 type GetTokensTokenListArrayInput interface {
 	pulumi.Input
 
@@ -687,7 +2410,7 @@ type GetVpcAttachmentsVpcAttachmentList struct {
 // GetVpcAttachmentsVpcAttachmentListInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArgs and GetVpcAttachmentsVpcAttachmentListOutput values.
 // You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListInput` via:
 //
-//	GetVpcAttachmentsVpcAttachmentListArgs{...}
+//          GetVpcAttachmentsVpcAttachmentListArgs{...}
 type GetVpcAttachmentsVpcAttachmentListInput interface {
 	pulumi.Input
 
@@ -725,7 +2448,7 @@ func (i GetVpcAttachmentsVpcAttachmentListArgs) ToGetVpcAttachmentsVpcAttachment
 // GetVpcAttachmentsVpcAttachmentListArrayInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArray and GetVpcAttachmentsVpcAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListArrayInput` via:
 //
-//	GetVpcAttachmentsVpcAttachmentListArray{ GetVpcAttachmentsVpcAttachmentListArgs{...} }
+//          GetVpcAttachmentsVpcAttachmentListArray{ GetVpcAttachmentsVpcAttachmentListArgs{...} }
 type GetVpcAttachmentsVpcAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -811,9 +2534,191 @@ func (o GetVpcAttachmentsVpcAttachmentListArrayOutput) Index(i pulumi.IntInput) 
 	}).(GetVpcAttachmentsVpcAttachmentListOutput)
 }
 
+type GetWebhookTriggerLogsLog struct {
+	// creation time.
+	CreationTime string `pulumi:"creationTime"`
+	// webhook trigger detail.
+	Detail string `pulumi:"detail"`
+	// event type.
+	EventType string `pulumi:"eventType"`
+	// log id.
+	Id int `pulumi:"id"`
+	// notification type.
+	NotifyType string `pulumi:"notifyType"`
+	// status.
+	Status string `pulumi:"status"`
+	// trigger id.
+	TriggerId int `pulumi:"triggerId"`
+	// update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetWebhookTriggerLogsLogInput is an input type that accepts GetWebhookTriggerLogsLogArgs and GetWebhookTriggerLogsLogOutput values.
+// You can construct a concrete instance of `GetWebhookTriggerLogsLogInput` via:
+//
+//          GetWebhookTriggerLogsLogArgs{...}
+type GetWebhookTriggerLogsLogInput interface {
+	pulumi.Input
+
+	ToGetWebhookTriggerLogsLogOutput() GetWebhookTriggerLogsLogOutput
+	ToGetWebhookTriggerLogsLogOutputWithContext(context.Context) GetWebhookTriggerLogsLogOutput
+}
+
+type GetWebhookTriggerLogsLogArgs struct {
+	// creation time.
+	CreationTime pulumi.StringInput `pulumi:"creationTime"`
+	// webhook trigger detail.
+	Detail pulumi.StringInput `pulumi:"detail"`
+	// event type.
+	EventType pulumi.StringInput `pulumi:"eventType"`
+	// log id.
+	Id pulumi.IntInput `pulumi:"id"`
+	// notification type.
+	NotifyType pulumi.StringInput `pulumi:"notifyType"`
+	// status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// trigger id.
+	TriggerId pulumi.IntInput `pulumi:"triggerId"`
+	// update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetWebhookTriggerLogsLogArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWebhookTriggerLogsLog)(nil)).Elem()
+}
+
+func (i GetWebhookTriggerLogsLogArgs) ToGetWebhookTriggerLogsLogOutput() GetWebhookTriggerLogsLogOutput {
+	return i.ToGetWebhookTriggerLogsLogOutputWithContext(context.Background())
+}
+
+func (i GetWebhookTriggerLogsLogArgs) ToGetWebhookTriggerLogsLogOutputWithContext(ctx context.Context) GetWebhookTriggerLogsLogOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWebhookTriggerLogsLogOutput)
+}
+
+// GetWebhookTriggerLogsLogArrayInput is an input type that accepts GetWebhookTriggerLogsLogArray and GetWebhookTriggerLogsLogArrayOutput values.
+// You can construct a concrete instance of `GetWebhookTriggerLogsLogArrayInput` via:
+//
+//          GetWebhookTriggerLogsLogArray{ GetWebhookTriggerLogsLogArgs{...} }
+type GetWebhookTriggerLogsLogArrayInput interface {
+	pulumi.Input
+
+	ToGetWebhookTriggerLogsLogArrayOutput() GetWebhookTriggerLogsLogArrayOutput
+	ToGetWebhookTriggerLogsLogArrayOutputWithContext(context.Context) GetWebhookTriggerLogsLogArrayOutput
+}
+
+type GetWebhookTriggerLogsLogArray []GetWebhookTriggerLogsLogInput
+
+func (GetWebhookTriggerLogsLogArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWebhookTriggerLogsLog)(nil)).Elem()
+}
+
+func (i GetWebhookTriggerLogsLogArray) ToGetWebhookTriggerLogsLogArrayOutput() GetWebhookTriggerLogsLogArrayOutput {
+	return i.ToGetWebhookTriggerLogsLogArrayOutputWithContext(context.Background())
+}
+
+func (i GetWebhookTriggerLogsLogArray) ToGetWebhookTriggerLogsLogArrayOutputWithContext(ctx context.Context) GetWebhookTriggerLogsLogArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWebhookTriggerLogsLogArrayOutput)
+}
+
+type GetWebhookTriggerLogsLogOutput struct{ *pulumi.OutputState }
+
+func (GetWebhookTriggerLogsLogOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWebhookTriggerLogsLog)(nil)).Elem()
+}
+
+func (o GetWebhookTriggerLogsLogOutput) ToGetWebhookTriggerLogsLogOutput() GetWebhookTriggerLogsLogOutput {
+	return o
+}
+
+func (o GetWebhookTriggerLogsLogOutput) ToGetWebhookTriggerLogsLogOutputWithContext(ctx context.Context) GetWebhookTriggerLogsLogOutput {
+	return o
+}
+
+// creation time.
+func (o GetWebhookTriggerLogsLogOutput) CreationTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) string { return v.CreationTime }).(pulumi.StringOutput)
+}
+
+// webhook trigger detail.
+func (o GetWebhookTriggerLogsLogOutput) Detail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) string { return v.Detail }).(pulumi.StringOutput)
+}
+
+// event type.
+func (o GetWebhookTriggerLogsLogOutput) EventType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) string { return v.EventType }).(pulumi.StringOutput)
+}
+
+// log id.
+func (o GetWebhookTriggerLogsLogOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// notification type.
+func (o GetWebhookTriggerLogsLogOutput) NotifyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) string { return v.NotifyType }).(pulumi.StringOutput)
+}
+
+// status.
+func (o GetWebhookTriggerLogsLogOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// trigger id.
+func (o GetWebhookTriggerLogsLogOutput) TriggerId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) int { return v.TriggerId }).(pulumi.IntOutput)
+}
+
+// update time.
+func (o GetWebhookTriggerLogsLogOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebhookTriggerLogsLog) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetWebhookTriggerLogsLogArrayOutput struct{ *pulumi.OutputState }
+
+func (GetWebhookTriggerLogsLogArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWebhookTriggerLogsLog)(nil)).Elem()
+}
+
+func (o GetWebhookTriggerLogsLogArrayOutput) ToGetWebhookTriggerLogsLogArrayOutput() GetWebhookTriggerLogsLogArrayOutput {
+	return o
+}
+
+func (o GetWebhookTriggerLogsLogArrayOutput) ToGetWebhookTriggerLogsLogArrayOutputWithContext(ctx context.Context) GetWebhookTriggerLogsLogArrayOutput {
+	return o
+}
+
+func (o GetWebhookTriggerLogsLogArrayOutput) Index(i pulumi.IntInput) GetWebhookTriggerLogsLogOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWebhookTriggerLogsLog {
+		return vs[0].([]GetWebhookTriggerLogsLog)[vs[1].(int)]
+	}).(GetWebhookTriggerLogsLogOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ImmutableTagRuleRuleInput)(nil)).Elem(), ImmutableTagRuleRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ImmutableTagRuleRulePtrInput)(nil)).Elem(), ImmutableTagRuleRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceReplicationInput)(nil)).Elem(), InstanceReplicationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceReplicationArrayInput)(nil)).Elem(), InstanceReplicationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSecurityPolicyInput)(nil)).Elem(), InstanceSecurityPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSecurityPolicyArrayInput)(nil)).Elem(), InstanceSecurityPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationPeerReplicationOptionInput)(nil)).Elem(), ManageReplicationOperationPeerReplicationOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationPeerReplicationOptionPtrInput)(nil)).Elem(), ManageReplicationOperationPeerReplicationOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRuleInput)(nil)).Elem(), ManageReplicationOperationRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRulePtrInput)(nil)).Elem(), ManageReplicationOperationRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRuleFilterInput)(nil)).Elem(), ManageReplicationOperationRuleFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRuleFilterArrayInput)(nil)).Elem(), ManageReplicationOperationRuleFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceCveWhitelistItemInput)(nil)).Elem(), NamespaceCveWhitelistItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceCveWhitelistItemArrayInput)(nil)).Elem(), NamespaceCveWhitelistItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleRetentionRuleInput)(nil)).Elem(), TagRetentionRuleRetentionRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleRetentionRulePtrInput)(nil)).Elem(), TagRetentionRuleRetentionRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerInput)(nil)).Elem(), WebhookTriggerTriggerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerPtrInput)(nil)).Elem(), WebhookTriggerTriggerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerTargetInput)(nil)).Elem(), WebhookTriggerTriggerTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerTargetArrayInput)(nil)).Elem(), WebhookTriggerTriggerTargetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerTargetHeaderInput)(nil)).Elem(), WebhookTriggerTriggerTargetHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerTargetHeaderArrayInput)(nil)).Elem(), WebhookTriggerTriggerTargetHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImagesImageInfoListInput)(nil)).Elem(), GetImagesImageInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImagesImageInfoListArrayInput)(nil)).Elem(), GetImagesImageInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceListInput)(nil)).Elem(), GetNamespacesNamespaceListArgs{})
@@ -824,8 +2729,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenListArrayInput)(nil)).Elem(), GetTokensTokenListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcAttachmentsVpcAttachmentListInput)(nil)).Elem(), GetVpcAttachmentsVpcAttachmentListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcAttachmentsVpcAttachmentListArrayInput)(nil)).Elem(), GetVpcAttachmentsVpcAttachmentListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWebhookTriggerLogsLogInput)(nil)).Elem(), GetWebhookTriggerLogsLogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWebhookTriggerLogsLogArrayInput)(nil)).Elem(), GetWebhookTriggerLogsLogArray{})
+	pulumi.RegisterOutputType(ImmutableTagRuleRuleOutput{})
+	pulumi.RegisterOutputType(ImmutableTagRuleRulePtrOutput{})
+	pulumi.RegisterOutputType(InstanceReplicationOutput{})
+	pulumi.RegisterOutputType(InstanceReplicationArrayOutput{})
 	pulumi.RegisterOutputType(InstanceSecurityPolicyOutput{})
 	pulumi.RegisterOutputType(InstanceSecurityPolicyArrayOutput{})
+	pulumi.RegisterOutputType(ManageReplicationOperationPeerReplicationOptionOutput{})
+	pulumi.RegisterOutputType(ManageReplicationOperationPeerReplicationOptionPtrOutput{})
+	pulumi.RegisterOutputType(ManageReplicationOperationRuleOutput{})
+	pulumi.RegisterOutputType(ManageReplicationOperationRulePtrOutput{})
+	pulumi.RegisterOutputType(ManageReplicationOperationRuleFilterOutput{})
+	pulumi.RegisterOutputType(ManageReplicationOperationRuleFilterArrayOutput{})
+	pulumi.RegisterOutputType(NamespaceCveWhitelistItemOutput{})
+	pulumi.RegisterOutputType(NamespaceCveWhitelistItemArrayOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleRetentionRuleOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleRetentionRulePtrOutput{})
+	pulumi.RegisterOutputType(WebhookTriggerTriggerOutput{})
+	pulumi.RegisterOutputType(WebhookTriggerTriggerPtrOutput{})
+	pulumi.RegisterOutputType(WebhookTriggerTriggerTargetOutput{})
+	pulumi.RegisterOutputType(WebhookTriggerTriggerTargetArrayOutput{})
+	pulumi.RegisterOutputType(WebhookTriggerTriggerTargetHeaderOutput{})
+	pulumi.RegisterOutputType(WebhookTriggerTriggerTargetHeaderArrayOutput{})
+	pulumi.RegisterOutputType(GetImagesImageInfoListOutput{})
+	pulumi.RegisterOutputType(GetImagesImageInfoListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetNamespacesNamespaceListOutput{})
@@ -836,4 +2765,6 @@ func init() {
 	pulumi.RegisterOutputType(GetTokensTokenListArrayOutput{})
 	pulumi.RegisterOutputType(GetVpcAttachmentsVpcAttachmentListOutput{})
 	pulumi.RegisterOutputType(GetVpcAttachmentsVpcAttachmentListArrayOutput{})
+	pulumi.RegisterOutputType(GetWebhookTriggerLogsLogOutput{})
+	pulumi.RegisterOutputType(GetWebhookTriggerLogsLogArrayOutput{})
 }

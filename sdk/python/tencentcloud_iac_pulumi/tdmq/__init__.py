@@ -5,8 +5,21 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_rocketmq_cluster import *
+from .get_rocketmq_group import *
+from .get_rocketmq_namespace import *
+from .get_rocketmq_role import *
+from .get_rocketmq_topic import *
 from .instance import *
 from .namespace import *
 from .namespace_role_attachment import *
+from .rocketmq_cluster import *
+from .rocketmq_environment_role import *
+from .rocketmq_group import *
+from .rocketmq_namespace import *
+from .rocketmq_role import *
+from .rocketmq_topic import *
 from .role import *
 from .topic import *
+from ._inputs import *
+from . import outputs

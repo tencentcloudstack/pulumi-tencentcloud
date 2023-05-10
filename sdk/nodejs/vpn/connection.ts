@@ -88,6 +88,18 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly customerGatewayId!: pulumi.Output<string>;
     /**
+     * The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+     */
+    public readonly dpdAction!: pulumi.Output<string>;
+    /**
+     * Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+     */
+    public readonly dpdEnable!: pulumi.Output<number>;
+    /**
+     * DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+     */
+    public readonly dpdTimeout!: pulumi.Output<number>;
+    /**
      * Whether intra-tunnel health checks are supported.
      */
     public readonly enableHealthCheck!: pulumi.Output<boolean>;
@@ -231,6 +243,9 @@ export class Connection extends pulumi.CustomResource {
             const state = argsOrState as ConnectionState | undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["customerGatewayId"] = state ? state.customerGatewayId : undefined;
+            resourceInputs["dpdAction"] = state ? state.dpdAction : undefined;
+            resourceInputs["dpdEnable"] = state ? state.dpdEnable : undefined;
+            resourceInputs["dpdTimeout"] = state ? state.dpdTimeout : undefined;
             resourceInputs["enableHealthCheck"] = state ? state.enableHealthCheck : undefined;
             resourceInputs["encryptProto"] = state ? state.encryptProto : undefined;
             resourceInputs["healthCheckLocalIp"] = state ? state.healthCheckLocalIp : undefined;
@@ -278,6 +293,9 @@ export class Connection extends pulumi.CustomResource {
                 throw new Error("Missing required property 'vpnGatewayId'");
             }
             resourceInputs["customerGatewayId"] = args ? args.customerGatewayId : undefined;
+            resourceInputs["dpdAction"] = args ? args.dpdAction : undefined;
+            resourceInputs["dpdEnable"] = args ? args.dpdEnable : undefined;
+            resourceInputs["dpdTimeout"] = args ? args.dpdTimeout : undefined;
             resourceInputs["enableHealthCheck"] = args ? args.enableHealthCheck : undefined;
             resourceInputs["healthCheckLocalIp"] = args ? args.healthCheckLocalIp : undefined;
             resourceInputs["healthCheckRemoteIp"] = args ? args.healthCheckRemoteIp : undefined;
@@ -329,6 +347,18 @@ export interface ConnectionState {
      * ID of the customer gateway.
      */
     customerGatewayId?: pulumi.Input<string>;
+    /**
+     * The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+     */
+    dpdAction?: pulumi.Input<string>;
+    /**
+     * Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+     */
+    dpdEnable?: pulumi.Input<number>;
+    /**
+     * DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+     */
+    dpdTimeout?: pulumi.Input<number>;
     /**
      * Whether intra-tunnel health checks are supported.
      */
@@ -467,6 +497,18 @@ export interface ConnectionArgs {
      * ID of the customer gateway.
      */
     customerGatewayId: pulumi.Input<string>;
+    /**
+     * The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
+     */
+    dpdAction?: pulumi.Input<string>;
+    /**
+     * Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
+     */
+    dpdEnable?: pulumi.Input<number>;
+    /**
+     * DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
+     */
+    dpdTimeout?: pulumi.Input<number>;
     /**
      * Whether intra-tunnel health checks are supported.
      */

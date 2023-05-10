@@ -22,36 +22,33 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Mysql.NewReadonlyInstance(ctx, "default", &Mysql.ReadonlyInstanceArgs{
-//				InstanceName:     pulumi.String("myTestMysql"),
-//				IntranetPort:     pulumi.Int(3306),
-//				MasterInstanceId: pulumi.String("cdb-dnqksd9f"),
-//				MemSize:          pulumi.Int(128000),
-//				SecurityGroups: pulumi.StringArray{
-//					pulumi.String("sg-ot8eclwz"),
-//				},
-//				SubnetId: pulumi.String("subnet-9uivyb1g"),
-//				Tags: pulumi.AnyMap{
-//					"name": pulumi.Any("test"),
-//				},
-//				VolumeSize: pulumi.Int(255),
-//				VpcId:      pulumi.String("vpc-12mt3l31"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewReadonlyInstance(ctx, "default", &Mysql.ReadonlyInstanceArgs{
+// 			InstanceName:     pulumi.String("myTestMysql"),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			MasterInstanceId: pulumi.String("cdb-dnqksd9f"),
+// 			MemSize:          pulumi.Int(128000),
+// 			SecurityGroups: pulumi.StringArray{
+// 				pulumi.String("sg-ot8eclwz"),
+// 			},
+// 			SubnetId: pulumi.String("subnet-9uivyb1g"),
+// 			Tags: pulumi.AnyMap{
+// 				"name": pulumi.Any("test"),
+// 			},
+// 			VolumeSize: pulumi.Int(255),
+// 			VpcId:      pulumi.String("vpc-12mt3l31"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -99,7 +96,7 @@ type ReadonlyInstance struct {
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntOutput `pulumi:"status"`
 	// Private network ID. If `vpcId` is set, this value is required.
-	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
+	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// Instance tags.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Indicates which kind of operations is being executed.
@@ -107,7 +104,7 @@ type ReadonlyInstance struct {
 	// Disk size (in GB).
 	VolumeSize pulumi.IntOutput `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
-	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
+	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 	// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
 	Zone pulumi.StringOutput `pulumi:"zone"`
 }
@@ -396,7 +393,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -421,7 +418,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 
@@ -557,8 +554,8 @@ func (o ReadonlyInstanceOutput) Status() pulumi.IntOutput {
 }
 
 // Private network ID. If `vpcId` is set, this value is required.
-func (o ReadonlyInstanceOutput) SubnetId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
+func (o ReadonlyInstanceOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
 }
 
 // Instance tags.
@@ -577,8 +574,8 @@ func (o ReadonlyInstanceOutput) VolumeSize() pulumi.IntOutput {
 }
 
 // ID of VPC, which can be modified once every 24 hours and can't be removed.
-func (o ReadonlyInstanceOutput) VpcId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
+func (o ReadonlyInstanceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
 // Zone information, this parameter defaults to, the system automatically selects an Availability Zone.

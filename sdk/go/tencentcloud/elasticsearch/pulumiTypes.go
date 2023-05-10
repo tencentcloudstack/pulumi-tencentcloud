@@ -10,6 +10,162 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type InstanceEsAcl struct {
+	// Blacklist of kibana access.
+	BlackLists []string `pulumi:"blackLists"`
+	// Whitelist of kibana access.
+	WhiteLists []string `pulumi:"whiteLists"`
+}
+
+// InstanceEsAclInput is an input type that accepts InstanceEsAclArgs and InstanceEsAclOutput values.
+// You can construct a concrete instance of `InstanceEsAclInput` via:
+//
+//          InstanceEsAclArgs{...}
+type InstanceEsAclInput interface {
+	pulumi.Input
+
+	ToInstanceEsAclOutput() InstanceEsAclOutput
+	ToInstanceEsAclOutputWithContext(context.Context) InstanceEsAclOutput
+}
+
+type InstanceEsAclArgs struct {
+	// Blacklist of kibana access.
+	BlackLists pulumi.StringArrayInput `pulumi:"blackLists"`
+	// Whitelist of kibana access.
+	WhiteLists pulumi.StringArrayInput `pulumi:"whiteLists"`
+}
+
+func (InstanceEsAclArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceEsAcl)(nil)).Elem()
+}
+
+func (i InstanceEsAclArgs) ToInstanceEsAclOutput() InstanceEsAclOutput {
+	return i.ToInstanceEsAclOutputWithContext(context.Background())
+}
+
+func (i InstanceEsAclArgs) ToInstanceEsAclOutputWithContext(ctx context.Context) InstanceEsAclOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceEsAclOutput)
+}
+
+func (i InstanceEsAclArgs) ToInstanceEsAclPtrOutput() InstanceEsAclPtrOutput {
+	return i.ToInstanceEsAclPtrOutputWithContext(context.Background())
+}
+
+func (i InstanceEsAclArgs) ToInstanceEsAclPtrOutputWithContext(ctx context.Context) InstanceEsAclPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceEsAclOutput).ToInstanceEsAclPtrOutputWithContext(ctx)
+}
+
+// InstanceEsAclPtrInput is an input type that accepts InstanceEsAclArgs, InstanceEsAclPtr and InstanceEsAclPtrOutput values.
+// You can construct a concrete instance of `InstanceEsAclPtrInput` via:
+//
+//          InstanceEsAclArgs{...}
+//
+//  or:
+//
+//          nil
+type InstanceEsAclPtrInput interface {
+	pulumi.Input
+
+	ToInstanceEsAclPtrOutput() InstanceEsAclPtrOutput
+	ToInstanceEsAclPtrOutputWithContext(context.Context) InstanceEsAclPtrOutput
+}
+
+type instanceEsAclPtrType InstanceEsAclArgs
+
+func InstanceEsAclPtr(v *InstanceEsAclArgs) InstanceEsAclPtrInput {
+	return (*instanceEsAclPtrType)(v)
+}
+
+func (*instanceEsAclPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceEsAcl)(nil)).Elem()
+}
+
+func (i *instanceEsAclPtrType) ToInstanceEsAclPtrOutput() InstanceEsAclPtrOutput {
+	return i.ToInstanceEsAclPtrOutputWithContext(context.Background())
+}
+
+func (i *instanceEsAclPtrType) ToInstanceEsAclPtrOutputWithContext(ctx context.Context) InstanceEsAclPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceEsAclPtrOutput)
+}
+
+type InstanceEsAclOutput struct{ *pulumi.OutputState }
+
+func (InstanceEsAclOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceEsAcl)(nil)).Elem()
+}
+
+func (o InstanceEsAclOutput) ToInstanceEsAclOutput() InstanceEsAclOutput {
+	return o
+}
+
+func (o InstanceEsAclOutput) ToInstanceEsAclOutputWithContext(ctx context.Context) InstanceEsAclOutput {
+	return o
+}
+
+func (o InstanceEsAclOutput) ToInstanceEsAclPtrOutput() InstanceEsAclPtrOutput {
+	return o.ToInstanceEsAclPtrOutputWithContext(context.Background())
+}
+
+func (o InstanceEsAclOutput) ToInstanceEsAclPtrOutputWithContext(ctx context.Context) InstanceEsAclPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v InstanceEsAcl) *InstanceEsAcl {
+		return &v
+	}).(InstanceEsAclPtrOutput)
+}
+
+// Blacklist of kibana access.
+func (o InstanceEsAclOutput) BlackLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v InstanceEsAcl) []string { return v.BlackLists }).(pulumi.StringArrayOutput)
+}
+
+// Whitelist of kibana access.
+func (o InstanceEsAclOutput) WhiteLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v InstanceEsAcl) []string { return v.WhiteLists }).(pulumi.StringArrayOutput)
+}
+
+type InstanceEsAclPtrOutput struct{ *pulumi.OutputState }
+
+func (InstanceEsAclPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceEsAcl)(nil)).Elem()
+}
+
+func (o InstanceEsAclPtrOutput) ToInstanceEsAclPtrOutput() InstanceEsAclPtrOutput {
+	return o
+}
+
+func (o InstanceEsAclPtrOutput) ToInstanceEsAclPtrOutputWithContext(ctx context.Context) InstanceEsAclPtrOutput {
+	return o
+}
+
+func (o InstanceEsAclPtrOutput) Elem() InstanceEsAclOutput {
+	return o.ApplyT(func(v *InstanceEsAcl) InstanceEsAcl {
+		if v != nil {
+			return *v
+		}
+		var ret InstanceEsAcl
+		return ret
+	}).(InstanceEsAclOutput)
+}
+
+// Blacklist of kibana access.
+func (o InstanceEsAclPtrOutput) BlackLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *InstanceEsAcl) []string {
+		if v == nil {
+			return nil
+		}
+		return v.BlackLists
+	}).(pulumi.StringArrayOutput)
+}
+
+// Whitelist of kibana access.
+func (o InstanceEsAclPtrOutput) WhiteLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *InstanceEsAcl) []string {
+		if v == nil {
+			return nil
+		}
+		return v.WhiteLists
+	}).(pulumi.StringArrayOutput)
+}
+
 type InstanceMultiZoneInfo struct {
 	// Availability zone.
 	AvailabilityZone string `pulumi:"availabilityZone"`
@@ -20,7 +176,7 @@ type InstanceMultiZoneInfo struct {
 // InstanceMultiZoneInfoInput is an input type that accepts InstanceMultiZoneInfoArgs and InstanceMultiZoneInfoOutput values.
 // You can construct a concrete instance of `InstanceMultiZoneInfoInput` via:
 //
-//	InstanceMultiZoneInfoArgs{...}
+//          InstanceMultiZoneInfoArgs{...}
 type InstanceMultiZoneInfoInput interface {
 	pulumi.Input
 
@@ -50,7 +206,7 @@ func (i InstanceMultiZoneInfoArgs) ToInstanceMultiZoneInfoOutputWithContext(ctx 
 // InstanceMultiZoneInfoArrayInput is an input type that accepts InstanceMultiZoneInfoArray and InstanceMultiZoneInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceMultiZoneInfoArrayInput` via:
 //
-//	InstanceMultiZoneInfoArray{ InstanceMultiZoneInfoArgs{...} }
+//          InstanceMultiZoneInfoArray{ InstanceMultiZoneInfoArgs{...} }
 type InstanceMultiZoneInfoArrayInput interface {
 	pulumi.Input
 
@@ -134,7 +290,7 @@ type InstanceNodeInfoList struct {
 // InstanceNodeInfoListInput is an input type that accepts InstanceNodeInfoListArgs and InstanceNodeInfoListOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoListInput` via:
 //
-//	InstanceNodeInfoListArgs{...}
+//          InstanceNodeInfoListArgs{...}
 type InstanceNodeInfoListInput interface {
 	pulumi.Input
 
@@ -172,7 +328,7 @@ func (i InstanceNodeInfoListArgs) ToInstanceNodeInfoListOutputWithContext(ctx co
 // InstanceNodeInfoListArrayInput is an input type that accepts InstanceNodeInfoListArray and InstanceNodeInfoListArrayOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoListArrayInput` via:
 //
-//	InstanceNodeInfoListArray{ InstanceNodeInfoListArgs{...} }
+//          InstanceNodeInfoListArray{ InstanceNodeInfoListArgs{...} }
 type InstanceNodeInfoListArrayInput interface {
 	pulumi.Input
 
@@ -268,7 +424,7 @@ type InstanceWebNodeTypeInfo struct {
 // InstanceWebNodeTypeInfoInput is an input type that accepts InstanceWebNodeTypeInfoArgs and InstanceWebNodeTypeInfoOutput values.
 // You can construct a concrete instance of `InstanceWebNodeTypeInfoInput` via:
 //
-//	InstanceWebNodeTypeInfoArgs{...}
+//          InstanceWebNodeTypeInfoArgs{...}
 type InstanceWebNodeTypeInfoInput interface {
 	pulumi.Input
 
@@ -298,7 +454,7 @@ func (i InstanceWebNodeTypeInfoArgs) ToInstanceWebNodeTypeInfoOutputWithContext(
 // InstanceWebNodeTypeInfoArrayInput is an input type that accepts InstanceWebNodeTypeInfoArray and InstanceWebNodeTypeInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceWebNodeTypeInfoArrayInput` via:
 //
-//	InstanceWebNodeTypeInfoArray{ InstanceWebNodeTypeInfoArgs{...} }
+//          InstanceWebNodeTypeInfoArray{ InstanceWebNodeTypeInfoArgs{...} }
 type InstanceWebNodeTypeInfoArrayInput interface {
 	pulumi.Input
 
@@ -406,7 +562,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -468,7 +624,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -624,7 +780,7 @@ type GetInstancesInstanceListMultiZoneInfo struct {
 // GetInstancesInstanceListMultiZoneInfoInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArgs and GetInstancesInstanceListMultiZoneInfoOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoInput` via:
 //
-//	GetInstancesInstanceListMultiZoneInfoArgs{...}
+//          GetInstancesInstanceListMultiZoneInfoArgs{...}
 type GetInstancesInstanceListMultiZoneInfoInput interface {
 	pulumi.Input
 
@@ -654,7 +810,7 @@ func (i GetInstancesInstanceListMultiZoneInfoArgs) ToGetInstancesInstanceListMul
 // GetInstancesInstanceListMultiZoneInfoArrayInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArray and GetInstancesInstanceListMultiZoneInfoArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoArrayInput` via:
 //
-//	GetInstancesInstanceListMultiZoneInfoArray{ GetInstancesInstanceListMultiZoneInfoArgs{...} }
+//          GetInstancesInstanceListMultiZoneInfoArray{ GetInstancesInstanceListMultiZoneInfoArgs{...} }
 type GetInstancesInstanceListMultiZoneInfoArrayInput interface {
 	pulumi.Input
 
@@ -738,7 +894,7 @@ type GetInstancesInstanceListNodeInfoList struct {
 // GetInstancesInstanceListNodeInfoListInput is an input type that accepts GetInstancesInstanceListNodeInfoListArgs and GetInstancesInstanceListNodeInfoListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListInput` via:
 //
-//	GetInstancesInstanceListNodeInfoListArgs{...}
+//          GetInstancesInstanceListNodeInfoListArgs{...}
 type GetInstancesInstanceListNodeInfoListInput interface {
 	pulumi.Input
 
@@ -776,7 +932,7 @@ func (i GetInstancesInstanceListNodeInfoListArgs) ToGetInstancesInstanceListNode
 // GetInstancesInstanceListNodeInfoListArrayInput is an input type that accepts GetInstancesInstanceListNodeInfoListArray and GetInstancesInstanceListNodeInfoListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListArrayInput` via:
 //
-//	GetInstancesInstanceListNodeInfoListArray{ GetInstancesInstanceListNodeInfoListArgs{...} }
+//          GetInstancesInstanceListNodeInfoListArray{ GetInstancesInstanceListNodeInfoListArgs{...} }
 type GetInstancesInstanceListNodeInfoListArrayInput interface {
 	pulumi.Input
 
@@ -863,6 +1019,8 @@ func (o GetInstancesInstanceListNodeInfoListArrayOutput) Index(i pulumi.IntInput
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEsAclInput)(nil)).Elem(), InstanceEsAclArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEsAclPtrInput)(nil)).Elem(), InstanceEsAclArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceMultiZoneInfoInput)(nil)).Elem(), InstanceMultiZoneInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceMultiZoneInfoArrayInput)(nil)).Elem(), InstanceMultiZoneInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceNodeInfoListInput)(nil)).Elem(), InstanceNodeInfoListArgs{})
@@ -875,6 +1033,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMultiZoneInfoArrayInput)(nil)).Elem(), GetInstancesInstanceListMultiZoneInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoListInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoListArrayInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoListArray{})
+	pulumi.RegisterOutputType(InstanceEsAclOutput{})
+	pulumi.RegisterOutputType(InstanceEsAclPtrOutput{})
 	pulumi.RegisterOutputType(InstanceMultiZoneInfoOutput{})
 	pulumi.RegisterOutputType(InstanceMultiZoneInfoArrayOutput{})
 	pulumi.RegisterOutputType(InstanceNodeInfoListOutput{})

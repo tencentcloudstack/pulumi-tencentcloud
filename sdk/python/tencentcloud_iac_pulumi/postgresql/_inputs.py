@@ -11,6 +11,8 @@ from .. import _utilities
 __all__ = [
     'InstanceBackupPlanArgs',
     'InstanceDbNodeSetArgs',
+    'ParameterTemplateModifyParamEntrySetArgs',
+    'GetParameterTemplatesFilterArgs',
 ]
 
 @pulumi.input_type
@@ -120,5 +122,81 @@ class InstanceDbNodeSetArgs:
     @role.setter
     def role(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "role", value)
+
+
+@pulumi.input_type
+class ParameterTemplateModifyParamEntrySetArgs:
+    def __init__(__self__, *,
+                 expected_value: pulumi.Input[str],
+                 name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] expected_value: Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
+        :param pulumi.Input[str] name: The parameter name.
+        """
+        pulumi.set(__self__, "expected_value", expected_value)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="expectedValue")
+    def expected_value(self) -> pulumi.Input[str]:
+        """
+        Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
+        """
+        return pulumi.get(self, "expected_value")
+
+    @expected_value.setter
+    def expected_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "expected_value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        The parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
+class GetParameterTemplatesFilterArgs:
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "values", value)
 
 

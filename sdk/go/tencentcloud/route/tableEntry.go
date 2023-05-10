@@ -19,57 +19,54 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "na-siliconvalley-1"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
-//				CidrBlock: pulumi.String("10.0.0.0/16"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			fooTable, err := Route.NewTable(ctx, "fooTable", &Route.TableArgs{
-//				VpcId: fooInstance.ID(),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Subnet.NewInstance(ctx, "fooSubnet/instanceInstance", &Subnet.InstanceArgs{
-//				VpcId:            fooInstance.ID(),
-//				CidrBlock:        pulumi.String("10.0.12.0/24"),
-//				AvailabilityZone: pulumi.String(availabilityZone),
-//				RouteTableId:     fooTable.ID(),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Route.NewTableEntry(ctx, "instance", &Route.TableEntryArgs{
-//				RouteTableId:         fooTable.ID(),
-//				DestinationCidrBlock: pulumi.String("10.4.4.0/24"),
-//				NextType:             pulumi.String("EIP"),
-//				NextHub:              pulumi.String("0"),
-//				Description:          pulumi.String("ci-test-route-table-entry"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "na-siliconvalley-1"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooTable, err := Route.NewTable(ctx, "fooTable", &Route.TableArgs{
+// 			VpcId: fooInstance.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Subnet.NewInstance(ctx, "fooSubnet/instanceInstance", &Subnet.InstanceArgs{
+// 			VpcId:            fooInstance.ID(),
+// 			CidrBlock:        pulumi.String("10.0.12.0/24"),
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			RouteTableId:     fooTable.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Route.NewTableEntry(ctx, "instance", &Route.TableEntryArgs{
+// 			RouteTableId:         fooTable.ID(),
+// 			DestinationCidrBlock: pulumi.String("10.4.4.0/24"),
+// 			NextType:             pulumi.String("EIP"),
+// 			NextHub:              pulumi.String("0"),
+// 			Description:          pulumi.String("ci-test-route-table-entry"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -77,9 +74,7 @@ import (
 // Route table entry can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Route/tableEntry:TableEntry foo 83517.rtb-mlhpg09u
-//
+//  $ pulumi import tencentcloud:Route/tableEntry:TableEntry foo 83517.rtb-mlhpg09u
 // ```
 type TableEntry struct {
 	pulumi.CustomResourceState
@@ -92,7 +87,7 @@ type TableEntry struct {
 	Disabled pulumi.BoolPtrOutput `pulumi:"disabled"`
 	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
 	NextHub pulumi.StringOutput `pulumi:"nextHub"`
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringOutput `pulumi:"nextType"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringOutput `pulumi:"routeTableId"`
@@ -148,7 +143,7 @@ type tableEntryState struct {
 	Disabled *bool `pulumi:"disabled"`
 	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
 	NextHub *string `pulumi:"nextHub"`
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType *string `pulumi:"nextType"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId *string `pulumi:"routeTableId"`
@@ -163,7 +158,7 @@ type TableEntryState struct {
 	Disabled pulumi.BoolPtrInput
 	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
 	NextHub pulumi.StringPtrInput
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringPtrInput
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringPtrInput
@@ -182,7 +177,7 @@ type tableEntryArgs struct {
 	Disabled *bool `pulumi:"disabled"`
 	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
 	NextHub string `pulumi:"nextHub"`
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType string `pulumi:"nextType"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId string `pulumi:"routeTableId"`
@@ -198,7 +193,7 @@ type TableEntryArgs struct {
 	Disabled pulumi.BoolPtrInput
 	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
 	NextHub pulumi.StringInput
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringInput
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringInput
@@ -230,7 +225,7 @@ func (i *TableEntry) ToTableEntryOutputWithContext(ctx context.Context) TableEnt
 // TableEntryArrayInput is an input type that accepts TableEntryArray and TableEntryArrayOutput values.
 // You can construct a concrete instance of `TableEntryArrayInput` via:
 //
-//	TableEntryArray{ TableEntryArgs{...} }
+//          TableEntryArray{ TableEntryArgs{...} }
 type TableEntryArrayInput interface {
 	pulumi.Input
 
@@ -255,7 +250,7 @@ func (i TableEntryArray) ToTableEntryArrayOutputWithContext(ctx context.Context)
 // TableEntryMapInput is an input type that accepts TableEntryMap and TableEntryMapOutput values.
 // You can construct a concrete instance of `TableEntryMapInput` via:
 //
-//	TableEntryMap{ "key": TableEntryArgs{...} }
+//          TableEntryMap{ "key": TableEntryArgs{...} }
 type TableEntryMapInput interface {
 	pulumi.Input
 
@@ -311,7 +306,7 @@ func (o TableEntryOutput) NextHub() pulumi.StringOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.NextHub }).(pulumi.StringOutput)
 }
 
-// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 func (o TableEntryOutput) NextType() pulumi.StringOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.NextType }).(pulumi.StringOutput)
 }

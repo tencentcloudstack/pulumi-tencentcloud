@@ -15,20 +15,26 @@ class InstanceArgs:
     def __init__(__self__, *,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  internet_service_provider: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 prepaid_period: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  type: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
-        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        :param pulumi.Input[str] bandwidth_package_id: ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
         :param pulumi.Input[str] name: The name of eip.
+        :param pulumi.Input[int] prepaid_period: Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
         :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
@@ -39,6 +45,10 @@ class InstanceArgs:
             pulumi.log.warn("""applicable_for_clb is deprecated: It has been deprecated from version 1.27.0.""")
         if applicable_for_clb is not None:
             pulumi.set(__self__, "applicable_for_clb", applicable_for_clb)
+        if auto_renew_flag is not None:
+            pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if bandwidth_package_id is not None:
+            pulumi.set(__self__, "bandwidth_package_id", bandwidth_package_id)
         if internet_charge_type is not None:
             pulumi.set(__self__, "internet_charge_type", internet_charge_type)
         if internet_max_bandwidth_out is not None:
@@ -47,6 +57,8 @@ class InstanceArgs:
             pulumi.set(__self__, "internet_service_provider", internet_service_provider)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if prepaid_period is not None:
+            pulumi.set(__self__, "prepaid_period", prepaid_period)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if type is not None:
@@ -77,10 +89,34 @@ class InstanceArgs:
         pulumi.set(self, "applicable_for_clb", value)
 
     @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @auto_renew_flag.setter
+    def auto_renew_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_renew_flag", value)
+
+    @property
+    @pulumi.getter(name="bandwidthPackageId")
+    def bandwidth_package_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        """
+        return pulumi.get(self, "bandwidth_package_id")
+
+    @bandwidth_package_id.setter
+    def bandwidth_package_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bandwidth_package_id", value)
+
+    @property
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -125,6 +161,18 @@ class InstanceArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="prepaidPeriod")
+    def prepaid_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
+        """
+        return pulumi.get(self, "prepaid_period")
+
+    @prepaid_period.setter
+    def prepaid_period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "prepaid_period", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -154,10 +202,13 @@ class _InstanceState:
     def __init__(__self__, *,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  internet_service_provider: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 prepaid_period: Optional[pulumi.Input[int]] = None,
                  public_ip: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -166,10 +217,13 @@ class _InstanceState:
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
-        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        :param pulumi.Input[str] bandwidth_package_id: ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
         :param pulumi.Input[str] name: The name of eip.
+        :param pulumi.Input[int] prepaid_period: Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
         :param pulumi.Input[str] public_ip: The elastic IP address.
         :param pulumi.Input[str] status: The EIP current status.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
@@ -182,6 +236,10 @@ class _InstanceState:
             pulumi.log.warn("""applicable_for_clb is deprecated: It has been deprecated from version 1.27.0.""")
         if applicable_for_clb is not None:
             pulumi.set(__self__, "applicable_for_clb", applicable_for_clb)
+        if auto_renew_flag is not None:
+            pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if bandwidth_package_id is not None:
+            pulumi.set(__self__, "bandwidth_package_id", bandwidth_package_id)
         if internet_charge_type is not None:
             pulumi.set(__self__, "internet_charge_type", internet_charge_type)
         if internet_max_bandwidth_out is not None:
@@ -190,6 +248,8 @@ class _InstanceState:
             pulumi.set(__self__, "internet_service_provider", internet_service_provider)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if prepaid_period is not None:
+            pulumi.set(__self__, "prepaid_period", prepaid_period)
         if public_ip is not None:
             pulumi.set(__self__, "public_ip", public_ip)
         if status is not None:
@@ -224,10 +284,34 @@ class _InstanceState:
         pulumi.set(self, "applicable_for_clb", value)
 
     @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @auto_renew_flag.setter
+    def auto_renew_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_renew_flag", value)
+
+    @property
+    @pulumi.getter(name="bandwidthPackageId")
+    def bandwidth_package_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        """
+        return pulumi.get(self, "bandwidth_package_id")
+
+    @bandwidth_package_id.setter
+    def bandwidth_package_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bandwidth_package_id", value)
+
+    @property
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -270,6 +354,18 @@ class _InstanceState:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="prepaidPeriod")
+    def prepaid_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
+        """
+        return pulumi.get(self, "prepaid_period")
+
+    @prepaid_period.setter
+    def prepaid_period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "prepaid_period", value)
 
     @property
     @pulumi.getter(name="publicIp")
@@ -327,10 +423,13 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  internet_service_provider: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 prepaid_period: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -343,7 +442,10 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.eip.Instance("foo")
+        foo = tencentcloud.eip.Instance("foo",
+            bandwidth_package_id="bwp-jtvzuky6",
+            internet_charge_type="BANDWIDTH_PACKAGE",
+            type="EIP")
         ```
 
         ## Import
@@ -358,10 +460,13 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
-        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        :param pulumi.Input[str] bandwidth_package_id: ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
         :param pulumi.Input[str] name: The name of eip.
+        :param pulumi.Input[int] prepaid_period: Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
         :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
         """
@@ -380,7 +485,10 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.eip.Instance("foo")
+        foo = tencentcloud.eip.Instance("foo",
+            bandwidth_package_id="bwp-jtvzuky6",
+            internet_charge_type="BANDWIDTH_PACKAGE",
+            type="EIP")
         ```
 
         ## Import
@@ -408,10 +516,13 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  internet_service_provider: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 prepaid_period: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -433,10 +544,13 @@ class Instance(pulumi.CustomResource):
                 warnings.warn("""It has been deprecated from version 1.27.0.""", DeprecationWarning)
                 pulumi.log.warn("""applicable_for_clb is deprecated: It has been deprecated from version 1.27.0.""")
             __props__.__dict__["applicable_for_clb"] = applicable_for_clb
+            __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+            __props__.__dict__["bandwidth_package_id"] = bandwidth_package_id
             __props__.__dict__["internet_charge_type"] = internet_charge_type
             __props__.__dict__["internet_max_bandwidth_out"] = internet_max_bandwidth_out
             __props__.__dict__["internet_service_provider"] = internet_service_provider
             __props__.__dict__["name"] = name
+            __props__.__dict__["prepaid_period"] = prepaid_period
             __props__.__dict__["tags"] = tags
             __props__.__dict__["type"] = type
             __props__.__dict__["public_ip"] = None
@@ -453,10 +567,13 @@ class Instance(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             anycast_zone: Optional[pulumi.Input[str]] = None,
             applicable_for_clb: Optional[pulumi.Input[bool]] = None,
+            auto_renew_flag: Optional[pulumi.Input[int]] = None,
+            bandwidth_package_id: Optional[pulumi.Input[str]] = None,
             internet_charge_type: Optional[pulumi.Input[str]] = None,
             internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
             internet_service_provider: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            prepaid_period: Optional[pulumi.Input[int]] = None,
             public_ip: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -470,10 +587,13 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
-        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        :param pulumi.Input[str] bandwidth_package_id: ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] internet_max_bandwidth_out: The bandwidth limit of EIP, unit is Mbps.
         :param pulumi.Input[str] internet_service_provider: Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
         :param pulumi.Input[str] name: The name of eip.
+        :param pulumi.Input[int] prepaid_period: Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
         :param pulumi.Input[str] public_ip: The elastic IP address.
         :param pulumi.Input[str] status: The EIP current status.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
@@ -485,10 +605,13 @@ class Instance(pulumi.CustomResource):
 
         __props__.__dict__["anycast_zone"] = anycast_zone
         __props__.__dict__["applicable_for_clb"] = applicable_for_clb
+        __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+        __props__.__dict__["bandwidth_package_id"] = bandwidth_package_id
         __props__.__dict__["internet_charge_type"] = internet_charge_type
         __props__.__dict__["internet_max_bandwidth_out"] = internet_max_bandwidth_out
         __props__.__dict__["internet_service_provider"] = internet_service_provider
         __props__.__dict__["name"] = name
+        __props__.__dict__["prepaid_period"] = prepaid_period
         __props__.__dict__["public_ip"] = public_ip
         __props__.__dict__["status"] = status
         __props__.__dict__["tags"] = tags
@@ -512,16 +635,32 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "applicable_for_clb")
 
     @property
-    @pulumi.getter(name="internetChargeType")
-    def internet_charge_type(self) -> pulumi.Output[Optional[str]]:
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> pulumi.Output[Optional[int]]:
         """
-        The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="bandwidthPackageId")
+    def bandwidth_package_id(self) -> pulumi.Output[str]:
+        """
+        ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        """
+        return pulumi.get(self, "bandwidth_package_id")
+
+    @property
+    @pulumi.getter(name="internetChargeType")
+    def internet_charge_type(self) -> pulumi.Output[str]:
+        """
+        The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "internet_charge_type")
 
     @property
     @pulumi.getter(name="internetMaxBandwidthOut")
-    def internet_max_bandwidth_out(self) -> pulumi.Output[Optional[int]]:
+    def internet_max_bandwidth_out(self) -> pulumi.Output[int]:
         """
         The bandwidth limit of EIP, unit is Mbps.
         """
@@ -542,6 +681,14 @@ class Instance(pulumi.CustomResource):
         The name of eip.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="prepaidPeriod")
+    def prepaid_period(self) -> pulumi.Output[Optional[int]]:
+        """
+        Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
+        """
+        return pulumi.get(self, "prepaid_period")
 
     @property
     @pulumi.getter(name="publicIp")

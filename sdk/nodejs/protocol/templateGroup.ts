@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const foo = new tencentcloud.Protocol.TemplateGroup("foo", {
- *     protocols: [
+ *     templateIds: [
  *         "ipl-axaf24151",
  *         "ipl-axaf24152",
  *     ],

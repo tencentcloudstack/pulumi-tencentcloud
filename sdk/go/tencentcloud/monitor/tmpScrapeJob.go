@@ -19,28 +19,25 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"fmt"
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Monitor.NewTmpScrapeJob(ctx, "tmpScrapeJob", &Monitor.TmpScrapeJobArgs{
-//				InstanceId: pulumi.String("prom-dko9d0nu"),
-//				AgentId:    pulumi.String("agent-6a7g40k2"),
-//				Config:     pulumi.String(fmt.Sprintf("%v%v%v%v", "job_name: demo-config\n", "honor_timestamps: true\n", "metrics_path: /metrics\n", "scheme: https\n")),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Monitor.NewTmpScrapeJob(ctx, "tmpScrapeJob", &Monitor.TmpScrapeJobArgs{
+// 			InstanceId: pulumi.String("prom-dko9d0nu"),
+// 			AgentId:    pulumi.String("agent-6a7g40k2"),
+// 			Config:     pulumi.String(fmt.Sprintf("%v%v%v%v", "job_name: demo-config\n", "honor_timestamps: true\n", "metrics_path: /metrics\n", "scheme: https\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -48,9 +45,7 @@ import (
 // monitor tmpScrapeJob can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
-//
+//  $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
 // ```
 type TmpScrapeJob struct {
 	pulumi.CustomResourceState
@@ -165,7 +160,7 @@ func (i *TmpScrapeJob) ToTmpScrapeJobOutputWithContext(ctx context.Context) TmpS
 // TmpScrapeJobArrayInput is an input type that accepts TmpScrapeJobArray and TmpScrapeJobArrayOutput values.
 // You can construct a concrete instance of `TmpScrapeJobArrayInput` via:
 //
-//	TmpScrapeJobArray{ TmpScrapeJobArgs{...} }
+//          TmpScrapeJobArray{ TmpScrapeJobArgs{...} }
 type TmpScrapeJobArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +185,7 @@ func (i TmpScrapeJobArray) ToTmpScrapeJobArrayOutputWithContext(ctx context.Cont
 // TmpScrapeJobMapInput is an input type that accepts TmpScrapeJobMap and TmpScrapeJobMapOutput values.
 // You can construct a concrete instance of `TmpScrapeJobMapInput` via:
 //
-//	TmpScrapeJobMap{ "key": TmpScrapeJobArgs{...} }
+//          TmpScrapeJobMap{ "key": TmpScrapeJobArgs{...} }
 type TmpScrapeJobMapInput interface {
 	pulumi.Input
 

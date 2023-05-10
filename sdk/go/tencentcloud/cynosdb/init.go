@@ -21,10 +21,14 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cynosdb/auditLogFile:AuditLogFile":
+		r = &AuditLogFile{}
 	case "tencentcloud:Cynosdb/cluster:Cluster":
 		r = &Cluster{}
 	case "tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance":
 		r = &ReadonlyInstance{}
+	case "tencentcloud:Cynosdb/securityGroup:SecurityGroup":
+		r = &SecurityGroup{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -40,12 +44,22 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cynosdb/auditLogFile",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cynosdb/cluster",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cynosdb/readonlyInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/securityGroup",
 		&module{version},
 	)
 }

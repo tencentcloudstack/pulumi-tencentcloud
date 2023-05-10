@@ -18,6 +18,7 @@ class StorageArgs:
                  storage_size: pulumi.Input[int],
                  storage_type: pulumi.Input[str],
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 disk_backup_quota: Optional[pulumi.Input[int]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
                  period: Optional[pulumi.Input[int]] = None,
@@ -31,9 +32,10 @@ class StorageArgs:
         The set of arguments for constructing a Storage resource.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[str] charge_type: The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         :param pulumi.Input[int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -50,6 +52,8 @@ class StorageArgs:
         pulumi.set(__self__, "storage_type", storage_type)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if disk_backup_quota is not None:
+            pulumi.set(__self__, "disk_backup_quota", disk_backup_quota)
         if encrypt is not None:
             pulumi.set(__self__, "encrypt", encrypt)
         if force_delete is not None:
@@ -100,7 +104,7 @@ class StorageArgs:
     @pulumi.getter(name="storageSize")
     def storage_size(self) -> pulumi.Input[int]:
         """
-        Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        Volume of CBS, and unit is GB.
         """
         return pulumi.get(self, "storage_size")
 
@@ -112,7 +116,7 @@ class StorageArgs:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> pulumi.Input[str]:
         """
-        Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         """
         return pulumi.get(self, "storage_type")
 
@@ -131,6 +135,18 @@ class StorageArgs:
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter(name="diskBackupQuota")
+    def disk_backup_quota(self) -> Optional[pulumi.Input[int]]:
+        """
+        The quota of backup points of cloud disk.
+        """
+        return pulumi.get(self, "disk_backup_quota")
+
+    @disk_backup_quota.setter
+    def disk_backup_quota(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_backup_quota", value)
 
     @property
     @pulumi.getter
@@ -247,6 +263,7 @@ class _StorageState:
                  attached: Optional[pulumi.Input[bool]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 disk_backup_quota: Optional[pulumi.Input[int]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
                  period: Optional[pulumi.Input[int]] = None,
@@ -265,6 +282,7 @@ class _StorageState:
         :param pulumi.Input[bool] attached: Indicates whether the CBS is mounted the CVM.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
         :param pulumi.Input[str] charge_type: The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         :param pulumi.Input[int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -273,9 +291,9 @@ class _StorageState:
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
         :param pulumi.Input[str] snapshot_id: ID of the snapshot. If specified, created the CBS by this snapshot.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
         :param pulumi.Input[str] storage_status: Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CBS.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
         """
@@ -285,6 +303,8 @@ class _StorageState:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if disk_backup_quota is not None:
+            pulumi.set(__self__, "disk_backup_quota", disk_backup_quota)
         if encrypt is not None:
             pulumi.set(__self__, "encrypt", encrypt)
         if force_delete is not None:
@@ -350,6 +370,18 @@ class _StorageState:
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter(name="diskBackupQuota")
+    def disk_backup_quota(self) -> Optional[pulumi.Input[int]]:
+        """
+        The quota of backup points of cloud disk.
+        """
+        return pulumi.get(self, "disk_backup_quota")
+
+    @disk_backup_quota.setter
+    def disk_backup_quota(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_backup_quota", value)
 
     @property
     @pulumi.getter
@@ -451,7 +483,7 @@ class _StorageState:
     @pulumi.getter(name="storageSize")
     def storage_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        Volume of CBS, and unit is GB.
         """
         return pulumi.get(self, "storage_size")
 
@@ -475,7 +507,7 @@ class _StorageState:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         """
         return pulumi.get(self, "storage_type")
 
@@ -515,6 +547,7 @@ class Storage(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 disk_backup_quota: Optional[pulumi.Input[int]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
                  period: Optional[pulumi.Input[int]] = None,
@@ -561,6 +594,7 @@ class Storage(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
         :param pulumi.Input[str] charge_type: The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         :param pulumi.Input[int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -569,8 +603,8 @@ class Storage(pulumi.CustomResource):
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
         :param pulumi.Input[str] snapshot_id: ID of the snapshot. If specified, created the CBS by this snapshot.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CBS.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
         """
@@ -626,6 +660,7 @@ class Storage(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 disk_backup_quota: Optional[pulumi.Input[int]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
                  period: Optional[pulumi.Input[int]] = None,
@@ -656,6 +691,7 @@ class Storage(pulumi.CustomResource):
                 raise TypeError("Missing required property 'availability_zone'")
             __props__.__dict__["availability_zone"] = availability_zone
             __props__.__dict__["charge_type"] = charge_type
+            __props__.__dict__["disk_backup_quota"] = disk_backup_quota
             __props__.__dict__["encrypt"] = encrypt
             __props__.__dict__["force_delete"] = force_delete
             if period is not None and not opts.urn:
@@ -692,6 +728,7 @@ class Storage(pulumi.CustomResource):
             attached: Optional[pulumi.Input[bool]] = None,
             availability_zone: Optional[pulumi.Input[str]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
+            disk_backup_quota: Optional[pulumi.Input[int]] = None,
             encrypt: Optional[pulumi.Input[bool]] = None,
             force_delete: Optional[pulumi.Input[bool]] = None,
             period: Optional[pulumi.Input[int]] = None,
@@ -715,6 +752,7 @@ class Storage(pulumi.CustomResource):
         :param pulumi.Input[bool] attached: Indicates whether the CBS is mounted the CVM.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
         :param pulumi.Input[str] charge_type: The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         :param pulumi.Input[int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -723,9 +761,9 @@ class Storage(pulumi.CustomResource):
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
         :param pulumi.Input[str] snapshot_id: ID of the snapshot. If specified, created the CBS by this snapshot.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
         :param pulumi.Input[str] storage_status: Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CBS.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
         """
@@ -736,6 +774,7 @@ class Storage(pulumi.CustomResource):
         __props__.__dict__["attached"] = attached
         __props__.__dict__["availability_zone"] = availability_zone
         __props__.__dict__["charge_type"] = charge_type
+        __props__.__dict__["disk_backup_quota"] = disk_backup_quota
         __props__.__dict__["encrypt"] = encrypt
         __props__.__dict__["force_delete"] = force_delete
         __props__.__dict__["period"] = period
@@ -774,6 +813,14 @@ class Storage(pulumi.CustomResource):
         The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="diskBackupQuota")
+    def disk_backup_quota(self) -> pulumi.Output[int]:
+        """
+        The quota of backup points of cloud disk.
+        """
+        return pulumi.get(self, "disk_backup_quota")
 
     @property
     @pulumi.getter
@@ -843,7 +890,7 @@ class Storage(pulumi.CustomResource):
     @pulumi.getter(name="storageSize")
     def storage_size(self) -> pulumi.Output[int]:
         """
-        Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        Volume of CBS, and unit is GB.
         """
         return pulumi.get(self, "storage_size")
 
@@ -859,7 +906,7 @@ class Storage(pulumi.CustomResource):
     @pulumi.getter(name="storageType")
     def storage_type(self) -> pulumi.Output[str]:
         """
-        Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         """
         return pulumi.get(self, "storage_type")
 

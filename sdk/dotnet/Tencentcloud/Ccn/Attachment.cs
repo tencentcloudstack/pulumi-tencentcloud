@@ -90,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Output<ImmutableArray<string>> CidrBlocks { get; private set; } = null!;
 
         /// <summary>
+        /// Remark of attachment.
+        /// </summary>
+        [Output("description")]
+        public Output<string?> Description { get; private set; } = null!;
+
+        /// <summary>
         /// ID of instance is attached.
         /// </summary>
         [Output("instanceId")]
@@ -173,6 +179,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Input<string>? CcnUin { get; set; }
 
         /// <summary>
+        /// Remark of attachment.
+        /// </summary>
+        [Input("description")]
+        public Input<string>? Description { get; set; }
+
+        /// <summary>
         /// ID of instance is attached.
         /// </summary>
         [Input("instanceId", required: true)]
@@ -226,6 +238,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
             get => _cidrBlocks ?? (_cidrBlocks = new InputList<string>());
             set => _cidrBlocks = value;
         }
+
+        /// <summary>
+        /// Remark of attachment.
+        /// </summary>
+        [Input("description")]
+        public Input<string>? Description { get; set; }
 
         /// <summary>
         /// ID of instance is attached.

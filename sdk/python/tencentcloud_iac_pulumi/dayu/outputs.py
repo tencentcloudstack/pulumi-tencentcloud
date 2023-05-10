@@ -19,6 +19,7 @@ __all__ = [
     'CcPolicyV2CcPrecisionReqLimit',
     'CcPolicyV2CcPrecisionReqLimitPolicy',
     'CcPolicyV2Threshold',
+    'DdosIpAttachmentV2BoundIpList',
     'DdosPolicyDropOption',
     'DdosPolicyPacketFilter',
     'DdosPolicyPortFilter',
@@ -742,6 +743,81 @@ class CcPolicyV2Threshold(dict):
         Cleaning threshold, -1 indicates that the `default` mode is turned on.
         """
         return pulumi.get(self, "threshold")
+
+
+@pulumi.output_type
+class DdosIpAttachmentV2BoundIpList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "bizType":
+            suggest = "biz_type"
+        elif key == "deviceType":
+            suggest = "device_type"
+        elif key == "instanceId":
+            suggest = "instance_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DdosIpAttachmentV2BoundIpList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DdosIpAttachmentV2BoundIpList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DdosIpAttachmentV2BoundIpList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ip: str,
+                 biz_type: Optional[str] = None,
+                 device_type: Optional[str] = None,
+                 instance_id: Optional[str] = None):
+        """
+        :param str ip: IP address.
+        :param str biz_type: Category of product that can be bound. Valid values: public (CVM and CLB), bm (BM), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), and other (hosted IP). This field is required when you perform binding.
+        :param str device_type: Sub-product category. Valid values: cvm (CVM), lb (Load balancer), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), eip (BM EIP) and other (managed IP). This field is required when you perform binding.
+        :param str instance_id: Anti-DDoS instance ID of the IP. This field is required only when the instance is bound to an IP. For example, this field InstanceId will be eni-* if the instance ID is bound to an ENI IP; none if there is no instance to bind to a managed IP.
+        """
+        pulumi.set(__self__, "ip", ip)
+        if biz_type is not None:
+            pulumi.set(__self__, "biz_type", biz_type)
+        if device_type is not None:
+            pulumi.set(__self__, "device_type", device_type)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP address.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="bizType")
+    def biz_type(self) -> Optional[str]:
+        """
+        Category of product that can be bound. Valid values: public (CVM and CLB), bm (BM), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), and other (hosted IP). This field is required when you perform binding.
+        """
+        return pulumi.get(self, "biz_type")
+
+    @property
+    @pulumi.getter(name="deviceType")
+    def device_type(self) -> Optional[str]:
+        """
+        Sub-product category. Valid values: cvm (CVM), lb (Load balancer), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), eip (BM EIP) and other (managed IP). This field is required when you perform binding.
+        """
+        return pulumi.get(self, "device_type")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        """
+        Anti-DDoS instance ID of the IP. This field is required only when the instance is bound to an IP. For example, this field InstanceId will be eni-* if the instance ID is bound to an ENI IP; none if there is no instance to bind to a managed IP.
+        """
+        return pulumi.get(self, "instance_id")
 
 
 @pulumi.output_type

@@ -32,8 +32,8 @@ class GatewayArgs:
         :param pulumi.Input[str] charge_type: Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -136,7 +136,7 @@ class GatewayArgs:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -148,7 +148,7 @@ class GatewayArgs:
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         """
         return pulumi.get(self, "prepaid_renew_flag")
 
@@ -225,8 +225,8 @@ class _GatewayState:
         :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
         :param pulumi.Input[str] new_purchase_plan: The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         :param pulumi.Input[str] public_ip_address: Public IP of the VPN gateway.
         :param pulumi.Input[str] restrict_state: Restrict state of gateway. Valid value: `PRETECIVELY_ISOLATED`, `NORMAL`.
         :param pulumi.Input[str] state: State of the VPN gateway. Valid value: `PENDING`, `DELETING`, `AVAILABLE`.
@@ -384,7 +384,7 @@ class _GatewayState:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -396,7 +396,7 @@ class _GatewayState:
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         """
         return pulumi.get(self, "prepaid_renew_flag")
 
@@ -556,8 +556,8 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -716,8 +716,8 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
         :param pulumi.Input[str] new_purchase_plan: The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         :param pulumi.Input[str] public_ip_address: Public IP of the VPN gateway.
         :param pulumi.Input[str] restrict_state: Restrict state of gateway. Valid value: `PRETECIVELY_ISOLATED`, `NORMAL`.
         :param pulumi.Input[str] state: State of the VPN gateway. Valid value: `PENDING`, `DELETING`, `AVAILABLE`.
@@ -826,7 +826,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> pulumi.Output[Optional[int]]:
         """
-        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -834,7 +834,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> pulumi.Output[Optional[str]]:
         """
-        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         """
         return pulumi.get(self, "prepaid_renew_flag")
 

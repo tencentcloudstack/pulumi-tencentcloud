@@ -111,6 +111,9 @@ export interface GetLayer4ListenersResult {
      * Protocol of the layer4 listener.
      */
     readonly protocol: string;
+    /**
+     * ID of the GAAP proxy.
+     */
     readonly proxyId?: string;
     readonly resultOutputFile?: string;
 }

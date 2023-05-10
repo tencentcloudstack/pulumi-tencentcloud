@@ -6,9 +6,13 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./api";
+export * from "./apiApp";
+export * from "./apiDoc";
 export * from "./apiKey";
 export * from "./apiKeyAttachment";
 export * from "./customDomain";
+export * from "./getApiApps";
+export * from "./getApiDocs";
 export * from "./getApiKeys";
 export * from "./getApis";
 export * from "./getCustomerDomains";
@@ -19,6 +23,8 @@ export * from "./getThrottlingServices";
 export * from "./getUsagePlanEnvironments";
 export * from "./getUsagePlans";
 export * from "./ipStrategy";
+export * from "./plugin";
+export * from "./pluginAttachment";
 export * from "./service";
 export * from "./serviceRelease";
 export * from "./strategyAttachment";
@@ -27,10 +33,14 @@ export * from "./usagePlanAttachment";
 
 // Import resources to register:
 import { Api } from "./api";
+import { ApiApp } from "./apiApp";
+import { ApiDoc } from "./apiDoc";
 import { ApiKey } from "./apiKey";
 import { ApiKeyAttachment } from "./apiKeyAttachment";
 import { CustomDomain } from "./customDomain";
 import { IpStrategy } from "./ipStrategy";
+import { Plugin } from "./plugin";
+import { PluginAttachment } from "./pluginAttachment";
 import { Service } from "./service";
 import { ServiceRelease } from "./serviceRelease";
 import { StrategyAttachment } from "./strategyAttachment";
@@ -43,6 +53,10 @@ const _module = {
         switch (type) {
             case "tencentcloud:ApiGateway/api:Api":
                 return new Api(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/apiApp:ApiApp":
+                return new ApiApp(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/apiDoc:ApiDoc":
+                return new ApiDoc(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/apiKey:ApiKey":
                 return new ApiKey(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment":
@@ -51,6 +65,10 @@ const _module = {
                 return new CustomDomain(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/ipStrategy:IpStrategy":
                 return new IpStrategy(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/plugin:Plugin":
+                return new Plugin(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/pluginAttachment:PluginAttachment":
+                return new PluginAttachment(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/service:Service":
                 return new Service(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/serviceRelease:ServiceRelease":
@@ -67,10 +85,14 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/api", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiApp", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiDoc", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiKey", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiKeyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/customDomain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/ipStrategy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/plugin", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/pluginAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/service", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/serviceRelease", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/strategyAttachment", _module)

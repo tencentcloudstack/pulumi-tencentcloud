@@ -6,6 +6,7 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .bucket import *
+from .bucket_domain_certificate_attachment import *
 from .bucket_object import *
 from .bucket_policy import *
 from .get_bucket_object import *

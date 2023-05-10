@@ -20,7 +20,7 @@ type GroupRuleAddressTemplate struct {
 // GroupRuleAddressTemplateInput is an input type that accepts GroupRuleAddressTemplateArgs and GroupRuleAddressTemplateOutput values.
 // You can construct a concrete instance of `GroupRuleAddressTemplateInput` via:
 //
-//	GroupRuleAddressTemplateArgs{...}
+//          GroupRuleAddressTemplateArgs{...}
 type GroupRuleAddressTemplateInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i GroupRuleAddressTemplateArgs) ToGroupRuleAddressTemplatePtrOutputWithCon
 // GroupRuleAddressTemplatePtrInput is an input type that accepts GroupRuleAddressTemplateArgs, GroupRuleAddressTemplatePtr and GroupRuleAddressTemplatePtrOutput values.
 // You can construct a concrete instance of `GroupRuleAddressTemplatePtrInput` via:
 //
-//	        GroupRuleAddressTemplateArgs{...}
+//          GroupRuleAddressTemplateArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type GroupRuleAddressTemplatePtrInput interface {
 	pulumi.Input
 
@@ -176,7 +176,7 @@ type GroupRuleProtocolTemplate struct {
 // GroupRuleProtocolTemplateInput is an input type that accepts GroupRuleProtocolTemplateArgs and GroupRuleProtocolTemplateOutput values.
 // You can construct a concrete instance of `GroupRuleProtocolTemplateInput` via:
 //
-//	GroupRuleProtocolTemplateArgs{...}
+//          GroupRuleProtocolTemplateArgs{...}
 type GroupRuleProtocolTemplateInput interface {
 	pulumi.Input
 
@@ -214,11 +214,11 @@ func (i GroupRuleProtocolTemplateArgs) ToGroupRuleProtocolTemplatePtrOutputWithC
 // GroupRuleProtocolTemplatePtrInput is an input type that accepts GroupRuleProtocolTemplateArgs, GroupRuleProtocolTemplatePtr and GroupRuleProtocolTemplatePtrOutput values.
 // You can construct a concrete instance of `GroupRuleProtocolTemplatePtrInput` via:
 //
-//	        GroupRuleProtocolTemplateArgs{...}
+//          GroupRuleProtocolTemplateArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type GroupRuleProtocolTemplatePtrInput interface {
 	pulumi.Input
 
@@ -322,6 +322,380 @@ func (o GroupRuleProtocolTemplatePtrOutput) TemplateId() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+type GroupRuleSetEgress struct {
+	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+	Action string `pulumi:"action"`
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateGroup *string `pulumi:"addressTemplateGroup"`
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateId *string `pulumi:"addressTemplateId"`
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	CidrBlock *string `pulumi:"cidrBlock"`
+	// Description of the security group rule.
+	Description *string `pulumi:"description"`
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	Ipv6CidrBlock *string `pulumi:"ipv6CidrBlock"`
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+	Port *string `pulumi:"port"`
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	Protocol *string `pulumi:"protocol"`
+	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateGroup *string `pulumi:"serviceTemplateGroup"`
+	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateId *string `pulumi:"serviceTemplateId"`
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	SourceSecurityId *string `pulumi:"sourceSecurityId"`
+}
+
+// GroupRuleSetEgressInput is an input type that accepts GroupRuleSetEgressArgs and GroupRuleSetEgressOutput values.
+// You can construct a concrete instance of `GroupRuleSetEgressInput` via:
+//
+//          GroupRuleSetEgressArgs{...}
+type GroupRuleSetEgressInput interface {
+	pulumi.Input
+
+	ToGroupRuleSetEgressOutput() GroupRuleSetEgressOutput
+	ToGroupRuleSetEgressOutputWithContext(context.Context) GroupRuleSetEgressOutput
+}
+
+type GroupRuleSetEgressArgs struct {
+	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateGroup pulumi.StringPtrInput `pulumi:"addressTemplateGroup"`
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateId pulumi.StringPtrInput `pulumi:"addressTemplateId"`
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// Description of the security group rule.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	Ipv6CidrBlock pulumi.StringPtrInput `pulumi:"ipv6CidrBlock"`
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+	Port pulumi.StringPtrInput `pulumi:"port"`
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateGroup pulumi.StringPtrInput `pulumi:"serviceTemplateGroup"`
+	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateId pulumi.StringPtrInput `pulumi:"serviceTemplateId"`
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	SourceSecurityId pulumi.StringPtrInput `pulumi:"sourceSecurityId"`
+}
+
+func (GroupRuleSetEgressArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GroupRuleSetEgress)(nil)).Elem()
+}
+
+func (i GroupRuleSetEgressArgs) ToGroupRuleSetEgressOutput() GroupRuleSetEgressOutput {
+	return i.ToGroupRuleSetEgressOutputWithContext(context.Background())
+}
+
+func (i GroupRuleSetEgressArgs) ToGroupRuleSetEgressOutputWithContext(ctx context.Context) GroupRuleSetEgressOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GroupRuleSetEgressOutput)
+}
+
+// GroupRuleSetEgressArrayInput is an input type that accepts GroupRuleSetEgressArray and GroupRuleSetEgressArrayOutput values.
+// You can construct a concrete instance of `GroupRuleSetEgressArrayInput` via:
+//
+//          GroupRuleSetEgressArray{ GroupRuleSetEgressArgs{...} }
+type GroupRuleSetEgressArrayInput interface {
+	pulumi.Input
+
+	ToGroupRuleSetEgressArrayOutput() GroupRuleSetEgressArrayOutput
+	ToGroupRuleSetEgressArrayOutputWithContext(context.Context) GroupRuleSetEgressArrayOutput
+}
+
+type GroupRuleSetEgressArray []GroupRuleSetEgressInput
+
+func (GroupRuleSetEgressArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GroupRuleSetEgress)(nil)).Elem()
+}
+
+func (i GroupRuleSetEgressArray) ToGroupRuleSetEgressArrayOutput() GroupRuleSetEgressArrayOutput {
+	return i.ToGroupRuleSetEgressArrayOutputWithContext(context.Background())
+}
+
+func (i GroupRuleSetEgressArray) ToGroupRuleSetEgressArrayOutputWithContext(ctx context.Context) GroupRuleSetEgressArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GroupRuleSetEgressArrayOutput)
+}
+
+type GroupRuleSetEgressOutput struct{ *pulumi.OutputState }
+
+func (GroupRuleSetEgressOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GroupRuleSetEgress)(nil)).Elem()
+}
+
+func (o GroupRuleSetEgressOutput) ToGroupRuleSetEgressOutput() GroupRuleSetEgressOutput {
+	return o
+}
+
+func (o GroupRuleSetEgressOutput) ToGroupRuleSetEgressOutputWithContext(ctx context.Context) GroupRuleSetEgressOutput {
+	return o
+}
+
+// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+func (o GroupRuleSetEgressOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+func (o GroupRuleSetEgressOutput) AddressTemplateGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.AddressTemplateGroup }).(pulumi.StringPtrOutput)
+}
+
+// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+func (o GroupRuleSetEgressOutput) AddressTemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.AddressTemplateId }).(pulumi.StringPtrOutput)
+}
+
+// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+func (o GroupRuleSetEgressOutput) CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Description of the security group rule.
+func (o GroupRuleSetEgressOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+func (o GroupRuleSetEgressOutput) Ipv6CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Ipv6CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+func (o GroupRuleSetEgressOutput) Port() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Port }).(pulumi.StringPtrOutput)
+}
+
+// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+func (o GroupRuleSetEgressOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+func (o GroupRuleSetEgressOutput) ServiceTemplateGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.ServiceTemplateGroup }).(pulumi.StringPtrOutput)
+}
+
+// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+func (o GroupRuleSetEgressOutput) ServiceTemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.ServiceTemplateId }).(pulumi.StringPtrOutput)
+}
+
+// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+func (o GroupRuleSetEgressOutput) SourceSecurityId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.SourceSecurityId }).(pulumi.StringPtrOutput)
+}
+
+type GroupRuleSetEgressArrayOutput struct{ *pulumi.OutputState }
+
+func (GroupRuleSetEgressArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GroupRuleSetEgress)(nil)).Elem()
+}
+
+func (o GroupRuleSetEgressArrayOutput) ToGroupRuleSetEgressArrayOutput() GroupRuleSetEgressArrayOutput {
+	return o
+}
+
+func (o GroupRuleSetEgressArrayOutput) ToGroupRuleSetEgressArrayOutputWithContext(ctx context.Context) GroupRuleSetEgressArrayOutput {
+	return o
+}
+
+func (o GroupRuleSetEgressArrayOutput) Index(i pulumi.IntInput) GroupRuleSetEgressOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GroupRuleSetEgress {
+		return vs[0].([]GroupRuleSetEgress)[vs[1].(int)]
+	}).(GroupRuleSetEgressOutput)
+}
+
+type GroupRuleSetIngress struct {
+	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+	Action string `pulumi:"action"`
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateGroup *string `pulumi:"addressTemplateGroup"`
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateId *string `pulumi:"addressTemplateId"`
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	CidrBlock *string `pulumi:"cidrBlock"`
+	// Description of the security group rule.
+	Description *string `pulumi:"description"`
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	Ipv6CidrBlock *string `pulumi:"ipv6CidrBlock"`
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+	Port *string `pulumi:"port"`
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	Protocol *string `pulumi:"protocol"`
+	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateGroup *string `pulumi:"serviceTemplateGroup"`
+	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateId *string `pulumi:"serviceTemplateId"`
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	SourceSecurityId *string `pulumi:"sourceSecurityId"`
+}
+
+// GroupRuleSetIngressInput is an input type that accepts GroupRuleSetIngressArgs and GroupRuleSetIngressOutput values.
+// You can construct a concrete instance of `GroupRuleSetIngressInput` via:
+//
+//          GroupRuleSetIngressArgs{...}
+type GroupRuleSetIngressInput interface {
+	pulumi.Input
+
+	ToGroupRuleSetIngressOutput() GroupRuleSetIngressOutput
+	ToGroupRuleSetIngressOutputWithContext(context.Context) GroupRuleSetIngressOutput
+}
+
+type GroupRuleSetIngressArgs struct {
+	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateGroup pulumi.StringPtrInput `pulumi:"addressTemplateGroup"`
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	AddressTemplateId pulumi.StringPtrInput `pulumi:"addressTemplateId"`
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// Description of the security group rule.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	Ipv6CidrBlock pulumi.StringPtrInput `pulumi:"ipv6CidrBlock"`
+	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+	Port pulumi.StringPtrInput `pulumi:"port"`
+	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateGroup pulumi.StringPtrInput `pulumi:"serviceTemplateGroup"`
+	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+	ServiceTemplateId pulumi.StringPtrInput `pulumi:"serviceTemplateId"`
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	SourceSecurityId pulumi.StringPtrInput `pulumi:"sourceSecurityId"`
+}
+
+func (GroupRuleSetIngressArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GroupRuleSetIngress)(nil)).Elem()
+}
+
+func (i GroupRuleSetIngressArgs) ToGroupRuleSetIngressOutput() GroupRuleSetIngressOutput {
+	return i.ToGroupRuleSetIngressOutputWithContext(context.Background())
+}
+
+func (i GroupRuleSetIngressArgs) ToGroupRuleSetIngressOutputWithContext(ctx context.Context) GroupRuleSetIngressOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GroupRuleSetIngressOutput)
+}
+
+// GroupRuleSetIngressArrayInput is an input type that accepts GroupRuleSetIngressArray and GroupRuleSetIngressArrayOutput values.
+// You can construct a concrete instance of `GroupRuleSetIngressArrayInput` via:
+//
+//          GroupRuleSetIngressArray{ GroupRuleSetIngressArgs{...} }
+type GroupRuleSetIngressArrayInput interface {
+	pulumi.Input
+
+	ToGroupRuleSetIngressArrayOutput() GroupRuleSetIngressArrayOutput
+	ToGroupRuleSetIngressArrayOutputWithContext(context.Context) GroupRuleSetIngressArrayOutput
+}
+
+type GroupRuleSetIngressArray []GroupRuleSetIngressInput
+
+func (GroupRuleSetIngressArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GroupRuleSetIngress)(nil)).Elem()
+}
+
+func (i GroupRuleSetIngressArray) ToGroupRuleSetIngressArrayOutput() GroupRuleSetIngressArrayOutput {
+	return i.ToGroupRuleSetIngressArrayOutputWithContext(context.Background())
+}
+
+func (i GroupRuleSetIngressArray) ToGroupRuleSetIngressArrayOutputWithContext(ctx context.Context) GroupRuleSetIngressArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GroupRuleSetIngressArrayOutput)
+}
+
+type GroupRuleSetIngressOutput struct{ *pulumi.OutputState }
+
+func (GroupRuleSetIngressOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GroupRuleSetIngress)(nil)).Elem()
+}
+
+func (o GroupRuleSetIngressOutput) ToGroupRuleSetIngressOutput() GroupRuleSetIngressOutput {
+	return o
+}
+
+func (o GroupRuleSetIngressOutput) ToGroupRuleSetIngressOutputWithContext(ctx context.Context) GroupRuleSetIngressOutput {
+	return o
+}
+
+// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+func (o GroupRuleSetIngressOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+func (o GroupRuleSetIngressOutput) AddressTemplateGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.AddressTemplateGroup }).(pulumi.StringPtrOutput)
+}
+
+// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+func (o GroupRuleSetIngressOutput) AddressTemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.AddressTemplateId }).(pulumi.StringPtrOutput)
+}
+
+// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+func (o GroupRuleSetIngressOutput) CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Description of the security group rule.
+func (o GroupRuleSetIngressOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+func (o GroupRuleSetIngressOutput) Ipv6CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Ipv6CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
+func (o GroupRuleSetIngressOutput) Port() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Port }).(pulumi.StringPtrOutput)
+}
+
+// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+func (o GroupRuleSetIngressOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+func (o GroupRuleSetIngressOutput) ServiceTemplateGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.ServiceTemplateGroup }).(pulumi.StringPtrOutput)
+}
+
+// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
+func (o GroupRuleSetIngressOutput) ServiceTemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.ServiceTemplateId }).(pulumi.StringPtrOutput)
+}
+
+// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+func (o GroupRuleSetIngressOutput) SourceSecurityId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.SourceSecurityId }).(pulumi.StringPtrOutput)
+}
+
+type GroupRuleSetIngressArrayOutput struct{ *pulumi.OutputState }
+
+func (GroupRuleSetIngressArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GroupRuleSetIngress)(nil)).Elem()
+}
+
+func (o GroupRuleSetIngressArrayOutput) ToGroupRuleSetIngressArrayOutput() GroupRuleSetIngressArrayOutput {
+	return o
+}
+
+func (o GroupRuleSetIngressArrayOutput) ToGroupRuleSetIngressArrayOutputWithContext(ctx context.Context) GroupRuleSetIngressArrayOutput {
+	return o
+}
+
+func (o GroupRuleSetIngressArrayOutput) Index(i pulumi.IntInput) GroupRuleSetIngressOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GroupRuleSetIngress {
+		return vs[0].([]GroupRuleSetIngress)[vs[1].(int)]
+	}).(GroupRuleSetIngressOutput)
+}
+
 type GetGroupsSecurityGroup struct {
 	// Number of security group binding resources.
 	BeAssociateCount int `pulumi:"beAssociateCount"`
@@ -346,7 +720,7 @@ type GetGroupsSecurityGroup struct {
 // GetGroupsSecurityGroupInput is an input type that accepts GetGroupsSecurityGroupArgs and GetGroupsSecurityGroupOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupInput` via:
 //
-//	GetGroupsSecurityGroupArgs{...}
+//          GetGroupsSecurityGroupArgs{...}
 type GetGroupsSecurityGroupInput interface {
 	pulumi.Input
 
@@ -390,7 +764,7 @@ func (i GetGroupsSecurityGroupArgs) ToGetGroupsSecurityGroupOutputWithContext(ct
 // GetGroupsSecurityGroupArrayInput is an input type that accepts GetGroupsSecurityGroupArray and GetGroupsSecurityGroupArrayOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupArrayInput` via:
 //
-//	GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
+//          GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
 type GetGroupsSecurityGroupArrayInput interface {
 	pulumi.Input
 
@@ -496,12 +870,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleAddressTemplatePtrInput)(nil)).Elem(), GroupRuleAddressTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleProtocolTemplateInput)(nil)).Elem(), GroupRuleProtocolTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleProtocolTemplatePtrInput)(nil)).Elem(), GroupRuleProtocolTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleSetEgressInput)(nil)).Elem(), GroupRuleSetEgressArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleSetEgressArrayInput)(nil)).Elem(), GroupRuleSetEgressArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleSetIngressInput)(nil)).Elem(), GroupRuleSetIngressArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleSetIngressArrayInput)(nil)).Elem(), GroupRuleSetIngressArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsSecurityGroupInput)(nil)).Elem(), GetGroupsSecurityGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsSecurityGroupArrayInput)(nil)).Elem(), GetGroupsSecurityGroupArray{})
 	pulumi.RegisterOutputType(GroupRuleAddressTemplateOutput{})
 	pulumi.RegisterOutputType(GroupRuleAddressTemplatePtrOutput{})
 	pulumi.RegisterOutputType(GroupRuleProtocolTemplateOutput{})
 	pulumi.RegisterOutputType(GroupRuleProtocolTemplatePtrOutput{})
+	pulumi.RegisterOutputType(GroupRuleSetEgressOutput{})
+	pulumi.RegisterOutputType(GroupRuleSetEgressArrayOutput{})
+	pulumi.RegisterOutputType(GroupRuleSetIngressOutput{})
+	pulumi.RegisterOutputType(GroupRuleSetIngressArrayOutput{})
 	pulumi.RegisterOutputType(GetGroupsSecurityGroupOutput{})
 	pulumi.RegisterOutputType(GetGroupsSecurityGroupArrayOutput{})
 }

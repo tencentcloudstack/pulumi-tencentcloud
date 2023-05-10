@@ -14,9 +14,9 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const logset = new tencentcloud.Cls.Logset("logset", {
- *     logsetName: "logset",
+ *     logsetName: "demo",
  *     tags: {
- *         test: "test",
+ *         createdBy: "terraform",
  *     },
  * });
  * ```
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * cls logset can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+ *  $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
  * ```
  */
 export class Logset extends pulumi.CustomResource {
@@ -66,11 +66,11 @@ export class Logset extends pulumi.CustomResource {
      */
     public readonly logsetName!: pulumi.Output<string>;
     /**
-     * If AssumerUin is not empty, it indicates the service provider who creates the logset.
+     * If assumerUin is not empty, it indicates the service provider who creates the logset.
      */
     public /*out*/ readonly roleName!: pulumi.Output<string>;
     /**
-     * Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+     * Tag description list.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
@@ -125,11 +125,11 @@ export interface LogsetState {
      */
     logsetName?: pulumi.Input<string>;
     /**
-     * If AssumerUin is not empty, it indicates the service provider who creates the logset.
+     * If assumerUin is not empty, it indicates the service provider who creates the logset.
      */
     roleName?: pulumi.Input<string>;
     /**
-     * Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+     * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
@@ -147,7 +147,7 @@ export interface LogsetArgs {
      */
     logsetName: pulumi.Input<string>;
     /**
-     * Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+     * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
 }

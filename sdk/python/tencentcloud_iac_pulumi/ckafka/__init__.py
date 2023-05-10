@@ -6,6 +6,8 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .acl import *
+from .connect_resource import *
+from .datahub_topic import *
 from .get_acls import *
 from .get_instances import *
 from .get_topics import *

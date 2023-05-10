@@ -19,13 +19,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly bool? AutoCreateDiscoveryAnonymousAuth;
         /// <summary>
-        /// Specify service-account-issuer.
+        /// Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
         /// </summary>
         public readonly string? Issuer;
         /// <summary>
-        /// Specify service-account-jwks-uri.
+        /// Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
         /// </summary>
         public readonly string? JwksUri;
+        /// <summary>
+        /// If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
+        /// </summary>
+        public readonly bool? UseTkeDefault;
 
         [OutputConstructor]
         private ClusterAuthOptions(
@@ -33,11 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string? issuer,
 
-            string? jwksUri)
+            string? jwksUri,
+
+            bool? useTkeDefault)
         {
             AutoCreateDiscoveryAnonymousAuth = autoCreateDiscoveryAnonymousAuth;
             Issuer = issuer;
             JwksUri = jwksUri;
+            UseTkeDefault = useTkeDefault;
         }
     }
 }

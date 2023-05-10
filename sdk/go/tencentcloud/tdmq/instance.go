@@ -19,25 +19,25 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-//				ClusterName: pulumi.String("example"),
-//				Remark:      pulumi.String("this is description."),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
+// 			ClusterName: pulumi.String("example"),
+// 			Remark:      pulumi.String("this is description."),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -45,9 +45,7 @@ import (
 // Tdmq instance can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
-//
+//  $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -58,6 +56,8 @@ type Instance struct {
 	ClusterName pulumi.StringOutput `pulumi:"clusterName"`
 	// Description of the tdmq cluster.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
+	// Tag description list.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -99,6 +99,8 @@ type instanceState struct {
 	ClusterName *string `pulumi:"clusterName"`
 	// Description of the tdmq cluster.
 	Remark *string `pulumi:"remark"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type InstanceState struct {
@@ -108,6 +110,8 @@ type InstanceState struct {
 	ClusterName pulumi.StringPtrInput
 	// Description of the tdmq cluster.
 	Remark pulumi.StringPtrInput
+	// Tag description list.
+	Tags pulumi.MapInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -121,6 +125,8 @@ type instanceArgs struct {
 	ClusterName string `pulumi:"clusterName"`
 	// Description of the tdmq cluster.
 	Remark *string `pulumi:"remark"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -131,6 +137,8 @@ type InstanceArgs struct {
 	ClusterName pulumi.StringInput
 	// Description of the tdmq cluster.
 	Remark pulumi.StringPtrInput
+	// Tag description list.
+	Tags pulumi.MapInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -159,7 +167,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +192,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -233,6 +241,11 @@ func (o InstanceOutput) ClusterName() pulumi.StringOutput {
 // Description of the tdmq cluster.
 func (o InstanceOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+// Tag description list.
+func (o InstanceOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

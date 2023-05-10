@@ -89,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Output<string> NextHub { get; private set; } = null!;
 
         /// <summary>
-        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
         /// </summary>
         [Output("nextType")]
         public Output<string> NextType { get; private set; } = null!;
@@ -172,7 +172,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Input<string> NextHub { get; set; } = null!;
 
         /// <summary>
-        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
         /// </summary>
         [Input("nextType", required: true)]
         public Input<string> NextType { get; set; } = null!;
@@ -215,7 +215,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Input<string>? NextHub { get; set; }
 
         /// <summary>
-        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
         /// </summary>
         [Input("nextType")]
         public Input<string>? NextType { get; set; }

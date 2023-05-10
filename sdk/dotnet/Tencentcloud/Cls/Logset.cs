@@ -25,10 +25,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///     {
     ///         var logset = new Tencentcloud.Cls.Logset("logset", new Tencentcloud.Cls.LogsetArgs
     ///         {
-    ///             LogsetName = "logset",
+    ///             LogsetName = "demo",
     ///             Tags = 
     ///             {
-    ///                 { "test", "test" },
+    ///                 { "createdBy", "terraform" },
     ///             },
     ///         });
     ///     }
@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// cls logset can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+    ///  $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/logset:Logset")]
@@ -60,13 +60,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<string> LogsetName { get; private set; } = null!;
 
         /// <summary>
-        /// If AssumerUin is not empty, it indicates the service provider who creates the logset.
+        /// If assumer_uin is not empty, it indicates the service provider who creates the logset.
         /// </summary>
         [Output("roleName")]
         public Output<string> RoleName { get; private set; } = null!;
 
         /// <summary>
-        /// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        /// Tag description list.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
@@ -134,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        /// Tag description list.
         /// </summary>
         public InputMap<object> Tags
         {
@@ -162,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<string>? LogsetName { get; set; }
 
         /// <summary>
-        /// If AssumerUin is not empty, it indicates the service provider who creates the logset.
+        /// If assumer_uin is not empty, it indicates the service provider who creates the logset.
         /// </summary>
         [Input("roleName")]
         public Input<string>? RoleName { get; set; }
@@ -171,7 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        /// Tag description list.
         /// </summary>
         public InputMap<object> Tags
         {

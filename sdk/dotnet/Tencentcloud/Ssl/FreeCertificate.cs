@@ -12,6 +12,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
 {
     /// <summary>
     /// Provide a resource to create a Free Certificate.
+    /// 
     /// &gt; **NOTE:** Once certificat created, it cannot be removed within 1 hours.
     /// 
     /// ## Example Usage
@@ -126,10 +127,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Output<string> Domain { get; private set; } = null!;
 
         /// <summary>
-        /// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        /// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         /// </summary>
         [Output("dvAuthMethod")]
         public Output<string> DvAuthMethod { get; private set; } = null!;
+
+        /// <summary>
+        /// DV certification information.
+        /// </summary>
+        [Output("dvAuths")]
+        public Output<ImmutableArray<Outputs.FreeCertificateDvAuth>> DvAuths { get; private set; } = null!;
 
         /// <summary>
         /// Certificate insert time.
@@ -287,7 +294,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Input<string> Domain { get; set; } = null!;
 
         /// <summary>
-        /// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        /// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         /// </summary>
         [Input("dvAuthMethod", required: true)]
         public Input<string> DvAuthMethod { get; set; } = null!;
@@ -396,10 +403,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Input<string>? Domain { get; set; }
 
         /// <summary>
-        /// Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        /// Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         /// </summary>
         [Input("dvAuthMethod")]
         public Input<string>? DvAuthMethod { get; set; }
+
+        [Input("dvAuths")]
+        private InputList<Inputs.FreeCertificateDvAuthGetArgs>? _dvAuths;
+
+        /// <summary>
+        /// DV certification information.
+        /// </summary>
+        public InputList<Inputs.FreeCertificateDvAuthGetArgs> DvAuths
+        {
+            get => _dvAuths ?? (_dvAuths = new InputList<Inputs.FreeCertificateDvAuthGetArgs>());
+            set => _dvAuths = value;
+        }
 
         /// <summary>
         /// Certificate insert time.

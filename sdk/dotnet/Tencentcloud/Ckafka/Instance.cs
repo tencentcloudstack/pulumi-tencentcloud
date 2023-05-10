@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// <summary>
     /// Use this resource to create ckafka instance.
     /// 
-    /// &gt; **NOTE:** It only support create profession ckafka instance.
+    /// &gt; **NOTE:** It only support create prepaid ckafka instance.
     /// 
     /// ## Example Usage
     /// 
@@ -51,6 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     ///             Period = 1,
     ///             PublicNetwork = 3,
     ///             RenewFlag = 0,
+    ///             SpecificationsType = "profession",
     ///             SubnetId = "subnet-4vwihrzk",
     ///             VpcId = "vpc-82p1t1nv",
     ///             ZoneId = 100006,
@@ -113,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<string> InstanceName { get; private set; } = null!;
 
         /// <summary>
+        /// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+        /// </summary>
+        [Output("instanceType")]
+        public Output<int> InstanceType { get; private set; } = null!;
+
+        /// <summary>
         /// Kafka version (0.10.2/1.1.1/2.4.1).
         /// </summary>
         [Output("kafkaVersion")]
@@ -143,7 +150,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<int?> Period { get; private set; } = null!;
 
         /// <summary>
-        /// Timestamp.
+        /// Bandwidth of the public network.
         /// </summary>
         [Output("publicNetwork")]
         public Output<int> PublicNetwork { get; private set; } = null!;
@@ -161,13 +168,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<int> RenewFlag { get; private set; } = null!;
 
         /// <summary>
-        /// Subnet id.
+        /// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
         /// </summary>
-        [Output("subnetId")]
-        public Output<string> SubnetId { get; private set; } = null!;
+        [Output("specificationsType")]
+        public Output<string?> SpecificationsType { get; private set; } = null!;
 
         /// <summary>
-        /// Partition size, the professional version does not need tag.
+        /// Subnet id, it will be basic network if not set.
+        /// </summary>
+        [Output("subnetId")]
+        public Output<string?> SubnetId { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag set of instance.
+        /// </summary>
+        [Output("tagSet")]
+        public Output<ImmutableDictionary<string, object>> TagSet { get; private set; } = null!;
+
+        /// <summary>
+        /// It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<Outputs.InstanceTag>> Tags { get; private set; } = null!;
@@ -179,10 +198,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<string> Vip { get; private set; } = null!;
 
         /// <summary>
-        /// Vpc id.
+        /// Vpc id, it will be basic network if not set.
         /// </summary>
         [Output("vpcId")]
-        public Output<string> VpcId { get; private set; } = null!;
+        public Output<string?> VpcId { get; private set; } = null!;
 
         /// <summary>
         /// Type of instance.
@@ -286,6 +305,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<string> InstanceName { get; set; } = null!;
 
         /// <summary>
+        /// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+        /// </summary>
+        [Input("instanceType")]
+        public Input<int>? InstanceType { get; set; }
+
+        /// <summary>
         /// Kafka version (0.10.2/1.1.1/2.4.1).
         /// </summary>
         [Input("kafkaVersion")]
@@ -316,7 +341,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Timestamp.
+        /// Bandwidth of the public network.
         /// </summary>
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }
@@ -334,17 +359,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? RenewFlag { get; set; }
 
         /// <summary>
-        /// Subnet id.
+        /// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
         /// </summary>
-        [Input("subnetId", required: true)]
-        public Input<string> SubnetId { get; set; } = null!;
+        [Input("specificationsType")]
+        public Input<string>? SpecificationsType { get; set; }
+
+        /// <summary>
+        /// Subnet id, it will be basic network if not set.
+        /// </summary>
+        [Input("subnetId")]
+        public Input<string>? SubnetId { get; set; }
+
+        [Input("tagSet")]
+        private InputMap<object>? _tagSet;
+
+        /// <summary>
+        /// Tag set of instance.
+        /// </summary>
+        public InputMap<object> TagSet
+        {
+            get => _tagSet ?? (_tagSet = new InputMap<object>());
+            set => _tagSet = value;
+        }
 
         [Input("tags")]
         private InputList<Inputs.InstanceTagArgs>? _tags;
 
         /// <summary>
-        /// Partition size, the professional version does not need tag.
+        /// It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.")]
         public InputList<Inputs.InstanceTagArgs> Tags
         {
             get => _tags ?? (_tags = new InputList<Inputs.InstanceTagArgs>());
@@ -352,10 +396,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
 
         /// <summary>
-        /// Vpc id.
+        /// Vpc id, it will be basic network if not set.
         /// </summary>
-        [Input("vpcId", required: true)]
-        public Input<string> VpcId { get; set; } = null!;
+        [Input("vpcId")]
+        public Input<string>? VpcId { get; set; }
 
         /// <summary>
         /// Available zone id.
@@ -419,6 +463,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<string>? InstanceName { get; set; }
 
         /// <summary>
+        /// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+        /// </summary>
+        [Input("instanceType")]
+        public Input<int>? InstanceType { get; set; }
+
+        /// <summary>
         /// Kafka version (0.10.2/1.1.1/2.4.1).
         /// </summary>
         [Input("kafkaVersion")]
@@ -449,7 +499,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Timestamp.
+        /// Bandwidth of the public network.
         /// </summary>
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }
@@ -467,17 +517,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? RenewFlag { get; set; }
 
         /// <summary>
-        /// Subnet id.
+        /// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+        /// </summary>
+        [Input("specificationsType")]
+        public Input<string>? SpecificationsType { get; set; }
+
+        /// <summary>
+        /// Subnet id, it will be basic network if not set.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
+
+        [Input("tagSet")]
+        private InputMap<object>? _tagSet;
+
+        /// <summary>
+        /// Tag set of instance.
+        /// </summary>
+        public InputMap<object> TagSet
+        {
+            get => _tagSet ?? (_tagSet = new InputMap<object>());
+            set => _tagSet = value;
+        }
 
         [Input("tags")]
         private InputList<Inputs.InstanceTagGetArgs>? _tags;
 
         /// <summary>
-        /// Partition size, the professional version does not need tag.
+        /// It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.")]
         public InputList<Inputs.InstanceTagGetArgs> Tags
         {
             get => _tags ?? (_tags = new InputList<Inputs.InstanceTagGetArgs>());
@@ -491,7 +560,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<string>? Vip { get; set; }
 
         /// <summary>
-        /// Vpc id.
+        /// Vpc id, it will be basic network if not set.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

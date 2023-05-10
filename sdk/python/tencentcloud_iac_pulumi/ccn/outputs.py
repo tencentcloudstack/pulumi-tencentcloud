@@ -10,10 +10,192 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'InstancesAcceptAttachInstance',
+    'InstancesResetAttachInstance',
     'GetBandwidthLimitsLimitResult',
+    'GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataResult',
+    'GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetResult',
+    'GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitResult',
+    'GetCrossBorderRegionBandwidthLimitsFilterResult',
     'GetInstancesInstanceListResult',
     'GetInstancesInstanceListAttachmentListResult',
 ]
+
+@pulumi.output_type
+class InstancesAcceptAttachInstance(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "instanceRegion":
+            suggest = "instance_region"
+        elif key == "instanceType":
+            suggest = "instance_type"
+        elif key == "routeTableId":
+            suggest = "route_table_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstancesAcceptAttachInstance. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstancesAcceptAttachInstance.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstancesAcceptAttachInstance.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_region: str,
+                 description: Optional[str] = None,
+                 instance_type: Optional[str] = None,
+                 route_table_id: Optional[str] = None):
+        """
+        :param str instance_id: Attachment Instance ID.
+        :param str instance_region: Instance Region.
+        :param str description: Description.
+        :param str instance_type: InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        :param str route_table_id: ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_region", instance_region)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if instance_type is not None:
+            pulumi.set(__self__, "instance_type", instance_type)
+        if route_table_id is not None:
+            pulumi.set(__self__, "route_table_id", route_table_id)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Attachment Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceRegion")
+    def instance_region(self) -> str:
+        """
+        Instance Region.
+        """
+        return pulumi.get(self, "instance_region")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> Optional[str]:
+        """
+        InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> Optional[str]:
+        """
+        ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "route_table_id")
+
+
+@pulumi.output_type
+class InstancesResetAttachInstance(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "instanceRegion":
+            suggest = "instance_region"
+        elif key == "instanceType":
+            suggest = "instance_type"
+        elif key == "routeTableId":
+            suggest = "route_table_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstancesResetAttachInstance. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstancesResetAttachInstance.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstancesResetAttachInstance.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_region: str,
+                 description: Optional[str] = None,
+                 instance_type: Optional[str] = None,
+                 route_table_id: Optional[str] = None):
+        """
+        :param str instance_id: Attachment Instance ID.
+        :param str instance_region: Instance Region.
+        :param str description: Description.
+        :param str instance_type: InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        :param str route_table_id: ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_region", instance_region)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if instance_type is not None:
+            pulumi.set(__self__, "instance_type", instance_type)
+        if route_table_id is not None:
+            pulumi.set(__self__, "route_table_id", route_table_id)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Attachment Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceRegion")
+    def instance_region(self) -> str:
+        """
+        Instance Region.
+        """
+        return pulumi.get(self, "instance_region")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> Optional[str]:
+        """
+        InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> Optional[str]:
+        """
+        ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "route_table_id")
+
 
 @pulumi.output_type
 class GetBandwidthLimitsLimitResult(dict):
@@ -53,6 +235,265 @@ class GetBandwidthLimitsLimitResult(dict):
         Limitation of region.
         """
         return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataResult(dict):
+    def __init__(__self__, *,
+                 in_bandwidths: Sequence[int],
+                 in_pkgs: Sequence[int],
+                 out_bandwidths: Sequence[int],
+                 out_pkgs: Sequence[int]):
+        """
+        :param Sequence[int] in_bandwidths: in bandwidth, `bps`.
+        :param Sequence[int] in_pkgs: in pkg, `pps`.
+        :param Sequence[int] out_bandwidths: out bandwidth, `bps`.
+        :param Sequence[int] out_pkgs: out pkg, `pps`.
+        """
+        pulumi.set(__self__, "in_bandwidths", in_bandwidths)
+        pulumi.set(__self__, "in_pkgs", in_pkgs)
+        pulumi.set(__self__, "out_bandwidths", out_bandwidths)
+        pulumi.set(__self__, "out_pkgs", out_pkgs)
+
+    @property
+    @pulumi.getter(name="inBandwidths")
+    def in_bandwidths(self) -> Sequence[int]:
+        """
+        in bandwidth, `bps`.
+        """
+        return pulumi.get(self, "in_bandwidths")
+
+    @property
+    @pulumi.getter(name="inPkgs")
+    def in_pkgs(self) -> Sequence[int]:
+        """
+        in pkg, `pps`.
+        """
+        return pulumi.get(self, "in_pkgs")
+
+    @property
+    @pulumi.getter(name="outBandwidths")
+    def out_bandwidths(self) -> Sequence[int]:
+        """
+        out bandwidth, `bps`.
+        """
+        return pulumi.get(self, "out_bandwidths")
+
+    @property
+    @pulumi.getter(name="outPkgs")
+    def out_pkgs(self) -> Sequence[int]:
+        """
+        out pkg, `pps`.
+        """
+        return pulumi.get(self, "out_pkgs")
+
+
+@pulumi.output_type
+class GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetResult(dict):
+    def __init__(__self__, *,
+                 ccn_id: str,
+                 ccn_region_bandwidth_limits: Sequence['outputs.GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitResult'],
+                 created_time: str,
+                 expired_time: str,
+                 instance_charge_type: str,
+                 is_cross_border: bool,
+                 is_security_lock: bool,
+                 market_id: str,
+                 region_flow_control_id: str,
+                 renew_flag: str,
+                 update_time: str,
+                 user_account_id: str):
+        """
+        :param str ccn_id: ccn id.
+        :param Sequence['GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs'] ccn_region_bandwidth_limits: bandwidth limit of cross region.
+        :param str created_time: create time.
+        :param str expired_time: expired time.
+        :param str instance_charge_type: `POSTPAID` or `PREPAID`.
+        :param bool is_cross_border: if cross region.
+        :param bool is_security_lock: `true` means locked.
+        :param str market_id: market id.
+        :param str region_flow_control_id: Id of RegionFlowControl.
+        :param str renew_flag: renew flag.
+        :param str update_time: update time.
+        :param str user_account_id: user account id.
+        """
+        pulumi.set(__self__, "ccn_id", ccn_id)
+        pulumi.set(__self__, "ccn_region_bandwidth_limits", ccn_region_bandwidth_limits)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "expired_time", expired_time)
+        pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        pulumi.set(__self__, "is_cross_border", is_cross_border)
+        pulumi.set(__self__, "is_security_lock", is_security_lock)
+        pulumi.set(__self__, "market_id", market_id)
+        pulumi.set(__self__, "region_flow_control_id", region_flow_control_id)
+        pulumi.set(__self__, "renew_flag", renew_flag)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "user_account_id", user_account_id)
+
+    @property
+    @pulumi.getter(name="ccnId")
+    def ccn_id(self) -> str:
+        """
+        ccn id.
+        """
+        return pulumi.get(self, "ccn_id")
+
+    @property
+    @pulumi.getter(name="ccnRegionBandwidthLimits")
+    def ccn_region_bandwidth_limits(self) -> Sequence['outputs.GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitResult']:
+        """
+        bandwidth limit of cross region.
+        """
+        return pulumi.get(self, "ccn_region_bandwidth_limits")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="expiredTime")
+    def expired_time(self) -> str:
+        """
+        expired time.
+        """
+        return pulumi.get(self, "expired_time")
+
+    @property
+    @pulumi.getter(name="instanceChargeType")
+    def instance_charge_type(self) -> str:
+        """
+        `POSTPAID` or `PREPAID`.
+        """
+        return pulumi.get(self, "instance_charge_type")
+
+    @property
+    @pulumi.getter(name="isCrossBorder")
+    def is_cross_border(self) -> bool:
+        """
+        if cross region.
+        """
+        return pulumi.get(self, "is_cross_border")
+
+    @property
+    @pulumi.getter(name="isSecurityLock")
+    def is_security_lock(self) -> bool:
+        """
+        `true` means locked.
+        """
+        return pulumi.get(self, "is_security_lock")
+
+    @property
+    @pulumi.getter(name="marketId")
+    def market_id(self) -> str:
+        """
+        market id.
+        """
+        return pulumi.get(self, "market_id")
+
+    @property
+    @pulumi.getter(name="regionFlowControlId")
+    def region_flow_control_id(self) -> str:
+        """
+        Id of RegionFlowControl.
+        """
+        return pulumi.get(self, "region_flow_control_id")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> str:
+        """
+        renew flag.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        update time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="userAccountId")
+    def user_account_id(self) -> str:
+        """
+        user account id.
+        """
+        return pulumi.get(self, "user_account_id")
+
+
+@pulumi.output_type
+class GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitResult(dict):
+    def __init__(__self__, *,
+                 bandwidth_limit: int,
+                 destination_region: str,
+                 source_region: str):
+        """
+        :param int bandwidth_limit: bandwidth list(Mbps).
+        :param str destination_region: destination region, such as.
+        :param str source_region: source region, such as &#39;ap-shanghai&#39;.
+        """
+        pulumi.set(__self__, "bandwidth_limit", bandwidth_limit)
+        pulumi.set(__self__, "destination_region", destination_region)
+        pulumi.set(__self__, "source_region", source_region)
+
+    @property
+    @pulumi.getter(name="bandwidthLimit")
+    def bandwidth_limit(self) -> int:
+        """
+        bandwidth list(Mbps).
+        """
+        return pulumi.get(self, "bandwidth_limit")
+
+    @property
+    @pulumi.getter(name="destinationRegion")
+    def destination_region(self) -> str:
+        """
+        destination region, such as.
+        """
+        return pulumi.get(self, "destination_region")
+
+    @property
+    @pulumi.getter(name="sourceRegion")
+    def source_region(self) -> str:
+        """
+        source region, such as &#39;ap-shanghai&#39;.
+        """
+        return pulumi.get(self, "source_region")
+
+
+@pulumi.output_type
+class GetCrossBorderRegionBandwidthLimitsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: attribute name.
+        :param Sequence[str] values: Value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        attribute name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Value of the field.
+        """
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type

@@ -78,7 +78,7 @@ export class Namespace extends pulumi.CustomResource {
      */
     public readonly remark!: pulumi.Output<string | undefined>;
     /**
-     * The Policy of message to retain.
+     * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
     public readonly retentionPolicy!: pulumi.Output<{[key: string]: any} | undefined>;
 
@@ -143,7 +143,7 @@ export interface NamespaceState {
      */
     remark?: pulumi.Input<string>;
     /**
-     * The Policy of message to retain.
+     * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
     retentionPolicy?: pulumi.Input<{[key: string]: any}>;
 }
@@ -169,7 +169,7 @@ export interface NamespaceArgs {
      */
     remark?: pulumi.Input<string>;
     /**
-     * The Policy of message to retain.
+     * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
     retentionPolicy?: pulumi.Input<{[key: string]: any}>;
 }

@@ -9,5 +9,6 @@ from .get_groups import *
 from .group import *
 from .group_lite_rule import *
 from .group_rule import *
+from .group_rule_set import *
 from ._inputs import *
 from . import outputs

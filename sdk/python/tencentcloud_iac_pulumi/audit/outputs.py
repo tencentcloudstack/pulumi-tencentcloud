@@ -9,9 +9,84 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'TrackStorage',
     'GetCosRegionsAuditCosRegionListResult',
     'GetKeyAliasAuditKeyAliasListResult',
 ]
+
+@pulumi.output_type
+class TrackStorage(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "storageName":
+            suggest = "storage_name"
+        elif key == "storagePrefix":
+            suggest = "storage_prefix"
+        elif key == "storageRegion":
+            suggest = "storage_region"
+        elif key == "storageType":
+            suggest = "storage_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TrackStorage. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TrackStorage.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TrackStorage.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 storage_name: str,
+                 storage_prefix: str,
+                 storage_region: str,
+                 storage_type: str):
+        """
+        :param str storage_name: Track Storage name:- when StorageType is `cls`, StorageName is cls topicId- when StorageType is `cos`, StorageName is cos bucket name that does not contain `-APPID`.
+        :param str storage_prefix: Storage path prefix.
+        :param str storage_region: Storage region.
+        :param str storage_type: Track Storage type, optional:- `cos`- `cls`.
+        """
+        pulumi.set(__self__, "storage_name", storage_name)
+        pulumi.set(__self__, "storage_prefix", storage_prefix)
+        pulumi.set(__self__, "storage_region", storage_region)
+        pulumi.set(__self__, "storage_type", storage_type)
+
+    @property
+    @pulumi.getter(name="storageName")
+    def storage_name(self) -> str:
+        """
+        Track Storage name:- when StorageType is `cls`, StorageName is cls topicId- when StorageType is `cos`, StorageName is cos bucket name that does not contain `-APPID`.
+        """
+        return pulumi.get(self, "storage_name")
+
+    @property
+    @pulumi.getter(name="storagePrefix")
+    def storage_prefix(self) -> str:
+        """
+        Storage path prefix.
+        """
+        return pulumi.get(self, "storage_prefix")
+
+    @property
+    @pulumi.getter(name="storageRegion")
+    def storage_region(self) -> str:
+        """
+        Storage region.
+        """
+        return pulumi.get(self, "storage_region")
+
+    @property
+    @pulumi.getter(name="storageType")
+    def storage_type(self) -> str:
+        """
+        Track Storage type, optional:- `cos`- `cls`.
+        """
+        return pulumi.get(self, "storage_type")
+
 
 @pulumi.output_type
 class GetCosRegionsAuditCosRegionListResult(dict):

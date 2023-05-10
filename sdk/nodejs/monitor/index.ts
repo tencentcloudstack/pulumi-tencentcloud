@@ -5,45 +5,86 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./alarmNotice";
 export * from "./alarmPolicy";
 export * from "./bindingReceiver";
+export * from "./getAlarmNotices";
 export * from "./getBindingObjects";
 export * from "./getData";
 export * from "./getPolicyConditions";
 export * from "./getPolicyGroups";
 export * from "./getProductEvent";
 export * from "./getProductNamespace";
+export * from "./grafanaInstance";
+export * from "./grafanaIntegration";
+export * from "./grafanaNotificationChannel";
+export * from "./grafanaPlugin";
+export * from "./grafanaSsoAccount";
 export * from "./policyBindingObject";
 export * from "./tmpAlertRule";
 export * from "./tmpCvmAgent";
 export * from "./tmpExporterIntegration";
+export * from "./tmpGrafanaConfig";
 export * from "./tmpInstance";
+export * from "./tmpManageGrafanaAttachment";
 export * from "./tmpRecordingRule";
 export * from "./tmpScrapeJob";
 export * from "./tmpTkeAlertPolicy";
+export * from "./tmpTkeBasicConfig";
+export * from "./tmpTkeClusterAgent";
+export * from "./tmpTkeConfig";
+export * from "./tmpTkeGlobalNotification";
+export * from "./tmpTkeRecordRuleYaml";
 export * from "./tmpTkeTemplate";
+export * from "./tmpTkeTemplateAttachment";
 
 // Import resources to register:
+import { AlarmNotice } from "./alarmNotice";
 import { AlarmPolicy } from "./alarmPolicy";
 import { BindingReceiver } from "./bindingReceiver";
+import { GrafanaInstance } from "./grafanaInstance";
+import { GrafanaIntegration } from "./grafanaIntegration";
+import { GrafanaNotificationChannel } from "./grafanaNotificationChannel";
+import { GrafanaPlugin } from "./grafanaPlugin";
+import { GrafanaSsoAccount } from "./grafanaSsoAccount";
 import { PolicyBindingObject } from "./policyBindingObject";
 import { TmpAlertRule } from "./tmpAlertRule";
 import { TmpCvmAgent } from "./tmpCvmAgent";
 import { TmpExporterIntegration } from "./tmpExporterIntegration";
+import { TmpGrafanaConfig } from "./tmpGrafanaConfig";
 import { TmpInstance } from "./tmpInstance";
+import { TmpManageGrafanaAttachment } from "./tmpManageGrafanaAttachment";
 import { TmpRecordingRule } from "./tmpRecordingRule";
 import { TmpScrapeJob } from "./tmpScrapeJob";
 import { TmpTkeAlertPolicy } from "./tmpTkeAlertPolicy";
+import { TmpTkeBasicConfig } from "./tmpTkeBasicConfig";
+import { TmpTkeClusterAgent } from "./tmpTkeClusterAgent";
+import { TmpTkeConfig } from "./tmpTkeConfig";
+import { TmpTkeGlobalNotification } from "./tmpTkeGlobalNotification";
+import { TmpTkeRecordRuleYaml } from "./tmpTkeRecordRuleYaml";
 import { TmpTkeTemplate } from "./tmpTkeTemplate";
+import { TmpTkeTemplateAttachment } from "./tmpTkeTemplateAttachment";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Monitor/alarmNotice:AlarmNotice":
+                return new AlarmNotice(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/alarmPolicy:AlarmPolicy":
                 return new AlarmPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/bindingReceiver:BindingReceiver":
                 return new BindingReceiver(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaInstance:GrafanaInstance":
+                return new GrafanaInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaIntegration:GrafanaIntegration":
+                return new GrafanaIntegration(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaNotificationChannel:GrafanaNotificationChannel":
+                return new GrafanaNotificationChannel(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin":
+                return new GrafanaPlugin(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount":
+                return new GrafanaSsoAccount(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
                 return new PolicyBindingObject(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpAlertRule:TmpAlertRule":
@@ -52,29 +93,59 @@ const _module = {
                 return new TmpCvmAgent(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpExporterIntegration:TmpExporterIntegration":
                 return new TmpExporterIntegration(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig":
+                return new TmpGrafanaConfig(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpInstance:TmpInstance":
                 return new TmpInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment":
+                return new TmpManageGrafanaAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule":
                 return new TmpRecordingRule(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob":
                 return new TmpScrapeJob(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpTkeAlertPolicy:TmpTkeAlertPolicy":
                 return new TmpTkeAlertPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpTkeBasicConfig:TmpTkeBasicConfig":
+                return new TmpTkeBasicConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpTkeClusterAgent:TmpTkeClusterAgent":
+                return new TmpTkeClusterAgent(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpTkeConfig:TmpTkeConfig":
+                return new TmpTkeConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpTkeGlobalNotification:TmpTkeGlobalNotification":
+                return new TmpTkeGlobalNotification(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpTkeRecordRuleYaml:TmpTkeRecordRuleYaml":
+                return new TmpTkeRecordRuleYaml(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpTkeTemplate:TmpTkeTemplate":
                 return new TmpTkeTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpTkeTemplateAttachment:TmpTkeTemplateAttachment":
+                return new TmpTkeTemplateAttachment(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmNotice", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/bindingReceiver", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaIntegration", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaNotificationChannel", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaPlugin", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaSsoAccount", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/policyBindingObject", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpAlertRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpCvmAgent", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpExporterIntegration", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpGrafanaConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpManageGrafanaAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpRecordingRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpScrapeJob", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeAlertPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeBasicConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeClusterAgent", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeGlobalNotification", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeRecordRuleYaml", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeTemplateAttachment", _module)

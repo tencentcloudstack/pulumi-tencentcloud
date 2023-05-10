@@ -64,6 +64,62 @@ import * as utilities from "../utilities";
  *     autoCreateDiscoveryAnonymousAuth: true,
  * });
  * ```
+ *
+ * Use the TKE default issuer and jwksUri
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const clusterCidr = config.get("clusterCidr") || "172.16.0.0/16";
+ * const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
+ * const default = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     osName: "centos",
+ * });
+ * const vpc = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZone,
+ * });
+ * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
+ *     vpcId: vpc.then(vpc => vpc.instanceLists?[0]?.vpcId),
+ *     clusterCidr: "10.31.0.0/16",
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "keep",
+ *     clusterDesc: "test cluster desc",
+ *     clusterVersion: "1.20.6",
+ *     clusterMaxServiceNum: 32,
+ *     workerConfigs: [{
+ *         count: 1,
+ *         availabilityZone: availabilityZone,
+ *         instanceType: defaultInstanceType,
+ *         systemDiskType: "CLOUD_SSD",
+ *         systemDiskSize: 60,
+ *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *         internetMaxBandwidthOut: 100,
+ *         publicIpAssigned: true,
+ *         subnetId: vpc.then(vpc => vpc.instanceLists?[0]?.subnetId),
+ *         dataDisks: [{
+ *             diskType: "CLOUD_PREMIUM",
+ *             diskSize: 50,
+ *         }],
+ *         enhancedSecurityService: false,
+ *         enhancedMonitorService: false,
+ *         userData: "dGVzdA==",
+ *         password: "ZZXXccvv1212",
+ *     }],
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ * });
+ * // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
+ * const testUseTkeDefaultAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach", {
+ *     clusterId: managedCluster.id,
+ *     autoCreateDiscoveryAnonymousAuth: true,
+ *     useTkeDefault: true,
+ * });
+ * ```
  */
 export class AuthAttachment extends pulumi.CustomResource {
     /**
@@ -102,13 +158,25 @@ export class AuthAttachment extends pulumi.CustomResource {
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Specify service-account-issuer.
+     * Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
      */
-    public readonly issuer!: pulumi.Output<string>;
+    public readonly issuer!: pulumi.Output<string | undefined>;
     /**
-     * Specify service-account-jwks-uri.
+     * Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
      */
     public readonly jwksUri!: pulumi.Output<string | undefined>;
+    /**
+     * The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     */
+    public /*out*/ readonly tkeDefaultIssuer!: pulumi.Output<string>;
+    /**
+     * The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     */
+    public /*out*/ readonly tkeDefaultJwksUri!: pulumi.Output<string>;
+    /**
+     * If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+     */
+    public readonly useTkeDefault!: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a AuthAttachment resource with the given unique name, arguments, and options.
@@ -127,18 +195,21 @@ export class AuthAttachment extends pulumi.CustomResource {
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["issuer"] = state ? state.issuer : undefined;
             resourceInputs["jwksUri"] = state ? state.jwksUri : undefined;
+            resourceInputs["tkeDefaultIssuer"] = state ? state.tkeDefaultIssuer : undefined;
+            resourceInputs["tkeDefaultJwksUri"] = state ? state.tkeDefaultJwksUri : undefined;
+            resourceInputs["useTkeDefault"] = state ? state.useTkeDefault : undefined;
         } else {
             const args = argsOrState as AuthAttachmentArgs | undefined;
             if ((!args || args.clusterId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clusterId'");
             }
-            if ((!args || args.issuer === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'issuer'");
-            }
             resourceInputs["autoCreateDiscoveryAnonymousAuth"] = args ? args.autoCreateDiscoveryAnonymousAuth : undefined;
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["issuer"] = args ? args.issuer : undefined;
             resourceInputs["jwksUri"] = args ? args.jwksUri : undefined;
+            resourceInputs["useTkeDefault"] = args ? args.useTkeDefault : undefined;
+            resourceInputs["tkeDefaultIssuer"] = undefined /*out*/;
+            resourceInputs["tkeDefaultJwksUri"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(AuthAttachment.__pulumiType, name, resourceInputs, opts);
@@ -158,13 +229,25 @@ export interface AuthAttachmentState {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * Specify service-account-issuer.
+     * Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
      */
     issuer?: pulumi.Input<string>;
     /**
-     * Specify service-account-jwks-uri.
+     * Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
      */
     jwksUri?: pulumi.Input<string>;
+    /**
+     * The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     */
+    tkeDefaultIssuer?: pulumi.Input<string>;
+    /**
+     * The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     */
+    tkeDefaultJwksUri?: pulumi.Input<string>;
+    /**
+     * If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+     */
+    useTkeDefault?: pulumi.Input<boolean>;
 }
 
 /**
@@ -180,11 +263,15 @@ export interface AuthAttachmentArgs {
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Specify service-account-issuer.
+     * Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
      */
-    issuer: pulumi.Input<string>;
+    issuer?: pulumi.Input<string>;
     /**
-     * Specify service-account-jwks-uri.
+     * Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
      */
     jwksUri?: pulumi.Input<string>;
+    /**
+     * If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+     */
+    useTkeDefault?: pulumi.Input<boolean>;
 }

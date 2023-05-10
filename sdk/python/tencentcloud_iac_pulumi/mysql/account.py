@@ -210,6 +210,14 @@ class Account(pulumi.CustomResource):
             password="********")
         ```
 
+        ## Import
+
+        mysql account can be imported using the mysqlId#accountName, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mysql/account:Account default cdb-gqg6j82x#tf_account
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Database description.
@@ -237,6 +245,14 @@ class Account(pulumi.CustomResource):
             description="My test account",
             mysql_id="my-test-database",
             password="********")
+        ```
+
+        ## Import
+
+        mysql account can be imported using the mysqlId#accountName, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mysql/account:Account default cdb-gqg6j82x#tf_account
         ```
 
         :param str resource_name: The name of the resource.

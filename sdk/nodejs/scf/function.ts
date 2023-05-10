@@ -128,11 +128,11 @@ export class Function extends pulumi.CustomResource {
      */
     public /*out*/ readonly eips!: pulumi.Output<string[]>;
     /**
-     * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
+     * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
      */
     public readonly enableEipConfig!: pulumi.Output<boolean | undefined>;
     /**
-     * Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
+     * Indicates whether public net config enabled. Default `false`. NOTE: only `vpcId` specified can disable public net config.
      */
     public readonly enablePublicNet!: pulumi.Output<boolean | undefined>;
     /**
@@ -388,11 +388,11 @@ export interface FunctionState {
      */
     eips?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
+     * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
      */
     enableEipConfig?: pulumi.Input<boolean>;
     /**
-     * Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
+     * Indicates whether public net config enabled. Default `false`. NOTE: only `vpcId` specified can disable public net config.
      */
     enablePublicNet?: pulumi.Input<boolean>;
     /**
@@ -526,11 +526,11 @@ export interface FunctionArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true.
+     * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
      */
     enableEipConfig?: pulumi.Input<boolean>;
     /**
-     * Indicates whether public net config enabled. NOTE: only `vpcId` specified can disable public net config.
+     * Indicates whether public net config enabled. Default `false`. NOTE: only `vpcId` specified can disable public net config.
      */
     enablePublicNet?: pulumi.Input<boolean>;
     /**

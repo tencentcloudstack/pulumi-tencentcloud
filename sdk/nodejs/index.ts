@@ -10,32 +10,40 @@ export * from "./provider";
 // Export sub-modules:
 import * as address from "./address";
 import * as apigateway from "./apigateway";
+import * as apm from "./apm";
 import * as as from "./as";
 import * as audit from "./audit";
 import * as audits from "./audits";
 import * as availability from "./availability";
 import * as cam from "./cam";
+import * as cat from "./cat";
 import * as cbs from "./cbs";
 import * as ccn from "./ccn";
 import * as cdh from "./cdh";
 import * as cdn from "./cdn";
 import * as cfs from "./cfs";
+import * as chdfs from "./chdfs";
+import * as ci from "./ci";
 import * as ckafka from "./ckafka";
 import * as clb from "./clb";
 import * as cls from "./cls";
 import * as config from "./config";
 import * as cos from "./cos";
+import * as css from "./css";
+import * as cvm from "./cvm";
 import * as cynosdb from "./cynosdb";
 import * as dayu from "./dayu";
+import * as dbbrain from "./dbbrain";
 import * as dc from "./dc";
+import * as dcdb from "./dcdb";
 import * as dcx from "./dcx";
 import * as dnat from "./dnat";
 import * as dnats from "./dnats";
 import * as dnspod from "./dnspod";
 import * as domains from "./domains";
+import * as dts from "./dts";
 import * as eip from "./eip";
 import * as eips from "./eips";
-import * as eks from "./eks";
 import * as elasticsearch from "./elasticsearch";
 import * as emr from "./emr";
 import * as eni from "./eni";
@@ -46,30 +54,47 @@ import * as image from "./image";
 import * as images from "./images";
 import * as instance from "./instance";
 import * as instances from "./instances";
+import * as ipv6 from "./ipv6";
 import * as key from "./key";
 import * as kms from "./kms";
 import * as kubernetes from "./kubernetes";
 import * as lighthouse from "./lighthouse";
+import * as mariadb from "./mariadb";
+import * as mdl from "./mdl";
 import * as mongodb from "./mongodb";
 import * as monitor from "./monitor";
+import * as mps from "./mps";
 import * as mysql from "./mysql";
 import * as nat from "./nat";
+import * as organization from "./organization";
 import * as placement from "./placement";
 import * as postgresql from "./postgresql";
 import * as privatedns from "./privatedns";
 import * as protocol from "./protocol";
+import * as pts from "./pts";
 import * as redis from "./redis";
 import * as reserved from "./reserved";
 import * as route from "./route";
+import * as rum from "./rum";
 import * as scf from "./scf";
 import * as security from "./security";
+import * as ses from "./ses";
+import * as sms from "./sms";
 import * as sqlserver from "./sqlserver";
 import * as ssl from "./ssl";
 import * as ssm from "./ssm";
+import * as sts from "./sts";
 import * as subnet from "./subnet";
+import * as tat from "./tat";
 import * as tcaplus from "./tcaplus";
+import * as tcm from "./tcm";
+import * as tcmq from "./tcmq";
 import * as tcr from "./tcr";
+import * as tdcpg from "./tdcpg";
 import * as tdmq from "./tdmq";
+import * as tem from "./tem";
+import * as teo from "./teo";
+import * as tsf from "./tsf";
 import * as types from "./types";
 import * as user from "./user";
 import * as vod from "./vod";
@@ -79,32 +104,40 @@ import * as vpn from "./vpn";
 export {
     address,
     apigateway,
+    apm,
     as,
     audit,
     audits,
     availability,
     cam,
+    cat,
     cbs,
     ccn,
     cdh,
     cdn,
     cfs,
+    chdfs,
+    ci,
     ckafka,
     clb,
     cls,
     config,
     cos,
+    css,
+    cvm,
     cynosdb,
     dayu,
+    dbbrain,
     dc,
+    dcdb,
     dcx,
     dnat,
     dnats,
     dnspod,
     domains,
+    dts,
     eip,
     eips,
-    eks,
     elasticsearch,
     emr,
     eni,
@@ -115,30 +148,47 @@ export {
     images,
     instance,
     instances,
+    ipv6,
     key,
     kms,
     kubernetes,
     lighthouse,
+    mariadb,
+    mdl,
     mongodb,
     monitor,
+    mps,
     mysql,
     nat,
+    organization,
     placement,
     postgresql,
     privatedns,
     protocol,
+    pts,
     redis,
     reserved,
     route,
+    rum,
     scf,
     security,
+    ses,
+    sms,
     sqlserver,
     ssl,
     ssm,
+    sts,
     subnet,
+    tat,
     tcaplus,
+    tcm,
+    tcmq,
     tcr,
+    tdcpg,
     tdmq,
+    tem,
+    teo,
+    tsf,
     types,
     user,
     vod,

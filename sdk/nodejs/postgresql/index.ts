@@ -6,15 +6,18 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./getInstances";
+export * from "./getParameterTemplates";
 export * from "./getSpecinfos";
 export * from "./getXlogs";
 export * from "./instance";
+export * from "./parameterTemplate";
 export * from "./readonlyAttachment";
 export * from "./readonlyGroup";
 export * from "./readonlyInstance";
 
 // Import resources to register:
 import { Instance } from "./instance";
+import { ParameterTemplate } from "./parameterTemplate";
 import { ReadonlyAttachment } from "./readonlyAttachment";
 import { ReadonlyGroup } from "./readonlyGroup";
 import { ReadonlyInstance } from "./readonlyInstance";
@@ -25,6 +28,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Postgresql/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/parameterTemplate:ParameterTemplate":
+                return new ParameterTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment":
                 return new ReadonlyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup":
@@ -37,6 +42,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/parameterTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/readonlyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/readonlyGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/readonlyInstance", _module)

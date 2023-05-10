@@ -8,6 +8,7 @@ import * as utilities from "../utilities";
 export * from "./account";
 export * from "./accountDbAttachment";
 export * from "./basicInstance";
+export * from "./configBackupStrategy";
 export * from "./db";
 export * from "./getAccountDbAttachments";
 export * from "./getAccounts";
@@ -19,6 +20,7 @@ export * from "./getPublishSubscribes";
 export * from "./getReadonlyGroups";
 export * from "./getZoneConfig";
 export * from "./instance";
+export * from "./migration";
 export * from "./publishSubscribe";
 export * from "./readonlyInstance";
 
@@ -26,8 +28,10 @@ export * from "./readonlyInstance";
 import { Account } from "./account";
 import { AccountDbAttachment } from "./accountDbAttachment";
 import { BasicInstance } from "./basicInstance";
+import { ConfigBackupStrategy } from "./configBackupStrategy";
 import { Db } from "./db";
 import { Instance } from "./instance";
+import { Migration } from "./migration";
 import { PublishSubscribe } from "./publishSubscribe";
 import { ReadonlyInstance } from "./readonlyInstance";
 
@@ -41,10 +45,14 @@ const _module = {
                 return new AccountDbAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/basicInstance:BasicInstance":
                 return new BasicInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy":
+                return new ConfigBackupStrategy(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/db:Db":
                 return new Db(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/migration:Migration":
+                return new Migration(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe":
                 return new PublishSubscribe(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance":
@@ -57,7 +65,9 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/accountDbAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/basicInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configBackupStrategy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/db", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/migration", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/publishSubscribe", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/readonlyInstance", _module)

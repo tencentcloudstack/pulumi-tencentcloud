@@ -21,10 +21,22 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Monitor/alarmNotice:AlarmNotice":
+		r = &AlarmNotice{}
 	case "tencentcloud:Monitor/alarmPolicy:AlarmPolicy":
 		r = &AlarmPolicy{}
 	case "tencentcloud:Monitor/bindingReceiver:BindingReceiver":
 		r = &BindingReceiver{}
+	case "tencentcloud:Monitor/grafanaInstance:GrafanaInstance":
+		r = &GrafanaInstance{}
+	case "tencentcloud:Monitor/grafanaIntegration:GrafanaIntegration":
+		r = &GrafanaIntegration{}
+	case "tencentcloud:Monitor/grafanaNotificationChannel:GrafanaNotificationChannel":
+		r = &GrafanaNotificationChannel{}
+	case "tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin":
+		r = &GrafanaPlugin{}
+	case "tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount":
+		r = &GrafanaSsoAccount{}
 	case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
 		r = &PolicyBindingObject{}
 	case "tencentcloud:Monitor/tmpAlertRule:TmpAlertRule":
@@ -33,16 +45,32 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &TmpCvmAgent{}
 	case "tencentcloud:Monitor/tmpExporterIntegration:TmpExporterIntegration":
 		r = &TmpExporterIntegration{}
+	case "tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig":
+		r = &TmpGrafanaConfig{}
 	case "tencentcloud:Monitor/tmpInstance:TmpInstance":
 		r = &TmpInstance{}
+	case "tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment":
+		r = &TmpManageGrafanaAttachment{}
 	case "tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule":
 		r = &TmpRecordingRule{}
 	case "tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob":
 		r = &TmpScrapeJob{}
 	case "tencentcloud:Monitor/tmpTkeAlertPolicy:TmpTkeAlertPolicy":
 		r = &TmpTkeAlertPolicy{}
+	case "tencentcloud:Monitor/tmpTkeBasicConfig:TmpTkeBasicConfig":
+		r = &TmpTkeBasicConfig{}
+	case "tencentcloud:Monitor/tmpTkeClusterAgent:TmpTkeClusterAgent":
+		r = &TmpTkeClusterAgent{}
+	case "tencentcloud:Monitor/tmpTkeConfig:TmpTkeConfig":
+		r = &TmpTkeConfig{}
+	case "tencentcloud:Monitor/tmpTkeGlobalNotification:TmpTkeGlobalNotification":
+		r = &TmpTkeGlobalNotification{}
+	case "tencentcloud:Monitor/tmpTkeRecordRuleYaml:TmpTkeRecordRuleYaml":
+		r = &TmpTkeRecordRuleYaml{}
 	case "tencentcloud:Monitor/tmpTkeTemplate:TmpTkeTemplate":
 		r = &TmpTkeTemplate{}
+	case "tencentcloud:Monitor/tmpTkeTemplateAttachment:TmpTkeTemplateAttachment":
+		r = &TmpTkeTemplateAttachment{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -58,12 +86,42 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Monitor/alarmNotice",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Monitor/alarmPolicy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Monitor/bindingReceiver",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaIntegration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaNotificationChannel",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaPlugin",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaSsoAccount",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -88,7 +146,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Monitor/tmpGrafanaConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Monitor/tmpInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpManageGrafanaAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -108,7 +176,37 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Monitor/tmpTkeBasicConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpTkeClusterAgent",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpTkeConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpTkeGlobalNotification",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpTkeRecordRuleYaml",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Monitor/tmpTkeTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpTkeTemplateAttachment",
 		&module{version},
 	)
 }

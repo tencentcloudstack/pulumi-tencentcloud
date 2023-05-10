@@ -19,25 +19,22 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cbs.NewStorageAttachment(ctx, "attachment", &Cbs.StorageAttachmentArgs{
-//				InstanceId: pulumi.String("ins-jqlegd42"),
-//				StorageId:  pulumi.String("disk-kdt0sq6m"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewStorageAttachment(ctx, "attachment", &Cbs.StorageAttachmentArgs{
+// 			InstanceId: pulumi.String("ins-jqlegd42"),
+// 			StorageId:  pulumi.String("disk-kdt0sq6m"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -45,9 +42,7 @@ import (
 // CBS storage attachment can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
-//
+//  $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
 // ```
 type StorageAttachment struct {
 	pulumi.CustomResourceState
@@ -152,7 +147,7 @@ func (i *StorageAttachment) ToStorageAttachmentOutputWithContext(ctx context.Con
 // StorageAttachmentArrayInput is an input type that accepts StorageAttachmentArray and StorageAttachmentArrayOutput values.
 // You can construct a concrete instance of `StorageAttachmentArrayInput` via:
 //
-//	StorageAttachmentArray{ StorageAttachmentArgs{...} }
+//          StorageAttachmentArray{ StorageAttachmentArgs{...} }
 type StorageAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +172,7 @@ func (i StorageAttachmentArray) ToStorageAttachmentArrayOutputWithContext(ctx co
 // StorageAttachmentMapInput is an input type that accepts StorageAttachmentMap and StorageAttachmentMapOutput values.
 // You can construct a concrete instance of `StorageAttachmentMapInput` via:
 //
-//	StorageAttachmentMap{ "key": StorageAttachmentArgs{...} }
+//          StorageAttachmentMap{ "key": StorageAttachmentArgs{...} }
 type StorageAttachmentMapInput interface {
 	pulumi.Input
 

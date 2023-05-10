@@ -27,6 +27,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BandwidthLimit{}
 	case "tencentcloud:Ccn/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Ccn/instancesAcceptAttach:InstancesAcceptAttach":
+		r = &InstancesAcceptAttach{}
+	case "tencentcloud:Ccn/instancesResetAttach:InstancesResetAttach":
+		r = &InstancesResetAttach{}
+	case "tencentcloud:Ccn/routes:Routes":
+		r = &Routes{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -53,6 +59,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ccn/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/instancesAcceptAttach",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/instancesResetAttach",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/routes",
 		&module{version},
 	)
 }

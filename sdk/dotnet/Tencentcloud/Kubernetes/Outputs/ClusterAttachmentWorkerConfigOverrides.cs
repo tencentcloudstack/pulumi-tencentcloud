@@ -31,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly ImmutableArray<string> ExtraArgs;
         /// <summary>
+        /// GPU driver parameters.
+        /// </summary>
+        public readonly Outputs.ClusterAttachmentWorkerConfigOverridesGpuArgs? GpuArgs;
+        /// <summary>
         /// Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         public readonly bool? IsSchedule;
@@ -53,6 +57,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             ImmutableArray<string> extraArgs,
 
+            Outputs.ClusterAttachmentWorkerConfigOverridesGpuArgs? gpuArgs,
+
             bool? isSchedule,
 
             string? mountTarget,
@@ -63,6 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             DesiredPodNum = desiredPodNum;
             DockerGraphPath = dockerGraphPath;
             ExtraArgs = extraArgs;
+            GpuArgs = gpuArgs;
             IsSchedule = isSchedule;
             MountTarget = mountTarget;
             UserData = userData;

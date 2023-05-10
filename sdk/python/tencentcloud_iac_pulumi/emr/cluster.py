@@ -35,7 +35,7 @@ class ClusterArgs:
         :param pulumi.Input[str] display_strategy: Display strategy of EMR instance.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
-        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
@@ -112,7 +112,7 @@ class ClusterArgs:
     @pulumi.getter(name="payMode")
     def pay_mode(self) -> pulumi.Input[int]:
         """
-        The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         """
         return pulumi.get(self, "pay_mode")
 
@@ -287,7 +287,7 @@ class _ClusterState:
                - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
                - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
                By default, the cluster Master node internet is enabled.
-        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
         :param pulumi.Input['ClusterResourceSpecArgs'] resource_spec: Resource specification of EMR instance.
@@ -411,7 +411,7 @@ class _ClusterState:
     @pulumi.getter(name="payMode")
     def pay_mode(self) -> Optional[pulumi.Input[int]]:
         """
-        The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         """
         return pulumi.get(self, "pay_mode")
 
@@ -614,7 +614,7 @@ class Cluster(pulumi.CustomResource):
                - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
                - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
                By default, the cluster Master node internet is enabled.
-        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
         :param pulumi.Input[pulumi.InputType['ClusterResourceSpecArgs']] resource_spec: Resource specification of EMR instance.
@@ -810,7 +810,7 @@ class Cluster(pulumi.CustomResource):
                - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
                - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
                By default, the cluster Master node internet is enabled.
-        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
         :param pulumi.Input[pulumi.InputType['ClusterResourceSpecArgs']] resource_spec: Resource specification of EMR instance.
@@ -899,7 +899,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="payMode")
     def pay_mode(self) -> pulumi.Output[int]:
         """
-        The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         """
         return pulumi.get(self, "pay_mode")
 

@@ -35,7 +35,7 @@ class TopicArgs:
         :param pulumi.Input[str] clean_up_policy: Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
         :param pulumi.Input[bool] enable_white_list: Whether to open the ip whitelist, `true`: open, `false`: close.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_white_lists: Ip whitelist, quota limit, required when enableWhileList=true.
-        :param pulumi.Input[int] max_message_bytes: Max message bytes.
+        :param pulumi.Input[int] max_message_bytes: Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         :param pulumi.Input[str] note: The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
         :param pulumi.Input[int] retention: Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
         :param pulumi.Input[int] segment: Segment scrolling time, in ms, the current minimum is 3600000ms.
@@ -153,7 +153,7 @@ class TopicArgs:
     @pulumi.getter(name="maxMessageBytes")
     def max_message_bytes(self) -> Optional[pulumi.Input[int]]:
         """
-        Max message bytes.
+        Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         """
         return pulumi.get(self, "max_message_bytes")
 
@@ -254,7 +254,7 @@ class _TopicState:
         :param pulumi.Input[int] forward_status: Data backup cos status. Valid values: `0`, `1`. `1`: do not open data backup, `0`: open data backup.
         :param pulumi.Input[str] instance_id: Ckafka instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_white_lists: Ip whitelist, quota limit, required when enableWhileList=true.
-        :param pulumi.Input[int] max_message_bytes: Max message bytes.
+        :param pulumi.Input[int] max_message_bytes: Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         :param pulumi.Input[str] message_storage_location: Message storage location.
         :param pulumi.Input[str] note: The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
         :param pulumi.Input[int] partition_num: The number of partition.
@@ -405,7 +405,7 @@ class _TopicState:
     @pulumi.getter(name="maxMessageBytes")
     def max_message_bytes(self) -> Optional[pulumi.Input[int]]:
         """
-        Max message bytes.
+        Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         """
         return pulumi.get(self, "max_message_bytes")
 
@@ -595,7 +595,7 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[bool] enable_white_list: Whether to open the ip whitelist, `true`: open, `false`: close.
         :param pulumi.Input[str] instance_id: Ckafka instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_white_lists: Ip whitelist, quota limit, required when enableWhileList=true.
-        :param pulumi.Input[int] max_message_bytes: Max message bytes.
+        :param pulumi.Input[int] max_message_bytes: Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         :param pulumi.Input[str] note: The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
         :param pulumi.Input[int] partition_num: The number of partition.
         :param pulumi.Input[int] replica_num: The number of replica.
@@ -760,7 +760,7 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[int] forward_status: Data backup cos status. Valid values: `0`, `1`. `1`: do not open data backup, `0`: open data backup.
         :param pulumi.Input[str] instance_id: Ckafka instance ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_white_lists: Ip whitelist, quota limit, required when enableWhileList=true.
-        :param pulumi.Input[int] max_message_bytes: Max message bytes.
+        :param pulumi.Input[int] max_message_bytes: Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         :param pulumi.Input[str] message_storage_location: Message storage location.
         :param pulumi.Input[str] note: The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
         :param pulumi.Input[int] partition_num: The number of partition.
@@ -863,9 +863,9 @@ class Topic(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="maxMessageBytes")
-    def max_message_bytes(self) -> pulumi.Output[Optional[int]]:
+    def max_message_bytes(self) -> pulumi.Output[int]:
         """
-        Max message bytes.
+        Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         """
         return pulumi.get(self, "max_message_bytes")
 

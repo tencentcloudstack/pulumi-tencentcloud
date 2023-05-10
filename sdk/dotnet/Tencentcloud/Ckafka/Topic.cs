@@ -108,10 +108,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<ImmutableArray<string>> IpWhiteLists { get; private set; } = null!;
 
         /// <summary>
-        /// Max message bytes.
+        /// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         /// </summary>
         [Output("maxMessageBytes")]
-        public Output<int?> MaxMessageBytes { get; private set; } = null!;
+        public Output<int> MaxMessageBytes { get; private set; } = null!;
 
         /// <summary>
         /// Message storage location.
@@ -251,7 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
 
         /// <summary>
-        /// Max message bytes.
+        /// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         /// </summary>
         [Input("maxMessageBytes")]
         public Input<int>? MaxMessageBytes { get; set; }
@@ -366,7 +366,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
 
         /// <summary>
-        /// Max message bytes.
+        /// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
         /// </summary>
         [Input("maxMessageBytes")]
         public Input<int>? MaxMessageBytes { get; set; }

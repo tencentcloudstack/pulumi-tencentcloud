@@ -7,6 +7,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['InstanceArgs', 'Instance']
 
@@ -20,6 +22,7 @@ class InstanceArgs:
                  force_delete: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
+                 params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -43,13 +46,14 @@ class InstanceArgs:
         :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
+        :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
@@ -70,6 +74,8 @@ class InstanceArgs:
             pulumi.set(__self__, "name", name)
         if no_auth is not None:
             pulumi.set(__self__, "no_auth", no_auth)
+        if params_template_id is not None:
+            pulumi.set(__self__, "params_template_id", params_template_id)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if port is not None:
@@ -187,6 +193,18 @@ class InstanceArgs:
         pulumi.set(self, "no_auth", value)
 
     @property
+    @pulumi.getter(name="paramsTemplateId")
+    def params_template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify params template id. If not set, will use default template.
+        """
+        return pulumi.get(self, "params_template_id")
+
+    @params_template_id.setter
+    def params_template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "params_template_id", value)
+
+    @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
@@ -238,7 +256,7 @@ class InstanceArgs:
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of instance copies. This is not required for standalone and master slave versions.
+        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         """
         return pulumi.get(self, "redis_replicas_num")
 
@@ -262,7 +280,7 @@ class InstanceArgs:
     @pulumi.getter(name="replicaZoneIds")
     def replica_zone_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
         """
-        ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         """
         return pulumi.get(self, "replica_zone_ids")
 
@@ -367,6 +385,8 @@ class _InstanceState:
                  mem_size: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
+                 node_infos: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoArgs']]]] = None,
+                 params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -393,13 +413,15 @@ class _InstanceState:
         :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoArgs']]] node_infos: Readonly Primary/Replica nodes.
+        :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] status: Current status of an instance, maybe: init, processing, online, isolate and todelete.
@@ -427,6 +449,10 @@ class _InstanceState:
             pulumi.set(__self__, "name", name)
         if no_auth is not None:
             pulumi.set(__self__, "no_auth", no_auth)
+        if node_infos is not None:
+            pulumi.set(__self__, "node_infos", node_infos)
+        if params_template_id is not None:
+            pulumi.set(__self__, "params_template_id", params_template_id)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if port is not None:
@@ -570,6 +596,30 @@ class _InstanceState:
         pulumi.set(self, "no_auth", value)
 
     @property
+    @pulumi.getter(name="nodeInfos")
+    def node_infos(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoArgs']]]]:
+        """
+        Readonly Primary/Replica nodes.
+        """
+        return pulumi.get(self, "node_infos")
+
+    @node_infos.setter
+    def node_infos(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoArgs']]]]):
+        pulumi.set(self, "node_infos", value)
+
+    @property
+    @pulumi.getter(name="paramsTemplateId")
+    def params_template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify params template id. If not set, will use default template.
+        """
+        return pulumi.get(self, "params_template_id")
+
+    @params_template_id.setter
+    def params_template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "params_template_id", value)
+
+    @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
@@ -621,7 +671,7 @@ class _InstanceState:
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of instance copies. This is not required for standalone and master slave versions.
+        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         """
         return pulumi.get(self, "redis_replicas_num")
 
@@ -645,7 +695,7 @@ class _InstanceState:
     @pulumi.getter(name="replicaZoneIds")
     def replica_zone_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
         """
-        ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         """
         return pulumi.get(self, "replica_zone_ids")
 
@@ -762,6 +812,7 @@ class Instance(pulumi.CustomResource):
                  mem_size: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
+                 params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -780,6 +831,10 @@ class Instance(pulumi.CustomResource):
         """
         Provides a resource to create a Redis instance and set its attributes.
 
+        > **NOTE:** The argument vpc_id and subnet_id is now required because Basic Network Instance is no longer supported.
+
+        > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
+
         ## Import
 
         Redis instance can be imported, e.g.
@@ -797,13 +852,14 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
+        :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
@@ -820,6 +876,10 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a Redis instance and set its attributes.
+
+        > **NOTE:** The argument vpc_id and subnet_id is now required because Basic Network Instance is no longer supported.
+
+        > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 
         ## Import
 
@@ -851,6 +911,7 @@ class Instance(pulumi.CustomResource):
                  mem_size: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
+                 params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -890,6 +951,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["mem_size"] = mem_size
             __props__.__dict__["name"] = name
             __props__.__dict__["no_auth"] = no_auth
+            __props__.__dict__["params_template_id"] = params_template_id
             __props__.__dict__["password"] = password
             __props__.__dict__["port"] = port
             __props__.__dict__["prepaid_period"] = prepaid_period
@@ -909,6 +971,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
             __props__.__dict__["ip"] = None
+            __props__.__dict__["node_infos"] = None
             __props__.__dict__["status"] = None
         super(Instance, __self__).__init__(
             'tencentcloud:Redis/instance:Instance',
@@ -929,6 +992,8 @@ class Instance(pulumi.CustomResource):
             mem_size: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
             no_auth: Optional[pulumi.Input[bool]] = None,
+            node_infos: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoArgs']]]]] = None,
+            params_template_id: Optional[pulumi.Input[str]] = None,
             password: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[int]] = None,
             prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -960,13 +1025,15 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoArgs']]]] node_infos: Readonly Primary/Replica nodes.
+        :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] status: Current status of an instance, maybe: init, processing, online, isolate and todelete.
@@ -989,6 +1056,8 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["mem_size"] = mem_size
         __props__.__dict__["name"] = name
         __props__.__dict__["no_auth"] = no_auth
+        __props__.__dict__["node_infos"] = node_infos
+        __props__.__dict__["params_template_id"] = params_template_id
         __props__.__dict__["password"] = password
         __props__.__dict__["port"] = port
         __props__.__dict__["prepaid_period"] = prepaid_period
@@ -1079,6 +1148,22 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "no_auth")
 
     @property
+    @pulumi.getter(name="nodeInfos")
+    def node_infos(self) -> pulumi.Output[Sequence['outputs.InstanceNodeInfo']]:
+        """
+        Readonly Primary/Replica nodes.
+        """
+        return pulumi.get(self, "node_infos")
+
+    @property
+    @pulumi.getter(name="paramsTemplateId")
+    def params_template_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Specify params template id. If not set, will use default template.
+        """
+        return pulumi.get(self, "params_template_id")
+
+    @property
     @pulumi.getter
     def password(self) -> pulumi.Output[Optional[str]]:
         """
@@ -1114,7 +1199,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> pulumi.Output[Optional[int]]:
         """
-        The number of instance copies. This is not required for standalone and master slave versions.
+        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         """
         return pulumi.get(self, "redis_replicas_num")
 
@@ -1130,7 +1215,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="replicaZoneIds")
     def replica_zone_ids(self) -> pulumi.Output[Optional[Sequence[int]]]:
         """
-        ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         """
         return pulumi.get(self, "replica_zone_ids")
 

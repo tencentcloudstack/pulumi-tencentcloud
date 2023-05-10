@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
     public sealed class ClusterClusterAudit
     {
         /// <summary>
+        /// when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
+        /// </summary>
+        public readonly bool? DeleteAuditLogAndTopic;
+        /// <summary>
         /// Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
         /// </summary>
         public readonly bool Enabled;
@@ -29,12 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
         [OutputConstructor]
         private ClusterClusterAudit(
+            bool? deleteAuditLogAndTopic,
+
             bool enabled,
 
             string? logSetId,
 
             string? topicId)
         {
+            DeleteAuditLogAndTopic = deleteAuditLogAndTopic;
             Enabled = enabled;
             LogSetId = logSetId;
             TopicId = topicId;

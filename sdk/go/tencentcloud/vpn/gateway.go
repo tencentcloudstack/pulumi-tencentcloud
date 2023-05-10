@@ -19,62 +19,56 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
-//				Bandwidth: pulumi.Int(5),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("test"),
-//				},
-//				VpcId: pulumi.String("vpc-dk8zmwuf"),
-//				Zone:  pulumi.String("ap-guangzhou-3"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+// 			Bandwidth: pulumi.Int(5),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			VpcId: pulumi.String("vpc-dk8zmwuf"),
+// 			Zone:  pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # PREPAID VPN gateway
+// PREPAID VPN gateway
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
-//				Bandwidth:     pulumi.Int(5),
-//				ChargeType:    pulumi.String("PREPAID"),
-//				PrepaidPeriod: pulumi.Int(1),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("test"),
-//				},
-//				VpcId: pulumi.String("vpc-dk8zmwuf"),
-//				Zone:  pulumi.String("ap-guangzhou-3"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+// 			Bandwidth:     pulumi.Int(5),
+// 			ChargeType:    pulumi.String("PREPAID"),
+// 			PrepaidPeriod: pulumi.Int(1),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			VpcId: pulumi.String("vpc-dk8zmwuf"),
+// 			Zone:  pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -82,9 +76,7 @@ import (
 // VPN gateway can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
-//
+//  $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
 // ```
 type Gateway struct {
 	pulumi.CustomResourceState
@@ -107,9 +99,9 @@ type Gateway struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
 	NewPurchasePlan pulumi.StringOutput `pulumi:"newPurchasePlan"`
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
 	PrepaidRenewFlag pulumi.StringPtrOutput `pulumi:"prepaidRenewFlag"`
 	// Public IP of the VPN gateway.
 	PublicIpAddress pulumi.StringOutput `pulumi:"publicIpAddress"`
@@ -178,9 +170,9 @@ type gatewayState struct {
 	Name *string `pulumi:"name"`
 	// The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
 	NewPurchasePlan *string `pulumi:"newPurchasePlan"`
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// Public IP of the VPN gateway.
 	PublicIpAddress *string `pulumi:"publicIpAddress"`
@@ -217,9 +209,9 @@ type GatewayState struct {
 	Name pulumi.StringPtrInput
 	// The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
 	NewPurchasePlan pulumi.StringPtrInput
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// Public IP of the VPN gateway.
 	PublicIpAddress pulumi.StringPtrInput
@@ -252,9 +244,9 @@ type gatewayArgs struct {
 	MaxConnection *int `pulumi:"maxConnection"`
 	// Name of the VPN gateway. The length of character is limited to 1-60.
 	Name *string `pulumi:"name"`
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -278,9 +270,9 @@ type GatewayArgs struct {
 	MaxConnection pulumi.IntPtrInput
 	// Name of the VPN gateway. The length of character is limited to 1-60.
 	Name pulumi.StringPtrInput
-	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+	// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
 	PrepaidPeriod pulumi.IntPtrInput
-	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+	// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
@@ -318,7 +310,7 @@ func (i *Gateway) ToGatewayOutputWithContext(ctx context.Context) GatewayOutput 
 // GatewayArrayInput is an input type that accepts GatewayArray and GatewayArrayOutput values.
 // You can construct a concrete instance of `GatewayArrayInput` via:
 //
-//	GatewayArray{ GatewayArgs{...} }
+//          GatewayArray{ GatewayArgs{...} }
 type GatewayArrayInput interface {
 	pulumi.Input
 
@@ -343,7 +335,7 @@ func (i GatewayArray) ToGatewayArrayOutputWithContext(ctx context.Context) Gatew
 // GatewayMapInput is an input type that accepts GatewayMap and GatewayMapOutput values.
 // You can construct a concrete instance of `GatewayMapInput` via:
 //
-//	GatewayMap{ "key": GatewayArgs{...} }
+//          GatewayMap{ "key": GatewayArgs{...} }
 type GatewayMapInput interface {
 	pulumi.Input
 
@@ -424,12 +416,12 @@ func (o GatewayOutput) NewPurchasePlan() pulumi.StringOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.NewPurchasePlan }).(pulumi.StringOutput)
 }
 
-// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
 func (o GatewayOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.IntPtrOutput { return v.PrepaidPeriod }).(pulumi.IntPtrOutput)
 }
 
-// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
 func (o GatewayOutput) PrepaidRenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringPtrOutput { return v.PrepaidRenewFlag }).(pulumi.StringPtrOutput)
 }

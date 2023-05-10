@@ -7,15 +7,198 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'ImmutableTagRuleRule',
+    'InstanceReplication',
     'InstanceSecurityPolicy',
+    'ManageReplicationOperationPeerReplicationOption',
+    'ManageReplicationOperationRule',
+    'ManageReplicationOperationRuleFilter',
+    'NamespaceCveWhitelistItem',
+    'TagRetentionRuleRetentionRule',
+    'WebhookTriggerTrigger',
+    'WebhookTriggerTriggerTarget',
+    'WebhookTriggerTriggerTargetHeader',
+    'GetImagesImageInfoListResult',
     'GetInstancesInstanceListResult',
     'GetNamespacesNamespaceListResult',
     'GetRepositoriesRepositoryListResult',
     'GetTokensTokenListResult',
     'GetVpcAttachmentsVpcAttachmentListResult',
+    'GetWebhookTriggerLogsLogResult',
 ]
+
+@pulumi.output_type
+class ImmutableTagRuleRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "repositoryDecoration":
+            suggest = "repository_decoration"
+        elif key == "repositoryPattern":
+            suggest = "repository_pattern"
+        elif key == "tagDecoration":
+            suggest = "tag_decoration"
+        elif key == "tagPattern":
+            suggest = "tag_pattern"
+        elif key == "nsName":
+            suggest = "ns_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ImmutableTagRuleRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ImmutableTagRuleRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ImmutableTagRuleRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 repository_decoration: str,
+                 repository_pattern: str,
+                 tag_decoration: str,
+                 tag_pattern: str,
+                 disabled: Optional[bool] = None,
+                 id: Optional[int] = None,
+                 ns_name: Optional[str] = None):
+        """
+        :param str repository_decoration: repository decoration type:repoMatches or repoExcludes.
+        :param str repository_pattern: repository matching rules.
+        :param str tag_decoration: tag decoration type: matches or excludes.
+        :param str tag_pattern: tag matching rules.
+        :param bool disabled: disable rule.
+        :param int id: ID of the resource.
+        """
+        pulumi.set(__self__, "repository_decoration", repository_decoration)
+        pulumi.set(__self__, "repository_pattern", repository_pattern)
+        pulumi.set(__self__, "tag_decoration", tag_decoration)
+        pulumi.set(__self__, "tag_pattern", tag_pattern)
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if ns_name is not None:
+            pulumi.set(__self__, "ns_name", ns_name)
+
+    @property
+    @pulumi.getter(name="repositoryDecoration")
+    def repository_decoration(self) -> str:
+        """
+        repository decoration type:repoMatches or repoExcludes.
+        """
+        return pulumi.get(self, "repository_decoration")
+
+    @property
+    @pulumi.getter(name="repositoryPattern")
+    def repository_pattern(self) -> str:
+        """
+        repository matching rules.
+        """
+        return pulumi.get(self, "repository_pattern")
+
+    @property
+    @pulumi.getter(name="tagDecoration")
+    def tag_decoration(self) -> str:
+        """
+        tag decoration type: matches or excludes.
+        """
+        return pulumi.get(self, "tag_decoration")
+
+    @property
+    @pulumi.getter(name="tagPattern")
+    def tag_pattern(self) -> str:
+        """
+        tag matching rules.
+        """
+        return pulumi.get(self, "tag_pattern")
+
+    @property
+    @pulumi.getter
+    def disabled(self) -> Optional[bool]:
+        """
+        disable rule.
+        """
+        return pulumi.get(self, "disabled")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[int]:
+        """
+        ID of the resource.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="nsName")
+    def ns_name(self) -> Optional[str]:
+        return pulumi.get(self, "ns_name")
+
+
+@pulumi.output_type
+class InstanceReplication(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "regionId":
+            suggest = "region_id"
+        elif key == "synTag":
+            suggest = "syn_tag"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstanceReplication. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstanceReplication.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstanceReplication.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 id: Optional[str] = None,
+                 region_id: Optional[int] = None,
+                 syn_tag: Optional[bool] = None):
+        """
+        :param str id: ID of the resource.
+        :param int region_id: Replication region ID, check the example at the top of page to find out id of region.
+        :param bool syn_tag: Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
+        """
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if region_id is not None:
+            pulumi.set(__self__, "region_id", region_id)
+        if syn_tag is not None:
+            pulumi.set(__self__, "syn_tag", syn_tag)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        """
+        ID of the resource.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> Optional[int]:
+        """
+        Replication region ID, check the example at the top of page to find out id of region.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="synTag")
+    def syn_tag(self) -> Optional[bool]:
+        """
+        Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
+        """
+        return pulumi.get(self, "syn_tag")
+
 
 @pulumi.output_type
 class InstanceSecurityPolicy(dict):
@@ -79,6 +262,479 @@ class InstanceSecurityPolicy(dict):
     @pulumi.getter
     def version(self) -> Optional[str]:
         return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class ManageReplicationOperationPeerReplicationOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "enablePeerReplication":
+            suggest = "enable_peer_replication"
+        elif key == "peerRegistryToken":
+            suggest = "peer_registry_token"
+        elif key == "peerRegistryUin":
+            suggest = "peer_registry_uin"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ManageReplicationOperationPeerReplicationOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ManageReplicationOperationPeerReplicationOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ManageReplicationOperationPeerReplicationOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enable_peer_replication: bool,
+                 peer_registry_token: str,
+                 peer_registry_uin: str):
+        """
+        :param bool enable_peer_replication: whether to enable cross-master account instance synchronization.
+        :param str peer_registry_token: access permanent token of the instance to be synchronized.
+        :param str peer_registry_uin: uin of the instance to be synchronized.
+        """
+        pulumi.set(__self__, "enable_peer_replication", enable_peer_replication)
+        pulumi.set(__self__, "peer_registry_token", peer_registry_token)
+        pulumi.set(__self__, "peer_registry_uin", peer_registry_uin)
+
+    @property
+    @pulumi.getter(name="enablePeerReplication")
+    def enable_peer_replication(self) -> bool:
+        """
+        whether to enable cross-master account instance synchronization.
+        """
+        return pulumi.get(self, "enable_peer_replication")
+
+    @property
+    @pulumi.getter(name="peerRegistryToken")
+    def peer_registry_token(self) -> str:
+        """
+        access permanent token of the instance to be synchronized.
+        """
+        return pulumi.get(self, "peer_registry_token")
+
+    @property
+    @pulumi.getter(name="peerRegistryUin")
+    def peer_registry_uin(self) -> str:
+        """
+        uin of the instance to be synchronized.
+        """
+        return pulumi.get(self, "peer_registry_uin")
+
+
+@pulumi.output_type
+class ManageReplicationOperationRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "destNamespace":
+            suggest = "dest_namespace"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ManageReplicationOperationRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ManageReplicationOperationRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ManageReplicationOperationRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 dest_namespace: str,
+                 filters: Sequence['outputs.ManageReplicationOperationRuleFilter'],
+                 name: str,
+                 override: bool):
+        """
+        :param str dest_namespace: target namespace.
+        :param Sequence['ManageReplicationOperationRuleFilterArgs'] filters: sync filters.
+        :param str name: synchronization rule names.
+        :param bool override: whether to cover.
+        """
+        pulumi.set(__self__, "dest_namespace", dest_namespace)
+        pulumi.set(__self__, "filters", filters)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "override", override)
+
+    @property
+    @pulumi.getter(name="destNamespace")
+    def dest_namespace(self) -> str:
+        """
+        target namespace.
+        """
+        return pulumi.get(self, "dest_namespace")
+
+    @property
+    @pulumi.getter
+    def filters(self) -> Sequence['outputs.ManageReplicationOperationRuleFilter']:
+        """
+        sync filters.
+        """
+        return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        synchronization rule names.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def override(self) -> bool:
+        """
+        whether to cover.
+        """
+        return pulumi.get(self, "override")
+
+
+@pulumi.output_type
+class ManageReplicationOperationRuleFilter(dict):
+    def __init__(__self__, *,
+                 type: str,
+                 value: Optional[str] = None):
+        """
+        :param str type: type (name, tag, and resource).
+        :param str value: empty by default.
+        """
+        pulumi.set(__self__, "type", type)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        type (name, tag, and resource).
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        empty by default.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class NamespaceCveWhitelistItem(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cveId":
+            suggest = "cve_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NamespaceCveWhitelistItem. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NamespaceCveWhitelistItem.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NamespaceCveWhitelistItem.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cve_id: Optional[str] = None):
+        """
+        :param str cve_id: Vulnerability Whitelist ID.
+        """
+        if cve_id is not None:
+            pulumi.set(__self__, "cve_id", cve_id)
+
+    @property
+    @pulumi.getter(name="cveId")
+    def cve_id(self) -> Optional[str]:
+        """
+        Vulnerability Whitelist ID.
+        """
+        return pulumi.get(self, "cve_id")
+
+
+@pulumi.output_type
+class TagRetentionRuleRetentionRule(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: int):
+        """
+        :param str key: The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+        :param int value: corresponding values for rule settings.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        """
+        corresponding values for rule settings.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class WebhookTriggerTrigger(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "eventTypes":
+            suggest = "event_types"
+        elif key == "namespaceId":
+            suggest = "namespace_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WebhookTriggerTrigger. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WebhookTriggerTrigger.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WebhookTriggerTrigger.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 condition: str,
+                 enabled: bool,
+                 event_types: Sequence[str],
+                 name: str,
+                 targets: Sequence['outputs.WebhookTriggerTriggerTarget'],
+                 description: Optional[str] = None,
+                 id: Optional[int] = None,
+                 namespace_id: Optional[int] = None):
+        """
+        :param str condition: trigger rule.
+        :param bool enabled: enable trigger.
+        :param Sequence[str] event_types: trigger action.
+        :param str name: trigger name.
+        :param Sequence['WebhookTriggerTriggerTargetArgs'] targets: trigger target.
+        :param str description: trigger description.
+        :param int id: ID of the resource.
+        :param int namespace_id: the namespace Id to which the trigger belongs.
+        """
+        pulumi.set(__self__, "condition", condition)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "event_types", event_types)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "targets", targets)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if namespace_id is not None:
+            pulumi.set(__self__, "namespace_id", namespace_id)
+
+    @property
+    @pulumi.getter
+    def condition(self) -> str:
+        """
+        trigger rule.
+        """
+        return pulumi.get(self, "condition")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        enable trigger.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="eventTypes")
+    def event_types(self) -> Sequence[str]:
+        """
+        trigger action.
+        """
+        return pulumi.get(self, "event_types")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        trigger name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def targets(self) -> Sequence['outputs.WebhookTriggerTriggerTarget']:
+        """
+        trigger target.
+        """
+        return pulumi.get(self, "targets")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        trigger description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[int]:
+        """
+        ID of the resource.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> Optional[int]:
+        """
+        the namespace Id to which the trigger belongs.
+        """
+        return pulumi.get(self, "namespace_id")
+
+
+@pulumi.output_type
+class WebhookTriggerTriggerTarget(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 headers: Optional[Sequence['outputs.WebhookTriggerTriggerTargetHeader']] = None):
+        """
+        :param str address: target address.
+        :param Sequence['WebhookTriggerTriggerTargetHeaderArgs'] headers: custom Headers.
+        """
+        pulumi.set(__self__, "address", address)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        target address.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[Sequence['outputs.WebhookTriggerTriggerTargetHeader']]:
+        """
+        custom Headers.
+        """
+        return pulumi.get(self, "headers")
+
+
+@pulumi.output_type
+class WebhookTriggerTriggerTargetHeader(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 values: Sequence[str]):
+        """
+        :param str key: Header Key.
+        :param Sequence[str] values: Header Values.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Header Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Header Values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetImagesImageInfoListResult(dict):
+    def __init__(__self__, *,
+                 digest: str,
+                 image_version: str,
+                 kind: str,
+                 kms_signature: str,
+                 size: int,
+                 update_time: str):
+        """
+        :param str digest: specify image digest for lookup.
+        :param str image_version: image version name, default is fuzzy match.
+        :param str kind: product type,note: this field may return null, indicating that no valid value can be obtained.
+        :param str kms_signature: kms signature information,note: this field may return null, indicating that no valid value can be obtained.
+        :param int size: image size (unit: byte).
+        :param str update_time: update time.
+        """
+        pulumi.set(__self__, "digest", digest)
+        pulumi.set(__self__, "image_version", image_version)
+        pulumi.set(__self__, "kind", kind)
+        pulumi.set(__self__, "kms_signature", kms_signature)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter
+    def digest(self) -> str:
+        """
+        specify image digest for lookup.
+        """
+        return pulumi.get(self, "digest")
+
+    @property
+    @pulumi.getter(name="imageVersion")
+    def image_version(self) -> str:
+        """
+        image version name, default is fuzzy match.
+        """
+        return pulumi.get(self, "image_version")
+
+    @property
+    @pulumi.getter
+    def kind(self) -> str:
+        """
+        product type,note: this field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "kind")
+
+    @property
+    @pulumi.getter(name="kmsSignature")
+    def kms_signature(self) -> str:
+        """
+        kms signature information,note: this field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "kms_signature")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        image size (unit: byte).
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        update time.
+        """
+        return pulumi.get(self, "update_time")
 
 
 @pulumi.output_type
@@ -168,14 +824,25 @@ class GetInstancesInstanceListResult(dict):
 @pulumi.output_type
 class GetNamespacesNamespaceListResult(dict):
     def __init__(__self__, *,
+                 id: int,
                  is_public: bool,
                  name: str):
         """
+        :param int id: ID of TCR namespace.
         :param bool is_public: Indicate that the namespace is public or not.
         :param str name: Name of TCR namespace.
         """
+        pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "is_public", is_public)
         pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        ID of TCR namespace.
+        """
+        return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="isPublic")
@@ -411,5 +1078,100 @@ class GetVpcAttachmentsVpcAttachmentListResult(dict):
         ID of VPC to query.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetWebhookTriggerLogsLogResult(dict):
+    def __init__(__self__, *,
+                 creation_time: str,
+                 detail: str,
+                 event_type: str,
+                 id: int,
+                 notify_type: str,
+                 status: str,
+                 trigger_id: int,
+                 update_time: str):
+        """
+        :param str creation_time: creation time.
+        :param str detail: webhook trigger detail.
+        :param str event_type: event type.
+        :param int id: log id.
+        :param str notify_type: notification type.
+        :param str status: status.
+        :param int trigger_id: trigger id.
+        :param str update_time: update time.
+        """
+        pulumi.set(__self__, "creation_time", creation_time)
+        pulumi.set(__self__, "detail", detail)
+        pulumi.set(__self__, "event_type", event_type)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "notify_type", notify_type)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "trigger_id", trigger_id)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="creationTime")
+    def creation_time(self) -> str:
+        """
+        creation time.
+        """
+        return pulumi.get(self, "creation_time")
+
+    @property
+    @pulumi.getter
+    def detail(self) -> str:
+        """
+        webhook trigger detail.
+        """
+        return pulumi.get(self, "detail")
+
+    @property
+    @pulumi.getter(name="eventType")
+    def event_type(self) -> str:
+        """
+        event type.
+        """
+        return pulumi.get(self, "event_type")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        log id.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="notifyType")
+    def notify_type(self) -> str:
+        """
+        notification type.
+        """
+        return pulumi.get(self, "notify_type")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="triggerId")
+    def trigger_id(self) -> int:
+        """
+        trigger id.
+        """
+        return pulumi.get(self, "trigger_id")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        update time.
+        """
+        return pulumi.get(self, "update_time")
 
 

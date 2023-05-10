@@ -10,6 +10,439 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AuditLogFileFilter struct {
+	// Affects the number of rows. Indicates to filter audit logs whose number of affected rows is greater than this value.
+	AffectRows *int `pulumi:"affectRows"`
+	// Database name.
+	DbNames []string `pulumi:"dbNames"`
+	// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+	ExecTime *int `pulumi:"execTime"`
+	// Client address.
+	Hosts []string `pulumi:"hosts"`
+	// The name of policy.
+	PolicyNames []string `pulumi:"policyNames"`
+	// SQL statement. support fuzzy matching.
+	Sql *string `pulumi:"sql"`
+	// SQL type. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlType *string `pulumi:"sqlType"`
+	// SQL type. Supports simultaneous query of multiple types. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlTypes []string `pulumi:"sqlTypes"`
+	// SQL statement. Support passing multiple sql statements.
+	Sqls []string `pulumi:"sqls"`
+	// Table name.
+	TableNames []string `pulumi:"tableNames"`
+	// User name.
+	Users []string `pulumi:"users"`
+}
+
+// AuditLogFileFilterInput is an input type that accepts AuditLogFileFilterArgs and AuditLogFileFilterOutput values.
+// You can construct a concrete instance of `AuditLogFileFilterInput` via:
+//
+//          AuditLogFileFilterArgs{...}
+type AuditLogFileFilterInput interface {
+	pulumi.Input
+
+	ToAuditLogFileFilterOutput() AuditLogFileFilterOutput
+	ToAuditLogFileFilterOutputWithContext(context.Context) AuditLogFileFilterOutput
+}
+
+type AuditLogFileFilterArgs struct {
+	// Affects the number of rows. Indicates to filter audit logs whose number of affected rows is greater than this value.
+	AffectRows pulumi.IntPtrInput `pulumi:"affectRows"`
+	// Database name.
+	DbNames pulumi.StringArrayInput `pulumi:"dbNames"`
+	// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+	ExecTime pulumi.IntPtrInput `pulumi:"execTime"`
+	// Client address.
+	Hosts pulumi.StringArrayInput `pulumi:"hosts"`
+	// The name of policy.
+	PolicyNames pulumi.StringArrayInput `pulumi:"policyNames"`
+	// SQL statement. support fuzzy matching.
+	Sql pulumi.StringPtrInput `pulumi:"sql"`
+	// SQL type. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlType pulumi.StringPtrInput `pulumi:"sqlType"`
+	// SQL type. Supports simultaneous query of multiple types. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+	SqlTypes pulumi.StringArrayInput `pulumi:"sqlTypes"`
+	// SQL statement. Support passing multiple sql statements.
+	Sqls pulumi.StringArrayInput `pulumi:"sqls"`
+	// Table name.
+	TableNames pulumi.StringArrayInput `pulumi:"tableNames"`
+	// User name.
+	Users pulumi.StringArrayInput `pulumi:"users"`
+}
+
+func (AuditLogFileFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileFilter)(nil)).Elem()
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterOutput() AuditLogFileFilterOutput {
+	return i.ToAuditLogFileFilterOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterOutputWithContext(ctx context.Context) AuditLogFileFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterOutput)
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return i.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterOutput).ToAuditLogFileFilterPtrOutputWithContext(ctx)
+}
+
+// AuditLogFileFilterPtrInput is an input type that accepts AuditLogFileFilterArgs, AuditLogFileFilterPtr and AuditLogFileFilterPtrOutput values.
+// You can construct a concrete instance of `AuditLogFileFilterPtrInput` via:
+//
+//          AuditLogFileFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type AuditLogFileFilterPtrInput interface {
+	pulumi.Input
+
+	ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput
+	ToAuditLogFileFilterPtrOutputWithContext(context.Context) AuditLogFileFilterPtrOutput
+}
+
+type auditLogFileFilterPtrType AuditLogFileFilterArgs
+
+func AuditLogFileFilterPtr(v *AuditLogFileFilterArgs) AuditLogFileFilterPtrInput {
+	return (*auditLogFileFilterPtrType)(v)
+}
+
+func (*auditLogFileFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AuditLogFileFilter)(nil)).Elem()
+}
+
+func (i *auditLogFileFilterPtrType) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return i.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *auditLogFileFilterPtrType) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterPtrOutput)
+}
+
+type AuditLogFileFilterOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileFilter)(nil)).Elem()
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterOutput() AuditLogFileFilterOutput {
+	return o
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterOutputWithContext(ctx context.Context) AuditLogFileFilterOutput {
+	return o
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return o.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AuditLogFileFilter) *AuditLogFileFilter {
+		return &v
+	}).(AuditLogFileFilterPtrOutput)
+}
+
+// Affects the number of rows. Indicates to filter audit logs whose number of affected rows is greater than this value.
+func (o AuditLogFileFilterOutput) AffectRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *int { return v.AffectRows }).(pulumi.IntPtrOutput)
+}
+
+// Database name.
+func (o AuditLogFileFilterOutput) DbNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.DbNames }).(pulumi.StringArrayOutput)
+}
+
+// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+func (o AuditLogFileFilterOutput) ExecTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *int { return v.ExecTime }).(pulumi.IntPtrOutput)
+}
+
+// Client address.
+func (o AuditLogFileFilterOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+// The name of policy.
+func (o AuditLogFileFilterOutput) PolicyNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.PolicyNames }).(pulumi.StringArrayOutput)
+}
+
+// SQL statement. support fuzzy matching.
+func (o AuditLogFileFilterOutput) Sql() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *string { return v.Sql }).(pulumi.StringPtrOutput)
+}
+
+// SQL type. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterOutput) SqlType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *string { return v.SqlType }).(pulumi.StringPtrOutput)
+}
+
+// SQL type. Supports simultaneous query of multiple types. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterOutput) SqlTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.SqlTypes }).(pulumi.StringArrayOutput)
+}
+
+// SQL statement. Support passing multiple sql statements.
+func (o AuditLogFileFilterOutput) Sqls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Sqls }).(pulumi.StringArrayOutput)
+}
+
+// Table name.
+func (o AuditLogFileFilterOutput) TableNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.TableNames }).(pulumi.StringArrayOutput)
+}
+
+// User name.
+func (o AuditLogFileFilterOutput) Users() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Users }).(pulumi.StringArrayOutput)
+}
+
+type AuditLogFileFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AuditLogFileFilter)(nil)).Elem()
+}
+
+func (o AuditLogFileFilterPtrOutput) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return o
+}
+
+func (o AuditLogFileFilterPtrOutput) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return o
+}
+
+func (o AuditLogFileFilterPtrOutput) Elem() AuditLogFileFilterOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) AuditLogFileFilter {
+		if v != nil {
+			return *v
+		}
+		var ret AuditLogFileFilter
+		return ret
+	}).(AuditLogFileFilterOutput)
+}
+
+// Affects the number of rows. Indicates to filter audit logs whose number of affected rows is greater than this value.
+func (o AuditLogFileFilterPtrOutput) AffectRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *int {
+		if v == nil {
+			return nil
+		}
+		return v.AffectRows
+	}).(pulumi.IntPtrOutput)
+}
+
+// Database name.
+func (o AuditLogFileFilterPtrOutput) DbNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DbNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+func (o AuditLogFileFilterPtrOutput) ExecTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ExecTime
+	}).(pulumi.IntPtrOutput)
+}
+
+// Client address.
+func (o AuditLogFileFilterPtrOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hosts
+	}).(pulumi.StringArrayOutput)
+}
+
+// The name of policy.
+func (o AuditLogFileFilterPtrOutput) PolicyNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// SQL statement. support fuzzy matching.
+func (o AuditLogFileFilterPtrOutput) Sql() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Sql
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQL type. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterPtrOutput) SqlType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SqlType
+	}).(pulumi.StringPtrOutput)
+}
+
+// SQL type. Supports simultaneous query of multiple types. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+func (o AuditLogFileFilterPtrOutput) SqlTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.SqlTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+// SQL statement. Support passing multiple sql statements.
+func (o AuditLogFileFilterPtrOutput) Sqls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Sqls
+	}).(pulumi.StringArrayOutput)
+}
+
+// Table name.
+func (o AuditLogFileFilterPtrOutput) TableNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.TableNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// User name.
+func (o AuditLogFileFilterPtrOutput) Users() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Users
+	}).(pulumi.StringArrayOutput)
+}
+
+type ParamTemplateParamList struct {
+	// The value of parameter.
+	CurrentValue *string `pulumi:"currentValue"`
+	// The name of parameter template.
+	Name *string `pulumi:"name"`
+}
+
+// ParamTemplateParamListInput is an input type that accepts ParamTemplateParamListArgs and ParamTemplateParamListOutput values.
+// You can construct a concrete instance of `ParamTemplateParamListInput` via:
+//
+//          ParamTemplateParamListArgs{...}
+type ParamTemplateParamListInput interface {
+	pulumi.Input
+
+	ToParamTemplateParamListOutput() ParamTemplateParamListOutput
+	ToParamTemplateParamListOutputWithContext(context.Context) ParamTemplateParamListOutput
+}
+
+type ParamTemplateParamListArgs struct {
+	// The value of parameter.
+	CurrentValue pulumi.StringPtrInput `pulumi:"currentValue"`
+	// The name of parameter template.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (ParamTemplateParamListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ParamTemplateParamList)(nil)).Elem()
+}
+
+func (i ParamTemplateParamListArgs) ToParamTemplateParamListOutput() ParamTemplateParamListOutput {
+	return i.ToParamTemplateParamListOutputWithContext(context.Background())
+}
+
+func (i ParamTemplateParamListArgs) ToParamTemplateParamListOutputWithContext(ctx context.Context) ParamTemplateParamListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ParamTemplateParamListOutput)
+}
+
+// ParamTemplateParamListArrayInput is an input type that accepts ParamTemplateParamListArray and ParamTemplateParamListArrayOutput values.
+// You can construct a concrete instance of `ParamTemplateParamListArrayInput` via:
+//
+//          ParamTemplateParamListArray{ ParamTemplateParamListArgs{...} }
+type ParamTemplateParamListArrayInput interface {
+	pulumi.Input
+
+	ToParamTemplateParamListArrayOutput() ParamTemplateParamListArrayOutput
+	ToParamTemplateParamListArrayOutputWithContext(context.Context) ParamTemplateParamListArrayOutput
+}
+
+type ParamTemplateParamListArray []ParamTemplateParamListInput
+
+func (ParamTemplateParamListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ParamTemplateParamList)(nil)).Elem()
+}
+
+func (i ParamTemplateParamListArray) ToParamTemplateParamListArrayOutput() ParamTemplateParamListArrayOutput {
+	return i.ToParamTemplateParamListArrayOutputWithContext(context.Background())
+}
+
+func (i ParamTemplateParamListArray) ToParamTemplateParamListArrayOutputWithContext(ctx context.Context) ParamTemplateParamListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ParamTemplateParamListArrayOutput)
+}
+
+type ParamTemplateParamListOutput struct{ *pulumi.OutputState }
+
+func (ParamTemplateParamListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ParamTemplateParamList)(nil)).Elem()
+}
+
+func (o ParamTemplateParamListOutput) ToParamTemplateParamListOutput() ParamTemplateParamListOutput {
+	return o
+}
+
+func (o ParamTemplateParamListOutput) ToParamTemplateParamListOutputWithContext(ctx context.Context) ParamTemplateParamListOutput {
+	return o
+}
+
+// The value of parameter.
+func (o ParamTemplateParamListOutput) CurrentValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ParamTemplateParamList) *string { return v.CurrentValue }).(pulumi.StringPtrOutput)
+}
+
+// The name of parameter template.
+func (o ParamTemplateParamListOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ParamTemplateParamList) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type ParamTemplateParamListArrayOutput struct{ *pulumi.OutputState }
+
+func (ParamTemplateParamListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ParamTemplateParamList)(nil)).Elem()
+}
+
+func (o ParamTemplateParamListArrayOutput) ToParamTemplateParamListArrayOutput() ParamTemplateParamListArrayOutput {
+	return o
+}
+
+func (o ParamTemplateParamListArrayOutput) ToParamTemplateParamListArrayOutputWithContext(ctx context.Context) ParamTemplateParamListArrayOutput {
+	return o
+}
+
+func (o ParamTemplateParamListArrayOutput) Index(i pulumi.IntInput) ParamTemplateParamListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ParamTemplateParamList {
+		return vs[0].([]ParamTemplateParamList)[vs[1].(int)]
+	}).(ParamTemplateParamListOutput)
+}
+
 type PrivilegeColumn struct {
 	// Column name.
 	ColumnName string `pulumi:"columnName"`
@@ -24,7 +457,7 @@ type PrivilegeColumn struct {
 // PrivilegeColumnInput is an input type that accepts PrivilegeColumnArgs and PrivilegeColumnOutput values.
 // You can construct a concrete instance of `PrivilegeColumnInput` via:
 //
-//	PrivilegeColumnArgs{...}
+//          PrivilegeColumnArgs{...}
 type PrivilegeColumnInput interface {
 	pulumi.Input
 
@@ -58,7 +491,7 @@ func (i PrivilegeColumnArgs) ToPrivilegeColumnOutputWithContext(ctx context.Cont
 // PrivilegeColumnArrayInput is an input type that accepts PrivilegeColumnArray and PrivilegeColumnArrayOutput values.
 // You can construct a concrete instance of `PrivilegeColumnArrayInput` via:
 //
-//	PrivilegeColumnArray{ PrivilegeColumnArgs{...} }
+//          PrivilegeColumnArray{ PrivilegeColumnArgs{...} }
 type PrivilegeColumnArrayInput interface {
 	pulumi.Input
 
@@ -144,7 +577,7 @@ type PrivilegeDatabase struct {
 // PrivilegeDatabaseInput is an input type that accepts PrivilegeDatabaseArgs and PrivilegeDatabaseOutput values.
 // You can construct a concrete instance of `PrivilegeDatabaseInput` via:
 //
-//	PrivilegeDatabaseArgs{...}
+//          PrivilegeDatabaseArgs{...}
 type PrivilegeDatabaseInput interface {
 	pulumi.Input
 
@@ -174,7 +607,7 @@ func (i PrivilegeDatabaseArgs) ToPrivilegeDatabaseOutputWithContext(ctx context.
 // PrivilegeDatabaseArrayInput is an input type that accepts PrivilegeDatabaseArray and PrivilegeDatabaseArrayOutput values.
 // You can construct a concrete instance of `PrivilegeDatabaseArrayInput` via:
 //
-//	PrivilegeDatabaseArray{ PrivilegeDatabaseArgs{...} }
+//          PrivilegeDatabaseArray{ PrivilegeDatabaseArgs{...} }
 type PrivilegeDatabaseArrayInput interface {
 	pulumi.Input
 
@@ -252,7 +685,7 @@ type PrivilegeTable struct {
 // PrivilegeTableInput is an input type that accepts PrivilegeTableArgs and PrivilegeTableOutput values.
 // You can construct a concrete instance of `PrivilegeTableInput` via:
 //
-//	PrivilegeTableArgs{...}
+//          PrivilegeTableArgs{...}
 type PrivilegeTableInput interface {
 	pulumi.Input
 
@@ -284,7 +717,7 @@ func (i PrivilegeTableArgs) ToPrivilegeTableOutputWithContext(ctx context.Contex
 // PrivilegeTableArrayInput is an input type that accepts PrivilegeTableArray and PrivilegeTableArrayOutput values.
 // You can construct a concrete instance of `PrivilegeTableArrayInput` via:
 //
-//	PrivilegeTableArray{ PrivilegeTableArgs{...} }
+//          PrivilegeTableArray{ PrivilegeTableArgs{...} }
 type PrivilegeTableArrayInput interface {
 	pulumi.Input
 
@@ -377,7 +810,7 @@ type GetBackupListList struct {
 // GetBackupListListInput is an input type that accepts GetBackupListListArgs and GetBackupListListOutput values.
 // You can construct a concrete instance of `GetBackupListListInput` via:
 //
-//	GetBackupListListArgs{...}
+//          GetBackupListListArgs{...}
 type GetBackupListListInput interface {
 	pulumi.Input
 
@@ -419,7 +852,7 @@ func (i GetBackupListListArgs) ToGetBackupListListOutputWithContext(ctx context.
 // GetBackupListListArrayInput is an input type that accepts GetBackupListListArray and GetBackupListListArrayOutput values.
 // You can construct a concrete instance of `GetBackupListListArrayInput` via:
 //
-//	GetBackupListListArray{ GetBackupListListArgs{...} }
+//          GetBackupListListArray{ GetBackupListListArgs{...} }
 type GetBackupListListArrayInput interface {
 	pulumi.Input
 
@@ -515,6 +948,709 @@ func (o GetBackupListListArrayOutput) Index(i pulumi.IntInput) GetBackupListList
 	}).(GetBackupListListOutput)
 }
 
+type GetBackupSummariesItem struct {
+	// The number of automatic data backups for this instance.
+	AutoBackupCount int `pulumi:"autoBackupCount"`
+	// The automatic data backup capacity of this instance.
+	AutoBackupVolume int `pulumi:"autoBackupVolume"`
+	// The total backup (including data backup and log backup) of the instance occupies capacity.
+	BackupVolume int `pulumi:"backupVolume"`
+	// The number of log backups for this instance.
+	BinlogBackupCount int `pulumi:"binlogBackupCount"`
+	// The capacity of the instance log backup.
+	BinlogBackupVolume int `pulumi:"binlogBackupVolume"`
+	// The total number of data backups (including automatic backups and manual backups) of the instance.
+	DataBackupCount int `pulumi:"dataBackupCount"`
+	// The total data backup capacity of this instance.
+	DataBackupVolume int `pulumi:"dataBackupVolume"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// The number of manual data backups for this instance.
+	ManualBackupCount int `pulumi:"manualBackupCount"`
+	// The capacity of manual data backup for this instance.
+	ManualBackupVolume int `pulumi:"manualBackupVolume"`
+}
+
+// GetBackupSummariesItemInput is an input type that accepts GetBackupSummariesItemArgs and GetBackupSummariesItemOutput values.
+// You can construct a concrete instance of `GetBackupSummariesItemInput` via:
+//
+//          GetBackupSummariesItemArgs{...}
+type GetBackupSummariesItemInput interface {
+	pulumi.Input
+
+	ToGetBackupSummariesItemOutput() GetBackupSummariesItemOutput
+	ToGetBackupSummariesItemOutputWithContext(context.Context) GetBackupSummariesItemOutput
+}
+
+type GetBackupSummariesItemArgs struct {
+	// The number of automatic data backups for this instance.
+	AutoBackupCount pulumi.IntInput `pulumi:"autoBackupCount"`
+	// The automatic data backup capacity of this instance.
+	AutoBackupVolume pulumi.IntInput `pulumi:"autoBackupVolume"`
+	// The total backup (including data backup and log backup) of the instance occupies capacity.
+	BackupVolume pulumi.IntInput `pulumi:"backupVolume"`
+	// The number of log backups for this instance.
+	BinlogBackupCount pulumi.IntInput `pulumi:"binlogBackupCount"`
+	// The capacity of the instance log backup.
+	BinlogBackupVolume pulumi.IntInput `pulumi:"binlogBackupVolume"`
+	// The total number of data backups (including automatic backups and manual backups) of the instance.
+	DataBackupCount pulumi.IntInput `pulumi:"dataBackupCount"`
+	// The total data backup capacity of this instance.
+	DataBackupVolume pulumi.IntInput `pulumi:"dataBackupVolume"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// The number of manual data backups for this instance.
+	ManualBackupCount pulumi.IntInput `pulumi:"manualBackupCount"`
+	// The capacity of manual data backup for this instance.
+	ManualBackupVolume pulumi.IntInput `pulumi:"manualBackupVolume"`
+}
+
+func (GetBackupSummariesItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupSummariesItem)(nil)).Elem()
+}
+
+func (i GetBackupSummariesItemArgs) ToGetBackupSummariesItemOutput() GetBackupSummariesItemOutput {
+	return i.ToGetBackupSummariesItemOutputWithContext(context.Background())
+}
+
+func (i GetBackupSummariesItemArgs) ToGetBackupSummariesItemOutputWithContext(ctx context.Context) GetBackupSummariesItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupSummariesItemOutput)
+}
+
+// GetBackupSummariesItemArrayInput is an input type that accepts GetBackupSummariesItemArray and GetBackupSummariesItemArrayOutput values.
+// You can construct a concrete instance of `GetBackupSummariesItemArrayInput` via:
+//
+//          GetBackupSummariesItemArray{ GetBackupSummariesItemArgs{...} }
+type GetBackupSummariesItemArrayInput interface {
+	pulumi.Input
+
+	ToGetBackupSummariesItemArrayOutput() GetBackupSummariesItemArrayOutput
+	ToGetBackupSummariesItemArrayOutputWithContext(context.Context) GetBackupSummariesItemArrayOutput
+}
+
+type GetBackupSummariesItemArray []GetBackupSummariesItemInput
+
+func (GetBackupSummariesItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupSummariesItem)(nil)).Elem()
+}
+
+func (i GetBackupSummariesItemArray) ToGetBackupSummariesItemArrayOutput() GetBackupSummariesItemArrayOutput {
+	return i.ToGetBackupSummariesItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetBackupSummariesItemArray) ToGetBackupSummariesItemArrayOutputWithContext(ctx context.Context) GetBackupSummariesItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupSummariesItemArrayOutput)
+}
+
+type GetBackupSummariesItemOutput struct{ *pulumi.OutputState }
+
+func (GetBackupSummariesItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupSummariesItem)(nil)).Elem()
+}
+
+func (o GetBackupSummariesItemOutput) ToGetBackupSummariesItemOutput() GetBackupSummariesItemOutput {
+	return o
+}
+
+func (o GetBackupSummariesItemOutput) ToGetBackupSummariesItemOutputWithContext(ctx context.Context) GetBackupSummariesItemOutput {
+	return o
+}
+
+// The number of automatic data backups for this instance.
+func (o GetBackupSummariesItemOutput) AutoBackupCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.AutoBackupCount }).(pulumi.IntOutput)
+}
+
+// The automatic data backup capacity of this instance.
+func (o GetBackupSummariesItemOutput) AutoBackupVolume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.AutoBackupVolume }).(pulumi.IntOutput)
+}
+
+// The total backup (including data backup and log backup) of the instance occupies capacity.
+func (o GetBackupSummariesItemOutput) BackupVolume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.BackupVolume }).(pulumi.IntOutput)
+}
+
+// The number of log backups for this instance.
+func (o GetBackupSummariesItemOutput) BinlogBackupCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.BinlogBackupCount }).(pulumi.IntOutput)
+}
+
+// The capacity of the instance log backup.
+func (o GetBackupSummariesItemOutput) BinlogBackupVolume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.BinlogBackupVolume }).(pulumi.IntOutput)
+}
+
+// The total number of data backups (including automatic backups and manual backups) of the instance.
+func (o GetBackupSummariesItemOutput) DataBackupCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.DataBackupCount }).(pulumi.IntOutput)
+}
+
+// The total data backup capacity of this instance.
+func (o GetBackupSummariesItemOutput) DataBackupVolume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.DataBackupVolume }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o GetBackupSummariesItemOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// The number of manual data backups for this instance.
+func (o GetBackupSummariesItemOutput) ManualBackupCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.ManualBackupCount }).(pulumi.IntOutput)
+}
+
+// The capacity of manual data backup for this instance.
+func (o GetBackupSummariesItemOutput) ManualBackupVolume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupSummariesItem) int { return v.ManualBackupVolume }).(pulumi.IntOutput)
+}
+
+type GetBackupSummariesItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupSummariesItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupSummariesItem)(nil)).Elem()
+}
+
+func (o GetBackupSummariesItemArrayOutput) ToGetBackupSummariesItemArrayOutput() GetBackupSummariesItemArrayOutput {
+	return o
+}
+
+func (o GetBackupSummariesItemArrayOutput) ToGetBackupSummariesItemArrayOutputWithContext(ctx context.Context) GetBackupSummariesItemArrayOutput {
+	return o
+}
+
+func (o GetBackupSummariesItemArrayOutput) Index(i pulumi.IntInput) GetBackupSummariesItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupSummariesItem {
+		return vs[0].([]GetBackupSummariesItem)[vs[1].(int)]
+	}).(GetBackupSummariesItemOutput)
+}
+
+type GetBinLogItem struct {
+	// binlog file deadline.
+	BinlogFinishTime string `pulumi:"binlogFinishTime"`
+	// Binlog file start time.
+	BinlogStartTime string `pulumi:"binlogStartTime"`
+	// Storage method, 0-regular storage, 1-archive storage, the default is 0.
+	CosStorageType int `pulumi:"cosStorageType"`
+	// File storage time, time format: 2016-03-17 02:10:37.
+	Date string `pulumi:"date"`
+	// Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
+	InstanceId string `pulumi:"instanceId"`
+	// download link.
+	InternetUrl string `pulumi:"internetUrl"`
+	// download link.
+	IntranetUrl string `pulumi:"intranetUrl"`
+	// binlog log backup file name.
+	Name string `pulumi:"name"`
+	// The region where remote backup is located.
+	Region string `pulumi:"region"`
+	// Binlog remote backup details.
+	RemoteInfos []GetBinLogItemRemoteInfo `pulumi:"remoteInfos"`
+	// Backup file size, unit: Byte.
+	Size int `pulumi:"size"`
+	// Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+	Status string `pulumi:"status"`
+	// Specific log type, possible values are: binlog - binary log.
+	Type string `pulumi:"type"`
+}
+
+// GetBinLogItemInput is an input type that accepts GetBinLogItemArgs and GetBinLogItemOutput values.
+// You can construct a concrete instance of `GetBinLogItemInput` via:
+//
+//          GetBinLogItemArgs{...}
+type GetBinLogItemInput interface {
+	pulumi.Input
+
+	ToGetBinLogItemOutput() GetBinLogItemOutput
+	ToGetBinLogItemOutputWithContext(context.Context) GetBinLogItemOutput
+}
+
+type GetBinLogItemArgs struct {
+	// binlog file deadline.
+	BinlogFinishTime pulumi.StringInput `pulumi:"binlogFinishTime"`
+	// Binlog file start time.
+	BinlogStartTime pulumi.StringInput `pulumi:"binlogStartTime"`
+	// Storage method, 0-regular storage, 1-archive storage, the default is 0.
+	CosStorageType pulumi.IntInput `pulumi:"cosStorageType"`
+	// File storage time, time format: 2016-03-17 02:10:37.
+	Date pulumi.StringInput `pulumi:"date"`
+	// Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// download link.
+	InternetUrl pulumi.StringInput `pulumi:"internetUrl"`
+	// download link.
+	IntranetUrl pulumi.StringInput `pulumi:"intranetUrl"`
+	// binlog log backup file name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The region where remote backup is located.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Binlog remote backup details.
+	RemoteInfos GetBinLogItemRemoteInfoArrayInput `pulumi:"remoteInfos"`
+	// Backup file size, unit: Byte.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Specific log type, possible values are: binlog - binary log.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetBinLogItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBinLogItem)(nil)).Elem()
+}
+
+func (i GetBinLogItemArgs) ToGetBinLogItemOutput() GetBinLogItemOutput {
+	return i.ToGetBinLogItemOutputWithContext(context.Background())
+}
+
+func (i GetBinLogItemArgs) ToGetBinLogItemOutputWithContext(ctx context.Context) GetBinLogItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBinLogItemOutput)
+}
+
+// GetBinLogItemArrayInput is an input type that accepts GetBinLogItemArray and GetBinLogItemArrayOutput values.
+// You can construct a concrete instance of `GetBinLogItemArrayInput` via:
+//
+//          GetBinLogItemArray{ GetBinLogItemArgs{...} }
+type GetBinLogItemArrayInput interface {
+	pulumi.Input
+
+	ToGetBinLogItemArrayOutput() GetBinLogItemArrayOutput
+	ToGetBinLogItemArrayOutputWithContext(context.Context) GetBinLogItemArrayOutput
+}
+
+type GetBinLogItemArray []GetBinLogItemInput
+
+func (GetBinLogItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBinLogItem)(nil)).Elem()
+}
+
+func (i GetBinLogItemArray) ToGetBinLogItemArrayOutput() GetBinLogItemArrayOutput {
+	return i.ToGetBinLogItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetBinLogItemArray) ToGetBinLogItemArrayOutputWithContext(ctx context.Context) GetBinLogItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBinLogItemArrayOutput)
+}
+
+type GetBinLogItemOutput struct{ *pulumi.OutputState }
+
+func (GetBinLogItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBinLogItem)(nil)).Elem()
+}
+
+func (o GetBinLogItemOutput) ToGetBinLogItemOutput() GetBinLogItemOutput {
+	return o
+}
+
+func (o GetBinLogItemOutput) ToGetBinLogItemOutputWithContext(ctx context.Context) GetBinLogItemOutput {
+	return o
+}
+
+// binlog file deadline.
+func (o GetBinLogItemOutput) BinlogFinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.BinlogFinishTime }).(pulumi.StringOutput)
+}
+
+// Binlog file start time.
+func (o GetBinLogItemOutput) BinlogStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.BinlogStartTime }).(pulumi.StringOutput)
+}
+
+// Storage method, 0-regular storage, 1-archive storage, the default is 0.
+func (o GetBinLogItemOutput) CosStorageType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBinLogItem) int { return v.CosStorageType }).(pulumi.IntOutput)
+}
+
+// File storage time, time format: 2016-03-17 02:10:37.
+func (o GetBinLogItemOutput) Date() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.Date }).(pulumi.StringOutput)
+}
+
+// Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
+func (o GetBinLogItemOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// download link.
+func (o GetBinLogItemOutput) InternetUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.InternetUrl }).(pulumi.StringOutput)
+}
+
+// download link.
+func (o GetBinLogItemOutput) IntranetUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.IntranetUrl }).(pulumi.StringOutput)
+}
+
+// binlog log backup file name.
+func (o GetBinLogItemOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The region where remote backup is located.
+func (o GetBinLogItemOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Binlog remote backup details.
+func (o GetBinLogItemOutput) RemoteInfos() GetBinLogItemRemoteInfoArrayOutput {
+	return o.ApplyT(func(v GetBinLogItem) []GetBinLogItemRemoteInfo { return v.RemoteInfos }).(GetBinLogItemRemoteInfoArrayOutput)
+}
+
+// Backup file size, unit: Byte.
+func (o GetBinLogItemOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBinLogItem) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+func (o GetBinLogItemOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Specific log type, possible values are: binlog - binary log.
+func (o GetBinLogItemOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItem) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetBinLogItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBinLogItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBinLogItem)(nil)).Elem()
+}
+
+func (o GetBinLogItemArrayOutput) ToGetBinLogItemArrayOutput() GetBinLogItemArrayOutput {
+	return o
+}
+
+func (o GetBinLogItemArrayOutput) ToGetBinLogItemArrayOutputWithContext(ctx context.Context) GetBinLogItemArrayOutput {
+	return o
+}
+
+func (o GetBinLogItemArrayOutput) Index(i pulumi.IntInput) GetBinLogItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBinLogItem {
+		return vs[0].([]GetBinLogItem)[vs[1].(int)]
+	}).(GetBinLogItemOutput)
+}
+
+type GetBinLogItemRemoteInfo struct {
+	// End time of remote backup task.
+	FinishTime string `pulumi:"finishTime"`
+	// The region where remote backup is located.
+	Region string `pulumi:"region"`
+	// Start time of remote backup task.
+	StartTime string `pulumi:"startTime"`
+	// Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+	Status string `pulumi:"status"`
+	// The ID of the remote backup subtask.
+	SubBackupIds []int `pulumi:"subBackupIds"`
+	// download link.
+	Url string `pulumi:"url"`
+}
+
+// GetBinLogItemRemoteInfoInput is an input type that accepts GetBinLogItemRemoteInfoArgs and GetBinLogItemRemoteInfoOutput values.
+// You can construct a concrete instance of `GetBinLogItemRemoteInfoInput` via:
+//
+//          GetBinLogItemRemoteInfoArgs{...}
+type GetBinLogItemRemoteInfoInput interface {
+	pulumi.Input
+
+	ToGetBinLogItemRemoteInfoOutput() GetBinLogItemRemoteInfoOutput
+	ToGetBinLogItemRemoteInfoOutputWithContext(context.Context) GetBinLogItemRemoteInfoOutput
+}
+
+type GetBinLogItemRemoteInfoArgs struct {
+	// End time of remote backup task.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// The region where remote backup is located.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Start time of remote backup task.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+	Status pulumi.StringInput `pulumi:"status"`
+	// The ID of the remote backup subtask.
+	SubBackupIds pulumi.IntArrayInput `pulumi:"subBackupIds"`
+	// download link.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetBinLogItemRemoteInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBinLogItemRemoteInfo)(nil)).Elem()
+}
+
+func (i GetBinLogItemRemoteInfoArgs) ToGetBinLogItemRemoteInfoOutput() GetBinLogItemRemoteInfoOutput {
+	return i.ToGetBinLogItemRemoteInfoOutputWithContext(context.Background())
+}
+
+func (i GetBinLogItemRemoteInfoArgs) ToGetBinLogItemRemoteInfoOutputWithContext(ctx context.Context) GetBinLogItemRemoteInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBinLogItemRemoteInfoOutput)
+}
+
+// GetBinLogItemRemoteInfoArrayInput is an input type that accepts GetBinLogItemRemoteInfoArray and GetBinLogItemRemoteInfoArrayOutput values.
+// You can construct a concrete instance of `GetBinLogItemRemoteInfoArrayInput` via:
+//
+//          GetBinLogItemRemoteInfoArray{ GetBinLogItemRemoteInfoArgs{...} }
+type GetBinLogItemRemoteInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetBinLogItemRemoteInfoArrayOutput() GetBinLogItemRemoteInfoArrayOutput
+	ToGetBinLogItemRemoteInfoArrayOutputWithContext(context.Context) GetBinLogItemRemoteInfoArrayOutput
+}
+
+type GetBinLogItemRemoteInfoArray []GetBinLogItemRemoteInfoInput
+
+func (GetBinLogItemRemoteInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBinLogItemRemoteInfo)(nil)).Elem()
+}
+
+func (i GetBinLogItemRemoteInfoArray) ToGetBinLogItemRemoteInfoArrayOutput() GetBinLogItemRemoteInfoArrayOutput {
+	return i.ToGetBinLogItemRemoteInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetBinLogItemRemoteInfoArray) ToGetBinLogItemRemoteInfoArrayOutputWithContext(ctx context.Context) GetBinLogItemRemoteInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBinLogItemRemoteInfoArrayOutput)
+}
+
+type GetBinLogItemRemoteInfoOutput struct{ *pulumi.OutputState }
+
+func (GetBinLogItemRemoteInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBinLogItemRemoteInfo)(nil)).Elem()
+}
+
+func (o GetBinLogItemRemoteInfoOutput) ToGetBinLogItemRemoteInfoOutput() GetBinLogItemRemoteInfoOutput {
+	return o
+}
+
+func (o GetBinLogItemRemoteInfoOutput) ToGetBinLogItemRemoteInfoOutputWithContext(ctx context.Context) GetBinLogItemRemoteInfoOutput {
+	return o
+}
+
+// End time of remote backup task.
+func (o GetBinLogItemRemoteInfoOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItemRemoteInfo) string { return v.FinishTime }).(pulumi.StringOutput)
+}
+
+// The region where remote backup is located.
+func (o GetBinLogItemRemoteInfoOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItemRemoteInfo) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Start time of remote backup task.
+func (o GetBinLogItemRemoteInfoOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItemRemoteInfo) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+func (o GetBinLogItemRemoteInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItemRemoteInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// The ID of the remote backup subtask.
+func (o GetBinLogItemRemoteInfoOutput) SubBackupIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetBinLogItemRemoteInfo) []int { return v.SubBackupIds }).(pulumi.IntArrayOutput)
+}
+
+// download link.
+func (o GetBinLogItemRemoteInfoOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBinLogItemRemoteInfo) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetBinLogItemRemoteInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBinLogItemRemoteInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBinLogItemRemoteInfo)(nil)).Elem()
+}
+
+func (o GetBinLogItemRemoteInfoArrayOutput) ToGetBinLogItemRemoteInfoArrayOutput() GetBinLogItemRemoteInfoArrayOutput {
+	return o
+}
+
+func (o GetBinLogItemRemoteInfoArrayOutput) ToGetBinLogItemRemoteInfoArrayOutputWithContext(ctx context.Context) GetBinLogItemRemoteInfoArrayOutput {
+	return o
+}
+
+func (o GetBinLogItemRemoteInfoArrayOutput) Index(i pulumi.IntInput) GetBinLogItemRemoteInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBinLogItemRemoteInfo {
+		return vs[0].([]GetBinLogItemRemoteInfo)[vs[1].(int)]
+	}).(GetBinLogItemRemoteInfoOutput)
+}
+
+type GetCloneListItem struct {
+	// Id of the task list corresponding to the clone task.
+	CloneJobId int `pulumi:"cloneJobId"`
+	// The newly spawned instance Id of the clone task.
+	DstInstanceId string `pulumi:"dstInstanceId"`
+	// Task end time.
+	EndTime string `pulumi:"endTime"`
+	// Id of the region where the cloned instance is located.
+	NewRegionId int `pulumi:"newRegionId"`
+	// The strategy used by the clone instance includes the following types: timepoint: specify the point-in-time rollback, backupset: specify the backup file rollback.
+	RollbackStrategy string `pulumi:"rollbackStrategy"`
+	// The time point when the clone instance is rolled back.
+	RollbackTargetTime string `pulumi:"rollbackTargetTime"`
+	// The source instance Id of the clone task.
+	SrcInstanceId string `pulumi:"srcInstanceId"`
+	// Id of the region where the source instance is located.
+	SrcRegionId int `pulumi:"srcRegionId"`
+	// Task start time.
+	StartTime string `pulumi:"startTime"`
+	// Task status, including the following status: initial, running, wait_complete, success, failed.
+	TaskStatus string `pulumi:"taskStatus"`
+}
+
+// GetCloneListItemInput is an input type that accepts GetCloneListItemArgs and GetCloneListItemOutput values.
+// You can construct a concrete instance of `GetCloneListItemInput` via:
+//
+//          GetCloneListItemArgs{...}
+type GetCloneListItemInput interface {
+	pulumi.Input
+
+	ToGetCloneListItemOutput() GetCloneListItemOutput
+	ToGetCloneListItemOutputWithContext(context.Context) GetCloneListItemOutput
+}
+
+type GetCloneListItemArgs struct {
+	// Id of the task list corresponding to the clone task.
+	CloneJobId pulumi.IntInput `pulumi:"cloneJobId"`
+	// The newly spawned instance Id of the clone task.
+	DstInstanceId pulumi.StringInput `pulumi:"dstInstanceId"`
+	// Task end time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Id of the region where the cloned instance is located.
+	NewRegionId pulumi.IntInput `pulumi:"newRegionId"`
+	// The strategy used by the clone instance includes the following types: timepoint: specify the point-in-time rollback, backupset: specify the backup file rollback.
+	RollbackStrategy pulumi.StringInput `pulumi:"rollbackStrategy"`
+	// The time point when the clone instance is rolled back.
+	RollbackTargetTime pulumi.StringInput `pulumi:"rollbackTargetTime"`
+	// The source instance Id of the clone task.
+	SrcInstanceId pulumi.StringInput `pulumi:"srcInstanceId"`
+	// Id of the region where the source instance is located.
+	SrcRegionId pulumi.IntInput `pulumi:"srcRegionId"`
+	// Task start time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Task status, including the following status: initial, running, wait_complete, success, failed.
+	TaskStatus pulumi.StringInput `pulumi:"taskStatus"`
+}
+
+func (GetCloneListItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCloneListItem)(nil)).Elem()
+}
+
+func (i GetCloneListItemArgs) ToGetCloneListItemOutput() GetCloneListItemOutput {
+	return i.ToGetCloneListItemOutputWithContext(context.Background())
+}
+
+func (i GetCloneListItemArgs) ToGetCloneListItemOutputWithContext(ctx context.Context) GetCloneListItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCloneListItemOutput)
+}
+
+// GetCloneListItemArrayInput is an input type that accepts GetCloneListItemArray and GetCloneListItemArrayOutput values.
+// You can construct a concrete instance of `GetCloneListItemArrayInput` via:
+//
+//          GetCloneListItemArray{ GetCloneListItemArgs{...} }
+type GetCloneListItemArrayInput interface {
+	pulumi.Input
+
+	ToGetCloneListItemArrayOutput() GetCloneListItemArrayOutput
+	ToGetCloneListItemArrayOutputWithContext(context.Context) GetCloneListItemArrayOutput
+}
+
+type GetCloneListItemArray []GetCloneListItemInput
+
+func (GetCloneListItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCloneListItem)(nil)).Elem()
+}
+
+func (i GetCloneListItemArray) ToGetCloneListItemArrayOutput() GetCloneListItemArrayOutput {
+	return i.ToGetCloneListItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetCloneListItemArray) ToGetCloneListItemArrayOutputWithContext(ctx context.Context) GetCloneListItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCloneListItemArrayOutput)
+}
+
+type GetCloneListItemOutput struct{ *pulumi.OutputState }
+
+func (GetCloneListItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCloneListItem)(nil)).Elem()
+}
+
+func (o GetCloneListItemOutput) ToGetCloneListItemOutput() GetCloneListItemOutput {
+	return o
+}
+
+func (o GetCloneListItemOutput) ToGetCloneListItemOutputWithContext(ctx context.Context) GetCloneListItemOutput {
+	return o
+}
+
+// Id of the task list corresponding to the clone task.
+func (o GetCloneListItemOutput) CloneJobId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCloneListItem) int { return v.CloneJobId }).(pulumi.IntOutput)
+}
+
+// The newly spawned instance Id of the clone task.
+func (o GetCloneListItemOutput) DstInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCloneListItem) string { return v.DstInstanceId }).(pulumi.StringOutput)
+}
+
+// Task end time.
+func (o GetCloneListItemOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCloneListItem) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Id of the region where the cloned instance is located.
+func (o GetCloneListItemOutput) NewRegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCloneListItem) int { return v.NewRegionId }).(pulumi.IntOutput)
+}
+
+// The strategy used by the clone instance includes the following types: timepoint: specify the point-in-time rollback, backupset: specify the backup file rollback.
+func (o GetCloneListItemOutput) RollbackStrategy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCloneListItem) string { return v.RollbackStrategy }).(pulumi.StringOutput)
+}
+
+// The time point when the clone instance is rolled back.
+func (o GetCloneListItemOutput) RollbackTargetTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCloneListItem) string { return v.RollbackTargetTime }).(pulumi.StringOutput)
+}
+
+// The source instance Id of the clone task.
+func (o GetCloneListItemOutput) SrcInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCloneListItem) string { return v.SrcInstanceId }).(pulumi.StringOutput)
+}
+
+// Id of the region where the source instance is located.
+func (o GetCloneListItemOutput) SrcRegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCloneListItem) int { return v.SrcRegionId }).(pulumi.IntOutput)
+}
+
+// Task start time.
+func (o GetCloneListItemOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCloneListItem) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Task status, including the following status: initial, running, wait_complete, success, failed.
+func (o GetCloneListItemOutput) TaskStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCloneListItem) string { return v.TaskStatus }).(pulumi.StringOutput)
+}
+
+type GetCloneListItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCloneListItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCloneListItem)(nil)).Elem()
+}
+
+func (o GetCloneListItemArrayOutput) ToGetCloneListItemArrayOutput() GetCloneListItemArrayOutput {
+	return o
+}
+
+func (o GetCloneListItemArrayOutput) ToGetCloneListItemArrayOutputWithContext(ctx context.Context) GetCloneListItemArrayOutput {
+	return o
+}
+
+func (o GetCloneListItemArrayOutput) Index(i pulumi.IntInput) GetCloneListItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCloneListItem {
+		return vs[0].([]GetCloneListItem)[vs[1].(int)]
+	}).(GetCloneListItemOutput)
+}
+
 type GetDefaultParamsParamList struct {
 	// Param current value.
 	CurrentValue string `pulumi:"currentValue"`
@@ -539,7 +1675,7 @@ type GetDefaultParamsParamList struct {
 // GetDefaultParamsParamListInput is an input type that accepts GetDefaultParamsParamListArgs and GetDefaultParamsParamListOutput values.
 // You can construct a concrete instance of `GetDefaultParamsParamListInput` via:
 //
-//	GetDefaultParamsParamListArgs{...}
+//          GetDefaultParamsParamListArgs{...}
 type GetDefaultParamsParamListInput interface {
 	pulumi.Input
 
@@ -583,7 +1719,7 @@ func (i GetDefaultParamsParamListArgs) ToGetDefaultParamsParamListOutputWithCont
 // GetDefaultParamsParamListArrayInput is an input type that accepts GetDefaultParamsParamListArray and GetDefaultParamsParamListArrayOutput values.
 // You can construct a concrete instance of `GetDefaultParamsParamListArrayInput` via:
 //
-//	GetDefaultParamsParamListArray{ GetDefaultParamsParamListArgs{...} }
+//          GetDefaultParamsParamListArray{ GetDefaultParamsParamListArgs{...} }
 type GetDefaultParamsParamListArrayInput interface {
 	pulumi.Input
 
@@ -746,7 +1882,7 @@ type GetInstanceInstanceList struct {
 // GetInstanceInstanceListInput is an input type that accepts GetInstanceInstanceListArgs and GetInstanceInstanceListOutput values.
 // You can construct a concrete instance of `GetInstanceInstanceListInput` via:
 //
-//	GetInstanceInstanceListArgs{...}
+//          GetInstanceInstanceListArgs{...}
 type GetInstanceInstanceListInput interface {
 	pulumi.Input
 
@@ -828,7 +1964,7 @@ func (i GetInstanceInstanceListArgs) ToGetInstanceInstanceListOutputWithContext(
 // GetInstanceInstanceListArrayInput is an input type that accepts GetInstanceInstanceListArray and GetInstanceInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceInstanceListArrayInput` via:
 //
-//	GetInstanceInstanceListArray{ GetInstanceInstanceListArgs{...} }
+//          GetInstanceInstanceListArray{ GetInstanceInstanceListArgs{...} }
 type GetInstanceInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1048,7 +2184,7 @@ type GetParameterListParameterList struct {
 // GetParameterListParameterListInput is an input type that accepts GetParameterListParameterListArgs and GetParameterListParameterListOutput values.
 // You can construct a concrete instance of `GetParameterListParameterListInput` via:
 //
-//	GetParameterListParameterListArgs{...}
+//          GetParameterListParameterListArgs{...}
 type GetParameterListParameterListInput interface {
 	pulumi.Input
 
@@ -1092,7 +2228,7 @@ func (i GetParameterListParameterListArgs) ToGetParameterListParameterListOutput
 // GetParameterListParameterListArrayInput is an input type that accepts GetParameterListParameterListArray and GetParameterListParameterListArrayOutput values.
 // You can construct a concrete instance of `GetParameterListParameterListArrayInput` via:
 //
-//	GetParameterListParameterListArray{ GetParameterListParameterListArgs{...} }
+//          GetParameterListParameterListArray{ GetParameterListParameterListArgs{...} }
 type GetParameterListParameterListArrayInput interface {
 	pulumi.Input
 
@@ -1225,7 +2361,7 @@ type GetZoneConfigList struct {
 // GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
 // You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//	GetZoneConfigListArgs{...}
+//          GetZoneConfigListArgs{...}
 type GetZoneConfigListInput interface {
 	pulumi.Input
 
@@ -1277,7 +2413,7 @@ func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.
 // GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//	GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
 type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 
@@ -1418,7 +2554,7 @@ type GetZoneConfigListSell struct {
 // GetZoneConfigListSellInput is an input type that accepts GetZoneConfigListSellArgs and GetZoneConfigListSellOutput values.
 // You can construct a concrete instance of `GetZoneConfigListSellInput` via:
 //
-//	GetZoneConfigListSellArgs{...}
+//          GetZoneConfigListSellArgs{...}
 type GetZoneConfigListSellInput interface {
 	pulumi.Input
 
@@ -1455,7 +2591,7 @@ func (i GetZoneConfigListSellArgs) ToGetZoneConfigListSellOutputWithContext(ctx 
 // GetZoneConfigListSellArrayInput is an input type that accepts GetZoneConfigListSellArray and GetZoneConfigListSellArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListSellArrayInput` via:
 //
-//	GetZoneConfigListSellArray{ GetZoneConfigListSellArgs{...} }
+//          GetZoneConfigListSellArray{ GetZoneConfigListSellArgs{...} }
 type GetZoneConfigListSellArrayInput interface {
 	pulumi.Input
 
@@ -1541,6 +2677,10 @@ func (o GetZoneConfigListSellArrayOutput) Index(i pulumi.IntInput) GetZoneConfig
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterInput)(nil)).Elem(), AuditLogFileFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterPtrInput)(nil)).Elem(), AuditLogFileFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ParamTemplateParamListInput)(nil)).Elem(), ParamTemplateParamListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ParamTemplateParamListArrayInput)(nil)).Elem(), ParamTemplateParamListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeColumnInput)(nil)).Elem(), PrivilegeColumnArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeColumnArrayInput)(nil)).Elem(), PrivilegeColumnArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeDatabaseInput)(nil)).Elem(), PrivilegeDatabaseArgs{})
@@ -1549,6 +2689,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeTableArrayInput)(nil)).Elem(), PrivilegeTableArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupListListInput)(nil)).Elem(), GetBackupListListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupListListArrayInput)(nil)).Elem(), GetBackupListListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupSummariesItemInput)(nil)).Elem(), GetBackupSummariesItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupSummariesItemArrayInput)(nil)).Elem(), GetBackupSummariesItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBinLogItemInput)(nil)).Elem(), GetBinLogItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBinLogItemArrayInput)(nil)).Elem(), GetBinLogItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBinLogItemRemoteInfoInput)(nil)).Elem(), GetBinLogItemRemoteInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBinLogItemRemoteInfoArrayInput)(nil)).Elem(), GetBinLogItemRemoteInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCloneListItemInput)(nil)).Elem(), GetCloneListItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCloneListItemArrayInput)(nil)).Elem(), GetCloneListItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParamsParamListInput)(nil)).Elem(), GetDefaultParamsParamListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParamsParamListArrayInput)(nil)).Elem(), GetDefaultParamsParamListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListInput)(nil)).Elem(), GetInstanceInstanceListArgs{})
@@ -1559,6 +2707,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListSellInput)(nil)).Elem(), GetZoneConfigListSellArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListSellArrayInput)(nil)).Elem(), GetZoneConfigListSellArray{})
+	pulumi.RegisterOutputType(AuditLogFileFilterOutput{})
+	pulumi.RegisterOutputType(AuditLogFileFilterPtrOutput{})
+	pulumi.RegisterOutputType(ParamTemplateParamListOutput{})
+	pulumi.RegisterOutputType(ParamTemplateParamListArrayOutput{})
 	pulumi.RegisterOutputType(PrivilegeColumnOutput{})
 	pulumi.RegisterOutputType(PrivilegeColumnArrayOutput{})
 	pulumi.RegisterOutputType(PrivilegeDatabaseOutput{})
@@ -1567,6 +2719,14 @@ func init() {
 	pulumi.RegisterOutputType(PrivilegeTableArrayOutput{})
 	pulumi.RegisterOutputType(GetBackupListListOutput{})
 	pulumi.RegisterOutputType(GetBackupListListArrayOutput{})
+	pulumi.RegisterOutputType(GetBackupSummariesItemOutput{})
+	pulumi.RegisterOutputType(GetBackupSummariesItemArrayOutput{})
+	pulumi.RegisterOutputType(GetBinLogItemOutput{})
+	pulumi.RegisterOutputType(GetBinLogItemArrayOutput{})
+	pulumi.RegisterOutputType(GetBinLogItemRemoteInfoOutput{})
+	pulumi.RegisterOutputType(GetBinLogItemRemoteInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetCloneListItemOutput{})
+	pulumi.RegisterOutputType(GetCloneListItemArrayOutput{})
 	pulumi.RegisterOutputType(GetDefaultParamsParamListOutput{})
 	pulumi.RegisterOutputType(GetDefaultParamsParamListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceInstanceListOutput{})

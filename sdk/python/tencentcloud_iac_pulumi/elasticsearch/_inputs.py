@@ -9,10 +9,50 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'InstanceEsAclArgs',
     'InstanceMultiZoneInfoArgs',
     'InstanceNodeInfoListArgs',
     'InstanceWebNodeTypeInfoArgs',
 ]
+
+@pulumi.input_type
+class InstanceEsAclArgs:
+    def __init__(__self__, *,
+                 black_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 white_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] black_lists: Blacklist of kibana access.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] white_lists: Whitelist of kibana access.
+        """
+        if black_lists is not None:
+            pulumi.set(__self__, "black_lists", black_lists)
+        if white_lists is not None:
+            pulumi.set(__self__, "white_lists", white_lists)
+
+    @property
+    @pulumi.getter(name="blackLists")
+    def black_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Blacklist of kibana access.
+        """
+        return pulumi.get(self, "black_lists")
+
+    @black_lists.setter
+    def black_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "black_lists", value)
+
+    @property
+    @pulumi.getter(name="whiteLists")
+    def white_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Whitelist of kibana access.
+        """
+        return pulumi.get(self, "white_lists")
+
+    @white_lists.setter
+    def white_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "white_lists", value)
+
 
 @pulumi.input_type
 class InstanceMultiZoneInfoArgs:

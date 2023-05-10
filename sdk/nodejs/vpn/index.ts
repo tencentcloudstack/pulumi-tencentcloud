@@ -6,10 +6,15 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./connection";
+export * from "./connectionReset";
 export * from "./customerGateway";
+export * from "./customerGatewayConfigurationDownload";
 export * from "./gateway";
+export * from "./gatewayCcnRoutes";
 export * from "./gatewayRoute";
+export * from "./gatewaySslClientCert";
 export * from "./getConnections";
+export * from "./getCustomerGatewayVendors";
 export * from "./getCustomerGateways";
 export * from "./getGatewayRoutes";
 export * from "./getGateways";
@@ -18,9 +23,13 @@ export * from "./sslServer";
 
 // Import resources to register:
 import { Connection } from "./connection";
+import { ConnectionReset } from "./connectionReset";
 import { CustomerGateway } from "./customerGateway";
+import { CustomerGatewayConfigurationDownload } from "./customerGatewayConfigurationDownload";
 import { Gateway } from "./gateway";
+import { GatewayCcnRoutes } from "./gatewayCcnRoutes";
 import { GatewayRoute } from "./gatewayRoute";
+import { GatewaySslClientCert } from "./gatewaySslClientCert";
 import { SslClient } from "./sslClient";
 import { SslServer } from "./sslServer";
 
@@ -30,12 +39,20 @@ const _module = {
         switch (type) {
             case "tencentcloud:Vpn/connection:Connection":
                 return new Connection(name, <any>undefined, { urn })
+            case "tencentcloud:Vpn/connectionReset:ConnectionReset":
+                return new ConnectionReset(name, <any>undefined, { urn })
             case "tencentcloud:Vpn/customerGateway:CustomerGateway":
                 return new CustomerGateway(name, <any>undefined, { urn })
+            case "tencentcloud:Vpn/customerGatewayConfigurationDownload:CustomerGatewayConfigurationDownload":
+                return new CustomerGatewayConfigurationDownload(name, <any>undefined, { urn })
             case "tencentcloud:Vpn/gateway:Gateway":
                 return new Gateway(name, <any>undefined, { urn })
+            case "tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes":
+                return new GatewayCcnRoutes(name, <any>undefined, { urn })
             case "tencentcloud:Vpn/gatewayRoute:GatewayRoute":
                 return new GatewayRoute(name, <any>undefined, { urn })
+            case "tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert":
+                return new GatewaySslClientCert(name, <any>undefined, { urn })
             case "tencentcloud:Vpn/sslClient:SslClient":
                 return new SslClient(name, <any>undefined, { urn })
             case "tencentcloud:Vpn/sslServer:SslServer":
@@ -46,8 +63,12 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/connection", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/connectionReset", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/customerGateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/customerGatewayConfigurationDownload", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/gateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/gatewayCcnRoutes", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/gatewayRoute", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/gatewaySslClientCert", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/sslClient", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpn/sslServer", _module)

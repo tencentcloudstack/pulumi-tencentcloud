@@ -66,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
+        /// Mount root-directory.
+        /// </summary>
+        [Output("fsId")]
+        public Output<string> FsId { get; private set; } = null!;
+
+        /// <summary>
         /// IP of mount point.
         /// </summary>
         [Output("mountIp")]
@@ -238,6 +244,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
+
+        /// <summary>
+        /// Mount root-directory.
+        /// </summary>
+        [Input("fsId")]
+        public Input<string>? FsId { get; set; }
 
         /// <summary>
         /// IP of mount point.

@@ -24,8 +24,8 @@ class InstanceDataDiskArgs:
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  throughput_performance: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[int] data_disk_size: Size of the data disk, and unit is GB. If disk type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
-        :param pulumi.Input[str] data_disk_type: Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: SSD, `CLOUD_HSSD`: Enhanced SSD. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
+        :param pulumi.Input[int] data_disk_size: Size of the data disk, and unit is GB.
+        :param pulumi.Input[str] data_disk_type: Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: LOCAL_BASIC: local disk, LOCAL_SSD: local SSD disk, LOCAL_NVME: local NVME disk, specified in the InstanceType, LOCAL_PRO: local HDD disk, specified in the InstanceType, CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD, CLOUD_BSSD: Balanced SSD.
         :param pulumi.Input[str] data_disk_id: Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         :param pulumi.Input[str] data_disk_snapshot_id: Snapshot ID of the data disk. The selected data disk snapshot size must be smaller than the data disk size.
         :param pulumi.Input[bool] delete_with_instance: Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), default is true.
@@ -49,7 +49,7 @@ class InstanceDataDiskArgs:
     @pulumi.getter(name="dataDiskSize")
     def data_disk_size(self) -> pulumi.Input[int]:
         """
-        Size of the data disk, and unit is GB. If disk type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        Size of the data disk, and unit is GB.
         """
         return pulumi.get(self, "data_disk_size")
 
@@ -61,7 +61,7 @@ class InstanceDataDiskArgs:
     @pulumi.getter(name="dataDiskType")
     def data_disk_type(self) -> pulumi.Input[str]:
         """
-        Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: SSD, `CLOUD_HSSD`: Enhanced SSD. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
+        Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: LOCAL_BASIC: local disk, LOCAL_SSD: local SSD disk, LOCAL_NVME: local NVME disk, specified in the InstanceType, LOCAL_PRO: local HDD disk, specified in the InstanceType, CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD, CLOUD_BSSD: Balanced SSD.
         """
         return pulumi.get(self, "data_disk_type")
 

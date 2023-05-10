@@ -212,6 +212,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// Protocol of the layer7 listener.
         /// </summary>
         public readonly string Protocol;
+        /// <summary>
+        /// ID of the GAAP proxy.
+        /// </summary>
         public readonly string? ProxyId;
         public readonly string? ResultOutputFile;
 

@@ -10,16 +10,238 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'AuditLogFileFilter',
+    'ParamTemplateParamList',
     'PrivilegeColumn',
     'PrivilegeDatabase',
     'PrivilegeTable',
     'GetBackupListListResult',
+    'GetBackupSummariesItemResult',
+    'GetBinLogItemResult',
+    'GetBinLogItemRemoteInfoResult',
+    'GetCloneListItemResult',
     'GetDefaultParamsParamListResult',
     'GetInstanceInstanceListResult',
     'GetParameterListParameterListResult',
     'GetZoneConfigListResult',
     'GetZoneConfigListSellResult',
 ]
+
+@pulumi.output_type
+class AuditLogFileFilter(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "affectRows":
+            suggest = "affect_rows"
+        elif key == "dbNames":
+            suggest = "db_names"
+        elif key == "execTime":
+            suggest = "exec_time"
+        elif key == "policyNames":
+            suggest = "policy_names"
+        elif key == "sqlType":
+            suggest = "sql_type"
+        elif key == "sqlTypes":
+            suggest = "sql_types"
+        elif key == "tableNames":
+            suggest = "table_names"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AuditLogFileFilter. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AuditLogFileFilter.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AuditLogFileFilter.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 affect_rows: Optional[int] = None,
+                 db_names: Optional[Sequence[str]] = None,
+                 exec_time: Optional[int] = None,
+                 hosts: Optional[Sequence[str]] = None,
+                 policy_names: Optional[Sequence[str]] = None,
+                 sql: Optional[str] = None,
+                 sql_type: Optional[str] = None,
+                 sql_types: Optional[Sequence[str]] = None,
+                 sqls: Optional[Sequence[str]] = None,
+                 table_names: Optional[Sequence[str]] = None,
+                 users: Optional[Sequence[str]] = None):
+        """
+        :param int affect_rows: Affects the number of rows. Indicates to filter audit logs whose number of affected rows is greater than this value.
+        :param Sequence[str] db_names: Database name.
+        :param int exec_time: Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+        :param Sequence[str] hosts: Client address.
+        :param Sequence[str] policy_names: The name of policy.
+        :param str sql: SQL statement. support fuzzy matching.
+        :param str sql_type: SQL type. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        :param Sequence[str] sql_types: SQL type. Supports simultaneous query of multiple types. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        :param Sequence[str] sqls: SQL statement. Support passing multiple sql statements.
+        :param Sequence[str] table_names: Table name.
+        :param Sequence[str] users: User name.
+        """
+        if affect_rows is not None:
+            pulumi.set(__self__, "affect_rows", affect_rows)
+        if db_names is not None:
+            pulumi.set(__self__, "db_names", db_names)
+        if exec_time is not None:
+            pulumi.set(__self__, "exec_time", exec_time)
+        if hosts is not None:
+            pulumi.set(__self__, "hosts", hosts)
+        if policy_names is not None:
+            pulumi.set(__self__, "policy_names", policy_names)
+        if sql is not None:
+            pulumi.set(__self__, "sql", sql)
+        if sql_type is not None:
+            pulumi.set(__self__, "sql_type", sql_type)
+        if sql_types is not None:
+            pulumi.set(__self__, "sql_types", sql_types)
+        if sqls is not None:
+            pulumi.set(__self__, "sqls", sqls)
+        if table_names is not None:
+            pulumi.set(__self__, "table_names", table_names)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+
+    @property
+    @pulumi.getter(name="affectRows")
+    def affect_rows(self) -> Optional[int]:
+        """
+        Affects the number of rows. Indicates to filter audit logs whose number of affected rows is greater than this value.
+        """
+        return pulumi.get(self, "affect_rows")
+
+    @property
+    @pulumi.getter(name="dbNames")
+    def db_names(self) -> Optional[Sequence[str]]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db_names")
+
+    @property
+    @pulumi.getter(name="execTime")
+    def exec_time(self) -> Optional[int]:
+        """
+        Execution time. The unit is: ms. Indicates to filter audit logs whose execution time is greater than this value.
+        """
+        return pulumi.get(self, "exec_time")
+
+    @property
+    @pulumi.getter
+    def hosts(self) -> Optional[Sequence[str]]:
+        """
+        Client address.
+        """
+        return pulumi.get(self, "hosts")
+
+    @property
+    @pulumi.getter(name="policyNames")
+    def policy_names(self) -> Optional[Sequence[str]]:
+        """
+        The name of policy.
+        """
+        return pulumi.get(self, "policy_names")
+
+    @property
+    @pulumi.getter
+    def sql(self) -> Optional[str]:
+        """
+        SQL statement. support fuzzy matching.
+        """
+        return pulumi.get(self, "sql")
+
+    @property
+    @pulumi.getter(name="sqlType")
+    def sql_type(self) -> Optional[str]:
+        """
+        SQL type. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_type")
+
+    @property
+    @pulumi.getter(name="sqlTypes")
+    def sql_types(self) -> Optional[Sequence[str]]:
+        """
+        SQL type. Supports simultaneous query of multiple types. Currently supported: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_types")
+
+    @property
+    @pulumi.getter
+    def sqls(self) -> Optional[Sequence[str]]:
+        """
+        SQL statement. Support passing multiple sql statements.
+        """
+        return pulumi.get(self, "sqls")
+
+    @property
+    @pulumi.getter(name="tableNames")
+    def table_names(self) -> Optional[Sequence[str]]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_names")
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[Sequence[str]]:
+        """
+        User name.
+        """
+        return pulumi.get(self, "users")
+
+
+@pulumi.output_type
+class ParamTemplateParamList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "currentValue":
+            suggest = "current_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ParamTemplateParamList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ParamTemplateParamList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ParamTemplateParamList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 current_value: Optional[str] = None,
+                 name: Optional[str] = None):
+        """
+        :param str current_value: The value of parameter.
+        :param str name: The name of parameter template.
+        """
+        if current_value is not None:
+            pulumi.set(__self__, "current_value", current_value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> Optional[str]:
+        """
+        The value of parameter.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        The name of parameter template.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class PrivilegeColumn(dict):
@@ -291,6 +513,463 @@ class GetBackupListListResult(dict):
         The earliest time at which the backup starts. For example, `2` indicates 2:00 am.
         """
         return pulumi.get(self, "time")
+
+
+@pulumi.output_type
+class GetBackupSummariesItemResult(dict):
+    def __init__(__self__, *,
+                 auto_backup_count: int,
+                 auto_backup_volume: int,
+                 backup_volume: int,
+                 binlog_backup_count: int,
+                 binlog_backup_volume: int,
+                 data_backup_count: int,
+                 data_backup_volume: int,
+                 instance_id: str,
+                 manual_backup_count: int,
+                 manual_backup_volume: int):
+        """
+        :param int auto_backup_count: The number of automatic data backups for this instance.
+        :param int auto_backup_volume: The automatic data backup capacity of this instance.
+        :param int backup_volume: The total backup (including data backup and log backup) of the instance occupies capacity.
+        :param int binlog_backup_count: The number of log backups for this instance.
+        :param int binlog_backup_volume: The capacity of the instance log backup.
+        :param int data_backup_count: The total number of data backups (including automatic backups and manual backups) of the instance.
+        :param int data_backup_volume: The total data backup capacity of this instance.
+        :param str instance_id: Instance ID.
+        :param int manual_backup_count: The number of manual data backups for this instance.
+        :param int manual_backup_volume: The capacity of manual data backup for this instance.
+        """
+        pulumi.set(__self__, "auto_backup_count", auto_backup_count)
+        pulumi.set(__self__, "auto_backup_volume", auto_backup_volume)
+        pulumi.set(__self__, "backup_volume", backup_volume)
+        pulumi.set(__self__, "binlog_backup_count", binlog_backup_count)
+        pulumi.set(__self__, "binlog_backup_volume", binlog_backup_volume)
+        pulumi.set(__self__, "data_backup_count", data_backup_count)
+        pulumi.set(__self__, "data_backup_volume", data_backup_volume)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "manual_backup_count", manual_backup_count)
+        pulumi.set(__self__, "manual_backup_volume", manual_backup_volume)
+
+    @property
+    @pulumi.getter(name="autoBackupCount")
+    def auto_backup_count(self) -> int:
+        """
+        The number of automatic data backups for this instance.
+        """
+        return pulumi.get(self, "auto_backup_count")
+
+    @property
+    @pulumi.getter(name="autoBackupVolume")
+    def auto_backup_volume(self) -> int:
+        """
+        The automatic data backup capacity of this instance.
+        """
+        return pulumi.get(self, "auto_backup_volume")
+
+    @property
+    @pulumi.getter(name="backupVolume")
+    def backup_volume(self) -> int:
+        """
+        The total backup (including data backup and log backup) of the instance occupies capacity.
+        """
+        return pulumi.get(self, "backup_volume")
+
+    @property
+    @pulumi.getter(name="binlogBackupCount")
+    def binlog_backup_count(self) -> int:
+        """
+        The number of log backups for this instance.
+        """
+        return pulumi.get(self, "binlog_backup_count")
+
+    @property
+    @pulumi.getter(name="binlogBackupVolume")
+    def binlog_backup_volume(self) -> int:
+        """
+        The capacity of the instance log backup.
+        """
+        return pulumi.get(self, "binlog_backup_volume")
+
+    @property
+    @pulumi.getter(name="dataBackupCount")
+    def data_backup_count(self) -> int:
+        """
+        The total number of data backups (including automatic backups and manual backups) of the instance.
+        """
+        return pulumi.get(self, "data_backup_count")
+
+    @property
+    @pulumi.getter(name="dataBackupVolume")
+    def data_backup_volume(self) -> int:
+        """
+        The total data backup capacity of this instance.
+        """
+        return pulumi.get(self, "data_backup_volume")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="manualBackupCount")
+    def manual_backup_count(self) -> int:
+        """
+        The number of manual data backups for this instance.
+        """
+        return pulumi.get(self, "manual_backup_count")
+
+    @property
+    @pulumi.getter(name="manualBackupVolume")
+    def manual_backup_volume(self) -> int:
+        """
+        The capacity of manual data backup for this instance.
+        """
+        return pulumi.get(self, "manual_backup_volume")
+
+
+@pulumi.output_type
+class GetBinLogItemResult(dict):
+    def __init__(__self__, *,
+                 binlog_finish_time: str,
+                 binlog_start_time: str,
+                 cos_storage_type: int,
+                 date: str,
+                 instance_id: str,
+                 internet_url: str,
+                 intranet_url: str,
+                 name: str,
+                 region: str,
+                 remote_infos: Sequence['outputs.GetBinLogItemRemoteInfoResult'],
+                 size: int,
+                 status: str,
+                 type: str):
+        """
+        :param str binlog_finish_time: binlog file deadline.
+        :param str binlog_start_time: Binlog file start time.
+        :param int cos_storage_type: Storage method, 0-regular storage, 1-archive storage, the default is 0.
+        :param str date: File storage time, time format: 2016-03-17 02:10:37.
+        :param str instance_id: Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
+        :param str internet_url: download link.
+        :param str intranet_url: download link.
+        :param str name: binlog log backup file name.
+        :param str region: The region where remote backup is located.
+        :param Sequence['GetBinLogItemRemoteInfoArgs'] remote_infos: Binlog remote backup details.
+        :param int size: Backup file size, unit: Byte.
+        :param str status: Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+        :param str type: Specific log type, possible values are: binlog - binary log.
+        """
+        pulumi.set(__self__, "binlog_finish_time", binlog_finish_time)
+        pulumi.set(__self__, "binlog_start_time", binlog_start_time)
+        pulumi.set(__self__, "cos_storage_type", cos_storage_type)
+        pulumi.set(__self__, "date", date)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "internet_url", internet_url)
+        pulumi.set(__self__, "intranet_url", intranet_url)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "remote_infos", remote_infos)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="binlogFinishTime")
+    def binlog_finish_time(self) -> str:
+        """
+        binlog file deadline.
+        """
+        return pulumi.get(self, "binlog_finish_time")
+
+    @property
+    @pulumi.getter(name="binlogStartTime")
+    def binlog_start_time(self) -> str:
+        """
+        Binlog file start time.
+        """
+        return pulumi.get(self, "binlog_start_time")
+
+    @property
+    @pulumi.getter(name="cosStorageType")
+    def cos_storage_type(self) -> int:
+        """
+        Storage method, 0-regular storage, 1-archive storage, the default is 0.
+        """
+        return pulumi.get(self, "cos_storage_type")
+
+    @property
+    @pulumi.getter
+    def date(self) -> str:
+        """
+        File storage time, time format: 2016-03-17 02:10:37.
+        """
+        return pulumi.get(self, "date")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="internetUrl")
+    def internet_url(self) -> str:
+        """
+        download link.
+        """
+        return pulumi.get(self, "internet_url")
+
+    @property
+    @pulumi.getter(name="intranetUrl")
+    def intranet_url(self) -> str:
+        """
+        download link.
+        """
+        return pulumi.get(self, "intranet_url")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        binlog log backup file name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        The region where remote backup is located.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="remoteInfos")
+    def remote_infos(self) -> Sequence['outputs.GetBinLogItemRemoteInfoResult']:
+        """
+        Binlog remote backup details.
+        """
+        return pulumi.get(self, "remote_infos")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        Backup file size, unit: Byte.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Specific log type, possible values are: binlog - binary log.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetBinLogItemRemoteInfoResult(dict):
+    def __init__(__self__, *,
+                 finish_time: str,
+                 region: str,
+                 start_time: str,
+                 status: str,
+                 sub_backup_ids: Sequence[int],
+                 url: str):
+        """
+        :param str finish_time: End time of remote backup task.
+        :param str region: The region where remote backup is located.
+        :param str start_time: Start time of remote backup task.
+        :param str status: Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+        :param Sequence[int] sub_backup_ids: The ID of the remote backup subtask.
+        :param str url: download link.
+        """
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "sub_backup_ids", sub_backup_ids)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        End time of remote backup task.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        The region where remote backup is located.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time of remote backup task.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Backup task status. Possible values are `SUCCESS`: backup succeeded, `FAILED`: backup failed, `RUNNING`: backup in progress.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subBackupIds")
+    def sub_backup_ids(self) -> Sequence[int]:
+        """
+        The ID of the remote backup subtask.
+        """
+        return pulumi.get(self, "sub_backup_ids")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        download link.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetCloneListItemResult(dict):
+    def __init__(__self__, *,
+                 clone_job_id: int,
+                 dst_instance_id: str,
+                 end_time: str,
+                 new_region_id: int,
+                 rollback_strategy: str,
+                 rollback_target_time: str,
+                 src_instance_id: str,
+                 src_region_id: int,
+                 start_time: str,
+                 task_status: str):
+        """
+        :param int clone_job_id: Id of the task list corresponding to the clone task.
+        :param str dst_instance_id: The newly spawned instance Id of the clone task.
+        :param str end_time: Task end time.
+        :param int new_region_id: Id of the region where the cloned instance is located.
+        :param str rollback_strategy: The strategy used by the clone instance includes the following types: timepoint: specify the point-in-time rollback, backupset: specify the backup file rollback.
+        :param str rollback_target_time: The time point when the clone instance is rolled back.
+        :param str src_instance_id: The source instance Id of the clone task.
+        :param int src_region_id: Id of the region where the source instance is located.
+        :param str start_time: Task start time.
+        :param str task_status: Task status, including the following status: initial, running, wait_complete, success, failed.
+        """
+        pulumi.set(__self__, "clone_job_id", clone_job_id)
+        pulumi.set(__self__, "dst_instance_id", dst_instance_id)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "new_region_id", new_region_id)
+        pulumi.set(__self__, "rollback_strategy", rollback_strategy)
+        pulumi.set(__self__, "rollback_target_time", rollback_target_time)
+        pulumi.set(__self__, "src_instance_id", src_instance_id)
+        pulumi.set(__self__, "src_region_id", src_region_id)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "task_status", task_status)
+
+    @property
+    @pulumi.getter(name="cloneJobId")
+    def clone_job_id(self) -> int:
+        """
+        Id of the task list corresponding to the clone task.
+        """
+        return pulumi.get(self, "clone_job_id")
+
+    @property
+    @pulumi.getter(name="dstInstanceId")
+    def dst_instance_id(self) -> str:
+        """
+        The newly spawned instance Id of the clone task.
+        """
+        return pulumi.get(self, "dst_instance_id")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Task end time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="newRegionId")
+    def new_region_id(self) -> int:
+        """
+        Id of the region where the cloned instance is located.
+        """
+        return pulumi.get(self, "new_region_id")
+
+    @property
+    @pulumi.getter(name="rollbackStrategy")
+    def rollback_strategy(self) -> str:
+        """
+        The strategy used by the clone instance includes the following types: timepoint: specify the point-in-time rollback, backupset: specify the backup file rollback.
+        """
+        return pulumi.get(self, "rollback_strategy")
+
+    @property
+    @pulumi.getter(name="rollbackTargetTime")
+    def rollback_target_time(self) -> str:
+        """
+        The time point when the clone instance is rolled back.
+        """
+        return pulumi.get(self, "rollback_target_time")
+
+    @property
+    @pulumi.getter(name="srcInstanceId")
+    def src_instance_id(self) -> str:
+        """
+        The source instance Id of the clone task.
+        """
+        return pulumi.get(self, "src_instance_id")
+
+    @property
+    @pulumi.getter(name="srcRegionId")
+    def src_region_id(self) -> int:
+        """
+        Id of the region where the source instance is located.
+        """
+        return pulumi.get(self, "src_region_id")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Task start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="taskStatus")
+    def task_status(self) -> str:
+        """
+        Task status, including the following status: initial, running, wait_complete, success, failed.
+        """
+        return pulumi.get(self, "task_status")
 
 
 @pulumi.output_type

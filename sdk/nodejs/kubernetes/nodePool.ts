@@ -10,6 +10,10 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:**  We recommend the usage of one cluster with essential worker config + node pool to manage cluster and nodes. Its a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, tencentcloud.Kubernetes.ScaleWorker or exist node management of `tencentcloudKubernetesAttachment`. Cause some unchangeable parameters of `workerConfig` may cause the whole cluster resource `force new`.
  *
+ * > **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `deleteKeepInstance` to `false`.
+ *
+ * > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `deleteWithInstance` to `true`.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -62,6 +66,8 @@ import * as utilities from "../utilities";
  *         password: "test123#",
  *         enhancedSecurityService: false,
  *         enhancedMonitorService: false,
+ *         hostName: "12.123.0.0",
+ *         hostNameStyle: "ORIGINAL",
  *     },
  *     labels: {
  *         test1: "test1",
@@ -256,6 +262,10 @@ export class NodePool extends pulumi.CustomResource {
      */
     public readonly subnetIds!: pulumi.Output<string[] | undefined>;
     /**
+     * Node pool tag specifications, will passthroughs to the scaling instances.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    /**
      * Taints of kubernetes node pool created nodes.
      */
     public readonly taints!: pulumi.Output<outputs.Kubernetes.NodePoolTaint[] | undefined>;
@@ -314,6 +324,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["scalingMode"] = state ? state.scalingMode : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["subnetIds"] = state ? state.subnetIds : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["taints"] = state ? state.taints : undefined;
             resourceInputs["terminationPolicies"] = state ? state.terminationPolicies : undefined;
             resourceInputs["unschedulable"] = state ? state.unschedulable : undefined;
@@ -355,6 +366,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["scalingGroupProjectId"] = args ? args.scalingGroupProjectId : undefined;
             resourceInputs["scalingMode"] = args ? args.scalingMode : undefined;
             resourceInputs["subnetIds"] = args ? args.subnetIds : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["taints"] = args ? args.taints : undefined;
             resourceInputs["terminationPolicies"] = args ? args.terminationPolicies : undefined;
             resourceInputs["unschedulable"] = args ? args.unschedulable : undefined;
@@ -477,6 +489,10 @@ export interface NodePoolState {
      */
     subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Node pool tag specifications, will passthroughs to the scaling instances.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
+    /**
      * Taints of kubernetes node pool created nodes.
      */
     taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolTaint>[]>;
@@ -578,6 +594,10 @@ export interface NodePoolArgs {
      * ID list of subnet, and for VPC it is required.
      */
     subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Node pool tag specifications, will passthroughs to the scaling instances.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
     /**
      * Taints of kubernetes node pool created nodes.
      */

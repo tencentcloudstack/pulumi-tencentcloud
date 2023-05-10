@@ -32,7 +32,7 @@ type GetInstanceDnatList struct {
 // GetInstanceDnatListInput is an input type that accepts GetInstanceDnatListArgs and GetInstanceDnatListOutput values.
 // You can construct a concrete instance of `GetInstanceDnatListInput` via:
 //
-//	GetInstanceDnatListArgs{...}
+//          GetInstanceDnatListArgs{...}
 type GetInstanceDnatListInput interface {
 	pulumi.Input
 
@@ -74,7 +74,7 @@ func (i GetInstanceDnatListArgs) ToGetInstanceDnatListOutputWithContext(ctx cont
 // GetInstanceDnatListArrayInput is an input type that accepts GetInstanceDnatListArray and GetInstanceDnatListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceDnatListArrayInput` via:
 //
-//	GetInstanceDnatListArray{ GetInstanceDnatListArgs{...} }
+//          GetInstanceDnatListArray{ GetInstanceDnatListArgs{...} }
 type GetInstanceDnatListArrayInput interface {
 	pulumi.Input
 

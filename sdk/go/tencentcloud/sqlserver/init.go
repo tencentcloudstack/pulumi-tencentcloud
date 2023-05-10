@@ -27,10 +27,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AccountDbAttachment{}
 	case "tencentcloud:Sqlserver/basicInstance:BasicInstance":
 		r = &BasicInstance{}
+	case "tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy":
+		r = &ConfigBackupStrategy{}
 	case "tencentcloud:Sqlserver/db:Db":
 		r = &Db{}
 	case "tencentcloud:Sqlserver/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Sqlserver/migration:Migration":
+		r = &Migration{}
 	case "tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe":
 		r = &PublishSubscribe{}
 	case "tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance":
@@ -65,12 +69,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Sqlserver/configBackupStrategy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Sqlserver/db",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Sqlserver/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/migration",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

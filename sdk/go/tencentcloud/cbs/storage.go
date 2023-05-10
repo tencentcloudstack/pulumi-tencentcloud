@@ -19,32 +19,29 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cbs.NewStorage(ctx, "storage", &Cbs.StorageArgs{
-//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-//				Encrypt:          pulumi.Bool(false),
-//				ProjectId:        pulumi.Int(0),
-//				StorageName:      pulumi.String("mystorage"),
-//				StorageSize:      pulumi.Int(100),
-//				StorageType:      pulumi.String("CLOUD_SSD"),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("tf"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewStorage(ctx, "storage", &Cbs.StorageArgs{
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			Encrypt:          pulumi.Bool(false),
+// 			ProjectId:        pulumi.Int(0),
+// 			StorageName:      pulumi.String("mystorage"),
+// 			StorageSize:      pulumi.Int(100),
+// 			StorageType:      pulumi.String("CLOUD_SSD"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -52,9 +49,7 @@ import (
 // CBS storage can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
-//
+//  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
 // ```
 type Storage struct {
 	pulumi.CustomResourceState
@@ -65,6 +60,8 @@ type Storage struct {
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
 	// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// The quota of backup points of cloud disk.
+	DiskBackupQuota pulumi.IntOutput `pulumi:"diskBackupQuota"`
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolPtrOutput `pulumi:"encrypt"`
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
@@ -83,11 +80,11 @@ type Storage struct {
 	SnapshotId pulumi.StringOutput `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringOutput `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize pulumi.IntOutput `pulumi:"storageSize"`
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus pulumi.StringOutput `pulumi:"storageStatus"`
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType pulumi.StringOutput `pulumi:"storageType"`
 	// The available tags within this CBS.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -143,6 +140,8 @@ type storageState struct {
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
+	// The quota of backup points of cloud disk.
+	DiskBackupQuota *int `pulumi:"diskBackupQuota"`
 	// Indicates whether CBS is encrypted.
 	Encrypt *bool `pulumi:"encrypt"`
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
@@ -161,11 +160,11 @@ type storageState struct {
 	SnapshotId *string `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName *string `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize *int `pulumi:"storageSize"`
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus *string `pulumi:"storageStatus"`
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType *string `pulumi:"storageType"`
 	// The available tags within this CBS.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -180,6 +179,8 @@ type StorageState struct {
 	AvailabilityZone pulumi.StringPtrInput
 	// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
+	// The quota of backup points of cloud disk.
+	DiskBackupQuota pulumi.IntPtrInput
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolPtrInput
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
@@ -198,11 +199,11 @@ type StorageState struct {
 	SnapshotId pulumi.StringPtrInput
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringPtrInput
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize pulumi.IntPtrInput
 	// Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
 	StorageStatus pulumi.StringPtrInput
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType pulumi.StringPtrInput
 	// The available tags within this CBS.
 	Tags pulumi.MapInput
@@ -219,6 +220,8 @@ type storageArgs struct {
 	AvailabilityZone string `pulumi:"availabilityZone"`
 	// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
+	// The quota of backup points of cloud disk.
+	DiskBackupQuota *int `pulumi:"diskBackupQuota"`
 	// Indicates whether CBS is encrypted.
 	Encrypt *bool `pulumi:"encrypt"`
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
@@ -237,9 +240,9 @@ type storageArgs struct {
 	SnapshotId *string `pulumi:"snapshotId"`
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName string `pulumi:"storageName"`
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize int `pulumi:"storageSize"`
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType string `pulumi:"storageType"`
 	// The available tags within this CBS.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -253,6 +256,8 @@ type StorageArgs struct {
 	AvailabilityZone pulumi.StringInput
 	// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
+	// The quota of backup points of cloud disk.
+	DiskBackupQuota pulumi.IntPtrInput
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolPtrInput
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
@@ -271,9 +276,9 @@ type StorageArgs struct {
 	SnapshotId pulumi.StringPtrInput
 	// Name of CBS. The maximum length can not exceed 60 bytes.
 	StorageName pulumi.StringInput
-	// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+	// Volume of CBS, and unit is GB.
 	StorageSize pulumi.IntInput
-	// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+	// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 	StorageType pulumi.StringInput
 	// The available tags within this CBS.
 	Tags pulumi.MapInput
@@ -307,7 +312,7 @@ func (i *Storage) ToStorageOutputWithContext(ctx context.Context) StorageOutput 
 // StorageArrayInput is an input type that accepts StorageArray and StorageArrayOutput values.
 // You can construct a concrete instance of `StorageArrayInput` via:
 //
-//	StorageArray{ StorageArgs{...} }
+//          StorageArray{ StorageArgs{...} }
 type StorageArrayInput interface {
 	pulumi.Input
 
@@ -332,7 +337,7 @@ func (i StorageArray) ToStorageArrayOutputWithContext(ctx context.Context) Stora
 // StorageMapInput is an input type that accepts StorageMap and StorageMapOutput values.
 // You can construct a concrete instance of `StorageMapInput` via:
 //
-//	StorageMap{ "key": StorageArgs{...} }
+//          StorageMap{ "key": StorageArgs{...} }
 type StorageMapInput interface {
 	pulumi.Input
 
@@ -383,6 +388,11 @@ func (o StorageOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
 
+// The quota of backup points of cloud disk.
+func (o StorageOutput) DiskBackupQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v *Storage) pulumi.IntOutput { return v.DiskBackupQuota }).(pulumi.IntOutput)
+}
+
 // Indicates whether CBS is encrypted.
 func (o StorageOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.BoolPtrOutput { return v.Encrypt }).(pulumi.BoolPtrOutput)
@@ -425,7 +435,7 @@ func (o StorageOutput) StorageName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Storage) pulumi.StringOutput { return v.StorageName }).(pulumi.StringOutput)
 }
 
-// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+// Volume of CBS, and unit is GB.
 func (o StorageOutput) StorageSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Storage) pulumi.IntOutput { return v.StorageSize }).(pulumi.IntOutput)
 }
@@ -435,7 +445,7 @@ func (o StorageOutput) StorageStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Storage) pulumi.StringOutput { return v.StorageStatus }).(pulumi.StringOutput)
 }
 
-// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
 func (o StorageOutput) StorageType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Storage) pulumi.StringOutput { return v.StorageType }).(pulumi.StringOutput)
 }

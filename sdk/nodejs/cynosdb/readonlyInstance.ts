@@ -78,9 +78,9 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    public readonly instanceCpuCore!: pulumi.Output<number>;
+    public readonly instanceCpuCore!: pulumi.Output<number | undefined>;
     /**
      * Duration time for maintenance, unit in second. `3600` by default.
      */
@@ -94,9 +94,9 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly instanceMaintainWeekdays!: pulumi.Output<string[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    public readonly instanceMemorySize!: pulumi.Output<number>;
+    public readonly instanceMemorySize!: pulumi.Output<number | undefined>;
     /**
      * Name of instance.
      */
@@ -138,12 +138,6 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             if ((!args || args.clusterId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clusterId'");
             }
-            if ((!args || args.instanceCpuCore === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'instanceCpuCore'");
-            }
-            if ((!args || args.instanceMemorySize === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'instanceMemorySize'");
-            }
             if ((!args || args.instanceName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceName'");
             }
@@ -176,7 +170,7 @@ export interface ReadonlyInstanceState {
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceCpuCore?: pulumi.Input<number>;
     /**
@@ -192,7 +186,7 @@ export interface ReadonlyInstanceState {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceMemorySize?: pulumi.Input<number>;
     /**
@@ -222,9 +216,9 @@ export interface ReadonlyInstanceArgs {
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceCpuCore: pulumi.Input<number>;
+    instanceCpuCore?: pulumi.Input<number>;
     /**
      * Duration time for maintenance, unit in second. `3600` by default.
      */
@@ -238,9 +232,9 @@ export interface ReadonlyInstanceArgs {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceMemorySize: pulumi.Input<number>;
+    instanceMemorySize?: pulumi.Input<number>;
     /**
      * Name of instance.
      */

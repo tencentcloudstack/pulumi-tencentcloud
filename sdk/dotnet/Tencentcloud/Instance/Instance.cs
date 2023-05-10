@@ -77,6 +77,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<ImmutableArray<Outputs.InstanceDataDisk>> DataDisks { get; private set; } = null!;
 
         /// <summary>
+        /// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        /// </summary>
+        [Output("disableApiTermination")]
+        public Output<bool?> DisableApiTermination { get; private set; } = null!;
+
+        /// <summary>
         /// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         /// </summary>
         [Output("disableMonitorService")]
@@ -155,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string> InstanceType { get; private set; } = null!;
 
         /// <summary>
-        /// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        /// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         /// </summary>
         [Output("internetChargeType")]
         public Output<string> InternetChargeType { get; private set; } = null!;
@@ -175,8 +181,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// <summary>
         /// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
         /// </summary>
+        [Output("keyIds")]
+        public Output<ImmutableArray<string>> KeyIds { get; private set; } = null!;
+
+        /// <summary>
+        /// Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        /// </summary>
         [Output("keyName")]
         public Output<string> KeyName { get; private set; } = null!;
+
+        /// <summary>
+        /// A list of orderly security group IDs to associate with.
+        /// </summary>
+        [Output("orderlySecurityGroups")]
+        public Output<ImmutableArray<string>> OrderlySecurityGroups { get; private set; } = null!;
 
         /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
@@ -215,7 +233,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<bool?> RunningFlag { get; private set; } = null!;
 
         /// <summary>
-        /// A list of security group IDs to associate with.
+        /// It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         /// </summary>
         [Output("securityGroups")]
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
@@ -251,13 +269,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string> SystemDiskId { get; private set; } = null!;
 
         /// <summary>
-        /// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+        /// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         /// </summary>
         [Output("systemDiskSize")]
         public Output<int?> SystemDiskSize { get; private set; } = null!;
 
         /// <summary>
-        /// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        /// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         /// </summary>
         [Output("systemDiskType")]
         public Output<string?> SystemDiskType { get; private set; } = null!;
@@ -382,6 +400,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
 
         /// <summary>
+        /// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        /// </summary>
+        [Input("disableApiTermination")]
+        public Input<bool>? DisableApiTermination { get; set; }
+
+        /// <summary>
         /// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         /// </summary>
         [Input("disableMonitorService")]
@@ -448,7 +472,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? InstanceType { get; set; }
 
         /// <summary>
-        /// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        /// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -465,11 +489,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("keepImageLogin")]
         public Input<bool>? KeepImageLogin { get; set; }
 
+        [Input("keyIds")]
+        private InputList<string>? _keyIds;
+
         /// <summary>
         /// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
         /// </summary>
+        public InputList<string> KeyIds
+        {
+            get => _keyIds ?? (_keyIds = new InputList<string>());
+            set => _keyIds = value;
+        }
+
+        /// <summary>
+        /// Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        /// </summary>
         [Input("keyName")]
         public Input<string>? KeyName { get; set; }
+
+        [Input("orderlySecurityGroups")]
+        private InputList<string>? _orderlySecurityGroups;
+
+        /// <summary>
+        /// A list of orderly security group IDs to associate with.
+        /// </summary>
+        public InputList<string> OrderlySecurityGroups
+        {
+            get => _orderlySecurityGroups ?? (_orderlySecurityGroups = new InputList<string>());
+            set => _orderlySecurityGroups = value;
+        }
 
         /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
@@ -505,8 +553,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// A list of security group IDs to associate with.
+        /// It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         /// </summary>
+        [Obsolete(@"It will be deprecated. Use `orderly_security_groups` instead.")]
         public InputList<string> SecurityGroups
         {
             get => _securityGroups ?? (_securityGroups = new InputList<string>());
@@ -544,13 +593,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? SystemDiskId { get; set; }
 
         /// <summary>
-        /// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+        /// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         /// </summary>
         [Input("systemDiskSize")]
         public Input<int>? SystemDiskSize { get; set; }
 
         /// <summary>
-        /// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        /// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         /// </summary>
         [Input("systemDiskType")]
         public Input<string>? SystemDiskType { get; set; }
@@ -647,6 +696,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
 
         /// <summary>
+        /// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        /// </summary>
+        [Input("disableApiTermination")]
+        public Input<bool>? DisableApiTermination { get; set; }
+
+        /// <summary>
         /// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         /// </summary>
         [Input("disableMonitorService")]
@@ -725,7 +780,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? InstanceType { get; set; }
 
         /// <summary>
-        /// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        /// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -742,11 +797,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("keepImageLogin")]
         public Input<bool>? KeepImageLogin { get; set; }
 
+        [Input("keyIds")]
+        private InputList<string>? _keyIds;
+
         /// <summary>
         /// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
         /// </summary>
+        public InputList<string> KeyIds
+        {
+            get => _keyIds ?? (_keyIds = new InputList<string>());
+            set => _keyIds = value;
+        }
+
+        /// <summary>
+        /// Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        /// </summary>
         [Input("keyName")]
         public Input<string>? KeyName { get; set; }
+
+        [Input("orderlySecurityGroups")]
+        private InputList<string>? _orderlySecurityGroups;
+
+        /// <summary>
+        /// A list of orderly security group IDs to associate with.
+        /// </summary>
+        public InputList<string> OrderlySecurityGroups
+        {
+            get => _orderlySecurityGroups ?? (_orderlySecurityGroups = new InputList<string>());
+            set => _orderlySecurityGroups = value;
+        }
 
         /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
@@ -788,8 +867,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// A list of security group IDs to associate with.
+        /// It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         /// </summary>
+        [Obsolete(@"It will be deprecated. Use `orderly_security_groups` instead.")]
         public InputList<string> SecurityGroups
         {
             get => _securityGroups ?? (_securityGroups = new InputList<string>());
@@ -827,13 +907,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? SystemDiskId { get; set; }
 
         /// <summary>
-        /// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+        /// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         /// </summary>
         [Input("systemDiskSize")]
         public Input<int>? SystemDiskSize { get; set; }
 
         /// <summary>
-        /// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        /// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         /// </summary>
         [Input("systemDiskType")]
         public Input<string>? SystemDiskType { get; set; }

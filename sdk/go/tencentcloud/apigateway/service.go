@@ -19,34 +19,31 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-//				IpVersion: pulumi.String("IPv4"),
-//				NetTypes: pulumi.StringArray{
-//					pulumi.String("INNER"),
-//					pulumi.String("OUTER"),
-//				},
-//				PreLimit:     pulumi.Int(500),
-//				Protocol:     pulumi.String("http&https"),
-//				ReleaseLimit: pulumi.Int(500),
-//				ServiceDesc:  pulumi.String("your nice service"),
-//				ServiceName:  pulumi.String("niceservice"),
-//				TestLimit:    pulumi.Int(500),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+// 			IpVersion: pulumi.String("IPv4"),
+// 			NetTypes: pulumi.StringArray{
+// 				pulumi.String("INNER"),
+// 				pulumi.String("OUTER"),
+// 			},
+// 			PreLimit:     pulumi.Int(500),
+// 			Protocol:     pulumi.String("http&https"),
+// 			ReleaseLimit: pulumi.Int(500),
+// 			ServiceDesc:  pulumi.String("your nice service"),
+// 			ServiceName:  pulumi.String("niceservice"),
+// 			TestLimit:    pulumi.Int(500),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -54,9 +51,7 @@ import (
 // API gateway service can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
-//
+//  $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
 // ```
 type Service struct {
 	pulumi.CustomResourceState
@@ -282,7 +277,7 @@ func (i *Service) ToServiceOutputWithContext(ctx context.Context) ServiceOutput 
 // ServiceArrayInput is an input type that accepts ServiceArray and ServiceArrayOutput values.
 // You can construct a concrete instance of `ServiceArrayInput` via:
 //
-//	ServiceArray{ ServiceArgs{...} }
+//          ServiceArray{ ServiceArgs{...} }
 type ServiceArrayInput interface {
 	pulumi.Input
 
@@ -307,7 +302,7 @@ func (i ServiceArray) ToServiceArrayOutputWithContext(ctx context.Context) Servi
 // ServiceMapInput is an input type that accepts ServiceMap and ServiceMapOutput values.
 // You can construct a concrete instance of `ServiceMapInput` via:
 //
-//	ServiceMap{ "key": ServiceArgs{...} }
+//          ServiceMap{ "key": ServiceArgs{...} }
 type ServiceMapInput interface {
 	pulumi.Input
 

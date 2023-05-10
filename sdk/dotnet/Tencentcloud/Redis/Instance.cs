@@ -13,6 +13,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// <summary>
     /// Provides a resource to create a Redis instance and set its attributes.
     /// 
+    /// &gt; **NOTE:** The argument vpc_id and subnet_id is now required because Basic Network Instance is no longer supported.
+    /// 
+    /// &gt; **NOTE:** Both adding and removing replications in one change is supported but not recommend.
+    /// 
     /// ## Import
     /// 
     /// Redis instance can be imported, e.g.
@@ -79,6 +83,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<bool?> NoAuth { get; private set; } = null!;
 
         /// <summary>
+        /// Readonly Primary/Replica nodes.
+        /// </summary>
+        [Output("nodeInfos")]
+        public Output<ImmutableArray<Outputs.InstanceNodeInfo>> NodeInfos { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify params template id. If not set, will use default template.
+        /// </summary>
+        [Output("paramsTemplateId")]
+        public Output<string?> ParamsTemplateId { get; private set; } = null!;
+
+        /// <summary>
         /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
         [Output("password")]
@@ -103,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         /// </summary>
         [Output("redisReplicasNum")]
         public Output<int?> RedisReplicasNum { get; private set; } = null!;
@@ -115,7 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int> RedisShardNum { get; private set; } = null!;
 
         /// <summary>
-        /// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        /// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         /// </summary>
         [Output("replicaZoneIds")]
         public Output<ImmutableArray<int>> ReplicaZoneIds { get; private set; } = null!;
@@ -258,6 +274,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<bool>? NoAuth { get; set; }
 
         /// <summary>
+        /// Specify params template id. If not set, will use default template.
+        /// </summary>
+        [Input("paramsTemplateId")]
+        public Input<string>? ParamsTemplateId { get; set; }
+
+        /// <summary>
         /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
         [Input("password")]
@@ -282,7 +304,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         /// </summary>
         [Input("redisReplicasNum")]
         public Input<int>? RedisReplicasNum { get; set; }
@@ -297,7 +319,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         private InputList<int>? _replicaZoneIds;
 
         /// <summary>
-        /// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        /// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         /// </summary>
         public InputList<int> ReplicaZoneIds
         {
@@ -420,6 +442,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         [Input("noAuth")]
         public Input<bool>? NoAuth { get; set; }
 
+        [Input("nodeInfos")]
+        private InputList<Inputs.InstanceNodeInfoGetArgs>? _nodeInfos;
+
+        /// <summary>
+        /// Readonly Primary/Replica nodes.
+        /// </summary>
+        public InputList<Inputs.InstanceNodeInfoGetArgs> NodeInfos
+        {
+            get => _nodeInfos ?? (_nodeInfos = new InputList<Inputs.InstanceNodeInfoGetArgs>());
+            set => _nodeInfos = value;
+        }
+
+        /// <summary>
+        /// Specify params template id. If not set, will use default template.
+        /// </summary>
+        [Input("paramsTemplateId")]
+        public Input<string>? ParamsTemplateId { get; set; }
+
         /// <summary>
         /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
@@ -445,7 +485,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         /// </summary>
         [Input("redisReplicasNum")]
         public Input<int>? RedisReplicasNum { get; set; }
@@ -460,7 +500,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         private InputList<int>? _replicaZoneIds;
 
         /// <summary>
-        /// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+        /// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         /// </summary>
         public InputList<int> ReplicaZoneIds
         {

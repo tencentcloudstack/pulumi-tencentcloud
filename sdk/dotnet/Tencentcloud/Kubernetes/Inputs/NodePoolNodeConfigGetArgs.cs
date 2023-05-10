@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         }
 
         /// <summary>
+        /// GPU driver parameters.
+        /// </summary>
+        [Input("gpuArgs")]
+        public Input<Inputs.NodePoolNodeConfigGpuArgsGetArgs>? GpuArgs { get; set; }
+
+        /// <summary>
         /// Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         [Input("isSchedule")]

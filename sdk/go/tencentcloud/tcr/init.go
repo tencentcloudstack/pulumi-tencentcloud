@@ -21,16 +21,30 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation":
+		r = &CreateImageSignatureOperation{}
+	case "tencentcloud:Tcr/customizedDomain:CustomizedDomain":
+		r = &CustomizedDomain{}
+	case "tencentcloud:Tcr/deleteImageOperation:DeleteImageOperation":
+		r = &DeleteImageOperation{}
+	case "tencentcloud:Tcr/immutableTagRule:ImmutableTagRule":
+		r = &ImmutableTagRule{}
 	case "tencentcloud:Tcr/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Tcr/manageReplicationOperation:ManageReplicationOperation":
+		r = &ManageReplicationOperation{}
 	case "tencentcloud:Tcr/namespace:Namespace":
 		r = &Namespace{}
 	case "tencentcloud:Tcr/repository:Repository":
 		r = &Repository{}
+	case "tencentcloud:Tcr/tagRetentionRule:TagRetentionRule":
+		r = &TagRetentionRule{}
 	case "tencentcloud:Tcr/token:Token":
 		r = &Token{}
 	case "tencentcloud:Tcr/vpcAttachment:VpcAttachment":
 		r = &VpcAttachment{}
+	case "tencentcloud:Tcr/webhookTrigger:WebhookTrigger":
+		r = &WebhookTrigger{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -46,7 +60,32 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Tcr/createImageSignatureOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tcr/customizedDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tcr/deleteImageOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tcr/immutableTagRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Tcr/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tcr/manageReplicationOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -61,12 +100,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Tcr/tagRetentionRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Tcr/token",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tcr/vpcAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tcr/webhookTrigger",
 		&module{version},
 	)
 }

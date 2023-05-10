@@ -12,6 +12,40 @@ import (
 )
 
 // Provides a resource to create a tmp tke template
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Monitor.NewTmpTkeTemplate(ctx, "template", &Monitor.TmpTkeTemplateArgs{
+// 			Template: &monitor.TmpTkeTemplateTemplateArgs{
+// 				Describe: pulumi.String("template"),
+// 				Level:    pulumi.String("cluster"),
+// 				Name:     pulumi.String("test"),
+// 				ServiceMonitors: monitor.TmpTkeTemplateTemplateServiceMonitorArray{
+// 					&monitor.TmpTkeTemplateTemplateServiceMonitorArgs{
+// 						Config: pulumi.String("xxxxx"),
+// 						Name:   pulumi.String("test"),
+// 					},
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type TmpTkeTemplate struct {
 	pulumi.CustomResourceState
 
@@ -102,7 +136,7 @@ func (i *TmpTkeTemplate) ToTmpTkeTemplateOutputWithContext(ctx context.Context) 
 // TmpTkeTemplateArrayInput is an input type that accepts TmpTkeTemplateArray and TmpTkeTemplateArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateArrayInput` via:
 //
-//	TmpTkeTemplateArray{ TmpTkeTemplateArgs{...} }
+//          TmpTkeTemplateArray{ TmpTkeTemplateArgs{...} }
 type TmpTkeTemplateArrayInput interface {
 	pulumi.Input
 
@@ -127,7 +161,7 @@ func (i TmpTkeTemplateArray) ToTmpTkeTemplateArrayOutputWithContext(ctx context.
 // TmpTkeTemplateMapInput is an input type that accepts TmpTkeTemplateMap and TmpTkeTemplateMapOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateMapInput` via:
 //
-//	TmpTkeTemplateMap{ "key": TmpTkeTemplateArgs{...} }
+//          TmpTkeTemplateMap{ "key": TmpTkeTemplateArgs{...} }
 type TmpTkeTemplateMapInput interface {
 	pulumi.Input
 

@@ -22,6 +22,7 @@ class DomainArgs:
                  authentication: Optional[pulumi.Input['DomainAuthenticationArgs']] = None,
                  aws_private_access: Optional[pulumi.Input['DomainAwsPrivateAccessArgs']] = None,
                  band_width_alert: Optional[pulumi.Input['DomainBandWidthAlertArgs']] = None,
+                 cache_key: Optional[pulumi.Input['DomainCacheKeyArgs']] = None,
                  compression: Optional[pulumi.Input['DomainCompressionArgs']] = None,
                  downstream_capping: Optional[pulumi.Input['DomainDownstreamCappingArgs']] = None,
                  error_page: Optional[pulumi.Input['DomainErrorPageArgs']] = None,
@@ -38,6 +39,7 @@ class DomainArgs:
                  origin_pull_optimization: Optional[pulumi.Input['DomainOriginPullOptimizationArgs']] = None,
                  origin_pull_timeout: Optional[pulumi.Input['DomainOriginPullTimeoutArgs']] = None,
                  oss_private_access: Optional[pulumi.Input['DomainOssPrivateAccessArgs']] = None,
+                 post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input['DomainQnPrivateAccessArgs']] = None,
                  quic_switch: Optional[pulumi.Input[str]] = None,
@@ -57,17 +59,18 @@ class DomainArgs:
         The set of arguments for constructing a Domain resource.
         :param pulumi.Input[str] domain: Name of the acceleration domain.
         :param pulumi.Input['DomainOriginArgs'] origin: Origin server configuration. It's a list and consist of at most one item.
-        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         :param pulumi.Input[str] area: Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
         :param pulumi.Input['DomainAuthenticationArgs'] authentication: Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
         :param pulumi.Input['DomainAwsPrivateAccessArgs'] aws_private_access: Access authentication for S3 origin.
         :param pulumi.Input['DomainBandWidthAlertArgs'] band_width_alert: Bandwidth cap configuration.
+        :param pulumi.Input['DomainCacheKeyArgs'] cache_key: Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
         :param pulumi.Input['DomainCompressionArgs'] compression: Smart compression configurations.
         :param pulumi.Input['DomainDownstreamCappingArgs'] downstream_capping: Downstream capping configuration.
         :param pulumi.Input['DomainErrorPageArgs'] error_page: Error page configurations.
         :param pulumi.Input[bool] explicit_using_dry_run: Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
         :param pulumi.Input[str] follow_redirect_switch: 301/302 redirect following switch, available values: `on`, `off` (default).
-        :param pulumi.Input[bool] full_url_cache: Whether to enable full-path cache. Default value is `true`.
+        :param pulumi.Input[bool] full_url_cache: Use `cache_key` > `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         :param pulumi.Input['DomainHttpsConfigArgs'] https_config: HTTPS acceleration configuration. It's a list and consist of at most one item.
         :param pulumi.Input['DomainHwPrivateAccessArgs'] hw_private_access: Access authentication for OBS origin.
         :param pulumi.Input['DomainIpFilterArgs'] ip_filter: Specify Ip filter configurations.
@@ -78,6 +81,7 @@ class DomainArgs:
         :param pulumi.Input['DomainOriginPullOptimizationArgs'] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input['DomainOriginPullTimeoutArgs'] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input['DomainOssPrivateAccessArgs'] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input['DomainQnPrivateAccessArgs'] qn_private_access: Access authentication for OBS origin.
         :param pulumi.Input[str] quic_switch: QUIC switch, available values: `on`, `off` (default).
@@ -105,6 +109,8 @@ class DomainArgs:
             pulumi.set(__self__, "aws_private_access", aws_private_access)
         if band_width_alert is not None:
             pulumi.set(__self__, "band_width_alert", band_width_alert)
+        if cache_key is not None:
+            pulumi.set(__self__, "cache_key", cache_key)
         if compression is not None:
             pulumi.set(__self__, "compression", compression)
         if downstream_capping is not None:
@@ -115,6 +121,9 @@ class DomainArgs:
             pulumi.set(__self__, "explicit_using_dry_run", explicit_using_dry_run)
         if follow_redirect_switch is not None:
             pulumi.set(__self__, "follow_redirect_switch", follow_redirect_switch)
+        if full_url_cache is not None:
+            warnings.warn("""Use `cache_key` -> `full_url_cache` instead.""", DeprecationWarning)
+            pulumi.log.warn("""full_url_cache is deprecated: Use `cache_key` -> `full_url_cache` instead.""")
         if full_url_cache is not None:
             pulumi.set(__self__, "full_url_cache", full_url_cache)
         if https_config is not None:
@@ -137,6 +146,8 @@ class DomainArgs:
             pulumi.set(__self__, "origin_pull_timeout", origin_pull_timeout)
         if oss_private_access is not None:
             pulumi.set(__self__, "oss_private_access", oss_private_access)
+        if post_max_sizes is not None:
+            pulumi.set(__self__, "post_max_sizes", post_max_sizes)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if qn_private_access is not None:
@@ -196,7 +207,7 @@ class DomainArgs:
     @pulumi.getter(name="serviceType")
     def service_type(self) -> pulumi.Input[str]:
         """
-        Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         """
         return pulumi.get(self, "service_type")
 
@@ -251,6 +262,18 @@ class DomainArgs:
     @band_width_alert.setter
     def band_width_alert(self, value: Optional[pulumi.Input['DomainBandWidthAlertArgs']]):
         pulumi.set(self, "band_width_alert", value)
+
+    @property
+    @pulumi.getter(name="cacheKey")
+    def cache_key(self) -> Optional[pulumi.Input['DomainCacheKeyArgs']]:
+        """
+        Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
+        """
+        return pulumi.get(self, "cache_key")
+
+    @cache_key.setter
+    def cache_key(self, value: Optional[pulumi.Input['DomainCacheKeyArgs']]):
+        pulumi.set(self, "cache_key", value)
 
     @property
     @pulumi.getter
@@ -316,7 +339,7 @@ class DomainArgs:
     @pulumi.getter(name="fullUrlCache")
     def full_url_cache(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to enable full-path cache. Default value is `true`.
+        Use `cache_key` > `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         """
         return pulumi.get(self, "full_url_cache")
 
@@ -443,6 +466,18 @@ class DomainArgs:
     @oss_private_access.setter
     def oss_private_access(self, value: Optional[pulumi.Input['DomainOssPrivateAccessArgs']]):
         pulumi.set(self, "oss_private_access", value)
+
+    @property
+    @pulumi.getter(name="postMaxSizes")
+    def post_max_sizes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]]:
+        """
+        Maximum post size configuration.
+        """
+        return pulumi.get(self, "post_max_sizes")
+
+    @post_max_sizes.setter
+    def post_max_sizes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]]):
+        pulumi.set(self, "post_max_sizes", value)
 
     @property
     @pulumi.getter(name="projectId")
@@ -632,6 +667,7 @@ class _DomainState:
                  authentication: Optional[pulumi.Input['DomainAuthenticationArgs']] = None,
                  aws_private_access: Optional[pulumi.Input['DomainAwsPrivateAccessArgs']] = None,
                  band_width_alert: Optional[pulumi.Input['DomainBandWidthAlertArgs']] = None,
+                 cache_key: Optional[pulumi.Input['DomainCacheKeyArgs']] = None,
                  cname: Optional[pulumi.Input[str]] = None,
                  compression: Optional[pulumi.Input['DomainCompressionArgs']] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
@@ -654,6 +690,7 @@ class _DomainState:
                  origin_pull_optimization: Optional[pulumi.Input['DomainOriginPullOptimizationArgs']] = None,
                  origin_pull_timeout: Optional[pulumi.Input['DomainOriginPullTimeoutArgs']] = None,
                  oss_private_access: Optional[pulumi.Input['DomainOssPrivateAccessArgs']] = None,
+                 post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input['DomainQnPrivateAccessArgs']] = None,
                  quic_switch: Optional[pulumi.Input[str]] = None,
@@ -677,6 +714,7 @@ class _DomainState:
         :param pulumi.Input['DomainAuthenticationArgs'] authentication: Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
         :param pulumi.Input['DomainAwsPrivateAccessArgs'] aws_private_access: Access authentication for S3 origin.
         :param pulumi.Input['DomainBandWidthAlertArgs'] band_width_alert: Bandwidth cap configuration.
+        :param pulumi.Input['DomainCacheKeyArgs'] cache_key: Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
         :param pulumi.Input[str] cname: CNAME address of domain name.
         :param pulumi.Input['DomainCompressionArgs'] compression: Smart compression configurations.
         :param pulumi.Input[str] create_time: Creation time of domain name.
@@ -687,7 +725,7 @@ class _DomainState:
         :param pulumi.Input['DomainErrorPageArgs'] error_page: Error page configurations.
         :param pulumi.Input[bool] explicit_using_dry_run: Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
         :param pulumi.Input[str] follow_redirect_switch: 301/302 redirect following switch, available values: `on`, `off` (default).
-        :param pulumi.Input[bool] full_url_cache: Whether to enable full-path cache. Default value is `true`.
+        :param pulumi.Input[bool] full_url_cache: Use `cache_key` > `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         :param pulumi.Input['DomainHttpsConfigArgs'] https_config: HTTPS acceleration configuration. It's a list and consist of at most one item.
         :param pulumi.Input['DomainHwPrivateAccessArgs'] hw_private_access: Access authentication for OBS origin.
         :param pulumi.Input['DomainIpFilterArgs'] ip_filter: Specify Ip filter configurations.
@@ -699,6 +737,7 @@ class _DomainState:
         :param pulumi.Input['DomainOriginPullOptimizationArgs'] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input['DomainOriginPullTimeoutArgs'] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input['DomainOssPrivateAccessArgs'] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input['DomainQnPrivateAccessArgs'] qn_private_access: Access authentication for OBS origin.
         :param pulumi.Input[str] quic_switch: QUIC switch, available values: `on`, `off` (default).
@@ -709,7 +748,7 @@ class _DomainState:
         :param pulumi.Input[str] response_header_cache_switch: Response header cache switch, available values: `on`, `off` (default).
         :param pulumi.Input[Sequence[pulumi.Input['DomainRuleCachArgs']]] rule_caches: Advanced path cache configuration.
         :param pulumi.Input[str] seo_switch: SEO switch, available values: `on`, `off` (default).
-        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         :param pulumi.Input[str] specific_config_mainland: Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
         :param pulumi.Input[str] specific_config_overseas: Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
         :param pulumi.Input[str] status: Acceleration service status.
@@ -725,6 +764,8 @@ class _DomainState:
             pulumi.set(__self__, "aws_private_access", aws_private_access)
         if band_width_alert is not None:
             pulumi.set(__self__, "band_width_alert", band_width_alert)
+        if cache_key is not None:
+            pulumi.set(__self__, "cache_key", cache_key)
         if cname is not None:
             pulumi.set(__self__, "cname", cname)
         if compression is not None:
@@ -745,6 +786,9 @@ class _DomainState:
             pulumi.set(__self__, "explicit_using_dry_run", explicit_using_dry_run)
         if follow_redirect_switch is not None:
             pulumi.set(__self__, "follow_redirect_switch", follow_redirect_switch)
+        if full_url_cache is not None:
+            warnings.warn("""Use `cache_key` -> `full_url_cache` instead.""", DeprecationWarning)
+            pulumi.log.warn("""full_url_cache is deprecated: Use `cache_key` -> `full_url_cache` instead.""")
         if full_url_cache is not None:
             pulumi.set(__self__, "full_url_cache", full_url_cache)
         if https_config is not None:
@@ -769,6 +813,8 @@ class _DomainState:
             pulumi.set(__self__, "origin_pull_timeout", origin_pull_timeout)
         if oss_private_access is not None:
             pulumi.set(__self__, "oss_private_access", oss_private_access)
+        if post_max_sizes is not None:
+            pulumi.set(__self__, "post_max_sizes", post_max_sizes)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if qn_private_access is not None:
@@ -851,6 +897,18 @@ class _DomainState:
     @band_width_alert.setter
     def band_width_alert(self, value: Optional[pulumi.Input['DomainBandWidthAlertArgs']]):
         pulumi.set(self, "band_width_alert", value)
+
+    @property
+    @pulumi.getter(name="cacheKey")
+    def cache_key(self) -> Optional[pulumi.Input['DomainCacheKeyArgs']]:
+        """
+        Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
+        """
+        return pulumi.get(self, "cache_key")
+
+    @cache_key.setter
+    def cache_key(self, value: Optional[pulumi.Input['DomainCacheKeyArgs']]):
+        pulumi.set(self, "cache_key", value)
 
     @property
     @pulumi.getter
@@ -976,7 +1034,7 @@ class _DomainState:
     @pulumi.getter(name="fullUrlCache")
     def full_url_cache(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to enable full-path cache. Default value is `true`.
+        Use `cache_key` > `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         """
         return pulumi.get(self, "full_url_cache")
 
@@ -1117,6 +1175,18 @@ class _DomainState:
         pulumi.set(self, "oss_private_access", value)
 
     @property
+    @pulumi.getter(name="postMaxSizes")
+    def post_max_sizes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]]:
+        """
+        Maximum post size configuration.
+        """
+        return pulumi.get(self, "post_max_sizes")
+
+    @post_max_sizes.setter
+    def post_max_sizes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]]):
+        pulumi.set(self, "post_max_sizes", value)
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> Optional[pulumi.Input[int]]:
         """
@@ -1240,7 +1310,7 @@ class _DomainState:
     @pulumi.getter(name="serviceType")
     def service_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         """
         return pulumi.get(self, "service_type")
 
@@ -1330,6 +1400,7 @@ class Domain(pulumi.CustomResource):
                  authentication: Optional[pulumi.Input[pulumi.InputType['DomainAuthenticationArgs']]] = None,
                  aws_private_access: Optional[pulumi.Input[pulumi.InputType['DomainAwsPrivateAccessArgs']]] = None,
                  band_width_alert: Optional[pulumi.Input[pulumi.InputType['DomainBandWidthAlertArgs']]] = None,
+                 cache_key: Optional[pulumi.Input[pulumi.InputType['DomainCacheKeyArgs']]] = None,
                  compression: Optional[pulumi.Input[pulumi.InputType['DomainCompressionArgs']]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  downstream_capping: Optional[pulumi.Input[pulumi.InputType['DomainDownstreamCappingArgs']]] = None,
@@ -1348,6 +1419,7 @@ class Domain(pulumi.CustomResource):
                  origin_pull_optimization: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']]] = None,
                  origin_pull_timeout: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']]] = None,
                  oss_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']]] = None,
+                 post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']]] = None,
                  quic_switch: Optional[pulumi.Input[str]] = None,
@@ -1367,6 +1439,7 @@ class Domain(pulumi.CustomResource):
                  __props__=None):
         """
         Provides a resource to create a CDN domain.
+
         > **NOTE:** To disable most of configuration with switch, just modify switch argument to off instead of remove the whole block
 
         ## Example Usage
@@ -1410,8 +1483,10 @@ class Domain(pulumi.CustomResource):
 
         foo = tencentcloud.cdn.Domain("foo",
             area="mainland",
+            cache_key=tencentcloud.cdn.DomainCacheKeyArgs(
+                full_url_cache="on",
+            ),
             domain="xxxx.com",
-            full_url_cache=False,
             https_config=tencentcloud.cdn.DomainHttpsConfigArgs(
                 force_redirect=tencentcloud.cdn.DomainHttpsConfigForceRedirectArgs(
                     redirect_status_code=302,
@@ -1465,7 +1540,9 @@ class Domain(pulumi.CustomResource):
             domain="abc.com",
             service_type="web",
             area="mainland",
-            full_url_cache=False,
+            cache_key=tencentcloud.cdn.DomainCacheKeyArgs(
+                full_url_cache="off",
+            ),
             origin=tencentcloud.cdn.DomainOriginArgs(
                 origin_type="cos",
                 origin_lists=[bucket.cos_bucket_url],
@@ -1496,13 +1573,14 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['DomainAuthenticationArgs']] authentication: Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
         :param pulumi.Input[pulumi.InputType['DomainAwsPrivateAccessArgs']] aws_private_access: Access authentication for S3 origin.
         :param pulumi.Input[pulumi.InputType['DomainBandWidthAlertArgs']] band_width_alert: Bandwidth cap configuration.
+        :param pulumi.Input[pulumi.InputType['DomainCacheKeyArgs']] cache_key: Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
         :param pulumi.Input[pulumi.InputType['DomainCompressionArgs']] compression: Smart compression configurations.
         :param pulumi.Input[str] domain: Name of the acceleration domain.
         :param pulumi.Input[pulumi.InputType['DomainDownstreamCappingArgs']] downstream_capping: Downstream capping configuration.
         :param pulumi.Input[pulumi.InputType['DomainErrorPageArgs']] error_page: Error page configurations.
         :param pulumi.Input[bool] explicit_using_dry_run: Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
         :param pulumi.Input[str] follow_redirect_switch: 301/302 redirect following switch, available values: `on`, `off` (default).
-        :param pulumi.Input[bool] full_url_cache: Whether to enable full-path cache. Default value is `true`.
+        :param pulumi.Input[bool] full_url_cache: Use `cache_key` > `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         :param pulumi.Input[pulumi.InputType['DomainHttpsConfigArgs']] https_config: HTTPS acceleration configuration. It's a list and consist of at most one item.
         :param pulumi.Input[pulumi.InputType['DomainHwPrivateAccessArgs']] hw_private_access: Access authentication for OBS origin.
         :param pulumi.Input[pulumi.InputType['DomainIpFilterArgs']] ip_filter: Specify Ip filter configurations.
@@ -1514,6 +1592,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']] qn_private_access: Access authentication for OBS origin.
         :param pulumi.Input[str] quic_switch: QUIC switch, available values: `on`, `off` (default).
@@ -1524,7 +1603,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[str] response_header_cache_switch: Response header cache switch, available values: `on`, `off` (default).
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainRuleCachArgs']]]] rule_caches: Advanced path cache configuration.
         :param pulumi.Input[str] seo_switch: SEO switch, available values: `on`, `off` (default).
-        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         :param pulumi.Input[str] specific_config_mainland: Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
         :param pulumi.Input[str] specific_config_overseas: Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
         :param pulumi.Input[pulumi.InputType['DomainStatusCodeCacheArgs']] status_code_cache: Status code cache configurations.
@@ -1539,6 +1618,7 @@ class Domain(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a CDN domain.
+
         > **NOTE:** To disable most of configuration with switch, just modify switch argument to off instead of remove the whole block
 
         ## Example Usage
@@ -1582,8 +1662,10 @@ class Domain(pulumi.CustomResource):
 
         foo = tencentcloud.cdn.Domain("foo",
             area="mainland",
+            cache_key=tencentcloud.cdn.DomainCacheKeyArgs(
+                full_url_cache="on",
+            ),
             domain="xxxx.com",
-            full_url_cache=False,
             https_config=tencentcloud.cdn.DomainHttpsConfigArgs(
                 force_redirect=tencentcloud.cdn.DomainHttpsConfigForceRedirectArgs(
                     redirect_status_code=302,
@@ -1637,7 +1719,9 @@ class Domain(pulumi.CustomResource):
             domain="abc.com",
             service_type="web",
             area="mainland",
-            full_url_cache=False,
+            cache_key=tencentcloud.cdn.DomainCacheKeyArgs(
+                full_url_cache="off",
+            ),
             origin=tencentcloud.cdn.DomainOriginArgs(
                 origin_type="cos",
                 origin_lists=[bucket.cos_bucket_url],
@@ -1681,6 +1765,7 @@ class Domain(pulumi.CustomResource):
                  authentication: Optional[pulumi.Input[pulumi.InputType['DomainAuthenticationArgs']]] = None,
                  aws_private_access: Optional[pulumi.Input[pulumi.InputType['DomainAwsPrivateAccessArgs']]] = None,
                  band_width_alert: Optional[pulumi.Input[pulumi.InputType['DomainBandWidthAlertArgs']]] = None,
+                 cache_key: Optional[pulumi.Input[pulumi.InputType['DomainCacheKeyArgs']]] = None,
                  compression: Optional[pulumi.Input[pulumi.InputType['DomainCompressionArgs']]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  downstream_capping: Optional[pulumi.Input[pulumi.InputType['DomainDownstreamCappingArgs']]] = None,
@@ -1699,6 +1784,7 @@ class Domain(pulumi.CustomResource):
                  origin_pull_optimization: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']]] = None,
                  origin_pull_timeout: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']]] = None,
                  oss_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']]] = None,
+                 post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']]] = None,
                  quic_switch: Optional[pulumi.Input[str]] = None,
@@ -1733,6 +1819,7 @@ class Domain(pulumi.CustomResource):
             __props__.__dict__["authentication"] = authentication
             __props__.__dict__["aws_private_access"] = aws_private_access
             __props__.__dict__["band_width_alert"] = band_width_alert
+            __props__.__dict__["cache_key"] = cache_key
             __props__.__dict__["compression"] = compression
             if domain is None and not opts.urn:
                 raise TypeError("Missing required property 'domain'")
@@ -1741,6 +1828,9 @@ class Domain(pulumi.CustomResource):
             __props__.__dict__["error_page"] = error_page
             __props__.__dict__["explicit_using_dry_run"] = explicit_using_dry_run
             __props__.__dict__["follow_redirect_switch"] = follow_redirect_switch
+            if full_url_cache is not None and not opts.urn:
+                warnings.warn("""Use `cache_key` -> `full_url_cache` instead.""", DeprecationWarning)
+                pulumi.log.warn("""full_url_cache is deprecated: Use `cache_key` -> `full_url_cache` instead.""")
             __props__.__dict__["full_url_cache"] = full_url_cache
             __props__.__dict__["https_config"] = https_config
             __props__.__dict__["hw_private_access"] = hw_private_access
@@ -1755,6 +1845,7 @@ class Domain(pulumi.CustomResource):
             __props__.__dict__["origin_pull_optimization"] = origin_pull_optimization
             __props__.__dict__["origin_pull_timeout"] = origin_pull_timeout
             __props__.__dict__["oss_private_access"] = oss_private_access
+            __props__.__dict__["post_max_sizes"] = post_max_sizes
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["qn_private_access"] = qn_private_access
             __props__.__dict__["quic_switch"] = quic_switch
@@ -1792,6 +1883,7 @@ class Domain(pulumi.CustomResource):
             authentication: Optional[pulumi.Input[pulumi.InputType['DomainAuthenticationArgs']]] = None,
             aws_private_access: Optional[pulumi.Input[pulumi.InputType['DomainAwsPrivateAccessArgs']]] = None,
             band_width_alert: Optional[pulumi.Input[pulumi.InputType['DomainBandWidthAlertArgs']]] = None,
+            cache_key: Optional[pulumi.Input[pulumi.InputType['DomainCacheKeyArgs']]] = None,
             cname: Optional[pulumi.Input[str]] = None,
             compression: Optional[pulumi.Input[pulumi.InputType['DomainCompressionArgs']]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
@@ -1814,6 +1906,7 @@ class Domain(pulumi.CustomResource):
             origin_pull_optimization: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']]] = None,
             origin_pull_timeout: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']]] = None,
             oss_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']]] = None,
+            post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
             qn_private_access: Optional[pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']]] = None,
             quic_switch: Optional[pulumi.Input[str]] = None,
@@ -1842,6 +1935,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['DomainAuthenticationArgs']] authentication: Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
         :param pulumi.Input[pulumi.InputType['DomainAwsPrivateAccessArgs']] aws_private_access: Access authentication for S3 origin.
         :param pulumi.Input[pulumi.InputType['DomainBandWidthAlertArgs']] band_width_alert: Bandwidth cap configuration.
+        :param pulumi.Input[pulumi.InputType['DomainCacheKeyArgs']] cache_key: Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
         :param pulumi.Input[str] cname: CNAME address of domain name.
         :param pulumi.Input[pulumi.InputType['DomainCompressionArgs']] compression: Smart compression configurations.
         :param pulumi.Input[str] create_time: Creation time of domain name.
@@ -1852,7 +1946,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['DomainErrorPageArgs']] error_page: Error page configurations.
         :param pulumi.Input[bool] explicit_using_dry_run: Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
         :param pulumi.Input[str] follow_redirect_switch: 301/302 redirect following switch, available values: `on`, `off` (default).
-        :param pulumi.Input[bool] full_url_cache: Whether to enable full-path cache. Default value is `true`.
+        :param pulumi.Input[bool] full_url_cache: Use `cache_key` > `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         :param pulumi.Input[pulumi.InputType['DomainHttpsConfigArgs']] https_config: HTTPS acceleration configuration. It's a list and consist of at most one item.
         :param pulumi.Input[pulumi.InputType['DomainHwPrivateAccessArgs']] hw_private_access: Access authentication for OBS origin.
         :param pulumi.Input[pulumi.InputType['DomainIpFilterArgs']] ip_filter: Specify Ip filter configurations.
@@ -1864,6 +1958,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']] qn_private_access: Access authentication for OBS origin.
         :param pulumi.Input[str] quic_switch: QUIC switch, available values: `on`, `off` (default).
@@ -1874,7 +1969,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[str] response_header_cache_switch: Response header cache switch, available values: `on`, `off` (default).
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainRuleCachArgs']]]] rule_caches: Advanced path cache configuration.
         :param pulumi.Input[str] seo_switch: SEO switch, available values: `on`, `off` (default).
-        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        :param pulumi.Input[str] service_type: Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         :param pulumi.Input[str] specific_config_mainland: Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
         :param pulumi.Input[str] specific_config_overseas: Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
         :param pulumi.Input[str] status: Acceleration service status.
@@ -1890,6 +1985,7 @@ class Domain(pulumi.CustomResource):
         __props__.__dict__["authentication"] = authentication
         __props__.__dict__["aws_private_access"] = aws_private_access
         __props__.__dict__["band_width_alert"] = band_width_alert
+        __props__.__dict__["cache_key"] = cache_key
         __props__.__dict__["cname"] = cname
         __props__.__dict__["compression"] = compression
         __props__.__dict__["create_time"] = create_time
@@ -1912,6 +2008,7 @@ class Domain(pulumi.CustomResource):
         __props__.__dict__["origin_pull_optimization"] = origin_pull_optimization
         __props__.__dict__["origin_pull_timeout"] = origin_pull_timeout
         __props__.__dict__["oss_private_access"] = oss_private_access
+        __props__.__dict__["post_max_sizes"] = post_max_sizes
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["qn_private_access"] = qn_private_access
         __props__.__dict__["quic_switch"] = quic_switch
@@ -1962,6 +2059,14 @@ class Domain(pulumi.CustomResource):
         Bandwidth cap configuration.
         """
         return pulumi.get(self, "band_width_alert")
+
+    @property
+    @pulumi.getter(name="cacheKey")
+    def cache_key(self) -> pulumi.Output[Optional['outputs.DomainCacheKey']]:
+        """
+        Cache key configuration (Ignore Query String configuration). NOTE: All of `full_url_cache` default value is `on`.
+        """
+        return pulumi.get(self, "cache_key")
 
     @property
     @pulumi.getter
@@ -2047,7 +2152,7 @@ class Domain(pulumi.CustomResource):
     @pulumi.getter(name="fullUrlCache")
     def full_url_cache(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to enable full-path cache. Default value is `true`.
+        Use `cache_key` > `full_url_cache` instead. Whether to enable full-path cache. Default value is `true`.
         """
         return pulumi.get(self, "full_url_cache")
 
@@ -2140,6 +2245,14 @@ class Domain(pulumi.CustomResource):
         return pulumi.get(self, "oss_private_access")
 
     @property
+    @pulumi.getter(name="postMaxSizes")
+    def post_max_sizes(self) -> pulumi.Output[Optional[Sequence['outputs.DomainPostMaxSize']]]:
+        """
+        Maximum post size configuration.
+        """
+        return pulumi.get(self, "post_max_sizes")
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Output[Optional[int]]:
         """
@@ -2223,7 +2336,7 @@ class Domain(pulumi.CustomResource):
     @pulumi.getter(name="serviceType")
     def service_type(self) -> pulumi.Output[str]:
         """
-        Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+        Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
         """
         return pulumi.get(self, "service_type")
 

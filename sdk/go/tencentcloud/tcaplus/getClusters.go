@@ -18,38 +18,35 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tcaplus.GetClusters(ctx, &tcaplus.GetClustersArgs{
-//				ClusterName: pulumi.StringRef("cluster"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Tcaplus.GetClusters(ctx, &tcaplus.GetClustersArgs{
-//				ClusterId: pulumi.StringRef(tencentcloud_tcaplus_cluster.Test.Id),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Tcaplus.GetClusters(ctx, &tcaplus.GetClustersArgs{
-//				ClusterId:   pulumi.StringRef(tencentcloud_tcaplus_cluster.Test.Id),
-//				ClusterName: pulumi.StringRef("cluster"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcaplus.GetClusters(ctx, &tcaplus.GetClustersArgs{
+// 			ClusterName: pulumi.StringRef("cluster"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcaplus.GetClusters(ctx, &tcaplus.GetClustersArgs{
+// 			ClusterId: pulumi.StringRef(tencentcloud_tcaplus_cluster.Test.Id),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcaplus.GetClusters(ctx, &tcaplus.GetClustersArgs{
+// 			ClusterId:   pulumi.StringRef(tencentcloud_tcaplus_cluster.Test.Id),
+// 			ClusterName: pulumi.StringRef("cluster"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetClusters(ctx *pulumi.Context, args *GetClustersArgs, opts ...pulumi.InvokeOption) (*GetClustersResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -77,7 +77,7 @@ export class TmpAlertRule extends pulumi.CustomResource {
      */
     public readonly duration!: pulumi.Output<string | undefined>;
     /**
-     * Rule expression.
+     * Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
      */
     public readonly expr!: pulumi.Output<string>;
     /**
@@ -169,7 +169,7 @@ export interface TmpAlertRuleState {
      */
     duration?: pulumi.Input<string>;
     /**
-     * Rule expression.
+     * Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
      */
     expr?: pulumi.Input<string>;
     /**
@@ -211,7 +211,7 @@ export interface TmpAlertRuleArgs {
      */
     duration?: pulumi.Input<string>;
     /**
-     * Rule expression.
+     * Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
      */
     expr: pulumi.Input<string>;
     /**

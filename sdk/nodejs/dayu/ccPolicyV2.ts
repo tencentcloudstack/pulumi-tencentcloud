@@ -90,7 +90,7 @@ export class CcPolicyV2 extends pulumi.CustomResource {
     }
 
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+     * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     public readonly business!: pulumi.Output<string>;
     /**
@@ -164,7 +164,7 @@ export class CcPolicyV2 extends pulumi.CustomResource {
  */
 export interface CcPolicyV2State {
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+     * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business?: pulumi.Input<string>;
     /**
@@ -198,7 +198,7 @@ export interface CcPolicyV2State {
  */
 export interface CcPolicyV2Args {
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+     * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business: pulumi.Input<string>;
     /**

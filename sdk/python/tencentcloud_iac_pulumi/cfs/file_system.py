@@ -164,6 +164,7 @@ class _FileSystemState:
                  access_group_id: Optional[pulumi.Input[str]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
+                 fs_id: Optional[pulumi.Input[str]] = None,
                  mount_ip: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
@@ -176,6 +177,7 @@ class _FileSystemState:
         :param pulumi.Input[str] access_group_id: ID of a access group.
         :param pulumi.Input[str] availability_zone: The available zone that the file system locates at.
         :param pulumi.Input[str] create_time: Create time of the file system.
+        :param pulumi.Input[str] fs_id: Mount root-directory.
         :param pulumi.Input[str] mount_ip: IP of mount point.
         :param pulumi.Input[str] name: Name of a file system.
         :param pulumi.Input[str] protocol: File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
@@ -190,6 +192,8 @@ class _FileSystemState:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
+        if fs_id is not None:
+            pulumi.set(__self__, "fs_id", fs_id)
         if mount_ip is not None:
             pulumi.set(__self__, "mount_ip", mount_ip)
         if name is not None:
@@ -240,6 +244,18 @@ class _FileSystemState:
     @create_time.setter
     def create_time(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "create_time", value)
+
+    @property
+    @pulumi.getter(name="fsId")
+    def fs_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Mount root-directory.
+        """
+        return pulumi.get(self, "fs_id")
+
+    @fs_id.setter
+    def fs_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fs_id", value)
 
     @property
     @pulumi.getter(name="mountIp")
@@ -465,6 +481,7 @@ class FileSystem(pulumi.CustomResource):
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
+            __props__.__dict__["fs_id"] = None
         super(FileSystem, __self__).__init__(
             'tencentcloud:Cfs/fileSystem:FileSystem',
             resource_name,
@@ -478,6 +495,7 @@ class FileSystem(pulumi.CustomResource):
             access_group_id: Optional[pulumi.Input[str]] = None,
             availability_zone: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
+            fs_id: Optional[pulumi.Input[str]] = None,
             mount_ip: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
@@ -495,6 +513,7 @@ class FileSystem(pulumi.CustomResource):
         :param pulumi.Input[str] access_group_id: ID of a access group.
         :param pulumi.Input[str] availability_zone: The available zone that the file system locates at.
         :param pulumi.Input[str] create_time: Create time of the file system.
+        :param pulumi.Input[str] fs_id: Mount root-directory.
         :param pulumi.Input[str] mount_ip: IP of mount point.
         :param pulumi.Input[str] name: Name of a file system.
         :param pulumi.Input[str] protocol: File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
@@ -510,6 +529,7 @@ class FileSystem(pulumi.CustomResource):
         __props__.__dict__["access_group_id"] = access_group_id
         __props__.__dict__["availability_zone"] = availability_zone
         __props__.__dict__["create_time"] = create_time
+        __props__.__dict__["fs_id"] = fs_id
         __props__.__dict__["mount_ip"] = mount_ip
         __props__.__dict__["name"] = name
         __props__.__dict__["protocol"] = protocol
@@ -542,6 +562,14 @@ class FileSystem(pulumi.CustomResource):
         Create time of the file system.
         """
         return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="fsId")
+    def fs_id(self) -> pulumi.Output[str]:
+        """
+        Mount root-directory.
+        """
+        return pulumi.get(self, "fs_id")
 
     @property
     @pulumi.getter(name="mountIp")

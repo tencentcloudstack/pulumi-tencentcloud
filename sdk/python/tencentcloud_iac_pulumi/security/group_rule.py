@@ -22,6 +22,7 @@ class GroupRuleArgs:
                  cidr_ip: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  ip_protocol: Optional[pulumi.Input[str]] = None,
+                 policy_index: Optional[pulumi.Input[int]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
                  protocol_template: Optional[pulumi.Input['GroupRuleProtocolTemplateArgs']] = None,
                  source_sgid: Optional[pulumi.Input[str]] = None):
@@ -34,6 +35,7 @@ class GroupRuleArgs:
         :param pulumi.Input[str] cidr_ip: An IP address network or segment, and conflict with `source_sgid` and `address_template`.
         :param pulumi.Input[str] description: Description of the security group rule.
         :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
+        :param pulumi.Input[int] policy_index: The security group rule index number, the value of which dynamically changes as the security group rule changes.
         :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input['GroupRuleProtocolTemplateArgs'] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] source_sgid: ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
@@ -49,6 +51,8 @@ class GroupRuleArgs:
             pulumi.set(__self__, "description", description)
         if ip_protocol is not None:
             pulumi.set(__self__, "ip_protocol", ip_protocol)
+        if policy_index is not None:
+            pulumi.set(__self__, "policy_index", policy_index)
         if port_range is not None:
             pulumi.set(__self__, "port_range", port_range)
         if protocol_template is not None:
@@ -141,6 +145,18 @@ class GroupRuleArgs:
         pulumi.set(self, "ip_protocol", value)
 
     @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> Optional[pulumi.Input[int]]:
+        """
+        The security group rule index number, the value of which dynamically changes as the security group rule changes.
+        """
+        return pulumi.get(self, "policy_index")
+
+    @policy_index.setter
+    def policy_index(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "policy_index", value)
+
+    @property
     @pulumi.getter(name="portRange")
     def port_range(self) -> Optional[pulumi.Input[str]]:
         """
@@ -185,6 +201,7 @@ class _GroupRuleState:
                  description: Optional[pulumi.Input[str]] = None,
                  ip_protocol: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None,
+                 policy_index: Optional[pulumi.Input[int]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
                  protocol_template: Optional[pulumi.Input['GroupRuleProtocolTemplateArgs']] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
@@ -197,6 +214,7 @@ class _GroupRuleState:
         :param pulumi.Input[str] description: Description of the security group rule.
         :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         :param pulumi.Input[str] policy: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+        :param pulumi.Input[int] policy_index: The security group rule index number, the value of which dynamically changes as the security group rule changes.
         :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input['GroupRuleProtocolTemplateArgs'] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] security_group_id: ID of the security group to be queried.
@@ -213,6 +231,8 @@ class _GroupRuleState:
             pulumi.set(__self__, "ip_protocol", ip_protocol)
         if policy is not None:
             pulumi.set(__self__, "policy", policy)
+        if policy_index is not None:
+            pulumi.set(__self__, "policy_index", policy_index)
         if port_range is not None:
             pulumi.set(__self__, "port_range", port_range)
         if protocol_template is not None:
@@ -285,6 +305,18 @@ class _GroupRuleState:
         pulumi.set(self, "policy", value)
 
     @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> Optional[pulumi.Input[int]]:
+        """
+        The security group rule index number, the value of which dynamically changes as the security group rule changes.
+        """
+        return pulumi.get(self, "policy_index")
+
+    @policy_index.setter
+    def policy_index(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "policy_index", value)
+
+    @property
     @pulumi.getter(name="portRange")
     def port_range(self) -> Optional[pulumi.Input[str]]:
         """
@@ -355,6 +387,7 @@ class GroupRule(pulumi.CustomResource):
                  description: Optional[pulumi.Input[str]] = None,
                  ip_protocol: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None,
+                 policy_index: Optional[pulumi.Input[int]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
                  protocol_template: Optional[pulumi.Input[pulumi.InputType['GroupRuleProtocolTemplateArgs']]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
@@ -363,6 +396,8 @@ class GroupRule(pulumi.CustomResource):
                  __props__=None):
         """
         Provides a resource to create security group rule.
+
+        > **NOTE:** Single security rule is hardly ordered, use Security.GroupLiteRule instead.
 
         ## Example Usage
 
@@ -414,6 +449,7 @@ class GroupRule(pulumi.CustomResource):
         :param pulumi.Input[str] description: Description of the security group rule.
         :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         :param pulumi.Input[str] policy: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+        :param pulumi.Input[int] policy_index: The security group rule index number, the value of which dynamically changes as the security group rule changes.
         :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input[pulumi.InputType['GroupRuleProtocolTemplateArgs']] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] security_group_id: ID of the security group to be queried.
@@ -428,6 +464,8 @@ class GroupRule(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create security group rule.
+
+        > **NOTE:** Single security rule is hardly ordered, use Security.GroupLiteRule instead.
 
         ## Example Usage
 
@@ -492,6 +530,7 @@ class GroupRule(pulumi.CustomResource):
                  description: Optional[pulumi.Input[str]] = None,
                  ip_protocol: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None,
+                 policy_index: Optional[pulumi.Input[int]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
                  protocol_template: Optional[pulumi.Input[pulumi.InputType['GroupRuleProtocolTemplateArgs']]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
@@ -518,6 +557,7 @@ class GroupRule(pulumi.CustomResource):
             if policy is None and not opts.urn:
                 raise TypeError("Missing required property 'policy'")
             __props__.__dict__["policy"] = policy
+            __props__.__dict__["policy_index"] = policy_index
             __props__.__dict__["port_range"] = port_range
             __props__.__dict__["protocol_template"] = protocol_template
             if security_group_id is None and not opts.urn:
@@ -542,6 +582,7 @@ class GroupRule(pulumi.CustomResource):
             description: Optional[pulumi.Input[str]] = None,
             ip_protocol: Optional[pulumi.Input[str]] = None,
             policy: Optional[pulumi.Input[str]] = None,
+            policy_index: Optional[pulumi.Input[int]] = None,
             port_range: Optional[pulumi.Input[str]] = None,
             protocol_template: Optional[pulumi.Input[pulumi.InputType['GroupRuleProtocolTemplateArgs']]] = None,
             security_group_id: Optional[pulumi.Input[str]] = None,
@@ -559,6 +600,7 @@ class GroupRule(pulumi.CustomResource):
         :param pulumi.Input[str] description: Description of the security group rule.
         :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         :param pulumi.Input[str] policy: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
+        :param pulumi.Input[int] policy_index: The security group rule index number, the value of which dynamically changes as the security group rule changes.
         :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input[pulumi.InputType['GroupRuleProtocolTemplateArgs']] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] security_group_id: ID of the security group to be queried.
@@ -574,6 +616,7 @@ class GroupRule(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["ip_protocol"] = ip_protocol
         __props__.__dict__["policy"] = policy
+        __props__.__dict__["policy_index"] = policy_index
         __props__.__dict__["port_range"] = port_range
         __props__.__dict__["protocol_template"] = protocol_template
         __props__.__dict__["security_group_id"] = security_group_id
@@ -620,6 +663,14 @@ class GroupRule(pulumi.CustomResource):
         Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
         """
         return pulumi.get(self, "policy")
+
+    @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> pulumi.Output[Optional[int]]:
+        """
+        The security group rule index number, the value of which dynamically changes as the security group rule changes.
+        """
+        return pulumi.get(self, "policy_index")
 
     @property
     @pulumi.getter(name="portRange")

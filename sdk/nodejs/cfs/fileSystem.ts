@@ -71,6 +71,10 @@ export class FileSystem extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
+     * Mount root-directory.
+     */
+    public /*out*/ readonly fsId!: pulumi.Output<string>;
+    /**
      * IP of mount point.
      */
     public readonly mountIp!: pulumi.Output<string>;
@@ -115,6 +119,7 @@ export class FileSystem extends pulumi.CustomResource {
             resourceInputs["accessGroupId"] = state ? state.accessGroupId : undefined;
             resourceInputs["availabilityZone"] = state ? state.availabilityZone : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
+            resourceInputs["fsId"] = state ? state.fsId : undefined;
             resourceInputs["mountIp"] = state ? state.mountIp : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
@@ -146,6 +151,7 @@ export class FileSystem extends pulumi.CustomResource {
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["fsId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(FileSystem.__pulumiType, name, resourceInputs, opts);
@@ -168,6 +174,10 @@ export interface FileSystemState {
      * Create time of the file system.
      */
     createTime?: pulumi.Input<string>;
+    /**
+     * Mount root-directory.
+     */
+    fsId?: pulumi.Input<string>;
     /**
      * IP of mount point.
      */

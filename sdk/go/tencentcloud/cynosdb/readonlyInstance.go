@@ -19,39 +19,36 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cynosdb.NewReadonlyInstance(ctx, "foo", &Cynosdb.ReadonlyInstanceArgs{
-//				ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
-//				InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
-//				ForceDelete:               pulumi.Bool(true),
-//				InstanceCpuCore:           pulumi.Int(2),
-//				InstanceMemorySize:        pulumi.Int(4),
-//				InstanceMaintainDuration:  pulumi.Int(7200),
-//				InstanceMaintainStartTime: pulumi.Int(21600),
-//				InstanceMaintainWeekdays: pulumi.StringArray{
-//					pulumi.String("Fri"),
-//					pulumi.String("Mon"),
-//					pulumi.String("Sat"),
-//					pulumi.String("Sun"),
-//					pulumi.String("Thu"),
-//					pulumi.String("Wed"),
-//					pulumi.String("Tue"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cynosdb.NewReadonlyInstance(ctx, "foo", &Cynosdb.ReadonlyInstanceArgs{
+// 			ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
+// 			InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
+// 			ForceDelete:               pulumi.Bool(true),
+// 			InstanceCpuCore:           pulumi.Int(2),
+// 			InstanceMemorySize:        pulumi.Int(4),
+// 			InstanceMaintainDuration:  pulumi.Int(7200),
+// 			InstanceMaintainStartTime: pulumi.Int(21600),
+// 			InstanceMaintainWeekdays: pulumi.StringArray{
+// 				pulumi.String("Fri"),
+// 				pulumi.String("Mon"),
+// 				pulumi.String("Sat"),
+// 				pulumi.String("Sun"),
+// 				pulumi.String("Thu"),
+// 				pulumi.String("Wed"),
+// 				pulumi.String("Tue"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -59,9 +56,7 @@ import (
 // CynosDB readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
-//
+//  $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -70,16 +65,16 @@ type ReadonlyInstance struct {
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
-	// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-	InstanceCpuCore pulumi.IntOutput `pulumi:"instanceCpuCore"`
+	// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	InstanceCpuCore pulumi.IntPtrOutput `pulumi:"instanceCpuCore"`
 	// Duration time for maintenance, unit in second. `3600` by default.
 	InstanceMaintainDuration pulumi.IntPtrOutput `pulumi:"instanceMaintainDuration"`
 	// Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
 	InstanceMaintainStartTime pulumi.IntPtrOutput `pulumi:"instanceMaintainStartTime"`
 	// Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
 	InstanceMaintainWeekdays pulumi.StringArrayOutput `pulumi:"instanceMaintainWeekdays"`
-	// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-	InstanceMemorySize pulumi.IntOutput `pulumi:"instanceMemorySize"`
+	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	InstanceMemorySize pulumi.IntPtrOutput `pulumi:"instanceMemorySize"`
 	// Name of instance.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Status of the instance.
@@ -97,12 +92,6 @@ func NewReadonlyInstance(ctx *pulumi.Context,
 
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
-	}
-	if args.InstanceCpuCore == nil {
-		return nil, errors.New("invalid value for required argument 'InstanceCpuCore'")
-	}
-	if args.InstanceMemorySize == nil {
-		return nil, errors.New("invalid value for required argument 'InstanceMemorySize'")
 	}
 	if args.InstanceName == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceName'")
@@ -134,7 +123,7 @@ type readonlyInstanceState struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceCpuCore *int `pulumi:"instanceCpuCore"`
 	// Duration time for maintenance, unit in second. `3600` by default.
 	InstanceMaintainDuration *int `pulumi:"instanceMaintainDuration"`
@@ -142,7 +131,7 @@ type readonlyInstanceState struct {
 	InstanceMaintainStartTime *int `pulumi:"instanceMaintainStartTime"`
 	// Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
 	InstanceMaintainWeekdays []string `pulumi:"instanceMaintainWeekdays"`
-	// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
 	// Name of instance.
 	InstanceName *string `pulumi:"instanceName"`
@@ -157,7 +146,7 @@ type ReadonlyInstanceState struct {
 	ClusterId pulumi.StringPtrInput
 	// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
 	ForceDelete pulumi.BoolPtrInput
-	// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceCpuCore pulumi.IntPtrInput
 	// Duration time for maintenance, unit in second. `3600` by default.
 	InstanceMaintainDuration pulumi.IntPtrInput
@@ -165,7 +154,7 @@ type ReadonlyInstanceState struct {
 	InstanceMaintainStartTime pulumi.IntPtrInput
 	// Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
 	InstanceMaintainWeekdays pulumi.StringArrayInput
-	// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize pulumi.IntPtrInput
 	// Name of instance.
 	InstanceName pulumi.StringPtrInput
@@ -184,16 +173,16 @@ type readonlyInstanceArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-	InstanceCpuCore int `pulumi:"instanceCpuCore"`
+	// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	InstanceCpuCore *int `pulumi:"instanceCpuCore"`
 	// Duration time for maintenance, unit in second. `3600` by default.
 	InstanceMaintainDuration *int `pulumi:"instanceMaintainDuration"`
 	// Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
 	InstanceMaintainStartTime *int `pulumi:"instanceMaintainStartTime"`
 	// Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
 	InstanceMaintainWeekdays []string `pulumi:"instanceMaintainWeekdays"`
-	// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-	InstanceMemorySize int `pulumi:"instanceMemorySize"`
+	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
 	// Name of instance.
 	InstanceName string `pulumi:"instanceName"`
 }
@@ -204,16 +193,16 @@ type ReadonlyInstanceArgs struct {
 	ClusterId pulumi.StringInput
 	// Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
 	ForceDelete pulumi.BoolPtrInput
-	// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-	InstanceCpuCore pulumi.IntInput
+	// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	InstanceCpuCore pulumi.IntPtrInput
 	// Duration time for maintenance, unit in second. `3600` by default.
 	InstanceMaintainDuration pulumi.IntPtrInput
 	// Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
 	InstanceMaintainStartTime pulumi.IntPtrInput
 	// Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
 	InstanceMaintainWeekdays pulumi.StringArrayInput
-	// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-	InstanceMemorySize pulumi.IntInput
+	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+	InstanceMemorySize pulumi.IntPtrInput
 	// Name of instance.
 	InstanceName pulumi.StringInput
 }
@@ -244,7 +233,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -269,7 +258,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 
@@ -315,9 +304,9 @@ func (o ReadonlyInstanceOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
 
-// The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-func (o ReadonlyInstanceOutput) InstanceCpuCore() pulumi.IntOutput {
-	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.InstanceCpuCore }).(pulumi.IntOutput)
+// The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+func (o ReadonlyInstanceOutput) InstanceCpuCore() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.InstanceCpuCore }).(pulumi.IntPtrOutput)
 }
 
 // Duration time for maintenance, unit in second. `3600` by default.
@@ -335,9 +324,9 @@ func (o ReadonlyInstanceOutput) InstanceMaintainWeekdays() pulumi.StringArrayOut
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringArrayOutput { return v.InstanceMaintainWeekdays }).(pulumi.StringArrayOutput)
 }
 
-// Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-func (o ReadonlyInstanceOutput) InstanceMemorySize() pulumi.IntOutput {
-	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.InstanceMemorySize }).(pulumi.IntOutput)
+// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+func (o ReadonlyInstanceOutput) InstanceMemorySize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.InstanceMemorySize }).(pulumi.IntPtrOutput)
 }
 
 // Name of instance.

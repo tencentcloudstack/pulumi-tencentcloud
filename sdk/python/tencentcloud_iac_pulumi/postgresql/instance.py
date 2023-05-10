@@ -19,6 +19,8 @@ class InstanceArgs:
                  memory: pulumi.Input[int],
                  root_password: pulumi.Input[str],
                  storage: pulumi.Input[int],
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  backup_plan: Optional[pulumi.Input['InstanceBackupPlanArgs']] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  charset: Optional[pulumi.Input[str]] = None,
@@ -33,12 +35,14 @@ class InstanceArgs:
                  max_standby_streaming_delay: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_tde: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  public_access_switch: Optional[pulumi.Input[bool]] = None,
                  root_user: Optional[pulumi.Input[str]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Instance resource.
@@ -46,8 +50,10 @@ class InstanceArgs:
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input['InstanceBackupPlanArgs'] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
@@ -60,18 +66,24 @@ class InstanceArgs:
         :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
         :param pulumi.Input[bool] public_access_switch: Indicates whether to enable the access to an instance from public network or not.
         :param pulumi.Input[str] root_user: Instance root account name. This parameter is optional, Default value is `root`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         :param pulumi.Input[str] vpc_id: ID of VPC.
         """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "memory", memory)
         pulumi.set(__self__, "root_password", root_password)
         pulumi.set(__self__, "storage", storage)
+        if auto_renew_flag is not None:
+            pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if auto_voucher is not None:
+            pulumi.set(__self__, "auto_voucher", auto_voucher)
         if backup_plan is not None:
             pulumi.set(__self__, "backup_plan", backup_plan)
         if charge_type is not None:
@@ -103,6 +115,8 @@ class InstanceArgs:
             pulumi.set(__self__, "name", name)
         if need_support_tde is not None:
             pulumi.set(__self__, "need_support_tde", need_support_tde)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if public_access_switch is not None:
@@ -115,6 +129,8 @@ class InstanceArgs:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if voucher_ids is not None:
+            pulumi.set(__self__, "voucher_ids", voucher_ids)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
 
@@ -167,6 +183,30 @@ class InstanceArgs:
         pulumi.set(self, "storage", value)
 
     @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @auto_renew_flag.setter
+    def auto_renew_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_renew_flag", value)
+
+    @property
+    @pulumi.getter(name="autoVoucher")
+    def auto_voucher(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to use voucher, `1` for enabled.
+        """
+        return pulumi.get(self, "auto_voucher")
+
+    @auto_voucher.setter
+    def auto_voucher(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_voucher", value)
+
+    @property
     @pulumi.getter(name="backupPlan")
     def backup_plan(self) -> Optional[pulumi.Input['InstanceBackupPlanArgs']]:
         """
@@ -182,7 +222,7 @@ class InstanceArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         """
         return pulumi.get(self, "charge_type")
 
@@ -335,6 +375,18 @@ class InstanceArgs:
         pulumi.set(self, "need_support_tde", value)
 
     @property
+    @pulumi.getter
+    def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period", value)
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> Optional[pulumi.Input[int]]:
         """
@@ -407,6 +459,18 @@ class InstanceArgs:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter(name="voucherIds")
+    def voucher_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        """
+        return pulumi.get(self, "voucher_ids")
+
+    @voucher_ids.setter
+    def voucher_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "voucher_ids", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -422,6 +486,8 @@ class InstanceArgs:
 @pulumi.input_type
 class _InstanceState:
     def __init__(__self__, *,
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  backup_plan: Optional[pulumi.Input['InstanceBackupPlanArgs']] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
@@ -439,6 +505,7 @@ class _InstanceState:
                  memory: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_tde: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  private_access_ip: Optional[pulumi.Input[str]] = None,
                  private_access_port: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -452,12 +519,15 @@ class _InstanceState:
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  uid: Optional[pulumi.Input[int]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
         :param pulumi.Input['InstanceBackupPlanArgs'] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
@@ -472,6 +542,7 @@ class _InstanceState:
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[str] private_access_ip: IP for private access.
         :param pulumi.Input[int] private_access_port: Port for private access.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
@@ -485,8 +556,13 @@ class _InstanceState:
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
         :param pulumi.Input[int] uid: Uid of the postgresql instance.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         :param pulumi.Input[str] vpc_id: ID of VPC.
         """
+        if auto_renew_flag is not None:
+            pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if auto_voucher is not None:
+            pulumi.set(__self__, "auto_voucher", auto_voucher)
         if availability_zone is not None:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if backup_plan is not None:
@@ -524,6 +600,8 @@ class _InstanceState:
             pulumi.set(__self__, "name", name)
         if need_support_tde is not None:
             pulumi.set(__self__, "need_support_tde", need_support_tde)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
         if private_access_ip is not None:
             pulumi.set(__self__, "private_access_ip", private_access_ip)
         if private_access_port is not None:
@@ -550,8 +628,34 @@ class _InstanceState:
             pulumi.set(__self__, "tags", tags)
         if uid is not None:
             pulumi.set(__self__, "uid", uid)
+        if voucher_ids is not None:
+            pulumi.set(__self__, "voucher_ids", voucher_ids)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @auto_renew_flag.setter
+    def auto_renew_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_renew_flag", value)
+
+    @property
+    @pulumi.getter(name="autoVoucher")
+    def auto_voucher(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to use voucher, `1` for enabled.
+        """
+        return pulumi.get(self, "auto_voucher")
+
+    @auto_voucher.setter
+    def auto_voucher(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_voucher", value)
 
     @property
     @pulumi.getter(name="availabilityZone")
@@ -581,7 +685,7 @@ class _InstanceState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         """
         return pulumi.get(self, "charge_type")
 
@@ -758,6 +862,18 @@ class _InstanceState:
         pulumi.set(self, "need_support_tde", value)
 
     @property
+    @pulumi.getter
+    def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period", value)
+
+    @property
     @pulumi.getter(name="privateAccessIp")
     def private_access_ip(self) -> Optional[pulumi.Input[str]]:
         """
@@ -914,6 +1030,18 @@ class _InstanceState:
         pulumi.set(self, "uid", value)
 
     @property
+    @pulumi.getter(name="voucherIds")
+    def voucher_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        """
+        return pulumi.get(self, "voucher_ids")
+
+    @voucher_ids.setter
+    def voucher_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "voucher_ids", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -931,6 +1059,8 @@ class Instance(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  backup_plan: Optional[pulumi.Input[pulumi.InputType['InstanceBackupPlanArgs']]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
@@ -947,6 +1077,7 @@ class Instance(pulumi.CustomResource):
                  memory: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_tde: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  public_access_switch: Optional[pulumi.Input[bool]] = None,
                  root_password: Optional[pulumi.Input[str]] = None,
@@ -955,6 +1086,7 @@ class Instance(pulumi.CustomResource):
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -1089,9 +1221,11 @@ class Instance(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
         :param pulumi.Input[pulumi.InputType['InstanceBackupPlanArgs']] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
@@ -1105,6 +1239,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
         :param pulumi.Input[bool] public_access_switch: Indicates whether to enable the access to an instance from public network or not.
         :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
@@ -1113,6 +1248,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         :param pulumi.Input[str] vpc_id: ID of VPC.
         """
         ...
@@ -1266,6 +1402,8 @@ class Instance(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  backup_plan: Optional[pulumi.Input[pulumi.InputType['InstanceBackupPlanArgs']]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
@@ -1282,6 +1420,7 @@ class Instance(pulumi.CustomResource):
                  memory: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_tde: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  public_access_switch: Optional[pulumi.Input[bool]] = None,
                  root_password: Optional[pulumi.Input[str]] = None,
@@ -1290,6 +1429,7 @@ class Instance(pulumi.CustomResource):
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -1305,6 +1445,8 @@ class Instance(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = InstanceArgs.__new__(InstanceArgs)
 
+            __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+            __props__.__dict__["auto_voucher"] = auto_voucher
             if availability_zone is None and not opts.urn:
                 raise TypeError("Missing required property 'availability_zone'")
             __props__.__dict__["availability_zone"] = availability_zone
@@ -1328,6 +1470,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["memory"] = memory
             __props__.__dict__["name"] = name
             __props__.__dict__["need_support_tde"] = need_support_tde
+            __props__.__dict__["period"] = period
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["public_access_switch"] = public_access_switch
             if root_password is None and not opts.urn:
@@ -1340,6 +1483,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["storage"] = storage
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["voucher_ids"] = voucher_ids
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
             __props__.__dict__["private_access_ip"] = None
@@ -1357,6 +1501,8 @@ class Instance(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            auto_renew_flag: Optional[pulumi.Input[int]] = None,
+            auto_voucher: Optional[pulumi.Input[int]] = None,
             availability_zone: Optional[pulumi.Input[str]] = None,
             backup_plan: Optional[pulumi.Input[pulumi.InputType['InstanceBackupPlanArgs']]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
@@ -1374,6 +1520,7 @@ class Instance(pulumi.CustomResource):
             memory: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
             need_support_tde: Optional[pulumi.Input[int]] = None,
+            period: Optional[pulumi.Input[int]] = None,
             private_access_ip: Optional[pulumi.Input[str]] = None,
             private_access_port: Optional[pulumi.Input[int]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
@@ -1387,6 +1534,7 @@ class Instance(pulumi.CustomResource):
             subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             uid: Optional[pulumi.Input[int]] = None,
+            voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None) -> 'Instance':
         """
         Get an existing Instance resource's state with the given name, id, and optional extra
@@ -1395,9 +1543,11 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
         :param pulumi.Input[pulumi.InputType['InstanceBackupPlanArgs']] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
@@ -1412,6 +1562,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[str] private_access_ip: IP for private access.
         :param pulumi.Input[int] private_access_port: Port for private access.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
@@ -1425,12 +1576,15 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
         :param pulumi.Input[int] uid: Uid of the postgresql instance.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         :param pulumi.Input[str] vpc_id: ID of VPC.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _InstanceState.__new__(_InstanceState)
 
+        __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+        __props__.__dict__["auto_voucher"] = auto_voucher
         __props__.__dict__["availability_zone"] = availability_zone
         __props__.__dict__["backup_plan"] = backup_plan
         __props__.__dict__["charge_type"] = charge_type
@@ -1448,6 +1602,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["memory"] = memory
         __props__.__dict__["name"] = name
         __props__.__dict__["need_support_tde"] = need_support_tde
+        __props__.__dict__["period"] = period
         __props__.__dict__["private_access_ip"] = private_access_ip
         __props__.__dict__["private_access_port"] = private_access_port
         __props__.__dict__["project_id"] = project_id
@@ -1461,8 +1616,25 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
         __props__.__dict__["uid"] = uid
+        __props__.__dict__["voucher_ids"] = voucher_ids
         __props__.__dict__["vpc_id"] = vpc_id
         return Instance(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> pulumi.Output[Optional[int]]:
+        """
+        Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="autoVoucher")
+    def auto_voucher(self) -> pulumi.Output[Optional[int]]:
+        """
+        Whether to use voucher, `1` for enabled.
+        """
+        return pulumi.get(self, "auto_voucher")
 
     @property
     @pulumi.getter(name="availabilityZone")
@@ -1484,7 +1656,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
         """
         return pulumi.get(self, "charge_type")
 
@@ -1601,6 +1773,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "need_support_tde")
 
     @property
+    @pulumi.getter
+    def period(self) -> pulumi.Output[Optional[int]]:
+        """
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        """
+        return pulumi.get(self, "period")
+
+    @property
     @pulumi.getter(name="privateAccessIp")
     def private_access_ip(self) -> pulumi.Output[str]:
         """
@@ -1703,6 +1883,14 @@ class Instance(pulumi.CustomResource):
         Uid of the postgresql instance.
         """
         return pulumi.get(self, "uid")
+
+    @property
+    @pulumi.getter(name="voucherIds")
+    def voucher_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        """
+        return pulumi.get(self, "voucher_ids")
 
     @property
     @pulumi.getter(name="vpcId")
