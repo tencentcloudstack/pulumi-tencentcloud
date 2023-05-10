@@ -7,6 +7,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['FreeCertificateArgs', 'FreeCertificate']
 
@@ -28,7 +30,7 @@ class FreeCertificateArgs:
         """
         The set of arguments for constructing a FreeCertificate resource.
         :param pulumi.Input[str] domain: Specify domain name.
-        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         :param pulumi.Input[str] alias: Specify alias for remark.
         :param pulumi.Input[str] contact_email: Email address.
         :param pulumi.Input[str] contact_phone: Phone number.
@@ -79,7 +81,7 @@ class FreeCertificateArgs:
     @pulumi.getter(name="dvAuthMethod")
     def dv_auth_method(self) -> pulumi.Input[str]:
         """
-        Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         """
         return pulumi.get(self, "dv_auth_method")
 
@@ -224,6 +226,7 @@ class _FreeCertificateState:
                  deployable: Optional[pulumi.Input[bool]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  dv_auth_method: Optional[pulumi.Input[str]] = None,
+                 dv_auths: Optional[pulumi.Input[Sequence[pulumi.Input['FreeCertificateDvAuthArgs']]]] = None,
                  insert_time: Optional[pulumi.Input[str]] = None,
                  old_certificate_id: Optional[pulumi.Input[str]] = None,
                  package_type: Optional[pulumi.Input[str]] = None,
@@ -249,7 +252,8 @@ class _FreeCertificateState:
         :param pulumi.Input[str] csr_key_password: Specify CSR key password.
         :param pulumi.Input[bool] deployable: Indicates whether the certificate deployable.
         :param pulumi.Input[str] domain: Specify domain name.
-        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        :param pulumi.Input[Sequence[pulumi.Input['FreeCertificateDvAuthArgs']]] dv_auths: DV certification information.
         :param pulumi.Input[str] insert_time: Certificate insert time.
         :param pulumi.Input[str] old_certificate_id: Specify old certificate ID, used for re-apply.
         :param pulumi.Input[str] package_type: Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
@@ -288,6 +292,8 @@ class _FreeCertificateState:
             pulumi.set(__self__, "domain", domain)
         if dv_auth_method is not None:
             pulumi.set(__self__, "dv_auth_method", dv_auth_method)
+        if dv_auths is not None:
+            pulumi.set(__self__, "dv_auths", dv_auths)
         if insert_time is not None:
             pulumi.set(__self__, "insert_time", insert_time)
         if old_certificate_id is not None:
@@ -459,13 +465,25 @@ class _FreeCertificateState:
     @pulumi.getter(name="dvAuthMethod")
     def dv_auth_method(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         """
         return pulumi.get(self, "dv_auth_method")
 
     @dv_auth_method.setter
     def dv_auth_method(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "dv_auth_method", value)
+
+    @property
+    @pulumi.getter(name="dvAuths")
+    def dv_auths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['FreeCertificateDvAuthArgs']]]]:
+        """
+        DV certification information.
+        """
+        return pulumi.get(self, "dv_auths")
+
+    @dv_auths.setter
+    def dv_auths(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['FreeCertificateDvAuthArgs']]]]):
+        pulumi.set(self, "dv_auths", value)
 
     @property
     @pulumi.getter(name="insertTime")
@@ -620,6 +638,7 @@ class FreeCertificate(pulumi.CustomResource):
                  __props__=None):
         """
         Provide a resource to create a Free Certificate.
+
         > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
 
         ## Example Usage
@@ -658,7 +677,7 @@ class FreeCertificate(pulumi.CustomResource):
         :param pulumi.Input[str] csr_key_parameter: Specify CSR key parameter, only support `"2048"` for now.
         :param pulumi.Input[str] csr_key_password: Specify CSR key password.
         :param pulumi.Input[str] domain: Specify domain name.
-        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         :param pulumi.Input[str] old_certificate_id: Specify old certificate ID, used for re-apply.
         :param pulumi.Input[str] package_type: Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
         :param pulumi.Input[int] project_id: ID of projects which this certification belong to.
@@ -672,6 +691,7 @@ class FreeCertificate(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to create a Free Certificate.
+
         > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
 
         ## Example Usage
@@ -763,6 +783,7 @@ class FreeCertificate(pulumi.CustomResource):
             __props__.__dict__["certificate_private_key"] = None
             __props__.__dict__["certificate_public_key"] = None
             __props__.__dict__["deployable"] = None
+            __props__.__dict__["dv_auths"] = None
             __props__.__dict__["insert_time"] = None
             __props__.__dict__["product_zh_name"] = None
             __props__.__dict__["renewable"] = None
@@ -793,6 +814,7 @@ class FreeCertificate(pulumi.CustomResource):
             deployable: Optional[pulumi.Input[bool]] = None,
             domain: Optional[pulumi.Input[str]] = None,
             dv_auth_method: Optional[pulumi.Input[str]] = None,
+            dv_auths: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FreeCertificateDvAuthArgs']]]]] = None,
             insert_time: Optional[pulumi.Input[str]] = None,
             old_certificate_id: Optional[pulumi.Input[str]] = None,
             package_type: Optional[pulumi.Input[str]] = None,
@@ -823,7 +845,8 @@ class FreeCertificate(pulumi.CustomResource):
         :param pulumi.Input[str] csr_key_password: Specify CSR key password.
         :param pulumi.Input[bool] deployable: Indicates whether the certificate deployable.
         :param pulumi.Input[str] domain: Specify domain name.
-        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        :param pulumi.Input[str] dv_auth_method: Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FreeCertificateDvAuthArgs']]]] dv_auths: DV certification information.
         :param pulumi.Input[str] insert_time: Certificate insert time.
         :param pulumi.Input[str] old_certificate_id: Specify old certificate ID, used for re-apply.
         :param pulumi.Input[str] package_type: Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
@@ -853,6 +876,7 @@ class FreeCertificate(pulumi.CustomResource):
         __props__.__dict__["deployable"] = deployable
         __props__.__dict__["domain"] = domain
         __props__.__dict__["dv_auth_method"] = dv_auth_method
+        __props__.__dict__["dv_auths"] = dv_auths
         __props__.__dict__["insert_time"] = insert_time
         __props__.__dict__["old_certificate_id"] = old_certificate_id
         __props__.__dict__["package_type"] = package_type
@@ -966,9 +990,17 @@ class FreeCertificate(pulumi.CustomResource):
     @pulumi.getter(name="dvAuthMethod")
     def dv_auth_method(self) -> pulumi.Output[str]:
         """
-        Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+        Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
         """
         return pulumi.get(self, "dv_auth_method")
+
+    @property
+    @pulumi.getter(name="dvAuths")
+    def dv_auths(self) -> pulumi.Output[Sequence['outputs.FreeCertificateDvAuth']]:
+        """
+        DV certification information.
+        """
+        return pulumi.get(self, "dv_auths")
 
     @property
     @pulumi.getter(name="insertTime")

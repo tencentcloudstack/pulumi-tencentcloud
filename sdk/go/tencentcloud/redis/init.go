@@ -21,10 +21,26 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Redis/account:Account":
+		r = &Account{}
 	case "tencentcloud:Redis/backupConfig:BackupConfig":
 		r = &BackupConfig{}
+	case "tencentcloud:Redis/connectionConfig:ConnectionConfig":
+		r = &ConnectionConfig{}
 	case "tencentcloud:Redis/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Redis/maintenanceWindow:MaintenanceWindow":
+		r = &MaintenanceWindow{}
+	case "tencentcloud:Redis/param:Param":
+		r = &Param{}
+	case "tencentcloud:Redis/paramTemplate:ParamTemplate":
+		r = &ParamTemplate{}
+	case "tencentcloud:Redis/readOnly:ReadOnly":
+		r = &ReadOnly{}
+	case "tencentcloud:Redis/replicaReadonly:ReplicaReadonly":
+		r = &ReplicaReadonly{}
+	case "tencentcloud:Redis/ssl:Ssl":
+		r = &Ssl{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -40,12 +56,52 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Redis/account",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Redis/backupConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Redis/connectionConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Redis/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/maintenanceWindow",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/param",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/paramTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/readOnly",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/replicaReadonly",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/ssl",
 		&module{version},
 	)
 }

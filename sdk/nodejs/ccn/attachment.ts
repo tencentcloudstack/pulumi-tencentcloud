@@ -89,6 +89,10 @@ export class Attachment extends pulumi.CustomResource {
      */
     public /*out*/ readonly cidrBlocks!: pulumi.Output<string[]>;
     /**
+     * Remark of attachment.
+     */
+    public readonly description!: pulumi.Output<string | undefined>;
+    /**
      * ID of instance is attached.
      */
     public readonly instanceId!: pulumi.Output<string>;
@@ -122,6 +126,7 @@ export class Attachment extends pulumi.CustomResource {
             resourceInputs["ccnId"] = state ? state.ccnId : undefined;
             resourceInputs["ccnUin"] = state ? state.ccnUin : undefined;
             resourceInputs["cidrBlocks"] = state ? state.cidrBlocks : undefined;
+            resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["instanceRegion"] = state ? state.instanceRegion : undefined;
             resourceInputs["instanceType"] = state ? state.instanceType : undefined;
@@ -142,6 +147,7 @@ export class Attachment extends pulumi.CustomResource {
             }
             resourceInputs["ccnId"] = args ? args.ccnId : undefined;
             resourceInputs["ccnUin"] = args ? args.ccnUin : undefined;
+            resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["instanceRegion"] = args ? args.instanceRegion : undefined;
             resourceInputs["instanceType"] = args ? args.instanceType : undefined;
@@ -175,6 +181,10 @@ export interface AttachmentState {
      */
     cidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Remark of attachment.
+     */
+    description?: pulumi.Input<string>;
+    /**
      * ID of instance is attached.
      */
     instanceId?: pulumi.Input<string>;
@@ -204,6 +214,10 @@ export interface AttachmentArgs {
      * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
     ccnUin?: pulumi.Input<string>;
+    /**
+     * Remark of attachment.
+     */
+    description?: pulumi.Input<string>;
     /**
      * ID of instance is attached.
      */

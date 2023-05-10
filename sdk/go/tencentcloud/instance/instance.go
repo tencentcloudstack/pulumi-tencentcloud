@@ -22,9 +22,7 @@ import (
 // CVM instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
-//
+//  $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -45,6 +43,8 @@ type Instance struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Settings for data disks.
 	DataDisks InstanceDataDiskArrayOutput `pulumi:"dataDisks"`
+	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+	DisableApiTermination pulumi.BoolPtrOutput `pulumi:"disableApiTermination"`
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
 	DisableMonitorService pulumi.BoolPtrOutput `pulumi:"disableMonitorService"`
 	// Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
@@ -73,14 +73,20 @@ type Instance struct {
 	InstanceStatus pulumi.StringOutput `pulumi:"instanceStatus"`
 	// The type of the instance.
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType pulumi.StringOutput `pulumi:"internetChargeType"`
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut pulumi.IntOutput `pulumi:"internetMaxBandwidthOut"`
 	// Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
 	KeepImageLogin pulumi.BoolPtrOutput `pulumi:"keepImageLogin"`
 	// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	KeyIds pulumi.StringArrayOutput `pulumi:"keyIds"`
+	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	//
+	// Deprecated: Please use `key_ids` instead.
 	KeyName pulumi.StringOutput `pulumi:"keyName"`
+	// A list of orderly security group IDs to associate with.
+	OrderlySecurityGroups pulumi.StringArrayOutput `pulumi:"orderlySecurityGroups"`
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
 	// The ID of a placement group.
@@ -93,7 +99,9 @@ type Instance struct {
 	PublicIp pulumi.StringOutput `pulumi:"publicIp"`
 	// Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
 	RunningFlag pulumi.BoolPtrOutput `pulumi:"runningFlag"`
-	// A list of security group IDs to associate with.
+	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
+	//
+	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType pulumi.StringPtrOutput `pulumi:"spotInstanceType"`
@@ -105,9 +113,9 @@ type Instance struct {
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId pulumi.StringOutput `pulumi:"systemDiskId"`
-	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrOutput `pulumi:"systemDiskSize"`
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType pulumi.StringPtrOutput `pulumi:"systemDiskType"`
 	// A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -171,6 +179,8 @@ type instanceState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Settings for data disks.
 	DataDisks []InstanceDataDisk `pulumi:"dataDisks"`
+	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+	DisableApiTermination *bool `pulumi:"disableApiTermination"`
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
 	DisableMonitorService *bool `pulumi:"disableMonitorService"`
 	// Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
@@ -199,14 +209,20 @@ type instanceState struct {
 	InstanceStatus *string `pulumi:"instanceStatus"`
 	// The type of the instance.
 	InstanceType *string `pulumi:"instanceType"`
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
 	// Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
 	KeepImageLogin *bool `pulumi:"keepImageLogin"`
 	// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	KeyIds []string `pulumi:"keyIds"`
+	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	//
+	// Deprecated: Please use `key_ids` instead.
 	KeyName *string `pulumi:"keyName"`
+	// A list of orderly security group IDs to associate with.
+	OrderlySecurityGroups []string `pulumi:"orderlySecurityGroups"`
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password *string `pulumi:"password"`
 	// The ID of a placement group.
@@ -219,7 +235,9 @@ type instanceState struct {
 	PublicIp *string `pulumi:"publicIp"`
 	// Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
 	RunningFlag *bool `pulumi:"runningFlag"`
-	// A list of security group IDs to associate with.
+	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
+	//
+	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType *string `pulumi:"spotInstanceType"`
@@ -231,9 +249,9 @@ type instanceState struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId *string `pulumi:"systemDiskId"`
-	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType *string `pulumi:"systemDiskType"`
 	// A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -262,6 +280,8 @@ type InstanceState struct {
 	CreateTime pulumi.StringPtrInput
 	// Settings for data disks.
 	DataDisks InstanceDataDiskArrayInput
+	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+	DisableApiTermination pulumi.BoolPtrInput
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
 	DisableMonitorService pulumi.BoolPtrInput
 	// Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
@@ -290,14 +310,20 @@ type InstanceState struct {
 	InstanceStatus pulumi.StringPtrInput
 	// The type of the instance.
 	InstanceType pulumi.StringPtrInput
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType pulumi.StringPtrInput
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
 	// Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
 	KeepImageLogin pulumi.BoolPtrInput
 	// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	KeyIds pulumi.StringArrayInput
+	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	//
+	// Deprecated: Please use `key_ids` instead.
 	KeyName pulumi.StringPtrInput
+	// A list of orderly security group IDs to associate with.
+	OrderlySecurityGroups pulumi.StringArrayInput
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password pulumi.StringPtrInput
 	// The ID of a placement group.
@@ -310,7 +336,9 @@ type InstanceState struct {
 	PublicIp pulumi.StringPtrInput
 	// Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
 	RunningFlag pulumi.BoolPtrInput
-	// A list of security group IDs to associate with.
+	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
+	//
+	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
 	SecurityGroups pulumi.StringArrayInput
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType pulumi.StringPtrInput
@@ -322,9 +350,9 @@ type InstanceState struct {
 	SubnetId pulumi.StringPtrInput
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId pulumi.StringPtrInput
-	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrInput
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType pulumi.StringPtrInput
 	// A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapInput
@@ -355,6 +383,8 @@ type instanceArgs struct {
 	CdhInstanceType *string `pulumi:"cdhInstanceType"`
 	// Settings for data disks.
 	DataDisks []InstanceDataDisk `pulumi:"dataDisks"`
+	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+	DisableApiTermination *bool `pulumi:"disableApiTermination"`
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
 	DisableMonitorService *bool `pulumi:"disableMonitorService"`
 	// Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
@@ -379,14 +409,20 @@ type instanceArgs struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// The type of the instance.
 	InstanceType *string `pulumi:"instanceType"`
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
 	// Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
 	KeepImageLogin *bool `pulumi:"keepImageLogin"`
 	// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	KeyIds []string `pulumi:"keyIds"`
+	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	//
+	// Deprecated: Please use `key_ids` instead.
 	KeyName *string `pulumi:"keyName"`
+	// A list of orderly security group IDs to associate with.
+	OrderlySecurityGroups []string `pulumi:"orderlySecurityGroups"`
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password *string `pulumi:"password"`
 	// The ID of a placement group.
@@ -397,7 +433,9 @@ type instanceArgs struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
 	RunningFlag *bool `pulumi:"runningFlag"`
-	// A list of security group IDs to associate with.
+	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
+	//
+	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType *string `pulumi:"spotInstanceType"`
@@ -409,9 +447,9 @@ type instanceArgs struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId *string `pulumi:"systemDiskId"`
-	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType *string `pulumi:"systemDiskType"`
 	// A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -439,6 +477,8 @@ type InstanceArgs struct {
 	CdhInstanceType pulumi.StringPtrInput
 	// Settings for data disks.
 	DataDisks InstanceDataDiskArrayInput
+	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+	DisableApiTermination pulumi.BoolPtrInput
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
 	DisableMonitorService pulumi.BoolPtrInput
 	// Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
@@ -463,14 +503,20 @@ type InstanceArgs struct {
 	InstanceName pulumi.StringPtrInput
 	// The type of the instance.
 	InstanceType pulumi.StringPtrInput
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType pulumi.StringPtrInput
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
 	// Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
 	KeepImageLogin pulumi.BoolPtrInput
 	// The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	KeyIds pulumi.StringArrayInput
+	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+	//
+	// Deprecated: Please use `key_ids` instead.
 	KeyName pulumi.StringPtrInput
+	// A list of orderly security group IDs to associate with.
+	OrderlySecurityGroups pulumi.StringArrayInput
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password pulumi.StringPtrInput
 	// The ID of a placement group.
@@ -481,7 +527,9 @@ type InstanceArgs struct {
 	ProjectId pulumi.IntPtrInput
 	// Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
 	RunningFlag pulumi.BoolPtrInput
-	// A list of security group IDs to associate with.
+	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
+	//
+	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
 	SecurityGroups pulumi.StringArrayInput
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType pulumi.StringPtrInput
@@ -493,9 +541,9 @@ type InstanceArgs struct {
 	SubnetId pulumi.StringPtrInput
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId pulumi.StringPtrInput
-	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrInput
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType pulumi.StringPtrInput
 	// A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapInput
@@ -533,7 +581,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -558,7 +606,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -634,6 +682,11 @@ func (o InstanceOutput) DataDisks() InstanceDataDiskArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceDataDiskArrayOutput { return v.DataDisks }).(InstanceDataDiskArrayOutput)
 }
 
+// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+func (o InstanceOutput) DisableApiTermination() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DisableApiTermination }).(pulumi.BoolPtrOutput)
+}
+
 // Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
 func (o InstanceOutput) DisableMonitorService() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DisableMonitorService }).(pulumi.BoolPtrOutput)
@@ -701,7 +754,7 @@ func (o InstanceOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
+// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 func (o InstanceOutput) InternetChargeType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InternetChargeType }).(pulumi.StringOutput)
 }
@@ -717,8 +770,20 @@ func (o InstanceOutput) KeepImageLogin() pulumi.BoolPtrOutput {
 }
 
 // The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+func (o InstanceOutput) KeyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.KeyIds }).(pulumi.StringArrayOutput)
+}
+
+// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+//
+// Deprecated: Please use `key_ids` instead.
 func (o InstanceOutput) KeyName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.KeyName }).(pulumi.StringOutput)
+}
+
+// A list of orderly security group IDs to associate with.
+func (o InstanceOutput) OrderlySecurityGroups() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.OrderlySecurityGroups }).(pulumi.StringArrayOutput)
 }
 
 // Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
@@ -751,7 +816,9 @@ func (o InstanceOutput) RunningFlag() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.RunningFlag }).(pulumi.BoolPtrOutput)
 }
 
-// A list of security group IDs to associate with.
+// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
+//
+// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
 func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }
@@ -781,12 +848,12 @@ func (o InstanceOutput) SystemDiskId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.SystemDiskId }).(pulumi.StringOutput)
 }
 
-// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 func (o InstanceOutput) SystemDiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.SystemDiskSize }).(pulumi.IntPtrOutput)
 }
 
-// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 func (o InstanceOutput) SystemDiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SystemDiskType }).(pulumi.StringPtrOutput)
 }

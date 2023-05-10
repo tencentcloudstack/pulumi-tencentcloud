@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CcHttpsPolicy{}
 	case "tencentcloud:Dayu/ccPolicyV2:CcPolicyV2":
 		r = &CcPolicyV2{}
+	case "tencentcloud:Dayu/ddosIpAttachmentV2:DdosIpAttachmentV2":
+		r = &DdosIpAttachmentV2{}
 	case "tencentcloud:Dayu/ddosPolicy:DdosPolicy":
 		r = &DdosPolicy{}
 	case "tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment":
@@ -71,6 +73,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Dayu/ccPolicyV2",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dayu/ddosIpAttachmentV2",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
     public sealed class NodePoolAutoScalingConfigDataDisk
     {
         /// <summary>
-        /// Indicates whether the disk remove after instance terminated.
+        /// Indicates whether the disk remove after instance terminated. Default is `false`.
         /// </summary>
         public readonly bool? DeleteWithInstance;
         /// <summary>
@@ -27,9 +27,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string? DiskType;
         /// <summary>
+        /// Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
+        /// </summary>
+        public readonly bool? Encrypt;
+        /// <summary>
         /// Data disk snapshot ID.
         /// </summary>
         public readonly string? SnapshotId;
+        /// <summary>
+        /// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `data_size` &gt; 460GB.
+        /// </summary>
+        public readonly int? ThroughputPerformance;
 
         [OutputConstructor]
         private NodePoolAutoScalingConfigDataDisk(
@@ -39,12 +47,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string? diskType,
 
-            string? snapshotId)
+            bool? encrypt,
+
+            string? snapshotId,
+
+            int? throughputPerformance)
         {
             DeleteWithInstance = deleteWithInstance;
             DiskSize = diskSize;
             DiskType = diskType;
+            Encrypt = encrypt;
             SnapshotId = snapshotId;
+            ThroughputPerformance = throughputPerformance;
         }
     }
 }

@@ -9,8 +9,184 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'ImmutableTagRuleRuleArgs',
+    'InstanceReplicationArgs',
     'InstanceSecurityPolicyArgs',
+    'ManageReplicationOperationPeerReplicationOptionArgs',
+    'ManageReplicationOperationRuleArgs',
+    'ManageReplicationOperationRuleFilterArgs',
+    'NamespaceCveWhitelistItemArgs',
+    'TagRetentionRuleRetentionRuleArgs',
+    'WebhookTriggerTriggerArgs',
+    'WebhookTriggerTriggerTargetArgs',
+    'WebhookTriggerTriggerTargetHeaderArgs',
 ]
+
+@pulumi.input_type
+class ImmutableTagRuleRuleArgs:
+    def __init__(__self__, *,
+                 repository_decoration: pulumi.Input[str],
+                 repository_pattern: pulumi.Input[str],
+                 tag_decoration: pulumi.Input[str],
+                 tag_pattern: pulumi.Input[str],
+                 disabled: Optional[pulumi.Input[bool]] = None,
+                 id: Optional[pulumi.Input[int]] = None,
+                 ns_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] repository_decoration: repository decoration type:repoMatches or repoExcludes.
+        :param pulumi.Input[str] repository_pattern: repository matching rules.
+        :param pulumi.Input[str] tag_decoration: tag decoration type: matches or excludes.
+        :param pulumi.Input[str] tag_pattern: tag matching rules.
+        :param pulumi.Input[bool] disabled: disable rule.
+        :param pulumi.Input[int] id: ID of the resource.
+        """
+        pulumi.set(__self__, "repository_decoration", repository_decoration)
+        pulumi.set(__self__, "repository_pattern", repository_pattern)
+        pulumi.set(__self__, "tag_decoration", tag_decoration)
+        pulumi.set(__self__, "tag_pattern", tag_pattern)
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if ns_name is not None:
+            pulumi.set(__self__, "ns_name", ns_name)
+
+    @property
+    @pulumi.getter(name="repositoryDecoration")
+    def repository_decoration(self) -> pulumi.Input[str]:
+        """
+        repository decoration type:repoMatches or repoExcludes.
+        """
+        return pulumi.get(self, "repository_decoration")
+
+    @repository_decoration.setter
+    def repository_decoration(self, value: pulumi.Input[str]):
+        pulumi.set(self, "repository_decoration", value)
+
+    @property
+    @pulumi.getter(name="repositoryPattern")
+    def repository_pattern(self) -> pulumi.Input[str]:
+        """
+        repository matching rules.
+        """
+        return pulumi.get(self, "repository_pattern")
+
+    @repository_pattern.setter
+    def repository_pattern(self, value: pulumi.Input[str]):
+        pulumi.set(self, "repository_pattern", value)
+
+    @property
+    @pulumi.getter(name="tagDecoration")
+    def tag_decoration(self) -> pulumi.Input[str]:
+        """
+        tag decoration type: matches or excludes.
+        """
+        return pulumi.get(self, "tag_decoration")
+
+    @tag_decoration.setter
+    def tag_decoration(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tag_decoration", value)
+
+    @property
+    @pulumi.getter(name="tagPattern")
+    def tag_pattern(self) -> pulumi.Input[str]:
+        """
+        tag matching rules.
+        """
+        return pulumi.get(self, "tag_pattern")
+
+    @tag_pattern.setter
+    def tag_pattern(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tag_pattern", value)
+
+    @property
+    @pulumi.getter
+    def disabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        disable rule.
+        """
+        return pulumi.get(self, "disabled")
+
+    @disabled.setter
+    def disabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "disabled", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[int]]:
+        """
+        ID of the resource.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="nsName")
+    def ns_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "ns_name")
+
+    @ns_name.setter
+    def ns_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ns_name", value)
+
+
+@pulumi.input_type
+class InstanceReplicationArgs:
+    def __init__(__self__, *,
+                 id: Optional[pulumi.Input[str]] = None,
+                 region_id: Optional[pulumi.Input[int]] = None,
+                 syn_tag: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] id: ID of the resource.
+        :param pulumi.Input[int] region_id: Replication region ID, check the example at the top of page to find out id of region.
+        :param pulumi.Input[bool] syn_tag: Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
+        """
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if region_id is not None:
+            pulumi.set(__self__, "region_id", region_id)
+        if syn_tag is not None:
+            pulumi.set(__self__, "syn_tag", syn_tag)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the resource.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Replication region ID, check the example at the top of page to find out id of region.
+        """
+        return pulumi.get(self, "region_id")
+
+    @region_id.setter
+    def region_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "region_id", value)
+
+    @property
+    @pulumi.getter(name="synTag")
+    def syn_tag(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
+        """
+        return pulumi.get(self, "syn_tag")
+
+    @syn_tag.setter
+    def syn_tag(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "syn_tag", value)
+
 
 @pulumi.input_type
 class InstanceSecurityPolicyArgs:
@@ -73,5 +249,427 @@ class InstanceSecurityPolicyArgs:
     @version.setter
     def version(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "version", value)
+
+
+@pulumi.input_type
+class ManageReplicationOperationPeerReplicationOptionArgs:
+    def __init__(__self__, *,
+                 enable_peer_replication: pulumi.Input[bool],
+                 peer_registry_token: pulumi.Input[str],
+                 peer_registry_uin: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] enable_peer_replication: whether to enable cross-master account instance synchronization.
+        :param pulumi.Input[str] peer_registry_token: access permanent token of the instance to be synchronized.
+        :param pulumi.Input[str] peer_registry_uin: uin of the instance to be synchronized.
+        """
+        pulumi.set(__self__, "enable_peer_replication", enable_peer_replication)
+        pulumi.set(__self__, "peer_registry_token", peer_registry_token)
+        pulumi.set(__self__, "peer_registry_uin", peer_registry_uin)
+
+    @property
+    @pulumi.getter(name="enablePeerReplication")
+    def enable_peer_replication(self) -> pulumi.Input[bool]:
+        """
+        whether to enable cross-master account instance synchronization.
+        """
+        return pulumi.get(self, "enable_peer_replication")
+
+    @enable_peer_replication.setter
+    def enable_peer_replication(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enable_peer_replication", value)
+
+    @property
+    @pulumi.getter(name="peerRegistryToken")
+    def peer_registry_token(self) -> pulumi.Input[str]:
+        """
+        access permanent token of the instance to be synchronized.
+        """
+        return pulumi.get(self, "peer_registry_token")
+
+    @peer_registry_token.setter
+    def peer_registry_token(self, value: pulumi.Input[str]):
+        pulumi.set(self, "peer_registry_token", value)
+
+    @property
+    @pulumi.getter(name="peerRegistryUin")
+    def peer_registry_uin(self) -> pulumi.Input[str]:
+        """
+        uin of the instance to be synchronized.
+        """
+        return pulumi.get(self, "peer_registry_uin")
+
+    @peer_registry_uin.setter
+    def peer_registry_uin(self, value: pulumi.Input[str]):
+        pulumi.set(self, "peer_registry_uin", value)
+
+
+@pulumi.input_type
+class ManageReplicationOperationRuleArgs:
+    def __init__(__self__, *,
+                 dest_namespace: pulumi.Input[str],
+                 filters: pulumi.Input[Sequence[pulumi.Input['ManageReplicationOperationRuleFilterArgs']]],
+                 name: pulumi.Input[str],
+                 override: pulumi.Input[bool]):
+        """
+        :param pulumi.Input[str] dest_namespace: target namespace.
+        :param pulumi.Input[Sequence[pulumi.Input['ManageReplicationOperationRuleFilterArgs']]] filters: sync filters.
+        :param pulumi.Input[str] name: synchronization rule names.
+        :param pulumi.Input[bool] override: whether to cover.
+        """
+        pulumi.set(__self__, "dest_namespace", dest_namespace)
+        pulumi.set(__self__, "filters", filters)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "override", override)
+
+    @property
+    @pulumi.getter(name="destNamespace")
+    def dest_namespace(self) -> pulumi.Input[str]:
+        """
+        target namespace.
+        """
+        return pulumi.get(self, "dest_namespace")
+
+    @dest_namespace.setter
+    def dest_namespace(self, value: pulumi.Input[str]):
+        pulumi.set(self, "dest_namespace", value)
+
+    @property
+    @pulumi.getter
+    def filters(self) -> pulumi.Input[Sequence[pulumi.Input['ManageReplicationOperationRuleFilterArgs']]]:
+        """
+        sync filters.
+        """
+        return pulumi.get(self, "filters")
+
+    @filters.setter
+    def filters(self, value: pulumi.Input[Sequence[pulumi.Input['ManageReplicationOperationRuleFilterArgs']]]):
+        pulumi.set(self, "filters", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        synchronization rule names.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def override(self) -> pulumi.Input[bool]:
+        """
+        whether to cover.
+        """
+        return pulumi.get(self, "override")
+
+    @override.setter
+    def override(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "override", value)
+
+
+@pulumi.input_type
+class ManageReplicationOperationRuleFilterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: type (name, tag, and resource).
+        :param pulumi.Input[str] value: empty by default.
+        """
+        pulumi.set(__self__, "type", type)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type (name, tag, and resource).
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        empty by default.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class NamespaceCveWhitelistItemArgs:
+    def __init__(__self__, *,
+                 cve_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cve_id: Vulnerability Whitelist ID.
+        """
+        if cve_id is not None:
+            pulumi.set(__self__, "cve_id", cve_id)
+
+    @property
+    @pulumi.getter(name="cveId")
+    def cve_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Vulnerability Whitelist ID.
+        """
+        return pulumi.get(self, "cve_id")
+
+    @cve_id.setter
+    def cve_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cve_id", value)
+
+
+@pulumi.input_type
+class TagRetentionRuleRetentionRuleArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] key: The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+        :param pulumi.Input[int] value: corresponding values for rule settings.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[int]:
+        """
+        corresponding values for rule settings.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[int]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class WebhookTriggerTriggerArgs:
+    def __init__(__self__, *,
+                 condition: pulumi.Input[str],
+                 enabled: pulumi.Input[bool],
+                 event_types: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 name: pulumi.Input[str],
+                 targets: pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetArgs']]],
+                 description: Optional[pulumi.Input[str]] = None,
+                 id: Optional[pulumi.Input[int]] = None,
+                 namespace_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] condition: trigger rule.
+        :param pulumi.Input[bool] enabled: enable trigger.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] event_types: trigger action.
+        :param pulumi.Input[str] name: trigger name.
+        :param pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetArgs']]] targets: trigger target.
+        :param pulumi.Input[str] description: trigger description.
+        :param pulumi.Input[int] id: ID of the resource.
+        :param pulumi.Input[int] namespace_id: the namespace Id to which the trigger belongs.
+        """
+        pulumi.set(__self__, "condition", condition)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "event_types", event_types)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "targets", targets)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if namespace_id is not None:
+            pulumi.set(__self__, "namespace_id", namespace_id)
+
+    @property
+    @pulumi.getter
+    def condition(self) -> pulumi.Input[str]:
+        """
+        trigger rule.
+        """
+        return pulumi.get(self, "condition")
+
+    @condition.setter
+    def condition(self, value: pulumi.Input[str]):
+        pulumi.set(self, "condition", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        enable trigger.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="eventTypes")
+    def event_types(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        trigger action.
+        """
+        return pulumi.get(self, "event_types")
+
+    @event_types.setter
+    def event_types(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "event_types", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        trigger name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def targets(self) -> pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetArgs']]]:
+        """
+        trigger target.
+        """
+        return pulumi.get(self, "targets")
+
+    @targets.setter
+    def targets(self, value: pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetArgs']]]):
+        pulumi.set(self, "targets", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        trigger description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[int]]:
+        """
+        ID of the resource.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        the namespace Id to which the trigger belongs.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @namespace_id.setter
+    def namespace_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "namespace_id", value)
+
+
+@pulumi.input_type
+class WebhookTriggerTriggerTargetArgs:
+    def __init__(__self__, *,
+                 address: pulumi.Input[str],
+                 headers: Optional[pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetHeaderArgs']]]] = None):
+        """
+        :param pulumi.Input[str] address: target address.
+        :param pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetHeaderArgs']]] headers: custom Headers.
+        """
+        pulumi.set(__self__, "address", address)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+
+    @property
+    @pulumi.getter
+    def address(self) -> pulumi.Input[str]:
+        """
+        target address.
+        """
+        return pulumi.get(self, "address")
+
+    @address.setter
+    def address(self, value: pulumi.Input[str]):
+        pulumi.set(self, "address", value)
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetHeaderArgs']]]]:
+        """
+        custom Headers.
+        """
+        return pulumi.get(self, "headers")
+
+    @headers.setter
+    def headers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetHeaderArgs']]]]):
+        pulumi.set(self, "headers", value)
+
+
+@pulumi.input_type
+class WebhookTriggerTriggerTargetHeaderArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 values: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] key: Header Key.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] values: Header Values.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        Header Key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Header Values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "values", value)
 
 

@@ -13,14 +13,16 @@ import (
 
 // Provides a resource to create a Redis instance and set its attributes.
 //
+// > **NOTE:** The argument vpcId and subnetId is now required because Basic Network Instance is no longer supported.
+//
+// > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
+//
 // ## Import
 //
 // Redis instance can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
-//
+//  $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -43,6 +45,10 @@ type Instance struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth pulumi.BoolPtrOutput `pulumi:"noAuth"`
+	// Readonly Primary/Replica nodes.
+	NodeInfos InstanceNodeInfoArrayOutput `pulumi:"nodeInfos"`
+	// Specify params template id. If not set, will use default template.
+	ParamsTemplateId pulumi.StringPtrOutput `pulumi:"paramsTemplateId"`
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
 	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
@@ -51,11 +57,11 @@ type Instance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// The number of instance copies. This is not required for standalone and master slave versions.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrOutput `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum pulumi.IntOutput `pulumi:"redisShardNum"`
-	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayOutput `pulumi:"replicaZoneIds"`
 	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly pulumi.BoolOutput `pulumi:"replicasReadOnly"`
@@ -131,6 +137,10 @@ type instanceState struct {
 	Name *string `pulumi:"name"`
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth *bool `pulumi:"noAuth"`
+	// Readonly Primary/Replica nodes.
+	NodeInfos []InstanceNodeInfo `pulumi:"nodeInfos"`
+	// Specify params template id. If not set, will use default template.
+	ParamsTemplateId *string `pulumi:"paramsTemplateId"`
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password *string `pulumi:"password"`
 	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
@@ -139,11 +149,11 @@ type instanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId *int `pulumi:"projectId"`
-	// The number of instance copies. This is not required for standalone and master slave versions.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum *int `pulumi:"redisShardNum"`
-	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
 	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly *bool `pulumi:"replicasReadOnly"`
@@ -184,6 +194,10 @@ type InstanceState struct {
 	Name pulumi.StringPtrInput
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth pulumi.BoolPtrInput
+	// Readonly Primary/Replica nodes.
+	NodeInfos InstanceNodeInfoArrayInput
+	// Specify params template id. If not set, will use default template.
+	ParamsTemplateId pulumi.StringPtrInput
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrInput
 	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
@@ -192,11 +206,11 @@ type InstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrInput
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum pulumi.IntPtrInput
-	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayInput
 	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly pulumi.BoolPtrInput
@@ -237,6 +251,8 @@ type instanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth *bool `pulumi:"noAuth"`
+	// Specify params template id. If not set, will use default template.
+	ParamsTemplateId *string `pulumi:"paramsTemplateId"`
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password *string `pulumi:"password"`
 	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
@@ -245,11 +261,11 @@ type instanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId *int `pulumi:"projectId"`
-	// The number of instance copies. This is not required for standalone and master slave versions.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum *int `pulumi:"redisShardNum"`
-	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
 	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly *bool `pulumi:"replicasReadOnly"`
@@ -285,6 +301,8 @@ type InstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth pulumi.BoolPtrInput
+	// Specify params template id. If not set, will use default template.
+	ParamsTemplateId pulumi.StringPtrInput
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrInput
 	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
@@ -293,11 +311,11 @@ type InstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrInput
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum pulumi.IntPtrInput
-	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayInput
 	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly pulumi.BoolPtrInput
@@ -343,7 +361,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -368,7 +386,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -449,6 +467,16 @@ func (o InstanceOutput) NoAuth() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.NoAuth }).(pulumi.BoolPtrOutput)
 }
 
+// Readonly Primary/Replica nodes.
+func (o InstanceOutput) NodeInfos() InstanceNodeInfoArrayOutput {
+	return o.ApplyT(func(v *Instance) InstanceNodeInfoArrayOutput { return v.NodeInfos }).(InstanceNodeInfoArrayOutput)
+}
+
+// Specify params template id. If not set, will use default template.
+func (o InstanceOutput) ParamsTemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ParamsTemplateId }).(pulumi.StringPtrOutput)
+}
+
 // Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 func (o InstanceOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
@@ -469,7 +497,7 @@ func (o InstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// The number of instance copies. This is not required for standalone and master slave versions.
+// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 func (o InstanceOutput) RedisReplicasNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.RedisReplicasNum }).(pulumi.IntPtrOutput)
 }
@@ -479,7 +507,7 @@ func (o InstanceOutput) RedisShardNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.RedisShardNum }).(pulumi.IntOutput)
 }
 
-// ID of replica nodes available zone. This is not required for standalone and master slave versions.
+// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 func (o InstanceOutput) ReplicaZoneIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntArrayOutput { return v.ReplicaZoneIds }).(pulumi.IntArrayOutput)
 }

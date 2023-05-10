@@ -19,10 +19,15 @@ from .group_membership import *
 from .group_policy_attachment import *
 from .oidc_sso import *
 from .policy import *
+from .policy_by_name import *
 from .role import *
+from .role_by_name import *
 from .role_policy_attachment import *
+from .role_policy_attachment_by_name import *
 from .role_sso import *
 from .saml_provider import *
+from .service_linked_role import *
 from .user import *
 from .user_policy_attachment import *
+from .user_saml_config import *
 from . import outputs

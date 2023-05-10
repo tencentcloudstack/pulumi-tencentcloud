@@ -18,32 +18,29 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vpn.GetConnections(ctx, &vpn.GetConnectionsArgs{
-//				CustomerGatewayId: pulumi.StringRef(""),
-//				Id:                pulumi.StringRef("vpnx-xfqag"),
-//				Name:              pulumi.StringRef("main"),
-//				Tags: map[string]interface{}{
-//					"test": "tf",
-//				},
-//				VpcId:        pulumi.StringRef("cgw-xfqag"),
-//				VpnGatewayId: pulumi.StringRef("vpngw-8ccsnclt"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.GetConnections(ctx, &vpn.GetConnectionsArgs{
+// 			CustomerGatewayId: pulumi.StringRef(""),
+// 			Id:                pulumi.StringRef("vpnx-xfqag"),
+// 			Name:              pulumi.StringRef("main"),
+// 			Tags: map[string]interface{}{
+// 				"test": "tf",
+// 			},
+// 			VpcId:        pulumi.StringRef("cgw-xfqag"),
+// 			VpnGatewayId: pulumi.StringRef("vpngw-8ccsnclt"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetConnections(ctx *pulumi.Context, args *GetConnectionsArgs, opts ...pulumi.InvokeOption) (*GetConnectionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

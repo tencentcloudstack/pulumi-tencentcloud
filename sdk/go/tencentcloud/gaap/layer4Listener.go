@@ -19,62 +19,59 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-//				Bandwidth:        pulumi.Int(10),
-//				Concurrent:       pulumi.Int(2),
-//				AccessRegion:     pulumi.String("SouthChina"),
-//				RealserverRegion: pulumi.String("NorthChina"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-//				Ip: pulumi.String("1.1.1.1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			bar, err := Gaap.NewRealserver(ctx, "bar", &Gaap.RealserverArgs{
-//				Ip: pulumi.String("119.29.29.29"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Gaap.NewLayer4Listener(ctx, "fooLayer4Listener", &Gaap.Layer4ListenerArgs{
-//				Protocol:       pulumi.String("TCP"),
-//				Port:           pulumi.Int(80),
-//				RealserverType: pulumi.String("IP"),
-//				ProxyId:        fooProxy.ID(),
-//				HealthCheck:    pulumi.Bool(true),
-//				RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
-//					&gaap.Layer4ListenerRealserverBindSetArgs{
-//						Id:   fooRealserver.ID(),
-//						Ip:   fooRealserver.Ip,
-//						Port: pulumi.Int(80),
-//					},
-//					&gaap.Layer4ListenerRealserverBindSetArgs{
-//						Id:   bar.ID(),
-//						Ip:   bar.Ip,
-//						Port: pulumi.Int(80),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+// 			Bandwidth:        pulumi.Int(10),
+// 			Concurrent:       pulumi.Int(2),
+// 			AccessRegion:     pulumi.String("SouthChina"),
+// 			RealserverRegion: pulumi.String("NorthChina"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
+// 			Ip: pulumi.String("1.1.1.1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		bar, err := Gaap.NewRealserver(ctx, "bar", &Gaap.RealserverArgs{
+// 			Ip: pulumi.String("119.29.29.29"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Gaap.NewLayer4Listener(ctx, "fooLayer4Listener", &Gaap.Layer4ListenerArgs{
+// 			Protocol:       pulumi.String("TCP"),
+// 			Port:           pulumi.Int(80),
+// 			RealserverType: pulumi.String("IP"),
+// 			ProxyId:        fooProxy.ID(),
+// 			HealthCheck:    pulumi.Bool(true),
+// 			RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
+// 				&gaap.Layer4ListenerRealserverBindSetArgs{
+// 					Id:   fooRealserver.ID(),
+// 					Ip:   fooRealserver.Ip,
+// 					Port: pulumi.Int(80),
+// 				},
+// 				&gaap.Layer4ListenerRealserverBindSetArgs{
+// 					Id:   bar.ID(),
+// 					Ip:   bar.Ip,
+// 					Port: pulumi.Int(80),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -82,9 +79,7 @@ import (
 // GAAP layer4 listener can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
-//
+//  $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
 // ```
 type Layer4Listener struct {
 	pulumi.CustomResourceState
@@ -297,7 +292,7 @@ func (i *Layer4Listener) ToLayer4ListenerOutputWithContext(ctx context.Context) 
 // Layer4ListenerArrayInput is an input type that accepts Layer4ListenerArray and Layer4ListenerArrayOutput values.
 // You can construct a concrete instance of `Layer4ListenerArrayInput` via:
 //
-//	Layer4ListenerArray{ Layer4ListenerArgs{...} }
+//          Layer4ListenerArray{ Layer4ListenerArgs{...} }
 type Layer4ListenerArrayInput interface {
 	pulumi.Input
 
@@ -322,7 +317,7 @@ func (i Layer4ListenerArray) ToLayer4ListenerArrayOutputWithContext(ctx context.
 // Layer4ListenerMapInput is an input type that accepts Layer4ListenerMap and Layer4ListenerMapOutput values.
 // You can construct a concrete instance of `Layer4ListenerMapInput` via:
 //
-//	Layer4ListenerMap{ "key": Layer4ListenerArgs{...} }
+//          Layer4ListenerMap{ "key": Layer4ListenerArgs{...} }
 type Layer4ListenerMapInput interface {
 	pulumi.Input
 

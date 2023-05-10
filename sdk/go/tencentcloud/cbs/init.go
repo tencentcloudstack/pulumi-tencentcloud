@@ -21,12 +21,18 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cbs/diskBackup:DiskBackup":
+		r = &DiskBackup{}
+	case "tencentcloud:Cbs/diskBackupRollbackOperation:DiskBackupRollbackOperation":
+		r = &DiskBackupRollbackOperation{}
 	case "tencentcloud:Cbs/snapshot:Snapshot":
 		r = &Snapshot{}
 	case "tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy":
 		r = &SnapshotPolicy{}
 	case "tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment":
 		r = &SnapshotPolicyAttachment{}
+	case "tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission":
+		r = &SnapshotSharePermission{}
 	case "tencentcloud:Cbs/storage:Storage":
 		r = &Storage{}
 	case "tencentcloud:Cbs/storageAttachment:StorageAttachment":
@@ -50,6 +56,16 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cbs/diskBackup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cbs/diskBackupRollbackOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cbs/snapshot",
 		&module{version},
 	)
@@ -61,6 +77,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cbs/snapshotPolicyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cbs/snapshotSharePermission",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -64,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<bool?> IsDefaultMapping { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+        /// </summary>
+        [Output("isForcedHttps")]
+        public Output<bool?> IsForcedHttps { get; private set; } = null!;
+
+        /// <summary>
         /// Network type. Valid values: `OUTER`, `INNER`.
         /// </summary>
         [Output("netType")]
@@ -165,6 +171,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<bool>? IsDefaultMapping { get; set; }
 
         /// <summary>
+        /// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+        /// </summary>
+        [Input("isForcedHttps")]
+        public Input<bool>? IsForcedHttps { get; set; }
+
+        /// <summary>
         /// Network type. Valid values: `OUTER`, `INNER`.
         /// </summary>
         [Input("netType", required: true)]
@@ -224,6 +236,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Input("isDefaultMapping")]
         public Input<bool>? IsDefaultMapping { get; set; }
+
+        /// <summary>
+        /// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+        /// </summary>
+        [Input("isForcedHttps")]
+        public Input<bool>? IsForcedHttps { get; set; }
 
         /// <summary>
         /// Network type. Valid values: `OUTER`, `INNER`.

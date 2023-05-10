@@ -6,9 +6,11 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .get_instances import *
+from .get_parameter_templates import *
 from .get_specinfos import *
 from .get_xlogs import *
 from .instance import *
+from .parameter_template import *
 from .readonly_attachment import *
 from .readonly_group import *
 from .readonly_instance import *

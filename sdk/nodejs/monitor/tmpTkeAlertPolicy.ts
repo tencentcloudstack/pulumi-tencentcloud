@@ -7,6 +7,37 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tke tmpAlertPolicy
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const basic = new tencentcloud.Monitor.TmpTkeAlertPolicy("basic", {
+ *     alertRule: {
+ *         name: "alert_rule-test",
+ *         notification: {
+ *             alertManager: {
+ *                 url: "xxx",
+ *             },
+ *             enabled: true,
+ *             type: "amp",
+ *         },
+ *         rules: [{
+ *             for: "5m",
+ *             labels: [{
+ *                 name: "severity",
+ *                 value: "warning",
+ *             }],
+ *             name: "rules-test",
+ *             rule: "(count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)",
+ *             template: "The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}",
+ *         }],
+ *     },
+ *     instanceId: "prom-xxxxxx",
+ * });
+ * ```
  */
 export class TmpTkeAlertPolicy extends pulumi.CustomResource {
     /**

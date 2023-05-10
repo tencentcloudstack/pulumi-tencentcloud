@@ -19,61 +19,58 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
-//				NetworkType: pulumi.String("OPEN"),
-//				ClbName:     pulumi.String("tf-clb-rule-basic"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			listenerBasic, err := Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
-//				ClbId:        clbBasic.ID(),
-//				Port:         pulumi.Int(1),
-//				Protocol:     pulumi.String("HTTP"),
-//				ListenerName: pulumi.String("listener_basic"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ruleBasic, err := Clb.NewListenerRule(ctx, "ruleBasic", &Clb.ListenerRuleArgs{
-//				ClbId:             clbBasic.ID(),
-//				ListenerId:        listenerBasic.ListenerId,
-//				Domain:            pulumi.String("abc.com"),
-//				Url:               pulumi.String("/"),
-//				SessionExpireTime: pulumi.Int(30),
-//				Scheduler:         pulumi.String("WRR"),
-//				TargetType:        pulumi.String("TARGETGROUP"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			test, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-//				TargetGroupName: pulumi.String("test-target-keep-1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Clb.NewTargetGroupAttachment(ctx, "group", &Clb.TargetGroupAttachmentArgs{
-//				ClbId:         clbBasic.ID(),
-//				ListenerId:    listenerBasic.ListenerId,
-//				RuleId:        ruleBasic.RuleId,
-//				TargetGroupId: test.ID(),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
+// 			NetworkType: pulumi.String("OPEN"),
+// 			ClbName:     pulumi.String("tf-clb-rule-basic"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		listenerBasic, err := Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
+// 			ClbId:        clbBasic.ID(),
+// 			Port:         pulumi.Int(1),
+// 			Protocol:     pulumi.String("HTTP"),
+// 			ListenerName: pulumi.String("listener_basic"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ruleBasic, err := Clb.NewListenerRule(ctx, "ruleBasic", &Clb.ListenerRuleArgs{
+// 			ClbId:             clbBasic.ID(),
+// 			ListenerId:        listenerBasic.ListenerId,
+// 			Domain:            pulumi.String("abc.com"),
+// 			Url:               pulumi.String("/"),
+// 			SessionExpireTime: pulumi.Int(30),
+// 			Scheduler:         pulumi.String("WRR"),
+// 			TargetType:        pulumi.String("TARGETGROUP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		test, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+// 			TargetGroupName: pulumi.String("test-target-keep-1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Clb.NewTargetGroupAttachment(ctx, "group", &Clb.TargetGroupAttachmentArgs{
+// 			ClbId:         clbBasic.ID(),
+// 			ListenerId:    listenerBasic.ListenerId,
+// 			RuleId:        ruleBasic.RuleId,
+// 			TargetGroupId: test.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -81,9 +78,7 @@ import (
 // CLB target group attachment can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
-//
+//  $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
 // ```
 type TargetGroupAttachment struct {
 	pulumi.CustomResourceState
@@ -228,7 +223,7 @@ func (i *TargetGroupAttachment) ToTargetGroupAttachmentOutputWithContext(ctx con
 // TargetGroupAttachmentArrayInput is an input type that accepts TargetGroupAttachmentArray and TargetGroupAttachmentArrayOutput values.
 // You can construct a concrete instance of `TargetGroupAttachmentArrayInput` via:
 //
-//	TargetGroupAttachmentArray{ TargetGroupAttachmentArgs{...} }
+//          TargetGroupAttachmentArray{ TargetGroupAttachmentArgs{...} }
 type TargetGroupAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +248,7 @@ func (i TargetGroupAttachmentArray) ToTargetGroupAttachmentArrayOutputWithContex
 // TargetGroupAttachmentMapInput is an input type that accepts TargetGroupAttachmentMap and TargetGroupAttachmentMapOutput values.
 // You can construct a concrete instance of `TargetGroupAttachmentMapInput` via:
 //
-//	TargetGroupAttachmentMap{ "key": TargetGroupAttachmentArgs{...} }
+//          TargetGroupAttachmentMap{ "key": TargetGroupAttachmentArgs{...} }
 type TargetGroupAttachmentMapInput interface {
 	pulumi.Input
 

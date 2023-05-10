@@ -68,6 +68,10 @@ export class CustomDomain extends pulumi.CustomResource {
      */
     public readonly isDefaultMapping!: pulumi.Output<boolean | undefined>;
     /**
+     * Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+     */
+    public readonly isForcedHttps!: pulumi.Output<boolean | undefined>;
+    /**
      * Network type. Valid values: `OUTER`, `INNER`.
      */
     public readonly netType!: pulumi.Output<string>;
@@ -108,6 +112,7 @@ export class CustomDomain extends pulumi.CustomResource {
             resourceInputs["certificateId"] = state ? state.certificateId : undefined;
             resourceInputs["defaultDomain"] = state ? state.defaultDomain : undefined;
             resourceInputs["isDefaultMapping"] = state ? state.isDefaultMapping : undefined;
+            resourceInputs["isForcedHttps"] = state ? state.isForcedHttps : undefined;
             resourceInputs["netType"] = state ? state.netType : undefined;
             resourceInputs["pathMappings"] = state ? state.pathMappings : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
@@ -134,6 +139,7 @@ export class CustomDomain extends pulumi.CustomResource {
             resourceInputs["certificateId"] = args ? args.certificateId : undefined;
             resourceInputs["defaultDomain"] = args ? args.defaultDomain : undefined;
             resourceInputs["isDefaultMapping"] = args ? args.isDefaultMapping : undefined;
+            resourceInputs["isForcedHttps"] = args ? args.isForcedHttps : undefined;
             resourceInputs["netType"] = args ? args.netType : undefined;
             resourceInputs["pathMappings"] = args ? args.pathMappings : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
@@ -162,6 +168,10 @@ export interface CustomDomainState {
      * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
      */
     isDefaultMapping?: pulumi.Input<boolean>;
+    /**
+     * Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+     */
+    isForcedHttps?: pulumi.Input<boolean>;
     /**
      * Network type. Valid values: `OUTER`, `INNER`.
      */
@@ -204,6 +214,10 @@ export interface CustomDomainArgs {
      * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
      */
     isDefaultMapping?: pulumi.Input<boolean>;
+    /**
+     * Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+     */
+    isForcedHttps?: pulumi.Input<boolean>;
     /**
      * Network type. Valid values: `OUTER`, `INNER`.
      */

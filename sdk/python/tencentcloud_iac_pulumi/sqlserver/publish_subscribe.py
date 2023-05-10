@@ -103,7 +103,6 @@ class _PublishSubscribeState:
                  database_tuples: Optional[pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]]] = None,
                  delete_subscribe_db: Optional[pulumi.Input[bool]] = None,
                  publish_instance_id: Optional[pulumi.Input[str]] = None,
-                 publish_subscribe_id: Optional[pulumi.Input[int]] = None,
                  publish_subscribe_name: Optional[pulumi.Input[str]] = None,
                  subscribe_instance_id: Optional[pulumi.Input[str]] = None):
         """
@@ -111,7 +110,6 @@ class _PublishSubscribeState:
         :param pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         :param pulumi.Input[str] publish_instance_id: ID of the SQL Server instance which publish.
-        :param pulumi.Input[int] publish_subscribe_id: ID of PubSub.
         :param pulumi.Input[str] publish_subscribe_name: The name of the Publish and Subscribe. Default is `default_name`.
         :param pulumi.Input[str] subscribe_instance_id: ID of the SQL Server instance which subscribe.
         """
@@ -121,8 +119,6 @@ class _PublishSubscribeState:
             pulumi.set(__self__, "delete_subscribe_db", delete_subscribe_db)
         if publish_instance_id is not None:
             pulumi.set(__self__, "publish_instance_id", publish_instance_id)
-        if publish_subscribe_id is not None:
-            pulumi.set(__self__, "publish_subscribe_id", publish_subscribe_id)
         if publish_subscribe_name is not None:
             pulumi.set(__self__, "publish_subscribe_name", publish_subscribe_name)
         if subscribe_instance_id is not None:
@@ -163,18 +159,6 @@ class _PublishSubscribeState:
     @publish_instance_id.setter
     def publish_instance_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "publish_instance_id", value)
-
-    @property
-    @pulumi.getter(name="publishSubscribeId")
-    def publish_subscribe_id(self) -> Optional[pulumi.Input[int]]:
-        """
-        ID of PubSub.
-        """
-        return pulumi.get(self, "publish_subscribe_id")
-
-    @publish_subscribe_id.setter
-    def publish_subscribe_id(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "publish_subscribe_id", value)
 
     @property
     @pulumi.getter(name="publishSubscribeName")
@@ -325,7 +309,6 @@ class PublishSubscribe(pulumi.CustomResource):
             if subscribe_instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'subscribe_instance_id'")
             __props__.__dict__["subscribe_instance_id"] = subscribe_instance_id
-            __props__.__dict__["publish_subscribe_id"] = None
         super(PublishSubscribe, __self__).__init__(
             'tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe',
             resource_name,
@@ -339,7 +322,6 @@ class PublishSubscribe(pulumi.CustomResource):
             database_tuples: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PublishSubscribeDatabaseTupleArgs']]]]] = None,
             delete_subscribe_db: Optional[pulumi.Input[bool]] = None,
             publish_instance_id: Optional[pulumi.Input[str]] = None,
-            publish_subscribe_id: Optional[pulumi.Input[int]] = None,
             publish_subscribe_name: Optional[pulumi.Input[str]] = None,
             subscribe_instance_id: Optional[pulumi.Input[str]] = None) -> 'PublishSubscribe':
         """
@@ -352,7 +334,6 @@ class PublishSubscribe(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PublishSubscribeDatabaseTupleArgs']]]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         :param pulumi.Input[str] publish_instance_id: ID of the SQL Server instance which publish.
-        :param pulumi.Input[int] publish_subscribe_id: ID of PubSub.
         :param pulumi.Input[str] publish_subscribe_name: The name of the Publish and Subscribe. Default is `default_name`.
         :param pulumi.Input[str] subscribe_instance_id: ID of the SQL Server instance which subscribe.
         """
@@ -363,7 +344,6 @@ class PublishSubscribe(pulumi.CustomResource):
         __props__.__dict__["database_tuples"] = database_tuples
         __props__.__dict__["delete_subscribe_db"] = delete_subscribe_db
         __props__.__dict__["publish_instance_id"] = publish_instance_id
-        __props__.__dict__["publish_subscribe_id"] = publish_subscribe_id
         __props__.__dict__["publish_subscribe_name"] = publish_subscribe_name
         __props__.__dict__["subscribe_instance_id"] = subscribe_instance_id
         return PublishSubscribe(resource_name, opts=opts, __props__=__props__)
@@ -391,14 +371,6 @@ class PublishSubscribe(pulumi.CustomResource):
         ID of the SQL Server instance which publish.
         """
         return pulumi.get(self, "publish_instance_id")
-
-    @property
-    @pulumi.getter(name="publishSubscribeId")
-    def publish_subscribe_id(self) -> pulumi.Output[int]:
-        """
-        ID of PubSub.
-        """
-        return pulumi.get(self, "publish_subscribe_id")
 
     @property
     @pulumi.getter(name="publishSubscribeName")

@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Scf/function:Function":
 		r = &Function{}
+	case "tencentcloud:Scf/functionAlias:FunctionAlias":
+		r = &FunctionAlias{}
 	case "tencentcloud:Scf/layer:Layer":
 		r = &Layer{}
 	case "tencentcloud:Scf/namespace:Namespace":
@@ -43,6 +45,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Scf/function",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Scf/functionAlias",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

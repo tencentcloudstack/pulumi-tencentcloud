@@ -52,17 +52,33 @@ class TmpCvmAgentArgs:
 @pulumi.input_type
 class _TmpCvmAgentState:
     def __init__(__self__, *,
+                 agent_id: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering TmpCvmAgent resources.
+        :param pulumi.Input[str] agent_id: Agent id.
         :param pulumi.Input[str] instance_id: Instance id.
         :param pulumi.Input[str] name: Agent name.
         """
+        if agent_id is not None:
+            pulumi.set(__self__, "agent_id", agent_id)
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="agentId")
+    def agent_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Agent id.
+        """
+        return pulumi.get(self, "agent_id")
+
+    @agent_id.setter
+    def agent_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "agent_id", value)
 
     @property
     @pulumi.getter(name="instanceId")
@@ -114,7 +130,7 @@ class TmpCvmAgent(pulumi.CustomResource):
         monitor tmpCvmAgent can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent tmpCvmAgent_id
+         $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -145,7 +161,7 @@ class TmpCvmAgent(pulumi.CustomResource):
         monitor tmpCvmAgent can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent tmpCvmAgent_id
+         $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -183,6 +199,7 @@ class TmpCvmAgent(pulumi.CustomResource):
                 raise TypeError("Missing required property 'instance_id'")
             __props__.__dict__["instance_id"] = instance_id
             __props__.__dict__["name"] = name
+            __props__.__dict__["agent_id"] = None
         super(TmpCvmAgent, __self__).__init__(
             'tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent',
             resource_name,
@@ -193,6 +210,7 @@ class TmpCvmAgent(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            agent_id: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None) -> 'TmpCvmAgent':
         """
@@ -202,6 +220,7 @@ class TmpCvmAgent(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] agent_id: Agent id.
         :param pulumi.Input[str] instance_id: Instance id.
         :param pulumi.Input[str] name: Agent name.
         """
@@ -209,9 +228,18 @@ class TmpCvmAgent(pulumi.CustomResource):
 
         __props__ = _TmpCvmAgentState.__new__(_TmpCvmAgentState)
 
+        __props__.__dict__["agent_id"] = agent_id
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["name"] = name
         return TmpCvmAgent(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="agentId")
+    def agent_id(self) -> pulumi.Output[str]:
+        """
+        Agent id.
+        """
+        return pulumi.get(self, "agent_id")
 
     @property
     @pulumi.getter(name="instanceId")

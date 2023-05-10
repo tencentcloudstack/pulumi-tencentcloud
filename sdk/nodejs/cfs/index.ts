@@ -7,15 +7,28 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./accessGroup";
 export * from "./accessRule";
+export * from "./autoSnapshotPolicy";
+export * from "./autoSnapshotPolicyAttachment";
 export * from "./fileSystem";
 export * from "./getAccessGroups";
 export * from "./getAccessRules";
+export * from "./getAvailableZone";
+export * from "./getFileSystemClients";
 export * from "./getFileSystems";
+export * from "./getMountTargets";
+export * from "./signUpCfsService";
+export * from "./snapshot";
+export * from "./userQuota";
 
 // Import resources to register:
 import { AccessGroup } from "./accessGroup";
 import { AccessRule } from "./accessRule";
+import { AutoSnapshotPolicy } from "./autoSnapshotPolicy";
+import { AutoSnapshotPolicyAttachment } from "./autoSnapshotPolicyAttachment";
 import { FileSystem } from "./fileSystem";
+import { SignUpCfsService } from "./signUpCfsService";
+import { Snapshot } from "./snapshot";
+import { UserQuota } from "./userQuota";
 
 const _module = {
     version: utilities.getVersion(),
@@ -25,8 +38,18 @@ const _module = {
                 return new AccessGroup(name, <any>undefined, { urn })
             case "tencentcloud:Cfs/accessRule:AccessRule":
                 return new AccessRule(name, <any>undefined, { urn })
+            case "tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy":
+                return new AutoSnapshotPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment":
+                return new AutoSnapshotPolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cfs/fileSystem:FileSystem":
                 return new FileSystem(name, <any>undefined, { urn })
+            case "tencentcloud:Cfs/signUpCfsService:SignUpCfsService":
+                return new SignUpCfsService(name, <any>undefined, { urn })
+            case "tencentcloud:Cfs/snapshot:Snapshot":
+                return new Snapshot(name, <any>undefined, { urn })
+            case "tencentcloud:Cfs/userQuota:UserQuota":
+                return new UserQuota(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -34,4 +57,9 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/accessGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/accessRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/autoSnapshotPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/autoSnapshotPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/fileSystem", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/signUpCfsService", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/snapshot", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfs/userQuota", _module)

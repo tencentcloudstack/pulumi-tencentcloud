@@ -17,6 +17,10 @@ __all__ = [
     'DomainAwsPrivateAccessArgs',
     'DomainBandWidthAlertArgs',
     'DomainBandWidthAlertStatisticItemArgs',
+    'DomainCacheKeyArgs',
+    'DomainCacheKeyKeyRuleArgs',
+    'DomainCacheKeyKeyRuleQueryStringArgs',
+    'DomainCacheKeyQueryStringArgs',
     'DomainCompressionArgs',
     'DomainCompressionCompressionRuleArgs',
     'DomainDownstreamCappingArgs',
@@ -37,6 +41,7 @@ __all__ = [
     'DomainOriginPullOptimizationArgs',
     'DomainOriginPullTimeoutArgs',
     'DomainOssPrivateAccessArgs',
+    'DomainPostMaxSizeArgs',
     'DomainQnPrivateAccessArgs',
     'DomainRefererArgs',
     'DomainRefererRefererRuleArgs',
@@ -912,6 +917,303 @@ class DomainBandWidthAlertStatisticItemArgs:
 
 
 @pulumi.input_type
+class DomainCacheKeyArgs:
+    def __init__(__self__, *,
+                 full_url_cache: Optional[pulumi.Input[str]] = None,
+                 ignore_case: Optional[pulumi.Input[str]] = None,
+                 key_rules: Optional[pulumi.Input[Sequence[pulumi.Input['DomainCacheKeyKeyRuleArgs']]]] = None,
+                 query_string: Optional[pulumi.Input['DomainCacheKeyQueryStringArgs']] = None):
+        """
+        :param pulumi.Input[str] full_url_cache: Whether to enable full-path cache, values `on` (DEFAULT ON), `off`.
+        :param pulumi.Input[str] ignore_case: Specifies whether the cache key is case sensitive.
+        :param pulumi.Input[Sequence[pulumi.Input['DomainCacheKeyKeyRuleArgs']]] key_rules: Path-specific cache key configuration.
+        :param pulumi.Input['DomainCacheKeyQueryStringArgs'] query_string: Request parameter contained in CacheKey.
+        """
+        if full_url_cache is not None:
+            pulumi.set(__self__, "full_url_cache", full_url_cache)
+        if ignore_case is not None:
+            pulumi.set(__self__, "ignore_case", ignore_case)
+        if key_rules is not None:
+            pulumi.set(__self__, "key_rules", key_rules)
+        if query_string is not None:
+            pulumi.set(__self__, "query_string", query_string)
+
+    @property
+    @pulumi.getter(name="fullUrlCache")
+    def full_url_cache(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to enable full-path cache, values `on` (DEFAULT ON), `off`.
+        """
+        return pulumi.get(self, "full_url_cache")
+
+    @full_url_cache.setter
+    def full_url_cache(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "full_url_cache", value)
+
+    @property
+    @pulumi.getter(name="ignoreCase")
+    def ignore_case(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specifies whether the cache key is case sensitive.
+        """
+        return pulumi.get(self, "ignore_case")
+
+    @ignore_case.setter
+    def ignore_case(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ignore_case", value)
+
+    @property
+    @pulumi.getter(name="keyRules")
+    def key_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainCacheKeyKeyRuleArgs']]]]:
+        """
+        Path-specific cache key configuration.
+        """
+        return pulumi.get(self, "key_rules")
+
+    @key_rules.setter
+    def key_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainCacheKeyKeyRuleArgs']]]]):
+        pulumi.set(self, "key_rules", value)
+
+    @property
+    @pulumi.getter(name="queryString")
+    def query_string(self) -> Optional[pulumi.Input['DomainCacheKeyQueryStringArgs']]:
+        """
+        Request parameter contained in CacheKey.
+        """
+        return pulumi.get(self, "query_string")
+
+    @query_string.setter
+    def query_string(self, value: Optional[pulumi.Input['DomainCacheKeyQueryStringArgs']]):
+        pulumi.set(self, "query_string", value)
+
+
+@pulumi.input_type
+class DomainCacheKeyKeyRuleArgs:
+    def __init__(__self__, *,
+                 query_string: pulumi.Input['DomainCacheKeyKeyRuleQueryStringArgs'],
+                 rule_paths: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 rule_type: pulumi.Input[str],
+                 full_url_cache: Optional[pulumi.Input[str]] = None,
+                 ignore_case: Optional[pulumi.Input[str]] = None,
+                 rule_tag: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['DomainCacheKeyKeyRuleQueryStringArgs'] query_string: Request parameter contained in CacheKey.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: List of rule paths for each `key_rules`: `/` for `index`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        :param pulumi.Input[str] rule_type: Rule type, available: `file`, `directory`, `path`, `index`.
+        :param pulumi.Input[str] full_url_cache: Whether to enable full-path cache, values `on` (DEFAULT ON), `off`.
+        :param pulumi.Input[str] ignore_case: Whether caches are case insensitive.
+        :param pulumi.Input[str] rule_tag: Specify rule tag, default value is `user`.
+        """
+        pulumi.set(__self__, "query_string", query_string)
+        pulumi.set(__self__, "rule_paths", rule_paths)
+        pulumi.set(__self__, "rule_type", rule_type)
+        if full_url_cache is not None:
+            pulumi.set(__self__, "full_url_cache", full_url_cache)
+        if ignore_case is not None:
+            pulumi.set(__self__, "ignore_case", ignore_case)
+        if rule_tag is not None:
+            pulumi.set(__self__, "rule_tag", rule_tag)
+
+    @property
+    @pulumi.getter(name="queryString")
+    def query_string(self) -> pulumi.Input['DomainCacheKeyKeyRuleQueryStringArgs']:
+        """
+        Request parameter contained in CacheKey.
+        """
+        return pulumi.get(self, "query_string")
+
+    @query_string.setter
+    def query_string(self, value: pulumi.Input['DomainCacheKeyKeyRuleQueryStringArgs']):
+        pulumi.set(self, "query_string", value)
+
+    @property
+    @pulumi.getter(name="rulePaths")
+    def rule_paths(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of rule paths for each `key_rules`: `/` for `index`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+        """
+        return pulumi.get(self, "rule_paths")
+
+    @rule_paths.setter
+    def rule_paths(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "rule_paths", value)
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> pulumi.Input[str]:
+        """
+        Rule type, available: `file`, `directory`, `path`, `index`.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @rule_type.setter
+    def rule_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "rule_type", value)
+
+    @property
+    @pulumi.getter(name="fullUrlCache")
+    def full_url_cache(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to enable full-path cache, values `on` (DEFAULT ON), `off`.
+        """
+        return pulumi.get(self, "full_url_cache")
+
+    @full_url_cache.setter
+    def full_url_cache(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "full_url_cache", value)
+
+    @property
+    @pulumi.getter(name="ignoreCase")
+    def ignore_case(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether caches are case insensitive.
+        """
+        return pulumi.get(self, "ignore_case")
+
+    @ignore_case.setter
+    def ignore_case(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ignore_case", value)
+
+    @property
+    @pulumi.getter(name="ruleTag")
+    def rule_tag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify rule tag, default value is `user`.
+        """
+        return pulumi.get(self, "rule_tag")
+
+    @rule_tag.setter
+    def rule_tag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "rule_tag", value)
+
+
+@pulumi.input_type
+class DomainCacheKeyKeyRuleQueryStringArgs:
+    def __init__(__self__, *,
+                 action: Optional[pulumi.Input[str]] = None,
+                 switch: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action: Specify key rule QS action, values: `includeCustom`, `excludeCustom`.
+        :param pulumi.Input[str] switch: Whether to use QueryString as part of CacheKey, values `on`, `off` (Default).
+        :param pulumi.Input[str] value: Array of included/excluded query strings (separated by `;`).
+        """
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if switch is not None:
+            pulumi.set(__self__, "switch", switch)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify key rule QS action, values: `includeCustom`, `excludeCustom`.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to use QueryString as part of CacheKey, values `on`, `off` (Default).
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Array of included/excluded query strings (separated by `;`).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class DomainCacheKeyQueryStringArgs:
+    def __init__(__self__, *,
+                 action: Optional[pulumi.Input[str]] = None,
+                 reorder: Optional[pulumi.Input[str]] = None,
+                 switch: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action: Specify key rule QS action, values: `includeCustom`, `excludeCustom`.
+        :param pulumi.Input[str] reorder: Whether to sort again, values `on`, `off` (Default).
+        :param pulumi.Input[str] switch: Whether to use QueryString as part of CacheKey, values `on`, `off` (Default).
+        :param pulumi.Input[str] value: Array of included/excluded query strings (separated by `;`).
+        """
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if reorder is not None:
+            pulumi.set(__self__, "reorder", reorder)
+        if switch is not None:
+            pulumi.set(__self__, "switch", switch)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify key rule QS action, values: `includeCustom`, `excludeCustom`.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter
+    def reorder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to sort again, values `on`, `off` (Default).
+        """
+        return pulumi.get(self, "reorder")
+
+    @reorder.setter
+    def reorder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "reorder", value)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to use QueryString as part of CacheKey, values `on`, `off` (Default).
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Array of included/excluded query strings (separated by `;`).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
 class DomainCompressionArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
@@ -1254,6 +1556,7 @@ class DomainHttpsConfigArgs:
                  ocsp_stapling_switch: Optional[pulumi.Input[str]] = None,
                  server_certificate_config: Optional[pulumi.Input['DomainHttpsConfigServerCertificateConfigArgs']] = None,
                  spdy_switch: Optional[pulumi.Input[str]] = None,
+                 tls_versions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  verify_client: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] https_switch: HTTPS configuration switch. Valid values are `on` and `off`.
@@ -1263,6 +1566,7 @@ class DomainHttpsConfigArgs:
         :param pulumi.Input[str] ocsp_stapling_switch: OCSP configuration switch. Valid values are `on` and `off`. and default value is `off`.
         :param pulumi.Input['DomainHttpsConfigServerCertificateConfigArgs'] server_certificate_config: Server certificate configuration information.
         :param pulumi.Input[str] spdy_switch: Spdy configuration switch. Valid values are `on` and `off`. and default value is `off`. This parameter is for white-list customer.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tls_versions: Tls version settings, only support some Advanced domain names, support settings TLSv1, TLSV1.1, TLSV1.2, TLSv1.3, when modifying must open consecutive versions.
         :param pulumi.Input[str] verify_client: Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
         """
         pulumi.set(__self__, "https_switch", https_switch)
@@ -1278,6 +1582,8 @@ class DomainHttpsConfigArgs:
             pulumi.set(__self__, "server_certificate_config", server_certificate_config)
         if spdy_switch is not None:
             pulumi.set(__self__, "spdy_switch", spdy_switch)
+        if tls_versions is not None:
+            pulumi.set(__self__, "tls_versions", tls_versions)
         if verify_client is not None:
             pulumi.set(__self__, "verify_client", verify_client)
 
@@ -1366,6 +1672,18 @@ class DomainHttpsConfigArgs:
         pulumi.set(self, "spdy_switch", value)
 
     @property
+    @pulumi.getter(name="tlsVersions")
+    def tls_versions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Tls version settings, only support some Advanced domain names, support settings TLSv1, TLSV1.1, TLSV1.2, TLSv1.3, when modifying must open consecutive versions.
+        """
+        return pulumi.get(self, "tls_versions")
+
+    @tls_versions.setter
+    def tls_versions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tls_versions", value)
+
+    @property
     @pulumi.getter(name="verifyClient")
     def verify_client(self) -> Optional[pulumi.Input[str]]:
         """
@@ -1443,20 +1761,36 @@ class DomainHttpsConfigClientCertificateConfigArgs:
 @pulumi.input_type
 class DomainHttpsConfigForceRedirectArgs:
     def __init__(__self__, *,
+                 carry_headers: Optional[pulumi.Input[str]] = None,
                  redirect_status_code: Optional[pulumi.Input[int]] = None,
                  redirect_type: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
         """
+        :param pulumi.Input[str] carry_headers: Whether to return the newly added header during force redirection. Values: `on`, `off`.
         :param pulumi.Input[int] redirect_status_code: Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
         :param pulumi.Input[str] redirect_type: Forced redirect type. Valid values are `http` and `https`. `http` means a forced redirect from HTTPS to HTTP, `https` means a forced redirect from HTTP to HTTPS. When `switch` setting `off`, this property does not need to be set or set to `http`. Default value is `http`.
         :param pulumi.Input[str] switch: Forced redirect configuration switch. Valid values are `on` and `off`. Default value is `off`.
         """
+        if carry_headers is not None:
+            pulumi.set(__self__, "carry_headers", carry_headers)
         if redirect_status_code is not None:
             pulumi.set(__self__, "redirect_status_code", redirect_status_code)
         if redirect_type is not None:
             pulumi.set(__self__, "redirect_type", redirect_type)
         if switch is not None:
             pulumi.set(__self__, "switch", switch)
+
+    @property
+    @pulumi.getter(name="carryHeaders")
+    def carry_headers(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to return the newly added header during force redirection. Values: `on`, `off`.
+        """
+        return pulumi.get(self, "carry_headers")
+
+    @carry_headers.setter
+    def carry_headers(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "carry_headers", value)
 
     @property
     @pulumi.getter(name="redirectStatusCode")
@@ -1915,7 +2249,7 @@ class DomainMaxAgeMaxAgeRuleArgs:
         """
         :param pulumi.Input[Sequence[pulumi.Input[str]]] max_age_contents: List of rule paths for each `max_age_type`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
         :param pulumi.Input[int] max_age_time: Max Age time in seconds, this can set to `0` that stands for no cache.
-        :param pulumi.Input[str] max_age_type: The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        :param pulumi.Input[str] max_age_type: The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page.
         :param pulumi.Input[str] follow_origin: Whether to follow origin, values: `on`/`off`, if set to `on`, the `max_age_time` will be ignored.
         """
         pulumi.set(__self__, "max_age_contents", max_age_contents)
@@ -1952,7 +2286,7 @@ class DomainMaxAgeMaxAgeRuleArgs:
     @pulumi.getter(name="maxAgeType")
     def max_age_type(self) -> pulumi.Input[str]:
         """
-        The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page.
         """
         return pulumi.get(self, "max_age_type")
 
@@ -2265,6 +2599,44 @@ class DomainOssPrivateAccessArgs:
     @secret_key.setter
     def secret_key(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "secret_key", value)
+
+
+@pulumi.input_type
+class DomainPostMaxSizeArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 max_size: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: Configuration switch, available values: `on`, `off` (default).
+        :param pulumi.Input[int] max_size: Maximum size in MB, value range is `[1, 200]`.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if max_size is not None:
+            pulumi.set(__self__, "max_size", max_size)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="maxSize")
+    def max_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum size in MB, value range is `[1, 200]`.
+        """
+        return pulumi.get(self, "max_size")
+
+    @max_size.setter
+    def max_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_size", value)
 
 
 @pulumi.input_type
@@ -2688,6 +3060,8 @@ class DomainRuleCachArgs:
                  cache_time: pulumi.Input[int],
                  compare_max_age: Optional[pulumi.Input[str]] = None,
                  follow_origin_switch: Optional[pulumi.Input[str]] = None,
+                 heuristic_cache_switch: Optional[pulumi.Input[str]] = None,
+                 heuristic_cache_time: Optional[pulumi.Input[int]] = None,
                  ignore_cache_control: Optional[pulumi.Input[str]] = None,
                  ignore_set_cookie: Optional[pulumi.Input[str]] = None,
                  no_cache_switch: Optional[pulumi.Input[str]] = None,
@@ -2699,12 +3073,14 @@ class DomainRuleCachArgs:
         :param pulumi.Input[int] cache_time: Cache expiration time setting, the unit is second, the maximum can be set to 365 days.
         :param pulumi.Input[str] compare_max_age: Advanced cache expiration configuration. When it is turned on, it will compare the max-age value returned by the origin site with the cache expiration time set in CacheRules, and take the minimum value to cache at the node. Valid values are `on` and `off`. Default value is `off`.
         :param pulumi.Input[str] follow_origin_switch: Follow the source station configuration switch. Valid values are `on` and `off`.
+        :param pulumi.Input[str] heuristic_cache_switch: Specify whether to enable heuristic cache, only available while `follow_origin_switch` enabled, values: `on`, `off` (Default).
+        :param pulumi.Input[int] heuristic_cache_time: Specify heuristic cache time in second, only available while `follow_origin_switch` and `heuristic_cache_switch` enabled.
         :param pulumi.Input[str] ignore_cache_control: Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules. Valid values are `on` and `off`. Default value is `off`.
         :param pulumi.Input[str] ignore_set_cookie: Ignore the Set-Cookie header of the origin site. Valid values are `on` and `off`. Default value is `off`. This parameter is for white-list customer.
         :param pulumi.Input[str] no_cache_switch: Cache configuration switch. Valid values are `on` and `off`.
         :param pulumi.Input[str] re_validate: Always check back to origin. Valid values are `on` and `off`. Default value is `off`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
-        :param pulumi.Input[str] rule_type: Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] rule_paths: Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /.
+        :param pulumi.Input[str] rule_type: Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page.
         :param pulumi.Input[str] switch: Cache configuration switch. Valid values are `on` and `off`.
         """
         pulumi.set(__self__, "cache_time", cache_time)
@@ -2712,6 +3088,10 @@ class DomainRuleCachArgs:
             pulumi.set(__self__, "compare_max_age", compare_max_age)
         if follow_origin_switch is not None:
             pulumi.set(__self__, "follow_origin_switch", follow_origin_switch)
+        if heuristic_cache_switch is not None:
+            pulumi.set(__self__, "heuristic_cache_switch", heuristic_cache_switch)
+        if heuristic_cache_time is not None:
+            pulumi.set(__self__, "heuristic_cache_time", heuristic_cache_time)
         if ignore_cache_control is not None:
             pulumi.set(__self__, "ignore_cache_control", ignore_cache_control)
         if ignore_set_cookie is not None:
@@ -2762,6 +3142,30 @@ class DomainRuleCachArgs:
     @follow_origin_switch.setter
     def follow_origin_switch(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "follow_origin_switch", value)
+
+    @property
+    @pulumi.getter(name="heuristicCacheSwitch")
+    def heuristic_cache_switch(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify whether to enable heuristic cache, only available while `follow_origin_switch` enabled, values: `on`, `off` (Default).
+        """
+        return pulumi.get(self, "heuristic_cache_switch")
+
+    @heuristic_cache_switch.setter
+    def heuristic_cache_switch(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "heuristic_cache_switch", value)
+
+    @property
+    @pulumi.getter(name="heuristicCacheTime")
+    def heuristic_cache_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify heuristic cache time in second, only available while `follow_origin_switch` and `heuristic_cache_switch` enabled.
+        """
+        return pulumi.get(self, "heuristic_cache_time")
+
+    @heuristic_cache_time.setter
+    def heuristic_cache_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "heuristic_cache_time", value)
 
     @property
     @pulumi.getter(name="ignoreCacheControl")
@@ -2815,7 +3219,7 @@ class DomainRuleCachArgs:
     @pulumi.getter(name="rulePaths")
     def rule_paths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
+        Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /.
         """
         return pulumi.get(self, "rule_paths")
 
@@ -2827,7 +3231,7 @@ class DomainRuleCachArgs:
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page.
         """
         return pulumi.get(self, "rule_type")
 

@@ -19,12 +19,17 @@ export * from "./groupMembership";
 export * from "./groupPolicyAttachment";
 export * from "./oidcSso";
 export * from "./policy";
+export * from "./policyByName";
 export * from "./role";
+export * from "./roleByName";
 export * from "./rolePolicyAttachment";
+export * from "./rolePolicyAttachmentByName";
 export * from "./roleSso";
 export * from "./samlProvider";
+export * from "./serviceLinkedRole";
 export * from "./user";
 export * from "./userPolicyAttachment";
+export * from "./userSamlConfig";
 
 // Import resources to register:
 import { Group } from "./group";
@@ -32,12 +37,17 @@ import { GroupMembership } from "./groupMembership";
 import { GroupPolicyAttachment } from "./groupPolicyAttachment";
 import { OidcSso } from "./oidcSso";
 import { Policy } from "./policy";
+import { PolicyByName } from "./policyByName";
 import { Role } from "./role";
+import { RoleByName } from "./roleByName";
 import { RolePolicyAttachment } from "./rolePolicyAttachment";
+import { RolePolicyAttachmentByName } from "./rolePolicyAttachmentByName";
 import { RoleSso } from "./roleSso";
 import { SamlProvider } from "./samlProvider";
+import { ServiceLinkedRole } from "./serviceLinkedRole";
 import { User } from "./user";
 import { UserPolicyAttachment } from "./userPolicyAttachment";
+import { UserSamlConfig } from "./userSamlConfig";
 
 const _module = {
     version: utilities.getVersion(),
@@ -53,18 +63,28 @@ const _module = {
                 return new OidcSso(name, <any>undefined, { urn })
             case "tencentcloud:Cam/policy:Policy":
                 return new Policy(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/policyByName:PolicyByName":
+                return new PolicyByName(name, <any>undefined, { urn })
             case "tencentcloud:Cam/role:Role":
                 return new Role(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/roleByName:RoleByName":
+                return new RoleByName(name, <any>undefined, { urn })
             case "tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment":
                 return new RolePolicyAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName":
+                return new RolePolicyAttachmentByName(name, <any>undefined, { urn })
             case "tencentcloud:Cam/roleSso:RoleSso":
                 return new RoleSso(name, <any>undefined, { urn })
             case "tencentcloud:Cam/samlProvider:SamlProvider":
                 return new SamlProvider(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/serviceLinkedRole:ServiceLinkedRole":
+                return new ServiceLinkedRole(name, <any>undefined, { urn })
             case "tencentcloud:Cam/user:User":
                 return new User(name, <any>undefined, { urn })
             case "tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment":
                 return new UserPolicyAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/userSamlConfig:UserSamlConfig":
+                return new UserSamlConfig(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -75,9 +95,14 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cam/groupMembership", _mo
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/groupPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/oidcSso", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/policy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/policyByName", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/role", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/roleByName", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/rolePolicyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/rolePolicyAttachmentByName", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/roleSso", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/samlProvider", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/serviceLinkedRole", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/user", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/userPolicyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/userSamlConfig", _module)

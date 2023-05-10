@@ -19,30 +19,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Sqlserver.NewInstance(ctx, "foo", &Sqlserver.InstanceArgs{
-//				AvailabilityZone: pulumi.Any(_var.Availability_zone),
-//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            pulumi.String("vpc-409mvdvv"),
-//				SubnetId:         pulumi.String("subnet-nf9n81ps"),
-//				ProjectId:        pulumi.Int(123),
-//				Memory:           pulumi.Int(2),
-//				Storage:          pulumi.Int(100),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.NewInstance(ctx, "foo", &Sqlserver.InstanceArgs{
+// 			AvailabilityZone: pulumi.Any(_var.Availability_zone),
+// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+// 			VpcId:            pulumi.String("vpc-409mvdvv"),
+// 			SubnetId:         pulumi.String("subnet-nf9n81ps"),
+// 			ProjectId:        pulumi.Int(123),
+// 			Memory:           pulumi.Int(2),
+// 			Storage:          pulumi.Int(100),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -50,9 +47,7 @@ import (
 // SQL Server instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
-//
+//  $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -367,7 +362,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -392,7 +387,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

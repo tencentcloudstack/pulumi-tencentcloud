@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
     public sealed class GetNamespacesNamespaceListResult
     {
         /// <summary>
+        /// ID of TCR namespace.
+        /// </summary>
+        public readonly int Id;
+        /// <summary>
         /// Indicate that the namespace is public or not.
         /// </summary>
         public readonly bool IsPublic;
@@ -25,10 +29,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
 
         [OutputConstructor]
         private GetNamespacesNamespaceListResult(
+            int id,
+
             bool isPublic,
 
             string name)
         {
+            Id = id;
             IsPublic = isPublic;
             Name = name;
         }

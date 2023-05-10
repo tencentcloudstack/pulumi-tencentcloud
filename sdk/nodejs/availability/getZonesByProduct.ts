@@ -6,9 +6,7 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to get the available zones in current region.
- * Must set product param to fetch the product infomations(e.g. => cvm, vpc)
- * By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `includeUnavailable` is specified.
+ * Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. => cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `includeUnavailable` is specified.
  *
  * ## Example Usage
  *

@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
     public sealed class ScalingConfigDataDiskArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Indicates whether the disk remove after instance terminated.
+        /// Indicates whether the disk remove after instance terminated. Default is `false`.
         /// </summary>
         [Input("deleteWithInstance")]
         public Input<bool>? DeleteWithInstance { get; set; }

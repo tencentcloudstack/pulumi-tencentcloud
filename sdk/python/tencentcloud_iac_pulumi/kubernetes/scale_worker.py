@@ -21,6 +21,7 @@ class ScaleWorkerArgs:
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 gpu_args: Optional[pulumi.Input['ScaleWorkerGpuArgsArgs']] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None):
@@ -32,6 +33,7 @@ class ScaleWorkerArgs:
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
+        :param pulumi.Input['ScaleWorkerGpuArgsArgs'] gpu_args: GPU driver parameters.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -46,6 +48,8 @@ class ScaleWorkerArgs:
             pulumi.set(__self__, "docker_graph_path", docker_graph_path)
         if extra_args is not None:
             pulumi.set(__self__, "extra_args", extra_args)
+        if gpu_args is not None:
+            pulumi.set(__self__, "gpu_args", gpu_args)
         if labels is not None:
             pulumi.set(__self__, "labels", labels)
         if mount_target is not None:
@@ -126,6 +130,18 @@ class ScaleWorkerArgs:
         pulumi.set(self, "extra_args", value)
 
     @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Optional[pulumi.Input['ScaleWorkerGpuArgsArgs']]:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
+
+    @gpu_args.setter
+    def gpu_args(self, value: Optional[pulumi.Input['ScaleWorkerGpuArgsArgs']]):
+        pulumi.set(self, "gpu_args", value)
+
+    @property
     @pulumi.getter
     def labels(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -170,6 +186,7 @@ class _ScaleWorkerState:
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 gpu_args: Optional[pulumi.Input['ScaleWorkerGpuArgsArgs']] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
@@ -182,6 +199,7 @@ class _ScaleWorkerState:
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
+        :param pulumi.Input['ScaleWorkerGpuArgsArgs'] gpu_args: GPU driver parameters.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -198,6 +216,8 @@ class _ScaleWorkerState:
             pulumi.set(__self__, "docker_graph_path", docker_graph_path)
         if extra_args is not None:
             pulumi.set(__self__, "extra_args", extra_args)
+        if gpu_args is not None:
+            pulumi.set(__self__, "gpu_args", gpu_args)
         if labels is not None:
             pulumi.set(__self__, "labels", labels)
         if mount_target is not None:
@@ -270,6 +290,18 @@ class _ScaleWorkerState:
         pulumi.set(self, "extra_args", value)
 
     @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Optional[pulumi.Input['ScaleWorkerGpuArgsArgs']]:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
+
+    @gpu_args.setter
+    def gpu_args(self, value: Optional[pulumi.Input['ScaleWorkerGpuArgsArgs']]):
+        pulumi.set(self, "gpu_args", value)
+
+    @property
     @pulumi.getter
     def labels(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -340,6 +372,7 @@ class ScaleWorker(pulumi.CustomResource):
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 gpu_args: Optional[pulumi.Input[pulumi.InputType['ScaleWorkerGpuArgsArgs']]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
@@ -445,6 +478,7 @@ class ScaleWorker(pulumi.CustomResource):
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
+        :param pulumi.Input[pulumi.InputType['ScaleWorkerGpuArgsArgs']] gpu_args: GPU driver parameters.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -569,6 +603,7 @@ class ScaleWorker(pulumi.CustomResource):
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 gpu_args: Optional[pulumi.Input[pulumi.InputType['ScaleWorkerGpuArgsArgs']]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
@@ -594,6 +629,7 @@ class ScaleWorker(pulumi.CustomResource):
             __props__.__dict__["desired_pod_num"] = desired_pod_num
             __props__.__dict__["docker_graph_path"] = docker_graph_path
             __props__.__dict__["extra_args"] = extra_args
+            __props__.__dict__["gpu_args"] = gpu_args
             __props__.__dict__["labels"] = labels
             __props__.__dict__["mount_target"] = mount_target
             __props__.__dict__["unschedulable"] = unschedulable
@@ -616,6 +652,7 @@ class ScaleWorker(pulumi.CustomResource):
             desired_pod_num: Optional[pulumi.Input[int]] = None,
             docker_graph_path: Optional[pulumi.Input[str]] = None,
             extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            gpu_args: Optional[pulumi.Input[pulumi.InputType['ScaleWorkerGpuArgsArgs']]] = None,
             labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             mount_target: Optional[pulumi.Input[str]] = None,
             unschedulable: Optional[pulumi.Input[int]] = None,
@@ -633,6 +670,7 @@ class ScaleWorker(pulumi.CustomResource):
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
+        :param pulumi.Input[pulumi.InputType['ScaleWorkerGpuArgsArgs']] gpu_args: GPU driver parameters.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -648,6 +686,7 @@ class ScaleWorker(pulumi.CustomResource):
         __props__.__dict__["desired_pod_num"] = desired_pod_num
         __props__.__dict__["docker_graph_path"] = docker_graph_path
         __props__.__dict__["extra_args"] = extra_args
+        __props__.__dict__["gpu_args"] = gpu_args
         __props__.__dict__["labels"] = labels
         __props__.__dict__["mount_target"] = mount_target
         __props__.__dict__["unschedulable"] = unschedulable
@@ -694,6 +733,14 @@ class ScaleWorker(pulumi.CustomResource):
         Custom parameter information related to the node.
         """
         return pulumi.get(self, "extra_args")
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> pulumi.Output[Optional['outputs.ScaleWorkerGpuArgs']]:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
 
     @property
     @pulumi.getter

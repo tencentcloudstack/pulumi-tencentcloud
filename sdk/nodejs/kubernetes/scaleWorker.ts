@@ -137,6 +137,10 @@ export class ScaleWorker extends pulumi.CustomResource {
      */
     public readonly extraArgs!: pulumi.Output<string[] | undefined>;
     /**
+     * GPU driver parameters.
+     */
+    public readonly gpuArgs!: pulumi.Output<outputs.Kubernetes.ScaleWorkerGpuArgs | undefined>;
+    /**
      * Labels of kubernetes scale worker created nodes.
      */
     public readonly labels!: pulumi.Output<{[key: string]: any} | undefined>;
@@ -175,6 +179,7 @@ export class ScaleWorker extends pulumi.CustomResource {
             resourceInputs["desiredPodNum"] = state ? state.desiredPodNum : undefined;
             resourceInputs["dockerGraphPath"] = state ? state.dockerGraphPath : undefined;
             resourceInputs["extraArgs"] = state ? state.extraArgs : undefined;
+            resourceInputs["gpuArgs"] = state ? state.gpuArgs : undefined;
             resourceInputs["labels"] = state ? state.labels : undefined;
             resourceInputs["mountTarget"] = state ? state.mountTarget : undefined;
             resourceInputs["unschedulable"] = state ? state.unschedulable : undefined;
@@ -193,6 +198,7 @@ export class ScaleWorker extends pulumi.CustomResource {
             resourceInputs["desiredPodNum"] = args ? args.desiredPodNum : undefined;
             resourceInputs["dockerGraphPath"] = args ? args.dockerGraphPath : undefined;
             resourceInputs["extraArgs"] = args ? args.extraArgs : undefined;
+            resourceInputs["gpuArgs"] = args ? args.gpuArgs : undefined;
             resourceInputs["labels"] = args ? args.labels : undefined;
             resourceInputs["mountTarget"] = args ? args.mountTarget : undefined;
             resourceInputs["unschedulable"] = args ? args.unschedulable : undefined;
@@ -228,6 +234,10 @@ export interface ScaleWorkerState {
      * Custom parameter information related to the node.
      */
     extraArgs?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * GPU driver parameters.
+     */
+    gpuArgs?: pulumi.Input<inputs.Kubernetes.ScaleWorkerGpuArgs>;
     /**
      * Labels of kubernetes scale worker created nodes.
      */
@@ -274,6 +284,10 @@ export interface ScaleWorkerArgs {
      * Custom parameter information related to the node.
      */
     extraArgs?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * GPU driver parameters.
+     */
+    gpuArgs?: pulumi.Input<inputs.Kubernetes.ScaleWorkerGpuArgs>;
     /**
      * Labels of kubernetes scale worker created nodes.
      */

@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  * monitor tmpCvmAgent can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent tmpCvmAgent_id
+ *  $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
  * ```
  */
 export class TmpCvmAgent extends pulumi.CustomResource {
@@ -55,6 +55,10 @@ export class TmpCvmAgent extends pulumi.CustomResource {
     }
 
     /**
+     * Agent id.
+     */
+    public /*out*/ readonly agentId!: pulumi.Output<string>;
+    /**
      * Instance id.
      */
     public readonly instanceId!: pulumi.Output<string>;
@@ -76,6 +80,7 @@ export class TmpCvmAgent extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TmpCvmAgentState | undefined;
+            resourceInputs["agentId"] = state ? state.agentId : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
         } else {
@@ -85,6 +90,7 @@ export class TmpCvmAgent extends pulumi.CustomResource {
             }
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["agentId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(TmpCvmAgent.__pulumiType, name, resourceInputs, opts);
@@ -95,6 +101,10 @@ export class TmpCvmAgent extends pulumi.CustomResource {
  * Input properties used for looking up and filtering TmpCvmAgent resources.
  */
 export interface TmpCvmAgentState {
+    /**
+     * Agent id.
+     */
+    agentId?: pulumi.Input<string>;
     /**
      * Instance id.
      */

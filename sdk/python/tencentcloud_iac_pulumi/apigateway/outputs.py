@@ -15,6 +15,8 @@ __all__ = [
     'ServiceApiList',
     'ServiceUsagePlanList',
     'UsagePlanAttachList',
+    'GetApiAppsApiAppListResult',
+    'GetApiDocsApiDocListResult',
     'GetApiKeysListResult',
     'GetApisListResult',
     'GetApisListRequestParameterResult',
@@ -517,6 +519,130 @@ class UsagePlanAttachList(dict):
         The service name.
         """
         return pulumi.get(self, "service_name")
+
+
+@pulumi.output_type
+class GetApiAppsApiAppListResult(dict):
+    def __init__(__self__, *,
+                 api_app_desc: str,
+                 api_app_id: str,
+                 api_app_key: str,
+                 api_app_name: str,
+                 api_app_secret: str,
+                 created_time: str,
+                 modified_time: str):
+        """
+        :param str api_app_desc: ApiApp description.
+        :param str api_app_id: Api app ID.
+        :param str api_app_key: ApiApp key.
+        :param str api_app_name: Api app name.
+        :param str api_app_secret: ApiApp secret.
+        :param str created_time: ApiApp create time.
+        :param str modified_time: ApiApp modified time.
+        """
+        pulumi.set(__self__, "api_app_desc", api_app_desc)
+        pulumi.set(__self__, "api_app_id", api_app_id)
+        pulumi.set(__self__, "api_app_key", api_app_key)
+        pulumi.set(__self__, "api_app_name", api_app_name)
+        pulumi.set(__self__, "api_app_secret", api_app_secret)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "modified_time", modified_time)
+
+    @property
+    @pulumi.getter(name="apiAppDesc")
+    def api_app_desc(self) -> str:
+        """
+        ApiApp description.
+        """
+        return pulumi.get(self, "api_app_desc")
+
+    @property
+    @pulumi.getter(name="apiAppId")
+    def api_app_id(self) -> str:
+        """
+        Api app ID.
+        """
+        return pulumi.get(self, "api_app_id")
+
+    @property
+    @pulumi.getter(name="apiAppKey")
+    def api_app_key(self) -> str:
+        """
+        ApiApp key.
+        """
+        return pulumi.get(self, "api_app_key")
+
+    @property
+    @pulumi.getter(name="apiAppName")
+    def api_app_name(self) -> str:
+        """
+        Api app name.
+        """
+        return pulumi.get(self, "api_app_name")
+
+    @property
+    @pulumi.getter(name="apiAppSecret")
+    def api_app_secret(self) -> str:
+        """
+        ApiApp secret.
+        """
+        return pulumi.get(self, "api_app_secret")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        ApiApp create time.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="modifiedTime")
+    def modified_time(self) -> str:
+        """
+        ApiApp modified time.
+        """
+        return pulumi.get(self, "modified_time")
+
+
+@pulumi.output_type
+class GetApiDocsApiDocListResult(dict):
+    def __init__(__self__, *,
+                 api_doc_id: str,
+                 api_doc_name: str,
+                 api_doc_status: str):
+        """
+        :param str api_doc_id: Api Doc ID.
+        :param str api_doc_name: Api Doc Name.
+        :param str api_doc_status: Api Doc Status.
+        """
+        pulumi.set(__self__, "api_doc_id", api_doc_id)
+        pulumi.set(__self__, "api_doc_name", api_doc_name)
+        pulumi.set(__self__, "api_doc_status", api_doc_status)
+
+    @property
+    @pulumi.getter(name="apiDocId")
+    def api_doc_id(self) -> str:
+        """
+        Api Doc ID.
+        """
+        return pulumi.get(self, "api_doc_id")
+
+    @property
+    @pulumi.getter(name="apiDocName")
+    def api_doc_name(self) -> str:
+        """
+        Api Doc Name.
+        """
+        return pulumi.get(self, "api_doc_name")
+
+    @property
+    @pulumi.getter(name="apiDocStatus")
+    def api_doc_status(self) -> str:
+        """
+        Api Doc Status.
+        """
+        return pulumi.get(self, "api_doc_status")
 
 
 @pulumi.output_type

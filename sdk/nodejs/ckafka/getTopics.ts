@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *         "ip1",
  *         "ip2",
  *     ],
- *     maxMessageBytes: 0,
+ *     maxMessageBytes: 1024,
  *     note: "topic note",
  *     partitionNum: 1,
  *     replicaNum: 2,

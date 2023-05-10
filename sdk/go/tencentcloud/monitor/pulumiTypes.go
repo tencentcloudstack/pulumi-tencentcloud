@@ -10,6 +10,459 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AlarmNoticeClsNotice struct {
+	// Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+	Enable *int `pulumi:"enable"`
+	// Log collection Id.
+	LogSetId string `pulumi:"logSetId"`
+	// Regional.
+	Region string `pulumi:"region"`
+	// Theme Id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// AlarmNoticeClsNoticeInput is an input type that accepts AlarmNoticeClsNoticeArgs and AlarmNoticeClsNoticeOutput values.
+// You can construct a concrete instance of `AlarmNoticeClsNoticeInput` via:
+//
+//          AlarmNoticeClsNoticeArgs{...}
+type AlarmNoticeClsNoticeInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeClsNoticeOutput() AlarmNoticeClsNoticeOutput
+	ToAlarmNoticeClsNoticeOutputWithContext(context.Context) AlarmNoticeClsNoticeOutput
+}
+
+type AlarmNoticeClsNoticeArgs struct {
+	// Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+	Enable pulumi.IntPtrInput `pulumi:"enable"`
+	// Log collection Id.
+	LogSetId pulumi.StringInput `pulumi:"logSetId"`
+	// Regional.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Theme Id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (AlarmNoticeClsNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeClsNoticeArgs) ToAlarmNoticeClsNoticeOutput() AlarmNoticeClsNoticeOutput {
+	return i.ToAlarmNoticeClsNoticeOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeClsNoticeArgs) ToAlarmNoticeClsNoticeOutputWithContext(ctx context.Context) AlarmNoticeClsNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeClsNoticeOutput)
+}
+
+// AlarmNoticeClsNoticeArrayInput is an input type that accepts AlarmNoticeClsNoticeArray and AlarmNoticeClsNoticeArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeClsNoticeArrayInput` via:
+//
+//          AlarmNoticeClsNoticeArray{ AlarmNoticeClsNoticeArgs{...} }
+type AlarmNoticeClsNoticeArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeClsNoticeArrayOutput() AlarmNoticeClsNoticeArrayOutput
+	ToAlarmNoticeClsNoticeArrayOutputWithContext(context.Context) AlarmNoticeClsNoticeArrayOutput
+}
+
+type AlarmNoticeClsNoticeArray []AlarmNoticeClsNoticeInput
+
+func (AlarmNoticeClsNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeClsNoticeArray) ToAlarmNoticeClsNoticeArrayOutput() AlarmNoticeClsNoticeArrayOutput {
+	return i.ToAlarmNoticeClsNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeClsNoticeArray) ToAlarmNoticeClsNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeClsNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeClsNoticeArrayOutput)
+}
+
+type AlarmNoticeClsNoticeOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeClsNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeClsNoticeOutput) ToAlarmNoticeClsNoticeOutput() AlarmNoticeClsNoticeOutput {
+	return o
+}
+
+func (o AlarmNoticeClsNoticeOutput) ToAlarmNoticeClsNoticeOutputWithContext(ctx context.Context) AlarmNoticeClsNoticeOutput {
+	return o
+}
+
+// Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+func (o AlarmNoticeClsNoticeOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeClsNotice) *int { return v.Enable }).(pulumi.IntPtrOutput)
+}
+
+// Log collection Id.
+func (o AlarmNoticeClsNoticeOutput) LogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeClsNotice) string { return v.LogSetId }).(pulumi.StringOutput)
+}
+
+// Regional.
+func (o AlarmNoticeClsNoticeOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeClsNotice) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Theme Id.
+func (o AlarmNoticeClsNoticeOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeClsNotice) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type AlarmNoticeClsNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeClsNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeClsNoticeArrayOutput) ToAlarmNoticeClsNoticeArrayOutput() AlarmNoticeClsNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeClsNoticeArrayOutput) ToAlarmNoticeClsNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeClsNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeClsNoticeArrayOutput) Index(i pulumi.IntInput) AlarmNoticeClsNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeClsNotice {
+		return vs[0].([]AlarmNoticeClsNotice)[vs[1].(int)]
+	}).(AlarmNoticeClsNoticeOutput)
+}
+
+type AlarmNoticeUrlNotice struct {
+	// Notification End Time Seconds at the start of a day.
+	EndTime *int `pulumi:"endTime"`
+	// Notification Start Time Number of seconds at the start of a day.
+	StartTime *int `pulumi:"startTime"`
+	// Callback URL (limited to 256 characters).
+	Url string `pulumi:"url"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays []int `pulumi:"weekdays"`
+}
+
+// AlarmNoticeUrlNoticeInput is an input type that accepts AlarmNoticeUrlNoticeArgs and AlarmNoticeUrlNoticeOutput values.
+// You can construct a concrete instance of `AlarmNoticeUrlNoticeInput` via:
+//
+//          AlarmNoticeUrlNoticeArgs{...}
+type AlarmNoticeUrlNoticeInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeUrlNoticeOutput() AlarmNoticeUrlNoticeOutput
+	ToAlarmNoticeUrlNoticeOutputWithContext(context.Context) AlarmNoticeUrlNoticeOutput
+}
+
+type AlarmNoticeUrlNoticeArgs struct {
+	// Notification End Time Seconds at the start of a day.
+	EndTime pulumi.IntPtrInput `pulumi:"endTime"`
+	// Notification Start Time Number of seconds at the start of a day.
+	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
+	// Callback URL (limited to 256 characters).
+	Url pulumi.StringInput `pulumi:"url"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays pulumi.IntArrayInput `pulumi:"weekdays"`
+}
+
+func (AlarmNoticeUrlNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeUrlNoticeArgs) ToAlarmNoticeUrlNoticeOutput() AlarmNoticeUrlNoticeOutput {
+	return i.ToAlarmNoticeUrlNoticeOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeUrlNoticeArgs) ToAlarmNoticeUrlNoticeOutputWithContext(ctx context.Context) AlarmNoticeUrlNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeUrlNoticeOutput)
+}
+
+// AlarmNoticeUrlNoticeArrayInput is an input type that accepts AlarmNoticeUrlNoticeArray and AlarmNoticeUrlNoticeArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeUrlNoticeArrayInput` via:
+//
+//          AlarmNoticeUrlNoticeArray{ AlarmNoticeUrlNoticeArgs{...} }
+type AlarmNoticeUrlNoticeArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeUrlNoticeArrayOutput() AlarmNoticeUrlNoticeArrayOutput
+	ToAlarmNoticeUrlNoticeArrayOutputWithContext(context.Context) AlarmNoticeUrlNoticeArrayOutput
+}
+
+type AlarmNoticeUrlNoticeArray []AlarmNoticeUrlNoticeInput
+
+func (AlarmNoticeUrlNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeUrlNoticeArray) ToAlarmNoticeUrlNoticeArrayOutput() AlarmNoticeUrlNoticeArrayOutput {
+	return i.ToAlarmNoticeUrlNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeUrlNoticeArray) ToAlarmNoticeUrlNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeUrlNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeUrlNoticeArrayOutput)
+}
+
+type AlarmNoticeUrlNoticeOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeUrlNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeUrlNoticeOutput) ToAlarmNoticeUrlNoticeOutput() AlarmNoticeUrlNoticeOutput {
+	return o
+}
+
+func (o AlarmNoticeUrlNoticeOutput) ToAlarmNoticeUrlNoticeOutputWithContext(ctx context.Context) AlarmNoticeUrlNoticeOutput {
+	return o
+}
+
+// Notification End Time Seconds at the start of a day.
+func (o AlarmNoticeUrlNoticeOutput) EndTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeUrlNotice) *int { return v.EndTime }).(pulumi.IntPtrOutput)
+}
+
+// Notification Start Time Number of seconds at the start of a day.
+func (o AlarmNoticeUrlNoticeOutput) StartTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeUrlNotice) *int { return v.StartTime }).(pulumi.IntPtrOutput)
+}
+
+// Callback URL (limited to 256 characters).
+func (o AlarmNoticeUrlNoticeOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeUrlNotice) string { return v.Url }).(pulumi.StringOutput)
+}
+
+// Notification period 1-7 indicates Monday to Sunday.
+func (o AlarmNoticeUrlNoticeOutput) Weekdays() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeUrlNotice) []int { return v.Weekdays }).(pulumi.IntArrayOutput)
+}
+
+type AlarmNoticeUrlNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeUrlNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeUrlNoticeArrayOutput) ToAlarmNoticeUrlNoticeArrayOutput() AlarmNoticeUrlNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeUrlNoticeArrayOutput) ToAlarmNoticeUrlNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeUrlNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeUrlNoticeArrayOutput) Index(i pulumi.IntInput) AlarmNoticeUrlNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeUrlNotice {
+		return vs[0].([]AlarmNoticeUrlNotice)[vs[1].(int)]
+	}).(AlarmNoticeUrlNoticeOutput)
+}
+
+type AlarmNoticeUserNotice struct {
+	// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+	EndTime int `pulumi:"endTime"`
+	// User group ID list.
+	GroupIds []int `pulumi:"groupIds"`
+	// Contact notification required 0= No 1= Yes.
+	NeedPhoneArriveNotice *int `pulumi:"needPhoneArriveNotice"`
+	// Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+	NoticeWays []string `pulumi:"noticeWays"`
+	// Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+	PhoneCallType *string `pulumi:"phoneCallType"`
+	// Number of seconds between polls (value range: 60-900).
+	PhoneCircleInterval *int `pulumi:"phoneCircleInterval"`
+	// Number of telephone polls (value range: 1-5).
+	PhoneCircleTimes *int `pulumi:"phoneCircleTimes"`
+	// Number of seconds between calls in a polling session (value range: 60-900).
+	PhoneInnerInterval *int `pulumi:"phoneInnerInterval"`
+	// Telephone polling list.
+	PhoneOrders []int `pulumi:"phoneOrders"`
+	// Recipient Type USER=User GROUP=User Group.
+	ReceiverType string `pulumi:"receiverType"`
+	// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+	StartTime int `pulumi:"startTime"`
+	// User UID List.
+	UserIds []int `pulumi:"userIds"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays []int `pulumi:"weekdays"`
+}
+
+// AlarmNoticeUserNoticeInput is an input type that accepts AlarmNoticeUserNoticeArgs and AlarmNoticeUserNoticeOutput values.
+// You can construct a concrete instance of `AlarmNoticeUserNoticeInput` via:
+//
+//          AlarmNoticeUserNoticeArgs{...}
+type AlarmNoticeUserNoticeInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeUserNoticeOutput() AlarmNoticeUserNoticeOutput
+	ToAlarmNoticeUserNoticeOutputWithContext(context.Context) AlarmNoticeUserNoticeOutput
+}
+
+type AlarmNoticeUserNoticeArgs struct {
+	// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+	EndTime pulumi.IntInput `pulumi:"endTime"`
+	// User group ID list.
+	GroupIds pulumi.IntArrayInput `pulumi:"groupIds"`
+	// Contact notification required 0= No 1= Yes.
+	NeedPhoneArriveNotice pulumi.IntPtrInput `pulumi:"needPhoneArriveNotice"`
+	// Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+	NoticeWays pulumi.StringArrayInput `pulumi:"noticeWays"`
+	// Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+	PhoneCallType pulumi.StringPtrInput `pulumi:"phoneCallType"`
+	// Number of seconds between polls (value range: 60-900).
+	PhoneCircleInterval pulumi.IntPtrInput `pulumi:"phoneCircleInterval"`
+	// Number of telephone polls (value range: 1-5).
+	PhoneCircleTimes pulumi.IntPtrInput `pulumi:"phoneCircleTimes"`
+	// Number of seconds between calls in a polling session (value range: 60-900).
+	PhoneInnerInterval pulumi.IntPtrInput `pulumi:"phoneInnerInterval"`
+	// Telephone polling list.
+	PhoneOrders pulumi.IntArrayInput `pulumi:"phoneOrders"`
+	// Recipient Type USER=User GROUP=User Group.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// User UID List.
+	UserIds pulumi.IntArrayInput `pulumi:"userIds"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays pulumi.IntArrayInput `pulumi:"weekdays"`
+}
+
+func (AlarmNoticeUserNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeUserNoticeArgs) ToAlarmNoticeUserNoticeOutput() AlarmNoticeUserNoticeOutput {
+	return i.ToAlarmNoticeUserNoticeOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeUserNoticeArgs) ToAlarmNoticeUserNoticeOutputWithContext(ctx context.Context) AlarmNoticeUserNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeUserNoticeOutput)
+}
+
+// AlarmNoticeUserNoticeArrayInput is an input type that accepts AlarmNoticeUserNoticeArray and AlarmNoticeUserNoticeArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeUserNoticeArrayInput` via:
+//
+//          AlarmNoticeUserNoticeArray{ AlarmNoticeUserNoticeArgs{...} }
+type AlarmNoticeUserNoticeArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeUserNoticeArrayOutput() AlarmNoticeUserNoticeArrayOutput
+	ToAlarmNoticeUserNoticeArrayOutputWithContext(context.Context) AlarmNoticeUserNoticeArrayOutput
+}
+
+type AlarmNoticeUserNoticeArray []AlarmNoticeUserNoticeInput
+
+func (AlarmNoticeUserNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeUserNoticeArray) ToAlarmNoticeUserNoticeArrayOutput() AlarmNoticeUserNoticeArrayOutput {
+	return i.ToAlarmNoticeUserNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeUserNoticeArray) ToAlarmNoticeUserNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeUserNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeUserNoticeArrayOutput)
+}
+
+type AlarmNoticeUserNoticeOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeUserNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeUserNoticeOutput) ToAlarmNoticeUserNoticeOutput() AlarmNoticeUserNoticeOutput {
+	return o
+}
+
+func (o AlarmNoticeUserNoticeOutput) ToAlarmNoticeUserNoticeOutputWithContext(ctx context.Context) AlarmNoticeUserNoticeOutput {
+	return o
+}
+
+// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+func (o AlarmNoticeUserNoticeOutput) EndTime() pulumi.IntOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) int { return v.EndTime }).(pulumi.IntOutput)
+}
+
+// User group ID list.
+func (o AlarmNoticeUserNoticeOutput) GroupIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) []int { return v.GroupIds }).(pulumi.IntArrayOutput)
+}
+
+// Contact notification required 0= No 1= Yes.
+func (o AlarmNoticeUserNoticeOutput) NeedPhoneArriveNotice() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) *int { return v.NeedPhoneArriveNotice }).(pulumi.IntPtrOutput)
+}
+
+// Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+func (o AlarmNoticeUserNoticeOutput) NoticeWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) []string { return v.NoticeWays }).(pulumi.StringArrayOutput)
+}
+
+// Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+func (o AlarmNoticeUserNoticeOutput) PhoneCallType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) *string { return v.PhoneCallType }).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds between polls (value range: 60-900).
+func (o AlarmNoticeUserNoticeOutput) PhoneCircleInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) *int { return v.PhoneCircleInterval }).(pulumi.IntPtrOutput)
+}
+
+// Number of telephone polls (value range: 1-5).
+func (o AlarmNoticeUserNoticeOutput) PhoneCircleTimes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) *int { return v.PhoneCircleTimes }).(pulumi.IntPtrOutput)
+}
+
+// Number of seconds between calls in a polling session (value range: 60-900).
+func (o AlarmNoticeUserNoticeOutput) PhoneInnerInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) *int { return v.PhoneInnerInterval }).(pulumi.IntPtrOutput)
+}
+
+// Telephone polling list.
+func (o AlarmNoticeUserNoticeOutput) PhoneOrders() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) []int { return v.PhoneOrders }).(pulumi.IntArrayOutput)
+}
+
+// Recipient Type USER=User GROUP=User Group.
+func (o AlarmNoticeUserNoticeOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+func (o AlarmNoticeUserNoticeOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) int { return v.StartTime }).(pulumi.IntOutput)
+}
+
+// User UID List.
+func (o AlarmNoticeUserNoticeOutput) UserIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) []int { return v.UserIds }).(pulumi.IntArrayOutput)
+}
+
+// Notification period 1-7 indicates Monday to Sunday.
+func (o AlarmNoticeUserNoticeOutput) Weekdays() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeUserNotice) []int { return v.Weekdays }).(pulumi.IntArrayOutput)
+}
+
+type AlarmNoticeUserNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeUserNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeUserNoticeArrayOutput) ToAlarmNoticeUserNoticeArrayOutput() AlarmNoticeUserNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeUserNoticeArrayOutput) ToAlarmNoticeUserNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeUserNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeUserNoticeArrayOutput) Index(i pulumi.IntInput) AlarmNoticeUserNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeUserNotice {
+		return vs[0].([]AlarmNoticeUserNotice)[vs[1].(int)]
+	}).(AlarmNoticeUserNoticeOutput)
+}
+
 type AlarmPolicyConditions struct {
 	// The and or relation of indicator alarm rule.
 	IsUnionRule *int `pulumi:"isUnionRule"`
@@ -20,7 +473,7 @@ type AlarmPolicyConditions struct {
 // AlarmPolicyConditionsInput is an input type that accepts AlarmPolicyConditionsArgs and AlarmPolicyConditionsOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsInput` via:
 //
-//	AlarmPolicyConditionsArgs{...}
+//          AlarmPolicyConditionsArgs{...}
 type AlarmPolicyConditionsInput interface {
 	pulumi.Input
 
@@ -58,11 +511,11 @@ func (i AlarmPolicyConditionsArgs) ToAlarmPolicyConditionsPtrOutputWithContext(c
 // AlarmPolicyConditionsPtrInput is an input type that accepts AlarmPolicyConditionsArgs, AlarmPolicyConditionsPtr and AlarmPolicyConditionsPtrOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsPtrInput` via:
 //
-//	        AlarmPolicyConditionsArgs{...}
+//          AlarmPolicyConditionsArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AlarmPolicyConditionsPtrInput interface {
 	pulumi.Input
 
@@ -194,7 +647,7 @@ type AlarmPolicyConditionsRule struct {
 // AlarmPolicyConditionsRuleInput is an input type that accepts AlarmPolicyConditionsRuleArgs and AlarmPolicyConditionsRuleOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleInput` via:
 //
-//	AlarmPolicyConditionsRuleArgs{...}
+//          AlarmPolicyConditionsRuleArgs{...}
 type AlarmPolicyConditionsRuleInput interface {
 	pulumi.Input
 
@@ -242,7 +695,7 @@ func (i AlarmPolicyConditionsRuleArgs) ToAlarmPolicyConditionsRuleOutputWithCont
 // AlarmPolicyConditionsRuleArrayInput is an input type that accepts AlarmPolicyConditionsRuleArray and AlarmPolicyConditionsRuleArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleArrayInput` via:
 //
-//	AlarmPolicyConditionsRuleArray{ AlarmPolicyConditionsRuleArgs{...} }
+//          AlarmPolicyConditionsRuleArray{ AlarmPolicyConditionsRuleArgs{...} }
 type AlarmPolicyConditionsRuleArrayInput interface {
 	pulumi.Input
 
@@ -363,7 +816,7 @@ type AlarmPolicyConditionsRuleFilter struct {
 // AlarmPolicyConditionsRuleFilterInput is an input type that accepts AlarmPolicyConditionsRuleFilterArgs and AlarmPolicyConditionsRuleFilterOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleFilterInput` via:
 //
-//	AlarmPolicyConditionsRuleFilterArgs{...}
+//          AlarmPolicyConditionsRuleFilterArgs{...}
 type AlarmPolicyConditionsRuleFilterInput interface {
 	pulumi.Input
 
@@ -401,11 +854,11 @@ func (i AlarmPolicyConditionsRuleFilterArgs) ToAlarmPolicyConditionsRuleFilterPt
 // AlarmPolicyConditionsRuleFilterPtrInput is an input type that accepts AlarmPolicyConditionsRuleFilterArgs, AlarmPolicyConditionsRuleFilterPtr and AlarmPolicyConditionsRuleFilterPtrOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleFilterPtrInput` via:
 //
-//	        AlarmPolicyConditionsRuleFilterArgs{...}
+//          AlarmPolicyConditionsRuleFilterArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AlarmPolicyConditionsRuleFilterPtrInput interface {
 	pulumi.Input
 
@@ -537,7 +990,7 @@ type AlarmPolicyEventCondition struct {
 // AlarmPolicyEventConditionInput is an input type that accepts AlarmPolicyEventConditionArgs and AlarmPolicyEventConditionOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionInput` via:
 //
-//	AlarmPolicyEventConditionArgs{...}
+//          AlarmPolicyEventConditionArgs{...}
 type AlarmPolicyEventConditionInput interface {
 	pulumi.Input
 
@@ -585,7 +1038,7 @@ func (i AlarmPolicyEventConditionArgs) ToAlarmPolicyEventConditionOutputWithCont
 // AlarmPolicyEventConditionArrayInput is an input type that accepts AlarmPolicyEventConditionArray and AlarmPolicyEventConditionArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionArrayInput` via:
 //
-//	AlarmPolicyEventConditionArray{ AlarmPolicyEventConditionArgs{...} }
+//          AlarmPolicyEventConditionArray{ AlarmPolicyEventConditionArgs{...} }
 type AlarmPolicyEventConditionArrayInput interface {
 	pulumi.Input
 
@@ -706,7 +1159,7 @@ type AlarmPolicyEventConditionFilter struct {
 // AlarmPolicyEventConditionFilterInput is an input type that accepts AlarmPolicyEventConditionFilterArgs and AlarmPolicyEventConditionFilterOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionFilterInput` via:
 //
-//	AlarmPolicyEventConditionFilterArgs{...}
+//          AlarmPolicyEventConditionFilterArgs{...}
 type AlarmPolicyEventConditionFilterInput interface {
 	pulumi.Input
 
@@ -744,11 +1197,11 @@ func (i AlarmPolicyEventConditionFilterArgs) ToAlarmPolicyEventConditionFilterPt
 // AlarmPolicyEventConditionFilterPtrInput is an input type that accepts AlarmPolicyEventConditionFilterArgs, AlarmPolicyEventConditionFilterPtr and AlarmPolicyEventConditionFilterPtrOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionFilterPtrInput` via:
 //
-//	        AlarmPolicyEventConditionFilterArgs{...}
+//          AlarmPolicyEventConditionFilterArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AlarmPolicyEventConditionFilterPtrInput interface {
 	pulumi.Input
 
@@ -862,7 +1315,7 @@ type AlarmPolicyPolicyTag struct {
 // AlarmPolicyPolicyTagInput is an input type that accepts AlarmPolicyPolicyTagArgs and AlarmPolicyPolicyTagOutput values.
 // You can construct a concrete instance of `AlarmPolicyPolicyTagInput` via:
 //
-//	AlarmPolicyPolicyTagArgs{...}
+//          AlarmPolicyPolicyTagArgs{...}
 type AlarmPolicyPolicyTagInput interface {
 	pulumi.Input
 
@@ -892,7 +1345,7 @@ func (i AlarmPolicyPolicyTagArgs) ToAlarmPolicyPolicyTagOutputWithContext(ctx co
 // AlarmPolicyPolicyTagArrayInput is an input type that accepts AlarmPolicyPolicyTagArray and AlarmPolicyPolicyTagArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyPolicyTagArrayInput` via:
 //
-//	AlarmPolicyPolicyTagArray{ AlarmPolicyPolicyTagArgs{...} }
+//          AlarmPolicyPolicyTagArray{ AlarmPolicyPolicyTagArgs{...} }
 type AlarmPolicyPolicyTagArrayInput interface {
 	pulumi.Input
 
@@ -968,7 +1421,7 @@ type AlarmPolicyTriggerTask struct {
 // AlarmPolicyTriggerTaskInput is an input type that accepts AlarmPolicyTriggerTaskArgs and AlarmPolicyTriggerTaskOutput values.
 // You can construct a concrete instance of `AlarmPolicyTriggerTaskInput` via:
 //
-//	AlarmPolicyTriggerTaskArgs{...}
+//          AlarmPolicyTriggerTaskArgs{...}
 type AlarmPolicyTriggerTaskInput interface {
 	pulumi.Input
 
@@ -998,7 +1451,7 @@ func (i AlarmPolicyTriggerTaskArgs) ToAlarmPolicyTriggerTaskOutputWithContext(ct
 // AlarmPolicyTriggerTaskArrayInput is an input type that accepts AlarmPolicyTriggerTaskArray and AlarmPolicyTriggerTaskArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyTriggerTaskArrayInput` via:
 //
-//	AlarmPolicyTriggerTaskArray{ AlarmPolicyTriggerTaskArgs{...} }
+//          AlarmPolicyTriggerTaskArray{ AlarmPolicyTriggerTaskArgs{...} }
 type AlarmPolicyTriggerTaskArrayInput interface {
 	pulumi.Input
 
@@ -1084,7 +1537,7 @@ type BindingReceiverReceivers struct {
 // BindingReceiverReceiversInput is an input type that accepts BindingReceiverReceiversArgs and BindingReceiverReceiversOutput values.
 // You can construct a concrete instance of `BindingReceiverReceiversInput` via:
 //
-//	BindingReceiverReceiversArgs{...}
+//          BindingReceiverReceiversArgs{...}
 type BindingReceiverReceiversInput interface {
 	pulumi.Input
 
@@ -1132,11 +1585,11 @@ func (i BindingReceiverReceiversArgs) ToBindingReceiverReceiversPtrOutputWithCon
 // BindingReceiverReceiversPtrInput is an input type that accepts BindingReceiverReceiversArgs, BindingReceiverReceiversPtr and BindingReceiverReceiversPtrOutput values.
 // You can construct a concrete instance of `BindingReceiverReceiversPtrInput` via:
 //
-//	        BindingReceiverReceiversArgs{...}
+//          BindingReceiverReceiversArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type BindingReceiverReceiversPtrInput interface {
 	pulumi.Input
 
@@ -1315,6 +1768,112 @@ func (o BindingReceiverReceiversPtrOutput) StartTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+type GrafanaSsoAccountRole struct {
+	// Grafana organization id string.
+	Organization string `pulumi:"organization"`
+	// Grafana role, one of {Admin,Editor,Viewer}.
+	Role string `pulumi:"role"`
+}
+
+// GrafanaSsoAccountRoleInput is an input type that accepts GrafanaSsoAccountRoleArgs and GrafanaSsoAccountRoleOutput values.
+// You can construct a concrete instance of `GrafanaSsoAccountRoleInput` via:
+//
+//          GrafanaSsoAccountRoleArgs{...}
+type GrafanaSsoAccountRoleInput interface {
+	pulumi.Input
+
+	ToGrafanaSsoAccountRoleOutput() GrafanaSsoAccountRoleOutput
+	ToGrafanaSsoAccountRoleOutputWithContext(context.Context) GrafanaSsoAccountRoleOutput
+}
+
+type GrafanaSsoAccountRoleArgs struct {
+	// Grafana organization id string.
+	Organization pulumi.StringInput `pulumi:"organization"`
+	// Grafana role, one of {Admin,Editor,Viewer}.
+	Role pulumi.StringInput `pulumi:"role"`
+}
+
+func (GrafanaSsoAccountRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GrafanaSsoAccountRole)(nil)).Elem()
+}
+
+func (i GrafanaSsoAccountRoleArgs) ToGrafanaSsoAccountRoleOutput() GrafanaSsoAccountRoleOutput {
+	return i.ToGrafanaSsoAccountRoleOutputWithContext(context.Background())
+}
+
+func (i GrafanaSsoAccountRoleArgs) ToGrafanaSsoAccountRoleOutputWithContext(ctx context.Context) GrafanaSsoAccountRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GrafanaSsoAccountRoleOutput)
+}
+
+// GrafanaSsoAccountRoleArrayInput is an input type that accepts GrafanaSsoAccountRoleArray and GrafanaSsoAccountRoleArrayOutput values.
+// You can construct a concrete instance of `GrafanaSsoAccountRoleArrayInput` via:
+//
+//          GrafanaSsoAccountRoleArray{ GrafanaSsoAccountRoleArgs{...} }
+type GrafanaSsoAccountRoleArrayInput interface {
+	pulumi.Input
+
+	ToGrafanaSsoAccountRoleArrayOutput() GrafanaSsoAccountRoleArrayOutput
+	ToGrafanaSsoAccountRoleArrayOutputWithContext(context.Context) GrafanaSsoAccountRoleArrayOutput
+}
+
+type GrafanaSsoAccountRoleArray []GrafanaSsoAccountRoleInput
+
+func (GrafanaSsoAccountRoleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GrafanaSsoAccountRole)(nil)).Elem()
+}
+
+func (i GrafanaSsoAccountRoleArray) ToGrafanaSsoAccountRoleArrayOutput() GrafanaSsoAccountRoleArrayOutput {
+	return i.ToGrafanaSsoAccountRoleArrayOutputWithContext(context.Background())
+}
+
+func (i GrafanaSsoAccountRoleArray) ToGrafanaSsoAccountRoleArrayOutputWithContext(ctx context.Context) GrafanaSsoAccountRoleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GrafanaSsoAccountRoleArrayOutput)
+}
+
+type GrafanaSsoAccountRoleOutput struct{ *pulumi.OutputState }
+
+func (GrafanaSsoAccountRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GrafanaSsoAccountRole)(nil)).Elem()
+}
+
+func (o GrafanaSsoAccountRoleOutput) ToGrafanaSsoAccountRoleOutput() GrafanaSsoAccountRoleOutput {
+	return o
+}
+
+func (o GrafanaSsoAccountRoleOutput) ToGrafanaSsoAccountRoleOutputWithContext(ctx context.Context) GrafanaSsoAccountRoleOutput {
+	return o
+}
+
+// Grafana organization id string.
+func (o GrafanaSsoAccountRoleOutput) Organization() pulumi.StringOutput {
+	return o.ApplyT(func(v GrafanaSsoAccountRole) string { return v.Organization }).(pulumi.StringOutput)
+}
+
+// Grafana role, one of {Admin,Editor,Viewer}.
+func (o GrafanaSsoAccountRoleOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GrafanaSsoAccountRole) string { return v.Role }).(pulumi.StringOutput)
+}
+
+type GrafanaSsoAccountRoleArrayOutput struct{ *pulumi.OutputState }
+
+func (GrafanaSsoAccountRoleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GrafanaSsoAccountRole)(nil)).Elem()
+}
+
+func (o GrafanaSsoAccountRoleArrayOutput) ToGrafanaSsoAccountRoleArrayOutput() GrafanaSsoAccountRoleArrayOutput {
+	return o
+}
+
+func (o GrafanaSsoAccountRoleArrayOutput) ToGrafanaSsoAccountRoleArrayOutputWithContext(ctx context.Context) GrafanaSsoAccountRoleArrayOutput {
+	return o
+}
+
+func (o GrafanaSsoAccountRoleArrayOutput) Index(i pulumi.IntInput) GrafanaSsoAccountRoleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GrafanaSsoAccountRole {
+		return vs[0].([]GrafanaSsoAccountRole)[vs[1].(int)]
+	}).(GrafanaSsoAccountRoleOutput)
+}
+
 type PolicyBindingObjectDimension struct {
 	// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
 	DimensionsJson string  `pulumi:"dimensionsJson"`
@@ -1324,7 +1883,7 @@ type PolicyBindingObjectDimension struct {
 // PolicyBindingObjectDimensionInput is an input type that accepts PolicyBindingObjectDimensionArgs and PolicyBindingObjectDimensionOutput values.
 // You can construct a concrete instance of `PolicyBindingObjectDimensionInput` via:
 //
-//	PolicyBindingObjectDimensionArgs{...}
+//          PolicyBindingObjectDimensionArgs{...}
 type PolicyBindingObjectDimensionInput interface {
 	pulumi.Input
 
@@ -1353,7 +1912,7 @@ func (i PolicyBindingObjectDimensionArgs) ToPolicyBindingObjectDimensionOutputWi
 // PolicyBindingObjectDimensionArrayInput is an input type that accepts PolicyBindingObjectDimensionArray and PolicyBindingObjectDimensionArrayOutput values.
 // You can construct a concrete instance of `PolicyBindingObjectDimensionArrayInput` via:
 //
-//	PolicyBindingObjectDimensionArray{ PolicyBindingObjectDimensionArgs{...} }
+//          PolicyBindingObjectDimensionArray{ PolicyBindingObjectDimensionArgs{...} }
 type PolicyBindingObjectDimensionArrayInput interface {
 	pulumi.Input
 
@@ -1428,7 +1987,7 @@ type TmpAlertRuleAnnotation struct {
 // TmpAlertRuleAnnotationInput is an input type that accepts TmpAlertRuleAnnotationArgs and TmpAlertRuleAnnotationOutput values.
 // You can construct a concrete instance of `TmpAlertRuleAnnotationInput` via:
 //
-//	TmpAlertRuleAnnotationArgs{...}
+//          TmpAlertRuleAnnotationArgs{...}
 type TmpAlertRuleAnnotationInput interface {
 	pulumi.Input
 
@@ -1458,7 +2017,7 @@ func (i TmpAlertRuleAnnotationArgs) ToTmpAlertRuleAnnotationOutputWithContext(ct
 // TmpAlertRuleAnnotationArrayInput is an input type that accepts TmpAlertRuleAnnotationArray and TmpAlertRuleAnnotationArrayOutput values.
 // You can construct a concrete instance of `TmpAlertRuleAnnotationArrayInput` via:
 //
-//	TmpAlertRuleAnnotationArray{ TmpAlertRuleAnnotationArgs{...} }
+//          TmpAlertRuleAnnotationArray{ TmpAlertRuleAnnotationArgs{...} }
 type TmpAlertRuleAnnotationArrayInput interface {
 	pulumi.Input
 
@@ -1534,7 +2093,7 @@ type TmpAlertRuleLabel struct {
 // TmpAlertRuleLabelInput is an input type that accepts TmpAlertRuleLabelArgs and TmpAlertRuleLabelOutput values.
 // You can construct a concrete instance of `TmpAlertRuleLabelInput` via:
 //
-//	TmpAlertRuleLabelArgs{...}
+//          TmpAlertRuleLabelArgs{...}
 type TmpAlertRuleLabelInput interface {
 	pulumi.Input
 
@@ -1564,7 +2123,7 @@ func (i TmpAlertRuleLabelArgs) ToTmpAlertRuleLabelOutputWithContext(ctx context.
 // TmpAlertRuleLabelArrayInput is an input type that accepts TmpAlertRuleLabelArray and TmpAlertRuleLabelArrayOutput values.
 // You can construct a concrete instance of `TmpAlertRuleLabelArrayInput` via:
 //
-//	TmpAlertRuleLabelArray{ TmpAlertRuleLabelArgs{...} }
+//          TmpAlertRuleLabelArray{ TmpAlertRuleLabelArgs{...} }
 type TmpAlertRuleLabelArrayInput interface {
 	pulumi.Input
 
@@ -1650,7 +2209,7 @@ type TmpTkeAlertPolicyAlertRule struct {
 // TmpTkeAlertPolicyAlertRuleInput is an input type that accepts TmpTkeAlertPolicyAlertRuleArgs and TmpTkeAlertPolicyAlertRuleOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleArgs{...}
+//          TmpTkeAlertPolicyAlertRuleArgs{...}
 type TmpTkeAlertPolicyAlertRuleInput interface {
 	pulumi.Input
 
@@ -1698,11 +2257,11 @@ func (i TmpTkeAlertPolicyAlertRuleArgs) ToTmpTkeAlertPolicyAlertRulePtrOutputWit
 // TmpTkeAlertPolicyAlertRulePtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleArgs, TmpTkeAlertPolicyAlertRulePtr and TmpTkeAlertPolicyAlertRulePtrOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRulePtrInput` via:
 //
-//	        TmpTkeAlertPolicyAlertRuleArgs{...}
+//          TmpTkeAlertPolicyAlertRuleArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type TmpTkeAlertPolicyAlertRulePtrInput interface {
 	pulumi.Input
 
@@ -1915,7 +2474,7 @@ type TmpTkeAlertPolicyAlertRuleNotification struct {
 // TmpTkeAlertPolicyAlertRuleNotificationInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationArgs and TmpTkeAlertPolicyAlertRuleNotificationOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
+//          TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
 type TmpTkeAlertPolicyAlertRuleNotificationInput interface {
 	pulumi.Input
 
@@ -1977,11 +2536,11 @@ func (i TmpTkeAlertPolicyAlertRuleNotificationArgs) ToTmpTkeAlertPolicyAlertRule
 // TmpTkeAlertPolicyAlertRuleNotificationPtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationArgs, TmpTkeAlertPolicyAlertRuleNotificationPtr and TmpTkeAlertPolicyAlertRuleNotificationPtrOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationPtrInput` via:
 //
-//	        TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
+//          TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type TmpTkeAlertPolicyAlertRuleNotificationPtrInput interface {
 	pulumi.Input
 
@@ -2279,7 +2838,7 @@ type TmpTkeAlertPolicyAlertRuleNotificationAlertManager struct {
 // TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs and TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
+//          TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
 type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput interface {
 	pulumi.Input
 
@@ -2319,11 +2878,11 @@ func (i TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) ToTmpTkeAlertPol
 // TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs, TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtr and TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput` via:
 //
-//	        TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
+//          TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput interface {
 	pulumi.Input
 
@@ -2464,7 +3023,7 @@ type TmpTkeAlertPolicyAlertRuleRule struct {
 // TmpTkeAlertPolicyAlertRuleRuleInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleArgs and TmpTkeAlertPolicyAlertRuleRuleOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleRuleArgs{...}
+//          TmpTkeAlertPolicyAlertRuleRuleArgs{...}
 type TmpTkeAlertPolicyAlertRuleRuleInput interface {
 	pulumi.Input
 
@@ -2506,7 +3065,7 @@ func (i TmpTkeAlertPolicyAlertRuleRuleArgs) ToTmpTkeAlertPolicyAlertRuleRuleOutp
 // TmpTkeAlertPolicyAlertRuleRuleArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleArray and TmpTkeAlertPolicyAlertRuleRuleArrayOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleArrayInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleRuleArray{ TmpTkeAlertPolicyAlertRuleRuleArgs{...} }
+//          TmpTkeAlertPolicyAlertRuleRuleArray{ TmpTkeAlertPolicyAlertRuleRuleArgs{...} }
 type TmpTkeAlertPolicyAlertRuleRuleArrayInput interface {
 	pulumi.Input
 
@@ -2614,7 +3173,7 @@ type TmpTkeAlertPolicyAlertRuleRuleAnnotation struct {
 // TmpTkeAlertPolicyAlertRuleRuleAnnotationInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs and TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleAnnotationInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...}
+//          TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...}
 type TmpTkeAlertPolicyAlertRuleRuleAnnotationInput interface {
 	pulumi.Input
 
@@ -2644,7 +3203,7 @@ func (i TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs) ToTmpTkeAlertPolicyAlertRu
 // TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleAnnotationArray and TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleRuleAnnotationArray{ TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...} }
+//          TmpTkeAlertPolicyAlertRuleRuleAnnotationArray{ TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...} }
 type TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput interface {
 	pulumi.Input
 
@@ -2720,7 +3279,7 @@ type TmpTkeAlertPolicyAlertRuleRuleLabel struct {
 // TmpTkeAlertPolicyAlertRuleRuleLabelInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleLabelArgs and TmpTkeAlertPolicyAlertRuleRuleLabelOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleLabelInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...}
+//          TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...}
 type TmpTkeAlertPolicyAlertRuleRuleLabelInput interface {
 	pulumi.Input
 
@@ -2750,7 +3309,7 @@ func (i TmpTkeAlertPolicyAlertRuleRuleLabelArgs) ToTmpTkeAlertPolicyAlertRuleRul
 // TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleLabelArray and TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput` via:
 //
-//	TmpTkeAlertPolicyAlertRuleRuleLabelArray{ TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...} }
+//          TmpTkeAlertPolicyAlertRuleRuleLabelArray{ TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...} }
 type TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput interface {
 	pulumi.Input
 
@@ -2816,6 +3375,1930 @@ func (o TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput) Index(i pulumi.IntInput)
 	}).(TmpTkeAlertPolicyAlertRuleRuleLabelOutput)
 }
 
+type TmpTkeClusterAgentAgents struct {
+	// An id identify the cluster, like `cls-xxxxxx`.
+	ClusterId   string  `pulumi:"clusterId"`
+	ClusterName *string `pulumi:"clusterName"`
+	// Type of cluster.
+	ClusterType string `pulumi:"clusterType"`
+	// Whether to enable the public network CLB.
+	EnableExternal bool `pulumi:"enableExternal"`
+	// All metrics collected by the cluster will carry these labels.
+	ExternalLabels []TmpTkeClusterAgentAgentsExternalLabel `pulumi:"externalLabels"`
+	// Pod configuration for components deployed in the cluster.
+	InClusterPodConfig *TmpTkeClusterAgentAgentsInClusterPodConfig `pulumi:"inClusterPodConfig"`
+	// Whether to install the default collection configuration.
+	NotInstallBasicScrape *bool `pulumi:"notInstallBasicScrape"`
+	// Whether to collect indicators, true means drop all indicators, false means collect default indicators.
+	NotScrape *bool `pulumi:"notScrape"`
+	// Limitation of region.
+	Region string  `pulumi:"region"`
+	Status *string `pulumi:"status"`
+}
+
+// TmpTkeClusterAgentAgentsInput is an input type that accepts TmpTkeClusterAgentAgentsArgs and TmpTkeClusterAgentAgentsOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsInput` via:
+//
+//          TmpTkeClusterAgentAgentsArgs{...}
+type TmpTkeClusterAgentAgentsInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsOutput() TmpTkeClusterAgentAgentsOutput
+	ToTmpTkeClusterAgentAgentsOutputWithContext(context.Context) TmpTkeClusterAgentAgentsOutput
+}
+
+type TmpTkeClusterAgentAgentsArgs struct {
+	// An id identify the cluster, like `cls-xxxxxx`.
+	ClusterId   pulumi.StringInput    `pulumi:"clusterId"`
+	ClusterName pulumi.StringPtrInput `pulumi:"clusterName"`
+	// Type of cluster.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Whether to enable the public network CLB.
+	EnableExternal pulumi.BoolInput `pulumi:"enableExternal"`
+	// All metrics collected by the cluster will carry these labels.
+	ExternalLabels TmpTkeClusterAgentAgentsExternalLabelArrayInput `pulumi:"externalLabels"`
+	// Pod configuration for components deployed in the cluster.
+	InClusterPodConfig TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput `pulumi:"inClusterPodConfig"`
+	// Whether to install the default collection configuration.
+	NotInstallBasicScrape pulumi.BoolPtrInput `pulumi:"notInstallBasicScrape"`
+	// Whether to collect indicators, true means drop all indicators, false means collect default indicators.
+	NotScrape pulumi.BoolPtrInput `pulumi:"notScrape"`
+	// Limitation of region.
+	Region pulumi.StringInput    `pulumi:"region"`
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (TmpTkeClusterAgentAgentsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgents)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsArgs) ToTmpTkeClusterAgentAgentsOutput() TmpTkeClusterAgentAgentsOutput {
+	return i.ToTmpTkeClusterAgentAgentsOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsArgs) ToTmpTkeClusterAgentAgentsOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsOutput)
+}
+
+func (i TmpTkeClusterAgentAgentsArgs) ToTmpTkeClusterAgentAgentsPtrOutput() TmpTkeClusterAgentAgentsPtrOutput {
+	return i.ToTmpTkeClusterAgentAgentsPtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsArgs) ToTmpTkeClusterAgentAgentsPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsOutput).ToTmpTkeClusterAgentAgentsPtrOutputWithContext(ctx)
+}
+
+// TmpTkeClusterAgentAgentsPtrInput is an input type that accepts TmpTkeClusterAgentAgentsArgs, TmpTkeClusterAgentAgentsPtr and TmpTkeClusterAgentAgentsPtrOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsPtrInput` via:
+//
+//          TmpTkeClusterAgentAgentsArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeClusterAgentAgentsPtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsPtrOutput() TmpTkeClusterAgentAgentsPtrOutput
+	ToTmpTkeClusterAgentAgentsPtrOutputWithContext(context.Context) TmpTkeClusterAgentAgentsPtrOutput
+}
+
+type tmpTkeClusterAgentAgentsPtrType TmpTkeClusterAgentAgentsArgs
+
+func TmpTkeClusterAgentAgentsPtr(v *TmpTkeClusterAgentAgentsArgs) TmpTkeClusterAgentAgentsPtrInput {
+	return (*tmpTkeClusterAgentAgentsPtrType)(v)
+}
+
+func (*tmpTkeClusterAgentAgentsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeClusterAgentAgents)(nil)).Elem()
+}
+
+func (i *tmpTkeClusterAgentAgentsPtrType) ToTmpTkeClusterAgentAgentsPtrOutput() TmpTkeClusterAgentAgentsPtrOutput {
+	return i.ToTmpTkeClusterAgentAgentsPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeClusterAgentAgentsPtrType) ToTmpTkeClusterAgentAgentsPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsPtrOutput)
+}
+
+type TmpTkeClusterAgentAgentsOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgents)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsOutput) ToTmpTkeClusterAgentAgentsOutput() TmpTkeClusterAgentAgentsOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsOutput) ToTmpTkeClusterAgentAgentsOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsOutput) ToTmpTkeClusterAgentAgentsPtrOutput() TmpTkeClusterAgentAgentsPtrOutput {
+	return o.ToTmpTkeClusterAgentAgentsPtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeClusterAgentAgentsOutput) ToTmpTkeClusterAgentAgentsPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeClusterAgentAgents) *TmpTkeClusterAgentAgents {
+		return &v
+	}).(TmpTkeClusterAgentAgentsPtrOutput)
+}
+
+// An id identify the cluster, like `cls-xxxxxx`.
+func (o TmpTkeClusterAgentAgentsOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+func (o TmpTkeClusterAgentAgentsOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) *string { return v.ClusterName }).(pulumi.StringPtrOutput)
+}
+
+// Type of cluster.
+func (o TmpTkeClusterAgentAgentsOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Whether to enable the public network CLB.
+func (o TmpTkeClusterAgentAgentsOutput) EnableExternal() pulumi.BoolOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) bool { return v.EnableExternal }).(pulumi.BoolOutput)
+}
+
+// All metrics collected by the cluster will carry these labels.
+func (o TmpTkeClusterAgentAgentsOutput) ExternalLabels() TmpTkeClusterAgentAgentsExternalLabelArrayOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) []TmpTkeClusterAgentAgentsExternalLabel { return v.ExternalLabels }).(TmpTkeClusterAgentAgentsExternalLabelArrayOutput)
+}
+
+// Pod configuration for components deployed in the cluster.
+func (o TmpTkeClusterAgentAgentsOutput) InClusterPodConfig() TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) *TmpTkeClusterAgentAgentsInClusterPodConfig {
+		return v.InClusterPodConfig
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput)
+}
+
+// Whether to install the default collection configuration.
+func (o TmpTkeClusterAgentAgentsOutput) NotInstallBasicScrape() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) *bool { return v.NotInstallBasicScrape }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to collect indicators, true means drop all indicators, false means collect default indicators.
+func (o TmpTkeClusterAgentAgentsOutput) NotScrape() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) *bool { return v.NotScrape }).(pulumi.BoolPtrOutput)
+}
+
+// Limitation of region.
+func (o TmpTkeClusterAgentAgentsOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) string { return v.Region }).(pulumi.StringOutput)
+}
+
+func (o TmpTkeClusterAgentAgentsOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgents) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeClusterAgentAgentsPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeClusterAgentAgents)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsPtrOutput) ToTmpTkeClusterAgentAgentsPtrOutput() TmpTkeClusterAgentAgentsPtrOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsPtrOutput) ToTmpTkeClusterAgentAgentsPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsPtrOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsPtrOutput) Elem() TmpTkeClusterAgentAgentsOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) TmpTkeClusterAgentAgents {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeClusterAgentAgents
+		return ret
+	}).(TmpTkeClusterAgentAgentsOutput)
+}
+
+// An id identify the cluster, like `cls-xxxxxx`.
+func (o TmpTkeClusterAgentAgentsPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o TmpTkeClusterAgentAgentsPtrOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Type of cluster.
+func (o TmpTkeClusterAgentAgentsPtrOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClusterType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable the public network CLB.
+func (o TmpTkeClusterAgentAgentsPtrOutput) EnableExternal() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.EnableExternal
+	}).(pulumi.BoolPtrOutput)
+}
+
+// All metrics collected by the cluster will carry these labels.
+func (o TmpTkeClusterAgentAgentsPtrOutput) ExternalLabels() TmpTkeClusterAgentAgentsExternalLabelArrayOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) []TmpTkeClusterAgentAgentsExternalLabel {
+		if v == nil {
+			return nil
+		}
+		return v.ExternalLabels
+	}).(TmpTkeClusterAgentAgentsExternalLabelArrayOutput)
+}
+
+// Pod configuration for components deployed in the cluster.
+func (o TmpTkeClusterAgentAgentsPtrOutput) InClusterPodConfig() TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *TmpTkeClusterAgentAgentsInClusterPodConfig {
+		if v == nil {
+			return nil
+		}
+		return v.InClusterPodConfig
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput)
+}
+
+// Whether to install the default collection configuration.
+func (o TmpTkeClusterAgentAgentsPtrOutput) NotInstallBasicScrape() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.NotInstallBasicScrape
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether to collect indicators, true means drop all indicators, false means collect default indicators.
+func (o TmpTkeClusterAgentAgentsPtrOutput) NotScrape() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.NotScrape
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Limitation of region.
+func (o TmpTkeClusterAgentAgentsPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o TmpTkeClusterAgentAgentsPtrOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgents) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Status
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeClusterAgentAgentsExternalLabel struct {
+	// Indicator name.
+	Name string `pulumi:"name"`
+	// Index value.
+	Value *string `pulumi:"value"`
+}
+
+// TmpTkeClusterAgentAgentsExternalLabelInput is an input type that accepts TmpTkeClusterAgentAgentsExternalLabelArgs and TmpTkeClusterAgentAgentsExternalLabelOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsExternalLabelInput` via:
+//
+//          TmpTkeClusterAgentAgentsExternalLabelArgs{...}
+type TmpTkeClusterAgentAgentsExternalLabelInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsExternalLabelOutput() TmpTkeClusterAgentAgentsExternalLabelOutput
+	ToTmpTkeClusterAgentAgentsExternalLabelOutputWithContext(context.Context) TmpTkeClusterAgentAgentsExternalLabelOutput
+}
+
+type TmpTkeClusterAgentAgentsExternalLabelArgs struct {
+	// Indicator name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Index value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (TmpTkeClusterAgentAgentsExternalLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsExternalLabel)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsExternalLabelArgs) ToTmpTkeClusterAgentAgentsExternalLabelOutput() TmpTkeClusterAgentAgentsExternalLabelOutput {
+	return i.ToTmpTkeClusterAgentAgentsExternalLabelOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsExternalLabelArgs) ToTmpTkeClusterAgentAgentsExternalLabelOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsExternalLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsExternalLabelOutput)
+}
+
+// TmpTkeClusterAgentAgentsExternalLabelArrayInput is an input type that accepts TmpTkeClusterAgentAgentsExternalLabelArray and TmpTkeClusterAgentAgentsExternalLabelArrayOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsExternalLabelArrayInput` via:
+//
+//          TmpTkeClusterAgentAgentsExternalLabelArray{ TmpTkeClusterAgentAgentsExternalLabelArgs{...} }
+type TmpTkeClusterAgentAgentsExternalLabelArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsExternalLabelArrayOutput() TmpTkeClusterAgentAgentsExternalLabelArrayOutput
+	ToTmpTkeClusterAgentAgentsExternalLabelArrayOutputWithContext(context.Context) TmpTkeClusterAgentAgentsExternalLabelArrayOutput
+}
+
+type TmpTkeClusterAgentAgentsExternalLabelArray []TmpTkeClusterAgentAgentsExternalLabelInput
+
+func (TmpTkeClusterAgentAgentsExternalLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeClusterAgentAgentsExternalLabel)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsExternalLabelArray) ToTmpTkeClusterAgentAgentsExternalLabelArrayOutput() TmpTkeClusterAgentAgentsExternalLabelArrayOutput {
+	return i.ToTmpTkeClusterAgentAgentsExternalLabelArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsExternalLabelArray) ToTmpTkeClusterAgentAgentsExternalLabelArrayOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsExternalLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsExternalLabelArrayOutput)
+}
+
+type TmpTkeClusterAgentAgentsExternalLabelOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsExternalLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsExternalLabel)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsExternalLabelOutput) ToTmpTkeClusterAgentAgentsExternalLabelOutput() TmpTkeClusterAgentAgentsExternalLabelOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsExternalLabelOutput) ToTmpTkeClusterAgentAgentsExternalLabelOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsExternalLabelOutput {
+	return o
+}
+
+// Indicator name.
+func (o TmpTkeClusterAgentAgentsExternalLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsExternalLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Index value.
+func (o TmpTkeClusterAgentAgentsExternalLabelOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsExternalLabel) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeClusterAgentAgentsExternalLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsExternalLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeClusterAgentAgentsExternalLabel)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsExternalLabelArrayOutput) ToTmpTkeClusterAgentAgentsExternalLabelArrayOutput() TmpTkeClusterAgentAgentsExternalLabelArrayOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsExternalLabelArrayOutput) ToTmpTkeClusterAgentAgentsExternalLabelArrayOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsExternalLabelArrayOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsExternalLabelArrayOutput) Index(i pulumi.IntInput) TmpTkeClusterAgentAgentsExternalLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeClusterAgentAgentsExternalLabel {
+		return vs[0].([]TmpTkeClusterAgentAgentsExternalLabel)[vs[1].(int)]
+	}).(TmpTkeClusterAgentAgentsExternalLabelOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfig struct {
+	// Whether to use HostNetWork.
+	HostNet bool `pulumi:"hostNet"`
+	// Specify the pod to run the node.
+	NodeSelectors []TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector `pulumi:"nodeSelectors"`
+	// Tolerate Stain.
+	Tolerations []TmpTkeClusterAgentAgentsInClusterPodConfigToleration `pulumi:"tolerations"`
+}
+
+// TmpTkeClusterAgentAgentsInClusterPodConfigInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigArgs and TmpTkeClusterAgentAgentsInClusterPodConfigOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigInput` via:
+//
+//          TmpTkeClusterAgentAgentsInClusterPodConfigArgs{...}
+type TmpTkeClusterAgentAgentsInClusterPodConfigInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigOutput() TmpTkeClusterAgentAgentsInClusterPodConfigOutput
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigOutputWithContext(context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigOutput
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigArgs struct {
+	// Whether to use HostNetWork.
+	HostNet pulumi.BoolInput `pulumi:"hostNet"`
+	// Specify the pod to run the node.
+	NodeSelectors TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput `pulumi:"nodeSelectors"`
+	// Tolerate Stain.
+	Tolerations TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput `pulumi:"tolerations"`
+}
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfig)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigOutput() TmpTkeClusterAgentAgentsInClusterPodConfigOutput {
+	return i.ToTmpTkeClusterAgentAgentsInClusterPodConfigOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsInClusterPodConfigOutput)
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput() TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return i.ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsInClusterPodConfigOutput).ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(ctx)
+}
+
+// TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigArgs, TmpTkeClusterAgentAgentsInClusterPodConfigPtr and TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput` via:
+//
+//          TmpTkeClusterAgentAgentsInClusterPodConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput() TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput
+}
+
+type tmpTkeClusterAgentAgentsInClusterPodConfigPtrType TmpTkeClusterAgentAgentsInClusterPodConfigArgs
+
+func TmpTkeClusterAgentAgentsInClusterPodConfigPtr(v *TmpTkeClusterAgentAgentsInClusterPodConfigArgs) TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput {
+	return (*tmpTkeClusterAgentAgentsInClusterPodConfigPtrType)(v)
+}
+
+func (*tmpTkeClusterAgentAgentsInClusterPodConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeClusterAgentAgentsInClusterPodConfig)(nil)).Elem()
+}
+
+func (i *tmpTkeClusterAgentAgentsInClusterPodConfigPtrType) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput() TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return i.ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeClusterAgentAgentsInClusterPodConfigPtrType) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfig)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigOutput() TmpTkeClusterAgentAgentsInClusterPodConfigOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput() TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return o.ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeClusterAgentAgentsInClusterPodConfig) *TmpTkeClusterAgentAgentsInClusterPodConfig {
+		return &v
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput)
+}
+
+// Whether to use HostNetWork.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigOutput) HostNet() pulumi.BoolOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfig) bool { return v.HostNet }).(pulumi.BoolOutput)
+}
+
+// Specify the pod to run the node.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigOutput) NodeSelectors() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfig) []TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector {
+		return v.NodeSelectors
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput)
+}
+
+// Tolerate Stain.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigOutput) Tolerations() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfig) []TmpTkeClusterAgentAgentsInClusterPodConfigToleration {
+		return v.Tolerations
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeClusterAgentAgentsInClusterPodConfig)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput() TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigPtrOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput) Elem() TmpTkeClusterAgentAgentsInClusterPodConfigOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgentsInClusterPodConfig) TmpTkeClusterAgentAgentsInClusterPodConfig {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeClusterAgentAgentsInClusterPodConfig
+		return ret
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigOutput)
+}
+
+// Whether to use HostNetWork.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput) HostNet() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgentsInClusterPodConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.HostNet
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Specify the pod to run the node.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput) NodeSelectors() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgentsInClusterPodConfig) []TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector {
+		if v == nil {
+			return nil
+		}
+		return v.NodeSelectors
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput)
+}
+
+// Tolerate Stain.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput) Tolerations() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput {
+	return o.ApplyT(func(v *TmpTkeClusterAgentAgentsInClusterPodConfig) []TmpTkeClusterAgentAgentsInClusterPodConfigToleration {
+		if v == nil {
+			return nil
+		}
+		return v.Tolerations
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector struct {
+	// The pod configuration name of the component deployed in the cluster.
+	Name *string `pulumi:"name"`
+	// Pod configuration values for components deployed in the cluster.
+	Value *string `pulumi:"value"`
+}
+
+// TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs and TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput` via:
+//
+//          TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs{...}
+type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutputWithContext(context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs struct {
+	// The pod configuration name of the component deployed in the cluster.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Pod configuration values for components deployed in the cluster.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput {
+	return i.ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput)
+}
+
+// TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray and TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput` via:
+//
+//          TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray{ TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs{...} }
+type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutputWithContext(context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray []TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput {
+	return i.ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput {
+	return o
+}
+
+// The pod configuration name of the component deployed in the cluster.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Pod configuration values for components deployed in the cluster.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput() TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput) Index(i pulumi.IntInput) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector {
+		return vs[0].([]TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector)[vs[1].(int)]
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigToleration struct {
+	// blemish effect to match.
+	Effect *string `pulumi:"effect"`
+	// The taint key to which the tolerance applies.
+	Key *string `pulumi:"key"`
+	// key-value relationship.
+	Operator *string `pulumi:"operator"`
+}
+
+// TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs and TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput` via:
+//
+//          TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs{...}
+type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutputWithContext(context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs struct {
+	// blemish effect to match.
+	Effect pulumi.StringPtrInput `pulumi:"effect"`
+	// The taint key to which the tolerance applies.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// key-value relationship.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+}
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigToleration)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput {
+	return i.ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput)
+}
+
+// TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray and TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput values.
+// You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput` via:
+//
+//          TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray{ TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs{...} }
+type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput
+	ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutputWithContext(context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray []TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeClusterAgentAgentsInClusterPodConfigToleration)(nil)).Elem()
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput {
+	return i.ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigToleration)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput {
+	return o
+}
+
+// blemish effect to match.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput) Effect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfigToleration) *string { return v.Effect }).(pulumi.StringPtrOutput)
+}
+
+// The taint key to which the tolerance applies.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfigToleration) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// key-value relationship.
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeClusterAgentAgentsInClusterPodConfigToleration) *string { return v.Operator }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeClusterAgentAgentsInClusterPodConfigToleration)(nil)).Elem()
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput() TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput) ToTmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutputWithContext(ctx context.Context) TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput {
+	return o
+}
+
+func (o TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput) Index(i pulumi.IntInput) TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeClusterAgentAgentsInClusterPodConfigToleration {
+		return vs[0].([]TmpTkeClusterAgentAgentsInClusterPodConfigToleration)[vs[1].(int)]
+	}).(TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput)
+}
+
+type TmpTkeConfigPodMonitor struct {
+	// Config.
+	Config string `pulumi:"config"`
+	// Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+	Name string `pulumi:"name"`
+	// Used for output parameters, if the configuration comes from a template, it is the template id.
+	TemplateId *string `pulumi:"templateId"`
+}
+
+// TmpTkeConfigPodMonitorInput is an input type that accepts TmpTkeConfigPodMonitorArgs and TmpTkeConfigPodMonitorOutput values.
+// You can construct a concrete instance of `TmpTkeConfigPodMonitorInput` via:
+//
+//          TmpTkeConfigPodMonitorArgs{...}
+type TmpTkeConfigPodMonitorInput interface {
+	pulumi.Input
+
+	ToTmpTkeConfigPodMonitorOutput() TmpTkeConfigPodMonitorOutput
+	ToTmpTkeConfigPodMonitorOutputWithContext(context.Context) TmpTkeConfigPodMonitorOutput
+}
+
+type TmpTkeConfigPodMonitorArgs struct {
+	// Config.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Used for output parameters, if the configuration comes from a template, it is the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+}
+
+func (TmpTkeConfigPodMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeConfigPodMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeConfigPodMonitorArgs) ToTmpTkeConfigPodMonitorOutput() TmpTkeConfigPodMonitorOutput {
+	return i.ToTmpTkeConfigPodMonitorOutputWithContext(context.Background())
+}
+
+func (i TmpTkeConfigPodMonitorArgs) ToTmpTkeConfigPodMonitorOutputWithContext(ctx context.Context) TmpTkeConfigPodMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeConfigPodMonitorOutput)
+}
+
+// TmpTkeConfigPodMonitorArrayInput is an input type that accepts TmpTkeConfigPodMonitorArray and TmpTkeConfigPodMonitorArrayOutput values.
+// You can construct a concrete instance of `TmpTkeConfigPodMonitorArrayInput` via:
+//
+//          TmpTkeConfigPodMonitorArray{ TmpTkeConfigPodMonitorArgs{...} }
+type TmpTkeConfigPodMonitorArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeConfigPodMonitorArrayOutput() TmpTkeConfigPodMonitorArrayOutput
+	ToTmpTkeConfigPodMonitorArrayOutputWithContext(context.Context) TmpTkeConfigPodMonitorArrayOutput
+}
+
+type TmpTkeConfigPodMonitorArray []TmpTkeConfigPodMonitorInput
+
+func (TmpTkeConfigPodMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeConfigPodMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeConfigPodMonitorArray) ToTmpTkeConfigPodMonitorArrayOutput() TmpTkeConfigPodMonitorArrayOutput {
+	return i.ToTmpTkeConfigPodMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeConfigPodMonitorArray) ToTmpTkeConfigPodMonitorArrayOutputWithContext(ctx context.Context) TmpTkeConfigPodMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeConfigPodMonitorArrayOutput)
+}
+
+type TmpTkeConfigPodMonitorOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeConfigPodMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeConfigPodMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeConfigPodMonitorOutput) ToTmpTkeConfigPodMonitorOutput() TmpTkeConfigPodMonitorOutput {
+	return o
+}
+
+func (o TmpTkeConfigPodMonitorOutput) ToTmpTkeConfigPodMonitorOutputWithContext(ctx context.Context) TmpTkeConfigPodMonitorOutput {
+	return o
+}
+
+// Config.
+func (o TmpTkeConfigPodMonitorOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeConfigPodMonitor) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+func (o TmpTkeConfigPodMonitorOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeConfigPodMonitor) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Used for output parameters, if the configuration comes from a template, it is the template id.
+func (o TmpTkeConfigPodMonitorOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeConfigPodMonitor) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeConfigPodMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeConfigPodMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeConfigPodMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeConfigPodMonitorArrayOutput) ToTmpTkeConfigPodMonitorArrayOutput() TmpTkeConfigPodMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeConfigPodMonitorArrayOutput) ToTmpTkeConfigPodMonitorArrayOutputWithContext(ctx context.Context) TmpTkeConfigPodMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeConfigPodMonitorArrayOutput) Index(i pulumi.IntInput) TmpTkeConfigPodMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeConfigPodMonitor {
+		return vs[0].([]TmpTkeConfigPodMonitor)[vs[1].(int)]
+	}).(TmpTkeConfigPodMonitorOutput)
+}
+
+type TmpTkeConfigRawJob struct {
+	// Config.
+	Config string `pulumi:"config"`
+	// Name.
+	Name string `pulumi:"name"`
+	// Used for output parameters, if the configuration comes from a template, it is the template id.
+	TemplateId *string `pulumi:"templateId"`
+}
+
+// TmpTkeConfigRawJobInput is an input type that accepts TmpTkeConfigRawJobArgs and TmpTkeConfigRawJobOutput values.
+// You can construct a concrete instance of `TmpTkeConfigRawJobInput` via:
+//
+//          TmpTkeConfigRawJobArgs{...}
+type TmpTkeConfigRawJobInput interface {
+	pulumi.Input
+
+	ToTmpTkeConfigRawJobOutput() TmpTkeConfigRawJobOutput
+	ToTmpTkeConfigRawJobOutputWithContext(context.Context) TmpTkeConfigRawJobOutput
+}
+
+type TmpTkeConfigRawJobArgs struct {
+	// Config.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Used for output parameters, if the configuration comes from a template, it is the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+}
+
+func (TmpTkeConfigRawJobArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeConfigRawJob)(nil)).Elem()
+}
+
+func (i TmpTkeConfigRawJobArgs) ToTmpTkeConfigRawJobOutput() TmpTkeConfigRawJobOutput {
+	return i.ToTmpTkeConfigRawJobOutputWithContext(context.Background())
+}
+
+func (i TmpTkeConfigRawJobArgs) ToTmpTkeConfigRawJobOutputWithContext(ctx context.Context) TmpTkeConfigRawJobOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeConfigRawJobOutput)
+}
+
+// TmpTkeConfigRawJobArrayInput is an input type that accepts TmpTkeConfigRawJobArray and TmpTkeConfigRawJobArrayOutput values.
+// You can construct a concrete instance of `TmpTkeConfigRawJobArrayInput` via:
+//
+//          TmpTkeConfigRawJobArray{ TmpTkeConfigRawJobArgs{...} }
+type TmpTkeConfigRawJobArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeConfigRawJobArrayOutput() TmpTkeConfigRawJobArrayOutput
+	ToTmpTkeConfigRawJobArrayOutputWithContext(context.Context) TmpTkeConfigRawJobArrayOutput
+}
+
+type TmpTkeConfigRawJobArray []TmpTkeConfigRawJobInput
+
+func (TmpTkeConfigRawJobArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeConfigRawJob)(nil)).Elem()
+}
+
+func (i TmpTkeConfigRawJobArray) ToTmpTkeConfigRawJobArrayOutput() TmpTkeConfigRawJobArrayOutput {
+	return i.ToTmpTkeConfigRawJobArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeConfigRawJobArray) ToTmpTkeConfigRawJobArrayOutputWithContext(ctx context.Context) TmpTkeConfigRawJobArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeConfigRawJobArrayOutput)
+}
+
+type TmpTkeConfigRawJobOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeConfigRawJobOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeConfigRawJob)(nil)).Elem()
+}
+
+func (o TmpTkeConfigRawJobOutput) ToTmpTkeConfigRawJobOutput() TmpTkeConfigRawJobOutput {
+	return o
+}
+
+func (o TmpTkeConfigRawJobOutput) ToTmpTkeConfigRawJobOutputWithContext(ctx context.Context) TmpTkeConfigRawJobOutput {
+	return o
+}
+
+// Config.
+func (o TmpTkeConfigRawJobOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeConfigRawJob) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Name.
+func (o TmpTkeConfigRawJobOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeConfigRawJob) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Used for output parameters, if the configuration comes from a template, it is the template id.
+func (o TmpTkeConfigRawJobOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeConfigRawJob) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeConfigRawJobArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeConfigRawJobArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeConfigRawJob)(nil)).Elem()
+}
+
+func (o TmpTkeConfigRawJobArrayOutput) ToTmpTkeConfigRawJobArrayOutput() TmpTkeConfigRawJobArrayOutput {
+	return o
+}
+
+func (o TmpTkeConfigRawJobArrayOutput) ToTmpTkeConfigRawJobArrayOutputWithContext(ctx context.Context) TmpTkeConfigRawJobArrayOutput {
+	return o
+}
+
+func (o TmpTkeConfigRawJobArrayOutput) Index(i pulumi.IntInput) TmpTkeConfigRawJobOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeConfigRawJob {
+		return vs[0].([]TmpTkeConfigRawJob)[vs[1].(int)]
+	}).(TmpTkeConfigRawJobOutput)
+}
+
+type TmpTkeConfigServiceMonitor struct {
+	// Config.
+	Config string `pulumi:"config"`
+	// Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+	Name string `pulumi:"name"`
+	// Used for output parameters, if the configuration comes from a template, it is the template id.
+	TemplateId *string `pulumi:"templateId"`
+}
+
+// TmpTkeConfigServiceMonitorInput is an input type that accepts TmpTkeConfigServiceMonitorArgs and TmpTkeConfigServiceMonitorOutput values.
+// You can construct a concrete instance of `TmpTkeConfigServiceMonitorInput` via:
+//
+//          TmpTkeConfigServiceMonitorArgs{...}
+type TmpTkeConfigServiceMonitorInput interface {
+	pulumi.Input
+
+	ToTmpTkeConfigServiceMonitorOutput() TmpTkeConfigServiceMonitorOutput
+	ToTmpTkeConfigServiceMonitorOutputWithContext(context.Context) TmpTkeConfigServiceMonitorOutput
+}
+
+type TmpTkeConfigServiceMonitorArgs struct {
+	// Config.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Used for output parameters, if the configuration comes from a template, it is the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+}
+
+func (TmpTkeConfigServiceMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeConfigServiceMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeConfigServiceMonitorArgs) ToTmpTkeConfigServiceMonitorOutput() TmpTkeConfigServiceMonitorOutput {
+	return i.ToTmpTkeConfigServiceMonitorOutputWithContext(context.Background())
+}
+
+func (i TmpTkeConfigServiceMonitorArgs) ToTmpTkeConfigServiceMonitorOutputWithContext(ctx context.Context) TmpTkeConfigServiceMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeConfigServiceMonitorOutput)
+}
+
+// TmpTkeConfigServiceMonitorArrayInput is an input type that accepts TmpTkeConfigServiceMonitorArray and TmpTkeConfigServiceMonitorArrayOutput values.
+// You can construct a concrete instance of `TmpTkeConfigServiceMonitorArrayInput` via:
+//
+//          TmpTkeConfigServiceMonitorArray{ TmpTkeConfigServiceMonitorArgs{...} }
+type TmpTkeConfigServiceMonitorArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeConfigServiceMonitorArrayOutput() TmpTkeConfigServiceMonitorArrayOutput
+	ToTmpTkeConfigServiceMonitorArrayOutputWithContext(context.Context) TmpTkeConfigServiceMonitorArrayOutput
+}
+
+type TmpTkeConfigServiceMonitorArray []TmpTkeConfigServiceMonitorInput
+
+func (TmpTkeConfigServiceMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeConfigServiceMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeConfigServiceMonitorArray) ToTmpTkeConfigServiceMonitorArrayOutput() TmpTkeConfigServiceMonitorArrayOutput {
+	return i.ToTmpTkeConfigServiceMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeConfigServiceMonitorArray) ToTmpTkeConfigServiceMonitorArrayOutputWithContext(ctx context.Context) TmpTkeConfigServiceMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeConfigServiceMonitorArrayOutput)
+}
+
+type TmpTkeConfigServiceMonitorOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeConfigServiceMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeConfigServiceMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeConfigServiceMonitorOutput) ToTmpTkeConfigServiceMonitorOutput() TmpTkeConfigServiceMonitorOutput {
+	return o
+}
+
+func (o TmpTkeConfigServiceMonitorOutput) ToTmpTkeConfigServiceMonitorOutputWithContext(ctx context.Context) TmpTkeConfigServiceMonitorOutput {
+	return o
+}
+
+// Config.
+func (o TmpTkeConfigServiceMonitorOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeConfigServiceMonitor) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+func (o TmpTkeConfigServiceMonitorOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeConfigServiceMonitor) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Used for output parameters, if the configuration comes from a template, it is the template id.
+func (o TmpTkeConfigServiceMonitorOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeConfigServiceMonitor) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeConfigServiceMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeConfigServiceMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeConfigServiceMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeConfigServiceMonitorArrayOutput) ToTmpTkeConfigServiceMonitorArrayOutput() TmpTkeConfigServiceMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeConfigServiceMonitorArrayOutput) ToTmpTkeConfigServiceMonitorArrayOutputWithContext(ctx context.Context) TmpTkeConfigServiceMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeConfigServiceMonitorArrayOutput) Index(i pulumi.IntInput) TmpTkeConfigServiceMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeConfigServiceMonitor {
+		return vs[0].([]TmpTkeConfigServiceMonitor)[vs[1].(int)]
+	}).(TmpTkeConfigServiceMonitorOutput)
+}
+
+type TmpTkeGlobalNotificationNotification struct {
+	// Alert manager, if Type is `alertmanager`, this field is required.
+	AlertManagers []TmpTkeGlobalNotificationNotificationAlertManager `pulumi:"alertManagers"`
+	// Alarm notification switch.
+	Enabled bool `pulumi:"enabled"`
+	// Alarm notification method, Valid values: `SMS`, `EMAIL`, `CALL`, `WECHAT`.
+	NotifyWays []string `pulumi:"notifyWays"`
+	// Phone Alarm Reach Notification, NotifyWay is `CALL`, and this parameter is used.
+	PhoneArriveNotice *bool `pulumi:"phoneArriveNotice"`
+	// Telephone alarm off-wheel interval, NotifyWay is `CALL`, and this parameter is used.
+	PhoneCircleInterval *int `pulumi:"phoneCircleInterval"`
+	// Number of phone alerts (user group), NotifyWay is `CALL`, and this parameter is used.
+	PhoneCircleTimes *int `pulumi:"phoneCircleTimes"`
+	// Interval between telephone alarm rounds, NotifyWay is `CALL`, and this parameter is used.
+	PhoneInnerInterval *int `pulumi:"phoneInnerInterval"`
+	// Phone alert sequence, NotifyWay is `CALL`, and this parameter is used.
+	PhoneNotifyOrders []int `pulumi:"phoneNotifyOrders"`
+	// Alarm receiving group(user group).
+	ReceiverGroups []string `pulumi:"receiverGroups"`
+	// Convergence time.
+	RepeatInterval *string `pulumi:"repeatInterval"`
+	// Effective end time.
+	TimeRangeEnd *string `pulumi:"timeRangeEnd"`
+	// Effective start time.
+	TimeRangeStart *string `pulumi:"timeRangeStart"`
+	// Alarm notification type, Valid values: `amp`, `webhook`, `alertmanager`.
+	Type string `pulumi:"type"`
+	// Web hook, if Type is `webhook`, this field is required.
+	WebHook *string `pulumi:"webHook"`
+}
+
+// TmpTkeGlobalNotificationNotificationInput is an input type that accepts TmpTkeGlobalNotificationNotificationArgs and TmpTkeGlobalNotificationNotificationOutput values.
+// You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationInput` via:
+//
+//          TmpTkeGlobalNotificationNotificationArgs{...}
+type TmpTkeGlobalNotificationNotificationInput interface {
+	pulumi.Input
+
+	ToTmpTkeGlobalNotificationNotificationOutput() TmpTkeGlobalNotificationNotificationOutput
+	ToTmpTkeGlobalNotificationNotificationOutputWithContext(context.Context) TmpTkeGlobalNotificationNotificationOutput
+}
+
+type TmpTkeGlobalNotificationNotificationArgs struct {
+	// Alert manager, if Type is `alertmanager`, this field is required.
+	AlertManagers TmpTkeGlobalNotificationNotificationAlertManagerArrayInput `pulumi:"alertManagers"`
+	// Alarm notification switch.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Alarm notification method, Valid values: `SMS`, `EMAIL`, `CALL`, `WECHAT`.
+	NotifyWays pulumi.StringArrayInput `pulumi:"notifyWays"`
+	// Phone Alarm Reach Notification, NotifyWay is `CALL`, and this parameter is used.
+	PhoneArriveNotice pulumi.BoolPtrInput `pulumi:"phoneArriveNotice"`
+	// Telephone alarm off-wheel interval, NotifyWay is `CALL`, and this parameter is used.
+	PhoneCircleInterval pulumi.IntPtrInput `pulumi:"phoneCircleInterval"`
+	// Number of phone alerts (user group), NotifyWay is `CALL`, and this parameter is used.
+	PhoneCircleTimes pulumi.IntPtrInput `pulumi:"phoneCircleTimes"`
+	// Interval between telephone alarm rounds, NotifyWay is `CALL`, and this parameter is used.
+	PhoneInnerInterval pulumi.IntPtrInput `pulumi:"phoneInnerInterval"`
+	// Phone alert sequence, NotifyWay is `CALL`, and this parameter is used.
+	PhoneNotifyOrders pulumi.IntArrayInput `pulumi:"phoneNotifyOrders"`
+	// Alarm receiving group(user group).
+	ReceiverGroups pulumi.StringArrayInput `pulumi:"receiverGroups"`
+	// Convergence time.
+	RepeatInterval pulumi.StringPtrInput `pulumi:"repeatInterval"`
+	// Effective end time.
+	TimeRangeEnd pulumi.StringPtrInput `pulumi:"timeRangeEnd"`
+	// Effective start time.
+	TimeRangeStart pulumi.StringPtrInput `pulumi:"timeRangeStart"`
+	// Alarm notification type, Valid values: `amp`, `webhook`, `alertmanager`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Web hook, if Type is `webhook`, this field is required.
+	WebHook pulumi.StringPtrInput `pulumi:"webHook"`
+}
+
+func (TmpTkeGlobalNotificationNotificationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeGlobalNotificationNotification)(nil)).Elem()
+}
+
+func (i TmpTkeGlobalNotificationNotificationArgs) ToTmpTkeGlobalNotificationNotificationOutput() TmpTkeGlobalNotificationNotificationOutput {
+	return i.ToTmpTkeGlobalNotificationNotificationOutputWithContext(context.Background())
+}
+
+func (i TmpTkeGlobalNotificationNotificationArgs) ToTmpTkeGlobalNotificationNotificationOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeGlobalNotificationNotificationOutput)
+}
+
+func (i TmpTkeGlobalNotificationNotificationArgs) ToTmpTkeGlobalNotificationNotificationPtrOutput() TmpTkeGlobalNotificationNotificationPtrOutput {
+	return i.ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeGlobalNotificationNotificationArgs) ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeGlobalNotificationNotificationOutput).ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(ctx)
+}
+
+// TmpTkeGlobalNotificationNotificationPtrInput is an input type that accepts TmpTkeGlobalNotificationNotificationArgs, TmpTkeGlobalNotificationNotificationPtr and TmpTkeGlobalNotificationNotificationPtrOutput values.
+// You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationPtrInput` via:
+//
+//          TmpTkeGlobalNotificationNotificationArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeGlobalNotificationNotificationPtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeGlobalNotificationNotificationPtrOutput() TmpTkeGlobalNotificationNotificationPtrOutput
+	ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(context.Context) TmpTkeGlobalNotificationNotificationPtrOutput
+}
+
+type tmpTkeGlobalNotificationNotificationPtrType TmpTkeGlobalNotificationNotificationArgs
+
+func TmpTkeGlobalNotificationNotificationPtr(v *TmpTkeGlobalNotificationNotificationArgs) TmpTkeGlobalNotificationNotificationPtrInput {
+	return (*tmpTkeGlobalNotificationNotificationPtrType)(v)
+}
+
+func (*tmpTkeGlobalNotificationNotificationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeGlobalNotificationNotification)(nil)).Elem()
+}
+
+func (i *tmpTkeGlobalNotificationNotificationPtrType) ToTmpTkeGlobalNotificationNotificationPtrOutput() TmpTkeGlobalNotificationNotificationPtrOutput {
+	return i.ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeGlobalNotificationNotificationPtrType) ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeGlobalNotificationNotificationPtrOutput)
+}
+
+type TmpTkeGlobalNotificationNotificationOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeGlobalNotificationNotificationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeGlobalNotificationNotification)(nil)).Elem()
+}
+
+func (o TmpTkeGlobalNotificationNotificationOutput) ToTmpTkeGlobalNotificationNotificationOutput() TmpTkeGlobalNotificationNotificationOutput {
+	return o
+}
+
+func (o TmpTkeGlobalNotificationNotificationOutput) ToTmpTkeGlobalNotificationNotificationOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationOutput {
+	return o
+}
+
+func (o TmpTkeGlobalNotificationNotificationOutput) ToTmpTkeGlobalNotificationNotificationPtrOutput() TmpTkeGlobalNotificationNotificationPtrOutput {
+	return o.ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeGlobalNotificationNotificationOutput) ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeGlobalNotificationNotification) *TmpTkeGlobalNotificationNotification {
+		return &v
+	}).(TmpTkeGlobalNotificationNotificationPtrOutput)
+}
+
+// Alert manager, if Type is `alertmanager`, this field is required.
+func (o TmpTkeGlobalNotificationNotificationOutput) AlertManagers() TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) []TmpTkeGlobalNotificationNotificationAlertManager {
+		return v.AlertManagers
+	}).(TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput)
+}
+
+// Alarm notification switch.
+func (o TmpTkeGlobalNotificationNotificationOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Alarm notification method, Valid values: `SMS`, `EMAIL`, `CALL`, `WECHAT`.
+func (o TmpTkeGlobalNotificationNotificationOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
+}
+
+// Phone Alarm Reach Notification, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationOutput) PhoneArriveNotice() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *bool { return v.PhoneArriveNotice }).(pulumi.BoolPtrOutput)
+}
+
+// Telephone alarm off-wheel interval, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationOutput) PhoneCircleInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *int { return v.PhoneCircleInterval }).(pulumi.IntPtrOutput)
+}
+
+// Number of phone alerts (user group), NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationOutput) PhoneCircleTimes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *int { return v.PhoneCircleTimes }).(pulumi.IntPtrOutput)
+}
+
+// Interval between telephone alarm rounds, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationOutput) PhoneInnerInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *int { return v.PhoneInnerInterval }).(pulumi.IntPtrOutput)
+}
+
+// Phone alert sequence, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationOutput) PhoneNotifyOrders() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) []int { return v.PhoneNotifyOrders }).(pulumi.IntArrayOutput)
+}
+
+// Alarm receiving group(user group).
+func (o TmpTkeGlobalNotificationNotificationOutput) ReceiverGroups() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) []string { return v.ReceiverGroups }).(pulumi.StringArrayOutput)
+}
+
+// Convergence time.
+func (o TmpTkeGlobalNotificationNotificationOutput) RepeatInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *string { return v.RepeatInterval }).(pulumi.StringPtrOutput)
+}
+
+// Effective end time.
+func (o TmpTkeGlobalNotificationNotificationOutput) TimeRangeEnd() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *string { return v.TimeRangeEnd }).(pulumi.StringPtrOutput)
+}
+
+// Effective start time.
+func (o TmpTkeGlobalNotificationNotificationOutput) TimeRangeStart() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *string { return v.TimeRangeStart }).(pulumi.StringPtrOutput)
+}
+
+// Alarm notification type, Valid values: `amp`, `webhook`, `alertmanager`.
+func (o TmpTkeGlobalNotificationNotificationOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Web hook, if Type is `webhook`, this field is required.
+func (o TmpTkeGlobalNotificationNotificationOutput) WebHook() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotification) *string { return v.WebHook }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeGlobalNotificationNotificationPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeGlobalNotificationNotificationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeGlobalNotificationNotification)(nil)).Elem()
+}
+
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) ToTmpTkeGlobalNotificationNotificationPtrOutput() TmpTkeGlobalNotificationNotificationPtrOutput {
+	return o
+}
+
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) ToTmpTkeGlobalNotificationNotificationPtrOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationPtrOutput {
+	return o
+}
+
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) Elem() TmpTkeGlobalNotificationNotificationOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) TmpTkeGlobalNotificationNotification {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeGlobalNotificationNotification
+		return ret
+	}).(TmpTkeGlobalNotificationNotificationOutput)
+}
+
+// Alert manager, if Type is `alertmanager`, this field is required.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) AlertManagers() TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) []TmpTkeGlobalNotificationNotificationAlertManager {
+		if v == nil {
+			return nil
+		}
+		return v.AlertManagers
+	}).(TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput)
+}
+
+// Alarm notification switch.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Alarm notification method, Valid values: `SMS`, `EMAIL`, `CALL`, `WECHAT`.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) []string {
+		if v == nil {
+			return nil
+		}
+		return v.NotifyWays
+	}).(pulumi.StringArrayOutput)
+}
+
+// Phone Alarm Reach Notification, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) PhoneArriveNotice() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneArriveNotice
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Telephone alarm off-wheel interval, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) PhoneCircleInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneCircleInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+// Number of phone alerts (user group), NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) PhoneCircleTimes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneCircleTimes
+	}).(pulumi.IntPtrOutput)
+}
+
+// Interval between telephone alarm rounds, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) PhoneInnerInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneInnerInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+// Phone alert sequence, NotifyWay is `CALL`, and this parameter is used.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) PhoneNotifyOrders() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) []int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneNotifyOrders
+	}).(pulumi.IntArrayOutput)
+}
+
+// Alarm receiving group(user group).
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) ReceiverGroups() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ReceiverGroups
+	}).(pulumi.StringArrayOutput)
+}
+
+// Convergence time.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) RepeatInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RepeatInterval
+	}).(pulumi.StringPtrOutput)
+}
+
+// Effective end time.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) TimeRangeEnd() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeRangeEnd
+	}).(pulumi.StringPtrOutput)
+}
+
+// Effective start time.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) TimeRangeStart() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeRangeStart
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alarm notification type, Valid values: `amp`, `webhook`, `alertmanager`.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+// Web hook, if Type is `webhook`, this field is required.
+func (o TmpTkeGlobalNotificationNotificationPtrOutput) WebHook() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeGlobalNotificationNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.WebHook
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeGlobalNotificationNotificationAlertManager struct {
+	// Cluster id.
+	ClusterId *string `pulumi:"clusterId"`
+	// Cluster type.
+	ClusterType *string `pulumi:"clusterType"`
+	// Alert manager url.
+	Url string `pulumi:"url"`
+}
+
+// TmpTkeGlobalNotificationNotificationAlertManagerInput is an input type that accepts TmpTkeGlobalNotificationNotificationAlertManagerArgs and TmpTkeGlobalNotificationNotificationAlertManagerOutput values.
+// You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationAlertManagerInput` via:
+//
+//          TmpTkeGlobalNotificationNotificationAlertManagerArgs{...}
+type TmpTkeGlobalNotificationNotificationAlertManagerInput interface {
+	pulumi.Input
+
+	ToTmpTkeGlobalNotificationNotificationAlertManagerOutput() TmpTkeGlobalNotificationNotificationAlertManagerOutput
+	ToTmpTkeGlobalNotificationNotificationAlertManagerOutputWithContext(context.Context) TmpTkeGlobalNotificationNotificationAlertManagerOutput
+}
+
+type TmpTkeGlobalNotificationNotificationAlertManagerArgs struct {
+	// Cluster id.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Cluster type.
+	ClusterType pulumi.StringPtrInput `pulumi:"clusterType"`
+	// Alert manager url.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (TmpTkeGlobalNotificationNotificationAlertManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeGlobalNotificationNotificationAlertManager)(nil)).Elem()
+}
+
+func (i TmpTkeGlobalNotificationNotificationAlertManagerArgs) ToTmpTkeGlobalNotificationNotificationAlertManagerOutput() TmpTkeGlobalNotificationNotificationAlertManagerOutput {
+	return i.ToTmpTkeGlobalNotificationNotificationAlertManagerOutputWithContext(context.Background())
+}
+
+func (i TmpTkeGlobalNotificationNotificationAlertManagerArgs) ToTmpTkeGlobalNotificationNotificationAlertManagerOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationAlertManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeGlobalNotificationNotificationAlertManagerOutput)
+}
+
+// TmpTkeGlobalNotificationNotificationAlertManagerArrayInput is an input type that accepts TmpTkeGlobalNotificationNotificationAlertManagerArray and TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput values.
+// You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationAlertManagerArrayInput` via:
+//
+//          TmpTkeGlobalNotificationNotificationAlertManagerArray{ TmpTkeGlobalNotificationNotificationAlertManagerArgs{...} }
+type TmpTkeGlobalNotificationNotificationAlertManagerArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeGlobalNotificationNotificationAlertManagerArrayOutput() TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput
+	ToTmpTkeGlobalNotificationNotificationAlertManagerArrayOutputWithContext(context.Context) TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput
+}
+
+type TmpTkeGlobalNotificationNotificationAlertManagerArray []TmpTkeGlobalNotificationNotificationAlertManagerInput
+
+func (TmpTkeGlobalNotificationNotificationAlertManagerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeGlobalNotificationNotificationAlertManager)(nil)).Elem()
+}
+
+func (i TmpTkeGlobalNotificationNotificationAlertManagerArray) ToTmpTkeGlobalNotificationNotificationAlertManagerArrayOutput() TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput {
+	return i.ToTmpTkeGlobalNotificationNotificationAlertManagerArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeGlobalNotificationNotificationAlertManagerArray) ToTmpTkeGlobalNotificationNotificationAlertManagerArrayOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput)
+}
+
+type TmpTkeGlobalNotificationNotificationAlertManagerOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeGlobalNotificationNotificationAlertManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeGlobalNotificationNotificationAlertManager)(nil)).Elem()
+}
+
+func (o TmpTkeGlobalNotificationNotificationAlertManagerOutput) ToTmpTkeGlobalNotificationNotificationAlertManagerOutput() TmpTkeGlobalNotificationNotificationAlertManagerOutput {
+	return o
+}
+
+func (o TmpTkeGlobalNotificationNotificationAlertManagerOutput) ToTmpTkeGlobalNotificationNotificationAlertManagerOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationAlertManagerOutput {
+	return o
+}
+
+// Cluster id.
+func (o TmpTkeGlobalNotificationNotificationAlertManagerOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotificationAlertManager) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Cluster type.
+func (o TmpTkeGlobalNotificationNotificationAlertManagerOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotificationAlertManager) *string { return v.ClusterType }).(pulumi.StringPtrOutput)
+}
+
+// Alert manager url.
+func (o TmpTkeGlobalNotificationNotificationAlertManagerOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeGlobalNotificationNotificationAlertManager) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeGlobalNotificationNotificationAlertManager)(nil)).Elem()
+}
+
+func (o TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput) ToTmpTkeGlobalNotificationNotificationAlertManagerArrayOutput() TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput {
+	return o
+}
+
+func (o TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput) ToTmpTkeGlobalNotificationNotificationAlertManagerArrayOutputWithContext(ctx context.Context) TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput {
+	return o
+}
+
+func (o TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput) Index(i pulumi.IntInput) TmpTkeGlobalNotificationNotificationAlertManagerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeGlobalNotificationNotificationAlertManager {
+		return vs[0].([]TmpTkeGlobalNotificationNotificationAlertManager)[vs[1].(int)]
+	}).(TmpTkeGlobalNotificationNotificationAlertManagerOutput)
+}
+
+type TmpTkeTemplateAttachmentTargets struct {
+	// ID of the cluster.
+	ClusterId *string `pulumi:"clusterId"`
+	// Name the cluster.
+	ClusterName *string `pulumi:"clusterName"`
+	// Cluster type.
+	ClusterType *string `pulumi:"clusterType"`
+	// instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// Name of the prometheus instance.
+	InstanceName *string `pulumi:"instanceName"`
+	// target area.
+	Region string `pulumi:"region"`
+	// Last sync template time.
+	SyncTime *string `pulumi:"syncTime"`
+	// Template version currently in use.
+	Version *string `pulumi:"version"`
+}
+
+// TmpTkeTemplateAttachmentTargetsInput is an input type that accepts TmpTkeTemplateAttachmentTargetsArgs and TmpTkeTemplateAttachmentTargetsOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateAttachmentTargetsInput` via:
+//
+//          TmpTkeTemplateAttachmentTargetsArgs{...}
+type TmpTkeTemplateAttachmentTargetsInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateAttachmentTargetsOutput() TmpTkeTemplateAttachmentTargetsOutput
+	ToTmpTkeTemplateAttachmentTargetsOutputWithContext(context.Context) TmpTkeTemplateAttachmentTargetsOutput
+}
+
+type TmpTkeTemplateAttachmentTargetsArgs struct {
+	// ID of the cluster.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Name the cluster.
+	ClusterName pulumi.StringPtrInput `pulumi:"clusterName"`
+	// Cluster type.
+	ClusterType pulumi.StringPtrInput `pulumi:"clusterType"`
+	// instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Name of the prometheus instance.
+	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+	// target area.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Last sync template time.
+	SyncTime pulumi.StringPtrInput `pulumi:"syncTime"`
+	// Template version currently in use.
+	Version pulumi.StringPtrInput `pulumi:"version"`
+}
+
+func (TmpTkeTemplateAttachmentTargetsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateAttachmentTargets)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateAttachmentTargetsArgs) ToTmpTkeTemplateAttachmentTargetsOutput() TmpTkeTemplateAttachmentTargetsOutput {
+	return i.ToTmpTkeTemplateAttachmentTargetsOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateAttachmentTargetsArgs) ToTmpTkeTemplateAttachmentTargetsOutputWithContext(ctx context.Context) TmpTkeTemplateAttachmentTargetsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateAttachmentTargetsOutput)
+}
+
+func (i TmpTkeTemplateAttachmentTargetsArgs) ToTmpTkeTemplateAttachmentTargetsPtrOutput() TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return i.ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateAttachmentTargetsArgs) ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(ctx context.Context) TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateAttachmentTargetsOutput).ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(ctx)
+}
+
+// TmpTkeTemplateAttachmentTargetsPtrInput is an input type that accepts TmpTkeTemplateAttachmentTargetsArgs, TmpTkeTemplateAttachmentTargetsPtr and TmpTkeTemplateAttachmentTargetsPtrOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateAttachmentTargetsPtrInput` via:
+//
+//          TmpTkeTemplateAttachmentTargetsArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeTemplateAttachmentTargetsPtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateAttachmentTargetsPtrOutput() TmpTkeTemplateAttachmentTargetsPtrOutput
+	ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(context.Context) TmpTkeTemplateAttachmentTargetsPtrOutput
+}
+
+type tmpTkeTemplateAttachmentTargetsPtrType TmpTkeTemplateAttachmentTargetsArgs
+
+func TmpTkeTemplateAttachmentTargetsPtr(v *TmpTkeTemplateAttachmentTargetsArgs) TmpTkeTemplateAttachmentTargetsPtrInput {
+	return (*tmpTkeTemplateAttachmentTargetsPtrType)(v)
+}
+
+func (*tmpTkeTemplateAttachmentTargetsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeTemplateAttachmentTargets)(nil)).Elem()
+}
+
+func (i *tmpTkeTemplateAttachmentTargetsPtrType) ToTmpTkeTemplateAttachmentTargetsPtrOutput() TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return i.ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeTemplateAttachmentTargetsPtrType) ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(ctx context.Context) TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateAttachmentTargetsPtrOutput)
+}
+
+type TmpTkeTemplateAttachmentTargetsOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateAttachmentTargetsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateAttachmentTargets)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateAttachmentTargetsOutput) ToTmpTkeTemplateAttachmentTargetsOutput() TmpTkeTemplateAttachmentTargetsOutput {
+	return o
+}
+
+func (o TmpTkeTemplateAttachmentTargetsOutput) ToTmpTkeTemplateAttachmentTargetsOutputWithContext(ctx context.Context) TmpTkeTemplateAttachmentTargetsOutput {
+	return o
+}
+
+func (o TmpTkeTemplateAttachmentTargetsOutput) ToTmpTkeTemplateAttachmentTargetsPtrOutput() TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return o.ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeTemplateAttachmentTargetsOutput) ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(ctx context.Context) TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeTemplateAttachmentTargets) *TmpTkeTemplateAttachmentTargets {
+		return &v
+	}).(TmpTkeTemplateAttachmentTargetsPtrOutput)
+}
+
+// ID of the cluster.
+func (o TmpTkeTemplateAttachmentTargetsOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Name the cluster.
+func (o TmpTkeTemplateAttachmentTargetsOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) *string { return v.ClusterName }).(pulumi.StringPtrOutput)
+}
+
+// Cluster type.
+func (o TmpTkeTemplateAttachmentTargetsOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) *string { return v.ClusterType }).(pulumi.StringPtrOutput)
+}
+
+// instance id.
+func (o TmpTkeTemplateAttachmentTargetsOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Name of the prometheus instance.
+func (o TmpTkeTemplateAttachmentTargetsOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+// target area.
+func (o TmpTkeTemplateAttachmentTargetsOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Last sync template time.
+func (o TmpTkeTemplateAttachmentTargetsOutput) SyncTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) *string { return v.SyncTime }).(pulumi.StringPtrOutput)
+}
+
+// Template version currently in use.
+func (o TmpTkeTemplateAttachmentTargetsOutput) Version() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateAttachmentTargets) *string { return v.Version }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeTemplateAttachmentTargetsPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateAttachmentTargetsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeTemplateAttachmentTargets)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) ToTmpTkeTemplateAttachmentTargetsPtrOutput() TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return o
+}
+
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) ToTmpTkeTemplateAttachmentTargetsPtrOutputWithContext(ctx context.Context) TmpTkeTemplateAttachmentTargetsPtrOutput {
+	return o
+}
+
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) Elem() TmpTkeTemplateAttachmentTargetsOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) TmpTkeTemplateAttachmentTargets {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeTemplateAttachmentTargets
+		return ret
+	}).(TmpTkeTemplateAttachmentTargetsOutput)
+}
+
+// ID of the cluster.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Name the cluster.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cluster type.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterType
+	}).(pulumi.StringPtrOutput)
+}
+
+// instance id.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Name of the prometheus instance.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// target area.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Last sync template time.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) SyncTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SyncTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Template version currently in use.
+func (o TmpTkeTemplateAttachmentTargetsPtrOutput) Version() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateAttachmentTargets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Version
+	}).(pulumi.StringPtrOutput)
+}
+
 type TmpTkeTemplateTemplate struct {
 	// Template description.
 	Describe *string `pulumi:"describe"`
@@ -2844,7 +5327,7 @@ type TmpTkeTemplateTemplate struct {
 // TmpTkeTemplateTemplateInput is an input type that accepts TmpTkeTemplateTemplateArgs and TmpTkeTemplateTemplateOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateInput` via:
 //
-//	TmpTkeTemplateTemplateArgs{...}
+//          TmpTkeTemplateTemplateArgs{...}
 type TmpTkeTemplateTemplateInput interface {
 	pulumi.Input
 
@@ -2900,11 +5383,11 @@ func (i TmpTkeTemplateTemplateArgs) ToTmpTkeTemplateTemplatePtrOutputWithContext
 // TmpTkeTemplateTemplatePtrInput is an input type that accepts TmpTkeTemplateTemplateArgs, TmpTkeTemplateTemplatePtr and TmpTkeTemplateTemplatePtrOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplatePtrInput` via:
 //
-//	        TmpTkeTemplateTemplateArgs{...}
+//          TmpTkeTemplateTemplateArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type TmpTkeTemplateTemplatePtrInput interface {
 	pulumi.Input
 
@@ -3155,7 +5638,7 @@ type TmpTkeTemplateTemplatePodMonitor struct {
 // TmpTkeTemplateTemplatePodMonitorInput is an input type that accepts TmpTkeTemplateTemplatePodMonitorArgs and TmpTkeTemplateTemplatePodMonitorOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplatePodMonitorInput` via:
 //
-//	TmpTkeTemplateTemplatePodMonitorArgs{...}
+//          TmpTkeTemplateTemplatePodMonitorArgs{...}
 type TmpTkeTemplateTemplatePodMonitorInput interface {
 	pulumi.Input
 
@@ -3187,7 +5670,7 @@ func (i TmpTkeTemplateTemplatePodMonitorArgs) ToTmpTkeTemplateTemplatePodMonitor
 // TmpTkeTemplateTemplatePodMonitorArrayInput is an input type that accepts TmpTkeTemplateTemplatePodMonitorArray and TmpTkeTemplateTemplatePodMonitorArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplatePodMonitorArrayInput` via:
 //
-//	TmpTkeTemplateTemplatePodMonitorArray{ TmpTkeTemplateTemplatePodMonitorArgs{...} }
+//          TmpTkeTemplateTemplatePodMonitorArray{ TmpTkeTemplateTemplatePodMonitorArgs{...} }
 type TmpTkeTemplateTemplatePodMonitorArrayInput interface {
 	pulumi.Input
 
@@ -3270,7 +5753,7 @@ type TmpTkeTemplateTemplateRawJob struct {
 // TmpTkeTemplateTemplateRawJobInput is an input type that accepts TmpTkeTemplateTemplateRawJobArgs and TmpTkeTemplateTemplateRawJobOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRawJobInput` via:
 //
-//	TmpTkeTemplateTemplateRawJobArgs{...}
+//          TmpTkeTemplateTemplateRawJobArgs{...}
 type TmpTkeTemplateTemplateRawJobInput interface {
 	pulumi.Input
 
@@ -3302,7 +5785,7 @@ func (i TmpTkeTemplateTemplateRawJobArgs) ToTmpTkeTemplateTemplateRawJobOutputWi
 // TmpTkeTemplateTemplateRawJobArrayInput is an input type that accepts TmpTkeTemplateTemplateRawJobArray and TmpTkeTemplateTemplateRawJobArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRawJobArrayInput` via:
 //
-//	TmpTkeTemplateTemplateRawJobArray{ TmpTkeTemplateTemplateRawJobArgs{...} }
+//          TmpTkeTemplateTemplateRawJobArray{ TmpTkeTemplateTemplateRawJobArgs{...} }
 type TmpTkeTemplateTemplateRawJobArrayInput interface {
 	pulumi.Input
 
@@ -3385,7 +5868,7 @@ type TmpTkeTemplateTemplateRecordRule struct {
 // TmpTkeTemplateTemplateRecordRuleInput is an input type that accepts TmpTkeTemplateTemplateRecordRuleArgs and TmpTkeTemplateTemplateRecordRuleOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRecordRuleInput` via:
 //
-//	TmpTkeTemplateTemplateRecordRuleArgs{...}
+//          TmpTkeTemplateTemplateRecordRuleArgs{...}
 type TmpTkeTemplateTemplateRecordRuleInput interface {
 	pulumi.Input
 
@@ -3417,7 +5900,7 @@ func (i TmpTkeTemplateTemplateRecordRuleArgs) ToTmpTkeTemplateTemplateRecordRule
 // TmpTkeTemplateTemplateRecordRuleArrayInput is an input type that accepts TmpTkeTemplateTemplateRecordRuleArray and TmpTkeTemplateTemplateRecordRuleArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRecordRuleArrayInput` via:
 //
-//	TmpTkeTemplateTemplateRecordRuleArray{ TmpTkeTemplateTemplateRecordRuleArgs{...} }
+//          TmpTkeTemplateTemplateRecordRuleArray{ TmpTkeTemplateTemplateRecordRuleArgs{...} }
 type TmpTkeTemplateTemplateRecordRuleArrayInput interface {
 	pulumi.Input
 
@@ -3500,7 +5983,7 @@ type TmpTkeTemplateTemplateServiceMonitor struct {
 // TmpTkeTemplateTemplateServiceMonitorInput is an input type that accepts TmpTkeTemplateTemplateServiceMonitorArgs and TmpTkeTemplateTemplateServiceMonitorOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateServiceMonitorInput` via:
 //
-//	TmpTkeTemplateTemplateServiceMonitorArgs{...}
+//          TmpTkeTemplateTemplateServiceMonitorArgs{...}
 type TmpTkeTemplateTemplateServiceMonitorInput interface {
 	pulumi.Input
 
@@ -3532,7 +6015,7 @@ func (i TmpTkeTemplateTemplateServiceMonitorArgs) ToTmpTkeTemplateTemplateServic
 // TmpTkeTemplateTemplateServiceMonitorArrayInput is an input type that accepts TmpTkeTemplateTemplateServiceMonitorArray and TmpTkeTemplateTemplateServiceMonitorArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateServiceMonitorArrayInput` via:
 //
-//	TmpTkeTemplateTemplateServiceMonitorArray{ TmpTkeTemplateTemplateServiceMonitorArgs{...} }
+//          TmpTkeTemplateTemplateServiceMonitorArray{ TmpTkeTemplateTemplateServiceMonitorArgs{...} }
 type TmpTkeTemplateTemplateServiceMonitorArrayInput interface {
 	pulumi.Input
 
@@ -3603,6 +6086,646 @@ func (o TmpTkeTemplateTemplateServiceMonitorArrayOutput) Index(i pulumi.IntInput
 	}).(TmpTkeTemplateTemplateServiceMonitorOutput)
 }
 
+type GetAlarmNoticesAlarmNotice struct {
+	// A maximum of one alarm notification can be pushed to the CLS service.
+	ClsNotices []GetAlarmNoticesAlarmNoticeClsNotice `pulumi:"clsNotices"`
+	// Alarm notification template ID.
+	Id string `pulumi:"id"`
+	// Whether it is the system default notification template 0=No 1=Yes.
+	IsPreset int `pulumi:"isPreset"`
+	// Alarm notification template name Used for fuzzy search.
+	Name string `pulumi:"name"`
+	// Notification language zh-CN=Chinese en-US=English.
+	NoticeLanguage string `pulumi:"noticeLanguage"`
+	// Alarm notification type ALARM=Notification not restored OK=Notification restored ALL.
+	NoticeType string `pulumi:"noticeType"`
+	// List of alarm policy IDs bound to the alarm notification template.
+	PolicyIds []string `pulumi:"policyIds"`
+	// Last modified time.
+	UpdatedAt string `pulumi:"updatedAt"`
+	// Last Modified By.
+	UpdatedBy string `pulumi:"updatedBy"`
+	// The maximum number of callback notifications is 3.
+	UrlNotices []GetAlarmNoticesAlarmNoticeUrlNotice `pulumi:"urlNotices"`
+	// Alarm notification template list.(At most five).
+	UserNotices []GetAlarmNoticesAlarmNoticeUserNotice `pulumi:"userNotices"`
+}
+
+// GetAlarmNoticesAlarmNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeArgs and GetAlarmNoticesAlarmNoticeOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeArgs{...}
+type GetAlarmNoticesAlarmNoticeInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeOutput() GetAlarmNoticesAlarmNoticeOutput
+	ToGetAlarmNoticesAlarmNoticeOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeOutput
+}
+
+type GetAlarmNoticesAlarmNoticeArgs struct {
+	// A maximum of one alarm notification can be pushed to the CLS service.
+	ClsNotices GetAlarmNoticesAlarmNoticeClsNoticeArrayInput `pulumi:"clsNotices"`
+	// Alarm notification template ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Whether it is the system default notification template 0=No 1=Yes.
+	IsPreset pulumi.IntInput `pulumi:"isPreset"`
+	// Alarm notification template name Used for fuzzy search.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Notification language zh-CN=Chinese en-US=English.
+	NoticeLanguage pulumi.StringInput `pulumi:"noticeLanguage"`
+	// Alarm notification type ALARM=Notification not restored OK=Notification restored ALL.
+	NoticeType pulumi.StringInput `pulumi:"noticeType"`
+	// List of alarm policy IDs bound to the alarm notification template.
+	PolicyIds pulumi.StringArrayInput `pulumi:"policyIds"`
+	// Last modified time.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+	// Last Modified By.
+	UpdatedBy pulumi.StringInput `pulumi:"updatedBy"`
+	// The maximum number of callback notifications is 3.
+	UrlNotices GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput `pulumi:"urlNotices"`
+	// Alarm notification template list.(At most five).
+	UserNotices GetAlarmNoticesAlarmNoticeUserNoticeArrayInput `pulumi:"userNotices"`
+}
+
+func (GetAlarmNoticesAlarmNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeArgs) ToGetAlarmNoticesAlarmNoticeOutput() GetAlarmNoticesAlarmNoticeOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeArgs) ToGetAlarmNoticesAlarmNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeArray and GetAlarmNoticesAlarmNoticeArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeArrayInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeArray{ GetAlarmNoticesAlarmNoticeArgs{...} }
+type GetAlarmNoticesAlarmNoticeArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeArrayOutput() GetAlarmNoticesAlarmNoticeArrayOutput
+	ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeArray []GetAlarmNoticesAlarmNoticeInput
+
+func (GetAlarmNoticesAlarmNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeArray) ToGetAlarmNoticesAlarmNoticeArrayOutput() GetAlarmNoticesAlarmNoticeArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeArray) ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeOutput) ToGetAlarmNoticesAlarmNoticeOutput() GetAlarmNoticesAlarmNoticeOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeOutput) ToGetAlarmNoticesAlarmNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeOutput {
+	return o
+}
+
+// A maximum of one alarm notification can be pushed to the CLS service.
+func (o GetAlarmNoticesAlarmNoticeOutput) ClsNotices() GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeClsNotice { return v.ClsNotices }).(GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput)
+}
+
+// Alarm notification template ID.
+func (o GetAlarmNoticesAlarmNoticeOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Whether it is the system default notification template 0=No 1=Yes.
+func (o GetAlarmNoticesAlarmNoticeOutput) IsPreset() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) int { return v.IsPreset }).(pulumi.IntOutput)
+}
+
+// Alarm notification template name Used for fuzzy search.
+func (o GetAlarmNoticesAlarmNoticeOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Notification language zh-CN=Chinese en-US=English.
+func (o GetAlarmNoticesAlarmNoticeOutput) NoticeLanguage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.NoticeLanguage }).(pulumi.StringOutput)
+}
+
+// Alarm notification type ALARM=Notification not restored OK=Notification restored ALL.
+func (o GetAlarmNoticesAlarmNoticeOutput) NoticeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.NoticeType }).(pulumi.StringOutput)
+}
+
+// List of alarm policy IDs bound to the alarm notification template.
+func (o GetAlarmNoticesAlarmNoticeOutput) PolicyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []string { return v.PolicyIds }).(pulumi.StringArrayOutput)
+}
+
+// Last modified time.
+func (o GetAlarmNoticesAlarmNoticeOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+// Last Modified By.
+func (o GetAlarmNoticesAlarmNoticeOutput) UpdatedBy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.UpdatedBy }).(pulumi.StringOutput)
+}
+
+// The maximum number of callback notifications is 3.
+func (o GetAlarmNoticesAlarmNoticeOutput) UrlNotices() GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeUrlNotice { return v.UrlNotices }).(GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput)
+}
+
+// Alarm notification template list.(At most five).
+func (o GetAlarmNoticesAlarmNoticeOutput) UserNotices() GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeUserNotice { return v.UserNotices }).(GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeArrayOutput() GetAlarmNoticesAlarmNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNotice {
+		return vs[0].([]GetAlarmNoticesAlarmNotice)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeClsNotice struct {
+	// Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+	Enable int `pulumi:"enable"`
+	// Log collection Id.
+	LogSetId string `pulumi:"logSetId"`
+	// Regional.
+	Region string `pulumi:"region"`
+	// Theme Id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// GetAlarmNoticesAlarmNoticeClsNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeClsNoticeArgs and GetAlarmNoticesAlarmNoticeClsNoticeOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeClsNoticeInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeClsNoticeArgs{...}
+type GetAlarmNoticesAlarmNoticeClsNoticeInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeClsNoticeOutput() GetAlarmNoticesAlarmNoticeClsNoticeOutput
+	ToGetAlarmNoticesAlarmNoticeClsNoticeOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeClsNoticeOutput
+}
+
+type GetAlarmNoticesAlarmNoticeClsNoticeArgs struct {
+	// Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+	Enable pulumi.IntInput `pulumi:"enable"`
+	// Log collection Id.
+	LogSetId pulumi.StringInput `pulumi:"logSetId"`
+	// Regional.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Theme Id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (GetAlarmNoticesAlarmNoticeClsNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeClsNoticeArgs) ToGetAlarmNoticesAlarmNoticeClsNoticeOutput() GetAlarmNoticesAlarmNoticeClsNoticeOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeClsNoticeOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeClsNoticeArgs) ToGetAlarmNoticesAlarmNoticeClsNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeClsNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeClsNoticeOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeClsNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeClsNoticeArray and GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeClsNoticeArrayInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeClsNoticeArray{ GetAlarmNoticesAlarmNoticeClsNoticeArgs{...} }
+type GetAlarmNoticesAlarmNoticeClsNoticeArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeClsNoticeArrayOutput() GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput
+	ToGetAlarmNoticesAlarmNoticeClsNoticeArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeClsNoticeArray []GetAlarmNoticesAlarmNoticeClsNoticeInput
+
+func (GetAlarmNoticesAlarmNoticeClsNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeClsNoticeArray) ToGetAlarmNoticesAlarmNoticeClsNoticeArrayOutput() GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeClsNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeClsNoticeArray) ToGetAlarmNoticesAlarmNoticeClsNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeClsNoticeOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeClsNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeClsNoticeOutput) ToGetAlarmNoticesAlarmNoticeClsNoticeOutput() GetAlarmNoticesAlarmNoticeClsNoticeOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeClsNoticeOutput) ToGetAlarmNoticesAlarmNoticeClsNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeClsNoticeOutput {
+	return o
+}
+
+// Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+func (o GetAlarmNoticesAlarmNoticeClsNoticeOutput) Enable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeClsNotice) int { return v.Enable }).(pulumi.IntOutput)
+}
+
+// Log collection Id.
+func (o GetAlarmNoticesAlarmNoticeClsNoticeOutput) LogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeClsNotice) string { return v.LogSetId }).(pulumi.StringOutput)
+}
+
+// Regional.
+func (o GetAlarmNoticesAlarmNoticeClsNoticeOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeClsNotice) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Theme Id.
+func (o GetAlarmNoticesAlarmNoticeClsNoticeOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeClsNotice) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeClsNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeClsNoticeArrayOutput() GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeClsNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeClsNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeClsNotice {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeClsNotice)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeClsNoticeOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeUrlNotice struct {
+	// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+	EndTime int `pulumi:"endTime"`
+	// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+	StartTime int `pulumi:"startTime"`
+	// Callback URL (limited to 256 characters).
+	Url string `pulumi:"url"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays []int `pulumi:"weekdays"`
+}
+
+// GetAlarmNoticesAlarmNoticeUrlNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeUrlNoticeArgs and GetAlarmNoticesAlarmNoticeUrlNoticeOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUrlNoticeInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeUrlNoticeArgs{...}
+type GetAlarmNoticesAlarmNoticeUrlNoticeInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeUrlNoticeOutput() GetAlarmNoticesAlarmNoticeUrlNoticeOutput
+	ToGetAlarmNoticesAlarmNoticeUrlNoticeOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeUrlNoticeOutput
+}
+
+type GetAlarmNoticesAlarmNoticeUrlNoticeArgs struct {
+	// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+	EndTime pulumi.IntInput `pulumi:"endTime"`
+	// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// Callback URL (limited to 256 characters).
+	Url pulumi.StringInput `pulumi:"url"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays pulumi.IntArrayInput `pulumi:"weekdays"`
+}
+
+func (GetAlarmNoticesAlarmNoticeUrlNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeUrlNoticeArgs) ToGetAlarmNoticesAlarmNoticeUrlNoticeOutput() GetAlarmNoticesAlarmNoticeUrlNoticeOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeUrlNoticeOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeUrlNoticeArgs) ToGetAlarmNoticesAlarmNoticeUrlNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUrlNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeUrlNoticeOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeUrlNoticeArray and GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeUrlNoticeArray{ GetAlarmNoticesAlarmNoticeUrlNoticeArgs{...} }
+type GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput() GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput
+	ToGetAlarmNoticesAlarmNoticeUrlNoticeArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeUrlNoticeArray []GetAlarmNoticesAlarmNoticeUrlNoticeInput
+
+func (GetAlarmNoticesAlarmNoticeUrlNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeUrlNoticeArray) ToGetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput() GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeUrlNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeUrlNoticeArray) ToGetAlarmNoticesAlarmNoticeUrlNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeUrlNoticeOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeUrlNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeOutput) ToGetAlarmNoticesAlarmNoticeUrlNoticeOutput() GetAlarmNoticesAlarmNoticeUrlNoticeOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeOutput) ToGetAlarmNoticesAlarmNoticeUrlNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUrlNoticeOutput {
+	return o
+}
+
+// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeOutput) EndTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUrlNotice) int { return v.EndTime }).(pulumi.IntOutput)
+}
+
+// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUrlNotice) int { return v.StartTime }).(pulumi.IntOutput)
+}
+
+// Callback URL (limited to 256 characters).
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUrlNotice) string { return v.Url }).(pulumi.StringOutput)
+}
+
+// Notification period 1-7 indicates Monday to Sunday.
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeOutput) Weekdays() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUrlNotice) []int { return v.Weekdays }).(pulumi.IntArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeUrlNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput() GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeUrlNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeUrlNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeUrlNotice {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeUrlNotice)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeUrlNoticeOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeUserNotice struct {
+	// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+	EndTime int `pulumi:"endTime"`
+	// Receive group list.
+	GroupIds []int `pulumi:"groupIds"`
+	// Contact notification required 0= No 1= Yes.
+	NeedPhoneArriveNotice int `pulumi:"needPhoneArriveNotice"`
+	// Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+	NoticeWays []string `pulumi:"noticeWays"`
+	// Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+	PhoneCallType string `pulumi:"phoneCallType"`
+	// Number of seconds between polls (value range: 60-900).
+	PhoneCircleInterval int `pulumi:"phoneCircleInterval"`
+	// Number of telephone polls (value range: 1-5).
+	PhoneCircleTimes int `pulumi:"phoneCircleTimes"`
+	// Number of seconds between calls in a polling session (value range: 60-900).
+	PhoneInnerInterval int `pulumi:"phoneInnerInterval"`
+	// Telephone polling list.
+	PhoneOrders []int `pulumi:"phoneOrders"`
+	// To filter alarm notification templates according to recipients, you need to select the notification user type. USER=user GROUP=user group Leave blank = not filter by recipient.
+	ReceiverType string `pulumi:"receiverType"`
+	// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+	StartTime int `pulumi:"startTime"`
+	// List of recipients.
+	UserIds []int `pulumi:"userIds"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays []int `pulumi:"weekdays"`
+}
+
+// GetAlarmNoticesAlarmNoticeUserNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeUserNoticeArgs and GetAlarmNoticesAlarmNoticeUserNoticeOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUserNoticeInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeUserNoticeArgs{...}
+type GetAlarmNoticesAlarmNoticeUserNoticeInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeUserNoticeOutput() GetAlarmNoticesAlarmNoticeUserNoticeOutput
+	ToGetAlarmNoticesAlarmNoticeUserNoticeOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeUserNoticeOutput
+}
+
+type GetAlarmNoticesAlarmNoticeUserNoticeArgs struct {
+	// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+	EndTime pulumi.IntInput `pulumi:"endTime"`
+	// Receive group list.
+	GroupIds pulumi.IntArrayInput `pulumi:"groupIds"`
+	// Contact notification required 0= No 1= Yes.
+	NeedPhoneArriveNotice pulumi.IntInput `pulumi:"needPhoneArriveNotice"`
+	// Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+	NoticeWays pulumi.StringArrayInput `pulumi:"noticeWays"`
+	// Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+	PhoneCallType pulumi.StringInput `pulumi:"phoneCallType"`
+	// Number of seconds between polls (value range: 60-900).
+	PhoneCircleInterval pulumi.IntInput `pulumi:"phoneCircleInterval"`
+	// Number of telephone polls (value range: 1-5).
+	PhoneCircleTimes pulumi.IntInput `pulumi:"phoneCircleTimes"`
+	// Number of seconds between calls in a polling session (value range: 60-900).
+	PhoneInnerInterval pulumi.IntInput `pulumi:"phoneInnerInterval"`
+	// Telephone polling list.
+	PhoneOrders pulumi.IntArrayInput `pulumi:"phoneOrders"`
+	// To filter alarm notification templates according to recipients, you need to select the notification user type. USER=user GROUP=user group Leave blank = not filter by recipient.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// List of recipients.
+	UserIds pulumi.IntArrayInput `pulumi:"userIds"`
+	// Notification period 1-7 indicates Monday to Sunday.
+	Weekdays pulumi.IntArrayInput `pulumi:"weekdays"`
+}
+
+func (GetAlarmNoticesAlarmNoticeUserNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeUserNoticeArgs) ToGetAlarmNoticesAlarmNoticeUserNoticeOutput() GetAlarmNoticesAlarmNoticeUserNoticeOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeUserNoticeOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeUserNoticeArgs) ToGetAlarmNoticesAlarmNoticeUserNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUserNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeUserNoticeOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeUserNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeUserNoticeArray and GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUserNoticeArrayInput` via:
+//
+//          GetAlarmNoticesAlarmNoticeUserNoticeArray{ GetAlarmNoticesAlarmNoticeUserNoticeArgs{...} }
+type GetAlarmNoticesAlarmNoticeUserNoticeArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeUserNoticeArrayOutput() GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput
+	ToGetAlarmNoticesAlarmNoticeUserNoticeArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeUserNoticeArray []GetAlarmNoticesAlarmNoticeUserNoticeInput
+
+func (GetAlarmNoticesAlarmNoticeUserNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeUserNoticeArray) ToGetAlarmNoticesAlarmNoticeUserNoticeArrayOutput() GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeUserNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeUserNoticeArray) ToGetAlarmNoticesAlarmNoticeUserNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeUserNoticeOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeUserNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) ToGetAlarmNoticesAlarmNoticeUserNoticeOutput() GetAlarmNoticesAlarmNoticeUserNoticeOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) ToGetAlarmNoticesAlarmNoticeUserNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUserNoticeOutput {
+	return o
+}
+
+// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) EndTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) int { return v.EndTime }).(pulumi.IntOutput)
+}
+
+// Receive group list.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) GroupIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) []int { return v.GroupIds }).(pulumi.IntArrayOutput)
+}
+
+// Contact notification required 0= No 1= Yes.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) NeedPhoneArriveNotice() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) int { return v.NeedPhoneArriveNotice }).(pulumi.IntOutput)
+}
+
+// Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) NoticeWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) []string { return v.NoticeWays }).(pulumi.StringArrayOutput)
+}
+
+// Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) PhoneCallType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) string { return v.PhoneCallType }).(pulumi.StringOutput)
+}
+
+// Number of seconds between polls (value range: 60-900).
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) PhoneCircleInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) int { return v.PhoneCircleInterval }).(pulumi.IntOutput)
+}
+
+// Number of telephone polls (value range: 1-5).
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) PhoneCircleTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) int { return v.PhoneCircleTimes }).(pulumi.IntOutput)
+}
+
+// Number of seconds between calls in a polling session (value range: 60-900).
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) PhoneInnerInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) int { return v.PhoneInnerInterval }).(pulumi.IntOutput)
+}
+
+// Telephone polling list.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) PhoneOrders() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) []int { return v.PhoneOrders }).(pulumi.IntArrayOutput)
+}
+
+// To filter alarm notification templates according to recipients, you need to select the notification user type. USER=user GROUP=user group Leave blank = not filter by recipient.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) int { return v.StartTime }).(pulumi.IntOutput)
+}
+
+// List of recipients.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) UserIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) []int { return v.UserIds }).(pulumi.IntArrayOutput)
+}
+
+// Notification period 1-7 indicates Monday to Sunday.
+func (o GetAlarmNoticesAlarmNoticeUserNoticeOutput) Weekdays() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeUserNotice) []int { return v.Weekdays }).(pulumi.IntArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeUserNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeUserNoticeArrayOutput() GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeUserNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeUserNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeUserNotice {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeUserNotice)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeUserNoticeOutput)
+}
+
 type GetBindingObjectsList struct {
 	// Represents a collection of dimensions of an object instance, json format.
 	DimensionsJson string `pulumi:"dimensionsJson"`
@@ -3617,7 +6740,7 @@ type GetBindingObjectsList struct {
 // GetBindingObjectsListInput is an input type that accepts GetBindingObjectsListArgs and GetBindingObjectsListOutput values.
 // You can construct a concrete instance of `GetBindingObjectsListInput` via:
 //
-//	GetBindingObjectsListArgs{...}
+//          GetBindingObjectsListArgs{...}
 type GetBindingObjectsListInput interface {
 	pulumi.Input
 
@@ -3651,7 +6774,7 @@ func (i GetBindingObjectsListArgs) ToGetBindingObjectsListOutputWithContext(ctx 
 // GetBindingObjectsListArrayInput is an input type that accepts GetBindingObjectsListArray and GetBindingObjectsListArrayOutput values.
 // You can construct a concrete instance of `GetBindingObjectsListArrayInput` via:
 //
-//	GetBindingObjectsListArray{ GetBindingObjectsListArgs{...} }
+//          GetBindingObjectsListArray{ GetBindingObjectsListArgs{...} }
 type GetBindingObjectsListArrayInput interface {
 	pulumi.Input
 
@@ -3737,7 +6860,7 @@ type GetDataDimension struct {
 // GetDataDimensionInput is an input type that accepts GetDataDimensionArgs and GetDataDimensionOutput values.
 // You can construct a concrete instance of `GetDataDimensionInput` via:
 //
-//	GetDataDimensionArgs{...}
+//          GetDataDimensionArgs{...}
 type GetDataDimensionInput interface {
 	pulumi.Input
 
@@ -3767,7 +6890,7 @@ func (i GetDataDimensionArgs) ToGetDataDimensionOutputWithContext(ctx context.Co
 // GetDataDimensionArrayInput is an input type that accepts GetDataDimensionArray and GetDataDimensionArrayOutput values.
 // You can construct a concrete instance of `GetDataDimensionArrayInput` via:
 //
-//	GetDataDimensionArray{ GetDataDimensionArgs{...} }
+//          GetDataDimensionArray{ GetDataDimensionArgs{...} }
 type GetDataDimensionArrayInput interface {
 	pulumi.Input
 
@@ -3843,7 +6966,7 @@ type GetDataList struct {
 // GetDataListInput is an input type that accepts GetDataListArgs and GetDataListOutput values.
 // You can construct a concrete instance of `GetDataListInput` via:
 //
-//	GetDataListArgs{...}
+//          GetDataListArgs{...}
 type GetDataListInput interface {
 	pulumi.Input
 
@@ -3873,7 +6996,7 @@ func (i GetDataListArgs) ToGetDataListOutputWithContext(ctx context.Context) Get
 // GetDataListArrayInput is an input type that accepts GetDataListArray and GetDataListArrayOutput values.
 // You can construct a concrete instance of `GetDataListArrayInput` via:
 //
-//	GetDataListArray{ GetDataListArgs{...} }
+//          GetDataListArray{ GetDataListArgs{...} }
 type GetDataListArrayInput interface {
 	pulumi.Input
 
@@ -3957,7 +7080,7 @@ type GetPolicyConditionsList struct {
 // GetPolicyConditionsListInput is an input type that accepts GetPolicyConditionsListArgs and GetPolicyConditionsListOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListInput` via:
 //
-//	GetPolicyConditionsListArgs{...}
+//          GetPolicyConditionsListArgs{...}
 type GetPolicyConditionsListInput interface {
 	pulumi.Input
 
@@ -3995,7 +7118,7 @@ func (i GetPolicyConditionsListArgs) ToGetPolicyConditionsListOutputWithContext(
 // GetPolicyConditionsListArrayInput is an input type that accepts GetPolicyConditionsListArray and GetPolicyConditionsListArrayOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListArrayInput` via:
 //
-//	GetPolicyConditionsListArray{ GetPolicyConditionsListArgs{...} }
+//          GetPolicyConditionsListArray{ GetPolicyConditionsListArgs{...} }
 type GetPolicyConditionsListArrayInput interface {
 	pulumi.Input
 
@@ -4093,7 +7216,7 @@ type GetPolicyConditionsListEventMetric struct {
 // GetPolicyConditionsListEventMetricInput is an input type that accepts GetPolicyConditionsListEventMetricArgs and GetPolicyConditionsListEventMetricOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListEventMetricInput` via:
 //
-//	GetPolicyConditionsListEventMetricArgs{...}
+//          GetPolicyConditionsListEventMetricArgs{...}
 type GetPolicyConditionsListEventMetricInput interface {
 	pulumi.Input
 
@@ -4125,7 +7248,7 @@ func (i GetPolicyConditionsListEventMetricArgs) ToGetPolicyConditionsListEventMe
 // GetPolicyConditionsListEventMetricArrayInput is an input type that accepts GetPolicyConditionsListEventMetricArray and GetPolicyConditionsListEventMetricArrayOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListEventMetricArrayInput` via:
 //
-//	GetPolicyConditionsListEventMetricArray{ GetPolicyConditionsListEventMetricArgs{...} }
+//          GetPolicyConditionsListEventMetricArray{ GetPolicyConditionsListEventMetricArgs{...} }
 type GetPolicyConditionsListEventMetricArrayInput interface {
 	pulumi.Input
 
@@ -4256,7 +7379,7 @@ type GetPolicyConditionsListMetric struct {
 // GetPolicyConditionsListMetricInput is an input type that accepts GetPolicyConditionsListMetricArgs and GetPolicyConditionsListMetricOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListMetricInput` via:
 //
-//	GetPolicyConditionsListMetricArgs{...}
+//          GetPolicyConditionsListMetricArgs{...}
 type GetPolicyConditionsListMetricInput interface {
 	pulumi.Input
 
@@ -4336,7 +7459,7 @@ func (i GetPolicyConditionsListMetricArgs) ToGetPolicyConditionsListMetricOutput
 // GetPolicyConditionsListMetricArrayInput is an input type that accepts GetPolicyConditionsListMetricArray and GetPolicyConditionsListMetricArrayOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListMetricArrayInput` via:
 //
-//	GetPolicyConditionsListMetricArray{ GetPolicyConditionsListMetricArgs{...} }
+//          GetPolicyConditionsListMetricArray{ GetPolicyConditionsListMetricArgs{...} }
 type GetPolicyConditionsListMetricArrayInput interface {
 	pulumi.Input
 
@@ -4567,7 +7690,7 @@ type GetPolicyGroupsList struct {
 // GetPolicyGroupsListInput is an input type that accepts GetPolicyGroupsListArgs and GetPolicyGroupsListOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListInput` via:
 //
-//	GetPolicyGroupsListArgs{...}
+//          GetPolicyGroupsListArgs{...}
 type GetPolicyGroupsListInput interface {
 	pulumi.Input
 
@@ -4627,7 +7750,7 @@ func (i GetPolicyGroupsListArgs) ToGetPolicyGroupsListOutputWithContext(ctx cont
 // GetPolicyGroupsListArrayInput is an input type that accepts GetPolicyGroupsListArray and GetPolicyGroupsListArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListArrayInput` via:
 //
-//	GetPolicyGroupsListArray{ GetPolicyGroupsListArgs{...} }
+//          GetPolicyGroupsListArray{ GetPolicyGroupsListArgs{...} }
 type GetPolicyGroupsListArrayInput interface {
 	pulumi.Input
 
@@ -4794,7 +7917,7 @@ type GetPolicyGroupsListCondition struct {
 // GetPolicyGroupsListConditionInput is an input type that accepts GetPolicyGroupsListConditionArgs and GetPolicyGroupsListConditionOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListConditionInput` via:
 //
-//	GetPolicyGroupsListConditionArgs{...}
+//          GetPolicyGroupsListConditionArgs{...}
 type GetPolicyGroupsListConditionInput interface {
 	pulumi.Input
 
@@ -4840,7 +7963,7 @@ func (i GetPolicyGroupsListConditionArgs) ToGetPolicyGroupsListConditionOutputWi
 // GetPolicyGroupsListConditionArrayInput is an input type that accepts GetPolicyGroupsListConditionArray and GetPolicyGroupsListConditionArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListConditionArrayInput` via:
 //
-//	GetPolicyGroupsListConditionArray{ GetPolicyGroupsListConditionArgs{...} }
+//          GetPolicyGroupsListConditionArray{ GetPolicyGroupsListConditionArgs{...} }
 type GetPolicyGroupsListConditionArrayInput interface {
 	pulumi.Input
 
@@ -4962,7 +8085,7 @@ type GetPolicyGroupsListEventCondition struct {
 // GetPolicyGroupsListEventConditionInput is an input type that accepts GetPolicyGroupsListEventConditionArgs and GetPolicyGroupsListEventConditionOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListEventConditionInput` via:
 //
-//	GetPolicyGroupsListEventConditionArgs{...}
+//          GetPolicyGroupsListEventConditionArgs{...}
 type GetPolicyGroupsListEventConditionInput interface {
 	pulumi.Input
 
@@ -4998,7 +8121,7 @@ func (i GetPolicyGroupsListEventConditionArgs) ToGetPolicyGroupsListEventConditi
 // GetPolicyGroupsListEventConditionArrayInput is an input type that accepts GetPolicyGroupsListEventConditionArray and GetPolicyGroupsListEventConditionArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListEventConditionArrayInput` via:
 //
-//	GetPolicyGroupsListEventConditionArray{ GetPolicyGroupsListEventConditionArgs{...} }
+//          GetPolicyGroupsListEventConditionArray{ GetPolicyGroupsListEventConditionArgs{...} }
 type GetPolicyGroupsListEventConditionArrayInput interface {
 	pulumi.Input
 
@@ -5113,7 +8236,7 @@ type GetPolicyGroupsListReceiver struct {
 // GetPolicyGroupsListReceiverInput is an input type that accepts GetPolicyGroupsListReceiverArgs and GetPolicyGroupsListReceiverOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListReceiverInput` via:
 //
-//	GetPolicyGroupsListReceiverArgs{...}
+//          GetPolicyGroupsListReceiverArgs{...}
 type GetPolicyGroupsListReceiverInput interface {
 	pulumi.Input
 
@@ -5167,7 +8290,7 @@ func (i GetPolicyGroupsListReceiverArgs) ToGetPolicyGroupsListReceiverOutputWith
 // GetPolicyGroupsListReceiverArrayInput is an input type that accepts GetPolicyGroupsListReceiverArray and GetPolicyGroupsListReceiverArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListReceiverArrayInput` via:
 //
-//	GetPolicyGroupsListReceiverArray{ GetPolicyGroupsListReceiverArgs{...} }
+//          GetPolicyGroupsListReceiverArray{ GetPolicyGroupsListReceiverArgs{...} }
 type GetPolicyGroupsListReceiverArrayInput interface {
 	pulumi.Input
 
@@ -5303,7 +8426,7 @@ type GetProductEventDimension struct {
 // GetProductEventDimensionInput is an input type that accepts GetProductEventDimensionArgs and GetProductEventDimensionOutput values.
 // You can construct a concrete instance of `GetProductEventDimensionInput` via:
 //
-//	GetProductEventDimensionArgs{...}
+//          GetProductEventDimensionArgs{...}
 type GetProductEventDimensionInput interface {
 	pulumi.Input
 
@@ -5333,7 +8456,7 @@ func (i GetProductEventDimensionArgs) ToGetProductEventDimensionOutputWithContex
 // GetProductEventDimensionArrayInput is an input type that accepts GetProductEventDimensionArray and GetProductEventDimensionArrayOutput values.
 // You can construct a concrete instance of `GetProductEventDimensionArrayInput` via:
 //
-//	GetProductEventDimensionArray{ GetProductEventDimensionArgs{...} }
+//          GetProductEventDimensionArray{ GetProductEventDimensionArgs{...} }
 type GetProductEventDimensionArrayInput interface {
 	pulumi.Input
 
@@ -5445,7 +8568,7 @@ type GetProductEventList struct {
 // GetProductEventListInput is an input type that accepts GetProductEventListArgs and GetProductEventListOutput values.
 // You can construct a concrete instance of `GetProductEventListInput` via:
 //
-//	GetProductEventListArgs{...}
+//          GetProductEventListArgs{...}
 type GetProductEventListInput interface {
 	pulumi.Input
 
@@ -5511,7 +8634,7 @@ func (i GetProductEventListArgs) ToGetProductEventListOutputWithContext(ctx cont
 // GetProductEventListArrayInput is an input type that accepts GetProductEventListArray and GetProductEventListArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListArrayInput` via:
 //
-//	GetProductEventListArray{ GetProductEventListArgs{...} }
+//          GetProductEventListArray{ GetProductEventListArgs{...} }
 type GetProductEventListArrayInput interface {
 	pulumi.Input
 
@@ -5679,7 +8802,7 @@ type GetProductEventListAdditionMsg struct {
 // GetProductEventListAdditionMsgInput is an input type that accepts GetProductEventListAdditionMsgArgs and GetProductEventListAdditionMsgOutput values.
 // You can construct a concrete instance of `GetProductEventListAdditionMsgInput` via:
 //
-//	GetProductEventListAdditionMsgArgs{...}
+//          GetProductEventListAdditionMsgArgs{...}
 type GetProductEventListAdditionMsgInput interface {
 	pulumi.Input
 
@@ -5711,7 +8834,7 @@ func (i GetProductEventListAdditionMsgArgs) ToGetProductEventListAdditionMsgOutp
 // GetProductEventListAdditionMsgArrayInput is an input type that accepts GetProductEventListAdditionMsgArray and GetProductEventListAdditionMsgArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListAdditionMsgArrayInput` via:
 //
-//	GetProductEventListAdditionMsgArray{ GetProductEventListAdditionMsgArgs{...} }
+//          GetProductEventListAdditionMsgArray{ GetProductEventListAdditionMsgArgs{...} }
 type GetProductEventListAdditionMsgArrayInput interface {
 	pulumi.Input
 
@@ -5794,7 +8917,7 @@ type GetProductEventListDimension struct {
 // GetProductEventListDimensionInput is an input type that accepts GetProductEventListDimensionArgs and GetProductEventListDimensionOutput values.
 // You can construct a concrete instance of `GetProductEventListDimensionInput` via:
 //
-//	GetProductEventListDimensionArgs{...}
+//          GetProductEventListDimensionArgs{...}
 type GetProductEventListDimensionInput interface {
 	pulumi.Input
 
@@ -5826,7 +8949,7 @@ func (i GetProductEventListDimensionArgs) ToGetProductEventListDimensionOutputWi
 // GetProductEventListDimensionArrayInput is an input type that accepts GetProductEventListDimensionArray and GetProductEventListDimensionArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListDimensionArrayInput` via:
 //
-//	GetProductEventListDimensionArray{ GetProductEventListDimensionArgs{...} }
+//          GetProductEventListDimensionArray{ GetProductEventListDimensionArgs{...} }
 type GetProductEventListDimensionArrayInput interface {
 	pulumi.Input
 
@@ -5907,7 +9030,7 @@ type GetProductEventListGroupInfo struct {
 // GetProductEventListGroupInfoInput is an input type that accepts GetProductEventListGroupInfoArgs and GetProductEventListGroupInfoOutput values.
 // You can construct a concrete instance of `GetProductEventListGroupInfoInput` via:
 //
-//	GetProductEventListGroupInfoArgs{...}
+//          GetProductEventListGroupInfoArgs{...}
 type GetProductEventListGroupInfoInput interface {
 	pulumi.Input
 
@@ -5937,7 +9060,7 @@ func (i GetProductEventListGroupInfoArgs) ToGetProductEventListGroupInfoOutputWi
 // GetProductEventListGroupInfoArrayInput is an input type that accepts GetProductEventListGroupInfoArray and GetProductEventListGroupInfoArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListGroupInfoArrayInput` via:
 //
-//	GetProductEventListGroupInfoArray{ GetProductEventListGroupInfoArgs{...} }
+//          GetProductEventListGroupInfoArray{ GetProductEventListGroupInfoArgs{...} }
 type GetProductEventListGroupInfoArrayInput interface {
 	pulumi.Input
 
@@ -6015,7 +9138,7 @@ type GetProductNamespaceList struct {
 // GetProductNamespaceListInput is an input type that accepts GetProductNamespaceListArgs and GetProductNamespaceListOutput values.
 // You can construct a concrete instance of `GetProductNamespaceListInput` via:
 //
-//	GetProductNamespaceListArgs{...}
+//          GetProductNamespaceListArgs{...}
 type GetProductNamespaceListInput interface {
 	pulumi.Input
 
@@ -6047,7 +9170,7 @@ func (i GetProductNamespaceListArgs) ToGetProductNamespaceListOutputWithContext(
 // GetProductNamespaceListArrayInput is an input type that accepts GetProductNamespaceListArray and GetProductNamespaceListArrayOutput values.
 // You can construct a concrete instance of `GetProductNamespaceListArrayInput` via:
 //
-//	GetProductNamespaceListArray{ GetProductNamespaceListArgs{...} }
+//          GetProductNamespaceListArray{ GetProductNamespaceListArgs{...} }
 type GetProductNamespaceListArrayInput interface {
 	pulumi.Input
 
@@ -6119,6 +9242,12 @@ func (o GetProductNamespaceListArrayOutput) Index(i pulumi.IntInput) GetProductN
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeClsNoticeInput)(nil)).Elem(), AlarmNoticeClsNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeClsNoticeArrayInput)(nil)).Elem(), AlarmNoticeClsNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeUrlNoticeInput)(nil)).Elem(), AlarmNoticeUrlNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeUrlNoticeArrayInput)(nil)).Elem(), AlarmNoticeUrlNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeUserNoticeInput)(nil)).Elem(), AlarmNoticeUserNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeUserNoticeArrayInput)(nil)).Elem(), AlarmNoticeUserNoticeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyConditionsInput)(nil)).Elem(), AlarmPolicyConditionsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyConditionsPtrInput)(nil)).Elem(), AlarmPolicyConditionsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyConditionsRuleInput)(nil)).Elem(), AlarmPolicyConditionsRuleArgs{})
@@ -6135,6 +9264,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyTriggerTaskArrayInput)(nil)).Elem(), AlarmPolicyTriggerTaskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BindingReceiverReceiversInput)(nil)).Elem(), BindingReceiverReceiversArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BindingReceiverReceiversPtrInput)(nil)).Elem(), BindingReceiverReceiversArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GrafanaSsoAccountRoleInput)(nil)).Elem(), GrafanaSsoAccountRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GrafanaSsoAccountRoleArrayInput)(nil)).Elem(), GrafanaSsoAccountRoleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionInput)(nil)).Elem(), PolicyBindingObjectDimensionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionArrayInput)(nil)).Elem(), PolicyBindingObjectDimensionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleAnnotationInput)(nil)).Elem(), TmpAlertRuleAnnotationArgs{})
@@ -6153,6 +9284,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleAnnotationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleLabelInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleLabelArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsInput)(nil)).Elem(), TmpTkeClusterAgentAgentsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsPtrInput)(nil)).Elem(), TmpTkeClusterAgentAgentsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsExternalLabelInput)(nil)).Elem(), TmpTkeClusterAgentAgentsExternalLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsExternalLabelArrayInput)(nil)).Elem(), TmpTkeClusterAgentAgentsExternalLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigInput)(nil)).Elem(), TmpTkeClusterAgentAgentsInClusterPodConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput)(nil)).Elem(), TmpTkeClusterAgentAgentsInClusterPodConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput)(nil)).Elem(), TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput)(nil)).Elem(), TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput)(nil)).Elem(), TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput)(nil)).Elem(), TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeConfigPodMonitorInput)(nil)).Elem(), TmpTkeConfigPodMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeConfigPodMonitorArrayInput)(nil)).Elem(), TmpTkeConfigPodMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeConfigRawJobInput)(nil)).Elem(), TmpTkeConfigRawJobArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeConfigRawJobArrayInput)(nil)).Elem(), TmpTkeConfigRawJobArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeConfigServiceMonitorInput)(nil)).Elem(), TmpTkeConfigServiceMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeConfigServiceMonitorArrayInput)(nil)).Elem(), TmpTkeConfigServiceMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeGlobalNotificationNotificationInput)(nil)).Elem(), TmpTkeGlobalNotificationNotificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeGlobalNotificationNotificationPtrInput)(nil)).Elem(), TmpTkeGlobalNotificationNotificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeGlobalNotificationNotificationAlertManagerInput)(nil)).Elem(), TmpTkeGlobalNotificationNotificationAlertManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeGlobalNotificationNotificationAlertManagerArrayInput)(nil)).Elem(), TmpTkeGlobalNotificationNotificationAlertManagerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateAttachmentTargetsInput)(nil)).Elem(), TmpTkeTemplateAttachmentTargetsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateAttachmentTargetsPtrInput)(nil)).Elem(), TmpTkeTemplateAttachmentTargetsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateInput)(nil)).Elem(), TmpTkeTemplateTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplatePtrInput)(nil)).Elem(), TmpTkeTemplateTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplatePodMonitorInput)(nil)).Elem(), TmpTkeTemplateTemplatePodMonitorArgs{})
@@ -6163,6 +9316,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateRecordRuleArrayInput)(nil)).Elem(), TmpTkeTemplateTemplateRecordRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateServiceMonitorInput)(nil)).Elem(), TmpTkeTemplateTemplateServiceMonitorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateServiceMonitorArrayInput)(nil)).Elem(), TmpTkeTemplateTemplateServiceMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeClsNoticeInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeClsNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeClsNoticeArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeClsNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUrlNoticeInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeUrlNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeUrlNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUserNoticeInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeUserNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeUserNoticeArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeUserNoticeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBindingObjectsListInput)(nil)).Elem(), GetBindingObjectsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBindingObjectsListArrayInput)(nil)).Elem(), GetBindingObjectsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDataDimensionInput)(nil)).Elem(), GetDataDimensionArgs{})
@@ -6195,6 +9356,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListGroupInfoArrayInput)(nil)).Elem(), GetProductEventListGroupInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductNamespaceListInput)(nil)).Elem(), GetProductNamespaceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductNamespaceListArrayInput)(nil)).Elem(), GetProductNamespaceListArray{})
+	pulumi.RegisterOutputType(AlarmNoticeClsNoticeOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeClsNoticeArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeUrlNoticeOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeUrlNoticeArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeUserNoticeOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeUserNoticeArrayOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyConditionsOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyConditionsPtrOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyConditionsRuleOutput{})
@@ -6211,6 +9378,8 @@ func init() {
 	pulumi.RegisterOutputType(AlarmPolicyTriggerTaskArrayOutput{})
 	pulumi.RegisterOutputType(BindingReceiverReceiversOutput{})
 	pulumi.RegisterOutputType(BindingReceiverReceiversPtrOutput{})
+	pulumi.RegisterOutputType(GrafanaSsoAccountRoleOutput{})
+	pulumi.RegisterOutputType(GrafanaSsoAccountRoleArrayOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionArrayOutput{})
 	pulumi.RegisterOutputType(TmpAlertRuleAnnotationOutput{})
@@ -6229,6 +9398,28 @@ func init() {
 	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput{})
 	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleLabelOutput{})
 	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsPtrOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsExternalLabelOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsExternalLabelArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsInClusterPodConfigOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput{})
+	pulumi.RegisterOutputType(TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeConfigPodMonitorOutput{})
+	pulumi.RegisterOutputType(TmpTkeConfigPodMonitorArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeConfigRawJobOutput{})
+	pulumi.RegisterOutputType(TmpTkeConfigRawJobArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeConfigServiceMonitorOutput{})
+	pulumi.RegisterOutputType(TmpTkeConfigServiceMonitorArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeGlobalNotificationNotificationOutput{})
+	pulumi.RegisterOutputType(TmpTkeGlobalNotificationNotificationPtrOutput{})
+	pulumi.RegisterOutputType(TmpTkeGlobalNotificationNotificationAlertManagerOutput{})
+	pulumi.RegisterOutputType(TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateAttachmentTargetsOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateAttachmentTargetsPtrOutput{})
 	pulumi.RegisterOutputType(TmpTkeTemplateTemplateOutput{})
 	pulumi.RegisterOutputType(TmpTkeTemplateTemplatePtrOutput{})
 	pulumi.RegisterOutputType(TmpTkeTemplateTemplatePodMonitorOutput{})
@@ -6239,6 +9430,14 @@ func init() {
 	pulumi.RegisterOutputType(TmpTkeTemplateTemplateRecordRuleArrayOutput{})
 	pulumi.RegisterOutputType(TmpTkeTemplateTemplateServiceMonitorOutput{})
 	pulumi.RegisterOutputType(TmpTkeTemplateTemplateServiceMonitorArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeClsNoticeOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeUrlNoticeOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeUserNoticeOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput{})
 	pulumi.RegisterOutputType(GetBindingObjectsListOutput{})
 	pulumi.RegisterOutputType(GetBindingObjectsListArrayOutput{})
 	pulumi.RegisterOutputType(GetDataDimensionOutput{})

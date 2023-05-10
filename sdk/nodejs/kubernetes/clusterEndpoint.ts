@@ -5,8 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provide a resource to create a KubernetesClusterEndpoint.
- * This resource allows you to create an empty cluster first without any workers. Only all attached node depends create complete, cluster endpoint will finally be enabled.
+ * Provide a resource to create a KubernetesClusterEndpoint. This resource allows you to create an empty cluster first without any workers. Only all attached node depends create complete, cluster endpoint will finally be enabled.
  *
  * > **NOTE:** Recommend using `dependsOn` to make sure endpoint create after node pools or workers does.
  *
@@ -67,6 +66,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
      */
     public readonly clusterInternet!: pulumi.Output<boolean | undefined>;
     /**
+     * Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+     */
+    public readonly clusterInternetDomain!: pulumi.Output<string | undefined>;
+    /**
      * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
      */
     public readonly clusterInternetSecurityGroup!: pulumi.Output<string | undefined>;
@@ -74,6 +77,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
      * Open intranet access or not.
      */
     public readonly clusterIntranet!: pulumi.Output<boolean | undefined>;
+    /**
+     * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+     */
+    public readonly clusterIntranetDomain!: pulumi.Output<string | undefined>;
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
@@ -119,8 +126,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
             resourceInputs["clusterExternalEndpoint"] = state ? state.clusterExternalEndpoint : undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["clusterInternet"] = state ? state.clusterInternet : undefined;
+            resourceInputs["clusterInternetDomain"] = state ? state.clusterInternetDomain : undefined;
             resourceInputs["clusterInternetSecurityGroup"] = state ? state.clusterInternetSecurityGroup : undefined;
             resourceInputs["clusterIntranet"] = state ? state.clusterIntranet : undefined;
+            resourceInputs["clusterIntranetDomain"] = state ? state.clusterIntranetDomain : undefined;
             resourceInputs["clusterIntranetSubnetId"] = state ? state.clusterIntranetSubnetId : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
             resourceInputs["managedClusterInternetSecurityPolicies"] = state ? state.managedClusterInternetSecurityPolicies : undefined;
@@ -134,8 +143,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
             }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["clusterInternet"] = args ? args.clusterInternet : undefined;
+            resourceInputs["clusterInternetDomain"] = args ? args.clusterInternetDomain : undefined;
             resourceInputs["clusterInternetSecurityGroup"] = args ? args.clusterInternetSecurityGroup : undefined;
             resourceInputs["clusterIntranet"] = args ? args.clusterIntranet : undefined;
+            resourceInputs["clusterIntranetDomain"] = args ? args.clusterIntranetDomain : undefined;
             resourceInputs["clusterIntranetSubnetId"] = args ? args.clusterIntranetSubnetId : undefined;
             resourceInputs["managedClusterInternetSecurityPolicies"] = args ? args.managedClusterInternetSecurityPolicies : undefined;
             resourceInputs["certificationAuthority"] = undefined /*out*/;
@@ -176,6 +187,10 @@ export interface ClusterEndpointState {
      */
     clusterInternet?: pulumi.Input<boolean>;
     /**
+     * Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+     */
+    clusterInternetDomain?: pulumi.Input<string>;
+    /**
      * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
      */
     clusterInternetSecurityGroup?: pulumi.Input<string>;
@@ -183,6 +198,10 @@ export interface ClusterEndpointState {
      * Open intranet access or not.
      */
     clusterIntranet?: pulumi.Input<boolean>;
+    /**
+     * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+     */
+    clusterIntranetDomain?: pulumi.Input<string>;
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
@@ -224,6 +243,10 @@ export interface ClusterEndpointArgs {
      */
     clusterInternet?: pulumi.Input<boolean>;
     /**
+     * Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
+     */
+    clusterInternetDomain?: pulumi.Input<string>;
+    /**
      * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
      */
     clusterInternetSecurityGroup?: pulumi.Input<string>;
@@ -231,6 +254,10 @@ export interface ClusterEndpointArgs {
      * Open intranet access or not.
      */
     clusterIntranet?: pulumi.Input<boolean>;
+    /**
+     * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
+     */
+    clusterIntranetDomain?: pulumi.Input<string>;
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */

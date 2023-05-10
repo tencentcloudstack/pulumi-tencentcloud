@@ -37,12 +37,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// monitor tmpCvmAgent can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent tmpCvmAgent_id
+    ///  $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent")]
     public partial class TmpCvmAgent : Pulumi.CustomResource
     {
+        /// <summary>
+        /// Agent id.
+        /// </summary>
+        [Output("agentId")]
+        public Output<string> AgentId { get; private set; } = null!;
+
         /// <summary>
         /// Instance id.
         /// </summary>
@@ -121,6 +127,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 
     public sealed class TmpCvmAgentState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Agent id.
+        /// </summary>
+        [Input("agentId")]
+        public Input<string>? AgentId { get; set; }
+
         /// <summary>
         /// Instance id.
         /// </summary>

@@ -19,49 +19,46 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := PrivateDns.NewZone(ctx, "foo", &PrivateDns.ZoneArgs{
-//				AccountVpcSets: privatedns.ZoneAccountVpcSetArray{
-//					&privatedns.ZoneAccountVpcSetArgs{
-//						Region:    pulumi.String("ap-guangzhou"),
-//						Uin:       pulumi.String("454xxxxxxx"),
-//						UniqVpcId: pulumi.String("vpc-xxxxx"),
-//						VpcName:   pulumi.String("test-redis"),
-//					},
-//				},
-//				DnsForwardStatus: pulumi.String("DISABLED"),
-//				Domain:           pulumi.String("domain.com"),
-//				Remark:           pulumi.String("test"),
-//				Tags: pulumi.AnyMap{
-//					"created_by": pulumi.Any{
-//						nil,
-//					},
-//					"terraform": pulumi.Any{
-//						nil,
-//					},
-//				},
-//				VpcSets: privatedns.ZoneVpcSetArray{
-//					&privatedns.ZoneVpcSetArgs{
-//						Region:    pulumi.String("ap-guangzhou"),
-//						UniqVpcId: pulumi.String("vpc-xxxxx"),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := PrivateDns.NewZone(ctx, "foo", &PrivateDns.ZoneArgs{
+// 			AccountVpcSets: privatedns.ZoneAccountVpcSetArray{
+// 				&privatedns.ZoneAccountVpcSetArgs{
+// 					Region:    pulumi.String("ap-guangzhou"),
+// 					Uin:       pulumi.String("454xxxxxxx"),
+// 					UniqVpcId: pulumi.String("vpc-xxxxx"),
+// 					VpcName:   pulumi.String("test-redis"),
+// 				},
+// 			},
+// 			DnsForwardStatus: pulumi.String("DISABLED"),
+// 			Domain:           pulumi.String("domain.com"),
+// 			Remark:           pulumi.String("test"),
+// 			Tags: pulumi.AnyMap{
+// 				"created_by": pulumi.Any{
+// 					nil,
+// 				},
+// 				"terraform": pulumi.Any{
+// 					nil,
+// 				},
+// 			},
+// 			VpcSets: privatedns.ZoneVpcSetArray{
+// 				&privatedns.ZoneVpcSetArgs{
+// 					Region:    pulumi.String("ap-guangzhou"),
+// 					UniqVpcId: pulumi.String("vpc-xxxxx"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -69,9 +66,7 @@ import (
 // Private Dns Zone can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
-//
+//  $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
 // ```
 type Zone struct {
 	pulumi.CustomResourceState
@@ -233,7 +228,7 @@ func (i *Zone) ToZoneOutputWithContext(ctx context.Context) ZoneOutput {
 // ZoneArrayInput is an input type that accepts ZoneArray and ZoneArrayOutput values.
 // You can construct a concrete instance of `ZoneArrayInput` via:
 //
-//	ZoneArray{ ZoneArgs{...} }
+//          ZoneArray{ ZoneArgs{...} }
 type ZoneArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +253,7 @@ func (i ZoneArray) ToZoneArrayOutputWithContext(ctx context.Context) ZoneArrayOu
 // ZoneMapInput is an input type that accepts ZoneMap and ZoneMapOutput values.
 // You can construct a concrete instance of `ZoneMapInput` via:
 //
-//	ZoneMap{ "key": ZoneArgs{...} }
+//          ZoneMap{ "key": ZoneArgs{...} }
 type ZoneMapInput interface {
 	pulumi.Input
 

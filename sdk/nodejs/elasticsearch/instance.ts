@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *     vpcId: _var.vpc_id,
  *     subnetId: _var.subnet_id,
  *     password: "Test12345",
- *     licenseType: "oss",
+ *     licenseType: "basic",
  *     webNodeTypeInfos: [{
  *         nodeNum: 1,
  *         nodeType: "ES.S1.MEDIUM4",
@@ -31,6 +31,13 @@ import * as utilities from "../utilities";
  *         nodeType: "ES.S1.MEDIUM4",
  *         encrypt: false,
  *     }],
+ *     esAcl: {
+ *         blackLists: [
+ *             "9.9.9.9",
+ *             "8.8.8.8",
+ *         ],
+ *         whiteLists: ["0.0.0.0"],
+ *     },
  *     tags: {
  *         test: "test",
  *     },
@@ -78,7 +85,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly availabilityZone!: pulumi.Output<string | undefined>;
     /**
-     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
      */
     public readonly basicSecurityType!: pulumi.Output<number | undefined>;
     /**
@@ -109,6 +116,10 @@ export class Instance extends pulumi.CustomResource {
      * Elasticsearch VIP.
      */
     public /*out*/ readonly elasticsearchVip!: pulumi.Output<string>;
+    /**
+     * Kibana Access Control Configuration.
+     */
+    public readonly esAcl!: pulumi.Output<outputs.Elasticsearch.InstanceEsAcl>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
@@ -180,6 +191,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["elasticsearchDomain"] = state ? state.elasticsearchDomain : undefined;
             resourceInputs["elasticsearchPort"] = state ? state.elasticsearchPort : undefined;
             resourceInputs["elasticsearchVip"] = state ? state.elasticsearchVip : undefined;
+            resourceInputs["esAcl"] = state ? state.esAcl : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["kibanaUrl"] = state ? state.kibanaUrl : undefined;
             resourceInputs["licenseType"] = state ? state.licenseType : undefined;
@@ -211,6 +223,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["chargePeriod"] = args ? args.chargePeriod : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["deployMode"] = args ? args.deployMode : undefined;
+            resourceInputs["esAcl"] = args ? args.esAcl : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["licenseType"] = args ? args.licenseType : undefined;
             resourceInputs["multiZoneInfos"] = args ? args.multiZoneInfos : undefined;
@@ -242,7 +255,7 @@ export interface InstanceState {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
-     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
      */
     basicSecurityType?: pulumi.Input<number>;
     /**
@@ -273,6 +286,10 @@ export interface InstanceState {
      * Elasticsearch VIP.
      */
     elasticsearchVip?: pulumi.Input<string>;
+    /**
+     * Kibana Access Control Configuration.
+     */
+    esAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsAcl>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
@@ -332,7 +349,7 @@ export interface InstanceArgs {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
-     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+     * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
      */
     basicSecurityType?: pulumi.Input<number>;
     /**
@@ -347,6 +364,10 @@ export interface InstanceArgs {
      * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
      */
     deployMode?: pulumi.Input<number>;
+    /**
+     * Kibana Access Control Configuration.
+     */
+    esAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsAcl>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */

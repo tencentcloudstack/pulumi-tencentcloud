@@ -19,37 +19,34 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
-//				AutoRenewFlag:      pulumi.Int(0),
-//				DbVersion:          pulumi.String("10.4"),
-//				InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
-//				MasterDbInstanceId: pulumi.String("postgres-j4pm65id"),
-//				Memory:             pulumi.Int(4),
-//				NeedSupportIpv6:    pulumi.Int(0),
-//				ProjectId:          pulumi.Int(0),
-//				SecurityGroupsIds: pulumi.StringArray{
-//					pulumi.String("sg-fefj5n6r"),
-//				},
-//				Storage:  pulumi.Int(250),
-//				SubnetId: pulumi.String("subnet-enm92y0m"),
-//				VpcId:    pulumi.String("vpc-86v957zb"),
-//				Zone:     pulumi.String("ap-guangzhou-6"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
+// 			AutoRenewFlag:      pulumi.Int(0),
+// 			DbVersion:          pulumi.String("10.4"),
+// 			InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+// 			MasterDbInstanceId: pulumi.String("postgres-j4pm65id"),
+// 			Memory:             pulumi.Int(4),
+// 			NeedSupportIpv6:    pulumi.Int(0),
+// 			ProjectId:          pulumi.Int(0),
+// 			SecurityGroupsIds: pulumi.StringArray{
+// 				pulumi.String("sg-fefj5n6r"),
+// 			},
+// 			Storage:  pulumi.Int(250),
+// 			SubnetId: pulumi.String("subnet-enm92y0m"),
+// 			VpcId:    pulumi.String("vpc-86v957zb"),
+// 			Zone:     pulumi.String("ap-guangzhou-6"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -57,15 +54,15 @@ import (
 // postgresql readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
-//
+//  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
 
-	// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher pulumi.IntPtrOutput `pulumi:"autoVoucher"`
 	// Create time of the postgresql instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -80,6 +77,8 @@ type ReadonlyInstance struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
 	NeedSupportIpv6 pulumi.IntPtrOutput `pulumi:"needSupportIpv6"`
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// Project ID.
 	ProjectId pulumi.IntOutput `pulumi:"projectId"`
 	// ID of security group.
@@ -88,6 +87,8 @@ type ReadonlyInstance struct {
 	Storage pulumi.IntOutput `pulumi:"storage"`
 	// VPC subnet ID.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds pulumi.StringArrayOutput `pulumi:"voucherIds"`
 	// VPC ID.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 	// Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
@@ -151,8 +152,10 @@ func GetReadonlyInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ReadonlyInstance resources.
 type readonlyInstanceState struct {
-	// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher *int `pulumi:"autoVoucher"`
 	// Create time of the postgresql instance.
 	CreateTime *string `pulumi:"createTime"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -167,6 +170,8 @@ type readonlyInstanceState struct {
 	Name *string `pulumi:"name"`
 	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
 	NeedSupportIpv6 *int `pulumi:"needSupportIpv6"`
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period *int `pulumi:"period"`
 	// Project ID.
 	ProjectId *int `pulumi:"projectId"`
 	// ID of security group.
@@ -175,6 +180,8 @@ type readonlyInstanceState struct {
 	Storage *int `pulumi:"storage"`
 	// VPC subnet ID.
 	SubnetId *string `pulumi:"subnetId"`
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds []string `pulumi:"voucherIds"`
 	// VPC ID.
 	VpcId *string `pulumi:"vpcId"`
 	// Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
@@ -182,8 +189,10 @@ type readonlyInstanceState struct {
 }
 
 type ReadonlyInstanceState struct {
-	// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
 	AutoRenewFlag pulumi.IntPtrInput
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher pulumi.IntPtrInput
 	// Create time of the postgresql instance.
 	CreateTime pulumi.StringPtrInput
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -198,6 +207,8 @@ type ReadonlyInstanceState struct {
 	Name pulumi.StringPtrInput
 	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
 	NeedSupportIpv6 pulumi.IntPtrInput
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period pulumi.IntPtrInput
 	// Project ID.
 	ProjectId pulumi.IntPtrInput
 	// ID of security group.
@@ -206,6 +217,8 @@ type ReadonlyInstanceState struct {
 	Storage pulumi.IntPtrInput
 	// VPC subnet ID.
 	SubnetId pulumi.StringPtrInput
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds pulumi.StringArrayInput
 	// VPC ID.
 	VpcId pulumi.StringPtrInput
 	// Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
@@ -217,8 +230,10 @@ func (ReadonlyInstanceState) ElementType() reflect.Type {
 }
 
 type readonlyInstanceArgs struct {
-	// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher *int `pulumi:"autoVoucher"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion string `pulumi:"dbVersion"`
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
@@ -231,6 +246,8 @@ type readonlyInstanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
 	NeedSupportIpv6 *int `pulumi:"needSupportIpv6"`
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period *int `pulumi:"period"`
 	// Project ID.
 	ProjectId int `pulumi:"projectId"`
 	// ID of security group.
@@ -239,6 +256,8 @@ type readonlyInstanceArgs struct {
 	Storage int `pulumi:"storage"`
 	// VPC subnet ID.
 	SubnetId string `pulumi:"subnetId"`
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds []string `pulumi:"voucherIds"`
 	// VPC ID.
 	VpcId string `pulumi:"vpcId"`
 	// Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
@@ -247,8 +266,10 @@ type readonlyInstanceArgs struct {
 
 // The set of arguments for constructing a ReadonlyInstance resource.
 type ReadonlyInstanceArgs struct {
-	// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
 	AutoRenewFlag pulumi.IntPtrInput
+	// Whether to use voucher, `1` for enabled.
+	AutoVoucher pulumi.IntPtrInput
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion pulumi.StringInput
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
@@ -261,6 +282,8 @@ type ReadonlyInstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
 	NeedSupportIpv6 pulumi.IntPtrInput
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period pulumi.IntPtrInput
 	// Project ID.
 	ProjectId pulumi.IntInput
 	// ID of security group.
@@ -269,6 +292,8 @@ type ReadonlyInstanceArgs struct {
 	Storage pulumi.IntInput
 	// VPC subnet ID.
 	SubnetId pulumi.StringInput
+	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+	VoucherIds pulumi.StringArrayInput
 	// VPC ID.
 	VpcId pulumi.StringInput
 	// Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
@@ -301,7 +326,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -326,7 +351,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 
@@ -362,9 +387,14 @@ func (o ReadonlyInstanceOutput) ToReadonlyInstanceOutputWithContext(ctx context.
 	return o
 }
 
-// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
 func (o ReadonlyInstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
+}
+
+// Whether to use voucher, `1` for enabled.
+func (o ReadonlyInstanceOutput) AutoVoucher() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.AutoVoucher }).(pulumi.IntPtrOutput)
 }
 
 // Create time of the postgresql instance.
@@ -402,6 +432,11 @@ func (o ReadonlyInstanceOutput) NeedSupportIpv6() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.NeedSupportIpv6 }).(pulumi.IntPtrOutput)
 }
 
+// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+func (o ReadonlyInstanceOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
+}
+
 // Project ID.
 func (o ReadonlyInstanceOutput) ProjectId() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
@@ -420,6 +455,11 @@ func (o ReadonlyInstanceOutput) Storage() pulumi.IntOutput {
 // VPC subnet ID.
 func (o ReadonlyInstanceOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+func (o ReadonlyInstanceOutput) VoucherIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringArrayOutput { return v.VoucherIds }).(pulumi.StringArrayOutput)
 }
 
 // VPC ID.

@@ -18,29 +18,26 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Monitor.GetProductEvent(ctx, &monitor.GetProductEventArgs{
-//				IsAlarmConfig: pulumi.IntRef(0),
-//				ProductNames: []string{
-//					"cvm",
-//				},
-//				StartTime: pulumi.IntRef(1588700283),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Monitor.GetProductEvent(ctx, &monitor.GetProductEventArgs{
+// 			IsAlarmConfig: pulumi.IntRef(0),
+// 			ProductNames: []string{
+// 				"cvm",
+// 			},
+// 			StartTime: pulumi.IntRef(1588700283),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetProductEvent(ctx *pulumi.Context, args *GetProductEventArgs, opts ...pulumi.InvokeOption) (*GetProductEventResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

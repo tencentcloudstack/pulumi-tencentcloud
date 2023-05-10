@@ -19,37 +19,34 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_default, err := Vpc.GetInstances(ctx, nil, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Vpc.NewAcl(ctx, "foo", &Vpc.AclArgs{
-//				VpcId: pulumi.String(_default.InstanceLists[0].VpcId),
-//				Ingresses: pulumi.StringArray{
-//					pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-//					pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-//				},
-//				Egresses: pulumi.StringArray{
-//					pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-//					pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_default, err := Vpc.GetInstances(ctx, nil, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Vpc.NewAcl(ctx, "foo", &Vpc.AclArgs{
+// 			VpcId: pulumi.String(_default.InstanceLists[0].VpcId),
+// 			Ingresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+// 			},
+// 			Egresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -57,9 +54,7 @@ import (
 // Vpc ACL can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
-//
+//  $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
 // ```
 type Acl struct {
 	pulumi.CustomResourceState
@@ -72,6 +67,8 @@ type Acl struct {
 	Ingresses pulumi.StringArrayOutput `pulumi:"ingresses"`
 	// Name of the network ACL.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Tags of the vpc acl.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 	// ID of the VPC instance.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
@@ -117,6 +114,8 @@ type aclState struct {
 	Ingresses []string `pulumi:"ingresses"`
 	// Name of the network ACL.
 	Name *string `pulumi:"name"`
+	// Tags of the vpc acl.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// ID of the VPC instance.
 	VpcId *string `pulumi:"vpcId"`
 }
@@ -130,6 +129,8 @@ type AclState struct {
 	Ingresses pulumi.StringArrayInput
 	// Name of the network ACL.
 	Name pulumi.StringPtrInput
+	// Tags of the vpc acl.
+	Tags pulumi.MapInput
 	// ID of the VPC instance.
 	VpcId pulumi.StringPtrInput
 }
@@ -145,6 +146,8 @@ type aclArgs struct {
 	Ingresses []string `pulumi:"ingresses"`
 	// Name of the network ACL.
 	Name *string `pulumi:"name"`
+	// Tags of the vpc acl.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// ID of the VPC instance.
 	VpcId string `pulumi:"vpcId"`
 }
@@ -157,6 +160,8 @@ type AclArgs struct {
 	Ingresses pulumi.StringArrayInput
 	// Name of the network ACL.
 	Name pulumi.StringPtrInput
+	// Tags of the vpc acl.
+	Tags pulumi.MapInput
 	// ID of the VPC instance.
 	VpcId pulumi.StringInput
 }
@@ -187,7 +192,7 @@ func (i *Acl) ToAclOutputWithContext(ctx context.Context) AclOutput {
 // AclArrayInput is an input type that accepts AclArray and AclArrayOutput values.
 // You can construct a concrete instance of `AclArrayInput` via:
 //
-//	AclArray{ AclArgs{...} }
+//          AclArray{ AclArgs{...} }
 type AclArrayInput interface {
 	pulumi.Input
 
@@ -212,7 +217,7 @@ func (i AclArray) ToAclArrayOutputWithContext(ctx context.Context) AclArrayOutpu
 // AclMapInput is an input type that accepts AclMap and AclMapOutput values.
 // You can construct a concrete instance of `AclMapInput` via:
 //
-//	AclMap{ "key": AclArgs{...} }
+//          AclMap{ "key": AclArgs{...} }
 type AclMapInput interface {
 	pulumi.Input
 
@@ -266,6 +271,11 @@ func (o AclOutput) Ingresses() pulumi.StringArrayOutput {
 // Name of the network ACL.
 func (o AclOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Acl) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Tags of the vpc acl.
+func (o AclOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Acl) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 // ID of the VPC instance.

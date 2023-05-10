@@ -55,6 +55,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         [Input("spdySwitch")]
         public Input<string>? SpdySwitch { get; set; }
 
+        [Input("tlsVersions")]
+        private InputList<string>? _tlsVersions;
+
+        /// <summary>
+        /// Tls version settings, only support some Advanced domain names, support settings TLSv1, TLSV1.1, TLSV1.2, TLSv1.3, when modifying must open consecutive versions.
+        /// </summary>
+        public InputList<string> TlsVersions
+        {
+            get => _tlsVersions ?? (_tlsVersions = new InputList<string>());
+            set => _tlsVersions = value;
+        }
+
         /// <summary>
         /// Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
         /// </summary>

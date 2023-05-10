@@ -2,6 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
@@ -14,8 +15,14 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const foo = new tencentcloud.Tcr.Namespace("foo", {
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
  *     instanceId: "",
+ *     isAutoScan: true,
+ *     isPreventVul: true,
  *     isPublic: true,
+ *     severity: "medium",
  * });
  * ```
  *
@@ -56,9 +63,21 @@ export class Namespace extends pulumi.CustomResource {
     }
 
     /**
+     * Vulnerability Whitelist.
+     */
+    public readonly cveWhitelistItems!: pulumi.Output<outputs.Tcr.NamespaceCveWhitelistItem[] | undefined>;
+    /**
      * ID of the TCR instance.
      */
     public readonly instanceId!: pulumi.Output<string>;
+    /**
+     * Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+     */
+    public readonly isAutoScan!: pulumi.Output<boolean | undefined>;
+    /**
+     * Blocking switch, `True` is open, `False` is closed. Default is `false`.
+     */
+    public readonly isPreventVul!: pulumi.Output<boolean | undefined>;
     /**
      * Indicate that the namespace is public or not. Default is `false`.
      */
@@ -67,6 +86,10 @@ export class Namespace extends pulumi.CustomResource {
      * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Block vulnerability level, currently only supports `low`, `medium`, `high`.
+     */
+    public readonly severity!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Namespace resource with the given unique name, arguments, and options.
@@ -81,17 +104,25 @@ export class Namespace extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as NamespaceState | undefined;
+            resourceInputs["cveWhitelistItems"] = state ? state.cveWhitelistItems : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
+            resourceInputs["isAutoScan"] = state ? state.isAutoScan : undefined;
+            resourceInputs["isPreventVul"] = state ? state.isPreventVul : undefined;
             resourceInputs["isPublic"] = state ? state.isPublic : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["severity"] = state ? state.severity : undefined;
         } else {
             const args = argsOrState as NamespaceArgs | undefined;
             if ((!args || args.instanceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceId'");
             }
+            resourceInputs["cveWhitelistItems"] = args ? args.cveWhitelistItems : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
+            resourceInputs["isAutoScan"] = args ? args.isAutoScan : undefined;
+            resourceInputs["isPreventVul"] = args ? args.isPreventVul : undefined;
             resourceInputs["isPublic"] = args ? args.isPublic : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["severity"] = args ? args.severity : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Namespace.__pulumiType, name, resourceInputs, opts);
@@ -103,9 +134,21 @@ export class Namespace extends pulumi.CustomResource {
  */
 export interface NamespaceState {
     /**
+     * Vulnerability Whitelist.
+     */
+    cveWhitelistItems?: pulumi.Input<pulumi.Input<inputs.Tcr.NamespaceCveWhitelistItem>[]>;
+    /**
      * ID of the TCR instance.
      */
     instanceId?: pulumi.Input<string>;
+    /**
+     * Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+     */
+    isAutoScan?: pulumi.Input<boolean>;
+    /**
+     * Blocking switch, `True` is open, `False` is closed. Default is `false`.
+     */
+    isPreventVul?: pulumi.Input<boolean>;
     /**
      * Indicate that the namespace is public or not. Default is `false`.
      */
@@ -114,6 +157,10 @@ export interface NamespaceState {
      * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Block vulnerability level, currently only supports `low`, `medium`, `high`.
+     */
+    severity?: pulumi.Input<string>;
 }
 
 /**
@@ -121,9 +168,21 @@ export interface NamespaceState {
  */
 export interface NamespaceArgs {
     /**
+     * Vulnerability Whitelist.
+     */
+    cveWhitelistItems?: pulumi.Input<pulumi.Input<inputs.Tcr.NamespaceCveWhitelistItem>[]>;
+    /**
      * ID of the TCR instance.
      */
     instanceId: pulumi.Input<string>;
+    /**
+     * Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+     */
+    isAutoScan?: pulumi.Input<boolean>;
+    /**
+     * Blocking switch, `True` is open, `False` is closed. Default is `false`.
+     */
+    isPreventVul?: pulumi.Input<boolean>;
     /**
      * Indicate that the namespace is public or not. Default is `false`.
      */
@@ -132,4 +191,8 @@ export interface NamespaceArgs {
      * Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Block vulnerability level, currently only supports `low`, `medium`, `high`.
+     */
+    severity?: pulumi.Input<string>;
 }

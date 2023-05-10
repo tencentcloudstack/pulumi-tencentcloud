@@ -6,6 +6,7 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./function";
+export * from "./functionAlias";
 export * from "./getFunctions";
 export * from "./getLogs";
 export * from "./getNamespaces";
@@ -14,6 +15,7 @@ export * from "./namespace";
 
 // Import resources to register:
 import { Function } from "./function";
+import { FunctionAlias } from "./functionAlias";
 import { Layer } from "./layer";
 import { Namespace } from "./namespace";
 
@@ -23,6 +25,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Scf/function:Function":
                 return new Function(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/functionAlias:FunctionAlias":
+                return new FunctionAlias(name, <any>undefined, { urn })
             case "tencentcloud:Scf/layer:Layer":
                 return new Layer(name, <any>undefined, { urn })
             case "tencentcloud:Scf/namespace:Namespace":
@@ -33,5 +37,6 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/function", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/functionAlias", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/layer", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/namespace", _module)

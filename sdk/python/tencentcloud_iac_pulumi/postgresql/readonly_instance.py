@@ -23,9 +23,12 @@ class ReadonlyInstanceArgs:
                  vpc_id: pulumi.Input[str],
                  zone: pulumi.Input[str],
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 need_support_ipv6: Optional[pulumi.Input[int]] = None):
+                 need_support_ipv6: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a ReadonlyInstance resource.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -37,10 +40,13 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
         :param pulumi.Input[str] vpc_id: VPC ID.
         :param pulumi.Input[str] zone: Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
-        :param pulumi.Input[int] auto_renew_flag: Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         """
         pulumi.set(__self__, "db_version", db_version)
         pulumi.set(__self__, "master_db_instance_id", master_db_instance_id)
@@ -53,12 +59,18 @@ class ReadonlyInstanceArgs:
         pulumi.set(__self__, "zone", zone)
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if auto_voucher is not None:
+            pulumi.set(__self__, "auto_voucher", auto_voucher)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if need_support_ipv6 is not None:
             pulumi.set(__self__, "need_support_ipv6", need_support_ipv6)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
+        if voucher_ids is not None:
+            pulumi.set(__self__, "voucher_ids", voucher_ids)
 
     @property
     @pulumi.getter(name="dbVersion")
@@ -172,13 +184,25 @@ class ReadonlyInstanceArgs:
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         """
         return pulumi.get(self, "auto_renew_flag")
 
     @auto_renew_flag.setter
     def auto_renew_flag(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "auto_renew_flag", value)
+
+    @property
+    @pulumi.getter(name="autoVoucher")
+    def auto_voucher(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to use voucher, `1` for enabled.
+        """
+        return pulumi.get(self, "auto_voucher")
+
+    @auto_voucher.setter
+    def auto_voucher(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_voucher", value)
 
     @property
     @pulumi.getter(name="instanceChargeType")
@@ -216,11 +240,36 @@ class ReadonlyInstanceArgs:
     def need_support_ipv6(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "need_support_ipv6", value)
 
+    @property
+    @pulumi.getter
+    def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period", value)
+
+    @property
+    @pulumi.getter(name="voucherIds")
+    def voucher_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        """
+        return pulumi.get(self, "voucher_ids")
+
+    @voucher_ids.setter
+    def voucher_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "voucher_ids", value)
+
 
 @pulumi.input_type
 class _ReadonlyInstanceState:
     def __init__(__self__, *,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
@@ -228,15 +277,18 @@ class _ReadonlyInstanceState:
                  memory: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ReadonlyInstance resources.
-        :param pulumi.Input[int] auto_renew_flag: Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
@@ -244,15 +296,19 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Project ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group.
         :param pulumi.Input[int] storage: Instance storage capacity in GB.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         :param pulumi.Input[str] vpc_id: VPC ID.
         :param pulumi.Input[str] zone: Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
         """
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if auto_voucher is not None:
+            pulumi.set(__self__, "auto_voucher", auto_voucher)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if db_version is not None:
@@ -267,6 +323,8 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "name", name)
         if need_support_ipv6 is not None:
             pulumi.set(__self__, "need_support_ipv6", need_support_ipv6)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if security_groups_ids is not None:
@@ -275,6 +333,8 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "storage", storage)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
+        if voucher_ids is not None:
+            pulumi.set(__self__, "voucher_ids", voucher_ids)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zone is not None:
@@ -284,13 +344,25 @@ class _ReadonlyInstanceState:
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         """
         return pulumi.get(self, "auto_renew_flag")
 
     @auto_renew_flag.setter
     def auto_renew_flag(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "auto_renew_flag", value)
+
+    @property
+    @pulumi.getter(name="autoVoucher")
+    def auto_voucher(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to use voucher, `1` for enabled.
+        """
+        return pulumi.get(self, "auto_voucher")
+
+    @auto_voucher.setter
+    def auto_voucher(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_voucher", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -377,6 +449,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "need_support_ipv6", value)
 
     @property
+    @pulumi.getter
+    def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period", value)
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> Optional[pulumi.Input[int]]:
         """
@@ -425,6 +509,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "subnet_id", value)
 
     @property
+    @pulumi.getter(name="voucherIds")
+    def voucher_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        """
+        return pulumi.get(self, "voucher_ids")
+
+    @voucher_ids.setter
+    def voucher_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "voucher_ids", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -455,16 +551,19 @@ class ReadonlyInstance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  master_db_instance_id: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -502,17 +601,20 @@ class ReadonlyInstance(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew_flag: Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Project ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group.
         :param pulumi.Input[int] storage: Instance storage capacity in GB.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         :param pulumi.Input[str] vpc_id: VPC ID.
         :param pulumi.Input[str] zone: Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
         """
@@ -570,16 +672,19 @@ class ReadonlyInstance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 auto_voucher: Optional[pulumi.Input[int]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  master_db_instance_id: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -597,6 +702,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             __props__ = ReadonlyInstanceArgs.__new__(ReadonlyInstanceArgs)
 
             __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+            __props__.__dict__["auto_voucher"] = auto_voucher
             if db_version is None and not opts.urn:
                 raise TypeError("Missing required property 'db_version'")
             __props__.__dict__["db_version"] = db_version
@@ -609,6 +715,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             __props__.__dict__["memory"] = memory
             __props__.__dict__["name"] = name
             __props__.__dict__["need_support_ipv6"] = need_support_ipv6
+            __props__.__dict__["period"] = period
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
@@ -621,6 +728,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             if subnet_id is None and not opts.urn:
                 raise TypeError("Missing required property 'subnet_id'")
             __props__.__dict__["subnet_id"] = subnet_id
+            __props__.__dict__["voucher_ids"] = voucher_ids
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
@@ -639,6 +747,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             auto_renew_flag: Optional[pulumi.Input[int]] = None,
+            auto_voucher: Optional[pulumi.Input[int]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             db_version: Optional[pulumi.Input[str]] = None,
             instance_charge_type: Optional[pulumi.Input[str]] = None,
@@ -646,10 +755,12 @@ class ReadonlyInstance(pulumi.CustomResource):
             memory: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
             need_support_ipv6: Optional[pulumi.Input[int]] = None,
+            period: Optional[pulumi.Input[int]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
             security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             storage: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
+            voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
             zone: Optional[pulumi.Input[str]] = None) -> 'ReadonlyInstance':
         """
@@ -659,7 +770,8 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew_flag: Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+        :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
@@ -667,10 +779,12 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Project ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group.
         :param pulumi.Input[int] storage: Instance storage capacity in GB.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         :param pulumi.Input[str] vpc_id: VPC ID.
         :param pulumi.Input[str] zone: Availability zone ID, which can be obtained through the Zone field in the returned value of the DescribeZones API.
         """
@@ -679,6 +793,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__ = _ReadonlyInstanceState.__new__(_ReadonlyInstanceState)
 
         __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+        __props__.__dict__["auto_voucher"] = auto_voucher
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["db_version"] = db_version
         __props__.__dict__["instance_charge_type"] = instance_charge_type
@@ -686,10 +801,12 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["memory"] = memory
         __props__.__dict__["name"] = name
         __props__.__dict__["need_support_ipv6"] = need_support_ipv6
+        __props__.__dict__["period"] = period
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["security_groups_ids"] = security_groups_ids
         __props__.__dict__["storage"] = storage
         __props__.__dict__["subnet_id"] = subnet_id
+        __props__.__dict__["voucher_ids"] = voucher_ids
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["zone"] = zone
         return ReadonlyInstance(resource_name, opts=opts, __props__=__props__)
@@ -698,9 +815,17 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> pulumi.Output[Optional[int]]:
         """
-        Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         """
         return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="autoVoucher")
+    def auto_voucher(self) -> pulumi.Output[Optional[int]]:
+        """
+        Whether to use voucher, `1` for enabled.
+        """
+        return pulumi.get(self, "auto_voucher")
 
     @property
     @pulumi.getter(name="createTime")
@@ -759,6 +884,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         return pulumi.get(self, "need_support_ipv6")
 
     @property
+    @pulumi.getter
+    def period(self) -> pulumi.Output[Optional[int]]:
+        """
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        """
+        return pulumi.get(self, "period")
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Output[int]:
         """
@@ -789,6 +922,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         VPC subnet ID.
         """
         return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="voucherIds")
+    def voucher_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        """
+        return pulumi.get(self, "voucher_ids")
 
     @property
     @pulumi.getter(name="vpcId")

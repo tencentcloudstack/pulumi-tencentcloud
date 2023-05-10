@@ -22,7 +22,7 @@ class InstanceArgs:
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
         :param pulumi.Input[bool] is_multicast: Indicates whether VPC multicast is enabled. The default value is 'true'.
         :param pulumi.Input[str] name: The name of the VPC.
@@ -56,7 +56,7 @@ class InstanceArgs:
     @pulumi.getter(name="assistantCidrs")
     def assistant_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Assistant CIDR.
+        List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         """
         return pulumi.get(self, "assistant_cidrs")
 
@@ -121,17 +121,19 @@ class _InstanceState:
                  create_time: Optional[pulumi.Input[str]] = None,
                  default_route_table_id: Optional[pulumi.Input[str]] = None,
                  dns_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 docker_assistant_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  is_default: Optional[pulumi.Input[bool]] = None,
                  is_multicast: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         :param pulumi.Input[str] create_time: Creation time of VPC.
         :param pulumi.Input[str] default_route_table_id: Default route table id, which created automatically after VPC create.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] docker_assistant_cidrs: List of Docker Assistant CIDR.
         :param pulumi.Input[bool] is_default: Indicates whether it is the default VPC for this region.
         :param pulumi.Input[bool] is_multicast: Indicates whether VPC multicast is enabled. The default value is 'true'.
         :param pulumi.Input[str] name: The name of the VPC.
@@ -147,6 +149,8 @@ class _InstanceState:
             pulumi.set(__self__, "default_route_table_id", default_route_table_id)
         if dns_servers is not None:
             pulumi.set(__self__, "dns_servers", dns_servers)
+        if docker_assistant_cidrs is not None:
+            pulumi.set(__self__, "docker_assistant_cidrs", docker_assistant_cidrs)
         if is_default is not None:
             pulumi.set(__self__, "is_default", is_default)
         if is_multicast is not None:
@@ -160,7 +164,7 @@ class _InstanceState:
     @pulumi.getter(name="assistantCidrs")
     def assistant_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Assistant CIDR.
+        List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         """
         return pulumi.get(self, "assistant_cidrs")
 
@@ -215,6 +219,18 @@ class _InstanceState:
     @dns_servers.setter
     def dns_servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "dns_servers", value)
+
+    @property
+    @pulumi.getter(name="dockerAssistantCidrs")
+    def docker_assistant_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of Docker Assistant CIDR.
+        """
+        return pulumi.get(self, "docker_assistant_cidrs")
+
+    @docker_assistant_cidrs.setter
+    def docker_assistant_cidrs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "docker_assistant_cidrs", value)
 
     @property
     @pulumi.getter(name="isDefault")
@@ -290,7 +306,7 @@ class Instance(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
         :param pulumi.Input[bool] is_multicast: Indicates whether VPC multicast is enabled. The default value is 'true'.
@@ -359,6 +375,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["tags"] = tags
             __props__.__dict__["create_time"] = None
             __props__.__dict__["default_route_table_id"] = None
+            __props__.__dict__["docker_assistant_cidrs"] = None
             __props__.__dict__["is_default"] = None
         super(Instance, __self__).__init__(
             'tencentcloud:Vpc/instance:Instance',
@@ -375,6 +392,7 @@ class Instance(pulumi.CustomResource):
             create_time: Optional[pulumi.Input[str]] = None,
             default_route_table_id: Optional[pulumi.Input[str]] = None,
             dns_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            docker_assistant_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             is_default: Optional[pulumi.Input[bool]] = None,
             is_multicast: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
@@ -386,11 +404,12 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] assistant_cidrs: List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         :param pulumi.Input[str] cidr_block: A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
         :param pulumi.Input[str] create_time: Creation time of VPC.
         :param pulumi.Input[str] default_route_table_id: Default route table id, which created automatically after VPC create.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] docker_assistant_cidrs: List of Docker Assistant CIDR.
         :param pulumi.Input[bool] is_default: Indicates whether it is the default VPC for this region.
         :param pulumi.Input[bool] is_multicast: Indicates whether VPC multicast is enabled. The default value is 'true'.
         :param pulumi.Input[str] name: The name of the VPC.
@@ -405,6 +424,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["default_route_table_id"] = default_route_table_id
         __props__.__dict__["dns_servers"] = dns_servers
+        __props__.__dict__["docker_assistant_cidrs"] = docker_assistant_cidrs
         __props__.__dict__["is_default"] = is_default
         __props__.__dict__["is_multicast"] = is_multicast
         __props__.__dict__["name"] = name
@@ -415,7 +435,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="assistantCidrs")
     def assistant_cidrs(self) -> pulumi.Output[Sequence[str]]:
         """
-        List of Assistant CIDR.
+        List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
         """
         return pulumi.get(self, "assistant_cidrs")
 
@@ -450,6 +470,14 @@ class Instance(pulumi.CustomResource):
         The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
         """
         return pulumi.get(self, "dns_servers")
+
+    @property
+    @pulumi.getter(name="dockerAssistantCidrs")
+    def docker_assistant_cidrs(self) -> pulumi.Output[Sequence[str]]:
+        """
+        List of Docker Assistant CIDR.
+        """
+        return pulumi.get(self, "docker_assistant_cidrs")
 
     @property
     @pulumi.getter(name="isDefault")

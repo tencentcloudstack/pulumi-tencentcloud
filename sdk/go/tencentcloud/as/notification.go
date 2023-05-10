@@ -19,33 +19,30 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := As.NewNotification(ctx, "asNotification", &As.NotificationArgs{
-//				NotificationTypes: pulumi.StringArray{
-//					pulumi.String("SCALE_OUT_FAILED"),
-//					pulumi.String("SCALE_IN_SUCCESSFUL"),
-//					pulumi.String("SCALE_IN_FAILED"),
-//					pulumi.String("REPLACE_UNHEALTHY_INSTANCE_FAILED"),
-//				},
-//				NotificationUserGroupIds: pulumi.StringArray{
-//					pulumi.String("76955"),
-//				},
-//				ScalingGroupId: pulumi.String("sg-12af45"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := As.NewNotification(ctx, "asNotification", &As.NotificationArgs{
+// 			NotificationTypes: pulumi.StringArray{
+// 				pulumi.String("SCALE_OUT_FAILED"),
+// 				pulumi.String("SCALE_IN_SUCCESSFUL"),
+// 				pulumi.String("SCALE_IN_FAILED"),
+// 				pulumi.String("REPLACE_UNHEALTHY_INSTANCE_FAILED"),
+// 			},
+// 			NotificationUserGroupIds: pulumi.StringArray{
+// 				pulumi.String("76955"),
+// 			},
+// 			ScalingGroupId: pulumi.String("sg-12af45"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type Notification struct {
 	pulumi.CustomResourceState
@@ -163,7 +160,7 @@ func (i *Notification) ToNotificationOutputWithContext(ctx context.Context) Noti
 // NotificationArrayInput is an input type that accepts NotificationArray and NotificationArrayOutput values.
 // You can construct a concrete instance of `NotificationArrayInput` via:
 //
-//	NotificationArray{ NotificationArgs{...} }
+//          NotificationArray{ NotificationArgs{...} }
 type NotificationArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +185,7 @@ func (i NotificationArray) ToNotificationArrayOutputWithContext(ctx context.Cont
 // NotificationMapInput is an input type that accepts NotificationMap and NotificationMapOutput values.
 // You can construct a concrete instance of `NotificationMapInput` via:
 //
-//	NotificationMap{ "key": NotificationArgs{...} }
+//          NotificationMap{ "key": NotificationArgs{...} }
 type NotificationMapInput interface {
 	pulumi.Input
 

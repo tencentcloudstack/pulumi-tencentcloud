@@ -10,1142 +10,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type AsScalingGroupAutoScalingConfig struct {
-	// Name of a launch configuration.
-	ConfigurationName string `pulumi:"configurationName"`
-	// Configurations of data disk.
-	DataDisks []AsScalingGroupAutoScalingConfigDataDisk `pulumi:"dataDisks"`
-	// To specify whether to enable cloud monitor service. Default is TRUE.
-	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
-	// To specify whether to enable cloud security service. Default is TRUE.
-	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
-	// A list of tags used to associate different resources.
-	InstanceTags map[string]interface{} `pulumi:"instanceTags"`
-	// Specified types of CVM instance.
-	InstanceType string `pulumi:"instanceType"`
-	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-	InternetChargeType *string `pulumi:"internetChargeType"`
-	// Max bandwidth of Internet access in Mbps. Default is `0`.
-	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
-	// ID list of keys.
-	KeyIds []string `pulumi:"keyIds"`
-	// Password to access.
-	Password *string `pulumi:"password"`
-	// Specifys to which project the configuration belongs.
-	ProjectId *int `pulumi:"projectId"`
-	// Specify whether to assign an Internet IP address.
-	PublicIpAssigned *bool `pulumi:"publicIpAssigned"`
-	// Security groups to which a CVM instance belongs.
-	SecurityGroupIds []string `pulumi:"securityGroupIds"`
-	// Volume of system disk in GB. Default is `50`.
-	SystemDiskSize *int `pulumi:"systemDiskSize"`
-	// Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
-	SystemDiskType *string `pulumi:"systemDiskType"`
-}
-
-// AsScalingGroupAutoScalingConfigInput is an input type that accepts AsScalingGroupAutoScalingConfigArgs and AsScalingGroupAutoScalingConfigOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingConfigInput` via:
-//
-//	AsScalingGroupAutoScalingConfigArgs{...}
-type AsScalingGroupAutoScalingConfigInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingConfigOutput() AsScalingGroupAutoScalingConfigOutput
-	ToAsScalingGroupAutoScalingConfigOutputWithContext(context.Context) AsScalingGroupAutoScalingConfigOutput
-}
-
-type AsScalingGroupAutoScalingConfigArgs struct {
-	// Name of a launch configuration.
-	ConfigurationName pulumi.StringInput `pulumi:"configurationName"`
-	// Configurations of data disk.
-	DataDisks AsScalingGroupAutoScalingConfigDataDiskArrayInput `pulumi:"dataDisks"`
-	// To specify whether to enable cloud monitor service. Default is TRUE.
-	EnhancedMonitorService pulumi.BoolPtrInput `pulumi:"enhancedMonitorService"`
-	// To specify whether to enable cloud security service. Default is TRUE.
-	EnhancedSecurityService pulumi.BoolPtrInput `pulumi:"enhancedSecurityService"`
-	// A list of tags used to associate different resources.
-	InstanceTags pulumi.MapInput `pulumi:"instanceTags"`
-	// Specified types of CVM instance.
-	InstanceType pulumi.StringInput `pulumi:"instanceType"`
-	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-	InternetChargeType pulumi.StringPtrInput `pulumi:"internetChargeType"`
-	// Max bandwidth of Internet access in Mbps. Default is `0`.
-	InternetMaxBandwidthOut pulumi.IntPtrInput `pulumi:"internetMaxBandwidthOut"`
-	// ID list of keys.
-	KeyIds pulumi.StringArrayInput `pulumi:"keyIds"`
-	// Password to access.
-	Password pulumi.StringPtrInput `pulumi:"password"`
-	// Specifys to which project the configuration belongs.
-	ProjectId pulumi.IntPtrInput `pulumi:"projectId"`
-	// Specify whether to assign an Internet IP address.
-	PublicIpAssigned pulumi.BoolPtrInput `pulumi:"publicIpAssigned"`
-	// Security groups to which a CVM instance belongs.
-	SecurityGroupIds pulumi.StringArrayInput `pulumi:"securityGroupIds"`
-	// Volume of system disk in GB. Default is `50`.
-	SystemDiskSize pulumi.IntPtrInput `pulumi:"systemDiskSize"`
-	// Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
-	SystemDiskType pulumi.StringPtrInput `pulumi:"systemDiskType"`
-}
-
-func (AsScalingGroupAutoScalingConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingConfig)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingConfigArgs) ToAsScalingGroupAutoScalingConfigOutput() AsScalingGroupAutoScalingConfigOutput {
-	return i.ToAsScalingGroupAutoScalingConfigOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingConfigArgs) ToAsScalingGroupAutoScalingConfigOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingConfigOutput)
-}
-
-func (i AsScalingGroupAutoScalingConfigArgs) ToAsScalingGroupAutoScalingConfigPtrOutput() AsScalingGroupAutoScalingConfigPtrOutput {
-	return i.ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingConfigArgs) ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingConfigOutput).ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(ctx)
-}
-
-// AsScalingGroupAutoScalingConfigPtrInput is an input type that accepts AsScalingGroupAutoScalingConfigArgs, AsScalingGroupAutoScalingConfigPtr and AsScalingGroupAutoScalingConfigPtrOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingConfigPtrInput` via:
-//
-//	        AsScalingGroupAutoScalingConfigArgs{...}
-//
-//	or:
-//
-//	        nil
-type AsScalingGroupAutoScalingConfigPtrInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingConfigPtrOutput() AsScalingGroupAutoScalingConfigPtrOutput
-	ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(context.Context) AsScalingGroupAutoScalingConfigPtrOutput
-}
-
-type asScalingGroupAutoScalingConfigPtrType AsScalingGroupAutoScalingConfigArgs
-
-func AsScalingGroupAutoScalingConfigPtr(v *AsScalingGroupAutoScalingConfigArgs) AsScalingGroupAutoScalingConfigPtrInput {
-	return (*asScalingGroupAutoScalingConfigPtrType)(v)
-}
-
-func (*asScalingGroupAutoScalingConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**AsScalingGroupAutoScalingConfig)(nil)).Elem()
-}
-
-func (i *asScalingGroupAutoScalingConfigPtrType) ToAsScalingGroupAutoScalingConfigPtrOutput() AsScalingGroupAutoScalingConfigPtrOutput {
-	return i.ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *asScalingGroupAutoScalingConfigPtrType) ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingConfigPtrOutput)
-}
-
-type AsScalingGroupAutoScalingConfigOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingConfig)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingConfigOutput) ToAsScalingGroupAutoScalingConfigOutput() AsScalingGroupAutoScalingConfigOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingConfigOutput) ToAsScalingGroupAutoScalingConfigOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingConfigOutput) ToAsScalingGroupAutoScalingConfigPtrOutput() AsScalingGroupAutoScalingConfigPtrOutput {
-	return o.ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(context.Background())
-}
-
-func (o AsScalingGroupAutoScalingConfigOutput) ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v AsScalingGroupAutoScalingConfig) *AsScalingGroupAutoScalingConfig {
-		return &v
-	}).(AsScalingGroupAutoScalingConfigPtrOutput)
-}
-
-// Name of a launch configuration.
-func (o AsScalingGroupAutoScalingConfigOutput) ConfigurationName() pulumi.StringOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) string { return v.ConfigurationName }).(pulumi.StringOutput)
-}
-
-// Configurations of data disk.
-func (o AsScalingGroupAutoScalingConfigOutput) DataDisks() AsScalingGroupAutoScalingConfigDataDiskArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) []AsScalingGroupAutoScalingConfigDataDisk { return v.DataDisks }).(AsScalingGroupAutoScalingConfigDataDiskArrayOutput)
-}
-
-// To specify whether to enable cloud monitor service. Default is TRUE.
-func (o AsScalingGroupAutoScalingConfigOutput) EnhancedMonitorService() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *bool { return v.EnhancedMonitorService }).(pulumi.BoolPtrOutput)
-}
-
-// To specify whether to enable cloud security service. Default is TRUE.
-func (o AsScalingGroupAutoScalingConfigOutput) EnhancedSecurityService() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *bool { return v.EnhancedSecurityService }).(pulumi.BoolPtrOutput)
-}
-
-// A list of tags used to associate different resources.
-func (o AsScalingGroupAutoScalingConfigOutput) InstanceTags() pulumi.MapOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) map[string]interface{} { return v.InstanceTags }).(pulumi.MapOutput)
-}
-
-// Specified types of CVM instance.
-func (o AsScalingGroupAutoScalingConfigOutput) InstanceType() pulumi.StringOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) string { return v.InstanceType }).(pulumi.StringOutput)
-}
-
-// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-func (o AsScalingGroupAutoScalingConfigOutput) InternetChargeType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *string { return v.InternetChargeType }).(pulumi.StringPtrOutput)
-}
-
-// Max bandwidth of Internet access in Mbps. Default is `0`.
-func (o AsScalingGroupAutoScalingConfigOutput) InternetMaxBandwidthOut() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *int { return v.InternetMaxBandwidthOut }).(pulumi.IntPtrOutput)
-}
-
-// ID list of keys.
-func (o AsScalingGroupAutoScalingConfigOutput) KeyIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) []string { return v.KeyIds }).(pulumi.StringArrayOutput)
-}
-
-// Password to access.
-func (o AsScalingGroupAutoScalingConfigOutput) Password() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *string { return v.Password }).(pulumi.StringPtrOutput)
-}
-
-// Specifys to which project the configuration belongs.
-func (o AsScalingGroupAutoScalingConfigOutput) ProjectId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *int { return v.ProjectId }).(pulumi.IntPtrOutput)
-}
-
-// Specify whether to assign an Internet IP address.
-func (o AsScalingGroupAutoScalingConfigOutput) PublicIpAssigned() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *bool { return v.PublicIpAssigned }).(pulumi.BoolPtrOutput)
-}
-
-// Security groups to which a CVM instance belongs.
-func (o AsScalingGroupAutoScalingConfigOutput) SecurityGroupIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) []string { return v.SecurityGroupIds }).(pulumi.StringArrayOutput)
-}
-
-// Volume of system disk in GB. Default is `50`.
-func (o AsScalingGroupAutoScalingConfigOutput) SystemDiskSize() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *int { return v.SystemDiskSize }).(pulumi.IntPtrOutput)
-}
-
-// Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
-func (o AsScalingGroupAutoScalingConfigOutput) SystemDiskType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfig) *string { return v.SystemDiskType }).(pulumi.StringPtrOutput)
-}
-
-type AsScalingGroupAutoScalingConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**AsScalingGroupAutoScalingConfig)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingConfigPtrOutput) ToAsScalingGroupAutoScalingConfigPtrOutput() AsScalingGroupAutoScalingConfigPtrOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingConfigPtrOutput) ToAsScalingGroupAutoScalingConfigPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigPtrOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingConfigPtrOutput) Elem() AsScalingGroupAutoScalingConfigOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) AsScalingGroupAutoScalingConfig {
-		if v != nil {
-			return *v
-		}
-		var ret AsScalingGroupAutoScalingConfig
-		return ret
-	}).(AsScalingGroupAutoScalingConfigOutput)
-}
-
-// Name of a launch configuration.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) ConfigurationName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ConfigurationName
-	}).(pulumi.StringPtrOutput)
-}
-
-// Configurations of data disk.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) DataDisks() AsScalingGroupAutoScalingConfigDataDiskArrayOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) []AsScalingGroupAutoScalingConfigDataDisk {
-		if v == nil {
-			return nil
-		}
-		return v.DataDisks
-	}).(AsScalingGroupAutoScalingConfigDataDiskArrayOutput)
-}
-
-// To specify whether to enable cloud monitor service. Default is TRUE.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) EnhancedMonitorService() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.EnhancedMonitorService
-	}).(pulumi.BoolPtrOutput)
-}
-
-// To specify whether to enable cloud security service. Default is TRUE.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) EnhancedSecurityService() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.EnhancedSecurityService
-	}).(pulumi.BoolPtrOutput)
-}
-
-// A list of tags used to associate different resources.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) InstanceTags() pulumi.MapOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) map[string]interface{} {
-		if v == nil {
-			return nil
-		}
-		return v.InstanceTags
-	}).(pulumi.MapOutput)
-}
-
-// Specified types of CVM instance.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) InstanceType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.InstanceType
-	}).(pulumi.StringPtrOutput)
-}
-
-// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) InternetChargeType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.InternetChargeType
-	}).(pulumi.StringPtrOutput)
-}
-
-// Max bandwidth of Internet access in Mbps. Default is `0`.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) InternetMaxBandwidthOut() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *int {
-		if v == nil {
-			return nil
-		}
-		return v.InternetMaxBandwidthOut
-	}).(pulumi.IntPtrOutput)
-}
-
-// ID list of keys.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) KeyIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) []string {
-		if v == nil {
-			return nil
-		}
-		return v.KeyIds
-	}).(pulumi.StringArrayOutput)
-}
-
-// Password to access.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) Password() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Password
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifys to which project the configuration belongs.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) ProjectId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ProjectId
-	}).(pulumi.IntPtrOutput)
-}
-
-// Specify whether to assign an Internet IP address.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) PublicIpAssigned() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.PublicIpAssigned
-	}).(pulumi.BoolPtrOutput)
-}
-
-// Security groups to which a CVM instance belongs.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) SecurityGroupIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) []string {
-		if v == nil {
-			return nil
-		}
-		return v.SecurityGroupIds
-	}).(pulumi.StringArrayOutput)
-}
-
-// Volume of system disk in GB. Default is `50`.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) SystemDiskSize() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *int {
-		if v == nil {
-			return nil
-		}
-		return v.SystemDiskSize
-	}).(pulumi.IntPtrOutput)
-}
-
-// Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
-func (o AsScalingGroupAutoScalingConfigPtrOutput) SystemDiskType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.SystemDiskType
-	}).(pulumi.StringPtrOutput)
-}
-
-type AsScalingGroupAutoScalingConfigDataDisk struct {
-	// Volume of disk in GB. Default is `0`.
-	DiskSize *int `pulumi:"diskSize"`
-	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
-	DiskType *string `pulumi:"diskType"`
-	// Data disk snapshot ID.
-	SnapshotId *string `pulumi:"snapshotId"`
-}
-
-// AsScalingGroupAutoScalingConfigDataDiskInput is an input type that accepts AsScalingGroupAutoScalingConfigDataDiskArgs and AsScalingGroupAutoScalingConfigDataDiskOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingConfigDataDiskInput` via:
-//
-//	AsScalingGroupAutoScalingConfigDataDiskArgs{...}
-type AsScalingGroupAutoScalingConfigDataDiskInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingConfigDataDiskOutput() AsScalingGroupAutoScalingConfigDataDiskOutput
-	ToAsScalingGroupAutoScalingConfigDataDiskOutputWithContext(context.Context) AsScalingGroupAutoScalingConfigDataDiskOutput
-}
-
-type AsScalingGroupAutoScalingConfigDataDiskArgs struct {
-	// Volume of disk in GB. Default is `0`.
-	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
-	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
-	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
-	// Data disk snapshot ID.
-	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
-}
-
-func (AsScalingGroupAutoScalingConfigDataDiskArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingConfigDataDisk)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingConfigDataDiskArgs) ToAsScalingGroupAutoScalingConfigDataDiskOutput() AsScalingGroupAutoScalingConfigDataDiskOutput {
-	return i.ToAsScalingGroupAutoScalingConfigDataDiskOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingConfigDataDiskArgs) ToAsScalingGroupAutoScalingConfigDataDiskOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigDataDiskOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingConfigDataDiskOutput)
-}
-
-// AsScalingGroupAutoScalingConfigDataDiskArrayInput is an input type that accepts AsScalingGroupAutoScalingConfigDataDiskArray and AsScalingGroupAutoScalingConfigDataDiskArrayOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingConfigDataDiskArrayInput` via:
-//
-//	AsScalingGroupAutoScalingConfigDataDiskArray{ AsScalingGroupAutoScalingConfigDataDiskArgs{...} }
-type AsScalingGroupAutoScalingConfigDataDiskArrayInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingConfigDataDiskArrayOutput() AsScalingGroupAutoScalingConfigDataDiskArrayOutput
-	ToAsScalingGroupAutoScalingConfigDataDiskArrayOutputWithContext(context.Context) AsScalingGroupAutoScalingConfigDataDiskArrayOutput
-}
-
-type AsScalingGroupAutoScalingConfigDataDiskArray []AsScalingGroupAutoScalingConfigDataDiskInput
-
-func (AsScalingGroupAutoScalingConfigDataDiskArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AsScalingGroupAutoScalingConfigDataDisk)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingConfigDataDiskArray) ToAsScalingGroupAutoScalingConfigDataDiskArrayOutput() AsScalingGroupAutoScalingConfigDataDiskArrayOutput {
-	return i.ToAsScalingGroupAutoScalingConfigDataDiskArrayOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingConfigDataDiskArray) ToAsScalingGroupAutoScalingConfigDataDiskArrayOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigDataDiskArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingConfigDataDiskArrayOutput)
-}
-
-type AsScalingGroupAutoScalingConfigDataDiskOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingConfigDataDiskOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingConfigDataDisk)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingConfigDataDiskOutput) ToAsScalingGroupAutoScalingConfigDataDiskOutput() AsScalingGroupAutoScalingConfigDataDiskOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingConfigDataDiskOutput) ToAsScalingGroupAutoScalingConfigDataDiskOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigDataDiskOutput {
-	return o
-}
-
-// Volume of disk in GB. Default is `0`.
-func (o AsScalingGroupAutoScalingConfigDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfigDataDisk) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
-}
-
-// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
-func (o AsScalingGroupAutoScalingConfigDataDiskOutput) DiskType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfigDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
-}
-
-// Data disk snapshot ID.
-func (o AsScalingGroupAutoScalingConfigDataDiskOutput) SnapshotId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingConfigDataDisk) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
-}
-
-type AsScalingGroupAutoScalingConfigDataDiskArrayOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingConfigDataDiskArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AsScalingGroupAutoScalingConfigDataDisk)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingConfigDataDiskArrayOutput) ToAsScalingGroupAutoScalingConfigDataDiskArrayOutput() AsScalingGroupAutoScalingConfigDataDiskArrayOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingConfigDataDiskArrayOutput) ToAsScalingGroupAutoScalingConfigDataDiskArrayOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingConfigDataDiskArrayOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingConfigDataDiskArrayOutput) Index(i pulumi.IntInput) AsScalingGroupAutoScalingConfigDataDiskOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AsScalingGroupAutoScalingConfigDataDisk {
-		return vs[0].([]AsScalingGroupAutoScalingConfigDataDisk)[vs[1].(int)]
-	}).(AsScalingGroupAutoScalingConfigDataDiskOutput)
-}
-
-type AsScalingGroupAutoScalingGroup struct {
-	// Default cooldown time in second, and default value is 300.
-	DefaultCooldown *int `pulumi:"defaultCooldown"`
-	// Desired volume of CVM instances, which is between maxSize and min_size.
-	DesiredCapacity *int `pulumi:"desiredCapacity"`
-	// List of application load balancers, which can't be specified with loadBalancerIds together.
-	ForwardBalancerIds []AsScalingGroupAutoScalingGroupForwardBalancerId `pulumi:"forwardBalancerIds"`
-	// ID list of traditional load balancers.
-	LoadBalancerIds []string `pulumi:"loadBalancerIds"`
-	// Maximum number of CVM instances (0~2000).
-	MaxSize int `pulumi:"maxSize"`
-	// Minimum number of CVM instances (0~2000).
-	MinSize int `pulumi:"minSize"`
-	// Specifys to which project the scaling group belongs.
-	ProjectId *int `pulumi:"projectId"`
-	// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
-	RetryPolicy *string `pulumi:"retryPolicy"`
-	// Name of a scaling group.
-	ScalingGroupName string `pulumi:"scalingGroupName"`
-	// ID list of subnet, and for VPC it is required.
-	SubnetIds []string `pulumi:"subnetIds"`
-	// Tags of a scaling group.
-	Tags map[string]interface{} `pulumi:"tags"`
-	// Available values for termination policies include `OLDEST_INSTANCE` and `NEWEST_INSTANCE`.
-	TerminationPolicies *string `pulumi:"terminationPolicies"`
-	// ID of VPC network.
-	VpcId string `pulumi:"vpcId"`
-	// List of available zones, for Basic network it is required.
-	Zones []string `pulumi:"zones"`
-}
-
-// AsScalingGroupAutoScalingGroupInput is an input type that accepts AsScalingGroupAutoScalingGroupArgs and AsScalingGroupAutoScalingGroupOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingGroupInput` via:
-//
-//	AsScalingGroupAutoScalingGroupArgs{...}
-type AsScalingGroupAutoScalingGroupInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingGroupOutput() AsScalingGroupAutoScalingGroupOutput
-	ToAsScalingGroupAutoScalingGroupOutputWithContext(context.Context) AsScalingGroupAutoScalingGroupOutput
-}
-
-type AsScalingGroupAutoScalingGroupArgs struct {
-	// Default cooldown time in second, and default value is 300.
-	DefaultCooldown pulumi.IntPtrInput `pulumi:"defaultCooldown"`
-	// Desired volume of CVM instances, which is between maxSize and min_size.
-	DesiredCapacity pulumi.IntPtrInput `pulumi:"desiredCapacity"`
-	// List of application load balancers, which can't be specified with loadBalancerIds together.
-	ForwardBalancerIds AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput `pulumi:"forwardBalancerIds"`
-	// ID list of traditional load balancers.
-	LoadBalancerIds pulumi.StringArrayInput `pulumi:"loadBalancerIds"`
-	// Maximum number of CVM instances (0~2000).
-	MaxSize pulumi.IntInput `pulumi:"maxSize"`
-	// Minimum number of CVM instances (0~2000).
-	MinSize pulumi.IntInput `pulumi:"minSize"`
-	// Specifys to which project the scaling group belongs.
-	ProjectId pulumi.IntPtrInput `pulumi:"projectId"`
-	// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
-	RetryPolicy pulumi.StringPtrInput `pulumi:"retryPolicy"`
-	// Name of a scaling group.
-	ScalingGroupName pulumi.StringInput `pulumi:"scalingGroupName"`
-	// ID list of subnet, and for VPC it is required.
-	SubnetIds pulumi.StringArrayInput `pulumi:"subnetIds"`
-	// Tags of a scaling group.
-	Tags pulumi.MapInput `pulumi:"tags"`
-	// Available values for termination policies include `OLDEST_INSTANCE` and `NEWEST_INSTANCE`.
-	TerminationPolicies pulumi.StringPtrInput `pulumi:"terminationPolicies"`
-	// ID of VPC network.
-	VpcId pulumi.StringInput `pulumi:"vpcId"`
-	// List of available zones, for Basic network it is required.
-	Zones pulumi.StringArrayInput `pulumi:"zones"`
-}
-
-func (AsScalingGroupAutoScalingGroupArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingGroup)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingGroupArgs) ToAsScalingGroupAutoScalingGroupOutput() AsScalingGroupAutoScalingGroupOutput {
-	return i.ToAsScalingGroupAutoScalingGroupOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingGroupArgs) ToAsScalingGroupAutoScalingGroupOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingGroupOutput)
-}
-
-func (i AsScalingGroupAutoScalingGroupArgs) ToAsScalingGroupAutoScalingGroupPtrOutput() AsScalingGroupAutoScalingGroupPtrOutput {
-	return i.ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingGroupArgs) ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingGroupOutput).ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(ctx)
-}
-
-// AsScalingGroupAutoScalingGroupPtrInput is an input type that accepts AsScalingGroupAutoScalingGroupArgs, AsScalingGroupAutoScalingGroupPtr and AsScalingGroupAutoScalingGroupPtrOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingGroupPtrInput` via:
-//
-//	        AsScalingGroupAutoScalingGroupArgs{...}
-//
-//	or:
-//
-//	        nil
-type AsScalingGroupAutoScalingGroupPtrInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingGroupPtrOutput() AsScalingGroupAutoScalingGroupPtrOutput
-	ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(context.Context) AsScalingGroupAutoScalingGroupPtrOutput
-}
-
-type asScalingGroupAutoScalingGroupPtrType AsScalingGroupAutoScalingGroupArgs
-
-func AsScalingGroupAutoScalingGroupPtr(v *AsScalingGroupAutoScalingGroupArgs) AsScalingGroupAutoScalingGroupPtrInput {
-	return (*asScalingGroupAutoScalingGroupPtrType)(v)
-}
-
-func (*asScalingGroupAutoScalingGroupPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**AsScalingGroupAutoScalingGroup)(nil)).Elem()
-}
-
-func (i *asScalingGroupAutoScalingGroupPtrType) ToAsScalingGroupAutoScalingGroupPtrOutput() AsScalingGroupAutoScalingGroupPtrOutput {
-	return i.ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(context.Background())
-}
-
-func (i *asScalingGroupAutoScalingGroupPtrType) ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingGroupPtrOutput)
-}
-
-type AsScalingGroupAutoScalingGroupOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingGroupOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingGroup)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingGroupOutput) ToAsScalingGroupAutoScalingGroupOutput() AsScalingGroupAutoScalingGroupOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupOutput) ToAsScalingGroupAutoScalingGroupOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupOutput) ToAsScalingGroupAutoScalingGroupPtrOutput() AsScalingGroupAutoScalingGroupPtrOutput {
-	return o.ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(context.Background())
-}
-
-func (o AsScalingGroupAutoScalingGroupOutput) ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v AsScalingGroupAutoScalingGroup) *AsScalingGroupAutoScalingGroup {
-		return &v
-	}).(AsScalingGroupAutoScalingGroupPtrOutput)
-}
-
-// Default cooldown time in second, and default value is 300.
-func (o AsScalingGroupAutoScalingGroupOutput) DefaultCooldown() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) *int { return v.DefaultCooldown }).(pulumi.IntPtrOutput)
-}
-
-// Desired volume of CVM instances, which is between maxSize and min_size.
-func (o AsScalingGroupAutoScalingGroupOutput) DesiredCapacity() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) *int { return v.DesiredCapacity }).(pulumi.IntPtrOutput)
-}
-
-// List of application load balancers, which can't be specified with loadBalancerIds together.
-func (o AsScalingGroupAutoScalingGroupOutput) ForwardBalancerIds() AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) []AsScalingGroupAutoScalingGroupForwardBalancerId {
-		return v.ForwardBalancerIds
-	}).(AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput)
-}
-
-// ID list of traditional load balancers.
-func (o AsScalingGroupAutoScalingGroupOutput) LoadBalancerIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) []string { return v.LoadBalancerIds }).(pulumi.StringArrayOutput)
-}
-
-// Maximum number of CVM instances (0~2000).
-func (o AsScalingGroupAutoScalingGroupOutput) MaxSize() pulumi.IntOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) int { return v.MaxSize }).(pulumi.IntOutput)
-}
-
-// Minimum number of CVM instances (0~2000).
-func (o AsScalingGroupAutoScalingGroupOutput) MinSize() pulumi.IntOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) int { return v.MinSize }).(pulumi.IntOutput)
-}
-
-// Specifys to which project the scaling group belongs.
-func (o AsScalingGroupAutoScalingGroupOutput) ProjectId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) *int { return v.ProjectId }).(pulumi.IntPtrOutput)
-}
-
-// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
-func (o AsScalingGroupAutoScalingGroupOutput) RetryPolicy() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) *string { return v.RetryPolicy }).(pulumi.StringPtrOutput)
-}
-
-// Name of a scaling group.
-func (o AsScalingGroupAutoScalingGroupOutput) ScalingGroupName() pulumi.StringOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) string { return v.ScalingGroupName }).(pulumi.StringOutput)
-}
-
-// ID list of subnet, and for VPC it is required.
-func (o AsScalingGroupAutoScalingGroupOutput) SubnetIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) []string { return v.SubnetIds }).(pulumi.StringArrayOutput)
-}
-
-// Tags of a scaling group.
-func (o AsScalingGroupAutoScalingGroupOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-// Available values for termination policies include `OLDEST_INSTANCE` and `NEWEST_INSTANCE`.
-func (o AsScalingGroupAutoScalingGroupOutput) TerminationPolicies() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) *string { return v.TerminationPolicies }).(pulumi.StringPtrOutput)
-}
-
-// ID of VPC network.
-func (o AsScalingGroupAutoScalingGroupOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-// List of available zones, for Basic network it is required.
-func (o AsScalingGroupAutoScalingGroupOutput) Zones() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroup) []string { return v.Zones }).(pulumi.StringArrayOutput)
-}
-
-type AsScalingGroupAutoScalingGroupPtrOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingGroupPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**AsScalingGroupAutoScalingGroup)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingGroupPtrOutput) ToAsScalingGroupAutoScalingGroupPtrOutput() AsScalingGroupAutoScalingGroupPtrOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupPtrOutput) ToAsScalingGroupAutoScalingGroupPtrOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupPtrOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupPtrOutput) Elem() AsScalingGroupAutoScalingGroupOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) AsScalingGroupAutoScalingGroup {
-		if v != nil {
-			return *v
-		}
-		var ret AsScalingGroupAutoScalingGroup
-		return ret
-	}).(AsScalingGroupAutoScalingGroupOutput)
-}
-
-// Default cooldown time in second, and default value is 300.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) DefaultCooldown() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *int {
-		if v == nil {
-			return nil
-		}
-		return v.DefaultCooldown
-	}).(pulumi.IntPtrOutput)
-}
-
-// Desired volume of CVM instances, which is between maxSize and min_size.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) DesiredCapacity() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *int {
-		if v == nil {
-			return nil
-		}
-		return v.DesiredCapacity
-	}).(pulumi.IntPtrOutput)
-}
-
-// List of application load balancers, which can't be specified with loadBalancerIds together.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) ForwardBalancerIds() AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) []AsScalingGroupAutoScalingGroupForwardBalancerId {
-		if v == nil {
-			return nil
-		}
-		return v.ForwardBalancerIds
-	}).(AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput)
-}
-
-// ID list of traditional load balancers.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) LoadBalancerIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) []string {
-		if v == nil {
-			return nil
-		}
-		return v.LoadBalancerIds
-	}).(pulumi.StringArrayOutput)
-}
-
-// Maximum number of CVM instances (0~2000).
-func (o AsScalingGroupAutoScalingGroupPtrOutput) MaxSize() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.MaxSize
-	}).(pulumi.IntPtrOutput)
-}
-
-// Minimum number of CVM instances (0~2000).
-func (o AsScalingGroupAutoScalingGroupPtrOutput) MinSize() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.MinSize
-	}).(pulumi.IntPtrOutput)
-}
-
-// Specifys to which project the scaling group belongs.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) ProjectId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ProjectId
-	}).(pulumi.IntPtrOutput)
-}
-
-// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) RetryPolicy() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *string {
-		if v == nil {
-			return nil
-		}
-		return v.RetryPolicy
-	}).(pulumi.StringPtrOutput)
-}
-
-// Name of a scaling group.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) ScalingGroupName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ScalingGroupName
-	}).(pulumi.StringPtrOutput)
-}
-
-// ID list of subnet, and for VPC it is required.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) SubnetIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) []string {
-		if v == nil {
-			return nil
-		}
-		return v.SubnetIds
-	}).(pulumi.StringArrayOutput)
-}
-
-// Tags of a scaling group.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) map[string]interface{} {
-		if v == nil {
-			return nil
-		}
-		return v.Tags
-	}).(pulumi.MapOutput)
-}
-
-// Available values for termination policies include `OLDEST_INSTANCE` and `NEWEST_INSTANCE`.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) TerminationPolicies() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *string {
-		if v == nil {
-			return nil
-		}
-		return v.TerminationPolicies
-	}).(pulumi.StringPtrOutput)
-}
-
-// ID of VPC network.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) VpcId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.VpcId
-	}).(pulumi.StringPtrOutput)
-}
-
-// List of available zones, for Basic network it is required.
-func (o AsScalingGroupAutoScalingGroupPtrOutput) Zones() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *AsScalingGroupAutoScalingGroup) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Zones
-	}).(pulumi.StringArrayOutput)
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerId struct {
-	// Listener ID for application load balancers.
-	ListenerId string `pulumi:"listenerId"`
-	// ID of available load balancers.
-	LoadBalancerId string `pulumi:"loadBalancerId"`
-	// ID of forwarding rules.
-	RuleId *string `pulumi:"ruleId"`
-	// Attribute list of target rules.
-	TargetAttributes []AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute `pulumi:"targetAttributes"`
-}
-
-// AsScalingGroupAutoScalingGroupForwardBalancerIdInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdArgs and AsScalingGroupAutoScalingGroupForwardBalancerIdOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdInput` via:
-//
-//	AsScalingGroupAutoScalingGroupForwardBalancerIdArgs{...}
-type AsScalingGroupAutoScalingGroupForwardBalancerIdInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdOutput
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdOutputWithContext(context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdOutput
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdArgs struct {
-	// Listener ID for application load balancers.
-	ListenerId pulumi.StringInput `pulumi:"listenerId"`
-	// ID of available load balancers.
-	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
-	// ID of forwarding rules.
-	RuleId pulumi.StringPtrInput `pulumi:"ruleId"`
-	// Attribute list of target rules.
-	TargetAttributes AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput `pulumi:"targetAttributes"`
-}
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerId)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdArgs) ToAsScalingGroupAutoScalingGroupForwardBalancerIdOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdOutput {
-	return i.ToAsScalingGroupAutoScalingGroupForwardBalancerIdOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdArgs) ToAsScalingGroupAutoScalingGroupForwardBalancerIdOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingGroupForwardBalancerIdOutput)
-}
-
-// AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdArray and AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput` via:
-//
-//	AsScalingGroupAutoScalingGroupForwardBalancerIdArray{ AsScalingGroupAutoScalingGroupForwardBalancerIdArgs{...} }
-type AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutputWithContext(context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdArray []AsScalingGroupAutoScalingGroupForwardBalancerIdInput
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AsScalingGroupAutoScalingGroupForwardBalancerId)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdArray) ToAsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput {
-	return i.ToAsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdArray) ToAsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput)
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerId)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdOutput {
-	return o
-}
-
-// Listener ID for application load balancers.
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdOutput) ListenerId() pulumi.StringOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroupForwardBalancerId) string { return v.ListenerId }).(pulumi.StringOutput)
-}
-
-// ID of available load balancers.
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdOutput) LoadBalancerId() pulumi.StringOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroupForwardBalancerId) string { return v.LoadBalancerId }).(pulumi.StringOutput)
-}
-
-// ID of forwarding rules.
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdOutput) RuleId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroupForwardBalancerId) *string { return v.RuleId }).(pulumi.StringPtrOutput)
-}
-
-// Attribute list of target rules.
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdOutput) TargetAttributes() AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroupForwardBalancerId) []AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute {
-		return v.TargetAttributes
-	}).(AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput)
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AsScalingGroupAutoScalingGroupForwardBalancerId)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput) Index(i pulumi.IntInput) AsScalingGroupAutoScalingGroupForwardBalancerIdOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AsScalingGroupAutoScalingGroupForwardBalancerId {
-		return vs[0].([]AsScalingGroupAutoScalingGroupForwardBalancerId)[vs[1].(int)]
-	}).(AsScalingGroupAutoScalingGroupForwardBalancerIdOutput)
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute struct {
-	// Port number.
-	Port int `pulumi:"port"`
-	// Weight.
-	Weight int `pulumi:"weight"`
-}
-
-// AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs and AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput` via:
-//
-//	AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs{...}
-type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutputWithContext(context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs struct {
-	// Port number.
-	Port pulumi.IntInput `pulumi:"port"`
-	// Weight.
-	Weight pulumi.IntInput `pulumi:"weight"`
-}
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput {
-	return i.ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput)
-}
-
-// AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput is an input type that accepts AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray and AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput values.
-// You can construct a concrete instance of `AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput` via:
-//
-//	AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray{ AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs{...} }
-type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput interface {
-	pulumi.Input
-
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput
-	ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutputWithContext(context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray []AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute)(nil)).Elem()
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput {
-	return i.ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutputWithContext(context.Background())
-}
-
-func (i AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput)
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput {
-	return o
-}
-
-// Port number.
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute) int { return v.Port }).(pulumi.IntOutput)
-}
-
-// Weight.
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func(v AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute) int { return v.Weight }).(pulumi.IntOutput)
-}
-
-type AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput struct{ *pulumi.OutputState }
-
-func (AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute)(nil)).Elem()
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput() AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput) ToAsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutputWithContext(ctx context.Context) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput {
-	return o
-}
-
-func (o AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput) Index(i pulumi.IntInput) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute {
-		return vs[0].([]AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute)[vs[1].(int)]
-	}).(AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput)
-}
-
 type ClusterAttachmentWorkerConfig struct {
 	// Configurations of data disk.
 	DataDisks []ClusterAttachmentWorkerConfigDataDisk `pulumi:"dataDisks"`
@@ -1155,6 +19,8 @@ type ClusterAttachmentWorkerConfig struct {
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs []string `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs *ClusterAttachmentWorkerConfigGpuArgs `pulumi:"gpuArgs"`
 	// Indicate to schedule the adding node or not. Default is true.
 	IsSchedule *bool `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
@@ -1166,7 +32,7 @@ type ClusterAttachmentWorkerConfig struct {
 // ClusterAttachmentWorkerConfigInput is an input type that accepts ClusterAttachmentWorkerConfigArgs and ClusterAttachmentWorkerConfigOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigInput` via:
 //
-//	ClusterAttachmentWorkerConfigArgs{...}
+//          ClusterAttachmentWorkerConfigArgs{...}
 type ClusterAttachmentWorkerConfigInput interface {
 	pulumi.Input
 
@@ -1183,6 +49,8 @@ type ClusterAttachmentWorkerConfigArgs struct {
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs ClusterAttachmentWorkerConfigGpuArgsPtrInput `pulumi:"gpuArgs"`
 	// Indicate to schedule the adding node or not. Default is true.
 	IsSchedule pulumi.BoolPtrInput `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
@@ -1214,11 +82,11 @@ func (i ClusterAttachmentWorkerConfigArgs) ToClusterAttachmentWorkerConfigPtrOut
 // ClusterAttachmentWorkerConfigPtrInput is an input type that accepts ClusterAttachmentWorkerConfigArgs, ClusterAttachmentWorkerConfigPtr and ClusterAttachmentWorkerConfigPtrOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigPtrInput` via:
 //
-//	        ClusterAttachmentWorkerConfigArgs{...}
+//          ClusterAttachmentWorkerConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterAttachmentWorkerConfigPtrInput interface {
 	pulumi.Input
 
@@ -1286,6 +154,11 @@ func (o ClusterAttachmentWorkerConfigOutput) DockerGraphPath() pulumi.StringPtrO
 // Custom parameter information related to the node. This is a white-list parameter.
 func (o ClusterAttachmentWorkerConfigOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) []string { return v.ExtraArgs }).(pulumi.StringArrayOutput)
+}
+
+// GPU driver parameters.
+func (o ClusterAttachmentWorkerConfigOutput) GpuArgs() ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *ClusterAttachmentWorkerConfigGpuArgs { return v.GpuArgs }).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
 }
 
 // Indicate to schedule the adding node or not. Default is true.
@@ -1367,6 +240,16 @@ func (o ClusterAttachmentWorkerConfigPtrOutput) ExtraArgs() pulumi.StringArrayOu
 	}).(pulumi.StringArrayOutput)
 }
 
+// GPU driver parameters.
+func (o ClusterAttachmentWorkerConfigPtrOutput) GpuArgs() ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) *ClusterAttachmentWorkerConfigGpuArgs {
+		if v == nil {
+			return nil
+		}
+		return v.GpuArgs
+	}).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
+}
+
 // Indicate to schedule the adding node or not. Default is true.
 func (o ClusterAttachmentWorkerConfigPtrOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) *bool {
@@ -1415,7 +298,7 @@ type ClusterAttachmentWorkerConfigDataDisk struct {
 // ClusterAttachmentWorkerConfigDataDiskInput is an input type that accepts ClusterAttachmentWorkerConfigDataDiskArgs and ClusterAttachmentWorkerConfigDataDiskOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigDataDiskInput` via:
 //
-//	ClusterAttachmentWorkerConfigDataDiskArgs{...}
+//          ClusterAttachmentWorkerConfigDataDiskArgs{...}
 type ClusterAttachmentWorkerConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -1453,7 +336,7 @@ func (i ClusterAttachmentWorkerConfigDataDiskArgs) ToClusterAttachmentWorkerConf
 // ClusterAttachmentWorkerConfigDataDiskArrayInput is an input type that accepts ClusterAttachmentWorkerConfigDataDiskArray and ClusterAttachmentWorkerConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigDataDiskArrayInput` via:
 //
-//	ClusterAttachmentWorkerConfigDataDiskArray{ ClusterAttachmentWorkerConfigDataDiskArgs{...} }
+//          ClusterAttachmentWorkerConfigDataDiskArray{ ClusterAttachmentWorkerConfigDataDiskArgs{...} }
 type ClusterAttachmentWorkerConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -1539,6 +422,219 @@ func (o ClusterAttachmentWorkerConfigDataDiskArrayOutput) Index(i pulumi.IntInpu
 	}).(ClusterAttachmentWorkerConfigDataDiskOutput)
 }
 
+type ClusterAttachmentWorkerConfigGpuArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda map[string]interface{} `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn map[string]interface{} `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver map[string]interface{} `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver map[string]interface{} `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable *bool `pulumi:"migEnable"`
+}
+
+// ClusterAttachmentWorkerConfigGpuArgsInput is an input type that accepts ClusterAttachmentWorkerConfigGpuArgsArgs and ClusterAttachmentWorkerConfigGpuArgsOutput values.
+// You can construct a concrete instance of `ClusterAttachmentWorkerConfigGpuArgsInput` via:
+//
+//          ClusterAttachmentWorkerConfigGpuArgsArgs{...}
+type ClusterAttachmentWorkerConfigGpuArgsInput interface {
+	pulumi.Input
+
+	ToClusterAttachmentWorkerConfigGpuArgsOutput() ClusterAttachmentWorkerConfigGpuArgsOutput
+	ToClusterAttachmentWorkerConfigGpuArgsOutputWithContext(context.Context) ClusterAttachmentWorkerConfigGpuArgsOutput
+}
+
+type ClusterAttachmentWorkerConfigGpuArgsArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda pulumi.MapInput `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn pulumi.MapInput `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver pulumi.MapInput `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver pulumi.MapInput `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable pulumi.BoolPtrInput `pulumi:"migEnable"`
+}
+
+func (ClusterAttachmentWorkerConfigGpuArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterAttachmentWorkerConfigGpuArgs)(nil)).Elem()
+}
+
+func (i ClusterAttachmentWorkerConfigGpuArgsArgs) ToClusterAttachmentWorkerConfigGpuArgsOutput() ClusterAttachmentWorkerConfigGpuArgsOutput {
+	return i.ToClusterAttachmentWorkerConfigGpuArgsOutputWithContext(context.Background())
+}
+
+func (i ClusterAttachmentWorkerConfigGpuArgsArgs) ToClusterAttachmentWorkerConfigGpuArgsOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigGpuArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigGpuArgsOutput)
+}
+
+func (i ClusterAttachmentWorkerConfigGpuArgsArgs) ToClusterAttachmentWorkerConfigGpuArgsPtrOutput() ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return i.ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterAttachmentWorkerConfigGpuArgsArgs) ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigGpuArgsOutput).ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(ctx)
+}
+
+// ClusterAttachmentWorkerConfigGpuArgsPtrInput is an input type that accepts ClusterAttachmentWorkerConfigGpuArgsArgs, ClusterAttachmentWorkerConfigGpuArgsPtr and ClusterAttachmentWorkerConfigGpuArgsPtrOutput values.
+// You can construct a concrete instance of `ClusterAttachmentWorkerConfigGpuArgsPtrInput` via:
+//
+//          ClusterAttachmentWorkerConfigGpuArgsArgs{...}
+//
+//  or:
+//
+//          nil
+type ClusterAttachmentWorkerConfigGpuArgsPtrInput interface {
+	pulumi.Input
+
+	ToClusterAttachmentWorkerConfigGpuArgsPtrOutput() ClusterAttachmentWorkerConfigGpuArgsPtrOutput
+	ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(context.Context) ClusterAttachmentWorkerConfigGpuArgsPtrOutput
+}
+
+type clusterAttachmentWorkerConfigGpuArgsPtrType ClusterAttachmentWorkerConfigGpuArgsArgs
+
+func ClusterAttachmentWorkerConfigGpuArgsPtr(v *ClusterAttachmentWorkerConfigGpuArgsArgs) ClusterAttachmentWorkerConfigGpuArgsPtrInput {
+	return (*clusterAttachmentWorkerConfigGpuArgsPtrType)(v)
+}
+
+func (*clusterAttachmentWorkerConfigGpuArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterAttachmentWorkerConfigGpuArgs)(nil)).Elem()
+}
+
+func (i *clusterAttachmentWorkerConfigGpuArgsPtrType) ToClusterAttachmentWorkerConfigGpuArgsPtrOutput() ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return i.ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterAttachmentWorkerConfigGpuArgsPtrType) ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
+}
+
+type ClusterAttachmentWorkerConfigGpuArgsOutput struct{ *pulumi.OutputState }
+
+func (ClusterAttachmentWorkerConfigGpuArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterAttachmentWorkerConfigGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) ToClusterAttachmentWorkerConfigGpuArgsOutput() ClusterAttachmentWorkerConfigGpuArgsOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) ToClusterAttachmentWorkerConfigGpuArgsOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigGpuArgsOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) ToClusterAttachmentWorkerConfigGpuArgsPtrOutput() ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return o.ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterAttachmentWorkerConfigGpuArgs) *ClusterAttachmentWorkerConfigGpuArgs {
+		return &v
+	}).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} { return v.Cuda }).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} { return v.Cudnn }).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} { return v.CustomDriver }).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} { return v.Driver }).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterAttachmentWorkerConfigGpuArgsOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigGpuArgs) *bool { return v.MigEnable }).(pulumi.BoolPtrOutput)
+}
+
+type ClusterAttachmentWorkerConfigGpuArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterAttachmentWorkerConfigGpuArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterAttachmentWorkerConfigGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) ToClusterAttachmentWorkerConfigGpuArgsPtrOutput() ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) ToClusterAttachmentWorkerConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) Elem() ClusterAttachmentWorkerConfigGpuArgsOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigGpuArgs) ClusterAttachmentWorkerConfigGpuArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterAttachmentWorkerConfigGpuArgs
+		return ret
+	}).(ClusterAttachmentWorkerConfigGpuArgsOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cuda
+	}).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cudnn
+	}).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.CustomDriver
+	}).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Driver
+	}).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterAttachmentWorkerConfigGpuArgsPtrOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigGpuArgs) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MigEnable
+	}).(pulumi.BoolPtrOutput)
+}
+
 type ClusterAttachmentWorkerConfigOverrides struct {
 	// Configurations of data disk.
 	DataDisks []ClusterAttachmentWorkerConfigOverridesDataDisk `pulumi:"dataDisks"`
@@ -1548,6 +644,8 @@ type ClusterAttachmentWorkerConfigOverrides struct {
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs []string `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs *ClusterAttachmentWorkerConfigOverridesGpuArgs `pulumi:"gpuArgs"`
 	// Indicate to schedule the adding node or not. Default is true.
 	IsSchedule *bool `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
@@ -1559,7 +657,7 @@ type ClusterAttachmentWorkerConfigOverrides struct {
 // ClusterAttachmentWorkerConfigOverridesInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesArgs and ClusterAttachmentWorkerConfigOverridesOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesInput` via:
 //
-//	ClusterAttachmentWorkerConfigOverridesArgs{...}
+//          ClusterAttachmentWorkerConfigOverridesArgs{...}
 type ClusterAttachmentWorkerConfigOverridesInput interface {
 	pulumi.Input
 
@@ -1576,6 +674,8 @@ type ClusterAttachmentWorkerConfigOverridesArgs struct {
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput `pulumi:"gpuArgs"`
 	// Indicate to schedule the adding node or not. Default is true.
 	IsSchedule pulumi.BoolPtrInput `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
@@ -1607,11 +707,11 @@ func (i ClusterAttachmentWorkerConfigOverridesArgs) ToClusterAttachmentWorkerCon
 // ClusterAttachmentWorkerConfigOverridesPtrInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesArgs, ClusterAttachmentWorkerConfigOverridesPtr and ClusterAttachmentWorkerConfigOverridesPtrOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesPtrInput` via:
 //
-//	        ClusterAttachmentWorkerConfigOverridesArgs{...}
+//          ClusterAttachmentWorkerConfigOverridesArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterAttachmentWorkerConfigOverridesPtrInput interface {
 	pulumi.Input
 
@@ -1681,6 +781,13 @@ func (o ClusterAttachmentWorkerConfigOverridesOutput) DockerGraphPath() pulumi.S
 // Custom parameter information related to the node. This is a white-list parameter.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) []string { return v.ExtraArgs }).(pulumi.StringArrayOutput)
+}
+
+// GPU driver parameters.
+func (o ClusterAttachmentWorkerConfigOverridesOutput) GpuArgs() ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *ClusterAttachmentWorkerConfigOverridesGpuArgs {
+		return v.GpuArgs
+	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
 }
 
 // Indicate to schedule the adding node or not. Default is true.
@@ -1762,6 +869,16 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) ExtraArgs() pulumi.Stri
 	}).(pulumi.StringArrayOutput)
 }
 
+// GPU driver parameters.
+func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) GpuArgs() ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *ClusterAttachmentWorkerConfigOverridesGpuArgs {
+		if v == nil {
+			return nil
+		}
+		return v.GpuArgs
+	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
+}
+
 // Indicate to schedule the adding node or not. Default is true.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *bool {
@@ -1810,7 +927,7 @@ type ClusterAttachmentWorkerConfigOverridesDataDisk struct {
 // ClusterAttachmentWorkerConfigOverridesDataDiskInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesDataDiskArgs and ClusterAttachmentWorkerConfigOverridesDataDiskOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesDataDiskInput` via:
 //
-//	ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...}
+//          ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...}
 type ClusterAttachmentWorkerConfigOverridesDataDiskInput interface {
 	pulumi.Input
 
@@ -1848,7 +965,7 @@ func (i ClusterAttachmentWorkerConfigOverridesDataDiskArgs) ToClusterAttachmentW
 // ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesDataDiskArray and ClusterAttachmentWorkerConfigOverridesDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput` via:
 //
-//	ClusterAttachmentWorkerConfigOverridesDataDiskArray{ ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...} }
+//          ClusterAttachmentWorkerConfigOverridesDataDiskArray{ ClusterAttachmentWorkerConfigOverridesDataDiskArgs{...} }
 type ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -1934,19 +1051,234 @@ func (o ClusterAttachmentWorkerConfigOverridesDataDiskArrayOutput) Index(i pulum
 	}).(ClusterAttachmentWorkerConfigOverridesDataDiskOutput)
 }
 
+type ClusterAttachmentWorkerConfigOverridesGpuArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda map[string]interface{} `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn map[string]interface{} `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver map[string]interface{} `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver map[string]interface{} `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable *bool `pulumi:"migEnable"`
+}
+
+// ClusterAttachmentWorkerConfigOverridesGpuArgsInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesGpuArgsArgs and ClusterAttachmentWorkerConfigOverridesGpuArgsOutput values.
+// You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesGpuArgsInput` via:
+//
+//          ClusterAttachmentWorkerConfigOverridesGpuArgsArgs{...}
+type ClusterAttachmentWorkerConfigOverridesGpuArgsInput interface {
+	pulumi.Input
+
+	ToClusterAttachmentWorkerConfigOverridesGpuArgsOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsOutput
+	ToClusterAttachmentWorkerConfigOverridesGpuArgsOutputWithContext(context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsOutput
+}
+
+type ClusterAttachmentWorkerConfigOverridesGpuArgsArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda pulumi.MapInput `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn pulumi.MapInput `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver pulumi.MapInput `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver pulumi.MapInput `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable pulumi.BoolPtrInput `pulumi:"migEnable"`
+}
+
+func (ClusterAttachmentWorkerConfigOverridesGpuArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesGpuArgs)(nil)).Elem()
+}
+
+func (i ClusterAttachmentWorkerConfigOverridesGpuArgsArgs) ToClusterAttachmentWorkerConfigOverridesGpuArgsOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsOutput {
+	return i.ToClusterAttachmentWorkerConfigOverridesGpuArgsOutputWithContext(context.Background())
+}
+
+func (i ClusterAttachmentWorkerConfigOverridesGpuArgsArgs) ToClusterAttachmentWorkerConfigOverridesGpuArgsOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigOverridesGpuArgsOutput)
+}
+
+func (i ClusterAttachmentWorkerConfigOverridesGpuArgsArgs) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return i.ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterAttachmentWorkerConfigOverridesGpuArgsArgs) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigOverridesGpuArgsOutput).ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(ctx)
+}
+
+// ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput is an input type that accepts ClusterAttachmentWorkerConfigOverridesGpuArgsArgs, ClusterAttachmentWorkerConfigOverridesGpuArgsPtr and ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput values.
+// You can construct a concrete instance of `ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput` via:
+//
+//          ClusterAttachmentWorkerConfigOverridesGpuArgsArgs{...}
+//
+//  or:
+//
+//          nil
+type ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput interface {
+	pulumi.Input
+
+	ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput
+	ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput
+}
+
+type clusterAttachmentWorkerConfigOverridesGpuArgsPtrType ClusterAttachmentWorkerConfigOverridesGpuArgsArgs
+
+func ClusterAttachmentWorkerConfigOverridesGpuArgsPtr(v *ClusterAttachmentWorkerConfigOverridesGpuArgsArgs) ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput {
+	return (*clusterAttachmentWorkerConfigOverridesGpuArgsPtrType)(v)
+}
+
+func (*clusterAttachmentWorkerConfigOverridesGpuArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterAttachmentWorkerConfigOverridesGpuArgs)(nil)).Elem()
+}
+
+func (i *clusterAttachmentWorkerConfigOverridesGpuArgsPtrType) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return i.ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterAttachmentWorkerConfigOverridesGpuArgsPtrType) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
+}
+
+type ClusterAttachmentWorkerConfigOverridesGpuArgsOutput struct{ *pulumi.OutputState }
+
+func (ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) ToClusterAttachmentWorkerConfigOverridesGpuArgsOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) ToClusterAttachmentWorkerConfigOverridesGpuArgsOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return o.ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterAttachmentWorkerConfigOverridesGpuArgs) *ClusterAttachmentWorkerConfigOverridesGpuArgs {
+		return &v
+	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} { return v.Cuda }).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} { return v.Cudnn }).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} { return v.CustomDriver }).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} { return v.Driver }).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverridesGpuArgs) *bool { return v.MigEnable }).(pulumi.BoolPtrOutput)
+}
+
+type ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterAttachmentWorkerConfigOverridesGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput() ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) ToClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) Elem() ClusterAttachmentWorkerConfigOverridesGpuArgsOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverridesGpuArgs) ClusterAttachmentWorkerConfigOverridesGpuArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterAttachmentWorkerConfigOverridesGpuArgs
+		return ret
+	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cuda
+	}).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cudnn
+	}).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.CustomDriver
+	}).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverridesGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Driver
+	}).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverridesGpuArgs) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MigEnable
+	}).(pulumi.BoolPtrOutput)
+}
+
 type ClusterAuthOptions struct {
 	// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
 	AutoCreateDiscoveryAnonymousAuth *bool `pulumi:"autoCreateDiscoveryAnonymousAuth"`
-	// Specify service-account-issuer.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 	Issuer *string `pulumi:"issuer"`
-	// Specify service-account-jwks-uri.
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 	JwksUri *string `pulumi:"jwksUri"`
+	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
+	UseTkeDefault *bool `pulumi:"useTkeDefault"`
 }
 
 // ClusterAuthOptionsInput is an input type that accepts ClusterAuthOptionsArgs and ClusterAuthOptionsOutput values.
 // You can construct a concrete instance of `ClusterAuthOptionsInput` via:
 //
-//	ClusterAuthOptionsArgs{...}
+//          ClusterAuthOptionsArgs{...}
 type ClusterAuthOptionsInput interface {
 	pulumi.Input
 
@@ -1957,10 +1289,12 @@ type ClusterAuthOptionsInput interface {
 type ClusterAuthOptionsArgs struct {
 	// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
 	AutoCreateDiscoveryAnonymousAuth pulumi.BoolPtrInput `pulumi:"autoCreateDiscoveryAnonymousAuth"`
-	// Specify service-account-issuer.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 	Issuer pulumi.StringPtrInput `pulumi:"issuer"`
-	// Specify service-account-jwks-uri.
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 	JwksUri pulumi.StringPtrInput `pulumi:"jwksUri"`
+	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
+	UseTkeDefault pulumi.BoolPtrInput `pulumi:"useTkeDefault"`
 }
 
 func (ClusterAuthOptionsArgs) ElementType() reflect.Type {
@@ -1986,11 +1320,11 @@ func (i ClusterAuthOptionsArgs) ToClusterAuthOptionsPtrOutputWithContext(ctx con
 // ClusterAuthOptionsPtrInput is an input type that accepts ClusterAuthOptionsArgs, ClusterAuthOptionsPtr and ClusterAuthOptionsPtrOutput values.
 // You can construct a concrete instance of `ClusterAuthOptionsPtrInput` via:
 //
-//	        ClusterAuthOptionsArgs{...}
+//          ClusterAuthOptionsArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterAuthOptionsPtrInput interface {
 	pulumi.Input
 
@@ -2045,14 +1379,19 @@ func (o ClusterAuthOptionsOutput) AutoCreateDiscoveryAnonymousAuth() pulumi.Bool
 	return o.ApplyT(func(v ClusterAuthOptions) *bool { return v.AutoCreateDiscoveryAnonymousAuth }).(pulumi.BoolPtrOutput)
 }
 
-// Specify service-account-issuer.
+// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 func (o ClusterAuthOptionsOutput) Issuer() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAuthOptions) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
-// Specify service-account-jwks-uri.
+// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 func (o ClusterAuthOptionsOutput) JwksUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAuthOptions) *string { return v.JwksUri }).(pulumi.StringPtrOutput)
+}
+
+// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
+func (o ClusterAuthOptionsOutput) UseTkeDefault() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterAuthOptions) *bool { return v.UseTkeDefault }).(pulumi.BoolPtrOutput)
 }
 
 type ClusterAuthOptionsPtrOutput struct{ *pulumi.OutputState }
@@ -2089,7 +1428,7 @@ func (o ClusterAuthOptionsPtrOutput) AutoCreateDiscoveryAnonymousAuth() pulumi.B
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Specify service-account-issuer.
+// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 func (o ClusterAuthOptionsPtrOutput) Issuer() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAuthOptions) *string {
 		if v == nil {
@@ -2099,7 +1438,7 @@ func (o ClusterAuthOptionsPtrOutput) Issuer() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Specify service-account-jwks-uri.
+// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
 func (o ClusterAuthOptionsPtrOutput) JwksUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAuthOptions) *string {
 		if v == nil {
@@ -2109,7 +1448,19 @@ func (o ClusterAuthOptionsPtrOutput) JwksUri() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
+func (o ClusterAuthOptionsPtrOutput) UseTkeDefault() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterAuthOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseTkeDefault
+	}).(pulumi.BoolPtrOutput)
+}
+
 type ClusterClusterAudit struct {
+	// when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
+	DeleteAuditLogAndTopic *bool `pulumi:"deleteAuditLogAndTopic"`
 	// Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
 	Enabled bool `pulumi:"enabled"`
 	// Specify id of existing CLS log set, or auto create a new set by leave it empty.
@@ -2121,7 +1472,7 @@ type ClusterClusterAudit struct {
 // ClusterClusterAuditInput is an input type that accepts ClusterClusterAuditArgs and ClusterClusterAuditOutput values.
 // You can construct a concrete instance of `ClusterClusterAuditInput` via:
 //
-//	ClusterClusterAuditArgs{...}
+//          ClusterClusterAuditArgs{...}
 type ClusterClusterAuditInput interface {
 	pulumi.Input
 
@@ -2130,6 +1481,8 @@ type ClusterClusterAuditInput interface {
 }
 
 type ClusterClusterAuditArgs struct {
+	// when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
+	DeleteAuditLogAndTopic pulumi.BoolPtrInput `pulumi:"deleteAuditLogAndTopic"`
 	// Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
 	Enabled pulumi.BoolInput `pulumi:"enabled"`
 	// Specify id of existing CLS log set, or auto create a new set by leave it empty.
@@ -2161,11 +1514,11 @@ func (i ClusterClusterAuditArgs) ToClusterClusterAuditPtrOutputWithContext(ctx c
 // ClusterClusterAuditPtrInput is an input type that accepts ClusterClusterAuditArgs, ClusterClusterAuditPtr and ClusterClusterAuditPtrOutput values.
 // You can construct a concrete instance of `ClusterClusterAuditPtrInput` via:
 //
-//	        ClusterClusterAuditArgs{...}
+//          ClusterClusterAuditArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterClusterAuditPtrInput interface {
 	pulumi.Input
 
@@ -2215,6 +1568,11 @@ func (o ClusterClusterAuditOutput) ToClusterClusterAuditPtrOutputWithContext(ctx
 	}).(ClusterClusterAuditPtrOutput)
 }
 
+// when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
+func (o ClusterClusterAuditOutput) DeleteAuditLogAndTopic() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterClusterAudit) *bool { return v.DeleteAuditLogAndTopic }).(pulumi.BoolPtrOutput)
+}
+
 // Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
 func (o ClusterClusterAuditOutput) Enabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v ClusterClusterAudit) bool { return v.Enabled }).(pulumi.BoolOutput)
@@ -2252,6 +1610,16 @@ func (o ClusterClusterAuditPtrOutput) Elem() ClusterClusterAuditOutput {
 		var ret ClusterClusterAudit
 		return ret
 	}).(ClusterClusterAuditOutput)
+}
+
+// when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
+func (o ClusterClusterAuditPtrOutput) DeleteAuditLogAndTopic() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterClusterAudit) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DeleteAuditLogAndTopic
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
@@ -2296,7 +1664,7 @@ type ClusterClusterExtraArgs struct {
 // ClusterClusterExtraArgsInput is an input type that accepts ClusterClusterExtraArgsArgs and ClusterClusterExtraArgsOutput values.
 // You can construct a concrete instance of `ClusterClusterExtraArgsInput` via:
 //
-//	ClusterClusterExtraArgsArgs{...}
+//          ClusterClusterExtraArgsArgs{...}
 type ClusterClusterExtraArgsInput interface {
 	pulumi.Input
 
@@ -2336,11 +1704,11 @@ func (i ClusterClusterExtraArgsArgs) ToClusterClusterExtraArgsPtrOutputWithConte
 // ClusterClusterExtraArgsPtrInput is an input type that accepts ClusterClusterExtraArgsArgs, ClusterClusterExtraArgsPtr and ClusterClusterExtraArgsPtrOutput values.
 // You can construct a concrete instance of `ClusterClusterExtraArgsPtrInput` via:
 //
-//	        ClusterClusterExtraArgsArgs{...}
+//          ClusterClusterExtraArgsArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterClusterExtraArgsPtrInput interface {
 	pulumi.Input
 
@@ -2460,6 +1828,8 @@ func (o ClusterClusterExtraArgsPtrOutput) KubeSchedulers() pulumi.StringArrayOut
 }
 
 type ClusterEventPersistence struct {
+	// when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
+	DeleteEventLogAndTopic *bool `pulumi:"deleteEventLogAndTopic"`
 	// Specify weather the Event Persistence enabled.
 	Enabled bool `pulumi:"enabled"`
 	// Specify id of existing CLS log set, or auto create a new set by leave it empty.
@@ -2471,7 +1841,7 @@ type ClusterEventPersistence struct {
 // ClusterEventPersistenceInput is an input type that accepts ClusterEventPersistenceArgs and ClusterEventPersistenceOutput values.
 // You can construct a concrete instance of `ClusterEventPersistenceInput` via:
 //
-//	ClusterEventPersistenceArgs{...}
+//          ClusterEventPersistenceArgs{...}
 type ClusterEventPersistenceInput interface {
 	pulumi.Input
 
@@ -2480,6 +1850,8 @@ type ClusterEventPersistenceInput interface {
 }
 
 type ClusterEventPersistenceArgs struct {
+	// when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
+	DeleteEventLogAndTopic pulumi.BoolPtrInput `pulumi:"deleteEventLogAndTopic"`
 	// Specify weather the Event Persistence enabled.
 	Enabled pulumi.BoolInput `pulumi:"enabled"`
 	// Specify id of existing CLS log set, or auto create a new set by leave it empty.
@@ -2511,11 +1883,11 @@ func (i ClusterEventPersistenceArgs) ToClusterEventPersistencePtrOutputWithConte
 // ClusterEventPersistencePtrInput is an input type that accepts ClusterEventPersistenceArgs, ClusterEventPersistencePtr and ClusterEventPersistencePtrOutput values.
 // You can construct a concrete instance of `ClusterEventPersistencePtrInput` via:
 //
-//	        ClusterEventPersistenceArgs{...}
+//          ClusterEventPersistenceArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterEventPersistencePtrInput interface {
 	pulumi.Input
 
@@ -2565,6 +1937,11 @@ func (o ClusterEventPersistenceOutput) ToClusterEventPersistencePtrOutputWithCon
 	}).(ClusterEventPersistencePtrOutput)
 }
 
+// when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
+func (o ClusterEventPersistenceOutput) DeleteEventLogAndTopic() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterEventPersistence) *bool { return v.DeleteEventLogAndTopic }).(pulumi.BoolPtrOutput)
+}
+
 // Specify weather the Event Persistence enabled.
 func (o ClusterEventPersistenceOutput) Enabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v ClusterEventPersistence) bool { return v.Enabled }).(pulumi.BoolOutput)
@@ -2602,6 +1979,16 @@ func (o ClusterEventPersistencePtrOutput) Elem() ClusterEventPersistenceOutput {
 		var ret ClusterEventPersistence
 		return ret
 	}).(ClusterEventPersistenceOutput)
+}
+
+// when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
+func (o ClusterEventPersistencePtrOutput) DeleteEventLogAndTopic() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterEventPersistence) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DeleteEventLogAndTopic
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Specify weather the Event Persistence enabled.
@@ -2646,7 +2033,7 @@ type ClusterExistInstance struct {
 // ClusterExistInstanceInput is an input type that accepts ClusterExistInstanceArgs and ClusterExistInstanceOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceInput` via:
 //
-//	ClusterExistInstanceArgs{...}
+//          ClusterExistInstanceArgs{...}
 type ClusterExistInstanceInput interface {
 	pulumi.Input
 
@@ -2678,7 +2065,7 @@ func (i ClusterExistInstanceArgs) ToClusterExistInstanceOutputWithContext(ctx co
 // ClusterExistInstanceArrayInput is an input type that accepts ClusterExistInstanceArray and ClusterExistInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceArrayInput` via:
 //
-//	ClusterExistInstanceArray{ ClusterExistInstanceArgs{...} }
+//          ClusterExistInstanceArray{ ClusterExistInstanceArgs{...} }
 type ClusterExistInstanceArrayInput interface {
 	pulumi.Input
 
@@ -2757,7 +2144,7 @@ type ClusterExistInstanceInstancesPara struct {
 // ClusterExistInstanceInstancesParaInput is an input type that accepts ClusterExistInstanceInstancesParaArgs and ClusterExistInstanceInstancesParaOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceInstancesParaInput` via:
 //
-//	ClusterExistInstanceInstancesParaArgs{...}
+//          ClusterExistInstanceInstancesParaArgs{...}
 type ClusterExistInstanceInstancesParaInput interface {
 	pulumi.Input
 
@@ -2793,11 +2180,11 @@ func (i ClusterExistInstanceInstancesParaArgs) ToClusterExistInstanceInstancesPa
 // ClusterExistInstanceInstancesParaPtrInput is an input type that accepts ClusterExistInstanceInstancesParaArgs, ClusterExistInstanceInstancesParaPtr and ClusterExistInstanceInstancesParaPtrOutput values.
 // You can construct a concrete instance of `ClusterExistInstanceInstancesParaPtrInput` via:
 //
-//	        ClusterExistInstanceInstancesParaArgs{...}
+//          ClusterExistInstanceInstancesParaArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterExistInstanceInstancesParaPtrInput interface {
 	pulumi.Input
 
@@ -2889,14 +2276,14 @@ func (o ClusterExistInstanceInstancesParaPtrOutput) InstanceIds() pulumi.StringA
 type ClusterExtensionAddon struct {
 	// Add-on name.
 	Name string `pulumi:"name"`
-	// Description of the add-on resource object in JSON string format.
+	// Parameter of the add-on resource object in JSON string format, please check the example at the top of page for reference.
 	Param string `pulumi:"param"`
 }
 
 // ClusterExtensionAddonInput is an input type that accepts ClusterExtensionAddonArgs and ClusterExtensionAddonOutput values.
 // You can construct a concrete instance of `ClusterExtensionAddonInput` via:
 //
-//	ClusterExtensionAddonArgs{...}
+//          ClusterExtensionAddonArgs{...}
 type ClusterExtensionAddonInput interface {
 	pulumi.Input
 
@@ -2907,7 +2294,7 @@ type ClusterExtensionAddonInput interface {
 type ClusterExtensionAddonArgs struct {
 	// Add-on name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Description of the add-on resource object in JSON string format.
+	// Parameter of the add-on resource object in JSON string format, please check the example at the top of page for reference.
 	Param pulumi.StringInput `pulumi:"param"`
 }
 
@@ -2926,7 +2313,7 @@ func (i ClusterExtensionAddonArgs) ToClusterExtensionAddonOutputWithContext(ctx 
 // ClusterExtensionAddonArrayInput is an input type that accepts ClusterExtensionAddonArray and ClusterExtensionAddonArrayOutput values.
 // You can construct a concrete instance of `ClusterExtensionAddonArrayInput` via:
 //
-//	ClusterExtensionAddonArray{ ClusterExtensionAddonArgs{...} }
+//          ClusterExtensionAddonArray{ ClusterExtensionAddonArgs{...} }
 type ClusterExtensionAddonArrayInput interface {
 	pulumi.Input
 
@@ -2967,7 +2354,7 @@ func (o ClusterExtensionAddonOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ClusterExtensionAddon) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Description of the add-on resource object in JSON string format.
+// Parameter of the add-on resource object in JSON string format, please check the example at the top of page for reference.
 func (o ClusterExtensionAddonOutput) Param() pulumi.StringOutput {
 	return o.ApplyT(func(v ClusterExtensionAddon) string { return v.Param }).(pulumi.StringOutput)
 }
@@ -3002,7 +2389,7 @@ type ClusterLogAgent struct {
 // ClusterLogAgentInput is an input type that accepts ClusterLogAgentArgs and ClusterLogAgentOutput values.
 // You can construct a concrete instance of `ClusterLogAgentInput` via:
 //
-//	ClusterLogAgentArgs{...}
+//          ClusterLogAgentArgs{...}
 type ClusterLogAgentInput interface {
 	pulumi.Input
 
@@ -3040,11 +2427,11 @@ func (i ClusterLogAgentArgs) ToClusterLogAgentPtrOutputWithContext(ctx context.C
 // ClusterLogAgentPtrInput is an input type that accepts ClusterLogAgentArgs, ClusterLogAgentPtr and ClusterLogAgentPtrOutput values.
 // You can construct a concrete instance of `ClusterLogAgentPtrInput` via:
 //
-//	        ClusterLogAgentArgs{...}
+//          ClusterLogAgentArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterLogAgentPtrInput interface {
 	pulumi.Input
 
@@ -3169,6 +2556,8 @@ type ClusterMasterConfig struct {
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
 	// The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 	Hostname *string `pulumi:"hostname"`
+	// Id of cvm hpc cluster.
+	HpcClusterId *string `pulumi:"hpcClusterId"`
 	// The valid image id, format of img-xxx.
 	ImgId *string `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
@@ -3206,7 +2595,7 @@ type ClusterMasterConfig struct {
 // ClusterMasterConfigInput is an input type that accepts ClusterMasterConfigArgs and ClusterMasterConfigOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigInput` via:
 //
-//	ClusterMasterConfigArgs{...}
+//          ClusterMasterConfigArgs{...}
 type ClusterMasterConfigInput interface {
 	pulumi.Input
 
@@ -3235,6 +2624,8 @@ type ClusterMasterConfigArgs struct {
 	EnhancedSecurityService pulumi.BoolPtrInput `pulumi:"enhancedSecurityService"`
 	// The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 	Hostname pulumi.StringPtrInput `pulumi:"hostname"`
+	// Id of cvm hpc cluster.
+	HpcClusterId pulumi.StringPtrInput `pulumi:"hpcClusterId"`
 	// The valid image id, format of img-xxx.
 	ImgId pulumi.StringPtrInput `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
@@ -3284,7 +2675,7 @@ func (i ClusterMasterConfigArgs) ToClusterMasterConfigOutputWithContext(ctx cont
 // ClusterMasterConfigArrayInput is an input type that accepts ClusterMasterConfigArray and ClusterMasterConfigArrayOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigArrayInput` via:
 //
-//	ClusterMasterConfigArray{ ClusterMasterConfigArgs{...} }
+//          ClusterMasterConfigArray{ ClusterMasterConfigArgs{...} }
 type ClusterMasterConfigArrayInput interface {
 	pulumi.Input
 
@@ -3368,6 +2759,11 @@ func (o ClusterMasterConfigOutput) EnhancedSecurityService() pulumi.BoolPtrOutpu
 // The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 func (o ClusterMasterConfigOutput) Hostname() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterMasterConfig) *string { return v.Hostname }).(pulumi.StringPtrOutput)
+}
+
+// Id of cvm hpc cluster.
+func (o ClusterMasterConfigOutput) HpcClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterConfig) *string { return v.HpcClusterId }).(pulumi.StringPtrOutput)
 }
 
 // The valid image id, format of img-xxx.
@@ -3494,7 +2890,7 @@ type ClusterMasterConfigDataDisk struct {
 // ClusterMasterConfigDataDiskInput is an input type that accepts ClusterMasterConfigDataDiskArgs and ClusterMasterConfigDataDiskOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigDataDiskInput` via:
 //
-//	ClusterMasterConfigDataDiskArgs{...}
+//          ClusterMasterConfigDataDiskArgs{...}
 type ClusterMasterConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -3538,7 +2934,7 @@ func (i ClusterMasterConfigDataDiskArgs) ToClusterMasterConfigDataDiskOutputWith
 // ClusterMasterConfigDataDiskArrayInput is an input type that accepts ClusterMasterConfigDataDiskArray and ClusterMasterConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterMasterConfigDataDiskArrayInput` via:
 //
-//	ClusterMasterConfigDataDiskArray{ ClusterMasterConfigDataDiskArgs{...} }
+//          ClusterMasterConfigDataDiskArray{ ClusterMasterConfigDataDiskArgs{...} }
 type ClusterMasterConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -3663,7 +3059,7 @@ type ClusterNodePoolGlobalConfig struct {
 // ClusterNodePoolGlobalConfigInput is an input type that accepts ClusterNodePoolGlobalConfigArgs and ClusterNodePoolGlobalConfigOutput values.
 // You can construct a concrete instance of `ClusterNodePoolGlobalConfigInput` via:
 //
-//	ClusterNodePoolGlobalConfigArgs{...}
+//          ClusterNodePoolGlobalConfigArgs{...}
 type ClusterNodePoolGlobalConfigInput interface {
 	pulumi.Input
 
@@ -3707,7 +3103,7 @@ func (i ClusterNodePoolGlobalConfigArgs) ToClusterNodePoolGlobalConfigOutputWith
 // ClusterNodePoolGlobalConfigArrayInput is an input type that accepts ClusterNodePoolGlobalConfigArray and ClusterNodePoolGlobalConfigArrayOutput values.
 // You can construct a concrete instance of `ClusterNodePoolGlobalConfigArrayInput` via:
 //
-//	ClusterNodePoolGlobalConfigArray{ ClusterNodePoolGlobalConfigArgs{...} }
+//          ClusterNodePoolGlobalConfigArray{ ClusterNodePoolGlobalConfigArgs{...} }
 type ClusterNodePoolGlobalConfigArrayInput interface {
 	pulumi.Input
 
@@ -3829,6 +3225,8 @@ type ClusterWorkerConfig struct {
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
 	// The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 	Hostname *string `pulumi:"hostname"`
+	// Id of cvm hpc cluster.
+	HpcClusterId *string `pulumi:"hpcClusterId"`
 	// The valid image id, format of img-xxx.
 	ImgId *string `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
@@ -3866,7 +3264,7 @@ type ClusterWorkerConfig struct {
 // ClusterWorkerConfigInput is an input type that accepts ClusterWorkerConfigArgs and ClusterWorkerConfigOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigInput` via:
 //
-//	ClusterWorkerConfigArgs{...}
+//          ClusterWorkerConfigArgs{...}
 type ClusterWorkerConfigInput interface {
 	pulumi.Input
 
@@ -3895,6 +3293,8 @@ type ClusterWorkerConfigArgs struct {
 	EnhancedSecurityService pulumi.BoolPtrInput `pulumi:"enhancedSecurityService"`
 	// The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 	Hostname pulumi.StringPtrInput `pulumi:"hostname"`
+	// Id of cvm hpc cluster.
+	HpcClusterId pulumi.StringPtrInput `pulumi:"hpcClusterId"`
 	// The valid image id, format of img-xxx.
 	ImgId pulumi.StringPtrInput `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
@@ -3944,7 +3344,7 @@ func (i ClusterWorkerConfigArgs) ToClusterWorkerConfigOutputWithContext(ctx cont
 // ClusterWorkerConfigArrayInput is an input type that accepts ClusterWorkerConfigArray and ClusterWorkerConfigArrayOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigArrayInput` via:
 //
-//	ClusterWorkerConfigArray{ ClusterWorkerConfigArgs{...} }
+//          ClusterWorkerConfigArray{ ClusterWorkerConfigArgs{...} }
 type ClusterWorkerConfigArrayInput interface {
 	pulumi.Input
 
@@ -4028,6 +3428,11 @@ func (o ClusterWorkerConfigOutput) EnhancedSecurityService() pulumi.BoolPtrOutpu
 // The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 func (o ClusterWorkerConfigOutput) Hostname() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterWorkerConfig) *string { return v.Hostname }).(pulumi.StringPtrOutput)
+}
+
+// Id of cvm hpc cluster.
+func (o ClusterWorkerConfigOutput) HpcClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterWorkerConfig) *string { return v.HpcClusterId }).(pulumi.StringPtrOutput)
 }
 
 // The valid image id, format of img-xxx.
@@ -4154,7 +3559,7 @@ type ClusterWorkerConfigDataDisk struct {
 // ClusterWorkerConfigDataDiskInput is an input type that accepts ClusterWorkerConfigDataDiskArgs and ClusterWorkerConfigDataDiskOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigDataDiskInput` via:
 //
-//	ClusterWorkerConfigDataDiskArgs{...}
+//          ClusterWorkerConfigDataDiskArgs{...}
 type ClusterWorkerConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -4198,7 +3603,7 @@ func (i ClusterWorkerConfigDataDiskArgs) ToClusterWorkerConfigDataDiskOutputWith
 // ClusterWorkerConfigDataDiskArrayInput is an input type that accepts ClusterWorkerConfigDataDiskArray and ClusterWorkerConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ClusterWorkerConfigDataDiskArrayInput` via:
 //
-//	ClusterWorkerConfigDataDiskArray{ ClusterWorkerConfigDataDiskArgs{...} }
+//          ClusterWorkerConfigDataDiskArray{ ClusterWorkerConfigDataDiskArgs{...} }
 type ClusterWorkerConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -4315,7 +3720,7 @@ type ClusterWorkerInstancesList struct {
 // ClusterWorkerInstancesListInput is an input type that accepts ClusterWorkerInstancesListArgs and ClusterWorkerInstancesListOutput values.
 // You can construct a concrete instance of `ClusterWorkerInstancesListInput` via:
 //
-//	ClusterWorkerInstancesListArgs{...}
+//          ClusterWorkerInstancesListArgs{...}
 type ClusterWorkerInstancesListInput interface {
 	pulumi.Input
 
@@ -4351,7 +3756,7 @@ func (i ClusterWorkerInstancesListArgs) ToClusterWorkerInstancesListOutputWithCo
 // ClusterWorkerInstancesListArrayInput is an input type that accepts ClusterWorkerInstancesListArray and ClusterWorkerInstancesListArrayOutput values.
 // You can construct a concrete instance of `ClusterWorkerInstancesListArrayInput` via:
 //
-//	ClusterWorkerInstancesListArray{ ClusterWorkerInstancesListArgs{...} }
+//          ClusterWorkerInstancesListArray{ ClusterWorkerInstancesListArgs{...} }
 type ClusterWorkerInstancesListArrayInput interface {
 	pulumi.Input
 
@@ -4445,12 +3850,18 @@ type NodePoolAutoScalingConfig struct {
 	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is TRUE.
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
+	// The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	HostName *string `pulumi:"hostName"`
+	// The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	HostNameStyle *string `pulumi:"hostNameStyle"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
 	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 	InstanceChargeTypePrepaidRenewFlag *string `pulumi:"instanceChargeTypePrepaidRenewFlag"`
+	// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	InstanceName *string `pulumi:"instanceName"`
 	// Specified types of CVM instance.
 	InstanceType string `pulumi:"instanceType"`
 	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -4478,7 +3889,7 @@ type NodePoolAutoScalingConfig struct {
 // NodePoolAutoScalingConfigInput is an input type that accepts NodePoolAutoScalingConfigArgs and NodePoolAutoScalingConfigOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigInput` via:
 //
-//	NodePoolAutoScalingConfigArgs{...}
+//          NodePoolAutoScalingConfigArgs{...}
 type NodePoolAutoScalingConfigInput interface {
 	pulumi.Input
 
@@ -4499,12 +3910,18 @@ type NodePoolAutoScalingConfigArgs struct {
 	EnhancedMonitorService pulumi.BoolPtrInput `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is TRUE.
 	EnhancedSecurityService pulumi.BoolPtrInput `pulumi:"enhancedSecurityService"`
+	// The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	HostName pulumi.StringPtrInput `pulumi:"hostName"`
+	// The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	HostNameStyle pulumi.StringPtrInput `pulumi:"hostNameStyle"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType pulumi.StringPtrInput `pulumi:"instanceChargeType"`
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput `pulumi:"instanceChargeTypePrepaidPeriod"`
 	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 	InstanceChargeTypePrepaidRenewFlag pulumi.StringPtrInput `pulumi:"instanceChargeTypePrepaidRenewFlag"`
+	// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
 	// Specified types of CVM instance.
 	InstanceType pulumi.StringInput `pulumi:"instanceType"`
 	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -4552,11 +3969,11 @@ func (i NodePoolAutoScalingConfigArgs) ToNodePoolAutoScalingConfigPtrOutputWithC
 // NodePoolAutoScalingConfigPtrInput is an input type that accepts NodePoolAutoScalingConfigArgs, NodePoolAutoScalingConfigPtr and NodePoolAutoScalingConfigPtrOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigPtrInput` via:
 //
-//	        NodePoolAutoScalingConfigArgs{...}
+//          NodePoolAutoScalingConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type NodePoolAutoScalingConfigPtrInput interface {
 	pulumi.Input
 
@@ -4636,6 +4053,16 @@ func (o NodePoolAutoScalingConfigOutput) EnhancedSecurityService() pulumi.BoolPt
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *bool { return v.EnhancedSecurityService }).(pulumi.BoolPtrOutput)
 }
 
+// The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigOutput) HostName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.HostName }).(pulumi.StringPtrOutput)
+}
+
+// The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigOutput) HostNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.HostNameStyle }).(pulumi.StringPtrOutput)
+}
+
 // Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 func (o NodePoolAutoScalingConfigOutput) InstanceChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InstanceChargeType }).(pulumi.StringPtrOutput)
@@ -4649,6 +4076,11 @@ func (o NodePoolAutoScalingConfigOutput) InstanceChargeTypePrepaidPeriod() pulum
 // Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 func (o NodePoolAutoScalingConfigOutput) InstanceChargeTypePrepaidRenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InstanceChargeTypePrepaidRenewFlag }).(pulumi.StringPtrOutput)
+}
+
+// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
 }
 
 // Specified types of CVM instance.
@@ -4790,6 +4222,26 @@ func (o NodePoolAutoScalingConfigPtrOutput) EnhancedSecurityService() pulumi.Boo
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigPtrOutput) HostName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HostName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigPtrOutput) HostNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HostNameStyle
+	}).(pulumi.StringPtrOutput)
+}
+
 // Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 func (o NodePoolAutoScalingConfigPtrOutput) InstanceChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
@@ -4817,6 +4269,16 @@ func (o NodePoolAutoScalingConfigPtrOutput) InstanceChargeTypePrepaidRenewFlag()
 			return nil
 		}
 		return v.InstanceChargeTypePrepaidRenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
+// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigPtrOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceName
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -4931,20 +4393,24 @@ func (o NodePoolAutoScalingConfigPtrOutput) SystemDiskType() pulumi.StringPtrOut
 }
 
 type NodePoolAutoScalingConfigDataDisk struct {
-	// Indicates whether the disk remove after instance terminated.
+	// Indicates whether the disk remove after instance terminated. Default is `false`.
 	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
 	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 	DiskType *string `pulumi:"diskType"`
+	// Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
+	Encrypt *bool `pulumi:"encrypt"`
 	// Data disk snapshot ID.
 	SnapshotId *string `pulumi:"snapshotId"`
+	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `dataSize` > 460GB.
+	ThroughputPerformance *int `pulumi:"throughputPerformance"`
 }
 
 // NodePoolAutoScalingConfigDataDiskInput is an input type that accepts NodePoolAutoScalingConfigDataDiskArgs and NodePoolAutoScalingConfigDataDiskOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigDataDiskInput` via:
 //
-//	NodePoolAutoScalingConfigDataDiskArgs{...}
+//          NodePoolAutoScalingConfigDataDiskArgs{...}
 type NodePoolAutoScalingConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -4953,14 +4419,18 @@ type NodePoolAutoScalingConfigDataDiskInput interface {
 }
 
 type NodePoolAutoScalingConfigDataDiskArgs struct {
-	// Indicates whether the disk remove after instance terminated.
+	// Indicates whether the disk remove after instance terminated. Default is `false`.
 	DeleteWithInstance pulumi.BoolPtrInput `pulumi:"deleteWithInstance"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
 	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
+	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
 	// Data disk snapshot ID.
 	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
+	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `dataSize` > 460GB.
+	ThroughputPerformance pulumi.IntPtrInput `pulumi:"throughputPerformance"`
 }
 
 func (NodePoolAutoScalingConfigDataDiskArgs) ElementType() reflect.Type {
@@ -4978,7 +4448,7 @@ func (i NodePoolAutoScalingConfigDataDiskArgs) ToNodePoolAutoScalingConfigDataDi
 // NodePoolAutoScalingConfigDataDiskArrayInput is an input type that accepts NodePoolAutoScalingConfigDataDiskArray and NodePoolAutoScalingConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `NodePoolAutoScalingConfigDataDiskArrayInput` via:
 //
-//	NodePoolAutoScalingConfigDataDiskArray{ NodePoolAutoScalingConfigDataDiskArgs{...} }
+//          NodePoolAutoScalingConfigDataDiskArray{ NodePoolAutoScalingConfigDataDiskArgs{...} }
 type NodePoolAutoScalingConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -5014,7 +4484,7 @@ func (o NodePoolAutoScalingConfigDataDiskOutput) ToNodePoolAutoScalingConfigData
 	return o
 }
 
-// Indicates whether the disk remove after instance terminated.
+// Indicates whether the disk remove after instance terminated. Default is `false`.
 func (o NodePoolAutoScalingConfigDataDiskOutput) DeleteWithInstance() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfigDataDisk) *bool { return v.DeleteWithInstance }).(pulumi.BoolPtrOutput)
 }
@@ -5029,9 +4499,19 @@ func (o NodePoolAutoScalingConfigDataDiskOutput) DiskType() pulumi.StringPtrOutp
 	return o.ApplyT(func(v NodePoolAutoScalingConfigDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
+func (o NodePoolAutoScalingConfigDataDiskOutput) Encrypt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfigDataDisk) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
+}
+
 // Data disk snapshot ID.
 func (o NodePoolAutoScalingConfigDataDiskOutput) SnapshotId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfigDataDisk) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
+}
+
+// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `dataSize` > 460GB.
+func (o NodePoolAutoScalingConfigDataDiskOutput) ThroughputPerformance() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfigDataDisk) *int { return v.ThroughputPerformance }).(pulumi.IntPtrOutput)
 }
 
 type NodePoolAutoScalingConfigDataDiskArrayOutput struct{ *pulumi.OutputState }
@@ -5063,6 +4543,8 @@ type NodePoolNodeConfig struct {
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs []string `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs *NodePoolNodeConfigGpuArgs `pulumi:"gpuArgs"`
 	// Indicate to schedule the adding node or not. Default is true.
 	IsSchedule *bool `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
@@ -5074,7 +4556,7 @@ type NodePoolNodeConfig struct {
 // NodePoolNodeConfigInput is an input type that accepts NodePoolNodeConfigArgs and NodePoolNodeConfigOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigInput` via:
 //
-//	NodePoolNodeConfigArgs{...}
+//          NodePoolNodeConfigArgs{...}
 type NodePoolNodeConfigInput interface {
 	pulumi.Input
 
@@ -5091,6 +4573,8 @@ type NodePoolNodeConfigArgs struct {
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs NodePoolNodeConfigGpuArgsPtrInput `pulumi:"gpuArgs"`
 	// Indicate to schedule the adding node or not. Default is true.
 	IsSchedule pulumi.BoolPtrInput `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
@@ -5122,11 +4606,11 @@ func (i NodePoolNodeConfigArgs) ToNodePoolNodeConfigPtrOutputWithContext(ctx con
 // NodePoolNodeConfigPtrInput is an input type that accepts NodePoolNodeConfigArgs, NodePoolNodeConfigPtr and NodePoolNodeConfigPtrOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigPtrInput` via:
 //
-//	        NodePoolNodeConfigArgs{...}
+//          NodePoolNodeConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type NodePoolNodeConfigPtrInput interface {
 	pulumi.Input
 
@@ -5194,6 +4678,11 @@ func (o NodePoolNodeConfigOutput) DockerGraphPath() pulumi.StringPtrOutput {
 // Custom parameter information related to the node. This is a white-list parameter.
 func (o NodePoolNodeConfigOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v NodePoolNodeConfig) []string { return v.ExtraArgs }).(pulumi.StringArrayOutput)
+}
+
+// GPU driver parameters.
+func (o NodePoolNodeConfigOutput) GpuArgs() NodePoolNodeConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v NodePoolNodeConfig) *NodePoolNodeConfigGpuArgs { return v.GpuArgs }).(NodePoolNodeConfigGpuArgsPtrOutput)
 }
 
 // Indicate to schedule the adding node or not. Default is true.
@@ -5275,6 +4764,16 @@ func (o NodePoolNodeConfigPtrOutput) ExtraArgs() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// GPU driver parameters.
+func (o NodePoolNodeConfigPtrOutput) GpuArgs() NodePoolNodeConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v *NodePoolNodeConfig) *NodePoolNodeConfigGpuArgs {
+		if v == nil {
+			return nil
+		}
+		return v.GpuArgs
+	}).(NodePoolNodeConfigGpuArgsPtrOutput)
+}
+
 // Indicate to schedule the adding node or not. Default is true.
 func (o NodePoolNodeConfigPtrOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *NodePoolNodeConfig) *bool {
@@ -5323,7 +4822,7 @@ type NodePoolNodeConfigDataDisk struct {
 // NodePoolNodeConfigDataDiskInput is an input type that accepts NodePoolNodeConfigDataDiskArgs and NodePoolNodeConfigDataDiskOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigDataDiskInput` via:
 //
-//	NodePoolNodeConfigDataDiskArgs{...}
+//          NodePoolNodeConfigDataDiskArgs{...}
 type NodePoolNodeConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -5361,7 +4860,7 @@ func (i NodePoolNodeConfigDataDiskArgs) ToNodePoolNodeConfigDataDiskOutputWithCo
 // NodePoolNodeConfigDataDiskArrayInput is an input type that accepts NodePoolNodeConfigDataDiskArray and NodePoolNodeConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `NodePoolNodeConfigDataDiskArrayInput` via:
 //
-//	NodePoolNodeConfigDataDiskArray{ NodePoolNodeConfigDataDiskArgs{...} }
+//          NodePoolNodeConfigDataDiskArray{ NodePoolNodeConfigDataDiskArgs{...} }
 type NodePoolNodeConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -5447,6 +4946,219 @@ func (o NodePoolNodeConfigDataDiskArrayOutput) Index(i pulumi.IntInput) NodePool
 	}).(NodePoolNodeConfigDataDiskOutput)
 }
 
+type NodePoolNodeConfigGpuArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda map[string]interface{} `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn map[string]interface{} `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver map[string]interface{} `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver map[string]interface{} `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable *bool `pulumi:"migEnable"`
+}
+
+// NodePoolNodeConfigGpuArgsInput is an input type that accepts NodePoolNodeConfigGpuArgsArgs and NodePoolNodeConfigGpuArgsOutput values.
+// You can construct a concrete instance of `NodePoolNodeConfigGpuArgsInput` via:
+//
+//          NodePoolNodeConfigGpuArgsArgs{...}
+type NodePoolNodeConfigGpuArgsInput interface {
+	pulumi.Input
+
+	ToNodePoolNodeConfigGpuArgsOutput() NodePoolNodeConfigGpuArgsOutput
+	ToNodePoolNodeConfigGpuArgsOutputWithContext(context.Context) NodePoolNodeConfigGpuArgsOutput
+}
+
+type NodePoolNodeConfigGpuArgsArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda pulumi.MapInput `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn pulumi.MapInput `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver pulumi.MapInput `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver pulumi.MapInput `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable pulumi.BoolPtrInput `pulumi:"migEnable"`
+}
+
+func (NodePoolNodeConfigGpuArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NodePoolNodeConfigGpuArgs)(nil)).Elem()
+}
+
+func (i NodePoolNodeConfigGpuArgsArgs) ToNodePoolNodeConfigGpuArgsOutput() NodePoolNodeConfigGpuArgsOutput {
+	return i.ToNodePoolNodeConfigGpuArgsOutputWithContext(context.Background())
+}
+
+func (i NodePoolNodeConfigGpuArgsArgs) ToNodePoolNodeConfigGpuArgsOutputWithContext(ctx context.Context) NodePoolNodeConfigGpuArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NodePoolNodeConfigGpuArgsOutput)
+}
+
+func (i NodePoolNodeConfigGpuArgsArgs) ToNodePoolNodeConfigGpuArgsPtrOutput() NodePoolNodeConfigGpuArgsPtrOutput {
+	return i.ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i NodePoolNodeConfigGpuArgsArgs) ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(ctx context.Context) NodePoolNodeConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NodePoolNodeConfigGpuArgsOutput).ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(ctx)
+}
+
+// NodePoolNodeConfigGpuArgsPtrInput is an input type that accepts NodePoolNodeConfigGpuArgsArgs, NodePoolNodeConfigGpuArgsPtr and NodePoolNodeConfigGpuArgsPtrOutput values.
+// You can construct a concrete instance of `NodePoolNodeConfigGpuArgsPtrInput` via:
+//
+//          NodePoolNodeConfigGpuArgsArgs{...}
+//
+//  or:
+//
+//          nil
+type NodePoolNodeConfigGpuArgsPtrInput interface {
+	pulumi.Input
+
+	ToNodePoolNodeConfigGpuArgsPtrOutput() NodePoolNodeConfigGpuArgsPtrOutput
+	ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(context.Context) NodePoolNodeConfigGpuArgsPtrOutput
+}
+
+type nodePoolNodeConfigGpuArgsPtrType NodePoolNodeConfigGpuArgsArgs
+
+func NodePoolNodeConfigGpuArgsPtr(v *NodePoolNodeConfigGpuArgsArgs) NodePoolNodeConfigGpuArgsPtrInput {
+	return (*nodePoolNodeConfigGpuArgsPtrType)(v)
+}
+
+func (*nodePoolNodeConfigGpuArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NodePoolNodeConfigGpuArgs)(nil)).Elem()
+}
+
+func (i *nodePoolNodeConfigGpuArgsPtrType) ToNodePoolNodeConfigGpuArgsPtrOutput() NodePoolNodeConfigGpuArgsPtrOutput {
+	return i.ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *nodePoolNodeConfigGpuArgsPtrType) ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(ctx context.Context) NodePoolNodeConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NodePoolNodeConfigGpuArgsPtrOutput)
+}
+
+type NodePoolNodeConfigGpuArgsOutput struct{ *pulumi.OutputState }
+
+func (NodePoolNodeConfigGpuArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NodePoolNodeConfigGpuArgs)(nil)).Elem()
+}
+
+func (o NodePoolNodeConfigGpuArgsOutput) ToNodePoolNodeConfigGpuArgsOutput() NodePoolNodeConfigGpuArgsOutput {
+	return o
+}
+
+func (o NodePoolNodeConfigGpuArgsOutput) ToNodePoolNodeConfigGpuArgsOutputWithContext(ctx context.Context) NodePoolNodeConfigGpuArgsOutput {
+	return o
+}
+
+func (o NodePoolNodeConfigGpuArgsOutput) ToNodePoolNodeConfigGpuArgsPtrOutput() NodePoolNodeConfigGpuArgsPtrOutput {
+	return o.ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (o NodePoolNodeConfigGpuArgsOutput) ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(ctx context.Context) NodePoolNodeConfigGpuArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NodePoolNodeConfigGpuArgs) *NodePoolNodeConfigGpuArgs {
+		return &v
+	}).(NodePoolNodeConfigGpuArgsPtrOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o NodePoolNodeConfigGpuArgsOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v NodePoolNodeConfigGpuArgs) map[string]interface{} { return v.Cuda }).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o NodePoolNodeConfigGpuArgsOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v NodePoolNodeConfigGpuArgs) map[string]interface{} { return v.Cudnn }).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o NodePoolNodeConfigGpuArgsOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v NodePoolNodeConfigGpuArgs) map[string]interface{} { return v.CustomDriver }).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o NodePoolNodeConfigGpuArgsOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v NodePoolNodeConfigGpuArgs) map[string]interface{} { return v.Driver }).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o NodePoolNodeConfigGpuArgsOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v NodePoolNodeConfigGpuArgs) *bool { return v.MigEnable }).(pulumi.BoolPtrOutput)
+}
+
+type NodePoolNodeConfigGpuArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (NodePoolNodeConfigGpuArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NodePoolNodeConfigGpuArgs)(nil)).Elem()
+}
+
+func (o NodePoolNodeConfigGpuArgsPtrOutput) ToNodePoolNodeConfigGpuArgsPtrOutput() NodePoolNodeConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o NodePoolNodeConfigGpuArgsPtrOutput) ToNodePoolNodeConfigGpuArgsPtrOutputWithContext(ctx context.Context) NodePoolNodeConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o NodePoolNodeConfigGpuArgsPtrOutput) Elem() NodePoolNodeConfigGpuArgsOutput {
+	return o.ApplyT(func(v *NodePoolNodeConfigGpuArgs) NodePoolNodeConfigGpuArgs {
+		if v != nil {
+			return *v
+		}
+		var ret NodePoolNodeConfigGpuArgs
+		return ret
+	}).(NodePoolNodeConfigGpuArgsOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o NodePoolNodeConfigGpuArgsPtrOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v *NodePoolNodeConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cuda
+	}).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o NodePoolNodeConfigGpuArgsPtrOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v *NodePoolNodeConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cudnn
+	}).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o NodePoolNodeConfigGpuArgsPtrOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v *NodePoolNodeConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.CustomDriver
+	}).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o NodePoolNodeConfigGpuArgsPtrOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v *NodePoolNodeConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Driver
+	}).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o NodePoolNodeConfigGpuArgsPtrOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *NodePoolNodeConfigGpuArgs) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MigEnable
+	}).(pulumi.BoolPtrOutput)
+}
+
 type NodePoolTaint struct {
 	// Effect of the taint. Valid values are: `NoSchedule`, `PreferNoSchedule`, `NoExecute`.
 	Effect string `pulumi:"effect"`
@@ -5459,7 +5171,7 @@ type NodePoolTaint struct {
 // NodePoolTaintInput is an input type that accepts NodePoolTaintArgs and NodePoolTaintOutput values.
 // You can construct a concrete instance of `NodePoolTaintInput` via:
 //
-//	NodePoolTaintArgs{...}
+//          NodePoolTaintArgs{...}
 type NodePoolTaintInput interface {
 	pulumi.Input
 
@@ -5491,7 +5203,7 @@ func (i NodePoolTaintArgs) ToNodePoolTaintOutputWithContext(ctx context.Context)
 // NodePoolTaintArrayInput is an input type that accepts NodePoolTaintArray and NodePoolTaintArrayOutput values.
 // You can construct a concrete instance of `NodePoolTaintArrayInput` via:
 //
-//	NodePoolTaintArray{ NodePoolTaintArgs{...} }
+//          NodePoolTaintArray{ NodePoolTaintArgs{...} }
 type NodePoolTaintArrayInput interface {
 	pulumi.Input
 
@@ -5578,7 +5290,7 @@ type ScaleWorkerDataDisk struct {
 // ScaleWorkerDataDiskInput is an input type that accepts ScaleWorkerDataDiskArgs and ScaleWorkerDataDiskOutput values.
 // You can construct a concrete instance of `ScaleWorkerDataDiskInput` via:
 //
-//	ScaleWorkerDataDiskArgs{...}
+//          ScaleWorkerDataDiskArgs{...}
 type ScaleWorkerDataDiskInput interface {
 	pulumi.Input
 
@@ -5614,7 +5326,7 @@ func (i ScaleWorkerDataDiskArgs) ToScaleWorkerDataDiskOutputWithContext(ctx cont
 // ScaleWorkerDataDiskArrayInput is an input type that accepts ScaleWorkerDataDiskArray and ScaleWorkerDataDiskArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerDataDiskArrayInput` via:
 //
-//	ScaleWorkerDataDiskArray{ ScaleWorkerDataDiskArgs{...} }
+//          ScaleWorkerDataDiskArray{ ScaleWorkerDataDiskArgs{...} }
 type ScaleWorkerDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -5695,6 +5407,219 @@ func (o ScaleWorkerDataDiskArrayOutput) Index(i pulumi.IntInput) ScaleWorkerData
 	}).(ScaleWorkerDataDiskOutput)
 }
 
+type ScaleWorkerGpuArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda map[string]interface{} `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn map[string]interface{} `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver map[string]interface{} `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver map[string]interface{} `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable *bool `pulumi:"migEnable"`
+}
+
+// ScaleWorkerGpuArgsInput is an input type that accepts ScaleWorkerGpuArgsArgs and ScaleWorkerGpuArgsOutput values.
+// You can construct a concrete instance of `ScaleWorkerGpuArgsInput` via:
+//
+//          ScaleWorkerGpuArgsArgs{...}
+type ScaleWorkerGpuArgsInput interface {
+	pulumi.Input
+
+	ToScaleWorkerGpuArgsOutput() ScaleWorkerGpuArgsOutput
+	ToScaleWorkerGpuArgsOutputWithContext(context.Context) ScaleWorkerGpuArgsOutput
+}
+
+type ScaleWorkerGpuArgsArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda pulumi.MapInput `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn pulumi.MapInput `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver pulumi.MapInput `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver pulumi.MapInput `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable pulumi.BoolPtrInput `pulumi:"migEnable"`
+}
+
+func (ScaleWorkerGpuArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScaleWorkerGpuArgs)(nil)).Elem()
+}
+
+func (i ScaleWorkerGpuArgsArgs) ToScaleWorkerGpuArgsOutput() ScaleWorkerGpuArgsOutput {
+	return i.ToScaleWorkerGpuArgsOutputWithContext(context.Background())
+}
+
+func (i ScaleWorkerGpuArgsArgs) ToScaleWorkerGpuArgsOutputWithContext(ctx context.Context) ScaleWorkerGpuArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScaleWorkerGpuArgsOutput)
+}
+
+func (i ScaleWorkerGpuArgsArgs) ToScaleWorkerGpuArgsPtrOutput() ScaleWorkerGpuArgsPtrOutput {
+	return i.ToScaleWorkerGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ScaleWorkerGpuArgsArgs) ToScaleWorkerGpuArgsPtrOutputWithContext(ctx context.Context) ScaleWorkerGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScaleWorkerGpuArgsOutput).ToScaleWorkerGpuArgsPtrOutputWithContext(ctx)
+}
+
+// ScaleWorkerGpuArgsPtrInput is an input type that accepts ScaleWorkerGpuArgsArgs, ScaleWorkerGpuArgsPtr and ScaleWorkerGpuArgsPtrOutput values.
+// You can construct a concrete instance of `ScaleWorkerGpuArgsPtrInput` via:
+//
+//          ScaleWorkerGpuArgsArgs{...}
+//
+//  or:
+//
+//          nil
+type ScaleWorkerGpuArgsPtrInput interface {
+	pulumi.Input
+
+	ToScaleWorkerGpuArgsPtrOutput() ScaleWorkerGpuArgsPtrOutput
+	ToScaleWorkerGpuArgsPtrOutputWithContext(context.Context) ScaleWorkerGpuArgsPtrOutput
+}
+
+type scaleWorkerGpuArgsPtrType ScaleWorkerGpuArgsArgs
+
+func ScaleWorkerGpuArgsPtr(v *ScaleWorkerGpuArgsArgs) ScaleWorkerGpuArgsPtrInput {
+	return (*scaleWorkerGpuArgsPtrType)(v)
+}
+
+func (*scaleWorkerGpuArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ScaleWorkerGpuArgs)(nil)).Elem()
+}
+
+func (i *scaleWorkerGpuArgsPtrType) ToScaleWorkerGpuArgsPtrOutput() ScaleWorkerGpuArgsPtrOutput {
+	return i.ToScaleWorkerGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *scaleWorkerGpuArgsPtrType) ToScaleWorkerGpuArgsPtrOutputWithContext(ctx context.Context) ScaleWorkerGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScaleWorkerGpuArgsPtrOutput)
+}
+
+type ScaleWorkerGpuArgsOutput struct{ *pulumi.OutputState }
+
+func (ScaleWorkerGpuArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScaleWorkerGpuArgs)(nil)).Elem()
+}
+
+func (o ScaleWorkerGpuArgsOutput) ToScaleWorkerGpuArgsOutput() ScaleWorkerGpuArgsOutput {
+	return o
+}
+
+func (o ScaleWorkerGpuArgsOutput) ToScaleWorkerGpuArgsOutputWithContext(ctx context.Context) ScaleWorkerGpuArgsOutput {
+	return o
+}
+
+func (o ScaleWorkerGpuArgsOutput) ToScaleWorkerGpuArgsPtrOutput() ScaleWorkerGpuArgsPtrOutput {
+	return o.ToScaleWorkerGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ScaleWorkerGpuArgsOutput) ToScaleWorkerGpuArgsPtrOutputWithContext(ctx context.Context) ScaleWorkerGpuArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ScaleWorkerGpuArgs) *ScaleWorkerGpuArgs {
+		return &v
+	}).(ScaleWorkerGpuArgsPtrOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ScaleWorkerGpuArgsOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v ScaleWorkerGpuArgs) map[string]interface{} { return v.Cuda }).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ScaleWorkerGpuArgsOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v ScaleWorkerGpuArgs) map[string]interface{} { return v.Cudnn }).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ScaleWorkerGpuArgsOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v ScaleWorkerGpuArgs) map[string]interface{} { return v.CustomDriver }).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ScaleWorkerGpuArgsOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v ScaleWorkerGpuArgs) map[string]interface{} { return v.Driver }).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ScaleWorkerGpuArgsOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ScaleWorkerGpuArgs) *bool { return v.MigEnable }).(pulumi.BoolPtrOutput)
+}
+
+type ScaleWorkerGpuArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ScaleWorkerGpuArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ScaleWorkerGpuArgs)(nil)).Elem()
+}
+
+func (o ScaleWorkerGpuArgsPtrOutput) ToScaleWorkerGpuArgsPtrOutput() ScaleWorkerGpuArgsPtrOutput {
+	return o
+}
+
+func (o ScaleWorkerGpuArgsPtrOutput) ToScaleWorkerGpuArgsPtrOutputWithContext(ctx context.Context) ScaleWorkerGpuArgsPtrOutput {
+	return o
+}
+
+func (o ScaleWorkerGpuArgsPtrOutput) Elem() ScaleWorkerGpuArgsOutput {
+	return o.ApplyT(func(v *ScaleWorkerGpuArgs) ScaleWorkerGpuArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ScaleWorkerGpuArgs
+		return ret
+	}).(ScaleWorkerGpuArgsOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ScaleWorkerGpuArgsPtrOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v *ScaleWorkerGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cuda
+	}).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ScaleWorkerGpuArgsPtrOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v *ScaleWorkerGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cudnn
+	}).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ScaleWorkerGpuArgsPtrOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ScaleWorkerGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.CustomDriver
+	}).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ScaleWorkerGpuArgsPtrOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ScaleWorkerGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Driver
+	}).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ScaleWorkerGpuArgsPtrOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ScaleWorkerGpuArgs) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MigEnable
+	}).(pulumi.BoolPtrOutput)
+}
+
 type ScaleWorkerWorkerConfig struct {
 	// Indicates which availability zone will be used.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
@@ -5716,6 +5641,8 @@ type ScaleWorkerWorkerConfig struct {
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
 	// The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 	Hostname *string `pulumi:"hostname"`
+	// Id of cvm hpc cluster.
+	HpcClusterId *string `pulumi:"hpcClusterId"`
 	// The valid image id, format of img-xxx.
 	ImgId *string `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
@@ -5753,7 +5680,7 @@ type ScaleWorkerWorkerConfig struct {
 // ScaleWorkerWorkerConfigInput is an input type that accepts ScaleWorkerWorkerConfigArgs and ScaleWorkerWorkerConfigOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigInput` via:
 //
-//	ScaleWorkerWorkerConfigArgs{...}
+//          ScaleWorkerWorkerConfigArgs{...}
 type ScaleWorkerWorkerConfigInput interface {
 	pulumi.Input
 
@@ -5782,6 +5709,8 @@ type ScaleWorkerWorkerConfigArgs struct {
 	EnhancedSecurityService pulumi.BoolPtrInput `pulumi:"enhancedSecurityService"`
 	// The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 	Hostname pulumi.StringPtrInput `pulumi:"hostname"`
+	// Id of cvm hpc cluster.
+	HpcClusterId pulumi.StringPtrInput `pulumi:"hpcClusterId"`
 	// The valid image id, format of img-xxx.
 	ImgId pulumi.StringPtrInput `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
@@ -5839,11 +5768,11 @@ func (i ScaleWorkerWorkerConfigArgs) ToScaleWorkerWorkerConfigPtrOutputWithConte
 // ScaleWorkerWorkerConfigPtrInput is an input type that accepts ScaleWorkerWorkerConfigArgs, ScaleWorkerWorkerConfigPtr and ScaleWorkerWorkerConfigPtrOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigPtrInput` via:
 //
-//	        ScaleWorkerWorkerConfigArgs{...}
+//          ScaleWorkerWorkerConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ScaleWorkerWorkerConfigPtrInput interface {
 	pulumi.Input
 
@@ -5941,6 +5870,11 @@ func (o ScaleWorkerWorkerConfigOutput) EnhancedSecurityService() pulumi.BoolPtrO
 // The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
 func (o ScaleWorkerWorkerConfigOutput) Hostname() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfig) *string { return v.Hostname }).(pulumi.StringPtrOutput)
+}
+
+// Id of cvm hpc cluster.
+func (o ScaleWorkerWorkerConfigOutput) HpcClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScaleWorkerWorkerConfig) *string { return v.HpcClusterId }).(pulumi.StringPtrOutput)
 }
 
 // The valid image id, format of img-xxx.
@@ -6147,6 +6081,16 @@ func (o ScaleWorkerWorkerConfigPtrOutput) Hostname() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Id of cvm hpc cluster.
+func (o ScaleWorkerWorkerConfigPtrOutput) HpcClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScaleWorkerWorkerConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HpcClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
 // The valid image id, format of img-xxx.
 func (o ScaleWorkerWorkerConfigPtrOutput) ImgId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScaleWorkerWorkerConfig) *string {
@@ -6331,7 +6275,7 @@ type ScaleWorkerWorkerConfigDataDisk struct {
 // ScaleWorkerWorkerConfigDataDiskInput is an input type that accepts ScaleWorkerWorkerConfigDataDiskArgs and ScaleWorkerWorkerConfigDataDiskOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigDataDiskInput` via:
 //
-//	ScaleWorkerWorkerConfigDataDiskArgs{...}
+//          ScaleWorkerWorkerConfigDataDiskArgs{...}
 type ScaleWorkerWorkerConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -6375,7 +6319,7 @@ func (i ScaleWorkerWorkerConfigDataDiskArgs) ToScaleWorkerWorkerConfigDataDiskOu
 // ScaleWorkerWorkerConfigDataDiskArrayInput is an input type that accepts ScaleWorkerWorkerConfigDataDiskArray and ScaleWorkerWorkerConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerConfigDataDiskArrayInput` via:
 //
-//	ScaleWorkerWorkerConfigDataDiskArray{ ScaleWorkerWorkerConfigDataDiskArgs{...} }
+//          ScaleWorkerWorkerConfigDataDiskArray{ ScaleWorkerWorkerConfigDataDiskArgs{...} }
 type ScaleWorkerWorkerConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -6492,7 +6436,7 @@ type ScaleWorkerWorkerInstancesList struct {
 // ScaleWorkerWorkerInstancesListInput is an input type that accepts ScaleWorkerWorkerInstancesListArgs and ScaleWorkerWorkerInstancesListOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerInstancesListInput` via:
 //
-//	ScaleWorkerWorkerInstancesListArgs{...}
+//          ScaleWorkerWorkerInstancesListArgs{...}
 type ScaleWorkerWorkerInstancesListInput interface {
 	pulumi.Input
 
@@ -6528,7 +6472,7 @@ func (i ScaleWorkerWorkerInstancesListArgs) ToScaleWorkerWorkerInstancesListOutp
 // ScaleWorkerWorkerInstancesListArrayInput is an input type that accepts ScaleWorkerWorkerInstancesListArray and ScaleWorkerWorkerInstancesListArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerWorkerInstancesListArrayInput` via:
 //
-//	ScaleWorkerWorkerInstancesListArray{ ScaleWorkerWorkerInstancesListArgs{...} }
+//          ScaleWorkerWorkerInstancesListArray{ ScaleWorkerWorkerInstancesListArgs{...} }
 type ScaleWorkerWorkerInstancesListArrayInput interface {
 	pulumi.Input
 
@@ -6609,6 +6553,333 @@ func (o ScaleWorkerWorkerInstancesListArrayOutput) Index(i pulumi.IntInput) Scal
 	}).(ScaleWorkerWorkerInstancesListOutput)
 }
 
+type ServerlessNodePoolServerlessNode struct {
+	// display name of serverless node.
+	DisplayName *string `pulumi:"displayName"`
+	// subnet id of serverless node.
+	SubnetId string `pulumi:"subnetId"`
+}
+
+// ServerlessNodePoolServerlessNodeInput is an input type that accepts ServerlessNodePoolServerlessNodeArgs and ServerlessNodePoolServerlessNodeOutput values.
+// You can construct a concrete instance of `ServerlessNodePoolServerlessNodeInput` via:
+//
+//          ServerlessNodePoolServerlessNodeArgs{...}
+type ServerlessNodePoolServerlessNodeInput interface {
+	pulumi.Input
+
+	ToServerlessNodePoolServerlessNodeOutput() ServerlessNodePoolServerlessNodeOutput
+	ToServerlessNodePoolServerlessNodeOutputWithContext(context.Context) ServerlessNodePoolServerlessNodeOutput
+}
+
+type ServerlessNodePoolServerlessNodeArgs struct {
+	// display name of serverless node.
+	DisplayName pulumi.StringPtrInput `pulumi:"displayName"`
+	// subnet id of serverless node.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+}
+
+func (ServerlessNodePoolServerlessNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServerlessNodePoolServerlessNode)(nil)).Elem()
+}
+
+func (i ServerlessNodePoolServerlessNodeArgs) ToServerlessNodePoolServerlessNodeOutput() ServerlessNodePoolServerlessNodeOutput {
+	return i.ToServerlessNodePoolServerlessNodeOutputWithContext(context.Background())
+}
+
+func (i ServerlessNodePoolServerlessNodeArgs) ToServerlessNodePoolServerlessNodeOutputWithContext(ctx context.Context) ServerlessNodePoolServerlessNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServerlessNodePoolServerlessNodeOutput)
+}
+
+// ServerlessNodePoolServerlessNodeArrayInput is an input type that accepts ServerlessNodePoolServerlessNodeArray and ServerlessNodePoolServerlessNodeArrayOutput values.
+// You can construct a concrete instance of `ServerlessNodePoolServerlessNodeArrayInput` via:
+//
+//          ServerlessNodePoolServerlessNodeArray{ ServerlessNodePoolServerlessNodeArgs{...} }
+type ServerlessNodePoolServerlessNodeArrayInput interface {
+	pulumi.Input
+
+	ToServerlessNodePoolServerlessNodeArrayOutput() ServerlessNodePoolServerlessNodeArrayOutput
+	ToServerlessNodePoolServerlessNodeArrayOutputWithContext(context.Context) ServerlessNodePoolServerlessNodeArrayOutput
+}
+
+type ServerlessNodePoolServerlessNodeArray []ServerlessNodePoolServerlessNodeInput
+
+func (ServerlessNodePoolServerlessNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServerlessNodePoolServerlessNode)(nil)).Elem()
+}
+
+func (i ServerlessNodePoolServerlessNodeArray) ToServerlessNodePoolServerlessNodeArrayOutput() ServerlessNodePoolServerlessNodeArrayOutput {
+	return i.ToServerlessNodePoolServerlessNodeArrayOutputWithContext(context.Background())
+}
+
+func (i ServerlessNodePoolServerlessNodeArray) ToServerlessNodePoolServerlessNodeArrayOutputWithContext(ctx context.Context) ServerlessNodePoolServerlessNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServerlessNodePoolServerlessNodeArrayOutput)
+}
+
+type ServerlessNodePoolServerlessNodeOutput struct{ *pulumi.OutputState }
+
+func (ServerlessNodePoolServerlessNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServerlessNodePoolServerlessNode)(nil)).Elem()
+}
+
+func (o ServerlessNodePoolServerlessNodeOutput) ToServerlessNodePoolServerlessNodeOutput() ServerlessNodePoolServerlessNodeOutput {
+	return o
+}
+
+func (o ServerlessNodePoolServerlessNodeOutput) ToServerlessNodePoolServerlessNodeOutputWithContext(ctx context.Context) ServerlessNodePoolServerlessNodeOutput {
+	return o
+}
+
+// display name of serverless node.
+func (o ServerlessNodePoolServerlessNodeOutput) DisplayName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ServerlessNodePoolServerlessNode) *string { return v.DisplayName }).(pulumi.StringPtrOutput)
+}
+
+// subnet id of serverless node.
+func (o ServerlessNodePoolServerlessNodeOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v ServerlessNodePoolServerlessNode) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+type ServerlessNodePoolServerlessNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (ServerlessNodePoolServerlessNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServerlessNodePoolServerlessNode)(nil)).Elem()
+}
+
+func (o ServerlessNodePoolServerlessNodeArrayOutput) ToServerlessNodePoolServerlessNodeArrayOutput() ServerlessNodePoolServerlessNodeArrayOutput {
+	return o
+}
+
+func (o ServerlessNodePoolServerlessNodeArrayOutput) ToServerlessNodePoolServerlessNodeArrayOutputWithContext(ctx context.Context) ServerlessNodePoolServerlessNodeArrayOutput {
+	return o
+}
+
+func (o ServerlessNodePoolServerlessNodeArrayOutput) Index(i pulumi.IntInput) ServerlessNodePoolServerlessNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ServerlessNodePoolServerlessNode {
+		return vs[0].([]ServerlessNodePoolServerlessNode)[vs[1].(int)]
+	}).(ServerlessNodePoolServerlessNodeOutput)
+}
+
+type ServerlessNodePoolTaint struct {
+	// Effect of the taint. Valid values are: `NoSchedule`, `PreferNoSchedule`, `NoExecute`.
+	Effect string `pulumi:"effect"`
+	// Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
+	Key string `pulumi:"key"`
+	// Value of the taint.
+	Value string `pulumi:"value"`
+}
+
+// ServerlessNodePoolTaintInput is an input type that accepts ServerlessNodePoolTaintArgs and ServerlessNodePoolTaintOutput values.
+// You can construct a concrete instance of `ServerlessNodePoolTaintInput` via:
+//
+//          ServerlessNodePoolTaintArgs{...}
+type ServerlessNodePoolTaintInput interface {
+	pulumi.Input
+
+	ToServerlessNodePoolTaintOutput() ServerlessNodePoolTaintOutput
+	ToServerlessNodePoolTaintOutputWithContext(context.Context) ServerlessNodePoolTaintOutput
+}
+
+type ServerlessNodePoolTaintArgs struct {
+	// Effect of the taint. Valid values are: `NoSchedule`, `PreferNoSchedule`, `NoExecute`.
+	Effect pulumi.StringInput `pulumi:"effect"`
+	// Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ServerlessNodePoolTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServerlessNodePoolTaint)(nil)).Elem()
+}
+
+func (i ServerlessNodePoolTaintArgs) ToServerlessNodePoolTaintOutput() ServerlessNodePoolTaintOutput {
+	return i.ToServerlessNodePoolTaintOutputWithContext(context.Background())
+}
+
+func (i ServerlessNodePoolTaintArgs) ToServerlessNodePoolTaintOutputWithContext(ctx context.Context) ServerlessNodePoolTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServerlessNodePoolTaintOutput)
+}
+
+// ServerlessNodePoolTaintArrayInput is an input type that accepts ServerlessNodePoolTaintArray and ServerlessNodePoolTaintArrayOutput values.
+// You can construct a concrete instance of `ServerlessNodePoolTaintArrayInput` via:
+//
+//          ServerlessNodePoolTaintArray{ ServerlessNodePoolTaintArgs{...} }
+type ServerlessNodePoolTaintArrayInput interface {
+	pulumi.Input
+
+	ToServerlessNodePoolTaintArrayOutput() ServerlessNodePoolTaintArrayOutput
+	ToServerlessNodePoolTaintArrayOutputWithContext(context.Context) ServerlessNodePoolTaintArrayOutput
+}
+
+type ServerlessNodePoolTaintArray []ServerlessNodePoolTaintInput
+
+func (ServerlessNodePoolTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServerlessNodePoolTaint)(nil)).Elem()
+}
+
+func (i ServerlessNodePoolTaintArray) ToServerlessNodePoolTaintArrayOutput() ServerlessNodePoolTaintArrayOutput {
+	return i.ToServerlessNodePoolTaintArrayOutputWithContext(context.Background())
+}
+
+func (i ServerlessNodePoolTaintArray) ToServerlessNodePoolTaintArrayOutputWithContext(ctx context.Context) ServerlessNodePoolTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServerlessNodePoolTaintArrayOutput)
+}
+
+type ServerlessNodePoolTaintOutput struct{ *pulumi.OutputState }
+
+func (ServerlessNodePoolTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServerlessNodePoolTaint)(nil)).Elem()
+}
+
+func (o ServerlessNodePoolTaintOutput) ToServerlessNodePoolTaintOutput() ServerlessNodePoolTaintOutput {
+	return o
+}
+
+func (o ServerlessNodePoolTaintOutput) ToServerlessNodePoolTaintOutputWithContext(ctx context.Context) ServerlessNodePoolTaintOutput {
+	return o
+}
+
+// Effect of the taint. Valid values are: `NoSchedule`, `PreferNoSchedule`, `NoExecute`.
+func (o ServerlessNodePoolTaintOutput) Effect() pulumi.StringOutput {
+	return o.ApplyT(func(v ServerlessNodePoolTaint) string { return v.Effect }).(pulumi.StringOutput)
+}
+
+// Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
+func (o ServerlessNodePoolTaintOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ServerlessNodePoolTaint) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value of the taint.
+func (o ServerlessNodePoolTaintOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ServerlessNodePoolTaint) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ServerlessNodePoolTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (ServerlessNodePoolTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServerlessNodePoolTaint)(nil)).Elem()
+}
+
+func (o ServerlessNodePoolTaintArrayOutput) ToServerlessNodePoolTaintArrayOutput() ServerlessNodePoolTaintArrayOutput {
+	return o
+}
+
+func (o ServerlessNodePoolTaintArrayOutput) ToServerlessNodePoolTaintArrayOutputWithContext(ctx context.Context) ServerlessNodePoolTaintArrayOutput {
+	return o
+}
+
+func (o ServerlessNodePoolTaintArrayOutput) Index(i pulumi.IntInput) ServerlessNodePoolTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ServerlessNodePoolTaint {
+		return vs[0].([]ServerlessNodePoolTaint)[vs[1].(int)]
+	}).(ServerlessNodePoolTaintOutput)
+}
+
+type GetAvailableClusterVersionsCluster struct {
+	// Cluster Id.
+	ClusterId string `pulumi:"clusterId"`
+	// Upgradable cluster version number. Note: This field may return null, indicating that no valid value can be obtained.
+	Versions []string `pulumi:"versions"`
+}
+
+// GetAvailableClusterVersionsClusterInput is an input type that accepts GetAvailableClusterVersionsClusterArgs and GetAvailableClusterVersionsClusterOutput values.
+// You can construct a concrete instance of `GetAvailableClusterVersionsClusterInput` via:
+//
+//          GetAvailableClusterVersionsClusterArgs{...}
+type GetAvailableClusterVersionsClusterInput interface {
+	pulumi.Input
+
+	ToGetAvailableClusterVersionsClusterOutput() GetAvailableClusterVersionsClusterOutput
+	ToGetAvailableClusterVersionsClusterOutputWithContext(context.Context) GetAvailableClusterVersionsClusterOutput
+}
+
+type GetAvailableClusterVersionsClusterArgs struct {
+	// Cluster Id.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Upgradable cluster version number. Note: This field may return null, indicating that no valid value can be obtained.
+	Versions pulumi.StringArrayInput `pulumi:"versions"`
+}
+
+func (GetAvailableClusterVersionsClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableClusterVersionsCluster)(nil)).Elem()
+}
+
+func (i GetAvailableClusterVersionsClusterArgs) ToGetAvailableClusterVersionsClusterOutput() GetAvailableClusterVersionsClusterOutput {
+	return i.ToGetAvailableClusterVersionsClusterOutputWithContext(context.Background())
+}
+
+func (i GetAvailableClusterVersionsClusterArgs) ToGetAvailableClusterVersionsClusterOutputWithContext(ctx context.Context) GetAvailableClusterVersionsClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableClusterVersionsClusterOutput)
+}
+
+// GetAvailableClusterVersionsClusterArrayInput is an input type that accepts GetAvailableClusterVersionsClusterArray and GetAvailableClusterVersionsClusterArrayOutput values.
+// You can construct a concrete instance of `GetAvailableClusterVersionsClusterArrayInput` via:
+//
+//          GetAvailableClusterVersionsClusterArray{ GetAvailableClusterVersionsClusterArgs{...} }
+type GetAvailableClusterVersionsClusterArrayInput interface {
+	pulumi.Input
+
+	ToGetAvailableClusterVersionsClusterArrayOutput() GetAvailableClusterVersionsClusterArrayOutput
+	ToGetAvailableClusterVersionsClusterArrayOutputWithContext(context.Context) GetAvailableClusterVersionsClusterArrayOutput
+}
+
+type GetAvailableClusterVersionsClusterArray []GetAvailableClusterVersionsClusterInput
+
+func (GetAvailableClusterVersionsClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableClusterVersionsCluster)(nil)).Elem()
+}
+
+func (i GetAvailableClusterVersionsClusterArray) ToGetAvailableClusterVersionsClusterArrayOutput() GetAvailableClusterVersionsClusterArrayOutput {
+	return i.ToGetAvailableClusterVersionsClusterArrayOutputWithContext(context.Background())
+}
+
+func (i GetAvailableClusterVersionsClusterArray) ToGetAvailableClusterVersionsClusterArrayOutputWithContext(ctx context.Context) GetAvailableClusterVersionsClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableClusterVersionsClusterArrayOutput)
+}
+
+type GetAvailableClusterVersionsClusterOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableClusterVersionsClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableClusterVersionsCluster)(nil)).Elem()
+}
+
+func (o GetAvailableClusterVersionsClusterOutput) ToGetAvailableClusterVersionsClusterOutput() GetAvailableClusterVersionsClusterOutput {
+	return o
+}
+
+func (o GetAvailableClusterVersionsClusterOutput) ToGetAvailableClusterVersionsClusterOutputWithContext(ctx context.Context) GetAvailableClusterVersionsClusterOutput {
+	return o
+}
+
+// Cluster Id.
+func (o GetAvailableClusterVersionsClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableClusterVersionsCluster) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Upgradable cluster version number. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAvailableClusterVersionsClusterOutput) Versions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAvailableClusterVersionsCluster) []string { return v.Versions }).(pulumi.StringArrayOutput)
+}
+
+type GetAvailableClusterVersionsClusterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableClusterVersionsClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableClusterVersionsCluster)(nil)).Elem()
+}
+
+func (o GetAvailableClusterVersionsClusterArrayOutput) ToGetAvailableClusterVersionsClusterArrayOutput() GetAvailableClusterVersionsClusterArrayOutput {
+	return o
+}
+
+func (o GetAvailableClusterVersionsClusterArrayOutput) ToGetAvailableClusterVersionsClusterArrayOutputWithContext(ctx context.Context) GetAvailableClusterVersionsClusterArrayOutput {
+	return o
+}
+
+func (o GetAvailableClusterVersionsClusterArrayOutput) Index(i pulumi.IntInput) GetAvailableClusterVersionsClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAvailableClusterVersionsCluster {
+		return vs[0].([]GetAvailableClusterVersionsCluster)[vs[1].(int)]
+	}).(GetAvailableClusterVersionsClusterOutput)
+}
+
 type GetChartsChartList struct {
 	// Label of chart.
 	Label map[string]interface{} `pulumi:"label"`
@@ -6621,7 +6892,7 @@ type GetChartsChartList struct {
 // GetChartsChartListInput is an input type that accepts GetChartsChartListArgs and GetChartsChartListOutput values.
 // You can construct a concrete instance of `GetChartsChartListInput` via:
 //
-//	GetChartsChartListArgs{...}
+//          GetChartsChartListArgs{...}
 type GetChartsChartListInput interface {
 	pulumi.Input
 
@@ -6653,7 +6924,7 @@ func (i GetChartsChartListArgs) ToGetChartsChartListOutputWithContext(ctx contex
 // GetChartsChartListArrayInput is an input type that accepts GetChartsChartListArray and GetChartsChartListArrayOutput values.
 // You can construct a concrete instance of `GetChartsChartListArrayInput` via:
 //
-//	GetChartsChartListArray{ GetChartsChartListArgs{...} }
+//          GetChartsChartListArray{ GetChartsChartListArgs{...} }
 type GetChartsChartListArrayInput interface {
 	pulumi.Input
 
@@ -6734,7 +7005,7 @@ type GetClusterCommonNamesList struct {
 // GetClusterCommonNamesListInput is an input type that accepts GetClusterCommonNamesListArgs and GetClusterCommonNamesListOutput values.
 // You can construct a concrete instance of `GetClusterCommonNamesListInput` via:
 //
-//	GetClusterCommonNamesListArgs{...}
+//          GetClusterCommonNamesListArgs{...}
 type GetClusterCommonNamesListInput interface {
 	pulumi.Input
 
@@ -6764,7 +7035,7 @@ func (i GetClusterCommonNamesListArgs) ToGetClusterCommonNamesListOutputWithCont
 // GetClusterCommonNamesListArrayInput is an input type that accepts GetClusterCommonNamesListArray and GetClusterCommonNamesListArrayOutput values.
 // You can construct a concrete instance of `GetClusterCommonNamesListArrayInput` via:
 //
-//	GetClusterCommonNamesListArray{ GetClusterCommonNamesListArgs{...} }
+//          GetClusterCommonNamesListArray{ GetClusterCommonNamesListArgs{...} }
 type GetClusterCommonNamesListArrayInput interface {
 	pulumi.Input
 
@@ -6852,7 +7123,7 @@ type GetClusterLevelsList struct {
 // GetClusterLevelsListInput is an input type that accepts GetClusterLevelsListArgs and GetClusterLevelsListOutput values.
 // You can construct a concrete instance of `GetClusterLevelsListInput` via:
 //
-//	GetClusterLevelsListArgs{...}
+//          GetClusterLevelsListArgs{...}
 type GetClusterLevelsListInput interface {
 	pulumi.Input
 
@@ -6894,7 +7165,7 @@ func (i GetClusterLevelsListArgs) ToGetClusterLevelsListOutputWithContext(ctx co
 // GetClusterLevelsListArrayInput is an input type that accepts GetClusterLevelsListArray and GetClusterLevelsListArrayOutput values.
 // You can construct a concrete instance of `GetClusterLevelsListArrayInput` via:
 //
-//	GetClusterLevelsListArray{ GetClusterLevelsListArgs{...} }
+//          GetClusterLevelsListArray{ GetClusterLevelsListArgs{...} }
 type GetClusterLevelsListArrayInput interface {
 	pulumi.Input
 
@@ -7070,7 +7341,7 @@ type GetClustersList struct {
 // GetClustersListInput is an input type that accepts GetClustersListArgs and GetClustersListOutput values.
 // You can construct a concrete instance of `GetClustersListInput` via:
 //
-//	GetClustersListArgs{...}
+//          GetClustersListArgs{...}
 type GetClustersListInput interface {
 	pulumi.Input
 
@@ -7170,7 +7441,7 @@ func (i GetClustersListArgs) ToGetClustersListOutputWithContext(ctx context.Cont
 // GetClustersListArrayInput is an input type that accepts GetClustersListArray and GetClustersListArrayOutput values.
 // You can construct a concrete instance of `GetClustersListArrayInput` via:
 //
-//	GetClustersListArray{ GetClustersListArgs{...} }
+//          GetClustersListArray{ GetClustersListArgs{...} }
 type GetClustersListArrayInput interface {
 	pulumi.Input
 
@@ -7420,7 +7691,7 @@ type GetClustersListClusterExtraArg struct {
 // GetClustersListClusterExtraArgInput is an input type that accepts GetClustersListClusterExtraArgArgs and GetClustersListClusterExtraArgOutput values.
 // You can construct a concrete instance of `GetClustersListClusterExtraArgInput` via:
 //
-//	GetClustersListClusterExtraArgArgs{...}
+//          GetClustersListClusterExtraArgArgs{...}
 type GetClustersListClusterExtraArgInput interface {
 	pulumi.Input
 
@@ -7452,7 +7723,7 @@ func (i GetClustersListClusterExtraArgArgs) ToGetClustersListClusterExtraArgOutp
 // GetClustersListClusterExtraArgArrayInput is an input type that accepts GetClustersListClusterExtraArgArray and GetClustersListClusterExtraArgArrayOutput values.
 // You can construct a concrete instance of `GetClustersListClusterExtraArgArrayInput` via:
 //
-//	GetClustersListClusterExtraArgArray{ GetClustersListClusterExtraArgArgs{...} }
+//          GetClustersListClusterExtraArgArray{ GetClustersListClusterExtraArgArgs{...} }
 type GetClustersListClusterExtraArgArrayInput interface {
 	pulumi.Input
 
@@ -7539,7 +7810,7 @@ type GetClustersListWorkerInstancesList struct {
 // GetClustersListWorkerInstancesListInput is an input type that accepts GetClustersListWorkerInstancesListArgs and GetClustersListWorkerInstancesListOutput values.
 // You can construct a concrete instance of `GetClustersListWorkerInstancesListInput` via:
 //
-//	GetClustersListWorkerInstancesListArgs{...}
+//          GetClustersListWorkerInstancesListArgs{...}
 type GetClustersListWorkerInstancesListInput interface {
 	pulumi.Input
 
@@ -7575,7 +7846,7 @@ func (i GetClustersListWorkerInstancesListArgs) ToGetClustersListWorkerInstances
 // GetClustersListWorkerInstancesListArrayInput is an input type that accepts GetClustersListWorkerInstancesListArray and GetClustersListWorkerInstancesListArrayOutput values.
 // You can construct a concrete instance of `GetClustersListWorkerInstancesListArrayInput` via:
 //
-//	GetClustersListWorkerInstancesListArray{ GetClustersListWorkerInstancesListArgs{...} }
+//          GetClustersListWorkerInstancesListArray{ GetClustersListWorkerInstancesListArgs{...} }
 type GetClustersListWorkerInstancesListArrayInput interface {
 	pulumi.Input
 
@@ -7657,24 +7928,18 @@ func (o GetClustersListWorkerInstancesListArrayOutput) Index(i pulumi.IntInput) 
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingConfigInput)(nil)).Elem(), AsScalingGroupAutoScalingConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingConfigPtrInput)(nil)).Elem(), AsScalingGroupAutoScalingConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingConfigDataDiskInput)(nil)).Elem(), AsScalingGroupAutoScalingConfigDataDiskArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingConfigDataDiskArrayInput)(nil)).Elem(), AsScalingGroupAutoScalingConfigDataDiskArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingGroupInput)(nil)).Elem(), AsScalingGroupAutoScalingGroupArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingGroupPtrInput)(nil)).Elem(), AsScalingGroupAutoScalingGroupArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerIdInput)(nil)).Elem(), AsScalingGroupAutoScalingGroupForwardBalancerIdArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerIdArrayInput)(nil)).Elem(), AsScalingGroupAutoScalingGroupForwardBalancerIdArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeInput)(nil)).Elem(), AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayInput)(nil)).Elem(), AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigInput)(nil)).Elem(), ClusterAttachmentWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigPtrInput)(nil)).Elem(), ClusterAttachmentWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigDataDiskInput)(nil)).Elem(), ClusterAttachmentWorkerConfigDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigDataDiskArrayInput)(nil)).Elem(), ClusterAttachmentWorkerConfigDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigGpuArgsInput)(nil)).Elem(), ClusterAttachmentWorkerConfigGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigGpuArgsPtrInput)(nil)).Elem(), ClusterAttachmentWorkerConfigGpuArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesPtrInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesDataDiskInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesGpuArgsInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesGpuArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAuthOptionsInput)(nil)).Elem(), ClusterAuthOptionsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAuthOptionsPtrInput)(nil)).Elem(), ClusterAuthOptionsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterClusterAuditInput)(nil)).Elem(), ClusterClusterAuditArgs{})
@@ -7711,16 +7976,26 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolNodeConfigPtrInput)(nil)).Elem(), NodePoolNodeConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolNodeConfigDataDiskInput)(nil)).Elem(), NodePoolNodeConfigDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolNodeConfigDataDiskArrayInput)(nil)).Elem(), NodePoolNodeConfigDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolNodeConfigGpuArgsInput)(nil)).Elem(), NodePoolNodeConfigGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolNodeConfigGpuArgsPtrInput)(nil)).Elem(), NodePoolNodeConfigGpuArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolTaintInput)(nil)).Elem(), NodePoolTaintArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolTaintArrayInput)(nil)).Elem(), NodePoolTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerDataDiskInput)(nil)).Elem(), ScaleWorkerDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerDataDiskArrayInput)(nil)).Elem(), ScaleWorkerDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerGpuArgsInput)(nil)).Elem(), ScaleWorkerGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerGpuArgsPtrInput)(nil)).Elem(), ScaleWorkerGpuArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerConfigInput)(nil)).Elem(), ScaleWorkerWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerConfigPtrInput)(nil)).Elem(), ScaleWorkerWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerConfigDataDiskInput)(nil)).Elem(), ScaleWorkerWorkerConfigDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerConfigDataDiskArrayInput)(nil)).Elem(), ScaleWorkerWorkerConfigDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerInstancesListInput)(nil)).Elem(), ScaleWorkerWorkerInstancesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerInstancesListArrayInput)(nil)).Elem(), ScaleWorkerWorkerInstancesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerlessNodePoolServerlessNodeInput)(nil)).Elem(), ServerlessNodePoolServerlessNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerlessNodePoolServerlessNodeArrayInput)(nil)).Elem(), ServerlessNodePoolServerlessNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerlessNodePoolTaintInput)(nil)).Elem(), ServerlessNodePoolTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerlessNodePoolTaintArrayInput)(nil)).Elem(), ServerlessNodePoolTaintArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableClusterVersionsClusterInput)(nil)).Elem(), GetAvailableClusterVersionsClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableClusterVersionsClusterArrayInput)(nil)).Elem(), GetAvailableClusterVersionsClusterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChartsChartListInput)(nil)).Elem(), GetChartsChartListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChartsChartListArrayInput)(nil)).Elem(), GetChartsChartListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCommonNamesListInput)(nil)).Elem(), GetClusterCommonNamesListArgs{})
@@ -7733,24 +8008,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListClusterExtraArgArrayInput)(nil)).Elem(), GetClustersListClusterExtraArgArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListWorkerInstancesListInput)(nil)).Elem(), GetClustersListWorkerInstancesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListWorkerInstancesListArrayInput)(nil)).Elem(), GetClustersListWorkerInstancesListArray{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingConfigOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingConfigPtrOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingConfigDataDiskOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingConfigDataDiskArrayOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingGroupOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingGroupPtrOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingGroupForwardBalancerIdOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingGroupForwardBalancerIdArrayOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeOutput{})
-	pulumi.RegisterOutputType(AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArrayOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigPtrOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigDataDiskOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigGpuArgsOutput{})
+	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigGpuArgsPtrOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesPtrOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesDataDiskOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesGpuArgsOutput{})
+	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput{})
 	pulumi.RegisterOutputType(ClusterAuthOptionsOutput{})
 	pulumi.RegisterOutputType(ClusterAuthOptionsPtrOutput{})
 	pulumi.RegisterOutputType(ClusterClusterAuditOutput{})
@@ -7787,16 +8056,26 @@ func init() {
 	pulumi.RegisterOutputType(NodePoolNodeConfigPtrOutput{})
 	pulumi.RegisterOutputType(NodePoolNodeConfigDataDiskOutput{})
 	pulumi.RegisterOutputType(NodePoolNodeConfigDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(NodePoolNodeConfigGpuArgsOutput{})
+	pulumi.RegisterOutputType(NodePoolNodeConfigGpuArgsPtrOutput{})
 	pulumi.RegisterOutputType(NodePoolTaintOutput{})
 	pulumi.RegisterOutputType(NodePoolTaintArrayOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerDataDiskOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ScaleWorkerGpuArgsOutput{})
+	pulumi.RegisterOutputType(ScaleWorkerGpuArgsPtrOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerConfigOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerConfigPtrOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerConfigDataDiskOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerConfigDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerInstancesListOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerInstancesListArrayOutput{})
+	pulumi.RegisterOutputType(ServerlessNodePoolServerlessNodeOutput{})
+	pulumi.RegisterOutputType(ServerlessNodePoolServerlessNodeArrayOutput{})
+	pulumi.RegisterOutputType(ServerlessNodePoolTaintOutput{})
+	pulumi.RegisterOutputType(ServerlessNodePoolTaintArrayOutput{})
+	pulumi.RegisterOutputType(GetAvailableClusterVersionsClusterOutput{})
+	pulumi.RegisterOutputType(GetAvailableClusterVersionsClusterArrayOutput{})
 	pulumi.RegisterOutputType(GetChartsChartListOutput{})
 	pulumi.RegisterOutputType(GetChartsChartListArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterCommonNamesListOutput{})

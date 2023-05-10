@@ -20,7 +20,7 @@ type ConfigExcludePath struct {
 // ConfigExcludePathInput is an input type that accepts ConfigExcludePathArgs and ConfigExcludePathOutput values.
 // You can construct a concrete instance of `ConfigExcludePathInput` via:
 //
-//	ConfigExcludePathArgs{...}
+//          ConfigExcludePathArgs{...}
 type ConfigExcludePathInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i ConfigExcludePathArgs) ToConfigExcludePathOutputWithContext(ctx context.
 // ConfigExcludePathArrayInput is an input type that accepts ConfigExcludePathArray and ConfigExcludePathArrayOutput values.
 // You can construct a concrete instance of `ConfigExcludePathArrayInput` via:
 //
-//	ConfigExcludePathArray{ ConfigExcludePathArgs{...} }
+//          ConfigExcludePathArray{ ConfigExcludePathArgs{...} }
 type ConfigExcludePathArrayInput interface {
 	pulumi.Input
 
@@ -138,7 +138,7 @@ type ConfigExtraContainerFile struct {
 // ConfigExtraContainerFileInput is an input type that accepts ConfigExtraContainerFileArgs and ConfigExtraContainerFileOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerFileInput` via:
 //
-//	ConfigExtraContainerFileArgs{...}
+//          ConfigExtraContainerFileArgs{...}
 type ConfigExtraContainerFileInput interface {
 	pulumi.Input
 
@@ -188,11 +188,11 @@ func (i ConfigExtraContainerFileArgs) ToConfigExtraContainerFilePtrOutputWithCon
 // ConfigExtraContainerFilePtrInput is an input type that accepts ConfigExtraContainerFileArgs, ConfigExtraContainerFilePtr and ConfigExtraContainerFilePtrOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerFilePtrInput` via:
 //
-//	        ConfigExtraContainerFileArgs{...}
+//          ConfigExtraContainerFileArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ConfigExtraContainerFilePtrInput interface {
 	pulumi.Input
 
@@ -400,7 +400,7 @@ type ConfigExtraContainerFileWorkload struct {
 // ConfigExtraContainerFileWorkloadInput is an input type that accepts ConfigExtraContainerFileWorkloadArgs and ConfigExtraContainerFileWorkloadOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerFileWorkloadInput` via:
 //
-//	ConfigExtraContainerFileWorkloadArgs{...}
+//          ConfigExtraContainerFileWorkloadArgs{...}
 type ConfigExtraContainerFileWorkloadInput interface {
 	pulumi.Input
 
@@ -442,11 +442,11 @@ func (i ConfigExtraContainerFileWorkloadArgs) ToConfigExtraContainerFileWorkload
 // ConfigExtraContainerFileWorkloadPtrInput is an input type that accepts ConfigExtraContainerFileWorkloadArgs, ConfigExtraContainerFileWorkloadPtr and ConfigExtraContainerFileWorkloadPtrOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerFileWorkloadPtrInput` via:
 //
-//	        ConfigExtraContainerFileWorkloadArgs{...}
+//          ConfigExtraContainerFileWorkloadArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ConfigExtraContainerFileWorkloadPtrInput interface {
 	pulumi.Input
 
@@ -598,7 +598,7 @@ type ConfigExtraContainerStdout struct {
 // ConfigExtraContainerStdoutInput is an input type that accepts ConfigExtraContainerStdoutArgs and ConfigExtraContainerStdoutOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerStdoutInput` via:
 //
-//	ConfigExtraContainerStdoutArgs{...}
+//          ConfigExtraContainerStdoutArgs{...}
 type ConfigExtraContainerStdoutInput interface {
 	pulumi.Input
 
@@ -644,11 +644,11 @@ func (i ConfigExtraContainerStdoutArgs) ToConfigExtraContainerStdoutPtrOutputWit
 // ConfigExtraContainerStdoutPtrInput is an input type that accepts ConfigExtraContainerStdoutArgs, ConfigExtraContainerStdoutPtr and ConfigExtraContainerStdoutPtrOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerStdoutPtrInput` via:
 //
-//	        ConfigExtraContainerStdoutArgs{...}
+//          ConfigExtraContainerStdoutArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ConfigExtraContainerStdoutPtrInput interface {
 	pulumi.Input
 
@@ -826,7 +826,7 @@ type ConfigExtraContainerStdoutWorkload struct {
 // ConfigExtraContainerStdoutWorkloadInput is an input type that accepts ConfigExtraContainerStdoutWorkloadArgs and ConfigExtraContainerStdoutWorkloadOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerStdoutWorkloadInput` via:
 //
-//	ConfigExtraContainerStdoutWorkloadArgs{...}
+//          ConfigExtraContainerStdoutWorkloadArgs{...}
 type ConfigExtraContainerStdoutWorkloadInput interface {
 	pulumi.Input
 
@@ -860,7 +860,7 @@ func (i ConfigExtraContainerStdoutWorkloadArgs) ToConfigExtraContainerStdoutWork
 // ConfigExtraContainerStdoutWorkloadArrayInput is an input type that accepts ConfigExtraContainerStdoutWorkloadArray and ConfigExtraContainerStdoutWorkloadArrayOutput values.
 // You can construct a concrete instance of `ConfigExtraContainerStdoutWorkloadArrayInput` via:
 //
-//	ConfigExtraContainerStdoutWorkloadArray{ ConfigExtraContainerStdoutWorkloadArgs{...} }
+//          ConfigExtraContainerStdoutWorkloadArray{ ConfigExtraContainerStdoutWorkloadArgs{...} }
 type ConfigExtraContainerStdoutWorkloadArrayInput interface {
 	pulumi.Input
 
@@ -946,7 +946,7 @@ type ConfigExtraExcludePath struct {
 // ConfigExtraExcludePathInput is an input type that accepts ConfigExtraExcludePathArgs and ConfigExtraExcludePathOutput values.
 // You can construct a concrete instance of `ConfigExtraExcludePathInput` via:
 //
-//	ConfigExtraExcludePathArgs{...}
+//          ConfigExtraExcludePathArgs{...}
 type ConfigExtraExcludePathInput interface {
 	pulumi.Input
 
@@ -976,7 +976,7 @@ func (i ConfigExtraExcludePathArgs) ToConfigExtraExcludePathOutputWithContext(ct
 // ConfigExtraExcludePathArrayInput is an input type that accepts ConfigExtraExcludePathArray and ConfigExtraExcludePathArrayOutput values.
 // You can construct a concrete instance of `ConfigExtraExcludePathArrayInput` via:
 //
-//	ConfigExtraExcludePathArray{ ConfigExtraExcludePathArgs{...} }
+//          ConfigExtraExcludePathArray{ ConfigExtraExcludePathArgs{...} }
 type ConfigExtraExcludePathArrayInput interface {
 	pulumi.Input
 
@@ -1068,7 +1068,7 @@ type ConfigExtraExtractRule struct {
 // ConfigExtraExtractRuleInput is an input type that accepts ConfigExtraExtractRuleArgs and ConfigExtraExtractRuleOutput values.
 // You can construct a concrete instance of `ConfigExtraExtractRuleInput` via:
 //
-//	ConfigExtraExtractRuleArgs{...}
+//          ConfigExtraExtractRuleArgs{...}
 type ConfigExtraExtractRuleInput interface {
 	pulumi.Input
 
@@ -1122,11 +1122,11 @@ func (i ConfigExtraExtractRuleArgs) ToConfigExtraExtractRulePtrOutputWithContext
 // ConfigExtraExtractRulePtrInput is an input type that accepts ConfigExtraExtractRuleArgs, ConfigExtraExtractRulePtr and ConfigExtraExtractRulePtrOutput values.
 // You can construct a concrete instance of `ConfigExtraExtractRulePtrInput` via:
 //
-//	        ConfigExtraExtractRuleArgs{...}
+//          ConfigExtraExtractRuleArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ConfigExtraExtractRulePtrInput interface {
 	pulumi.Input
 
@@ -1360,7 +1360,7 @@ type ConfigExtraExtractRuleFilterKeyRegex struct {
 // ConfigExtraExtractRuleFilterKeyRegexInput is an input type that accepts ConfigExtraExtractRuleFilterKeyRegexArgs and ConfigExtraExtractRuleFilterKeyRegexOutput values.
 // You can construct a concrete instance of `ConfigExtraExtractRuleFilterKeyRegexInput` via:
 //
-//	ConfigExtraExtractRuleFilterKeyRegexArgs{...}
+//          ConfigExtraExtractRuleFilterKeyRegexArgs{...}
 type ConfigExtraExtractRuleFilterKeyRegexInput interface {
 	pulumi.Input
 
@@ -1390,7 +1390,7 @@ func (i ConfigExtraExtractRuleFilterKeyRegexArgs) ToConfigExtraExtractRuleFilter
 // ConfigExtraExtractRuleFilterKeyRegexArrayInput is an input type that accepts ConfigExtraExtractRuleFilterKeyRegexArray and ConfigExtraExtractRuleFilterKeyRegexArrayOutput values.
 // You can construct a concrete instance of `ConfigExtraExtractRuleFilterKeyRegexArrayInput` via:
 //
-//	ConfigExtraExtractRuleFilterKeyRegexArray{ ConfigExtraExtractRuleFilterKeyRegexArgs{...} }
+//          ConfigExtraExtractRuleFilterKeyRegexArray{ ConfigExtraExtractRuleFilterKeyRegexArgs{...} }
 type ConfigExtraExtractRuleFilterKeyRegexArrayInput interface {
 	pulumi.Input
 
@@ -1468,7 +1468,7 @@ type ConfigExtraHostFile struct {
 // ConfigExtraHostFileInput is an input type that accepts ConfigExtraHostFileArgs and ConfigExtraHostFileOutput values.
 // You can construct a concrete instance of `ConfigExtraHostFileInput` via:
 //
-//	ConfigExtraHostFileArgs{...}
+//          ConfigExtraHostFileArgs{...}
 type ConfigExtraHostFileInput interface {
 	pulumi.Input
 
@@ -1508,11 +1508,11 @@ func (i ConfigExtraHostFileArgs) ToConfigExtraHostFilePtrOutputWithContext(ctx c
 // ConfigExtraHostFilePtrInput is an input type that accepts ConfigExtraHostFileArgs, ConfigExtraHostFilePtr and ConfigExtraHostFilePtrOutput values.
 // You can construct a concrete instance of `ConfigExtraHostFilePtrInput` via:
 //
-//	        ConfigExtraHostFileArgs{...}
+//          ConfigExtraHostFileArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ConfigExtraHostFilePtrInput interface {
 	pulumi.Input
 
@@ -1657,7 +1657,7 @@ type ConfigExtractRule struct {
 // ConfigExtractRuleInput is an input type that accepts ConfigExtractRuleArgs and ConfigExtractRuleOutput values.
 // You can construct a concrete instance of `ConfigExtractRuleInput` via:
 //
-//	ConfigExtractRuleArgs{...}
+//          ConfigExtractRuleArgs{...}
 type ConfigExtractRuleInput interface {
 	pulumi.Input
 
@@ -1711,11 +1711,11 @@ func (i ConfigExtractRuleArgs) ToConfigExtractRulePtrOutputWithContext(ctx conte
 // ConfigExtractRulePtrInput is an input type that accepts ConfigExtractRuleArgs, ConfigExtractRulePtr and ConfigExtractRulePtrOutput values.
 // You can construct a concrete instance of `ConfigExtractRulePtrInput` via:
 //
-//	        ConfigExtractRuleArgs{...}
+//          ConfigExtractRuleArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ConfigExtractRulePtrInput interface {
 	pulumi.Input
 
@@ -1949,7 +1949,7 @@ type ConfigExtractRuleFilterKeyRegex struct {
 // ConfigExtractRuleFilterKeyRegexInput is an input type that accepts ConfigExtractRuleFilterKeyRegexArgs and ConfigExtractRuleFilterKeyRegexOutput values.
 // You can construct a concrete instance of `ConfigExtractRuleFilterKeyRegexInput` via:
 //
-//	ConfigExtractRuleFilterKeyRegexArgs{...}
+//          ConfigExtractRuleFilterKeyRegexArgs{...}
 type ConfigExtractRuleFilterKeyRegexInput interface {
 	pulumi.Input
 
@@ -1979,7 +1979,7 @@ func (i ConfigExtractRuleFilterKeyRegexArgs) ToConfigExtractRuleFilterKeyRegexOu
 // ConfigExtractRuleFilterKeyRegexArrayInput is an input type that accepts ConfigExtractRuleFilterKeyRegexArray and ConfigExtractRuleFilterKeyRegexArrayOutput values.
 // You can construct a concrete instance of `ConfigExtractRuleFilterKeyRegexArrayInput` via:
 //
-//	ConfigExtractRuleFilterKeyRegexArray{ ConfigExtractRuleFilterKeyRegexArgs{...} }
+//          ConfigExtractRuleFilterKeyRegexArray{ ConfigExtractRuleFilterKeyRegexArgs{...} }
 type ConfigExtractRuleFilterKeyRegexArrayInput interface {
 	pulumi.Input
 
@@ -2053,7 +2053,7 @@ type CosShipperCompress struct {
 // CosShipperCompressInput is an input type that accepts CosShipperCompressArgs and CosShipperCompressOutput values.
 // You can construct a concrete instance of `CosShipperCompressInput` via:
 //
-//	CosShipperCompressArgs{...}
+//          CosShipperCompressArgs{...}
 type CosShipperCompressInput interface {
 	pulumi.Input
 
@@ -2089,11 +2089,11 @@ func (i CosShipperCompressArgs) ToCosShipperCompressPtrOutputWithContext(ctx con
 // CosShipperCompressPtrInput is an input type that accepts CosShipperCompressArgs, CosShipperCompressPtr and CosShipperCompressPtrOutput values.
 // You can construct a concrete instance of `CosShipperCompressPtrInput` via:
 //
-//	        CosShipperCompressArgs{...}
+//          CosShipperCompressArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type CosShipperCompressPtrInput interface {
 	pulumi.Input
 
@@ -2194,7 +2194,7 @@ type CosShipperContent struct {
 // CosShipperContentInput is an input type that accepts CosShipperContentArgs and CosShipperContentOutput values.
 // You can construct a concrete instance of `CosShipperContentInput` via:
 //
-//	CosShipperContentArgs{...}
+//          CosShipperContentArgs{...}
 type CosShipperContentInput interface {
 	pulumi.Input
 
@@ -2234,11 +2234,11 @@ func (i CosShipperContentArgs) ToCosShipperContentPtrOutputWithContext(ctx conte
 // CosShipperContentPtrInput is an input type that accepts CosShipperContentArgs, CosShipperContentPtr and CosShipperContentPtrOutput values.
 // You can construct a concrete instance of `CosShipperContentPtrInput` via:
 //
-//	        CosShipperContentArgs{...}
+//          CosShipperContentArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type CosShipperContentPtrInput interface {
 	pulumi.Input
 
@@ -2373,7 +2373,7 @@ type CosShipperContentCsv struct {
 // CosShipperContentCsvInput is an input type that accepts CosShipperContentCsvArgs and CosShipperContentCsvOutput values.
 // You can construct a concrete instance of `CosShipperContentCsvInput` via:
 //
-//	CosShipperContentCsvArgs{...}
+//          CosShipperContentCsvArgs{...}
 type CosShipperContentCsvInput interface {
 	pulumi.Input
 
@@ -2417,11 +2417,11 @@ func (i CosShipperContentCsvArgs) ToCosShipperContentCsvPtrOutputWithContext(ctx
 // CosShipperContentCsvPtrInput is an input type that accepts CosShipperContentCsvArgs, CosShipperContentCsvPtr and CosShipperContentCsvPtrOutput values.
 // You can construct a concrete instance of `CosShipperContentCsvPtrInput` via:
 //
-//	        CosShipperContentCsvArgs{...}
+//          CosShipperContentCsvArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type CosShipperContentCsvPtrInput interface {
 	pulumi.Input
 
@@ -2581,7 +2581,7 @@ type CosShipperContentJson struct {
 // CosShipperContentJsonInput is an input type that accepts CosShipperContentJsonArgs and CosShipperContentJsonOutput values.
 // You can construct a concrete instance of `CosShipperContentJsonInput` via:
 //
-//	CosShipperContentJsonArgs{...}
+//          CosShipperContentJsonArgs{...}
 type CosShipperContentJsonInput interface {
 	pulumi.Input
 
@@ -2620,11 +2620,11 @@ func (i CosShipperContentJsonArgs) ToCosShipperContentJsonPtrOutputWithContext(c
 // CosShipperContentJsonPtrInput is an input type that accepts CosShipperContentJsonArgs, CosShipperContentJsonPtr and CosShipperContentJsonPtrOutput values.
 // You can construct a concrete instance of `CosShipperContentJsonPtrInput` via:
 //
-//	        CosShipperContentJsonArgs{...}
+//          CosShipperContentJsonArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type CosShipperContentJsonPtrInput interface {
 	pulumi.Input
 
@@ -2742,7 +2742,7 @@ type CosShipperFilterRule struct {
 // CosShipperFilterRuleInput is an input type that accepts CosShipperFilterRuleArgs and CosShipperFilterRuleOutput values.
 // You can construct a concrete instance of `CosShipperFilterRuleInput` via:
 //
-//	CosShipperFilterRuleArgs{...}
+//          CosShipperFilterRuleArgs{...}
 type CosShipperFilterRuleInput interface {
 	pulumi.Input
 
@@ -2774,7 +2774,7 @@ func (i CosShipperFilterRuleArgs) ToCosShipperFilterRuleOutputWithContext(ctx co
 // CosShipperFilterRuleArrayInput is an input type that accepts CosShipperFilterRuleArray and CosShipperFilterRuleArrayOutput values.
 // You can construct a concrete instance of `CosShipperFilterRuleArrayInput` via:
 //
-//	CosShipperFilterRuleArray{ CosShipperFilterRuleArgs{...} }
+//          CosShipperFilterRuleArray{ CosShipperFilterRuleArgs{...} }
 type CosShipperFilterRuleArrayInput interface {
 	pulumi.Input
 
@@ -2857,7 +2857,7 @@ type IndexRule struct {
 // IndexRuleInput is an input type that accepts IndexRuleArgs and IndexRuleOutput values.
 // You can construct a concrete instance of `IndexRuleInput` via:
 //
-//	IndexRuleArgs{...}
+//          IndexRuleArgs{...}
 type IndexRuleInput interface {
 	pulumi.Input
 
@@ -2897,11 +2897,11 @@ func (i IndexRuleArgs) ToIndexRulePtrOutputWithContext(ctx context.Context) Inde
 // IndexRulePtrInput is an input type that accepts IndexRuleArgs, IndexRulePtr and IndexRulePtrOutput values.
 // You can construct a concrete instance of `IndexRulePtrInput` via:
 //
-//	        IndexRuleArgs{...}
+//          IndexRuleArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type IndexRulePtrInput interface {
 	pulumi.Input
 
@@ -3032,7 +3032,7 @@ type IndexRuleFullText struct {
 // IndexRuleFullTextInput is an input type that accepts IndexRuleFullTextArgs and IndexRuleFullTextOutput values.
 // You can construct a concrete instance of `IndexRuleFullTextInput` via:
 //
-//	IndexRuleFullTextArgs{...}
+//          IndexRuleFullTextArgs{...}
 type IndexRuleFullTextInput interface {
 	pulumi.Input
 
@@ -3072,11 +3072,11 @@ func (i IndexRuleFullTextArgs) ToIndexRuleFullTextPtrOutputWithContext(ctx conte
 // IndexRuleFullTextPtrInput is an input type that accepts IndexRuleFullTextArgs, IndexRuleFullTextPtr and IndexRuleFullTextPtrOutput values.
 // You can construct a concrete instance of `IndexRuleFullTextPtrInput` via:
 //
-//	        IndexRuleFullTextArgs{...}
+//          IndexRuleFullTextArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type IndexRuleFullTextPtrInput interface {
 	pulumi.Input
 
@@ -3205,7 +3205,7 @@ type IndexRuleKeyValue struct {
 // IndexRuleKeyValueInput is an input type that accepts IndexRuleKeyValueArgs and IndexRuleKeyValueOutput values.
 // You can construct a concrete instance of `IndexRuleKeyValueInput` via:
 //
-//	IndexRuleKeyValueArgs{...}
+//          IndexRuleKeyValueArgs{...}
 type IndexRuleKeyValueInput interface {
 	pulumi.Input
 
@@ -3243,11 +3243,11 @@ func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValuePtrOutputWithContext(ctx conte
 // IndexRuleKeyValuePtrInput is an input type that accepts IndexRuleKeyValueArgs, IndexRuleKeyValuePtr and IndexRuleKeyValuePtrOutput values.
 // You can construct a concrete instance of `IndexRuleKeyValuePtrInput` via:
 //
-//	        IndexRuleKeyValueArgs{...}
+//          IndexRuleKeyValueArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type IndexRuleKeyValuePtrInput interface {
 	pulumi.Input
 
@@ -3361,7 +3361,7 @@ type IndexRuleKeyValueKeyValue struct {
 // IndexRuleKeyValueKeyValueInput is an input type that accepts IndexRuleKeyValueKeyValueArgs and IndexRuleKeyValueKeyValueOutput values.
 // You can construct a concrete instance of `IndexRuleKeyValueKeyValueInput` via:
 //
-//	IndexRuleKeyValueKeyValueArgs{...}
+//          IndexRuleKeyValueKeyValueArgs{...}
 type IndexRuleKeyValueKeyValueInput interface {
 	pulumi.Input
 
@@ -3391,7 +3391,7 @@ func (i IndexRuleKeyValueKeyValueArgs) ToIndexRuleKeyValueKeyValueOutputWithCont
 // IndexRuleKeyValueKeyValueArrayInput is an input type that accepts IndexRuleKeyValueKeyValueArray and IndexRuleKeyValueKeyValueArrayOutput values.
 // You can construct a concrete instance of `IndexRuleKeyValueKeyValueArrayInput` via:
 //
-//	IndexRuleKeyValueKeyValueArray{ IndexRuleKeyValueKeyValueArgs{...} }
+//          IndexRuleKeyValueKeyValueArray{ IndexRuleKeyValueKeyValueArgs{...} }
 type IndexRuleKeyValueKeyValueArrayInput interface {
 	pulumi.Input
 
@@ -3471,7 +3471,7 @@ type IndexRuleKeyValueKeyValueValue struct {
 // IndexRuleKeyValueKeyValueValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueArgs and IndexRuleKeyValueKeyValueValueOutput values.
 // You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueInput` via:
 //
-//	IndexRuleKeyValueKeyValueValueArgs{...}
+//          IndexRuleKeyValueKeyValueValueArgs{...}
 type IndexRuleKeyValueKeyValueValueInput interface {
 	pulumi.Input
 
@@ -3513,11 +3513,11 @@ func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValuePtrO
 // IndexRuleKeyValueKeyValueValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueArgs, IndexRuleKeyValueKeyValueValuePtr and IndexRuleKeyValueKeyValueValuePtrOutput values.
 // You can construct a concrete instance of `IndexRuleKeyValueKeyValueValuePtrInput` via:
 //
-//	        IndexRuleKeyValueKeyValueValueArgs{...}
+//          IndexRuleKeyValueKeyValueValueArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type IndexRuleKeyValueKeyValueValuePtrInput interface {
 	pulumi.Input
 
@@ -3661,7 +3661,7 @@ type IndexRuleTag struct {
 // IndexRuleTagInput is an input type that accepts IndexRuleTagArgs and IndexRuleTagOutput values.
 // You can construct a concrete instance of `IndexRuleTagInput` via:
 //
-//	IndexRuleTagArgs{...}
+//          IndexRuleTagArgs{...}
 type IndexRuleTagInput interface {
 	pulumi.Input
 
@@ -3699,11 +3699,11 @@ func (i IndexRuleTagArgs) ToIndexRuleTagPtrOutputWithContext(ctx context.Context
 // IndexRuleTagPtrInput is an input type that accepts IndexRuleTagArgs, IndexRuleTagPtr and IndexRuleTagPtrOutput values.
 // You can construct a concrete instance of `IndexRuleTagPtrInput` via:
 //
-//	        IndexRuleTagArgs{...}
+//          IndexRuleTagArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type IndexRuleTagPtrInput interface {
 	pulumi.Input
 
@@ -3817,7 +3817,7 @@ type IndexRuleTagKeyValue struct {
 // IndexRuleTagKeyValueInput is an input type that accepts IndexRuleTagKeyValueArgs and IndexRuleTagKeyValueOutput values.
 // You can construct a concrete instance of `IndexRuleTagKeyValueInput` via:
 //
-//	IndexRuleTagKeyValueArgs{...}
+//          IndexRuleTagKeyValueArgs{...}
 type IndexRuleTagKeyValueInput interface {
 	pulumi.Input
 
@@ -3847,7 +3847,7 @@ func (i IndexRuleTagKeyValueArgs) ToIndexRuleTagKeyValueOutputWithContext(ctx co
 // IndexRuleTagKeyValueArrayInput is an input type that accepts IndexRuleTagKeyValueArray and IndexRuleTagKeyValueArrayOutput values.
 // You can construct a concrete instance of `IndexRuleTagKeyValueArrayInput` via:
 //
-//	IndexRuleTagKeyValueArray{ IndexRuleTagKeyValueArgs{...} }
+//          IndexRuleTagKeyValueArray{ IndexRuleTagKeyValueArgs{...} }
 type IndexRuleTagKeyValueArrayInput interface {
 	pulumi.Input
 
@@ -3927,7 +3927,7 @@ type IndexRuleTagKeyValueValue struct {
 // IndexRuleTagKeyValueValueInput is an input type that accepts IndexRuleTagKeyValueValueArgs and IndexRuleTagKeyValueValueOutput values.
 // You can construct a concrete instance of `IndexRuleTagKeyValueValueInput` via:
 //
-//	IndexRuleTagKeyValueValueArgs{...}
+//          IndexRuleTagKeyValueValueArgs{...}
 type IndexRuleTagKeyValueValueInput interface {
 	pulumi.Input
 
@@ -3969,11 +3969,11 @@ func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValuePtrOutputWithC
 // IndexRuleTagKeyValueValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueArgs, IndexRuleTagKeyValueValuePtr and IndexRuleTagKeyValueValuePtrOutput values.
 // You can construct a concrete instance of `IndexRuleTagKeyValueValuePtrInput` via:
 //
-//	        IndexRuleTagKeyValueValueArgs{...}
+//          IndexRuleTagKeyValueValueArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type IndexRuleTagKeyValueValuePtrInput interface {
 	pulumi.Input
 
@@ -4117,7 +4117,7 @@ type MachineGroupMachineGroupType struct {
 // MachineGroupMachineGroupTypeInput is an input type that accepts MachineGroupMachineGroupTypeArgs and MachineGroupMachineGroupTypeOutput values.
 // You can construct a concrete instance of `MachineGroupMachineGroupTypeInput` via:
 //
-//	MachineGroupMachineGroupTypeArgs{...}
+//          MachineGroupMachineGroupTypeArgs{...}
 type MachineGroupMachineGroupTypeInput interface {
 	pulumi.Input
 
@@ -4155,11 +4155,11 @@ func (i MachineGroupMachineGroupTypeArgs) ToMachineGroupMachineGroupTypePtrOutpu
 // MachineGroupMachineGroupTypePtrInput is an input type that accepts MachineGroupMachineGroupTypeArgs, MachineGroupMachineGroupTypePtr and MachineGroupMachineGroupTypePtrOutput values.
 // You can construct a concrete instance of `MachineGroupMachineGroupTypePtrInput` via:
 //
-//	        MachineGroupMachineGroupTypeArgs{...}
+//          MachineGroupMachineGroupTypeArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type MachineGroupMachineGroupTypePtrInput interface {
 	pulumi.Input
 

@@ -2,10 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
  * Provide a resource to create a Free Certificate.
+ *
  * > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
  *
  * ## Example Usage
@@ -113,9 +115,13 @@ export class FreeCertificate extends pulumi.CustomResource {
      */
     public readonly domain!: pulumi.Output<string>;
     /**
-     * Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+     * Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
      */
     public readonly dvAuthMethod!: pulumi.Output<string>;
+    /**
+     * DV certification information.
+     */
+    public /*out*/ readonly dvAuths!: pulumi.Output<outputs.Ssl.FreeCertificateDvAuth[]>;
     /**
      * Certificate insert time.
      */
@@ -187,6 +193,7 @@ export class FreeCertificate extends pulumi.CustomResource {
             resourceInputs["deployable"] = state ? state.deployable : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
             resourceInputs["dvAuthMethod"] = state ? state.dvAuthMethod : undefined;
+            resourceInputs["dvAuths"] = state ? state.dvAuths : undefined;
             resourceInputs["insertTime"] = state ? state.insertTime : undefined;
             resourceInputs["oldCertificateId"] = state ? state.oldCertificateId : undefined;
             resourceInputs["packageType"] = state ? state.packageType : undefined;
@@ -223,6 +230,7 @@ export class FreeCertificate extends pulumi.CustomResource {
             resourceInputs["certificatePrivateKey"] = undefined /*out*/;
             resourceInputs["certificatePublicKey"] = undefined /*out*/;
             resourceInputs["deployable"] = undefined /*out*/;
+            resourceInputs["dvAuths"] = undefined /*out*/;
             resourceInputs["insertTime"] = undefined /*out*/;
             resourceInputs["productZhName"] = undefined /*out*/;
             resourceInputs["renewable"] = undefined /*out*/;
@@ -289,9 +297,13 @@ export interface FreeCertificateState {
      */
     domain?: pulumi.Input<string>;
     /**
-     * Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+     * Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
      */
     dvAuthMethod?: pulumi.Input<string>;
+    /**
+     * DV certification information.
+     */
+    dvAuths?: pulumi.Input<pulumi.Input<inputs.Ssl.FreeCertificateDvAuth>[]>;
     /**
      * Certificate insert time.
      */
@@ -371,7 +383,7 @@ export interface FreeCertificateArgs {
      */
     domain: pulumi.Input<string>;
     /**
-     * Specify DV authorize method, available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
+     * Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
      */
     dvAuthMethod: pulumi.Input<string>;
     /**

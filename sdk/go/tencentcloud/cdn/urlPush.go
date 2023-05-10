@@ -19,26 +19,23 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cdn.NewUrlPush(ctx, "foo", &Cdn.UrlPushArgs{
-//				Urls: pulumi.StringArray{
-//					pulumi.String("https://www.example.com/b"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cdn.NewUrlPush(ctx, "foo", &Cdn.UrlPushArgs{
+// 			Urls: pulumi.StringArray{
+// 				pulumi.String("https://www.example.com/b"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // argument to request new push task with same urls
@@ -47,27 +44,24 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cdn.NewUrlPush(ctx, "foo", &Cdn.UrlPushArgs{
-//				Redo: pulumi.Int(1),
-//				Urls: pulumi.StringArray{
-//					pulumi.String("https://www.example.com/a"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cdn.NewUrlPush(ctx, "foo", &Cdn.UrlPushArgs{
+// 			Redo: pulumi.Int(1),
+// 			Urls: pulumi.StringArray{
+// 				pulumi.String("https://www.example.com/a"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type UrlPush struct {
 	pulumi.CustomResourceState
@@ -221,7 +215,7 @@ func (i *UrlPush) ToUrlPushOutputWithContext(ctx context.Context) UrlPushOutput 
 // UrlPushArrayInput is an input type that accepts UrlPushArray and UrlPushArrayOutput values.
 // You can construct a concrete instance of `UrlPushArrayInput` via:
 //
-//	UrlPushArray{ UrlPushArgs{...} }
+//          UrlPushArray{ UrlPushArgs{...} }
 type UrlPushArrayInput interface {
 	pulumi.Input
 
@@ -246,7 +240,7 @@ func (i UrlPushArray) ToUrlPushArrayOutputWithContext(ctx context.Context) UrlPu
 // UrlPushMapInput is an input type that accepts UrlPushMap and UrlPushMapOutput values.
 // You can construct a concrete instance of `UrlPushMapInput` via:
 //
-//	UrlPushMap{ "key": UrlPushArgs{...} }
+//          UrlPushMap{ "key": UrlPushArgs{...} }
 type UrlPushMapInput interface {
 	pulumi.Input
 

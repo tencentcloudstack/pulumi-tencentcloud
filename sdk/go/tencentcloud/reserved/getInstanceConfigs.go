@@ -18,25 +18,22 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Reserved.GetInstanceConfigs(ctx, &reserved.GetInstanceConfigsArgs{
-//				AvailabilityZone: pulumi.StringRef("na-siliconvalley-1"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Reserved.GetInstanceConfigs(ctx, &reserved.GetInstanceConfigsArgs{
+// 			AvailabilityZone: pulumi.StringRef("na-siliconvalley-1"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetInstanceConfigs(ctx *pulumi.Context, args *GetInstanceConfigsArgs, opts ...pulumi.InvokeOption) (*GetInstanceConfigsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

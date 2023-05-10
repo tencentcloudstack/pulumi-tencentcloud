@@ -67,6 +67,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// }
     /// ```
     /// 
+    /// Create with Replications
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var tcrRegionMap = config.GetObject&lt;dynamic&gt;("tcrRegionMap") ?? 
+    ///         {
+    ///             { "ap-guangzhou", 1 },
+    ///             { "ap-shanghai", 4 },
+    ///             { "ap-hongkong", 5 },
+    ///             { "ap-beijing", 8 },
+    ///             { "ap-singapore", 9 },
+    ///             { "na-siliconvalley", 15 },
+    ///             { "ap-chengdu", 16 },
+    ///             { "eu-frankfurt", 17 },
+    ///             { "ap-seoul", 18 },
+    ///             { "ap-chongqing", 19 },
+    ///             { "ap-mumbai", 21 },
+    ///             { "na-ashburn", 22 },
+    ///             { "ap-bangkok", 23 },
+    ///             { "eu-moscow", 24 },
+    ///             { "ap-tokyo", 25 },
+    ///             { "ap-nanjing", 33 },
+    ///             { "ap-taipei", 39 },
+    ///             { "ap-jakarta", 72 },
+    ///         };
+    ///         var foo = new Tencentcloud.Tcr.Instance("foo", new Tencentcloud.Tcr.InstanceArgs
+    ///         {
+    ///             InstanceType = "premium",
+    ///             Replications = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.InstanceReplicationArgs
+    ///                 {
+    ///                     RegionId = tcrRegionMap.Ap_guangzhou,
+    ///                 },
+    ///                 new Tencentcloud.Tcr.Inputs.InstanceReplicationArgs
+    ///                 {
+    ///                     RegionId = tcrRegionMap.Ap_singapore,
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// tcr instance can be imported using the id, e.g.
@@ -83,6 +135,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Output("deleteBucket")]
         public Output<bool?> DeleteBucket { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance expiration time (prepaid).
+        /// </summary>
+        [Output("expiredAt")]
+        public Output<string> ExpiredAt { get; private set; } = null!;
+
+        /// <summary>
+        /// Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        /// </summary>
+        [Output("instanceChargeTypePrepaidPeriod")]
+        public Output<int?> InstanceChargeTypePrepaidPeriod { get; private set; } = null!;
+
+        /// <summary>
+        /// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
+        /// </summary>
+        [Output("instanceChargeTypePrepaidRenewFlag")]
+        public Output<int?> InstanceChargeTypePrepaidRenewFlag { get; private set; } = null!;
 
         /// <summary>
         /// TCR types. Valid values are: `standard`, `basic`, `premium`.
@@ -119,6 +189,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Output("publicStatus")]
         public Output<string> PublicStatus { get; private set; } = null!;
+
+        /// <summary>
+        /// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        /// </summary>
+        [Output("registryChargeType")]
+        public Output<int?> RegistryChargeType { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+        /// </summary>
+        [Output("replications")]
+        public Output<ImmutableArray<Outputs.InstanceReplication>> Replications { get; private set; } = null!;
 
         /// <summary>
         /// Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
@@ -192,6 +274,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Input<bool>? DeleteBucket { get; set; }
 
         /// <summary>
+        /// Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        /// </summary>
+        [Input("instanceChargeTypePrepaidPeriod")]
+        public Input<int>? InstanceChargeTypePrepaidPeriod { get; set; }
+
+        /// <summary>
+        /// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
+        /// </summary>
+        [Input("instanceChargeTypePrepaidRenewFlag")]
+        public Input<int>? InstanceChargeTypePrepaidRenewFlag { get; set; }
+
+        /// <summary>
         /// TCR types. Valid values are: `standard`, `basic`, `premium`.
         /// </summary>
         [Input("instanceType", required: true)]
@@ -208,6 +302,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("openPublicOperation")]
         public Input<bool>? OpenPublicOperation { get; set; }
+
+        /// <summary>
+        /// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        /// </summary>
+        [Input("registryChargeType")]
+        public Input<int>? RegistryChargeType { get; set; }
+
+        [Input("replications")]
+        private InputList<Inputs.InstanceReplicationArgs>? _replications;
+
+        /// <summary>
+        /// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+        /// </summary>
+        public InputList<Inputs.InstanceReplicationArgs> Replications
+        {
+            get => _replications ?? (_replications = new InputList<Inputs.InstanceReplicationArgs>());
+            set => _replications = value;
+        }
 
         [Input("securityPolicies")]
         private InputList<Inputs.InstanceSecurityPolicyArgs>? _securityPolicies;
@@ -247,6 +359,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Input<bool>? DeleteBucket { get; set; }
 
         /// <summary>
+        /// Instance expiration time (prepaid).
+        /// </summary>
+        [Input("expiredAt")]
+        public Input<string>? ExpiredAt { get; set; }
+
+        /// <summary>
+        /// Length of time to purchase an instance (in month). Must set when registry_charge_type is prepaid.
+        /// </summary>
+        [Input("instanceChargeTypePrepaidPeriod")]
+        public Input<int>? InstanceChargeTypePrepaidPeriod { get; set; }
+
+        /// <summary>
+        /// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registry_charge_type is prepaid.
+        /// </summary>
+        [Input("instanceChargeTypePrepaidRenewFlag")]
+        public Input<int>? InstanceChargeTypePrepaidRenewFlag { get; set; }
+
+        /// <summary>
         /// TCR types. Valid values are: `standard`, `basic`, `premium`.
         /// </summary>
         [Input("instanceType")]
@@ -281,6 +411,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("publicStatus")]
         public Input<string>? PublicStatus { get; set; }
+
+        /// <summary>
+        /// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+        /// </summary>
+        [Input("registryChargeType")]
+        public Input<int>? RegistryChargeType { get; set; }
+
+        [Input("replications")]
+        private InputList<Inputs.InstanceReplicationGetArgs>? _replications;
+
+        /// <summary>
+        /// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+        /// </summary>
+        public InputList<Inputs.InstanceReplicationGetArgs> Replications
+        {
+            get => _replications ?? (_replications = new InputList<Inputs.InstanceReplicationGetArgs>());
+            set => _replications = value;
+        }
 
         [Input("securityPolicies")]
         private InputList<Inputs.InstanceSecurityPolicyGetArgs>? _securityPolicies;

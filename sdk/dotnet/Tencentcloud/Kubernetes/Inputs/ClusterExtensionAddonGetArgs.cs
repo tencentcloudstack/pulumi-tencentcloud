@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// Description of the add-on resource object in JSON string format.
+        /// Parameter of the add-on resource object in JSON string format, please check the example at the top of page for reference.
         /// </summary>
         [Input("param", required: true)]
         public Input<string> Param { get; set; } = null!;

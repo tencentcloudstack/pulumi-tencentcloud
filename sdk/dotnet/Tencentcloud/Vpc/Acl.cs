@@ -80,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// Tags of the vpc acl.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
+        /// <summary>
         /// ID of the VPC instance.
         /// </summary>
         [Output("vpcId")]
@@ -162,6 +168,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of the vpc acl.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// ID of the VPC instance.
         /// </summary>
@@ -210,6 +228,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of the vpc acl.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// ID of the VPC instance.

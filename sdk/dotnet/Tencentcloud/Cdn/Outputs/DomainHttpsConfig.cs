@@ -43,6 +43,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// </summary>
         public readonly string? SpdySwitch;
         /// <summary>
+        /// Tls version settings, only support some Advanced domain names, support settings TLSv1, TLSV1.1, TLSV1.2, TLSv1.3, when modifying must open consecutive versions.
+        /// </summary>
+        public readonly ImmutableArray<string> TlsVersions;
+        /// <summary>
         /// Client certificate authentication feature. Valid values are `on` and `off`. and default value is `off`.
         /// </summary>
         public readonly string? VerifyClient;
@@ -63,6 +67,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
 
             string? spdySwitch,
 
+            ImmutableArray<string> tlsVersions,
+
             string? verifyClient)
         {
             ClientCertificateConfig = clientCertificateConfig;
@@ -72,6 +78,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
             OcspStaplingSwitch = ocspStaplingSwitch;
             ServerCertificateConfig = serverCertificateConfig;
             SpdySwitch = spdySwitch;
+            TlsVersions = tlsVersions;
             VerifyClient = verifyClient;
         }
     }

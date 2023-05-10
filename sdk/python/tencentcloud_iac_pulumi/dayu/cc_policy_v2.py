@@ -24,7 +24,7 @@ class CcPolicyV2Args:
                  thresholds: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]] = None):
         """
         The set of arguments for constructing a CcPolicyV2 resource.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
         :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]] cc_black_white_ips: Blacklist and whitelist.
         :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]] cc_geo_ip_policys: Details of the CC region blocking policy list.
@@ -49,7 +49,7 @@ class CcPolicyV2Args:
     @pulumi.getter
     def business(self) -> pulumi.Input[str]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -142,7 +142,7 @@ class _CcPolicyV2State:
                  thresholds: Optional[pulumi.Input[Sequence[pulumi.Input['CcPolicyV2ThresholdArgs']]]] = None):
         """
         Input properties used for looking up and filtering CcPolicyV2 resources.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcBlackWhiteIpArgs']]] cc_black_white_ips: Blacklist and whitelist.
         :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcGeoIpPolicyArgs']]] cc_geo_ip_policys: Details of the CC region blocking policy list.
         :param pulumi.Input[Sequence[pulumi.Input['CcPolicyV2CcPrecisionPolicyArgs']]] cc_precision_policys: CC Precision Protection List.
@@ -169,7 +169,7 @@ class _CcPolicyV2State:
     @pulumi.getter
     def business(self) -> Optional[pulumi.Input[str]]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 
@@ -320,7 +320,7 @@ class CcPolicyV2(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcBlackWhiteIpArgs']]]] cc_black_white_ips: Blacklist and whitelist.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcGeoIpPolicyArgs']]]] cc_geo_ip_policys: Details of the CC region blocking policy list.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionPolicyArgs']]]] cc_precision_policys: CC Precision Protection List.
@@ -460,7 +460,7 @@ class CcPolicyV2(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] business: Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        :param pulumi.Input[str] business: Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcBlackWhiteIpArgs']]]] cc_black_white_ips: Blacklist and whitelist.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcGeoIpPolicyArgs']]]] cc_geo_ip_policys: Details of the CC region blocking policy list.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CcPolicyV2CcPrecisionPolicyArgs']]]] cc_precision_policys: CC Precision Protection List.
@@ -485,7 +485,7 @@ class CcPolicyV2(pulumi.CustomResource):
     @pulumi.getter
     def business(self) -> pulumi.Output[str]:
         """
-        Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+        Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
         """
         return pulumi.get(self, "business")
 

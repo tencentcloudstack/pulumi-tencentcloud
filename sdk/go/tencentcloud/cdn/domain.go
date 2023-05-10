@@ -12,6 +12,7 @@ import (
 )
 
 // Provides a resource to create a CDN domain.
+//
 // > **NOTE:** To disable most of configuration with switch, just modify switch argument to off instead of remove the whole block
 //
 // ## Example Usage
@@ -20,178 +21,173 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
-//				Area:         pulumi.String("mainland"),
-//				Domain:       pulumi.String("xxxx.com"),
-//				FullUrlCache: pulumi.Bool(false),
-//				HttpsConfig: &cdn.DomainHttpsConfigArgs{
-//					ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
-//						RedirectStatusCode: pulumi.Int(302),
-//						RedirectType:       pulumi.String("http"),
-//						Switch:             pulumi.String("on"),
-//					},
-//					Http2Switch:        pulumi.String("off"),
-//					HttpsSwitch:        pulumi.String("off"),
-//					OcspStaplingSwitch: pulumi.String("off"),
-//					SpdySwitch:         pulumi.String("off"),
-//					VerifyClient:       pulumi.String("off"),
-//				},
-//				Origin: &cdn.DomainOriginArgs{
-//					OriginLists: pulumi.StringArray{
-//						pulumi.String("127.0.0.1"),
-//					},
-//					OriginPullProtocol: pulumi.String("follow"),
-//					OriginType:         pulumi.String("ip"),
-//				},
-//				ServiceType: pulumi.String("web"),
-//				Tags: pulumi.AnyMap{
-//					"hello": pulumi.Any("world"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
+// 			Area:         pulumi.String("mainland"),
+// 			Domain:       pulumi.String("xxxx.com"),
+// 			FullUrlCache: pulumi.Bool(false),
+// 			HttpsConfig: &cdn.DomainHttpsConfigArgs{
+// 				ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
+// 					RedirectStatusCode: pulumi.Int(302),
+// 					RedirectType:       pulumi.String("http"),
+// 					Switch:             pulumi.String("on"),
+// 				},
+// 				Http2Switch:        pulumi.String("off"),
+// 				HttpsSwitch:        pulumi.String("off"),
+// 				OcspStaplingSwitch: pulumi.String("off"),
+// 				SpdySwitch:         pulumi.String("off"),
+// 				VerifyClient:       pulumi.String("off"),
+// 			},
+// 			Origin: &cdn.DomainOriginArgs{
+// 				OriginLists: pulumi.StringArray{
+// 					pulumi.String("127.0.0.1"),
+// 				},
+// 				OriginPullProtocol: pulumi.String("follow"),
+// 				OriginType:         pulumi.String("ip"),
+// 			},
+// 			ServiceType: pulumi.String("web"),
+// 			Tags: pulumi.AnyMap{
+// 				"hello": pulumi.Any("world"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Example Usage of cdn uses cache and request headers
+// Example Usage of cdn uses cache and request headers
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
-//				Area:         pulumi.String("mainland"),
-//				Domain:       pulumi.String("xxxx.com"),
-//				FullUrlCache: pulumi.Bool(false),
-//				HttpsConfig: &cdn.DomainHttpsConfigArgs{
-//					ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
-//						RedirectStatusCode: pulumi.Int(302),
-//						RedirectType:       pulumi.String("http"),
-//						Switch:             pulumi.String("on"),
-//					},
-//					Http2Switch:        pulumi.String("off"),
-//					HttpsSwitch:        pulumi.String("off"),
-//					OcspStaplingSwitch: pulumi.String("off"),
-//					SpdySwitch:         pulumi.String("off"),
-//					VerifyClient:       pulumi.String("off"),
-//				},
-//				Origin: &cdn.DomainOriginArgs{
-//					OriginLists: pulumi.StringArray{
-//						pulumi.String("127.0.0.1"),
-//					},
-//					OriginPullProtocol: pulumi.String("follow"),
-//					OriginType:         pulumi.String("ip"),
-//				},
-//				RangeOriginSwitch: pulumi.String("off"),
-//				RequestHeader: &cdn.DomainRequestHeaderArgs{
-//					HeaderRules: cdn.DomainRequestHeaderHeaderRuleArray{
-//						&cdn.DomainRequestHeaderHeaderRuleArgs{
-//							HeaderMode:  pulumi.String("add"),
-//							HeaderName:  pulumi.String("tf-header-name"),
-//							HeaderValue: pulumi.String("tf-header-value"),
-//							RulePaths: pulumi.StringArray{
-//								pulumi.String("*"),
-//							},
-//							RuleType: pulumi.String("all"),
-//						},
-//					},
-//					Switch: pulumi.String("on"),
-//				},
-//				RuleCaches: cdn.DomainRuleCachArray{
-//					&cdn.DomainRuleCachArgs{
-//						CacheTime:     pulumi.Int(10000),
-//						NoCacheSwitch: pulumi.String("on"),
-//						ReValidate:    pulumi.String("on"),
-//					},
-//				},
-//				ServiceType: pulumi.String("web"),
-//				Tags: pulumi.AnyMap{
-//					"hello": pulumi.Any("world"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
+// 			Area: pulumi.String("mainland"),
+// 			CacheKey: &cdn.DomainCacheKeyArgs{
+// 				FullUrlCache: pulumi.String("on"),
+// 			},
+// 			Domain: pulumi.String("xxxx.com"),
+// 			HttpsConfig: &cdn.DomainHttpsConfigArgs{
+// 				ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
+// 					RedirectStatusCode: pulumi.Int(302),
+// 					RedirectType:       pulumi.String("http"),
+// 					Switch:             pulumi.String("on"),
+// 				},
+// 				Http2Switch:        pulumi.String("off"),
+// 				HttpsSwitch:        pulumi.String("off"),
+// 				OcspStaplingSwitch: pulumi.String("off"),
+// 				SpdySwitch:         pulumi.String("off"),
+// 				VerifyClient:       pulumi.String("off"),
+// 			},
+// 			Origin: &cdn.DomainOriginArgs{
+// 				OriginLists: pulumi.StringArray{
+// 					pulumi.String("127.0.0.1"),
+// 				},
+// 				OriginPullProtocol: pulumi.String("follow"),
+// 				OriginType:         pulumi.String("ip"),
+// 			},
+// 			RangeOriginSwitch: pulumi.String("off"),
+// 			RequestHeader: &cdn.DomainRequestHeaderArgs{
+// 				HeaderRules: cdn.DomainRequestHeaderHeaderRuleArray{
+// 					&cdn.DomainRequestHeaderHeaderRuleArgs{
+// 						HeaderMode:  pulumi.String("add"),
+// 						HeaderName:  pulumi.String("tf-header-name"),
+// 						HeaderValue: pulumi.String("tf-header-value"),
+// 						RulePaths: pulumi.StringArray{
+// 							pulumi.String("*"),
+// 						},
+// 						RuleType: pulumi.String("all"),
+// 					},
+// 				},
+// 				Switch: pulumi.String("on"),
+// 			},
+// 			RuleCaches: cdn.DomainRuleCachArray{
+// 				&cdn.DomainRuleCachArgs{
+// 					CacheTime:     pulumi.Int(10000),
+// 					NoCacheSwitch: pulumi.String("on"),
+// 					ReValidate:    pulumi.String("on"),
+// 				},
+// 			},
+// 			ServiceType: pulumi.String("web"),
+// 			Tags: pulumi.AnyMap{
+// 				"hello": pulumi.Any("world"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Example Usage of COS bucket url as origin
+// Example Usage of COS bucket url as origin
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			bucket, err := Cos.NewBucket(ctx, "bucket", &Cos.BucketArgs{
-//				Bucket: pulumi.String("demo-bucket-1251234567"),
-//				Acl:    pulumi.String("private"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Cdn.NewDomain(ctx, "cdn", &Cdn.DomainArgs{
-//				Domain:       pulumi.String("abc.com"),
-//				ServiceType:  pulumi.String("web"),
-//				Area:         pulumi.String("mainland"),
-//				FullUrlCache: pulumi.Bool(false),
-//				Origin: &cdn.DomainOriginArgs{
-//					OriginType: pulumi.String("cos"),
-//					OriginLists: pulumi.StringArray{
-//						bucket.CosBucketUrl,
-//					},
-//					ServerName:         bucket.CosBucketUrl,
-//					OriginPullProtocol: pulumi.String("follow"),
-//					CosPrivateAccess:   pulumi.String("on"),
-//				},
-//				HttpsConfig: &cdn.DomainHttpsConfigArgs{
-//					HttpsSwitch:        pulumi.String("off"),
-//					Http2Switch:        pulumi.String("off"),
-//					OcspStaplingSwitch: pulumi.String("off"),
-//					SpdySwitch:         pulumi.String("off"),
-//					VerifyClient:       pulumi.String("off"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		bucket, err := Cos.NewBucket(ctx, "bucket", &Cos.BucketArgs{
+// 			Bucket: pulumi.String("demo-bucket-1251234567"),
+// 			Acl:    pulumi.String("private"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cdn.NewDomain(ctx, "cdn", &Cdn.DomainArgs{
+// 			Domain:      pulumi.String("abc.com"),
+// 			ServiceType: pulumi.String("web"),
+// 			Area:        pulumi.String("mainland"),
+// 			CacheKey: &cdn.DomainCacheKeyArgs{
+// 				FullUrlCache: pulumi.String("off"),
+// 			},
+// 			Origin: &cdn.DomainOriginArgs{
+// 				OriginType: pulumi.String("cos"),
+// 				OriginLists: pulumi.StringArray{
+// 					bucket.CosBucketUrl,
+// 				},
+// 				ServerName:         bucket.CosBucketUrl,
+// 				OriginPullProtocol: pulumi.String("follow"),
+// 				CosPrivateAccess:   pulumi.String("on"),
+// 			},
+// 			HttpsConfig: &cdn.DomainHttpsConfigArgs{
+// 				HttpsSwitch:        pulumi.String("off"),
+// 				Http2Switch:        pulumi.String("off"),
+// 				OcspStaplingSwitch: pulumi.String("off"),
+// 				SpdySwitch:         pulumi.String("off"),
+// 				VerifyClient:       pulumi.String("off"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -199,9 +195,7 @@ import (
 // CDN domain can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
-//
+//  $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
 // ```
 type Domain struct {
 	pulumi.CustomResourceState
@@ -214,6 +208,8 @@ type Domain struct {
 	AwsPrivateAccess DomainAwsPrivateAccessPtrOutput `pulumi:"awsPrivateAccess"`
 	// Bandwidth cap configuration.
 	BandWidthAlert DomainBandWidthAlertPtrOutput `pulumi:"bandWidthAlert"`
+	// Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+	CacheKey DomainCacheKeyPtrOutput `pulumi:"cacheKey"`
 	// CNAME address of domain name.
 	Cname pulumi.StringOutput `pulumi:"cname"`
 	// Smart compression configurations.
@@ -234,7 +230,9 @@ type Domain struct {
 	ExplicitUsingDryRun pulumi.BoolPtrOutput `pulumi:"explicitUsingDryRun"`
 	// 301/302 redirect following switch, available values: `on`, `off` (default).
 	FollowRedirectSwitch pulumi.StringPtrOutput `pulumi:"followRedirectSwitch"`
-	// Whether to enable full-path cache. Default value is `true`.
+	// Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+	//
+	// Deprecated: Use `cache_key` -> `full_url_cache` instead.
 	FullUrlCache pulumi.BoolPtrOutput `pulumi:"fullUrlCache"`
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig DomainHttpsConfigOutput `pulumi:"httpsConfig"`
@@ -258,6 +256,8 @@ type Domain struct {
 	OriginPullTimeout DomainOriginPullTimeoutPtrOutput `pulumi:"originPullTimeout"`
 	// Access authentication for OSS origin.
 	OssPrivateAccess DomainOssPrivateAccessPtrOutput `pulumi:"ossPrivateAccess"`
+	// Maximum post size configuration.
+	PostMaxSizes DomainPostMaxSizeArrayOutput `pulumi:"postMaxSizes"`
 	// The project CDN belongs to, default to 0.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Access authentication for OBS origin.
@@ -278,7 +278,7 @@ type Domain struct {
 	RuleCaches DomainRuleCachArrayOutput `pulumi:"ruleCaches"`
 	// SEO switch, available values: `on`, `off` (default).
 	SeoSwitch pulumi.StringPtrOutput `pulumi:"seoSwitch"`
-	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
 	ServiceType pulumi.StringOutput `pulumi:"serviceType"`
 	// Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
 	SpecificConfigMainland pulumi.StringPtrOutput `pulumi:"specificConfigMainland"`
@@ -341,6 +341,8 @@ type domainState struct {
 	AwsPrivateAccess *DomainAwsPrivateAccess `pulumi:"awsPrivateAccess"`
 	// Bandwidth cap configuration.
 	BandWidthAlert *DomainBandWidthAlert `pulumi:"bandWidthAlert"`
+	// Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+	CacheKey *DomainCacheKey `pulumi:"cacheKey"`
 	// CNAME address of domain name.
 	Cname *string `pulumi:"cname"`
 	// Smart compression configurations.
@@ -361,7 +363,9 @@ type domainState struct {
 	ExplicitUsingDryRun *bool `pulumi:"explicitUsingDryRun"`
 	// 301/302 redirect following switch, available values: `on`, `off` (default).
 	FollowRedirectSwitch *string `pulumi:"followRedirectSwitch"`
-	// Whether to enable full-path cache. Default value is `true`.
+	// Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+	//
+	// Deprecated: Use `cache_key` -> `full_url_cache` instead.
 	FullUrlCache *bool `pulumi:"fullUrlCache"`
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig *DomainHttpsConfig `pulumi:"httpsConfig"`
@@ -385,6 +389,8 @@ type domainState struct {
 	OriginPullTimeout *DomainOriginPullTimeout `pulumi:"originPullTimeout"`
 	// Access authentication for OSS origin.
 	OssPrivateAccess *DomainOssPrivateAccess `pulumi:"ossPrivateAccess"`
+	// Maximum post size configuration.
+	PostMaxSizes []DomainPostMaxSize `pulumi:"postMaxSizes"`
 	// The project CDN belongs to, default to 0.
 	ProjectId *int `pulumi:"projectId"`
 	// Access authentication for OBS origin.
@@ -405,7 +411,7 @@ type domainState struct {
 	RuleCaches []DomainRuleCach `pulumi:"ruleCaches"`
 	// SEO switch, available values: `on`, `off` (default).
 	SeoSwitch *string `pulumi:"seoSwitch"`
-	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
 	ServiceType *string `pulumi:"serviceType"`
 	// Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
 	SpecificConfigMainland *string `pulumi:"specificConfigMainland"`
@@ -430,6 +436,8 @@ type DomainState struct {
 	AwsPrivateAccess DomainAwsPrivateAccessPtrInput
 	// Bandwidth cap configuration.
 	BandWidthAlert DomainBandWidthAlertPtrInput
+	// Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+	CacheKey DomainCacheKeyPtrInput
 	// CNAME address of domain name.
 	Cname pulumi.StringPtrInput
 	// Smart compression configurations.
@@ -450,7 +458,9 @@ type DomainState struct {
 	ExplicitUsingDryRun pulumi.BoolPtrInput
 	// 301/302 redirect following switch, available values: `on`, `off` (default).
 	FollowRedirectSwitch pulumi.StringPtrInput
-	// Whether to enable full-path cache. Default value is `true`.
+	// Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+	//
+	// Deprecated: Use `cache_key` -> `full_url_cache` instead.
 	FullUrlCache pulumi.BoolPtrInput
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig DomainHttpsConfigPtrInput
@@ -474,6 +484,8 @@ type DomainState struct {
 	OriginPullTimeout DomainOriginPullTimeoutPtrInput
 	// Access authentication for OSS origin.
 	OssPrivateAccess DomainOssPrivateAccessPtrInput
+	// Maximum post size configuration.
+	PostMaxSizes DomainPostMaxSizeArrayInput
 	// The project CDN belongs to, default to 0.
 	ProjectId pulumi.IntPtrInput
 	// Access authentication for OBS origin.
@@ -494,7 +506,7 @@ type DomainState struct {
 	RuleCaches DomainRuleCachArrayInput
 	// SEO switch, available values: `on`, `off` (default).
 	SeoSwitch pulumi.StringPtrInput
-	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
 	ServiceType pulumi.StringPtrInput
 	// Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
 	SpecificConfigMainland pulumi.StringPtrInput
@@ -523,6 +535,8 @@ type domainArgs struct {
 	AwsPrivateAccess *DomainAwsPrivateAccess `pulumi:"awsPrivateAccess"`
 	// Bandwidth cap configuration.
 	BandWidthAlert *DomainBandWidthAlert `pulumi:"bandWidthAlert"`
+	// Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+	CacheKey *DomainCacheKey `pulumi:"cacheKey"`
 	// Smart compression configurations.
 	Compression *DomainCompression `pulumi:"compression"`
 	// Name of the acceleration domain.
@@ -535,7 +549,9 @@ type domainArgs struct {
 	ExplicitUsingDryRun *bool `pulumi:"explicitUsingDryRun"`
 	// 301/302 redirect following switch, available values: `on`, `off` (default).
 	FollowRedirectSwitch *string `pulumi:"followRedirectSwitch"`
-	// Whether to enable full-path cache. Default value is `true`.
+	// Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+	//
+	// Deprecated: Use `cache_key` -> `full_url_cache` instead.
 	FullUrlCache *bool `pulumi:"fullUrlCache"`
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig *DomainHttpsConfig `pulumi:"httpsConfig"`
@@ -559,6 +575,8 @@ type domainArgs struct {
 	OriginPullTimeout *DomainOriginPullTimeout `pulumi:"originPullTimeout"`
 	// Access authentication for OSS origin.
 	OssPrivateAccess *DomainOssPrivateAccess `pulumi:"ossPrivateAccess"`
+	// Maximum post size configuration.
+	PostMaxSizes []DomainPostMaxSize `pulumi:"postMaxSizes"`
 	// The project CDN belongs to, default to 0.
 	ProjectId *int `pulumi:"projectId"`
 	// Access authentication for OBS origin.
@@ -579,7 +597,7 @@ type domainArgs struct {
 	RuleCaches []DomainRuleCach `pulumi:"ruleCaches"`
 	// SEO switch, available values: `on`, `off` (default).
 	SeoSwitch *string `pulumi:"seoSwitch"`
-	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
 	ServiceType string `pulumi:"serviceType"`
 	// Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
 	SpecificConfigMainland *string `pulumi:"specificConfigMainland"`
@@ -603,6 +621,8 @@ type DomainArgs struct {
 	AwsPrivateAccess DomainAwsPrivateAccessPtrInput
 	// Bandwidth cap configuration.
 	BandWidthAlert DomainBandWidthAlertPtrInput
+	// Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+	CacheKey DomainCacheKeyPtrInput
 	// Smart compression configurations.
 	Compression DomainCompressionPtrInput
 	// Name of the acceleration domain.
@@ -615,7 +635,9 @@ type DomainArgs struct {
 	ExplicitUsingDryRun pulumi.BoolPtrInput
 	// 301/302 redirect following switch, available values: `on`, `off` (default).
 	FollowRedirectSwitch pulumi.StringPtrInput
-	// Whether to enable full-path cache. Default value is `true`.
+	// Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+	//
+	// Deprecated: Use `cache_key` -> `full_url_cache` instead.
 	FullUrlCache pulumi.BoolPtrInput
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig DomainHttpsConfigPtrInput
@@ -639,6 +661,8 @@ type DomainArgs struct {
 	OriginPullTimeout DomainOriginPullTimeoutPtrInput
 	// Access authentication for OSS origin.
 	OssPrivateAccess DomainOssPrivateAccessPtrInput
+	// Maximum post size configuration.
+	PostMaxSizes DomainPostMaxSizeArrayInput
 	// The project CDN belongs to, default to 0.
 	ProjectId pulumi.IntPtrInput
 	// Access authentication for OBS origin.
@@ -659,7 +683,7 @@ type DomainArgs struct {
 	RuleCaches DomainRuleCachArrayInput
 	// SEO switch, available values: `on`, `off` (default).
 	SeoSwitch pulumi.StringPtrInput
-	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
 	ServiceType pulumi.StringInput
 	// Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
 	SpecificConfigMainland pulumi.StringPtrInput
@@ -699,7 +723,7 @@ func (i *Domain) ToDomainOutputWithContext(ctx context.Context) DomainOutput {
 // DomainArrayInput is an input type that accepts DomainArray and DomainArrayOutput values.
 // You can construct a concrete instance of `DomainArrayInput` via:
 //
-//	DomainArray{ DomainArgs{...} }
+//          DomainArray{ DomainArgs{...} }
 type DomainArrayInput interface {
 	pulumi.Input
 
@@ -724,7 +748,7 @@ func (i DomainArray) ToDomainArrayOutputWithContext(ctx context.Context) DomainA
 // DomainMapInput is an input type that accepts DomainMap and DomainMapOutput values.
 // You can construct a concrete instance of `DomainMapInput` via:
 //
-//	DomainMap{ "key": DomainArgs{...} }
+//          DomainMap{ "key": DomainArgs{...} }
 type DomainMapInput interface {
 	pulumi.Input
 
@@ -780,6 +804,11 @@ func (o DomainOutput) BandWidthAlert() DomainBandWidthAlertPtrOutput {
 	return o.ApplyT(func(v *Domain) DomainBandWidthAlertPtrOutput { return v.BandWidthAlert }).(DomainBandWidthAlertPtrOutput)
 }
 
+// Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
+func (o DomainOutput) CacheKey() DomainCacheKeyPtrOutput {
+	return o.ApplyT(func(v *Domain) DomainCacheKeyPtrOutput { return v.CacheKey }).(DomainCacheKeyPtrOutput)
+}
+
 // CNAME address of domain name.
 func (o DomainOutput) Cname() pulumi.StringOutput {
 	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.Cname }).(pulumi.StringOutput)
@@ -830,7 +859,9 @@ func (o DomainOutput) FollowRedirectSwitch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.FollowRedirectSwitch }).(pulumi.StringPtrOutput)
 }
 
-// Whether to enable full-path cache. Default value is `true`.
+// Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
+//
+// Deprecated: Use `cache_key` -> `full_url_cache` instead.
 func (o DomainOutput) FullUrlCache() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Domain) pulumi.BoolPtrOutput { return v.FullUrlCache }).(pulumi.BoolPtrOutput)
 }
@@ -890,6 +921,11 @@ func (o DomainOutput) OssPrivateAccess() DomainOssPrivateAccessPtrOutput {
 	return o.ApplyT(func(v *Domain) DomainOssPrivateAccessPtrOutput { return v.OssPrivateAccess }).(DomainOssPrivateAccessPtrOutput)
 }
 
+// Maximum post size configuration.
+func (o DomainOutput) PostMaxSizes() DomainPostMaxSizeArrayOutput {
+	return o.ApplyT(func(v *Domain) DomainPostMaxSizeArrayOutput { return v.PostMaxSizes }).(DomainPostMaxSizeArrayOutput)
+}
+
 // The project CDN belongs to, default to 0.
 func (o DomainOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Domain) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
@@ -940,7 +976,7 @@ func (o DomainOutput) SeoSwitch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.SeoSwitch }).(pulumi.StringPtrOutput)
 }
 
-// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration.
+// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
 func (o DomainOutput) ServiceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.ServiceType }).(pulumi.StringOutput)
 }

@@ -31,6 +31,7 @@ import * as utilities from "../utilities";
  * const mycos = new tencentcloud.Cos.Bucket("mycos", {
  *     acl: "private",
  *     bucket: "mycos-1258798060",
+ *     forceClean: true,
  *     multiAz: true,
  *     versioningEnable: true,
  * });
@@ -80,15 +81,16 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const mycos = new tencentcloud.Cos.Bucket("mycos", {
+ * const mycos = new tencentcloud.cos.Bucket("mycos", {
  *     bucket: "mycos-1258798060",
  *     website: {
- *         errorDocument: "error.html",
  *         indexDocument: "index.html",
+ *         errorDocument: "error.html",
  *     },
  * });
+ * export const endpointTest = mycos.website.apply(website => website?.endpoint);
  * ```
  *
  * Using CORS
@@ -289,6 +291,10 @@ export class Bucket extends pulumi.CustomResource {
     }
 
     /**
+     * Enable bucket acceleration.
+     */
+    public readonly accelerationEnable!: pulumi.Output<boolean | undefined>;
+    /**
      * The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
      */
     public readonly acl!: pulumi.Output<string | undefined>;
@@ -312,6 +318,10 @@ export class Bucket extends pulumi.CustomResource {
      * The server-side encryption algorithm to use. Valid value is `AES256`.
      */
     public readonly encryptionAlgorithm!: pulumi.Output<string | undefined>;
+    /**
+     * Force cleanup all objects before delete bucket.
+     */
+    public readonly forceClean!: pulumi.Output<boolean | undefined>;
     /**
      * A configuration of object lifecycle management (documented below).
      */
@@ -374,12 +384,14 @@ export class Bucket extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as BucketState | undefined;
+            resourceInputs["accelerationEnable"] = state ? state.accelerationEnable : undefined;
             resourceInputs["acl"] = state ? state.acl : undefined;
             resourceInputs["aclBody"] = state ? state.aclBody : undefined;
             resourceInputs["bucket"] = state ? state.bucket : undefined;
             resourceInputs["corsRules"] = state ? state.corsRules : undefined;
             resourceInputs["cosBucketUrl"] = state ? state.cosBucketUrl : undefined;
             resourceInputs["encryptionAlgorithm"] = state ? state.encryptionAlgorithm : undefined;
+            resourceInputs["forceClean"] = state ? state.forceClean : undefined;
             resourceInputs["lifecycleRules"] = state ? state.lifecycleRules : undefined;
             resourceInputs["logEnable"] = state ? state.logEnable : undefined;
             resourceInputs["logPrefix"] = state ? state.logPrefix : undefined;
@@ -397,11 +409,13 @@ export class Bucket extends pulumi.CustomResource {
             if ((!args || args.bucket === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'bucket'");
             }
+            resourceInputs["accelerationEnable"] = args ? args.accelerationEnable : undefined;
             resourceInputs["acl"] = args ? args.acl : undefined;
             resourceInputs["aclBody"] = args ? args.aclBody : undefined;
             resourceInputs["bucket"] = args ? args.bucket : undefined;
             resourceInputs["corsRules"] = args ? args.corsRules : undefined;
             resourceInputs["encryptionAlgorithm"] = args ? args.encryptionAlgorithm : undefined;
+            resourceInputs["forceClean"] = args ? args.forceClean : undefined;
             resourceInputs["lifecycleRules"] = args ? args.lifecycleRules : undefined;
             resourceInputs["logEnable"] = args ? args.logEnable : undefined;
             resourceInputs["logPrefix"] = args ? args.logPrefix : undefined;
@@ -426,6 +440,10 @@ export class Bucket extends pulumi.CustomResource {
  */
 export interface BucketState {
     /**
+     * Enable bucket acceleration.
+     */
+    accelerationEnable?: pulumi.Input<boolean>;
+    /**
      * The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
      */
     acl?: pulumi.Input<string>;
@@ -449,6 +467,10 @@ export interface BucketState {
      * The server-side encryption algorithm to use. Valid value is `AES256`.
      */
     encryptionAlgorithm?: pulumi.Input<string>;
+    /**
+     * Force cleanup all objects before delete bucket.
+     */
+    forceClean?: pulumi.Input<boolean>;
     /**
      * A configuration of object lifecycle management (documented below).
      */
@@ -504,6 +526,10 @@ export interface BucketState {
  */
 export interface BucketArgs {
     /**
+     * Enable bucket acceleration.
+     */
+    accelerationEnable?: pulumi.Input<boolean>;
+    /**
      * The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
      */
     acl?: pulumi.Input<string>;
@@ -523,6 +549,10 @@ export interface BucketArgs {
      * The server-side encryption algorithm to use. Valid value is `AES256`.
      */
     encryptionAlgorithm?: pulumi.Input<string>;
+    /**
+     * Force cleanup all objects before delete bucket.
+     */
+    forceClean?: pulumi.Input<boolean>;
     /**
      * A configuration of object lifecycle management (documented below).
      */

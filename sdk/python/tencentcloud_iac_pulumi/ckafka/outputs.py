@@ -10,6 +10,16 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'ConnectResourceClickhouseConnectParam',
+    'ConnectResourceDorisConnectParam',
+    'ConnectResourceDtsConnectParam',
+    'ConnectResourceEsConnectParam',
+    'ConnectResourceKafkaConnectParam',
+    'ConnectResourceMariadbConnectParam',
+    'ConnectResourceMongodbConnectParam',
+    'ConnectResourceMysqlConnectParam',
+    'ConnectResourcePostgresqlConnectParam',
+    'ConnectResourceSqlserverConnectParam',
     'InstanceConfig',
     'InstanceDynamicRetentionConfig',
     'InstanceTag',
@@ -21,6 +31,1203 @@ __all__ = [
     'GetTopicsInstanceListResult',
     'GetUsersUserListResult',
 ]
+
+@pulumi.output_type
+class ConnectResourceClickhouseConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "selfBuilt":
+            suggest = "self_built"
+        elif key == "userName":
+            suggest = "user_name"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceClickhouseConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceClickhouseConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceClickhouseConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 self_built: bool,
+                 user_name: str,
+                 is_update: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: Password for Clickhouse connection source.
+        :param int port: Clickhouse connection port.
+        :param str resource: Instance resources for Click House connection sources.
+        :param bool self_built: Whether the Clickhouse connection source is a self-built cluster.
+        :param str user_name: The username of the clickhouse connection source.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        :param str service_vip: Instance VIP of the ClickHouse connection source, when it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: The vpc Id of the source of the ClickHouse connection, when it is a Tencent Cloud instance, it is required.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        pulumi.set(__self__, "user_name", user_name)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        Password for Clickhouse connection source.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Clickhouse connection port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        Instance resources for Click House connection sources.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> bool:
+        """
+        Whether the Clickhouse connection source is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        The username of the clickhouse connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        Instance VIP of the ClickHouse connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        The vpc Id of the source of the ClickHouse connection, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ConnectResourceDorisConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "userName":
+            suggest = "user_name"
+        elif key == "bePort":
+            suggest = "be_port"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "selfBuilt":
+            suggest = "self_built"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceDorisConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceDorisConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceDorisConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 user_name: str,
+                 be_port: Optional[int] = None,
+                 is_update: Optional[bool] = None,
+                 self_built: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: Doris  password.
+        :param int port: Doris jdbc CLB port, Usually mapped to port 9030 of fe.
+        :param str resource: Doris  instanceId.
+        :param str user_name: Doris  The username of the connection source.
+        :param int be_port: Doris http CLB port, Usually mapped to port 8040 of be.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        :param bool self_built: Doris Whether the connection source is a self-built cluster, default: false.
+        :param str service_vip: Doris vip, When it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: Doris vpcId, When it is a Tencent Cloud instance, it is required.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "user_name", user_name)
+        if be_port is not None:
+            pulumi.set(__self__, "be_port", be_port)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        Doris  password.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Doris jdbc CLB port, Usually mapped to port 9030 of fe.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        Doris  instanceId.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        Doris  The username of the connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="bePort")
+    def be_port(self) -> Optional[int]:
+        """
+        Doris http CLB port, Usually mapped to port 8040 of be.
+        """
+        return pulumi.get(self, "be_port")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[bool]:
+        """
+        Doris Whether the connection source is a self-built cluster, default: false.
+        """
+        return pulumi.get(self, "self_built")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        Doris vip, When it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        Doris vpcId, When it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ConnectResourceDtsConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "groupId":
+            suggest = "group_id"
+        elif key == "userName":
+            suggest = "user_name"
+        elif key == "isUpdate":
+            suggest = "is_update"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceDtsConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceDtsConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceDtsConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 group_id: str,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 topic: str,
+                 user_name: str,
+                 is_update: Optional[bool] = None):
+        """
+        :param str group_id: Id of the Dts consumption group.
+        :param str password: The password of the Dts consumption group.
+        :param int port: Dts port.
+        :param str resource: Dts instance Id.
+        :param str topic: Topic subscribed by Dts.
+        :param str user_name: The account number of the Dts consumption group.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        """
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "user_name", user_name)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Id of the Dts consumption group.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        The password of the Dts consumption group.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Dts port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        Dts instance Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter
+    def topic(self) -> str:
+        """
+        Topic subscribed by Dts.
+        """
+        return pulumi.get(self, "topic")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        The account number of the Dts consumption group.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+
+@pulumi.output_type
+class ConnectResourceEsConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "selfBuilt":
+            suggest = "self_built"
+        elif key == "userName":
+            suggest = "user_name"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceEsConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceEsConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceEsConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 self_built: bool,
+                 user_name: str,
+                 is_update: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: Es The password of the connection source.
+        :param int port: Es port.
+        :param str resource: Instance resource of Es connection source.
+        :param bool self_built: Whether the Es connection source is a self-built cluster.
+        :param str user_name: Es The username of the connection source.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        :param str service_vip: The instance vip of the Es connection source, when it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: The vpc Id of the Es connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        pulumi.set(__self__, "user_name", user_name)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        Es The password of the connection source.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Es port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        Instance resource of Es connection source.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> bool:
+        """
+        Whether the Es connection source is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        Es The username of the connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        The instance vip of the Es connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        The vpc Id of the Es connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ConnectResourceKafkaConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "brokerAddress":
+            suggest = "broker_address"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "selfBuilt":
+            suggest = "self_built"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceKafkaConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceKafkaConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceKafkaConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 broker_address: Optional[str] = None,
+                 is_update: Optional[bool] = None,
+                 region: Optional[str] = None,
+                 resource: Optional[str] = None,
+                 self_built: Optional[bool] = None):
+        """
+        :param str broker_address: Kafka broker ip, Mandatory when self-built.
+        :param bool is_update: Whether to update to the associated Dip task, default: false.
+        :param str region: CKafka instanceId region, Required when crossing regions.
+        :param str resource: Kafka instanceId, When it is a Tencent Cloud instance, it is required.
+        :param bool self_built: Whether it is a self-built cluster, default: false.
+        """
+        if broker_address is not None:
+            pulumi.set(__self__, "broker_address", broker_address)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+        if resource is not None:
+            pulumi.set(__self__, "resource", resource)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+
+    @property
+    @pulumi.getter(name="brokerAddress")
+    def broker_address(self) -> Optional[str]:
+        """
+        Kafka broker ip, Mandatory when self-built.
+        """
+        return pulumi.get(self, "broker_address")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Dip task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[str]:
+        """
+        CKafka instanceId region, Required when crossing regions.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> Optional[str]:
+        """
+        Kafka instanceId, When it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[bool]:
+        """
+        Whether it is a self-built cluster, default: false.
+        """
+        return pulumi.get(self, "self_built")
+
+
+@pulumi.output_type
+class ConnectResourceMariadbConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "userName":
+            suggest = "user_name"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceMariadbConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceMariadbConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceMariadbConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 user_name: str,
+                 is_update: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: MariaDB password.
+        :param int port: MariaDB port.
+        :param str resource: MariaDB instanceId.
+        :param str user_name: MariaDB The username of the connection source.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        :param str service_vip: The instance vip of the Maria DB connection source, when it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: MariaDB vpcId, When it is a Tencent Cloud instance, it is required.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "user_name", user_name)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        MariaDB password.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        MariaDB port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        MariaDB instanceId.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        MariaDB The username of the connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        The instance vip of the Maria DB connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        MariaDB vpcId, When it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ConnectResourceMongodbConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "selfBuilt":
+            suggest = "self_built"
+        elif key == "userName":
+            suggest = "user_name"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceMongodbConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceMongodbConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceMongodbConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 self_built: bool,
+                 user_name: str,
+                 is_update: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: Password for the source of the Mongo DB connection.
+        :param int port: MongoDB port.
+        :param str resource: Instance resource of Mongo DB connection source.
+        :param bool self_built: Whether the Mongo DB connection source is a self-built cluster.
+        :param str user_name: The username of the Mongo DB connection source.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        :param str service_vip: The instance VIP of the Mongo DB connection source, when it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: The vpc Id of the Mongo DB connection source, which is required when it is a Tencent Cloud instance.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        pulumi.set(__self__, "user_name", user_name)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        Password for the source of the Mongo DB connection.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        MongoDB port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        Instance resource of Mongo DB connection source.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> bool:
+        """
+        Whether the Mongo DB connection source is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        The username of the Mongo DB connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        The instance VIP of the Mongo DB connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        The vpc Id of the Mongo DB connection source, which is required when it is a Tencent Cloud instance.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ConnectResourceMysqlConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "userName":
+            suggest = "user_name"
+        elif key == "clusterId":
+            suggest = "cluster_id"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "selfBuilt":
+            suggest = "self_built"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceMysqlConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceMysqlConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceMysqlConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 user_name: str,
+                 cluster_id: Optional[str] = None,
+                 is_update: Optional[bool] = None,
+                 self_built: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: Mysql connection source password.
+        :param int port: MySQL port.
+        :param str resource: Instance resource of My SQL connection source.
+        :param str user_name: Username of Mysql connection source.
+        :param str cluster_id: Required when type is TDSQL C_MYSQL.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        :param bool self_built: Mysql Whether the connection source is a self-built cluster, default: false.
+        :param str service_vip: The instance vip of the MySQL connection source, when it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: The vpc Id of the My SQL connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "user_name", user_name)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        Mysql connection source password.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        MySQL port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        Instance resource of My SQL connection source.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        Username of Mysql connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[str]:
+        """
+        Required when type is TDSQL C_MYSQL.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[bool]:
+        """
+        Mysql Whether the connection source is a self-built cluster, default: false.
+        """
+        return pulumi.get(self, "self_built")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        The instance vip of the MySQL connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        The vpc Id of the My SQL connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ConnectResourcePostgresqlConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "userName":
+            suggest = "user_name"
+        elif key == "clusterId":
+            suggest = "cluster_id"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "selfBuilt":
+            suggest = "self_built"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourcePostgresqlConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourcePostgresqlConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourcePostgresqlConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 user_name: str,
+                 cluster_id: Optional[str] = None,
+                 is_update: Optional[bool] = None,
+                 self_built: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: PostgreSQL password.
+        :param int port: PostgreSQL port.
+        :param str resource: PostgreSQL instanceId.
+        :param str user_name: PostgreSQL The username of the connection source.
+        :param str cluster_id: Required when type is TDSQL C_POSTGRESQL.
+        :param bool is_update: Whether to update to the associated Datahub task, default: false.
+        :param bool self_built: PostgreSQL Whether the connection source is a self-built cluster, default: false.
+        :param str service_vip: The instance VIP of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: The instance vpcId of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "user_name", user_name)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        PostgreSQL password.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        PostgreSQL port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        PostgreSQL instanceId.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        PostgreSQL The username of the connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[str]:
+        """
+        Required when type is TDSQL C_POSTGRESQL.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Datahub task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[bool]:
+        """
+        PostgreSQL Whether the connection source is a self-built cluster, default: false.
+        """
+        return pulumi.get(self, "self_built")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        The instance VIP of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        The instance vpcId of the Postgresql connection source, when it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ConnectResourceSqlserverConnectParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "userName":
+            suggest = "user_name"
+        elif key == "isUpdate":
+            suggest = "is_update"
+        elif key == "serviceVip":
+            suggest = "service_vip"
+        elif key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectResourceSqlserverConnectParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectResourceSqlserverConnectParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectResourceSqlserverConnectParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 password: str,
+                 port: int,
+                 resource: str,
+                 user_name: str,
+                 is_update: Optional[bool] = None,
+                 service_vip: Optional[str] = None,
+                 uniq_vpc_id: Optional[str] = None):
+        """
+        :param str password: SQLServer password.
+        :param int port: SQLServer port.
+        :param str resource: SQLServer instanceId.
+        :param str user_name: SQLServer The username of the connection source.
+        :param bool is_update: Whether to update to the associated Dip task, default: false.
+        :param str service_vip: SQLServer instance vip, When it is a Tencent Cloud instance, it is required.
+        :param str uniq_vpc_id: SQLServer vpcId, When it is a Tencent Cloud instance, it is required.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "user_name", user_name)
+        if is_update is not None:
+            pulumi.set(__self__, "is_update", is_update)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        SQLServer password.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        SQLServer port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        SQLServer instanceId.
+        """
+        return pulumi.get(self, "resource")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        SQLServer The username of the connection source.
+        """
+        return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="isUpdate")
+    def is_update(self) -> Optional[bool]:
+        """
+        Whether to update to the associated Dip task, default: false.
+        """
+        return pulumi.get(self, "is_update")
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[str]:
+        """
+        SQLServer instance vip, When it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[str]:
+        """
+        SQLServer vpcId, When it is a Tencent Cloud instance, it is required.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
 
 @pulumi.output_type
 class InstanceConfig(dict):
@@ -345,7 +1552,7 @@ class GetInstancesInstanceListResult(dict):
         :param int renew_flag: Whether the instance is renewed, the int enumeration value: 1 indicates auto-renewal, and 2 indicates that it is not automatically renewed.
         :param int status: (Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.
         :param str subnet_id: Subnet id.
-        :param Sequence['GetInstancesInstanceListTagArgs'] tags: Tag infomation.
+        :param Sequence['GetInstancesInstanceListTagArgs'] tags: Tag information.
         :param int topic_num: The number of topics.
         :param str version: Kafka version information. Note: This field may return null, indicating that a valid value could not be retrieved.
         :param str vip: Virtual IP.
@@ -558,7 +1765,7 @@ class GetInstancesInstanceListResult(dict):
     @pulumi.getter
     def tags(self) -> Sequence['outputs.GetInstancesInstanceListTagResult']:
         """
-        Tag infomation.
+        Tag information.
         """
         return pulumi.get(self, "tags")
 

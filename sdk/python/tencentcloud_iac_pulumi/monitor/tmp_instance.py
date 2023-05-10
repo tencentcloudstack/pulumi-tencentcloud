@@ -112,25 +112,41 @@ class TmpInstanceArgs:
 @pulumi.input_type
 class _TmpInstanceState:
     def __init__(__self__, *,
+                 api_root_path: Optional[pulumi.Input[str]] = None,
                  data_retention_time: Optional[pulumi.Input[int]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 ipv4_address: Optional[pulumi.Input[str]] = None,
+                 proxy_address: Optional[pulumi.Input[str]] = None,
+                 remote_write: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering TmpInstance resources.
+        :param pulumi.Input[str] api_root_path: Prometheus HTTP API root address.
         :param pulumi.Input[int] data_retention_time: Data retention time.
         :param pulumi.Input[str] instance_name: Instance name.
+        :param pulumi.Input[str] ipv4_address: Instance IPv4 address.
+        :param pulumi.Input[str] proxy_address: Proxy address.
+        :param pulumi.Input[str] remote_write: Prometheus remote write address.
         :param pulumi.Input[str] subnet_id: Subnet Id.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] vpc_id: Vpc Id.
         :param pulumi.Input[str] zone: Available zone.
         """
+        if api_root_path is not None:
+            pulumi.set(__self__, "api_root_path", api_root_path)
         if data_retention_time is not None:
             pulumi.set(__self__, "data_retention_time", data_retention_time)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if ipv4_address is not None:
+            pulumi.set(__self__, "ipv4_address", ipv4_address)
+        if proxy_address is not None:
+            pulumi.set(__self__, "proxy_address", proxy_address)
+        if remote_write is not None:
+            pulumi.set(__self__, "remote_write", remote_write)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
@@ -139,6 +155,18 @@ class _TmpInstanceState:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zone is not None:
             pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="apiRootPath")
+    def api_root_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Prometheus HTTP API root address.
+        """
+        return pulumi.get(self, "api_root_path")
+
+    @api_root_path.setter
+    def api_root_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "api_root_path", value)
 
     @property
     @pulumi.getter(name="dataRetentionTime")
@@ -163,6 +191,42 @@ class _TmpInstanceState:
     @instance_name.setter
     def instance_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_name", value)
+
+    @property
+    @pulumi.getter(name="ipv4Address")
+    def ipv4_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        Instance IPv4 address.
+        """
+        return pulumi.get(self, "ipv4_address")
+
+    @ipv4_address.setter
+    def ipv4_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv4_address", value)
+
+    @property
+    @pulumi.getter(name="proxyAddress")
+    def proxy_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        Proxy address.
+        """
+        return pulumi.get(self, "proxy_address")
+
+    @proxy_address.setter
+    def proxy_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "proxy_address", value)
+
+    @property
+    @pulumi.getter(name="remoteWrite")
+    def remote_write(self) -> Optional[pulumi.Input[str]]:
+        """
+        Prometheus remote write address.
+        """
+        return pulumi.get(self, "remote_write")
+
+    @remote_write.setter
+    def remote_write(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "remote_write", value)
 
     @property
     @pulumi.getter(name="subnetId")
@@ -347,6 +411,10 @@ class TmpInstance(pulumi.CustomResource):
             if zone is None and not opts.urn:
                 raise TypeError("Missing required property 'zone'")
             __props__.__dict__["zone"] = zone
+            __props__.__dict__["api_root_path"] = None
+            __props__.__dict__["ipv4_address"] = None
+            __props__.__dict__["proxy_address"] = None
+            __props__.__dict__["remote_write"] = None
         super(TmpInstance, __self__).__init__(
             'tencentcloud:Monitor/tmpInstance:TmpInstance',
             resource_name,
@@ -357,8 +425,12 @@ class TmpInstance(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            api_root_path: Optional[pulumi.Input[str]] = None,
             data_retention_time: Optional[pulumi.Input[int]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
+            ipv4_address: Optional[pulumi.Input[str]] = None,
+            proxy_address: Optional[pulumi.Input[str]] = None,
+            remote_write: Optional[pulumi.Input[str]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
@@ -370,8 +442,12 @@ class TmpInstance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] api_root_path: Prometheus HTTP API root address.
         :param pulumi.Input[int] data_retention_time: Data retention time.
         :param pulumi.Input[str] instance_name: Instance name.
+        :param pulumi.Input[str] ipv4_address: Instance IPv4 address.
+        :param pulumi.Input[str] proxy_address: Proxy address.
+        :param pulumi.Input[str] remote_write: Prometheus remote write address.
         :param pulumi.Input[str] subnet_id: Subnet Id.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] vpc_id: Vpc Id.
@@ -381,13 +457,25 @@ class TmpInstance(pulumi.CustomResource):
 
         __props__ = _TmpInstanceState.__new__(_TmpInstanceState)
 
+        __props__.__dict__["api_root_path"] = api_root_path
         __props__.__dict__["data_retention_time"] = data_retention_time
         __props__.__dict__["instance_name"] = instance_name
+        __props__.__dict__["ipv4_address"] = ipv4_address
+        __props__.__dict__["proxy_address"] = proxy_address
+        __props__.__dict__["remote_write"] = remote_write
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["zone"] = zone
         return TmpInstance(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="apiRootPath")
+    def api_root_path(self) -> pulumi.Output[str]:
+        """
+        Prometheus HTTP API root address.
+        """
+        return pulumi.get(self, "api_root_path")
 
     @property
     @pulumi.getter(name="dataRetentionTime")
@@ -404,6 +492,30 @@ class TmpInstance(pulumi.CustomResource):
         Instance name.
         """
         return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="ipv4Address")
+    def ipv4_address(self) -> pulumi.Output[str]:
+        """
+        Instance IPv4 address.
+        """
+        return pulumi.get(self, "ipv4_address")
+
+    @property
+    @pulumi.getter(name="proxyAddress")
+    def proxy_address(self) -> pulumi.Output[str]:
+        """
+        Proxy address.
+        """
+        return pulumi.get(self, "proxy_address")
+
+    @property
+    @pulumi.getter(name="remoteWrite")
+    def remote_write(self) -> pulumi.Output[str]:
+        """
+        Prometheus remote write address.
+        """
+        return pulumi.get(self, "remote_write")
 
     @property
     @pulumi.getter(name="subnetId")

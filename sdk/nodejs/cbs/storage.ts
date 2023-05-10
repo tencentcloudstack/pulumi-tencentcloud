@@ -75,6 +75,10 @@ export class Storage extends pulumi.CustomResource {
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
+     * The quota of backup points of cloud disk.
+     */
+    public readonly diskBackupQuota!: pulumi.Output<number>;
+    /**
      * Indicates whether CBS is encrypted.
      */
     public readonly encrypt!: pulumi.Output<boolean | undefined>;
@@ -109,7 +113,7 @@ export class Storage extends pulumi.CustomResource {
      */
     public readonly storageName!: pulumi.Output<string>;
     /**
-     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+     * Volume of CBS, and unit is GB.
      */
     public readonly storageSize!: pulumi.Output<number>;
     /**
@@ -117,7 +121,7 @@ export class Storage extends pulumi.CustomResource {
      */
     public /*out*/ readonly storageStatus!: pulumi.Output<string>;
     /**
-     * Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+     * Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
      */
     public readonly storageType!: pulumi.Output<string>;
     /**
@@ -145,6 +149,7 @@ export class Storage extends pulumi.CustomResource {
             resourceInputs["attached"] = state ? state.attached : undefined;
             resourceInputs["availabilityZone"] = state ? state.availabilityZone : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
+            resourceInputs["diskBackupQuota"] = state ? state.diskBackupQuota : undefined;
             resourceInputs["encrypt"] = state ? state.encrypt : undefined;
             resourceInputs["forceDelete"] = state ? state.forceDelete : undefined;
             resourceInputs["period"] = state ? state.period : undefined;
@@ -174,6 +179,7 @@ export class Storage extends pulumi.CustomResource {
             }
             resourceInputs["availabilityZone"] = args ? args.availabilityZone : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
+            resourceInputs["diskBackupQuota"] = args ? args.diskBackupQuota : undefined;
             resourceInputs["encrypt"] = args ? args.encrypt : undefined;
             resourceInputs["forceDelete"] = args ? args.forceDelete : undefined;
             resourceInputs["period"] = args ? args.period : undefined;
@@ -211,6 +217,10 @@ export interface StorageState {
      */
     chargeType?: pulumi.Input<string>;
     /**
+     * The quota of backup points of cloud disk.
+     */
+    diskBackupQuota?: pulumi.Input<number>;
+    /**
      * Indicates whether CBS is encrypted.
      */
     encrypt?: pulumi.Input<boolean>;
@@ -245,7 +255,7 @@ export interface StorageState {
      */
     storageName?: pulumi.Input<string>;
     /**
-     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+     * Volume of CBS, and unit is GB.
      */
     storageSize?: pulumi.Input<number>;
     /**
@@ -253,7 +263,7 @@ export interface StorageState {
      */
     storageStatus?: pulumi.Input<string>;
     /**
-     * Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+     * Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
      */
     storageType?: pulumi.Input<string>;
     /**
@@ -278,6 +288,10 @@ export interface StorageArgs {
      * The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * The quota of backup points of cloud disk.
+     */
+    diskBackupQuota?: pulumi.Input<number>;
     /**
      * Indicates whether CBS is encrypted.
      */
@@ -313,11 +327,11 @@ export interface StorageArgs {
      */
     storageName: pulumi.Input<string>;
     /**
-     * Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+     * Volume of CBS, and unit is GB.
      */
     storageSize: pulumi.Input<number>;
     /**
-     * Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+     * Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
      */
     storageType: pulumi.Input<string>;
     /**

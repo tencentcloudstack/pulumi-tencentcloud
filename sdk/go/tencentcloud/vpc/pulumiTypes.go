@@ -10,6 +10,162 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type FlowLogFlowLogStorage struct {
+	// Specify storage instance id, required while `storageType` is `ckafka`.
+	StorageId *string `pulumi:"storageId"`
+	// Specify storage topic id, required while `storageType` is `ckafka`.
+	StorageTopic *string `pulumi:"storageTopic"`
+}
+
+// FlowLogFlowLogStorageInput is an input type that accepts FlowLogFlowLogStorageArgs and FlowLogFlowLogStorageOutput values.
+// You can construct a concrete instance of `FlowLogFlowLogStorageInput` via:
+//
+//          FlowLogFlowLogStorageArgs{...}
+type FlowLogFlowLogStorageInput interface {
+	pulumi.Input
+
+	ToFlowLogFlowLogStorageOutput() FlowLogFlowLogStorageOutput
+	ToFlowLogFlowLogStorageOutputWithContext(context.Context) FlowLogFlowLogStorageOutput
+}
+
+type FlowLogFlowLogStorageArgs struct {
+	// Specify storage instance id, required while `storageType` is `ckafka`.
+	StorageId pulumi.StringPtrInput `pulumi:"storageId"`
+	// Specify storage topic id, required while `storageType` is `ckafka`.
+	StorageTopic pulumi.StringPtrInput `pulumi:"storageTopic"`
+}
+
+func (FlowLogFlowLogStorageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FlowLogFlowLogStorage)(nil)).Elem()
+}
+
+func (i FlowLogFlowLogStorageArgs) ToFlowLogFlowLogStorageOutput() FlowLogFlowLogStorageOutput {
+	return i.ToFlowLogFlowLogStorageOutputWithContext(context.Background())
+}
+
+func (i FlowLogFlowLogStorageArgs) ToFlowLogFlowLogStorageOutputWithContext(ctx context.Context) FlowLogFlowLogStorageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FlowLogFlowLogStorageOutput)
+}
+
+func (i FlowLogFlowLogStorageArgs) ToFlowLogFlowLogStoragePtrOutput() FlowLogFlowLogStoragePtrOutput {
+	return i.ToFlowLogFlowLogStoragePtrOutputWithContext(context.Background())
+}
+
+func (i FlowLogFlowLogStorageArgs) ToFlowLogFlowLogStoragePtrOutputWithContext(ctx context.Context) FlowLogFlowLogStoragePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FlowLogFlowLogStorageOutput).ToFlowLogFlowLogStoragePtrOutputWithContext(ctx)
+}
+
+// FlowLogFlowLogStoragePtrInput is an input type that accepts FlowLogFlowLogStorageArgs, FlowLogFlowLogStoragePtr and FlowLogFlowLogStoragePtrOutput values.
+// You can construct a concrete instance of `FlowLogFlowLogStoragePtrInput` via:
+//
+//          FlowLogFlowLogStorageArgs{...}
+//
+//  or:
+//
+//          nil
+type FlowLogFlowLogStoragePtrInput interface {
+	pulumi.Input
+
+	ToFlowLogFlowLogStoragePtrOutput() FlowLogFlowLogStoragePtrOutput
+	ToFlowLogFlowLogStoragePtrOutputWithContext(context.Context) FlowLogFlowLogStoragePtrOutput
+}
+
+type flowLogFlowLogStoragePtrType FlowLogFlowLogStorageArgs
+
+func FlowLogFlowLogStoragePtr(v *FlowLogFlowLogStorageArgs) FlowLogFlowLogStoragePtrInput {
+	return (*flowLogFlowLogStoragePtrType)(v)
+}
+
+func (*flowLogFlowLogStoragePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FlowLogFlowLogStorage)(nil)).Elem()
+}
+
+func (i *flowLogFlowLogStoragePtrType) ToFlowLogFlowLogStoragePtrOutput() FlowLogFlowLogStoragePtrOutput {
+	return i.ToFlowLogFlowLogStoragePtrOutputWithContext(context.Background())
+}
+
+func (i *flowLogFlowLogStoragePtrType) ToFlowLogFlowLogStoragePtrOutputWithContext(ctx context.Context) FlowLogFlowLogStoragePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FlowLogFlowLogStoragePtrOutput)
+}
+
+type FlowLogFlowLogStorageOutput struct{ *pulumi.OutputState }
+
+func (FlowLogFlowLogStorageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FlowLogFlowLogStorage)(nil)).Elem()
+}
+
+func (o FlowLogFlowLogStorageOutput) ToFlowLogFlowLogStorageOutput() FlowLogFlowLogStorageOutput {
+	return o
+}
+
+func (o FlowLogFlowLogStorageOutput) ToFlowLogFlowLogStorageOutputWithContext(ctx context.Context) FlowLogFlowLogStorageOutput {
+	return o
+}
+
+func (o FlowLogFlowLogStorageOutput) ToFlowLogFlowLogStoragePtrOutput() FlowLogFlowLogStoragePtrOutput {
+	return o.ToFlowLogFlowLogStoragePtrOutputWithContext(context.Background())
+}
+
+func (o FlowLogFlowLogStorageOutput) ToFlowLogFlowLogStoragePtrOutputWithContext(ctx context.Context) FlowLogFlowLogStoragePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FlowLogFlowLogStorage) *FlowLogFlowLogStorage {
+		return &v
+	}).(FlowLogFlowLogStoragePtrOutput)
+}
+
+// Specify storage instance id, required while `storageType` is `ckafka`.
+func (o FlowLogFlowLogStorageOutput) StorageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FlowLogFlowLogStorage) *string { return v.StorageId }).(pulumi.StringPtrOutput)
+}
+
+// Specify storage topic id, required while `storageType` is `ckafka`.
+func (o FlowLogFlowLogStorageOutput) StorageTopic() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FlowLogFlowLogStorage) *string { return v.StorageTopic }).(pulumi.StringPtrOutput)
+}
+
+type FlowLogFlowLogStoragePtrOutput struct{ *pulumi.OutputState }
+
+func (FlowLogFlowLogStoragePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FlowLogFlowLogStorage)(nil)).Elem()
+}
+
+func (o FlowLogFlowLogStoragePtrOutput) ToFlowLogFlowLogStoragePtrOutput() FlowLogFlowLogStoragePtrOutput {
+	return o
+}
+
+func (o FlowLogFlowLogStoragePtrOutput) ToFlowLogFlowLogStoragePtrOutputWithContext(ctx context.Context) FlowLogFlowLogStoragePtrOutput {
+	return o
+}
+
+func (o FlowLogFlowLogStoragePtrOutput) Elem() FlowLogFlowLogStorageOutput {
+	return o.ApplyT(func(v *FlowLogFlowLogStorage) FlowLogFlowLogStorage {
+		if v != nil {
+			return *v
+		}
+		var ret FlowLogFlowLogStorage
+		return ret
+	}).(FlowLogFlowLogStorageOutput)
+}
+
+// Specify storage instance id, required while `storageType` is `ckafka`.
+func (o FlowLogFlowLogStoragePtrOutput) StorageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FlowLogFlowLogStorage) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specify storage topic id, required while `storageType` is `ckafka`.
+func (o FlowLogFlowLogStoragePtrOutput) StorageTopic() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FlowLogFlowLogStorage) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageTopic
+	}).(pulumi.StringPtrOutput)
+}
+
 type GetAclsAclList struct {
 	// Creation time.
 	CreateTime string `pulumi:"createTime"`
@@ -30,7 +186,7 @@ type GetAclsAclList struct {
 // GetAclsAclListInput is an input type that accepts GetAclsAclListArgs and GetAclsAclListOutput values.
 // You can construct a concrete instance of `GetAclsAclListInput` via:
 //
-//	GetAclsAclListArgs{...}
+//          GetAclsAclListArgs{...}
 type GetAclsAclListInput interface {
 	pulumi.Input
 
@@ -70,7 +226,7 @@ func (i GetAclsAclListArgs) ToGetAclsAclListOutputWithContext(ctx context.Contex
 // GetAclsAclListArrayInput is an input type that accepts GetAclsAclListArray and GetAclsAclListArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListArrayInput` via:
 //
-//	GetAclsAclListArray{ GetAclsAclListArgs{...} }
+//          GetAclsAclListArray{ GetAclsAclListArgs{...} }
 type GetAclsAclListArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +333,7 @@ type GetAclsAclListEgress struct {
 // GetAclsAclListEgressInput is an input type that accepts GetAclsAclListEgressArgs and GetAclsAclListEgressOutput values.
 // You can construct a concrete instance of `GetAclsAclListEgressInput` via:
 //
-//	GetAclsAclListEgressArgs{...}
+//          GetAclsAclListEgressArgs{...}
 type GetAclsAclListEgressInput interface {
 	pulumi.Input
 
@@ -213,7 +369,7 @@ func (i GetAclsAclListEgressArgs) ToGetAclsAclListEgressOutputWithContext(ctx co
 // GetAclsAclListEgressArrayInput is an input type that accepts GetAclsAclListEgressArray and GetAclsAclListEgressArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListEgressArrayInput` via:
 //
-//	GetAclsAclListEgressArray{ GetAclsAclListEgressArgs{...} }
+//          GetAclsAclListEgressArray{ GetAclsAclListEgressArgs{...} }
 type GetAclsAclListEgressArrayInput interface {
 	pulumi.Input
 
@@ -310,7 +466,7 @@ type GetAclsAclListIngress struct {
 // GetAclsAclListIngressInput is an input type that accepts GetAclsAclListIngressArgs and GetAclsAclListIngressOutput values.
 // You can construct a concrete instance of `GetAclsAclListIngressInput` via:
 //
-//	GetAclsAclListIngressArgs{...}
+//          GetAclsAclListIngressArgs{...}
 type GetAclsAclListIngressInput interface {
 	pulumi.Input
 
@@ -346,7 +502,7 @@ func (i GetAclsAclListIngressArgs) ToGetAclsAclListIngressOutputWithContext(ctx 
 // GetAclsAclListIngressArrayInput is an input type that accepts GetAclsAclListIngressArray and GetAclsAclListIngressArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListIngressArrayInput` via:
 //
-//	GetAclsAclListIngressArray{ GetAclsAclListIngressArgs{...} }
+//          GetAclsAclListIngressArray{ GetAclsAclListIngressArgs{...} }
 type GetAclsAclListIngressArrayInput interface {
 	pulumi.Input
 
@@ -443,7 +599,7 @@ type GetAclsAclListSubnet struct {
 // GetAclsAclListSubnetInput is an input type that accepts GetAclsAclListSubnetArgs and GetAclsAclListSubnetOutput values.
 // You can construct a concrete instance of `GetAclsAclListSubnetInput` via:
 //
-//	GetAclsAclListSubnetArgs{...}
+//          GetAclsAclListSubnetArgs{...}
 type GetAclsAclListSubnetInput interface {
 	pulumi.Input
 
@@ -479,7 +635,7 @@ func (i GetAclsAclListSubnetArgs) ToGetAclsAclListSubnetOutputWithContext(ctx co
 // GetAclsAclListSubnetArrayInput is an input type that accepts GetAclsAclListSubnetArray and GetAclsAclListSubnetArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListSubnetArrayInput` via:
 //
-//	GetAclsAclListSubnetArray{ GetAclsAclListSubnetArgs{...} }
+//          GetAclsAclListSubnetArray{ GetAclsAclListSubnetArgs{...} }
 type GetAclsAclListSubnetArrayInput interface {
 	pulumi.Input
 
@@ -584,7 +740,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -628,7 +784,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -751,7 +907,7 @@ type GetRouteTablesInstanceList struct {
 // GetRouteTablesInstanceListInput is an input type that accepts GetRouteTablesInstanceListArgs and GetRouteTablesInstanceListOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListInput` via:
 //
-//	GetRouteTablesInstanceListArgs{...}
+//          GetRouteTablesInstanceListArgs{...}
 type GetRouteTablesInstanceListInput interface {
 	pulumi.Input
 
@@ -793,7 +949,7 @@ func (i GetRouteTablesInstanceListArgs) ToGetRouteTablesInstanceListOutputWithCo
 // GetRouteTablesInstanceListArrayInput is an input type that accepts GetRouteTablesInstanceListArray and GetRouteTablesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListArrayInput` via:
 //
-//	GetRouteTablesInstanceListArray{ GetRouteTablesInstanceListArgs{...} }
+//          GetRouteTablesInstanceListArray{ GetRouteTablesInstanceListArgs{...} }
 type GetRouteTablesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -907,7 +1063,7 @@ type GetRouteTablesInstanceListRouteEntryInfo struct {
 // GetRouteTablesInstanceListRouteEntryInfoInput is an input type that accepts GetRouteTablesInstanceListRouteEntryInfoArgs and GetRouteTablesInstanceListRouteEntryInfoOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListRouteEntryInfoInput` via:
 //
-//	GetRouteTablesInstanceListRouteEntryInfoArgs{...}
+//          GetRouteTablesInstanceListRouteEntryInfoArgs{...}
 type GetRouteTablesInstanceListRouteEntryInfoInput interface {
 	pulumi.Input
 
@@ -943,7 +1099,7 @@ func (i GetRouteTablesInstanceListRouteEntryInfoArgs) ToGetRouteTablesInstanceLi
 // GetRouteTablesInstanceListRouteEntryInfoArrayInput is an input type that accepts GetRouteTablesInstanceListRouteEntryInfoArray and GetRouteTablesInstanceListRouteEntryInfoArrayOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListRouteEntryInfoArrayInput` via:
 //
-//	GetRouteTablesInstanceListRouteEntryInfoArray{ GetRouteTablesInstanceListRouteEntryInfoArgs{...} }
+//          GetRouteTablesInstanceListRouteEntryInfoArray{ GetRouteTablesInstanceListRouteEntryInfoArgs{...} }
 type GetRouteTablesInstanceListRouteEntryInfoArrayInput interface {
 	pulumi.Input
 
@@ -1052,7 +1208,7 @@ type GetSubnetsInstanceList struct {
 // GetSubnetsInstanceListInput is an input type that accepts GetSubnetsInstanceListArgs and GetSubnetsInstanceListOutput values.
 // You can construct a concrete instance of `GetSubnetsInstanceListInput` via:
 //
-//	GetSubnetsInstanceListArgs{...}
+//          GetSubnetsInstanceListArgs{...}
 type GetSubnetsInstanceListInput interface {
 	pulumi.Input
 
@@ -1100,7 +1256,7 @@ func (i GetSubnetsInstanceListArgs) ToGetSubnetsInstanceListOutputWithContext(ct
 // GetSubnetsInstanceListArrayInput is an input type that accepts GetSubnetsInstanceListArray and GetSubnetsInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetSubnetsInstanceListArrayInput` via:
 //
-//	GetSubnetsInstanceListArray{ GetSubnetsInstanceListArgs{...} }
+//          GetSubnetsInstanceListArray{ GetSubnetsInstanceListArgs{...} }
 type GetSubnetsInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1212,6 +1368,8 @@ func (o GetSubnetsInstanceListArrayOutput) Index(i pulumi.IntInput) GetSubnetsIn
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*FlowLogFlowLogStorageInput)(nil)).Elem(), FlowLogFlowLogStorageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FlowLogFlowLogStoragePtrInput)(nil)).Elem(), FlowLogFlowLogStorageArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListInput)(nil)).Elem(), GetAclsAclListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListArrayInput)(nil)).Elem(), GetAclsAclListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListEgressInput)(nil)).Elem(), GetAclsAclListEgressArgs{})
@@ -1228,6 +1386,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTablesInstanceListRouteEntryInfoArrayInput)(nil)).Elem(), GetRouteTablesInstanceListRouteEntryInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetsInstanceListInput)(nil)).Elem(), GetSubnetsInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetsInstanceListArrayInput)(nil)).Elem(), GetSubnetsInstanceListArray{})
+	pulumi.RegisterOutputType(FlowLogFlowLogStorageOutput{})
+	pulumi.RegisterOutputType(FlowLogFlowLogStoragePtrOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListArrayOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListEgressOutput{})

@@ -85,7 +85,7 @@ export class TableEntry extends pulumi.CustomResource {
      */
     public readonly nextHub!: pulumi.Output<string>;
     /**
-     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
      */
     public readonly nextType!: pulumi.Output<string>;
     /**
@@ -159,7 +159,7 @@ export interface TableEntryState {
      */
     nextHub?: pulumi.Input<string>;
     /**
-     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
      */
     nextType?: pulumi.Input<string>;
     /**
@@ -189,7 +189,7 @@ export interface TableEntryArgs {
      */
     nextHub: pulumi.Input<string>;
     /**
-     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
      */
     nextType: pulumi.Input<string>;
     /**

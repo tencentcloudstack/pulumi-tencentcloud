@@ -14,36 +14,38 @@ __all__ = ['ReadonlyInstanceArgs', 'ReadonlyInstance']
 class ReadonlyInstanceArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[str],
-                 instance_cpu_core: pulumi.Input[int],
-                 instance_memory_size: pulumi.Input[int],
                  instance_name: pulumi.Input[str],
                  force_delete: Optional[pulumi.Input[bool]] = None,
+                 instance_cpu_core: Optional[pulumi.Input[int]] = None,
                  instance_maintain_duration: Optional[pulumi.Input[int]] = None,
                  instance_maintain_start_time: Optional[pulumi.Input[int]] = None,
-                 instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+                 instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 instance_memory_size: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a ReadonlyInstance resource.
         :param pulumi.Input[str] cluster_id: Cluster ID which the readonly instance belongs to.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_name: Name of instance.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
-        pulumi.set(__self__, "instance_cpu_core", instance_cpu_core)
-        pulumi.set(__self__, "instance_memory_size", instance_memory_size)
         pulumi.set(__self__, "instance_name", instance_name)
         if force_delete is not None:
             pulumi.set(__self__, "force_delete", force_delete)
+        if instance_cpu_core is not None:
+            pulumi.set(__self__, "instance_cpu_core", instance_cpu_core)
         if instance_maintain_duration is not None:
             pulumi.set(__self__, "instance_maintain_duration", instance_maintain_duration)
         if instance_maintain_start_time is not None:
             pulumi.set(__self__, "instance_maintain_start_time", instance_maintain_start_time)
         if instance_maintain_weekdays is not None:
             pulumi.set(__self__, "instance_maintain_weekdays", instance_maintain_weekdays)
+        if instance_memory_size is not None:
+            pulumi.set(__self__, "instance_memory_size", instance_memory_size)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -56,30 +58,6 @@ class ReadonlyInstanceArgs:
     @cluster_id.setter
     def cluster_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "cluster_id", value)
-
-    @property
-    @pulumi.getter(name="instanceCpuCore")
-    def instance_cpu_core(self) -> pulumi.Input[int]:
-        """
-        The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        """
-        return pulumi.get(self, "instance_cpu_core")
-
-    @instance_cpu_core.setter
-    def instance_cpu_core(self, value: pulumi.Input[int]):
-        pulumi.set(self, "instance_cpu_core", value)
-
-    @property
-    @pulumi.getter(name="instanceMemorySize")
-    def instance_memory_size(self) -> pulumi.Input[int]:
-        """
-        Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        """
-        return pulumi.get(self, "instance_memory_size")
-
-    @instance_memory_size.setter
-    def instance_memory_size(self, value: pulumi.Input[int]):
-        pulumi.set(self, "instance_memory_size", value)
 
     @property
     @pulumi.getter(name="instanceName")
@@ -104,6 +82,18 @@ class ReadonlyInstanceArgs:
     @force_delete.setter
     def force_delete(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "force_delete", value)
+
+    @property
+    @pulumi.getter(name="instanceCpuCore")
+    def instance_cpu_core(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        """
+        return pulumi.get(self, "instance_cpu_core")
+
+    @instance_cpu_core.setter
+    def instance_cpu_core(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_cpu_core", value)
 
     @property
     @pulumi.getter(name="instanceMaintainDuration")
@@ -141,6 +131,18 @@ class ReadonlyInstanceArgs:
     def instance_maintain_weekdays(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "instance_maintain_weekdays", value)
 
+    @property
+    @pulumi.getter(name="instanceMemorySize")
+    def instance_memory_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        """
+        return pulumi.get(self, "instance_memory_size")
+
+    @instance_memory_size.setter
+    def instance_memory_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_memory_size", value)
+
 
 @pulumi.input_type
 class _ReadonlyInstanceState:
@@ -159,11 +161,11 @@ class _ReadonlyInstanceState:
         Input properties used for looking up and filtering ReadonlyInstance resources.
         :param pulumi.Input[str] cluster_id: Cluster ID which the readonly instance belongs to.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_name: Name of instance.
         :param pulumi.Input[str] instance_status: Status of the instance.
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
@@ -217,7 +219,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter(name="instanceCpuCore")
     def instance_cpu_core(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_cpu_core")
 
@@ -265,7 +267,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter(name="instanceMemorySize")
     def instance_memory_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_memory_size")
 
@@ -364,11 +366,11 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID which the readonly instance belongs to.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_name: Name of instance.
         """
         ...
@@ -454,14 +456,10 @@ class ReadonlyInstance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
             __props__.__dict__["force_delete"] = force_delete
-            if instance_cpu_core is None and not opts.urn:
-                raise TypeError("Missing required property 'instance_cpu_core'")
             __props__.__dict__["instance_cpu_core"] = instance_cpu_core
             __props__.__dict__["instance_maintain_duration"] = instance_maintain_duration
             __props__.__dict__["instance_maintain_start_time"] = instance_maintain_start_time
             __props__.__dict__["instance_maintain_weekdays"] = instance_maintain_weekdays
-            if instance_memory_size is None and not opts.urn:
-                raise TypeError("Missing required property 'instance_memory_size'")
             __props__.__dict__["instance_memory_size"] = instance_memory_size
             if instance_name is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_name'")
@@ -497,11 +495,11 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID which the readonly instance belongs to.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_name: Name of instance.
         :param pulumi.Input[str] instance_status: Status of the instance.
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
@@ -540,9 +538,9 @@ class ReadonlyInstance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="instanceCpuCore")
-    def instance_cpu_core(self) -> pulumi.Output[int]:
+    def instance_cpu_core(self) -> pulumi.Output[Optional[int]]:
         """
-        The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_cpu_core")
 
@@ -572,9 +570,9 @@ class ReadonlyInstance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="instanceMemorySize")
-    def instance_memory_size(self) -> pulumi.Output[int]:
+    def instance_memory_size(self) -> pulumi.Output[Optional[int]]:
         """
-        Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_memory_size")
 

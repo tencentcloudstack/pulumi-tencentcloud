@@ -13,9 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
     public static class GetZonesByProduct
     {
         /// <summary>
-        /// Use this data source to get the available zones in current region.
-        /// Must set product param to fetch the product infomations(e.g. =&gt; cvm, vpc)
-        /// By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
+        /// Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. =&gt; cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
         /// 
         /// {{% examples %}}
         /// ## Example Usage
@@ -44,9 +42,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
             => Pulumi.Deployment.Instance.InvokeAsync<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to get the available zones in current region.
-        /// Must set product param to fetch the product infomations(e.g. =&gt; cvm, vpc)
-        /// By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
+        /// Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. =&gt; cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
         /// 
         /// {{% examples %}}
         /// ## Example Usage

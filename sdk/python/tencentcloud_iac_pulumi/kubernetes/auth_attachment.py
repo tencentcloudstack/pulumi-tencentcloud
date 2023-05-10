@@ -14,22 +14,27 @@ __all__ = ['AuthAttachmentArgs', 'AuthAttachment']
 class AuthAttachmentArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[str],
-                 issuer: pulumi.Input[str],
                  auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
-                 jwks_uri: Optional[pulumi.Input[str]] = None):
+                 issuer: Optional[pulumi.Input[str]] = None,
+                 jwks_uri: Optional[pulumi.Input[str]] = None,
+                 use_tke_default: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AuthAttachment resource.
         :param pulumi.Input[str] cluster_id: ID of clusters.
-        :param pulumi.Input[str] issuer: Specify service-account-issuer.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
-        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri.
+        :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[bool] use_tke_default: If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
-        pulumi.set(__self__, "issuer", issuer)
         if auto_create_discovery_anonymous_auth is not None:
             pulumi.set(__self__, "auto_create_discovery_anonymous_auth", auto_create_discovery_anonymous_auth)
+        if issuer is not None:
+            pulumi.set(__self__, "issuer", issuer)
         if jwks_uri is not None:
             pulumi.set(__self__, "jwks_uri", jwks_uri)
+        if use_tke_default is not None:
+            pulumi.set(__self__, "use_tke_default", use_tke_default)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -44,18 +49,6 @@ class AuthAttachmentArgs:
         pulumi.set(self, "cluster_id", value)
 
     @property
-    @pulumi.getter
-    def issuer(self) -> pulumi.Input[str]:
-        """
-        Specify service-account-issuer.
-        """
-        return pulumi.get(self, "issuer")
-
-    @issuer.setter
-    def issuer(self, value: pulumi.Input[str]):
-        pulumi.set(self, "issuer", value)
-
-    @property
     @pulumi.getter(name="autoCreateDiscoveryAnonymousAuth")
     def auto_create_discovery_anonymous_auth(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -68,16 +61,40 @@ class AuthAttachmentArgs:
         pulumi.set(self, "auto_create_discovery_anonymous_auth", value)
 
     @property
+    @pulumi.getter
+    def issuer(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
+        """
+        return pulumi.get(self, "issuer")
+
+    @issuer.setter
+    def issuer(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "issuer", value)
+
+    @property
     @pulumi.getter(name="jwksUri")
     def jwks_uri(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify service-account-jwks-uri.
+        Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
         """
         return pulumi.get(self, "jwks_uri")
 
     @jwks_uri.setter
     def jwks_uri(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "jwks_uri", value)
+
+    @property
+    @pulumi.getter(name="useTkeDefault")
+    def use_tke_default(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        """
+        return pulumi.get(self, "use_tke_default")
+
+    @use_tke_default.setter
+    def use_tke_default(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_tke_default", value)
 
 
 @pulumi.input_type
@@ -86,13 +103,19 @@ class _AuthAttachmentState:
                  auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
-                 jwks_uri: Optional[pulumi.Input[str]] = None):
+                 jwks_uri: Optional[pulumi.Input[str]] = None,
+                 tke_default_issuer: Optional[pulumi.Input[str]] = None,
+                 tke_default_jwks_uri: Optional[pulumi.Input[str]] = None,
+                 use_tke_default: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AuthAttachment resources.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
         :param pulumi.Input[str] cluster_id: ID of clusters.
-        :param pulumi.Input[str] issuer: Specify service-account-issuer.
-        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri.
+        :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[str] tke_default_issuer: The default issuer of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        :param pulumi.Input[str] tke_default_jwks_uri: The default jwks_uri of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        :param pulumi.Input[bool] use_tke_default: If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
         """
         if auto_create_discovery_anonymous_auth is not None:
             pulumi.set(__self__, "auto_create_discovery_anonymous_auth", auto_create_discovery_anonymous_auth)
@@ -102,6 +125,12 @@ class _AuthAttachmentState:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_uri is not None:
             pulumi.set(__self__, "jwks_uri", jwks_uri)
+        if tke_default_issuer is not None:
+            pulumi.set(__self__, "tke_default_issuer", tke_default_issuer)
+        if tke_default_jwks_uri is not None:
+            pulumi.set(__self__, "tke_default_jwks_uri", tke_default_jwks_uri)
+        if use_tke_default is not None:
+            pulumi.set(__self__, "use_tke_default", use_tke_default)
 
     @property
     @pulumi.getter(name="autoCreateDiscoveryAnonymousAuth")
@@ -131,7 +160,7 @@ class _AuthAttachmentState:
     @pulumi.getter
     def issuer(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify service-account-issuer.
+        Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         """
         return pulumi.get(self, "issuer")
 
@@ -143,13 +172,49 @@ class _AuthAttachmentState:
     @pulumi.getter(name="jwksUri")
     def jwks_uri(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify service-account-jwks-uri.
+        Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
         """
         return pulumi.get(self, "jwks_uri")
 
     @jwks_uri.setter
     def jwks_uri(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "jwks_uri", value)
+
+    @property
+    @pulumi.getter(name="tkeDefaultIssuer")
+    def tke_default_issuer(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default issuer of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        """
+        return pulumi.get(self, "tke_default_issuer")
+
+    @tke_default_issuer.setter
+    def tke_default_issuer(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tke_default_issuer", value)
+
+    @property
+    @pulumi.getter(name="tkeDefaultJwksUri")
+    def tke_default_jwks_uri(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default jwks_uri of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        """
+        return pulumi.get(self, "tke_default_jwks_uri")
+
+    @tke_default_jwks_uri.setter
+    def tke_default_jwks_uri(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tke_default_jwks_uri", value)
+
+    @property
+    @pulumi.getter(name="useTkeDefault")
+    def use_tke_default(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        """
+        return pulumi.get(self, "use_tke_default")
+
+    @use_tke_default.setter
+    def use_tke_default(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_tke_default", value)
 
 
 class AuthAttachment(pulumi.CustomResource):
@@ -161,6 +226,7 @@ class AuthAttachment(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks_uri: Optional[pulumi.Input[str]] = None,
+                 use_tke_default: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
         Provide a resource to configure kubernetes cluster authentication info.
@@ -223,12 +289,69 @@ class AuthAttachment(pulumi.CustomResource):
             auto_create_discovery_anonymous_auth=True)
         ```
 
+        Use the TKE default issuer and jwks_uri
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        cluster_cidr = config.get("clusterCidr")
+        if cluster_cidr is None:
+            cluster_cidr = "172.16.0.0/16"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "S1.SMALL1"
+        default = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="centos")
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc.instance_lists[0].vpc_id,
+            cluster_cidr="10.31.0.0/16",
+            cluster_max_pod_num=32,
+            cluster_name="keep",
+            cluster_desc="test cluster desc",
+            cluster_version="1.20.6",
+            cluster_max_service_num=32,
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=availability_zone,
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_SSD",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id=vpc.instance_lists[0].subnet_id,
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                password="ZZXXccvv1212",
+            )],
+            cluster_deploy_type="MANAGED_CLUSTER")
+        # if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
+        test_use_tke_default_auth_attach = tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach",
+            cluster_id=managed_cluster.id,
+            auto_create_discovery_anonymous_auth=True,
+            use_tke_default=True)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
         :param pulumi.Input[str] cluster_id: ID of clusters.
-        :param pulumi.Input[str] issuer: Specify service-account-issuer.
-        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri.
+        :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[bool] use_tke_default: If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
         """
         ...
     @overload
@@ -297,6 +420,62 @@ class AuthAttachment(pulumi.CustomResource):
             auto_create_discovery_anonymous_auth=True)
         ```
 
+        Use the TKE default issuer and jwks_uri
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        cluster_cidr = config.get("clusterCidr")
+        if cluster_cidr is None:
+            cluster_cidr = "172.16.0.0/16"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "S1.SMALL1"
+        default = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="centos")
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc.instance_lists[0].vpc_id,
+            cluster_cidr="10.31.0.0/16",
+            cluster_max_pod_num=32,
+            cluster_name="keep",
+            cluster_desc="test cluster desc",
+            cluster_version="1.20.6",
+            cluster_max_service_num=32,
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=availability_zone,
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_SSD",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id=vpc.instance_lists[0].subnet_id,
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                password="ZZXXccvv1212",
+            )],
+            cluster_deploy_type="MANAGED_CLUSTER")
+        # if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
+        test_use_tke_default_auth_attach = tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach",
+            cluster_id=managed_cluster.id,
+            auto_create_discovery_anonymous_auth=True,
+            use_tke_default=True)
+        ```
+
         :param str resource_name: The name of the resource.
         :param AuthAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -316,6 +495,7 @@ class AuthAttachment(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks_uri: Optional[pulumi.Input[str]] = None,
+                 use_tke_default: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -334,10 +514,11 @@ class AuthAttachment(pulumi.CustomResource):
             if cluster_id is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
-            if issuer is None and not opts.urn:
-                raise TypeError("Missing required property 'issuer'")
             __props__.__dict__["issuer"] = issuer
             __props__.__dict__["jwks_uri"] = jwks_uri
+            __props__.__dict__["use_tke_default"] = use_tke_default
+            __props__.__dict__["tke_default_issuer"] = None
+            __props__.__dict__["tke_default_jwks_uri"] = None
         super(AuthAttachment, __self__).__init__(
             'tencentcloud:Kubernetes/authAttachment:AuthAttachment',
             resource_name,
@@ -351,7 +532,10 @@ class AuthAttachment(pulumi.CustomResource):
             auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
             cluster_id: Optional[pulumi.Input[str]] = None,
             issuer: Optional[pulumi.Input[str]] = None,
-            jwks_uri: Optional[pulumi.Input[str]] = None) -> 'AuthAttachment':
+            jwks_uri: Optional[pulumi.Input[str]] = None,
+            tke_default_issuer: Optional[pulumi.Input[str]] = None,
+            tke_default_jwks_uri: Optional[pulumi.Input[str]] = None,
+            use_tke_default: Optional[pulumi.Input[bool]] = None) -> 'AuthAttachment':
         """
         Get an existing AuthAttachment resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -361,8 +545,11 @@ class AuthAttachment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
         :param pulumi.Input[str] cluster_id: ID of clusters.
-        :param pulumi.Input[str] issuer: Specify service-account-issuer.
-        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri.
+        :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
+        :param pulumi.Input[str] tke_default_issuer: The default issuer of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        :param pulumi.Input[str] tke_default_jwks_uri: The default jwks_uri of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        :param pulumi.Input[bool] use_tke_default: If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -372,6 +559,9 @@ class AuthAttachment(pulumi.CustomResource):
         __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["issuer"] = issuer
         __props__.__dict__["jwks_uri"] = jwks_uri
+        __props__.__dict__["tke_default_issuer"] = tke_default_issuer
+        __props__.__dict__["tke_default_jwks_uri"] = tke_default_jwks_uri
+        __props__.__dict__["use_tke_default"] = use_tke_default
         return AuthAttachment(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -392,9 +582,9 @@ class AuthAttachment(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def issuer(self) -> pulumi.Output[str]:
+    def issuer(self) -> pulumi.Output[Optional[str]]:
         """
-        Specify service-account-issuer.
+        Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         """
         return pulumi.get(self, "issuer")
 
@@ -402,7 +592,31 @@ class AuthAttachment(pulumi.CustomResource):
     @pulumi.getter(name="jwksUri")
     def jwks_uri(self) -> pulumi.Output[Optional[str]]:
         """
-        Specify service-account-jwks-uri.
+        Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
         """
         return pulumi.get(self, "jwks_uri")
+
+    @property
+    @pulumi.getter(name="tkeDefaultIssuer")
+    def tke_default_issuer(self) -> pulumi.Output[str]:
+        """
+        The default issuer of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        """
+        return pulumi.get(self, "tke_default_issuer")
+
+    @property
+    @pulumi.getter(name="tkeDefaultJwksUri")
+    def tke_default_jwks_uri(self) -> pulumi.Output[str]:
+        """
+        The default jwks_uri of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        """
+        return pulumi.get(self, "tke_default_jwks_uri")
+
+    @property
+    @pulumi.getter(name="useTkeDefault")
+    def use_tke_default(self) -> pulumi.Output[Optional[bool]]:
+        """
+        If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        """
+        return pulumi.get(self, "use_tke_default")
 

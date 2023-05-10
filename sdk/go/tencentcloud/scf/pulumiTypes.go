@@ -10,6 +10,396 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type FunctionAliasRoutingConfig struct {
+	// Additional version with rule-based routing.
+	AdditionalVersionMatches []FunctionAliasRoutingConfigAdditionalVersionMatch `pulumi:"additionalVersionMatches"`
+	// Additional version with random weight-based routing.
+	AdditionalVersionWeights []FunctionAliasRoutingConfigAdditionalVersionWeight `pulumi:"additionalVersionWeights"`
+}
+
+// FunctionAliasRoutingConfigInput is an input type that accepts FunctionAliasRoutingConfigArgs and FunctionAliasRoutingConfigOutput values.
+// You can construct a concrete instance of `FunctionAliasRoutingConfigInput` via:
+//
+//          FunctionAliasRoutingConfigArgs{...}
+type FunctionAliasRoutingConfigInput interface {
+	pulumi.Input
+
+	ToFunctionAliasRoutingConfigOutput() FunctionAliasRoutingConfigOutput
+	ToFunctionAliasRoutingConfigOutputWithContext(context.Context) FunctionAliasRoutingConfigOutput
+}
+
+type FunctionAliasRoutingConfigArgs struct {
+	// Additional version with rule-based routing.
+	AdditionalVersionMatches FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput `pulumi:"additionalVersionMatches"`
+	// Additional version with random weight-based routing.
+	AdditionalVersionWeights FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput `pulumi:"additionalVersionWeights"`
+}
+
+func (FunctionAliasRoutingConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionAliasRoutingConfig)(nil)).Elem()
+}
+
+func (i FunctionAliasRoutingConfigArgs) ToFunctionAliasRoutingConfigOutput() FunctionAliasRoutingConfigOutput {
+	return i.ToFunctionAliasRoutingConfigOutputWithContext(context.Background())
+}
+
+func (i FunctionAliasRoutingConfigArgs) ToFunctionAliasRoutingConfigOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionAliasRoutingConfigOutput)
+}
+
+func (i FunctionAliasRoutingConfigArgs) ToFunctionAliasRoutingConfigPtrOutput() FunctionAliasRoutingConfigPtrOutput {
+	return i.ToFunctionAliasRoutingConfigPtrOutputWithContext(context.Background())
+}
+
+func (i FunctionAliasRoutingConfigArgs) ToFunctionAliasRoutingConfigPtrOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionAliasRoutingConfigOutput).ToFunctionAliasRoutingConfigPtrOutputWithContext(ctx)
+}
+
+// FunctionAliasRoutingConfigPtrInput is an input type that accepts FunctionAliasRoutingConfigArgs, FunctionAliasRoutingConfigPtr and FunctionAliasRoutingConfigPtrOutput values.
+// You can construct a concrete instance of `FunctionAliasRoutingConfigPtrInput` via:
+//
+//          FunctionAliasRoutingConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type FunctionAliasRoutingConfigPtrInput interface {
+	pulumi.Input
+
+	ToFunctionAliasRoutingConfigPtrOutput() FunctionAliasRoutingConfigPtrOutput
+	ToFunctionAliasRoutingConfigPtrOutputWithContext(context.Context) FunctionAliasRoutingConfigPtrOutput
+}
+
+type functionAliasRoutingConfigPtrType FunctionAliasRoutingConfigArgs
+
+func FunctionAliasRoutingConfigPtr(v *FunctionAliasRoutingConfigArgs) FunctionAliasRoutingConfigPtrInput {
+	return (*functionAliasRoutingConfigPtrType)(v)
+}
+
+func (*functionAliasRoutingConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionAliasRoutingConfig)(nil)).Elem()
+}
+
+func (i *functionAliasRoutingConfigPtrType) ToFunctionAliasRoutingConfigPtrOutput() FunctionAliasRoutingConfigPtrOutput {
+	return i.ToFunctionAliasRoutingConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *functionAliasRoutingConfigPtrType) ToFunctionAliasRoutingConfigPtrOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionAliasRoutingConfigPtrOutput)
+}
+
+type FunctionAliasRoutingConfigOutput struct{ *pulumi.OutputState }
+
+func (FunctionAliasRoutingConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionAliasRoutingConfig)(nil)).Elem()
+}
+
+func (o FunctionAliasRoutingConfigOutput) ToFunctionAliasRoutingConfigOutput() FunctionAliasRoutingConfigOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigOutput) ToFunctionAliasRoutingConfigOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigOutput) ToFunctionAliasRoutingConfigPtrOutput() FunctionAliasRoutingConfigPtrOutput {
+	return o.ToFunctionAliasRoutingConfigPtrOutputWithContext(context.Background())
+}
+
+func (o FunctionAliasRoutingConfigOutput) ToFunctionAliasRoutingConfigPtrOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FunctionAliasRoutingConfig) *FunctionAliasRoutingConfig {
+		return &v
+	}).(FunctionAliasRoutingConfigPtrOutput)
+}
+
+// Additional version with rule-based routing.
+func (o FunctionAliasRoutingConfigOutput) AdditionalVersionMatches() FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput {
+	return o.ApplyT(func(v FunctionAliasRoutingConfig) []FunctionAliasRoutingConfigAdditionalVersionMatch {
+		return v.AdditionalVersionMatches
+	}).(FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput)
+}
+
+// Additional version with random weight-based routing.
+func (o FunctionAliasRoutingConfigOutput) AdditionalVersionWeights() FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return o.ApplyT(func(v FunctionAliasRoutingConfig) []FunctionAliasRoutingConfigAdditionalVersionWeight {
+		return v.AdditionalVersionWeights
+	}).(FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput)
+}
+
+type FunctionAliasRoutingConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (FunctionAliasRoutingConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionAliasRoutingConfig)(nil)).Elem()
+}
+
+func (o FunctionAliasRoutingConfigPtrOutput) ToFunctionAliasRoutingConfigPtrOutput() FunctionAliasRoutingConfigPtrOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigPtrOutput) ToFunctionAliasRoutingConfigPtrOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigPtrOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigPtrOutput) Elem() FunctionAliasRoutingConfigOutput {
+	return o.ApplyT(func(v *FunctionAliasRoutingConfig) FunctionAliasRoutingConfig {
+		if v != nil {
+			return *v
+		}
+		var ret FunctionAliasRoutingConfig
+		return ret
+	}).(FunctionAliasRoutingConfigOutput)
+}
+
+// Additional version with rule-based routing.
+func (o FunctionAliasRoutingConfigPtrOutput) AdditionalVersionMatches() FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput {
+	return o.ApplyT(func(v *FunctionAliasRoutingConfig) []FunctionAliasRoutingConfigAdditionalVersionMatch {
+		if v == nil {
+			return nil
+		}
+		return v.AdditionalVersionMatches
+	}).(FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput)
+}
+
+// Additional version with random weight-based routing.
+func (o FunctionAliasRoutingConfigPtrOutput) AdditionalVersionWeights() FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return o.ApplyT(func(v *FunctionAliasRoutingConfig) []FunctionAliasRoutingConfigAdditionalVersionWeight {
+		if v == nil {
+			return nil
+		}
+		return v.AdditionalVersionWeights
+	}).(FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput)
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionMatch struct {
+	// Rule requirements for range match:It should be described in an open or closed range, i.e., (a,b) or [a,b], where both a and b are integersRule requirements for exact match:Exact string match.
+	Expression string `pulumi:"expression"`
+	// Matching rule key. When the API is called, pass in the key to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for key and pass in RoutingKey:{User:value} when invoking a function through invoke for invocation based on rule matching.
+	Key string `pulumi:"key"`
+	// Match method. Valid values:range: Range matchexact: exact string match.
+	Method string `pulumi:"method"`
+	// Function version name.
+	Version string `pulumi:"version"`
+}
+
+// FunctionAliasRoutingConfigAdditionalVersionMatchInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionMatchArgs and FunctionAliasRoutingConfigAdditionalVersionMatchOutput values.
+// You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionMatchInput` via:
+//
+//          FunctionAliasRoutingConfigAdditionalVersionMatchArgs{...}
+type FunctionAliasRoutingConfigAdditionalVersionMatchInput interface {
+	pulumi.Input
+
+	ToFunctionAliasRoutingConfigAdditionalVersionMatchOutput() FunctionAliasRoutingConfigAdditionalVersionMatchOutput
+	ToFunctionAliasRoutingConfigAdditionalVersionMatchOutputWithContext(context.Context) FunctionAliasRoutingConfigAdditionalVersionMatchOutput
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionMatchArgs struct {
+	// Rule requirements for range match:It should be described in an open or closed range, i.e., (a,b) or [a,b], where both a and b are integersRule requirements for exact match:Exact string match.
+	Expression pulumi.StringInput `pulumi:"expression"`
+	// Matching rule key. When the API is called, pass in the key to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for key and pass in RoutingKey:{User:value} when invoking a function through invoke for invocation based on rule matching.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Match method. Valid values:range: Range matchexact: exact string match.
+	Method pulumi.StringInput `pulumi:"method"`
+	// Function version name.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (FunctionAliasRoutingConfigAdditionalVersionMatchArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionMatch)(nil)).Elem()
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionMatchArgs) ToFunctionAliasRoutingConfigAdditionalVersionMatchOutput() FunctionAliasRoutingConfigAdditionalVersionMatchOutput {
+	return i.ToFunctionAliasRoutingConfigAdditionalVersionMatchOutputWithContext(context.Background())
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionMatchArgs) ToFunctionAliasRoutingConfigAdditionalVersionMatchOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionMatchOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionAliasRoutingConfigAdditionalVersionMatchOutput)
+}
+
+// FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionMatchArray and FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput values.
+// You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput` via:
+//
+//          FunctionAliasRoutingConfigAdditionalVersionMatchArray{ FunctionAliasRoutingConfigAdditionalVersionMatchArgs{...} }
+type FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput interface {
+	pulumi.Input
+
+	ToFunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput() FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput
+	ToFunctionAliasRoutingConfigAdditionalVersionMatchArrayOutputWithContext(context.Context) FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionMatchArray []FunctionAliasRoutingConfigAdditionalVersionMatchInput
+
+func (FunctionAliasRoutingConfigAdditionalVersionMatchArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionAliasRoutingConfigAdditionalVersionMatch)(nil)).Elem()
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionMatchArray) ToFunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput() FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput {
+	return i.ToFunctionAliasRoutingConfigAdditionalVersionMatchArrayOutputWithContext(context.Background())
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionMatchArray) ToFunctionAliasRoutingConfigAdditionalVersionMatchArrayOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput)
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionMatchOutput struct{ *pulumi.OutputState }
+
+func (FunctionAliasRoutingConfigAdditionalVersionMatchOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionMatch)(nil)).Elem()
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchOutput) ToFunctionAliasRoutingConfigAdditionalVersionMatchOutput() FunctionAliasRoutingConfigAdditionalVersionMatchOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchOutput) ToFunctionAliasRoutingConfigAdditionalVersionMatchOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionMatchOutput {
+	return o
+}
+
+// Rule requirements for range match:It should be described in an open or closed range, i.e., (a,b) or [a,b], where both a and b are integersRule requirements for exact match:Exact string match.
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchOutput) Expression() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionAliasRoutingConfigAdditionalVersionMatch) string { return v.Expression }).(pulumi.StringOutput)
+}
+
+// Matching rule key. When the API is called, pass in the key to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for key and pass in RoutingKey:{User:value} when invoking a function through invoke for invocation based on rule matching.
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionAliasRoutingConfigAdditionalVersionMatch) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Match method. Valid values:range: Range matchexact: exact string match.
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionAliasRoutingConfigAdditionalVersionMatch) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// Function version name.
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionAliasRoutingConfigAdditionalVersionMatch) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput struct{ *pulumi.OutputState }
+
+func (FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionAliasRoutingConfigAdditionalVersionMatch)(nil)).Elem()
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput) ToFunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput() FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput) ToFunctionAliasRoutingConfigAdditionalVersionMatchArrayOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput) Index(i pulumi.IntInput) FunctionAliasRoutingConfigAdditionalVersionMatchOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionAliasRoutingConfigAdditionalVersionMatch {
+		return vs[0].([]FunctionAliasRoutingConfigAdditionalVersionMatch)[vs[1].(int)]
+	}).(FunctionAliasRoutingConfigAdditionalVersionMatchOutput)
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionWeight struct {
+	// Function version name.
+	Version string `pulumi:"version"`
+	// Version weight.
+	Weight float64 `pulumi:"weight"`
+}
+
+// FunctionAliasRoutingConfigAdditionalVersionWeightInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionWeightArgs and FunctionAliasRoutingConfigAdditionalVersionWeightOutput values.
+// You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionWeightInput` via:
+//
+//          FunctionAliasRoutingConfigAdditionalVersionWeightArgs{...}
+type FunctionAliasRoutingConfigAdditionalVersionWeightInput interface {
+	pulumi.Input
+
+	ToFunctionAliasRoutingConfigAdditionalVersionWeightOutput() FunctionAliasRoutingConfigAdditionalVersionWeightOutput
+	ToFunctionAliasRoutingConfigAdditionalVersionWeightOutputWithContext(context.Context) FunctionAliasRoutingConfigAdditionalVersionWeightOutput
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionWeightArgs struct {
+	// Function version name.
+	Version pulumi.StringInput `pulumi:"version"`
+	// Version weight.
+	Weight pulumi.Float64Input `pulumi:"weight"`
+}
+
+func (FunctionAliasRoutingConfigAdditionalVersionWeightArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionWeightArgs) ToFunctionAliasRoutingConfigAdditionalVersionWeightOutput() FunctionAliasRoutingConfigAdditionalVersionWeightOutput {
+	return i.ToFunctionAliasRoutingConfigAdditionalVersionWeightOutputWithContext(context.Background())
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionWeightArgs) ToFunctionAliasRoutingConfigAdditionalVersionWeightOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionWeightOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionAliasRoutingConfigAdditionalVersionWeightOutput)
+}
+
+// FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionWeightArray and FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput values.
+// You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput` via:
+//
+//          FunctionAliasRoutingConfigAdditionalVersionWeightArray{ FunctionAliasRoutingConfigAdditionalVersionWeightArgs{...} }
+type FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput interface {
+	pulumi.Input
+
+	ToFunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput() FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput
+	ToFunctionAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(context.Context) FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionWeightArray []FunctionAliasRoutingConfigAdditionalVersionWeightInput
+
+func (FunctionAliasRoutingConfigAdditionalVersionWeightArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionWeightArray) ToFunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput() FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return i.ToFunctionAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(context.Background())
+}
+
+func (i FunctionAliasRoutingConfigAdditionalVersionWeightArray) ToFunctionAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput)
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionWeightOutput struct{ *pulumi.OutputState }
+
+func (FunctionAliasRoutingConfigAdditionalVersionWeightOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionWeightOutput) ToFunctionAliasRoutingConfigAdditionalVersionWeightOutput() FunctionAliasRoutingConfigAdditionalVersionWeightOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionWeightOutput) ToFunctionAliasRoutingConfigAdditionalVersionWeightOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionWeightOutput {
+	return o
+}
+
+// Function version name.
+func (o FunctionAliasRoutingConfigAdditionalVersionWeightOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionAliasRoutingConfigAdditionalVersionWeight) string { return v.Version }).(pulumi.StringOutput)
+}
+
+// Version weight.
+func (o FunctionAliasRoutingConfigAdditionalVersionWeightOutput) Weight() pulumi.Float64Output {
+	return o.ApplyT(func(v FunctionAliasRoutingConfigAdditionalVersionWeight) float64 { return v.Weight }).(pulumi.Float64Output)
+}
+
+type FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput struct{ *pulumi.OutputState }
+
+func (FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput) ToFunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput() FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput) ToFunctionAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(ctx context.Context) FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return o
+}
+
+func (o FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput) Index(i pulumi.IntInput) FunctionAliasRoutingConfigAdditionalVersionWeightOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionAliasRoutingConfigAdditionalVersionWeight {
+		return vs[0].([]FunctionAliasRoutingConfigAdditionalVersionWeight)[vs[1].(int)]
+	}).(FunctionAliasRoutingConfigAdditionalVersionWeightOutput)
+}
+
 type FunctionCfsConfig struct {
 	// File system instance ID.
 	CfsId     string  `pulumi:"cfsId"`
@@ -31,7 +421,7 @@ type FunctionCfsConfig struct {
 // FunctionCfsConfigInput is an input type that accepts FunctionCfsConfigArgs and FunctionCfsConfigOutput values.
 // You can construct a concrete instance of `FunctionCfsConfigInput` via:
 //
-//	FunctionCfsConfigArgs{...}
+//          FunctionCfsConfigArgs{...}
 type FunctionCfsConfigInput interface {
 	pulumi.Input
 
@@ -72,7 +462,7 @@ func (i FunctionCfsConfigArgs) ToFunctionCfsConfigOutputWithContext(ctx context.
 // FunctionCfsConfigArrayInput is an input type that accepts FunctionCfsConfigArray and FunctionCfsConfigArrayOutput values.
 // You can construct a concrete instance of `FunctionCfsConfigArrayInput` via:
 //
-//	FunctionCfsConfigArray{ FunctionCfsConfigArgs{...} }
+//          FunctionCfsConfigArray{ FunctionCfsConfigArgs{...} }
 type FunctionCfsConfigArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +578,7 @@ type FunctionImageConfig struct {
 // FunctionImageConfigInput is an input type that accepts FunctionImageConfigArgs and FunctionImageConfigOutput values.
 // You can construct a concrete instance of `FunctionImageConfigInput` via:
 //
-//	FunctionImageConfigArgs{...}
+//          FunctionImageConfigArgs{...}
 type FunctionImageConfigInput interface {
 	pulumi.Input
 
@@ -226,7 +616,7 @@ func (i FunctionImageConfigArgs) ToFunctionImageConfigOutputWithContext(ctx cont
 // FunctionImageConfigArrayInput is an input type that accepts FunctionImageConfigArray and FunctionImageConfigArrayOutput values.
 // You can construct a concrete instance of `FunctionImageConfigArrayInput` via:
 //
-//	FunctionImageConfigArray{ FunctionImageConfigArgs{...} }
+//          FunctionImageConfigArray{ FunctionImageConfigArgs{...} }
 type FunctionImageConfigArrayInput interface {
 	pulumi.Input
 
@@ -322,7 +712,7 @@ type FunctionLayer struct {
 // FunctionLayerInput is an input type that accepts FunctionLayerArgs and FunctionLayerOutput values.
 // You can construct a concrete instance of `FunctionLayerInput` via:
 //
-//	FunctionLayerArgs{...}
+//          FunctionLayerArgs{...}
 type FunctionLayerInput interface {
 	pulumi.Input
 
@@ -352,7 +742,7 @@ func (i FunctionLayerArgs) ToFunctionLayerOutputWithContext(ctx context.Context)
 // FunctionLayerArrayInput is an input type that accepts FunctionLayerArray and FunctionLayerArrayOutput values.
 // You can construct a concrete instance of `FunctionLayerArrayInput` via:
 //
-//	FunctionLayerArray{ FunctionLayerArgs{...} }
+//          FunctionLayerArray{ FunctionLayerArgs{...} }
 type FunctionLayerArrayInput interface {
 	pulumi.Input
 
@@ -432,7 +822,7 @@ type FunctionTrigger struct {
 // FunctionTriggerInput is an input type that accepts FunctionTriggerArgs and FunctionTriggerOutput values.
 // You can construct a concrete instance of `FunctionTriggerInput` via:
 //
-//	FunctionTriggerArgs{...}
+//          FunctionTriggerArgs{...}
 type FunctionTriggerInput interface {
 	pulumi.Input
 
@@ -466,7 +856,7 @@ func (i FunctionTriggerArgs) ToFunctionTriggerOutputWithContext(ctx context.Cont
 // FunctionTriggerArrayInput is an input type that accepts FunctionTriggerArray and FunctionTriggerArrayOutput values.
 // You can construct a concrete instance of `FunctionTriggerArrayInput` via:
 //
-//	FunctionTriggerArray{ FunctionTriggerArgs{...} }
+//          FunctionTriggerArray{ FunctionTriggerArgs{...} }
 type FunctionTriggerArrayInput interface {
 	pulumi.Input
 
@@ -562,7 +952,7 @@ type FunctionTriggerInfo struct {
 // FunctionTriggerInfoInput is an input type that accepts FunctionTriggerInfoArgs and FunctionTriggerInfoOutput values.
 // You can construct a concrete instance of `FunctionTriggerInfoInput` via:
 //
-//	FunctionTriggerInfoArgs{...}
+//          FunctionTriggerInfoArgs{...}
 type FunctionTriggerInfoInput interface {
 	pulumi.Input
 
@@ -602,7 +992,7 @@ func (i FunctionTriggerInfoArgs) ToFunctionTriggerInfoOutputWithContext(ctx cont
 // FunctionTriggerInfoArrayInput is an input type that accepts FunctionTriggerInfoArray and FunctionTriggerInfoArrayOutput values.
 // You can construct a concrete instance of `FunctionTriggerInfoArrayInput` via:
 //
-//	FunctionTriggerInfoArray{ FunctionTriggerInfoArgs{...} }
+//          FunctionTriggerInfoArray{ FunctionTriggerInfoArgs{...} }
 type FunctionTriggerInfoArrayInput interface {
 	pulumi.Input
 
@@ -707,7 +1097,7 @@ type LayerContent struct {
 // LayerContentInput is an input type that accepts LayerContentArgs and LayerContentOutput values.
 // You can construct a concrete instance of `LayerContentInput` via:
 //
-//	LayerContentArgs{...}
+//          LayerContentArgs{...}
 type LayerContentInput interface {
 	pulumi.Input
 
@@ -749,11 +1139,11 @@ func (i LayerContentArgs) ToLayerContentPtrOutputWithContext(ctx context.Context
 // LayerContentPtrInput is an input type that accepts LayerContentArgs, LayerContentPtr and LayerContentPtrOutput values.
 // You can construct a concrete instance of `LayerContentPtrInput` via:
 //
-//	        LayerContentArgs{...}
+//          LayerContentArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type LayerContentPtrInput interface {
 	pulumi.Input
 
@@ -955,7 +1345,7 @@ type GetFunctionsFunction struct {
 // GetFunctionsFunctionInput is an input type that accepts GetFunctionsFunctionArgs and GetFunctionsFunctionOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionInput` via:
 //
-//	GetFunctionsFunctionArgs{...}
+//          GetFunctionsFunctionArgs{...}
 type GetFunctionsFunctionInput interface {
 	pulumi.Input
 
@@ -1043,7 +1433,7 @@ func (i GetFunctionsFunctionArgs) ToGetFunctionsFunctionOutputWithContext(ctx co
 // GetFunctionsFunctionArrayInput is an input type that accepts GetFunctionsFunctionArray and GetFunctionsFunctionArrayOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionArrayInput` via:
 //
-//	GetFunctionsFunctionArray{ GetFunctionsFunctionArgs{...} }
+//          GetFunctionsFunctionArray{ GetFunctionsFunctionArgs{...} }
 type GetFunctionsFunctionArrayInput interface {
 	pulumi.Input
 
@@ -1274,7 +1664,7 @@ type GetFunctionsFunctionTriggerInfo struct {
 // GetFunctionsFunctionTriggerInfoInput is an input type that accepts GetFunctionsFunctionTriggerInfoArgs and GetFunctionsFunctionTriggerInfoOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionTriggerInfoInput` via:
 //
-//	GetFunctionsFunctionTriggerInfoArgs{...}
+//          GetFunctionsFunctionTriggerInfoArgs{...}
 type GetFunctionsFunctionTriggerInfoInput interface {
 	pulumi.Input
 
@@ -1314,7 +1704,7 @@ func (i GetFunctionsFunctionTriggerInfoArgs) ToGetFunctionsFunctionTriggerInfoOu
 // GetFunctionsFunctionTriggerInfoArrayInput is an input type that accepts GetFunctionsFunctionTriggerInfoArray and GetFunctionsFunctionTriggerInfoArrayOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionTriggerInfoArrayInput` via:
 //
-//	GetFunctionsFunctionTriggerInfoArray{ GetFunctionsFunctionTriggerInfoArgs{...} }
+//          GetFunctionsFunctionTriggerInfoArray{ GetFunctionsFunctionTriggerInfoArgs{...} }
 type GetFunctionsFunctionTriggerInfoArrayInput interface {
 	pulumi.Input
 
@@ -1435,7 +1825,7 @@ type GetLogsLog struct {
 // GetLogsLogInput is an input type that accepts GetLogsLogArgs and GetLogsLogOutput values.
 // You can construct a concrete instance of `GetLogsLogInput` via:
 //
-//	GetLogsLogArgs{...}
+//          GetLogsLogArgs{...}
 type GetLogsLogInput interface {
 	pulumi.Input
 
@@ -1485,7 +1875,7 @@ func (i GetLogsLogArgs) ToGetLogsLogOutputWithContext(ctx context.Context) GetLo
 // GetLogsLogArrayInput is an input type that accepts GetLogsLogArray and GetLogsLogArrayOutput values.
 // You can construct a concrete instance of `GetLogsLogArrayInput` via:
 //
-//	GetLogsLogArray{ GetLogsLogArgs{...} }
+//          GetLogsLogArray{ GetLogsLogArgs{...} }
 type GetLogsLogArrayInput interface {
 	pulumi.Input
 
@@ -1617,7 +2007,7 @@ type GetNamespacesNamespace struct {
 // GetNamespacesNamespaceInput is an input type that accepts GetNamespacesNamespaceArgs and GetNamespacesNamespaceOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceInput` via:
 //
-//	GetNamespacesNamespaceArgs{...}
+//          GetNamespacesNamespaceArgs{...}
 type GetNamespacesNamespaceInput interface {
 	pulumi.Input
 
@@ -1653,7 +2043,7 @@ func (i GetNamespacesNamespaceArgs) ToGetNamespacesNamespaceOutputWithContext(ct
 // GetNamespacesNamespaceArrayInput is an input type that accepts GetNamespacesNamespaceArray and GetNamespacesNamespaceArrayOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceArrayInput` via:
 //
-//	GetNamespacesNamespaceArray{ GetNamespacesNamespaceArgs{...} }
+//          GetNamespacesNamespaceArray{ GetNamespacesNamespaceArgs{...} }
 type GetNamespacesNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -1735,6 +2125,12 @@ func (o GetNamespacesNamespaceArrayOutput) Index(i pulumi.IntInput) GetNamespace
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigInput)(nil)).Elem(), FunctionAliasRoutingConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigPtrInput)(nil)).Elem(), FunctionAliasRoutingConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionMatchInput)(nil)).Elem(), FunctionAliasRoutingConfigAdditionalVersionMatchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput)(nil)).Elem(), FunctionAliasRoutingConfigAdditionalVersionMatchArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionWeightInput)(nil)).Elem(), FunctionAliasRoutingConfigAdditionalVersionWeightArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput)(nil)).Elem(), FunctionAliasRoutingConfigAdditionalVersionWeightArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionCfsConfigInput)(nil)).Elem(), FunctionCfsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionCfsConfigArrayInput)(nil)).Elem(), FunctionCfsConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionImageConfigInput)(nil)).Elem(), FunctionImageConfigArgs{})
@@ -1755,6 +2151,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsLogArrayInput)(nil)).Elem(), GetLogsLogArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceInput)(nil)).Elem(), GetNamespacesNamespaceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceArrayInput)(nil)).Elem(), GetNamespacesNamespaceArray{})
+	pulumi.RegisterOutputType(FunctionAliasRoutingConfigOutput{})
+	pulumi.RegisterOutputType(FunctionAliasRoutingConfigPtrOutput{})
+	pulumi.RegisterOutputType(FunctionAliasRoutingConfigAdditionalVersionMatchOutput{})
+	pulumi.RegisterOutputType(FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput{})
+	pulumi.RegisterOutputType(FunctionAliasRoutingConfigAdditionalVersionWeightOutput{})
+	pulumi.RegisterOutputType(FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput{})
 	pulumi.RegisterOutputType(FunctionCfsConfigOutput{})
 	pulumi.RegisterOutputType(FunctionCfsConfigArrayOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigOutput{})

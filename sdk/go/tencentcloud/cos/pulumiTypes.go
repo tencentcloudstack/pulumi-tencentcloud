@@ -26,7 +26,7 @@ type BucketCorsRule struct {
 // BucketCorsRuleInput is an input type that accepts BucketCorsRuleArgs and BucketCorsRuleOutput values.
 // You can construct a concrete instance of `BucketCorsRuleInput` via:
 //
-//	BucketCorsRuleArgs{...}
+//          BucketCorsRuleArgs{...}
 type BucketCorsRuleInput interface {
 	pulumi.Input
 
@@ -62,7 +62,7 @@ func (i BucketCorsRuleArgs) ToBucketCorsRuleOutputWithContext(ctx context.Contex
 // BucketCorsRuleArrayInput is an input type that accepts BucketCorsRuleArray and BucketCorsRuleArrayOutput values.
 // You can construct a concrete instance of `BucketCorsRuleArrayInput` via:
 //
-//	BucketCorsRuleArray{ BucketCorsRuleArgs{...} }
+//          BucketCorsRuleArray{ BucketCorsRuleArgs{...} }
 type BucketCorsRuleArrayInput interface {
 	pulumi.Input
 
@@ -143,6 +143,480 @@ func (o BucketCorsRuleArrayOutput) Index(i pulumi.IntInput) BucketCorsRuleOutput
 	}).(BucketCorsRuleOutput)
 }
 
+type BucketDomainCertificateAttachmentDomainCertificate struct {
+	// Certificate info.
+	Certificate BucketDomainCertificateAttachmentDomainCertificateCertificate `pulumi:"certificate"`
+	// The name of domain.
+	Domain string `pulumi:"domain"`
+}
+
+// BucketDomainCertificateAttachmentDomainCertificateInput is an input type that accepts BucketDomainCertificateAttachmentDomainCertificateArgs and BucketDomainCertificateAttachmentDomainCertificateOutput values.
+// You can construct a concrete instance of `BucketDomainCertificateAttachmentDomainCertificateInput` via:
+//
+//          BucketDomainCertificateAttachmentDomainCertificateArgs{...}
+type BucketDomainCertificateAttachmentDomainCertificateInput interface {
+	pulumi.Input
+
+	ToBucketDomainCertificateAttachmentDomainCertificateOutput() BucketDomainCertificateAttachmentDomainCertificateOutput
+	ToBucketDomainCertificateAttachmentDomainCertificateOutputWithContext(context.Context) BucketDomainCertificateAttachmentDomainCertificateOutput
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateArgs struct {
+	// Certificate info.
+	Certificate BucketDomainCertificateAttachmentDomainCertificateCertificateInput `pulumi:"certificate"`
+	// The name of domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+}
+
+func (BucketDomainCertificateAttachmentDomainCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificate)(nil)).Elem()
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificateOutput() BucketDomainCertificateAttachmentDomainCertificateOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificateOutputWithContext(context.Background())
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificateOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateOutput)
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateOutput).ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(ctx)
+}
+
+// BucketDomainCertificateAttachmentDomainCertificatePtrInput is an input type that accepts BucketDomainCertificateAttachmentDomainCertificateArgs, BucketDomainCertificateAttachmentDomainCertificatePtr and BucketDomainCertificateAttachmentDomainCertificatePtrOutput values.
+// You can construct a concrete instance of `BucketDomainCertificateAttachmentDomainCertificatePtrInput` via:
+//
+//          BucketDomainCertificateAttachmentDomainCertificateArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketDomainCertificateAttachmentDomainCertificatePtrInput interface {
+	pulumi.Input
+
+	ToBucketDomainCertificateAttachmentDomainCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificatePtrOutput
+	ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(context.Context) BucketDomainCertificateAttachmentDomainCertificatePtrOutput
+}
+
+type bucketDomainCertificateAttachmentDomainCertificatePtrType BucketDomainCertificateAttachmentDomainCertificateArgs
+
+func BucketDomainCertificateAttachmentDomainCertificatePtr(v *BucketDomainCertificateAttachmentDomainCertificateArgs) BucketDomainCertificateAttachmentDomainCertificatePtrInput {
+	return (*bucketDomainCertificateAttachmentDomainCertificatePtrType)(v)
+}
+
+func (*bucketDomainCertificateAttachmentDomainCertificatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketDomainCertificateAttachmentDomainCertificate)(nil)).Elem()
+}
+
+func (i *bucketDomainCertificateAttachmentDomainCertificatePtrType) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i *bucketDomainCertificateAttachmentDomainCertificatePtrType) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificatePtrOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateOutput struct{ *pulumi.OutputState }
+
+func (BucketDomainCertificateAttachmentDomainCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificate)(nil)).Elem()
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificateOutput() BucketDomainCertificateAttachmentDomainCertificateOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificateOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return o.ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(context.Background())
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketDomainCertificateAttachmentDomainCertificate) *BucketDomainCertificateAttachmentDomainCertificate {
+		return &v
+	}).(BucketDomainCertificateAttachmentDomainCertificatePtrOutput)
+}
+
+// Certificate info.
+func (o BucketDomainCertificateAttachmentDomainCertificateOutput) Certificate() BucketDomainCertificateAttachmentDomainCertificateCertificateOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificate) BucketDomainCertificateAttachmentDomainCertificateCertificate {
+		return v.Certificate
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificateOutput)
+}
+
+// The name of domain.
+func (o BucketDomainCertificateAttachmentDomainCertificateOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificate) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificatePtrOutput struct{ *pulumi.OutputState }
+
+func (BucketDomainCertificateAttachmentDomainCertificatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketDomainCertificateAttachmentDomainCertificate)(nil)).Elem()
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificatePtrOutput) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificatePtrOutput) ToBucketDomainCertificateAttachmentDomainCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificatePtrOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificatePtrOutput) Elem() BucketDomainCertificateAttachmentDomainCertificateOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificate) BucketDomainCertificateAttachmentDomainCertificate {
+		if v != nil {
+			return *v
+		}
+		var ret BucketDomainCertificateAttachmentDomainCertificate
+		return ret
+	}).(BucketDomainCertificateAttachmentDomainCertificateOutput)
+}
+
+// Certificate info.
+func (o BucketDomainCertificateAttachmentDomainCertificatePtrOutput) Certificate() BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificate) *BucketDomainCertificateAttachmentDomainCertificateCertificate {
+		if v == nil {
+			return nil
+		}
+		return &v.Certificate
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput)
+}
+
+// The name of domain.
+func (o BucketDomainCertificateAttachmentDomainCertificatePtrOutput) Domain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Domain
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificate struct {
+	// Certificate type.
+	CertType string `pulumi:"certType"`
+	// Custom certificate.
+	CustomCert BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert `pulumi:"customCert"`
+}
+
+// BucketDomainCertificateAttachmentDomainCertificateCertificateInput is an input type that accepts BucketDomainCertificateAttachmentDomainCertificateCertificateArgs and BucketDomainCertificateAttachmentDomainCertificateCertificateOutput values.
+// You can construct a concrete instance of `BucketDomainCertificateAttachmentDomainCertificateCertificateInput` via:
+//
+//          BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{...}
+type BucketDomainCertificateAttachmentDomainCertificateCertificateInput interface {
+	pulumi.Input
+
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificateOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateOutput
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificateOutputWithContext(context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateOutput
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificateArgs struct {
+	// Certificate type.
+	CertType pulumi.StringInput `pulumi:"certType"`
+	// Custom certificate.
+	CustomCert BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput `pulumi:"customCert"`
+}
+
+func (BucketDomainCertificateAttachmentDomainCertificateCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificate)(nil)).Elem()
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificateOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificateCertificateOutputWithContext(context.Background())
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificateOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateCertificateOutput)
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateCertificateOutput).ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(ctx)
+}
+
+// BucketDomainCertificateAttachmentDomainCertificateCertificatePtrInput is an input type that accepts BucketDomainCertificateAttachmentDomainCertificateCertificateArgs, BucketDomainCertificateAttachmentDomainCertificateCertificatePtr and BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput values.
+// You can construct a concrete instance of `BucketDomainCertificateAttachmentDomainCertificateCertificatePtrInput` via:
+//
+//          BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketDomainCertificateAttachmentDomainCertificateCertificatePtrInput interface {
+	pulumi.Input
+
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput
+}
+
+type bucketDomainCertificateAttachmentDomainCertificateCertificatePtrType BucketDomainCertificateAttachmentDomainCertificateCertificateArgs
+
+func BucketDomainCertificateAttachmentDomainCertificateCertificatePtr(v *BucketDomainCertificateAttachmentDomainCertificateCertificateArgs) BucketDomainCertificateAttachmentDomainCertificateCertificatePtrInput {
+	return (*bucketDomainCertificateAttachmentDomainCertificateCertificatePtrType)(v)
+}
+
+func (*bucketDomainCertificateAttachmentDomainCertificateCertificatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketDomainCertificateAttachmentDomainCertificateCertificate)(nil)).Elem()
+}
+
+func (i *bucketDomainCertificateAttachmentDomainCertificateCertificatePtrType) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i *bucketDomainCertificateAttachmentDomainCertificateCertificatePtrType) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificateOutput struct{ *pulumi.OutputState }
+
+func (BucketDomainCertificateAttachmentDomainCertificateCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificate)(nil)).Elem()
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return o.ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(context.Background())
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketDomainCertificateAttachmentDomainCertificateCertificate) *BucketDomainCertificateAttachmentDomainCertificateCertificate {
+		return &v
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput)
+}
+
+// Certificate type.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateOutput) CertType() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificate) string { return v.CertType }).(pulumi.StringOutput)
+}
+
+// Custom certificate.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateOutput) CustomCert() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificate) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert {
+		return v.CustomCert
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput struct{ *pulumi.OutputState }
+
+func (BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketDomainCertificateAttachmentDomainCertificateCertificate)(nil)).Elem()
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput) Elem() BucketDomainCertificateAttachmentDomainCertificateCertificateOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificateCertificate) BucketDomainCertificateAttachmentDomainCertificateCertificate {
+		if v != nil {
+			return *v
+		}
+		var ret BucketDomainCertificateAttachmentDomainCertificateCertificate
+		return ret
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificateOutput)
+}
+
+// Certificate type.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput) CertType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificateCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CertType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom certificate.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput) CustomCert() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificateCertificate) *BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert {
+		if v == nil {
+			return nil
+		}
+		return &v.CustomCert
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert struct {
+	// Public key of certificate.
+	Cert string `pulumi:"cert"`
+	// Private key of certificate.
+	PrivateKey string `pulumi:"privateKey"`
+}
+
+// BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput is an input type that accepts BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs and BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput values.
+// You can construct a concrete instance of `BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput` via:
+//
+//          BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{...}
+type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput interface {
+	pulumi.Input
+
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutputWithContext(context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs struct {
+	// Public key of certificate.
+	Cert pulumi.StringInput `pulumi:"cert"`
+	// Private key of certificate.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+}
+
+func (BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert)(nil)).Elem()
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutputWithContext(context.Background())
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput)
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(context.Background())
+}
+
+func (i BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput).ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(ctx)
+}
+
+// BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrInput is an input type that accepts BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs, BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtr and BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput values.
+// You can construct a concrete instance of `BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrInput` via:
+//
+//          BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrInput interface {
+	pulumi.Input
+
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput
+	ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput
+}
+
+type bucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrType BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
+
+func BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtr(v *BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrInput {
+	return (*bucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrType)(v)
+}
+
+func (*bucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert)(nil)).Elem()
+}
+
+func (i *bucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrType) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return i.ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrType) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput struct{ *pulumi.OutputState }
+
+func (BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert)(nil)).Elem()
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return o.ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(context.Background())
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) *BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert {
+		return &v
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput)
+}
+
+// Public key of certificate.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) Cert() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) string { return v.Cert }).(pulumi.StringOutput)
+}
+
+// Private key of certificate.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) string {
+		return v.PrivateKey
+	}).(pulumi.StringOutput)
+}
+
+type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert)(nil)).Elem()
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput) ToBucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutputWithContext(ctx context.Context) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput {
+	return o
+}
+
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput) Elem() BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert {
+		if v != nil {
+			return *v
+		}
+		var ret BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert
+		return ret
+	}).(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput)
+}
+
+// Public key of certificate.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput) Cert() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Cert
+	}).(pulumi.StringPtrOutput)
+}
+
+// Private key of certificate.
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
 type BucketLifecycleRule struct {
 	// Specifies a period in the object's expire (documented below).
 	Expiration *BucketLifecycleRuleExpiration `pulumi:"expiration"`
@@ -161,7 +635,7 @@ type BucketLifecycleRule struct {
 // BucketLifecycleRuleInput is an input type that accepts BucketLifecycleRuleArgs and BucketLifecycleRuleOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleInput` via:
 //
-//	BucketLifecycleRuleArgs{...}
+//          BucketLifecycleRuleArgs{...}
 type BucketLifecycleRuleInput interface {
 	pulumi.Input
 
@@ -199,7 +673,7 @@ func (i BucketLifecycleRuleArgs) ToBucketLifecycleRuleOutputWithContext(ctx cont
 // BucketLifecycleRuleArrayInput is an input type that accepts BucketLifecycleRuleArray and BucketLifecycleRuleArrayOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleArrayInput` via:
 //
-//	BucketLifecycleRuleArray{ BucketLifecycleRuleArgs{...} }
+//          BucketLifecycleRuleArray{ BucketLifecycleRuleArgs{...} }
 type BucketLifecycleRuleArrayInput interface {
 	pulumi.Input
 
@@ -297,7 +771,7 @@ type BucketLifecycleRuleExpiration struct {
 // BucketLifecycleRuleExpirationInput is an input type that accepts BucketLifecycleRuleExpirationArgs and BucketLifecycleRuleExpirationOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleExpirationInput` via:
 //
-//	BucketLifecycleRuleExpirationArgs{...}
+//          BucketLifecycleRuleExpirationArgs{...}
 type BucketLifecycleRuleExpirationInput interface {
 	pulumi.Input
 
@@ -337,11 +811,11 @@ func (i BucketLifecycleRuleExpirationArgs) ToBucketLifecycleRuleExpirationPtrOut
 // BucketLifecycleRuleExpirationPtrInput is an input type that accepts BucketLifecycleRuleExpirationArgs, BucketLifecycleRuleExpirationPtr and BucketLifecycleRuleExpirationPtrOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleExpirationPtrInput` via:
 //
-//	        BucketLifecycleRuleExpirationArgs{...}
+//          BucketLifecycleRuleExpirationArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type BucketLifecycleRuleExpirationPtrInput interface {
 	pulumi.Input
 
@@ -468,7 +942,7 @@ type BucketLifecycleRuleNonCurrentExpiration struct {
 // BucketLifecycleRuleNonCurrentExpirationInput is an input type that accepts BucketLifecycleRuleNonCurrentExpirationArgs and BucketLifecycleRuleNonCurrentExpirationOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentExpirationInput` via:
 //
-//	BucketLifecycleRuleNonCurrentExpirationArgs{...}
+//          BucketLifecycleRuleNonCurrentExpirationArgs{...}
 type BucketLifecycleRuleNonCurrentExpirationInput interface {
 	pulumi.Input
 
@@ -504,11 +978,11 @@ func (i BucketLifecycleRuleNonCurrentExpirationArgs) ToBucketLifecycleRuleNonCur
 // BucketLifecycleRuleNonCurrentExpirationPtrInput is an input type that accepts BucketLifecycleRuleNonCurrentExpirationArgs, BucketLifecycleRuleNonCurrentExpirationPtr and BucketLifecycleRuleNonCurrentExpirationPtrOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentExpirationPtrInput` via:
 //
-//	        BucketLifecycleRuleNonCurrentExpirationArgs{...}
+//          BucketLifecycleRuleNonCurrentExpirationArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type BucketLifecycleRuleNonCurrentExpirationPtrInput interface {
 	pulumi.Input
 
@@ -600,14 +1074,14 @@ func (o BucketLifecycleRuleNonCurrentExpirationPtrOutput) NonCurrentDays() pulum
 type BucketLifecycleRuleNonCurrentTransition struct {
 	// Number of days after non current object creation when the specific rule action takes effect.
 	NonCurrentDays *int `pulumi:"nonCurrentDays"`
-	// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass string `pulumi:"storageClass"`
 }
 
 // BucketLifecycleRuleNonCurrentTransitionInput is an input type that accepts BucketLifecycleRuleNonCurrentTransitionArgs and BucketLifecycleRuleNonCurrentTransitionOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentTransitionInput` via:
 //
-//	BucketLifecycleRuleNonCurrentTransitionArgs{...}
+//          BucketLifecycleRuleNonCurrentTransitionArgs{...}
 type BucketLifecycleRuleNonCurrentTransitionInput interface {
 	pulumi.Input
 
@@ -618,7 +1092,7 @@ type BucketLifecycleRuleNonCurrentTransitionInput interface {
 type BucketLifecycleRuleNonCurrentTransitionArgs struct {
 	// Number of days after non current object creation when the specific rule action takes effect.
 	NonCurrentDays pulumi.IntPtrInput `pulumi:"nonCurrentDays"`
-	// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass pulumi.StringInput `pulumi:"storageClass"`
 }
 
@@ -637,7 +1111,7 @@ func (i BucketLifecycleRuleNonCurrentTransitionArgs) ToBucketLifecycleRuleNonCur
 // BucketLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts BucketLifecycleRuleNonCurrentTransitionArray and BucketLifecycleRuleNonCurrentTransitionArrayOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleNonCurrentTransitionArrayInput` via:
 //
-//	BucketLifecycleRuleNonCurrentTransitionArray{ BucketLifecycleRuleNonCurrentTransitionArgs{...} }
+//          BucketLifecycleRuleNonCurrentTransitionArray{ BucketLifecycleRuleNonCurrentTransitionArgs{...} }
 type BucketLifecycleRuleNonCurrentTransitionArrayInput interface {
 	pulumi.Input
 
@@ -678,7 +1152,7 @@ func (o BucketLifecycleRuleNonCurrentTransitionOutput) NonCurrentDays() pulumi.I
 	return o.ApplyT(func(v BucketLifecycleRuleNonCurrentTransition) *int { return v.NonCurrentDays }).(pulumi.IntPtrOutput)
 }
 
-// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 func (o BucketLifecycleRuleNonCurrentTransitionOutput) StorageClass() pulumi.StringOutput {
 	return o.ApplyT(func(v BucketLifecycleRuleNonCurrentTransition) string { return v.StorageClass }).(pulumi.StringOutput)
 }
@@ -708,14 +1182,14 @@ type BucketLifecycleRuleTransition struct {
 	Date *string `pulumi:"date"`
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	Days *int `pulumi:"days"`
-	// Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Specifies the storage class to which you want the object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass string `pulumi:"storageClass"`
 }
 
 // BucketLifecycleRuleTransitionInput is an input type that accepts BucketLifecycleRuleTransitionArgs and BucketLifecycleRuleTransitionOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleTransitionInput` via:
 //
-//	BucketLifecycleRuleTransitionArgs{...}
+//          BucketLifecycleRuleTransitionArgs{...}
 type BucketLifecycleRuleTransitionInput interface {
 	pulumi.Input
 
@@ -728,7 +1202,7 @@ type BucketLifecycleRuleTransitionArgs struct {
 	Date pulumi.StringPtrInput `pulumi:"date"`
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	Days pulumi.IntPtrInput `pulumi:"days"`
-	// Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Specifies the storage class to which you want the object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass pulumi.StringInput `pulumi:"storageClass"`
 }
 
@@ -747,7 +1221,7 @@ func (i BucketLifecycleRuleTransitionArgs) ToBucketLifecycleRuleTransitionOutput
 // BucketLifecycleRuleTransitionArrayInput is an input type that accepts BucketLifecycleRuleTransitionArray and BucketLifecycleRuleTransitionArrayOutput values.
 // You can construct a concrete instance of `BucketLifecycleRuleTransitionArrayInput` via:
 //
-//	BucketLifecycleRuleTransitionArray{ BucketLifecycleRuleTransitionArgs{...} }
+//          BucketLifecycleRuleTransitionArray{ BucketLifecycleRuleTransitionArgs{...} }
 type BucketLifecycleRuleTransitionArrayInput interface {
 	pulumi.Input
 
@@ -793,7 +1267,7 @@ func (o BucketLifecycleRuleTransitionOutput) Days() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v BucketLifecycleRuleTransition) *int { return v.Days }).(pulumi.IntPtrOutput)
 }
 
-// Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+// Specifies the storage class to which you want the object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 func (o BucketLifecycleRuleTransitionOutput) StorageClass() pulumi.StringOutput {
 	return o.ApplyT(func(v BucketLifecycleRuleTransition) string { return v.StorageClass }).(pulumi.StringOutput)
 }
@@ -830,7 +1304,7 @@ type BucketOriginDomainRule struct {
 // BucketOriginDomainRuleInput is an input type that accepts BucketOriginDomainRuleArgs and BucketOriginDomainRuleOutput values.
 // You can construct a concrete instance of `BucketOriginDomainRuleInput` via:
 //
-//	BucketOriginDomainRuleArgs{...}
+//          BucketOriginDomainRuleArgs{...}
 type BucketOriginDomainRuleInput interface {
 	pulumi.Input
 
@@ -862,7 +1336,7 @@ func (i BucketOriginDomainRuleArgs) ToBucketOriginDomainRuleOutputWithContext(ct
 // BucketOriginDomainRuleArrayInput is an input type that accepts BucketOriginDomainRuleArray and BucketOriginDomainRuleArrayOutput values.
 // You can construct a concrete instance of `BucketOriginDomainRuleArrayInput` via:
 //
-//	BucketOriginDomainRuleArray{ BucketOriginDomainRuleArgs{...} }
+//          BucketOriginDomainRuleArray{ BucketOriginDomainRuleArgs{...} }
 type BucketOriginDomainRuleArrayInput interface {
 	pulumi.Input
 
@@ -957,7 +1431,7 @@ type BucketOriginPullRule struct {
 // BucketOriginPullRuleInput is an input type that accepts BucketOriginPullRuleArgs and BucketOriginPullRuleOutput values.
 // You can construct a concrete instance of `BucketOriginPullRuleInput` via:
 //
-//	BucketOriginPullRuleArgs{...}
+//          BucketOriginPullRuleArgs{...}
 type BucketOriginPullRuleInput interface {
 	pulumi.Input
 
@@ -1001,7 +1475,7 @@ func (i BucketOriginPullRuleArgs) ToBucketOriginPullRuleOutputWithContext(ctx co
 // BucketOriginPullRuleArrayInput is an input type that accepts BucketOriginPullRuleArray and BucketOriginPullRuleArrayOutput values.
 // You can construct a concrete instance of `BucketOriginPullRuleArrayInput` via:
 //
-//	BucketOriginPullRuleArray{ BucketOriginPullRuleArgs{...} }
+//          BucketOriginPullRuleArray{ BucketOriginPullRuleArgs{...} }
 type BucketOriginPullRuleArrayInput interface {
 	pulumi.Input
 
@@ -1118,7 +1592,7 @@ type BucketReplicaRule struct {
 // BucketReplicaRuleInput is an input type that accepts BucketReplicaRuleArgs and BucketReplicaRuleOutput values.
 // You can construct a concrete instance of `BucketReplicaRuleInput` via:
 //
-//	BucketReplicaRuleArgs{...}
+//          BucketReplicaRuleArgs{...}
 type BucketReplicaRuleInput interface {
 	pulumi.Input
 
@@ -1154,7 +1628,7 @@ func (i BucketReplicaRuleArgs) ToBucketReplicaRuleOutputWithContext(ctx context.
 // BucketReplicaRuleArrayInput is an input type that accepts BucketReplicaRuleArray and BucketReplicaRuleArrayOutput values.
 // You can construct a concrete instance of `BucketReplicaRuleArrayInput` via:
 //
-//	BucketReplicaRuleArray{ BucketReplicaRuleArgs{...} }
+//          BucketReplicaRuleArray{ BucketReplicaRuleArgs{...} }
 type BucketReplicaRuleArrayInput interface {
 	pulumi.Input
 
@@ -1236,6 +1710,7 @@ func (o BucketReplicaRuleArrayOutput) Index(i pulumi.IntInput) BucketReplicaRule
 }
 
 type BucketWebsite struct {
+	Endpoint *string `pulumi:"endpoint"`
 	// An absolute path to the document to return in case of a 4XX error.
 	ErrorDocument *string `pulumi:"errorDocument"`
 	// COS returns this index document when requests are made to the root domain or any of the subfolders.
@@ -1245,7 +1720,7 @@ type BucketWebsite struct {
 // BucketWebsiteInput is an input type that accepts BucketWebsiteArgs and BucketWebsiteOutput values.
 // You can construct a concrete instance of `BucketWebsiteInput` via:
 //
-//	BucketWebsiteArgs{...}
+//          BucketWebsiteArgs{...}
 type BucketWebsiteInput interface {
 	pulumi.Input
 
@@ -1254,6 +1729,7 @@ type BucketWebsiteInput interface {
 }
 
 type BucketWebsiteArgs struct {
+	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
 	// An absolute path to the document to return in case of a 4XX error.
 	ErrorDocument pulumi.StringPtrInput `pulumi:"errorDocument"`
 	// COS returns this index document when requests are made to the root domain or any of the subfolders.
@@ -1283,11 +1759,11 @@ func (i BucketWebsiteArgs) ToBucketWebsitePtrOutputWithContext(ctx context.Conte
 // BucketWebsitePtrInput is an input type that accepts BucketWebsiteArgs, BucketWebsitePtr and BucketWebsitePtrOutput values.
 // You can construct a concrete instance of `BucketWebsitePtrInput` via:
 //
-//	        BucketWebsiteArgs{...}
+//          BucketWebsiteArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type BucketWebsitePtrInput interface {
 	pulumi.Input
 
@@ -1337,6 +1813,10 @@ func (o BucketWebsiteOutput) ToBucketWebsitePtrOutputWithContext(ctx context.Con
 	}).(BucketWebsitePtrOutput)
 }
 
+func (o BucketWebsiteOutput) Endpoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketWebsite) *string { return v.Endpoint }).(pulumi.StringPtrOutput)
+}
+
 // An absolute path to the document to return in case of a 4XX error.
 func (o BucketWebsiteOutput) ErrorDocument() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v BucketWebsite) *string { return v.ErrorDocument }).(pulumi.StringPtrOutput)
@@ -1369,6 +1849,15 @@ func (o BucketWebsitePtrOutput) Elem() BucketWebsiteOutput {
 		var ret BucketWebsite
 		return ret
 	}).(BucketWebsiteOutput)
+}
+
+func (o BucketWebsitePtrOutput) Endpoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketWebsite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Endpoint
+	}).(pulumi.StringPtrOutput)
 }
 
 // An absolute path to the document to return in case of a 4XX error.
@@ -1417,7 +1906,7 @@ type GetBucketsBucketList struct {
 // GetBucketsBucketListInput is an input type that accepts GetBucketsBucketListArgs and GetBucketsBucketListOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListInput` via:
 //
-//	GetBucketsBucketListArgs{...}
+//          GetBucketsBucketListArgs{...}
 type GetBucketsBucketListInput interface {
 	pulumi.Input
 
@@ -1463,7 +1952,7 @@ func (i GetBucketsBucketListArgs) ToGetBucketsBucketListOutputWithContext(ctx co
 // GetBucketsBucketListArrayInput is an input type that accepts GetBucketsBucketListArray and GetBucketsBucketListArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListArrayInput` via:
 //
-//	GetBucketsBucketListArray{ GetBucketsBucketListArgs{...} }
+//          GetBucketsBucketListArray{ GetBucketsBucketListArgs{...} }
 type GetBucketsBucketListArrayInput interface {
 	pulumi.Input
 
@@ -1585,7 +2074,7 @@ type GetBucketsBucketListCorsRule struct {
 // GetBucketsBucketListCorsRuleInput is an input type that accepts GetBucketsBucketListCorsRuleArgs and GetBucketsBucketListCorsRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListCorsRuleInput` via:
 //
-//	GetBucketsBucketListCorsRuleArgs{...}
+//          GetBucketsBucketListCorsRuleArgs{...}
 type GetBucketsBucketListCorsRuleInput interface {
 	pulumi.Input
 
@@ -1621,7 +2110,7 @@ func (i GetBucketsBucketListCorsRuleArgs) ToGetBucketsBucketListCorsRuleOutputWi
 // GetBucketsBucketListCorsRuleArrayInput is an input type that accepts GetBucketsBucketListCorsRuleArray and GetBucketsBucketListCorsRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListCorsRuleArrayInput` via:
 //
-//	GetBucketsBucketListCorsRuleArray{ GetBucketsBucketListCorsRuleArgs{...} }
+//          GetBucketsBucketListCorsRuleArray{ GetBucketsBucketListCorsRuleArgs{...} }
 type GetBucketsBucketListCorsRuleArrayInput interface {
 	pulumi.Input
 
@@ -1718,7 +2207,7 @@ type GetBucketsBucketListLifecycleRule struct {
 // GetBucketsBucketListLifecycleRuleInput is an input type that accepts GetBucketsBucketListLifecycleRuleArgs and GetBucketsBucketListLifecycleRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleArgs{...}
+//          GetBucketsBucketListLifecycleRuleArgs{...}
 type GetBucketsBucketListLifecycleRuleInput interface {
 	pulumi.Input
 
@@ -1754,7 +2243,7 @@ func (i GetBucketsBucketListLifecycleRuleArgs) ToGetBucketsBucketListLifecycleRu
 // GetBucketsBucketListLifecycleRuleArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleArray and GetBucketsBucketListLifecycleRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleArrayInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleArray{ GetBucketsBucketListLifecycleRuleArgs{...} }
+//          GetBucketsBucketListLifecycleRuleArray{ GetBucketsBucketListLifecycleRuleArgs{...} }
 type GetBucketsBucketListLifecycleRuleArrayInput interface {
 	pulumi.Input
 
@@ -1853,7 +2342,7 @@ type GetBucketsBucketListLifecycleRuleExpiration struct {
 // GetBucketsBucketListLifecycleRuleExpirationInput is an input type that accepts GetBucketsBucketListLifecycleRuleExpirationArgs and GetBucketsBucketListLifecycleRuleExpirationOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleExpirationInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleExpirationArgs{...}
+//          GetBucketsBucketListLifecycleRuleExpirationArgs{...}
 type GetBucketsBucketListLifecycleRuleExpirationInput interface {
 	pulumi.Input
 
@@ -1883,7 +2372,7 @@ func (i GetBucketsBucketListLifecycleRuleExpirationArgs) ToGetBucketsBucketListL
 // GetBucketsBucketListLifecycleRuleExpirationArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleExpirationArray and GetBucketsBucketListLifecycleRuleExpirationArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleExpirationArrayInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleExpirationArray{ GetBucketsBucketListLifecycleRuleExpirationArgs{...} }
+//          GetBucketsBucketListLifecycleRuleExpirationArray{ GetBucketsBucketListLifecycleRuleExpirationArgs{...} }
 type GetBucketsBucketListLifecycleRuleExpirationArrayInput interface {
 	pulumi.Input
 
@@ -1957,7 +2446,7 @@ type GetBucketsBucketListLifecycleRuleNonCurrentExpiration struct {
 // GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs and GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...}
+//          GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...}
 type GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput interface {
 	pulumi.Input
 
@@ -1985,7 +2474,7 @@ func (i GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ToGetBucketsB
 // GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray and GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray{ GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...} }
+//          GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray{ GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...} }
 type GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput interface {
 	pulumi.Input
 
@@ -2056,7 +2545,7 @@ type GetBucketsBucketListLifecycleRuleNonCurrentTransition struct {
 // GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs and GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...}
+//          GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...}
 type GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput interface {
 	pulumi.Input
 
@@ -2086,7 +2575,7 @@ func (i GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ToGetBucketsB
 // GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray and GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray{ GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...} }
+//          GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray{ GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...} }
 type GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput interface {
 	pulumi.Input
 
@@ -2164,7 +2653,7 @@ type GetBucketsBucketListLifecycleRuleTransition struct {
 // GetBucketsBucketListLifecycleRuleTransitionInput is an input type that accepts GetBucketsBucketListLifecycleRuleTransitionArgs and GetBucketsBucketListLifecycleRuleTransitionOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleTransitionInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleTransitionArgs{...}
+//          GetBucketsBucketListLifecycleRuleTransitionArgs{...}
 type GetBucketsBucketListLifecycleRuleTransitionInput interface {
 	pulumi.Input
 
@@ -2196,7 +2685,7 @@ func (i GetBucketsBucketListLifecycleRuleTransitionArgs) ToGetBucketsBucketListL
 // GetBucketsBucketListLifecycleRuleTransitionArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleTransitionArray and GetBucketsBucketListLifecycleRuleTransitionArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleTransitionArrayInput` via:
 //
-//	GetBucketsBucketListLifecycleRuleTransitionArray{ GetBucketsBucketListLifecycleRuleTransitionArgs{...} }
+//          GetBucketsBucketListLifecycleRuleTransitionArray{ GetBucketsBucketListLifecycleRuleTransitionArgs{...} }
 type GetBucketsBucketListLifecycleRuleTransitionArrayInput interface {
 	pulumi.Input
 
@@ -2276,7 +2765,7 @@ type GetBucketsBucketListOriginDomainRule struct {
 // GetBucketsBucketListOriginDomainRuleInput is an input type that accepts GetBucketsBucketListOriginDomainRuleArgs and GetBucketsBucketListOriginDomainRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginDomainRuleInput` via:
 //
-//	GetBucketsBucketListOriginDomainRuleArgs{...}
+//          GetBucketsBucketListOriginDomainRuleArgs{...}
 type GetBucketsBucketListOriginDomainRuleInput interface {
 	pulumi.Input
 
@@ -2305,7 +2794,7 @@ func (i GetBucketsBucketListOriginDomainRuleArgs) ToGetBucketsBucketListOriginDo
 // GetBucketsBucketListOriginDomainRuleArrayInput is an input type that accepts GetBucketsBucketListOriginDomainRuleArray and GetBucketsBucketListOriginDomainRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginDomainRuleArrayInput` via:
 //
-//	GetBucketsBucketListOriginDomainRuleArray{ GetBucketsBucketListOriginDomainRuleArgs{...} }
+//          GetBucketsBucketListOriginDomainRuleArray{ GetBucketsBucketListOriginDomainRuleArgs{...} }
 type GetBucketsBucketListOriginDomainRuleArrayInput interface {
 	pulumi.Input
 
@@ -2388,7 +2877,7 @@ type GetBucketsBucketListOriginPullRule struct {
 // GetBucketsBucketListOriginPullRuleInput is an input type that accepts GetBucketsBucketListOriginPullRuleArgs and GetBucketsBucketListOriginPullRuleOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginPullRuleInput` via:
 //
-//	GetBucketsBucketListOriginPullRuleArgs{...}
+//          GetBucketsBucketListOriginPullRuleArgs{...}
 type GetBucketsBucketListOriginPullRuleInput interface {
 	pulumi.Input
 
@@ -2423,7 +2912,7 @@ func (i GetBucketsBucketListOriginPullRuleArgs) ToGetBucketsBucketListOriginPull
 // GetBucketsBucketListOriginPullRuleArrayInput is an input type that accepts GetBucketsBucketListOriginPullRuleArray and GetBucketsBucketListOriginPullRuleArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListOriginPullRuleArrayInput` via:
 //
-//	GetBucketsBucketListOriginPullRuleArray{ GetBucketsBucketListOriginPullRuleArgs{...} }
+//          GetBucketsBucketListOriginPullRuleArray{ GetBucketsBucketListOriginPullRuleArgs{...} }
 type GetBucketsBucketListOriginPullRuleArrayInput interface {
 	pulumi.Input
 
@@ -2525,7 +3014,7 @@ type GetBucketsBucketListWebsite struct {
 // GetBucketsBucketListWebsiteInput is an input type that accepts GetBucketsBucketListWebsiteArgs and GetBucketsBucketListWebsiteOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListWebsiteInput` via:
 //
-//	GetBucketsBucketListWebsiteArgs{...}
+//          GetBucketsBucketListWebsiteArgs{...}
 type GetBucketsBucketListWebsiteInput interface {
 	pulumi.Input
 
@@ -2555,7 +3044,7 @@ func (i GetBucketsBucketListWebsiteArgs) ToGetBucketsBucketListWebsiteOutputWith
 // GetBucketsBucketListWebsiteArrayInput is an input type that accepts GetBucketsBucketListWebsiteArray and GetBucketsBucketListWebsiteArrayOutput values.
 // You can construct a concrete instance of `GetBucketsBucketListWebsiteArrayInput` via:
 //
-//	GetBucketsBucketListWebsiteArray{ GetBucketsBucketListWebsiteArgs{...} }
+//          GetBucketsBucketListWebsiteArray{ GetBucketsBucketListWebsiteArgs{...} }
 type GetBucketsBucketListWebsiteArrayInput interface {
 	pulumi.Input
 
@@ -2624,6 +3113,12 @@ func (o GetBucketsBucketListWebsiteArrayOutput) Index(i pulumi.IntInput) GetBuck
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketCorsRuleInput)(nil)).Elem(), BucketCorsRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketCorsRuleArrayInput)(nil)).Elem(), BucketCorsRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificatePtrInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificatePtrInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleInput)(nil)).Elem(), BucketLifecycleRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleArrayInput)(nil)).Elem(), BucketLifecycleRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleExpirationInput)(nil)).Elem(), BucketLifecycleRuleExpirationArgs{})
@@ -2664,6 +3159,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListWebsiteArrayInput)(nil)).Elem(), GetBucketsBucketListWebsiteArray{})
 	pulumi.RegisterOutputType(BucketCorsRuleOutput{})
 	pulumi.RegisterOutputType(BucketCorsRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateOutput{})
+	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificatePtrOutput{})
+	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificateOutput{})
+	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput{})
+	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput{})
+	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleArrayOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleExpirationOutput{})

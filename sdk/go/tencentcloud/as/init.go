@@ -27,6 +27,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &LifecycleHook{}
 	case "tencentcloud:As/notification:Notification":
 		r = &Notification{}
+	case "tencentcloud:As/protectInstances:ProtectInstances":
+		r = &ProtectInstances{}
+	case "tencentcloud:As/removeInstances:RemoveInstances":
+		r = &RemoveInstances{}
 	case "tencentcloud:As/scalingConfig:ScalingConfig":
 		r = &ScalingConfig{}
 	case "tencentcloud:As/scalingGroup:ScalingGroup":
@@ -35,6 +39,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ScalingPolicy{}
 	case "tencentcloud:As/schedule:Schedule":
 		r = &Schedule{}
+	case "tencentcloud:As/startInstances:StartInstances":
+		r = &StartInstances{}
+	case "tencentcloud:As/stopInstances:StopInstances":
+		r = &StopInstances{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -65,6 +73,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"As/protectInstances",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/removeInstances",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"As/scalingConfig",
 		&module{version},
 	)
@@ -81,6 +99,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"As/schedule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/startInstances",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/stopInstances",
 		&module{version},
 	)
 }

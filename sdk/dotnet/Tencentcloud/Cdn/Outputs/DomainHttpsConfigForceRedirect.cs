@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
     public sealed class DomainHttpsConfigForceRedirect
     {
         /// <summary>
+        /// Whether to return the newly added header during force redirection. Values: `on`, `off`.
+        /// </summary>
+        public readonly string? CarryHeaders;
+        /// <summary>
         /// Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
         /// </summary>
         public readonly int? RedirectStatusCode;
@@ -29,12 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
 
         [OutputConstructor]
         private DomainHttpsConfigForceRedirect(
+            string? carryHeaders,
+
             int? redirectStatusCode,
 
             string? redirectType,
 
             string? @switch)
         {
+            CarryHeaders = carryHeaders;
             RedirectStatusCode = redirectStatusCode;
             RedirectType = redirectType;
             Switch = @switch;

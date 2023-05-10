@@ -25,8 +25,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AccessGroup{}
 	case "tencentcloud:Cfs/accessRule:AccessRule":
 		r = &AccessRule{}
+	case "tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy":
+		r = &AutoSnapshotPolicy{}
+	case "tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment":
+		r = &AutoSnapshotPolicyAttachment{}
 	case "tencentcloud:Cfs/fileSystem:FileSystem":
 		r = &FileSystem{}
+	case "tencentcloud:Cfs/signUpCfsService:SignUpCfsService":
+		r = &SignUpCfsService{}
+	case "tencentcloud:Cfs/snapshot:Snapshot":
+		r = &Snapshot{}
+	case "tencentcloud:Cfs/userQuota:UserQuota":
+		r = &UserQuota{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -52,7 +62,32 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cfs/autoSnapshotPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfs/autoSnapshotPolicyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cfs/fileSystem",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfs/signUpCfsService",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfs/snapshot",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfs/userQuota",
 		&module{version},
 	)
 }

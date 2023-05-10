@@ -12,6 +12,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 {
     /// <summary>
     /// Provides a resource to create a tmp tke template
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var template = new Tencentcloud.Monitor.TmpTkeTemplate("template", new Tencentcloud.Monitor.TmpTkeTemplateArgs
+    ///         {
+    ///             Template = new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateArgs
+    ///             {
+    ///                 Describe = "template",
+    ///                 Level = "cluster",
+    ///                 Name = "test",
+    ///                 ServiceMonitors = 
+    ///                 {
+    ///                     new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateServiceMonitorArgs
+    ///                     {
+    ///                         Config = "xxxxx",
+    ///                         Name = "test",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpTkeTemplate:TmpTkeTemplate")]
     public partial class TmpTkeTemplate : Pulumi.CustomResource

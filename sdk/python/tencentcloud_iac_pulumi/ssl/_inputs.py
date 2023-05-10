@@ -9,8 +9,120 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'FreeCertificateDvAuthArgs',
+    'PayCertificateDvAuthArgs',
     'PayCertificateInformationArgs',
 ]
+
+@pulumi.input_type
+class FreeCertificateDvAuthArgs:
+    def __init__(__self__, *,
+                 dv_auth_key: Optional[pulumi.Input[str]] = None,
+                 dv_auth_value: Optional[pulumi.Input[str]] = None,
+                 dv_auth_verify_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] dv_auth_key: DV authentication key.
+        :param pulumi.Input[str] dv_auth_value: DV authentication value.
+        :param pulumi.Input[str] dv_auth_verify_type: DV authentication type.
+        """
+        if dv_auth_key is not None:
+            pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        if dv_auth_value is not None:
+            pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        if dv_auth_verify_type is not None:
+            pulumi.set(__self__, "dv_auth_verify_type", dv_auth_verify_type)
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        DV authentication key.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @dv_auth_key.setter
+    def dv_auth_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dv_auth_key", value)
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        DV authentication value.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @dv_auth_value.setter
+    def dv_auth_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dv_auth_value", value)
+
+    @property
+    @pulumi.getter(name="dvAuthVerifyType")
+    def dv_auth_verify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        DV authentication type.
+        """
+        return pulumi.get(self, "dv_auth_verify_type")
+
+    @dv_auth_verify_type.setter
+    def dv_auth_verify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dv_auth_verify_type", value)
+
+
+@pulumi.input_type
+class PayCertificateDvAuthArgs:
+    def __init__(__self__, *,
+                 dv_auth_key: Optional[pulumi.Input[str]] = None,
+                 dv_auth_value: Optional[pulumi.Input[str]] = None,
+                 dv_auth_verify_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] dv_auth_key: DV authentication key.
+        :param pulumi.Input[str] dv_auth_value: DV authentication value.
+        :param pulumi.Input[str] dv_auth_verify_type: DV authentication type.
+        """
+        if dv_auth_key is not None:
+            pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        if dv_auth_value is not None:
+            pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        if dv_auth_verify_type is not None:
+            pulumi.set(__self__, "dv_auth_verify_type", dv_auth_verify_type)
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        DV authentication key.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @dv_auth_key.setter
+    def dv_auth_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dv_auth_key", value)
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        DV authentication value.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @dv_auth_value.setter
+    def dv_auth_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dv_auth_value", value)
+
+    @property
+    @pulumi.getter(name="dvAuthVerifyType")
+    def dv_auth_verify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        DV authentication type.
+        """
+        return pulumi.get(self, "dv_auth_verify_type")
+
+    @dv_auth_verify_type.setter
+    def dv_auth_verify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dv_auth_verify_type", value)
+
 
 @pulumi.input_type
 class PayCertificateInformationArgs:

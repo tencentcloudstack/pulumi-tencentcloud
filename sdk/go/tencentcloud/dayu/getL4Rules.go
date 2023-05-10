@@ -18,35 +18,32 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Dayu.GetL4Rules(ctx, &dayu.GetL4RulesArgs{
-//				ResourceType: tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
-//				ResourceId:   tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
-//				Name:         pulumi.StringRef(tencentcloud_dayu_l4_rule.Test_rule.Name),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Dayu.GetL4Rules(ctx, &dayu.GetL4RulesArgs{
-//				ResourceType: tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
-//				ResourceId:   tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
-//				RuleId:       pulumi.StringRef(tencentcloud_dayu_l4_rule.Test_rule.Rule_id),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.GetL4Rules(ctx, &dayu.GetL4RulesArgs{
+// 			ResourceType: tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
+// 			ResourceId:   tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
+// 			Name:         pulumi.StringRef(tencentcloud_dayu_l4_rule.Test_rule.Name),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Dayu.GetL4Rules(ctx, &dayu.GetL4RulesArgs{
+// 			ResourceType: tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
+// 			ResourceId:   tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
+// 			RuleId:       pulumi.StringRef(tencentcloud_dayu_l4_rule.Test_rule.Rule_id),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetL4Rules(ctx *pulumi.Context, args *GetL4RulesArgs, opts ...pulumi.InvokeOption) (*GetL4RulesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

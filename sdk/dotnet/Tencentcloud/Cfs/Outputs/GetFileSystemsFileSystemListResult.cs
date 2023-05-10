@@ -31,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs.Outputs
         /// </summary>
         public readonly string FileSystemId;
         /// <summary>
+        /// Mount root-directory.
+        /// </summary>
+        public readonly string FsId;
+        /// <summary>
         /// IP of the file system.
         /// </summary>
         public readonly string MountIp;
@@ -69,6 +73,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs.Outputs
 
             string fileSystemId,
 
+            string fsId,
+
             string mountIp,
 
             string name,
@@ -87,6 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs.Outputs
             AvailabilityZone = availabilityZone;
             CreateTime = createTime;
             FileSystemId = fileSystemId;
+            FsId = fsId;
             MountIp = mountIp;
             Name = name;
             Protocol = protocol;

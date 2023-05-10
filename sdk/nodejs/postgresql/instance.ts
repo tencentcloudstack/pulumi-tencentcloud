@@ -164,6 +164,14 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
+     * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+     */
+    public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
+    /**
+     * Whether to use voucher, `1` for enabled.
+     */
+    public readonly autoVoucher!: pulumi.Output<number | undefined>;
+    /**
      * Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
      */
     public readonly availabilityZone!: pulumi.Output<string>;
@@ -172,7 +180,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly backupPlan!: pulumi.Output<outputs.Postgresql.InstanceBackupPlan | undefined>;
     /**
-     * Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
@@ -234,6 +242,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly needSupportTde!: pulumi.Output<number>;
     /**
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     */
+    public readonly period!: pulumi.Output<number | undefined>;
+    /**
      * IP for private access.
      */
     public /*out*/ readonly privateAccessIp!: pulumi.Output<string>;
@@ -286,6 +298,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly uid!: pulumi.Output<number>;
     /**
+     * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+     */
+    public readonly voucherIds!: pulumi.Output<string[] | undefined>;
+    /**
      * ID of VPC.
      */
     public readonly vpcId!: pulumi.Output<string | undefined>;
@@ -303,6 +319,8 @@ export class Instance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
+            resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
+            resourceInputs["autoVoucher"] = state ? state.autoVoucher : undefined;
             resourceInputs["availabilityZone"] = state ? state.availabilityZone : undefined;
             resourceInputs["backupPlan"] = state ? state.backupPlan : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
@@ -320,6 +338,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["memory"] = state ? state.memory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["needSupportTde"] = state ? state.needSupportTde : undefined;
+            resourceInputs["period"] = state ? state.period : undefined;
             resourceInputs["privateAccessIp"] = state ? state.privateAccessIp : undefined;
             resourceInputs["privateAccessPort"] = state ? state.privateAccessPort : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
@@ -333,6 +352,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["uid"] = state ? state.uid : undefined;
+            resourceInputs["voucherIds"] = state ? state.voucherIds : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
@@ -348,6 +368,8 @@ export class Instance extends pulumi.CustomResource {
             if ((!args || args.storage === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'storage'");
             }
+            resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
+            resourceInputs["autoVoucher"] = args ? args.autoVoucher : undefined;
             resourceInputs["availabilityZone"] = args ? args.availabilityZone : undefined;
             resourceInputs["backupPlan"] = args ? args.backupPlan : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
@@ -364,6 +386,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["memory"] = args ? args.memory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["needSupportTde"] = args ? args.needSupportTde : undefined;
+            resourceInputs["period"] = args ? args.period : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["publicAccessSwitch"] = args ? args.publicAccessSwitch : undefined;
             resourceInputs["rootPassword"] = args ? args.rootPassword : undefined;
@@ -372,6 +395,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["storage"] = args ? args.storage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["voucherIds"] = args ? args.voucherIds : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["privateAccessIp"] = undefined /*out*/;
@@ -390,6 +414,14 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
+     * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+     */
+    autoRenewFlag?: pulumi.Input<number>;
+    /**
+     * Whether to use voucher, `1` for enabled.
+     */
+    autoVoucher?: pulumi.Input<number>;
+    /**
      * Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
      */
     availabilityZone?: pulumi.Input<string>;
@@ -398,7 +430,7 @@ export interface InstanceState {
      */
     backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan>;
     /**
-     * Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -460,6 +492,10 @@ export interface InstanceState {
      */
     needSupportTde?: pulumi.Input<number>;
     /**
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     */
+    period?: pulumi.Input<number>;
+    /**
      * IP for private access.
      */
     privateAccessIp?: pulumi.Input<string>;
@@ -512,6 +548,10 @@ export interface InstanceState {
      */
     uid?: pulumi.Input<number>;
     /**
+     * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+     */
+    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * ID of VPC.
      */
     vpcId?: pulumi.Input<string>;
@@ -522,6 +562,14 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
+     * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
+     */
+    autoRenewFlag?: pulumi.Input<number>;
+    /**
+     * Whether to use voucher, `1` for enabled.
+     */
+    autoVoucher?: pulumi.Input<number>;
+    /**
      * Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
      */
     availabilityZone: pulumi.Input<string>;
@@ -530,7 +578,7 @@ export interface InstanceArgs {
      */
     backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan>;
     /**
-     * Pay type of the postgresql instance. For now, only `POSTPAID_BY_HOUR` is valid.
+     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -588,6 +636,10 @@ export interface InstanceArgs {
      */
     needSupportTde?: pulumi.Input<number>;
     /**
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     */
+    period?: pulumi.Input<number>;
+    /**
      * Project id, default value is `0`.
      */
     projectId?: pulumi.Input<number>;
@@ -619,6 +671,10 @@ export interface InstanceArgs {
      * The available tags within this postgresql.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
+     */
+    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * ID of VPC.
      */

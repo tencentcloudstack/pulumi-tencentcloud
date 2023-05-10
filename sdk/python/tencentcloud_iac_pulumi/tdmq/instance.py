@@ -15,18 +15,22 @@ class InstanceArgs:
     def __init__(__self__, *,
                  cluster_name: pulumi.Input[str],
                  bind_cluster_id: Optional[pulumi.Input[int]] = None,
-                 remark: Optional[pulumi.Input[str]] = None):
+                 remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] cluster_name: The name of tdmq cluster to be created.
         :param pulumi.Input[int] bind_cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] remark: Description of the tdmq cluster.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "cluster_name", cluster_name)
         if bind_cluster_id is not None:
             pulumi.set(__self__, "bind_cluster_id", bind_cluster_id)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="clusterName")
@@ -64,18 +68,32 @@ class InstanceArgs:
     def remark(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remark", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _InstanceState:
     def __init__(__self__, *,
                  bind_cluster_id: Optional[pulumi.Input[int]] = None,
                  cluster_name: Optional[pulumi.Input[str]] = None,
-                 remark: Optional[pulumi.Input[str]] = None):
+                 remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[int] bind_cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] cluster_name: The name of tdmq cluster to be created.
         :param pulumi.Input[str] remark: Description of the tdmq cluster.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         if bind_cluster_id is not None:
             pulumi.set(__self__, "bind_cluster_id", bind_cluster_id)
@@ -83,6 +101,8 @@ class _InstanceState:
             pulumi.set(__self__, "cluster_name", cluster_name)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="bindClusterId")
@@ -120,6 +140,18 @@ class _InstanceState:
     def remark(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remark", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 class Instance(pulumi.CustomResource):
     @overload
@@ -129,6 +161,7 @@ class Instance(pulumi.CustomResource):
                  bind_cluster_id: Optional[pulumi.Input[int]] = None,
                  cluster_name: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provide a resource to create a TDMQ instance.
@@ -141,7 +174,10 @@ class Instance(pulumi.CustomResource):
 
         foo = tencentcloud.tdmq.Instance("foo",
             cluster_name="example",
-            remark="this is description.")
+            remark="this is description.",
+            tags={
+                "createdBy": "terraform",
+            })
         ```
 
         ## Import
@@ -157,6 +193,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] bind_cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] cluster_name: The name of tdmq cluster to be created.
         :param pulumi.Input[str] remark: Description of the tdmq cluster.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         ...
     @overload
@@ -175,7 +212,10 @@ class Instance(pulumi.CustomResource):
 
         foo = tencentcloud.tdmq.Instance("foo",
             cluster_name="example",
-            remark="this is description.")
+            remark="this is description.",
+            tags={
+                "createdBy": "terraform",
+            })
         ```
 
         ## Import
@@ -204,6 +244,7 @@ class Instance(pulumi.CustomResource):
                  bind_cluster_id: Optional[pulumi.Input[int]] = None,
                  cluster_name: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -223,6 +264,7 @@ class Instance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'cluster_name'")
             __props__.__dict__["cluster_name"] = cluster_name
             __props__.__dict__["remark"] = remark
+            __props__.__dict__["tags"] = tags
         super(Instance, __self__).__init__(
             'tencentcloud:Tdmq/instance:Instance',
             resource_name,
@@ -235,7 +277,8 @@ class Instance(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             bind_cluster_id: Optional[pulumi.Input[int]] = None,
             cluster_name: Optional[pulumi.Input[str]] = None,
-            remark: Optional[pulumi.Input[str]] = None) -> 'Instance':
+            remark: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Instance':
         """
         Get an existing Instance resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -246,6 +289,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] bind_cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] cluster_name: The name of tdmq cluster to be created.
         :param pulumi.Input[str] remark: Description of the tdmq cluster.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -254,6 +298,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["bind_cluster_id"] = bind_cluster_id
         __props__.__dict__["cluster_name"] = cluster_name
         __props__.__dict__["remark"] = remark
+        __props__.__dict__["tags"] = tags
         return Instance(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -279,4 +324,12 @@ class Instance(pulumi.CustomResource):
         Description of the tdmq cluster.
         """
         return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
 

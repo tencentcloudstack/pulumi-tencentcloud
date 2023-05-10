@@ -102,9 +102,9 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly ipWhiteLists!: pulumi.Output<string[] | undefined>;
     /**
-     * Max message bytes.
+     * Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
      */
-    public readonly maxMessageBytes!: pulumi.Output<number | undefined>;
+    public readonly maxMessageBytes!: pulumi.Output<number>;
     /**
      * Message storage location.
      */
@@ -254,7 +254,7 @@ export interface TopicState {
      */
     ipWhiteLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Max message bytes.
+     * Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
      */
     maxMessageBytes?: pulumi.Input<number>;
     /**
@@ -320,7 +320,7 @@ export interface TopicArgs {
      */
     ipWhiteLists?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Max message bytes.
+     * Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
      */
     maxMessageBytes?: pulumi.Input<number>;
     /**

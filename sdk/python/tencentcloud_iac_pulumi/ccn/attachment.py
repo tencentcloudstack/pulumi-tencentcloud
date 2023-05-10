@@ -17,7 +17,8 @@ class AttachmentArgs:
                  instance_id: pulumi.Input[str],
                  instance_region: pulumi.Input[str],
                  instance_type: pulumi.Input[str],
-                 ccn_uin: Optional[pulumi.Input[str]] = None):
+                 ccn_uin: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Attachment resource.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
@@ -25,6 +26,7 @@ class AttachmentArgs:
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        :param pulumi.Input[str] description: Remark of attachment.
         """
         pulumi.set(__self__, "ccn_id", ccn_id)
         pulumi.set(__self__, "instance_id", instance_id)
@@ -32,6 +34,8 @@ class AttachmentArgs:
         pulumi.set(__self__, "instance_type", instance_type)
         if ccn_uin is not None:
             pulumi.set(__self__, "ccn_uin", ccn_uin)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
 
     @property
     @pulumi.getter(name="ccnId")
@@ -93,6 +97,18 @@ class AttachmentArgs:
     def ccn_uin(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "ccn_uin", value)
 
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Remark of attachment.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
 
 @pulumi.input_type
 class _AttachmentState:
@@ -101,6 +117,7 @@ class _AttachmentState:
                  ccn_id: Optional[pulumi.Input[str]] = None,
                  ccn_uin: Optional[pulumi.Input[str]] = None,
                  cidr_blocks: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  instance_region: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
@@ -111,6 +128,7 @@ class _AttachmentState:
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] cidr_blocks: A network address block of the instance that is attached.
+        :param pulumi.Input[str] description: Remark of attachment.
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
@@ -124,6 +142,8 @@ class _AttachmentState:
             pulumi.set(__self__, "ccn_uin", ccn_uin)
         if cidr_blocks is not None:
             pulumi.set(__self__, "cidr_blocks", cidr_blocks)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
         if instance_region is not None:
@@ -182,6 +202,18 @@ class _AttachmentState:
         pulumi.set(self, "cidr_blocks", value)
 
     @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Remark of attachment.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -237,6 +269,7 @@ class Attachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  ccn_id: Optional[pulumi.Input[str]] = None,
                  ccn_uin: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  instance_region: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
@@ -287,6 +320,7 @@ class Attachment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        :param pulumi.Input[str] description: Remark of attachment.
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
@@ -356,6 +390,7 @@ class Attachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  ccn_id: Optional[pulumi.Input[str]] = None,
                  ccn_uin: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  instance_region: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
@@ -377,6 +412,7 @@ class Attachment(pulumi.CustomResource):
                 raise TypeError("Missing required property 'ccn_id'")
             __props__.__dict__["ccn_id"] = ccn_id
             __props__.__dict__["ccn_uin"] = ccn_uin
+            __props__.__dict__["description"] = description
             if instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_id'")
             __props__.__dict__["instance_id"] = instance_id
@@ -403,6 +439,7 @@ class Attachment(pulumi.CustomResource):
             ccn_id: Optional[pulumi.Input[str]] = None,
             ccn_uin: Optional[pulumi.Input[str]] = None,
             cidr_blocks: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            description: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
             instance_region: Optional[pulumi.Input[str]] = None,
             instance_type: Optional[pulumi.Input[str]] = None,
@@ -418,6 +455,7 @@ class Attachment(pulumi.CustomResource):
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] cidr_blocks: A network address block of the instance that is attached.
+        :param pulumi.Input[str] description: Remark of attachment.
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
@@ -431,6 +469,7 @@ class Attachment(pulumi.CustomResource):
         __props__.__dict__["ccn_id"] = ccn_id
         __props__.__dict__["ccn_uin"] = ccn_uin
         __props__.__dict__["cidr_blocks"] = cidr_blocks
+        __props__.__dict__["description"] = description
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["instance_region"] = instance_region
         __props__.__dict__["instance_type"] = instance_type
@@ -468,6 +507,14 @@ class Attachment(pulumi.CustomResource):
         A network address block of the instance that is attached.
         """
         return pulumi.get(self, "cidr_blocks")
+
+    @property
+    @pulumi.getter
+    def description(self) -> pulumi.Output[Optional[str]]:
+        """
+        Remark of attachment.
+        """
+        return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="instanceId")

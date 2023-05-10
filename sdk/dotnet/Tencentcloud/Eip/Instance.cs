@@ -25,6 +25,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     ///     {
     ///         var foo = new Tencentcloud.Eip.Instance("foo", new Tencentcloud.Eip.InstanceArgs
     ///         {
+    ///             BandwidthPackageId = "bwp-jtvzuky6",
+    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///             Type = "EIP",
     ///         });
     ///     }
     /// 
@@ -55,16 +58,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Output<bool?> ApplicableForClb { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        /// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        /// </summary>
+        [Output("autoRenewFlag")]
+        public Output<int?> AutoRenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        /// </summary>
+        [Output("bandwidthPackageId")]
+        public Output<string> BandwidthPackageId { get; private set; } = null!;
+
+        /// <summary>
+        /// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         /// </summary>
         [Output("internetChargeType")]
-        public Output<string?> InternetChargeType { get; private set; } = null!;
+        public Output<string> InternetChargeType { get; private set; } = null!;
 
         /// <summary>
         /// The bandwidth limit of EIP, unit is Mbps.
         /// </summary>
         [Output("internetMaxBandwidthOut")]
-        public Output<int?> InternetMaxBandwidthOut { get; private set; } = null!;
+        public Output<int> InternetMaxBandwidthOut { get; private set; } = null!;
 
         /// <summary>
         /// Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
@@ -77,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
+        /// </summary>
+        [Output("prepaidPeriod")]
+        public Output<int?> PrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
         /// The elastic IP address.
@@ -162,7 +183,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Input<bool>? ApplicableForClb { get; set; }
 
         /// <summary>
-        /// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        /// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        /// </summary>
+        [Input("autoRenewFlag")]
+        public Input<int>? AutoRenewFlag { get; set; }
+
+        /// <summary>
+        /// ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        /// </summary>
+        [Input("bandwidthPackageId")]
+        public Input<string>? BandwidthPackageId { get; set; }
+
+        /// <summary>
+        /// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -184,6 +217,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
+        /// </summary>
+        [Input("prepaidPeriod")]
+        public Input<int>? PrepaidPeriod { get; set; }
 
         [Input("tags")]
         private InputMap<object>? _tags;
@@ -223,7 +262,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Input<bool>? ApplicableForClb { get; set; }
 
         /// <summary>
-        /// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+        /// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+        /// </summary>
+        [Input("autoRenewFlag")]
+        public Input<int>? AutoRenewFlag { get; set; }
+
+        /// <summary>
+        /// ID of bandwidth package, it will set when `internet_charge_type` is `BANDWIDTH_PACKAGE`.
+        /// </summary>
+        [Input("bandwidthPackageId")]
+        public Input<string>? BandwidthPackageId { get; set; }
+
+        /// <summary>
+        /// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -245,6 +296,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
+        /// </summary>
+        [Input("prepaidPeriod")]
+        public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
         /// The elastic IP address.

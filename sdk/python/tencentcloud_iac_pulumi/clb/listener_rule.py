@@ -28,6 +28,8 @@ class ListenerRuleArgs:
                  health_check_http_path: Optional[pulumi.Input[str]] = None,
                  health_check_interval_time: Optional[pulumi.Input[int]] = None,
                  health_check_switch: Optional[pulumi.Input[bool]] = None,
+                 health_check_time_out: Optional[pulumi.Input[int]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
@@ -50,6 +52,8 @@ class ListenerRuleArgs:
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
+        :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
+        :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -82,6 +86,10 @@ class ListenerRuleArgs:
             pulumi.set(__self__, "health_check_interval_time", health_check_interval_time)
         if health_check_switch is not None:
             pulumi.set(__self__, "health_check_switch", health_check_switch)
+        if health_check_time_out is not None:
+            pulumi.set(__self__, "health_check_time_out", health_check_time_out)
+        if health_check_type is not None:
+            pulumi.set(__self__, "health_check_type", health_check_type)
         if health_check_unhealth_num is not None:
             pulumi.set(__self__, "health_check_unhealth_num", health_check_unhealth_num)
         if http2_switch is not None:
@@ -274,6 +282,30 @@ class ListenerRuleArgs:
         pulumi.set(self, "health_check_switch", value)
 
     @property
+    @pulumi.getter(name="healthCheckTimeOut")
+    def health_check_time_out(self) -> Optional[pulumi.Input[int]]:
+        """
+        Time out of health check. The value range is 2-60.
+        """
+        return pulumi.get(self, "health_check_time_out")
+
+    @health_check_time_out.setter
+    def health_check_time_out(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "health_check_time_out", value)
+
+    @property
+    @pulumi.getter(name="healthCheckType")
+    def health_check_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        """
+        return pulumi.get(self, "health_check_type")
+
+    @health_check_type.setter
+    def health_check_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "health_check_type", value)
+
+    @property
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> Optional[pulumi.Input[int]]:
         """
@@ -350,6 +382,8 @@ class _ListenerRuleState:
                  health_check_http_path: Optional[pulumi.Input[str]] = None,
                  health_check_interval_time: Optional[pulumi.Input[int]] = None,
                  health_check_switch: Optional[pulumi.Input[bool]] = None,
+                 health_check_time_out: Optional[pulumi.Input[int]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
@@ -373,6 +407,8 @@ class _ListenerRuleState:
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
+        :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
+        :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
         :param pulumi.Input[str] listener_id: ID of CLB listener.
@@ -408,6 +444,10 @@ class _ListenerRuleState:
             pulumi.set(__self__, "health_check_interval_time", health_check_interval_time)
         if health_check_switch is not None:
             pulumi.set(__self__, "health_check_switch", health_check_switch)
+        if health_check_time_out is not None:
+            pulumi.set(__self__, "health_check_time_out", health_check_time_out)
+        if health_check_type is not None:
+            pulumi.set(__self__, "health_check_type", health_check_type)
         if health_check_unhealth_num is not None:
             pulumi.set(__self__, "health_check_unhealth_num", health_check_unhealth_num)
         if http2_switch is not None:
@@ -582,6 +622,30 @@ class _ListenerRuleState:
         pulumi.set(self, "health_check_switch", value)
 
     @property
+    @pulumi.getter(name="healthCheckTimeOut")
+    def health_check_time_out(self) -> Optional[pulumi.Input[int]]:
+        """
+        Time out of health check. The value range is 2-60.
+        """
+        return pulumi.get(self, "health_check_time_out")
+
+    @health_check_time_out.setter
+    def health_check_time_out(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "health_check_time_out", value)
+
+    @property
+    @pulumi.getter(name="healthCheckType")
+    def health_check_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        """
+        return pulumi.get(self, "health_check_type")
+
+    @health_check_type.setter
+    def health_check_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "health_check_type", value)
+
+    @property
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> Optional[pulumi.Input[int]]:
         """
@@ -696,6 +760,8 @@ class ListenerRule(pulumi.CustomResource):
                  health_check_http_path: Optional[pulumi.Input[str]] = None,
                  health_check_interval_time: Optional[pulumi.Input[int]] = None,
                  health_check_switch: Optional[pulumi.Input[bool]] = None,
+                 health_check_time_out: Optional[pulumi.Input[int]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
@@ -758,6 +824,8 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
+        :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
+        :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
         :param pulumi.Input[str] listener_id: ID of CLB listener.
@@ -839,6 +907,8 @@ class ListenerRule(pulumi.CustomResource):
                  health_check_http_path: Optional[pulumi.Input[str]] = None,
                  health_check_interval_time: Optional[pulumi.Input[int]] = None,
                  health_check_switch: Optional[pulumi.Input[bool]] = None,
+                 health_check_time_out: Optional[pulumi.Input[int]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
@@ -877,6 +947,8 @@ class ListenerRule(pulumi.CustomResource):
             __props__.__dict__["health_check_http_path"] = health_check_http_path
             __props__.__dict__["health_check_interval_time"] = health_check_interval_time
             __props__.__dict__["health_check_switch"] = health_check_switch
+            __props__.__dict__["health_check_time_out"] = health_check_time_out
+            __props__.__dict__["health_check_type"] = health_check_type
             __props__.__dict__["health_check_unhealth_num"] = health_check_unhealth_num
             __props__.__dict__["http2_switch"] = http2_switch
             if listener_id is None and not opts.urn:
@@ -912,6 +984,8 @@ class ListenerRule(pulumi.CustomResource):
             health_check_http_path: Optional[pulumi.Input[str]] = None,
             health_check_interval_time: Optional[pulumi.Input[int]] = None,
             health_check_switch: Optional[pulumi.Input[bool]] = None,
+            health_check_time_out: Optional[pulumi.Input[int]] = None,
+            health_check_type: Optional[pulumi.Input[str]] = None,
             health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
             http2_switch: Optional[pulumi.Input[bool]] = None,
             listener_id: Optional[pulumi.Input[str]] = None,
@@ -940,6 +1014,8 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
+        :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
+        :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
         :param pulumi.Input[str] listener_id: ID of CLB listener.
@@ -966,6 +1042,8 @@ class ListenerRule(pulumi.CustomResource):
         __props__.__dict__["health_check_http_path"] = health_check_http_path
         __props__.__dict__["health_check_interval_time"] = health_check_interval_time
         __props__.__dict__["health_check_switch"] = health_check_switch
+        __props__.__dict__["health_check_time_out"] = health_check_time_out
+        __props__.__dict__["health_check_type"] = health_check_type
         __props__.__dict__["health_check_unhealth_num"] = health_check_unhealth_num
         __props__.__dict__["http2_switch"] = http2_switch
         __props__.__dict__["listener_id"] = listener_id
@@ -1079,6 +1157,22 @@ class ListenerRule(pulumi.CustomResource):
         Indicates whether health check is enabled.
         """
         return pulumi.get(self, "health_check_switch")
+
+    @property
+    @pulumi.getter(name="healthCheckTimeOut")
+    def health_check_time_out(self) -> pulumi.Output[int]:
+        """
+        Time out of health check. The value range is 2-60.
+        """
+        return pulumi.get(self, "health_check_time_out")
+
+    @property
+    @pulumi.getter(name="healthCheckType")
+    def health_check_type(self) -> pulumi.Output[str]:
+        """
+        Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        """
+        return pulumi.get(self, "health_check_type")
 
     @property
     @pulumi.getter(name="healthCheckUnhealthNum")

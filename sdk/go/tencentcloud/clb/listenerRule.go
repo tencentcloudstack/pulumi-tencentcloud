@@ -21,40 +21,37 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Clb.NewListenerRule(ctx, "foo", &Clb.ListenerRuleArgs{
-//				CertificateCaId:         pulumi.String("VfqO4zkB"),
-//				CertificateId:           pulumi.String("VjANRdz8"),
-//				CertificateSslMode:      pulumi.String("MUTUAL"),
-//				ClbId:                   pulumi.String("lb-k2zjp9lv"),
-//				Domain:                  pulumi.String("foo.net"),
-//				HealthCheckHealthNum:    pulumi.Int(3),
-//				HealthCheckHttpCode:     pulumi.Int(2),
-//				HealthCheckHttpDomain:   pulumi.String("Default Domain"),
-//				HealthCheckHttpMethod:   pulumi.String("GET"),
-//				HealthCheckHttpPath:     pulumi.String("Default Path"),
-//				HealthCheckIntervalTime: pulumi.Int(5),
-//				HealthCheckSwitch:       pulumi.Bool(true),
-//				HealthCheckUnhealthNum:  pulumi.Int(3),
-//				ListenerId:              pulumi.String("lbl-hh141sn9"),
-//				Scheduler:               pulumi.String("WRR"),
-//				SessionExpireTime:       pulumi.Int(30),
-//				Url:                     pulumi.String("/bar"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListenerRule(ctx, "foo", &Clb.ListenerRuleArgs{
+// 			CertificateCaId:         pulumi.String("VfqO4zkB"),
+// 			CertificateId:           pulumi.String("VjANRdz8"),
+// 			CertificateSslMode:      pulumi.String("MUTUAL"),
+// 			ClbId:                   pulumi.String("lb-k2zjp9lv"),
+// 			Domain:                  pulumi.String("foo.net"),
+// 			HealthCheckHealthNum:    pulumi.Int(3),
+// 			HealthCheckHttpCode:     pulumi.Int(2),
+// 			HealthCheckHttpDomain:   pulumi.String("Default Domain"),
+// 			HealthCheckHttpMethod:   pulumi.String("GET"),
+// 			HealthCheckHttpPath:     pulumi.String("Default Path"),
+// 			HealthCheckIntervalTime: pulumi.Int(5),
+// 			HealthCheckSwitch:       pulumi.Bool(true),
+// 			HealthCheckUnhealthNum:  pulumi.Int(3),
+// 			ListenerId:              pulumi.String("lbl-hh141sn9"),
+// 			Scheduler:               pulumi.String("WRR"),
+// 			SessionExpireTime:       pulumi.Int(30),
+// 			Url:                     pulumi.String("/bar"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -62,9 +59,7 @@ import (
 // CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
-//
+//  $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
 // ```
 type ListenerRule struct {
 	pulumi.CustomResourceState
@@ -95,6 +90,10 @@ type ListenerRule struct {
 	HealthCheckIntervalTime pulumi.IntOutput `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolOutput `pulumi:"healthCheckSwitch"`
+	// Time out of health check. The value range is 2-60.
+	HealthCheckTimeOut pulumi.IntOutput `pulumi:"healthCheckTimeOut"`
+	// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+	HealthCheckType pulumi.StringOutput `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntOutput `pulumi:"healthCheckUnhealthNum"`
 	// Indicate to apply HTTP2.0 protocol or not.
@@ -181,6 +180,10 @@ type listenerRuleState struct {
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
+	// Time out of health check. The value range is 2-60.
+	HealthCheckTimeOut *int `pulumi:"healthCheckTimeOut"`
+	// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+	HealthCheckType *string `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
 	// Indicate to apply HTTP2.0 protocol or not.
@@ -226,6 +229,10 @@ type ListenerRuleState struct {
 	HealthCheckIntervalTime pulumi.IntPtrInput
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolPtrInput
+	// Time out of health check. The value range is 2-60.
+	HealthCheckTimeOut pulumi.IntPtrInput
+	// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+	HealthCheckType pulumi.StringPtrInput
 	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
 	// Indicate to apply HTTP2.0 protocol or not.
@@ -275,6 +282,10 @@ type listenerRuleArgs struct {
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
+	// Time out of health check. The value range is 2-60.
+	HealthCheckTimeOut *int `pulumi:"healthCheckTimeOut"`
+	// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+	HealthCheckType *string `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
 	// Indicate to apply HTTP2.0 protocol or not.
@@ -319,6 +330,10 @@ type ListenerRuleArgs struct {
 	HealthCheckIntervalTime pulumi.IntPtrInput
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolPtrInput
+	// Time out of health check. The value range is 2-60.
+	HealthCheckTimeOut pulumi.IntPtrInput
+	// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+	HealthCheckType pulumi.StringPtrInput
 	// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
 	// Indicate to apply HTTP2.0 protocol or not.
@@ -361,7 +376,7 @@ func (i *ListenerRule) ToListenerRuleOutputWithContext(ctx context.Context) List
 // ListenerRuleArrayInput is an input type that accepts ListenerRuleArray and ListenerRuleArrayOutput values.
 // You can construct a concrete instance of `ListenerRuleArrayInput` via:
 //
-//	ListenerRuleArray{ ListenerRuleArgs{...} }
+//          ListenerRuleArray{ ListenerRuleArgs{...} }
 type ListenerRuleArrayInput interface {
 	pulumi.Input
 
@@ -386,7 +401,7 @@ func (i ListenerRuleArray) ToListenerRuleArrayOutputWithContext(ctx context.Cont
 // ListenerRuleMapInput is an input type that accepts ListenerRuleMap and ListenerRuleMapOutput values.
 // You can construct a concrete instance of `ListenerRuleMapInput` via:
 //
-//	ListenerRuleMap{ "key": ListenerRuleArgs{...} }
+//          ListenerRuleMap{ "key": ListenerRuleArgs{...} }
 type ListenerRuleMapInput interface {
 	pulumi.Input
 
@@ -485,6 +500,16 @@ func (o ListenerRuleOutput) HealthCheckIntervalTime() pulumi.IntOutput {
 // Indicates whether health check is enabled.
 func (o ListenerRuleOutput) HealthCheckSwitch() pulumi.BoolOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.BoolOutput { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
+}
+
+// Time out of health check. The value range is 2-60.
+func (o ListenerRuleOutput) HealthCheckTimeOut() pulumi.IntOutput {
+	return o.ApplyT(func(v *ListenerRule) pulumi.IntOutput { return v.HealthCheckTimeOut }).(pulumi.IntOutput)
+}
+
+// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+func (o ListenerRuleOutput) HealthCheckType() pulumi.StringOutput {
+	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.HealthCheckType }).(pulumi.StringOutput)
 }
 
 // Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.

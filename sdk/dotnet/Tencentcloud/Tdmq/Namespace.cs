@@ -76,7 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
-        /// The Policy of message to retain.
+        /// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         /// </summary>
         [Output("retentionPolicy")]
         public Output<ImmutableDictionary<string, object>?> RetentionPolicy { get; private set; } = null!;
@@ -156,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         private InputMap<object>? _retentionPolicy;
 
         /// <summary>
-        /// The Policy of message to retain.
+        /// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         /// </summary>
         public InputMap<object> RetentionPolicy
         {
@@ -199,7 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         private InputMap<object>? _retentionPolicy;
 
         /// <summary>
-        /// The Policy of message to retain.
+        /// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         /// </summary>
         public InputMap<object> RetentionPolicy
         {

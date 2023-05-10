@@ -116,7 +116,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly needMasterWan!: pulumi.Output<string | undefined>;
     /**
-     * The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+     * The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
      */
     public readonly payMode!: pulumi.Output<number>;
     /**
@@ -275,7 +275,7 @@ export interface ClusterState {
      */
     needMasterWan?: pulumi.Input<string>;
     /**
-     * The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+     * The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
      */
     payMode?: pulumi.Input<number>;
     /**
@@ -345,7 +345,7 @@ export interface ClusterArgs {
      */
     needMasterWan?: pulumi.Input<string>;
     /**
-     * The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+     * The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
      */
     payMode: pulumi.Input<number>;
     /**

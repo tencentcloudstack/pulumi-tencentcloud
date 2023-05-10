@@ -24,6 +24,7 @@ class InstanceArgs:
                  charge_period: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  deploy_mode: Optional[pulumi.Input[int]] = None,
+                 es_acl: Optional[pulumi.Input['InstanceEsAclArgs']] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  license_type: Optional[pulumi.Input[str]] = None,
                  multi_zone_infos: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceMultiZoneInfoArgs']]]] = None,
@@ -38,10 +39,11 @@ class InstanceArgs:
         :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
+        :param pulumi.Input['InstanceEsAclArgs'] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceMultiZoneInfoArgs']]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
@@ -64,6 +66,8 @@ class InstanceArgs:
             pulumi.set(__self__, "charge_type", charge_type)
         if deploy_mode is not None:
             pulumi.set(__self__, "deploy_mode", deploy_mode)
+        if es_acl is not None:
+            pulumi.set(__self__, "es_acl", es_acl)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
         if license_type is not None:
@@ -143,7 +147,7 @@ class InstanceArgs:
     @pulumi.getter(name="basicSecurityType")
     def basic_security_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         """
         return pulumi.get(self, "basic_security_type")
 
@@ -186,6 +190,18 @@ class InstanceArgs:
     @deploy_mode.setter
     def deploy_mode(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "deploy_mode", value)
+
+    @property
+    @pulumi.getter(name="esAcl")
+    def es_acl(self) -> Optional[pulumi.Input['InstanceEsAclArgs']]:
+        """
+        Kibana Access Control Configuration.
+        """
+        return pulumi.get(self, "es_acl")
+
+    @es_acl.setter
+    def es_acl(self, value: Optional[pulumi.Input['InstanceEsAclArgs']]):
+        pulumi.set(self, "es_acl", value)
 
     @property
     @pulumi.getter(name="instanceName")
@@ -284,6 +300,7 @@ class _InstanceState:
                  elasticsearch_domain: Optional[pulumi.Input[str]] = None,
                  elasticsearch_port: Optional[pulumi.Input[int]] = None,
                  elasticsearch_vip: Optional[pulumi.Input[str]] = None,
+                 es_acl: Optional[pulumi.Input['InstanceEsAclArgs']] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  kibana_url: Optional[pulumi.Input[str]] = None,
                  license_type: Optional[pulumi.Input[str]] = None,
@@ -299,7 +316,7 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Instance creation time.
@@ -307,6 +324,7 @@ class _InstanceState:
         :param pulumi.Input[str] elasticsearch_domain: Elasticsearch domain name.
         :param pulumi.Input[int] elasticsearch_port: Elasticsearch port.
         :param pulumi.Input[str] elasticsearch_vip: Elasticsearch VIP.
+        :param pulumi.Input['InstanceEsAclArgs'] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] kibana_url: Kibana access URL.
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -338,6 +356,8 @@ class _InstanceState:
             pulumi.set(__self__, "elasticsearch_port", elasticsearch_port)
         if elasticsearch_vip is not None:
             pulumi.set(__self__, "elasticsearch_vip", elasticsearch_vip)
+        if es_acl is not None:
+            pulumi.set(__self__, "es_acl", es_acl)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
         if kibana_url is not None:
@@ -379,7 +399,7 @@ class _InstanceState:
     @pulumi.getter(name="basicSecurityType")
     def basic_security_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         """
         return pulumi.get(self, "basic_security_type")
 
@@ -470,6 +490,18 @@ class _InstanceState:
     @elasticsearch_vip.setter
     def elasticsearch_vip(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "elasticsearch_vip", value)
+
+    @property
+    @pulumi.getter(name="esAcl")
+    def es_acl(self) -> Optional[pulumi.Input['InstanceEsAclArgs']]:
+        """
+        Kibana Access Control Configuration.
+        """
+        return pulumi.get(self, "es_acl")
+
+    @es_acl.setter
+    def es_acl(self, value: Optional[pulumi.Input['InstanceEsAclArgs']]):
+        pulumi.set(self, "es_acl", value)
 
     @property
     @pulumi.getter(name="instanceName")
@@ -626,6 +658,7 @@ class Instance(pulumi.CustomResource):
                  charge_period: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  deploy_mode: Optional[pulumi.Input[int]] = None,
+                 es_acl: Optional[pulumi.Input[pulumi.InputType['InstanceEsAclArgs']]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  license_type: Optional[pulumi.Input[str]] = None,
                  multi_zone_infos: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceMultiZoneInfoArgs']]]]] = None,
@@ -654,7 +687,7 @@ class Instance(pulumi.CustomResource):
             vpc_id=var["vpc_id"],
             subnet_id=var["subnet_id"],
             password="Test12345",
-            license_type="oss",
+            license_type="basic",
             web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
                 node_num=1,
                 node_type="ES.S1.MEDIUM4",
@@ -664,6 +697,13 @@ class Instance(pulumi.CustomResource):
                 node_type="ES.S1.MEDIUM4",
                 encrypt=False,
             )],
+            es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
+                black_lists=[
+                    "9.9.9.9",
+                    "8.8.8.8",
+                ],
+                white_lists=["0.0.0.0"],
+            ),
             tags={
                 "test": "test",
             })
@@ -680,10 +720,11 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
+        :param pulumi.Input[pulumi.InputType['InstanceEsAclArgs']] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceMultiZoneInfoArgs']]]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
@@ -718,7 +759,7 @@ class Instance(pulumi.CustomResource):
             vpc_id=var["vpc_id"],
             subnet_id=var["subnet_id"],
             password="Test12345",
-            license_type="oss",
+            license_type="basic",
             web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
                 node_num=1,
                 node_type="ES.S1.MEDIUM4",
@@ -728,6 +769,13 @@ class Instance(pulumi.CustomResource):
                 node_type="ES.S1.MEDIUM4",
                 encrypt=False,
             )],
+            es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
+                black_lists=[
+                    "9.9.9.9",
+                    "8.8.8.8",
+                ],
+                white_lists=["0.0.0.0"],
+            ),
             tags={
                 "test": "test",
             })
@@ -761,6 +809,7 @@ class Instance(pulumi.CustomResource):
                  charge_period: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  deploy_mode: Optional[pulumi.Input[int]] = None,
+                 es_acl: Optional[pulumi.Input[pulumi.InputType['InstanceEsAclArgs']]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  license_type: Optional[pulumi.Input[str]] = None,
                  multi_zone_infos: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceMultiZoneInfoArgs']]]]] = None,
@@ -791,6 +840,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["charge_period"] = charge_period
             __props__.__dict__["charge_type"] = charge_type
             __props__.__dict__["deploy_mode"] = deploy_mode
+            __props__.__dict__["es_acl"] = es_acl
             __props__.__dict__["instance_name"] = instance_name
             __props__.__dict__["license_type"] = license_type
             __props__.__dict__["multi_zone_infos"] = multi_zone_infos
@@ -834,6 +884,7 @@ class Instance(pulumi.CustomResource):
             elasticsearch_domain: Optional[pulumi.Input[str]] = None,
             elasticsearch_port: Optional[pulumi.Input[int]] = None,
             elasticsearch_vip: Optional[pulumi.Input[str]] = None,
+            es_acl: Optional[pulumi.Input[pulumi.InputType['InstanceEsAclArgs']]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
             kibana_url: Optional[pulumi.Input[str]] = None,
             license_type: Optional[pulumi.Input[str]] = None,
@@ -854,7 +905,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
-        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Instance creation time.
@@ -862,6 +913,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] elasticsearch_domain: Elasticsearch domain name.
         :param pulumi.Input[int] elasticsearch_port: Elasticsearch port.
         :param pulumi.Input[str] elasticsearch_vip: Elasticsearch VIP.
+        :param pulumi.Input[pulumi.InputType['InstanceEsAclArgs']] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[str] kibana_url: Kibana access URL.
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -888,6 +940,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["elasticsearch_domain"] = elasticsearch_domain
         __props__.__dict__["elasticsearch_port"] = elasticsearch_port
         __props__.__dict__["elasticsearch_vip"] = elasticsearch_vip
+        __props__.__dict__["es_acl"] = es_acl
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["kibana_url"] = kibana_url
         __props__.__dict__["license_type"] = license_type
@@ -914,7 +967,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="basicSecurityType")
     def basic_security_type(self) -> pulumi.Output[Optional[int]]:
         """
-        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         """
         return pulumi.get(self, "basic_security_type")
 
@@ -973,6 +1026,14 @@ class Instance(pulumi.CustomResource):
         Elasticsearch VIP.
         """
         return pulumi.get(self, "elasticsearch_vip")
+
+    @property
+    @pulumi.getter(name="esAcl")
+    def es_acl(self) -> pulumi.Output['outputs.InstanceEsAcl']:
+        """
+        Kibana Access Control Configuration.
+        """
+        return pulumi.get(self, "es_acl")
 
     @property
     @pulumi.getter(name="instanceName")

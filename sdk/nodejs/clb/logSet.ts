@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const foo = new tencentcloud.Clb.LogSet("foo", {
- *     perioid: 7,
+ *     period: 7,
  * });
  * ```
  *

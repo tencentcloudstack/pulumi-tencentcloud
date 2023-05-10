@@ -11,6 +11,8 @@ from . import outputs
 
 __all__ = [
     'AttachmentTarget',
+    'FunctionTargetsAttachmentFunctionTargets',
+    'FunctionTargetsAttachmentFunctionTargetsFunction',
     'InstanceSnatIp',
     'SnatIpIp',
     'TargetGroupTargetGroupInstance',
@@ -96,6 +98,111 @@ class AttachmentTarget(dict):
         Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to `10`.
         """
         return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class FunctionTargetsAttachmentFunctionTargets(dict):
+    def __init__(__self__, *,
+                 function: 'outputs.FunctionTargetsAttachmentFunctionTargetsFunction',
+                 weight: Optional[int] = None):
+        """
+        :param 'FunctionTargetsAttachmentFunctionTargetsFunctionArgs' function: Information about cloud functions.Note: This field may return null, indicating that no valid value can be obtained.
+        :param int weight: Weight. The default is `10`.
+        """
+        pulumi.set(__self__, "function", function)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def function(self) -> 'outputs.FunctionTargetsAttachmentFunctionTargetsFunction':
+        """
+        Information about cloud functions.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "function")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[int]:
+        """
+        Weight. The default is `10`.
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class FunctionTargetsAttachmentFunctionTargetsFunction(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "functionName":
+            suggest = "function_name"
+        elif key == "functionNamespace":
+            suggest = "function_namespace"
+        elif key == "functionQualifier":
+            suggest = "function_qualifier"
+        elif key == "functionQualifierType":
+            suggest = "function_qualifier_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FunctionTargetsAttachmentFunctionTargetsFunction. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FunctionTargetsAttachmentFunctionTargetsFunction.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FunctionTargetsAttachmentFunctionTargetsFunction.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 function_name: str,
+                 function_namespace: str,
+                 function_qualifier: str,
+                 function_qualifier_type: Optional[str] = None):
+        """
+        :param str function_name: The name of function.
+        :param str function_namespace: The namespace of function.
+        :param str function_qualifier: The version name or alias of the function.
+        :param str function_qualifier_type: Identifies the type of FunctionQualifier parameter, possible values: VERSION, ALIAS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "function_name", function_name)
+        pulumi.set(__self__, "function_namespace", function_namespace)
+        pulumi.set(__self__, "function_qualifier", function_qualifier)
+        if function_qualifier_type is not None:
+            pulumi.set(__self__, "function_qualifier_type", function_qualifier_type)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> str:
+        """
+        The name of function.
+        """
+        return pulumi.get(self, "function_name")
+
+    @property
+    @pulumi.getter(name="functionNamespace")
+    def function_namespace(self) -> str:
+        """
+        The namespace of function.
+        """
+        return pulumi.get(self, "function_namespace")
+
+    @property
+    @pulumi.getter(name="functionQualifier")
+    def function_qualifier(self) -> str:
+        """
+        The version name or alias of the function.
+        """
+        return pulumi.get(self, "function_qualifier")
+
+    @property
+    @pulumi.getter(name="functionQualifierType")
+    def function_qualifier_type(self) -> Optional[str]:
+        """
+        Identifies the type of FunctionQualifier parameter, possible values: VERSION, ALIAS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "function_qualifier_type")
 
 
 @pulumi.output_type

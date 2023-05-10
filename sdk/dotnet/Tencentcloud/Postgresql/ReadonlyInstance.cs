@@ -58,10 +58,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public partial class ReadonlyInstance : Pulumi.CustomResource
     {
         /// <summary>
-        /// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         /// </summary>
         [Output("autoRenewFlag")]
         public Output<int?> AutoRenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to use voucher, `1` for enabled.
+        /// </summary>
+        [Output("autoVoucher")]
+        public Output<int?> AutoVoucher { get; private set; } = null!;
 
         /// <summary>
         /// Create time of the postgresql instance.
@@ -106,6 +112,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int?> NeedSupportIpv6 { get; private set; } = null!;
 
         /// <summary>
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// </summary>
+        [Output("period")]
+        public Output<int?> Period { get; private set; } = null!;
+
+        /// <summary>
         /// Project ID.
         /// </summary>
         [Output("projectId")]
@@ -128,6 +140,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Output("subnetId")]
         public Output<string> SubnetId { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        /// </summary>
+        [Output("voucherIds")]
+        public Output<ImmutableArray<string>> VoucherIds { get; private set; } = null!;
 
         /// <summary>
         /// VPC ID.
@@ -189,10 +207,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public sealed class ReadonlyInstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
+
+        /// <summary>
+        /// Whether to use voucher, `1` for enabled.
+        /// </summary>
+        [Input("autoVoucher")]
+        public Input<int>? AutoVoucher { get; set; }
 
         /// <summary>
         /// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -231,6 +255,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? NeedSupportIpv6 { get; set; }
 
         /// <summary>
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// </summary>
+        [Input("period")]
+        public Input<int>? Period { get; set; }
+
+        /// <summary>
         /// Project ID.
         /// </summary>
         [Input("projectId", required: true)]
@@ -260,6 +290,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         [Input("subnetId", required: true)]
         public Input<string> SubnetId { get; set; } = null!;
 
+        [Input("voucherIds")]
+        private InputList<string>? _voucherIds;
+
+        /// <summary>
+        /// Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        /// </summary>
+        public InputList<string> VoucherIds
+        {
+            get => _voucherIds ?? (_voucherIds = new InputList<string>());
+            set => _voucherIds = value;
+        }
+
         /// <summary>
         /// VPC ID.
         /// </summary>
@@ -280,10 +322,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public sealed class ReadonlyInstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal). Default value: 0.
+        /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
+
+        /// <summary>
+        /// Whether to use voucher, `1` for enabled.
+        /// </summary>
+        [Input("autoVoucher")]
+        public Input<int>? AutoVoucher { get; set; }
 
         /// <summary>
         /// Create time of the postgresql instance.
@@ -328,6 +376,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? NeedSupportIpv6 { get; set; }
 
         /// <summary>
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// </summary>
+        [Input("period")]
+        public Input<int>? Period { get; set; }
+
+        /// <summary>
         /// Project ID.
         /// </summary>
         [Input("projectId")]
@@ -356,6 +410,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
+
+        [Input("voucherIds")]
+        private InputList<string>? _voucherIds;
+
+        /// <summary>
+        /// Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
+        /// </summary>
+        public InputList<string> VoucherIds
+        {
+            get => _voucherIds ?? (_voucherIds = new InputList<string>());
+            set => _voucherIds = value;
+        }
 
         /// <summary>
         /// VPC ID.

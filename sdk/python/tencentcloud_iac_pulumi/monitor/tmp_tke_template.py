@@ -69,6 +69,23 @@ class TmpTkeTemplate(pulumi.CustomResource):
         """
         Provides a resource to create a tmp tke template
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        template = tencentcloud.monitor.TmpTkeTemplate("template", template=tencentcloud.monitor.TmpTkeTemplateTemplateArgs(
+            describe="template",
+            level="cluster",
+            name="test",
+            service_monitors=[tencentcloud.monitor.TmpTkeTemplateTemplateServiceMonitorArgs(
+                config="xxxxx",
+                name="test",
+            )],
+        ))
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['TmpTkeTemplateTemplateArgs']] template: Template settings.
@@ -81,6 +98,23 @@ class TmpTkeTemplate(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a tmp tke template
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        template = tencentcloud.monitor.TmpTkeTemplate("template", template=tencentcloud.monitor.TmpTkeTemplateTemplateArgs(
+            describe="template",
+            level="cluster",
+            name="test",
+            service_monitors=[tencentcloud.monitor.TmpTkeTemplateTemplateServiceMonitorArgs(
+                config="xxxxx",
+                name="test",
+            )],
+        ))
+        ```
 
         :param str resource_name: The name of the resource.
         :param TmpTkeTemplateArgs args: The arguments to use to populate this resource's properties.

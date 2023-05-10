@@ -16,6 +16,9 @@ import * as utilities from "../utilities";
  * const foo = new tencentcloud.Tdmq.Instance("foo", {
  *     clusterName: "example",
  *     remark: "this is description.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
  * });
  * ```
  *
@@ -67,6 +70,10 @@ export class Instance extends pulumi.CustomResource {
      * Description of the tdmq cluster.
      */
     public readonly remark!: pulumi.Output<string | undefined>;
+    /**
+     * Tag description list.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -84,6 +91,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bindClusterId"] = state ? state.bindClusterId : undefined;
             resourceInputs["clusterName"] = state ? state.clusterName : undefined;
             resourceInputs["remark"] = state ? state.remark : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
             if ((!args || args.clusterName === undefined) && !opts.urn) {
@@ -92,6 +100,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bindClusterId"] = args ? args.bindClusterId : undefined;
             resourceInputs["clusterName"] = args ? args.clusterName : undefined;
             resourceInputs["remark"] = args ? args.remark : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
@@ -114,6 +123,10 @@ export interface InstanceState {
      * Description of the tdmq cluster.
      */
     remark?: pulumi.Input<string>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -132,4 +145,8 @@ export interface InstanceArgs {
      * Description of the tdmq cluster.
      */
     remark?: pulumi.Input<string>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }

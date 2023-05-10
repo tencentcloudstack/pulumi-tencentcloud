@@ -15,182 +15,182 @@ import (
 //
 // > **NOTE:**  We recommend the usage of one cluster with essential worker config + node pool to manage cluster and nodes. Its a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, Kubernetes.ScaleWorker or exist node management of `tencentcloudKubernetesAttachment`. Cause some unchangeable parameters of `workerConfig` may cause the whole cluster resource `force new`.
 //
+// > **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `deleteKeepInstance` to `false`.
+//
+// > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `deleteWithInstance` to `true`.
+//
 // ## Example Usage
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-3"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			clusterCidr := "172.31.0.0/16"
-//			if param := cfg.Get("clusterCidr"); param != "" {
-//				clusterCidr = param
-//			}
-//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				IsDefault:        pulumi.BoolRef(true),
-//				AvailabilityZone: pulumi.StringRef(availabilityZone),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			defaultInstanceType := "S1.SMALL1"
-//			if param := cfg.Get("defaultInstanceType"); param != "" {
-//				defaultInstanceType = param
-//			}
-//			managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-//				ClusterCidr:          pulumi.String(clusterCidr),
-//				ClusterMaxPodNum:     pulumi.Int(32),
-//				ClusterName:          pulumi.String("tf-tke-unit-test"),
-//				ClusterDesc:          pulumi.String("test cluster desc"),
-//				ClusterMaxServiceNum: pulumi.Int(32),
-//				ClusterVersion:       pulumi.String("1.18.4"),
-//				ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
-//				ClusterId: managedCluster.ID(),
-//				MaxSize:   pulumi.Int(6),
-//				MinSize:   pulumi.Int(1),
-//				VpcId:     pulumi.String(vpc.InstanceLists[0].VpcId),
-//				SubnetIds: pulumi.StringArray{
-//					pulumi.String(vpc.InstanceLists[0].SubnetId),
-//				},
-//				RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-//				DesiredCapacity:       pulumi.Int(4),
-//				EnableAutoScale:       pulumi.Bool(true),
-//				MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-//				AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-//					InstanceType:   pulumi.String(defaultInstanceType),
-//					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-//					SystemDiskSize: pulumi.Int(50),
-//					SecurityGroupIds: pulumi.StringArray{
-//						pulumi.String("sg-24vswocp"),
-//					},
-//					DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
-//						&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-//							DiskType: pulumi.String("CLOUD_PREMIUM"),
-//							DiskSize: pulumi.Int(50),
-//						},
-//					},
-//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-//					InternetMaxBandwidthOut: pulumi.Int(10),
-//					PublicIpAssigned:        pulumi.Bool(true),
-//					Password:                pulumi.String("test123#"),
-//					EnhancedSecurityService: pulumi.Bool(false),
-//					EnhancedMonitorService:  pulumi.Bool(false),
-//				},
-//				Labels: pulumi.AnyMap{
-//					"test1": pulumi.Any("test1"),
-//					"test2": pulumi.Any("test2"),
-//				},
-//				Taints: kubernetes.NodePoolTaintArray{
-//					&kubernetes.NodePoolTaintArgs{
-//						Key:    pulumi.String("test_taint"),
-//						Value:  pulumi.String("taint_value"),
-//						Effect: pulumi.String("PreferNoSchedule"),
-//					},
-//					&kubernetes.NodePoolTaintArgs{
-//						Key:    pulumi.String("test_taint2"),
-//						Value:  pulumi.String("taint_value2"),
-//						Effect: pulumi.String("PreferNoSchedule"),
-//					},
-//				},
-//				NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
-//					ExtraArgs: pulumi.StringArray{
-//						pulumi.String("root-dir=/var/lib/kubelet"),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		clusterCidr := "172.31.0.0/16"
+// 		if param := cfg.Get("clusterCidr"); param != "" {
+// 			clusterCidr = param
+// 		}
+// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+// 			IsDefault:        pulumi.BoolRef(true),
+// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		defaultInstanceType := "S1.SMALL1"
+// 		if param := cfg.Get("defaultInstanceType"); param != "" {
+// 			defaultInstanceType = param
+// 		}
+// 		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+// 			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+// 			ClusterCidr:          pulumi.String(clusterCidr),
+// 			ClusterMaxPodNum:     pulumi.Int(32),
+// 			ClusterName:          pulumi.String("tf-tke-unit-test"),
+// 			ClusterDesc:          pulumi.String("test cluster desc"),
+// 			ClusterMaxServiceNum: pulumi.Int(32),
+// 			ClusterVersion:       pulumi.String("1.18.4"),
+// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
+// 			ClusterId: managedCluster.ID(),
+// 			MaxSize:   pulumi.Int(6),
+// 			MinSize:   pulumi.Int(1),
+// 			VpcId:     pulumi.String(vpc.InstanceLists[0].VpcId),
+// 			SubnetIds: pulumi.StringArray{
+// 				pulumi.String(vpc.InstanceLists[0].SubnetId),
+// 			},
+// 			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+// 			DesiredCapacity:       pulumi.Int(4),
+// 			EnableAutoScale:       pulumi.Bool(true),
+// 			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+// 			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+// 				InstanceType:   pulumi.String(defaultInstanceType),
+// 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+// 				SystemDiskSize: pulumi.Int(50),
+// 				SecurityGroupIds: pulumi.StringArray{
+// 					pulumi.String("sg-24vswocp"),
+// 				},
+// 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+// 					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
+// 						DiskSize: pulumi.Int(50),
+// 					},
+// 				},
+// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+// 				InternetMaxBandwidthOut: pulumi.Int(10),
+// 				PublicIpAssigned:        pulumi.Bool(true),
+// 				Password:                pulumi.String("test123#"),
+// 				EnhancedSecurityService: pulumi.Bool(false),
+// 				EnhancedMonitorService:  pulumi.Bool(false),
+// 				HostName:                pulumi.String("12.123.0.0"),
+// 				HostNameStyle:           pulumi.String("ORIGINAL"),
+// 			},
+// 			Labels: pulumi.AnyMap{
+// 				"test1": pulumi.Any("test1"),
+// 				"test2": pulumi.Any("test2"),
+// 			},
+// 			Taints: kubernetes.NodePoolTaintArray{
+// 				&kubernetes.NodePoolTaintArgs{
+// 					Key:    pulumi.String("test_taint"),
+// 					Value:  pulumi.String("taint_value"),
+// 					Effect: pulumi.String("PreferNoSchedule"),
+// 				},
+// 				&kubernetes.NodePoolTaintArgs{
+// 					Key:    pulumi.String("test_taint2"),
+// 					Value:  pulumi.String("taint_value2"),
+// 					Effect: pulumi.String("PreferNoSchedule"),
+// 				},
+// 			},
+// 			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+// 				ExtraArgs: pulumi.StringArray{
+// 					pulumi.String("root-dir=/var/lib/kubelet"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Using Spot CVM Instance
+// Using Spot CVM Instance
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
-//				ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
-//				MaxSize:   pulumi.Int(6),
-//				MinSize:   pulumi.Int(1),
-//				VpcId:     pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id),
-//				SubnetIds: pulumi.StringArray{
-//					pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id),
-//				},
-//				RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-//				DesiredCapacity:       pulumi.Int(4),
-//				EnableAutoScale:       pulumi.Bool(true),
-//				MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-//				AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-//					InstanceType:   pulumi.Any(_var.Default_instance_type),
-//					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-//					SystemDiskSize: pulumi.Int(50),
-//					SecurityGroupIds: pulumi.StringArray{
-//						pulumi.String("sg-24vswocp"),
-//					},
-//					InstanceChargeType: pulumi.String("SPOTPAID"),
-//					SpotInstanceType:   pulumi.String("one-time"),
-//					SpotMaxPrice:       pulumi.String("1000"),
-//					DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
-//						&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-//							DiskType: pulumi.String("CLOUD_PREMIUM"),
-//							DiskSize: pulumi.Int(50),
-//						},
-//					},
-//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-//					InternetMaxBandwidthOut: pulumi.Int(10),
-//					PublicIpAssigned:        pulumi.Bool(true),
-//					Password:                pulumi.String("test123#"),
-//					EnhancedSecurityService: pulumi.Bool(false),
-//					EnhancedMonitorService:  pulumi.Bool(false),
-//				},
-//				Labels: pulumi.AnyMap{
-//					"test1": pulumi.Any("test1"),
-//					"test2": pulumi.Any("test2"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
+// 			ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
+// 			MaxSize:   pulumi.Int(6),
+// 			MinSize:   pulumi.Int(1),
+// 			VpcId:     pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id),
+// 			SubnetIds: pulumi.StringArray{
+// 				pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id),
+// 			},
+// 			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+// 			DesiredCapacity:       pulumi.Int(4),
+// 			EnableAutoScale:       pulumi.Bool(true),
+// 			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+// 			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+// 				InstanceType:   pulumi.Any(_var.Default_instance_type),
+// 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+// 				SystemDiskSize: pulumi.Int(50),
+// 				SecurityGroupIds: pulumi.StringArray{
+// 					pulumi.String("sg-24vswocp"),
+// 				},
+// 				InstanceChargeType: pulumi.String("SPOTPAID"),
+// 				SpotInstanceType:   pulumi.String("one-time"),
+// 				SpotMaxPrice:       pulumi.String("1000"),
+// 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+// 					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
+// 						DiskSize: pulumi.Int(50),
+// 					},
+// 				},
+// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+// 				InternetMaxBandwidthOut: pulumi.Int(10),
+// 				PublicIpAssigned:        pulumi.Bool(true),
+// 				Password:                pulumi.String("test123#"),
+// 				EnhancedSecurityService: pulumi.Bool(false),
+// 				EnhancedMonitorService:  pulumi.Bool(false),
+// 			},
+// 			Labels: pulumi.AnyMap{
+// 				"test1": pulumi.Any("test1"),
+// 				"test2": pulumi.Any("test2"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type NodePool struct {
 	pulumi.CustomResourceState
@@ -245,6 +245,8 @@ type NodePool struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 	// ID list of subnet, and for VPC it is required.
 	SubnetIds pulumi.StringArrayOutput `pulumi:"subnetIds"`
+	// Node pool tag specifications, will passthroughs to the scaling instances.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Taints of kubernetes node pool created nodes.
 	Taints NodePoolTaintArrayOutput `pulumi:"taints"`
 	// Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
@@ -352,6 +354,8 @@ type nodePoolState struct {
 	Status *string `pulumi:"status"`
 	// ID list of subnet, and for VPC it is required.
 	SubnetIds []string `pulumi:"subnetIds"`
+	// Node pool tag specifications, will passthroughs to the scaling instances.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// Taints of kubernetes node pool created nodes.
 	Taints []NodePoolTaint `pulumi:"taints"`
 	// Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
@@ -415,6 +419,8 @@ type NodePoolState struct {
 	Status pulumi.StringPtrInput
 	// ID list of subnet, and for VPC it is required.
 	SubnetIds pulumi.StringArrayInput
+	// Node pool tag specifications, will passthroughs to the scaling instances.
+	Tags pulumi.MapInput
 	// Taints of kubernetes node pool created nodes.
 	Taints NodePoolTaintArrayInput
 	// Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
@@ -470,6 +476,8 @@ type nodePoolArgs struct {
 	ScalingMode *string `pulumi:"scalingMode"`
 	// ID list of subnet, and for VPC it is required.
 	SubnetIds []string `pulumi:"subnetIds"`
+	// Node pool tag specifications, will passthroughs to the scaling instances.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// Taints of kubernetes node pool created nodes.
 	Taints []NodePoolTaint `pulumi:"taints"`
 	// Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
@@ -522,6 +530,8 @@ type NodePoolArgs struct {
 	ScalingMode pulumi.StringPtrInput
 	// ID list of subnet, and for VPC it is required.
 	SubnetIds pulumi.StringArrayInput
+	// Node pool tag specifications, will passthroughs to the scaling instances.
+	Tags pulumi.MapInput
 	// Taints of kubernetes node pool created nodes.
 	Taints NodePoolTaintArrayInput
 	// Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
@@ -560,7 +570,7 @@ func (i *NodePool) ToNodePoolOutputWithContext(ctx context.Context) NodePoolOutp
 // NodePoolArrayInput is an input type that accepts NodePoolArray and NodePoolArrayOutput values.
 // You can construct a concrete instance of `NodePoolArrayInput` via:
 //
-//	NodePoolArray{ NodePoolArgs{...} }
+//          NodePoolArray{ NodePoolArgs{...} }
 type NodePoolArrayInput interface {
 	pulumi.Input
 
@@ -585,7 +595,7 @@ func (i NodePoolArray) ToNodePoolArrayOutputWithContext(ctx context.Context) Nod
 // NodePoolMapInput is an input type that accepts NodePoolMap and NodePoolMapOutput values.
 // You can construct a concrete instance of `NodePoolMapInput` via:
 //
-//	NodePoolMap{ "key": NodePoolArgs{...} }
+//          NodePoolMap{ "key": NodePoolArgs{...} }
 type NodePoolMapInput interface {
 	pulumi.Input
 
@@ -744,6 +754,11 @@ func (o NodePoolOutput) Status() pulumi.StringOutput {
 // ID list of subnet, and for VPC it is required.
 func (o NodePoolOutput) SubnetIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.StringArrayOutput { return v.SubnetIds }).(pulumi.StringArrayOutput)
+}
+
+// Node pool tag specifications, will passthroughs to the scaling instances.
+func (o NodePoolOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *NodePool) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 // Taints of kubernetes node pool created nodes.

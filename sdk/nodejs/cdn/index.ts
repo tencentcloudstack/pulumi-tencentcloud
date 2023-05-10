@@ -6,6 +6,7 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./domain";
+export * from "./getDomainVerifier";
 export * from "./getDomains";
 export * from "./urlPurge";
 export * from "./urlPush";

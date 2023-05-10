@@ -19,33 +19,30 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
-//				AutoSplit:          pulumi.Bool(false),
-//				LogsetId:           pulumi.String("5cd3a17e-fb0b-418c-afd7-77b365397426"),
-//				MaxSplitPartitions: pulumi.Int(20),
-//				PartitionCount:     pulumi.Int(1),
-//				Period:             pulumi.Int(10),
-//				StorageType:        pulumi.String("hot"),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("test"),
-//				},
-//				TopicName: pulumi.String("topic"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
+// 			AutoSplit:          pulumi.Bool(false),
+// 			LogsetId:           pulumi.String("5cd3a17e-fb0b-418c-afd7-77b365397426"),
+// 			MaxSplitPartitions: pulumi.Int(20),
+// 			PartitionCount:     pulumi.Int(1),
+// 			Period:             pulumi.Int(10),
+// 			StorageType:        pulumi.String("hot"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			TopicName: pulumi.String("topic"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -53,9 +50,7 @@ import (
 // cls topic can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
-//
+//  $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
 // ```
 type Topic struct {
 	pulumi.CustomResourceState
@@ -220,7 +215,7 @@ func (i *Topic) ToTopicOutputWithContext(ctx context.Context) TopicOutput {
 // TopicArrayInput is an input type that accepts TopicArray and TopicArrayOutput values.
 // You can construct a concrete instance of `TopicArrayInput` via:
 //
-//	TopicArray{ TopicArgs{...} }
+//          TopicArray{ TopicArgs{...} }
 type TopicArrayInput interface {
 	pulumi.Input
 
@@ -245,7 +240,7 @@ func (i TopicArray) ToTopicArrayOutputWithContext(ctx context.Context) TopicArra
 // TopicMapInput is an input type that accepts TopicMap and TopicMapOutput values.
 // You can construct a concrete instance of `TopicMapInput` via:
 //
-//	TopicMap{ "key": TopicArgs{...} }
+//          TopicMap{ "key": TopicArgs{...} }
 type TopicMapInput interface {
 	pulumi.Input
 

@@ -101,6 +101,9 @@ export interface GetLayer7ListenersResult {
      * Protocol of the layer7 listener.
      */
     readonly protocol: string;
+    /**
+     * ID of the GAAP proxy.
+     */
     readonly proxyId?: string;
     readonly resultOutputFile?: string;
 }

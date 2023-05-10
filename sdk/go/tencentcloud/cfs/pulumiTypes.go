@@ -24,7 +24,7 @@ type GetAccessGroupsAccessGroupList struct {
 // GetAccessGroupsAccessGroupListInput is an input type that accepts GetAccessGroupsAccessGroupListArgs and GetAccessGroupsAccessGroupListOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupListInput` via:
 //
-//	GetAccessGroupsAccessGroupListArgs{...}
+//          GetAccessGroupsAccessGroupListArgs{...}
 type GetAccessGroupsAccessGroupListInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i GetAccessGroupsAccessGroupListArgs) ToGetAccessGroupsAccessGroupListOutp
 // GetAccessGroupsAccessGroupListArrayInput is an input type that accepts GetAccessGroupsAccessGroupListArray and GetAccessGroupsAccessGroupListArrayOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupListArrayInput` via:
 //
-//	GetAccessGroupsAccessGroupListArray{ GetAccessGroupsAccessGroupListArgs{...} }
+//          GetAccessGroupsAccessGroupListArray{ GetAccessGroupsAccessGroupListArgs{...} }
 type GetAccessGroupsAccessGroupListArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +150,7 @@ type GetAccessRulesAccessRuleList struct {
 // GetAccessRulesAccessRuleListInput is an input type that accepts GetAccessRulesAccessRuleListArgs and GetAccessRulesAccessRuleListOutput values.
 // You can construct a concrete instance of `GetAccessRulesAccessRuleListInput` via:
 //
-//	GetAccessRulesAccessRuleListArgs{...}
+//          GetAccessRulesAccessRuleListArgs{...}
 type GetAccessRulesAccessRuleListInput interface {
 	pulumi.Input
 
@@ -186,7 +186,7 @@ func (i GetAccessRulesAccessRuleListArgs) ToGetAccessRulesAccessRuleListOutputWi
 // GetAccessRulesAccessRuleListArrayInput is an input type that accepts GetAccessRulesAccessRuleListArray and GetAccessRulesAccessRuleListArrayOutput values.
 // You can construct a concrete instance of `GetAccessRulesAccessRuleListArrayInput` via:
 //
-//	GetAccessRulesAccessRuleListArray{ GetAccessRulesAccessRuleListArgs{...} }
+//          GetAccessRulesAccessRuleListArray{ GetAccessRulesAccessRuleListArgs{...} }
 type GetAccessRulesAccessRuleListArrayInput interface {
 	pulumi.Input
 
@@ -267,6 +267,637 @@ func (o GetAccessRulesAccessRuleListArrayOutput) Index(i pulumi.IntInput) GetAcc
 	}).(GetAccessRulesAccessRuleListOutput)
 }
 
+type GetAvailableZoneRegionZone struct {
+	// Region name, such as `ap-beijing`.
+	Region string `pulumi:"region"`
+	// Region chinese name, such as `Guangzhou`.
+	RegionCnName string `pulumi:"regionCnName"`
+	// Region name, such as `bj`.
+	RegionName string `pulumi:"regionName"`
+	// Region availability. If a region has at least one AZ where resources are purchasable, this value will be AVAILABLE; otherwise, it will be UNAVAILABLE.
+	RegionStatus string `pulumi:"regionStatus"`
+	// Array of AZs.
+	Zones []GetAvailableZoneRegionZoneZone `pulumi:"zones"`
+}
+
+// GetAvailableZoneRegionZoneInput is an input type that accepts GetAvailableZoneRegionZoneArgs and GetAvailableZoneRegionZoneOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneInput` via:
+//
+//          GetAvailableZoneRegionZoneArgs{...}
+type GetAvailableZoneRegionZoneInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneOutput() GetAvailableZoneRegionZoneOutput
+	ToGetAvailableZoneRegionZoneOutputWithContext(context.Context) GetAvailableZoneRegionZoneOutput
+}
+
+type GetAvailableZoneRegionZoneArgs struct {
+	// Region name, such as `ap-beijing`.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region chinese name, such as `Guangzhou`.
+	RegionCnName pulumi.StringInput `pulumi:"regionCnName"`
+	// Region name, such as `bj`.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Region availability. If a region has at least one AZ where resources are purchasable, this value will be AVAILABLE; otherwise, it will be UNAVAILABLE.
+	RegionStatus pulumi.StringInput `pulumi:"regionStatus"`
+	// Array of AZs.
+	Zones GetAvailableZoneRegionZoneZoneArrayInput `pulumi:"zones"`
+}
+
+func (GetAvailableZoneRegionZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZone)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneArgs) ToGetAvailableZoneRegionZoneOutput() GetAvailableZoneRegionZoneOutput {
+	return i.ToGetAvailableZoneRegionZoneOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneArgs) ToGetAvailableZoneRegionZoneOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneOutput)
+}
+
+// GetAvailableZoneRegionZoneArrayInput is an input type that accepts GetAvailableZoneRegionZoneArray and GetAvailableZoneRegionZoneArrayOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneArrayInput` via:
+//
+//          GetAvailableZoneRegionZoneArray{ GetAvailableZoneRegionZoneArgs{...} }
+type GetAvailableZoneRegionZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneArrayOutput() GetAvailableZoneRegionZoneArrayOutput
+	ToGetAvailableZoneRegionZoneArrayOutputWithContext(context.Context) GetAvailableZoneRegionZoneArrayOutput
+}
+
+type GetAvailableZoneRegionZoneArray []GetAvailableZoneRegionZoneInput
+
+func (GetAvailableZoneRegionZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZone)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneArray) ToGetAvailableZoneRegionZoneArrayOutput() GetAvailableZoneRegionZoneArrayOutput {
+	return i.ToGetAvailableZoneRegionZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneArray) ToGetAvailableZoneRegionZoneArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneArrayOutput)
+}
+
+type GetAvailableZoneRegionZoneOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZone)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneOutput) ToGetAvailableZoneRegionZoneOutput() GetAvailableZoneRegionZoneOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneOutput) ToGetAvailableZoneRegionZoneOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneOutput {
+	return o
+}
+
+// Region name, such as `ap-beijing`.
+func (o GetAvailableZoneRegionZoneOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZone) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Region chinese name, such as `Guangzhou`.
+func (o GetAvailableZoneRegionZoneOutput) RegionCnName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZone) string { return v.RegionCnName }).(pulumi.StringOutput)
+}
+
+// Region name, such as `bj`.
+func (o GetAvailableZoneRegionZoneOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZone) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Region availability. If a region has at least one AZ where resources are purchasable, this value will be AVAILABLE; otherwise, it will be UNAVAILABLE.
+func (o GetAvailableZoneRegionZoneOutput) RegionStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZone) string { return v.RegionStatus }).(pulumi.StringOutput)
+}
+
+// Array of AZs.
+func (o GetAvailableZoneRegionZoneOutput) Zones() GetAvailableZoneRegionZoneZoneArrayOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZone) []GetAvailableZoneRegionZoneZone { return v.Zones }).(GetAvailableZoneRegionZoneZoneArrayOutput)
+}
+
+type GetAvailableZoneRegionZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZone)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneArrayOutput) ToGetAvailableZoneRegionZoneArrayOutput() GetAvailableZoneRegionZoneArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneArrayOutput) ToGetAvailableZoneRegionZoneArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneArrayOutput) Index(i pulumi.IntInput) GetAvailableZoneRegionZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAvailableZoneRegionZone {
+		return vs[0].([]GetAvailableZoneRegionZone)[vs[1].(int)]
+	}).(GetAvailableZoneRegionZoneOutput)
+}
+
+type GetAvailableZoneRegionZoneZone struct {
+	// Array of classes.
+	Types []GetAvailableZoneRegionZoneZoneType `pulumi:"types"`
+	// AZ name.
+	Zone string `pulumi:"zone"`
+	// Chinese name of an AZ.
+	ZoneCnName string `pulumi:"zoneCnName"`
+	// AZ ID.
+	ZoneId int `pulumi:"zoneId"`
+	// Chinese and English names of an AZ.
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetAvailableZoneRegionZoneZoneInput is an input type that accepts GetAvailableZoneRegionZoneZoneArgs and GetAvailableZoneRegionZoneZoneOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneInput` via:
+//
+//          GetAvailableZoneRegionZoneZoneArgs{...}
+type GetAvailableZoneRegionZoneZoneInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneZoneOutput() GetAvailableZoneRegionZoneZoneOutput
+	ToGetAvailableZoneRegionZoneZoneOutputWithContext(context.Context) GetAvailableZoneRegionZoneZoneOutput
+}
+
+type GetAvailableZoneRegionZoneZoneArgs struct {
+	// Array of classes.
+	Types GetAvailableZoneRegionZoneZoneTypeArrayInput `pulumi:"types"`
+	// AZ name.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// Chinese name of an AZ.
+	ZoneCnName pulumi.StringInput `pulumi:"zoneCnName"`
+	// AZ ID.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// Chinese and English names of an AZ.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetAvailableZoneRegionZoneZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZoneZone)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneZoneArgs) ToGetAvailableZoneRegionZoneZoneOutput() GetAvailableZoneRegionZoneZoneOutput {
+	return i.ToGetAvailableZoneRegionZoneZoneOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneZoneArgs) ToGetAvailableZoneRegionZoneZoneOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneZoneOutput)
+}
+
+// GetAvailableZoneRegionZoneZoneArrayInput is an input type that accepts GetAvailableZoneRegionZoneZoneArray and GetAvailableZoneRegionZoneZoneArrayOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneArrayInput` via:
+//
+//          GetAvailableZoneRegionZoneZoneArray{ GetAvailableZoneRegionZoneZoneArgs{...} }
+type GetAvailableZoneRegionZoneZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneZoneArrayOutput() GetAvailableZoneRegionZoneZoneArrayOutput
+	ToGetAvailableZoneRegionZoneZoneArrayOutputWithContext(context.Context) GetAvailableZoneRegionZoneZoneArrayOutput
+}
+
+type GetAvailableZoneRegionZoneZoneArray []GetAvailableZoneRegionZoneZoneInput
+
+func (GetAvailableZoneRegionZoneZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZoneZone)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneZoneArray) ToGetAvailableZoneRegionZoneZoneArrayOutput() GetAvailableZoneRegionZoneZoneArrayOutput {
+	return i.ToGetAvailableZoneRegionZoneZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneZoneArray) ToGetAvailableZoneRegionZoneZoneArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneZoneArrayOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZoneZone)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneZoneOutput) ToGetAvailableZoneRegionZoneZoneOutput() GetAvailableZoneRegionZoneZoneOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneOutput) ToGetAvailableZoneRegionZoneZoneOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneOutput {
+	return o
+}
+
+// Array of classes.
+func (o GetAvailableZoneRegionZoneZoneOutput) Types() GetAvailableZoneRegionZoneZoneTypeArrayOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZone) []GetAvailableZoneRegionZoneZoneType { return v.Types }).(GetAvailableZoneRegionZoneZoneTypeArrayOutput)
+}
+
+// AZ name.
+func (o GetAvailableZoneRegionZoneZoneOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZone) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// Chinese name of an AZ.
+func (o GetAvailableZoneRegionZoneZoneOutput) ZoneCnName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZone) string { return v.ZoneCnName }).(pulumi.StringOutput)
+}
+
+// AZ ID.
+func (o GetAvailableZoneRegionZoneZoneOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZone) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// Chinese and English names of an AZ.
+func (o GetAvailableZoneRegionZoneZoneOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZone) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZoneZone)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneZoneArrayOutput) ToGetAvailableZoneRegionZoneZoneArrayOutput() GetAvailableZoneRegionZoneZoneArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneArrayOutput) ToGetAvailableZoneRegionZoneZoneArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneArrayOutput) Index(i pulumi.IntInput) GetAvailableZoneRegionZoneZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAvailableZoneRegionZoneZone {
+		return vs[0].([]GetAvailableZoneRegionZoneZone)[vs[1].(int)]
+	}).(GetAvailableZoneRegionZoneZoneOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneType struct {
+	// Indicates whether prepaid is supported. true: yes; false: no.
+	Prepayment bool `pulumi:"prepayment"`
+	// Protocol and sale details.
+	Protocols []GetAvailableZoneRegionZoneZoneTypeProtocol `pulumi:"protocols"`
+	// Storage class. Valid values: SD (standard storage) and HP (high-performance storage).
+	Type string `pulumi:"type"`
+}
+
+// GetAvailableZoneRegionZoneZoneTypeInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeArgs and GetAvailableZoneRegionZoneZoneTypeOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeInput` via:
+//
+//          GetAvailableZoneRegionZoneZoneTypeArgs{...}
+type GetAvailableZoneRegionZoneZoneTypeInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneZoneTypeOutput() GetAvailableZoneRegionZoneZoneTypeOutput
+	ToGetAvailableZoneRegionZoneZoneTypeOutputWithContext(context.Context) GetAvailableZoneRegionZoneZoneTypeOutput
+}
+
+type GetAvailableZoneRegionZoneZoneTypeArgs struct {
+	// Indicates whether prepaid is supported. true: yes; false: no.
+	Prepayment pulumi.BoolInput `pulumi:"prepayment"`
+	// Protocol and sale details.
+	Protocols GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput `pulumi:"protocols"`
+	// Storage class. Valid values: SD (standard storage) and HP (high-performance storage).
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetAvailableZoneRegionZoneZoneTypeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZoneZoneType)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeArgs) ToGetAvailableZoneRegionZoneZoneTypeOutput() GetAvailableZoneRegionZoneZoneTypeOutput {
+	return i.ToGetAvailableZoneRegionZoneZoneTypeOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeArgs) ToGetAvailableZoneRegionZoneZoneTypeOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneZoneTypeOutput)
+}
+
+// GetAvailableZoneRegionZoneZoneTypeArrayInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeArray and GetAvailableZoneRegionZoneZoneTypeArrayOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeArrayInput` via:
+//
+//          GetAvailableZoneRegionZoneZoneTypeArray{ GetAvailableZoneRegionZoneZoneTypeArgs{...} }
+type GetAvailableZoneRegionZoneZoneTypeArrayInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneZoneTypeArrayOutput() GetAvailableZoneRegionZoneZoneTypeArrayOutput
+	ToGetAvailableZoneRegionZoneZoneTypeArrayOutputWithContext(context.Context) GetAvailableZoneRegionZoneZoneTypeArrayOutput
+}
+
+type GetAvailableZoneRegionZoneZoneTypeArray []GetAvailableZoneRegionZoneZoneTypeInput
+
+func (GetAvailableZoneRegionZoneZoneTypeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZoneZoneType)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeArray) ToGetAvailableZoneRegionZoneZoneTypeArrayOutput() GetAvailableZoneRegionZoneZoneTypeArrayOutput {
+	return i.ToGetAvailableZoneRegionZoneZoneTypeArrayOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeArray) ToGetAvailableZoneRegionZoneZoneTypeArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneZoneTypeArrayOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneTypeOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneZoneTypeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZoneZoneType)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeOutput) ToGetAvailableZoneRegionZoneZoneTypeOutput() GetAvailableZoneRegionZoneZoneTypeOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeOutput) ToGetAvailableZoneRegionZoneZoneTypeOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeOutput {
+	return o
+}
+
+// Indicates whether prepaid is supported. true: yes; false: no.
+func (o GetAvailableZoneRegionZoneZoneTypeOutput) Prepayment() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZoneType) bool { return v.Prepayment }).(pulumi.BoolOutput)
+}
+
+// Protocol and sale details.
+func (o GetAvailableZoneRegionZoneZoneTypeOutput) Protocols() GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZoneType) []GetAvailableZoneRegionZoneZoneTypeProtocol {
+		return v.Protocols
+	}).(GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput)
+}
+
+// Storage class. Valid values: SD (standard storage) and HP (high-performance storage).
+func (o GetAvailableZoneRegionZoneZoneTypeOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZoneType) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneTypeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneZoneTypeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZoneZoneType)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeArrayOutput) ToGetAvailableZoneRegionZoneZoneTypeArrayOutput() GetAvailableZoneRegionZoneZoneTypeArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeArrayOutput) ToGetAvailableZoneRegionZoneZoneTypeArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeArrayOutput) Index(i pulumi.IntInput) GetAvailableZoneRegionZoneZoneTypeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAvailableZoneRegionZoneZoneType {
+		return vs[0].([]GetAvailableZoneRegionZoneZoneType)[vs[1].(int)]
+	}).(GetAvailableZoneRegionZoneZoneTypeOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneTypeProtocol struct {
+	// Protocol type. Valid values: NFS, CIFS.
+	Protocol string `pulumi:"protocol"`
+	// Sale status. Valid values: saleOut (sold out), saling (purchasable), noSaling (non-purchasable).
+	SaleStatus string `pulumi:"saleStatus"`
+}
+
+// GetAvailableZoneRegionZoneZoneTypeProtocolInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeProtocolArgs and GetAvailableZoneRegionZoneZoneTypeProtocolOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeProtocolInput` via:
+//
+//          GetAvailableZoneRegionZoneZoneTypeProtocolArgs{...}
+type GetAvailableZoneRegionZoneZoneTypeProtocolInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneZoneTypeProtocolOutput() GetAvailableZoneRegionZoneZoneTypeProtocolOutput
+	ToGetAvailableZoneRegionZoneZoneTypeProtocolOutputWithContext(context.Context) GetAvailableZoneRegionZoneZoneTypeProtocolOutput
+}
+
+type GetAvailableZoneRegionZoneZoneTypeProtocolArgs struct {
+	// Protocol type. Valid values: NFS, CIFS.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Sale status. Valid values: saleOut (sold out), saling (purchasable), noSaling (non-purchasable).
+	SaleStatus pulumi.StringInput `pulumi:"saleStatus"`
+}
+
+func (GetAvailableZoneRegionZoneZoneTypeProtocolArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZoneZoneTypeProtocol)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeProtocolArgs) ToGetAvailableZoneRegionZoneZoneTypeProtocolOutput() GetAvailableZoneRegionZoneZoneTypeProtocolOutput {
+	return i.ToGetAvailableZoneRegionZoneZoneTypeProtocolOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeProtocolArgs) ToGetAvailableZoneRegionZoneZoneTypeProtocolOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeProtocolOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneZoneTypeProtocolOutput)
+}
+
+// GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeProtocolArray and GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput values.
+// You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput` via:
+//
+//          GetAvailableZoneRegionZoneZoneTypeProtocolArray{ GetAvailableZoneRegionZoneZoneTypeProtocolArgs{...} }
+type GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput interface {
+	pulumi.Input
+
+	ToGetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput() GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput
+	ToGetAvailableZoneRegionZoneZoneTypeProtocolArrayOutputWithContext(context.Context) GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput
+}
+
+type GetAvailableZoneRegionZoneZoneTypeProtocolArray []GetAvailableZoneRegionZoneZoneTypeProtocolInput
+
+func (GetAvailableZoneRegionZoneZoneTypeProtocolArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZoneZoneTypeProtocol)(nil)).Elem()
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeProtocolArray) ToGetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput() GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput {
+	return i.ToGetAvailableZoneRegionZoneZoneTypeProtocolArrayOutputWithContext(context.Background())
+}
+
+func (i GetAvailableZoneRegionZoneZoneTypeProtocolArray) ToGetAvailableZoneRegionZoneZoneTypeProtocolArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneTypeProtocolOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneZoneTypeProtocolOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAvailableZoneRegionZoneZoneTypeProtocol)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeProtocolOutput) ToGetAvailableZoneRegionZoneZoneTypeProtocolOutput() GetAvailableZoneRegionZoneZoneTypeProtocolOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeProtocolOutput) ToGetAvailableZoneRegionZoneZoneTypeProtocolOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeProtocolOutput {
+	return o
+}
+
+// Protocol type. Valid values: NFS, CIFS.
+func (o GetAvailableZoneRegionZoneZoneTypeProtocolOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZoneTypeProtocol) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Sale status. Valid values: saleOut (sold out), saling (purchasable), noSaling (non-purchasable).
+func (o GetAvailableZoneRegionZoneZoneTypeProtocolOutput) SaleStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAvailableZoneRegionZoneZoneTypeProtocol) string { return v.SaleStatus }).(pulumi.StringOutput)
+}
+
+type GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAvailableZoneRegionZoneZoneTypeProtocol)(nil)).Elem()
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput) ToGetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput() GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput) ToGetAvailableZoneRegionZoneZoneTypeProtocolArrayOutputWithContext(ctx context.Context) GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput {
+	return o
+}
+
+func (o GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput) Index(i pulumi.IntInput) GetAvailableZoneRegionZoneZoneTypeProtocolOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAvailableZoneRegionZoneZoneTypeProtocol {
+		return vs[0].([]GetAvailableZoneRegionZoneZoneTypeProtocol)[vs[1].(int)]
+	}).(GetAvailableZoneRegionZoneZoneTypeProtocolOutput)
+}
+
+type GetFileSystemClientsClientList struct {
+	// IP address of the file system.
+	CfsVip string `pulumi:"cfsVip"`
+	// Client IP.
+	ClientIp string `pulumi:"clientIp"`
+	// Path in which the file system is mounted to the client.
+	MountDirectory string `pulumi:"mountDirectory"`
+	// File system VPCID.
+	VpcId string `pulumi:"vpcId"`
+	// Name of the availability zone, e.g. ap-beijing-1. For more information, see regions and availability zones in the Overview document.
+	Zone string `pulumi:"zone"`
+	// AZ name.
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetFileSystemClientsClientListInput is an input type that accepts GetFileSystemClientsClientListArgs and GetFileSystemClientsClientListOutput values.
+// You can construct a concrete instance of `GetFileSystemClientsClientListInput` via:
+//
+//          GetFileSystemClientsClientListArgs{...}
+type GetFileSystemClientsClientListInput interface {
+	pulumi.Input
+
+	ToGetFileSystemClientsClientListOutput() GetFileSystemClientsClientListOutput
+	ToGetFileSystemClientsClientListOutputWithContext(context.Context) GetFileSystemClientsClientListOutput
+}
+
+type GetFileSystemClientsClientListArgs struct {
+	// IP address of the file system.
+	CfsVip pulumi.StringInput `pulumi:"cfsVip"`
+	// Client IP.
+	ClientIp pulumi.StringInput `pulumi:"clientIp"`
+	// Path in which the file system is mounted to the client.
+	MountDirectory pulumi.StringInput `pulumi:"mountDirectory"`
+	// File system VPCID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Name of the availability zone, e.g. ap-beijing-1. For more information, see regions and availability zones in the Overview document.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// AZ name.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetFileSystemClientsClientListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFileSystemClientsClientList)(nil)).Elem()
+}
+
+func (i GetFileSystemClientsClientListArgs) ToGetFileSystemClientsClientListOutput() GetFileSystemClientsClientListOutput {
+	return i.ToGetFileSystemClientsClientListOutputWithContext(context.Background())
+}
+
+func (i GetFileSystemClientsClientListArgs) ToGetFileSystemClientsClientListOutputWithContext(ctx context.Context) GetFileSystemClientsClientListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFileSystemClientsClientListOutput)
+}
+
+// GetFileSystemClientsClientListArrayInput is an input type that accepts GetFileSystemClientsClientListArray and GetFileSystemClientsClientListArrayOutput values.
+// You can construct a concrete instance of `GetFileSystemClientsClientListArrayInput` via:
+//
+//          GetFileSystemClientsClientListArray{ GetFileSystemClientsClientListArgs{...} }
+type GetFileSystemClientsClientListArrayInput interface {
+	pulumi.Input
+
+	ToGetFileSystemClientsClientListArrayOutput() GetFileSystemClientsClientListArrayOutput
+	ToGetFileSystemClientsClientListArrayOutputWithContext(context.Context) GetFileSystemClientsClientListArrayOutput
+}
+
+type GetFileSystemClientsClientListArray []GetFileSystemClientsClientListInput
+
+func (GetFileSystemClientsClientListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFileSystemClientsClientList)(nil)).Elem()
+}
+
+func (i GetFileSystemClientsClientListArray) ToGetFileSystemClientsClientListArrayOutput() GetFileSystemClientsClientListArrayOutput {
+	return i.ToGetFileSystemClientsClientListArrayOutputWithContext(context.Background())
+}
+
+func (i GetFileSystemClientsClientListArray) ToGetFileSystemClientsClientListArrayOutputWithContext(ctx context.Context) GetFileSystemClientsClientListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFileSystemClientsClientListArrayOutput)
+}
+
+type GetFileSystemClientsClientListOutput struct{ *pulumi.OutputState }
+
+func (GetFileSystemClientsClientListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFileSystemClientsClientList)(nil)).Elem()
+}
+
+func (o GetFileSystemClientsClientListOutput) ToGetFileSystemClientsClientListOutput() GetFileSystemClientsClientListOutput {
+	return o
+}
+
+func (o GetFileSystemClientsClientListOutput) ToGetFileSystemClientsClientListOutputWithContext(ctx context.Context) GetFileSystemClientsClientListOutput {
+	return o
+}
+
+// IP address of the file system.
+func (o GetFileSystemClientsClientListOutput) CfsVip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemClientsClientList) string { return v.CfsVip }).(pulumi.StringOutput)
+}
+
+// Client IP.
+func (o GetFileSystemClientsClientListOutput) ClientIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemClientsClientList) string { return v.ClientIp }).(pulumi.StringOutput)
+}
+
+// Path in which the file system is mounted to the client.
+func (o GetFileSystemClientsClientListOutput) MountDirectory() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemClientsClientList) string { return v.MountDirectory }).(pulumi.StringOutput)
+}
+
+// File system VPCID.
+func (o GetFileSystemClientsClientListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemClientsClientList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Name of the availability zone, e.g. ap-beijing-1. For more information, see regions and availability zones in the Overview document.
+func (o GetFileSystemClientsClientListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemClientsClientList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// AZ name.
+func (o GetFileSystemClientsClientListOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemClientsClientList) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetFileSystemClientsClientListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFileSystemClientsClientListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFileSystemClientsClientList)(nil)).Elem()
+}
+
+func (o GetFileSystemClientsClientListArrayOutput) ToGetFileSystemClientsClientListArrayOutput() GetFileSystemClientsClientListArrayOutput {
+	return o
+}
+
+func (o GetFileSystemClientsClientListArrayOutput) ToGetFileSystemClientsClientListArrayOutputWithContext(ctx context.Context) GetFileSystemClientsClientListArrayOutput {
+	return o
+}
+
+func (o GetFileSystemClientsClientListArrayOutput) Index(i pulumi.IntInput) GetFileSystemClientsClientListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFileSystemClientsClientList {
+		return vs[0].([]GetFileSystemClientsClientList)[vs[1].(int)]
+	}).(GetFileSystemClientsClientListOutput)
+}
+
 type GetFileSystemsFileSystemList struct {
 	// ID of the access group.
 	AccessGroupId string `pulumi:"accessGroupId"`
@@ -276,6 +907,8 @@ type GetFileSystemsFileSystemList struct {
 	CreateTime string `pulumi:"createTime"`
 	// A specified file system ID used to query.
 	FileSystemId string `pulumi:"fileSystemId"`
+	// Mount root-directory.
+	FsId string `pulumi:"fsId"`
 	// IP of the file system.
 	MountIp string `pulumi:"mountIp"`
 	// A file system name used to query.
@@ -295,7 +928,7 @@ type GetFileSystemsFileSystemList struct {
 // GetFileSystemsFileSystemListInput is an input type that accepts GetFileSystemsFileSystemListArgs and GetFileSystemsFileSystemListOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemListInput` via:
 //
-//	GetFileSystemsFileSystemListArgs{...}
+//          GetFileSystemsFileSystemListArgs{...}
 type GetFileSystemsFileSystemListInput interface {
 	pulumi.Input
 
@@ -312,6 +945,8 @@ type GetFileSystemsFileSystemListArgs struct {
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// A specified file system ID used to query.
 	FileSystemId pulumi.StringInput `pulumi:"fileSystemId"`
+	// Mount root-directory.
+	FsId pulumi.StringInput `pulumi:"fsId"`
 	// IP of the file system.
 	MountIp pulumi.StringInput `pulumi:"mountIp"`
 	// A file system name used to query.
@@ -343,7 +978,7 @@ func (i GetFileSystemsFileSystemListArgs) ToGetFileSystemsFileSystemListOutputWi
 // GetFileSystemsFileSystemListArrayInput is an input type that accepts GetFileSystemsFileSystemListArray and GetFileSystemsFileSystemListArrayOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemListArrayInput` via:
 //
-//	GetFileSystemsFileSystemListArray{ GetFileSystemsFileSystemListArgs{...} }
+//          GetFileSystemsFileSystemListArray{ GetFileSystemsFileSystemListArgs{...} }
 type GetFileSystemsFileSystemListArrayInput interface {
 	pulumi.Input
 
@@ -397,6 +1032,11 @@ func (o GetFileSystemsFileSystemListOutput) CreateTime() pulumi.StringOutput {
 // A specified file system ID used to query.
 func (o GetFileSystemsFileSystemListOutput) FileSystemId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.FileSystemId }).(pulumi.StringOutput)
+}
+
+// Mount root-directory.
+func (o GetFileSystemsFileSystemListOutput) FsId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.FsId }).(pulumi.StringOutput)
 }
 
 // IP of the file system.
@@ -454,17 +1094,237 @@ func (o GetFileSystemsFileSystemListArrayOutput) Index(i pulumi.IntInput) GetFil
 	}).(GetFileSystemsFileSystemListOutput)
 }
 
+type GetMountTargetsMountTarget struct {
+	// CCN instance ID used by CFS Turbo.
+	CcnId string `pulumi:"ccnId"`
+	// CCN IP range used by CFS Turbo.
+	CidrBlock string `pulumi:"cidrBlock"`
+	// File system ID.
+	FileSystemId string `pulumi:"fileSystemId"`
+	// Mount root-directory.
+	FsId string `pulumi:"fsId"`
+	// Mount target IP.
+	IpAddress string `pulumi:"ipAddress"`
+	// Mount target status.
+	LifeCycleState string `pulumi:"lifeCycleState"`
+	// Mount target ID.
+	MountTargetId string `pulumi:"mountTargetId"`
+	// Network type.
+	NetworkInterface string `pulumi:"networkInterface"`
+	// Subnet ID.
+	SubnetId string `pulumi:"subnetId"`
+	// Subnet name.
+	SubnetName string `pulumi:"subnetName"`
+	// VPC ID.
+	VpcId string `pulumi:"vpcId"`
+	// VPC name.
+	VpcName string `pulumi:"vpcName"`
+}
+
+// GetMountTargetsMountTargetInput is an input type that accepts GetMountTargetsMountTargetArgs and GetMountTargetsMountTargetOutput values.
+// You can construct a concrete instance of `GetMountTargetsMountTargetInput` via:
+//
+//          GetMountTargetsMountTargetArgs{...}
+type GetMountTargetsMountTargetInput interface {
+	pulumi.Input
+
+	ToGetMountTargetsMountTargetOutput() GetMountTargetsMountTargetOutput
+	ToGetMountTargetsMountTargetOutputWithContext(context.Context) GetMountTargetsMountTargetOutput
+}
+
+type GetMountTargetsMountTargetArgs struct {
+	// CCN instance ID used by CFS Turbo.
+	CcnId pulumi.StringInput `pulumi:"ccnId"`
+	// CCN IP range used by CFS Turbo.
+	CidrBlock pulumi.StringInput `pulumi:"cidrBlock"`
+	// File system ID.
+	FileSystemId pulumi.StringInput `pulumi:"fileSystemId"`
+	// Mount root-directory.
+	FsId pulumi.StringInput `pulumi:"fsId"`
+	// Mount target IP.
+	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	// Mount target status.
+	LifeCycleState pulumi.StringInput `pulumi:"lifeCycleState"`
+	// Mount target ID.
+	MountTargetId pulumi.StringInput `pulumi:"mountTargetId"`
+	// Network type.
+	NetworkInterface pulumi.StringInput `pulumi:"networkInterface"`
+	// Subnet ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Subnet name.
+	SubnetName pulumi.StringInput `pulumi:"subnetName"`
+	// VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// VPC name.
+	VpcName pulumi.StringInput `pulumi:"vpcName"`
+}
+
+func (GetMountTargetsMountTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMountTargetsMountTarget)(nil)).Elem()
+}
+
+func (i GetMountTargetsMountTargetArgs) ToGetMountTargetsMountTargetOutput() GetMountTargetsMountTargetOutput {
+	return i.ToGetMountTargetsMountTargetOutputWithContext(context.Background())
+}
+
+func (i GetMountTargetsMountTargetArgs) ToGetMountTargetsMountTargetOutputWithContext(ctx context.Context) GetMountTargetsMountTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMountTargetsMountTargetOutput)
+}
+
+// GetMountTargetsMountTargetArrayInput is an input type that accepts GetMountTargetsMountTargetArray and GetMountTargetsMountTargetArrayOutput values.
+// You can construct a concrete instance of `GetMountTargetsMountTargetArrayInput` via:
+//
+//          GetMountTargetsMountTargetArray{ GetMountTargetsMountTargetArgs{...} }
+type GetMountTargetsMountTargetArrayInput interface {
+	pulumi.Input
+
+	ToGetMountTargetsMountTargetArrayOutput() GetMountTargetsMountTargetArrayOutput
+	ToGetMountTargetsMountTargetArrayOutputWithContext(context.Context) GetMountTargetsMountTargetArrayOutput
+}
+
+type GetMountTargetsMountTargetArray []GetMountTargetsMountTargetInput
+
+func (GetMountTargetsMountTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMountTargetsMountTarget)(nil)).Elem()
+}
+
+func (i GetMountTargetsMountTargetArray) ToGetMountTargetsMountTargetArrayOutput() GetMountTargetsMountTargetArrayOutput {
+	return i.ToGetMountTargetsMountTargetArrayOutputWithContext(context.Background())
+}
+
+func (i GetMountTargetsMountTargetArray) ToGetMountTargetsMountTargetArrayOutputWithContext(ctx context.Context) GetMountTargetsMountTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMountTargetsMountTargetArrayOutput)
+}
+
+type GetMountTargetsMountTargetOutput struct{ *pulumi.OutputState }
+
+func (GetMountTargetsMountTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMountTargetsMountTarget)(nil)).Elem()
+}
+
+func (o GetMountTargetsMountTargetOutput) ToGetMountTargetsMountTargetOutput() GetMountTargetsMountTargetOutput {
+	return o
+}
+
+func (o GetMountTargetsMountTargetOutput) ToGetMountTargetsMountTargetOutputWithContext(ctx context.Context) GetMountTargetsMountTargetOutput {
+	return o
+}
+
+// CCN instance ID used by CFS Turbo.
+func (o GetMountTargetsMountTargetOutput) CcnId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.CcnId }).(pulumi.StringOutput)
+}
+
+// CCN IP range used by CFS Turbo.
+func (o GetMountTargetsMountTargetOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.CidrBlock }).(pulumi.StringOutput)
+}
+
+// File system ID.
+func (o GetMountTargetsMountTargetOutput) FileSystemId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.FileSystemId }).(pulumi.StringOutput)
+}
+
+// Mount root-directory.
+func (o GetMountTargetsMountTargetOutput) FsId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.FsId }).(pulumi.StringOutput)
+}
+
+// Mount target IP.
+func (o GetMountTargetsMountTargetOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// Mount target status.
+func (o GetMountTargetsMountTargetOutput) LifeCycleState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.LifeCycleState }).(pulumi.StringOutput)
+}
+
+// Mount target ID.
+func (o GetMountTargetsMountTargetOutput) MountTargetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.MountTargetId }).(pulumi.StringOutput)
+}
+
+// Network type.
+func (o GetMountTargetsMountTargetOutput) NetworkInterface() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.NetworkInterface }).(pulumi.StringOutput)
+}
+
+// Subnet ID.
+func (o GetMountTargetsMountTargetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Subnet name.
+func (o GetMountTargetsMountTargetOutput) SubnetName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.SubnetName }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o GetMountTargetsMountTargetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// VPC name.
+func (o GetMountTargetsMountTargetOutput) VpcName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMountTargetsMountTarget) string { return v.VpcName }).(pulumi.StringOutput)
+}
+
+type GetMountTargetsMountTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMountTargetsMountTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMountTargetsMountTarget)(nil)).Elem()
+}
+
+func (o GetMountTargetsMountTargetArrayOutput) ToGetMountTargetsMountTargetArrayOutput() GetMountTargetsMountTargetArrayOutput {
+	return o
+}
+
+func (o GetMountTargetsMountTargetArrayOutput) ToGetMountTargetsMountTargetArrayOutputWithContext(ctx context.Context) GetMountTargetsMountTargetArrayOutput {
+	return o
+}
+
+func (o GetMountTargetsMountTargetArrayOutput) Index(i pulumi.IntInput) GetMountTargetsMountTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMountTargetsMountTarget {
+		return vs[0].([]GetMountTargetsMountTarget)[vs[1].(int)]
+	}).(GetMountTargetsMountTargetOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessGroupsAccessGroupListInput)(nil)).Elem(), GetAccessGroupsAccessGroupListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessGroupsAccessGroupListArrayInput)(nil)).Elem(), GetAccessGroupsAccessGroupListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRulesAccessRuleListInput)(nil)).Elem(), GetAccessRulesAccessRuleListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRulesAccessRuleListArrayInput)(nil)).Elem(), GetAccessRulesAccessRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneInput)(nil)).Elem(), GetAvailableZoneRegionZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneArrayInput)(nil)).Elem(), GetAvailableZoneRegionZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneZoneInput)(nil)).Elem(), GetAvailableZoneRegionZoneZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneZoneArrayInput)(nil)).Elem(), GetAvailableZoneRegionZoneZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneZoneTypeInput)(nil)).Elem(), GetAvailableZoneRegionZoneZoneTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneZoneTypeArrayInput)(nil)).Elem(), GetAvailableZoneRegionZoneZoneTypeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneZoneTypeProtocolInput)(nil)).Elem(), GetAvailableZoneRegionZoneZoneTypeProtocolArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput)(nil)).Elem(), GetAvailableZoneRegionZoneZoneTypeProtocolArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemClientsClientListInput)(nil)).Elem(), GetFileSystemClientsClientListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemClientsClientListArrayInput)(nil)).Elem(), GetFileSystemClientsClientListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemsFileSystemListInput)(nil)).Elem(), GetFileSystemsFileSystemListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemsFileSystemListArrayInput)(nil)).Elem(), GetFileSystemsFileSystemListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMountTargetsMountTargetInput)(nil)).Elem(), GetMountTargetsMountTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMountTargetsMountTargetArrayInput)(nil)).Elem(), GetMountTargetsMountTargetArray{})
 	pulumi.RegisterOutputType(GetAccessGroupsAccessGroupListOutput{})
 	pulumi.RegisterOutputType(GetAccessGroupsAccessGroupListArrayOutput{})
 	pulumi.RegisterOutputType(GetAccessRulesAccessRuleListOutput{})
 	pulumi.RegisterOutputType(GetAccessRulesAccessRuleListArrayOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneZoneOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneZoneTypeOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneZoneTypeArrayOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneZoneTypeProtocolOutput{})
+	pulumi.RegisterOutputType(GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput{})
+	pulumi.RegisterOutputType(GetFileSystemClientsClientListOutput{})
+	pulumi.RegisterOutputType(GetFileSystemClientsClientListArrayOutput{})
 	pulumi.RegisterOutputType(GetFileSystemsFileSystemListOutput{})
 	pulumi.RegisterOutputType(GetFileSystemsFileSystemListArrayOutput{})
+	pulumi.RegisterOutputType(GetMountTargetsMountTargetOutput{})
+	pulumi.RegisterOutputType(GetMountTargetsMountTargetArrayOutput{})
 }

@@ -23,6 +23,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Ckafka/acl:Acl":
 		r = &Acl{}
+	case "tencentcloud:Ckafka/connectResource:ConnectResource":
+		r = &ConnectResource{}
+	case "tencentcloud:Ckafka/datahubTopic:DatahubTopic":
+		r = &DatahubTopic{}
 	case "tencentcloud:Ckafka/instance:Instance":
 		r = &Instance{}
 	case "tencentcloud:Ckafka/topic:Topic":
@@ -45,6 +49,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ckafka/acl",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ckafka/connectResource",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ckafka/datahubTopic",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

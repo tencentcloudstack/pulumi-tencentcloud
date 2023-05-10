@@ -18,37 +18,34 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cam.GetUsers(ctx, &cam.GetUsersArgs{
-//				Name: pulumi.StringRef("cam-user-test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Cam.GetUsers(ctx, &cam.GetUsersArgs{
-//				Email: pulumi.StringRef("hello@test.com"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Cam.GetUsers(ctx, &cam.GetUsersArgs{
-//				PhoneNum: pulumi.StringRef("12345678910"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.GetUsers(ctx, &cam.GetUsersArgs{
+// 			Name: pulumi.StringRef("cam-user-test"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cam.GetUsers(ctx, &cam.GetUsersArgs{
+// 			Email: pulumi.StringRef("hello@test.com"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cam.GetUsers(ctx, &cam.GetUsersArgs{
+// 			PhoneNum: pulumi.StringRef("12345678910"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetUsers(ctx *pulumi.Context, args *GetUsersArgs, opts ...pulumi.InvokeOption) (*GetUsersResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

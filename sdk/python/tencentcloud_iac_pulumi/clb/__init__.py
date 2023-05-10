@@ -7,6 +7,7 @@ import typing
 # Export this package's modules as members:
 from .attachment import *
 from .customized_config import *
+from .function_targets_attachment import *
 from .get_attachments import *
 from .get_instances import *
 from .get_listener_rules import *

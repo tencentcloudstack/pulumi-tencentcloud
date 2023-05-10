@@ -21,53 +21,50 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Dayu.NewDdosPolicyCase(ctx, "foo", &Dayu.DdosPolicyCaseArgs{
-//				AppProtocols: pulumi.StringArray{
-//					pulumi.String("tcp"),
-//					pulumi.String("udp"),
-//				},
-//				AppType:          pulumi.String("WEB"),
-//				HasAbroad:        pulumi.String("yes"),
-//				HasInitiateTcp:   pulumi.String("yes"),
-//				HasInitiateUdp:   pulumi.String("yes"),
-//				HasVpn:           pulumi.String("yes"),
-//				MaxTcpPackageLen: pulumi.String("1200"),
-//				MaxUdpPackageLen: pulumi.String("1200"),
-//				MinTcpPackageLen: pulumi.String("1000"),
-//				MinUdpPackageLen: pulumi.String("1000"),
-//				PeerTcpPort:      pulumi.String("1111"),
-//				PeerUdpPort:      pulumi.String("3333"),
-//				PlatformTypes: pulumi.StringArray{
-//					pulumi.String("PC"),
-//					pulumi.String("MOBILE"),
-//				},
-//				ResourceType: pulumi.String("bgpip"),
-//				TcpEndPort:   pulumi.String("2000"),
-//				TcpFootprint: pulumi.String("511"),
-//				TcpStartPort: pulumi.String("1000"),
-//				UdpEndPort:   pulumi.String("4000"),
-//				UdpFootprint: pulumi.String("500"),
-//				UdpStartPort: pulumi.String("3000"),
-//				WebApiUrls: pulumi.StringArray{
-//					pulumi.String("abc.com"),
-//					pulumi.String("test.cn/aaa.png"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewDdosPolicyCase(ctx, "foo", &Dayu.DdosPolicyCaseArgs{
+// 			AppProtocols: pulumi.StringArray{
+// 				pulumi.String("tcp"),
+// 				pulumi.String("udp"),
+// 			},
+// 			AppType:          pulumi.String("WEB"),
+// 			HasAbroad:        pulumi.String("yes"),
+// 			HasInitiateTcp:   pulumi.String("yes"),
+// 			HasInitiateUdp:   pulumi.String("yes"),
+// 			HasVpn:           pulumi.String("yes"),
+// 			MaxTcpPackageLen: pulumi.String("1200"),
+// 			MaxUdpPackageLen: pulumi.String("1200"),
+// 			MinTcpPackageLen: pulumi.String("1000"),
+// 			MinUdpPackageLen: pulumi.String("1000"),
+// 			PeerTcpPort:      pulumi.String("1111"),
+// 			PeerUdpPort:      pulumi.String("3333"),
+// 			PlatformTypes: pulumi.StringArray{
+// 				pulumi.String("PC"),
+// 				pulumi.String("MOBILE"),
+// 			},
+// 			ResourceType: pulumi.String("bgpip"),
+// 			TcpEndPort:   pulumi.String("2000"),
+// 			TcpFootprint: pulumi.String("511"),
+// 			TcpStartPort: pulumi.String("1000"),
+// 			UdpEndPort:   pulumi.String("4000"),
+// 			UdpFootprint: pulumi.String("500"),
+// 			UdpStartPort: pulumi.String("3000"),
+// 			WebApiUrls: pulumi.StringArray{
+// 				pulumi.String("abc.com"),
+// 				pulumi.String("test.cn/aaa.png"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type DdosPolicyCase struct {
 	pulumi.CustomResourceState
@@ -411,7 +408,7 @@ func (i *DdosPolicyCase) ToDdosPolicyCaseOutputWithContext(ctx context.Context) 
 // DdosPolicyCaseArrayInput is an input type that accepts DdosPolicyCaseArray and DdosPolicyCaseArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyCaseArrayInput` via:
 //
-//	DdosPolicyCaseArray{ DdosPolicyCaseArgs{...} }
+//          DdosPolicyCaseArray{ DdosPolicyCaseArgs{...} }
 type DdosPolicyCaseArrayInput interface {
 	pulumi.Input
 
@@ -436,7 +433,7 @@ func (i DdosPolicyCaseArray) ToDdosPolicyCaseArrayOutputWithContext(ctx context.
 // DdosPolicyCaseMapInput is an input type that accepts DdosPolicyCaseMap and DdosPolicyCaseMapOutput values.
 // You can construct a concrete instance of `DdosPolicyCaseMapInput` via:
 //
-//	DdosPolicyCaseMap{ "key": DdosPolicyCaseArgs{...} }
+//          DdosPolicyCaseMap{ "key": DdosPolicyCaseArgs{...} }
 type DdosPolicyCaseMapInput interface {
 	pulumi.Input
 

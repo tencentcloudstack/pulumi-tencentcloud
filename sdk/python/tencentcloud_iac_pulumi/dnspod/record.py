@@ -358,6 +358,14 @@ class Record(pulumi.CustomResource):
             value="1.2.3.9")
         ```
 
+        ## Import
+
+        DnsPod Domain record can be imported using the Domain#RecordId, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain: The Domain.
@@ -391,6 +399,14 @@ class Record(pulumi.CustomResource):
             record_type="A",
             sub_domain="demo",
             value="1.2.3.9")
+        ```
+
+        ## Import
+
+        DnsPod Domain record can be imported using the Domain#RecordId, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
         ```
 
         :param str resource_name: The name of the resource.

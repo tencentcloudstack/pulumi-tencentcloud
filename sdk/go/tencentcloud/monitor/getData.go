@@ -18,61 +18,58 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			instances, err := Instances.GetInstance(ctx, nil, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Monitor.GetData(ctx, &monitor.GetDataArgs{
-//				Namespace:  "QCE/CVM",
-//				MetricName: "CPUUsage",
-//				Dimensions: []monitor.GetDataDimension{
-//					monitor.GetDataDimension{
-//						Name:  "InstanceId",
-//						Value: instances.InstanceLists[0].InstanceId,
-//					},
-//				},
-//				Period:    pulumi.IntRef(300),
-//				StartTime: "2020-04-28T18:45:00+08:00",
-//				EndTime:   "2020-04-28T19:00:00+08:00",
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Monitor.GetData(ctx, &monitor.GetDataArgs{
-//				Namespace:  "QCE/COS",
-//				MetricName: "InternetTraffic",
-//				Dimensions: []monitor.GetDataDimension{
-//					monitor.GetDataDimension{
-//						Name:  "appid",
-//						Value: "1258798060",
-//					},
-//					monitor.GetDataDimension{
-//						Name:  "bucket",
-//						Value: "test-1258798060",
-//					},
-//				},
-//				Period:    pulumi.IntRef(300),
-//				StartTime: "2020-04-28T18:30:00+08:00",
-//				EndTime:   "2020-04-28T19:00:00+08:00",
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		instances, err := Instances.GetInstance(ctx, nil, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.GetData(ctx, &monitor.GetDataArgs{
+// 			Namespace:  "QCE/CVM",
+// 			MetricName: "CPUUsage",
+// 			Dimensions: []monitor.GetDataDimension{
+// 				monitor.GetDataDimension{
+// 					Name:  "InstanceId",
+// 					Value: instances.InstanceLists[0].InstanceId,
+// 				},
+// 			},
+// 			Period:    pulumi.IntRef(300),
+// 			StartTime: "2020-04-28T18:45:00+08:00",
+// 			EndTime:   "2020-04-28T19:00:00+08:00",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.GetData(ctx, &monitor.GetDataArgs{
+// 			Namespace:  "QCE/COS",
+// 			MetricName: "InternetTraffic",
+// 			Dimensions: []monitor.GetDataDimension{
+// 				monitor.GetDataDimension{
+// 					Name:  "appid",
+// 					Value: "1258798060",
+// 				},
+// 				monitor.GetDataDimension{
+// 					Name:  "bucket",
+// 					Value: "test-1258798060",
+// 				},
+// 			},
+// 			Period:    pulumi.IntRef(300),
+// 			StartTime: "2020-04-28T18:30:00+08:00",
+// 			EndTime:   "2020-04-28T19:00:00+08:00",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetData(ctx *pulumi.Context, args *GetDataArgs, opts ...pulumi.InvokeOption) (*GetDataResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

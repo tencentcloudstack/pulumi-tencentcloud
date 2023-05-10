@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Key.NewPair(ctx, "foo", &Key.PairArgs{
-//				KeyName:   pulumi.String("terraform_test"),
-//				PublicKey: pulumi.String("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw=="),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Key.NewPair(ctx, "foo", &Key.PairArgs{
+// 			KeyName: pulumi.String("terraform_test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Key.NewPair(ctx, "foo1", &Key.PairArgs{
+// 			KeyName:   pulumi.String("terraform_test"),
+// 			PublicKey: pulumi.String("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw=="),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -45,9 +48,7 @@ import (
 // Key pair can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
-//
+//  $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
 // ```
 type Pair struct {
 	pulumi.CustomResourceState
@@ -58,6 +59,8 @@ type Pair struct {
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// You can import an existing public key and using TencentCloud key pair to manage it.
 	PublicKey pulumi.StringOutput `pulumi:"publicKey"`
+	// Tags of the key pair.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
 // NewPair registers a new resource with the given unique name, arguments, and options.
@@ -69,9 +72,6 @@ func NewPair(ctx *pulumi.Context,
 
 	if args.KeyName == nil {
 		return nil, errors.New("invalid value for required argument 'KeyName'")
-	}
-	if args.PublicKey == nil {
-		return nil, errors.New("invalid value for required argument 'PublicKey'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Pair
@@ -102,6 +102,8 @@ type pairState struct {
 	ProjectId *int `pulumi:"projectId"`
 	// You can import an existing public key and using TencentCloud key pair to manage it.
 	PublicKey *string `pulumi:"publicKey"`
+	// Tags of the key pair.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type PairState struct {
@@ -111,6 +113,8 @@ type PairState struct {
 	ProjectId pulumi.IntPtrInput
 	// You can import an existing public key and using TencentCloud key pair to manage it.
 	PublicKey pulumi.StringPtrInput
+	// Tags of the key pair.
+	Tags pulumi.MapInput
 }
 
 func (PairState) ElementType() reflect.Type {
@@ -123,7 +127,9 @@ type pairArgs struct {
 	// Specifys to which project the key pair belongs.
 	ProjectId *int `pulumi:"projectId"`
 	// You can import an existing public key and using TencentCloud key pair to manage it.
-	PublicKey string `pulumi:"publicKey"`
+	PublicKey *string `pulumi:"publicKey"`
+	// Tags of the key pair.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Pair resource.
@@ -133,7 +139,9 @@ type PairArgs struct {
 	// Specifys to which project the key pair belongs.
 	ProjectId pulumi.IntPtrInput
 	// You can import an existing public key and using TencentCloud key pair to manage it.
-	PublicKey pulumi.StringInput
+	PublicKey pulumi.StringPtrInput
+	// Tags of the key pair.
+	Tags pulumi.MapInput
 }
 
 func (PairArgs) ElementType() reflect.Type {
@@ -162,7 +170,7 @@ func (i *Pair) ToPairOutputWithContext(ctx context.Context) PairOutput {
 // PairArrayInput is an input type that accepts PairArray and PairArrayOutput values.
 // You can construct a concrete instance of `PairArrayInput` via:
 //
-//	PairArray{ PairArgs{...} }
+//          PairArray{ PairArgs{...} }
 type PairArrayInput interface {
 	pulumi.Input
 
@@ -187,7 +195,7 @@ func (i PairArray) ToPairArrayOutputWithContext(ctx context.Context) PairArrayOu
 // PairMapInput is an input type that accepts PairMap and PairMapOutput values.
 // You can construct a concrete instance of `PairMapInput` via:
 //
-//	PairMap{ "key": PairArgs{...} }
+//          PairMap{ "key": PairArgs{...} }
 type PairMapInput interface {
 	pulumi.Input
 
@@ -236,6 +244,11 @@ func (o PairOutput) ProjectId() pulumi.IntPtrOutput {
 // You can import an existing public key and using TencentCloud key pair to manage it.
 func (o PairOutput) PublicKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *Pair) pulumi.StringOutput { return v.PublicKey }).(pulumi.StringOutput)
+}
+
+// Tags of the key pair.
+func (o PairOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Pair) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 type PairArrayOutput struct{ *pulumi.OutputState }

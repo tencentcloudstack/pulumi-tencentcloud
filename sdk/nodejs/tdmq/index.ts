@@ -5,9 +5,20 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getRocketmqCluster";
+export * from "./getRocketmqGroup";
+export * from "./getRocketmqNamespace";
+export * from "./getRocketmqRole";
+export * from "./getRocketmqTopic";
 export * from "./instance";
 export * from "./namespace";
 export * from "./namespaceRoleAttachment";
+export * from "./rocketmqCluster";
+export * from "./rocketmqEnvironmentRole";
+export * from "./rocketmqGroup";
+export * from "./rocketmqNamespace";
+export * from "./rocketmqRole";
+export * from "./rocketmqTopic";
 export * from "./role";
 export * from "./topic";
 
@@ -15,6 +26,12 @@ export * from "./topic";
 import { Instance } from "./instance";
 import { Namespace } from "./namespace";
 import { NamespaceRoleAttachment } from "./namespaceRoleAttachment";
+import { RocketmqCluster } from "./rocketmqCluster";
+import { RocketmqEnvironmentRole } from "./rocketmqEnvironmentRole";
+import { RocketmqGroup } from "./rocketmqGroup";
+import { RocketmqNamespace } from "./rocketmqNamespace";
+import { RocketmqRole } from "./rocketmqRole";
+import { RocketmqTopic } from "./rocketmqTopic";
 import { Role } from "./role";
 import { Topic } from "./topic";
 
@@ -28,6 +45,18 @@ const _module = {
                 return new Namespace(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/namespaceRoleAttachment:NamespaceRoleAttachment":
                 return new NamespaceRoleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster":
+                return new RocketmqCluster(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rocketmqEnvironmentRole:RocketmqEnvironmentRole":
+                return new RocketmqEnvironmentRole(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup":
+                return new RocketmqGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace":
+                return new RocketmqNamespace(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rocketmqRole:RocketmqRole":
+                return new RocketmqRole(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic":
+                return new RocketmqTopic(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/role:Role":
                 return new Role(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/topic:Topic":
@@ -40,5 +69,11 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/namespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/namespaceRoleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqCluster", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqEnvironmentRole", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqNamespace", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqRole", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqTopic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/role", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/topic", _module)

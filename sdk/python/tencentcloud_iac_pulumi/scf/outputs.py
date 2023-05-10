@@ -10,6 +10,9 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'FunctionAliasRoutingConfig',
+    'FunctionAliasRoutingConfigAdditionalVersionMatch',
+    'FunctionAliasRoutingConfigAdditionalVersionWeight',
     'FunctionCfsConfig',
     'FunctionImageConfig',
     'FunctionLayer',
@@ -21,6 +24,136 @@ __all__ = [
     'GetLogsLogResult',
     'GetNamespacesNamespaceResult',
 ]
+
+@pulumi.output_type
+class FunctionAliasRoutingConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "additionalVersionMatches":
+            suggest = "additional_version_matches"
+        elif key == "additionalVersionWeights":
+            suggest = "additional_version_weights"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FunctionAliasRoutingConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FunctionAliasRoutingConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FunctionAliasRoutingConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 additional_version_matches: Optional[Sequence['outputs.FunctionAliasRoutingConfigAdditionalVersionMatch']] = None,
+                 additional_version_weights: Optional[Sequence['outputs.FunctionAliasRoutingConfigAdditionalVersionWeight']] = None):
+        """
+        :param Sequence['FunctionAliasRoutingConfigAdditionalVersionMatchArgs'] additional_version_matches: Additional version with rule-based routing.
+        :param Sequence['FunctionAliasRoutingConfigAdditionalVersionWeightArgs'] additional_version_weights: Additional version with random weight-based routing.
+        """
+        if additional_version_matches is not None:
+            pulumi.set(__self__, "additional_version_matches", additional_version_matches)
+        if additional_version_weights is not None:
+            pulumi.set(__self__, "additional_version_weights", additional_version_weights)
+
+    @property
+    @pulumi.getter(name="additionalVersionMatches")
+    def additional_version_matches(self) -> Optional[Sequence['outputs.FunctionAliasRoutingConfigAdditionalVersionMatch']]:
+        """
+        Additional version with rule-based routing.
+        """
+        return pulumi.get(self, "additional_version_matches")
+
+    @property
+    @pulumi.getter(name="additionalVersionWeights")
+    def additional_version_weights(self) -> Optional[Sequence['outputs.FunctionAliasRoutingConfigAdditionalVersionWeight']]:
+        """
+        Additional version with random weight-based routing.
+        """
+        return pulumi.get(self, "additional_version_weights")
+
+
+@pulumi.output_type
+class FunctionAliasRoutingConfigAdditionalVersionMatch(dict):
+    def __init__(__self__, *,
+                 expression: str,
+                 key: str,
+                 method: str,
+                 version: str):
+        """
+        :param str expression: Rule requirements for range match:It should be described in an open or closed range, i.e., (a,b) or [a,b], where both a and b are integersRule requirements for exact match:Exact string match.
+        :param str key: Matching rule key. When the API is called, pass in the key to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for key and pass in RoutingKey:{User:value} when invoking a function through invoke for invocation based on rule matching.
+        :param str method: Match method. Valid values:range: Range matchexact: exact string match.
+        :param str version: Function version name.
+        """
+        pulumi.set(__self__, "expression", expression)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def expression(self) -> str:
+        """
+        Rule requirements for range match:It should be described in an open or closed range, i.e., (a,b) or [a,b], where both a and b are integersRule requirements for exact match:Exact string match.
+        """
+        return pulumi.get(self, "expression")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Matching rule key. When the API is called, pass in the key to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for key and pass in RoutingKey:{User:value} when invoking a function through invoke for invocation based on rule matching.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        Match method. Valid values:range: Range matchexact: exact string match.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Function version name.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class FunctionAliasRoutingConfigAdditionalVersionWeight(dict):
+    def __init__(__self__, *,
+                 version: str,
+                 weight: float):
+        """
+        :param str version: Function version name.
+        :param float weight: Version weight.
+        """
+        pulumi.set(__self__, "version", version)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Function version name.
+        """
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> float:
+        """
+        Version weight.
+        """
+        return pulumi.get(self, "weight")
+
 
 @pulumi.output_type
 class FunctionCfsConfig(dict):

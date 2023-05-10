@@ -10,15 +10,12 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'AsScalingGroupAutoScalingConfig',
-    'AsScalingGroupAutoScalingConfigDataDisk',
-    'AsScalingGroupAutoScalingGroup',
-    'AsScalingGroupAutoScalingGroupForwardBalancerId',
-    'AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute',
     'ClusterAttachmentWorkerConfig',
     'ClusterAttachmentWorkerConfigDataDisk',
+    'ClusterAttachmentWorkerConfigGpuArgs',
     'ClusterAttachmentWorkerConfigOverrides',
     'ClusterAttachmentWorkerConfigOverridesDataDisk',
+    'ClusterAttachmentWorkerConfigOverridesGpuArgs',
     'ClusterAuthOptions',
     'ClusterClusterAudit',
     'ClusterClusterExtraArgs',
@@ -37,11 +34,16 @@ __all__ = [
     'NodePoolAutoScalingConfigDataDisk',
     'NodePoolNodeConfig',
     'NodePoolNodeConfigDataDisk',
+    'NodePoolNodeConfigGpuArgs',
     'NodePoolTaint',
     'ScaleWorkerDataDisk',
+    'ScaleWorkerGpuArgs',
     'ScaleWorkerWorkerConfig',
     'ScaleWorkerWorkerConfigDataDisk',
     'ScaleWorkerWorkerInstancesList',
+    'ServerlessNodePoolServerlessNode',
+    'ServerlessNodePoolTaint',
+    'GetAvailableClusterVersionsClusterResult',
     'GetChartsChartListResult',
     'GetClusterCommonNamesListResult',
     'GetClusterLevelsListResult',
@@ -49,612 +51,6 @@ __all__ = [
     'GetClustersListClusterExtraArgResult',
     'GetClustersListWorkerInstancesListResult',
 ]
-
-@pulumi.output_type
-class AsScalingGroupAutoScalingConfig(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "configurationName":
-            suggest = "configuration_name"
-        elif key == "instanceType":
-            suggest = "instance_type"
-        elif key == "dataDisks":
-            suggest = "data_disks"
-        elif key == "enhancedMonitorService":
-            suggest = "enhanced_monitor_service"
-        elif key == "enhancedSecurityService":
-            suggest = "enhanced_security_service"
-        elif key == "instanceTags":
-            suggest = "instance_tags"
-        elif key == "internetChargeType":
-            suggest = "internet_charge_type"
-        elif key == "internetMaxBandwidthOut":
-            suggest = "internet_max_bandwidth_out"
-        elif key == "keyIds":
-            suggest = "key_ids"
-        elif key == "projectId":
-            suggest = "project_id"
-        elif key == "publicIpAssigned":
-            suggest = "public_ip_assigned"
-        elif key == "securityGroupIds":
-            suggest = "security_group_ids"
-        elif key == "systemDiskSize":
-            suggest = "system_disk_size"
-        elif key == "systemDiskType":
-            suggest = "system_disk_type"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in AsScalingGroupAutoScalingConfig. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        AsScalingGroupAutoScalingConfig.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        AsScalingGroupAutoScalingConfig.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 configuration_name: str,
-                 instance_type: str,
-                 data_disks: Optional[Sequence['outputs.AsScalingGroupAutoScalingConfigDataDisk']] = None,
-                 enhanced_monitor_service: Optional[bool] = None,
-                 enhanced_security_service: Optional[bool] = None,
-                 instance_tags: Optional[Mapping[str, Any]] = None,
-                 internet_charge_type: Optional[str] = None,
-                 internet_max_bandwidth_out: Optional[int] = None,
-                 key_ids: Optional[Sequence[str]] = None,
-                 password: Optional[str] = None,
-                 project_id: Optional[int] = None,
-                 public_ip_assigned: Optional[bool] = None,
-                 security_group_ids: Optional[Sequence[str]] = None,
-                 system_disk_size: Optional[int] = None,
-                 system_disk_type: Optional[str] = None):
-        """
-        :param str configuration_name: Name of a launch configuration.
-        :param str instance_type: Specified types of CVM instance.
-        :param Sequence['AsScalingGroupAutoScalingConfigDataDiskArgs'] data_disks: Configurations of data disk.
-        :param bool enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
-        :param bool enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
-        :param Mapping[str, Any] instance_tags: A list of tags used to associate different resources.
-        :param str internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-        :param int internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
-        :param Sequence[str] key_ids: ID list of keys.
-        :param str password: Password to access.
-        :param int project_id: Specifys to which project the configuration belongs.
-        :param bool public_ip_assigned: Specify whether to assign an Internet IP address.
-        :param Sequence[str] security_group_ids: Security groups to which a CVM instance belongs.
-        :param int system_disk_size: Volume of system disk in GB. Default is `50`.
-        :param str system_disk_type: Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
-        """
-        pulumi.set(__self__, "configuration_name", configuration_name)
-        pulumi.set(__self__, "instance_type", instance_type)
-        if data_disks is not None:
-            pulumi.set(__self__, "data_disks", data_disks)
-        if enhanced_monitor_service is not None:
-            pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
-        if enhanced_security_service is not None:
-            pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
-        if instance_tags is not None:
-            pulumi.set(__self__, "instance_tags", instance_tags)
-        if internet_charge_type is not None:
-            pulumi.set(__self__, "internet_charge_type", internet_charge_type)
-        if internet_max_bandwidth_out is not None:
-            pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
-        if key_ids is not None:
-            pulumi.set(__self__, "key_ids", key_ids)
-        if password is not None:
-            pulumi.set(__self__, "password", password)
-        if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
-        if public_ip_assigned is not None:
-            pulumi.set(__self__, "public_ip_assigned", public_ip_assigned)
-        if security_group_ids is not None:
-            pulumi.set(__self__, "security_group_ids", security_group_ids)
-        if system_disk_size is not None:
-            pulumi.set(__self__, "system_disk_size", system_disk_size)
-        if system_disk_type is not None:
-            pulumi.set(__self__, "system_disk_type", system_disk_type)
-
-    @property
-    @pulumi.getter(name="configurationName")
-    def configuration_name(self) -> str:
-        """
-        Name of a launch configuration.
-        """
-        return pulumi.get(self, "configuration_name")
-
-    @property
-    @pulumi.getter(name="instanceType")
-    def instance_type(self) -> str:
-        """
-        Specified types of CVM instance.
-        """
-        return pulumi.get(self, "instance_type")
-
-    @property
-    @pulumi.getter(name="dataDisks")
-    def data_disks(self) -> Optional[Sequence['outputs.AsScalingGroupAutoScalingConfigDataDisk']]:
-        """
-        Configurations of data disk.
-        """
-        return pulumi.get(self, "data_disks")
-
-    @property
-    @pulumi.getter(name="enhancedMonitorService")
-    def enhanced_monitor_service(self) -> Optional[bool]:
-        """
-        To specify whether to enable cloud monitor service. Default is TRUE.
-        """
-        return pulumi.get(self, "enhanced_monitor_service")
-
-    @property
-    @pulumi.getter(name="enhancedSecurityService")
-    def enhanced_security_service(self) -> Optional[bool]:
-        """
-        To specify whether to enable cloud security service. Default is TRUE.
-        """
-        return pulumi.get(self, "enhanced_security_service")
-
-    @property
-    @pulumi.getter(name="instanceTags")
-    def instance_tags(self) -> Optional[Mapping[str, Any]]:
-        """
-        A list of tags used to associate different resources.
-        """
-        return pulumi.get(self, "instance_tags")
-
-    @property
-    @pulumi.getter(name="internetChargeType")
-    def internet_charge_type(self) -> Optional[str]:
-        """
-        Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
-        """
-        return pulumi.get(self, "internet_charge_type")
-
-    @property
-    @pulumi.getter(name="internetMaxBandwidthOut")
-    def internet_max_bandwidth_out(self) -> Optional[int]:
-        """
-        Max bandwidth of Internet access in Mbps. Default is `0`.
-        """
-        return pulumi.get(self, "internet_max_bandwidth_out")
-
-    @property
-    @pulumi.getter(name="keyIds")
-    def key_ids(self) -> Optional[Sequence[str]]:
-        """
-        ID list of keys.
-        """
-        return pulumi.get(self, "key_ids")
-
-    @property
-    @pulumi.getter
-    def password(self) -> Optional[str]:
-        """
-        Password to access.
-        """
-        return pulumi.get(self, "password")
-
-    @property
-    @pulumi.getter(name="projectId")
-    def project_id(self) -> Optional[int]:
-        """
-        Specifys to which project the configuration belongs.
-        """
-        return pulumi.get(self, "project_id")
-
-    @property
-    @pulumi.getter(name="publicIpAssigned")
-    def public_ip_assigned(self) -> Optional[bool]:
-        """
-        Specify whether to assign an Internet IP address.
-        """
-        return pulumi.get(self, "public_ip_assigned")
-
-    @property
-    @pulumi.getter(name="securityGroupIds")
-    def security_group_ids(self) -> Optional[Sequence[str]]:
-        """
-        Security groups to which a CVM instance belongs.
-        """
-        return pulumi.get(self, "security_group_ids")
-
-    @property
-    @pulumi.getter(name="systemDiskSize")
-    def system_disk_size(self) -> Optional[int]:
-        """
-        Volume of system disk in GB. Default is `50`.
-        """
-        return pulumi.get(self, "system_disk_size")
-
-    @property
-    @pulumi.getter(name="systemDiskType")
-    def system_disk_type(self) -> Optional[str]:
-        """
-        Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
-        """
-        return pulumi.get(self, "system_disk_type")
-
-
-@pulumi.output_type
-class AsScalingGroupAutoScalingConfigDataDisk(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "diskSize":
-            suggest = "disk_size"
-        elif key == "diskType":
-            suggest = "disk_type"
-        elif key == "snapshotId":
-            suggest = "snapshot_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in AsScalingGroupAutoScalingConfigDataDisk. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        AsScalingGroupAutoScalingConfigDataDisk.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        AsScalingGroupAutoScalingConfigDataDisk.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 disk_size: Optional[int] = None,
-                 disk_type: Optional[str] = None,
-                 snapshot_id: Optional[str] = None):
-        """
-        :param int disk_size: Volume of disk in GB. Default is `0`.
-        :param str disk_type: Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
-        :param str snapshot_id: Data disk snapshot ID.
-        """
-        if disk_size is not None:
-            pulumi.set(__self__, "disk_size", disk_size)
-        if disk_type is not None:
-            pulumi.set(__self__, "disk_type", disk_type)
-        if snapshot_id is not None:
-            pulumi.set(__self__, "snapshot_id", snapshot_id)
-
-    @property
-    @pulumi.getter(name="diskSize")
-    def disk_size(self) -> Optional[int]:
-        """
-        Volume of disk in GB. Default is `0`.
-        """
-        return pulumi.get(self, "disk_size")
-
-    @property
-    @pulumi.getter(name="diskType")
-    def disk_type(self) -> Optional[str]:
-        """
-        Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
-        """
-        return pulumi.get(self, "disk_type")
-
-    @property
-    @pulumi.getter(name="snapshotId")
-    def snapshot_id(self) -> Optional[str]:
-        """
-        Data disk snapshot ID.
-        """
-        return pulumi.get(self, "snapshot_id")
-
-
-@pulumi.output_type
-class AsScalingGroupAutoScalingGroup(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "maxSize":
-            suggest = "max_size"
-        elif key == "minSize":
-            suggest = "min_size"
-        elif key == "scalingGroupName":
-            suggest = "scaling_group_name"
-        elif key == "vpcId":
-            suggest = "vpc_id"
-        elif key == "defaultCooldown":
-            suggest = "default_cooldown"
-        elif key == "desiredCapacity":
-            suggest = "desired_capacity"
-        elif key == "forwardBalancerIds":
-            suggest = "forward_balancer_ids"
-        elif key == "loadBalancerIds":
-            suggest = "load_balancer_ids"
-        elif key == "projectId":
-            suggest = "project_id"
-        elif key == "retryPolicy":
-            suggest = "retry_policy"
-        elif key == "subnetIds":
-            suggest = "subnet_ids"
-        elif key == "terminationPolicies":
-            suggest = "termination_policies"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in AsScalingGroupAutoScalingGroup. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        AsScalingGroupAutoScalingGroup.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        AsScalingGroupAutoScalingGroup.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 max_size: int,
-                 min_size: int,
-                 scaling_group_name: str,
-                 vpc_id: str,
-                 default_cooldown: Optional[int] = None,
-                 desired_capacity: Optional[int] = None,
-                 forward_balancer_ids: Optional[Sequence['outputs.AsScalingGroupAutoScalingGroupForwardBalancerId']] = None,
-                 load_balancer_ids: Optional[Sequence[str]] = None,
-                 project_id: Optional[int] = None,
-                 retry_policy: Optional[str] = None,
-                 subnet_ids: Optional[Sequence[str]] = None,
-                 tags: Optional[Mapping[str, Any]] = None,
-                 termination_policies: Optional[str] = None,
-                 zones: Optional[Sequence[str]] = None):
-        """
-        :param int max_size: Maximum number of CVM instances (0~2000).
-        :param int min_size: Minimum number of CVM instances (0~2000).
-        :param str scaling_group_name: Name of a scaling group.
-        :param str vpc_id: ID of VPC network.
-        :param int default_cooldown: Default cooldown time in second, and default value is 300.
-        :param int desired_capacity: Desired volume of CVM instances, which is between max_size and min_size.
-        :param Sequence['AsScalingGroupAutoScalingGroupForwardBalancerIdArgs'] forward_balancer_ids: List of application load balancers, which can't be specified with load_balancer_ids together.
-        :param Sequence[str] load_balancer_ids: ID list of traditional load balancers.
-        :param int project_id: Specifys to which project the scaling group belongs.
-        :param str retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
-        :param Sequence[str] subnet_ids: ID list of subnet, and for VPC it is required.
-        :param Mapping[str, Any] tags: Tags of a scaling group.
-        :param str termination_policies: Available values for termination policies include `OLDEST_INSTANCE` and `NEWEST_INSTANCE`.
-        :param Sequence[str] zones: List of available zones, for Basic network it is required.
-        """
-        pulumi.set(__self__, "max_size", max_size)
-        pulumi.set(__self__, "min_size", min_size)
-        pulumi.set(__self__, "scaling_group_name", scaling_group_name)
-        pulumi.set(__self__, "vpc_id", vpc_id)
-        if default_cooldown is not None:
-            pulumi.set(__self__, "default_cooldown", default_cooldown)
-        if desired_capacity is not None:
-            pulumi.set(__self__, "desired_capacity", desired_capacity)
-        if forward_balancer_ids is not None:
-            pulumi.set(__self__, "forward_balancer_ids", forward_balancer_ids)
-        if load_balancer_ids is not None:
-            pulumi.set(__self__, "load_balancer_ids", load_balancer_ids)
-        if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
-        if retry_policy is not None:
-            pulumi.set(__self__, "retry_policy", retry_policy)
-        if subnet_ids is not None:
-            pulumi.set(__self__, "subnet_ids", subnet_ids)
-        if tags is not None:
-            pulumi.set(__self__, "tags", tags)
-        if termination_policies is not None:
-            pulumi.set(__self__, "termination_policies", termination_policies)
-        if zones is not None:
-            pulumi.set(__self__, "zones", zones)
-
-    @property
-    @pulumi.getter(name="maxSize")
-    def max_size(self) -> int:
-        """
-        Maximum number of CVM instances (0~2000).
-        """
-        return pulumi.get(self, "max_size")
-
-    @property
-    @pulumi.getter(name="minSize")
-    def min_size(self) -> int:
-        """
-        Minimum number of CVM instances (0~2000).
-        """
-        return pulumi.get(self, "min_size")
-
-    @property
-    @pulumi.getter(name="scalingGroupName")
-    def scaling_group_name(self) -> str:
-        """
-        Name of a scaling group.
-        """
-        return pulumi.get(self, "scaling_group_name")
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> str:
-        """
-        ID of VPC network.
-        """
-        return pulumi.get(self, "vpc_id")
-
-    @property
-    @pulumi.getter(name="defaultCooldown")
-    def default_cooldown(self) -> Optional[int]:
-        """
-        Default cooldown time in second, and default value is 300.
-        """
-        return pulumi.get(self, "default_cooldown")
-
-    @property
-    @pulumi.getter(name="desiredCapacity")
-    def desired_capacity(self) -> Optional[int]:
-        """
-        Desired volume of CVM instances, which is between max_size and min_size.
-        """
-        return pulumi.get(self, "desired_capacity")
-
-    @property
-    @pulumi.getter(name="forwardBalancerIds")
-    def forward_balancer_ids(self) -> Optional[Sequence['outputs.AsScalingGroupAutoScalingGroupForwardBalancerId']]:
-        """
-        List of application load balancers, which can't be specified with load_balancer_ids together.
-        """
-        return pulumi.get(self, "forward_balancer_ids")
-
-    @property
-    @pulumi.getter(name="loadBalancerIds")
-    def load_balancer_ids(self) -> Optional[Sequence[str]]:
-        """
-        ID list of traditional load balancers.
-        """
-        return pulumi.get(self, "load_balancer_ids")
-
-    @property
-    @pulumi.getter(name="projectId")
-    def project_id(self) -> Optional[int]:
-        """
-        Specifys to which project the scaling group belongs.
-        """
-        return pulumi.get(self, "project_id")
-
-    @property
-    @pulumi.getter(name="retryPolicy")
-    def retry_policy(self) -> Optional[str]:
-        """
-        Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
-        """
-        return pulumi.get(self, "retry_policy")
-
-    @property
-    @pulumi.getter(name="subnetIds")
-    def subnet_ids(self) -> Optional[Sequence[str]]:
-        """
-        ID list of subnet, and for VPC it is required.
-        """
-        return pulumi.get(self, "subnet_ids")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> Optional[Mapping[str, Any]]:
-        """
-        Tags of a scaling group.
-        """
-        return pulumi.get(self, "tags")
-
-    @property
-    @pulumi.getter(name="terminationPolicies")
-    def termination_policies(self) -> Optional[str]:
-        """
-        Available values for termination policies include `OLDEST_INSTANCE` and `NEWEST_INSTANCE`.
-        """
-        return pulumi.get(self, "termination_policies")
-
-    @property
-    @pulumi.getter
-    def zones(self) -> Optional[Sequence[str]]:
-        """
-        List of available zones, for Basic network it is required.
-        """
-        return pulumi.get(self, "zones")
-
-
-@pulumi.output_type
-class AsScalingGroupAutoScalingGroupForwardBalancerId(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "listenerId":
-            suggest = "listener_id"
-        elif key == "loadBalancerId":
-            suggest = "load_balancer_id"
-        elif key == "targetAttributes":
-            suggest = "target_attributes"
-        elif key == "ruleId":
-            suggest = "rule_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in AsScalingGroupAutoScalingGroupForwardBalancerId. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        AsScalingGroupAutoScalingGroupForwardBalancerId.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        AsScalingGroupAutoScalingGroupForwardBalancerId.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 listener_id: str,
-                 load_balancer_id: str,
-                 target_attributes: Sequence['outputs.AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute'],
-                 rule_id: Optional[str] = None):
-        """
-        :param str listener_id: Listener ID for application load balancers.
-        :param str load_balancer_id: ID of available load balancers.
-        :param Sequence['AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttributeArgs'] target_attributes: Attribute list of target rules.
-        :param str rule_id: ID of forwarding rules.
-        """
-        pulumi.set(__self__, "listener_id", listener_id)
-        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
-        pulumi.set(__self__, "target_attributes", target_attributes)
-        if rule_id is not None:
-            pulumi.set(__self__, "rule_id", rule_id)
-
-    @property
-    @pulumi.getter(name="listenerId")
-    def listener_id(self) -> str:
-        """
-        Listener ID for application load balancers.
-        """
-        return pulumi.get(self, "listener_id")
-
-    @property
-    @pulumi.getter(name="loadBalancerId")
-    def load_balancer_id(self) -> str:
-        """
-        ID of available load balancers.
-        """
-        return pulumi.get(self, "load_balancer_id")
-
-    @property
-    @pulumi.getter(name="targetAttributes")
-    def target_attributes(self) -> Sequence['outputs.AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute']:
-        """
-        Attribute list of target rules.
-        """
-        return pulumi.get(self, "target_attributes")
-
-    @property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> Optional[str]:
-        """
-        ID of forwarding rules.
-        """
-        return pulumi.get(self, "rule_id")
-
-
-@pulumi.output_type
-class AsScalingGroupAutoScalingGroupForwardBalancerIdTargetAttribute(dict):
-    def __init__(__self__, *,
-                 port: int,
-                 weight: int):
-        """
-        :param int port: Port number.
-        :param int weight: Weight.
-        """
-        pulumi.set(__self__, "port", port)
-        pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter
-    def port(self) -> int:
-        """
-        Port number.
-        """
-        return pulumi.get(self, "port")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> int:
-        """
-        Weight.
-        """
-        return pulumi.get(self, "weight")
-
 
 @pulumi.output_type
 class ClusterAttachmentWorkerConfig(dict):
@@ -669,6 +65,8 @@ class ClusterAttachmentWorkerConfig(dict):
             suggest = "docker_graph_path"
         elif key == "extraArgs":
             suggest = "extra_args"
+        elif key == "gpuArgs":
+            suggest = "gpu_args"
         elif key == "isSchedule":
             suggest = "is_schedule"
         elif key == "mountTarget":
@@ -692,6 +90,7 @@ class ClusterAttachmentWorkerConfig(dict):
                  desired_pod_num: Optional[int] = None,
                  docker_graph_path: Optional[str] = None,
                  extra_args: Optional[Sequence[str]] = None,
+                 gpu_args: Optional['outputs.ClusterAttachmentWorkerConfigGpuArgs'] = None,
                  is_schedule: Optional[bool] = None,
                  mount_target: Optional[str] = None,
                  user_data: Optional[str] = None):
@@ -700,6 +99,7 @@ class ClusterAttachmentWorkerConfig(dict):
         :param int desired_pod_num: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
         :param str docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param Sequence[str] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param 'ClusterAttachmentWorkerConfigGpuArgsArgs' gpu_args: GPU driver parameters.
         :param bool is_schedule: Indicate to schedule the adding node or not. Default is true.
         :param str mount_target: Mount target. Default is not mounting.
         :param str user_data: Base64-encoded User Data text, the length limit is 16KB.
@@ -712,6 +112,8 @@ class ClusterAttachmentWorkerConfig(dict):
             pulumi.set(__self__, "docker_graph_path", docker_graph_path)
         if extra_args is not None:
             pulumi.set(__self__, "extra_args", extra_args)
+        if gpu_args is not None:
+            pulumi.set(__self__, "gpu_args", gpu_args)
         if is_schedule is not None:
             pulumi.set(__self__, "is_schedule", is_schedule)
         if mount_target is not None:
@@ -750,6 +152,14 @@ class ClusterAttachmentWorkerConfig(dict):
         Custom parameter information related to the node. This is a white-list parameter.
         """
         return pulumi.get(self, "extra_args")
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Optional['outputs.ClusterAttachmentWorkerConfigGpuArgs']:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
 
     @property
     @pulumi.getter(name="isSchedule")
@@ -883,6 +293,92 @@ class ClusterAttachmentWorkerConfigDataDisk(dict):
 
 
 @pulumi.output_type
+class ClusterAttachmentWorkerConfigGpuArgs(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customDriver":
+            suggest = "custom_driver"
+        elif key == "migEnable":
+            suggest = "mig_enable"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ClusterAttachmentWorkerConfigGpuArgs. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ClusterAttachmentWorkerConfigGpuArgs.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ClusterAttachmentWorkerConfigGpuArgs.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cuda: Optional[Mapping[str, Any]] = None,
+                 cudnn: Optional[Mapping[str, Any]] = None,
+                 custom_driver: Optional[Mapping[str, Any]] = None,
+                 driver: Optional[Mapping[str, Any]] = None,
+                 mig_enable: Optional[bool] = None):
+        """
+        :param Mapping[str, Any] cuda: CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param Mapping[str, Any] cudnn: cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        :param Mapping[str, Any] custom_driver: Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        :param Mapping[str, Any] driver: GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param bool mig_enable: Whether to enable MIG.
+        """
+        if cuda is not None:
+            pulumi.set(__self__, "cuda", cuda)
+        if cudnn is not None:
+            pulumi.set(__self__, "cudnn", cudnn)
+        if custom_driver is not None:
+            pulumi.set(__self__, "custom_driver", custom_driver)
+        if driver is not None:
+            pulumi.set(__self__, "driver", driver)
+        if mig_enable is not None:
+            pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cuda(self) -> Optional[Mapping[str, Any]]:
+        """
+        CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "cuda")
+
+    @property
+    @pulumi.getter
+    def cudnn(self) -> Optional[Mapping[str, Any]]:
+        """
+        cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        """
+        return pulumi.get(self, "cudnn")
+
+    @property
+    @pulumi.getter(name="customDriver")
+    def custom_driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        """
+        return pulumi.get(self, "custom_driver")
+
+    @property
+    @pulumi.getter
+    def driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "driver")
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> Optional[bool]:
+        """
+        Whether to enable MIG.
+        """
+        return pulumi.get(self, "mig_enable")
+
+
+@pulumi.output_type
 class ClusterAttachmentWorkerConfigOverrides(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -895,6 +391,8 @@ class ClusterAttachmentWorkerConfigOverrides(dict):
             suggest = "docker_graph_path"
         elif key == "extraArgs":
             suggest = "extra_args"
+        elif key == "gpuArgs":
+            suggest = "gpu_args"
         elif key == "isSchedule":
             suggest = "is_schedule"
         elif key == "mountTarget":
@@ -918,6 +416,7 @@ class ClusterAttachmentWorkerConfigOverrides(dict):
                  desired_pod_num: Optional[int] = None,
                  docker_graph_path: Optional[str] = None,
                  extra_args: Optional[Sequence[str]] = None,
+                 gpu_args: Optional['outputs.ClusterAttachmentWorkerConfigOverridesGpuArgs'] = None,
                  is_schedule: Optional[bool] = None,
                  mount_target: Optional[str] = None,
                  user_data: Optional[str] = None):
@@ -926,6 +425,7 @@ class ClusterAttachmentWorkerConfigOverrides(dict):
         :param int desired_pod_num: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
         :param str docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param Sequence[str] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param 'ClusterAttachmentWorkerConfigOverridesGpuArgsArgs' gpu_args: GPU driver parameters.
         :param bool is_schedule: Indicate to schedule the adding node or not. Default is true.
         :param str mount_target: Mount target. Default is not mounting.
         :param str user_data: Base64-encoded User Data text, the length limit is 16KB.
@@ -938,6 +438,8 @@ class ClusterAttachmentWorkerConfigOverrides(dict):
             pulumi.set(__self__, "docker_graph_path", docker_graph_path)
         if extra_args is not None:
             pulumi.set(__self__, "extra_args", extra_args)
+        if gpu_args is not None:
+            pulumi.set(__self__, "gpu_args", gpu_args)
         if is_schedule is not None:
             pulumi.set(__self__, "is_schedule", is_schedule)
         if mount_target is not None:
@@ -976,6 +478,14 @@ class ClusterAttachmentWorkerConfigOverrides(dict):
         Custom parameter information related to the node. This is a white-list parameter.
         """
         return pulumi.get(self, "extra_args")
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Optional['outputs.ClusterAttachmentWorkerConfigOverridesGpuArgs']:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
 
     @property
     @pulumi.getter(name="isSchedule")
@@ -1109,6 +619,92 @@ class ClusterAttachmentWorkerConfigOverridesDataDisk(dict):
 
 
 @pulumi.output_type
+class ClusterAttachmentWorkerConfigOverridesGpuArgs(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customDriver":
+            suggest = "custom_driver"
+        elif key == "migEnable":
+            suggest = "mig_enable"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ClusterAttachmentWorkerConfigOverridesGpuArgs. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ClusterAttachmentWorkerConfigOverridesGpuArgs.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ClusterAttachmentWorkerConfigOverridesGpuArgs.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cuda: Optional[Mapping[str, Any]] = None,
+                 cudnn: Optional[Mapping[str, Any]] = None,
+                 custom_driver: Optional[Mapping[str, Any]] = None,
+                 driver: Optional[Mapping[str, Any]] = None,
+                 mig_enable: Optional[bool] = None):
+        """
+        :param Mapping[str, Any] cuda: CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param Mapping[str, Any] cudnn: cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        :param Mapping[str, Any] custom_driver: Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        :param Mapping[str, Any] driver: GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param bool mig_enable: Whether to enable MIG.
+        """
+        if cuda is not None:
+            pulumi.set(__self__, "cuda", cuda)
+        if cudnn is not None:
+            pulumi.set(__self__, "cudnn", cudnn)
+        if custom_driver is not None:
+            pulumi.set(__self__, "custom_driver", custom_driver)
+        if driver is not None:
+            pulumi.set(__self__, "driver", driver)
+        if mig_enable is not None:
+            pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cuda(self) -> Optional[Mapping[str, Any]]:
+        """
+        CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "cuda")
+
+    @property
+    @pulumi.getter
+    def cudnn(self) -> Optional[Mapping[str, Any]]:
+        """
+        cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        """
+        return pulumi.get(self, "cudnn")
+
+    @property
+    @pulumi.getter(name="customDriver")
+    def custom_driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        """
+        return pulumi.get(self, "custom_driver")
+
+    @property
+    @pulumi.getter
+    def driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "driver")
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> Optional[bool]:
+        """
+        Whether to enable MIG.
+        """
+        return pulumi.get(self, "mig_enable")
+
+
+@pulumi.output_type
 class ClusterAuthOptions(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -1117,6 +713,8 @@ class ClusterAuthOptions(dict):
             suggest = "auto_create_discovery_anonymous_auth"
         elif key == "jwksUri":
             suggest = "jwks_uri"
+        elif key == "useTkeDefault":
+            suggest = "use_tke_default"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ClusterAuthOptions. Access the value via the '{suggest}' property getter instead.")
@@ -1132,11 +730,13 @@ class ClusterAuthOptions(dict):
     def __init__(__self__, *,
                  auto_create_discovery_anonymous_auth: Optional[bool] = None,
                  issuer: Optional[str] = None,
-                 jwks_uri: Optional[str] = None):
+                 jwks_uri: Optional[str] = None,
+                 use_tke_default: Optional[bool] = None):
         """
         :param bool auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
-        :param str issuer: Specify service-account-issuer.
-        :param str jwks_uri: Specify service-account-jwks-uri.
+        :param str issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
+        :param str jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
+        :param bool use_tke_default: If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
         """
         if auto_create_discovery_anonymous_auth is not None:
             pulumi.set(__self__, "auto_create_discovery_anonymous_auth", auto_create_discovery_anonymous_auth)
@@ -1144,6 +744,8 @@ class ClusterAuthOptions(dict):
             pulumi.set(__self__, "issuer", issuer)
         if jwks_uri is not None:
             pulumi.set(__self__, "jwks_uri", jwks_uri)
+        if use_tke_default is not None:
+            pulumi.set(__self__, "use_tke_default", use_tke_default)
 
     @property
     @pulumi.getter(name="autoCreateDiscoveryAnonymousAuth")
@@ -1157,7 +759,7 @@ class ClusterAuthOptions(dict):
     @pulumi.getter
     def issuer(self) -> Optional[str]:
         """
-        Specify service-account-issuer.
+        Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
         """
         return pulumi.get(self, "issuer")
 
@@ -1165,9 +767,17 @@ class ClusterAuthOptions(dict):
     @pulumi.getter(name="jwksUri")
     def jwks_uri(self) -> Optional[str]:
         """
-        Specify service-account-jwks-uri.
+        Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
         """
         return pulumi.get(self, "jwks_uri")
+
+    @property
+    @pulumi.getter(name="useTkeDefault")
+    def use_tke_default(self) -> Optional[bool]:
+        """
+        If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
+        """
+        return pulumi.get(self, "use_tke_default")
 
 
 @pulumi.output_type
@@ -1175,7 +785,9 @@ class ClusterClusterAudit(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "logSetId":
+        if key == "deleteAuditLogAndTopic":
+            suggest = "delete_audit_log_and_topic"
+        elif key == "logSetId":
             suggest = "log_set_id"
         elif key == "topicId":
             suggest = "topic_id"
@@ -1193,14 +805,18 @@ class ClusterClusterAudit(dict):
 
     def __init__(__self__, *,
                  enabled: bool,
+                 delete_audit_log_and_topic: Optional[bool] = None,
                  log_set_id: Optional[str] = None,
                  topic_id: Optional[str] = None):
         """
         :param bool enabled: Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
+        :param bool delete_audit_log_and_topic: when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
         :param str log_set_id: Specify id of existing CLS log set, or auto create a new set by leave it empty.
         :param str topic_id: Specify id of existing CLS log topic, or auto create a new topic by leave it empty.
         """
         pulumi.set(__self__, "enabled", enabled)
+        if delete_audit_log_and_topic is not None:
+            pulumi.set(__self__, "delete_audit_log_and_topic", delete_audit_log_and_topic)
         if log_set_id is not None:
             pulumi.set(__self__, "log_set_id", log_set_id)
         if topic_id is not None:
@@ -1213,6 +829,14 @@ class ClusterClusterAudit(dict):
         Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
         """
         return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="deleteAuditLogAndTopic")
+    def delete_audit_log_and_topic(self) -> Optional[bool]:
+        """
+        when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
+        """
+        return pulumi.get(self, "delete_audit_log_and_topic")
 
     @property
     @pulumi.getter(name="logSetId")
@@ -1300,7 +924,9 @@ class ClusterEventPersistence(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "logSetId":
+        if key == "deleteEventLogAndTopic":
+            suggest = "delete_event_log_and_topic"
+        elif key == "logSetId":
             suggest = "log_set_id"
         elif key == "topicId":
             suggest = "topic_id"
@@ -1318,14 +944,18 @@ class ClusterEventPersistence(dict):
 
     def __init__(__self__, *,
                  enabled: bool,
+                 delete_event_log_and_topic: Optional[bool] = None,
                  log_set_id: Optional[str] = None,
                  topic_id: Optional[str] = None):
         """
         :param bool enabled: Specify weather the Event Persistence enabled.
+        :param bool delete_event_log_and_topic: when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
         :param str log_set_id: Specify id of existing CLS log set, or auto create a new set by leave it empty.
         :param str topic_id: Specify id of existing CLS log topic, or auto create a new topic by leave it empty.
         """
         pulumi.set(__self__, "enabled", enabled)
+        if delete_event_log_and_topic is not None:
+            pulumi.set(__self__, "delete_event_log_and_topic", delete_event_log_and_topic)
         if log_set_id is not None:
             pulumi.set(__self__, "log_set_id", log_set_id)
         if topic_id is not None:
@@ -1338,6 +968,14 @@ class ClusterEventPersistence(dict):
         Specify weather the Event Persistence enabled.
         """
         return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="deleteEventLogAndTopic")
+    def delete_event_log_and_topic(self) -> Optional[bool]:
+        """
+        when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
+        """
+        return pulumi.get(self, "delete_event_log_and_topic")
 
     @property
     @pulumi.getter(name="logSetId")
@@ -1462,7 +1100,7 @@ class ClusterExtensionAddon(dict):
                  param: str):
         """
         :param str name: Add-on name.
-        :param str param: Description of the add-on resource object in JSON string format.
+        :param str param: Parameter of the add-on resource object in JSON string format, please check the example at the top of page for reference.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "param", param)
@@ -1479,7 +1117,7 @@ class ClusterExtensionAddon(dict):
     @pulumi.getter
     def param(self) -> str:
         """
-        Description of the add-on resource object in JSON string format.
+        Parameter of the add-on resource object in JSON string format, please check the example at the top of page for reference.
         """
         return pulumi.get(self, "param")
 
@@ -1556,6 +1194,8 @@ class ClusterMasterConfig(dict):
             suggest = "enhanced_monitor_service"
         elif key == "enhancedSecurityService":
             suggest = "enhanced_security_service"
+        elif key == "hpcClusterId":
+            suggest = "hpc_cluster_id"
         elif key == "imgId":
             suggest = "img_id"
         elif key == "instanceChargeType":
@@ -1607,6 +1247,7 @@ class ClusterMasterConfig(dict):
                  enhanced_monitor_service: Optional[bool] = None,
                  enhanced_security_service: Optional[bool] = None,
                  hostname: Optional[str] = None,
+                 hpc_cluster_id: Optional[str] = None,
                  img_id: Optional[str] = None,
                  instance_charge_type: Optional[str] = None,
                  instance_charge_type_prepaid_period: Optional[int] = None,
@@ -1634,6 +1275,7 @@ class ClusterMasterConfig(dict):
         :param bool enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
         :param bool enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
         :param str hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
+        :param str hpc_cluster_id: Id of cvm hpc cluster.
         :param str img_id: The valid image id, format of img-xxx.
         :param str instance_charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
         :param int instance_charge_type_prepaid_period: The tenancy (time unit is month) of the prepaid instance. NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -1671,6 +1313,8 @@ class ClusterMasterConfig(dict):
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
         if hostname is not None:
             pulumi.set(__self__, "hostname", hostname)
+        if hpc_cluster_id is not None:
+            pulumi.set(__self__, "hpc_cluster_id", hpc_cluster_id)
         if img_id is not None:
             pulumi.set(__self__, "img_id", img_id)
         if instance_charge_type is not None:
@@ -1795,6 +1439,14 @@ class ClusterMasterConfig(dict):
         The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
         """
         return pulumi.get(self, "hostname")
+
+    @property
+    @pulumi.getter(name="hpcClusterId")
+    def hpc_cluster_id(self) -> Optional[str]:
+        """
+        Id of cvm hpc cluster.
+        """
+        return pulumi.get(self, "hpc_cluster_id")
 
     @property
     @pulumi.getter(name="imgId")
@@ -2226,6 +1878,8 @@ class ClusterWorkerConfig(dict):
             suggest = "enhanced_monitor_service"
         elif key == "enhancedSecurityService":
             suggest = "enhanced_security_service"
+        elif key == "hpcClusterId":
+            suggest = "hpc_cluster_id"
         elif key == "imgId":
             suggest = "img_id"
         elif key == "instanceChargeType":
@@ -2277,6 +1931,7 @@ class ClusterWorkerConfig(dict):
                  enhanced_monitor_service: Optional[bool] = None,
                  enhanced_security_service: Optional[bool] = None,
                  hostname: Optional[str] = None,
+                 hpc_cluster_id: Optional[str] = None,
                  img_id: Optional[str] = None,
                  instance_charge_type: Optional[str] = None,
                  instance_charge_type_prepaid_period: Optional[int] = None,
@@ -2304,6 +1959,7 @@ class ClusterWorkerConfig(dict):
         :param bool enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
         :param bool enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
         :param str hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
+        :param str hpc_cluster_id: Id of cvm hpc cluster.
         :param str img_id: The valid image id, format of img-xxx.
         :param str instance_charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
         :param int instance_charge_type_prepaid_period: The tenancy (time unit is month) of the prepaid instance. NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -2341,6 +1997,8 @@ class ClusterWorkerConfig(dict):
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
         if hostname is not None:
             pulumi.set(__self__, "hostname", hostname)
+        if hpc_cluster_id is not None:
+            pulumi.set(__self__, "hpc_cluster_id", hpc_cluster_id)
         if img_id is not None:
             pulumi.set(__self__, "img_id", img_id)
         if instance_charge_type is not None:
@@ -2465,6 +2123,14 @@ class ClusterWorkerConfig(dict):
         The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
         """
         return pulumi.get(self, "hostname")
+
+    @property
+    @pulumi.getter(name="hpcClusterId")
+    def hpc_cluster_id(self) -> Optional[str]:
+        """
+        Id of cvm hpc cluster.
+        """
+        return pulumi.get(self, "hpc_cluster_id")
 
     @property
     @pulumi.getter(name="imgId")
@@ -2836,12 +2502,18 @@ class NodePoolAutoScalingConfig(dict):
             suggest = "enhanced_monitor_service"
         elif key == "enhancedSecurityService":
             suggest = "enhanced_security_service"
+        elif key == "hostName":
+            suggest = "host_name"
+        elif key == "hostNameStyle":
+            suggest = "host_name_style"
         elif key == "instanceChargeType":
             suggest = "instance_charge_type"
         elif key == "instanceChargeTypePrepaidPeriod":
             suggest = "instance_charge_type_prepaid_period"
         elif key == "instanceChargeTypePrepaidRenewFlag":
             suggest = "instance_charge_type_prepaid_renew_flag"
+        elif key == "instanceName":
+            suggest = "instance_name"
         elif key == "internetChargeType":
             suggest = "internet_charge_type"
         elif key == "internetMaxBandwidthOut":
@@ -2880,9 +2552,12 @@ class NodePoolAutoScalingConfig(dict):
                  data_disks: Optional[Sequence['outputs.NodePoolAutoScalingConfigDataDisk']] = None,
                  enhanced_monitor_service: Optional[bool] = None,
                  enhanced_security_service: Optional[bool] = None,
+                 host_name: Optional[str] = None,
+                 host_name_style: Optional[str] = None,
                  instance_charge_type: Optional[str] = None,
                  instance_charge_type_prepaid_period: Optional[int] = None,
                  instance_charge_type_prepaid_renew_flag: Optional[str] = None,
+                 instance_name: Optional[str] = None,
                  internet_charge_type: Optional[str] = None,
                  internet_max_bandwidth_out: Optional[int] = None,
                  key_ids: Optional[Sequence[str]] = None,
@@ -2901,9 +2576,12 @@ class NodePoolAutoScalingConfig(dict):
         :param Sequence['NodePoolAutoScalingConfigDataDiskArgs'] data_disks: Configurations of data disk.
         :param bool enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
         :param bool enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
+        :param str host_name: The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        :param str host_name_style: The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
         :param str instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param int instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param str instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        :param str instance_name: Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
         :param str internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param int internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param Sequence[str] key_ids: ID list of keys.
@@ -2928,12 +2606,18 @@ class NodePoolAutoScalingConfig(dict):
             pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
         if enhanced_security_service is not None:
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
+        if host_name is not None:
+            pulumi.set(__self__, "host_name", host_name)
+        if host_name_style is not None:
+            pulumi.set(__self__, "host_name_style", host_name_style)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
         if instance_charge_type_prepaid_period is not None:
             pulumi.set(__self__, "instance_charge_type_prepaid_period", instance_charge_type_prepaid_period)
         if instance_charge_type_prepaid_renew_flag is not None:
             pulumi.set(__self__, "instance_charge_type_prepaid_renew_flag", instance_charge_type_prepaid_renew_flag)
+        if instance_name is not None:
+            pulumi.set(__self__, "instance_name", instance_name)
         if internet_charge_type is not None:
             pulumi.set(__self__, "internet_charge_type", internet_charge_type)
         if internet_max_bandwidth_out is not None:
@@ -3012,6 +2696,22 @@ class NodePoolAutoScalingConfig(dict):
         return pulumi.get(self, "enhanced_security_service")
 
     @property
+    @pulumi.getter(name="hostName")
+    def host_name(self) -> Optional[str]:
+        """
+        The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        """
+        return pulumi.get(self, "host_name")
+
+    @property
+    @pulumi.getter(name="hostNameStyle")
+    def host_name_style(self) -> Optional[str]:
+        """
+        The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to `HostNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        """
+        return pulumi.get(self, "host_name_style")
+
+    @property
     @pulumi.getter(name="instanceChargeType")
     def instance_charge_type(self) -> Optional[str]:
         """
@@ -3034,6 +2734,14 @@ class NodePoolAutoScalingConfig(dict):
         Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "instance_charge_type_prepaid_renew_flag")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> Optional[str]:
+        """
+        Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        """
+        return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="internetChargeType")
@@ -3129,6 +2837,8 @@ class NodePoolAutoScalingConfigDataDisk(dict):
             suggest = "disk_type"
         elif key == "snapshotId":
             suggest = "snapshot_id"
+        elif key == "throughputPerformance":
+            suggest = "throughput_performance"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NodePoolAutoScalingConfigDataDisk. Access the value via the '{suggest}' property getter instead.")
@@ -3145,12 +2855,16 @@ class NodePoolAutoScalingConfigDataDisk(dict):
                  delete_with_instance: Optional[bool] = None,
                  disk_size: Optional[int] = None,
                  disk_type: Optional[str] = None,
-                 snapshot_id: Optional[str] = None):
+                 encrypt: Optional[bool] = None,
+                 snapshot_id: Optional[str] = None,
+                 throughput_performance: Optional[int] = None):
         """
-        :param bool delete_with_instance: Indicates whether the disk remove after instance terminated.
+        :param bool delete_with_instance: Indicates whether the disk remove after instance terminated. Default is `false`.
         :param int disk_size: Volume of disk in GB. Default is `0`.
         :param str disk_type: Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param bool encrypt: Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
         :param str snapshot_id: Data disk snapshot ID.
+        :param int throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `data_size` > 460GB.
         """
         if delete_with_instance is not None:
             pulumi.set(__self__, "delete_with_instance", delete_with_instance)
@@ -3158,14 +2872,18 @@ class NodePoolAutoScalingConfigDataDisk(dict):
             pulumi.set(__self__, "disk_size", disk_size)
         if disk_type is not None:
             pulumi.set(__self__, "disk_type", disk_type)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
         if snapshot_id is not None:
             pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if throughput_performance is not None:
+            pulumi.set(__self__, "throughput_performance", throughput_performance)
 
     @property
     @pulumi.getter(name="deleteWithInstance")
     def delete_with_instance(self) -> Optional[bool]:
         """
-        Indicates whether the disk remove after instance terminated.
+        Indicates whether the disk remove after instance terminated. Default is `false`.
         """
         return pulumi.get(self, "delete_with_instance")
 
@@ -3186,12 +2904,28 @@ class NodePoolAutoScalingConfigDataDisk(dict):
         return pulumi.get(self, "disk_type")
 
     @property
+    @pulumi.getter
+    def encrypt(self) -> Optional[bool]:
+        """
+        Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
+        """
+        return pulumi.get(self, "encrypt")
+
+    @property
     @pulumi.getter(name="snapshotId")
     def snapshot_id(self) -> Optional[str]:
         """
         Data disk snapshot ID.
         """
         return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter(name="throughputPerformance")
+    def throughput_performance(self) -> Optional[int]:
+        """
+        Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `data_size` > 460GB.
+        """
+        return pulumi.get(self, "throughput_performance")
 
 
 @pulumi.output_type
@@ -3207,6 +2941,8 @@ class NodePoolNodeConfig(dict):
             suggest = "docker_graph_path"
         elif key == "extraArgs":
             suggest = "extra_args"
+        elif key == "gpuArgs":
+            suggest = "gpu_args"
         elif key == "isSchedule":
             suggest = "is_schedule"
         elif key == "mountTarget":
@@ -3230,6 +2966,7 @@ class NodePoolNodeConfig(dict):
                  desired_pod_num: Optional[int] = None,
                  docker_graph_path: Optional[str] = None,
                  extra_args: Optional[Sequence[str]] = None,
+                 gpu_args: Optional['outputs.NodePoolNodeConfigGpuArgs'] = None,
                  is_schedule: Optional[bool] = None,
                  mount_target: Optional[str] = None,
                  user_data: Optional[str] = None):
@@ -3238,6 +2975,7 @@ class NodePoolNodeConfig(dict):
         :param int desired_pod_num: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
         :param str docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param Sequence[str] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param 'NodePoolNodeConfigGpuArgsArgs' gpu_args: GPU driver parameters.
         :param bool is_schedule: Indicate to schedule the adding node or not. Default is true.
         :param str mount_target: Mount target. Default is not mounting.
         :param str user_data: Base64-encoded User Data text, the length limit is 16KB.
@@ -3250,6 +2988,8 @@ class NodePoolNodeConfig(dict):
             pulumi.set(__self__, "docker_graph_path", docker_graph_path)
         if extra_args is not None:
             pulumi.set(__self__, "extra_args", extra_args)
+        if gpu_args is not None:
+            pulumi.set(__self__, "gpu_args", gpu_args)
         if is_schedule is not None:
             pulumi.set(__self__, "is_schedule", is_schedule)
         if mount_target is not None:
@@ -3288,6 +3028,14 @@ class NodePoolNodeConfig(dict):
         Custom parameter information related to the node. This is a white-list parameter.
         """
         return pulumi.get(self, "extra_args")
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Optional['outputs.NodePoolNodeConfigGpuArgs']:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
 
     @property
     @pulumi.getter(name="isSchedule")
@@ -3418,6 +3166,92 @@ class NodePoolNodeConfigDataDisk(dict):
         Mount target.
         """
         return pulumi.get(self, "mount_target")
+
+
+@pulumi.output_type
+class NodePoolNodeConfigGpuArgs(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customDriver":
+            suggest = "custom_driver"
+        elif key == "migEnable":
+            suggest = "mig_enable"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NodePoolNodeConfigGpuArgs. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NodePoolNodeConfigGpuArgs.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NodePoolNodeConfigGpuArgs.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cuda: Optional[Mapping[str, Any]] = None,
+                 cudnn: Optional[Mapping[str, Any]] = None,
+                 custom_driver: Optional[Mapping[str, Any]] = None,
+                 driver: Optional[Mapping[str, Any]] = None,
+                 mig_enable: Optional[bool] = None):
+        """
+        :param Mapping[str, Any] cuda: CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param Mapping[str, Any] cudnn: cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        :param Mapping[str, Any] custom_driver: Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        :param Mapping[str, Any] driver: GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param bool mig_enable: Whether to enable MIG.
+        """
+        if cuda is not None:
+            pulumi.set(__self__, "cuda", cuda)
+        if cudnn is not None:
+            pulumi.set(__self__, "cudnn", cudnn)
+        if custom_driver is not None:
+            pulumi.set(__self__, "custom_driver", custom_driver)
+        if driver is not None:
+            pulumi.set(__self__, "driver", driver)
+        if mig_enable is not None:
+            pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cuda(self) -> Optional[Mapping[str, Any]]:
+        """
+        CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "cuda")
+
+    @property
+    @pulumi.getter
+    def cudnn(self) -> Optional[Mapping[str, Any]]:
+        """
+        cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        """
+        return pulumi.get(self, "cudnn")
+
+    @property
+    @pulumi.getter(name="customDriver")
+    def custom_driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        """
+        return pulumi.get(self, "custom_driver")
+
+    @property
+    @pulumi.getter
+    def driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "driver")
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> Optional[bool]:
+        """
+        Whether to enable MIG.
+        """
+        return pulumi.get(self, "mig_enable")
 
 
 @pulumi.output_type
@@ -3553,6 +3387,92 @@ class ScaleWorkerDataDisk(dict):
 
 
 @pulumi.output_type
+class ScaleWorkerGpuArgs(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customDriver":
+            suggest = "custom_driver"
+        elif key == "migEnable":
+            suggest = "mig_enable"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ScaleWorkerGpuArgs. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ScaleWorkerGpuArgs.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ScaleWorkerGpuArgs.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cuda: Optional[Mapping[str, Any]] = None,
+                 cudnn: Optional[Mapping[str, Any]] = None,
+                 custom_driver: Optional[Mapping[str, Any]] = None,
+                 driver: Optional[Mapping[str, Any]] = None,
+                 mig_enable: Optional[bool] = None):
+        """
+        :param Mapping[str, Any] cuda: CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param Mapping[str, Any] cudnn: cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        :param Mapping[str, Any] custom_driver: Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        :param Mapping[str, Any] driver: GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param bool mig_enable: Whether to enable MIG.
+        """
+        if cuda is not None:
+            pulumi.set(__self__, "cuda", cuda)
+        if cudnn is not None:
+            pulumi.set(__self__, "cudnn", cudnn)
+        if custom_driver is not None:
+            pulumi.set(__self__, "custom_driver", custom_driver)
+        if driver is not None:
+            pulumi.set(__self__, "driver", driver)
+        if mig_enable is not None:
+            pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cuda(self) -> Optional[Mapping[str, Any]]:
+        """
+        CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "cuda")
+
+    @property
+    @pulumi.getter
+    def cudnn(self) -> Optional[Mapping[str, Any]]:
+        """
+        cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        """
+        return pulumi.get(self, "cudnn")
+
+    @property
+    @pulumi.getter(name="customDriver")
+    def custom_driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        """
+        return pulumi.get(self, "custom_driver")
+
+    @property
+    @pulumi.getter
+    def driver(self) -> Optional[Mapping[str, Any]]:
+        """
+        GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "driver")
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> Optional[bool]:
+        """
+        Whether to enable MIG.
+        """
+        return pulumi.get(self, "mig_enable")
+
+
+@pulumi.output_type
 class ScaleWorkerWorkerConfig(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -3577,6 +3497,8 @@ class ScaleWorkerWorkerConfig(dict):
             suggest = "enhanced_monitor_service"
         elif key == "enhancedSecurityService":
             suggest = "enhanced_security_service"
+        elif key == "hpcClusterId":
+            suggest = "hpc_cluster_id"
         elif key == "imgId":
             suggest = "img_id"
         elif key == "instanceChargeType":
@@ -3628,6 +3550,7 @@ class ScaleWorkerWorkerConfig(dict):
                  enhanced_monitor_service: Optional[bool] = None,
                  enhanced_security_service: Optional[bool] = None,
                  hostname: Optional[str] = None,
+                 hpc_cluster_id: Optional[str] = None,
                  img_id: Optional[str] = None,
                  instance_charge_type: Optional[str] = None,
                  instance_charge_type_prepaid_period: Optional[int] = None,
@@ -3655,6 +3578,7 @@ class ScaleWorkerWorkerConfig(dict):
         :param bool enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
         :param bool enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
         :param str hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
+        :param str hpc_cluster_id: Id of cvm hpc cluster.
         :param str img_id: The valid image id, format of img-xxx.
         :param str instance_charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
         :param int instance_charge_type_prepaid_period: The tenancy (time unit is month) of the prepaid instance. NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -3692,6 +3616,8 @@ class ScaleWorkerWorkerConfig(dict):
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
         if hostname is not None:
             pulumi.set(__self__, "hostname", hostname)
+        if hpc_cluster_id is not None:
+            pulumi.set(__self__, "hpc_cluster_id", hpc_cluster_id)
         if img_id is not None:
             pulumi.set(__self__, "img_id", img_id)
         if instance_charge_type is not None:
@@ -3816,6 +3742,14 @@ class ScaleWorkerWorkerConfig(dict):
         The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
         """
         return pulumi.get(self, "hostname")
+
+    @property
+    @pulumi.getter(name="hpcClusterId")
+    def hpc_cluster_id(self) -> Optional[str]:
+        """
+        Id of cvm hpc cluster.
+        """
+        return pulumi.get(self, "hpc_cluster_id")
 
     @property
     @pulumi.getter(name="imgId")
@@ -4166,6 +4100,124 @@ class ScaleWorkerWorkerInstancesList(dict):
         LAN IP of the cvm.
         """
         return pulumi.get(self, "lan_ip")
+
+
+@pulumi.output_type
+class ServerlessNodePoolServerlessNode(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "displayName":
+            suggest = "display_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ServerlessNodePoolServerlessNode. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ServerlessNodePoolServerlessNode.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ServerlessNodePoolServerlessNode.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 display_name: Optional[str] = None):
+        """
+        :param str subnet_id: subnet id of serverless node.
+        :param str display_name: display name of serverless node.
+        """
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        if display_name is not None:
+            pulumi.set(__self__, "display_name", display_name)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet id of serverless node.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> Optional[str]:
+        """
+        display name of serverless node.
+        """
+        return pulumi.get(self, "display_name")
+
+
+@pulumi.output_type
+class ServerlessNodePoolTaint(dict):
+    def __init__(__self__, *,
+                 effect: str,
+                 key: str,
+                 value: str):
+        """
+        :param str effect: Effect of the taint. Valid values are: `NoSchedule`, `PreferNoSchedule`, `NoExecute`.
+        :param str key: Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
+        :param str value: Value of the taint.
+        """
+        pulumi.set(__self__, "effect", effect)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> str:
+        """
+        Effect of the taint. Valid values are: `NoSchedule`, `PreferNoSchedule`, `NoExecute`.
+        """
+        return pulumi.get(self, "effect")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAvailableClusterVersionsClusterResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 versions: Sequence[str]):
+        """
+        :param str cluster_id: Cluster Id.
+        :param Sequence[str] versions: Upgradable cluster version number. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "versions", versions)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster Id.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter
+    def versions(self) -> Sequence[str]:
+        """
+        Upgradable cluster version number. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "versions")
 
 
 @pulumi.output_type

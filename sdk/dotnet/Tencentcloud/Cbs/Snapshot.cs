@@ -86,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         [Output("storageSize")]
         public Output<int> StorageSize { get; private set; } = null!;
 
+        /// <summary>
+        /// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Snapshot resource with the given unique name, arguments, and options.
@@ -145,6 +151,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         [Input("storageId", required: true)]
         public Input<string> StorageId { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+        /// </summary>
+        [Obsolete(@"cbs snapshot do not support tag now.")]
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
+
         public SnapshotArgs()
         {
         }
@@ -193,6 +212,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// </summary>
         [Input("storageSize")]
         public Input<int>? StorageSize { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+        /// </summary>
+        [Obsolete(@"cbs snapshot do not support tag now.")]
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         public SnapshotState()
         {

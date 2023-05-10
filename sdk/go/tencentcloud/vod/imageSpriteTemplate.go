@@ -19,32 +19,29 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vod.NewImageSpriteTemplate(ctx, "foo", &Vod.ImageSpriteTemplateArgs{
-//				ColumnCount:        pulumi.Int(3),
-//				Comment:            pulumi.String("test"),
-//				FillType:           pulumi.String("stretch"),
-//				Height:             pulumi.Int(128),
-//				ResolutionAdaptive: pulumi.Bool(false),
-//				RowCount:           pulumi.Int(3),
-//				SampleInterval:     pulumi.Int(10),
-//				SampleType:         pulumi.String("Percent"),
-//				Width:              pulumi.Int(128),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vod.NewImageSpriteTemplate(ctx, "foo", &Vod.ImageSpriteTemplateArgs{
+// 			ColumnCount:        pulumi.Int(3),
+// 			Comment:            pulumi.String("test"),
+// 			FillType:           pulumi.String("stretch"),
+// 			Height:             pulumi.Int(128),
+// 			ResolutionAdaptive: pulumi.Bool(false),
+// 			RowCount:           pulumi.Int(3),
+// 			SampleInterval:     pulumi.Int(10),
+// 			SampleType:         pulumi.String("Percent"),
+// 			Width:              pulumi.Int(128),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -52,9 +49,7 @@ import (
 // VOD image sprite template can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
-//
+//  $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
 // ```
 type ImageSpriteTemplate struct {
 	pulumi.CustomResourceState
@@ -267,7 +262,7 @@ func (i *ImageSpriteTemplate) ToImageSpriteTemplateOutputWithContext(ctx context
 // ImageSpriteTemplateArrayInput is an input type that accepts ImageSpriteTemplateArray and ImageSpriteTemplateArrayOutput values.
 // You can construct a concrete instance of `ImageSpriteTemplateArrayInput` via:
 //
-//	ImageSpriteTemplateArray{ ImageSpriteTemplateArgs{...} }
+//          ImageSpriteTemplateArray{ ImageSpriteTemplateArgs{...} }
 type ImageSpriteTemplateArrayInput interface {
 	pulumi.Input
 
@@ -292,7 +287,7 @@ func (i ImageSpriteTemplateArray) ToImageSpriteTemplateArrayOutputWithContext(ct
 // ImageSpriteTemplateMapInput is an input type that accepts ImageSpriteTemplateMap and ImageSpriteTemplateMapOutput values.
 // You can construct a concrete instance of `ImageSpriteTemplateMapInput` via:
 //
-//	ImageSpriteTemplateMap{ "key": ImageSpriteTemplateArgs{...} }
+//          ImageSpriteTemplateMap{ "key": ImageSpriteTemplateArgs{...} }
 type ImageSpriteTemplateMapInput interface {
 	pulumi.Input
 

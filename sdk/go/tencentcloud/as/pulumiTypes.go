@@ -11,7 +11,7 @@ import (
 )
 
 type ScalingConfigDataDisk struct {
-	// Indicates whether the disk remove after instance terminated.
+	// Indicates whether the disk remove after instance terminated. Default is `false`.
 	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
@@ -24,7 +24,7 @@ type ScalingConfigDataDisk struct {
 // ScalingConfigDataDiskInput is an input type that accepts ScalingConfigDataDiskArgs and ScalingConfigDataDiskOutput values.
 // You can construct a concrete instance of `ScalingConfigDataDiskInput` via:
 //
-//	ScalingConfigDataDiskArgs{...}
+//          ScalingConfigDataDiskArgs{...}
 type ScalingConfigDataDiskInput interface {
 	pulumi.Input
 
@@ -33,7 +33,7 @@ type ScalingConfigDataDiskInput interface {
 }
 
 type ScalingConfigDataDiskArgs struct {
-	// Indicates whether the disk remove after instance terminated.
+	// Indicates whether the disk remove after instance terminated. Default is `false`.
 	DeleteWithInstance pulumi.BoolPtrInput `pulumi:"deleteWithInstance"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -58,7 +58,7 @@ func (i ScalingConfigDataDiskArgs) ToScalingConfigDataDiskOutputWithContext(ctx 
 // ScalingConfigDataDiskArrayInput is an input type that accepts ScalingConfigDataDiskArray and ScalingConfigDataDiskArrayOutput values.
 // You can construct a concrete instance of `ScalingConfigDataDiskArrayInput` via:
 //
-//	ScalingConfigDataDiskArray{ ScalingConfigDataDiskArgs{...} }
+//          ScalingConfigDataDiskArray{ ScalingConfigDataDiskArgs{...} }
 type ScalingConfigDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -94,7 +94,7 @@ func (o ScalingConfigDataDiskOutput) ToScalingConfigDataDiskOutputWithContext(ct
 	return o
 }
 
-// Indicates whether the disk remove after instance terminated.
+// Indicates whether the disk remove after instance terminated. Default is `false`.
 func (o ScalingConfigDataDiskOutput) DeleteWithInstance() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ScalingConfigDataDisk) *bool { return v.DeleteWithInstance }).(pulumi.BoolPtrOutput)
 }
@@ -144,7 +144,7 @@ type ScalingConfigInstanceNameSettings struct {
 // ScalingConfigInstanceNameSettingsInput is an input type that accepts ScalingConfigInstanceNameSettingsArgs and ScalingConfigInstanceNameSettingsOutput values.
 // You can construct a concrete instance of `ScalingConfigInstanceNameSettingsInput` via:
 //
-//	ScalingConfigInstanceNameSettingsArgs{...}
+//          ScalingConfigInstanceNameSettingsArgs{...}
 type ScalingConfigInstanceNameSettingsInput interface {
 	pulumi.Input
 
@@ -182,11 +182,11 @@ func (i ScalingConfigInstanceNameSettingsArgs) ToScalingConfigInstanceNameSettin
 // ScalingConfigInstanceNameSettingsPtrInput is an input type that accepts ScalingConfigInstanceNameSettingsArgs, ScalingConfigInstanceNameSettingsPtr and ScalingConfigInstanceNameSettingsPtrOutput values.
 // You can construct a concrete instance of `ScalingConfigInstanceNameSettingsPtrInput` via:
 //
-//	        ScalingConfigInstanceNameSettingsArgs{...}
+//          ScalingConfigInstanceNameSettingsArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ScalingConfigInstanceNameSettingsPtrInput interface {
 	pulumi.Input
 
@@ -304,7 +304,7 @@ type ScalingGroupForwardBalancerId struct {
 // ScalingGroupForwardBalancerIdInput is an input type that accepts ScalingGroupForwardBalancerIdArgs and ScalingGroupForwardBalancerIdOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdInput` via:
 //
-//	ScalingGroupForwardBalancerIdArgs{...}
+//          ScalingGroupForwardBalancerIdArgs{...}
 type ScalingGroupForwardBalancerIdInput interface {
 	pulumi.Input
 
@@ -338,7 +338,7 @@ func (i ScalingGroupForwardBalancerIdArgs) ToScalingGroupForwardBalancerIdOutput
 // ScalingGroupForwardBalancerIdArrayInput is an input type that accepts ScalingGroupForwardBalancerIdArray and ScalingGroupForwardBalancerIdArrayOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdArrayInput` via:
 //
-//	ScalingGroupForwardBalancerIdArray{ ScalingGroupForwardBalancerIdArgs{...} }
+//          ScalingGroupForwardBalancerIdArray{ ScalingGroupForwardBalancerIdArgs{...} }
 type ScalingGroupForwardBalancerIdArrayInput interface {
 	pulumi.Input
 
@@ -426,7 +426,7 @@ type ScalingGroupForwardBalancerIdTargetAttribute struct {
 // ScalingGroupForwardBalancerIdTargetAttributeInput is an input type that accepts ScalingGroupForwardBalancerIdTargetAttributeArgs and ScalingGroupForwardBalancerIdTargetAttributeOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdTargetAttributeInput` via:
 //
-//	ScalingGroupForwardBalancerIdTargetAttributeArgs{...}
+//          ScalingGroupForwardBalancerIdTargetAttributeArgs{...}
 type ScalingGroupForwardBalancerIdTargetAttributeInput interface {
 	pulumi.Input
 
@@ -456,7 +456,7 @@ func (i ScalingGroupForwardBalancerIdTargetAttributeArgs) ToScalingGroupForwardB
 // ScalingGroupForwardBalancerIdTargetAttributeArrayInput is an input type that accepts ScalingGroupForwardBalancerIdTargetAttributeArray and ScalingGroupForwardBalancerIdTargetAttributeArrayOutput values.
 // You can construct a concrete instance of `ScalingGroupForwardBalancerIdTargetAttributeArrayInput` via:
 //
-//	ScalingGroupForwardBalancerIdTargetAttributeArray{ ScalingGroupForwardBalancerIdTargetAttributeArgs{...} }
+//          ScalingGroupForwardBalancerIdTargetAttributeArray{ ScalingGroupForwardBalancerIdTargetAttributeArgs{...} }
 type ScalingGroupForwardBalancerIdTargetAttributeArrayInput interface {
 	pulumi.Input
 
@@ -522,6 +522,317 @@ func (o ScalingGroupForwardBalancerIdTargetAttributeArrayOutput) Index(i pulumi.
 	}).(ScalingGroupForwardBalancerIdTargetAttributeOutput)
 }
 
+type GetInstancesFilter struct {
+	// Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+	Name string `pulumi:"name"`
+	// Value of the field.
+	Values []string `pulumi:"values"`
+}
+
+// GetInstancesFilterInput is an input type that accepts GetInstancesFilterArgs and GetInstancesFilterOutput values.
+// You can construct a concrete instance of `GetInstancesFilterInput` via:
+//
+//          GetInstancesFilterArgs{...}
+type GetInstancesFilterInput interface {
+	pulumi.Input
+
+	ToGetInstancesFilterOutput() GetInstancesFilterOutput
+	ToGetInstancesFilterOutputWithContext(context.Context) GetInstancesFilterOutput
+}
+
+type GetInstancesFilterArgs struct {
+	// Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of the field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetInstancesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesFilter)(nil)).Elem()
+}
+
+func (i GetInstancesFilterArgs) ToGetInstancesFilterOutput() GetInstancesFilterOutput {
+	return i.ToGetInstancesFilterOutputWithContext(context.Background())
+}
+
+func (i GetInstancesFilterArgs) ToGetInstancesFilterOutputWithContext(ctx context.Context) GetInstancesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesFilterOutput)
+}
+
+// GetInstancesFilterArrayInput is an input type that accepts GetInstancesFilterArray and GetInstancesFilterArrayOutput values.
+// You can construct a concrete instance of `GetInstancesFilterArrayInput` via:
+//
+//          GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
+type GetInstancesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesFilterArrayOutput() GetInstancesFilterArrayOutput
+	ToGetInstancesFilterArrayOutputWithContext(context.Context) GetInstancesFilterArrayOutput
+}
+
+type GetInstancesFilterArray []GetInstancesFilterInput
+
+func (GetInstancesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesFilter)(nil)).Elem()
+}
+
+func (i GetInstancesFilterArray) ToGetInstancesFilterArrayOutput() GetInstancesFilterArrayOutput {
+	return i.ToGetInstancesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesFilterArray) ToGetInstancesFilterArrayOutputWithContext(ctx context.Context) GetInstancesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesFilterArrayOutput)
+}
+
+type GetInstancesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesFilter)(nil)).Elem()
+}
+
+func (o GetInstancesFilterOutput) ToGetInstancesFilterOutput() GetInstancesFilterOutput {
+	return o
+}
+
+func (o GetInstancesFilterOutput) ToGetInstancesFilterOutputWithContext(ctx context.Context) GetInstancesFilterOutput {
+	return o
+}
+
+// Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+func (o GetInstancesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of the field.
+func (o GetInstancesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetInstancesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesFilter)(nil)).Elem()
+}
+
+func (o GetInstancesFilterArrayOutput) ToGetInstancesFilterArrayOutput() GetInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetInstancesFilterArrayOutput) ToGetInstancesFilterArrayOutputWithContext(ctx context.Context) GetInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetInstancesFilterArrayOutput) Index(i pulumi.IntInput) GetInstancesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesFilter {
+		return vs[0].([]GetInstancesFilter)[vs[1].(int)]
+	}).(GetInstancesFilterOutput)
+}
+
+type GetInstancesInstanceList struct {
+	// The time when the instance joined the group.
+	AddTime string `pulumi:"addTime"`
+	// Auto scaling group ID.
+	AutoScalingGroupId string `pulumi:"autoScalingGroupId"`
+	// Auto scaling group name.
+	AutoScalingGroupName string `pulumi:"autoScalingGroupName"`
+	// Valid values: `AUTO_CREATION`, `MANUAL_ATTACHING`.
+	CreationType string `pulumi:"creationType"`
+	// Health status, the valid values are HEALTHY and UNHEALTHY.
+	HealthStatus string `pulumi:"healthStatus"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance type.
+	InstanceType string `pulumi:"instanceType"`
+	// Launch configuration ID.
+	LaunchConfigurationId string `pulumi:"launchConfigurationId"`
+	// Launch configuration name.
+	LaunchConfigurationName string `pulumi:"launchConfigurationName"`
+	// Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.
+	LifeCycleState string `pulumi:"lifeCycleState"`
+	// Enable scale in protection.
+	ProtectedFromScaleIn bool `pulumi:"protectedFromScaleIn"`
+	// Version ID.
+	VersionNumber int `pulumi:"versionNumber"`
+	// Available zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
+//
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
+}
+
+type GetInstancesInstanceListArgs struct {
+	// The time when the instance joined the group.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Auto scaling group ID.
+	AutoScalingGroupId pulumi.StringInput `pulumi:"autoScalingGroupId"`
+	// Auto scaling group name.
+	AutoScalingGroupName pulumi.StringInput `pulumi:"autoScalingGroupName"`
+	// Valid values: `AUTO_CREATION`, `MANUAL_ATTACHING`.
+	CreationType pulumi.StringInput `pulumi:"creationType"`
+	// Health status, the valid values are HEALTHY and UNHEALTHY.
+	HealthStatus pulumi.StringInput `pulumi:"healthStatus"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance type.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Launch configuration ID.
+	LaunchConfigurationId pulumi.StringInput `pulumi:"launchConfigurationId"`
+	// Launch configuration name.
+	LaunchConfigurationName pulumi.StringInput `pulumi:"launchConfigurationName"`
+	// Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.
+	LifeCycleState pulumi.StringInput `pulumi:"lifeCycleState"`
+	// Enable scale in protection.
+	ProtectedFromScaleIn pulumi.BoolInput `pulumi:"protectedFromScaleIn"`
+	// Version ID.
+	VersionNumber pulumi.IntInput `pulumi:"versionNumber"`
+	// Available zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
+}
+
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
+//
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
+}
+
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
+
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
+}
+
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return o
+}
+
+// The time when the instance joined the group.
+func (o GetInstancesInstanceListOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// Auto scaling group ID.
+func (o GetInstancesInstanceListOutput) AutoScalingGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AutoScalingGroupId }).(pulumi.StringOutput)
+}
+
+// Auto scaling group name.
+func (o GetInstancesInstanceListOutput) AutoScalingGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AutoScalingGroupName }).(pulumi.StringOutput)
+}
+
+// Valid values: `AUTO_CREATION`, `MANUAL_ATTACHING`.
+func (o GetInstancesInstanceListOutput) CreationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreationType }).(pulumi.StringOutput)
+}
+
+// Health status, the valid values are HEALTHY and UNHEALTHY.
+func (o GetInstancesInstanceListOutput) HealthStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.HealthStatus }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetInstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance type.
+func (o GetInstancesInstanceListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Launch configuration ID.
+func (o GetInstancesInstanceListOutput) LaunchConfigurationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LaunchConfigurationId }).(pulumi.StringOutput)
+}
+
+// Launch configuration name.
+func (o GetInstancesInstanceListOutput) LaunchConfigurationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LaunchConfigurationName }).(pulumi.StringOutput)
+}
+
+// Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.
+func (o GetInstancesInstanceListOutput) LifeCycleState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LifeCycleState }).(pulumi.StringOutput)
+}
+
+// Enable scale in protection.
+func (o GetInstancesInstanceListOutput) ProtectedFromScaleIn() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.ProtectedFromScaleIn }).(pulumi.BoolOutput)
+}
+
+// Version ID.
+func (o GetInstancesInstanceListOutput) VersionNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.VersionNumber }).(pulumi.IntOutput)
+}
+
+// Available zone.
+func (o GetInstancesInstanceListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
+}
+
 type GetScalingConfigsConfigurationList struct {
 	// Launch configuration ID.
 	ConfigurationId string `pulumi:"configurationId"`
@@ -568,7 +879,7 @@ type GetScalingConfigsConfigurationList struct {
 // GetScalingConfigsConfigurationListInput is an input type that accepts GetScalingConfigsConfigurationListArgs and GetScalingConfigsConfigurationListOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListInput` via:
 //
-//	GetScalingConfigsConfigurationListArgs{...}
+//          GetScalingConfigsConfigurationListArgs{...}
 type GetScalingConfigsConfigurationListInput interface {
 	pulumi.Input
 
@@ -634,7 +945,7 @@ func (i GetScalingConfigsConfigurationListArgs) ToGetScalingConfigsConfiguration
 // GetScalingConfigsConfigurationListArrayInput is an input type that accepts GetScalingConfigsConfigurationListArray and GetScalingConfigsConfigurationListArrayOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListArrayInput` via:
 //
-//	GetScalingConfigsConfigurationListArray{ GetScalingConfigsConfigurationListArgs{...} }
+//          GetScalingConfigsConfigurationListArray{ GetScalingConfigsConfigurationListArgs{...} }
 type GetScalingConfigsConfigurationListArrayInput interface {
 	pulumi.Input
 
@@ -806,7 +1117,7 @@ type GetScalingConfigsConfigurationListDataDisk struct {
 // GetScalingConfigsConfigurationListDataDiskInput is an input type that accepts GetScalingConfigsConfigurationListDataDiskArgs and GetScalingConfigsConfigurationListDataDiskOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListDataDiskInput` via:
 //
-//	GetScalingConfigsConfigurationListDataDiskArgs{...}
+//          GetScalingConfigsConfigurationListDataDiskArgs{...}
 type GetScalingConfigsConfigurationListDataDiskInput interface {
 	pulumi.Input
 
@@ -840,7 +1151,7 @@ func (i GetScalingConfigsConfigurationListDataDiskArgs) ToGetScalingConfigsConfi
 // GetScalingConfigsConfigurationListDataDiskArrayInput is an input type that accepts GetScalingConfigsConfigurationListDataDiskArray and GetScalingConfigsConfigurationListDataDiskArrayOutput values.
 // You can construct a concrete instance of `GetScalingConfigsConfigurationListDataDiskArrayInput` via:
 //
-//	GetScalingConfigsConfigurationListDataDiskArray{ GetScalingConfigsConfigurationListDataDiskArgs{...} }
+//          GetScalingConfigsConfigurationListDataDiskArray{ GetScalingConfigsConfigurationListDataDiskArgs{...} }
 type GetScalingConfigsConfigurationListDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -962,7 +1273,7 @@ type GetScalingGroupsScalingGroupList struct {
 // GetScalingGroupsScalingGroupListInput is an input type that accepts GetScalingGroupsScalingGroupListArgs and GetScalingGroupsScalingGroupListOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListInput` via:
 //
-//	GetScalingGroupsScalingGroupListArgs{...}
+//          GetScalingGroupsScalingGroupListArgs{...}
 type GetScalingGroupsScalingGroupListInput interface {
 	pulumi.Input
 
@@ -1028,7 +1339,7 @@ func (i GetScalingGroupsScalingGroupListArgs) ToGetScalingGroupsScalingGroupList
 // GetScalingGroupsScalingGroupListArrayInput is an input type that accepts GetScalingGroupsScalingGroupListArray and GetScalingGroupsScalingGroupListArrayOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListArrayInput` via:
 //
-//	GetScalingGroupsScalingGroupListArray{ GetScalingGroupsScalingGroupListArgs{...} }
+//          GetScalingGroupsScalingGroupListArray{ GetScalingGroupsScalingGroupListArgs{...} }
 type GetScalingGroupsScalingGroupListArrayInput interface {
 	pulumi.Input
 
@@ -1200,7 +1511,7 @@ type GetScalingGroupsScalingGroupListForwardBalancerId struct {
 // GetScalingGroupsScalingGroupListForwardBalancerIdInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdArgs and GetScalingGroupsScalingGroupListForwardBalancerIdOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...}
+//          GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...}
 type GetScalingGroupsScalingGroupListForwardBalancerIdInput interface {
 	pulumi.Input
 
@@ -1234,7 +1545,7 @@ func (i GetScalingGroupsScalingGroupListForwardBalancerIdArgs) ToGetScalingGroup
 // GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdArray and GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdArray{ GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...} }
+//          GetScalingGroupsScalingGroupListForwardBalancerIdArray{ GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...} }
 type GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput interface {
 	pulumi.Input
 
@@ -1322,7 +1633,7 @@ type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute struct {
 // GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs and GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...}
+//          GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...}
 type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput interface {
 	pulumi.Input
 
@@ -1352,7 +1663,7 @@ func (i GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs) To
 // GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray and GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput values.
 // You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray{ GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...} }
+//          GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray{ GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...} }
 type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput interface {
 	pulumi.Input
 
@@ -1448,7 +1759,7 @@ type GetScalingPoliciesScalingPolicyList struct {
 // GetScalingPoliciesScalingPolicyListInput is an input type that accepts GetScalingPoliciesScalingPolicyListArgs and GetScalingPoliciesScalingPolicyListOutput values.
 // You can construct a concrete instance of `GetScalingPoliciesScalingPolicyListInput` via:
 //
-//	GetScalingPoliciesScalingPolicyListArgs{...}
+//          GetScalingPoliciesScalingPolicyListArgs{...}
 type GetScalingPoliciesScalingPolicyListInput interface {
 	pulumi.Input
 
@@ -1498,7 +1809,7 @@ func (i GetScalingPoliciesScalingPolicyListArgs) ToGetScalingPoliciesScalingPoli
 // GetScalingPoliciesScalingPolicyListArrayInput is an input type that accepts GetScalingPoliciesScalingPolicyListArray and GetScalingPoliciesScalingPolicyListArrayOutput values.
 // You can construct a concrete instance of `GetScalingPoliciesScalingPolicyListArrayInput` via:
 //
-//	GetScalingPoliciesScalingPolicyListArray{ GetScalingPoliciesScalingPolicyListArgs{...} }
+//          GetScalingPoliciesScalingPolicyListArray{ GetScalingPoliciesScalingPolicyListArgs{...} }
 type GetScalingPoliciesScalingPolicyListArrayInput interface {
 	pulumi.Input
 
@@ -1623,6 +1934,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingGroupForwardBalancerIdArrayInput)(nil)).Elem(), ScalingGroupForwardBalancerIdArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingGroupForwardBalancerIdTargetAttributeInput)(nil)).Elem(), ScalingGroupForwardBalancerIdTargetAttributeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingGroupForwardBalancerIdTargetAttributeArrayInput)(nil)).Elem(), ScalingGroupForwardBalancerIdTargetAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesFilterInput)(nil)).Elem(), GetInstancesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesFilterArrayInput)(nil)).Elem(), GetInstancesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingConfigsConfigurationListInput)(nil)).Elem(), GetScalingConfigsConfigurationListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingConfigsConfigurationListArrayInput)(nil)).Elem(), GetScalingConfigsConfigurationListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingConfigsConfigurationListDataDiskInput)(nil)).Elem(), GetScalingConfigsConfigurationListDataDiskArgs{})
@@ -1643,6 +1958,10 @@ func init() {
 	pulumi.RegisterOutputType(ScalingGroupForwardBalancerIdArrayOutput{})
 	pulumi.RegisterOutputType(ScalingGroupForwardBalancerIdTargetAttributeOutput{})
 	pulumi.RegisterOutputType(ScalingGroupForwardBalancerIdTargetAttributeArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesFilterOutput{})
+	pulumi.RegisterOutputType(GetInstancesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetScalingConfigsConfigurationListOutput{})
 	pulumi.RegisterOutputType(GetScalingConfigsConfigurationListArrayOutput{})
 	pulumi.RegisterOutputType(GetScalingConfigsConfigurationListDataDiskOutput{})

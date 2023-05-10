@@ -27,6 +27,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Namespace{}
 	case "tencentcloud:Tdmq/namespaceRoleAttachment:NamespaceRoleAttachment":
 		r = &NamespaceRoleAttachment{}
+	case "tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster":
+		r = &RocketmqCluster{}
+	case "tencentcloud:Tdmq/rocketmqEnvironmentRole:RocketmqEnvironmentRole":
+		r = &RocketmqEnvironmentRole{}
+	case "tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup":
+		r = &RocketmqGroup{}
+	case "tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace":
+		r = &RocketmqNamespace{}
+	case "tencentcloud:Tdmq/rocketmqRole:RocketmqRole":
+		r = &RocketmqRole{}
+	case "tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic":
+		r = &RocketmqTopic{}
 	case "tencentcloud:Tdmq/role:Role":
 		r = &Role{}
 	case "tencentcloud:Tdmq/topic:Topic":
@@ -57,6 +69,36 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tdmq/namespaceRoleAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/rocketmqCluster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/rocketmqEnvironmentRole",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/rocketmqGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/rocketmqNamespace",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/rocketmqRole",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/rocketmqTopic",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

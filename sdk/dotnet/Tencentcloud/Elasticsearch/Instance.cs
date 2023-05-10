@@ -31,7 +31,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     ///             VpcId = @var.Vpc_id,
     ///             SubnetId = @var.Subnet_id,
     ///             Password = "Test12345",
-    ///             LicenseType = "oss",
+    ///             LicenseType = "basic",
     ///             WebNodeTypeInfos = 
     ///             {
     ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
@@ -47,6 +47,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     ///                     NodeNum = 2,
     ///                     NodeType = "ES.S1.MEDIUM4",
     ///                     Encrypt = false,
+    ///                 },
+    ///             },
+    ///             EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+    ///             {
+    ///                 BlackLists = 
+    ///                 {
+    ///                     "9.9.9.9",
+    ///                     "8.8.8.8",
+    ///                 },
+    ///                 WhiteLists = 
+    ///                 {
+    ///                     "0.0.0.0",
     ///                 },
     ///             },
     ///             Tags = 
@@ -77,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Output<string?> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         /// </summary>
         [Output("basicSecurityType")]
         public Output<int?> BasicSecurityType { get; private set; } = null!;
@@ -123,6 +135,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Output("elasticsearchVip")]
         public Output<string> ElasticsearchVip { get; private set; } = null!;
+
+        /// <summary>
+        /// Kibana Access Control Configuration.
+        /// </summary>
+        [Output("esAcl")]
+        public Output<Outputs.InstanceEsAcl> EsAcl { get; private set; } = null!;
 
         /// <summary>
         /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -250,7 +268,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         /// </summary>
         [Input("basicSecurityType")]
         public Input<int>? BasicSecurityType { get; set; }
@@ -272,6 +290,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("deployMode")]
         public Input<int>? DeployMode { get; set; }
+
+        /// <summary>
+        /// Kibana Access Control Configuration.
+        /// </summary>
+        [Input("esAcl")]
+        public Input<Inputs.InstanceEsAclArgs>? EsAcl { get; set; }
 
         /// <summary>
         /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -377,7 +401,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+        /// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         /// </summary>
         [Input("basicSecurityType")]
         public Input<int>? BasicSecurityType { get; set; }
@@ -423,6 +447,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("elasticsearchVip")]
         public Input<string>? ElasticsearchVip { get; set; }
+
+        /// <summary>
+        /// Kibana Access Control Configuration.
+        /// </summary>
+        [Input("esAcl")]
+        public Input<Inputs.InstanceEsAclGetArgs>? EsAcl { get; set; }
 
         /// <summary>
         /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).

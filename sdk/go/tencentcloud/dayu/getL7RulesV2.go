@@ -18,27 +18,24 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Dayu.GetL7RulesV2(ctx, &dayu.GetL7RulesV2Args{
-//				Business: "bgpip",
-//				Limit:    pulumi.IntRef(10),
-//				Offset:   pulumi.IntRef(0),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.GetL7RulesV2(ctx, &dayu.GetL7RulesV2Args{
+// 			Business: "bgpip",
+// 			Limit:    pulumi.IntRef(10),
+// 			Offset:   pulumi.IntRef(0),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetL7RulesV2(ctx *pulumi.Context, args *GetL7RulesV2Args, opts ...pulumi.InvokeOption) (*GetL7RulesV2Result, error) {
 	opts = pkgInvokeDefaultOpts(opts)

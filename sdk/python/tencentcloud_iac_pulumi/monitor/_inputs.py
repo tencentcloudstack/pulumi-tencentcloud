@@ -9,6 +9,9 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'AlarmNoticeClsNoticeArgs',
+    'AlarmNoticeUrlNoticeArgs',
+    'AlarmNoticeUserNoticeArgs',
     'AlarmPolicyConditionsArgs',
     'AlarmPolicyConditionsRuleArgs',
     'AlarmPolicyConditionsRuleFilterArgs',
@@ -17,6 +20,7 @@ __all__ = [
     'AlarmPolicyPolicyTagArgs',
     'AlarmPolicyTriggerTaskArgs',
     'BindingReceiverReceiversArgs',
+    'GrafanaSsoAccountRoleArgs',
     'PolicyBindingObjectDimensionArgs',
     'TmpAlertRuleAnnotationArgs',
     'TmpAlertRuleLabelArgs',
@@ -26,6 +30,17 @@ __all__ = [
     'TmpTkeAlertPolicyAlertRuleRuleArgs',
     'TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs',
     'TmpTkeAlertPolicyAlertRuleRuleLabelArgs',
+    'TmpTkeClusterAgentAgentsArgs',
+    'TmpTkeClusterAgentAgentsExternalLabelArgs',
+    'TmpTkeClusterAgentAgentsInClusterPodConfigArgs',
+    'TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs',
+    'TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs',
+    'TmpTkeConfigPodMonitorArgs',
+    'TmpTkeConfigRawJobArgs',
+    'TmpTkeConfigServiceMonitorArgs',
+    'TmpTkeGlobalNotificationNotificationArgs',
+    'TmpTkeGlobalNotificationNotificationAlertManagerArgs',
+    'TmpTkeTemplateAttachmentTargetsArgs',
     'TmpTkeTemplateTemplateArgs',
     'TmpTkeTemplateTemplatePodMonitorArgs',
     'TmpTkeTemplateTemplateRawJobArgs',
@@ -34,6 +49,355 @@ __all__ = [
     'GetDataDimensionArgs',
     'GetProductEventDimensionArgs',
 ]
+
+@pulumi.input_type
+class AlarmNoticeClsNoticeArgs:
+    def __init__(__self__, *,
+                 log_set_id: pulumi.Input[str],
+                 region: pulumi.Input[str],
+                 topic_id: pulumi.Input[str],
+                 enable: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] log_set_id: Log collection Id.
+        :param pulumi.Input[str] region: Regional.
+        :param pulumi.Input[str] topic_id: Theme Id.
+        :param pulumi.Input[int] enable: Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+        """
+        pulumi.set(__self__, "log_set_id", log_set_id)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "topic_id", topic_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+
+    @property
+    @pulumi.getter(name="logSetId")
+    def log_set_id(self) -> pulumi.Input[str]:
+        """
+        Log collection Id.
+        """
+        return pulumi.get(self, "log_set_id")
+
+    @log_set_id.setter
+    def log_set_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "log_set_id", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Regional.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Theme Id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
+        """
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "enable", value)
+
+
+@pulumi.input_type
+class AlarmNoticeUrlNoticeArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str],
+                 end_time: Optional[pulumi.Input[int]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
+        """
+        :param pulumi.Input[str] url: Callback URL (limited to 256 characters).
+        :param pulumi.Input[int] end_time: Notification End Time Seconds at the start of a day.
+        :param pulumi.Input[int] start_time: Notification Start Time Number of seconds at the start of a day.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] weekdays: Notification period 1-7 indicates Monday to Sunday.
+        """
+        pulumi.set(__self__, "url", url)
+        if end_time is not None:
+            pulumi.set(__self__, "end_time", end_time)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if weekdays is not None:
+            pulumi.set(__self__, "weekdays", weekdays)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        Callback URL (limited to 256 characters).
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Notification End Time Seconds at the start of a day.
+        """
+        return pulumi.get(self, "end_time")
+
+    @end_time.setter
+    def end_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "end_time", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Notification Start Time Number of seconds at the start of a day.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter
+    def weekdays(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Notification period 1-7 indicates Monday to Sunday.
+        """
+        return pulumi.get(self, "weekdays")
+
+    @weekdays.setter
+    def weekdays(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "weekdays", value)
+
+
+@pulumi.input_type
+class AlarmNoticeUserNoticeArgs:
+    def __init__(__self__, *,
+                 end_time: pulumi.Input[int],
+                 notice_ways: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 receiver_type: pulumi.Input[str],
+                 start_time: pulumi.Input[int],
+                 group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
+                 need_phone_arrive_notice: Optional[pulumi.Input[int]] = None,
+                 phone_call_type: Optional[pulumi.Input[str]] = None,
+                 phone_circle_interval: Optional[pulumi.Input[int]] = None,
+                 phone_circle_times: Optional[pulumi.Input[int]] = None,
+                 phone_inner_interval: Optional[pulumi.Input[int]] = None,
+                 phone_orders: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
+                 user_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
+                 weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
+        """
+        :param pulumi.Input[int] end_time: The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notice_ways: Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+        :param pulumi.Input[str] receiver_type: Recipient Type USER=User GROUP=User Group.
+        :param pulumi.Input[int] start_time: The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] group_ids: User group ID list.
+        :param pulumi.Input[int] need_phone_arrive_notice: Contact notification required 0= No 1= Yes.
+        :param pulumi.Input[str] phone_call_type: Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+        :param pulumi.Input[int] phone_circle_interval: Number of seconds between polls (value range: 60-900).
+        :param pulumi.Input[int] phone_circle_times: Number of telephone polls (value range: 1-5).
+        :param pulumi.Input[int] phone_inner_interval: Number of seconds between calls in a polling session (value range: 60-900).
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] phone_orders: Telephone polling list.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] user_ids: User UID List.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] weekdays: Notification period 1-7 indicates Monday to Sunday.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "notice_ways", notice_ways)
+        pulumi.set(__self__, "receiver_type", receiver_type)
+        pulumi.set(__self__, "start_time", start_time)
+        if group_ids is not None:
+            pulumi.set(__self__, "group_ids", group_ids)
+        if need_phone_arrive_notice is not None:
+            pulumi.set(__self__, "need_phone_arrive_notice", need_phone_arrive_notice)
+        if phone_call_type is not None:
+            pulumi.set(__self__, "phone_call_type", phone_call_type)
+        if phone_circle_interval is not None:
+            pulumi.set(__self__, "phone_circle_interval", phone_circle_interval)
+        if phone_circle_times is not None:
+            pulumi.set(__self__, "phone_circle_times", phone_circle_times)
+        if phone_inner_interval is not None:
+            pulumi.set(__self__, "phone_inner_interval", phone_inner_interval)
+        if phone_orders is not None:
+            pulumi.set(__self__, "phone_orders", phone_orders)
+        if user_ids is not None:
+            pulumi.set(__self__, "user_ids", user_ids)
+        if weekdays is not None:
+            pulumi.set(__self__, "weekdays", weekdays)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> pulumi.Input[int]:
+        """
+        The number of seconds since the notification end time 00:00:00 (value range 0-86399).
+        """
+        return pulumi.get(self, "end_time")
+
+    @end_time.setter
+    def end_time(self, value: pulumi.Input[int]):
+        pulumi.set(self, "end_time", value)
+
+    @property
+    @pulumi.getter(name="noticeWays")
+    def notice_ways(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Notification Channel List EMAIL=Mail SMS=SMS CALL=Telephone WECHAT=WeChat RTX=Enterprise WeChat.
+        """
+        return pulumi.get(self, "notice_ways")
+
+    @notice_ways.setter
+    def notice_ways(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "notice_ways", value)
+
+    @property
+    @pulumi.getter(name="receiverType")
+    def receiver_type(self) -> pulumi.Input[str]:
+        """
+        Recipient Type USER=User GROUP=User Group.
+        """
+        return pulumi.get(self, "receiver_type")
+
+    @receiver_type.setter
+    def receiver_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "receiver_type", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> pulumi.Input[int]:
+        """
+        The number of seconds since the notification start time 00:00:00 (value range 0-86399).
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: pulumi.Input[int]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="groupIds")
+    def group_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        User group ID list.
+        """
+        return pulumi.get(self, "group_ids")
+
+    @group_ids.setter
+    def group_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "group_ids", value)
+
+    @property
+    @pulumi.getter(name="needPhoneArriveNotice")
+    def need_phone_arrive_notice(self) -> Optional[pulumi.Input[int]]:
+        """
+        Contact notification required 0= No 1= Yes.
+        """
+        return pulumi.get(self, "need_phone_arrive_notice")
+
+    @need_phone_arrive_notice.setter
+    def need_phone_arrive_notice(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "need_phone_arrive_notice", value)
+
+    @property
+    @pulumi.getter(name="phoneCallType")
+    def phone_call_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Call type SYNC= Simultaneous call CIRCLE= Round call If this parameter is not specified, the default value is round call.
+        """
+        return pulumi.get(self, "phone_call_type")
+
+    @phone_call_type.setter
+    def phone_call_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "phone_call_type", value)
+
+    @property
+    @pulumi.getter(name="phoneCircleInterval")
+    def phone_circle_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of seconds between polls (value range: 60-900).
+        """
+        return pulumi.get(self, "phone_circle_interval")
+
+    @phone_circle_interval.setter
+    def phone_circle_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_circle_interval", value)
+
+    @property
+    @pulumi.getter(name="phoneCircleTimes")
+    def phone_circle_times(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of telephone polls (value range: 1-5).
+        """
+        return pulumi.get(self, "phone_circle_times")
+
+    @phone_circle_times.setter
+    def phone_circle_times(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_circle_times", value)
+
+    @property
+    @pulumi.getter(name="phoneInnerInterval")
+    def phone_inner_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of seconds between calls in a polling session (value range: 60-900).
+        """
+        return pulumi.get(self, "phone_inner_interval")
+
+    @phone_inner_interval.setter
+    def phone_inner_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_inner_interval", value)
+
+    @property
+    @pulumi.getter(name="phoneOrders")
+    def phone_orders(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Telephone polling list.
+        """
+        return pulumi.get(self, "phone_orders")
+
+    @phone_orders.setter
+    def phone_orders(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "phone_orders", value)
+
+    @property
+    @pulumi.getter(name="userIds")
+    def user_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        User UID List.
+        """
+        return pulumi.get(self, "user_ids")
+
+    @user_ids.setter
+    def user_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "user_ids", value)
+
+    @property
+    @pulumi.getter
+    def weekdays(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Notification period 1-7 indicates Monday to Sunday.
+        """
+        return pulumi.get(self, "weekdays")
+
+    @weekdays.setter
+    def weekdays(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "weekdays", value)
+
 
 @pulumi.input_type
 class AlarmPolicyConditionsArgs:
@@ -707,6 +1071,43 @@ class BindingReceiverReceiversArgs:
     @start_time.setter
     def start_time(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "start_time", value)
+
+
+@pulumi.input_type
+class GrafanaSsoAccountRoleArgs:
+    def __init__(__self__, *,
+                 organization: pulumi.Input[str],
+                 role: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] organization: Grafana organization id string.
+        :param pulumi.Input[str] role: Grafana role, one of {Admin,Editor,Viewer}.
+        """
+        pulumi.set(__self__, "organization", organization)
+        pulumi.set(__self__, "role", role)
+
+    @property
+    @pulumi.getter
+    def organization(self) -> pulumi.Input[str]:
+        """
+        Grafana organization id string.
+        """
+        return pulumi.get(self, "organization")
+
+    @organization.setter
+    def organization(self, value: pulumi.Input[str]):
+        pulumi.set(self, "organization", value)
+
+    @property
+    @pulumi.getter
+    def role(self) -> pulumi.Input[str]:
+        """
+        Grafana role, one of {Admin,Editor,Viewer}.
+        """
+        return pulumi.get(self, "role")
+
+    @role.setter
+    def role(self, value: pulumi.Input[str]):
+        pulumi.set(self, "role", value)
 
 
 @pulumi.input_type
@@ -1419,6 +1820,922 @@ class TmpTkeAlertPolicyAlertRuleRuleLabelArgs:
     @value.setter
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class TmpTkeClusterAgentAgentsArgs:
+    def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
+                 cluster_type: pulumi.Input[str],
+                 enable_external: pulumi.Input[bool],
+                 region: pulumi.Input[str],
+                 cluster_name: Optional[pulumi.Input[str]] = None,
+                 external_labels: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsExternalLabelArgs']]]] = None,
+                 in_cluster_pod_config: Optional[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigArgs']] = None,
+                 not_install_basic_scrape: Optional[pulumi.Input[bool]] = None,
+                 not_scrape: Optional[pulumi.Input[bool]] = None,
+                 status: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cluster_id: An id identify the cluster, like `cls-xxxxxx`.
+        :param pulumi.Input[str] cluster_type: Type of cluster.
+        :param pulumi.Input[bool] enable_external: Whether to enable the public network CLB.
+        :param pulumi.Input[str] region: Limitation of region.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsExternalLabelArgs']]] external_labels: All metrics collected by the cluster will carry these labels.
+        :param pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigArgs'] in_cluster_pod_config: Pod configuration for components deployed in the cluster.
+        :param pulumi.Input[bool] not_install_basic_scrape: Whether to install the default collection configuration.
+        :param pulumi.Input[bool] not_scrape: Whether to collect indicators, true means drop all indicators, false means collect default indicators.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "enable_external", enable_external)
+        pulumi.set(__self__, "region", region)
+        if cluster_name is not None:
+            pulumi.set(__self__, "cluster_name", cluster_name)
+        if external_labels is not None:
+            pulumi.set(__self__, "external_labels", external_labels)
+        if in_cluster_pod_config is not None:
+            pulumi.set(__self__, "in_cluster_pod_config", in_cluster_pod_config)
+        if not_install_basic_scrape is not None:
+            pulumi.set(__self__, "not_install_basic_scrape", not_install_basic_scrape)
+        if not_scrape is not None:
+            pulumi.set(__self__, "not_scrape", not_scrape)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        An id identify the cluster, like `cls-xxxxxx`.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> pulumi.Input[str]:
+        """
+        Type of cluster.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @cluster_type.setter
+    def cluster_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_type", value)
+
+    @property
+    @pulumi.getter(name="enableExternal")
+    def enable_external(self) -> pulumi.Input[bool]:
+        """
+        Whether to enable the public network CLB.
+        """
+        return pulumi.get(self, "enable_external")
+
+    @enable_external.setter
+    def enable_external(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enable_external", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Limitation of region.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "cluster_name")
+
+    @cluster_name.setter
+    def cluster_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_name", value)
+
+    @property
+    @pulumi.getter(name="externalLabels")
+    def external_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsExternalLabelArgs']]]]:
+        """
+        All metrics collected by the cluster will carry these labels.
+        """
+        return pulumi.get(self, "external_labels")
+
+    @external_labels.setter
+    def external_labels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsExternalLabelArgs']]]]):
+        pulumi.set(self, "external_labels", value)
+
+    @property
+    @pulumi.getter(name="inClusterPodConfig")
+    def in_cluster_pod_config(self) -> Optional[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigArgs']]:
+        """
+        Pod configuration for components deployed in the cluster.
+        """
+        return pulumi.get(self, "in_cluster_pod_config")
+
+    @in_cluster_pod_config.setter
+    def in_cluster_pod_config(self, value: Optional[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigArgs']]):
+        pulumi.set(self, "in_cluster_pod_config", value)
+
+    @property
+    @pulumi.getter(name="notInstallBasicScrape")
+    def not_install_basic_scrape(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to install the default collection configuration.
+        """
+        return pulumi.get(self, "not_install_basic_scrape")
+
+    @not_install_basic_scrape.setter
+    def not_install_basic_scrape(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "not_install_basic_scrape", value)
+
+    @property
+    @pulumi.getter(name="notScrape")
+    def not_scrape(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to collect indicators, true means drop all indicators, false means collect default indicators.
+        """
+        return pulumi.get(self, "not_scrape")
+
+    @not_scrape.setter
+    def not_scrape(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "not_scrape", value)
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "status", value)
+
+
+@pulumi.input_type
+class TmpTkeClusterAgentAgentsExternalLabelArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Indicator name.
+        :param pulumi.Input[str] value: Index value.
+        """
+        pulumi.set(__self__, "name", name)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Indicator name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Index value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class TmpTkeClusterAgentAgentsInClusterPodConfigArgs:
+    def __init__(__self__, *,
+                 host_net: pulumi.Input[bool],
+                 node_selectors: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs']]]] = None,
+                 tolerations: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs']]]] = None):
+        """
+        :param pulumi.Input[bool] host_net: Whether to use HostNetWork.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs']]] node_selectors: Specify the pod to run the node.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs']]] tolerations: Tolerate Stain.
+        """
+        pulumi.set(__self__, "host_net", host_net)
+        if node_selectors is not None:
+            pulumi.set(__self__, "node_selectors", node_selectors)
+        if tolerations is not None:
+            pulumi.set(__self__, "tolerations", tolerations)
+
+    @property
+    @pulumi.getter(name="hostNet")
+    def host_net(self) -> pulumi.Input[bool]:
+        """
+        Whether to use HostNetWork.
+        """
+        return pulumi.get(self, "host_net")
+
+    @host_net.setter
+    def host_net(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "host_net", value)
+
+    @property
+    @pulumi.getter(name="nodeSelectors")
+    def node_selectors(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs']]]]:
+        """
+        Specify the pod to run the node.
+        """
+        return pulumi.get(self, "node_selectors")
+
+    @node_selectors.setter
+    def node_selectors(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs']]]]):
+        pulumi.set(self, "node_selectors", value)
+
+    @property
+    @pulumi.getter
+    def tolerations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs']]]]:
+        """
+        Tolerate Stain.
+        """
+        return pulumi.get(self, "tolerations")
+
+    @tolerations.setter
+    def tolerations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs']]]]):
+        pulumi.set(self, "tolerations", value)
+
+
+@pulumi.input_type
+class TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: The pod configuration name of the component deployed in the cluster.
+        :param pulumi.Input[str] value: Pod configuration values for components deployed in the cluster.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The pod configuration name of the component deployed in the cluster.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Pod configuration values for components deployed in the cluster.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs:
+    def __init__(__self__, *,
+                 effect: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None,
+                 operator: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] effect: blemish effect to match.
+        :param pulumi.Input[str] key: The taint key to which the tolerance applies.
+        :param pulumi.Input[str] operator: key-value relationship.
+        """
+        if effect is not None:
+            pulumi.set(__self__, "effect", effect)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if operator is not None:
+            pulumi.set(__self__, "operator", operator)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> Optional[pulumi.Input[str]]:
+        """
+        blemish effect to match.
+        """
+        return pulumi.get(self, "effect")
+
+    @effect.setter
+    def effect(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "effect", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The taint key to which the tolerance applies.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> Optional[pulumi.Input[str]]:
+        """
+        key-value relationship.
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "operator", value)
+
+
+@pulumi.input_type
+class TmpTkeConfigPodMonitorArgs:
+    def __init__(__self__, *,
+                 config: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 template_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] config: Config.
+        :param pulumi.Input[str] name: Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+        :param pulumi.Input[str] template_id: Used for output parameters, if the configuration comes from a template, it is the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for output parameters, if the configuration comes from a template, it is the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+
+@pulumi.input_type
+class TmpTkeConfigRawJobArgs:
+    def __init__(__self__, *,
+                 config: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 template_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] config: Config.
+        :param pulumi.Input[str] name: Name.
+        :param pulumi.Input[str] template_id: Used for output parameters, if the configuration comes from a template, it is the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for output parameters, if the configuration comes from a template, it is the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+
+@pulumi.input_type
+class TmpTkeConfigServiceMonitorArgs:
+    def __init__(__self__, *,
+                 config: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 template_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] config: Config.
+        :param pulumi.Input[str] name: Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+        :param pulumi.Input[str] template_id: Used for output parameters, if the configuration comes from a template, it is the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name. The naming rule is: namespace/name. If you don't have any namespace, use the default namespace: kube-system, otherwise use the specified one.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for output parameters, if the configuration comes from a template, it is the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+
+@pulumi.input_type
+class TmpTkeGlobalNotificationNotificationArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 type: pulumi.Input[str],
+                 alert_managers: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeGlobalNotificationNotificationAlertManagerArgs']]]] = None,
+                 notify_ways: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 phone_arrive_notice: Optional[pulumi.Input[bool]] = None,
+                 phone_circle_interval: Optional[pulumi.Input[int]] = None,
+                 phone_circle_times: Optional[pulumi.Input[int]] = None,
+                 phone_inner_interval: Optional[pulumi.Input[int]] = None,
+                 phone_notify_orders: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
+                 receiver_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 repeat_interval: Optional[pulumi.Input[str]] = None,
+                 time_range_end: Optional[pulumi.Input[str]] = None,
+                 time_range_start: Optional[pulumi.Input[str]] = None,
+                 web_hook: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Alarm notification switch.
+        :param pulumi.Input[str] type: Alarm notification type, Valid values: `amp`, `webhook`, `alertmanager`.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeGlobalNotificationNotificationAlertManagerArgs']]] alert_managers: Alert manager, if Type is `alertmanager`, this field is required.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notify_ways: Alarm notification method, Valid values: `SMS`, `EMAIL`, `CALL`, `WECHAT`.
+        :param pulumi.Input[bool] phone_arrive_notice: Phone Alarm Reach Notification, NotifyWay is `CALL`, and this parameter is used.
+        :param pulumi.Input[int] phone_circle_interval: Telephone alarm off-wheel interval, NotifyWay is `CALL`, and this parameter is used.
+        :param pulumi.Input[int] phone_circle_times: Number of phone alerts (user group), NotifyWay is `CALL`, and this parameter is used.
+        :param pulumi.Input[int] phone_inner_interval: Interval between telephone alarm rounds, NotifyWay is `CALL`, and this parameter is used.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] phone_notify_orders: Phone alert sequence, NotifyWay is `CALL`, and this parameter is used.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] receiver_groups: Alarm receiving group(user group).
+        :param pulumi.Input[str] repeat_interval: Convergence time.
+        :param pulumi.Input[str] time_range_end: Effective end time.
+        :param pulumi.Input[str] time_range_start: Effective start time.
+        :param pulumi.Input[str] web_hook: Web hook, if Type is `webhook`, this field is required.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "type", type)
+        if alert_managers is not None:
+            pulumi.set(__self__, "alert_managers", alert_managers)
+        if notify_ways is not None:
+            pulumi.set(__self__, "notify_ways", notify_ways)
+        if phone_arrive_notice is not None:
+            pulumi.set(__self__, "phone_arrive_notice", phone_arrive_notice)
+        if phone_circle_interval is not None:
+            pulumi.set(__self__, "phone_circle_interval", phone_circle_interval)
+        if phone_circle_times is not None:
+            pulumi.set(__self__, "phone_circle_times", phone_circle_times)
+        if phone_inner_interval is not None:
+            pulumi.set(__self__, "phone_inner_interval", phone_inner_interval)
+        if phone_notify_orders is not None:
+            pulumi.set(__self__, "phone_notify_orders", phone_notify_orders)
+        if receiver_groups is not None:
+            pulumi.set(__self__, "receiver_groups", receiver_groups)
+        if repeat_interval is not None:
+            pulumi.set(__self__, "repeat_interval", repeat_interval)
+        if time_range_end is not None:
+            pulumi.set(__self__, "time_range_end", time_range_end)
+        if time_range_start is not None:
+            pulumi.set(__self__, "time_range_start", time_range_start)
+        if web_hook is not None:
+            pulumi.set(__self__, "web_hook", web_hook)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Alarm notification switch.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Alarm notification type, Valid values: `amp`, `webhook`, `alertmanager`.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="alertManagers")
+    def alert_managers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeGlobalNotificationNotificationAlertManagerArgs']]]]:
+        """
+        Alert manager, if Type is `alertmanager`, this field is required.
+        """
+        return pulumi.get(self, "alert_managers")
+
+    @alert_managers.setter
+    def alert_managers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeGlobalNotificationNotificationAlertManagerArgs']]]]):
+        pulumi.set(self, "alert_managers", value)
+
+    @property
+    @pulumi.getter(name="notifyWays")
+    def notify_ways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Alarm notification method, Valid values: `SMS`, `EMAIL`, `CALL`, `WECHAT`.
+        """
+        return pulumi.get(self, "notify_ways")
+
+    @notify_ways.setter
+    def notify_ways(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "notify_ways", value)
+
+    @property
+    @pulumi.getter(name="phoneArriveNotice")
+    def phone_arrive_notice(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Phone Alarm Reach Notification, NotifyWay is `CALL`, and this parameter is used.
+        """
+        return pulumi.get(self, "phone_arrive_notice")
+
+    @phone_arrive_notice.setter
+    def phone_arrive_notice(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "phone_arrive_notice", value)
+
+    @property
+    @pulumi.getter(name="phoneCircleInterval")
+    def phone_circle_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        Telephone alarm off-wheel interval, NotifyWay is `CALL`, and this parameter is used.
+        """
+        return pulumi.get(self, "phone_circle_interval")
+
+    @phone_circle_interval.setter
+    def phone_circle_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_circle_interval", value)
+
+    @property
+    @pulumi.getter(name="phoneCircleTimes")
+    def phone_circle_times(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of phone alerts (user group), NotifyWay is `CALL`, and this parameter is used.
+        """
+        return pulumi.get(self, "phone_circle_times")
+
+    @phone_circle_times.setter
+    def phone_circle_times(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_circle_times", value)
+
+    @property
+    @pulumi.getter(name="phoneInnerInterval")
+    def phone_inner_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        Interval between telephone alarm rounds, NotifyWay is `CALL`, and this parameter is used.
+        """
+        return pulumi.get(self, "phone_inner_interval")
+
+    @phone_inner_interval.setter
+    def phone_inner_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_inner_interval", value)
+
+    @property
+    @pulumi.getter(name="phoneNotifyOrders")
+    def phone_notify_orders(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Phone alert sequence, NotifyWay is `CALL`, and this parameter is used.
+        """
+        return pulumi.get(self, "phone_notify_orders")
+
+    @phone_notify_orders.setter
+    def phone_notify_orders(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "phone_notify_orders", value)
+
+    @property
+    @pulumi.getter(name="receiverGroups")
+    def receiver_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Alarm receiving group(user group).
+        """
+        return pulumi.get(self, "receiver_groups")
+
+    @receiver_groups.setter
+    def receiver_groups(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "receiver_groups", value)
+
+    @property
+    @pulumi.getter(name="repeatInterval")
+    def repeat_interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        Convergence time.
+        """
+        return pulumi.get(self, "repeat_interval")
+
+    @repeat_interval.setter
+    def repeat_interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_interval", value)
+
+    @property
+    @pulumi.getter(name="timeRangeEnd")
+    def time_range_end(self) -> Optional[pulumi.Input[str]]:
+        """
+        Effective end time.
+        """
+        return pulumi.get(self, "time_range_end")
+
+    @time_range_end.setter
+    def time_range_end(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_range_end", value)
+
+    @property
+    @pulumi.getter(name="timeRangeStart")
+    def time_range_start(self) -> Optional[pulumi.Input[str]]:
+        """
+        Effective start time.
+        """
+        return pulumi.get(self, "time_range_start")
+
+    @time_range_start.setter
+    def time_range_start(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_range_start", value)
+
+    @property
+    @pulumi.getter(name="webHook")
+    def web_hook(self) -> Optional[pulumi.Input[str]]:
+        """
+        Web hook, if Type is `webhook`, this field is required.
+        """
+        return pulumi.get(self, "web_hook")
+
+    @web_hook.setter
+    def web_hook(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "web_hook", value)
+
+
+@pulumi.input_type
+class TmpTkeGlobalNotificationNotificationAlertManagerArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str],
+                 cluster_id: Optional[pulumi.Input[str]] = None,
+                 cluster_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] url: Alert manager url.
+        :param pulumi.Input[str] cluster_id: Cluster id.
+        :param pulumi.Input[str] cluster_type: Cluster type.
+        """
+        pulumi.set(__self__, "url", url)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if cluster_type is not None:
+            pulumi.set(__self__, "cluster_type", cluster_type)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        Alert manager url.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster id.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster type.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @cluster_type.setter
+    def cluster_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_type", value)
+
+
+@pulumi.input_type
+class TmpTkeTemplateAttachmentTargetsArgs:
+    def __init__(__self__, *,
+                 instance_id: pulumi.Input[str],
+                 region: pulumi.Input[str],
+                 cluster_id: Optional[pulumi.Input[str]] = None,
+                 cluster_name: Optional[pulumi.Input[str]] = None,
+                 cluster_type: Optional[pulumi.Input[str]] = None,
+                 instance_name: Optional[pulumi.Input[str]] = None,
+                 sync_time: Optional[pulumi.Input[str]] = None,
+                 version: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] instance_id: instance id.
+        :param pulumi.Input[str] region: target area.
+        :param pulumi.Input[str] cluster_id: ID of the cluster.
+        :param pulumi.Input[str] cluster_name: Name the cluster.
+        :param pulumi.Input[str] cluster_type: Cluster type.
+        :param pulumi.Input[str] instance_name: Name of the prometheus instance.
+        :param pulumi.Input[str] sync_time: Last sync template time.
+        :param pulumi.Input[str] version: Template version currently in use.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "region", region)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if cluster_name is not None:
+            pulumi.set(__self__, "cluster_name", cluster_name)
+        if cluster_type is not None:
+            pulumi.set(__self__, "cluster_type", cluster_type)
+        if instance_name is not None:
+            pulumi.set(__self__, "instance_name", instance_name)
+        if sync_time is not None:
+            pulumi.set(__self__, "sync_time", sync_time)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        """
+        instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        target area.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the cluster.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name the cluster.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @cluster_name.setter
+    def cluster_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_name", value)
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster type.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @cluster_type.setter
+    def cluster_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_type", value)
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the prometheus instance.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @instance_name.setter
+    def instance_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_name", value)
+
+    @property
+    @pulumi.getter(name="syncTime")
+    def sync_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Last sync template time.
+        """
+        return pulumi.get(self, "sync_time")
+
+    @sync_time.setter
+    def sync_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sync_time", value)
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[pulumi.Input[str]]:
+        """
+        Template version currently in use.
+        """
+        return pulumi.get(self, "version")
+
+    @version.setter
+    def version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "version", value)
 
 
 @pulumi.input_type

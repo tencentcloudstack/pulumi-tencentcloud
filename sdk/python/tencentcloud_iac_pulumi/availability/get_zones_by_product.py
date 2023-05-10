@@ -101,9 +101,7 @@ def get_zones_by_product(include_unavailable: Optional[bool] = None,
                          result_output_file: Optional[str] = None,
                          opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetZonesByProductResult:
     """
-    Use this data source to get the available zones in current region.
-    Must set product param to fetch the product infomations(e.g. => cvm, vpc)
-    By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
+    Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. => cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
 
     ## Example Usage
 
@@ -149,9 +147,7 @@ def get_zones_by_product_output(include_unavailable: Optional[pulumi.Input[Optio
                                 result_output_file: Optional[pulumi.Input[Optional[str]]] = None,
                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetZonesByProductResult]:
     """
-    Use this data source to get the available zones in current region.
-    Must set product param to fetch the product infomations(e.g. => cvm, vpc)
-    By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
+    Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. => cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
 
     ## Example Usage
 

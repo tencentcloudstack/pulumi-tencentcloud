@@ -16,13 +16,15 @@ class AclArgs:
                  vpc_id: pulumi.Input[str],
                  egresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ingresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Acl resource.
         :param pulumi.Input[str] vpc_id: ID of the VPC instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[str] name: Name of the network ACL.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the vpc acl.
         """
         pulumi.set(__self__, "vpc_id", vpc_id)
         if egresses is not None:
@@ -31,6 +33,8 @@ class AclArgs:
             pulumi.set(__self__, "ingresses", ingresses)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="vpcId")
@@ -80,6 +84,18 @@ class AclArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of the vpc acl.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _AclState:
@@ -88,6 +104,7 @@ class _AclState:
                  egresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ingresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Acl resources.
@@ -95,6 +112,7 @@ class _AclState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[str] name: Name of the network ACL.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the vpc acl.
         :param pulumi.Input[str] vpc_id: ID of the VPC instance.
         """
         if create_time is not None:
@@ -105,6 +123,8 @@ class _AclState:
             pulumi.set(__self__, "ingresses", ingresses)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
 
@@ -157,6 +177,18 @@ class _AclState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of the vpc acl.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -177,6 +209,7 @@ class Acl(pulumi.CustomResource):
                  egresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ingresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -215,6 +248,7 @@ class Acl(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[str] name: Name of the network ACL.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the vpc acl.
         :param pulumi.Input[str] vpc_id: ID of the VPC instance.
         """
         ...
@@ -272,6 +306,7 @@ class Acl(pulumi.CustomResource):
                  egresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ingresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -290,6 +325,7 @@ class Acl(pulumi.CustomResource):
             __props__.__dict__["egresses"] = egresses
             __props__.__dict__["ingresses"] = ingresses
             __props__.__dict__["name"] = name
+            __props__.__dict__["tags"] = tags
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
@@ -308,6 +344,7 @@ class Acl(pulumi.CustomResource):
             egresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             ingresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None) -> 'Acl':
         """
         Get an existing Acl resource's state with the given name, id, and optional extra
@@ -320,6 +357,7 @@ class Acl(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[str] name: Name of the network ACL.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the vpc acl.
         :param pulumi.Input[str] vpc_id: ID of the VPC instance.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -330,6 +368,7 @@ class Acl(pulumi.CustomResource):
         __props__.__dict__["egresses"] = egresses
         __props__.__dict__["ingresses"] = ingresses
         __props__.__dict__["name"] = name
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["vpc_id"] = vpc_id
         return Acl(resource_name, opts=opts, __props__=__props__)
 
@@ -364,6 +403,14 @@ class Acl(pulumi.CustomResource):
         Name of the network ACL.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tags of the vpc acl.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")

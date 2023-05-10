@@ -10,10 +10,836 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'InstanceNodeInfo',
+    'ParamTemplateParamDetail',
+    'ParamTemplateParamsOverride',
+    'GetBackupBackupSetResult',
+    'GetBackupDownloadInfoBackupInfoResult',
+    'GetBackupDownloadInfoLimitVpcResult',
+    'GetInstanceShardsInstanceShardResult',
+    'GetInstanceTaskListTaskResult',
+    'GetInstanceZoneInfoReplicaGroupResult',
+    'GetInstanceZoneInfoReplicaGroupRedisNodeResult',
     'GetInstancesInstanceListResult',
     'GetInstancesInstanceListNodeInfoResult',
+    'GetParamRecordsInstanceParamHistoryResult',
     'GetZoneConfigListResult',
 ]
+
+@pulumi.output_type
+class InstanceNodeInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "zoneId":
+            suggest = "zone_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstanceNodeInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstanceNodeInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstanceNodeInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 id: Optional[int] = None,
+                 master: Optional[bool] = None,
+                 zone_id: Optional[int] = None):
+        """
+        :param int id: ID of the master or replica node.
+        :param bool master: Indicates whether the node is master.
+        :param int zone_id: ID of the availability zone of the master or replica node.
+        """
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if master is not None:
+            pulumi.set(__self__, "master", master)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[int]:
+        """
+        ID of the master or replica node.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def master(self) -> Optional[bool]:
+        """
+        Indicates whether the node is master.
+        """
+        return pulumi.get(self, "master")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[int]:
+        """
+        ID of the availability zone of the master or replica node.
+        """
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class ParamTemplateParamDetail(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "currentValue":
+            suggest = "current_value"
+        elif key == "enumValues":
+            suggest = "enum_values"
+        elif key == "needReboot":
+            suggest = "need_reboot"
+        elif key == "paramType":
+            suggest = "param_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ParamTemplateParamDetail. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ParamTemplateParamDetail.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ParamTemplateParamDetail.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 current_value: Optional[str] = None,
+                 default: Optional[str] = None,
+                 description: Optional[str] = None,
+                 enum_values: Optional[Sequence[str]] = None,
+                 max: Optional[str] = None,
+                 min: Optional[str] = None,
+                 name: Optional[str] = None,
+                 need_reboot: Optional[int] = None,
+                 param_type: Optional[str] = None):
+        """
+        :param str current_value: Current value.
+        :param str default: Default value.
+        :param str description: Parameter template description.
+        :param Sequence[str] enum_values: Enum values.
+        :param str max: Maximum value.
+        :param str min: Minimum value.
+        :param str name: Parameter template name.
+        :param int need_reboot: Indicates whether to reboot redis instance if modified.
+        :param str param_type: Parameter type.
+        """
+        if current_value is not None:
+            pulumi.set(__self__, "current_value", current_value)
+        if default is not None:
+            pulumi.set(__self__, "default", default)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if enum_values is not None:
+            pulumi.set(__self__, "enum_values", enum_values)
+        if max is not None:
+            pulumi.set(__self__, "max", max)
+        if min is not None:
+            pulumi.set(__self__, "min", min)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if need_reboot is not None:
+            pulumi.set(__self__, "need_reboot", need_reboot)
+        if param_type is not None:
+            pulumi.set(__self__, "param_type", param_type)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> Optional[str]:
+        """
+        Current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter
+    def default(self) -> Optional[str]:
+        """
+        Default value.
+        """
+        return pulumi.get(self, "default")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Parameter template description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="enumValues")
+    def enum_values(self) -> Optional[Sequence[str]]:
+        """
+        Enum values.
+        """
+        return pulumi.get(self, "enum_values")
+
+    @property
+    @pulumi.getter
+    def max(self) -> Optional[str]:
+        """
+        Maximum value.
+        """
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter
+    def min(self) -> Optional[str]:
+        """
+        Minimum value.
+        """
+        return pulumi.get(self, "min")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Parameter template name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="needReboot")
+    def need_reboot(self) -> Optional[int]:
+        """
+        Indicates whether to reboot redis instance if modified.
+        """
+        return pulumi.get(self, "need_reboot")
+
+    @property
+    @pulumi.getter(name="paramType")
+    def param_type(self) -> Optional[str]:
+        """
+        Parameter type.
+        """
+        return pulumi.get(self, "param_type")
+
+
+@pulumi.output_type
+class ParamTemplateParamsOverride(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Parameter key e.g. `timeout`, check https://www.tencentcloud.com/document/product/239/39796 for more reference.
+        :param str value: Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Parameter key e.g. `timeout`, check https://www.tencentcloud.com/document/product/239/39796 for more reference.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetBackupBackupSetResult(dict):
+    def __init__(__self__, *,
+                 backup_id: str,
+                 backup_size: int,
+                 backup_type: str,
+                 end_time: str,
+                 expire_time: str,
+                 file_type: str,
+                 full_backup: int,
+                 instance_id: str,
+                 instance_name: str,
+                 instance_type: int,
+                 locked: int,
+                 region: str,
+                 remark: str,
+                 start_time: str,
+                 status: int):
+        """
+        :param str backup_id: Backup ID.
+        :param int backup_size: Internal fields, which can be ignored by the user.
+        :param str backup_type: Backup type.1: User-initiated manual backup.0: System-initiated backup in the early morning.
+        :param str end_time: End time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
+        :param str expire_time: Backup file expiration time.
+        :param str file_type: Back up file types.
+        :param int full_backup: Internal fields, which can be ignored by the user.
+        :param str instance_id: The ID of instance.
+        :param str instance_name: Instance name, which supports fuzzy search based on instance name.
+        :param int instance_type: Internal fields, which can be ignored by the user.
+        :param int locked: Whether the backup is locked.0: Not locked.1: Has been locked.
+        :param str region: The region where the backup is located.
+        :param str remark: Notes information for the backup.
+        :param str start_time: Backup start time.
+        :param int status: Status of the backup task:1: Backup is in the process.2: The backup is normal.3: Backup to RDB file processing.4: RDB conversion completed.-1: The backup has expired.-2: Backup deleted.
+        """
+        pulumi.set(__self__, "backup_id", backup_id)
+        pulumi.set(__self__, "backup_size", backup_size)
+        pulumi.set(__self__, "backup_type", backup_type)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "file_type", file_type)
+        pulumi.set(__self__, "full_backup", full_backup)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "locked", locked)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="backupId")
+    def backup_id(self) -> str:
+        """
+        Backup ID.
+        """
+        return pulumi.get(self, "backup_id")
+
+    @property
+    @pulumi.getter(name="backupSize")
+    def backup_size(self) -> int:
+        """
+        Internal fields, which can be ignored by the user.
+        """
+        return pulumi.get(self, "backup_size")
+
+    @property
+    @pulumi.getter(name="backupType")
+    def backup_type(self) -> str:
+        """
+        Backup type.1: User-initiated manual backup.0: System-initiated backup in the early morning.
+        """
+        return pulumi.get(self, "backup_type")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        End time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Backup file expiration time.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="fileType")
+    def file_type(self) -> str:
+        """
+        Back up file types.
+        """
+        return pulumi.get(self, "file_type")
+
+    @property
+    @pulumi.getter(name="fullBackup")
+    def full_backup(self) -> int:
+        """
+        Internal fields, which can be ignored by the user.
+        """
+        return pulumi.get(self, "full_backup")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        The ID of instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Instance name, which supports fuzzy search based on instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> int:
+        """
+        Internal fields, which can be ignored by the user.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter
+    def locked(self) -> int:
+        """
+        Whether the backup is locked.0: Not locked.1: Has been locked.
+        """
+        return pulumi.get(self, "locked")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        The region where the backup is located.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Notes information for the backup.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Backup start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Status of the backup task:1: Backup is in the process.2: The backup is normal.3: Backup to RDB file processing.4: RDB conversion completed.-1: The backup has expired.-2: Backup deleted.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetBackupDownloadInfoBackupInfoResult(dict):
+    def __init__(__self__, *,
+                 download_url: str,
+                 file_name: str,
+                 file_size: int,
+                 inner_download_url: str):
+        """
+        :param str download_url: Backup file download address on the Internet (6 hours).
+        :param str file_name: Backup file name.
+        :param int file_size: The backup file size is in unit B, if it is 0, it is invalid.
+        :param str inner_download_url: Backup file intranet download address (6 hours).
+        """
+        pulumi.set(__self__, "download_url", download_url)
+        pulumi.set(__self__, "file_name", file_name)
+        pulumi.set(__self__, "file_size", file_size)
+        pulumi.set(__self__, "inner_download_url", inner_download_url)
+
+    @property
+    @pulumi.getter(name="downloadUrl")
+    def download_url(self) -> str:
+        """
+        Backup file download address on the Internet (6 hours).
+        """
+        return pulumi.get(self, "download_url")
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        Backup file name.
+        """
+        return pulumi.get(self, "file_name")
+
+    @property
+    @pulumi.getter(name="fileSize")
+    def file_size(self) -> int:
+        """
+        The backup file size is in unit B, if it is 0, it is invalid.
+        """
+        return pulumi.get(self, "file_size")
+
+    @property
+    @pulumi.getter(name="innerDownloadUrl")
+    def inner_download_url(self) -> str:
+        """
+        Backup file intranet download address (6 hours).
+        """
+        return pulumi.get(self, "inner_download_url")
+
+
+@pulumi.output_type
+class GetBackupDownloadInfoLimitVpcResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 vpc_lists: Sequence[str]):
+        """
+        :param str region: Customize the region of the VPC to which the backup file is downloaded.
+        :param Sequence[str] vpc_lists: Customize the list of VPCs to download backup files.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc_lists", vpc_lists)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Customize the region of the VPC to which the backup file is downloaded.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="vpcLists")
+    def vpc_lists(self) -> Sequence[str]:
+        """
+        Customize the list of VPCs to download backup files.
+        """
+        return pulumi.get(self, "vpc_lists")
+
+
+@pulumi.output_type
+class GetInstanceShardsInstanceShardResult(dict):
+    def __init__(__self__, *,
+                 connected: int,
+                 keys: int,
+                 role: int,
+                 runid: str,
+                 shard_id: str,
+                 shard_name: str,
+                 slots: str,
+                 storage: int,
+                 storage_slope: float):
+        """
+        :param int connected: Service status: 0-down;1-on.
+        :param int keys: Number of keys.
+        :param int role: role.
+        :param str runid: The node ID of the instance runtime.
+        :param str shard_id: Shard node ID.
+        :param str shard_name: Shard node name.
+        :param str slots: Slot information.
+        :param int storage: Used capacity.
+        :param float storage_slope: Capacity tilt.
+        """
+        pulumi.set(__self__, "connected", connected)
+        pulumi.set(__self__, "keys", keys)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "runid", runid)
+        pulumi.set(__self__, "shard_id", shard_id)
+        pulumi.set(__self__, "shard_name", shard_name)
+        pulumi.set(__self__, "slots", slots)
+        pulumi.set(__self__, "storage", storage)
+        pulumi.set(__self__, "storage_slope", storage_slope)
+
+    @property
+    @pulumi.getter
+    def connected(self) -> int:
+        """
+        Service status: 0-down;1-on.
+        """
+        return pulumi.get(self, "connected")
+
+    @property
+    @pulumi.getter
+    def keys(self) -> int:
+        """
+        Number of keys.
+        """
+        return pulumi.get(self, "keys")
+
+    @property
+    @pulumi.getter
+    def role(self) -> int:
+        """
+        role.
+        """
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter
+    def runid(self) -> str:
+        """
+        The node ID of the instance runtime.
+        """
+        return pulumi.get(self, "runid")
+
+    @property
+    @pulumi.getter(name="shardId")
+    def shard_id(self) -> str:
+        """
+        Shard node ID.
+        """
+        return pulumi.get(self, "shard_id")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> str:
+        """
+        Shard node name.
+        """
+        return pulumi.get(self, "shard_name")
+
+    @property
+    @pulumi.getter
+    def slots(self) -> str:
+        """
+        Slot information.
+        """
+        return pulumi.get(self, "slots")
+
+    @property
+    @pulumi.getter
+    def storage(self) -> int:
+        """
+        Used capacity.
+        """
+        return pulumi.get(self, "storage")
+
+    @property
+    @pulumi.getter(name="storageSlope")
+    def storage_slope(self) -> float:
+        """
+        Capacity tilt.
+        """
+        return pulumi.get(self, "storage_slope")
+
+
+@pulumi.output_type
+class GetInstanceTaskListTaskResult(dict):
+    def __init__(__self__, *,
+                 end_time: str,
+                 instance_id: str,
+                 instance_name: str,
+                 progress: float,
+                 project_id: int,
+                 result: int,
+                 start_time: str,
+                 task_id: int,
+                 task_type: str):
+        """
+        :param str end_time: Termination time.
+        :param str instance_id: The ID of instance.
+        :param str instance_name: Instance name.
+        :param float progress: Task progress.
+        :param int project_id: The project ID.
+        :param int result: Task status.
+        :param str start_time: Start time.
+        :param int task_id: Task ID.
+        :param str task_type: Task type.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "progress", progress)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "result", result)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "task_id", task_id)
+        pulumi.set(__self__, "task_type", task_type)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Termination time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        The ID of instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter
+    def progress(self) -> float:
+        """
+        Task progress.
+        """
+        return pulumi.get(self, "progress")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        The project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter
+    def result(self) -> int:
+        """
+        Task status.
+        """
+        return pulumi.get(self, "result")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> int:
+        """
+        Task ID.
+        """
+        return pulumi.get(self, "task_id")
+
+    @property
+    @pulumi.getter(name="taskType")
+    def task_type(self) -> str:
+        """
+        Task type.
+        """
+        return pulumi.get(self, "task_type")
+
+
+@pulumi.output_type
+class GetInstanceZoneInfoReplicaGroupResult(dict):
+    def __init__(__self__, *,
+                 group_id: int,
+                 group_name: str,
+                 redis_nodes: Sequence['outputs.GetInstanceZoneInfoReplicaGroupRedisNodeResult'],
+                 role: str,
+                 zone_id: str):
+        """
+        :param int group_id: Node group ID.
+        :param str group_name: Node group Name.
+        :param Sequence['GetInstanceZoneInfoReplicaGroupRedisNodeArgs'] redis_nodes: Node group node list.
+        :param str role: The node group type, master is the primary node, and replica is the replica node.
+        :param str zone_id: he availability zone ID of the node, such as ap-guangzhou-1.
+        """
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "redis_nodes", redis_nodes)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> int:
+        """
+        Node group ID.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Node group Name.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="redisNodes")
+    def redis_nodes(self) -> Sequence['outputs.GetInstanceZoneInfoReplicaGroupRedisNodeResult']:
+        """
+        Node group node list.
+        """
+        return pulumi.get(self, "redis_nodes")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        """
+        The node group type, master is the primary node, and replica is the replica node.
+        """
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        """
+        he availability zone ID of the node, such as ap-guangzhou-1.
+        """
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetInstanceZoneInfoReplicaGroupRedisNodeResult(dict):
+    def __init__(__self__, *,
+                 keys: int,
+                 node_id: str,
+                 role: str,
+                 slot: str,
+                 status: str):
+        """
+        :param int keys: The number of node keys.
+        :param str node_id: Node ID.
+        :param str role: The node group type, master is the primary node, and replica is the replica node.
+        :param str slot: Node slot distribution.
+        :param str status: Node status.
+        """
+        pulumi.set(__self__, "keys", keys)
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "slot", slot)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def keys(self) -> int:
+        """
+        The number of node keys.
+        """
+        return pulumi.get(self, "keys")
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        """
+        The node group type, master is the primary node, and replica is the replica node.
+        """
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter
+    def slot(self) -> str:
+        """
+        Node slot distribution.
+        """
+        return pulumi.get(self, "slot")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Node status.
+        """
+        return pulumi.get(self, "status")
+
 
 @pulumi.output_type
 class GetInstancesInstanceListResult(dict):
@@ -258,6 +1084,68 @@ class GetInstancesInstanceListNodeInfoResult(dict):
         ID of the availability zone of the master or replica node.
         """
         return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetParamRecordsInstanceParamHistoryResult(dict):
+    def __init__(__self__, *,
+                 modify_time: str,
+                 new_value: str,
+                 param_name: str,
+                 pre_value: str,
+                 status: int):
+        """
+        :param str modify_time: Modification time.
+        :param str new_value: The modified value.
+        :param str param_name: The parameter name.
+        :param str pre_value: Modify the previous value.
+        :param int status: Parameter status:1: parameter configuration modification.2: The parameter configuration is modified successfully.3: Parameter configuration modification failed.
+        """
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "param_name", param_name)
+        pulumi.set(__self__, "pre_value", pre_value)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Modification time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> str:
+        """
+        The modified value.
+        """
+        return pulumi.get(self, "new_value")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        The parameter name.
+        """
+        return pulumi.get(self, "param_name")
+
+    @property
+    @pulumi.getter(name="preValue")
+    def pre_value(self) -> str:
+        """
+        Modify the previous value.
+        """
+        return pulumi.get(self, "pre_value")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Parameter status:1: parameter configuration modification.2: The parameter configuration is modified successfully.3: Parameter configuration modification failed.
+        """
+        return pulumi.get(self, "status")
 
 
 @pulumi.output_type

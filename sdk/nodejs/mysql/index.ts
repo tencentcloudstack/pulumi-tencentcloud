@@ -6,22 +6,40 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./account";
+export * from "./auditLogFile";
 export * from "./backupPolicy";
+export * from "./deployGroup";
 export * from "./getBackupList";
+export * from "./getBackupOverview";
+export * from "./getBackupSummaries";
+export * from "./getBinLog";
+export * from "./getBinlogBackupOverview";
+export * from "./getCloneList";
+export * from "./getDataBackupOverview";
 export * from "./getDefaultParams";
 export * from "./getInstance";
 export * from "./getParameterList";
 export * from "./getZoneConfig";
 export * from "./instance";
+export * from "./localBinlogConfig";
+export * from "./paramTemplate";
 export * from "./privilege";
 export * from "./readonlyInstance";
+export * from "./securityGroupsAttachment";
+export * from "./timeWindow";
 
 // Import resources to register:
 import { Account } from "./account";
+import { AuditLogFile } from "./auditLogFile";
 import { BackupPolicy } from "./backupPolicy";
+import { DeployGroup } from "./deployGroup";
 import { Instance } from "./instance";
+import { LocalBinlogConfig } from "./localBinlogConfig";
+import { ParamTemplate } from "./paramTemplate";
 import { Privilege } from "./privilege";
 import { ReadonlyInstance } from "./readonlyInstance";
+import { SecurityGroupsAttachment } from "./securityGroupsAttachment";
+import { TimeWindow } from "./timeWindow";
 
 const _module = {
     version: utilities.getVersion(),
@@ -29,21 +47,39 @@ const _module = {
         switch (type) {
             case "tencentcloud:Mysql/account:Account":
                 return new Account(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/auditLogFile:AuditLogFile":
+                return new AuditLogFile(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
                 return new BackupPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/deployGroup:DeployGroup":
+                return new DeployGroup(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/localBinlogConfig:LocalBinlogConfig":
+                return new LocalBinlogConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/paramTemplate:ParamTemplate":
+                return new ParamTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/privilege:Privilege":
                 return new Privilege(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/readonlyInstance:ReadonlyInstance":
                 return new ReadonlyInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/securityGroupsAttachment:SecurityGroupsAttachment":
+                return new SecurityGroupsAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/timeWindow:TimeWindow":
+                return new TimeWindow(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/account", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/auditLogFile", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/deployGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/localBinlogConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/paramTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/privilege", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/readonlyInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/securityGroupsAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/timeWindow", _module)

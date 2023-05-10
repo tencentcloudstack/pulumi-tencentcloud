@@ -80,7 +80,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Output<string?> Duration { get; private set; } = null!;
 
         /// <summary>
-        /// Rule expression.
+        /// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         /// </summary>
         [Output("expr")]
         public Output<string> Expr { get; private set; } = null!;
@@ -187,7 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Input<string>? Duration { get; set; }
 
         /// <summary>
-        /// Rule expression.
+        /// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         /// </summary>
         [Input("expr", required: true)]
         public Input<string> Expr { get; set; } = null!;
@@ -266,7 +266,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Input<string>? Duration { get; set; }
 
         /// <summary>
-        /// Rule expression.
+        /// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
         /// </summary>
         [Input("expr")]
         public Input<string>? Expr { get; set; }

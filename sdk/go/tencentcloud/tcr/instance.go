@@ -19,63 +19,114 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
-//				InstanceType: pulumi.String("basic"),
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("tf"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("basic"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Using public network access whitelist
+// Using public network access whitelist
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
-//				InstanceType:        pulumi.String("basic"),
-//				OpenPublicOperation: pulumi.Bool(true),
-//				SecurityPolicies: tcr.InstanceSecurityPolicyArray{
-//					&tcr.InstanceSecurityPolicyArgs{
-//						CidrBlock: pulumi.String("10.0.0.1/24"),
-//					},
-//					&tcr.InstanceSecurityPolicyArgs{
-//						CidrBlock: pulumi.String("192.168.1.1"),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 			InstanceType:        pulumi.String("basic"),
+// 			OpenPublicOperation: pulumi.Bool(true),
+// 			SecurityPolicies: tcr.InstanceSecurityPolicyArray{
+// 				&tcr.InstanceSecurityPolicyArgs{
+// 					CidrBlock: pulumi.String("10.0.0.1/24"),
+// 				},
+// 				&tcr.InstanceSecurityPolicyArgs{
+// 					CidrBlock: pulumi.String("192.168.1.1"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
+// Create with Replications
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		tcrRegionMap := map[string]interface{}{
+// 			"ap-guangzhou":     1,
+// 			"ap-shanghai":      4,
+// 			"ap-hongkong":      5,
+// 			"ap-beijing":       8,
+// 			"ap-singapore":     9,
+// 			"na-siliconvalley": 15,
+// 			"ap-chengdu":       16,
+// 			"eu-frankfurt":     17,
+// 			"ap-seoul":         18,
+// 			"ap-chongqing":     19,
+// 			"ap-mumbai":        21,
+// 			"na-ashburn":       22,
+// 			"ap-bangkok":       23,
+// 			"eu-moscow":        24,
+// 			"ap-tokyo":         25,
+// 			"ap-nanjing":       33,
+// 			"ap-taipei":        39,
+// 			"ap-jakarta":       72,
+// 		}
+// 		if param := cfg.GetBool("tcrRegionMap"); param != nil {
+// 			tcrRegionMap = param
+// 		}
+// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("premium"),
+// 			Replications: tcr.InstanceReplicationArray{
+// 				&tcr.InstanceReplicationArgs{
+// 					RegionId: pulumi.Float64(tcrRegionMap.Ap - guangzhou),
+// 				},
+// 				&tcr.InstanceReplicationArgs{
+// 					RegionId: pulumi.Float64(tcrRegionMap.Ap - singapore),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -83,15 +134,19 @@ import (
 // tcr instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
-//
+//  $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
 
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket pulumi.BoolPtrOutput `pulumi:"deleteBucket"`
+	// Instance expiration time (prepaid).
+	ExpiredAt pulumi.StringOutput `pulumi:"expiredAt"`
+	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidPeriod pulumi.IntPtrOutput `pulumi:"instanceChargeTypePrepaidPeriod"`
+	// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidRenewFlag pulumi.IntPtrOutput `pulumi:"instanceChargeTypePrepaidRenewFlag"`
 	// TCR types. Valid values are: `standard`, `basic`, `premium`.
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
 	// Internal address for access of the TCR instance.
@@ -104,6 +159,10 @@ type Instance struct {
 	PublicDomain pulumi.StringOutput `pulumi:"publicDomain"`
 	// Status of the TCR instance public network access.
 	PublicStatus pulumi.StringOutput `pulumi:"publicStatus"`
+	// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+	RegistryChargeType pulumi.IntPtrOutput `pulumi:"registryChargeType"`
+	// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+	Replications InstanceReplicationArrayOutput `pulumi:"replications"`
 	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies InstanceSecurityPolicyArrayOutput `pulumi:"securityPolicies"`
 	// Status of the TCR instance.
@@ -147,6 +206,12 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket *bool `pulumi:"deleteBucket"`
+	// Instance expiration time (prepaid).
+	ExpiredAt *string `pulumi:"expiredAt"`
+	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
+	// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidRenewFlag *int `pulumi:"instanceChargeTypePrepaidRenewFlag"`
 	// TCR types. Valid values are: `standard`, `basic`, `premium`.
 	InstanceType *string `pulumi:"instanceType"`
 	// Internal address for access of the TCR instance.
@@ -159,6 +224,10 @@ type instanceState struct {
 	PublicDomain *string `pulumi:"publicDomain"`
 	// Status of the TCR instance public network access.
 	PublicStatus *string `pulumi:"publicStatus"`
+	// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+	RegistryChargeType *int `pulumi:"registryChargeType"`
+	// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+	Replications []InstanceReplication `pulumi:"replications"`
 	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies []InstanceSecurityPolicy `pulumi:"securityPolicies"`
 	// Status of the TCR instance.
@@ -170,6 +239,12 @@ type instanceState struct {
 type InstanceState struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket pulumi.BoolPtrInput
+	// Instance expiration time (prepaid).
+	ExpiredAt pulumi.StringPtrInput
+	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput
+	// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidRenewFlag pulumi.IntPtrInput
 	// TCR types. Valid values are: `standard`, `basic`, `premium`.
 	InstanceType pulumi.StringPtrInput
 	// Internal address for access of the TCR instance.
@@ -182,6 +257,10 @@ type InstanceState struct {
 	PublicDomain pulumi.StringPtrInput
 	// Status of the TCR instance public network access.
 	PublicStatus pulumi.StringPtrInput
+	// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+	RegistryChargeType pulumi.IntPtrInput
+	// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+	Replications InstanceReplicationArrayInput
 	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies InstanceSecurityPolicyArrayInput
 	// Status of the TCR instance.
@@ -197,12 +276,20 @@ func (InstanceState) ElementType() reflect.Type {
 type instanceArgs struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket *bool `pulumi:"deleteBucket"`
+	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
+	// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidRenewFlag *int `pulumi:"instanceChargeTypePrepaidRenewFlag"`
 	// TCR types. Valid values are: `standard`, `basic`, `premium`.
 	InstanceType string `pulumi:"instanceType"`
 	// Name of the TCR instance.
 	Name *string `pulumi:"name"`
 	// Control public network access.
 	OpenPublicOperation *bool `pulumi:"openPublicOperation"`
+	// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+	RegistryChargeType *int `pulumi:"registryChargeType"`
+	// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+	Replications []InstanceReplication `pulumi:"replications"`
 	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies []InstanceSecurityPolicy `pulumi:"securityPolicies"`
 	// The available tags within this TCR instance.
@@ -213,12 +300,20 @@ type instanceArgs struct {
 type InstanceArgs struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket pulumi.BoolPtrInput
+	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput
+	// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+	InstanceChargeTypePrepaidRenewFlag pulumi.IntPtrInput
 	// TCR types. Valid values are: `standard`, `basic`, `premium`.
 	InstanceType pulumi.StringInput
 	// Name of the TCR instance.
 	Name pulumi.StringPtrInput
 	// Control public network access.
 	OpenPublicOperation pulumi.BoolPtrInput
+	// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+	RegistryChargeType pulumi.IntPtrInput
+	// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+	Replications InstanceReplicationArrayInput
 	// Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
 	SecurityPolicies InstanceSecurityPolicyArrayInput
 	// The available tags within this TCR instance.
@@ -251,7 +346,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +371,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -317,6 +412,21 @@ func (o InstanceOutput) DeleteBucket() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DeleteBucket }).(pulumi.BoolPtrOutput)
 }
 
+// Instance expiration time (prepaid).
+func (o InstanceOutput) ExpiredAt() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.ExpiredAt }).(pulumi.StringOutput)
+}
+
+// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+func (o InstanceOutput) InstanceChargeTypePrepaidPeriod() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.InstanceChargeTypePrepaidPeriod }).(pulumi.IntPtrOutput)
+}
+
+// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+func (o InstanceOutput) InstanceChargeTypePrepaidRenewFlag() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.InstanceChargeTypePrepaidRenewFlag }).(pulumi.IntPtrOutput)
+}
+
 // TCR types. Valid values are: `standard`, `basic`, `premium`.
 func (o InstanceOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
@@ -345,6 +455,16 @@ func (o InstanceOutput) PublicDomain() pulumi.StringOutput {
 // Status of the TCR instance public network access.
 func (o InstanceOutput) PublicStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.PublicStatus }).(pulumi.StringOutput)
+}
+
+// Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+func (o InstanceOutput) RegistryChargeType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.RegistryChargeType }).(pulumi.IntPtrOutput)
+}
+
+// Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+func (o InstanceOutput) Replications() InstanceReplicationArrayOutput {
+	return o.ApplyT(func(v *Instance) InstanceReplicationArrayOutput { return v.Replications }).(InstanceReplicationArrayOutput)
 }
 
 // Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.

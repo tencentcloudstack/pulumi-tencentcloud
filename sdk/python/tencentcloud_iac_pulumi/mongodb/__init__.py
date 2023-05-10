@@ -5,9 +5,17 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_instance_backups import *
+from .get_instance_connections import *
+from .get_instance_current_op import *
+from .get_instance_params import *
+from .get_instance_slow_log import *
 from .get_instances import *
 from .get_zone_config import *
 from .instance import *
+from .instance_account import *
+from .instance_backup import *
+from .instance_backup_download_task import *
 from .sharding_instance import *
 from .standby_instance import *
 from ._inputs import *

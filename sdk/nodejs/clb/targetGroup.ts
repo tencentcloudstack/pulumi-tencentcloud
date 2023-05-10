@@ -20,22 +20,6 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
- * Create target group
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const test = new tencentcloud.Clb.TargetGroup("test", {
- *     port: 18082,
- *     targetGroupInstances: [{
- *         bindIp: "10.0.0.4",
- *         port: 18080,
- *     }],
- *     targetGroupName: "hello1",
- * });
- * ```
- *
  * ## Import
  *
  * CLB target group can be imported using the id, e.g.
@@ -77,7 +61,9 @@ export class TargetGroup extends pulumi.CustomResource {
      */
     public readonly port!: pulumi.Output<number | undefined>;
     /**
-     * The backend server of target group bind.
+     * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+     *
+     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
      */
     public readonly targetGroupInstances!: pulumi.Output<outputs.Clb.TargetGroupTargetGroupInstance[] | undefined>;
     /**
@@ -127,7 +113,9 @@ export interface TargetGroupState {
      */
     port?: pulumi.Input<number>;
     /**
-     * The backend server of target group bind.
+     * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+     *
+     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
      */
     targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[]>;
     /**
@@ -149,7 +137,9 @@ export interface TargetGroupArgs {
      */
     port?: pulumi.Input<number>;
     /**
-     * The backend server of target group bind.
+     * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
+     *
+     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
      */
     targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[]>;
     /**

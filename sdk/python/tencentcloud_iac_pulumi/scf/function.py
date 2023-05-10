@@ -51,8 +51,8 @@ class FunctionArgs:
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
-        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
-        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
+        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with ``.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
@@ -229,7 +229,7 @@ class FunctionArgs:
     @pulumi.getter(name="enableEipConfig")
     def enable_eip_config(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+        Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         """
         return pulumi.get(self, "enable_eip_config")
 
@@ -241,7 +241,7 @@ class FunctionArgs:
     @pulumi.getter(name="enablePublicNet")
     def enable_public_net(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         """
         return pulumi.get(self, "enable_public_net")
 
@@ -473,8 +473,8 @@ class _FunctionState:
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         :param pulumi.Input[bool] eip_fixed: Whether EIP is a fixed IP.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] eips: SCF function EIP list.
-        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
-        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
+        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[int] err_no: SCF function code error code.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
@@ -725,7 +725,7 @@ class _FunctionState:
     @pulumi.getter(name="enableEipConfig")
     def enable_eip_config(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+        Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         """
         return pulumi.get(self, "enable_eip_config")
 
@@ -737,7 +737,7 @@ class _FunctionState:
     @pulumi.getter(name="enablePublicNet")
     def enable_public_net(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         """
         return pulumi.get(self, "enable_public_net")
 
@@ -1118,8 +1118,8 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
-        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
-        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
+        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with ``.
@@ -1350,8 +1350,8 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         :param pulumi.Input[bool] eip_fixed: Whether EIP is a fixed IP.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] eips: SCF function EIP list.
-        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
-        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
+        :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[int] err_no: SCF function code error code.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
@@ -1521,7 +1521,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter(name="enableEipConfig")
     def enable_eip_config(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
+        Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         """
         return pulumi.get(self, "enable_eip_config")
 
@@ -1529,7 +1529,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter(name="enablePublicNet")
     def enable_public_net(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
+        Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         """
         return pulumi.get(self, "enable_public_net")
 

@@ -23,12 +23,20 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Vpn/connection:Connection":
 		r = &Connection{}
+	case "tencentcloud:Vpn/connectionReset:ConnectionReset":
+		r = &ConnectionReset{}
 	case "tencentcloud:Vpn/customerGateway:CustomerGateway":
 		r = &CustomerGateway{}
+	case "tencentcloud:Vpn/customerGatewayConfigurationDownload:CustomerGatewayConfigurationDownload":
+		r = &CustomerGatewayConfigurationDownload{}
 	case "tencentcloud:Vpn/gateway:Gateway":
 		r = &Gateway{}
+	case "tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes":
+		r = &GatewayCcnRoutes{}
 	case "tencentcloud:Vpn/gatewayRoute:GatewayRoute":
 		r = &GatewayRoute{}
+	case "tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert":
+		r = &GatewaySslClientCert{}
 	case "tencentcloud:Vpn/sslClient:SslClient":
 		r = &SslClient{}
 	case "tencentcloud:Vpn/sslServer:SslServer":
@@ -53,7 +61,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Vpn/connectionReset",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Vpn/customerGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpn/customerGatewayConfigurationDownload",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -63,7 +81,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Vpn/gatewayCcnRoutes",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Vpn/gatewayRoute",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpn/gatewaySslClientCert",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

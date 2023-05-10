@@ -36,7 +36,7 @@ class BasicInstanceArgs:
         """
         The set of arguments for constructing a BasicInstance resource.
         :param pulumi.Input[int] cpu: The CPU number of the SQL Server basic instance.
-        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[int] auto_renew: Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.
@@ -109,7 +109,7 @@ class BasicInstanceArgs:
     @pulumi.getter(name="machineType")
     def machine_type(self) -> pulumi.Input[str]:
         """
-        The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         """
         return pulumi.get(self, "machine_type")
 
@@ -370,7 +370,7 @@ class _BasicInstanceState:
         :param pulumi.Input[int] cpu: The CPU number of the SQL Server basic instance.
         :param pulumi.Input[str] create_time: Create time of the SQL Server basic instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
-        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.
@@ -525,7 +525,7 @@ class _BasicInstanceState:
     @pulumi.getter(name="machineType")
     def machine_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         """
         return pulumi.get(self, "machine_type")
 
@@ -800,7 +800,7 @@ class BasicInstance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
         :param pulumi.Input[int] cpu: The CPU number of the SQL Server basic instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
-        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.
@@ -990,7 +990,7 @@ class BasicInstance(pulumi.CustomResource):
         :param pulumi.Input[int] cpu: The CPU number of the SQL Server basic instance.
         :param pulumi.Input[str] create_time: Create time of the SQL Server basic instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
-        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.
@@ -1098,7 +1098,7 @@ class BasicInstance(pulumi.CustomResource):
     @pulumi.getter(name="machineType")
     def machine_type(self) -> pulumi.Output[str]:
         """
-        The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk.
+        The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         """
         return pulumi.get(self, "machine_type")
 

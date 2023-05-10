@@ -724,6 +724,7 @@ class GetLayer4ListenersListenerResult(dict):
                  name: str,
                  port: int,
                  protocol: str,
+                 proxy_id: str,
                  realserver_type: str,
                  scheduler: str,
                  status: int):
@@ -736,6 +737,7 @@ class GetLayer4ListenersListenerResult(dict):
         :param str name: Name of the layer4 listener.
         :param int port: Port of the layer4 listener to be queried.
         :param str protocol: Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
+        :param str proxy_id: ID of the GAAP proxy to be queried.
         :param str realserver_type: Type of the realserver.
         :param str scheduler: Scheduling policy of the layer4 listener.
         :param int status: Status of the layer4 listener.
@@ -748,6 +750,7 @@ class GetLayer4ListenersListenerResult(dict):
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "proxy_id", proxy_id)
         pulumi.set(__self__, "realserver_type", realserver_type)
         pulumi.set(__self__, "scheduler", scheduler)
         pulumi.set(__self__, "status", status)
@@ -817,6 +820,14 @@ class GetLayer4ListenersListenerResult(dict):
         return pulumi.get(self, "protocol")
 
     @property
+    @pulumi.getter(name="proxyId")
+    def proxy_id(self) -> str:
+        """
+        ID of the GAAP proxy to be queried.
+        """
+        return pulumi.get(self, "proxy_id")
+
+    @property
     @pulumi.getter(name="realserverType")
     def realserver_type(self) -> str:
         """
@@ -854,6 +865,7 @@ class GetLayer7ListenersListenerResult(dict):
                  name: str,
                  port: int,
                  protocol: str,
+                 proxy_id: str,
                  status: int):
         """
         :param int auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication.
@@ -866,6 +878,7 @@ class GetLayer7ListenersListenerResult(dict):
         :param str name: Name of the layer7 listener.
         :param int port: Port of the layer7 listener to be queried.
         :param str protocol: Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
+        :param str proxy_id: ID of the GAAP proxy to be queried.
         :param int status: Status of the layer7 listener.
         """
         pulumi.set(__self__, "auth_type", auth_type)
@@ -878,6 +891,7 @@ class GetLayer7ListenersListenerResult(dict):
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "proxy_id", proxy_id)
         pulumi.set(__self__, "status", status)
 
     @property
@@ -959,6 +973,14 @@ class GetLayer7ListenersListenerResult(dict):
         Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
         """
         return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="proxyId")
+    def proxy_id(self) -> str:
+        """
+        ID of the GAAP proxy to be queried.
+        """
+        return pulumi.get(self, "proxy_id")
 
     @property
     @pulumi.getter

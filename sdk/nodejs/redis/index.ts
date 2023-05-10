@@ -5,27 +5,73 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./account";
 export * from "./backupConfig";
+export * from "./connectionConfig";
+export * from "./getBackup";
+export * from "./getBackupDownloadInfo";
+export * from "./getInstanceShards";
+export * from "./getInstanceTaskList";
+export * from "./getInstanceZoneInfo";
 export * from "./getInstances";
+export * from "./getParamRecords";
 export * from "./getZoneConfig";
 export * from "./instance";
+export * from "./maintenanceWindow";
+export * from "./param";
+export * from "./paramTemplate";
+export * from "./readOnly";
+export * from "./replicaReadonly";
+export * from "./ssl";
 
 // Import resources to register:
+import { Account } from "./account";
 import { BackupConfig } from "./backupConfig";
+import { ConnectionConfig } from "./connectionConfig";
 import { Instance } from "./instance";
+import { MaintenanceWindow } from "./maintenanceWindow";
+import { Param } from "./param";
+import { ParamTemplate } from "./paramTemplate";
+import { ReadOnly } from "./readOnly";
+import { ReplicaReadonly } from "./replicaReadonly";
+import { Ssl } from "./ssl";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Redis/account:Account":
+                return new Account(name, <any>undefined, { urn })
             case "tencentcloud:Redis/backupConfig:BackupConfig":
                 return new BackupConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/connectionConfig:ConnectionConfig":
+                return new ConnectionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Redis/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/maintenanceWindow:MaintenanceWindow":
+                return new MaintenanceWindow(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/param:Param":
+                return new Param(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/paramTemplate:ParamTemplate":
+                return new ParamTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/readOnly:ReadOnly":
+                return new ReadOnly(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/replicaReadonly:ReplicaReadonly":
+                return new ReplicaReadonly(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/ssl:Ssl":
+                return new Ssl(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/connectionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/maintenanceWindow", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/param", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/paramTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/readOnly", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/replicaReadonly", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/ssl", _module)

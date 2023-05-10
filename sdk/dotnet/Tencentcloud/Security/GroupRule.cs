@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// <summary>
     /// Provides a resource to create security group rule.
     /// 
+    /// &gt; **NOTE:** Single security rule is hardly ordered, use tencentcloud.Security.GroupLiteRule instead.
+    /// 
     /// ## Example Usage
     /// 
     /// Source is CIDR ip
@@ -112,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         /// </summary>
         [Output("policy")]
         public Output<string> Policy { get; private set; } = null!;
+
+        /// <summary>
+        /// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+        /// </summary>
+        [Output("policyIndex")]
+        public Output<int?> PolicyIndex { get; private set; } = null!;
 
         /// <summary>
         /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
@@ -221,6 +229,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         public Input<string> Policy { get; set; } = null!;
 
         /// <summary>
+        /// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+        /// </summary>
+        [Input("policyIndex")]
+        public Input<int>? PolicyIndex { get; set; }
+
+        /// <summary>
         /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         /// </summary>
         [Input("portRange")]
@@ -286,6 +300,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         /// </summary>
         [Input("policy")]
         public Input<string>? Policy { get; set; }
+
+        /// <summary>
+        /// The security group rule index number, the value of which dynamically changes as the security group rule changes.
+        /// </summary>
+        [Input("policyIndex")]
+        public Input<int>? PolicyIndex { get; set; }
 
         /// <summary>
         /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.

@@ -25,8 +25,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///     {
     ///         var foo = new Tencentcloud.Tcr.Namespace("foo", new Tencentcloud.Tcr.NamespaceArgs
     ///         {
+    ///             CveWhitelistItems = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///                 {
+    ///                     CveId = "cve-xxxxx",
+    ///                 },
+    ///             },
     ///             InstanceId = "",
+    ///             IsAutoScan = true,
+    ///             IsPreventVul = true,
     ///             IsPublic = true,
+    ///             Severity = "medium",
     ///         });
     ///     }
     /// 
@@ -45,10 +55,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     public partial class Namespace : Pulumi.CustomResource
     {
         /// <summary>
+        /// Vulnerability Whitelist.
+        /// </summary>
+        [Output("cveWhitelistItems")]
+        public Output<ImmutableArray<Outputs.NamespaceCveWhitelistItem>> CveWhitelistItems { get; private set; } = null!;
+
+        /// <summary>
         /// ID of the TCR instance.
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        /// </summary>
+        [Output("isAutoScan")]
+        public Output<bool?> IsAutoScan { get; private set; } = null!;
+
+        /// <summary>
+        /// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+        /// </summary>
+        [Output("isPreventVul")]
+        public Output<bool?> IsPreventVul { get; private set; } = null!;
 
         /// <summary>
         /// Indicate that the namespace is public or not. Default is `false`.
@@ -61,6 +89,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+        /// </summary>
+        [Output("severity")]
+        public Output<string?> Severity { get; private set; } = null!;
 
 
         /// <summary>
@@ -109,11 +143,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 
     public sealed class NamespaceArgs : Pulumi.ResourceArgs
     {
+        [Input("cveWhitelistItems")]
+        private InputList<Inputs.NamespaceCveWhitelistItemArgs>? _cveWhitelistItems;
+
+        /// <summary>
+        /// Vulnerability Whitelist.
+        /// </summary>
+        public InputList<Inputs.NamespaceCveWhitelistItemArgs> CveWhitelistItems
+        {
+            get => _cveWhitelistItems ?? (_cveWhitelistItems = new InputList<Inputs.NamespaceCveWhitelistItemArgs>());
+            set => _cveWhitelistItems = value;
+        }
+
         /// <summary>
         /// ID of the TCR instance.
         /// </summary>
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
+
+        /// <summary>
+        /// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        /// </summary>
+        [Input("isAutoScan")]
+        public Input<bool>? IsAutoScan { get; set; }
+
+        /// <summary>
+        /// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+        /// </summary>
+        [Input("isPreventVul")]
+        public Input<bool>? IsPreventVul { get; set; }
 
         /// <summary>
         /// Indicate that the namespace is public or not. Default is `false`.
@@ -126,6 +184,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+        /// </summary>
+        [Input("severity")]
+        public Input<string>? Severity { get; set; }
 
         public NamespaceArgs()
         {
@@ -134,11 +198,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 
     public sealed class NamespaceState : Pulumi.ResourceArgs
     {
+        [Input("cveWhitelistItems")]
+        private InputList<Inputs.NamespaceCveWhitelistItemGetArgs>? _cveWhitelistItems;
+
+        /// <summary>
+        /// Vulnerability Whitelist.
+        /// </summary>
+        public InputList<Inputs.NamespaceCveWhitelistItemGetArgs> CveWhitelistItems
+        {
+            get => _cveWhitelistItems ?? (_cveWhitelistItems = new InputList<Inputs.NamespaceCveWhitelistItemGetArgs>());
+            set => _cveWhitelistItems = value;
+        }
+
         /// <summary>
         /// ID of the TCR instance.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
+        /// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+        /// </summary>
+        [Input("isAutoScan")]
+        public Input<bool>? IsAutoScan { get; set; }
+
+        /// <summary>
+        /// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+        /// </summary>
+        [Input("isPreventVul")]
+        public Input<bool>? IsPreventVul { get; set; }
 
         /// <summary>
         /// Indicate that the namespace is public or not. Default is `false`.
@@ -151,6 +239,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+        /// </summary>
+        [Input("severity")]
+        public Input<string>? Severity { get; set; }
 
         public NamespaceState()
         {

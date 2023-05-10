@@ -5,9 +5,16 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .audit_log_file import *
 from .cluster import *
+from .get_accounts import *
+from .get_cluster_instance_groups import *
+from .get_cluster_params import *
 from .get_clusters import *
 from .get_instances import *
+from .get_param_templates import *
+from .get_zone_config import *
 from .readonly_instance import *
+from .security_group import *
 from ._inputs import *
 from . import outputs

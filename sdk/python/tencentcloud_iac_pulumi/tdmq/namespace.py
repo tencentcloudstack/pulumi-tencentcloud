@@ -24,7 +24,7 @@ class NamespaceArgs:
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain.
+        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "environ_name", environ_name)
@@ -86,7 +86,7 @@ class NamespaceArgs:
     @pulumi.getter(name="retentionPolicy")
     def retention_policy(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        The Policy of message to retain.
+        The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         return pulumi.get(self, "retention_policy")
 
@@ -109,7 +109,7 @@ class _NamespaceState:
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain.
+        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -174,7 +174,7 @@ class _NamespaceState:
     @pulumi.getter(name="retentionPolicy")
     def retention_policy(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        The Policy of message to retain.
+        The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         return pulumi.get(self, "retention_policy")
 
@@ -227,7 +227,7 @@ class Namespace(pulumi.CustomResource):
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain.
+        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         ...
     @overload
@@ -333,7 +333,7 @@ class Namespace(pulumi.CustomResource):
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain.
+        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -382,7 +382,7 @@ class Namespace(pulumi.CustomResource):
     @pulumi.getter(name="retentionPolicy")
     def retention_policy(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
         """
-        The Policy of message to retain.
+        The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         return pulumi.get(self, "retention_policy")
 

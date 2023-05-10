@@ -28,7 +28,7 @@ type ClusterResourceSpec struct {
 // ClusterResourceSpecInput is an input type that accepts ClusterResourceSpecArgs and ClusterResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecInput` via:
 //
-//	ClusterResourceSpecArgs{...}
+//          ClusterResourceSpecArgs{...}
 type ClusterResourceSpecInput interface {
 	pulumi.Input
 
@@ -74,11 +74,11 @@ func (i ClusterResourceSpecArgs) ToClusterResourceSpecPtrOutputWithContext(ctx c
 // ClusterResourceSpecPtrInput is an input type that accepts ClusterResourceSpecArgs, ClusterResourceSpecPtr and ClusterResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecPtrInput` via:
 //
-//	        ClusterResourceSpecArgs{...}
+//          ClusterResourceSpecArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -277,7 +277,7 @@ type ClusterResourceSpecCommonResourceSpec struct {
 // ClusterResourceSpecCommonResourceSpecInput is an input type that accepts ClusterResourceSpecCommonResourceSpecArgs and ClusterResourceSpecCommonResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCommonResourceSpecInput` via:
 //
-//	ClusterResourceSpecCommonResourceSpecArgs{...}
+//          ClusterResourceSpecCommonResourceSpecArgs{...}
 type ClusterResourceSpecCommonResourceSpecInput interface {
 	pulumi.Input
 
@@ -318,11 +318,11 @@ func (i ClusterResourceSpecCommonResourceSpecArgs) ToClusterResourceSpecCommonRe
 // ClusterResourceSpecCommonResourceSpecPtrInput is an input type that accepts ClusterResourceSpecCommonResourceSpecArgs, ClusterResourceSpecCommonResourceSpecPtr and ClusterResourceSpecCommonResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCommonResourceSpecPtrInput` via:
 //
-//	        ClusterResourceSpecCommonResourceSpecArgs{...}
+//          ClusterResourceSpecCommonResourceSpecArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterResourceSpecCommonResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -500,7 +500,7 @@ type ClusterResourceSpecCoreResourceSpec struct {
 // ClusterResourceSpecCoreResourceSpecInput is an input type that accepts ClusterResourceSpecCoreResourceSpecArgs and ClusterResourceSpecCoreResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCoreResourceSpecInput` via:
 //
-//	ClusterResourceSpecCoreResourceSpecArgs{...}
+//          ClusterResourceSpecCoreResourceSpecArgs{...}
 type ClusterResourceSpecCoreResourceSpecInput interface {
 	pulumi.Input
 
@@ -541,11 +541,11 @@ func (i ClusterResourceSpecCoreResourceSpecArgs) ToClusterResourceSpecCoreResour
 // ClusterResourceSpecCoreResourceSpecPtrInput is an input type that accepts ClusterResourceSpecCoreResourceSpecArgs, ClusterResourceSpecCoreResourceSpecPtr and ClusterResourceSpecCoreResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCoreResourceSpecPtrInput` via:
 //
-//	        ClusterResourceSpecCoreResourceSpecArgs{...}
+//          ClusterResourceSpecCoreResourceSpecArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterResourceSpecCoreResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -723,7 +723,7 @@ type ClusterResourceSpecMasterResourceSpec struct {
 // ClusterResourceSpecMasterResourceSpecInput is an input type that accepts ClusterResourceSpecMasterResourceSpecArgs and ClusterResourceSpecMasterResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecMasterResourceSpecInput` via:
 //
-//	ClusterResourceSpecMasterResourceSpecArgs{...}
+//          ClusterResourceSpecMasterResourceSpecArgs{...}
 type ClusterResourceSpecMasterResourceSpecInput interface {
 	pulumi.Input
 
@@ -764,11 +764,11 @@ func (i ClusterResourceSpecMasterResourceSpecArgs) ToClusterResourceSpecMasterRe
 // ClusterResourceSpecMasterResourceSpecPtrInput is an input type that accepts ClusterResourceSpecMasterResourceSpecArgs, ClusterResourceSpecMasterResourceSpecPtr and ClusterResourceSpecMasterResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecMasterResourceSpecPtrInput` via:
 //
-//	        ClusterResourceSpecMasterResourceSpecArgs{...}
+//          ClusterResourceSpecMasterResourceSpecArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterResourceSpecMasterResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -946,7 +946,7 @@ type ClusterResourceSpecTaskResourceSpec struct {
 // ClusterResourceSpecTaskResourceSpecInput is an input type that accepts ClusterResourceSpecTaskResourceSpecArgs and ClusterResourceSpecTaskResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecTaskResourceSpecInput` via:
 //
-//	ClusterResourceSpecTaskResourceSpecArgs{...}
+//          ClusterResourceSpecTaskResourceSpecArgs{...}
 type ClusterResourceSpecTaskResourceSpecInput interface {
 	pulumi.Input
 
@@ -987,11 +987,11 @@ func (i ClusterResourceSpecTaskResourceSpecArgs) ToClusterResourceSpecTaskResour
 // ClusterResourceSpecTaskResourceSpecPtrInput is an input type that accepts ClusterResourceSpecTaskResourceSpecArgs, ClusterResourceSpecTaskResourceSpecPtr and ClusterResourceSpecTaskResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecTaskResourceSpecPtrInput` via:
 //
-//	        ClusterResourceSpecTaskResourceSpecArgs{...}
+//          ClusterResourceSpecTaskResourceSpecArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ClusterResourceSpecTaskResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -1186,7 +1186,7 @@ type GetInstanceCluster struct {
 // GetInstanceClusterInput is an input type that accepts GetInstanceClusterArgs and GetInstanceClusterOutput values.
 // You can construct a concrete instance of `GetInstanceClusterInput` via:
 //
-//	GetInstanceClusterArgs{...}
+//          GetInstanceClusterArgs{...}
 type GetInstanceClusterInput interface {
 	pulumi.Input
 
@@ -1236,7 +1236,7 @@ func (i GetInstanceClusterArgs) ToGetInstanceClusterOutputWithContext(ctx contex
 // GetInstanceClusterArrayInput is an input type that accepts GetInstanceClusterArray and GetInstanceClusterArrayOutput values.
 // You can construct a concrete instance of `GetInstanceClusterArrayInput` via:
 //
-//	GetInstanceClusterArray{ GetInstanceClusterArgs{...} }
+//          GetInstanceClusterArray{ GetInstanceClusterArgs{...} }
 type GetInstanceClusterArrayInput interface {
 	pulumi.Input
 
@@ -1438,7 +1438,7 @@ type GetNodesNode struct {
 // GetNodesNodeInput is an input type that accepts GetNodesNodeArgs and GetNodesNodeOutput values.
 // You can construct a concrete instance of `GetNodesNodeInput` via:
 //
-//	GetNodesNodeArgs{...}
+//          GetNodesNodeArgs{...}
 type GetNodesNodeInput interface {
 	pulumi.Input
 
@@ -1544,7 +1544,7 @@ func (i GetNodesNodeArgs) ToGetNodesNodeOutputWithContext(ctx context.Context) G
 // GetNodesNodeArrayInput is an input type that accepts GetNodesNodeArray and GetNodesNodeArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeArrayInput` via:
 //
-//	GetNodesNodeArray{ GetNodesNodeArgs{...} }
+//          GetNodesNodeArray{ GetNodesNodeArgs{...} }
 type GetNodesNodeArrayInput interface {
 	pulumi.Input
 
@@ -1836,7 +1836,7 @@ type GetNodesNodeCdbNodeInfo struct {
 // GetNodesNodeCdbNodeInfoInput is an input type that accepts GetNodesNodeCdbNodeInfoArgs and GetNodesNodeCdbNodeInfoOutput values.
 // You can construct a concrete instance of `GetNodesNodeCdbNodeInfoInput` via:
 //
-//	GetNodesNodeCdbNodeInfoArgs{...}
+//          GetNodesNodeCdbNodeInfoArgs{...}
 type GetNodesNodeCdbNodeInfoInput interface {
 	pulumi.Input
 
@@ -1892,7 +1892,7 @@ func (i GetNodesNodeCdbNodeInfoArgs) ToGetNodesNodeCdbNodeInfoOutputWithContext(
 // GetNodesNodeCdbNodeInfoArrayInput is an input type that accepts GetNodesNodeCdbNodeInfoArray and GetNodesNodeCdbNodeInfoArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeCdbNodeInfoArrayInput` via:
 //
-//	GetNodesNodeCdbNodeInfoArray{ GetNodesNodeCdbNodeInfoArgs{...} }
+//          GetNodesNodeCdbNodeInfoArray{ GetNodesNodeCdbNodeInfoArgs{...} }
 type GetNodesNodeCdbNodeInfoArrayInput interface {
 	pulumi.Input
 
@@ -2035,7 +2035,7 @@ type GetNodesNodeMcMultiDisk struct {
 // GetNodesNodeMcMultiDiskInput is an input type that accepts GetNodesNodeMcMultiDiskArgs and GetNodesNodeMcMultiDiskOutput values.
 // You can construct a concrete instance of `GetNodesNodeMcMultiDiskInput` via:
 //
-//	GetNodesNodeMcMultiDiskArgs{...}
+//          GetNodesNodeMcMultiDiskArgs{...}
 type GetNodesNodeMcMultiDiskInput interface {
 	pulumi.Input
 
@@ -2067,7 +2067,7 @@ func (i GetNodesNodeMcMultiDiskArgs) ToGetNodesNodeMcMultiDiskOutputWithContext(
 // GetNodesNodeMcMultiDiskArrayInput is an input type that accepts GetNodesNodeMcMultiDiskArray and GetNodesNodeMcMultiDiskArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeMcMultiDiskArrayInput` via:
 //
-//	GetNodesNodeMcMultiDiskArray{ GetNodesNodeMcMultiDiskArgs{...} }
+//          GetNodesNodeMcMultiDiskArray{ GetNodesNodeMcMultiDiskArgs{...} }
 type GetNodesNodeMcMultiDiskArrayInput interface {
 	pulumi.Input
 
@@ -2148,7 +2148,7 @@ type GetNodesNodeTag struct {
 // GetNodesNodeTagInput is an input type that accepts GetNodesNodeTagArgs and GetNodesNodeTagOutput values.
 // You can construct a concrete instance of `GetNodesNodeTagInput` via:
 //
-//	GetNodesNodeTagArgs{...}
+//          GetNodesNodeTagArgs{...}
 type GetNodesNodeTagInput interface {
 	pulumi.Input
 
@@ -2178,7 +2178,7 @@ func (i GetNodesNodeTagArgs) ToGetNodesNodeTagOutputWithContext(ctx context.Cont
 // GetNodesNodeTagArrayInput is an input type that accepts GetNodesNodeTagArray and GetNodesNodeTagArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeTagArrayInput` via:
 //
-//	GetNodesNodeTagArray{ GetNodesNodeTagArgs{...} }
+//          GetNodesNodeTagArray{ GetNodesNodeTagArgs{...} }
 type GetNodesNodeTagArrayInput interface {
 	pulumi.Input
 

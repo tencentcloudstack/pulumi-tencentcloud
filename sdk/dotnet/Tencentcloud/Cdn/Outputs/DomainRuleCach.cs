@@ -27,6 +27,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// </summary>
         public readonly string? FollowOriginSwitch;
         /// <summary>
+        /// Specify whether to enable heuristic cache, only available while `follow_origin_switch` enabled, values: `on`, `off` (Default).
+        /// </summary>
+        public readonly string? HeuristicCacheSwitch;
+        /// <summary>
+        /// Specify heuristic cache time in second, only available while `follow_origin_switch` and `heuristic_cache_switch` enabled.
+        /// </summary>
+        public readonly int? HeuristicCacheTime;
+        /// <summary>
         /// Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules. Valid values are `on` and `off`. Default value is `off`.
         /// </summary>
         public readonly string? IgnoreCacheControl;
@@ -43,11 +51,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// </summary>
         public readonly string? ReValidate;
         /// <summary>
-        /// Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /, `default`: Fill `no max-age`.
+        /// Matching content under the corresponding type of CacheType: `all`: fill *, `file`: fill in the suffix name, such as jpg, txt, `directory`: fill in the path, such as /xxx/test, `path`: fill in the absolute path, such as /xxx/test.html, `index`: fill /.
         /// </summary>
         public readonly ImmutableArray<string> RulePaths;
         /// <summary>
-        /// Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page, `default`: effective when the source site has no max-age.
+        /// Rule type. The following types are supported: `all`: all documents take effect, `file`: the specified file suffix takes effect, `directory`: the specified path takes effect, `path`: specify the absolute path to take effect, `index`: home page.
         /// </summary>
         public readonly string? RuleType;
         /// <summary>
@@ -62,6 +70,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
             string? compareMaxAge,
 
             string? followOriginSwitch,
+
+            string? heuristicCacheSwitch,
+
+            int? heuristicCacheTime,
 
             string? ignoreCacheControl,
 
@@ -80,6 +92,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
             CacheTime = cacheTime;
             CompareMaxAge = compareMaxAge;
             FollowOriginSwitch = followOriginSwitch;
+            HeuristicCacheSwitch = heuristicCacheSwitch;
+            HeuristicCacheTime = heuristicCacheTime;
             IgnoreCacheControl = ignoreCacheControl;
             IgnoreSetCookie = ignoreSetCookie;
             NoCacheSwitch = noCacheSwitch;

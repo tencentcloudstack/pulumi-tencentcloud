@@ -42,6 +42,46 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * Create with Replications
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const tcrRegionMap = config.getObject("tcrRegionMap") || {
+ *     "ap-guangzhou": 1,
+ *     "ap-shanghai": 4,
+ *     "ap-hongkong": 5,
+ *     "ap-beijing": 8,
+ *     "ap-singapore": 9,
+ *     "na-siliconvalley": 15,
+ *     "ap-chengdu": 16,
+ *     "eu-frankfurt": 17,
+ *     "ap-seoul": 18,
+ *     "ap-chongqing": 19,
+ *     "ap-mumbai": 21,
+ *     "na-ashburn": 22,
+ *     "ap-bangkok": 23,
+ *     "eu-moscow": 24,
+ *     "ap-tokyo": 25,
+ *     "ap-nanjing": 33,
+ *     "ap-taipei": 39,
+ *     "ap-jakarta": 72,
+ * };
+ * const foo = new tencentcloud.tcr.Instance("foo", {
+ *     instanceType: "premium",
+ *     replications: [
+ *         {
+ *             regionId: tcrRegionMap["ap-guangzhou"],
+ *         },
+ *         {
+ *             regionId: tcrRegionMap["ap-singapore"],
+ *         },
+ *     ],
+ * });
+ * ```
+ *
  * ## Import
  *
  * tcr instance can be imported using the id, e.g.
@@ -83,6 +123,18 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly deleteBucket!: pulumi.Output<boolean | undefined>;
     /**
+     * Instance expiration time (prepaid).
+     */
+    public /*out*/ readonly expiredAt!: pulumi.Output<string>;
+    /**
+     * Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+     */
+    public readonly instanceChargeTypePrepaidPeriod!: pulumi.Output<number | undefined>;
+    /**
+     * Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+     */
+    public readonly instanceChargeTypePrepaidRenewFlag!: pulumi.Output<number | undefined>;
+    /**
      * TCR types. Valid values are: `standard`, `basic`, `premium`.
      */
     public readonly instanceType!: pulumi.Output<string>;
@@ -106,6 +158,14 @@ export class Instance extends pulumi.CustomResource {
      * Status of the TCR instance public network access.
      */
     public /*out*/ readonly publicStatus!: pulumi.Output<string>;
+    /**
+     * Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+     */
+    public readonly registryChargeType!: pulumi.Output<number | undefined>;
+    /**
+     * Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+     */
+    public readonly replications!: pulumi.Output<outputs.Tcr.InstanceReplication[] | undefined>;
     /**
      * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */
@@ -133,12 +193,17 @@ export class Instance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["deleteBucket"] = state ? state.deleteBucket : undefined;
+            resourceInputs["expiredAt"] = state ? state.expiredAt : undefined;
+            resourceInputs["instanceChargeTypePrepaidPeriod"] = state ? state.instanceChargeTypePrepaidPeriod : undefined;
+            resourceInputs["instanceChargeTypePrepaidRenewFlag"] = state ? state.instanceChargeTypePrepaidRenewFlag : undefined;
             resourceInputs["instanceType"] = state ? state.instanceType : undefined;
             resourceInputs["internalEndPoint"] = state ? state.internalEndPoint : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["openPublicOperation"] = state ? state.openPublicOperation : undefined;
             resourceInputs["publicDomain"] = state ? state.publicDomain : undefined;
             resourceInputs["publicStatus"] = state ? state.publicStatus : undefined;
+            resourceInputs["registryChargeType"] = state ? state.registryChargeType : undefined;
+            resourceInputs["replications"] = state ? state.replications : undefined;
             resourceInputs["securityPolicies"] = state ? state.securityPolicies : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -148,11 +213,16 @@ export class Instance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'instanceType'");
             }
             resourceInputs["deleteBucket"] = args ? args.deleteBucket : undefined;
+            resourceInputs["instanceChargeTypePrepaidPeriod"] = args ? args.instanceChargeTypePrepaidPeriod : undefined;
+            resourceInputs["instanceChargeTypePrepaidRenewFlag"] = args ? args.instanceChargeTypePrepaidRenewFlag : undefined;
             resourceInputs["instanceType"] = args ? args.instanceType : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["openPublicOperation"] = args ? args.openPublicOperation : undefined;
+            resourceInputs["registryChargeType"] = args ? args.registryChargeType : undefined;
+            resourceInputs["replications"] = args ? args.replications : undefined;
             resourceInputs["securityPolicies"] = args ? args.securityPolicies : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["expiredAt"] = undefined /*out*/;
             resourceInputs["internalEndPoint"] = undefined /*out*/;
             resourceInputs["publicDomain"] = undefined /*out*/;
             resourceInputs["publicStatus"] = undefined /*out*/;
@@ -171,6 +241,18 @@ export interface InstanceState {
      * Indicate to delete the COS bucket which is auto-created with the instance or not.
      */
     deleteBucket?: pulumi.Input<boolean>;
+    /**
+     * Instance expiration time (prepaid).
+     */
+    expiredAt?: pulumi.Input<string>;
+    /**
+     * Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+     */
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    /**
+     * Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+     */
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<number>;
     /**
      * TCR types. Valid values are: `standard`, `basic`, `premium`.
      */
@@ -196,6 +278,14 @@ export interface InstanceState {
      */
     publicStatus?: pulumi.Input<string>;
     /**
+     * Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+     */
+    registryChargeType?: pulumi.Input<number>;
+    /**
+     * Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+     */
+    replications?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceReplication>[]>;
+    /**
      * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */
     securityPolicies?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceSecurityPolicy>[]>;
@@ -218,6 +308,14 @@ export interface InstanceArgs {
      */
     deleteBucket?: pulumi.Input<boolean>;
     /**
+     * Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
+     */
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    /**
+     * Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
+     */
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<number>;
+    /**
      * TCR types. Valid values are: `standard`, `basic`, `premium`.
      */
     instanceType: pulumi.Input<string>;
@@ -229,6 +327,14 @@ export interface InstanceArgs {
      * Control public network access.
      */
     openPublicOperation?: pulumi.Input<boolean>;
+    /**
+     * Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
+     */
+    registryChargeType?: pulumi.Input<number>;
+    /**
+     * Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
+     */
+    replications?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceReplication>[]>;
     /**
      * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */

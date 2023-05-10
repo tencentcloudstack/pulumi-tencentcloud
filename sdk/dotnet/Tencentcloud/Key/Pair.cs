@@ -26,6 +26,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
     ///         var foo = new Tencentcloud.Key.Pair("foo", new Tencentcloud.Key.PairArgs
     ///         {
     ///             KeyName = "terraform_test",
+    ///         });
+    ///         var foo1 = new Tencentcloud.Key.Pair("foo1", new Tencentcloud.Key.PairArgs
+    ///         {
+    ///             KeyName = "terraform_test",
     ///             PublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
     ///         });
     ///     }
@@ -61,6 +65,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// </summary>
         [Output("publicKey")]
         public Output<string> PublicKey { get; private set; } = null!;
+
+        /// <summary>
+        /// Tags of the key pair.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -124,8 +134,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// <summary>
         /// You can import an existing public key and using TencentCloud key pair to manage it.
         /// </summary>
-        [Input("publicKey", required: true)]
-        public Input<string> PublicKey { get; set; } = null!;
+        [Input("publicKey")]
+        public Input<string>? PublicKey { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of the key pair.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         public PairArgs()
         {
@@ -151,6 +173,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// </summary>
         [Input("publicKey")]
         public Input<string>? PublicKey { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of the key pair.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         public PairState()
         {

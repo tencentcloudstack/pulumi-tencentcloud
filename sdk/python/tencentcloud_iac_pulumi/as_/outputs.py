@@ -14,6 +14,8 @@ __all__ = [
     'ScalingConfigInstanceNameSettings',
     'ScalingGroupForwardBalancerId',
     'ScalingGroupForwardBalancerIdTargetAttribute',
+    'GetInstancesFilterResult',
+    'GetInstancesInstanceListResult',
     'GetScalingConfigsConfigurationListResult',
     'GetScalingConfigsConfigurationListDataDiskResult',
     'GetScalingGroupsScalingGroupListResult',
@@ -53,7 +55,7 @@ class ScalingConfigDataDisk(dict):
                  disk_type: Optional[str] = None,
                  snapshot_id: Optional[str] = None):
         """
-        :param bool delete_with_instance: Indicates whether the disk remove after instance terminated.
+        :param bool delete_with_instance: Indicates whether the disk remove after instance terminated. Default is `false`.
         :param int disk_size: Volume of disk in GB. Default is `0`.
         :param str disk_type: Types of disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. valid when disk_type_policy is ORIGINAL.
         :param str snapshot_id: Data disk snapshot ID.
@@ -71,7 +73,7 @@ class ScalingConfigDataDisk(dict):
     @pulumi.getter(name="deleteWithInstance")
     def delete_with_instance(self) -> Optional[bool]:
         """
-        Indicates whether the disk remove after instance terminated.
+        Indicates whether the disk remove after instance terminated. Default is `false`.
         """
         return pulumi.get(self, "delete_with_instance")
 
@@ -251,6 +253,185 @@ class ScalingGroupForwardBalancerIdTargetAttribute(dict):
         Weight.
         """
         return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetInstancesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+        :param Sequence[str] values: Value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Value of the field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetInstancesInstanceListResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 auto_scaling_group_id: str,
+                 auto_scaling_group_name: str,
+                 creation_type: str,
+                 health_status: str,
+                 instance_id: str,
+                 instance_type: str,
+                 launch_configuration_id: str,
+                 launch_configuration_name: str,
+                 life_cycle_state: str,
+                 protected_from_scale_in: bool,
+                 version_number: int,
+                 zone: str):
+        """
+        :param str add_time: The time when the instance joined the group.
+        :param str auto_scaling_group_id: Auto scaling group ID.
+        :param str auto_scaling_group_name: Auto scaling group name.
+        :param str creation_type: Valid values: `AUTO_CREATION`, `MANUAL_ATTACHING`.
+        :param str health_status: Health status, the valid values are HEALTHY and UNHEALTHY.
+        :param str instance_id: Instance ID.
+        :param str instance_type: Instance type.
+        :param str launch_configuration_id: Launch configuration ID.
+        :param str launch_configuration_name: Launch configuration name.
+        :param str life_cycle_state: Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.
+        :param bool protected_from_scale_in: Enable scale in protection.
+        :param int version_number: Version ID.
+        :param str zone: Available zone.
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "auto_scaling_group_id", auto_scaling_group_id)
+        pulumi.set(__self__, "auto_scaling_group_name", auto_scaling_group_name)
+        pulumi.set(__self__, "creation_type", creation_type)
+        pulumi.set(__self__, "health_status", health_status)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "launch_configuration_id", launch_configuration_id)
+        pulumi.set(__self__, "launch_configuration_name", launch_configuration_name)
+        pulumi.set(__self__, "life_cycle_state", life_cycle_state)
+        pulumi.set(__self__, "protected_from_scale_in", protected_from_scale_in)
+        pulumi.set(__self__, "version_number", version_number)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        The time when the instance joined the group.
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter(name="autoScalingGroupId")
+    def auto_scaling_group_id(self) -> str:
+        """
+        Auto scaling group ID.
+        """
+        return pulumi.get(self, "auto_scaling_group_id")
+
+    @property
+    @pulumi.getter(name="autoScalingGroupName")
+    def auto_scaling_group_name(self) -> str:
+        """
+        Auto scaling group name.
+        """
+        return pulumi.get(self, "auto_scaling_group_name")
+
+    @property
+    @pulumi.getter(name="creationType")
+    def creation_type(self) -> str:
+        """
+        Valid values: `AUTO_CREATION`, `MANUAL_ATTACHING`.
+        """
+        return pulumi.get(self, "creation_type")
+
+    @property
+    @pulumi.getter(name="healthStatus")
+    def health_status(self) -> str:
+        """
+        Health status, the valid values are HEALTHY and UNHEALTHY.
+        """
+        return pulumi.get(self, "health_status")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Instance type.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="launchConfigurationId")
+    def launch_configuration_id(self) -> str:
+        """
+        Launch configuration ID.
+        """
+        return pulumi.get(self, "launch_configuration_id")
+
+    @property
+    @pulumi.getter(name="launchConfigurationName")
+    def launch_configuration_name(self) -> str:
+        """
+        Launch configuration name.
+        """
+        return pulumi.get(self, "launch_configuration_name")
+
+    @property
+    @pulumi.getter(name="lifeCycleState")
+    def life_cycle_state(self) -> str:
+        """
+        Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.
+        """
+        return pulumi.get(self, "life_cycle_state")
+
+    @property
+    @pulumi.getter(name="protectedFromScaleIn")
+    def protected_from_scale_in(self) -> bool:
+        """
+        Enable scale in protection.
+        """
+        return pulumi.get(self, "protected_from_scale_in")
+
+    @property
+    @pulumi.getter(name="versionNumber")
+    def version_number(self) -> int:
+        """
+        Version ID.
+        """
+        return pulumi.get(self, "version_number")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Available zone.
+        """
+        return pulumi.get(self, "zone")
 
 
 @pulumi.output_type

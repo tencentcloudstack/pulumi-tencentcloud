@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// }
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// mysql account can be imported using the mysqlId#accountName, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Mysql/account:Account default cdb-gqg6j82x#tf_account
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/account:Account")]
     public partial class Account : Pulumi.CustomResource

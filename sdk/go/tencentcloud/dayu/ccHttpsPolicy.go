@@ -21,37 +21,34 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Dayu.NewCcHttpsPolicy(ctx, "testPolicy", &Dayu.CcHttpsPolicyArgs{
-//				ResourceType: pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_type),
-//				ResourceId:   pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_id),
-//				RuleId:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Rule_id),
-//				Domain:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Domain),
-//				Action:       pulumi.String("drop"),
-//				Switch:       pulumi.Bool(true),
-//				RuleLists: dayu.CcHttpsPolicyRuleListArray{
-//					&dayu.CcHttpsPolicyRuleListArgs{
-//						Skey:     pulumi.String("cgi"),
-//						Operator: pulumi.String("include"),
-//						Value:    pulumi.String("123"),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewCcHttpsPolicy(ctx, "testPolicy", &Dayu.CcHttpsPolicyArgs{
+// 			ResourceType: pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_type),
+// 			ResourceId:   pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Resource_id),
+// 			RuleId:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Rule_id),
+// 			Domain:       pulumi.Any(tencentcloud_dayu_l7_rule.Test_rule.Domain),
+// 			Action:       pulumi.String("drop"),
+// 			Switch:       pulumi.Bool(true),
+// 			RuleLists: dayu.CcHttpsPolicyRuleListArray{
+// 				&dayu.CcHttpsPolicyRuleListArgs{
+// 					Skey:     pulumi.String("cgi"),
+// 					Operator: pulumi.String("include"),
+// 					Value:    pulumi.String("123"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type CcHttpsPolicy struct {
 	pulumi.CustomResourceState
@@ -243,7 +240,7 @@ func (i *CcHttpsPolicy) ToCcHttpsPolicyOutputWithContext(ctx context.Context) Cc
 // CcHttpsPolicyArrayInput is an input type that accepts CcHttpsPolicyArray and CcHttpsPolicyArrayOutput values.
 // You can construct a concrete instance of `CcHttpsPolicyArrayInput` via:
 //
-//	CcHttpsPolicyArray{ CcHttpsPolicyArgs{...} }
+//          CcHttpsPolicyArray{ CcHttpsPolicyArgs{...} }
 type CcHttpsPolicyArrayInput interface {
 	pulumi.Input
 
@@ -268,7 +265,7 @@ func (i CcHttpsPolicyArray) ToCcHttpsPolicyArrayOutputWithContext(ctx context.Co
 // CcHttpsPolicyMapInput is an input type that accepts CcHttpsPolicyMap and CcHttpsPolicyMapOutput values.
 // You can construct a concrete instance of `CcHttpsPolicyMapInput` via:
 //
-//	CcHttpsPolicyMap{ "key": CcHttpsPolicyArgs{...} }
+//          CcHttpsPolicyMap{ "key": CcHttpsPolicyArgs{...} }
 type CcHttpsPolicyMapInput interface {
 	pulumi.Input
 

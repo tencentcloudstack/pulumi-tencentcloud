@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Description of the add-on resource object in JSON string format.
+        /// Parameter of the add-on resource object in JSON string format, please check the example at the top of page for reference.
         /// </summary>
         public readonly string Param;
 

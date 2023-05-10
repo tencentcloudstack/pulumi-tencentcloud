@@ -13,7 +13,7 @@ import (
 
 // Use this resource to create ckafka instance.
 //
-// > **NOTE:** It only support create profession ckafka instance.
+// > **NOTE:** It only support create prepaid ckafka instance.
 //
 // ## Example Usage
 //
@@ -21,53 +21,51 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ckafka.NewInstance(ctx, "foo", &Ckafka.InstanceArgs{
-//				BandWidth: pulumi.Int(40),
-//				Config: &ckafka.InstanceConfigArgs{
-//					AutoCreateTopicEnable:    pulumi.Bool(true),
-//					DefaultNumPartitions:     pulumi.Int(3),
-//					DefaultReplicationFactor: pulumi.Int(3),
-//				},
-//				DiskSize: pulumi.Int(500),
-//				DiskType: pulumi.String("CLOUD_BASIC"),
-//				DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
-//					BottomRetention:       pulumi.Int(0),
-//					DiskQuotaPercentage:   pulumi.Int(0),
-//					Enable:                pulumi.Int(1),
-//					StepForwardPercentage: pulumi.Int(0),
-//				},
-//				InstanceName:     pulumi.String("ckafka-instance-tf-test"),
-//				KafkaVersion:     pulumi.String("1.1.1"),
-//				MsgRetentionTime: pulumi.Int(1300),
-//				MultiZoneFlag:    pulumi.Bool(true),
-//				Partition:        pulumi.Int(800),
-//				Period:           pulumi.Int(1),
-//				PublicNetwork:    pulumi.Int(3),
-//				RenewFlag:        pulumi.Int(0),
-//				SubnetId:         pulumi.String("subnet-4vwihrzk"),
-//				VpcId:            pulumi.String("vpc-82p1t1nv"),
-//				ZoneId:           pulumi.Int(100006),
-//				ZoneIds: pulumi.IntArray{
-//					pulumi.Int(100006),
-//					pulumi.Int(100007),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ckafka.NewInstance(ctx, "foo", &Ckafka.InstanceArgs{
+// 			BandWidth: pulumi.Int(40),
+// 			Config: &ckafka.InstanceConfigArgs{
+// 				AutoCreateTopicEnable:    pulumi.Bool(true),
+// 				DefaultNumPartitions:     pulumi.Int(3),
+// 				DefaultReplicationFactor: pulumi.Int(3),
+// 			},
+// 			DiskSize: pulumi.Int(500),
+// 			DiskType: pulumi.String("CLOUD_BASIC"),
+// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+// 				BottomRetention:       pulumi.Int(0),
+// 				DiskQuotaPercentage:   pulumi.Int(0),
+// 				Enable:                pulumi.Int(1),
+// 				StepForwardPercentage: pulumi.Int(0),
+// 			},
+// 			InstanceName:       pulumi.String("ckafka-instance-tf-test"),
+// 			KafkaVersion:       pulumi.String("1.1.1"),
+// 			MsgRetentionTime:   pulumi.Int(1300),
+// 			MultiZoneFlag:      pulumi.Bool(true),
+// 			Partition:          pulumi.Int(800),
+// 			Period:             pulumi.Int(1),
+// 			PublicNetwork:      pulumi.Int(3),
+// 			RenewFlag:          pulumi.Int(0),
+// 			SpecificationsType: pulumi.String("profession"),
+// 			SubnetId:           pulumi.String("subnet-4vwihrzk"),
+// 			VpcId:              pulumi.String("vpc-82p1t1nv"),
+// 			ZoneId:             pulumi.Int(100006),
+// 			ZoneIds: pulumi.IntArray{
+// 				pulumi.Int(100006),
+// 				pulumi.Int(100007),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -75,9 +73,7 @@ import (
 // ckafka instance can be imported using the instance_id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
-//
+//  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -94,6 +90,8 @@ type Instance struct {
 	DynamicRetentionConfig InstanceDynamicRetentionConfigOutput `pulumi:"dynamicRetentionConfig"`
 	// Instance name.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
+	// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+	InstanceType pulumi.IntOutput `pulumi:"instanceType"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringOutput `pulumi:"kafkaVersion"`
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
@@ -104,20 +102,26 @@ type Instance struct {
 	Partition pulumi.IntOutput `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
-	// Timestamp.
+	// Bandwidth of the public network.
 	PublicNetwork pulumi.IntOutput `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrOutput `pulumi:"rebalanceTime"`
 	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag pulumi.IntOutput `pulumi:"renewFlag"`
-	// Subnet id.
-	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
-	// Partition size, the professional version does not need tag.
+	// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+	SpecificationsType pulumi.StringPtrOutput `pulumi:"specificationsType"`
+	// Subnet id, it will be basic network if not set.
+	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
+	// Tag set of instance.
+	TagSet pulumi.MapOutput `pulumi:"tagSet"`
+	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+	//
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
 	Tags InstanceTagArrayOutput `pulumi:"tags"`
 	// Vip of instance.
 	Vip pulumi.StringOutput `pulumi:"vip"`
-	// Vpc id.
-	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// Vpc id, it will be basic network if not set.
+	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 	// Type of instance.
 	Vport pulumi.StringOutput `pulumi:"vport"`
 	// Available zone id.
@@ -135,12 +139,6 @@ func NewInstance(ctx *pulumi.Context,
 
 	if args.InstanceName == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceName'")
-	}
-	if args.SubnetId == nil {
-		return nil, errors.New("invalid value for required argument 'SubnetId'")
-	}
-	if args.VpcId == nil {
-		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
@@ -180,6 +178,8 @@ type instanceState struct {
 	DynamicRetentionConfig *InstanceDynamicRetentionConfig `pulumi:"dynamicRetentionConfig"`
 	// Instance name.
 	InstanceName *string `pulumi:"instanceName"`
+	// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+	InstanceType *int `pulumi:"instanceType"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion *string `pulumi:"kafkaVersion"`
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
@@ -190,19 +190,25 @@ type instanceState struct {
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
-	// Timestamp.
+	// Bandwidth of the public network.
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
 	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag *int `pulumi:"renewFlag"`
-	// Subnet id.
+	// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+	SpecificationsType *string `pulumi:"specificationsType"`
+	// Subnet id, it will be basic network if not set.
 	SubnetId *string `pulumi:"subnetId"`
-	// Partition size, the professional version does not need tag.
+	// Tag set of instance.
+	TagSet map[string]interface{} `pulumi:"tagSet"`
+	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+	//
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
 	Tags []InstanceTag `pulumi:"tags"`
 	// Vip of instance.
 	Vip *string `pulumi:"vip"`
-	// Vpc id.
+	// Vpc id, it will be basic network if not set.
 	VpcId *string `pulumi:"vpcId"`
 	// Type of instance.
 	Vport *string `pulumi:"vport"`
@@ -225,6 +231,8 @@ type InstanceState struct {
 	DynamicRetentionConfig InstanceDynamicRetentionConfigPtrInput
 	// Instance name.
 	InstanceName pulumi.StringPtrInput
+	// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+	InstanceType pulumi.IntPtrInput
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringPtrInput
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
@@ -235,19 +243,25 @@ type InstanceState struct {
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
-	// Timestamp.
+	// Bandwidth of the public network.
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
 	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag pulumi.IntPtrInput
-	// Subnet id.
+	// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+	SpecificationsType pulumi.StringPtrInput
+	// Subnet id, it will be basic network if not set.
 	SubnetId pulumi.StringPtrInput
-	// Partition size, the professional version does not need tag.
+	// Tag set of instance.
+	TagSet pulumi.MapInput
+	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+	//
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
 	Tags InstanceTagArrayInput
 	// Vip of instance.
 	Vip pulumi.StringPtrInput
-	// Vpc id.
+	// Vpc id, it will be basic network if not set.
 	VpcId pulumi.StringPtrInput
 	// Type of instance.
 	Vport pulumi.StringPtrInput
@@ -274,6 +288,8 @@ type instanceArgs struct {
 	DynamicRetentionConfig *InstanceDynamicRetentionConfig `pulumi:"dynamicRetentionConfig"`
 	// Instance name.
 	InstanceName string `pulumi:"instanceName"`
+	// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+	InstanceType *int `pulumi:"instanceType"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion *string `pulumi:"kafkaVersion"`
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
@@ -284,18 +300,24 @@ type instanceArgs struct {
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
-	// Timestamp.
+	// Bandwidth of the public network.
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
 	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag *int `pulumi:"renewFlag"`
-	// Subnet id.
-	SubnetId string `pulumi:"subnetId"`
-	// Partition size, the professional version does not need tag.
+	// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+	SpecificationsType *string `pulumi:"specificationsType"`
+	// Subnet id, it will be basic network if not set.
+	SubnetId *string `pulumi:"subnetId"`
+	// Tag set of instance.
+	TagSet map[string]interface{} `pulumi:"tagSet"`
+	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+	//
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
 	Tags []InstanceTag `pulumi:"tags"`
-	// Vpc id.
-	VpcId string `pulumi:"vpcId"`
+	// Vpc id, it will be basic network if not set.
+	VpcId *string `pulumi:"vpcId"`
 	// Available zone id.
 	ZoneId int `pulumi:"zoneId"`
 	// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
@@ -316,6 +338,8 @@ type InstanceArgs struct {
 	DynamicRetentionConfig InstanceDynamicRetentionConfigPtrInput
 	// Instance name.
 	InstanceName pulumi.StringInput
+	// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+	InstanceType pulumi.IntPtrInput
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringPtrInput
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
@@ -326,18 +350,24 @@ type InstanceArgs struct {
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
-	// Timestamp.
+	// Bandwidth of the public network.
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
 	// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
 	RenewFlag pulumi.IntPtrInput
-	// Subnet id.
-	SubnetId pulumi.StringInput
-	// Partition size, the professional version does not need tag.
+	// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+	SpecificationsType pulumi.StringPtrInput
+	// Subnet id, it will be basic network if not set.
+	SubnetId pulumi.StringPtrInput
+	// Tag set of instance.
+	TagSet pulumi.MapInput
+	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+	//
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
 	Tags InstanceTagArrayInput
-	// Vpc id.
-	VpcId pulumi.StringInput
+	// Vpc id, it will be basic network if not set.
+	VpcId pulumi.StringPtrInput
 	// Available zone id.
 	ZoneId pulumi.IntInput
 	// List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
@@ -370,7 +400,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -395,7 +425,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -461,6 +491,11 @@ func (o InstanceOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
 }
 
+// Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
+func (o InstanceOutput) InstanceType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.InstanceType }).(pulumi.IntOutput)
+}
+
 // Kafka version (0.10.2/1.1.1/2.4.1).
 func (o InstanceOutput) KafkaVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.KafkaVersion }).(pulumi.StringOutput)
@@ -486,7 +521,7 @@ func (o InstanceOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }
 
-// Timestamp.
+// Bandwidth of the public network.
 func (o InstanceOutput) PublicNetwork() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.PublicNetwork }).(pulumi.IntOutput)
 }
@@ -501,12 +536,24 @@ func (o InstanceOutput) RenewFlag() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.RenewFlag }).(pulumi.IntOutput)
 }
 
-// Subnet id.
-func (o InstanceOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
+// Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
+func (o InstanceOutput) SpecificationsType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SpecificationsType }).(pulumi.StringPtrOutput)
 }
 
-// Partition size, the professional version does not need tag.
+// Subnet id, it will be basic network if not set.
+func (o InstanceOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
+}
+
+// Tag set of instance.
+func (o InstanceOutput) TagSet() pulumi.MapOutput {
+	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.TagSet }).(pulumi.MapOutput)
+}
+
+// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
+//
+// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
 func (o InstanceOutput) Tags() InstanceTagArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceTagArrayOutput { return v.Tags }).(InstanceTagArrayOutput)
 }
@@ -516,9 +563,9 @@ func (o InstanceOutput) Vip() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Vip }).(pulumi.StringOutput)
 }
 
-// Vpc id.
-func (o InstanceOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+// Vpc id, it will be basic network if not set.
+func (o InstanceOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
 }
 
 // Type of instance.

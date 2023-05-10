@@ -19,26 +19,31 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Mysql.NewAccount(ctx, "default", &Mysql.AccountArgs{
-//				Description: pulumi.String("My test account"),
-//				MysqlId:     pulumi.String("my-test-database"),
-//				Password:    pulumi.String("********"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewAccount(ctx, "default", &Mysql.AccountArgs{
+// 			Description: pulumi.String("My test account"),
+// 			MysqlId:     pulumi.String("my-test-database"),
+// 			Password:    pulumi.String("********"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
+// ## Import
+//
+// mysql account can be imported using the mysqlId#accountName, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Mysql/account:Account default cdb-gqg6j82x#tf_account
 // ```
 type Account struct {
 	pulumi.CustomResourceState
@@ -173,7 +178,7 @@ func (i *Account) ToAccountOutputWithContext(ctx context.Context) AccountOutput 
 // AccountArrayInput is an input type that accepts AccountArray and AccountArrayOutput values.
 // You can construct a concrete instance of `AccountArrayInput` via:
 //
-//	AccountArray{ AccountArgs{...} }
+//          AccountArray{ AccountArgs{...} }
 type AccountArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +203,7 @@ func (i AccountArray) ToAccountArrayOutputWithContext(ctx context.Context) Accou
 // AccountMapInput is an input type that accepts AccountMap and AccountMapOutput values.
 // You can construct a concrete instance of `AccountMapInput` via:
 //
-//	AccountMap{ "key": AccountArgs{...} }
+//          AccountMap{ "key": AccountArgs{...} }
 type AccountMapInput interface {
 	pulumi.Input
 

@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
     public sealed class ScalingConfigDataDisk
     {
         /// <summary>
-        /// Indicates whether the disk remove after instance terminated.
+        /// Indicates whether the disk remove after instance terminated. Default is `false`.
         /// </summary>
         public readonly bool? DeleteWithInstance;
         /// <summary>

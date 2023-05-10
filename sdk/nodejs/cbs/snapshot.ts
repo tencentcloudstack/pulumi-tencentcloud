@@ -83,6 +83,12 @@ export class Snapshot extends pulumi.CustomResource {
      * Volume of storage which this snapshot created from.
      */
     public /*out*/ readonly storageSize!: pulumi.Output<number>;
+    /**
+     * cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+     *
+     * @deprecated cbs snapshot do not support tag now.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a Snapshot resource with the given unique name, arguments, and options.
@@ -104,6 +110,7 @@ export class Snapshot extends pulumi.CustomResource {
             resourceInputs["snapshotStatus"] = state ? state.snapshotStatus : undefined;
             resourceInputs["storageId"] = state ? state.storageId : undefined;
             resourceInputs["storageSize"] = state ? state.storageSize : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as SnapshotArgs | undefined;
             if ((!args || args.snapshotName === undefined) && !opts.urn) {
@@ -114,6 +121,7 @@ export class Snapshot extends pulumi.CustomResource {
             }
             resourceInputs["snapshotName"] = args ? args.snapshotName : undefined;
             resourceInputs["storageId"] = args ? args.storageId : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["diskType"] = undefined /*out*/;
             resourceInputs["percent"] = undefined /*out*/;
@@ -157,6 +165,12 @@ export interface SnapshotState {
      * Volume of storage which this snapshot created from.
      */
     storageSize?: pulumi.Input<number>;
+    /**
+     * cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+     *
+     * @deprecated cbs snapshot do not support tag now.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -171,4 +185,10 @@ export interface SnapshotArgs {
      * ID of the the CBS which this snapshot created from.
      */
     storageId: pulumi.Input<string>;
+    /**
+     * cbs snapshot do not support tag now. The available tags within this CBS Snapshot.
+     *
+     * @deprecated cbs snapshot do not support tag now.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }

@@ -2,10 +2,15 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a Redis instance and set its attributes.
+ *
+ * > **NOTE:** The argument vpcId and subnetId is now required because Basic Network Instance is no longer supported.
+ *
+ * > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
  *
  * ## Import
  *
@@ -80,6 +85,14 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly noAuth!: pulumi.Output<boolean | undefined>;
     /**
+     * Readonly Primary/Replica nodes.
+     */
+    public /*out*/ readonly nodeInfos!: pulumi.Output<outputs.Redis.InstanceNodeInfo[]>;
+    /**
+     * Specify params template id. If not set, will use default template.
+     */
+    public readonly paramsTemplateId!: pulumi.Output<string | undefined>;
+    /**
      * Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
      */
     public readonly password!: pulumi.Output<string | undefined>;
@@ -96,7 +109,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
      */
     public readonly redisReplicasNum!: pulumi.Output<number | undefined>;
     /**
@@ -104,7 +117,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly redisShardNum!: pulumi.Output<number>;
     /**
-     * ID of replica nodes available zone. This is not required for standalone and master slave versions.
+     * ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
      */
     public readonly replicaZoneIds!: pulumi.Output<number[] | undefined>;
     /**
@@ -164,6 +177,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["memSize"] = state ? state.memSize : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["noAuth"] = state ? state.noAuth : undefined;
+            resourceInputs["nodeInfos"] = state ? state.nodeInfos : undefined;
+            resourceInputs["paramsTemplateId"] = state ? state.paramsTemplateId : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
@@ -194,6 +209,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["memSize"] = args ? args.memSize : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["noAuth"] = args ? args.noAuth : undefined;
+            resourceInputs["paramsTemplateId"] = args ? args.paramsTemplateId : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
@@ -210,6 +226,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["ip"] = undefined /*out*/;
+            resourceInputs["nodeInfos"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -258,6 +275,14 @@ export interface InstanceState {
      */
     noAuth?: pulumi.Input<boolean>;
     /**
+     * Readonly Primary/Replica nodes.
+     */
+    nodeInfos?: pulumi.Input<pulumi.Input<inputs.Redis.InstanceNodeInfo>[]>;
+    /**
+     * Specify params template id. If not set, will use default template.
+     */
+    paramsTemplateId?: pulumi.Input<string>;
+    /**
      * Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
      */
     password?: pulumi.Input<string>;
@@ -274,7 +299,7 @@ export interface InstanceState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
      */
     redisReplicasNum?: pulumi.Input<number>;
     /**
@@ -282,7 +307,7 @@ export interface InstanceState {
      */
     redisShardNum?: pulumi.Input<number>;
     /**
-     * ID of replica nodes available zone. This is not required for standalone and master slave versions.
+     * ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
      */
     replicaZoneIds?: pulumi.Input<pulumi.Input<number>[]>;
     /**
@@ -354,6 +379,10 @@ export interface InstanceArgs {
      */
     noAuth?: pulumi.Input<boolean>;
     /**
+     * Specify params template id. If not set, will use default template.
+     */
+    paramsTemplateId?: pulumi.Input<string>;
+    /**
      * Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
      */
     password?: pulumi.Input<string>;
@@ -370,7 +399,7 @@ export interface InstanceArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
      */
     redisReplicasNum?: pulumi.Input<number>;
     /**
@@ -378,7 +407,7 @@ export interface InstanceArgs {
      */
     redisShardNum?: pulumi.Input<number>;
     /**
-     * ID of replica nodes available zone. This is not required for standalone and master slave versions.
+     * ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
      */
     replicaZoneIds?: pulumi.Input<pulumi.Input<number>[]>;
     /**

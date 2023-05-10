@@ -100,6 +100,18 @@ class TemplateGroup(pulumi.CustomResource):
         """
         Provides a resource to manage protocol template group.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.protocol.TemplateGroup("foo", template_ids=[
+            "ipl-axaf24151",
+            "ipl-axaf24152",
+        ])
+        ```
+
         ## Import
 
         Protocol template group can be imported using the id, e.g.
@@ -121,6 +133,18 @@ class TemplateGroup(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to manage protocol template group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.protocol.TemplateGroup("foo", template_ids=[
+            "ipl-axaf24151",
+            "ipl-axaf24152",
+        ])
+        ```
 
         ## Import
 

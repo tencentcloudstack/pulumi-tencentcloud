@@ -27,8 +27,8 @@ class StorageSetArgs:
         The set of arguments for constructing a StorageSet resource.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[str] charge_type: The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
         :param pulumi.Input[int] disk_count: The number of disks to be purchased. Default 1.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
@@ -81,7 +81,7 @@ class StorageSetArgs:
     @pulumi.getter(name="storageSize")
     def storage_size(self) -> pulumi.Input[int]:
         """
-        Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        Volume of CBS, and unit is GB.
         """
         return pulumi.get(self, "storage_size")
 
@@ -93,7 +93,7 @@ class StorageSetArgs:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> pulumi.Input[str]:
         """
-        Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         """
         return pulumi.get(self, "storage_type")
 
@@ -201,9 +201,9 @@ class _StorageSetState:
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
         :param pulumi.Input[str] snapshot_id: ID of the snapshot. If specified, created the CBS by this snapshot.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
         :param pulumi.Input[str] storage_status: Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
         """
         if attached is not None:
@@ -345,7 +345,7 @@ class _StorageSetState:
     @pulumi.getter(name="storageSize")
     def storage_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        Volume of CBS, and unit is GB.
         """
         return pulumi.get(self, "storage_size")
 
@@ -369,7 +369,7 @@ class _StorageSetState:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         """
         return pulumi.get(self, "storage_type")
 
@@ -434,8 +434,8 @@ class StorageSet(pulumi.CustomResource):
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
         :param pulumi.Input[str] snapshot_id: ID of the snapshot. If specified, created the CBS by this snapshot.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
         """
         ...
@@ -562,9 +562,9 @@ class StorageSet(pulumi.CustomResource):
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
         :param pulumi.Input[str] snapshot_id: ID of the snapshot. If specified, created the CBS by this snapshot.
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
-        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
         :param pulumi.Input[str] storage_status: Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
-        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -662,7 +662,7 @@ class StorageSet(pulumi.CustomResource):
     @pulumi.getter(name="storageSize")
     def storage_size(self) -> pulumi.Output[int]:
         """
-        Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        Volume of CBS, and unit is GB.
         """
         return pulumi.get(self, "storage_size")
 
@@ -678,7 +678,7 @@ class StorageSet(pulumi.CustomResource):
     @pulumi.getter(name="storageType")
     def storage_type(self) -> pulumi.Output[str]:
         """
-        Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         """
         return pulumi.get(self, "storage_type")
 

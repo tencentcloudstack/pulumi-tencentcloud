@@ -24,7 +24,7 @@ type AttachmentTarget struct {
 // AttachmentTargetInput is an input type that accepts AttachmentTargetArgs and AttachmentTargetOutput values.
 // You can construct a concrete instance of `AttachmentTargetInput` via:
 //
-//	AttachmentTargetArgs{...}
+//          AttachmentTargetArgs{...}
 type AttachmentTargetInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i AttachmentTargetArgs) ToAttachmentTargetOutputWithContext(ctx context.Co
 // AttachmentTargetArrayInput is an input type that accepts AttachmentTargetArray and AttachmentTargetArrayOutput values.
 // You can construct a concrete instance of `AttachmentTargetArrayInput` via:
 //
-//	AttachmentTargetArray{ AttachmentTargetArgs{...} }
+//          AttachmentTargetArray{ AttachmentTargetArgs{...} }
 type AttachmentTargetArrayInput interface {
 	pulumi.Input
 
@@ -134,6 +134,358 @@ func (o AttachmentTargetArrayOutput) Index(i pulumi.IntInput) AttachmentTargetOu
 	}).(AttachmentTargetOutput)
 }
 
+type FunctionTargetsAttachmentFunctionTargets struct {
+	// Information about cloud functions.Note: This field may return null, indicating that no valid value can be obtained.
+	Function FunctionTargetsAttachmentFunctionTargetsFunction `pulumi:"function"`
+	// Weight. The default is `10`.
+	Weight *int `pulumi:"weight"`
+}
+
+// FunctionTargetsAttachmentFunctionTargetsInput is an input type that accepts FunctionTargetsAttachmentFunctionTargetsArgs and FunctionTargetsAttachmentFunctionTargetsOutput values.
+// You can construct a concrete instance of `FunctionTargetsAttachmentFunctionTargetsInput` via:
+//
+//          FunctionTargetsAttachmentFunctionTargetsArgs{...}
+type FunctionTargetsAttachmentFunctionTargetsInput interface {
+	pulumi.Input
+
+	ToFunctionTargetsAttachmentFunctionTargetsOutput() FunctionTargetsAttachmentFunctionTargetsOutput
+	ToFunctionTargetsAttachmentFunctionTargetsOutputWithContext(context.Context) FunctionTargetsAttachmentFunctionTargetsOutput
+}
+
+type FunctionTargetsAttachmentFunctionTargetsArgs struct {
+	// Information about cloud functions.Note: This field may return null, indicating that no valid value can be obtained.
+	Function FunctionTargetsAttachmentFunctionTargetsFunctionInput `pulumi:"function"`
+	// Weight. The default is `10`.
+	Weight pulumi.IntPtrInput `pulumi:"weight"`
+}
+
+func (FunctionTargetsAttachmentFunctionTargetsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargets)(nil)).Elem()
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsArgs) ToFunctionTargetsAttachmentFunctionTargetsOutput() FunctionTargetsAttachmentFunctionTargetsOutput {
+	return i.ToFunctionTargetsAttachmentFunctionTargetsOutputWithContext(context.Background())
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsArgs) ToFunctionTargetsAttachmentFunctionTargetsOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionTargetsAttachmentFunctionTargetsOutput)
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsArgs) ToFunctionTargetsAttachmentFunctionTargetsPtrOutput() FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return i.ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(context.Background())
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsArgs) ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionTargetsAttachmentFunctionTargetsOutput).ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(ctx)
+}
+
+// FunctionTargetsAttachmentFunctionTargetsPtrInput is an input type that accepts FunctionTargetsAttachmentFunctionTargetsArgs, FunctionTargetsAttachmentFunctionTargetsPtr and FunctionTargetsAttachmentFunctionTargetsPtrOutput values.
+// You can construct a concrete instance of `FunctionTargetsAttachmentFunctionTargetsPtrInput` via:
+//
+//          FunctionTargetsAttachmentFunctionTargetsArgs{...}
+//
+//  or:
+//
+//          nil
+type FunctionTargetsAttachmentFunctionTargetsPtrInput interface {
+	pulumi.Input
+
+	ToFunctionTargetsAttachmentFunctionTargetsPtrOutput() FunctionTargetsAttachmentFunctionTargetsPtrOutput
+	ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(context.Context) FunctionTargetsAttachmentFunctionTargetsPtrOutput
+}
+
+type functionTargetsAttachmentFunctionTargetsPtrType FunctionTargetsAttachmentFunctionTargetsArgs
+
+func FunctionTargetsAttachmentFunctionTargetsPtr(v *FunctionTargetsAttachmentFunctionTargetsArgs) FunctionTargetsAttachmentFunctionTargetsPtrInput {
+	return (*functionTargetsAttachmentFunctionTargetsPtrType)(v)
+}
+
+func (*functionTargetsAttachmentFunctionTargetsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionTargetsAttachmentFunctionTargets)(nil)).Elem()
+}
+
+func (i *functionTargetsAttachmentFunctionTargetsPtrType) ToFunctionTargetsAttachmentFunctionTargetsPtrOutput() FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return i.ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(context.Background())
+}
+
+func (i *functionTargetsAttachmentFunctionTargetsPtrType) ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionTargetsAttachmentFunctionTargetsPtrOutput)
+}
+
+type FunctionTargetsAttachmentFunctionTargetsOutput struct{ *pulumi.OutputState }
+
+func (FunctionTargetsAttachmentFunctionTargetsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargets)(nil)).Elem()
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsOutput) ToFunctionTargetsAttachmentFunctionTargetsOutput() FunctionTargetsAttachmentFunctionTargetsOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsOutput) ToFunctionTargetsAttachmentFunctionTargetsOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsOutput) ToFunctionTargetsAttachmentFunctionTargetsPtrOutput() FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return o.ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(context.Background())
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsOutput) ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FunctionTargetsAttachmentFunctionTargets) *FunctionTargetsAttachmentFunctionTargets {
+		return &v
+	}).(FunctionTargetsAttachmentFunctionTargetsPtrOutput)
+}
+
+// Information about cloud functions.Note: This field may return null, indicating that no valid value can be obtained.
+func (o FunctionTargetsAttachmentFunctionTargetsOutput) Function() FunctionTargetsAttachmentFunctionTargetsFunctionOutput {
+	return o.ApplyT(func(v FunctionTargetsAttachmentFunctionTargets) FunctionTargetsAttachmentFunctionTargetsFunction {
+		return v.Function
+	}).(FunctionTargetsAttachmentFunctionTargetsFunctionOutput)
+}
+
+// Weight. The default is `10`.
+func (o FunctionTargetsAttachmentFunctionTargetsOutput) Weight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v FunctionTargetsAttachmentFunctionTargets) *int { return v.Weight }).(pulumi.IntPtrOutput)
+}
+
+type FunctionTargetsAttachmentFunctionTargetsPtrOutput struct{ *pulumi.OutputState }
+
+func (FunctionTargetsAttachmentFunctionTargetsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionTargetsAttachmentFunctionTargets)(nil)).Elem()
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsPtrOutput) ToFunctionTargetsAttachmentFunctionTargetsPtrOutput() FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsPtrOutput) ToFunctionTargetsAttachmentFunctionTargetsPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsPtrOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsPtrOutput) Elem() FunctionTargetsAttachmentFunctionTargetsOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargets) FunctionTargetsAttachmentFunctionTargets {
+		if v != nil {
+			return *v
+		}
+		var ret FunctionTargetsAttachmentFunctionTargets
+		return ret
+	}).(FunctionTargetsAttachmentFunctionTargetsOutput)
+}
+
+// Information about cloud functions.Note: This field may return null, indicating that no valid value can be obtained.
+func (o FunctionTargetsAttachmentFunctionTargetsPtrOutput) Function() FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargets) *FunctionTargetsAttachmentFunctionTargetsFunction {
+		if v == nil {
+			return nil
+		}
+		return &v.Function
+	}).(FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput)
+}
+
+// Weight. The default is `10`.
+func (o FunctionTargetsAttachmentFunctionTargetsPtrOutput) Weight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargets) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Weight
+	}).(pulumi.IntPtrOutput)
+}
+
+type FunctionTargetsAttachmentFunctionTargetsFunction struct {
+	// The name of function.
+	FunctionName string `pulumi:"functionName"`
+	// The namespace of function.
+	FunctionNamespace string `pulumi:"functionNamespace"`
+	// The version name or alias of the function.
+	FunctionQualifier string `pulumi:"functionQualifier"`
+	// Identifies the type of FunctionQualifier parameter, possible values: VERSION, ALIAS.Note: This field may return null, indicating that no valid value can be obtained.
+	FunctionQualifierType *string `pulumi:"functionQualifierType"`
+}
+
+// FunctionTargetsAttachmentFunctionTargetsFunctionInput is an input type that accepts FunctionTargetsAttachmentFunctionTargetsFunctionArgs and FunctionTargetsAttachmentFunctionTargetsFunctionOutput values.
+// You can construct a concrete instance of `FunctionTargetsAttachmentFunctionTargetsFunctionInput` via:
+//
+//          FunctionTargetsAttachmentFunctionTargetsFunctionArgs{...}
+type FunctionTargetsAttachmentFunctionTargetsFunctionInput interface {
+	pulumi.Input
+
+	ToFunctionTargetsAttachmentFunctionTargetsFunctionOutput() FunctionTargetsAttachmentFunctionTargetsFunctionOutput
+	ToFunctionTargetsAttachmentFunctionTargetsFunctionOutputWithContext(context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionOutput
+}
+
+type FunctionTargetsAttachmentFunctionTargetsFunctionArgs struct {
+	// The name of function.
+	FunctionName pulumi.StringInput `pulumi:"functionName"`
+	// The namespace of function.
+	FunctionNamespace pulumi.StringInput `pulumi:"functionNamespace"`
+	// The version name or alias of the function.
+	FunctionQualifier pulumi.StringInput `pulumi:"functionQualifier"`
+	// Identifies the type of FunctionQualifier parameter, possible values: VERSION, ALIAS.Note: This field may return null, indicating that no valid value can be obtained.
+	FunctionQualifierType pulumi.StringPtrInput `pulumi:"functionQualifierType"`
+}
+
+func (FunctionTargetsAttachmentFunctionTargetsFunctionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunction)(nil)).Elem()
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsFunctionArgs) ToFunctionTargetsAttachmentFunctionTargetsFunctionOutput() FunctionTargetsAttachmentFunctionTargetsFunctionOutput {
+	return i.ToFunctionTargetsAttachmentFunctionTargetsFunctionOutputWithContext(context.Background())
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsFunctionArgs) ToFunctionTargetsAttachmentFunctionTargetsFunctionOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionTargetsAttachmentFunctionTargetsFunctionOutput)
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsFunctionArgs) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput() FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return i.ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(context.Background())
+}
+
+func (i FunctionTargetsAttachmentFunctionTargetsFunctionArgs) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionTargetsAttachmentFunctionTargetsFunctionOutput).ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(ctx)
+}
+
+// FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput is an input type that accepts FunctionTargetsAttachmentFunctionTargetsFunctionArgs, FunctionTargetsAttachmentFunctionTargetsFunctionPtr and FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput values.
+// You can construct a concrete instance of `FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput` via:
+//
+//          FunctionTargetsAttachmentFunctionTargetsFunctionArgs{...}
+//
+//  or:
+//
+//          nil
+type FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput interface {
+	pulumi.Input
+
+	ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput() FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput
+	ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput
+}
+
+type functionTargetsAttachmentFunctionTargetsFunctionPtrType FunctionTargetsAttachmentFunctionTargetsFunctionArgs
+
+func FunctionTargetsAttachmentFunctionTargetsFunctionPtr(v *FunctionTargetsAttachmentFunctionTargetsFunctionArgs) FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput {
+	return (*functionTargetsAttachmentFunctionTargetsFunctionPtrType)(v)
+}
+
+func (*functionTargetsAttachmentFunctionTargetsFunctionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionTargetsAttachmentFunctionTargetsFunction)(nil)).Elem()
+}
+
+func (i *functionTargetsAttachmentFunctionTargetsFunctionPtrType) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput() FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return i.ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(context.Background())
+}
+
+func (i *functionTargetsAttachmentFunctionTargetsFunctionPtrType) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput)
+}
+
+type FunctionTargetsAttachmentFunctionTargetsFunctionOutput struct{ *pulumi.OutputState }
+
+func (FunctionTargetsAttachmentFunctionTargetsFunctionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunction)(nil)).Elem()
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) ToFunctionTargetsAttachmentFunctionTargetsFunctionOutput() FunctionTargetsAttachmentFunctionTargetsFunctionOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) ToFunctionTargetsAttachmentFunctionTargetsFunctionOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput() FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return o.ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(context.Background())
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FunctionTargetsAttachmentFunctionTargetsFunction) *FunctionTargetsAttachmentFunctionTargetsFunction {
+		return &v
+	}).(FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput)
+}
+
+// The name of function.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) FunctionName() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionTargetsAttachmentFunctionTargetsFunction) string { return v.FunctionName }).(pulumi.StringOutput)
+}
+
+// The namespace of function.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) FunctionNamespace() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionTargetsAttachmentFunctionTargetsFunction) string { return v.FunctionNamespace }).(pulumi.StringOutput)
+}
+
+// The version name or alias of the function.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) FunctionQualifier() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionTargetsAttachmentFunctionTargetsFunction) string { return v.FunctionQualifier }).(pulumi.StringOutput)
+}
+
+// Identifies the type of FunctionQualifier parameter, possible values: VERSION, ALIAS.Note: This field may return null, indicating that no valid value can be obtained.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionOutput) FunctionQualifierType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionTargetsAttachmentFunctionTargetsFunction) *string { return v.FunctionQualifierType }).(pulumi.StringPtrOutput)
+}
+
+type FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput struct{ *pulumi.OutputState }
+
+func (FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionTargetsAttachmentFunctionTargetsFunction)(nil)).Elem()
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput() FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) ToFunctionTargetsAttachmentFunctionTargetsFunctionPtrOutputWithContext(ctx context.Context) FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput {
+	return o
+}
+
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) Elem() FunctionTargetsAttachmentFunctionTargetsFunctionOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargetsFunction) FunctionTargetsAttachmentFunctionTargetsFunction {
+		if v != nil {
+			return *v
+		}
+		var ret FunctionTargetsAttachmentFunctionTargetsFunction
+		return ret
+	}).(FunctionTargetsAttachmentFunctionTargetsFunctionOutput)
+}
+
+// The name of function.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) FunctionName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargetsFunction) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FunctionName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The namespace of function.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) FunctionNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargetsFunction) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FunctionNamespace
+	}).(pulumi.StringPtrOutput)
+}
+
+// The version name or alias of the function.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) FunctionQualifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargetsFunction) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FunctionQualifier
+	}).(pulumi.StringPtrOutput)
+}
+
+// Identifies the type of FunctionQualifier parameter, possible values: VERSION, ALIAS.Note: This field may return null, indicating that no valid value can be obtained.
+func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) FunctionQualifierType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionTargetsAttachmentFunctionTargetsFunction) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FunctionQualifierType
+	}).(pulumi.StringPtrOutput)
+}
+
 type InstanceSnatIp struct {
 	// Snat IP address, If set to empty will auto allocated.
 	Ip *string `pulumi:"ip"`
@@ -144,7 +496,7 @@ type InstanceSnatIp struct {
 // InstanceSnatIpInput is an input type that accepts InstanceSnatIpArgs and InstanceSnatIpOutput values.
 // You can construct a concrete instance of `InstanceSnatIpInput` via:
 //
-//	InstanceSnatIpArgs{...}
+//          InstanceSnatIpArgs{...}
 type InstanceSnatIpInput interface {
 	pulumi.Input
 
@@ -174,7 +526,7 @@ func (i InstanceSnatIpArgs) ToInstanceSnatIpOutputWithContext(ctx context.Contex
 // InstanceSnatIpArrayInput is an input type that accepts InstanceSnatIpArray and InstanceSnatIpArrayOutput values.
 // You can construct a concrete instance of `InstanceSnatIpArrayInput` via:
 //
-//	InstanceSnatIpArray{ InstanceSnatIpArgs{...} }
+//          InstanceSnatIpArray{ InstanceSnatIpArgs{...} }
 type InstanceSnatIpArrayInput interface {
 	pulumi.Input
 
@@ -250,7 +602,7 @@ type SnatIpIp struct {
 // SnatIpIpInput is an input type that accepts SnatIpIpArgs and SnatIpIpOutput values.
 // You can construct a concrete instance of `SnatIpIpInput` via:
 //
-//	SnatIpIpArgs{...}
+//          SnatIpIpArgs{...}
 type SnatIpIpInput interface {
 	pulumi.Input
 
@@ -280,7 +632,7 @@ func (i SnatIpIpArgs) ToSnatIpIpOutputWithContext(ctx context.Context) SnatIpIpO
 // SnatIpIpArrayInput is an input type that accepts SnatIpIpArray and SnatIpIpArrayOutput values.
 // You can construct a concrete instance of `SnatIpIpArrayInput` via:
 //
-//	SnatIpIpArray{ SnatIpIpArgs{...} }
+//          SnatIpIpArray{ SnatIpIpArgs{...} }
 type SnatIpIpArrayInput interface {
 	pulumi.Input
 
@@ -360,7 +712,7 @@ type TargetGroupTargetGroupInstance struct {
 // TargetGroupTargetGroupInstanceInput is an input type that accepts TargetGroupTargetGroupInstanceArgs and TargetGroupTargetGroupInstanceOutput values.
 // You can construct a concrete instance of `TargetGroupTargetGroupInstanceInput` via:
 //
-//	TargetGroupTargetGroupInstanceArgs{...}
+//          TargetGroupTargetGroupInstanceArgs{...}
 type TargetGroupTargetGroupInstanceInput interface {
 	pulumi.Input
 
@@ -394,7 +746,7 @@ func (i TargetGroupTargetGroupInstanceArgs) ToTargetGroupTargetGroupInstanceOutp
 // TargetGroupTargetGroupInstanceArrayInput is an input type that accepts TargetGroupTargetGroupInstanceArray and TargetGroupTargetGroupInstanceArrayOutput values.
 // You can construct a concrete instance of `TargetGroupTargetGroupInstanceArrayInput` via:
 //
-//	TargetGroupTargetGroupInstanceArray{ TargetGroupTargetGroupInstanceArgs{...} }
+//          TargetGroupTargetGroupInstanceArray{ TargetGroupTargetGroupInstanceArgs{...} }
 type TargetGroupTargetGroupInstanceArrayInput interface {
 	pulumi.Input
 
@@ -486,7 +838,7 @@ type GetAttachmentsAttachmentList struct {
 // GetAttachmentsAttachmentListInput is an input type that accepts GetAttachmentsAttachmentListArgs and GetAttachmentsAttachmentListOutput values.
 // You can construct a concrete instance of `GetAttachmentsAttachmentListInput` via:
 //
-//	GetAttachmentsAttachmentListArgs{...}
+//          GetAttachmentsAttachmentListArgs{...}
 type GetAttachmentsAttachmentListInput interface {
 	pulumi.Input
 
@@ -522,7 +874,7 @@ func (i GetAttachmentsAttachmentListArgs) ToGetAttachmentsAttachmentListOutputWi
 // GetAttachmentsAttachmentListArrayInput is an input type that accepts GetAttachmentsAttachmentListArray and GetAttachmentsAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetAttachmentsAttachmentListArrayInput` via:
 //
-//	GetAttachmentsAttachmentListArray{ GetAttachmentsAttachmentListArgs{...} }
+//          GetAttachmentsAttachmentListArray{ GetAttachmentsAttachmentListArgs{...} }
 type GetAttachmentsAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -615,7 +967,7 @@ type GetAttachmentsAttachmentListTarget struct {
 // GetAttachmentsAttachmentListTargetInput is an input type that accepts GetAttachmentsAttachmentListTargetArgs and GetAttachmentsAttachmentListTargetOutput values.
 // You can construct a concrete instance of `GetAttachmentsAttachmentListTargetInput` via:
 //
-//	GetAttachmentsAttachmentListTargetArgs{...}
+//          GetAttachmentsAttachmentListTargetArgs{...}
 type GetAttachmentsAttachmentListTargetInput interface {
 	pulumi.Input
 
@@ -647,7 +999,7 @@ func (i GetAttachmentsAttachmentListTargetArgs) ToGetAttachmentsAttachmentListTa
 // GetAttachmentsAttachmentListTargetArrayInput is an input type that accepts GetAttachmentsAttachmentListTargetArray and GetAttachmentsAttachmentListTargetArrayOutput values.
 // You can construct a concrete instance of `GetAttachmentsAttachmentListTargetArrayInput` via:
 //
-//	GetAttachmentsAttachmentListTargetArray{ GetAttachmentsAttachmentListTargetArgs{...} }
+//          GetAttachmentsAttachmentListTargetArray{ GetAttachmentsAttachmentListTargetArgs{...} }
 type GetAttachmentsAttachmentListTargetArrayInput interface {
 	pulumi.Input
 
@@ -770,7 +1122,7 @@ type GetInstancesClbList struct {
 // GetInstancesClbListInput is an input type that accepts GetInstancesClbListArgs and GetInstancesClbListOutput values.
 // You can construct a concrete instance of `GetInstancesClbListInput` via:
 //
-//	GetInstancesClbListArgs{...}
+//          GetInstancesClbListArgs{...}
 type GetInstancesClbListInput interface {
 	pulumi.Input
 
@@ -842,7 +1194,7 @@ func (i GetInstancesClbListArgs) ToGetInstancesClbListOutputWithContext(ctx cont
 // GetInstancesClbListArrayInput is an input type that accepts GetInstancesClbListArray and GetInstancesClbListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesClbListArrayInput` via:
 //
-//	GetInstancesClbListArray{ GetInstancesClbListArgs{...} }
+//          GetInstancesClbListArray{ GetInstancesClbListArgs{...} }
 type GetInstancesClbListArrayInput interface {
 	pulumi.Input
 
@@ -1057,7 +1409,7 @@ type GetListenerRulesRuleList struct {
 // GetListenerRulesRuleListInput is an input type that accepts GetListenerRulesRuleListArgs and GetListenerRulesRuleListOutput values.
 // You can construct a concrete instance of `GetListenerRulesRuleListInput` via:
 //
-//	GetListenerRulesRuleListArgs{...}
+//          GetListenerRulesRuleListArgs{...}
 type GetListenerRulesRuleListInput interface {
 	pulumi.Input
 
@@ -1121,7 +1473,7 @@ func (i GetListenerRulesRuleListArgs) ToGetListenerRulesRuleListOutputWithContex
 // GetListenerRulesRuleListArrayInput is an input type that accepts GetListenerRulesRuleListArray and GetListenerRulesRuleListArrayOutput values.
 // You can construct a concrete instance of `GetListenerRulesRuleListArrayInput` via:
 //
-//	GetListenerRulesRuleListArray{ GetListenerRulesRuleListArgs{...} }
+//          GetListenerRulesRuleListArray{ GetListenerRulesRuleListArgs{...} }
 type GetListenerRulesRuleListArrayInput interface {
 	pulumi.Input
 
@@ -1330,7 +1682,7 @@ type GetListenersListenerList struct {
 // GetListenersListenerListInput is an input type that accepts GetListenersListenerListArgs and GetListenersListenerListOutput values.
 // You can construct a concrete instance of `GetListenersListenerListInput` via:
 //
-//	GetListenersListenerListArgs{...}
+//          GetListenersListenerListArgs{...}
 type GetListenersListenerListInput interface {
 	pulumi.Input
 
@@ -1408,7 +1760,7 @@ func (i GetListenersListenerListArgs) ToGetListenersListenerListOutputWithContex
 // GetListenersListenerListArrayInput is an input type that accepts GetListenersListenerListArray and GetListenersListenerListArrayOutput values.
 // You can construct a concrete instance of `GetListenersListenerListArrayInput` via:
 //
-//	GetListenersListenerListArray{ GetListenersListenerListArgs{...} }
+//          GetListenersListenerListArray{ GetListenersListenerListArgs{...} }
 type GetListenersListenerListArrayInput interface {
 	pulumi.Input
 
@@ -1610,7 +1962,7 @@ type GetRedirectionsRedirectionList struct {
 // GetRedirectionsRedirectionListInput is an input type that accepts GetRedirectionsRedirectionListArgs and GetRedirectionsRedirectionListOutput values.
 // You can construct a concrete instance of `GetRedirectionsRedirectionListInput` via:
 //
-//	GetRedirectionsRedirectionListArgs{...}
+//          GetRedirectionsRedirectionListArgs{...}
 type GetRedirectionsRedirectionListInput interface {
 	pulumi.Input
 
@@ -1646,7 +1998,7 @@ func (i GetRedirectionsRedirectionListArgs) ToGetRedirectionsRedirectionListOutp
 // GetRedirectionsRedirectionListArrayInput is an input type that accepts GetRedirectionsRedirectionListArray and GetRedirectionsRedirectionListArrayOutput values.
 // You can construct a concrete instance of `GetRedirectionsRedirectionListArrayInput` via:
 //
-//	GetRedirectionsRedirectionListArray{ GetRedirectionsRedirectionListArgs{...} }
+//          GetRedirectionsRedirectionListArray{ GetRedirectionsRedirectionListArgs{...} }
 type GetRedirectionsRedirectionListArrayInput interface {
 	pulumi.Input
 
@@ -1749,7 +2101,7 @@ type GetTargetGroupsList struct {
 // GetTargetGroupsListInput is an input type that accepts GetTargetGroupsListArgs and GetTargetGroupsListOutput values.
 // You can construct a concrete instance of `GetTargetGroupsListInput` via:
 //
-//	GetTargetGroupsListArgs{...}
+//          GetTargetGroupsListArgs{...}
 type GetTargetGroupsListInput interface {
 	pulumi.Input
 
@@ -1791,7 +2143,7 @@ func (i GetTargetGroupsListArgs) ToGetTargetGroupsListOutputWithContext(ctx cont
 // GetTargetGroupsListArrayInput is an input type that accepts GetTargetGroupsListArray and GetTargetGroupsListArrayOutput values.
 // You can construct a concrete instance of `GetTargetGroupsListArrayInput` via:
 //
-//	GetTargetGroupsListArray{ GetTargetGroupsListArgs{...} }
+//          GetTargetGroupsListArray{ GetTargetGroupsListArgs{...} }
 type GetTargetGroupsListArrayInput interface {
 	pulumi.Input
 
@@ -1913,7 +2265,7 @@ type GetTargetGroupsListAssociatedRuleList struct {
 // GetTargetGroupsListAssociatedRuleListInput is an input type that accepts GetTargetGroupsListAssociatedRuleListArgs and GetTargetGroupsListAssociatedRuleListOutput values.
 // You can construct a concrete instance of `GetTargetGroupsListAssociatedRuleListInput` via:
 //
-//	GetTargetGroupsListAssociatedRuleListArgs{...}
+//          GetTargetGroupsListAssociatedRuleListArgs{...}
 type GetTargetGroupsListAssociatedRuleListInput interface {
 	pulumi.Input
 
@@ -1957,7 +2309,7 @@ func (i GetTargetGroupsListAssociatedRuleListArgs) ToGetTargetGroupsListAssociat
 // GetTargetGroupsListAssociatedRuleListArrayInput is an input type that accepts GetTargetGroupsListAssociatedRuleListArray and GetTargetGroupsListAssociatedRuleListArrayOutput values.
 // You can construct a concrete instance of `GetTargetGroupsListAssociatedRuleListArrayInput` via:
 //
-//	GetTargetGroupsListAssociatedRuleListArray{ GetTargetGroupsListAssociatedRuleListArgs{...} }
+//          GetTargetGroupsListAssociatedRuleListArray{ GetTargetGroupsListAssociatedRuleListArgs{...} }
 type GetTargetGroupsListAssociatedRuleListArrayInput interface {
 	pulumi.Input
 
@@ -2082,7 +2434,7 @@ type GetTargetGroupsListTargetGroupInstanceList struct {
 // GetTargetGroupsListTargetGroupInstanceListInput is an input type that accepts GetTargetGroupsListTargetGroupInstanceListArgs and GetTargetGroupsListTargetGroupInstanceListOutput values.
 // You can construct a concrete instance of `GetTargetGroupsListTargetGroupInstanceListInput` via:
 //
-//	GetTargetGroupsListTargetGroupInstanceListArgs{...}
+//          GetTargetGroupsListTargetGroupInstanceListArgs{...}
 type GetTargetGroupsListTargetGroupInstanceListInput interface {
 	pulumi.Input
 
@@ -2126,7 +2478,7 @@ func (i GetTargetGroupsListTargetGroupInstanceListArgs) ToGetTargetGroupsListTar
 // GetTargetGroupsListTargetGroupInstanceListArrayInput is an input type that accepts GetTargetGroupsListTargetGroupInstanceListArray and GetTargetGroupsListTargetGroupInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetTargetGroupsListTargetGroupInstanceListArrayInput` via:
 //
-//	GetTargetGroupsListTargetGroupInstanceListArray{ GetTargetGroupsListTargetGroupInstanceListArgs{...} }
+//          GetTargetGroupsListTargetGroupInstanceListArray{ GetTargetGroupsListTargetGroupInstanceListArgs{...} }
 type GetTargetGroupsListTargetGroupInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -2230,6 +2582,10 @@ func (o GetTargetGroupsListTargetGroupInstanceListArrayOutput) Index(i pulumi.In
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachmentTargetInput)(nil)).Elem(), AttachmentTargetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachmentTargetArrayInput)(nil)).Elem(), AttachmentTargetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsPtrInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunctionInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsFunctionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsFunctionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpInput)(nil)).Elem(), InstanceSnatIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpArrayInput)(nil)).Elem(), InstanceSnatIpArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnatIpIpInput)(nil)).Elem(), SnatIpIpArgs{})
@@ -2256,6 +2612,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupsListTargetGroupInstanceListArrayInput)(nil)).Elem(), GetTargetGroupsListTargetGroupInstanceListArray{})
 	pulumi.RegisterOutputType(AttachmentTargetOutput{})
 	pulumi.RegisterOutputType(AttachmentTargetArrayOutput{})
+	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsOutput{})
+	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsPtrOutput{})
+	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsFunctionOutput{})
+	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpArrayOutput{})
 	pulumi.RegisterOutputType(SnatIpIpOutput{})

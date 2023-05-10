@@ -19,39 +19,36 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
-//				CleanUpPolicy:   pulumi.String("delete"),
-//				EnableWhiteList: pulumi.Bool(true),
-//				InstanceId:      pulumi.String("ckafka-f9ife4zz"),
-//				IpWhiteLists: pulumi.StringArray{
-//					pulumi.String("ip1"),
-//					pulumi.String("ip2"),
-//				},
-//				MaxMessageBytes:             pulumi.Int(0),
-//				Note:                        pulumi.String("topic note"),
-//				PartitionNum:                pulumi.Int(1),
-//				ReplicaNum:                  pulumi.Int(2),
-//				Retention:                   pulumi.Int(60000),
-//				Segment:                     pulumi.Int(3600000),
-//				SyncReplicaMinNum:           pulumi.Int(1),
-//				TopicName:                   pulumi.String("example"),
-//				UncleanLeaderElectionEnable: pulumi.Bool(false),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
+// 			CleanUpPolicy:   pulumi.String("delete"),
+// 			EnableWhiteList: pulumi.Bool(true),
+// 			InstanceId:      pulumi.String("ckafka-f9ife4zz"),
+// 			IpWhiteLists: pulumi.StringArray{
+// 				pulumi.String("ip1"),
+// 				pulumi.String("ip2"),
+// 			},
+// 			MaxMessageBytes:             pulumi.Int(0),
+// 			Note:                        pulumi.String("topic note"),
+// 			PartitionNum:                pulumi.Int(1),
+// 			ReplicaNum:                  pulumi.Int(2),
+// 			Retention:                   pulumi.Int(60000),
+// 			Segment:                     pulumi.Int(3600000),
+// 			SyncReplicaMinNum:           pulumi.Int(1),
+// 			TopicName:                   pulumi.String("example"),
+// 			UncleanLeaderElectionEnable: pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -59,9 +56,7 @@ import (
 // ckafka topic can be imported using the instance_id#topic_name, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
-//
+//  $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
 // ```
 type Topic struct {
 	pulumi.CustomResourceState
@@ -82,8 +77,8 @@ type Topic struct {
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Ip whitelist, quota limit, required when enableWhileList=true.
 	IpWhiteLists pulumi.StringArrayOutput `pulumi:"ipWhiteLists"`
-	// Max message bytes.
-	MaxMessageBytes pulumi.IntPtrOutput `pulumi:"maxMessageBytes"`
+	// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
+	MaxMessageBytes pulumi.IntOutput `pulumi:"maxMessageBytes"`
 	// Message storage location.
 	MessageStorageLocation pulumi.StringOutput `pulumi:"messageStorageLocation"`
 	// The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
@@ -164,7 +159,7 @@ type topicState struct {
 	InstanceId *string `pulumi:"instanceId"`
 	// Ip whitelist, quota limit, required when enableWhileList=true.
 	IpWhiteLists []string `pulumi:"ipWhiteLists"`
-	// Max message bytes.
+	// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
 	MaxMessageBytes *int `pulumi:"maxMessageBytes"`
 	// Message storage location.
 	MessageStorageLocation *string `pulumi:"messageStorageLocation"`
@@ -205,7 +200,7 @@ type TopicState struct {
 	InstanceId pulumi.StringPtrInput
 	// Ip whitelist, quota limit, required when enableWhileList=true.
 	IpWhiteLists pulumi.StringArrayInput
-	// Max message bytes.
+	// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
 	MaxMessageBytes pulumi.IntPtrInput
 	// Message storage location.
 	MessageStorageLocation pulumi.StringPtrInput
@@ -242,7 +237,7 @@ type topicArgs struct {
 	InstanceId string `pulumi:"instanceId"`
 	// Ip whitelist, quota limit, required when enableWhileList=true.
 	IpWhiteLists []string `pulumi:"ipWhiteLists"`
-	// Max message bytes.
+	// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
 	MaxMessageBytes *int `pulumi:"maxMessageBytes"`
 	// The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
 	Note *string `pulumi:"note"`
@@ -272,7 +267,7 @@ type TopicArgs struct {
 	InstanceId pulumi.StringInput
 	// Ip whitelist, quota limit, required when enableWhileList=true.
 	IpWhiteLists pulumi.StringArrayInput
-	// Max message bytes.
+	// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
 	MaxMessageBytes pulumi.IntPtrInput
 	// The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
 	Note pulumi.StringPtrInput
@@ -318,7 +313,7 @@ func (i *Topic) ToTopicOutputWithContext(ctx context.Context) TopicOutput {
 // TopicArrayInput is an input type that accepts TopicArray and TopicArrayOutput values.
 // You can construct a concrete instance of `TopicArrayInput` via:
 //
-//	TopicArray{ TopicArgs{...} }
+//          TopicArray{ TopicArgs{...} }
 type TopicArrayInput interface {
 	pulumi.Input
 
@@ -343,7 +338,7 @@ func (i TopicArray) ToTopicArrayOutputWithContext(ctx context.Context) TopicArra
 // TopicMapInput is an input type that accepts TopicMap and TopicMapOutput values.
 // You can construct a concrete instance of `TopicMapInput` via:
 //
-//	TopicMap{ "key": TopicArgs{...} }
+//          TopicMap{ "key": TopicArgs{...} }
 type TopicMapInput interface {
 	pulumi.Input
 
@@ -419,9 +414,9 @@ func (o TopicOutput) IpWhiteLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringArrayOutput { return v.IpWhiteLists }).(pulumi.StringArrayOutput)
 }
 
-// Max message bytes.
-func (o TopicOutput) MaxMessageBytes() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Topic) pulumi.IntPtrOutput { return v.MaxMessageBytes }).(pulumi.IntPtrOutput)
+// Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
+func (o TopicOutput) MaxMessageBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.MaxMessageBytes }).(pulumi.IntOutput)
 }
 
 // Message storage location.

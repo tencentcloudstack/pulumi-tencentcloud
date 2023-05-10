@@ -79,7 +79,7 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
-     * List of Assistant CIDR.
+     * List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
      */
     public readonly assistantCidrs!: pulumi.Output<string[]>;
     /**
@@ -98,6 +98,10 @@ export class Instance extends pulumi.CustomResource {
      * The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
      */
     public readonly dnsServers!: pulumi.Output<string[]>;
+    /**
+     * List of Docker Assistant CIDR.
+     */
+    public /*out*/ readonly dockerAssistantCidrs!: pulumi.Output<string[]>;
     /**
      * Indicates whether it is the default VPC for this region.
      */
@@ -133,6 +137,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["defaultRouteTableId"] = state ? state.defaultRouteTableId : undefined;
             resourceInputs["dnsServers"] = state ? state.dnsServers : undefined;
+            resourceInputs["dockerAssistantCidrs"] = state ? state.dockerAssistantCidrs : undefined;
             resourceInputs["isDefault"] = state ? state.isDefault : undefined;
             resourceInputs["isMulticast"] = state ? state.isMulticast : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -150,6 +155,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["defaultRouteTableId"] = undefined /*out*/;
+            resourceInputs["dockerAssistantCidrs"] = undefined /*out*/;
             resourceInputs["isDefault"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -162,7 +168,7 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
-     * List of Assistant CIDR.
+     * List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
      */
     assistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -181,6 +187,10 @@ export interface InstanceState {
      * The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
      */
     dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of Docker Assistant CIDR.
+     */
+    dockerAssistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Indicates whether it is the default VPC for this region.
      */
@@ -204,7 +214,7 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * List of Assistant CIDR.
+     * List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
      */
     assistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**

@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
     public sealed class ClusterEventPersistence
     {
         /// <summary>
+        /// when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
+        /// </summary>
+        public readonly bool? DeleteEventLogAndTopic;
+        /// <summary>
         /// Specify weather the Event Persistence enabled.
         /// </summary>
         public readonly bool Enabled;
@@ -29,12 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
         [OutputConstructor]
         private ClusterEventPersistence(
+            bool? deleteEventLogAndTopic,
+
             bool enabled,
 
             string? logSetId,
 
             string? topicId)
         {
+            DeleteEventLogAndTopic = deleteEventLogAndTopic;
             Enabled = enabled;
             LogSetId = logSetId;
             TopicId = topicId;

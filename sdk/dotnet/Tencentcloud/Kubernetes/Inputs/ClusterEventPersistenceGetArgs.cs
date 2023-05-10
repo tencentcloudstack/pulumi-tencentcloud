@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
     public sealed class ClusterEventPersistenceGetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
+        /// </summary>
+        [Input("deleteEventLogAndTopic")]
+        public Input<bool>? DeleteEventLogAndTopic { get; set; }
+
+        /// <summary>
         /// Specify weather the Event Persistence enabled.
         /// </summary>
         [Input("enabled", required: true)]

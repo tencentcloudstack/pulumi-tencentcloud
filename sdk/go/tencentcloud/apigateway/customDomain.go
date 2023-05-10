@@ -19,33 +19,30 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
-//				DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
-//				IsDefaultMapping: pulumi.Bool(false),
-//				NetType:          pulumi.String("OUTER"),
-//				PathMappings: pulumi.StringArray{
-//					pulumi.String("/good#test"),
-//					pulumi.String("/root#release"),
-//				},
-//				Protocol:  pulumi.String("http"),
-//				ServiceId: pulumi.String("service-ohxqslqe"),
-//				SubDomain: pulumi.String("tic-test.dnsv1.com"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
+// 			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
+// 			IsDefaultMapping: pulumi.Bool(false),
+// 			NetType:          pulumi.String("OUTER"),
+// 			PathMappings: pulumi.StringArray{
+// 				pulumi.String("/good#test"),
+// 				pulumi.String("/root#release"),
+// 			},
+// 			Protocol:  pulumi.String("http"),
+// 			ServiceId: pulumi.String("service-ohxqslqe"),
+// 			SubDomain: pulumi.String("tic-test.dnsv1.com"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type CustomDomain struct {
 	pulumi.CustomResourceState
@@ -56,6 +53,8 @@ type CustomDomain struct {
 	DefaultDomain pulumi.StringOutput `pulumi:"defaultDomain"`
 	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping pulumi.BoolPtrOutput `pulumi:"isDefaultMapping"`
+	// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+	IsForcedHttps pulumi.BoolPtrOutput `pulumi:"isForcedHttps"`
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType pulumi.StringOutput `pulumi:"netType"`
 	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
@@ -121,6 +120,8 @@ type customDomainState struct {
 	DefaultDomain *string `pulumi:"defaultDomain"`
 	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping *bool `pulumi:"isDefaultMapping"`
+	// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+	IsForcedHttps *bool `pulumi:"isForcedHttps"`
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType *string `pulumi:"netType"`
 	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
@@ -142,6 +143,8 @@ type CustomDomainState struct {
 	DefaultDomain pulumi.StringPtrInput
 	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping pulumi.BoolPtrInput
+	// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+	IsForcedHttps pulumi.BoolPtrInput
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType pulumi.StringPtrInput
 	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
@@ -167,6 +170,8 @@ type customDomainArgs struct {
 	DefaultDomain string `pulumi:"defaultDomain"`
 	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping *bool `pulumi:"isDefaultMapping"`
+	// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+	IsForcedHttps *bool `pulumi:"isForcedHttps"`
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType string `pulumi:"netType"`
 	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
@@ -187,6 +192,8 @@ type CustomDomainArgs struct {
 	DefaultDomain pulumi.StringInput
 	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping pulumi.BoolPtrInput
+	// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+	IsForcedHttps pulumi.BoolPtrInput
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType pulumi.StringInput
 	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
@@ -225,7 +232,7 @@ func (i *CustomDomain) ToCustomDomainOutputWithContext(ctx context.Context) Cust
 // CustomDomainArrayInput is an input type that accepts CustomDomainArray and CustomDomainArrayOutput values.
 // You can construct a concrete instance of `CustomDomainArrayInput` via:
 //
-//	CustomDomainArray{ CustomDomainArgs{...} }
+//          CustomDomainArray{ CustomDomainArgs{...} }
 type CustomDomainArrayInput interface {
 	pulumi.Input
 
@@ -250,7 +257,7 @@ func (i CustomDomainArray) ToCustomDomainArrayOutputWithContext(ctx context.Cont
 // CustomDomainMapInput is an input type that accepts CustomDomainMap and CustomDomainMapOutput values.
 // You can construct a concrete instance of `CustomDomainMapInput` via:
 //
-//	CustomDomainMap{ "key": CustomDomainArgs{...} }
+//          CustomDomainMap{ "key": CustomDomainArgs{...} }
 type CustomDomainMapInput interface {
 	pulumi.Input
 
@@ -299,6 +306,11 @@ func (o CustomDomainOutput) DefaultDomain() pulumi.StringOutput {
 // Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 func (o CustomDomainOutput) IsDefaultMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.BoolPtrOutput { return v.IsDefaultMapping }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
+func (o CustomDomainOutput) IsForcedHttps() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CustomDomain) pulumi.BoolPtrOutput { return v.IsForcedHttps }).(pulumi.BoolPtrOutput)
 }
 
 // Network type. Valid values: `OUTER`, `INNER`.

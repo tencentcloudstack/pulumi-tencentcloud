@@ -74,7 +74,7 @@ type Set struct {
 	SystemDiskId pulumi.StringOutput `pulumi:"systemDiskId"`
 	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrOutput `pulumi:"systemDiskSize"`
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType pulumi.StringPtrOutput `pulumi:"systemDiskType"`
 	// The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
 	UserData pulumi.StringPtrOutput `pulumi:"userData"`
@@ -180,7 +180,7 @@ type setState struct {
 	SystemDiskId *string `pulumi:"systemDiskId"`
 	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType *string `pulumi:"systemDiskType"`
 	// The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
 	UserData *string `pulumi:"userData"`
@@ -251,7 +251,7 @@ type SetState struct {
 	SystemDiskId pulumi.StringPtrInput
 	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrInput
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType pulumi.StringPtrInput
 	// The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
 	UserData pulumi.StringPtrInput
@@ -316,7 +316,7 @@ type setArgs struct {
 	SystemDiskId *string `pulumi:"systemDiskId"`
 	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType *string `pulumi:"systemDiskType"`
 	// The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
 	UserData *string `pulumi:"userData"`
@@ -378,7 +378,7 @@ type SetArgs struct {
 	SystemDiskId pulumi.StringPtrInput
 	// Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrInput
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 	SystemDiskType pulumi.StringPtrInput
 	// The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
 	UserData pulumi.StringPtrInput
@@ -414,7 +414,7 @@ func (i *Set) ToSetOutputWithContext(ctx context.Context) SetOutput {
 // SetArrayInput is an input type that accepts SetArray and SetArrayOutput values.
 // You can construct a concrete instance of `SetArrayInput` via:
 //
-//	SetArray{ SetArgs{...} }
+//          SetArray{ SetArgs{...} }
 type SetArrayInput interface {
 	pulumi.Input
 
@@ -439,7 +439,7 @@ func (i SetArray) ToSetArrayOutputWithContext(ctx context.Context) SetArrayOutpu
 // SetMapInput is an input type that accepts SetMap and SetMapOutput values.
 // You can construct a concrete instance of `SetMapInput` via:
 //
-//	SetMap{ "key": SetArgs{...} }
+//          SetMap{ "key": SetArgs{...} }
 type SetMapInput interface {
 	pulumi.Input
 
@@ -625,7 +625,7 @@ func (o SetOutput) SystemDiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Set) pulumi.IntPtrOutput { return v.SystemDiskSize }).(pulumi.IntPtrOutput)
 }
 
-// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
 func (o SetOutput) SystemDiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Set) pulumi.StringPtrOutput { return v.SystemDiskType }).(pulumi.StringPtrOutput)
 }

@@ -19,31 +19,28 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Monitor.NewTmpInstance(ctx, "tmpInstance", &Monitor.TmpInstanceArgs{
-//				DataRetentionTime: pulumi.Int(30),
-//				InstanceName:      pulumi.String("demo"),
-//				SubnetId:          pulumi.String("subnet-rdkj0agk"),
-//				Tags: pulumi.AnyMap{
-//					"createdBy": pulumi.Any("terraform"),
-//				},
-//				VpcId: pulumi.String("vpc-2hfyray3"),
-//				Zone:  pulumi.String("ap-guangzhou-3"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Monitor.NewTmpInstance(ctx, "tmpInstance", &Monitor.TmpInstanceArgs{
+// 			DataRetentionTime: pulumi.Int(30),
+// 			InstanceName:      pulumi.String("demo"),
+// 			SubnetId:          pulumi.String("subnet-rdkj0agk"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 			VpcId: pulumi.String("vpc-2hfyray3"),
+// 			Zone:  pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -51,17 +48,23 @@ import (
 // monitor tmpInstance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
-//
+//  $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
 // ```
 type TmpInstance struct {
 	pulumi.CustomResourceState
 
+	// Prometheus HTTP API root address.
+	ApiRootPath pulumi.StringOutput `pulumi:"apiRootPath"`
 	// Data retention time.
 	DataRetentionTime pulumi.IntOutput `pulumi:"dataRetentionTime"`
 	// Instance name.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
+	// Instance IPv4 address.
+	Ipv4Address pulumi.StringOutput `pulumi:"ipv4Address"`
+	// Proxy address.
+	ProxyAddress pulumi.StringOutput `pulumi:"proxyAddress"`
+	// Prometheus remote write address.
+	RemoteWrite pulumi.StringOutput `pulumi:"remoteWrite"`
 	// Subnet Id.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// Tag description list.
@@ -117,10 +120,18 @@ func GetTmpInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering TmpInstance resources.
 type tmpInstanceState struct {
+	// Prometheus HTTP API root address.
+	ApiRootPath *string `pulumi:"apiRootPath"`
 	// Data retention time.
 	DataRetentionTime *int `pulumi:"dataRetentionTime"`
 	// Instance name.
 	InstanceName *string `pulumi:"instanceName"`
+	// Instance IPv4 address.
+	Ipv4Address *string `pulumi:"ipv4Address"`
+	// Proxy address.
+	ProxyAddress *string `pulumi:"proxyAddress"`
+	// Prometheus remote write address.
+	RemoteWrite *string `pulumi:"remoteWrite"`
 	// Subnet Id.
 	SubnetId *string `pulumi:"subnetId"`
 	// Tag description list.
@@ -132,10 +143,18 @@ type tmpInstanceState struct {
 }
 
 type TmpInstanceState struct {
+	// Prometheus HTTP API root address.
+	ApiRootPath pulumi.StringPtrInput
 	// Data retention time.
 	DataRetentionTime pulumi.IntPtrInput
 	// Instance name.
 	InstanceName pulumi.StringPtrInput
+	// Instance IPv4 address.
+	Ipv4Address pulumi.StringPtrInput
+	// Proxy address.
+	ProxyAddress pulumi.StringPtrInput
+	// Prometheus remote write address.
+	RemoteWrite pulumi.StringPtrInput
 	// Subnet Id.
 	SubnetId pulumi.StringPtrInput
 	// Tag description list.
@@ -207,7 +226,7 @@ func (i *TmpInstance) ToTmpInstanceOutputWithContext(ctx context.Context) TmpIns
 // TmpInstanceArrayInput is an input type that accepts TmpInstanceArray and TmpInstanceArrayOutput values.
 // You can construct a concrete instance of `TmpInstanceArrayInput` via:
 //
-//	TmpInstanceArray{ TmpInstanceArgs{...} }
+//          TmpInstanceArray{ TmpInstanceArgs{...} }
 type TmpInstanceArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +251,7 @@ func (i TmpInstanceArray) ToTmpInstanceArrayOutputWithContext(ctx context.Contex
 // TmpInstanceMapInput is an input type that accepts TmpInstanceMap and TmpInstanceMapOutput values.
 // You can construct a concrete instance of `TmpInstanceMapInput` via:
 //
-//	TmpInstanceMap{ "key": TmpInstanceArgs{...} }
+//          TmpInstanceMap{ "key": TmpInstanceArgs{...} }
 type TmpInstanceMapInput interface {
 	pulumi.Input
 
@@ -268,6 +287,11 @@ func (o TmpInstanceOutput) ToTmpInstanceOutputWithContext(ctx context.Context) T
 	return o
 }
 
+// Prometheus HTTP API root address.
+func (o TmpInstanceOutput) ApiRootPath() pulumi.StringOutput {
+	return o.ApplyT(func(v *TmpInstance) pulumi.StringOutput { return v.ApiRootPath }).(pulumi.StringOutput)
+}
+
 // Data retention time.
 func (o TmpInstanceOutput) DataRetentionTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *TmpInstance) pulumi.IntOutput { return v.DataRetentionTime }).(pulumi.IntOutput)
@@ -276,6 +300,21 @@ func (o TmpInstanceOutput) DataRetentionTime() pulumi.IntOutput {
 // Instance name.
 func (o TmpInstanceOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *TmpInstance) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance IPv4 address.
+func (o TmpInstanceOutput) Ipv4Address() pulumi.StringOutput {
+	return o.ApplyT(func(v *TmpInstance) pulumi.StringOutput { return v.Ipv4Address }).(pulumi.StringOutput)
+}
+
+// Proxy address.
+func (o TmpInstanceOutput) ProxyAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v *TmpInstance) pulumi.StringOutput { return v.ProxyAddress }).(pulumi.StringOutput)
+}
+
+// Prometheus remote write address.
+func (o TmpInstanceOutput) RemoteWrite() pulumi.StringOutput {
+	return o.ApplyT(func(v *TmpInstance) pulumi.StringOutput { return v.RemoteWrite }).(pulumi.StringOutput)
 }
 
 // Subnet Id.

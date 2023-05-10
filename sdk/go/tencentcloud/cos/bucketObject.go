@@ -15,67 +15,61 @@ import (
 //
 // ## Example Usage
 //
-// # Uploading a file to a bucket
+// Uploading a file to a bucket
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
-//				Bucket: pulumi.String("mycos-1258798060"),
-//				Key:    pulumi.String("new_object_key"),
-//				Source: pulumi.String("path/to/file"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
+// 			Bucket: pulumi.String("mycos-1258798060"),
+// 			Key:    pulumi.String("new_object_key"),
+// 			Source: pulumi.String("path/to/file"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Uploading a content to a bucket
+// Uploading a content to a bucket
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			mycos, err := Cos.NewBucket(ctx, "mycos", &Cos.BucketArgs{
-//				Bucket: pulumi.String("mycos-1258798060"),
-//				Acl:    pulumi.String("public-read"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
-//				Bucket:  mycos.Bucket,
-//				Key:     pulumi.String("new_object_key"),
-//				Content: pulumi.String("the content that you want to upload."),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		mycos, err := Cos.NewBucket(ctx, "mycos", &Cos.BucketArgs{
+// 			Bucket: pulumi.String("mycos-1258798060"),
+// 			Acl:    pulumi.String("public-read"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
+// 			Bucket:  mycos.Bucket,
+// 			Key:     pulumi.String("new_object_key"),
+// 			Content: pulumi.String("the content that you want to upload."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type BucketObject struct {
 	pulumi.CustomResourceState
@@ -100,7 +94,7 @@ type BucketObject struct {
 	Key pulumi.StringOutput `pulumi:"key"`
 	// The path to the source file being uploaded to the bucket.
 	Source pulumi.StringPtrOutput `pulumi:"source"`
-	// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass pulumi.StringOutput `pulumi:"storageClass"`
 	// Tag of the object.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -162,7 +156,7 @@ type bucketObjectState struct {
 	Key *string `pulumi:"key"`
 	// The path to the source file being uploaded to the bucket.
 	Source *string `pulumi:"source"`
-	// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass *string `pulumi:"storageClass"`
 	// Tag of the object.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -189,7 +183,7 @@ type BucketObjectState struct {
 	Key pulumi.StringPtrInput
 	// The path to the source file being uploaded to the bucket.
 	Source pulumi.StringPtrInput
-	// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass pulumi.StringPtrInput
 	// Tag of the object.
 	Tags pulumi.MapInput
@@ -220,7 +214,7 @@ type bucketObjectArgs struct {
 	Key string `pulumi:"key"`
 	// The path to the source file being uploaded to the bucket.
 	Source *string `pulumi:"source"`
-	// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass *string `pulumi:"storageClass"`
 	// Tag of the object.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -248,7 +242,7 @@ type BucketObjectArgs struct {
 	Key pulumi.StringInput
 	// The path to the source file being uploaded to the bucket.
 	Source pulumi.StringPtrInput
-	// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 	StorageClass pulumi.StringPtrInput
 	// Tag of the object.
 	Tags pulumi.MapInput
@@ -280,7 +274,7 @@ func (i *BucketObject) ToBucketObjectOutputWithContext(ctx context.Context) Buck
 // BucketObjectArrayInput is an input type that accepts BucketObjectArray and BucketObjectArrayOutput values.
 // You can construct a concrete instance of `BucketObjectArrayInput` via:
 //
-//	BucketObjectArray{ BucketObjectArgs{...} }
+//          BucketObjectArray{ BucketObjectArgs{...} }
 type BucketObjectArrayInput interface {
 	pulumi.Input
 
@@ -305,7 +299,7 @@ func (i BucketObjectArray) ToBucketObjectArrayOutputWithContext(ctx context.Cont
 // BucketObjectMapInput is an input type that accepts BucketObjectMap and BucketObjectMapOutput values.
 // You can construct a concrete instance of `BucketObjectMapInput` via:
 //
-//	BucketObjectMap{ "key": BucketObjectArgs{...} }
+//          BucketObjectMap{ "key": BucketObjectArgs{...} }
 type BucketObjectMapInput interface {
 	pulumi.Input
 
@@ -391,7 +385,7 @@ func (o BucketObjectOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BucketObject) pulumi.StringPtrOutput { return v.Source }).(pulumi.StringPtrOutput)
 }
 
-// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
 func (o BucketObjectOutput) StorageClass() pulumi.StringOutput {
 	return o.ApplyT(func(v *BucketObject) pulumi.StringOutput { return v.StorageClass }).(pulumi.StringOutput)
 }

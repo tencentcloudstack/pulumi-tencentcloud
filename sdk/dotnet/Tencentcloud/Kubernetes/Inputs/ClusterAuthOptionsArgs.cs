@@ -20,16 +20,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<bool>? AutoCreateDiscoveryAnonymousAuth { get; set; }
 
         /// <summary>
-        /// Specify service-account-issuer.
+        /// Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
         /// </summary>
         [Input("issuer")]
         public Input<string>? Issuer { get; set; }
 
         /// <summary>
-        /// Specify service-account-jwks-uri.
+        /// Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field, it will be ignored anyway.
         /// </summary>
         [Input("jwksUri")]
         public Input<string>? JwksUri { get; set; }
+
+        /// <summary>
+        /// If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
+        /// </summary>
+        [Input("useTkeDefault")]
+        public Input<bool>? UseTkeDefault { get; set; }
 
         public ClusterAuthOptionsArgs()
         {

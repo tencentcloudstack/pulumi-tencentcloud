@@ -47,6 +47,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
         /// </summary>
         public readonly string Protocol;
         /// <summary>
+        /// ID of the GAAP proxy to be queried.
+        /// </summary>
+        public readonly string ProxyId;
+        /// <summary>
         /// Type of the realserver.
         /// </summary>
         public readonly string RealserverType;
@@ -77,6 +81,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
 
             string protocol,
 
+            string proxyId,
+
             string realserverType,
 
             string scheduler,
@@ -91,6 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
             Name = name;
             Port = port;
             Protocol = protocol;
+            ProxyId = proxyId;
             RealserverType = realserverType;
             Scheduler = scheduler;
             Status = status;

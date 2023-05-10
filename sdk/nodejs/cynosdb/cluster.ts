@@ -38,6 +38,7 @@ import * as utilities from "../utilities";
  *         name: "character_set_server",
  *     }],
  *     password: "cynos@123",
+ *     prarmTemplateId: 12345,
  *     roGroupSgs: ["sg-ibyjkl6r"],
  *     rwGroupSgs: ["sg-ibyjkl6r"],
  *     storageLimit: 1000,
@@ -86,6 +87,14 @@ export class Cluster extends pulumi.CustomResource {
     }
 
     /**
+     * Specify whether the cluster can auto-pause while `dbMode` is `SERVERLESS`. Values: `yes` (default), `no`.
+     */
+    public readonly autoPause!: pulumi.Output<string | undefined>;
+    /**
+     * Specify auto-pause delay in second while `dbMode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+     */
+    public readonly autoPauseDelay!: pulumi.Output<number | undefined>;
+    /**
      * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
      */
     public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
@@ -114,6 +123,10 @@ export class Cluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
+     * Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+     */
+    public readonly dbMode!: pulumi.Output<string | undefined>;
+    /**
      * Type of CynosDB, and available values include `MYSQL`.
      */
     public readonly dbType!: pulumi.Output<string>;
@@ -126,9 +139,9 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    public readonly instanceCpuCore!: pulumi.Output<number>;
+    public readonly instanceCpuCore!: pulumi.Output<number | undefined>;
     /**
      * ID of instance.
      */
@@ -146,9 +159,9 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly instanceMaintainWeekdays!: pulumi.Output<string[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    public readonly instanceMemorySize!: pulumi.Output<number>;
+    public readonly instanceMemorySize!: pulumi.Output<number | undefined>;
     /**
      * Name of instance.
      */
@@ -162,7 +175,15 @@ export class Cluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly instanceStorageSize!: pulumi.Output<number>;
     /**
-     * Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+     * Maximum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+     */
+    public readonly maxCpu!: pulumi.Output<number | undefined>;
+    /**
+     * Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+     */
+    public readonly minCpu!: pulumi.Output<number | undefined>;
+    /**
+     * Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
      */
     public readonly paramItems!: pulumi.Output<outputs.Cynosdb.ClusterParamItem[] | undefined>;
     /**
@@ -173,6 +194,10 @@ export class Cluster extends pulumi.CustomResource {
      * Port of CynosDB cluster.
      */
     public readonly port!: pulumi.Output<number | undefined>;
+    /**
+     * The ID of the parameter template.
+     */
+    public readonly prarmTemplateId!: pulumi.Output<number>;
     /**
      * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
@@ -214,6 +239,14 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly rwGroupSgs!: pulumi.Output<string[] | undefined>;
     /**
+     * Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverlessStatusFlag`.
+     */
+    public /*out*/ readonly serverlessStatus!: pulumi.Output<string>;
+    /**
+     * Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+     */
+    public readonly serverlessStatusFlag!: pulumi.Output<string | undefined>;
+    /**
      * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */
     public readonly storageLimit!: pulumi.Output<number | undefined>;
@@ -247,6 +280,8 @@ export class Cluster extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClusterState | undefined;
+            resourceInputs["autoPause"] = state ? state.autoPause : undefined;
+            resourceInputs["autoPauseDelay"] = state ? state.autoPauseDelay : undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
             resourceInputs["availableZone"] = state ? state.availableZone : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
@@ -254,6 +289,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["clusterName"] = state ? state.clusterName : undefined;
             resourceInputs["clusterStatus"] = state ? state.clusterStatus : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
+            resourceInputs["dbMode"] = state ? state.dbMode : undefined;
             resourceInputs["dbType"] = state ? state.dbType : undefined;
             resourceInputs["dbVersion"] = state ? state.dbVersion : undefined;
             resourceInputs["forceDelete"] = state ? state.forceDelete : undefined;
@@ -266,9 +302,12 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["instanceStatus"] = state ? state.instanceStatus : undefined;
             resourceInputs["instanceStorageSize"] = state ? state.instanceStorageSize : undefined;
+            resourceInputs["maxCpu"] = state ? state.maxCpu : undefined;
+            resourceInputs["minCpu"] = state ? state.minCpu : undefined;
             resourceInputs["paramItems"] = state ? state.paramItems : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
+            resourceInputs["prarmTemplateId"] = state ? state.prarmTemplateId : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["roGroupAddrs"] = state ? state.roGroupAddrs : undefined;
@@ -279,6 +318,8 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["rwGroupId"] = state ? state.rwGroupId : undefined;
             resourceInputs["rwGroupInstances"] = state ? state.rwGroupInstances : undefined;
             resourceInputs["rwGroupSgs"] = state ? state.rwGroupSgs : undefined;
+            resourceInputs["serverlessStatus"] = state ? state.serverlessStatus : undefined;
+            resourceInputs["serverlessStatusFlag"] = state ? state.serverlessStatusFlag : undefined;
             resourceInputs["storageLimit"] = state ? state.storageLimit : undefined;
             resourceInputs["storageUsed"] = state ? state.storageUsed : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
@@ -298,12 +339,6 @@ export class Cluster extends pulumi.CustomResource {
             if ((!args || args.dbVersion === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'dbVersion'");
             }
-            if ((!args || args.instanceCpuCore === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'instanceCpuCore'");
-            }
-            if ((!args || args.instanceMemorySize === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'instanceMemorySize'");
-            }
             if ((!args || args.password === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'password'");
             }
@@ -313,10 +348,13 @@ export class Cluster extends pulumi.CustomResource {
             if ((!args || args.vpcId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpcId'");
             }
+            resourceInputs["autoPause"] = args ? args.autoPause : undefined;
+            resourceInputs["autoPauseDelay"] = args ? args.autoPauseDelay : undefined;
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
             resourceInputs["availableZone"] = args ? args.availableZone : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["clusterName"] = args ? args.clusterName : undefined;
+            resourceInputs["dbMode"] = args ? args.dbMode : undefined;
             resourceInputs["dbType"] = args ? args.dbType : undefined;
             resourceInputs["dbVersion"] = args ? args.dbVersion : undefined;
             resourceInputs["forceDelete"] = args ? args.forceDelete : undefined;
@@ -325,13 +363,17 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["instanceMaintainStartTime"] = args ? args.instanceMaintainStartTime : undefined;
             resourceInputs["instanceMaintainWeekdays"] = args ? args.instanceMaintainWeekdays : undefined;
             resourceInputs["instanceMemorySize"] = args ? args.instanceMemorySize : undefined;
+            resourceInputs["maxCpu"] = args ? args.maxCpu : undefined;
+            resourceInputs["minCpu"] = args ? args.minCpu : undefined;
             resourceInputs["paramItems"] = args ? args.paramItems : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
+            resourceInputs["prarmTemplateId"] = args ? args.prarmTemplateId : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["roGroupSgs"] = args ? args.roGroupSgs : undefined;
             resourceInputs["rwGroupSgs"] = args ? args.rwGroupSgs : undefined;
+            resourceInputs["serverlessStatusFlag"] = args ? args.serverlessStatusFlag : undefined;
             resourceInputs["storageLimit"] = args ? args.storageLimit : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -349,6 +391,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["rwGroupAddrs"] = undefined /*out*/;
             resourceInputs["rwGroupId"] = undefined /*out*/;
             resourceInputs["rwGroupInstances"] = undefined /*out*/;
+            resourceInputs["serverlessStatus"] = undefined /*out*/;
             resourceInputs["storageUsed"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -360,6 +403,14 @@ export class Cluster extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Cluster resources.
  */
 export interface ClusterState {
+    /**
+     * Specify whether the cluster can auto-pause while `dbMode` is `SERVERLESS`. Values: `yes` (default), `no`.
+     */
+    autoPause?: pulumi.Input<string>;
+    /**
+     * Specify auto-pause delay in second while `dbMode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+     */
+    autoPauseDelay?: pulumi.Input<number>;
     /**
      * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
      */
@@ -389,6 +440,10 @@ export interface ClusterState {
      */
     createTime?: pulumi.Input<string>;
     /**
+     * Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+     */
+    dbMode?: pulumi.Input<string>;
+    /**
      * Type of CynosDB, and available values include `MYSQL`.
      */
     dbType?: pulumi.Input<string>;
@@ -401,7 +456,7 @@ export interface ClusterState {
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceCpuCore?: pulumi.Input<number>;
     /**
@@ -421,7 +476,7 @@ export interface ClusterState {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceMemorySize?: pulumi.Input<number>;
     /**
@@ -437,7 +492,15 @@ export interface ClusterState {
      */
     instanceStorageSize?: pulumi.Input<number>;
     /**
-     * Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+     * Maximum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+     */
+    maxCpu?: pulumi.Input<number>;
+    /**
+     * Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+     */
+    minCpu?: pulumi.Input<number>;
+    /**
+     * Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
      */
     paramItems?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterParamItem>[]>;
     /**
@@ -448,6 +511,10 @@ export interface ClusterState {
      * Port of CynosDB cluster.
      */
     port?: pulumi.Input<number>;
+    /**
+     * The ID of the parameter template.
+     */
+    prarmTemplateId?: pulumi.Input<number>;
     /**
      * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
@@ -489,6 +556,14 @@ export interface ClusterState {
      */
     rwGroupSgs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverlessStatusFlag`.
+     */
+    serverlessStatus?: pulumi.Input<string>;
+    /**
+     * Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+     */
+    serverlessStatusFlag?: pulumi.Input<string>;
+    /**
      * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */
     storageLimit?: pulumi.Input<number>;
@@ -515,6 +590,14 @@ export interface ClusterState {
  */
 export interface ClusterArgs {
     /**
+     * Specify whether the cluster can auto-pause while `dbMode` is `SERVERLESS`. Values: `yes` (default), `no`.
+     */
+    autoPause?: pulumi.Input<string>;
+    /**
+     * Specify auto-pause delay in second while `dbMode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+     */
+    autoPauseDelay?: pulumi.Input<number>;
+    /**
      * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
      */
     autoRenewFlag?: pulumi.Input<number>;
@@ -531,6 +614,10 @@ export interface ClusterArgs {
      */
     clusterName: pulumi.Input<string>;
     /**
+     * Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+     */
+    dbMode?: pulumi.Input<string>;
+    /**
      * Type of CynosDB, and available values include `MYSQL`.
      */
     dbType: pulumi.Input<string>;
@@ -543,9 +630,9 @@ export interface ClusterArgs {
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceCpuCore: pulumi.Input<number>;
+    instanceCpuCore?: pulumi.Input<number>;
     /**
      * Duration time for maintenance, unit in second. `3600` by default.
      */
@@ -559,11 +646,19 @@ export interface ClusterArgs {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceMemorySize: pulumi.Input<number>;
+    instanceMemorySize?: pulumi.Input<number>;
     /**
-     * Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+     * Maximum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+     */
+    maxCpu?: pulumi.Input<number>;
+    /**
+     * Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+     */
+    minCpu?: pulumi.Input<number>;
+    /**
+     * Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
      */
     paramItems?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterParamItem>[]>;
     /**
@@ -574,6 +669,10 @@ export interface ClusterArgs {
      * Port of CynosDB cluster.
      */
     port?: pulumi.Input<number>;
+    /**
+     * The ID of the parameter template.
+     */
+    prarmTemplateId?: pulumi.Input<number>;
     /**
      * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
@@ -590,6 +689,10 @@ export interface ClusterArgs {
      * IDs of security group for `rwGroup`.
      */
     rwGroupSgs?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+     */
+    serverlessStatusFlag?: pulumi.Input<string>;
     /**
      * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */

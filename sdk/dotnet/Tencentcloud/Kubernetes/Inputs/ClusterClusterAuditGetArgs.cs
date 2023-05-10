@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
     public sealed class ClusterClusterAuditGetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// when you want to close the cluster audit log or delete the cluster, you can use this parameter to determine whether the audit log set and topic created by default will be deleted.
+        /// </summary>
+        [Input("deleteAuditLogAndTopic")]
+        public Input<bool>? DeleteAuditLogAndTopic { get; set; }
+
+        /// <summary>
         /// Specify weather the Cluster Audit enabled. NOTE: Enable Cluster Audit will also auto install Log Agent.
         /// </summary>
         [Input("enabled", required: true)]

@@ -9,8 +9,63 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'InstanceAccountAuthRoleArgs',
+    'InstanceBackupDownloadTaskBackupSetArgs',
     'InstanceStandbyInstanceListArgs',
 ]
+
+@pulumi.input_type
+class InstanceAccountAuthRoleArgs:
+    def __init__(__self__, *,
+                 mask: pulumi.Input[int],
+                 namespace: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] mask: Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
+        :param pulumi.Input[str] namespace: Refers to the name of the database with the current account permissions.*: Indicates all databases. db.name: Indicates the database of a specific name.
+        """
+        pulumi.set(__self__, "mask", mask)
+        pulumi.set(__self__, "namespace", namespace)
+
+    @property
+    @pulumi.getter
+    def mask(self) -> pulumi.Input[int]:
+        """
+        Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
+        """
+        return pulumi.get(self, "mask")
+
+    @mask.setter
+    def mask(self, value: pulumi.Input[int]):
+        pulumi.set(self, "mask", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> pulumi.Input[str]:
+        """
+        Refers to the name of the database with the current account permissions.*: Indicates all databases. db.name: Indicates the database of a specific name.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: pulumi.Input[str]):
+        pulumi.set(self, "namespace", value)
+
+
+@pulumi.input_type
+class InstanceBackupDownloadTaskBackupSetArgs:
+    def __init__(__self__, *,
+                 replica_set_id: pulumi.Input[str]):
+        pulumi.set(__self__, "replica_set_id", replica_set_id)
+
+    @property
+    @pulumi.getter(name="replicaSetId")
+    def replica_set_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "replica_set_id")
+
+    @replica_set_id.setter
+    def replica_set_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "replica_set_id", value)
+
 
 @pulumi.input_type
 class InstanceStandbyInstanceListArgs:

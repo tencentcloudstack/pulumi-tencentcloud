@@ -6,6 +6,8 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./acl";
+export * from "./connectResource";
+export * from "./datahubTopic";
 export * from "./getAcls";
 export * from "./getInstances";
 export * from "./getTopics";
@@ -16,6 +18,8 @@ export * from "./user";
 
 // Import resources to register:
 import { Acl } from "./acl";
+import { ConnectResource } from "./connectResource";
+import { DatahubTopic } from "./datahubTopic";
 import { Instance } from "./instance";
 import { Topic } from "./topic";
 import { User } from "./user";
@@ -26,6 +30,10 @@ const _module = {
         switch (type) {
             case "tencentcloud:Ckafka/acl:Acl":
                 return new Acl(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/connectResource:ConnectResource":
+                return new ConnectResource(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/datahubTopic:DatahubTopic":
+                return new DatahubTopic(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/topic:Topic":
@@ -38,6 +46,8 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/acl", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/connectResource", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/datahubTopic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/topic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/user", _module)

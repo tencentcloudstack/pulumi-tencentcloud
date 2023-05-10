@@ -24,7 +24,7 @@ type InstanceBackupPlan struct {
 // InstanceBackupPlanInput is an input type that accepts InstanceBackupPlanArgs and InstanceBackupPlanOutput values.
 // You can construct a concrete instance of `InstanceBackupPlanInput` via:
 //
-//	InstanceBackupPlanArgs{...}
+//          InstanceBackupPlanArgs{...}
 type InstanceBackupPlanInput interface {
 	pulumi.Input
 
@@ -66,11 +66,11 @@ func (i InstanceBackupPlanArgs) ToInstanceBackupPlanPtrOutputWithContext(ctx con
 // InstanceBackupPlanPtrInput is an input type that accepts InstanceBackupPlanArgs, InstanceBackupPlanPtr and InstanceBackupPlanPtrOutput values.
 // You can construct a concrete instance of `InstanceBackupPlanPtrInput` via:
 //
-//	        InstanceBackupPlanArgs{...}
+//          InstanceBackupPlanArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type InstanceBackupPlanPtrInput interface {
 	pulumi.Input
 
@@ -214,7 +214,7 @@ type InstanceDbNodeSet struct {
 // InstanceDbNodeSetInput is an input type that accepts InstanceDbNodeSetArgs and InstanceDbNodeSetOutput values.
 // You can construct a concrete instance of `InstanceDbNodeSetInput` via:
 //
-//	InstanceDbNodeSetArgs{...}
+//          InstanceDbNodeSetArgs{...}
 type InstanceDbNodeSetInput interface {
 	pulumi.Input
 
@@ -244,7 +244,7 @@ func (i InstanceDbNodeSetArgs) ToInstanceDbNodeSetOutputWithContext(ctx context.
 // InstanceDbNodeSetArrayInput is an input type that accepts InstanceDbNodeSetArray and InstanceDbNodeSetArrayOutput values.
 // You can construct a concrete instance of `InstanceDbNodeSetArrayInput` via:
 //
-//	InstanceDbNodeSetArray{ InstanceDbNodeSetArgs{...} }
+//          InstanceDbNodeSetArray{ InstanceDbNodeSetArgs{...} }
 type InstanceDbNodeSetArrayInput interface {
 	pulumi.Input
 
@@ -310,6 +310,112 @@ func (o InstanceDbNodeSetArrayOutput) Index(i pulumi.IntInput) InstanceDbNodeSet
 	}).(InstanceDbNodeSetOutput)
 }
 
+type ParameterTemplateModifyParamEntrySet struct {
+	// Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
+	ExpectedValue string `pulumi:"expectedValue"`
+	// The parameter name.
+	Name string `pulumi:"name"`
+}
+
+// ParameterTemplateModifyParamEntrySetInput is an input type that accepts ParameterTemplateModifyParamEntrySetArgs and ParameterTemplateModifyParamEntrySetOutput values.
+// You can construct a concrete instance of `ParameterTemplateModifyParamEntrySetInput` via:
+//
+//          ParameterTemplateModifyParamEntrySetArgs{...}
+type ParameterTemplateModifyParamEntrySetInput interface {
+	pulumi.Input
+
+	ToParameterTemplateModifyParamEntrySetOutput() ParameterTemplateModifyParamEntrySetOutput
+	ToParameterTemplateModifyParamEntrySetOutputWithContext(context.Context) ParameterTemplateModifyParamEntrySetOutput
+}
+
+type ParameterTemplateModifyParamEntrySetArgs struct {
+	// Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
+	ExpectedValue pulumi.StringInput `pulumi:"expectedValue"`
+	// The parameter name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (ParameterTemplateModifyParamEntrySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ParameterTemplateModifyParamEntrySet)(nil)).Elem()
+}
+
+func (i ParameterTemplateModifyParamEntrySetArgs) ToParameterTemplateModifyParamEntrySetOutput() ParameterTemplateModifyParamEntrySetOutput {
+	return i.ToParameterTemplateModifyParamEntrySetOutputWithContext(context.Background())
+}
+
+func (i ParameterTemplateModifyParamEntrySetArgs) ToParameterTemplateModifyParamEntrySetOutputWithContext(ctx context.Context) ParameterTemplateModifyParamEntrySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ParameterTemplateModifyParamEntrySetOutput)
+}
+
+// ParameterTemplateModifyParamEntrySetArrayInput is an input type that accepts ParameterTemplateModifyParamEntrySetArray and ParameterTemplateModifyParamEntrySetArrayOutput values.
+// You can construct a concrete instance of `ParameterTemplateModifyParamEntrySetArrayInput` via:
+//
+//          ParameterTemplateModifyParamEntrySetArray{ ParameterTemplateModifyParamEntrySetArgs{...} }
+type ParameterTemplateModifyParamEntrySetArrayInput interface {
+	pulumi.Input
+
+	ToParameterTemplateModifyParamEntrySetArrayOutput() ParameterTemplateModifyParamEntrySetArrayOutput
+	ToParameterTemplateModifyParamEntrySetArrayOutputWithContext(context.Context) ParameterTemplateModifyParamEntrySetArrayOutput
+}
+
+type ParameterTemplateModifyParamEntrySetArray []ParameterTemplateModifyParamEntrySetInput
+
+func (ParameterTemplateModifyParamEntrySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ParameterTemplateModifyParamEntrySet)(nil)).Elem()
+}
+
+func (i ParameterTemplateModifyParamEntrySetArray) ToParameterTemplateModifyParamEntrySetArrayOutput() ParameterTemplateModifyParamEntrySetArrayOutput {
+	return i.ToParameterTemplateModifyParamEntrySetArrayOutputWithContext(context.Background())
+}
+
+func (i ParameterTemplateModifyParamEntrySetArray) ToParameterTemplateModifyParamEntrySetArrayOutputWithContext(ctx context.Context) ParameterTemplateModifyParamEntrySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ParameterTemplateModifyParamEntrySetArrayOutput)
+}
+
+type ParameterTemplateModifyParamEntrySetOutput struct{ *pulumi.OutputState }
+
+func (ParameterTemplateModifyParamEntrySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ParameterTemplateModifyParamEntrySet)(nil)).Elem()
+}
+
+func (o ParameterTemplateModifyParamEntrySetOutput) ToParameterTemplateModifyParamEntrySetOutput() ParameterTemplateModifyParamEntrySetOutput {
+	return o
+}
+
+func (o ParameterTemplateModifyParamEntrySetOutput) ToParameterTemplateModifyParamEntrySetOutputWithContext(ctx context.Context) ParameterTemplateModifyParamEntrySetOutput {
+	return o
+}
+
+// Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
+func (o ParameterTemplateModifyParamEntrySetOutput) ExpectedValue() pulumi.StringOutput {
+	return o.ApplyT(func(v ParameterTemplateModifyParamEntrySet) string { return v.ExpectedValue }).(pulumi.StringOutput)
+}
+
+// The parameter name.
+func (o ParameterTemplateModifyParamEntrySetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ParameterTemplateModifyParamEntrySet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type ParameterTemplateModifyParamEntrySetArrayOutput struct{ *pulumi.OutputState }
+
+func (ParameterTemplateModifyParamEntrySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ParameterTemplateModifyParamEntrySet)(nil)).Elem()
+}
+
+func (o ParameterTemplateModifyParamEntrySetArrayOutput) ToParameterTemplateModifyParamEntrySetArrayOutput() ParameterTemplateModifyParamEntrySetArrayOutput {
+	return o
+}
+
+func (o ParameterTemplateModifyParamEntrySetArrayOutput) ToParameterTemplateModifyParamEntrySetArrayOutputWithContext(ctx context.Context) ParameterTemplateModifyParamEntrySetArrayOutput {
+	return o
+}
+
+func (o ParameterTemplateModifyParamEntrySetArrayOutput) Index(i pulumi.IntInput) ParameterTemplateModifyParamEntrySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ParameterTemplateModifyParamEntrySet {
+		return vs[0].([]ParameterTemplateModifyParamEntrySet)[vs[1].(int)]
+	}).(ParameterTemplateModifyParamEntrySetOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// Auto renew flag.
 	AutoRenewFlag int `pulumi:"autoRenewFlag"`
@@ -356,7 +462,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//	GetInstancesInstanceListArgs{...}
+//          GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -422,7 +528,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -578,6 +684,245 @@ func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanc
 	}).(GetInstancesInstanceListOutput)
 }
 
+type GetParameterTemplatesFilter struct {
+	// Filter name.
+	Name *string `pulumi:"name"`
+	// One or more filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetParameterTemplatesFilterInput is an input type that accepts GetParameterTemplatesFilterArgs and GetParameterTemplatesFilterOutput values.
+// You can construct a concrete instance of `GetParameterTemplatesFilterInput` via:
+//
+//          GetParameterTemplatesFilterArgs{...}
+type GetParameterTemplatesFilterInput interface {
+	pulumi.Input
+
+	ToGetParameterTemplatesFilterOutput() GetParameterTemplatesFilterOutput
+	ToGetParameterTemplatesFilterOutputWithContext(context.Context) GetParameterTemplatesFilterOutput
+}
+
+type GetParameterTemplatesFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// One or more filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetParameterTemplatesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParameterTemplatesFilter)(nil)).Elem()
+}
+
+func (i GetParameterTemplatesFilterArgs) ToGetParameterTemplatesFilterOutput() GetParameterTemplatesFilterOutput {
+	return i.ToGetParameterTemplatesFilterOutputWithContext(context.Background())
+}
+
+func (i GetParameterTemplatesFilterArgs) ToGetParameterTemplatesFilterOutputWithContext(ctx context.Context) GetParameterTemplatesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParameterTemplatesFilterOutput)
+}
+
+// GetParameterTemplatesFilterArrayInput is an input type that accepts GetParameterTemplatesFilterArray and GetParameterTemplatesFilterArrayOutput values.
+// You can construct a concrete instance of `GetParameterTemplatesFilterArrayInput` via:
+//
+//          GetParameterTemplatesFilterArray{ GetParameterTemplatesFilterArgs{...} }
+type GetParameterTemplatesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetParameterTemplatesFilterArrayOutput() GetParameterTemplatesFilterArrayOutput
+	ToGetParameterTemplatesFilterArrayOutputWithContext(context.Context) GetParameterTemplatesFilterArrayOutput
+}
+
+type GetParameterTemplatesFilterArray []GetParameterTemplatesFilterInput
+
+func (GetParameterTemplatesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParameterTemplatesFilter)(nil)).Elem()
+}
+
+func (i GetParameterTemplatesFilterArray) ToGetParameterTemplatesFilterArrayOutput() GetParameterTemplatesFilterArrayOutput {
+	return i.ToGetParameterTemplatesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetParameterTemplatesFilterArray) ToGetParameterTemplatesFilterArrayOutputWithContext(ctx context.Context) GetParameterTemplatesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParameterTemplatesFilterArrayOutput)
+}
+
+type GetParameterTemplatesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetParameterTemplatesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParameterTemplatesFilter)(nil)).Elem()
+}
+
+func (o GetParameterTemplatesFilterOutput) ToGetParameterTemplatesFilterOutput() GetParameterTemplatesFilterOutput {
+	return o
+}
+
+func (o GetParameterTemplatesFilterOutput) ToGetParameterTemplatesFilterOutputWithContext(ctx context.Context) GetParameterTemplatesFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetParameterTemplatesFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetParameterTemplatesFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// One or more filter values.
+func (o GetParameterTemplatesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetParameterTemplatesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetParameterTemplatesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetParameterTemplatesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParameterTemplatesFilter)(nil)).Elem()
+}
+
+func (o GetParameterTemplatesFilterArrayOutput) ToGetParameterTemplatesFilterArrayOutput() GetParameterTemplatesFilterArrayOutput {
+	return o
+}
+
+func (o GetParameterTemplatesFilterArrayOutput) ToGetParameterTemplatesFilterArrayOutputWithContext(ctx context.Context) GetParameterTemplatesFilterArrayOutput {
+	return o
+}
+
+func (o GetParameterTemplatesFilterArrayOutput) Index(i pulumi.IntInput) GetParameterTemplatesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetParameterTemplatesFilter {
+		return vs[0].([]GetParameterTemplatesFilter)[vs[1].(int)]
+	}).(GetParameterTemplatesFilterOutput)
+}
+
+type GetParameterTemplatesList struct {
+	// the database engine for which the parameter template applies.
+	DbEngine string `pulumi:"dbEngine"`
+	// the database version to which the parameter template applies.
+	DbMajorVersion string `pulumi:"dbMajorVersion"`
+	// parameter template description.
+	TemplateDescription string `pulumi:"templateDescription"`
+	// parameter template ID.
+	TemplateId string `pulumi:"templateId"`
+	// parameter template name.
+	TemplateName string `pulumi:"templateName"`
+}
+
+// GetParameterTemplatesListInput is an input type that accepts GetParameterTemplatesListArgs and GetParameterTemplatesListOutput values.
+// You can construct a concrete instance of `GetParameterTemplatesListInput` via:
+//
+//          GetParameterTemplatesListArgs{...}
+type GetParameterTemplatesListInput interface {
+	pulumi.Input
+
+	ToGetParameterTemplatesListOutput() GetParameterTemplatesListOutput
+	ToGetParameterTemplatesListOutputWithContext(context.Context) GetParameterTemplatesListOutput
+}
+
+type GetParameterTemplatesListArgs struct {
+	// the database engine for which the parameter template applies.
+	DbEngine pulumi.StringInput `pulumi:"dbEngine"`
+	// the database version to which the parameter template applies.
+	DbMajorVersion pulumi.StringInput `pulumi:"dbMajorVersion"`
+	// parameter template description.
+	TemplateDescription pulumi.StringInput `pulumi:"templateDescription"`
+	// parameter template ID.
+	TemplateId pulumi.StringInput `pulumi:"templateId"`
+	// parameter template name.
+	TemplateName pulumi.StringInput `pulumi:"templateName"`
+}
+
+func (GetParameterTemplatesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParameterTemplatesList)(nil)).Elem()
+}
+
+func (i GetParameterTemplatesListArgs) ToGetParameterTemplatesListOutput() GetParameterTemplatesListOutput {
+	return i.ToGetParameterTemplatesListOutputWithContext(context.Background())
+}
+
+func (i GetParameterTemplatesListArgs) ToGetParameterTemplatesListOutputWithContext(ctx context.Context) GetParameterTemplatesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParameterTemplatesListOutput)
+}
+
+// GetParameterTemplatesListArrayInput is an input type that accepts GetParameterTemplatesListArray and GetParameterTemplatesListArrayOutput values.
+// You can construct a concrete instance of `GetParameterTemplatesListArrayInput` via:
+//
+//          GetParameterTemplatesListArray{ GetParameterTemplatesListArgs{...} }
+type GetParameterTemplatesListArrayInput interface {
+	pulumi.Input
+
+	ToGetParameterTemplatesListArrayOutput() GetParameterTemplatesListArrayOutput
+	ToGetParameterTemplatesListArrayOutputWithContext(context.Context) GetParameterTemplatesListArrayOutput
+}
+
+type GetParameterTemplatesListArray []GetParameterTemplatesListInput
+
+func (GetParameterTemplatesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParameterTemplatesList)(nil)).Elem()
+}
+
+func (i GetParameterTemplatesListArray) ToGetParameterTemplatesListArrayOutput() GetParameterTemplatesListArrayOutput {
+	return i.ToGetParameterTemplatesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetParameterTemplatesListArray) ToGetParameterTemplatesListArrayOutputWithContext(ctx context.Context) GetParameterTemplatesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetParameterTemplatesListArrayOutput)
+}
+
+type GetParameterTemplatesListOutput struct{ *pulumi.OutputState }
+
+func (GetParameterTemplatesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetParameterTemplatesList)(nil)).Elem()
+}
+
+func (o GetParameterTemplatesListOutput) ToGetParameterTemplatesListOutput() GetParameterTemplatesListOutput {
+	return o
+}
+
+func (o GetParameterTemplatesListOutput) ToGetParameterTemplatesListOutputWithContext(ctx context.Context) GetParameterTemplatesListOutput {
+	return o
+}
+
+// the database engine for which the parameter template applies.
+func (o GetParameterTemplatesListOutput) DbEngine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterTemplatesList) string { return v.DbEngine }).(pulumi.StringOutput)
+}
+
+// the database version to which the parameter template applies.
+func (o GetParameterTemplatesListOutput) DbMajorVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterTemplatesList) string { return v.DbMajorVersion }).(pulumi.StringOutput)
+}
+
+// parameter template description.
+func (o GetParameterTemplatesListOutput) TemplateDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterTemplatesList) string { return v.TemplateDescription }).(pulumi.StringOutput)
+}
+
+// parameter template ID.
+func (o GetParameterTemplatesListOutput) TemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterTemplatesList) string { return v.TemplateId }).(pulumi.StringOutput)
+}
+
+// parameter template name.
+func (o GetParameterTemplatesListOutput) TemplateName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetParameterTemplatesList) string { return v.TemplateName }).(pulumi.StringOutput)
+}
+
+type GetParameterTemplatesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetParameterTemplatesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetParameterTemplatesList)(nil)).Elem()
+}
+
+func (o GetParameterTemplatesListArrayOutput) ToGetParameterTemplatesListArrayOutput() GetParameterTemplatesListArrayOutput {
+	return o
+}
+
+func (o GetParameterTemplatesListArrayOutput) ToGetParameterTemplatesListArrayOutputWithContext(ctx context.Context) GetParameterTemplatesListArrayOutput {
+	return o
+}
+
+func (o GetParameterTemplatesListArrayOutput) Index(i pulumi.IntInput) GetParameterTemplatesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetParameterTemplatesList {
+		return vs[0].([]GetParameterTemplatesList)[vs[1].(int)]
+	}).(GetParameterTemplatesListOutput)
+}
+
 type GetSpecinfosList struct {
 	// The CPU number of the postgresql instance.
 	Cpu int `pulumi:"cpu"`
@@ -600,7 +945,7 @@ type GetSpecinfosList struct {
 // GetSpecinfosListInput is an input type that accepts GetSpecinfosListArgs and GetSpecinfosListOutput values.
 // You can construct a concrete instance of `GetSpecinfosListInput` via:
 //
-//	GetSpecinfosListArgs{...}
+//          GetSpecinfosListArgs{...}
 type GetSpecinfosListInput interface {
 	pulumi.Input
 
@@ -642,7 +987,7 @@ func (i GetSpecinfosListArgs) ToGetSpecinfosListOutputWithContext(ctx context.Co
 // GetSpecinfosListArrayInput is an input type that accepts GetSpecinfosListArray and GetSpecinfosListArrayOutput values.
 // You can construct a concrete instance of `GetSpecinfosListArrayInput` via:
 //
-//	GetSpecinfosListArray{ GetSpecinfosListArgs{...} }
+//          GetSpecinfosListArray{ GetSpecinfosListArgs{...} }
 type GetSpecinfosListArrayInput interface {
 	pulumi.Input
 
@@ -756,7 +1101,7 @@ type GetXlogsList struct {
 // GetXlogsListInput is an input type that accepts GetXlogsListArgs and GetXlogsListOutput values.
 // You can construct a concrete instance of `GetXlogsListInput` via:
 //
-//	GetXlogsListArgs{...}
+//          GetXlogsListArgs{...}
 type GetXlogsListInput interface {
 	pulumi.Input
 
@@ -794,7 +1139,7 @@ func (i GetXlogsListArgs) ToGetXlogsListOutputWithContext(ctx context.Context) G
 // GetXlogsListArrayInput is an input type that accepts GetXlogsListArray and GetXlogsListArrayOutput values.
 // You can construct a concrete instance of `GetXlogsListArrayInput` via:
 //
-//	GetXlogsListArray{ GetXlogsListArgs{...} }
+//          GetXlogsListArray{ GetXlogsListArgs{...} }
 type GetXlogsListArrayInput interface {
 	pulumi.Input
 
@@ -885,8 +1230,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupPlanPtrInput)(nil)).Elem(), InstanceBackupPlanArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDbNodeSetInput)(nil)).Elem(), InstanceDbNodeSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDbNodeSetArrayInput)(nil)).Elem(), InstanceDbNodeSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetArrayInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesFilterInput)(nil)).Elem(), GetParameterTemplatesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesFilterArrayInput)(nil)).Elem(), GetParameterTemplatesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesListInput)(nil)).Elem(), GetParameterTemplatesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesListArrayInput)(nil)).Elem(), GetParameterTemplatesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecinfosListInput)(nil)).Elem(), GetSpecinfosListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecinfosListArrayInput)(nil)).Elem(), GetSpecinfosListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetXlogsListInput)(nil)).Elem(), GetXlogsListArgs{})
@@ -895,8 +1246,14 @@ func init() {
 	pulumi.RegisterOutputType(InstanceBackupPlanPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDbNodeSetOutput{})
 	pulumi.RegisterOutputType(InstanceDbNodeSetArrayOutput{})
+	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetOutput{})
+	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetParameterTemplatesFilterOutput{})
+	pulumi.RegisterOutputType(GetParameterTemplatesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetParameterTemplatesListOutput{})
+	pulumi.RegisterOutputType(GetParameterTemplatesListArrayOutput{})
 	pulumi.RegisterOutputType(GetSpecinfosListOutput{})
 	pulumi.RegisterOutputType(GetSpecinfosListArrayOutput{})
 	pulumi.RegisterOutputType(GetXlogsListOutput{})

@@ -19,47 +19,53 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Elasticsearch.NewInstance(ctx, "foo", &Elasticsearch.InstanceArgs{
-//				InstanceName:     pulumi.String("tf-test"),
-//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-//				Version:          pulumi.String("7.5.1"),
-//				VpcId:            pulumi.Any(_var.Vpc_id),
-//				SubnetId:         pulumi.Any(_var.Subnet_id),
-//				Password:         pulumi.String("Test12345"),
-//				LicenseType:      pulumi.String("oss"),
-//				WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
-//					&elasticsearch.InstanceWebNodeTypeInfoArgs{
-//						NodeNum:  pulumi.Int(1),
-//						NodeType: pulumi.String("ES.S1.MEDIUM4"),
-//					},
-//				},
-//				NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
-//					&elasticsearch.InstanceNodeInfoListArgs{
-//						NodeNum:  pulumi.Int(2),
-//						NodeType: pulumi.String("ES.S1.MEDIUM4"),
-//						Encrypt:  pulumi.Bool(false),
-//					},
-//				},
-//				Tags: pulumi.AnyMap{
-//					"test": pulumi.Any("test"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Elasticsearch.NewInstance(ctx, "foo", &Elasticsearch.InstanceArgs{
+// 			InstanceName:     pulumi.String("tf-test"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			Version:          pulumi.String("7.5.1"),
+// 			VpcId:            pulumi.Any(_var.Vpc_id),
+// 			SubnetId:         pulumi.Any(_var.Subnet_id),
+// 			Password:         pulumi.String("Test12345"),
+// 			LicenseType:      pulumi.String("basic"),
+// 			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+// 				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+// 					NodeNum:  pulumi.Int(1),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+// 				},
+// 			},
+// 			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+// 				&elasticsearch.InstanceNodeInfoListArgs{
+// 					NodeNum:  pulumi.Int(2),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+// 					Encrypt:  pulumi.Bool(false),
+// 				},
+// 			},
+// 			EsAcl: &elasticsearch.InstanceEsAclArgs{
+// 				BlackLists: pulumi.StringArray{
+// 					pulumi.String("9.9.9.9"),
+// 					pulumi.String("8.8.8.8"),
+// 				},
+// 				WhiteLists: pulumi.StringArray{
+// 					pulumi.String("0.0.0.0"),
+// 				},
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -67,16 +73,14 @@ import (
 // Elasticsearch instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
-//
+//  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
 
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone pulumi.StringPtrOutput `pulumi:"availabilityZone"`
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType pulumi.IntPtrOutput `pulumi:"basicSecurityType"`
 	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod pulumi.IntPtrOutput `pulumi:"chargePeriod"`
@@ -92,6 +96,8 @@ type Instance struct {
 	ElasticsearchPort pulumi.IntOutput `pulumi:"elasticsearchPort"`
 	// Elasticsearch VIP.
 	ElasticsearchVip pulumi.StringOutput `pulumi:"elasticsearchVip"`
+	// Kibana Access Control Configuration.
+	EsAcl InstanceEsAclOutput `pulumi:"esAcl"`
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
 	// Kibana access URL.
@@ -162,7 +168,7 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType *int `pulumi:"basicSecurityType"`
 	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod *int `pulumi:"chargePeriod"`
@@ -178,6 +184,8 @@ type instanceState struct {
 	ElasticsearchPort *int `pulumi:"elasticsearchPort"`
 	// Elasticsearch VIP.
 	ElasticsearchVip *string `pulumi:"elasticsearchVip"`
+	// Kibana Access Control Configuration.
+	EsAcl *InstanceEsAcl `pulumi:"esAcl"`
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
 	// Kibana access URL.
@@ -207,7 +215,7 @@ type instanceState struct {
 type InstanceState struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone pulumi.StringPtrInput
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType pulumi.IntPtrInput
 	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod pulumi.IntPtrInput
@@ -223,6 +231,8 @@ type InstanceState struct {
 	ElasticsearchPort pulumi.IntPtrInput
 	// Elasticsearch VIP.
 	ElasticsearchVip pulumi.StringPtrInput
+	// Kibana Access Control Configuration.
+	EsAcl InstanceEsAclPtrInput
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
 	// Kibana access URL.
@@ -256,7 +266,7 @@ func (InstanceState) ElementType() reflect.Type {
 type instanceArgs struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType *int `pulumi:"basicSecurityType"`
 	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod *int `pulumi:"chargePeriod"`
@@ -264,6 +274,8 @@ type instanceArgs struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode *int `pulumi:"deployMode"`
+	// Kibana Access Control Configuration.
+	EsAcl *InstanceEsAcl `pulumi:"esAcl"`
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -292,7 +304,7 @@ type instanceArgs struct {
 type InstanceArgs struct {
 	// Availability zone. When create multi-az es, this parameter must be omitted.
 	AvailabilityZone pulumi.StringPtrInput
-	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType pulumi.IntPtrInput
 	// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
 	ChargePeriod pulumi.IntPtrInput
@@ -300,6 +312,8 @@ type InstanceArgs struct {
 	ChargeType pulumi.StringPtrInput
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode pulumi.IntPtrInput
+	// Kibana Access Control Configuration.
+	EsAcl InstanceEsAclPtrInput
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -350,7 +364,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -375,7 +389,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -416,7 +430,7 @@ func (o InstanceOutput) AvailabilityZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.AvailabilityZone }).(pulumi.StringPtrOutput)
 }
 
-// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`.
+// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 func (o InstanceOutput) BasicSecurityType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.BasicSecurityType }).(pulumi.IntPtrOutput)
 }
@@ -454,6 +468,11 @@ func (o InstanceOutput) ElasticsearchPort() pulumi.IntOutput {
 // Elasticsearch VIP.
 func (o InstanceOutput) ElasticsearchVip() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.ElasticsearchVip }).(pulumi.StringOutput)
+}
+
+// Kibana Access Control Configuration.
+func (o InstanceOutput) EsAcl() InstanceEsAclOutput {
+	return o.ApplyT(func(v *Instance) InstanceEsAclOutput { return v.EsAcl }).(InstanceEsAclOutput)
 }
 
 // Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).

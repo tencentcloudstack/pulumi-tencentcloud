@@ -35,6 +35,7 @@ class NodePoolArgs:
                  scaling_group_project_id: Optional[pulumi.Input[int]] = None,
                  scaling_mode: Optional[pulumi.Input[str]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  taints: Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]]] = None,
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
@@ -61,6 +62,7 @@ class NodePoolArgs:
         :param pulumi.Input[int] scaling_group_project_id: Project ID the scaling group belongs to.
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
+        :param pulumi.Input[Mapping[str, Any]] tags: Node pool tag specifications, will passthroughs to the scaling instances.
         :param pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]] taints: Taints of kubernetes node pool created nodes.
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -101,6 +103,8 @@ class NodePoolArgs:
             pulumi.set(__self__, "scaling_mode", scaling_mode)
         if subnet_ids is not None:
             pulumi.set(__self__, "subnet_ids", subnet_ids)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if taints is not None:
             pulumi.set(__self__, "taints", taints)
         if termination_policies is not None:
@@ -352,6 +356,18 @@ class NodePoolArgs:
 
     @property
     @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Node pool tag specifications, will passthroughs to the scaling instances.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
     def taints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]]]:
         """
         Taints of kubernetes node pool created nodes.
@@ -427,6 +443,7 @@ class _NodePoolState:
                  scaling_mode: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  taints: Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]]] = None,
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
@@ -459,6 +476,7 @@ class _NodePoolState:
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
         :param pulumi.Input[str] status: Status of the node pool.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
+        :param pulumi.Input[Mapping[str, Any]] tags: Node pool tag specifications, will passthroughs to the scaling instances.
         :param pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]] taints: Taints of kubernetes node pool created nodes.
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -515,6 +533,8 @@ class _NodePoolState:
             pulumi.set(__self__, "status", status)
         if subnet_ids is not None:
             pulumi.set(__self__, "subnet_ids", subnet_ids)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if taints is not None:
             pulumi.set(__self__, "taints", taints)
         if termination_policies is not None:
@@ -828,6 +848,18 @@ class _NodePoolState:
 
     @property
     @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Node pool tag specifications, will passthroughs to the scaling instances.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
     def taints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]]]:
         """
         Taints of kubernetes node pool created nodes.
@@ -911,6 +943,7 @@ class NodePool(pulumi.CustomResource):
                  scaling_group_project_id: Optional[pulumi.Input[int]] = None,
                  scaling_mode: Optional[pulumi.Input[str]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  taints: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolTaintArgs']]]]] = None,
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
@@ -921,6 +954,10 @@ class NodePool(pulumi.CustomResource):
         Provide a resource to create an auto scaling group for kubernetes cluster.
 
         > **NOTE:**  We recommend the usage of one cluster with essential worker config + node pool to manage cluster and nodes. Its a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
+
+        > **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `delete_keep_instance` to `false`.
+
+        > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
 
         ## Example Usage
 
@@ -977,6 +1014,8 @@ class NodePool(pulumi.CustomResource):
                 password="test123#",
                 enhanced_security_service=False,
                 enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
             ),
             labels={
                 "test1": "test1",
@@ -1061,6 +1100,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[int] scaling_group_project_id: Project ID the scaling group belongs to.
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
+        :param pulumi.Input[Mapping[str, Any]] tags: Node pool tag specifications, will passthroughs to the scaling instances.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolTaintArgs']]]] taints: Taints of kubernetes node pool created nodes.
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -1077,6 +1117,10 @@ class NodePool(pulumi.CustomResource):
         Provide a resource to create an auto scaling group for kubernetes cluster.
 
         > **NOTE:**  We recommend the usage of one cluster with essential worker config + node pool to manage cluster and nodes. Its a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
+
+        > **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `delete_keep_instance` to `false`.
+
+        > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
 
         ## Example Usage
 
@@ -1133,6 +1177,8 @@ class NodePool(pulumi.CustomResource):
                 password="test123#",
                 enhanced_security_service=False,
                 enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
             ),
             labels={
                 "test1": "test1",
@@ -1230,6 +1276,7 @@ class NodePool(pulumi.CustomResource):
                  scaling_group_project_id: Optional[pulumi.Input[int]] = None,
                  scaling_mode: Optional[pulumi.Input[str]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  taints: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolTaintArgs']]]]] = None,
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
@@ -1276,6 +1323,7 @@ class NodePool(pulumi.CustomResource):
             __props__.__dict__["scaling_group_project_id"] = scaling_group_project_id
             __props__.__dict__["scaling_mode"] = scaling_mode
             __props__.__dict__["subnet_ids"] = subnet_ids
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["taints"] = taints
             __props__.__dict__["termination_policies"] = termination_policies
             __props__.__dict__["unschedulable"] = unschedulable
@@ -1324,6 +1372,7 @@ class NodePool(pulumi.CustomResource):
             scaling_mode: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
             subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             taints: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolTaintArgs']]]]] = None,
             termination_policies: Optional[pulumi.Input[str]] = None,
             unschedulable: Optional[pulumi.Input[int]] = None,
@@ -1361,6 +1410,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
         :param pulumi.Input[str] status: Status of the node pool.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
+        :param pulumi.Input[Mapping[str, Any]] tags: Node pool tag specifications, will passthroughs to the scaling instances.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolTaintArgs']]]] taints: Taints of kubernetes node pool created nodes.
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
@@ -1396,6 +1446,7 @@ class NodePool(pulumi.CustomResource):
         __props__.__dict__["scaling_mode"] = scaling_mode
         __props__.__dict__["status"] = status
         __props__.__dict__["subnet_ids"] = subnet_ids
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["taints"] = taints
         __props__.__dict__["termination_policies"] = termination_policies
         __props__.__dict__["unschedulable"] = unschedulable
@@ -1602,6 +1653,14 @@ class NodePool(pulumi.CustomResource):
         ID list of subnet, and for VPC it is required.
         """
         return pulumi.get(self, "subnet_ids")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Node pool tag specifications, will passthroughs to the scaling instances.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter

@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
     public sealed class DomainHttpsConfigForceRedirectGetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether to return the newly added header during force redirection. Values: `on`, `off`.
+        /// </summary>
+        [Input("carryHeaders")]
+        public Input<string>? CarryHeaders { get; set; }
+
+        /// <summary>
         /// Forced redirect status code. Valid values are `301` and `302`. When `switch` setting `off`, this property does not need to be set or set to `302`. Default value is `302`.
         /// </summary>
         [Input("redirectStatusCode")]

@@ -73,7 +73,9 @@ export class VpcAttachment extends pulumi.CustomResource {
      */
     public readonly instanceId!: pulumi.Output<string>;
     /**
-     * ID of region. Conflict with region_name, can not be set at the same time.
+     * this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
+     *
+     * @deprecated this argument was deprecated, use `region_name` instead.
      */
     public readonly regionId!: pulumi.Output<number | undefined>;
     /**
@@ -162,7 +164,9 @@ export interface VpcAttachmentState {
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * ID of region. Conflict with region_name, can not be set at the same time.
+     * this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
+     *
+     * @deprecated this argument was deprecated, use `region_name` instead.
      */
     regionId?: pulumi.Input<number>;
     /**
@@ -200,7 +204,9 @@ export interface VpcAttachmentArgs {
      */
     instanceId: pulumi.Input<string>;
     /**
-     * ID of region. Conflict with region_name, can not be set at the same time.
+     * this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
+     *
+     * @deprecated this argument was deprecated, use `region_name` instead.
      */
     regionId?: pulumi.Input<number>;
     /**

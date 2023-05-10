@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to configure kubernetes cluster app addons.
  *
+ * > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -15,11 +17,12 @@ import * as utilities from "../utilities";
  *
  * const addonCbs = new tencentcloud.Kubernetes.AddonAttachment("addon_cbs", {
  *     clusterId: "cls-xxxxxxxx",
+ *     // version = "1.0.5"
  *     values: ["rootdir=/var/lib/kubelet"],
- *     version: "1.0.0",
  * });
  * const addonTcr = new tencentcloud.Kubernetes.AddonAttachment("addon_tcr", {
  *     clusterId: "cls-xxxxxxxx",
+ *     // version = "1.0.0"
  *     values: [
  *         // imagePullSecretsCrs is an array which can configure image pull
  *         "global.imagePullSecretsCrs[0].name=unique-sample-vpc",
@@ -41,7 +44,6 @@ import * as utilities from "../utilities";
  *         "global.hosts[0].ip=10.16.0.49",
  *         "global.hosts[0].disabled=false",
  *     ],
- *     version: "1.0.0",
  * });
  * ```
  *
@@ -57,7 +59,7 @@ import * as utilities from "../utilities";
  *     "spec":{
  *         "chart":{
  *             "chartName":"cbs",
- *             "chartVersion":"1.0.0"
+ *             "chartVersion":"1.0.5"
  *         },
  *         "values":{
  *             "rawValuesType":"yaml",
@@ -134,7 +136,7 @@ export class AddonAttachment extends pulumi.CustomResource {
     /**
      * Addon version, default latest version. Conflict with `requestBody`.
      */
-    public readonly version!: pulumi.Output<string | undefined>;
+    public readonly version!: pulumi.Output<string>;
 
     /**
      * Create a AddonAttachment resource with the given unique name, arguments, and options.

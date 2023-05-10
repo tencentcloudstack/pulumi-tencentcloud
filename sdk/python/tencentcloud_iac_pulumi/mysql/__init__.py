@@ -6,14 +6,26 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .account import *
+from .audit_log_file import *
 from .backup_policy import *
+from .deploy_group import *
 from .get_backup_list import *
+from .get_backup_overview import *
+from .get_backup_summaries import *
+from .get_bin_log import *
+from .get_binlog_backup_overview import *
+from .get_clone_list import *
+from .get_data_backup_overview import *
 from .get_default_params import *
 from .get_instance import *
 from .get_parameter_list import *
 from .get_zone_config import *
 from .instance import *
+from .local_binlog_config import *
+from .param_template import *
 from .privilege import *
 from .readonly_instance import *
+from .security_groups_attachment import *
+from .time_window import *
 from ._inputs import *
 from . import outputs

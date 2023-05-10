@@ -16,10 +16,12 @@ __all__ = ['BucketArgs', 'Bucket']
 class BucketArgs:
     def __init__(__self__, *,
                  bucket: pulumi.Input[str],
+                 acceleration_enable: Optional[pulumi.Input[bool]] = None,
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
+                 force_clean: Optional[pulumi.Input[bool]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -35,10 +37,12 @@ class BucketArgs:
         """
         The set of arguments for constructing a Bucket resource.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
+        :param pulumi.Input[bool] acceleration_enable: Enable bucket acceleration.
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -53,6 +57,8 @@ class BucketArgs:
         :param pulumi.Input['BucketWebsiteArgs'] website: A website object(documented below).
         """
         pulumi.set(__self__, "bucket", bucket)
+        if acceleration_enable is not None:
+            pulumi.set(__self__, "acceleration_enable", acceleration_enable)
         if acl is not None:
             pulumi.set(__self__, "acl", acl)
         if acl_body is not None:
@@ -61,6 +67,8 @@ class BucketArgs:
             pulumi.set(__self__, "cors_rules", cors_rules)
         if encryption_algorithm is not None:
             pulumi.set(__self__, "encryption_algorithm", encryption_algorithm)
+        if force_clean is not None:
+            pulumi.set(__self__, "force_clean", force_clean)
         if lifecycle_rules is not None:
             pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
         if log_enable is not None:
@@ -97,6 +105,18 @@ class BucketArgs:
     @bucket.setter
     def bucket(self, value: pulumi.Input[str]):
         pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter(name="accelerationEnable")
+    def acceleration_enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable bucket acceleration.
+        """
+        return pulumi.get(self, "acceleration_enable")
+
+    @acceleration_enable.setter
+    def acceleration_enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "acceleration_enable", value)
 
     @property
     @pulumi.getter
@@ -145,6 +165,18 @@ class BucketArgs:
     @encryption_algorithm.setter
     def encryption_algorithm(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "encryption_algorithm", value)
+
+    @property
+    @pulumi.getter(name="forceClean")
+    def force_clean(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Force cleanup all objects before delete bucket.
+        """
+        return pulumi.get(self, "force_clean")
+
+    @force_clean.setter
+    def force_clean(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_clean", value)
 
     @property
     @pulumi.getter(name="lifecycleRules")
@@ -294,12 +326,14 @@ class BucketArgs:
 @pulumi.input_type
 class _BucketState:
     def __init__(__self__, *,
+                 acceleration_enable: Optional[pulumi.Input[bool]] = None,
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]] = None,
                  cos_bucket_url: Optional[pulumi.Input[str]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
+                 force_clean: Optional[pulumi.Input[bool]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -314,12 +348,14 @@ class _BucketState:
                  website: Optional[pulumi.Input['BucketWebsiteArgs']] = None):
         """
         Input properties used for looking up and filtering Bucket resources.
+        :param pulumi.Input[bool] acceleration_enable: Enable bucket acceleration.
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] cos_bucket_url: The URL of this cos bucket.
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -333,6 +369,8 @@ class _BucketState:
         :param pulumi.Input[bool] versioning_enable: Enable bucket versioning.
         :param pulumi.Input['BucketWebsiteArgs'] website: A website object(documented below).
         """
+        if acceleration_enable is not None:
+            pulumi.set(__self__, "acceleration_enable", acceleration_enable)
         if acl is not None:
             pulumi.set(__self__, "acl", acl)
         if acl_body is not None:
@@ -345,6 +383,8 @@ class _BucketState:
             pulumi.set(__self__, "cos_bucket_url", cos_bucket_url)
         if encryption_algorithm is not None:
             pulumi.set(__self__, "encryption_algorithm", encryption_algorithm)
+        if force_clean is not None:
+            pulumi.set(__self__, "force_clean", force_clean)
         if lifecycle_rules is not None:
             pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
         if log_enable is not None:
@@ -369,6 +409,18 @@ class _BucketState:
             pulumi.set(__self__, "versioning_enable", versioning_enable)
         if website is not None:
             pulumi.set(__self__, "website", website)
+
+    @property
+    @pulumi.getter(name="accelerationEnable")
+    def acceleration_enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable bucket acceleration.
+        """
+        return pulumi.get(self, "acceleration_enable")
+
+    @acceleration_enable.setter
+    def acceleration_enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "acceleration_enable", value)
 
     @property
     @pulumi.getter
@@ -441,6 +493,18 @@ class _BucketState:
     @encryption_algorithm.setter
     def encryption_algorithm(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "encryption_algorithm", value)
+
+    @property
+    @pulumi.getter(name="forceClean")
+    def force_clean(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Force cleanup all objects before delete bucket.
+        """
+        return pulumi.get(self, "force_clean")
+
+    @force_clean.setter
+    def force_clean(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_clean", value)
 
     @property
     @pulumi.getter(name="lifecycleRules")
@@ -592,11 +656,13 @@ class Bucket(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 acceleration_enable: Optional[pulumi.Input[bool]] = None,
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
+                 force_clean: Optional[pulumi.Input[bool]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -635,6 +701,7 @@ class Bucket(pulumi.CustomResource):
         mycos = tencentcloud.cos.Bucket("mycos",
             acl="private",
             bucket="mycos-1258798060",
+            force_clean=True,
             multi_az=True,
             versioning_enable=True)
         ```
@@ -687,9 +754,10 @@ class Bucket(pulumi.CustomResource):
         mycos = tencentcloud.cos.Bucket("mycos",
             bucket="mycos-1258798060",
             website=tencentcloud.cos.BucketWebsiteArgs(
-                error_document="error.html",
                 index_document="index.html",
+                error_document="error.html",
             ))
+        pulumi.export("endpointTest", mycos.website.endpoint)
         ```
 
         Using CORS
@@ -851,11 +919,13 @@ class Bucket(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] acceleration_enable: Enable bucket acceleration.
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -900,6 +970,7 @@ class Bucket(pulumi.CustomResource):
         mycos = tencentcloud.cos.Bucket("mycos",
             acl="private",
             bucket="mycos-1258798060",
+            force_clean=True,
             multi_az=True,
             versioning_enable=True)
         ```
@@ -952,9 +1023,10 @@ class Bucket(pulumi.CustomResource):
         mycos = tencentcloud.cos.Bucket("mycos",
             bucket="mycos-1258798060",
             website=tencentcloud.cos.BucketWebsiteArgs(
-                error_document="error.html",
                 index_document="index.html",
+                error_document="error.html",
             ))
+        pulumi.export("endpointTest", mycos.website.endpoint)
         ```
 
         Using CORS
@@ -1129,11 +1201,13 @@ class Bucket(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 acceleration_enable: Optional[pulumi.Input[bool]] = None,
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
+                 force_clean: Optional[pulumi.Input[bool]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -1160,6 +1234,7 @@ class Bucket(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = BucketArgs.__new__(BucketArgs)
 
+            __props__.__dict__["acceleration_enable"] = acceleration_enable
             __props__.__dict__["acl"] = acl
             __props__.__dict__["acl_body"] = acl_body
             if bucket is None and not opts.urn:
@@ -1167,6 +1242,7 @@ class Bucket(pulumi.CustomResource):
             __props__.__dict__["bucket"] = bucket
             __props__.__dict__["cors_rules"] = cors_rules
             __props__.__dict__["encryption_algorithm"] = encryption_algorithm
+            __props__.__dict__["force_clean"] = force_clean
             __props__.__dict__["lifecycle_rules"] = lifecycle_rules
             __props__.__dict__["log_enable"] = log_enable
             __props__.__dict__["log_prefix"] = log_prefix
@@ -1190,12 +1266,14 @@ class Bucket(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            acceleration_enable: Optional[pulumi.Input[bool]] = None,
             acl: Optional[pulumi.Input[str]] = None,
             acl_body: Optional[pulumi.Input[str]] = None,
             bucket: Optional[pulumi.Input[str]] = None,
             cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
             cos_bucket_url: Optional[pulumi.Input[str]] = None,
             encryption_algorithm: Optional[pulumi.Input[str]] = None,
+            force_clean: Optional[pulumi.Input[bool]] = None,
             lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
             log_enable: Optional[pulumi.Input[bool]] = None,
             log_prefix: Optional[pulumi.Input[str]] = None,
@@ -1215,12 +1293,14 @@ class Bucket(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] acceleration_enable: Enable bucket acceleration.
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] cos_bucket_url: The URL of this cos bucket.
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -1238,12 +1318,14 @@ class Bucket(pulumi.CustomResource):
 
         __props__ = _BucketState.__new__(_BucketState)
 
+        __props__.__dict__["acceleration_enable"] = acceleration_enable
         __props__.__dict__["acl"] = acl
         __props__.__dict__["acl_body"] = acl_body
         __props__.__dict__["bucket"] = bucket
         __props__.__dict__["cors_rules"] = cors_rules
         __props__.__dict__["cos_bucket_url"] = cos_bucket_url
         __props__.__dict__["encryption_algorithm"] = encryption_algorithm
+        __props__.__dict__["force_clean"] = force_clean
         __props__.__dict__["lifecycle_rules"] = lifecycle_rules
         __props__.__dict__["log_enable"] = log_enable
         __props__.__dict__["log_prefix"] = log_prefix
@@ -1257,6 +1339,14 @@ class Bucket(pulumi.CustomResource):
         __props__.__dict__["versioning_enable"] = versioning_enable
         __props__.__dict__["website"] = website
         return Bucket(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="accelerationEnable")
+    def acceleration_enable(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Enable bucket acceleration.
+        """
+        return pulumi.get(self, "acceleration_enable")
 
     @property
     @pulumi.getter
@@ -1305,6 +1395,14 @@ class Bucket(pulumi.CustomResource):
         The server-side encryption algorithm to use. Valid value is `AES256`.
         """
         return pulumi.get(self, "encryption_algorithm")
+
+    @property
+    @pulumi.getter(name="forceClean")
+    def force_clean(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Force cleanup all objects before delete bucket.
+        """
+        return pulumi.get(self, "force_clean")
 
     @property
     @pulumi.getter(name="lifecycleRules")

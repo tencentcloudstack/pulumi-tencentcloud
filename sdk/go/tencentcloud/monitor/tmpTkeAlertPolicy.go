@@ -115,7 +115,7 @@ func (i *TmpTkeAlertPolicy) ToTmpTkeAlertPolicyOutputWithContext(ctx context.Con
 // TmpTkeAlertPolicyArrayInput is an input type that accepts TmpTkeAlertPolicyArray and TmpTkeAlertPolicyArrayOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyArrayInput` via:
 //
-//	TmpTkeAlertPolicyArray{ TmpTkeAlertPolicyArgs{...} }
+//          TmpTkeAlertPolicyArray{ TmpTkeAlertPolicyArgs{...} }
 type TmpTkeAlertPolicyArrayInput interface {
 	pulumi.Input
 
@@ -140,7 +140,7 @@ func (i TmpTkeAlertPolicyArray) ToTmpTkeAlertPolicyArrayOutputWithContext(ctx co
 // TmpTkeAlertPolicyMapInput is an input type that accepts TmpTkeAlertPolicyMap and TmpTkeAlertPolicyMapOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyMapInput` via:
 //
-//	TmpTkeAlertPolicyMap{ "key": TmpTkeAlertPolicyArgs{...} }
+//          TmpTkeAlertPolicyMap{ "key": TmpTkeAlertPolicyArgs{...} }
 type TmpTkeAlertPolicyMapInput interface {
 	pulumi.Input
 

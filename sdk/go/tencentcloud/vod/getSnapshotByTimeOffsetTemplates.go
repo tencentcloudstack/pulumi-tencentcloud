@@ -18,34 +18,31 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			fooSnapshotByTimeOffsetTemplate, err := Vod.NewSnapshotByTimeOffsetTemplate(ctx, "fooSnapshotByTimeOffsetTemplate", &Vod.SnapshotByTimeOffsetTemplateArgs{
-//				Width:              pulumi.Int(130),
-//				Height:             pulumi.Int(128),
-//				ResolutionAdaptive: pulumi.Bool(false),
-//				Format:             pulumi.String("png"),
-//				Comment:            pulumi.String("test"),
-//				FillType:           pulumi.String("white"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_ = Vod.GetSnapshotByTimeOffsetTemplatesOutput(ctx, vod.GetSnapshotByTimeOffsetTemplatesOutputArgs{
-//				Type:       pulumi.String("Custom"),
-//				Definition: fooSnapshotByTimeOffsetTemplate.ID(),
-//			}, nil)
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooSnapshotByTimeOffsetTemplate, err := Vod.NewSnapshotByTimeOffsetTemplate(ctx, "fooSnapshotByTimeOffsetTemplate", &Vod.SnapshotByTimeOffsetTemplateArgs{
+// 			Width:              pulumi.Int(130),
+// 			Height:             pulumi.Int(128),
+// 			ResolutionAdaptive: pulumi.Bool(false),
+// 			Format:             pulumi.String("png"),
+// 			Comment:            pulumi.String("test"),
+// 			FillType:           pulumi.String("white"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_ = Vod.GetSnapshotByTimeOffsetTemplatesOutput(ctx, vod.GetSnapshotByTimeOffsetTemplatesOutputArgs{
+// 			Type:       pulumi.String("Custom"),
+// 			Definition: fooSnapshotByTimeOffsetTemplate.ID(),
+// 		}, nil)
+// 		return nil
+// 	})
+// }
 // ```
 func GetSnapshotByTimeOffsetTemplates(ctx *pulumi.Context, args *GetSnapshotByTimeOffsetTemplatesArgs, opts ...pulumi.InvokeOption) (*GetSnapshotByTimeOffsetTemplatesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

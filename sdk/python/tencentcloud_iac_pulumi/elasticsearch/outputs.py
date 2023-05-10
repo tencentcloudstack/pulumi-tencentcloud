@@ -10,6 +10,7 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'InstanceEsAcl',
     'InstanceMultiZoneInfo',
     'InstanceNodeInfoList',
     'InstanceWebNodeTypeInfo',
@@ -17,6 +18,56 @@ __all__ = [
     'GetInstancesInstanceListMultiZoneInfoResult',
     'GetInstancesInstanceListNodeInfoListResult',
 ]
+
+@pulumi.output_type
+class InstanceEsAcl(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "blackLists":
+            suggest = "black_lists"
+        elif key == "whiteLists":
+            suggest = "white_lists"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstanceEsAcl. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstanceEsAcl.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstanceEsAcl.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 black_lists: Optional[Sequence[str]] = None,
+                 white_lists: Optional[Sequence[str]] = None):
+        """
+        :param Sequence[str] black_lists: Blacklist of kibana access.
+        :param Sequence[str] white_lists: Whitelist of kibana access.
+        """
+        if black_lists is not None:
+            pulumi.set(__self__, "black_lists", black_lists)
+        if white_lists is not None:
+            pulumi.set(__self__, "white_lists", white_lists)
+
+    @property
+    @pulumi.getter(name="blackLists")
+    def black_lists(self) -> Optional[Sequence[str]]:
+        """
+        Blacklist of kibana access.
+        """
+        return pulumi.get(self, "black_lists")
+
+    @property
+    @pulumi.getter(name="whiteLists")
+    def white_lists(self) -> Optional[Sequence[str]]:
+        """
+        Whitelist of kibana access.
+        """
+        return pulumi.get(self, "white_lists")
+
 
 @pulumi.output_type
 class InstanceMultiZoneInfo(dict):

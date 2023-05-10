@@ -19,25 +19,31 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tcr.NewNamespace(ctx, "foo", &Tcr.NamespaceArgs{
-//				InstanceId: pulumi.String(""),
-//				IsPublic:   pulumi.Bool(true),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewNamespace(ctx, "foo", &Tcr.NamespaceArgs{
+// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+// 				&tcr.NamespaceCveWhitelistItemArgs{
+// 					CveId: pulumi.String("cve-xxxxx"),
+// 				},
+// 			},
+// 			InstanceId:   pulumi.String(""),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			IsPublic:     pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -45,19 +51,25 @@ import (
 // tcr namespace can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
-//
+//  $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
 // ```
 type Namespace struct {
 	pulumi.CustomResourceState
 
+	// Vulnerability Whitelist.
+	CveWhitelistItems NamespaceCveWhitelistItemArrayOutput `pulumi:"cveWhitelistItems"`
 	// ID of the TCR instance.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
+	// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+	IsAutoScan pulumi.BoolPtrOutput `pulumi:"isAutoScan"`
+	// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+	IsPreventVul pulumi.BoolPtrOutput `pulumi:"isPreventVul"`
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic pulumi.BoolPtrOutput `pulumi:"isPublic"`
 	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+	Severity pulumi.StringPtrOutput `pulumi:"severity"`
 }
 
 // NewNamespace registers a new resource with the given unique name, arguments, and options.
@@ -93,21 +105,37 @@ func GetNamespace(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Namespace resources.
 type namespaceState struct {
+	// Vulnerability Whitelist.
+	CveWhitelistItems []NamespaceCveWhitelistItem `pulumi:"cveWhitelistItems"`
 	// ID of the TCR instance.
 	InstanceId *string `pulumi:"instanceId"`
+	// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+	IsAutoScan *bool `pulumi:"isAutoScan"`
+	// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+	IsPreventVul *bool `pulumi:"isPreventVul"`
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic *bool `pulumi:"isPublic"`
 	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name *string `pulumi:"name"`
+	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+	Severity *string `pulumi:"severity"`
 }
 
 type NamespaceState struct {
+	// Vulnerability Whitelist.
+	CveWhitelistItems NamespaceCveWhitelistItemArrayInput
 	// ID of the TCR instance.
 	InstanceId pulumi.StringPtrInput
+	// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+	IsAutoScan pulumi.BoolPtrInput
+	// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+	IsPreventVul pulumi.BoolPtrInput
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic pulumi.BoolPtrInput
 	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name pulumi.StringPtrInput
+	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+	Severity pulumi.StringPtrInput
 }
 
 func (NamespaceState) ElementType() reflect.Type {
@@ -115,22 +143,38 @@ func (NamespaceState) ElementType() reflect.Type {
 }
 
 type namespaceArgs struct {
+	// Vulnerability Whitelist.
+	CveWhitelistItems []NamespaceCveWhitelistItem `pulumi:"cveWhitelistItems"`
 	// ID of the TCR instance.
 	InstanceId string `pulumi:"instanceId"`
+	// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+	IsAutoScan *bool `pulumi:"isAutoScan"`
+	// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+	IsPreventVul *bool `pulumi:"isPreventVul"`
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic *bool `pulumi:"isPublic"`
 	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name *string `pulumi:"name"`
+	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+	Severity *string `pulumi:"severity"`
 }
 
 // The set of arguments for constructing a Namespace resource.
 type NamespaceArgs struct {
+	// Vulnerability Whitelist.
+	CveWhitelistItems NamespaceCveWhitelistItemArrayInput
 	// ID of the TCR instance.
 	InstanceId pulumi.StringInput
+	// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+	IsAutoScan pulumi.BoolPtrInput
+	// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+	IsPreventVul pulumi.BoolPtrInput
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic pulumi.BoolPtrInput
 	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name pulumi.StringPtrInput
+	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+	Severity pulumi.StringPtrInput
 }
 
 func (NamespaceArgs) ElementType() reflect.Type {
@@ -159,7 +203,7 @@ func (i *Namespace) ToNamespaceOutputWithContext(ctx context.Context) NamespaceO
 // NamespaceArrayInput is an input type that accepts NamespaceArray and NamespaceArrayOutput values.
 // You can construct a concrete instance of `NamespaceArrayInput` via:
 //
-//	NamespaceArray{ NamespaceArgs{...} }
+//          NamespaceArray{ NamespaceArgs{...} }
 type NamespaceArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +228,7 @@ func (i NamespaceArray) ToNamespaceArrayOutputWithContext(ctx context.Context) N
 // NamespaceMapInput is an input type that accepts NamespaceMap and NamespaceMapOutput values.
 // You can construct a concrete instance of `NamespaceMapInput` via:
 //
-//	NamespaceMap{ "key": NamespaceArgs{...} }
+//          NamespaceMap{ "key": NamespaceArgs{...} }
 type NamespaceMapInput interface {
 	pulumi.Input
 
@@ -220,9 +264,24 @@ func (o NamespaceOutput) ToNamespaceOutputWithContext(ctx context.Context) Names
 	return o
 }
 
+// Vulnerability Whitelist.
+func (o NamespaceOutput) CveWhitelistItems() NamespaceCveWhitelistItemArrayOutput {
+	return o.ApplyT(func(v *Namespace) NamespaceCveWhitelistItemArrayOutput { return v.CveWhitelistItems }).(NamespaceCveWhitelistItemArrayOutput)
+}
+
 // ID of the TCR instance.
 func (o NamespaceOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Namespace) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Scanning level, `True` is automatic, `False` is manual. Default is `false`.
+func (o NamespaceOutput) IsAutoScan() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Namespace) pulumi.BoolPtrOutput { return v.IsAutoScan }).(pulumi.BoolPtrOutput)
+}
+
+// Blocking switch, `True` is open, `False` is closed. Default is `false`.
+func (o NamespaceOutput) IsPreventVul() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Namespace) pulumi.BoolPtrOutput { return v.IsPreventVul }).(pulumi.BoolPtrOutput)
 }
 
 // Indicate that the namespace is public or not. Default is `false`.
@@ -233,6 +292,11 @@ func (o NamespaceOutput) IsPublic() pulumi.BoolPtrOutput {
 // Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 func (o NamespaceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Namespace) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Block vulnerability level, currently only supports `low`, `medium`, `high`.
+func (o NamespaceOutput) Severity() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Namespace) pulumi.StringPtrOutput { return v.Severity }).(pulumi.StringPtrOutput)
 }
 
 type NamespaceArrayOutput struct{ *pulumi.OutputState }

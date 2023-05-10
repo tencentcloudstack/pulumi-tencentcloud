@@ -8,13 +8,23 @@ import * as utilities from "../utilities";
 export * from "./attachment";
 export * from "./bandwidthLimit";
 export * from "./getBandwidthLimits";
+export * from "./getCrossBorderCompliance";
+export * from "./getCrossBorderFlowMonitor";
+export * from "./getCrossBorderRegionBandwidthLimits";
 export * from "./getInstances";
+export * from "./getTenantInstances";
 export * from "./instance";
+export * from "./instancesAcceptAttach";
+export * from "./instancesResetAttach";
+export * from "./routes";
 
 // Import resources to register:
 import { Attachment } from "./attachment";
 import { BandwidthLimit } from "./bandwidthLimit";
 import { Instance } from "./instance";
+import { InstancesAcceptAttach } from "./instancesAcceptAttach";
+import { InstancesResetAttach } from "./instancesResetAttach";
+import { Routes } from "./routes";
 
 const _module = {
     version: utilities.getVersion(),
@@ -26,6 +36,12 @@ const _module = {
                 return new BandwidthLimit(name, <any>undefined, { urn })
             case "tencentcloud:Ccn/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/instancesAcceptAttach:InstancesAcceptAttach":
+                return new InstancesAcceptAttach(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/instancesResetAttach:InstancesResetAttach":
+                return new InstancesResetAttach(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/routes:Routes":
+                return new Routes(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -34,3 +50,6 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/attachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/bandwidthLimit", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instancesAcceptAttach", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instancesResetAttach", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/routes", _module)

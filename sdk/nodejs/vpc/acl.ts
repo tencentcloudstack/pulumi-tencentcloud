@@ -81,6 +81,10 @@ export class Acl extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * Tags of the vpc acl.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    /**
      * ID of the VPC instance.
      */
     public readonly vpcId!: pulumi.Output<string>;
@@ -102,6 +106,7 @@ export class Acl extends pulumi.CustomResource {
             resourceInputs["egresses"] = state ? state.egresses : undefined;
             resourceInputs["ingresses"] = state ? state.ingresses : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
             const args = argsOrState as AclArgs | undefined;
@@ -111,6 +116,7 @@ export class Acl extends pulumi.CustomResource {
             resourceInputs["egresses"] = args ? args.egresses : undefined;
             resourceInputs["ingresses"] = args ? args.ingresses : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
         }
@@ -140,6 +146,10 @@ export interface AclState {
      */
     name?: pulumi.Input<string>;
     /**
+     * Tags of the vpc acl.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
+    /**
      * ID of the VPC instance.
      */
     vpcId?: pulumi.Input<string>;
@@ -161,6 +171,10 @@ export interface AclArgs {
      * Name of the network ACL.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Tags of the vpc acl.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
     /**
      * ID of the VPC instance.
      */

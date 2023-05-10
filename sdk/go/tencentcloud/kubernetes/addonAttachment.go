@@ -13,89 +13,83 @@ import (
 
 // Provide a resource to configure kubernetes cluster app addons.
 //
+// > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
+//
 // ## Example Usage
 //
 // ```go
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Kubernetes.NewAddonAttachment(ctx, "addonCbs", &Kubernetes.AddonAttachmentArgs{
-//				ClusterId: pulumi.String("cls-xxxxxxxx"),
-//				Values: pulumi.StringArray{
-//					pulumi.String("rootdir=/var/lib/kubelet"),
-//				},
-//				Version: pulumi.String("1.0.0"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Kubernetes.NewAddonAttachment(ctx, "addonTcr", &Kubernetes.AddonAttachmentArgs{
-//				ClusterId: pulumi.String("cls-xxxxxxxx"),
-//				Values: pulumi.StringArray{
-//					pulumi.String("global.imagePullSecretsCrs[0].name=unique-sample-vpc"),
-//					pulumi.String("global.imagePullSecretsCrs[0].namespaces=tcr-assistant-system"),
-//					pulumi.String("global.imagePullSecretsCrs[0].serviceAccounts=*"),
-//					pulumi.String("global.imagePullSecretsCrs[0].type=docker"),
-//					pulumi.String("global.imagePullSecretsCrs[0].dockerUsername=100012345678"),
-//					pulumi.String("global.imagePullSecretsCrs[0].dockerPassword=a.b.tcr-token"),
-//					pulumi.String("global.imagePullSecretsCrs[0].dockerServer=xxxx.tencentcloudcr.com"),
-//					pulumi.String("global.imagePullSecretsCrs[1].name=sample-public"),
-//					pulumi.String("global.imagePullSecretsCrs[1].namespaces=*"),
-//					pulumi.String("global.imagePullSecretsCrs[1].serviceAccounts=*"),
-//					pulumi.String("global.imagePullSecretsCrs[1].type=docker"),
-//					pulumi.String("global.imagePullSecretsCrs[1].dockerUsername=100012345678"),
-//					pulumi.String("global.imagePullSecretsCrs[1].dockerPassword=a.b.tcr-token"),
-//					pulumi.String("global.imagePullSecretsCrs[1].dockerServer=sample"),
-//					pulumi.String("global.hosts[0].domain=sample-vpc.tencentcloudcr.com"),
-//					pulumi.String("global.hosts[0].ip=10.16.0.49"),
-//					pulumi.String("global.hosts[0].disabled=false"),
-//				},
-//				Version: pulumi.String("1.0.0"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kubernetes.NewAddonAttachment(ctx, "addonCbs", &Kubernetes.AddonAttachmentArgs{
+// 			ClusterId: pulumi.String("cls-xxxxxxxx"),
+// 			Values: pulumi.StringArray{
+// 				pulumi.String("rootdir=/var/lib/kubelet"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Kubernetes.NewAddonAttachment(ctx, "addonTcr", &Kubernetes.AddonAttachmentArgs{
+// 			ClusterId: pulumi.String("cls-xxxxxxxx"),
+// 			Values: pulumi.StringArray{
+// 				pulumi.String("global.imagePullSecretsCrs[0].name=unique-sample-vpc"),
+// 				pulumi.String("global.imagePullSecretsCrs[0].namespaces=tcr-assistant-system"),
+// 				pulumi.String("global.imagePullSecretsCrs[0].serviceAccounts=*"),
+// 				pulumi.String("global.imagePullSecretsCrs[0].type=docker"),
+// 				pulumi.String("global.imagePullSecretsCrs[0].dockerUsername=100012345678"),
+// 				pulumi.String("global.imagePullSecretsCrs[0].dockerPassword=a.b.tcr-token"),
+// 				pulumi.String("global.imagePullSecretsCrs[0].dockerServer=xxxx.tencentcloudcr.com"),
+// 				pulumi.String("global.imagePullSecretsCrs[1].name=sample-public"),
+// 				pulumi.String("global.imagePullSecretsCrs[1].namespaces=*"),
+// 				pulumi.String("global.imagePullSecretsCrs[1].serviceAccounts=*"),
+// 				pulumi.String("global.imagePullSecretsCrs[1].type=docker"),
+// 				pulumi.String("global.imagePullSecretsCrs[1].dockerUsername=100012345678"),
+// 				pulumi.String("global.imagePullSecretsCrs[1].dockerPassword=a.b.tcr-token"),
+// 				pulumi.String("global.imagePullSecretsCrs[1].dockerServer=sample"),
+// 				pulumi.String("global.hosts[0].domain=sample-vpc.tencentcloudcr.com"),
+// 				pulumi.String("global.hosts[0].ip=10.16.0.49"),
+// 				pulumi.String("global.hosts[0].disabled=false"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
-// # Install new addon by passing spec json to reqBody directly
+// Install new addon by passing spec json to reqBody directly
 //
 // ```go
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"fmt"
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Kubernetes.NewAddonAttachment(ctx, "addonCbs", &Kubernetes.AddonAttachmentArgs{
-//				ClusterId:   pulumi.String("cls-xxxxxxxx"),
-//				RequestBody: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "  {\n", "    \"spec\":{\n", "        \"chart\":{\n", "            \"chartName\":\"cbs\",\n", "            \"chartVersion\":\"1.0.0\"\n", "        },\n", "        \"values\":{\n", "            \"rawValuesType\":\"yaml\",\n", "            \"values\":[\n", "              \"rootdir=/var/lib/kubelet\"\n", "            ]\n", "        }\n", "    }\n", "  }\n", "\n")),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kubernetes.NewAddonAttachment(ctx, "addonCbs", &Kubernetes.AddonAttachmentArgs{
+// 			ClusterId:   pulumi.String("cls-xxxxxxxx"),
+// 			RequestBody: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "  {\n", "    \"spec\":{\n", "        \"chart\":{\n", "            \"chartName\":\"cbs\",\n", "            \"chartVersion\":\"1.0.5\"\n", "        },\n", "        \"values\":{\n", "            \"rawValuesType\":\"yaml\",\n", "            \"values\":[\n", "              \"rootdir=/var/lib/kubelet\"\n", "            ]\n", "        }\n", "    }\n", "  }\n", "\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -103,9 +97,7 @@ import (
 // Addon can be imported by using cluster_id#addon_name
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Kubernetes/addonAttachment:AddonAttachment addon_cos cls-xxxxxxxx#cos
-//
+//  $ pulumi import tencentcloud:Kubernetes/addonAttachment:AddonAttachment addon_cos cls-xxxxxxxx#cos
 // ```
 type AddonAttachment struct {
 	pulumi.CustomResourceState
@@ -123,7 +115,7 @@ type AddonAttachment struct {
 	// Values the addon passthroughs. Conflict with `requestBody`.
 	Values pulumi.StringArrayOutput `pulumi:"values"`
 	// Addon version, default latest version. Conflict with `requestBody`.
-	Version pulumi.StringPtrOutput `pulumi:"version"`
+	Version pulumi.StringOutput `pulumi:"version"`
 }
 
 // NewAddonAttachment registers a new resource with the given unique name, arguments, and options.
@@ -249,7 +241,7 @@ func (i *AddonAttachment) ToAddonAttachmentOutputWithContext(ctx context.Context
 // AddonAttachmentArrayInput is an input type that accepts AddonAttachmentArray and AddonAttachmentArrayOutput values.
 // You can construct a concrete instance of `AddonAttachmentArrayInput` via:
 //
-//	AddonAttachmentArray{ AddonAttachmentArgs{...} }
+//          AddonAttachmentArray{ AddonAttachmentArgs{...} }
 type AddonAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -274,7 +266,7 @@ func (i AddonAttachmentArray) ToAddonAttachmentArrayOutputWithContext(ctx contex
 // AddonAttachmentMapInput is an input type that accepts AddonAttachmentMap and AddonAttachmentMapOutput values.
 // You can construct a concrete instance of `AddonAttachmentMapInput` via:
 //
-//	AddonAttachmentMap{ "key": AddonAttachmentArgs{...} }
+//          AddonAttachmentMap{ "key": AddonAttachmentArgs{...} }
 type AddonAttachmentMapInput interface {
 	pulumi.Input
 
@@ -341,8 +333,8 @@ func (o AddonAttachmentOutput) Values() pulumi.StringArrayOutput {
 }
 
 // Addon version, default latest version. Conflict with `requestBody`.
-func (o AddonAttachmentOutput) Version() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *AddonAttachment) pulumi.StringPtrOutput { return v.Version }).(pulumi.StringPtrOutput)
+func (o AddonAttachmentOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v *AddonAttachment) pulumi.StringOutput { return v.Version }).(pulumi.StringOutput)
 }
 
 type AddonAttachmentArrayOutput struct{ *pulumi.OutputState }

@@ -19,33 +19,30 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Sqlserver.NewPublishSubscribe(ctx, "example", &Sqlserver.PublishSubscribeArgs{
-//				PublishInstanceId:    pulumi.Any(tencentcloud_sqlserver_instance.Publish_instance.Id),
-//				SubscribeInstanceId:  pulumi.Any(tencentcloud_sqlserver_instance.Subscribe_instance.Id),
-//				PublishSubscribeName: pulumi.String("example"),
-//				DeleteSubscribeDb:    pulumi.Bool(false),
-//				DatabaseTuples: sqlserver.PublishSubscribeDatabaseTupleArray{
-//					&sqlserver.PublishSubscribeDatabaseTupleArgs{
-//						PublishDatabase: pulumi.Any(tencentcloud_sqlserver_db.Test_publish_subscribe.Name),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.NewPublishSubscribe(ctx, "example", &Sqlserver.PublishSubscribeArgs{
+// 			PublishInstanceId:    pulumi.Any(tencentcloud_sqlserver_instance.Publish_instance.Id),
+// 			SubscribeInstanceId:  pulumi.Any(tencentcloud_sqlserver_instance.Subscribe_instance.Id),
+// 			PublishSubscribeName: pulumi.String("example"),
+// 			DeleteSubscribeDb:    pulumi.Bool(false),
+// 			DatabaseTuples: sqlserver.PublishSubscribeDatabaseTupleArray{
+// 				&sqlserver.PublishSubscribeDatabaseTupleArgs{
+// 					PublishDatabase: pulumi.Any(tencentcloud_sqlserver_db.Test_publish_subscribe.Name),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -53,9 +50,7 @@ import (
 // SQL Server PublishSubscribe can be imported using the publish_sqlserver_id#subscribe_sqlserver_id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe foo publish_sqlserver_id#subscribe_sqlserver_id
-//
+//  $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe foo publish_sqlserver_id#subscribe_sqlserver_id
 // ```
 type PublishSubscribe struct {
 	pulumi.CustomResourceState
@@ -66,8 +61,6 @@ type PublishSubscribe struct {
 	DeleteSubscribeDb pulumi.BoolPtrOutput `pulumi:"deleteSubscribeDb"`
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId pulumi.StringOutput `pulumi:"publishInstanceId"`
-	// ID of PubSub.
-	PublishSubscribeId pulumi.IntOutput `pulumi:"publishSubscribeId"`
 	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName pulumi.StringPtrOutput `pulumi:"publishSubscribeName"`
 	// ID of the SQL Server instance which subscribe.
@@ -119,8 +112,6 @@ type publishSubscribeState struct {
 	DeleteSubscribeDb *bool `pulumi:"deleteSubscribeDb"`
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId *string `pulumi:"publishInstanceId"`
-	// ID of PubSub.
-	PublishSubscribeId *int `pulumi:"publishSubscribeId"`
 	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName *string `pulumi:"publishSubscribeName"`
 	// ID of the SQL Server instance which subscribe.
@@ -134,8 +125,6 @@ type PublishSubscribeState struct {
 	DeleteSubscribeDb pulumi.BoolPtrInput
 	// ID of the SQL Server instance which publish.
 	PublishInstanceId pulumi.StringPtrInput
-	// ID of PubSub.
-	PublishSubscribeId pulumi.IntPtrInput
 	// The name of the Publish and Subscribe. Default is `defaultName`.
 	PublishSubscribeName pulumi.StringPtrInput
 	// ID of the SQL Server instance which subscribe.
@@ -199,7 +188,7 @@ func (i *PublishSubscribe) ToPublishSubscribeOutputWithContext(ctx context.Conte
 // PublishSubscribeArrayInput is an input type that accepts PublishSubscribeArray and PublishSubscribeArrayOutput values.
 // You can construct a concrete instance of `PublishSubscribeArrayInput` via:
 //
-//	PublishSubscribeArray{ PublishSubscribeArgs{...} }
+//          PublishSubscribeArray{ PublishSubscribeArgs{...} }
 type PublishSubscribeArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +213,7 @@ func (i PublishSubscribeArray) ToPublishSubscribeArrayOutputWithContext(ctx cont
 // PublishSubscribeMapInput is an input type that accepts PublishSubscribeMap and PublishSubscribeMapOutput values.
 // You can construct a concrete instance of `PublishSubscribeMapInput` via:
 //
-//	PublishSubscribeMap{ "key": PublishSubscribeArgs{...} }
+//          PublishSubscribeMap{ "key": PublishSubscribeArgs{...} }
 type PublishSubscribeMapInput interface {
 	pulumi.Input
 
@@ -273,11 +262,6 @@ func (o PublishSubscribeOutput) DeleteSubscribeDb() pulumi.BoolPtrOutput {
 // ID of the SQL Server instance which publish.
 func (o PublishSubscribeOutput) PublishInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *PublishSubscribe) pulumi.StringOutput { return v.PublishInstanceId }).(pulumi.StringOutput)
-}
-
-// ID of PubSub.
-func (o PublishSubscribeOutput) PublishSubscribeId() pulumi.IntOutput {
-	return o.ApplyT(func(v *PublishSubscribe) pulumi.IntOutput { return v.PublishSubscribeId }).(pulumi.IntOutput)
 }
 
 // The name of the Publish and Subscribe. Default is `defaultName`.

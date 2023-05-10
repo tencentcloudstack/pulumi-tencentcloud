@@ -92,6 +92,84 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// }
     /// ```
+    /// 
+    /// Use the TKE default issuer and jwks_uri
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///         var clusterCidr = config.Get("clusterCidr") ?? "172.16.0.0/16";
+    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
+    ///         var @default = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         {
+    ///             ImageTypes = 
+    ///             {
+    ///                 "PUBLIC_IMAGE",
+    ///             },
+    ///             OsName = "centos",
+    ///         }));
+    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZone,
+    ///         }));
+    ///         var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         {
+    ///             VpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId),
+    ///             ClusterCidr = "10.31.0.0/16",
+    ///             ClusterMaxPodNum = 32,
+    ///             ClusterName = "keep",
+    ///             ClusterDesc = "test cluster desc",
+    ///             ClusterVersion = "1.20.6",
+    ///             ClusterMaxServiceNum = 32,
+    ///             WorkerConfigs = 
+    ///             {
+    ///                 new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
+    ///                 {
+    ///                     Count = 1,
+    ///                     AvailabilityZone = availabilityZone,
+    ///                     InstanceType = defaultInstanceType,
+    ///                     SystemDiskType = "CLOUD_SSD",
+    ///                     SystemDiskSize = 60,
+    ///                     InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///                     InternetMaxBandwidthOut = 100,
+    ///                     PublicIpAssigned = true,
+    ///                     SubnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId),
+    ///                     DataDisks = 
+    ///                     {
+    ///                         new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
+    ///                         {
+    ///                             DiskType = "CLOUD_PREMIUM",
+    ///                             DiskSize = 50,
+    ///                         },
+    ///                     },
+    ///                     EnhancedSecurityService = false,
+    ///                     EnhancedMonitorService = false,
+    ///                     UserData = "dGVzdA==",
+    ///                     Password = "ZZXXccvv1212",
+    ///                 },
+    ///             },
+    ///             ClusterDeployType = "MANAGED_CLUSTER",
+    ///         });
+    ///         // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
+    ///         var testUseTkeDefaultAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach", new Tencentcloud.Kubernetes.AuthAttachmentArgs
+    ///         {
+    ///             ClusterId = managedCluster.Id,
+    ///             AutoCreateDiscoveryAnonymousAuth = true,
+    ///             UseTkeDefault = true,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/authAttachment:AuthAttachment")]
     public partial class AuthAttachment : Pulumi.CustomResource
@@ -109,16 +187,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Specify service-account-issuer.
+        /// Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         /// </summary>
         [Output("issuer")]
-        public Output<string> Issuer { get; private set; } = null!;
+        public Output<string?> Issuer { get; private set; } = null!;
 
         /// <summary>
-        /// Specify service-account-jwks-uri.
+        /// Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
         /// </summary>
         [Output("jwksUri")]
         public Output<string?> JwksUri { get; private set; } = null!;
+
+        /// <summary>
+        /// The default issuer of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        /// </summary>
+        [Output("tkeDefaultIssuer")]
+        public Output<string> TkeDefaultIssuer { get; private set; } = null!;
+
+        /// <summary>
+        /// The default jwks_uri of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        /// </summary>
+        [Output("tkeDefaultJwksUri")]
+        public Output<string> TkeDefaultJwksUri { get; private set; } = null!;
+
+        /// <summary>
+        /// If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        /// </summary>
+        [Output("useTkeDefault")]
+        public Output<bool?> UseTkeDefault { get; private set; } = null!;
 
 
         /// <summary>
@@ -180,16 +276,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// Specify service-account-issuer.
+        /// Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         /// </summary>
-        [Input("issuer", required: true)]
-        public Input<string> Issuer { get; set; } = null!;
+        [Input("issuer")]
+        public Input<string>? Issuer { get; set; }
 
         /// <summary>
-        /// Specify service-account-jwks-uri.
+        /// Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
         /// </summary>
         [Input("jwksUri")]
         public Input<string>? JwksUri { get; set; }
+
+        /// <summary>
+        /// If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        /// </summary>
+        [Input("useTkeDefault")]
+        public Input<bool>? UseTkeDefault { get; set; }
 
         public AuthAttachmentArgs()
         {
@@ -211,16 +313,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Specify service-account-issuer.
+        /// Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         /// </summary>
         [Input("issuer")]
         public Input<string>? Issuer { get; set; }
 
         /// <summary>
-        /// Specify service-account-jwks-uri.
+        /// Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
         /// </summary>
         [Input("jwksUri")]
         public Input<string>? JwksUri { get; set; }
+
+        /// <summary>
+        /// The default issuer of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        /// </summary>
+        [Input("tkeDefaultIssuer")]
+        public Input<string>? TkeDefaultIssuer { get; set; }
+
+        /// <summary>
+        /// The default jwks_uri of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
+        /// </summary>
+        [Input("tkeDefaultJwksUri")]
+        public Input<string>? TkeDefaultJwksUri { get; set; }
+
+        /// <summary>
+        /// If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        /// </summary>
+        [Input("useTkeDefault")]
+        public Input<bool>? UseTkeDefault { get; set; }
 
         public AuthAttachmentState()
         {

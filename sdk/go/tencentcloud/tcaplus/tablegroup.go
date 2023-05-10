@@ -19,36 +19,33 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			test, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
-//				IdlType:               pulumi.String("PROTO"),
-//				ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
-//				VpcId:                 pulumi.String("vpc-7k6gzox6"),
-//				SubnetId:              pulumi.String("subnet-akwgvfa3"),
-//				Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
-//				OldPasswordExpireLast: pulumi.Int(3600),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Tcaplus.NewTablegroup(ctx, "tablegroup", &Tcaplus.TablegroupArgs{
-//				ClusterId:      test.ID(),
-//				TablegroupName: pulumi.String("tf_test_group_name"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		test, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
+// 			IdlType:               pulumi.String("PROTO"),
+// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
+// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
+// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
+// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
+// 			OldPasswordExpireLast: pulumi.Int(3600),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcaplus.NewTablegroup(ctx, "tablegroup", &Tcaplus.TablegroupArgs{
+// 			ClusterId:      test.ID(),
+// 			TablegroupName: pulumi.String("tf_test_group_name"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type Tablegroup struct {
 	pulumi.CustomResourceState
@@ -171,7 +168,7 @@ func (i *Tablegroup) ToTablegroupOutputWithContext(ctx context.Context) Tablegro
 // TablegroupArrayInput is an input type that accepts TablegroupArray and TablegroupArrayOutput values.
 // You can construct a concrete instance of `TablegroupArrayInput` via:
 //
-//	TablegroupArray{ TablegroupArgs{...} }
+//          TablegroupArray{ TablegroupArgs{...} }
 type TablegroupArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +193,7 @@ func (i TablegroupArray) ToTablegroupArrayOutputWithContext(ctx context.Context)
 // TablegroupMapInput is an input type that accepts TablegroupMap and TablegroupMapOutput values.
 // You can construct a concrete instance of `TablegroupMapInput` via:
 //
-//	TablegroupMap{ "key": TablegroupArgs{...} }
+//          TablegroupMap{ "key": TablegroupArgs{...} }
 type TablegroupMapInput interface {
 	pulumi.Input
 

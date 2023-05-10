@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     [OutputType]
     public sealed class BucketWebsite
     {
+        public readonly string? Endpoint;
         /// <summary>
         /// An absolute path to the document to return in case of a 4XX error.
         /// </summary>
@@ -25,10 +26,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
 
         [OutputConstructor]
         private BucketWebsite(
+            string? endpoint,
+
             string? errorDocument,
 
             string? indexDocument)
         {
+            Endpoint = endpoint;
             ErrorDocument = errorDocument;
             IndexDocument = indexDocument;
         }

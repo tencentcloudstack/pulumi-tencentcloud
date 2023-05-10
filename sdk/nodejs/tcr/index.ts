@@ -5,45 +5,82 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./createImageSignatureOperation";
+export * from "./customizedDomain";
+export * from "./deleteImageOperation";
+export * from "./getImages";
 export * from "./getInstances";
 export * from "./getNamespaces";
 export * from "./getRepositories";
 export * from "./getTokens";
 export * from "./getVpcAttachments";
+export * from "./getWebhookTriggerLogs";
+export * from "./immutableTagRule";
 export * from "./instance";
+export * from "./manageReplicationOperation";
 export * from "./namespace";
 export * from "./repository";
+export * from "./tagRetentionRule";
 export * from "./token";
 export * from "./vpcAttachment";
+export * from "./webhookTrigger";
 
 // Import resources to register:
+import { CreateImageSignatureOperation } from "./createImageSignatureOperation";
+import { CustomizedDomain } from "./customizedDomain";
+import { DeleteImageOperation } from "./deleteImageOperation";
+import { ImmutableTagRule } from "./immutableTagRule";
 import { Instance } from "./instance";
+import { ManageReplicationOperation } from "./manageReplicationOperation";
 import { Namespace } from "./namespace";
 import { Repository } from "./repository";
+import { TagRetentionRule } from "./tagRetentionRule";
 import { Token } from "./token";
 import { VpcAttachment } from "./vpcAttachment";
+import { WebhookTrigger } from "./webhookTrigger";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation":
+                return new CreateImageSignatureOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/customizedDomain:CustomizedDomain":
+                return new CustomizedDomain(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/deleteImageOperation:DeleteImageOperation":
+                return new DeleteImageOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/immutableTagRule:ImmutableTagRule":
+                return new ImmutableTagRule(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/manageReplicationOperation:ManageReplicationOperation":
+                return new ManageReplicationOperation(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/namespace:Namespace":
                 return new Namespace(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/repository:Repository":
                 return new Repository(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/tagRetentionRule:TagRetentionRule":
+                return new TagRetentionRule(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/token:Token":
                 return new Token(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/vpcAttachment:VpcAttachment":
                 return new VpcAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/webhookTrigger:WebhookTrigger":
+                return new WebhookTrigger(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/createImageSignatureOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/customizedDomain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/deleteImageOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/immutableTagRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/manageReplicationOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/namespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/repository", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/tagRetentionRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/token", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/vpcAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/webhookTrigger", _module)

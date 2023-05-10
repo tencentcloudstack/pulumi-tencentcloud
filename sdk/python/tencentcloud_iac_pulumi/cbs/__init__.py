@@ -5,6 +5,8 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .disk_backup import *
+from .disk_backup_rollback_operation import *
 from .get_snapshot_policies import *
 from .get_snapshots import *
 from .get_storages import *
@@ -12,6 +14,7 @@ from .get_storages_set import *
 from .snapshot import *
 from .snapshot_policy import *
 from .snapshot_policy_attachment import *
+from .snapshot_share_permission import *
 from .storage import *
 from .storage_attachment import *
 from .storage_set import *

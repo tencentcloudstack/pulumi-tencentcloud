@@ -12,6 +12,84 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 {
     /// <summary>
     /// Provides a resource to create a monitor tmpExporterIntegration
+    /// 
+    /// &gt; **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// Use blackbox-exporter
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var tmpExporterIntegration = new Tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegration", new Tencentcloud.Monitor.TmpExporterIntegrationArgs
+    ///         {
+    ///             ClusterId = "cls-bmuaukfu",
+    ///             Content = "{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}",
+    ///             InstanceId = "prom-dko9d0nu",
+    ///             Kind = "blackbox-exporter",
+    ///             KubeType = 1,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Use es-exporter
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var tmpExporterIntegrationEs = new Tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegrationEs", new Tencentcloud.Monitor.TmpExporterIntegrationArgs
+    ///         {
+    ///             InstanceId = tencentcloud_monitor_tmp_instance.TmpInstance.Id,
+    ///             Kind = "es-exporter",
+    ///             Content = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 { "name", "ex-exporter-example" },
+    ///                 { "kind", "es-exporter" },
+    ///                 { "spec", new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     { "instanceSpec", new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         { "url", "http://127.0.0.1:9123" },
+    ///                         { "labels", new Dictionary&lt;string, object?&gt;
+    ///                         {
+    ///                             { "instance", "es-abcd" },
+    ///                         } },
+    ///                         { "version", "1.70.1" },
+    ///                         { "user", "fugiat Duis minim" },
+    ///                         { "password", "exercitation cillum velit" },
+    ///                     } },
+    ///                     { "exporterSpec", new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         { "all", true },
+    ///                         { "indicesSettings", false },
+    ///                         { "snapshots", false },
+    ///                         { "indices", true },
+    ///                         { "shards", false },
+    ///                     } },
+    ///                 } },
+    ///             }),
+    ///             ClusterId = "",
+    ///             KubeType = 3,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpExporterIntegration:TmpExporterIntegration")]
     public partial class TmpExporterIntegration : Pulumi.CustomResource

@@ -5,15 +5,24 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .create_image_signature_operation import *
+from .customized_domain import *
+from .delete_image_operation import *
+from .get_images import *
 from .get_instances import *
 from .get_namespaces import *
 from .get_repositories import *
 from .get_tokens import *
 from .get_vpc_attachments import *
+from .get_webhook_trigger_logs import *
+from .immutable_tag_rule import *
 from .instance import *
+from .manage_replication_operation import *
 from .namespace import *
 from .repository import *
+from .tag_retention_rule import *
 from .token import *
 from .vpc_attachment import *
+from .webhook_trigger import *
 from ._inputs import *
 from . import outputs

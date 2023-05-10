@@ -19,34 +19,31 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := As.NewScalingPolicy(ctx, "scalingPolicy", &As.ScalingPolicyArgs{
-//				AdjustmentType:     pulumi.String("EXACT_CAPACITY"),
-//				AdjustmentValue:    pulumi.Int(0),
-//				ComparisonOperator: pulumi.String("GREATER_THAN"),
-//				ContinuousTime:     pulumi.Int(10),
-//				Cooldown:           pulumi.Int(360),
-//				MetricName:         pulumi.String("CPU_UTILIZATION"),
-//				Period:             pulumi.Int(300),
-//				PolicyName:         pulumi.String("tf-as-scaling-policy"),
-//				ScalingGroupId:     pulumi.String("asg-n32ymck2"),
-//				Statistic:          pulumi.String("AVERAGE"),
-//				Threshold:          pulumi.Int(80),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := As.NewScalingPolicy(ctx, "scalingPolicy", &As.ScalingPolicyArgs{
+// 			AdjustmentType:     pulumi.String("EXACT_CAPACITY"),
+// 			AdjustmentValue:    pulumi.Int(0),
+// 			ComparisonOperator: pulumi.String("GREATER_THAN"),
+// 			ContinuousTime:     pulumi.Int(10),
+// 			Cooldown:           pulumi.Int(360),
+// 			MetricName:         pulumi.String("CPU_UTILIZATION"),
+// 			Period:             pulumi.Int(300),
+// 			PolicyName:         pulumi.String("tf-as-scaling-policy"),
+// 			ScalingGroupId:     pulumi.String("asg-n32ymck2"),
+// 			Statistic:          pulumi.String("AVERAGE"),
+// 			Threshold:          pulumi.Int(80),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 type ScalingPolicy struct {
 	pulumi.CustomResourceState
@@ -272,7 +269,7 @@ func (i *ScalingPolicy) ToScalingPolicyOutputWithContext(ctx context.Context) Sc
 // ScalingPolicyArrayInput is an input type that accepts ScalingPolicyArray and ScalingPolicyArrayOutput values.
 // You can construct a concrete instance of `ScalingPolicyArrayInput` via:
 //
-//	ScalingPolicyArray{ ScalingPolicyArgs{...} }
+//          ScalingPolicyArray{ ScalingPolicyArgs{...} }
 type ScalingPolicyArrayInput interface {
 	pulumi.Input
 
@@ -297,7 +294,7 @@ func (i ScalingPolicyArray) ToScalingPolicyArrayOutputWithContext(ctx context.Co
 // ScalingPolicyMapInput is an input type that accepts ScalingPolicyMap and ScalingPolicyMapOutput values.
 // You can construct a concrete instance of `ScalingPolicyMapInput` via:
 //
-//	ScalingPolicyMap{ "key": ScalingPolicyArgs{...} }
+//          ScalingPolicyMap{ "key": ScalingPolicyArgs{...} }
 type ScalingPolicyMapInput interface {
 	pulumi.Input
 

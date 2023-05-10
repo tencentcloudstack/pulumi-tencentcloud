@@ -125,7 +125,7 @@ export class DdosPolicyV2 extends pulumi.CustomResource {
      */
     public readonly blackWhiteIps!: pulumi.Output<outputs.Dayu.DdosPolicyV2BlackWhiteIp[] | undefined>;
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+     * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     public readonly business!: pulumi.Output<string | undefined>;
     /**
@@ -226,7 +226,7 @@ export interface DdosPolicyV2State {
      */
     blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[]>;
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+     * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business?: pulumi.Input<string>;
     /**
@@ -280,7 +280,7 @@ export interface DdosPolicyV2Args {
      */
     blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[]>;
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+     * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business?: pulumi.Input<string>;
     /**

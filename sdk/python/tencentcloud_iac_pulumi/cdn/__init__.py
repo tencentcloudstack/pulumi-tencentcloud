@@ -6,6 +6,7 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .domain import *
+from .get_domain_verifier import *
 from .get_domains import *
 from .url_purge import *
 from .url_push import *

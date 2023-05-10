@@ -23,6 +23,7 @@ class InstanceArgs:
                  cdh_host_id: Optional[pulumi.Input[str]] = None,
                  cdh_instance_type: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]]] = None,
+                 disable_api_termination: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -36,7 +37,9 @@ class InstanceArgs:
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  keep_image_login: Optional[pulumi.Input[bool]] = None,
+                 key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_name: Optional[pulumi.Input[str]] = None,
+                 orderly_security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  placement_group_id: Optional[pulumi.Input[str]] = None,
                  private_ip: Optional[pulumi.Input[str]] = None,
@@ -64,6 +67,7 @@ class InstanceArgs:
         :param pulumi.Input[str] cdh_host_id: Id of cdh instance. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[str] cdh_instance_type: Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]] data_disks: Settings for data disks.
+        :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
@@ -74,23 +78,25 @@ class InstanceArgs:
         :param pulumi.Input[int] instance_count: It has been deprecated from version 1.59.18. Use built-in `count` instead. The number of instances to be purchased. Value range:[1,100]; default value: 1.
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
-        :param pulumi.Input[str] key_name: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[str] key_name: Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] orderly_security_groups: A list of orderly security group IDs to associate with.
         :param pulumi.Input[str] password: Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         :param pulumi.Input[str] placement_group_id: The ID of a placement group.
         :param pulumi.Input[str] private_ip: The private IP to be assigned to this instance, must be in the provided subnet and available.
         :param pulumi.Input[int] project_id: The project the instance belongs to, default to 0.
         :param pulumi.Input[bool] running_flag: Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs to associate with.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `ONE-TIME` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
-        :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
@@ -110,6 +116,8 @@ class InstanceArgs:
             pulumi.set(__self__, "cdh_instance_type", cdh_instance_type)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
+        if disable_api_termination is not None:
+            pulumi.set(__self__, "disable_api_termination", disable_api_termination)
         if disable_monitor_service is not None:
             pulumi.set(__self__, "disable_monitor_service", disable_monitor_service)
         if disable_security_service is not None:
@@ -139,8 +147,15 @@ class InstanceArgs:
             pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
         if keep_image_login is not None:
             pulumi.set(__self__, "keep_image_login", keep_image_login)
+        if key_ids is not None:
+            pulumi.set(__self__, "key_ids", key_ids)
+        if key_name is not None:
+            warnings.warn("""Please use `key_ids` instead.""", DeprecationWarning)
+            pulumi.log.warn("""key_name is deprecated: Please use `key_ids` instead.""")
         if key_name is not None:
             pulumi.set(__self__, "key_name", key_name)
+        if orderly_security_groups is not None:
+            pulumi.set(__self__, "orderly_security_groups", orderly_security_groups)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if placement_group_id is not None:
@@ -151,6 +166,9 @@ class InstanceArgs:
             pulumi.set(__self__, "project_id", project_id)
         if running_flag is not None:
             pulumi.set(__self__, "running_flag", running_flag)
+        if security_groups is not None:
+            warnings.warn("""It will be deprecated. Use `orderly_security_groups` instead.""", DeprecationWarning)
+            pulumi.log.warn("""security_groups is deprecated: It will be deprecated. Use `orderly_security_groups` instead.""")
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
         if spot_instance_type is not None:
@@ -271,6 +289,18 @@ class InstanceArgs:
     @data_disks.setter
     def data_disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]]]):
         pulumi.set(self, "data_disks", value)
+
+    @property
+    @pulumi.getter(name="disableApiTermination")
+    def disable_api_termination(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        """
+        return pulumi.get(self, "disable_api_termination")
+
+    @disable_api_termination.setter
+    def disable_api_termination(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "disable_api_termination", value)
 
     @property
     @pulumi.getter(name="disableMonitorService")
@@ -396,7 +426,7 @@ class InstanceArgs:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -429,16 +459,40 @@ class InstanceArgs:
         pulumi.set(self, "keep_image_login", value)
 
     @property
+    @pulumi.getter(name="keyIds")
+    def key_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        """
+        return pulumi.get(self, "key_ids")
+
+    @key_ids.setter
+    def key_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "key_ids", value)
+
+    @property
     @pulumi.getter(name="keyName")
     def key_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
         """
         return pulumi.get(self, "key_name")
 
     @key_name.setter
     def key_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "key_name", value)
+
+    @property
+    @pulumi.getter(name="orderlySecurityGroups")
+    def orderly_security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of orderly security group IDs to associate with.
+        """
+        return pulumi.get(self, "orderly_security_groups")
+
+    @orderly_security_groups.setter
+    def orderly_security_groups(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "orderly_security_groups", value)
 
     @property
     @pulumi.getter
@@ -504,7 +558,7 @@ class InstanceArgs:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A list of security group IDs to associate with.
+        It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         """
         return pulumi.get(self, "security_groups")
 
@@ -576,7 +630,7 @@ class InstanceArgs:
     @pulumi.getter(name="systemDiskSize")
     def system_disk_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+        Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_size")
 
@@ -588,7 +642,7 @@ class InstanceArgs:
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_type")
 
@@ -656,6 +710,7 @@ class _InstanceState:
                  cdh_instance_type: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]]] = None,
+                 disable_api_termination: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  expired_time: Optional[pulumi.Input[str]] = None,
@@ -672,7 +727,9 @@ class _InstanceState:
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  keep_image_login: Optional[pulumi.Input[bool]] = None,
+                 key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_name: Optional[pulumi.Input[str]] = None,
+                 orderly_security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  placement_group_id: Optional[pulumi.Input[str]] = None,
                  private_ip: Optional[pulumi.Input[str]] = None,
@@ -701,6 +758,7 @@ class _InstanceState:
         :param pulumi.Input[str] cdh_instance_type: Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[str] create_time: Create time of the instance.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]] data_disks: Settings for data disks.
+        :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[str] expired_time: Expired time of the instance.
@@ -714,24 +772,26 @@ class _InstanceState:
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_status: Current status of the instance.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
-        :param pulumi.Input[str] key_name: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[str] key_name: Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] orderly_security_groups: A list of orderly security group IDs to associate with.
         :param pulumi.Input[str] password: Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         :param pulumi.Input[str] placement_group_id: The ID of a placement group.
         :param pulumi.Input[str] private_ip: The private IP to be assigned to this instance, must be in the provided subnet and available.
         :param pulumi.Input[int] project_id: The project the instance belongs to, default to 0.
         :param pulumi.Input[str] public_ip: Public IP of the instance.
         :param pulumi.Input[bool] running_flag: Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs to associate with.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `ONE-TIME` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
-        :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
@@ -753,6 +813,8 @@ class _InstanceState:
             pulumi.set(__self__, "create_time", create_time)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
+        if disable_api_termination is not None:
+            pulumi.set(__self__, "disable_api_termination", disable_api_termination)
         if disable_monitor_service is not None:
             pulumi.set(__self__, "disable_monitor_service", disable_monitor_service)
         if disable_security_service is not None:
@@ -788,8 +850,15 @@ class _InstanceState:
             pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
         if keep_image_login is not None:
             pulumi.set(__self__, "keep_image_login", keep_image_login)
+        if key_ids is not None:
+            pulumi.set(__self__, "key_ids", key_ids)
+        if key_name is not None:
+            warnings.warn("""Please use `key_ids` instead.""", DeprecationWarning)
+            pulumi.log.warn("""key_name is deprecated: Please use `key_ids` instead.""")
         if key_name is not None:
             pulumi.set(__self__, "key_name", key_name)
+        if orderly_security_groups is not None:
+            pulumi.set(__self__, "orderly_security_groups", orderly_security_groups)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if placement_group_id is not None:
@@ -802,6 +871,9 @@ class _InstanceState:
             pulumi.set(__self__, "public_ip", public_ip)
         if running_flag is not None:
             pulumi.set(__self__, "running_flag", running_flag)
+        if security_groups is not None:
+            warnings.warn("""It will be deprecated. Use `orderly_security_groups` instead.""", DeprecationWarning)
+            pulumi.log.warn("""security_groups is deprecated: It will be deprecated. Use `orderly_security_groups` instead.""")
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
         if spot_instance_type is not None:
@@ -922,6 +994,18 @@ class _InstanceState:
     @data_disks.setter
     def data_disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]]]):
         pulumi.set(self, "data_disks", value)
+
+    @property
+    @pulumi.getter(name="disableApiTermination")
+    def disable_api_termination(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        """
+        return pulumi.get(self, "disable_api_termination")
+
+    @disable_api_termination.setter
+    def disable_api_termination(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "disable_api_termination", value)
 
     @property
     @pulumi.getter(name="disableMonitorService")
@@ -1083,7 +1167,7 @@ class _InstanceState:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -1116,16 +1200,40 @@ class _InstanceState:
         pulumi.set(self, "keep_image_login", value)
 
     @property
+    @pulumi.getter(name="keyIds")
+    def key_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        """
+        return pulumi.get(self, "key_ids")
+
+    @key_ids.setter
+    def key_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "key_ids", value)
+
+    @property
     @pulumi.getter(name="keyName")
     def key_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
         """
         return pulumi.get(self, "key_name")
 
     @key_name.setter
     def key_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "key_name", value)
+
+    @property
+    @pulumi.getter(name="orderlySecurityGroups")
+    def orderly_security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of orderly security group IDs to associate with.
+        """
+        return pulumi.get(self, "orderly_security_groups")
+
+    @orderly_security_groups.setter
+    def orderly_security_groups(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "orderly_security_groups", value)
 
     @property
     @pulumi.getter
@@ -1203,7 +1311,7 @@ class _InstanceState:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        A list of security group IDs to associate with.
+        It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         """
         return pulumi.get(self, "security_groups")
 
@@ -1275,7 +1383,7 @@ class _InstanceState:
     @pulumi.getter(name="systemDiskSize")
     def system_disk_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+        Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_size")
 
@@ -1287,7 +1395,7 @@ class _InstanceState:
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_type")
 
@@ -1356,6 +1464,7 @@ class Instance(pulumi.CustomResource):
                  cdh_host_id: Optional[pulumi.Input[str]] = None,
                  cdh_instance_type: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]]] = None,
+                 disable_api_termination: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -1370,7 +1479,9 @@ class Instance(pulumi.CustomResource):
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  keep_image_login: Optional[pulumi.Input[bool]] = None,
+                 key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_name: Optional[pulumi.Input[str]] = None,
+                 orderly_security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  placement_group_id: Optional[pulumi.Input[str]] = None,
                  private_ip: Optional[pulumi.Input[str]] = None,
@@ -1413,6 +1524,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] cdh_host_id: Id of cdh instance. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[str] cdh_instance_type: Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]] data_disks: Settings for data disks.
+        :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
@@ -1424,23 +1536,25 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] instance_count: It has been deprecated from version 1.59.18. Use built-in `count` instead. The number of instances to be purchased. Value range:[1,100]; default value: 1.
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
-        :param pulumi.Input[str] key_name: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[str] key_name: Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] orderly_security_groups: A list of orderly security group IDs to associate with.
         :param pulumi.Input[str] password: Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         :param pulumi.Input[str] placement_group_id: The ID of a placement group.
         :param pulumi.Input[str] private_ip: The private IP to be assigned to this instance, must be in the provided subnet and available.
         :param pulumi.Input[int] project_id: The project the instance belongs to, default to 0.
         :param pulumi.Input[bool] running_flag: Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs to associate with.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `ONE-TIME` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
-        :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
@@ -1489,6 +1603,7 @@ class Instance(pulumi.CustomResource):
                  cdh_host_id: Optional[pulumi.Input[str]] = None,
                  cdh_instance_type: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]]] = None,
+                 disable_api_termination: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -1503,7 +1618,9 @@ class Instance(pulumi.CustomResource):
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  keep_image_login: Optional[pulumi.Input[bool]] = None,
+                 key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_name: Optional[pulumi.Input[str]] = None,
+                 orderly_security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  placement_group_id: Optional[pulumi.Input[str]] = None,
                  private_ip: Optional[pulumi.Input[str]] = None,
@@ -1544,6 +1661,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["cdh_host_id"] = cdh_host_id
             __props__.__dict__["cdh_instance_type"] = cdh_instance_type
             __props__.__dict__["data_disks"] = data_disks
+            __props__.__dict__["disable_api_termination"] = disable_api_termination
             __props__.__dict__["disable_monitor_service"] = disable_monitor_service
             __props__.__dict__["disable_security_service"] = disable_security_service
             __props__.__dict__["force_delete"] = force_delete
@@ -1563,12 +1681,20 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["internet_charge_type"] = internet_charge_type
             __props__.__dict__["internet_max_bandwidth_out"] = internet_max_bandwidth_out
             __props__.__dict__["keep_image_login"] = keep_image_login
+            __props__.__dict__["key_ids"] = key_ids
+            if key_name is not None and not opts.urn:
+                warnings.warn("""Please use `key_ids` instead.""", DeprecationWarning)
+                pulumi.log.warn("""key_name is deprecated: Please use `key_ids` instead.""")
             __props__.__dict__["key_name"] = key_name
+            __props__.__dict__["orderly_security_groups"] = orderly_security_groups
             __props__.__dict__["password"] = password
             __props__.__dict__["placement_group_id"] = placement_group_id
             __props__.__dict__["private_ip"] = private_ip
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["running_flag"] = running_flag
+            if security_groups is not None and not opts.urn:
+                warnings.warn("""It will be deprecated. Use `orderly_security_groups` instead.""", DeprecationWarning)
+                pulumi.log.warn("""security_groups is deprecated: It will be deprecated. Use `orderly_security_groups` instead.""")
             __props__.__dict__["security_groups"] = security_groups
             __props__.__dict__["spot_instance_type"] = spot_instance_type
             __props__.__dict__["spot_max_price"] = spot_max_price
@@ -1603,6 +1729,7 @@ class Instance(pulumi.CustomResource):
             cdh_instance_type: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]]] = None,
+            disable_api_termination: Optional[pulumi.Input[bool]] = None,
             disable_monitor_service: Optional[pulumi.Input[bool]] = None,
             disable_security_service: Optional[pulumi.Input[bool]] = None,
             expired_time: Optional[pulumi.Input[str]] = None,
@@ -1619,7 +1746,9 @@ class Instance(pulumi.CustomResource):
             internet_charge_type: Optional[pulumi.Input[str]] = None,
             internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
             keep_image_login: Optional[pulumi.Input[bool]] = None,
+            key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             key_name: Optional[pulumi.Input[str]] = None,
+            orderly_security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             password: Optional[pulumi.Input[str]] = None,
             placement_group_id: Optional[pulumi.Input[str]] = None,
             private_ip: Optional[pulumi.Input[str]] = None,
@@ -1653,6 +1782,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] cdh_instance_type: Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[str] create_time: Create time of the instance.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]] data_disks: Settings for data disks.
+        :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[str] expired_time: Expired time of the instance.
@@ -1666,24 +1796,26 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_status: Current status of the instance.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
-        :param pulumi.Input[str] key_name: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[str] key_name: Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] orderly_security_groups: A list of orderly security group IDs to associate with.
         :param pulumi.Input[str] password: Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         :param pulumi.Input[str] placement_group_id: The ID of a placement group.
         :param pulumi.Input[str] private_ip: The private IP to be assigned to this instance, must be in the provided subnet and available.
         :param pulumi.Input[int] project_id: The project the instance belongs to, default to 0.
         :param pulumi.Input[str] public_ip: Public IP of the instance.
         :param pulumi.Input[bool] running_flag: Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs to associate with.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `ONE-TIME` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
-        :param pulumi.Input[int] system_disk_size: Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
-        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
+        :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[str] user_data: The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
         :param pulumi.Input[str] user_data_raw: The user data to be injected into this instance, in plain text. Conflicts with `user_data`. Up to 16 KB after base64 encoded.
@@ -1701,6 +1833,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["cdh_instance_type"] = cdh_instance_type
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["data_disks"] = data_disks
+        __props__.__dict__["disable_api_termination"] = disable_api_termination
         __props__.__dict__["disable_monitor_service"] = disable_monitor_service
         __props__.__dict__["disable_security_service"] = disable_security_service
         __props__.__dict__["expired_time"] = expired_time
@@ -1717,7 +1850,9 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["internet_charge_type"] = internet_charge_type
         __props__.__dict__["internet_max_bandwidth_out"] = internet_max_bandwidth_out
         __props__.__dict__["keep_image_login"] = keep_image_login
+        __props__.__dict__["key_ids"] = key_ids
         __props__.__dict__["key_name"] = key_name
+        __props__.__dict__["orderly_security_groups"] = orderly_security_groups
         __props__.__dict__["password"] = password
         __props__.__dict__["placement_group_id"] = placement_group_id
         __props__.__dict__["private_ip"] = private_ip
@@ -1801,6 +1936,14 @@ class Instance(pulumi.CustomResource):
         Settings for data disks.
         """
         return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="disableApiTermination")
+    def disable_api_termination(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        """
+        return pulumi.get(self, "disable_api_termination")
 
     @property
     @pulumi.getter(name="disableMonitorService")
@@ -1910,7 +2053,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> pulumi.Output[str]:
         """
-        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocate_public_ip` is false.
+        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -1931,12 +2074,28 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "keep_image_login")
 
     @property
-    @pulumi.getter(name="keyName")
-    def key_name(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="keyIds")
+    def key_ids(self) -> pulumi.Output[Sequence[str]]:
         """
         The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
         """
+        return pulumi.get(self, "key_ids")
+
+    @property
+    @pulumi.getter(name="keyName")
+    def key_name(self) -> pulumi.Output[str]:
+        """
+        Please use `key_ids` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+        """
         return pulumi.get(self, "key_name")
+
+    @property
+    @pulumi.getter(name="orderlySecurityGroups")
+    def orderly_security_groups(self) -> pulumi.Output[Sequence[str]]:
+        """
+        A list of orderly security group IDs to associate with.
+        """
+        return pulumi.get(self, "orderly_security_groups")
 
     @property
     @pulumi.getter
@@ -1990,7 +2149,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> pulumi.Output[Sequence[str]]:
         """
-        A list of security group IDs to associate with.
+        It will be deprecated. Use `orderly_security_groups` instead. A list of security group IDs to associate with.
         """
         return pulumi.get(self, "security_groups")
 
@@ -2038,7 +2197,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="systemDiskSize")
     def system_disk_size(self) -> pulumi.Output[Optional[int]]:
         """
-        Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
+        Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_size")
 
@@ -2046,7 +2205,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> pulumi.Output[Optional[str]]:
         """
-        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: 1. `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated; 2. If modified, the instance may force stop.
+        System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
         """
         return pulumi.get(self, "system_disk_type")
 

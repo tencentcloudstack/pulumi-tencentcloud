@@ -19,23 +19,30 @@ class ClusterArgs:
                  cluster_name: pulumi.Input[str],
                  db_type: pulumi.Input[str],
                  db_version: pulumi.Input[str],
-                 instance_cpu_core: pulumi.Input[int],
-                 instance_memory_size: pulumi.Input[int],
                  password: pulumi.Input[str],
                  subnet_id: pulumi.Input[str],
                  vpc_id: pulumi.Input[str],
+                 auto_pause: Optional[pulumi.Input[str]] = None,
+                 auto_pause_delay: Optional[pulumi.Input[int]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 db_mode: Optional[pulumi.Input[str]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
+                 instance_cpu_core: Optional[pulumi.Input[int]] = None,
                  instance_maintain_duration: Optional[pulumi.Input[int]] = None,
                  instance_maintain_start_time: Optional[pulumi.Input[int]] = None,
                  instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 instance_memory_size: Optional[pulumi.Input[int]] = None,
+                 max_cpu: Optional[pulumi.Input[float]] = None,
+                 min_cpu: Optional[pulumi.Input[float]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]] = None,
                  port: Optional[pulumi.Input[int]] = None,
+                 prarm_template_id: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  ro_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
@@ -44,23 +51,30 @@ class ClusterArgs:
         :param pulumi.Input[str] cluster_name: Name of CynosDB cluster.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
         :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
         :param pulumi.Input[str] vpc_id: ID of the VPC.
+        :param pulumi.Input[str] auto_pause: Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        :param pulumi.Input[int] auto_pause_delay: Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] db_mode: Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
+        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ro_group_sgs: IDs of security group for `ro_group`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
+        :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
         """
@@ -68,27 +82,41 @@ class ClusterArgs:
         pulumi.set(__self__, "cluster_name", cluster_name)
         pulumi.set(__self__, "db_type", db_type)
         pulumi.set(__self__, "db_version", db_version)
-        pulumi.set(__self__, "instance_cpu_core", instance_cpu_core)
-        pulumi.set(__self__, "instance_memory_size", instance_memory_size)
         pulumi.set(__self__, "password", password)
         pulumi.set(__self__, "subnet_id", subnet_id)
         pulumi.set(__self__, "vpc_id", vpc_id)
+        if auto_pause is not None:
+            pulumi.set(__self__, "auto_pause", auto_pause)
+        if auto_pause_delay is not None:
+            pulumi.set(__self__, "auto_pause_delay", auto_pause_delay)
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if db_mode is not None:
+            pulumi.set(__self__, "db_mode", db_mode)
         if force_delete is not None:
             pulumi.set(__self__, "force_delete", force_delete)
+        if instance_cpu_core is not None:
+            pulumi.set(__self__, "instance_cpu_core", instance_cpu_core)
         if instance_maintain_duration is not None:
             pulumi.set(__self__, "instance_maintain_duration", instance_maintain_duration)
         if instance_maintain_start_time is not None:
             pulumi.set(__self__, "instance_maintain_start_time", instance_maintain_start_time)
         if instance_maintain_weekdays is not None:
             pulumi.set(__self__, "instance_maintain_weekdays", instance_maintain_weekdays)
+        if instance_memory_size is not None:
+            pulumi.set(__self__, "instance_memory_size", instance_memory_size)
+        if max_cpu is not None:
+            pulumi.set(__self__, "max_cpu", max_cpu)
+        if min_cpu is not None:
+            pulumi.set(__self__, "min_cpu", min_cpu)
         if param_items is not None:
             pulumi.set(__self__, "param_items", param_items)
         if port is not None:
             pulumi.set(__self__, "port", port)
+        if prarm_template_id is not None:
+            pulumi.set(__self__, "prarm_template_id", prarm_template_id)
         if prepaid_period is not None:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
         if project_id is not None:
@@ -97,6 +125,8 @@ class ClusterArgs:
             pulumi.set(__self__, "ro_group_sgs", ro_group_sgs)
         if rw_group_sgs is not None:
             pulumi.set(__self__, "rw_group_sgs", rw_group_sgs)
+        if serverless_status_flag is not None:
+            pulumi.set(__self__, "serverless_status_flag", serverless_status_flag)
         if storage_limit is not None:
             pulumi.set(__self__, "storage_limit", storage_limit)
         if tags is not None:
@@ -151,30 +181,6 @@ class ClusterArgs:
         pulumi.set(self, "db_version", value)
 
     @property
-    @pulumi.getter(name="instanceCpuCore")
-    def instance_cpu_core(self) -> pulumi.Input[int]:
-        """
-        The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        """
-        return pulumi.get(self, "instance_cpu_core")
-
-    @instance_cpu_core.setter
-    def instance_cpu_core(self, value: pulumi.Input[int]):
-        pulumi.set(self, "instance_cpu_core", value)
-
-    @property
-    @pulumi.getter(name="instanceMemorySize")
-    def instance_memory_size(self) -> pulumi.Input[int]:
-        """
-        Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        """
-        return pulumi.get(self, "instance_memory_size")
-
-    @instance_memory_size.setter
-    def instance_memory_size(self, value: pulumi.Input[int]):
-        pulumi.set(self, "instance_memory_size", value)
-
-    @property
     @pulumi.getter
     def password(self) -> pulumi.Input[str]:
         """
@@ -211,6 +217,30 @@ class ClusterArgs:
         pulumi.set(self, "vpc_id", value)
 
     @property
+    @pulumi.getter(name="autoPause")
+    def auto_pause(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        """
+        return pulumi.get(self, "auto_pause")
+
+    @auto_pause.setter
+    def auto_pause(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auto_pause", value)
+
+    @property
+    @pulumi.getter(name="autoPauseDelay")
+    def auto_pause_delay(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+        """
+        return pulumi.get(self, "auto_pause_delay")
+
+    @auto_pause_delay.setter
+    def auto_pause_delay(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_pause_delay", value)
+
+    @property
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
@@ -235,6 +265,18 @@ class ClusterArgs:
         pulumi.set(self, "charge_type", value)
 
     @property
+    @pulumi.getter(name="dbMode")
+    def db_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+        """
+        return pulumi.get(self, "db_mode")
+
+    @db_mode.setter
+    def db_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "db_mode", value)
+
+    @property
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -245,6 +287,18 @@ class ClusterArgs:
     @force_delete.setter
     def force_delete(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "force_delete", value)
+
+    @property
+    @pulumi.getter(name="instanceCpuCore")
+    def instance_cpu_core(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        """
+        return pulumi.get(self, "instance_cpu_core")
+
+    @instance_cpu_core.setter
+    def instance_cpu_core(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_cpu_core", value)
 
     @property
     @pulumi.getter(name="instanceMaintainDuration")
@@ -283,10 +337,46 @@ class ClusterArgs:
         pulumi.set(self, "instance_maintain_weekdays", value)
 
     @property
+    @pulumi.getter(name="instanceMemorySize")
+    def instance_memory_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        """
+        return pulumi.get(self, "instance_memory_size")
+
+    @instance_memory_size.setter
+    def instance_memory_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "instance_memory_size", value)
+
+    @property
+    @pulumi.getter(name="maxCpu")
+    def max_cpu(self) -> Optional[pulumi.Input[float]]:
+        """
+        Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        """
+        return pulumi.get(self, "max_cpu")
+
+    @max_cpu.setter
+    def max_cpu(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "max_cpu", value)
+
+    @property
+    @pulumi.getter(name="minCpu")
+    def min_cpu(self) -> Optional[pulumi.Input[float]]:
+        """
+        Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        """
+        return pulumi.get(self, "min_cpu")
+
+    @min_cpu.setter
+    def min_cpu(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "min_cpu", value)
+
+    @property
     @pulumi.getter(name="paramItems")
     def param_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]:
         """
-        Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         """
         return pulumi.get(self, "param_items")
 
@@ -305,6 +395,18 @@ class ClusterArgs:
     @port.setter
     def port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="prarmTemplateId")
+    def prarm_template_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of the parameter template.
+        """
+        return pulumi.get(self, "prarm_template_id")
+
+    @prarm_template_id.setter
+    def prarm_template_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "prarm_template_id", value)
 
     @property
     @pulumi.getter(name="prepaidPeriod")
@@ -355,6 +457,18 @@ class ClusterArgs:
         pulumi.set(self, "rw_group_sgs", value)
 
     @property
+    @pulumi.getter(name="serverlessStatusFlag")
+    def serverless_status_flag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        """
+        return pulumi.get(self, "serverless_status_flag")
+
+    @serverless_status_flag.setter
+    def serverless_status_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "serverless_status_flag", value)
+
+    @property
     @pulumi.getter(name="storageLimit")
     def storage_limit(self) -> Optional[pulumi.Input[int]]:
         """
@@ -382,6 +496,8 @@ class ClusterArgs:
 @pulumi.input_type
 class _ClusterState:
     def __init__(__self__, *,
+                 auto_pause: Optional[pulumi.Input[str]] = None,
+                 auto_pause_delay: Optional[pulumi.Input[int]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
                  available_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
@@ -389,6 +505,7 @@ class _ClusterState:
                  cluster_name: Optional[pulumi.Input[str]] = None,
                  cluster_status: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
+                 db_mode: Optional[pulumi.Input[str]] = None,
                  db_type: Optional[pulumi.Input[str]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -401,9 +518,12 @@ class _ClusterState:
                  instance_name: Optional[pulumi.Input[str]] = None,
                  instance_status: Optional[pulumi.Input[str]] = None,
                  instance_storage_size: Optional[pulumi.Input[int]] = None,
+                 max_cpu: Optional[pulumi.Input[float]] = None,
+                 min_cpu: Optional[pulumi.Input[float]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
+                 prarm_template_id: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  ro_group_addrs: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterRoGroupAddrArgs']]]] = None,
@@ -414,6 +534,8 @@ class _ClusterState:
                  rw_group_id: Optional[pulumi.Input[str]] = None,
                  rw_group_instances: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterRwGroupInstanceArgs']]]] = None,
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 serverless_status: Optional[pulumi.Input[str]] = None,
+                 serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  storage_used: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -421,6 +543,8 @@ class _ClusterState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Cluster resources.
+        :param pulumi.Input[str] auto_pause: Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        :param pulumi.Input[int] auto_pause_delay: Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         :param pulumi.Input[str] available_zone: The available zone of the CynosDB Cluster.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
@@ -428,21 +552,25 @@ class _ClusterState:
         :param pulumi.Input[str] cluster_name: Name of CynosDB cluster.
         :param pulumi.Input[str] cluster_status: Status of the Cynosdb cluster.
         :param pulumi.Input[str] create_time: Creation time of the CynosDB cluster.
+        :param pulumi.Input[str] db_mode: Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
         :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_id: ID of instance.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_name: Name of instance.
         :param pulumi.Input[str] instance_status: Status of the instance.
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
-        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
+        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterRoGroupAddrArgs']]] ro_group_addrs: Readonly addresses. Each element contains the following attributes:
@@ -453,12 +581,18 @@ class _ClusterState:
         :param pulumi.Input[str] rw_group_id: ID of read-write instance group.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterRwGroupInstanceArgs']]] rw_group_instances: List of instances in the read-write instance group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
+        :param pulumi.Input[str] serverless_status: Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
+        :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[int] storage_used: Used storage of CynosDB cluster, unit in MB.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
         :param pulumi.Input[str] vpc_id: ID of the VPC.
         """
+        if auto_pause is not None:
+            pulumi.set(__self__, "auto_pause", auto_pause)
+        if auto_pause_delay is not None:
+            pulumi.set(__self__, "auto_pause_delay", auto_pause_delay)
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         if available_zone is not None:
@@ -473,6 +607,8 @@ class _ClusterState:
             pulumi.set(__self__, "cluster_status", cluster_status)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
+        if db_mode is not None:
+            pulumi.set(__self__, "db_mode", db_mode)
         if db_type is not None:
             pulumi.set(__self__, "db_type", db_type)
         if db_version is not None:
@@ -497,12 +633,18 @@ class _ClusterState:
             pulumi.set(__self__, "instance_status", instance_status)
         if instance_storage_size is not None:
             pulumi.set(__self__, "instance_storage_size", instance_storage_size)
+        if max_cpu is not None:
+            pulumi.set(__self__, "max_cpu", max_cpu)
+        if min_cpu is not None:
+            pulumi.set(__self__, "min_cpu", min_cpu)
         if param_items is not None:
             pulumi.set(__self__, "param_items", param_items)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if port is not None:
             pulumi.set(__self__, "port", port)
+        if prarm_template_id is not None:
+            pulumi.set(__self__, "prarm_template_id", prarm_template_id)
         if prepaid_period is not None:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
         if project_id is not None:
@@ -523,6 +665,10 @@ class _ClusterState:
             pulumi.set(__self__, "rw_group_instances", rw_group_instances)
         if rw_group_sgs is not None:
             pulumi.set(__self__, "rw_group_sgs", rw_group_sgs)
+        if serverless_status is not None:
+            pulumi.set(__self__, "serverless_status", serverless_status)
+        if serverless_status_flag is not None:
+            pulumi.set(__self__, "serverless_status_flag", serverless_status_flag)
         if storage_limit is not None:
             pulumi.set(__self__, "storage_limit", storage_limit)
         if storage_used is not None:
@@ -533,6 +679,30 @@ class _ClusterState:
             pulumi.set(__self__, "tags", tags)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="autoPause")
+    def auto_pause(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        """
+        return pulumi.get(self, "auto_pause")
+
+    @auto_pause.setter
+    def auto_pause(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auto_pause", value)
+
+    @property
+    @pulumi.getter(name="autoPauseDelay")
+    def auto_pause_delay(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+        """
+        return pulumi.get(self, "auto_pause_delay")
+
+    @auto_pause_delay.setter
+    def auto_pause_delay(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_pause_delay", value)
 
     @property
     @pulumi.getter(name="autoRenewFlag")
@@ -619,6 +789,18 @@ class _ClusterState:
         pulumi.set(self, "create_time", value)
 
     @property
+    @pulumi.getter(name="dbMode")
+    def db_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+        """
+        return pulumi.get(self, "db_mode")
+
+    @db_mode.setter
+    def db_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "db_mode", value)
+
+    @property
     @pulumi.getter(name="dbType")
     def db_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -658,7 +840,7 @@ class _ClusterState:
     @pulumi.getter(name="instanceCpuCore")
     def instance_cpu_core(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_cpu_core")
 
@@ -718,7 +900,7 @@ class _ClusterState:
     @pulumi.getter(name="instanceMemorySize")
     def instance_memory_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_memory_size")
 
@@ -763,10 +945,34 @@ class _ClusterState:
         pulumi.set(self, "instance_storage_size", value)
 
     @property
+    @pulumi.getter(name="maxCpu")
+    def max_cpu(self) -> Optional[pulumi.Input[float]]:
+        """
+        Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        """
+        return pulumi.get(self, "max_cpu")
+
+    @max_cpu.setter
+    def max_cpu(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "max_cpu", value)
+
+    @property
+    @pulumi.getter(name="minCpu")
+    def min_cpu(self) -> Optional[pulumi.Input[float]]:
+        """
+        Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        """
+        return pulumi.get(self, "min_cpu")
+
+    @min_cpu.setter
+    def min_cpu(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "min_cpu", value)
+
+    @property
     @pulumi.getter(name="paramItems")
     def param_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]:
         """
-        Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         """
         return pulumi.get(self, "param_items")
 
@@ -797,6 +1003,18 @@ class _ClusterState:
     @port.setter
     def port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="prarmTemplateId")
+    def prarm_template_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of the parameter template.
+        """
+        return pulumi.get(self, "prarm_template_id")
+
+    @prarm_template_id.setter
+    def prarm_template_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "prarm_template_id", value)
 
     @property
     @pulumi.getter(name="prepaidPeriod")
@@ -919,6 +1137,30 @@ class _ClusterState:
         pulumi.set(self, "rw_group_sgs", value)
 
     @property
+    @pulumi.getter(name="serverlessStatus")
+    def serverless_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
+        """
+        return pulumi.get(self, "serverless_status")
+
+    @serverless_status.setter
+    def serverless_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "serverless_status", value)
+
+    @property
+    @pulumi.getter(name="serverlessStatusFlag")
+    def serverless_status_flag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        """
+        return pulumi.get(self, "serverless_status_flag")
+
+    @serverless_status_flag.setter
+    def serverless_status_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "serverless_status_flag", value)
+
+    @property
     @pulumi.getter(name="storageLimit")
     def storage_limit(self) -> Optional[pulumi.Input[int]]:
         """
@@ -984,10 +1226,13 @@ class Cluster(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_pause: Optional[pulumi.Input[str]] = None,
+                 auto_pause_delay: Optional[pulumi.Input[int]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
                  available_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  cluster_name: Optional[pulumi.Input[str]] = None,
+                 db_mode: Optional[pulumi.Input[str]] = None,
                  db_type: Optional[pulumi.Input[str]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -996,13 +1241,17 @@ class Cluster(pulumi.CustomResource):
                  instance_maintain_start_time: Optional[pulumi.Input[int]] = None,
                  instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
+                 max_cpu: Optional[pulumi.Input[float]] = None,
+                 min_cpu: Optional[pulumi.Input[float]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
+                 prarm_template_id: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  ro_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1021,25 +1270,32 @@ class Cluster(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] auto_pause: Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        :param pulumi.Input[int] auto_pause_delay: Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         :param pulumi.Input[str] available_zone: The available zone of the CynosDB Cluster.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] cluster_name: Name of CynosDB cluster.
+        :param pulumi.Input[str] db_mode: Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
         :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
+        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ro_group_sgs: IDs of security group for `ro_group`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
+        :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
@@ -1077,10 +1333,13 @@ class Cluster(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_pause: Optional[pulumi.Input[str]] = None,
+                 auto_pause_delay: Optional[pulumi.Input[int]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
                  available_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  cluster_name: Optional[pulumi.Input[str]] = None,
+                 db_mode: Optional[pulumi.Input[str]] = None,
                  db_type: Optional[pulumi.Input[str]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -1089,13 +1348,17 @@ class Cluster(pulumi.CustomResource):
                  instance_maintain_start_time: Optional[pulumi.Input[int]] = None,
                  instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
+                 max_cpu: Optional[pulumi.Input[float]] = None,
+                 min_cpu: Optional[pulumi.Input[float]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
+                 prarm_template_id: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  ro_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1114,6 +1377,8 @@ class Cluster(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ClusterArgs.__new__(ClusterArgs)
 
+            __props__.__dict__["auto_pause"] = auto_pause
+            __props__.__dict__["auto_pause_delay"] = auto_pause_delay
             __props__.__dict__["auto_renew_flag"] = auto_renew_flag
             if available_zone is None and not opts.urn:
                 raise TypeError("Missing required property 'available_zone'")
@@ -1122,6 +1387,7 @@ class Cluster(pulumi.CustomResource):
             if cluster_name is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_name'")
             __props__.__dict__["cluster_name"] = cluster_name
+            __props__.__dict__["db_mode"] = db_mode
             if db_type is None and not opts.urn:
                 raise TypeError("Missing required property 'db_type'")
             __props__.__dict__["db_type"] = db_type
@@ -1129,24 +1395,24 @@ class Cluster(pulumi.CustomResource):
                 raise TypeError("Missing required property 'db_version'")
             __props__.__dict__["db_version"] = db_version
             __props__.__dict__["force_delete"] = force_delete
-            if instance_cpu_core is None and not opts.urn:
-                raise TypeError("Missing required property 'instance_cpu_core'")
             __props__.__dict__["instance_cpu_core"] = instance_cpu_core
             __props__.__dict__["instance_maintain_duration"] = instance_maintain_duration
             __props__.__dict__["instance_maintain_start_time"] = instance_maintain_start_time
             __props__.__dict__["instance_maintain_weekdays"] = instance_maintain_weekdays
-            if instance_memory_size is None and not opts.urn:
-                raise TypeError("Missing required property 'instance_memory_size'")
             __props__.__dict__["instance_memory_size"] = instance_memory_size
+            __props__.__dict__["max_cpu"] = max_cpu
+            __props__.__dict__["min_cpu"] = min_cpu
             __props__.__dict__["param_items"] = param_items
             if password is None and not opts.urn:
                 raise TypeError("Missing required property 'password'")
             __props__.__dict__["password"] = password
             __props__.__dict__["port"] = port
+            __props__.__dict__["prarm_template_id"] = prarm_template_id
             __props__.__dict__["prepaid_period"] = prepaid_period
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["ro_group_sgs"] = ro_group_sgs
             __props__.__dict__["rw_group_sgs"] = rw_group_sgs
+            __props__.__dict__["serverless_status_flag"] = serverless_status_flag
             __props__.__dict__["storage_limit"] = storage_limit
             if subnet_id is None and not opts.urn:
                 raise TypeError("Missing required property 'subnet_id'")
@@ -1168,6 +1434,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["rw_group_addrs"] = None
             __props__.__dict__["rw_group_id"] = None
             __props__.__dict__["rw_group_instances"] = None
+            __props__.__dict__["serverless_status"] = None
             __props__.__dict__["storage_used"] = None
         super(Cluster, __self__).__init__(
             'tencentcloud:Cynosdb/cluster:Cluster',
@@ -1179,6 +1446,8 @@ class Cluster(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            auto_pause: Optional[pulumi.Input[str]] = None,
+            auto_pause_delay: Optional[pulumi.Input[int]] = None,
             auto_renew_flag: Optional[pulumi.Input[int]] = None,
             available_zone: Optional[pulumi.Input[str]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
@@ -1186,6 +1455,7 @@ class Cluster(pulumi.CustomResource):
             cluster_name: Optional[pulumi.Input[str]] = None,
             cluster_status: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
+            db_mode: Optional[pulumi.Input[str]] = None,
             db_type: Optional[pulumi.Input[str]] = None,
             db_version: Optional[pulumi.Input[str]] = None,
             force_delete: Optional[pulumi.Input[bool]] = None,
@@ -1198,9 +1468,12 @@ class Cluster(pulumi.CustomResource):
             instance_name: Optional[pulumi.Input[str]] = None,
             instance_status: Optional[pulumi.Input[str]] = None,
             instance_storage_size: Optional[pulumi.Input[int]] = None,
+            max_cpu: Optional[pulumi.Input[float]] = None,
+            min_cpu: Optional[pulumi.Input[float]] = None,
             param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
             password: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[int]] = None,
+            prarm_template_id: Optional[pulumi.Input[int]] = None,
             prepaid_period: Optional[pulumi.Input[int]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
             ro_group_addrs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRoGroupAddrArgs']]]]] = None,
@@ -1211,6 +1484,8 @@ class Cluster(pulumi.CustomResource):
             rw_group_id: Optional[pulumi.Input[str]] = None,
             rw_group_instances: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRwGroupInstanceArgs']]]]] = None,
             rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            serverless_status: Optional[pulumi.Input[str]] = None,
+            serverless_status_flag: Optional[pulumi.Input[str]] = None,
             storage_limit: Optional[pulumi.Input[int]] = None,
             storage_used: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
@@ -1223,6 +1498,8 @@ class Cluster(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] auto_pause: Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        :param pulumi.Input[int] auto_pause_delay: Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
         :param pulumi.Input[str] available_zone: The available zone of the CynosDB Cluster.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
@@ -1230,21 +1507,25 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_name: Name of CynosDB cluster.
         :param pulumi.Input[str] cluster_status: Status of the Cynosdb cluster.
         :param pulumi.Input[str] create_time: Creation time of the CynosDB cluster.
+        :param pulumi.Input[str] db_mode: Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
         :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
-        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_id: ID of instance.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
-        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_name: Name of instance.
         :param pulumi.Input[str] instance_status: Status of the instance.
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
+        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRoGroupAddrArgs']]]] ro_group_addrs: Readonly addresses. Each element contains the following attributes:
@@ -1255,6 +1536,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] rw_group_id: ID of read-write instance group.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRwGroupInstanceArgs']]]] rw_group_instances: List of instances in the read-write instance group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
+        :param pulumi.Input[str] serverless_status: Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
+        :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[int] storage_used: Used storage of CynosDB cluster, unit in MB.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
@@ -1265,6 +1548,8 @@ class Cluster(pulumi.CustomResource):
 
         __props__ = _ClusterState.__new__(_ClusterState)
 
+        __props__.__dict__["auto_pause"] = auto_pause
+        __props__.__dict__["auto_pause_delay"] = auto_pause_delay
         __props__.__dict__["auto_renew_flag"] = auto_renew_flag
         __props__.__dict__["available_zone"] = available_zone
         __props__.__dict__["charge_type"] = charge_type
@@ -1272,6 +1557,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["cluster_name"] = cluster_name
         __props__.__dict__["cluster_status"] = cluster_status
         __props__.__dict__["create_time"] = create_time
+        __props__.__dict__["db_mode"] = db_mode
         __props__.__dict__["db_type"] = db_type
         __props__.__dict__["db_version"] = db_version
         __props__.__dict__["force_delete"] = force_delete
@@ -1284,9 +1570,12 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["instance_status"] = instance_status
         __props__.__dict__["instance_storage_size"] = instance_storage_size
+        __props__.__dict__["max_cpu"] = max_cpu
+        __props__.__dict__["min_cpu"] = min_cpu
         __props__.__dict__["param_items"] = param_items
         __props__.__dict__["password"] = password
         __props__.__dict__["port"] = port
+        __props__.__dict__["prarm_template_id"] = prarm_template_id
         __props__.__dict__["prepaid_period"] = prepaid_period
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["ro_group_addrs"] = ro_group_addrs
@@ -1297,12 +1586,30 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["rw_group_id"] = rw_group_id
         __props__.__dict__["rw_group_instances"] = rw_group_instances
         __props__.__dict__["rw_group_sgs"] = rw_group_sgs
+        __props__.__dict__["serverless_status"] = serverless_status
+        __props__.__dict__["serverless_status_flag"] = serverless_status_flag
         __props__.__dict__["storage_limit"] = storage_limit
         __props__.__dict__["storage_used"] = storage_used
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
         __props__.__dict__["vpc_id"] = vpc_id
         return Cluster(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="autoPause")
+    def auto_pause(self) -> pulumi.Output[Optional[str]]:
+        """
+        Specify whether the cluster can auto-pause while `db_mode` is `SERVERLESS`. Values: `yes` (default), `no`.
+        """
+        return pulumi.get(self, "auto_pause")
+
+    @property
+    @pulumi.getter(name="autoPauseDelay")
+    def auto_pause_delay(self) -> pulumi.Output[Optional[int]]:
+        """
+        Specify auto-pause delay in second while `db_mode` is `SERVERLESS`. Value range: `[600, 691200]`. Default: `600`.
+        """
+        return pulumi.get(self, "auto_pause_delay")
 
     @property
     @pulumi.getter(name="autoRenewFlag")
@@ -1361,6 +1668,14 @@ class Cluster(pulumi.CustomResource):
         return pulumi.get(self, "create_time")
 
     @property
+    @pulumi.getter(name="dbMode")
+    def db_mode(self) -> pulumi.Output[Optional[str]]:
+        """
+        Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
+        """
+        return pulumi.get(self, "db_mode")
+
+    @property
     @pulumi.getter(name="dbType")
     def db_type(self) -> pulumi.Output[str]:
         """
@@ -1386,9 +1701,9 @@ class Cluster(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="instanceCpuCore")
-    def instance_cpu_core(self) -> pulumi.Output[int]:
+    def instance_cpu_core(self) -> pulumi.Output[Optional[int]]:
         """
-        The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_cpu_core")
 
@@ -1426,9 +1741,9 @@ class Cluster(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="instanceMemorySize")
-    def instance_memory_size(self) -> pulumi.Output[int]:
+    def instance_memory_size(self) -> pulumi.Output[Optional[int]]:
         """
-        Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         """
         return pulumi.get(self, "instance_memory_size")
 
@@ -1457,10 +1772,26 @@ class Cluster(pulumi.CustomResource):
         return pulumi.get(self, "instance_storage_size")
 
     @property
+    @pulumi.getter(name="maxCpu")
+    def max_cpu(self) -> pulumi.Output[Optional[float]]:
+        """
+        Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        """
+        return pulumi.get(self, "max_cpu")
+
+    @property
+    @pulumi.getter(name="minCpu")
+    def min_cpu(self) -> pulumi.Output[Optional[float]]:
+        """
+        Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        """
+        return pulumi.get(self, "min_cpu")
+
+    @property
     @pulumi.getter(name="paramItems")
     def param_items(self) -> pulumi.Output[Optional[Sequence['outputs.ClusterParamItem']]]:
         """
-        Specify parameter list of database. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         """
         return pulumi.get(self, "param_items")
 
@@ -1479,6 +1810,14 @@ class Cluster(pulumi.CustomResource):
         Port of CynosDB cluster.
         """
         return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="prarmTemplateId")
+    def prarm_template_id(self) -> pulumi.Output[int]:
+        """
+        The ID of the parameter template.
+        """
+        return pulumi.get(self, "prarm_template_id")
 
     @property
     @pulumi.getter(name="prepaidPeriod")
@@ -1559,6 +1898,22 @@ class Cluster(pulumi.CustomResource):
         IDs of security group for `rw_group`.
         """
         return pulumi.get(self, "rw_group_sgs")
+
+    @property
+    @pulumi.getter(name="serverlessStatus")
+    def serverless_status(self) -> pulumi.Output[str]:
+        """
+        Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
+        """
+        return pulumi.get(self, "serverless_status")
+
+    @property
+    @pulumi.getter(name="serverlessStatusFlag")
+    def serverless_status_flag(self) -> pulumi.Output[Optional[str]]:
+        """
+        Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        """
+        return pulumi.get(self, "serverless_status_flag")
 
     @property
     @pulumi.getter(name="storageLimit")

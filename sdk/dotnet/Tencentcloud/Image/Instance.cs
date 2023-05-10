@@ -92,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         [Output("sysprep")]
         public Output<bool?> Sysprep { get; private set; } = null!;
 
+        /// <summary>
+        /// Tags of the image.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Instance resource with the given unique name, arguments, and options.
@@ -193,6 +199,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         [Input("sysprep")]
         public Input<bool>? Sysprep { get; set; }
 
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of the image.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
+
         public InstanceArgs()
         {
         }
@@ -253,6 +271,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// </summary>
         [Input("sysprep")]
         public Input<bool>? Sysprep { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of the image.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         public InstanceState()
         {

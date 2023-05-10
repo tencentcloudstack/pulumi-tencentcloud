@@ -6,6 +6,7 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .function import *
+from .function_alias import *
 from .get_functions import *
 from .get_logs import *
 from .get_namespaces import *

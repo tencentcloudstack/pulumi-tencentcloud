@@ -18,37 +18,34 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
-//				Name: pulumi.StringRef("test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
-//				ProjectId: pulumi.IntRef(0),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
-//				Id: pulumi.StringRef("postgres-h9t4fde1"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
+// 			Name: pulumi.StringRef("test"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
+// 			ProjectId: pulumi.IntRef(0),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
+// 			Id: pulumi.StringRef("postgres-h9t4fde1"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

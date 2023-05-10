@@ -19,44 +19,41 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Monitor.NewTmpAlertRule(ctx, "tmpAlertRule", &Monitor.TmpAlertRuleArgs{
-//				Annotations: monitor.TmpAlertRuleAnnotationArray{
-//					&monitor.TmpAlertRuleAnnotationArgs{
-//						Key:   pulumi.String("hello2"),
-//						Value: pulumi.String("world2"),
-//					},
-//				},
-//				Duration:   pulumi.String("4m"),
-//				Expr:       pulumi.String("up{service=\"rig-prometheus-agent\"}>0"),
-//				InstanceId: pulumi.String("prom-c89b3b3u"),
-//				Labels: monitor.TmpAlertRuleLabelArray{
-//					&monitor.TmpAlertRuleLabelArgs{
-//						Key:   pulumi.String("hello1"),
-//						Value: pulumi.String("world1"),
-//					},
-//				},
-//				Receivers: pulumi.StringArray{
-//					pulumi.String("notice-l9ziyxw6"),
-//				},
-//				RuleName:  pulumi.String("test123"),
-//				RuleState: pulumi.Int(2),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Monitor.NewTmpAlertRule(ctx, "tmpAlertRule", &Monitor.TmpAlertRuleArgs{
+// 			Annotations: monitor.TmpAlertRuleAnnotationArray{
+// 				&monitor.TmpAlertRuleAnnotationArgs{
+// 					Key:   pulumi.String("hello2"),
+// 					Value: pulumi.String("world2"),
+// 				},
+// 			},
+// 			Duration:   pulumi.String("4m"),
+// 			Expr:       pulumi.String("up{service=\"rig-prometheus-agent\"}>0"),
+// 			InstanceId: pulumi.String("prom-c89b3b3u"),
+// 			Labels: monitor.TmpAlertRuleLabelArray{
+// 				&monitor.TmpAlertRuleLabelArgs{
+// 					Key:   pulumi.String("hello1"),
+// 					Value: pulumi.String("world1"),
+// 				},
+// 			},
+// 			Receivers: pulumi.StringArray{
+// 				pulumi.String("notice-l9ziyxw6"),
+// 			},
+// 			RuleName:  pulumi.String("test123"),
+// 			RuleState: pulumi.Int(2),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -64,9 +61,7 @@ import (
 // monitor tmpAlertRule can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
-//
+//  $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
 // ```
 type TmpAlertRule struct {
 	pulumi.CustomResourceState
@@ -75,7 +70,7 @@ type TmpAlertRule struct {
 	Annotations TmpAlertRuleAnnotationArrayOutput `pulumi:"annotations"`
 	// Rule alarm duration.
 	Duration pulumi.StringPtrOutput `pulumi:"duration"`
-	// Rule expression.
+	// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
 	Expr pulumi.StringOutput `pulumi:"expr"`
 	// Instance id.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
@@ -137,7 +132,7 @@ type tmpAlertRuleState struct {
 	Annotations []TmpAlertRuleAnnotation `pulumi:"annotations"`
 	// Rule alarm duration.
 	Duration *string `pulumi:"duration"`
-	// Rule expression.
+	// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
 	Expr *string `pulumi:"expr"`
 	// Instance id.
 	InstanceId *string `pulumi:"instanceId"`
@@ -158,7 +153,7 @@ type TmpAlertRuleState struct {
 	Annotations TmpAlertRuleAnnotationArrayInput
 	// Rule alarm duration.
 	Duration pulumi.StringPtrInput
-	// Rule expression.
+	// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
 	Expr pulumi.StringPtrInput
 	// Instance id.
 	InstanceId pulumi.StringPtrInput
@@ -183,7 +178,7 @@ type tmpAlertRuleArgs struct {
 	Annotations []TmpAlertRuleAnnotation `pulumi:"annotations"`
 	// Rule alarm duration.
 	Duration *string `pulumi:"duration"`
-	// Rule expression.
+	// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
 	Expr string `pulumi:"expr"`
 	// Instance id.
 	InstanceId string `pulumi:"instanceId"`
@@ -205,7 +200,7 @@ type TmpAlertRuleArgs struct {
 	Annotations TmpAlertRuleAnnotationArrayInput
 	// Rule alarm duration.
 	Duration pulumi.StringPtrInput
-	// Rule expression.
+	// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
 	Expr pulumi.StringInput
 	// Instance id.
 	InstanceId pulumi.StringInput
@@ -247,7 +242,7 @@ func (i *TmpAlertRule) ToTmpAlertRuleOutputWithContext(ctx context.Context) TmpA
 // TmpAlertRuleArrayInput is an input type that accepts TmpAlertRuleArray and TmpAlertRuleArrayOutput values.
 // You can construct a concrete instance of `TmpAlertRuleArrayInput` via:
 //
-//	TmpAlertRuleArray{ TmpAlertRuleArgs{...} }
+//          TmpAlertRuleArray{ TmpAlertRuleArgs{...} }
 type TmpAlertRuleArrayInput interface {
 	pulumi.Input
 
@@ -272,7 +267,7 @@ func (i TmpAlertRuleArray) ToTmpAlertRuleArrayOutputWithContext(ctx context.Cont
 // TmpAlertRuleMapInput is an input type that accepts TmpAlertRuleMap and TmpAlertRuleMapOutput values.
 // You can construct a concrete instance of `TmpAlertRuleMapInput` via:
 //
-//	TmpAlertRuleMap{ "key": TmpAlertRuleArgs{...} }
+//          TmpAlertRuleMap{ "key": TmpAlertRuleArgs{...} }
 type TmpAlertRuleMapInput interface {
 	pulumi.Input
 
@@ -318,7 +313,7 @@ func (o TmpAlertRuleOutput) Duration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TmpAlertRule) pulumi.StringPtrOutput { return v.Duration }).(pulumi.StringPtrOutput)
 }
 
-// Rule expression.
+// Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
 func (o TmpAlertRuleOutput) Expr() pulumi.StringOutput {
 	return o.ApplyT(func(v *TmpAlertRule) pulumi.StringOutput { return v.Expr }).(pulumi.StringOutput)
 }

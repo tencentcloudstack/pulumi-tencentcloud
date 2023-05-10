@@ -20,7 +20,7 @@ type ProviderAssumeRole struct {
 // ProviderAssumeRoleInput is an input type that accepts ProviderAssumeRoleArgs and ProviderAssumeRoleOutput values.
 // You can construct a concrete instance of `ProviderAssumeRoleInput` via:
 //
-//	ProviderAssumeRoleArgs{...}
+//          ProviderAssumeRoleArgs{...}
 type ProviderAssumeRoleInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i ProviderAssumeRoleArgs) ToProviderAssumeRolePtrOutputWithContext(ctx con
 // ProviderAssumeRolePtrInput is an input type that accepts ProviderAssumeRoleArgs, ProviderAssumeRolePtr and ProviderAssumeRolePtrOutput values.
 // You can construct a concrete instance of `ProviderAssumeRolePtrInput` via:
 //
-//	        ProviderAssumeRoleArgs{...}
+//          ProviderAssumeRoleArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type ProviderAssumeRolePtrInput interface {
 	pulumi.Input
 

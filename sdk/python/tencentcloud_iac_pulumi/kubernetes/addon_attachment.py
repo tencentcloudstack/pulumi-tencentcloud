@@ -231,6 +231,8 @@ class AddonAttachment(pulumi.CustomResource):
         """
         Provide a resource to configure kubernetes cluster app addons.
 
+        > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
+
         ## Example Usage
 
         ```python
@@ -239,8 +241,7 @@ class AddonAttachment(pulumi.CustomResource):
 
         addon_cbs = tencentcloud.kubernetes.AddonAttachment("addonCbs",
             cluster_id="cls-xxxxxxxx",
-            values=["rootdir=/var/lib/kubelet"],
-            version="1.0.0")
+            values=["rootdir=/var/lib/kubelet"])
         addon_tcr = tencentcloud.kubernetes.AddonAttachment("addonTcr",
             cluster_id="cls-xxxxxxxx",
             values=[
@@ -261,8 +262,7 @@ class AddonAttachment(pulumi.CustomResource):
                 "global.hosts[0].domain=sample-vpc.tencentcloudcr.com",
                 "global.hosts[0].ip=10.16.0.49",
                 "global.hosts[0].disabled=false",
-            ],
-            version="1.0.0")
+            ])
         ```
 
         Install new addon by passing spec json to req_body directly
@@ -277,7 +277,7 @@ class AddonAttachment(pulumi.CustomResource):
             "spec":{
                 "chart":{
                     "chartName":"cbs",
-                    "chartVersion":"1.0.0"
+                    "chartVersion":"1.0.5"
                 },
                 "values":{
                     "rawValuesType":"yaml",
@@ -316,6 +316,8 @@ class AddonAttachment(pulumi.CustomResource):
         """
         Provide a resource to configure kubernetes cluster app addons.
 
+        > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
+
         ## Example Usage
 
         ```python
@@ -324,8 +326,7 @@ class AddonAttachment(pulumi.CustomResource):
 
         addon_cbs = tencentcloud.kubernetes.AddonAttachment("addonCbs",
             cluster_id="cls-xxxxxxxx",
-            values=["rootdir=/var/lib/kubelet"],
-            version="1.0.0")
+            values=["rootdir=/var/lib/kubelet"])
         addon_tcr = tencentcloud.kubernetes.AddonAttachment("addonTcr",
             cluster_id="cls-xxxxxxxx",
             values=[
@@ -346,8 +347,7 @@ class AddonAttachment(pulumi.CustomResource):
                 "global.hosts[0].domain=sample-vpc.tencentcloudcr.com",
                 "global.hosts[0].ip=10.16.0.49",
                 "global.hosts[0].disabled=false",
-            ],
-            version="1.0.0")
+            ])
         ```
 
         Install new addon by passing spec json to req_body directly
@@ -362,7 +362,7 @@ class AddonAttachment(pulumi.CustomResource):
             "spec":{
                 "chart":{
                     "chartName":"cbs",
-                    "chartVersion":"1.0.0"
+                    "chartVersion":"1.0.5"
                 },
                 "values":{
                     "rawValuesType":"yaml",
@@ -522,7 +522,7 @@ class AddonAttachment(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def version(self) -> pulumi.Output[Optional[str]]:
+    def version(self) -> pulumi.Output[str]:
         """
         Addon version, default latest version. Conflict with `request_body`.
         """

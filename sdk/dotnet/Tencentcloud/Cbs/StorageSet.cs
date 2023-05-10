@@ -96,7 +96,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Output<string> StorageName { get; private set; } = null!;
 
         /// <summary>
-        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        /// Volume of CBS, and unit is GB.
         /// </summary>
         [Output("storageSize")]
         public Output<int> StorageSize { get; private set; } = null!;
@@ -108,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Output<string> StorageStatus { get; private set; } = null!;
 
         /// <summary>
-        /// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        /// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         /// </summary>
         [Output("storageType")]
         public Output<string> StorageType { get; private set; } = null!;
@@ -209,13 +209,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<string> StorageName { get; set; } = null!;
 
         /// <summary>
-        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        /// Volume of CBS, and unit is GB.
         /// </summary>
         [Input("storageSize", required: true)]
         public Input<int> StorageSize { get; set; } = null!;
 
         /// <summary>
-        /// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        /// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         /// </summary>
         [Input("storageType", required: true)]
         public Input<string> StorageType { get; set; } = null!;
@@ -294,7 +294,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<string>? StorageName { get; set; }
 
         /// <summary>
-        /// Volume of CBS, and unit is GB. If storage type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        /// Volume of CBS, and unit is GB.
         /// </summary>
         [Input("storageSize")]
         public Input<int>? StorageSize { get; set; }
@@ -306,7 +306,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<string>? StorageStatus { get; set; }
 
         /// <summary>
-        /// Type of CBS medium. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_TSSD and CLOUD_HSSD.
+        /// Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }

@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Postgresql/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Postgresql/parameterTemplate:ParameterTemplate":
+		r = &ParameterTemplate{}
 	case "tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment":
 		r = &ReadonlyAttachment{}
 	case "tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup":
@@ -45,6 +47,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Postgresql/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/parameterTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

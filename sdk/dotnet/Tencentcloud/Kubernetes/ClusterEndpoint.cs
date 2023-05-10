@@ -11,8 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 {
     /// <summary>
-    /// Provide a resource to create a KubernetesClusterEndpoint.
-    /// This resource allows you to create an empty cluster first without any workers. Only all attached node depends create complete, cluster endpoint will finally be enabled.
+    /// Provide a resource to create a KubernetesClusterEndpoint. This resource allows you to create an empty cluster first without any workers. Only all attached node depends create complete, cluster endpoint will finally be enabled.
     /// 
     /// &gt; **NOTE:** Recommend using `depends_on` to make sure endpoint create after node pools or workers does.
     /// 
@@ -58,6 +57,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<bool?> ClusterInternet { get; private set; } = null!;
 
         /// <summary>
+        /// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
+        /// </summary>
+        [Output("clusterInternetDomain")]
+        public Output<string?> ClusterInternetDomain { get; private set; } = null!;
+
+        /// <summary>
         /// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
         /// </summary>
         [Output("clusterInternetSecurityGroup")]
@@ -68,6 +73,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("clusterIntranet")]
         public Output<bool?> ClusterIntranet { get; private set; } = null!;
+
+        /// <summary>
+        /// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
+        /// </summary>
+        [Output("clusterIntranetDomain")]
+        public Output<string?> ClusterIntranetDomain { get; private set; } = null!;
 
         /// <summary>
         /// Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
@@ -165,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? ClusterInternet { get; set; }
 
         /// <summary>
+        /// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
+        /// </summary>
+        [Input("clusterInternetDomain")]
+        public Input<string>? ClusterInternetDomain { get; set; }
+
+        /// <summary>
         /// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
         /// </summary>
         [Input("clusterInternetSecurityGroup")]
@@ -175,6 +192,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("clusterIntranet")]
         public Input<bool>? ClusterIntranet { get; set; }
+
+        /// <summary>
+        /// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
+        /// </summary>
+        [Input("clusterIntranetDomain")]
+        public Input<string>? ClusterIntranetDomain { get; set; }
 
         /// <summary>
         /// Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
@@ -233,6 +256,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? ClusterInternet { get; set; }
 
         /// <summary>
+        /// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
+        /// </summary>
+        [Input("clusterInternetDomain")]
+        public Input<string>? ClusterInternetDomain { get; set; }
+
+        /// <summary>
         /// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
         /// </summary>
         [Input("clusterInternetSecurityGroup")]
@@ -243,6 +272,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("clusterIntranet")]
         public Input<bool>? ClusterIntranet { get; set; }
+
+        /// <summary>
+        /// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
+        /// </summary>
+        [Input("clusterIntranetDomain")]
+        public Input<string>? ClusterIntranetDomain { get; set; }
 
         /// <summary>
         /// Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.

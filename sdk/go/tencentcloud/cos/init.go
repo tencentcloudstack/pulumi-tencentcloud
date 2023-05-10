@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Cos/bucket:Bucket":
 		r = &Bucket{}
+	case "tencentcloud:Cos/bucketDomainCertificateAttachment:BucketDomainCertificateAttachment":
+		r = &BucketDomainCertificateAttachment{}
 	case "tencentcloud:Cos/bucketObject:BucketObject":
 		r = &BucketObject{}
 	case "tencentcloud:Cos/bucketPolicy:BucketPolicy":
@@ -43,6 +45,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cos/bucket",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/bucketDomainCertificateAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

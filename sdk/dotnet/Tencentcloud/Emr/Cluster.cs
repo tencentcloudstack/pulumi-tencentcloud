@@ -123,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Output<string?> NeedMasterWan { get; private set; } = null!;
 
         /// <summary>
-        /// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        /// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         /// </summary>
         [Output("payMode")]
         public Output<int> PayMode { get; private set; } = null!;
@@ -270,7 +270,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Input<string>? NeedMasterWan { get; set; }
 
         /// <summary>
-        /// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        /// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         /// </summary>
         [Input("payMode", required: true)]
         public Input<int> PayMode { get; set; } = null!;
@@ -401,7 +401,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Input<string>? NeedMasterWan { get; set; }
 
         /// <summary>
-        /// The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
+        /// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         /// </summary>
         [Input("payMode")]
         public Input<int>? PayMode { get; set; }

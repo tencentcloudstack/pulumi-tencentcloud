@@ -14,18 +14,23 @@ __all__ = ['PairArgs', 'Pair']
 class PairArgs:
     def __init__(__self__, *,
                  key_name: pulumi.Input[str],
-                 public_key: pulumi.Input[str],
-                 project_id: Optional[pulumi.Input[int]] = None):
+                 project_id: Optional[pulumi.Input[int]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Pair resource.
         :param pulumi.Input[str] key_name: The key pair's name. It is the only in one TencentCloud account.
-        :param pulumi.Input[str] public_key: You can import an existing public key and using TencentCloud key pair to manage it.
         :param pulumi.Input[int] project_id: Specifys to which project the key pair belongs.
+        :param pulumi.Input[str] public_key: You can import an existing public key and using TencentCloud key pair to manage it.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the key pair.
         """
         pulumi.set(__self__, "key_name", key_name)
-        pulumi.set(__self__, "public_key", public_key)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="keyName")
@@ -40,18 +45,6 @@ class PairArgs:
         pulumi.set(self, "key_name", value)
 
     @property
-    @pulumi.getter(name="publicKey")
-    def public_key(self) -> pulumi.Input[str]:
-        """
-        You can import an existing public key and using TencentCloud key pair to manage it.
-        """
-        return pulumi.get(self, "public_key")
-
-    @public_key.setter
-    def public_key(self, value: pulumi.Input[str]):
-        pulumi.set(self, "public_key", value)
-
-    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> Optional[pulumi.Input[int]]:
         """
@@ -63,18 +56,44 @@ class PairArgs:
     def project_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "project_id", value)
 
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        You can import an existing public key and using TencentCloud key pair to manage it.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_key", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of the key pair.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _PairState:
     def __init__(__self__, *,
                  key_name: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
-                 public_key: Optional[pulumi.Input[str]] = None):
+                 public_key: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Pair resources.
         :param pulumi.Input[str] key_name: The key pair's name. It is the only in one TencentCloud account.
         :param pulumi.Input[int] project_id: Specifys to which project the key pair belongs.
         :param pulumi.Input[str] public_key: You can import an existing public key and using TencentCloud key pair to manage it.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the key pair.
         """
         if key_name is not None:
             pulumi.set(__self__, "key_name", key_name)
@@ -82,6 +101,8 @@ class _PairState:
             pulumi.set(__self__, "project_id", project_id)
         if public_key is not None:
             pulumi.set(__self__, "public_key", public_key)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="keyName")
@@ -119,6 +140,18 @@ class _PairState:
     def public_key(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "public_key", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of the key pair.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 class Pair(pulumi.CustomResource):
     @overload
@@ -128,6 +161,7 @@ class Pair(pulumi.CustomResource):
                  key_name: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  public_key: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provides a key pair resource.
@@ -138,7 +172,8 @@ class Pair(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.key.Pair("foo",
+        foo = tencentcloud.key.Pair("foo", key_name="terraform_test")
+        foo1 = tencentcloud.key.Pair("foo1",
             key_name="terraform_test",
             public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
         ```
@@ -156,6 +191,7 @@ class Pair(pulumi.CustomResource):
         :param pulumi.Input[str] key_name: The key pair's name. It is the only in one TencentCloud account.
         :param pulumi.Input[int] project_id: Specifys to which project the key pair belongs.
         :param pulumi.Input[str] public_key: You can import an existing public key and using TencentCloud key pair to manage it.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the key pair.
         """
         ...
     @overload
@@ -172,7 +208,8 @@ class Pair(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.key.Pair("foo",
+        foo = tencentcloud.key.Pair("foo", key_name="terraform_test")
+        foo1 = tencentcloud.key.Pair("foo1",
             key_name="terraform_test",
             public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
         ```
@@ -203,6 +240,7 @@ class Pair(pulumi.CustomResource):
                  key_name: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  public_key: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -221,9 +259,8 @@ class Pair(pulumi.CustomResource):
                 raise TypeError("Missing required property 'key_name'")
             __props__.__dict__["key_name"] = key_name
             __props__.__dict__["project_id"] = project_id
-            if public_key is None and not opts.urn:
-                raise TypeError("Missing required property 'public_key'")
             __props__.__dict__["public_key"] = public_key
+            __props__.__dict__["tags"] = tags
         super(Pair, __self__).__init__(
             'tencentcloud:Key/pair:Pair',
             resource_name,
@@ -236,7 +273,8 @@ class Pair(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             key_name: Optional[pulumi.Input[str]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
-            public_key: Optional[pulumi.Input[str]] = None) -> 'Pair':
+            public_key: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Pair':
         """
         Get an existing Pair resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -247,6 +285,7 @@ class Pair(pulumi.CustomResource):
         :param pulumi.Input[str] key_name: The key pair's name. It is the only in one TencentCloud account.
         :param pulumi.Input[int] project_id: Specifys to which project the key pair belongs.
         :param pulumi.Input[str] public_key: You can import an existing public key and using TencentCloud key pair to manage it.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of the key pair.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -255,6 +294,7 @@ class Pair(pulumi.CustomResource):
         __props__.__dict__["key_name"] = key_name
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["public_key"] = public_key
+        __props__.__dict__["tags"] = tags
         return Pair(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -280,4 +320,12 @@ class Pair(pulumi.CustomResource):
         You can import an existing public key and using TencentCloud key pair to manage it.
         """
         return pulumi.get(self, "public_key")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tags of the key pair.
+        """
+        return pulumi.get(self, "tags")
 

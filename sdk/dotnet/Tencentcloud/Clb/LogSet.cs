@@ -13,6 +13,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// <summary>
     /// Provides a resource to create an exclusive CLB Logset.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Clb.LogSet("foo", new Tencentcloud.Clb.LogSetArgs
+    ///         {
+    ///             Period = 7,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// CLB log set can be imported using the id, e.g.

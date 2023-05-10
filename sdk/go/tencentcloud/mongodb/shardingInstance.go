@@ -19,35 +19,35 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Mongodb.NewShardingInstance(ctx, "mongodb", &Mongodb.ShardingInstanceArgs{
-//				AvailableZone: pulumi.String("ap-guangzhou-3"),
-//				EngineVersion: pulumi.String("MONGO_3_WT"),
-//				InstanceName:  pulumi.String("mongodb"),
-//				MachineType:   pulumi.String("GIO"),
-//				Memory:        pulumi.Int(4),
-//				NodesPerShard: pulumi.Int(3),
-//				Password:      pulumi.String("password1234"),
-//				ProjectId:     pulumi.Int(0),
-//				ShardQuantity: pulumi.Int(2),
-//				SubnetId:      pulumi.String("subnet-lk0svi3p"),
-//				Volume:        pulumi.Int(100),
-//				VpcId:         pulumi.String("vpc-mz3efvbw"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mongodb.NewShardingInstance(ctx, "mongodb", &Mongodb.ShardingInstanceArgs{
+// 			AvailableZone: pulumi.String("ap-guangzhou-3"),
+// 			EngineVersion: pulumi.String("MONGO_36_WT"),
+// 			InstanceName:  pulumi.String("mongodb"),
+// 			MachineType:   pulumi.String("HIO10G"),
+// 			Memory:        pulumi.Int(4),
+// 			MongosCpu:     pulumi.Int(1),
+// 			MongosMemory:  pulumi.Int(2),
+// 			MongosNodeNum: pulumi.Int(3),
+// 			NodesPerShard: pulumi.Int(3),
+// 			Password:      pulumi.String("password1234"),
+// 			ProjectId:     pulumi.Int(0),
+// 			ShardQuantity: pulumi.Int(2),
+// 			SubnetId:      pulumi.String("subnet-lk0svi3p"),
+// 			Volume:        pulumi.Int(100),
+// 			VpcId:         pulumi.String("vpc-mz3efvbw"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -55,15 +55,19 @@ import (
 // Mongodb sharding instance can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
-//
+//  $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
 // ```
 type ShardingInstance struct {
 	pulumi.CustomResourceState
 
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
+	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+	// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+	// - Version 4.2 and above are not supported.
+	// - Read-only disaster recovery instances are not supported.
+	// - Basic network cannot be selected.
+	AvailabilityZoneLists pulumi.StringArrayOutput `pulumi:"availabilityZoneLists"`
 	// The available zone of the Mongodb.
 	AvailableZone pulumi.StringOutput `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
@@ -72,12 +76,20 @@ type ShardingInstance struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
 	EngineVersion pulumi.StringOutput `pulumi:"engineVersion"`
+	// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+	HiddenZone pulumi.StringOutput `pulumi:"hiddenZone"`
 	// Name of the Mongodb instance.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType pulumi.StringOutput `pulumi:"machineType"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory pulumi.IntOutput `pulumi:"memory"`
+	// Number of mongos cpu.
+	MongosCpu pulumi.IntOutput `pulumi:"mongosCpu"`
+	// Mongos memory size in GB.
+	MongosMemory pulumi.IntOutput `pulumi:"mongosMemory"`
+	// Number of mongos.
+	MongosNodeNum pulumi.IntOutput `pulumi:"mongosNodeNum"`
 	// Number of nodes per shard, at least 3(one master and two slaves).
 	NodesPerShard pulumi.IntOutput `pulumi:"nodesPerShard"`
 	// Password of this Mongodb account.
@@ -162,6 +174,12 @@ func GetShardingInstance(ctx *pulumi.Context,
 type shardingInstanceState struct {
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+	// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+	// - Version 4.2 and above are not supported.
+	// - Read-only disaster recovery instances are not supported.
+	// - Basic network cannot be selected.
+	AvailabilityZoneLists []string `pulumi:"availabilityZoneLists"`
 	// The available zone of the Mongodb.
 	AvailableZone *string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
@@ -170,12 +188,20 @@ type shardingInstanceState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
 	EngineVersion *string `pulumi:"engineVersion"`
+	// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+	HiddenZone *string `pulumi:"hiddenZone"`
 	// Name of the Mongodb instance.
 	InstanceName *string `pulumi:"instanceName"`
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType *string `pulumi:"machineType"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory *int `pulumi:"memory"`
+	// Number of mongos cpu.
+	MongosCpu *int `pulumi:"mongosCpu"`
+	// Mongos memory size in GB.
+	MongosMemory *int `pulumi:"mongosMemory"`
+	// Number of mongos.
+	MongosNodeNum *int `pulumi:"mongosNodeNum"`
 	// Number of nodes per shard, at least 3(one master and two slaves).
 	NodesPerShard *int `pulumi:"nodesPerShard"`
 	// Password of this Mongodb account.
@@ -207,6 +233,12 @@ type shardingInstanceState struct {
 type ShardingInstanceState struct {
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrInput
+	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+	// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+	// - Version 4.2 and above are not supported.
+	// - Read-only disaster recovery instances are not supported.
+	// - Basic network cannot be selected.
+	AvailabilityZoneLists pulumi.StringArrayInput
 	// The available zone of the Mongodb.
 	AvailableZone pulumi.StringPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
@@ -215,12 +247,20 @@ type ShardingInstanceState struct {
 	CreateTime pulumi.StringPtrInput
 	// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
 	EngineVersion pulumi.StringPtrInput
+	// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+	HiddenZone pulumi.StringPtrInput
 	// Name of the Mongodb instance.
 	InstanceName pulumi.StringPtrInput
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType pulumi.StringPtrInput
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory pulumi.IntPtrInput
+	// Number of mongos cpu.
+	MongosCpu pulumi.IntPtrInput
+	// Mongos memory size in GB.
+	MongosMemory pulumi.IntPtrInput
+	// Number of mongos.
+	MongosNodeNum pulumi.IntPtrInput
 	// Number of nodes per shard, at least 3(one master and two slaves).
 	NodesPerShard pulumi.IntPtrInput
 	// Password of this Mongodb account.
@@ -256,18 +296,32 @@ func (ShardingInstanceState) ElementType() reflect.Type {
 type shardingInstanceArgs struct {
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+	// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+	// - Version 4.2 and above are not supported.
+	// - Read-only disaster recovery instances are not supported.
+	// - Basic network cannot be selected.
+	AvailabilityZoneLists []string `pulumi:"availabilityZoneLists"`
 	// The available zone of the Mongodb.
 	AvailableZone string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
 	// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
 	EngineVersion string `pulumi:"engineVersion"`
+	// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+	HiddenZone *string `pulumi:"hiddenZone"`
 	// Name of the Mongodb instance.
 	InstanceName string `pulumi:"instanceName"`
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType string `pulumi:"machineType"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory int `pulumi:"memory"`
+	// Number of mongos cpu.
+	MongosCpu *int `pulumi:"mongosCpu"`
+	// Mongos memory size in GB.
+	MongosMemory *int `pulumi:"mongosMemory"`
+	// Number of mongos.
+	MongosNodeNum *int `pulumi:"mongosNodeNum"`
 	// Number of nodes per shard, at least 3(one master and two slaves).
 	NodesPerShard int `pulumi:"nodesPerShard"`
 	// Password of this Mongodb account.
@@ -294,18 +348,32 @@ type shardingInstanceArgs struct {
 type ShardingInstanceArgs struct {
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrInput
+	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+	// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+	// - Version 4.2 and above are not supported.
+	// - Read-only disaster recovery instances are not supported.
+	// - Basic network cannot be selected.
+	AvailabilityZoneLists pulumi.StringArrayInput
 	// The available zone of the Mongodb.
 	AvailableZone pulumi.StringInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrInput
 	// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
 	EngineVersion pulumi.StringInput
+	// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+	HiddenZone pulumi.StringPtrInput
 	// Name of the Mongodb instance.
 	InstanceName pulumi.StringInput
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType pulumi.StringInput
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory pulumi.IntInput
+	// Number of mongos cpu.
+	MongosCpu pulumi.IntPtrInput
+	// Mongos memory size in GB.
+	MongosMemory pulumi.IntPtrInput
+	// Number of mongos.
+	MongosNodeNum pulumi.IntPtrInput
 	// Number of nodes per shard, at least 3(one master and two slaves).
 	NodesPerShard pulumi.IntInput
 	// Password of this Mongodb account.
@@ -354,7 +422,7 @@ func (i *ShardingInstance) ToShardingInstanceOutputWithContext(ctx context.Conte
 // ShardingInstanceArrayInput is an input type that accepts ShardingInstanceArray and ShardingInstanceArrayOutput values.
 // You can construct a concrete instance of `ShardingInstanceArrayInput` via:
 //
-//	ShardingInstanceArray{ ShardingInstanceArgs{...} }
+//          ShardingInstanceArray{ ShardingInstanceArgs{...} }
 type ShardingInstanceArrayInput interface {
 	pulumi.Input
 
@@ -379,7 +447,7 @@ func (i ShardingInstanceArray) ToShardingInstanceArrayOutputWithContext(ctx cont
 // ShardingInstanceMapInput is an input type that accepts ShardingInstanceMap and ShardingInstanceMapOutput values.
 // You can construct a concrete instance of `ShardingInstanceMapInput` via:
 //
-//	ShardingInstanceMap{ "key": ShardingInstanceArgs{...} }
+//          ShardingInstanceMap{ "key": ShardingInstanceArgs{...} }
 type ShardingInstanceMapInput interface {
 	pulumi.Input
 
@@ -420,6 +488,15 @@ func (o ShardingInstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntPtrOutput { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
 }
 
+// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+// - Version 4.2 and above are not supported.
+// - Read-only disaster recovery instances are not supported.
+// - Basic network cannot be selected.
+func (o ShardingInstanceOutput) AvailabilityZoneLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ShardingInstance) pulumi.StringArrayOutput { return v.AvailabilityZoneLists }).(pulumi.StringArrayOutput)
+}
+
 // The available zone of the Mongodb.
 func (o ShardingInstanceOutput) AvailableZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringOutput { return v.AvailableZone }).(pulumi.StringOutput)
@@ -440,6 +517,11 @@ func (o ShardingInstanceOutput) EngineVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringOutput { return v.EngineVersion }).(pulumi.StringOutput)
 }
 
+// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+func (o ShardingInstanceOutput) HiddenZone() pulumi.StringOutput {
+	return o.ApplyT(func(v *ShardingInstance) pulumi.StringOutput { return v.HiddenZone }).(pulumi.StringOutput)
+}
+
 // Name of the Mongodb instance.
 func (o ShardingInstanceOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
@@ -453,6 +535,21 @@ func (o ShardingInstanceOutput) MachineType() pulumi.StringOutput {
 // Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 func (o ShardingInstanceOutput) Memory() pulumi.IntOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntOutput { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Number of mongos cpu.
+func (o ShardingInstanceOutput) MongosCpu() pulumi.IntOutput {
+	return o.ApplyT(func(v *ShardingInstance) pulumi.IntOutput { return v.MongosCpu }).(pulumi.IntOutput)
+}
+
+// Mongos memory size in GB.
+func (o ShardingInstanceOutput) MongosMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v *ShardingInstance) pulumi.IntOutput { return v.MongosMemory }).(pulumi.IntOutput)
+}
+
+// Number of mongos.
+func (o ShardingInstanceOutput) MongosNodeNum() pulumi.IntOutput {
+	return o.ApplyT(func(v *ShardingInstance) pulumi.IntOutput { return v.MongosNodeNum }).(pulumi.IntOutput)
 }
 
 // Number of nodes per shard, at least 3(one master and two slaves).

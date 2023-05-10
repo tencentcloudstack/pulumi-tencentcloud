@@ -19,34 +19,31 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-//				ClusterName: pulumi.String("example"),
-//				Remark:      pulumi.String("this is description."),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = Tdmq.NewNamespace(ctx, "bar", &Tdmq.NamespaceArgs{
-//				ClusterId:   foo.ID(),
-//				EnvironName: pulumi.String("example"),
-//				MsgTtl:      pulumi.Int(300),
-//				Remark:      pulumi.String("this is description."),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
+// 			ClusterName: pulumi.String("example"),
+// 			Remark:      pulumi.String("this is description."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tdmq.NewNamespace(ctx, "bar", &Tdmq.NamespaceArgs{
+// 			ClusterId:   foo.ID(),
+// 			EnvironName: pulumi.String("example"),
+// 			MsgTtl:      pulumi.Int(300),
+// 			Remark:      pulumi.String("this is description."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -54,9 +51,7 @@ import (
 // Tdmq namespace can be imported, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
-//
+//  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
 // ```
 type Namespace struct {
 	pulumi.CustomResourceState
@@ -69,7 +64,7 @@ type Namespace struct {
 	MsgTtl pulumi.IntOutput `pulumi:"msgTtl"`
 	// Description of the namespace.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
-	// The Policy of message to retain.
+	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy pulumi.MapOutput `pulumi:"retentionPolicy"`
 }
 
@@ -120,7 +115,7 @@ type namespaceState struct {
 	MsgTtl *int `pulumi:"msgTtl"`
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
-	// The Policy of message to retain.
+	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy map[string]interface{} `pulumi:"retentionPolicy"`
 }
 
@@ -133,7 +128,7 @@ type NamespaceState struct {
 	MsgTtl pulumi.IntPtrInput
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
-	// The Policy of message to retain.
+	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy pulumi.MapInput
 }
 
@@ -150,7 +145,7 @@ type namespaceArgs struct {
 	MsgTtl int `pulumi:"msgTtl"`
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
-	// The Policy of message to retain.
+	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy map[string]interface{} `pulumi:"retentionPolicy"`
 }
 
@@ -164,7 +159,7 @@ type NamespaceArgs struct {
 	MsgTtl pulumi.IntInput
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
-	// The Policy of message to retain.
+	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy pulumi.MapInput
 }
 
@@ -194,7 +189,7 @@ func (i *Namespace) ToNamespaceOutputWithContext(ctx context.Context) NamespaceO
 // NamespaceArrayInput is an input type that accepts NamespaceArray and NamespaceArrayOutput values.
 // You can construct a concrete instance of `NamespaceArrayInput` via:
 //
-//	NamespaceArray{ NamespaceArgs{...} }
+//          NamespaceArray{ NamespaceArgs{...} }
 type NamespaceArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +214,7 @@ func (i NamespaceArray) ToNamespaceArrayOutputWithContext(ctx context.Context) N
 // NamespaceMapInput is an input type that accepts NamespaceMap and NamespaceMapOutput values.
 // You can construct a concrete instance of `NamespaceMapInput` via:
 //
-//	NamespaceMap{ "key": NamespaceArgs{...} }
+//          NamespaceMap{ "key": NamespaceArgs{...} }
 type NamespaceMapInput interface {
 	pulumi.Input
 
@@ -275,7 +270,7 @@ func (o NamespaceOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Namespace) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
-// The Policy of message to retain.
+// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 func (o NamespaceOutput) RetentionPolicy() pulumi.MapOutput {
 	return o.ApplyT(func(v *Namespace) pulumi.MapOutput { return v.RetentionPolicy }).(pulumi.MapOutput)
 }

@@ -6,27 +6,30 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./addonAttachment";
-export * from "./asScalingGroup";
 export * from "./authAttachment";
+export * from "./backupStorageLocation";
 export * from "./cluster";
 export * from "./clusterAttachment";
 export * from "./clusterEndpoint";
+export * from "./getAvailableClusterVersions";
 export * from "./getCharts";
 export * from "./getClusterCommonNames";
 export * from "./getClusterLevels";
 export * from "./getClusters";
 export * from "./nodePool";
 export * from "./scaleWorker";
+export * from "./serverlessNodePool";
 
 // Import resources to register:
 import { AddonAttachment } from "./addonAttachment";
-import { AsScalingGroup } from "./asScalingGroup";
 import { AuthAttachment } from "./authAttachment";
+import { BackupStorageLocation } from "./backupStorageLocation";
 import { Cluster } from "./cluster";
 import { ClusterAttachment } from "./clusterAttachment";
 import { ClusterEndpoint } from "./clusterEndpoint";
 import { NodePool } from "./nodePool";
 import { ScaleWorker } from "./scaleWorker";
+import { ServerlessNodePool } from "./serverlessNodePool";
 
 const _module = {
     version: utilities.getVersion(),
@@ -34,10 +37,10 @@ const _module = {
         switch (type) {
             case "tencentcloud:Kubernetes/addonAttachment:AddonAttachment":
                 return new AddonAttachment(name, <any>undefined, { urn })
-            case "tencentcloud:Kubernetes/asScalingGroup:AsScalingGroup":
-                return new AsScalingGroup(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/authAttachment:AuthAttachment":
                 return new AuthAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
+                return new BackupStorageLocation(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/cluster:Cluster":
                 return new Cluster(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/clusterAttachment:ClusterAttachment":
@@ -48,16 +51,19 @@ const _module = {
                 return new NodePool(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/scaleWorker:ScaleWorker":
                 return new ScaleWorker(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool":
+                return new ServerlessNodePool(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addonAttachment", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/asScalingGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/authAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/backupStorageLocation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/cluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterEndpoint", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nodePool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/scaleWorker", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/serverlessNodePool", _module)

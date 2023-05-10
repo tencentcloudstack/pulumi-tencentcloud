@@ -99,7 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Outputs
         /// </summary>
         public readonly string SubnetId;
         /// <summary>
-        /// Tag infomation.
+        /// Tag information.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetInstancesInstanceListTagResult> Tags;
         /// <summary>

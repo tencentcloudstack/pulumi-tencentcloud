@@ -18,22 +18,23 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Eip.NewInstance(ctx, "foo", nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+// 			BandwidthPackageId: pulumi.String("bwp-jtvzuky6"),
+// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+// 			Type:               pulumi.String("EIP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 //
 // ## Import
@@ -41,9 +42,7 @@ import (
 // EIP can be imported using the id, e.g.
 //
 // ```sh
-//
-//	$ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
-//
+//  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -54,14 +53,20 @@ type Instance struct {
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb pulumi.BoolPtrOutput `pulumi:"applicableForClb"`
-	// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
-	InternetChargeType pulumi.StringPtrOutput `pulumi:"internetChargeType"`
+	// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
+	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+	BandwidthPackageId pulumi.StringOutput `pulumi:"bandwidthPackageId"`
+	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
+	InternetChargeType pulumi.StringOutput `pulumi:"internetChargeType"`
 	// The bandwidth limit of EIP, unit is Mbps.
-	InternetMaxBandwidthOut pulumi.IntPtrOutput `pulumi:"internetMaxBandwidthOut"`
+	InternetMaxBandwidthOut pulumi.IntOutput `pulumi:"internetMaxBandwidthOut"`
 	// Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
 	InternetServiceProvider pulumi.StringPtrOutput `pulumi:"internetServiceProvider"`
 	// The name of eip.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// The elastic IP address.
 	PublicIp pulumi.StringOutput `pulumi:"publicIp"`
 	// The EIP current status.
@@ -108,7 +113,11 @@ type instanceState struct {
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb *bool `pulumi:"applicableForClb"`
-	// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+	// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
+	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// The bandwidth limit of EIP, unit is Mbps.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
@@ -116,6 +125,8 @@ type instanceState struct {
 	InternetServiceProvider *string `pulumi:"internetServiceProvider"`
 	// The name of eip.
 	Name *string `pulumi:"name"`
+	// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// The elastic IP address.
 	PublicIp *string `pulumi:"publicIp"`
 	// The EIP current status.
@@ -133,7 +144,11 @@ type InstanceState struct {
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb pulumi.BoolPtrInput
-	// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+	// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+	AutoRenewFlag pulumi.IntPtrInput
+	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+	BandwidthPackageId pulumi.StringPtrInput
+	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType pulumi.StringPtrInput
 	// The bandwidth limit of EIP, unit is Mbps.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
@@ -141,6 +156,8 @@ type InstanceState struct {
 	InternetServiceProvider pulumi.StringPtrInput
 	// The name of eip.
 	Name pulumi.StringPtrInput
+	// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+	PrepaidPeriod pulumi.IntPtrInput
 	// The elastic IP address.
 	PublicIp pulumi.StringPtrInput
 	// The EIP current status.
@@ -162,7 +179,11 @@ type instanceArgs struct {
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb *bool `pulumi:"applicableForClb"`
-	// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+	// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
+	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// The bandwidth limit of EIP, unit is Mbps.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
@@ -170,6 +191,8 @@ type instanceArgs struct {
 	InternetServiceProvider *string `pulumi:"internetServiceProvider"`
 	// The name of eip.
 	Name *string `pulumi:"name"`
+	// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// The tags of eip.
 	Tags map[string]interface{} `pulumi:"tags"`
 	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
@@ -184,7 +207,11 @@ type InstanceArgs struct {
 	//
 	// Deprecated: It has been deprecated from version 1.27.0.
 	ApplicableForClb pulumi.BoolPtrInput
-	// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+	// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+	AutoRenewFlag pulumi.IntPtrInput
+	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+	BandwidthPackageId pulumi.StringPtrInput
+	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType pulumi.StringPtrInput
 	// The bandwidth limit of EIP, unit is Mbps.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
@@ -192,6 +219,8 @@ type InstanceArgs struct {
 	InternetServiceProvider pulumi.StringPtrInput
 	// The name of eip.
 	Name pulumi.StringPtrInput
+	// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+	PrepaidPeriod pulumi.IntPtrInput
 	// The tags of eip.
 	Tags pulumi.MapInput
 	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
@@ -224,7 +253,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//	InstanceArray{ InstanceArgs{...} }
+//          InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -249,7 +278,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//	InstanceMap{ "key": InstanceArgs{...} }
+//          InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -297,14 +326,24 @@ func (o InstanceOutput) ApplicableForClb() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.ApplicableForClb }).(pulumi.BoolPtrOutput)
 }
 
-// The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
-func (o InstanceOutput) InternetChargeType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.InternetChargeType }).(pulumi.StringPtrOutput)
+// Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+func (o InstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
+}
+
+// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+func (o InstanceOutput) BandwidthPackageId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.BandwidthPackageId }).(pulumi.StringOutput)
+}
+
+// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
+func (o InstanceOutput) InternetChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InternetChargeType }).(pulumi.StringOutput)
 }
 
 // The bandwidth limit of EIP, unit is Mbps.
-func (o InstanceOutput) InternetMaxBandwidthOut() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.InternetMaxBandwidthOut }).(pulumi.IntPtrOutput)
+func (o InstanceOutput) InternetMaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.InternetMaxBandwidthOut }).(pulumi.IntOutput)
 }
 
 // Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
@@ -315,6 +354,11 @@ func (o InstanceOutput) InternetServiceProvider() pulumi.StringPtrOutput {
 // The name of eip.
 func (o InstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+func (o InstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PrepaidPeriod }).(pulumi.IntPtrOutput)
 }
 
 // The elastic IP address.

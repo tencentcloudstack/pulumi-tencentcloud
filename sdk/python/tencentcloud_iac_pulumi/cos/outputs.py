@@ -11,6 +11,9 @@ from . import outputs
 
 __all__ = [
     'BucketCorsRule',
+    'BucketDomainCertificateAttachmentDomainCertificate',
+    'BucketDomainCertificateAttachmentDomainCertificateCertificate',
+    'BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert',
     'BucketLifecycleRule',
     'BucketLifecycleRuleExpiration',
     'BucketLifecycleRuleNonCurrentExpiration',
@@ -119,6 +122,129 @@ class BucketCorsRule(dict):
         Specifies time in seconds that browser can cache the response for a preflight request.
         """
         return pulumi.get(self, "max_age_seconds")
+
+
+@pulumi.output_type
+class BucketDomainCertificateAttachmentDomainCertificate(dict):
+    def __init__(__self__, *,
+                 certificate: 'outputs.BucketDomainCertificateAttachmentDomainCertificateCertificate',
+                 domain: str):
+        """
+        :param 'BucketDomainCertificateAttachmentDomainCertificateCertificateArgs' certificate: Certificate info.
+        :param str domain: The name of domain.
+        """
+        pulumi.set(__self__, "certificate", certificate)
+        pulumi.set(__self__, "domain", domain)
+
+    @property
+    @pulumi.getter
+    def certificate(self) -> 'outputs.BucketDomainCertificateAttachmentDomainCertificateCertificate':
+        """
+        Certificate info.
+        """
+        return pulumi.get(self, "certificate")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        The name of domain.
+        """
+        return pulumi.get(self, "domain")
+
+
+@pulumi.output_type
+class BucketDomainCertificateAttachmentDomainCertificateCertificate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "certType":
+            suggest = "cert_type"
+        elif key == "customCert":
+            suggest = "custom_cert"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketDomainCertificateAttachmentDomainCertificateCertificate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketDomainCertificateAttachmentDomainCertificateCertificate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketDomainCertificateAttachmentDomainCertificateCertificate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cert_type: str,
+                 custom_cert: 'outputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert'):
+        """
+        :param str cert_type: Certificate type.
+        :param 'BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs' custom_cert: Custom certificate.
+        """
+        pulumi.set(__self__, "cert_type", cert_type)
+        pulumi.set(__self__, "custom_cert", custom_cert)
+
+    @property
+    @pulumi.getter(name="certType")
+    def cert_type(self) -> str:
+        """
+        Certificate type.
+        """
+        return pulumi.get(self, "cert_type")
+
+    @property
+    @pulumi.getter(name="customCert")
+    def custom_cert(self) -> 'outputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert':
+        """
+        Custom certificate.
+        """
+        return pulumi.get(self, "custom_cert")
+
+
+@pulumi.output_type
+class BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "privateKey":
+            suggest = "private_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cert: str,
+                 private_key: str):
+        """
+        :param str cert: Public key of certificate.
+        :param str private_key: Private key of certificate.
+        """
+        pulumi.set(__self__, "cert", cert)
+        pulumi.set(__self__, "private_key", private_key)
+
+    @property
+    @pulumi.getter
+    def cert(self) -> str:
+        """
+        Public key of certificate.
+        """
+        return pulumi.get(self, "cert")
+
+    @property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> str:
+        """
+        Private key of certificate.
+        """
+        return pulumi.get(self, "private_key")
 
 
 @pulumi.output_type
@@ -341,7 +467,7 @@ class BucketLifecycleRuleNonCurrentTransition(dict):
                  storage_class: str,
                  non_current_days: Optional[int] = None):
         """
-        :param str storage_class: Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param str storage_class: Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param int non_current_days: Number of days after non current object creation when the specific rule action takes effect.
         """
         pulumi.set(__self__, "storage_class", storage_class)
@@ -352,7 +478,7 @@ class BucketLifecycleRuleNonCurrentTransition(dict):
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> str:
         """
-        Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         """
         return pulumi.get(self, "storage_class")
 
@@ -389,7 +515,7 @@ class BucketLifecycleRuleTransition(dict):
                  date: Optional[str] = None,
                  days: Optional[int] = None):
         """
-        :param str storage_class: Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param str storage_class: Specifies the storage class to which you want the object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         :param str date: Specifies the date after which you want the corresponding action to take effect.
         :param int days: Specifies the number of days after object creation when the specific rule action takes effect.
         """
@@ -403,7 +529,7 @@ class BucketLifecycleRuleTransition(dict):
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> str:
         """
-        Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        Specifies the storage class to which you want the object to transition. Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         """
         return pulumi.get(self, "storage_class")
 
@@ -710,16 +836,24 @@ class BucketWebsite(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 endpoint: Optional[str] = None,
                  error_document: Optional[str] = None,
                  index_document: Optional[str] = None):
         """
         :param str error_document: An absolute path to the document to return in case of a 4XX error.
         :param str index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
         """
+        if endpoint is not None:
+            pulumi.set(__self__, "endpoint", endpoint)
         if error_document is not None:
             pulumi.set(__self__, "error_document", error_document)
         if index_document is not None:
             pulumi.set(__self__, "index_document", index_document)
+
+    @property
+    @pulumi.getter
+    def endpoint(self) -> Optional[str]:
+        return pulumi.get(self, "endpoint")
 
     @property
     @pulumi.getter(name="errorDocument")

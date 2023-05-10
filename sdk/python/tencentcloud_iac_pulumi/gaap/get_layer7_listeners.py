@@ -92,6 +92,9 @@ class GetLayer7ListenersResult:
     @property
     @pulumi.getter(name="proxyId")
     def proxy_id(self) -> Optional[str]:
+        """
+        ID of the GAAP proxy.
+        """
         return pulumi.get(self, "proxy_id")
 
     @property

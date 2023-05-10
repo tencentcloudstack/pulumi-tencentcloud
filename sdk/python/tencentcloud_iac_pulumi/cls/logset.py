@@ -18,7 +18,7 @@ class LogsetArgs:
         """
         The set of arguments for constructing a Logset resource.
         :param pulumi.Input[str] logset_name: Logset name, which must be unique.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "logset_name", logset_name)
         if tags is not None:
@@ -40,7 +40,7 @@ class LogsetArgs:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        Tag description list.
         """
         return pulumi.get(self, "tags")
 
@@ -61,8 +61,8 @@ class _LogsetState:
         Input properties used for looking up and filtering Logset resources.
         :param pulumi.Input[str] create_time: Creation time.
         :param pulumi.Input[str] logset_name: Logset name, which must be unique.
-        :param pulumi.Input[str] role_name: If AssumerUin is not empty, it indicates the service provider who creates the logset.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        :param pulumi.Input[str] role_name: If assumer_uin is not empty, it indicates the service provider who creates the logset.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] topic_count: Number of log topics in logset.
         """
         if create_time is not None:
@@ -104,7 +104,7 @@ class _LogsetState:
     @pulumi.getter(name="roleName")
     def role_name(self) -> Optional[pulumi.Input[str]]:
         """
-        If AssumerUin is not empty, it indicates the service provider who creates the logset.
+        If assumer_uin is not empty, it indicates the service provider who creates the logset.
         """
         return pulumi.get(self, "role_name")
 
@@ -116,7 +116,7 @@ class _LogsetState:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        Tag description list.
         """
         return pulumi.get(self, "tags")
 
@@ -155,9 +155,9 @@ class Logset(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         logset = tencentcloud.cls.Logset("logset",
-            logset_name="logset",
+            logset_name="demo",
             tags={
-                "test": "test",
+                "createdBy": "terraform",
             })
         ```
 
@@ -166,13 +166,13 @@ class Logset(pulumi.CustomResource):
         cls logset can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+         $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] logset_name: Logset name, which must be unique.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         ...
     @overload
@@ -190,9 +190,9 @@ class Logset(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         logset = tencentcloud.cls.Logset("logset",
-            logset_name="logset",
+            logset_name="demo",
             tags={
-                "test": "test",
+                "createdBy": "terraform",
             })
         ```
 
@@ -201,7 +201,7 @@ class Logset(pulumi.CustomResource):
         cls logset can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+         $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -266,8 +266,8 @@ class Logset(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] create_time: Creation time.
         :param pulumi.Input[str] logset_name: Logset name, which must be unique.
-        :param pulumi.Input[str] role_name: If AssumerUin is not empty, it indicates the service provider who creates the logset.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        :param pulumi.Input[str] role_name: If assumer_uin is not empty, it indicates the service provider who creates the logset.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] topic_count: Number of log topics in logset.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -301,7 +301,7 @@ class Logset(pulumi.CustomResource):
     @pulumi.getter(name="roleName")
     def role_name(self) -> pulumi.Output[str]:
         """
-        If AssumerUin is not empty, it indicates the service provider who creates the logset.
+        If assumer_uin is not empty, it indicates the service provider who creates the logset.
         """
         return pulumi.get(self, "role_name")
 
@@ -309,7 +309,7 @@ class Logset(pulumi.CustomResource):
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
         """
-        Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        Tag description list.
         """
         return pulumi.get(self, "tags")
 

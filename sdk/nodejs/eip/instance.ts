@@ -13,7 +13,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Eip.Instance("foo", {});
+ * const foo = new tencentcloud.Eip.Instance("foo", {
+ *     bandwidthPackageId: "bwp-jtvzuky6",
+ *     internetChargeType: "BANDWIDTH_PACKAGE",
+ *     type: "EIP",
+ * });
  * ```
  *
  * ## Import
@@ -63,13 +67,21 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly applicableForClb!: pulumi.Output<boolean | undefined>;
     /**
-     * The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+     * Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
      */
-    public readonly internetChargeType!: pulumi.Output<string | undefined>;
+    public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
+    /**
+     * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+     */
+    public readonly bandwidthPackageId!: pulumi.Output<string>;
+    /**
+     * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
+     */
+    public readonly internetChargeType!: pulumi.Output<string>;
     /**
      * The bandwidth limit of EIP, unit is Mbps.
      */
-    public readonly internetMaxBandwidthOut!: pulumi.Output<number | undefined>;
+    public readonly internetMaxBandwidthOut!: pulumi.Output<number>;
     /**
      * Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
      */
@@ -78,6 +90,10 @@ export class Instance extends pulumi.CustomResource {
      * The name of eip.
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+     */
+    public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
      * The elastic IP address.
      */
@@ -110,10 +126,13 @@ export class Instance extends pulumi.CustomResource {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["anycastZone"] = state ? state.anycastZone : undefined;
             resourceInputs["applicableForClb"] = state ? state.applicableForClb : undefined;
+            resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
+            resourceInputs["bandwidthPackageId"] = state ? state.bandwidthPackageId : undefined;
             resourceInputs["internetChargeType"] = state ? state.internetChargeType : undefined;
             resourceInputs["internetMaxBandwidthOut"] = state ? state.internetMaxBandwidthOut : undefined;
             resourceInputs["internetServiceProvider"] = state ? state.internetServiceProvider : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
             resourceInputs["publicIp"] = state ? state.publicIp : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -122,10 +141,13 @@ export class Instance extends pulumi.CustomResource {
             const args = argsOrState as InstanceArgs | undefined;
             resourceInputs["anycastZone"] = args ? args.anycastZone : undefined;
             resourceInputs["applicableForClb"] = args ? args.applicableForClb : undefined;
+            resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
+            resourceInputs["bandwidthPackageId"] = args ? args.bandwidthPackageId : undefined;
             resourceInputs["internetChargeType"] = args ? args.internetChargeType : undefined;
             resourceInputs["internetMaxBandwidthOut"] = args ? args.internetMaxBandwidthOut : undefined;
             resourceInputs["internetServiceProvider"] = args ? args.internetServiceProvider : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["type"] = args ? args.type : undefined;
             resourceInputs["publicIp"] = undefined /*out*/;
@@ -151,7 +173,15 @@ export interface InstanceState {
      */
     applicableForClb?: pulumi.Input<boolean>;
     /**
-     * The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+     * Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+     */
+    autoRenewFlag?: pulumi.Input<number>;
+    /**
+     * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+     */
+    bandwidthPackageId?: pulumi.Input<string>;
+    /**
+     * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
      */
     internetChargeType?: pulumi.Input<string>;
     /**
@@ -166,6 +196,10 @@ export interface InstanceState {
      * The name of eip.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+     */
+    prepaidPeriod?: pulumi.Input<number>;
     /**
      * The elastic IP address.
      */
@@ -199,7 +233,15 @@ export interface InstanceArgs {
      */
     applicableForClb?: pulumi.Input<boolean>;
     /**
-     * The charge type of eip. Valid value: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR` and `TRAFFIC_POSTPAID_BY_HOUR`.
+     * Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
+     */
+    autoRenewFlag?: pulumi.Input<number>;
+    /**
+     * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
+     */
+    bandwidthPackageId?: pulumi.Input<string>;
+    /**
+     * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
      */
     internetChargeType?: pulumi.Input<string>;
     /**
@@ -214,6 +256,10 @@ export interface InstanceArgs {
      * The name of eip.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
+     */
+    prepaidPeriod?: pulumi.Input<number>;
     /**
      * The tags of eip.
      */

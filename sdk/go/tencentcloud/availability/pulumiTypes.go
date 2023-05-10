@@ -22,7 +22,7 @@ type GetRegionsRegion struct {
 // GetRegionsRegionInput is an input type that accepts GetRegionsRegionArgs and GetRegionsRegionOutput values.
 // You can construct a concrete instance of `GetRegionsRegionInput` via:
 //
-//	GetRegionsRegionArgs{...}
+//          GetRegionsRegionArgs{...}
 type GetRegionsRegionInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i GetRegionsRegionArgs) ToGetRegionsRegionOutputWithContext(ctx context.Co
 // GetRegionsRegionArrayInput is an input type that accepts GetRegionsRegionArray and GetRegionsRegionArrayOutput values.
 // You can construct a concrete instance of `GetRegionsRegionArrayInput` via:
 //
-//	GetRegionsRegionArray{ GetRegionsRegionArgs{...} }
+//          GetRegionsRegionArray{ GetRegionsRegionArgs{...} }
 type GetRegionsRegionArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +139,7 @@ type GetZonesByProductZone struct {
 // GetZonesByProductZoneInput is an input type that accepts GetZonesByProductZoneArgs and GetZonesByProductZoneOutput values.
 // You can construct a concrete instance of `GetZonesByProductZoneInput` via:
 //
-//	GetZonesByProductZoneArgs{...}
+//          GetZonesByProductZoneArgs{...}
 type GetZonesByProductZoneInput interface {
 	pulumi.Input
 
@@ -173,7 +173,7 @@ func (i GetZonesByProductZoneArgs) ToGetZonesByProductZoneOutputWithContext(ctx 
 // GetZonesByProductZoneArrayInput is an input type that accepts GetZonesByProductZoneArray and GetZonesByProductZoneArrayOutput values.
 // You can construct a concrete instance of `GetZonesByProductZoneArrayInput` via:
 //
-//	GetZonesByProductZoneArray{ GetZonesByProductZoneArgs{...} }
+//          GetZonesByProductZoneArray{ GetZonesByProductZoneArgs{...} }
 type GetZonesByProductZoneArrayInput interface {
 	pulumi.Input
 

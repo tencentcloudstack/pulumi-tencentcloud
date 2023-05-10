@@ -15,10 +15,13 @@ import * as utilities from "../utilities";
  *
  * const mongodb = new tencentcloud.Mongodb.ShardingInstance("mongodb", {
  *     availableZone: "ap-guangzhou-3",
- *     engineVersion: "MONGO_3_WT",
+ *     engineVersion: "MONGO_36_WT",
  *     instanceName: "mongodb",
- *     machineType: "GIO",
+ *     machineType: "HIO10G",
  *     memory: 4,
+ *     mongosCpu: 1,
+ *     mongosMemory: 2,
+ *     mongosNodeNum: 3,
  *     nodesPerShard: 3,
  *     password: "password1234",
  *     projectId: 0,
@@ -70,6 +73,14 @@ export class ShardingInstance extends pulumi.CustomResource {
      */
     public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
     /**
+     * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+     * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+     * - Version 4.2 and above are not supported.
+     * - Read-only disaster recovery instances are not supported.
+     * - Basic network cannot be selected.
+     */
+    public readonly availabilityZoneLists!: pulumi.Output<string[]>;
+    /**
      * The available zone of the Mongodb.
      */
     public readonly availableZone!: pulumi.Output<string>;
@@ -86,6 +97,10 @@ export class ShardingInstance extends pulumi.CustomResource {
      */
     public readonly engineVersion!: pulumi.Output<string>;
     /**
+     * The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+     */
+    public readonly hiddenZone!: pulumi.Output<string>;
+    /**
      * Name of the Mongodb instance.
      */
     public readonly instanceName!: pulumi.Output<string>;
@@ -97,6 +112,18 @@ export class ShardingInstance extends pulumi.CustomResource {
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
     public readonly memory!: pulumi.Output<number>;
+    /**
+     * Number of mongos cpu.
+     */
+    public readonly mongosCpu!: pulumi.Output<number>;
+    /**
+     * Mongos memory size in GB.
+     */
+    public readonly mongosMemory!: pulumi.Output<number>;
+    /**
+     * Number of mongos.
+     */
+    public readonly mongosNodeNum!: pulumi.Output<number>;
     /**
      * Number of nodes per shard, at least 3(one master and two slaves).
      */
@@ -164,13 +191,18 @@ export class ShardingInstance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ShardingInstanceState | undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
+            resourceInputs["availabilityZoneLists"] = state ? state.availabilityZoneLists : undefined;
             resourceInputs["availableZone"] = state ? state.availableZone : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["engineVersion"] = state ? state.engineVersion : undefined;
+            resourceInputs["hiddenZone"] = state ? state.hiddenZone : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["machineType"] = state ? state.machineType : undefined;
             resourceInputs["memory"] = state ? state.memory : undefined;
+            resourceInputs["mongosCpu"] = state ? state.mongosCpu : undefined;
+            resourceInputs["mongosMemory"] = state ? state.mongosMemory : undefined;
+            resourceInputs["mongosNodeNum"] = state ? state.mongosNodeNum : undefined;
             resourceInputs["nodesPerShard"] = state ? state.nodesPerShard : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
@@ -211,12 +243,17 @@ export class ShardingInstance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'volume'");
             }
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
+            resourceInputs["availabilityZoneLists"] = args ? args.availabilityZoneLists : undefined;
             resourceInputs["availableZone"] = args ? args.availableZone : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["engineVersion"] = args ? args.engineVersion : undefined;
+            resourceInputs["hiddenZone"] = args ? args.hiddenZone : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["machineType"] = args ? args.machineType : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
+            resourceInputs["mongosCpu"] = args ? args.mongosCpu : undefined;
+            resourceInputs["mongosMemory"] = args ? args.mongosMemory : undefined;
+            resourceInputs["mongosNodeNum"] = args ? args.mongosNodeNum : undefined;
             resourceInputs["nodesPerShard"] = args ? args.nodesPerShard : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
@@ -246,6 +283,14 @@ export interface ShardingInstanceState {
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
+     * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+     * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+     * - Version 4.2 and above are not supported.
+     * - Read-only disaster recovery instances are not supported.
+     * - Basic network cannot be selected.
+     */
+    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The available zone of the Mongodb.
      */
     availableZone?: pulumi.Input<string>;
@@ -262,6 +307,10 @@ export interface ShardingInstanceState {
      */
     engineVersion?: pulumi.Input<string>;
     /**
+     * The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+     */
+    hiddenZone?: pulumi.Input<string>;
+    /**
      * Name of the Mongodb instance.
      */
     instanceName?: pulumi.Input<string>;
@@ -273,6 +322,18 @@ export interface ShardingInstanceState {
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
     memory?: pulumi.Input<number>;
+    /**
+     * Number of mongos cpu.
+     */
+    mongosCpu?: pulumi.Input<number>;
+    /**
+     * Mongos memory size in GB.
+     */
+    mongosMemory?: pulumi.Input<number>;
+    /**
+     * Number of mongos.
+     */
+    mongosNodeNum?: pulumi.Input<number>;
     /**
      * Number of nodes per shard, at least 3(one master and two slaves).
      */
@@ -336,6 +397,14 @@ export interface ShardingInstanceArgs {
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
+     * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+     * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+     * - Version 4.2 and above are not supported.
+     * - Read-only disaster recovery instances are not supported.
+     * - Basic network cannot be selected.
+     */
+    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The available zone of the Mongodb.
      */
     availableZone: pulumi.Input<string>;
@@ -348,6 +417,10 @@ export interface ShardingInstanceArgs {
      */
     engineVersion: pulumi.Input<string>;
     /**
+     * The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+     */
+    hiddenZone?: pulumi.Input<string>;
+    /**
      * Name of the Mongodb instance.
      */
     instanceName: pulumi.Input<string>;
@@ -359,6 +432,18 @@ export interface ShardingInstanceArgs {
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
     memory: pulumi.Input<number>;
+    /**
+     * Number of mongos cpu.
+     */
+    mongosCpu?: pulumi.Input<number>;
+    /**
+     * Mongos memory size in GB.
+     */
+    mongosMemory?: pulumi.Input<number>;
+    /**
+     * Number of mongos.
+     */
+    mongosNodeNum?: pulumi.Input<number>;
     /**
      * Number of nodes per shard, at least 3(one master and two slaves).
      */

@@ -6,24 +6,33 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./attachment";
+export * from "./getInstances";
 export * from "./getScalingConfigs";
 export * from "./getScalingGroups";
 export * from "./getScalingPolicies";
 export * from "./lifecycleHook";
 export * from "./notification";
+export * from "./protectInstances";
+export * from "./removeInstances";
 export * from "./scalingConfig";
 export * from "./scalingGroup";
 export * from "./scalingPolicy";
 export * from "./schedule";
+export * from "./startInstances";
+export * from "./stopInstances";
 
 // Import resources to register:
 import { Attachment } from "./attachment";
 import { LifecycleHook } from "./lifecycleHook";
 import { Notification } from "./notification";
+import { ProtectInstances } from "./protectInstances";
+import { RemoveInstances } from "./removeInstances";
 import { ScalingConfig } from "./scalingConfig";
 import { ScalingGroup } from "./scalingGroup";
 import { ScalingPolicy } from "./scalingPolicy";
 import { Schedule } from "./schedule";
+import { StartInstances } from "./startInstances";
+import { StopInstances } from "./stopInstances";
 
 const _module = {
     version: utilities.getVersion(),
@@ -35,6 +44,10 @@ const _module = {
                 return new LifecycleHook(name, <any>undefined, { urn })
             case "tencentcloud:As/notification:Notification":
                 return new Notification(name, <any>undefined, { urn })
+            case "tencentcloud:As/protectInstances:ProtectInstances":
+                return new ProtectInstances(name, <any>undefined, { urn })
+            case "tencentcloud:As/removeInstances:RemoveInstances":
+                return new RemoveInstances(name, <any>undefined, { urn })
             case "tencentcloud:As/scalingConfig:ScalingConfig":
                 return new ScalingConfig(name, <any>undefined, { urn })
             case "tencentcloud:As/scalingGroup:ScalingGroup":
@@ -43,6 +56,10 @@ const _module = {
                 return new ScalingPolicy(name, <any>undefined, { urn })
             case "tencentcloud:As/schedule:Schedule":
                 return new Schedule(name, <any>undefined, { urn })
+            case "tencentcloud:As/startInstances:StartInstances":
+                return new StartInstances(name, <any>undefined, { urn })
+            case "tencentcloud:As/stopInstances:StopInstances":
+                return new StopInstances(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -51,7 +68,11 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "As/attachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/lifecycleHook", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/notification", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "As/protectInstances", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "As/removeInstances", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/scalingConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/scalingGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/scalingPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/schedule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "As/startInstances", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "As/stopInstances", _module)

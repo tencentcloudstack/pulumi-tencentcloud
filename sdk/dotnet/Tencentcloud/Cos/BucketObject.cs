@@ -126,7 +126,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<string?> Source { get; private set; } = null!;
 
         /// <summary>
-        /// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        /// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         /// </summary>
         [Output("storageClass")]
         public Output<string> StorageClass { get; private set; } = null!;
@@ -245,7 +245,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string>? Source { get; set; }
 
         /// <summary>
-        /// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        /// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         /// </summary>
         [Input("storageClass")]
         public Input<string>? StorageClass { get; set; }
@@ -330,7 +330,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string>? Source { get; set; }
 
         /// <summary>
-        /// Object storage type, Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        /// Object storage type, Available values include `STANDARD_IA`, `MAZ_STANDARD_IA`, `INTELLIGENT_TIERING`, `MAZ_INTELLIGENT_TIERING`, `ARCHIVE`, `DEEP_ARCHIVE`. For more information, please refer to: https://cloud.tencent.com/document/product/436/33417.
         /// </summary>
         [Input("storageClass")]
         public Input<string>? StorageClass { get; set; }

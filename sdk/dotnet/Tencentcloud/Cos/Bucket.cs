@@ -49,6 +49,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///         {
     ///             Acl = "private",
     ///             Bucket = "mycos-1258798060",
+    ///             ForceClean = true,
     ///             MultiAz = true,
     ///             VersioningEnable = true,
     ///         });
@@ -120,12 +121,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///             Bucket = "mycos-1258798060",
     ///             Website = new Tencentcloud.Cos.Inputs.BucketWebsiteArgs
     ///             {
-    ///                 ErrorDocument = "error.html",
     ///                 IndexDocument = "index.html",
+    ///                 ErrorDocument = "error.html",
     ///             },
     ///         });
+    ///         this.EndpointTest = mycos.Website.Apply(website =&gt; website?.Endpoint);
     ///     }
     /// 
+    ///     [Output("endpointTest")]
+    ///     public Output&lt;string&gt; EndpointTest { get; set; }
     /// }
     /// ```
     /// 
@@ -392,6 +396,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     public partial class Bucket : Pulumi.CustomResource
     {
         /// <summary>
+        /// Enable bucket acceleration.
+        /// </summary>
+        [Output("accelerationEnable")]
+        public Output<bool?> AccelerationEnable { get; private set; } = null!;
+
+        /// <summary>
         /// The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         /// </summary>
         [Output("acl")]
@@ -426,6 +436,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Output("encryptionAlgorithm")]
         public Output<string?> EncryptionAlgorithm { get; private set; } = null!;
+
+        /// <summary>
+        /// Force cleanup all objects before delete bucket.
+        /// </summary>
+        [Output("forceClean")]
+        public Output<bool?> ForceClean { get; private set; } = null!;
 
         /// <summary>
         /// A configuration of object lifecycle management (documented below).
@@ -547,6 +563,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     public sealed class BucketArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Enable bucket acceleration.
+        /// </summary>
+        [Input("accelerationEnable")]
+        public Input<bool>? AccelerationEnable { get; set; }
+
+        /// <summary>
         /// The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         /// </summary>
         [Input("acl")]
@@ -581,6 +603,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("encryptionAlgorithm")]
         public Input<string>? EncryptionAlgorithm { get; set; }
+
+        /// <summary>
+        /// Force cleanup all objects before delete bucket.
+        /// </summary>
+        [Input("forceClean")]
+        public Input<bool>? ForceClean { get; set; }
 
         [Input("lifecycleRules")]
         private InputList<Inputs.BucketLifecycleRuleArgs>? _lifecycleRules;
@@ -692,6 +720,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     public sealed class BucketState : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Enable bucket acceleration.
+        /// </summary>
+        [Input("accelerationEnable")]
+        public Input<bool>? AccelerationEnable { get; set; }
+
+        /// <summary>
         /// The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         /// </summary>
         [Input("acl")]
@@ -732,6 +766,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("encryptionAlgorithm")]
         public Input<string>? EncryptionAlgorithm { get; set; }
+
+        /// <summary>
+        /// Force cleanup all objects before delete bucket.
+        /// </summary>
+        [Input("forceClean")]
+        public Input<bool>? ForceClean { get; set; }
 
         [Input("lifecycleRules")]
         private InputList<Inputs.BucketLifecycleRuleGetArgs>? _lifecycleRules;

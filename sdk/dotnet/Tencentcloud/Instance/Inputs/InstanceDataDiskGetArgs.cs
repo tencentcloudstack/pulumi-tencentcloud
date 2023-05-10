@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
         public Input<string>? DataDiskId { get; set; }
 
         /// <summary>
-        /// Size of the data disk, and unit is GB. If disk type is `CLOUD_SSD`, the size range is [100, 16000], and the others are [10-16000].
+        /// Size of the data disk, and unit is GB.
         /// </summary>
         [Input("dataDiskSize", required: true)]
         public Input<int> DataDiskSize { get; set; } = null!;
@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
         public Input<string>? DataDiskSnapshotId { get; set; }
 
         /// <summary>
-        /// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: SSD, `CLOUD_HSSD`: Enhanced SSD. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
+        /// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: LOCAL_BASIC: local disk, LOCAL_SSD: local SSD disk, LOCAL_NVME: local NVME disk, specified in the InstanceType, LOCAL_PRO: local HDD disk, specified in the InstanceType, CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD, CLOUD_BSSD: Balanced SSD.
         /// </summary>
         [Input("dataDiskType", required: true)]
         public Input<string> DataDiskType { get; set; } = null!;

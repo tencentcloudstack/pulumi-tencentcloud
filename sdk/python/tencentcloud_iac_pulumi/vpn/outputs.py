@@ -11,8 +11,10 @@ from . import outputs
 
 __all__ = [
     'ConnectionSecurityGroupPolicy',
+    'CustomerGatewayConfigurationDownloadCustomerGatewayVendor',
     'GetConnectionsConnectionListResult',
     'GetConnectionsConnectionListSecurityGroupPolicyResult',
+    'GetCustomerGatewayVendorsCustomerGatewayVendorSetResult',
     'GetCustomerGatewaysGatewayListResult',
     'GetGatewayRoutesVpnGatewayRouteListResult',
     'GetGatewaysGatewayListResult',
@@ -64,6 +66,65 @@ class ConnectionSecurityGroupPolicy(dict):
         Remote cidr block list.
         """
         return pulumi.get(self, "remote_cidr_blocks")
+
+
+@pulumi.output_type
+class CustomerGatewayConfigurationDownloadCustomerGatewayVendor(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "softwareVersion":
+            suggest = "software_version"
+        elif key == "vendorName":
+            suggest = "vendor_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomerGatewayConfigurationDownloadCustomerGatewayVendor. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomerGatewayConfigurationDownloadCustomerGatewayVendor.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomerGatewayConfigurationDownloadCustomerGatewayVendor.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 platform: str,
+                 software_version: str,
+                 vendor_name: str):
+        """
+        :param str platform: Platform.
+        :param str software_version: SoftwareVersion.
+        :param str vendor_name: VendorName.
+        """
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "software_version", software_version)
+        pulumi.set(__self__, "vendor_name", vendor_name)
+
+    @property
+    @pulumi.getter
+    def platform(self) -> str:
+        """
+        Platform.
+        """
+        return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter(name="softwareVersion")
+    def software_version(self) -> str:
+        """
+        SoftwareVersion.
+        """
+        return pulumi.get(self, "software_version")
+
+    @property
+    @pulumi.getter(name="vendorName")
+    def vendor_name(self) -> str:
+        """
+        VendorName.
+        """
+        return pulumi.get(self, "vendor_name")
 
 
 @pulumi.output_type
@@ -441,6 +502,46 @@ class GetConnectionsConnectionListSecurityGroupPolicyResult(dict):
         Remote cidr block list.
         """
         return pulumi.get(self, "remote_cidr_blocks")
+
+
+@pulumi.output_type
+class GetCustomerGatewayVendorsCustomerGatewayVendorSetResult(dict):
+    def __init__(__self__, *,
+                 platform: str,
+                 software_version: str,
+                 vendor_name: str):
+        """
+        :param str platform: Platform.
+        :param str software_version: SoftwareVersion.
+        :param str vendor_name: VendorName.
+        """
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "software_version", software_version)
+        pulumi.set(__self__, "vendor_name", vendor_name)
+
+    @property
+    @pulumi.getter
+    def platform(self) -> str:
+        """
+        Platform.
+        """
+        return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter(name="softwareVersion")
+    def software_version(self) -> str:
+        """
+        SoftwareVersion.
+        """
+        return pulumi.get(self, "software_version")
+
+    @property
+    @pulumi.getter(name="vendorName")
+    def vendor_name(self) -> str:
+        """
+        VendorName.
+        """
+        return pulumi.get(self, "vendor_name")
 
 
 @pulumi.output_type

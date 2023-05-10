@@ -142,7 +142,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
     /**
      * Private network ID. If `vpcId` is set, this value is required.
      */
-    public readonly subnetId!: pulumi.Output<string | undefined>;
+    public readonly subnetId!: pulumi.Output<string>;
     /**
      * Instance tags.
      */
@@ -158,7 +158,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
     /**
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
-    public readonly vpcId!: pulumi.Output<string | undefined>;
+    public readonly vpcId!: pulumi.Output<string>;
     /**
      * Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
      */
