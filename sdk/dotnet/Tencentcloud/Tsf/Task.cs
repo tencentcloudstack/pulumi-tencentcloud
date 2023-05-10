@@ -168,7 +168,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// Whether to enable the task, ENABLED/DISABLED.
         /// </summary>
         [Output("taskState")]
-        public Output<string> TaskState { get; private set; } = null!;
+        public Output<string> TsfTaskState { get; private set; } = null!;
 
         /// <summary>
         /// task type, java.
@@ -474,7 +474,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// Whether to enable the task, ENABLED/DISABLED.
         /// </summary>
         [Input("taskState")]
-        public Input<string>? TaskState { get; set; }
+        public Input<string>? TsfTaskState { get; set; }
 
         /// <summary>
         /// task type, java.

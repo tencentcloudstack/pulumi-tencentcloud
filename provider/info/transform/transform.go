@@ -9,7 +9,8 @@ import (
 
 var hardCodedAlters = map[string][]string{
 	"tencentcloud_kms_keys": {"key_state", "KmsKeyState"},
-	"tencentcloud_kms_key": {"key_state", "KmsKeyState"},
+	"tencentcloud_kms_key":  {"key_state", "KmsKeyState"},
+	"tencentcloud_tsf_task": {"task_state", "TsfTaskState"},
 }
 
 func GetConflictFieldOfCsharpModule(key string, fields map[string]*schema.Schema) map[string]string {
