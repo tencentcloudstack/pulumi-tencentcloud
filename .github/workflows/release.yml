@@ -34,18 +34,19 @@ jobs:
       uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
+        tag: v0.0.32
     - name: Set PreRelease Version
       run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v2
       with:
-        args: -p 3 release --rm-dist
+        args: -p 2 release --rm-dist
         version: latest
     strategy:
       fail-fast: true
       matrix:
         goversion:
-        - 1.19.x
+        - 1.18.x
   publish_sdk:
     name: Publish SDKs
     runs-on: ubuntu-latest
@@ -63,8 +64,11 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@v1.5.0
         with:
           repo: pulumi/pulumictl
+          tag: v0.0.32
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v2.0.0
+        with:
+          pulumi-version: 3.47.1
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -111,15 +115,15 @@ jobs:
       fail-fast: true
       matrix:
         dotnetversion:
-          - 3.1.301
+          - 6.0.408
         goversion:
-          - 1.19.x
+          - 1.18.x
         language:
           - nodejs
           - python
           - dotnet
           - go
         nodeversion:
-          - 14.x
+          - 18.x
         pythonversion:
           - "3.9"
