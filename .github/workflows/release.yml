@@ -41,7 +41,7 @@ jobs:
       uses: goreleaser/goreleaser-action@v2
       with:
         args: -p 3 release --timeout 60m --clean
-        version: latest
+        version: 1.18.3
     strategy:
       fail-fast: true
       matrix:
